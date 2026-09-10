@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
 import type { ScheduleResult as Result } from "./types";
 
 type Props = {
@@ -39,6 +40,14 @@ export default function ScheduleResult({ result, digitStyle }: Props) {
     ? `${t("conflictsFoundLabel")}: ${fmtInt(result.conflicts.length)}`
     : `${t("noConflicts")} — ${fmtInt(totalHours)} ${t("hoursPerWeek")}`;
 
+  const loadBand = totalHours >= 20 ? "heavy" : totalHours >= 10 ? "typical" : "light";
+  const loadColor =
+    loadBand === "heavy"
+      ? "fill-violet-600 dark:fill-violet-400"
+      : loadBand === "typical"
+        ? "fill-blue-600 dark:fill-blue-400"
+        : "fill-sky-600 dark:fill-sky-400";
+
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
@@ -58,6 +67,23 @@ export default function ScheduleResult({ result, digitStyle }: Props) {
           <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
             {fmtInt(totalHours)} {t("hoursPerWeek")}
           </p>
+
+          <div className="mt-4 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <RatioGauge
+              value={totalHours}
+              domainMin={0}
+              domainMax={30}
+              zones={[
+                { key: "light", from: 0, to: 10, colorClass: "stroke-sky-500 dark:stroke-sky-400" },
+                { key: "typical", from: 10, to: 20, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
+                { key: "heavy", from: 20, to: 30, colorClass: "stroke-violet-500 dark:stroke-violet-400" },
+              ]}
+              valueLabel={`${fmtInt(totalHours)}${t("hoursShortUnit")}`}
+              caption={t(`loadBand.${loadBand}`)}
+              captionColorClass={loadColor}
+              ticks={[0, 10, 20, 30]}
+            />
+          </div>
 
           {result.hasConflicts && (
             <ul dir="ltr" className="mt-4 space-y-2 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">

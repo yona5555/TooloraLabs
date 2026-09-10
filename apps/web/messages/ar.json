@@ -5448,7 +5448,9 @@
         "targetGpaLabel": "المعدل المستهدف",
         "targetGpaPlaceholder": "مثال: 3.5",
         "plannedCreditsLabel": "الساعات المعتمدة القادمة",
-        "plannedCreditsPlaceholder": "مثال: 30"
+        "plannedCreditsPlaceholder": "مثال: 30",
+        "scenarioLabel": "تعبئة سريعة لسيناريو",
+        "clear": "مسح"
       },
       "result": {
         "heading": "النتيجة",
@@ -5459,7 +5461,10 @@
         "creditsSummary": "{credits} ساعة معتمدة إجمالاً، و{points} نقطة جودة.",
         "diagramCaption": "{value} على سلّم المعدل التراكمي من 0 إلى 4.0.",
         "stepCalculate": "إجمالي نقاط الجودة مقسومًا على {credits} ساعة معتمدة إجمالاً.",
-        "stepTarget": "بدءًا من معدل {current} على مدى {credits} ساعة معتمدة إجمالاً بعد إضافة المقررات القادمة."
+        "stepTarget": "بدءًا من معدل {current} على مدى {credits} ساعة معتمدة إجمالاً بعد إضافة المقررات القادمة.",
+        "courseCountLabel": "عدد المقررات المدخلة",
+        "creditsLabel": "الساعات المعتمدة",
+        "qualityPointsLabel": "نقاط الجودة"
       },
       "education": {
         "intro": {
@@ -5579,7 +5584,43 @@
           "note": "تتتبّع دراسة شنايدر وهَت المحكَّمة التبنّي التدريجي للسلّم الحرفي من A إلى F وتوحيده عبر التعليم الأمريكي، واضعةً سابقة كلية ماونت هوليوك ضمن تاريخ أوسع وأكثر جدلاً لإصلاح أنظمة التقييم.",
           "url": "https://doi.org/10.1080/00220272.2013.790480",
           "readOriginal": "اقرأ النص الأصلي"
+        },
+        "scenarioWidget": {
+          "title": "جرّب سيناريو فصل دراسي حقيقي",
+          "intro": "انقر على عبء مقررات أدناه لترى كيف يتغير المعدل التراكمي وفئة الوضع الأكاديمي مباشرة، باستخدام نفس المحرك تمامًا الذي تستخدمه الحاسبة أعلاه.",
+          "summary": "{credits} ساعة معتمدة، {points} نقطة جودة ← معدل {gpa}."
         }
+      },
+      "scenarios": {
+        "deansListSemester": "قائمة العميد (امتياز)",
+        "solidBSemester": "جيد جدًا ثابت",
+        "mixedSemester": "مزيج A/B/C",
+        "strugglingSemester": "ضعيف (C/D)"
+      },
+      "gauge": {
+        "probation": "إنذار أكاديمي (أقل من 2.0)",
+        "satisfactory": "مقبول (2.0–3.0)",
+        "good": "وضع جيد (3.0–3.5)",
+        "excellent": "ممتاز (3.5+)"
+      },
+      "shareExport": {
+        "triggerLabel": "مشاركة / تصدير",
+        "modalTitle": "شارك أو صدّر هذه النتيجة",
+        "shareToSocial": "شارك على وسائل التواصل الاجتماعي",
+        "contactSectionTitle": "أضف بياناتك إلى ملف PDF (اختياري)",
+        "contactName": "الاسم",
+        "contactNamePlaceholder": "جين دو",
+        "contactEmail": "البريد الإلكتروني",
+        "contactEmailPlaceholder": "jane@example.com",
+        "contactPhone": "الهاتف",
+        "contactPhonePlaceholder": "+1 555 123 4567",
+        "contactOrganization": "المدرسة / المؤسسة",
+        "contactOrganizationPlaceholder": "جامعة الولاية",
+        "contactAddress": "العنوان",
+        "contactAddressPlaceholder": "123 شارع الحرم الجامعي",
+        "preparedForTitle": "أُعِدَّ من أجل",
+        "generatedOn": "تاريخ الإنشاء",
+        "howCalculatedTitle": "كيف تم حساب هذا"
       }
     },
     "density-calculator": {
@@ -8565,7 +8606,9 @@
         "longBreakMinutesPlaceholder": "مثال: 15",
         "pomodorosBeforeLongBreakLabel": "عدد فترات بومودورو قبل الاستراحة الطويلة",
         "pomodorosBeforeLongBreakHint": "عدد فترات العمل التي تُكمّلها قبل أخذ الاستراحة الأطول.",
-        "pomodorosBeforeLongBreakPlaceholder": "مثال: 4"
+        "pomodorosBeforeLongBreakPlaceholder": "مثال: 4",
+        "scenarioLabel": "تعبئة سريعة لطول الجلسة",
+        "clear": "مسح"
       },
       "result": {
         "heading": "خطة الجلسة",
@@ -8584,7 +8627,12 @@
         "diagramWork": "عمل",
         "diagramBreak": "استراحة",
         "diagramLeftover": "غير مجدوَل",
-        "diagramCaption": "توزيع نسبي لجلستك: وقت العمل المركّز، ووقت الاستراحة، وأي دقائق متبقية أقصر من أن تكفي لفترة كاملة أخرى."
+        "diagramCaption": "توزيع نسبي لجلستك: وقت العمل المركّز، ووقت الاستراحة، وأي دقائق متبقية أقصر من أن تكفي لفترة كاملة أخرى.",
+        "utilization": {
+          "short": "جلسة قصيرة",
+          "wellPlanned": "مخطَّط جيدًا",
+          "tight": "مضغوطة بإحكام"
+        }
       },
       "education": {
         "intro": {
@@ -8698,6 +8746,12 @@
           "url": "https://doi.org/10.1111/bjep.12593",
           "readOriginal": "اقرأ النص الأصلي"
         }
+      },
+      "scenarios": {
+        "quickSession": "سريعة (30 دقيقة)",
+        "standardSession": "قياسية (ساعتان)",
+        "deepWorkSession": "عمل عميق (4 ساعات)",
+        "allDaySession": "طوال اليوم (8 ساعات)"
       }
     },
     "vector-calculator": {
@@ -10008,7 +10062,9 @@
         },
         "startTimeLabel": "وقت البدء",
         "endTimeLabel": "وقت الانتهاء",
-        "addClass": "إضافة مادة أخرى"
+        "addClass": "إضافة مادة أخرى",
+        "scenarioLabel": "تعبئة سريعة لجدول نموذجي",
+        "clear": "مسح"
       },
       "result": {
         "heading": "فحص الجدول",
@@ -10027,6 +10083,12 @@
           "fri": "الجمعة",
           "sat": "السبت",
           "sun": "الأحد"
+        },
+        "hoursShortUnit": "س",
+        "loadBand": {
+          "light": "أسبوع خفيف",
+          "typical": "أسبوع متوازن",
+          "heavy": "أسبوع مزدحم"
         }
       },
       "education": {
@@ -10145,6 +10207,12 @@
           "url": "https://doi.org/10.1137/0205048",
           "readOriginal": "قراءة الورقة الأصلية"
         }
+      },
+      "scenarios": {
+        "lightLoad": "حمل خفيف (مادتان)",
+        "typicalLoad": "حمل معتاد (5 مواد)",
+        "heavyLoad": "حمل ثقيل (7 مواد)",
+        "conflictDemo": "عرض تعارض"
       }
     },
     "citation-generator": {
@@ -10196,7 +10264,9 @@
         "urlLabel": "الرابط",
         "urlPlaceholder": "https://example.com/page",
         "accessDateLabel": "تاريخ الوصول (اختياري)",
-        "accessDatePlaceholder": "مثال: 5 يناير 2024"
+        "accessDatePlaceholder": "مثال: 5 يناير 2024",
+        "scenarioLabel": "تعبئة سريعة بمثال محلول",
+        "clear": "مسح"
       },
       "result": {
         "heading": "اقتباساتك",
@@ -10205,7 +10275,13 @@
         "missingUrl": "أدخل رابط الصفحة الإلكترونية.",
         "apaLabel": "APA",
         "mlaLabel": "MLA",
-        "chicagoLabel": "Chicago"
+        "chicagoLabel": "Chicago",
+        "completenessHeading": "اكتمال الاستشهاد",
+        "completeness": {
+          "incomplete": "غير مكتمل",
+          "mostlyComplete": "شبه مكتمل",
+          "complete": "مكتمل"
+        }
       },
       "education": {
         "intro": {
@@ -10323,6 +10399,11 @@
           "url": "https://doi.org/10.1126/science.122.3159.108",
           "readOriginal": "قراءة الورقة الأصلية"
         }
+      },
+      "scenarios": {
+        "bookExample": "مثال كتاب",
+        "journalExample": "مثال مقال دورية",
+        "websiteExample": "مثال موقع ويب"
       }
     },
     "area-calculator": {

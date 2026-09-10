@@ -39,6 +39,13 @@ const HALF_CIRCUMFERENCE = Math.PI * R;
  * per-tool breakdown donuts, just rotated 180deg so the pattern traces the
  * top half only (9 o'clock -> 12 o'clock -> 3 o'clock) instead of a full ring.
  */
+// Server (Node) and client (browser) V8 builds can round Math.sin/Math.cos
+// differently in the last ULP for the same input, which makes React's
+// hydration check see "28.407078564789586" vs "28.407078564789572" as a
+// mismatch even though the values are visually identical. Rounding to a
+// fixed precision collapses both sides to the same string.
+const round = (n: number) => Math.round(n * 10000) / 10000;
+
 export default function RatioGauge({ value, domainMin, domainMax, zones, valueLabel, caption, captionColorClass, ticks, tickFormatter }: RatioGaugeProps) {
   const span = domainMax - domainMin;
   const clampedValue = Math.min(Math.max(value, domainMin), domainMax);
@@ -57,10 +64,10 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
   const needleAngleRad = ((needleT + 180) * Math.PI) / 180;
   const needleInnerR = R - STROKE / 2 - 6;
   const needleOuterR = R + STROKE / 2 + 10;
-  const needleX1 = CX + needleInnerR * Math.cos(needleAngleRad);
-  const needleY1 = CY + needleInnerR * Math.sin(needleAngleRad);
-  const needleX2 = CX + needleOuterR * Math.cos(needleAngleRad);
-  const needleY2 = CY + needleOuterR * Math.sin(needleAngleRad);
+  const needleX1 = round(CX + needleInnerR * Math.cos(needleAngleRad));
+  const needleY1 = round(CY + needleInnerR * Math.sin(needleAngleRad));
+  const needleX2 = round(CX + needleOuterR * Math.cos(needleAngleRad));
+  const needleY2 = round(CY + needleOuterR * Math.sin(needleAngleRad));
 
   const tickPoint = (tick: number) => {
     const t = span > 0 ? ((Math.min(Math.max(tick, domainMin), domainMax) - domainMin) / span) * 180 : 0;
@@ -69,7 +76,7 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
     // Anchor the extreme ticks toward the inside of the viewBox instead of centering on the point
     // — a centered label at the very end of the arc (0deg/180deg) would run past the SVG's edge.
     const anchor: "start" | "end" | "middle" = t < 15 ? "start" : t > 165 ? "end" : "middle";
-    return { x: CX + tickR * Math.cos(angleRad), y: CY + tickR * Math.sin(angleRad), anchor };
+    return { x: round(CX + tickR * Math.cos(angleRad)), y: round(CY + tickR * Math.sin(angleRad)), anchor };
   };
 
   return (

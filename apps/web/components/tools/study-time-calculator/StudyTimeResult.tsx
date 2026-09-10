@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
 import PomodoroTimelineDiagram from "./PomodoroTimelineDiagram";
 import type { StudyTimeResult as Result } from "./types";
 
@@ -21,6 +22,10 @@ export default function StudyTimeResult({ result, digitStyle }: Props) {
 
   const copyText = `${t("completedPomodoros")}: ${fmt(result.completedPomodoros)}, ${t("totalWorkMinutes")}: ${fmt(result.totalWorkMinutes)} min`;
 
+  const utilizationPercent = result.scheduledMinutes > 0 ? (result.scheduledMinutes / (result.scheduledMinutes + result.leftoverMinutes)) * 100 : 0;
+  const utilizationBand = utilizationPercent >= 85 ? "tight" : utilizationPercent >= 50 ? "wellPlanned" : "short";
+  const utilizationColor = utilizationBand === "tight" ? "fill-emerald-600 dark:fill-emerald-400" : utilizationBand === "wellPlanned" ? "fill-blue-600 dark:fill-blue-400" : "fill-amber-600 dark:fill-amber-400";
+
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
@@ -34,6 +39,23 @@ export default function StudyTimeResult({ result, digitStyle }: Props) {
             {fmt(result.completedPomodoros)}
           </p>
           <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("completedPomodoros")}</p>
+
+          <div className="mt-4 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <RatioGauge
+              value={utilizationPercent}
+              domainMin={0}
+              domainMax={100}
+              zones={[
+                { key: "short", from: 0, to: 50, colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+                { key: "wellPlanned", from: 50, to: 85, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
+                { key: "tight", from: 85, to: 100, colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+              ]}
+              valueLabel={`${fmt(utilizationPercent)}%`}
+              caption={t(`utilization.${utilizationBand}`)}
+              captionColorClass={utilizationColor}
+              ticks={[0, 50, 85, 100]}
+            />
+          </div>
 
           <PomodoroTimelineDiagram
             totalWorkMinutes={result.totalWorkMinutes}

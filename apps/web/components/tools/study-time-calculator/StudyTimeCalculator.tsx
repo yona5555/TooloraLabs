@@ -12,17 +12,36 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import StudyTimeInputPanel from "./StudyTimeInputPanel";
 import StudyTimeResult from "./StudyTimeResult";
 import StudyTimeQuickReference from "./StudyTimeQuickReference";
+import type { StudySessionScenario } from "./types";
 
 const tool = new StudyTimeCalculatorTool();
+
+const DEFAULTS = { totalMinutes: "120", workMinutes: "25", shortBreakMinutes: "5", longBreakMinutes: "15", pomodorosBeforeLongBreak: "4" };
 
 export default function StudyTimeCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.study-time-calculator.nav");
 
-  const [totalMinutes, setTotalMinutes] = useState("120");
-  const [workMinutes, setWorkMinutes] = useState("25");
-  const [shortBreakMinutes, setShortBreakMinutes] = useState("5");
-  const [longBreakMinutes, setLongBreakMinutes] = useState("15");
-  const [pomodorosBeforeLongBreak, setPomodorosBeforeLongBreak] = useState("4");
+  const [totalMinutes, setTotalMinutes] = useState(DEFAULTS.totalMinutes);
+  const [workMinutes, setWorkMinutes] = useState(DEFAULTS.workMinutes);
+  const [shortBreakMinutes, setShortBreakMinutes] = useState(DEFAULTS.shortBreakMinutes);
+  const [longBreakMinutes, setLongBreakMinutes] = useState(DEFAULTS.longBreakMinutes);
+  const [pomodorosBeforeLongBreak, setPomodorosBeforeLongBreak] = useState(DEFAULTS.pomodorosBeforeLongBreak);
+
+  function handleScenarioPreset(scenario: StudySessionScenario) {
+    setTotalMinutes(scenario.totalMinutes);
+    setWorkMinutes(scenario.workMinutes);
+    setShortBreakMinutes(scenario.shortBreakMinutes);
+    setLongBreakMinutes(scenario.longBreakMinutes);
+    setPomodorosBeforeLongBreak(scenario.pomodorosBeforeLongBreak);
+  }
+
+  function handleClear() {
+    setTotalMinutes(DEFAULTS.totalMinutes);
+    setWorkMinutes(DEFAULTS.workMinutes);
+    setShortBreakMinutes(DEFAULTS.shortBreakMinutes);
+    setLongBreakMinutes(DEFAULTS.longBreakMinutes);
+    setPomodorosBeforeLongBreak(DEFAULTS.pomodorosBeforeLongBreak);
+  }
 
   const digitStyle: DigitStyle = resolveDigitStyle(
     totalMinutes,
@@ -68,6 +87,8 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
               onLongBreakMinutesChange={setLongBreakMinutes}
               pomodorosBeforeLongBreak={pomodorosBeforeLongBreak}
               onPomodorosBeforeLongBreakChange={setPomodorosBeforeLongBreak}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<StudyTimeResult result={result} digitStyle={digitStyle} />}

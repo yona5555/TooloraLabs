@@ -5448,7 +5448,9 @@
         "targetGpaLabel": "Target GPA",
         "targetGpaPlaceholder": "e.g. 3.5",
         "plannedCreditsLabel": "Upcoming Credit Hours",
-        "plannedCreditsPlaceholder": "e.g. 30"
+        "plannedCreditsPlaceholder": "e.g. 30",
+        "scenarioLabel": "Quick-fill a scenario",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Result",
@@ -5459,7 +5461,10 @@
         "creditsSummary": "{credits} total credit hours, {points} quality points.",
         "diagramCaption": "{value} on the 0-to-4.0 GPA scale.",
         "stepCalculate": "Total quality points divided by {credits} total credit hours.",
-        "stepTarget": "Starting from a {current} GPA over {credits} total credit hours once the upcoming courses are included."
+        "stepTarget": "Starting from a {current} GPA over {credits} total credit hours once the upcoming courses are included.",
+        "courseCountLabel": "Courses entered",
+        "creditsLabel": "Credit hours",
+        "qualityPointsLabel": "Quality points"
       },
       "education": {
         "intro": {
@@ -5579,7 +5584,43 @@
           "note": "Schneider and Hutt's peer-reviewed history traces the gradual adoption and standardization of the A–F letter-grade scale across American education, situating the Mount Holyoke College precedent within a broader, more contested history of grading reform.",
           "url": "https://doi.org/10.1080/00220272.2013.790480",
           "readOriginal": "Read the Original Text"
+        },
+        "scenarioWidget": {
+          "title": "Try a Real Semester Scenario",
+          "intro": "Click a course load below to see how the GPA and standing band change live, using the exact same engine as the calculator above.",
+          "summary": "{credits} credit hours, {points} quality points → {gpa} GPA."
         }
+      },
+      "scenarios": {
+        "deansListSemester": "Dean's List (A's)",
+        "solidBSemester": "Solid B's",
+        "mixedSemester": "Mixed A/B/C",
+        "strugglingSemester": "Struggling (C/D)"
+      },
+      "gauge": {
+        "probation": "Probation (below 2.0)",
+        "satisfactory": "Satisfactory (2.0–3.0)",
+        "good": "Good Standing (3.0–3.5)",
+        "excellent": "Excellent (3.5+)"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "shareToSocial": "Share to social media",
+        "contactSectionTitle": "Add your details to the PDF (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "Jane Doe",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "jane@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "+1 555 123 4567",
+        "contactOrganization": "School / Organization",
+        "contactOrganizationPlaceholder": "State University",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "123 Campus Ave",
+        "preparedForTitle": "Prepared for",
+        "generatedOn": "Generated on",
+        "howCalculatedTitle": "How This Was Calculated"
       }
     },
     "density-calculator": {
@@ -8565,7 +8606,9 @@
         "longBreakMinutesPlaceholder": "e.g. 15",
         "pomodorosBeforeLongBreakLabel": "Pomodoros Before Long Break",
         "pomodorosBeforeLongBreakHint": "How many work intervals to complete before taking the longer break.",
-        "pomodorosBeforeLongBreakPlaceholder": "e.g. 4"
+        "pomodorosBeforeLongBreakPlaceholder": "e.g. 4",
+        "scenarioLabel": "Quick-fill a session length",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Session Plan",
@@ -8584,7 +8627,12 @@
         "diagramWork": "Work",
         "diagramBreak": "Break",
         "diagramLeftover": "Unscheduled",
-        "diagramCaption": "Proportional breakdown of your session: focused work time, break time, and any leftover minutes too short for another full interval."
+        "diagramCaption": "Proportional breakdown of your session: focused work time, break time, and any leftover minutes too short for another full interval.",
+        "utilization": {
+          "short": "Short Session",
+          "wellPlanned": "Well-Planned",
+          "tight": "Tightly Packed"
+        }
       },
       "education": {
         "intro": {
@@ -8698,6 +8746,12 @@
           "url": "https://doi.org/10.1111/bjep.12593",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "scenarios": {
+        "quickSession": "Quick (30 min)",
+        "standardSession": "Standard (2 hr)",
+        "deepWorkSession": "Deep Work (4 hr)",
+        "allDaySession": "All-Day (8 hr)"
       }
     },
     "vector-calculator": {
@@ -10008,7 +10062,9 @@
         },
         "startTimeLabel": "Start Time",
         "endTimeLabel": "End Time",
-        "addClass": "Add Another Class"
+        "addClass": "Add Another Class",
+        "scenarioLabel": "Quick-fill a sample schedule",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Schedule Check",
@@ -10027,6 +10083,12 @@
           "fri": "Friday",
           "sat": "Saturday",
           "sun": "Sunday"
+        },
+        "hoursShortUnit": "h",
+        "loadBand": {
+          "light": "Light Week",
+          "typical": "Balanced Week",
+          "heavy": "Heavy Week"
         }
       },
       "education": {
@@ -10145,6 +10207,12 @@
           "url": "https://doi.org/10.1137/0205048",
           "readOriginal": "Read the Original Paper"
         }
+      },
+      "scenarios": {
+        "lightLoad": "Light Load (2 classes)",
+        "typicalLoad": "Typical Load (5 classes)",
+        "heavyLoad": "Heavy Load (7 classes)",
+        "conflictDemo": "Conflict Demo"
       }
     },
     "citation-generator": {
@@ -10196,7 +10264,9 @@
         "urlLabel": "URL",
         "urlPlaceholder": "https://example.com/page",
         "accessDateLabel": "Access Date (optional)",
-        "accessDatePlaceholder": "e.g. January 5, 2024"
+        "accessDatePlaceholder": "e.g. January 5, 2024",
+        "scenarioLabel": "Quick-fill a worked example",
+        "clear": "Clear"
       },
       "result": {
         "heading": "Your Citations",
@@ -10205,7 +10275,13 @@
         "missingUrl": "Enter the URL of the web page.",
         "apaLabel": "APA",
         "mlaLabel": "MLA",
-        "chicagoLabel": "Chicago"
+        "chicagoLabel": "Chicago",
+        "completenessHeading": "Citation Completeness",
+        "completeness": {
+          "incomplete": "Incomplete",
+          "mostlyComplete": "Mostly Complete",
+          "complete": "Complete"
+        }
       },
       "education": {
         "intro": {
@@ -10323,6 +10399,11 @@
           "url": "https://doi.org/10.1126/science.122.3159.108",
           "readOriginal": "Read the Original Paper"
         }
+      },
+      "scenarios": {
+        "bookExample": "Book Example",
+        "journalExample": "Journal Article Example",
+        "websiteExample": "Website Example"
       }
     },
     "area-calculator": {

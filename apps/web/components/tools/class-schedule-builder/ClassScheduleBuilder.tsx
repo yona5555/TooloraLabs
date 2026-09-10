@@ -11,7 +11,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ScheduleInputPanel from "./ScheduleInputPanel";
 import ScheduleResult from "./ScheduleResult";
 import ScheduleQuickReference from "./ScheduleQuickReference";
-import type { DraftClass, DayCode } from "./types";
+import { DEFAULT_SCHEDULE_CLASSES, type DraftClass, type DayCode, type ScheduleScenario } from "./types";
 
 const tool = new ClassScheduleBuilderTool();
 
@@ -23,10 +23,15 @@ function timeToMinutes(time: string): number {
 export default function ClassScheduleBuilder({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.class-schedule-builder.nav");
 
-  const [classes, setClasses] = useState<DraftClass[]>([
-    { name: "Math 101", days: ["mon", "wed"], startTime: "09:00", endTime: "10:30" },
-    { name: "Physics 201", days: ["mon"], startTime: "10:00", endTime: "11:00" },
-  ]);
+  const [classes, setClasses] = useState<DraftClass[]>(DEFAULT_SCHEDULE_CLASSES);
+
+  function handleScenarioPreset(scenario: ScheduleScenario) {
+    setClasses(scenario.classes.map((cls) => ({ ...cls, days: [...cls.days] })));
+  }
+
+  function handleClear() {
+    setClasses(DEFAULT_SCHEDULE_CLASSES.map((cls) => ({ ...cls, days: [...cls.days] })));
+  }
 
   const digitStyle = resolveDigitStyle();
 
@@ -55,7 +60,14 @@ export default function ClassScheduleBuilder({ education }: { education: ReactNo
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<ScheduleInputPanel classes={classes} onClassesChange={setClasses} />}
+          input={
+            <ScheduleInputPanel
+              classes={classes}
+              onClassesChange={setClasses}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
           result={<ScheduleResult result={result} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="class-schedule-builder" category="student-productivity" />}
           secondary={

@@ -1,15 +1,16 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, RotateCcw, Trash2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import { emptyCourse, LETTER_GRADES, type DraftCourse, type GpaOperation } from "./types";
+import { emptyCourse, LETTER_GRADES, GPA_SCENARIOS, type DraftCourse, type GpaOperation, type GpaScenario } from "./types";
 
 type GpaInputPanelProps = {
   operation: GpaOperation;
   onOperationChange: (operation: GpaOperation) => void;
   courses: DraftCourse[];
   onCoursesChange: (courses: DraftCourse[]) => void;
+  onScenarioPreset: (scenario: GpaScenario) => void;
   currentGpa: string;
   onCurrentGpaChange: (value: string) => void;
   currentCredits: string;
@@ -18,6 +19,7 @@ type GpaInputPanelProps = {
   onTargetGpaChange: (value: string) => void;
   plannedCredits: string;
   onPlannedCreditsChange: (value: string) => void;
+  onClear: () => void;
 };
 
 export default function GpaInputPanel({
@@ -25,6 +27,7 @@ export default function GpaInputPanel({
   onOperationChange,
   courses,
   onCoursesChange,
+  onScenarioPreset,
   currentGpa,
   onCurrentGpaChange,
   currentCredits,
@@ -33,8 +36,10 @@ export default function GpaInputPanel({
   onTargetGpaChange,
   plannedCredits,
   onPlannedCreditsChange,
+  onClear,
 }: GpaInputPanelProps) {
   const t = useTranslations("tools.gpa-calculator.form");
+  const tScenarios = useTranslations("tools.gpa-calculator.scenarios");
 
   function updateCourse(index: number, patch: Partial<DraftCourse>) {
     onCoursesChange(courses.map((c, i) => (i === index ? { ...c, ...patch } : c)));
@@ -62,6 +67,22 @@ export default function GpaInputPanel({
 
       {operation === "calculate" ? (
         <div className="mt-5 space-y-3">
+          <div>
+            <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+            <div className="flex flex-wrap gap-2">
+              {GPA_SCENARIOS.map((scenario) => (
+                <button
+                  key={scenario.key}
+                  type="button"
+                  onClick={() => onScenarioPreset(scenario)}
+                  className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+                >
+                  {tScenarios(scenario.key)}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {courses.map((course, index) => (
             <div key={index} className="grid grid-cols-[1fr_1fr_auto] items-end gap-2">
               <label className="block space-y-2">
@@ -146,6 +167,15 @@ export default function GpaInputPanel({
           />
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

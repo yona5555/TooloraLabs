@@ -7,32 +7,28 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import CitationInputPanel, { type CitationDraft } from "./CitationInputPanel";
+import CitationInputPanel from "./CitationInputPanel";
 import CitationResult from "./CitationResult";
 import CitationQuickReference from "./CitationQuickReference";
+import { CITATION_SCENARIOS, EMPTY_CITATION_DRAFT, type CitationDraft, type CitationScenario } from "./types";
 
 const tool = new CitationGeneratorTool();
 
 function defaultDraft(): CitationDraft {
-  return {
-    sourceType: "book",
-    authors: [{ firstName: "Jane", lastName: "Doe" }],
-    title: "The Craft of Research",
-    year: "2020",
-    publisher: "University of Chicago Press",
-    journalName: "",
-    volume: "",
-    issue: "",
-    pages: "",
-    siteName: "",
-    url: "",
-    accessDate: "",
-  };
+  return CITATION_SCENARIOS[0].draft;
 }
 
 export default function CitationGenerator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.citation-generator.nav");
   const [draft, setDraft] = useState<CitationDraft>(defaultDraft());
+
+  function handleScenarioPreset(scenario: CitationScenario) {
+    setDraft({ ...scenario.draft, authors: scenario.draft.authors.map((a) => ({ ...a })) });
+  }
+
+  function handleClear() {
+    setDraft({ ...EMPTY_CITATION_DRAFT, authors: EMPTY_CITATION_DRAFT.authors.map((a) => ({ ...a })) });
+  }
 
   const result = useMemo(() => {
     const output = tool.execute(
@@ -65,8 +61,15 @@ export default function CitationGenerator({ education }: { education: ReactNode 
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<CitationInputPanel draft={draft} onChange={setDraft} />}
-          result={<CitationResult result={result} />}
+          input={
+            <CitationInputPanel
+              draft={draft}
+              onChange={setDraft}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
+          result={<CitationResult result={result} draft={draft} />}
           sidebar={<RelatedToolsSidebar currentSlug="citation-generator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">

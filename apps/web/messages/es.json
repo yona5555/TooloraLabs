@@ -5448,7 +5448,9 @@
         "targetGpaLabel": "GPA Objetivo",
         "targetGpaPlaceholder": "p. ej. 3.5",
         "plannedCreditsLabel": "Horas de Crédito Próximas",
-        "plannedCreditsPlaceholder": "p. ej. 30"
+        "plannedCreditsPlaceholder": "p. ej. 30",
+        "scenarioLabel": "Rellenar rápido un escenario",
+        "clear": "Borrar"
       },
       "result": {
         "heading": "Resultado",
@@ -5459,7 +5461,10 @@
         "creditsSummary": "{credits} horas de crédito en total, {points} puntos de calidad.",
         "diagramCaption": "{value} en la escala de GPA de 0 a 4.0.",
         "stepCalculate": "Puntos de calidad totales divididos entre {credits} horas de crédito totales.",
-        "stepTarget": "Partiendo de un GPA de {current} sobre {credits} horas de crédito totales una vez incluidos los próximos cursos."
+        "stepTarget": "Partiendo de un GPA de {current} sobre {credits} horas de crédito totales una vez incluidos los próximos cursos.",
+        "courseCountLabel": "Cursos ingresados",
+        "creditsLabel": "Horas crédito",
+        "qualityPointsLabel": "Puntos de calidad"
       },
       "education": {
         "intro": {
@@ -5579,7 +5584,43 @@
           "note": "La revisión histórica de Schneider y Hutt, revisada por pares, documenta la adopción y estandarización graduales de la escala de calificación de la A a la F en la educación estadounidense, situando el precedente de Mount Holyoke College dentro de una historia más amplia y más disputada de la reforma de la calificación.",
           "url": "https://doi.org/10.1080/00220272.2013.790480",
           "readOriginal": "Leer el texto original"
+        },
+        "scenarioWidget": {
+          "title": "Prueba un escenario de semestre real",
+          "intro": "Haz clic en una carga de cursos a continuación para ver cómo cambian el GPA y la banda de posición en vivo, usando exactamente el mismo motor que la calculadora de arriba.",
+          "summary": "{credits} horas crédito, {points} puntos de calidad → GPA de {gpa}."
         }
+      },
+      "scenarios": {
+        "deansListSemester": "Lista del decano (A's)",
+        "solidBSemester": "B's sólidas",
+        "mixedSemester": "Mezcla A/B/C",
+        "strugglingSemester": "Con dificultades (C/D)"
+      },
+      "gauge": {
+        "probation": "En probatoria (menos de 2.0)",
+        "satisfactory": "Satisfactorio (2.0–3.0)",
+        "good": "Buena posición (3.0–3.5)",
+        "excellent": "Excelente (3.5+)"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Comparte o exporta este resultado",
+        "shareToSocial": "Compartir en redes sociales",
+        "contactSectionTitle": "Añade tus datos al PDF (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "Jane Doe",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "jane@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "+1 555 123 4567",
+        "contactOrganization": "Escuela / Organización",
+        "contactOrganizationPlaceholder": "State University",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "123 Campus Ave",
+        "preparedForTitle": "Preparado para",
+        "generatedOn": "Generado el",
+        "howCalculatedTitle": "Cómo se calculó esto"
       }
     },
     "density-calculator": {
@@ -8565,7 +8606,9 @@
         "longBreakMinutesPlaceholder": "p. ej. 15",
         "pomodorosBeforeLongBreakLabel": "Pomodoros Antes del Descanso Largo",
         "pomodorosBeforeLongBreakHint": "Cuántos intervalos de trabajo completas antes de tomar el descanso más largo.",
-        "pomodorosBeforeLongBreakPlaceholder": "p. ej. 4"
+        "pomodorosBeforeLongBreakPlaceholder": "p. ej. 4",
+        "scenarioLabel": "Rellenar rápido una duración de sesión",
+        "clear": "Borrar"
       },
       "result": {
         "heading": "Plan de la Sesión",
@@ -8584,7 +8627,12 @@
         "diagramWork": "Trabajo",
         "diagramBreak": "Descanso",
         "diagramLeftover": "No Programado",
-        "diagramCaption": "Desglose proporcional de tu sesión: tiempo de trabajo concentrado, tiempo de descanso y cualquier minuto restante demasiado corto para otro intervalo completo."
+        "diagramCaption": "Desglose proporcional de tu sesión: tiempo de trabajo concentrado, tiempo de descanso y cualquier minuto restante demasiado corto para otro intervalo completo.",
+        "utilization": {
+          "short": "Sesión corta",
+          "wellPlanned": "Bien planificada",
+          "tight": "Muy ajustada"
+        }
       },
       "education": {
         "intro": {
@@ -8698,6 +8746,12 @@
           "url": "https://doi.org/10.1111/bjep.12593",
           "readOriginal": "Leer el Texto Original"
         }
+      },
+      "scenarios": {
+        "quickSession": "Rápida (30 min)",
+        "standardSession": "Estándar (2 h)",
+        "deepWorkSession": "Trabajo profundo (4 h)",
+        "allDaySession": "Todo el día (8 h)"
       }
     },
     "vector-calculator": {
@@ -10008,7 +10062,9 @@
         },
         "startTimeLabel": "Hora de Inicio",
         "endTimeLabel": "Hora de Fin",
-        "addClass": "Añadir Otra Clase"
+        "addClass": "Añadir Otra Clase",
+        "scenarioLabel": "Rellenar rápido un horario de ejemplo",
+        "clear": "Borrar"
       },
       "result": {
         "heading": "Revisión del Horario",
@@ -10027,6 +10083,12 @@
           "fri": "Viernes",
           "sat": "Sábado",
           "sun": "Domingo"
+        },
+        "hoursShortUnit": "h",
+        "loadBand": {
+          "light": "Semana ligera",
+          "typical": "Semana equilibrada",
+          "heavy": "Semana cargada"
         }
       },
       "education": {
@@ -10145,6 +10207,12 @@
           "url": "https://doi.org/10.1137/0205048",
           "readOriginal": "Leer el Artículo Original"
         }
+      },
+      "scenarios": {
+        "lightLoad": "Carga ligera (2 clases)",
+        "typicalLoad": "Carga típica (5 clases)",
+        "heavyLoad": "Carga alta (7 clases)",
+        "conflictDemo": "Demo de conflicto"
       }
     },
     "citation-generator": {
@@ -10196,7 +10264,9 @@
         "urlLabel": "URL",
         "urlPlaceholder": "https://example.com/page",
         "accessDateLabel": "Fecha de Acceso (opcional)",
-        "accessDatePlaceholder": "p. ej., 5 de enero de 2024"
+        "accessDatePlaceholder": "p. ej., 5 de enero de 2024",
+        "scenarioLabel": "Rellenar rápido un ejemplo resuelto",
+        "clear": "Borrar"
       },
       "result": {
         "heading": "Tus Citas",
@@ -10205,7 +10275,13 @@
         "missingUrl": "Introduce la URL de la página web.",
         "apaLabel": "APA",
         "mlaLabel": "MLA",
-        "chicagoLabel": "Chicago"
+        "chicagoLabel": "Chicago",
+        "completenessHeading": "Integridad de la cita",
+        "completeness": {
+          "incomplete": "Incompleta",
+          "mostlyComplete": "Mayormente completa",
+          "complete": "Completa"
+        }
       },
       "education": {
         "intro": {
@@ -10323,6 +10399,11 @@
           "url": "https://doi.org/10.1126/science.122.3159.108",
           "readOriginal": "Leer el Artículo Original"
         }
+      },
+      "scenarios": {
+        "bookExample": "Ejemplo de libro",
+        "journalExample": "Ejemplo de artículo de revista",
+        "websiteExample": "Ejemplo de sitio web"
       }
     },
     "area-calculator": {

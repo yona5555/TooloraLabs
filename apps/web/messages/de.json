@@ -5448,7 +5448,9 @@
         "targetGpaLabel": "Ziel-GPA",
         "targetGpaPlaceholder": "z. B. 3,5",
         "plannedCreditsLabel": "Anstehende Leistungspunkte",
-        "plannedCreditsPlaceholder": "z. B. 30"
+        "plannedCreditsPlaceholder": "z. B. 30",
+        "scenarioLabel": "Szenario schnell ausfüllen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -5459,7 +5461,10 @@
         "creditsSummary": "{credits} Leistungspunkte insgesamt, {points} Qualitätspunkte.",
         "diagramCaption": "{value} auf der GPA-Skala von 0 bis 4,0.",
         "stepCalculate": "Gesamte Qualitätspunkte geteilt durch {credits} Leistungspunkte insgesamt.",
-        "stepTarget": "Ausgehend von einem GPA von {current} über {credits} Leistungspunkte insgesamt, sobald die anstehenden Kurse einbezogen sind."
+        "stepTarget": "Ausgehend von einem GPA von {current} über {credits} Leistungspunkte insgesamt, sobald die anstehenden Kurse einbezogen sind.",
+        "courseCountLabel": "Eingegebene Kurse",
+        "creditsLabel": "Credit-Stunden",
+        "qualityPointsLabel": "Qualitätspunkte"
       },
       "education": {
         "intro": {
@@ -5579,7 +5584,43 @@
           "note": "Die von Schneider und Hutt begutachtete historische Untersuchung zeichnet die schrittweise Übernahme und Standardisierung der Buchstabenskala von A bis F im amerikanischen Bildungswesen nach und ordnet den Präzedenzfall des Mount Holyoke College in eine breitere, umstrittenere Geschichte der Bewertungsreform ein.",
           "url": "https://doi.org/10.1080/00220272.2013.790480",
           "readOriginal": "Originaltext lesen"
+        },
+        "scenarioWidget": {
+          "title": "Ein reales Semester-Szenario ausprobieren",
+          "intro": "Klicken Sie unten auf eine Kurslast, um live zu sehen, wie sich der GPA und das Standing-Band ändern — mit genau derselben Engine wie der Rechner oben.",
+          "summary": "{credits} Credit-Stunden, {points} Qualitätspunkte → {gpa} GPA."
         }
+      },
+      "scenarios": {
+        "deansListSemester": "Dean's List (Einser)",
+        "solidBSemester": "Solide Zweier",
+        "mixedSemester": "Gemischt A/B/C",
+        "strugglingSemester": "Schwierig (C/D)"
+      },
+      "gauge": {
+        "probation": "Bewährung (unter 2,0)",
+        "satisfactory": "Befriedigend (2,0–3,0)",
+        "good": "Guter Stand (3,0–3,5)",
+        "excellent": "Ausgezeichnet (3,5+)"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "shareToSocial": "In sozialen Medien teilen",
+        "contactSectionTitle": "Ihre Angaben zum PDF hinzufügen (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "Jane Doe",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "jane@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "+1 555 123 4567",
+        "contactOrganization": "Schule / Organisation",
+        "contactOrganizationPlaceholder": "State University",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "123 Campus Ave",
+        "preparedForTitle": "Erstellt für",
+        "generatedOn": "Erstellt am",
+        "howCalculatedTitle": "So wurde dies berechnet"
       }
     },
     "density-calculator": {
@@ -8565,7 +8606,9 @@
         "longBreakMinutesPlaceholder": "z. B. 15",
         "pomodorosBeforeLongBreakLabel": "Pomodoros vor langer Pause",
         "pomodorosBeforeLongBreakHint": "Wie viele Arbeitsintervalle Sie abschließen, bevor Sie die längere Pause machen.",
-        "pomodorosBeforeLongBreakPlaceholder": "z. B. 4"
+        "pomodorosBeforeLongBreakPlaceholder": "z. B. 4",
+        "scenarioLabel": "Sitzungsdauer schnell ausfüllen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Sitzungsplan",
@@ -8584,7 +8627,12 @@
         "diagramWork": "Arbeit",
         "diagramBreak": "Pause",
         "diagramLeftover": "Nicht verplant",
-        "diagramCaption": "Anteilige Aufteilung Ihrer Sitzung: fokussierte Arbeitszeit, Pausenzeit und übrig gebliebene Minuten, die für ein weiteres volles Intervall nicht ausreichen."
+        "diagramCaption": "Anteilige Aufteilung Ihrer Sitzung: fokussierte Arbeitszeit, Pausenzeit und übrig gebliebene Minuten, die für ein weiteres volles Intervall nicht ausreichen.",
+        "utilization": {
+          "short": "Kurze Sitzung",
+          "wellPlanned": "Gut geplant",
+          "tight": "Eng getaktet"
+        }
       },
       "education": {
         "intro": {
@@ -8698,6 +8746,12 @@
           "url": "https://doi.org/10.1111/bjep.12593",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "scenarios": {
+        "quickSession": "Schnell (30 Min.)",
+        "standardSession": "Standard (2 Std.)",
+        "deepWorkSession": "Deep Work (4 Std.)",
+        "allDaySession": "Ganztägig (8 Std.)"
       }
     },
     "vector-calculator": {
@@ -10008,7 +10062,9 @@
         },
         "startTimeLabel": "Startzeit",
         "endTimeLabel": "Endzeit",
-        "addClass": "Weiteren Kurs hinzufügen"
+        "addClass": "Weiteren Kurs hinzufügen",
+        "scenarioLabel": "Beispielstundenplan schnell ausfüllen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Stundenplan-Prüfung",
@@ -10027,6 +10083,12 @@
           "fri": "Freitag",
           "sat": "Samstag",
           "sun": "Sonntag"
+        },
+        "hoursShortUnit": "Std",
+        "loadBand": {
+          "light": "Leichte Woche",
+          "typical": "Ausgewogene Woche",
+          "heavy": "Volle Woche"
         }
       },
       "education": {
@@ -10145,6 +10207,12 @@
           "url": "https://doi.org/10.1137/0205048",
           "readOriginal": "Originalarbeit lesen"
         }
+      },
+      "scenarios": {
+        "lightLoad": "Leichte Last (2 Kurse)",
+        "typicalLoad": "Typische Last (5 Kurse)",
+        "heavyLoad": "Hohe Last (7 Kurse)",
+        "conflictDemo": "Konflikt-Demo"
       }
     },
     "citation-generator": {
@@ -10196,7 +10264,9 @@
         "urlLabel": "URL",
         "urlPlaceholder": "https://example.com/page",
         "accessDateLabel": "Zugriffsdatum (optional)",
-        "accessDatePlaceholder": "z. B. 5. Januar 2024"
+        "accessDatePlaceholder": "z. B. 5. Januar 2024",
+        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Ihre Zitate",
@@ -10205,7 +10275,13 @@
         "missingUrl": "Geben Sie die URL der Webseite ein.",
         "apaLabel": "APA",
         "mlaLabel": "MLA",
-        "chicagoLabel": "Chicago"
+        "chicagoLabel": "Chicago",
+        "completenessHeading": "Vollständigkeit des Zitats",
+        "completeness": {
+          "incomplete": "Unvollständig",
+          "mostlyComplete": "Größtenteils vollständig",
+          "complete": "Vollständig"
+        }
       },
       "education": {
         "intro": {
@@ -10323,6 +10399,11 @@
           "url": "https://doi.org/10.1126/science.122.3159.108",
           "readOriginal": "Originalarbeit lesen"
         }
+      },
+      "scenarios": {
+        "bookExample": "Buchbeispiel",
+        "journalExample": "Zeitschriftenartikel-Beispiel",
+        "websiteExample": "Website-Beispiel"
       }
     },
     "area-calculator": {
