@@ -15,7 +15,7 @@ import AgeLifeExpectancyCard from "./AgeLifeExpectancyCard";
 import AgePlanetaryAge from "./AgePlanetaryAge";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import type { AgeExtendedResult, CalendarSystem } from "./types";
+import type { AgeExtendedResult, AgeScenario, CalendarSystem } from "./types";
 
 const tool = new AgeCalculatorTool();
 const DEFAULT_BIRTH_DATE = "1994-06-15";
@@ -226,6 +226,21 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
     );
   }
 
+  function handleScenarioPreset(scenario: AgeScenario) {
+    setCalendarSystem("gregorian");
+    setBirthDate(scenario.birthDate);
+    const hijri = defaultHijriFields(scenario.birthDate);
+    setHijriDay(hijri.day);
+    setHijriMonth(hijri.month);
+    setHijriYear(hijri.year);
+    setUseCustomReference(false);
+    setReferenceDate("");
+    setError("");
+    setDigitStyle(resolveDigitStyle(scenario.birthDate));
+    setCalcBirthISO(scenario.birthDate);
+    setCalcReferenceISO(null);
+  }
+
   function handleReset() {
     setCalendarSystem("gregorian");
     setBirthDate(DEFAULT_BIRTH_DATE);
@@ -267,6 +282,7 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
               error={error}
               onSubmit={handleSubmit}
               onReset={handleReset}
+              onScenarioPreset={handleScenarioPreset}
             />
             <AgePlanetaryAge totalDays={result.totalDays} digitStyle={digitStyle} />
           </div>

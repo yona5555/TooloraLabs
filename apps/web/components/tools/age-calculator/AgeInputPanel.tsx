@@ -3,7 +3,7 @@ import type { Gender } from "@tooloralabs/tools";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import type { CalendarSystem } from "./types";
+import { AGE_SCENARIOS, type AgeScenario, type CalendarSystem } from "./types";
 
 type AgeInputPanelProps = {
   calendarSystem: CalendarSystem;
@@ -30,6 +30,7 @@ type AgeInputPanelProps = {
   error: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onReset: () => void;
+  onScenarioPreset: (scenario: AgeScenario) => void;
 };
 
 export default function AgeInputPanel({
@@ -52,12 +53,29 @@ export default function AgeInputPanel({
   error,
   onSubmit,
   onReset,
+  onScenarioPreset,
 }: AgeInputPanelProps) {
   const t = useTranslations("tools.age-calculator");
+  const tScenarios = useTranslations("tools.age-calculator.scenarios");
   const hijriMonths = t.raw("form.hijriMonths") as string[];
 
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {AGE_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
       <form onSubmit={onSubmit} className="space-y-5">
         {calendarSystem === "gregorian" ? (
           <ToolInput

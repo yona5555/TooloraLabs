@@ -10,15 +10,29 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SleepInputPanel from "./SleepInputPanel";
 import SleepResult from "./SleepResult";
 import SleepQuickReference from "./SleepQuickReference";
-import { timeStringToMinutes, type SleepMode } from "./types";
+import { timeStringToMinutes, type SleepMode, type SleepScenario } from "./types";
 
 const tool = new SleepTool();
 
+const DEFAULTS = { mode: "wakeUp" as SleepMode, time: "07:00", fallAsleepMinutes: "15" };
+
 export default function SleepCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.sleep-calculator.nav");
-  const [mode, setMode] = useState<SleepMode>("wakeUp");
-  const [time, setTime] = useState("07:00");
-  const [fallAsleepMinutes, setFallAsleepMinutes] = useState("15");
+  const [mode, setMode] = useState<SleepMode>(DEFAULTS.mode);
+  const [time, setTime] = useState(DEFAULTS.time);
+  const [fallAsleepMinutes, setFallAsleepMinutes] = useState(DEFAULTS.fallAsleepMinutes);
+
+  function handleScenarioPreset(scenario: SleepScenario) {
+    setMode(scenario.mode);
+    setTime(scenario.time);
+    setFallAsleepMinutes(scenario.fallAsleepMinutes);
+  }
+
+  function handleClear() {
+    setMode(DEFAULTS.mode);
+    setTime(DEFAULTS.time);
+    setFallAsleepMinutes(DEFAULTS.fallAsleepMinutes);
+  }
 
   const result = useMemo(() => {
     const timeMinutes = timeStringToMinutes(time);
@@ -48,6 +62,8 @@ export default function SleepCalculator({ education }: { education: ReactNode })
               onTimeChange={setTime}
               fallAsleepMinutes={fallAsleepMinutes}
               onFallAsleepMinutesChange={setFallAsleepMinutes}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<SleepResult result={result} mode={mode} />}

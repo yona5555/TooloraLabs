@@ -10,7 +10,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DueDateInputPanel from "./DueDateInputPanel";
 import DueDateResult from "./DueDateResult";
 import DueDateQuickReference from "./DueDateQuickReference";
-import type { DueDateMethod } from "./types";
+import type { DueDateMethod, DueDateScenario } from "./types";
 
 const tool = new DueDateTool();
 
@@ -19,11 +19,31 @@ function todayISO(): string {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
+function isoDaysAgo(daysAgo: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+const DEFAULT_CYCLE_LENGTH = "28";
+
 export default function DueDateCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.due-date-calculator.nav");
   const [method, setMethod] = useState<DueDateMethod>("lmp");
   const [date, setDate] = useState(todayISO());
-  const [cycleLengthDays, setCycleLengthDays] = useState("28");
+  const [cycleLengthDays, setCycleLengthDays] = useState(DEFAULT_CYCLE_LENGTH);
+
+  function handleScenarioPreset(scenario: DueDateScenario) {
+    setMethod(scenario.method);
+    setDate(isoDaysAgo(scenario.daysAgo));
+    setCycleLengthDays(scenario.cycleLengthDays);
+  }
+
+  function handleClear() {
+    setMethod("lmp");
+    setDate(todayISO());
+    setCycleLengthDays(DEFAULT_CYCLE_LENGTH);
+  }
 
   const result = useMemo(() => {
     const cycleNum = parseInt(cycleLengthDays, 10);
@@ -52,6 +72,8 @@ export default function DueDateCalculator({ education }: { education: ReactNode 
               onDateChange={setDate}
               cycleLengthDays={cycleLengthDays}
               onCycleLengthDaysChange={setCycleLengthDays}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<DueDateResult result={result} />}

@@ -11,6 +11,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PregnancyInputPanel from "./PregnancyInputPanel";
 import PregnancyResult from "./PregnancyResult";
 import PregnancyQuickReference from "./PregnancyQuickReference";
+import type { PregnancyScenario } from "./types";
 
 const tool = new PregnancyTool();
 
@@ -19,15 +20,25 @@ function todayISO(): string {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
-function defaultLastPeriodDate(): string {
+function lastPeriodDateForWeeksAlong(weeksAlong: number): string {
   const now = new Date();
-  now.setDate(now.getDate() - 7 * 10); // default to ~10 weeks along, for a meaningful preview
+  now.setDate(now.getDate() - 7 * weeksAlong);
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
+const DEFAULT_WEEKS_ALONG = 10;
+
 export default function PregnancyCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.pregnancy-calculator.nav");
-  const [lastPeriodDate, setLastPeriodDate] = useState(defaultLastPeriodDate());
+  const [lastPeriodDate, setLastPeriodDate] = useState(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG));
+
+  function handleScenarioPreset(scenario: PregnancyScenario) {
+    setLastPeriodDate(lastPeriodDateForWeeksAlong(scenario.weeksAlong));
+  }
+
+  function handleClear() {
+    setLastPeriodDate(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG));
+  }
 
   const digitStyle = resolveDigitStyle();
 
@@ -46,7 +57,14 @@ export default function PregnancyCalculator({ education }: { education: ReactNod
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<PregnancyInputPanel lastPeriodDate={lastPeriodDate} onLastPeriodDateChange={setLastPeriodDate} />}
+          input={
+            <PregnancyInputPanel
+              lastPeriodDate={lastPeriodDate}
+              onLastPeriodDateChange={setLastPeriodDate}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
           result={<PregnancyResult result={result} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="pregnancy-calculator" category="health-fitness" />}
           secondary={
