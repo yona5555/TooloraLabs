@@ -20,6 +20,15 @@ const RELATED_TOOLS = ["stoichiometry-calculator", "chemical-equation-balancer",
 
 const DEFAULT_FORMULA = "C6H12O6";
 
+// Real, familiar molecules users commonly look up.
+const SCENARIOS: Record<string, string> = {
+  water: "H2O",
+  tableSalt: "NaCl",
+  aspirin: "C9H8O4",
+  caffeine: "C8H10N4O2",
+  sulfuricAcid: "H2SO4",
+};
+
 const EMPTY_RESULT: MolarMassCalculatorOutput = { error: null, errorDetail: null, totalMass: 0, breakdown: [] };
 
 function computeResult(formula: string): MolarMassCalculatorOutput {
@@ -78,6 +87,15 @@ export default function MolarMassCalculator({ education }: { education: ReactNod
     setDigitStyle(resolveDigitStyle(formula));
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS[key];
+    if (!preset) return;
+    setFormula(preset);
+    setDigitStyle(resolveDigitStyle(preset));
+    setResult(computeResult(preset));
+    setHasCalculated(true);
+  }
+
   function handleClear() {
     setFormula(DEFAULT_FORMULA);
     setDigitStyle(resolveDigitStyle(DEFAULT_FORMULA));
@@ -98,7 +116,14 @@ export default function MolarMassCalculator({ education }: { education: ReactNod
         <ToolAboveFold
           input={
             <div className="flex flex-col gap-3">
-              <MolarMassInputPanel formula={formula} onFormulaChange={setFormula} onCalculate={handleCalculate} onClear={handleClear} />
+              <MolarMassInputPanel
+                formula={formula}
+                onFormulaChange={setFormula}
+                scenarioKeys={Object.keys(SCENARIOS)}
+                onScenarioPreset={handleScenarioPreset}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
               <MolarMassReferenceTable />
             </div>
           }

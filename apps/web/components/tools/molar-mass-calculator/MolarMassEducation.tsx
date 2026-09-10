@@ -9,6 +9,7 @@ import MolarMassAtomicMassDiagram from "./MolarMassAtomicMassDiagram";
 import MolarMassAvogadroDiagram from "./MolarMassAvogadroDiagram";
 import MolarMassGroupNotationDiagram from "./MolarMassGroupNotationDiagram";
 import MolarMassFormulaBreakdownDiagram from "./MolarMassFormulaBreakdownDiagram";
+import MolarMassGauge from "./MolarMassGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function MolarMassEducation() {
 
   return (
     <EncyclopediaPaper>
+      <MolarMassGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <MolarMassCompositionBarDiagram
