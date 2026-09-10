@@ -9699,7 +9699,15 @@
         "clear": "مسح",
         "structureReactants": "{count, plural, one {# متفاعل} other {# متفاعلات}}",
         "structureProducts": "{count, plural, one {# ناتج} other {# نواتج}}",
-        "structureCaption": "عدد حي للحدود أثناء الكتابة — يتحدث قبل موازنة المعادلة حتى."
+        "structureCaption": "عدد حي للحدود أثناء الكتابة — يتحدث قبل موازنة المعادلة حتى.",
+        "scenarioPresetsLabel": "جرّب تفاعلًا واقعيًا:",
+        "scenarios": {
+          "methaneCombustion": "احتراق الميثان",
+          "ammoniaSynthesis": "تصنيع الأمونيا",
+          "photosynthesis": "البناء الضوئي",
+          "neutralization": "تعادل حمض وقاعدة",
+          "glucoseCombustion": "احتراق الغلوكوز"
+        }
       },
       "result": {
         "heading": "المعادلة الموزونة",
@@ -9731,6 +9739,31 @@
           },
           "coefficient": {
             "caption": "\"2 H₂O\" تعني جزيئتي ماء منفصلتين متطابقتين، وليس جزيئة واحدة مضاعفة الحجم."
+          },
+          "complexityGauge": {
+            "title": "جرّبها: ما مدى تعقيد هذا التفاعل؟",
+            "intro": "اختر تفاعلًا واقعيًا لترى مجموع معاملاته الموزونة وتقارنه بالآخرين.",
+            "simple": "بسيط",
+            "moderate": "متوسط",
+            "complex": "معقّد",
+            "verdict": "موازنة {reaction} {classification}.",
+            "sumFact": "مجموع معاملاته الموزونة يساوي {sum}.",
+            "reactions": {
+              "hydrogenWater": "تصنيع الماء من الهيدروجين",
+              "ammoniaSynthesis": "تصنيع الأمونيا (عملية هابر)",
+              "ironRusting": "صدأ الحديد",
+              "glucoseCombustion": "احتراق الغلوكوز",
+              "sucroseCombustion": "احتراق سكر المائدة",
+              "octaneCombustion": "احتراق الأوكتان"
+            },
+            "equations": {
+              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
+              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
+              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
+              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
+              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
+              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
+            }
           }
         },
         "examples": {

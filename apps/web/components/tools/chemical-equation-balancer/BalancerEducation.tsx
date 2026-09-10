@@ -9,6 +9,7 @@ import BalancerAtomBalanceDiagram from "./BalancerAtomBalanceDiagram";
 import BalancerConservationScaleDiagram from "./BalancerConservationScaleDiagram";
 import BalancerCoefficientMoleculeDiagram from "./BalancerCoefficientMoleculeDiagram";
 import BalancerMatrixDiagram from "./BalancerMatrixDiagram";
+import BalancerComplexityGauge from "./BalancerComplexityGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function BalancerEducation() {
 
   return (
     <EncyclopediaPaper>
+      <BalancerComplexityGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <BalancerEquationStructureDiagram

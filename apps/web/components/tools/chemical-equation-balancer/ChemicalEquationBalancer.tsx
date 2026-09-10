@@ -20,6 +20,15 @@ const RELATED_TOOLS = ["molar-mass-calculator", "stoichiometry-calculator", "mol
 
 const DEFAULT_EQUATION = "Fe + O2 -> Fe2O3";
 
+// Real, unbalanced reactions users commonly look up.
+const SCENARIOS: Record<string, string> = {
+  methaneCombustion: "CH4 + O2 -> CO2 + H2O",
+  ammoniaSynthesis: "N2 + H2 -> NH3",
+  photosynthesis: "CO2 + H2O -> C6H12O6 + O2",
+  neutralization: "NaOH + H2SO4 -> Na2SO4 + H2O",
+  glucoseCombustion: "C6H12O6 + O2 -> CO2 + H2O",
+};
+
 const EMPTY_RESULT: ChemicalEquationBalancerOutput = { error: null, errorDetail: null, balancedEquation: "", terms: [] };
 
 function computeResult(equation: string): ChemicalEquationBalancerOutput {
@@ -78,6 +87,15 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
     setDigitStyle(resolveDigitStyle(equation));
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS[key];
+    if (!preset) return;
+    setEquation(preset);
+    setDigitStyle(resolveDigitStyle(preset));
+    setResult(computeResult(preset));
+    setHasCalculated(true);
+  }
+
   function handleClear() {
     setEquation(DEFAULT_EQUATION);
     setDigitStyle(resolveDigitStyle(DEFAULT_EQUATION));
@@ -98,7 +116,14 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
         <ToolAboveFold
           input={
             <div className="flex flex-col gap-3">
-              <BalancerInputPanel equation={equation} onEquationChange={setEquation} onCalculate={handleCalculate} onClear={handleClear} />
+              <BalancerInputPanel
+                equation={equation}
+                onEquationChange={setEquation}
+                scenarioKeys={Object.keys(SCENARIOS)}
+                onScenarioPreset={handleScenarioPreset}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
               <BalancerReferenceTable />
             </div>
           }

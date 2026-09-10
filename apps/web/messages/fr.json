@@ -9699,7 +9699,15 @@
         "clear": "Effacer",
         "structureReactants": "{count, plural, one {# réactif} other {# réactifs}}",
         "structureProducts": "{count, plural, one {# produit} other {# produits}}",
-        "structureCaption": "Comptage des termes en direct pendant la saisie — se met à jour même avant que l'équation ne soit équilibrée."
+        "structureCaption": "Comptage des termes en direct pendant la saisie — se met à jour même avant que l'équation ne soit équilibrée.",
+        "scenarioPresetsLabel": "Essayer une réaction réelle :",
+        "scenarios": {
+          "methaneCombustion": "Combustion du Méthane",
+          "ammoniaSynthesis": "Synthèse de l'Ammoniac",
+          "photosynthesis": "Photosynthèse",
+          "neutralization": "Neutralisation Acide-Base",
+          "glucoseCombustion": "Combustion du Glucose"
+        }
       },
       "result": {
         "heading": "Équation Équilibrée",
@@ -9731,6 +9739,31 @@
           },
           "coefficient": {
             "caption": "« 2 H₂O » signifie deux molécules d'eau identiques et séparées, pas une molécule doublée en taille."
+          },
+          "complexityGauge": {
+            "title": "À essayer : quelle est la complexité de cette réaction ?",
+            "intro": "Choisissez une réaction réelle pour voir la somme de ses coefficients équilibrés et la comparer à d'autres.",
+            "simple": "Simple",
+            "moderate": "Modérée",
+            "complex": "Complexe",
+            "verdict": "{reaction} est {classification} à équilibrer.",
+            "sumFact": "Ses coefficients équilibrés totalisent {sum}.",
+            "reactions": {
+              "hydrogenWater": "Synthèse de l'Eau à partir d'Hydrogène",
+              "ammoniaSynthesis": "Synthèse de l'Ammoniac (Procédé Haber)",
+              "ironRusting": "Rouille du Fer",
+              "glucoseCombustion": "Combustion du Glucose",
+              "sucroseCombustion": "Combustion du Sucre de Table",
+              "octaneCombustion": "Combustion de l'Octane"
+            },
+            "equations": {
+              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
+              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
+              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
+              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
+              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
+              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
+            }
           }
         },
         "examples": {

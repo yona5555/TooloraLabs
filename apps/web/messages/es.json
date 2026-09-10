@@ -9699,7 +9699,15 @@
         "clear": "Limpiar",
         "structureReactants": "{count, plural, one {# reactivo} other {# reactivos}}",
         "structureProducts": "{count, plural, one {# producto} other {# productos}}",
-        "structureCaption": "Recuento de términos en vivo mientras escribes — se actualiza incluso antes de que la ecuación esté balanceada."
+        "structureCaption": "Recuento de términos en vivo mientras escribes — se actualiza incluso antes de que la ecuación esté balanceada.",
+        "scenarioPresetsLabel": "Prueba una reacción real:",
+        "scenarios": {
+          "methaneCombustion": "Combustión del Metano",
+          "ammoniaSynthesis": "Síntesis de Amoníaco",
+          "photosynthesis": "Fotosíntesis",
+          "neutralization": "Neutralización Ácido-Base",
+          "glucoseCombustion": "Combustión de la Glucosa"
+        }
       },
       "result": {
         "heading": "Ecuación Balanceada",
@@ -9731,6 +9739,31 @@
           },
           "coefficient": {
             "caption": "\"2 H₂O\" significa dos moléculas de agua idénticas y separadas, no una molécula duplicada en tamaño."
+          },
+          "complexityGauge": {
+            "title": "Pruébalo: ¿qué tan compleja es esa reacción?",
+            "intro": "Elige una reacción real para ver cómo suman sus coeficientes balanceados y compararla con otras.",
+            "simple": "Simple",
+            "moderate": "Moderada",
+            "complex": "Compleja",
+            "verdict": "{reaction} es {classification} de balancear.",
+            "sumFact": "Sus coeficientes balanceados suman {sum}.",
+            "reactions": {
+              "hydrogenWater": "Síntesis de Agua a partir de Hidrógeno",
+              "ammoniaSynthesis": "Síntesis de Amoníaco (Proceso Haber)",
+              "ironRusting": "Oxidación del Hierro",
+              "glucoseCombustion": "Combustión de la Glucosa",
+              "sucroseCombustion": "Combustión del Azúcar de Mesa",
+              "octaneCombustion": "Combustión del Octano"
+            },
+            "equations": {
+              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
+              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
+              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
+              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
+              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
+              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
+            }
           }
         },
         "examples": {
