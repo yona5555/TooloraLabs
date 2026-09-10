@@ -8,7 +8,9 @@ import {
   calculateTDEE,
   calculateWeightGoal,
   feetInchesToCm,
+  cmToFeetInches,
   lbToKg,
+  kgToLb,
 } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
@@ -19,24 +21,72 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TDEEInputPanel from "./TDEEInputPanel";
 import TDEEResult from "./TDEEResult";
 import TDEEDisclaimer from "./TDEEDisclaimer";
-import type { ActivityLevel, Gender, GoalDirection, UnitSystem } from "./types";
+import type { ActivityLevel, Gender, GoalDirection, TDEEScenario, UnitSystem } from "./types";
+
+const DEFAULTS = {
+  unitSystem: "metric" as UnitSystem,
+  heightCm: "175",
+  weightKg: "70",
+  heightFt: "5",
+  heightIn: "9",
+  weightLb: "154",
+  age: "30",
+  gender: "male" as Gender,
+  activityLevel: "moderate" as ActivityLevel,
+};
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
+}
 
 export default function TDEECalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.tdee-calculator.nav");
 
-  const [unitSystem, setUnitSystem] = useState<UnitSystem>("metric");
-  const [heightCm, setHeightCm] = useState("175");
-  const [weightKg, setWeightKg] = useState("70");
-  const [heightFt, setHeightFt] = useState("5");
-  const [heightIn, setHeightIn] = useState("9");
-  const [weightLb, setWeightLb] = useState("154");
-  const [age, setAge] = useState("30");
-  const [gender, setGender] = useState<Gender>("male");
-  const [activityLevel, setActivityLevel] = useState<ActivityLevel>("moderate");
+  const [unitSystem, setUnitSystem] = useState<UnitSystem>(DEFAULTS.unitSystem);
+  const [heightCm, setHeightCm] = useState(DEFAULTS.heightCm);
+  const [weightKg, setWeightKg] = useState(DEFAULTS.weightKg);
+  const [heightFt, setHeightFt] = useState(DEFAULTS.heightFt);
+  const [heightIn, setHeightIn] = useState(DEFAULTS.heightIn);
+  const [weightLb, setWeightLb] = useState(DEFAULTS.weightLb);
+  const [age, setAge] = useState(DEFAULTS.age);
+  const [gender, setGender] = useState<Gender>(DEFAULTS.gender);
+  const [activityLevel, setActivityLevel] = useState<ActivityLevel>(DEFAULTS.activityLevel);
   const [useBodyFat, setUseBodyFat] = useState(false);
   const [bodyFatPercent, setBodyFatPercent] = useState("15");
   const [goalDirection, setGoalDirection] = useState<GoalDirection>("maintain");
   const [weeklyRateKg, setWeeklyRateKg] = useState("0.5");
+
+  function handleScenarioPreset(scenario: TDEEScenario) {
+    const heightCmValue = parseLocalizedNumber(scenario.heightCm);
+    const weightKgValue = parseLocalizedNumber(scenario.weightKg);
+    setUnitSystem("metric");
+    setHeightCm(scenario.heightCm);
+    setWeightKg(scenario.weightKg);
+    const { feet, inches } = cmToFeetInches(heightCmValue);
+    setHeightFt(String(feet));
+    setHeightIn(String(inches));
+    setWeightLb(String(round1(kgToLb(weightKgValue))));
+    setAge(scenario.age);
+    setGender(scenario.gender);
+    setActivityLevel(scenario.activityLevel);
+    setUseBodyFat(false);
+  }
+
+  function handleClear() {
+    setUnitSystem(DEFAULTS.unitSystem);
+    setHeightCm(DEFAULTS.heightCm);
+    setWeightKg(DEFAULTS.weightKg);
+    setHeightFt(DEFAULTS.heightFt);
+    setHeightIn(DEFAULTS.heightIn);
+    setWeightLb(DEFAULTS.weightLb);
+    setAge(DEFAULTS.age);
+    setGender(DEFAULTS.gender);
+    setActivityLevel(DEFAULTS.activityLevel);
+    setUseBodyFat(false);
+    setBodyFatPercent("15");
+    setGoalDirection("maintain");
+    setWeeklyRateKg("0.5");
+  }
 
   const digitStyle: DigitStyle = resolveDigitStyle(heightCm, weightKg, age, weeklyRateKg);
 
@@ -106,6 +156,8 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
               onUseBodyFatChange={setUseBodyFat}
               bodyFatPercent={bodyFatPercent}
               onBodyFatPercentChange={setBodyFatPercent}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={

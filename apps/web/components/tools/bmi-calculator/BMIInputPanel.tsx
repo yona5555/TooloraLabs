@@ -3,7 +3,7 @@ import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { Gender } from "@tooloralabs/tools";
-import type { UnitSystem } from "./types";
+import { BMI_SCENARIOS, type BMIScenario, type UnitSystem } from "./types";
 
 type BMIInputPanelProps = {
   unitSystem: UnitSystem;
@@ -25,6 +25,7 @@ type BMIInputPanelProps = {
   error: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onReset: () => void;
+  onScenarioPreset?: (scenario: BMIScenario) => void;
 };
 
 export default function BMIInputPanel({
@@ -47,11 +48,30 @@ export default function BMIInputPanel({
   error,
   onSubmit,
   onReset,
+  onScenarioPreset,
 }: BMIInputPanelProps) {
   const t = useTranslations("tools.bmi-calculator");
+  const tScenarios = useTranslations("tools.bmi-calculator.scenarios");
 
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
+      {onScenarioPreset && (
+        <div className="mb-5">
+          <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.scenarioLabel")}</span>
+          <div className="flex flex-wrap gap-2">
+            {BMI_SCENARIOS.map((scenario) => (
+              <button
+                key={scenario.key}
+                type="button"
+                onClick={() => onScenarioPreset(scenario)}
+                className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+              >
+                {tScenarios(scenario.key)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         <button
           type="button"

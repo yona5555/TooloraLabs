@@ -12,9 +12,11 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BodyFatInputPanel from "./BodyFatInputPanel";
 import BodyFatResult from "./BodyFatResult";
 import BodyFatQuickReference from "./BodyFatQuickReference";
-import type { Gender } from "./types";
+import { type BodyFatScenario, type Gender } from "./types";
 
 const tool = new BodyFatTool();
+
+const DEFAULTS = { gender: "male" as Gender, heightCm: "180", neckCm: "38", waistCm: "85", hipCm: "95" };
 
 function toNum(s: string): number {
   const n = parseLocalizedNumber(s);
@@ -23,11 +25,27 @@ function toNum(s: string): number {
 
 export default function BodyFatCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.body-fat-calculator.nav");
-  const [gender, setGender] = useState<Gender>("male");
-  const [heightCm, setHeightCm] = useState("180");
-  const [neckCm, setNeckCm] = useState("38");
-  const [waistCm, setWaistCm] = useState("85");
-  const [hipCm, setHipCm] = useState("95");
+  const [gender, setGender] = useState<Gender>(DEFAULTS.gender);
+  const [heightCm, setHeightCm] = useState(DEFAULTS.heightCm);
+  const [neckCm, setNeckCm] = useState(DEFAULTS.neckCm);
+  const [waistCm, setWaistCm] = useState(DEFAULTS.waistCm);
+  const [hipCm, setHipCm] = useState(DEFAULTS.hipCm);
+
+  function handleScenarioPreset(scenario: BodyFatScenario) {
+    setGender(scenario.gender);
+    setHeightCm(scenario.heightCm);
+    setNeckCm(scenario.neckCm);
+    setWaistCm(scenario.waistCm);
+    setHipCm(scenario.hipCm);
+  }
+
+  function handleClear() {
+    setGender(DEFAULTS.gender);
+    setHeightCm(DEFAULTS.heightCm);
+    setNeckCm(DEFAULTS.neckCm);
+    setWaistCm(DEFAULTS.waistCm);
+    setHipCm(DEFAULTS.hipCm);
+  }
 
   const digitStyle = resolveDigitStyle(heightCm, neckCm, waistCm, hipCm);
 
@@ -67,6 +85,8 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
               onWaistCmChange={setWaistCm}
               hipCm={hipCm}
               onHipCmChange={setHipCm}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<BodyFatResult result={result} gender={gender} digitStyle={digitStyle} />}

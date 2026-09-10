@@ -23,7 +23,7 @@ import BMIRecommendations from "./BMIRecommendations";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import type { BMIExtendedResult, UnitSystem } from "./types";
+import type { BMIExtendedResult, BMIScenario, UnitSystem } from "./types";
 
 const tool = new BMICalculatorTool();
 const DEFAULT_HEIGHT_CM = 170;
@@ -152,6 +152,20 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
     );
   }
 
+  function handleScenarioPreset(scenario: BMIScenario) {
+    setUnitSystem("metric");
+    setHeightCm(String(scenario.heightCm));
+    setWeightKg(String(scenario.weightKg));
+    setHeightFt(String(cmToFeetInches(scenario.heightCm).feet));
+    setHeightIn(String(cmToFeetInches(scenario.heightCm).inches));
+    setWeightLb(String(round1(kgToLb(scenario.weightKg))));
+    setAge(String(scenario.age));
+    setGender(scenario.gender);
+    setError("");
+    setDigitStyle("western");
+    setResult(buildExtendedResult(scenario.heightCm, scenario.weightKg, scenario.age, scenario.gender));
+  }
+
   function handleReset() {
     setUnitSystem("metric");
     setHeightCm(String(DEFAULT_HEIGHT_CM));
@@ -200,6 +214,7 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
               error={error}
               onSubmit={handleSubmit}
               onReset={handleReset}
+              onScenarioPreset={handleScenarioPreset}
             />
             <BMIQuickInsight result={result} />
           </div>

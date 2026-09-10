@@ -2,6 +2,15 @@ export type { MacroGoal, MacroBreakdown, MacroCalculatorError, MacroCalculatorOu
 
 export const MACRO_GOALS = ["lose", "maintain", "gain", "buildMuscle"] as const;
 
+export type MacroScenario = { key: string; totalCalories: string; goal: "lose" | "maintain" | "gain" | "buildMuscle" };
+
+export const MACRO_SCENARIOS: MacroScenario[] = [
+  { key: "cuttingDiet", totalCalories: "1700", goal: "lose" },
+  { key: "maintenanceDiet", totalCalories: "2200", goal: "maintain" },
+  { key: "leanBulk", totalCalories: "2800", goal: "gain" },
+  { key: "strengthTraining", totalCalories: "3200", goal: "buildMuscle" },
+];
+
 export type StoredTdeeResult = { dailyCalorieTarget: number; tdee: number };
 
 let cachedRaw: string | null = null;

@@ -1,7 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { BMRResult as Result } from "./types";
+import { bandForBmr, type BMRResult as Result } from "./types";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import RatioGauge from "@/components/tool-ui/RatioGauge";
 import BMRComparisonChart from "./BMRComparisonChart";
 
 type Props = {
@@ -28,6 +29,13 @@ export default function BMRResult({ result, digitStyle }: Props) {
 
   const single = result.harrisBenedict ?? result.mifflinStJeor;
   const isCompare = result.harrisBenedict !== null && result.mifflinStJeor !== null;
+  const band = bandForBmr(single ?? 0);
+  const bandColor =
+    band === "higher"
+      ? "fill-indigo-600 dark:fill-indigo-400"
+      : band === "typical"
+        ? "fill-blue-600 dark:fill-blue-400"
+        : "fill-sky-600 dark:fill-sky-400";
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
@@ -43,6 +51,22 @@ export default function BMRResult({ result, digitStyle }: Props) {
         />
       </div>
       <div className="p-4 lg:p-6">
+        <div className="mb-5 flex justify-center border-b border-zinc-100 pb-5 dark:border-zinc-800">
+          <RatioGauge
+            value={single ?? 0}
+            domainMin={800}
+            domainMax={3000}
+            zones={[
+              { key: "lower", from: 800, to: 1400, colorClass: "stroke-sky-500 dark:stroke-sky-400" },
+              { key: "typical", from: 1400, to: 2000, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
+              { key: "higher", from: 2000, to: 3000, colorClass: "stroke-indigo-500 dark:stroke-indigo-400" },
+            ]}
+            valueLabel={fmt(single ?? 0)}
+            caption={t(`range.${band}`)}
+            captionColorClass={bandColor}
+            ticks={[800, 1400, 2000, 3000]}
+          />
+        </div>
         {isCompare ? (
           <>
             <div className="grid grid-cols-2 gap-3 text-center">

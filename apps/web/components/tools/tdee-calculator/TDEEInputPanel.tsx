@@ -1,8 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import type { ActivityLevel, Gender, UnitSystem } from "./types";
+import { TDEE_SCENARIOS, type ActivityLevel, type Gender, type TDEEScenario, type UnitSystem } from "./types";
 
 type TDEEInputPanelProps = {
   unitSystem: UnitSystem;
@@ -27,6 +28,8 @@ type TDEEInputPanelProps = {
   onUseBodyFatChange: (value: boolean) => void;
   bodyFatPercent: string;
   onBodyFatPercentChange: (value: string) => void;
+  onScenarioPreset: (scenario: TDEEScenario) => void;
+  onClear: () => void;
 };
 
 const ACTIVITY_LEVELS: ActivityLevel[] = ["sedentary", "light", "moderate", "active", "veryActive"];
@@ -54,11 +57,29 @@ export default function TDEEInputPanel({
   onUseBodyFatChange,
   bodyFatPercent,
   onBodyFatPercentChange,
+  onScenarioPreset,
+  onClear,
 }: TDEEInputPanelProps) {
   const t = useTranslations("tools.tdee-calculator");
+  const tScenarios = useTranslations("tools.tdee-calculator.scenarios");
 
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {TDEE_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         {(["metric", "us"] as const).map((system) => (
           <button
@@ -193,6 +214,15 @@ export default function TDEEInputPanel({
             </div>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("form.clear")}
+        </button>
       </div>
     </SectionCard>
   );

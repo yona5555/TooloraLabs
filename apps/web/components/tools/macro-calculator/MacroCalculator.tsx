@@ -13,14 +13,26 @@ import MacroInputPanel from "./MacroInputPanel";
 import MacroResult from "./MacroResult";
 import MacroQuickReference from "./MacroQuickReference";
 import MacroDisclaimer from "./MacroDisclaimer";
-import type { MacroGoal } from "./types";
+import { type MacroGoal, type MacroScenario } from "./types";
 
 const tool = new MacroTool();
 
+const DEFAULTS = { totalCalories: "2000", goal: "maintain" as MacroGoal };
+
 export default function MacroCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.macro-calculator.nav");
-  const [totalCalories, setTotalCalories] = useState("2000");
-  const [goal, setGoal] = useState<MacroGoal>("maintain");
+  const [totalCalories, setTotalCalories] = useState(DEFAULTS.totalCalories);
+  const [goal, setGoal] = useState<MacroGoal>(DEFAULTS.goal);
+
+  function handleScenarioPreset(scenario: MacroScenario) {
+    setTotalCalories(scenario.totalCalories);
+    setGoal(scenario.goal);
+  }
+
+  function handleClear() {
+    setTotalCalories(DEFAULTS.totalCalories);
+    setGoal(DEFAULTS.goal);
+  }
 
   const digitStyle = resolveDigitStyle(totalCalories);
 
@@ -40,7 +52,16 @@ export default function MacroCalculator({ education }: { education: ReactNode })
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<MacroInputPanel totalCalories={totalCalories} onTotalCaloriesChange={setTotalCalories} goal={goal} onGoalChange={setGoal} />}
+          input={
+            <MacroInputPanel
+              totalCalories={totalCalories}
+              onTotalCaloriesChange={setTotalCalories}
+              goal={goal}
+              onGoalChange={setGoal}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
           result={<MacroResult result={result} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="macro-calculator" category="health-fitness" />}
           secondary={

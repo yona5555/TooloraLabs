@@ -12,6 +12,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import IdealWeightInputPanel from "./IdealWeightInputPanel";
 import IdealWeightResult from "./IdealWeightResult";
+import type { IdealWeightScenario } from "./types";
 
 const DEFAULTS = { gender: "male" as Gender, heightCm: "175" };
 
@@ -20,6 +21,16 @@ export default function IdealWeightCalculator({ education }: { education: ReactN
 
   const [gender, setGender] = useState<Gender>(DEFAULTS.gender);
   const [heightCm, setHeightCm] = useState(DEFAULTS.heightCm);
+
+  function handleScenarioPreset(scenario: IdealWeightScenario) {
+    setGender(scenario.gender);
+    setHeightCm(scenario.heightCm);
+  }
+
+  function handleClear() {
+    setGender(DEFAULTS.gender);
+    setHeightCm(DEFAULTS.heightCm);
+  }
 
   const digitStyle: DigitStyle = resolveDigitStyle(heightCm);
 
@@ -43,6 +54,8 @@ export default function IdealWeightCalculator({ education }: { education: ReactN
               onGenderChange={setGender}
               heightCm={heightCm}
               onHeightCmChange={setHeightCm}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={

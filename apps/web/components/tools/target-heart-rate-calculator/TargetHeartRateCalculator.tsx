@@ -12,8 +12,11 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TargetHeartRateInputPanel from "./TargetHeartRateInputPanel";
 import TargetHeartRateResult from "./TargetHeartRateResult";
 import TargetHeartRateQuickReference from "./TargetHeartRateQuickReference";
+import type { HeartRateScenario } from "./types";
 
 const tool = new TargetHeartRateTool();
+
+const DEFAULTS = { age: "30", useRestingHeartRate: false, restingHeartRate: "60" };
 
 function toNum(s: string): number | undefined {
   if (!s.trim()) return undefined;
@@ -23,9 +26,21 @@ function toNum(s: string): number | undefined {
 
 export default function TargetHeartRateCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.target-heart-rate-calculator.nav");
-  const [age, setAge] = useState("30");
-  const [useRestingHeartRate, setUseRestingHeartRate] = useState(false);
-  const [restingHeartRate, setRestingHeartRate] = useState("60");
+  const [age, setAge] = useState(DEFAULTS.age);
+  const [useRestingHeartRate, setUseRestingHeartRate] = useState(DEFAULTS.useRestingHeartRate);
+  const [restingHeartRate, setRestingHeartRate] = useState(DEFAULTS.restingHeartRate);
+
+  function handleScenarioPreset(scenario: HeartRateScenario) {
+    setAge(scenario.age);
+    setUseRestingHeartRate(scenario.useRestingHeartRate);
+    setRestingHeartRate(scenario.restingHeartRate);
+  }
+
+  function handleClear() {
+    setAge(DEFAULTS.age);
+    setUseRestingHeartRate(DEFAULTS.useRestingHeartRate);
+    setRestingHeartRate(DEFAULTS.restingHeartRate);
+  }
 
   const digitStyle = resolveDigitStyle(age, restingHeartRate);
 
@@ -54,6 +69,8 @@ export default function TargetHeartRateCalculator({ education }: { education: Re
               onUseRestingHeartRateChange={setUseRestingHeartRate}
               restingHeartRate={restingHeartRate}
               onRestingHeartRateChange={setRestingHeartRate}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<TargetHeartRateResult result={result} digitStyle={digitStyle} />}

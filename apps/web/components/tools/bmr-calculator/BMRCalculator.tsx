@@ -13,9 +13,11 @@ import BMRInputPanel from "./BMRInputPanel";
 import BMRResult from "./BMRResult";
 import BMRQuickReference from "./BMRQuickReference";
 import BMRDisclaimer from "./BMRDisclaimer";
-import type { BMRFormula, Gender } from "./types";
+import { type BMRFormula, type BMRScenario, type Gender } from "./types";
 
 const tool = new BMRTool();
+
+const DEFAULTS = { gender: "male" as Gender, weightKg: "75", heightCm: "175", age: "30" };
 
 function toNum(s: string): number {
   const n = parseLocalizedNumber(s);
@@ -24,11 +26,25 @@ function toNum(s: string): number {
 
 export default function BMRCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.bmr-calculator.nav");
-  const [gender, setGender] = useState<Gender>("male");
-  const [weightKg, setWeightKg] = useState("75");
-  const [heightCm, setHeightCm] = useState("175");
-  const [age, setAge] = useState("30");
+  const [gender, setGender] = useState<Gender>(DEFAULTS.gender);
+  const [weightKg, setWeightKg] = useState(DEFAULTS.weightKg);
+  const [heightCm, setHeightCm] = useState(DEFAULTS.heightCm);
+  const [age, setAge] = useState(DEFAULTS.age);
   const [formula, setFormula] = useState<BMRFormula>("compare");
+
+  function handleScenarioPreset(scenario: BMRScenario) {
+    setGender(scenario.gender);
+    setWeightKg(scenario.weightKg);
+    setHeightCm(scenario.heightCm);
+    setAge(scenario.age);
+  }
+
+  function handleClear() {
+    setGender(DEFAULTS.gender);
+    setWeightKg(DEFAULTS.weightKg);
+    setHeightCm(DEFAULTS.heightCm);
+    setAge(DEFAULTS.age);
+  }
 
   const digitStyle = resolveDigitStyle(weightKg, heightCm, age);
 
@@ -62,6 +78,8 @@ export default function BMRCalculator({ education }: { education: ReactNode }) {
               onAgeChange={setAge}
               formula={formula}
               onFormulaChange={setFormula}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<BMRResult result={result} digitStyle={digitStyle} />}
