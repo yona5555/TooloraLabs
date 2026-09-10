@@ -1,8 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorldTimeCityPicker from "./WorldTimeCityPicker";
+import { WORLD_TIME_SCENARIOS, type WorldTimeScenario } from "./types";
 
 type WorldTimeInputPanelProps = {
   fromCityId: string;
@@ -14,6 +15,8 @@ type WorldTimeInputPanelProps = {
   onUseNowChange: (value: boolean) => void;
   customDateTime: string;
   onCustomDateTimeChange: (value: string) => void;
+  onScenarioPreset: (scenario: WorldTimeScenario) => void;
+  onClear: () => void;
 };
 
 export default function WorldTimeInputPanel({
@@ -26,11 +29,29 @@ export default function WorldTimeInputPanel({
   onUseNowChange,
   customDateTime,
   onCustomDateTimeChange,
+  onScenarioPreset,
+  onClear,
 }: WorldTimeInputPanelProps) {
   const t = useTranslations("tools.world-time-converter.aboveFold");
+  const tScenarios = useTranslations("tools.world-time-converter.scenarios");
 
   return (
     <SectionCard title={t("converterTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {WORLD_TIME_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="space-y-5">
         <WorldTimeCityPicker label={t("fromLabel")} value={fromCityId} onChange={onFromCityChange} />
 
@@ -70,6 +91,15 @@ export default function WorldTimeInputPanel({
             </div>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("clearLabel")}
+        </button>
       </div>
     </SectionCard>
   );

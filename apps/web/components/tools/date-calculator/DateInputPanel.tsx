@@ -1,9 +1,10 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import DateModeTabs from "./DateModeTabs";
-import { DATE_UNITS, type DateCalculatorMode, type DateOperation, type DateUnit } from "./types";
+import { DATE_SCENARIOS, DATE_UNITS, type DateCalculatorMode, type DateOperation, type DateScenario, type DateUnit } from "./types";
 
 type Props = {
   mode: DateCalculatorMode;
@@ -18,6 +19,8 @@ type Props = {
   onUnitChange: (unit: DateUnit) => void;
   operation: DateOperation;
   onOperationChange: (operation: DateOperation) => void;
+  onScenarioPreset: (scenario: DateScenario) => void;
+  onClear: () => void;
 };
 
 export default function DateInputPanel({
@@ -33,11 +36,29 @@ export default function DateInputPanel({
   onUnitChange,
   operation,
   onOperationChange,
+  onScenarioPreset,
+  onClear,
 }: Props) {
   const t = useTranslations("tools.date-calculator.form");
+  const tScenarios = useTranslations("tools.date-calculator.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {DATE_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="mb-4">
         <DateModeTabs mode={mode} onModeChange={onModeChange} />
       </div>
@@ -85,6 +106,15 @@ export default function DateInputPanel({
           </>
         )}
       </div>
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

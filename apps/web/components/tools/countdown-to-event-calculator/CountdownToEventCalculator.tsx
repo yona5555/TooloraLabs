@@ -12,6 +12,7 @@ import CountdownInputPanel from "./CountdownInputPanel";
 import CountdownResult from "./CountdownResult";
 import CountdownQuickReference from "./CountdownQuickReference";
 import { subscribeToClock, getNowSnapshot, getServerNowSnapshot } from "./clock";
+import type { CountdownScenario } from "./types";
 
 const tool = new CountdownTool();
 
@@ -21,11 +22,30 @@ function defaultDate(): string {
   return d.toISOString().slice(0, 10);
 }
 
+function dateInDays(daysFromNow: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + daysFromNow);
+  return d.toISOString().slice(0, 10);
+}
+
 export default function CountdownToEventCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.countdown-to-event-calculator.nav");
+  const tScenarios = useTranslations("tools.countdown-to-event-calculator.scenarios");
   const [eventName, setEventName] = useState("");
   const [date, setDate] = useState(defaultDate);
   const [time, setTime] = useState("00:00");
+
+  function handleScenarioPreset(scenario: CountdownScenario) {
+    setEventName(tScenarios(scenario.eventNameKey));
+    setDate(dateInDays(scenario.daysFromNow));
+    setTime(scenario.time);
+  }
+
+  function handleClear() {
+    setEventName("");
+    setDate(defaultDate());
+    setTime("00:00");
+  }
 
   const now = useSyncExternalStore(subscribeToClock, getNowSnapshot, getServerNowSnapshot);
   const digitStyle = resolveDigitStyle(date, time);
@@ -59,6 +79,8 @@ export default function CountdownToEventCalculator({ education }: { education: R
               onDateChange={setDate}
               time={time}
               onTimeChange={setTime}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={

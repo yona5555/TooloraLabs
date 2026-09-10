@@ -11,7 +11,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DateInputPanel from "./DateInputPanel";
 import DateResult from "./DateResult";
 import DateQuickReference from "./DateQuickReference";
-import type { DateCalculatorMode, DateOperation, DateUnit } from "./types";
+import type { DateCalculatorMode, DateOperation, DateScenario, DateUnit } from "./types";
 
 const tool = new DateTool();
 
@@ -20,14 +20,40 @@ function todayISO(): string {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
+function isoDaysAgo(daysAgo: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+const DEFAULTS = { mode: "difference" as DateCalculatorMode, amount: "30", unit: "days" as DateUnit, operation: "add" as DateOperation };
+
 export default function DateCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.date-calculator.nav");
-  const [mode, setMode] = useState<DateCalculatorMode>("difference");
+  const [mode, setMode] = useState<DateCalculatorMode>(DEFAULTS.mode);
   const [startDate, setStartDate] = useState(todayISO());
   const [endDate, setEndDate] = useState(todayISO());
-  const [amount, setAmount] = useState("30");
-  const [unit, setUnit] = useState<DateUnit>("days");
-  const [operation, setOperation] = useState<DateOperation>("add");
+  const [amount, setAmount] = useState(DEFAULTS.amount);
+  const [unit, setUnit] = useState<DateUnit>(DEFAULTS.unit);
+  const [operation, setOperation] = useState<DateOperation>(DEFAULTS.operation);
+
+  function handleScenarioPreset(scenario: DateScenario) {
+    setMode(scenario.mode);
+    setStartDate(isoDaysAgo(scenario.startDaysAgo));
+    setEndDate(isoDaysAgo(scenario.endDaysAgo));
+    setAmount(scenario.amount);
+    setUnit(scenario.unit);
+    setOperation(scenario.operation);
+  }
+
+  function handleClear() {
+    setMode(DEFAULTS.mode);
+    setStartDate(todayISO());
+    setEndDate(todayISO());
+    setAmount(DEFAULTS.amount);
+    setUnit(DEFAULTS.unit);
+    setOperation(DEFAULTS.operation);
+  }
 
   const digitStyle = resolveDigitStyle(amount);
 
@@ -71,6 +97,8 @@ export default function DateCalculator({ education }: { education: ReactNode }) 
               onUnitChange={setUnit}
               operation={operation}
               onOperationChange={setOperation}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<DateResult mode={mode} result={result} digitStyle={digitStyle} />}

@@ -14,8 +14,10 @@ import WorldTimeDisclaimer from "./WorldTimeDisclaimer";
 import WorldClockList from "./WorldClockList";
 import MeetingPlanner from "./MeetingPlanner";
 import { findCityById } from "@/lib/worldtime/cities";
+import type { WorldTimeScenario } from "./types";
 
 const digitStyle: DigitStyle = "western";
+const DEFAULTS = { fromCityId: "America/New_York", toCityId: "Europe/London" };
 
 /** The wall-clock reading in `ianaZone` at `instant`, as a `datetime-local`-compatible string. */
 function zonedWallTimeAsInputValue(instant: Date, ianaZone: string): string {
@@ -38,11 +40,11 @@ function zonedWallTimeAsInputValue(instant: Date, ianaZone: string): string {
 export default function WorldTimeCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.world-time-converter.nav");
 
-  const [fromCityId, setFromCityId] = useState("America/New_York");
-  const [toCityId, setToCityId] = useState("Europe/London");
+  const [fromCityId, setFromCityId] = useState(DEFAULTS.fromCityId);
+  const [toCityId, setToCityId] = useState(DEFAULTS.toCityId);
   const [useNow, setUseNow] = useState(true);
   const [nowSnapshot, setNowSnapshot] = useState(() => new Date());
-  const [customDateTime, setCustomDateTime] = useState(() => zonedWallTimeAsInputValue(nowSnapshot, "America/New_York"));
+  const [customDateTime, setCustomDateTime] = useState(() => zonedWallTimeAsInputValue(nowSnapshot, DEFAULTS.fromCityId));
 
   const fromCity = findCityById(fromCityId) ?? findCityById("America/New_York")!;
   const toCity = findCityById(toCityId) ?? findCityById("Europe/London")!;
@@ -50,6 +52,20 @@ export default function WorldTimeCalculator({ education }: { education: ReactNod
   function handleSwap() {
     setFromCityId(toCityId);
     setToCityId(fromCityId);
+  }
+
+  function handleScenarioPreset(scenario: WorldTimeScenario) {
+    setFromCityId(scenario.fromCityId);
+    setToCityId(scenario.toCityId);
+    setUseNow(true);
+    setNowSnapshot(new Date());
+  }
+
+  function handleClear() {
+    setFromCityId(DEFAULTS.fromCityId);
+    setToCityId(DEFAULTS.toCityId);
+    setUseNow(true);
+    setNowSnapshot(new Date());
   }
 
   function handleUseNowChange(value: boolean) {
@@ -99,6 +115,8 @@ export default function WorldTimeCalculator({ education }: { education: ReactNod
               onUseNowChange={handleUseNowChange}
               customDateTime={customDateTime}
               onCustomDateTimeChange={setCustomDateTime}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<WorldTimeResult fromCity={fromCity} toCity={toCity} result={result} digitStyle={digitStyle} />}
