@@ -24,7 +24,7 @@ const GAUGE_MOVERS: { key: string; speed: number }[] = [
 
 function tickLabel(tick: number): string {
   const value = 10 ** tick;
-  return value >= 1 ? String(value) : value.toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
+  return value >= 1 ? String(Math.round(value)) : value.toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
 }
 
 export default function KinematicsSpeedGauge() {

@@ -23,8 +23,8 @@ const GAUGE_SOURCES: { key: string; force: number }[] = [
 
 function tickLabel(tick: number): string {
   const value = 10 ** tick;
-  if (value >= 1000) return `${value / 1000}k`;
-  return value >= 1 ? String(value) : value.toFixed(5).replace(/0+$/, "").replace(/\.$/, "");
+  if (value >= 1000) return `${Math.round(value / 1000)}k`;
+  return value >= 1 ? String(Math.round(value)) : value.toFixed(5).replace(/0+$/, "").replace(/\.$/, "");
 }
 
 export default function ForceMagnitudeGauge() {

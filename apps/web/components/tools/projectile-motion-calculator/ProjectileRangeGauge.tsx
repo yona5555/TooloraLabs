@@ -24,8 +24,8 @@ const GAUGE_PROJECTILES: { key: string; range: number }[] = [
 
 function tickLabel(tick: number): string {
   const value = 10 ** tick;
-  if (value >= 1000) return `${value / 1000}k`;
-  return String(value);
+  if (value >= 1000) return `${Math.round(value / 1000)}k`;
+  return String(Math.round(value));
 }
 
 export default function ProjectileRangeGauge() {
