@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { SignificantFiguresOperation } from "./types";
@@ -16,6 +17,7 @@ type SignificantFiguresInputPanelProps = {
   onValueBChange: (value: string) => void;
   roundToDigits: string;
   onRoundToDigitsChange: (value: string) => void;
+  onClear: () => void;
 };
 
 export default function SignificantFiguresInputPanel({
@@ -27,6 +29,7 @@ export default function SignificantFiguresInputPanel({
   onValueBChange,
   roundToDigits,
   onRoundToDigitsChange,
+  onClear,
 }: SignificantFiguresInputPanelProps) {
   const t = useTranslations("tools.significant-figures-calculator.form");
 
@@ -91,6 +94,15 @@ export default function SignificantFiguresInputPanel({
           </select>
         </label>
       )}
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

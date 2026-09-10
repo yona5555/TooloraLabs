@@ -39,6 +39,12 @@ export default function SignificantFiguresCalculator({ education }: { education:
     setRoundToDigits(DEFAULTS[next].roundToDigits);
   }
 
+  function handleClear() {
+    setValueA(DEFAULTS[operation].valueA);
+    setValueB(DEFAULTS[operation].valueB);
+    setRoundToDigits(DEFAULTS[operation].roundToDigits);
+  }
+
   const { result, computed } = useMemo(() => {
     const digits = Number(roundToDigits) || 1;
     const output = tool.execute(
@@ -71,6 +77,7 @@ export default function SignificantFiguresCalculator({ education }: { education:
               onValueBChange={setValueB}
               roundToDigits={roundToDigits}
               onRoundToDigitsChange={setRoundToDigits}
+              onClear={handleClear}
             />
           }
           result={<SignificantFiguresResult result={result} computed={computed} />}

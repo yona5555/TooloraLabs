@@ -23,6 +23,12 @@ export default function ReadingTimeCalculator({ education }: { education: ReactN
   const [preset, setPreset] = useState<ReadingSpeedPreset>("average");
   const [customWpm, setCustomWpm] = useState("230");
 
+  function handleClear() {
+    setText("");
+    setPreset("average");
+    setCustomWpm("230");
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(customWpm);
 
   const wordsPerMinute = preset === "custom" ? parseLocalizedNumber(customWpm) || 0 : READING_SPEED_PRESETS[preset];
@@ -50,6 +56,7 @@ export default function ReadingTimeCalculator({ education }: { education: ReactN
               onPresetChange={setPreset}
               customWpm={customWpm}
               onCustomWpmChange={setCustomWpm}
+              onClear={handleClear}
             />
           }
           result={<RTResult result={result} digitStyle={digitStyle} />}

@@ -12,14 +12,23 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import StatisticsInputPanel from "./StatisticsInputPanel";
 import StatisticsResult from "./StatisticsResult";
 import StatisticsQuickReference from "./StatisticsQuickReference";
-import { parseDataSet } from "./types";
+import { parseDataSet, type StatisticsScenario } from "./types";
 
 const tool = new StatisticsCalculatorTool();
+const DEFAULT_DATA = "2, 4, 4, 4, 5, 5, 7, 9";
 
 export default function StatisticsCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.statistics-calculator.nav");
 
-  const [rawData, setRawData] = useState("2, 4, 4, 4, 5, 5, 7, 9");
+  const [rawData, setRawData] = useState(DEFAULT_DATA);
+
+  function handleScenarioPreset(scenario: StatisticsScenario) {
+    setRawData(scenario.rawData);
+  }
+
+  function handleClear() {
+    setRawData(DEFAULT_DATA);
+  }
 
   const values = useMemo(() => parseDataSet(rawData), [rawData]);
   const digitStyle: DigitStyle = resolveDigitStyle(rawData);
@@ -39,7 +48,14 @@ export default function StatisticsCalculator({ education }: { education: ReactNo
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<StatisticsInputPanel rawData={rawData} onRawDataChange={setRawData} />}
+          input={
+            <StatisticsInputPanel
+              rawData={rawData}
+              onRawDataChange={setRawData}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
           result={<StatisticsResult result={result} values={values} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="statistics-calculator" category="math" />}
           secondary={

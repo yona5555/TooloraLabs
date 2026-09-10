@@ -1,13 +1,15 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
 type ReadabilityInputPanelProps = {
   text: string;
   onTextChange: (value: string) => void;
+  onClear: () => void;
 };
 
-export default function ReadabilityInputPanel({ text, onTextChange }: ReadabilityInputPanelProps) {
+export default function ReadabilityInputPanel({ text, onTextChange, onClear }: ReadabilityInputPanelProps) {
   const t = useTranslations("tools.readability-score-calculator.form");
 
   return (
@@ -24,6 +26,15 @@ export default function ReadabilityInputPanel({ text, onTextChange }: Readabilit
         />
       </label>
       <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{t("inputHint")}</p>
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

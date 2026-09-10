@@ -1,8 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import { READING_SPEED_PRESETS } from "./types";
+import { READING_SPEED_PRESETS, SAMPLE_TEXT } from "./types";
 import type { ReadingSpeedPreset } from "./types";
 
 const PRESETS: ReadingSpeedPreset[] = ["slow", "average", "fast", "custom"];
@@ -14,13 +15,23 @@ type Props = {
   onPresetChange: (value: ReadingSpeedPreset) => void;
   customWpm: string;
   onCustomWpmChange: (value: string) => void;
+  onClear: () => void;
 };
 
-export default function RTInputPanel({ text, onTextChange, preset, onPresetChange, customWpm, onCustomWpmChange }: Props) {
+export default function RTInputPanel({ text, onTextChange, preset, onPresetChange, customWpm, onCustomWpmChange, onClear }: Props) {
   const t = useTranslations("tools.reading-time-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-3">
+        <button
+          type="button"
+          onClick={() => onTextChange(SAMPLE_TEXT)}
+          className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+        >
+          {t("loadSampleText")}
+        </button>
+      </div>
       <label className="block space-y-2">
         <span className="sr-only">{t("textLabel")}</span>
         <textarea
@@ -65,6 +76,15 @@ export default function RTInputPanel({ text, onTextChange, preset, onPresetChang
           />
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

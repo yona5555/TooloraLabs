@@ -11,7 +11,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import StandardDeviationInputPanel from "./StandardDeviationInputPanel";
 import StandardDeviationResult from "./StandardDeviationResult";
 import StandardDeviationQuickReference from "./StandardDeviationQuickReference";
-import { parseDataSet } from "./types";
+import { parseDataSet, type StandardDeviationScenario } from "./types";
 
 const tool = new StandardDeviationTool();
 const DEFAULT_DATA = "2, 4, 4, 4, 5, 5, 7, 9";
@@ -19,6 +19,14 @@ const DEFAULT_DATA = "2, 4, 4, 4, 5, 5, 7, 9";
 export default function StandardDeviationCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.standard-deviation-calculator.nav");
   const [rawData, setRawData] = useState(DEFAULT_DATA);
+
+  function handleScenarioPreset(scenario: StandardDeviationScenario) {
+    setRawData(scenario.rawData);
+  }
+
+  function handleClear() {
+    setRawData(DEFAULT_DATA);
+  }
 
   const digitStyle = resolveDigitStyle(rawData);
 
@@ -38,7 +46,14 @@ export default function StandardDeviationCalculator({ education }: { education: 
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<StandardDeviationInputPanel rawData={rawData} onRawDataChange={setRawData} />}
+          input={
+            <StandardDeviationInputPanel
+              rawData={rawData}
+              onRawDataChange={setRawData}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
           result={<StandardDeviationResult result={result} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="standard-deviation-calculator" category="math" />}
           secondary={

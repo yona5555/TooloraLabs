@@ -22,6 +22,10 @@ export default function ReadabilityCalculator({ education }: { education: ReactN
 
   const [text, setText] = useState(SAMPLE_TEXT);
 
+  function handleClear() {
+    setText(SAMPLE_TEXT);
+  }
+
   const result = useMemo(() => tool.execute({ text }, { locale: "en-US" }).data, [text]);
   const digitStyle = resolveDigitStyle(text);
 
@@ -35,7 +39,7 @@ export default function ReadabilityCalculator({ education }: { education: ReactN
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<ReadabilityInputPanel text={text} onTextChange={setText} />}
+          input={<ReadabilityInputPanel text={text} onTextChange={setText} onClear={handleClear} />}
           result={<ReadabilityResult result={result} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="readability-score-calculator" category="text-tools" />}
           secondary={

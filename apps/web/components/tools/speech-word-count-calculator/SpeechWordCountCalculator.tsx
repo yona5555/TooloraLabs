@@ -23,6 +23,12 @@ export default function SpeechWordCountCalculator({ education }: { education: Re
   const [preset, setPreset] = useState<SpeechPacePreset>("normal");
   const [customWpm, setCustomWpm] = useState("140");
 
+  function handleClear() {
+    setText("");
+    setPreset("normal");
+    setCustomWpm("140");
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(customWpm);
 
   const wordsPerMinute = preset === "custom" ? parseLocalizedNumber(customWpm) || 0 : SPEECH_PACE_PRESETS[preset];
@@ -50,6 +56,7 @@ export default function SpeechWordCountCalculator({ education }: { education: Re
               onPresetChange={setPreset}
               customWpm={customWpm}
               onCustomWpmChange={setCustomWpm}
+              onClear={handleClear}
             />
           }
           result={<SWResult result={result} digitStyle={digitStyle} />}
