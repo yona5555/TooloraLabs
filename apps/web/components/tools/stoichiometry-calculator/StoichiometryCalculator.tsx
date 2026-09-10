@@ -22,6 +22,15 @@ const RELATED_TOOLS = ["chemical-equation-balancer", "molar-mass-calculator", "m
 
 const DEFAULTS = { knownFormula: "H2", knownCoefficient: "2", knownAmount: "4", targetFormula: "H2O", targetCoefficient: "2" };
 
+// Real reactions spanning classroom to industrial scale, each with a known
+// substance's mass and both coefficients from its balanced equation.
+const SCENARIOS: Record<string, { knownFormula: string; knownCoefficient: string; knownAmount: string; targetFormula: string; targetCoefficient: string }> = {
+  classroomMagnesium: { knownFormula: "Mg", knownCoefficient: "2", knownAmount: "5", targetFormula: "MgO", targetCoefficient: "2" },
+  labWaterSynthesis: { knownFormula: "H2", knownCoefficient: "2", knownAmount: "10", targetFormula: "H2O", targetCoefficient: "2" },
+  industrialAmmonia: { knownFormula: "N2", knownCoefficient: "1", knownAmount: "5000", targetFormula: "NH3", targetCoefficient: "2" },
+  bridgeIronRusting: { knownFormula: "Fe", knownCoefficient: "4", knownAmount: "5000000", targetFormula: "Fe2O3", targetCoefficient: "2" },
+};
+
 const EMPTY_RESULT: StoichiometryCalculatorOutput = {
   error: null,
   errorDetail: null,
@@ -117,6 +126,21 @@ export default function StoichiometryCalculator({ education }: { education: Reac
     setDigitStyle(resolveDigitStyle(knownCoefficient, knownAmount, targetCoefficient));
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS[key];
+    if (!preset) return;
+    setKnownFormula(preset.knownFormula);
+    setKnownCoefficient(preset.knownCoefficient);
+    setKnownAmount(preset.knownAmount);
+    setKnownUnit("grams");
+    setTargetFormula(preset.targetFormula);
+    setTargetCoefficient(preset.targetCoefficient);
+    setTargetUnit("grams");
+    setResult(computeResult(preset.knownFormula, preset.knownCoefficient, preset.knownAmount, "grams", preset.targetFormula, preset.targetCoefficient, "grams"));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(preset.knownCoefficient, preset.knownAmount, preset.targetCoefficient));
+  }
+
   function handleClear() {
     setKnownFormula(DEFAULTS.knownFormula);
     setKnownCoefficient(DEFAULTS.knownCoefficient);
@@ -158,6 +182,8 @@ export default function StoichiometryCalculator({ education }: { education: Reac
                 onTargetCoefficientChange={setTargetCoefficient}
                 targetUnit={targetUnit}
                 onTargetUnitChange={setTargetUnit}
+                scenarioKeys={Object.keys(SCENARIOS)}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />

@@ -25,6 +25,8 @@ type StoichiometryInputPanelProps = {
   onTargetCoefficientChange: (value: string) => void;
   targetUnit: AmountUnit;
   onTargetUnitChange: (value: AmountUnit) => void;
+  scenarioKeys: string[];
+  onScenarioPreset: (key: string) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
@@ -44,13 +46,32 @@ export default function StoichiometryInputPanel({
   onTargetCoefficientChange,
   targetUnit,
   onTargetUnitChange,
+  scenarioKeys,
+  onScenarioPreset,
   onCalculate,
   onClear,
 }: StoichiometryInputPanelProps) {
   const t = useTranslations("tools.stoichiometry-calculator.form");
+  const tScenarios = useTranslations("tools.stoichiometry-calculator.form.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {scenarioKeys.map((key) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => onScenarioPreset(key)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+            >
+              {tScenarios(key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <StoichiometryEquationDiagram
         knownCoefficient={knownCoefficient}
         knownFormula={knownFormula}

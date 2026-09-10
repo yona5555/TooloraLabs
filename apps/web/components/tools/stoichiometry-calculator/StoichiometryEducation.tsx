@@ -9,6 +9,7 @@ import StoichiometryConversionPathDiagram from "./StoichiometryConversionPathDia
 import StoichiometryMoleRatioDiagram from "./StoichiometryMoleRatioDiagram";
 import StoichiometryMolarMassBridgeDiagram from "./StoichiometryMolarMassBridgeDiagram";
 import StoichiometryUnitsCompareDiagram from "./StoichiometryUnitsCompareDiagram";
+import StoichiometryScaleGauge from "./StoichiometryScaleGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function StoichiometryEducation() {
 
   return (
     <EncyclopediaPaper>
+      <StoichiometryScaleGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <StoichiometryEquationDiagram knownCoefficient="2" knownFormula="H₂" targetCoefficient="2" targetFormula="H₂O" caption={t("intro.equation.caption")} />
