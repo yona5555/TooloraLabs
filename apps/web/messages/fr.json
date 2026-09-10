@@ -30804,6 +30804,568 @@
             "answer": "Non — il est calculé indépendamment pour chaque cours (la durée propre de ce cours multipliée par le nombre de jours où il a lieu) puis additionné, sans vérifier ni supprimer aucun chevauchement compté deux fois entre différents cours. Cela signifie que le total représente la somme du temps programmé propre à chaque cours, pas le nombre réel d'heures distinctes pendant lesquelles vous seriez occupé si le temps en conflit de deux cours n'est vécu qu'une seule fois."
           }
         ]
+      },
+      "word-counter": {
+        "version": "v1",
+        "description": "Référence technique du Compteur de Mots et Caractères : comment les mots, caractères, phrases et mots-clés principaux sont comptés à partir d'un texte, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Classer les mots-clés principaux par fréquence",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Statistiques calculées",
+          "modesValue": "10",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "mots = texte réduit divisé sur les espaces | motsUniques = taille de l'ensemble des jetons de mots en minuscules | motsClésPrincipaux = jetons de mots (2+ caractères, mots vides exclus) regroupés, comptés et triés par fréquence, les 5 premiers conservés",
+          "note": "Plusieurs comptages sont dérivés de tokenisations différentes du même texte : le nombre de mots principal est une simple division sur les espaces, tandis que les statistiques de mots uniques et de mots-clés utilisent un extracteur de jetons distinct qui met le texte en minuscules et fait correspondre des suites de lettres, chiffres, apostrophes et traits d'union — un compteur de mots et une liste de mots-clés ne comptent donc pas tout à fait la même chose en coulisses."
+        },
+        "flowchart": {
+          "intro": "Chaque statistique est dérivée du même texte d'entrée, mais plusieurs utilisent leur propre passage de tokenisation distinct adapté à ce qu'elles mesurent.",
+          "steps": [
+            "Réduire le texte d'entrée ; un résultat vide après réduction signale chaque compteur comme zéro plutôt que de tenter de tokeniser rien",
+            "Compter les caractères directement (y compris tous les espaces) et séparément avec chaque caractère d'espace supprimé, puis diviser le texte réduit sur les suites d'espaces pour obtenir le nombre de mots",
+            "Diviser sur la ponctuation qui termine les phrases pour compter les phrases, et sur les suites de lignes vides pour compter les paragraphes — deux heuristiques indépendantes, non dérivées du nombre de mots",
+            "Extraire séparément des jetons de mots en minuscules (lettres, chiffres, apostrophes et traits d'union) pour calculer le nombre de mots uniques, la longueur moyenne des mots, et le mot le plus long",
+            "À partir de cette même liste de jetons, écarter les jetons courts et les mots vides courants, compter combien de fois chaque mot restant apparaît, puis trier par fréquence et conserver les 5 premiers comme liste de mots-clés"
+          ],
+          "caption": "Un texte d'entrée alimente plusieurs passages de tokenisation indépendants, chacun adapté à la statistique spécifique qu'il produit."
+        },
+        "anatomy": {
+          "intro": "Une fois les mots vides et les jetons courts filtrés, les mots restants sont comptés et classés par fréquence — les 5 premiers deviennent la liste de mots-clés.",
+          "labelWord1": "croissance",
+          "labelWord2": "marché",
+          "labelWord3": "stratégie",
+          "labelWord4": "client",
+          "labelWord5": "marque",
+          "caption": "Pour un passage répétant certains mots thématiques, la liste des mots-clés principaux classe 'croissance' (5 occurrences) au-dessus de 'marché' (4), 'stratégie' (3), et deux mots à égalité à 2 — exactement le classement par fréquence que produit topKeywords, avec des mots vides courants comme 'the' et 'and' exclus en premier."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "texte",
+            "meaning": "Le texte à analyser.",
+            "unit": "Texte"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le nombre de mots et l'extraction de mots-clés tokenisent le texte de deux manières différentes",
+            "description": "Le nombre de mots principal est une simple division sur les suites d'espaces, comptant tout ce qui se trouve entre les espaces comme un 'mot', y compris la ponctuation nue ; les statistiques de mots-clés et de mots uniques extraient plutôt uniquement des suites de lettres, chiffres, apostrophes et traits d'union, de sorte que ces comptages peuvent légèrement diverger sur un texte à la ponctuation inhabituelle."
+          },
+          {
+            "title": "La division en phrases est une heuristique basée sur la ponctuation, pas une analyse grammaticale réelle",
+            "description": "Les phrases sont comptées en divisant sur des suites se terminant par un point, un point d'exclamation ou un point d'interrogation, ce qui signifie qu'une abréviation comme 'Dr.' ou un nombre décimal peut être compté à tort comme une limite de phrase — une simplification délibérée, pas un analyseur grammatical de phrases complet."
+          },
+          {
+            "title": "Les mots de moins de 2 caractères sont exclus de la liste de mots-clés même s'ils ne sont pas des mots vides",
+            "description": "L'étape de fréquence des mots-clés ignore tout jeton plus court que 2 caractères en plus d'ignorer les mots vides, donc les jetons d'une seule lettre n'apparaissent jamais dans la liste des mots-clés principaux peu importe combien de fois ils se répètent."
+          },
+          {
+            "title": "Le temps de lecture est estimé à partir du nombre de mots en utilisant un taux fixe unique, toujours arrondi vers le haut",
+            "description": "Le temps de lecture estimé divise le nombre de mots par un taux fixe de 200 mots par minute et arrondit toujours vers le haut à la minute entière suivante (via plafond, pas arrondi standard), donc même quelques mots au-delà d'une limite de minute exacte poussent l'estimation vers le haut plutôt que vers le bas."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la liste de mots-clés et le nombre total de mots peuvent-ils sembler incohérents sur un texte avec beaucoup de ponctuation ou de mots courts ?",
+            "answer": "Ils proviennent de deux passages de tokenisation distincts sur le même texte. Le nombre total de mots est une simple division sur les espaces, comptant tout fragment séparé par des espaces — même de la ponctuation nue — comme un mot, tandis que l'extracteur de mots-clés ne tire que des suites de lettres, chiffres, apostrophes et traits d'union, excluant délibérément cette ponctuation égarée et les jetons très courts du classement par fréquence."
+          },
+          {
+            "question": "Pourquoi des mots courants comme 'the' et 'and' sont-ils exclus de la liste des mots-clés principaux ?",
+            "answer": "Ils sont filtrés par une liste de mots vides avant le comptage de fréquence — les mots grammaticaux à haute fréquence comme les articles, conjonctions et pronoms domineraient sinon le classement des 5 premiers dans presque tout passage, évinçant les mots thématiques réels que la liste de mots-clés est censée révéler. Les mots vides anglais et arabes sont tous deux inclus dans ce filtre."
+          },
+          {
+            "question": "Pourquoi le nombre de phrases pourrait-il être erroné pour un texte contenant des abréviations ou des nombres décimaux ?",
+            "answer": "Le comptage de phrases est une heuristique basée sur la ponctuation — il recherche des suites de texte se terminant par un point, un point d'exclamation ou un point d'interrogation — plutôt qu'un analyseur grammatical complet qui comprend que 'Dr.' ou '3,14' ne sont pas des fins de phrase. Cela garde le compteur rapide et sans dépendances, au prix d'un surcomptage occasionnel des phrases dans un texte avec beaucoup d'abréviations ou de décimales."
+          },
+          {
+            "question": "Pourquoi le temps de lecture estimé arrondit-il toujours vers le haut, même d'une fraction de minute ?",
+            "answer": "L'estimation utilise une fonction de plafond plutôt qu'un arrondi standard, donc un passage qui prendrait, disons, 2 minutes et 5 secondes à la vitesse de lecture supposée est signalé comme 3 minutes plutôt que d'arrondir vers le bas à 2 — un choix délibéré pour ne jamais sous-estimer combien de temps prendra la lecture d'un passage."
+          }
+        ]
+      },
+      "readability-score-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Score de Lisibilité : comment le score de facilité de lecture de Flesch et le niveau scolaire de Flesch-Kincaid sont calculés à partir d'un passage de texte, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Où un score se situe sur l'échelle de facilité de lecture",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Bandes de score",
+          "modesValue": "7",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Facilité de lecture Flesch = 206,835 − 1,015×(mots/phrases) − 84,6×(syllabes/mots) | Niveau Flesch-Kincaid = 0,39×(mots/phrases) + 11,8×(syllabes/mots) − 15,59",
+          "note": "Les deux formules utilisent les deux mêmes ratios — mots moyens par phrase, et syllabes moyennes par mot — comme seules entrées. La facilité de lecture fonctionne sur une échelle d'environ 0 à 100 où plus élevé signifie plus facile à lire ; le niveau scolaire estime le niveau scolaire américain dont un lecteur aurait besoin, donc les deux scores se déplacent dans des directions opposées à partir de la même complexité sous-jacente."
+        },
+        "flowchart": {
+          "intro": "Le texte est découpé en mots et phrases à l'aide d'heuristiques basées sur la ponctuation, puis chaque mot passe par une heuristique de comptage de syllabes avant que les deux formules de Flesch ne soient appliquées.",
+          "steps": [
+            "Tokeniser le texte en mots en divisant sur les espaces et en écartant tout jeton sans lettres ni chiffres, et le diviser séparément en fragments de type phrase en regroupant des suites de texte se terminant par un point, un point d'exclamation ou un point d'interrogation",
+            "Rejeter l'entrée avec une erreur distincte si aucun mot ne subsiste après tokenisation, ou si aucun fragment de type phrase ne peut être trouvé — les deux sont nécessaires avant de pouvoir calculer tout ratio",
+            "Compter les syllabes dans chaque mot avec une heuristique : les mots de 3 lettres ou moins comptent pour une syllabe ; les mots plus longs sont comptés par leurs groupes de voyelles, avec un 'e' muet final d'abord supprimé sauf s'il fait partie d'une terminaison syllabique 'consonne + le' comme 'simple' ou 'table'",
+            "Calculer les deux ratios dont dépendent les formules : mots moyens par phrase, et syllabes moyennes par mot, sur tout le texte",
+            "Insérer les deux ratios dans les formules de Facilité de Lecture Flesch et de Niveau Scolaire Flesch-Kincaid, puis classer le score de facilité de lecture dans l'une des sept bandes lisibles par un humain, de 'très facile' à 'très confus'"
+          ],
+          "caption": "La tokenisation des mots et des phrases alimente un passage de comptage de syllabes, et les deux ratios convergent ensemble vers les deux formules de Flesch."
+        },
+        "anatomy": {
+          "intro": "Le score de facilité de lecture de Flesch place un passage sur une échelle de 0 à 100, avec des limites de bande publiées à 30, 60 et 90 marquant les seuils difficile, standard et très facile.",
+          "caption": "Un score de 65 se situe juste au-dessus du seuil standard de 60 points et bien en dessous du seuil très facile de 90 points — le plaçant dans la bande 'standard', à peu près le niveau de lecture d'un article de magazine typique."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "texte",
+            "meaning": "Le passage de texte anglais à analyser.",
+            "unit": "Texte"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les deux formules partagent les deux mêmes entrées, donc les scores de facilité de lecture et de niveau scolaire se déplacent toujours dans des directions opposées",
+            "description": "La facilité de lecture est mise à l'échelle pour qu'un nombre plus élevé signifie un texte plus facile, tandis que le niveau scolaire est mis à l'échelle pour qu'un nombre plus élevé signifie un texte plus difficile — les deux sont calculés à partir des ratios identiques de mots par phrase et de syllabes par mot, simplement combinés avec des coefficients de signe opposé, donc un passage n'obtient jamais 'facile' sur une échelle et 'difficile' sur l'autre."
+          },
+          {
+            "title": "La règle du 'e' muet du compteur de syllabes protège spécifiquement les terminaisons 'consonne + le'",
+            "description": "Un 'e' final est supprimé avant de compter les groupes de voyelles (transformant 'make' en un 'mak' d'une syllabe), sauf lorsque la lettre avant le 'le' final est elle-même une consonne — un cas comme 'simple' ou 'table' où ce 'e' final porte en réalité sa propre syllabe, et le supprimer sous-compterait."
+          },
+          {
+            "title": "Les mots de 3 lettres ou moins sont toujours comptés comme exactement une syllabe, sans comptage de voyelles impliqué",
+            "description": "Les mots très courts (comme 'a', 'the', 'is') sautent entièrement la logique de comptage des groupes de voyelles et sont codés en dur à une syllabe — un raccourci qui évite les cas limites dans des mots trop courts pour que l'heuristique générale les gère de manière fiable."
+          },
+          {
+            "title": "L'entrée vide et 'aucune phrase trouvée' sont signalées comme deux erreurs distinctes",
+            "description": "Un texte vide ou ne contenant aucun jeton de mot reconnaissable renvoie une erreur de texte vide ; un texte avec des mots mais sans ponctuation que le diviseur de phrases reconnaît renvoie une erreur distincte d'absence de phrases — les deux arrêtent le calcul, mais elles pointent vers des problèmes différents avec l'entrée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le score de facilité de lecture et le score de niveau scolaire semblent-ils mesurer la même chose mais se déplacer dans des directions opposées ?",
+            "answer": "Ils sont délibérément conçus comme des vues complémentaires de la même complexité : la facilité de lecture est mise à l'échelle de 0 à 100 avec plus élevé signifiant plus facile, dans le style des conventions de notation de tests, tandis que le niveau scolaire est mis à l'échelle pour correspondre aux niveaux scolaires américains, où un nombre plus élevé signifie un texte plus avancé et plus difficile à lire. Les deux formules prennent exactement les deux mêmes entrées — mots par phrase et syllabes par mot — simplement pondérées avec des coefficients de signe opposé."
+          },
+          {
+            "question": "Pourquoi le compteur de syllabes traite-t-il des mots comme 'simple' et 'table' différemment de mots comme 'make' ou 'take' ?",
+            "answer": "Dans 'make', le 'e' final est muet et n'ajoute pas de syllabe, donc il est supprimé avant le comptage. Mais dans 'simple' ou 'table', ce '-le' final est en réalité prononcé comme sa propre syllabe, porté par le 'l' plutôt que par une voyelle — le compteur vérifie spécifiquement si la lettre avant le 'le' final est une consonne pour distinguer ce cas, car supprimer le 'e' là sous-compterait d'une syllabe."
+          },
+          {
+            "question": "Le comptage des syllabes est-il linguistiquement exact ?",
+            "answer": "Non — c'est une heuristique rapide basée sur le comptage de groupes de voyelles, avec quelques ajustements bien connus pour les terminaisons en 'e' muet et syllabique. Elle gère correctement les cas courants mais n'est pas une recherche de prononciation appuyée par un dictionnaire, donc des mots inhabituels ou irréguliers peuvent occasionnellement être mal comptés d'une syllabe."
+          },
+          {
+            "question": "Quelle est la différence entre l'erreur de texte vide et l'erreur d'absence de phrases ?",
+            "answer": "Texte vide signifie que l'entrée n'avait aucun jeton de mot utilisable du tout — soit elle était vide, soit chaque jeton était de la ponctuation pure sans lettres ni chiffres. Absence de phrases signifie que de vrais mots ont été trouvés, mais l'étape de division en phrases n'a pu identifier aucune marque de ponctuation pour découper le texte en fragments de type phrase — par exemple, une seule longue phrase décousue sans aucune ponctuation terminale du tout."
+          }
+        ]
+      },
+      "reading-time-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Temps de Lecture : comment le temps estimé pour lire un passage est calculé à partir du nombre de mots et de la vitesse de lecture, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Le même passage à trois vitesses de lecture",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Préréglages de vitesse",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "nombreDeMots = texte réduit divisé sur les espaces | secondesTotales = arrondi(nombreDeMots ÷ motsParMinute × 60) | minutes = plancher(secondesTotales ÷ 60), secondes = reste",
+          "note": "Le nombre de mots provient d'une simple division sur les espaces du texte d'entrée, indépendamment de la vitesse de lecture choisie. Ce nombre de mots unique est ensuite divisé par le taux de mots par minute sélectionné — un préréglage intégré lent/moyen/rapide, ou un taux personnalisé — pour obtenir un chiffre de minutes brut, converti en secondes, arrondi à la seconde entière la plus proche, et enfin redivisé en minutes entières et secondes restantes."
+        },
+        "flowchart": {
+          "intro": "Un seul nombre de mots alimente une division, le taux de vitesse de lecture étant la seule variable entre les préréglages.",
+          "steps": [
+            "Réduire le texte d'entrée et le rejeter avec une erreur de texte vide si rien ne subsiste",
+            "Valider que le taux de mots par minute est un nombre fini entre 1 et 1000 ; un taux hors plage ou non numérique est rejeté avant tout calcul de temps",
+            "Compter les mots en divisant le texte réduit sur les espaces et en comptant les morceaux non vides résultants",
+            "Diviser le nombre de mots par le taux de mots par minute pour obtenir un nombre de minutes brut, multiplier par 60 pour convertir en secondes, et arrondir à la seconde entière la plus proche",
+            "Diviser ce chiffre de secondes totales en minutes entières (via division entière) et les secondes restantes dans la dernière minute partielle"
+          ],
+          "caption": "Un nombre de mots, divisé par un taux de vitesse de lecture, produit un temps brut arrondi à la seconde la plus proche puis déballé en minutes et secondes."
+        },
+        "anatomy": {
+          "intro": "Le même nombre de mots produit un temps estimé différent à chacun des trois préréglages de vitesse de lecture intégrés.",
+          "labelSlow": "Lent",
+          "labelAverage": "Moyen",
+          "labelFast": "Rapide",
+          "caption": "Un passage de 500 mots prend un temps estimé de 200 secondes (3:20) au préréglage lent de 150 mots par minute, 130 secondes (2:10) au préréglage moyen de 230 mpm, et 100 secondes (1:40) au préréglage rapide de 300 mpm — le même nombre de mots, trois taux différents."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "texte",
+            "meaning": "Le texte pour lequel estimer le temps de lecture.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "motsParMinute",
+            "meaning": "La vitesse de lecture à utiliser, en mots par minute — soit un préréglage (lent/moyen/rapide), soit une valeur personnalisée de 1 à 1000.",
+            "unit": "mpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Le taux de mots par minute est strictement borné, même pour une valeur personnalisée",
+            "description": "Tout taux hors de 1 à 1000 mots par minute est rejeté avec une erreur de taux invalide, qu'il provienne d'un préréglage ou d'une saisie personnalisée — cela protège contre un taux nul, négatif ou absurdement élevé produisant une estimation de temps insensée ou une division par zéro."
+          },
+          {
+            "title": "Le chiffre final de secondes totales est arrondi une fois, pas construit à partir de minutes et secondes arrondies séparément",
+            "description": "La conversion brute de minutes en secondes est d'abord arrondie à la seconde entière la plus proche, et seulement ensuite divisée en minutes et secondes restantes — arrondir ainsi à la toute fin évite la petite erreur cumulative que pourrait introduire l'arrondi séparé des minutes et des secondes."
+          },
+          {
+            "title": "Le nombre de mots utilise une simple division sur les espaces, la même tokenisation quelle que soit la langue ou la ponctuation",
+            "description": "Les mots sont comptés en divisant sur des suites d'espaces, sans traitement spécial pour la ponctuation attachée aux mots ou pour les langues qui n'utilisent pas d'espaces entre les mots comme le fait l'anglais — une approche délibérément simple et rapide plutôt qu'un tokeniseur conscient de la langue."
+          },
+          {
+            "title": "Les vitesses de lecture préréglées sont des valeurs de référence fixes, non personnalisées pour le lecteur réel",
+            "description": "Les préréglages lent/moyen/rapide (150/230/300 mots par minute) sont des vitesses de référence standard pour la lecture silencieuse de texte anglais — ils ne s'adaptent pas à la vitesse de lecture réelle d'un individu spécifique, ce à quoi l'option de taux personnalisé est destinée."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le taux de mots par minute est-il plafonné à 1-1000, même en mode personnalisé ?",
+            "answer": "Un taux de zéro ferait diviser par zéro le calcul de temps, et un taux négatif ou absurdement élevé ne correspondrait à aucune vitesse de lecture réaliste — plafonner la plage valide garde l'estimation sensée peu importe ce qu'un utilisateur tape dans le champ personnalisé."
+          },
+          {
+            "question": "Pourquoi mon estimation de temps de lecture pourrait-elle ne pas correspondre à ma vitesse de lecture personnelle ?",
+            "answer": "Les préréglages intégrés (150, 230 et 300 mots par minute pour lent, moyen et rapide) sont des vitesses de référence standard pour la lecture silencieuse de texte anglais en général, pas des mesures de la vitesse de lecture réelle d'une personne spécifique, qui varie considérablement selon l'individu, la familiarité avec le sujet et la difficulté du texte. L'option de taux personnalisé existe spécifiquement pour que vous puissiez insérer votre propre vitesse de lecture connue à la place."
+          },
+          {
+            "question": "Le nombre de mots pour le temps de lecture utilise-t-il la même méthode que le nombre de mots d'un traitement de texte ?",
+            "answer": "Il utilise une simple division sur les espaces, comptant tout fragment non vide entre les espaces comme un mot — c'est une approche courante et rapide mais qui peut différer légèrement des compteurs de mots plus sophistiqués qui traitent différemment les mots à trait d'union, les tirets cadratins ou autre ponctuation."
+          },
+          {
+            "question": "Pourquoi les minutes et les secondes sont-elles calculées à partir d'un seul total arrondi, plutôt que d'arrondir chacune séparément ?",
+            "answer": "Arrondir d'abord le temps brut à la seconde la plus proche, et seulement ensuite le diviser en minutes et secondes restantes, évite une classe d'erreurs d'arrondi petite mais réelle qui peut survenir lorsque deux nombres liés sont chacun arrondis indépendamment — les minutes et secondes affichées s'additionnent toujours exactement au chiffre unique de secondes totales arrondi."
+          }
+        ]
+      },
+      "lorem-ipsum-generator": {
+        "version": "v1",
+        "description": "Référence technique du Générateur de Lorem Ipsum : comment un texte de remplissage aléatoire est assemblé à partir d'une banque de mots fixe en mots, phrases ou paragraphes, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Deux banques de mots, deux vocabulaires",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Unités de sortie",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Phrase = 5-14 mots aléatoires de la banque de mots choisie, en majuscule et ponctués | Paragraphe = 3-6 phrases aléatoires jointes | Sortie = la quantité demandée de l'unité choisie",
+          "note": "Chaque phrase et paragraphe est assemblé à partir de choix de mots aléatoires indépendants tirés de l'une de deux banques de mots fixes — 62 mots classiques dérivés du latin, ou 51 mots modernes de jargon commercial — avec la longueur de phrase et la longueur de paragraphe chacune aléatoirisée dans sa propre plage fixe à chaque génération."
+        },
+        "flowchart": {
+          "intro": "La génération se ramifie selon l'unité demandée (mots, phrases ou paragraphes), mais les trois puisent finalement dans la même banque de mots et le même sélecteur de mots aléatoire.",
+          "steps": [
+            "Rejeter immédiatement la demande si la quantité demandée n'est pas un nombre entier entre 1 et 50",
+            "Sélectionner la banque de mots : la liste classique dérivée du latin, ou la liste moderne de jargon commercial, selon le style choisi",
+            "Pour une demande de mots : construire directement à partir de la banque le nombre demandé de mots aléatoires ; pour une demande de phrases : construire chaque phrase comme 5 à 14 mots aléatoires, en majuscule et se terminant par un point ; pour une demande de paragraphes : construire chaque paragraphe comme 3 à 6 de ces phrases jointes",
+            "Si 'commencer par Lorem ipsum' est activé et que le style est classique, insérer la phrase d'ouverture classique fixe comme première phrase, premier paragraphe, ou mots de tête, au lieu de générer cette partie aléatoirement",
+            "Joindre les pièces générées avec le séparateur approprié — espaces entre les phrases, lignes vides entre les paragraphes — et compter séparément le total des mots dans la sortie finale"
+          ],
+          "caption": "La même banque de mots et le même sélecteur aléatoire génèrent des mots, phrases ou paragraphes, simplement assemblés avec des plages de longueur et des règles de jonction différentes."
+        },
+        "anatomy": {
+          "intro": "Les deux banques de mots diffèrent à la fois en taille et en vocabulaire — la banque classique puise dans un texte de remplissage latin traditionnel, la banque moderne dans le jargon commercial.",
+          "labelClassic": "Classique",
+          "labelModern": "Moderne",
+          "caption": "La banque de mots classique contient 62 mots dérivés du latin, tandis que la banque de jargon commercial moderne en contient 51 — chaque phrase ou paragraphe généré puise ses mots aléatoires dans celle de ces deux listes qui correspond au style choisi."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "unité",
+            "meaning": "Ce qu'il faut générer : paragraphes, phrases ou mots.",
+            "unit": "—"
+          },
+          {
+            "symbol": "quantité",
+            "meaning": "Combien de l'unité choisie générer, de 1 à 50.",
+            "unit": "—"
+          },
+          {
+            "symbol": "style",
+            "meaning": "De quelle banque de mots puiser : classique (dérivé du latin) ou moderne (jargon commercial).",
+            "unit": "—"
+          },
+          {
+            "symbol": "commencerParLorem",
+            "meaning": "S'il faut commencer par la phrase d'ouverture classique fixe. S'applique uniquement lorsque le style est classique.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La quantité doit être un nombre entier compris entre 1 et 50, sinon la demande est rejetée d'emblée",
+            "description": "Une quantité non entière, ou en dehors de la plage 1-50, renvoie une erreur de quantité invalide avant qu'aucun texte ne soit généré — il n'y a pas de limitation à la valeur valide la plus proche, donc une demande hors plage ne produit aucune sortie du tout plutôt qu'une sortie ajustée silencieusement."
+          },
+          {
+            "title": "'Commencer par Lorem ipsum' est silencieusement ignoré en dehors du style classique",
+            "description": "L'option commencerParLorem n'a d'effet que lorsque le style est 'classique' — la demander avec le style 'moderne' ne génère pas d'erreur, elle n'est simplement pas appliquée, car la phrase d'ouverture fixe est écrite dans le vocabulaire classique dérivé du latin et n'aurait pas de sens insérée dans une sortie de style moderne."
+          },
+          {
+            "title": "La phrase d'ouverture fixe peut quand même laisser de la place à des mots générés aléatoirement dans une demande de quantité de mots",
+            "description": "Lors de la génération d'une demande de quantité de mots avec l'ouverture activée, seul le nombre de mots d'ouverture nécessaire (jusqu'à la quantité demandée) est utilisé, et si la quantité demandée dépasse le propre nombre de mots de l'ouverture, les mots restants sont remplis aléatoirement à partir de la banque de mots pour atteindre exactement le total demandé."
+          },
+          {
+            "title": "Le nombre de mots final est calculé à partir du texte généré lui-même, pas prédit à partir de la quantité demandée",
+            "description": "Plutôt que de supposer que le nombre de mots de sortie est égal à la quantité demandée (ce qui n'est vrai que pour une demande d'unité de mots), l'outil divise et compte réellement les mots dans le texte généré final — pour une demande de phrases ou de paragraphes, cela rapporte le véritable total de mots à travers toutes les phrases de taille aléatoire générées, pas une estimation."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la quantité ne peut-elle pas dépasser 50 ?",
+            "answer": "Le plafond de 1 à 50 garde la génération rapide et la sortie d'une taille raisonnable pour l'utilisation typique de texte de remplissage, comme remplir une maquette ou tester une mise en page — il n'y a aucune raison technique pour qu'un plafond plus élevé ne puisse exister, mais 50 paragraphes ou phrases produisent déjà bien plus de texte que la plupart des cas d'usage de remplissage n'en ont besoin."
+          },
+          {
+            "question": "Que se passe-t-il si j'active 'commencer par Lorem ipsum' mais que je choisis le style moderne ?",
+            "answer": "L'option n'est simplement pas appliquée — la sortie de style moderne est générée entièrement à partir de la banque de mots de jargon commercial moderne, sans erreur ni avertissement. La phrase d'ouverture classique n'apparaît que lorsque le style est réglé sur classique, car elle est écrite dans un vocabulaire dérivé du latin qui ne conviendrait pas à côté de mots de jargon moderne."
+          },
+          {
+            "question": "Pourquoi le nombre de mots rapporté n'est-il parfois pas exactement ce à quoi je m'attendrais de la quantité que j'ai saisie ?",
+            "answer": "Le champ de nombre de mots rapporte le nombre réel de mots dans le texte généré, compté après génération — cela n'égale votre quantité demandée que lors de la génération d'une demande d'unité de mots. Pour une demande de phrases ou de paragraphes, la longueur de chaque phrase (5 à 14 mots) et le nombre de phrases de chaque paragraphe (3 à 6) sont aléatoirisés, donc le véritable nombre total de mots varie naturellement entre les générations même pour la même quantité demandée."
+          },
+          {
+            "question": "Qu'est-ce qui différencie réellement les styles 'classique' et 'moderne' hormis le vocabulaire ?",
+            "answer": "La logique de génération sous-jacente — longueur de phrase, longueur de paragraphe, capitalisation et ponctuation — est identique entre les deux styles ; seule la banque de mots dans laquelle ils puisent diffère, 62 mots traditionnels dérivés du latin pour classique contre 51 mots contemporains de jargon commercial pour moderne. L'option 'commencer par Lorem ipsum' est le seul comportement exclusif au style classique."
+          }
+        ]
+      },
+      "text-logo-generator": {
+        "version": "v1",
+        "description": "Référence technique du Générateur de Logo Texte : comment le texte est converti en caractères Unicode stylisés comme gras, italique et à double trait, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Tous les caractères n'ont pas d'équivalent stylisé",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Styles",
+          "modesValue": "7",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "texteStylisé = chaque caractère de l'entrée, remplacé via une table de caractères Unicode propre au style, ou laissé inchangé si aucun équivalent mappé n'existe",
+          "note": "Chaque style (gras, italique, double trait, etc.) est soutenu par sa propre table de correspondance associant chaque caractère A-Z, a-z et (pour la plupart des styles) 0-9 à un unique point de code Unicode correspondant du bloc des Symboles Alphanumériques Mathématiques ou d'une plage similaire. Une poignée de lettres ont des exceptions documentées où Unicode réutilise un symbole hérité existant plutôt que d'allouer un nouveau point de code dans le bloc."
+        },
+        "flowchart": {
+          "intro": "Chaque caractère de l'entrée est recherché indépendamment dans la table de caractères du style sélectionné et remplacé, ou transmis inchangé s'il ne s'agit pas d'une lettre ou d'un chiffre mappé.",
+          "steps": [
+            "Réduire le texte d'entrée et le rejeter avec une erreur de texte vide si rien ne subsiste",
+            "Sélectionner la table de caractères pour le style choisi ; la table de chaque style est construite une fois à partir d'un point de code Unicode de base pour les majuscules, d'une base pour les minuscules, et (pour la plupart des styles) d'une base pour les chiffres",
+            "Appliquer des exceptions documentées par caractère à la table générée — des cas où Unicode réutilise un symbole hérité existant plutôt que de suivre le motif de décalage régulier du bloc",
+            "Diviser l'entrée en caractères individuels et rechercher chacun dans la table du style",
+            "Remplacer chaque caractère ayant un équivalent mappé par son homologue Unicode stylisé, et laisser tout caractère sans équivalent exactement tel qu'il était"
+          ],
+          "caption": "Chaque caractère est recherché indépendamment dans la table du style — les caractères mappés sont échangés contre leur équivalent Unicode stylisé, tout le reste passe sans être touché."
+        },
+        "anatomy": {
+          "intro": "Tous les caractères de l'entrée n'ont pas d'équivalent stylisé — les espaces et la ponctuation non mappée passent simplement sans changement.",
+          "labelStyled": "Stylisé",
+          "labelUnchanged": "Inchangé",
+          "totalLabel": "« Hello World » (11 caractères)",
+          "caption": "Dans l'expression de 11 caractères « Hello World », les 10 lettres sont chacune remplacées via la table de caractères Unicode du style, tandis que le 1 espace n'a aucun équivalent mappé et passe exactement tel qu'il a été saisi."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "texte",
+            "meaning": "Le texte à convertir.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "style",
+            "meaning": "Quel style Unicode appliquer : gras, italique, gras italique, double trait, chasse fixe, pleine largeur, ou encerclé.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les caractères sans équivalent mappé passent complètement inchangés, ne sont pas supprimés ni remplacés par un espace réservé",
+            "description": "Un caractère introuvable dans la table du style (espaces, ponctuation, ou chiffres dans un style sans mappage de chiffres) est conservé exactement tel qu'il apparaissait dans l'entrée — la sortie a toujours la même longueur que l'entrée, caractère par caractère."
+          },
+          {
+            "title": "Plusieurs styles n'ont aucun mappage de chiffres, contrairement à la plupart des styles réservés aux lettres",
+            "description": "Italique et gras italique sont construits sans argument de chiffres, donc les nombres dans l'entrée pour ces deux styles restent complètement non stylisés, passant comme des chiffres ordinaires, tandis que des styles comme gras, chasse fixe et pleine largeur mappent bien 0-9 vers des équivalents stylisés."
+          },
+          {
+            "title": "Une poignée de lettres individuelles outrepasse délibérément le motif de décalage régulier du bloc",
+            "description": "Le bloc des Symboles Alphanumériques Mathématiques d'Unicode réutilise une poignée de points de code hérités préexistants plutôt que d'en allouer de nouveaux pour certaines lettres — le 'h' minuscule en italique devient le symbole de la constante de Planck, et les C, H, N, P, Q, R et Z en double trait deviennent leurs propres symboles mathématiques en gras tableau noir établis de longue date — ces exceptions sont appliquées par-dessus le motif régulier du bloc, pas dérivées de celui-ci."
+          },
+          {
+            "title": "Une valeur de style non reconnue se replie sur gras plutôt que de générer une erreur",
+            "description": "Si la valeur de style transmise ne correspond à aucune des clés de style connues, la recherche dans la table de caractères se replie sur la table du style gras plutôt que d'échouer complètement — une valeur par défaut défensive plutôt qu'une opération silencieuse sans effet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi les espaces et certaines ponctuations restent-ils en texte brut tandis que les lettres sont stylisées ?",
+            "answer": "Seuls les caractères ayant une entrée dans la table de caractères Unicode du style sélectionné sont remplacés — cette table ne couvre que les lettres (et, dans la plupart des styles, les chiffres), car le bloc des Symboles Alphanumériques Mathématiques d'Unicode dans lequel puisent ces styles ne définit pas de versions stylisées des espaces ou de la ponctuation. Tout caractère hors de la table passe complètement sans être touché, ce qui explique aussi pourquoi la sortie a toujours la même longueur que l'entrée."
+          },
+          {
+            "question": "Pourquoi les styles italique et gras italique laissent-ils les nombres complètement non stylisés alors que gras et chasse fixe les stylisent ?",
+            "answer": "Cela dépend de ce qu'Unicode définit réellement : le bloc des Symboles Alphanumériques Mathématiques inclut des plages de chiffres stylisés pour certains styles (comme gras, chasse fixe et pleine largeur) mais pas pour italique ou gras italique, car Unicode n'a jamais alloué de bloc de chiffres italiques distinct. L'outil ne peut pas styliser ce qui n'existe pas comme point de code Unicode, donc ces deux styles laissent simplement les chiffres en texte brut."
+          },
+          {
+            "question": "Pourquoi le 'h' minuscule en italique a-t-il l'air différent du motif des autres lettres italiques ?",
+            "answer": "C'est une particularité documentée de la norme Unicode elle-même, pas un bogue dans le mappage : le point de code qui aurait contenu un 'h' italique dédié dans le bloc des Symboles Alphanumériques Mathématiques a été laissé inutilisé, et Unicode désigne à la place le symbole préexistant de la constante de Planck comme le 'h' italique à cette fin — la table de caractères code en dur cette exception unique par-dessus son motif régulier."
+          },
+          {
+            "question": "Ces 'polices' stylisées sont-elles réellement des polices différentes, ou autre chose ?",
+            "answer": "Ce ne sont pas du tout des polices — chaque caractère stylisé est un point de code Unicode véritablement distinct (faisant partie du bloc des Symboles Alphanumériques Mathématiques ou de plages similaires) qui se trouve ressembler visuellement à une lettre en gras, italique ou autrement stylisée. C'est pourquoi le texte stylisé se copie-colle comme ces mêmes caractères spéciaux partout, et aussi pourquoi il n'est pas lu comme 'gras' ou 'italique' par les lecteurs d'écran ou les moteurs de recherche, qui voient des symboles sans rapport plutôt que des lettres latines stylisées."
+          }
+        ]
+      },
+      "speech-word-count-calculator": {
+        "version": "v1",
+        "description": "Référence technique de la Calculatrice de Comptage de Mots pour Discours : comment le temps de prononciation estimé pour un discours ou une présentation est calculé à partir du nombre de mots et du rythme d'élocution, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Le même discours à trois rythmes d'élocution",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Préréglages de rythme",
+          "modesValue": "3",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "nombreDeMots = texte réduit divisé sur les espaces | secondesTotales = arrondi(nombreDeMots ÷ motsParMinute × 60) | minutes = plancher(secondesTotales ÷ 60), secondes = reste",
+          "note": "La même forme de division et d'arrondi qu'une estimation de temps de lecture, mais construite autour de préréglages de rythme d'expression orale publique (110-170 mots par minute) plutôt que de vitesse de lecture silencieuse, car la prononciation orale est cadencée par la respiration, l'articulation et la compréhension du public plutôt que par le mouvement oculaire d'un lecteur."
+        },
+        "flowchart": {
+          "intro": "Un seul nombre de mots est divisé par un taux de rythme d'élocution pour produire un temps de prononciation estimé.",
+          "steps": [
+            "Réduire le texte d'entrée et le rejeter avec une erreur de texte vide si rien ne subsiste",
+            "Valider que le rythme de mots par minute est un nombre fini entre 1 et 400 ; un rythme hors plage ou non numérique est rejeté avant tout calcul de temps",
+            "Compter les mots en divisant le texte réduit sur les espaces et en comptant les morceaux non vides résultants",
+            "Diviser le nombre de mots par le rythme de mots par minute pour obtenir un nombre de minutes brut, multiplier par 60 pour convertir en secondes, et arrondir à la seconde entière la plus proche",
+            "Diviser ce chiffre de secondes totales en minutes entières (via division entière) et les secondes restantes dans la dernière minute partielle"
+          ],
+          "caption": "Un nombre de mots, divisé par un taux de rythme d'élocution, produit un temps de prononciation brut arrondi à la seconde la plus proche puis déballé en minutes et secondes."
+        },
+        "anatomy": {
+          "intro": "Le même texte de discours prend un temps de prononciation estimé différent à chacun des trois préréglages de rythme d'élocution intégrés.",
+          "labelFormal": "Formel",
+          "labelNormal": "Normal",
+          "labelFast": "Rapide",
+          "caption": "Un discours de 420 mots prend un temps estimé de 229 secondes (3:49) au préréglage formel posé de 110 mots par minute, 180 secondes (3:00) au préréglage normal de 140 mpm, et 148 secondes (2:28) au préréglage rapide de 170 mpm."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "texte",
+            "meaning": "Le texte du discours ou de la présentation pour lequel estimer le temps de prononciation.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "motsParMinute",
+            "meaning": "Le rythme d'élocution à utiliser, en mots par minute — soit un préréglage (formel/normal/rapide), soit une valeur personnalisée de 1 à 400.",
+            "unit": "mpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La plage de rythme d'élocution est plafonnée bien plus bas que les taux de lecture silencieuse typiques",
+            "description": "La plage valide culmine à 400 mots par minute, bien en dessous du plafond de 1000 mots utilisé ailleurs pour la lecture silencieuse — reflétant que même un rythme d'élocution très rapide reste cadencé par la respiration et l'articulation d'une manière dont la lecture silencieuse ne l'est pas, donc un taux au-delà de quelques centaines de mots par minute ne représenterait pas un discours réaliste."
+          },
+          {
+            "title": "La prononciation formelle est le préréglage le plus lent, pas le plus rapide",
+            "description": "Le préréglage formel (110 mpm) est délibérément le plus lent des trois, reflétant qu'une prononciation de présentation soignée et posée — marquant des pauses pour l'emphase, articulant clairement — prend plus de temps qu'une élocution conversationnelle décontractée, l'inverse de ce que 'formel' pourrait suggérer si on suppose que cela signifie 'vif' ou 'efficace'."
+          },
+          {
+            "title": "Le chiffre final de secondes totales est arrondi une fois, pas construit à partir de minutes et secondes arrondies séparément",
+            "description": "La conversion brute de minutes en secondes est d'abord arrondie à la seconde entière la plus proche, et seulement ensuite divisée en minutes et secondes restantes — cela évite la petite erreur cumulative que pourrait introduire l'arrondi séparé des minutes et des secondes."
+          },
+          {
+            "title": "Le nombre de mots utilise la même division simple sur les espaces quel que soit le formatage propre au discours",
+            "description": "Les mots sont comptés en divisant sur les espaces, sans traitement spécial pour les indications scéniques, notes d'orateur, ou repères entre crochets pouvant être intégrés dans un script de discours — tout ce qui est séparé par des espaces est compté comme un mot, qu'il soit destiné à être prononcé à voix haute ou non."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi le rythme d'élocution maximal est-il tellement plus bas que le maximum d'une calculatrice de vitesse de lecture typique ?",
+            "answer": "Le discours est cadencé par la respiration, l'articulation, et le fait de laisser du temps à un public pour comprendre ce qui est dit — des contraintes qui ne s'appliquent pas à la lecture silencieuse. Même un orateur inhabituellement rapide dépasse rarement quelques centaines de mots par minute dans un discours compréhensible, donc la plage valide ici est plafonnée à 400 mots par minute, bien en dessous du plafond de 1000 mots qui a du sens pour la lecture silencieuse."
+          },
+          {
+            "question": "Pourquoi 'formel' est-il le préréglage le plus lent plutôt que le plus rapide ?",
+            "answer": "La prononciation de présentation formelle — le type utilisé pour un discours, une allocution principale, ou une annonce solennelle — est typiquement plus lente et plus posée que l'élocution décontractée, avec des pauses pour l'emphase et une articulation plus claire, pas plus rapide. Les noms de préréglages décrivent le style de prononciation, pas un classement de vitesse, ce qui explique pourquoi formel (110 mpm) est le plus lent des trois et rapide (170 mpm) est le plus véloce, plus proche de la façon dont quelqu'un parle en conversation décontractée."
+          },
+          {
+            "question": "Cela tient-il compte des pauses que je pourrais ajouter pour des diapositives, la réaction du public, ou l'emphase ?",
+            "answer": "Non — l'estimation est une simple division du nombre de mots par un rythme constant de mots par minute, sans marge pour les pauses, transitions de diapositives, ou silence planifié. Pour un discours avec des pauses intégrées significatives, le temps de prononciation réel sera plus long que cette estimation ; considérez-la comme un plancher pour le temps de parole continu, pas un total incluant les pauses."
+          },
+          {
+            "question": "Pourquoi le nombre de mots inclut-il des éléments comme les indications scéniques si je colle un script complet ?",
+            "answer": "Le compteur de mots ne distingue pas le dialogue prononcé des indications scéniques, étiquettes d'orateur, ou notes entre crochets — il compte chaque fragment séparé par des espaces dans l'entrée comme un mot. Si votre script inclut du texte non prononcé, le retirer avant de coller donnera une estimation plus précise du temps de parole réel."
+          }
+        ]
       }
     }
   }

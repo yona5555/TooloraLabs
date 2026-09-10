@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ReadabilityInputPanel from "./ReadabilityInputPanel";
 import ReadabilityResult from "./ReadabilityResult";
 import ReadabilityQuickReference from "./ReadabilityQuickReference";
@@ -39,6 +40,7 @@ export default function ReadabilityCalculator({ education }: { education: ReactN
           sidebar={<RelatedToolsSidebar currentSlug="readability-score-calculator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="readability-score-calculator" />
               <SectionNav items={navItems} />
               <ReadabilityQuickReference />
             </div>

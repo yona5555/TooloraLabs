@@ -30804,6 +30804,568 @@
             "answer": "No: se calcula de forma independiente para cada clase (la duración propia de esa clase multiplicada por cuántos días se reúne) y luego se suma, sin verificar ni eliminar ninguna superposición contada dos veces entre diferentes clases. Esto significa que el total representa la suma del tiempo programado propio de cada clase, no el número real de horas distintas en que estaría ocupado si el tiempo en conflicto de dos clases solo se experimenta una vez."
           }
         ]
+      },
+      "word-counter": {
+        "version": "v1",
+        "description": "Referencia técnica del Contador de Palabras y Caracteres: cómo se cuentan las palabras, caracteres, oraciones y palabras clave principales de un texto, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Clasificar las palabras clave principales por frecuencia",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Estadísticas calculadas",
+          "modesValue": "10",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "palabras = texto recortado dividido por espacios en blanco | palabrasÚnicas = tamaño del conjunto de tokens de palabras en minúsculas | palabrasClavePrincipales = tokens de palabras (2+ caracteres, sin palabras vacías) agrupados, contados y ordenados por frecuencia, se conservan las 5 principales",
+          "note": "Varios conteos se derivan de tokenizaciones diferentes del mismo texto: el conteo principal de palabras es una simple división por espacios en blanco, mientras que las estadísticas de palabras únicas y palabras clave usan un extractor de tokens separado que convierte el texto a minúsculas y coincide con secuencias de letras, dígitos, apóstrofos y guiones, por lo que un conteo de palabras y una lista de palabras clave no cuentan exactamente lo mismo por debajo."
+        },
+        "flowchart": {
+          "intro": "Cada estadística se deriva del mismo texto de entrada, pero varias usan su propio paso de tokenización separado adecuado a lo que miden.",
+          "steps": [
+            "Recortar el texto de entrada; un resultado vacío después de recortar reporta cada conteo como cero en lugar de intentar tokenizar nada",
+            "Contar caracteres directamente (incluyendo todos los espacios en blanco) y por separado con cada carácter de espacio en blanco eliminado, luego dividir el texto recortado en secuencias de espacios en blanco para obtener el conteo de palabras",
+            "Dividir en puntuación que termina oraciones para contar oraciones, y en secuencias de líneas en blanco para contar párrafos: dos heurísticas independientes, no derivadas del conteo de palabras",
+            "Extraer por separado tokens de palabras en minúsculas (letras, dígitos, apóstrofos y guiones) para calcular el conteo de palabras únicas, la longitud promedio de palabra y la única palabra más larga",
+            "De esa misma lista de tokens, descartar tokens cortos y palabras vacías comunes, contar cuántas veces aparece cada palabra restante, luego ordenar por frecuencia y conservar las 5 principales como la lista de palabras clave"
+          ],
+          "caption": "Un texto de entrada alimenta varios pasos de tokenización independientes, cada uno adecuado a la estadística específica que produce."
+        },
+        "anatomy": {
+          "intro": "Después de filtrar las palabras vacías y los tokens cortos, las palabras restantes se cuentan y clasifican por frecuencia; las 5 principales se convierten en la lista de palabras clave.",
+          "labelWord1": "crecimiento",
+          "labelWord2": "mercado",
+          "labelWord3": "estrategia",
+          "labelWord4": "cliente",
+          "labelWord5": "marca",
+          "caption": "Para un pasaje que repite ciertas palabras temáticas, la lista de palabras clave principales clasifica 'crecimiento' (5 ocurrencias) por encima de 'mercado' (4), 'estrategia' (3), y dos palabras empatadas en 2, exactamente el ranking de frecuencia que produce topKeywords, con palabras vacías comunes como 'the' y 'and' excluidas primero."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "texto",
+            "meaning": "El texto a analizar.",
+            "unit": "Texto"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "El conteo de palabras y la extracción de palabras clave tokenizan el texto de dos maneras diferentes",
+            "description": "El conteo principal de palabras es una simple división en secuencias de espacios en blanco, contando cualquier cosa entre espacios como una 'palabra', incluida la puntuación desnuda; las estadísticas de palabras clave y palabras únicas en cambio extraen solo secuencias de letras, dígitos, apóstrofos y guiones, por lo que estos conteos pueden divergir ligeramente en texto con puntuación inusual."
+          },
+          {
+            "title": "La división de oraciones es una heurística basada en puntuación, no un análisis gramatical real",
+            "description": "Las oraciones se cuentan dividiendo en secuencias que terminan en punto, signo de exclamación o interrogación, lo que significa que una abreviatura como 'Dr.' o un número decimal puede contarse erróneamente como límite de oración: una simplificación deliberada, no un analizador gramatical de oraciones completo."
+          },
+          {
+            "title": "Las palabras de menos de 2 caracteres se excluyen de la lista de palabras clave incluso si no son palabras vacías",
+            "description": "El paso de frecuencia de palabras clave omite cualquier token más corto de 2 caracteres además de omitir palabras vacías, por lo que los tokens de una sola letra nunca aparecen en la lista de palabras clave principales sin importar cuántas veces se repitan."
+          },
+          {
+            "title": "El tiempo de lectura se estima a partir del conteo de palabras usando una tasa fija única, siempre redondeada hacia arriba",
+            "description": "El tiempo de lectura estimado divide el conteo de palabras entre una tasa fija de 200 palabras por minuto y siempre redondea hacia arriba al siguiente minuto completo (mediante techo, no redondeo estándar), por lo que incluso unas pocas palabras más allá de un límite de minuto exacto empujan la estimación hacia arriba en lugar de hacia abajo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la lista de palabras clave y el conteo total de palabras pueden parecer inconsistentes en texto con mucha puntuación o palabras cortas?",
+            "answer": "Provienen de dos pasos de tokenización separados sobre el mismo texto. El conteo total de palabras es una división simple en espacios en blanco, contando cualquier fragmento separado por espacios, incluso puntuación desnuda, como una palabra, mientras que el extractor de palabras clave solo extrae secuencias de letras, dígitos, apóstrofos y guiones, excluyendo deliberadamente esta puntuación perdida y los tokens muy cortos del ranking de frecuencia."
+          },
+          {
+            "question": "¿Por qué se dejan fuera de la lista de palabras clave principales palabras comunes como 'the' y 'and'?",
+            "answer": "Se filtran mediante una lista de palabras vacías antes del conteo de frecuencia: las palabras gramaticales de alta frecuencia como artículos, conjunciones y pronombres de otro modo dominarían el ranking de las 5 principales en casi cualquier pasaje, desplazando las palabras temáticas reales que la lista de palabras clave pretende mostrar. Tanto las palabras vacías en inglés como en árabe están incluidas en este filtro."
+          },
+          {
+            "question": "¿Por qué podría estar mal el conteo de oraciones en texto que contiene abreviaturas o números decimales?",
+            "answer": "El conteo de oraciones es una heurística basada en puntuación: busca secuencias de texto que terminan en punto, signo de exclamación o interrogación, en lugar de un analizador gramatical completo que entienda que 'Dr.' o '3.14' no son finales de oración. Esto mantiene el contador rápido y sin dependencias, a costa de sobrecontar ocasionalmente oraciones en texto con muchas abreviaturas o decimales."
+          },
+          {
+            "question": "¿Por qué el tiempo de lectura estimado siempre redondea hacia arriba, incluso por una fracción de minuto?",
+            "answer": "La estimación usa una función de techo en lugar de redondeo estándar, por lo que un pasaje que tomaría, digamos, 2 minutos y 5 segundos a la velocidad de lectura asumida se reporta como 3 minutos en lugar de redondear hacia abajo a 2: una elección deliberada para nunca subestimar cuánto tiempo tomará leer un pasaje."
+          }
+        ]
+      },
+      "readability-score-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Puntuación de Legibilidad: cómo se calculan la puntuación de facilidad de lectura de Flesch y el nivel de grado de Flesch-Kincaid a partir de un pasaje de texto, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Dónde cae una puntuación en la escala de facilidad de lectura",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Bandas de puntuación",
+          "modesValue": "7",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Facilidad de lectura Flesch = 206.835 − 1.015×(palabras/oraciones) − 84.6×(sílabas/palabras) | Grado Flesch-Kincaid = 0.39×(palabras/oraciones) + 11.8×(sílabas/palabras) − 15.59",
+          "note": "Ambas fórmulas usan las mismas dos proporciones (promedio de palabras por oración y promedio de sílabas por palabra) como únicas entradas. La facilidad de lectura funciona en una escala de aproximadamente 0 a 100 donde más alto significa más fácil de leer; el nivel de grado estima el grado escolar estadounidense que necesitaría un lector, por lo que las dos puntuaciones se mueven en direcciones opuestas a partir de la misma complejidad subyacente."
+        },
+        "flowchart": {
+          "intro": "El texto se divide en palabras y oraciones usando heurísticas basadas en puntuación, luego cada palabra pasa por una heurística de conteo de sílabas antes de aplicar las dos fórmulas de Flesch.",
+          "steps": [
+            "Tokenizar el texto en palabras dividiendo en espacios en blanco y descartando cualquier token sin letras ni dígitos, y por separado dividirlo en fragmentos similares a oraciones agrupando secuencias de texto que terminan en punto, signo de exclamación o interrogación",
+            "Rechazar la entrada con un error distinto si no quedan palabras después de tokenizar, o si no se pueden encontrar fragmentos similares a oraciones: ambos son necesarios antes de poder calcular cualquier proporción",
+            "Contar sílabas en cada palabra con una heurística: las palabras de 3 letras o menos cuentan como una sílaba; las palabras más largas se cuentan por sus grupos de vocales, eliminando primero una 'e' muda final a menos que sea parte de una terminación silábica de 'consonante + le' como 'simple' o 'table'",
+            "Calcular las dos proporciones de las que dependen las fórmulas: promedio de palabras por oración y promedio de sílabas por palabra, en todo el texto",
+            "Introducir ambas proporciones en las fórmulas de Facilidad de Lectura Flesch y Nivel de Grado Flesch-Kincaid, luego clasificar la puntuación de facilidad de lectura en una de siete bandas legibles por humanos, desde 'muy fácil' hasta 'muy confuso'"
+          ],
+          "caption": "La tokenización de palabras y oraciones alimenta un paso de conteo de sílabas, y ambas proporciones fluyen juntas hacia las dos fórmulas de Flesch."
+        },
+        "anatomy": {
+          "intro": "La puntuación de facilidad de lectura de Flesch coloca un pasaje en una escala de 0 a 100, con límites de banda publicados en 30, 60 y 90 marcando los cortes de difícil, estándar y muy fácil.",
+          "caption": "Una puntuación de 65 se sitúa justo por encima del corte estándar de 60 puntos y muy por debajo del corte muy fácil de 90 puntos, colocándola en la banda 'estándar', aproximadamente el nivel de lectura de un artículo de revista típico."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "texto",
+            "meaning": "El pasaje de texto en inglés a analizar.",
+            "unit": "Texto"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ambas fórmulas comparten las mismas dos entradas, por lo que las puntuaciones de facilidad de lectura y nivel de grado siempre se mueven en direcciones opuestas",
+            "description": "La facilidad de lectura se escala para que un número más alto signifique texto más fácil, mientras que el nivel de grado se escala para que un número más alto signifique texto más difícil: ambas se calculan a partir de las proporciones idénticas de palabras por oración y sílabas por palabra, solo combinadas con coeficientes de signo opuesto, por lo que un pasaje nunca puntúa 'fácil' en una escala y 'difícil' en la otra."
+          },
+          {
+            "title": "La regla de la 'e' muda del contador de sílabas protege específicamente las terminaciones de 'consonante + le'",
+            "description": "Se elimina una 'e' final antes de contar los grupos de vocales (convirtiendo 'make' en un 'mak' de una sílaba), excepto cuando la letra antes de la 'le' final es en sí misma una consonante: un caso como 'simple' o 'table' donde esa 'e' final en realidad lleva su propia sílaba, y eliminarla subcontaría."
+          },
+          {
+            "title": "Las palabras de 3 letras o menos siempre se cuentan como exactamente una sílaba, sin conteo de vocales involucrado",
+            "description": "Las palabras muy cortas (como 'a', 'the', 'is') omiten por completo la lógica de conteo de grupos de vocales y están codificadas de forma fija en una sílaba: un atajo que evita casos límite en palabras demasiado cortas para que la heurística general las maneje de forma confiable."
+          },
+          {
+            "title": "La entrada vacía y 'no se encontraron oraciones' se reportan como dos errores distintos",
+            "description": "El texto que está vacío o no contiene tokens de palabras reconocibles devuelve un error de texto vacío; el texto con palabras pero sin puntuación que el divisor de oraciones reconoce devuelve un error separado de sin oraciones: ambos detienen el cálculo, pero apuntan a problemas diferentes con la entrada."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la puntuación de facilidad de lectura y la puntuación de nivel de grado parecen medir lo mismo pero se mueven en direcciones opuestas?",
+            "answer": "Están deliberadamente diseñadas como vistas complementarias de la misma complejidad: la facilidad de lectura se escala de 0 a 100 donde más alto significa más fácil, al estilo de las convenciones de puntuación de exámenes, mientras que el nivel de grado se escala para coincidir con los grados escolares estadounidenses, donde un número más alto significa un texto más avanzado y difícil de leer. Ambas fórmulas toman exactamente las mismas dos entradas (palabras por oración y sílabas por palabra), solo ponderadas con coeficientes de signo opuesto."
+          },
+          {
+            "question": "¿Por qué el contador de sílabas trata palabras como 'simple' y 'table' de manera diferente a palabras como 'make' o 'take'?",
+            "answer": "En 'make', la 'e' final es muda y no añade una sílaba, por lo que se elimina antes de contar. Pero en 'simple' o 'table', esa '-le' final en realidad se pronuncia como su propia sílaba, llevada por la 'l' en lugar de una vocal: el contador verifica específicamente si la letra antes de la 'le' final es una consonante para distinguir este caso, ya que eliminar la 'e' ahí subcontaría en una sílaba."
+          },
+          {
+            "question": "¿Es el conteo de sílabas lingüísticamente exacto?",
+            "answer": "No: es una heurística rápida basada en contar grupos de vocales, con un par de ajustes bien conocidos para terminaciones de 'e' muda y silábica. Maneja correctamente los casos comunes pero no es una búsqueda de pronunciación respaldada por un diccionario, por lo que las palabras inusuales o irregulares pueden ocasionalmente contarse mal en una sílaba."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre el error de texto vacío y el error de sin oraciones?",
+            "answer": "Texto vacío significa que la entrada no tenía ningún token de palabra utilizable en absoluto, ya fuera en blanco, o cada token era puntuación pura sin letras ni dígitos. Sin oraciones significa que se encontraron palabras reales, pero el paso de división de oraciones no pudo identificar ninguna marca de puntuación para dividir el texto en fragmentos similares a oraciones, por ejemplo, una sola frase larga corrida sin ninguna puntuación terminal en absoluto."
+          }
+        ]
+      },
+      "reading-time-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Tiempo de Lectura: cómo se calcula el tiempo estimado para leer un pasaje a partir del conteo de palabras y la velocidad de lectura, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "El mismo pasaje a tres velocidades de lectura",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Preajustes de velocidad",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "conteoDePalabras = texto recortado dividido por espacios en blanco | segundosTotales = redondeo(conteoDePalabras ÷ palabrasPorMinuto × 60) | minutos = piso(segundosTotales ÷ 60), segundos = resto",
+          "note": "El conteo de palabras proviene de una simple división por espacios en blanco del texto de entrada, independiente de la velocidad de lectura elegida. Ese único conteo de palabras se divide luego entre la tasa de palabras por minuto seleccionada, ya sea un preajuste incorporado lento/promedio/rápido, o una tasa personalizada, para obtener una cifra de minutos sin procesar, que se convierte a segundos, se redondea al segundo entero más cercano, y finalmente se divide de nuevo en minutos completos y segundos sobrantes."
+        },
+        "flowchart": {
+          "intro": "Un único conteo de palabras alimenta una división, siendo la tasa de velocidad de lectura la única variable entre los preajustes.",
+          "steps": [
+            "Recortar el texto de entrada y rechazarlo con un error de texto vacío si no queda nada",
+            "Validar que la tasa de palabras por minuto sea un número finito entre 1 y 1000; una tasa fuera de rango o no numérica se rechaza antes de calcular cualquier tiempo",
+            "Contar palabras dividiendo el texto recortado en espacios en blanco y contando las piezas no vacías resultantes",
+            "Dividir el conteo de palabras entre la tasa de palabras por minuto para obtener un número de minutos sin procesar, multiplicar por 60 para convertir a segundos, y redondear al segundo entero más cercano",
+            "Dividir esa cifra de segundos totales en minutos completos (mediante división entera) y los segundos sobrantes dentro del último minuto parcial"
+          ],
+          "caption": "Un conteo de palabras, dividido entre una tasa de velocidad de lectura, produce un tiempo sin procesar que se redondea al segundo más cercano y luego se desempaqueta en minutos y segundos."
+        },
+        "anatomy": {
+          "intro": "El mismo conteo de palabras produce un tiempo estimado diferente en cada uno de los tres preajustes de velocidad de lectura incorporados.",
+          "labelSlow": "Lento",
+          "labelAverage": "Promedio",
+          "labelFast": "Rápido",
+          "caption": "Un pasaje de 500 palabras toma un estimado de 200 segundos (3:20) en el preajuste lento de 150 palabras por minuto, 130 segundos (2:10) en el preajuste promedio de 230 ppm, y 100 segundos (1:40) en el preajuste rápido de 300 ppm: el mismo conteo de palabras, tres tasas diferentes."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "texto",
+            "meaning": "El texto para el cual estimar el tiempo de lectura.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "palabrasPorMinuto",
+            "meaning": "La velocidad de lectura a usar, en palabras por minuto: ya sea un preajuste (lento/promedio/rápido) o un valor personalizado de 1 a 1000.",
+            "unit": "ppm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La tasa de palabras por minuto está estrictamente acotada, incluso para un valor personalizado",
+            "description": "Cualquier tasa fuera de 1 a 1000 palabras por minuto se rechaza con un error de tasa inválida, sin importar si proviene de un preajuste o de una entrada personalizada: esto protege contra una tasa cero, negativa o absurdamente grande que produzca una estimación de tiempo sin sentido o una división entre cero."
+          },
+          {
+            "title": "La cifra final de segundos totales se redondea una vez, no se construye a partir de minutos y segundos redondeados por separado",
+            "description": "La conversión sin procesar de minutos a segundos se redondea primero al segundo entero más cercano, y solo después se divide en minutos y segundos restantes: redondear al final de esta manera evita el pequeño error acumulativo que podría introducir redondear minutos y segundos por separado."
+          },
+          {
+            "title": "El conteo de palabras usa una simple división por espacios en blanco, la misma tokenización sin importar el idioma o la puntuación",
+            "description": "Las palabras se cuentan dividiendo en secuencias de espacios en blanco, sin manejo especial para la puntuación adjunta a las palabras o para idiomas que no usan espacios entre palabras de la forma en que lo hace el inglés: un enfoque deliberadamente simple y rápido en lugar de un tokenizador consciente del idioma."
+          },
+          {
+            "title": "Las velocidades de lectura preajustadas son valores de referencia fijos, no personalizados para el lector real",
+            "description": "Los preajustes lento/promedio/rápido (150/230/300 palabras por minuto) son velocidades de referencia estándar para la lectura silenciosa de texto en inglés: no se adaptan a la velocidad de lectura real de un individuo específico, para lo cual existe la opción de tasa personalizada."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la tasa de palabras por minuto está limitada a 1-1000, incluso en modo personalizado?",
+            "answer": "Una tasa de cero haría que el cálculo de tiempo dividiera entre cero, y una tasa negativa o absurdamente alta no correspondería a ninguna velocidad de lectura realista: limitar el rango válido mantiene la estimación significativa sin importar lo que un usuario escriba en el campo personalizado."
+          },
+          {
+            "question": "¿Por qué mi estimación de tiempo de lectura podría no coincidir con la velocidad a la que leo personalmente?",
+            "answer": "Los preajustes incorporados (150, 230 y 300 palabras por minuto para lento, promedio y rápido) son velocidades de referencia estándar para la lectura silenciosa de texto en inglés en general, no mediciones de la velocidad de lectura real de una persona específica, que varía bastante según el individuo, la familiaridad con el tema y la dificultad del texto. La opción de tasa personalizada existe específicamente para que pueda ingresar su propia velocidad de lectura conocida en su lugar."
+          },
+          {
+            "question": "¿El conteo de palabras para el tiempo de lectura usa el mismo método que el conteo de palabras de un procesador de textos?",
+            "answer": "Usa una simple división por espacios en blanco, contando cualquier fragmento no vacío entre espacios como una palabra: este es un enfoque común y rápido, pero puede diferir ligeramente de contadores de palabras más sofisticados que manejan palabras con guiones, rayas u otra puntuación de forma diferente."
+          },
+          {
+            "question": "¿Por qué los minutos y segundos se calculan a partir de un único total redondeado, en lugar de redondear cada uno por separado?",
+            "answer": "Redondear el tiempo sin procesar al segundo más cercano primero, y solo después dividirlo en minutos y segundos sobrantes, evita una clase pequeña pero real de errores de redondeo que pueden ocurrir cuando dos números relacionados se redondean cada uno de forma independiente: los minutos y segundos mostrados siempre suman exactamente la única cifra de segundos totales redondeada."
+          }
+        ]
+      },
+      "lorem-ipsum-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Lorem Ipsum: cómo se ensambla texto de relleno aleatorio a partir de un banco de palabras fijo en palabras, oraciones o párrafos, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Dos bancos de palabras, dos vocabularios",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Unidades de salida",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Oración = 5-14 palabras aleatorias del banco de palabras elegido, capitalizadas y puntuadas | Párrafo = 3-6 oraciones aleatorias unidas | Salida = la cantidad solicitada de la unidad elegida",
+          "note": "Cada oración y párrafo se ensambla a partir de elecciones de palabras aleatorias independientes extraídas de uno de dos bancos de palabras fijos: 62 palabras clásicas derivadas del latín, o 51 palabras modernas de jerga empresarial, con la longitud de la oración y la longitud del párrafo aleatorizadas cada una dentro de su propio rango fijo en cada generación."
+        },
+        "flowchart": {
+          "intro": "La generación se ramifica según qué unidad (palabras, oraciones o párrafos) se solicitó, pero las tres finalmente extraen del mismo banco de palabras y selector de palabras aleatorio.",
+          "steps": [
+            "Rechazar la solicitud de inmediato si la cantidad solicitada no es un número entero entre 1 y 50",
+            "Seleccionar el banco de palabras: la lista clásica derivada del latín, o la lista moderna de jerga empresarial, según el estilo elegido",
+            "Para una solicitud de palabras: construir la cantidad solicitada de palabras aleatorias directamente del banco; para una solicitud de oraciones: construir cada oración como 5 a 14 palabras aleatorias, capitalizadas y terminando en punto; para una solicitud de párrafos: construir cada párrafo como 3 a 6 de esas oraciones unidas",
+            "Si 'comenzar con Lorem ipsum' está activado y el estilo es clásico, insertar la oración de apertura clásica fija como la primera oración, primer párrafo, o palabras iniciales, en lugar de generar esa parte aleatoriamente",
+            "Unir las piezas generadas con el separador apropiado (espacios entre oraciones, líneas en blanco entre párrafos) y contar por separado el total de palabras en la salida final"
+          ],
+          "caption": "El mismo banco de palabras y selector aleatorio generan palabras, oraciones o párrafos, solo ensamblados con diferentes rangos de longitud y reglas de unión."
+        },
+        "anatomy": {
+          "intro": "Los dos bancos de palabras difieren tanto en tamaño como en vocabulario: el banco clásico extrae de texto de relleno latino tradicional, el banco moderno de jerga empresarial.",
+          "labelClassic": "Clásico",
+          "labelModern": "Moderno",
+          "caption": "El banco de palabras clásico contiene 62 palabras derivadas del latín, mientras que el banco de jerga empresarial moderno contiene 51: cada oración o párrafo generado extrae sus palabras aleatorias de cualquiera de estas dos listas que coincida con el estilo elegido."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "unidad",
+            "meaning": "Qué generar: párrafos, oraciones o palabras.",
+            "unit": "—"
+          },
+          {
+            "symbol": "cantidad",
+            "meaning": "Cuánto de la unidad elegida generar, de 1 a 50.",
+            "unit": "—"
+          },
+          {
+            "symbol": "estilo",
+            "meaning": "De qué banco de palabras extraer: clásico (derivado del latín) o moderno (jerga empresarial).",
+            "unit": "—"
+          },
+          {
+            "symbol": "comenzarConLorem",
+            "meaning": "Si comenzar con la oración de apertura clásica fija. Solo se aplica cuando el estilo es clásico.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La cantidad debe ser un número entero dentro de 1 a 50, o la solicitud se rechaza de plano",
+            "description": "Una cantidad no entera, o una fuera del rango 1-50, devuelve un error de cantidad inválida antes de generar cualquier texto: no hay limitación al valor válido más cercano, por lo que una solicitud fuera de rango no produce ninguna salida en absoluto en lugar de una ajustada silenciosamente."
+          },
+          {
+            "title": "'Comenzar con Lorem ipsum' se ignora silenciosamente fuera del estilo clásico",
+            "description": "La opción comenzarConLorem solo tiene efecto cuando el estilo es 'clásico': solicitarla junto con el estilo 'moderno' no genera error, simplemente no se aplica, ya que la oración de apertura fija está escrita en el vocabulario clásico derivado del latín y no tendría sentido insertada en salida de estilo moderno."
+          },
+          {
+            "title": "La oración de apertura fija aún puede dejar espacio para palabras generadas aleatoriamente en una solicitud de cantidad de palabras",
+            "description": "Al generar una solicitud de cantidad de palabras con la apertura activada, solo se usan tantas palabras de apertura como sean necesarias (hasta la cantidad solicitada), y si la cantidad solicitada excede el propio conteo de palabras de la apertura, las palabras restantes se rellenan aleatoriamente del banco de palabras para alcanzar exactamente el total solicitado."
+          },
+          {
+            "title": "El conteo final de palabras se calcula a partir del texto generado mismo, no se predice a partir de la cantidad solicitada",
+            "description": "En lugar de asumir que el conteo de palabras de salida es igual a la cantidad solicitada (lo cual solo es cierto para una solicitud de unidad de palabras), la herramienta en realidad divide y cuenta las palabras en el texto generado final: para una solicitud de oraciones o párrafos, esto reporta el total real de palabras en todas las oraciones de tamaño aleatorio generadas, no una estimación."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la cantidad no puede superar 50?",
+            "answer": "El límite de 1 a 50 mantiene la generación rápida y la salida de un tamaño razonable para el uso típico de texto de relleno, como llenar una maqueta o probar un diseño: no hay una razón técnica por la que no pudiera existir un límite mayor, pero 50 párrafos u oraciones ya producen mucho más texto del que la mayoría de los casos de uso de relleno necesitan."
+          },
+          {
+            "question": "¿Qué sucede si activo 'comenzar con Lorem ipsum' pero elijo el estilo moderno?",
+            "answer": "La opción simplemente no se aplica: la salida de estilo moderno se genera completamente a partir del banco de palabras de jerga empresarial moderna, sin error ni advertencia. La oración de apertura clásica solo aparece cuando el estilo está configurado como clásico, ya que está escrita en vocabulario derivado del latín que no encajaría junto a palabras de jerga moderna."
+          },
+          {
+            "question": "¿Por qué el conteo de palabras reportado a veces no es exactamente lo que esperaría de la cantidad que ingresé?",
+            "answer": "El campo de conteo de palabras reporta el número real de palabras en el texto generado, contado después de la generación: esto solo es igual a su cantidad solicitada al generar una solicitud de unidad de palabras. Para una solicitud de oraciones o párrafos, la longitud de cada oración (5 a 14 palabras) y el conteo de oraciones de cada párrafo (3 a 6) se aleatorizan, por lo que el conteo total real de palabras varía naturalmente entre generaciones incluso para la misma cantidad solicitada."
+          },
+          {
+            "question": "¿Qué es realmente diferente entre los estilos 'clásico' y 'moderno' además del vocabulario?",
+            "answer": "La lógica de generación subyacente (longitud de oración, longitud de párrafo, capitalización y puntuación) es idéntica entre los dos estilos; solo difiere el banco de palabras del que extraen, 62 palabras tradicionales derivadas del latín para clásico frente a 51 palabras contemporáneas de jerga empresarial para moderno. La opción 'comenzar con Lorem ipsum' es el único comportamiento exclusivo del estilo clásico."
+          }
+        ]
+      },
+      "text-logo-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Logotipos de Texto: cómo se convierte el texto en caracteres Unicode estilizados como negrita, cursiva y de doble trazo, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "No todos los caracteres tienen un equivalente estilizado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Estilos",
+          "modesValue": "7",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "textoEstilizado = cada carácter de la entrada, reemplazado a través de un mapa de caracteres Unicode específico del estilo, o dejado sin cambios si no existe un equivalente mapeado",
+          "note": "Cada estilo (negrita, cursiva, doble trazo, etc.) está respaldado por su propia tabla de búsqueda que mapea cada carácter A-Z, a-z y (para la mayoría de los estilos) 0-9 a un único punto de código Unicode correspondiente del bloque de Símbolos Alfanuméricos Matemáticos o un rango similar. Un puñado de letras tienen excepciones documentadas donde Unicode reutiliza un símbolo heredado existente en lugar de asignar un nuevo punto de código en el bloque."
+        },
+        "flowchart": {
+          "intro": "Cada carácter de la entrada se busca de forma independiente en el mapa de caracteres del estilo seleccionado y se reemplaza, o se pasa sin cambios si no es una letra o dígito mapeado.",
+          "steps": [
+            "Recortar el texto de entrada y rechazarlo con un error de texto vacío si no queda nada",
+            "Seleccionar el mapa de caracteres para el estilo elegido; el mapa de cada estilo se construye una vez a partir de un punto de código Unicode base para letras mayúsculas, una base para letras minúsculas, y (para la mayoría de los estilos) una base para dígitos",
+            "Aplicar excepciones documentadas por carácter al mapa generado: casos donde Unicode reutiliza un símbolo heredado existente en lugar de seguir el patrón de desplazamiento regular del bloque",
+            "Dividir la entrada en caracteres individuales y buscar cada uno en el mapa del estilo",
+            "Reemplazar cada carácter que tenga un equivalente mapeado con su contraparte Unicode estilizada, y dejar cualquier carácter sin uno exactamente como estaba"
+          ],
+          "caption": "Cada carácter se busca de forma independiente en el mapa del estilo: los caracteres mapeados se intercambian por su equivalente Unicode estilizado, todo lo demás pasa sin tocar."
+        },
+        "anatomy": {
+          "intro": "No todos los caracteres en la entrada tienen un equivalente estilizado: los espacios y la puntuación no mapeada simplemente pasan sin cambios.",
+          "labelStyled": "Estilizado",
+          "labelUnchanged": "Sin cambios",
+          "totalLabel": "\"Hello World\" (11 caracteres)",
+          "caption": "En la frase de 11 caracteres 'Hello World,' las 10 letras se reemplazan cada una a través del mapa de caracteres Unicode del estilo, mientras que el 1 espacio no tiene equivalente mapeado y pasa exactamente como se escribió."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "texto",
+            "meaning": "El texto a convertir.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "estilo",
+            "meaning": "Qué estilo Unicode aplicar: negrita, cursiva, negrita cursiva, doble trazo, monoespaciado, ancho completo, o rodeado por círculo.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los caracteres sin equivalente mapeado pasan completamente sin cambios, no se eliminan ni se reemplazan con un marcador de posición",
+            "description": "Un carácter no encontrado en el mapa del estilo (espacios, puntuación, o dígitos en un estilo sin mapeo de dígitos) se conserva exactamente como apareció en la entrada: la salida siempre tiene la misma longitud que la entrada, carácter por carácter."
+          },
+          {
+            "title": "Varios estilos no tienen mapeo de dígitos en absoluto, a diferencia de la mayoría de los estilos solo de letras",
+            "description": "Cursiva y negrita cursiva se construyen sin un argumento de dígitos, por lo que los números en la entrada para esos dos estilos quedan completamente sin estilizar, pasando como dígitos planos, mientras que estilos como negrita, monoespaciado y ancho completo sí mapean 0-9 a equivalentes estilizados."
+          },
+          {
+            "title": "Un puñado de letras individuales anula deliberadamente el patrón de desplazamiento regular del bloque",
+            "description": "El bloque de Símbolos Alfanuméricos Matemáticos de Unicode reutiliza un puñado de puntos de código heredados preexistentes en lugar de asignar nuevos para ciertas letras: la 'h' minúscula en cursiva se convierte en el símbolo de la constante de Planck, y las C, H, N, P, Q, R y Z de doble trazo se convierten en sus propios símbolos matemáticos de pizarra en negrita ya establecidos desde hace tiempo: estas excepciones se aplican sobre el patrón regular del bloque, no derivadas de él."
+          },
+          {
+            "title": "Un valor de estilo no reconocido recurre a negrita en lugar de generar un error",
+            "description": "Si el valor de estilo pasado no coincide con una de las claves de estilo conocidas, la búsqueda del mapa de caracteres recurre al mapa del estilo negrita en lugar de fallar por completo: un valor predeterminado defensivo en lugar de una operación silenciosa nula."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué los espacios y cierta puntuación permanecen en texto plano mientras las letras se estilizan?",
+            "answer": "Solo se reemplazan los caracteres con una entrada en el mapa de caracteres Unicode del estilo seleccionado: ese mapa solo cubre letras (y, en la mayoría de los estilos, dígitos), ya que el bloque de Símbolos Alfanuméricos Matemáticos de Unicode del que extraen estos estilos no define versiones estilizadas de espacios o puntuación. Cualquier carácter fuera del mapa pasa completamente sin tocar, que es también por qué la salida siempre tiene la misma longitud que la entrada."
+          },
+          {
+            "question": "¿Por qué los estilos cursiva y negrita cursiva dejan los números completamente sin estilizar mientras que negrita y monoespaciado sí los estilizan?",
+            "answer": "Se reduce a lo que Unicode realmente define: el bloque de Símbolos Alfanuméricos Matemáticos incluye rangos de dígitos estilizados para algunos estilos (como negrita, monoespaciado y ancho completo) pero no para cursiva o negrita cursiva, ya que Unicode nunca asignó un bloque de dígitos cursivos distinto. La herramienta no puede estilizar lo que no existe como punto de código Unicode, por lo que esos dos estilos simplemente dejan los dígitos como texto plano."
+          },
+          {
+            "question": "¿Por qué la 'h' minúscula en cursiva se ve diferente del patrón de las otras letras cursivas?",
+            "answer": "Es una peculiaridad documentada del propio estándar Unicode, no un error en el mapeo: el punto de código que habría contenido una 'h' cursiva dedicada en el bloque de Símbolos Alfanuméricos Matemáticos se dejó sin usar, y Unicode en su lugar designa el símbolo preexistente de la constante de Planck como la 'h' cursiva para este propósito: el mapa de caracteres codifica de forma fija esta única excepción sobre su patrón regular."
+          },
+          {
+            "question": "¿Son estas 'fuentes' estilizadas realmente fuentes diferentes, o algo más?",
+            "answer": "No son fuentes en absoluto: cada carácter estilizado es un punto de código Unicode genuinamente distinto (parte del bloque de Símbolos Alfanuméricos Matemáticos o rangos similares) que resulta parecerse visualmente a una letra en negrita, cursiva o estilizada de otra manera. Esto es por qué el texto estilizado se copia y pega como esos mismos caracteres especiales en cualquier lugar, y también por qué no se lee como 'negrita' o 'cursiva' por lectores de pantalla o motores de búsqueda, que ven símbolos no relacionados en lugar de letras latinas estilizadas."
+          }
+        ]
+      },
+      "speech-word-count-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora de Conteo de Palabras para Discursos: cómo se calcula el tiempo estimado de entrega para un discurso o presentación a partir del conteo de palabras y el ritmo de habla, las variables que acepta y los casos límite que maneja.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "El mismo discurso a tres ritmos de habla",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Preajustes de ritmo",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "conteoDePalabras = texto recortado dividido por espacios en blanco | segundosTotales = redondeo(conteoDePalabras ÷ palabrasPorMinuto × 60) | minutos = piso(segundosTotales ÷ 60), segundos = resto",
+          "note": "La misma forma de división y redondeo que una estimación de tiempo de lectura, pero construida alrededor de preajustes de ritmo de habla pública (110-170 palabras por minuto) en lugar de velocidad de lectura silenciosa, ya que la entrega hablada está pautada por la respiración, la articulación y la comprensión de la audiencia en lugar del movimiento ocular de un lector."
+        },
+        "flowchart": {
+          "intro": "Un único conteo de palabras se divide entre una tasa de ritmo de habla para producir un tiempo de entrega estimado.",
+          "steps": [
+            "Recortar el texto de entrada y rechazarlo con un error de texto vacío si no queda nada",
+            "Validar que el ritmo de palabras por minuto sea un número finito entre 1 y 400; un ritmo fuera de rango o no numérico se rechaza antes de calcular cualquier tiempo",
+            "Contar palabras dividiendo el texto recortado en espacios en blanco y contando las piezas no vacías resultantes",
+            "Dividir el conteo de palabras entre el ritmo de palabras por minuto para obtener un número de minutos sin procesar, multiplicar por 60 para convertir a segundos, y redondear al segundo entero más cercano",
+            "Dividir esa cifra de segundos totales en minutos completos (mediante división entera) y los segundos sobrantes dentro del último minuto parcial"
+          ],
+          "caption": "Un conteo de palabras, dividido entre una tasa de ritmo de habla, produce un tiempo de entrega sin procesar que se redondea al segundo más cercano y luego se desempaqueta en minutos y segundos."
+        },
+        "anatomy": {
+          "intro": "El mismo texto de discurso toma un tiempo de entrega estimado diferente en cada uno de los tres preajustes de ritmo de habla incorporados.",
+          "labelFormal": "Formal",
+          "labelNormal": "Normal",
+          "labelFast": "Rápido",
+          "caption": "Un discurso de 420 palabras toma un estimado de 229 segundos (3:49) en el preajuste formal deliberado de 110 palabras por minuto, 180 segundos (3:00) en el preajuste normal de 140 ppm, y 148 segundos (2:28) en el preajuste rápido de 170 ppm."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "texto",
+            "meaning": "El texto del discurso o presentación para el cual estimar el tiempo de entrega.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "palabrasPorMinuto",
+            "meaning": "El ritmo de habla a usar, en palabras por minuto: ya sea un preajuste (formal/normal/rápido) o un valor personalizado de 1 a 400.",
+            "unit": "ppm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "El rango de ritmo de habla está limitado mucho más bajo que las tasas típicas de lectura silenciosa",
+            "description": "El rango válido llega hasta 400 palabras por minuto, muy por debajo del límite de 1000 palabras usado para la lectura silenciosa en otro lugar: esto refleja que incluso un ritmo de habla muy rápido sigue estando pautado por la respiración y la articulación de una manera en que la lectura silenciosa no lo está, por lo que una tasa más allá de unos pocos cientos de palabras por minuto no representaría un habla realista."
+          },
+          {
+            "title": "La entrega formal es el preajuste más lento, no el más rápido",
+            "description": "El preajuste formal (110 ppm) es deliberadamente el más lento de los tres, reflejando que la entrega de presentación cuidadosa y deliberada (pausando para dar énfasis, proyectando con claridad) toma más tiempo que el habla conversacional casual, lo opuesto a cómo podría leerse 'formal' si se asume que significa 'rápido' o 'eficiente.'"
+          },
+          {
+            "title": "La cifra final de segundos totales se redondea una vez, no se construye a partir de minutos y segundos redondeados por separado",
+            "description": "La conversión sin procesar de minutos a segundos se redondea primero al segundo entero más cercano, y solo después se divide en minutos y segundos restantes: esto evita el pequeño error acumulativo que podría introducir redondear minutos y segundos por separado."
+          },
+          {
+            "title": "El conteo de palabras usa la misma división simple por espacios en blanco sin importar el formato específico del discurso",
+            "description": "Las palabras se cuentan dividiendo en espacios en blanco, sin manejo especial para direcciones de escenario, notas del orador, o indicaciones entre corchetes que puedan estar incrustadas en un guion de discurso: cualquier cosa separada por espacios en blanco se cuenta como una palabra, sea o no que esté destinada a ser hablada en voz alta."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el ritmo máximo de habla es mucho más bajo que el máximo de una calculadora típica de velocidad de lectura?",
+            "answer": "El habla está pautada por la respiración, la articulación, y dar tiempo a una audiencia para comprender lo que se dice: restricciones que no se aplican a la lectura silenciosa. Incluso un orador inusualmente rápido rara vez excede unos pocos cientos de palabras por minuto en habla comprensible, por lo que el rango válido aquí está limitado a 400 palabras por minuto, muy por debajo del límite de 1000 palabras que tiene sentido para la lectura silenciosa."
+          },
+          {
+            "question": "¿Por qué 'formal' es el preajuste más lento en lugar del más rápido?",
+            "answer": "La entrega de presentación formal (el tipo usado para un discurso, una ponencia principal, o un anuncio solemne) es típicamente más lenta y deliberada que el habla casual, con pausas para dar énfasis y articulación más clara, no más rápida. Los nombres de los preajustes describen el estilo de entrega, no un ranking de velocidad, razón por la cual formal (110 ppm) es el más lento de los tres y rápido (170 ppm) es el más veloz, más cercano a cómo alguien habla en conversación casual."
+          },
+          {
+            "question": "¿Esto toma en cuenta las pausas que podría añadir para diapositivas, reacción de la audiencia, o énfasis?",
+            "answer": "No: la estimación es una división directa del conteo de palabras entre un ritmo constante de palabras por minuto, sin margen para pausas, transiciones de diapositivas, o silencio planeado. Para un discurso con pausas incorporadas significativas, el tiempo de entrega real será más largo que esta estimación; trátela como un piso para el tiempo de habla continuo, no un total que incluya descansos."
+          },
+          {
+            "question": "¿Por qué el conteo de palabras incluye cosas como direcciones de escenario si pego un guion completo?",
+            "answer": "El contador de palabras no distingue el diálogo hablado de las direcciones de escenario, etiquetas de orador, o notas entre corchetes: cuenta cada fragmento separado por espacios en blanco en la entrada como una palabra. Si su guion incluye texto no hablado, eliminarlo antes de pegar dará una estimación más precisa del tiempo real de habla."
+          }
+        ]
       }
     }
   }

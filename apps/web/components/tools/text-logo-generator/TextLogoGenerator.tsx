@@ -6,6 +6,7 @@ import { TextLogoCalculator as LogoTool } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import LogoInputPanel from "./LogoInputPanel";
 import LogoResult from "./LogoResult";
 import LogoQuickReference from "./LogoQuickReference";
@@ -40,6 +41,7 @@ export default function TextLogoGenerator({ education }: { education: ReactNode 
           sidebar={<RelatedToolsSidebar currentSlug="text-logo-generator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="text-logo-generator" />
               <SectionNav items={navItems} />
               <LogoQuickReference />
             </div>

@@ -88,6 +88,12 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "citation-generator",
   "study-time-calculator",
   "class-schedule-builder",
+  "word-counter",
+  "readability-score-calculator",
+  "reading-time-calculator",
+  "lorem-ipsum-generator",
+  "text-logo-generator",
+  "speech-word-count-calculator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

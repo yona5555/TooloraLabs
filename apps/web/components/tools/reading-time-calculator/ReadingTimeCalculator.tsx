@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import RTInputPanel from "./RTInputPanel";
 import RTResult from "./RTResult";
 import RTQuickReference from "./RTQuickReference";
@@ -55,6 +56,7 @@ export default function ReadingTimeCalculator({ education }: { education: ReactN
           sidebar={<RelatedToolsSidebar currentSlug="reading-time-calculator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="reading-time-calculator" />
               <SectionNav items={navItems} />
               <RTQuickReference />
             </div>

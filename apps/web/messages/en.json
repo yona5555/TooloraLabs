@@ -30804,6 +30804,568 @@
             "answer": "No — it's computed independently for each class (that class's own duration times how many days it meets) and then summed, without checking for or removing any double-counted overlap between different classes. This means the total represents the sum of each class's own scheduled time, not the actual number of distinct hours you'd be occupied if two classes' conflicting time is only experienced once."
           }
         ]
+      },
+      "word-counter": {
+        "version": "v1",
+        "description": "Technical reference for the Word & Character Counter: how words, characters, sentences, and top keywords are counted from text, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Ranking Top Keywords by Frequency",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Stats Computed",
+          "modesValue": "10",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "words = trimmed text split on whitespace | uniqueWords = size of the set of lowercase word tokens | topKeywords = word tokens (2+ chars, stopwords excluded) grouped, counted, and sorted by frequency, top 5 kept",
+          "note": "Several counts are derived from different tokenizations of the same text: the headline word count is a simple whitespace split, while unique-word and keyword statistics use a separate token extractor that lowercases text and matches runs of letters, digits, apostrophes, and hyphens — so a word count and a keyword list aren't counting quite the same thing under the hood."
+        },
+        "flowchart": {
+          "intro": "Every statistic is derived from the same input text, but several use their own separate tokenization pass suited to what they're measuring.",
+          "steps": [
+            "Trim the input text; an empty result after trimming reports every count as zero rather than attempting to tokenize nothing",
+            "Count characters directly (including all whitespace) and separately with every whitespace character stripped out, then split the trimmed text on runs of whitespace to get the word count",
+            "Split on sentence-terminating punctuation to count sentences, and on runs of blank lines to count paragraphs — two independent heuristics, not derived from the word count",
+            "Separately extract lowercase word tokens (letters, digits, apostrophes, and hyphens) to compute unique-word count, average word length, and the single longest word",
+            "From that same token list, discard short tokens and common stopwords, count how often each remaining word appears, then sort by frequency and keep the top 5 as the keyword list"
+          ],
+          "caption": "One input text feeds several independent tokenization passes, each suited to the specific statistic it produces."
+        },
+        "anatomy": {
+          "intro": "After stopwords and short tokens are filtered out, the remaining words are counted and ranked by frequency — the top 5 become the keyword list.",
+          "labelWord1": "growth",
+          "labelWord2": "market",
+          "labelWord3": "strategy",
+          "labelWord4": "customer",
+          "labelWord5": "brand",
+          "caption": "For a passage repeating certain topic words, the top keyword list ranks 'growth' (5 occurrences) above 'market' (4), 'strategy' (3), and two words tied at 2 — exactly the frequency ranking topKeywords produces, with common stopwords like 'the' and 'and' excluded first."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The text to analyze.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Word count and keyword extraction tokenize the text two different ways",
+            "description": "The headline word count is a simple split on whitespace runs, counting anything between spaces as a 'word' including bare punctuation; the keyword and unique-word statistics instead extract only runs of letters, digits, apostrophes, and hyphens, so these counts can diverge slightly on text with unusual punctuation."
+          },
+          {
+            "title": "Sentence splitting is a punctuation heuristic, not true grammar parsing",
+            "description": "Sentences are counted by splitting on runs ending in a period, exclamation point, or question mark, which means an abbreviation like 'Dr.' or a decimal number can be miscounted as a sentence boundary — a deliberate simplification, not a full grammatical sentence parser."
+          },
+          {
+            "title": "Words under 2 characters are excluded from the keyword list even if they're not stopwords",
+            "description": "The keyword-frequency step skips any token shorter than 2 characters in addition to skipping stopwords, so single-letter tokens never appear in the top-keywords list regardless of how often they repeat."
+          },
+          {
+            "title": "Reading time is estimated from word count using a single fixed rate, always rounded up",
+            "description": "Estimated reading time divides the word count by a fixed 200 words-per-minute and always rounds up to the next whole minute (via ceiling, not standard rounding), so even a few words over an exact minute boundary bumps the estimate up rather than down."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why can the keyword list and the total word count seem inconsistent on text with lots of punctuation or short words?",
+            "answer": "They come from two separate tokenization passes over the same text. The total word count is a simple split on whitespace, counting any whitespace-separated chunk — even bare punctuation — as a word, while the keyword extractor only pulls out runs of letters, digits, apostrophes, and hyphens, deliberately excluding this stray punctuation and very short tokens from the frequency ranking."
+          },
+          {
+            "question": "Why are common words like 'the' and 'and' left out of the top keywords list?",
+            "answer": "They're filtered by a stopword list before frequency counting — high-frequency grammatical words like articles, conjunctions, and pronouns would otherwise dominate the top-5 ranking in nearly any passage, crowding out the actual topic words the keyword list is meant to surface. Both English and Arabic stopwords are included in this filter."
+          },
+          {
+            "question": "Why might the sentence count be off for text containing abbreviations or decimal numbers?",
+            "answer": "Sentence counting is a punctuation-based heuristic — it looks for runs of text ending in a period, exclamation point, or question mark — rather than a full grammatical parser that understands that 'Dr.' or '3.14' aren't sentence endings. This keeps the counter fast and dependency-free, at the cost of occasionally over-counting sentences in text with many abbreviations or decimals."
+          },
+          {
+            "question": "Why does the estimated reading time always round up, even by a fraction of a minute?",
+            "answer": "The estimate uses a ceiling function rather than standard rounding, so a passage that would take, say, 2 minutes and 5 seconds at the assumed reading speed is reported as 3 minutes rather than rounding down to 2 — a deliberate choice to avoid ever underestimating how long a passage will take to read."
+          }
+        ]
+      },
+      "readability-score-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Readability Score Calculator: how the Flesch Reading Ease score and Flesch-Kincaid Grade Level are computed from a passage of text, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Where a Score Falls on the Reading-Ease Scale",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Score Bands",
+          "modesValue": "7",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Flesch Reading Ease = 206.835 − 1.015×(words/sentences) − 84.6×(syllables/words) | Flesch-Kincaid Grade = 0.39×(words/sentences) + 11.8×(syllables/words) − 15.59",
+          "note": "Both formulas use the same two ratios — average words per sentence, and average syllables per word — as their only inputs. Reading ease runs on a roughly 0-100 scale where higher means easier to read; grade level estimates the U.S. school grade a reader would need, so the two scores move in opposite directions from the same underlying complexity."
+        },
+        "flowchart": {
+          "intro": "The text is broken into words and sentences using punctuation-based heuristics, then each word is run through a syllable-counting heuristic before the two Flesch formulas are applied.",
+          "steps": [
+            "Tokenize the text into words by splitting on whitespace and discarding any token with no letters or digits, and separately split it into sentence-like chunks by grouping runs of text that end in a period, exclamation point, or question mark",
+            "Reject the input with a distinct error if no words remain after tokenizing, or if no sentence-like chunks can be found — both are needed before any ratio can be computed",
+            "Count syllables in each word with a heuristic: words of 3 letters or fewer count as one syllable; longer words are counted by their vowel groups, with a trailing silent 'e' dropped first unless it's part of a syllabic 'consonant + le' ending like 'simple' or 'table'",
+            "Compute the two ratios the formulas depend on: average words per sentence, and average syllables per word, across the whole text",
+            "Plug both ratios into the Flesch Reading Ease and Flesch-Kincaid Grade Level formulas, then classify the reading-ease score into one of seven human-readable bands from 'very easy' to 'very confusing'"
+          ],
+          "caption": "Word and sentence tokenization feeds a syllable-counting pass, and both ratios flow into the two Flesch formulas together."
+        },
+        "anatomy": {
+          "intro": "The Flesch Reading Ease score places a passage on a 0-100 scale, with published band boundaries at 30, 60, and 90 marking the difficult, standard, and very-easy cutoffs.",
+          "caption": "A score of 65 sits just above the 60-point standard cutoff and well below the 90-point very-easy cutoff — landing it in the 'standard' band, roughly the reading level of a typical magazine article."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The passage of English text to analyze.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Both formulas share the same two inputs, so the reading-ease and grade-level scores always move in opposite directions",
+            "description": "Reading ease is scaled so that a higher number means easier text, while grade level is scaled so that a higher number means harder text — both are computed from the identical words-per-sentence and syllables-per-word ratios, just combined with opposite-signed coefficients, so a passage never scores 'easy' on one scale and 'hard' on the other."
+          },
+          {
+            "title": "The syllable counter's silent-e rule specifically protects 'consonant + le' endings",
+            "description": "A trailing 'e' is dropped before counting vowel groups (turning 'make' into a one-syllable 'mak'), except when the letter before the final 'le' is itself a consonant — a case like 'simple' or 'table' where that final 'e' actually carries its own syllable, and dropping it would undercount."
+          },
+          {
+            "title": "Words of 3 letters or fewer are always counted as exactly one syllable, no vowel-counting involved",
+            "description": "Very short words (like 'a,' 'the,' 'is') skip the vowel-group counting logic entirely and are hardcoded to one syllable — a shortcut that avoids edge cases in words too short for the general heuristic to reliably handle."
+          },
+          {
+            "title": "Empty input and 'no sentences found' are reported as two distinct errors",
+            "description": "Text that's empty or contains no recognizable word tokens returns an empty-text error; text with words but no punctuation the sentence-splitter recognizes returns a separate no-sentences error — both stop the calculation, but they point to different problems with the input."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do the reading-ease score and the grade-level score seem to measure the same thing but move in opposite directions?",
+            "answer": "They're deliberately designed as complementary views of the same complexity: reading ease is scaled 0-100 with higher meaning easier, styled after test-score conventions, while grade level is scaled to match U.S. school grades, where a higher number means a more advanced, harder-to-read text. Both formulas take the exact same two inputs — words per sentence and syllables per word — just weighted with coefficients of opposite sign."
+          },
+          {
+            "question": "Why does the syllable counter treat words like 'simple' and 'table' differently from words like 'make' or 'take'?",
+            "answer": "In 'make,' the trailing 'e' is silent and doesn't add a syllable, so it's dropped before counting. But in 'simple' or 'table,' that final '-le' is actually pronounced as its own syllable, carried by the 'l' rather than a vowel — the counter specifically checks whether the letter before the final 'le' is a consonant to distinguish this case, since dropping the 'e' there would undercount by one syllable."
+          },
+          {
+            "question": "Is the syllable count linguistically exact?",
+            "answer": "No — it's a fast heuristic based on counting groups of vowels, with a couple of well-known adjustments for silent and syllabic 'e' endings. It handles the common cases correctly but isn't a dictionary-backed pronunciation lookup, so unusual or irregular words can occasionally be miscounted by a syllable."
+          },
+          {
+            "question": "What's the difference between the empty-text error and the no-sentences error?",
+            "answer": "Empty-text means the input had no usable word tokens at all — either it was blank, or every token was pure punctuation with no letters or digits. No-sentences means real words were found, but the sentence-splitting step couldn't identify any punctuation marks to break the text into sentence-like chunks — for example, a single long run-on phrase with no terminal punctuation at all."
+          }
+        ]
+      },
+      "reading-time-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Reading Time Calculator: how the estimated time to read a passage is computed from word count and reading speed, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The Same Passage at Three Reading Speeds",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Speed Presets",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "wordCount = trimmed text split on whitespace | totalSeconds = round(wordCount ÷ wordsPerMinute × 60) | minutes = floor(totalSeconds ÷ 60), seconds = remainder",
+          "note": "The word count comes from a simple whitespace split of the input text, independent of the chosen reading speed. That single word count is then divided by whichever words-per-minute rate is selected — a built-in slow/average/fast preset, or a custom rate — to get a raw minute figure, which is converted to seconds, rounded to the nearest whole second, and finally split back into whole minutes and leftover seconds."
+        },
+        "flowchart": {
+          "intro": "A single word count feeds into one division, with the reading-speed rate as the only variable between presets.",
+          "steps": [
+            "Trim the input text and reject it with an empty-text error if nothing remains",
+            "Validate the words-per-minute rate is a finite number between 1 and 1000; an out-of-range or non-numeric rate is rejected before any time is computed",
+            "Count words by splitting the trimmed text on whitespace and counting the resulting non-empty pieces",
+            "Divide the word count by the words-per-minute rate to get a raw number of minutes, multiply by 60 to convert to seconds, and round to the nearest whole second",
+            "Split that total-seconds figure into whole minutes (via integer division) and the leftover seconds within the final partial minute"
+          ],
+          "caption": "One word count, divided by one reading-speed rate, produces a raw time that's rounded to the nearest second and then unpacked into minutes and seconds."
+        },
+        "anatomy": {
+          "intro": "The same word count produces a different estimated time at each of the three built-in reading-speed presets.",
+          "labelSlow": "Slow",
+          "labelAverage": "Average",
+          "labelFast": "Fast",
+          "caption": "A 500-word passage takes an estimated 200 seconds (3:20) at the slow 150-words-per-minute preset, 130 seconds (2:10) at the average 230 wpm preset, and 100 seconds (1:40) at the fast 300 wpm preset — the same word count, three different rates."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The text to estimate reading time for.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "wordsPerMinute",
+            "meaning": "The reading speed to use, in words per minute — either a preset (slow/average/fast) or a custom value from 1 to 1000.",
+            "unit": "wpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "The words-per-minute rate is strictly bounded, even for a custom value",
+            "description": "Any rate outside 1 to 1000 words per minute is rejected with an invalid-rate error, regardless of whether it came from a preset or a custom entry — this guards against a zero, negative, or absurdly large rate producing a nonsensical or divide-by-zero time estimate."
+          },
+          {
+            "title": "The final total-seconds figure is rounded once, not built up from separately rounded minutes and seconds",
+            "description": "The raw minutes-to-seconds conversion is rounded to the nearest whole second first, and only then split into minutes and remaining seconds — rounding at the very end this way avoids the small compounding error that rounding minutes and seconds separately could introduce."
+          },
+          {
+            "title": "Word count uses a simple whitespace split, the same tokenization regardless of language or punctuation",
+            "description": "Words are counted by splitting on runs of whitespace, with no special handling for punctuation attached to words or for languages that don't use spaces between words the way English does — a deliberately simple, fast approach rather than a language-aware tokenizer."
+          },
+          {
+            "title": "Preset reading speeds are fixed reference values, not personalized to the actual reader",
+            "description": "The slow/average/fast presets (150/230/300 words per minute) are standard reference speeds for silent reading of English text — they don't adapt to a specific individual's actual reading speed, which the custom rate option exists to accommodate."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the words-per-minute rate capped at 1 to 1000, even in custom mode?",
+            "answer": "A rate of zero would make the time calculation divide by zero, and a negative or absurdly high rate wouldn't correspond to any realistic reading speed — capping the valid range keeps the estimate meaningful regardless of what a user types into the custom field."
+          },
+          {
+            "question": "Why might my reading time estimate not match how fast I personally read?",
+            "answer": "The built-in presets (150, 230, and 300 words per minute for slow, average, and fast) are standard reference speeds for silent reading of English text in general, not measurements of any specific person's actual reading speed, which varies quite a bit by individual, familiarity with the topic, and text difficulty. The custom rate option exists specifically so you can plug in your own known reading speed instead."
+          },
+          {
+            "question": "Does the word count for reading time use the same method as a word processor's word count?",
+            "answer": "It uses a simple split on whitespace, counting any non-empty chunk between spaces as one word — this is a common, fast approach but can differ slightly from more sophisticated word counters that handle hyphenated words, em-dashes, or other punctuation differently."
+          },
+          {
+            "question": "Why are minutes and seconds computed from a single rounded total, instead of rounding each separately?",
+            "answer": "Rounding the raw time to the nearest second first, and only afterward splitting it into minutes and leftover seconds, avoids a small but real class of rounding errors that can occur when two related numbers are each rounded independently — the displayed minutes and seconds always add up exactly to the single rounded total-seconds figure."
+          }
+        ]
+      },
+      "lorem-ipsum-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Lorem Ipsum Generator: how random placeholder text is assembled from a fixed word bank into words, sentences, or paragraphs, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Two Word Banks, Two Vocabularies",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Output Units",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Sentence = 5-14 random words from the chosen word bank, capitalized and punctuated | Paragraph = 3-6 random sentences joined | Output = the requested count of the chosen unit",
+          "note": "Every sentence and paragraph is assembled from independently random word choices drawn from one of two fixed word banks — 62 classic Latin-derived words, or 51 modern business-jargon words — with sentence length and paragraph length each randomized within their own fixed range on every generation."
+        },
+        "flowchart": {
+          "intro": "Generation branches by which unit (words, sentences, or paragraphs) was requested, but all three ultimately draw from the same word bank and random word picker.",
+          "steps": [
+            "Reject the request immediately if the requested count isn't a whole number between 1 and 50",
+            "Select the word bank: the classic Latin-derived list, or the modern business-jargon list, based on the chosen style",
+            "For a words request: build the requested number of random words directly from the bank; for a sentences request: build each sentence as 5 to 14 random words, capitalized and ending in a period; for a paragraphs request: build each paragraph as 3 to 6 such sentences joined together",
+            "If 'start with Lorem ipsum' is enabled and the style is classic, splice the fixed classic opening sentence in as the first sentence, first paragraph, or leading words, instead of generating that portion randomly",
+            "Join the generated pieces with the appropriate separator — spaces between sentences, blank lines between paragraphs — and separately count the total words in the final output"
+          ],
+          "caption": "The same word bank and random picker generate words, sentences, or paragraphs, just assembled with different length ranges and joining rules."
+        },
+        "anatomy": {
+          "intro": "The two word banks differ in both size and vocabulary — the classic bank draws from traditional Latin filler text, the modern bank from business jargon.",
+          "labelClassic": "Classic",
+          "labelModern": "Modern",
+          "caption": "The classic word bank holds 62 Latin-derived words, while the modern business-jargon bank holds 51 — every generated sentence or paragraph draws its random words from whichever of these two lists matches the chosen style."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "unit",
+            "meaning": "What to generate: paragraphs, sentences, or words.",
+            "unit": "—"
+          },
+          {
+            "symbol": "count",
+            "meaning": "How many of the chosen unit to generate, from 1 to 50.",
+            "unit": "—"
+          },
+          {
+            "symbol": "style",
+            "meaning": "Which word bank to draw from: classic (Latin-derived) or modern (business jargon).",
+            "unit": "—"
+          },
+          {
+            "symbol": "startWithLorem",
+            "meaning": "Whether to begin with the fixed classic opening sentence. Only applies when style is classic.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "The count must be a whole number within 1 to 50, or the request is rejected outright",
+            "description": "A non-integer count, or one outside the 1-50 range, returns an invalid-count error before any text is generated — there's no clamping to the nearest valid value, so an out-of-range request produces no output at all rather than a silently adjusted one."
+          },
+          {
+            "title": "'Start with Lorem ipsum' is silently ignored outside the classic style",
+            "description": "The startWithLorem option only has an effect when style is 'classic' — requesting it alongside the 'modern' style doesn't error, it's simply not applied, since the fixed opening sentence is written in the classic Latin-derived vocabulary and wouldn't make sense spliced into modern-style output."
+          },
+          {
+            "title": "The fixed opening sentence can still leave room for randomly generated words in a words-count request",
+            "description": "When generating a words-count request with the opening enabled, only as many opening words as needed (up to the requested count) are used, and if the requested count exceeds the opening's own word count, the remaining words are filled in randomly from the word bank to reach the exact requested total."
+          },
+          {
+            "title": "The final word count is computed from the generated text itself, not predicted from the requested count",
+            "description": "Rather than assuming the output word count equals the requested count (which is only true for a words-unit request), the tool actually splits and counts the words in the final generated text — for a sentences or paragraphs request, this reports the real total words across all the randomly-sized sentences generated, not an estimate."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why can't the count go above 50?",
+            "answer": "The 1-to-50 cap keeps generation fast and the output a reasonable size for typical placeholder-text use, like filling in a mockup or testing a layout — there's no technical reason a larger cap couldn't exist, but 50 paragraphs or sentences already produces far more text than most placeholder use cases need."
+          },
+          {
+            "question": "What happens if I enable 'start with Lorem ipsum' but choose the modern style?",
+            "answer": "The option is simply not applied — the modern-style output generates entirely from the modern business-jargon word bank, with no error or warning. The classic opening sentence only ever appears when the style is set to classic, since it's written in Latin-derived vocabulary that wouldn't fit alongside modern jargon words."
+          },
+          {
+            "question": "Why is the reported word count sometimes not exactly what I'd expect from the count I entered?",
+            "answer": "The word count field reports the actual number of words in the generated text, counted after generation — this only equals your requested count when generating a words-unit request. For a sentences or paragraphs request, each sentence's length (5 to 14 words) and each paragraph's sentence count (3 to 6) are randomized, so the true total word count naturally varies between generations even for the same requested count."
+          },
+          {
+            "question": "What's actually different between the 'classic' and 'modern' styles besides the vocabulary?",
+            "answer": "The underlying generation logic — sentence length, paragraph length, capitalization, and punctuation — is identical between the two styles; only the word bank they draw from differs, 62 traditional Latin-derived words for classic versus 51 contemporary business-jargon words for modern. The 'start with Lorem ipsum' option is the one behavior that's exclusive to the classic style."
+          }
+        ]
+      },
+      "text-logo-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Text Logo Generator: how text is converted into stylized Unicode characters like bold, italic, and double-struck, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Not Every Character Has a Styled Equivalent",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Styles",
+          "modesValue": "7",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "styledText = each character of the input, replaced via a per-style Unicode character map, or left unchanged if no mapped equivalent exists",
+          "note": "Each style (bold, italic, double-struck, and so on) is backed by its own lookup table mapping every A-Z, a-z, and (for most styles) 0-9 character to a single corresponding Unicode code point from the Mathematical Alphanumeric Symbols block or a similar range. A handful of letters have documented exceptions where Unicode reuses an existing legacy symbol instead of allocating a new code point in the block."
+        },
+        "flowchart": {
+          "intro": "Every character of the input is looked up independently in the selected style's character map and replaced, or passed through unchanged if it isn't a mapped letter or digit.",
+          "steps": [
+            "Trim the input text and reject it with an empty-text error if nothing remains",
+            "Select the character map for the chosen style; each style's map is built once from a base Unicode code point for uppercase letters, a base for lowercase letters, and (for most styles) a base for digits",
+            "Apply documented per-character exceptions to the generated map — cases where Unicode reuses an existing legacy symbol instead of following the block's regular offset pattern",
+            "Split the input into individual characters and look each one up in the style's map",
+            "Replace every character that has a mapped equivalent with its styled Unicode counterpart, and leave any character without one exactly as it was"
+          ],
+          "caption": "Each character is looked up independently in the style's map — mapped characters are swapped for their styled Unicode equivalent, everything else passes through untouched."
+        },
+        "anatomy": {
+          "intro": "Not every character in the input has a styled equivalent — spaces and unmapped punctuation simply pass through unchanged.",
+          "labelStyled": "Styled",
+          "labelUnchanged": "Unchanged",
+          "totalLabel": "\"Hello World\" (11 Characters)",
+          "caption": "In the 11-character phrase 'Hello World,' the 10 letters are each replaced via the style's Unicode character map, while the 1 space has no mapped equivalent and passes through exactly as typed."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The text to convert.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "style",
+            "meaning": "Which Unicode styling to apply: bold, italic, bold italic, double-struck, monospace, fullwidth, or circled.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Characters with no mapped equivalent pass through completely unchanged, not dropped or replaced with a placeholder",
+            "description": "A character not found in the style's map (spaces, punctuation, or digits in a style with no digit mapping) is kept exactly as it appeared in the input — the output is always the same length as the input, character for character."
+          },
+          {
+            "title": "Several styles have no digit mapping at all, unlike most letter-only styles",
+            "description": "Italic and bold-italic are built without a digits argument, so numerals in the input to those two styles are left completely unstyled, passing through as plain digits, while styles like bold, monospace, and fullwidth do map 0-9 to styled equivalents."
+          },
+          {
+            "title": "A handful of individual letters deliberately override the block's regular offset pattern",
+            "description": "Unicode's Mathematical Alphanumeric Symbols block reuses a handful of pre-existing legacy code points instead of allocating new ones for certain letters — italic lowercase 'h' becomes the Planck constant symbol, and double-struck C, H, N, P, Q, R, and Z become their own long-established blackboard-bold math symbols — these exceptions are applied on top of the block's regular pattern, not derived from it."
+          },
+          {
+            "title": "An unrecognized style value falls back to bold rather than erroring",
+            "description": "If the style value passed in doesn't match one of the known style keys, the character map lookup falls back to the bold style's map rather than failing outright — a defensive default rather than a silent no-op."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do spaces and some punctuation stay in plain text while letters get styled?",
+            "answer": "Only characters with an entry in the selected style's Unicode character map get replaced — that map only covers letters (and, in most styles, digits), since Unicode's Mathematical Alphanumeric Symbols block that these styles draw from doesn't define styled versions of spaces or punctuation. Any character outside the map is passed through completely untouched, which is also why the output is always the same length as the input."
+          },
+          {
+            "question": "Why do the italic and bold-italic styles leave numbers completely unstyled while bold and monospace do style them?",
+            "answer": "It comes down to what Unicode actually defines: the Mathematical Alphanumeric Symbols block includes styled digit ranges for some styles (like bold, monospace, and fullwidth) but not for italic or bold-italic, since Unicode never allocated a distinct italic-digit block. The tool can't style what doesn't exist as a Unicode code point, so those two styles simply leave digits as plain text."
+          },
+          {
+            "question": "Why does italic lowercase 'h' look different from the pattern of the other italic letters?",
+            "answer": "It's a documented quirk of the Unicode standard itself, not a bug in the mapping: the code point that would have held a dedicated italic 'h' in the Mathematical Alphanumeric Symbols block was left unused, and Unicode instead designates the pre-existing Planck constant symbol as the italic 'h' for this purpose — the character map hardcodes this one exception on top of its regular pattern."
+          },
+          {
+            "question": "Are these styled 'fonts' actually different fonts, or something else?",
+            "answer": "They're not fonts at all — each styled character is a genuinely distinct Unicode code point (part of the Mathematical Alphanumeric Symbols block or similar ranges) that happens to visually resemble a bold, italic, or otherwise styled letter. This is why styled text copy-pastes as those same special characters anywhere, and also why it isn't read as 'bold' or 'italic' by screen readers or search engines, which see unrelated symbols rather than styled Latin letters."
+          }
+        ]
+      },
+      "speech-word-count-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Speech Word Count Calculator: how the estimated delivery time for a speech or presentation is computed from word count and speaking pace, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The Same Speech at Three Speaking Paces",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Pace Presets",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "wordCount = trimmed text split on whitespace | totalSeconds = round(wordCount ÷ wordsPerMinute × 60) | minutes = floor(totalSeconds ÷ 60), seconds = remainder",
+          "note": "The same division-and-rounding shape as a reading-time estimate, but built around public-speaking pace presets (110-170 words per minute) rather than silent-reading speed, since spoken delivery is paced by breath, articulation, and audience comprehension rather than a reader's eye movement."
+        },
+        "flowchart": {
+          "intro": "A single word count is divided by a speaking-pace rate to produce an estimated delivery time.",
+          "steps": [
+            "Trim the input text and reject it with an empty-text error if nothing remains",
+            "Validate the words-per-minute pace is a finite number between 1 and 400; an out-of-range or non-numeric pace is rejected before any time is computed",
+            "Count words by splitting the trimmed text on whitespace and counting the resulting non-empty pieces",
+            "Divide the word count by the words-per-minute pace to get a raw number of minutes, multiply by 60 to convert to seconds, and round to the nearest whole second",
+            "Split that total-seconds figure into whole minutes (via integer division) and the leftover seconds within the final partial minute"
+          ],
+          "caption": "One word count, divided by one speaking-pace rate, produces a raw delivery time that's rounded to the nearest second and then unpacked into minutes and seconds."
+        },
+        "anatomy": {
+          "intro": "The same speech text takes a different estimated delivery time at each of the three built-in speaking-pace presets.",
+          "labelFormal": "Formal",
+          "labelNormal": "Normal",
+          "labelFast": "Fast",
+          "caption": "A 420-word speech takes an estimated 229 seconds (3:49) at the deliberate 110-words-per-minute formal preset, 180 seconds (3:00) at the 140 wpm normal preset, and 148 seconds (2:28) at the 170 wpm fast preset."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The speech or presentation text to estimate delivery time for.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "wordsPerMinute",
+            "meaning": "The speaking pace to use, in words per minute — either a preset (formal/normal/fast) or a custom value from 1 to 400.",
+            "unit": "wpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "The speaking-pace range is capped much lower than typical silent-reading rates",
+            "description": "The valid range tops out at 400 words per minute, well below the 1000-word ceiling used for silent reading elsewhere — reflecting that even a very fast speaking pace is still paced by breath and articulation in a way silent reading isn't, so a rate beyond a few hundred words per minute wouldn't represent realistic speech."
+          },
+          {
+            "title": "Formal delivery is the slowest preset, not the fastest",
+            "description": "The formal preset (110 wpm) is deliberately the slowest of the three, reflecting that careful, deliberate presentation delivery — pausing for emphasis, projecting clearly — takes longer than casual conversational speech, the opposite of how 'formal' might read if assumed to mean 'brisk' or 'efficient.'"
+          },
+          {
+            "title": "The final total-seconds figure is rounded once, not built up from separately rounded minutes and seconds",
+            "description": "The raw minutes-to-seconds conversion is rounded to the nearest whole second first, and only then split into minutes and remaining seconds — this avoids the small compounding error that rounding minutes and seconds separately could introduce."
+          },
+          {
+            "title": "Word count uses the same simple whitespace split regardless of speech-specific formatting",
+            "description": "Words are counted by splitting on whitespace, with no special handling for stage directions, speaker notes, or bracketed cues that might be embedded in a speech script — anything separated by whitespace is counted as a word, whether or not it's meant to be spoken aloud."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the maximum speaking pace so much lower than a typical reading-speed calculator's maximum?",
+            "answer": "Speech is paced by breath, articulation, and giving an audience time to comprehend what's being said — constraints that don't apply to silent reading. Even an unusually fast speaker rarely exceeds a few hundred words per minute in comprehensible speech, so the valid range here is capped at 400 words per minute, well below the 1000-word ceiling that makes sense for silent reading."
+          },
+          {
+            "question": "Why is 'formal' the slowest preset instead of the fastest?",
+            "answer": "Formal presentation delivery — the kind used for a speech, a keynote, or a solemn announcement — is typically slower and more deliberate than casual speech, with pauses for emphasis and clearer articulation, not faster. The preset names describe delivery style, not speed ranking, which is why formal (110 wpm) is the slowest of the three and fast (170 wpm) is the quickest, closer to how someone speaks in casual conversation."
+          },
+          {
+            "question": "Does this account for pauses I might add for slides, audience reaction, or emphasis?",
+            "answer": "No — the estimate is a straight division of word count by a steady words-per-minute pace, with no allowance for pauses, slide transitions, or planned silence. For a speech with significant built-in pauses, the actual delivery time will run longer than this estimate; treat it as a floor for continuous speaking time, not a total including breaks."
+          },
+          {
+            "question": "Why does the word count include things like stage directions if I paste in a full script?",
+            "answer": "The word counter doesn't distinguish spoken dialogue from stage directions, speaker labels, or bracketed notes — it counts every whitespace-separated chunk in the input as a word. If your script includes non-spoken text, removing it before pasting will give a more accurate estimate of actual speaking time."
+          }
+        ]
       }
     }
   }

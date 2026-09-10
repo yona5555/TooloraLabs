@@ -30804,6 +30804,568 @@
             "answer": "Nein — sie wird unabhängig für jeden Kurs berechnet (die eigene Dauer dieses Kurses multipliziert mit der Anzahl der Tage, an denen er stattfindet) und dann summiert, ohne auf doppelt gezählte Überlappung zwischen verschiedenen Kursen zu prüfen oder sie zu entfernen. Das bedeutet, die Summe stellt die Summe der eigenen geplanten Zeit jedes Kurses dar, nicht die tatsächliche Anzahl unterschiedlicher Stunden, die Sie beschäftigt wären, wenn die kollidierende Zeit zweier Kurse nur einmal erlebt wird."
           }
         ]
+      },
+      "word-counter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Wort- & Zeichenzähler: wie Wörter, Zeichen, Sätze und häufigste Schlüsselwörter aus Text gezählt werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Top-Schlüsselwörter nach Häufigkeit ranken",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Berechnete Werte",
+          "modesValue": "10",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Wörter = getrimmter Text, geteilt an Leerzeichen | eindeutigeWörter = Größe der Menge kleingeschriebener Wort-Tokens | topKeywords = Wort-Tokens (2+ Zeichen, ohne Stoppwörter) gruppiert, gezählt und nach Häufigkeit sortiert, Top 5 behalten",
+          "note": "Mehrere Werte werden aus unterschiedlichen Tokenisierungen desselben Textes abgeleitet: die Hauptwortzahl ist eine einfache Aufteilung nach Leerzeichen, während die Statistiken für eindeutige Wörter und Schlüsselwörter einen separaten Token-Extraktor verwenden, der Text kleinschreibt und Folgen von Buchstaben, Ziffern, Apostrophen und Bindestrichen erfasst — ein Wortzähler und eine Schlüsselwortliste zählen also unter der Haube nicht ganz dasselbe."
+        },
+        "flowchart": {
+          "intro": "Jede Statistik wird aus demselben Eingabetext abgeleitet, aber mehrere verwenden ihren eigenen separaten Tokenisierungsdurchlauf, passend zu dem, was sie messen.",
+          "steps": [
+            "Den Eingabetext trimmen; ein leeres Ergebnis nach dem Trimmen meldet jeden Wert als null, statt zu versuchen, nichts zu tokenisieren",
+            "Zeichen direkt zählen (einschließlich aller Leerzeichen) und separat mit entfernten Leerzeichen, dann den getrimmten Text an Leerzeichen-Folgen teilen, um die Wortzahl zu erhalten",
+            "An satzbeendender Zeichensetzung teilen, um Sätze zu zählen, und an Folgen von Leerzeilen, um Absätze zu zählen — zwei unabhängige Heuristiken, nicht aus der Wortzahl abgeleitet",
+            "Separat kleingeschriebene Wort-Tokens (Buchstaben, Ziffern, Apostrophe und Bindestriche) extrahieren, um die Anzahl eindeutiger Wörter, die durchschnittliche Wortlänge und das längste Wort zu berechnen",
+            "Aus derselben Token-Liste kurze Tokens und häufige Stoppwörter verwerfen, zählen, wie oft jedes verbleibende Wort vorkommt, dann nach Häufigkeit sortieren und die Top 5 als Schlüsselwortliste behalten"
+          ],
+          "caption": "Ein Eingabetext speist mehrere unabhängige Tokenisierungsdurchläufe, jeder passend zur spezifischen Statistik, die er erzeugt."
+        },
+        "anatomy": {
+          "intro": "Nachdem Stoppwörter und kurze Tokens herausgefiltert sind, werden die verbleibenden Wörter gezählt und nach Häufigkeit gerankt — die Top 5 werden zur Schlüsselwortliste.",
+          "labelWord1": "Wachstum",
+          "labelWord2": "Markt",
+          "labelWord3": "Strategie",
+          "labelWord4": "Kunde",
+          "labelWord5": "Marke",
+          "caption": "Für eine Passage, die bestimmte Themenwörter wiederholt, rankt die Top-Schlüsselwortliste 'Wachstum' (5 Vorkommen) über 'Markt' (4), 'Strategie' (3) und zwei Wörter gleichauf bei 2 — genau das Häufigkeitsranking, das topKeywords erzeugt, wobei häufige Stoppwörter wie 'the' und 'and' zuerst ausgeschlossen werden."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der zu analysierende Text.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Wortzahl und Schlüsselwort-Extraktion tokenisieren den Text auf zwei verschiedene Arten",
+            "description": "Die Hauptwortzahl ist eine einfache Aufteilung an Leerzeichen-Folgen, die alles zwischen Leerzeichen als 'Wort' zählt, einschließlich bloßer Zeichensetzung; die Schlüsselwort- und Statistiken für eindeutige Wörter extrahieren stattdessen nur Folgen von Buchstaben, Ziffern, Apostrophen und Bindestrichen, sodass diese Zahlen bei Text mit ungewöhnlicher Zeichensetzung leicht auseinanderlaufen können."
+          },
+          {
+            "title": "Satzaufteilung ist eine Zeichensetzungs-Heuristik, keine echte Grammatikanalyse",
+            "description": "Sätze werden gezählt, indem an Folgen geteilt wird, die mit einem Punkt, Ausrufezeichen oder Fragezeichen enden, was bedeutet, dass eine Abkürzung wie 'Dr.' oder eine Dezimalzahl fälschlich als Satzgrenze gezählt werden kann — eine bewusste Vereinfachung, kein vollständiger grammatikalischer Satzparser."
+          },
+          {
+            "title": "Wörter unter 2 Zeichen werden aus der Schlüsselwortliste ausgeschlossen, selbst wenn sie keine Stoppwörter sind",
+            "description": "Der Schlüsselwort-Häufigkeitsschritt überspringt jedes Token, das kürzer als 2 Zeichen ist, zusätzlich zum Überspringen von Stoppwörtern, sodass Ein-Buchstaben-Tokens nie in der Top-Schlüsselwortliste erscheinen, egal wie oft sie sich wiederholen."
+          },
+          {
+            "title": "Die Lesezeit wird aus der Wortzahl mit einer einzigen festen Rate geschätzt, immer aufgerundet",
+            "description": "Die geschätzte Lesezeit teilt die Wortzahl durch feste 200 Wörter pro Minute und rundet immer auf die nächste ganze Minute auf (über Aufrundung, nicht Standardrundung), sodass selbst ein paar Wörter über einer exakten Minutengrenze die Schätzung nach oben statt nach unten verschieben."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum können die Schlüsselwortliste und die Gesamtwortzahl bei Text mit viel Zeichensetzung oder kurzen Wörtern inkonsistent wirken?",
+            "answer": "Sie stammen aus zwei separaten Tokenisierungsdurchläufen über denselben Text. Die Gesamtwortzahl ist eine einfache Aufteilung an Leerzeichen, die jeden durch Leerzeichen getrennten Abschnitt — selbst bloße Zeichensetzung — als Wort zählt, während der Schlüsselwort-Extraktor nur Folgen von Buchstaben, Ziffern, Apostrophen und Bindestrichen herauszieht und diese verirrte Zeichensetzung und sehr kurze Tokens bewusst vom Häufigkeitsranking ausschließt."
+          },
+          {
+            "question": "Warum werden häufige Wörter wie 'the' und 'and' aus der Top-Schlüsselwortliste weggelassen?",
+            "answer": "Sie werden vor der Häufigkeitszählung durch eine Stoppwortliste gefiltert — hochfrequente grammatikalische Wörter wie Artikel, Konjunktionen und Pronomen würden sonst das Top-5-Ranking in fast jeder Passage dominieren und die eigentlichen Themenwörter verdrängen, die die Schlüsselwortliste zeigen soll. Sowohl englische als auch arabische Stoppwörter sind in diesem Filter enthalten."
+          },
+          {
+            "question": "Warum könnte die Satzanzahl bei Text mit Abkürzungen oder Dezimalzahlen falsch sein?",
+            "answer": "Die Satzzählung ist eine zeichensetzungsbasierte Heuristik — sie sucht nach Textfolgen, die mit einem Punkt, Ausrufezeichen oder Fragezeichen enden — statt einem vollständigen grammatikalischen Parser, der versteht, dass 'Dr.' oder '3,14' keine Satzenden sind. Dies hält den Zähler schnell und ohne Abhängigkeiten, auf Kosten gelegentlicher Überzählung von Sätzen in Text mit vielen Abkürzungen oder Dezimalzahlen."
+          },
+          {
+            "question": "Warum rundet die geschätzte Lesezeit immer auf, selbst um einen Bruchteil einer Minute?",
+            "answer": "Die Schätzung verwendet eine Aufrundungsfunktion statt Standardrundung, sodass eine Passage, die bei der angenommenen Lesegeschwindigkeit beispielsweise 2 Minuten und 5 Sekunden dauern würde, als 3 Minuten gemeldet wird, statt auf 2 abzurunden — eine bewusste Wahl, um die Lesedauer einer Passage nie zu unterschätzen."
+          }
+        ]
+      },
+      "readability-score-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Lesbarkeits-Score-Rechner: wie der Flesch-Reading-Ease-Score und das Flesch-Kincaid-Klassenstufe aus einer Textpassage berechnet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Wo ein Score auf der Lesbarkeitsskala liegt",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Score-Bänder",
+          "modesValue": "7",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Flesch Reading Ease = 206,835 − 1,015×(Wörter/Sätze) − 84,6×(Silben/Wörter) | Flesch-Kincaid-Klassenstufe = 0,39×(Wörter/Sätze) + 11,8×(Silben/Wörter) − 15,59",
+          "note": "Beide Formeln verwenden dieselben zwei Verhältnisse — durchschnittliche Wörter pro Satz und durchschnittliche Silben pro Wort — als einzige Eingaben. Reading Ease läuft auf einer Skala von grob 0-100, wobei höher leichter zu lesen bedeutet; die Klassenstufe schätzt die US-Schulklasse, die ein Leser bräuchte, sodass sich die beiden Werte aus derselben zugrunde liegenden Komplexität in entgegengesetzte Richtungen bewegen."
+        },
+        "flowchart": {
+          "intro": "Der Text wird mit zeichensetzungsbasierten Heuristiken in Wörter und Sätze zerlegt, dann durchläuft jedes Wort eine Silbenzähl-Heuristik, bevor die beiden Flesch-Formeln angewendet werden.",
+          "steps": [
+            "Den Text durch Aufteilen an Leerzeichen in Wörter tokenisieren und jedes Token ohne Buchstaben oder Ziffern verwerfen, und ihn separat in satzähnliche Abschnitte aufteilen, indem Textfolgen gruppiert werden, die mit einem Punkt, Ausrufezeichen oder Fragezeichen enden",
+            "Die Eingabe mit einem eigenen Fehler ablehnen, wenn nach der Tokenisierung keine Wörter übrig bleiben, oder wenn keine satzähnlichen Abschnitte gefunden werden können — beides wird benötigt, bevor irgendein Verhältnis berechnet werden kann",
+            "Silben in jedem Wort mit einer Heuristik zählen: Wörter mit 3 oder weniger Buchstaben zählen als eine Silbe; längere Wörter werden anhand ihrer Vokalgruppen gezählt, wobei ein abschließendes stummes 'e' zuerst entfernt wird, es sei denn, es ist Teil einer silbischen 'Konsonant + le'-Endung wie 'simple' oder 'table'",
+            "Die beiden Verhältnisse berechnen, von denen die Formeln abhängen: durchschnittliche Wörter pro Satz und durchschnittliche Silben pro Wort, über den gesamten Text",
+            "Beide Verhältnisse in die Formeln für Flesch Reading Ease und Flesch-Kincaid-Klassenstufe einsetzen, dann den Reading-Ease-Score in eines von sieben menschenlesbaren Bändern von 'sehr leicht' bis 'sehr verwirrend' einordnen"
+          ],
+          "caption": "Wort- und Satztokenisierung speist einen Silbenzähldurchlauf, und beide Verhältnisse fließen gemeinsam in die beiden Flesch-Formeln."
+        },
+        "anatomy": {
+          "intro": "Der Flesch-Reading-Ease-Score platziert eine Passage auf einer Skala von 0-100, mit veröffentlichten Bandgrenzen bei 30, 60 und 90, die die Grenzen für schwierig, standard und sehr leicht markieren.",
+          "caption": "Ein Score von 65 liegt knapp über der 60-Punkte-Standardgrenze und deutlich unter der 90-Punkte-Sehr-leicht-Grenze — was ihn ins 'Standard'-Band einordnet, etwa das Leseniveau eines typischen Zeitschriftenartikels."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Die zu analysierende englische Textpassage.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Beide Formeln teilen dieselben zwei Eingaben, sodass sich Reading-Ease- und Klassenstufen-Score immer in entgegengesetzte Richtungen bewegen",
+            "description": "Reading Ease ist so skaliert, dass eine höhere Zahl leichteren Text bedeutet, während die Klassenstufe so skaliert ist, dass eine höhere Zahl schwierigeren Text bedeutet — beide werden aus identischen Wörter-pro-Satz- und Silben-pro-Wort-Verhältnissen berechnet, nur mit entgegengesetzt vorzeichenbehafteten Koeffizienten kombiniert, sodass eine Passage nie auf einer Skala 'leicht' und auf der anderen 'schwer' abschneidet."
+          },
+          {
+            "title": "Die Stumme-e-Regel des Silbenzählers schützt speziell 'Konsonant + le'-Endungen",
+            "description": "Ein abschließendes 'e' wird vor dem Zählen der Vokalgruppen entfernt (was 'make' in ein einsilbiges 'mak' verwandelt), außer wenn der Buchstabe vor dem letzten 'le' selbst ein Konsonant ist — ein Fall wie 'simple' oder 'table', wo dieses letzte 'e' tatsächlich seine eigene Silbe trägt, und es zu entfernen würde die Zählung unterschätzen."
+          },
+          {
+            "title": "Wörter mit 3 oder weniger Buchstaben werden immer als genau eine Silbe gezählt, ohne Vokalzählung",
+            "description": "Sehr kurze Wörter (wie 'a', 'the', 'is') überspringen die Vokalgruppen-Zähllogik vollständig und sind fest auf eine Silbe codiert — eine Abkürzung, die Grenzfälle bei Wörtern vermeidet, die zu kurz sind, als dass die allgemeine Heuristik sie zuverlässig handhaben könnte."
+          },
+          {
+            "title": "Leere Eingabe und 'keine Sätze gefunden' werden als zwei unterschiedliche Fehler gemeldet",
+            "description": "Text, der leer ist oder keine erkennbaren Wort-Tokens enthält, gibt einen Fehler für leeren Text zurück; Text mit Wörtern, aber ohne Zeichensetzung, die der Satzaufteiler erkennt, gibt einen separaten Fehler für keine Sätze zurück — beide stoppen die Berechnung, weisen aber auf unterschiedliche Probleme mit der Eingabe hin."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum scheinen der Reading-Ease-Score und der Klassenstufen-Score dasselbe zu messen, bewegen sich aber in entgegengesetzte Richtungen?",
+            "answer": "Sie sind bewusst als komplementäre Ansichten derselben Komplexität konzipiert: Reading Ease ist 0-100 skaliert, wobei höher leichter bedeutet, angelehnt an Testergebnis-Konventionen, während die Klassenstufe an US-Schulklassen angepasst ist, wo eine höhere Zahl einen fortgeschritteneren, schwerer zu lesenden Text bedeutet. Beide Formeln nehmen genau dieselben zwei Eingaben — Wörter pro Satz und Silben pro Wort —, nur mit entgegengesetzt vorzeichenbehafteten Koeffizienten gewichtet."
+          },
+          {
+            "question": "Warum behandelt der Silbenzähler Wörter wie 'simple' und 'table' anders als Wörter wie 'make' oder 'take'?",
+            "answer": "Bei 'make' ist das abschließende 'e' stumm und fügt keine Silbe hinzu, daher wird es vor dem Zählen entfernt. Aber bei 'simple' oder 'table' wird dieses abschließende '-le' tatsächlich als eigene Silbe ausgesprochen, getragen vom 'l' statt einem Vokal — der Zähler prüft speziell, ob der Buchstabe vor dem letzten 'le' ein Konsonant ist, um diesen Fall zu unterscheiden, da das Entfernen des 'e' dort um eine Silbe unterzählen würde."
+          },
+          {
+            "question": "Ist die Silbenzählung linguistisch exakt?",
+            "answer": "Nein — es ist eine schnelle Heuristik basierend auf dem Zählen von Vokalgruppen, mit ein paar bekannten Anpassungen für stumme und silbische 'e'-Endungen. Sie handhabt die üblichen Fälle korrekt, ist aber kein wörterbuchgestütztes Ausspracheverzeichnis, sodass ungewöhnliche oder unregelmäßige Wörter gelegentlich um eine Silbe falsch gezählt werden können."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen dem Fehler für leeren Text und dem Fehler für keine Sätze?",
+            "answer": "Leerer Text bedeutet, dass die Eingabe überhaupt keine nutzbaren Wort-Tokens enthielt — entweder war sie leer, oder jedes Token war reine Zeichensetzung ohne Buchstaben oder Ziffern. Keine Sätze bedeutet, dass echte Wörter gefunden wurden, aber der Satzaufteilungsschritt keine Zeichensetzungsmarken identifizieren konnte, um den Text in satzähnliche Abschnitte zu zerlegen — zum Beispiel eine einzige lange Schachtelphrase ganz ohne abschließende Zeichensetzung."
+          }
+        ]
+      },
+      "reading-time-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Lesezeit-Rechner: wie die geschätzte Zeit zum Lesen einer Passage aus Wortzahl und Lesegeschwindigkeit berechnet wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Dieselbe Passage bei drei Lesegeschwindigkeiten",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Geschwindigkeits-Presets",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Wortzahl = getrimmter Text, geteilt an Leerzeichen | Gesamtsekunden = gerundet(Wortzahl ÷ WörterProMinute × 60) | Minuten = abgerundet(Gesamtsekunden ÷ 60), Sekunden = Rest",
+          "note": "Die Wortzahl stammt aus einer einfachen Leerzeichen-Aufteilung des Eingabetexts, unabhängig von der gewählten Lesegeschwindigkeit. Diese einzelne Wortzahl wird dann durch die gewählte Wörter-pro-Minute-Rate geteilt — ein eingebautes Langsam-/Durchschnitt-/Schnell-Preset oder eine benutzerdefinierte Rate —, um eine rohe Minutenzahl zu erhalten, die in Sekunden umgerechnet, auf die nächste ganze Sekunde gerundet und schließlich zurück in ganze Minuten und übrige Sekunden aufgeteilt wird."
+        },
+        "flowchart": {
+          "intro": "Eine einzelne Wortzahl speist eine Division, wobei die Lesegeschwindigkeits-Rate die einzige Variable zwischen den Presets ist.",
+          "steps": [
+            "Den Eingabetext trimmen und mit einem Fehler für leeren Text ablehnen, falls nichts übrig bleibt",
+            "Prüfen, dass die Wörter-pro-Minute-Rate eine endliche Zahl zwischen 1 und 1000 ist; eine Rate außerhalb des Bereichs oder nicht-numerische Rate wird abgelehnt, bevor irgendeine Zeit berechnet wird",
+            "Wörter zählen, indem der getrimmte Text an Leerzeichen geteilt und die resultierenden nicht-leeren Stücke gezählt werden",
+            "Die Wortzahl durch die Wörter-pro-Minute-Rate teilen, um eine rohe Minutenzahl zu erhalten, mit 60 multiplizieren, um in Sekunden umzurechnen, und auf die nächste ganze Sekunde runden",
+            "Diese Gesamtsekunden-Zahl in ganze Minuten (über Ganzzahldivision) und die übrigen Sekunden innerhalb der letzten Teilminute aufteilen"
+          ],
+          "caption": "Eine Wortzahl, geteilt durch eine Lesegeschwindigkeits-Rate, erzeugt eine rohe Zeit, die auf die nächste Sekunde gerundet und dann in Minuten und Sekunden entpackt wird."
+        },
+        "anatomy": {
+          "intro": "Dieselbe Wortzahl erzeugt bei jedem der drei eingebauten Lesegeschwindigkeits-Presets eine unterschiedliche geschätzte Zeit.",
+          "labelSlow": "Langsam",
+          "labelAverage": "Durchschnitt",
+          "labelFast": "Schnell",
+          "caption": "Eine 500-Wort-Passage dauert geschätzt 200 Sekunden (3:20) beim langsamen 150-Wörter-pro-Minute-Preset, 130 Sekunden (2:10) beim durchschnittlichen 230-wpm-Preset, und 100 Sekunden (1:40) beim schnellen 300-wpm-Preset — dieselbe Wortzahl, drei unterschiedliche Raten."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der Text, für den die Lesezeit geschätzt werden soll.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "WörterProMinute",
+            "meaning": "Die zu verwendende Lesegeschwindigkeit, in Wörtern pro Minute — entweder ein Preset (langsam/durchschnitt/schnell) oder ein benutzerdefinierter Wert von 1 bis 1000.",
+            "unit": "wpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Wörter-pro-Minute-Rate ist streng begrenzt, selbst für einen benutzerdefinierten Wert",
+            "description": "Jede Rate außerhalb von 1 bis 1000 Wörtern pro Minute wird mit einem Fehler für ungültige Rate abgelehnt, unabhängig davon, ob sie von einem Preset oder einer benutzerdefinierten Eingabe stammt — dies schützt davor, dass eine null, negative oder absurd große Rate eine unsinnige oder Divisionsdurch-null-Zeitschätzung erzeugt."
+          },
+          {
+            "title": "Die endgültige Gesamtsekunden-Zahl wird einmal gerundet, nicht aus separat gerundeten Minuten und Sekunden aufgebaut",
+            "description": "Die rohe Minuten-zu-Sekunden-Umrechnung wird zuerst auf die nächste ganze Sekunde gerundet, und erst dann in Minuten und verbleibende Sekunden aufgeteilt — das Runden ganz am Ende auf diese Weise vermeidet den kleinen sich summierenden Fehler, den separates Runden von Minuten und Sekunden einführen könnte."
+          },
+          {
+            "title": "Die Wortzahl verwendet eine einfache Leerzeichen-Aufteilung, dieselbe Tokenisierung unabhängig von Sprache oder Zeichensetzung",
+            "description": "Wörter werden gezählt, indem an Leerzeichen-Folgen geteilt wird, ohne besondere Behandlung für an Wörtern angehängte Zeichensetzung oder für Sprachen, die nicht wie Englisch Leerzeichen zwischen Wörtern verwenden — ein bewusst einfacher, schneller Ansatz statt eines sprachbewussten Tokenizers."
+          },
+          {
+            "title": "Voreingestellte Lesegeschwindigkeiten sind feste Referenzwerte, nicht auf den tatsächlichen Leser personalisiert",
+            "description": "Die Langsam-/Durchschnitt-/Schnell-Presets (150/230/300 Wörter pro Minute) sind Standard-Referenzgeschwindigkeiten für stilles Lesen von englischem Text — sie passen sich nicht an die tatsächliche Lesegeschwindigkeit einer bestimmten Person an, wofür die Option der benutzerdefinierten Rate existiert."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist die Wörter-pro-Minute-Rate auf 1 bis 1000 begrenzt, selbst im benutzerdefinierten Modus?",
+            "answer": "Eine Rate von null würde die Zeitberechnung durch null teilen lassen, und eine negative oder absurd hohe Rate würde keiner realistischen Lesegeschwindigkeit entsprechen — die Begrenzung des gültigen Bereichs hält die Schätzung sinnvoll, unabhängig davon, was ein Benutzer in das benutzerdefinierte Feld eingibt."
+          },
+          {
+            "question": "Warum stimmt meine Lesezeitschätzung möglicherweise nicht mit meiner persönlichen Lesegeschwindigkeit überein?",
+            "answer": "Die eingebauten Presets (150, 230 und 300 Wörter pro Minute für langsam, durchschnittlich und schnell) sind allgemeine Standard-Referenzgeschwindigkeiten für stilles Lesen von englischem Text, keine Messungen der tatsächlichen Lesegeschwindigkeit einer bestimmten Person, die je nach Individuum, Vertrautheit mit dem Thema und Textschwierigkeit stark variiert. Die Option der benutzerdefinierten Rate existiert speziell, damit Sie Ihre eigene bekannte Lesegeschwindigkeit eingeben können."
+          },
+          {
+            "question": "Verwendet die Wortzahl für die Lesezeit dieselbe Methode wie die Wortzahl eines Textverarbeitungsprogramms?",
+            "answer": "Sie verwendet eine einfache Aufteilung an Leerzeichen, wobei jeder nicht-leere Abschnitt zwischen Leerzeichen als ein Wort gezählt wird — dies ist ein gängiger, schneller Ansatz, kann sich aber leicht von anspruchsvolleren Wortzählern unterscheiden, die Bindestrichwörter, Gedankenstriche oder andere Zeichensetzung unterschiedlich behandeln."
+          },
+          {
+            "question": "Warum werden Minuten und Sekunden aus einer einzigen gerundeten Summe berechnet, statt jede separat zu runden?",
+            "answer": "Zuerst die rohe Zeit auf die nächste Sekunde zu runden und sie erst danach in Minuten und übrige Sekunden aufzuteilen, vermeidet eine kleine, aber reale Klasse von Rundungsfehlern, die auftreten kann, wenn zwei zusammenhängende Zahlen jeweils unabhängig gerundet werden — die angezeigten Minuten und Sekunden addieren sich immer exakt zur einzigen gerundeten Gesamtsekunden-Zahl."
+          }
+        ]
+      },
+      "lorem-ipsum-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Lorem-Ipsum-Generator: wie zufälliger Platzhaltertext aus einer festen Wortbank in Wörter, Sätze oder Absätze zusammengesetzt wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Zwei Wortbanken, zwei Vokabulare",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ausgabeeinheiten",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Satz = 5-14 zufällige Wörter aus der gewählten Wortbank, großgeschrieben und interpunktiert | Absatz = 3-6 zufällige Sätze zusammengefügt | Ausgabe = die angeforderte Anzahl der gewählten Einheit",
+          "note": "Jeder Satz und Absatz wird aus unabhängig zufälligen Wortauswahlen zusammengesetzt, gezogen aus einer von zwei festen Wortbanken — 62 klassische, lateinisch abgeleitete Wörter oder 51 moderne Business-Jargon-Wörter —, wobei Satzlänge und Absatzlänge bei jeder Generierung jeweils innerhalb ihres eigenen festen Bereichs zufällig bestimmt werden."
+        },
+        "flowchart": {
+          "intro": "Die Generierung verzweigt sich danach, welche Einheit (Wörter, Sätze oder Absätze) angefordert wurde, aber alle drei greifen letztlich auf dieselbe Wortbank und denselben Zufallswort-Auswähler zurück.",
+          "steps": [
+            "Die Anfrage sofort ablehnen, wenn die angeforderte Anzahl keine ganze Zahl zwischen 1 und 50 ist",
+            "Die Wortbank auswählen: die klassische, lateinisch abgeleitete Liste oder die moderne Business-Jargon-Liste, basierend auf dem gewählten Stil",
+            "Bei einer Wörter-Anfrage: die angeforderte Anzahl zufälliger Wörter direkt aus der Bank aufbauen; bei einer Sätze-Anfrage: jeden Satz als 5 bis 14 zufällige Wörter aufbauen, großgeschrieben und mit einem Punkt endend; bei einer Absätze-Anfrage: jeden Absatz als 3 bis 6 solcher zusammengefügter Sätze aufbauen",
+            "Wenn 'mit Lorem ipsum beginnen' aktiviert ist und der Stil klassisch ist, den festen klassischen Eröffnungssatz als ersten Satz, ersten Absatz oder führende Wörter einfügen, statt diesen Teil zufällig zu generieren",
+            "Die generierten Teile mit dem passenden Trennzeichen verbinden — Leerzeichen zwischen Sätzen, Leerzeilen zwischen Absätzen — und separat die Gesamtwörter in der endgültigen Ausgabe zählen"
+          ],
+          "caption": "Dieselbe Wortbank und derselbe Zufallswort-Auswähler erzeugen Wörter, Sätze oder Absätze, nur mit unterschiedlichen Längenbereichen und Verbindungsregeln zusammengesetzt."
+        },
+        "anatomy": {
+          "intro": "Die beiden Wortbanken unterscheiden sich sowohl in Größe als auch Vokabular — die klassische Bank schöpft aus traditionellem lateinischem Fülltext, die moderne Bank aus Business-Jargon.",
+          "labelClassic": "Klassisch",
+          "labelModern": "Modern",
+          "caption": "Die klassische Wortbank enthält 62 lateinisch abgeleitete Wörter, während die moderne Business-Jargon-Bank 51 enthält — jeder generierte Satz oder Absatz zieht seine zufälligen Wörter aus welcher dieser beiden Listen dem gewählten Stil entspricht."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Einheit",
+            "meaning": "Was generiert werden soll: Absätze, Sätze oder Wörter.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Anzahl",
+            "meaning": "Wie viele der gewählten Einheit generiert werden sollen, von 1 bis 50.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Stil",
+            "meaning": "Aus welcher Wortbank geschöpft werden soll: klassisch (lateinisch abgeleitet) oder modern (Business-Jargon).",
+            "unit": "—"
+          },
+          {
+            "symbol": "MitLoremBeginnen",
+            "meaning": "Ob mit dem festen klassischen Eröffnungssatz begonnen werden soll. Gilt nur, wenn der Stil klassisch ist.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Die Anzahl muss eine ganze Zahl zwischen 1 und 50 sein, sonst wird die Anfrage rundweg abgelehnt",
+            "description": "Eine nicht-ganzzahlige Anzahl, oder eine außerhalb des 1-50-Bereichs, gibt einen Fehler für ungültige Anzahl zurück, bevor irgendein Text generiert wird — es gibt keine Begrenzung auf den nächstgültigen Wert, sodass eine Anfrage außerhalb des Bereichs überhaupt keine Ausgabe erzeugt, statt einer stillschweigend angepassten."
+          },
+          {
+            "title": "'Mit Lorem ipsum beginnen' wird außerhalb des klassischen Stils stillschweigend ignoriert",
+            "description": "Die Option MitLoremBeginnen wirkt sich nur aus, wenn der Stil 'klassisch' ist — sie zusammen mit dem Stil 'modern' anzufordern, verursacht keinen Fehler, sie wird einfach nicht angewendet, da der feste Eröffnungssatz im klassischen, lateinisch abgeleiteten Vokabular geschrieben ist und keinen Sinn ergäbe, in modernstilige Ausgabe eingefügt zu werden."
+          },
+          {
+            "title": "Der feste Eröffnungssatz kann bei einer Wörter-Anzahl-Anfrage immer noch Raum für zufällig generierte Wörter lassen",
+            "description": "Bei der Generierung einer Wörter-Anzahl-Anfrage mit aktivierter Eröffnung werden nur so viele Eröffnungswörter wie nötig (bis zur angeforderten Anzahl) verwendet, und wenn die angeforderte Anzahl die eigene Wortzahl der Eröffnung übersteigt, werden die verbleibenden Wörter zufällig aus der Wortbank aufgefüllt, um genau die angeforderte Gesamtzahl zu erreichen."
+          },
+          {
+            "title": "Die endgültige Wortzahl wird aus dem generierten Text selbst berechnet, nicht aus der angeforderten Anzahl vorhergesagt",
+            "description": "Statt anzunehmen, dass die Ausgabe-Wortzahl der angeforderten Anzahl entspricht (was nur bei einer Wörter-Einheiten-Anfrage zutrifft), teilt und zählt das Tool tatsächlich die Wörter im endgültigen generierten Text — bei einer Sätze- oder Absätze-Anfrage meldet dies die echte Gesamtwortzahl über alle zufällig bemessenen generierten Sätze hinweg, keine Schätzung."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum kann die Anzahl nicht über 50 gehen?",
+            "answer": "Die Obergrenze von 1 bis 50 hält die Generierung schnell und die Ausgabe in einer angemessenen Größe für typische Platzhaltertext-Verwendung, wie das Füllen eines Mockups oder das Testen eines Layouts — es gibt keinen technischen Grund, warum eine höhere Obergrenze nicht existieren könnte, aber 50 Absätze oder Sätze erzeugen bereits weit mehr Text, als die meisten Platzhalter-Anwendungsfälle benötigen."
+          },
+          {
+            "question": "Was passiert, wenn ich 'mit Lorem ipsum beginnen' aktiviere, aber den modernen Stil wähle?",
+            "answer": "Die Option wird einfach nicht angewendet — die modernstilige Ausgabe wird vollständig aus der modernen Business-Jargon-Wortbank generiert, ohne Fehler oder Warnung. Der klassische Eröffnungssatz erscheint nur, wenn der Stil auf klassisch gesetzt ist, da er in lateinisch abgeleitetem Vokabular geschrieben ist, das nicht zu modernen Jargon-Wörtern passen würde."
+          },
+          {
+            "question": "Warum ist die gemeldete Wortzahl manchmal nicht genau das, was ich von der eingegebenen Anzahl erwarten würde?",
+            "answer": "Das Wortzahl-Feld meldet die tatsächliche Anzahl der Wörter im generierten Text, gezählt nach der Generierung — dies entspricht nur Ihrer angeforderten Anzahl, wenn eine Wörter-Einheiten-Anfrage generiert wird. Bei einer Sätze- oder Absätze-Anfrage wird die Länge jedes Satzes (5 bis 14 Wörter) und die Satzanzahl jedes Absatzes (3 bis 6) zufällig bestimmt, sodass die tatsächliche Gesamtwortzahl zwischen Generierungen natürlich variiert, selbst bei derselben angeforderten Anzahl."
+          },
+          {
+            "question": "Was ist eigentlich der Unterschied zwischen den Stilen 'klassisch' und 'modern' außer dem Vokabular?",
+            "answer": "Die zugrunde liegende Generierungslogik — Satzlänge, Absatzlänge, Großschreibung und Zeichensetzung — ist zwischen den beiden Stilen identisch; nur die Wortbank, aus der sie schöpfen, unterscheidet sich, 62 traditionelle, lateinisch abgeleitete Wörter für klassisch gegenüber 51 zeitgenössischen Business-Jargon-Wörtern für modern. Die Option 'mit Lorem ipsum beginnen' ist das einzige Verhalten, das exklusiv dem klassischen Stil vorbehalten ist."
+          }
+        ]
+      },
+      "text-logo-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Text-Logo-Generator: wie Text in stilisierte Unicode-Zeichen wie fett, kursiv und doppelt durchgestrichen umgewandelt wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Nicht jedes Zeichen hat ein stilisiertes Äquivalent",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Stile",
+          "modesValue": "7",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "stilisierterText = jedes Zeichen der Eingabe, ersetzt über eine stilspezifische Unicode-Zeichentabelle, oder unverändert belassen, falls kein zugeordnetes Äquivalent existiert",
+          "note": "Jeder Stil (fett, kursiv, doppelt durchgestrichen usw.) wird von seiner eigenen Nachschlagetabelle unterstützt, die jeden A-Z-, a-z- und (bei den meisten Stilen) 0-9-Charakter einem einzigen entsprechenden Unicode-Codepunkt aus dem Block der mathematischen alphanumerischen Symbole oder einem ähnlichen Bereich zuordnet. Eine Handvoll Buchstaben haben dokumentierte Ausnahmen, bei denen Unicode ein vorhandenes Legacy-Symbol wiederverwendet, statt einen neuen Codepunkt im Block zuzuweisen."
+        },
+        "flowchart": {
+          "intro": "Jedes Zeichen der Eingabe wird unabhängig in der Zeichentabelle des gewählten Stils nachgeschlagen und ersetzt, oder unverändert durchgereicht, wenn es kein zugeordneter Buchstabe oder Ziffer ist.",
+          "steps": [
+            "Den Eingabetext trimmen und mit einem Fehler für leeren Text ablehnen, falls nichts übrig bleibt",
+            "Die Zeichentabelle für den gewählten Stil auswählen; die Tabelle jedes Stils wird einmal aus einem Basis-Unicode-Codepunkt für Großbuchstaben, einer Basis für Kleinbuchstaben und (bei den meisten Stilen) einer Basis für Ziffern aufgebaut",
+            "Dokumentierte Ausnahmen pro Zeichen auf die generierte Tabelle anwenden — Fälle, in denen Unicode ein vorhandenes Legacy-Symbol wiederverwendet, statt dem regulären Versatzmuster des Blocks zu folgen",
+            "Die Eingabe in einzelne Zeichen aufteilen und jedes in der Tabelle des Stils nachschlagen",
+            "Jedes Zeichen mit einem zugeordneten Äquivalent durch sein stilisiertes Unicode-Gegenstück ersetzen und jedes Zeichen ohne eines genau so belassen, wie es war"
+          ],
+          "caption": "Jedes Zeichen wird unabhängig in der Tabelle des Stils nachgeschlagen — zugeordnete Zeichen werden gegen ihr stilisiertes Unicode-Äquivalent getauscht, alles andere passiert unangetastet durch."
+        },
+        "anatomy": {
+          "intro": "Nicht jedes Zeichen in der Eingabe hat ein stilisiertes Äquivalent — Leerzeichen und nicht zugeordnete Zeichensetzung passieren einfach unverändert durch.",
+          "labelStyled": "Stilisiert",
+          "labelUnchanged": "Unverändert",
+          "totalLabel": "„Hello World“ (11 Zeichen)",
+          "caption": "In der 11-zeichigen Phrase „Hello World“ werden die 10 Buchstaben jeweils über die Unicode-Zeichentabelle des Stils ersetzt, während das 1 Leerzeichen kein zugeordnetes Äquivalent hat und genau so durchgeht, wie es eingegeben wurde."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der umzuwandelnde Text.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Stil",
+            "meaning": "Welche Unicode-Stilisierung angewendet werden soll: fett, kursiv, fett kursiv, doppelt durchgestrichen, Monospace, Vollbreite oder eingekreist.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Zeichen ohne zugeordnetes Äquivalent passieren vollständig unverändert durch, werden nicht verworfen oder durch einen Platzhalter ersetzt",
+            "description": "Ein Zeichen, das nicht in der Tabelle des Stils gefunden wird (Leerzeichen, Zeichensetzung oder Ziffern bei einem Stil ohne Ziffernzuordnung), wird genau so beibehalten, wie es in der Eingabe erschien — die Ausgabe ist immer genau so lang wie die Eingabe, Zeichen für Zeichen."
+          },
+          {
+            "title": "Mehrere Stile haben überhaupt keine Ziffernzuordnung, anders als die meisten reinen Buchstabenstile",
+            "description": "Kursiv und Fett-kursiv sind ohne Ziffern-Argument aufgebaut, sodass Zahlen in der Eingabe für diese beiden Stile völlig unstilisiert bleiben und als normale Ziffern durchgehen, während Stile wie fett, Monospace und Vollbreite 0-9 tatsächlich stilisierten Äquivalenten zuordnen."
+          },
+          {
+            "title": "Eine Handvoll einzelner Buchstaben überschreibt absichtlich das reguläre Versatzmuster des Blocks",
+            "description": "Der Block der mathematischen alphanumerischen Symbole in Unicode verwendet eine Handvoll bereits vorhandener Legacy-Codepunkte wieder, statt für bestimmte Buchstaben neue zuzuweisen — kursives kleines 'h' wird zum Planck-Konstanten-Symbol, und doppelt durchgestrichene C, H, N, P, Q, R und Z werden zu ihren eigenen, seit langem etablierten Tafel-fett-Mathematiksymbolen — diese Ausnahmen werden auf das reguläre Muster des Blocks aufgesetzt, nicht daraus abgeleitet."
+          },
+          {
+            "title": "Ein nicht erkannter Stilwert fällt auf fett zurück, statt einen Fehler zu erzeugen",
+            "description": "Wenn der übergebene Stilwert keinem der bekannten Stilschlüssel entspricht, fällt die Zeichentabellensuche auf die Tabelle des fetten Stils zurück, statt komplett zu scheitern — ein defensiver Standardwert statt eines stillschweigenden Nichtstuns."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum bleiben Leerzeichen und manche Zeichensetzung als normaler Text, während Buchstaben stilisiert werden?",
+            "answer": "Nur Zeichen mit einem Eintrag in der Unicode-Zeichentabelle des gewählten Stils werden ersetzt — diese Tabelle deckt nur Buchstaben ab (und bei den meisten Stilen Ziffern), da der Block der mathematischen alphanumerischen Symbole in Unicode, aus dem diese Stile schöpfen, keine stilisierten Versionen von Leerzeichen oder Zeichensetzung definiert. Jedes Zeichen außerhalb der Tabelle wird vollständig unangetastet durchgereicht, weshalb die Ausgabe auch immer genau so lang wie die Eingabe ist."
+          },
+          {
+            "question": "Warum lassen die Stile kursiv und fett-kursiv Zahlen völlig unstilisiert, während fett und Monospace sie stilisieren?",
+            "answer": "Es kommt darauf an, was Unicode tatsächlich definiert: Der Block der mathematischen alphanumerischen Symbole enthält stilisierte Ziffernbereiche für manche Stile (wie fett, Monospace und Vollbreite), aber nicht für kursiv oder fett-kursiv, da Unicode nie einen eigenen kursiven Ziffernblock zugewiesen hat. Das Tool kann nicht stilisieren, was als Unicode-Codepunkt nicht existiert, daher lassen diese beiden Stile Ziffern einfach als reinen Text."
+          },
+          {
+            "question": "Warum sieht das kursive kleine 'h' anders aus als das Muster der anderen kursiven Buchstaben?",
+            "answer": "Es ist eine dokumentierte Eigenart des Unicode-Standards selbst, kein Fehler in der Zuordnung: Der Codepunkt, der ein dediziertes kursives 'h' im Block der mathematischen alphanumerischen Symbole enthalten hätte, wurde unbenutzt gelassen, und Unicode weist stattdessen das bereits vorhandene Planck-Konstanten-Symbol als das kursive 'h' zu diesem Zweck zu — die Zeichentabelle codiert diese eine Ausnahme fest, oben auf ihrem regulären Muster."
+          },
+          {
+            "question": "Sind diese stilisierten 'Schriften' tatsächlich verschiedene Schriftarten, oder etwas anderes?",
+            "answer": "Sie sind überhaupt keine Schriftarten — jedes stilisierte Zeichen ist ein tatsächlich eigenständiger Unicode-Codepunkt (Teil des Blocks der mathematischen alphanumerischen Symbole oder ähnlicher Bereiche), der zufällig visuell einem fetten, kursiven oder anderweitig stilisierten Buchstaben ähnelt. Deshalb wird stilisierter Text überall als dieselben speziellen Zeichen kopiert und eingefügt, und deshalb wird er auch nicht von Screenreadern oder Suchmaschinen als 'fett' oder 'kursiv' gelesen, die unabhängige Symbole statt stilisierter lateinischer Buchstaben sehen."
+          }
+        ]
+      },
+      "speech-word-count-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Redezeit-Wortzähler: wie die geschätzte Vortragszeit für eine Rede oder Präsentation aus Wortzahl und Sprechtempo berechnet wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Dieselbe Rede bei drei Sprechtempi",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Tempo-Presets",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Wortzahl = getrimmter Text, geteilt an Leerzeichen | Gesamtsekunden = gerundet(Wortzahl ÷ WörterProMinute × 60) | Minuten = abgerundet(Gesamtsekunden ÷ 60), Sekunden = Rest",
+          "note": "Dieselbe Divisions- und Rundungsform wie eine Lesezeitschätzung, aber aufgebaut um Presets für das Tempo öffentlichen Sprechens (110-170 Wörter pro Minute) statt um stille Lesegeschwindigkeit, da das gesprochene Vortragen von Atmung, Artikulation und Publikumsverständnis getaktet wird, nicht von der Augenbewegung eines Lesers."
+        },
+        "flowchart": {
+          "intro": "Eine einzelne Wortzahl wird durch eine Sprechtempo-Rate geteilt, um eine geschätzte Vortragszeit zu erzeugen.",
+          "steps": [
+            "Den Eingabetext trimmen und mit einem Fehler für leeren Text ablehnen, falls nichts übrig bleibt",
+            "Prüfen, dass das Wörter-pro-Minute-Tempo eine endliche Zahl zwischen 1 und 400 ist; ein Tempo außerhalb des Bereichs oder nicht-numerisch wird abgelehnt, bevor irgendeine Zeit berechnet wird",
+            "Wörter zählen, indem der getrimmte Text an Leerzeichen geteilt und die resultierenden nicht-leeren Stücke gezählt werden",
+            "Die Wortzahl durch das Wörter-pro-Minute-Tempo teilen, um eine rohe Minutenzahl zu erhalten, mit 60 multiplizieren, um in Sekunden umzurechnen, und auf die nächste ganze Sekunde runden",
+            "Diese Gesamtsekunden-Zahl in ganze Minuten (über Ganzzahldivision) und die übrigen Sekunden innerhalb der letzten Teilminute aufteilen"
+          ],
+          "caption": "Eine Wortzahl, geteilt durch eine Sprechtempo-Rate, erzeugt eine rohe Vortragszeit, die auf die nächste Sekunde gerundet und dann in Minuten und Sekunden entpackt wird."
+        },
+        "anatomy": {
+          "intro": "Derselbe Redetext benötigt bei jedem der drei eingebauten Sprechtempo-Presets eine unterschiedliche geschätzte Vortragszeit.",
+          "labelFormal": "Formell",
+          "labelNormal": "Normal",
+          "labelFast": "Schnell",
+          "caption": "Eine 420-Wort-Rede dauert geschätzt 229 Sekunden (3:49) beim bedächtigen 110-Wörter-pro-Minute-formellen Preset, 180 Sekunden (3:00) beim 140-wpm-normalen Preset und 148 Sekunden (2:28) beim 170-wpm-schnellen Preset."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der Rede- oder Präsentationstext, für den die Vortragszeit geschätzt werden soll.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "WörterProMinute",
+            "meaning": "Das zu verwendende Sprechtempo, in Wörtern pro Minute — entweder ein Preset (formell/normal/schnell) oder ein benutzerdefinierter Wert von 1 bis 400.",
+            "unit": "wpm"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Der Sprechtempo-Bereich ist viel niedriger begrenzt als typische Stilllese-Raten",
+            "description": "Der gültige Bereich endet bei 400 Wörtern pro Minute, weit unter der 1000-Wörter-Obergrenze, die anderswo für stilles Lesen verwendet wird — das spiegelt wider, dass selbst ein sehr schnelles Sprechtempo immer noch von Atmung und Artikulation getaktet wird, wie es beim stillen Lesen nicht der Fall ist, sodass eine Rate jenseits weniger hundert Wörter pro Minute keine realistische Sprache darstellen würde."
+          },
+          {
+            "title": "Formeller Vortrag ist das langsamste Preset, nicht das schnellste",
+            "description": "Das formelle Preset (110 wpm) ist bewusst das langsamste der drei, was widerspiegelt, dass sorgfältiger, bedächtiger Präsentationsvortrag — mit Pausen zur Betonung, klarer Aussprache — länger dauert als lässiges Konversationssprechen, das Gegenteil davon, wie 'formell' gelesen werden könnte, wenn man annimmt, es bedeute 'zügig' oder 'effizient'."
+          },
+          {
+            "title": "Die endgültige Gesamtsekunden-Zahl wird einmal gerundet, nicht aus separat gerundeten Minuten und Sekunden aufgebaut",
+            "description": "Die rohe Minuten-zu-Sekunden-Umrechnung wird zuerst auf die nächste ganze Sekunde gerundet, und erst dann in Minuten und verbleibende Sekunden aufgeteilt — dies vermeidet den kleinen sich summierenden Fehler, den separates Runden von Minuten und Sekunden einführen könnte."
+          },
+          {
+            "title": "Die Wortzahl verwendet dieselbe einfache Leerzeichen-Aufteilung, unabhängig von redespezifischer Formatierung",
+            "description": "Wörter werden gezählt, indem an Leerzeichen geteilt wird, ohne besondere Behandlung für Regieanweisungen, Sprechernotizen oder in Klammern gesetzte Hinweise, die in einem Redeskript eingebettet sein könnten — alles durch Leerzeichen Getrennte wird als Wort gezählt, unabhängig davon, ob es laut gesprochen werden soll oder nicht."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist das maximale Sprechtempo so viel niedriger als das Maximum eines typischen Lesegeschwindigkeitsrechners?",
+            "answer": "Sprache wird von Atmung, Artikulation und dem Geben von Verständniszeit für das Publikum getaktet — Einschränkungen, die für stilles Lesen nicht gelten. Selbst ein ungewöhnlich schneller Sprecher überschreitet selten ein paar hundert Wörter pro Minute in verständlicher Sprache, daher ist der gültige Bereich hier auf 400 Wörter pro Minute begrenzt, weit unter der 1000-Wörter-Obergrenze, die für stilles Lesen sinnvoll ist."
+          },
+          {
+            "question": "Warum ist 'formell' das langsamste Preset statt das schnellste?",
+            "answer": "Formeller Präsentationsvortrag — die Art, die für eine Rede, eine Keynote oder eine feierliche Ankündigung verwendet wird — ist typischerweise langsamer und bedächtiger als lässiges Sprechen, mit Pausen zur Betonung und klarerer Artikulation, nicht schneller. Die Preset-Namen beschreiben den Vortragsstil, nicht eine Geschwindigkeitsrangfolge, weshalb formell (110 wpm) das langsamste der drei ist und schnell (170 wpm) das zügigste, näher daran, wie jemand in lässiger Konversation spricht."
+          },
+          {
+            "question": "Berücksichtigt dies Pausen, die ich für Folien, Publikumsreaktionen oder Betonung einfügen könnte?",
+            "answer": "Nein — die Schätzung ist eine reine Division der Wortzahl durch ein gleichmäßiges Wörter-pro-Minute-Tempo, ohne Berücksichtigung von Pausen, Folienübergängen oder geplanter Stille. Bei einer Rede mit erheblichen eingebauten Pausen wird die tatsächliche Vortragszeit länger sein als diese Schätzung; betrachten Sie sie als Untergrenze für kontinuierliches Sprechen, nicht als Gesamtzeit einschließlich Pausen."
+          },
+          {
+            "question": "Warum enthält die Wortzahl Dinge wie Regieanweisungen, wenn ich ein vollständiges Skript einfüge?",
+            "answer": "Der Wortzähler unterscheidet nicht zwischen gesprochenem Dialog und Regieanweisungen, Sprecherbezeichnungen oder in Klammern gesetzten Notizen — er zählt jeden durch Leerzeichen getrennten Abschnitt in der Eingabe als Wort. Wenn Ihr Skript nicht gesprochenen Text enthält, gibt das Entfernen vor dem Einfügen eine genauere Schätzung der tatsächlichen Sprechzeit."
+          }
+        ]
       }
     }
   }

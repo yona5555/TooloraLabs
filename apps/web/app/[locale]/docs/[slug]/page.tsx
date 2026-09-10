@@ -88,6 +88,12 @@ import GpaCalculatorDocsPage, { getGpaCalculatorTocItems } from "@/components/do
 import CitationGeneratorDocsPage, { getCitationGeneratorTocItems } from "@/components/docs/citation-generator/CitationGeneratorDocsPage";
 import StudyTimeCalculatorDocsPage, { getStudyTimeCalculatorTocItems } from "@/components/docs/study-time-calculator/StudyTimeCalculatorDocsPage";
 import ClassScheduleBuilderDocsPage, { getClassScheduleBuilderTocItems } from "@/components/docs/class-schedule-builder/ClassScheduleBuilderDocsPage";
+import WordCounterDocsPage, { getWordCounterTocItems } from "@/components/docs/word-counter/WordCounterDocsPage";
+import ReadabilityScoreCalculatorDocsPage, { getReadabilityScoreCalculatorTocItems } from "@/components/docs/readability-score-calculator/ReadabilityScoreCalculatorDocsPage";
+import ReadingTimeCalculatorDocsPage, { getReadingTimeCalculatorTocItems } from "@/components/docs/reading-time-calculator/ReadingTimeCalculatorDocsPage";
+import LoremIpsumGeneratorDocsPage, { getLoremIpsumGeneratorTocItems } from "@/components/docs/lorem-ipsum-generator/LoremIpsumGeneratorDocsPage";
+import TextLogoGeneratorDocsPage, { getTextLogoGeneratorTocItems } from "@/components/docs/text-logo-generator/TextLogoGeneratorDocsPage";
+import SpeechWordCountCalculatorDocsPage, { getSpeechWordCountCalculatorTocItems } from "@/components/docs/speech-word-count-calculator/SpeechWordCountCalculatorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -465,6 +471,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "class-schedule-builder":
       content = <ClassScheduleBuilderDocsPage />;
       tocItems = await getClassScheduleBuilderTocItems();
+      break;
+    case "word-counter":
+      content = <WordCounterDocsPage />;
+      tocItems = await getWordCounterTocItems();
+      break;
+    case "readability-score-calculator":
+      content = <ReadabilityScoreCalculatorDocsPage />;
+      tocItems = await getReadabilityScoreCalculatorTocItems();
+      break;
+    case "reading-time-calculator":
+      content = <ReadingTimeCalculatorDocsPage />;
+      tocItems = await getReadingTimeCalculatorTocItems();
+      break;
+    case "lorem-ipsum-generator":
+      content = <LoremIpsumGeneratorDocsPage />;
+      tocItems = await getLoremIpsumGeneratorTocItems();
+      break;
+    case "text-logo-generator":
+      content = <TextLogoGeneratorDocsPage />;
+      tocItems = await getTextLogoGeneratorTocItems();
+      break;
+    case "speech-word-count-calculator":
+      content = <SpeechWordCountCalculatorDocsPage />;
+      tocItems = await getSpeechWordCountCalculatorTocItems();
       break;
   }
 

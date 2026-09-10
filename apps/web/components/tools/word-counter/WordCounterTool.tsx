@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import WordCounterInputPanel from "./WordCounterInputPanel";
 import WordCounterResult from "./WordCounterResult";
 import PlatformLimitsReference from "./PlatformLimitsReference";
@@ -36,6 +37,7 @@ export default function WordCounterTool({ education }: { education: ReactNode })
           sidebar={<RelatedToolsSidebar currentSlug="word-counter" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="word-counter" />
               <SectionNav items={navItems} />
               <PlatformLimitsReference characters={stats.characters} />
             </div>
