@@ -9,6 +9,7 @@ import ProjectileRangeVsAngleDiagram from "./ProjectileRangeVsAngleDiagram";
 import ProjectileVelocityComponentsDiagram from "./ProjectileVelocityComponentsDiagram";
 import ProjectileImpactVelocityDiagram from "./ProjectileImpactVelocityDiagram";
 import ProjectileGravityComparisonDiagram from "./ProjectileGravityComparisonDiagram";
+import ProjectileRangeGauge from "./ProjectileRangeGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function ProjectileMotionEducation() {
 
   return (
     <EncyclopediaPaper>
+      <ProjectileRangeGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <TrajectoryDiagram

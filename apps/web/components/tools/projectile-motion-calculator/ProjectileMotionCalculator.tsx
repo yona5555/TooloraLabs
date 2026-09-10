@@ -22,9 +22,20 @@ const RELATED_TOOLS = ["kinematics-calculator", "force-calculator", "energy-work
 
 const DEFAULTS = { speed: "20", angle: "45", height: "0", gravity: "9.8" };
 
-const EMPTY_RESULT: ProjectileMotionCalculatorOutput = { error: null, timeOfFlight: 0, maxHeight: 0, range: 0, impactSpeed: 0, impactAngle: 0 };
-
 type Inputs = typeof DEFAULTS;
+
+// Real everyday and iconic launches, each paired with the world whose
+// gravity it was (or would be) launched under.
+const SCENARIOS: Record<string, { speed: string; angle: string; height: string; gravityPreset: Exclude<GravityPreset, "custom"> }> = {
+  basketballShot: { speed: "8", angle: "50", height: "2", gravityPreset: "earth" },
+  soccerKick: { speed: "25", angle: "30", height: "0", gravityPreset: "earth" },
+  baseballThrow: { speed: "35", angle: "35", height: "1.8", gravityPreset: "earth" },
+  golfDrive: { speed: "70", angle: "12", height: "0", gravityPreset: "earth" },
+  cannonball: { speed: "120", angle: "45", height: "0", gravityPreset: "earth" },
+  moonGolfShot: { speed: "25", angle: "45", height: "0", gravityPreset: "moon" },
+};
+
+const EMPTY_RESULT: ProjectileMotionCalculatorOutput = { error: null, timeOfFlight: 0, maxHeight: 0, range: 0, impactSpeed: 0, impactAngle: 0 };
 
 function computeResult(i: Inputs): ProjectileMotionCalculatorOutput {
   const output = tool.execute(
@@ -105,6 +116,20 @@ export default function ProjectileMotionCalculator({ education }: { education: R
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS[key];
+    if (!preset) return;
+    const nextGravity = String(GRAVITY_PRESET_VALUES[preset.gravityPreset]);
+    setSpeed(preset.speed);
+    setAngle(preset.angle);
+    setHeight(preset.height);
+    setGravityPreset(preset.gravityPreset);
+    setGravity(nextGravity);
+    setResult(computeResult({ speed: preset.speed, angle: preset.angle, height: preset.height, gravity: nextGravity }));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(preset.speed, preset.angle, preset.height, nextGravity));
+  }
+
   function handleClear() {
     setSpeed(DEFAULTS.speed);
     setAngle(DEFAULTS.angle);
@@ -145,6 +170,8 @@ export default function ProjectileMotionCalculator({ education }: { education: R
                 onGravityChange={setGravity}
                 gravityPreset={gravityPreset}
                 onGravityPresetChange={handleGravityPresetChange}
+                scenarioKeys={Object.keys(SCENARIOS)}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
