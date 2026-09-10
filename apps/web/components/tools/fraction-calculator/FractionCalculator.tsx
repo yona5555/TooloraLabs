@@ -41,6 +41,13 @@ export default function FractionCalculator({ education }: { education: ReactNode
     setDenominatorB(DEFAULTS[next].denominatorB);
   }
 
+  function handleClear() {
+    setNumeratorA(DEFAULTS[operation].numeratorA);
+    setDenominatorA(DEFAULTS[operation].denominatorA);
+    setNumeratorB(DEFAULTS[operation].numeratorB);
+    setDenominatorB(DEFAULTS[operation].denominatorB);
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(numeratorA, denominatorA, numeratorB, denominatorB);
 
   const { result, computed } = useMemo(() => {
@@ -80,6 +87,7 @@ export default function FractionCalculator({ education }: { education: ReactNode
               onNumeratorBChange={setNumeratorB}
               denominatorB={denominatorB}
               onDenominatorBChange={setDenominatorB}
+              onClear={handleClear}
             />
           }
           result={<FractionResult result={result} computed={computed} />}

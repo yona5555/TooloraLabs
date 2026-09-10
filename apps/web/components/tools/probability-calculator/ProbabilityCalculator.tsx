@@ -55,6 +55,10 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
     setFields((prev) => ({ ...prev, [mode]: { ...prev[mode], [field]: value } }));
   }
 
+  function handleClear() {
+    setFields((prev) => ({ ...prev, [mode]: DEFAULTS[mode] }));
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -65,7 +69,7 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<ProbabilityInputPanel mode={mode} onModeChange={setMode} fields={current} onFieldChange={updateField} />}
+          input={<ProbabilityInputPanel mode={mode} onModeChange={setMode} fields={current} onFieldChange={updateField} onClear={handleClear} />}
           result={<ProbabilityResult mode={mode} singleResult={singleResult} compoundResult={compoundResult} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="probability-calculator" category="math" />}
           secondary={

@@ -49,6 +49,10 @@ export default function TriangleCalculator({ education }: { education: ReactNode
     });
   }
 
+  function handleClear() {
+    setFields((prev) => ({ ...prev, [mode]: DEFAULTS[mode] }));
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -71,6 +75,7 @@ export default function TriangleCalculator({ education }: { education: ReactNode
               onField1Change={(v) => updateField(0, v)}
               onField2Change={(v) => updateField(1, v)}
               onField3Change={(v) => updateField(2, v)}
+              onClear={handleClear}
             />
           }
           result={<TriangleResult result={result ?? EMPTY_TRIANGLE_RESULT} digitStyle={digitStyle} />}

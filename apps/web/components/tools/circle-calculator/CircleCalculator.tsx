@@ -12,14 +12,25 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CircleInputPanel from "./CircleInputPanel";
 import CircleResult from "./CircleResult";
 import CircleQuickReference from "./CircleQuickReference";
-import type { CircleKnownField } from "./types";
+import type { CircleKnownField, CircleScenario } from "./types";
 
 const tool = new CircleTool();
+const DEFAULTS = { knownField: "radius" as CircleKnownField, value: "5" };
 
 export default function CircleCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.circle-calculator.nav");
-  const [knownField, setKnownField] = useState<CircleKnownField>("radius");
-  const [value, setValue] = useState("5");
+  const [knownField, setKnownField] = useState<CircleKnownField>(DEFAULTS.knownField);
+  const [value, setValue] = useState(DEFAULTS.value);
+
+  function handleScenarioPreset(scenario: CircleScenario) {
+    setKnownField(scenario.knownField);
+    setValue(scenario.value);
+  }
+
+  function handleClear() {
+    setKnownField(DEFAULTS.knownField);
+    setValue(DEFAULTS.value);
+  }
 
   const digitStyle = resolveDigitStyle(value);
 
@@ -39,7 +50,16 @@ export default function CircleCalculator({ education }: { education: ReactNode }
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<CircleInputPanel knownField={knownField} onKnownFieldChange={setKnownField} value={value} onValueChange={setValue} />}
+          input={
+            <CircleInputPanel
+              knownField={knownField}
+              onKnownFieldChange={setKnownField}
+              value={value}
+              onValueChange={setValue}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
+            />
+          }
           result={<CircleResult result={result} knownField={knownField} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="circle-calculator" category="math" />}
           secondary={

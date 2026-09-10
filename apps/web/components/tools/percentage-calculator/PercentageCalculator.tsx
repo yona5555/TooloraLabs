@@ -38,6 +38,11 @@ export default function PercentageCalculator({ education }: { education: ReactNo
     setSecond(DEFAULTS[next].second);
   }
 
+  function handleClear() {
+    setFirst(DEFAULTS[mode].first);
+    setSecond(DEFAULTS[mode].second);
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(first, second);
 
   const { result, computed } = useMemo(() => {
@@ -68,6 +73,7 @@ export default function PercentageCalculator({ education }: { education: ReactNo
               onFirstChange={setFirst}
               second={second}
               onSecondChange={setSecond}
+              onClear={handleClear}
             />
           }
           result={<PercentageResult result={result} computed={computed} />}

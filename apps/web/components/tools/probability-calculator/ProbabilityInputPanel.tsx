@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ProbabilityModeTabs from "./ProbabilityModeTabs";
@@ -19,9 +20,10 @@ type Props = {
   onModeChange: (mode: ProbabilityMode) => void;
   fields: ProbabilityFields;
   onFieldChange: (field: keyof ProbabilityFields, value: string) => void;
+  onClear: () => void;
 };
 
-export default function ProbabilityInputPanel({ mode, onModeChange, fields, onFieldChange }: Props) {
+export default function ProbabilityInputPanel({ mode, onModeChange, fields, onFieldChange, onClear }: Props) {
   const t = useTranslations("tools.probability-calculator.form");
 
   return (
@@ -61,6 +63,15 @@ export default function ProbabilityInputPanel({ mode, onModeChange, fields, onFi
         )}
       </div>
       <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">{t(`hints.${mode}`)}</p>
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }
