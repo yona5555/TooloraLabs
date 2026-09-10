@@ -18,6 +18,10 @@ export default function TextLogoGenerator({ education }: { education: ReactNode 
   const tNav = useTranslations("tools.text-logo-generator.nav");
   const [text, setText] = useState("Toolora");
 
+  function handleClear() {
+    setText("Toolora");
+  }
+
   const entries = useMemo(() => {
     if (!text.trim()) return [];
     return TEXT_LOGO_STYLES.map((style) => {
@@ -36,7 +40,7 @@ export default function TextLogoGenerator({ education }: { education: ReactNode 
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<LogoInputPanel text={text} onTextChange={setText} />}
+          input={<LogoInputPanel text={text} onTextChange={setText} onClear={handleClear} />}
           result={<LogoResult entries={entries} isEmpty={!text.trim()} />}
           sidebar={<RelatedToolsSidebar currentSlug="text-logo-generator" category="text-tools" />}
           secondary={

@@ -27,6 +27,13 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
     setHasCalculated(true);
   }
 
+  function handleClear() {
+    setName1("");
+    setName2("");
+    setResult(INITIAL_RESULT);
+    setHasCalculated(false);
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -46,6 +53,7 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
               name2={name2}
               onName2Change={setName2}
               onCalculate={handleCalculate}
+              onClear={handleClear}
             />
           }
           result={

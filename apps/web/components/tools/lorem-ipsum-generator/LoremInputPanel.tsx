@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import { LOREM_UNITS, LOREM_STYLES } from "./types";
@@ -16,6 +16,7 @@ type Props = {
   startWithLorem: boolean;
   onStartWithLoremChange: (value: boolean) => void;
   onGenerate: () => void;
+  onClear: () => void;
 };
 
 export default function LoremInputPanel({
@@ -28,6 +29,7 @@ export default function LoremInputPanel({
   startWithLorem,
   onStartWithLoremChange,
   onGenerate,
+  onClear,
 }: Props) {
   const t = useTranslations("tools.lorem-ipsum-generator.form");
 
@@ -94,14 +96,24 @@ export default function LoremInputPanel({
           </label>
         )}
 
-        <button
-          type="button"
-          onClick={onGenerate}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-        >
-          <RefreshCw size={18} />
-          {t("generate")}
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onGenerate}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            <RefreshCw size={18} />
+            {t("generate")}
+          </button>
+          <button
+            type="button"
+            onClick={onClear}
+            className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-3 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            <RotateCcw size={16} />
+            {t("clear")}
+          </button>
+        </div>
       </div>
     </SectionCard>
   );
