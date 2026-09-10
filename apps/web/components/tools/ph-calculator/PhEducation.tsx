@@ -6,6 +6,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import PhScaleDiagram from "./PhScaleDiagram";
 import PhIndicatorColorDiagram from "./PhIndicatorColorDiagram";
+import PhScaleGauge from "./PhScaleGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -18,6 +19,8 @@ export default async function PhEducation() {
 
   return (
     <EncyclopediaPaper>
+      <PhScaleGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <PhScaleDiagram pH={5.5} caption={t("intro.diagram.caption")} />

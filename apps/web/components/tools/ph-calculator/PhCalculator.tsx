@@ -21,9 +21,21 @@ const tool = new PhCalculatorTool();
 
 const DEFAULTS = { hConcentration: "0.0000001", pH: "5.5", ohConcentration: "0.0000001", pOH: "7" };
 
-const EMPTY_RESULT: PhCalculatorOutput = { error: null, pH: 0, pOH: 0, hConcentration: 0, ohConcentration: 0, classification: "neutral" };
-
 type Inputs = typeof DEFAULTS;
+
+// Real everyday substances and their documented pH values, reusing the same
+// keys as COMMON_SUBSTANCES so scenario chip labels come from the existing
+// tools.ph-calculator.substances translations.
+const SCENARIOS: Record<string, number> = {
+  lemonJuice: 2.2,
+  blackCoffee: 5.0,
+  pureWater: 7.0,
+  seawater: 8.2,
+  bakingSoda: 9.0,
+  bleach: 12.6,
+};
+
+const EMPTY_RESULT: PhCalculatorOutput = { error: null, pH: 0, pOH: 0, hConcentration: 0, ohConcentration: 0, classification: "neutral" };
 
 function computeResult(operation: PhOperation, i: Inputs): PhCalculatorOutput {
   const output = tool.execute(
@@ -105,6 +117,17 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const phValue = SCENARIOS[key];
+    if (phValue === undefined) return;
+    const nextPH = String(phValue);
+    setOperation("fromPH");
+    setPH(nextPH);
+    setResult(computeResult("fromPH", { ...currentInputs(), pH: nextPH }));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(nextPH));
+  }
+
   function handleClear() {
     setHConcentration(DEFAULTS.hConcentration);
     setPH(DEFAULTS.pH);
@@ -138,6 +161,8 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
                 onOhConcentrationChange={setOhConcentration}
                 pOH={pOH}
                 onPOHChange={setPOH}
+                scenarioKeys={Object.keys(SCENARIOS)}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
