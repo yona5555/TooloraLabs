@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FileSizeInputPanel from "./FileSizeInputPanel";
 import FileSizeResult from "./FileSizeResult";
 import TransferTimeReference from "./TransferTimeReference";
@@ -62,6 +63,7 @@ export default function FileSizeConverterTool({ education }: { education: ReactN
           sidebar={<RelatedToolsSidebar currentSlug="file-size-converter" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="file-size-converter" />
               <SectionNav items={navItems} />
               <TransferTimeReference bytes={data?.bytes ?? 0} digitStyle={digitStyle} />
             </div>

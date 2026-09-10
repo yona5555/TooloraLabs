@@ -73,6 +73,12 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "barcode-generator",
   "color-palette-generator",
   "qr-code-generator",
+  "pdf-merge-split",
+  "zip-compressor",
+  "csv-json-converter",
+  "file-size-converter",
+  "file-name-sanitizer",
+  "duplicate-line-remover",
 ];
 
 export function isToolDocumented(slug: string): boolean {

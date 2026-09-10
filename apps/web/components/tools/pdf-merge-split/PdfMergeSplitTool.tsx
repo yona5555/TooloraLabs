@@ -8,6 +8,7 @@ import { mergePdfs, splitPdf, getPdfPageCount, parsePageRanges } from "@tooloral
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PdfMergeSplitInputPanel, { type PdfMode } from "./PdfMergeSplitInputPanel";
 import PdfMergeSplitResult from "./PdfMergeSplitResult";
 
@@ -209,7 +210,12 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="pdf-merge-split" category="file-tools" />}
-          secondary={<SectionNav items={navItems} />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="pdf-merge-split" />
+              <SectionNav items={navItems} />
+            </div>
+          }
         />
       </div>
 

@@ -7,6 +7,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DuplicateLineInputPanel from "./DuplicateLineInputPanel";
 import DuplicateLineResult from "./DuplicateLineResult";
 import DedupeReference from "./DedupeReference";
@@ -63,6 +64,7 @@ export default function DuplicateLineRemoverTool({ education }: { education: Rea
           sidebar={<RelatedToolsSidebar currentSlug="duplicate-line-remover" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="duplicate-line-remover" />
               <SectionNav items={navItems} />
               <DedupeReference />
             </div>

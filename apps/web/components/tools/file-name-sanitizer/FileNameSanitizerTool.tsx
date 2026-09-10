@@ -6,6 +6,7 @@ import { FileNameSanitizer, type FileNameSanitizerInput } from "@tooloralabs/too
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FileNameInputPanel from "./FileNameInputPanel";
 import FileNameResult from "./FileNameResult";
 import PlatformRulesReference from "./PlatformRulesReference";
@@ -63,6 +64,7 @@ export default function FileNameSanitizerTool({ education }: { education: ReactN
           sidebar={<RelatedToolsSidebar currentSlug="file-name-sanitizer" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="file-name-sanitizer" />
               <SectionNav items={navItems} />
               <PlatformRulesReference />
             </div>

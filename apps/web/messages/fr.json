@@ -29120,6 +29120,619 @@
             "answer": "mailto: et SMSTO: sont des schémas URI reconnus que les téléphones et ordinateurs savent déjà gérer — scanner un code QR mailto: ouvre l'application e-mail par défaut de l'appareil avec l'adresse, le sujet, et le corps pré-remplis, et SMSTO: fait de même pour une application de messagerie texte. Cela rend le code QR immédiatement actionnable dès le scan, plutôt que de simplement afficher une adresse e-mail ou un numéro de téléphone en texte brut qui devrait être copié manuellement."
           }
         ]
+      },
+      "pdf-merge-split": {
+        "version": "v1",
+        "description": "Référence technique de Fusion et Division PDF : comment les documents sont combinés page par page et comment les plages de pages sont analysées et extraites, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Analyse d'une liste de plages de pages",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Fusionner : pages(Doc₁) + pages(Doc₂) + ... → un nouveau document  |  Diviser : Doc[Début..Fin] → un nouveau document par plage",
+          "note": "Les deux opérations travaillent au niveau de pages entières : fusionner concatène les pages de chaque document source dans l'ordre en un seul nouveau document, tandis que diviser copie uniquement les pages de chaque plage demandée dans son propre nouveau document séparé."
+        },
+        "flowchart": {
+          "intro": "Fusionner et diviser sont des opérations distinctes qui construisent toutes deux des documents PDF entièrement nouveaux en copiant des pages, plutôt que de modifier un fichier source sur place.",
+          "steps": [
+            "Pour fusionner : créer un nouveau document PDF vide, puis pour chaque fichier source dans l'ordre donné, le charger et copier chacune de ses pages dans son ordre d'origine vers le nouveau document",
+            "Enregistrer le document fusionné sous la forme d'un nouvel ensemble d'octets contenant chaque page de chaque fichier source, dans l'ordre où les fichiers ont été spécifiés",
+            "Pour diviser à la place : charger le PDF source et lire son nombre total de pages, puis déterminer quelles plages de pages extraire — soit les plages spécifiées explicitement, soit, si aucune n'est spécifiée, une plage d'une seule page par page",
+            "Pour chaque plage : limiter son début à au moins la page 1 et sa fin à au plus la dernière page du document, puis ignorer entièrement la plage si le début limité tombe après la fin limitée",
+            "Copier uniquement les pages de cette plage dans un document entièrement nouveau et l'enregistrer — ce qui produit un fichier de sortie par plage valide, de sorte qu'une seule liste de plages puisse produire plusieurs PDF distincts à la fois"
+          ],
+          "caption": "Fusionner concatène des documents entiers page par page ; diviser copie un nouveau document par plage de pages demandée."
+        },
+        "anatomy": {
+          "intro": "Une seule chaîne de plages séparées par des virgules peut demander plusieurs plages de pages à la fois, chacune devenant son propre nombre de pages à extraire.",
+          "labelRangeOne": "Pages 1-3",
+          "labelSingle": "Page 5",
+          "labelRangeTwo": "Pages 8-9",
+          "totalLabel": "6 pages sélectionnées",
+          "caption": "La chaîne de plages \"1-3,5,8-9\" se résout en trois plages distinctes couvrant 3, 1 et 2 pages — soit 6 pages au total, extraites sous forme de trois fichiers de sortie distincts."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Fichiers à fusionner",
+            "meaning": "L'ensemble des fichiers PDF source, combinés dans l'ordre donné. Utilisé en mode fusion.",
+            "unit": "Fichiers"
+          },
+          {
+            "symbol": "PDF source",
+            "meaning": "Le fichier PDF unique dont les pages doivent être extraites. Utilisé en mode division.",
+            "unit": "Fichier"
+          },
+          {
+            "symbol": "Plages de pages",
+            "meaning": "Une liste de numéros de page et de plages séparée par des virgules (p. ex. \"1-3,5,8-9\"), indexée à partir de 1 et incluant les deux extrémités. Utilisé en mode division.",
+            "unit": "Texte"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Une plage non ordonnée ou invalide est ignorée silencieusement",
+            "description": "Lorsque le début limité d'une plage est supérieur à sa fin limitée (par exemple une plage demandée entièrement au-delà du nombre réel de pages du document), cette plage est simplement ignorée plutôt que de produire une sortie vide ou corrompue."
+          },
+          {
+            "title": "Les plages sont limitées aux bornes réelles du document plutôt que rejetées",
+            "description": "Une plage demandée comme page 1 à 500 sur un document de 10 pages est limitée à 1-10 plutôt que d'échouer complètement, de sorte qu'une plage légèrement trop généreuse produit tout de même un résultat sensé."
+          },
+          {
+            "title": "Aucune plage spécifiée signifie \"diviser en pages individuelles\"",
+            "description": "Lorsque la liste de plages est vide ou omise, l'outil se rabat par défaut sur une plage d'une seule page par page du document — divisant ainsi un PDF de 10 pages en dix PDF distincts d'une seule page."
+          },
+          {
+            "title": "Les jetons mal formés dans une chaîne de plages sont écartés, pas traités comme une erreur",
+            "description": "L'analyseur de plages ne conserve que les jetons correspondant à un motif valide \"nombre\" ou \"nombre-nombre\" avec un début positif ne dépassant pas la fin ; tout le reste dans une liste séparée par des virgules — comme un jeton vide dû à une virgule perdue — est filtré silencieusement plutôt que de déclencher une erreur."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Que se passe-t-il si je fusionne des PDF ayant des tailles ou orientations de page différentes ?",
+            "answer": "Chaque page est copiée exactement telle qu'elle existe dans son document source, en conservant la taille et l'orientation propres à cette page — la fusion ne redimensionne, ne réoriente ni ne normalise les pages pour les faire correspondre entre elles, de sorte qu'un document fusionné peut librement mélanger des pages portrait et paysage ou des formats de papier différents, exactement comme ils apparaissaient dans les fichiers d'origine."
+          },
+          {
+            "question": "Pourquoi les plages de pages sont-elles indexées à partir de 1 plutôt qu'à partir de 0 ?",
+            "answer": "L'indexation à partir de 1 correspond à la façon dont les numéros de page sont réellement affichés aux utilisateurs dans les visionneuses PDF et imprimés sur les pages physiques — faire en sorte que \"page 1\" désigne la première page est bien plus intuitif qu'un schéma indexé à partir de 0 où la première page serait \"page 0\", même si le code sous-jacent convertit en interne vers des positions de tableau indexées à partir de 0."
+          },
+          {
+            "question": "Que se passe-t-il si je demande une plage de pages entièrement au-delà de la longueur réelle du document ?",
+            "answer": "Le début et la fin de la plage sont chacun limités aux bornes réelles de pages du document — si le début d'une plage, après limitation, dépasse sa fin, la plage entière est silencieusement ignorée, ne produisant aucun fichier de sortie pour cette plage spécifique au lieu d'une erreur, tandis que toute autre plage valide dans la même demande continue de produire normalement ses fichiers."
+          },
+          {
+            "question": "Mon PDF est-il téléversé quelque part lors de la fusion ou de la division ?",
+            "answer": "Non — les deux opérations s'exécutent entièrement en mémoire à l'aide de pdf-lib, qui travaille directement avec les octets du fichier sans nécessiter d'aller-retour vers un serveur ; la logique de fusion et de division elle-même ne contient aucun code réseau, de sorte que rien de votre document ne quitte votre appareil pendant cette étape de traitement."
+          }
+        ]
+      },
+      "zip-compressor": {
+        "version": "v1",
+        "description": "Référence technique du Compresseur ZIP : comment les fichiers sont compressés dans une archive ZIP et en sont extraits à l'aide de l'algorithme DEFLATE, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Le taux de compression dépend du type de fichier",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Compresser : fichiers → algorithme DEFLATE → une seule archive .zip (en mémoire)  |  Extraire : archive .zip → décodage DEFLATE → fichiers individuels",
+          "note": "Chaque fichier ajouté à l'archive est compressé avec le même algorithme, DEFLATE, qui recherche des motifs d'octets répétés au sein de chaque fichier et les remplace par des références plus courtes — l'ampleur réelle de la réduction d'un fichier donné dépend entièrement de la quantité de répétition que DEFLATE peut y trouver."
+        },
+        "flowchart": {
+          "intro": "Compression et extraction sont des opérations miroirs qui s'exécutent entièrement en mémoire, cette étape n'écrivant jamais de fichier sur disque ni ne l'envoyant à un serveur.",
+          "steps": [
+            "Pour compresser : prendre un ensemble de fichiers nommés sous forme d'octets bruts, ajouter chacun sous son nom donné à une nouvelle structure d'archive, et appliquer l'algorithme de compression DEFLATE aux octets de chaque fichier individuellement",
+            "Produire l'archive finale sous forme d'une seule séquence d'octets contenant chaque fichier compressé, prête à être téléchargée sous forme de fichier .zip",
+            "Pour extraire à la place : charger les octets d'une archive .zip existante et parcourir sa liste interne d'entrées, en ignorant toute entrée qui est un répertoire plutôt qu'un fichier réel",
+            "Pour chaque entrée de fichier réel, décompresser ses octets pour retrouver sa forme d'origine",
+            "Signaler le nom, le contenu décompressé et la taille en octets décompressée de chaque fichier extrait"
+          ],
+          "caption": "La compression applique DEFLATE à chaque fichier entrant dans l'archive ; l'extraction inverse ce processus pour chaque fichier qui en ressort."
+        },
+        "anatomy": {
+          "intro": "DEFLATE compresse en trouvant des motifs répétés dans les octets d'un fichier — l'efficacité de cette méthode dépend fortement du fait que le fichier contienne déjà ce type de répétition, ce qui explique pourquoi différents types de fichiers rétrécissent de montants très différents.",
+          "labelText": "Texte brut (.txt)",
+          "labelCompressed": "Déjà compressé (.jpg/.mp4/.zip)",
+          "caption": "Un fichier texte brut typique pourrait être compressé à environ 30 % de sa taille d'origine, tandis qu'un format déjà compressé comme JPG, MP4 ou un autre ZIP se réduit souvent à peine, car DEFLATE trouve des motifs déjà extraits au maximum."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Fichiers à compresser",
+            "meaning": "L'ensemble des fichiers, chacun avec un nom et un contenu en octets bruts, à ajouter à une nouvelle archive ZIP.",
+            "unit": "Fichiers"
+          },
+          {
+            "symbol": "Données d'archive",
+            "meaning": "Les octets bruts d'une archive .zip existante, utilisés lors de l'extraction.",
+            "unit": "Fichier"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Tout se passe en mémoire, rien n'est téléversé",
+            "description": "Compression et extraction s'exécutent entièrement côté client ; cette fonctionnalité elle-même n'écrit aucun fichier sur disque ni ne l'envoie à un serveur, contrairement à certains outils ZIP basés sur le web qui traitent les fichiers à distance."
+          },
+          {
+            "title": "Les entrées de répertoire sont ignorées silencieusement lors de l'extraction",
+            "description": "Une archive .zip peut contenir des entrées de dossier aux côtés des entrées de fichier — l'étape d'extraction les filtre explicitement, ne renvoyant que des fichiers réels avec un contenu véritable, pas des espaces réservés de dossiers vides."
+          },
+          {
+            "title": "La compression utilise toujours DEFLATE, jamais un mode \"stockage\" non compressé",
+            "description": "Chaque fichier ajouté à l'archive est compressé avec l'algorithme DEFLATE, même les fichiers qui rétrécissent à peine, comme les formats déjà compressés — plutôt que de détecter de tels fichiers et de basculer vers un mode de passage direct non compressé pour eux."
+          },
+          {
+            "title": "La taille totale est calculée à partir des tailles décompressées, pas compressées",
+            "description": "Les tailles de fichiers signalées additionnent la longueur en octets décompressée réelle de chaque fichier extrait — ce qui compte lorsque ce contenu est ensuite utilisé ou enregistré — pas la taille compressée plus petite que ces octets occupaient dans l'archive."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la compression en ZIP d'un fichier déjà compressé, comme un JPG ou un MP4, réduit-elle à peine sa taille ?",
+            "answer": "La compression DEFLATE fonctionne en trouvant des motifs répétés dans les octets bruts d'un fichier et en les remplaçant par des références plus courtes — les formats d'image et de vidéo comme JPG et MP4 utilisent déjà leur propre compression interne qui élimine la plupart de cette répétition, ne laissant que très peu de matière pour que DEFLATE trouve et continue d'extraire. Compresser un tel fichier en ZIP ajoute principalement seulement une petite quantité de surcharge d'archive plutôt que de le réduire de manière notable."
+          },
+          {
+            "question": "Compresser plusieurs fichiers ensemble en ZIP donne-t-il une meilleure compression que les compresser séparément ?",
+            "answer": "Cela peut être le cas, en particulier avec de nombreux petits fichiers similaires — DEFLATE peut parfois trouver des motifs utiles entre des données proches les unes des autres au sein du processus de compression, et une seule archive évite la petite surcharge fixe qu'ajouteraient l'en-tête et les métadonnées propres à chaque fichier .zip séparé. Avec un petit nombre de fichiers volumineux et différents les uns des autres, la différence est typiquement faible dans un sens comme dans l'autre."
+          },
+          {
+            "question": "Pourquoi l'outil utilise-t-il toujours DEFLATE plutôt que d'offrir une option \"stockage\" non compressée ?",
+            "answer": "DEFLATE est la méthode de compression par défaut, universellement prise en charge pour les archives ZIP, et l'utiliser de manière cohérente garde l'outil simple — même pour les fichiers qui ne se compressent pas bien, la surcharge de DEFLATE est faible, et tout programme compatible ZIP peut décompresser les entrées compressées avec DEFLATE sans avoir besoin de détecter ou de gérer un mode non compressé séparé."
+          },
+          {
+            "question": "Mes données de fichiers sont-elles jamais téléversées vers un serveur pendant la compression ou l'extraction ?",
+            "answer": "Non — les deux opérations s'exécutent entièrement dans le navigateur à l'aide d'une bibliothèque ZIP en mémoire ; la logique de compression et d'extraction elle-même ne contient aucun code réseau, de sorte que le contenu de vos fichiers ne quitte jamais votre appareil pendant cette étape de traitement."
+          }
+        ]
+      },
+      "csv-json-converter": {
+        "version": "v1",
+        "description": "Référence technique du Convertisseur CSV↔JSON : comment fonctionnent la détection de délimiteur, l'analyse des champs entre guillemets et l'aplatissement des objets imbriqués dans les deux sens, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Détection automatique du délimiteur",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Détection auto : délimiteur = candidat avec le plus grand nombre d'occurrences sur la première ligne  |  CSV→JSON : chaque ligne → un objet, avec des clés selon l'en-tête  |  JSON→CSV : chaque objet → une ligne aplatie",
+          "note": "Convertir de CSV vers JSON transforme chaque ligne en un objet dont les clés proviennent des en-têtes de colonnes, tandis que convertir de JSON vers CSV fait l'inverse — les propriétés de chaque objet (y compris les propriétés imbriquées, via la notation par points) sont aplaties en une seule ligne sous un ensemble commun d'en-têtes de colonnes."
+        },
+        "flowchart": {
+          "intro": "La résolution du délimiteur se produit une seule fois à l'avance ; tout ce qui suit dépend de la direction dans laquelle la conversion s'exécute.",
+          "steps": [
+            "Réduire le texte d'entrée et le rejeter immédiatement s'il est vide",
+            "Résoudre le délimiteur : en détection automatique, compter combien de fois chaque caractère candidat (virgule, point-virgule, tabulation, barre verticale) apparaît uniquement sur la première ligne, et choisir celui qui apparaît le plus fréquemment ; sinon, utiliser le délimiteur explicitement choisi",
+            "Pour CSV→JSON : analyser le texte caractère par caractère, en suivant si chaque position se trouve à l'intérieur d'un champ entre guillemets, de sorte que les délimiteurs, les sauts de ligne et les guillemets doubles à l'intérieur des guillemets soient lus comme du contenu littéral plutôt que comme de la structure, puis convertir chaque ligne résultante en un objet, en utilisant la première ligne comme en-têtes, ou des noms générés column1, column2… en l'absence d'en-tête",
+            "Pour JSON→CSV : analyser le texte en tant que JSON et exiger un tableau de niveau supérieur, aplatir les propriétés imbriquées de chaque objet en clés à notation par points, rassembler l'union de chaque clé résultante à travers tous les objets comme en-têtes de colonnes, puis construire une ligne par objet, en mettant entre guillemets tout champ contenant un guillemet, un saut de ligne ou le délimiteur lui-même",
+            "Renvoyer le texte résultant ainsi que le délimiteur réellement utilisé, important en particulier lorsque la détection automatique a été exécutée"
+          ],
+          "caption": "Une étape de résolution du délimiteur, puis une conversion ligne-vers-objet ou objet-vers-ligne, selon la direction choisie."
+        },
+        "anatomy": {
+          "intro": "La détection automatique choisit le délimiteur candidat qui apparaît le plus fréquemment sur la première ligne du fichier — un simple comptage de fréquence sur une courte liste fixe de délimiteurs courants.",
+          "labelComma": "Virgule (,)",
+          "labelSemicolon": "Point-virgule (;)",
+          "labelTab": "Tabulation",
+          "labelPipe": "Barre verticale (|)",
+          "caption": "Pour la première ligne \"name,age;city,note\", la virgule apparaît deux fois, le point-virgule une fois, et la tabulation et la barre verticale n'apparaissent pas — la détection automatique choisit la virgule comme délimiteur."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Texte",
+            "meaning": "Le texte CSV ou JSON à convertir, selon le mode choisi.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "S'il faut convertir de CSV vers JSON, ou de JSON vers CSV.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Délimiteur",
+            "meaning": "Quel caractère sépare les champs CSV : virgule, point-virgule, tabulation, barre verticale, ou détection automatique.",
+            "unit": "—"
+          },
+          {
+            "symbol": "A un en-tête",
+            "meaning": "CSV→JSON uniquement : si la première ligne est une ligne d'en-tête plutôt que des données.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "L'entrée vide est rejetée avant toute analyse",
+            "description": "Un texte qui se réduit à rien renvoie immédiatement une erreur \"entrée vide\" pour les deux directions de conversion, plutôt que de produire un résultat vide ou trompeur."
+          },
+          {
+            "title": "La détection automatique ne regarde que la première ligne",
+            "description": "La détection du délimiteur compte les occurrences de chaque candidat uniquement sur la première ligne du texte, puis réutilise ce même délimiteur pour chaque ligne suivante — un fichier qui mélange les délimiteurs de manière incohérente entre les lignes ne sera pas détecté ni analysé correctement."
+          },
+          {
+            "title": "Les champs CSV entre guillemets peuvent contenir le délimiteur, des guillemets et des sauts de ligne",
+            "description": "L'analyseur caractère par caractère suit s'il se trouve à l'intérieur d'un champ entre guillemets, de sorte qu'une valeur comme \"Smith, John\" (avec le délimiteur à l'intérieur des guillemets) est lue comme un seul champ plutôt que divisée en deux, et un guillemet double \"\" à l'intérieur d'un champ entre guillemets est converti en un seul guillemet littéral."
+          },
+          {
+            "title": "JSON→CSV exige spécifiquement un tableau de niveau supérieur",
+            "description": "Si le JSON analysé est syntaxiquement valide mais n'est pas un tableau — un objet unique, un nombre ou une chaîne par exemple —, l'outil renvoie une erreur \"tableau attendu\" plutôt que de deviner comment envelopper une valeur non-tableau dans des lignes de tableau."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi la détection automatique ne vérifie-t-elle que la première ligne plutôt que d'analyser tout le fichier ?",
+            "answer": "Un fichier CSV bien formé utilise le même délimiteur de manière cohérente, et la première ligne — souvent la ligne d'en-tête — montre de manière fiable quel délimiteur est utilisé sans nécessiter une analyse complète d'une entrée potentiellement volumineuse. Vérifier uniquement la première ligne garde la détection rapide et suffit pour la grande majorité des fichiers CSV réels qui ne mélangent pas les délimiteurs en cours de fichier."
+          },
+          {
+            "question": "Comment le convertisseur gère-t-il une virgule à l'intérieur d'un champ CSV entre guillemets ?",
+            "answer": "L'analyseur suit l'état des guillemets caractère par caractère plutôt que de simplement diviser sur le délimiteur — à l'intérieur d'un champ entre guillemets, une virgule (ou quel que soit le délimiteur actif) est traitée comme du texte littéral appartenant à ce champ, non comme un séparateur de champ, de sorte qu'une valeur comme \"Springfield, IL\" reste correctement regroupée en un seul champ plutôt que divisée en deux."
+          },
+          {
+            "question": "Pourquoi JSON→CSV aplatit-il les objets imbriqués en clés à notation par points plutôt que de simplement les transformer en chaînes ?",
+            "answer": "L'aplatissement par notation à points (qui transforme {\"address\": {\"city\": \"Boston\"}} en une colonne nommée \"address.city\") garde chaque valeur imbriquée individuelle dans sa propre colonne, ce qui rend le CSV résultant utilisable dans un tableur de la manière dont les données tabulaires plates le sont habituellement — transformer plutôt l'objet imbriqué entier en une seule cellule enfouirait ces données structurées dans du texte non analysable."
+          },
+          {
+            "question": "Qu'advient-il des valeurs de type tableau à l'intérieur d'un objet JSON lors de la conversion en CSV ?",
+            "answer": "L'étape d'aplatissement ne développe que les objets imbriqués simples en clés à notation par points ; les tableaux sont laissés inchangés et transmis à l'étape de valeur de cellule, qui les convertit en leur représentation textuelle JSON pour cette cellule unique — puisque les lignes CSV n'ont aucun moyen natif de représenter une liste de longueur variable, les données du tableau restent ainsi intactes sous forme de texte lisible plutôt que d'être perdues."
+          }
+        ]
+      },
+      "file-size-converter": {
+        "version": "v1",
+        "description": "Référence technique du Convertisseur de Taille de Fichier : comment une taille est convertie en octets bruts puis réexprimée simultanément dans chaque unité décimale (SI) et binaire (IEC), les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Décimal vs binaire : mêmes octets, nombres différents",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Normes",
+          "modesValue": "2",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Octets = Valeur × Baseᵏ  (décimal : base = 1000, binaire : base = 1024)  |  k = niveau d'unité, B=0 jusqu'à PB=5",
+          "note": "La valeur saisie est d'abord convertie en une seule unité commune, les octets bruts, en utilisant la base (1000 pour décimal, 1024 pour binaire) dans laquelle l'unité source est mesurée — à partir de ce seul nombre d'octets, l'outil réexprime ensuite la taille dans chaque unité des deux normes simultanément."
+        },
+        "flowchart": {
+          "intro": "Une conversion en octets alimente deux échelles d'unités indépendantes, calculées quelle que soit la norme utilisée par l'entrée.",
+          "steps": [
+            "Vérifier que la valeur saisie est nulle ou positive, en rejetant catégoriquement les tailles négatives",
+            "Déterminer quelle base utiliser pour l'unité source : 1000 pour la norme décimale (SI), ou 1024 pour la norme binaire (IEC), avec décimal par défaut",
+            "Convertir la valeur saisie en octets bruts en la multipliant par cette base élevée au niveau de l'unité source — B est le niveau 0, KB/KiB est le niveau 1, jusqu'à PB/PiB au niveau 5",
+            "Réexprimer ce même nombre d'octets dans chaque unité décimale (B, KB, MB, GB, TB, PB) en divisant par des puissances successives de 1000",
+            "Réexprimer à nouveau ce même nombre d'octets dans chaque unité binaire (B, KiB, MiB, GiB, TiB, PiB) en divisant par des puissances successives de 1024"
+          ],
+          "caption": "Un seul nombre d'octets, calculé une fois, qui traverse simultanément deux échelles d'unités indépendantes — décimale et binaire."
+        },
+        "anatomy": {
+          "intro": "La même quantité physique de données obtient un nombre d'apparence différente selon la norme utilisée — un fait qui a causé une véritable confusion sur la manière dont les fabricants de stockage et les systèmes d'exploitation rapportent la taille.",
+          "labelDecimal": "En GB (décimal)",
+          "labelBinary": "En GiB (binaire)",
+          "caption": "1 000 000 000 octets valent exactement 1,0 GB selon la norme décimale, mais seulement environ 0,931 GiB selon la norme binaire — le même nombre d'octets, deux nombres différents, selon la base utilisée."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Valeur",
+            "meaning": "La quantité numérique à convertir. Doit être nulle ou positive.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Unité source",
+            "meaning": "Dans quelle unité la valeur saisie est mesurée : B, KB, MB, GB, TB, ou PB.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Norme",
+            "meaning": "Quelle base utilise l'unité source : décimale (SI, ×1000 par palier) ou binaire (IEC, ×1024 par palier). Décimal par défaut.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les valeurs négatives sont catégoriquement rejetées",
+            "description": "Une valeur qui n'est ni nulle ni positive renvoie une erreur \"valeur négative\" plutôt que de traiter une taille négative comme nulle ou de tenter une conversion négative absurde."
+          },
+          {
+            "title": "La norme change ce que signifie un palier d'unité, pas seulement son étiquette",
+            "description": "Le décimal traite chaque palier vers le haut (B→KB→MB…) comme une multiplication par 1000 ; le binaire traite ce même palier comme une multiplication par 1024 — une valeur convertie selon une norme n'est pas le même nombre que la même entrée convertie selon l'autre."
+          },
+          {
+            "title": "Les deux normes sont toujours calculées ensemble, quelle que soit celle choisie",
+            "description": "L'entrée \"norme\" n'affecte que la façon dont la valeur source est initialement convertie en octets bruts — la sortie inclut toujours l'échelle décimale complète et l'échelle binaire complète côte à côte, pas seulement celle correspondant à la norme d'entrée."
+          },
+          {
+            "title": "Zéro est une entrée valide et entièrement prise en charge",
+            "description": "Une valeur de zéro exactement produit zéro dans chaque unité des deux normes, plutôt que d'être traitée comme un cas particulier ou invalide, car une taille de fichier de zéro octet (un fichier vide) a un sens physique."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi décimal (GB) et binaire (GiB) donnent-ils des nombres d'apparence différente pour ce qui ressemble à la même taille de fichier ?",
+            "answer": "Les fabricants de stockage utilisent traditionnellement la norme décimale (1 GB = 1 000 000 000 octets), tandis que de nombreux systèmes d'exploitation rapportaient historiquement la taille en utilisant la norme binaire mais l'étiquetaient à tort avec des noms d'unités décimales — cet écart est exactement la raison pour laquelle un disque annoncé comme \"1 TB\" peut afficher environ 931 GB sur un système d'exploitation qui calcule en réalité en unités binaires (de la taille TiB) mais affiche une étiquette d'apparence décimale."
+          },
+          {
+            "question": "Pourquoi l'outil calcule-t-il les six unités pour les deux normes plutôt que de simplement convertir vers la seule unité demandée ?",
+            "answer": "Afficher toutes les unités à la fois, décimales et binaires, vous permet de comparer immédiatement à quoi ressemble une taille donnée dans différents contextes sans exécuter plusieurs conversions séparées, ce qui est particulièrement utile étant donné la fréquence à laquelle les unités décimales et binaires sont confondues ou mal étiquetées dans la documentation réelle des logiciels et du matériel."
+          },
+          {
+            "question": "Quelle est la différence entre l'entrée \"norme\" et les unités affichées dans la sortie ?",
+            "answer": "L'entrée \"norme\" détermine uniquement comment votre valeur et unité saisies sont interprétées pour calculer en premier lieu le nombre d'octets sous-jacent — une fois ce nombre d'octets connu, l'outil l'affiche toujours réexprimé dans chaque unité des deux normes, quelle que soit la norme que vous avez utilisée pour la saisie."
+          },
+          {
+            "question": "Pourquoi une taille de fichier négative est-elle rejetée plutôt que de simplement afficher un résultat négatif ?",
+            "answer": "Une taille de fichier ou de données ne peut physiquement pas être négative — il n'existe aucune interprétation réelle sensée de \"−5 mégaoctets\" — l'outil valide donc cela à l'avance et renvoie une erreur explicite plutôt que d'effectuer le calcul et d'afficher un nombre négatif techniquement calculé mais dénué de sens."
+          }
+        ]
+      },
+      "file-name-sanitizer": {
+        "version": "v1",
+        "description": "Référence technique de l'Assainisseur de Nom de Fichier : comment un nom de fichier est assaini pour une utilisation sûre sur Windows, macOS et Linux via une séquence de transformations, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Logique principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Un nom assaini devient plus court, pas seulement plus propre",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Étapes de transformation",
+          "modesValue": "6",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Nom → [translittérer] → supprimer les caractères illégaux → fusionner les espaces en séparateur → couper les points/espaces finaux → protéger les noms réservés → tronquer à la longueur maximale",
+          "note": "Le nom de base et l'extension du fichier sont assainis indépendamment via la même séquence de transformations, puis rejoints — chaque étape du pipeline traite une classe spécifique de problème susceptible de rendre un nom de fichier invalide ou peu pratique sur l'un ou l'autre système d'exploitation."
+        },
+        "flowchart": {
+          "intro": "Le nom de base et l'extension sont d'abord séparés, puis chacun traverse le même pipeline d'assainissement avant d'être rejoints.",
+          "steps": [
+            "Diviser le nom de fichier en un nom de base et une extension à son dernier point, à condition que ce point ne soit ni le tout premier ni le tout dernier caractère",
+            "Faire passer la base (et séparément l'extension, le cas échéant) par le même pipeline : supprimer optionnellement les accents et signes diacritiques vers de l'ASCII pur, retirer les caractères illégaux sur Windows, macOS ou Linux, fusionner les espaces vers le séparateur choisi, puis fusionner les séparateurs répétés et couper ceux en début ou en fin",
+            "Couper les points ou espaces finaux spécifiquement sur la base — Windows interdit un nom se terminant par l'un ou l'autre, une règle que la suppression préalable des caractères illégaux ne couvre pas",
+            "Vérifier si la base assainie correspond exactement à l'un des noms de périphériques réservés par Windows (CON, PRN, AUX, NUL, COM1-9, LPT1-9) ; si c'est le cas, ajouter le séparateur et le mot \"file\"",
+            "Rejoindre la base et l'extension, puis tronquer le résultat entier à la longueur maximale s'il est trop long, en raccourcissant uniquement la base afin que l'extension reste toujours intacte"
+          ],
+          "caption": "La base et l'extension sont assainies indépendamment via le même pipeline, puis rejointes et vérifiées en longueur comme un tout."
+        },
+        "anatomy": {
+          "intro": "Une seule passe d'assainissement peut traiter plusieurs types de problèmes différents dans un nom de fichier à la fois — les caractères accentués, la ponctuation illégale et l'espacement sont tous résolus dans la même opération.",
+          "labelBefore": "Avant",
+          "labelAfter": "Après",
+          "caption": "\"Café Photo!!.JPG\" (16 caractères) est assaini en \"cafe-photo.jpg\" (14 caractères) — le é accentué est translittéré, les points d'exclamation sont supprimés en tant que caractères illégaux, l'espace est fusionné en un tiret, et le résultat entier est mis en minuscules."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Nom de fichier",
+            "meaning": "Le nom de fichier d'origine à assainir, y compris son extension le cas échéant.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "Minuscules",
+            "meaning": "S'il faut convertir le résultat en minuscules. Vrai par défaut.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Séparateur",
+            "meaning": "Quel caractère remplace les espaces et relie les mots : tiret ou tiret bas. Tiret par défaut.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Translittérer",
+            "meaning": "S'il faut supprimer les accents et signes diacritiques vers de l'ASCII pur (p. ex. \"café\" → \"cafe\"). Faux par défaut.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Longueur maximale",
+            "meaning": "Longueur de sortie maximale en caractères, en tronquant le nom de base (jamais l'extension) si dépassée. 255 par défaut.",
+            "unit": "Caractères"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un résultat vide après assainissement est rejeté, pas renvoyé comme un nom vide",
+            "description": "Lorsque la suppression des caractères illégaux et des espaces ne laisse absolument rien — une base composée uniquement de caractères illégaux, par exemple —, l'outil renvoie une erreur \"résultat invalide\" plutôt qu'une chaîne vide inutilisable."
+          },
+          {
+            "title": "Les noms de périphériques réservés par Windows sont détectés sans distinction de casse après assainissement",
+            "description": "Une base assainie correspondant exactement à CON, PRN, AUX, NUL, ou COM1-9/LPT1-9, quelle que soit la casse, se voit ajouter le séparateur et \"file\", car ces noms sont réservés par Windows même sans extension de fichier attachée."
+          },
+          {
+            "title": "La troncature préserve toujours l'extension intacte",
+            "description": "Lorsque le nom combiné dépasse la longueur maximale, seul le nom de base est raccourci ; l'extension, y compris son point initial, est entièrement conservée, de sorte qu'un fichier tronqué ne perd jamais d'information sur son type de fichier."
+          },
+          {
+            "title": "Les points et espaces finaux sont supprimés lors d'une passe distincte de la suppression des caractères illégaux",
+            "description": "La suppression des caractères illégaux retire uniquement des caractères comme < > : \" / \\ | ? *, de sorte qu'une base se terminant par un simple point (comme \"notes..\") nécessite ensuite une étape de coupe finale dédiée, car un point lui-même ne fait pas partie de l'ensemble des caractères illégaux, bien que Windows interdise tout de même un nom se terminant par un point."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi l'outil sépare-t-il le nom de fichier en base et extension avant assainissement, plutôt que d'assainir toute la chaîne d'un coup ?",
+            "answer": "Séparer à l'avance permet à l'outil de garantir que l'extension survit intacte à l'assainissement et se retrouve toujours à la bonne position après le nom de base, et permet à la troncature de ne raccourcir que la base tout en préservant l'extension entièrement — assainir la chaîne combinée comme une unité risquerait de corrompre le point qui les sépare ou de tronquer l'extension elle-même pendant la troncature."
+          },
+          {
+            "question": "Pourquoi la suppression des caractères accentués (translittération) est-elle une étape optionnelle plutôt que toujours appliquée ?",
+            "answer": "Les caractères accentués comme é, ñ ou ü sont parfaitement valides dans les noms de fichiers sur les systèmes Windows, macOS et Linux modernes — ils ne sont en réalité pas illégaux —, donc les translittérer est un choix stylistique pour une compatibilité maximale avec des systèmes plus anciens ou des contextes ASCII pur, pas une exigence de correction, ce qui explique pourquoi c'est désactivé par défaut plutôt qu'imposé à tous."
+          },
+          {
+            "question": "Pourquoi les noms réservés par Windows comme CON ou NUL sont-ils pertinents sur macOS ou Linux, où ils ne sont pas du tout bloqués ?",
+            "answer": "L'assainisseur est conçu pour produire un nom de fichier sûr à utiliser sur les trois systèmes d'exploitation majeurs simultanément, car les fichiers sont couramment déplacés entre eux via synchronisation cloud, clés USB, ou stockage réseau partagé — un nom qui fonctionne parfaitement bien lors de sa création sur macOS mais qui se trouve être CON ou NUL causerait tout de même des problèmes dès qu'il serait copié vers ou accédé depuis un système Windows."
+          },
+          {
+            "question": "Pourquoi la longueur maximale par défaut est-elle spécifiquement de 255 caractères ?",
+            "answer": "255 caractères (ou octets, selon le système de fichiers) est la limite de longueur de nom de fichier la plus courante parmi les systèmes de fichiers modernes, y compris NTFS, APFS et la plupart des systèmes de fichiers Linux comme ext4 — l'utiliser par défaut signifie que la sortie assainie fonctionnera très probablement partout sans atteindre une limite de longueur, bien que certains systèmes de fichiers spécifiques ou restrictions de longueur de chemin complet puissent être plus restrictifs."
+          }
+        ]
+      },
+      "duplicate-line-remover": {
+        "version": "v1",
+        "description": "Référence technique du Suppresseur de Lignes en Double : comment les lignes répétées sont détectées, dédupliquées et rapportées, les variables acceptées et les cas limites gérés.",
+        "sectionFormula": "Formule principale",
+        "sectionFlowchart": "Comment le calcul est effectué",
+        "sectionAnatomy": "Total de lignes réparti en conservées et supprimées",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Cas limites gérés",
+        "sectionFaq": "Questions fréquentes",
+        "sectionRelatedTools": "Outils associés",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Options",
+          "modesValue": "4",
+          "relatedTools": "Outils associés",
+          "readTime": "Temps de lecture",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "lignesUniques = nombre de lignes distinctes vues  |  nombreSupprimé = lignesTotales − lignesUniques",
+          "note": "Chaque ligne non vide est comptée une fois dans le total, puis regroupée par correspondance exacte (ou insensible à la casse) avec toute autre ligne — le nombre de lignes supprimées est simplement l'écart entre le nombre de lignes reçues et le nombre de lignes distinctes obtenues."
+        },
+        "flowchart": {
+          "intro": "Chaque ligne est traitée une fois pour construire simultanément à la fois la sortie dédupliquée et le rapport de fréquence des doublons.",
+          "steps": [
+            "Diviser l'entrée en lignes selon tout style de saut de ligne (\\n, \\r\\n, ou \\r), en coupant optionnellement d'abord les espaces de chaque ligne",
+            "Ignorer entièrement les lignes vides — elles ne comptent pas dans les totaux et n'apparaissent jamais dans la sortie",
+            "Pour chaque ligne restante, l'utiliser directement comme clé de comparaison si sensible à la casse, ou sa forme en minuscules sinon, et compter combien de fois cette clé apparaît dans toute l'entrée",
+            "Décider quelle ligne physique conserver pour chaque clé : la première occurrence rencontrée, ou la dernière, selon le paramètre choisi — en conservant la position relative d'origine de cette occurrence pour l'ordonnancement",
+            "Optionnellement, retrier alphabétiquement les lignes dédupliquées plutôt que de conserver la position d'origine, et rapporter séparément toute ligne apparue plus d'une fois avec son nombre total d'occurrences, triées de la plus fréquente à la moins fréquente"
+          ],
+          "caption": "Une passe sur chaque ligne construit ensemble la sortie dédupliquée et le rapport de fréquence des doublons."
+        },
+        "anatomy": {
+          "intro": "Chaque ligne entrante finit dans exactement l'un de deux compartiments — les lignes qui ont survécu à la déduplication, ou les lignes répétées supplémentaires qui ont été supprimées.",
+          "labelKept": "Conservées (uniques)",
+          "labelRemoved": "Supprimées (doublons)",
+          "totalLabel": "10 lignes au total",
+          "caption": "Pour une liste de 10 lignes d'entrée non vides avec 3 répétitions, 7 lignes uniques sont conservées et 3 occurrences de doublons sont supprimées — conservées plus supprimées font toujours le total d'origine."
+        },
+        "variablesColumns": {
+          "symbol": "Symbole",
+          "meaning": "Signification",
+          "unit": "Unité"
+        },
+        "variables": [
+          {
+            "symbol": "Texte",
+            "meaning": "Le texte d'entrée, traité une ligne à la fois.",
+            "unit": "Texte"
+          },
+          {
+            "symbol": "Sensible à la casse",
+            "meaning": "Si les lignes qui ne diffèrent que par la casse comptent comme des doublons. Vrai par défaut (sensible à la casse).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Trier",
+            "meaning": "Si la sortie dédupliquée doit être triée alphabétiquement plutôt que de conserver l'ordre d'origine. Faux par défaut.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Occurrence à conserver",
+            "meaning": "Quelle occurrence d'une ligne répétée conserver : la première, ou la dernière. Première par défaut.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Couper les espaces",
+            "meaning": "S'il faut couper chaque ligne avant comparaison et sortie. Vrai par défaut.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Les lignes vides sont toujours ignorées, jamais comptées ni dédupliquées",
+            "description": "Une ligne vide (après coupe, si activée) ne contribue en rien aux lignes totales, aux lignes uniques, ou à la sortie, quel que soit le nombre de lignes vides apparaissant dans l'entrée."
+          },
+          {
+            "title": "La sensibilité à la casse change quelles lignes comptent comme \"identiques\" sans changer ce qui est affiché",
+            "description": "La clé de comparaison est convertie en minuscules lorsque la correspondance insensible à la casse est choisie, mais la ligne de sortie réelle conserve toujours la casse d'origine exactement telle qu'elle est apparue en premier, ou en dernier, dans l'entrée."
+          },
+          {
+            "title": "Conserver la première vs la dernière occurrence peut changer la casse de la ligne survivante",
+            "description": "Puisque le texte original exact (et non la clé de comparaison en minuscules) est stocké pour l'occurrence conservée, choisir \"dernière\" plutôt que \"première\" peut révéler une version de casse différente d'un doublon si les occurrences ultérieures utilisaient une casse différente de la première."
+          },
+          {
+            "title": "Le tri et l'ordre d'origine sont des paramètres indépendants et séparés",
+            "description": "La sortie par défaut conserve la position d'origine de chaque ligne conservée depuis l'entrée ; activer le tri ne fait que réorganiser alphabétiquement la liste dédupliquée finale — cela ne change pas quelle occurrence d'un doublon a été conservée en premier lieu."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Pourquoi les lignes vides sont-elles complètement ignorées plutôt que traitées comme des doublons les unes des autres ?",
+            "answer": "Les lignes vides sont typiquement juste de la mise en forme ou de l'espacement dans un document plutôt que des données significatives, et traiter chacune comme \"la même ligne en double\" produirait un rapport déroutant affirmant des dizaines de doublons de lignes vides dans un document par ailleurs normal — les exclure entièrement garde le rapport de doublons concentré sur le contenu réellement répété."
+          },
+          {
+            "question": "Quelle est la différence entre choisir de conserver la \"première\" vs la \"dernière\" occurrence d'un doublon ?",
+            "answer": "Les deux paramètres font survivre exactement une copie de chaque ligne unique, mais ils peuvent différer sur la version du texte de cette ligne qui est conservée si les occurrences ne sont pas identiques octet par octet — par exemple ne différant que par la casse — et dans des cas plus subtils où le contenu de la ligne est par ailleurs identique, \"première\" conserve la version apparue le plus tôt dans le document, \"dernière\" conserve celle apparue le plus récemment."
+          },
+          {
+            "question": "Pourquoi le rapport de doublons affiche-t-il un nombre pour chaque ligne répétée plutôt que de simplement lister les lignes supprimées ?",
+            "answer": "Un nombre indiquant combien de fois chaque ligne est apparue, plutôt que seulement combien ont été supprimées, vous indique à la fois qu'une ligne était dupliquée et dans quelle mesure, ce qui est plus utile pour repérer des motifs — cinq copies en double d'une ligne ressortent très différemment dans un rapport que cinq lignes distinctes ayant chacune exactement un doublon."
+          },
+          {
+            "question": "Comment la sensibilité à la casse affecte-t-elle quelles lignes sont considérées comme des doublons ?",
+            "answer": "Avec une correspondance sensible à la casse (le paramètre par défaut), \"Apple\" et \"apple\" sont traités comme deux lignes distinctes et survivent tous deux à la déduplication ; avec la correspondance insensible à la casse activée, ils sont traités comme la même ligne et un seul survit — quelle casse spécifique survit dépend alors du paramètre de conservation première-ou-dernière."
+          }
+        ]
       }
     }
   }

@@ -29120,6 +29120,619 @@
             "answer": "mailto: und SMSTO: sind erkannte URI-Schemata, die Telefone und Computer bereits zu handhaben wissen — das Scannen eines mailto:-QR-Codes öffnet die Standard-E-Mail-App des Geräts mit vorausgefüllter Adresse, Betreff und Text, und SMSTO: tut dasselbe für eine Textnachrichten-App. Dies macht den QR-Code beim Scannen sofort actionable, statt nur eine E-Mail-Adresse oder Telefonnummer als reinen Text anzuzeigen, der manuell kopiert werden müsste."
           }
         ]
+      },
+      "pdf-merge-split": {
+        "version": "v1",
+        "description": "Technische Referenz für PDF Zusammenführen & Teilen: wie Dokumente Seite für Seite kombiniert werden und wie Seitenbereiche geparst und extrahiert werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Eine Seitenbereichsliste parsen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Zusammenführen: Seiten(Dok₁) + Seiten(Dok₂) + ... → ein neues Dokument  |  Teilen: Dok[Start..Ende] → ein neues Dokument pro Bereich",
+          "note": "Beide Operationen arbeiten auf Ebene ganzer Seiten — Zusammenführen verkettet die Seiten jedes Quelldokuments in Reihenfolge zu einem einzigen neuen Dokument, während Teilen nur die Seiten innerhalb jedes angeforderten Bereichs in ein eigenes, separates neues Dokument kopiert."
+        },
+        "flowchart": {
+          "intro": "Zusammenführen und Teilen sind getrennte Operationen, die beide völlig neue PDF-Dokumente durch Kopieren von Seiten aufbauen, statt eine Quelldatei an Ort und Stelle zu ändern.",
+          "steps": [
+            "Zum Zusammenführen: ein neues, leeres PDF-Dokument erstellen, dann für jede Quelldatei in der gegebenen Reihenfolge diese laden und jede ihrer Seiten in ursprünglicher Reihenfolge in das neue Dokument kopieren",
+            "Das zusammengeführte Dokument als einen neuen Bytesatz speichern, der jede Seite jeder Quelldatei enthält, in der Reihenfolge, in der die Dateien angegeben wurden",
+            "Zum Teilen stattdessen: das Quell-PDF laden und seine Gesamtseitenzahl auslesen, dann bestimmen, welche Seitenbereiche extrahiert werden sollen — entweder die explizit angegebenen Bereiche, oder, falls keine angegeben wurden, ein Einzelseitenbereich pro Seite",
+            "Für jeden Bereich: seinen Start auf mindestens Seite 1 und sein Ende auf höchstens die letzte Seite des Dokuments begrenzen, dann den Bereich vollständig überspringen, wenn der begrenzte Start nach dem begrenzten Ende liegt",
+            "Nur die Seiten dieses Bereichs in ein brandneues Dokument kopieren und es speichern — was eine Ausgabedatei pro gültigem Bereich erzeugt, sodass eine einzige Bereichsliste mehrere separate PDFs auf einmal erzeugen kann"
+          ],
+          "caption": "Zusammenführen verkettet ganze Dokumente seitenweise; Teilen kopiert ein neues Dokument pro angefordertem Seitenbereich heraus."
+        },
+        "anatomy": {
+          "intro": "Ein einziger kommagetrennter Bereichsstring kann mehrere Seitenbereiche auf einmal anfordern, jeder wird zu seiner eigenen Anzahl zu extrahierender Seiten.",
+          "labelRangeOne": "Seiten 1-3",
+          "labelSingle": "Seite 5",
+          "labelRangeTwo": "Seiten 8-9",
+          "totalLabel": "6 Seiten ausgewählt",
+          "caption": "Der Bereichsstring \"1-3,5,8-9\" löst sich in drei separate Bereiche auf, die 3, 1 und 2 Seiten umfassen — 6 Seiten insgesamt, extrahiert als drei separate Ausgabedateien."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Zusammenzuführende Dateien",
+            "meaning": "Der Satz der Quell-PDF-Dateien, kombiniert in der angegebenen Reihenfolge. Im Zusammenführungsmodus verwendet.",
+            "unit": "Dateien"
+          },
+          {
+            "symbol": "Quell-PDF",
+            "meaning": "Die einzelne PDF-Datei, aus der Seiten extrahiert werden sollen. Im Teilungsmodus verwendet.",
+            "unit": "Datei"
+          },
+          {
+            "symbol": "Seitenbereiche",
+            "meaning": "Eine kommagetrennte Liste von Seitenzahlen und Bereichen (z. B. \"1-3,5,8-9\"), 1-indiziert und beidseitig einschließend. Im Teilungsmodus verwendet.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein ungeordneter oder ungültiger Bereich wird stillschweigend übersprungen",
+            "description": "Wenn der begrenzte Start eines Bereichs größer als sein begrenztes Ende ist (zum Beispiel ein angeforderter Bereich vollständig jenseits der tatsächlichen Seitenzahl des Dokuments), wird dieser Bereich einfach übersprungen, statt eine leere oder fehlerhafte Ausgabe zu erzeugen."
+          },
+          {
+            "title": "Bereiche werden auf die tatsächlichen Grenzen des Dokuments begrenzt, nicht abgelehnt",
+            "description": "Ein angeforderter Bereich wie Seite 1 bis 500 bei einem 10-seitigen Dokument wird auf 1-10 begrenzt, statt vollständig zu scheitern, sodass ein leicht zu großzügiger Bereich dennoch ein sinnvolles Ergebnis erzeugt."
+          },
+          {
+            "title": "Keine angegebenen Bereiche bedeutet \"in Einzelseiten aufteilen\"",
+            "description": "Wenn die Bereichsliste leer ist oder ausgelassen wird, greift das Tool standardmäßig auf einen Einzelseitenbereich pro Seite im Dokument zurück — ein 10-seitiges PDF wird so in zehn separate Einzelseiten-PDFs aufgeteilt."
+          },
+          {
+            "title": "Fehlerhafte Tokens in einem Bereichsstring werden verworfen, nicht als Fehler behandelt",
+            "description": "Der Bereichsparser behält nur Tokens, die einem gültigen \"Zahl\"- oder \"Zahl-Zahl\"-Muster mit einem positiven Start nicht größer als das Ende entsprechen; alles andere in einer kommagetrennten Liste — wie ein leeres Token durch ein verirrtes Komma — wird stillschweigend herausgefiltert, statt einen Fehler auszulösen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Was passiert, wenn ich PDFs mit unterschiedlichen Seitengrößen oder -ausrichtungen zusammenführe?",
+            "answer": "Jede Seite wird genau so kopiert, wie sie in ihrem Quelldokument existiert, wobei die eigene Größe und Ausrichtung dieser Seite erhalten bleibt — das Zusammenführen ändert die Größe, Ausrichtung oder Normalisierung von Seiten nicht, um sie aneinander anzugleichen, sodass ein zusammengeführtes Dokument frei Hoch- und Querformatseiten oder unterschiedliche Papiergrößen mischen kann, genau wie sie in den Originaldateien erschienen."
+          },
+          {
+            "question": "Warum sind Seitenbereiche 1-indiziert statt 0-indiziert?",
+            "answer": "1-Indizierung entspricht der Art und Weise, wie Seitenzahlen Nutzern tatsächlich in PDF-Betrachtern angezeigt und auf physischen Seiten gedruckt werden — \"Seite 1\" die erste Seite bedeuten zu lassen ist weit intuitiver als ein 0-indiziertes Schema, bei dem die erste Seite \"Seite 0\" wäre, auch wenn der zugrunde liegende Code intern in 0-indizierte Array-Positionen umrechnet."
+          },
+          {
+            "question": "Was passiert, wenn ich einen Seitenbereich anfordere, der vollständig jenseits der tatsächlichen Länge des Dokuments liegt?",
+            "answer": "Start und Ende des Bereichs werden jeweils auf die tatsächlichen Seitengrenzen des Dokuments begrenzt — wenn der Start eines Bereichs nach der Begrenzung größer als sein Ende ist, wird der gesamte Bereich stillschweigend übersprungen, was keine Ausgabedatei für diesen spezifischen Bereich erzeugt statt eines Fehlers, während alle anderen gültigen Bereiche in derselben Anfrage weiterhin normal ihre Dateien erzeugen."
+          },
+          {
+            "question": "Wird mein PDF beim Zusammenführen oder Teilen jemals irgendwohin hochgeladen?",
+            "answer": "Nein — beide Operationen laufen vollständig im Speicher mit pdf-lib ab, das direkt mit den Bytes der Datei arbeitet, ohne einen Server-Roundtrip zu benötigen; die Zusammenführungs- und Teilungslogik selbst enthält überhaupt keinen Netzwerkcode, sodass während dieses Verarbeitungsschritts nichts von Ihrem Dokument Ihr Gerät verlässt."
+          }
+        ]
+      },
+      "zip-compressor": {
+        "version": "v1",
+        "description": "Technische Referenz für den ZIP-Kompressor: wie Dateien mithilfe des DEFLATE-Algorithmus in ein ZIP-Archiv komprimiert und daraus extrahiert werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Das Kompressionsverhältnis hängt vom Dateityp ab",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Komprimieren: Dateien → DEFLATE-Algorithmus → einzelnes .zip-Archiv (im Speicher)  |  Extrahieren: .zip-Archiv → DEFLATE-Dekodierung → einzelne Dateien",
+          "note": "Jede zum Archiv hinzugefügte Datei wird mit demselben Algorithmus komprimiert, DEFLATE, der nach wiederholten Bytemustern innerhalb jeder Datei sucht und sie durch kürzere Referenzen ersetzt — wie stark eine bestimmte Datei tatsächlich schrumpft, hängt vollständig davon ab, wie viel Wiederholung DEFLATE darin finden kann."
+        },
+        "flowchart": {
+          "intro": "Komprimierung und Extraktion sind spiegelbildliche Operationen, die beide vollständig im Speicher laufen, wobei durch diesen Schritt selbst nie eine Datei auf die Festplatte geschrieben oder an einen Server gesendet wird.",
+          "steps": [
+            "Zum Komprimieren: einen Satz benannter Dateien als rohe Bytes annehmen, jede unter ihrem angegebenen Namen zu einer neuen Archivstruktur hinzufügen und den DEFLATE-Kompressionsalgorithmus einzeln auf die Bytes jeder Datei anwenden",
+            "Das endgültige Archiv als eine einzige Bytefolge erzeugen, die jede komprimierte Datei enthält, bereit zum Herunterladen als eine .zip-Datei",
+            "Zum Extrahieren stattdessen: die Bytes eines vorhandenen .zip-Archivs laden und dessen interne Liste von Einträgen durchgehen, wobei jeder Eintrag, der ein Verzeichnis statt einer tatsächlichen Datei ist, übersprungen wird",
+            "Für jeden echten Dateieintrag dessen Bytes zurück in ihre ursprüngliche Form dekomprimieren",
+            "Den Namen, den dekomprimierten Inhalt und die dekomprimierte Bytegröße jeder extrahierten Datei melden"
+          ],
+          "caption": "Komprimierung wendet DEFLATE auf jede Datei an, die ins Archiv gelangt; Extraktion kehrt dies für jede Datei um, die wieder herauskommt."
+        },
+        "anatomy": {
+          "intro": "DEFLATE komprimiert durch Finden wiederholter Muster in den Bytes einer Datei — wie gut das funktioniert, hängt stark davon ab, ob die Datei bereits diese Art von Wiederholung enthält, weshalb verschiedene Dateitypen um sehr unterschiedliche Beträge schrumpfen.",
+          "labelText": "Reiner Text (.txt)",
+          "labelCompressed": "Bereits komprimiert (.jpg/.mp4/.zip)",
+          "caption": "Eine typische reine Textdatei könnte auf etwa 30 % ihrer ursprünglichen Größe komprimiert werden, während ein bereits komprimiertes Format wie JPG, MP4 oder ein weiteres ZIP oft kaum schrumpft, da DEFLATE bereits herausgequetschte Muster vorfindet."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Zu komprimierende Dateien",
+            "meaning": "Der Satz von Dateien, jede mit Namen und rohem Byte-Inhalt, die zu einem neuen ZIP-Archiv hinzugefügt werden sollen.",
+            "unit": "Dateien"
+          },
+          {
+            "symbol": "Archivdaten",
+            "meaning": "Die rohen Bytes einer vorhandenen .zip-Datei, beim Extrahieren verwendet.",
+            "unit": "Datei"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Alles geschieht im Speicher, nichts wird hochgeladen",
+            "description": "Sowohl Komprimierung als auch Extraktion laufen vollständig clientseitig ab; durch diese Funktion selbst wird keine Datei auf die Festplatte geschrieben oder an einen Server gesendet, anders als bei manchen webbasierten ZIP-Tools, die Dateien remote verarbeiten."
+          },
+          {
+            "title": "Verzeichniseinträge werden bei der Extraktion stillschweigend übersprungen",
+            "description": "Ein .zip-Archiv kann Ordnereinträge neben Dateieinträgen enthalten — der Extraktionsschritt filtert diese explizit heraus, sodass nur tatsächliche Dateien mit echtem Inhalt zurückgegeben werden, keine leeren Ordner-Platzhalter."
+          },
+          {
+            "title": "Komprimierung verwendet immer DEFLATE, nie einen unkomprimierten \"Store\"-Modus",
+            "description": "Jede zum Archiv hinzugefügte Datei wird mit dem DEFLATE-Algorithmus komprimiert, selbst Dateien, die kaum schrumpfen, wie bereits komprimierte Formate — statt solche Dateien zu erkennen und für sie auf einen unkomprimierten Durchleitungsmodus umzuschalten."
+          },
+          {
+            "title": "Die Gesamtgröße wird aus dekomprimierten Größen berechnet, nicht aus komprimierten",
+            "description": "Gemeldete Dateigrößen summieren die tatsächliche dekomprimierte Bytelänge jeder extrahierten Datei — was zählt, wenn dieser Inhalt anschließend verwendet oder gespeichert wird — nicht die kleinere komprimierte Größe, die diese Bytes innerhalb des Archivs belegten."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum reduziert das Zippen einer bereits komprimierten Datei, wie einer JPG oder MP4, deren Größe kaum?",
+            "answer": "Die DEFLATE-Komprimierung funktioniert durch das Finden wiederholter Muster in den rohen Bytes einer Datei und deren Ersetzung durch kürzere Referenzen — Bild- und Videoformate wie JPG und MP4 verwenden bereits ihre eigene interne Komprimierung, die die meiste dieser Wiederholung entfernt, sodass für DEFLATE nur sehr wenig übrig bleibt, das es finden und weiter herausquetschen könnte. Das Zippen einer solchen Datei fügt hauptsächlich nur einen kleinen Betrag an Archiv-Overhead hinzu, statt sie merklich zu verkleinern."
+          },
+          {
+            "question": "Komprimiert das Zusammenzippen mehrerer Dateien besser als das separate Zippen?",
+            "answer": "Das kann es, besonders bei vielen kleinen, ähnlichen Dateien — DEFLATE kann manchmal nützliche Muster über nahe beieinanderliegende Daten innerhalb des Komprimierungsprozesses finden, und ein einzelnes Archiv vermeidet den kleinen festen Overhead, den der eigene Header und die Metadaten jeder separaten .zip-Datei hinzufügen würden. Bei einer kleinen Anzahl großer, unähnlicher Dateien ist der Unterschied typischerweise in beide Richtungen gering."
+          },
+          {
+            "question": "Warum verwendet das Tool immer DEFLATE, statt eine unkomprimierte \"Store\"-Option anzubieten?",
+            "answer": "DEFLATE ist die standardmäßige, universell unterstützte Komprimierungsmethode für ZIP-Archive, und die konsistente Verwendung hält das Tool einfach — selbst bei Dateien, die sich nicht gut komprimieren lassen, ist der Overhead von DEFLATE gering, und jedes ZIP-kompatible Programm kann DEFLATE-komprimierte Einträge dekomprimieren, ohne einen separaten unkomprimierten Modus erkennen oder handhaben zu müssen."
+          },
+          {
+            "question": "Werden meine Dateidaten während der Komprimierung oder Extraktion jemals an einen Server hochgeladen?",
+            "answer": "Nein — beide Operationen laufen vollständig im Browser mit einer speicherinternen ZIP-Bibliothek ab; die Komprimierungs- und Extraktionslogik selbst enthält keinen Netzwerkcode, sodass die Inhalte Ihrer Dateien während dieses Verarbeitungsschritts nie Ihr Gerät verlassen."
+          }
+        ]
+      },
+      "csv-json-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den CSV-↔-JSON-Konverter: wie Trennzeichenerkennung, das Parsen zitierter Felder und das Abflachen verschachtelter Objekte in beide Richtungen funktionieren, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Das Trennzeichen automatisch erkennen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Modi",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Auto-Erkennung: Trennzeichen = Kandidat mit der höchsten Anzahl in der ersten Zeile  |  CSV→JSON: jede Zeile → ein Objekt, nach Header verschlüsselt  |  JSON→CSV: jedes Objekt → eine abgeflachte Zeile",
+          "note": "Die Umwandlung von CSV zu JSON macht jede Zeile zu einem Objekt, das nach Spaltenüberschriften verschlüsselt ist, während die Umwandlung von JSON zu CSV das Gegenteil tut — die Eigenschaften jedes Objekts (einschließlich verschachtelter, über Punktnotation) werden zu einer einzigen Zeile unter einem gemeinsamen Satz von Spaltenüberschriften abgeflacht."
+        },
+        "flowchart": {
+          "intro": "Die Trennzeichenauflösung erfolgt einmal im Voraus; alles danach hängt davon ab, in welche Richtung die Umwandlung läuft.",
+          "steps": [
+            "Den Eingabetext trimmen und ihn sofort ablehnen, wenn er leer ist",
+            "Das Trennzeichen auflösen: bei automatischer Erkennung zählen, wie oft jedes Kandidatenzeichen (Komma, Semikolon, Tabulator, Pipe) nur in der ersten Zeile vorkommt, und dasjenige wählen, das am häufigsten vorkommt; andernfalls das explizit gewählte Trennzeichen verwenden",
+            "Für CSV→JSON: den Text Zeichen für Zeichen parsen, wobei verfolgt wird, ob sich jede Position innerhalb eines zitierten Felds befindet, sodass Trennzeichen, Zeilenumbrüche und doppelte Anführungszeichen innerhalb von Zitaten als wörtlicher Inhalt statt als Struktur gelesen werden, dann jede resultierende Zeile in ein Objekt umwandeln, wobei die erste Zeile als Header verwendet wird, oder generierte column1-, column2-…-Namen, falls kein Header vorhanden ist",
+            "Für JSON→CSV: den Text als JSON parsen und ein Array auf oberster Ebene verlangen, die verschachtelten Eigenschaften jedes Objekts zu Punktnotation-Schlüsseln abflachen, die Vereinigung jedes resultierenden Schlüssels über alle Objekte als Spaltenüberschriften sammeln, dann eine Zeile pro Objekt aufbauen, wobei jedes Feld, das ein Anführungszeichen, einen Zeilenumbruch oder das Trennzeichen selbst enthält, maskiert wird",
+            "Den resultierenden Text zusammen mit dem tatsächlich verwendeten Trennzeichen zurückgeben, was speziell dann wichtig ist, wenn die automatische Erkennung lief"
+          ],
+          "caption": "Ein Trennzeichenauflösungsschritt, dann entweder Zeile-zu-Objekt- oder Objekt-zu-Zeile-Umwandlung, je nach gewählter Richtung."
+        },
+        "anatomy": {
+          "intro": "Die automatische Erkennung wählt dasjenige Kandidaten-Trennzeichen, das in der ersten Zeile der Datei am häufigsten vorkommt — eine einfache Häufigkeitszählung über eine kurze, feste Liste gängiger Trennzeichen.",
+          "labelComma": "Komma (,)",
+          "labelSemicolon": "Semikolon (;)",
+          "labelTab": "Tabulator",
+          "labelPipe": "Pipe (|)",
+          "caption": "Für die erste Zeile \"name,age;city,note\" erscheint das Komma zweimal, das Semikolon einmal, und Tabulator und Pipe gar nicht — die automatische Erkennung wählt das Komma als Trennzeichen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der CSV- oder JSON-Text, der umgewandelt werden soll, je nach gewähltem Modus.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Modus",
+            "meaning": "Ob CSV zu JSON umgewandelt werden soll, oder JSON zurück zu CSV.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Trennzeichen",
+            "meaning": "Welches Zeichen CSV-Felder trennt: Komma, Semikolon, Tabulator, Pipe, oder automatische Erkennung.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Hat Header",
+            "meaning": "Nur CSV→JSON: ob die erste Zeile eine Header-Zeile statt Daten ist.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leere Eingabe wird vor jedem Parsen abgelehnt",
+            "description": "Text, der sich auf nichts reduziert, gibt sofort einen \"leere Eingabe\"-Fehler für beide Umwandlungsrichtungen zurück, statt ein leeres oder irreführendes Ergebnis zu erzeugen."
+          },
+          {
+            "title": "Die automatische Erkennung schaut nur auf die erste Zeile",
+            "description": "Die Trennzeichenerkennung zählt die Vorkommen jedes Kandidaten nur in der ersten Zeile des Texts, dann wird dasselbe Trennzeichen für jede nachfolgende Zeile wiederverwendet — eine Datei, die Trennzeichen über Zeilen hinweg inkonsistent mischt, wird nicht korrekt erkannt oder geparst."
+          },
+          {
+            "title": "Zitierte CSV-Felder können das Trennzeichen, Anführungszeichen und Zeilenumbrüche enthalten",
+            "description": "Der zeichenweise Parser verfolgt, ob er sich innerhalb eines zitierten Felds befindet, sodass ein Wert wie \"Smith, John\" (mit dem Trennzeichen innerhalb von Anführungszeichen) als ein Feld gelesen wird statt in zwei geteilt zu werden, und ein doppeltes Anführungszeichen \"\" innerhalb eines zitierten Felds wird zu einem einzelnen literalen Anführungszeichen entmaskiert."
+          },
+          {
+            "title": "JSON→CSV erfordert speziell ein Array auf oberster Ebene",
+            "description": "Wenn das geparste JSON syntaktisch gültig ist, aber kein Array — ein einzelnes Objekt, eine Zahl oder ein String zum Beispiel —, gibt das Tool einen \"Array erwartet\"-Fehler zurück, statt zu raten, wie ein Nicht-Array-Wert in Tabellenzeilen verpackt werden soll."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum prüft die automatische Erkennung nur die erste Zeile, statt die gesamte Datei zu scannen?",
+            "answer": "Eine wohlgeformte CSV-Datei verwendet durchgängig dasselbe Trennzeichen, und die erste Zeile — oft die Header-Zeile — zeigt zuverlässig, welches Trennzeichen verwendet wird, ohne einen vollständigen Scan potenziell großer Eingaben zu erfordern. Nur die erste Zeile zu prüfen hält die Erkennung schnell und ist für die überwiegende Mehrheit echter CSV-Dateien ausreichend, die Trennzeichen nicht mitten in der Datei mischen."
+          },
+          {
+            "question": "Wie geht der Konverter mit einem Komma innerhalb eines zitierten CSV-Felds um?",
+            "answer": "Der Parser verfolgt den Anführungszeichenstatus zeichenweise, statt einfach am Trennzeichen zu teilen — innerhalb eines zitierten Felds wird ein Komma (oder was auch immer das aktive Trennzeichen ist) als wörtlicher Text behandelt, der zu diesem Feld gehört, nicht als Feldtrenner, sodass ein Wert wie \"Springfield, IL\" korrekt als ein Feld zusammenbleibt, statt in zwei geteilt zu werden."
+          },
+          {
+            "question": "Warum flacht JSON→CSV verschachtelte Objekte zu Punktnotation-Schlüsseln ab, statt sie einfach zu Strings zu machen?",
+            "answer": "Punktnotation-Abflachung (die {\"address\": {\"city\": \"Boston\"}} zu einer Spalte namens \"address.city\" macht) hält jeden einzelnen verschachtelten Wert in seiner eigenen Spalte, was das resultierende CSV in einer Tabellenkalkulation so nutzbar macht, wie flache Tabellendaten normalerweise sind — das gesamte verschachtelte Objekt stattdessen in eine Zelle zu verwandeln, würde diese strukturierten Daten in unparsbarem Text vergraben."
+          },
+          {
+            "question": "Was passiert mit Array-Werten innerhalb eines JSON-Objekts bei der Umwandlung zu CSV?",
+            "answer": "Der Abflachungsschritt erweitert nur einfache verschachtelte Objekte zu Punktnotation-Schlüsseln; Arrays werden unverändert gelassen und an den Zellenwert-Schritt weitergegeben, der sie in ihre JSON-Textdarstellung für diese eine Zelle umwandelt — da CSV-Zeilen keine native Möglichkeit haben, eine Liste variabler Länge darzustellen, bleiben die Array-Daten so als lesbarer Text intakt, statt verloren zu gehen."
+          }
+        ]
+      },
+      "file-size-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Dateigrößen-Umrechner: wie eine Größe in rohe Bytes umgerechnet und gleichzeitig in jeder dezimalen (SI) und binären (IEC) Einheit neu ausgedrückt wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Dezimal vs. Binär: dieselben Bytes, unterschiedliche Zahlen",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Standards",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Bytes = Wert × Basisᵏ  (dezimal: Basis = 1000, binär: Basis = 1024)  |  k = Einheitenstufe, B=0 bis PB=5",
+          "note": "Der eingegebene Wert wird zunächst in eine einzige gemeinsame Einheit umgerechnet, rohe Bytes, unter Verwendung der Basis (1000 für dezimal, 1024 für binär), in der die Quelleinheit gemessen wird — von dieser einen Bytezahl aus drückt das Tool die Größe dann in jeder Einheit beider Standards gleichzeitig neu aus."
+        },
+        "flowchart": {
+          "intro": "Eine Umrechnung zu Bytes speist zwei separate Einheitenleitern, unabhängig davon berechnet, welchen Standard die Eingabe verwendete.",
+          "steps": [
+            "Prüfen, dass der eingegebene Wert null oder positiv ist, wobei negative Größen rundweg abgelehnt werden",
+            "Bestimmen, welche Basis für die Quelleinheit verwendet wird: 1000 für den dezimalen (SI-)Standard, oder 1024 für den binären (IEC-)Standard, standardmäßig dezimal",
+            "Den eingegebenen Wert in rohe Bytes umrechnen, indem er mit dieser Basis potenziert mit der Stufe der Quelleinheit multipliziert wird — B ist Stufe 0, KB/KiB ist Stufe 1, bis hinauf zu PB/PiB bei Stufe 5",
+            "Dieselbe Bytezahl in jeder dezimalen Einheit (B, KB, MB, GB, TB, PB) neu ausdrücken, indem durch aufeinanderfolgende Potenzen von 1000 geteilt wird",
+            "Dieselbe Bytezahl erneut in jeder binären Einheit (B, KiB, MiB, GiB, TiB, PiB) neu ausdrücken, indem durch aufeinanderfolgende Potenzen von 1024 geteilt wird"
+          ],
+          "caption": "Eine einzige, einmal berechnete Bytezahl, die gleichzeitig durch zwei unabhängige Einheitenleitern läuft — dezimal und binär."
+        },
+        "anatomy": {
+          "intro": "Dieselbe physikalische Datenmenge erhält je nach verwendetem Standard eine unterschiedlich aussehende Zahl — eine Tatsache, die reale Verwirrung darüber verursacht hat, wie Speicherhersteller und Betriebssysteme die Größe angeben.",
+          "labelDecimal": "Als GB (dezimal)",
+          "labelBinary": "Als GiB (binär)",
+          "caption": "1.000.000.000 Bytes sind unter dem dezimalen Standard exakt 1,0 GB, aber unter dem binären Standard nur etwa 0,931 GiB — dieselbe Bytezahl, zwei unterschiedliche Zahlen, je nachdem welche Basis verwendet wird."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Wert",
+            "meaning": "Die umzurechnende numerische Größe. Muss null oder positiv sein.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Von Einheit",
+            "meaning": "In welcher Einheit der eingegebene Wert gemessen wird: B, KB, MB, GB, TB, oder PB.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Standard",
+            "meaning": "Welche Basis die Quelleinheit verwendet: dezimal (SI, ×1000 pro Schritt) oder binär (IEC, ×1024 pro Schritt). Standardmäßig dezimal.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Negative Werte werden rundweg abgelehnt",
+            "description": "Ein Wert, der nicht null oder positiv ist, gibt einen \"negativer Wert\"-Fehler zurück, statt eine negative Größe als null zu behandeln oder eine unsinnige negative Umrechnung zu versuchen."
+          },
+          {
+            "title": "Der Standard ändert, was ein einzelner Einheitenschritt bedeutet, nicht nur seine Bezeichnung",
+            "description": "Dezimal behandelt jeden Schritt nach oben (B→KB→MB…) als Multiplikation mit 1000; binär behandelt denselben Schritt als Multiplikation mit 1024 — ein unter einem Standard umgerechneter Wert ist nicht dieselbe Zahl wie dieselbe Eingabe, unter dem anderen umgerechnet."
+          },
+          {
+            "title": "Beide Standards werden immer zusammen berechnet, unabhängig vom gewählten",
+            "description": "Die \"Standard\"-Eingabe beeinflusst nur, wie der Quellwert zunächst in rohe Bytes umgerechnet wird — die Ausgabe enthält immer die vollständige dezimale Leiter und die vollständige binäre Leiter nebeneinander, nicht nur die zum Eingabestandard passende."
+          },
+          {
+            "title": "Null ist eine gültige, vollständig unterstützte Eingabe",
+            "description": "Ein Wert von exakt null erzeugt null über jede Einheit in beiden Standards, statt als Sonder- oder ungültiger Fall behandelt zu werden, da eine Dateigröße von null Bytes (eine leere Datei) physikalisch sinnvoll ist."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ergeben dezimal (GB) und binär (GiB) unterschiedlich aussehende Zahlen für das, was sich wie dieselbe Dateigröße anfühlt?",
+            "answer": "Speicherhersteller haben traditionell den dezimalen Standard verwendet (1 GB = 1.000.000.000 Bytes), während viele Betriebssysteme historisch die Größe mit dem binären Standard meldeten, sie aber mit dezimalen Einheitennamen falsch beschrifteten — diese Diskrepanz ist genau der Grund, warum ein als \"1 TB\" beworbenes Laufwerk in einem Betriebssystem, das tatsächlich in binären (TiB-großen) Einheiten rechnet, aber ein dezimal wirkendes Etikett anzeigt, etwa 931 GB anzeigen kann."
+          },
+          {
+            "question": "Warum berechnet das Tool alle sechs Einheiten für beide Standards, statt nur in die eine angeforderte Einheit umzurechnen?",
+            "answer": "Alle Einheiten auf einmal zu zeigen — sowohl dezimal als auch binär — lässt Sie sofort vergleichen, wie eine gegebene Größe in verschiedenen Kontexten aussieht, ohne mehrere separate Umrechnungen durchführen zu müssen, was besonders nützlich ist angesichts dessen, wie oft dezimale und binäre Einheiten in echter Software- und Hardware-Dokumentation verwechselt oder falsch beschriftet werden."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen der \"Standard\"-Eingabe und den in der Ausgabe gezeigten Einheiten?",
+            "answer": "Die \"Standard\"-Eingabe bestimmt nur, wie Ihr eingegebener Wert und Ihre Einheit interpretiert werden, um überhaupt zunächst die zugrunde liegende Bytezahl zu berechnen — sobald diese Bytezahl bekannt ist, zeigt das Tool sie immer neu ausgedrückt in jeder Einheit beider Standards, unabhängig davon, welchen Standard Sie für die Eingabe verwendet haben."
+          },
+          {
+            "question": "Warum wird eine negative Dateigröße abgelehnt, statt einfach ein negatives Ergebnis anzuzeigen?",
+            "answer": "Eine Datei- oder Datengröße kann physikalisch nicht negativ sein — es gibt keine sinnvolle reale Interpretation von \"−5 Megabyte\" — daher validiert das Tool dies im Voraus und gibt einen expliziten Fehler zurück, statt die Arithmetik durchzuführen und eine technisch berechnete, aber bedeutungslose negative Zahl anzuzeigen."
+          }
+        ]
+      },
+      "file-name-sanitizer": {
+        "version": "v1",
+        "description": "Technische Referenz für den Dateinamen-Bereiniger: wie ein Dateiname für die sichere Verwendung auf Windows, macOS und Linux durch eine Sequenz von Transformationen bereinigt wird, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernlogik",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Ein bereinigter Name wird kürzer, nicht nur sauberer",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Transformationsschritte",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Name → [transliterieren] → illegale Zeichen entfernen → Leerzeichen zu Trennzeichen zusammenfassen → abschließende Punkte/Leerzeichen trimmen → reservierte Namen schützen → auf maximale Länge kürzen",
+          "note": "Der Basisname und die Dateierweiterung werden unabhängig durch dieselbe Sequenz von Transformationen bereinigt, dann wieder zusammengefügt — jeder Schritt in der Pipeline behandelt eine spezifische Klasse von Problemen, die einen Dateinamen auf dem einen oder anderen Betriebssystem ungültig oder unpraktisch machen könnten."
+        },
+        "flowchart": {
+          "intro": "Basisname und Erweiterung werden zuerst getrennt, dann wird jeder durch dieselbe Bereinigungspipeline geschickt, bevor sie wieder zusammengefügt werden.",
+          "steps": [
+            "Den Dateinamen an seinem letzten Punkt in einen Basisnamen und eine Erweiterung aufteilen, solange dieser Punkt nicht das allererste oder allerletzte Zeichen ist",
+            "Die Basis (und separat die Erweiterung, falls vorhanden) durch dieselbe Pipeline laufen lassen: optional Akzente und diakritische Zeichen zu reinem ASCII entfernen, auf Windows, macOS oder Linux illegale Zeichen entfernen, Leerzeichen zum gewählten Trennzeichen zusammenfassen, dann wiederholte Trennzeichen zusammenfassen und führende oder abschließende trimmen",
+            "Etwaige abschließende Punkte oder Leerzeichen speziell auf der Basis trimmen — Windows verbietet einen Namen, der mit einem von beiden endet, eine Regel, die die vorherige Entfernung illegaler Zeichen nicht abdeckt",
+            "Prüfen, ob die bereinigte Basis exakt einem von Windows reservierten Gerätenamen entspricht (CON, PRN, AUX, NUL, COM1-9, LPT1-9); falls ja, das Trennzeichen und das Wort \"file\" anhängen",
+            "Basis und Erweiterung wieder zusammenfügen, dann das gesamte Ergebnis auf die maximale Länge kürzen, falls zu lang — nur die Basis verkürzen, sodass die Erweiterung immer intakt erhalten bleibt"
+          ],
+          "caption": "Basis und Erweiterung werden unabhängig durch dieselbe Pipeline bereinigt, dann wieder zusammengefügt und als Ganzes auf Länge geprüft."
+        },
+        "anatomy": {
+          "intro": "Ein einziger Bereinigungsdurchgang kann mehrere verschiedene Arten von Problemen in einem Dateinamen auf einmal berühren — akzentuierte Zeichen, illegale Zeichensetzung und Abstände werden alle in derselben Operation gelöst.",
+          "labelBefore": "Vorher",
+          "labelAfter": "Nachher",
+          "caption": "\"Café Photo!!.JPG\" (16 Zeichen) wird zu \"cafe-photo.jpg\" (14 Zeichen) bereinigt — das akzentuierte é transliteriert, die Ausrufezeichen als illegale Zeichen entfernt, das Leerzeichen zu einem Bindestrich zusammengefasst, und das gesamte Ergebnis in Kleinbuchstaben."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Dateiname",
+            "meaning": "Der ursprüngliche zu bereinigende Dateiname, einschließlich seiner Erweiterung, falls vorhanden.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Kleinbuchstaben",
+            "meaning": "Ob das Ergebnis in Kleinbuchstaben umgewandelt werden soll. Standardmäßig wahr.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Trennzeichen",
+            "meaning": "Welches Zeichen Leerzeichen ersetzt und Wörter verbindet: Bindestrich oder Unterstrich. Standardmäßig Bindestrich.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Transliterieren",
+            "meaning": "Ob Akzente und diakritische Zeichen zu reinem ASCII entfernt werden sollen (z. B. \"café\" → \"cafe\"). Standardmäßig falsch.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Maximale Länge",
+            "meaning": "Maximale Ausgabelänge in Zeichen, wobei bei Überschreitung der Basisname (nie die Erweiterung) gekürzt wird. Standardmäßig 255.",
+            "unit": "Zeichen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein leeres Ergebnis nach der Bereinigung wird abgelehnt, nicht als leerer Name zurückgegeben",
+            "description": "Wenn das Entfernen illegaler Zeichen und Leerzeichen überhaupt nichts übrig lässt — eine Basis, die nur aus illegalen Zeichen besteht, zum Beispiel —, gibt das Tool einen \"ungültiges Ergebnis\"-Fehler zurück statt eines unbrauchbaren leeren Strings."
+          },
+          {
+            "title": "Von Windows reservierte Gerätenamen werden nach der Bereinigung unabhängig von Groß-/Kleinschreibung erkannt",
+            "description": "Eine bereinigte Basis, die exakt CON, PRN, AUX, NUL, oder COM1-9/LPT1-9 entspricht — unabhängig von der Groß-/Kleinschreibung —, bekommt ein Trennzeichen und \"file\" angehängt, da diese Namen von Windows reserviert sind, selbst ohne angehängte Dateierweiterung."
+          },
+          {
+            "title": "Kürzung bewahrt immer die Erweiterung intakt",
+            "description": "Wenn der kombinierte Name die maximale Länge überschreitet, wird nur der Basisname verkürzt; die Erweiterung, einschließlich ihres führenden Punkts, wird vollständig beibehalten, sodass eine gekürzte Datei nie Informationen über ihren Dateityp verliert."
+          },
+          {
+            "title": "Abschließende Punkte und Leerzeichen werden in einem separaten Durchgang von der Entfernung illegaler Zeichen entfernt",
+            "description": "Die Entfernung illegaler Zeichen entfernt nur Zeichen wie < > : \" / \\ | ? *, sodass eine Basis, die mit einem reinen Punkt endet (wie \"notes..\"), danach einen eigenen Trimm-Schritt für das Ende benötigt, da ein Punkt selbst nicht in der Menge illegaler Zeichen ist, obwohl Windows dennoch einen mit einem Punkt endenden Namen verbietet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum trennt das Tool den Dateinamen vor der Bereinigung in Basis und Erweiterung, statt den gesamten String auf einmal zu bereinigen?",
+            "answer": "Vorheriges Trennen lässt das Tool garantieren, dass die Erweiterung die Bereinigung intakt übersteht und immer an der richtigen Stelle nach dem Basisnamen landet, und es lässt die Kürzung nur die Basis verkürzen, während die Erweiterung vollständig erhalten bleibt — den kombinierten String als eine Einheit zu bereinigen würde riskieren, dass der sie trennende Punkt verstümmelt wird oder die Erweiterung selbst während der Kürzung abgeschnitten wird."
+          },
+          {
+            "question": "Warum ist das Entfernen akzentuierter Zeichen (Transliteration) ein optionaler Schritt statt immer angewendet zu werden?",
+            "answer": "Akzentuierte Zeichen wie é, ñ oder ü sind in Dateinamen auf modernen Windows-, macOS- und Linux-Systemen vollkommen gültig — sie sind eigentlich nicht illegal —, daher ist ihre Transliteration eine stilistische Wahl für maximale Kompatibilität mit älteren Systemen oder reinen ASCII-Kontexten, keine Korrektheitsanforderung, weshalb sie standardmäßig deaktiviert ist, statt allen aufgezwungen zu werden."
+          },
+          {
+            "question": "Warum sind von Windows reservierte Namen wie CON oder NUL auf macOS oder Linux relevant, wo sie überhaupt nicht blockiert sind?",
+            "answer": "Der Bereiniger ist darauf ausgelegt, einen Dateinamen zu erzeugen, der auf allen drei großen Betriebssystemen gleichzeitig sicher zu verwenden ist, da Dateien routinemäßig zwischen ihnen verschoben werden (über Cloud-Synchronisation, USB-Laufwerke, oder gemeinsam genutzten Netzwerkspeicher) — ein Name, der beim erstmaligen Erstellen auf macOS problemlos funktioniert, aber zufällig CON oder NUL ist, würde dennoch Probleme verursachen, sobald er auf ein Windows-System kopiert oder von dort aufgerufen wird."
+          },
+          {
+            "question": "Warum ist die Standardmaximallänge ausgerechnet 255 Zeichen?",
+            "answer": "255 Zeichen (oder Bytes, je nach Dateisystem) ist die häufigste Dateinamenlängengrenze über moderne Dateisysteme hinweg, einschließlich NTFS, APFS und die meisten Linux-Dateisysteme wie ext4 — sie als Standard zu verwenden bedeutet, dass die bereinigte Ausgabe sehr wahrscheinlich überall funktioniert, ohne an eine Längengrenze zu stoßen, obwohl manche spezifischen Dateisysteme oder Beschränkungen der vollständigen Pfadlänge restriktiver sein können."
+          }
+        ]
+      },
+      "duplicate-line-remover": {
+        "version": "v1",
+        "description": "Technische Referenz für den Duplikat-Zeilen-Entferner: wie wiederholte Zeilen erkannt, dedupliziert und gemeldet werden, die akzeptierten Variablen und die behandelten Grenzfälle.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Gesamtzeilen aufgeteilt in behaltene und entfernte",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Optionen",
+          "modesValue": "4",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "eindeutigeZeilen = Anzahl der gesehenen unterschiedlichen Zeilen  |  entfernteAnzahl = Gesamtzeilen − eindeutigeZeilen",
+          "note": "Jede nicht-leere Zeile wird einmal zur Gesamtsumme gezählt, dann durch exakten (oder groß-/kleinschreibungsunabhängigen) Abgleich mit jeder anderen Zeile gruppiert — die Anzahl der entfernten Zeilen ist einfach die Lücke zwischen der Anzahl eingegangener Zeilen und der Anzahl unterschiedlicher herausgekommener."
+        },
+        "flowchart": {
+          "intro": "Jede Zeile wird einmal verarbeitet, um sowohl die deduplizierte Ausgabe als auch den Duplikat-Häufigkeitsbericht gleichzeitig aufzubauen.",
+          "steps": [
+            "Die Eingabe an jedem Zeilenumbruchstil (\\n, \\r\\n, oder \\r) in Zeilen aufteilen, wobei optional zuerst Leerzeichen von jeder Zeile getrimmt werden",
+            "Leere Zeilen vollständig überspringen — sie zählen nicht zu den Summen und erscheinen nie in der Ausgabe",
+            "Für jede verbleibende Zeile diese direkt als Vergleichsschlüssel verwenden, falls groß-/kleinschreibungssensitiv, oder ihre Kleinbuchstabenform, falls nicht, und zählen, wie oft dieser Schlüssel im gesamten Input erscheint",
+            "Entscheiden, welche physische Zeile für jeden Schlüssel erhalten bleibt: das erste angetroffene Vorkommen, oder das letzte, je nach gewählter Einstellung — wobei die ursprüngliche relative Position dieses Vorkommens für die Reihenfolge beibehalten wird",
+            "Optional die deduplizierten Zeilen alphabetisch statt nach ursprünglicher Position neu sortieren, und separat jede Zeile melden, die mehr als einmal erschien, zusammen mit ihrer Gesamtvorkommenszahl, sortiert von am häufigsten zu am seltensten"
+          ],
+          "caption": "Ein Durchgang über jede Zeile baut die deduplizierte Ausgabe und den Duplikat-Häufigkeitsbericht gemeinsam auf."
+        },
+        "anatomy": {
+          "intro": "Jede eingehende Zeile landet in genau einem von zwei Eimern — den Zeilen, die die Deduplizierung überlebt haben, oder den zusätzlichen wiederholten Zeilen, die entfernt wurden.",
+          "labelKept": "Behalten (eindeutig)",
+          "labelRemoved": "Entfernt (Duplikate)",
+          "totalLabel": "10 Zeilen insgesamt",
+          "caption": "Für eine Liste von 10 nicht-leeren Eingabezeilen mit 3 Wiederholungen werden 7 eindeutige Zeilen behalten und 3 Duplikatvorkommen entfernt — behalten plus entfernt ergibt immer wieder die ursprüngliche Gesamtsumme."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "Der Eingabetext, jeweils eine Zeile auf einmal verarbeitet.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Groß-/Kleinschreibung beachten",
+            "meaning": "Ob sich nur in der Groß-/Kleinschreibung unterscheidende Zeilen als Duplikate zählen. Standardmäßig wahr (groß-/kleinschreibungssensitiv).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Sortieren",
+            "meaning": "Ob die deduplizierte Ausgabe alphabetisch sortiert werden soll, statt die ursprüngliche Reihenfolge beizubehalten. Standardmäßig falsch.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Vorkommen behalten",
+            "meaning": "Welches Vorkommen einer wiederholten Zeile behalten werden soll: das erste, oder das letzte. Standardmäßig das erste.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Leerzeichen trimmen",
+            "meaning": "Ob jede Zeile vor dem Vergleich und der Ausgabe getrimmt werden soll. Standardmäßig wahr.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leere Zeilen werden immer übersprungen, nie gezählt oder dedupliziert",
+            "description": "Eine leere Zeile (nach dem Trimmen, falls aktiviert) trägt überhaupt nicht zu Gesamtzeilen, eindeutigen Zeilen, oder der Ausgabe bei, unabhängig davon, wie viele leere Zeilen in der Eingabe erscheinen."
+          },
+          {
+            "title": "Groß-/Kleinschreibungssensitivität ändert, welche Zeilen als \"dasselbe\" zählen, ohne zu ändern, was angezeigt wird",
+            "description": "Der Vergleichsschlüssel wird in Kleinbuchstaben umgewandelt, wenn groß-/kleinschreibungsunabhängiger Abgleich gewählt wird, aber die tatsächliche Ausgabezeile behält immer ihre ursprüngliche Groß-/Kleinschreibung genau so bei, wie sie zuerst — oder zuletzt — in der Eingabe erschien."
+          },
+          {
+            "title": "Das Behalten des ersten vs. letzten Vorkommens kann die Groß-/Kleinschreibung der überlebenden Zeile ändern",
+            "description": "Da der exakte ursprüngliche Text (nicht der in Kleinbuchstaben umgewandelte Vergleichsschlüssel) für das jeweils behaltene Vorkommen gespeichert wird, kann die Wahl von \"letztes\" statt \"erstes\" eine anders großgeschriebene Version eines Duplikats zutage fördern, falls spätere Vorkommen eine andere Groß-/Kleinschreibung als das erste verwendeten."
+          },
+          {
+            "title": "Sortierung und ursprüngliche Reihenfolge sind unabhängige, separate Einstellungen",
+            "description": "Die Standardausgabe bewahrt die ursprüngliche Position jeder behaltenen Zeile aus der Eingabe; das Aktivieren der Sortierung ordnet nur die endgültige deduplizierte Liste alphabetisch neu — es ändert nicht, welches Vorkommen eines Duplikats überhaupt behalten wurde."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum werden leere Zeilen vollständig ignoriert, statt als Duplikate voneinander behandelt zu werden?",
+            "answer": "Leere Zeilen sind typischerweise nur Formatierung oder Abstand in einem Dokument statt bedeutungsvolle Daten, und jede von ihnen als \"dieselbe Duplikatzeile\" zu behandeln würde einen verwirrenden Bericht erzeugen, der Dutzende Leerzeilen-Duplikate in einem ansonsten normalen Dokument behauptet — sie vollständig auszuschließen hält den Duplikatbericht auf tatsächlich wiederholten Inhalt fokussiert."
+          },
+          {
+            "question": "Was ist der Unterschied zwischen der Wahl, das \"erste\" vs. \"letzte\" Vorkommen eines Duplikats zu behalten?",
+            "answer": "Beide Einstellungen führen dazu, dass genau eine Kopie jeder eindeutigen Zeile überlebt, aber sie können sich darin unterscheiden, welche Version des Texts dieser Zeile behalten wird, falls Vorkommen nicht byte-für-byte identisch sind — zum Beispiel nur in der Groß-/Kleinschreibung unterschiedlich — und in subtileren Fällen, in denen der Zeileninhalt ansonsten identisch ist, behält \"erstes\" die Version, die im Dokument am frühesten erschien, \"letztes\" behält diejenige, die am jüngsten erschien."
+          },
+          {
+            "question": "Warum zeigt der Duplikatbericht eine Anzahl für jede wiederholte Zeile, statt einfach aufzulisten, welche Zeilen entfernt wurden?",
+            "answer": "Eine Anzahl, wie oft jede Zeile erschien (statt nur wie viele entfernt wurden), sagt Ihnen sowohl, dass eine Zeile dupliziert war, als auch um wie viel, was nützlicher ist, um Muster zu erkennen — fünf Duplikatkopien einer Zeile heben sich in einem Bericht ganz anders hervor als fünf verschiedene Zeilen, die jeweils zufällig genau ein Duplikat hatten."
+          },
+          {
+            "question": "Wie beeinflusst die Groß-/Kleinschreibungssensitivität, welche Zeilen als Duplikate gelten?",
+            "answer": "Bei groß-/kleinschreibungssensitivem Abgleich (der Standardeinstellung) werden \"Apple\" und \"apple\" als zwei unterschiedliche Zeilen behandelt und beide überleben die Deduplizierung; bei aktiviertem groß-/kleinschreibungsunabhängigem Abgleich werden sie als dieselbe Zeile behandelt, und nur eine überlebt — welche spezifische Groß-/Kleinschreibung überlebt, hängt dann von der Einstellung erstes-oder-letztes-behalten ab."
+          }
+        ]
       }
     }
   }

@@ -73,6 +73,12 @@ import PasswordGeneratorDocsPage, { getPasswordGeneratorTocItems } from "@/compo
 import BarcodeGeneratorDocsPage, { getBarcodeGeneratorTocItems } from "@/components/docs/barcode-generator/BarcodeGeneratorDocsPage";
 import ColorPaletteGeneratorDocsPage, { getColorPaletteGeneratorTocItems } from "@/components/docs/color-palette-generator/ColorPaletteGeneratorDocsPage";
 import QrCodeGeneratorDocsPage, { getQrCodeGeneratorTocItems } from "@/components/docs/qr-code-generator/QrCodeGeneratorDocsPage";
+import PdfMergeSplitDocsPage, { getPdfMergeSplitTocItems } from "@/components/docs/pdf-merge-split/PdfMergeSplitDocsPage";
+import ZipCompressorDocsPage, { getZipCompressorTocItems } from "@/components/docs/zip-compressor/ZipCompressorDocsPage";
+import CsvJsonConverterDocsPage, { getCsvJsonConverterTocItems } from "@/components/docs/csv-json-converter/CsvJsonConverterDocsPage";
+import FileSizeConverterDocsPage, { getFileSizeConverterTocItems } from "@/components/docs/file-size-converter/FileSizeConverterDocsPage";
+import FileNameSanitizerDocsPage, { getFileNameSanitizerTocItems } from "@/components/docs/file-name-sanitizer/FileNameSanitizerDocsPage";
+import DuplicateLineRemoverDocsPage, { getDuplicateLineRemoverTocItems } from "@/components/docs/duplicate-line-remover/DuplicateLineRemoverDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -390,6 +396,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "qr-code-generator":
       content = <QrCodeGeneratorDocsPage />;
       tocItems = await getQrCodeGeneratorTocItems();
+      break;
+    case "pdf-merge-split":
+      content = <PdfMergeSplitDocsPage />;
+      tocItems = await getPdfMergeSplitTocItems();
+      break;
+    case "zip-compressor":
+      content = <ZipCompressorDocsPage />;
+      tocItems = await getZipCompressorTocItems();
+      break;
+    case "csv-json-converter":
+      content = <CsvJsonConverterDocsPage />;
+      tocItems = await getCsvJsonConverterTocItems();
+      break;
+    case "file-size-converter":
+      content = <FileSizeConverterDocsPage />;
+      tocItems = await getFileSizeConverterTocItems();
+      break;
+    case "file-name-sanitizer":
+      content = <FileNameSanitizerDocsPage />;
+      tocItems = await getFileNameSanitizerTocItems();
+      break;
+    case "duplicate-line-remover":
+      content = <DuplicateLineRemoverDocsPage />;
+      tocItems = await getDuplicateLineRemoverTocItems();
       break;
   }
 

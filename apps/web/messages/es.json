@@ -29120,6 +29120,619 @@
             "answer": "mailto: y SMSTO: son esquemas URI reconocidos que los teléfonos y computadoras ya saben manejar — escanear un código QR mailto: abre la app de correo electrónico predeterminada del dispositivo con la dirección, asunto, y cuerpo prellenados, y SMSTO: hace lo mismo para una app de mensajes de texto. Esto hace que el código QR sea inmediatamente accionable al escanearlo, en lugar de simplemente mostrar una dirección de correo electrónico o número de teléfono como texto plano que necesitaría copiarse manualmente."
           }
         ]
+      },
+      "pdf-merge-split": {
+        "version": "v1",
+        "description": "Referencia técnica de Combinar y Dividir PDF: cómo se combinan los documentos página por página y cómo se analizan y extraen los rangos de páginas, las variables aceptadas y los casos límite manejados.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Análisis de una lista de rangos de páginas",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Combinar: páginas(Doc₁) + páginas(Doc₂) + ... → un nuevo documento  |  Dividir: Doc[Inicio..Fin] → un nuevo documento por rango",
+          "note": "Ambas operaciones trabajan a nivel de páginas completas: combinar concatena las páginas de cada documento de origen en orden en un único documento nuevo, mientras que dividir copia solo las páginas dentro de cada rango solicitado en su propio documento nuevo separado."
+        },
+        "flowchart": {
+          "intro": "Combinar y dividir son operaciones independientes que construyen documentos PDF completamente nuevos copiando páginas, en lugar de modificar un archivo de origen en su lugar.",
+          "steps": [
+            "Para combinar: crear un nuevo documento PDF vacío, luego, para cada archivo de origen en el orden dado, cargarlo y copiar cada una de sus páginas en su orden original al nuevo documento",
+            "Guardar el documento combinado como un nuevo conjunto de bytes que contiene cada página de cada archivo de origen, en el orden en que se especificaron los archivos",
+            "Para dividir en su lugar: cargar el PDF de origen y leer su recuento total de páginas, luego determinar qué rangos de páginas extraer, ya sean los rangos especificados explícitamente o, si no se especifica ninguno, un rango de una sola página por cada página",
+            "Para cada rango: limitar su inicio a al menos la página 1 y su fin a como máximo la última página del documento, luego omitir el rango por completo si el inicio limitado queda después del fin limitado",
+            "Copiar solo las páginas de ese rango en un documento completamente nuevo y guardarlo, produciendo un archivo de salida por cada rango válido, de modo que una sola lista de rangos pueda generar varios PDF separados a la vez"
+          ],
+          "caption": "Combinar concatena documentos completos página por página; dividir copia un nuevo documento por cada rango de páginas solicitado."
+        },
+        "anatomy": {
+          "intro": "Una sola cadena de rangos separada por comas puede solicitar varios rangos de páginas a la vez, cada uno convirtiéndose en su propio recuento de páginas a extraer.",
+          "labelRangeOne": "Páginas 1-3",
+          "labelSingle": "Página 5",
+          "labelRangeTwo": "Páginas 8-9",
+          "totalLabel": "6 páginas seleccionadas",
+          "caption": "La cadena de rangos \"1-3,5,8-9\" se resuelve en tres rangos separados que abarcan 3, 1 y 2 páginas: 6 páginas en total, extraídas como tres archivos de salida separados."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Archivos a combinar",
+            "meaning": "El conjunto de archivos PDF de origen, combinados en el orden dado. Se usa en el modo de combinación.",
+            "unit": "Archivos"
+          },
+          {
+            "symbol": "PDF de origen",
+            "meaning": "El único archivo PDF del que se extraerán páginas. Se usa en el modo de división.",
+            "unit": "Archivo"
+          },
+          {
+            "symbol": "Rangos de páginas",
+            "meaning": "Una lista separada por comas de números de página y rangos (p. ej., \"1-3,5,8-9\"), con índice 1 e inclusiva en ambos extremos. Se usa en el modo de división.",
+            "unit": "Texto"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un rango desordenado o inválido se omite en silencio",
+            "description": "Cuando el inicio limitado de un rango es mayor que su fin limitado (por ejemplo, un rango solicitado que queda por completo más allá del recuento real de páginas del documento), ese rango simplemente se omite en lugar de producir una salida vacía o corrupta."
+          },
+          {
+            "title": "Los rangos se limitan a los límites reales del documento en lugar de rechazarse",
+            "description": "Un rango solicitado como la página 1 a la 500 en un documento de 10 páginas se limita a 1-10 en lugar de fallar por completo, de modo que un rango ligeramente demasiado generoso aún produce un resultado con sentido."
+          },
+          {
+            "title": "No especificar rangos significa \"dividir en páginas individuales\"",
+            "description": "Cuando la lista de rangos está vacía u omitida, la herramienta recurre por defecto a un rango de una sola página por cada página del documento, dividiendo así un PDF de 10 páginas en diez PDF de una sola página separados."
+          },
+          {
+            "title": "Los tokens mal formados en una cadena de rangos se descartan, no se tratan como un error",
+            "description": "El analizador de rangos solo conserva los tokens que coinciden con un patrón válido de \"número\" o \"número-número\" con un inicio positivo no mayor que el fin; cualquier otra cosa en una lista separada por comas, como un token vacío por una coma perdida, se filtra en silencio en lugar de generar un error."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Qué sucede si combino archivos PDF con diferentes tamaños u orientaciones de página?",
+            "answer": "Cada página se copia exactamente tal como existe en su documento de origen, conservando el tamaño y la orientación propios de esa página; combinar no cambia el tamaño, la orientación ni normaliza las páginas para que coincidan entre sí, por lo que un documento combinado puede mezclar libremente páginas verticales y horizontales o diferentes tamaños de papel, tal como aparecían en los archivos originales."
+          },
+          {
+            "question": "¿Por qué los rangos de páginas tienen índice 1 en lugar de índice 0?",
+            "answer": "El índice basado en 1 coincide con la forma en que los números de página se muestran realmente a los usuarios en los visores de PDF y se imprimen en las páginas físicas; hacer que \"página 1\" signifique la primera página es mucho más intuitivo que un esquema con índice 0 donde la primera página sería \"página 0\", aunque el código subyacente internamente convierte a posiciones de array con índice 0."
+          },
+          {
+            "question": "¿Qué sucede si solicito un rango de páginas que queda completamente más allá de la longitud real del documento?",
+            "answer": "El inicio y el fin del rango se limitan cada uno a los límites reales de páginas del documento; si el inicio de un rango, después de limitarse, es mayor que su fin, todo el rango se omite en silencio, sin producir un archivo de salida para ese rango específico en lugar de generar un error, mientras que cualquier otro rango válido en la misma solicitud sigue produciendo sus archivos con normalidad."
+          },
+          {
+            "question": "¿Mi PDF se sube alguna vez a algún lugar al combinar o dividir?",
+            "answer": "No: ambas operaciones se ejecutan completamente en memoria usando pdf-lib, que trabaja directamente con los bytes del archivo sin necesitar un viaje de ida y vuelta al servidor; la lógica de combinación y división en sí no contiene ningún código de red, por lo que nada de su documento sale de su dispositivo durante este paso de procesamiento."
+          }
+        ]
+      },
+      "zip-compressor": {
+        "version": "v1",
+        "description": "Referencia técnica del Compresor ZIP: cómo se comprimen y extraen archivos de un archivo ZIP usando el algoritmo DEFLATE, las variables aceptadas y los casos límite manejados.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "La relación de compresión depende del tipo de archivo",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Comprimir: archivos → algoritmo DEFLATE → un solo archivo .zip (en memoria)  |  Extraer: archivo .zip → decodificación DEFLATE → archivos individuales",
+          "note": "Cada archivo añadido al archivo comprimido se comprime con el mismo algoritmo, DEFLATE, que busca patrones de bytes repetidos dentro de cada archivo y los reemplaza con referencias más cortas; cuánto se reduce realmente un archivo dado depende por completo de cuánta repetición pueda encontrar DEFLATE en él."
+        },
+        "flowchart": {
+          "intro": "Comprimir y extraer son operaciones en espejo que se ejecutan por completo en memoria, sin que este paso escriba nunca un archivo en disco ni lo envíe a un servidor.",
+          "steps": [
+            "Para comprimir: tomar un conjunto de archivos con nombre como bytes sin procesar, añadir cada uno con su nombre dado a una nueva estructura de archivo comprimido, y aplicar el algoritmo de compresión DEFLATE a los bytes de cada archivo individualmente",
+            "Producir el archivo comprimido final como una única secuencia de bytes que contiene cada archivo comprimido, lista para descargarse como un archivo .zip",
+            "Para extraer en su lugar: cargar los bytes de un archivo .zip existente y recorrer su lista interna de entradas, omitiendo cualquier entrada que sea un directorio en lugar de un archivo real",
+            "Para cada entrada de archivo real, descomprimir sus bytes de vuelta a su forma original",
+            "Informar el nombre, el contenido descomprimido y el tamaño en bytes descomprimido de cada archivo extraído"
+          ],
+          "caption": "La compresión aplica DEFLATE a cada archivo que entra al archivo comprimido; la extracción invierte esto para cada archivo que vuelve a salir."
+        },
+        "anatomy": {
+          "intro": "DEFLATE comprime encontrando patrones repetidos en los bytes de un archivo; qué tan bien funciona depende en gran medida de si el archivo ya contiene ese tipo de repetición, razón por la cual diferentes tipos de archivo se reducen en cantidades muy distintas.",
+          "labelText": "Texto plano (.txt)",
+          "labelCompressed": "Ya comprimido (.jpg/.mp4/.zip)",
+          "caption": "Un archivo de texto plano típico podría comprimirse hasta aproximadamente el 30% de su tamaño original, mientras que un formato ya comprimido como JPG, MP4 u otro ZIP a menudo apenas se reduce, ya que DEFLATE encuentra patrones que ya se han extraído al máximo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Archivos a comprimir",
+            "meaning": "El conjunto de archivos, cada uno con nombre y contenido en bytes sin procesar, que se añadirán a un nuevo archivo ZIP.",
+            "unit": "Archivos"
+          },
+          {
+            "symbol": "Datos del archivo comprimido",
+            "meaning": "Los bytes sin procesar de un archivo .zip existente, usados al extraer.",
+            "unit": "Archivo"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Todo ocurre en memoria, nada se sube",
+            "description": "Tanto la compresión como la extracción se ejecutan completamente en el lado del cliente; esta función en sí no escribe ningún archivo en disco ni lo envía a un servidor, a diferencia de algunas herramientas ZIP basadas en web que procesan archivos de forma remota."
+          },
+          {
+            "title": "Las entradas de directorio se omiten en silencio al extraer",
+            "description": "Un archivo .zip puede contener entradas de carpeta junto con entradas de archivo; el paso de extracción las filtra explícitamente, devolviendo solo archivos reales con contenido genuino, no marcadores de posición de carpetas vacías."
+          },
+          {
+            "title": "La compresión siempre usa DEFLATE, nunca un modo \"almacenar\" sin comprimir",
+            "description": "Cada archivo añadido al archivo comprimido se comprime con el algoritmo DEFLATE, incluso los archivos que apenas se reducen, como los formatos ya comprimidos, en lugar de detectar tales archivos y cambiar a un modo de paso directo sin comprimir para ellos."
+          },
+          {
+            "title": "El tamaño total se calcula a partir de los tamaños descomprimidos, no de los comprimidos",
+            "description": "Los tamaños de archivo informados suman la longitud real en bytes descomprimida de cada archivo extraído, que es lo que importa cuando ese contenido se usa o guarda posteriormente, no el tamaño comprimido más pequeño que esos bytes ocupaban dentro del archivo comprimido."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué comprimir en ZIP un archivo ya comprimido, como un JPG o MP4, apenas reduce su tamaño?",
+            "answer": "La compresión DEFLATE funciona encontrando patrones repetidos en los bytes sin procesar de un archivo y reemplazándolos con referencias más cortas; los formatos de imagen y video como JPG y MP4 ya usan su propia compresión interna que elimina la mayor parte de esa repetición, dejando muy poco para que DEFLATE encuentre y siga extrayendo. Comprimir en ZIP un archivo así principalmente solo añade una pequeña cantidad de sobrecarga del archivo comprimido en lugar de reducirlo de forma notable."
+          },
+          {
+            "question": "¿Comprimir varios archivos juntos en ZIP comprime mejor que hacerlo por separado?",
+            "answer": "Puede hacerlo, especialmente con muchos archivos pequeños y similares: DEFLATE a veces puede encontrar patrones útiles entre datos cercanos entre sí dentro del proceso de compresión, y un único archivo comprimido evita la pequeña sobrecarga fija que añadirían el encabezado y los metadatos propios de cada archivo .zip separado. Con un pequeño número de archivos grandes y distintos entre sí, la diferencia suele ser pequeña en cualquier dirección."
+          },
+          {
+            "question": "¿Por qué la herramienta siempre usa DEFLATE en lugar de ofrecer una opción \"almacenar\" sin comprimir?",
+            "answer": "DEFLATE es el método de compresión predeterminado y compatible universalmente para los archivos ZIP, y usarlo de forma consistente mantiene la herramienta simple; incluso en archivos que no se comprimen bien, la sobrecarga de DEFLATE es pequeña, y cualquier programa compatible con ZIP puede descomprimir entradas comprimidas con DEFLATE sin necesitar detectar o manejar un modo sin comprimir separado."
+          },
+          {
+            "question": "¿Los datos de mis archivos se suben alguna vez a un servidor durante la compresión o extracción?",
+            "answer": "No: ambas operaciones se ejecutan completamente en el navegador usando una biblioteca ZIP en memoria; la lógica de compresión y extracción en sí no contiene ningún código de red, por lo que el contenido de sus archivos nunca sale de su dispositivo durante este paso de procesamiento."
+          }
+        ]
+      },
+      "csv-json-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor CSV↔JSON: cómo funciona la detección de delimitadores, el análisis de campos entrecomillados y el aplanamiento de objetos anidados en ambas direcciones, las variables aceptadas y los casos límite manejados.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Detección automática del delimitador",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modos",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Autodetección: delimitador = candidato con el mayor recuento en la primera línea  |  CSV→JSON: cada línea → un objeto, con claves según el encabezado  |  JSON→CSV: cada objeto → una fila aplanada",
+          "note": "Convertir de CSV a JSON convierte cada línea en un objeto con claves según los encabezados de columna, mientras que convertir de JSON a CSV hace lo contrario: las propiedades de cada objeto (incluidas las anidadas, mediante notación de punto) se aplanan en una sola fila bajo un conjunto común de encabezados de columna."
+        },
+        "flowchart": {
+          "intro": "La resolución del delimitador ocurre una vez por adelantado; todo lo que sigue depende de en qué dirección se ejecuta la conversión.",
+          "steps": [
+            "Recortar el texto de entrada y rechazarlo de inmediato si está vacío",
+            "Resolver el delimitador: en autodetección, contar cuántas veces aparece cada carácter candidato (coma, punto y coma, tabulación, barra vertical) solo en la primera línea, y elegir el que aparezca con más frecuencia; en caso contrario, usar el delimitador elegido explícitamente",
+            "Para CSV→JSON: analizar el texto carácter por carácter, siguiendo si cada posición está dentro de un campo entrecomillado, de modo que los delimitadores, los saltos de línea y las comillas dobles dentro de comillas se lean como contenido literal en lugar de estructura, luego convertir cada fila resultante en un objeto, usando la primera fila como encabezados o nombres generados column1, column2… si no hay encabezado",
+            "Para JSON→CSV: analizar el texto como JSON y requerir un array de nivel superior, aplanar las propiedades anidadas de cada objeto en claves de notación de punto, recopilar la unión de cada clave resultante en todos los objetos como encabezados de columna, luego construir una fila por objeto, entrecomillando cualquier campo que contenga una comilla, un salto de línea o el propio delimitador",
+            "Devolver el texto resultante junto con el delimitador realmente usado, importante especialmente cuando se ejecutó la autodetección"
+          ],
+          "caption": "Un paso de resolución del delimitador, luego una conversión de fila a objeto u objeto a fila, según la dirección elegida."
+        },
+        "anatomy": {
+          "intro": "La autodetección elige el delimitador candidato que aparece con más frecuencia en la primera línea del archivo, un simple recuento de frecuencia sobre una lista corta y fija de delimitadores comunes.",
+          "labelComma": "Coma (,)",
+          "labelSemicolon": "Punto y coma (;)",
+          "labelTab": "Tabulación",
+          "labelPipe": "Barra vertical (|)",
+          "caption": "Para la primera línea \"name,age;city,note\", la coma aparece dos veces, el punto y coma una vez, y la tabulación y la barra vertical no aparecen; la autodetección elige la coma como delimitador."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Texto",
+            "meaning": "El texto CSV o JSON a convertir, según el modo elegido.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "Modo",
+            "meaning": "Si convertir de CSV a JSON, o de JSON de vuelta a CSV.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Delimitador",
+            "meaning": "Qué carácter separa los campos CSV: coma, punto y coma, tabulación, barra vertical, o autodetección.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Tiene encabezado",
+            "meaning": "Solo CSV→JSON: si la primera fila es una fila de encabezado en lugar de datos.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "La entrada vacía se rechaza antes de cualquier análisis",
+            "description": "El texto que se reduce a nada devuelve de inmediato un error de \"entrada vacía\" para ambas direcciones de conversión, en lugar de producir un resultado vacío o engañoso."
+          },
+          {
+            "title": "La autodetección solo observa la primera línea",
+            "description": "La detección de delimitadores cuenta las apariciones de cada candidato solo en la primera línea del texto, luego reutiliza ese mismo delimitador para cada línea posterior; un archivo que mezcla delimitadores de forma inconsistente entre líneas no se detectará ni analizará correctamente."
+          },
+          {
+            "title": "Los campos CSV entrecomillados pueden contener el delimitador, comillas y saltos de línea",
+            "description": "El analizador carácter por carácter rastrea si está dentro de un campo entrecomillado, de modo que un valor como \"Smith, John\" (con el delimitador dentro de comillas) se lee como un solo campo en lugar de dividirse en dos, y una comilla doble \"\" dentro de un campo entrecomillado se convierte en una sola comilla literal."
+          },
+          {
+            "title": "JSON→CSV requiere específicamente un array de nivel superior",
+            "description": "Si el JSON analizado es sintácticamente válido pero no es un array, por ejemplo, un solo objeto, un número o una cadena, la herramienta devuelve un error de \"se esperaba un array\" en lugar de adivinar cómo envolver un valor que no es un array en filas de tabla."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la autodetección solo comprueba la primera línea en lugar de escanear todo el archivo?",
+            "answer": "Un archivo CSV bien formado usa el mismo delimitador de manera consistente, y la primera línea, a menudo la fila de encabezado, muestra de forma confiable qué delimitador se usa sin requerir un escaneo completo de una entrada potencialmente grande. Comprobar solo la primera línea mantiene la detección rápida y es suficiente para la gran mayoría de los archivos CSV reales que no mezclan delimitadores a mitad de archivo."
+          },
+          {
+            "question": "¿Cómo maneja el conversor una coma dentro de un campo CSV entrecomillado?",
+            "answer": "El analizador rastrea el estado de las comillas carácter por carácter en lugar de simplemente dividir por el delimitador; dentro de un campo entrecomillado, una coma (o cualquiera que sea el delimitador activo) se trata como texto literal perteneciente a ese campo, no como un separador de campo, de modo que un valor como \"Springfield, IL\" se mantiene correctamente unido como un solo campo en lugar de dividirse en dos."
+          },
+          {
+            "question": "¿Por qué JSON→CSV aplana los objetos anidados en claves de notación de punto en lugar de simplemente convertirlos en cadenas?",
+            "answer": "El aplanamiento por notación de punto (que convierte {\"address\": {\"city\": \"Boston\"}} en una columna llamada \"address.city\") mantiene cada valor anidado individual en su propia columna, lo que hace que el CSV resultante sea utilizable en una hoja de cálculo de la forma en que los datos tabulares planos normalmente lo son; convertir todo el objeto anidado en una sola celda en su lugar enterraría esos datos estructurados en texto no analizable."
+          },
+          {
+            "question": "¿Qué sucede con los valores de array dentro de un objeto JSON al convertir a CSV?",
+            "answer": "El paso de aplanamiento solo expande los objetos anidados simples en claves de notación de punto; los arrays se dejan sin cambios y se pasan al paso de valor de celda, que los convierte a su representación de texto JSON para esa única celda; dado que las filas CSV no tienen forma nativa de representar una lista de longitud variable, los datos del array permanecen así intactos como texto legible en lugar de perderse."
+          }
+        ]
+      },
+      "file-size-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor de Tamaño de Archivo: cómo un tamaño se convierte a bytes sin procesar y luego se vuelve a expresar en cada unidad decimal (SI) y binaria (IEC) simultáneamente, las variables aceptadas y los casos límite manejados.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Decimal vs. binario: mismos bytes, números diferentes",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Estándares",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "Bytes = Valor × Baseᵏ  (decimal: base = 1000, binario: base = 1024)  |  k = nivel de unidad, B=0 hasta PB=5",
+          "note": "El valor introducido se convierte primero a una única unidad común, bytes sin procesar, usando la base (1000 para decimal, 1024 para binario) en la que se mide la unidad de origen; a partir de ese único recuento de bytes, la herramienta luego vuelve a expresar el tamaño en cada unidad de ambos estándares simultáneamente."
+        },
+        "flowchart": {
+          "intro": "Una conversión a bytes alimenta dos escaleras de unidades independientes, calculadas sin importar qué estándar usara la entrada.",
+          "steps": [
+            "Verificar que el valor introducido sea cero o positivo, rechazando de plano los tamaños negativos",
+            "Determinar qué base usar para la unidad de origen: 1000 para el estándar decimal (SI), o 1024 para el estándar binario (IEC), predeterminado a decimal",
+            "Convertir el valor introducido a bytes sin procesar multiplicándolo por esa base elevada al nivel de la unidad de origen: B es el nivel 0, KB/KiB es el nivel 1, hasta PB/PiB en el nivel 5",
+            "Volver a expresar ese mismo recuento de bytes en cada unidad decimal (B, KB, MB, GB, TB, PB) dividiendo por potencias sucesivas de 1000",
+            "Volver a expresar ese mismo recuento de bytes de nuevo en cada unidad binaria (B, KiB, MiB, GiB, TiB, PiB) dividiendo por potencias sucesivas de 1024"
+          ],
+          "caption": "Un único recuento de bytes, calculado una vez, que se ejecuta simultáneamente a través de dos escaleras de unidades independientes: decimal y binaria."
+        },
+        "anatomy": {
+          "intro": "La misma cantidad física de datos obtiene un número de aspecto diferente según el estándar usado, un hecho que ha causado confusión real sobre cómo los fabricantes de almacenamiento y los sistemas operativos informan el tamaño.",
+          "labelDecimal": "Como GB (decimal)",
+          "labelBinary": "Como GiB (binario)",
+          "caption": "1.000.000.000 bytes son exactamente 1,0 GB bajo el estándar decimal, pero solo aproximadamente 0,931 GiB bajo el estándar binario: el mismo recuento de bytes, dos números diferentes, según qué base se use."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Valor",
+            "meaning": "La cantidad numérica a convertir. Debe ser cero o positiva.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Desde unidad",
+            "meaning": "En qué unidad se mide el valor introducido: B, KB, MB, GB, TB o PB.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Estándar",
+            "meaning": "Qué base usa la unidad de origen: decimal (SI, ×1000 por paso) o binario (IEC, ×1024 por paso). Predeterminado a decimal.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los valores negativos se rechazan de plano",
+            "description": "Un valor que no es cero ni positivo devuelve un error de \"valor negativo\" en lugar de tratar un tamaño negativo como cero o intentar una conversión negativa sin sentido."
+          },
+          {
+            "title": "El estándar cambia lo que significa un paso de unidad, no solo su etiqueta",
+            "description": "El decimal trata cada paso hacia arriba (B→KB→MB…) como una multiplicación por 1000; el binario trata ese mismo paso como una multiplicación por 1024: un valor convertido bajo un estándar no es el mismo número que la misma entrada convertida bajo el otro."
+          },
+          {
+            "title": "Ambos estándares siempre se calculan juntos, independientemente del elegido",
+            "description": "La entrada \"estándar\" solo afecta cómo se convierte inicialmente el valor de origen a bytes sin procesar; la salida siempre incluye la escalera decimal completa y la escalera binaria completa una junto a la otra, no solo la que coincide con el estándar de entrada."
+          },
+          {
+            "title": "Cero es una entrada válida y totalmente compatible",
+            "description": "Un valor de exactamente cero produce cero en cada unidad de ambos estándares, en lugar de tratarse como un caso especial o inválido, ya que un tamaño de archivo de cero bytes (un archivo vacío) tiene sentido físico."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué decimal (GB) y binario (GiB) dan números de aspecto diferente para lo que parece el mismo tamaño de archivo?",
+            "answer": "Los fabricantes de almacenamiento tradicionalmente han usado el estándar decimal (1 GB = 1.000.000.000 bytes), mientras que muchos sistemas operativos históricamente informaban el tamaño usando el estándar binario pero lo etiquetaban incorrectamente con nombres de unidades decimales; esa discrepancia es exactamente la razón por la que una unidad anunciada como \"1 TB\" puede mostrar alrededor de 931 GB en un sistema operativo que en realidad calcula en unidades binarias (del tamaño de TiB) pero muestra una etiqueta de aspecto decimal."
+          },
+          {
+            "question": "¿Por qué la herramienta calcula las seis unidades para ambos estándares en lugar de simplemente convertir a la única unidad solicitada?",
+            "answer": "Mostrar todas las unidades a la vez, tanto decimales como binarias, le permite comparar de inmediato cómo se ve un tamaño dado en diferentes contextos sin ejecutar múltiples conversiones separadas, lo cual es especialmente útil dado con qué frecuencia las unidades decimales y binarias se confunden o etiquetan incorrectamente en la documentación real de software y hardware."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre la entrada \"estándar\" y las unidades mostradas en la salida?",
+            "answer": "La entrada \"estándar\" solo determina cómo se interpretan su valor y unidad introducidos para calcular en primer lugar el recuento de bytes subyacente; una vez que se conoce ese recuento de bytes, la herramienta siempre lo muestra vuelto a expresar en cada unidad de ambos estándares, independientemente de qué estándar usó para la entrada."
+          },
+          {
+            "question": "¿Por qué se rechaza un tamaño de archivo negativo en lugar de simplemente mostrar un resultado negativo?",
+            "answer": "Un tamaño de archivo o de datos no puede ser físicamente negativo; no hay una interpretación real con sentido de \"−5 megabytes\", por lo que la herramienta valida esto por adelantado y devuelve un error explícito en lugar de realizar la aritmética y mostrar un número negativo calculado técnicamente pero sin sentido."
+          }
+        ]
+      },
+      "file-name-sanitizer": {
+        "version": "v1",
+        "description": "Referencia técnica del Sanitizador de Nombres de Archivo: cómo se sanitiza un nombre de archivo para su uso seguro en Windows, macOS y Linux mediante una secuencia de transformaciones, las variables aceptadas y los casos límite manejados.",
+        "sectionFormula": "Lógica principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Un nombre sanitizado se vuelve más corto, no solo más limpio",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Pasos de transformación",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Nombre → [transliterar] → quitar caracteres ilegales → colapsar espacios en separador → recortar puntos/espacios finales → proteger nombres reservados → truncar a la longitud máxima",
+          "note": "El nombre base y la extensión del archivo se sanitizan de forma independiente mediante la misma secuencia de transformaciones y luego se vuelven a unir; cada paso de la canalización aborda una clase específica de problema que podría hacer que un nombre de archivo sea inválido o poco práctico en uno u otro sistema operativo."
+        },
+        "flowchart": {
+          "intro": "El nombre base y la extensión se separan primero, luego cada uno pasa por la misma canalización de sanitización antes de volver a unirse.",
+          "steps": [
+            "Dividir el nombre de archivo en un nombre base y una extensión en su último punto, siempre que ese punto no sea el primer ni el último carácter",
+            "Ejecutar la base (y por separado la extensión, si existe) a través de la misma canalización: eliminar opcionalmente los acentos y diacríticos a ASCII puro, quitar los caracteres ilegales en Windows, macOS o Linux, colapsar los espacios en blanco al separador elegido, luego colapsar los separadores repetidos y recortar los iniciales o finales",
+            "Recortar los puntos o espacios finales específicamente en la base; Windows prohíbe un nombre que termine en cualquiera de los dos, una regla que la eliminación previa de caracteres ilegales no cubre",
+            "Comprobar si la base sanitizada coincide exactamente con uno de los nombres de dispositivo reservados por Windows (CON, PRN, AUX, NUL, COM1-9, LPT1-9); si es así, añadir el separador y la palabra \"file\"",
+            "Volver a unir la base y la extensión, luego truncar el resultado completo a la longitud máxima si es demasiado largo, acortando solo la base para que la extensión siempre permanezca intacta"
+          ],
+          "caption": "La base y la extensión se sanitizan de forma independiente mediante la misma canalización, luego se vuelven a unir y se comprueba la longitud como un todo."
+        },
+        "anatomy": {
+          "intro": "Una sola pasada de sanitización puede abordar varios tipos diferentes de problemas en un nombre de archivo a la vez: los caracteres acentuados, la puntuación ilegal y el espaciado se resuelven todos en la misma operación.",
+          "labelBefore": "Antes",
+          "labelAfter": "Después",
+          "caption": "\"Café Photo!!.JPG\" (16 caracteres) se sanitiza a \"cafe-photo.jpg\" (14 caracteres): la é acentuada se translitera, los signos de exclamación se eliminan como caracteres ilegales, el espacio se colapsa en un guion, y el resultado completo se pone en minúsculas."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Nombre de archivo",
+            "meaning": "El nombre de archivo original a sanitizar, incluida su extensión si tiene una.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "Minúsculas",
+            "meaning": "Si convertir el resultado a minúsculas. Predeterminado verdadero.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Separador",
+            "meaning": "Qué carácter reemplaza los espacios y une palabras: guion o guion bajo. Predeterminado a guion.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Transliterar",
+            "meaning": "Si eliminar los acentos y diacríticos a ASCII puro (p. ej., \"café\" → \"cafe\"). Predeterminado falso.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Longitud máxima",
+            "meaning": "Longitud máxima de salida en caracteres, truncando el nombre base (nunca la extensión) si se excede. Predeterminado 255.",
+            "unit": "Caracteres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un resultado vacío después de sanitizar se rechaza, no se devuelve como un nombre vacío",
+            "description": "Cuando eliminar los caracteres ilegales y los espacios no deja absolutamente nada, una base compuesta solo de caracteres ilegales, por ejemplo, la herramienta devuelve un error de \"resultado inválido\" en lugar de una cadena vacía inutilizable."
+          },
+          {
+            "title": "Los nombres de dispositivo reservados por Windows se detectan sin distinguir mayúsculas/minúsculas después de sanitizar",
+            "description": "Una base sanitizada que coincide exactamente con CON, PRN, AUX, NUL, o COM1-9/LPT1-9, sin importar las mayúsculas o minúsculas, recibe el separador y \"file\" añadidos, ya que estos nombres están reservados por Windows incluso sin una extensión de archivo adjunta."
+          },
+          {
+            "title": "El truncamiento siempre conserva la extensión intacta",
+            "description": "Cuando el nombre combinado excede la longitud máxima, solo se acorta el nombre base; la extensión, incluido su punto inicial, se conserva por completo, de modo que un archivo truncado nunca pierde información sobre su tipo de archivo."
+          },
+          {
+            "title": "Los puntos y espacios finales se eliminan en una pasada separada de la eliminación de caracteres ilegales",
+            "description": "La eliminación de caracteres ilegales solo quita caracteres como < > : \" / \\ | ? *, por lo que una base que termina en un punto sin más (como \"notes..\") necesita un paso de recorte final dedicado después, ya que un punto en sí no está en el conjunto de caracteres ilegales, aunque Windows aún prohíbe un nombre que termine en punto."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta separa el nombre de archivo en base y extensión antes de sanitizar, en lugar de sanitizar toda la cadena a la vez?",
+            "answer": "Separar de antemano permite a la herramienta garantizar que la extensión sobreviva intacta a la sanitización y siempre termine en la posición correcta después del nombre base, y permite que el truncamiento acorte solo la base mientras conserva la extensión por completo; sanitizar la cadena combinada como una unidad arriesgaría corromper el punto que las separa o cortar la extensión misma durante el truncamiento."
+          },
+          {
+            "question": "¿Por qué eliminar los caracteres acentuados (transliteración) es un paso opcional en lugar de aplicarse siempre?",
+            "answer": "Los caracteres acentuados como é, ñ o ü son perfectamente válidos en nombres de archivo en los sistemas Windows, macOS y Linux modernos; en realidad no son ilegales, por lo que transliterarlos es una elección estilística para la máxima compatibilidad con sistemas más antiguos o contextos de ASCII puro, no un requisito de corrección, razón por la cual está desactivada por defecto en lugar de imponerse a todos."
+          },
+          {
+            "question": "¿Por qué son relevantes los nombres reservados por Windows como CON o NUL en macOS o Linux, donde no están bloqueados en absoluto?",
+            "answer": "El sanitizador está diseñado para producir un nombre de archivo que sea seguro de usar en los tres sistemas operativos principales simultáneamente, ya que los archivos se mueven rutinariamente entre ellos mediante sincronización en la nube, unidades USB o almacenamiento de red compartido; un nombre que funciona perfectamente bien cuando se crea por primera vez en macOS pero que resulta ser CON o NUL igualmente causaría problemas en cuanto se copiara o se accediera a él desde un sistema Windows."
+          },
+          {
+            "question": "¿Por qué la longitud máxima predeterminada es específicamente 255 caracteres?",
+            "answer": "255 caracteres (o bytes, según el sistema de archivos) es el límite de longitud de nombre de archivo más común en los sistemas de archivos modernos, incluidos NTFS, APFS y la mayoría de los sistemas de archivos Linux como ext4; usarlo como predeterminado significa que la salida sanitizada es muy probable que funcione en todas partes sin toparse con un límite de longitud, aunque algunos sistemas de archivos específicos o restricciones de longitud de ruta completa pueden ser más restrictivos."
+          }
+        ]
+      },
+      "duplicate-line-remover": {
+        "version": "v1",
+        "description": "Referencia técnica del Eliminador de Líneas Duplicadas: cómo se detectan, deduplican e informan las líneas repetidas, las variables aceptadas y los casos límite manejados.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Total de líneas dividido en conservadas y eliminadas",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite manejados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Opciones",
+          "modesValue": "4",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "líneasÚnicas = recuento de líneas distintas vistas  |  recuentoEliminado = líneasTotales − líneasÚnicas",
+          "note": "Cada línea no vacía se cuenta una vez hacia el total, luego se agrupa mediante coincidencia exacta (o insensible a mayúsculas/minúsculas) con cualquier otra línea; el número de líneas eliminadas es simplemente la diferencia entre cuántas líneas entraron y cuántas distintas salieron."
+        },
+        "flowchart": {
+          "intro": "Cada línea se procesa una vez para construir simultáneamente tanto la salida deduplicada como el informe de frecuencia de duplicados.",
+          "steps": [
+            "Dividir la entrada en líneas por cualquier estilo de salto de línea (\\n, \\r\\n o \\r), recortando opcionalmente primero los espacios en blanco de cada línea",
+            "Omitir por completo las líneas vacías: no cuentan para los totales y nunca aparecen en la salida",
+            "Para cada línea restante, usarla directamente como clave de comparación si distingue mayúsculas/minúsculas, o su forma en minúsculas si no, y contar cuántas veces aparece esa clave en toda la entrada",
+            "Decidir qué línea física conservar para cada clave: la primera ocurrencia encontrada, o la última, según la configuración elegida, conservando la posición relativa original de esa ocurrencia para el ordenamiento",
+            "Opcionalmente, reordenar alfabéticamente las líneas deduplicadas en lugar de mantener la posición original, e informar por separado cualquier línea que apareciera más de una vez junto con su recuento total de ocurrencias, ordenadas de más a menos frecuente"
+          ],
+          "caption": "Una pasada sobre cada línea construye juntos la salida deduplicada y el informe de frecuencia de duplicados."
+        },
+        "anatomy": {
+          "intro": "Cada línea entrante termina en exactamente uno de dos cubos: las líneas que sobrevivieron a la deduplicación, o las líneas repetidas adicionales que se eliminaron.",
+          "labelKept": "Conservadas (únicas)",
+          "labelRemoved": "Eliminadas (duplicadas)",
+          "totalLabel": "10 líneas en total",
+          "caption": "Para una lista de 10 líneas de entrada no vacías con 3 repeticiones, se conservan 7 líneas únicas y se eliminan 3 ocurrencias duplicadas: conservadas más eliminadas siempre suman el total original."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "Texto",
+            "meaning": "El texto de entrada, procesado una línea a la vez.",
+            "unit": "Texto"
+          },
+          {
+            "symbol": "Distinguir mayúsculas/minúsculas",
+            "meaning": "Si las líneas que solo difieren en mayúsculas y minúsculas se cuentan como duplicadas. Predeterminado verdadero (distingue mayúsculas/minúsculas).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Ordenar",
+            "meaning": "Si la salida deduplicada debe ordenarse alfabéticamente en lugar de conservar el orden original. Predeterminado falso.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Conservar ocurrencia",
+            "meaning": "Qué ocurrencia de una línea repetida conservar: la primera o la última. Predeterminado a la primera.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Recortar espacios",
+            "meaning": "Si recortar cada línea antes de comparar y de la salida. Predeterminado verdadero.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Las líneas vacías siempre se omiten, nunca se cuentan ni se deduplican",
+            "description": "Una línea vacía (después de recortar, si está activado) no contribuye en absoluto a las líneas totales, las líneas únicas o la salida, sin importar cuántas líneas vacías aparezcan en la entrada."
+          },
+          {
+            "title": "La distinción de mayúsculas/minúsculas cambia qué líneas cuentan como \"la misma\" sin cambiar lo que se muestra",
+            "description": "La clave de comparación se convierte a minúsculas cuando se elige la coincidencia insensible a mayúsculas/minúsculas, pero la línea de salida real siempre conserva las mayúsculas y minúsculas originales exactamente como apareció primero, o al final, en la entrada."
+          },
+          {
+            "title": "Conservar la primera vs. la última ocurrencia puede cambiar las mayúsculas y minúsculas de la línea superviviente",
+            "description": "Dado que se almacena el texto original exacto (no la clave de comparación en minúsculas) para cualquier ocurrencia que se conserve, elegir \"última\" en lugar de \"primera\" puede revelar una versión con mayúsculas y minúsculas diferentes de un duplicado si las ocurrencias posteriores usaron mayúsculas y minúsculas distintas de la primera."
+          },
+          {
+            "title": "El ordenamiento y el orden original son configuraciones independientes y separadas",
+            "description": "La salida predeterminada conserva la posición original de cada línea conservada de la entrada; activar el ordenamiento solo reorganiza alfabéticamente la lista deduplicada final: no cambia qué ocurrencia de un duplicado se conservó en primer lugar."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué se ignoran por completo las líneas vacías en lugar de tratarse como duplicadas entre sí?",
+            "answer": "Las líneas vacías suelen ser solo formato o espaciado en un documento en lugar de datos significativos, y tratar cada una como \"la misma línea duplicada\" produciría un informe confuso que afirma docenas de duplicados de líneas vacías en un documento por lo demás normal; excluirlas por completo mantiene el informe de duplicados enfocado en el contenido realmente repetido."
+          },
+          {
+            "question": "¿Cuál es la diferencia entre elegir conservar la \"primera\" vs. la \"última\" ocurrencia de un duplicado?",
+            "answer": "Ambas configuraciones hacen que sobreviva exactamente una copia de cada línea única, pero pueden diferir en qué versión del texto de esa línea se conserva si las ocurrencias no son idénticas byte por byte, por ejemplo, difiriendo solo en mayúsculas y minúsculas, y en casos más sutiles donde el contenido de la línea es por lo demás idéntico, \"primera\" conserva la versión que apareció más temprano en el documento, \"última\" conserva la que apareció más recientemente."
+          },
+          {
+            "question": "¿Por qué el informe de duplicados muestra un recuento de cada línea repetida en lugar de simplemente listar qué líneas se eliminaron?",
+            "answer": "Un recuento de cuántas veces apareció cada línea, en lugar de solo cuántas se eliminaron, le dice tanto que una línea estaba duplicada como en qué medida, lo cual es más útil para detectar patrones: cinco copias duplicadas de una línea destacan de manera muy diferente en un informe que cinco líneas distintas que cada una resultó tener exactamente un duplicado."
+          },
+          {
+            "question": "¿Cómo afecta la distinción de mayúsculas/minúsculas a qué líneas se consideran duplicadas?",
+            "answer": "Con la coincidencia que distingue mayúsculas/minúsculas (la configuración predeterminada), \"Apple\" y \"apple\" se tratan como dos líneas distintas y ambas sobreviven a la deduplicación; con la coincidencia insensible a mayúsculas/minúsculas activada, se tratan como la misma línea y solo una sobrevive: qué mayúsculas y minúsculas específicas sobreviven depende entonces de la configuración de conservar primera o última."
+          }
+        ]
       }
     }
   }

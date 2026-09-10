@@ -29120,6 +29120,619 @@
             "answer": "mailto: and SMSTO: are recognized URI schemes that phones and computers already know how to handle — scanning a mailto: QR code opens the device's default email app with the address, subject, and body pre-filled, and SMSTO: does the same for a text messaging app. This makes the QR code immediately actionable on scan, rather than just displaying an email address or phone number as plain text that would need to be manually copied."
           }
         ]
+      },
+      "pdf-merge-split": {
+        "version": "v1",
+        "description": "Technical reference for the PDF Merge & Split tool: how documents are combined page-by-page and how page ranges are parsed and extracted, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Parsing a Page-Range List",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Merge: pages(doc₁) + pages(doc₂) + ... → one new document  |  Split: doc[start..end] → one new document per range",
+          "note": "Both operations work at the level of whole pages — merging concatenates every source document's pages in order into a single new document, while splitting copies just the pages inside each requested range into their own separate new document."
+        },
+        "flowchart": {
+          "intro": "Merging and splitting are separate operations that both build entirely new PDF documents by copying pages, rather than modifying any source file in place.",
+          "steps": [
+            "To merge: create a new, empty PDF document, then for each source file in the given order, load it and copy every one of its pages, in original order, into the new document",
+            "Save the merged document as one new set of bytes containing every page from every source file, in the order the files were provided",
+            "To split instead: load the source PDF and read its total page count, then determine which page ranges to extract — either the ranges explicitly provided, or, if none were given, one single-page range per page",
+            "For each range: clamp its start to at least page 1 and its end to at most the document's last page, then skip the range entirely if the clamped start ends up after the clamped end",
+            "Copy just that range's pages into a brand-new document and save it — producing one output file per valid range, so a single range list can generate several separate PDFs at once"
+          ],
+          "caption": "Merging concatenates whole documents page by page; splitting copies out one new document per requested page range."
+        },
+        "anatomy": {
+          "intro": "A single comma-separated range string can request several page ranges at once, each one becoming its own count of pages to extract.",
+          "labelRangeOne": "Pages 1-3",
+          "labelSingle": "Page 5",
+          "labelRangeTwo": "Pages 8-9",
+          "totalLabel": "6 Pages Selected",
+          "caption": "The range string \"1-3,5,8-9\" resolves to three separate ranges covering 3, 1, and 2 pages — 6 pages total, extracted as three separate output files."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Files to Merge",
+            "meaning": "The set of source PDF files, combined in the order provided. Used in merge mode.",
+            "unit": "Files"
+          },
+          {
+            "symbol": "Source PDF",
+            "meaning": "The single PDF file to extract pages from. Used in split mode.",
+            "unit": "File"
+          },
+          {
+            "symbol": "Page Ranges",
+            "meaning": "A comma-separated list of page numbers and ranges (e.g. \"1-3,5,8-9\"), 1-indexed and inclusive. Used in split mode.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An out-of-order or invalid range is silently skipped",
+            "description": "If a range's clamped start ends up greater than its clamped end (for example, a requested range entirely beyond the document's actual page count), that range is simply skipped rather than producing an empty or error output."
+          },
+          {
+            "title": "Ranges are clamped to the document's actual bounds, not rejected",
+            "description": "A requested range like page 1 to 500 on a 10-page document is clamped to 1-10 rather than failing outright, so a slightly-too-generous range still produces a sensible result instead of an error."
+          },
+          {
+            "title": "No ranges provided means \"split into individual pages\"",
+            "description": "If the ranges list is empty or omitted, the tool defaults to one single-page range per page in the document — splitting a 10-page PDF into ten separate one-page PDFs."
+          },
+          {
+            "title": "Malformed tokens in a range string are dropped, not treated as errors",
+            "description": "The range parser only keeps tokens matching a valid \"number\" or \"number-number\" pattern with a positive start no greater than the end; anything else in a comma-separated list — like an empty token from a stray comma — is filtered out silently rather than raising an error."
+          }
+        ],
+        "faq": [
+          {
+            "question": "What happens if I merge PDFs with different page sizes or orientations?",
+            "answer": "Each page is copied exactly as it exists in its source document, preserving that page's own size and orientation — the merge doesn't resize, rotate, or normalize pages to match each other, so a merged document can freely mix portrait and landscape pages, or different paper sizes, exactly as they appeared in the original files."
+          },
+          {
+            "question": "Why are page ranges 1-indexed instead of 0-indexed?",
+            "answer": "1-indexing matches how page numbers are actually displayed to users in PDF viewers and printed on physical pages — asking for \"page 1\" to mean the first page is far more intuitive than a 0-indexed scheme where the first page would be \"page 0,\" even though the underlying code converts to 0-indexed array positions internally."
+          },
+          {
+            "question": "What happens if I request a page range that's entirely beyond the document's actual length?",
+            "answer": "The range's start and end are each clamped to the document's actual page bounds — if a range's start, once clamped, ends up greater than its end, the entire range is silently skipped, producing no output file for that specific range rather than an error, while any other valid ranges in the same request still produce their files normally."
+          },
+          {
+            "question": "Is my PDF ever uploaded anywhere during merging or splitting?",
+            "answer": "No — both operations run entirely in memory using pdf-lib, which works directly with the file's bytes without needing a server round-trip; the merge and split logic itself has no networking code at all, so nothing about your document leaves your device during this processing step."
+          }
+        ]
+      },
+      "zip-compressor": {
+        "version": "v1",
+        "description": "Technical reference for the ZIP Compressor: how files are compressed into and extracted from a ZIP archive using the DEFLATE algorithm, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Compression Ratio Depends on File Type",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Compress: files → DEFLATE algorithm → single .zip archive (in-memory)  |  Extract: .zip archive → DEFLATE decode → individual files",
+          "note": "Every file added to the archive is compressed with the same algorithm, DEFLATE, which looks for repeated byte patterns within each file and replaces them with shorter references — how much a given file actually shrinks depends entirely on how much repetition DEFLATE can find in it."
+        },
+        "flowchart": {
+          "intro": "Compression and extraction are mirror-image operations, both running entirely in memory with no file ever written to disk or sent to a server by this step itself.",
+          "steps": [
+            "To compress: accept a set of named files as raw bytes, add each one to a new archive structure under its given name, and apply the DEFLATE compression algorithm to each file's bytes individually",
+            "Generate the final archive as a single byte sequence containing every compressed file, ready to be downloaded as one .zip file",
+            "To extract instead: load an existing .zip archive's bytes and walk its internal list of entries, skipping any entry that's a directory rather than an actual file",
+            "For each real file entry, decompress its bytes back to their original form",
+            "Report each extracted file's name, its decompressed content, and its decompressed byte size"
+          ],
+          "caption": "Compression applies DEFLATE to each file going into the archive; extraction reverses it for each file coming back out."
+        },
+        "anatomy": {
+          "intro": "DEFLATE compresses by finding repeated patterns in a file's bytes — how well that works depends heavily on whether the file already contains that kind of repetition, which is why different file types shrink by very different amounts.",
+          "labelText": "Plain Text (.txt)",
+          "labelCompressed": "Already-Compressed (.jpg/.mp4/.zip)",
+          "caption": "A typical plain text file might compress down to roughly 30% of its original size, while an already-compressed format like JPG, MP4, or another ZIP often barely shrinks at all, since DEFLATE has already-squeezed-out patterns left to find."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Files to Compress",
+            "meaning": "The set of files, each with a name and its raw byte content, to add to a new ZIP archive.",
+            "unit": "Files"
+          },
+          {
+            "symbol": "Archive Data",
+            "meaning": "The raw bytes of an existing .zip file, used when extracting.",
+            "unit": "File"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Everything happens in memory, nothing is uploaded",
+            "description": "Both compression and extraction run entirely client-side; no file is written to disk or sent to a server by this function itself, unlike some web-based ZIP tools that process files remotely."
+          },
+          {
+            "title": "Directory entries are silently skipped during extraction",
+            "description": "A .zip archive can contain folder entries alongside file entries — the extraction step filters these out explicitly, so only actual files with real content are ever returned, not empty folder placeholders."
+          },
+          {
+            "title": "Compression always uses DEFLATE, never an uncompressed \"store\" mode",
+            "description": "Every file added to the archive is compressed with the DEFLATE algorithm, even files that won't shrink much, like already-compressed formats — rather than detecting such files and switching to an uncompressed pass-through mode for them."
+          },
+          {
+            "title": "Total size is computed from decompressed sizes, not compressed ones",
+            "description": "Reported file sizes sum each extracted file's actual decompressed byte length — what matters if that content is being used or saved afterward — not the smaller compressed size those bytes occupied while inside the archive."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does zipping an already-compressed file, like a JPG or MP4, barely reduce its size?",
+            "answer": "DEFLATE compression works by finding repeated patterns in a file's raw bytes and replacing them with shorter references — image and video formats like JPG and MP4 already use their own internal compression that removes most of that repetition, so there's very little left for DEFLATE to find and squeeze out further. Zipping such a file mainly just adds a small amount of archive overhead rather than meaningfully shrinking it."
+          },
+          {
+            "question": "Does zipping multiple files together compress better than zipping them separately?",
+            "answer": "It can, particularly for many small, similar files — DEFLATE can sometimes find useful patterns across nearby data within the compression process, and a single archive avoids the small fixed overhead that each separate .zip file's own header and metadata would add. For a small number of large, dissimilar files, the difference is typically minor either way."
+          },
+          {
+            "question": "Why does the tool always use DEFLATE instead of offering an uncompressed \"store\" option?",
+            "answer": "DEFLATE is the standard, universally-supported compression method for ZIP archives, and using it consistently keeps the tool simple — even for files that don't compress well, DEFLATE's overhead is small, and every ZIP-compatible program can decompress DEFLATE-compressed entries without needing to detect or handle a separate uncompressed mode."
+          },
+          {
+            "question": "Is any of my file data ever uploaded to a server during compression or extraction?",
+            "answer": "No — both operations run entirely in the browser using an in-memory ZIP library; the compression and extraction logic itself contains no networking code, so your files' contents never leave your device during this processing step."
+          }
+        ]
+      },
+      "csv-json-converter": {
+        "version": "v1",
+        "description": "Technical reference for the CSV ↔ JSON Converter: how delimiter detection, quoted-field parsing, and nested-object flattening work in both directions, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Auto-Detecting the Delimiter",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Modes",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "Auto-detect: delimiter = candidate with the highest count in the first line  |  CSV→JSON: each row → one object, keyed by header  |  JSON→CSV: each object → one flattened row",
+          "note": "Converting from CSV to JSON turns each row into an object keyed by column headers, while converting from JSON to CSV does the reverse — flattening each object's properties (including nested ones, via dot-notation) into a single row under a shared set of column headers."
+        },
+        "flowchart": {
+          "intro": "Delimiter resolution happens once up front; everything after that depends on which direction the conversion is running.",
+          "steps": [
+            "Trim the input text and reject it immediately if it's empty",
+            "Resolve the delimiter: if set to auto-detect, count how many times each candidate character (comma, semicolon, tab, pipe) appears in just the first line, and pick whichever appears most; otherwise use the explicitly selected delimiter",
+            "For CSV→JSON: parse the text character by character, tracking whether each position is inside a quoted field so that delimiters, newlines, and doubled quotes inside quotes are read as literal content rather than structure, then convert each resulting row into an object using the first row as headers, or generated column1, column2… names if there's no header",
+            "For JSON→CSV: parse the text as JSON and require a top-level array, flatten each object's nested properties into dot-notation keys, collect the union of every resulting key across all objects as the column headers, then build one row per object, escaping any field that contains a quote, newline, or the delimiter itself",
+            "Return the resulting text along with the delimiter that was actually used, which matters specifically when auto-detection ran"
+          ],
+          "caption": "One delimiter resolution step, then either row-to-object or object-to-row conversion depending on the chosen direction."
+        },
+        "anatomy": {
+          "intro": "Auto-detection picks whichever candidate delimiter appears most often in the file's first line — a simple frequency count across a short, fixed list of common delimiter characters.",
+          "labelComma": "Comma (,)",
+          "labelSemicolon": "Semicolon (;)",
+          "labelTab": "Tab",
+          "labelPipe": "Pipe (|)",
+          "caption": "For the first line \"name,age;city,note\", the comma appears twice, the semicolon once, and tab and pipe not at all — auto-detection selects the comma as the delimiter."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "The CSV text or JSON text to convert, depending on the selected mode.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Mode",
+            "meaning": "Whether to convert CSV to JSON, or JSON back to CSV.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Delimiter",
+            "meaning": "Which character separates CSV fields: comma, semicolon, tab, pipe, or auto-detect.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Has Header",
+            "meaning": "CSV→JSON only: whether the first row is a header row rather than data.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Empty input is rejected before any parsing",
+            "description": "Text that trims down to nothing returns an \"empty input\" error immediately for either conversion direction, rather than producing an empty or misleading result."
+          },
+          {
+            "title": "Auto-detection only looks at the first line",
+            "description": "Delimiter detection counts each candidate's occurrences only in the text's first line, then reuses that same delimiter for every subsequent line — a file that inconsistently mixes delimiters across lines won't be detected or parsed correctly."
+          },
+          {
+            "title": "Quoted CSV fields can contain the delimiter, quotes, and newlines",
+            "description": "The character-by-character parser tracks whether it's inside a quoted field, so a value like \"Smith, John\" (with the delimiter inside quotes) is read as one field rather than split into two, and a doubled quote \"\" inside a quoted field is unescaped to a single literal quote character."
+          },
+          {
+            "title": "JSON→CSV requires a top-level array specifically",
+            "description": "If the parsed JSON is syntactically valid but isn't an array — a single object, a number, or a string, for example — the tool returns an \"expected array\" error rather than guessing how to wrap a non-array value into table rows."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does auto-detection only check the first line instead of scanning the whole file?",
+            "answer": "A well-formed CSV file uses the same delimiter consistently throughout, and the first line — often the header row — reliably shows which delimiter is in use without requiring a full scan of potentially large input. Checking only the first line keeps detection fast and is sufficient for the vast majority of real CSV files, which don't mix delimiters mid-file."
+          },
+          {
+            "question": "How does the converter handle a comma inside a quoted CSV field?",
+            "answer": "The parser tracks quote state character by character rather than simply splitting on the delimiter — while inside a quoted field, a comma (or whatever the active delimiter is) is treated as literal text belonging to that field, not as a field separator, so a value like \"Springfield, IL\" correctly stays together as one field instead of being split into two."
+          },
+          {
+            "question": "Why does JSON→CSV flatten nested objects into dot-notation keys instead of just stringifying them?",
+            "answer": "Dot-notation flattening (turning {\"address\": {\"city\": \"Boston\"}} into a column named \"address.city\") keeps each individual nested value in its own column, making the resulting CSV usable in a spreadsheet the way flat tabular data normally is — stringifying the whole nested object into one cell instead would bury that structured data inside unparseable text."
+          },
+          {
+            "question": "What happens to array values inside a JSON object when converting to CSV?",
+            "answer": "The flattening step only expands plain nested objects into dot-notation keys; arrays are left as-is and passed through to the cell-value step, which converts them to their JSON text representation for that single cell — since CSV rows have no native way to represent a variable-length list, this keeps the array's data intact as readable text rather than losing it."
+          }
+        ]
+      },
+      "file-size-converter": {
+        "version": "v1",
+        "description": "Technical reference for the File Size Converter: how a size is converted to raw bytes and re-expressed across every decimal (SI) and binary (IEC) unit at once, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Decimal vs. Binary: Same Bytes, Different Numbers",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Standards",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "bytes = value × baseᵏ  (decimal: base = 1000, binary: base = 1024)  |  k = unit level, B=0 through PB=5",
+          "note": "The entered value is first converted to a single common unit, raw bytes, using whichever base (1000 for decimal, 1024 for binary) the source unit is measured in — from that one byte count, the tool then re-expresses the size in every unit of both standards at once."
+        },
+        "flowchart": {
+          "intro": "One conversion to bytes feeds two separate unit ladders, computed independently of which standard the input used.",
+          "steps": [
+            "Validate that the entered value is zero or positive, rejecting negative sizes outright",
+            "Determine which base to use for the source unit: 1000 for the decimal (SI) standard, or 1024 for the binary (IEC) standard, defaulting to decimal",
+            "Convert the entered value to raw bytes by multiplying it by that base raised to the power of the source unit's level — B is level 0, KB/KiB is level 1, up through PB/PiB at level 5",
+            "Re-express that same byte count in every decimal unit (B, KB, MB, GB, TB, PB) by dividing by successive powers of 1000",
+            "Re-express the same byte count again in every binary unit (B, KiB, MiB, GiB, TiB, PiB) by dividing by successive powers of 1024"
+          ],
+          "caption": "A single byte count, computed once, run through two independent unit ladders — decimal and binary — at the same time."
+        },
+        "anatomy": {
+          "intro": "The same physical amount of data gets a different-looking number depending on which standard is used to express it — a fact that's caused real-world confusion between how storage manufacturers and operating systems report size.",
+          "labelDecimal": "As GB (decimal)",
+          "labelBinary": "As GiB (binary)",
+          "caption": "1,000,000,000 bytes is exactly 1.0 GB under the decimal standard, but only about 0.931 GiB under the binary standard — the same byte count, two different numbers depending on which base is used."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Value",
+            "meaning": "The numeric size to convert. Must be zero or positive.",
+            "unit": "—"
+          },
+          {
+            "symbol": "From Unit",
+            "meaning": "Which unit the entered value is measured in: B, KB, MB, GB, TB, or PB.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Standard",
+            "meaning": "Which base the source unit uses: decimal (SI, ×1000 per step) or binary (IEC, ×1024 per step). Defaults to decimal.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Negative values are rejected outright",
+            "description": "A value that isn't zero or positive returns a \"negative value\" error rather than treating a negative size as zero or attempting a nonsensical negative conversion."
+          },
+          {
+            "title": "The standard changes what a single unit step means, not just its label",
+            "description": "Decimal treats each step up (B→KB→MB…) as a multiplication by 1000; binary treats the same step as a multiplication by 1024 — a value converted under one standard is not the same number as the same input converted under the other."
+          },
+          {
+            "title": "Both standards are always computed together, regardless of the selected one",
+            "description": "The \"standard\" input only affects how the source value is first converted into raw bytes — the output always includes the complete decimal ladder and the complete binary ladder side by side, not just the one matching the input standard."
+          },
+          {
+            "title": "Zero is a valid, fully supported input",
+            "description": "A value of exactly zero produces zero across every unit in both standards rather than being treated as a special or invalid case, since a file size of zero bytes (an empty file) is physically meaningful."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why do decimal (GB) and binary (GiB) give different-looking numbers for what feels like the same file size?",
+            "answer": "Storage manufacturers have traditionally used the decimal standard (1 GB = 1,000,000,000 bytes), while many operating systems historically reported size using the binary standard but mislabeled it with decimal unit names — this mismatch is exactly why a drive advertised as \"1 TB\" can show up as roughly 931 GB in an operating system that's actually calculating in binary (TiB-sized) units while displaying a decimal-style label."
+          },
+          {
+            "question": "Why does the tool compute all six units for both standards instead of just converting to the one unit I asked for?",
+            "answer": "Showing every unit at once — both decimal and binary — lets you instantly compare how a given size looks across contexts without needing to run multiple separate conversions, which is especially useful given how often decimal and binary units get confused or mislabeled in real software and hardware documentation."
+          },
+          {
+            "question": "What's the difference between the \"standard\" input and the units shown in the output?",
+            "answer": "The \"standard\" input only determines how your entered value and unit are interpreted to compute the underlying byte count in the first place — once that byte count is known, the tool always displays it re-expressed in every unit of both standards, regardless of which standard you used for the input."
+          },
+          {
+            "question": "Why is a negative file size rejected instead of just showing a negative result?",
+            "answer": "A file or data size can't physically be negative — there's no meaningful real-world interpretation of \"−5 megabytes\" — so the tool validates this upfront and returns an explicit error rather than performing the arithmetic and displaying a technically-computed but meaningless negative number."
+          }
+        ]
+      },
+      "file-name-sanitizer": {
+        "version": "v1",
+        "description": "Technical reference for the File Name Sanitizer: how a file name is cleaned for safe use across Windows, macOS, and Linux through a sequence of transformations, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Logic",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "A Sanitized Name Gets Shorter, Not Just Cleaner",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Transform Steps",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "name → [transliterate] → strip illegal characters → collapse whitespace to separator → trim trailing dots/spaces → guard reserved names → truncate to max length",
+          "note": "The base name and file extension are sanitized through the identical sequence of transformations independently, then rejoined — each step in the pipeline addresses one specific class of problem that could make a file name invalid or awkward on one operating system or another."
+        },
+        "flowchart": {
+          "intro": "The base name and extension are split apart first, then each is pushed through the same sanitization pipeline before being rejoined.",
+          "steps": [
+            "Split the file name at its last dot into a base name and an extension, as long as that dot isn't the very first or very last character",
+            "Run the base (and separately the extension, if present) through the same pipeline: optionally strip accents and diacritics down to plain ASCII, remove characters illegal on Windows, macOS, or Linux, collapse whitespace into the chosen separator character, then collapse repeated separators and trim leading or trailing ones",
+            "Trim any trailing dots or spaces left on the base specifically — Windows forbids a name ending in either, a rule the earlier illegal-character removal doesn't cover",
+            "Check whether the sanitized base exactly matches a Windows-reserved device name (CON, PRN, AUX, NUL, COM1-9, LPT1-9); if it does, append the separator and the word \"file\" to it",
+            "Rejoin the base and extension, then truncate the whole result to the maximum length if it's too long — shortening only the base so the extension is always preserved intact"
+          ],
+          "caption": "Base and extension sanitized through the same pipeline independently, then rejoined and length-checked as a whole."
+        },
+        "anatomy": {
+          "intro": "A single sanitization pass can touch several different kinds of problems in one file name at once — accented characters, illegal punctuation, and spacing are all resolved in the same operation.",
+          "labelBefore": "Before",
+          "labelAfter": "After",
+          "caption": "\"Café Photo!!.JPG\" (16 characters) sanitizes to \"cafe-photo.jpg\" (14 characters) — the accented é transliterated, the exclamation marks removed as illegal characters, the space collapsed into a hyphen, and the whole result lowercased."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "File Name",
+            "meaning": "The original file name to sanitize, including its extension if it has one.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Lowercase",
+            "meaning": "Whether to convert the result to lowercase. Defaults to true.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Separator",
+            "meaning": "Which character replaces whitespace and joins words: hyphen or underscore. Defaults to hyphen.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Transliterate",
+            "meaning": "Whether to strip accents and diacritics down to plain ASCII (e.g. \"café\" → \"cafe\"). Defaults to false.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Max Length",
+            "meaning": "Maximum output length in characters, truncating the base name (never the extension) if exceeded. Defaults to 255.",
+            "unit": "Characters"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An empty result after sanitizing is rejected, not returned as a blank name",
+            "description": "If stripping illegal characters and whitespace leaves nothing at all — a base consisting only of illegal characters, for instance — the tool returns an \"invalid result\" error rather than an unusable empty string."
+          },
+          {
+            "title": "Windows-reserved device names are detected after sanitization, case-insensitively",
+            "description": "A sanitized base that exactly matches CON, PRN, AUX, NUL, or COM1-9/LPT1-9 — regardless of letter case — gets a separator and \"file\" appended, since these names are reserved by Windows even without a file extension attached."
+          },
+          {
+            "title": "Truncation always preserves the extension intact",
+            "description": "When the combined name exceeds the maximum length, only the base name is shortened; the extension, including its leading dot, is kept in full, so a truncated file never loses information about what type of file it is."
+          },
+          {
+            "title": "Trailing dots and spaces are stripped in a separate pass from illegal-character removal",
+            "description": "Illegal-character stripping only removes characters like < > : \" / \\ | ? *, so a base ending in a plain dot (like \"notes..\") needs a distinct trailing-trim step afterward, since a dot itself isn't in the illegal-character set even though Windows still forbids a name ending in one."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool separate the file name into a base and extension before sanitizing, instead of sanitizing the whole string at once?",
+            "answer": "Splitting first lets the tool guarantee the extension survives sanitization intact and always ends up in the right place after the base name, and it lets truncation shorten only the base while keeping the extension whole — sanitizing the combined string as one unit would risk the dot separating them getting mangled or the extension itself being cut off during truncation."
+          },
+          {
+            "question": "Why is stripping accented characters (transliteration) an optional step rather than always applied?",
+            "answer": "Accented characters like é, ñ, or ü are perfectly valid in file names on modern Windows, macOS, and Linux systems — they're not actually illegal — so transliterating them is a stylistic choice for maximum compatibility with older systems or ASCII-only contexts, not a correctness requirement, which is why it defaults to off rather than being forced on everyone."
+          },
+          {
+            "question": "Why are Windows-reserved names like CON or NUL relevant on macOS or Linux, where they're not blocked at all?",
+            "answer": "The sanitizer is designed to produce a file name that's safe to use on any of the three major operating systems at once, since files are routinely moved between them (via cloud sync, USB drives, or shared network storage) — a name that works fine when first created on macOS but happens to be CON or NUL would still cause problems the moment it's copied to or accessed from a Windows system."
+          },
+          {
+            "question": "Why does the default maximum length happen to be 255 characters?",
+            "answer": "255 characters (or bytes, depending on the filesystem) is the most common file name length limit across modern filesystems, including NTFS, APFS, and most Linux filesystems like ext4 — using it as the default means the sanitized output is very likely to work everywhere without hitting a length limit, even though some specific filesystems or full path-length constraints can be more restrictive."
+          }
+        ]
+      },
+      "duplicate-line-remover": {
+        "version": "v1",
+        "description": "Technical reference for the Duplicate Line Remover: how repeated lines are detected, deduplicated, and reported, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Total Lines Split Into Kept and Removed",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Options",
+          "modesValue": "4",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "uniqueLines = count of distinct lines seen  |  removedCount = totalLines − uniqueLines",
+          "note": "Every non-blank line is counted once toward the total, then grouped by an exact (or case-insensitive) match against every other line — the number of lines removed is simply the gap between how many lines came in and how many distinct ones came out."
+        },
+        "flowchart": {
+          "intro": "Every line is processed once to build both the deduplicated output and the duplicate-frequency report at the same time.",
+          "steps": [
+            "Split the input into lines on any newline style (\\n, \\r\\n, or \\r), optionally trimming whitespace from each line first",
+            "Skip blank lines entirely — they don't count toward totals and never appear in the output",
+            "For each remaining line, use it directly as the comparison key if case-sensitive, or its lowercased form if not, and count how many times that key appears across the whole input",
+            "Decide which physical line survives for each key: the first occurrence encountered, or the last, per the selected setting — keeping that occurrence's original relative position for ordering",
+            "Optionally re-sort the deduplicated lines alphabetically instead of by original position, and separately report every line that appeared more than once along with its total occurrence count, sorted from most to least frequent"
+          ],
+          "caption": "One pass over every line builds the deduplicated output and the duplicate-frequency report together."
+        },
+        "anatomy": {
+          "intro": "Every line that goes in ends up in exactly one of two buckets — the lines that survived deduplication, or the extra repeated lines that got removed.",
+          "labelKept": "Kept (Unique)",
+          "labelRemoved": "Removed (Duplicates)",
+          "totalLabel": "10 Total Lines",
+          "caption": "For a list of 10 non-blank input lines with 3 repeats, 7 unique lines are kept and 3 duplicate occurrences are removed — kept plus removed always adds back up to the original total."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "Text",
+            "meaning": "The input text, processed one line at a time.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "Case Sensitive",
+            "meaning": "Whether lines differing only in letter case count as duplicates. Defaults to true (case-sensitive).",
+            "unit": "—"
+          },
+          {
+            "symbol": "Sort",
+            "meaning": "Whether to alphabetically sort the deduplicated output instead of preserving original order. Defaults to false.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Keep Occurrence",
+            "meaning": "Which occurrence of a repeated line to keep: the first, or the last. Defaults to first.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Trim Whitespace",
+            "meaning": "Whether to trim each line before comparing and outputting it. Defaults to true.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Blank lines are always skipped, never counted or deduplicated",
+            "description": "An empty line (after trimming, if enabled) doesn't contribute to totalLines, uniqueLines, or the output at all, regardless of how many blank lines appear in the input."
+          },
+          {
+            "title": "Case sensitivity changes which lines count as \"the same\" without changing what's displayed",
+            "description": "The comparison key is lowercased when case-insensitive matching is chosen, but the actual output line always keeps its original casing exactly as it first — or last — appeared in the input."
+          },
+          {
+            "title": "Keeping the first vs. last occurrence can change the surviving line's casing",
+            "description": "Since the exact original text (not the lowercased comparison key) is stored for whichever occurrence is kept, choosing \"last\" instead of \"first\" can surface a differently-capitalized version of a duplicate if later occurrences used different casing than the first one."
+          },
+          {
+            "title": "Sorting and original order are independent, separate settings",
+            "description": "The default output preserves each kept line's original position from the input; enabling sort re-orders only the final deduplicated list alphabetically — it doesn't change which occurrence of a duplicate was kept in the first place."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why are blank lines completely ignored rather than being treated as duplicates of each other?",
+            "answer": "Blank lines are typically just formatting or spacing in a document rather than meaningful data, and treating every one of them as \"the same duplicate line\" would produce a confusing report claiming dozens of blank-line duplicates in an otherwise normal document — excluding them entirely keeps the duplicate report focused on actual repeated content."
+          },
+          {
+            "question": "What's the difference between choosing to keep the \"first\" vs. \"last\" occurrence of a duplicate?",
+            "answer": "Both settings result in exactly one copy of each unique line surviving, but they can differ in exactly which version of that line's text is kept if occurrences aren't byte-for-byte identical — for example, differing only in capitalization — and in more subtle cases where line content is otherwise identical, \"first\" keeps the version that appeared earliest in the document, \"last\" keeps the one that appeared most recently."
+          },
+          {
+            "question": "Why does the duplicates report show a count for each repeated line instead of just listing which lines were removed?",
+            "answer": "A count of how many times each line appeared (rather than just how many were removed) tells you both that a line was duplicated and by how much, which is more useful for spotting patterns — five duplicate copies of one line stands out very differently in a report than five different lines that each happened to have exactly one duplicate."
+          },
+          {
+            "question": "How does case-sensitivity affect which lines are considered duplicates?",
+            "answer": "With case-sensitive matching (the default), \"Apple\" and \"apple\" are treated as two distinct lines and both survive deduplication; with case-insensitive matching enabled, they're treated as the same line, and only one survives — which specific casing survives then depends on the keep-first-or-last setting."
+          }
+        ]
       }
     }
   }

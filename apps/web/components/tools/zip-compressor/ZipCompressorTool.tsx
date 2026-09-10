@@ -7,6 +7,7 @@ import { zipFiles, extractZip } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ZipCompressorInputPanel, { type ZipMode } from "./ZipCompressorInputPanel";
 import ZipCompressorResult, { type ExtractedEntry } from "./ZipCompressorResult";
 
@@ -181,7 +182,12 @@ export default function ZipCompressorTool({ education }: { education: ReactNode 
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="zip-compressor" category="file-tools" />}
-          secondary={<SectionNav items={navItems} />}
+          secondary={
+            <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="zip-compressor" />
+              <SectionNav items={navItems} />
+            </div>
+          }
         />
       </div>
 

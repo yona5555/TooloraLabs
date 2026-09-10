@@ -5,6 +5,7 @@ import { CsvJsonConverter, type CsvJsonMode, type CsvDelimiter } from "@tooloral
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CsvJsonInputPanel from "./CsvJsonInputPanel";
 import CsvJsonResult from "./CsvJsonResult";
 import CsvVsJsonReference from "./CsvVsJsonReference";
@@ -86,6 +87,7 @@ export default function CsvJsonConverterUI({ education }: { education: ReactNode
           sidebar={<RelatedToolsSidebar currentSlug="csv-json-converter" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
+              <ViewDocsLink slug="csv-json-converter" />
               <SectionNav items={navItems} />
               <CsvVsJsonReference />
             </div>
