@@ -9,6 +9,7 @@ import KinematicsPositionTimeDiagram from "./KinematicsPositionTimeDiagram";
 import KinematicsVelocityTimeDiagram from "./KinematicsVelocityTimeDiagram";
 import KinematicsVariablesDiagram from "./KinematicsVariablesDiagram";
 import KinematicsReferenceAccelerationsDiagram from "./KinematicsReferenceAccelerationsDiagram";
+import KinematicsSpeedGauge from "./KinematicsSpeedGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,6 +22,8 @@ export default async function KinematicsEducation() {
 
   return (
     <EncyclopediaPaper>
+      <KinematicsSpeedGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <MotionDiagram v0={0} v={10} startLabel={t("intro.diagram.startLabel")} endLabel={t("intro.diagram.endLabel")} caption={t("intro.diagram.caption")} />

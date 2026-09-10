@@ -23,9 +23,24 @@ const RELATED_TOOLS = ["force-calculator", "projectile-motion-calculator", "ener
 
 const DEFAULTS = { v0: "0", v: "10", a: "2", t: "5", dx: "25" };
 
-const EMPTY_RESULT: KinematicsCalculatorOutput = { error: null, v0: 0, v: 0, a: 0, t: 0, dx: 0, dxAvailable: false, tAvailable: false };
-
 type Inputs = typeof DEFAULTS;
+
+// Real, mode-specific everyday scenarios, each internally consistent with
+// v = v0 + at (timeBased) or v² = v0² + 2a·dx (distanceBased).
+const SCENARIOS_BY_MODE: Record<KinematicsMode, Record<string, Partial<Inputs>>> = {
+  timeBased: {
+    carAccelerating: { v0: "0", v: "25", a: "2.5", t: "10" },
+    planeTakeoff: { v0: "0", v: "70", a: "3.5", t: "20" },
+    trainBraking: { v0: "30", v: "0", a: "-1.5", t: "20" },
+  },
+  distanceBased: {
+    sprinterAcceleration: { v0: "0", v: "10", a: "2.5", dx: "20" },
+    cyclistDescent: { v0: "5", v: "15", a: "1", dx: "100" },
+    carBraking: { v0: "20", v: "0", a: "-4", dx: "50" },
+  },
+};
+
+const EMPTY_RESULT: KinematicsCalculatorOutput = { error: null, v0: 0, v: 0, a: 0, t: 0, dx: 0, dxAvailable: false, tAvailable: false };
 
 function computeResult(mode: KinematicsMode, solveForTime: KinematicsSolveForTime, solveForDistance: KinematicsSolveForDistance, i: Inputs): KinematicsCalculatorOutput {
   const output = tool.execute(
@@ -126,6 +141,20 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
     setHasCalculated(true);
   }
 
+  function handleScenarioPreset(key: string) {
+    const preset = SCENARIOS_BY_MODE[mode][key];
+    if (!preset) return;
+    const next = { ...currentInputs(), ...preset };
+    if (preset.v0 !== undefined) setV0(preset.v0);
+    if (preset.v !== undefined) setV(preset.v);
+    if (preset.a !== undefined) setA(preset.a);
+    if (preset.t !== undefined) setT(preset.t);
+    if (preset.dx !== undefined) setDx(preset.dx);
+    setResult(computeResult(mode, solveForTime, solveForDistance, next));
+    setHasCalculated(true);
+    setDigitStyle(resolveDigitStyle(...Object.values(next)));
+  }
+
   function handleClear() {
     setV0(DEFAULTS.v0);
     setV(DEFAULTS.v);
@@ -166,6 +195,8 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
                 onTChange={setT}
                 dx={dx}
                 onDxChange={setDx}
+                scenarioKeys={Object.keys(SCENARIOS_BY_MODE[mode])}
+                onScenarioPreset={handleScenarioPreset}
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
