@@ -6,6 +6,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import DilutionFlasksDiagram from "./DilutionFlasksDiagram";
 import MolarityDilutionRatioDiagram from "./MolarityDilutionRatioDiagram";
+import MolarityConcentrationGauge from "./MolarityConcentrationGauge";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -18,6 +19,8 @@ export default async function MolarityEducation() {
 
   return (
     <EncyclopediaPaper>
+      <MolarityConcentrationGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <DilutionFlasksDiagram

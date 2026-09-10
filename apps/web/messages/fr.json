@@ -6666,7 +6666,16 @@
         "v2Placeholder": "p. ex. 1",
         "calculate": "Calculer",
         "clear": "Effacer",
-        "variablesCaption": "La grandeur que vous calculez est mise en évidence."
+        "variablesCaption": "La grandeur que vous calculez est mise en évidence.",
+        "scenarioPresetsLabel": "Essayer un scénario réel :",
+        "scenarios": {
+          "salineIV": "Perfusion Saline Médicale",
+          "sugarWater": "Sucre Dissous dans l'Eau",
+          "labStockSolution": "Solution Mère de Laboratoire Concentrée",
+          "diluteStockTenfold": "Diluer la Solution Mère 10×",
+          "labSerialDilution": "Dilution en Série de Laboratoire (100×)",
+          "diluteConcentratedAcid": "Diluer un Acide Concentré"
+        }
       },
       "result": {
         "heading": "Résultat",
@@ -6703,7 +6712,24 @@
           },
           "paragraph2": "La dilution suit un principe simple de conservation : ajouter du solvant à une solution modifie son volume et sa concentration, mais pas le nombre total de moles de soluté présentes. Cela donne l'équation de dilution C₁V₁ = C₂V₂, où C₁ et V₁ sont la concentration et le volume avant dilution (la solution « initiale ») et C₂ et V₂ la concentration et le volume après ajout de solvant. Les moles étant conservées, cette équation peut être réarrangée pour calculer n'importe laquelle des quatre grandeurs à partir des trois autres.",
           "paragraph3": "Diluer une solution abaisse toujours sa concentration exactement en proportion de l'augmentation de son volume — doubler le volume divise exactement par deux la concentration, le tripler la réduit au tiers, et ainsi de suite. Cette relation proportionnelle explique pourquoi les calculs de dilution ne nécessitent jamais de connaître la nature exacte du soluté : la même équation C₁V₁ = C₂V₂ s'applique quelle que soit la substance chimique concernée.",
-          "dilutionRatioCaption": "Chaque étape supplémentaire de dilution 1:2 divise la concentration par deux, atténuant la couleur proportionnellement."
+          "dilutionRatioCaption": "Chaque étape supplémentaire de dilution 1:2 divise la concentration par deux, atténuant la couleur proportionnellement.",
+          "concentrationGauge": {
+            "title": "À essayer : quelle est cette concentration ?",
+            "intro": "Choisissez une solution réelle pour voir sa molarité sur la jauge et la comparer à d'autres.",
+            "dilute": "Diluée",
+            "moderate": "Modérée",
+            "concentrated": "Concentrée",
+            "verdict": "{substance} est une solution {classification}.",
+            "particlesFact": "Dans 1 litre, cela représente environ {particles} × 10²³ particules dissoutes.",
+            "substances": {
+              "bloodGlucose": "Glycémie",
+              "stomachAcid": "Acide Gastrique",
+              "seawater": "Eau de Mer",
+              "vinegar": "Vinaigre",
+              "labNaOH": "Hydroxyde de Sodium de Qualité Laboratoire",
+              "concentratedH2SO4": "Acide Sulfurique Concentré"
+            }
+          }
         },
         "examples": {
           "title": "Exemples Résolus",

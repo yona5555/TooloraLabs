@@ -6666,7 +6666,16 @@
         "v2Placeholder": "e.g. 1",
         "calculate": "Calculate",
         "clear": "Clear",
-        "variablesCaption": "The quantity you're solving for is highlighted."
+        "variablesCaption": "The quantity you're solving for is highlighted.",
+        "scenarioPresetsLabel": "Try a real scenario:",
+        "scenarios": {
+          "salineIV": "Medical Saline IV",
+          "sugarWater": "Sugar Dissolved in Water",
+          "labStockSolution": "Concentrated Lab Stock",
+          "diluteStockTenfold": "Dilute Stock Solution 10×",
+          "labSerialDilution": "Lab Serial Dilution (100×)",
+          "diluteConcentratedAcid": "Dilute a Concentrated Acid"
+        }
       },
       "result": {
         "heading": "Result",
@@ -6703,7 +6712,24 @@
           },
           "paragraph2": "Dilution follows a simple conservation principle: adding solvent to a solution changes its volume and concentration, but not the total moles of solute present. That gives the dilution equation C₁V₁ = C₂V₂, where C₁ and V₁ are the concentration and volume before dilution (the \"stock\" solution) and C₂ and V₂ are the concentration and volume after adding solvent. Because moles are conserved, this equation can be rearranged to solve for any one of the four quantities given the other three.",
           "paragraph3": "Diluting a solution always lowers its concentration in exact proportion to how much its volume increases — doubling the volume exactly halves the concentration, tripling it cuts concentration to a third, and so on. This proportional relationship is why dilution calculations never require knowing what the solute actually is: the same C₁V₁ = C₂V₂ equation applies regardless of the specific chemical involved.",
-          "dilutionRatioCaption": "Each further 1:2 dilution step halves the concentration, fading the color proportionally."
+          "dilutionRatioCaption": "Each further 1:2 dilution step halves the concentration, fading the color proportionally.",
+          "concentrationGauge": {
+            "title": "Try It: How Concentrated Is That?",
+            "intro": "Pick a real-world solution to see its molarity on the gauge and compare it with others.",
+            "dilute": "Dilute",
+            "moderate": "Moderate",
+            "concentrated": "Concentrated",
+            "verdict": "{substance} is a {classification} solution.",
+            "particlesFact": "In 1 liter, that's about {particles} × 10²³ dissolved particles.",
+            "substances": {
+              "bloodGlucose": "Blood Glucose",
+              "stomachAcid": "Stomach Acid",
+              "seawater": "Seawater",
+              "vinegar": "Vinegar",
+              "labNaOH": "Lab-Grade Sodium Hydroxide",
+              "concentratedH2SO4": "Concentrated Sulfuric Acid"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",

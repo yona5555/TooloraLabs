@@ -6666,7 +6666,16 @@
         "v2Placeholder": "z. B. 1",
         "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "variablesCaption": "Die gesuchte Größe ist hervorgehoben."
+        "variablesCaption": "Die gesuchte Größe ist hervorgehoben.",
+        "scenarioPresetsLabel": "Ein reales Szenario ausprobieren:",
+        "scenarios": {
+          "salineIV": "Medizinische Kochsalzinfusion",
+          "sugarWater": "Zucker in Wasser gelöst",
+          "labStockSolution": "Konzentrierte Laborstammlösung",
+          "diluteStockTenfold": "Stammlösung 10-fach verdünnen",
+          "labSerialDilution": "Serielle Laborverdünnung (100×)",
+          "diluteConcentratedAcid": "Eine konzentrierte Säure verdünnen"
+        }
       },
       "result": {
         "heading": "Ergebnis",
@@ -6703,7 +6712,24 @@
           },
           "paragraph2": "Verdünnung folgt einem einfachen Erhaltungsprinzip: Das Hinzufügen von Lösungsmittel zu einer Lösung ändert deren Volumen und Konzentration, nicht aber die gesamte Stoffmenge des vorhandenen gelösten Stoffs. Daraus ergibt sich die Verdünnungsgleichung C₁V₁ = C₂V₂, wobei C₁ und V₁ Konzentration und Volumen vor der Verdünnung (die „Stammlösung“) sind und C₂ und V₂ Konzentration und Volumen nach Zugabe des Lösungsmittels. Da die Stoffmenge erhalten bleibt, lässt sich diese Gleichung nach jeder der vier Größen umstellen, sofern die anderen drei bekannt sind.",
           "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie.",
-          "dilutionRatioCaption": "Jeder weitere 1:2-Verdünnungsschritt halbiert die Konzentration und lässt die Farbe entsprechend verblassen."
+          "dilutionRatioCaption": "Jeder weitere 1:2-Verdünnungsschritt halbiert die Konzentration und lässt die Farbe entsprechend verblassen.",
+          "concentrationGauge": {
+            "title": "Ausprobieren: Wie konzentriert ist das?",
+            "intro": "Wähle eine reale Lösung, um ihre Molarität auf der Anzeige zu sehen und mit anderen zu vergleichen.",
+            "dilute": "Verdünnt",
+            "moderate": "Mittel",
+            "concentrated": "Konzentriert",
+            "verdict": "{substance} ist eine {classification} Lösung.",
+            "particlesFact": "In 1 Liter sind das etwa {particles} × 10²³ gelöste Teilchen.",
+            "substances": {
+              "bloodGlucose": "Blutzucker",
+              "stomachAcid": "Magensäure",
+              "seawater": "Meerwasser",
+              "vinegar": "Essig",
+              "labNaOH": "Laborgradiges Natriumhydroxid",
+              "concentratedH2SO4": "Konzentrierte Schwefelsäure"
+            }
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
