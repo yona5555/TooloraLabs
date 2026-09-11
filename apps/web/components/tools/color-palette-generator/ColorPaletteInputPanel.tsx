@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Shuffle } from "lucide-react";
+import { RotateCcw, Shuffle } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { HarmonyType } from "@tooloralabs/tools";
 
@@ -11,6 +11,7 @@ type ColorPaletteInputPanelProps = {
   harmony: HarmonyType;
   onHarmonyChange: (value: HarmonyType) => void;
   error: string;
+  onClear: () => void;
 };
 
 const HARMONIES: HarmonyType[] = [
@@ -29,6 +30,7 @@ export default function ColorPaletteInputPanel({
   harmony,
   onHarmonyChange,
   error,
+  onClear,
 }: ColorPaletteInputPanelProps) {
   const t = useTranslations("tools.color-palette-generator");
   const isValidForSwatch = /^#[0-9a-fA-F]{6}$/.test(baseHex);
@@ -95,6 +97,15 @@ export default function ColorPaletteInputPanel({
             ))}
           </div>
         </div>
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("form.clear")}
+        </button>
       </div>
     </SectionCard>
   );

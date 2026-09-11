@@ -57,6 +57,12 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
     setLogoPlacement("none");
   }
 
+  function handleClear() {
+    setSymbology("upc-a");
+    setValue(DEFAULT_VALUES["upc-a"]);
+    handleLogoClear();
+  }
+
   const output = useMemo(() => tool.execute({ symbology, value }, { locale: "en-US" }), [symbology, value]);
 
   const errorMessage = output.success ? "" : t(ERROR_KEYS[String(output.metadata.error)] ?? "required");
@@ -82,6 +88,7 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
               onLogoClear={handleLogoClear}
               logoPlacement={logoPlacement}
               onLogoPlacementChange={setLogoPlacement}
+              onClear={handleClear}
             />
           }
           result={

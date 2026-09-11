@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Upload, X } from "lucide-react";
+import { Upload, X, RotateCcw } from "lucide-react";
 import type { BarcodeSymbology } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -18,6 +18,7 @@ type BarcodeInputPanelProps = {
   onLogoClear: () => void;
   logoPlacement: "beside" | "none";
   onLogoPlacementChange: (placement: "beside" | "none") => void;
+  onClear: () => void;
 };
 
 export default function BarcodeInputPanel({
@@ -30,6 +31,7 @@ export default function BarcodeInputPanel({
   onLogoClear,
   logoPlacement,
   onLogoPlacementChange,
+  onClear,
 }: BarcodeInputPanelProps) {
   const t = useTranslations("tools.barcode-generator.form");
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -118,6 +120,15 @@ export default function BarcodeInputPanel({
           </label>
         )}
       </div>
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

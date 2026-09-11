@@ -28,6 +28,11 @@ export default function ColorPaletteGeneratorTool({ education }: { education: Re
     setBaseHex(generateRandomHex());
   }
 
+  function handleClear() {
+    setBaseHex(DEFAULTS.baseHex);
+    setHarmony(DEFAULTS.harmony);
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -46,6 +51,7 @@ export default function ColorPaletteGeneratorTool({ education }: { education: Re
               harmony={harmony}
               onHarmonyChange={setHarmony}
               error={baseHex && !isValid ? t("form.invalidHex") : ""}
+              onClear={handleClear}
             />
           }
           result={<ColorPaletteResult palette={palette} />}

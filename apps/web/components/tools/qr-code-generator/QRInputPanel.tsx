@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import type { QRContentType, QRWifiEncryption } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -28,12 +29,13 @@ export type QRFormState = {
 type QRInputPanelProps = {
   form: QRFormState;
   onChange: (patch: Partial<QRFormState>) => void;
+  onClear: () => void;
 };
 
 const selectClass =
   "w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100";
 
-export default function QRInputPanel({ form, onChange }: QRInputPanelProps) {
+export default function QRInputPanel({ form, onChange, onClear }: QRInputPanelProps) {
   const t = useTranslations("tools.qr-code-generator.form");
 
   return (
@@ -147,6 +149,15 @@ export default function QRInputPanel({ form, onChange }: QRInputPanelProps) {
           </>
         )}
       </div>
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

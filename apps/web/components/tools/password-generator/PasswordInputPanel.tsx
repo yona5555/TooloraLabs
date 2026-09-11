@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import type { PasswordMode, PassphraseSeparator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
@@ -22,9 +23,10 @@ export type PasswordFormState = {
 type PasswordInputPanelProps = {
   form: PasswordFormState;
   onChange: (patch: Partial<PasswordFormState>) => void;
+  onClear: () => void;
 };
 
-export default function PasswordInputPanel({ form, onChange }: PasswordInputPanelProps) {
+export default function PasswordInputPanel({ form, onChange, onClear }: PasswordInputPanelProps) {
   const t = useTranslations("tools.password-generator.form");
 
   const charOptions: { key: "includeUppercase" | "includeLowercase" | "includeNumbers" | "includeSymbols"; label: string }[] = [
@@ -160,6 +162,15 @@ export default function PasswordInputPanel({ form, onChange }: PasswordInputPane
           </div>
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

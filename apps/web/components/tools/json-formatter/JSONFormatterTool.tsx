@@ -27,6 +27,13 @@ export default function JSONFormatterTool({ education }: { education: ReactNode 
   const [indent, setIndent] = useState<JSONIndent>(2);
   const [sortKeys, setSortKeys] = useState(false);
 
+  function handleClear() {
+    setJson(SAMPLE_JSON);
+    setMode("format");
+    setIndent(2);
+    setSortKeys(false);
+  }
+
   const output = useMemo(() => {
     if (!json.trim()) return null;
     return tool.execute({ json, mode, indent, sortKeys }, { locale: "en-US" });
@@ -52,6 +59,7 @@ export default function JSONFormatterTool({ education }: { education: ReactNode 
               onIndentChange={setIndent}
               sortKeys={sortKeys}
               onSortKeysChange={setSortKeys}
+              onClear={handleClear}
             />
           }
           result={

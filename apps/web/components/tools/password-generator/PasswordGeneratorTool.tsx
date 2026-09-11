@@ -46,6 +46,10 @@ export default function PasswordGeneratorTool({ education }: { education: ReactN
 
   const regenerate = useCallback(() => setSeed((s) => s + 1), []);
 
+  function handleClear() {
+    setForm(INITIAL_FORM);
+  }
+
   useEffect(() => {
     // Deferred to a microtask so this genuinely runs after the commit (not
     // synchronously inside the effect body), avoiding a cascading render.
@@ -65,7 +69,7 @@ export default function PasswordGeneratorTool({ education }: { education: ReactN
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<PasswordInputPanel form={form} onChange={patchForm} />}
+          input={<PasswordInputPanel form={form} onChange={patchForm} onClear={handleClear} />}
           result={<PasswordResult password={result.password} entropyBits={result.entropyBits} onRegenerate={regenerate} />}
           sidebar={<RelatedToolsSidebar currentSlug="password-generator" category="developer-tools" />}
           secondary={

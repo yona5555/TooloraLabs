@@ -22,6 +22,12 @@ export default function Base64ToolUI({ education }: { education: ReactNode }) {
   const [mode, setMode] = useState<Base64Mode>("encode");
   const [variant, setVariant] = useState<Base64Variant>("standard");
 
+  function handleClear() {
+    setText("");
+    setMode("encode");
+    setVariant("standard");
+  }
+
   const digitStyle = resolveDigitStyle(text);
 
   const { output, errorKey } = useMemo(() => {
@@ -53,6 +59,7 @@ export default function Base64ToolUI({ education }: { education: ReactNode }) {
               onModeChange={setMode}
               variant={variant}
               onVariantChange={setVariant}
+              onClear={handleClear}
             />
           }
           result={

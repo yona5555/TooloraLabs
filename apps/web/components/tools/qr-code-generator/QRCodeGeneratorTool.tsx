@@ -87,6 +87,16 @@ export default function QRCodeGeneratorTool({ education }: { education: ReactNod
     if (logoMode === "center") setLevelBeforeCenterLogo(level);
   }
 
+  function handleClear() {
+    setForm(INITIAL_FORM);
+    setErrorCorrectionLevel("M");
+    setLevelBeforeCenterLogo("M");
+    setDarkColor("#000000");
+    setLightColor("#ffffff");
+    setLogoDataUrl(null);
+    setLogoMode("none");
+  }
+
   useEffect(() => {
     const id = ++requestId.current;
 
@@ -118,7 +128,7 @@ export default function QRCodeGeneratorTool({ education }: { education: ReactNod
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<QRInputPanel form={form} onChange={patchForm} />}
+          input={<QRInputPanel form={form} onChange={patchForm} onClear={handleClear} />}
           result={<QRResult svg={svg} payload={payload} error={error} logoDataUrl={logoDataUrl} logoMode={logoMode} />}
           sidebar={<RelatedToolsSidebar currentSlug="qr-code-generator" category="developer-tools" />}
           secondary={
