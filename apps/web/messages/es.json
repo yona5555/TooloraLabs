@@ -18468,7 +18468,8 @@
         "errors": {
           "invalid-time": "Introduce una hora válida para ver un resultado.",
           "invalid-fall-asleep-minutes": "Introduce un número de minutos entre 0 y 120."
-        }
+        },
+        "sentence": "La mejor opción es {time}, lo que da aproximadamente {hours} horas de sueño."
       },
       "quickReference": {
         "title": "El cálculo",
@@ -18478,7 +18479,25 @@
         "intro": {
           "title": "Entender los ciclos de sueño",
           "paragraph1": "El sueño no es un estado uniforme único — pasa por un ciclo recurrente de etapas distintas aproximadamente cada 90 minutos durante toda la noche, y despertar en mitad de un ciclo (particularmente durante el sueño profundo) tiende a producir la sensación de aturdimiento y desorientación conocida como inercia del sueño. Despertar en el límite entre dos ciclos, cuando el sueño es naturalmente más ligero, es la heurística popular detrás de calculadoras de ciclos de sueño como esta.",
-          "paragraph2": "Esta calculadora trabaja en ciclos completos de 90 minutos, añadiendo un breve margen (ajustable, 15 minutos por defecto) para el tiempo que normalmente se tarda en quedarse realmente dormido después de acostarse. Dada una hora de despertar objetivo, cuenta hacia atrás en ciclos completos para sugerir horas de acostarse; dada una hora de acostarse, cuenta hacia adelante para sugerir horas de despertar. En cualquier caso, ofrece un rango desde 6 ciclos (9 horas de sueño) hasta 3 ciclos (4,5 horas), ya que las necesidades y horarios varían — 6 ciclos es la opción más alineada con las recomendaciones estándar de sueño para adultos."
+          "paragraph2": "Esta calculadora trabaja en ciclos completos de 90 minutos, añadiendo un breve margen (ajustable, 15 minutos por defecto) para el tiempo que normalmente se tarda en quedarse realmente dormido después de acostarse. Dada una hora de despertar objetivo, cuenta hacia atrás en ciclos completos para sugerir horas de acostarse; dada una hora de acostarse, cuenta hacia adelante para sugerir horas de despertar. En cualquier caso, ofrece un rango desde 6 ciclos (9 horas de sueño) hasta 3 ciclos (4,5 horas), ya que las necesidades y horarios varían — 6 ciclos es la opción más alineada con las recomendaciones estándar de sueño para adultos.",
+          "durationGauge": {
+            "title": "¿Dónde se ubica esta duración del sueño?",
+            "intro": "La duración de sueño recomendada cambia a lo largo de las etapas de la vida, desde los largos periodos de un recién nacido hasta la necesidad nocturna más corta de un adulto. Elige un ejemplo real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Necesidad de sueño: {classification}.",
+            "fact": "Este ejemplo necesita aproximadamente {hours} horas por noche.",
+            "hoursValue": "{hours} h",
+            "examples": {
+              "newborn": "Recién nacido (0-3 meses)",
+              "teenager": "Adolescente",
+              "adult": "Adulto",
+              "olderAdult": "Adulto mayor (65+)"
+            },
+            "ranges": {
+              "low": "Corta",
+              "typical": "Típica",
+              "high": "Larga"
+            }
+          }
         },
         "stages": {
           "title": "Las etapas dentro de cada ciclo",
@@ -18608,6 +18627,24 @@
         "earlyRiser": "Madrugador",
         "lateNightBedtime": "Acostarse tarde",
         "quickSleeper": "Se duerme rápido"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "body-fat-calculator": {
@@ -19061,7 +19098,8 @@
           "invalid-date": "Introduce una fecha válida para ver un resultado.",
           "invalid-cycle-length": "Introduce una duración de ciclo entre 20 y 45 días.",
           "invalid-luteal-phase": "Introduce una duración de fase lútea entre 10 y 17 días."
-        }
+        },
+        "sentence": "La fecha estimada de la próxima ovulación es {date}."
       },
       "quickReference": {
         "title": "La fórmula",
@@ -19071,7 +19109,19 @@
         "intro": {
           "title": "Entender la ovulación y la ventana fértil",
           "paragraph1": "La ovulación es la liberación de un óvulo maduro de un ovario, el único evento del ciclo menstrual en que el embarazo se vuelve posible. Como el óvulo sobrevive solo unas 24 horas tras su liberación, y los espermatozoides pueden sobrevivir en el tracto reproductivo hasta unos 5 días, la \"ventana fértil\" —los días en que las relaciones sexuales pueden resultar en embarazo— abarca aproximadamente los 5 días antes de la ovulación hasta el día después, aunque la concepción en sí solo puede ocurrir el día de la ovulación.",
-          "paragraph2": "Una idea clave detrás de estimar la ovulación a partir de la duración del ciclo es que el ciclo menstrual tiene dos fases de consistencia desigual: la fase folicular (desde el inicio de la regla hasta la ovulación) varía considerablemente en duración de una persona a otra y de un ciclo a otro, mientras que la fase lútea (desde la ovulación hasta la próxima regla) es notablemente consistente, típicamente de 12-14 días independientemente de la duración total del ciclo. Por eso esta calculadora estima la ovulación contando hacia atrás un número fijo de días desde la próxima regla esperada, en lugar de contar hacia adelante un número fijo de días desde la última."
+          "paragraph2": "Una idea clave detrás de estimar la ovulación a partir de la duración del ciclo es que el ciclo menstrual tiene dos fases de consistencia desigual: la fase folicular (desde el inicio de la regla hasta la ovulación) varía considerablemente en duración de una persona a otra y de un ciclo a otro, mientras que la fase lútea (desde la ovulación hasta la próxima regla) es notablemente consistente, típicamente de 12-14 días independientemente de la duración total del ciclo. Por eso esta calculadora estima la ovulación contando hacia atrás un número fijo de días desde la próxima regla esperada, en lugar de contar hacia adelante un número fijo de días desde la última.",
+          "cycleGauge": {
+            "title": "¿Dónde se ubica esta duración del ciclo?",
+            "intro": "La duración del ciclo menstrual varía naturalmente de una persona a otra, generalmente entre 21 y 35 días. Elige un ejemplo real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Duración del ciclo: {classification}.",
+            "fact": "Este ejemplo usa un ciclo de {days} días.",
+            "daysValue": "{days} días",
+            "classifications": {
+              "short": "Más corto que el promedio",
+              "typical": "Típico",
+              "long": "Más largo que el promedio"
+            }
+          }
         },
         "phases": {
           "title": "Las fases del ciclo menstrual",
@@ -19201,6 +19251,24 @@
         "typicalCycle": "Ciclo típico de 28 días",
         "shortCycle": "Ciclo más corto",
         "longCycle": "Ciclo más largo"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "pregnancy-calculator": {
@@ -19274,7 +19342,8 @@
           "invalid-date": "Introduce una fecha válida para ver un resultado.",
           "date-in-future": "La fecha introducida no puede ser posterior a hoy.",
           "beyond-full-term": "Esta fecha supera en más de tres semanas el término completo — por favor verifícala, o si el embarazo ya ha terminado, este rastreador ya no aplica."
-        }
+        },
+        "sentence": "En {weeks}, la fecha probable de parto es {dueDate}."
       },
       "quickReference": {
         "title": "El cálculo",
@@ -19284,7 +19353,14 @@
         "intro": {
           "title": "Entender el seguimiento del embarazo semana a semana",
           "paragraph1": "Este rastreador sigue el progreso de un embarazo en \"edad gestacional\" — tiempo contado desde el primer día de la última regla (FUR), la convención estándar utilizada en toda la atención obstétrica, aunque la concepción real típicamente ocurre unas dos semanas después de esa fecha. Un embarazo a término abarca 40 semanas (280 días) de edad gestacional, dividido en tres trimestres de aproximadamente 13-14 semanas cada uno, cada uno asociado con etapas distintas del desarrollo fetal y diferentes experiencias típicas para la persona embarazada.",
-          "paragraph2": "Junto con la edad gestacional numérica, este rastreador incluye una comparación de tamaño semanal —el popular estilo de hito \"tu bebé tiene aproximadamente el tamaño de un limón\" que muchos rastreadores de embarazo usan para hacer el crecimiento fetal más tangible que una simple cifra de longitud en centímetros. Estas comparaciones se basan en curvas de crecimiento fetal promedio típicamente publicadas; el tamaño real varía de un embarazo a otro y se evalúa adecuadamente mediante ecografía, no mediante una estimación de calendario."
+          "paragraph2": "Junto con la edad gestacional numérica, este rastreador incluye una comparación de tamaño semanal —el popular estilo de hito \"tu bebé tiene aproximadamente el tamaño de un limón\" que muchos rastreadores de embarazo usan para hacer el crecimiento fetal más tangible que una simple cifra de longitud en centímetros. Estas comparaciones se basan en curvas de crecimiento fetal promedio típicamente publicadas; el tamaño real varía de un embarazo a otro y se evalúa adecuadamente mediante ecografía, no mediante una estimación de calendario.",
+          "weekGauge": {
+            "title": "¿Dónde se ubica esta semana?",
+            "intro": "Un embarazo a término abarca 42 semanas en tres trimestres. Elige un ejemplo real a continuación para ver en qué trimestre se ubica.",
+            "verdict": "Este ejemplo se ubica en el {example}, en la semana {weeks}.",
+            "fact": "Este ejemplo corresponde a la semana {weeks} del embarazo.",
+            "weekValue": "Semana {weeks}"
+          }
         },
         "trimesters": {
           "title": "Los tres trimestres",
@@ -19414,6 +19490,24 @@
         "firstTrimester": "Primer trimestre",
         "secondTrimester": "Segundo trimestre",
         "thirdTrimester": "Tercer trimestre"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "macro-calculator": {

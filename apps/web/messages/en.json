@@ -18468,7 +18468,8 @@
         "errors": {
           "invalid-time": "Enter a valid time to see a result.",
           "invalid-fall-asleep-minutes": "Enter a number of minutes between 0 and 120."
-        }
+        },
+        "sentence": "The best option is {time}, giving about {hours} hours of sleep."
       },
       "quickReference": {
         "title": "The Math",
@@ -18478,7 +18479,25 @@
         "intro": {
           "title": "Understanding Sleep Cycles",
           "paragraph1": "Sleep isn't a single uniform state — it moves through a repeating cycle of distinct stages roughly every 90 minutes throughout the night, and waking up in the middle of a cycle (particularly during deep sleep) tends to produce the groggy, disoriented feeling known as sleep inertia. Waking up at the boundary between two cycles, when sleep is naturally lighter, is the popular heuristic behind sleep-cycle calculators like this one.",
-          "paragraph2": "This calculator works in whole 90-minute cycles, adding a short buffer (adjustable, defaulting to 15 minutes) for the time it typically takes to actually fall asleep after getting into bed. Given a target wake-up time, it counts backward in full cycles to suggest bedtimes; given a bedtime, it counts forward to suggest wake-up times. Either way, it offers a range from 6 cycles (9 hours of sleep) down to 3 cycles (4.5 hours), since needs and schedules vary — 6 cycles is the option most aligned with standard sleep recommendations for adults."
+          "paragraph2": "This calculator works in whole 90-minute cycles, adding a short buffer (adjustable, defaulting to 15 minutes) for the time it typically takes to actually fall asleep after getting into bed. Given a target wake-up time, it counts backward in full cycles to suggest bedtimes; given a bedtime, it counts forward to suggest wake-up times. Either way, it offers a range from 6 cycles (9 hours of sleep) down to 3 cycles (4.5 hours), since needs and schedules vary — 6 cycles is the option most aligned with standard sleep recommendations for adults.",
+          "durationGauge": {
+            "title": "Where Does This Sleep Duration Fall?",
+            "intro": "Recommended sleep duration changes across life stages, from a newborn's long stretches to an adult's shorter nightly need. Pick a real-world example below to see where it falls.",
+            "verdict": "{example} — Sleep need: {classification}.",
+            "fact": "This example needs about {hours} hours per night.",
+            "hoursValue": "{hours}h",
+            "examples": {
+              "newborn": "Newborn (0-3 months)",
+              "teenager": "Teenager",
+              "adult": "Adult",
+              "olderAdult": "Older Adult (65+)"
+            },
+            "ranges": {
+              "low": "Short",
+              "typical": "Typical",
+              "high": "Long"
+            }
+          }
         },
         "stages": {
           "title": "The Stages Within Each Cycle",
@@ -18608,6 +18627,24 @@
         "earlyRiser": "Early Riser",
         "lateNightBedtime": "Late Night Bedtime",
         "quickSleeper": "Quick Sleeper"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "body-fat-calculator": {
@@ -19061,7 +19098,8 @@
           "invalid-date": "Enter a valid date to see a result.",
           "invalid-cycle-length": "Enter a cycle length between 20 and 45 days.",
           "invalid-luteal-phase": "Enter a luteal phase length between 10 and 17 days."
-        }
+        },
+        "sentence": "The estimated next ovulation date is {date}."
       },
       "quickReference": {
         "title": "The Formula",
@@ -19071,7 +19109,19 @@
         "intro": {
           "title": "Understanding Ovulation and the Fertile Window",
           "paragraph1": "Ovulation is the release of a mature egg from an ovary, the single event in the menstrual cycle when pregnancy becomes possible. Because the egg survives for only about 24 hours after release, and sperm can survive in the reproductive tract for up to about 5 days, the \"fertile window\" — the days when intercourse can result in pregnancy — spans roughly the 5 days before ovulation through the day after it, even though conception itself can only happen on ovulation day.",
-          "paragraph2": "A key insight behind estimating ovulation from cycle length is that the menstrual cycle has two phases of unequal consistency: the follicular phase (from the start of the period to ovulation) varies considerably in length from person to person and cycle to cycle, while the luteal phase (from ovulation to the next period) is remarkably consistent, typically 12-14 days regardless of overall cycle length. This is why this calculator estimates ovulation by counting backward a fixed number of days from the next expected period, rather than counting forward a fixed number of days from the last one."
+          "paragraph2": "A key insight behind estimating ovulation from cycle length is that the menstrual cycle has two phases of unequal consistency: the follicular phase (from the start of the period to ovulation) varies considerably in length from person to person and cycle to cycle, while the luteal phase (from ovulation to the next period) is remarkably consistent, typically 12-14 days regardless of overall cycle length. This is why this calculator estimates ovulation by counting backward a fixed number of days from the next expected period, rather than counting forward a fixed number of days from the last one.",
+          "cycleGauge": {
+            "title": "Where Does This Cycle Length Fall?",
+            "intro": "Menstrual cycle length varies naturally from person to person, typically between 21 and 35 days. Pick a real example below to see where it falls.",
+            "verdict": "{example} — Cycle length: {classification}.",
+            "fact": "This example uses a {days}-day cycle.",
+            "daysValue": "{days} days",
+            "classifications": {
+              "short": "Shorter Than Average",
+              "typical": "Typical",
+              "long": "Longer Than Average"
+            }
+          }
         },
         "phases": {
           "title": "The Phases of the Menstrual Cycle",
@@ -19201,6 +19251,24 @@
         "typicalCycle": "Typical 28-Day Cycle",
         "shortCycle": "Shorter Cycle",
         "longCycle": "Longer Cycle"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "pregnancy-calculator": {
@@ -19274,7 +19342,8 @@
           "invalid-date": "Enter a valid date to see a result.",
           "date-in-future": "The date entered can't be after today.",
           "beyond-full-term": "This date is more than three weeks past full term — please double-check it, or if the pregnancy has already ended, this tracker no longer applies."
-        }
+        },
+        "sentence": "At {weeks}, the estimated due date is {dueDate}."
       },
       "quickReference": {
         "title": "The Math",
@@ -19284,7 +19353,14 @@
         "intro": {
           "title": "Understanding Week-by-Week Pregnancy Tracking",
           "paragraph1": "This tracker follows a pregnancy's progress in \"gestational age\" — time counted from the first day of the last menstrual period (LMP), the standard convention used throughout obstetric care, even though actual conception typically occurs about two weeks after that date. A full-term pregnancy spans 40 weeks (280 days) of gestational age, divided into three trimesters of roughly 13-14 weeks each, each associated with distinct stages of fetal development and different typical experiences for the pregnant person.",
-          "paragraph2": "Alongside the numeric gestational age, this tracker includes a weekly size comparison — the popular \"your baby is about the size of a lemon\" style of milestone that many pregnancy trackers use to make fetal growth more tangible than a length-in-centimeters figure alone. These comparisons are based on typical published average fetal growth curves; actual size varies from pregnancy to pregnancy and is properly assessed via ultrasound, not a calendar estimate."
+          "paragraph2": "Alongside the numeric gestational age, this tracker includes a weekly size comparison — the popular \"your baby is about the size of a lemon\" style of milestone that many pregnancy trackers use to make fetal growth more tangible than a length-in-centimeters figure alone. These comparisons are based on typical published average fetal growth curves; actual size varies from pregnancy to pregnancy and is properly assessed via ultrasound, not a calendar estimate.",
+          "weekGauge": {
+            "title": "Where Does This Week Fall?",
+            "intro": "A full-term pregnancy spans 42 weeks across three trimesters. Pick a real example below to see which trimester it falls in.",
+            "verdict": "This example falls in the {example}, at week {weeks}.",
+            "fact": "This example is at week {weeks} of the pregnancy.",
+            "weekValue": "Week {weeks}"
+          }
         },
         "trimesters": {
           "title": "The Three Trimesters",
@@ -19414,6 +19490,24 @@
         "firstTrimester": "First Trimester",
         "secondTrimester": "Second Trimester",
         "thirdTrimester": "Third Trimester"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "macro-calculator": {

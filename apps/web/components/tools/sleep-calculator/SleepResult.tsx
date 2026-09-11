@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import type { SleepResult as Result, SleepMode } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import SleepCycleDiagram from "./SleepCycleDiagram";
+import SleepShareExportModal from "./SleepShareExportModal";
 
 type Props = {
   result: Result;
@@ -34,14 +34,18 @@ export default function SleepResult({ result, mode }: Props) {
 
   const heading = mode === "wakeUp" ? t("headingBedtimes") : t("headingWakeUpTimes");
 
+  const resultRows = result.options.map((o) => ({
+    label: t("cyclesCount", { count: o.cycles }),
+    value: `${formatClock(o.clockMinutes)} (${t("sleepDuration", { hours: (o.sleepMinutes / 60).toFixed(1) })})`,
+  }));
+  const best = result.options[0];
+  const sentence = best ? t("sentence", { time: formatClock(best.clockMinutes), hours: (best.sleepMinutes / 60).toFixed(1) }) : "";
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{heading}</h2>
-        <CopyButton
-          text={result.options.map((o) => `${formatClock(o.clockMinutes)} (${o.cycles} ${t("cycles")})`).join(", ")}
-          className="!text-white dark:!text-white"
-        />
+        <SleepShareExportModal inputRows={[]} resultRows={resultRows} heroLabel={heading} heroValue={best ? formatClock(best.clockMinutes) : ""} sentence={sentence} />
       </div>
       <div className="p-4 lg:p-6">
         <SleepCycleDiagram options={result.options} />

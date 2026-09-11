@@ -18468,7 +18468,8 @@
         "errors": {
           "invalid-time": "Gib eine gültige Uhrzeit ein, um ein Ergebnis zu sehen.",
           "invalid-fall-asleep-minutes": "Gib eine Minutenzahl zwischen 0 und 120 ein."
-        }
+        },
+        "sentence": "Die beste Option ist {time}, das ergibt etwa {hours} Stunden Schlaf."
       },
       "quickReference": {
         "title": "Die Rechnung",
@@ -18478,7 +18479,25 @@
         "intro": {
           "title": "Schlafzyklen verstehen",
           "paragraph1": "Schlaf ist kein einheitlicher Zustand — er durchläuft während der Nacht etwa alle 90 Minuten einen sich wiederholenden Zyklus unterschiedlicher Stadien, und das Aufwachen mitten in einem Zyklus (besonders während des Tiefschlafs) führt tendenziell zu dem benommenen, desorientierten Gefühl, das als Schlafträgheit bekannt ist. Das Aufwachen an der Grenze zwischen zwei Zyklen, wenn der Schlaf naturgemäß leichter ist, ist die verbreitete Heuristik hinter Schlafzyklus-Rechnern wie diesem.",
-          "paragraph2": "Dieser Rechner arbeitet in vollen 90-Minuten-Zyklen und fügt einen kurzen Puffer hinzu (anpassbar, standardmäßig 15 Minuten) für die Zeit, die man normalerweise zum tatsächlichen Einschlafen nach dem Zubettgehen braucht. Bei einer angestrebten Weckzeit zählt er in vollen Zyklen zurück, um Schlafenszeiten vorzuschlagen; bei einer Schlafenszeit zählt er vorwärts, um Weckzeiten vorzuschlagen. So oder so bietet er einen Bereich von 6 Zyklen (9 Stunden Schlaf) bis hinunter zu 3 Zyklen (4,5 Stunden), da Bedürfnisse und Zeitpläne variieren — 6 Zyklen entsprechen am ehesten den Standard-Schlafempfehlungen für Erwachsene."
+          "paragraph2": "Dieser Rechner arbeitet in vollen 90-Minuten-Zyklen und fügt einen kurzen Puffer hinzu (anpassbar, standardmäßig 15 Minuten) für die Zeit, die man normalerweise zum tatsächlichen Einschlafen nach dem Zubettgehen braucht. Bei einer angestrebten Weckzeit zählt er in vollen Zyklen zurück, um Schlafenszeiten vorzuschlagen; bei einer Schlafenszeit zählt er vorwärts, um Weckzeiten vorzuschlagen. So oder so bietet er einen Bereich von 6 Zyklen (9 Stunden Schlaf) bis hinunter zu 3 Zyklen (4,5 Stunden), da Bedürfnisse und Zeitpläne variieren — 6 Zyklen entsprechen am ehesten den Standard-Schlafempfehlungen für Erwachsene.",
+          "durationGauge": {
+            "title": "Wo liegt diese Schlafdauer?",
+            "intro": "Die empfohlene Schlafdauer ändert sich im Laufe des Lebens, von den langen Schlafphasen eines Neugeborenen bis zum kürzeren nächtlichen Bedarf eines Erwachsenen. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Schlafbedarf: {classification}.",
+            "fact": "Dieses Beispiel benötigt etwa {hours} Stunden pro Nacht.",
+            "hoursValue": "{hours} Std.",
+            "examples": {
+              "newborn": "Neugeborenes (0-3 Monate)",
+              "teenager": "Teenager",
+              "adult": "Erwachsener",
+              "olderAdult": "Älterer Erwachsener (65+)"
+            },
+            "ranges": {
+              "low": "Kurz",
+              "typical": "Typisch",
+              "high": "Lang"
+            }
+          }
         },
         "stages": {
           "title": "Die Stadien innerhalb jedes Zyklus",
@@ -18608,6 +18627,24 @@
         "earlyRiser": "Frühaufsteher",
         "lateNightBedtime": "Späte Schlafenszeit",
         "quickSleeper": "Schnell einschlafend"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "body-fat-calculator": {
@@ -19061,7 +19098,8 @@
           "invalid-date": "Gib ein gültiges Datum ein, um ein Ergebnis zu sehen.",
           "invalid-cycle-length": "Gib eine Zykluslänge zwischen 20 und 45 Tagen ein.",
           "invalid-luteal-phase": "Gib eine Lutealphasenlänge zwischen 10 und 17 Tagen ein."
-        }
+        },
+        "sentence": "Der voraussichtliche nächste Eisprungtermin ist {date}."
       },
       "quickReference": {
         "title": "Die Formel",
@@ -19071,7 +19109,19 @@
         "intro": {
           "title": "Eisprung und fruchtbares Fenster verstehen",
           "paragraph1": "Der Eisprung ist die Freisetzung einer reifen Eizelle aus einem Eierstock — das einzige Ereignis im Menstruationszyklus, bei dem eine Schwangerschaft möglich wird. Da die Eizelle nach der Freisetzung nur etwa 24 Stunden überlebt und Spermien im Fortpflanzungstrakt bis zu etwa 5 Tage überleben können, umfasst das \"fruchtbare Fenster\" — die Tage, an denen Geschlechtsverkehr zu einer Schwangerschaft führen kann — ungefähr die 5 Tage vor dem Eisprung bis zum Tag danach, auch wenn die eigentliche Befruchtung nur am Eisprungtag selbst stattfinden kann.",
-          "paragraph2": "Eine zentrale Erkenntnis hinter der Schätzung des Eisprungs aus der Zykluslänge ist, dass der Menstruationszyklus zwei Phasen unterschiedlicher Konsistenz hat: Die Follikelphase (vom Beginn der Periode bis zum Eisprung) variiert von Person zu Person und von Zyklus zu Zyklus erheblich in der Länge, während die Lutealphase (vom Eisprung bis zur nächsten Periode) bemerkenswert konsistent ist, typischerweise 12-14 Tage, unabhängig von der Gesamtzykluslänge. Deshalb schätzt dieser Rechner den Eisprung, indem er eine feste Anzahl von Tagen von der nächsten erwarteten Periode zurückzählt, statt eine feste Anzahl von Tagen von der letzten Periode vorwärtszuzählen."
+          "paragraph2": "Eine zentrale Erkenntnis hinter der Schätzung des Eisprungs aus der Zykluslänge ist, dass der Menstruationszyklus zwei Phasen unterschiedlicher Konsistenz hat: Die Follikelphase (vom Beginn der Periode bis zum Eisprung) variiert von Person zu Person und von Zyklus zu Zyklus erheblich in der Länge, während die Lutealphase (vom Eisprung bis zur nächsten Periode) bemerkenswert konsistent ist, typischerweise 12-14 Tage, unabhängig von der Gesamtzykluslänge. Deshalb schätzt dieser Rechner den Eisprung, indem er eine feste Anzahl von Tagen von der nächsten erwarteten Periode zurückzählt, statt eine feste Anzahl von Tagen von der letzten Periode vorwärtszuzählen.",
+          "cycleGauge": {
+            "title": "Wo liegt diese Zykluslänge?",
+            "intro": "Die Länge des Menstruationszyklus variiert von Person zu Person natürlich, typischerweise zwischen 21 und 35 Tagen. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Zykluslänge: {classification}.",
+            "fact": "Dieses Beispiel verwendet einen {days}-Tage-Zyklus.",
+            "daysValue": "{days} Tage",
+            "classifications": {
+              "short": "Kürzer als durchschnittlich",
+              "typical": "Typisch",
+              "long": "Länger als durchschnittlich"
+            }
+          }
         },
         "phases": {
           "title": "Die Phasen des Menstruationszyklus",
@@ -19201,6 +19251,24 @@
         "typicalCycle": "Typischer 28-Tage-Zyklus",
         "shortCycle": "Kürzerer Zyklus",
         "longCycle": "Längerer Zyklus"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "pregnancy-calculator": {
@@ -19274,7 +19342,8 @@
           "invalid-date": "Gib ein gültiges Datum ein, um ein Ergebnis zu sehen.",
           "date-in-future": "Das eingegebene Datum darf nicht nach heute liegen.",
           "beyond-full-term": "Dieses Datum liegt mehr als drei Wochen nach dem errechneten Termin — bitte überprüfe es, oder falls die Schwangerschaft bereits beendet ist, gilt dieser Tracker nicht mehr."
-        }
+        },
+        "sentence": "Bei {weeks} liegt der voraussichtliche Geburtstermin bei {dueDate}."
       },
       "quickReference": {
         "title": "Die Rechnung",
@@ -19284,7 +19353,14 @@
         "intro": {
           "title": "Wochenweise Schwangerschaftsverfolgung verstehen",
           "paragraph1": "Dieser Tracker verfolgt den Verlauf einer Schwangerschaft im \"Schwangerschaftsalter\" — Zeit gezählt ab dem ersten Tag der letzten Periode (LMP), der Standardkonvention in der gesamten geburtshilflichen Versorgung, obwohl die tatsächliche Empfängnis typischerweise etwa zwei Wochen nach diesem Datum stattfindet. Eine termingerechte Schwangerschaft umfasst 40 Wochen (280 Tage) Schwangerschaftsalter, unterteilt in drei Trimester von jeweils etwa 13-14 Wochen, jedes verbunden mit unterschiedlichen Stadien der fetalen Entwicklung und unterschiedlichen typischen Erfahrungen für die schwangere Person.",
-          "paragraph2": "Neben dem numerischen Schwangerschaftsalter enthält dieser Tracker einen wöchentlichen Größenvergleich — die beliebte \"dein Baby ist ungefähr so groß wie eine Zitrone\"-Art von Meilenstein, die viele Schwangerschafts-Tracker verwenden, um das fetale Wachstum greifbarer zu machen als eine reine Längenangabe in Zentimetern. Diese Vergleiche basieren auf typischen veröffentlichten durchschnittlichen fetalen Wachstumskurven; die tatsächliche Größe variiert von Schwangerschaft zu Schwangerschaft und wird ordnungsgemäß per Ultraschall beurteilt, nicht durch eine Kalenderschätzung."
+          "paragraph2": "Neben dem numerischen Schwangerschaftsalter enthält dieser Tracker einen wöchentlichen Größenvergleich — die beliebte \"dein Baby ist ungefähr so groß wie eine Zitrone\"-Art von Meilenstein, die viele Schwangerschafts-Tracker verwenden, um das fetale Wachstum greifbarer zu machen als eine reine Längenangabe in Zentimetern. Diese Vergleiche basieren auf typischen veröffentlichten durchschnittlichen fetalen Wachstumskurven; die tatsächliche Größe variiert von Schwangerschaft zu Schwangerschaft und wird ordnungsgemäß per Ultraschall beurteilt, nicht durch eine Kalenderschätzung.",
+          "weekGauge": {
+            "title": "Wo liegt diese Woche?",
+            "intro": "Eine ausgetragene Schwangerschaft umfasst 42 Wochen in drei Trimestern. Wähle unten ein reales Beispiel, um zu sehen, in welches Trimester es fällt.",
+            "verdict": "Dieses Beispiel liegt im {example}, in Woche {weeks}.",
+            "fact": "Dieses Beispiel liegt in Woche {weeks} der Schwangerschaft.",
+            "weekValue": "Woche {weeks}"
+          }
         },
         "trimesters": {
           "title": "Die drei Trimester",
@@ -19414,6 +19490,24 @@
         "firstTrimester": "Erstes Trimester",
         "secondTrimester": "Zweites Trimester",
         "thirdTrimester": "Drittes Trimester"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "macro-calculator": {

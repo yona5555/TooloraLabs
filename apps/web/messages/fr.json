@@ -18468,7 +18468,8 @@
         "errors": {
           "invalid-time": "Saisissez une heure valide pour voir un résultat.",
           "invalid-fall-asleep-minutes": "Saisissez un nombre de minutes entre 0 et 120."
-        }
+        },
+        "sentence": "La meilleure option est {time}, soit environ {hours} heures de sommeil."
       },
       "quickReference": {
         "title": "Le calcul",
@@ -18478,7 +18479,25 @@
         "intro": {
           "title": "Comprendre les cycles de sommeil",
           "paragraph1": "Le sommeil n'est pas un état uniforme unique — il traverse un cycle récurrent d'étapes distinctes environ toutes les 90 minutes tout au long de la nuit, et se réveiller au milieu d'un cycle (particulièrement pendant le sommeil profond) tend à produire la sensation de groggy et de désorientation connue sous le nom d'inertie du sommeil. Se réveiller à la limite entre deux cycles, lorsque le sommeil est naturellement plus léger, est l'heuristique populaire derrière les calculatrices de cycles de sommeil comme celle-ci.",
-          "paragraph2": "Cette calculatrice fonctionne par cycles complets de 90 minutes, en ajoutant une courte marge (ajustable, 15 minutes par défaut) pour le temps qu'il faut généralement pour réellement s'endormir après s'être couché. Étant donné une heure de réveil cible, elle compte en arrière par cycles complets pour suggérer des heures de coucher ; étant donné une heure de coucher, elle compte en avant pour suggérer des heures de réveil. Dans les deux cas, elle propose une plage allant de 6 cycles (9 heures de sommeil) à 3 cycles (4,5 heures), car les besoins et les emplois du temps varient — 6 cycles est l'option la plus alignée avec les recommandations standard de sommeil pour les adultes."
+          "paragraph2": "Cette calculatrice fonctionne par cycles complets de 90 minutes, en ajoutant une courte marge (ajustable, 15 minutes par défaut) pour le temps qu'il faut généralement pour réellement s'endormir après s'être couché. Étant donné une heure de réveil cible, elle compte en arrière par cycles complets pour suggérer des heures de coucher ; étant donné une heure de coucher, elle compte en avant pour suggérer des heures de réveil. Dans les deux cas, elle propose une plage allant de 6 cycles (9 heures de sommeil) à 3 cycles (4,5 heures), car les besoins et les emplois du temps varient — 6 cycles est l'option la plus alignée avec les recommandations standard de sommeil pour les adultes.",
+          "durationGauge": {
+            "title": "Où se situe cette durée de sommeil ?",
+            "intro": "La durée de sommeil recommandée évolue selon les étapes de la vie, des longues périodes d'un nouveau-né au besoin nocturne plus court d'un adulte. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Besoin de sommeil : {classification}.",
+            "fact": "Cet exemple a besoin d'environ {hours} heures par nuit.",
+            "hoursValue": "{hours} h",
+            "examples": {
+              "newborn": "Nouveau-né (0-3 mois)",
+              "teenager": "Adolescent",
+              "adult": "Adulte",
+              "olderAdult": "Personne âgée (65+)"
+            },
+            "ranges": {
+              "low": "Courte",
+              "typical": "Typique",
+              "high": "Longue"
+            }
+          }
         },
         "stages": {
           "title": "Les étapes au sein de chaque cycle",
@@ -18608,6 +18627,24 @@
         "earlyRiser": "Lève-tôt",
         "lateNightBedtime": "Coucher tardif",
         "quickSleeper": "S'endort vite"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "body-fat-calculator": {
@@ -19061,7 +19098,8 @@
           "invalid-date": "Saisissez une date valide pour voir un résultat.",
           "invalid-cycle-length": "Saisissez une durée de cycle entre 20 et 45 jours.",
           "invalid-luteal-phase": "Saisissez une durée de phase lutéale entre 10 et 17 jours."
-        }
+        },
+        "sentence": "La date estimée de la prochaine ovulation est le {date}."
       },
       "quickReference": {
         "title": "La formule",
@@ -19071,7 +19109,19 @@
         "intro": {
           "title": "Comprendre l'ovulation et la fenêtre de fertilité",
           "paragraph1": "L'ovulation est la libération d'un ovule mature par un ovaire, le seul événement du cycle menstruel où une grossesse devient possible. Comme l'ovule ne survit qu'environ 24 heures après sa libération, et que les spermatozoïdes peuvent survivre dans les voies reproductives jusqu'à environ 5 jours, la \"fenêtre de fertilité\" — les jours où un rapport sexuel peut entraîner une grossesse — s'étend approximativement des 5 jours précédant l'ovulation jusqu'au lendemain, même si la conception elle-même ne peut se produire que le jour de l'ovulation.",
-          "paragraph2": "Une idée clé derrière l'estimation de l'ovulation à partir de la durée du cycle est que le cycle menstruel comporte deux phases de constance inégale : la phase folliculaire (du début des règles à l'ovulation) varie considérablement en durée d'une personne à l'autre et d'un cycle à l'autre, tandis que la phase lutéale (de l'ovulation aux prochaines règles) est remarquablement constante, typiquement de 12 à 14 jours quelle que soit la durée globale du cycle. C'est pourquoi cette calculatrice estime l'ovulation en comptant à rebours un nombre fixe de jours à partir des prochaines règles attendues, plutôt qu'en comptant en avant un nombre fixe de jours à partir des dernières."
+          "paragraph2": "Une idée clé derrière l'estimation de l'ovulation à partir de la durée du cycle est que le cycle menstruel comporte deux phases de constance inégale : la phase folliculaire (du début des règles à l'ovulation) varie considérablement en durée d'une personne à l'autre et d'un cycle à l'autre, tandis que la phase lutéale (de l'ovulation aux prochaines règles) est remarquablement constante, typiquement de 12 à 14 jours quelle que soit la durée globale du cycle. C'est pourquoi cette calculatrice estime l'ovulation en comptant à rebours un nombre fixe de jours à partir des prochaines règles attendues, plutôt qu'en comptant en avant un nombre fixe de jours à partir des dernières.",
+          "cycleGauge": {
+            "title": "Où se situe cette longueur de cycle ?",
+            "intro": "La longueur du cycle menstruel varie naturellement d'une personne à l'autre, généralement entre 21 et 35 jours. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Longueur du cycle : {classification}.",
+            "fact": "Cet exemple utilise un cycle de {days} jours.",
+            "daysValue": "{days} jours",
+            "classifications": {
+              "short": "Plus court que la moyenne",
+              "typical": "Typique",
+              "long": "Plus long que la moyenne"
+            }
+          }
         },
         "phases": {
           "title": "Les phases du cycle menstruel",
@@ -19201,6 +19251,24 @@
         "typicalCycle": "Cycle typique de 28 jours",
         "shortCycle": "Cycle plus court",
         "longCycle": "Cycle plus long"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "pregnancy-calculator": {
@@ -19274,7 +19342,8 @@
           "invalid-date": "Saisissez une date valide pour voir un résultat.",
           "date-in-future": "La date saisie ne peut pas être postérieure à aujourd'hui.",
           "beyond-full-term": "Cette date dépasse le terme de plus de trois semaines — veuillez la vérifier, ou si la grossesse est déjà terminée, ce suivi ne s'applique plus."
-        }
+        },
+        "sentence": "À {weeks}, la date d'accouchement prévue est le {dueDate}."
       },
       "quickReference": {
         "title": "Le calcul",
@@ -19284,7 +19353,14 @@
         "intro": {
           "title": "Comprendre le suivi de grossesse semaine par semaine",
           "paragraph1": "Ce suivi retrace la progression d'une grossesse en \"âge gestationnel\" — le temps compté à partir du premier jour des dernières règles (DDR), la convention standard utilisée dans tous les soins obstétriques, même si la conception réelle survient généralement environ deux semaines après cette date. Une grossesse à terme s'étend sur 40 semaines (280 jours) d'âge gestationnel, divisées en trois trimestres d'environ 13-14 semaines chacun, chacun associé à des étapes distinctes du développement fœtal et à des expériences typiques différentes pour la personne enceinte.",
-          "paragraph2": "Parallèlement à l'âge gestationnel numérique, ce suivi inclut une comparaison de taille hebdomadaire — le style populaire de jalon \"votre bébé a environ la taille d'un citron\" que de nombreux suivis de grossesse utilisent pour rendre la croissance fœtale plus tangible qu'un simple chiffre de longueur en centimètres. Ces comparaisons sont basées sur des courbes de croissance fœtale moyennes typiquement publiées ; la taille réelle varie d'une grossesse à l'autre et est correctement évaluée par échographie, pas par une estimation calendaire."
+          "paragraph2": "Parallèlement à l'âge gestationnel numérique, ce suivi inclut une comparaison de taille hebdomadaire — le style populaire de jalon \"votre bébé a environ la taille d'un citron\" que de nombreux suivis de grossesse utilisent pour rendre la croissance fœtale plus tangible qu'un simple chiffre de longueur en centimètres. Ces comparaisons sont basées sur des courbes de croissance fœtale moyennes typiquement publiées ; la taille réelle varie d'une grossesse à l'autre et est correctement évaluée par échographie, pas par une estimation calendaire.",
+          "weekGauge": {
+            "title": "Où se situe cette semaine ?",
+            "intro": "Une grossesse à terme s'étend sur 42 semaines réparties en trois trimestres. Choisissez un exemple réel ci-dessous pour voir dans quel trimestre il se situe.",
+            "verdict": "Cet exemple se situe dans le {example}, à la semaine {weeks}.",
+            "fact": "Cet exemple correspond à la semaine {weeks} de la grossesse.",
+            "weekValue": "Semaine {weeks}"
+          }
         },
         "trimesters": {
           "title": "Les trois trimestres",
@@ -19414,6 +19490,24 @@
         "firstTrimester": "Premier trimestre",
         "secondTrimester": "Deuxième trimestre",
         "thirdTrimester": "Troisième trimestre"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "macro-calculator": {

@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import type { DigitStyle } from "@tooloralabs/core";
 import type { PregnancyResult as Result } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import PregnancyWeekProgress from "./PregnancyWeekProgress";
 import PregnancySizeCard from "./PregnancySizeCard";
+import PregnancyShareExportModal from "./PregnancyShareExportModal";
 
 type Props = {
   result: Result;
@@ -32,13 +32,26 @@ export default function PregnancyResult({ result, digitStyle }: Props) {
     );
   }
 
+  const inputRows = [{ label: t("week"), value: t("weekValue", { weeks: result.gestationalAgeWeeks, days: result.gestationalAgeDays }) }];
+  const resultRows = [
+    { label: t("dueDate"), value: formatDate(result.dueDateISO) },
+    { label: t("daysUntilDue"), value: `${result.daysUntilDue}` },
+  ];
+  const sentence = t("sentence", {
+    weeks: t("weekValue", { weeks: result.gestationalAgeWeeks, days: result.gestationalAgeDays }),
+    dueDate: formatDate(result.dueDateISO),
+  });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton
-          text={`${t("week")}: ${result.gestationalAgeWeeks}w ${result.gestationalAgeDays}d, ${t("dueDate")}: ${formatDate(result.dueDateISO)}`}
-          className="!text-white dark:!text-white"
+        <PregnancyShareExportModal
+          inputRows={inputRows}
+          resultRows={resultRows}
+          heroLabel={t("trimesterValue", { n: result.trimester })}
+          heroValue={t("weekValue", { weeks: result.gestationalAgeWeeks, days: result.gestationalAgeDays })}
+          sentence={sentence}
         />
       </div>
       <div className="p-4 lg:p-6">

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import type { OvulationResult as Result } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import OvulationCycleTimeline from "./OvulationCycleTimeline";
+import OvulationShareExportModal from "./OvulationShareExportModal";
 
 type Props = {
   result: Result;
@@ -30,16 +30,18 @@ export default function OvulationResult({ result }: Props) {
 
   const first = result.cycles[0];
 
+  const inputRows = result.cycles.map((c) => ({ label: t("cycle", { n: c.cycleNumber }), value: `${t("ovulationDay")} ${formatDate(c.ovulationDateISO)}` }));
+  const resultRows = result.cycles.map((c) => ({
+    label: t("fertileWindow"),
+    value: `${formatDate(c.fertileWindowStartISO)} - ${formatDate(c.fertileWindowEndISO)}`,
+  }));
+  const sentence = t("sentence", { date: formatDate(first.ovulationDateISO) });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton
-          text={result.cycles
-            .map((c) => `${t("cycle", { n: c.cycleNumber })}: ${t("ovulationDay")} ${formatDate(c.ovulationDateISO)}`)
-            .join(", ")}
-          className="!text-white dark:!text-white"
-        />
+        <OvulationShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("nextOvulation")} heroValue={formatDate(first.ovulationDateISO)} sentence={sentence} />
       </div>
       <div className="p-4 lg:p-6">
         <div className="text-center">
