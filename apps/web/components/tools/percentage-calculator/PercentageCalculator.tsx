@@ -12,7 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PercentageInputPanel from "./PercentageInputPanel";
 import PercentageResult from "./PercentageResult";
 import PercentageQuickReference from "./PercentageQuickReference";
-import type { PercentageMode } from "./types";
+import type { PercentageMode, PercentageScenario } from "./types";
 
 const tool = new PercentageCalculatorTool();
 
@@ -41,6 +41,12 @@ export default function PercentageCalculator({ education }: { education: ReactNo
   function handleClear() {
     setFirst(DEFAULTS[mode].first);
     setSecond(DEFAULTS[mode].second);
+  }
+
+  function handleScenarioPreset(scenario: PercentageScenario) {
+    setMode(scenario.mode);
+    setFirst(scenario.first);
+    setSecond(scenario.second);
   }
 
   const digitStyle: DigitStyle = resolveDigitStyle(first, second);
@@ -74,6 +80,7 @@ export default function PercentageCalculator({ education }: { education: ReactNo
               second={second}
               onSecondChange={setSecond}
               onClear={handleClear}
+              onScenarioPreset={handleScenarioPreset}
             />
           }
           result={<PercentageResult result={result} computed={computed} />}

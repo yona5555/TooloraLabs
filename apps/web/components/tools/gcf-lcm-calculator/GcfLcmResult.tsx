@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
+import GcfLcmShareExportModal from "./GcfLcmShareExportModal";
 import type { GcfLcmDraft, GcfLcmResult as Result } from "./types";
 
 type Props = {
@@ -32,11 +32,22 @@ export default function GcfLcmResult({ result, digitStyle, draft }: Props) {
     );
   }
 
+  const sentence = t("sentence", { numbers: draft.numbers.join(", "), gcf: fmt(result.gcf), lcm: fmt(result.lcm) });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={`${t("gcfLabel")}: ${fmt(result.gcf)}, ${t("lcmLabel")}: ${fmt(result.lcm)}`} className="!text-white dark:!text-white" />
+        <GcfLcmShareExportModal
+          inputRows={[{ label: t("numbersLabel"), value: draft.numbers.join(", ") }]}
+          resultRows={[
+            { label: t("gcfLabel"), value: fmt(result.gcf) },
+            { label: t("lcmLabel"), value: fmt(result.lcm) },
+          ]}
+          heroLabel={t("gcfLabel")}
+          heroValue={fmt(result.gcf)}
+          sentence={sentence}
+        />
       </div>
       <div className="p-4 lg:p-6">
         <div className="grid grid-cols-2 gap-4 text-center">

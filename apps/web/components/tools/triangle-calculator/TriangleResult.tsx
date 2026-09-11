@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { TriangleResult as Result } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import TriangleDiagram from "./TriangleDiagram";
+import TriangleShareExportModal from "./TriangleShareExportModal";
 
 type Props = {
   result: Result;
@@ -35,14 +35,24 @@ export default function TriangleResult({ result, digitStyle }: Props) {
     );
   }
 
+  const inputRows = [
+    { label: t("sideA"), value: fmt(result.a) },
+    { label: t("sideB"), value: fmt(result.b) },
+    { label: t("sideC"), value: fmt(result.c) },
+  ];
+  const resultRows = [
+    { label: t("angleA"), value: `${fmt(result.angleA)}°` },
+    { label: t("angleB"), value: `${fmt(result.angleB)}°` },
+    { label: t("angleC"), value: `${fmt(result.angleC)}°` },
+    { label: t("perimeter"), value: fmt(result.perimeter) },
+  ];
+  const sentence = t("sentence", { area: fmt(result.area) });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton
-          text={`a=${fmt(result.a)}, b=${fmt(result.b)}, c=${fmt(result.c)}, A=${fmt(result.angleA)}°, B=${fmt(result.angleB)}°, C=${fmt(result.angleC)}°`}
-          className="!text-white dark:!text-white"
-        />
+        <TriangleShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("area")} heroValue={fmt(result.area)} sentence={sentence} />
       </div>
       <div className="p-4 lg:p-6">
         <TriangleDiagram result={result} digitStyle={digitStyle} />

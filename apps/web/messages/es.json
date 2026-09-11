@@ -5039,7 +5039,8 @@
         "denominatorLabel": "Denominador",
         "numeratorPlaceholder": "Numerador",
         "denominatorPlaceholder": "Denominador",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "scenarioLabel": "Prueba un problema real"
       },
       "result": {
         "heading": "Resultado",
@@ -5050,7 +5051,8 @@
         "diagramCaption": "{numerator}/{denominator} representada como partes iguales sombreadas.",
         "stepAddSubtract": "Convertido a un denominador común de {commonDenominator}: {scaledA}/{commonDenominator} y {scaledB}/{commonDenominator}, y luego simplificado a su mínima expresión.",
         "stepMultiply": "Multiplicación directa — numeradores {numA}×{numB} y denominadores {denA}×{denB} — y luego simplificado a su mínima expresión.",
-        "stepDivide": "Multiplicado por el recíproco de la segunda fracción ({numB}/{denB} se convierte en {denB}/{numB}), y luego simplificado a su mínima expresión."
+        "stepDivide": "Multiplicado por el recíproco de la segunda fracción ({numB}/{denB} se convierte en {denB}/{numB}), y luego simplificado a su mínima expresión.",
+        "decimalLabel": "Equivalente decimal"
       },
       "education": {
         "intro": {
@@ -5060,7 +5062,25 @@
             "caption": "3/8 — tres de ocho partes iguales están sombreadas."
           },
           "paragraph2": "Las cuatro operaciones se comportan de forma distinta. La suma y la resta requieren primero un denominador común, porque solo pueden combinarse directamente partes del mismo tamaño — esta herramienta convierte ambas fracciones al mínimo común denominador antes de combinar sus numeradores. La multiplicación nunca necesita un denominador común: basta con multiplicar los dos numeradores entre sí y los dos denominadores entre sí. La división funciona multiplicando por el recíproco de la segunda fracción — invirtiendo su numerador y denominador —, lo cual equivale matemáticamente a dividir directamente. Cada resultado se reduce automáticamente a su forma más simple dividiendo el numerador y el denominador entre su máximo común divisor (MCD).",
-          "paragraph3": "Mantener un cálculo en fracciones exactas, en lugar de convertirlo pronto a decimal, evita los errores de redondeo que se acumulan a partir de decimales periódicos — 1/3 es exactamente 1/3, pero 0.333 no es exactamente un tercio. Esta distinción importa al escalar recetas, en medidas de construcción y en cualquier reparto de partes o cantidades cuyas piezas deban sumar exactamente el todo, no de forma aproximada."
+          "paragraph3": "Mantener un cálculo en fracciones exactas, en lugar de convertirlo pronto a decimal, evita los errores de redondeo que se acumulan a partir de decimales periódicos — 1/3 es exactamente 1/3, pero 0.333 no es exactamente un tercio. Esta distinción importa al escalar recetas, en medidas de construcción y en cualquier reparto de partes o cantidades cuyas piezas deban sumar exactamente el todo, no de forma aproximada.",
+          "numberLineGauge": {
+            "title": "Fracciones comunes en una recta numérica",
+            "intro": "Las fracciones describen porciones cotidianas, desde un cuarto de tanque de gasolina hasta una pizza y media. Elige un ejemplo real a continuación para ver dónde se ubica en la recta numérica.",
+            "verdict": "{example} se ubica {classification} en la recta numérica.",
+            "fact": "Como decimal, eso es {value}.",
+            "examples": {
+              "quarterTank": "1/4 de tanque de gasolina",
+              "halfRecipe": "1/2 receta",
+              "threeQuarterBattery": "3/4 de carga de batería",
+              "wholePizza": "1 pizza entera",
+              "oneAndHalfCups": "1 1/2 tazas"
+            },
+            "zones": {
+              "small": "por debajo de la mitad",
+              "half": "entre la mitad y un entero",
+              "large": "más allá de un entero"
+            }
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -5179,6 +5199,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Leer el texto original"
         }
+      },
+      "scenarios": {
+        "doubleRecipe": "Duplicar una receta",
+        "leftoverPizza": "Pizza sobrante",
+        "fabricYardage": "Cortar tela",
+        "roadTripSplit": "Dividir un viaje por carretera"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "scientific-notation-converter": {
@@ -11590,7 +11634,8 @@
         },
         "firstPlaceholder": "p. ej. 20",
         "secondPlaceholder": "p. ej. 150",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "scenarioLabel": "Prueba un escenario real"
       },
       "result": {
         "heading": "Resultado",
@@ -11622,7 +11667,24 @@
           "diagram": {
             "caption": "27 de estos 100 cuadros están sombreados — esto es literalmente lo que significa «27 %»: 27 partes por cada 100."
           },
-          "paragraph3": "La diferencia entre cambio porcentual y diferencia porcentual confunde incluso a analistas experimentados. Pasar de 80 a 100 es un cambio porcentual del +25 %, usando 80 (el valor original) como base. Pero la diferencia porcentual entre esos mismos dos números, que usa su promedio de 90 como base, es de aproximadamente el 22,2 % — los mismos dos números, dos preguntas distintas, dos respuestas igualmente válidas."
+          "paragraph3": "La diferencia entre cambio porcentual y diferencia porcentual confunde incluso a analistas experimentados. Pasar de 80 a 100 es un cambio porcentual del +25 %, usando 80 (el valor original) como base. Pero la diferencia porcentual entre esos mismos dos números, que usa su promedio de 90 como base, es de aproximadamente el 22,2 % — los mismos dos números, dos preguntas distintas, dos respuestas igualmente válidas.",
+          "rateGauge": {
+            "title": "¿Dónde se ubica esta tasa porcentual?",
+            "intro": "Las tasas porcentuales aparecen en todas partes de la vida diaria, desde el impuesto sobre ventas hasta los intereses de tarjetas de crédito. Elige un ejemplo real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Tasa: {classification}.",
+            "fact": "Este ejemplo tiene una tasa del {percent}.",
+            "examples": {
+              "salesTax": "Impuesto sobre ventas",
+              "restaurantTip": "Propina en restaurante",
+              "storeDiscount": "Descuento de tienda",
+              "creditCardApr": "TAE de tarjeta de crédito"
+            },
+            "zones": {
+              "low": "Baja",
+              "moderate": "Moderada",
+              "high": "Alta"
+            }
+          }
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -11741,6 +11803,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Leer el texto original"
         }
+      },
+      "scenarios": {
+        "restaurantTip": "Propina en restaurante",
+        "examScore": "Puntuación de examen",
+        "salaryRaise": "Aumento de salario",
+        "discountedPrice": "Precio con descuento"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "tip-calculator": {
@@ -17304,7 +17390,8 @@
           "diameter": "Diámetro",
           "circumference": "Circunferencia",
           "area": "Área"
-        }
+        },
+        "sentence": "Con {field} de {value}, las demás medidas del círculo se derivan directamente."
       },
       "quickReference": {
         "title": "Las Fórmulas",
@@ -17314,7 +17401,25 @@
         "intro": {
           "title": "Entender las Medidas del Círculo",
           "paragraph1": "Un círculo queda completamente definido por un único número: su radio, la distancia desde su centro hasta cualquier punto de su borde. Cualquier otra medida habitual — diámetro, circunferencia, área — es un múltiplo fijo o una función de ese único radio, por lo que conocer cualquiera de las cuatro medidas siempre basta para recuperar las otras tres; no existe un círculo \"subdeterminado\" como puede ocurrir con un triángulo o cuadrilátero general.",
-          "paragraph2": "La constante que vincula la circunferencia de un círculo con su diámetro es π (pi) — un número irracional, aproximadamente 3,14159, que nunca termina ni se repite en forma decimal. El diámetro es simplemente el doble del radio; la circunferencia es π por el diámetro (equivalentemente, 2π por el radio); y el área es π por el radio al cuadrado. Esta herramienta acepta cualquiera de los cuatro valores que ya conozcas y deriva el resto al instante."
+          "paragraph2": "La constante que vincula la circunferencia de un círculo con su diámetro es π (pi) — un número irracional, aproximadamente 3,14159, que nunca termina ni se repite en forma decimal. El diámetro es simplemente el doble del radio; la circunferencia es π por el diámetro (equivalentemente, 2π por el radio); y el área es π por el radio al cuadrado. Esta herramienta acepta cualquiera de los cuatro valores que ya conozcas y deriva el resto al instante.",
+          "radiusGauge": {
+            "title": "¿Dónde se ubica este radio?",
+            "intro": "El tamaño de los círculos abarca un rango enorme, desde una pequeña moneda hasta una gigantesca noria. Elige un ejemplo real a continuación para ver dónde se ubica su radio.",
+            "verdict": "{example} — Escala: {classification}.",
+            "fact": "Este ejemplo tiene un radio de aproximadamente {radius}.",
+            "examples": {
+              "coin": "Una moneda",
+              "dinnerPlate": "Un plato",
+              "bicycleWheel": "Una rueda de bicicleta",
+              "runningTrack": "Una pista de atletismo",
+              "ferrisWheel": "Una noria"
+            },
+            "scales": {
+              "pocket": "Tamaño de bolsillo",
+              "room": "Tamaño de habitación",
+              "landmark": "Tamaño de monumento"
+            }
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -17441,6 +17546,24 @@
         "pizzaDiameter": "Pizza (diámetro)",
         "trackLap": "Pista de atletismo (circunferencia)",
         "roomFloor": "Habitación redonda (área)"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "gcf-lcm-calculator": {
@@ -17478,13 +17601,26 @@
         "invalidNumber": "Cada número debe ser un entero positivo (1 o mayor).",
         "gcfLabel": "MCD",
         "lcmLabel": "MCM",
-        "factorizationsTitle": "Factorizaciones primas"
+        "factorizationsTitle": "Factorizaciones primas",
+        "sentence": "Para {numbers}, el MCD es {gcf} y el MCM es {lcm}.",
+        "numbersLabel": "Números"
       },
       "education": {
         "intro": {
           "title": "Entender el MCD y el MCM",
           "paragraph1": "El máximo común divisor (MCD) de un conjunto de números es el mayor número entero que divide a todos ellos exactamente — la mayor parte en la que todos pueden dividirse por igual. El mínimo común múltiplo (MCM) es el menor número entero que es divisible exactamente por todos ellos — el primer punto en el que sus múltiplos coinciden. Responden a preguntas opuestas: el MCD busca el mayor divisor compartido, el MCM busca el menor múltiplo compartido.",
-          "paragraph2": "Esta calculadora encuentra ambos mediante factorización prima: descompone cada número en los primos cuyo producto lo forma y luego compara esas factorizaciones. El MCD toma cada factor primo que los números comparten, a la menor potencia en que aparece en cualquiera de ellos; el MCM toma cada factor primo que aparece en cualquiera de ellos, a la mayor potencia en que se usa. Para exactamente dos números, MCD × MCM siempre es igual al producto de ambos números — una comprobación útil del resultado."
+          "paragraph2": "Esta calculadora encuentra ambos mediante factorización prima: descompone cada número en los primos cuyo producto lo forma y luego compara esas factorizaciones. El MCD toma cada factor primo que los números comparten, a la menor potencia en que aparece en cualquiera de ellos; el MCM toma cada factor primo que aparece en cualquiera de ellos, a la mayor potencia en que se usa. Para exactamente dos números, MCD × MCM siempre es igual al producto de ambos números — una comprobación útil del resultado.",
+          "ratioGauge": {
+            "title": "¿Qué tan relacionados están estos números?",
+            "intro": "La proporción entre el MCM y el MCD muestra cuánta estructura común tiene un conjunto de números: una proporción pequeña significa que comparten factores comunes grandes, una proporción grande significa que son casi coprimos. Elige un ejemplo real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Aquí, el MCM es {ratio}× el MCD.",
+            "zones": {
+              "closelyRelated": "Estrechamente relacionados",
+              "moderatelyRelated": "Moderadamente relacionados",
+              "looselyRelated": "Casi coprimos"
+            }
+          }
         },
         "variables": {
           "title": "Variables implicadas",
@@ -17641,6 +17777,24 @@
         "threeNumbers": "Tres números",
         "coprimeExample": "Ejemplo coprimo",
         "recipeScaling": "Ajustar una receta"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "triangle-calculator": {
@@ -17669,7 +17823,8 @@
           "asa": "Introduce dos ángulos y el lado entre ellos (ángulos en grados).",
           "aas": "Introduce dos ángulos y un lado no situado entre ellos (ángulos en grados)."
         },
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "scenarioLabel": "Prueba un triángulo real"
       },
       "modes": {
         "groupLabel": "Valores conocidos",
@@ -17694,7 +17849,8 @@
         "invalidSides": "Introduce longitudes de lado positivas para ver un resultado.",
         "invalidAngles": "Introduce ángulos positivos para ver un resultado.",
         "triangleInequalityViolated": "Estos lados no pueden formar un triángulo — la suma de dos lados cualesquiera debe superar al tercero.",
-        "angleSumInvalid": "Estos ángulos no pueden formar un triángulo — la suma de los dos ángulos dados debe ser menor que 180°."
+        "angleSumInvalid": "Estos ángulos no pueden formar un triángulo — la suma de los dos ángulos dados debe ser menor que 180°.",
+        "sentence": "Este triángulo tiene un área de {area}."
       },
       "quickReference": {
         "title": "Las fórmulas",
@@ -17704,7 +17860,18 @@
         "intro": {
           "title": "Entender la resolución de triángulos",
           "paragraph1": "Un triángulo tiene seis medidas — tres lados y tres ángulos —, pero solo tres de ellas, en la combinación correcta, bastan para fijar toda la forma. \"Resolver\" un triángulo significa partir de tres medidas conocidas y derivar las otras tres, junto con cantidades derivadas como el área y el perímetro. Las cuatro combinaciones que siempre determinan un triángulo único se conocen con las siglas SSS (tres lados), SAS (dos lados y el ángulo entre ellos), ASA (dos ángulos y el lado entre ellos) y AAS (dos ángulos y un lado no situado entre ellos).",
-          "paragraph2": "Dos relaciones clásicas hacen todo el trabajo: la ley del coseno, que generaliza el teorema de Pitágoras a cualquier triángulo (no solo a los rectángulos) y se usa siempre que se conoce un conjunto completo de lados o un ángulo incluido, y la ley del seno, que relaciona cada lado con el seno de su ángulo opuesto y se usa cuando ya se conocen dos ángulos. Esta calculadora elige la ley que corresponde a la combinación de datos que proporcionas, y luego comprueba el resultado contra la desigualdad triangular (la suma de dos lados cualesquiera debe superar al tercero) y el hecho de que los ángulos de todo triángulo suman siempre exactamente 180°."
+          "paragraph2": "Dos relaciones clásicas hacen todo el trabajo: la ley del coseno, que generaliza el teorema de Pitágoras a cualquier triángulo (no solo a los rectángulos) y se usa siempre que se conoce un conjunto completo de lados o un ángulo incluido, y la ley del seno, que relaciona cada lado con el seno de su ángulo opuesto y se usa cuando ya se conocen dos ángulos. Esta calculadora elige la ley que corresponde a la combinación de datos que proporcionas, y luego comprueba el resultado contra la desigualdad triangular (la suma de dos lados cualesquiera debe superar al tercero) y el hecho de que los ángulos de todo triángulo suman siempre exactamente 180°.",
+          "angleGauge": {
+            "title": "¿Acutángulo, Rectángulo u Obtusángulo?",
+            "intro": "La forma de un triángulo se define por su ángulo más grande: agudo (menos de 90°), recto (exactamente 90°) u obtuso (más de 90°). Elige un ejemplo real a continuación para ver cuál es.",
+            "verdict": "{example} — Forma: {classification}.",
+            "fact": "Su ángulo más grande es de aproximadamente {angle}°.",
+            "shapes": {
+              "acute": "Triángulo acutángulo",
+              "right": "Triángulo rectángulo",
+              "obtuse": "Triángulo obtusángulo"
+            }
+          }
         },
         "modes": {
           "title": "Los cuatro modos de resolución",
@@ -17833,6 +18000,30 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Leer los Elementos de Euclides, Libro I"
         }
+      },
+      "scenarios": {
+        "rightTriangle": "Triángulo rectángulo 3-4-5",
+        "acuteTriangle": "Triángulo acutángulo 5-6-7",
+        "obtuseTriangle": "Triángulo obtusángulo 2-3-4",
+        "slimObtuseTriangle": "Astilla muy obtusa"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "probability-calculator": {

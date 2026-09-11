@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import type { PercentageMode } from "./types";
+import { PERCENTAGE_SCENARIOS, type PercentageMode, type PercentageScenario } from "./types";
 
 const MODES: PercentageMode[] = [
   "percent-of-number",
@@ -21,6 +21,7 @@ type PercentageInputPanelProps = {
   second: string;
   onSecondChange: (value: string) => void;
   onClear: () => void;
+  onScenarioPreset: (scenario: PercentageScenario) => void;
 };
 
 export default function PercentageInputPanel({
@@ -31,11 +32,29 @@ export default function PercentageInputPanel({
   second,
   onSecondChange,
   onClear,
+  onScenarioPreset,
 }: PercentageInputPanelProps) {
   const t = useTranslations("tools.percentage-calculator.form");
+  const tScenarios = useTranslations("tools.percentage-calculator.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {PERCENTAGE_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-300 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
         <select

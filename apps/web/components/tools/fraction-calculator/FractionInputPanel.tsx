@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import type { FractionOperation } from "./types";
+import { FRACTION_SCENARIOS, type FractionOperation, type FractionScenario } from "./types";
 
 const OPERATIONS: FractionOperation[] = ["add", "subtract", "multiply", "divide"];
 
@@ -19,6 +19,7 @@ type FractionInputPanelProps = {
   denominatorB: string;
   onDenominatorBChange: (value: string) => void;
   onClear: () => void;
+  onScenarioPreset: (scenario: FractionScenario) => void;
 };
 
 export default function FractionInputPanel({
@@ -33,11 +34,29 @@ export default function FractionInputPanel({
   denominatorB,
   onDenominatorBChange,
   onClear,
+  onScenarioPreset,
 }: FractionInputPanelProps) {
   const t = useTranslations("tools.fraction-calculator.form");
+  const tScenarios = useTranslations("tools.fraction-calculator.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {FRACTION_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-300 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
         <select

@@ -12,7 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FractionInputPanel from "./FractionInputPanel";
 import FractionResult from "./FractionResult";
 import FractionQuickReference from "./FractionQuickReference";
-import type { FractionOperation } from "./types";
+import type { FractionOperation, FractionScenario } from "./types";
 
 const tool = new FractionCalculatorTool();
 
@@ -46,6 +46,14 @@ export default function FractionCalculator({ education }: { education: ReactNode
     setDenominatorA(DEFAULTS[operation].denominatorA);
     setNumeratorB(DEFAULTS[operation].numeratorB);
     setDenominatorB(DEFAULTS[operation].denominatorB);
+  }
+
+  function handleScenarioPreset(scenario: FractionScenario) {
+    setOperation(scenario.operation);
+    setNumeratorA(scenario.numeratorA);
+    setDenominatorA(scenario.denominatorA);
+    setNumeratorB(scenario.numeratorB);
+    setDenominatorB(scenario.denominatorB);
   }
 
   const digitStyle: DigitStyle = resolveDigitStyle(numeratorA, denominatorA, numeratorB, denominatorB);
@@ -88,6 +96,7 @@ export default function FractionCalculator({ education }: { education: ReactNode
               denominatorB={denominatorB}
               onDenominatorBChange={setDenominatorB}
               onClear={handleClear}
+              onScenarioPreset={handleScenarioPreset}
             />
           }
           result={<FractionResult result={result} computed={computed} />}

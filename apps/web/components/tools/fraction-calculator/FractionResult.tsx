@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import FractionBarDiagram from "./FractionBarDiagram";
+import FractionShareExportModal from "./FractionShareExportModal";
 import type { FractionOperation, FractionResult as Result } from "./types";
 
 type Computed = {
@@ -39,6 +39,7 @@ function FractionGlyph({ numerator, denominator }: { numerator: number; denomina
 
 export default function FractionResult({ result, computed }: Props) {
   const t = useTranslations("tools.fraction-calculator.result");
+  const tForm = useTranslations("tools.fraction-calculator.form");
   const { operation, numeratorA, denominatorA, numeratorB, denominatorB, digitStyle } = computed;
 
   const num = (value: number) => formatLocalizedNumber(value, digitStyle);
@@ -69,9 +70,15 @@ export default function FractionResult({ result, computed }: Props) {
     );
   }
 
-  const copyText = result.isWholeNumber
+  const heroValue = result.isWholeNumber
     ? num(result.result.numerator)
     : `${num(result.result.numerator)}/${num(result.result.denominator)}`;
+
+  const inputRows = [
+    { label: tForm("fractionALabel"), value: `${num(numeratorA)}/${num(denominatorA)}` },
+    { label: tForm("fractionBLabel"), value: `${num(numeratorB)}/${num(denominatorB)}` },
+  ];
+  const resultRows = [{ label: t("decimalLabel"), value: num(result.decimal) }];
 
   const stepSentence =
     operation === "add" || operation === "subtract"
@@ -99,7 +106,7 @@ export default function FractionResult({ result, computed }: Props) {
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
-          <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          <FractionShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={heroValue} sentence={stepSentence} />
         </div>
 
         <div className="p-4 lg:p-6">

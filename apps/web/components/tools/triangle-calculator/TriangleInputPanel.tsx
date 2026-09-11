@@ -4,7 +4,7 @@ import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import TriangleModeTabs from "./TriangleModeTabs";
-import type { TriangleMode } from "./types";
+import { TRIANGLE_SCENARIOS, type TriangleMode, type TriangleScenario } from "./types";
 
 type Props = {
   mode: TriangleMode;
@@ -16,6 +16,7 @@ type Props = {
   onField2Change: (value: string) => void;
   onField3Change: (value: string) => void;
   onClear: () => void;
+  onScenarioPreset: (scenario: TriangleScenario) => void;
 };
 
 const FIELD_LABEL_KEYS: Record<TriangleMode, [string, string, string]> = {
@@ -25,8 +26,9 @@ const FIELD_LABEL_KEYS: Record<TriangleMode, [string, string, string]> = {
   aas: ["angleA", "angleB", "oppositeSideA"],
 };
 
-export default function TriangleInputPanel({ mode, onModeChange, field1, field2, field3, onField1Change, onField2Change, onField3Change, onClear }: Props) {
+export default function TriangleInputPanel({ mode, onModeChange, field1, field2, field3, onField1Change, onField2Change, onField3Change, onClear, onScenarioPreset }: Props) {
   const t = useTranslations("tools.triangle-calculator.form");
+  const tScenarios = useTranslations("tools.triangle-calculator.scenarios");
   const [label1, label2, label3] = FIELD_LABEL_KEYS[mode];
 
   return (
@@ -34,6 +36,24 @@ export default function TriangleInputPanel({ mode, onModeChange, field1, field2,
       <div className="mb-4">
         <TriangleModeTabs mode={mode} onModeChange={onModeChange} />
       </div>
+
+      {mode === "sss" && (
+        <div className="mb-4">
+          <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+          <div className="flex flex-wrap gap-2">
+            {TRIANGLE_SCENARIOS.map((scenario) => (
+              <button
+                key={scenario.key}
+                type="button"
+                onClick={() => onScenarioPreset(scenario)}
+                className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-300 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 sm:text-sm"
+              >
+                {tScenarios(scenario.key)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="space-y-3">
         <ToolInput label={t(`fields.${label1}`)} type="text" inputMode="decimal" value={field1} onChange={(e) => onField1Change(e.target.value)} />

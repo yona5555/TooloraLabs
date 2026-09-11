@@ -5039,7 +5039,8 @@
         "denominatorLabel": "Dénominateur",
         "numeratorPlaceholder": "Numérateur",
         "denominatorPlaceholder": "Dénominateur",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "scenarioLabel": "Essayer un problème réel"
       },
       "result": {
         "heading": "Résultat",
@@ -5050,7 +5051,8 @@
         "diagramCaption": "{numerator}/{denominator} représenté par des parts égales colorées.",
         "stepAddSubtract": "Converti à un dénominateur commun de {commonDenominator} : {scaledA}/{commonDenominator} et {scaledB}/{commonDenominator}, puis simplifié à sa forme la plus simple.",
         "stepMultiply": "Multiplication directe — numérateurs {numA}×{numB} et dénominateurs {denA}×{denB} — puis simplifié à sa forme la plus simple.",
-        "stepDivide": "Multiplié par l'inverse de la seconde fraction ({numB}/{denB} devient {denB}/{numB}), puis simplifié à sa forme la plus simple."
+        "stepDivide": "Multiplié par l'inverse de la seconde fraction ({numB}/{denB} devient {denB}/{numB}), puis simplifié à sa forme la plus simple.",
+        "decimalLabel": "Équivalent décimal"
       },
       "education": {
         "intro": {
@@ -5060,7 +5062,25 @@
             "caption": "3/8 — trois parts sur huit parts égales sont colorées."
           },
           "paragraph2": "Les quatre opérations se comportent différemment. L'addition et la soustraction exigent d'abord un dénominateur commun, car seules des parts de même taille peuvent être combinées directement — cet outil convertit les deux fractions au plus petit dénominateur commun avant de combiner leurs numérateurs. La multiplication ne nécessite jamais de dénominateur commun : il suffit de multiplier les deux numérateurs entre eux et les deux dénominateurs entre eux. La division consiste à multiplier par l'inverse de la seconde fraction — en inversant son numérateur et son dénominateur —, ce qui équivaut mathématiquement à une division directe. Chaque résultat est ensuite automatiquement réduit à sa forme la plus simple en divisant le numérateur et le dénominateur par leur plus grand commun diviseur (PGCD).",
-          "paragraph3": "Conserver un calcul en fractions exactes, plutôt que de le convertir prématurément en décimal, évite les erreurs d'arrondi qui s'accumulent à partir des décimales périodiques — 1/3 vaut exactement 1/3, mais 0,333 ne vaut pas exactement un tiers. Cette distinction compte lors de la mise à l'échelle de recettes, dans les mesures de construction, et dans tout partage de parts ou de quantités dont les morceaux doivent reformer exactement le tout, sans approximation."
+          "paragraph3": "Conserver un calcul en fractions exactes, plutôt que de le convertir prématurément en décimal, évite les erreurs d'arrondi qui s'accumulent à partir des décimales périodiques — 1/3 vaut exactement 1/3, mais 0,333 ne vaut pas exactement un tiers. Cette distinction compte lors de la mise à l'échelle de recettes, dans les mesures de construction, et dans tout partage de parts ou de quantités dont les morceaux doivent reformer exactement le tout, sans approximation.",
+          "numberLineGauge": {
+            "title": "Fractions courantes sur une droite numérique",
+            "intro": "Les fractions décrivent des portions du quotidien, d'un quart de réservoir d'essence à une pizza et demie. Choisissez un exemple réel ci-dessous pour voir où il se situe sur la droite numérique.",
+            "verdict": "{example} se situe {classification} sur la droite numérique.",
+            "fact": "En décimal, cela fait {value}.",
+            "examples": {
+              "quarterTank": "1/4 de réservoir d'essence",
+              "halfRecipe": "1/2 recette",
+              "threeQuarterBattery": "3/4 de charge de batterie",
+              "wholePizza": "1 pizza entière",
+              "oneAndHalfCups": "1 1/2 tasse"
+            },
+            "zones": {
+              "small": "en dessous de la moitié",
+              "half": "entre la moitié et un entier",
+              "large": "au-delà d'un entier"
+            }
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -5179,6 +5199,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Lire le texte original"
         }
+      },
+      "scenarios": {
+        "doubleRecipe": "Doubler une recette",
+        "leftoverPizza": "Reste de pizza",
+        "fabricYardage": "Couper du tissu",
+        "roadTripSplit": "Diviser un road trip"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "scientific-notation-converter": {
@@ -11590,7 +11634,8 @@
         },
         "firstPlaceholder": "ex. 20",
         "secondPlaceholder": "ex. 150",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "scenarioLabel": "Essayer un scénario réel"
       },
       "result": {
         "heading": "Résultat",
@@ -11622,7 +11667,24 @@
           "diagram": {
             "caption": "27 de ces 100 carrés sont colorés — c'est littéralement ce que signifie «27 %» : 27 parts pour 100."
           },
-          "paragraph3": "La distinction entre variation en pourcentage et différence en pourcentage déroute même les analystes expérimentés. Passer de 80 à 100 représente une variation en pourcentage de +25 %, en utilisant 80 (la valeur initiale) comme base. Mais la différence en pourcentage entre ces deux mêmes nombres, qui utilise leur moyenne de 90 comme base, est d'environ 22,2 % — les deux mêmes nombres, deux questions différentes, deux réponses valides différentes."
+          "paragraph3": "La distinction entre variation en pourcentage et différence en pourcentage déroute même les analystes expérimentés. Passer de 80 à 100 représente une variation en pourcentage de +25 %, en utilisant 80 (la valeur initiale) comme base. Mais la différence en pourcentage entre ces deux mêmes nombres, qui utilise leur moyenne de 90 comme base, est d'environ 22,2 % — les deux mêmes nombres, deux questions différentes, deux réponses valides différentes.",
+          "rateGauge": {
+            "title": "Où se situe ce taux de pourcentage ?",
+            "intro": "Les taux de pourcentage apparaissent partout dans la vie quotidienne, de la taxe de vente aux intérêts de carte de crédit. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Taux : {classification}.",
+            "fact": "Cet exemple a un taux de {percent}.",
+            "examples": {
+              "salesTax": "Taxe de vente",
+              "restaurantTip": "Pourboire au restaurant",
+              "storeDiscount": "Remise en magasin",
+              "creditCardApr": "TAEG de carte de crédit"
+            },
+            "zones": {
+              "low": "Faible",
+              "moderate": "Modéré",
+              "high": "Élevé"
+            }
+          }
         },
         "examples": {
           "title": "Exemples résolus",
@@ -11741,6 +11803,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Lire le texte original"
         }
+      },
+      "scenarios": {
+        "restaurantTip": "Pourboire au restaurant",
+        "examScore": "Note d'examen",
+        "salaryRaise": "Augmentation de salaire",
+        "discountedPrice": "Prix réduit"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "tip-calculator": {
@@ -17304,7 +17390,8 @@
           "diameter": "Diamètre",
           "circumference": "Circonférence",
           "area": "Aire"
-        }
+        },
+        "sentence": "Avec {field} de {value}, les autres mesures du cercle en découlent directement."
       },
       "quickReference": {
         "title": "Les Formules",
@@ -17314,7 +17401,25 @@
         "intro": {
           "title": "Comprendre les Mesures du Cercle",
           "paragraph1": "Un cercle est entièrement défini par un seul nombre : son rayon, la distance de son centre à n'importe quel point de son bord. Toute autre mesure courante — diamètre, circonférence, aire — est un multiple fixe ou une fonction de ce seul rayon, c'est pourquoi connaître l'une des quatre mesures suffit toujours à retrouver les trois autres ; il n'existe pas de cercle \"sous-déterminé\" comme cela peut être le cas pour un triangle ou un quadrilatère général.",
-          "paragraph2": "La constante qui relie la circonférence d'un cercle à son diamètre est π (pi) — un nombre irrationnel, environ 3,14159, qui ne se termine ni ne se répète jamais sous forme décimale. Le diamètre est simplement le double du rayon ; la circonférence est π fois le diamètre (soit, de manière équivalente, 2π fois le rayon) ; et l'aire est π fois le rayon au carré. Cet outil accepte celle des quatre valeurs que vous connaissez déjà et en déduit instantanément les autres."
+          "paragraph2": "La constante qui relie la circonférence d'un cercle à son diamètre est π (pi) — un nombre irrationnel, environ 3,14159, qui ne se termine ni ne se répète jamais sous forme décimale. Le diamètre est simplement le double du rayon ; la circonférence est π fois le diamètre (soit, de manière équivalente, 2π fois le rayon) ; et l'aire est π fois le rayon au carré. Cet outil accepte celle des quatre valeurs que vous connaissez déjà et en déduit instantanément les autres.",
+          "radiusGauge": {
+            "title": "Où se situe ce rayon ?",
+            "intro": "La taille des cercles couvre une gamme énorme, d'une petite pièce de monnaie à une immense grande roue. Choisissez un exemple réel ci-dessous pour voir où se situe son rayon.",
+            "verdict": "{example} — Échelle : {classification}.",
+            "fact": "Cet exemple a un rayon d'environ {radius}.",
+            "examples": {
+              "coin": "Une pièce de monnaie",
+              "dinnerPlate": "Une assiette",
+              "bicycleWheel": "Une roue de vélo",
+              "runningTrack": "Une piste d'athlétisme",
+              "ferrisWheel": "Une grande roue"
+            },
+            "scales": {
+              "pocket": "Format de poche",
+              "room": "Taille d'une pièce",
+              "landmark": "Taille d'un monument"
+            }
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -17441,6 +17546,24 @@
         "pizzaDiameter": "Pizza (diamètre)",
         "trackLap": "Piste d'athlétisme (circonférence)",
         "roomFloor": "Pièce ronde (aire)"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "gcf-lcm-calculator": {
@@ -17478,13 +17601,26 @@
         "invalidNumber": "Chaque nombre doit être un entier positif (1 ou plus).",
         "gcfLabel": "PGCD",
         "lcmLabel": "PPCM",
-        "factorizationsTitle": "Décompositions en facteurs premiers"
+        "factorizationsTitle": "Décompositions en facteurs premiers",
+        "sentence": "Pour {numbers}, le PGCD est {gcf} et le PPCM est {lcm}.",
+        "numbersLabel": "Nombres"
       },
       "education": {
         "intro": {
           "title": "Comprendre le PGCD et le PPCM",
           "paragraph1": "Le plus grand commun diviseur (PGCD) d'un ensemble de nombres est le plus grand entier qui les divise tous exactement — la plus grande part en laquelle ils peuvent tous être divisés également. Le plus petit commun multiple (PPCM) est le plus petit entier que chacun d'eux divise exactement — le premier point où leurs multiples coïncident. Ils répondent à des questions opposées : le PGCD cherche le plus grand diviseur commun, le PPCM cherche le plus petit multiple commun.",
-          "paragraph2": "Cette calculatrice trouve les deux par décomposition en facteurs premiers : chaque nombre est décomposé en nombres premiers dont le produit le compose, puis ces décompositions sont comparées. Le PGCD prend chaque facteur premier commun à la puissance la plus basse à laquelle il apparaît dans l'un d'eux ; le PPCM prend chaque facteur premier apparaissant dans l'un d'eux, à la puissance la plus élevée utilisée. Pour exactement deux nombres, PGCD × PPCM est toujours égal au produit des deux nombres — une vérification utile du résultat."
+          "paragraph2": "Cette calculatrice trouve les deux par décomposition en facteurs premiers : chaque nombre est décomposé en nombres premiers dont le produit le compose, puis ces décompositions sont comparées. Le PGCD prend chaque facteur premier commun à la puissance la plus basse à laquelle il apparaît dans l'un d'eux ; le PPCM prend chaque facteur premier apparaissant dans l'un d'eux, à la puissance la plus élevée utilisée. Pour exactement deux nombres, PGCD × PPCM est toujours égal au produit des deux nombres — une vérification utile du résultat.",
+          "ratioGauge": {
+            "title": "Dans quelle mesure ces nombres sont-ils liés ?",
+            "intro": "Le rapport entre le PPCM et le PGCD montre à quel point un ensemble de nombres partage une structure commune — un petit rapport signifie qu'ils partagent de grands facteurs communs, un grand rapport signifie qu'ils sont presque premiers entre eux. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Ici, le PPCM est {ratio}× le PGCD.",
+            "zones": {
+              "closelyRelated": "Étroitement liés",
+              "moderatelyRelated": "Modérément liés",
+              "looselyRelated": "Presque premiers entre eux"
+            }
+          }
         },
         "variables": {
           "title": "Variables concernées",
@@ -17641,6 +17777,24 @@
         "threeNumbers": "Trois nombres",
         "coprimeExample": "Exemple de nombres premiers entre eux",
         "recipeScaling": "Mise à l'échelle d'une recette"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "triangle-calculator": {
@@ -17669,7 +17823,8 @@
           "asa": "Saisissez deux angles et le côté entre eux (angles en degrés).",
           "aas": "Saisissez deux angles et un côté non compris entre eux (angles en degrés)."
         },
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "scenarioLabel": "Essayer un triangle réel"
       },
       "modes": {
         "groupLabel": "Valeurs connues",
@@ -17694,7 +17849,8 @@
         "invalidSides": "Saisissez des longueurs de côtés positives pour voir un résultat.",
         "invalidAngles": "Saisissez des angles positifs pour voir un résultat.",
         "triangleInequalityViolated": "Ces côtés ne peuvent pas former un triangle — la somme de deux côtés quelconques doit dépasser le troisième.",
-        "angleSumInvalid": "Ces angles ne peuvent pas former un triangle — la somme des deux angles donnés doit être inférieure à 180°."
+        "angleSumInvalid": "Ces angles ne peuvent pas former un triangle — la somme des deux angles donnés doit être inférieure à 180°.",
+        "sentence": "Ce triangle a une superficie de {area}."
       },
       "quickReference": {
         "title": "Les formules",
@@ -17704,7 +17860,18 @@
         "intro": {
           "title": "Comprendre la résolution de triangles",
           "paragraph1": "Un triangle possède six mesures — trois côtés et trois angles —, mais seules trois d'entre elles, dans la bonne combinaison, suffisent à fixer toute la forme. \"Résoudre\" un triangle signifie partir de trois mesures connues et en déduire les trois autres, ainsi que des grandeurs dérivées comme l'aire et le périmètre. Les quatre combinaisons qui déterminent toujours un triangle unique sont connues sous les abréviations CCC (trois côtés), CAC (deux côtés et l'angle entre eux), ACA (deux angles et le côté entre eux) et AAC (deux angles et un côté non compris entre eux).",
-          "paragraph2": "Deux relations classiques font tout le travail : la loi des cosinus, qui généralise le théorème de Pythagore à tout triangle (pas seulement les triangles rectangles) et s'utilise dès qu'un ensemble complet de côtés ou un angle inclus est connu, et la loi des sinus, qui relie chaque côté au sinus de son angle opposé et s'utilise lorsque deux angles sont déjà connus. Cette calculatrice choisit la loi adaptée à la combinaison de données fournies, puis vérifie le résultat par rapport à l'inégalité triangulaire (deux côtés quelconques doivent dépasser le troisième) et au fait que les angles de tout triangle totalisent toujours exactement 180°."
+          "paragraph2": "Deux relations classiques font tout le travail : la loi des cosinus, qui généralise le théorème de Pythagore à tout triangle (pas seulement les triangles rectangles) et s'utilise dès qu'un ensemble complet de côtés ou un angle inclus est connu, et la loi des sinus, qui relie chaque côté au sinus de son angle opposé et s'utilise lorsque deux angles sont déjà connus. Cette calculatrice choisit la loi adaptée à la combinaison de données fournies, puis vérifie le résultat par rapport à l'inégalité triangulaire (deux côtés quelconques doivent dépasser le troisième) et au fait que les angles de tout triangle totalisent toujours exactement 180°.",
+          "angleGauge": {
+            "title": "Acutangle, Rectangle ou Obtusangle ?",
+            "intro": "La forme d'un triangle est définie par son plus grand angle : aigu (moins de 90°), droit (exactement 90°) ou obtus (plus de 90°). Choisissez un exemple réel ci-dessous pour voir lequel il est.",
+            "verdict": "{example} — Forme : {classification}.",
+            "fact": "Son plus grand angle est d'environ {angle}°.",
+            "shapes": {
+              "acute": "Triangle acutangle",
+              "right": "Triangle rectangle",
+              "obtuse": "Triangle obtusangle"
+            }
+          }
         },
         "modes": {
           "title": "Les quatre modes de résolution",
@@ -17833,6 +18000,30 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Lire les Éléments d'Euclide, Livre I"
         }
+      },
+      "scenarios": {
+        "rightTriangle": "Triangle rectangle 3-4-5",
+        "acuteTriangle": "Triangle acutangle 5-6-7",
+        "obtuseTriangle": "Triangle obtusangle 2-3-4",
+        "slimObtuseTriangle": "Éclat très obtus"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "probability-calculator": {

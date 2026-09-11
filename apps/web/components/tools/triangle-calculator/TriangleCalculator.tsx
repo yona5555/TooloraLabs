@@ -12,7 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TriangleInputPanel from "./TriangleInputPanel";
 import TriangleResult from "./TriangleResult";
 import TriangleQuickReference from "./TriangleQuickReference";
-import { EMPTY_TRIANGLE_RESULT, type TriangleMode } from "./types";
+import { EMPTY_TRIANGLE_RESULT, type TriangleMode, type TriangleScenario } from "./types";
 
 function toNum(s: string): number {
   const n = parseLocalizedNumber(s);
@@ -53,6 +53,11 @@ export default function TriangleCalculator({ education }: { education: ReactNode
     setFields((prev) => ({ ...prev, [mode]: DEFAULTS[mode] }));
   }
 
+  function handleScenarioPreset(scenario: TriangleScenario) {
+    setMode("sss");
+    setFields((prev) => ({ ...prev, sss: scenario.sides }));
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -76,6 +81,7 @@ export default function TriangleCalculator({ education }: { education: ReactNode
               onField2Change={(v) => updateField(1, v)}
               onField3Change={(v) => updateField(2, v)}
               onClear={handleClear}
+              onScenarioPreset={handleScenarioPreset}
             />
           }
           result={<TriangleResult result={result ?? EMPTY_TRIANGLE_RESULT} digitStyle={digitStyle} />}

@@ -5039,7 +5039,8 @@
         "denominatorLabel": "Denominator",
         "numeratorPlaceholder": "Numerator",
         "denominatorPlaceholder": "Denominator",
-        "clear": "Clear"
+        "clear": "Clear",
+        "scenarioLabel": "Try a real problem"
       },
       "result": {
         "heading": "Result",
@@ -5050,7 +5051,8 @@
         "diagramCaption": "{numerator}/{denominator} shown as equal shaded parts.",
         "stepAddSubtract": "Converted to a common denominator of {commonDenominator}: {scaledA}/{commonDenominator} and {scaledB}/{commonDenominator}, then simplified to lowest terms.",
         "stepMultiply": "Multiplied straight across — numerators {numA}×{numB} and denominators {denA}×{denB} — then simplified to lowest terms.",
-        "stepDivide": "Multiplied by the reciprocal of the second fraction ({numB}/{denB} becomes {denB}/{numB}), then simplified to lowest terms."
+        "stepDivide": "Multiplied by the reciprocal of the second fraction ({numB}/{denB} becomes {denB}/{numB}), then simplified to lowest terms.",
+        "decimalLabel": "Decimal Equivalent"
       },
       "education": {
         "intro": {
@@ -5060,7 +5062,25 @@
             "caption": "3/8 — three of eight equal parts are shaded."
           },
           "paragraph2": "The four operations behave differently. Addition and subtraction require a common denominator first, because only equally-sized parts can be combined directly — this tool converts both fractions to the least common denominator before combining their numerators. Multiplication never needs a common denominator: it simply multiplies the two numerators together and the two denominators together. Division works by multiplying by the reciprocal of the second fraction instead — flipping its numerator and denominator — which is mathematically equivalent to dividing directly. Every result is then automatically reduced to its simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).",
-          "paragraph3": "Keeping a calculation in exact fractions rather than converting early to a decimal avoids the rounding errors that build up from repeating decimals — 1/3 is exactly 1/3, but 0.333 is not exactly one third. This distinction matters in recipe scaling, construction measurements, and any split of shares or quantities where the parts must add back up to the whole exactly, not approximately."
+          "paragraph3": "Keeping a calculation in exact fractions rather than converting early to a decimal avoids the rounding errors that build up from repeating decimals — 1/3 is exactly 1/3, but 0.333 is not exactly one third. This distinction matters in recipe scaling, construction measurements, and any split of shares or quantities where the parts must add back up to the whole exactly, not approximately.",
+          "numberLineGauge": {
+            "title": "Common Fractions on a Number Line",
+            "intro": "Fractions describe everyday portions, from a quarter tank of gas to a pizza and a half. Pick a real-world example below to see where it sits on the number line.",
+            "verdict": "{example} sits {classification} on the number line.",
+            "fact": "As a decimal, that's {value}.",
+            "examples": {
+              "quarterTank": "1/4 Tank of Gas",
+              "halfRecipe": "1/2 a Recipe",
+              "threeQuarterBattery": "3/4 Battery Charge",
+              "wholePizza": "1 Whole Pizza",
+              "oneAndHalfCups": "1 1/2 Cups"
+            },
+            "zones": {
+              "small": "below the halfway point",
+              "half": "between half and one whole",
+              "large": "beyond one whole"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -5179,6 +5199,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "scenarios": {
+        "doubleRecipe": "Doubling a Recipe",
+        "leftoverPizza": "Leftover Pizza",
+        "fabricYardage": "Cutting Fabric",
+        "roadTripSplit": "Splitting a Road Trip"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "scientific-notation-converter": {
@@ -11590,7 +11634,8 @@
         },
         "firstPlaceholder": "e.g. 20",
         "secondPlaceholder": "e.g. 150",
-        "clear": "Clear"
+        "clear": "Clear",
+        "scenarioLabel": "Try a real scenario"
       },
       "result": {
         "heading": "Result",
@@ -11622,7 +11667,24 @@
           "diagram": {
             "caption": "27 of these 100 squares are shaded — this is literally what \"27%\" means: 27 parts for every 100."
           },
-          "paragraph3": "The distinction between percentage change and percentage difference trips up even experienced analysts. Going from 80 to 100 is a percentage change of +25%, using 80 (the original value) as the base. But the percentage difference between the same two numbers, which uses their average of 90 as the base instead, is about 22.2% — the same two numbers, two different questions, two different valid answers."
+          "paragraph3": "The distinction between percentage change and percentage difference trips up even experienced analysts. Going from 80 to 100 is a percentage change of +25%, using 80 (the original value) as the base. But the percentage difference between the same two numbers, which uses their average of 90 as the base instead, is about 22.2% — the same two numbers, two different questions, two different valid answers.",
+          "rateGauge": {
+            "title": "Where Does This Percentage Rate Fall?",
+            "intro": "Percentage rates show up everywhere in daily life, from sales tax to credit card interest. Pick a real-world example below to see where it falls.",
+            "verdict": "{example} — Rate: {classification}.",
+            "fact": "This example is a rate of {percent}.",
+            "examples": {
+              "salesTax": "Sales Tax",
+              "restaurantTip": "Restaurant Tip",
+              "storeDiscount": "Store Discount",
+              "creditCardApr": "Credit Card APR"
+            },
+            "zones": {
+              "low": "Low",
+              "moderate": "Moderate",
+              "high": "High"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -11741,6 +11803,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Read the Original Text"
         }
+      },
+      "scenarios": {
+        "restaurantTip": "Restaurant Tip",
+        "examScore": "Exam Score",
+        "salaryRaise": "Salary Raise",
+        "discountedPrice": "Discounted Price"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "tip-calculator": {
@@ -16613,13 +16699,26 @@
         "invalidNumber": "Every number must be a positive whole number (1 or greater).",
         "gcfLabel": "GCF",
         "lcmLabel": "LCM",
-        "factorizationsTitle": "Prime Factorizations"
+        "factorizationsTitle": "Prime Factorizations",
+        "sentence": "For {numbers}, the GCF is {gcf} and the LCM is {lcm}.",
+        "numbersLabel": "Numbers"
       },
       "education": {
         "intro": {
           "title": "Understanding GCF and LCM",
           "paragraph1": "The greatest common factor (GCF) of a set of numbers is the largest whole number that divides all of them evenly — the biggest piece they can all be evenly split into. The least common multiple (LCM) is the smallest whole number that all of them divide into evenly — the first point where their multiples line up. They answer opposite questions: GCF looks for the largest shared divisor, LCM looks for the smallest shared multiple.",
-          "paragraph2": "This calculator finds both by prime factorization: breaking each number down into the primes that multiply together to make it, then comparing those factorizations. The GCF takes every prime factor the numbers share, at the lowest power any of them uses it; the LCM takes every prime factor that appears in any of them, at the highest power it's used. For exactly two numbers, GCF × LCM always equals the product of the two numbers — a useful check on the result."
+          "paragraph2": "This calculator finds both by prime factorization: breaking each number down into the primes that multiply together to make it, then comparing those factorizations. The GCF takes every prime factor the numbers share, at the lowest power any of them uses it; the LCM takes every prime factor that appears in any of them, at the highest power it's used. For exactly two numbers, GCF × LCM always equals the product of the two numbers — a useful check on the result.",
+          "ratioGauge": {
+            "title": "How Closely Related Are These Numbers?",
+            "intro": "The ratio of LCM to GCF shows how much shared structure a set of numbers has — a small ratio means they share large common factors, a large ratio means they're nearly coprime. Pick a real example below to see where it falls.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Here, the LCM is {ratio}× the GCF.",
+            "zones": {
+              "closelyRelated": "Closely Related",
+              "moderatelyRelated": "Moderately Related",
+              "looselyRelated": "Nearly Coprime"
+            }
+          }
         },
         "variables": {
           "title": "Variables Involved",
@@ -16776,6 +16875,24 @@
         "threeNumbers": "Three Numbers",
         "coprimeExample": "Coprime Example",
         "recipeScaling": "Recipe Scaling"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "pace-calculator": {
@@ -17504,7 +17621,8 @@
           "diameter": "Diameter",
           "circumference": "Circumference",
           "area": "Area"
-        }
+        },
+        "sentence": "With {field} of {value}, the other circle measurements follow directly."
       },
       "quickReference": {
         "title": "The Formulas",
@@ -17514,7 +17632,25 @@
         "intro": {
           "title": "Understanding Circle Measurements",
           "paragraph1": "A circle is fully defined by a single number: its radius, the distance from its center to any point on its edge. Every other common measurement — diameter, circumference, area — is a fixed multiple or function of that one radius, which is why knowing any one of the four measurements is always enough to recover the other three; there's no such thing as an \"underdetermined\" circle the way there can be for a general triangle or quadrilateral.",
-          "paragraph2": "The constant that links a circle's circumference to its diameter is π (pi) — an irrational number, roughly 3.14159, that never terminates or repeats in decimal form. Diameter is simply twice the radius; circumference is π times the diameter (equivalently, 2π times the radius); and area is π times the radius squared. This tool accepts whichever one of the four you already know and derives the rest instantly."
+          "paragraph2": "The constant that links a circle's circumference to its diameter is π (pi) — an irrational number, roughly 3.14159, that never terminates or repeats in decimal form. Diameter is simply twice the radius; circumference is π times the diameter (equivalently, 2π times the radius); and area is π times the radius squared. This tool accepts whichever one of the four you already know and derives the rest instantly.",
+          "radiusGauge": {
+            "title": "Where Does This Radius Fall?",
+            "intro": "Circle sizes span an enormous range, from a small coin to a giant Ferris wheel. Pick a real-world example below to see where its radius falls.",
+            "verdict": "{example} — Scale: {classification}.",
+            "fact": "This example has a radius of about {radius}.",
+            "examples": {
+              "coin": "A Coin",
+              "dinnerPlate": "A Dinner Plate",
+              "bicycleWheel": "A Bicycle Wheel",
+              "runningTrack": "A Running Track",
+              "ferrisWheel": "A Ferris Wheel"
+            },
+            "scales": {
+              "pocket": "Pocket-Sized",
+              "room": "Room-Sized",
+              "landmark": "Landmark-Sized"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -17641,6 +17777,24 @@
         "pizzaDiameter": "Pizza (Diameter)",
         "trackLap": "Running Track (Circumference)",
         "roomFloor": "Round Room (Area)"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "triangle-calculator": {
@@ -17669,7 +17823,8 @@
           "asa": "Enter two angles and the side between them (in degrees for angles).",
           "aas": "Enter two angles and a side not between them (in degrees for angles)."
         },
-        "clear": "Clear"
+        "clear": "Clear",
+        "scenarioLabel": "Try a real triangle"
       },
       "modes": {
         "groupLabel": "Known values",
@@ -17694,7 +17849,8 @@
         "invalidSides": "Enter positive side lengths to see a result.",
         "invalidAngles": "Enter positive angles to see a result.",
         "triangleInequalityViolated": "These sides can't form a triangle — any two sides must add up to more than the third.",
-        "angleSumInvalid": "These angles can't form a triangle — the two given angles must add up to less than 180°."
+        "angleSumInvalid": "These angles can't form a triangle — the two given angles must add up to less than 180°.",
+        "sentence": "This triangle has an area of {area}."
       },
       "quickReference": {
         "title": "The Formulas",
@@ -17704,7 +17860,18 @@
         "intro": {
           "title": "Understanding Triangle Solving",
           "paragraph1": "A triangle has six measurements — three sides and three angles — but only three of them, in the right combination, are needed to pin down the whole shape. \"Solving\" a triangle means starting from three known measurements and deriving the other three, along with derived quantities like area and perimeter. The four combinations that always determine a unique triangle are known by the shorthand SSS (three sides), SAS (two sides and the angle between them), ASA (two angles and the side between them), and AAS (two angles and a side not between them).",
-          "paragraph2": "Two classical relationships do all the work: the Law of Cosines, which generalizes the Pythagorean theorem to any triangle (not just right triangles) and is used whenever a full set of sides or an included angle is known, and the Law of Sines, which relates each side to the sine of its opposite angle and is used whenever two angles are already known. This calculator picks whichever law fits the combination of inputs you provide, then checks the result against the triangle inequality (any two sides must outweigh the third) and the fact that every triangle's angles sum to exactly 180°."
+          "paragraph2": "Two classical relationships do all the work: the Law of Cosines, which generalizes the Pythagorean theorem to any triangle (not just right triangles) and is used whenever a full set of sides or an included angle is known, and the Law of Sines, which relates each side to the sine of its opposite angle and is used whenever two angles are already known. This calculator picks whichever law fits the combination of inputs you provide, then checks the result against the triangle inequality (any two sides must outweigh the third) and the fact that every triangle's angles sum to exactly 180°.",
+          "angleGauge": {
+            "title": "Acute, Right, or Obtuse?",
+            "intro": "A triangle's shape is defined by its largest angle: acute (under 90°), right (exactly 90°), or obtuse (over 90°). Pick a real example below to see which it is.",
+            "verdict": "{example} — Shape: {classification}.",
+            "fact": "Its largest angle is about {angle}°.",
+            "shapes": {
+              "acute": "Acute Triangle",
+              "right": "Right Triangle",
+              "obtuse": "Obtuse Triangle"
+            }
+          }
         },
         "modes": {
           "title": "The Four Solving Modes",
@@ -17833,6 +18000,30 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Read Euclid's Elements, Book I"
         }
+      },
+      "scenarios": {
+        "rightTriangle": "3-4-5 Right Triangle",
+        "acuteTriangle": "5-6-7 Acute Triangle",
+        "obtuseTriangle": "2-3-4 Obtuse Triangle",
+        "slimObtuseTriangle": "Very Obtuse Sliver"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "probability-calculator": {

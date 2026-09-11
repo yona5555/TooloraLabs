@@ -5039,7 +5039,8 @@
         "denominatorLabel": "Nenner",
         "numeratorPlaceholder": "Zähler",
         "denominatorPlaceholder": "Nenner",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "scenarioLabel": "Ein reales Problem ausprobieren"
       },
       "result": {
         "heading": "Ergebnis",
@@ -5050,7 +5051,8 @@
         "diagramCaption": "{numerator}/{denominator} dargestellt als gleich große, markierte Teile.",
         "stepAddSubtract": "Auf den gemeinsamen Nenner {commonDenominator} gebracht: {scaledA}/{commonDenominator} und {scaledB}/{commonDenominator}, anschließend auf die einfachste Form gekürzt.",
         "stepMultiply": "Direkt multipliziert — Zähler {numA}×{numB} und Nenner {denA}×{denB} — anschließend auf die einfachste Form gekürzt.",
-        "stepDivide": "Mit dem Kehrwert des zweiten Bruchs multipliziert ({numB}/{denB} wird zu {denB}/{numB}), anschließend auf die einfachste Form gekürzt."
+        "stepDivide": "Mit dem Kehrwert des zweiten Bruchs multipliziert ({numB}/{denB} wird zu {denB}/{numB}), anschließend auf die einfachste Form gekürzt.",
+        "decimalLabel": "Dezimaläquivalent"
       },
       "education": {
         "intro": {
@@ -5060,7 +5062,25 @@
             "caption": "3/8 — drei von acht gleich großen Teilen sind markiert."
           },
           "paragraph2": "Die vier Rechenarten verhalten sich unterschiedlich. Addition und Subtraktion benötigen zunächst einen gemeinsamen Nenner, da nur gleich große Teile direkt zusammengefasst werden können — dieses Tool wandelt beide Brüche zunächst in den kleinsten gemeinsamen Nenner um, bevor ihre Zähler zusammengeführt werden. Die Multiplikation benötigt niemals einen gemeinsamen Nenner: Es genügt, die beiden Zähler miteinander und die beiden Nenner miteinander zu multiplizieren. Die Division funktioniert, indem stattdessen mit dem Kehrwert des zweiten Bruchs multipliziert wird — also mit vertauschtem Zähler und Nenner —, was mathematisch der direkten Division entspricht. Jedes Ergebnis wird anschließend automatisch auf seine einfachste Form gekürzt, indem Zähler und Nenner durch ihren größten gemeinsamen Teiler (ggT) geteilt werden.",
-          "paragraph3": "Eine Berechnung in exakten Brüchen zu belassen, statt sie frühzeitig in eine Dezimalzahl umzuwandeln, vermeidet die Rundungsfehler, die sich aus periodischen Dezimalzahlen aufbauen — 1/3 ist exakt 1/3, aber 0,333 ist nicht exakt ein Drittel. Dieser Unterschied ist bei der Skalierung von Rezepten, bei Baumessungen und bei jeder Aufteilung von Anteilen oder Mengen wichtig, deren Teile sich exakt und nicht nur näherungsweise wieder zum Ganzen zusammenfügen müssen."
+          "paragraph3": "Eine Berechnung in exakten Brüchen zu belassen, statt sie frühzeitig in eine Dezimalzahl umzuwandeln, vermeidet die Rundungsfehler, die sich aus periodischen Dezimalzahlen aufbauen — 1/3 ist exakt 1/3, aber 0,333 ist nicht exakt ein Drittel. Dieser Unterschied ist bei der Skalierung von Rezepten, bei Baumessungen und bei jeder Aufteilung von Anteilen oder Mengen wichtig, deren Teile sich exakt und nicht nur näherungsweise wieder zum Ganzen zusammenfügen müssen.",
+          "numberLineGauge": {
+            "title": "Gängige Brüche auf einer Zahlenlinie",
+            "intro": "Brüche beschreiben alltägliche Anteile, von einem viertel Tank Benzin bis zu anderthalb Pizzen. Wähle unten ein reales Beispiel, um zu sehen, wo es auf der Zahlenlinie liegt.",
+            "verdict": "{example} liegt {classification} auf der Zahlenlinie.",
+            "fact": "Als Dezimalzahl ist das {value}.",
+            "examples": {
+              "quarterTank": "1/4 Tank Benzin",
+              "halfRecipe": "1/2 Rezept",
+              "threeQuarterBattery": "3/4 Akkuladung",
+              "wholePizza": "1 ganze Pizza",
+              "oneAndHalfCups": "1 1/2 Tassen"
+            },
+            "zones": {
+              "small": "unterhalb der Hälfte",
+              "half": "zwischen der Hälfte und einem Ganzen",
+              "large": "jenseits eines Ganzen"
+            }
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -5179,6 +5199,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "scenarios": {
+        "doubleRecipe": "Ein Rezept verdoppeln",
+        "leftoverPizza": "Übrig gebliebene Pizza",
+        "fabricYardage": "Stoff zuschneiden",
+        "roadTripSplit": "Eine Autoreise aufteilen"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "scientific-notation-converter": {
@@ -11590,7 +11634,8 @@
         },
         "firstPlaceholder": "z. B. 20",
         "secondPlaceholder": "z. B. 150",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "scenarioLabel": "Ein reales Szenario ausprobieren"
       },
       "result": {
         "heading": "Ergebnis",
@@ -11622,7 +11667,24 @@
           "diagram": {
             "caption": "27 dieser 100 Quadrate sind eingefärbt – das ist wortwörtlich, was „27%\" bedeutet: 27 Teile von je 100."
           },
-          "paragraph3": "Der Unterschied zwischen prozentualer Veränderung und prozentualer Differenz bringt selbst erfahrene Analysten ins Stolpern. Der Wechsel von 80 auf 100 ist eine prozentuale Veränderung von +25%, wobei 80 (der Ursprungswert) als Basis verwendet wird. Die prozentuale Differenz zwischen denselben zwei Zahlen jedoch, die stattdessen ihren Durchschnitt von 90 als Basis verwendet, beträgt etwa 22,2% – dieselben zwei Zahlen, zwei unterschiedliche Fragen, zwei unterschiedliche, gültige Antworten."
+          "paragraph3": "Der Unterschied zwischen prozentualer Veränderung und prozentualer Differenz bringt selbst erfahrene Analysten ins Stolpern. Der Wechsel von 80 auf 100 ist eine prozentuale Veränderung von +25%, wobei 80 (der Ursprungswert) als Basis verwendet wird. Die prozentuale Differenz zwischen denselben zwei Zahlen jedoch, die stattdessen ihren Durchschnitt von 90 als Basis verwendet, beträgt etwa 22,2% – dieselben zwei Zahlen, zwei unterschiedliche Fragen, zwei unterschiedliche, gültige Antworten.",
+          "rateGauge": {
+            "title": "Wo liegt dieser Prozentsatz?",
+            "intro": "Prozentsätze begegnen uns überall im Alltag, von der Mehrwertsteuer bis zu Kreditkartenzinsen. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Satz: {classification}.",
+            "fact": "Dieses Beispiel hat einen Satz von {percent}.",
+            "examples": {
+              "salesTax": "Mehrwertsteuer",
+              "restaurantTip": "Trinkgeld im Restaurant",
+              "storeDiscount": "Ladenrabatt",
+              "creditCardApr": "Kreditkarten-Zinssatz"
+            },
+            "zones": {
+              "low": "Niedrig",
+              "moderate": "Moderat",
+              "high": "Hoch"
+            }
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -11741,6 +11803,30 @@
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Originaltext lesen"
         }
+      },
+      "scenarios": {
+        "restaurantTip": "Trinkgeld im Restaurant",
+        "examScore": "Prüfungsergebnis",
+        "salaryRaise": "Gehaltserhöhung",
+        "discountedPrice": "Rabattierter Preis"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "tip-calculator": {
@@ -17304,7 +17390,8 @@
           "diameter": "Durchmesser",
           "circumference": "Umfang",
           "area": "Fläche"
-        }
+        },
+        "sentence": "Bei einem {field} von {value} ergeben sich die anderen Kreismaße direkt daraus."
       },
       "quickReference": {
         "title": "Die Formeln",
@@ -17314,7 +17401,25 @@
         "intro": {
           "title": "Kreismessungen verstehen",
           "paragraph1": "Ein Kreis wird vollständig durch eine einzige Zahl definiert: seinen Radius, den Abstand von seinem Mittelpunkt zu jedem Punkt auf seinem Rand. Jede andere gängige Messung — Durchmesser, Umfang, Fläche — ist ein fester Vielfacher oder eine Funktion dieses einen Radius, weshalb die Kenntnis einer der vier Messungen immer ausreicht, um die anderen drei zu ermitteln; es gibt keinen \"unterbestimmten\" Kreis, wie es ihn bei einem allgemeinen Dreieck oder Viereck geben kann.",
-          "paragraph2": "Die Konstante, die den Umfang eines Kreises mit seinem Durchmesser verbindet, ist π (Pi) — eine irrationale Zahl, ungefähr 3,14159, die in Dezimalform nie endet oder sich wiederholt. Der Durchmesser ist einfach das Doppelte des Radius; der Umfang ist π mal der Durchmesser (gleichbedeutend 2π mal der Radius); und die Fläche ist π mal das Quadrat des Radius. Dieses Tool akzeptiert, welchen der vier Werte auch immer Sie bereits kennen, und leitet die restlichen sofort ab."
+          "paragraph2": "Die Konstante, die den Umfang eines Kreises mit seinem Durchmesser verbindet, ist π (Pi) — eine irrationale Zahl, ungefähr 3,14159, die in Dezimalform nie endet oder sich wiederholt. Der Durchmesser ist einfach das Doppelte des Radius; der Umfang ist π mal der Durchmesser (gleichbedeutend 2π mal der Radius); und die Fläche ist π mal das Quadrat des Radius. Dieses Tool akzeptiert, welchen der vier Werte auch immer Sie bereits kennen, und leitet die restlichen sofort ab.",
+          "radiusGauge": {
+            "title": "Wo liegt dieser Radius?",
+            "intro": "Kreisgrößen erstrecken sich über einen enormen Bereich, von einer kleinen Münze bis zu einem riesigen Riesenrad. Wähle unten ein reales Beispiel, um zu sehen, wo sein Radius liegt.",
+            "verdict": "{example} — Größenordnung: {classification}.",
+            "fact": "Dieses Beispiel hat einen Radius von etwa {radius}.",
+            "examples": {
+              "coin": "Eine Münze",
+              "dinnerPlate": "Ein Teller",
+              "bicycleWheel": "Ein Fahrradrad",
+              "runningTrack": "Eine Laufbahn",
+              "ferrisWheel": "Ein Riesenrad"
+            },
+            "scales": {
+              "pocket": "Taschengröße",
+              "room": "Zimmergröße",
+              "landmark": "Landmarkengröße"
+            }
+          }
         },
         "examples": {
           "title": "Berechnete Beispiele",
@@ -17441,6 +17546,24 @@
         "pizzaDiameter": "Pizza (Durchmesser)",
         "trackLap": "Laufbahn (Umfang)",
         "roomFloor": "Runder Raum (Fläche)"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "gcf-lcm-calculator": {
@@ -17478,13 +17601,26 @@
         "invalidNumber": "Jede Zahl muss eine positive ganze Zahl (1 oder größer) sein.",
         "gcfLabel": "GGT",
         "lcmLabel": "KGV",
-        "factorizationsTitle": "Primfaktorzerlegungen"
+        "factorizationsTitle": "Primfaktorzerlegungen",
+        "sentence": "Für {numbers} ist der ggT {gcf} und das kgV {lcm}.",
+        "numbersLabel": "Zahlen"
       },
       "education": {
         "intro": {
           "title": "GGT und KGV verstehen",
           "paragraph1": "Der größte gemeinsame Teiler (GGT) einer Zahlenmenge ist die größte ganze Zahl, die alle diese Zahlen ohne Rest teilt — das größte Stück, in das sie sich alle gleichmäßig aufteilen lassen. Das kleinste gemeinsame Vielfache (KGV) ist die kleinste ganze Zahl, die durch alle diese Zahlen ohne Rest teilbar ist — der erste Punkt, an dem sich ihre Vielfachen treffen. Beide beantworten entgegengesetzte Fragen: Der GGT sucht den größten gemeinsamen Teiler, das KGV das kleinste gemeinsame Vielfache.",
-          "paragraph2": "Dieser Rechner findet beide durch Primfaktorzerlegung: Jede Zahl wird in die Primzahlen zerlegt, aus deren Produkt sie besteht, und diese Zerlegungen werden anschließend verglichen. Der GGT übernimmt jeden gemeinsamen Primfaktor mit der niedrigsten Potenz, in der er in irgendeiner der Zahlen vorkommt; das KGV übernimmt jeden Primfaktor, der in irgendeiner der Zahlen vorkommt, mit der höchsten verwendeten Potenz. Bei genau zwei Zahlen gilt immer: GGT × KGV entspricht dem Produkt der beiden Zahlen — eine nützliche Kontrolle des Ergebnisses."
+          "paragraph2": "Dieser Rechner findet beide durch Primfaktorzerlegung: Jede Zahl wird in die Primzahlen zerlegt, aus deren Produkt sie besteht, und diese Zerlegungen werden anschließend verglichen. Der GGT übernimmt jeden gemeinsamen Primfaktor mit der niedrigsten Potenz, in der er in irgendeiner der Zahlen vorkommt; das KGV übernimmt jeden Primfaktor, der in irgendeiner der Zahlen vorkommt, mit der höchsten verwendeten Potenz. Bei genau zwei Zahlen gilt immer: GGT × KGV entspricht dem Produkt der beiden Zahlen — eine nützliche Kontrolle des Ergebnisses.",
+          "ratioGauge": {
+            "title": "Wie eng sind diese Zahlen verwandt?",
+            "intro": "Das Verhältnis von kgV zu ggT zeigt, wie viel gemeinsame Struktur eine Zahlenmenge hat — ein kleines Verhältnis bedeutet, dass sie große gemeinsame Faktoren teilen, ein großes Verhältnis bedeutet, dass sie fast teilerfremd sind. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Hier ist das kgV {ratio}-mal so groß wie der ggT.",
+            "zones": {
+              "closelyRelated": "Eng verwandt",
+              "moderatelyRelated": "Mäßig verwandt",
+              "looselyRelated": "Fast teilerfremd"
+            }
+          }
         },
         "variables": {
           "title": "Beteiligte Größen",
@@ -17641,6 +17777,24 @@
         "threeNumbers": "Drei Zahlen",
         "coprimeExample": "Teilerfremdes Beispiel",
         "recipeScaling": "Rezept skalieren"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "triangle-calculator": {
@@ -17669,7 +17823,8 @@
           "asa": "Gib zwei Winkel und die Seite zwischen ihnen ein (Winkel in Grad).",
           "aas": "Gib zwei Winkel und eine nicht dazwischen liegende Seite ein (Winkel in Grad)."
         },
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "scenarioLabel": "Ein reales Dreieck ausprobieren"
       },
       "modes": {
         "groupLabel": "Bekannte Werte",
@@ -17694,7 +17849,8 @@
         "invalidSides": "Gib positive Seitenlängen ein, um ein Ergebnis zu sehen.",
         "invalidAngles": "Gib positive Winkel ein, um ein Ergebnis zu sehen.",
         "triangleInequalityViolated": "Diese Seiten können kein Dreieck bilden — die Summe zweier beliebiger Seiten muss größer sein als die dritte.",
-        "angleSumInvalid": "Diese Winkel können kein Dreieck bilden — die Summe der beiden gegebenen Winkel muss kleiner als 180° sein."
+        "angleSumInvalid": "Diese Winkel können kein Dreieck bilden — die Summe der beiden gegebenen Winkel muss kleiner als 180° sein.",
+        "sentence": "Dieses Dreieck hat eine Fläche von {area}."
       },
       "quickReference": {
         "title": "Die Formeln",
@@ -17704,7 +17860,18 @@
         "intro": {
           "title": "Dreiecksberechnung verstehen",
           "paragraph1": "Ein Dreieck hat sechs Größen — drei Seiten und drei Winkel —, aber nur drei davon, in der richtigen Kombination, legen die gesamte Form fest. Ein Dreieck zu \"lösen\" bedeutet, von drei bekannten Größen auszugehen und die übrigen drei sowie abgeleitete Größen wie Fläche und Umfang zu bestimmen. Die vier Kombinationen, die ein Dreieck immer eindeutig festlegen, sind unter den Kürzeln SSS (drei Seiten), SAS (zwei Seiten und der eingeschlossene Winkel), ASA (zwei Winkel und die eingeschlossene Seite) und AAS (zwei Winkel und eine nicht eingeschlossene Seite) bekannt.",
-          "paragraph2": "Zwei klassische Sätze leisten die gesamte Arbeit: der Kosinussatz, der den Satz des Pythagoras auf beliebige Dreiecke verallgemeinert (nicht nur rechtwinklige) und immer dann verwendet wird, wenn alle Seiten oder ein eingeschlossener Winkel bekannt sind, und der Sinussatz, der jede Seite mit dem Sinus des gegenüberliegenden Winkels verknüpft und verwendet wird, wenn bereits zwei Winkel bekannt sind. Dieser Rechner wählt den zur Eingabekombination passenden Satz aus und prüft das Ergebnis anschließend anhand der Dreiecksungleichung (zwei beliebige Seiten müssen zusammen größer sein als die dritte) und der Tatsache, dass die Winkel jedes Dreiecks immer genau 180° ergeben."
+          "paragraph2": "Zwei klassische Sätze leisten die gesamte Arbeit: der Kosinussatz, der den Satz des Pythagoras auf beliebige Dreiecke verallgemeinert (nicht nur rechtwinklige) und immer dann verwendet wird, wenn alle Seiten oder ein eingeschlossener Winkel bekannt sind, und der Sinussatz, der jede Seite mit dem Sinus des gegenüberliegenden Winkels verknüpft und verwendet wird, wenn bereits zwei Winkel bekannt sind. Dieser Rechner wählt den zur Eingabekombination passenden Satz aus und prüft das Ergebnis anschließend anhand der Dreiecksungleichung (zwei beliebige Seiten müssen zusammen größer sein als die dritte) und der Tatsache, dass die Winkel jedes Dreiecks immer genau 180° ergeben.",
+          "angleGauge": {
+            "title": "Spitz-, Recht- oder Stumpfwinklig?",
+            "intro": "Die Form eines Dreiecks wird durch seinen größten Winkel bestimmt: spitz (unter 90°), recht (genau 90°) oder stumpf (über 90°). Wähle unten ein reales Beispiel, um zu sehen, welches es ist.",
+            "verdict": "{example} — Form: {classification}.",
+            "fact": "Sein größter Winkel beträgt etwa {angle}°.",
+            "shapes": {
+              "acute": "Spitzwinkliges Dreieck",
+              "right": "Rechtwinkliges Dreieck",
+              "obtuse": "Stumpfwinkliges Dreieck"
+            }
+          }
         },
         "modes": {
           "title": "Die vier Lösungsmodi",
@@ -17833,6 +18000,30 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Euklids Elemente, Buch I lesen"
         }
+      },
+      "scenarios": {
+        "rightTriangle": "3-4-5-Rechtwinkliges Dreieck",
+        "acuteTriangle": "5-6-7-Spitzwinkliges Dreieck",
+        "obtuseTriangle": "2-3-4-Stumpfwinkliges Dreieck",
+        "slimObtuseTriangle": "Sehr stumpfwinkliger Splitter"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "probability-calculator": {
