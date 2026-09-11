@@ -8,6 +8,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import BMICategoryTable from "./BMICategoryTable";
 import BMIBodyLevelsChart from "./BMIBodyLevelsChart";
 import BMICompositionChart from "./BMICompositionChart";
+import BMIRangeGauge from "./BMIRangeGauge";
 
 type CategoryRow = { category: string; range: string };
 type ExampleStep = { label: string; value: string };
@@ -35,6 +36,8 @@ export default async function BMIEducation() {
 
   return (
     <EncyclopediaPaper>
+      <BMIRangeGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
