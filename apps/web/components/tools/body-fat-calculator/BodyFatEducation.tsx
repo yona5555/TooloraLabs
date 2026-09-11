@@ -4,6 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import BodyFatRangeGauge from "./BodyFatRangeGauge";
+import BodyFatMeasurementDiagram from "./BodyFatMeasurementDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 type CategoryItem = { title: string; description: string };
@@ -18,8 +20,11 @@ export default async function BodyFatEducation() {
 
   return (
     <EncyclopediaPaper>
+      <BodyFatRangeGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <BodyFatMeasurementDiagram />
         <p>{t("intro.paragraph2")}</p>
       </InfoSection>
 

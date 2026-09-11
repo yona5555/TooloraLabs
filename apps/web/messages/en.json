@@ -18434,7 +18434,8 @@
       },
       "result": {
         "heading": "Result",
-        "invalidMeasurements": "Enter valid measurements to see a result. Waist (plus hip, for women) must exceed neck."
+        "invalidMeasurements": "Enter valid measurements to see a result. Waist (plus hip, for women) must exceed neck.",
+        "sentence": "A body fat percentage of {percent}% falls in the {category} category, using the U.S. Navy circumference method."
       },
       "categories": {
         "essential": "Essential Fat",
@@ -18444,6 +18445,31 @@
         "obese": "Obese",
         "scaleAriaLabel": "A horizontal scale of body fat percentage categories, with a marker showing where the calculated result falls"
       },
+      "measurementDiagram": {
+        "ariaLabel": "A simplified body outline marking where to measure the neck, waist, and hip",
+        "neck": "Neck",
+        "waist": "Waist",
+        "hip": "Hip (women)",
+        "caption": "The three tape-measure points the U.S. Navy method uses, from top to bottom."
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
+      },
       "quickReference": {
         "title": "The Formula",
         "intro": "The US Navy method estimates body fat from circumference measurements alone."
@@ -18452,7 +18478,13 @@
         "intro": {
           "title": "Understanding the US Navy Body Fat Method",
           "paragraph1": "Body fat percentage — the proportion of total body weight that is fat tissue, as opposed to muscle, bone, organs, and water — is a more direct measure of body composition than BMI, which cannot distinguish a muscular body from a fat one at the same height and weight. The US Navy method estimates it from a small set of tape-measure circumferences (neck, waist, and for women, hip) rather than skinfold calipers, DEXA scans, or underwater weighing, trading some precision for a measurement almost anyone can take at home with just a tape measure.",
-          "paragraph2": "The formula, developed by Hodgdon and Beckett in 1984 for the US Navy's body composition standards, uses the logarithm of these circumference measurements because body fat's relationship to circumference isn't linear — small waist changes matter more at some body sizes than others, and the logarithmic form captures that curve better than a simple ratio would. Men's and women's formulas differ because fat distribution patterns differ meaningfully by sex, on average, which is also why the method requires a hip measurement for women but not for men."
+          "paragraph2": "The formula, developed by Hodgdon and Beckett in 1984 for the US Navy's body composition standards, uses the logarithm of these circumference measurements because body fat's relationship to circumference isn't linear — small waist changes matter more at some body sizes than others, and the logarithmic form captures that curve better than a simple ratio would. Men's and women's formulas differ because fat distribution patterns differ meaningfully by sex, on average, which is also why the method requires a hip measurement for women but not for men.",
+          "bodyFatGauge": {
+            "title": "Try It: How Does That Body Fat % Compare?",
+            "intro": "Pick a real example to see its body fat percentage on the gauge and compare it with others.",
+            "verdict": "{example} typically falls in the {classification} category.",
+            "percentFact": "That's a body fat percentage of about {percent}%."
+          }
         },
         "categoriesSection": {
           "title": "The Five Body Fat Categories",

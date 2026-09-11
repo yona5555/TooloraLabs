@@ -89,7 +89,7 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
               onClear={handleClear}
             />
           }
-          result={<BodyFatResult result={result} gender={gender} digitStyle={digitStyle} />}
+          result={<BodyFatResult result={result} gender={gender} heightCm={heightCm} neckCm={neckCm} waistCm={waistCm} hipCm={hipCm} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="body-fat-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
