@@ -16522,7 +16522,8 @@
         "minutes": "Minuten",
         "seconds": "Sekunden",
         "paceLabelKm": "Pace pro km",
-        "paceLabelMi": "Pace pro Meile"
+        "paceLabelMi": "Pace pro Meile",
+        "scenarioLabel": "Ein reales Szenario ausprobieren"
       },
       "result": {
         "heading": "Ergebnis",
@@ -16543,7 +16544,8 @@
         "speedKmh": "Geschwindigkeit",
         "speedMph": "Geschwindigkeit",
         "kmh": "km/h",
-        "mph": "mph"
+        "mph": "mph",
+        "sentence": "{distance} {unit} in einem Tempo von {pace} pro km zu laufen, dauert {time}."
       },
       "gauge": {
         "ariaLabel": "Pace auf der Belastungsskala",
@@ -16612,7 +16614,20 @@
         "intro": {
           "title": "Pace verstehen",
           "paragraph1": "Pace ist eine Rate, ausgedrückt als Zeit pro Distanzeinheit — Minuten und Sekunden pro Kilometer oder Meile —, statt Distanz pro Zeiteinheit, was die Geschwindigkeit misst. Beide beschreiben dieselbe Bewegung aus entgegengesetzter Richtung: eine Pace von 5:00 pro Kilometer und eine Geschwindigkeit von 12 km/h sind dieselbe Laufanstrengung, nur unterschiedlich ausgedrückt. Läufer, Geher und Radfahrer denken meist in Pace, weil sie sich direkt in einen Trainingsplan übersetzen lässt (\"5:00 pro km für die mittleren drei Kilometer halten\") und in eine Zielzeit (Pace mal Renndistanz), während Geschwindigkeit eher beim Radfahren und in motorisierten Kontexten gebräuchlich ist.",
-          "paragraph2": "Die zugrunde liegende Rechnung ist einfach — Pace = Zeit ÷ Distanz, Zeit = Distanz × Pace, Distanz = Zeit ÷ Pace —, aber die Umrechnung zwischen einer festen Pace und einer Zielzeit von Hand, über Einheitensysteme und über Renndistanzen hinweg, die keine runden Zahlen sind (21,0975 km beim Halbmarathon, 42,195 km beim Marathon), ist genau da, wo ein Rechner seinen Nutzen zeigt. Dieses Tool berechnet jede beliebige der drei Größen Pace, Zeit oder Distanz aus den beiden anderen, protokolliert die Pace über mehrere reale Kontrollpunkte statt eine konstante Anstrengung für einen ganzen Lauf anzunehmen, rechnet Pace direkt zwischen Kilometern und Meilen um und prognostiziert eine Zielzeit für eine andere Distanz aus einem bereits erzielten Ergebnis."
+          "paragraph2": "Die zugrunde liegende Rechnung ist einfach — Pace = Zeit ÷ Distanz, Zeit = Distanz × Pace, Distanz = Zeit ÷ Pace —, aber die Umrechnung zwischen einer festen Pace und einer Zielzeit von Hand, über Einheitensysteme und über Renndistanzen hinweg, die keine runden Zahlen sind (21,0975 km beim Halbmarathon, 42,195 km beim Marathon), ist genau da, wo ein Rechner seinen Nutzen zeigt. Dieses Tool berechnet jede beliebige der drei Größen Pace, Zeit oder Distanz aus den beiden anderen, protokolliert die Pace über mehrere reale Kontrollpunkte statt eine konstante Anstrengung für einen ganzen Lauf anzunehmen, rechnet Pace direkt zwischen Kilometern und Meilen um und prognostiziert eine Zielzeit für eine andere Distanz aus einem bereits erzielten Ergebnis.",
+          "rangeGauge": {
+            "title": "Wo liegt dieses Tempo?",
+            "intro": "Das Lauftempo reicht von Elite-Renngeschwindigkeit bis zu einem entspannten Spaziergang. Wähle unten ein reales Beispiel, um zu sehen, wo es auf der Anstrengungsskala liegt.",
+            "verdict": "{example} — Lauftempo-Einstufung: {classification}.",
+            "fact": "Das entspricht {pace} pro Kilometer.",
+            "examples": {
+              "eliteRunner": "Elite-Marathonläufer",
+              "competitiveRunner": "Wettkampfläufer",
+              "recreationalRunner": "Freizeitläufer",
+              "casualJogger": "Gelegenheitsjogger",
+              "briskWalker": "Zügiger Spaziergänger"
+            }
+          }
         },
         "examples": {
           "title": "Berechnete Beispiele",
@@ -16795,6 +16810,30 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
           "readOriginal": "Originalarbeit lesen"
         }
+      },
+      "scenarios": {
+        "sub2Marathon": "Marathon unter 2 Stunden",
+        "halfMarathonGoal": "Halbmarathon in 2 Stunden",
+        "run10kUnderHour": "10 km unter einer Stunde",
+        "couchTo5k": "Couch-to-5K-Ziel"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "random-number-generator": {

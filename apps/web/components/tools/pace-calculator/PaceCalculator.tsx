@@ -8,6 +8,7 @@ import {
   calculateMultipointSegments,
   predictFinishTimeSeconds,
   secondsFromParts,
+  partsFromSeconds,
   convertDistanceValue,
   RACE_PRESET_DISTANCE_KM,
   type DistanceUnit,
@@ -30,7 +31,7 @@ import ConverterInputPanel from "./ConverterInputPanel";
 import ConverterResult from "./ConverterResult";
 import FinishTimeInputPanel from "./FinishTimeInputPanel";
 import FinishTimeResult from "./FinishTimeResult";
-import type { MultipointRowDraft, SolveField, TopMode } from "./types";
+import type { MultipointRowDraft, PaceScenario, SolveField, TopMode } from "./types";
 
 function toNum(s: string): number {
   const n = parseLocalizedNumber(s);
@@ -73,6 +74,17 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
   function handleRacePresetChange(preset: string) {
     setRacePreset(preset);
     if (preset) setDistance(round4(convertDistanceValue(RACE_PRESET_DISTANCE_KM[preset as RacePreset], "km", distanceUnit)));
+  }
+
+  function handleScenarioPreset(scenario: PaceScenario) {
+    setSolveFor("pace");
+    setDistanceUnit("km");
+    setRacePreset(scenario.racePreset);
+    setDistance(round4(scenario.distanceKm));
+    const parts = partsFromSeconds(scenario.timeSeconds);
+    setHours(String(parts.hours));
+    setMinutes(String(parts.minutes));
+    setSeconds(String(parts.seconds));
   }
 
   function handleDistanceUnitChange(nextUnit: DistanceUnit) {
@@ -183,6 +195,7 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
         paceSeconds={paceSeconds}
         onPaceMinutesChange={setPaceMinutes}
         onPaceSecondsChange={setPaceSeconds}
+        onScenarioPreset={handleScenarioPreset}
       />
     );
     result = <PaceCalcResult result={calcResult} solveFor={solveFor} digitStyle={digitStyle} />;

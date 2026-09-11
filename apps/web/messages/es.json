@@ -16522,7 +16522,8 @@
         "minutes": "Minutos",
         "seconds": "Segundos",
         "paceLabelKm": "Ritmo por km",
-        "paceLabelMi": "Ritmo por milla"
+        "paceLabelMi": "Ritmo por milla",
+        "scenarioLabel": "Prueba un escenario real"
       },
       "result": {
         "heading": "Resultado",
@@ -16543,7 +16544,8 @@
         "speedKmh": "Velocidad",
         "speedMph": "Velocidad",
         "kmh": "km/h",
-        "mph": "mph"
+        "mph": "mph",
+        "sentence": "Recorrer {distance} {unit} a un ritmo de {pace} por km lleva {time}."
       },
       "gauge": {
         "ariaLabel": "Ritmo en la escala de esfuerzo",
@@ -16612,7 +16614,20 @@
         "intro": {
           "title": "Entender el Ritmo",
           "paragraph1": "El ritmo es una tasa expresada como tiempo por unidad de distancia — minutos y segundos por kilómetro o por milla —, en lugar de distancia por unidad de tiempo, que es lo que mide la velocidad. Ambos describen el mismo movimiento desde direcciones opuestas: un ritmo de 5:00 por kilómetro y una velocidad de 12 km/h son el mismo esfuerzo al correr, solo que expresado de forma distinta. Los corredores, caminantes y ciclistas suelen pensar en ritmo porque se traduce directamente en un plan de entrenamiento (\"mantener 5:00 por km en los tres kilómetros centrales\") y en un tiempo de meta (multiplicar el ritmo por la distancia de carrera), mientras que la velocidad es más habitual en el ciclismo y en contextos motorizados.",
-          "paragraph2": "La aritmética subyacente es sencilla — ritmo = tiempo ÷ distancia, tiempo = distancia × ritmo, distancia = tiempo ÷ ritmo —, pero convertir a mano entre un ritmo fijo y un tiempo de meta, entre sistemas de unidades y entre distancias de carrera que no son números redondos (los 21,0975 km de una media maratón, los 42,195 km de una maratón), es donde una calculadora demuestra su utilidad. Esta herramienta resuelve cualquiera de los tres valores — ritmo, tiempo o distancia — a partir de los otros dos, registra el ritmo en varios puntos de control reales en lugar de asumir un esfuerzo constante durante toda la carrera, convierte el ritmo directamente entre kilómetros y millas, y proyecta un tiempo de meta para una distancia distinta a partir de un resultado que ya has corrido."
+          "paragraph2": "La aritmética subyacente es sencilla — ritmo = tiempo ÷ distancia, tiempo = distancia × ritmo, distancia = tiempo ÷ ritmo —, pero convertir a mano entre un ritmo fijo y un tiempo de meta, entre sistemas de unidades y entre distancias de carrera que no son números redondos (los 21,0975 km de una media maratón, los 42,195 km de una maratón), es donde una calculadora demuestra su utilidad. Esta herramienta resuelve cualquiera de los tres valores — ritmo, tiempo o distancia — a partir de los otros dos, registra el ritmo en varios puntos de control reales en lugar de asumir un esfuerzo constante durante toda la carrera, convierte el ritmo directamente entre kilómetros y millas, y proyecta un tiempo de meta para una distancia distinta a partir de un resultado que ya has corrido.",
+          "rangeGauge": {
+            "title": "¿Dónde se ubica este ritmo?",
+            "intro": "El ritmo de carrera va desde la velocidad de élite en competición hasta un paseo relajado. Elige un ejemplo real a continuación para ver dónde se ubica en la escala de esfuerzo.",
+            "verdict": "{example} — Clasificación de ritmo: {classification}.",
+            "fact": "Eso equivale a {pace} por kilómetro.",
+            "examples": {
+              "eliteRunner": "Maratonista de élite",
+              "competitiveRunner": "Corredor competitivo",
+              "recreationalRunner": "Corredor recreativo",
+              "casualJogger": "Corredor casual",
+              "briskWalker": "Caminante enérgico"
+            }
+          }
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -16795,6 +16810,30 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
           "readOriginal": "Leer el Artículo Original"
         }
+      },
+      "scenarios": {
+        "sub2Marathon": "Maratón en menos de 2 horas",
+        "halfMarathonGoal": "Media maratón en 2 horas",
+        "run10kUnderHour": "10K en menos de una hora",
+        "couchTo5k": "Meta de Couch to 5K"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "random-number-generator": {

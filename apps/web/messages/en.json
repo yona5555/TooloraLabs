@@ -16722,7 +16722,8 @@
         "minutes": "Minutes",
         "seconds": "Seconds",
         "paceLabelKm": "Pace per km",
-        "paceLabelMi": "Pace per mile"
+        "paceLabelMi": "Pace per mile",
+        "scenarioLabel": "Try a real scenario"
       },
       "result": {
         "heading": "Result",
@@ -16743,7 +16744,8 @@
         "speedKmh": "Speed",
         "speedMph": "Speed",
         "kmh": "km/h",
-        "mph": "mph"
+        "mph": "mph",
+        "sentence": "Covering {distance} {unit} at a {pace} per km pace takes {time}."
       },
       "gauge": {
         "ariaLabel": "Pace on the effort scale",
@@ -16812,7 +16814,20 @@
         "intro": {
           "title": "Understanding Pace",
           "paragraph1": "Pace is a rate expressed as time per unit of distance — minutes and seconds per kilometer or per mile — rather than distance per unit of time, which is what speed measures. The two describe the same motion from opposite directions: a pace of 5:00 per kilometer and a speed of 12 km/h are the same running effort, just expressed differently. Runners, walkers, and cyclists generally think in pace because it maps directly onto a training plan (\"hold 5:00 per km for the middle three kilometers\") and onto a finishing time (multiply pace by race distance), while speed is more common in cycling and motorized contexts.",
-          "paragraph2": "The underlying arithmetic is simple — pace = time ÷ distance, time = distance × pace, distance = time ÷ pace — but converting between a fixed pace and a finishing time by hand, across unit systems, and across race distances that aren't round numbers (a half marathon's 21.0975 km, a marathon's 42.195 km) is where a calculator earns its keep. This tool solves any one of pace, time, or distance from the other two, logs pace across multiple real checkpoints instead of assuming a constant effort for an entire run, converts pace between kilometers and miles directly, and projects a finishing time for a different distance from a result you've already run."
+          "paragraph2": "The underlying arithmetic is simple — pace = time ÷ distance, time = distance × pace, distance = time ÷ pace — but converting between a fixed pace and a finishing time by hand, across unit systems, and across race distances that aren't round numbers (a half marathon's 21.0975 km, a marathon's 42.195 km) is where a calculator earns its keep. This tool solves any one of pace, time, or distance from the other two, logs pace across multiple real checkpoints instead of assuming a constant effort for an entire run, converts pace between kilometers and miles directly, and projects a finishing time for a different distance from a result you've already run.",
+          "rangeGauge": {
+            "title": "Where Does This Pace Rank?",
+            "intro": "Running pace ranges from elite race speed to a relaxed walk. Pick a real-world example below to see where it falls on the effort scale.",
+            "verdict": "{example} — Pace effort: {classification}.",
+            "fact": "That works out to {pace} per kilometer.",
+            "examples": {
+              "eliteRunner": "Elite Marathoner",
+              "competitiveRunner": "Competitive Runner",
+              "recreationalRunner": "Recreational Runner",
+              "casualJogger": "Casual Jogger",
+              "briskWalker": "Brisk Walker"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -16995,6 +17010,30 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
           "readOriginal": "Read the Original Paper"
         }
+      },
+      "scenarios": {
+        "sub2Marathon": "Sub-2-hour marathon",
+        "halfMarathonGoal": "2-hour half marathon",
+        "run10kUnderHour": "10K under an hour",
+        "couchTo5k": "Couch-to-5K finish"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "random-number-generator": {

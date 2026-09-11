@@ -4,7 +4,7 @@ import type { DistanceUnit } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import TimeInputGroup from "./TimeInputGroup";
-import { SOLVE_FIELDS, RACE_PRESETS, type SolveField } from "./types";
+import { SOLVE_FIELDS, RACE_PRESETS, PACE_SCENARIOS, type SolveField, type PaceScenario } from "./types";
 
 const selectClass =
   "w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100";
@@ -28,6 +28,7 @@ type PaceCalcInputPanelProps = {
   paceSeconds: string;
   onPaceMinutesChange: (value: string) => void;
   onPaceSecondsChange: (value: string) => void;
+  onScenarioPreset: (scenario: PaceScenario) => void;
 };
 
 export default function PaceCalcInputPanel({
@@ -49,12 +50,30 @@ export default function PaceCalcInputPanel({
   paceSeconds,
   onPaceMinutesChange,
   onPaceSecondsChange,
+  onScenarioPreset,
 }: PaceCalcInputPanelProps) {
   const t = useTranslations("tools.pace-calculator.form");
   const tSolve = useTranslations("tools.pace-calculator.solveTabs");
+  const tScenarios = useTranslations("tools.pace-calculator.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {PACE_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-300 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div role="tablist" aria-label={tSolve("groupLabel")} className="mb-4 flex flex-wrap gap-1.5">
         {SOLVE_FIELDS.map((field) => (
           <button

@@ -16522,7 +16522,8 @@
         "minutes": "Minutes",
         "seconds": "Secondes",
         "paceLabelKm": "Allure au km",
-        "paceLabelMi": "Allure au mile"
+        "paceLabelMi": "Allure au mile",
+        "scenarioLabel": "Essayer un scénario réel"
       },
       "result": {
         "heading": "Résultat",
@@ -16543,7 +16544,8 @@
         "speedKmh": "Vitesse",
         "speedMph": "Vitesse",
         "kmh": "km/h",
-        "mph": "mph"
+        "mph": "mph",
+        "sentence": "Parcourir {distance} {unit} à une allure de {pace} par km prend {time}."
       },
       "gauge": {
         "ariaLabel": "Allure sur l'échelle d'effort",
@@ -16612,7 +16614,20 @@
         "intro": {
           "title": "Comprendre l'Allure",
           "paragraph1": "L'allure est un taux exprimé en temps par unité de distance — minutes et secondes par kilomètre ou par mile —, plutôt qu'en distance par unité de temps, ce que mesure la vitesse. Les deux décrivent le même mouvement depuis des directions opposées : une allure de 5:00 au kilomètre et une vitesse de 12 km/h représentent le même effort de course, exprimé différemment. Les coureurs, marcheurs et cyclistes raisonnent généralement en allure car elle se traduit directement dans un plan d'entraînement (\"tenir 5:00 au km sur les trois kilomètres du milieu\") et dans un temps d'arrivée (multiplier l'allure par la distance de course), tandis que la vitesse est plus courante en cyclisme et dans les contextes motorisés.",
-          "paragraph2": "L'arithmétique sous-jacente est simple — allure = temps ÷ distance, temps = distance × allure, distance = temps ÷ allure —, mais convertir à la main entre une allure fixe et un temps d'arrivée, entre systèmes d'unités et entre distances de course qui ne sont pas des nombres ronds (les 21,0975 km d'un semi-marathon, les 42,195 km d'un marathon), c'est précisément là qu'un calculateur devient utile. Cet outil résout n'importe laquelle des trois valeurs — allure, temps ou distance — à partir des deux autres, enregistre l'allure sur plusieurs points de contrôle réels au lieu de supposer un effort constant sur toute la course, convertit l'allure directement entre kilomètres et miles, et projette un temps d'arrivée pour une distance différente à partir d'un résultat déjà couru."
+          "paragraph2": "L'arithmétique sous-jacente est simple — allure = temps ÷ distance, temps = distance × allure, distance = temps ÷ allure —, mais convertir à la main entre une allure fixe et un temps d'arrivée, entre systèmes d'unités et entre distances de course qui ne sont pas des nombres ronds (les 21,0975 km d'un semi-marathon, les 42,195 km d'un marathon), c'est précisément là qu'un calculateur devient utile. Cet outil résout n'importe laquelle des trois valeurs — allure, temps ou distance — à partir des deux autres, enregistre l'allure sur plusieurs points de contrôle réels au lieu de supposer un effort constant sur toute la course, convertit l'allure directement entre kilomètres et miles, et projette un temps d'arrivée pour une distance différente à partir d'un résultat déjà couru.",
+          "rangeGauge": {
+            "title": "Où se situe cette allure ?",
+            "intro": "L'allure de course va de la vitesse de course d'élite à une marche détendue. Choisissez un exemple réel ci-dessous pour voir où il se situe sur l'échelle d'effort.",
+            "verdict": "{example} — Classification d'allure : {classification}.",
+            "fact": "Cela équivaut à {pace} par kilomètre.",
+            "examples": {
+              "eliteRunner": "Marathonien d'élite",
+              "competitiveRunner": "Coureur de compétition",
+              "recreationalRunner": "Coureur amateur",
+              "casualJogger": "Jogeur occasionnel",
+              "briskWalker": "Marcheur rapide"
+            }
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -16795,6 +16810,30 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/7235349/",
           "readOriginal": "Lire l'Article Original"
         }
+      },
+      "scenarios": {
+        "sub2Marathon": "Marathon en moins de 2 heures",
+        "halfMarathonGoal": "Semi-marathon en 2 heures",
+        "run10kUnderHour": "10 km en moins d'une heure",
+        "couchTo5k": "Objectif Couch to 5K"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "random-number-generator": {
