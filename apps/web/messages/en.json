@@ -18180,7 +18180,8 @@
         "errors": {
           "invalid-age": "Enter an age between 1 and 120 to see a result.",
           "invalid-resting-heart-rate": "Enter a resting heart rate between 1 and 220 bpm."
-        }
+        },
+        "sentence": "Your estimated maximum heart rate is {maxHr} bpm."
       },
       "quickReference": {
         "title": "The Formulas",
@@ -18190,7 +18191,27 @@
         "intro": {
           "title": "Understanding Target Heart Rate",
           "paragraph1": "Target heart rate zones translate exercise intensity into a heart rate range you can monitor in real time, so you can train at a specific effort level rather than guessing. The starting point is your estimated maximum heart rate — the fastest your heart can safely beat during maximal exertion — from which five standard training zones are calculated as percentage bands, from very light activity up to maximum effort.",
-          "paragraph2": "This calculator estimates maximum heart rate using the classic \"220 minus age\" formula, still the most widely cited estimate despite being a population average that can be off by 10-20 beats per minute for any specific individual. When you also provide your resting heart rate, it switches to the Karvonen method, which calculates zones from your heart rate reserve (max minus resting) instead of straight percentages of max — a more personalized estimate, since it accounts for your current fitness level rather than treating everyone the same age as identical."
+          "paragraph2": "This calculator estimates maximum heart rate using the classic \"220 minus age\" formula, still the most widely cited estimate despite being a population average that can be off by 10-20 beats per minute for any specific individual. When you also provide your resting heart rate, it switches to the Karvonen method, which calculates zones from your heart rate reserve (max minus resting) instead of straight percentages of max — a more personalized estimate, since it accounts for your current fitness level rather than treating everyone the same age as identical.",
+          "restingGauge": {
+            "title": "Where Does This Resting Heart Rate Rank?",
+            "intro": "Resting heart rate ranges from an elite endurance athlete's slow, efficient beat to an elevated rate linked to stress or low fitness. Pick a real-world example below to see where it falls.",
+            "verdict": "{example} — Resting heart rate: {classification}.",
+            "fact": "That's about {bpm} beats per minute.",
+            "examples": {
+              "eliteAthlete": "Elite Endurance Athlete",
+              "recreationalAthlete": "Recreational Athlete",
+              "averageAdult": "Average Healthy Adult",
+              "deskWorker": "Sedentary Desk Worker",
+              "stressedElevated": "Elevated (Stress or Illness)"
+            },
+            "classifications": {
+              "elite": "Elite",
+              "athletic": "Athletic",
+              "normal": "Normal",
+              "elevated": "Elevated",
+              "high": "High"
+            }
+          }
         },
         "zones": {
           "title": "The Five Training Zones",
@@ -18329,6 +18350,24 @@
         "middleAgeKarvonen": "Middle-Age (Karvonen)",
         "olderAdult": "Older Adult",
         "trainedAthlete": "Trained Athlete"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "sleep-calculator": {

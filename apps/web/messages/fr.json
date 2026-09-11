@@ -18180,7 +18180,8 @@
         "errors": {
           "invalid-age": "Saisissez un âge entre 1 et 120 pour voir un résultat.",
           "invalid-resting-heart-rate": "Saisissez une fréquence cardiaque au repos entre 1 et 220 bpm."
-        }
+        },
+        "sentence": "Votre fréquence cardiaque maximale estimée est de {maxHr} bpm."
       },
       "quickReference": {
         "title": "Les formules",
@@ -18190,7 +18191,27 @@
         "intro": {
           "title": "Comprendre la fréquence cardiaque cible",
           "paragraph1": "Les zones de fréquence cardiaque cible traduisent l'intensité de l'exercice en une plage de fréquence cardiaque que vous pouvez surveiller en temps réel, afin de vous entraîner à un niveau d'effort précis plutôt que de deviner. Le point de départ est votre fréquence cardiaque maximale estimée — la vitesse la plus rapide à laquelle votre cœur peut battre en toute sécurité lors d'un effort maximal —, à partir de laquelle cinq zones d'entraînement standards sont calculées sous forme de bandes de pourcentage, d'une activité très légère à un effort maximal.",
-          "paragraph2": "Cette calculatrice estime la fréquence cardiaque maximale à l'aide de la formule classique \"220 moins l'âge\", toujours l'estimation la plus citée bien qu'il s'agisse d'une moyenne de population pouvant varier de 10 à 20 battements par minute pour un individu donné. Lorsque vous fournissez également votre fréquence cardiaque au repos, elle bascule vers la méthode de Karvonen, qui calcule les zones à partir de votre réserve de fréquence cardiaque (maximum moins repos) plutôt que de pourcentages directs du maximum — une estimation plus personnalisée, car elle tient compte de votre niveau de forme physique actuel plutôt que de traiter toutes les personnes du même âge de façon identique."
+          "paragraph2": "Cette calculatrice estime la fréquence cardiaque maximale à l'aide de la formule classique \"220 moins l'âge\", toujours l'estimation la plus citée bien qu'il s'agisse d'une moyenne de population pouvant varier de 10 à 20 battements par minute pour un individu donné. Lorsque vous fournissez également votre fréquence cardiaque au repos, elle bascule vers la méthode de Karvonen, qui calcule les zones à partir de votre réserve de fréquence cardiaque (maximum moins repos) plutôt que de pourcentages directs du maximum — une estimation plus personnalisée, car elle tient compte de votre niveau de forme physique actuel plutôt que de traiter toutes les personnes du même âge de façon identique.",
+          "restingGauge": {
+            "title": "Où se situe cette fréquence cardiaque au repos ?",
+            "intro": "La fréquence cardiaque au repos va du pouls lent et efficace d'un athlète d'endurance d'élite à une fréquence élevée liée au stress ou à une faible condition physique. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Fréquence cardiaque au repos : {classification}.",
+            "fact": "Cela représente environ {bpm} battements par minute.",
+            "examples": {
+              "eliteAthlete": "Athlète d'endurance d'élite",
+              "recreationalAthlete": "Athlète amateur",
+              "averageAdult": "Adulte en bonne santé moyen",
+              "deskWorker": "Employé de bureau sédentaire",
+              "stressedElevated": "Élevée (stress ou maladie)"
+            },
+            "classifications": {
+              "elite": "Élite",
+              "athletic": "Athlétique",
+              "normal": "Normale",
+              "elevated": "Élevée",
+              "high": "Haute"
+            }
+          }
         },
         "zones": {
           "title": "Les cinq zones d'entraînement",
@@ -18329,6 +18350,24 @@
         "middleAgeKarvonen": "Âge moyen (Karvonen)",
         "olderAdult": "Adulte plus âgé",
         "trainedAthlete": "Athlète entraîné"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "sleep-calculator": {

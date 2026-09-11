@@ -73,7 +73,15 @@ export default function TargetHeartRateCalculator({ education }: { education: Re
               onClear={handleClear}
             />
           }
-          result={<TargetHeartRateResult result={result} digitStyle={digitStyle} />}
+          result={
+            <TargetHeartRateResult
+              result={result}
+              digitStyle={digitStyle}
+              age={age}
+              useRestingHeartRate={useRestingHeartRate}
+              restingHeartRate={restingHeartRate}
+            />
+          }
           sidebar={<RelatedToolsSidebar currentSlug="target-heart-rate-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">

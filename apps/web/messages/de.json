@@ -18180,7 +18180,8 @@
         "errors": {
           "invalid-age": "Gib ein Alter zwischen 1 und 120 ein, um ein Ergebnis zu sehen.",
           "invalid-resting-heart-rate": "Gib eine Ruheherzfrequenz zwischen 1 und 220 Schlägen/Min. ein."
-        }
+        },
+        "sentence": "Deine geschätzte maximale Herzfrequenz beträgt {maxHr} Schläge/Minute."
       },
       "quickReference": {
         "title": "Die Formeln",
@@ -18190,7 +18191,27 @@
         "intro": {
           "title": "Zielherzfrequenz verstehen",
           "paragraph1": "Zielherzfrequenzzonen übersetzen die Trainingsintensität in einen Herzfrequenzbereich, den du in Echtzeit überwachen kannst, sodass du mit einem bestimmten Anstrengungsgrad trainierst, statt zu raten. Ausgangspunkt ist deine geschätzte maximale Herzfrequenz — die schnellste Rate, mit der dein Herz bei maximaler Anstrengung sicher schlagen kann —, aus der fünf standardisierte Trainingszonen als Prozentbänder berechnet werden, von sehr leichter Aktivität bis zu maximaler Anstrengung.",
-          "paragraph2": "Dieser Rechner schätzt die maximale Herzfrequenz mit der klassischen Formel \"220 minus Alter\", die trotz ihres Charakters als Bevölkerungsdurchschnitt, der bei einer bestimmten Person um 10-20 Schläge pro Minute abweichen kann, immer noch die am häufigsten zitierte Schätzung ist. Gibst du zusätzlich deine Ruheherzfrequenz an, wechselt der Rechner zur Karvonen-Methode, die Zonen aus deiner Herzfrequenzreserve (Maximum minus Ruhe) statt aus direkten Prozentsätzen des Maximums berechnet — eine individuellere Schätzung, da sie dein aktuelles Fitnessniveau berücksichtigt, statt alle Gleichaltrigen gleichzusetzen."
+          "paragraph2": "Dieser Rechner schätzt die maximale Herzfrequenz mit der klassischen Formel \"220 minus Alter\", die trotz ihres Charakters als Bevölkerungsdurchschnitt, der bei einer bestimmten Person um 10-20 Schläge pro Minute abweichen kann, immer noch die am häufigsten zitierte Schätzung ist. Gibst du zusätzlich deine Ruheherzfrequenz an, wechselt der Rechner zur Karvonen-Methode, die Zonen aus deiner Herzfrequenzreserve (Maximum minus Ruhe) statt aus direkten Prozentsätzen des Maximums berechnet — eine individuellere Schätzung, da sie dein aktuelles Fitnessniveau berücksichtigt, statt alle Gleichaltrigen gleichzusetzen.",
+          "restingGauge": {
+            "title": "Wo liegt diese Ruheherzfrequenz?",
+            "intro": "Die Ruheherzfrequenz reicht vom langsamen, effizienten Puls eines Ausdauersportlers bis zu einer erhöhten Frequenz durch Stress oder geringe Fitness. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Ruheherzfrequenz: {classification}.",
+            "fact": "Das sind etwa {bpm} Schläge pro Minute.",
+            "examples": {
+              "eliteAthlete": "Elite-Ausdauersportler",
+              "recreationalAthlete": "Freizeitsportler",
+              "averageAdult": "Durchschnittlicher gesunder Erwachsener",
+              "deskWorker": "Sitzender Büroangestellter",
+              "stressedElevated": "Erhöht (Stress oder Krankheit)"
+            },
+            "classifications": {
+              "elite": "Elite-Niveau",
+              "athletic": "Sportlich",
+              "normal": "Normal",
+              "elevated": "Erhöht",
+              "high": "Hoch"
+            }
+          }
         },
         "zones": {
           "title": "Die fünf Trainingszonen",
@@ -18329,6 +18350,24 @@
         "middleAgeKarvonen": "Mittleres Alter (Karvonen)",
         "olderAdult": "Älterer Erwachsener",
         "trainedAthlete": "Trainierter Athlet"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "sleep-calculator": {

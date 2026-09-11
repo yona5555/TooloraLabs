@@ -18180,7 +18180,8 @@
         "errors": {
           "invalid-age": "Introduce una edad entre 1 y 120 para ver un resultado.",
           "invalid-resting-heart-rate": "Introduce una frecuencia cardíaca en reposo entre 1 y 220 lpm."
-        }
+        },
+        "sentence": "Tu frecuencia cardíaca máxima estimada es de {maxHr} lpm."
       },
       "quickReference": {
         "title": "Las fórmulas",
@@ -18190,7 +18191,27 @@
         "intro": {
           "title": "Entender la frecuencia cardíaca objetivo",
           "paragraph1": "Las zonas de frecuencia cardíaca objetivo traducen la intensidad del ejercicio en un rango de frecuencia cardíaca que puedes monitorear en tiempo real, para entrenar a un nivel de esfuerzo específico en lugar de adivinar. El punto de partida es tu frecuencia cardíaca máxima estimada — la velocidad más rápida a la que tu corazón puede latir con seguridad durante un esfuerzo máximo —, a partir de la cual se calculan cinco zonas de entrenamiento estándar como bandas porcentuales, desde actividad muy ligera hasta esfuerzo máximo.",
-          "paragraph2": "Esta calculadora estima la frecuencia cardíaca máxima usando la fórmula clásica \"220 menos la edad\", que sigue siendo la estimación más citada a pesar de ser un promedio poblacional que puede diferir en 10-20 latidos por minuto para cualquier persona en particular. Cuando también proporcionas tu frecuencia cardíaca en reposo, cambia al método de Karvonen, que calcula las zonas a partir de tu reserva de frecuencia cardíaca (máxima menos reposo) en lugar de porcentajes directos del máximo — una estimación más personalizada, ya que tiene en cuenta tu nivel de forma física actual en lugar de tratar a todas las personas de la misma edad por igual."
+          "paragraph2": "Esta calculadora estima la frecuencia cardíaca máxima usando la fórmula clásica \"220 menos la edad\", que sigue siendo la estimación más citada a pesar de ser un promedio poblacional que puede diferir en 10-20 latidos por minuto para cualquier persona en particular. Cuando también proporcionas tu frecuencia cardíaca en reposo, cambia al método de Karvonen, que calcula las zonas a partir de tu reserva de frecuencia cardíaca (máxima menos reposo) en lugar de porcentajes directos del máximo — una estimación más personalizada, ya que tiene en cuenta tu nivel de forma física actual en lugar de tratar a todas las personas de la misma edad por igual.",
+          "restingGauge": {
+            "title": "¿Dónde se ubica esta frecuencia cardíaca en reposo?",
+            "intro": "La frecuencia cardíaca en reposo va desde el pulso lento y eficiente de un atleta de resistencia de élite hasta una frecuencia elevada vinculada al estrés o la baja forma física. Elige un ejemplo real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Frecuencia cardíaca en reposo: {classification}.",
+            "fact": "Eso es aproximadamente {bpm} latidos por minuto.",
+            "examples": {
+              "eliteAthlete": "Atleta de resistencia de élite",
+              "recreationalAthlete": "Atleta recreativo",
+              "averageAdult": "Adulto sano promedio",
+              "deskWorker": "Trabajador de oficina sedentario",
+              "stressedElevated": "Elevada (estrés o enfermedad)"
+            },
+            "classifications": {
+              "elite": "Élite",
+              "athletic": "Atlético",
+              "normal": "Normal",
+              "elevated": "Elevada",
+              "high": "Alta"
+            }
+          }
         },
         "zones": {
           "title": "Las cinco zonas de entrenamiento",
@@ -18329,6 +18350,24 @@
         "middleAgeKarvonen": "Mediana edad (Karvonen)",
         "olderAdult": "Adulto mayor",
         "trainedAthlete": "Atleta entrenado"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "sleep-calculator": {
