@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, RotateCcw } from "lucide-react";
 import type { CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -16,6 +16,7 @@ type CryptoInputPanelProps = {
   onToCoinChange: (id: string) => void;
   onCoinDiscovered: (coin: CryptoCoin) => void;
   onSwap: () => void;
+  onClear: () => void;
 };
 
 export default function CryptoInputPanel({
@@ -28,6 +29,7 @@ export default function CryptoInputPanel({
   onToCoinChange,
   onCoinDiscovered,
   onSwap,
+  onClear,
 }: CryptoInputPanelProps) {
   const t = useTranslations("tools.crypto-converter.aboveFold");
 
@@ -68,6 +70,15 @@ export default function CryptoInputPanel({
           onChange={onToCoinChange}
           onCoinDiscovered={onCoinDiscovered}
         />
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("clear")}
+        </button>
       </div>
     </SectionCard>
   );

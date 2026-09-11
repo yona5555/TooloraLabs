@@ -1,8 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Play, Pause, Square } from "lucide-react";
+import { Play, Pause, Square, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import type { PlaybackState } from "./types";
+import { SAMPLE_TEXT, type PlaybackState } from "./types";
 
 type Props = {
   text: string;
@@ -19,6 +19,7 @@ type Props = {
   onPause: () => void;
   onResume: () => void;
   onStop: () => void;
+  onClear: () => void;
   isSupported: boolean;
 };
 
@@ -37,6 +38,7 @@ export default function TTSInputPanel({
   onPause,
   onResume,
   onStop,
+  onClear,
   isSupported,
 }: Props) {
   const t = useTranslations("tools.text-to-speech.form");
@@ -60,6 +62,24 @@ export default function TTSInputPanel({
           className="w-full resize-y rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
         />
       </label>
+
+      <div className="mt-2 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => onTextChange(SAMPLE_TEXT)}
+          className="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-blue-500 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+        >
+          {t("loadSampleText")}
+        </button>
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-1.5 rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={13} />
+          {t("clear")}
+        </button>
+      </div>
 
       {voices.length > 0 && (
         <label className="mt-4 block space-y-2">

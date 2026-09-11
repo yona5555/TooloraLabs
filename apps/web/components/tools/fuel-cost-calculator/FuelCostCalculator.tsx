@@ -12,17 +12,31 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FuelInputPanel from "./FuelInputPanel";
 import FuelResult from "./FuelResult";
 import FuelQuickReference from "./FuelQuickReference";
-import type { FuelRateMode } from "./types";
+import { FUEL_DEFAULTS, type FuelRateMode, type FuelScenario } from "./types";
 
 const tool = new FuelCostTool();
 
 export default function FuelCostCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.fuel-cost-calculator.nav");
 
-  const [distance, setDistance] = useState("500");
-  const [rateMode, setRateMode] = useState<FuelRateMode>("consumption");
-  const [rateValue, setRateValue] = useState("8");
-  const [pricePerUnit, setPricePerUnit] = useState("1.5");
+  const [distance, setDistance] = useState(FUEL_DEFAULTS.distance);
+  const [rateMode, setRateMode] = useState<FuelRateMode>(FUEL_DEFAULTS.rateMode);
+  const [rateValue, setRateValue] = useState(FUEL_DEFAULTS.rateValue);
+  const [pricePerUnit, setPricePerUnit] = useState(FUEL_DEFAULTS.pricePerUnit);
+
+  function handleScenarioPreset(scenario: FuelScenario) {
+    setDistance(scenario.distance);
+    setRateMode(scenario.rateMode);
+    setRateValue(scenario.rateValue);
+    setPricePerUnit(scenario.pricePerUnit);
+  }
+
+  function handleClear() {
+    setDistance(FUEL_DEFAULTS.distance);
+    setRateMode(FUEL_DEFAULTS.rateMode);
+    setRateValue(FUEL_DEFAULTS.rateValue);
+    setPricePerUnit(FUEL_DEFAULTS.pricePerUnit);
+  }
 
   const digitStyle: DigitStyle = resolveDigitStyle(distance, rateValue, pricePerUnit);
 
@@ -59,6 +73,8 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
               onRateValueChange={setRateValue}
               pricePerUnit={pricePerUnit}
               onPricePerUnitChange={setPricePerUnit}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={

@@ -36,6 +36,12 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
     setToCode(fromCode);
   }
 
+  function handleClear() {
+    setFromCode("USD");
+    setToCode("EUR");
+    setAmount("1");
+  }
+
   const fromCurrency = findCurrencyByCode(initialCurrencies, fromCode);
   const toCurrency = findCurrencyByCode(initialCurrencies, toCode);
 
@@ -66,6 +72,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
               toCode={toCode}
               onToChange={setToCode}
               onSwap={handleSwap}
+              onClear={handleClear}
             />
           }
           result={

@@ -1,8 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import type { FuelRateMode } from "./types";
+import { FUEL_SCENARIOS, type FuelRateMode, type FuelScenario } from "./types";
 
 type Props = {
   distance: string;
@@ -13,6 +14,8 @@ type Props = {
   onRateValueChange: (value: string) => void;
   pricePerUnit: string;
   onPricePerUnitChange: (value: string) => void;
+  onScenarioPreset: (scenario: FuelScenario) => void;
+  onClear: () => void;
 };
 
 export default function FuelInputPanel({
@@ -24,11 +27,27 @@ export default function FuelInputPanel({
   onRateValueChange,
   pricePerUnit,
   onPricePerUnitChange,
+  onScenarioPreset,
+  onClear,
 }: Props) {
   const t = useTranslations("tools.fuel-cost-calculator.form");
+  const tScenarios = useTranslations("tools.fuel-cost-calculator.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-4 flex flex-wrap gap-2">
+        {FUEL_SCENARIOS.map((scenario) => (
+          <button
+            key={scenario.key}
+            type="button"
+            onClick={() => onScenarioPreset(scenario)}
+            className="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-blue-500 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+          >
+            {tScenarios(scenario.key)}
+          </button>
+        ))}
+      </div>
+
       <div className="space-y-4">
         <ToolInput
           label={t("distanceLabel")}
@@ -85,6 +104,15 @@ export default function FuelInputPanel({
           onChange={(e) => onPricePerUnitChange(e.target.value)}
           hint={t("priceHint")}
         />
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("clear")}
+        </button>
       </div>
     </SectionCard>
   );

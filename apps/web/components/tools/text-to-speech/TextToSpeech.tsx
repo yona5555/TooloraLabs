@@ -89,6 +89,16 @@ export default function TextToSpeech({ education }: { education: ReactNode }) {
     setPlaybackState("idle");
   }
 
+  function handleClear() {
+    if (isSupported) window.speechSynthesis.cancel();
+    setText("");
+    setVoiceURI("");
+    setRate(1);
+    setPitch(1);
+    setPlaybackState("idle");
+    setHasSpoken(false);
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -115,6 +125,7 @@ export default function TextToSpeech({ education }: { education: ReactNode }) {
               onPause={handlePause}
               onResume={handleResume}
               onStop={handleStop}
+              onClear={handleClear}
               isSupported={isSupported}
             />
           }

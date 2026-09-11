@@ -2,6 +2,7 @@ import { STORAGE_KEY, type SavedInvoice } from "./types";
 
 let cachedRaw: string | null = null;
 let cachedInvoices: SavedInvoice[] = [];
+const EMPTY_INVOICES: SavedInvoice[] = [];
 
 function isValidInvoice(value: unknown): value is SavedInvoice {
   if (!value || typeof value !== "object") return false;
@@ -52,5 +53,5 @@ export function subscribeToInvoiceStorage(callback: () => void): () => void {
 }
 
 export function getServerInvoices(): SavedInvoice[] {
-  return [];
+  return EMPTY_INVOICES;
 }

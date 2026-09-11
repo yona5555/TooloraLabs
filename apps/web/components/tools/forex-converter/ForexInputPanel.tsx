@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, RotateCcw } from "lucide-react";
 import type { CurrencyRate } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -15,6 +15,7 @@ type ForexInputPanelProps = {
   toCode: string;
   onToChange: (code: string) => void;
   onSwap: () => void;
+  onClear: () => void;
 };
 
 export default function ForexInputPanel({
@@ -26,6 +27,7 @@ export default function ForexInputPanel({
   toCode,
   onToChange,
   onSwap,
+  onClear,
 }: ForexInputPanelProps) {
   const t = useTranslations("tools.forex-converter.aboveFold");
 
@@ -54,6 +56,15 @@ export default function ForexInputPanel({
         </div>
 
         <ForexCurrencyPicker label={t("toLabel")} currencies={currencies} value={toCode} onChange={onToChange} />
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("clear")}
+        </button>
       </div>
     </SectionCard>
   );

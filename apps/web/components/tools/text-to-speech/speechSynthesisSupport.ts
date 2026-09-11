@@ -1,6 +1,8 @@
 let cachedVoices: SpeechSynthesisVoice[] = [];
 let cachedVoicesKey = "";
 
+const EMPTY_VOICES: SpeechSynthesisVoice[] = [];
+
 function noopSubscribe(): () => void {
   return () => {};
 }
@@ -29,11 +31,16 @@ export function getVoicesSnapshot(): SpeechSynthesisVoice[] {
   const key = voices.map((v) => v.voiceURI).join("|");
   if (key !== cachedVoicesKey) {
     cachedVoicesKey = key;
-    cachedVoices = voices;
+    const seen = new Set<string>();
+    cachedVoices = voices.filter((v) => {
+      if (seen.has(v.voiceURI)) return false;
+      seen.add(v.voiceURI);
+      return true;
+    });
   }
   return cachedVoices;
 }
 
 export function getServerVoicesSnapshot(): SpeechSynthesisVoice[] {
-  return [];
+  return EMPTY_VOICES;
 }

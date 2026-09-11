@@ -47,6 +47,13 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
     setToCoinId(fromCoinId);
   }
 
+  function handleClear() {
+    setFromCoinId("bitcoin");
+    setToCoinId("ethereum");
+    setAmount("1");
+    setFiatCurrency("usd");
+  }
+
   const fromCoin = findCoinById(coins, fromCoinId);
   const toCoin = findCoinById(coins, toCoinId);
 
@@ -79,6 +86,7 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
               onToCoinChange={setToCoinId}
               onCoinDiscovered={handleCoinDiscovered}
               onSwap={handleSwap}
+              onClear={handleClear}
             />
           }
           result={

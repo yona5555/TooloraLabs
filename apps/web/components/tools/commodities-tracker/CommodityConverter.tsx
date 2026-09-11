@@ -44,6 +44,13 @@ export default function CommodityConverter({
   const digitStyle: DigitStyle = resolveDigitStyle(amount);
   const fxRate = currency === "sar" ? usdToSarRate : 1;
 
+  function handleClear() {
+    setCommodity("gold");
+    setAmount("1");
+    setWeightUnit("gram");
+    setCurrency("usd");
+  }
+
   const convertedValue = useMemo(() => {
     const amountValue = parseLocalizedNumber(amount);
     if (Number.isNaN(amountValue)) return 0;
@@ -71,6 +78,7 @@ export default function CommodityConverter({
               onAmountChange={setAmount}
               weightUnit={weightUnit}
               onWeightUnitChange={setWeightUnit}
+              onClear={handleClear}
             />
           }
           result={

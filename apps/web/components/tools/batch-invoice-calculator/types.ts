@@ -22,3 +22,13 @@ export type SavedInvoice = {
 };
 
 export const STORAGE_KEY = "toolora:batch-invoices";
+
+export const SAMPLE_INVOICE: { invoiceNumber: string; vendor: string; lineItems: DraftLineItem[]; taxPercent: string } = {
+  invoiceNumber: "INV-1001",
+  vendor: "Acme Supplies",
+  lineItems: [
+    { itemName: "Consulting Hours", quantity: "12", unitPrice: "85" },
+    { itemName: "Office Supplies", quantity: "3", unitPrice: "24.50" },
+  ],
+  taxPercent: "8.5",
+};

@@ -16,7 +16,7 @@ import InvoiceSummary from "./InvoiceSummary";
 import PrintableSummary from "./PrintableSummary";
 import BatchInvoiceQuickReference from "./BatchInvoiceQuickReference";
 import { readStoredInvoices, writeStoredInvoices, subscribeToInvoiceStorage, getServerInvoices } from "./storage";
-import type { DraftLineItem, SavedInvoice } from "./types";
+import { SAMPLE_INVOICE, type DraftLineItem, type SavedInvoice } from "./types";
 
 const tool = new BatchInvoiceTool();
 
@@ -86,6 +86,15 @@ export default function BatchInvoiceCalculator({ education }: { education: React
 
   function handleRemoveLineItem(index: number) {
     setLineItems((prev) => (prev.length <= 1 ? prev : prev.filter((_, i) => i !== index)));
+  }
+
+  function handleLoadSample() {
+    setInvoiceNumber(SAMPLE_INVOICE.invoiceNumber);
+    setDate(todayISO());
+    setVendor(SAMPLE_INVOICE.vendor);
+    setLineItems(SAMPLE_INVOICE.lineItems.map((item) => ({ ...item })));
+    setTaxPercent(SAMPLE_INVOICE.taxPercent);
+    setEditingId(null);
   }
 
   function handleSave() {
@@ -164,6 +173,8 @@ export default function BatchInvoiceCalculator({ education }: { education: React
               taxPercent={taxPercent}
               onTaxPercentChange={setTaxPercent}
               onSave={handleSave}
+              onLoadSample={handleLoadSample}
+              onClear={resetDraft}
               isEditing={editingId !== null}
             />
           }

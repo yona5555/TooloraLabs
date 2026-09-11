@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Plus, Trash2, Save } from "lucide-react";
+import { Plus, Trash2, Save, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { DraftLineItem } from "./types";
@@ -19,6 +19,8 @@ type Props = {
   taxPercent: string;
   onTaxPercentChange: (value: string) => void;
   onSave: () => void;
+  onLoadSample: () => void;
+  onClear: () => void;
   isEditing: boolean;
 };
 
@@ -36,12 +38,31 @@ export default function InvoiceDraftPanel({
   taxPercent,
   onTaxPercentChange,
   onSave,
+  onLoadSample,
+  onClear,
   isEditing,
 }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator.form");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-4 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={onLoadSample}
+          className="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-blue-500 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+        >
+          {t("loadSampleInvoice")}
+        </button>
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-1.5 rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={13} />
+          {t("clearDraft")}
+        </button>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <ToolInput
           label={t("invoiceNumberLabel")}
