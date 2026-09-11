@@ -24,6 +24,13 @@ export default function FileNameSanitizerTool({ education }: { education: ReactN
   const [lowercase, setLowercase] = useState(true);
   const [transliterate, setTransliterate] = useState(false);
 
+  function handleClear() {
+    setFileName("");
+    setSeparator("-");
+    setLowercase(true);
+    setTransliterate(false);
+  }
+
   const { result, changes, errorKey } = useMemo(() => {
     if (!fileName.trim()) return { result: "", changes: [], errorKey: "" };
 
@@ -58,6 +65,7 @@ export default function FileNameSanitizerTool({ education }: { education: ReactN
               onLowercaseChange={setLowercase}
               transliterate={transliterate}
               onTransliterateChange={setTransliterate}
+              onClear={handleClear}
             />
           }
           result={<FileNameResult result={result} errorMessage={errorMessage} changes={changes} />}

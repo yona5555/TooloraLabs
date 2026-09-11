@@ -46,6 +46,12 @@ export default function CsvJsonConverterUI({ education }: { education: ReactNode
     setInput(next === "csvToJson" ? SAMPLE_CSV : SAMPLE_JSON);
   }
 
+  function handleClear() {
+    setInput(mode === "csvToJson" ? SAMPLE_CSV : SAMPLE_JSON);
+    setDelimiter(",");
+    setHasHeader(true);
+  }
+
   const output = useMemo(() => {
     if (!input.trim()) return null;
     return tool.execute({ text: input, mode, delimiter, hasHeader }, { locale: "en-US" });
@@ -73,6 +79,7 @@ export default function CsvJsonConverterUI({ education }: { education: ReactNode
               onDelimiterChange={setDelimiter}
               hasHeader={hasHeader}
               onHasHeaderChange={setHasHeader}
+              onClear={handleClear}
             />
           }
           result={

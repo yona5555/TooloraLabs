@@ -25,6 +25,14 @@ export default function DuplicateLineRemoverTool({ education }: { education: Rea
   const [trimWhitespace, setTrimWhitespace] = useState(true);
   const [keepOccurrence, setKeepOccurrence] = useState<KeepOccurrence>("first");
 
+  function handleClear() {
+    setText("");
+    setCaseSensitive(true);
+    setSort(false);
+    setTrimWhitespace(true);
+    setKeepOccurrence("first");
+  }
+
   const digitStyle = resolveDigitStyle(text);
 
   const data = useMemo(() => {
@@ -58,6 +66,7 @@ export default function DuplicateLineRemoverTool({ education }: { education: Rea
               onTrimWhitespaceChange={setTrimWhitespace}
               keepOccurrence={keepOccurrence}
               onKeepOccurrenceChange={setKeepOccurrence}
+              onClear={handleClear}
             />
           }
           result={<DuplicateLineResult data={data} digitStyle={digitStyle} />}

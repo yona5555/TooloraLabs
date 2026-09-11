@@ -38,6 +38,14 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
     setResultBlob(null);
   }
 
+  function handleClear() {
+    setMergeFiles([]);
+    setSplitFile(null);
+    setSplitPageCount(null);
+    setRangesInput("");
+    resetResult();
+  }
+
   function handleModeChange(next: PdfMode) {
     resetResult();
     setMode(next);
@@ -198,6 +206,7 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
               rangesInput={rangesInput}
               onRangesInputChange={handleRangesInputChange}
               error={error}
+              onClear={handleClear}
             />
           }
           result={

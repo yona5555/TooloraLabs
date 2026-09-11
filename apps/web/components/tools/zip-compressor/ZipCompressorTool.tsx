@@ -67,6 +67,12 @@ export default function ZipCompressorTool({ education }: { education: ReactNode 
     setExtractFile(file);
   }
 
+  function handleClear() {
+    setCompressFiles([]);
+    setExtractFile(null);
+    resetResult();
+  }
+
   async function handleProcess() {
     setError("");
 
@@ -169,6 +175,7 @@ export default function ZipCompressorTool({ education }: { education: ReactNode 
               extractFile={extractFile}
               onExtractFileSelect={handleExtractFileSelect}
               error={error}
+              onClear={handleClear}
             />
           }
           result={

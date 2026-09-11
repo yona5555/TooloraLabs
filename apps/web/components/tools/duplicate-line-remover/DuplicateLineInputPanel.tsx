@@ -1,9 +1,18 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import type { DuplicateLineRemoverInput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
 type KeepOccurrence = NonNullable<DuplicateLineRemoverInput["keepOccurrence"]>;
+
+const SAMPLE_TEXT = `apple
+banana
+apple
+cherry
+banana
+date
+apple`;
 
 type DuplicateLineInputPanelProps = {
   text: string;
@@ -16,6 +25,7 @@ type DuplicateLineInputPanelProps = {
   onTrimWhitespaceChange: (value: boolean) => void;
   keepOccurrence: KeepOccurrence;
   onKeepOccurrenceChange: (value: KeepOccurrence) => void;
+  onClear: () => void;
 };
 
 export default function DuplicateLineInputPanel({
@@ -29,6 +39,7 @@ export default function DuplicateLineInputPanel({
   onTrimWhitespaceChange,
   keepOccurrence,
   onKeepOccurrenceChange,
+  onClear,
 }: DuplicateLineInputPanelProps) {
   const t = useTranslations("tools.duplicate-line-remover.form");
 
@@ -39,6 +50,15 @@ export default function DuplicateLineInputPanel({
           <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
             {t("inputLabel")}
           </span>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => onTextChange(SAMPLE_TEXT)}
+              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+            >
+              {t("loadSampleText")}
+            </button>
+          </div>
           <textarea
             value={text}
             onChange={(e) => onTextChange(e.target.value)}
@@ -90,6 +110,15 @@ export default function DuplicateLineInputPanel({
             </select>
           </label>
         </div>
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("clear")}
+        </button>
       </div>
     </SectionCard>
   );

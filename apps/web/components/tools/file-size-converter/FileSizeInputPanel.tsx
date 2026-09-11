@@ -1,8 +1,10 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import type { FileSizeUnit, FileSizeStandard } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import { FILE_SIZE_SCENARIOS, type FileSizeScenario } from "./types";
 
 type FileSizeInputPanelProps = {
   value: string;
@@ -11,6 +13,8 @@ type FileSizeInputPanelProps = {
   onUnitChange: (unit: FileSizeUnit) => void;
   standard: FileSizeStandard;
   onStandardChange: (standard: FileSizeStandard) => void;
+  onScenarioPreset: (scenario: FileSizeScenario) => void;
+  onClear: () => void;
 };
 
 const UNITS: FileSizeUnit[] = ["B", "KB", "MB", "GB", "TB", "PB"];
@@ -25,12 +29,30 @@ export default function FileSizeInputPanel({
   onUnitChange,
   standard,
   onStandardChange,
+  onScenarioPreset,
+  onClear,
 }: FileSizeInputPanelProps) {
   const t = useTranslations("tools.file-size-converter.form");
   const tUnits = useTranslations("tools.file-size-converter.units");
+  const tScenarios = useTranslations("tools.file-size-converter.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {FILE_SIZE_SCENARIOS.map((scenario) => (
+            <button
+              key={scenario.key}
+              type="button"
+              onClick={() => onScenarioPreset(scenario)}
+              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
+            >
+              {tScenarios(scenario.key)}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <ToolInput
@@ -96,6 +118,15 @@ export default function FileSizeInputPanel({
             </label>
           </div>
         </fieldset>
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("clear")}
+        </button>
       </div>
     </SectionCard>
   );

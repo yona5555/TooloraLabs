@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Upload, X, GripVertical } from "lucide-react";
+import { Upload, X, GripVertical, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 
@@ -22,6 +22,7 @@ type PdfMergeSplitInputPanelProps = {
   rangesInput: string;
   onRangesInputChange: (value: string) => void;
   error: string;
+  onClear: () => void;
 };
 
 export default function PdfMergeSplitInputPanel({
@@ -37,13 +38,29 @@ export default function PdfMergeSplitInputPanel({
   rangesInput,
   onRangesInputChange,
   error,
+  onClear,
 }: PdfMergeSplitInputPanelProps) {
   const t = useTranslations("tools.pdf-merge-split");
   const mergeInputRef = useRef<HTMLInputElement>(null);
   const splitInputRef = useRef<HTMLInputElement>(null);
+  const hasState = mode === "merge" ? mergeFiles.length > 0 : splitFile !== null;
 
   return (
-    <SectionCard title={t("form.inputTitle")}>
+    <SectionCard
+      title={t("form.inputTitle")}
+      action={
+        hasState ? (
+          <button
+            type="button"
+            onClick={onClear}
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            <RotateCcw size={14} />
+            {t("form.clear")}
+          </button>
+        ) : undefined
+      }
+    >
       <div className="mb-4 flex gap-3">
         {(["merge", "split"] as const).map((value) => (
           <label

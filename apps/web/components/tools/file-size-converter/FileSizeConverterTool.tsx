@@ -12,6 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FileSizeInputPanel from "./FileSizeInputPanel";
 import FileSizeResult from "./FileSizeResult";
 import TransferTimeReference from "./TransferTimeReference";
+import type { FileSizeScenario } from "./types";
 
 const tool = new FileSizeConverter();
 
@@ -22,6 +23,18 @@ export default function FileSizeConverterTool({ education }: { education: ReactN
   const [value, setValue] = useState("");
   const [unit, setUnit] = useState<FileSizeUnit>("MB");
   const [standard, setStandard] = useState<FileSizeStandard>("decimal");
+
+  function handleScenarioPreset(scenario: FileSizeScenario) {
+    setValue(scenario.value);
+    setUnit(scenario.unit);
+    setStandard(scenario.standard);
+  }
+
+  function handleClear() {
+    setValue("");
+    setUnit("MB");
+    setStandard("decimal");
+  }
 
   const digitStyle: DigitStyle = resolveDigitStyle(value);
 
@@ -57,6 +70,8 @@ export default function FileSizeConverterTool({ education }: { education: ReactN
               onUnitChange={setUnit}
               standard={standard}
               onStandardChange={setStandard}
+              onScenarioPreset={handleScenarioPreset}
+              onClear={handleClear}
             />
           }
           result={<FileSizeResult data={data} errorMessage={errorMessage} digitStyle={digitStyle} />}
