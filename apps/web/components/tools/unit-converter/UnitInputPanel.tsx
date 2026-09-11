@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { ArrowLeftRight } from "lucide-react";
+import { ArrowLeftRight, RotateCcw } from "lucide-react";
 import type { UnitCategory } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -18,6 +18,7 @@ type UnitInputPanelProps = {
   onFromChange: (unit: string) => void;
   to: string;
   onSwap: () => void;
+  onClear: () => void;
 };
 
 export default function UnitInputPanel({
@@ -29,6 +30,7 @@ export default function UnitInputPanel({
   onFromChange,
   to,
   onSwap,
+  onClear,
 }: UnitInputPanelProps) {
   const t = useTranslations("tools.unit-converter");
 
@@ -86,6 +88,15 @@ export default function UnitInputPanel({
         <p dir="ltr" className="text-center text-sm text-zinc-500 dark:text-zinc-400">
           {t("form.toHint", { unit: t(`units.${to}`) })}
         </p>
+
+        <button
+          type="button"
+          onClick={onClear}
+          className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        >
+          <RotateCcw size={16} />
+          {t("form.clear")}
+        </button>
       </div>
     </SectionCard>
   );

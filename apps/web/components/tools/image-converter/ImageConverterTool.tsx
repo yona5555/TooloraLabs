@@ -117,6 +117,19 @@ export default function ImageConverterTool({ education }: { education: ReactNode
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewUrl, format, quality, resizeEnabled, maxWidth]);
 
+  function handleClear() {
+    setFile(null);
+    setPreviewUrl("");
+    setFormat("image/webp");
+    setQuality(0.85);
+    setResizeEnabled(false);
+    setMaxWidth("1920");
+    setError("");
+    setResultUrl("");
+    setResultSize(0);
+    setOutputDimensions(null);
+  }
+
   function download() {
     if (!resultUrl) return;
     const link = document.createElement("a");
@@ -150,6 +163,7 @@ export default function ImageConverterTool({ education }: { education: ReactNode
               maxWidth={maxWidth}
               onMaxWidthChange={setMaxWidth}
               error={error}
+              onClear={handleClear}
             />
           }
           result={

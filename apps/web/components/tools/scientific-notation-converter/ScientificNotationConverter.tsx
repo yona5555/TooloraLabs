@@ -46,6 +46,14 @@ export default function ScientificNotationConverter({ education }: { education: 
     setExponentB(DEFAULTS[next].exponentB);
   }
 
+  function handleClear() {
+    setStandardValue(DEFAULTS[operation].standardValue);
+    setCoefficientA(DEFAULTS[operation].coefficientA);
+    setExponentA(DEFAULTS[operation].exponentA);
+    setCoefficientB(DEFAULTS[operation].coefficientB);
+    setExponentB(DEFAULTS[operation].exponentB);
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(standardValue, coefficientA, exponentA, coefficientB, exponentB);
 
   const { result, computed } = useMemo(() => {
@@ -88,6 +96,7 @@ export default function ScientificNotationConverter({ education }: { education: 
               onCoefficientBChange={setCoefficientB}
               exponentB={exponentB}
               onExponentBChange={setExponentB}
+              onClear={handleClear}
             />
           }
           result={<ScientificNotationResult result={result} computed={computed} />}

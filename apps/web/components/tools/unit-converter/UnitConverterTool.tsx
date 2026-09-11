@@ -34,6 +34,13 @@ export default function UnitConverterTool({ education }: { education: ReactNode 
     setTo(from);
   }
 
+  function handleClear() {
+    setCategory("length");
+    setFrom(DEFAULT_UNIT.length[0]);
+    setTo(DEFAULT_UNIT.length[1]);
+    setValue("10");
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(value);
 
   const { result, allConversions } = useMemo(() => {
@@ -63,6 +70,7 @@ export default function UnitConverterTool({ education }: { education: ReactNode 
               onFromChange={setFrom}
               to={to}
               onSwap={swap}
+              onClear={handleClear}
             />
           }
           result={

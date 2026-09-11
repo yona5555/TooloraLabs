@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { MultiplicationTableMode } from "./types";
@@ -15,6 +16,7 @@ type Props = {
   onRangeStartChange: (value: string) => void;
   rangeEnd: string;
   onRangeEndChange: (value: string) => void;
+  onClear: () => void;
 };
 
 export default function MTInputPanel({
@@ -28,6 +30,7 @@ export default function MTInputPanel({
   onRangeStartChange,
   rangeEnd,
   onRangeEndChange,
+  onClear,
 }: Props) {
   const t = useTranslations("tools.multiplication-table-generator.form");
 
@@ -93,6 +96,15 @@ export default function MTInputPanel({
           />
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

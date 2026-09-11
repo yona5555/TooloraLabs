@@ -24,6 +24,14 @@ export default function MultiplicationTableGenerator({ education }: { education:
   const [rangeStart, setRangeStart] = useState("1");
   const [rangeEnd, setRangeEnd] = useState("10");
 
+  function handleClear() {
+    setMode("single");
+    setNumber("7");
+    setMaxMultiplier("12");
+    setRangeStart("1");
+    setRangeEnd("10");
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(number, maxMultiplier, rangeStart, rangeEnd);
 
   const result = useMemo(() => {
@@ -62,6 +70,7 @@ export default function MultiplicationTableGenerator({ education }: { education:
               onRangeStartChange={setRangeStart}
               rangeEnd={rangeEnd}
               onRangeEndChange={setRangeEnd}
+              onClear={handleClear}
             />
           }
           result={<MTResult result={result} digitStyle={digitStyle} />}

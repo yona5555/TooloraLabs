@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Dices } from "lucide-react";
+import { Dices, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import { SORT_ORDERS } from "./types";
@@ -18,6 +18,7 @@ type Props = {
   sortOrder: SortOrder;
   onSortOrderChange: (value: SortOrder) => void;
   onGenerate: () => void;
+  onClear: () => void;
 };
 
 export default function RandomNumberInputPanel({
@@ -32,6 +33,7 @@ export default function RandomNumberInputPanel({
   sortOrder,
   onSortOrderChange,
   onGenerate,
+  onClear,
 }: Props) {
   const t = useTranslations("tools.random-number-generator.form");
 
@@ -93,14 +95,24 @@ export default function RandomNumberInputPanel({
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={onGenerate}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-        >
-          <Dices size={18} />
-          {t("generate")}
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onGenerate}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            <Dices size={18} />
+            {t("generate")}
+          </button>
+          <button
+            type="button"
+            onClick={onClear}
+            className="flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-3 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            <RotateCcw size={16} />
+            {t("clear")}
+          </button>
+        </div>
       </div>
     </SectionCard>
   );

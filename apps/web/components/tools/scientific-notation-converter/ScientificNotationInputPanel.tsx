@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { ScientificNotationOperation } from "./types";
@@ -19,6 +20,7 @@ type ScientificNotationInputPanelProps = {
   onCoefficientBChange: (value: string) => void;
   exponentB: string;
   onExponentBChange: (value: string) => void;
+  onClear: () => void;
 };
 
 export default function ScientificNotationInputPanel({
@@ -34,6 +36,7 @@ export default function ScientificNotationInputPanel({
   onCoefficientBChange,
   exponentB,
   onExponentBChange,
+  onClear,
 }: ScientificNotationInputPanelProps) {
   const t = useTranslations("tools.scientific-notation-converter.form");
 
@@ -121,6 +124,15 @@ export default function ScientificNotationInputPanel({
           </div>
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={onClear}
+        className="mt-5 flex items-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <RotateCcw size={16} />
+        {t("clear")}
+      </button>
     </SectionCard>
   );
 }

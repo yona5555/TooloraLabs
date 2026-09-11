@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Upload } from "lucide-react";
+import { RotateCcw, Upload } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { formatBytes } from "./formatBytes";
 
@@ -20,6 +20,7 @@ type ImageInputPanelProps = {
   maxWidth: string;
   onMaxWidthChange: (value: string) => void;
   error: string;
+  onClear: () => void;
 };
 
 export default function ImageInputPanel({
@@ -35,6 +36,7 @@ export default function ImageInputPanel({
   maxWidth,
   onMaxWidthChange,
   error,
+  onClear,
 }: ImageInputPanelProps) {
   const t = useTranslations("tools.image-converter");
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -46,7 +48,21 @@ export default function ImageInputPanel({
   }
 
   return (
-    <SectionCard title={t("form.inputTitle")}>
+    <SectionCard
+      title={t("form.inputTitle")}
+      action={
+        file ? (
+          <button
+            type="button"
+            onClick={onClear}
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            <RotateCcw size={14} />
+            {t("form.clear")}
+          </button>
+        ) : undefined
+      }
+    >
       <input
         ref={fileInputRef}
         type="file"

@@ -21,6 +21,12 @@ export default function RomanNumeralConverter({ education }: { education: ReactN
   const [arabicValue, setArabicValue] = useState("1994");
   const [romanValue, setRomanValue] = useState("MCMXCIV");
 
+  function handleClear() {
+    setDirection("toRoman");
+    setArabicValue("1994");
+    setRomanValue("MCMXCIV");
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(arabicValue);
 
   const result = useMemo(() => {
@@ -53,6 +59,7 @@ export default function RomanNumeralConverter({ education }: { education: ReactN
               onArabicValueChange={setArabicValue}
               romanValue={romanValue}
               onRomanValueChange={setRomanValue}
+              onClear={handleClear}
             />
           }
           result={<RomanResult result={result} direction={direction} digitStyle={digitStyle} />}
