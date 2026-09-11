@@ -289,7 +289,7 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
         }
         result={
           <div className="flex flex-col gap-4">
-            <AgeResult result={result} digitStyle={digitStyle} />
+            <AgeResult result={result} birthDateDisplay={calcBirthISO} digitStyle={digitStyle} />
             <AgeLifeExpectancyCard decimalAge={result.decimalAge} gender={gender} digitStyle={digitStyle} />
             <AgeMiniDateDiff />
           </div>

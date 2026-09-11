@@ -1,11 +1,12 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import AgeYearProgressRing from "./AgeYearProgressRing";
+import AgeShareExportModal from "./AgeShareExportModal";
 import type { AgeExtendedResult } from "./types";
 
 type AgeResultProps = {
   result: AgeExtendedResult;
+  birthDateDisplay: string;
   digitStyle: DigitStyle;
 };
 
@@ -24,7 +25,7 @@ function StatTile({ label, value, title }: { label: string; value: string; title
   );
 }
 
-export default function AgeResult({ result, digitStyle }: AgeResultProps) {
+export default function AgeResult({ result, birthDateDisplay, digitStyle }: AgeResultProps) {
   const t = useTranslations("tools.age-calculator");
 
   const fmt = (n: number, opts = INT) => formatLocalizedNumber(n, digitStyle, opts);
@@ -40,13 +41,18 @@ export default function AgeResult({ result, digitStyle }: AgeResultProps) {
     days: fmt(result.days),
   });
 
-  const summaryText = `${t("title")}: ${ageText}`;
+  const inputRows = [{ label: t("aboveFold.inputTitle"), value: birthDateDisplay }];
+  const resultRows = [
+    { label: t("aboveFold.totalDaysLabel"), value: fmt(result.totalDays) },
+    { label: t("aboveFold.generationLabel"), value: generationNames[result.generation] },
+    { label: t("aboveFold.zodiacLabel"), value: zodiacNames[result.zodiac] },
+  ];
 
   return (
     <div className="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex items-center justify-between bg-blue-600 px-6 py-3">
         <h2 className="font-bold text-white">{t("aboveFold.resultTitle")}</h2>
-        <CopyButton text={summaryText} />
+        <AgeShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("aboveFold.resultTitle")} heroValue={ageText} sentence={ageText} />
       </div>
 
       <div className="p-6">
