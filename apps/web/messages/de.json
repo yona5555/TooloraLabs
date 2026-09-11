@@ -1295,7 +1295,8 @@
         "hamwiLabel": "Hamwi (1964)",
         "placeholder": "Geben Sie Ihr Geschlecht und Ihre Körpergröße ein, um Ihr geschätztes Idealgewicht zu sehen.",
         "disclaimer": "Dieses Tool liefert nur eine allgemeine, lehrreiche Schätzung, keine medizinische Beratung. Diese Formeln wurden ursprünglich für klinische Zwecke wie die Medikamentendosierung entwickelt, nicht als persönliche Abnehm- oder Zunahmeziele. Wenden Sie sich für eine auf Ihren Körper und Ihre Gesundheitsziele zugeschnittene Beratung an einen Arzt, Ernährungsberater oder eine andere qualifizierte Fachperson.",
-        "spreadLabel": "Streuung zwischen den Formeln"
+        "spreadLabel": "Streuung zwischen den Formeln",
+        "sentence": "Das durchschnittlich geschätzte Idealgewicht für diese Größe beträgt {value}."
       },
       "nav": {
         "tool": "Rechner",
@@ -1315,7 +1316,18 @@
         "intro": {
           "title": "So funktioniert dieser Rechner",
           "paragraph1": "Dieses Tool wendet vier klassische Formeln für das ideale Körpergewicht an — Devine, Robinson, Miller und Hamwi —, jede eine einfache lineare Gleichung basierend auf der Körpergröße in Zoll über fünf Fuß, mit unterschiedlichen Basisgewichten und Zuwächsen für Männer und Frauen. Alle vier wurden ursprünglich im klinischen Umfeld entwickelt, vor allem um eine Gewichtszahl für die Berechnung von Medikamentendosen zu schätzen, nicht als allgemeine Wellness-Ziele.",
-          "paragraph2": "Da die vier Formeln unabhängig voneinander, aus unterschiedlichen Referenzpopulationen und Jahrzehnten, abgeleitet wurden, liefern sie für dieselbe Körpergröße keine identischen Zahlen — dieses Tool zeigt alle vier einzeln sowie deren Durchschnitt an, anstatt eine als definitiv richtig auszuwählen. Dies unterscheidet sich von einem BMI-basierten gesunden Gewichtsbereich, der stattdessen eine Gewichtsspanne angibt, die einem BMI von 18,5-24,9 für eine bestimmte Körpergröße entspricht."
+          "paragraph2": "Da die vier Formeln unabhängig voneinander, aus unterschiedlichen Referenzpopulationen und Jahrzehnten, abgeleitet wurden, liefern sie für dieselbe Körpergröße keine identischen Zahlen — dieses Tool zeigt alle vier einzeln sowie deren Durchschnitt an, anstatt eine als definitiv richtig auszuwählen. Dies unterscheidet sich von einem BMI-basierten gesunden Gewichtsbereich, der stattdessen eine Gewichtsspanne angibt, die einem BMI von 18,5-24,9 für eine bestimmte Körpergröße entspricht.",
+          "rangeGauge": {
+            "title": "Wo liegt dieses Idealgewicht?",
+            "intro": "Das geschätzte Idealgewicht steigt naturgemäß mit der Körpergröße, von einem zierlichen bis zu einem größeren Körperbau. Wähle unten ein reales Größenbeispiel, um die durchschnittliche Schätzung dafür zu sehen.",
+            "verdict": "{example} — Geschätzter Körperbau: {classification}.",
+            "fact": "Der Durchschnittswert für dieses Beispiel liegt bei {weight}.",
+            "frames": {
+              "petite": "Zierlicher Körperbau",
+              "average": "Durchschnittlicher Körperbau",
+              "larger": "Größerer Körperbau"
+            }
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -1432,6 +1444,24 @@
         "averageFemale": "Durchschnittliche Frau",
         "averageMale": "Durchschnittlicher Mann",
         "tallMale": "Größerer Mann"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "mortgage-calculator": {
@@ -19418,7 +19448,8 @@
         "protein": "Protein",
         "carbs": "Kohlenhydrate",
         "fat": "Fett",
-        "invalidCalories": "Gib eine Gesamtkalorienzahl zwischen 1 und 20.000 ein, um ein Ergebnis zu sehen."
+        "invalidCalories": "Gib eine Gesamtkalorienzahl zwischen 1 und 20.000 ein, um ein Ergebnis zu sehen.",
+        "sentence": "Dein Tagesziel sind {protein} Eiweiß, {carbs} Kohlenhydrate und {fat} Fett."
       },
       "disclaimer": "Dieses Tool bietet nur allgemeine, informative Schätzungen und ersetzt keine persönliche Beratung durch eine zugelassene Ernährungsfachkraft oder eine andere qualifizierte medizinische Fachkraft — besonders bei einer Erkrankung, während einer Schwangerschaft oder beim Training für ein spezifisches sportliches Ziel.",
       "quickReference": {
@@ -19429,7 +19460,25 @@
         "intro": {
           "title": "Makronährstoffverteilungen verstehen",
           "paragraph1": "\"Makros\" ist die Kurzform für Makronährstoffe — die drei Nährstoffkategorien, die den Körper mit Kalorien versorgen: Protein, Kohlenhydrate und Fett (Alkohol wird manchmal als vierte Kategorie gezählt, ist aber nicht Teil eines typischen Ernährungsplans). Jedes Gramm Protein und Kohlenhydrat liefert etwa 4 Kilokalorien, während jedes Gramm Fett etwa 9 liefert — Werte, die als Atwater-Faktoren bekannt sind, im späten 19. und frühen 20. Jahrhundert festgelegt und noch heute die Grundlage der Nährwertkennzeichnung.",
-          "paragraph2": "Dieser Rechner verteilt deine gesamten Tageskalorien auf die drei Makronährstoffe als Prozentsätze, die innerhalb der Acceptable Macronutrient Distribution Range (AMDR) der Dietary Reference Intakes gewählt werden — der Aufnahmebereich für jeden Makronährstoff, der mit einem verringerten Risiko für chronische Krankheiten verbunden ist, während dennoch ausreichende essenzielle Nährstoffe bereitgestellt werden, wie von den U.S. National Academies of Sciences festgelegt (Protein 10-35%, Kohlenhydrate 45-65%, Fett 20-35% der Gesamtkalorien). Die genaue Aufteilung verschiebt sich innerhalb dieses Bereichs je nach gewähltem Ziel, mit mehr Protein für Fettabbau oder Muskelaufbau und mehr Kohlenhydraten für einen allgemeinen Gewichtszunahme-Überschuss."
+          "paragraph2": "Dieser Rechner verteilt deine gesamten Tageskalorien auf die drei Makronährstoffe als Prozentsätze, die innerhalb der Acceptable Macronutrient Distribution Range (AMDR) der Dietary Reference Intakes gewählt werden — der Aufnahmebereich für jeden Makronährstoff, der mit einem verringerten Risiko für chronische Krankheiten verbunden ist, während dennoch ausreichende essenzielle Nährstoffe bereitgestellt werden, wie von den U.S. National Academies of Sciences festgelegt (Protein 10-35%, Kohlenhydrate 45-65%, Fett 20-35% der Gesamtkalorien). Die genaue Aufteilung verschiebt sich innerhalb dieses Bereichs je nach gewähltem Ziel, mit mehr Protein für Fettabbau oder Muskelaufbau und mehr Kohlenhydraten für einen allgemeinen Gewichtszunahme-Überschuss.",
+          "carbGauge": {
+            "title": "Wo liegt dieser Kohlenhydratanteil?",
+            "intro": "Der Anteil der Tageskalorien aus Kohlenhydraten variiert je nach Ernährungsstil stark, von strikten ketogenen Plänen bis zur kohlenhydratreichen Ausdauerernährung. Wähle unten ein reales Ernährungsbeispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Kohlenhydratanteil: {classification}.",
+            "fact": "Kohlenhydrate machen in diesem Beispiel etwa {percent} der Tageskalorien aus.",
+            "examples": {
+              "ketogenicDiet": "Ketogene Diät",
+              "lowCarbDiet": "Low-Carb-Diät",
+              "balancedDiet": "Ausgewogene Ernährung",
+              "enduranceAthleteDiet": "Ernährung für Ausdauersportler"
+            },
+            "classifications": {
+              "veryLow": "Sehr niedrig",
+              "low": "Niedrig",
+              "moderate": "Moderat",
+              "high": "Hoch"
+            }
+          }
         },
         "goals": {
           "title": "Wie jedes Ziel die Aufteilung verändert",
@@ -19564,6 +19613,24 @@
         "maintenanceDiet": "Erhaltung",
         "leanBulk": "Lean Bulk",
         "strengthTraining": "Krafttraining"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "bmr-calculator": {

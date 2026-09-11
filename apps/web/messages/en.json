@@ -1295,7 +1295,8 @@
         "hamwiLabel": "Hamwi (1964)",
         "placeholder": "Enter your gender and height to see your estimated ideal body weight.",
         "disclaimer": "This tool provides a general educational estimate only, not medical advice. These formulas were originally developed for clinical uses such as medication dosing, not as personal weight-loss or weight-gain targets. Consult a doctor, dietitian, or other qualified health professional for guidance specific to your body and health goals.",
-        "spreadLabel": "Spread Across Formulas"
+        "spreadLabel": "Spread Across Formulas",
+        "sentence": "The average estimated ideal weight for this height is {value}."
       },
       "nav": {
         "tool": "Calculator",
@@ -1315,7 +1316,18 @@
         "intro": {
           "title": "How This Calculator Works",
           "paragraph1": "This tool applies four classic ideal-body-weight formulas — Devine, Robinson, Miller, and Hamwi — each a simple linear equation based on height in inches over five feet, with different base weights and increments for men and women. All four were originally developed in clinical settings, most notably to estimate a weight figure for calculating medication doses, rather than as general wellness targets.",
-          "paragraph2": "Because the four formulas were derived independently, from different reference populations and decades, they don't produce identical numbers for the same height — this tool shows all four individually plus their average, rather than picking one as definitively correct. This is a different approach from a BMI-based healthy-weight range, which instead expresses a band of weights corresponding to a BMI of 18.5-24.9 for a given height."
+          "paragraph2": "Because the four formulas were derived independently, from different reference populations and decades, they don't produce identical numbers for the same height — this tool shows all four individually plus their average, rather than picking one as definitively correct. This is a different approach from a BMI-based healthy-weight range, which instead expresses a band of weights corresponding to a BMI of 18.5-24.9 for a given height.",
+          "rangeGauge": {
+            "title": "Where Does This Ideal Weight Fall?",
+            "intro": "Estimated ideal weight naturally rises with height, from a petite frame to a larger one. Pick a real-world height example below to see the average estimate for it.",
+            "verdict": "{example} — Estimated frame: {classification}.",
+            "fact": "The average estimate for this example is {weight}.",
+            "frames": {
+              "petite": "Petite Frame",
+              "average": "Average Frame",
+              "larger": "Larger Frame"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -1432,6 +1444,24 @@
         "averageFemale": "Average Female",
         "averageMale": "Average Male",
         "tallMale": "Taller Male"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "mortgage-calculator": {
@@ -19418,7 +19448,8 @@
         "protein": "Protein",
         "carbs": "Carbohydrate",
         "fat": "Fat",
-        "invalidCalories": "Enter a total daily calorie amount between 1 and 20,000 to see a result."
+        "invalidCalories": "Enter a total daily calorie amount between 1 and 20,000 to see a result.",
+        "sentence": "Your daily target is {protein} of protein, {carbs} of carbs, and {fat} of fat."
       },
       "disclaimer": "This tool provides general, educational estimates only and is not a substitute for personalized advice from a registered dietitian or other qualified healthcare provider — especially if you have a medical condition, are pregnant, or are training for a specific athletic goal.",
       "quickReference": {
@@ -19429,7 +19460,25 @@
         "intro": {
           "title": "Understanding Macronutrient Splits",
           "paragraph1": "\"Macros\" is short for macronutrients — the three categories of nutrients that supply the body with calories: protein, carbohydrate, and fat (alcohol is sometimes counted as a fourth, but it isn't part of a typical dietary plan). Each gram of protein and carbohydrate supplies about 4 kilocalories, while each gram of fat supplies about 9 — figures known as the Atwater general factors, established in the late 19th and early 20th centuries and still the basis of nutrition labeling today.",
-          "paragraph2": "This calculator distributes your total daily calories across the three macronutrients as percentages chosen from within the Dietary Reference Intakes' Acceptable Macronutrient Distribution Range (AMDR) — the range of intake for each macronutrient associated with reduced risk of chronic disease while still providing adequate essential nutrients, as established by the U.S. National Academies of Sciences (protein 10-35%, carbohydrate 45-65%, fat 20-35% of total calories). The exact split shifts within that range depending on your selected goal, favoring more protein for fat loss or muscle building and more carbohydrate for a general weight-gain surplus."
+          "paragraph2": "This calculator distributes your total daily calories across the three macronutrients as percentages chosen from within the Dietary Reference Intakes' Acceptable Macronutrient Distribution Range (AMDR) — the range of intake for each macronutrient associated with reduced risk of chronic disease while still providing adequate essential nutrients, as established by the U.S. National Academies of Sciences (protein 10-35%, carbohydrate 45-65%, fat 20-35% of total calories). The exact split shifts within that range depending on your selected goal, favoring more protein for fat loss or muscle building and more carbohydrate for a general weight-gain surplus.",
+          "carbGauge": {
+            "title": "Where Does This Carb Percentage Fall?",
+            "intro": "The share of daily calories from carbohydrates varies widely by diet style, from strict ketogenic plans to high-carb endurance fueling. Pick a real-world diet example below to see where it falls.",
+            "verdict": "{example} — Carb share: {classification}.",
+            "fact": "Carbohydrates make up about {percent} of daily calories in this example.",
+            "examples": {
+              "ketogenicDiet": "Ketogenic Diet",
+              "lowCarbDiet": "Low-Carb Diet",
+              "balancedDiet": "Balanced Diet",
+              "enduranceAthleteDiet": "Endurance Athlete Diet"
+            },
+            "classifications": {
+              "veryLow": "Very Low",
+              "low": "Low",
+              "moderate": "Moderate",
+              "high": "High"
+            }
+          }
         },
         "goals": {
           "title": "How Each Goal Changes the Split",
@@ -19564,6 +19613,24 @@
         "maintenanceDiet": "Maintenance",
         "leanBulk": "Lean Bulk",
         "strengthTraining": "Strength Training"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "bmr-calculator": {

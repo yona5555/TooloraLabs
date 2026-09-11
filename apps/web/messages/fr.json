@@ -1295,7 +1295,8 @@
         "hamwiLabel": "Hamwi (1964)",
         "placeholder": "Saisissez votre sexe et votre taille pour voir votre poids corporel idéal estimé.",
         "disclaimer": "Cet outil fournit uniquement une estimation éducative générale, et non un avis médical. Ces formules ont été initialement conçues pour des usages cliniques comme le dosage de médicaments, et non comme des objectifs personnels de perte ou de prise de poids. Consultez un médecin, un diététicien ou un autre professionnel de santé qualifié pour des conseils adaptés à votre corps et à vos objectifs de santé.",
-        "spreadLabel": "Écart entre les formules"
+        "spreadLabel": "Écart entre les formules",
+        "sentence": "Le poids idéal moyen estimé pour cette taille est de {value}."
       },
       "nav": {
         "tool": "Calculateur",
@@ -1315,7 +1316,18 @@
         "intro": {
           "title": "Comment fonctionne ce calculateur",
           "paragraph1": "Cet outil applique quatre formules classiques de poids corporel idéal — Devine, Robinson, Miller et Hamwi — chacune une simple équation linéaire basée sur la taille en pouces au-delà de cinq pieds, avec des poids de base et des incréments différents pour les hommes et les femmes. Les quatre ont été développées à l'origine en contexte clinique, notamment pour estimer un poids servant au calcul de doses médicamenteuses, plutôt que comme des objectifs de bien-être général.",
-          "paragraph2": "Comme les quatre formules ont été établies indépendamment, à partir de populations de référence et de décennies différentes, elles ne produisent pas des chiffres identiques pour une même taille — cet outil affiche les quatre individuellement ainsi que leur moyenne, plutôt que d'en choisir une seule comme définitivement correcte. C'est une approche différente d'une fourchette de poids santé basée sur l'IMC, qui exprime plutôt une plage de poids correspondant à un IMC de 18,5 à 24,9 pour une taille donnée."
+          "paragraph2": "Comme les quatre formules ont été établies indépendamment, à partir de populations de référence et de décennies différentes, elles ne produisent pas des chiffres identiques pour une même taille — cet outil affiche les quatre individuellement ainsi que leur moyenne, plutôt que d'en choisir une seule comme définitivement correcte. C'est une approche différente d'une fourchette de poids santé basée sur l'IMC, qui exprime plutôt une plage de poids correspondant à un IMC de 18,5 à 24,9 pour une taille donnée.",
+          "rangeGauge": {
+            "title": "Où se situe ce poids idéal ?",
+            "intro": "Le poids idéal estimé augmente naturellement avec la taille, d'une carrure menue à une carrure plus large. Choisissez un exemple réel de taille ci-dessous pour voir l'estimation moyenne correspondante.",
+            "verdict": "{example} — Carrure estimée : {classification}.",
+            "fact": "L'estimation moyenne pour cet exemple est de {weight}.",
+            "frames": {
+              "petite": "Carrure menue",
+              "average": "Carrure moyenne",
+              "larger": "Carrure plus large"
+            }
+          }
         },
         "examples": {
           "title": "Exemples chiffrés",
@@ -1432,6 +1444,24 @@
         "averageFemale": "Femme moyenne",
         "averageMale": "Homme moyen",
         "tallMale": "Homme plus grand"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "mortgage-calculator": {
@@ -19418,7 +19448,8 @@
         "protein": "Protéines",
         "carbs": "Glucides",
         "fat": "Lipides",
-        "invalidCalories": "Saisissez un total de calories quotidiennes entre 1 et 20 000 pour voir un résultat."
+        "invalidCalories": "Saisissez un total de calories quotidiennes entre 1 et 20 000 pour voir un résultat.",
+        "sentence": "Votre objectif quotidien est de {protein} de protéines, {carbs} de glucides et {fat} de lipides."
       },
       "disclaimer": "Cet outil fournit uniquement des estimations générales et éducatives et ne remplace pas les conseils personnalisés d'un(e) diététicien(ne) nutritionniste agréé(e) ou d'un autre professionnel de santé qualifié — surtout en cas de condition médicale, de grossesse, ou d'entraînement pour un objectif sportif spécifique.",
       "quickReference": {
@@ -19429,7 +19460,25 @@
         "intro": {
           "title": "Comprendre les répartitions de macronutriments",
           "paragraph1": "\"Macros\" est l'abréviation de macronutriments — les trois catégories de nutriments qui fournissent des calories à l'organisme : protéines, glucides et lipides (l'alcool est parfois compté comme une quatrième catégorie, mais il ne fait pas partie d'un plan alimentaire typique). Chaque gramme de protéines et de glucides fournit environ 4 kilocalories, tandis que chaque gramme de lipides en fournit environ 9 — des chiffres connus sous le nom de facteurs généraux d'Atwater, établis à la fin du XIXe et au début du XXe siècle et qui restent la base de l'étiquetage nutritionnel aujourd'hui.",
-          "paragraph2": "Cette calculatrice répartit vos calories quotidiennes totales entre les trois macronutriments sous forme de pourcentages choisis dans la fourchette de distribution acceptable des macronutriments (AMDR) des apports nutritionnels de référence — la plage d'apport pour chaque macronutriment associée à un risque réduit de maladie chronique tout en fournissant des nutriments essentiels adéquats, telle qu'établie par les Académies nationales des sciences des États-Unis (protéines 10-35 %, glucides 45-65 %, lipides 20-35 % des calories totales). La répartition exacte varie dans cette fourchette selon l'objectif sélectionné, favorisant plus de protéines pour la perte de graisse ou la prise de muscle et plus de glucides pour un surplus général de prise de poids."
+          "paragraph2": "Cette calculatrice répartit vos calories quotidiennes totales entre les trois macronutriments sous forme de pourcentages choisis dans la fourchette de distribution acceptable des macronutriments (AMDR) des apports nutritionnels de référence — la plage d'apport pour chaque macronutriment associée à un risque réduit de maladie chronique tout en fournissant des nutriments essentiels adéquats, telle qu'établie par les Académies nationales des sciences des États-Unis (protéines 10-35 %, glucides 45-65 %, lipides 20-35 % des calories totales). La répartition exacte varie dans cette fourchette selon l'objectif sélectionné, favorisant plus de protéines pour la perte de graisse ou la prise de muscle et plus de glucides pour un surplus général de prise de poids.",
+          "carbGauge": {
+            "title": "Où se situe ce pourcentage de glucides ?",
+            "intro": "La part des calories quotidiennes provenant des glucides varie beaucoup selon le style alimentaire, des régimes cétogènes stricts à l'alimentation riche en glucides pour l'endurance. Choisissez un exemple réel de régime ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Part de glucides : {classification}.",
+            "fact": "Les glucides représentent environ {percent} des calories quotidiennes dans cet exemple.",
+            "examples": {
+              "ketogenicDiet": "Régime cétogène",
+              "lowCarbDiet": "Régime pauvre en glucides",
+              "balancedDiet": "Régime équilibré",
+              "enduranceAthleteDiet": "Régime d'athlète d'endurance"
+            },
+            "classifications": {
+              "veryLow": "Très faible",
+              "low": "Faible",
+              "moderate": "Modérée",
+              "high": "Élevée"
+            }
+          }
         },
         "goals": {
           "title": "Comment chaque objectif modifie la répartition",
@@ -19564,6 +19613,24 @@
         "maintenanceDiet": "Maintien",
         "leanBulk": "Prise de masse propre",
         "strengthTraining": "Musculation"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "bmr-calculator": {

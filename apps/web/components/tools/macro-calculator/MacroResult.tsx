@@ -1,16 +1,20 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { MacroResult as Result } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
+import type { MacroGoal, MacroResult as Result } from "./types";
 import MacroPieChart from "./MacroPieChart";
+import MacroShareExportModal from "./MacroShareExportModal";
 
 type Props = {
   result: Result;
   digitStyle: DigitStyle;
+  totalCalories: string;
+  goal: MacroGoal;
 };
 
-export default function MacroResult({ result, digitStyle }: Props) {
+export default function MacroResult({ result, digitStyle, totalCalories, goal }: Props) {
   const t = useTranslations("tools.macro-calculator.result");
+  const tForm = useTranslations("tools.macro-calculator.form");
+  const tGoals = useTranslations("tools.macro-calculator.goals.labels");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
 
   if (result.error) {
@@ -32,14 +36,18 @@ export default function MacroResult({ result, digitStyle }: Props) {
     { key: "fat", color: "border-amber-400 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-500/10" },
   ];
 
+  const inputRows = [
+    { label: tForm("totalCalories"), value: `${totalCalories} kcal` },
+    { label: tForm("goalLabel"), value: tGoals(goal) },
+  ];
+  const resultRows = rows.map((r) => ({ label: t(r.key), value: `${fmt(result[r.key].grams)} g (${fmt(result[r.key].calories)} kcal)` }));
+  const sentence = t("sentence", { protein: `${fmt(result.protein.grams)} g`, carbs: `${fmt(result.carbs.grams)} g`, fat: `${fmt(result.fat.grams)} g` });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton
-          text={rows.map((r) => `${t(r.key)}: ${fmt(result[r.key].grams)}g (${fmt(result[r.key].calories)} kcal)`).join(", ")}
-          className="!text-white dark:!text-white"
-        />
+        <MacroShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={`${totalCalories} kcal`} sentence={sentence} />
       </div>
       <div className="p-4 lg:p-6">
         <MacroPieChart protein={result.protein} carbs={result.carbs} fat={result.fat} />

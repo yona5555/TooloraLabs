@@ -1295,7 +1295,8 @@
         "hamwiLabel": "Hamwi (1964)",
         "placeholder": "Introduce tu sexo y estatura para ver tu peso corporal ideal estimado.",
         "disclaimer": "Esta herramienta ofrece solo una estimación educativa general, no asesoramiento médico. Estas fórmulas se desarrollaron originalmente para usos clínicos como la dosificación de medicamentos, no como objetivos personales de pérdida o aumento de peso. Consulta a un médico, nutricionista u otro profesional de salud calificado para obtener orientación específica para tu cuerpo y tus objetivos de salud.",
-        "spreadLabel": "Dispersión entre fórmulas"
+        "spreadLabel": "Dispersión entre fórmulas",
+        "sentence": "El peso ideal promedio estimado para esta estatura es de {value}."
       },
       "nav": {
         "tool": "Calculadora",
@@ -1315,7 +1316,18 @@
         "intro": {
           "title": "Cómo funciona esta calculadora",
           "paragraph1": "Esta herramienta aplica cuatro fórmulas clásicas de peso corporal ideal —Devine, Robinson, Miller y Hamwi—, cada una una simple ecuación lineal basada en la estatura en pulgadas por encima de cinco pies, con pesos base e incrementos distintos para hombres y mujeres. Las cuatro se desarrollaron originalmente en entornos clínicos, sobre todo para estimar una cifra de peso con la que calcular dosis de medicamentos, y no como objetivos generales de bienestar.",
-          "paragraph2": "Como las cuatro fórmulas se derivaron de forma independiente, a partir de poblaciones de referencia y décadas distintas, no producen cifras idénticas para una misma estatura; esta herramienta muestra las cuatro individualmente además de su promedio, en lugar de elegir una como definitivamente correcta. Este enfoque difiere de un rango de peso saludable basado en el IMC, que en cambio expresa una banda de pesos correspondiente a un IMC de 18,5 a 24,9 para una estatura dada."
+          "paragraph2": "Como las cuatro fórmulas se derivaron de forma independiente, a partir de poblaciones de referencia y décadas distintas, no producen cifras idénticas para una misma estatura; esta herramienta muestra las cuatro individualmente además de su promedio, en lugar de elegir una como definitivamente correcta. Este enfoque difiere de un rango de peso saludable basado en el IMC, que en cambio expresa una banda de pesos correspondiente a un IMC de 18,5 a 24,9 para una estatura dada.",
+          "rangeGauge": {
+            "title": "¿Dónde se ubica este peso ideal?",
+            "intro": "El peso ideal estimado aumenta naturalmente con la estatura, desde una complexión menuda hasta una más grande. Elige un ejemplo real de estatura a continuación para ver la estimación promedio.",
+            "verdict": "{example} — Complexión estimada: {classification}.",
+            "fact": "La estimación promedio para este ejemplo es de {weight}.",
+            "frames": {
+              "petite": "Complexión menuda",
+              "average": "Complexión promedio",
+              "larger": "Complexión más grande"
+            }
+          }
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -1432,6 +1444,24 @@
         "averageFemale": "Mujer promedio",
         "averageMale": "Hombre promedio",
         "tallMale": "Hombre más alto"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "mortgage-calculator": {
@@ -19418,7 +19448,8 @@
         "protein": "Proteína",
         "carbs": "Carbohidratos",
         "fat": "Grasa",
-        "invalidCalories": "Introduce un total de calorías diarias entre 1 y 20.000 para ver un resultado."
+        "invalidCalories": "Introduce un total de calorías diarias entre 1 y 20.000 para ver un resultado.",
+        "sentence": "Tu objetivo diario es {protein} de proteína, {carbs} de carbohidratos y {fat} de grasa."
       },
       "disclaimer": "Esta herramienta ofrece únicamente estimaciones generales y educativas, y no sustituye el asesoramiento personalizado de un dietista-nutricionista registrado u otro profesional de la salud cualificado —especialmente si tienes una condición médica, estás embarazada, o entrenas para un objetivo deportivo específico.",
       "quickReference": {
@@ -19429,7 +19460,25 @@
         "intro": {
           "title": "Entender las distribuciones de macronutrientes",
           "paragraph1": "\"Macros\" es la abreviatura de macronutrientes —las tres categorías de nutrientes que aportan calorías al cuerpo: proteínas, carbohidratos y grasas (el alcohol a veces se cuenta como una cuarta categoría, pero no forma parte de un plan dietético típico). Cada gramo de proteína y carbohidrato aporta unas 4 kilocalorías, mientras que cada gramo de grasa aporta unas 9 —cifras conocidas como los factores generales de Atwater, establecidos a finales del siglo XIX y principios del XX, y que aún hoy son la base del etiquetado nutricional.",
-          "paragraph2": "Esta calculadora distribuye tus calorías diarias totales entre los tres macronutrientes como porcentajes elegidos dentro del Rango Aceptable de Distribución de Macronutrientes (AMDR) de las Ingestas Dietéticas de Referencia —el rango de ingesta para cada macronutriente asociado con un menor riesgo de enfermedad crónica mientras se siguen proporcionando nutrientes esenciales adecuados, según lo establecido por las Academias Nacionales de Ciencias de EE. UU. (proteína 10-35%, carbohidratos 45-65%, grasa 20-35% del total de calorías). La distribución exacta varía dentro de ese rango según tu objetivo seleccionado, favoreciendo más proteína para la pérdida de grasa o la ganancia muscular y más carbohidratos para un superávit general de ganancia de peso."
+          "paragraph2": "Esta calculadora distribuye tus calorías diarias totales entre los tres macronutrientes como porcentajes elegidos dentro del Rango Aceptable de Distribución de Macronutrientes (AMDR) de las Ingestas Dietéticas de Referencia —el rango de ingesta para cada macronutriente asociado con un menor riesgo de enfermedad crónica mientras se siguen proporcionando nutrientes esenciales adecuados, según lo establecido por las Academias Nacionales de Ciencias de EE. UU. (proteína 10-35%, carbohidratos 45-65%, grasa 20-35% del total de calorías). La distribución exacta varía dentro de ese rango según tu objetivo seleccionado, favoreciendo más proteína para la pérdida de grasa o la ganancia muscular y más carbohidratos para un superávit general de ganancia de peso.",
+          "carbGauge": {
+            "title": "¿Dónde se ubica este porcentaje de carbohidratos?",
+            "intro": "La proporción de calorías diarias provenientes de carbohidratos varía mucho según el estilo de dieta, desde planes cetogénicos estrictos hasta la alimentación rica en carbohidratos para resistencia. Elige un ejemplo real de dieta a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Proporción de carbohidratos: {classification}.",
+            "fact": "Los carbohidratos representan aproximadamente el {percent} de las calorías diarias en este ejemplo.",
+            "examples": {
+              "ketogenicDiet": "Dieta cetogénica",
+              "lowCarbDiet": "Dieta baja en carbohidratos",
+              "balancedDiet": "Dieta equilibrada",
+              "enduranceAthleteDiet": "Dieta de atleta de resistencia"
+            },
+            "classifications": {
+              "veryLow": "Muy baja",
+              "low": "Baja",
+              "moderate": "Moderada",
+              "high": "Alta"
+            }
+          }
         },
         "goals": {
           "title": "Cómo cada objetivo cambia la distribución",
@@ -19564,6 +19613,24 @@
         "maintenanceDiet": "Mantenimiento",
         "leanBulk": "Volumen limpio",
         "strengthTraining": "Entrenamiento de fuerza"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "bmr-calculator": {

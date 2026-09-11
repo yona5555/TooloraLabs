@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import PdfDownloadButton from "@/components/tool-ui/PdfDownloadButton";
+import IdealWeightShareExportModal from "./IdealWeightShareExportModal";
 import type { Gender, IdealWeightResult as IdealWeightResultData } from "@tooloralabs/tools";
 
 type IdealWeightResultProps = {
@@ -82,20 +82,20 @@ export default function IdealWeightResult({ result, gender, heightCm, digitStyle
       title={t("aboveFold.resultTitle")}
       action={
         hasResult ? (
-          <PdfDownloadButton
-            toolName={t("title")}
-            inputs={[
+          <IdealWeightShareExportModal
+            inputRows={[
               { label: t("form.genderLabel"), value: gender === "male" ? t("form.genderMale") : t("form.genderFemale") },
               { label: t("form.heightLabel"), value: `${formatLocalizedNumber(heightCm, digitStyle)} cm` },
             ]}
-            results={[
-              { label: t("aboveFold.averageLabel"), value: kg(result.average) },
+            resultRows={[
               { label: t("aboveFold.devineLabel"), value: kg(result.devine) },
               { label: t("aboveFold.robinsonLabel"), value: kg(result.robinson) },
               { label: t("aboveFold.millerLabel"), value: kg(result.miller) },
               { label: t("aboveFold.hamwiLabel"), value: kg(result.hamwi) },
             ]}
-            filename="ideal-weight-calculator-result.pdf"
+            heroLabel={t("aboveFold.averageLabel")}
+            heroValue={kg(result.average)}
+            sentence={t("aboveFold.sentence", { value: kg(result.average) })}
           />
         ) : undefined
       }

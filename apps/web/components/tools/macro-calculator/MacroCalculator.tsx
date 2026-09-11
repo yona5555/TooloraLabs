@@ -62,7 +62,7 @@ export default function MacroCalculator({ education }: { education: ReactNode })
               onClear={handleClear}
             />
           }
-          result={<MacroResult result={result} digitStyle={digitStyle} />}
+          result={<MacroResult result={result} digitStyle={digitStyle} totalCalories={totalCalories} goal={goal} />}
           sidebar={<RelatedToolsSidebar currentSlug="macro-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
