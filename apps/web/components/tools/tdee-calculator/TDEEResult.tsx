@@ -4,6 +4,7 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import TDEEEnergyGauge from "./TDEEEnergyGauge";
+import TDEEShareExportModal from "./TDEEShareExportModal";
 import type { GoalDirection } from "./types";
 
 type TDEEResultProps = {
@@ -38,8 +39,21 @@ export default function TDEEResult({
   const kcal = (value: number) => `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 })} ${t("aboveFold.kcalUnit")}`;
   const signedAdjustmentPercent = goalDirection === "lose" ? -adjustmentPercentOfTDEE : goalDirection === "gain" ? adjustmentPercentOfTDEE : 0;
 
+  const inputRows = [
+    { label: t("aboveFold.bmrLabel"), value: kcal(bmr) },
+    { label: t("aboveFold.tdeeLabel"), value: kcal(tdee) },
+    { label: t("aboveFold.goalLabel"), value: t(`aboveFold.goalDirection.${goalDirection}`) },
+  ];
+  const resultRows = [{ label: t("aboveFold.dailyTargetLabel"), value: kcal(dailyCalorieTarget) }];
+  const sentence = t("aboveFold.sentence", { target: kcal(dailyCalorieTarget), tdee: kcal(tdee), goal: t(`aboveFold.goalDirection.${goalDirection}`) });
+
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        <TDEEShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("aboveFold.dailyTargetLabel")} heroValue={kcal(dailyCalorieTarget)} sentence={sentence} />
+      }
+    >
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl bg-zinc-50 p-3 text-center dark:bg-zinc-800/60">
           <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.bmrLabel")}</dt>

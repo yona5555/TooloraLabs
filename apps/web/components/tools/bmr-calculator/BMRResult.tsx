@@ -1,17 +1,23 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { Gender } from "@tooloralabs/tools";
 import { bandForBmr, type BMRResult as Result } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import BMRComparisonChart from "./BMRComparisonChart";
+import BMRShareExportModal from "./BMRShareExportModal";
 
 type Props = {
   result: Result;
   digitStyle: DigitStyle;
+  gender: Gender;
+  weightKg: string;
+  heightCm: string;
+  age: string;
 };
 
-export default function BMRResult({ result, digitStyle }: Props) {
+export default function BMRResult({ result, digitStyle, gender, weightKg, heightCm, age }: Props) {
   const t = useTranslations("tools.bmr-calculator.result");
+  const tForm = useTranslations("tools.bmr-calculator.form");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
 
   if (result.error) {
@@ -37,17 +43,44 @@ export default function BMRResult({ result, digitStyle }: Props) {
         ? "fill-blue-600 dark:fill-blue-400"
         : "fill-sky-600 dark:fill-sky-400";
 
+  const inputRows = [
+    { label: tForm("genderLabel"), value: gender === "male" ? tForm("genderMale") : tForm("genderFemale") },
+    { label: tForm("weight"), value: `${weightKg} kg` },
+    { label: tForm("height"), value: `${heightCm} cm` },
+    { label: tForm("age"), value: age },
+  ];
+  const resultRows = isCompare
+    ? [
+        { label: t("harrisBenedict"), value: `${fmt(result.harrisBenedict!)} kcal` },
+        { label: t("mifflinStJeor"), value: `${fmt(result.mifflinStJeor!)} kcal` },
+      ]
+    : [{ label: t("bmrUnit"), value: `${fmt(single!)} kcal` }];
+  const heroValue = isCompare ? `${fmt(result.harrisBenedict!)} / ${fmt(result.mifflinStJeor!)} kcal` : `${fmt(single!)} kcal`;
+  const sentence = t("sentence", { value: fmt(single ?? 0), classification: t(`range.${band}`) });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton
-          text={
-            isCompare
-              ? `Harris-Benedict: ${fmt(result.harrisBenedict!)} kcal, Mifflin-St Jeor: ${fmt(result.mifflinStJeor!)} kcal`
-              : `BMR: ${fmt(single!)} kcal`
-          }
-          className="!text-white dark:!text-white"
+        <BMRShareExportModal
+          inputRows={inputRows}
+          resultRows={resultRows}
+          heroLabel={t("heading")}
+          heroValue={heroValue}
+          sentence={sentence}
+          gauge={{
+            zones: [
+              { from: 800, to: 1400, color: "#0ea5e9" },
+              { from: 1400, to: 2000, color: "#3b82f6" },
+              { from: 2000, to: 3000, color: "#6366f1" },
+            ],
+            domainMin: 800,
+            domainMax: 3000,
+            value: single ?? 0,
+            ticks: [800, 1400, 2000, 3000],
+            valueLabel: fmt(single ?? 0),
+            caption: t(`range.${band}`),
+          }}
         />
       </div>
       <div className="p-4 lg:p-6">

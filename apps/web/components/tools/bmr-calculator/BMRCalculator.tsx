@@ -82,7 +82,7 @@ export default function BMRCalculator({ education }: { education: ReactNode }) {
               onClear={handleClear}
             />
           }
-          result={<BMRResult result={result} digitStyle={digitStyle} />}
+          result={<BMRResult result={result} digitStyle={digitStyle} gender={gender} weightKg={weightKg} heightCm={heightCm} age={age} />}
           sidebar={<RelatedToolsSidebar currentSlug="bmr-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">

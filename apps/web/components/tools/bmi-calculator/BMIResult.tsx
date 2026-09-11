@@ -2,9 +2,9 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
 import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
-import PdfDownloadButton from "@/components/tool-ui/PdfDownloadButton";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import BMIScaleChart from "./BMIScaleChart";
+import BMIShareExportModal from "./BMIShareExportModal";
 import type { BMIExtendedResult, UnitSystem } from "./types";
 
 interface BMIResultProps {
@@ -85,16 +85,19 @@ export default function BMIResult({
     { label: t("aboveFold.bodyFatLabel"), value: `${bodyFatText}%` },
   ];
 
+  const sentence = t("aboveFold.sentence", { bmi: bmiText, category: t(`levels.${level}.title`) });
+
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
       action={
-        <PdfDownloadButton
-          toolName={t("title")}
-          inputs={pdfInputs}
-          results={pdfResults}
-          gauge={{ zones: GAUGE_ZONES, domainMin: 15, domainMax: 40, value: result.bmi, ticks: [15, 18.5, 25, 30, 40] }}
-          filename="bmi-calculator-result.pdf"
+        <BMIShareExportModal
+          inputRows={pdfInputs}
+          resultRows={pdfResults}
+          heroLabel="BMI"
+          heroValue={bmiText}
+          sentence={sentence}
+          gauge={{ zones: GAUGE_ZONES, domainMin: 15, domainMax: 40, value: result.bmi, ticks: [15, 18.5, 25, 30, 40], valueLabel: bmiText, caption: t(`levels.${level}.title`) }}
         />
       }
     >
