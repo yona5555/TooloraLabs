@@ -5006,6 +5006,24 @@
         "nyToTokyo": "New York → Tokyo",
         "londonToSydney": "Londres → Sydney",
         "laToDubai": "Los Angeles → Dubaï"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "fraction-calculator": {
@@ -17211,7 +17229,8 @@
         "stepsTitle": "Écarts Étape par Étape",
         "columnValue": "Valeur",
         "columnDeviation": "Écart (x − μ)",
-        "columnSquared": "Au Carré"
+        "columnSquared": "Au Carré",
+        "sentence": "Avec une moyenne de {mean}, cet ensemble de données a un écart type de {stdDev}."
       },
       "chart": {
         "ariaLabel": "Droite numérique montrant chaque valeur saisie sous forme de point, avec une bande ombrée couvrant un écart-type de population de chaque côté de la moyenne",
@@ -17226,7 +17245,18 @@
         "intro": {
           "title": "Comprendre l'Écart-Type",
           "paragraph1": "L'écart-type mesure la dispersion d'un ensemble de valeurs autour de sa moyenne — un petit écart-type signifie que la plupart des valeurs sont proches de la moyenne, tandis qu'un grand signifie qu'elles sont largement dispersées. C'est la racine carrée de la variance, qui est elle-même la moyenne des distances au carré de chaque valeur par rapport à la moyenne ; élever au carré d'abord (plutôt que de simplement faire la moyenne des distances brutes) garantit que les écarts au-dessus et en dessous de la moyenne ne s'annulent pas mutuellement, et prendre la racine carrée à la fin ramène le résultat à l'unité d'origine des données plutôt qu'à une unité au carré.",
-          "paragraph2": "Cet outil calcule à la fois l'écart-type de population (σ), utilisé lorsque votre jeu de données constitue l'ensemble du groupe qui vous intéresse, et l'écart-type d'échantillon (s), utilisé lorsque vos données sont un sous-ensemble tiré d'une population plus large sur laquelle vous essayez de tirer des conclusions. Les deux formules ne diffèrent que par le dénominateur — la population divise par N, l'échantillon divise par n − 1 —, un ajustement modeste mais délibéré appelé correction de Bessel, qui corrige la tendance de la moyenne d'un échantillon à être plus proche de ses propres points de données que ne le serait la véritable moyenne de la population."
+          "paragraph2": "Cet outil calcule à la fois l'écart-type de population (σ), utilisé lorsque votre jeu de données constitue l'ensemble du groupe qui vous intéresse, et l'écart-type d'échantillon (s), utilisé lorsque vos données sont un sous-ensemble tiré d'une population plus large sur laquelle vous essayez de tirer des conclusions. Les deux formules ne diffèrent que par le dénominateur — la population divise par N, l'échantillon divise par n − 1 —, un ajustement modeste mais délibéré appelé correction de Bessel, qui corrige la tendance de la moyenne d'un échantillon à être plus proche de ses propres points de données que ne le serait la véritable moyenne de la population.",
+          "cvGauge": {
+            "title": "Quelle est la dispersion de ces données ?",
+            "intro": "Le coefficient de variation (écart type par rapport à la moyenne) montre la dispersion d'un ensemble de données, indépendamment de ses unités. Choisissez un ensemble de données réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Variabilité : {classification}.",
+            "fact": "Son coefficient de variation est d'environ {cv}%.",
+            "zones": {
+              "low": "Faible variabilité",
+              "moderate": "Variabilité modérée",
+              "high": "Forte variabilité"
+            }
+          }
         },
         "formula": {
           "title": "Les Formules",
@@ -17357,6 +17387,24 @@
         "testScores": "Notes d'examen",
         "dailyTemperatures": "Températures quotidiennes",
         "factoryMeasurements": "Mesures d'usine"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "circle-calculator": {
@@ -18059,7 +18107,8 @@
           "or": "Saisissez la probabilité de chaque événement et la probabilité qu'ils se produisent ensemble (0 s'ils sont mutuellement exclusifs), en pourcentages.",
           "conditional": "Saisissez la probabilité que les deux événements se produisent ensemble et la probabilité de la condition B, en pourcentages."
         },
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "scenarioLabel": "Essayer un exemple classique"
       },
       "diagram": {
         "ariaLabel": "Une barre horizontale remplie jusqu'au pourcentage de probabilité calculé"
@@ -18075,7 +18124,8 @@
           "and": "Saisissez deux probabilités comprises entre 0 % et 100 %.",
           "or": "Saisissez des probabilités entre 0 % et 100 %, avec P(A et B) ne dépassant pas le plus petit de P(A) et P(B).",
           "conditional": "Saisissez des probabilités entre 0 % et 100 %, avec P(A et B) ne dépassant pas P(B), et P(B) supérieur à 0 %."
-        }
+        },
+        "sentence": "La probabilité est de {probability} ({percentage}%)."
       },
       "quickReference": {
         "title": "Les formules",
@@ -18085,7 +18135,27 @@
         "intro": {
           "title": "Comprendre la probabilité",
           "paragraph1": "La probabilité mesure à quel point un événement est susceptible de se produire, exprimée par un nombre compris entre 0 (impossible) et 1 (certain) — ou, de manière équivalente, entre 0 % et 100 %. Pour un événement unique aux résultats également probables, la probabilité est simplement le nombre de résultats favorables divisé par le nombre total de résultats possibles : obtenir un 3 en lançant un dé équilibré à six faces a une probabilité de 1/6, car exactement une des six faces également probables est un 3.",
-          "paragraph2": "Les situations réelles impliquent généralement plus d'un événement, d'où l'intérêt des règles de combinaison des probabilités. La règle ET multiplie deux probabilités indépendantes pour trouver la chance que les deux se produisent. La règle OU additionne deux probabilités et soustrait leur chevauchement, afin que les résultats partagés ne soient pas comptés deux fois. La probabilité conditionnelle restreint le champ aux seuls résultats où une condition est déjà connue comme vraie, puis demande quelle est la probabilité de l'événement au sein de cet ensemble plus restreint. Cette calculatrice met en œuvre ces quatre relations directement à partir de leurs définitions standards."
+          "paragraph2": "Les situations réelles impliquent généralement plus d'un événement, d'où l'intérêt des règles de combinaison des probabilités. La règle ET multiplie deux probabilités indépendantes pour trouver la chance que les deux se produisent. La règle OU additionne deux probabilités et soustrait leur chevauchement, afin que les résultats partagés ne soient pas comptés deux fois. La probabilité conditionnelle restreint le champ aux seuls résultats où une condition est déjà connue comme vraie, puis demande quelle est la probabilité de l'événement au sein de cet ensemble plus restreint. Cette calculatrice met en œuvre ces quatre relations directement à partir de leurs définitions standards.",
+          "likelihoodGauge": {
+            "title": "Quelle est la probabilité ?",
+            "intro": "Les probabilités vont d'événements rares à des quasi-certitudes. Choisissez un exemple familier ci-dessous pour voir où il se situe sur l'échelle de probabilité.",
+            "verdict": "{example} — Probabilité : {classification}.",
+            "fact": "Cet exemple a une probabilité d'environ {percent}.",
+            "examples": {
+              "winningRaffle": "Gagner une tombola",
+              "rollingSix": "Obtenir un six",
+              "coinFlip": "Un lancer de pièce",
+              "rainTomorrow": "Pluie demain",
+              "sunriseTomorrow": "Lever du soleil demain"
+            },
+            "zones": {
+              "rare": "Rare",
+              "unlikely": "Improbable",
+              "even": "Chances égales",
+              "likely": "Probable",
+              "certain": "Quasi certain"
+            }
+          }
         },
         "modes": {
           "title": "Les quatre modes de calcul",
@@ -18214,6 +18284,30 @@
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Lire le traité original de Laplace"
         }
+      },
+      "scenarios": {
+        "coinFlip": "Lancer de pièce",
+        "dieRollSix": "Obtenir un six",
+        "cardIsHeart": "Tirer un cœur",
+        "raffleTicket": "Gagner une tombola à 1 sur 100"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "mean-median-mode-range-calculator": {
@@ -20688,7 +20782,8 @@
           "high": "Belle alchimie selon les calculs de cet outil — on dirait un duo prometteur !",
           "veryHigh": "Hors norme ! Cet outil pense que vous formez un couple merveilleux."
         },
-        "forFunOnly": "N'oubliez pas : ceci est un jeu de style numérologique pour le divertissement, pas un résultat scientifique."
+        "forFunOnly": "N'oubliez pas : ceci est un jeu de style numérologique pour le divertissement, pas un résultat scientifique.",
+        "sentence": "{name1} et {name2} obtiennent {percentage}% pour le plaisir."
       },
       "quickReference": {
         "title": "Comment Ça Marche",
@@ -20699,7 +20794,24 @@
         "intro": {
           "title": "Comprendre Cet Outil",
           "paragraph1": "Cette calculatrice prend les deux prénoms que vous saisissez, les combine et les normalise, puis les fait passer par une formule numérique déterministe qui convertit les lettres en un pourcentage compris entre 0 et 100. Comme la formule est déterministe, les deux mêmes prénoms produiront toujours le même pourcentage, peu importe le nombre de fois où vous vérifiez, et l'ordre dans lequel vous les saisissez n'a pas non plus d'importance — \"Alex et Jordan\" donne le même résultat que \"Jordan et Alex\".",
-          "disclaimer": "Important : ce pourcentage est généré purement pour le divertissement. Il n'a aucun fondement en psychologie, en science des relations, ni dans une quelconque mesure réelle de compatibilité — c'est simplement un jeu de chiffres ludique basé sur les lettres d'un prénom."
+          "disclaimer": "Important : ce pourcentage est généré purement pour le divertissement. Il n'a aucun fondement en psychologie, en science des relations, ni dans une quelconque mesure réelle de compatibilité — c'est simplement un jeu de chiffres ludique basé sur les lettres d'un prénom.",
+          "compatibilityGauge": {
+            "title": "Essayez des couples célèbres",
+            "intro": "Juste pour le plaisir, découvrez ce que l'algorithme ludique de cette calculatrice donne pour quelques couples connus. Choisissez-en un ci-dessous.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Cet algorithme ludique leur donne {percent}%.",
+            "examples": {
+              "romeoJuliet": "Roméo et Juliette",
+              "jackRose": "Jack et Rose",
+              "mickeyMinnie": "Mickey et Minnie",
+              "batmanCatwoman": "Batman et Catwoman"
+            },
+            "zones": {
+              "low": "Faible compatibilité",
+              "medium": "Compatibilité moyenne",
+              "high": "Grande compatibilité"
+            }
+          }
         },
         "useCases": {
           "title": "Utilisations Courantes",
@@ -20800,6 +20912,24 @@
           "url": "https://www.gottman.com/about/research/",
           "readOriginal": "Consulter la Recherche"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "fuel-cost-calculator": {
@@ -20838,7 +20968,8 @@
         "invalidRate": "Saisissez un taux de consommation ou d'efficacité supérieur à zéro.",
         "invalidPrice": "Saisissez un prix de carburant supérieur à zéro.",
         "fuelUsedLabel": "Carburant Utilisé",
-        "costPerDistanceLabel": "Coût par Unité de Distance"
+        "costPerDistanceLabel": "Coût par Unité de Distance",
+        "sentence": "Parcourir {distance} coûte environ {cost}."
       },
       "quickReference": {
         "title": "Le calcul",
@@ -20848,7 +20979,24 @@
         "intro": {
           "title": "Comprendre l'Estimation du Coût de Carburant",
           "paragraph1": "Estimer le coût en carburant d'un trajet revient à déterminer la quantité de carburant que le trajet consommera, puis à multiplier cette quantité par le prix du carburant. La consommation de carburant elle-même peut être décrite de deux façons mathématiquement équivalentes mais formulées différemment : comme un taux de consommation (la quantité de carburant utilisée pour une distance fixe, comme des litres pour 100 kilomètres, courant dans la majeure partie du monde) ou comme un taux d'efficacité (la distance parcourue par un véhicule par unité de carburant, comme des kilomètres par litre ou des miles par gallon, courant aux États-Unis et au Royaume-Uni).",
-          "paragraph2": "Les deux types de taux sont simplement des inverses l'un de l'autre, réarrangés par commodité : une voiture consommant 8 litres pour 100 km est exactement aussi efficace qu'une voiture parcourant 12,5 km par litre (puisque 100 ÷ 8 = 12,5). Cette calculatrice accepte directement les deux formats, vous n'avez donc pas besoin de convertir les chiffres de consommation de votre véhicule dans un format différent avant d'estimer le coût d'un trajet — vous devez simplement veiller à ce que l'unité de distance et l'unité de distance du taux de carburant soient cohérentes (toutes deux en kilomètres, ou toutes deux en miles)."
+          "paragraph2": "Les deux types de taux sont simplement des inverses l'un de l'autre, réarrangés par commodité : une voiture consommant 8 litres pour 100 km est exactement aussi efficace qu'une voiture parcourant 12,5 km par litre (puisque 100 ÷ 8 = 12,5). Cette calculatrice accepte directement les deux formats, vous n'avez donc pas besoin de convertir les chiffres de consommation de votre véhicule dans un format différent avant d'estimer le coût d'un trajet — vous devez simplement veiller à ce que l'unité de distance et l'unité de distance du taux de carburant soient cohérentes (toutes deux en kilomètres, ou toutes deux en miles).",
+          "efficiencyGauge": {
+            "title": "Quelle est la consommation de ce véhicule ?",
+            "intro": "La consommation de carburant varie beaucoup selon le type de véhicule, des hybrides économes aux pick-up gourmands. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Consommation : {classification}.",
+            "fact": "Il consomme environ {rate}.",
+            "examples": {
+              "hybridCar": "Voiture hybride",
+              "compactSedan": "Berline compacte",
+              "suv": "SUV",
+              "pickupTruck": "Pick-up"
+            },
+            "zones": {
+              "efficient": "Économe",
+              "average": "Moyenne",
+              "thirsty": "Gourmand"
+            }
+          }
         },
         "useCases": {
           "title": "Utilisations Courantes",
@@ -20975,6 +21123,24 @@
         "roadTrip": "Road trip",
         "efficientHybrid": "Hybride économe",
         "usPickupTruck": "Pick-up américain"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "batch-invoice-calculator": {

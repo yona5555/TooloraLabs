@@ -3,8 +3,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { formatUtcOffsetLabel, type TimeConversionResult } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import WorldClockGauge from "./WorldClockGauge";
+import WorldTimeShareExportModal from "./WorldTimeShareExportModal";
 import type { WorldCity } from "@/lib/worldtime/cities";
 
 type WorldTimeResultProps = {
@@ -61,10 +61,23 @@ export default function WorldTimeResult({ fromCity, toCity, result, digitStyle }
 
   const dayNote = result.dayDifference === 0 ? t("sameDay") : result.dayDifference > 0 ? t("nextDay") : t("previousDay");
 
-  const summaryText = `${toCity.city[nameKey]}: ${formattedTime} — ${formattedDate}`;
+  const inputRows = [
+    { label: t("fromLabel"), value: fromCity.city[nameKey] },
+    { label: t("toLabel"), value: toCity.city[nameKey] },
+  ];
+  const resultRows = [
+    { label: t("differenceLabel"), value: result.differenceMinutes === 0 ? t("sameTime") : `${result.differenceMinutes > 0 ? "+" : "−"}${diffLabel}` },
+    { label: t("dayNoteLabel"), value: dayNote },
+  ];
+  const sentence = `${toCity.city[nameKey]}: ${formattedTime} — ${formattedDate}`;
 
   return (
-    <SectionCard title={t("resultTitle")} action={<CopyButton text={summaryText} />}>
+    <SectionCard
+      title={t("resultTitle")}
+      action={
+        <WorldTimeShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("resultTitle")} heroValue={formattedTime} sentence={sentence} />
+      }
+    >
       <div className="text-center">
         <p dir="ltr" suppressHydrationWarning className="font-mono text-4xl font-bold text-zinc-900 dark:text-zinc-50">
           {formattedTime}

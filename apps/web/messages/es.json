@@ -5006,6 +5006,24 @@
         "nyToTokyo": "Nueva York → Tokio",
         "londonToSydney": "Londres → Sídney",
         "laToDubai": "Los Ángeles → Dubái"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "fraction-calculator": {
@@ -17211,7 +17229,8 @@
         "stepsTitle": "Desviaciones Paso a Paso",
         "columnValue": "Valor",
         "columnDeviation": "Desviación (x − μ)",
-        "columnSquared": "Al Cuadrado"
+        "columnSquared": "Al Cuadrado",
+        "sentence": "Con una media de {mean}, este conjunto de datos tiene una desviación estándar de {stdDev}."
       },
       "chart": {
         "ariaLabel": "Recta numérica que muestra cada valor introducido como un punto, con una banda sombreada que abarca una desviación estándar poblacional a cada lado de la media",
@@ -17226,7 +17245,18 @@
         "intro": {
           "title": "Entender la Desviación Estándar",
           "paragraph1": "La desviación estándar mide cuán dispersos están los valores de un conjunto respecto a su media — una desviación estándar pequeña significa que la mayoría de los valores están cerca del promedio, mientras que una grande significa que están muy dispersos. Es la raíz cuadrada de la varianza, que a su vez es el promedio de la distancia al cuadrado de cada valor respecto a la media; elevar al cuadrado primero (en lugar de simplemente promediar las distancias en bruto) garantiza que las desviaciones por encima y por debajo de la media no se cancelen entre sí, y sacar la raíz cuadrada al final devuelve el resultado a la unidad original de los datos en lugar de a una al cuadrado.",
-          "paragraph2": "Esta herramienta calcula tanto la desviación estándar poblacional (σ), usada cuando tu conjunto de datos es todo el grupo que te interesa, como la desviación estándar muestral (s), usada cuando tus datos son un subconjunto extraído de una población más grande sobre la que intentas sacar conclusiones. Las dos fórmulas solo difieren en el denominador — la población divide entre N, la muestra divide entre n − 1 —, un ajuste pequeño pero deliberado llamado corrección de Bessel, que corrige la tendencia de la media de una muestra a estar más cerca de sus propios datos de lo que estaría la verdadera media poblacional."
+          "paragraph2": "Esta herramienta calcula tanto la desviación estándar poblacional (σ), usada cuando tu conjunto de datos es todo el grupo que te interesa, como la desviación estándar muestral (s), usada cuando tus datos son un subconjunto extraído de una población más grande sobre la que intentas sacar conclusiones. Las dos fórmulas solo difieren en el denominador — la población divide entre N, la muestra divide entre n − 1 —, un ajuste pequeño pero deliberado llamado corrección de Bessel, que corrige la tendencia de la media de una muestra a estar más cerca de sus propios datos de lo que estaría la verdadera media poblacional.",
+          "cvGauge": {
+            "title": "¿Qué tan dispersos están estos datos?",
+            "intro": "El coeficiente de variación (desviación estándar en relación con la media) muestra qué tan dispersos están los datos, independientemente de sus unidades. Elige un conjunto de datos real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Variabilidad: {classification}.",
+            "fact": "Su coeficiente de variación es de aproximadamente {cv}%.",
+            "zones": {
+              "low": "Baja variabilidad",
+              "moderate": "Variabilidad moderada",
+              "high": "Alta variabilidad"
+            }
+          }
         },
         "formula": {
           "title": "Las Fórmulas",
@@ -17357,6 +17387,24 @@
         "testScores": "Calificaciones de examen",
         "dailyTemperatures": "Temperaturas diarias",
         "factoryMeasurements": "Mediciones de fábrica"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "circle-calculator": {
@@ -18059,7 +18107,8 @@
           "or": "Introduce la probabilidad de cada evento y la probabilidad de que ambos ocurran juntos (0 si son mutuamente excluyentes), en porcentajes.",
           "conditional": "Introduce la probabilidad de que ambos eventos ocurran juntos y la probabilidad de la condición B, en porcentajes."
         },
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "scenarioLabel": "Prueba un ejemplo clásico"
       },
       "diagram": {
         "ariaLabel": "Una barra horizontal rellena hasta el porcentaje de probabilidad calculado"
@@ -18075,7 +18124,8 @@
           "and": "Introduce dos probabilidades entre 0% y 100%.",
           "or": "Introduce probabilidades entre 0% y 100%, con P(A y B) no mayor que el menor de P(A) y P(B).",
           "conditional": "Introduce probabilidades entre 0% y 100%, con P(A y B) no mayor que P(B), y P(B) mayor que 0%."
-        }
+        },
+        "sentence": "La probabilidad es {probability} ({percentage}%)."
       },
       "quickReference": {
         "title": "Las fórmulas",
@@ -18085,7 +18135,27 @@
         "intro": {
           "title": "Entender la probabilidad",
           "paragraph1": "La probabilidad mide qué tan probable es que ocurra un evento, expresada como un número entre 0 (imposible) y 1 (seguro) — o, de forma equivalente, entre 0% y 100%. Para un solo evento con resultados igualmente probables, la probabilidad es simplemente el número de resultados favorables dividido entre el número total de resultados posibles: sacar un 3 con un dado justo de seis caras tiene una probabilidad de 1/6, porque exactamente una de las seis caras igualmente probables es un 3.",
-          "paragraph2": "Las situaciones reales suelen involucrar más de un evento, y ahí es donde entran las reglas para combinar probabilidades. La regla Y multiplica dos probabilidades independientes para hallar la posibilidad de que ambas ocurran. La regla O suma dos probabilidades y resta su superposición, para que los resultados compartidos no se cuenten dos veces. La probabilidad condicional reduce el campo solo a los resultados en los que ya se sabe que una condición es verdadera, y luego pregunta qué tan probable es el evento dentro de ese conjunto más reducido. Esta calculadora implementa las cuatro relaciones directamente a partir de sus definiciones estándar."
+          "paragraph2": "Las situaciones reales suelen involucrar más de un evento, y ahí es donde entran las reglas para combinar probabilidades. La regla Y multiplica dos probabilidades independientes para hallar la posibilidad de que ambas ocurran. La regla O suma dos probabilidades y resta su superposición, para que los resultados compartidos no se cuenten dos veces. La probabilidad condicional reduce el campo solo a los resultados en los que ya se sabe que una condición es verdadera, y luego pregunta qué tan probable es el evento dentro de ese conjunto más reducido. Esta calculadora implementa las cuatro relaciones directamente a partir de sus definiciones estándar.",
+          "likelihoodGauge": {
+            "title": "¿Qué tan probable es eso?",
+            "intro": "Las probabilidades van desde eventos raros hasta casi certezas. Elige un ejemplo familiar a continuación para ver dónde se ubica en la escala de probabilidad.",
+            "verdict": "{example} — Probabilidad: {classification}.",
+            "fact": "Este ejemplo tiene una probabilidad de aproximadamente {percent}.",
+            "examples": {
+              "winningRaffle": "Ganar una rifa",
+              "rollingSix": "Sacar un seis",
+              "coinFlip": "Un lanzamiento de moneda",
+              "rainTomorrow": "Lluvia mañana",
+              "sunriseTomorrow": "Amanecer mañana"
+            },
+            "zones": {
+              "rare": "Rara",
+              "unlikely": "Poco probable",
+              "even": "Probabilidad pareja",
+              "likely": "Probable",
+              "certain": "Casi seguro"
+            }
+          }
         },
         "modes": {
           "title": "Los cuatro modos de cálculo",
@@ -18214,6 +18284,30 @@
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Leer el tratado original de Laplace"
         }
+      },
+      "scenarios": {
+        "coinFlip": "Lanzamiento de moneda",
+        "dieRollSix": "Sacar un seis",
+        "cardIsHeart": "Sacar un corazón",
+        "raffleTicket": "Ganar una rifa de 1 entre 100"
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "mean-median-mode-range-calculator": {
@@ -20688,7 +20782,8 @@
           "high": "Gran química según los cálculos de esta herramienta —¡suena como una pareja prometedora!",
           "veryHigh": "¡Fuera de escala! Esta calculadora cree que ustedes dos son una pareja maravillosa."
         },
-        "forFunOnly": "Recuerda: esto es un juego de estilo numerológico para entretenimiento, no un resultado científico."
+        "forFunOnly": "Recuerda: esto es un juego de estilo numerológico para entretenimiento, no un resultado científico.",
+        "sentence": "{name1} y {name2} obtienen un {percentage}% por diversión."
       },
       "quickReference": {
         "title": "Cómo Funciona",
@@ -20699,7 +20794,24 @@
         "intro": {
           "title": "Entender Esta Herramienta",
           "paragraph1": "Esta calculadora toma los dos nombres que introduces, los combina y normaliza, y los procesa mediante una fórmula numérica determinista que convierte las letras en un porcentaje entre 0 y 100. Como la fórmula es determinista, los mismos dos nombres siempre producirán el mismo porcentaje sin importar cuántas veces lo compruebes, y el orden en que los introduzcas tampoco importa —\"Alex y Jordan\" da el mismo resultado que \"Jordan y Alex\".",
-          "disclaimer": "Importante: este porcentaje se genera puramente para entretenimiento. No tiene base en la psicología, la ciencia de las relaciones, ni ninguna medida real de compatibilidad —es simplemente un juego de números lúdico basado en las letras de un nombre."
+          "disclaimer": "Importante: este porcentaje se genera puramente para entretenimiento. No tiene base en la psicología, la ciencia de las relaciones, ni ninguna medida real de compatibilidad —es simplemente un juego de números lúdico basado en las letras de un nombre.",
+          "compatibilityGauge": {
+            "title": "Prueba algunas parejas famosas",
+            "intro": "Solo por diversión, mira qué da el algoritmo lúdico de esta calculadora para algunas parejas conocidas. Elige una a continuación.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Este algoritmo lúdico les da un {percent}%.",
+            "examples": {
+              "romeoJuliet": "Romeo y Julieta",
+              "jackRose": "Jack y Rose",
+              "mickeyMinnie": "Mickey y Minnie",
+              "batmanCatwoman": "Batman y Catwoman"
+            },
+            "zones": {
+              "low": "Coincidencia baja",
+              "medium": "Coincidencia media",
+              "high": "Coincidencia alta"
+            }
+          }
         },
         "useCases": {
           "title": "Usos Comunes",
@@ -20800,6 +20912,24 @@
           "url": "https://www.gottman.com/about/research/",
           "readOriginal": "Ver la Investigación"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "fuel-cost-calculator": {
@@ -20838,7 +20968,8 @@
         "invalidRate": "Introduce una tasa de consumo o eficiencia mayor que cero.",
         "invalidPrice": "Introduce un precio de combustible mayor que cero.",
         "fuelUsedLabel": "Combustible Usado",
-        "costPerDistanceLabel": "Costo por Unidad de Distancia"
+        "costPerDistanceLabel": "Costo por Unidad de Distancia",
+        "sentence": "Conducir {distance} cuesta aproximadamente {cost}."
       },
       "quickReference": {
         "title": "El cálculo",
@@ -20848,7 +20979,24 @@
         "intro": {
           "title": "Entender la Estimación del Costo de Combustible",
           "paragraph1": "Estimar el costo de combustible de un viaje se reduce a calcular cuánto combustible consumirá el viaje, y luego multiplicar esa cantidad por el precio del combustible. El uso de combustible en sí puede describirse de dos formas matemáticamente equivalentes pero formuladas de manera diferente: como una tasa de consumo (cuánto combustible se usa por una distancia fija, como litros por 100 kilómetros, común en la mayor parte del mundo) o como una tasa de eficiencia (qué tan lejos viaja un vehículo por unidad de combustible, como kilómetros por litro o millas por galón, común en Estados Unidos y el Reino Unido).",
-          "paragraph2": "Los dos tipos de tasa son simplemente inversos entre sí reorganizados por conveniencia: un auto que usa 8 litros por 100 km es exactamente tan eficiente como uno que viaja 12.5 km por litro (ya que 100 ÷ 8 = 12.5). Esta calculadora acepta cualquiera de los dos formatos directamente, por lo que no necesitas convertir las cifras de economía de combustible de tu vehículo a un formato diferente antes de estimar el costo de un viaje —solo necesitas mantener consistente la unidad de distancia y la unidad de distancia de la tasa de combustible (ambas en kilómetros, o ambas en millas)."
+          "paragraph2": "Los dos tipos de tasa son simplemente inversos entre sí reorganizados por conveniencia: un auto que usa 8 litros por 100 km es exactamente tan eficiente como uno que viaja 12.5 km por litro (ya que 100 ÷ 8 = 12.5). Esta calculadora acepta cualquiera de los dos formatos directamente, por lo que no necesitas convertir las cifras de economía de combustible de tu vehículo a un formato diferente antes de estimar el costo de un viaje —solo necesitas mantener consistente la unidad de distancia y la unidad de distancia de la tasa de combustible (ambas en kilómetros, o ambas en millas).",
+          "efficiencyGauge": {
+            "title": "¿Qué tan sediento es este vehículo?",
+            "intro": "El consumo de combustible varía mucho según el tipo de vehículo, desde híbridos eficientes hasta camionetas sedientas. Elige un ejemplo real a continuación para ver dónde se ubica.",
+            "verdict": "{example} — Consumo: {classification}.",
+            "fact": "Consume aproximadamente {rate}.",
+            "examples": {
+              "hybridCar": "Coche híbrido",
+              "compactSedan": "Sedán compacto",
+              "suv": "SUV",
+              "pickupTruck": "Camioneta pickup"
+            },
+            "zones": {
+              "efficient": "Eficiente",
+              "average": "Promedio",
+              "thirsty": "Sediento"
+            }
+          }
         },
         "useCases": {
           "title": "Usos Comunes",
@@ -20975,6 +21123,24 @@
         "roadTrip": "Viaje por carretera",
         "efficientHybrid": "Híbrido eficiente",
         "usPickupTruck": "Camioneta pickup de EE. UU."
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "batch-invoice-calculator": {

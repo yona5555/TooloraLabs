@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { SingleEventResult, CompoundResult, ProbabilityMode } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import ProbabilityBar from "./ProbabilityBar";
+import ProbabilityShareExportModal from "./ProbabilityShareExportModal";
 
 type Props = {
   mode: ProbabilityMode;
@@ -33,11 +33,26 @@ export default function ProbabilityResult({ mode, singleResult, compoundResult, 
     );
   }
 
+  const resultRows =
+    mode === "single"
+      ? [
+          { label: t("oddsFor"), value: `1 : ${fmtOdds(singleResult.oddsAgainst)}` },
+          { label: t("oddsAgainst"), value: `${fmtOdds(singleResult.oddsAgainst)} : 1` },
+        ]
+      : [];
+  const sentence = t("sentence", { probability: fmt(result.probability), percentage: fmt(percentage) });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={`P = ${fmt(result.probability)} (${fmt(percentage)}%)`} className="!text-white dark:!text-white" />
+        <ProbabilityShareExportModal
+          inputRows={[{ label: t("probability"), value: fmt(result.probability) }]}
+          resultRows={resultRows}
+          heroLabel={t("percentage")}
+          heroValue={`${fmt(percentage)}%`}
+          sentence={sentence}
+        />
       </div>
       <div className="p-4 lg:p-6">
         <ProbabilityBar percentage={percentage} digitStyle={digitStyle} />

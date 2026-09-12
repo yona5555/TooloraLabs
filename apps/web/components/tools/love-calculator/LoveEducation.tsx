@@ -4,6 +4,7 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import LoveCompatibilityGauge from "./LoveCompatibilityGauge";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -16,6 +17,8 @@ export default async function LoveEducation() {
 
   return (
     <EncyclopediaPaper>
+      <LoveCompatibilityGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p className="rounded-xl border border-pink-200 bg-pink-50 p-4 text-sm font-medium text-pink-800 dark:border-pink-500/30 dark:bg-pink-500/10 dark:text-pink-300">

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import FuelFlowDiagram from "./FuelFlowDiagram";
+import FuelShareExportModal from "./FuelShareExportModal";
 import type { FuelCostCalculatorOutput } from "./types";
 
 type Props = {
@@ -34,11 +34,19 @@ export default function FuelResult({ result, distance, digitStyle }: Props) {
     );
   }
 
+  const sentence = t("sentence", { distance: fmt(distance, 0), cost: fmt(result.totalCost) });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={fmt(result.totalCost)} className="!text-white dark:!text-white" />
+        <FuelShareExportModal
+          inputRows={[{ label: t("fuelUsedLabel"), value: fmt(result.fuelUsed) }]}
+          resultRows={[{ label: t("costPerDistanceLabel"), value: fmt(result.costPerDistanceUnit, 3) }]}
+          heroLabel={t("heading")}
+          heroValue={fmt(result.totalCost)}
+          sentence={sentence}
+        />
       </div>
       <div className="p-4 lg:p-6">
         <p className="text-center font-mono text-3xl font-bold text-blue-700 dark:text-blue-300">

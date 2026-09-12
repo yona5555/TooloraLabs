@@ -12,7 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ProbabilityInputPanel, { type ProbabilityFields } from "./ProbabilityInputPanel";
 import ProbabilityResult from "./ProbabilityResult";
 import ProbabilityQuickReference from "./ProbabilityQuickReference";
-import { EMPTY_SINGLE, EMPTY_COMPOUND, type ProbabilityMode } from "./types";
+import { EMPTY_SINGLE, EMPTY_COMPOUND, type ProbabilityMode, type ProbabilityScenario } from "./types";
 
 function toNum(s: string): number {
   const n = parseLocalizedNumber(s);
@@ -59,6 +59,11 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
     setFields((prev) => ({ ...prev, [mode]: DEFAULTS[mode] }));
   }
 
+  function handleScenarioPreset(scenario: ProbabilityScenario) {
+    setMode("single");
+    setFields((prev) => ({ ...prev, single: { ...prev.single, favorable: scenario.favorable, total: scenario.total } }));
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -69,7 +74,16 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<ProbabilityInputPanel mode={mode} onModeChange={setMode} fields={current} onFieldChange={updateField} onClear={handleClear} />}
+          input={
+            <ProbabilityInputPanel
+              mode={mode}
+              onModeChange={setMode}
+              fields={current}
+              onFieldChange={updateField}
+              onClear={handleClear}
+              onScenarioPreset={handleScenarioPreset}
+            />
+          }
           result={<ProbabilityResult mode={mode} singleResult={singleResult} compoundResult={compoundResult} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="probability-calculator" category="math" />}
           secondary={

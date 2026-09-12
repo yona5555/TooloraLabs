@@ -5006,6 +5006,24 @@
         "nyToTokyo": "New York → Tokyo",
         "londonToSydney": "London → Sydney",
         "laToDubai": "Los Angeles → Dubai"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "fraction-calculator": {
@@ -17442,7 +17460,8 @@
         "stepsTitle": "Step-by-Step Deviations",
         "columnValue": "Value",
         "columnDeviation": "Deviation (x − μ)",
-        "columnSquared": "Squared"
+        "columnSquared": "Squared",
+        "sentence": "With a mean of {mean}, this dataset has a standard deviation of {stdDev}."
       },
       "chart": {
         "ariaLabel": "Number line showing each entered value as a dot, with a shaded band spanning one population standard deviation on either side of the mean",
@@ -17457,7 +17476,18 @@
         "intro": {
           "title": "Understanding Standard Deviation",
           "paragraph1": "Standard deviation measures how spread out a set of values is around its mean — a small standard deviation means most values sit close to the average, while a large one means they're scattered widely. It's the square root of the variance, which itself is the average of each value's squared distance from the mean; squaring first (rather than just averaging the raw distances) ensures that deviations above and below the mean don't cancel each other out, and taking the square root at the end brings the result back to the data's original unit rather than a squared one.",
-          "paragraph2": "This tool computes both the population standard deviation (σ), used when your data set is the entire group you care about, and the sample standard deviation (s), used when your data is a subset drawn from a larger population you're trying to draw conclusions about. The two formulas differ only in the denominator — population divides by N, the sample divides by n − 1 — a small but deliberate adjustment called Bessel's correction, which corrects for the tendency of a sample's own mean to sit closer to its own data points than the true population mean would."
+          "paragraph2": "This tool computes both the population standard deviation (σ), used when your data set is the entire group you care about, and the sample standard deviation (s), used when your data is a subset drawn from a larger population you're trying to draw conclusions about. The two formulas differ only in the denominator — population divides by N, the sample divides by n − 1 — a small but deliberate adjustment called Bessel's correction, which corrects for the tendency of a sample's own mean to sit closer to its own data points than the true population mean would.",
+          "cvGauge": {
+            "title": "How Spread Out Is This Data?",
+            "intro": "The coefficient of variation (standard deviation relative to the mean) shows how spread out a dataset is regardless of its units. Pick a real dataset below to see where it falls.",
+            "verdict": "{example} — Variability: {classification}.",
+            "fact": "Its coefficient of variation is about {cv}%.",
+            "zones": {
+              "low": "Low Variability",
+              "moderate": "Moderate Variability",
+              "high": "High Variability"
+            }
+          }
         },
         "formula": {
           "title": "The Formulas",
@@ -17588,6 +17618,24 @@
         "testScores": "Test Scores",
         "dailyTemperatures": "Daily Temperatures",
         "factoryMeasurements": "Factory Measurements"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "circle-calculator": {
@@ -18059,7 +18107,8 @@
           "or": "Enter each event's probability and the probability both occur together (0 if mutually exclusive), as percentages.",
           "conditional": "Enter the probability both events occur together and the probability of the condition B, as percentages."
         },
-        "clear": "Clear"
+        "clear": "Clear",
+        "scenarioLabel": "Try a classic example"
       },
       "diagram": {
         "ariaLabel": "A horizontal meter filled to the calculated probability percentage"
@@ -18075,7 +18124,8 @@
           "and": "Enter two probabilities between 0% and 100%.",
           "or": "Enter probabilities between 0% and 100%, with P(A and B) no greater than the smaller of P(A) and P(B).",
           "conditional": "Enter probabilities between 0% and 100%, with P(A and B) no greater than P(B), and P(B) greater than 0%."
-        }
+        },
+        "sentence": "The probability is {probability} ({percentage}%)."
       },
       "quickReference": {
         "title": "The Formulas",
@@ -18085,7 +18135,27 @@
         "intro": {
           "title": "Understanding Probability",
           "paragraph1": "Probability measures how likely an event is to happen, expressed as a number between 0 (impossible) and 1 (certain) — or, equivalently, between 0% and 100%. For a single event with equally likely outcomes, probability is simply the count of favorable outcomes divided by the total count of possible outcomes: rolling a 3 on a fair six-sided die has probability 1/6, because exactly one of the six equally likely faces is a 3.",
-          "paragraph2": "Real situations usually involve more than one event, which is where the rules for combining probabilities come in. The AND rule multiplies two independent probabilities together to find the chance both happen. The OR rule adds two probabilities and subtracts their overlap, so shared outcomes aren't counted twice. Conditional probability narrows the field to only the outcomes where a condition is already known to be true, then asks how likely the event is within that narrower set. This calculator implements all four relationships directly from their standard definitions."
+          "paragraph2": "Real situations usually involve more than one event, which is where the rules for combining probabilities come in. The AND rule multiplies two independent probabilities together to find the chance both happen. The OR rule adds two probabilities and subtracts their overlap, so shared outcomes aren't counted twice. Conditional probability narrows the field to only the outcomes where a condition is already known to be true, then asks how likely the event is within that narrower set. This calculator implements all four relationships directly from their standard definitions.",
+          "likelihoodGauge": {
+            "title": "How Likely Is That?",
+            "intro": "Probabilities range from rare events to near certainties. Pick a familiar example below to see where it falls on the likelihood scale.",
+            "verdict": "{example} — Likelihood: {classification}.",
+            "fact": "This example has about a {percent} chance.",
+            "examples": {
+              "winningRaffle": "Winning a Raffle",
+              "rollingSix": "Rolling a Six",
+              "coinFlip": "A Coin Flip",
+              "rainTomorrow": "Rain Tomorrow",
+              "sunriseTomorrow": "Sunrise Tomorrow"
+            },
+            "zones": {
+              "rare": "Rare",
+              "unlikely": "Unlikely",
+              "even": "Even Odds",
+              "likely": "Likely",
+              "certain": "Near Certain"
+            }
+          }
         },
         "modes": {
           "title": "The Four Calculation Modes",
@@ -18214,6 +18284,30 @@
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Read Laplace's Original Treatise"
         }
+      },
+      "scenarios": {
+        "coinFlip": "Coin Flip",
+        "dieRollSix": "Rolling a Six",
+        "cardIsHeart": "Drawing a Heart",
+        "raffleTicket": "Winning a 1-in-100 Raffle"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "mean-median-mode-range-calculator": {
@@ -20688,7 +20782,8 @@
           "high": "Great chemistry by this calculator's math — sounds like a promising pair!",
           "veryHigh": "Off the charts! This calculator thinks you two are a wonderful match."
         },
-        "forFunOnly": "Remember: this is a numerology-style game for entertainment, not a scientific result."
+        "forFunOnly": "Remember: this is a numerology-style game for entertainment, not a scientific result.",
+        "sentence": "{name1} and {name2} score {percentage}% for fun."
       },
       "quickReference": {
         "title": "How It Works",
@@ -20699,7 +20794,24 @@
         "intro": {
           "title": "Understanding This Tool",
           "paragraph1": "This calculator takes the two names you enter, combines and normalizes them, and runs them through a deterministic numerical formula that converts the letters into a percentage between 0 and 100. Because the formula is deterministic, the same two names will always produce the same percentage no matter how many times you check, and the order you enter them in doesn't matter either — \"Alex and Jordan\" gives the same result as \"Jordan and Alex.\"",
-          "disclaimer": "Important: this percentage is generated purely for entertainment. It has no basis in psychology, relationship science, or any real measure of compatibility — it is simply a playful numbers game based on the letters in a name."
+          "disclaimer": "Important: this percentage is generated purely for entertainment. It has no basis in psychology, relationship science, or any real measure of compatibility — it is simply a playful numbers game based on the letters in a name.",
+          "compatibilityGauge": {
+            "title": "Try Some Famous Pairs",
+            "intro": "Just for fun, see what this calculator's playful algorithm gives some well-known pairs. Pick one below.",
+            "verdict": "{example} — {classification}.",
+            "fact": "This playful algorithm gives them {percent}%.",
+            "examples": {
+              "romeoJuliet": "Romeo & Juliet",
+              "jackRose": "Jack & Rose",
+              "mickeyMinnie": "Mickey & Minnie",
+              "batmanCatwoman": "Batman & Catwoman"
+            },
+            "zones": {
+              "low": "Low Match",
+              "medium": "Medium Match",
+              "high": "High Match"
+            }
+          }
         },
         "useCases": {
           "title": "Common Uses",
@@ -20800,6 +20912,24 @@
           "url": "https://www.gottman.com/about/research/",
           "readOriginal": "View the Research"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "fuel-cost-calculator": {
@@ -20838,7 +20968,8 @@
         "invalidRate": "Enter a fuel consumption or efficiency rate greater than zero.",
         "invalidPrice": "Enter a fuel price greater than zero.",
         "fuelUsedLabel": "Fuel Used",
-        "costPerDistanceLabel": "Cost per Distance Unit"
+        "costPerDistanceLabel": "Cost per Distance Unit",
+        "sentence": "Driving {distance} costs about {cost}."
       },
       "quickReference": {
         "title": "The Math",
@@ -20848,7 +20979,24 @@
         "intro": {
           "title": "Understanding Fuel Cost Estimation",
           "paragraph1": "Estimating the fuel cost of a trip comes down to figuring out how much fuel the trip will consume, then multiplying that amount by the price of fuel. Fuel usage itself can be described in two mathematically equivalent but differently worded ways: as a consumption rate (how much fuel is used per fixed distance, like liters per 100 kilometers, common in most of the world) or as an efficiency rate (how far a vehicle travels per unit of fuel, like kilometers per liter or miles per gallon, common in the United States and United Kingdom).",
-          "paragraph2": "The two rate types are just inverses of each other rearranged for convenience: a car using 8 liters per 100 km is exactly as efficient as one traveling 12.5 km per liter (since 100 ÷ 8 = 12.5). This calculator accepts either style directly, so you don't need to convert your vehicle's fuel economy figures into a different format before estimating a trip's cost — you just need to keep the distance unit and the fuel-rate's distance unit consistent (both in kilometers, or both in miles)."
+          "paragraph2": "The two rate types are just inverses of each other rearranged for convenience: a car using 8 liters per 100 km is exactly as efficient as one traveling 12.5 km per liter (since 100 ÷ 8 = 12.5). This calculator accepts either style directly, so you don't need to convert your vehicle's fuel economy figures into a different format before estimating a trip's cost — you just need to keep the distance unit and the fuel-rate's distance unit consistent (both in kilometers, or both in miles).",
+          "efficiencyGauge": {
+            "title": "How Thirsty Is This Vehicle?",
+            "intro": "Fuel consumption varies widely by vehicle type, from efficient hybrids to thirsty pickup trucks. Pick a real example below to see where it falls.",
+            "verdict": "{example} — Consumption: {classification}.",
+            "fact": "It uses about {rate}.",
+            "examples": {
+              "hybridCar": "Hybrid Car",
+              "compactSedan": "Compact Sedan",
+              "suv": "SUV",
+              "pickupTruck": "Pickup Truck"
+            },
+            "zones": {
+              "efficient": "Efficient",
+              "average": "Average",
+              "thirsty": "Thirsty"
+            }
+          }
         },
         "useCases": {
           "title": "Common Uses",
@@ -20975,6 +21123,24 @@
         "roadTrip": "Road Trip",
         "efficientHybrid": "Efficient Hybrid",
         "usPickupTruck": "US Pickup Truck"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "batch-invoice-calculator": {

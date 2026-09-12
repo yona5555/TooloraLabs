@@ -5006,6 +5006,24 @@
         "nyToTokyo": "New York → Tokio",
         "londonToSydney": "London → Sydney",
         "laToDubai": "Los Angeles → Dubai"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "fraction-calculator": {
@@ -17211,7 +17229,8 @@
         "stepsTitle": "Abweichungen Schritt für Schritt",
         "columnValue": "Wert",
         "columnDeviation": "Abweichung (x − μ)",
-        "columnSquared": "Quadriert"
+        "columnSquared": "Quadriert",
+        "sentence": "Bei einem Mittelwert von {mean} hat dieser Datensatz eine Standardabweichung von {stdDev}."
       },
       "chart": {
         "ariaLabel": "Zahlenstrahl, der jeden eingegebenen Wert als Punkt zeigt, mit einem schattierten Band, das eine Standardabweichung der Grundgesamtheit auf jeder Seite des Mittelwerts umfasst",
@@ -17226,7 +17245,18 @@
         "intro": {
           "title": "Standardabweichung verstehen",
           "paragraph1": "Die Standardabweichung misst, wie stark eine Reihe von Werten um ihren Mittelwert gestreut ist — eine kleine Standardabweichung bedeutet, dass die meisten Werte nahe am Durchschnitt liegen, eine große bedeutet, dass sie weit gestreut sind. Sie ist die Quadratwurzel der Varianz, die selbst der Durchschnitt der quadrierten Abstände jedes Wertes vom Mittelwert ist; das vorherige Quadrieren (statt einfach die rohen Abstände zu mitteln) stellt sicher, dass sich Abweichungen über und unter dem Mittelwert nicht gegenseitig aufheben, und das abschließende Ziehen der Quadratwurzel bringt das Ergebnis zurück in die ursprüngliche Einheit der Daten statt in eine quadrierte.",
-          "paragraph2": "Dieses Tool berechnet sowohl die Standardabweichung der Grundgesamtheit (σ), verwendet, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert, als auch die Standardabweichung der Stichprobe (s), verwendet, wenn Ihre Daten eine Teilmenge sind, die aus einer größeren Population gezogen wurde, über die Sie Schlüsse ziehen möchten. Die beiden Formeln unterscheiden sich nur im Nenner — die Grundgesamtheit teilt durch N, die Stichprobe teilt durch n − 1 — eine kleine, aber bewusste Anpassung namens Bessel-Korrektur, die die Tendenz des Stichprobenmittelwerts korrigiert, näher an den eigenen Datenpunkten zu liegen, als es der wahre Populationsmittelwert tun würde."
+          "paragraph2": "Dieses Tool berechnet sowohl die Standardabweichung der Grundgesamtheit (σ), verwendet, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert, als auch die Standardabweichung der Stichprobe (s), verwendet, wenn Ihre Daten eine Teilmenge sind, die aus einer größeren Population gezogen wurde, über die Sie Schlüsse ziehen möchten. Die beiden Formeln unterscheiden sich nur im Nenner — die Grundgesamtheit teilt durch N, die Stichprobe teilt durch n − 1 — eine kleine, aber bewusste Anpassung namens Bessel-Korrektur, die die Tendenz des Stichprobenmittelwerts korrigiert, näher an den eigenen Datenpunkten zu liegen, als es der wahre Populationsmittelwert tun würde.",
+          "cvGauge": {
+            "title": "Wie stark streut dieser Datensatz?",
+            "intro": "Der Variationskoeffizient (Standardabweichung relativ zum Mittelwert) zeigt, wie stark ein Datensatz streut, unabhängig von seinen Einheiten. Wähle unten einen realen Datensatz, um zu sehen, wo er liegt.",
+            "verdict": "{example} — Streuung: {classification}.",
+            "fact": "Sein Variationskoeffizient liegt bei etwa {cv}%.",
+            "zones": {
+              "low": "Geringe Streuung",
+              "moderate": "Mäßige Streuung",
+              "high": "Hohe Streuung"
+            }
+          }
         },
         "formula": {
           "title": "Die Formeln",
@@ -17357,6 +17387,24 @@
         "testScores": "Testergebnisse",
         "dailyTemperatures": "Tagestemperaturen",
         "factoryMeasurements": "Fabrikmessungen"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "circle-calculator": {
@@ -18059,7 +18107,8 @@
           "or": "Gib die Wahrscheinlichkeit jedes Ereignisses und die Wahrscheinlichkeit ein, dass beide gemeinsam eintreten (0, falls sich gegenseitig ausschließend), in Prozent.",
           "conditional": "Gib die Wahrscheinlichkeit ein, dass beide Ereignisse gemeinsam eintreten, sowie die Wahrscheinlichkeit der Bedingung B, in Prozent."
         },
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "scenarioLabel": "Ein klassisches Beispiel ausprobieren"
       },
       "diagram": {
         "ariaLabel": "Ein horizontaler Balken, gefüllt bis zur berechneten Wahrscheinlichkeit in Prozent"
@@ -18075,7 +18124,8 @@
           "and": "Gib zwei Wahrscheinlichkeiten zwischen 0 % und 100 % ein.",
           "or": "Gib Wahrscheinlichkeiten zwischen 0 % und 100 % ein, wobei P(A und B) nicht größer sein darf als der kleinere Wert von P(A) und P(B).",
           "conditional": "Gib Wahrscheinlichkeiten zwischen 0 % und 100 % ein, wobei P(A und B) nicht größer als P(B) sein darf und P(B) größer als 0 % sein muss."
-        }
+        },
+        "sentence": "Die Wahrscheinlichkeit beträgt {probability} ({percentage}%)."
       },
       "quickReference": {
         "title": "Die Formeln",
@@ -18085,7 +18135,27 @@
         "intro": {
           "title": "Wahrscheinlichkeit verstehen",
           "paragraph1": "Wahrscheinlichkeit misst, wie wahrscheinlich ein Ereignis eintritt, ausgedrückt als Zahl zwischen 0 (unmöglich) und 1 (sicher) — oder gleichwertig zwischen 0 % und 100 %. Bei einem einzelnen Ereignis mit gleich wahrscheinlichen Ausgängen ist die Wahrscheinlichkeit einfach die Anzahl der günstigen Ausgänge geteilt durch die Gesamtzahl der möglichen Ausgänge: Eine 3 mit einem fairen sechsseitigen Würfel zu würfeln hat die Wahrscheinlichkeit 1/6, da genau eine der sechs gleich wahrscheinlichen Seiten eine 3 ist.",
-          "paragraph2": "Reale Situationen betreffen meist mehr als ein Ereignis — hier kommen die Regeln zur Kombination von Wahrscheinlichkeiten ins Spiel. Die UND-Regel multipliziert zwei unabhängige Wahrscheinlichkeiten, um die Chance zu finden, dass beide eintreten. Die ODER-Regel addiert zwei Wahrscheinlichkeiten und subtrahiert ihre Überschneidung, damit gemeinsame Ausgänge nicht doppelt gezählt werden. Die bedingte Wahrscheinlichkeit grenzt das Feld auf nur die Ausgänge ein, bei denen eine Bedingung bereits als wahr bekannt ist, und fragt dann, wie wahrscheinlich das Ereignis innerhalb dieser engeren Menge ist. Dieser Rechner setzt alle vier Beziehungen direkt nach ihren Standarddefinitionen um."
+          "paragraph2": "Reale Situationen betreffen meist mehr als ein Ereignis — hier kommen die Regeln zur Kombination von Wahrscheinlichkeiten ins Spiel. Die UND-Regel multipliziert zwei unabhängige Wahrscheinlichkeiten, um die Chance zu finden, dass beide eintreten. Die ODER-Regel addiert zwei Wahrscheinlichkeiten und subtrahiert ihre Überschneidung, damit gemeinsame Ausgänge nicht doppelt gezählt werden. Die bedingte Wahrscheinlichkeit grenzt das Feld auf nur die Ausgänge ein, bei denen eine Bedingung bereits als wahr bekannt ist, und fragt dann, wie wahrscheinlich das Ereignis innerhalb dieser engeren Menge ist. Dieser Rechner setzt alle vier Beziehungen direkt nach ihren Standarddefinitionen um.",
+          "likelihoodGauge": {
+            "title": "Wie wahrscheinlich ist das?",
+            "intro": "Wahrscheinlichkeiten reichen von seltenen Ereignissen bis zu nahezu sicheren. Wähle unten ein vertrautes Beispiel, um zu sehen, wo es auf der Wahrscheinlichkeitsskala liegt.",
+            "verdict": "{example} — Wahrscheinlichkeit: {classification}.",
+            "fact": "Dieses Beispiel hat eine Wahrscheinlichkeit von etwa {percent}.",
+            "examples": {
+              "winningRaffle": "Eine Verlosung gewinnen",
+              "rollingSix": "Eine Sechs würfeln",
+              "coinFlip": "Ein Münzwurf",
+              "rainTomorrow": "Regen morgen",
+              "sunriseTomorrow": "Sonnenaufgang morgen"
+            },
+            "zones": {
+              "rare": "Selten",
+              "unlikely": "Unwahrscheinlich",
+              "even": "Ausgeglichene Chancen",
+              "likely": "Wahrscheinlich",
+              "certain": "Nahezu sicher"
+            }
+          }
         },
         "modes": {
           "title": "Die vier Berechnungsmodi",
@@ -18214,6 +18284,30 @@
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Laplaces Originalabhandlung lesen"
         }
+      },
+      "scenarios": {
+        "coinFlip": "Münzwurf",
+        "dieRollSix": "Eine Sechs würfeln",
+        "cardIsHeart": "Ein Herz ziehen",
+        "raffleTicket": "Eine 1-zu-100-Verlosung gewinnen"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "mean-median-mode-range-calculator": {
@@ -20688,7 +20782,8 @@
           "high": "Großartige Chemie laut dieser Rechnung — klingt nach einem vielversprechenden Paar!",
           "veryHigh": "Außergewöhnlich! Dieser Rechner hält euch beide für ein wunderbares Paar."
         },
-        "forFunOnly": "Denk daran: Dies ist ein numerologisches Spiel zur Unterhaltung, kein wissenschaftliches Ergebnis."
+        "forFunOnly": "Denk daran: Dies ist ein numerologisches Spiel zur Unterhaltung, kein wissenschaftliches Ergebnis.",
+        "sentence": "{name1} und {name2} erreichen zum Spaß {percentage}%."
       },
       "quickReference": {
         "title": "So funktioniert es",
@@ -20699,7 +20794,24 @@
         "intro": {
           "title": "Dieses Tool verstehen",
           "paragraph1": "Dieser Rechner nimmt die beiden eingegebenen Namen, kombiniert und normalisiert sie und führt sie durch eine deterministische numerische Formel, die die Buchstaben in einen Prozentsatz zwischen 0 und 100 umwandelt. Da die Formel deterministisch ist, ergeben dieselben zwei Namen immer denselben Prozentsatz, egal wie oft du nachschaust, und auch die Reihenfolge, in der du sie eingibst, spielt keine Rolle — \"Alex und Jordan\" ergibt dasselbe Ergebnis wie \"Jordan und Alex\".",
-          "disclaimer": "Wichtig: Dieser Prozentsatz wird rein zur Unterhaltung generiert. Er hat keine Grundlage in Psychologie, Beziehungswissenschaft oder einem echten Maß für Kompatibilität — es ist einfach ein spielerisches Zahlenspiel, das auf den Buchstaben eines Namens basiert."
+          "disclaimer": "Wichtig: Dieser Prozentsatz wird rein zur Unterhaltung generiert. Er hat keine Grundlage in Psychologie, Beziehungswissenschaft oder einem echten Maß für Kompatibilität — es ist einfach ein spielerisches Zahlenspiel, das auf den Buchstaben eines Namens basiert.",
+          "compatibilityGauge": {
+            "title": "Probiere ein paar berühmte Paare",
+            "intro": "Nur zum Spaß: Sieh, was der verspielte Algorithmus dieses Rechners bei ein paar bekannten Paaren ergibt. Wähle unten eines aus.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Dieser verspielte Algorithmus gibt ihnen {percent}%.",
+            "examples": {
+              "romeoJuliet": "Romeo & Julia",
+              "jackRose": "Jack & Rose",
+              "mickeyMinnie": "Micky & Minnie",
+              "batmanCatwoman": "Batman & Catwoman"
+            },
+            "zones": {
+              "low": "Geringe Übereinstimmung",
+              "medium": "Mittlere Übereinstimmung",
+              "high": "Hohe Übereinstimmung"
+            }
+          }
         },
         "useCases": {
           "title": "Häufige Anwendungen",
@@ -20800,6 +20912,24 @@
           "url": "https://www.gottman.com/about/research/",
           "readOriginal": "Forschung ansehen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "fuel-cost-calculator": {
@@ -20838,7 +20968,8 @@
         "invalidRate": "Gib eine Verbrauchs- oder Effizienzrate größer als null ein.",
         "invalidPrice": "Gib einen Kraftstoffpreis größer als null ein.",
         "fuelUsedLabel": "Verbrauchter Kraftstoff",
-        "costPerDistanceLabel": "Kosten pro Streckeneinheit"
+        "costPerDistanceLabel": "Kosten pro Streckeneinheit",
+        "sentence": "Eine Fahrt von {distance} kostet etwa {cost}."
       },
       "quickReference": {
         "title": "Die Rechnung",
@@ -20848,7 +20979,24 @@
         "intro": {
           "title": "Kraftstoffkostenschätzung verstehen",
           "paragraph1": "Die Schätzung der Kraftstoffkosten einer Fahrt läuft darauf hinaus, herauszufinden, wie viel Kraftstoff die Fahrt verbrauchen wird, und diese Menge dann mit dem Kraftstoffpreis zu multiplizieren. Der Kraftstoffverbrauch selbst kann auf zwei mathematisch gleichwertige, aber unterschiedlich formulierte Arten beschrieben werden: als Verbrauchsrate (wie viel Kraftstoff pro fester Strecke verbraucht wird, wie Liter pro 100 Kilometer, in den meisten Teilen der Welt üblich) oder als Effizienzrate (wie weit ein Fahrzeug pro Kraftstoffeinheit fährt, wie Kilometer pro Liter oder Meilen pro Gallone, in den USA und Großbritannien üblich).",
-          "paragraph2": "Die beiden Angabetypen sind lediglich zur Vereinfachung umgestellte Kehrwerte voneinander: Ein Auto, das 8 Liter pro 100 km verbraucht, ist genauso effizient wie eines, das 12,5 km pro Liter fährt (da 100 ÷ 8 = 12,5). Dieser Rechner akzeptiert beide Formate direkt, sodass du die Verbrauchswerte deines Fahrzeugs nicht in ein anderes Format umrechnen musst, bevor du die Kosten einer Fahrt schätzt — du musst nur sicherstellen, dass die Streckeneinheit und die Streckeneinheit der Verbrauchsrate übereinstimmen (beide in Kilometern oder beide in Meilen)."
+          "paragraph2": "Die beiden Angabetypen sind lediglich zur Vereinfachung umgestellte Kehrwerte voneinander: Ein Auto, das 8 Liter pro 100 km verbraucht, ist genauso effizient wie eines, das 12,5 km pro Liter fährt (da 100 ÷ 8 = 12,5). Dieser Rechner akzeptiert beide Formate direkt, sodass du die Verbrauchswerte deines Fahrzeugs nicht in ein anderes Format umrechnen musst, bevor du die Kosten einer Fahrt schätzt — du musst nur sicherstellen, dass die Streckeneinheit und die Streckeneinheit der Verbrauchsrate übereinstimmen (beide in Kilometern oder beide in Meilen).",
+          "efficiencyGauge": {
+            "title": "Wie durstig ist dieses Fahrzeug?",
+            "intro": "Der Kraftstoffverbrauch variiert je nach Fahrzeugtyp stark, von sparsamen Hybriden bis zu durstigen Pickup-Trucks. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Verbrauch: {classification}.",
+            "fact": "Es verbraucht etwa {rate}.",
+            "examples": {
+              "hybridCar": "Hybridauto",
+              "compactSedan": "Kompaktlimousine",
+              "suv": "SUV",
+              "pickupTruck": "Pickup-Truck"
+            },
+            "zones": {
+              "efficient": "Sparsam",
+              "average": "Durchschnittlich",
+              "thirsty": "Durstig"
+            }
+          }
         },
         "useCases": {
           "title": "Häufige Anwendungen",
@@ -20975,6 +21123,24 @@
         "roadTrip": "Roadtrip",
         "efficientHybrid": "Effizienter Hybrid",
         "usPickupTruck": "US-Pickup-Truck"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "batch-invoice-calculator": {

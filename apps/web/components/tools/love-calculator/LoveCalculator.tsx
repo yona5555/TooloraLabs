@@ -58,9 +58,9 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
           }
           result={
             hasCalculated ? (
-              <LoveResult result={displayResult} />
+              <LoveResult result={displayResult} name1={name1} name2={name2} />
             ) : (
-              <LoveResult result={{ error: "empty-name", percentage: 0 }} />
+              <LoveResult result={{ error: "empty-name", percentage: 0 }} name1={name1} name2={name2} />
             )
           }
           sidebar={<RelatedToolsSidebar currentSlug="love-calculator" category="fun-entertainment" />}
