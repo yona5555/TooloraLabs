@@ -6,6 +6,7 @@ import { SpellingGrammarCalculator as SGTool, type SpellingGrammarOutput } from 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SGInputPanel from "./SGInputPanel";
 import SGResult from "./SGResult";
 import SGQuickReference from "./SGQuickReference";
@@ -44,6 +45,7 @@ export default function SpellingGrammarChecker({ education }: { education: React
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="spelling-grammar-checker" />
               <SGQuickReference />
             </div>
           }

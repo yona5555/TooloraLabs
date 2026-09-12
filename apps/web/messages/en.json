@@ -33736,6 +33736,629 @@
             "answer": "Not an arithmetic one — it's a uniformly random selection from whichever pool the category filter (and the 'exclude current quote' rule) produces. Every quote in that pool has an equal chance of being chosen."
           }
         ]
+      },
+      "unit-converter": {
+        "version": "v2",
+        "description": "Technical reference for the Unit Converter: how length, weight, temperature, area, volume, and speed values are converted using per-category conversion factors (and, for temperature, a Celsius pivot), the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The Full Conversions Table",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categories",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "linear categories: result = (value × factor[from]) ÷ factor[to]  |  temperature: celsius = toCelsius(value, from); result = fromCelsius(celsius, to)",
+          "note": "Every linear category (length, weight, area, volume, speed) shares one factor-table formula: convert the input to that category's base unit by multiplying by the source unit's factor, then convert to the target unit by dividing by its factor. Temperature can't work this way, since °F and °C don't share a zero point, so it's handled separately by pivoting through Celsius with two explicit conversion functions."
+        },
+        "flowchart": {
+          "intro": "Every category except temperature shares the exact same two-step conversion; temperature needs a dedicated non-linear pivot instead.",
+          "steps": [
+            "Pick a category — length, weight, temperature, area, volume, or speed — and a 'from' and 'to' unit within it",
+            "For temperature, convert the entered value to Celsius first using a dedicated formula for whichever unit (Celsius, Fahrenheit, or Kelvin) it was entered in",
+            "For every other category, look up the 'from' and 'to' units' conversion factors in that category's factor table (each expressed relative to one base unit, like meters or kilograms)",
+            "Multiply the value by the 'from' factor, then divide by the 'to' factor, to get the converted result — for temperature, convert the pivoted Celsius value into the target unit instead",
+            "Round the result to 6 decimal places, and also compute the same input value converted into every other unit in the category, for the full conversions table"
+          ],
+          "caption": "Linear categories pivot through a base unit (like meters); temperature pivots through Celsius instead, since its scales don't share a zero point."
+        },
+        "anatomy": {
+          "intro": "Converting a value doesn't just produce one number — the tool also computes the same quantity in every other unit of the category at once, so 1 kilometer's other equivalents are already on hand.",
+          "labelKm": "Kilometers",
+          "labelM": "Meters",
+          "labelMi": "Miles",
+          "labelFt": "Feet",
+          "caption": "All four rows represent the exact same physical distance — 1 kilometer — just expressed through each unit's own factor relative to the meter base unit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "category",
+            "meaning": "Which family of units to convert within.",
+            "unit": "length, weight, temperature, area, volume, or speed"
+          },
+          {
+            "symbol": "value",
+            "meaning": "The numeric quantity to convert.",
+            "unit": "from unit"
+          },
+          {
+            "symbol": "from",
+            "meaning": "The unit the entered value is currently in.",
+            "unit": "—"
+          },
+          {
+            "symbol": "to",
+            "meaning": "The unit to convert the value into.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An unrecognized unit for the selected category fails explicitly, not silently",
+            "description": "If either the 'from' or 'to' unit isn't a key in that category's factor table (or, for temperature, isn't celsius/fahrenheit/kelvin), the tool returns a failed result with an explicit 'Unsupported unit for this category' error instead of silently producing 0 or NaN."
+          },
+          {
+            "title": "Temperature is deliberately never routed through the linear factor tables",
+            "description": "Because Fahrenheit and Celsius have different zero points as well as different scale sizes, no single multiplicative factor can convert between them — the code branches on category === 'temperature' specifically to use the two dedicated toCelsius/fromCelsius functions instead."
+          },
+          {
+            "title": "Every result is rounded to exactly 6 decimal places",
+            "description": "The round() helper always formats to 6 decimals via toFixed before converting back to a number — this keeps results from converters like acres (a 10-decimal-precision factor) from displaying long strings of floating-point noise."
+          },
+          {
+            "title": "The full conversions table is only populated when the 'from' unit is valid",
+            "description": "allConversions is built by converting the input into every unit in the category, but only after confirming input.from exists in the factor table — an invalid 'from' unit produces an empty conversions object rather than a table full of NaN values."
+          },
+          {
+            "title": "Converting a unit to itself still runs the full factor-table math",
+            "description": "There's no identity shortcut for from === to — the value is still multiplied and divided by the same factor, which mathematically cancels out to the original value (modulo the 6-decimal rounding), so the result is correct without needing special-case code."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does temperature need special handling when every other category doesn't?",
+            "answer": "Length, weight, area, volume, and speed all convert by simple multiplication — 1 unit of any of them is always some fixed multiple of the base unit. Temperature scales don't share a zero point (0°C is 32°F, not 0°F), so no single multiplication factor can convert between them; the tool pivots through Celsius with dedicated addition/subtraction-based formulas instead."
+          },
+          {
+            "question": "What does the 'all conversions' table show, exactly?",
+            "answer": "It's the same input value, converted into every unit available in the selected category, computed all at once alongside the main result — so switching which unit you want to read the answer in doesn't require re-entering the value."
+          },
+          {
+            "question": "Why are results rounded to 6 decimal places instead of shown at full precision?",
+            "answer": "Some conversion factors (like acres-to-square-meters, at 4046.8564224) carry many decimal digits, and floating-point arithmetic can introduce tiny representation errors beyond that. Rounding to 6 decimals keeps results clean and readable without meaningfully sacrificing accuracy for any realistic use case."
+          },
+          {
+            "question": "Can I convert between two units in different categories, like meters to kilograms?",
+            "answer": "No — a category (length, weight, temperature, area, volume, or speed) is selected first, and only units within that same category are offered as 'from'/'to' choices, since converting between fundamentally different physical quantities isn't a valid operation."
+          }
+        ]
+      },
+      "roman-numeral-converter": {
+        "version": "v1",
+        "description": "Technical reference for the Roman Numeral Converter: how a number is greedily broken down into value-symbol pairs to build a Roman numeral, how a Roman numeral is parsed back into a number with round-trip validation, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Roman Numeral",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Value Range",
+          "modesValue": "1–3999",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "toRoman(n): greedily subtract the largest value-symbol pair ≤ n, appending its symbol, until n reaches 0  |  toArabic(s): sum each letter's value, subtracting it instead when it precedes a larger letter",
+          "note": "Both directions use a fixed list of 13 value-symbol pairs from 1000 (M) down to 1 (I), including the six subtractive pairs (900=CM, 400=CD, 90=XC, 40=XL, 9=IX, 4=IV) — checking those subtractive pairs before their plain counterparts is what produces standard forms like 'XC' for 90 instead of 'LXXXX'."
+        },
+        "flowchart": {
+          "intro": "Converting to Roman is a greedy consume-and-append loop; converting back to Arabic is a left-to-right scan with a look-ahead comparison, followed by a round-trip check.",
+          "steps": [
+            "For 'to Roman': validate the entered number is a whole number between 1 and 3999 (the largest value representable without repeating a symbol more than the standard three times)",
+            "Walk the 13 value-symbol pairs from largest (1000, 'M') to smallest (1, 'I'); at each pair, append the symbol and subtract its value from the remaining amount for as long as the remaining amount is still at least that value",
+            "For 'to Arabic': validate the entered text is non-empty and contains only the seven valid Roman letters (I, V, X, L, C, D, M)",
+            "Scan the letters left to right, looking at each letter's value against the very next letter's value — if the next letter's value is larger, subtract the current letter's value instead of adding it (this is what makes 'IV' equal 4, not 6)",
+            "Re-convert the parsed number back to Roman and compare it to the original input — if they don't match exactly, reject the input as an invalid, non-canonical numeral (like 'IIII' or 'VX') even though the naive sum would have produced a number"
+          ],
+          "caption": "The round-trip check in the last step is what catches numerals a simple summing parser would otherwise accept incorrectly."
+        },
+        "anatomy": {
+          "intro": "A Roman numeral is literally a concatenation of value-symbol pairs, each consumed greedily from the largest down — breaking 1994 down this way shows exactly where each letter group comes from.",
+          "totalLabel": "1994",
+          "caption": "1994 = 1000 (M) + 900 (CM) + 90 (XC) + 4 (IV) — MCMXCIV — each segment matching one greedily-consumed value-symbol pair."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "direction",
+            "meaning": "Which way to convert: Arabic number to Roman numeral, or Roman numeral to Arabic number.",
+            "unit": "—"
+          },
+          {
+            "symbol": "arabicValue",
+            "meaning": "The whole number to convert to Roman numerals (used when direction is 'to Roman').",
+            "unit": "1–3999"
+          },
+          {
+            "symbol": "romanValue",
+            "meaning": "The Roman numeral text to convert to a number (used when direction is 'to Arabic').",
+            "unit": "I, V, X, L, C, D, M"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Values outside 1–3999 are rejected, not clamped or wrapped",
+            "description": "3999 (MMMCMXCIX) is the largest number the standard 7-symbol system can represent without repeating a symbol more than three times in a row; the tool rejects both 0 and anything above 3999 with an explicit 'out-of-range' error rather than silently clamping to the nearest valid value."
+          },
+          {
+            "title": "A non-canonical but 'summable' Roman numeral like 'IIII' or 'VX' is still rejected",
+            "description": "romanToArabic would happily sum 'IIII' to 4 using the letter-by-letter comparison rule, but the calculator re-converts that 4 back to Roman (getting 'IV') and rejects the input because 'IV' ≠ 'IIII' — this round-trip check is the only thing that catches non-standard forms, since the summing logic alone can't distinguish them."
+          },
+          {
+            "title": "Roman input is case-insensitive on the way in, but always uppercase on the way out",
+            "description": "Typed Roman numerals are uppercased before validation (so 'mcmxciv' and 'MCMXCIV' both work), but a converted result is always rendered in the standard uppercase form, since lowercase Roman numerals aren't a recognized convention."
+          },
+          {
+            "title": "Any character outside I, V, X, L, C, D, M fails validation immediately",
+            "description": "The regex check for valid Roman letters runs before any parsing logic, so an input like '12' or 'IVX!' is rejected with 'invalid-roman' before the letter-by-letter scan ever executes, rather than partially parsing and failing later."
+          },
+          {
+            "title": "An empty or whitespace-only input in either direction returns a distinct 'empty-input' error, separate from 'invalid' or 'out-of-range'",
+            "description": "This distinction lets the UI show a neutral 'nothing entered yet' state rather than an alarming validation-failure message when a field is simply blank."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is 3999 the maximum, instead of allowing larger numbers?",
+            "answer": "Standard Roman numerals have no symbol for 5000 or beyond in common use, and the largest number expressible using only M/CM/D/CD/C/XC/L/XL/X/IX/V/IV/I without repeating any symbol more than three times consecutively is 3999 (MMMCMXCIX). Larger numbers would require non-standard notation this converter doesn't attempt to support."
+          },
+          {
+            "question": "Why does the converter reject 'IIII' for 4, when it seems to add up correctly?",
+            "answer": "'IIII' does sum to 4 under a naive letter-by-letter rule, but it isn't the standard, canonical way to write 4 — 'IV' is. The converter specifically checks this by converting any parsed number back to Roman and rejecting the input if it doesn't match exactly, which catches 'IIII', 'VX', and similar non-standard forms."
+          },
+          {
+            "question": "Does capitalization matter when I type a Roman numeral?",
+            "answer": "No — typed input is automatically uppercased before it's validated or parsed, so 'xiv', 'Xiv', and 'XIV' are all treated identically. The converted result itself is always displayed in standard uppercase, though."
+          },
+          {
+            "question": "How does the converter know 'IV' means 4 and not 6 (I + V)?",
+            "answer": "It compares each letter's value to the very next letter's value while scanning left to right. When a smaller-value letter comes right before a larger-value one, that smaller letter's value is subtracted instead of added — that single comparison rule is what turns 'IV' into 5 − 1 = 4 rather than 1 + 5 = 6."
+          }
+        ]
+      },
+      "image-converter": {
+        "version": "v1",
+        "description": "Technical reference for the Image Converter: how a browser re-encodes an image to a different format using the Canvas API, how optional resizing preserves aspect ratio without ever upscaling, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Original vs. Converted Size",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Output Formats",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "outputDimensions = fit(original, maxWidth) preserving aspect ratio, scale ≤ 1 only  |  compressionPercent = round((1 − newBytes ÷ originalBytes) × 100)",
+          "note": "Resizing computes a single scale factor — capped at 1 so the image is never stretched larger than its original size — and applies it to both width and height together, which is what keeps the aspect ratio intact. Compression percent is a plain before/after byte-size comparison, computed only after the browser has actually produced the converted file."
+        },
+        "flowchart": {
+          "intro": "Every step after the initial file check runs entirely in the browser — no image data is ever uploaded to a server.",
+          "steps": [
+            "Validate the selected file's type starts with 'image/' and its size is under the 10 MB limit, rejecting it with a specific error otherwise",
+            "Decode the image into an in-memory <img> element to read its natural (original) pixel width and height",
+            "If resizing is enabled, compute new dimensions that fit within the given max width while preserving the original aspect ratio — capping the scale factor at 1 so a small image is never stretched larger",
+            "Draw the image onto an off-screen <canvas> element at the final (possibly resized) dimensions",
+            "Re-encode the canvas to the chosen output format (PNG, JPEG, or WebP) via the browser's canvas.toBlob, passing a quality value for JPEG/WebP (PNG ignores quality, since it's a lossless format)",
+            "Compare the resulting file's byte size to the original to report a compression percentage, and make the converted file available to preview and download"
+          ],
+          "caption": "Nothing here calls a server API — decoding, resizing, and re-encoding all happen through the browser's own Image and Canvas APIs."
+        },
+        "anatomy": {
+          "intro": "Converting to a more efficient format typically shrinks the file — this compares one illustrative original size against its converted result.",
+          "labelOriginal": "Original (KB)",
+          "labelConverted": "Converted (KB)",
+          "caption": "A 2.4 MB original converted to WebP at quality 0.85 might come out around 640 KB — roughly a 73% reduction — though the exact result always depends on the source image's own content."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "file",
+            "meaning": "The selected image file to convert.",
+            "unit": "≤ 10 MB, image/*"
+          },
+          {
+            "symbol": "format",
+            "meaning": "The output format to re-encode into.",
+            "unit": "PNG, JPEG, or WebP"
+          },
+          {
+            "symbol": "quality",
+            "meaning": "Compression quality passed to the encoder; ignored for PNG since it's lossless.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "resizeEnabled / maxWidth",
+            "meaning": "Whether to constrain the output to a maximum width, and that width, before re-encoding.",
+            "unit": "pixels"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A non-image file is rejected before any decoding is attempted",
+            "description": "The file's MIME type is checked against the 'image/' prefix immediately on selection — a mismatched file (like a PDF renamed with a misleading extension) is rejected with a specific error rather than being handed to the Image element, where it would fail less predictably."
+          },
+          {
+            "title": "Files over 10 MB are rejected outright, regardless of format",
+            "description": "The size check runs before the file is ever read, so a large file doesn't get partially decoded or start consuming memory before the limit is enforced."
+          },
+          {
+            "title": "Resizing only ever shrinks an image, never enlarges it",
+            "description": "computeResizedDimensions computes the scale as the minimum of the width-fit ratio, the height-fit ratio, and 1 — that hard cap at 1 means an image already smaller than the requested max width is returned at its original size instead of being stretched up, which would only blur it."
+          },
+          {
+            "title": "The quality slider has no effect at all when the output format is PNG",
+            "description": "canvas.toBlob is called with undefined for the quality argument specifically when the format is PNG, since PNG is a lossless format with no quality/compression trade-off to control — the same slider value is silently ignored for that format."
+          },
+          {
+            "title": "Every conversion is debounced by 250ms after the last settings change",
+            "description": "Adjusting format, quality, or the resize width doesn't trigger an immediate re-conversion on every keystroke or slider tick — a 250ms debounce timer coalesces rapid changes into a single conversion pass, avoiding redundant canvas work while a value is actively being adjusted."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Is my image uploaded to a server when I convert it?",
+            "answer": "No — every step (decoding the file, resizing, re-encoding to the new format) happens locally in your browser using the Canvas and Image APIs. The image data never leaves your device."
+          },
+          {
+            "question": "Why does the quality slider not change anything when I pick PNG as the output format?",
+            "answer": "PNG is a lossless format — it doesn't have a quality/compression trade-off the way JPEG and WebP do. The tool still shows the slider for a consistent layout across formats, but it's not passed to the encoder when the output is PNG."
+          },
+          {
+            "question": "Will resizing ever make my image bigger or blurrier?",
+            "answer": "No — the resize calculation explicitly caps its scale factor at 1, so an image already smaller than your requested max width is left at its original size rather than being stretched up, which would only degrade its quality."
+          },
+          {
+            "question": "What's the largest file I can convert?",
+            "answer": "10 MB. Files larger than that are rejected immediately, before any decoding is attempted, to keep the browser from trying to process very large images that could stall the page."
+          }
+        ]
+      },
+      "text-to-speech": {
+        "version": "v1",
+        "description": "Technical reference for the Text to Speech tool: how text is split into speech-friendly chunks at sentence and word boundaries, how the browser's SpeechSynthesis API speaks each chunk in sequence, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Chunked Passage",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Chunk Limit",
+          "modesValue": "200 chars",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "chunks = splitIntoChunks(text, maxLength=200): accumulate sentences up to maxLength; split any single sentence longer than maxLength at word boundaries",
+          "note": "Chunking exists because some browsers silently truncate or mishandle a single very long SpeechSynthesisUtterance — splitting into shorter chunks and queuing them one after another keeps every browser's speech engine reliable, regardless of how long the original text is."
+        },
+        "flowchart": {
+          "intro": "Chunking always tries to break at a sentence boundary first, only falling back to word boundaries for a single sentence that's too long on its own.",
+          "steps": [
+            "Trim the entered text; if nothing is left, return the 'empty-text' error immediately",
+            "Validate the rate is a finite number within the Web Speech API's supported range (0.1 to 10); reject otherwise with 'invalid-rate'",
+            "Validate the pitch is a finite number within its supported range (0 to 2); reject otherwise with 'invalid-pitch'",
+            "Split the text into sentences using a regex that matches runs of characters ending in '.', '!', or '?'",
+            "Accumulate sentences into a chunk until adding the next one would exceed the 200-character limit, then start a new chunk — a single sentence longer than the limit is further split at word boundaries instead",
+            "Queue one SpeechSynthesisUtterance per finished chunk, in order, using the selected voice, rate, and pitch, and speak them back to back"
+          ],
+          "caption": "The chunk boundary search always prefers whole sentences; only a sentence that's individually too long ever gets split mid-sentence, at a word boundary."
+        },
+        "anatomy": {
+          "intro": "A long piece of text is queued as several shorter chunks rather than spoken in one utterance — this shows how one 417-character passage might split into three.",
+          "labelChunk1": "Chunk 1",
+          "labelChunk2": "Chunk 2",
+          "labelChunk3": "Chunk 3",
+          "totalLabel": "Total characters",
+          "caption": "Each chunk stays under the 200-character limit; splitting happens at a sentence boundary whenever possible, so no chunk cuts a sentence in half unless that sentence alone is too long to fit."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The text to convert to speech.",
+            "unit": "characters"
+          },
+          {
+            "symbol": "rate",
+            "meaning": "Playback speed passed to the speech engine.",
+            "unit": "0.1–10 (default 1)"
+          },
+          {
+            "symbol": "pitch",
+            "meaning": "Voice pitch passed to the speech engine.",
+            "unit": "0–2 (default 1)"
+          },
+          {
+            "symbol": "maxChunkLength",
+            "meaning": "The maximum character length of any one speech chunk before it's split further.",
+            "unit": "default 200"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Empty or whitespace-only text is rejected before rate or pitch are even checked",
+            "description": "The text is trimmed and checked for emptiness first, short-circuiting with the 'empty-text' error before the rate and pitch validations run at all — an empty text field never produces a confusing 'invalid-rate' message when the rate itself was actually fine."
+          },
+          {
+            "title": "Rate and pitch are validated against the Web Speech API's actual spec ranges, not arbitrary limits",
+            "description": "0.1–10 for rate and 0–2 for pitch are the ranges SpeechSynthesisUtterance itself supports per the Web Speech API specification — values outside those ranges are rejected before ever reaching the browser's speech engine, which might otherwise clamp or ignore them silently."
+          },
+          {
+            "title": "A single sentence longer than the chunk limit is split at word boundaries, never mid-word",
+            "description": "When a sentence itself exceeds maxLength, the chunker falls back to accumulating whole words until the limit is reached — it never cuts a chunk in the middle of a word, which would produce garbled or mispronounced speech at the boundary."
+          },
+          {
+            "title": "The chunk length limit is configurable but defaults to 200 characters",
+            "description": "maxChunkLength is an optional input defaulting to 200 — this default was chosen empirically as short enough to avoid the truncation bugs some browsers exhibit on very long utterances, while still being long enough to hold a full sentence in the common case."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why is the text split into chunks instead of being spoken as one continuous utterance?",
+            "answer": "Some browsers' SpeechSynthesis implementations silently truncate or behave unreliably with a single very long utterance. Splitting the text into shorter chunks and queuing them one after another sidesteps that inconsistency and keeps playback reliable across browsers, regardless of how long the original text is."
+          },
+          {
+            "question": "Why does the chunk splitter prefer sentence boundaries over just cutting every 200 characters?",
+            "answer": "Cutting mid-sentence would create an awkward pause and mispronunciation right in the middle of a thought. The chunker only falls back to a mid-sentence, word-boundary split when a single sentence is itself longer than the chunk limit — otherwise every chunk break lands at a natural sentence ending."
+          },
+          {
+            "question": "What are valid values for the speed and pitch sliders?",
+            "answer": "Rate accepts 0.1 to 10 (1 is normal speed), and pitch accepts 0 to 2 (1 is a voice's normal pitch) — these are the exact ranges defined by the Web Speech API specification for SpeechSynthesisUtterance, not values specific to this tool."
+          },
+          {
+            "question": "Does converting text to speech send my text to a server?",
+            "answer": "No — this tool exclusively uses your browser's built-in SpeechSynthesis API, which runs the same text-to-speech engine your operating system's own accessibility features use. Nothing about the text or the resulting audio is sent anywhere."
+          }
+        ]
+      },
+      "speech-to-text": {
+        "version": "v1",
+        "description": "Technical reference for the Speech to Text tool: how raw recognized speech segments from the browser's SpeechRecognition API are cleaned up and joined into one readable transcript, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Joined Transcript",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Processing Steps",
+          "modesValue": "5",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "transcript = capitalizeSentences(segments.map(trim + collapse whitespace).filter(nonEmpty).join(' '))  |  wordCount = transcript ? transcript.split(/\\s+/).length : 0",
+          "note": "This formatting logic is pure text processing with no dependency on the SpeechRecognition API itself — it only ever operates on the finalized transcript segments the browser hands back, which is what makes it fully testable outside a real browser microphone session."
+        },
+        "flowchart": {
+          "intro": "The browser's own recognition engine does the actual speech-to-text work; this tool's own logic only cleans up and joins the segments it returns.",
+          "steps": [
+            "The browser's SpeechRecognition API listens to the microphone and produces finalized transcript segments as the speaker pauses between phrases",
+            "Trim each segment and collapse any run of internal whitespace down to a single space",
+            "Drop any segment that's empty after trimming (silence or a misrecognized empty result)",
+            "Join the remaining cleaned segments together with single spaces, in the order they were recognized",
+            "Capitalize the very first letter of the joined transcript, and the first letter following any '.', '!', or '?' followed by whitespace, so sentence starts read naturally",
+            "Count words by splitting the finished transcript on whitespace, or report 0 if the transcript ended up empty"
+          ],
+          "caption": "Steps 2 onward are the same regardless of which speech-recognition engine or browser produced the raw segments in step 1."
+        },
+        "anatomy": {
+          "intro": "Several short recognized segments are joined into one continuous transcript — this shows how three segments of different lengths combine into the final character count.",
+          "labelSegment1": "Segment 1",
+          "labelSegment2": "Segment 2",
+          "labelSegment3": "Segment 3",
+          "totalLabel": "Transcript length",
+          "caption": "Segments are joined with a single space between each — the transcript's total length is the sum of the cleaned segments plus one space per join."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "segments",
+            "meaning": "The finalized transcript segments recognized so far, in recognition order.",
+            "unit": "array of text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An empty segments array produces an empty transcript and a word count of 0, not an error",
+            "description": "The calculator has no dedicated 'no speech detected' error state — an empty or all-whitespace segments array simply flows through to an empty joined string, and the word count logic explicitly checks for that empty case to report 0 instead of counting a single empty-string 'word'."
+          },
+          {
+            "title": "Internal whitespace is collapsed per-segment, before joining, not after",
+            "description": "Each segment is individually trimmed and has runs of internal whitespace collapsed to one space before any joining happens — this prevents a browser that occasionally returns a segment with irregular spacing from producing double-spaced gaps in the final transcript."
+          },
+          {
+            "title": "Capitalization is applied to the fully joined transcript, not to each segment individually",
+            "description": "If capitalization ran per-segment instead, a segment that happens to start mid-sentence (after an already-lowercase word from the previous segment) would be incorrectly capitalized — running the regex once, after joining, correctly identifies only genuine transcript-start and sentence-start positions."
+          },
+          {
+            "title": "The sentence-capitalization regex only capitalizes a letter following punctuation AND whitespace, not punctuation alone",
+            "description": "The pattern specifically requires a space (or other whitespace) between the sentence-ending punctuation and the next letter — this avoids incorrectly capitalizing something like a decimal number or an abbreviation where a period isn't actually ending a sentence."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Does this tool do the actual speech recognition itself?",
+            "answer": "No — the actual audio-to-text recognition is done entirely by your browser's built-in SpeechRecognition API (the same engine behind features like voice typing). This tool's own code only formats and joins the finalized segments that API returns; it has no speech-processing logic of its own."
+          },
+          {
+            "question": "Why might the transcript have a word count of 0 even though I spoke?",
+            "answer": "This happens when every recognized segment was empty after trimming — for example, if the browser returned only silence markers or empty strings. The word-count logic explicitly checks for an empty final transcript and reports 0 in that case, rather than miscounting an empty string as one word."
+          },
+          {
+            "question": "Why does capitalization sometimes look different from what I actually said?",
+            "answer": "The tool capitalizes the first letter of the whole transcript and the first letter after any sentence-ending punctuation followed by a space — it has no way to know your actual intended sentence structure beyond what punctuation the recognition engine inserted, so unusual capitalization can happen if the recognizer's punctuation differs from how you'd punctuate it yourself."
+          },
+          {
+            "question": "Is my audio sent to a server for transcription?",
+            "answer": "That depends entirely on your browser's own SpeechRecognition implementation, not on this tool — this tool only receives and formats whatever text segments the browser's API hands back; it has no server component of its own and never uploads audio or text anywhere."
+          }
+        ]
+      },
+      "spelling-grammar-checker": {
+        "version": "v1",
+        "description": "Technical reference for the Spelling & Grammar Checker: how eight independent rule-based checks scan text for common mistakes, how their results are merged and ordered, the variables it accepts, and the edge cases it handles. A basic rule-based checker, not a dictionary-backed or AI-powered spellchecker.",
+        "sectionFormula": "Core Rule",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionIssueTypes": "The Four Issue Types",
+        "sectionAnatomy": "Anatomy of a Detected Issue",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rule Checks",
+          "modesValue": "8",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "issues = [misspellings, lowercase 'i', sentence capitalization, double spaces, repeated words, missing space after punctuation, a/an errors, your/you're confusion].flat().sortBy(issue ⇒ issue.start)",
+          "note": "Each of the eight checks is an independent regular-expression scan that runs over the full text and returns its own list of issues — there's no shared state or dependency between them. The only combining step is concatenating all eight lists and sorting the result by each issue's character position, so overlapping or adjacent issues from different rules still display in reading order."
+        },
+        "flowchart": {
+          "intro": "All eight rule checks run independently over the same text — order of execution doesn't matter, since the results are sorted by position afterward anyway.",
+          "steps": [
+            "If the text is empty or whitespace-only, return the 'empty-text' error immediately without running any checks",
+            "Run eight independent rule-based checks over the full text: a small fixed dictionary of ~45 commonly misspelled words, a lowercase standalone 'i' that should be capitalized, missing capitalization at the start of a sentence, runs of two or more spaces, an immediately repeated word, missing space after punctuation, incorrect 'a'/'an' article usage before a vowel or consonant sound, and 'your' followed by an '-ing' word (a likely 'you're' mix-up)",
+            "Concatenate every issue every rule found into one combined list",
+            "Sort that combined list by each issue's start character position, so issues from different rules interleave in the order they actually appear in the text",
+            "Count words by trimming the text, splitting on whitespace, and filtering out empty results",
+            "Return the sorted issue list alongside the word count"
+          ],
+          "caption": "The eight checks never see each other's results — the only interaction between them is the final sort by text position."
+        },
+        "issueTypes": {
+          "intro": "Every issue is tagged with one of four types, which the result panel uses to group and color-code them — this shows how many of each type a representative sample of text might surface.",
+          "labelSpelling": "Spelling",
+          "labelGrammar": "Grammar",
+          "labelCapitalization": "Capitalization",
+          "labelPunctuation": "Punctuation",
+          "caption": "Six of the eight checks map to a single issue type each; the misspelling check always tags 'spelling', while the a/an and your/you're checks both tag 'grammar'."
+        },
+        "anatomy": {
+          "intro": "Every detected issue is one record with several fields — this shows what the checker actually returns for a single flagged word.",
+          "labelType": "Type",
+          "valueType": "spelling",
+          "labelMessage": "Message",
+          "valueMessage": "\"teh\" may be misspelled.",
+          "labelOriginal": "Original",
+          "valueOriginal": "teh",
+          "labelSuggestion": "Suggestion",
+          "valueSuggestion": "the",
+          "caption": "Alongside these fields, every issue also carries a start and end character position, which the result panel uses to highlight exactly where in the text the issue occurs."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "The text to check for spelling and grammar issues.",
+            "unit": "characters"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "The misspelling dictionary is a small fixed list, not an exhaustive spellchecker",
+            "description": "MISSPELLED_WORDS covers roughly 45 commonly mistyped English words (like 'teh', 'recieve', 'definately') — a word that's misspelled but isn't in that list simply won't be flagged, since this is a lightweight rule-based checker rather than a full dictionary-backed spellchecker."
+          },
+          {
+            "title": "A correction preserves the original word's capitalization",
+            "description": "preserveCase checks whether the misspelled word's first letter was uppercase and, if so, capitalizes the first letter of the suggested correction too — so 'Teh' suggests 'The', not 'the', even though the dictionary only stores the lowercase form."
+          },
+          {
+            "title": "The a/an check has explicit exception lists for words that break the simple vowel/consonant rule",
+            "description": "Words like 'university' start with a vowel letter but a consonant sound (correctly 'a university'), and words like 'hour' start with a consonant letter but a vowel sound (correctly 'an hour') — dedicated exception lists cover these specific words so the otherwise-simple first-letter check doesn't incorrectly flag them."
+          },
+          {
+            "title": "The repeated-word check is case-insensitive but requires the exact same word twice with only whitespace between",
+            "description": "The regex flags 'the the' and 'The the' alike (case-insensitive), but 'the quick the' (with an intervening word) isn't flagged, since the pattern only matches a word immediately followed by whitespace and that identical word again."
+          },
+          {
+            "title": "All eight issue lists are concatenated and then sorted once, not merged incrementally",
+            "description": "Every check runs independently and returns its own full list before any sorting happens — the eight lists are spread into one array and sorted by start position as a single final step, so the checks never need to know about each other's findings."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Is this checker powered by AI or a full dictionary, like a spell-checking service?",
+            "answer": "No — it's a lightweight, rule-based checker. Misspellings are matched against a small fixed list of common mistakes (not a full dictionary), and grammar/punctuation issues are found with a handful of targeted regular-expression patterns, not a language model. It runs entirely in your browser with no server calls."
+          },
+          {
+            "question": "Why didn't the checker catch a misspelling I know is wrong?",
+            "answer": "The misspelling check only flags words present in its built-in list of roughly 45 common mistakes. A typo not on that list — even an obvious one — won't be detected, since this tool doesn't use a comprehensive dictionary or language model."
+          },
+          {
+            "question": "How are the four issue types (spelling, grammar, capitalization, punctuation) assigned?",
+            "answer": "Each of the eight underlying checks tags its own findings with one fixed type: the misspelling check always tags 'spelling'; the two capitalization checks (lowercase 'i' and sentence starts) tag 'capitalization'; the double-space and missing-space-after-punctuation checks tag 'punctuation'; and the repeated-word, a/an, and your/you're checks all tag 'grammar'."
+          },
+          {
+            "question": "Why do issues appear in the order they do in the results list?",
+            "answer": "All the issues found by every check are combined into one list and then sorted by where each one starts in the text — so they always display in the same left-to-right reading order as the text itself, regardless of which of the eight rules happened to detect each one."
+          }
+        ]
       }
     }
   }

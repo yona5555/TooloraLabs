@@ -33736,6 +33736,629 @@
             "answer": "Keine rechnerische — es ist eine gleichverteilte Zufallsauswahl aus welchem Pool auch immer der Kategoriefilter (und die Regel 'aktuelles Zitat ausschließen') erzeugt. Jedes Zitat in diesem Pool hat die gleiche Chance, ausgewählt zu werden."
           }
         ]
+      },
+      "unit-converter": {
+        "version": "v2",
+        "description": "Technische Referenz für den Einheitenrechner: wie Werte für Länge, Gewicht, Temperatur, Fläche, Volumen und Geschwindigkeit mithilfe kategoriespezifischer Umrechnungsfaktoren umgerechnet werden (bei Temperatur über einen Celsius-Drehpunkt), welche Variablen er akzeptiert und welche Grenzfälle er behandelt.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die vollständige Umrechnungstabelle",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kategorien",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "lineare Kategorien: Ergebnis = (Wert × Faktor[von]) ÷ Faktor[zu]  |  Temperatur: celsius = zuCelsius(Wert, von); Ergebnis = vonCelsius(celsius, zu)",
+          "note": "Jede lineare Kategorie (Länge, Gewicht, Fläche, Volumen, Geschwindigkeit) teilt sich eine Faktortabellen-Formel: den Eingabewert durch Multiplikation mit dem Faktor der Quelleinheit in die Basiseinheit dieser Kategorie umrechnen, dann durch Division mit dem Faktor der Zieleinheit umrechnen. Bei Temperatur funktioniert das nicht, da °F und °C keinen gemeinsamen Nullpunkt haben — sie wird daher separat über einen Celsius-Drehpunkt mit zwei expliziten Umrechnungsfunktionen behandelt."
+        },
+        "flowchart": {
+          "intro": "Jede Kategorie außer Temperatur teilt sich genau dieselbe zweistufige Umrechnung; Temperatur benötigt stattdessen einen eigenen, nicht-linearen Drehpunkt.",
+          "steps": [
+            "Eine Kategorie wählen — Länge, Gewicht, Temperatur, Fläche, Volumen oder Geschwindigkeit — sowie eine 'von'- und 'zu'-Einheit darin",
+            "Bei Temperatur den eingegebenen Wert zuerst mit einer eigenen Formel für die jeweilige Einheit (Celsius, Fahrenheit oder Kelvin) in Celsius umrechnen",
+            "Bei jeder anderen Kategorie die Umrechnungsfaktoren der 'von'- und 'zu'-Einheit in der Faktortabelle dieser Kategorie nachschlagen (jeweils relativ zu einer Basiseinheit wie Meter oder Kilogramm ausgedrückt)",
+            "Den Wert mit dem 'von'-Faktor multiplizieren, dann durch den 'zu'-Faktor teilen, um das umgerechnete Ergebnis zu erhalten — bei Temperatur stattdessen den über Celsius geleiteten Wert in die Zieleinheit umrechnen",
+            "Das Ergebnis auf 6 Dezimalstellen runden und zusätzlich denselben Eingabewert für jede andere Einheit der Kategorie berechnen, für die vollständige Umrechnungstabelle"
+          ],
+          "caption": "Lineare Kategorien laufen über eine Basiseinheit (wie Meter); Temperatur läuft stattdessen über Celsius, da ihre Skalen keinen gemeinsamen Nullpunkt teilen."
+        },
+        "anatomy": {
+          "intro": "Das Umrechnen eines Werts liefert nicht nur eine Zahl — das Tool berechnet gleichzeitig dieselbe Größe in jeder anderen Einheit der Kategorie, sodass die Entsprechungen von 1 Kilometer sofort vorliegen.",
+          "labelKm": "Kilometer",
+          "labelM": "Meter",
+          "labelMi": "Meilen",
+          "labelFt": "Fuß",
+          "caption": "Alle vier Zeilen stellen exakt dieselbe physische Entfernung dar — 1 Kilometer — nur ausgedrückt durch den jeweiligen Faktor jeder Einheit relativ zur Basiseinheit Meter."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "category",
+            "meaning": "Innerhalb welcher Einheitenfamilie umgerechnet werden soll.",
+            "unit": "Länge, Gewicht, Temperatur, Fläche, Volumen oder Geschwindigkeit"
+          },
+          {
+            "symbol": "value",
+            "meaning": "Die numerische Größe, die umgerechnet werden soll.",
+            "unit": "von-Einheit"
+          },
+          {
+            "symbol": "from",
+            "meaning": "Die Einheit, in der der eingegebene Wert aktuell vorliegt.",
+            "unit": "—"
+          },
+          {
+            "symbol": "to",
+            "meaning": "Die Einheit, in die der Wert umgerechnet werden soll.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine für die gewählte Kategorie nicht erkannte Einheit schlägt explizit fehl, nicht still",
+            "description": "Ist weder die 'von'- noch die 'zu'-Einheit ein Schlüssel in der Faktortabelle dieser Kategorie (oder bei Temperatur nicht celsius/fahrenheit/kelvin), liefert das Tool ein fehlgeschlagenes Ergebnis mit einem expliziten Fehler 'Nicht unterstützte Einheit für diese Kategorie', statt still 0 oder NaN zu erzeugen."
+          },
+          {
+            "title": "Temperatur wird bewusst nie über die linearen Faktortabellen geleitet",
+            "description": "Da Fahrenheit und Celsius sowohl unterschiedliche Nullpunkte als auch unterschiedliche Skalengrößen haben, kann kein einzelner Multiplikationsfaktor zwischen ihnen umrechnen — der Code verzweigt bei category === 'temperature' gezielt zu den beiden eigenen Funktionen zuCelsius/vonCelsius."
+          },
+          {
+            "title": "Jedes Ergebnis wird auf exakt 6 Dezimalstellen gerundet",
+            "description": "Die Rundungsfunktion formatiert vor der Rückumwandlung in eine Zahl immer auf 6 Dezimalstellen — das verhindert, dass Ergebnisse von Umrechnungen wie Acres (ein Faktor mit 10 Nachkommastellen Präzision) lange Ketten von Gleitkomma-Rauschen anzeigen."
+          },
+          {
+            "title": "Die vollständige Umrechnungstabelle wird nur befüllt, wenn die 'von'-Einheit gültig ist",
+            "description": "allConversions wird erstellt, indem die Eingabe in jede Einheit der Kategorie umgerechnet wird, aber erst nachdem bestätigt wurde, dass input.from in der Faktortabelle existiert — eine ungültige 'von'-Einheit erzeugt ein leeres Umrechnungsobjekt statt einer Tabelle voller NaN-Werte."
+          },
+          {
+            "title": "Das Umrechnen einer Einheit in sich selbst durchläuft weiterhin die volle Faktortabellen-Rechnung",
+            "description": "Es gibt keine Identitäts-Abkürzung für from === to — der Wert wird weiterhin mit demselben Faktor multipliziert und dividiert, was sich mathematisch zum Originalwert aufhebt (bis auf die 6-Dezimalstellen-Rundung), sodass das Ergebnis korrekt ist, ohne Sonderfall-Code zu benötigen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum braucht Temperatur eine Sonderbehandlung, wenn keine andere Kategorie das tut?",
+            "answer": "Länge, Gewicht, Fläche, Volumen und Geschwindigkeit rechnen alle durch einfache Multiplikation um — eine Einheit von ihnen ist immer ein festes Vielfaches der Basiseinheit. Temperaturskalen teilen keinen Nullpunkt (0°C sind 32°F, nicht 0°F), sodass kein einzelner Multiplikationsfaktor zwischen ihnen umrechnen kann; das Tool läuft stattdessen über Celsius mit eigenen additions-/subtraktionsbasierten Formeln."
+          },
+          {
+            "question": "Was genau zeigt die Tabelle 'alle Umrechnungen'?",
+            "answer": "Es ist derselbe Eingabewert, umgerechnet in jede in der gewählten Kategorie verfügbare Einheit, alle gleichzeitig zusammen mit dem Hauptergebnis berechnet — ein Wechsel der Einheit, in der man das Ergebnis ablesen möchte, erfordert also keine erneute Eingabe des Werts."
+          },
+          {
+            "question": "Warum werden Ergebnisse auf 6 Dezimalstellen gerundet statt mit voller Genauigkeit angezeigt?",
+            "answer": "Manche Umrechnungsfaktoren (wie Acres zu Quadratmetern, bei 4046,8564224) tragen viele Nachkommastellen, und Gleitkomma-Arithmetik kann darüber hinaus winzige Darstellungsfehler einführen. Das Runden auf 6 Dezimalstellen hält Ergebnisse sauber und lesbar, ohne für einen realistischen Anwendungsfall nennenswert an Genauigkeit einzubüßen."
+          },
+          {
+            "question": "Kann ich zwischen zwei Einheiten aus unterschiedlichen Kategorien umrechnen, etwa Meter in Kilogramm?",
+            "answer": "Nein — zuerst wird eine Kategorie gewählt (Länge, Gewicht, Temperatur, Fläche, Volumen oder Geschwindigkeit), und nur Einheiten innerhalb dieser Kategorie werden als 'von'/'zu'-Optionen angeboten, da die Umrechnung zwischen grundlegend verschiedenen physikalischen Größen keine gültige Operation ist."
+          }
+        ]
+      },
+      "roman-numeral-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Römische-Zahlen-Umrechner: wie eine Zahl gierig in Wert-Symbol-Paare zerlegt wird, um eine römische Zahl aufzubauen, wie eine römische Zahl mit einer Rückkonvertierungsprüfung wieder in eine Zahl umgewandelt wird, welche Variablen akzeptiert werden und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie einer römischen Zahl",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Wertebereich",
+          "modesValue": "1–3999",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "zuRömisch(n): gierig das größte Wert-Symbol-Paar ≤ n subtrahieren, dessen Symbol anhängen, bis n 0 erreicht  |  zuArabisch(s): den Wert jedes Buchstabens addieren, stattdessen subtrahieren, wenn er einem größeren Buchstaben vorausgeht",
+          "note": "Beide Richtungen nutzen eine feste Liste von 13 Wert-Symbol-Paaren von 1000 (M) bis 1 (I), einschließlich der sechs subtraktiven Paare (900=CM, 400=CD, 90=XC, 40=XL, 9=IX, 4=IV) — diese subtraktiven Paare vor ihren einfachen Gegenstücken zu prüfen, erzeugt Standardformen wie 'XC' für 90 statt 'LXXXX'."
+        },
+        "flowchart": {
+          "intro": "Die Umrechnung ins Römische ist eine gierige Verbrauchen-und-Anhängen-Schleife; die Rückumwandlung ins Arabische ist ein Links-nach-rechts-Scan mit Vorausschau-Vergleich, gefolgt von einer Rückkonvertierungsprüfung.",
+          "steps": [
+            "Bei 'ins Römische': prüfen, dass die eingegebene Zahl eine ganze Zahl zwischen 1 und 3999 ist (der größte Wert, der ohne mehr als die standardmäßigen drei Wiederholungen eines Symbols darstellbar ist)",
+            "Die 13 Wert-Symbol-Paare vom größten (1000, 'M') zum kleinsten (1, 'I') durchlaufen; bei jedem Paar das Symbol anhängen und seinen Wert vom verbleibenden Betrag subtrahieren, solange der verbleibende Betrag noch mindestens diesem Wert entspricht",
+            "Bei 'ins Arabische': prüfen, dass der eingegebene Text nicht leer ist und nur die sieben gültigen römischen Buchstaben (I, V, X, L, C, D, M) enthält",
+            "Die Buchstaben von links nach rechts scannen und den Wert jedes Buchstabens mit dem Wert des direkt folgenden Buchstabens vergleichen — ist der Wert des nächsten Buchstabens größer, wird der Wert des aktuellen Buchstabens subtrahiert statt addiert (dadurch entspricht 'IV' 4, nicht 6)",
+            "Die geparste Zahl wieder ins Römische umwandeln und mit der ursprünglichen Eingabe vergleichen — stimmen sie nicht exakt überein, die Eingabe als ungültige, nicht-kanonische Zahl (wie 'IIII' oder 'VX') ablehnen, auch wenn die naive Summe eine Zahl ergeben hätte"
+          ],
+          "caption": "Die Rückkonvertierungsprüfung im letzten Schritt fängt Zahlen ab, die ein einfacher Summierungs-Parser sonst fälschlich akzeptieren würde."
+        },
+        "anatomy": {
+          "intro": "Eine römische Zahl ist buchstäblich eine Aneinanderreihung von Wert-Symbol-Paaren, jeweils gierig von oben nach unten verbraucht — die Zerlegung von 1994 auf diese Weise zeigt genau, woher jede Buchstabengruppe stammt.",
+          "totalLabel": "1994",
+          "caption": "1994 = 1000 (M) + 900 (CM) + 90 (XC) + 4 (IV) — MCMXCIV — jedes Segment entspricht einem gierig verbrauchten Wert-Symbol-Paar."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "direction",
+            "meaning": "In welche Richtung umgerechnet wird: arabische Zahl zu römischer Zahl, oder römische Zahl zu arabischer Zahl.",
+            "unit": "—"
+          },
+          {
+            "symbol": "arabicValue",
+            "meaning": "Die ganze Zahl, die in römische Zahlen umgerechnet werden soll (verwendet, wenn direction 'ins Römische' ist).",
+            "unit": "1–3999"
+          },
+          {
+            "symbol": "romanValue",
+            "meaning": "Der römische Zahlentext, der in eine Zahl umgerechnet werden soll (verwendet, wenn direction 'ins Arabische' ist).",
+            "unit": "I, V, X, L, C, D, M"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Werte außerhalb von 1–3999 werden abgelehnt, nicht begrenzt oder umgebrochen",
+            "description": "3999 (MMMCMXCIX) ist die größte Zahl, die das Standardsystem mit 7 Symbolen darstellen kann, ohne ein Symbol mehr als dreimal hintereinander zu wiederholen; das Tool lehnt sowohl 0 als auch alles über 3999 mit einem expliziten Fehler 'außerhalb des Bereichs' ab, statt still auf den nächstgültigen Wert zu begrenzen."
+          },
+          {
+            "title": "Eine nicht-kanonische, aber 'aufsummierbare' römische Zahl wie 'IIII' oder 'VX' wird dennoch abgelehnt",
+            "description": "Die Rückumwandlung würde 'IIII' anhand der buchstabenweisen Vergleichsregel bereitwillig zu 4 summieren, aber der Rechner wandelt diese 4 wieder ins Römische um (erhält 'IV') und lehnt die Eingabe ab, weil 'IV' ≠ 'IIII' ist — diese Rückkonvertierungsprüfung ist das Einzige, was nicht-standardmäßige Formen abfängt, da die Summierungslogik allein sie nicht unterscheiden kann."
+          },
+          {
+            "title": "Römische Eingabe ist bei der Eingabe nicht groß-/kleinschreibungsabhängig, aber bei der Ausgabe immer in Großbuchstaben",
+            "description": "Eingetippte römische Zahlen werden vor der Prüfung in Großbuchstaben umgewandelt (sodass 'mcmxciv' und 'MCMXCIV' beide funktionieren), aber ein umgerechnetes Ergebnis wird immer in der Standard-Großschreibform dargestellt, da kleingeschriebene römische Zahlen keine anerkannte Konvention sind."
+          },
+          {
+            "title": "Jedes Zeichen außerhalb von I, V, X, L, C, D, M schlägt die Prüfung sofort fehl",
+            "description": "Die Prüfung mittels regulärem Ausdruck für gültige römische Buchstaben läuft vor jeglicher Parsing-Logik, sodass eine Eingabe wie '12' oder 'IVX!' mit 'ungültig-römisch' abgelehnt wird, bevor der buchstabenweise Scan überhaupt ausgeführt wird, statt teilweise geparst zu werden und später fehlzuschlagen."
+          },
+          {
+            "title": "Eine leere oder nur aus Leerzeichen bestehende Eingabe in beide Richtungen liefert einen eigenen Fehler 'leere Eingabe', getrennt von 'ungültig' oder 'außerhalb des Bereichs'",
+            "description": "Diese Unterscheidung erlaubt der Oberfläche, bei einem einfach leeren Feld einen neutralen Zustand 'noch nichts eingegeben' statt einer alarmierenden Validierungsfehlermeldung anzuzeigen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum ist 3999 das Maximum, statt größere Zahlen zuzulassen?",
+            "answer": "Standardmäßige römische Zahlen haben im üblichen Gebrauch kein Symbol für 5000 oder darüber, und die größte Zahl, die sich nur mit M/CM/D/CD/C/XC/L/XL/X/IX/V/IV/I darstellen lässt, ohne ein Symbol mehr als dreimal hintereinander zu wiederholen, ist 3999 (MMMCMXCIX). Größere Zahlen würden eine nicht-standardmäßige Notation erfordern, die dieser Umrechner nicht zu unterstützen versucht."
+          },
+          {
+            "question": "Warum lehnt der Umrechner 'IIII' für 4 ab, obwohl es sich korrekt zu addieren scheint?",
+            "answer": "'IIII' summiert sich unter einer naiven buchstabenweisen Regel tatsächlich zu 4, ist aber nicht die standardmäßige, kanonische Art, 4 zu schreiben — das ist 'IV'. Der Umrechner prüft dies gezielt, indem er jede geparste Zahl wieder ins Römische umwandelt und die Eingabe ablehnt, wenn sie nicht exakt übereinstimmt, was 'IIII', 'VX' und ähnliche nicht-standardmäßige Formen abfängt."
+          },
+          {
+            "question": "Spielt die Groß-/Kleinschreibung eine Rolle, wenn ich eine römische Zahl eingebe?",
+            "answer": "Nein — die eingegebene Eingabe wird automatisch in Großbuchstaben umgewandelt, bevor sie geprüft oder geparst wird, sodass 'xiv', 'Xiv' und 'XIV' alle identisch behandelt werden. Das umgerechnete Ergebnis selbst wird jedoch immer in standardmäßigen Großbuchstaben angezeigt."
+          },
+          {
+            "question": "Woher weiß der Umrechner, dass 'IV' 4 bedeutet und nicht 6 (I + V)?",
+            "answer": "Er vergleicht den Wert jedes Buchstabens mit dem Wert des direkt folgenden Buchstabens beim Scannen von links nach rechts. Steht ein Buchstabe mit kleinerem Wert direkt vor einem mit größerem Wert, wird der Wert des kleineren Buchstabens subtrahiert statt addiert — diese einzige Vergleichsregel macht aus 'IV' 5 − 1 = 4 statt 1 + 5 = 6."
+          }
+        ]
+      },
+      "image-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Bildkonverter: wie ein Browser ein Bild mithilfe der Canvas-API in ein anderes Format neu kodiert, wie optionales Skalieren das Seitenverhältnis erhält, ohne jemals zu vergrößern, welche Variablen akzeptiert werden und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Original- vs. konvertierte Größe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ausgabeformate",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Ausgabemaße = einpassen(Original, maxBreite) unter Beibehaltung des Seitenverhältnisses, Skalierung ≤ 1 nur  |  Kompressionsprozent = runden((1 − neueBytes ÷ originalBytes) × 100)",
+          "note": "Die Größenänderung berechnet einen einzigen Skalierungsfaktor — auf maximal 1 begrenzt, damit das Bild nie größer als seine Originalgröße gestreckt wird — und wendet ihn gemeinsam auf Breite und Höhe an, was das Seitenverhältnis intakt hält. Der Kompressionsprozentsatz ist ein einfacher Vorher/Nachher-Byte-Größenvergleich, berechnet erst, nachdem der Browser die konvertierte Datei tatsächlich erzeugt hat."
+        },
+        "flowchart": {
+          "intro": "Jeder Schritt nach der anfänglichen Dateiprüfung läuft vollständig im Browser — es werden niemals Bilddaten an einen Server hochgeladen.",
+          "steps": [
+            "Prüfen, dass der Typ der ausgewählten Datei mit 'image/' beginnt und ihre Größe unter dem 10-MB-Limit liegt, andernfalls mit einem spezifischen Fehler ablehnen",
+            "Das Bild in ein <img>-Element im Speicher dekodieren, um seine natürliche (ursprüngliche) Pixelbreite und -höhe auszulesen",
+            "Ist die Größenänderung aktiviert, neue Maße berechnen, die innerhalb der angegebenen maximalen Breite liegen und dabei das ursprüngliche Seitenverhältnis beibehalten — der Skalierungsfaktor wird auf maximal 1 begrenzt, damit ein kleines Bild nie größer gestreckt wird",
+            "Das Bild in den finalen (eventuell verkleinerten) Maßen auf ein unsichtbares <canvas>-Element zeichnen",
+            "Das Canvas über canvas.toBlob des Browsers in das gewählte Ausgabeformat (PNG, JPEG oder WebP) neu kodieren, mit Übergabe eines Qualitätswerts für JPEG/WebP (PNG ignoriert die Qualität, da es verlustfrei ist)",
+            "Die Byte-Größe der resultierenden Datei mit dem Original vergleichen, um einen Kompressionsprozentsatz auszuweisen, und die konvertierte Datei zur Vorschau und zum Download bereitstellen"
+          ],
+          "caption": "Nichts hier ruft eine Server-API auf — Dekodieren, Skalieren und Neukodieren geschehen vollständig über die eigenen Image- und Canvas-APIs des Browsers."
+        },
+        "anatomy": {
+          "intro": "Die Umwandlung in ein effizienteres Format verkleinert die Datei typischerweise — dies vergleicht eine veranschauliche Originalgröße mit ihrem konvertierten Ergebnis.",
+          "labelOriginal": "Original (KB)",
+          "labelConverted": "Konvertiert (KB)",
+          "caption": "Ein 2,4-MB-Original, konvertiert nach WebP mit Qualität 0,85, könnte bei etwa 640 KB landen — eine Reduktion um rund 73 % —, wobei das genaue Ergebnis immer vom Inhalt des Quellbilds selbst abhängt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "file",
+            "meaning": "Die ausgewählte Bilddatei, die konvertiert werden soll.",
+            "unit": "≤ 10 MB, image/*"
+          },
+          {
+            "symbol": "format",
+            "meaning": "Das Ausgabeformat, in das neu kodiert werden soll.",
+            "unit": "PNG, JPEG oder WebP"
+          },
+          {
+            "symbol": "quality",
+            "meaning": "An den Encoder übergebene Komprimierungsqualität; bei PNG ignoriert, da verlustfrei.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "resizeEnabled / maxWidth",
+            "meaning": "Ob die Ausgabe vor dem Neukodieren auf eine maximale Breite begrenzt werden soll, und diese Breite.",
+            "unit": "Pixel"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine Nicht-Bild-Datei wird abgelehnt, bevor überhaupt versucht wird, sie zu dekodieren",
+            "description": "Der MIME-Typ der Datei wird sofort bei der Auswahl gegen das Präfix 'image/' geprüft — eine nicht passende Datei (etwa ein umbenanntes PDF mit irreführender Endung) wird mit einem spezifischen Fehler abgelehnt, statt an das Image-Element übergeben zu werden, wo sie weniger vorhersehbar fehlschlagen würde."
+          },
+          {
+            "title": "Dateien über 10 MB werden unabhängig vom Format rundweg abgelehnt",
+            "description": "Die Größenprüfung läuft, bevor die Datei überhaupt gelesen wird, sodass eine große Datei nicht teilweise dekodiert wird oder anfängt, Speicher zu belegen, bevor das Limit durchgesetzt wird."
+          },
+          {
+            "title": "Die Größenänderung verkleinert ein Bild nur, vergrößert es nie",
+            "description": "Die Berechnung der Zielmaße ermittelt die Skalierung als das Minimum aus Breiten-Passverhältnis, Höhen-Passverhältnis und 1 — diese feste Obergrenze bei 1 bedeutet, dass ein bereits kleineres Bild als die gewünschte maximale Breite in seiner Originalgröße zurückgegeben wird, statt hochgezogen zu werden, was es nur unscharf machen würde."
+          },
+          {
+            "title": "Der Qualitätsregler hat überhaupt keine Wirkung, wenn das Ausgabeformat PNG ist",
+            "description": "canvas.toBlob wird speziell bei PNG mit undefined als Qualitätsargument aufgerufen, da PNG ein verlustfreies Format ohne Qualitäts-/Kompromissregler ist — derselbe Reglerwert wird für dieses Format stillschweigend ignoriert."
+          },
+          {
+            "title": "Jede Konvertierung wird nach der letzten Einstellungsänderung um 250 ms verzögert",
+            "description": "Das Anpassen von Format, Qualität oder Skalierungsbreite löst nicht bei jedem Tastendruck oder Reglerschritt sofort eine erneute Konvertierung aus — ein 250-ms-Verzögerungstimer fasst schnelle Änderungen zu einem einzigen Konvertierungsdurchlauf zusammen und vermeidet so überflüssige Canvas-Arbeit, während ein Wert aktiv angepasst wird."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wird mein Bild bei der Konvertierung auf einen Server hochgeladen?",
+            "answer": "Nein — jeder Schritt (Dekodieren der Datei, Größenänderung, Neukodierung in das neue Format) geschieht lokal in Ihrem Browser mithilfe der Canvas- und Image-APIs. Die Bilddaten verlassen Ihr Gerät niemals."
+          },
+          {
+            "question": "Warum ändert der Qualitätsregler nichts, wenn ich PNG als Ausgabeformat wähle?",
+            "answer": "PNG ist ein verlustfreies Format — es hat keinen Qualitäts-/Kompressions-Kompromiss wie JPEG und WebP. Das Tool zeigt den Regler dennoch für ein konsistentes Layout über alle Formate hinweg, aber er wird bei PNG-Ausgabe nicht an den Encoder übergeben."
+          },
+          {
+            "question": "Kann die Größenänderung mein Bild jemals größer oder unschärfer machen?",
+            "answer": "Nein — die Berechnung der Größenänderung begrenzt den Skalierungsfaktor explizit auf maximal 1, sodass ein bereits kleineres Bild als die gewünschte maximale Breite in seiner Originalgröße belassen wird, statt hochgezogen zu werden, was nur seine Qualität mindern würde."
+          },
+          {
+            "question": "Wie groß darf die größte Datei sein, die ich konvertieren kann?",
+            "answer": "10 MB. Größere Dateien werden sofort abgelehnt, bevor überhaupt versucht wird, sie zu dekodieren, damit der Browser nicht versucht, sehr große Bilder zu verarbeiten, die die Seite blockieren könnten."
+          }
+        ]
+      },
+      "text-to-speech": {
+        "version": "v1",
+        "description": "Technische Referenz für die Text-zu-Sprache-Funktion: wie Text an Satz- und Wortgrenzen in sprachfreundliche Abschnitte geteilt wird, wie die SpeechSynthesis-API des Browsers jeden Abschnitt der Reihe nach vorliest, welche Variablen akzeptiert werden und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie einer in Abschnitte geteilten Passage",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Abschnittsgrenze",
+          "modesValue": "200 Zeichen",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Abschnitte = inAbschnitteTeilen(Text, maxLänge=200): Sätze bis maxLänge zusammenfassen; jeden einzelnen Satz, der länger als maxLänge ist, an Wortgrenzen teilen",
+          "note": "Die Abschnittsbildung existiert, weil manche Browser eine einzige, sehr lange SpeechSynthesisUtterance stillschweigend abschneiden oder fehlerhaft behandeln — das Aufteilen in kürzere Abschnitte und deren nacheinander erfolgende Einreihung hält die Sprach-Engine jedes Browsers zuverlässig, unabhängig davon, wie lang der ursprüngliche Text ist."
+        },
+        "flowchart": {
+          "intro": "Die Abschnittsbildung versucht immer zuerst, an einer Satzgrenze zu trennen, und greift nur bei einem einzelnen, für sich genommen zu langen Satz auf Wortgrenzen zurück.",
+          "steps": [
+            "Den eingegebenen Text trimmen; bleibt nichts übrig, sofort den Fehler 'leerer-Text' zurückgeben",
+            "Prüfen, dass die Geschwindigkeit eine endliche Zahl innerhalb des von der Web Speech API unterstützten Bereichs (0,1 bis 10) ist; andernfalls mit 'ungültige-Geschwindigkeit' ablehnen",
+            "Prüfen, dass die Tonhöhe eine endliche Zahl innerhalb ihres unterstützten Bereichs (0 bis 2) ist; andernfalls mit 'ungültige-Tonhöhe' ablehnen",
+            "Den Text mithilfe eines regulären Ausdrucks, der Zeichenfolgen erfasst, die mit '.', '!' oder '?' enden, in Sätze aufteilen",
+            "Sätze in einem Abschnitt sammeln, bis das Hinzufügen des nächsten das 200-Zeichen-Limit überschreiten würde, dann einen neuen Abschnitt beginnen — ein einzelner Satz, der länger als das Limit ist, wird stattdessen weiter an Wortgrenzen geteilt",
+            "Pro fertigem Abschnitt eine SpeechSynthesisUtterance in eine Warteschlange einreihen, in Reihenfolge, mit der gewählten Stimme, Geschwindigkeit und Tonhöhe, und sie nacheinander vorlesen"
+          ],
+          "caption": "Die Suche nach Abschnittsgrenzen bevorzugt immer ganze Sätze; nur ein einzeln zu langer Satz wird jemals mitten im Satz, an einer Wortgrenze, geteilt."
+        },
+        "anatomy": {
+          "intro": "Ein langer Text wird als mehrere kürzere Abschnitte eingereiht, statt in einer Äußerung vorgelesen zu werden — dies zeigt, wie eine 417 Zeichen lange Passage in drei Abschnitte geteilt werden könnte.",
+          "labelChunk1": "Abschnitt 1",
+          "labelChunk2": "Abschnitt 2",
+          "labelChunk3": "Abschnitt 3",
+          "totalLabel": "Zeichen insgesamt",
+          "caption": "Jeder Abschnitt bleibt unter dem 200-Zeichen-Limit; die Teilung erfolgt, wann immer möglich, an einer Satzgrenze, sodass kein Abschnitt einen Satz mittendurch trennt, es sei denn, dieser Satz allein ist bereits zu lang."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "Der in Sprache umzuwandelnde Text.",
+            "unit": "Zeichen"
+          },
+          {
+            "symbol": "rate",
+            "meaning": "An die Sprach-Engine übergebene Wiedergabegeschwindigkeit.",
+            "unit": "0,1–10 (Standard 1)"
+          },
+          {
+            "symbol": "pitch",
+            "meaning": "An die Sprach-Engine übergebene Stimmtonhöhe.",
+            "unit": "0–2 (Standard 1)"
+          },
+          {
+            "symbol": "maxChunkLength",
+            "meaning": "Die maximale Zeichenlänge eines Sprachabschnitts, bevor er weiter geteilt wird.",
+            "unit": "Standard 200"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Leerer oder nur aus Leerzeichen bestehender Text wird abgelehnt, bevor Geschwindigkeit oder Tonhöhe überhaupt geprüft werden",
+            "description": "Der Text wird getrimmt und zuerst auf Leere geprüft, wobei bei 'leerer-Text' abgebrochen wird, bevor die Geschwindigkeits- und Tonhöhenprüfungen überhaupt laufen — ein leeres Textfeld erzeugt nie eine verwirrende 'ungültige-Geschwindigkeit'-Meldung, während die Geschwindigkeit selbst eigentlich in Ordnung war."
+          },
+          {
+            "title": "Geschwindigkeit und Tonhöhe werden gegen die tatsächlichen Spezifikationsbereiche der Web Speech API geprüft, nicht gegen willkürliche Grenzen",
+            "description": "0,1–10 für die Geschwindigkeit und 0–2 für die Tonhöhe sind die Bereiche, die SpeechSynthesisUtterance selbst gemäß der Web-Speech-API-Spezifikation unterstützt — Werte außerhalb dieser Bereiche werden abgelehnt, bevor sie überhaupt die Sprach-Engine des Browsers erreichen, die sie sonst stillschweigend begrenzen oder ignorieren könnte."
+          },
+          {
+            "title": "Ein einzelner Satz, der länger als das Abschnittslimit ist, wird an Wortgrenzen geteilt, nie mitten im Wort",
+            "description": "Übersteigt ein Satz selbst maxLänge, fällt die Abschnittsbildung darauf zurück, ganze Wörter zu sammeln, bis das Limit erreicht ist — sie schneidet nie einen Abschnitt mitten in einem Wort ab, was an der Grenze zu verstümmelter oder falsch ausgesprochener Sprache führen würde."
+          },
+          {
+            "title": "Das Abschnittslängenlimit ist konfigurierbar, standardmäßig aber 200 Zeichen",
+            "description": "maxChunkLength ist eine optionale Eingabe mit Standardwert 200 — dieser Standard wurde empirisch gewählt, kurz genug, um die Abschneide-Fehler zu vermeiden, die manche Browser bei sehr langen Äußerungen zeigen, aber lang genug, um im üblichen Fall einen ganzen Satz zu fassen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird der Text in Abschnitte geteilt, statt als eine durchgehende Äußerung vorgelesen zu werden?",
+            "answer": "Manche SpeechSynthesis-Implementierungen von Browsern schneiden eine einzige, sehr lange Äußerung stillschweigend ab oder verhalten sich unzuverlässig. Das Aufteilen des Texts in kürzere Abschnitte und deren nacheinander erfolgende Einreihung umgeht diese Inkonsistenz und hält die Wiedergabe über Browser hinweg zuverlässig, unabhängig davon, wie lang der ursprüngliche Text ist."
+          },
+          {
+            "question": "Warum bevorzugt der Abschnittsteiler Satzgrenzen, statt einfach alle 200 Zeichen zu schneiden?",
+            "answer": "Ein Schnitt mitten im Satz würde eine unangenehme Pause und eine Fehlaussprache genau mitten im Gedanken erzeugen. Der Teiler greift nur dann auf einen Schnitt mitten im Satz an einer Wortgrenze zurück, wenn ein einzelner Satz selbst länger als das Abschnittslimit ist — andernfalls landet jede Abschnittsgrenze an einem natürlichen Satzende."
+          },
+          {
+            "question": "Was sind gültige Werte für die Regler für Geschwindigkeit und Tonhöhe?",
+            "answer": "Die Geschwindigkeit akzeptiert 0,1 bis 10 (1 ist normale Geschwindigkeit), und die Tonhöhe akzeptiert 0 bis 2 (1 ist die normale Tonhöhe einer Stimme) — dies sind die exakten Bereiche, die die Web-Speech-API-Spezifikation für SpeechSynthesisUtterance definiert, keine für dieses Tool spezifischen Werte."
+          },
+          {
+            "question": "Wird mein Text beim Umwandeln in Sprache an einen Server gesendet?",
+            "answer": "Nein — dieses Tool nutzt ausschließlich die im Browser integrierte SpeechSynthesis-API, die dieselbe Text-zu-Sprache-Engine ausführt, die auch die Barrierefreiheitsfunktionen Ihres Betriebssystems verwenden. Weder der Text noch das resultierende Audio werden irgendwohin gesendet."
+          }
+        ]
+      },
+      "speech-to-text": {
+        "version": "v1",
+        "description": "Technische Referenz für die Sprache-zu-Text-Funktion: wie rohe, erkannte Sprachabschnitte aus der SpeechRecognition-API des Browsers bereinigt und zu einem lesbaren Transkript zusammengefügt werden, welche Variablen akzeptiert werden und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie eines zusammengefügten Transkripts",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Verarbeitungsschritte",
+          "modesValue": "5",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Transkript = SätzeGroßschreiben(Segmente.map(trimmen + Leerraum zusammenfassen).filter(nichtLeer).join(' '))  |  Wortanzahl = Transkript ? Transkript.split(/\\s+/).length : 0",
+          "note": "Diese Formatierungslogik ist reine Textverarbeitung ohne Abhängigkeit von der SpeechRecognition-API selbst — sie arbeitet ausschließlich mit den finalisierten Transkriptabschnitten, die der Browser zurückliefert, was sie außerhalb einer echten Browser-Mikrofonsitzung vollständig testbar macht."
+        },
+        "flowchart": {
+          "intro": "Die eigene Erkennungs-Engine des Browsers erledigt die eigentliche Sprache-zu-Text-Arbeit; die eigene Logik dieses Tools bereinigt und fügt nur die zurückgelieferten Abschnitte zusammen.",
+          "steps": [
+            "Die SpeechRecognition-API des Browsers hört das Mikrofon ab und erzeugt finalisierte Transkriptabschnitte, sobald der Sprecher zwischen Phrasen pausiert",
+            "Jeden Abschnitt trimmen und jede Folge interner Leerzeichen auf ein einzelnes Leerzeichen reduzieren",
+            "Jeden Abschnitt verwerfen, der nach dem Trimmen leer ist (Stille oder ein fehlerhaft erkanntes leeres Ergebnis)",
+            "Die verbleibenden bereinigten Abschnitte mit einzelnen Leerzeichen zusammenfügen, in der Reihenfolge, in der sie erkannt wurden",
+            "Den allerersten Buchstaben des zusammengefügten Transkripts großschreiben sowie den ersten Buchstaben nach jedem '.', '!' oder '?', gefolgt von Leerraum, damit Satzanfänge natürlich lesbar sind",
+            "Wörter zählen, indem das fertige Transkript am Leerraum aufgeteilt wird, oder 0 melden, falls das Transkript leer war"
+          ],
+          "caption": "Schritt 2 und die folgenden sind gleich, unabhängig davon, welche Spracherkennungs-Engine oder welcher Browser die rohen Abschnitte in Schritt 1 erzeugt hat."
+        },
+        "anatomy": {
+          "intro": "Mehrere kurze erkannte Abschnitte werden zu einem durchgehenden Transkript zusammengefügt — dies zeigt, wie drei unterschiedlich lange Abschnitte sich zur finalen Zeichenanzahl summieren.",
+          "labelSegment1": "Abschnitt 1",
+          "labelSegment2": "Abschnitt 2",
+          "labelSegment3": "Abschnitt 3",
+          "totalLabel": "Transkriptlänge",
+          "caption": "Abschnitte werden mit jeweils einem einzelnen Leerzeichen dazwischen zusammengefügt — die Gesamtlänge des Transkripts ist die Summe der bereinigten Abschnitte plus ein Leerzeichen pro Verbindung."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "segments",
+            "meaning": "Die bisher erkannten, finalisierten Transkriptabschnitte in Erkennungsreihenfolge.",
+            "unit": "Textarray"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein leeres Segments-Array erzeugt ein leeres Transkript und eine Wortanzahl von 0, keinen Fehler",
+            "description": "Der Rechner hat keinen eigenen Fehlerzustand für 'keine Sprache erkannt' — ein leeres oder nur aus Leerzeichen bestehendes Segments-Array fließt einfach zu einer leeren zusammengefügten Zeichenkette durch, und die Wortanzahl-Logik prüft diesen leeren Fall explizit, um 0 statt eines einzelnen 'Wortes' aus einer leeren Zeichenkette zu melden."
+          },
+          {
+            "title": "Interner Leerraum wird pro Abschnitt zusammengefasst, vor dem Zusammenfügen, nicht danach",
+            "description": "Jeder Abschnitt wird einzeln getrimmt und hat Folgen interner Leerzeichen auf ein einzelnes reduziert, bevor überhaupt ein Zusammenfügen stattfindet — dies verhindert, dass ein Browser, der gelegentlich einen Abschnitt mit unregelmäßigem Abstand liefert, doppelte Leerraumlücken im finalen Transkript erzeugt."
+          },
+          {
+            "title": "Die Großschreibung wird auf das vollständig zusammengefügte Transkript angewendet, nicht auf jeden Abschnitt einzeln",
+            "description": "Liefe die Großschreibung stattdessen pro Abschnitt, würde ein Abschnitt, der zufällig mitten im Satz beginnt (nach einem bereits kleingeschriebenen Wort aus dem vorherigen Abschnitt), fälschlich großgeschrieben — den regulären Ausdruck einmal, nach dem Zusammenfügen, laufen zu lassen, identifiziert korrekt nur echte Transkript- und Satzanfänge."
+          },
+          {
+            "title": "Der reguläre Ausdruck zur Satz-Großschreibung schreibt nur einen Buchstaben groß, der auf Interpunktion UND Leerraum folgt, nicht auf Interpunktion allein",
+            "description": "Das Muster verlangt gezielt ein Leerzeichen (oder anderen Leerraum) zwischen der satzbeendenden Interpunktion und dem nächsten Buchstaben — dies vermeidet die fälschliche Großschreibung etwa einer Dezimalzahl oder einer Abkürzung, bei der ein Punkt tatsächlich keinen Satz beendet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Führt dieses Tool die eigentliche Spracherkennung selbst durch?",
+            "answer": "Nein — die eigentliche Audio-zu-Text-Erkennung wird vollständig von der im Browser integrierten SpeechRecognition-API durchgeführt (dieselbe Engine, die auch Funktionen wie die Spracheingabe antreibt). Der eigene Code dieses Tools formatiert und fügt lediglich die von dieser API zurückgelieferten finalisierten Abschnitte zusammen; er hat keine eigene Sprachverarbeitungslogik."
+          },
+          {
+            "question": "Warum könnte das Transkript eine Wortanzahl von 0 haben, obwohl ich gesprochen habe?",
+            "answer": "Dies passiert, wenn jeder erkannte Abschnitt nach dem Trimmen leer war — zum Beispiel, wenn der Browser nur Stille-Marker oder leere Zeichenketten zurückgab. Die Wortanzahl-Logik prüft explizit auf ein leeres finales Transkript und meldet in diesem Fall 0, statt eine leere Zeichenkette fälschlich als ein Wort zu zählen."
+          },
+          {
+            "question": "Warum sieht die Großschreibung manchmal anders aus als das, was ich tatsächlich gesagt habe?",
+            "answer": "Das Tool schreibt den ersten Buchstaben des gesamten Transkripts sowie den ersten Buchstaben nach jeder satzbeendenden Interpunktion mit folgendem Leerzeichen groß — es hat keine Möglichkeit, Ihre tatsächlich beabsichtigte Satzstruktur über die von der Erkennungs-Engine eingefügte Interpunktion hinaus zu kennen, sodass ungewöhnliche Großschreibung auftreten kann, wenn die Interpunktion der Erkennung von der abweicht, wie Sie selbst interpunktieren würden."
+          },
+          {
+            "question": "Wird mein Audio zur Transkription an einen Server gesendet?",
+            "answer": "Das hängt vollständig von der eigenen SpeechRecognition-Implementierung Ihres Browsers ab, nicht von diesem Tool — dieses Tool empfängt und formatiert lediglich die Textabschnitte, die die API des Browsers zurückliefert; es hat keine eigene Serverkomponente und lädt niemals Audio oder Text irgendwohin hoch."
+          }
+        ]
+      },
+      "spelling-grammar-checker": {
+        "version": "v1",
+        "description": "Technische Referenz für die Rechtschreib- und Grammatikprüfung: wie acht unabhängige regelbasierte Prüfungen Text nach häufigen Fehlern durchsuchen, wie ihre Ergebnisse zusammengeführt und geordnet werden, welche Variablen akzeptiert werden und welche Grenzfälle behandelt werden. Eine einfache regelbasierte Prüfung, kein wörterbuchgestützter oder KI-gestützter Rechtschreibprüfer.",
+        "sectionFormula": "Kernregel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionIssueTypes": "Die vier Problemtypen",
+        "sectionAnatomy": "Anatomie eines erkannten Problems",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Regelprüfungen",
+          "modesValue": "8",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "Probleme = [Rechtschreibfehler, kleines 'i', Satz-Großschreibung, doppelte Leerzeichen, wiederholte Wörter, fehlendes Leerzeichen nach Interpunktion, a/an-Fehler, your/you're-Verwechslung].flat().sortBy(Problem ⇒ Problem.Start)",
+          "note": "Jede der acht Prüfungen ist ein unabhängiger Scan mit regulärem Ausdruck, der über den gesamten Text läuft und seine eigene Problemliste zurückgibt — es gibt keinen gemeinsamen Zustand oder Abhängigkeiten zwischen ihnen. Der einzige Zusammenführungsschritt besteht darin, alle acht Listen zu verketten und das Ergebnis nach der Zeichenposition jedes Problems zu sortieren, sodass sich überlappende oder benachbarte Probleme verschiedener Regeln dennoch in Lesereihenfolge anzeigen."
+        },
+        "flowchart": {
+          "intro": "Alle acht Regelprüfungen laufen unabhängig über denselben Text — die Ausführungsreihenfolge spielt keine Rolle, da die Ergebnisse ohnehin anschließend nach Position sortiert werden.",
+          "steps": [
+            "Ist der Text leer oder besteht nur aus Leerzeichen, sofort den Fehler 'leerer-Text' zurückgeben, ohne irgendeine Prüfung auszuführen",
+            "Acht unabhängige regelbasierte Prüfungen über den gesamten Text ausführen: ein kleines festes Wörterbuch von ~45 häufig falsch geschriebenen Wörtern, ein alleinstehendes kleines 'i', das großgeschrieben werden sollte, fehlende Großschreibung am Satzanfang, Folgen von zwei oder mehr Leerzeichen, ein unmittelbar wiederholtes Wort, fehlendes Leerzeichen nach Interpunktion, falscher Gebrauch des Artikels 'a'/'an' vor einem Vokal- oder Konsonantenlaut, sowie 'your', gefolgt von einem '-ing'-Wort (eine wahrscheinliche 'you're'-Verwechslung)",
+            "Jedes von jeder Regel gefundene Problem zu einer kombinierten Liste zusammenfassen",
+            "Diese kombinierte Liste nach der Start-Zeichenposition jedes Problems sortieren, sodass sich Probleme verschiedener Regeln in der Reihenfolge einreihen, in der sie tatsächlich im Text erscheinen",
+            "Wörter zählen, indem der Text getrimmt, am Leerraum aufgeteilt und leere Ergebnisse herausgefiltert werden",
+            "Die sortierte Problemliste zusammen mit der Wortanzahl zurückgeben"
+          ],
+          "caption": "Die acht Prüfungen sehen niemals die Ergebnisse der anderen — die einzige Interaktion zwischen ihnen ist die abschließende Sortierung nach Textposition."
+        },
+        "issueTypes": {
+          "intro": "Jedes Problem wird mit einem von vier Typen markiert, die das Ergebnisfeld zum Gruppieren und Farbcodieren nutzt — dies zeigt, wie viele jedes Typs eine repräsentative Textprobe zutage fördern könnte.",
+          "labelSpelling": "Rechtschreibung",
+          "labelGrammar": "Grammatik",
+          "labelCapitalization": "Großschreibung",
+          "labelPunctuation": "Zeichensetzung",
+          "caption": "Sechs der acht Prüfungen ordnen jeweils genau einem Problemtyp zu; die Rechtschreibprüfung markiert immer 'Rechtschreibung', während die a/an- und your/you're-Prüfungen beide 'Grammatik' markieren."
+        },
+        "anatomy": {
+          "intro": "Jedes erkannte Problem ist ein einzelner Datensatz mit mehreren Feldern — dies zeigt, was die Prüfung für ein einzelnes markiertes Wort tatsächlich zurückgibt.",
+          "labelType": "Typ",
+          "valueType": "Rechtschreibung",
+          "labelMessage": "Meldung",
+          "valueMessage": "\"teh\" könnte falsch geschrieben sein.",
+          "labelOriginal": "Original",
+          "valueOriginal": "teh",
+          "labelSuggestion": "Vorschlag",
+          "valueSuggestion": "the",
+          "caption": "Neben diesen Feldern trägt jedes Problem auch eine Start- und Endzeichenposition, die das Ergebnisfeld nutzt, um genau hervorzuheben, wo im Text das Problem auftritt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "Der auf Rechtschreib- und Grammatikprobleme zu prüfende Text.",
+            "unit": "Zeichen"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Das Rechtschreibfehler-Wörterbuch ist eine kleine feste Liste, kein umfassender Rechtschreibprüfer",
+            "description": "Das Wörterbuch der Rechtschreibfehler deckt etwa 45 häufig falsch getippte englische Wörter ab (wie 'teh', 'recieve', 'definately') — ein falsch geschriebenes Wort, das nicht in dieser Liste steht, wird einfach nicht markiert, da dies eine leichtgewichtige regelbasierte Prüfung ist, kein voll wörterbuchgestützter Rechtschreibprüfer."
+          },
+          {
+            "title": "Eine Korrektur bewahrt die Groß-/Kleinschreibung des Originalworts",
+            "description": "Die Logik zur Bewahrung der Groß-/Kleinschreibung prüft, ob der erste Buchstabe des falsch geschriebenen Worts großgeschrieben war, und schreibt in diesem Fall auch den ersten Buchstaben der vorgeschlagenen Korrektur groß — sodass 'Teh' 'The' vorschlägt, nicht 'the', obwohl das Wörterbuch nur die Kleinschreibform speichert."
+          },
+          {
+            "title": "Die a/an-Prüfung hat explizite Ausnahmelisten für Wörter, die die einfache Vokal-/Konsonantenregel brechen",
+            "description": "Wörter wie 'university' beginnen mit einem Vokalbuchstaben, aber einem Konsonantenlaut (korrekt 'a university'), und Wörter wie 'hour' beginnen mit einem Konsonantenbuchstaben, aber einem Vokallaut (korrekt 'an hour') — eigene Ausnahmelisten führen diese spezifischen Wörter auf, damit die sonst einfache Erste-Buchstabe-Prüfung sie nicht fälschlich markiert."
+          },
+          {
+            "title": "Die Prüfung auf wiederholte Wörter ist nicht groß-/kleinschreibungsabhängig, verlangt aber exakt dasselbe Wort zweimal mit nur Leerraum dazwischen",
+            "description": "Der reguläre Ausdruck markiert 'the the' und 'The the' gleichermaßen (unabhängig von Groß-/Kleinschreibung), aber 'the quick the' (mit einem dazwischenliegenden Wort) wird nicht markiert, da das Muster nur ein Wort erfasst, dem unmittelbar Leerraum und dasselbe Wort erneut folgt."
+          },
+          {
+            "title": "Alle acht Problemlisten werden zusammengefasst und dann einmal sortiert, nicht schrittweise zusammengeführt",
+            "description": "Jede Prüfung läuft unabhängig und gibt ihre eigene vollständige Liste zurück, bevor überhaupt sortiert wird — die acht Listen werden in einem einzigen finalen Schritt zu einem Array zusammengeführt und nach Startposition sortiert, sodass die Prüfungen nie die Ergebnisse der anderen kennen müssen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Wird diese Prüfung von KI oder einem vollständigen Wörterbuch angetrieben, wie ein Rechtschreibprüfungsdienst?",
+            "answer": "Nein — es ist eine leichtgewichtige, regelbasierte Prüfung. Rechtschreibfehler werden gegen eine kleine feste Liste häufiger Fehler abgeglichen (kein vollständiges Wörterbuch), und Grammatik-/Zeichensetzungsprobleme werden mit einer Handvoll gezielter regulärer Ausdrucksmuster gefunden, nicht mit einem Sprachmodell. Sie läuft vollständig in Ihrem Browser, ohne Serveraufrufe."
+          },
+          {
+            "question": "Warum hat die Prüfung einen Rechtschreibfehler nicht erkannt, von dem ich weiß, dass er falsch ist?",
+            "answer": "Die Rechtschreibprüfung markiert nur Wörter, die in ihrer eingebauten Liste von etwa 45 häufigen Fehlern enthalten sind. Ein Tippfehler, der nicht auf dieser Liste steht — selbst ein offensichtlicher — wird nicht erkannt, da dieses Tool kein umfassendes Wörterbuch oder Sprachmodell verwendet."
+          },
+          {
+            "question": "Wie werden die vier Problemtypen (Rechtschreibung, Grammatik, Großschreibung, Zeichensetzung) zugeordnet?",
+            "answer": "Jede der acht zugrunde liegenden Prüfungen markiert ihre eigenen Funde mit einem festen Typ: Die Rechtschreibprüfung markiert immer 'Rechtschreibung'; die beiden Großschreibungsprüfungen (kleines 'i' und Satzanfänge) markieren 'Großschreibung'; die Prüfungen auf doppelte Leerzeichen und fehlendes Leerzeichen nach Interpunktion markieren 'Zeichensetzung'; und die Prüfungen auf wiederholte Wörter, a/an sowie your/you're markieren alle 'Grammatik'."
+          },
+          {
+            "question": "Warum erscheinen Probleme in der Reihenfolge, in der sie in der Ergebnisliste stehen?",
+            "answer": "Alle von jeder Prüfung gefundenen Probleme werden zu einer Liste zusammengeführt und dann danach sortiert, wo jedes im Text beginnt — sie werden also immer in derselben Links-nach-rechts-Lesereihenfolge wie der Text selbst angezeigt, unabhängig davon, welche der acht Regeln jedes einzelne entdeckt hat."
+          }
+        ]
       }
     }
   }

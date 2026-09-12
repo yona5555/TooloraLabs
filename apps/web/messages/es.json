@@ -33736,6 +33736,629 @@
             "answer": "No una aritmética — es una selección aleatoria uniforme del conjunto que produzca el filtro de categoría (y la regla de 'excluir la cita actual'). Cada cita de ese conjunto tiene la misma probabilidad de ser elegida."
           }
         ]
+      },
+      "unit-converter": {
+        "version": "v2",
+        "description": "Referencia técnica del Conversor de Unidades: cómo se convierten valores de longitud, peso, temperatura, área, volumen y velocidad usando factores de conversión por categoría (y, para la temperatura, un pivote Celsius), las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "La tabla completa de conversiones",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categorías",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "categorías lineales: resultado = (valor × factor[origen]) ÷ factor[destino]  |  temperatura: celsius = aCelsius(valor, origen); resultado = desdeCelsius(celsius, destino)",
+          "note": "Cada categoría lineal (longitud, peso, área, volumen, velocidad) comparte una fórmula de tabla de factores: convertir la entrada a la unidad base de esa categoría multiplicando por el factor de la unidad de origen, y luego convertir a la unidad de destino dividiendo por su factor. La temperatura no puede funcionar así, ya que °F y °C no comparten un punto cero, así que se gestiona por separado pivotando a través de Celsius con dos funciones de conversión explícitas."
+        },
+        "flowchart": {
+          "intro": "Toda categoría salvo la temperatura comparte exactamente la misma conversión de dos pasos; la temperatura necesita en cambio un pivote no lineal dedicado.",
+          "steps": [
+            "Elige una categoría —longitud, peso, temperatura, área, volumen o velocidad— y una unidad de 'origen' y de 'destino' dentro de ella",
+            "Para la temperatura, convierte primero el valor introducido a Celsius usando una fórmula dedicada según la unidad (Celsius, Fahrenheit o Kelvin) en que se introdujo",
+            "Para cualquier otra categoría, consulta los factores de conversión de las unidades de 'origen' y 'destino' en la tabla de factores de esa categoría (cada uno expresado respecto a una unidad base, como metros o kilogramos)",
+            "Multiplica el valor por el factor de 'origen', y luego divide entre el factor de 'destino', para obtener el resultado convertido —para la temperatura, convierte en su lugar el valor Celsius pivotado a la unidad de destino",
+            "Redondea el resultado a 6 decimales, y calcula además el mismo valor de entrada convertido a cada otra unidad de la categoría, para la tabla completa de conversiones"
+          ],
+          "caption": "Las categorías lineales pivotan a través de una unidad base (como el metro); la temperatura pivota en cambio a través de Celsius, ya que sus escalas no comparten un punto cero."
+        },
+        "anatomy": {
+          "intro": "Convertir un valor no produce solo un número: la herramienta también calcula la misma cantidad en cada otra unidad de la categoría a la vez, así que los equivalentes de 1 kilómetro ya están disponibles.",
+          "labelKm": "Kilómetros",
+          "labelM": "Metros",
+          "labelMi": "Millas",
+          "labelFt": "Pies",
+          "caption": "Las cuatro filas representan exactamente la misma distancia física —1 kilómetro— solo expresada mediante el factor propio de cada unidad respecto a la unidad base, el metro."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "category",
+            "meaning": "La familia de unidades dentro de la cual convertir.",
+            "unit": "longitud, peso, temperatura, área, volumen o velocidad"
+          },
+          {
+            "symbol": "value",
+            "meaning": "La cantidad numérica a convertir.",
+            "unit": "unidad de origen"
+          },
+          {
+            "symbol": "from",
+            "meaning": "La unidad en la que está actualmente el valor introducido.",
+            "unit": "—"
+          },
+          {
+            "symbol": "to",
+            "meaning": "La unidad a la que convertir el valor.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Una unidad no reconocida para la categoría seleccionada falla explícitamente, no en silencio",
+            "description": "Si la unidad de 'origen' o 'destino' no es una clave en la tabla de factores de esa categoría (o, para la temperatura, no es celsius/fahrenheit/kelvin), la herramienta devuelve un resultado fallido con un error explícito 'Unidad no compatible para esta categoría', en lugar de producir 0 o NaN en silencio."
+          },
+          {
+            "title": "La temperatura deliberadamente nunca se encamina a través de las tablas de factores lineales",
+            "description": "Como Fahrenheit y Celsius tienen puntos cero distintos además de tamaños de escala distintos, ningún factor de multiplicación único puede convertir entre ellas —el código se ramifica específicamente en category === 'temperature' para usar en su lugar las dos funciones dedicadas aCelsius/desdeCelsius."
+          },
+          {
+            "title": "Todo resultado se redondea a exactamente 6 decimales",
+            "description": "La función de redondeo siempre formatea a 6 decimales antes de volver a convertir a número —esto evita que resultados de conversiones como acres (un factor con 10 decimales de precisión) muestren largas cadenas de ruido de coma flotante."
+          },
+          {
+            "title": "La tabla completa de conversiones solo se rellena cuando la unidad de 'origen' es válida",
+            "description": "allConversions se construye convirtiendo la entrada a cada unidad de la categoría, pero solo después de confirmar que input.from existe en la tabla de factores —una unidad de 'origen' inválida produce un objeto de conversiones vacío en lugar de una tabla llena de valores NaN."
+          },
+          {
+            "title": "Convertir una unidad a sí misma sigue ejecutando el cálculo completo de la tabla de factores",
+            "description": "No hay un atajo de identidad para from === to —el valor se sigue multiplicando y dividiendo por el mismo factor, lo que matemáticamente se cancela al valor original (salvo el redondeo a 6 decimales), así que el resultado es correcto sin necesitar código de caso especial."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la temperatura necesita un tratamiento especial cuando ninguna otra categoría lo necesita?",
+            "answer": "Longitud, peso, área, volumen y velocidad se convierten todos mediante una simple multiplicación —una unidad de cualquiera de ellas es siempre un múltiplo fijo de la unidad base. Las escalas de temperatura no comparten un punto cero (0 °C son 32 °F, no 0 °F), así que ningún factor de multiplicación único puede convertir entre ellas; la herramienta pivota a través de Celsius con fórmulas dedicadas basadas en suma/resta en su lugar."
+          },
+          {
+            "question": "¿Qué muestra exactamente la tabla de 'todas las conversiones'?",
+            "answer": "Es el mismo valor de entrada, convertido a cada unidad disponible en la categoría seleccionada, calculado todo a la vez junto con el resultado principal —así que cambiar la unidad en la que quieres leer la respuesta no requiere volver a introducir el valor."
+          },
+          {
+            "question": "¿Por qué se redondean los resultados a 6 decimales en lugar de mostrarse con precisión completa?",
+            "answer": "Algunos factores de conversión (como acres a metros cuadrados, en 4046,8564224) llevan muchos dígitos decimales, y la aritmética de coma flotante puede introducir pequeños errores de representación más allá de eso. Redondear a 6 decimales mantiene los resultados limpios y legibles sin sacrificar de forma significativa la precisión para ningún caso de uso realista."
+          },
+          {
+            "question": "¿Puedo convertir entre dos unidades de categorías distintas, como metros a kilogramos?",
+            "answer": "No —primero se selecciona una categoría (longitud, peso, temperatura, área, volumen o velocidad), y solo se ofrecen como opciones de 'origen'/'destino' las unidades dentro de esa misma categoría, ya que convertir entre magnitudes físicas fundamentalmente distintas no es una operación válida."
+          }
+        ]
+      },
+      "roman-numeral-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor de Números Romanos: cómo un número se descompone de forma voraz en pares valor-símbolo para construir un número romano, cómo se analiza un número romano de vuelta a un número con validación de ida y vuelta, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de un número romano",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rango de valores",
+          "modesValue": "1–3999",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "aRomano(n): resta de forma voraz el par valor-símbolo más grande ≤ n, añadiendo su símbolo, hasta que n llega a 0  |  aArábigo(s): suma el valor de cada letra, restándolo en su lugar cuando precede a una letra mayor",
+          "note": "Ambas direcciones usan una lista fija de 13 pares valor-símbolo desde 1000 (M) hasta 1 (I), incluyendo los seis pares sustractivos (900=CM, 400=CD, 90=XC, 40=XL, 9=IX, 4=IV) —comprobar esos pares sustractivos antes que sus equivalentes simples es lo que produce formas estándar como 'XC' para 90 en lugar de 'LXXXX'."
+        },
+        "flowchart": {
+          "intro": "Convertir a romano es un bucle voraz de consumir y añadir; convertir de vuelta a arábigo es un recorrido de izquierda a derecha con una comparación de anticipación, seguido de una comprobación de ida y vuelta.",
+          "steps": [
+            "Para 'a romano': valida que el número introducido sea un entero entre 1 y 3999 (el mayor valor representable sin repetir un símbolo más de las tres veces estándar)",
+            "Recorre los 13 pares valor-símbolo del más grande (1000, 'M') al más pequeño (1, 'I'); en cada par, añade el símbolo y resta su valor de la cantidad restante mientras esta siga siendo al menos ese valor",
+            "Para 'a arábigo': valida que el texto introducido no esté vacío y contenga solo las siete letras romanas válidas (I, V, X, L, C, D, M)",
+            "Recorre las letras de izquierda a derecha, comparando el valor de cada letra con el valor de la letra inmediatamente siguiente —si el valor de la siguiente letra es mayor, resta el valor de la letra actual en lugar de sumarlo (esto es lo que hace que 'IV' equivalga a 4, no a 6)",
+            "Vuelve a convertir el número analizado a romano y compáralo con la entrada original —si no coinciden exactamente, rechaza la entrada como un numeral inválido y no canónico (como 'IIII' o 'VX'), aunque la suma ingenua hubiera producido un número"
+          ],
+          "caption": "La comprobación de ida y vuelta del último paso es lo que detecta numerales que un analizador de suma simple aceptaría incorrectamente."
+        },
+        "anatomy": {
+          "intro": "Un número romano es literalmente una concatenación de pares valor-símbolo, cada uno consumido de forma voraz de mayor a menor —descomponer 1994 de esta manera muestra exactamente de dónde viene cada grupo de letras.",
+          "totalLabel": "1994",
+          "caption": "1994 = 1000 (M) + 900 (CM) + 90 (XC) + 4 (IV) — MCMXCIV — cada segmento corresponde a un par valor-símbolo consumido de forma voraz."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "direction",
+            "meaning": "En qué sentido convertir: número arábigo a numeral romano, o numeral romano a número arábigo.",
+            "unit": "—"
+          },
+          {
+            "symbol": "arabicValue",
+            "meaning": "El número entero a convertir a numerales romanos (se usa cuando direction es 'a romano').",
+            "unit": "1–3999"
+          },
+          {
+            "symbol": "romanValue",
+            "meaning": "El texto del numeral romano a convertir a número (se usa cuando direction es 'a arábigo').",
+            "unit": "I, V, X, L, C, D, M"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Los valores fuera de 1–3999 se rechazan, no se limitan ni se envuelven",
+            "description": "3999 (MMMCMXCIX) es el mayor número que el sistema estándar de 7 símbolos puede representar sin repetir un símbolo más de tres veces seguidas; la herramienta rechaza tanto el 0 como cualquier valor por encima de 3999 con un error explícito 'fuera de rango', en lugar de limitarlo en silencio al valor válido más cercano."
+          },
+          {
+            "title": "Un numeral romano no canónico pero 'sumable' como 'IIII' o 'VX' se rechaza igualmente",
+            "description": "La conversión a arábigo sumaría felizmente 'IIII' a 4 usando la regla de comparación letra por letra, pero la calculadora vuelve a convertir ese 4 a romano (obteniendo 'IV') y rechaza la entrada porque 'IV' ≠ 'IIII' —esta comprobación de ida y vuelta es lo único que detecta formas no estándar, ya que la lógica de suma por sí sola no puede distinguirlas."
+          },
+          {
+            "title": "La entrada romana no distingue mayúsculas de minúsculas al entrar, pero siempre se muestra en mayúsculas al salir",
+            "description": "Los numerales romanos escritos se convierten a mayúsculas antes de validarse (así que tanto 'mcmxciv' como 'MCMXCIV' funcionan), pero un resultado convertido siempre se representa en la forma estándar en mayúsculas, ya que los numerales romanos en minúsculas no son una convención reconocida."
+          },
+          {
+            "title": "Cualquier carácter fuera de I, V, X, L, C, D, M falla la validación de inmediato",
+            "description": "La comprobación mediante expresión regular de letras romanas válidas se ejecuta antes de cualquier lógica de análisis, así que una entrada como '12' o 'IVX!' se rechaza con 'romano-inválido' antes de que el recorrido letra por letra llegue a ejecutarse, en lugar de analizarse parcialmente y fallar más tarde."
+          },
+          {
+            "title": "Una entrada vacía o solo con espacios en cualquiera de las dos direcciones devuelve un error distinto de 'entrada-vacía', separado de 'inválido' o 'fuera-de-rango'",
+            "description": "Esta distinción permite que la interfaz muestre un estado neutro de 'aún no se ha introducido nada' en lugar de un mensaje de fallo de validación alarmante cuando un campo simplemente está en blanco."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué 3999 es el máximo, en lugar de permitir números mayores?",
+            "answer": "Los numerales romanos estándar no tienen símbolo para 5000 o más en el uso habitual, y el mayor número expresable usando solo M/CM/D/CD/C/XC/L/XL/X/IX/V/IV/I sin repetir ningún símbolo más de tres veces consecutivas es 3999 (MMMCMXCIX). Números mayores requerirían una notación no estándar que este conversor no intenta admitir."
+          },
+          {
+            "question": "¿Por qué el conversor rechaza 'IIII' para el 4, cuando parece sumar correctamente?",
+            "answer": "'IIII' sí suma 4 bajo una regla ingenua letra por letra, pero no es la forma estándar y canónica de escribir 4 —esa es 'IV'. El conversor comprueba esto específicamente volviendo a convertir a romano cualquier número analizado y rechazando la entrada si no coincide exactamente, lo que detecta 'IIII', 'VX' y formas no estándar similares."
+          },
+          {
+            "question": "¿Importan las mayúsculas al escribir un numeral romano?",
+            "answer": "No —la entrada escrita se convierte automáticamente a mayúsculas antes de validarse o analizarse, así que 'xiv', 'Xiv' y 'XIV' se tratan de forma idéntica. Sin embargo, el resultado convertido siempre se muestra en mayúsculas estándar."
+          },
+          {
+            "question": "¿Cómo sabe el conversor que 'IV' significa 4 y no 6 (I + V)?",
+            "answer": "Compara el valor de cada letra con el valor de la letra inmediatamente siguiente al recorrer de izquierda a derecha. Cuando una letra de menor valor precede directamente a una de mayor valor, se resta el valor de esa letra menor en lugar de sumarse —esa única regla de comparación es lo que convierte 'IV' en 5 − 1 = 4, en lugar de 1 + 5 = 6."
+          }
+        ]
+      },
+      "image-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor de Imágenes: cómo el navegador vuelve a codificar una imagen a un formato distinto usando la API Canvas, cómo el redimensionado opcional conserva la proporción sin ampliar nunca, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Tamaño original frente a convertido",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Formatos de salida",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "dimensionesDeSalida = ajustar(original, anchoMáximo) conservando la proporción, escala ≤ 1 únicamente  |  porcentajeDeCompresión = redondear((1 − bytesNuevos ÷ bytesOriginales) × 100)",
+          "note": "El redimensionado calcula un único factor de escala —limitado a 1 como máximo, para que la imagen nunca se estire más allá de su tamaño original— y lo aplica al ancho y al alto conjuntamente, lo que mantiene intacta la proporción. El porcentaje de compresión es una simple comparación de tamaño en bytes antes/después, calculada solo después de que el navegador haya producido realmente el archivo convertido."
+        },
+        "flowchart": {
+          "intro": "Cada paso posterior a la comprobación inicial del archivo se ejecuta por completo en el navegador: ningún dato de imagen se sube nunca a un servidor.",
+          "steps": [
+            "Comprueba que el tipo del archivo seleccionado empiece por 'image/' y que su tamaño sea inferior al límite de 10 MB, rechazándolo con un error específico en caso contrario",
+            "Decodifica la imagen en un elemento <img> en memoria para leer su ancho y alto natural (original) en píxeles",
+            "Si el redimensionado está activado, calcula nuevas dimensiones que se ajusten al ancho máximo indicado conservando la proporción original —limitando el factor de escala a 1 para que una imagen pequeña nunca se estire más",
+            "Dibuja la imagen en un elemento <canvas> fuera de pantalla con las dimensiones finales (posiblemente redimensionadas)",
+            "Vuelve a codificar el canvas al formato de salida elegido (PNG, JPEG o WebP) mediante canvas.toBlob del navegador, pasando un valor de calidad para JPEG/WebP (PNG ignora la calidad, al ser un formato sin pérdida)",
+            "Compara el tamaño en bytes del archivo resultante con el original para informar de un porcentaje de compresión, y pone el archivo convertido a disposición para previsualizar y descargar"
+          ],
+          "caption": "Nada de esto llama a una API de servidor: decodificar, redimensionar y volver a codificar ocurre todo a través de las propias API Image y Canvas del navegador."
+        },
+        "anatomy": {
+          "intro": "Convertir a un formato más eficiente normalmente reduce el archivo —esto compara un tamaño original ilustrativo con su resultado convertido.",
+          "labelOriginal": "Original (KB)",
+          "labelConverted": "Convertido (KB)",
+          "caption": "Un original de 2,4 MB convertido a WebP con calidad 0,85 podría quedar en torno a 640 KB —una reducción de aproximadamente el 73 %—, aunque el resultado exacto siempre depende del contenido propio de la imagen de origen."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "file",
+            "meaning": "El archivo de imagen seleccionado para convertir.",
+            "unit": "≤ 10 MB, image/*"
+          },
+          {
+            "symbol": "format",
+            "meaning": "El formato de salida al que volver a codificar.",
+            "unit": "PNG, JPEG o WebP"
+          },
+          {
+            "symbol": "quality",
+            "meaning": "Calidad de compresión pasada al codificador; se ignora para PNG por ser sin pérdida.",
+            "unit": "0–1"
+          },
+          {
+            "symbol": "resizeEnabled / maxWidth",
+            "meaning": "Si se debe limitar la salida a un ancho máximo, y ese ancho, antes de volver a codificar.",
+            "unit": "píxeles"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un archivo que no es de imagen se rechaza antes de intentar decodificarlo",
+            "description": "El tipo MIME del archivo se comprueba contra el prefijo 'image/' inmediatamente al seleccionarlo —un archivo no coincidente (como un PDF renombrado con una extensión engañosa) se rechaza con un error específico en lugar de entregarse al elemento Image, donde fallaría de forma menos predecible."
+          },
+          {
+            "title": "Los archivos de más de 10 MB se rechazan directamente, sea cual sea el formato",
+            "description": "La comprobación de tamaño se ejecuta antes de que el archivo se llegue a leer, así que un archivo grande no se decodifica parcialmente ni empieza a consumir memoria antes de que se aplique el límite."
+          },
+          {
+            "title": "El redimensionado solo reduce una imagen, nunca la agranda",
+            "description": "El cálculo de dimensiones redimensionadas obtiene la escala como el mínimo entre la proporción de ajuste de ancho, la de alto y 1 —ese tope estricto en 1 significa que una imagen ya más pequeña que el ancho máximo solicitado se devuelve en su tamaño original en lugar de estirarse, lo que solo la difuminaría."
+          },
+          {
+            "title": "El control de calidad no tiene ningún efecto cuando el formato de salida es PNG",
+            "description": "canvas.toBlob se llama con undefined como argumento de calidad específicamente cuando el formato es PNG, ya que PNG es un formato sin pérdida sin compromiso calidad/compresión que controlar —el mismo valor del control se ignora silenciosamente para ese formato."
+          },
+          {
+            "title": "Cada conversión se retrasa 250 ms tras el último cambio de ajustes",
+            "description": "Ajustar el formato, la calidad o el ancho de redimensionado no dispara una reconversión inmediata en cada pulsación de tecla o movimiento del control —un temporizador de retardo de 250 ms agrupa los cambios rápidos en un único paso de conversión, evitando trabajo redundante del canvas mientras se ajusta activamente un valor."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Se sube mi imagen a un servidor al convertirla?",
+            "answer": "No —cada paso (decodificar el archivo, redimensionar, volver a codificar al nuevo formato) ocurre localmente en tu navegador usando las API Canvas e Image. Los datos de la imagen nunca salen de tu dispositivo."
+          },
+          {
+            "question": "¿Por qué el control de calidad no cambia nada cuando elijo PNG como formato de salida?",
+            "answer": "PNG es un formato sin pérdida —no tiene el compromiso calidad/compresión que sí tienen JPEG y WebP. La herramienta sigue mostrando el control para mantener un diseño coherente entre formatos, pero no se pasa al codificador cuando la salida es PNG."
+          },
+          {
+            "question": "¿Puede el redimensionado hacer mi imagen más grande o más borrosa?",
+            "answer": "No —el cálculo de redimensionado limita explícitamente su factor de escala a 1 como máximo, así que una imagen ya más pequeña que el ancho máximo solicitado se deja en su tamaño original en lugar de estirarse, lo que solo degradaría su calidad."
+          },
+          {
+            "question": "¿Cuál es el archivo más grande que puedo convertir?",
+            "answer": "10 MB. Los archivos mayores se rechazan de inmediato, antes de intentar decodificarlos, para evitar que el navegador intente procesar imágenes muy grandes que podrían bloquear la página."
+          }
+        ]
+      },
+      "text-to-speech": {
+        "version": "v1",
+        "description": "Referencia técnica de la herramienta de Texto a Voz: cómo se divide el texto en fragmentos aptos para la voz en los límites de frase y palabra, cómo la API SpeechSynthesis del navegador narra cada fragmento en secuencia, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de un pasaje fragmentado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Límite de fragmento",
+          "modesValue": "200 caracteres",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "fragmentos = dividirEnFragmentos(texto, longitudMáxima=200): acumula frases hasta longitudMáxima; divide cualquier frase más larga que longitudMáxima en los límites de palabra",
+          "note": "La fragmentación existe porque algunos navegadores truncan en silencio o manejan mal una única expresión de voz (SpeechSynthesisUtterance) muy larga —dividir en fragmentos más cortos y encolarlos uno tras otro mantiene fiable el motor de voz de cada navegador, sin importar cuán largo sea el texto original."
+        },
+        "flowchart": {
+          "intro": "La fragmentación siempre intenta cortar primero en un límite de frase, y solo recurre a los límites de palabra para una única frase demasiado larga por sí sola.",
+          "steps": [
+            "Recorta el texto introducido; si no queda nada, devuelve de inmediato el error 'texto-vacío'",
+            "Comprueba que la velocidad sea un número finito dentro del rango admitido por la Web Speech API (0,1 a 10); en caso contrario, rechaza con 'velocidad-inválida'",
+            "Comprueba que el tono sea un número finito dentro de su rango admitido (0 a 2); en caso contrario, rechaza con 'tono-inválido'",
+            "Divide el texto en frases usando una expresión regular que coincide con secuencias de caracteres que terminan en '.', '!' o '?'",
+            "Acumula frases en un fragmento hasta que añadir la siguiente superaría el límite de 200 caracteres, y entonces empieza un nuevo fragmento —una única frase más larga que el límite se divide además en los límites de palabra",
+            "Encola una SpeechSynthesisUtterance por cada fragmento terminado, en orden, usando la voz, velocidad y tono seleccionados, y narrarlos uno tras otro"
+          ],
+          "caption": "La búsqueda del límite de fragmento siempre prefiere frases completas; solo una frase individualmente demasiado larga llega a dividirse a mitad de frase, en un límite de palabra."
+        },
+        "anatomy": {
+          "intro": "Un texto largo se encola como varios fragmentos más cortos en lugar de narrarse en una sola expresión —esto muestra cómo un pasaje de 417 caracteres podría dividirse en tres.",
+          "labelChunk1": "Fragmento 1",
+          "labelChunk2": "Fragmento 2",
+          "labelChunk3": "Fragmento 3",
+          "totalLabel": "Caracteres totales",
+          "caption": "Cada fragmento se mantiene por debajo del límite de 200 caracteres; la división ocurre en un límite de frase siempre que sea posible, así que ningún fragmento parte una frase por la mitad salvo que esa frase por sí sola sea demasiado larga para caber."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "El texto a convertir en voz.",
+            "unit": "caracteres"
+          },
+          {
+            "symbol": "rate",
+            "meaning": "Velocidad de reproducción pasada al motor de voz.",
+            "unit": "0,1–10 (por defecto 1)"
+          },
+          {
+            "symbol": "pitch",
+            "meaning": "Tono de voz pasado al motor de voz.",
+            "unit": "0–2 (por defecto 1)"
+          },
+          {
+            "symbol": "maxChunkLength",
+            "meaning": "La longitud máxima en caracteres de un fragmento de voz antes de dividirse más.",
+            "unit": "por defecto 200"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "El texto vacío o solo con espacios se rechaza antes incluso de comprobar la velocidad o el tono",
+            "description": "El texto se recorta y se comprueba su vacuidad primero, cortocircuitando con el error 'texto-vacío' antes de que se ejecuten las validaciones de velocidad y tono —un campo de texto vacío nunca produce un confuso mensaje de 'velocidad-inválida' cuando la velocidad en sí era en realidad correcta."
+          },
+          {
+            "title": "La velocidad y el tono se validan contra los rangos reales de la especificación de la Web Speech API, no contra límites arbitrarios",
+            "description": "0,1–10 para la velocidad y 0–2 para el tono son los rangos que el propio SpeechSynthesisUtterance admite según la especificación de la Web Speech API —los valores fuera de esos rangos se rechazan antes de llegar siquiera al motor de voz del navegador, que de otro modo podría limitarlos o ignorarlos en silencio."
+          },
+          {
+            "title": "Una única frase más larga que el límite de fragmento se divide en los límites de palabra, nunca a mitad de palabra",
+            "description": "Cuando una frase en sí supera la longitud máxima, el fragmentador recurre a acumular palabras completas hasta alcanzar el límite —nunca corta un fragmento en mitad de una palabra, lo que produciría una voz confusa o mal pronunciada en el límite."
+          },
+          {
+            "title": "El límite de longitud de fragmento es configurable pero por defecto es de 200 caracteres",
+            "description": "maxChunkLength es una entrada opcional cuyo valor por defecto es 200 —este valor se eligió empíricamente por ser lo bastante corto para evitar los fallos de truncado que algunos navegadores muestran con expresiones muy largas, siendo a la vez lo bastante largo para contener una frase completa en el caso habitual."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué se divide el texto en fragmentos en lugar de narrarse como una única expresión continua?",
+            "answer": "Algunas implementaciones de SpeechSynthesis en los navegadores truncan en silencio o se comportan de forma poco fiable con una única expresión muy larga. Dividir el texto en fragmentos más cortos y encolarlos uno tras otro evita esa inconsistencia y mantiene la reproducción fiable entre navegadores, sin importar cuán largo sea el texto original."
+          },
+          {
+            "question": "¿Por qué el divisor de fragmentos prefiere los límites de frase en lugar de simplemente cortar cada 200 caracteres?",
+            "answer": "Cortar a mitad de frase crearía una pausa incómoda y una mala pronunciación justo en medio de una idea. El divisor solo recurre a una división a mitad de frase, en un límite de palabra, cuando una única frase es en sí misma más larga que el límite del fragmento —de lo contrario, cada corte de fragmento cae en un final de frase natural."
+          },
+          {
+            "question": "¿Cuáles son los valores válidos para los controles de velocidad y tono?",
+            "answer": "La velocidad acepta de 0,1 a 10 (1 es la velocidad normal), y el tono acepta de 0 a 2 (1 es el tono normal de una voz) —estos son los rangos exactos definidos por la especificación de la Web Speech API para SpeechSynthesisUtterance, no valores específicos de esta herramienta."
+          },
+          {
+            "question": "¿Convertir texto a voz envía mi texto a un servidor?",
+            "answer": "No —esta herramienta usa exclusivamente la API SpeechSynthesis integrada en tu navegador, que ejecuta el mismo motor de texto a voz que usan las funciones de accesibilidad de tu sistema operativo. Nada relacionado con el texto ni con el audio resultante se envía a ningún sitio."
+          }
+        ]
+      },
+      "speech-to-text": {
+        "version": "v1",
+        "description": "Referencia técnica de la herramienta de Voz a Texto: cómo los fragmentos de voz reconocidos en bruto de la API SpeechRecognition del navegador se limpian y se unen en una transcripción legible, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de una transcripción unida",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Pasos de procesamiento",
+          "modesValue": "5",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "transcripción = capitalizarFrases(fragmentos.map(recortar + colapsar espacios).filter(noVacío).join(' '))  |  cuentaDePalabras = transcripción ? transcripción.split(/\\s+/).length : 0",
+          "note": "Esta lógica de formateo es procesamiento de texto puro, sin dependencia de la propia API SpeechRecognition —solo opera sobre los fragmentos de transcripción finalizados que devuelve el navegador, lo que la hace completamente comprobable fuera de una sesión real de micrófono en el navegador."
+        },
+        "flowchart": {
+          "intro": "El propio motor de reconocimiento del navegador hace el trabajo real de voz a texto; la lógica propia de esta herramienta solo limpia y une los fragmentos que devuelve.",
+          "steps": [
+            "La API SpeechRecognition del navegador escucha el micrófono y produce fragmentos de transcripción finalizados a medida que el hablante hace pausas entre frases",
+            "Recorta cada fragmento y colapsa cualquier secuencia de espacios internos a un único espacio",
+            "Descarta cualquier fragmento que quede vacío tras recortarlo (silencio o un resultado vacío mal reconocido)",
+            "Une los fragmentos limpios restantes con espacios simples, en el orden en que se reconocieron",
+            "Pone en mayúscula la primera letra de la transcripción unida, y la primera letra tras cualquier '.', '!' o '?' seguido de espacio en blanco, para que los inicios de frase se lean con naturalidad",
+            "Cuenta las palabras dividiendo la transcripción final por los espacios en blanco, o informa de 0 si la transcripción quedó vacía"
+          ],
+          "caption": "Del paso 2 en adelante es igual sin importar qué motor de reconocimiento de voz o navegador produjo los fragmentos en bruto del paso 1."
+        },
+        "anatomy": {
+          "intro": "Varios fragmentos cortos reconocidos se unen en una transcripción continua —esto muestra cómo tres fragmentos de distinta longitud se combinan en el recuento final de caracteres.",
+          "labelSegment1": "Fragmento 1",
+          "labelSegment2": "Fragmento 2",
+          "labelSegment3": "Fragmento 3",
+          "totalLabel": "Longitud de la transcripción",
+          "caption": "Los fragmentos se unen con un único espacio entre cada uno —la longitud total de la transcripción es la suma de los fragmentos limpios más un espacio por cada unión."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "segments",
+            "meaning": "Los fragmentos de transcripción finalizados reconocidos hasta ahora, en orden de reconocimiento.",
+            "unit": "arreglo de texto"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un arreglo de fragmentos vacío produce una transcripción vacía y un recuento de palabras de 0, no un error",
+            "description": "El cálculo no tiene un estado de error dedicado para 'no se detectó voz' —un arreglo de fragmentos vacío o compuesto solo por espacios simplemente fluye hasta una cadena unida vacía, y la lógica de recuento de palabras comprueba explícitamente ese caso vacío para informar de 0 en lugar de contar una cadena vacía como una 'palabra'."
+          },
+          {
+            "title": "Los espacios internos se colapsan por fragmento, antes de unir, no después",
+            "description": "Cada fragmento se recorta individualmente y tiene sus secuencias de espacios internos colapsadas a uno antes de que ocurra cualquier unión —esto evita que un navegador que a veces devuelve un fragmento con espaciado irregular produzca huecos de doble espacio en la transcripción final."
+          },
+          {
+            "title": "La capitalización se aplica a la transcripción totalmente unida, no a cada fragmento individualmente",
+            "description": "Si la capitalización se ejecutara por fragmento en su lugar, un fragmento que resulte empezar a mitad de frase (tras una palabra ya en minúscula del fragmento anterior) se capitalizaría incorrectamente —ejecutar la expresión regular una sola vez, tras unir, identifica correctamente solo posiciones genuinas de inicio de transcripción y de inicio de frase."
+          },
+          {
+            "title": "La expresión regular de capitalización de frases solo pone en mayúscula una letra que sigue a puntuación Y a espacio en blanco, no a la puntuación sola",
+            "description": "El patrón exige específicamente un espacio (u otro espacio en blanco) entre la puntuación que termina la frase y la siguiente letra —esto evita capitalizar incorrectamente algo como un número decimal o una abreviatura donde un punto en realidad no termina una frase."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Esta herramienta realiza ella misma el reconocimiento de voz real?",
+            "answer": "No —el reconocimiento real de audio a texto lo realiza por completo la API SpeechRecognition integrada en tu navegador (el mismo motor detrás de funciones como la escritura por voz). El propio código de esta herramienta solo formatea y une los fragmentos finalizados que devuelve esa API; no tiene lógica propia de procesamiento de voz."
+          },
+          {
+            "question": "¿Por qué la transcripción podría tener un recuento de palabras de 0 aunque yo hablara?",
+            "answer": "Esto ocurre cuando cada fragmento reconocido quedó vacío tras recortarlo —por ejemplo, si el navegador devolvió solo marcadores de silencio o cadenas vacías. La lógica de recuento de palabras comprueba explícitamente una transcripción final vacía e informa de 0 en ese caso, en lugar de contar erróneamente una cadena vacía como una palabra."
+          },
+          {
+            "question": "¿Por qué a veces la capitalización se ve distinta de lo que realmente dije?",
+            "answer": "La herramienta pone en mayúscula la primera letra de toda la transcripción y la primera letra tras cualquier puntuación que termine una frase seguida de un espacio —no tiene forma de conocer la estructura de frase que realmente pretendías más allá de la puntuación que insertó el motor de reconocimiento, así que puede darse una capitalización inusual si la puntuación del reconocedor difiere de cómo la puntuarías tú mismo."
+          },
+          {
+            "question": "¿Se envía mi audio a un servidor para transcribirlo?",
+            "answer": "Eso depende por completo de la propia implementación de SpeechRecognition de tu navegador, no de esta herramienta —esta herramienta solo recibe y formatea los fragmentos de texto que le entrega la API del navegador; no tiene componente de servidor propio y nunca sube audio ni texto a ningún sitio."
+          }
+        ]
+      },
+      "spelling-grammar-checker": {
+        "version": "v1",
+        "description": "Referencia técnica del Corrector Ortográfico y Gramatical: cómo ocho comprobaciones independientes basadas en reglas examinan el texto en busca de errores comunes, cómo se combinan y ordenan sus resultados, las variables que acepta y los casos límite que gestiona. Un corrector básico basado en reglas, no un corrector con diccionario ni impulsado por IA.",
+        "sectionFormula": "Regla principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionIssueTypes": "Los cuatro tipos de problema",
+        "sectionAnatomy": "Anatomía de un problema detectado",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Comprobaciones de reglas",
+          "modesValue": "8",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "problemas = [errores ortográficos, 'i' en minúscula, capitalización de frases, espacios dobles, palabras repetidas, espacio faltante tras puntuación, errores de a/an, confusión your/you're].flat().sortBy(problema ⇒ problema.inicio)",
+          "note": "Cada una de las ocho comprobaciones es un escaneo independiente con expresión regular que recorre todo el texto y devuelve su propia lista de problemas —no hay estado compartido ni dependencia entre ellas. El único paso de combinación es concatenar las ocho listas y ordenar el resultado por la posición de carácter de cada problema, de modo que los problemas superpuestos o adyacentes de distintas reglas se muestren igualmente en orden de lectura."
+        },
+        "flowchart": {
+          "intro": "Las ocho comprobaciones de reglas se ejecutan de forma independiente sobre el mismo texto —el orden de ejecución no importa, ya que los resultados se ordenan por posición después de todos modos.",
+          "steps": [
+            "Si el texto está vacío o solo contiene espacios, devuelve de inmediato el error 'texto-vacío' sin ejecutar ninguna comprobación",
+            "Ejecuta ocho comprobaciones independientes basadas en reglas sobre todo el texto: un pequeño diccionario fijo de unas 45 palabras comúnmente mal escritas, una 'i' minúscula aislada que debería capitalizarse, falta de capitalización al inicio de una frase, secuencias de dos o más espacios, una palabra inmediatamente repetida, espacio faltante tras la puntuación, uso incorrecto del artículo 'a'/'an' antes de un sonido vocálico o consonántico, y 'your' seguido de una palabra en '-ing' (una probable confusión con 'you're')",
+            "Concatena en una lista combinada cada problema que encontró cada regla",
+            "Ordena esa lista combinada por la posición de carácter de inicio de cada problema, de modo que los problemas de distintas reglas se intercalen en el orden en que realmente aparecen en el texto",
+            "Cuenta las palabras recortando el texto, dividiéndolo por espacios en blanco y filtrando los resultados vacíos",
+            "Devuelve la lista de problemas ordenada junto con el recuento de palabras"
+          ],
+          "caption": "Las ocho comprobaciones nunca ven los resultados de las demás —la única interacción entre ellas es la ordenación final por posición en el texto."
+        },
+        "issueTypes": {
+          "intro": "Cada problema se etiqueta con uno de cuatro tipos, que el panel de resultados usa para agruparlos y colorearlos —esto muestra cuántos de cada tipo podría revelar una muestra representativa de texto.",
+          "labelSpelling": "Ortografía",
+          "labelGrammar": "Gramática",
+          "labelCapitalization": "Capitalización",
+          "labelPunctuation": "Puntuación",
+          "caption": "Seis de las ocho comprobaciones corresponden cada una a un único tipo de problema; la comprobación de errores ortográficos siempre etiqueta 'ortografía', mientras que las comprobaciones de a/an y your/you're etiquetan ambas 'gramática'."
+        },
+        "anatomy": {
+          "intro": "Cada problema detectado es un registro con varios campos —esto muestra lo que el corrector devuelve realmente para una sola palabra marcada.",
+          "labelType": "Tipo",
+          "valueType": "ortografía",
+          "labelMessage": "Mensaje",
+          "valueMessage": "\"teh\" podría estar mal escrito.",
+          "labelOriginal": "Original",
+          "valueOriginal": "teh",
+          "labelSuggestion": "Sugerencia",
+          "valueSuggestion": "the",
+          "caption": "Junto a estos campos, cada problema también lleva una posición de carácter de inicio y de fin, que el panel de resultados usa para resaltar exactamente dónde ocurre el problema en el texto."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "text",
+            "meaning": "El texto a comprobar en busca de problemas ortográficos y gramaticales.",
+            "unit": "caracteres"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "El diccionario de errores ortográficos es una lista fija pequeña, no un corrector ortográfico exhaustivo",
+            "description": "El diccionario de palabras mal escritas cubre alrededor de 45 palabras inglesas comúnmente mal tecleadas (como 'teh', 'recieve', 'definately') —una palabra mal escrita que no esté en esa lista simplemente no se marcará, ya que este es un corrector ligero basado en reglas, no un corrector ortográfico completo respaldado por diccionario."
+          },
+          {
+            "title": "Una corrección conserva la capitalización de la palabra original",
+            "description": "La lógica de preservación de mayúsculas comprueba si la primera letra de la palabra mal escrita estaba en mayúscula y, en ese caso, también pone en mayúscula la primera letra de la corrección sugerida —así que 'Teh' sugiere 'The', no 'the', aunque el diccionario solo almacena la forma en minúscula."
+          },
+          {
+            "title": "La comprobación de a/an tiene listas explícitas de excepciones para palabras que rompen la regla simple de vocal/consonante",
+            "description": "Palabras como 'university' empiezan con letra vocal pero sonido consonántico (correctamente 'a university'), y palabras como 'hour' empiezan con letra consonántica pero sonido vocálico (correctamente 'an hour') —listas de excepciones dedicadas cubren estas palabras específicas para que la comprobación, por lo demás simple, de la primera letra no las marque incorrectamente."
+          },
+          {
+            "title": "La comprobación de palabra repetida no distingue mayúsculas de minúsculas pero exige exactamente la misma palabra dos veces con solo espacio en blanco entre medias",
+            "description": "La expresión regular marca 'the the' y 'The the' por igual (sin distinguir mayúsculas), pero 'the quick the' (con una palabra intermedia) no se marca, ya que el patrón solo coincide con una palabra seguida inmediatamente de espacio en blanco y esa misma palabra de nuevo."
+          },
+          {
+            "title": "Las ocho listas de problemas se concatenan y luego se ordenan una sola vez, no se fusionan de forma incremental",
+            "description": "Cada comprobación se ejecuta de forma independiente y devuelve su propia lista completa antes de que ocurra cualquier ordenación —las ocho listas se combinan en un único arreglo y se ordenan por posición de inicio como un único paso final, así que las comprobaciones nunca necesitan conocer los hallazgos de las demás."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Este corrector funciona con IA o un diccionario completo, como un servicio de corrección ortográfica?",
+            "answer": "No —es un corrector ligero, basado en reglas. Los errores ortográficos se comparan contra una pequeña lista fija de errores comunes (no un diccionario completo), y los problemas de gramática/puntuación se encuentran con un puñado de patrones de expresión regular dirigidos, no con un modelo de lenguaje. Se ejecuta por completo en tu navegador, sin llamadas a servidor."
+          },
+          {
+            "question": "¿Por qué el corrector no detectó un error ortográfico que sé que es incorrecto?",
+            "answer": "La comprobación ortográfica solo marca palabras presentes en su lista integrada de unos 45 errores comunes. Un error tipográfico que no esté en esa lista —incluso uno evidente— no se detectará, ya que esta herramienta no usa un diccionario completo ni un modelo de lenguaje."
+          },
+          {
+            "question": "¿Cómo se asignan los cuatro tipos de problema (ortografía, gramática, capitalización, puntuación)?",
+            "answer": "Cada una de las ocho comprobaciones subyacentes etiqueta sus propios hallazgos con un tipo fijo: la comprobación ortográfica siempre etiqueta 'ortografía'; las dos comprobaciones de capitalización ('i' minúscula e inicios de frase) etiquetan 'capitalización'; las comprobaciones de espacio doble y espacio faltante tras puntuación etiquetan 'puntuación'; y las comprobaciones de palabra repetida, a/an y your/you're etiquetan todas 'gramática'."
+          },
+          {
+            "question": "¿Por qué los problemas aparecen en el orden en que lo hacen en la lista de resultados?",
+            "answer": "Todos los problemas encontrados por cada comprobación se combinan en una lista y luego se ordenan según dónde empieza cada uno en el texto —así que siempre se muestran en el mismo orden de lectura de izquierda a derecha que el propio texto, sin importar cuál de las ocho reglas detectó cada uno."
+          }
+        ]
       }
     }
   }
