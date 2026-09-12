@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
+import ReadabilityShareExportModal from "./ReadabilityShareExportModal";
 import type { ReadabilityResult as Result } from "./types";
 
 type Props = {
@@ -21,14 +21,49 @@ export default function ReadabilityResult({ result, digitStyle }: Props) {
   }
 
   const bandLabel = result.readingEaseLabel ? t(`bands.${result.readingEaseLabel}`) : "";
-  const copyText = `${t("fleschReadingEase")}: ${fmt(result.fleschReadingEase)} (${bandLabel}), ${t("fleschKincaidGrade")}: ${fmt(result.fleschKincaidGrade)}`;
+  const sentence = `${t("fleschReadingEase")}: ${fmt(result.fleschReadingEase)} (${bandLabel}), ${t("fleschKincaidGrade")}: ${fmt(result.fleschKincaidGrade)}`;
+
+  const resultRows = [
+    { label: t("fleschKincaidGrade"), value: fmt(result.fleschKincaidGrade) },
+    { label: t("averageWordsPerSentence"), value: fmt(result.averageWordsPerSentence) },
+    { label: t("averageSyllablesPerWord"), value: fmt(result.averageSyllablesPerWord) },
+    { label: t("wordCount"), value: fmtInt(result.wordCount) },
+    { label: t("sentenceCount"), value: fmtInt(result.sentenceCount) },
+    { label: t("syllableCount"), value: fmtInt(result.syllableCount) },
+  ];
+
+  const clampedScore = Math.max(-30, Math.min(100, result.fleschReadingEase));
+  const gauge = {
+    domainMin: -30,
+    domainMax: 100,
+    value: clampedScore,
+    zones: [
+      { from: -30, to: 30, color: "#dc2626" },
+      { from: 30, to: 50, color: "#f97316" },
+      { from: 50, to: 60, color: "#f59e0b" },
+      { from: 60, to: 70, color: "#facc15" },
+      { from: 70, to: 80, color: "#84cc16" },
+      { from: 80, to: 90, color: "#22c55e" },
+      { from: 90, to: 100, color: "#059669" },
+    ],
+    ticks: [-30, 0, 30, 60, 90, 100],
+    valueLabel: fmt(result.fleschReadingEase),
+    caption: bandLabel,
+  };
 
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
-          <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          <ReadabilityShareExportModal
+            inputRows={[]}
+            resultRows={resultRows}
+            heroLabel={t("fleschReadingEase")}
+            heroValue={fmt(result.fleschReadingEase)}
+            sentence={sentence}
+            gauge={gauge}
+          />
         </div>
 
         <div className="p-4 lg:p-6">

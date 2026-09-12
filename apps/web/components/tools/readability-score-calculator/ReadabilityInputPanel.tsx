@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { PASSAGE_EXAMPLES } from "./passageExamples";
 
 type ReadabilityInputPanelProps = {
   text: string;
@@ -11,9 +12,26 @@ type ReadabilityInputPanelProps = {
 
 export default function ReadabilityInputPanel({ text, onTextChange, onClear }: ReadabilityInputPanelProps) {
   const t = useTranslations("tools.readability-score-calculator.form");
+  const tExamples = useTranslations("tools.readability-score-calculator.gauge.examples");
 
   return (
     <SectionCard title={t("inputTitle")}>
+      <div className="mb-4">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {PASSAGE_EXAMPLES.map((example) => (
+            <button
+              key={example.key}
+              type="button"
+              onClick={() => onTextChange(example.text)}
+              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+            >
+              {tExamples(example.key)}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("inputLabel")}</span>
         <textarea

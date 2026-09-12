@@ -4,6 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import ReadabilityGauge from "./ReadabilityGauge";
+import ReadabilityScaleDiagram from "./ReadabilityScaleDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -16,10 +18,13 @@ export default async function ReadabilityEducation() {
 
   return (
     <EncyclopediaPaper>
+      <ReadabilityGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <ReadabilityScaleDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
