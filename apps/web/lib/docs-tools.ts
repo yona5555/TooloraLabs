@@ -101,6 +101,12 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "dice-roller",
   "love-calculator",
   "random-quote-generator",
+  "image-converter",
+  "unit-converter",
+  "roman-numeral-converter",
+  "text-to-speech",
+  "speech-to-text",
+  "spelling-grammar-checker",
 ];
 
 export function isToolDocumented(slug: string): boolean {

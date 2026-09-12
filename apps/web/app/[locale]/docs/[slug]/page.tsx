@@ -101,6 +101,12 @@ import WeatherForecastDocsPage, { getWeatherForecastTocItems } from "@/component
 import DiceRollerDocsPage, { getDiceRollerTocItems } from "@/components/docs/dice-roller/DiceRollerDocsPage";
 import LoveCalculatorDocsPage, { getLoveCalculatorTocItems } from "@/components/docs/love-calculator/LoveCalculatorDocsPage";
 import RandomQuoteGeneratorDocsPage, { getRandomQuoteGeneratorTocItems } from "@/components/docs/random-quote-generator/RandomQuoteGeneratorDocsPage";
+import ImageConverterDocsPage, { getImageConverterTocItems } from "@/components/docs/image-converter/ImageConverterDocsPage";
+import UnitConverterDocsPage, { getUnitConverterTocItems } from "@/components/docs/unit-converter/UnitConverterDocsPage";
+import RomanNumeralConverterDocsPage, { getRomanNumeralConverterTocItems } from "@/components/docs/roman-numeral-converter/RomanNumeralConverterDocsPage";
+import TextToSpeechDocsPage, { getTextToSpeechTocItems } from "@/components/docs/text-to-speech/TextToSpeechDocsPage";
+import SpeechToTextDocsPage, { getSpeechToTextTocItems } from "@/components/docs/speech-to-text/SpeechToTextDocsPage";
+import SpellingGrammarCheckerDocsPage, { getSpellingGrammarCheckerTocItems } from "@/components/docs/spelling-grammar-checker/SpellingGrammarCheckerDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -530,6 +536,30 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "random-quote-generator":
       content = <RandomQuoteGeneratorDocsPage />;
       tocItems = await getRandomQuoteGeneratorTocItems();
+      break;
+    case "image-converter":
+      content = <ImageConverterDocsPage />;
+      tocItems = await getImageConverterTocItems();
+      break;
+    case "unit-converter":
+      content = <UnitConverterDocsPage />;
+      tocItems = await getUnitConverterTocItems();
+      break;
+    case "roman-numeral-converter":
+      content = <RomanNumeralConverterDocsPage />;
+      tocItems = await getRomanNumeralConverterTocItems();
+      break;
+    case "text-to-speech":
+      content = <TextToSpeechDocsPage />;
+      tocItems = await getTextToSpeechTocItems();
+      break;
+    case "speech-to-text":
+      content = <SpeechToTextDocsPage />;
+      tocItems = await getSpeechToTextTocItems();
+      break;
+    case "spelling-grammar-checker":
+      content = <SpellingGrammarCheckerDocsPage />;
+      tocItems = await getSpellingGrammarCheckerTocItems();
       break;
   }
 

@@ -6,6 +6,7 @@ import { TextToSpeechCalculator as TTSTool, type TextToSpeechOutput } from "@too
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TTSInputPanel from "./TTSInputPanel";
 import TTSResult from "./TTSResult";
 import TTSQuickReference from "./TTSQuickReference";
@@ -134,6 +135,7 @@ export default function TextToSpeech({ education }: { education: ReactNode }) {
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="text-to-speech" />
               <TTSQuickReference />
             </div>
           }
