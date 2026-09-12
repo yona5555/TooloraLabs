@@ -10,6 +10,10 @@ import CityPanel from "./CityPanel";
 import CurrentWeatherResult from "./CurrentWeatherResult";
 import WeatherDisclaimer from "./WeatherDisclaimer";
 import SevenDayForecastPanel from "./SevenDayForecastPanel";
+import WeatherWeekChart from "./WeatherWeekChart";
+import WeatherHumidityGauge from "./WeatherHumidityGauge";
+import WeatherWindCompass from "./WeatherWindCompass";
+import WeatherUVIndexGauge from "./WeatherUVIndexGauge";
 import type { SelectedCity, WeatherSnapshot } from "./types";
 
 type WeatherTrackerProps = {
@@ -58,6 +62,8 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "forecast", label: tNav("forecast") },
+    { id: "world-map", label: tNav("worldMap") },
+    { id: "disasters", label: tNav("disasters") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
@@ -82,7 +88,22 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <WeatherDisclaimer />
-              {snapshot && <SevenDayForecastPanel daily={snapshot.daily} unitSystem={unitSystem} digitStyle={digitStyle} />}
+              {snapshot && (
+                <>
+                  <SevenDayForecastPanel daily={snapshot.daily} unitSystem={unitSystem} digitStyle={digitStyle} />
+                  <WeatherWeekChart daily={snapshot.daily} unitSystem={unitSystem} digitStyle={digitStyle} />
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <WeatherHumidityGauge relativeHumidity={snapshot.current.relativeHumidity} digitStyle={digitStyle} />
+                    <WeatherWindCompass
+                      windSpeedKmh={snapshot.current.windSpeedKmh}
+                      windDirectionDeg={snapshot.current.windDirectionDeg}
+                      unitSystem={unitSystem}
+                      digitStyle={digitStyle}
+                    />
+                  </div>
+                  <WeatherUVIndexGauge uvIndexMax={snapshot.daily[0]?.uvIndexMax ?? 0} digitStyle={digitStyle} />
+                </>
+              )}
             </div>
           }
         />

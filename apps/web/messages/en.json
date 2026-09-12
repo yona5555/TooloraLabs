@@ -2689,7 +2689,11 @@
           "london": "London",
           "tokyo": "Tokyo",
           "sydney": "Sydney",
-          "toronto": "Toronto"
+          "toronto": "Toronto",
+          "riyadh": "Riyadh",
+          "moscow": "Moscow",
+          "cairo": "Cairo",
+          "rioDeJaneiro": "Rio de Janeiro"
         },
         "loading": "Loading weather…",
         "error": "Couldn't load weather data. Please try again.",
@@ -2700,13 +2704,16 @@
         "precipChanceLabel": "Chance of rain",
         "kmh": "km/h",
         "mph": "mph",
-        "disclaimer": "These are general weather estimates based on forecast models, and may differ from actual conditions. Rely on official local sources for important decisions."
+        "disclaimer": "These are general weather estimates based on forecast models, and may differ from actual conditions. Rely on official local sources for important decisions.",
+        "temperatureLabel": "Temperature"
       },
       "nav": {
         "tool": "Forecast",
         "forecast": "7-Day Outlook",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Behind the Tool",
+        "worldMap": "World Map",
+        "disasters": "Natural Disasters"
       },
       "dataSource": {
         "label": "Weather data by"
@@ -2744,7 +2751,20 @@
             "collection": "Collection",
             "caption": "The water cycle: the continuous movement of water between the surface and the atmosphere that drives clouds and precipitation."
           },
-          "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for official warnings or forecasts from your local meteorological authority."
+          "disclaimer": "The figures and explanations on this page are educational only and are not a substitute for official warnings or forecasts from your local meteorological authority.",
+          "tempGauge": {
+            "title": "Try It: Live Temperature Around the World",
+            "intro": "Pick a city to see its real current temperature, pulled live from the same forecast data this tool uses, plotted on a gauge from freezing to extreme heat.",
+            "error": "Couldn't load live temperature. Please try again.",
+            "verdict": "It's currently {temperature} in {city} — {condition}.",
+            "zones": {
+              "freezing": "Freezing",
+              "cold": "Cold",
+              "mild": "Mild",
+              "warm": "Warm",
+              "hot": "Hot"
+            }
+          }
         },
         "models": {
           "title": "Weather Models and Data Sources",
@@ -2857,7 +2877,149 @@
           "note": "The landmark paper that established the mathematical basis of chaos theory in the context of atmospheric modeling — the formal explanation for why weather forecasts become less precise the further into the future they look, popularly known as the \"butterfly effect.\"",
           "url": "https://math.bu.edu/people/mabeck/Fall14/Lorenz63.pdf",
           "readOriginal": "Read the Original Paper"
+        },
+        "disasters": {
+          "title": "Weather-Related Natural Disasters",
+          "intro": "Certain weather patterns can intensify into natural disasters. This section explains six major types in plain scientific terms, each illustrated with one real, documented historical event — it is purely educational, and not a live hazard-monitoring or early-warning system.",
+          "disclaimer": "This section is for general education only. It does not monitor current conditions and must never be used as a substitute for official warnings from your national meteorological or emergency management agency.",
+          "items": [
+            {
+              "name": "Tropical Cyclones",
+              "definition": "A tropical cyclone is a rotating storm system that forms over warm ocean waters, powered by heat released as moist air rises and condenses. The same phenomenon is called a \"hurricane\" in the Atlantic and Northeast Pacific, a \"typhoon\" in the Northwest Pacific, and simply a \"cyclone\" in the South Pacific and Indian Ocean.",
+              "connection": "They form only over ocean water warmer than about 26.5°C (80°F), which is why cyclone activity peaks in each region's warm season and why the storms weaken rapidly once they move over land or cooler water.",
+              "example": "Historical example: Hurricane Katrina, August 2005 — made landfall on the US Gulf Coast and caused catastrophic flooding in New Orleans after levee failures, becoming one of the costliest natural disasters in US history."
+            },
+            {
+              "name": "Floods",
+              "definition": "A flood occurs when water overflows onto normally dry land, most often from prolonged or intense rainfall that exceeds what rivers, soil, and drainage systems can absorb, though flooding can also result from rapid snowmelt or storm surge.",
+              "connection": "Floods are directly tied to precipitation patterns — a single very intense storm, or an unusually long wet season, can each push a river beyond its banks depending on the surrounding terrain and existing ground saturation.",
+              "example": "Historical example: The 1931 China floods along the Yangtze and Huai rivers are recorded as the deadliest natural disaster in recorded history, with estimates of several hundred thousand to over a million deaths."
+            },
+            {
+              "name": "Heatwaves",
+              "definition": "A heatwave is a prolonged period of excessively hot weather, generally defined relative to what is normal for a given region and season, which can persist for days to weeks under a stagnant area of high atmospheric pressure.",
+              "connection": "Heatwaves form when a high-pressure system traps warm air in place for an extended period, suppressing cloud formation and rainfall — the same stagnant conditions that also tend to worsen air quality and drought.",
+              "example": "Historical example: The 2003 European heatwave is estimated to have caused around 70,000 excess deaths across the continent, with France particularly affected."
+            },
+            {
+              "name": "Droughts",
+              "definition": "A drought is a prolonged period of below-average precipitation that leads to water shortages affecting agriculture, water supply, and ecosystems, distinguished from normal dry seasons by its unusual duration and severity.",
+              "connection": "Droughts typically develop when persistent high-pressure patterns repeatedly divert storm tracks away from a region over multiple seasons, and can be worsened by reduced snowpack or soil moisture feedback loops.",
+              "example": "Historical example: The Dust Bowl of the 1930s in the US Great Plains combined a multi-year drought with poor farming practices, causing severe soil erosion and displacing hundreds of thousands of families."
+            },
+            {
+              "name": "Severe Thunderstorms & Hail",
+              "definition": "A severe thunderstorm is one producing large hail, damaging straight-line winds, and/or tornadoes, forming when strong upward currents of warm, moist air interact with wind shear (winds changing speed or direction with height).",
+              "connection": "Hailstones grow when strong updrafts repeatedly carry ice pellets up through supercooled cloud layers, adding new layers of ice each cycle — the stronger the updraft, the larger the hail can grow before falling.",
+              "example": "Historical example: The April 1999 Sydney hailstorm in Australia produced hailstones up to 9 cm across and remains the costliest natural disaster in Australian insurance history."
+            },
+            {
+              "name": "Blizzards",
+              "definition": "A blizzard is a severe snowstorm defined by sustained strong winds, heavy falling or blowing snow, and visibility reduced to a few hundred meters or less, typically lasting for an extended period.",
+              "connection": "Blizzards form when a strong low-pressure system draws in cold air and moisture simultaneously, and the accompanying strong winds pick up already-fallen snow, extending near-zero visibility well beyond the actual snowfall itself.",
+              "example": "Historical example: The \"Storm of the Century\" in March 1993 blanketed much of the Eastern United States and Canada with heavy snow and hurricane-force winds, and was linked to roughly 300 deaths."
+            }
+          ]
         }
+      },
+      "weekChart": {
+        "title": "7-Day Temperature Trend",
+        "highLabel": "High",
+        "lowLabel": "Low"
+      },
+      "humidityGauge": {
+        "title": "Humidity Level",
+        "zones": {
+          "dry": "Dry",
+          "comfortable": "Comfortable",
+          "humid": "Humid"
+        }
+      },
+      "windCompass": {
+        "title": "Wind",
+        "mph": "mph",
+        "kmh": "km/h",
+        "directions": {
+          "n": "N",
+          "ne": "NE",
+          "e": "E",
+          "se": "SE",
+          "s": "S",
+          "sw": "SW",
+          "w": "W",
+          "nw": "NW"
+        },
+        "fromDirection": "from the {direction}",
+        "ariaLabel": "Wind blowing from the {direction} at {speed}"
+      },
+      "uvGauge": {
+        "title": "UV Index",
+        "zones": {
+          "low": "Low",
+          "moderate": "Moderate",
+          "high": "High",
+          "veryHigh": "Very High",
+          "extreme": "Extreme"
+        },
+        "advice": {
+          "low": "Minimal risk. No protection needed for most people.",
+          "moderate": "Wear sunglasses and use sunscreen on prolonged outdoor exposure.",
+          "high": "Reduce midday sun exposure. Wear a hat, sunglasses, and SPF 30+ sunscreen.",
+          "veryHigh": "Take extra precautions: seek shade during midday hours and reapply sunscreen often.",
+          "extreme": "Avoid sun exposure during midday hours. Unprotected skin can burn in minutes."
+        }
+      },
+      "worldMap": {
+        "title": "Interactive World Weather Map",
+        "intro": "Click any pin to see live current temperature and conditions for that city, sourced from the same Open-Meteo forecast models used throughout this tool.",
+        "showMapButton": "Show Map",
+        "attribution": {
+          "openMeteo": "Weather data by Open-Meteo.com"
+        },
+        "cities": {
+          "riyadh": "Riyadh",
+          "cairo": "Cairo",
+          "london": "London",
+          "paris": "Paris",
+          "berlin": "Berlin",
+          "madrid": "Madrid",
+          "rome": "Rome",
+          "moscow": "Moscow",
+          "istanbul": "Istanbul",
+          "dubai": "Dubai",
+          "newDelhi": "New Delhi",
+          "beijing": "Beijing",
+          "tokyo": "Tokyo",
+          "seoul": "Seoul",
+          "bangkok": "Bangkok",
+          "jakarta": "Jakarta",
+          "sydney": "Sydney",
+          "nairobi": "Nairobi",
+          "lagos": "Lagos",
+          "capeTown": "Cape Town",
+          "newYork": "New York",
+          "mexicoCity": "Mexico City",
+          "rioDeJaneiro": "Rio de Janeiro",
+          "buenosAires": "Buenos Aires"
+        }
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "tdee-calculator": {

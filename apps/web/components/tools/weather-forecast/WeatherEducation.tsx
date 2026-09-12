@@ -6,6 +6,10 @@ import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/Equip
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import WaterCycleDiagram from "./WaterCycleDiagram";
+import WeatherLiveTempGauge from "./WeatherLiveTempGauge";
+import WeatherWorldMap from "./WeatherWorldMap";
+import WeatherDisasters, { type DisasterItem } from "./WeatherDisasters";
+import { WORLD_MAP_CITIES, getWorldMapSnapshot } from "@/lib/weather/open-meteo";
 
 export default async function WeatherEducation() {
   const t = await getTranslations("tools.weather-forecast.education");
@@ -13,9 +17,14 @@ export default async function WeatherEducation() {
   const faqItems = t.raw("faq.items") as FAQItem[];
   const equipmentItems = t.raw("behindTheTool.equipment.items") as EquipmentItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
+  const disasterItems = t.raw("disasters.items") as DisasterItem[];
+
+  const worldMapCities = await getWorldMapSnapshot(WORLD_MAP_CITIES).catch(() => []);
 
   return (
     <EncyclopediaPaper>
+      <WeatherLiveTempGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
@@ -35,7 +44,13 @@ export default async function WeatherEducation() {
         <p>{t("models.paragraph3")}</p>
       </InfoSection>
 
+      <WeatherWorldMap cities={worldMapCities} />
+
       <AdSpace variant="leaderboard" />
+
+      <InfoSection id="disasters" title={t("disasters.title")}>
+        <WeatherDisasters intro={t("disasters.intro")} items={disasterItems} disclaimer={t("disasters.disclaimer")} />
+      </InfoSection>
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />

@@ -2689,7 +2689,11 @@
           "london": "London",
           "tokyo": "Tokio",
           "sydney": "Sydney",
-          "toronto": "Toronto"
+          "toronto": "Toronto",
+          "riyadh": "Riad",
+          "moscow": "Moskau",
+          "cairo": "Kairo",
+          "rioDeJaneiro": "Rio de Janeiro"
         },
         "loading": "Wetter wird geladen …",
         "error": "Wetterdaten konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
@@ -2700,13 +2704,16 @@
         "precipChanceLabel": "Regenwahrscheinlichkeit",
         "kmh": "km/h",
         "mph": "mph",
-        "disclaimer": "Dies sind allgemeine Wetterschätzungen auf Basis von Vorhersagemodellen und können von den tatsächlichen Bedingungen abweichen. Verlassen Sie sich für wichtige Entscheidungen auf offizielle örtliche Quellen."
+        "disclaimer": "Dies sind allgemeine Wetterschätzungen auf Basis von Vorhersagemodellen und können von den tatsächlichen Bedingungen abweichen. Verlassen Sie sich für wichtige Entscheidungen auf offizielle örtliche Quellen.",
+        "temperatureLabel": "Temperatur"
       },
       "nav": {
         "tool": "Vorhersage",
         "forecast": "7-Tage-Ausblick",
         "faq": "FAQ",
-        "behindTheTool": "Hinter dem Tool"
+        "behindTheTool": "Hinter dem Tool",
+        "worldMap": "Weltkarte",
+        "disasters": "Naturkatastrophen"
       },
       "dataSource": {
         "label": "Wetterdaten von"
@@ -2744,7 +2751,20 @@
             "collection": "Sammlung",
             "caption": "Der Wasserkreislauf: die kontinuierliche Bewegung von Wasser zwischen Oberfläche und Atmosphäre, die Wolken und Niederschlag antreibt."
           },
-          "disclaimer": "Die Zahlen und Erklärungen auf dieser Seite dienen nur der Bildung und ersetzen keine offiziellen Warnungen oder Vorhersagen Ihrer örtlichen Wetterbehörde."
+          "disclaimer": "Die Zahlen und Erklärungen auf dieser Seite dienen nur der Bildung und ersetzen keine offiziellen Warnungen oder Vorhersagen Ihrer örtlichen Wetterbehörde.",
+          "tempGauge": {
+            "title": "Ausprobieren: Live-Temperatur weltweit",
+            "intro": "Wählen Sie eine Stadt, um ihre tatsächliche aktuelle Temperatur zu sehen — live aus denselben Vorhersagedaten, die dieses Tool nutzt, dargestellt auf einer Skala vom Gefrierpunkt bis zu extremer Hitze.",
+            "error": "Live-Temperatur konnte nicht geladen werden. Bitte erneut versuchen.",
+            "verdict": "Aktuell sind es {temperature} in {city} — {condition}.",
+            "zones": {
+              "freezing": "Gefrierend",
+              "cold": "Kalt",
+              "mild": "Mild",
+              "warm": "Warm",
+              "hot": "Heiß"
+            }
+          }
         },
         "models": {
           "title": "Wettermodelle und Datenquellen",
@@ -2857,7 +2877,149 @@
           "note": "Die wegweisende Arbeit, die die mathematische Grundlage der Chaostheorie im Kontext der Atmosphärenmodellierung begründete – die formale Erklärung dafür, warum Wettervorhersagen mit zunehmendem zeitlichem Abstand ungenauer werden, populär bekannt als der „Schmetterlingseffekt\".",
           "url": "https://math.bu.edu/people/mabeck/Fall14/Lorenz63.pdf",
           "readOriginal": "Originalstudie lesen"
+        },
+        "disasters": {
+          "title": "Wetterbedingte Naturkatastrophen",
+          "intro": "Bestimmte Wettermuster können sich zu Naturkatastrophen verstärken. Dieser Abschnitt erklärt sechs Haupttypen in einfacher wissenschaftlicher Sprache, jeweils illustriert mit einem realen, dokumentierten historischen Ereignis — er dient rein der Bildung und ist kein Live-Überwachungs- oder Frühwarnsystem.",
+          "disclaimer": "Dieser Abschnitt dient nur der allgemeinen Bildung. Er überwacht keine aktuellen Bedingungen und darf niemals als Ersatz für offizielle Warnungen Ihrer nationalen Wetter- oder Katastrophenschutzbehörde verwendet werden.",
+          "items": [
+            {
+              "name": "Tropische Wirbelstürme",
+              "definition": "Ein tropischer Wirbelsturm ist ein rotierendes Sturmsystem, das sich über warmem Meerwasser bildet und durch die Wärme angetrieben wird, die beim Aufsteigen und Kondensieren feuchter Luft freigesetzt wird. Dasselbe Phänomen wird im Atlantik und Nordost-Pazifik „Hurrikan“ genannt, im Nordwest-Pazifik „Taifun“ und im Südpazifik sowie im Indischen Ozean einfach „Zyklon“.",
+              "connection": "Sie entstehen nur über Meerwasser, das wärmer als etwa 26,5 °C ist, weshalb die Wirbelsturmaktivität in der jeweiligen Warmzeit einer Region ihren Höhepunkt erreicht und die Stürme schnell abschwächen, sobald sie auf Land oder kälteres Wasser treffen.",
+              "example": "Historisches Beispiel: Hurrikan Katrina, August 2005 — traf auf die US-Golfküste und verursachte nach Deichbrüchen katastrophale Überschwemmungen in New Orleans; einer der teuersten Naturkatastrophen in der Geschichte der USA."
+            },
+            {
+              "name": "Überschwemmungen",
+              "definition": "Eine Überschwemmung entsteht, wenn Wasser normalerweise trockenes Land überflutet, meist durch anhaltenden oder intensiven Regen, der die Aufnahmefähigkeit von Flüssen, Boden und Entwässerungssystemen übersteigt; sie kann aber auch durch schnelle Schneeschmelze oder Sturmfluten verursacht werden.",
+              "connection": "Überschwemmungen hängen direkt mit Niederschlagsmustern zusammen — ein einzelner sehr intensiver Sturm oder eine ungewöhnlich lange Regenzeit kann jeweils einen Fluss über seine Ufer treten lassen, abhängig vom umgebenden Gelände und der bereits vorhandenen Bodensättigung.",
+              "example": "Historisches Beispiel: Die China-Flut von 1931 entlang der Flüsse Jangtsekiang und Huai gilt als die tödlichste Naturkatastrophe der aufgezeichneten Geschichte, mit Schätzungen von mehreren Hunderttausend bis über einer Million Todesopfern."
+            },
+            {
+              "name": "Hitzewellen",
+              "definition": "Eine Hitzewelle ist eine anhaltende Periode außergewöhnlich heißen Wetters, definiert relativ zu dem, was für eine bestimmte Region und Jahreszeit normal ist, und kann unter einem stationären Hochdruckgebiet Tage bis Wochen andauern.",
+              "connection": "Hitzewellen entstehen, wenn ein Hochdrucksystem warme Luft über einen längeren Zeitraum an Ort und Stelle hält und dabei Wolkenbildung und Niederschlag unterdrückt — dieselben stationären Bedingungen verschlechtern meist auch die Luftqualität und verstärken Dürren.",
+              "example": "Historisches Beispiel: Die europäische Hitzewelle von 2003 verursachte schätzungsweise rund 70.000 zusätzliche Todesfälle auf dem Kontinent, besonders betroffen war Frankreich."
+            },
+            {
+              "name": "Dürren",
+              "definition": "Eine Dürre ist eine anhaltende Periode unterdurchschnittlichen Niederschlags, die zu Wasserknappheit führt und Landwirtschaft, Wasserversorgung und Ökosysteme beeinträchtigt; sie unterscheidet sich von normalen Trockenzeiten durch ihre ungewöhnliche Dauer und Schwere.",
+              "connection": "Dürren entwickeln sich meist, wenn anhaltende Hochdruckmuster Sturmbahnen über mehrere Jahreszeiten hinweg wiederholt von einer Region ablenken, und können durch verringerte Schneedecke oder Rückkopplungseffekte der Bodenfeuchte verschärft werden.",
+              "example": "Historisches Beispiel: Der „Dust Bowl“ der 1930er-Jahre in den US-Great-Plains verband eine mehrjährige Dürre mit schlechten landwirtschaftlichen Praktiken, was zu schwerer Bodenerosion führte und Hunderttausende Familien vertrieb."
+            },
+            {
+              "name": "Schwere Gewitter und Hagel",
+              "definition": "Ein schweres Gewitter erzeugt großen Hagel, zerstörerische geradlinige Fallwinde und/oder Tornados und entsteht, wenn starke Aufwinde aus warmer, feuchter Luft mit Windscherung (Änderung von Windgeschwindigkeit oder -richtung mit der Höhe) zusammentreffen.",
+              "connection": "Hagelkörner wachsen, wenn starke Aufwinde Eiskörner wiederholt durch unterkühlte Wolkenschichten nach oben tragen und dabei bei jedem Durchgang eine neue Eisschicht hinzufügen — je stärker der Aufwind, desto größer kann der Hagel werden, bevor er fällt.",
+              "example": "Historisches Beispiel: Der Hagelsturm von Sydney im April 1999 in Australien erzeugte Hagelkörner mit bis zu 9 cm Durchmesser und bleibt die teuerste Naturkatastrophe in der australischen Versicherungsgeschichte."
+            },
+            {
+              "name": "Schneestürme",
+              "definition": "Ein Schneesturm (Blizzard) ist ein schwerer Wintersturm, definiert durch anhaltend starke Winde, starken fallenden oder verwehten Schnee und eine Sicht von wenigen hundert Metern oder weniger, der typischerweise über einen längeren Zeitraum anhält.",
+              "connection": "Schneestürme entstehen, wenn ein starkes Tiefdrucksystem gleichzeitig kalte Luft und Feuchtigkeit heranzieht, und die begleitenden starken Winde bereits gefallenen Schnee aufwirbeln, wodurch die Sichtweite von nahezu null weit über den eigentlichen Schneefall hinaus ausgedehnt wird.",
+              "example": "Historisches Beispiel: Der „Sturm des Jahrhunderts“ im März 1993 bedeckte weite Teile der Ostküste der USA und Kanadas mit starkem Schneefall und orkanartigen Winden und wurde mit rund 300 Todesfällen in Verbindung gebracht."
+            }
+          ]
         }
+      },
+      "weekChart": {
+        "title": "7-Tage-Temperaturverlauf",
+        "highLabel": "Höchstwert",
+        "lowLabel": "Tiefstwert"
+      },
+      "humidityGauge": {
+        "title": "Luftfeuchtigkeit",
+        "zones": {
+          "dry": "Trocken",
+          "comfortable": "Angenehm",
+          "humid": "Feucht"
+        }
+      },
+      "windCompass": {
+        "title": "Wind",
+        "mph": "mph",
+        "kmh": "km/h",
+        "directions": {
+          "n": "N",
+          "ne": "NO",
+          "e": "O",
+          "se": "SO",
+          "s": "S",
+          "sw": "SW",
+          "w": "W",
+          "nw": "NW"
+        },
+        "fromDirection": "aus {direction}",
+        "ariaLabel": "Wind aus {direction} mit {speed}"
+      },
+      "uvGauge": {
+        "title": "UV-Index",
+        "zones": {
+          "low": "Niedrig",
+          "moderate": "Mäßig",
+          "high": "Hoch",
+          "veryHigh": "Sehr hoch",
+          "extreme": "Extrem"
+        },
+        "advice": {
+          "low": "Minimales Risiko. Für die meisten Menschen ist kein Schutz nötig.",
+          "moderate": "Bei längerem Aufenthalt im Freien Sonnenbrille tragen und Sonnencreme verwenden.",
+          "high": "Sonnenexposition am Mittag reduzieren. Hut, Sonnenbrille und Sonnencreme mit LSF 30+ tragen.",
+          "veryHigh": "Zusätzliche Vorsicht: mittags im Schatten bleiben und Sonnencreme häufig erneuern.",
+          "extreme": "Sonnenexposition am Mittag vermeiden. Ungeschützte Haut kann innerhalb von Minuten verbrennen."
+        }
+      },
+      "worldMap": {
+        "title": "Interaktive Weltwetterkarte",
+        "intro": "Klicken Sie auf einen Pin, um die aktuelle Live-Temperatur und die Wetterbedingungen dieser Stadt zu sehen — aus denselben Open-Meteo-Vorhersagemodellen, die dieses Tool durchgehend verwendet.",
+        "showMapButton": "Karte anzeigen",
+        "attribution": {
+          "openMeteo": "Wetterdaten von Open-Meteo.com"
+        },
+        "cities": {
+          "riyadh": "Riad",
+          "cairo": "Kairo",
+          "london": "London",
+          "paris": "Paris",
+          "berlin": "Berlin",
+          "madrid": "Madrid",
+          "rome": "Rom",
+          "moscow": "Moskau",
+          "istanbul": "Istanbul",
+          "dubai": "Dubai",
+          "newDelhi": "Neu-Delhi",
+          "beijing": "Peking",
+          "tokyo": "Tokio",
+          "seoul": "Seoul",
+          "bangkok": "Bangkok",
+          "jakarta": "Jakarta",
+          "sydney": "Sydney",
+          "nairobi": "Nairobi",
+          "lagos": "Lagos",
+          "capeTown": "Kapstadt",
+          "newYork": "New York",
+          "mexicoCity": "Mexiko-Stadt",
+          "rioDeJaneiro": "Rio de Janeiro",
+          "buenosAires": "Buenos Aires"
+        }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "tdee-calculator": {

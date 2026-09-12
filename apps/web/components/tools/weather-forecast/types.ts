@@ -1,5 +1,5 @@
 import type { TemperatureUnit, WindSpeedUnit, WeatherCategory } from "@tooloralabs/tools";
-import type { CitySearchResult, DailyForecast, WeatherSnapshot } from "@/lib/weather/open-meteo";
+import type { CitySearchResult, DailyForecast, WeatherSnapshot, WorldMapWeather } from "@/lib/weather/open-meteo";
 
 export type SelectedCity = {
   label: string;
@@ -7,4 +7,4 @@ export type SelectedCity = {
   longitude: number;
 };
 
-export type { TemperatureUnit, WindSpeedUnit, WeatherCategory, CitySearchResult, DailyForecast, WeatherSnapshot };
+export type { TemperatureUnit, WindSpeedUnit, WeatherCategory, CitySearchResult, DailyForecast, WeatherSnapshot, WorldMapWeather };

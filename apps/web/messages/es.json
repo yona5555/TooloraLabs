@@ -2689,7 +2689,11 @@
           "london": "Londres",
           "tokyo": "Tokio",
           "sydney": "Sídney",
-          "toronto": "Toronto"
+          "toronto": "Toronto",
+          "riyadh": "Riad",
+          "moscow": "Moscú",
+          "cairo": "El Cairo",
+          "rioDeJaneiro": "Río de Janeiro"
         },
         "loading": "Cargando el tiempo…",
         "error": "No se pudieron cargar los datos meteorológicos. Inténtalo de nuevo.",
@@ -2700,13 +2704,16 @@
         "precipChanceLabel": "Probabilidad de lluvia",
         "kmh": "km/h",
         "mph": "mph",
-        "disclaimer": "Estas son estimaciones generales basadas en modelos de pronóstico y pueden diferir de las condiciones reales. Para decisiones importantes, consulta siempre fuentes oficiales locales."
+        "disclaimer": "Estas son estimaciones generales basadas en modelos de pronóstico y pueden diferir de las condiciones reales. Para decisiones importantes, consulta siempre fuentes oficiales locales.",
+        "temperatureLabel": "Temperatura"
       },
       "nav": {
         "tool": "Pronóstico",
         "forecast": "Previsión a 7 días",
         "faq": "Preguntas frecuentes",
-        "behindTheTool": "Detrás de la herramienta"
+        "behindTheTool": "Detrás de la herramienta",
+        "worldMap": "Mapa Mundial",
+        "disasters": "Desastres Naturales"
       },
       "dataSource": {
         "label": "Datos meteorológicos de"
@@ -2744,7 +2751,20 @@
             "collection": "Escorrentía",
             "caption": "El ciclo del agua: el movimiento continuo del agua entre la superficie y la atmósfera que impulsa la formación de nubes y las precipitaciones."
           },
-          "disclaimer": "Las cifras y explicaciones de esta página tienen fines educativos y no sustituyen los avisos o pronósticos oficiales de tu servicio meteorológico local."
+          "disclaimer": "Las cifras y explicaciones de esta página tienen fines educativos y no sustituyen los avisos o pronósticos oficiales de tu servicio meteorológico local.",
+          "tempGauge": {
+            "title": "Pruébalo: Temperatura en Vivo Alrededor del Mundo",
+            "intro": "Elige una ciudad para ver su temperatura actual real, obtenida en vivo de los mismos datos de pronóstico que usa esta herramienta, representada en un medidor desde el punto de congelación hasta el calor extremo.",
+            "error": "No se pudo cargar la temperatura en vivo. Inténtalo de nuevo.",
+            "verdict": "Ahora mismo hace {temperature} en {city} — {condition}.",
+            "zones": {
+              "freezing": "Congelante",
+              "cold": "Frío",
+              "mild": "Templado",
+              "warm": "Cálido",
+              "hot": "Caluroso"
+            }
+          }
         },
         "models": {
           "title": "Modelos meteorológicos y fuentes de datos",
@@ -2857,7 +2877,149 @@
           "note": "El artículo de referencia que estableció la base matemática de la teoría del caos aplicada a la modelización atmosférica: la explicación formal de por qué los pronósticos del tiempo pierden precisión cuanto más lejano es el horizonte, conocido popularmente como el «efecto mariposa».",
           "url": "https://math.bu.edu/people/mabeck/Fall14/Lorenz63.pdf",
           "readOriginal": "Leer el artículo original"
+        },
+        "disasters": {
+          "title": "Desastres Naturales Relacionados con el Clima",
+          "intro": "Ciertos patrones climáticos pueden intensificarse hasta convertirse en desastres naturales. Esta sección explica seis tipos principales en términos científicos sencillos, cada uno ilustrado con un evento histórico real y documentado — es puramente educativa, y no un sistema de monitoreo o alerta temprana en vivo.",
+          "disclaimer": "Esta sección es solo para fines educativos generales. No monitorea las condiciones actuales y nunca debe usarse como sustituto de las advertencias oficiales de la agencia meteorológica o de gestión de emergencias de su país.",
+          "items": [
+            {
+              "name": "Ciclones Tropicales",
+              "definition": "Un ciclón tropical es un sistema de tormenta giratoria que se forma sobre aguas oceánicas cálidas, impulsado por el calor liberado cuando el aire húmedo asciende y se condensa. El mismo fenómeno se llama \"huracán\" en el Atlántico y el Pacífico noreste, \"tifón\" en el Pacífico noroeste, y simplemente \"ciclón\" en el Pacífico sur y el océano Índico.",
+              "connection": "Solo se forman sobre aguas oceánicas más cálidas de unos 26,5 °C, por lo que la actividad ciclónica alcanza su punto máximo en la temporada cálida de cada región, y las tormentas se debilitan rápidamente al llegar a tierra o aguas más frías.",
+              "example": "Ejemplo histórico: El huracán Katrina, en agosto de 2005, tocó tierra en la costa del Golfo de EE. UU. y causó inundaciones catastróficas en Nueva Orleans tras el fallo de los diques, convirtiéndose en uno de los desastres naturales más costosos de la historia estadounidense."
+            },
+            {
+              "name": "Inundaciones",
+              "definition": "Una inundación ocurre cuando el agua se desborda sobre tierra normalmente seca, casi siempre por lluvias intensas o prolongadas que superan lo que ríos, suelo y sistemas de drenaje pueden absorber, aunque también puede resultar del deshielo rápido o de una marejada ciclónica.",
+              "connection": "Las inundaciones están directamente vinculadas a los patrones de precipitación: una tormenta muy intensa, o una temporada de lluvias inusualmente larga, pueden hacer que un río se desborde, según el terreno circundante y la saturación previa del suelo.",
+              "example": "Ejemplo histórico: Las inundaciones de China de 1931 en los ríos Yangtsé y Huai están registradas como el desastre natural más mortífero de la historia documentada, con estimaciones de varios cientos de miles a más de un millón de muertes."
+            },
+            {
+              "name": "Olas de Calor",
+              "definition": "Una ola de calor es un período prolongado de calor excesivo, generalmente definido en relación con lo que es normal para una región y estación determinadas, que puede persistir de días a semanas bajo un área estancada de alta presión atmosférica.",
+              "connection": "Las olas de calor se forman cuando un sistema de alta presión atrapa el aire caliente en un lugar durante un período prolongado, suprimiendo la formación de nubes y la lluvia — las mismas condiciones estancadas que también tienden a empeorar la calidad del aire y la sequía.",
+              "example": "Ejemplo histórico: Se estima que la ola de calor europea de 2003 causó unas 70.000 muertes adicionales en el continente, con Francia particularmente afectada."
+            },
+            {
+              "name": "Sequías",
+              "definition": "Una sequía es un período prolongado de precipitaciones por debajo del promedio que provoca escasez de agua, afectando la agricultura, el suministro de agua y los ecosistemas, y se distingue de las temporadas secas normales por su duración y severidad inusuales.",
+              "connection": "Las sequías suelen desarrollarse cuando patrones persistentes de alta presión desvían repetidamente las trayectorias de las tormentas lejos de una región durante varias temporadas, y pueden agravarse por la reducción del manto de nieve o ciclos de retroalimentación de la humedad del suelo.",
+              "example": "Ejemplo histórico: El \"Dust Bowl\" de la década de 1930 en las Grandes Llanuras de EE. UU. combinó una sequía plurianual con malas prácticas agrícolas, causando una severa erosión del suelo y desplazando a cientos de miles de familias."
+            },
+            {
+              "name": "Tormentas Severas y Granizo",
+              "definition": "Una tormenta severa es la que produce granizo grande, vientos rectos dañinos y/o tornados, y se forma cuando fuertes corrientes ascendentes de aire cálido y húmedo interactúan con la cizalladura del viento (cambios de velocidad o dirección del viento con la altura).",
+              "connection": "Las piedras de granizo crecen cuando fuertes corrientes ascendentes transportan repetidamente partículas de hielo hacia arriba a través de capas de nubes sobreenfriadas, añadiendo una nueva capa de hielo en cada ciclo — cuanto más fuerte es la corriente ascendente, más grande puede crecer el granizo antes de caer.",
+              "example": "Ejemplo histórico: La granizada de Sídney de abril de 1999 en Australia produjo granizos de hasta 9 cm de diámetro y sigue siendo el desastre natural más costoso en la historia de los seguros australianos."
+            },
+            {
+              "name": "Ventiscas",
+              "definition": "Una ventisca es una tormenta de nieve severa definida por vientos fuertes y sostenidos, nieve intensa que cae o es arrastrada por el viento, y visibilidad reducida a unos pocos cientos de metros o menos, que típicamente dura un período prolongado.",
+              "connection": "Las ventiscas se forman cuando un fuerte sistema de baja presión atrae simultáneamente aire frío y humedad, y los fuertes vientos que la acompañan levantan la nieve ya caída, extendiendo la visibilidad casi nula mucho más allá de la nevada real.",
+              "example": "Ejemplo histórico: La \"Tormenta del Siglo\" de marzo de 1993 cubrió gran parte del este de Estados Unidos y Canadá con nieve intensa y vientos huracanados, y se relacionó con unas 300 muertes."
+            }
+          ]
         }
+      },
+      "weekChart": {
+        "title": "Tendencia de Temperatura a 7 Días",
+        "highLabel": "Máxima",
+        "lowLabel": "Mínima"
+      },
+      "humidityGauge": {
+        "title": "Nivel de Humedad",
+        "zones": {
+          "dry": "Seco",
+          "comfortable": "Confortable",
+          "humid": "Húmedo"
+        }
+      },
+      "windCompass": {
+        "title": "Viento",
+        "mph": "mph",
+        "kmh": "km/h",
+        "directions": {
+          "n": "N",
+          "ne": "NE",
+          "e": "E",
+          "se": "SE",
+          "s": "S",
+          "sw": "SO",
+          "w": "O",
+          "nw": "NO"
+        },
+        "fromDirection": "desde el {direction}",
+        "ariaLabel": "Viento soplando desde el {direction} a {speed}"
+      },
+      "uvGauge": {
+        "title": "Índice UV",
+        "zones": {
+          "low": "Bajo",
+          "moderate": "Moderado",
+          "high": "Alto",
+          "veryHigh": "Muy Alto",
+          "extreme": "Extremo"
+        },
+        "advice": {
+          "low": "Riesgo mínimo. La mayoría de las personas no necesita protección.",
+          "moderate": "Use gafas de sol y protector solar si va a estar mucho tiempo al aire libre.",
+          "high": "Reduzca la exposición al sol al mediodía. Use sombrero, gafas de sol y protector solar SPF 30+.",
+          "veryHigh": "Tome precauciones extra: busque sombra al mediodía y reaplique protector solar con frecuencia.",
+          "extreme": "Evite la exposición al sol al mediodía. La piel sin protección puede quemarse en minutos."
+        }
+      },
+      "worldMap": {
+        "title": "Mapa Meteorológico Mundial Interactivo",
+        "intro": "Haga clic en cualquier marcador para ver la temperatura actual en vivo y las condiciones de esa ciudad, extraídas de los mismos modelos de pronóstico de Open-Meteo utilizados en toda esta herramienta.",
+        "showMapButton": "Mostrar Mapa",
+        "attribution": {
+          "openMeteo": "Datos meteorológicos de Open-Meteo.com"
+        },
+        "cities": {
+          "riyadh": "Riad",
+          "cairo": "El Cairo",
+          "london": "Londres",
+          "paris": "París",
+          "berlin": "Berlín",
+          "madrid": "Madrid",
+          "rome": "Roma",
+          "moscow": "Moscú",
+          "istanbul": "Estambul",
+          "dubai": "Dubái",
+          "newDelhi": "Nueva Delhi",
+          "beijing": "Pekín",
+          "tokyo": "Tokio",
+          "seoul": "Seúl",
+          "bangkok": "Bangkok",
+          "jakarta": "Yakarta",
+          "sydney": "Sídney",
+          "nairobi": "Nairobi",
+          "lagos": "Lagos",
+          "capeTown": "Ciudad del Cabo",
+          "newYork": "Nueva York",
+          "mexicoCity": "Ciudad de México",
+          "rioDeJaneiro": "Río de Janeiro",
+          "buenosAires": "Buenos Aires"
+        }
+      },
+      "shareExport": {
+        "triggerLabel": "Compartir / Exportar",
+        "modalTitle": "Compartir o Exportar Este Resultado",
+        "contactSectionTitle": "Preparado Para (opcional)",
+        "contactName": "Nombre",
+        "contactNamePlaceholder": "p. ej. Jordan Lee",
+        "contactEmail": "Correo electrónico",
+        "contactEmailPlaceholder": "p. ej. jordan@example.com",
+        "contactPhone": "Teléfono",
+        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
+        "contactOrganization": "Organización",
+        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
+        "contactAddress": "Dirección",
+        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
+        "shareToSocial": "Compartir en redes sociales",
+        "generatedOn": "Generado el",
+        "preparedForTitle": "Preparado Para"
       }
     },
     "tdee-calculator": {

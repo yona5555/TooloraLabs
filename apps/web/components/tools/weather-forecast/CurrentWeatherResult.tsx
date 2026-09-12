@@ -5,6 +5,7 @@ import { convertTemperature, convertWindSpeed, getWeatherCategory } from "@toolo
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WeatherIcon from "./WeatherIcon";
 import WeatherDataSourceNote from "./WeatherDataSourceNote";
+import WeatherShareExportModal from "./WeatherShareExportModal";
 import type { WeatherSnapshot } from "./types";
 
 type UnitSystem = "metric" | "us";
@@ -48,23 +49,37 @@ export default function CurrentWeatherResult({
       }).format(new Date(snapshot.current.time))
     : "";
 
+  const inputRows = [{ label: t("searchLabel"), value: cityLabel }];
+  const resultRows = snapshot
+    ? [
+        { label: t("feelsLikeLabel"), value: temperature(snapshot.current.apparentTemperatureC) },
+        { label: t("humidityLabel"), value: `${formatLocalizedNumber(snapshot.current.relativeHumidity, digitStyle, { maximumFractionDigits: 0 })}%` },
+        { label: t("windLabel"), value: windSpeed(snapshot.current.windSpeedKmh) },
+        { label: t("precipChanceLabel"), value: `${formatLocalizedNumber(snapshot.daily[0]?.precipitationProbabilityMax ?? 0, digitStyle, { maximumFractionDigits: 0 })}%` },
+      ]
+    : [];
+  const sentence = snapshot ? `${cityLabel}: ${temperature(snapshot.current.temperatureC)}, ${tCategory(getWeatherCategory(snapshot.current.weatherCode))}` : "";
+
   return (
     <SectionCard
       title={cityLabel}
       action={
-        <div className="inline-flex rounded-lg border border-white/30 p-0.5">
-          {(["metric", "us"] as const).map((unit) => (
-            <button
-              key={unit}
-              type="button"
-              onClick={() => onUnitSystemChange(unit)}
-              className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
-                unitSystem === unit ? "bg-white text-blue-700" : "text-white/80 hover:text-white"
-              }`}
-            >
-              {unit === "metric" ? "°C" : "°F"}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          {status === "idle" && snapshot && <WeatherShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("temperatureLabel")} heroValue={temperature(snapshot.current.temperatureC)} sentence={sentence} />}
+          <div className="inline-flex rounded-lg border border-white/30 p-0.5">
+            {(["metric", "us"] as const).map((unit) => (
+              <button
+                key={unit}
+                type="button"
+                onClick={() => onUnitSystemChange(unit)}
+                className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
+                  unitSystem === unit ? "bg-white text-blue-700" : "text-white/80 hover:text-white"
+                }`}
+              >
+                {unit === "metric" ? "°C" : "°F"}
+              </button>
+            ))}
+          </div>
         </div>
       }
     >
