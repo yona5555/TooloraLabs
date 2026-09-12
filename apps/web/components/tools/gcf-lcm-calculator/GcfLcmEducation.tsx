@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import GcfLcmConceptDiagram from "./GcfLcmConceptDiagram";
+import GcfLcmLadderDiagram from "./GcfLcmLadderDiagram";
 import GcfLcmRatioGauge from "./GcfLcmRatioGauge";
 
 type ExampleRow = { calculation: string; result: string };
@@ -28,6 +29,7 @@ export default async function GcfLcmEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <GcfLcmConceptDiagram />
+        <GcfLcmLadderDiagram />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>

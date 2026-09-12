@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import FractionBarDiagram from "./FractionBarDiagram";
+import FractionPieDiagram from "./FractionPieDiagram";
 import FractionNumberLineGauge from "./FractionNumberLineGauge";
 
 type ExampleRow = { calculation: string; result: string };
@@ -25,6 +26,7 @@ export default async function FractionEducation() {
         <FractionBarDiagram numerator={3} denominator={8} caption={t("intro.diagram.caption")} />
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <FractionPieDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
