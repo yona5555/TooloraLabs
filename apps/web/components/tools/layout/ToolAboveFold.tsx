@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 
 type ToolAboveFoldProps = {
   input: ReactNode;
@@ -139,9 +139,19 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
       className="relative grid grid-cols-1 content-start items-start gap-6 lg:grid-cols-[320px_minmax(360px,1fr)_320px]"
       style={{ minHeight: sidebarHeight || undefined }}
     >
+      {/*
+        The stretch height is desktop-only (matches the sidebar's `sticky`
+        below, which is also `lg:`-gated) — below `lg` the layout is a
+        single stacked column, so forcing this wrapper to `result`'s height
+        would leave a large empty gap under a short input card before the
+        result starts. Setting it as a CSS custom property and reading it
+        only inside an `lg:` arbitrary-property class (rather than an
+        unconditional inline `style.height`) keeps the value inert below
+        `lg` without needing a matchMedia/JS breakpoint check.
+      */}
       <div
-        className="min-w-0 lg:col-start-1 lg:row-start-1"
-        style={inputBoxHeight ? { height: inputBoxHeight } : undefined}
+        className="min-w-0 lg:col-start-1 lg:row-start-1 lg:[height:var(--input-stretch-h)]"
+        style={inputBoxHeight ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : undefined}
       >
         <div ref={inputRef} className={inputBoxHeight ? "lg:sticky lg:top-20" : undefined}>
           {input}
