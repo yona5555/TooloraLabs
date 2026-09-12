@@ -2,7 +2,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { convertTemperature, getWeatherCategory } from "@tooloralabs/tools";
-import { Droplet, Info } from "lucide-react";
+import { Droplet } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WeatherIcon from "./WeatherIcon";
 import WeatherDataSourceNote from "./WeatherDataSourceNote";
@@ -56,11 +56,7 @@ export default function SevenDayForecastPanel({ daily, unitSystem, digitStyle }:
         </div>
       </div>
       <div className="p-4 pt-3 lg:px-6">
-        <div className="flex gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-500/30 dark:bg-amber-500/10">
-          <Info size={18} className="mt-0.5 shrink-0 text-amber-600 dark:text-amber-400" />
-          <p className="text-sm leading-6 text-amber-900 dark:text-amber-200">{t("accuracyNote")}</p>
-        </div>
-        <WeatherDataSourceNote className="mt-3" />
+        <WeatherDataSourceNote />
       </div>
     </SectionCard>
   );

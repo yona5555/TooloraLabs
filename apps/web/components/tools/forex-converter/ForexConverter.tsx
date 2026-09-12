@@ -10,7 +10,6 @@ import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ForexInputPanel from "./ForexInputPanel";
 import ForexResult from "./ForexResult";
-import ForexDisclaimer from "./ForexDisclaimer";
 import ForexTopList from "./ForexTopList";
 import ForexHistoricalChart from "./ForexHistoricalChart";
 import ForexNews from "./ForexNews";
@@ -56,6 +55,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
     { id: "news", label: tNav("news") },
     { id: "learning-resources", label: tNav("education") },
     { id: "faq", label: tNav("faq") },
+    { id: "notices", label: tNav("notices") },
   ];
 
   return (
@@ -88,7 +88,6 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
-              <ForexDisclaimer />
               <ForexTopList currencies={initialCurrencies} digitStyle={digitStyle} />
               <ForexHistoricalChart digitStyle={digitStyle} />
               <ForexNews />

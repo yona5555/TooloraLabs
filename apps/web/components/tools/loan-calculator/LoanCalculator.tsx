@@ -18,7 +18,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import PlainDisclaimer from "@/components/tool-ui/PlainDisclaimer";
 import LoanModeTabs from "./LoanModeTabs";
 import LoanTipsCard from "./LoanTipsCard";
 import LoanInputPanel from "./LoanInputPanel";
@@ -269,6 +268,7 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
     { id: "amortization", label: tNav("amortization") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    { id: "notices", label: tNav("notices") },
   ];
 
   const activeCalculated = hasCalculated[mode];
@@ -400,7 +400,6 @@ export default function LoanCalculator({ education }: { education: ReactNode }) 
       </div>
 
       {education}
-      <PlainDisclaimer text={t("aboveFold.disclaimer")} />
     </LoanLiveInputsProvider>
   );
 }

@@ -10,7 +10,6 @@ import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import CommodityInputPanel from "./CommodityInputPanel";
 import CommodityResult from "./CommodityResult";
-import CommodityDisclaimer from "./CommodityDisclaimer";
 import CommodityHistoricalChart from "./CommodityHistoricalChart";
 import CommodityNews from "./CommodityNews";
 import CommodityLearningResources from "./CommodityLearningResources";
@@ -64,6 +63,7 @@ export default function CommodityConverter({
     { id: "news", label: tNav("news") },
     { id: "learning-resources", label: tNav("education") },
     { id: "faq", label: tNav("faq") },
+    { id: "notices", label: tNav("notices") },
   ];
 
   return (
@@ -99,7 +99,6 @@ export default function CommodityConverter({
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
-              <CommodityDisclaimer />
               <CommodityHistoricalChart digitStyle={digitStyle} />
               <CommodityNews />
               <CommodityLearningResources />

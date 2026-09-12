@@ -18,7 +18,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import PlainDisclaimer from "@/components/tool-ui/PlainDisclaimer";
 import CompoundInterestModeTabs from "./CompoundInterestModeTabs";
 import RuleOf72Card from "./RuleOf72Card";
 import CompoundInterestInputPanel from "./CompoundInterestInputPanel";
@@ -423,6 +422,7 @@ export default function CompoundInterestCalculator({ education }: { education: R
     { id: "yearly-breakdown", label: tNav("yearlyBreakdown") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    { id: "notices", label: tNav("notices") },
   ];
 
   return (
@@ -537,7 +537,6 @@ export default function CompoundInterestCalculator({ education }: { education: R
       </div>
 
       {education}
-      <PlainDisclaimer text={t("aboveFold.disclaimer")} />
     </CompoundInterestLiveInputsProvider>
   );
 }

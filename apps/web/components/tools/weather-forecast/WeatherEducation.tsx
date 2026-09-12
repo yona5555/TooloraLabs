@@ -5,21 +5,18 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/EquipmentSection";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import WaterCycleDiagram from "./WaterCycleDiagram";
 import WeatherLiveTempGauge from "./WeatherLiveTempGauge";
-import WeatherWorldMap from "./WeatherWorldMap";
 import WeatherDisasters, { type DisasterItem } from "./WeatherDisasters";
-import { WORLD_MAP_CITIES, getWorldMapSnapshot } from "@/lib/weather/open-meteo";
 
 export default async function WeatherEducation() {
   const t = await getTranslations("tools.weather-forecast.education");
+  const tAboveFold = await getTranslations("tools.weather-forecast.aboveFold");
+  const tForecast = await getTranslations("tools.weather-forecast.forecast");
 
   const faqItems = t.raw("faq.items") as FAQItem[];
   const equipmentItems = t.raw("behindTheTool.equipment.items") as EquipmentItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
   const disasterItems = t.raw("disasters.items") as DisasterItem[];
-
-  const worldMapCities = await getWorldMapSnapshot(WORLD_MAP_CITIES).catch(() => []);
 
   return (
     <EncyclopediaPaper>
@@ -28,14 +25,6 @@ export default async function WeatherEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <WaterCycleDiagram
-          evaporationLabel={t("intro.diagram.evaporation")}
-          condensationLabel={t("intro.diagram.condensation")}
-          precipitationLabel={t("intro.diagram.precipitation")}
-          collectionLabel={t("intro.diagram.collection")}
-          caption={t("intro.diagram.caption")}
-        />
-        <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
       </InfoSection>
 
       <InfoSection title={t("models.title")}>
@@ -44,12 +33,10 @@ export default async function WeatherEducation() {
         <p>{t("models.paragraph3")}</p>
       </InfoSection>
 
-      <WeatherWorldMap cities={worldMapCities} />
-
       <AdSpace variant="leaderboard" />
 
       <InfoSection id="disasters" title={t("disasters.title")}>
-        <WeatherDisasters intro={t("disasters.intro")} items={disasterItems} disclaimer={t("disasters.disclaimer")} />
+        <WeatherDisasters intro={t("disasters.intro")} items={disasterItems} />
       </InfoSection>
 
       <InfoSection id="faq" title={t("faq.title")}>
@@ -90,6 +77,15 @@ export default async function WeatherEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={t("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tAboveFold("disclaimer")}</li>
+          <li>{tForecast("accuracyNote")}</li>
+          <li>{t("intro.disclaimer")}</li>
+          <li>{t("disasters.disclaimer")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

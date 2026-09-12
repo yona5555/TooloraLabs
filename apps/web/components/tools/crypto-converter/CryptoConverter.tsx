@@ -10,7 +10,6 @@ import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import CryptoInputPanel from "./CryptoInputPanel";
 import CryptoResult from "./CryptoResult";
-import CryptoDisclaimer from "./CryptoDisclaimer";
 import CryptoTopList from "./CryptoTopList";
 import CryptoHistoricalChart from "./CryptoHistoricalChart";
 import CryptoWhatIfCalculator from "./CryptoWhatIfCalculator";
@@ -69,6 +68,7 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
     { id: "news", label: tNav("news") },
     { id: "learning-resources", label: tNav("education") },
     { id: "faq", label: tNav("faq") },
+    { id: "notices", label: tNav("notices") },
   ];
 
   return (
@@ -105,7 +105,6 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
-              <CryptoDisclaimer />
               <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
               <CryptoHistoricalChart coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
               <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />

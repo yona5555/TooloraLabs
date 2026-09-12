@@ -13,6 +13,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function CompoundInterestEducation() {
   const t = await getTranslations("tools.compound-interest-calculator.education");
+  const tAboveFold = await getTranslations("tools.compound-interest-calculator.aboveFold");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -27,7 +28,6 @@ export default async function CompoundInterestEducation() {
         <p>{t("intro.paragraph2")}</p>
         <CompoundInterestConceptDiagram />
         <CompoundInterestComparisonChart />
-        <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -113,6 +113,13 @@ export default async function CompoundInterestEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={t("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tAboveFold("disclaimer")}</li>
+          <li>{t("intro.disclaimer")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

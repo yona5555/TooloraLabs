@@ -8,7 +8,6 @@ import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import CityPanel from "./CityPanel";
 import CurrentWeatherResult from "./CurrentWeatherResult";
-import WeatherDisclaimer from "./WeatherDisclaimer";
 import SevenDayForecastPanel from "./SevenDayForecastPanel";
 import WeatherWeekChart from "./WeatherWeekChart";
 import WeatherHumidityGauge from "./WeatherHumidityGauge";
@@ -19,10 +18,11 @@ import type { SelectedCity, WeatherSnapshot } from "./types";
 type WeatherTrackerProps = {
   initialCity: SelectedCity;
   initialSnapshot: WeatherSnapshot;
+  worldMap: ReactNode;
   education: ReactNode;
 };
 
-export default function WeatherTracker({ initialCity, initialSnapshot, education }: WeatherTrackerProps) {
+export default function WeatherTracker({ initialCity, initialSnapshot, worldMap, education }: WeatherTrackerProps) {
   const tNav = useTranslations("tools.weather-forecast.nav");
   const [selectedCity, setSelectedCity] = useState<SelectedCity>(initialCity);
   const [snapshot, setSnapshot] = useState<WeatherSnapshot | null>(initialSnapshot);
@@ -66,6 +66,7 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
     { id: "disasters", label: tNav("disasters") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    { id: "notices", label: tNav("notices") },
   ];
 
   return (
@@ -87,7 +88,6 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
-              <WeatherDisclaimer />
               {snapshot && (
                 <>
                   <SevenDayForecastPanel daily={snapshot.daily} unitSystem={unitSystem} digitStyle={digitStyle} />
@@ -108,6 +108,8 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
           }
         />
       </div>
+
+      {worldMap}
 
       {education}
     </>

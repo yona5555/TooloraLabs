@@ -1,5 +1,4 @@
 import { CloudLightning, Droplets, Flame, Snowflake, Waves, Wind } from "lucide-react";
-import PlainDisclaimer from "@/components/tool-ui/PlainDisclaimer";
 
 export type DisasterItem = {
   name: string;
@@ -13,20 +12,19 @@ const ICONS = [Wind, Waves, Flame, Droplets, CloudLightning, Snowflake];
 type WeatherDisastersProps = {
   intro: string;
   items: DisasterItem[];
-  disclaimer: string;
 };
 
 /**
  * Educational overview only — deliberately built from `items` passed in as
- * plain data (no live feed, no location matching, no severity scoring)
- * so it can never be mistaken for an actual disaster-warning system. The
- * closing disclaimer says so explicitly and, per project style rules, uses
- * the same plain-paragraph register as the rest of the page rather than a
- * colored warning box. Rendered inside a parent InfoSection, which already
- * supplies the section's own heading — this component intentionally has no
- * heading of its own to avoid a duplicate title.
+ * plain data (no live feed, no location matching, no severity scoring) so
+ * it can never be mistaken for an actual disaster-warning system. That
+ * caveat lives in the page's single consolidated Notices section (per
+ * TooloraLabs-Claude-Instructions.md's disclaimer-consolidation rule)
+ * rather than repeated here. Rendered inside a parent InfoSection, which
+ * already supplies the section's own heading — this component intentionally
+ * has no heading of its own to avoid a duplicate title.
  */
-export default function WeatherDisasters({ intro, items, disclaimer }: WeatherDisastersProps) {
+export default function WeatherDisasters({ intro, items }: WeatherDisastersProps) {
   return (
     <div>
       <p>{intro}</p>
@@ -47,8 +45,6 @@ export default function WeatherDisasters({ intro, items, disclaimer }: WeatherDi
           );
         })}
       </div>
-
-      <PlainDisclaimer text={disclaimer} />
     </div>
   );
 }

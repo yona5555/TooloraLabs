@@ -11,6 +11,7 @@ type RegimeRow = { regime: string; example: string; description: string };
 
 export default async function ForexEducation() {
   const t = await getTranslations("tools.forex-converter.education");
+  const tAboveFold = await getTranslations("tools.forex-converter.aboveFold");
 
   const eras = t.raw("history.diagram.eras") as TimelineEra[];
   const regimeRows = t.raw("regimes.rows") as RegimeRow[];
@@ -22,7 +23,6 @@ export default async function ForexEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
       </InfoSection>
 
       <InfoSection title={t("history.title")}>
@@ -100,6 +100,13 @@ export default async function ForexEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={t("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tAboveFold("disclaimer")}</li>
+          <li>{t("intro.disclaimer")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

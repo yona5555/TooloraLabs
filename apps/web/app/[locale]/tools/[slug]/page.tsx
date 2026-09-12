@@ -17,6 +17,7 @@ import CommodityConverter from "@/components/tools/commodities-tracker/Commodity
 import CommodityEducation from "@/components/tools/commodities-tracker/CommodityEducation";
 import WeatherTracker from "@/components/tools/weather-forecast/WeatherTracker";
 import WeatherEducation from "@/components/tools/weather-forecast/WeatherEducation";
+import WeatherWorldMapSection from "@/components/tools/weather-forecast/WeatherWorldMapSection";
 import TDEECalculator from "@/components/tools/tdee-calculator/TDEECalculator";
 import TDEEEducation from "@/components/tools/tdee-calculator/TDEEEducation";
 import CompoundInterestCalculator from "@/components/tools/compound-interest-calculator/CompoundInterestCalculator";
@@ -391,6 +392,7 @@ export default async function ToolPage({
             longitude: defaultCity.longitude,
           }}
           initialSnapshot={snapshot}
+          worldMap={<WeatherWorldMapSection />}
           education={<WeatherEducation />}
         />
       );

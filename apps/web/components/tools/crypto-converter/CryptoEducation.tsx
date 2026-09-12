@@ -10,6 +10,7 @@ type ComparisonRow = { name: string; launched: string; consensus: string; mainUs
 
 export default async function CryptoEducation() {
   const t = await getTranslations("tools.crypto-converter.education");
+  const tAboveFold = await getTranslations("tools.crypto-converter.aboveFold");
 
   const comparisonRows = t.raw("comparison.rows") as ComparisonRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -20,7 +21,6 @@ export default async function CryptoEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
       </InfoSection>
 
       <InfoSection title={t("blockchain.title")}>
@@ -106,6 +106,13 @@ export default async function CryptoEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={t("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tAboveFold("disclaimer")}</li>
+          <li>{t("intro.disclaimer")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

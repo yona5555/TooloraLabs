@@ -11,6 +11,7 @@ type ExampleRow = { profile: string; bmr: string; tdee: string };
 
 export default async function TDEEEducation() {
   const t = await getTranslations("tools.tdee-calculator.education");
+  const tAboveFold = await getTranslations("tools.tdee-calculator.aboveFold");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -27,7 +28,6 @@ export default async function TDEEEducation() {
           fulcrumLabel={t("intro.diagram.fulcrum")}
           caption={t("intro.diagram.caption")}
         />
-        <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
         <TDEEComponentBreakdownDiagram />
       </InfoSection>
 
@@ -90,6 +90,13 @@ export default async function TDEEEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={t("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tAboveFold("disclaimer")}</li>
+          <li>{t("intro.disclaimer")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );
