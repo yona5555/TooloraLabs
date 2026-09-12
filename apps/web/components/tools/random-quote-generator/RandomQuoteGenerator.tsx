@@ -6,6 +6,7 @@ import { RandomQuoteCalculator as QuoteTool, type Quote } from "@tooloralabs/too
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import QuoteInputPanel from "./QuoteInputPanel";
 import QuoteResult from "./QuoteResult";
 import QuoteQuickReference from "./QuoteQuickReference";
@@ -49,6 +50,7 @@ export default function RandomQuoteGenerator({ education }: { education: ReactNo
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="random-quote-generator" />
               <QuoteQuickReference />
             </div>
           }

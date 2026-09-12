@@ -32983,6 +32983,759 @@
             "answer": "El contador de palabras no distingue el diálogo hablado de las direcciones de escenario, etiquetas de orador, o notas entre corchetes: cuenta cada fragmento separado por espacios en blanco en la entrada como una palabra. Si su guion incluye texto no hablado, eliminarlo antes de pegar dará una estimación más precisa del tiempo real de habla."
           }
         ]
+      },
+      "forex-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor de Divisas: cómo se usa el tipo de cambio diario en vivo de un par de divisas para convertir un importe a través de un pivote compartido en USD, las variables que acepta y los casos límite que gestiona.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Por qué la conversión escala linealmente",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rutas de conversión",
+          "modesValue": "1",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "importeConvertido = (importe ÷ tipoOrigenPorUSD) × tipoDestinoPorUSD",
+          "note": "Los tipos de ambas divisas se expresan de la misma forma —unidades de esa divisa por 1 dólar estadounidense—, de modo que el USD actúa como pivote compartido: dividir por el tipo de la divisa de origen convierte el importe a su equivalente en dólares, y multiplicar después por el tipo de la divisa de destino convierte ese valor en dólares a la divisa destino, todo en un solo paso."
+        },
+        "flowchart": {
+          "intro": "Una conversión nunca compara dos divisas directamente: siempre encamina el importe primero a través del USD como unidad común.",
+          "steps": [
+            "Elige una divisa de 'origen' y otra de 'destino' de la lista de tipos en vivo (más de 30 divisas principales y de la región árabe)",
+            "Consulta el tipo de cada divisa como unidades por USD desde el proveedor actualizado a diario",
+            "Divide el importe introducido por el tipo de la divisa de origen para obtener su equivalente en dólares estadounidenses",
+            "Multiplica ese valor en dólares por el tipo de la divisa de destino para convertirlo a la divisa final",
+            "Muestra el resultado, formateado con el código de la divisa de destino"
+          ],
+          "caption": "Toda conversión pasa una vez por el USD, incluso cuando ni la divisa de origen ni la de destino es el propio dólar."
+        },
+        "anatomy": {
+          "intro": "Como la fórmula siempre multiplica el importe introducido por una razón fija (tipoDestino ÷ tipoOrigen) para un par de divisas dado, duplicar o escalar el importe escala el resultado exactamente por el mismo factor: la relación es una línea recta que pasa por el origen.",
+          "xLabel": "Importe (USD)",
+          "yLabel": "Convertido (EUR)",
+          "caption": "Con un tipo fijo USD→EUR de 0,86, el importe convertido crece en proporción exacta al importe introducido."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "amount",
+            "meaning": "La cantidad de la divisa de origen a convertir.",
+            "unit": "divisa de origen"
+          },
+          {
+            "symbol": "fromRatePerUsd",
+            "meaning": "Unidades de la divisa de origen por 1 dólar estadounidense, de la lista de tipos en vivo.",
+            "unit": "divisa de origen / USD"
+          },
+          {
+            "symbol": "toRatePerUsd",
+            "meaning": "Unidades de la divisa de destino por 1 dólar estadounidense, de la lista de tipos en vivo.",
+            "unit": "divisa de destino / USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un importe no finito o ausente se convierte en cero, no en un error",
+            "description": "Si el importe no puede interpretarse como un número finito (campo vacío, caracteres extraños), la función de conversión devuelve 0 directamente en lugar de lanzar un error o mostrar NaN — el panel de resultados simplemente muestra un importe cero hasta que se introduce un número válido."
+          },
+          {
+            "title": "Un tipo de origen de cero o menos se rechaza directamente",
+            "description": "La conversión comprueba explícitamente que el tipo de la divisa de origen no sea cero ni negativo —dividir entre un valor así produciría un resultado infinito o absurdo— y devuelve 0 en su lugar, protegiendo frente a cualquier entrada corrupta o ausente en la lista de tipos en vivo."
+          },
+          {
+            "title": "Un código de divisa no reconocido produce un resultado cero, no un fallo",
+            "description": "Si el código de origen o de destino no coincide con ninguna entrada de la lista de tipos cargada (por ejemplo justo tras una carga de página o por un código incorrecto), la búsqueda devuelve undefined y la herramienta muestra un importe cero en lugar de fallar por una propiedad ausente."
+          },
+          {
+            "title": "Elegir la misma divisa en ambos lados es una entrada válida y segura",
+            "description": "Convertir una divisa a sí misma divide y luego multiplica por exactamente el mismo tipo, devolviendo el importe original sin cambios — la herramienta no trata este caso de forma especial, porque la fórmula general ya produce el resultado de identidad correcto."
+          },
+          {
+            "title": "El intercambio mantiene intactas ambas selecciones de divisa",
+            "description": "El control de intercambio permuta directamente los códigos de origen y destino, sin tocar el importe introducido ni volver a consultar los tipos, de modo que la misma lista de tipos se reutiliza para el par invertido."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué el conversor pasa siempre por el USD, incluso entre dos divisas que no son el dólar?",
+            "answer": "La lista de tipos en vivo solo guarda el tipo de cada divisa frente a una única base común —el dólar estadounidense—, de modo que nunca necesita guardar ni consultar un tipo de cambio directo para cada posible par de divisas. Convertir a través de ese pivote compartido significa que el mismo conjunto de datos, pequeño, puede fijar el precio de cualquier par, al coste de una multiplicación adicional."
+          },
+          {
+            "question": "¿Con qué frecuencia se actualizan los tipos de cambio?",
+            "answer": "La lista de tipos se actualiza una vez al día desde un proveedor público de datos de mercado. Es suficientemente precisa para conversiones y estimaciones cotidianas, pero puede quedar por detrás del mercado interbancario en vivo —que se mueve continuamente—, por lo que no es adecuada para decisiones de trading sensibles al tiempo."
+          },
+          {
+            "question": "¿Por qué el importe convertido siempre parece proporcional al importe que escribí?",
+            "answer": "Porque la fórmula de conversión es una simple multiplicación por una razón fija para un par de divisas dado (tipoDestino ÷ tipoOrigen), la relación entre entrada y salida es perfectamente lineal — introducir el doble de importe siempre produce exactamente el doble de resultado convertido, siempre que los tipos subyacentes no hayan cambiado."
+          },
+          {
+            "question": "¿Qué ocurre si introduzco un importe antes de que termine de cargar la lista de divisas?",
+            "answer": "Las búsquedas de las divisas de origen y destino devuelven undefined hasta que llega la lista de tipos, y las protecciones de la función de conversión tratan eso igual que un tipo inválido — devuelve cero en lugar de fallar, así que el panel de resultados muestra brevemente 0 hasta que los tipos en vivo están listos."
+          }
+        ]
+      },
+      "crypto-converter": {
+        "version": "v1",
+        "description": "Referencia técnica del Conversor de Criptomonedas: cómo se usan los precios en vivo en USD de dos criptomonedas para convertir un importe entre ellas, cómo se calcula el rendimiento de \"qué habría pasado si hubiera invertido\", las variables implicadas y los casos límite gestionados.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "El rendimiento de \"Qué habría pasado si hubiera invertido\"",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Funciones",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "importeConvertido = (importe × precioOrigenUSD) ÷ precioDestinoUSD  |  gananciaPérdida = (invertido ÷ precioEntonces × precioAhora) − invertido",
+          "note": "A diferencia de los tipos en unidades por USD del Conversor de Divisas, aquí el precio de cada moneda ya está en USD por moneda — así que la conversión multiplica por el precio de la moneda de origen y divide por el precio de la moneda de destino, en el orden opuesto a un pivote en unidades por USD."
+        },
+        "flowchart": {
+          "intro": "El precio en USD de cada moneda actúa como pivote compartido entre dos monedas cualesquiera, el mismo papel que los tipos en unidades por USD desempeñan en el Conversor de Divisas.",
+          "steps": [
+            "Elige una moneda de 'origen' y otra de 'destino' de la lista en vivo de las 100 principales por capitalización de mercado, o busca cualquier otra moneda por nombre o símbolo",
+            "Consulta el precio actual en USD de cada moneda — las monedas encontradas solo mediante la búsqueda se añaden a la lista local en cuanto se devuelven",
+            "Multiplica el importe introducido por el precio en USD de la moneda de origen para obtener su valor en dólares estadounidenses",
+            "Divide ese valor en USD entre el precio en USD de la moneda de destino para obtener el importe equivalente en la moneda de destino",
+            "Muestra el resultado en la moneda de destino, junto con una lectura en moneda fiduciaria"
+          ],
+          "caption": "Los precios en USD de ambas monedas actúan como pivote compartido, igual que los tipos en unidades por USD en el Conversor de Divisas, solo que expresados al revés."
+        },
+        "anatomy": {
+          "intro": "La función 'qué habría pasado si hubiera invertido' es un cálculo aparte del conversor de arriba: compara un importe fijo en USD invertido a un precio con su valor al precio de hoy.",
+          "label": "Valor",
+          "xUnit": " (ahora)",
+          "caption": "Una inversión hipotética de 500 $ a un precio anterior vale hoy 820 $ — la ganancia es simplemente el valor de hoy menos el importe invertido."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "amount",
+            "meaning": "La cantidad de la moneda de origen a convertir.",
+            "unit": "moneda de origen"
+          },
+          {
+            "symbol": "fromPriceUsd",
+            "meaning": "El precio actual de la moneda de origen en dólares estadounidenses.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "toPriceUsd",
+            "meaning": "El precio actual de la moneda de destino en dólares estadounidenses.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "amountInvested",
+            "meaning": "Un importe hipotético en dólares invertido a un precio pasado, para la calculadora de rendimiento.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "priceThenUsd",
+            "meaning": "El precio en USD de la moneda en la fecha hipotética de compra.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "priceNowUsd",
+            "meaning": "El precio actual en USD de la moneda.",
+            "unit": "USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un precio de destino no positivo o no finito devuelve cero, no un error",
+            "description": "La función de conversión comprueba explícitamente que el precio de destino sea finito y mayor que cero antes de dividir —una moneda sin precio válido (datos ausentes, o un resultado de búsqueda que aún carga) dividiría en otro caso entre cero o un valor absurdo— y devuelve 0 en su lugar."
+          },
+          {
+            "title": "La calculadora del \"qué habría pasado\" rechaza un importe invertido de cero o menos",
+            "description": "El cálculo del rendimiento devuelve null —no un resultado con valor cero— para un importe invertido no positivo o no finito, de modo que la interfaz pueda distinguir entre 'aún no hay una entrada válida' y un resultado genuino (aunque improbable) de 0 $."
+          },
+          {
+            "title": "Un precio histórico de cero o menos también se rechaza, pero el precio de hoy sí puede ser exactamente cero",
+            "description": "El precio de compra anterior debe ser estrictamente positivo (no se puede haber comprado a un precio sin valor o negativo), mientras que el precio actual solo tiene que ser no negativo — el precio actual de una moneda puede legítimamente caer a cero, y la calculadora sigue informando de una pérdida total en lugar de negarse a calcular."
+          },
+          {
+            "title": "Una moneda encontrada solo mediante la búsqueda se recuerda para que su precio siga disponible",
+            "description": "La función de descubrimiento añade una moneda recién buscada a la lista de trabajo exactamente una vez —comprobado por id—, de modo que volver a seleccionar esa moneda más tarde en 'origen' o 'destino' sigue encontrando su precio, sin necesidad de buscarla de nuevo."
+          },
+          {
+            "title": "Los datos históricos del gráfico están limitados a 365 días hacia atrás",
+            "description": "Este límite refleja el propio límite del proveedor de datos de criptomonedas para consultas históricas gratuitas; la comprobación de rango histórico compara días de calendario en UTC (no marcas de tiempo brutas), de modo que la fecha límite misma —exactamente hace 365 días— se acepta en lugar de rechazarse por unas pocas horas de error de redondeo."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la conversión de cripto multiplica por un precio y divide por el otro, en lugar de usar un tipo como el Conversor de Divisas?",
+            "answer": "El precio de cada moneda ya se cotiza directamente en dólares estadounidenses (dólares por moneda), no al revés. Multiplicar por el precio de la moneda de origen convierte el importe a USD, y dividir entre el precio de la moneda de destino convierte ese valor en USD a la moneda de destino — matemáticamente la misma idea del pivote en USD que el Conversor de Divisas, solo que formulada con precios en lugar de tipos en unidades por dólar."
+          },
+          {
+            "question": "¿La función 'qué habría pasado si hubiera invertido' es lo mismo que datos de trading en vivo?",
+            "answer": "No — es una ilustración aritmética simple y transparente (importe ÷ precio de entonces × precio de ahora) pensada con fines educativos, con los dos precios que tú indiques. No tiene en cuenta comisiones de trading, deslizamiento, impuestos ni el momento exacto en que se habría ejecutado una operación real."
+          },
+          {
+            "question": "¿Qué ocurre si busco una moneda que no está en la lista inicial de las 100 principales?",
+            "answer": "La búsqueda llama a una consulta dedicada y, en cuanto la encuentra, añade esa moneda a la lista de trabajo de la página mediante la función de descubrimiento — así aparece en los selectores de 'origen'/'destino' y sigue funcionando con normalidad, incluidos el gráfico histórico y la calculadora de 'qué habría pasado', sin recargar la página."
+          },
+          {
+            "question": "¿Por qué no puedo ver el gráfico de precios de cripto más allá de un año?",
+            "answer": "El nivel gratuito del proveedor de datos de mercado que usa esta herramienta limita los datos históricos diarios a 365 días. El selector de fechas no ofrece ir más atrás porque los datos subyacentes simplemente no existen en ese nivel."
+          }
+        ]
+      },
+      "commodities-tracker": {
+        "version": "v1",
+        "description": "Referencia técnica del Rastreador de Materias Primas: cómo se convierte un peso de oro o plata, o un número de barriles de petróleo, en un valor en efectivo usando precios por unidad en vivo y una conversión exacta a onzas troy, las variables implicadas y los casos límite gestionados.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Comparando precios por unidad de las materias primas",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Materias primas",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "valorMetal = peso(oz troy) × precioPorOzTroy × tipoDeCambio  |  valorPetróleo = barriles × precioPorBarril × tipoDeCambio  |  1 oz troy = 31,1034768 g",
+          "note": "Oro y plata comparten una fórmula de valor (ambos se cotizan por onza troy); el petróleo usa la misma forma con barriles en lugar de peso. Un tipo de cambio de 1 fija el resultado en dólares estadounidenses; cualquier otro tipo en unidades por USD lo recotiza en otra divisa, exactamente igual que el pivote del Conversor de Divisas."
+        },
+        "flowchart": {
+          "intro": "El peso siempre se normaliza a onzas troy antes de encontrarse con un precio, ya que es la unidad en la que realmente se cotizan los precios de los metales.",
+          "steps": [
+            "Elige una materia prima: oro, plata o petróleo",
+            "Para oro o plata, elige una unidad de peso (gramos u onzas troy) e introduce la cantidad; para petróleo, introduce directamente un número de barriles",
+            "Si el peso se introdujo en gramos, conviértelo a onzas troy dividiendo por la constante exacta 31,1034768",
+            "Consulta el precio actual en USD por onza troy (para metales) o por barril (para petróleo) del proveedor de datos en vivo",
+            "Multiplica la cantidad en onzas troy (o barriles) por ese precio, y luego por el tipo de cambio de la divisa de visualización seleccionada, para obtener el valor en efectivo final"
+          ],
+          "caption": "Los gramos nunca se multiplican directamente por un precio por onza: siempre se convierten primero a onzas troy."
+        },
+        "anatomy": {
+          "intro": "Oro, plata y petróleo se cotizan en unidades y magnitudes muy distintas — esto compara, uno junto a otro, un precio por unidad ilustrativo de cada uno.",
+          "labelGold": "Oro (USD/g)",
+          "labelSilver": "Plata (USD/g)",
+          "labelOil": "Petróleo (USD/barril)",
+          "caption": "El oro se cotiza aproximadamente a 70 veces el precio de la plata por gramo, mientras que el petróleo se cotiza por barril y no por peso en absoluto — la herramienta conserva la unidad natural de cada materia prima en lugar de forzar las tres a una sola."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "peso / barriles",
+            "meaning": "La cantidad introducida — un peso para oro/plata, o un número de barriles para petróleo.",
+            "unit": "gramo, onza troy o barril"
+          },
+          {
+            "symbol": "weightUnit",
+            "meaning": "En qué unidad está el peso introducido (gramo u onza troy) — solo aplica a oro y plata.",
+            "unit": "—"
+          },
+          {
+            "symbol": "precio por onza troy / barril",
+            "meaning": "El precio actual en vivo en USD de una onza troy del metal, o de un barril de petróleo.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "fxRatePerUnit",
+            "meaning": "Unidades de la divisa de visualización seleccionada por 1 dólar estadounidense; 1 deja el valor en USD.",
+            "unit": "divisa de visualización / USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un peso, precio o tipo de cambio negativo o no finito devuelve cero, no un valor negativo ni NaN",
+            "description": "Tanto el cálculo del valor del metal como el del petróleo comprueban que cada una de sus entradas numéricas sea finita y no negativa antes de multiplicar — si alguna falla esa comprobación, el resultado completo pasa a ser 0, en lugar de dejar que una fuente de precios defectuosa o un signo negativo perdido produzcan un valor en efectivo absurdo."
+          },
+          {
+            "title": "Convertir un peso a la unidad en la que ya está es una operación nula, no un cálculo desperdiciado",
+            "description": "La conversión de peso comprueba primero si la unidad de origen y la de destino coinciden, y devuelve la cantidad sin cambios — nunca encamina una 'conversión' de gramo a gramo o de onza a onza a través de la constante de la onza troy."
+          },
+          {
+            "title": "La conversión a onzas troy usa una constante exacta, no una aproximación redondeada",
+            "description": "El valor de una onza troy en gramos es 31,1034768 —el valor exacto estandarizado internacionalmente— en lugar de un redondeado '31,1', de modo que convertir de un lado a otro entre gramos y onzas troy nunca introduce una deriva de redondeo acumulada."
+          },
+          {
+            "title": "El petróleo no tiene, por diseño, ningún selector de unidad de peso",
+            "description": "El panel de entrada solo muestra el selector gramo/onza troy cuando la materia prima seleccionada no es petróleo — el petróleo siempre se introduce y se cotiza en barriles, ya que es la unidad en la que se cotiza su precio en vivo."
+          },
+          {
+            "title": "Una cantidad introducida no finita se trata como cero antes de ejecutar cualquier conversión",
+            "description": "La propia conversión de peso devuelve 0 para una cantidad no finita (por ejemplo, una entrada vacía o escrita a medias), de modo que un número incompleto en el campo de cantidad nunca llega a la multiplicación del precio como NaN."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta convierte gramos a onzas troy en lugar de al revés?",
+            "answer": "Los precios del oro y la plata se cotizan internacionalmente por onza troy, no por gramo — así que la onza troy es la 'unidad de fijación de precios' interna de la herramienta. Cualquier cantidad introducida en gramos se convierte primero a onzas troy para poder multiplicarla directamente por ese precio por onza."
+          },
+          {
+            "question": "¿Por qué la constante de conversión a onzas troy es tan precisa (31,1034768) en lugar de redondeada?",
+            "answer": "Una onza troy se define por convención internacional como exactamente 31,1034768 gramos. Usar el '31,1' redondeado introduciría un error pequeño pero real que se acumula cada vez que un importe se convierte de un lado a otro entre las dos unidades."
+          },
+          {
+            "question": "¿Puedo ver el petróleo cotizado por peso en lugar de por barril?",
+            "answer": "No — la herramienta siempre cotiza el petróleo por barril, en línea con cómo lo cotiza realmente el proveedor de datos en vivo (crudo WTI, USD por barril). El selector gramo/onza troy solo aparece para oro y plata, que son materias primas genuinamente basadas en el peso."
+          },
+          {
+            "question": "¿Cómo se calcula el valor en SAR (u otra divisa) a partir del precio en USD?",
+            "answer": "El precio por unidad denominado en USD simplemente se multiplica por el tipo en unidades por USD de la divisa — el mismo mecanismo de pivote que usa el Conversor de Divisas — de modo que cambiar la divisa de visualización no requiere una fuente de precios separada de oro/plata/petróleo para cada divisa, solo una multiplicación adicional."
+          }
+        ]
+      },
+      "weather-forecast": {
+        "version": "v1",
+        "description": "Referencia técnica de la herramienta de Pronóstico del Tiempo: cómo se usan las coordenadas de una ciudad buscada o predefinida para obtener las condiciones actuales y una previsión de 7 días, cómo se traducen los códigos de tiempo y las unidades brutas para su visualización, las variables implicadas y los casos límite gestionados.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionAnatomy": "Anatomía de un pronóstico diario",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Sistemas de unidades",
+          "modesValue": "2",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "°F = °C × 9⁄5 + 32  |  °C = (°F − 32) × 5⁄9  |  mph = km/h ÷ 1,609344",
+          "note": "Estas son las únicas fórmulas aritméticas verdaderas de la herramienta — todo lo demás (elegir una ciudad, obtener un pronóstico, categorizar una condición) es una consulta de datos o una petición de red, no un cálculo."
+        },
+        "flowchart": {
+          "intro": "Solo el último paso implica aritmética — todo lo anterior consiste en resolver una ubicación y obtener datos.",
+          "steps": [
+            "Busca una ciudad por nombre, o elige una de las ciudades prioritarias integradas",
+            "Resuelve la ciudad elegida a un par de latitud/longitud (los resultados de búsqueda ya incluyen coordenadas; las ciudades prioritarias las traen integradas)",
+            "Obtén las condiciones actuales y un pronóstico de 7 días para esas coordenadas desde la API de Open-Meteo",
+            "Asigna el código numérico de tiempo (WMO) que devuelve la API a una de las categorías de tiempo conocidas por la herramienta (cielo despejado, lluvia, nieve, tormenta eléctrica, etc.), recurriendo a 'desconocido' para cualquier código que no esté en la tabla",
+            "Convierte los valores de temperatura y velocidad del viento al sistema de unidades elegido por el visitante (métrico o estadounidense) antes de renderizar la tarjeta de condiciones actuales y el panel de 7 días"
+          ],
+          "caption": "Solo el último paso implica aritmética — todo lo anterior consiste en resolver una ubicación y obtener datos, no en calcular un valor."
+        },
+        "anatomy": {
+          "intro": "La entrada de pronóstico de un solo día es una estructura pequeña, no un único número — esto compara dos de sus campos uno junto al otro para un día ilustrativo.",
+          "labelHigh": "Máxima (°C)",
+          "labelLow": "Mínima (°C)",
+          "caption": "Cada día del pronóstico de 7 días lleva su propia temperatura máxima y mínima, junto con una categoría de tiempo y una probabilidad de precipitación — esto muestra solo el rango de temperatura de un día representativo."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "latitude, longitude",
+            "meaning": "Las coordenadas de la ciudad seleccionada, usadas para consultar la API de pronóstico.",
+            "unit": "grados decimales"
+          },
+          {
+            "symbol": "weather_code",
+            "meaning": "Un código numérico WMO que devuelve la API para las condiciones actuales o de pronóstico.",
+            "unit": "—"
+          },
+          {
+            "symbol": "unitSystem",
+            "meaning": "Si la temperatura y la velocidad del viento se muestran en unidades métricas (°C, km/h) o estadounidenses (°F, mph).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un código de tiempo no reconocido recurre a 'desconocido' en lugar de fallar",
+            "description": "La función de categoría de tiempo busca el código numérico en una tabla fija que cubre los códigos WMO que Open-Meteo realmente devuelve; cualquier código fuera de esa tabla (un cambio en la API, un valor no documentado) se resuelve como categoría 'desconocido' en lugar de lanzar un error o mostrar un icono en blanco."
+          },
+          {
+            "title": "Seleccionar la ciudad inicial ya cargada no vuelve a obtener el pronóstico",
+            "description": "El rastreador compara las coordenadas de la ciudad recién seleccionada con la ciudad inicial de la página y omite la petición por completo cuando coinciden — el pronóstico renderizado en el servidor para la ciudad de inicio se reutiliza en lugar de solicitarse una segunda vez."
+          },
+          {
+            "title": "Una petición de pronóstico fallida establece un estado de error visible, no una visualización obsoleta silenciosa",
+            "description": "Si la petición del pronóstico no se resuelve con éxito, el rastreador establece su estado en 'error' en lugar de dejar el pronóstico de la ciudad anterior en pantalla sin explicación — la interfaz puede entonces mostrar que los datos de la nueva ciudad no se cargaron."
+          },
+          {
+            "title": "La búsqueda de ciudad solo consulta la API una vez escritos al menos dos caracteres",
+            "description": "El efecto de búsqueda se detiene de inmediato para una consulta normalizada más corta de 2 caracteres, evitando una petición de red (y un conjunto de resultados vacío o ruidoso) por una sola pulsación de tecla."
+          },
+          {
+            "title": "Un valor de temperatura o velocidad del viento no finito se convierte en cero en lugar de NaN",
+            "description": "Todas las funciones de conversión de temperatura y velocidad del viento se protegen comprobando que el valor sea finito antes de convertir, de modo que una lectura defectuosa o ausente de la API se muestra como 0 en lugar de propagar 'NaN°' en la página."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué la herramienta solo admite los sistemas de unidades métrico y estadounidense, no otros?",
+            "answer": "La temperatura (°C/°F) y la velocidad del viento (km/h/mph) son los dos pares de unidades que realmente difieren entre regiones en la información meteorológica cotidiana; cualquier otro valor que devuelve la API, como la probabilidad de precipitación o la humedad, ya es un porcentaje y no necesita conversión de unidades."
+          },
+          {
+            "question": "¿De dónde provienen los iconos y categorías del tiempo?",
+            "answer": "Open-Meteo devuelve un código numérico de tiempo WMO (Organización Meteorológica Mundial) tanto para las condiciones actuales como para cada día del pronóstico. La herramienta asigna ese código a una de sus propias categorías conocidas —cielo despejado, lluvia, nieve, tormenta eléctrica, etc.— en lugar de mostrar el código numérico en bruto a los visitantes."
+          },
+          {
+            "question": "¿Por qué no hay una sección de noticias o alertas, a diferencia de las herramientas de Divisas o Cripto?",
+            "answer": "Esta herramienta está deliberadamente limitada a las condiciones actuales y una previsión de 7 días de una única fuente de datos gratuita y sin clave (Open-Meteo). Las alertas de tiempo severo requerirían un segundo proveedor de datos específico de cada región, y se omitieron para mantener la obtención de datos de la herramienta simple y coherente en todo el mundo."
+          },
+          {
+            "question": "¿Seleccionar una nueva ciudad siempre desencadena una petición de red nueva?",
+            "answer": "Solo cuando las coordenadas de la nueva ciudad difieren de aquella cuyo pronóstico ya está cargado — volver a seleccionar la misma ciudad de inicio con la que cargó la página reutiliza el pronóstico ya obtenido en el servidor, en lugar de solicitarlo de nuevo."
+          }
+        ]
+      },
+      "dice-roller": {
+        "version": "v1",
+        "description": "Referencia técnica del Lanzador de Dados: cómo se extrae la cara de cada dado de una distribución aleatoria uniforme, cómo se validan el número de dados y de caras, las variables implicadas y los casos límite gestionados.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionDistribution": "Distribución de las tiradas",
+        "sectionAnatomy": "Anatomía de un total con varios dados",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Tipos de dado",
+          "modesValue": "6",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "tirada = ⌊ funciónAleatoria() × caras ⌋ + 1  |  total = Σ tiradas",
+          "note": "Se espera que funciónAleatoria() devuelva un valor en [0, 1) —el contrato estándar de Math.random()—, así que multiplicar por el número de caras y redondear hacia abajo produce un entero uniformemente distribuido de 0 a caras−1, y sumar 1 desplaza ese rango a la numeración habitual de dados de 1 a caras."
+        },
+        "flowchart": {
+          "intro": "Cada dado se lanza de forma independiente con la misma fórmula — el total solo se calcula después, a partir del conjunto ya terminado de tiradas.",
+          "steps": [
+            "Valida que el número de dados sea un número entero entre 1 y 20",
+            "Valida que el número de caras sea uno de los seis tipos de dado admitidos: 4, 6, 8, 10, 12 o 20",
+            "Para cada dado, extrae un valor de la fuente aleatoria y asígnalo a una cara entera usando ⌊aleatorio × caras⌋ + 1",
+            "Recoge el resultado de cada dado individual en un arreglo de tiradas, en el orden en que se lanzaron los dados",
+            "Suma todas las tiradas del arreglo para obtener el total, y muestra tanto las tiradas individuales como el total"
+          ],
+          "caption": "Cada dado se lanza de forma independiente con la misma fórmula — el total es solo una suma calculada después, no un sorteo aleatorio aparte."
+        },
+        "distribution": {
+          "intro": "Como cada cara es igualmente probable, lanzar el mismo dado repetidamente reparte los resultados de manera uniforme por su rango, centrados en el promedio matemático del dado.",
+          "labelAverage": "Promedio",
+          "caption": "Ocho tiradas de muestra de un dado de seis caras se dispersan por las seis caras, agrupándose vagamente en torno al promedio real de 3,5 — la mitad entre 1 y 6."
+        },
+        "anatomy": {
+          "intro": "Lanzar más de un dado informa de cada resultado individual junto a su suma, así que el total nunca es un número misterioso.",
+          "labelDie1": "Dado 1",
+          "labelDie2": "Dado 2",
+          "labelDie3": "Dado 3",
+          "totalLabel": "Total",
+          "caption": "Tres dados que muestran 4, 2 y 6 suman un total mostrado de 12 — las tiradas individuales y el total siempre se muestran juntos."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "diceCount",
+            "meaning": "Cuántos dados lanzar de una vez.",
+            "unit": "1–20"
+          },
+          {
+            "symbol": "faces",
+            "meaning": "Cuántas caras tiene cada dado.",
+            "unit": "4, 6, 8, 10, 12 o 20"
+          },
+          {
+            "symbol": "randomFn",
+            "meaning": "La fuente aleatoria de la que se extrae la cara de cada dado; por defecto Math.random, pero se puede sustituir para pruebas deterministas.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un número de dados fuera de 1–20, o que no sea un número entero, se rechaza con un error de 'número de dados no válido'",
+            "description": "Se comprueba que el número de dados sea entero junto con el rango de 1 a 20 en una sola condición — un número fraccionario (como 2,5) se rechaza por la misma razón que un número de 0 o 25, ya que ninguno describe un número real y lanzable de dados."
+          },
+          {
+            "title": "Cualquier número de caras fuera del conjunto fijo {4, 6, 8, 10, 12, 20} se rechaza con un error de 'caras no válidas'",
+            "description": "La calculadora comprueba la pertenencia a una lista explícita de los seis tipos de dado admitidos en lugar de solo un rango numérico — un número de caras como 7 o 100 se rechaza aunque sea un entero perfectamente válido, porque no se modela ningún dado físico así."
+          },
+          {
+            "title": "Ambos casos de error siguen devolviendo success: true, con el error expuesto mediante un campo en lugar de una excepción lanzada",
+            "description": "Incluso un número de dados o de caras no válido produce un objeto de resultado exitoso normal (con el arreglo de tiradas vacío y el total en 0) en lugar de lanzar una excepción — quienes llaman a la función comprueban el campo de error para detectar el problema, siguiendo el mismo patrón que cualquier otra calculadora de este proyecto."
+          },
+          {
+            "title": "La fuente aleatoria es inyectable, específicamente para que las pruebas nunca dependan de aleatoriedad real",
+            "description": "randomFn por defecto es Math.random, pero puede sustituirse por cualquier función que devuelva un valor en [0, 1) — esto es lo que permite que las pruebas automatizadas de la calculadora comprueben una secuencia de tiradas exacta y repetible en lugar de un rango de resultados aceptables."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Por qué solo puedo elegir entre seis números de caras concretos en lugar de cualquier número?",
+            "answer": "Esos seis —d4, d6, d8, d10, d12 y d20— son los dados poliédricos estándar usados en juegos de mesa; la herramienta valida contra esa lista fija en lugar de aceptar un número arbitrario de caras, ya que cualquier otro no correspondería a un dado real."
+          },
+          {
+            "question": "¿Es Math.random() suficientemente bueno para tiradas de dados justas?",
+            "answer": "Sí, para el propósito de esta herramienta. Math.random() es un generador pseudoaleatorio de propósito general que produce una distribución uniforme en [0, 1) — más que suficiente para lanzar dados de forma casual. No es criptográficamente seguro, así que no sería apropiado para algo como un sorteo de lotería justo e impredecible, pero no es para eso para lo que sirve esta herramienta."
+          },
+          {
+            "question": "¿Por qué se limita a 20 dados en lugar de permitir más?",
+            "answer": "Veinte es un límite superior práctico elegido para mantener legible la visualización de las tiradas individuales y claramente acotada la entrada — la validación rechaza cualquier número por encima de ese, junto con los números por debajo de 1."
+          },
+          {
+            "question": "¿Cómo se calcula el total al lanzar varios dados?",
+            "answer": "El resultado de cada dado se genera primero, en orden, y se almacena en un arreglo de tiradas — el total es después una suma directa de ese arreglo, calculada una sola vez, no acumulada dado por dado durante el bucle de lanzamiento."
+          }
+        ]
+      },
+      "love-calculator": {
+        "version": "v1",
+        "description": "Referencia técnica de la Calculadora del Amor: cómo se convierten dos nombres en un porcentaje de compatibilidad determinista e independiente del orden usando un hash de cadena, las variables implicadas y los casos límite gestionados. Una herramienta de entretenimiento y diversión, no una medida real de compatibilidad.",
+        "sectionFormula": "Fórmula principal",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionOverlap": "Lo que comparten los dos nombres",
+        "sectionAnatomy": "El resultado como porcentaje",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Rango de resultado",
+          "modesValue": "0–100%",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "combinado = ordenar(normalizar(nombre1), normalizar(nombre2)).unir('+')  |  hash = Σ (hash×31 + puntoDeCódigo) mod 2³²  |  porcentaje = |hash| mod 101",
+          "note": "Este es un hash de cadena de tipo Java clásico (multiplicar por 31 y sumar), no una medida de nada real sobre compatibilidad — los mismos dos nombres siempre se ordenan a la misma cadena combinada y, por tanto, siempre producen el mismo porcentaje, sin importar cuál se escribió primero."
+        },
+        "flowchart": {
+          "intro": "Ordenar los dos nombres antes de aplicar el hash es lo que hace que el resultado sea independiente de cuál se introdujo primero.",
+          "steps": [
+            "Normaliza cada nombre: recorta espacios, conviértelo a minúsculas y elimina todo carácter que no sea una letra o dígito Unicode",
+            "Si alguno de los nombres normalizados está vacío, detente e informa del error 'nombre vacío' en lugar de calcular un hash",
+            "Ordena alfabéticamente los dos nombres normalizados y únelos con un '+', de modo que el orden en que se escribieron los nombres nunca afecte al resultado",
+            "Recorre la cadena combinada carácter a carácter, actualizando un hash acumulado como hash × 31 + el punto de código de ese carácter, envuelto a un entero de 32 bits con signo en cada paso",
+            "Toma el valor absoluto del hash final y redúcelo módulo 101 para obtener un porcentaje de 0 a 100"
+          ],
+          "caption": "Ordenar los dos nombres antes de aplicar el hash es lo que hace que 'Alicia' + 'Roberto' produzca exactamente el mismo resultado que 'Roberto' + 'Alicia'."
+        },
+        "overlap": {
+          "intro": "Ambos nombres se normalizan por separado y luego se combinan en una sola cadena antes de aplicar el hash — esto muestra lo que aporta cada nombre a esa entrada compartida.",
+          "leftLabel": "Nombre 1",
+          "rightLabel": "Nombre 2",
+          "overlapLabel": "Combinado y con hash",
+          "leftOnlyItems": "\"alicia\"",
+          "overlapItems": "\"alicia+roberto\"",
+          "rightOnlyItems": "\"roberto\"",
+          "caption": "Cada nombre se normaliza por sí solo, y luego ambos se ordenan y se unen en una única cadena que la función de hash procesa realmente."
+        },
+        "anatomy": {
+          "intro": "El resultado final es un único porcentaje de 0 a 100 — mostrado aquí como una cuadrícula rellena, de la misma forma en que se visualiza un porcentaje en otras partes de esta documentación.",
+          "caption": "Un hash que se reduce a 73 se muestra como 73 de 100 celdas rellenas — el porcentaje siempre es un número entero dentro de ese rango exacto, nunca negativo y nunca superior a 100."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "name1",
+            "meaning": "El primer nombre introducido.",
+            "unit": "texto"
+          },
+          {
+            "symbol": "name2",
+            "meaning": "El segundo nombre introducido.",
+            "unit": "texto"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Un nombre vacío en cualquiera de los dos lados —incluido uno que solo sean espacios o solo puntuación— devuelve el error 'nombre vacío'",
+            "description": "La normalización elimina los espacios y todo carácter que no sea letra o dígito antes de que se ejecute la comprobación de vacío, así que un nombre escrito como \"---\" o unos pocos espacios se trata correctamente como vacío, igual que un campo genuinamente en blanco."
+          },
+          {
+            "title": "El resultado nunca depende de en qué casilla se escribió cada nombre",
+            "description": "Como los dos nombres normalizados se ordenan antes de unirlos y aplicar el hash, introducir 'Alicia' y 'Roberto' produce el mismo porcentaje idéntico que introducir 'Roberto' y 'Alicia' — la calculadora está diseñada explícitamente para ser independiente del orden."
+          },
+          {
+            "title": "Las diferencias de puntuación y espaciado entre nombres por lo demás idénticos no cambian el resultado",
+            "description": "El paso de eliminación consciente de Unicode quita guiones, apóstrofos y espacios junto con la puntuación ASCII, así que 'Ana-María' y 'AnaMaría' se normalizan a la misma cadena y, por tanto, producen el mismo porcentaje de hash."
+          },
+          {
+            "title": "El hash acumulado se desborda deliberadamente mediante el desbordamiento de enteros de 32 bits, no un número que crece sin límite",
+            "description": "La operación `| 0` tras cada paso de multiplicar y sumar fuerza al hash de vuelta al rango de entero de 32 bits con signo en cada carácter, coincidiendo exactamente con el algoritmo clásico de Java String.hashCode() en lugar de dejar que el valor crezca a un número arbitrariamente grande."
+          },
+          {
+            "title": "Math.abs() antes del módulo gestiona el caso de que el hash caiga en un número negativo",
+            "description": "Como el desbordamiento de 32 bits puede producir un hash intermedio negativo, tomar el valor absoluto antes del paso de módulo 101 es lo que garantiza que el porcentaje final sea siempre no negativo, en lugar de mostrar ocasionalmente una puntuación de compatibilidad negativa."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿Es esto una medida real de compatibilidad romántica?",
+            "answer": "No — esto es explícitamente una herramienta de entretenimiento y diversión. El porcentaje proviene de un hash determinista de cadena de los dos nombres, no de ningún modelo psicológico, astrológico o estadístico de compatibilidad."
+          },
+          {
+            "question": "¿Por qué no importa el orden en que escribo los dos nombres?",
+            "answer": "Los dos nombres normalizados se ordenan alfabéticamente antes de combinarse en la cadena que realmente se somete al hash — así que la función de hash siempre ve la misma entrada combinada sin importar cuál nombre se introdujo primero."
+          },
+          {
+            "question": "¿Obtendré el mismo porcentaje cada vez que introduzca los mismos dos nombres?",
+            "answer": "Sí — el hash es completamente determinista; no hay aleatoriedad en ninguna parte del cálculo. Los mismos dos nombres, en cualquier orden, siempre producen exactamente el mismo porcentaje."
+          },
+          {
+            "question": "¿Por qué las mayúsculas o la puntuación de un nombre no cambian el resultado?",
+            "answer": "Cada nombre se convierte a minúsculas y se despoja de todo lo que no sea una letra o dígito Unicode antes de aplicar el hash, así que 'Ana-María', 'ana maria' y 'ANAMARIA' se normalizan todos a la cadena idéntica y, por tanto, producen el mismo hash."
+          }
+        ]
+      },
+      "random-quote-generator": {
+        "version": "v1",
+        "description": "Referencia técnica del Generador de Citas Aleatorias: cómo un filtro de categoría construye un conjunto de citas, cómo una solicitud de 'Nueva Cita' evita repetir la cita actual, y la colección curada y con fuentes citadas de la que extrae.",
+        "sectionFormula": "Regla de selección",
+        "sectionFlowchart": "Cómo se calcula",
+        "sectionPools": "La colección de citas",
+        "sectionAnatomy": "Anatomía de un resultado de cita",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Casos límite gestionados",
+        "sectionFaq": "Preguntas frecuentes",
+        "sectionRelatedTools": "Herramientas relacionadas",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categorías",
+          "modesValue": "3",
+          "relatedTools": "Herramientas relacionadas",
+          "readTime": "Tiempo de lectura",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "conjunto = categoría === 'todas' ? todasLasCitas : todasLasCitas.filter(c ⇒ c.categoría === categoría)  |  índice = ⌊ funciónAleatoria() × conjunto.longitud ⌋",
+          "note": "Aquí no hay una 'respuesta' aritmética — el resultado es una selección aleatoria de una lista filtrada, no un número calculado, así que esto expresa la regla de selección en lugar de una fórmula en el sentido habitual."
+        },
+        "flowchart": {
+          "intro": "Excluir la cita actual solo reduce el conjunto en una entrada — nunca corre el riesgo de dejar nada para elegir.",
+          "steps": [
+            "Elige un filtro de categoría — Motivacional, Literaria, Filosófica o 'Todas'",
+            "Construye el conjunto correspondiente: todas las citas si se selecciona 'Todas', o solo las citas etiquetadas con la categoría elegida",
+            "Si se trata de una solicitud de 'Nueva Cita', elimina el id de la cita mostrada actualmente de ese conjunto — a menos que hacerlo vaciara el conjunto por completo, en cuyo caso se conserva el conjunto completo",
+            "Extrae un índice aleatorio uniforme dentro del conjunto restante usando la fuente aleatoria",
+            "Muestra el texto, el autor y la fuente citada de esa cita"
+          ],
+          "caption": "Excluir la cita actual solo reduce el conjunto en una entrada — nunca corre el riesgo de no dejar ninguna cita para elegir."
+        },
+        "pools": {
+          "intro": "La colección está repartida uniformemente entre sus tres categorías, cada una documentada de forma independiente con una fuente primaria verificable.",
+          "labelMotivational": "Motivacional",
+          "labelLiterary": "Literaria",
+          "labelPhilosophical": "Filosófica",
+          "caption": "Diez citas en cada una de las tres categorías —treinta en total— todas ellas atribuidas a un discurso, libro o texto publicado real."
+        },
+        "anatomy": {
+          "intro": "Cada cita de la colección es un pequeño registro con cuatro campos — esto muestra de qué se compone realmente un resultado mostrado.",
+          "labelText": "Texto de la cita",
+          "valueText": "\"Pienso, luego existo.\"",
+          "labelAuthor": "Autor",
+          "valueAuthor": "René Descartes",
+          "labelSource": "Fuente",
+          "valueSource": "Discurso del método, 1637",
+          "labelCategory": "Categoría",
+          "valueCategory": "Filosófica",
+          "caption": "Cada cita lleva los mismos cuatro campos, así que el panel de resultados nunca tiene que adivinar qué información hay disponible para mostrar."
+        },
+        "variablesColumns": {
+          "symbol": "Símbolo",
+          "meaning": "Significado",
+          "unit": "Unidad"
+        },
+        "variables": [
+          {
+            "symbol": "category",
+            "meaning": "De qué categoría extraer — Motivacional, Literaria, Filosófica, o 'all' para todas las citas.",
+            "unit": "—"
+          },
+          {
+            "symbol": "excludeId",
+            "meaning": "El id de la cita mostrada actualmente, transmitido solo al hacer clic en 'Nueva Cita', para que pueda filtrarse del siguiente sorteo.",
+            "unit": "—"
+          },
+          {
+            "symbol": "randomFn",
+            "meaning": "La fuente aleatoria usada para elegir un índice dentro del conjunto; por defecto Math.random, sustituible para pruebas deterministas.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Excluir la cita actual nunca vacía el conjunto, incluso en una categoría de una sola cita",
+            "description": "Si filtrar el id de la cita actual dejara cero candidatas, la calculadora recurre en su lugar al conjunto sin filtrar — así que 'Nueva Cita' siempre tiene algo que devolver, incluso en el caso hipotético de una categoría con una sola cita."
+          },
+          {
+            "title": "La categoría 'Todas' agrupa todas las citas sin importar su etiqueta de categoría individual",
+            "description": "Pasar category como 'all' (u omitirlo, ya que por defecto es 'all') omite por completo el filtro de categoría, extrayendo de la colección completa de 30 citas en lugar de solo un tercio de ella."
+          },
+          {
+            "title": "Cada cita lleva una fuente verificable y documentada en lugar de una 'cita de internet' sin atribuir",
+            "description": "El campo de fuente de cada entrada cita un discurso concreto, un libro publicado o un registro histórico — esta fue una decisión de curación deliberada para evitar las atribuciones erróneas, ampliamente difundidas pero no verificables, comunes en las colecciones de citas."
+          },
+          {
+            "title": "La fuente aleatoria es inyectable por exactamente la misma razón que en el Lanzador de Dados",
+            "description": "randomFn por defecto es Math.random, pero acepta cualquier función que devuelva un valor en [0, 1), lo que permite que las pruebas de la calculadora comprueben una selección de cita específica y repetible, en lugar de solo verificar que el resultado pertenece al conjunto esperado."
+          }
+        ],
+        "faq": [
+          {
+            "question": "¿De dónde vienen estas citas? ¿Están verificadas?",
+            "answer": "Cada cita de la colección cita una fuente concreta y comprobable: un discurso nombrado, un libro publicado con su año, o un registro histórico. Fue una decisión deliberada para evitar las 'citas' sin atribuir o mal atribuidas que circulan ampliamente en internet sin ninguna fuente real."
+          },
+          {
+            "question": "¿Puede 'Nueva Cita' mostrarme exactamente la misma cita dos veces seguidas?",
+            "answer": "No por solicitud — hacer clic en 'Nueva Cita' excluye explícitamente el id de la cita mostrada actualmente del conjunto del que se extrae, así que los clics consecutivos tienen garantizado no repetirse, a menos que la categoría seleccionada contenga solo esa cita."
+          },
+          {
+            "question": "¿Cuántas citas hay en cada categoría?",
+            "answer": "Diez en cada una, repartidas uniformemente entre Motivacional, Literaria y Filosófica — treinta citas en total en toda la colección."
+          },
+          {
+            "question": "¿Hay una fórmula detrás de qué cita aparece?",
+            "answer": "No una aritmética — es una selección aleatoria uniforme del conjunto que produzca el filtro de categoría (y la regla de 'excluir la cita actual'). Cada cita de ese conjunto tiene la misma probabilidad de ser elegida."
+          }
+        ]
       }
     }
   }

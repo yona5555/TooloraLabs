@@ -32983,6 +32983,759 @@
             "answer": "The word counter doesn't distinguish spoken dialogue from stage directions, speaker labels, or bracketed notes — it counts every whitespace-separated chunk in the input as a word. If your script includes non-spoken text, removing it before pasting will give a more accurate estimate of actual speaking time."
           }
         ]
+      },
+      "forex-converter": {
+        "version": "v1",
+        "description": "Technical reference for the Forex Converter: how a currency pair's live daily rate is used to convert an amount through a shared USD pivot, the variables it accepts, and the edge cases it handles.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Why Conversion Scales Linearly",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Conversion Paths",
+          "modesValue": "1",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "convertedAmount = (amount ÷ fromRatePerUsd) × toRatePerUsd",
+          "note": "Both currencies' rates are expressed the same way — units of that currency per 1 US dollar — so USD acts as a shared pivot: dividing by the 'from' rate converts the amount into its USD equivalent, then multiplying by the 'to' rate converts that USD value into the destination currency, all in one pass."
+        },
+        "flowchart": {
+          "intro": "A conversion never compares two currencies directly — it always routes the amount through USD as a common unit first.",
+          "steps": [
+            "Pick a 'from' and a 'to' currency from the live rate list (over 30 major and Arab-region currencies)",
+            "Look up each currency's rate as units-per-USD from the daily-refreshed provider",
+            "Divide the entered amount by the 'from' currency's rate to get its equivalent value in US dollars",
+            "Multiply that USD value by the 'to' currency's rate to convert it into the destination currency",
+            "Display the result, formatted with the destination currency's code"
+          ],
+          "caption": "Every conversion passes through USD once, even when neither the 'from' nor the 'to' currency is USD itself."
+        },
+        "anatomy": {
+          "intro": "Because the formula only ever multiplies the entered amount by a fixed ratio (toRate ÷ fromRate) for a given currency pair, doubling or scaling the amount scales the result by exactly the same factor — the relationship is a straight line through the origin.",
+          "xLabel": "Amount (USD)",
+          "yLabel": "Converted (EUR)",
+          "caption": "At a fixed USD→EUR rate of 0.86, the converted amount grows in exact proportion to the entered amount."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "amount",
+            "meaning": "The quantity of the 'from' currency to convert.",
+            "unit": "from currency"
+          },
+          {
+            "symbol": "fromRatePerUsd",
+            "meaning": "Units of the 'from' currency per 1 US dollar, from the live rate list.",
+            "unit": "from currency / USD"
+          },
+          {
+            "symbol": "toRatePerUsd",
+            "meaning": "Units of the 'to' currency per 1 US dollar, from the live rate list.",
+            "unit": "to currency / USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A non-finite or missing amount converts to zero, not an error",
+            "description": "If the amount can't be parsed into a finite number (empty field, stray characters), the conversion function returns 0 outright rather than throwing or showing NaN — the result panel simply shows a zero amount until a valid number is entered."
+          },
+          {
+            "title": "A 'from' rate of zero or less is rejected outright",
+            "description": "The conversion explicitly guards against fromRatePerUsd being zero or negative — since dividing by such a value would produce an infinite or nonsensical result — and returns 0 instead, protecting against any corrupted or missing entry in the live rate list."
+          },
+          {
+            "title": "An unrecognized currency code produces a zero result, not a crash",
+            "description": "If either the 'from' or 'to' currency code doesn't match any entry in the loaded rate list (for example, right after a page-load race or a bad code), the lookup returns undefined and the tool renders a zero amount instead of throwing on a missing property."
+          },
+          {
+            "title": "Selecting the same currency on both sides is a valid, safe input",
+            "description": "Converting a currency to itself divides and then multiplies by the exact same rate, returning the original amount unchanged — the tool doesn't special-case this, because the general formula already produces the correct identity result."
+          },
+          {
+            "title": "Swap keeps both currency selections intact",
+            "description": "The swap control exchanges the 'from' and 'to' codes directly, without touching the entered amount or refetching rates, so the very same rate list is reused for the reversed pair."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the converter always go through USD, even for two non-USD currencies?",
+            "answer": "The live rate list only stores each currency's rate against a single common base — the US dollar — so it never has to store or fetch a direct exchange rate for every possible currency pair. Converting through that shared pivot means the same small dataset can price any pair, at the cost of one extra multiplication."
+          },
+          {
+            "question": "How often are the exchange rates updated?",
+            "answer": "The rate list is refreshed once daily from a public market-data provider. This is accurate enough for everyday conversions and estimates, but it can lag the live interbank market — which moves continuously — so it isn't suitable for time-sensitive trading decisions."
+          },
+          {
+            "question": "Why does the converted amount always look proportional to the amount I typed?",
+            "answer": "Because the conversion formula is a simple multiplication by a fixed ratio for a given currency pair (toRate ÷ fromRate), the relationship between input and output is perfectly linear — entering twice the amount always produces exactly twice the converted result, as long as the underlying rates haven't changed."
+          },
+          {
+            "question": "What happens if I enter an amount before the currency list has finished loading?",
+            "answer": "The 'from' and 'to' lookups return undefined until the rate list arrives, and the conversion function's guards treat that the same as an invalid rate — it returns zero rather than crashing, so the result panel briefly shows 0 until the live rates are ready."
+          }
+        ]
+      },
+      "crypto-converter": {
+        "version": "v1",
+        "description": "Technical reference for the Crypto Converter: how two cryptocurrencies' live USD prices are used to convert an amount between them, how the 'what if I had invested' return is computed, the variables involved, and the edge cases handled.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "The \"What If I Had Invested\" Return",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Features",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "4 min"
+        },
+        "formula": {
+          "expression": "convertedAmount = (amount × fromPriceUsd) ÷ toPriceUsd  |  profitLoss = (invested ÷ priceThen × priceNow) − invested",
+          "note": "Unlike the Forex Converter's units-per-USD rates, each coin's price here is already USD-per-coin — so converting multiplies by the source coin's price and divides by the destination coin's price, the opposite order from a units-per-USD pivot."
+        },
+        "flowchart": {
+          "intro": "Each coin's own USD price acts as the shared pivot between any two coins, the same role USD-per-unit rates play in the Forex Converter.",
+          "steps": [
+            "Pick a 'from' and a 'to' coin from the live top-100-by-market-cap list, or search for any other coin by name or symbol",
+            "Look up each coin's current USD price — coins found only through search are added to the local list the moment they're returned",
+            "Multiply the entered amount by the 'from' coin's USD price to get its value in US dollars",
+            "Divide that USD value by the 'to' coin's USD price to get the equivalent amount of the destination coin",
+            "Display the result in the destination coin, alongside a fiat readout"
+          ],
+          "caption": "Both coins' USD prices act as a shared pivot, exactly like the units-per-USD rates in the Forex Converter, just expressed the other way around."
+        },
+        "anatomy": {
+          "intro": "The 'what if I had invested' feature is a separate calculation from the converter above it: it compares a fixed USD amount invested at one price against its value at today's price.",
+          "label": "Value",
+          "xUnit": " (now)",
+          "caption": "A hypothetical $500 invested at an earlier price is worth $820 today — the profit is simply today's value minus the amount invested."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "amount",
+            "meaning": "The quantity of the 'from' coin to convert.",
+            "unit": "from coin"
+          },
+          {
+            "symbol": "fromPriceUsd",
+            "meaning": "The 'from' coin's current price in US dollars.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "toPriceUsd",
+            "meaning": "The 'to' coin's current price in US dollars.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "amountInvested",
+            "meaning": "A hypothetical US dollar amount invested at a past price, for the return calculator.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "priceThenUsd",
+            "meaning": "The coin's USD price at the hypothetical purchase date.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "priceNowUsd",
+            "meaning": "The coin's current USD price.",
+            "unit": "USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A non-positive or non-finite 'to' price returns zero, not an error",
+            "description": "convertCryptoAmount explicitly checks that toPriceUsd is finite and greater than zero before dividing — since a coin with no valid price (missing data, or a search result still loading) would otherwise divide by zero or a nonsensical value; it returns 0 instead."
+          },
+          {
+            "title": "The 'what if' calculator rejects an invested amount of zero or less",
+            "description": "calculateInvestmentReturn returns null — not a zero-value result — for a non-positive or non-finite invested amount, so the UI can distinguish 'no valid input yet' from a genuine (if unlikely) $0 outcome."
+          },
+          {
+            "title": "A historical price of zero or less is also rejected, but today's price is allowed to be exactly zero",
+            "description": "priceThenUsd must be strictly positive (a coin can't have been bought at a worthless or negative price), while priceNowUsd only has to be non-negative — a coin's current price can legitimately fall to zero, and the calculator still reports a full loss rather than refusing to compute."
+          },
+          {
+            "title": "A coin found only through search is remembered so its price stays available",
+            "description": "onCoinDiscovered appends a newly searched-up coin to the working coin list exactly once — checked by id — so switching the 'from' or 'to' selector back to that coin later still finds its price, without needing to search for it again."
+          },
+          {
+            "title": "Historical chart data is capped at 365 days back",
+            "description": "MAX_HISTORY_DAYS reflects the crypto data provider's own limit on free historical queries; isWithinSupportedHistory compares calendar days in UTC (not raw timestamps) so the boundary date itself — exactly 365 days ago — is still accepted rather than rejected by a few hours of rounding error."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does converting crypto multiply by one price and divide by the other, instead of using a rate the way the Forex Converter does?",
+            "answer": "Each coin's price is already quoted directly in US dollars (dollars per coin), not the other way around. Multiplying by the source coin's price converts the amount to USD, and dividing by the destination coin's price converts that USD value into the destination coin — mathematically the same USD-pivot idea as the Forex Converter, just phrased with prices instead of units-per-dollar rates."
+          },
+          {
+            "question": "Is the 'what if I had invested' feature the same as live trading data?",
+            "answer": "No — it's a simple, transparent arithmetic illustration (amount ÷ then-price × now-price) meant for education, using whatever two prices you supply. It doesn't account for trading fees, slippage, taxes, or the exact moment a real trade would have executed."
+          },
+          {
+            "question": "What happens if I search for a coin that isn't in the initial top-100 list?",
+            "answer": "The search calls a dedicated lookup and, once found, adds that coin to the page's working list via onCoinDiscovered — so it appears in the 'from'/'to' pickers and keeps working normally, including in the historical chart and what-if calculator, without a page reload."
+          },
+          {
+            "question": "Why can't I chart crypto prices further back than a year?",
+            "answer": "The free tier of the market-data provider this tool uses caps historical daily data at 365 days. Requesting further back isn't offered by the date picker, since the underlying data simply doesn't exist at that plan level."
+          }
+        ]
+      },
+      "commodities-tracker": {
+        "version": "v1",
+        "description": "Technical reference for the Commodities Tracker: how a weight of gold or silver, or a number of oil barrels, is converted into a cash value using live per-unit prices and an exact troy-ounce conversion, the variables involved, and the edge cases handled.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Comparing Commodity Unit Prices",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Commodities",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "metalValue = weight(troy oz) × pricePerTroyOunce × fxRate  |  oilValue = barrels × pricePerBarrel × fxRate  |  1 troy oz = 31.1034768 g",
+          "note": "Gold and silver share one value formula (they're both priced per troy ounce); oil uses the same shape with barrels standing in for weight. An fxRate of 1 prices the result in US dollars; any other units-per-USD rate reprices it into another currency, exactly like the Forex Converter's pivot."
+        },
+        "flowchart": {
+          "intro": "Weight is always normalized to troy ounces before it ever meets a price, since that's the unit metal prices are actually quoted in.",
+          "steps": [
+            "Choose a commodity — gold, silver, or oil",
+            "For gold or silver, choose a weight unit (grams or troy ounces) and enter the amount; for oil, enter a number of barrels directly",
+            "If the weight was entered in grams, convert it to troy ounces by dividing by the exact constant 31.1034768",
+            "Look up today's USD price per troy ounce (for metals) or per barrel (for oil) from the live data provider",
+            "Multiply the troy-ounce (or barrel) amount by that price, then by the selected display currency's fx rate, to get the final cash value"
+          ],
+          "caption": "Grams never multiply directly against a per-ounce price — they're converted to troy ounces first, every time."
+        },
+        "anatomy": {
+          "intro": "Gold, silver, and oil are priced in very different units and magnitudes — this compares one illustrative unit price for each, side by side.",
+          "labelGold": "Gold (USD/g)",
+          "labelSilver": "Silver (USD/g)",
+          "labelOil": "Oil (USD/barrel)",
+          "caption": "Gold trades at roughly 70× silver's price per gram, while oil is priced per barrel rather than by weight at all — the tool keeps each commodity's own natural unit instead of forcing all three into one."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "weightAmount / barrels",
+            "meaning": "The quantity entered — a weight for gold/silver, or a barrel count for oil.",
+            "unit": "gram, troy oz, or barrel"
+          },
+          {
+            "symbol": "weightUnit",
+            "meaning": "Which unit the entered weight is in (gram or troy ounce) — only applies to gold and silver.",
+            "unit": "—"
+          },
+          {
+            "symbol": "pricePerTroyOunce / pricePerBarrel",
+            "meaning": "Today's live USD price for one troy ounce of the metal, or one barrel of oil.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "fxRatePerUnit",
+            "meaning": "Units of the selected display currency per 1 US dollar; 1 leaves the value in USD.",
+            "unit": "display currency / USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A negative or non-finite weight, price, or fx rate returns zero, not a negative or NaN value",
+            "description": "calculateMetalValue and calculateOilValue both check every one of their numeric inputs for being finite and non-negative before multiplying — any one failing that check makes the whole result 0, rather than letting a bad price feed or a stray negative sign produce a nonsensical cash value."
+          },
+          {
+            "title": "Converting a weight to the same unit it's already in is a no-op, not a wasted calculation",
+            "description": "convertMetalWeight checks from === to first and returns the amount unchanged — it never routes a gram-to-gram or ounce-to-ounce 'conversion' through the troy-ounce constant at all."
+          },
+          {
+            "title": "The troy ounce conversion uses an exact constant, not a rounded approximation",
+            "description": "TROY_OUNCE_IN_GRAMS is 31.1034768 — the internationally standardized exact value — rather than a rounded '31.1', so converting back and forth between grams and troy ounces never introduces compounding rounding drift."
+          },
+          {
+            "title": "Oil has no weight-unit toggle at all, by design",
+            "description": "The input panel only shows the gram/troy-ounce toggle when the selected commodity isn't oil — oil is always entered and priced in barrels, since that's the unit its live price is quoted in."
+          },
+          {
+            "title": "A non-finite entered amount is treated as zero before any conversion runs",
+            "description": "convertMetalWeight itself returns 0 for a non-finite amount (e.g. an empty or partially typed input), so an incomplete number in the amount field never reaches the pricing multiplication as NaN."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool convert grams to troy ounces instead of the other way around?",
+            "answer": "Gold and silver prices are internationally quoted per troy ounce, not per gram — so troy ounces are the tool's internal 'pricing unit.' Any amount entered in grams is converted to troy ounces first so it can be multiplied directly against that per-ounce price."
+          },
+          {
+            "question": "Why is the troy ounce conversion constant so precise (31.1034768), instead of rounded?",
+            "answer": "A troy ounce is defined as exactly 31.1034768 grams by international convention. Using the rounded '31.1' would introduce a small but real error that compounds every time an amount is converted back and forth between the two units."
+          },
+          {
+            "question": "Can I see oil priced by weight instead of by barrel?",
+            "answer": "No — the tool always prices oil per barrel, matching how oil is actually quoted by the live data provider (WTI crude, USD per barrel). The gram/troy-ounce toggle only appears for gold and silver, which are genuinely weight-based commodities."
+          },
+          {
+            "question": "How is the SAR (or other currency) value calculated from the USD price?",
+            "answer": "The USD-denominated per-unit price is simply multiplied by the currency's units-per-USD rate — the same pivot mechanism the Forex Converter uses — so switching the display currency doesn't require a separate gold/silver/oil price feed for every currency, just one extra multiplication."
+          }
+        ]
+      },
+      "weather-forecast": {
+        "version": "v1",
+        "description": "Technical reference for the Weather Forecast tool: how a searched or preset city's coordinates are used to fetch current conditions and a 7-day outlook, how raw weather codes and units are translated for display, the variables involved, and the edge cases handled.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionAnatomy": "Anatomy of a Day's Forecast",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Unit Systems",
+          "modesValue": "2",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "°F = °C × 9⁄5 + 32  |  °C = (°F − 32) × 5⁄9  |  mph = km/h ÷ 1.609344",
+          "note": "These are the only true arithmetic formulas in the tool — everything else (choosing a city, fetching a forecast, categorizing a condition) is a data lookup or a network fetch, not a calculation."
+        },
+        "flowchart": {
+          "intro": "Only the very last step involves arithmetic — everything before it is resolving a location and fetching data.",
+          "steps": [
+            "Search for a city by name, or pick one of the built-in priority cities",
+            "Resolve the chosen city to a latitude/longitude pair (search results already include coordinates; priority cities have them built in)",
+            "Fetch current conditions and a 7-day forecast for those coordinates from the Open-Meteo API",
+            "Map the numeric WMO weather code the API returns to one of the tool's known weather categories (clear sky, rain, snow, thunderstorm, and so on), falling back to 'unknown' for any code not in the table",
+            "Convert temperature and wind-speed values into the visitor's chosen unit system (metric or US) before rendering the current-conditions card and the 7-day panel"
+          ],
+          "caption": "Only the last step involves arithmetic — everything before it is resolving a location and fetching data, not computing a value."
+        },
+        "anatomy": {
+          "intro": "A single day's forecast entry is a small structure, not one number — this compares two of its fields side by side for one illustrative day.",
+          "labelHigh": "High (°C)",
+          "labelLow": "Low (°C)",
+          "caption": "Each day in the 7-day forecast carries its own high and low, alongside a weather category and precipitation chance — this shows just the temperature spread for one representative day."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "latitude, longitude",
+            "meaning": "The selected city's coordinates, used to query the forecast API.",
+            "unit": "decimal degrees"
+          },
+          {
+            "symbol": "weather_code",
+            "meaning": "A numeric WMO code the API returns for current or forecast conditions.",
+            "unit": "—"
+          },
+          {
+            "symbol": "unitSystem",
+            "meaning": "Whether temperature and wind speed are displayed in metric (°C, km/h) or US units (°F, mph).",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An unrecognized weather code falls back to 'unknown' rather than crashing",
+            "description": "getWeatherCategory looks the numeric code up in a fixed table covering the WMO codes Open-Meteo actually returns; any code outside that table (an API change, an undocumented value) resolves to the 'unknown' category instead of throwing or rendering a blank icon."
+          },
+          {
+            "title": "Selecting the already-loaded initial city doesn't refetch the forecast",
+            "description": "The tracker compares the newly selected city's coordinates against the page's initial city and skips the fetch entirely when they match — the server-rendered forecast for the starting city is reused instead of being requested a second time."
+          },
+          {
+            "title": "A failed forecast fetch sets a visible error state, not a silent stale display",
+            "description": "If the forecast request doesn't resolve successfully, the tracker sets its status to 'error' rather than leaving the previous city's forecast on screen unexplained — the UI can then show that the new city's data failed to load."
+          },
+          {
+            "title": "The city search only queries the API once at least two characters are typed",
+            "description": "The search effect exits immediately for a normalized query shorter than 2 characters, avoiding a network request (and an empty or noisy result set) for a single keystroke."
+          },
+          {
+            "title": "A non-finite temperature or wind-speed value converts to zero rather than NaN",
+            "description": "celsiusToFahrenheit, fahrenheitToCelsius, kmhToMph, and mphToKmh all guard with Number.isFinite before converting, so a malformed or missing reading from the API renders as 0 instead of propagating 'NaN°' onto the page."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why does the tool only support metric and US unit systems, not others?",
+            "answer": "Temperature (°C/°F) and wind speed (km/h/mph) are the two unit pairs that actually differ between regions in everyday weather reporting; every other value the API returns, like precipitation chance and humidity, is already a percentage and needs no unit conversion."
+          },
+          {
+            "question": "Where do the weather icons and categories come from?",
+            "answer": "Open-Meteo returns a numeric WMO (World Meteorological Organization) weather code for both current conditions and each forecast day. The tool maps that code to one of its own known categories — clear sky, rain, snow, thunderstorm, and so on — rather than showing the raw numeric code to visitors."
+          },
+          {
+            "question": "Why is there no news or alerts section, unlike the Forex or Crypto tools?",
+            "answer": "This tool is deliberately scoped to current conditions and a 7-day outlook from one free, keyless data source (Open-Meteo). Severe weather alerts would require a second, region-specific data provider and were left out to keep the tool's data sourcing simple and consistent worldwide."
+          },
+          {
+            "question": "Does selecting a new city always trigger a fresh network request?",
+            "answer": "Only when the new city's coordinates differ from whichever city's forecast is already loaded — reselecting the same starting city the page loaded with reuses the forecast that was already fetched on the server, instead of requesting it again."
+          }
+        ]
+      },
+      "dice-roller": {
+        "version": "v1",
+        "description": "Technical reference for the Dice Roller: how each die's face is drawn from a uniform random distribution, how dice and face counts are validated, the variables involved, and the edge cases handled.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionDistribution": "Roll Distribution",
+        "sectionAnatomy": "Anatomy of a Multi-Die Total",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Die Types",
+          "modesValue": "6",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "roll = ⌊ randomFn() × faces ⌋ + 1  |  total = Σ rolls",
+          "note": "randomFn() is expected to return a value in [0, 1) — the standard contract of Math.random() — so multiplying by the face count and flooring produces a uniformly distributed integer from 0 to faces−1, and adding 1 shifts that range to the usual 1-to-faces die labeling."
+        },
+        "flowchart": {
+          "intro": "Every die is rolled independently with the same formula — the total is only computed afterward, from the finished set of rolls.",
+          "steps": [
+            "Validate that the dice count is a whole number between 1 and 20",
+            "Validate that the face count is one of the six supported die types: 4, 6, 8, 10, 12, or 20",
+            "For each die, draw a value from the random source and map it to an integer face using ⌊random × faces⌋ + 1",
+            "Collect every individual die's result into a rolls array, in the order the dice were rolled",
+            "Sum every roll in the array to produce the total, and display both the individual rolls and the total"
+          ],
+          "caption": "Every die is rolled independently with the same formula — the total is just a sum computed afterward, not a separate random draw."
+        },
+        "distribution": {
+          "intro": "Because each face is equally likely, rolling the same die repeatedly spreads results evenly across its range, centered on the die's mathematical average.",
+          "labelAverage": "Average",
+          "caption": "Eight sample rolls of a six-sided die scatter across all six faces, clustering loosely around the true average of 3.5 — halfway between 1 and 6."
+        },
+        "anatomy": {
+          "intro": "Rolling more than one die reports each individual result alongside their sum, so the total is never a mystery number.",
+          "labelDie1": "Die 1",
+          "labelDie2": "Die 2",
+          "labelDie3": "Die 3",
+          "totalLabel": "Total",
+          "caption": "Three dice showing 4, 2, and 6 sum to a displayed total of 12 — the individual rolls and the total are always shown together."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "diceCount",
+            "meaning": "How many dice to roll in one go.",
+            "unit": "1–20"
+          },
+          {
+            "symbol": "faces",
+            "meaning": "How many faces each die has.",
+            "unit": "4, 6, 8, 10, 12, or 20"
+          },
+          {
+            "symbol": "randomFn",
+            "meaning": "The random source each die's face is drawn from; defaults to Math.random, but can be swapped in for deterministic testing.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "A dice count outside 1–20, or one that isn't a whole number, is rejected with an 'invalid-dice-count' error",
+            "description": "Number.isInteger(diceCount) is checked alongside the 1-to-20 range in a single condition — a fractional count (like 2.5) is rejected for the same reason a count of 0 or 25 is, since none of those describe a real, rollable number of dice."
+          },
+          {
+            "title": "Any face count outside the fixed set {4, 6, 8, 10, 12, 20} is rejected with an 'invalid-faces' error",
+            "description": "The calculator checks membership in an explicit list of the six supported die types rather than just a numeric range — a face count like 7 or 100 is rejected even though it's a perfectly valid integer, because no such physical die is modeled."
+          },
+          {
+            "title": "Both error cases still return success: true, with the error surfaced through a field instead of a thrown exception",
+            "description": "Even an invalid dice count or face count produces a normal successful result object (with rolls set to an empty array and total to 0) rather than throwing — callers check the error field to detect the problem, following the same pattern as every other calculator in this codebase."
+          },
+          {
+            "title": "The random source is injectable, specifically so tests never depend on real randomness",
+            "description": "randomFn defaults to Math.random but can be replaced with any function returning a value in [0, 1) — this is what lets the calculator's automated tests assert an exact, repeatable roll sequence instead of a range of acceptable outcomes."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Why can I only choose from six specific face counts instead of any number?",
+            "answer": "Those six — d4, d6, d8, d10, d12, and d20 — are the standard polyhedral dice used in tabletop games; the tool validates against that fixed list rather than accepting an arbitrary face count, since anything else wouldn't correspond to a real die."
+          },
+          {
+            "question": "Is Math.random() good enough for fair dice rolls?",
+            "answer": "Yes, for this tool's purpose. Math.random() is a general-purpose pseudorandom generator that produces a uniform distribution across [0, 1) — more than sufficient for casual dice rolling. It isn't cryptographically secure, so it wouldn't be appropriate for something like a fair, unpredictable lottery draw, but that isn't what this tool is for."
+          },
+          {
+            "question": "Why does rolling 20 dice cap out there instead of allowing more?",
+            "answer": "Twenty is a practical upper bound chosen to keep the individual-roll display readable and the input clearly bounded — the validation rejects any count above that, alongside rejecting counts below 1."
+          },
+          {
+            "question": "How is the total calculated once I roll multiple dice?",
+            "answer": "Every individual die's result is generated first, in order, and stored in a rolls array — the total is a straightforward sum of that array afterward, computed once, not accumulated die-by-die during the rolling loop."
+          }
+        ]
+      },
+      "love-calculator": {
+        "version": "v1",
+        "description": "Technical reference for the Love Calculator: how two names are turned into a deterministic, order-independent compatibility percentage using a string hash, the variables involved, and the edge cases handled. A fun, entertainment-only tool — not a real measure of compatibility.",
+        "sectionFormula": "Core Formula",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionOverlap": "What the Two Names Share",
+        "sectionAnatomy": "The Result as a Percentage",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Result Range",
+          "modesValue": "0–100%",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "combined = sort(normalize(name1), normalize(name2)).join('+')  |  hash = Σ (hash×31 + codePoint) mod 2³²  |  percentage = |hash| mod 101",
+          "note": "This is a classic Java-style rolling string hash (multiply-by-31-and-add), not a measure of anything real about compatibility — the same two names always sort to the same combined string and therefore always hash to the same percentage, regardless of which name was typed first."
+        },
+        "flowchart": {
+          "intro": "Sorting the two names before hashing is what makes the result independent of which name was entered first.",
+          "steps": [
+            "Normalize each name: trim whitespace, lowercase it, and strip every character that isn't a Unicode letter or digit",
+            "If either normalized name is empty, stop and report the 'empty-name' error instead of computing a hash",
+            "Sort the two normalized names alphabetically and join them with a '+', so the order the names were typed in never affects the result",
+            "Walk the combined string character by character, updating a running hash as hash × 31 + that character's code point, wrapped to a signed 32-bit integer each step",
+            "Take the absolute value of the final hash and reduce it modulo 101 to land on a percentage from 0 to 100"
+          ],
+          "caption": "Sorting the two names before hashing is what makes 'Alice' + 'Bob' produce the exact same result as 'Bob' + 'Alice'."
+        },
+        "overlap": {
+          "intro": "Both names are normalized on their own and then combined into one string before hashing — this shows what each name contributes to that shared input.",
+          "leftLabel": "Name 1",
+          "rightLabel": "Name 2",
+          "overlapLabel": "Combined & Hashed",
+          "leftOnlyItems": "\"alice\"",
+          "overlapItems": "\"alice+bob\"",
+          "rightOnlyItems": "\"bob\"",
+          "caption": "Each name is normalized on its own, then the two are sorted and joined into a single string that the hash function actually processes."
+        },
+        "anatomy": {
+          "intro": "The final result is a single percentage from 0 to 100 — shown here as a filled grid, the same way a percentage is visualized elsewhere in this documentation.",
+          "caption": "A hash that reduces to 73 displays as 73 of 100 cells filled — the percentage is always a whole number in this exact range, never negative and never above 100."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "name1",
+            "meaning": "The first name entered.",
+            "unit": "text"
+          },
+          {
+            "symbol": "name2",
+            "meaning": "The second name entered.",
+            "unit": "text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "An empty name on either side — including one that's only whitespace or only punctuation — returns the 'empty-name' error",
+            "description": "Normalization strips whitespace and every non-letter/non-digit character before the emptiness check runs, so a name typed as just \"---\" or a few spaces is correctly treated as empty, the same as a genuinely blank field."
+          },
+          {
+            "title": "The result never depends on which name was typed into which box",
+            "description": "Because the two normalized names are sorted before being joined and hashed, entering 'Alice' and 'Bob' produces the identical percentage as entering 'Bob' and 'Alice' — the calculator is explicitly designed to be order-independent."
+          },
+          {
+            "title": "Punctuation and spacing differences between otherwise-identical names don't change the result",
+            "description": "The Unicode-aware strip step removes hyphens, apostrophes, and spaces alongside ASCII punctuation, so 'Anne-Marie' and 'AnneMarie' normalize to the same string and therefore hash to the same percentage."
+          },
+          {
+            "title": "The running hash deliberately wraps using 32-bit integer overflow, not an ever-growing number",
+            "description": "The `| 0` operation after each multiply-and-add step forces the hash back into signed 32-bit integer range on every character, matching the classic Java String.hashCode() algorithm exactly rather than letting the value grow into an arbitrarily large number."
+          },
+          {
+            "title": "Math.abs() before the modulo handles the hash landing on a negative number",
+            "description": "Because the 32-bit wraparound can produce a negative intermediate hash, taking the absolute value before the mod-101 step is what guarantees the final percentage is always non-negative, rather than occasionally showing a negative compatibility score."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Is this a real measure of romantic compatibility?",
+            "answer": "No — this is explicitly a fun, entertainment-only tool. The percentage comes from a deterministic string hash of the two names, not from any psychological, astrological, or statistical model of compatibility."
+          },
+          {
+            "question": "Why does the order I type the two names not matter?",
+            "answer": "The two normalized names are sorted alphabetically before being combined into the string that actually gets hashed — so the hash function always sees the same combined input regardless of which name was entered first."
+          },
+          {
+            "question": "Will I get the same percentage every time I enter the same two names?",
+            "answer": "Yes — the hash is fully deterministic; there's no randomness involved anywhere in the calculation. The same two names, in either order, always produce the exact same percentage."
+          },
+          {
+            "question": "Why does capitalization or punctuation in a name not change the result?",
+            "answer": "Every name is lowercased and stripped of anything that isn't a Unicode letter or digit before hashing, so 'Anne-Marie', 'anne marie', and 'ANNEMARIE' all normalize to the identical string and therefore hash identically."
+          }
+        ]
+      },
+      "random-quote-generator": {
+        "version": "v1",
+        "description": "Technical reference for the Random Quote Generator: how a category filter builds a pool of quotes, how a 'New Quote' request avoids repeating the current one, and the curated, source-cited collection it draws from.",
+        "sectionFormula": "Selection Rule",
+        "sectionFlowchart": "How It's Calculated",
+        "sectionPools": "The Quote Collection",
+        "sectionAnatomy": "Anatomy of a Quote Result",
+        "sectionVariables": "Variables",
+        "sectionEdgeCases": "Edge Cases Handled",
+        "sectionFaq": "Frequently Asked Questions",
+        "sectionRelatedTools": "Related Tools",
+        "quickFacts": {
+          "variables": "Variables",
+          "modes": "Categories",
+          "modesValue": "3",
+          "relatedTools": "Related Tools",
+          "readTime": "Read Time",
+          "readTimeValue": "3 min"
+        },
+        "formula": {
+          "expression": "pool = category === 'all' ? allQuotes : allQuotes.filter(q ⇒ q.category === category)  |  index = ⌊ randomFn() × pool.length ⌋",
+          "note": "There's no arithmetic 'answer' here — the result is a random selection from a filtered list, not a computed number, so this expresses the selection rule rather than a formula in the usual sense."
+        },
+        "flowchart": {
+          "intro": "Excluding the current quote only ever narrows the pool by one entry — it never risks leaving nothing to pick from.",
+          "steps": [
+            "Pick a category filter — Motivational, Literary, Philosophical, or 'All'",
+            "Build the matching pool: every quote if 'All' is selected, or only the quotes tagged with the chosen category",
+            "If this is a 'New Quote' request, remove the currently displayed quote's id from that pool — unless doing so would empty the pool entirely, in which case the full pool is kept instead",
+            "Draw a uniformly random index into the remaining pool using the random source",
+            "Display that quote's text, author, and cited source"
+          ],
+          "caption": "Excluding the current quote only ever narrows the pool by one entry — it never risks leaving no quote to pick from."
+        },
+        "pools": {
+          "intro": "The collection is evenly split across its three categories, each independently documented with a verifiable primary source.",
+          "labelMotivational": "Motivational",
+          "labelLiterary": "Literary",
+          "labelPhilosophical": "Philosophical",
+          "caption": "Ten quotes in each of the three categories — thirty in total — every one attributed to a real speech, book, or published text."
+        },
+        "anatomy": {
+          "intro": "Each quote in the collection is one small record with four fields — this shows what a displayed result is actually built from.",
+          "labelText": "Quote Text",
+          "valueText": "\"I think, therefore I am.\"",
+          "labelAuthor": "Author",
+          "valueAuthor": "René Descartes",
+          "labelSource": "Source",
+          "valueSource": "Discourse on the Method, 1637",
+          "labelCategory": "Category",
+          "valueCategory": "Philosophical",
+          "caption": "Every quote carries the same four fields, so the result panel never has to guess which pieces of information are available to display."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Meaning",
+          "unit": "Unit"
+        },
+        "variables": [
+          {
+            "symbol": "category",
+            "meaning": "Which category to draw from — Motivational, Literary, Philosophical, or 'all' for every quote.",
+            "unit": "—"
+          },
+          {
+            "symbol": "excludeId",
+            "meaning": "The currently displayed quote's id, passed only on a 'New Quote' click, so it can be filtered out of the next draw.",
+            "unit": "—"
+          },
+          {
+            "symbol": "randomFn",
+            "meaning": "The random source used to pick an index into the pool; defaults to Math.random, swappable for deterministic testing.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Excluding the current quote never empties the pool, even in a single-quote category",
+            "description": "If filtering out the current quote's id would leave zero candidates, the calculator falls back to the unfiltered pool instead — so 'New Quote' always has something to return, even in the hypothetical case of a category holding only one quote."
+          },
+          {
+            "title": "The 'All' category pools every quote together regardless of its individual category tag",
+            "description": "Passing category as 'all' (or omitting it, since it defaults to 'all') skips the category filter entirely, drawing from the full 30-quote collection rather than any one third of it."
+          },
+          {
+            "title": "Every quote carries a verifiable, documented source rather than an unattributed 'internet quote'",
+            "description": "Each entry's source field cites a specific speech, published book, or historical record — this was a deliberate curation choice to avoid the widely circulated but unverifiable misattributions common in quote collections."
+          },
+          {
+            "title": "The random source is injectable for the exact same reason as in the Dice Roller",
+            "description": "randomFn defaults to Math.random but accepts any [0, 1)-returning function, letting the calculator's tests assert a specific, repeatable quote selection instead of merely checking that the result belongs to the expected pool."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Where do these quotes come from — are they verified?",
+            "answer": "Every quote in the collection cites a specific, checkable source: a named speech, a published book with its year, or a historical record. This was a deliberate choice to avoid the unattributed or misattributed 'quotes' that circulate widely online without any real source."
+          },
+          {
+            "question": "Can 'New Quote' show me the exact same quote twice in a row?",
+            "answer": "Not by request — clicking 'New Quote' explicitly excludes the currently displayed quote's id from the pool it draws from, so back-to-back clicks are guaranteed not to repeat, unless the selected category holds only that one quote."
+          },
+          {
+            "question": "How many quotes are in each category?",
+            "answer": "Ten each, evenly split across Motivational, Literary, and Philosophical — thirty quotes in total across the whole collection."
+          },
+          {
+            "question": "Is there a formula behind which quote appears?",
+            "answer": "Not an arithmetic one — it's a uniformly random selection from whichever pool the category filter (and the 'exclude current quote' rule) produces. Every quote in that pool has an equal chance of being chosen."
+          }
+        ]
       }
     }
   }
