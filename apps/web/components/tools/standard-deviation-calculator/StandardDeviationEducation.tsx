@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CoefficientOfVariationGauge from "./CoefficientOfVariationGauge";
+import NormalDistributionDiagram from "./NormalDistributionDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
@@ -24,6 +25,7 @@ export default async function StandardDeviationEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <NormalDistributionDiagram />
       </InfoSection>
 
       <InfoSection title={t("formula.title")}>

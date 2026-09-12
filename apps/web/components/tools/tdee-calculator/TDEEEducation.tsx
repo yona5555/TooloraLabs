@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import EnergyBalanceDiagram from "./EnergyBalanceDiagram";
+import TDEEComponentBreakdownDiagram from "./TDEEComponentBreakdownDiagram";
 
 type ExampleRow = { profile: string; bmr: string; tdee: string };
 
@@ -27,6 +28,7 @@ export default async function TDEEEducation() {
           caption={t("intro.diagram.caption")}
         />
         <p className="rounded-sm border border-current/20 px-4 py-3 text-sm">{t("intro.disclaimer")}</p>
+        <TDEEComponentBreakdownDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
