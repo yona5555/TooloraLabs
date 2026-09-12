@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import type { DueDateResult as Result } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import PregnancyProgressBar from "./PregnancyProgressBar";
+import DueDateShareExportModal from "./DueDateShareExportModal";
 
 type Props = {
   result: Result;
@@ -36,9 +36,16 @@ export default function DueDateResult({ result }: Props) {
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton
-          text={`${t("dueDate")}: ${dueDateFormatted}, ${t("gestationalAge")}: ${result.gestationalAgeWeeks}w ${result.gestationalAgeDays}d`}
-          className="!text-white dark:!text-white"
+        <DueDateShareExportModal
+          inputRows={[{ label: t("conceptionDate"), value: conceptionFormatted }]}
+          resultRows={[
+            { label: t("gestationalAge"), value: `${result.gestationalAgeWeeks}w ${result.gestationalAgeDays}d` },
+            { label: t("trimester"), value: t(`trimesterValue.${result.trimester}`) },
+            { label: t("daysUntilDue"), value: `${result.daysUntilDue}` },
+          ]}
+          heroLabel={t("dueDate")}
+          heroValue={dueDateFormatted}
+          sentence={t("sentence", { dueDate: dueDateFormatted, weeks: result.gestationalAgeWeeks, days: result.gestationalAgeDays })}
         />
       </div>
       <div className="p-4 lg:p-6">

@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import CountdownShareExportModal from "./CountdownShareExportModal";
 import type { CountdownOutput } from "./types";
 
 type Props = {
@@ -49,10 +50,28 @@ export default function CountdownResult({ result, eventName, hasTarget, digitSty
     );
   }
 
+  const sentence = t("sentence", {
+    event: eventName || t("heading"),
+    days: `${result.days}`,
+    hours: `${result.hours}`,
+    minutes: `${result.minutes}`,
+  });
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{eventName || t("heading")}</h2>
+        <CountdownShareExportModal
+          inputRows={[]}
+          resultRows={[
+            { label: t("hours"), value: `${result.hours}` },
+            { label: t("minutes"), value: `${result.minutes}` },
+            { label: t("seconds"), value: `${result.seconds}` },
+          ]}
+          heroLabel={t("days")}
+          heroValue={`${result.days}`}
+          sentence={sentence}
+        />
       </div>
       <div className="p-4 lg:p-6">
         <p className="mb-4 text-center text-sm font-medium text-zinc-600 dark:text-zinc-300">

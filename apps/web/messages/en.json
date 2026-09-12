@@ -8850,14 +8850,27 @@
           "short": "Short Session",
           "wellPlanned": "Well-Planned",
           "tight": "Tightly Packed"
-        }
+        },
+        "sentence": "This session fits {pomodoros} completed pomodoros, {workMinutes} minutes of focused work."
       },
       "education": {
         "intro": {
           "title": "Understanding the Pomodoro Technique",
           "paragraph1": "The Pomodoro Technique breaks work into short, fixed intervals — traditionally 25 minutes — called \"pomodoros,\" each followed by a short break. After a set number of pomodoros (traditionally four), a longer break follows before the cycle restarts. The core idea is that a single pomodoro is treated as indivisible: once you start one, you commit to it fully rather than splitting your attention, which turns a vague, open-ended task into a concrete, timed unit of focused effort.",
           "paragraph2": "This calculator applies the same idea in reverse: instead of just starting a timer, it works out in advance how many complete work intervals actually fit into the time you have, factoring in every short and long break along the way. That distinction matters because a break only \"counts\" once it fully fits in the remaining time — a session that runs out with only a few minutes left still keeps the pomodoro that was already completed, it just skips the trailing break that no longer fits.",
-          "paragraph3": "The default values (25-minute work intervals, 5-minute short breaks, 15-minute long breaks every 4 pomodoros) follow the technique's traditional numbers, but every value is adjustable — some people find longer 45–50 minute intervals suit deep, uninterrupted work better, while others prefer shorter intervals for tasks that are easy to resume."
+          "paragraph3": "The default values (25-minute work intervals, 5-minute short breaks, 15-minute long breaks every 4 pomodoros) follow the technique's traditional numbers, but every value is adjustable — some people find longer 45–50 minute intervals suit deep, uninterrupted work better, while others prefer shorter intervals for tasks that are easy to resume.",
+          "sessionGauge": {
+            "title": "How Long Is This Study Session?",
+            "intro": "Study sessions range from a quick review to a full day of deep work. Pick a real example below to see where it falls.",
+            "verdict": "{example} — Length: {classification}.",
+            "fact": "This example is {minutes} minutes long.",
+            "minutesValue": "{minutes}m",
+            "zones": {
+              "quick": "Quick Session",
+              "standard": "Standard Session",
+              "extended": "Extended Session"
+            }
+          }
         },
         "examples": {
           "title": "Worked Examples",
@@ -8970,6 +8983,24 @@
         "standardSession": "Standard (2 hr)",
         "deepWorkSession": "Deep Work (4 hr)",
         "allDaySession": "All-Day (8 hr)"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "vector-calculator": {
@@ -19202,7 +19233,8 @@
           "invalid-date": "Enter a valid date to see a result.",
           "invalid-cycle-length": "Enter a cycle length between 20 and 45 days.",
           "date-in-future": "The date entered can't be after today."
-        }
+        },
+        "sentence": "The estimated due date is {dueDate}, at {weeks} weeks {days} days along."
       },
       "quickReference": {
         "title": "The Formulas",
@@ -19212,7 +19244,19 @@
         "intro": {
           "title": "Understanding Due Date Estimation",
           "paragraph1": "A due date is an estimate, not a prediction with pinpoint accuracy — only about 5% of babies are actually born on their calculated due date, with the large majority arriving anywhere within two weeks before or after it. Despite that inherent uncertainty, an estimated due date remains a clinically essential anchor point: it's used to time prenatal screening tests, track fetal growth against expected milestones, and decide when a pregnancy is considered \"full term\" versus early or late.",
-          "paragraph2": "Pregnancy is conventionally measured in \"gestational age,\" counted from the first day of the last menstrual period (LMP) rather than from the actual date of conception — even though conception typically happens about two weeks after that date. This convention exists simply because the LMP date is usually known with confidence, while the exact conception date rarely is. A full-term pregnancy is defined as 280 days (40 weeks) from the LMP, which is equivalent to 266 days (38 weeks) from conception itself."
+          "paragraph2": "Pregnancy is conventionally measured in \"gestational age,\" counted from the first day of the last menstrual period (LMP) rather than from the actual date of conception — even though conception typically happens about two weeks after that date. This convention exists simply because the LMP date is usually known with confidence, while the exact conception date rarely is. A full-term pregnancy is defined as 280 days (40 weeks) from the LMP, which is equivalent to 266 days (38 weeks) from conception itself.",
+          "weekGauge": {
+            "title": "Where Does This Week Fall?",
+            "intro": "A full-term pregnancy spans 42 weeks across three trimesters. Pick a real example below to see which trimester it falls in.",
+            "verdict": "Week {weeks} falls in the {classification}.",
+            "fact": "This example is at week {weeks} of the pregnancy.",
+            "weekValue": "Week {weeks}",
+            "examples": {
+              "firstTrimester": "First Trimester",
+              "secondTrimester": "Second Trimester",
+              "thirdTrimester": "Third Trimester"
+            }
+          }
         },
         "methods": {
           "title": "The Four Calculation Methods",
@@ -19347,6 +19391,24 @@
         "shortCycleExample": "Shorter Cycle (LMP)",
         "conceptionExample": "Conception Date",
         "ivf5dayExample": "IVF 5-Day Transfer"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "ovulation-calculator": {
@@ -20283,7 +20345,9 @@
         "errors": {
           "invalid-date": "Enter valid dates to see a result.",
           "invalid-amount": "Enter a non-negative amount to see a result."
-        }
+        },
+        "sentenceDifference": "That span is {totalDays} days ({years}y {months}m {days}d).",
+        "sentenceResultDate": "The resulting date is {date}."
       },
       "quickReference": {
         "title": "The Math",
@@ -20293,7 +20357,26 @@
         "intro": {
           "title": "Understanding Date Arithmetic",
           "paragraph1": "Calculating with calendar dates is more involved than simple arithmetic because months have unequal lengths (28 to 31 days), years can be leap years (366 days instead of 365), and \"a month later\" doesn't mean a fixed number of days — adding one month to January 31st, for instance, can't literally produce February 31st, since February never has that many days. This calculator handles those irregularities automatically so you get a real, valid calendar date or an accurate day count every time.",
-          "paragraph2": "The two most common date questions — \"how far apart are these two dates?\" and \"what date is a certain duration from now?\" — both come up constantly in everyday planning: tracking an anniversary or a deadline, calculating someone's exact age, figuring out a project's end date from its start and duration, or working out when a warranty or subscription period will lapse."
+          "paragraph2": "The two most common date questions — \"how far apart are these two dates?\" and \"what date is a certain duration from now?\" — both come up constantly in everyday planning: tracking an anniversary or a deadline, calculating someone's exact age, figuring out a project's end date from its start and duration, or working out when a warranty or subscription period will lapse.",
+          "spanGauge": {
+            "title": "How Long Is This Span?",
+            "intro": "Spans of time range from a long weekend to a full decade. Pick a real example below to see where it falls.",
+            "verdict": "{example} — Length: {classification}.",
+            "fact": "This example spans {days} days.",
+            "daysValue": "{days} days",
+            "examples": {
+              "longWeekend": "A Long Weekend",
+              "schoolYear": "A School Year",
+              "pregnancyTerm": "A Pregnancy Term",
+              "presidentialTerm": "A Presidential Term",
+              "decade": "A Decade"
+            },
+            "zones": {
+              "short": "Short",
+              "medium": "Medium",
+              "long": "Long"
+            }
+          }
         },
         "modes": {
           "title": "The Two Modes",
@@ -20419,6 +20502,24 @@
         "projectDuration": "Project Duration",
         "add90Days": "Add 90 Days",
         "subtract5Years": "Subtract 5 Years"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "time-calculator": {
@@ -20451,7 +20552,8 @@
         "invalidTime": "Enter valid times (minutes and seconds between 0 and 59) to see a result.",
         "negativeNote": "Duration 2 was larger than Duration 1, so the result is negative.",
         "totalSeconds": "Total Seconds",
-        "totalSecondsUnit": "seconds"
+        "totalSecondsUnit": "seconds",
+        "sentence": "The result is {clockText} ({totalSeconds} seconds)."
       },
       "quickReference": {
         "title": "The Math",
@@ -20461,7 +20563,25 @@
         "intro": {
           "title": "Understanding Duration Arithmetic",
           "paragraph1": "Adding or subtracting durations expressed in hours, minutes, and seconds requires carrying values between units, much like adding numbers in a non-decimal base: 60 seconds carry into 1 minute, and 60 minutes carry into 1 hour, rather than the base-10 carrying used in ordinary arithmetic. This calculator converts both durations to a single total-seconds value, performs the addition or subtraction on that single number, then converts the result back into hours, minutes, and seconds for display.",
-          "paragraph2": "It's worth distinguishing duration arithmetic (the kind this tool performs) from clock-time arithmetic. Duration arithmetic answers \"how long is 1 hour 45 minutes plus 30 minutes?\" as a pure elapsed-time question, while clock-time arithmetic answers \"what time will it be 3 hours after 11:00 PM?\", which wraps around a 24-hour cycle and depends on a specific starting point on the clock. This tool handles the former; subtracting a larger duration from a smaller one correctly produces a negative result rather than wrapping around."
+          "paragraph2": "It's worth distinguishing duration arithmetic (the kind this tool performs) from clock-time arithmetic. Duration arithmetic answers \"how long is 1 hour 45 minutes plus 30 minutes?\" as a pure elapsed-time question, while clock-time arithmetic answers \"what time will it be 3 hours after 11:00 PM?\", which wraps around a 24-hour cycle and depends on a specific starting point on the clock. This tool handles the former; subtracting a larger duration from a smaller one correctly produces a negative result rather than wrapping around.",
+          "durationGauge": {
+            "title": "How Long Is This Duration?",
+            "intro": "Durations range from a quick coffee break to a full day. Pick a real activity below to see where it falls.",
+            "verdict": "{example} — Duration: {classification}.",
+            "fact": "This example takes about {duration}.",
+            "examples": {
+              "coffeeBreak": "Coffee Break",
+              "movie": "A Movie",
+              "marathonRun": "A Marathon Run",
+              "workday": "A Workday",
+              "fullDay": "A Full Day"
+            },
+            "zones": {
+              "quick": "Quick",
+              "moderate": "Moderate",
+              "long": "Long"
+            }
+          }
         },
         "useCases": {
           "title": "Common Uses",
@@ -20591,6 +20711,24 @@
         "workdayPlusOvertime": "Workday + Overtime",
         "subtractLunchBreak": "Subtract Lunch Break",
         "combineVideoClips": "Combine Video Clips"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     },
     "dice-roller": {
@@ -22756,7 +22894,8 @@
         "days": "Days",
         "hours": "Hours",
         "minutes": "Minutes",
-        "seconds": "Seconds"
+        "seconds": "Seconds",
+        "sentence": "{event} is {days} days, {hours} hours, and {minutes} minutes away."
       },
       "quickReference": {
         "title": "Good to Know",
@@ -22766,7 +22905,19 @@
         "intro": {
           "title": "Understanding This Countdown",
           "paragraph1": "This tool continuously computes the difference between the current time and a target date and time you choose, breaking that difference down into days, hours, minutes, and seconds, and refreshing the display every second so the countdown updates live without ever needing to reload the page.",
-          "paragraph2": "Once the target moment arrives, the countdown automatically switches to counting up instead, showing how much time has elapsed since the event — useful for tracking anniversaries, milestones, or simply confirming that a moment you were counting down to has indeed passed."
+          "paragraph2": "Once the target moment arrives, the countdown automatically switches to counting up instead, showing how much time has elapsed since the event — useful for tracking anniversaries, milestones, or simply confirming that a moment you were counting down to has indeed passed.",
+          "distanceGauge": {
+            "title": "How Far Away Is This?",
+            "intro": "Countdowns range from a few days away to many months out. Pick a real example below to see where it falls.",
+            "verdict": "{example} — {classification}.",
+            "fact": "That's {days} days from now.",
+            "daysValue": "{days} days",
+            "zones": {
+              "soon": "Coming Up Soon",
+              "upcoming": "Upcoming",
+              "farOff": "Far Off"
+            }
+          }
         },
         "useCases": {
           "title": "Common Uses",
@@ -22872,6 +23023,24 @@
         "conferenceTalk": "Conference Talk",
         "productLaunch": "Product Launch",
         "weddingDay": "Wedding Day"
+      },
+      "shareExport": {
+        "triggerLabel": "Share / Export",
+        "modalTitle": "Share or Export This Result",
+        "contactSectionTitle": "Prepared For (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "e.g. Jordan Lee",
+        "contactEmail": "Email",
+        "contactEmailPlaceholder": "e.g. jordan@example.com",
+        "contactPhone": "Phone",
+        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
+        "contactOrganization": "Organization",
+        "contactOrganizationPlaceholder": "e.g. Lee Labs",
+        "contactAddress": "Address",
+        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
+        "shareToSocial": "Share to social media",
+        "generatedOn": "Generated on",
+        "preparedForTitle": "Prepared For"
       }
     }
   },

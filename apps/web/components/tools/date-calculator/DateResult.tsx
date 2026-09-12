@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { DateResult as Result, DateCalculatorMode } from "./types";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import DateSpanDiagram from "./DateSpanDiagram";
+import DateShareExportModal from "./DateShareExportModal";
 
 type Props = {
   mode: DateCalculatorMode;
@@ -38,9 +38,17 @@ export default function DateResult({ mode, result, digitStyle }: Props) {
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
-          <CopyButton
-            text={`${t("totalDays")}: ${fmt(d.totalDays)}, ${d.years}y ${d.months}m ${d.days}d`}
-            className="!text-white dark:!text-white"
+          <DateShareExportModal
+            inputRows={[]}
+            resultRows={[
+              { label: t("years"), value: `${d.years}` },
+              { label: t("months"), value: `${d.months}` },
+              { label: t("days"), value: `${d.days}` },
+              { label: t("totalWeeks"), value: fmt(d.totalWeeks) },
+            ]}
+            heroLabel={t("totalDays")}
+            heroValue={fmt(d.totalDays)}
+            sentence={t("sentenceDifference", { totalDays: fmt(d.totalDays), years: d.years, months: d.months, days: d.days })}
           />
         </div>
         <div className="p-4 lg:p-6">
@@ -81,7 +89,13 @@ export default function DateResult({ mode, result, digitStyle }: Props) {
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={formatDate(result.resultDateISO ?? "")} className="!text-white dark:!text-white" />
+        <DateShareExportModal
+          inputRows={[]}
+          resultRows={[]}
+          heroLabel={t("resultDate")}
+          heroValue={formatDate(result.resultDateISO ?? "")}
+          sentence={t("sentenceResultDate", { date: formatDate(result.resultDateISO ?? "") })}
+        />
       </div>
       <div className="p-4 lg:p-6 text-center">
         <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{formatDate(result.resultDateISO ?? "")}</p>

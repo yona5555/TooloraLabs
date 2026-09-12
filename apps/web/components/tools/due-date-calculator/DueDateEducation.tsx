@@ -4,6 +4,7 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import DueDateWeekGauge from "./DueDateWeekGauge";
 
 type ExampleRow = { calculation: string; result: string };
 type MethodItem = { title: string; description: string };
@@ -18,6 +19,8 @@ export default async function DueDateEducation() {
 
   return (
     <EncyclopediaPaper>
+      <DueDateWeekGauge />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>

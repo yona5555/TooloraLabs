@@ -8850,14 +8850,27 @@
           "short": "Kurze Sitzung",
           "wellPlanned": "Gut geplant",
           "tight": "Eng getaktet"
-        }
+        },
+        "sentence": "Diese Sitzung umfasst {pomodoros} abgeschlossene Pomodoros, {workMinutes} Minuten fokussierte Arbeit."
       },
       "education": {
         "intro": {
           "title": "Die Pomodoro-Technik verstehen",
           "paragraph1": "Die Pomodoro-Technik unterteilt Arbeit in kurze, feste Intervalle — traditionell 25 Minuten — sogenannte „Pomodoros“, auf die jeweils eine kurze Pause folgt. Nach einer festgelegten Anzahl von Pomodoros (traditionell vier) folgt eine längere Pause, bevor der Zyklus von vorn beginnt. Die Kernidee ist, einen einzelnen Pomodoro als unteilbar zu behandeln: Sobald Sie einen beginnen, verpflichten Sie sich voll und ganz dazu, statt Ihre Aufmerksamkeit aufzuteilen — das verwandelt eine vage, offene Aufgabe in eine konkrete, zeitlich begrenzte Einheit fokussierter Anstrengung.",
           "paragraph2": "Dieser Rechner wendet dieselbe Idee umgekehrt an: Statt einfach nur einen Timer zu starten, berechnet er im Voraus, wie viele vollständige Arbeitsintervalle tatsächlich in die verfügbare Zeit passen, unter Berücksichtigung jeder kurzen und langen Pause auf dem Weg. Diese Unterscheidung ist wichtig, weil eine Pause nur dann „zählt“, wenn sie vollständig in die verbleibende Zeit passt — eine Sitzung, deren Zeit mit nur wenigen Minuten übrig abläuft, behält den bereits abgeschlossenen Pomodoro, überspringt aber lediglich die anschließende Pause, die nicht mehr passt.",
-          "paragraph3": "Die Standardwerte (25-minütige Arbeitsintervalle, 5-minütige kurze Pausen, 15-minütige lange Pausen alle 4 Pomodoros) folgen den traditionellen Zahlen der Technik, aber jeder Wert ist anpassbar — manche Menschen empfinden längere Intervalle von 45–50 Minuten als besser geeignet für tiefe, ununterbrochene Arbeit, während andere kürzere Intervalle für Aufgaben bevorzugen, die sich leicht wieder aufnehmen lassen."
+          "paragraph3": "Die Standardwerte (25-minütige Arbeitsintervalle, 5-minütige kurze Pausen, 15-minütige lange Pausen alle 4 Pomodoros) folgen den traditionellen Zahlen der Technik, aber jeder Wert ist anpassbar — manche Menschen empfinden längere Intervalle von 45–50 Minuten als besser geeignet für tiefe, ununterbrochene Arbeit, während andere kürzere Intervalle für Aufgaben bevorzugen, die sich leicht wieder aufnehmen lassen.",
+          "sessionGauge": {
+            "title": "Wie lang ist diese Lernsitzung?",
+            "intro": "Lernsitzungen reichen von einer kurzen Wiederholung bis zu einem ganzen Tag konzentrierter Arbeit. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Länge: {classification}.",
+            "fact": "Dieses Beispiel dauert {minutes} Minuten.",
+            "minutesValue": "{minutes} Min.",
+            "zones": {
+              "quick": "Kurze Sitzung",
+              "standard": "Standardsitzung",
+              "extended": "Verlängerte Sitzung"
+            }
+          }
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8970,6 +8983,24 @@
         "standardSession": "Standard (2 Std.)",
         "deepWorkSession": "Deep Work (4 Std.)",
         "allDaySession": "Ganztägig (8 Std.)"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "vector-calculator": {
@@ -19202,7 +19233,8 @@
           "invalid-date": "Gib ein gültiges Datum ein, um ein Ergebnis zu sehen.",
           "invalid-cycle-length": "Gib eine Zykluslänge zwischen 20 und 45 Tagen ein.",
           "date-in-future": "Das eingegebene Datum darf nicht nach heute liegen."
-        }
+        },
+        "sentence": "Der voraussichtliche Geburtstermin ist {dueDate}, bei {weeks} Wochen und {days} Tagen."
       },
       "quickReference": {
         "title": "Die Formeln",
@@ -19212,7 +19244,19 @@
         "intro": {
           "title": "Geburtstermin-Schätzung verstehen",
           "paragraph1": "Ein Geburtstermin ist eine Schätzung, keine punktgenaue Vorhersage — nur etwa 5% der Babys werden tatsächlich am berechneten Termin geboren, die große Mehrheit kommt irgendwann innerhalb von zwei Wochen davor oder danach zur Welt. Trotz dieser inhärenten Unsicherheit bleibt ein geschätzter Geburtstermin ein klinisch essenzieller Ankerpunkt: Er wird verwendet, um pränatale Screening-Tests zu terminieren, das fetale Wachstum gegen erwartete Meilensteine zu verfolgen und zu entscheiden, wann eine Schwangerschaft als \"termingerecht\" statt früh oder spät gilt.",
-          "paragraph2": "Schwangerschaft wird üblicherweise im \"Schwangerschaftsalter\" gemessen, gezählt ab dem ersten Tag der letzten Periode (LMP) statt ab dem tatsächlichen Empfängnisdatum — obwohl die Empfängnis typischerweise etwa zwei Wochen nach diesem Datum stattfindet. Diese Konvention existiert einfach, weil das LMP-Datum meist zuverlässig bekannt ist, während das genaue Empfängnisdatum selten bekannt ist. Eine termingerechte Schwangerschaft wird als 280 Tage (40 Wochen) ab der LMP definiert, was 266 Tagen (38 Wochen) ab der Empfängnis selbst entspricht."
+          "paragraph2": "Schwangerschaft wird üblicherweise im \"Schwangerschaftsalter\" gemessen, gezählt ab dem ersten Tag der letzten Periode (LMP) statt ab dem tatsächlichen Empfängnisdatum — obwohl die Empfängnis typischerweise etwa zwei Wochen nach diesem Datum stattfindet. Diese Konvention existiert einfach, weil das LMP-Datum meist zuverlässig bekannt ist, während das genaue Empfängnisdatum selten bekannt ist. Eine termingerechte Schwangerschaft wird als 280 Tage (40 Wochen) ab der LMP definiert, was 266 Tagen (38 Wochen) ab der Empfängnis selbst entspricht.",
+          "weekGauge": {
+            "title": "Wo liegt diese Woche?",
+            "intro": "Eine ausgetragene Schwangerschaft umfasst 42 Wochen in drei Trimestern. Wähle unten ein reales Beispiel, um zu sehen, in welches Trimester es fällt.",
+            "verdict": "Woche {weeks} liegt im {classification}.",
+            "fact": "Dieses Beispiel liegt in Woche {weeks} der Schwangerschaft.",
+            "weekValue": "Woche {weeks}",
+            "examples": {
+              "firstTrimester": "Erstes Trimester",
+              "secondTrimester": "Zweites Trimester",
+              "thirdTrimester": "Drittes Trimester"
+            }
+          }
         },
         "methods": {
           "title": "Die vier Berechnungsmethoden",
@@ -19347,6 +19391,24 @@
         "shortCycleExample": "Kürzerer Zyklus (letzte Periode)",
         "conceptionExample": "Empfängnisdatum",
         "ivf5dayExample": "IVF 5-Tage-Transfer"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "ovulation-calculator": {
@@ -20283,7 +20345,9 @@
         "errors": {
           "invalid-date": "Gib gültige Daten ein, um ein Ergebnis zu sehen.",
           "invalid-amount": "Gib eine nicht-negative Menge ein, um ein Ergebnis zu sehen."
-        }
+        },
+        "sentenceDifference": "Diese Zeitspanne beträgt {totalDays} Tage ({years} J. {months} M. {days} T.).",
+        "sentenceResultDate": "Das resultierende Datum ist {date}."
       },
       "quickReference": {
         "title": "Die Rechnung",
@@ -20293,7 +20357,26 @@
         "intro": {
           "title": "Datumsarithmetik verstehen",
           "paragraph1": "Das Rechnen mit Kalenderdaten ist komplexer als einfache Arithmetik, da Monate unterschiedlich lang sind (28 bis 31 Tage), Jahre Schaltjahre sein können (366 statt 365 Tage) und \"einen Monat später\" nicht eine feste Anzahl von Tagen bedeutet — das Hinzufügen eines Monats zum 31. Januar kann beispielsweise nicht buchstäblich den 31. Februar ergeben, da der Februar nie so viele Tage hat. Dieser Rechner behandelt diese Unregelmäßigkeiten automatisch, sodass du jedes Mal ein echtes, gültiges Kalenderdatum oder eine genaue Tageszahl erhältst.",
-          "paragraph2": "Die beiden häufigsten Datumsfragen — \"wie weit liegen diese beiden Daten auseinander?\" und \"welches Datum ist eine bestimmte Dauer von jetzt entfernt?\" — kommen in der alltäglichen Planung ständig vor: das Verfolgen eines Jahrestags oder einer Frist, die Berechnung des genauen Alters einer Person, die Ermittlung des Enddatums eines Projekts aus Beginn und Dauer, oder die Berechnung, wann eine Garantie- oder Abonnementlaufzeit abläuft."
+          "paragraph2": "Die beiden häufigsten Datumsfragen — \"wie weit liegen diese beiden Daten auseinander?\" und \"welches Datum ist eine bestimmte Dauer von jetzt entfernt?\" — kommen in der alltäglichen Planung ständig vor: das Verfolgen eines Jahrestags oder einer Frist, die Berechnung des genauen Alters einer Person, die Ermittlung des Enddatums eines Projekts aus Beginn und Dauer, oder die Berechnung, wann eine Garantie- oder Abonnementlaufzeit abläuft.",
+          "spanGauge": {
+            "title": "Wie lang ist diese Zeitspanne?",
+            "intro": "Zeitspannen reichen von einem langen Wochenende bis zu einem ganzen Jahrzehnt. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — Länge: {classification}.",
+            "fact": "Dieses Beispiel umfasst {days} Tage.",
+            "daysValue": "{days} Tage",
+            "examples": {
+              "longWeekend": "Ein langes Wochenende",
+              "schoolYear": "Ein Schuljahr",
+              "pregnancyTerm": "Eine Schwangerschaft",
+              "presidentialTerm": "Eine Präsidentschaftsamtszeit",
+              "decade": "Ein Jahrzehnt"
+            },
+            "zones": {
+              "short": "Kurz",
+              "medium": "Mittel",
+              "long": "Lang"
+            }
+          }
         },
         "modes": {
           "title": "Die zwei Modi",
@@ -20419,6 +20502,24 @@
         "projectDuration": "Projektdauer",
         "add90Days": "90 Tage addieren",
         "subtract5Years": "5 Jahre subtrahieren"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "time-calculator": {
@@ -20451,7 +20552,8 @@
         "invalidTime": "Gib gültige Zeiten ein (Minuten und Sekunden zwischen 0 und 59), um ein Ergebnis zu sehen.",
         "negativeNote": "Dauer 2 war größer als Dauer 1, daher ist das Ergebnis negativ.",
         "totalSeconds": "Gesamtsekunden",
-        "totalSecondsUnit": "Sekunden"
+        "totalSecondsUnit": "Sekunden",
+        "sentence": "Das Ergebnis ist {clockText} ({totalSeconds} Sekunden)."
       },
       "quickReference": {
         "title": "Die Rechnung",
@@ -20461,7 +20563,25 @@
         "intro": {
           "title": "Dauerarithmetik verstehen",
           "paragraph1": "Das Addieren oder Subtrahieren von Dauern in Stunden, Minuten und Sekunden erfordert das Übertragen von Werten zwischen Einheiten, ähnlich wie das Addieren von Zahlen in einem Nicht-Dezimalsystem: 60 Sekunden werden zu 1 Minute übertragen, und 60 Minuten werden zu 1 Stunde übertragen, statt des dezimalen Übertrags in der gewöhnlichen Arithmetik. Dieser Rechner wandelt beide Dauern in einen einzigen Gesamtsekundenwert um, führt die Addition oder Subtraktion auf dieser einzelnen Zahl durch und wandelt das Ergebnis dann zur Anzeige zurück in Stunden, Minuten und Sekunden um.",
-          "paragraph2": "Es lohnt sich, Dauerarithmetik (die Art, die dieses Tool durchführt) von Uhrzeitarithmetik zu unterscheiden. Dauerarithmetik beantwortet \"wie lang sind 1 Stunde 45 Minuten plus 30 Minuten?\" als reine Frage der verstrichenen Zeit, während Uhrzeitarithmetik beantwortet \"wie spät ist es 3 Stunden nach 23:00 Uhr?\", was sich um einen 24-Stunden-Zyklus dreht und von einem bestimmten Startpunkt auf der Uhr abhängt. Dieses Tool behandelt Ersteres; das Subtrahieren einer größeren Dauer von einer kleineren ergibt korrekt ein negatives Ergebnis, statt sich zu umwickeln."
+          "paragraph2": "Es lohnt sich, Dauerarithmetik (die Art, die dieses Tool durchführt) von Uhrzeitarithmetik zu unterscheiden. Dauerarithmetik beantwortet \"wie lang sind 1 Stunde 45 Minuten plus 30 Minuten?\" als reine Frage der verstrichenen Zeit, während Uhrzeitarithmetik beantwortet \"wie spät ist es 3 Stunden nach 23:00 Uhr?\", was sich um einen 24-Stunden-Zyklus dreht und von einem bestimmten Startpunkt auf der Uhr abhängt. Dieses Tool behandelt Ersteres; das Subtrahieren einer größeren Dauer von einer kleineren ergibt korrekt ein negatives Ergebnis, statt sich zu umwickeln.",
+          "durationGauge": {
+            "title": "Wie lang ist diese Dauer?",
+            "intro": "Zeitdauern reichen von einer kurzen Kaffeepause bis zu einem ganzen Tag. Wähle unten eine reale Aktivität, um zu sehen, wo sie liegt.",
+            "verdict": "{example} — Dauer: {classification}.",
+            "fact": "Dieses Beispiel dauert etwa {duration}.",
+            "examples": {
+              "coffeeBreak": "Kaffeepause",
+              "movie": "Ein Film",
+              "marathonRun": "Ein Marathonlauf",
+              "workday": "Ein Arbeitstag",
+              "fullDay": "Ein ganzer Tag"
+            },
+            "zones": {
+              "quick": "Kurz",
+              "moderate": "Moderat",
+              "long": "Lang"
+            }
+          }
         },
         "useCases": {
           "title": "Häufige Anwendungen",
@@ -20591,6 +20711,24 @@
         "workdayPlusOvertime": "Arbeitstag + Überstunden",
         "subtractLunchBreak": "Mittagspause abziehen",
         "combineVideoClips": "Videoclips zusammenfügen"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     },
     "dice-roller": {
@@ -22756,7 +22894,8 @@
         "days": "Tage",
         "hours": "Stunden",
         "minutes": "Minuten",
-        "seconds": "Sekunden"
+        "seconds": "Sekunden",
+        "sentence": "{event} ist noch {days} Tage, {hours} Stunden und {minutes} Minuten entfernt."
       },
       "quickReference": {
         "title": "Gut zu wissen",
@@ -22766,7 +22905,19 @@
         "intro": {
           "title": "Diesen Countdown verstehen",
           "paragraph1": "Dieses Tool berechnet fortlaufend die Differenz zwischen der aktuellen Zeit und einem von dir gewählten Zieldatum und einer Zieluhrzeit, unterteilt diese Differenz in Tage, Stunden, Minuten und Sekunden, und aktualisiert die Anzeige jede Sekunde, sodass der Countdown live aktualisiert wird, ohne jemals die Seite neu laden zu müssen.",
-          "paragraph2": "Sobald der Zielzeitpunkt erreicht ist, wechselt der Countdown automatisch zum Aufwärtszählen, wobei angezeigt wird, wie viel Zeit seit dem Ereignis verstrichen ist — nützlich, um Jahrestage, Meilensteine zu verfolgen oder einfach zu bestätigen, dass ein Moment, auf den du hingezählt hast, tatsächlich vergangen ist."
+          "paragraph2": "Sobald der Zielzeitpunkt erreicht ist, wechselt der Countdown automatisch zum Aufwärtszählen, wobei angezeigt wird, wie viel Zeit seit dem Ereignis verstrichen ist — nützlich, um Jahrestage, Meilensteine zu verfolgen oder einfach zu bestätigen, dass ein Moment, auf den du hingezählt hast, tatsächlich vergangen ist.",
+          "distanceGauge": {
+            "title": "Wie weit ist das noch entfernt?",
+            "intro": "Countdowns reichen von wenigen Tagen bis zu vielen Monaten. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Das sind {days} Tage ab heute.",
+            "daysValue": "{days} Tage",
+            "zones": {
+              "soon": "Bald bevorstehend",
+              "upcoming": "Bevorstehend",
+              "farOff": "Weit entfernt"
+            }
+          }
         },
         "useCases": {
           "title": "Häufige Anwendungen",
@@ -22872,6 +23023,24 @@
         "conferenceTalk": "Konferenzvortrag",
         "productLaunch": "Produkteinführung",
         "weddingDay": "Hochzeitstag"
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z.B. Jordan Lee",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z.B. jordan@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z.B. +49 151 12345678",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z.B. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für"
       }
     }
   },

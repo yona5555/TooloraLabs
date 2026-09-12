@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import CopyButton from "@/components/tool-ui/CopyButton";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import PomodoroTimelineDiagram from "./PomodoroTimelineDiagram";
+import StudyTimeShareExportModal from "./StudyTimeShareExportModal";
 import type { StudyTimeResult as Result } from "./types";
 
 type Props = {
@@ -20,7 +20,7 @@ export default function StudyTimeResult({ result, digitStyle }: Props) {
   if (result.error === "invalid-cycle-length") return <ErrorCard heading={t("heading")} message={t("invalidCycleLength")} />;
   if (result.error === "session-too-short") return <ErrorCard heading={t("heading")} message={t("sessionTooShort")} />;
 
-  const copyText = `${t("completedPomodoros")}: ${fmt(result.completedPomodoros)}, ${t("totalWorkMinutes")}: ${fmt(result.totalWorkMinutes)} min`;
+  const sentence = t("sentence", { pomodoros: fmt(result.completedPomodoros), workMinutes: fmt(result.totalWorkMinutes) });
 
   const utilizationPercent = result.scheduledMinutes > 0 ? (result.scheduledMinutes / (result.scheduledMinutes + result.leftoverMinutes)) * 100 : 0;
   const utilizationBand = utilizationPercent >= 85 ? "tight" : utilizationPercent >= 50 ? "wellPlanned" : "short";
@@ -31,7 +31,17 @@ export default function StudyTimeResult({ result, digitStyle }: Props) {
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
-          <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          <StudyTimeShareExportModal
+            inputRows={[]}
+            resultRows={[
+              { label: t("totalWorkMinutes"), value: `${fmt(result.totalWorkMinutes)} min` },
+              { label: t("totalBreakMinutes"), value: `${fmt(result.totalBreakMinutes)} min` },
+              { label: t("leftoverMinutes"), value: `${fmt(result.leftoverMinutes)} min` },
+            ]}
+            heroLabel={t("completedPomodoros")}
+            heroValue={fmt(result.completedPomodoros)}
+            sentence={sentence}
+          />
         </div>
 
         <div className="p-4 lg:p-6">

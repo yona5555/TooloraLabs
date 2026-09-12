@@ -8850,14 +8850,27 @@
           "short": "Session courte",
           "wellPlanned": "Bien planifiée",
           "tight": "Très chargée"
-        }
+        },
+        "sentence": "Cette session permet {pomodoros} pomodoros complétés, {workMinutes} minutes de travail concentré."
       },
       "education": {
         "intro": {
           "title": "Comprendre la Technique Pomodoro",
           "paragraph1": "La Technique Pomodoro découpe le travail en intervalles courts et fixes — traditionnellement 25 minutes — appelés « pomodoros », chacun suivi d'une pause courte. Après un nombre défini de pomodoros (traditionnellement quatre), une pause plus longue suit avant que le cycle ne recommence. L'idée centrale est de traiter chaque pomodoro comme indivisible : une fois que vous en commencez un, vous vous y engagez pleinement plutôt que de partager votre attention, ce qui transforme une tâche vague et sans limite claire en une unité concrète et chronométrée d'effort concentré.",
           "paragraph2": "Ce calculateur applique la même idée à l'envers : plutôt que de simplement lancer une minuterie, il détermine à l'avance combien d'intervalles de travail complets tiennent réellement dans le temps dont vous disposez, en tenant compte de chaque pause courte et longue en cours de route. Cette distinction compte parce qu'une pause ne « compte » que si elle tient entièrement dans le temps restant — une séance qui manque de temps avec seulement quelques minutes restantes conserve le pomodoro déjà terminé, mais saute simplement la pause suivante qui ne tient plus.",
-          "paragraph3": "Les valeurs par défaut (intervalles de travail de 25 minutes, pauses courtes de 5 minutes, pauses longues de 15 minutes toutes les 4 pomodoros) suivent les chiffres traditionnels de la technique, mais chaque valeur est ajustable — certaines personnes trouvent que des intervalles plus longs de 45 à 50 minutes conviennent mieux au travail profond et ininterrompu, tandis que d'autres préfèrent des intervalles plus courts pour des tâches faciles à reprendre."
+          "paragraph3": "Les valeurs par défaut (intervalles de travail de 25 minutes, pauses courtes de 5 minutes, pauses longues de 15 minutes toutes les 4 pomodoros) suivent les chiffres traditionnels de la technique, mais chaque valeur est ajustable — certaines personnes trouvent que des intervalles plus longs de 45 à 50 minutes conviennent mieux au travail profond et ininterrompu, tandis que d'autres préfèrent des intervalles plus courts pour des tâches faciles à reprendre.",
+          "sessionGauge": {
+            "title": "Quelle est la durée de cette session d'étude ?",
+            "intro": "Les sessions d'étude vont d'une révision rapide à une journée entière de travail approfondi. Choisissez un exemple réel ci-dessous pour voir où elle se situe.",
+            "verdict": "{example} — Durée : {classification}.",
+            "fact": "Cet exemple dure {minutes} minutes.",
+            "minutesValue": "{minutes} min",
+            "zones": {
+              "quick": "Session rapide",
+              "standard": "Session standard",
+              "extended": "Session prolongée"
+            }
+          }
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -8970,6 +8983,24 @@
         "standardSession": "Standard (2 h)",
         "deepWorkSession": "Travail profond (4 h)",
         "allDaySession": "Toute la journée (8 h)"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "vector-calculator": {
@@ -19202,7 +19233,8 @@
           "invalid-date": "Saisissez une date valide pour voir un résultat.",
           "invalid-cycle-length": "Saisissez une durée de cycle entre 20 et 45 jours.",
           "date-in-future": "La date saisie ne peut pas être postérieure à aujourd'hui."
-        }
+        },
+        "sentence": "La date d'accouchement prévue est le {dueDate}, à {weeks} semaines et {days} jours."
       },
       "quickReference": {
         "title": "Les formules",
@@ -19212,7 +19244,19 @@
         "intro": {
           "title": "Comprendre l'estimation de la date d'accouchement",
           "paragraph1": "Une date d'accouchement est une estimation, pas une prédiction d'une précision absolue — seulement environ 5% des bébés naissent réellement à leur date calculée, la grande majorité arrivant à un moment donné dans les deux semaines précédant ou suivant cette date. Malgré cette incertitude inhérente, une date d'accouchement estimée reste un point de repère cliniquement essentiel : elle sert à programmer les tests de dépistage prénatal, à suivre la croissance fœtale par rapport aux étapes attendues, et à décider quand une grossesse est considérée \"à terme\" par opposition à précoce ou tardive.",
-          "paragraph2": "La grossesse est classiquement mesurée en \"âge gestationnel\", compté à partir du premier jour des dernières règles (DDR) plutôt qu'à partir de la date réelle de conception — même si la conception survient généralement environ deux semaines après cette date. Cette convention existe simplement parce que la date des DDR est généralement connue avec confiance, alors que la date exacte de conception l'est rarement. Une grossesse à terme est définie comme 280 jours (40 semaines) à partir des DDR, ce qui équivaut à 266 jours (38 semaines) à partir de la conception elle-même."
+          "paragraph2": "La grossesse est classiquement mesurée en \"âge gestationnel\", compté à partir du premier jour des dernières règles (DDR) plutôt qu'à partir de la date réelle de conception — même si la conception survient généralement environ deux semaines après cette date. Cette convention existe simplement parce que la date des DDR est généralement connue avec confiance, alors que la date exacte de conception l'est rarement. Une grossesse à terme est définie comme 280 jours (40 semaines) à partir des DDR, ce qui équivaut à 266 jours (38 semaines) à partir de la conception elle-même.",
+          "weekGauge": {
+            "title": "Où se situe cette semaine ?",
+            "intro": "Une grossesse à terme s'étend sur 42 semaines réparties en trois trimestres. Choisissez un exemple réel ci-dessous pour voir dans quel trimestre il se situe.",
+            "verdict": "La semaine {weeks} se situe dans le {classification}.",
+            "fact": "Cet exemple correspond à la semaine {weeks} de la grossesse.",
+            "weekValue": "Semaine {weeks}",
+            "examples": {
+              "firstTrimester": "Premier trimestre",
+              "secondTrimester": "Deuxième trimestre",
+              "thirdTrimester": "Troisième trimestre"
+            }
+          }
         },
         "methods": {
           "title": "Les quatre méthodes de calcul",
@@ -19347,6 +19391,24 @@
         "shortCycleExample": "Cycle plus court (DDR)",
         "conceptionExample": "Date de conception",
         "ivf5dayExample": "Transfert FIV à 5 jours"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "ovulation-calculator": {
@@ -20283,7 +20345,9 @@
         "errors": {
           "invalid-date": "Saisissez des dates valides pour voir un résultat.",
           "invalid-amount": "Saisissez une quantité non négative pour voir un résultat."
-        }
+        },
+        "sentenceDifference": "Cet intervalle est de {totalDays} jours ({years}a {months}m {days}j).",
+        "sentenceResultDate": "La date résultante est le {date}."
       },
       "quickReference": {
         "title": "Le calcul",
@@ -20293,7 +20357,26 @@
         "intro": {
           "title": "Comprendre l'arithmétique des dates",
           "paragraph1": "Calculer avec des dates de calendrier est plus complexe qu'une simple arithmétique car les mois ont des longueurs inégales (28 à 31 jours), les années peuvent être bissextiles (366 jours au lieu de 365), et \"un mois plus tard\" ne signifie pas un nombre fixe de jours — ajouter un mois au 31 janvier, par exemple, ne peut pas littéralement produire le 31 février, puisque février n'a jamais autant de jours. Cette calculatrice gère ces irrégularités automatiquement pour que vous obteniez à chaque fois une date de calendrier réelle et valide ou un décompte de jours précis.",
-          "paragraph2": "Les deux questions de date les plus courantes — \"quel est l'écart entre ces deux dates ?\" et \"quelle date correspond à une certaine durée à partir de maintenant ?\" — reviennent constamment dans la planification quotidienne : suivre un anniversaire ou une échéance, calculer l'âge exact de quelqu'un, déterminer la date de fin d'un projet à partir de son début et de sa durée, ou calculer quand une garantie ou un abonnement expirera."
+          "paragraph2": "Les deux questions de date les plus courantes — \"quel est l'écart entre ces deux dates ?\" et \"quelle date correspond à une certaine durée à partir de maintenant ?\" — reviennent constamment dans la planification quotidienne : suivre un anniversaire ou une échéance, calculer l'âge exact de quelqu'un, déterminer la date de fin d'un projet à partir de son début et de sa durée, ou calculer quand une garantie ou un abonnement expirera.",
+          "spanGauge": {
+            "title": "Quelle est la durée de cet intervalle ?",
+            "intro": "Les durées vont d'un long week-end à une décennie entière. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — Durée : {classification}.",
+            "fact": "Cet exemple couvre {days} jours.",
+            "daysValue": "{days} jours",
+            "examples": {
+              "longWeekend": "Un long week-end",
+              "schoolYear": "Une année scolaire",
+              "pregnancyTerm": "Une grossesse",
+              "presidentialTerm": "Un mandat présidentiel",
+              "decade": "Une décennie"
+            },
+            "zones": {
+              "short": "Courte",
+              "medium": "Moyenne",
+              "long": "Longue"
+            }
+          }
         },
         "modes": {
           "title": "Les deux modes",
@@ -20419,6 +20502,24 @@
         "projectDuration": "Durée de projet",
         "add90Days": "Ajouter 90 jours",
         "subtract5Years": "Soustraire 5 ans"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "time-calculator": {
@@ -20451,7 +20552,8 @@
         "invalidTime": "Saisissez des temps valides (minutes et secondes entre 0 et 59) pour voir un résultat.",
         "negativeNote": "La Durée 2 était plus grande que la Durée 1, donc le résultat est négatif.",
         "totalSeconds": "Secondes Totales",
-        "totalSecondsUnit": "secondes"
+        "totalSecondsUnit": "secondes",
+        "sentence": "Le résultat est {clockText} ({totalSeconds} secondes)."
       },
       "quickReference": {
         "title": "Le calcul",
@@ -20461,7 +20563,25 @@
         "intro": {
           "title": "Comprendre l'arithmétique des durées",
           "paragraph1": "Additionner ou soustraire des durées exprimées en heures, minutes et secondes nécessite de reporter des valeurs entre unités, un peu comme additionner des nombres dans une base non décimale : 60 secondes sont reportées en 1 minute, et 60 minutes sont reportées en 1 heure, plutôt que la retenue en base 10 utilisée en arithmétique ordinaire. Cette calculatrice convertit les deux durées en une seule valeur de secondes totales, effectue l'addition ou la soustraction sur ce nombre unique, puis reconvertit le résultat en heures, minutes et secondes pour l'affichage.",
-          "paragraph2": "Il convient de distinguer l'arithmétique des durées (le type que cet outil effectue) de l'arithmétique de l'heure de l'horloge. L'arithmétique des durées répond à \"combien font 1 heure 45 minutes plus 30 minutes ?\" comme une pure question de temps écoulé, tandis que l'arithmétique de l'heure de l'horloge répond à \"quelle heure sera-t-il 3 heures après 23h00 ?\", qui boucle sur un cycle de 24 heures et dépend d'un point de départ précis sur l'horloge. Cet outil traite le premier cas ; soustraire une durée plus grande d'une plus petite produit correctement un résultat négatif plutôt que de boucler."
+          "paragraph2": "Il convient de distinguer l'arithmétique des durées (le type que cet outil effectue) de l'arithmétique de l'heure de l'horloge. L'arithmétique des durées répond à \"combien font 1 heure 45 minutes plus 30 minutes ?\" comme une pure question de temps écoulé, tandis que l'arithmétique de l'heure de l'horloge répond à \"quelle heure sera-t-il 3 heures après 23h00 ?\", qui boucle sur un cycle de 24 heures et dépend d'un point de départ précis sur l'horloge. Cet outil traite le premier cas ; soustraire une durée plus grande d'une plus petite produit correctement un résultat négatif plutôt que de boucler.",
+          "durationGauge": {
+            "title": "Quelle est la durée de cet intervalle ?",
+            "intro": "Les durées vont d'une courte pause café à une journée entière. Choisissez une activité réelle ci-dessous pour voir où elle se situe.",
+            "verdict": "{example} — Durée : {classification}.",
+            "fact": "Cet exemple dure environ {duration}.",
+            "examples": {
+              "coffeeBreak": "Pause café",
+              "movie": "Un film",
+              "marathonRun": "Une course de marathon",
+              "workday": "Une journée de travail",
+              "fullDay": "Une journée entière"
+            },
+            "zones": {
+              "quick": "Rapide",
+              "moderate": "Modérée",
+              "long": "Longue"
+            }
+          }
         },
         "useCases": {
           "title": "Utilisations courantes",
@@ -20591,6 +20711,24 @@
         "workdayPlusOvertime": "Journée + heures sup.",
         "subtractLunchBreak": "Soustraire la pause déjeuner",
         "combineVideoClips": "Combiner des clips vidéo"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     },
     "dice-roller": {
@@ -22756,7 +22894,8 @@
         "days": "Jours",
         "hours": "Heures",
         "minutes": "Minutes",
-        "seconds": "Secondes"
+        "seconds": "Secondes",
+        "sentence": "Il reste {days} jours, {hours} heures et {minutes} minutes avant {event}."
       },
       "quickReference": {
         "title": "Bon à Savoir",
@@ -22766,7 +22905,19 @@
         "intro": {
           "title": "Comprendre Ce Compte à Rebours",
           "paragraph1": "Cet outil calcule en continu la différence entre l'heure actuelle et une date et heure cible que vous choisissez, décomposant cette différence en jours, heures, minutes, et secondes, et actualisant l'affichage chaque seconde afin que le compte à rebours se mette à jour en direct sans jamais avoir besoin de recharger la page.",
-          "paragraph2": "Une fois le moment cible arrivé, le compte à rebours passe automatiquement au comptage vers le haut à la place, affichant le temps écoulé depuis l'événement — utile pour suivre les anniversaires, les jalons, ou simplement confirmer qu'un moment que vous attendiez avec impatience est effectivement passé."
+          "paragraph2": "Une fois le moment cible arrivé, le compte à rebours passe automatiquement au comptage vers le haut à la place, affichant le temps écoulé depuis l'événement — utile pour suivre les anniversaires, les jalons, ou simplement confirmer qu'un moment que vous attendiez avec impatience est effectivement passé.",
+          "distanceGauge": {
+            "title": "À quelle distance est-ce ?",
+            "intro": "Les comptes à rebours vont de quelques jours à plusieurs mois. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
+            "verdict": "{example} — {classification}.",
+            "fact": "Cela fait {days} jours à partir de maintenant.",
+            "daysValue": "{days} jours",
+            "zones": {
+              "soon": "Arrive bientôt",
+              "upcoming": "À venir",
+              "farOff": "Lointain"
+            }
+          }
         },
         "useCases": {
           "title": "Utilisations Courantes",
@@ -22872,6 +23023,24 @@
         "conferenceTalk": "Conférence",
         "productLaunch": "Lancement de produit",
         "weddingDay": "Jour du mariage"
+      },
+      "shareExport": {
+        "triggerLabel": "Partager / Exporter",
+        "modalTitle": "Partager ou Exporter Ce Résultat",
+        "contactSectionTitle": "Préparé Pour (facultatif)",
+        "contactName": "Nom",
+        "contactNamePlaceholder": "ex. Jordan Lee",
+        "contactEmail": "E-mail",
+        "contactEmailPlaceholder": "ex. jordan@example.com",
+        "contactPhone": "Téléphone",
+        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "ex. Lee Labs",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
+        "shareToSocial": "Partager sur les réseaux sociaux",
+        "generatedOn": "Généré le",
+        "preparedForTitle": "Préparé Pour"
       }
     }
   },
