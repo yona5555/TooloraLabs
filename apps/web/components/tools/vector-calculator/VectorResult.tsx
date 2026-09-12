@@ -70,6 +70,7 @@ export default function VectorResult({ result, ax, ay, az, bx, by, bz, digitStyl
           <Stat
             label={t("projectionAOntoB")}
             value={result.projectionX === null ? na : `(${fmt(result.projectionX)}, ${fmt(result.projectionY!)}, ${fmt(result.projectionZ!)})`}
+            className="col-span-2 sm:col-span-1"
           />
         </dl>
       </SectionCard>
@@ -92,9 +93,9 @@ export default function VectorResult({ result, ax, ay, az, bx, by, bz, digitStyl
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, className }: { label: string; value: string; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{label}</dt>
       <dd dir="ltr" className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">
         {value}

@@ -84,7 +84,7 @@ export default function MatrixResult({ result, digitStyle, matrices, hasCalculat
           <Field label={t("transposeA")}>
             <Matrix2x2 m11={result.transposeA11} m12={result.transposeA12} m21={result.transposeA21} m22={result.transposeA22} fmt={fmt} />
           </Field>
-          <Field label={t("inverseA")}>
+          <Field label={t("inverseA")} className="sm:col-span-2">
             <Matrix2x2 m11={result.inverseA11} m12={result.inverseA12} m21={result.inverseA21} m22={result.inverseA22} fmt={fmt} />
           </Field>
         </div>
@@ -111,9 +111,9 @@ export default function MatrixResult({ result, digitStyle, matrices, hasCalculat
   );
 }
 
-function Field({ label, children }: { label: string; children: ReactNode }) {
+function Field({ label, children, className }: { label: string; children: ReactNode; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{label}</p>
       {children}
     </div>

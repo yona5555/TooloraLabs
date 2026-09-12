@@ -12,9 +12,9 @@ type WordCounterResultProps = {
   digitStyle: DigitStyle;
 };
 
-function Stat({ title, value }: { title: string; value: string }) {
+function Stat({ title, value, className }: { title: string; value: string; className?: string }) {
   return (
-    <div className="rounded-xl bg-zinc-50 px-3 py-2.5 text-center dark:bg-zinc-800/60">
+    <div className={`rounded-xl bg-zinc-50 px-3 py-2.5 text-center dark:bg-zinc-800/60 ${className ?? ""}`}>
       <dt className="text-xs text-zinc-500 dark:text-zinc-400">{title}</dt>
       <dd dir="ltr" className="mt-0.5 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
         {value}
@@ -59,7 +59,7 @@ export default function WordCounterResult({ stats, hasText, digitStyle }: WordCo
             <Stat title={t("stats.readingTimeMinutes")} value={formatLocalizedNumber(stats.readingTimeMinutes, digitStyle)} />
             <Stat title={t("stats.uniqueWords")} value={formatLocalizedNumber(stats.uniqueWords, digitStyle)} />
             <Stat title={t("stats.averageWordLength")} value={formatLocalizedNumber(stats.averageWordLength, digitStyle)} />
-            <Stat title={t("stats.longestWord")} value={stats.longestWord || "—"} />
+            <Stat title={t("stats.longestWord")} value={stats.longestWord || "—"} className="sm:col-span-2" />
           </div>
 
           {stats.topKeywords.length > 0 && (

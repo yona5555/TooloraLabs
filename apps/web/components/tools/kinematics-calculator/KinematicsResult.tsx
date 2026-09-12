@@ -142,7 +142,7 @@ export default function KinematicsResult({ hasCalculated, result, mode, solveFor
             <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("t")}</dt>
             <dd className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{result.tAvailable ? fmt(result.t) : t("undefined")}</dd>
           </div>
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("dx")}</dt>
             <dd className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(result.dx)}</dd>
           </div>

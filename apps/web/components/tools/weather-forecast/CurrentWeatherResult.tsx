@@ -159,7 +159,7 @@ export default function CurrentWeatherResult({
                 {formatLocalizedNumber(snapshot.daily[0]?.uvIndexMax ?? 0, digitStyle, { maximumFractionDigits: 1 })}
               </dd>
             </div>
-            <div className="col-span-2 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+            <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
               <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("sunriseSunsetLabel")}</dt>
               <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
                 {timeFormatter.format(new Date(snapshot.daily[0]?.sunrise ?? snapshot.current.time))} / {timeFormatter.format(new Date(snapshot.daily[0]?.sunset ?? snapshot.current.time))}

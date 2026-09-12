@@ -135,7 +135,7 @@ export default function PhResult({ hasCalculated, result, operation, digitStyle 
           <PhSeesawDiagram pH={result.pH} pOH={result.pOH} caption={t("seesawCaption")} />
         </div>
 
-        <dl dir="ltr" className="mt-4 grid grid-cols-2 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
+        <dl dir="ltr" className="mt-4 grid grid-cols-3 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
           <div>
             <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("pOH")}</dt>
             <dd className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(result.pOH)}</dd>

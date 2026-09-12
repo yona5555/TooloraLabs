@@ -55,7 +55,7 @@ export default function StatisticsResult({ result, values, digitStyle }: Props) 
             <Stat label={t("populationStdDev")} value={fmt(result.populationStdDev)} />
             <Stat label={t("sampleStdDev")} value={fmt(result.sampleStdDev)} />
             <Stat label={t("populationVariance")} value={fmt(result.populationVariance)} />
-            <Stat label={t("sampleVariance")} value={fmt(result.sampleVariance)} />
+            <Stat label={t("sampleVariance")} value={fmt(result.sampleVariance)} className="col-span-2" />
           </dl>
         </div>
       </div>
@@ -63,9 +63,9 @@ export default function StatisticsResult({ result, values, digitStyle }: Props) 
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value, className }: { label: string; value: string; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{label}</dt>
       <dd className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{value}</dd>
     </div>
