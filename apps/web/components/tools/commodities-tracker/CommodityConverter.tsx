@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CommodityInputPanel from "./CommodityInputPanel";
 import CommodityResult from "./CommodityResult";
 import CommodityDisclaimer from "./CommodityDisclaimer";
@@ -99,6 +100,7 @@ export default function CommodityConverter({
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="commodities-tracker" />
               <CommodityDisclaimer />
               <CommodityHistoricalChart digitStyle={digitStyle} />
               <CommodityNews />

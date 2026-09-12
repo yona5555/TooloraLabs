@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CryptoInputPanel from "./CryptoInputPanel";
 import CryptoResult from "./CryptoResult";
 import CryptoDisclaimer from "./CryptoDisclaimer";
@@ -105,6 +106,7 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="crypto-converter" />
               <CryptoDisclaimer />
               <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
               <CryptoHistoricalChart coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />

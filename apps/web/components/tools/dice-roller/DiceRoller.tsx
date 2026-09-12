@@ -6,6 +6,7 @@ import { DiceRollerCalculator, type DiceRollerOutput } from "@tooloralabs/tools"
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DiceInputPanel from "./DiceInputPanel";
 import DiceResult from "./DiceResult";
 import DiceQuickReference from "./DiceQuickReference";
@@ -92,6 +93,7 @@ export default function DiceRoller({ education }: { education: ReactNode }) {
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="dice-roller" />
               <DiceQuickReference />
             </div>
           }

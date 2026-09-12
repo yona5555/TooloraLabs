@@ -32955,6 +32955,759 @@
             "answer": "Der Wortzähler unterscheidet nicht zwischen gesprochenem Dialog und Regieanweisungen, Sprecherbezeichnungen oder in Klammern gesetzten Notizen — er zählt jeden durch Leerzeichen getrennten Abschnitt in der Eingabe als Wort. Wenn Ihr Skript nicht gesprochenen Text enthält, gibt das Entfernen vor dem Einfügen eine genauere Schätzung der tatsächlichen Sprechzeit."
           }
         ]
+      },
+      "forex-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Devisenrechner: wie der aktuelle Tageskurs eines Währungspaars einen Betrag über den gemeinsamen USD-Drehpunkt umrechnet, welche Variablen die Funktion akzeptiert und welche Grenzfälle sie behandelt.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Warum die Umrechnung linear skaliert",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Umrechnungswege",
+          "modesValue": "1",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "umgerechneterBetrag = (Betrag ÷ vonKursProUSD) × zuKursProUSD",
+          "note": "Beide Kurse sind gleich definiert — Einheiten dieser Währung pro 1 US-Dollar —, sodass USD als gemeinsamer Drehpunkt dient: Die Division durch den 'von'-Kurs liefert den USD-Gegenwert, die anschließende Multiplikation mit dem 'zu'-Kurs rechnet diesen USD-Wert in einem Schritt in die Zielwährung um."
+        },
+        "flowchart": {
+          "intro": "Eine Umrechnung vergleicht nie zwei Währungen direkt — der Betrag wird immer zuerst über USD als gemeinsame Einheit geleitet.",
+          "steps": [
+            "Eine 'von'- und eine 'zu'-Währung aus der Live-Kursliste wählen (über 30 wichtige und arabische Regionalwährungen)",
+            "Den Kurs jeder Währung als Einheiten pro USD beim täglich aktualisierten Anbieter nachschlagen",
+            "Den eingegebenen Betrag durch den 'von'-Kurs teilen, um den Gegenwert in US-Dollar zu erhalten",
+            "Diesen USD-Wert mit dem 'zu'-Kurs multiplizieren, um ihn in die Zielwährung umzurechnen",
+            "Das Ergebnis mit dem Code der Zielwährung anzeigen"
+          ],
+          "caption": "Jede Umrechnung durchläuft einmal USD — selbst wenn weder die 'von'- noch die 'zu'-Währung USD ist."
+        },
+        "anatomy": {
+          "intro": "Da die Formel den eingegebenen Betrag für ein festes Währungspaar stets mit demselben festen Verhältnis (zuKurs ÷ vonKurs) multipliziert, skaliert eine Verdopplung des Betrags das Ergebnis um exakt denselben Faktor — die Beziehung ist eine Gerade durch den Ursprung.",
+          "xLabel": "Betrag (USD)",
+          "yLabel": "Umgerechnet (EUR)",
+          "caption": "Bei einem festen USD→EUR-Kurs von 0,86 wächst der umgerechnete Betrag exakt proportional zum eingegebenen Betrag."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "amount",
+            "meaning": "Der umzurechnende Betrag in der 'von'-Währung.",
+            "unit": "von-Währung"
+          },
+          {
+            "symbol": "fromRatePerUsd",
+            "meaning": "Einheiten der 'von'-Währung pro 1 US-Dollar, aus der Live-Kursliste.",
+            "unit": "von-Währung / USD"
+          },
+          {
+            "symbol": "toRatePerUsd",
+            "meaning": "Einheiten der 'zu'-Währung pro 1 US-Dollar, aus der Live-Kursliste.",
+            "unit": "zu-Währung / USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein nicht endlicher oder fehlender Betrag wird zu null, nicht zu einem Fehler",
+            "description": "Kann der Betrag nicht als endliche Zahl geparst werden (leeres Feld, ungültige Zeichen), liefert die Umrechnungsfunktion direkt 0 zurück statt eines Fehlers oder NaN — das Ergebnisfeld zeigt einfach null an, bis eine gültige Zahl eingegeben wird."
+          },
+          {
+            "title": "Ein 'von'-Kurs von null oder darunter wird rundweg abgelehnt",
+            "description": "Die Umrechnung prüft ausdrücklich, dass fromRatePerUsd nicht null oder negativ ist — da eine Division durch einen solchen Wert ein unendliches oder unsinniges Ergebnis liefern würde — und gibt stattdessen 0 zurück, als Schutz vor fehlerhaften oder fehlenden Einträgen in der Live-Kursliste."
+          },
+          {
+            "title": "Ein unbekannter Währungscode erzeugt ein Nullergebnis, keinen Absturz",
+            "description": "Stimmt weder der 'von'- noch der 'zu'-Code mit einem Eintrag der geladenen Kursliste überein (etwa unmittelbar nach dem Seitenaufbau oder bei einem falschen Code), liefert die Suche undefined zurück, und das Tool zeigt einen Nullbetrag statt bei einer fehlenden Eigenschaft abzustürzen."
+          },
+          {
+            "title": "Dieselbe Währung auf beiden Seiten zu wählen ist eine gültige, sichere Eingabe",
+            "description": "Die Umrechnung einer Währung in sich selbst teilt und multipliziert exakt mit demselben Kurs und liefert den ursprünglichen Betrag unverändert zurück — dies wird nicht gesondert behandelt, da die allgemeine Formel bereits das korrekte Identitätsergebnis liefert."
+          },
+          {
+            "title": "Die Tauschfunktion lässt beide Währungsauswahlen intakt",
+            "description": "Der Tausch-Button vertauscht die 'von'- und 'zu'-Codes direkt, ohne den eingegebenen Betrag zu ändern oder die Kurse neu abzurufen — dieselbe Kursliste wird für das umgekehrte Paar weiterverwendet."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum läuft die Umrechnung immer über USD, auch zwischen zwei Nicht-USD-Währungen?",
+            "answer": "Die Live-Kursliste speichert den Kurs jeder Währung nur gegenüber einer einzigen gemeinsamen Basis — dem US-Dollar —, sodass nie ein direkter Wechselkurs für jedes mögliche Währungspaar gespeichert oder abgerufen werden muss. Die Umrechnung über diesen gemeinsamen Drehpunkt bedeutet, dass derselbe kleine Datensatz jedes Paar bepreisen kann, auf Kosten einer zusätzlichen Multiplikation."
+          },
+          {
+            "question": "Wie oft werden die Wechselkurse aktualisiert?",
+            "answer": "Die Kursliste wird einmal täglich von einem öffentlichen Marktdatenanbieter aktualisiert. Das ist für alltägliche Umrechnungen und Schätzungen genau genug, kann aber dem sich ständig bewegenden Interbankenmarkt hinterherhinken — für zeitkritische Handelsentscheidungen ist es daher ungeeignet."
+          },
+          {
+            "question": "Warum wirkt der umgerechnete Betrag immer proportional zum eingegebenen Betrag?",
+            "answer": "Weil die Umrechnungsformel für ein gegebenes Währungspaar eine einfache Multiplikation mit einem festen Verhältnis ist (zuKurs ÷ vonKurs), ist die Beziehung zwischen Eingabe und Ergebnis exakt linear — der doppelte Betrag ergibt immer exakt das doppelte Ergebnis, solange sich die zugrunde liegenden Kurse nicht ändern."
+          },
+          {
+            "question": "Was passiert, wenn ich einen Betrag eingebe, bevor die Währungsliste vollständig geladen ist?",
+            "answer": "Die Suche nach der 'von'- und 'zu'-Währung liefert undefined, bis die Kursliste eintrifft, und die Sicherungen der Umrechnungsfunktion behandeln das wie einen ungültigen Kurs — sie geben null zurück statt abzustürzen, sodass das Ergebnisfeld kurz 0 anzeigt, bis die Live-Kurse bereitstehen."
+          }
+        ]
+      },
+      "crypto-converter": {
+        "version": "v1",
+        "description": "Technische Referenz für den Krypto-Rechner: wie die aktuellen USD-Preise zweier Kryptowährungen einen Betrag zwischen ihnen umrechnen, wie die 'Was-wäre-wenn'-Investitionsrendite berechnet wird, welche Variablen beteiligt sind und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Die \"Was wäre, wenn ich investiert hätte\"-Rendite",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Funktionen",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "4 Min."
+        },
+        "formula": {
+          "expression": "umgerechneterBetrag = (Betrag × vonPreisUSD) ÷ zuPreisUSD  |  Gewinn/Verlust = (investiert ÷ Preis_damals × Preis_jetzt) − investiert",
+          "note": "Anders als beim Devisenrechner mit Einheiten-pro-USD-Kursen ist der Preis jeder Münze hier bereits USD pro Münze — die Umrechnung multipliziert also mit dem Preis der Quellmünze und dividiert durch den Preis der Zielmünze, in umgekehrter Reihenfolge zu einem Einheiten-pro-USD-Drehpunkt."
+        },
+        "flowchart": {
+          "intro": "Der USD-Preis jeder Münze dient als gemeinsamer Drehpunkt zwischen zwei beliebigen Münzen, genau wie die Einheiten-pro-USD-Kurse im Devisenrechner.",
+          "steps": [
+            "Eine 'von'- und eine 'zu'-Münze aus der Live-Liste der 100 größten nach Marktkapitalisierung wählen, oder eine beliebige andere Münze per Name oder Symbol suchen",
+            "Den aktuellen USD-Preis jeder Münze nachschlagen — nur über die Suche gefundene Münzen werden der lokalen Liste sofort hinzugefügt",
+            "Den eingegebenen Betrag mit dem USD-Preis der 'von'-Münze multiplizieren, um den Wert in US-Dollar zu erhalten",
+            "Diesen USD-Wert durch den USD-Preis der 'zu'-Münze teilen, um die entsprechende Menge der Zielmünze zu erhalten",
+            "Das Ergebnis in der Zielmünze anzeigen, zusammen mit einer Fiat-Anzeige"
+          ],
+          "caption": "Die USD-Preise beider Münzen dienen als gemeinsamer Drehpunkt, genau wie die Einheiten-pro-USD-Kurse im Devisenrechner, nur umgekehrt ausgedrückt."
+        },
+        "anatomy": {
+          "intro": "Die Funktion 'Was wäre, wenn ich investiert hätte' ist eine eigenständige Berechnung, getrennt vom Umrechner darüber: Sie vergleicht einen festen USD-Betrag, investiert zu einem Preis, mit seinem Wert zum heutigen Preis.",
+          "label": "Wert",
+          "xUnit": " (jetzt)",
+          "caption": "500 US-Dollar, hypothetisch zu einem früheren Preis investiert, sind heute 820 US-Dollar wert — der Gewinn ist einfach der heutige Wert minus der investierte Betrag."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "amount",
+            "meaning": "Die umzurechnende Menge der 'von'-Münze.",
+            "unit": "von-Münze"
+          },
+          {
+            "symbol": "fromPriceUsd",
+            "meaning": "Der aktuelle Preis der 'von'-Münze in US-Dollar.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "toPriceUsd",
+            "meaning": "Der aktuelle Preis der 'zu'-Münze in US-Dollar.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "amountInvested",
+            "meaning": "Ein hypothetischer, zu einem früheren Preis investierter US-Dollar-Betrag, für den Renditerechner.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "priceThenUsd",
+            "meaning": "Der USD-Preis der Münze am hypothetischen Kaufdatum.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "priceNowUsd",
+            "meaning": "Der aktuelle USD-Preis der Münze.",
+            "unit": "USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein nicht positiver oder nicht endlicher 'zu'-Preis liefert null, keinen Fehler",
+            "description": "convertCryptoAmount prüft ausdrücklich, dass toPriceUsd endlich und größer als null ist, bevor dividiert wird — eine Münze ohne gültigen Preis (fehlende Daten oder ein noch ladendes Suchergebnis) würde sonst durch null oder einen unsinnigen Wert teilen; stattdessen wird 0 zurückgegeben."
+          },
+          {
+            "title": "Der 'Was-wäre-wenn'-Rechner lehnt einen investierten Betrag von null oder darunter ab",
+            "description": "calculateInvestmentReturn liefert null — kein Ergebnis mit Wert null — für einen nicht positiven oder nicht endlichen investierten Betrag, sodass die Oberfläche zwischen 'noch keine gültige Eingabe' und einem echten (wenn auch unwahrscheinlichen) 0-Dollar-Ergebnis unterscheiden kann."
+          },
+          {
+            "title": "Ein historischer Preis von null oder darunter wird ebenfalls abgelehnt, der heutige Preis darf jedoch exakt null sein",
+            "description": "priceThenUsd muss strikt positiv sein (man kann nicht zu einem wertlosen oder negativen Preis gekauft haben), während priceNowUsd nur nicht negativ sein muss — der aktuelle Preis einer Münze kann durchaus auf null fallen, und der Rechner meldet dann einen Totalverlust, statt die Berechnung zu verweigern."
+          },
+          {
+            "title": "Eine nur über die Suche gefundene Münze wird gemerkt, damit ihr Preis verfügbar bleibt",
+            "description": "onCoinDiscovered fügt eine neu gefundene Münze genau einmal — per ID geprüft — der aktiven Münzliste hinzu, sodass ein späteres Zurückschalten der 'von'- oder 'zu'-Auswahl auf diese Münze ihren Preis weiterhin findet, ohne erneut suchen zu müssen."
+          },
+          {
+            "title": "Historische Chartdaten sind auf 365 Tage zurück begrenzt",
+            "description": "MAX_HISTORY_DAYS spiegelt die Grenze des Krypto-Datenanbieters für kostenlose historische Abfragen wider; isWithinSupportedHistory vergleicht Kalendertage in UTC (nicht rohe Zeitstempel), sodass das Grenzdatum selbst — exakt vor 365 Tagen — akzeptiert und nicht wegen einiger Stunden Rundungsfehler abgelehnt wird."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum wird beim Umrechnen von Krypto mit einem Preis multipliziert und durch den anderen dividiert, statt wie beim Devisenrechner einen Kurs zu verwenden?",
+            "answer": "Der Preis jeder Münze wird bereits direkt in US-Dollar notiert (Dollar pro Münze), nicht umgekehrt. Die Multiplikation mit dem Preis der Quellmünze rechnet den Betrag in USD um, die Division durch den Preis der Zielmünze rechnet diesen USD-Wert in die Zielmünze um — mathematisch dieselbe USD-Drehpunkt-Idee wie beim Devisenrechner, nur mit Preisen statt Einheiten-pro-Dollar-Kursen formuliert."
+          },
+          {
+            "question": "Ist die Funktion 'Was wäre, wenn ich investiert hätte' dasselbe wie Live-Handelsdaten?",
+            "answer": "Nein — es ist eine einfache, transparente rechnerische Veranschaulichung (Betrag ÷ Preis damals × Preis jetzt) zu Lernzwecken, mit den von Ihnen angegebenen zwei Preisen. Handelsgebühren, Slippage, Steuern oder der genaue Zeitpunkt eines echten Trades werden nicht berücksichtigt."
+          },
+          {
+            "question": "Was passiert, wenn ich nach einer Münze suche, die nicht in der anfänglichen Top-100-Liste ist?",
+            "answer": "Die Suche ruft eine eigene Abfrage auf und fügt die gefundene Münze über onCoinDiscovered der aktiven Liste der Seite hinzu — sie erscheint dann in den 'von'/'zu'-Auswahlfeldern und funktioniert normal weiter, auch im historischen Chart und im Was-wäre-wenn-Rechner, ohne Neuladen der Seite."
+          },
+          {
+            "question": "Warum kann ich Kryptopreise nicht weiter als ein Jahr zurück im Chart sehen?",
+            "answer": "Die kostenlose Stufe des von diesem Tool genutzten Marktdatenanbieters begrenzt historische Tagesdaten auf 365 Tage. Die Datumsauswahl bietet keine weiter zurückliegende Option, da die zugrunde liegenden Daten auf dieser Stufe schlicht nicht existieren."
+          }
+        ]
+      },
+      "commodities-tracker": {
+        "version": "v1",
+        "description": "Technische Referenz für den Rohstoff-Tracker: wie ein Gewicht Gold oder Silber, oder eine Anzahl Ölfässer, mithilfe von Live-Stückpreisen und einer exakten Feinunzen-Umrechnung in einen Geldwert umgerechnet wird, welche Variablen beteiligt sind und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Vergleich der Rohstoff-Stückpreise",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Rohstoffe",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Metallwert = Gewicht(Feinunze) × PreisProFeinunze × Wechselkurs  |  Ölwert = Fässer × PreisProFass × Wechselkurs  |  1 Feinunze = 31,1034768 g",
+          "note": "Gold und Silber teilen sich eine Wertformel (beide werden pro Feinunze bepreist); Öl nutzt dieselbe Form, wobei Fässer das Gewicht ersetzen. Ein Wechselkurs von 1 bepreist das Ergebnis in US-Dollar; jeder andere Einheiten-pro-USD-Kurs rechnet es in eine andere Währung um, genau wie der Drehpunkt des Devisenrechners."
+        },
+        "flowchart": {
+          "intro": "Das Gewicht wird immer zuerst auf Feinunzen normiert, bevor es auf einen Preis trifft, da dies die Einheit ist, in der Metallpreise tatsächlich notiert werden.",
+          "steps": [
+            "Einen Rohstoff wählen — Gold, Silber oder Öl",
+            "Bei Gold oder Silber eine Gewichtseinheit (Gramm oder Feinunze) wählen und die Menge eingeben; bei Öl direkt eine Anzahl Fässer eingeben",
+            "Wurde das Gewicht in Gramm eingegeben, durch die exakte Konstante 31,1034768 teilen, um es in Feinunzen umzurechnen",
+            "Den heutigen USD-Preis pro Feinunze (für Metalle) oder pro Fass (für Öl) beim Live-Datenanbieter nachschlagen",
+            "Die Menge in Feinunzen (oder Fässern) mit diesem Preis multiplizieren, dann mit dem Wechselkurs der gewählten Anzeigewährung, um den endgültigen Geldwert zu erhalten"
+          ],
+          "caption": "Gramm werden nie direkt mit einem Preis pro Unze multipliziert — sie werden jedes Mal zuerst in Feinunzen umgerechnet."
+        },
+        "anatomy": {
+          "intro": "Gold, Silber und Öl werden in sehr unterschiedlichen Einheiten und Größenordnungen bepreist — dies vergleicht je einen anschaulichen Stückpreis nebeneinander.",
+          "labelGold": "Gold (USD/g)",
+          "labelSilver": "Silber (USD/g)",
+          "labelOil": "Öl (USD/Fass)",
+          "caption": "Gold wird zu etwa dem 70-Fachen des Silberpreises pro Gramm gehandelt, während Öl überhaupt nicht nach Gewicht, sondern pro Fass bepreist wird — das Tool behält die jeweils natürliche Einheit jedes Rohstoffs bei, statt alle drei in eine zu zwingen."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "Gewicht / Fässer",
+            "meaning": "Die eingegebene Menge — ein Gewicht für Gold/Silber, oder eine Fassanzahl für Öl.",
+            "unit": "Gramm, Feinunze oder Fass"
+          },
+          {
+            "symbol": "weightUnit",
+            "meaning": "Die Einheit des eingegebenen Gewichts (Gramm oder Feinunze) — gilt nur für Gold und Silber.",
+            "unit": "—"
+          },
+          {
+            "symbol": "Preis pro Feinunze / Fass",
+            "meaning": "Der heutige Live-USD-Preis für eine Feinunze des Metalls oder ein Fass Öl.",
+            "unit": "USD"
+          },
+          {
+            "symbol": "fxRatePerUnit",
+            "meaning": "Einheiten der gewählten Anzeigewährung pro 1 US-Dollar; 1 belässt den Wert in USD.",
+            "unit": "Anzeigewährung / USD"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein negatives oder nicht endliches Gewicht, Preis oder Wechselkurs liefert null, keinen negativen oder NaN-Wert",
+            "description": "Sowohl die Metall- als auch die Ölwert-Berechnung prüfen jede ihrer numerischen Eingaben vor der Multiplikation auf Endlichkeit und Nicht-Negativität — schlägt eine dieser Prüfungen fehl, wird das gesamte Ergebnis 0, statt einem fehlerhaften Preis-Feed oder einem versehentlichen Minuszeichen einen unsinnigen Geldwert zu erlauben."
+          },
+          {
+            "title": "Die Umrechnung eines Gewichts in dieselbe Einheit, in der es bereits vorliegt, ist eine No-op, keine unnötige Berechnung",
+            "description": "Die Gewichtsumrechnung prüft zuerst, ob Quell- und Zieleinheit übereinstimmen, und gibt die Menge unverändert zurück — eine Gramm-zu-Gramm- oder Unze-zu-Unze-'Umrechnung' wird nie über die Feinunzen-Konstante geleitet."
+          },
+          {
+            "title": "Die Feinunzen-Umrechnung verwendet eine exakte Konstante, keine gerundete Näherung",
+            "description": "Der Wert für eine Feinunze in Gramm beträgt exakt 31,1034768 — der international genormte exakte Wert — statt eines gerundeten '31,1', sodass das wiederholte Hin- und Herrechnen zwischen Gramm und Feinunze nie eine kumulierende Rundungsabweichung einführt."
+          },
+          {
+            "title": "Öl hat gezielt überhaupt keinen Gewichtseinheiten-Umschalter",
+            "description": "Das Eingabefeld zeigt den Gramm/Feinunze-Umschalter nur, wenn der gewählte Rohstoff nicht Öl ist — Öl wird immer in Fässern eingegeben und bepreist, da dies die Einheit ist, in der sein Live-Preis notiert wird."
+          },
+          {
+            "title": "Eine nicht endliche eingegebene Menge wird vor jeder Umrechnung als null behandelt",
+            "description": "Die Gewichtsumrechnung selbst liefert 0 für eine nicht endliche Menge (etwa eine leere oder unvollständig eingegebene Eingabe), sodass eine unvollständige Zahl im Mengenfeld nie als NaN in die Preismultiplikation gelangt."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum rechnet das Tool Gramm in Feinunzen um und nicht umgekehrt?",
+            "answer": "Gold- und Silberpreise werden international pro Feinunze notiert, nicht pro Gramm — die Feinunze ist also die interne 'Preiseinheit' des Tools. Eine in Gramm eingegebene Menge wird zuerst in Feinunzen umgerechnet, damit sie direkt mit diesem Preis pro Unze multipliziert werden kann."
+          },
+          {
+            "question": "Warum ist die Feinunzen-Umrechnungskonstante so genau (31,1034768) statt gerundet?",
+            "answer": "Eine Feinunze ist nach internationaler Konvention exakt als 31,1034768 Gramm definiert. Die gerundete '31,1' würde einen kleinen, aber realen Fehler einführen, der sich bei jedem Hin- und Herrechnen zwischen den beiden Einheiten aufsummiert."
+          },
+          {
+            "question": "Kann ich Öl nach Gewicht statt nach Fass bepreisen lassen?",
+            "answer": "Nein — das Tool bepreist Öl immer pro Fass, entsprechend der tatsächlichen Notierung durch den Live-Datenanbieter (WTI-Rohöl, USD pro Fass). Der Gramm/Feinunze-Umschalter erscheint nur bei Gold und Silber, die tatsächlich gewichtsbasierte Rohstoffe sind."
+          },
+          {
+            "question": "Wie wird der SAR- (oder andere Währungs-)Wert aus dem USD-Preis berechnet?",
+            "answer": "Der in USD ausgedrückte Stückpreis wird einfach mit dem Einheiten-pro-USD-Kurs der Währung multipliziert — demselben Drehpunktmechanismus, den auch der Devisenrechner nutzt — sodass der Wechsel der Anzeigewährung keinen separaten Gold-/Silber-/Ölpreis-Feed pro Währung erfordert, sondern nur eine zusätzliche Multiplikation."
+          }
+        ]
+      },
+      "weather-forecast": {
+        "version": "v1",
+        "description": "Technische Referenz für die Wettervorhersage: wie die Koordinaten einer gesuchten oder voreingestellten Stadt genutzt werden, um aktuelle Bedingungen und eine 7-Tage-Vorschau abzurufen, wie rohe Wettercodes und Einheiten für die Anzeige übersetzt werden, welche Variablen beteiligt sind und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionAnatomy": "Anatomie eines Tages-Vorhersageeintrags",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Einheitensysteme",
+          "modesValue": "2",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "°F = °C × 9⁄5 + 32  |  °C = (°F − 32) × 5⁄9  |  mph = km/h ÷ 1,609344",
+          "note": "Dies sind die einzigen echten rechnerischen Formeln im Tool — alles andere (eine Stadt wählen, eine Vorhersage abrufen, eine Bedingung kategorisieren) ist ein Datenabgleich oder ein Netzwerkabruf, keine Berechnung."
+        },
+        "flowchart": {
+          "intro": "Nur der allerletzte Schritt beinhaltet Arithmetik — alles davor ist das Auflösen eines Standorts und das Abrufen von Daten.",
+          "steps": [
+            "Eine Stadt namentlich suchen oder eine der integrierten Prioritätsstädte wählen",
+            "Die gewählte Stadt in ein Breitengrad-/Längengrad-Paar auflösen (Suchergebnisse enthalten bereits Koordinaten; Prioritätsstädte haben sie fest eingebaut)",
+            "Aktuelle Bedingungen und eine 7-Tage-Vorhersage für diese Koordinaten von der Open-Meteo-API abrufen",
+            "Den numerischen WMO-Wettercode der API einer der bekannten Wetterkategorien des Tools zuordnen (klarer Himmel, Regen, Schnee, Gewitter usw.), mit Rückfall auf 'unbekannt' für jeden nicht in der Tabelle enthaltenen Code",
+            "Temperatur- und Windgeschwindigkeitswerte in das vom Besucher gewählte Einheitensystem (metrisch oder US) umrechnen, bevor die Karte der aktuellen Bedingungen und das 7-Tage-Panel gerendert werden"
+          ],
+          "caption": "Nur der letzte Schritt beinhaltet Arithmetik — alles davor ist das Auflösen eines Standorts und Abrufen von Daten, keine Wertberechnung."
+        },
+        "anatomy": {
+          "intro": "Ein einzelner Tages-Vorhersageeintrag ist eine kleine Struktur, keine einzelne Zahl — dies vergleicht zwei seiner Felder nebeneinander für einen veranschaulichenden Tag.",
+          "labelHigh": "Höchst (°C)",
+          "labelLow": "Tiefst (°C)",
+          "caption": "Jeder Tag der 7-Tage-Vorhersage trägt seine eigene Höchst- und Tiefsttemperatur, zusammen mit einer Wetterkategorie und einer Niederschlagswahrscheinlichkeit — dies zeigt nur die Temperaturspanne für einen repräsentativen Tag."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "latitude, longitude",
+            "meaning": "Die Koordinaten der gewählten Stadt, verwendet für die Abfrage der Vorhersage-API.",
+            "unit": "Dezimalgrad"
+          },
+          {
+            "symbol": "weather_code",
+            "meaning": "Ein numerischer WMO-Code, den die API für aktuelle oder vorhergesagte Bedingungen zurückgibt.",
+            "unit": "—"
+          },
+          {
+            "symbol": "unitSystem",
+            "meaning": "Ob Temperatur und Windgeschwindigkeit metrisch (°C, km/h) oder in US-Einheiten (°F, mph) angezeigt werden.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein nicht erkannter Wettercode fällt auf 'unbekannt' zurück, statt abzustürzen",
+            "description": "Die Wetterkategorie-Zuordnung sucht den numerischen Code in einer festen Tabelle, die die von Open-Meteo tatsächlich zurückgegebenen WMO-Codes abdeckt; jeder Code außerhalb dieser Tabelle (eine API-Änderung, ein undokumentierter Wert) wird zur Kategorie 'unbekannt' aufgelöst, statt einen Fehler zu werfen oder ein leeres Symbol anzuzeigen."
+          },
+          {
+            "title": "Die Auswahl der bereits geladenen Startstadt löst keinen erneuten Abruf der Vorhersage aus",
+            "description": "Der Tracker vergleicht die Koordinaten der neu gewählten Stadt mit der Startstadt der Seite und überspringt den Abruf vollständig, wenn sie übereinstimmen — die serverseitig gerenderte Vorhersage für die Startstadt wird wiederverwendet, statt ein zweites Mal angefragt zu werden."
+          },
+          {
+            "title": "Ein fehlgeschlagener Vorhersageabruf setzt einen sichtbaren Fehlerzustand, keine stille veraltete Anzeige",
+            "description": "Löst sich die Vorhersageanfrage nicht erfolgreich auf, setzt der Tracker seinen Status auf 'Fehler', statt die Vorhersage der vorherigen Stadt unerklärt auf dem Bildschirm zu belassen — die Oberfläche kann dann anzeigen, dass die Daten der neuen Stadt nicht geladen werden konnten."
+          },
+          {
+            "title": "Die Stadtsuche fragt die API erst ab, wenn mindestens zwei Zeichen eingegeben wurden",
+            "description": "Die Sucheffekt-Funktion bricht sofort für eine normalisierte Anfrage kürzer als 2 Zeichen ab und vermeidet so eine Netzwerkanfrage (und ein leeres oder verrauschtes Ergebnis) für einen einzelnen Tastendruck."
+          },
+          {
+            "title": "Ein nicht endlicher Temperatur- oder Windgeschwindigkeitswert wird zu null statt zu NaN umgerechnet",
+            "description": "Alle Umrechnungsfunktionen für Temperatur und Windgeschwindigkeit prüfen vor der Umrechnung auf Endlichkeit, sodass ein fehlerhafter oder fehlender Messwert der API als 0 statt als 'NaN°' auf der Seite erscheint."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum unterstützt das Tool nur metrische und US-Einheitensysteme, keine anderen?",
+            "answer": "Temperatur (°C/°F) und Windgeschwindigkeit (km/h/mph) sind die beiden Einheitenpaare, die sich in der alltäglichen Wetterberichterstattung zwischen Regionen tatsächlich unterscheiden; jeder andere von der API zurückgegebene Wert, wie Niederschlagswahrscheinlichkeit und Luftfeuchtigkeit, ist bereits ein Prozentwert und benötigt keine Einheitenumrechnung."
+          },
+          {
+            "question": "Woher kommen die Wettersymbole und -kategorien?",
+            "answer": "Open-Meteo liefert für aktuelle Bedingungen und jeden Vorhersagetag einen numerischen WMO-Wettercode (Weltorganisation für Meteorologie). Das Tool ordnet diesen Code einer seiner eigenen bekannten Kategorien zu — klarer Himmel, Regen, Schnee, Gewitter und so weiter —, statt Besuchern den rohen numerischen Code anzuzeigen."
+          },
+          {
+            "question": "Warum gibt es keinen Nachrichten- oder Warnbereich wie bei den Devisen- oder Krypto-Tools?",
+            "answer": "Dieses Tool ist bewusst auf aktuelle Bedingungen und eine 7-Tage-Vorschau aus einer einzigen kostenlosen, schlüssellosen Datenquelle (Open-Meteo) beschränkt. Unwetterwarnungen würden einen zweiten, regionsspezifischen Datenanbieter erfordern und wurden weggelassen, um die Datenquelle des Tools weltweit einfach und konsistent zu halten."
+          },
+          {
+            "question": "Löst die Auswahl einer neuen Stadt immer eine neue Netzwerkanfrage aus?",
+            "answer": "Nur, wenn sich die Koordinaten der neuen Stadt von der Stadt unterscheiden, deren Vorhersage bereits geladen ist — wird dieselbe Startstadt, mit der die Seite geladen wurde, erneut gewählt, wird die bereits serverseitig abgerufene Vorhersage wiederverwendet, statt sie erneut anzufragen."
+          }
+        ]
+      },
+      "dice-roller": {
+        "version": "v1",
+        "description": "Technische Referenz für den Würfelroller: wie das Ergebnis jedes Würfels aus einer gleichverteilten Zufallsverteilung gezogen wird, wie Würfel- und Seitenzahl validiert werden, welche Variablen beteiligt sind und welche Grenzfälle behandelt werden.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionDistribution": "Verteilung der Würfe",
+        "sectionAnatomy": "Anatomie einer Mehrfach-Würfel-Summe",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Würfeltypen",
+          "modesValue": "6",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Wurf = ⌊ zufallsFn() × Seiten ⌋ + 1  |  Summe = Σ Würfe",
+          "note": "zufallsFn() soll einen Wert in [0, 1) liefern — der Standardvertrag von Math.random() —, sodass die Multiplikation mit der Seitenzahl und das Abrunden eine gleichverteilte Ganzzahl von 0 bis Seiten−1 ergibt, und die Addition von 1 diesen Bereich auf die übliche Würfelbeschriftung von 1 bis Seiten verschiebt."
+        },
+        "flowchart": {
+          "intro": "Jeder Würfel wird unabhängig mit derselben Formel geworfen — die Summe wird erst danach aus dem fertigen Satz der Würfe berechnet.",
+          "steps": [
+            "Prüfen, dass die Würfelanzahl eine ganze Zahl zwischen 1 und 20 ist",
+            "Prüfen, dass die Seitenzahl einer der sechs unterstützten Würfeltypen ist: 4, 6, 8, 10, 12 oder 20",
+            "Für jeden Würfel einen Wert aus der Zufallsquelle ziehen und mit ⌊Zufall × Seiten⌋ + 1 auf eine ganzzahlige Seite abbilden",
+            "Das Ergebnis jedes einzelnen Würfels in ein Wurf-Array sammeln, in der Reihenfolge, in der die Würfel geworfen wurden",
+            "Alle Würfe im Array addieren, um die Summe zu erhalten, und sowohl die einzelnen Würfe als auch die Summe anzeigen"
+          ],
+          "caption": "Jeder Würfel wird unabhängig mit derselben Formel geworfen — die Summe ist nur eine danach berechnete Addition, kein separater Zufallszug."
+        },
+        "distribution": {
+          "intro": "Da jede Seite gleich wahrscheinlich ist, verteilen sich die Ergebnisse beim wiederholten Werfen desselben Würfels gleichmäßig über seinen Bereich, zentriert auf den mathematischen Durchschnitt des Würfels.",
+          "labelAverage": "Durchschnitt",
+          "caption": "Acht Beispielwürfe eines sechsseitigen Würfels streuen über alle sechs Seiten, lose gruppiert um den wahren Durchschnitt von 3,5 — die Mitte zwischen 1 und 6."
+        },
+        "anatomy": {
+          "intro": "Das Werfen von mehr als einem Würfel zeigt jedes einzelne Ergebnis zusammen mit ihrer Summe, sodass die Summe nie eine rätselhafte Zahl ist.",
+          "labelDie1": "Würfel 1",
+          "labelDie2": "Würfel 2",
+          "labelDie3": "Würfel 3",
+          "totalLabel": "Summe",
+          "caption": "Drei Würfel, die 4, 2 und 6 zeigen, ergeben eine angezeigte Summe von 12 — die einzelnen Würfe und die Summe werden immer zusammen angezeigt."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "diceCount",
+            "meaning": "Wie viele Würfel auf einmal geworfen werden sollen.",
+            "unit": "1–20"
+          },
+          {
+            "symbol": "faces",
+            "meaning": "Wie viele Seiten jeder Würfel hat.",
+            "unit": "4, 6, 8, 10, 12 oder 20"
+          },
+          {
+            "symbol": "randomFn",
+            "meaning": "Die Zufallsquelle, aus der die Seite jedes Würfels gezogen wird; standardmäßig Math.random, austauschbar für deterministische Tests.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Eine Würfelanzahl außerhalb von 1–20 oder eine, die keine ganze Zahl ist, wird mit dem Fehler 'ungültige Würfelanzahl' abgelehnt",
+            "description": "Number.isInteger(diceCount) wird zusammen mit dem Bereich 1 bis 20 in einer einzigen Bedingung geprüft — eine gebrochene Anzahl (wie 2,5) wird aus demselben Grund abgelehnt wie eine Anzahl von 0 oder 25, da keine von beiden eine echte, würfelbare Anzahl beschreibt."
+          },
+          {
+            "title": "Jede Seitenzahl außerhalb der festen Menge {4, 6, 8, 10, 12, 20} wird mit dem Fehler 'ungültige Seitenzahl' abgelehnt",
+            "description": "Der Rechner prüft die Zugehörigkeit zu einer expliziten Liste der sechs unterstützten Würfeltypen statt nur zu einem numerischen Bereich — eine Seitenzahl wie 7 oder 100 wird abgelehnt, obwohl sie eine völlig gültige Ganzzahl ist, da kein solcher physischer Würfel modelliert wird."
+          },
+          {
+            "title": "Beide Fehlerfälle liefern weiterhin success: true, wobei der Fehler über ein Feld statt einer geworfenen Ausnahme sichtbar wird",
+            "description": "Selbst eine ungültige Würfel- oder Seitenzahl erzeugt ein normales, erfolgreiches Ergebnisobjekt (mit einem leeren Wurf-Array und Summe 0), statt eine Ausnahme zu werfen — Aufrufer prüfen das Fehlerfeld, um das Problem zu erkennen, nach demselben Muster wie jeder andere Rechner in dieser Codebasis."
+          },
+          {
+            "title": "Die Zufallsquelle ist injizierbar, gezielt damit Tests nie von echter Zufälligkeit abhängen",
+            "description": "randomFn ist standardmäßig Math.random, kann aber durch jede Funktion ersetzt werden, die einen Wert in [0, 1) liefert — dies erlaubt es den automatisierten Tests des Rechners, eine exakte, wiederholbare Wurffolge zu behaupten, statt nur einen Bereich akzeptabler Ergebnisse."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Warum kann ich nur aus sechs bestimmten Seitenzahlen wählen statt aus einer beliebigen Zahl?",
+            "answer": "Diese sechs — W4, W6, W8, W10, W12 und W20 — sind die in Tabletop-Spielen üblichen polyedrischen Standardwürfel; das Tool prüft gegen diese feste Liste, statt eine beliebige Seitenzahl zu akzeptieren, da alles andere keinem echten Würfel entspräche."
+          },
+          {
+            "question": "Ist Math.random() gut genug für faire Würfelwürfe?",
+            "answer": "Ja, für den Zweck dieses Tools. Math.random() ist ein universeller Pseudozufallsgenerator, der eine Gleichverteilung über [0, 1) erzeugt — mehr als ausreichend für gelegentliches Würfeln. Er ist nicht kryptografisch sicher und wäre daher für etwas wie eine faire, unvorhersehbare Lotterieziehung nicht geeignet, aber dafür ist dieses Tool nicht gedacht."
+          },
+          {
+            "question": "Warum ist bei 20 Würfeln Schluss, statt mehr zu erlauben?",
+            "answer": "Zwanzig ist eine praktische Obergrenze, gewählt, um die Anzeige der einzelnen Würfe lesbar und die Eingabe klar begrenzt zu halten — die Validierung lehnt jede Anzahl darüber ab, ebenso wie Anzahlen unter 1."
+          },
+          {
+            "question": "Wie wird die Summe berechnet, wenn ich mehrere Würfel werfe?",
+            "answer": "Das Ergebnis jedes einzelnen Würfels wird zuerst der Reihe nach erzeugt und in einem Wurf-Array gespeichert — die Summe ist danach eine einfache Addition dieses Arrays, einmal berechnet, nicht Würfel für Würfel während der Wurfschleife akkumuliert."
+          }
+        ]
+      },
+      "love-calculator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Liebesrechner: wie zwei Namen mittels eines String-Hashes in einen deterministischen, reihenfolgeunabhängigen Kompatibilitätsprozentsatz umgewandelt werden, welche Variablen beteiligt sind und welche Grenzfälle behandelt werden. Ein reines Spaß- und Unterhaltungstool — kein echtes Maß für Kompatibilität.",
+        "sectionFormula": "Kernformel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionOverlap": "Was die beiden Namen gemeinsam haben",
+        "sectionAnatomy": "Das Ergebnis als Prozentsatz",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Ergebnisbereich",
+          "modesValue": "0–100 %",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "kombiniert = sortieren(normalisieren(Name1), normalisieren(Name2)).join('+')  |  Hash = Σ (Hash×31 + Codepoint) mod 2³²  |  Prozentsatz = |Hash| mod 101",
+          "note": "Dies ist ein klassischer, Java-artiger rollender String-Hash (mal 31 und addieren), kein Maß für irgendetwas Reales an Kompatibilität — dieselben zwei Namen werden immer zur selben kombinierten Zeichenkette sortiert und ergeben daher immer denselben Prozentsatz, unabhängig davon, welcher Name zuerst eingegeben wurde."
+        },
+        "flowchart": {
+          "intro": "Das Sortieren der beiden Namen vor dem Hashing sorgt dafür, dass das Ergebnis unabhängig davon ist, welcher Name zuerst eingegeben wurde.",
+          "steps": [
+            "Jeden Namen normalisieren: Leerzeichen trimmen, in Kleinbuchstaben umwandeln und jedes Zeichen entfernen, das kein Unicode-Buchstabe oder -Ziffer ist",
+            "Ist einer der normalisierten Namen leer, abbrechen und den Fehler 'leerer Name' melden statt einen Hash zu berechnen",
+            "Die beiden normalisierten Namen alphabetisch sortieren und mit einem '+' verbinden, sodass die Eingabereihenfolge der Namen das Ergebnis nie beeinflusst",
+            "Die kombinierte Zeichenkette Zeichen für Zeichen durchlaufen und einen laufenden Hash als Hash × 31 + Codepoint dieses Zeichens aktualisieren, bei jedem Schritt auf eine vorzeichenbehaftete 32-Bit-Ganzzahl umgebrochen",
+            "Den Absolutwert des finalen Hash nehmen und modulo 101 reduzieren, um bei einem Prozentsatz von 0 bis 100 zu landen"
+          ],
+          "caption": "Das Sortieren der beiden Namen vor dem Hashing sorgt dafür, dass 'Alice' + 'Bob' exakt dasselbe Ergebnis liefert wie 'Bob' + 'Alice'."
+        },
+        "overlap": {
+          "intro": "Beide Namen werden zunächst einzeln normalisiert und dann vor dem Hashing zu einer Zeichenkette kombiniert — dies zeigt, was jeder Name zu dieser gemeinsamen Eingabe beiträgt.",
+          "leftLabel": "Name 1",
+          "rightLabel": "Name 2",
+          "overlapLabel": "Kombiniert & gehasht",
+          "leftOnlyItems": "\"alice\"",
+          "overlapItems": "\"alice+bob\"",
+          "rightOnlyItems": "\"bob\"",
+          "caption": "Jeder Name wird einzeln normalisiert, dann werden beide sortiert und zu einer einzigen Zeichenkette verbunden, die die Hash-Funktion tatsächlich verarbeitet."
+        },
+        "anatomy": {
+          "intro": "Das Endergebnis ist ein einzelner Prozentsatz von 0 bis 100 — hier als gefülltes Raster dargestellt, genauso wie ein Prozentsatz an anderer Stelle in dieser Dokumentation visualisiert wird.",
+          "caption": "Ein Hash, der sich auf 73 reduziert, wird als 73 von 100 gefüllten Zellen angezeigt — der Prozentsatz ist immer eine ganze Zahl in genau diesem Bereich, nie negativ und nie über 100."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "name1",
+            "meaning": "Der erste eingegebene Name.",
+            "unit": "Text"
+          },
+          {
+            "symbol": "name2",
+            "meaning": "Der zweite eingegebene Name.",
+            "unit": "Text"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Ein leerer Name auf einer der beiden Seiten — auch einer, der nur aus Leerzeichen oder nur aus Satzzeichen besteht — liefert den Fehler 'leerer Name'",
+            "description": "Die Normalisierung entfernt Leerzeichen und jedes Nicht-Buchstaben-/Nicht-Ziffern-Zeichen, bevor die Leerheitsprüfung läuft, sodass ein Name, der nur als \"---\" oder ein paar Leerzeichen eingegeben wurde, korrekt als leer behandelt wird, genau wie ein wirklich leeres Feld."
+          },
+          {
+            "title": "Das Ergebnis hängt nie davon ab, welcher Name in welches Feld eingegeben wurde",
+            "description": "Da die beiden normalisierten Namen vor dem Verbinden und Hashen sortiert werden, liefert die Eingabe von 'Alice' und 'Bob' denselben Prozentsatz wie die Eingabe von 'Bob' und 'Alice' — der Rechner ist ausdrücklich reihenfolgeunabhängig konzipiert."
+          },
+          {
+            "title": "Unterschiede in Satzzeichen und Leerzeichen zwischen ansonsten identischen Namen ändern das Ergebnis nicht",
+            "description": "Der Unicode-bewusste Entfernungsschritt entfernt Bindestriche, Apostrophe und Leerzeichen zusammen mit ASCII-Satzzeichen, sodass 'Anne-Marie' und 'AnneMarie' auf dieselbe Zeichenkette normalisiert werden und daher denselben Hash-Prozentsatz ergeben."
+          },
+          {
+            "title": "Der laufende Hash läuft bewusst über einen 32-Bit-Ganzzahlüberlauf um, statt einer stetig wachsenden Zahl",
+            "description": "Die `| 0`-Operation nach jedem Multiplikations- und Additionsschritt zwingt den Hash bei jedem Zeichen zurück in den vorzeichenbehafteten 32-Bit-Ganzzahlbereich, exakt nach dem klassischen Java-Algorithmus String.hashCode(), statt den Wert beliebig groß werden zu lassen."
+          },
+          {
+            "title": "Math.abs() vor dem Modulo behandelt den Fall, dass der Hash auf einer negativen Zahl landet",
+            "description": "Da der 32-Bit-Überlauf einen negativen Zwischenhash erzeugen kann, garantiert die Absolutwertbildung vor dem Modulo-101-Schritt, dass der endgültige Prozentsatz immer nicht negativ ist, statt gelegentlich einen negativen Kompatibilitätswert anzuzeigen."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Ist das ein echtes Maß für romantische Kompatibilität?",
+            "answer": "Nein — dies ist ausdrücklich ein reines Spaß- und Unterhaltungstool. Der Prozentsatz stammt aus einem deterministischen String-Hash der beiden Namen, nicht aus einem psychologischen, astrologischen oder statistischen Kompatibilitätsmodell."
+          },
+          {
+            "question": "Warum spielt die Reihenfolge, in der ich die beiden Namen eingebe, keine Rolle?",
+            "answer": "Die beiden normalisierten Namen werden alphabetisch sortiert, bevor sie zu der Zeichenkette kombiniert werden, die tatsächlich gehasht wird — die Hash-Funktion sieht also immer dieselbe kombinierte Eingabe, unabhängig davon, welcher Name zuerst eingegeben wurde."
+          },
+          {
+            "question": "Erhalte ich jedes Mal denselben Prozentsatz, wenn ich dieselben zwei Namen eingebe?",
+            "answer": "Ja — der Hash ist vollständig deterministisch; an keiner Stelle der Berechnung ist Zufall im Spiel. Dieselben zwei Namen, in beliebiger Reihenfolge, ergeben immer exakt denselben Prozentsatz."
+          },
+          {
+            "question": "Warum ändert Groß-/Kleinschreibung oder Satzzeichen in einem Namen das Ergebnis nicht?",
+            "answer": "Jeder Name wird vor dem Hashing in Kleinbuchstaben umgewandelt und von allem befreit, das kein Unicode-Buchstabe oder -Ziffer ist, sodass 'Anne-Marie', 'anne marie' und 'ANNEMARIE' alle zur identischen Zeichenkette normalisiert werden und daher identisch gehasht werden."
+          }
+        ]
+      },
+      "random-quote-generator": {
+        "version": "v1",
+        "description": "Technische Referenz für den Zufallszitat-Generator: wie ein Kategoriefilter einen Zitatepool aufbaut, wie eine 'Neues Zitat'-Anfrage die Wiederholung des aktuellen Zitats vermeidet, und die kuratierte, quellenbelegte Sammlung, aus der er schöpft.",
+        "sectionFormula": "Auswahlregel",
+        "sectionFlowchart": "So wird gerechnet",
+        "sectionPools": "Die Zitatesammlung",
+        "sectionAnatomy": "Anatomie eines Zitat-Ergebnisses",
+        "sectionVariables": "Variablen",
+        "sectionEdgeCases": "Behandelte Grenzfälle",
+        "sectionFaq": "Häufig gestellte Fragen",
+        "sectionRelatedTools": "Verwandte Tools",
+        "quickFacts": {
+          "variables": "Variablen",
+          "modes": "Kategorien",
+          "modesValue": "3",
+          "relatedTools": "Verwandte Tools",
+          "readTime": "Lesezeit",
+          "readTimeValue": "3 Min."
+        },
+        "formula": {
+          "expression": "Pool = Kategorie === 'alle' ? alleZitate : alleZitate.filter(z ⇒ z.kategorie === Kategorie)  |  Index = ⌊ zufallsFn() × Pool.Länge ⌋",
+          "note": "Es gibt hier kein rechnerisches 'Ergebnis' — das Resultat ist eine zufällige Auswahl aus einer gefilterten Liste, keine berechnete Zahl; dies beschreibt daher die Auswahlregel und keine Formel im üblichen Sinne."
+        },
+        "flowchart": {
+          "intro": "Das Ausschließen des aktuellen Zitats verkleinert den Pool immer nur um einen Eintrag — es besteht nie die Gefahr, nichts mehr zur Auswahl zu haben.",
+          "steps": [
+            "Einen Kategoriefilter wählen — Motivierend, Literarisch, Philosophisch oder 'Alle'",
+            "Den passenden Pool aufbauen: jedes Zitat, wenn 'Alle' gewählt ist, oder nur die mit der gewählten Kategorie markierten Zitate",
+            "Handelt es sich um eine 'Neues Zitat'-Anfrage, die ID des aktuell angezeigten Zitats aus diesem Pool entfernen — außer dies würde den Pool vollständig leeren; dann wird stattdessen der volle Pool beibehalten",
+            "Mithilfe der Zufallsquelle einen gleichverteilt zufälligen Index im verbleibenden Pool ziehen",
+            "Text, Autor und angegebene Quelle dieses Zitats anzeigen"
+          ],
+          "caption": "Das Ausschließen des aktuellen Zitats verkleinert den Pool immer nur um einen Eintrag — es besteht nie die Gefahr, kein Zitat mehr zur Auswahl zu haben."
+        },
+        "pools": {
+          "intro": "Die Sammlung ist gleichmäßig auf ihre drei Kategorien verteilt, jede unabhängig mit einer überprüfbaren Primärquelle belegt.",
+          "labelMotivational": "Motivierend",
+          "labelLiterary": "Literarisch",
+          "labelPhilosophical": "Philosophisch",
+          "caption": "Zehn Zitate in jeder der drei Kategorien — dreißig insgesamt — jedes einer echten Rede, einem Buch oder einem veröffentlichten Text zugeschrieben."
+        },
+        "anatomy": {
+          "intro": "Jedes Zitat in der Sammlung ist ein kleiner Datensatz mit vier Feldern — dies zeigt, woraus ein angezeigtes Ergebnis tatsächlich besteht.",
+          "labelText": "Zitattext",
+          "valueText": "\"Ich denke, also bin ich.\"",
+          "labelAuthor": "Autor",
+          "valueAuthor": "René Descartes",
+          "labelSource": "Quelle",
+          "valueSource": "Discours de la méthode, 1637",
+          "labelCategory": "Kategorie",
+          "valueCategory": "Philosophisch",
+          "caption": "Jedes Zitat trägt dieselben vier Felder, sodass das Ergebnisfeld nie raten muss, welche Informationen zur Anzeige verfügbar sind."
+        },
+        "variablesColumns": {
+          "symbol": "Symbol",
+          "meaning": "Bedeutung",
+          "unit": "Einheit"
+        },
+        "variables": [
+          {
+            "symbol": "category",
+            "meaning": "Aus welcher Kategorie gezogen werden soll — Motivierend, Literarisch, Philosophisch oder 'all' für alle Zitate.",
+            "unit": "—"
+          },
+          {
+            "symbol": "excludeId",
+            "meaning": "Die ID des aktuell angezeigten Zitats, nur bei einem Klick auf 'Neues Zitat' übergeben, damit sie aus dem nächsten Zug herausgefiltert werden kann.",
+            "unit": "—"
+          },
+          {
+            "symbol": "randomFn",
+            "meaning": "Die Zufallsquelle zur Auswahl eines Index im Pool; standardmäßig Math.random, austauschbar für deterministische Tests.",
+            "unit": "—"
+          }
+        ],
+        "edgeCases": [
+          {
+            "title": "Das Ausschließen des aktuellen Zitats leert den Pool nie, selbst in einer Kategorie mit nur einem Zitat",
+            "description": "Würde das Herausfiltern der aktuellen Zitat-ID null Kandidaten übrig lassen, greift der Rechner stattdessen auf den ungefilterten Pool zurück — 'Neues Zitat' hat also immer etwas zurückzugeben, selbst im hypothetischen Fall einer Kategorie mit nur einem einzigen Zitat."
+          },
+          {
+            "title": "Die Kategorie 'Alle' fasst jedes Zitat zusammen, unabhängig von seiner individuellen Kategoriemarkierung",
+            "description": "Die Übergabe von category als 'all' (oder das Weglassen, da der Standard 'all' ist) überspringt den Kategoriefilter vollständig und zieht aus der vollen 30-Zitate-Sammlung statt aus nur einem Drittel davon."
+          },
+          {
+            "title": "Jedes Zitat trägt eine überprüfbare, dokumentierte Quelle statt eines nicht zugeordneten 'Internet-Zitats'",
+            "description": "Das Quellenfeld jedes Eintrags nennt eine konkrete Rede, ein veröffentlichtes Buch oder einen historischen Beleg — dies war eine bewusste kuratorische Entscheidung, um die weitverbreiteten, aber unüberprüfbaren Falschzuschreibungen zu vermeiden, die in Zitatesammlungen üblich sind."
+          },
+          {
+            "title": "Die Zufallsquelle ist aus genau demselben Grund injizierbar wie beim Würfelroller",
+            "description": "randomFn ist standardmäßig Math.random, akzeptiert aber jede Funktion, die einen Wert in [0, 1) liefert, was es den Tests des Rechners erlaubt, eine bestimmte, wiederholbare Zitatauswahl zu behaupten, statt nur zu prüfen, dass das Ergebnis zum erwarteten Pool gehört."
+          }
+        ],
+        "faq": [
+          {
+            "question": "Woher stammen diese Zitate — sind sie verifiziert?",
+            "answer": "Jedes Zitat in der Sammlung nennt eine konkrete, überprüfbare Quelle: eine namentlich genannte Rede, ein veröffentlichtes Buch mit Erscheinungsjahr oder einen historischen Beleg. Dies war eine bewusste Entscheidung, um die im Internet weitverbreiteten, nicht zugeordneten oder falsch zugeschriebenen 'Zitate' ohne echte Quelle zu vermeiden."
+          },
+          {
+            "question": "Kann 'Neues Zitat' mir zweimal hintereinander exakt dasselbe Zitat zeigen?",
+            "answer": "Nicht auf Anfrage — ein Klick auf 'Neues Zitat' schließt ausdrücklich die ID des aktuell angezeigten Zitats aus dem Pool aus, aus dem gezogen wird, sodass aufeinanderfolgende Klicks garantiert nicht wiederholen, es sei denn, die gewählte Kategorie enthält nur dieses eine Zitat."
+          },
+          {
+            "question": "Wie viele Zitate gibt es in jeder Kategorie?",
+            "answer": "Jeweils zehn, gleichmäßig verteilt auf Motivierend, Literarisch und Philosophisch — insgesamt dreißig Zitate in der gesamten Sammlung."
+          },
+          {
+            "question": "Gibt es eine Formel dafür, welches Zitat erscheint?",
+            "answer": "Keine rechnerische — es ist eine gleichverteilte Zufallsauswahl aus welchem Pool auch immer der Kategoriefilter (und die Regel 'aktuelles Zitat ausschließen') erzeugt. Jedes Zitat in diesem Pool hat die gleiche Chance, ausgewählt zu werden."
+          }
+        ]
       }
     }
   }

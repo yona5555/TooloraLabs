@@ -6,6 +6,7 @@ import type { DigitStyle } from "@tooloralabs/core";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CityPanel from "./CityPanel";
 import CurrentWeatherResult from "./CurrentWeatherResult";
 import WeatherDisclaimer from "./WeatherDisclaimer";
@@ -87,6 +88,7 @@ export default function WeatherTracker({ initialCity, initialSnapshot, education
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
+              <ViewDocsLink slug="weather-forecast" />
               <WeatherDisclaimer />
               {snapshot && (
                 <>

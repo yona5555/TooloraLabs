@@ -94,6 +94,13 @@ export const DOCUMENTED_TOOL_SLUGS = [
   "lorem-ipsum-generator",
   "text-logo-generator",
   "speech-word-count-calculator",
+  "forex-converter",
+  "crypto-converter",
+  "commodities-tracker",
+  "weather-forecast",
+  "dice-roller",
+  "love-calculator",
+  "random-quote-generator",
 ];
 
 export function isToolDocumented(slug: string): boolean {

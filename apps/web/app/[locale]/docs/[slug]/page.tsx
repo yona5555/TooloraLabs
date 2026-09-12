@@ -94,6 +94,13 @@ import ReadingTimeCalculatorDocsPage, { getReadingTimeCalculatorTocItems } from 
 import LoremIpsumGeneratorDocsPage, { getLoremIpsumGeneratorTocItems } from "@/components/docs/lorem-ipsum-generator/LoremIpsumGeneratorDocsPage";
 import TextLogoGeneratorDocsPage, { getTextLogoGeneratorTocItems } from "@/components/docs/text-logo-generator/TextLogoGeneratorDocsPage";
 import SpeechWordCountCalculatorDocsPage, { getSpeechWordCountCalculatorTocItems } from "@/components/docs/speech-word-count-calculator/SpeechWordCountCalculatorDocsPage";
+import ForexConverterDocsPage, { getForexConverterTocItems } from "@/components/docs/forex-converter/ForexConverterDocsPage";
+import CryptoConverterDocsPage, { getCryptoConverterTocItems } from "@/components/docs/crypto-converter/CryptoConverterDocsPage";
+import CommoditiesTrackerDocsPage, { getCommoditiesTrackerTocItems } from "@/components/docs/commodities-tracker/CommoditiesTrackerDocsPage";
+import WeatherForecastDocsPage, { getWeatherForecastTocItems } from "@/components/docs/weather-forecast/WeatherForecastDocsPage";
+import DiceRollerDocsPage, { getDiceRollerTocItems } from "@/components/docs/dice-roller/DiceRollerDocsPage";
+import LoveCalculatorDocsPage, { getLoveCalculatorTocItems } from "@/components/docs/love-calculator/LoveCalculatorDocsPage";
+import RandomQuoteGeneratorDocsPage, { getRandomQuoteGeneratorTocItems } from "@/components/docs/random-quote-generator/RandomQuoteGeneratorDocsPage";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -495,6 +502,34 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "speech-word-count-calculator":
       content = <SpeechWordCountCalculatorDocsPage />;
       tocItems = await getSpeechWordCountCalculatorTocItems();
+      break;
+    case "forex-converter":
+      content = <ForexConverterDocsPage />;
+      tocItems = await getForexConverterTocItems();
+      break;
+    case "crypto-converter":
+      content = <CryptoConverterDocsPage />;
+      tocItems = await getCryptoConverterTocItems();
+      break;
+    case "commodities-tracker":
+      content = <CommoditiesTrackerDocsPage />;
+      tocItems = await getCommoditiesTrackerTocItems();
+      break;
+    case "weather-forecast":
+      content = <WeatherForecastDocsPage />;
+      tocItems = await getWeatherForecastTocItems();
+      break;
+    case "dice-roller":
+      content = <DiceRollerDocsPage />;
+      tocItems = await getDiceRollerTocItems();
+      break;
+    case "love-calculator":
+      content = <LoveCalculatorDocsPage />;
+      tocItems = await getLoveCalculatorTocItems();
+      break;
+    case "random-quote-generator":
+      content = <RandomQuoteGeneratorDocsPage />;
+      tocItems = await getRandomQuoteGeneratorTocItems();
       break;
   }
 
