@@ -14,6 +14,13 @@ const tool = new LoveTool();
 
 const INITIAL_RESULT: LoveCalculatorOutput = { error: null, percentage: 0 };
 
+const LOVE_SCENARIOS: { key: string; name1: string; name2: string }[] = [
+  { key: "romeoJuliet", name1: "Romeo", name2: "Juliet" },
+  { key: "jackRose", name1: "Jack", name2: "Rose" },
+  { key: "mickeyMinnie", name1: "Mickey", name2: "Minnie" },
+  { key: "batmanCatwoman", name1: "Batman", name2: "Catwoman" },
+];
+
 export default function LoveCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.love-calculator.nav");
   const [name1, setName1] = useState("");
@@ -23,6 +30,14 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
 
   function handleCalculate() {
     const output = tool.execute({ name1, name2 }, { locale: "en-US" });
+    setResult(output.data);
+    setHasCalculated(true);
+  }
+
+  function handleScenarioPreset(scenario: (typeof LOVE_SCENARIOS)[number]) {
+    setName1(scenario.name1);
+    setName2(scenario.name2);
+    const output = tool.execute({ name1: scenario.name1, name2: scenario.name2 }, { locale: "en-US" });
     setResult(output.data);
     setHasCalculated(true);
   }
@@ -54,6 +69,8 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
               onName2Change={setName2}
               onCalculate={handleCalculate}
               onClear={handleClear}
+              scenarios={LOVE_SCENARIOS}
+              onScenarioPreset={handleScenarioPreset}
             />
           }
           result={

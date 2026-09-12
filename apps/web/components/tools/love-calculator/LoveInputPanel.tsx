@@ -4,6 +4,8 @@ import { Heart, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 
+type Scenario = { key: string; name1: string; name2: string };
+
 type Props = {
   name1: string;
   onName1Change: (value: string) => void;
@@ -11,14 +13,33 @@ type Props = {
   onName2Change: (value: string) => void;
   onCalculate: () => void;
   onClear: () => void;
+  scenarios: Scenario[];
+  onScenarioPreset: (scenario: Scenario) => void;
 };
 
-export default function LoveInputPanel({ name1, onName1Change, name2, onName2Change, onCalculate, onClear }: Props) {
+export default function LoveInputPanel({ name1, onName1Change, name2, onName2Change, onCalculate, onClear, scenarios, onScenarioPreset }: Props) {
   const t = useTranslations("tools.love-calculator.form");
+  const tScenarios = useTranslations("tools.love-calculator.form.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
       <div className="space-y-4">
+        <div>
+          <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
+          <div className="flex flex-wrap gap-2">
+            {scenarios.map((scenario) => (
+              <button
+                key={scenario.key}
+                type="button"
+                onClick={() => onScenarioPreset(scenario)}
+                className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-pink-400 hover:text-pink-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-pink-400 dark:hover:text-pink-400"
+              >
+                {tScenarios(scenario.key)}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <ToolInput
           label={t("name1Label")}
           type="text"

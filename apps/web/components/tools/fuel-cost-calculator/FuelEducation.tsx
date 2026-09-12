@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import FuelEfficiencyGauge from "./FuelEfficiencyGauge";
+import FuelCostComparisonDiagram from "./FuelCostComparisonDiagram";
 
 type ExampleRow = { scenario: string; result: string };
 type UseCaseItem = { title: string; description: string };
@@ -24,6 +25,7 @@ export default async function FuelEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <FuelCostComparisonDiagram />
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
