@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ChevronDown, MapPin, Search as SearchIcon } from "lucide-react";
+import { ChevronDown, MapPin, MapIcon, Search as SearchIcon } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { PRIORITY_CITIES } from "@/lib/weather/open-meteo";
 import type { CitySearchResult, SelectedCity } from "./types";
@@ -122,7 +122,20 @@ export default function CityPanel({ selectedCity, onSelectCity }: CityPanelProps
         </div>
 
         <div>
-          <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("priorityCitiesLabel")}</span>
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("priorityCitiesLabel")}</span>
+            <a
+              href="#world-map"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("world-map")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex items-center gap-1.5 text-xs font-medium text-blue-600 transition hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+            >
+              <MapIcon size={13} />
+              {t("viewMapLink")}
+            </a>
+          </div>
           <div className="grid grid-cols-2 gap-2">
             {PRIORITY_CITIES.map((city) => {
               const isActive = selectedCity.latitude === city.latitude && selectedCity.longitude === city.longitude;

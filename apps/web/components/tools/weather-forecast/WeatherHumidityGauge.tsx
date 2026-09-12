@@ -41,6 +41,7 @@ export default function WeatherHumidityGauge({ relativeHumidity, digitStyle }: W
         ticks={[0, 30, 60, 100]}
         tickFormatter={(tick) => `${tick}%`}
       />
+      <p className="mt-3 text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(`advice.${zoneKey}`)}</p>
     </SectionCard>
   );
 }

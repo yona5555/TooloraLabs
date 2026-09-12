@@ -41,6 +41,16 @@ export default function CurrentWeatherResult({
     return `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 })} ${unitSystem === "us" ? t("mph") : t("kmh")}`;
   };
 
+  const visibility = (meters: number) => {
+    const value = unitSystem === "us" ? meters / 1609.34 : meters / 1000;
+    return `${formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 })} ${unitSystem === "us" ? t("miles") : t("km")}`;
+  };
+
+  const timeFormatter = new Intl.DateTimeFormat(locale === "ar" ? "ar" : "en-US", {
+    timeStyle: "short",
+    numberingSystem: digitStyle === "eastern" ? "arab" : "latn",
+  });
+
   const updatedLabel = snapshot
     ? new Intl.DateTimeFormat(locale === "ar" ? "ar" : "en-US", {
         dateStyle: "medium",
@@ -56,6 +66,10 @@ export default function CurrentWeatherResult({
         { label: t("humidityLabel"), value: `${formatLocalizedNumber(snapshot.current.relativeHumidity, digitStyle, { maximumFractionDigits: 0 })}%` },
         { label: t("windLabel"), value: windSpeed(snapshot.current.windSpeedKmh) },
         { label: t("precipChanceLabel"), value: `${formatLocalizedNumber(snapshot.daily[0]?.precipitationProbabilityMax ?? 0, digitStyle, { maximumFractionDigits: 0 })}%` },
+        { label: t("visibilityLabel"), value: visibility(snapshot.current.visibilityM) },
+        { label: t("pressureLabel"), value: `${formatLocalizedNumber(snapshot.current.pressureHpa, digitStyle, { maximumFractionDigits: 0 })} ${t("hpa")}` },
+        { label: t("uvIndexLabel"), value: formatLocalizedNumber(snapshot.daily[0]?.uvIndexMax ?? 0, digitStyle, { maximumFractionDigits: 1 }) },
+        { label: t("sunriseSunsetLabel"), value: `${timeFormatter.format(new Date(snapshot.daily[0]?.sunrise ?? snapshot.current.time))} / ${timeFormatter.format(new Date(snapshot.daily[0]?.sunset ?? snapshot.current.time))}` },
       ]
     : [];
   const sentence = snapshot ? `${cityLabel}: ${temperature(snapshot.current.temperatureC)}, ${tCategory(getWeatherCategory(snapshot.current.weatherCode))}` : "";
@@ -125,6 +139,30 @@ export default function CurrentWeatherResult({
               <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("precipChanceLabel")}</dt>
               <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
                 {formatLocalizedNumber(snapshot.daily[0]?.precipitationProbabilityMax ?? 0, digitStyle, { maximumFractionDigits: 0 })}%
+              </dd>
+            </div>
+            <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+              <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("visibilityLabel")}</dt>
+              <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
+                {visibility(snapshot.current.visibilityM)}
+              </dd>
+            </div>
+            <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+              <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("pressureLabel")}</dt>
+              <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
+                {formatLocalizedNumber(snapshot.current.pressureHpa, digitStyle, { maximumFractionDigits: 0 })} {t("hpa")}
+              </dd>
+            </div>
+            <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+              <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("uvIndexLabel")}</dt>
+              <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
+                {formatLocalizedNumber(snapshot.daily[0]?.uvIndexMax ?? 0, digitStyle, { maximumFractionDigits: 1 })}
+              </dd>
+            </div>
+            <div className="col-span-2 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
+              <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("sunriseSunsetLabel")}</dt>
+              <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
+                {timeFormatter.format(new Date(snapshot.daily[0]?.sunrise ?? snapshot.current.time))} / {timeFormatter.format(new Date(snapshot.daily[0]?.sunset ?? snapshot.current.time))}
               </dd>
             </div>
           </dl>

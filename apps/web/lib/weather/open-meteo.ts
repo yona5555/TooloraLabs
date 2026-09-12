@@ -133,6 +133,9 @@ export type DailyForecast = {
   temperatureMinC: number;
   precipitationProbabilityMax: number;
   uvIndexMax: number;
+  /** ISO-8601 in the location's own local time. */
+  sunrise: string;
+  sunset: string;
 };
 
 export type WeatherSnapshot = {
@@ -144,6 +147,8 @@ export type WeatherSnapshot = {
     windDirectionDeg: number;
     precipitationMm: number;
     weatherCode: number;
+    visibilityM: number;
+    pressureHpa: number;
     /** ISO-8601 in the location's own local time, as Open-Meteo returns it. */
     time: string;
   };
@@ -162,6 +167,8 @@ type ForecastResponse = {
     wind_direction_10m: number;
     weather_code: number;
     precipitation: number;
+    visibility: number;
+    surface_pressure: number;
   };
   daily: {
     time: string[];
@@ -170,6 +177,8 @@ type ForecastResponse = {
     temperature_2m_min: number[];
     precipitation_probability_max: number[];
     uv_index_max: number[];
+    sunrise: string[];
+    sunset: string[];
   };
 };
 
@@ -177,8 +186,9 @@ export async function getWeatherSnapshot(latitude: number, longitude: number): P
   const params = new URLSearchParams({
     latitude: String(latitude),
     longitude: String(longitude),
-    current: "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,precipitation",
-    daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max",
+    current:
+      "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,weather_code,precipitation,visibility,surface_pressure",
+    daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max,sunrise,sunset",
     timezone: "auto",
     forecast_days: "7",
   });
@@ -199,6 +209,8 @@ export async function getWeatherSnapshot(latitude: number, longitude: number): P
       windDirectionDeg: json.current.wind_direction_10m,
       precipitationMm: json.current.precipitation,
       weatherCode: json.current.weather_code,
+      visibilityM: json.current.visibility,
+      pressureHpa: json.current.surface_pressure,
       time: json.current.time,
     },
     daily: json.daily.time.map((date, i) => ({
@@ -208,6 +220,8 @@ export async function getWeatherSnapshot(latitude: number, longitude: number): P
       temperatureMinC: json.daily.temperature_2m_min[i],
       precipitationProbabilityMax: json.daily.precipitation_probability_max[i],
       uvIndexMax: json.daily.uv_index_max[i],
+      sunrise: json.daily.sunrise[i],
+      sunset: json.daily.sunset[i],
     })),
     timezone: json.timezone,
   };

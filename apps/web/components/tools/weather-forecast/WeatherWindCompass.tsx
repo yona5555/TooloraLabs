@@ -19,6 +19,15 @@ function directionKey(deg: number): (typeof DIRECTION_KEYS)[number] {
   return DIRECTION_KEYS[index];
 }
 
+/** Simplified Beaufort-style bands (km/h) for the plain-language advice line. */
+type WindLevel = "calm" | "light" | "moderate" | "strong";
+function windLevel(kmh: number): WindLevel {
+  if (kmh < 6) return "calm";
+  if (kmh < 20) return "light";
+  if (kmh < 39) return "moderate";
+  return "strong";
+}
+
 const SIZE = 160;
 const CENTER = SIZE / 2;
 const RADIUS = 66;
@@ -87,6 +96,7 @@ export default function WeatherWindCompass({ windSpeedKmh, windDirectionDeg, uni
           </span>{" "}
           <span className="text-zinc-600 dark:text-zinc-300">{t("fromDirection", { direction: t(`directions.${directionKey(windDirectionDeg)}`) })}</span>
         </p>
+        <p className="mt-3 text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(`levelAdvice.${windLevel(windSpeedKmh)}`)}</p>
       </div>
     </SectionCard>
   );
