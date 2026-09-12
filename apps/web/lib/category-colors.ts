@@ -16,6 +16,10 @@ export const categoryIconColors: Record<string, string> = {
   "file-tools": "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
   "text-tools": "bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-500/10 dark:text-fuchsia-400",
   "website-tools": "bg-zinc-100 text-zinc-500 dark:bg-zinc-500/10 dark:text-zinc-400",
+  "algebra-number-theory": "bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400",
+  "calculus-analysis": "bg-stone-100 text-stone-600 dark:bg-stone-500/10 dark:text-stone-400",
+  "probability-statistics": "bg-orange-50 text-orange-600 dark:bg-orange-500/10 dark:text-orange-400",
+  "geometry-coordinate-math": "bg-neutral-100 text-neutral-600 dark:bg-neutral-500/10 dark:text-neutral-400",
 };
 
 export function getCategoryIconColor(categorySlug: string): string {
