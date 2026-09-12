@@ -1,10 +1,12 @@
 import {
   Atom,
+  Axis3D,
   BrainCircuit,
   Calculator,
   CalendarClock,
   CloudSun,
   Code2,
+  Dices,
   FileText,
   FlaskConical,
   Folder,
@@ -16,7 +18,9 @@ import {
   Receipt,
   RefreshCw,
   Sigma,
+  Spline,
   TrendingUp,
+  Variable,
   type LucideIcon,
 } from "lucide-react";
 
@@ -39,6 +43,10 @@ export const categoryIcons: Record<string, LucideIcon> = {
   "calendar-clock": CalendarClock,
   "cloud-sun": CloudSun,
   "party-popper": PartyPopper,
+  variable: Variable,
+  spline: Spline,
+  dices: Dices,
+  "axis-3d": Axis3D,
 };
 
 export function getCategoryIcon(icon: string): LucideIcon {

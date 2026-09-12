@@ -108,4 +108,28 @@ export const categories: Category[] = [
     description: "Embeddable widgets and utilities for website owners and creators.",
     icon: "globe",
   },
+  {
+    slug: "algebra-number-theory",
+    title: "Algebra & Number Theory",
+    description: "Equations, polynomials, factoring, and the properties of numbers.",
+    icon: "variable",
+  },
+  {
+    slug: "calculus-analysis",
+    title: "Calculus & Analysis",
+    description: "Limits, derivatives, integrals, and the mathematics of continuous change.",
+    icon: "spline",
+  },
+  {
+    slug: "probability-statistics",
+    title: "Probability & Statistics",
+    description: "Distributions, combinatorics, and the mathematics of chance and data.",
+    icon: "dices",
+  },
+  {
+    slug: "geometry-coordinate-math",
+    title: "Geometry & Coordinate Math",
+    description: "Shapes, coordinate systems, and the mathematics of space and transformations.",
+    icon: "axis-3d",
+  },
 ];
