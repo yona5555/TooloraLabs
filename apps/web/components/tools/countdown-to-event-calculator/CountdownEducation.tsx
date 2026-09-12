@@ -5,6 +5,8 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CountdownDistanceGauge from "./CountdownDistanceGauge";
+import CountdownUnitsDiagram from "./CountdownUnitsDiagram";
+import CountdownMilestoneDiagram from "./CountdownMilestoneDiagram";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -22,6 +24,8 @@ export default async function CountdownEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <CountdownUnitsDiagram />
+        <CountdownMilestoneDiagram />
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
