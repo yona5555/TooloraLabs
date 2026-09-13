@@ -5,11 +5,13 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import CryptoShareExportModal from "./CryptoShareExportModal";
 import type { FiatCurrency } from "./types";
 
 type CryptoResultProps = {
   fromCoin: CryptoCoin | undefined;
   toCoin: CryptoCoin | undefined;
+  amount: string;
   convertedAmount: number;
   fiatCurrency: FiatCurrency;
   onFiatCurrencyChange: (currency: FiatCurrency) => void;
@@ -69,6 +71,7 @@ function PriceTile({ coin, fiatCurrency, usdToSarRate, digitStyle }: {
 export default function CryptoResult({
   fromCoin,
   toCoin,
+  amount,
   convertedAmount,
   fiatCurrency,
   onFiatCurrencyChange,
@@ -88,7 +91,25 @@ export default function CryptoResult({
   return (
     <SectionCard
       title={t("resultTitle")}
-      action={toCoin && <CopyButton text={summaryText} />}
+      action={
+        toCoin && fromCoin ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={summaryText} />
+            <CryptoShareExportModal
+              operationLabel={`${fromCoin.symbol.toUpperCase()} → ${toCoin.symbol.toUpperCase()}`}
+              inputRows={[{ label: fromCoin.symbol.toUpperCase(), value: `${amount} ${fromCoin.symbol.toUpperCase()}` }]}
+              resultRows={[
+                { label: toCoin.symbol.toUpperCase(), value: summaryText },
+                { label: `1 ${fromCoin.symbol.toUpperCase()}`, value: formatLocalizedNumber(fromCoin.currentPrice, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: fromCoin.currentPrice < 1 ? 6 : 2 }) },
+                { label: `1 ${toCoin.symbol.toUpperCase()}`, value: formatLocalizedNumber(toCoin.currentPrice, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: toCoin.currentPrice < 1 ? 6 : 2 }) },
+              ]}
+              heroLabel={toCoin.symbol.toUpperCase()}
+              heroValue={summaryText}
+              sentence={`${amount} ${fromCoin.symbol.toUpperCase()} = ${summaryText} (${t("lastUpdated", { time: updatedLabel })}).`}
+            />
+          </div>
+        ) : undefined
+      }
     >
       <div className="text-center">
         {toCoin ? (

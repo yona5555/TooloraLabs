@@ -31,6 +31,7 @@ const ERROR_KEYS: Record<string, string> = {
 export default function BarcodeGeneratorTool({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.barcode-generator.errors");
   const tNav = useTranslations("tools.barcode-generator.nav");
+  const tForm = useTranslations("tools.barcode-generator.form");
 
   const [symbology, setSymbology] = useState<BarcodeSymbology>("upc-a");
   const [value, setValue] = useState(DEFAULT_VALUES["upc-a"]);
@@ -99,6 +100,7 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
               errorMessage={errorMessage}
               logoDataUrl={logoDataUrl}
               logoPlacement={logoPlacement}
+              symbologyLabel={tForm(`symbology.${symbology}`)}
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="barcode-generator" category="developer-tools" />}

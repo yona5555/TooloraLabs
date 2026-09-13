@@ -34,6 +34,7 @@ const ERROR_MESSAGE_KEYS: Record<string, string> = {
 export default function CsvJsonConverterUI({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.csv-json-converter.errors");
   const tNav = useTranslations("tools.csv-json-converter.nav");
+  const tForm = useTranslations("tools.csv-json-converter.form");
 
   const [input, setInput] = useState(SAMPLE_CSV);
   const [mode, setMode] = useState<CsvJsonMode>("csvToJson");
@@ -89,6 +90,7 @@ export default function CsvJsonConverterUI({ education }: { education: ReactNode
               errorMessage={errorMessage}
               filename={mode === "csvToJson" ? "converted.json" : "converted.csv"}
               mimeType={mode === "csvToJson" ? "application/json;charset=utf-8" : "text/csv;charset=utf-8"}
+              modeLabel={mode === "csvToJson" ? tForm("csvToJson") : tForm("jsonToCsv")}
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="csv-json-converter" category="file-tools" />}

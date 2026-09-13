@@ -4,6 +4,7 @@ import { AlertTriangle } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import DownloadButton from "@/components/tool-ui/DownloadButton";
+import CsvJsonShareExportModal from "./CsvJsonShareExportModal";
 
 type CsvJsonResultProps = {
   result: string;
@@ -11,13 +12,35 @@ type CsvJsonResultProps = {
   isEmpty: boolean;
   filename: string;
   mimeType: string;
+  modeLabel: string;
 };
 
-export default function CsvJsonResult({ result, errorMessage, isEmpty, filename, mimeType }: CsvJsonResultProps) {
+export default function CsvJsonResult({ result, errorMessage, isEmpty, filename, mimeType, modeLabel }: CsvJsonResultProps) {
   const t = useTranslations("tools.csv-json-converter");
 
+  const lineCount = result ? result.split("\n").length : 0;
+  const charCount = result.length;
+
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        !isEmpty && !errorMessage ? (
+          <CsvJsonShareExportModal
+            operationLabel={modeLabel}
+            inputRows={[]}
+            resultRows={[
+              { label: t("form.outputLabel"), value: filename },
+              { label: t("shareExport.lineCount"), value: String(lineCount) },
+              { label: t("shareExport.charCount"), value: String(charCount) },
+            ]}
+            heroLabel={t("form.outputLabel")}
+            heroValue={filename}
+            sentence={`${modeLabel} — ${lineCount} lines, ${charCount} characters.`}
+          />
+        ) : undefined
+      }
+    >
       {isEmpty ? (
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
           {t("aboveFold.placeholder")}

@@ -80,6 +80,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
             <ForexResult
               fromCurrency={fromCurrency}
               toCurrency={toCurrency}
+              amount={amount}
               convertedAmount={convertedAmount}
               lastUpdatedUnix={lastUpdatedUnix}
               digitStyle={digitStyle}

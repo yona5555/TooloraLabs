@@ -94,6 +94,7 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
             <CryptoResult
               fromCoin={fromCoin}
               toCoin={toCoin}
+              amount={amount}
               convertedAmount={convertedAmount}
               fiatCurrency={fiatCurrency}
               onFiatCurrencyChange={setFiatCurrency}

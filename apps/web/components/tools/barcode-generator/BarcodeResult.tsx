@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { AlertTriangle, Download } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import BarcodeSVG, { type BarcodeSegment } from "./BarcodeSVG";
+import BarcodeShareExportModal from "./BarcodeShareExportModal";
 
 type BarcodeResultProps = {
   segments: BarcodeSegment[] | null;
@@ -12,9 +13,10 @@ type BarcodeResultProps = {
   errorMessage: string;
   logoDataUrl: string | null;
   logoPlacement: "beside" | "none";
+  symbologyLabel: string;
 };
 
-export default function BarcodeResult({ segments, displayText, quietZoneModules, errorMessage, logoDataUrl, logoPlacement }: BarcodeResultProps) {
+export default function BarcodeResult({ segments, displayText, quietZoneModules, errorMessage, logoDataUrl, logoPlacement, symbologyLabel }: BarcodeResultProps) {
   const t = useTranslations("tools.barcode-generator");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -42,14 +44,27 @@ export default function BarcodeResult({ segments, displayText, quietZoneModules,
           <div ref={containerRef} dir="ltr" className="w-full rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700">
             <BarcodeSVG segments={segments} displayText={displayText} quietZoneModules={quietZoneModules} logoDataUrl={logoDataUrl} logoPlacement={logoPlacement} />
           </div>
-          <button
-            type="button"
-            onClick={download}
-            className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-300 px-4 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
-          >
-            <Download size={16} />
-            {t("form.download")}
-          </button>
+          <div className="flex w-full items-center gap-2">
+            <button
+              type="button"
+              onClick={download}
+              className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-zinc-300 px-4 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
+            >
+              <Download size={16} />
+              {t("form.download")}
+            </button>
+            <BarcodeShareExportModal
+              operationLabel={symbologyLabel}
+              inputRows={[{ label: t("form.valueLabel"), value: displayText }]}
+              resultRows={[
+                { label: t("form.valueLabel"), value: displayText },
+                { label: t("shareExport.quietZone"), value: String(quietZoneModules) },
+              ]}
+              heroLabel={t("form.valueLabel")}
+              heroValue={displayText}
+              sentence={`${symbologyLabel} barcode encoding "${displayText}".`}
+            />
+          </div>
         </div>
       ) : (
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">

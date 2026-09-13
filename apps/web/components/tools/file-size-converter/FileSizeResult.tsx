@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { FileSizeConverterOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import FileSizeConverterShareExportModal from "./FileSizeConverterShareExportModal";
 
 type FileSizeResultProps = {
   data: FileSizeConverterOutput | null;
@@ -31,8 +32,33 @@ function UnitTable({ title, rows, digitStyle }: { title: string; rows: { unit: s
 export default function FileSizeResult({ data, errorMessage, digitStyle }: FileSizeResultProps) {
   const t = useTranslations("tools.file-size-converter");
 
+  const heroValue = data ? formatLocalizedNumber(data.bytes, digitStyle, { maximumFractionDigits: 0 }) : "";
+
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        data ? (
+          <FileSizeConverterShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={[
+              ...data.decimal.slice(0, 3).map((row) => ({
+                label: row.unit,
+                value: formatLocalizedNumber(row.value, digitStyle, { maximumFractionDigits: row.value < 1 ? 6 : 3 }),
+              })),
+              ...data.binary.slice(0, 3).map((row) => ({
+                label: row.unit,
+                value: formatLocalizedNumber(row.value, digitStyle, { maximumFractionDigits: row.value < 1 ? 6 : 3 }),
+              })),
+            ]}
+            heroLabel={t("aboveFold.exactBytes")}
+            heroValue={heroValue}
+            sentence={`${t("aboveFold.exactBytes")}: ${heroValue} bytes.`}
+          />
+        ) : undefined
+      }
+    >
       {errorMessage ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}

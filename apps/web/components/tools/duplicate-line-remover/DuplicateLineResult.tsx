@@ -4,6 +4,7 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { DuplicateLineRemoverOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import DuplicateLineShareExportModal from "./DuplicateLineShareExportModal";
 
 type DuplicateLineResultProps = {
   data: DuplicateLineRemoverOutput | null;
@@ -27,7 +28,25 @@ export default function DuplicateLineResult({ data, digitStyle }: DuplicateLineR
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
-      action={data && data.result ? <CopyButton text={data.result} /> : undefined}
+      action={
+        data && data.result ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={data.result} />
+            <DuplicateLineShareExportModal
+              operationLabel=""
+              inputRows={[]}
+              resultRows={[
+                { label: t("aboveFold.totalLines"), value: formatLocalizedNumber(data.totalLines, digitStyle) },
+                { label: t("aboveFold.uniqueLines"), value: formatLocalizedNumber(data.uniqueLines, digitStyle) },
+                { label: t("aboveFold.removedCount"), value: formatLocalizedNumber(data.removedCount, digitStyle) },
+              ]}
+              heroLabel={t("aboveFold.uniqueLines")}
+              heroValue={formatLocalizedNumber(data.uniqueLines, digitStyle)}
+              sentence={`${t("aboveFold.totalLines")}: ${formatLocalizedNumber(data.totalLines, digitStyle)} → ${t("aboveFold.uniqueLines")}: ${formatLocalizedNumber(data.uniqueLines, digitStyle)} (${t("aboveFold.removedCount")}: ${formatLocalizedNumber(data.removedCount, digitStyle)})`}
+            />
+          </div>
+        ) : undefined
+      }
     >
       {data ? (
         <>

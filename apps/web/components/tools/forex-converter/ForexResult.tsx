@@ -6,10 +6,12 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import { getCurrencyDisplayName } from "@/lib/forex/currencyNames";
 import DataSourceNote from "./DataSourceNote";
+import ForexShareExportModal from "./ForexShareExportModal";
 
 type ForexResultProps = {
   fromCurrency: CurrencyRate | undefined;
   toCurrency: CurrencyRate | undefined;
+  amount: string;
   convertedAmount: number;
   lastUpdatedUnix: number;
   digitStyle: DigitStyle;
@@ -29,7 +31,7 @@ function RateTile({ currency, digitStyle, locale }: { currency: CurrencyRate; di
   );
 }
 
-export default function ForexResult({ fromCurrency, toCurrency, convertedAmount, lastUpdatedUnix, digitStyle }: ForexResultProps) {
+export default function ForexResult({ fromCurrency, toCurrency, amount, convertedAmount, lastUpdatedUnix, digitStyle }: ForexResultProps) {
   const t = useTranslations("tools.forex-converter.aboveFold");
   const locale = useLocale();
 
@@ -45,7 +47,28 @@ export default function ForexResult({ fromCurrency, toCurrency, convertedAmount,
   const summaryText = toCurrency ? `${resultText} ${toCurrency.code}` : "";
 
   return (
-    <SectionCard title={t("resultTitle")} action={toCurrency && <CopyButton text={summaryText} />}>
+    <SectionCard
+      title={t("resultTitle")}
+      action={
+        toCurrency && fromCurrency ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={summaryText} />
+            <ForexShareExportModal
+              operationLabel={`${fromCurrency.code} → ${toCurrency.code}`}
+              inputRows={[{ label: fromCurrency.code, value: `${amount} ${fromCurrency.code}` }]}
+              resultRows={[
+                { label: toCurrency.code, value: summaryText },
+                { label: `1 ${fromCurrency.code}`, value: formatLocalizedNumber(fromCurrency.ratePerUsd, digitStyle, { maximumFractionDigits: fromCurrency.ratePerUsd < 1 ? 6 : 4 }) },
+                { label: `1 ${toCurrency.code}`, value: formatLocalizedNumber(toCurrency.ratePerUsd, digitStyle, { maximumFractionDigits: toCurrency.ratePerUsd < 1 ? 6 : 4 }) },
+              ]}
+              heroLabel={toCurrency.code}
+              heroValue={summaryText}
+              sentence={`${amount} ${fromCurrency.code} = ${summaryText} (${t("lastUpdated", { time: updatedLabel })}).`}
+            />
+          </div>
+        ) : undefined
+      }
+    >
       <div className="text-center">
         {toCurrency ? (
           <>

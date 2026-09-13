@@ -5,6 +5,7 @@ import { calculateMetalValue } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import DataSourceNote from "./DataSourceNote";
+import CommodityShareExportModal from "./CommodityShareExportModal";
 import type { CommodityId, DisplayCurrency } from "./types";
 
 type CommodityResultProps = {
@@ -57,8 +58,30 @@ export default function CommodityResult({
   const goldPerOunce = money(goldUsdPerOunce * fxRate);
   const oilPerBarrel = money(wtiUsdPerBarrel * fxRate);
 
+  const commodityLabel = commodity === "gold" ? t("goldPerOunceLabel") : commodity === "silver" ? t("silverPerGramLabel") : t("oilPerBarrelLabel");
+
   return (
-    <SectionCard title={t("resultTitle")} action={<CopyButton text={resultText} />}>
+    <SectionCard
+      title={t("resultTitle")}
+      action={
+        <div className="flex items-center gap-2">
+          <CopyButton text={resultText} />
+          <CommodityShareExportModal
+            operationLabel={commodityLabel}
+            inputRows={[]}
+            resultRows={[
+              { label: t("goldPerGramLabel"), value: goldPerGram },
+              { label: t("silverPerGramLabel"), value: silverPerGram },
+              { label: t("goldPerOunceLabel"), value: goldPerOunce },
+              { label: t("oilPerBarrelLabel"), value: oilPerBarrel },
+            ]}
+            heroLabel={commodityLabel}
+            heroValue={resultText}
+            sentence={`${t("resultTitle")}: ${resultText} (${t("lastUpdated", { time: updatedLabel })}).`}
+          />
+        </div>
+      }
+    >
       <div className="text-center">
         <p dir="ltr" className="break-all font-mono text-3xl font-bold text-zinc-900 dark:text-zinc-50">
           {resultText}
