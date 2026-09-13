@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
+import { comingSoonPhases } from "@/data/comingSoon";
 import { getCategoryIcon } from "@/lib/category-icons";
 import { getCategoryIconColor } from "@/lib/category-colors";
 
@@ -9,6 +10,16 @@ const TOOL_COUNT_BY_CATEGORY = tools.reduce<Record<string, number>>((counts, too
   counts[tool.category] = (counts[tool.category] ?? 0) + 1;
   return counts;
 }, {});
+
+/** Planned (not yet live) tools, counted separately from TOOL_COUNT_BY_CATEGORY above so the
+ * real live-tool count this component has always shown never gets diluted with unshipped tools —
+ * it's rendered as an additive "+N coming" badge instead of being folded into the main count. */
+const COMING_SOON_COUNT_BY_CATEGORY = Object.values(comingSoonPhases)
+  .flat()
+  .reduce<Record<string, number>>((counts, tool) => {
+    counts[tool.category] = (counts[tool.category] ?? 0) + 1;
+    return counts;
+  }, {});
 
 /** Shared by both card variants below so the "Coming Soon" placeholder lines up exactly with a real category card at every breakpoint. Title is forced to a single line (truncating with an ellipsis in the rare case a translation still doesn't fit) rather than wrapping to two lines. */
 const CARD_CLASSES =
@@ -26,6 +37,7 @@ export default function HeroCategories() {
         const Icon = getCategoryIcon(category.icon);
         const iconColorClasses = getCategoryIconColor(category.slug);
         const toolCount = TOOL_COUNT_BY_CATEGORY[category.slug] ?? 0;
+        const comingSoonCount = COMING_SOON_COUNT_BY_CATEGORY[category.slug] ?? 0;
 
         if (toolCount === 0) {
           return (
@@ -51,8 +63,15 @@ export default function HeroCategories() {
               <Icon size={22} strokeWidth={2} />
             </span>
             <span className={TITLE_CLASSES}>{tc(`${category.slug}.title`)}</span>
-            <span className="rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:text-[10px]">
-              {tSection("toolCount", { count: toolCount })}
+            <span className="flex flex-col items-center gap-0.5">
+              <span className="rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400 sm:text-[10px]">
+                {tSection("toolCount", { count: toolCount })}
+              </span>
+              {comingSoonCount > 0 && (
+                <span className="rounded-full bg-blue-50 px-1.5 py-0.5 text-[9px] font-medium text-blue-500 dark:bg-blue-500/10 dark:text-blue-400 sm:text-[10px]">
+                  {tSection("comingSoonCount", { count: comingSoonCount })}
+                </span>
+              )}
             </span>
           </Link>
         );
