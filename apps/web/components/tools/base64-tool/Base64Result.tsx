@@ -1,8 +1,10 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { Base64Mode } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import Base64ShareExportModal from "./Base64ShareExportModal";
 
 type Base64ResultProps = {
   result: string;
@@ -10,18 +12,38 @@ type Base64ResultProps = {
   inputBytes: number;
   outputBytes: number;
   digitStyle: DigitStyle;
+  mode: Base64Mode;
 };
 
-export default function Base64Result({ result, errorMessage, inputBytes, outputBytes, digitStyle }: Base64ResultProps) {
+export default function Base64Result({ result, errorMessage, inputBytes, outputBytes, digitStyle, mode }: Base64ResultProps) {
   const t = useTranslations("tools.base64-tool");
 
   const maxBytes = Math.max(inputBytes, outputBytes, 1);
   const overheadPercent = inputBytes > 0 ? Math.round(((outputBytes - inputBytes) / inputBytes) * 100) : 0;
+  const operationLabel = mode === "encode" ? t("form.encode") : t("form.decode");
+  const truncatedResult = result.length > 300 ? `${result.slice(0, 300)}…` : result;
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
-      action={result ? <CopyButton text={result} /> : undefined}
+      action={
+        result ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={result} />
+            <Base64ShareExportModal
+              operationLabel={operationLabel}
+              inputRows={[{ label: t("aboveFold.sizeInput"), value: `${formatLocalizedNumber(inputBytes, digitStyle)} ${t("aboveFold.bytes")}` }]}
+              resultRows={[
+                { label: t("aboveFold.sizeOutput"), value: `${formatLocalizedNumber(outputBytes, digitStyle)} ${t("aboveFold.bytes")}` },
+                { label: t("aboveFold.resultTitle"), value: truncatedResult },
+              ]}
+              heroLabel={t("aboveFold.resultTitle")}
+              heroValue={truncatedResult}
+              sentence={`${operationLabel}: ${formatLocalizedNumber(inputBytes, digitStyle)} → ${formatLocalizedNumber(outputBytes, digitStyle)} ${t("aboveFold.bytes")}`}
+            />
+          </div>
+        ) : undefined
+      }
     >
       {errorMessage ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">

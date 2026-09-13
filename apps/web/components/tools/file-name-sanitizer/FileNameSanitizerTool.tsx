@@ -68,7 +68,7 @@ export default function FileNameSanitizerTool({ education }: { education: ReactN
               onClear={handleClear}
             />
           }
-          result={<FileNameResult result={result} errorMessage={errorMessage} changes={changes} />}
+          result={<FileNameResult result={result} errorMessage={errorMessage} changes={changes} originalFileName={fileName} />}
           sidebar={<RelatedToolsSidebar currentSlug="file-name-sanitizer" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">

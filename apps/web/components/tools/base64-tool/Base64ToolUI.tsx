@@ -69,6 +69,7 @@ export default function Base64ToolUI({ education }: { education: ReactNode }) {
               inputBytes={output?.inputBytes ?? 0}
               outputBytes={output?.outputBytes ?? 0}
               digitStyle={digitStyle}
+              mode={mode}
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="base64-tool" category="developer-tools" />}

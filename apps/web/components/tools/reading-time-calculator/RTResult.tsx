@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import RTShareExportModal from "./RTShareExportModal";
 import type { ReadingTimeOutput } from "./types";
 
 type Props = {
@@ -32,8 +33,16 @@ export default function RTResult({ result, digitStyle }: Props) {
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
+        <RTShareExportModal
+          operationLabel=""
+          inputRows={[]}
+          resultRows={[{ label: t("wordCountLabel"), value: fmt(result.wordCount) }]}
+          heroLabel={t("heading")}
+          heroValue={timeLabel}
+          sentence={`${timeLabel} — ${t("wordCountLabel")}: ${fmt(result.wordCount)}`}
+        />
       </div>
       <div className="p-4 lg:p-6">
         <p className="text-center font-mono text-3xl font-bold text-blue-700 dark:text-blue-300">{timeLabel}</p>

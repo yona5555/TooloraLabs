@@ -4,18 +4,37 @@ import { Check } from "lucide-react";
 import type { SanitizerChangeCode } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import FileNameShareExportModal from "./FileNameShareExportModal";
 
 type FileNameResultProps = {
   result: string;
   errorMessage: string;
   changes: SanitizerChangeCode[];
+  originalFileName: string;
 };
 
-export default function FileNameResult({ result, errorMessage, changes }: FileNameResultProps) {
+export default function FileNameResult({ result, errorMessage, changes, originalFileName }: FileNameResultProps) {
   const t = useTranslations("tools.file-name-sanitizer");
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")} action={result ? <CopyButton text={result} /> : undefined}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        result ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={result} />
+            <FileNameShareExportModal
+              operationLabel=""
+              inputRows={[{ label: t("form.inputLabel"), value: originalFileName }]}
+              resultRows={[{ label: t("aboveFold.resultTitle"), value: result }]}
+              heroLabel={t("aboveFold.resultTitle")}
+              heroValue={result}
+              sentence={`${originalFileName} → ${result}`}
+            />
+          </div>
+        ) : undefined
+      }
+    >
       {errorMessage ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}

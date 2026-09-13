@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import ScientificNotationShareExportModal from "./ScientificNotationShareExportModal";
 import MagnitudeScaleDiagram from "./MagnitudeScaleDiagram";
 import type { ScientificNotationOperation, ScientificNotationResult as Result } from "./types";
 
@@ -21,6 +22,7 @@ type Props = {
 
 export default function ScientificNotationResult({ result, computed }: Props) {
   const t = useTranslations("tools.scientific-notation-converter.result");
+  const tRoot = useTranslations("tools.scientific-notation-converter");
   const { operation, standardValue, coefficientA, exponentA, coefficientB, exponentB, digitStyle } = computed;
 
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 10 });
@@ -73,7 +75,21 @@ export default function ScientificNotationResult({ result, computed }: Props) {
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
-          <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          <div className="flex items-center gap-2">
+            <CopyButton text={copyText} className="!text-white dark:!text-white" />
+            <ScientificNotationShareExportModal
+              operationLabel=""
+              inputRows={[]}
+              resultRows={[
+                { label: t("heading"), value: copyText },
+                { label: tRoot("shareExport.standardLabel"), value: fmtStandard(standard) },
+                { label: tRoot("shareExport.engineeringLabel"), value: `${fmt(engineering.coefficient)} × 10^${fmt(engineering.exponent)}` },
+              ]}
+              heroLabel={t("heading")}
+              heroValue={copyText}
+              sentence={stepSentence}
+            />
+          </div>
         </div>
 
         <div className="p-4 lg:p-6">

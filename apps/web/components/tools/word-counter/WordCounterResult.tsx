@@ -5,6 +5,7 @@ import type { TextCounterOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import TopKeywordsChart from "./TopKeywordsChart";
+import WordCounterShareExportModal from "./WordCounterShareExportModal";
 
 type WordCounterResultProps = {
   stats: TextCounterOutput;
@@ -42,7 +43,30 @@ export default function WordCounterResult({ stats, hasText, digitStyle }: WordCo
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
-      action={hasText ? <CopyButton text={summaryText} /> : undefined}
+      action={
+        hasText ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={summaryText} />
+            <WordCounterShareExportModal
+              operationLabel=""
+              inputRows={[]}
+              resultRows={[
+                { label: t("stats.words"), value: formatLocalizedNumber(stats.words, digitStyle) },
+                { label: t("stats.characters"), value: formatLocalizedNumber(stats.characters, digitStyle) },
+                { label: t("stats.charactersNoSpaces"), value: formatLocalizedNumber(stats.charactersNoSpaces, digitStyle) },
+                { label: t("stats.sentences"), value: formatLocalizedNumber(stats.sentences, digitStyle) },
+                { label: t("stats.paragraphs"), value: formatLocalizedNumber(stats.paragraphs, digitStyle) },
+                { label: t("stats.readingTimeMinutes"), value: formatLocalizedNumber(stats.readingTimeMinutes, digitStyle) },
+                { label: t("stats.uniqueWords"), value: formatLocalizedNumber(stats.uniqueWords, digitStyle) },
+                { label: t("stats.averageWordLength"), value: formatLocalizedNumber(stats.averageWordLength, digitStyle) },
+              ]}
+              heroLabel={t("stats.words")}
+              heroValue={formatLocalizedNumber(stats.words, digitStyle)}
+              sentence={summaryText}
+            />
+          </div>
+        ) : undefined
+      }
     >
       {hasText ? (
         <>
