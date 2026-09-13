@@ -175,6 +175,7 @@ export default function ImageConverterTool({ education }: { education: ReactNode
               outputDimensions={outputDimensions}
               isConverting={isConverting}
               onDownload={download}
+              format={format}
             />
           }
           sidebar={<RelatedToolsSidebar currentSlug="image-converter" category="converters" />}

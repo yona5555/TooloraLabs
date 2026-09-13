@@ -5,6 +5,7 @@ import type { JSONStats } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import DownloadButton from "@/components/tool-ui/DownloadButton";
+import JSONShareExportModal from "./JSONShareExportModal";
 
 type JSONResultProps = {
   result: string;
@@ -24,7 +25,25 @@ export default function JSONResult({ result, stats, errorMessage, errorLine, err
   const t = useTranslations("tools.json-formatter");
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        !isEmpty && !errorMessage && stats ? (
+          <JSONShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={[
+              { label: t("aboveFold.statKeys"), value: String(stats.keys) },
+              { label: t("aboveFold.statDepth"), value: String(stats.depth) },
+              { label: t("aboveFold.statSize"), value: formatBytes(stats.sizeBytes) },
+            ]}
+            heroLabel={t("aboveFold.statSize")}
+            heroValue={formatBytes(stats.sizeBytes)}
+            sentence={t("shareExport.summarySentence", { keys: stats.keys, depth: stats.depth, size: formatBytes(stats.sizeBytes) })}
+          />
+        ) : undefined
+      }
+    >
       {isEmpty ? (
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
           {t("aboveFold.placeholder")}

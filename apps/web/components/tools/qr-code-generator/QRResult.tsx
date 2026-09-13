@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Download } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import QRShareExportModal from "./QRShareExportModal";
 import { embedCenterLogo } from "./qrLogoOverlay";
 import type { QRLogoMode } from "./QRLogoPanel";
 
@@ -37,7 +38,21 @@ export default function QRResult({ svg, payload, error, logoDataUrl, logoMode }:
   const showBesideLogo = logoMode === "beside" && logoDataUrl && svg;
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        payload ? (
+          <QRShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={[{ label: t("aboveFold.payloadTitle"), value: payload }]}
+            heroLabel={t("aboveFold.payloadTitle")}
+            heroValue={payload}
+            sentence={t("shareExport.summarySentence", { payload })}
+          />
+        ) : undefined
+      }
+    >
       <div className="flex flex-col items-center gap-4">
         <div className="flex items-center justify-center gap-4">
           <div className="flex h-56 w-56 items-center justify-center rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-700 [&_svg]:h-full [&_svg]:w-full">

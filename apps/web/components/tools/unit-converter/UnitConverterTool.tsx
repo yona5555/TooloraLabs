@@ -77,6 +77,8 @@ export default function UnitConverterTool({ education }: { education: ReactNode 
           result={
             <UnitResult
               category={category}
+              from={from}
+              fromValue={value}
               to={to}
               onToChange={setTo}
               result={result}

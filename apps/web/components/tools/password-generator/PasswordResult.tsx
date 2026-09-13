@@ -4,6 +4,7 @@ import { RefreshCw } from "lucide-react";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import PasswordShareExportModal from "./PasswordShareExportModal";
 import { formatCrackTime, getStrengthTier, STRENGTH_TIER_ORDER, type StrengthTier } from "./crackTime";
 
 const TIER_COLOR: Record<StrengthTier, string> = {
@@ -34,7 +35,24 @@ export default function PasswordResult({ password, entropyBits, onRegenerate }: 
   const tierIndex = STRENGTH_TIER_ORDER.indexOf(tier);
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        password ? (
+          <PasswordShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={[
+              { label: t("aboveFold.strengthLabel"), value: t(`aboveFold.tier.${tier}`) },
+              { label: t("aboveFold.bitsOfEntropy"), value: formatLocalizedNumber(entropyBits, digitStyle, { maximumFractionDigits: 1 }) },
+            ]}
+            heroLabel={t("shareExport.generatedPasswordLabel")}
+            heroValue={password}
+            sentence={t("shareExport.summarySentence", { tier: t(`aboveFold.tier.${tier}`), bits: formatLocalizedNumber(entropyBits, digitStyle, { maximumFractionDigits: 1 }) })}
+          />
+        ) : undefined
+      }
+    >
       <div className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-4 dark:border-zinc-700 dark:bg-zinc-800">
         <code dir="ltr" className="min-w-0 flex-1 break-all font-mono text-lg text-zinc-900 dark:text-zinc-100">
           {password}

@@ -4,6 +4,7 @@ import type { UnitCategory } from "@tooloralabs/tools";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import UnitShareExportModal from "./UnitShareExportModal";
 import { UNITS_BY_CATEGORY } from "./units";
 
 const selectClass =
@@ -11,6 +12,8 @@ const selectClass =
 
 type UnitResultProps = {
   category: UnitCategory;
+  from: string;
+  fromValue: string;
   to: string;
   onToChange: (unit: string) => void;
   result: number | null;
@@ -18,13 +21,31 @@ type UnitResultProps = {
   digitStyle: DigitStyle;
 };
 
-export default function UnitResult({ category, to, onToChange, result, allConversions, digitStyle }: UnitResultProps) {
+export default function UnitResult({ category, from, fromValue, to, onToChange, result, allConversions, digitStyle }: UnitResultProps) {
   const t = useTranslations("tools.unit-converter");
 
   const money = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 6 });
+  const heroValue = result !== null ? `${money(result)} ${t(`units.${to}`)}` : "";
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        result !== null ? (
+          <UnitShareExportModal
+            operationLabel=""
+            inputRows={[{ label: t("shareExport.fromValueLabel"), value: `${fromValue} ${t(`units.${from}`)}` }]}
+            resultRows={Object.entries(allConversions).map(([unit, value]) => ({
+              label: t(`units.${unit}`),
+              value: money(value),
+            }))}
+            heroLabel={t(`units.${to}`)}
+            heroValue={heroValue}
+            sentence={`${fromValue} ${t(`units.${from}`)} = ${heroValue}.`}
+          />
+        ) : undefined
+      }
+    >
       <div className="flex items-center justify-center gap-2">
         <select value={to} onChange={(e) => onToChange(e.target.value)} className={selectClass}>
           {UNITS_BY_CATEGORY[category].map((unit) => (

@@ -4,6 +4,8 @@ import { Download } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { formatBytes } from "./formatBytes";
 import type { Dimensions } from "./resizeMath";
+import type { OutputFormat } from "./ImageInputPanel";
+import ImageShareExportModal from "./ImageShareExportModal";
 
 type ImageResultProps = {
   resultUrl: string;
@@ -12,15 +14,35 @@ type ImageResultProps = {
   outputDimensions: Dimensions | null;
   isConverting: boolean;
   onDownload: () => void;
+  format: OutputFormat;
 };
 
-export default function ImageResult({ resultUrl, resultSize, originalSize, outputDimensions, isConverting, onDownload }: ImageResultProps) {
+export default function ImageResult({ resultUrl, resultSize, originalSize, outputDimensions, isConverting, onDownload, format }: ImageResultProps) {
   const t = useTranslations("tools.image-converter");
 
   const percentChange = originalSize > 0 ? Math.round((1 - resultSize / originalSize) * 100) : 0;
+  const formatLabel = format.split("/")[1].toUpperCase();
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        resultUrl ? (
+          <ImageShareExportModal
+            operationLabel={formatLabel}
+            inputRows={[{ label: t("form.formatLabel"), value: formatLabel }]}
+            resultRows={[
+              { label: t("aboveFold.originalSize"), value: formatBytes(originalSize) },
+              { label: t("aboveFold.newSize"), value: formatBytes(resultSize) },
+              ...(outputDimensions ? [{ label: t("shareExport.dimensionsLabel"), value: `${outputDimensions.width} × ${outputDimensions.height}px` }] : []),
+            ]}
+            heroLabel={t("aboveFold.newSize")}
+            heroValue={formatBytes(resultSize)}
+            sentence={t("shareExport.summarySentence", { format: formatLabel, size: formatBytes(resultSize) })}
+          />
+        ) : undefined
+      }
+    >
       {resultUrl ? (
         <div className="flex flex-col items-center gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}

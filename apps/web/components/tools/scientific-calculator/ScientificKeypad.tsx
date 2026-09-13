@@ -5,6 +5,7 @@ import { Delete } from "lucide-react";
 import type { ScientificOperation } from "@tooloralabs/tools";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import ScientificShareExportModal from "./ScientificShareExportModal";
 import type { CalculatorAction, CalculatorState, BinaryOperator } from "./reducer";
 
 type ButtonConfig = {
@@ -126,7 +127,22 @@ export default function ScientificKeypad({ state, dispatch, compact = false }: S
   };
 
   return (
-    <SectionCard title={t("aboveFold.calculatorTitle")} bodyClassName={compact ? "p-3" : "p-4 lg:p-5"}>
+    <SectionCard
+      title={t("aboveFold.calculatorTitle")}
+      bodyClassName={compact ? "p-3" : "p-4 lg:p-5"}
+      action={
+        !compact && !state.errorCode ? (
+          <ScientificShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={state.history.slice(0, 5).map((entry) => ({ label: entry.expression, value: String(entry.result) }))}
+            heroLabel={t("shareExport.currentResultLabel")}
+            heroValue={state.display}
+            sentence={t("shareExport.summarySentence", { value: state.display })}
+          />
+        ) : undefined
+      }
+    >
       <div className={`rounded-2xl bg-zinc-50 text-end dark:bg-zinc-800 ${compact ? "px-4 py-2.5" : "px-5 py-4"}`}>
         <div className="flex items-center justify-between text-xs font-medium text-zinc-400 dark:text-zinc-500">
           <span>{state.memory !== 0 ? "M" : ""}</span>
