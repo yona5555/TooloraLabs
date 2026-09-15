@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import CountdownShareExportModal from "./CountdownShareExportModal";
+import CountdownWeekdayStripDiagram from "./CountdownWeekdayStripDiagram";
+import CountdownWeeksAheadBar from "./CountdownWeeksAheadBar";
 import type { CountdownOutput } from "./types";
 
 type Props = {
@@ -8,6 +10,7 @@ type Props = {
   eventName: string;
   hasTarget: boolean;
   digitStyle: DigitStyle;
+  date: string;
 };
 
 function Unit({ value, label, digitStyle }: { value: number; label: string; digitStyle: DigitStyle }) {
@@ -21,8 +24,10 @@ function Unit({ value, label, digitStyle }: { value: number; label: string; digi
   );
 }
 
-export default function CountdownResult({ result, eventName, hasTarget, digitStyle }: Props) {
+export default function CountdownResult({ result, eventName, hasTarget, digitStyle, date }: Props) {
   const t = useTranslations("tools.countdown-to-event-calculator.result");
+  const dw = useTranslations("tools.countdown-to-event-calculator.weekdayDiagram");
+  const wa = useTranslations("tools.countdown-to-event-calculator.weeksAheadDiagram");
 
   if (!hasTarget) {
     return (
@@ -57,6 +62,12 @@ export default function CountdownResult({ result, eventName, hasTarget, digitSty
     minutes: `${result.minutes}`,
   });
 
+  const targetDayIndex = new Date(`${date}T00:00:00`).getDay();
+  const dayLabels = [0, 1, 2, 3, 4, 5, 6].map((i) => dw(`days.${i}`));
+  const totalWholeDays = result.isPast ? 0 : result.days;
+  const fullWeeks = Math.floor(totalWholeDays / 7);
+  const extraDays = totalWholeDays % 7;
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
@@ -83,6 +94,25 @@ export default function CountdownResult({ result, eventName, hasTarget, digitSty
           <Unit value={result.minutes} label={t("minutes")} digitStyle={digitStyle} />
           <Unit value={result.seconds} label={t("seconds")} digitStyle={digitStyle} />
         </div>
+
+        {!result.isPast && (
+          <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <CountdownWeekdayStripDiagram targetDayIndex={targetDayIndex} dayLabels={dayLabels} caption={dw("caption")} />
+          </div>
+        )}
+
+        {!result.isPast && totalWholeDays > 0 && (
+          <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <CountdownWeeksAheadBar
+              totalDays={totalWholeDays}
+              fullWeeks={fullWeeks}
+              extraDays={extraDays}
+              weeksLabel={wa("weeksLabel")}
+              extraDaysLabel={wa("extraDaysLabel")}
+              caption={wa("caption")}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

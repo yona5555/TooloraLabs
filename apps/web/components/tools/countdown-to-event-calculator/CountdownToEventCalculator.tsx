@@ -84,7 +84,7 @@ export default function CountdownToEventCalculator({ education }: { education: R
             />
           }
           result={
-            <CountdownResult result={result} eventName={eventName} hasTarget={hasTarget} digitStyle={digitStyle} />
+            <CountdownResult result={result} eventName={eventName} hasTarget={hasTarget} digitStyle={digitStyle} date={date} />
           }
           sidebar={<RelatedToolsSidebar currentSlug="countdown-to-event-calculator" category="date-time" />}
           secondary={

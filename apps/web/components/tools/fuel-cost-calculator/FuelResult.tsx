@@ -1,17 +1,20 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import FuelFlowDiagram from "./FuelFlowDiagram";
+import FuelPriceSensitivityDiagram from "./FuelPriceSensitivityDiagram";
 import FuelShareExportModal from "./FuelShareExportModal";
 import type { FuelCostCalculatorOutput } from "./types";
 
 type Props = {
   result: FuelCostCalculatorOutput;
   distance: number;
+  pricePerUnit: number;
   digitStyle: DigitStyle;
 };
 
-export default function FuelResult({ result, distance, digitStyle }: Props) {
+export default function FuelResult({ result, distance, pricePerUnit, digitStyle }: Props) {
   const t = useTranslations("tools.fuel-cost-calculator.result");
+  const ts = useTranslations("tools.fuel-cost-calculator.sensitivityDiagram");
   const fmt = (value: number, maxFractionDigits = 2) =>
     formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: maxFractionDigits });
 
@@ -35,6 +38,12 @@ export default function FuelResult({ result, distance, digitStyle }: Props) {
   }
 
   const sentence = t("sentence", { distance: fmt(distance, 0), cost: fmt(result.totalCost) });
+
+  const fuelUsed = result.fuelUsed;
+  const sensitivityPoints = [0.6, 0.8, 1, 1.2, 1.4, 1.6].map((multiplier) => {
+    const price = pricePerUnit * multiplier;
+    return { price, cost: fuelUsed * price };
+  });
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
@@ -60,6 +69,12 @@ export default function FuelResult({ result, distance, digitStyle }: Props) {
             costLabel={fmt(result.totalCost)}
           />
         </div>
+
+        {pricePerUnit > 0 && (
+          <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <FuelPriceSensitivityDiagram points={sensitivityPoints} currentPrice={pricePerUnit} caption={ts("caption")} xLabel={ts("xLabel")} />
+          </div>
+        )}
 
         <ul className="mt-5 space-y-1.5 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800">
           <li className="flex items-center justify-between gap-3">

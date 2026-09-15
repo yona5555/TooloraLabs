@@ -81,6 +81,7 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
             <FuelResult
               result={result}
               distance={parseLocalizedNumber(distance) || 0}
+              pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
               digitStyle={digitStyle}
             />
           }

@@ -118,6 +118,7 @@ export default function GpaCalculator({ education }: { education: ReactNode }) {
               operation={operation}
               digitStyle={digitStyle}
               courseCount={courses.length}
+              courses={courses}
               targetGpaInput={targetGpa}
               plannedCreditsInput={plannedCredits}
             />

@@ -3,23 +3,27 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import GpaMainGauge from "./GpaMainGauge";
 import GpaScaleDiagram from "./GpaScaleDiagram";
+import GpaCourseContributionBar from "./GpaCourseContributionBar";
 import GpaShareExportModal from "./GpaShareExportModal";
-import { bandForGpa } from "./types";
-import type { GpaOperation, GpaResult as Result } from "./types";
+import { bandForGpa, GRADE_POINTS } from "./types";
+import type { DraftCourse, GpaOperation, GpaResult as Result } from "./types";
+import { parseLocalizedNumber } from "@tooloralabs/core";
 
 type Props = {
   result: Result;
   operation: GpaOperation;
   digitStyle: DigitStyle;
   courseCount: number;
+  courses: DraftCourse[];
   targetGpaInput: string;
   plannedCreditsInput: string;
 };
 
-export default function GpaResult({ result, operation, digitStyle, courseCount, targetGpaInput, plannedCreditsInput }: Props) {
+export default function GpaResult({ result, operation, digitStyle, courseCount, courses, targetGpaInput, plannedCreditsInput }: Props) {
   const t = useTranslations("tools.gpa-calculator.result");
   const tGauge = useTranslations("tools.gpa-calculator.gauge");
   const tForm = useTranslations("tools.gpa-calculator.form");
+  const tc = useTranslations("tools.gpa-calculator.courseContribution");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 3 });
 
   if (result.error === "no-courses") {
@@ -102,6 +106,19 @@ export default function GpaResult({ result, operation, digitStyle, courseCount, 
         <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
           <GpaScaleDiagram gpa={headline} caption={t("diagramCaption", { value: heroValue })} />
         </div>
+
+        {!isTarget && courses.length > 1 && (
+          <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+            <GpaCourseContributionBar
+              segments={courses.map((c, i) => {
+                const credits = parseLocalizedNumber(c.creditHours) || 0;
+                const gpa = GRADE_POINTS[c.grade];
+                return { label: tc("courseLabel", { number: i + 1 }), qualityPoints: credits * gpa, gpa };
+              })}
+              caption={tc("caption")}
+            />
+          </div>
+        )}
 
         <p className="mt-4 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-600 dark:border-zinc-800 dark:text-zinc-300">{sentence}</p>
       </SectionCard>
