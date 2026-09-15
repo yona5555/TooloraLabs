@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { StandardDeviationResult as Result } from "./types";
 import StandardDeviationChart from "./StandardDeviationChart";
+import EmpiricalRuleCompareChart from "./EmpiricalRuleCompareChart";
 import StandardDeviationShareExportModal from "./StandardDeviationShareExportModal";
 
 type Props = {
@@ -58,6 +59,10 @@ export default function StandardDeviationResult({ result, digitStyle }: Props) {
 
         <div className="mt-5">
           <StandardDeviationChart values={result.deviations.map((d) => d.value)} mean={result.mean} populationStdDev={result.populationStdDev} />
+        </div>
+
+        <div className="mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+          <EmpiricalRuleCompareChart values={result.deviations.map((d) => d.value)} mean={result.mean} populationStdDev={result.populationStdDev} />
         </div>
 
         <ul className="mt-5 space-y-1.5 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800">

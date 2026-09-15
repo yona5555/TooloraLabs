@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import PercentageComparisonChart from "./PercentageComparisonChart";
+import PercentageChangeScale from "./PercentageChangeScale";
 import PercentageShareExportModal from "./PercentageShareExportModal";
 import type { PercentageMode, PercentageResult as Result } from "./types";
 
@@ -129,6 +130,12 @@ export default function PercentageResult({ result, computed }: Props) {
                 rightFormatted={num(chart.rightValue)}
                 percentageLabel={sentence}
               />
+            </div>
+          )}
+
+          {!isError && (mode === "percentage-change" || mode === "percentage-difference") && (
+            <div className="mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+              <PercentageChangeScale value={result.value} />
             </div>
           )}
 

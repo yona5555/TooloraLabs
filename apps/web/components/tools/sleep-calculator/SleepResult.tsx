@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import type { SleepResult as Result, SleepMode } from "./types";
 import SleepCycleDiagram from "./SleepCycleDiagram";
+import SleepClockDiagram from "./SleepClockDiagram";
 import SleepShareExportModal from "./SleepShareExportModal";
 
 type Props = {
@@ -49,6 +50,9 @@ export default function SleepResult({ result, mode }: Props) {
       </div>
       <div className="p-4 lg:p-6">
         <SleepCycleDiagram options={result.options} />
+        <div className="mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+          <SleepClockDiagram options={result.options} />
+        </div>
 
         <ul className="mt-5 space-y-2">
           {result.options.map((option, index) => (

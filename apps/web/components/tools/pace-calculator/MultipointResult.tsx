@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { convertPaceSeconds, formatClock, type DistanceUnit, type MultipointSegment } from "@tooloralabs/tools";
 import PaceGauge from "./PaceGauge";
+import MultipointSplitsChart from "./MultipointSplitsChart";
 
 type MultipointResultProps = {
   segments: MultipointSegment[];
@@ -75,6 +76,11 @@ export default function MultipointResult({ segments, unit, digitStyle }: Multipo
           </>
         )}
       </div>
+      {segments.length >= 2 && (
+        <div className="border-t border-zinc-100 p-4 dark:border-zinc-800 lg:p-6">
+          <MultipointSplitsChart segments={segments} />
+        </div>
+      )}
     </div>
   );
 }
