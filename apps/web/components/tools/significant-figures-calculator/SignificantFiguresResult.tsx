@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import DigitSignificanceDisplay from "./DigitSignificanceDisplay";
+import SignificantFiguresShareExportModal from "./SignificantFiguresShareExportModal";
 import type { SignificantFiguresOperation, SignificantFiguresResult as Result } from "./types";
 
 type Computed = {
@@ -16,6 +17,7 @@ type Props = {
 
 export default function SignificantFiguresResult({ result, computed }: Props) {
   const t = useTranslations("tools.significant-figures-calculator.result");
+  const tForm = useTranslations("tools.significant-figures-calculator.form");
   const { operation, valueA } = computed;
 
   if (result.error === "invalid-number") {
@@ -72,7 +74,17 @@ export default function SignificantFiguresResult({ result, computed }: Props) {
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
-          <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          <div className="flex items-center gap-2">
+            <SignificantFiguresShareExportModal
+              operationLabel={tForm(`operation.${operation}`)}
+              inputRows={[]}
+              resultRows={[]}
+              heroLabel={t("heading")}
+              heroValue={copyText}
+              sentence={stepSentence}
+            />
+            <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          </div>
         </div>
 
         <div className="p-4 lg:p-6">

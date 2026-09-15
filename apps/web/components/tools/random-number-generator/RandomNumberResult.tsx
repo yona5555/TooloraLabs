@@ -2,14 +2,19 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { RandomNumberGeneratorOutput } from "./types";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import RandomNumberRangePositionDiagram from "./RandomNumberRangePositionDiagram";
+import RandomNumberShareExportModal from "./RandomNumberShareExportModal";
 
 type Props = {
   result: RandomNumberGeneratorOutput;
   digitStyle: DigitStyle;
+  rangeMin: number;
+  rangeMax: number;
 };
 
-export default function RandomNumberResult({ result, digitStyle }: Props) {
+export default function RandomNumberResult({ result, digitStyle, rangeMin, rangeMax }: Props) {
   const t = useTranslations("tools.random-number-generator.result");
+  const tRoot = useTranslations("tools.random-number-generator");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
 
   if (result.error) {
@@ -30,7 +35,21 @@ export default function RandomNumberResult({ result, digitStyle }: Props) {
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={result.numbers.join(", ")} className="!text-white dark:!text-white" />
+        <div className="flex items-center gap-2">
+          <RandomNumberShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={[
+              { label: t("countLabel"), value: fmt(result.numbers.length) },
+              { label: t("sumLabel"), value: fmt(result.sum) },
+              { label: t("averageLabel"), value: fmt(result.average) },
+            ]}
+            heroLabel={t("heading")}
+            heroValue={result.numbers.map(fmt).join(", ")}
+            sentence={tRoot("shareExport.summarySentence", { count: result.numbers.length, average: fmt(result.average) })}
+          />
+          <CopyButton text={result.numbers.join(", ")} className="!text-white dark:!text-white" />
+        </div>
       </div>
       <div className="p-4 lg:p-6">
         <div dir="ltr" className="flex max-h-64 flex-wrap gap-2 overflow-y-auto rounded-xl border border-zinc-100 p-3 dark:border-zinc-800">
@@ -43,6 +62,18 @@ export default function RandomNumberResult({ result, digitStyle }: Props) {
             </span>
           ))}
         </div>
+
+        {result.numbers.length > 1 && rangeMax > rangeMin && (
+          <RandomNumberRangePositionDiagram
+            numbers={result.numbers}
+            min={rangeMin}
+            max={rangeMax}
+            average={result.average}
+            digitStyle={digitStyle}
+            averageLabel={t("averageLabel")}
+            caption={t("rangeDiagramCaption")}
+          />
+        )}
 
         <ul className="mt-5 space-y-1.5 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800">
           <li className="flex items-center justify-between gap-3">

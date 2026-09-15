@@ -2,25 +2,53 @@
 import { useTranslations } from "next-intl";
 import { Printer, Trash2 } from "lucide-react";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { BatchSummary } from "@tooloralabs/tools";
+import type { BatchInvoiceCalculatorOutput, BatchSummary } from "@tooloralabs/tools";
+import InvoiceBatchComparisonChart from "./InvoiceBatchComparisonChart";
+import BatchInvoiceShareExportModal from "./BatchInvoiceShareExportModal";
+import type { SavedInvoice } from "./types";
 
 type Props = {
   summary: BatchSummary;
   digitStyle: DigitStyle;
   onPrint: () => void;
   onClearAll: () => void;
+  invoices: SavedInvoice[];
+  invoiceResults: BatchInvoiceCalculatorOutput[];
 };
 
-export default function InvoiceSummary({ summary, digitStyle, onPrint, onClearAll }: Props) {
+export default function InvoiceSummary({ summary, digitStyle, onPrint, onClearAll, invoices, invoiceResults }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator.summary");
+  const tRoot = useTranslations("tools.batch-invoice-calculator");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
+        {summary.invoiceCount > 0 && (
+          <BatchInvoiceShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={[
+              { label: t("invoiceCountLabel"), value: String(summary.invoiceCount) },
+              { label: t("netBeforeTaxLabel"), value: fmt(summary.netBeforeTax) },
+              { label: t("taxTotalLabel"), value: fmt(summary.taxTotal) },
+            ]}
+            heroLabel={t("grandTotalLabel")}
+            heroValue={fmt(summary.grandTotal)}
+            sentence={tRoot("shareExport.summarySentence", { count: summary.invoiceCount, total: fmt(summary.grandTotal) })}
+          />
+        )}
       </div>
       <div className="p-4 lg:p-6">
+        <InvoiceBatchComparisonChart
+          invoices={invoices}
+          results={invoiceResults}
+          digitStyle={digitStyle}
+          netLabel={t("netBeforeTaxLabel")}
+          taxLabel={t("taxTotalLabel")}
+          caption={t("comparisonChartCaption")}
+        />
         <ul className="space-y-1.5 text-sm">
           <li className="flex items-center justify-between gap-3">
             <span className="text-zinc-500 dark:text-zinc-400">{t("invoiceCountLabel")}</span>

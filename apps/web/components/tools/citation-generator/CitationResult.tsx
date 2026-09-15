@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
+import CitationShareExportModal from "./CitationShareExportModal";
 import { bandForCompleteness, citationCompleteness, type CitationDraft, type CitationResult as Result } from "./types";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 
 export default function CitationResult({ result, draft }: Props) {
   const t = useTranslations("tools.citation-generator.result");
+  const tRoot = useTranslations("tools.citation-generator");
   const completeness = citationCompleteness(draft);
   const completenessBand = bandForCompleteness(completeness.percent);
   const completenessColor =
@@ -62,8 +64,16 @@ export default function CitationResult({ result, draft }: Props) {
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+        <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("completenessHeading")}</h2>
+          <CitationShareExportModal
+            operationLabel=""
+            inputRows={[]}
+            resultRows={styles.map((style) => ({ label: style.label, value: style.text }))}
+            heroLabel={t("apaLabel")}
+            heroValue={styles[0]?.text ?? ""}
+            sentence={tRoot("shareExport.summarySentence", { percent: completeness.percent })}
+          />
         </div>
         {completenessGauge}
       </div>

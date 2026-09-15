@@ -191,7 +191,14 @@ export default function BatchInvoiceCalculator({ education }: { education: React
 
         <div className="mx-auto mt-8 grid max-w-6xl gap-6 px-4 lg:grid-cols-[1fr_320px] lg:px-0 print:hidden">
           <InvoiceTable invoices={invoices} totals={totals} digitStyle={digitStyle} onEdit={handleEdit} onDelete={handleDelete} />
-          <InvoiceSummary summary={summary} digitStyle={digitStyle} onPrint={handlePrint} onClearAll={handleClearAll} />
+          <InvoiceSummary
+            summary={summary}
+            digitStyle={digitStyle}
+            onPrint={handlePrint}
+            onClearAll={handleClearAll}
+            invoices={invoices}
+            invoiceResults={invoiceResults}
+          />
         </div>
 
         <PrintableSummary invoices={invoices} totals={totals} summary={summary} digitStyle={digitStyle} />
