@@ -74,7 +74,14 @@ export default function TimeCalculator({ education }: { education: ReactNode }) 
               onScenarioPreset={handleScenarioPreset} onClear={handleClear}
             />
           }
-          result={<TimeResult result={result} />}
+          result={
+            <TimeResult
+              result={result}
+              h1={toInt(h1)} m1={toInt(m1)} s1={toInt(s1)}
+              h2={toInt(h2)} m2={toInt(m2)} s2={toInt(s2)}
+              operation={operation}
+            />
+          }
           sidebar={<RelatedToolsSidebar currentSlug="time-calculator" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">

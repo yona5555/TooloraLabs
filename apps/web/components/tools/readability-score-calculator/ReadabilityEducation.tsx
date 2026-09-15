@@ -6,6 +6,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import ReadabilityGauge from "./ReadabilityGauge";
 import ReadabilityScaleDiagram from "./ReadabilityScaleDiagram";
+import ReadabilityGradeLevelDiagram from "./ReadabilityGradeLevelDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -25,6 +26,7 @@ export default async function ReadabilityEducation() {
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
         <ReadabilityScaleDiagram />
+        <ReadabilityGradeLevelDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

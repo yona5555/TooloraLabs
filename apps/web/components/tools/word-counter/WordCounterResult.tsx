@@ -5,6 +5,7 @@ import type { TextCounterOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import TopKeywordsChart from "./TopKeywordsChart";
+import VocabularyDiversityChart from "./VocabularyDiversityChart";
 import WordCounterShareExportModal from "./WordCounterShareExportModal";
 
 type WordCounterResultProps = {
@@ -92,6 +93,8 @@ export default function WordCounterResult({ stats, hasText, digitStyle }: WordCo
               <TopKeywordsChart keywords={stats.topKeywords} chartLabel={t("aboveFold.keywordsTitle")} />
             </div>
           )}
+
+          <VocabularyDiversityChart words={stats.words} uniqueWords={stats.uniqueWords} digitStyle={digitStyle} />
         </>
       ) : (
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">

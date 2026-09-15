@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import UnitCircleDiagram from "./UnitCircleDiagram";
+import OrderOfOperationsDiagram from "./OrderOfOperationsDiagram";
 
 type ExampleRow = { expression: string; result: string };
 
@@ -26,6 +27,7 @@ export default async function ScientificEducation() {
           angleLabel={t("intro.diagram.angleLabel")}
           caption={t("intro.diagram.caption")}
         />
+        <OrderOfOperationsDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

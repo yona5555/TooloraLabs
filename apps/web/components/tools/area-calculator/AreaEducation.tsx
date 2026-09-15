@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import AreaConceptDiagram from "./AreaConceptDiagram";
+import AreaShapeComparisonDiagram from "./AreaShapeComparisonDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -25,6 +26,7 @@ export default async function AreaEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <AreaConceptDiagram />
+        <AreaShapeComparisonDiagram />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>

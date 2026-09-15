@@ -5,6 +5,7 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { findOverlappingBusinessHours, getTimeZoneOffsetMinutes } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { WorldCity } from "@/lib/worldtime/cities";
+import OverlapTimelineDiagram from "./OverlapTimelineDiagram";
 
 type MeetingPlannerProps = {
   fromCity: WorldCity;
@@ -28,6 +29,7 @@ export default function MeetingPlanner({ fromCity, toCity, referenceDate, digitS
   );
 
   const fromOffset = useMemo(() => getTimeZoneOffsetMinutes(referenceDate, fromCity.ianaZone), [fromCity, referenceDate]);
+  const toOffset = useMemo(() => getTimeZoneOffsetMinutes(referenceDate, toCity.ianaZone), [toCity, referenceDate]);
 
   function formatFromHour(utcHour: number) {
     const localHour = Math.round((((utcHour + fromOffset / 60) % 24) + 24) % 24);
@@ -39,6 +41,14 @@ export default function MeetingPlanner({ fromCity, toCity, referenceDate, digitS
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
         {t("intro", { from: fromCity.city[nameKey], to: toCity.city[nameKey] })}
       </p>
+
+      <OverlapTimelineDiagram
+        fromLabel={fromCity.city[nameKey]}
+        toLabel={toCity.city[nameKey]}
+        fromOffsetMinutes={fromOffset}
+        toOffsetMinutes={toOffset}
+        overlapUtcHours={overlap}
+      />
 
       {overlap.length > 0 ? (
         <div className="mt-4">

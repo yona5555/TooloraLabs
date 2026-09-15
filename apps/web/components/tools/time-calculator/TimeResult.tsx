@@ -1,17 +1,21 @@
 import { useTranslations } from "next-intl";
-import type { TimeResult as Result } from "./types";
+import type { TimeOperation, TimeResult as Result } from "./types";
 import TimeClockDiagram from "./TimeClockDiagram";
+import TimeAddSubtractBarDiagram from "./TimeAddSubtractBarDiagram";
 import TimeShareExportModal from "./TimeShareExportModal";
 
 type Props = {
   result: Result;
+  h1: number; m1: number; s1: number;
+  h2: number; m2: number; s2: number;
+  operation: TimeOperation;
 };
 
 function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-export default function TimeResult({ result }: Props) {
+export default function TimeResult({ result, h1, m1, s1, h2, m2, s2, operation }: Props) {
   const t = useTranslations("tools.time-calculator.result");
 
   if (result.error) {
@@ -52,6 +56,15 @@ export default function TimeResult({ result }: Props) {
 
         <div className="mt-5">
           <TimeClockDiagram hours={hours} minutes={minutes} />
+        </div>
+
+        <div className="mt-5">
+          <TimeAddSubtractBarDiagram
+            h1={h1} m1={m1} s1={s1}
+            h2={h2} m2={m2} s2={s2}
+            operation={operation}
+            resultSeconds={result.totalSeconds}
+          />
         </div>
 
         <p className="mt-5 border-t border-zinc-100 pt-4 text-sm text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
