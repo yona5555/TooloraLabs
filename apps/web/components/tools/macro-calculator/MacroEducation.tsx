@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import MacroCarbGauge from "./MacroCarbGauge";
+import MacroGoalComparisonChart from "./MacroGoalComparisonChart";
 
 type ExampleRow = { calculation: string; result: string };
 type GoalItem = { title: string; description: string };
@@ -36,6 +37,7 @@ export default async function MacroEducation() {
             </div>
           ))}
         </div>
+        <MacroGoalComparisonChart />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

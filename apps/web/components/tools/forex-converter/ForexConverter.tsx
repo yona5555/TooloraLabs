@@ -13,6 +13,7 @@ import ForexInputPanel from "./ForexInputPanel";
 import ForexResult from "./ForexResult";
 import ForexTopList from "./ForexTopList";
 import ForexHistoricalChart from "./ForexHistoricalChart";
+import ForexQuickAmountsChart from "./ForexQuickAmountsChart";
 import ForexNews from "./ForexNews";
 import ForexLearningResources from "./ForexLearningResources";
 import type { ReactNode } from "react";
@@ -77,14 +78,17 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
             />
           }
           result={
-            <ForexResult
-              fromCurrency={fromCurrency}
-              toCurrency={toCurrency}
-              amount={amount}
-              convertedAmount={convertedAmount}
-              lastUpdatedUnix={lastUpdatedUnix}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-4">
+              <ForexResult
+                fromCurrency={fromCurrency}
+                toCurrency={toCurrency}
+                amount={amount}
+                convertedAmount={convertedAmount}
+                lastUpdatedUnix={lastUpdatedUnix}
+                digitStyle={digitStyle}
+              />
+              <ForexQuickAmountsChart fromCurrency={fromCurrency} toCurrency={toCurrency} digitStyle={digitStyle} />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="forex-converter" category="financial-markets" />}
           secondary={

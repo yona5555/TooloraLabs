@@ -12,6 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CommodityInputPanel from "./CommodityInputPanel";
 import CommodityResult from "./CommodityResult";
 import CommodityHistoricalChart from "./CommodityHistoricalChart";
+import CommodityGoldSilverRatioGauge from "./CommodityGoldSilverRatioGauge";
 import CommodityNews from "./CommodityNews";
 import CommodityLearningResources from "./CommodityLearningResources";
 import type { CommodityId, DisplayCurrency, MetalWeightUnit } from "./types";
@@ -102,6 +103,7 @@ export default function CommodityConverter({
               <SectionNav items={navItems} />
               <ViewDocsLink slug="commodities-tracker" />
               <CommodityHistoricalChart digitStyle={digitStyle} />
+              <CommodityGoldSilverRatioGauge goldUsdPerOunce={goldUsdPerOunce} silverUsdPerOunce={silverUsdPerOunce} />
               <CommodityNews />
               <CommodityLearningResources />
             </div>
