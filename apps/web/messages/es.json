@@ -1295,7 +1295,15 @@
         "lbUnit": "lb",
         "miniConverterTitle": "Conversor rápido de unidades",
         "miniConverterResultPrefix": "=",
-        "sentence": "Un IMC de {bmi} se ubica en el rango: {category}."
+        "sentence": "Un IMC de {bmi} se ubica en el rango: {category}.",
+        "bodyFatGaugeTitle": "Rango Estimado de Grasa Corporal",
+        "bodyFatZones": {
+          "essential": "Esencial",
+          "athletes": "Atletas",
+          "fitness": "Buena forma",
+          "average": "Promedio",
+          "obese": "Obesidad"
+        }
       },
       "scenarios": {
         "underweightExample": "Ejemplo de bajo peso",
@@ -3694,6 +3702,18 @@
         },
         "notices": {
           "title": "Avisos"
+        },
+        "frequencyDiagram": {
+          "title": "¿Realmente importa la frecuencia de capitalización?",
+          "intro": "Para tus propios números — {rate}% durante {years} años — aquí está el valor futuro en cada frecuencia de capitalización, desde una vez al año hasta una vez al día:",
+          "frequencies": {
+            "annually": "Anual",
+            "semiannually": "Semestral",
+            "quarterly": "Trimestral",
+            "monthly": "Mensual",
+            "daily": "Diaria"
+          },
+          "gap": "La diferencia entre la capitalización anual y diaria con estos números: {amount}, real, pero menor de lo que la mayoría espera."
         }
       }
     },
@@ -4084,6 +4104,11 @@
             "chartAriaLabel": "Gráfico de barras que compara el monto máximo de préstamo que soporta una cuota mensual de 300 $ a tasas anuales del 5 %, 8 % y 11 %, cada una a un plazo de 5 años",
             "rateLabel": "tasa del {rate} %",
             "caption": "Misma cuota mensual de 300 $, mismo plazo de 5 años: solo cambia la tasa. Al 5 % la cuota soporta un préstamo de 15.897 $, pero al 11 % solo 13.798 $. Una diferencia de 6 puntos en la tasa equivale a unos 2.100 $ de capacidad de préstamo, así que vale la pena comparar ofertas."
+          },
+          "payoffDiagram": {
+            "chartAriaLabel": "Gráfico de área que muestra cómo el saldo pendiente de un préstamo de $20,000 baja a cero a lo largo de un plazo de 5 años con un interés anual del 6%",
+            "yearLabel": "Año {year}",
+            "caption": "Un préstamo de $20,000 al 6% durante 5 años: el saldo baja lentamente al principio (los primeros pagos son sobre todo intereses) y más rápido hacia el final (los últimos pagos son sobre todo capital)."
           }
         },
         "variables": {
@@ -5547,6 +5572,11 @@
           "note": "Cajori documenta el uso que hizo al-Hassar en el siglo XII de la línea horizontal de fracción y la adopción de esa misma notación por Fibonacci en el Liber Abaci (1202), señalando explícitamente que la prioridad de al-Hassar sobre Fibonacci no está del todo confirmada.",
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Leer el texto original"
+        },
+        "operations": {
+          "title": "Ver las operaciones en sí",
+          "addIntro": "Sumar o restar fracciones con distinto denominador requiere primero reescribirlas con un denominador común — así es exactamente para 1/2 + 1/3:",
+          "multiplyIntro": "Multiplicar fracciones tiene una representación visual clara: el \"modelo de área\" de abajo muestra 2/3 × 3/4 como regiones sombreadas superpuestas de una cuadrícula."
         }
       },
       "scenarios": {
@@ -5578,6 +5608,16 @@
         "intro": "La misma fracción dibujada como porciones de pastel en lugar de una barra — algunas personas encuentran una representación más intuitiva que la otra.",
         "ariaLabel": "Un pastel dividido en {denominator} porciones iguales, con {numerator} de ellas sombreadas",
         "caption": "{fraction} del pastel está sombreado."
+      },
+      "additionDiagram": {
+        "rowA": "1/2 → 3/6",
+        "rowB": "1/3 → 2/6",
+        "rowSum": "5/6",
+        "caption": "Para sumar 1/2 + 1/3, ambas fracciones se reescriben con un denominador común (6): 1/2 se convierte en 3/6 y 1/3 en 2/6; luego las partes sombreadas simplemente se combinan: 3/6 + 2/6 = 5/6."
+      },
+      "multiplicationDiagram": {
+        "gridAriaLabel": "Una cuadrícula de 3 por 4 que representa 2/3 por 3/4, con la región superpuesta de 2 por 3 sombreada para mostrar el producto 6/12",
+        "caption": "2/3 × 3/4 como modelo de área: una cuadrícula de 3 columnas × 4 filas (12 celdas en total) con 2 columnas sombreadas en un sentido y 3 filas en el otro; la superposición de 6 celdas es el numerador del producto, y las 12 celdas son su denominador: 6/12 = 1/2."
       }
     },
     "scientific-notation-converter": {
@@ -9881,7 +9921,8 @@
           "determinant": {
             "title": "El determinante como área",
             "description": "El determinante no es solo una fórmula para memorizar — es literalmente el área del paralelogramo al que una matriz transforma el cuadrado unitario (con signo: positivo cuando se conserva la orientación, negativo cuando la matriz voltea el plano). Una matriz que estira el espacio tiene un determinante mayor que 1 en valor absoluto; una que lo comprime tiene un determinante entre 0 y 1; y una matriz singular (determinante 0) aplasta todo el plano hasta una línea, por lo que destruye información de forma irreversible.",
-            "diagramCaption": "La imagen del cuadrado unitario bajo la matriz A, con su área — igual a |det(A)| — sombreada y etiquetada."
+            "diagramCaption": "La imagen del cuadrado unitario bajo la matriz A, con su área — igual a |det(A)| — sombreada y etiquetada.",
+            "arithmeticCaption": "Los dos productos diagonales: a11×a22 (diagonal principal, se suma) menos a12×a21 (diagonal secundaria, se resta)."
           },
           "composition": {
             "title": "La multiplicación de matrices como composición de transformaciones",
@@ -18174,7 +18215,8 @@
               "room": "Tamaño de habitación",
               "landmark": "Tamaño de monumento"
             }
-          }
+          },
+          "paragraph3": "La fórmula del área sigue la misma idea, solo que con los sectores en lugar del borde: corta el círculo en finas porciones tipo pastel y colócalas una junto a otra, y se aproximan a un rectángulo cuya altura es el radio y cuya base es la mitad de la circunferencia (πr), lo que da un área de πr × r = πr²."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -18325,6 +18367,18 @@
         "intro": "Si pudieras cortar el borde de un círculo y extenderlo en línea recta, mediría exactamente π diámetros de largo — tres diámetros completos más un pequeño trozo sobrante.",
         "ariaLabel": "La circunferencia de un círculo desenrollada en una línea recta de longitud pi por el diámetro",
         "caption": "Por eso π ≈ 3,14159 — es la relación fija entre la circunferencia de cualquier círculo y su diámetro."
+      },
+      "areaDiagram": {
+        "areaSectorsCaption": "Los sectores del círculo desplegados en una franja que se aproxima a un rectángulo de base πr y altura r; su área, πr × r = πr², es la fórmula del área del círculo.",
+        "areaHeightLabel": "altura = r",
+        "areaBaseLabel": "base = πr"
+      },
+      "growthChart": {
+        "chartAriaLabel": "Gráfico de líneas que compara la circunferencia (crecimiento lineal) y el área (crecimiento cuadrático) a medida que el radio aumenta de 0 a 10",
+        "radiusLabel": "r = {r}",
+        "legendCircumference": "Circunferencia (2πr)",
+        "legendArea": "Área (πr²)",
+        "caption": "A medida que crece el radio, la circunferencia crece en proporción directa, pero el área crece con el cuadrado del radio: duplicar el radio duplica aproximadamente la circunferencia, pero cuadruplica el área."
       }
     },
     "gcf-lcm-calculator": {
@@ -18562,6 +18616,23 @@
         "intro": "Divide ambos números entre un factor primo común, anota ese primo a un lado, y repite hasta que ya no haya divisor común — una forma rápida de hallar el MCD y el mcm a mano.",
         "ariaLabel": "Una escalera de división para hallar el MCD y el mcm de 12 y 18",
         "caption": "Multiplica los números primos del lado para obtener el MCD; multiplícalos por los dos números que quedan abajo para obtener el mcm."
+      },
+      "multiplesDiagram": {
+        "title": "El MCM como el primer múltiplo compartido",
+        "intro": "Alinear los múltiplos de {a} y {b} en una recta numérica muestra exactamente qué significa el MCM: el primer punto en el que ambas listas coinciden.",
+        "ariaLabel": "Recta numérica que muestra los múltiplos de 12 en una fila y los múltiplos de 18 en otra, coincidiendo primero en 36",
+        "rowA": "Múltiplos de {a}",
+        "rowB": "Múltiplos de {b}",
+        "rowLcm": "Primer múltiplo compartido (MCM)",
+        "caption": "12 y 18 comparten por primera vez un múltiplo en 36: ese es el MCM, alcanzado aquí simplemente contando, sin factorizar nada."
+      },
+      "factorTreeDiagram": {
+        "title": "Descomponer los números en sus factores primos",
+        "intro": "Antes de poder hallar el MCD y el MCM, cada número se descompone primero en factores primos: los bloques que ya no se pueden dividir más. Así se ramifican 12 y 18 hasta sus factores primos.",
+        "labelA": "{a} = 2 × 2 × 3",
+        "labelB": "{b} = 2 × 3 × 3",
+        "legendPrime": "Factor primo",
+        "caption": "12 = 2² × 3 y 18 = 2 × 3²: exactamente las factorizaciones de las que parten el diagrama de Venn y el método de la escalera anteriores."
       }
     },
     "triangle-calculator": {

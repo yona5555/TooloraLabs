@@ -1295,7 +1295,15 @@
         "lbUnit": "lb",
         "miniConverterTitle": "Schneller Einheitenrechner",
         "miniConverterResultPrefix": "=",
-        "sentence": "Ein BMI von {bmi} liegt im Bereich: {category}."
+        "sentence": "Ein BMI von {bmi} liegt im Bereich: {category}.",
+        "bodyFatGaugeTitle": "Geschätzter Körperfettbereich",
+        "bodyFatZones": {
+          "essential": "Essenziell",
+          "athletes": "Athleten",
+          "fitness": "Fitness",
+          "average": "Durchschnitt",
+          "obese": "Adipositas"
+        }
       },
       "scenarios": {
         "underweightExample": "Untergewicht-Beispiel",
@@ -3694,6 +3702,18 @@
         },
         "notices": {
           "title": "Hinweise"
+        },
+        "frequencyDiagram": {
+          "title": "Spielt die Zinseszinsfrequenz wirklich eine Rolle?",
+          "intro": "Für Ihre eigenen Zahlen — {rate}% über {years} Jahre — hier der Endwert bei jeder Zinseszinsfrequenz, von einmal jährlich bis einmal täglich:",
+          "frequencies": {
+            "annually": "Jährlich",
+            "semiannually": "Halbjährlich",
+            "quarterly": "Vierteljährlich",
+            "monthly": "Monatlich",
+            "daily": "Täglich"
+          },
+          "gap": "Die Differenz zwischen jährlicher und täglicher Verzinsung bei diesen Zahlen: {amount} — real, aber kleiner als die meisten erwarten."
         }
       }
     },
@@ -4084,6 +4104,11 @@
             "chartAriaLabel": "Balkendiagramm: maximaler Kreditbetrag, den eine monatliche Rate von 300 $ bei 5 %, 8 % und 11 % Jahreszins jeweils über eine Laufzeit von 5 Jahren trägt",
             "rateLabel": "{rate} % Zins",
             "caption": "Gleiche monatliche Rate von 300 $, gleiche Laufzeit von 5 Jahren — nur der Zinssatz ändert sich: Bei 5 % trägt die Rate einen Kredit von 15.897 $, bei 11 % nur noch 13.798 $. Ein Unterschied von 6 Prozentpunkten macht rund 2.100 $ an Kreditspielraum aus — ein Grund, Angebote zu vergleichen."
+          },
+          "payoffDiagram": {
+            "chartAriaLabel": "Flächendiagramm, das den auf null sinkenden Restsaldo eines 20.000-$-Kredits über eine 5-jährige Laufzeit bei 6% Jahreszins zeigt",
+            "yearLabel": "Jahr {year}",
+            "caption": "Ein 20.000-$-Kredit zu 6% über 5 Jahre: Der Saldo sinkt anfangs langsam (frühe Zahlungen sind größtenteils Zinsen) und gegen Ende schneller (spätere Zahlungen sind größtenteils Tilgung)."
           }
         },
         "variables": {
@@ -5547,6 +5572,11 @@
           "note": "Cajori dokumentiert al-Hassars Verwendung des waagerechten Bruchstrichs im 12. Jahrhundert sowie Fibonaccis Übernahme derselben Notation im Liber Abaci (1202) und weist dabei ausdrücklich darauf hin, dass al-Hassars Priorität gegenüber Fibonacci nicht vollständig gesichert ist.",
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Originaltext lesen"
+        },
+        "operations": {
+          "title": "Die Operationen selbst sehen",
+          "addIntro": "Das Addieren oder Subtrahieren von Brüchen mit unterschiedlichen Nennern erfordert zunächst, sie auf einen gemeinsamen Nenner zu bringen — so sieht das genau für 1/2 + 1/3 aus:",
+          "multiplyIntro": "Das Multiplizieren von Brüchen hat eine anschauliche Darstellung: Das „Flächenmodell“ unten zeigt 2/3 × 3/4 als überlappende schattierte Bereiche eines Rasters."
         }
       },
       "scenarios": {
@@ -5578,6 +5608,16 @@
         "intro": "Derselbe Bruch als Kuchenstücke statt als Balken dargestellt — manche Menschen finden die eine Darstellung intuitiver als die andere.",
         "ariaLabel": "Ein Kuchen, geteilt in {denominator} gleiche Stücke, davon {numerator} eingefärbt",
         "caption": "{fraction} des Kuchens ist eingefärbt."
+      },
+      "additionDiagram": {
+        "rowA": "1/2 → 3/6",
+        "rowB": "1/3 → 2/6",
+        "rowSum": "5/6",
+        "caption": "Um 1/2 + 1/3 zu addieren, werden beide Brüche auf ihren gemeinsamen Nenner (6) gebracht — 1/2 wird zu 3/6 und 1/3 zu 2/6 — dann werden die schattierten Teile einfach zusammengezählt: 3/6 + 2/6 = 5/6."
+      },
+      "multiplicationDiagram": {
+        "gridAriaLabel": "Ein 3×4-Raster, das 2/3 mal 3/4 darstellt, wobei der überlappende 2×3-Bereich schattiert ist, um das Produkt 6/12 zu zeigen",
+        "caption": "2/3 × 3/4 als Flächenmodell: ein Raster aus 3 Spalten × 4 Zeilen (12 Zellen insgesamt), 2 Spalten in eine Richtung und 3 Zeilen in die andere schattiert — die 6-Zellen-Überlappung ist der Zähler des Produkts, alle 12 Zellen sind der Nenner: 6/12 = 1/2."
       }
     },
     "scientific-notation-converter": {
@@ -9881,7 +9921,8 @@
           "determinant": {
             "title": "Determinante als Fläche",
             "description": "Die Determinante ist keine bloß auswendig zu lernende Formel — sie ist buchstäblich die Fläche des Parallelogramms, auf das eine Matrix das Einheitsquadrat abbildet (mit Vorzeichen: positiv, wenn die Orientierung erhalten bleibt, negativ, wenn die Matrix die Ebene umklappt). Eine Matrix, die den Raum streckt, hat eine Determinante mit Betrag größer als 1; eine, die den Raum staucht, hat eine Determinante zwischen 0 und 1; und eine singuläre Matrix (Determinante 0) drückt die gesamte Ebene auf eine Linie zusammen, weshalb sie Information zerstört, die sich nicht wiederherstellen lässt.",
-            "diagramCaption": "Das Bild des Einheitsquadrats unter Matrix A, mit seiner Fläche — gleich |det(A)| — schattiert und beschriftet."
+            "diagramCaption": "Das Bild des Einheitsquadrats unter Matrix A, mit seiner Fläche — gleich |det(A)| — schattiert und beschriftet.",
+            "arithmeticCaption": "Die beiden Diagonalprodukte: a11×a22 (Hauptdiagonale, addiert) minus a12×a21 (Nebendiagonale, subtrahiert)."
           },
           "composition": {
             "title": "Matrixmultiplikation als Verkettung von Transformationen",
@@ -18174,7 +18215,8 @@
               "room": "Zimmergröße",
               "landmark": "Landmarkengröße"
             }
-          }
+          },
+          "paragraph3": "Die Flächenformel folgt derselben Idee, nur mit den Sektoren statt dem Rand: Schneidet man den Kreis in dünne Tortenstücke und legt sie aneinander, ergeben sie näherungsweise ein Rechteck mit der Höhe des Radius und einer Grundfläche von der Hälfte des Umfangs (πr) — das ergibt eine Fläche von πr × r = πr²."
         },
         "examples": {
           "title": "Berechnete Beispiele",
@@ -18325,6 +18367,18 @@
         "intro": "Würde man den Rand eines Kreises abschneiden und flach auslegen, wäre er genau π Durchmesser lang — drei volle Durchmesser plus ein kleines übriges Stück.",
         "ariaLabel": "Ein Kreisumfang, abgerollt zu einer geraden Linie mit der Länge Pi mal Durchmesser",
         "caption": "Genau deshalb ist π ≈ 3,14159 — es ist das feste Verhältnis zwischen dem Umfang und dem Durchmesser jedes Kreises."
+      },
+      "areaDiagram": {
+        "areaSectorsCaption": "Die Kreissektoren, ausgerollt zu einem Streifen, der einem Rechteck mit Grundfläche πr und Höhe r nahekommt — seine Fläche, πr × r = πr², ist die Flächenformel des Kreises.",
+        "areaHeightLabel": "Höhe = r",
+        "areaBaseLabel": "Grundfläche = πr"
+      },
+      "growthChart": {
+        "chartAriaLabel": "Liniendiagramm, das Umfang (linear wachsend) und Fläche (quadratisch wachsend) vergleicht, während der Radius von 0 auf 10 steigt",
+        "radiusLabel": "r = {r}",
+        "legendCircumference": "Umfang (2πr)",
+        "legendArea": "Fläche (πr²)",
+        "caption": "Mit wachsendem Radius wächst der Umfang direkt proportional, doch die Fläche wächst mit dem Quadrat des Radius — eine Verdopplung des Radius verdoppelt etwa den Umfang, vervierfacht aber die Fläche."
       }
     },
     "gcf-lcm-calculator": {
@@ -18562,6 +18616,23 @@
         "intro": "Teilen Sie beide Zahlen durch einen gemeinsamen Primfaktor, notieren Sie diesen Primfaktor daneben, und wiederholen Sie dies, bis nichts mehr gemeinsam teilbar ist — eine schnelle Methode, um ggT und kgV von Hand zu finden.",
         "ariaLabel": "Eine Divisionsleiter zur Bestimmung von ggT und kgV von 12 und 18",
         "caption": "Multiplizieren Sie die Primzahlen an der Seite für den ggT; multiplizieren Sie sie mit den beiden übrig gebliebenen Zahlen unten für das kgV."
+      },
+      "multiplesDiagram": {
+        "title": "kgV als erstes gemeinsames Vielfaches",
+        "intro": "Die Vielfachen von {a} und {b} auf einem Zahlenstrahl aufzureihen zeigt genau, was das kgV bedeutet: der erste Punkt, an dem sich beide Listen treffen.",
+        "ariaLabel": "Zahlenstrahl mit den Vielfachen von 12 in einer Zeile und den Vielfachen von 18 in einer anderen, die sich zuerst bei 36 treffen",
+        "rowA": "Vielfache von {a}",
+        "rowB": "Vielfache von {b}",
+        "rowLcm": "Erstes gemeinsames Vielfaches (kgV)",
+        "caption": "12 und 18 teilen sich zuerst ein Vielfaches bei 36 — das ist das kgV, hier einfach durch Zählen erreicht, ohne irgendetwas zu faktorisieren."
+      },
+      "factorTreeDiagram": {
+        "title": "Zahlen in ihre Primfaktoren zerlegen",
+        "intro": "Bevor ggT und kgV gefunden werden können, wird jede Zahl zunächst in Primfaktoren zerlegt — die Bausteine, die sich nicht weiter teilen lassen. So verzweigen sich 12 und 18 zu ihren Primfaktoren.",
+        "labelA": "{a} = 2 × 2 × 3",
+        "labelB": "{b} = 2 × 3 × 3",
+        "legendPrime": "Primfaktor",
+        "caption": "12 = 2² × 3 und 18 = 2 × 3² — genau diese Zerlegungen sind der Ausgangspunkt für das Venn-Diagramm und die Leiter-Methode oben."
       }
     },
     "triangle-calculator": {

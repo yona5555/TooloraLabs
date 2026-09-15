@@ -8,6 +8,7 @@ import MatrixTransformDiagram from "./MatrixTransformDiagram";
 import MatrixCompositionDiagram from "./MatrixCompositionDiagram";
 import MatrixInverseDiagram from "./MatrixInverseDiagram";
 import MatrixTransposeDiagram from "./MatrixTransposeDiagram";
+import MatrixDeterminantArithmeticDiagram from "./MatrixDeterminantArithmeticDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
@@ -45,6 +46,14 @@ export default async function MatrixEducation() {
             label="A"
             areaLabel="det(A) = 4"
             caption={t("variables.determinant.diagramCaption")}
+          />
+          <MatrixDeterminantArithmeticDiagram
+            a11={2}
+            a12={1}
+            a21={0}
+            a22={2}
+            fmt={fmt}
+            caption={t("variables.determinant.arithmeticCaption")}
           />
         </div>
 

@@ -3,6 +3,7 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
 import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import BMIBodyFatGauge from "./BMIBodyFatGauge";
 import BMIScaleChart from "./BMIScaleChart";
 import BMIShareExportModal from "./BMIShareExportModal";
 import type { BMIExtendedResult, UnitSystem } from "./types";
@@ -157,6 +158,22 @@ export default function BMIResult({
           )}
         </div>
       </dl>
+
+      <div className="mt-5 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+        <p className="mb-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">{t("aboveFold.bodyFatGaugeTitle")}</p>
+        <BMIBodyFatGauge
+          bodyFatPercent={result.bodyFatEstimate}
+          gender={gender}
+          labels={{
+            essential: t("aboveFold.bodyFatZones.essential"),
+            athletes: t("aboveFold.bodyFatZones.athletes"),
+            fitness: t("aboveFold.bodyFatZones.fitness"),
+            average: t("aboveFold.bodyFatZones.average"),
+            obese: t("aboveFold.bodyFatZones.obese"),
+            yourBodyFat: t("aboveFold.bodyFatLabel"),
+          }}
+        />
+      </div>
     </SectionCard>
   );
 }

@@ -6,6 +6,8 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CircleRadiusGauge from "./CircleRadiusGauge";
 import CirclePiUnrollDiagram from "./CirclePiUnrollDiagram";
+import CircleAreaDiagram from "./CircleAreaDiagram";
+import CircleGrowthComparisonChart from "./CircleGrowthComparisonChart";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
@@ -26,6 +28,9 @@ export default async function CircleEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <CirclePiUnrollDiagram />
+        <p>{t("intro.paragraph3")}</p>
+        <CircleAreaDiagram />
+        <CircleGrowthComparisonChart />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

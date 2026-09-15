@@ -6,6 +6,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CompoundInterestComparisonChart from "./CompoundInterestComparisonChart";
 import CompoundInterestConceptDiagram from "./CompoundInterestConceptDiagram";
+import CompoundInterestFrequencyDiagram from "./CompoundInterestFrequencyDiagram";
 
 type ExampleRow = { scenario: string; futureValue: string; interest: string };
 type VariableItem = { name: string; description: string };
@@ -40,6 +41,7 @@ export default async function CompoundInterestEducation() {
             </div>
           ))}
         </dl>
+        <CompoundInterestFrequencyDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

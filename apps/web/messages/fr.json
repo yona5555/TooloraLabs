@@ -1295,7 +1295,15 @@
         "lbUnit": "lb",
         "miniConverterTitle": "Convertisseur rapide d'unités",
         "miniConverterResultPrefix": "=",
-        "sentence": "Un IMC de {bmi} se situe dans la plage : {category}."
+        "sentence": "Un IMC de {bmi} se situe dans la plage : {category}.",
+        "bodyFatGaugeTitle": "Plage Estimée de Graisse Corporelle",
+        "bodyFatZones": {
+          "essential": "Essentielle",
+          "athletes": "Athlètes",
+          "fitness": "Forme",
+          "average": "Moyenne",
+          "obese": "Obésité"
+        }
       },
       "scenarios": {
         "underweightExample": "Exemple d'insuffisance pondérale",
@@ -3694,6 +3702,18 @@
         },
         "notices": {
           "title": "Avis"
+        },
+        "frequencyDiagram": {
+          "title": "La fréquence de capitalisation change-t-elle vraiment quelque chose ?",
+          "intro": "Pour vos propres chiffres — {rate}% sur {years} ans — voici la valeur future à chaque fréquence de capitalisation, d'une fois par an à une fois par jour :",
+          "frequencies": {
+            "annually": "Annuelle",
+            "semiannually": "Semestrielle",
+            "quarterly": "Trimestrielle",
+            "monthly": "Mensuelle",
+            "daily": "Quotidienne"
+          },
+          "gap": "L'écart entre une capitalisation annuelle et quotidienne sur ces chiffres : {amount} — réel, mais plus petit que ce que la plupart des gens imaginent."
         }
       }
     },
@@ -4084,6 +4104,11 @@
             "chartAriaLabel": "Diagramme à barres comparant le montant maximal empruntable soutenu par une mensualité de 300 $ à des taux annuels de 5 %, 8 % et 11 %, chacun sur une durée de 5 ans",
             "rateLabel": "taux de {rate} %",
             "caption": "Même mensualité de 300 $, même durée de 5 ans — seul le taux change : à 5 %, la mensualité soutient un prêt de 15 897 $, mais à 11 %, seulement 13 798 $. Un écart de 6 points de taux représente environ 2 100 $ de capacité d'emprunt, ce qui justifie de comparer les offres."
+          },
+          "payoffDiagram": {
+            "chartAriaLabel": "Graphique en aires montrant le solde restant dû d'un prêt de 20 000 $ diminuant jusqu'à zéro sur une durée de 5 ans à un taux d'intérêt annuel de 6 %",
+            "yearLabel": "An {year}",
+            "caption": "Un prêt de 20 000 $ à 6 % sur 5 ans : le solde diminue lentement au début (les premiers paiements sont surtout des intérêts) puis plus vite vers la fin (les derniers paiements sont surtout du capital)."
           }
         },
         "variables": {
@@ -5547,6 +5572,11 @@
           "note": "Cajori documente l'usage par al-Hassar, au XIIe siècle, de la barre horizontale de fraction et son adoption par Fibonacci dans le Liber Abaci (1202), tout en signalant explicitement que l'antériorité d'al-Hassar sur Fibonacci n'est pas totalement établie.",
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Lire le texte original"
+        },
+        "operations": {
+          "title": "Visualiser les opérations elles-mêmes",
+          "addIntro": "Additionner ou soustraire des fractions à dénominateurs différents nécessite d'abord de les réécrire avec un dénominateur commun — voici exactement à quoi cela ressemble pour 1/2 + 1/3 :",
+          "multiplyIntro": "Multiplier des fractions a une représentation visuelle claire : le « modèle d'aire » ci-dessous montre 2/3 × 3/4 comme des régions ombrées superposées d'une grille."
         }
       },
       "scenarios": {
@@ -5578,6 +5608,16 @@
         "intro": "La même fraction dessinée en parts de tarte plutôt qu'en barre — certaines personnes trouvent une représentation plus intuitive que l'autre.",
         "ariaLabel": "Une tarte divisée en {denominator} parts égales, dont {numerator} sont colorées",
         "caption": "{fraction} de la tarte est colorée."
+      },
+      "additionDiagram": {
+        "rowA": "1/2 → 3/6",
+        "rowB": "1/3 → 2/6",
+        "rowSum": "5/6",
+        "caption": "Pour additionner 1/2 + 1/3, les deux fractions sont réécrites avec un dénominateur commun (6) — 1/2 devient 3/6 et 1/3 devient 2/6 — puis les parties ombrées sont simplement combinées : 3/6 + 2/6 = 5/6."
+      },
+      "multiplicationDiagram": {
+        "gridAriaLabel": "Une grille de 3 par 4 représentant 2/3 fois 3/4, avec la région de chevauchement 2 par 3 ombrée pour montrer le produit 6/12",
+        "caption": "2/3 × 3/4 comme modèle d'aire : une grille de 3 colonnes × 4 lignes (12 cellules au total) avec 2 colonnes ombrées dans un sens et 3 lignes dans l'autre — le chevauchement de 6 cellules est le numérateur du produit, et les 12 cellules sont son dénominateur : 6/12 = 1/2."
       }
     },
     "scientific-notation-converter": {
@@ -9881,7 +9921,8 @@
           "determinant": {
             "title": "Le déterminant comme aire",
             "description": "Le déterminant n'est pas qu'une formule à mémoriser — c'est littéralement l'aire du parallélogramme sur lequel une matrice envoie le carré unité (avec un signe : positif quand l'orientation est préservée, négatif quand la matrice retourne le plan). Une matrice qui étire l'espace a un déterminant de valeur absolue supérieure à 1 ; une qui le comprime a un déterminant entre 0 et 1 ; et une matrice singulière (déterminant 0) écrase tout le plan sur une droite, ce qui détruit l'information de façon irréversible.",
-            "diagramCaption": "L'image du carré unité par la matrice A, avec son aire — égale à |det(A)| — ombrée et étiquetée."
+            "diagramCaption": "L'image du carré unité par la matrice A, avec son aire — égale à |det(A)| — ombrée et étiquetée.",
+            "arithmeticCaption": "Les deux produits diagonaux : a11×a22 (diagonale principale, additionné) moins a12×a21 (diagonale secondaire, soustrait)."
           },
           "composition": {
             "title": "La multiplication matricielle comme composition de transformations",
@@ -18174,7 +18215,8 @@
               "room": "Taille d'une pièce",
               "landmark": "Taille d'un monument"
             }
-          }
+          },
+          "paragraph3": "La formule de l'aire suit la même idée, mais avec les secteurs plutôt que le bord : découpez le cercle en fines parts de tarte et alignez-les bord à bord, elles se rapprochent d'un rectangle dont la hauteur est le rayon et la base la moitié de la circonférence (πr) — ce qui donne une aire de πr × r = πr²."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -18325,6 +18367,18 @@
         "intro": "Si vous pouviez découper le bord d'un cercle et l'étaler à plat, il mesurerait exactement π diamètres de long — trois diamètres complets plus un petit morceau restant.",
         "ariaLabel": "La circonférence d'un cercle déroulée en une ligne droite de longueur pi fois le diamètre",
         "caption": "C'est exactement pourquoi π ≈ 3,14159 — c'est le rapport fixe entre la circonférence de tout cercle et son diamètre."
+      },
+      "areaDiagram": {
+        "areaSectorsCaption": "Les secteurs du cercle déroulés en une bande approximant un rectangle de base πr et de hauteur r — son aire, πr × r = πr², est la formule de l'aire du cercle.",
+        "areaHeightLabel": "hauteur = r",
+        "areaBaseLabel": "base = πr"
+      },
+      "growthChart": {
+        "chartAriaLabel": "Graphique linéaire comparant la circonférence (croissance linéaire) et l'aire (croissance quadratique) lorsque le rayon augmente de 0 à 10",
+        "radiusLabel": "r = {r}",
+        "legendCircumference": "Circonférence (2πr)",
+        "legendArea": "Aire (πr²)",
+        "caption": "À mesure que le rayon augmente, la circonférence croît proportionnellement, mais l'aire croît avec le carré du rayon — doubler le rayon double environ la circonférence mais quadruple l'aire."
       }
     },
     "gcf-lcm-calculator": {
@@ -18562,6 +18616,23 @@
         "intro": "Divisez les deux nombres par un facteur premier commun, notez ce nombre premier sur le côté, et répétez jusqu'à ce qu'il n'y ait plus de diviseur commun — un moyen rapide de trouver le PGCD et le PPCM à la main.",
         "ariaLabel": "Une échelle de division pour trouver le PGCD et le PPCM de 12 et 18",
         "caption": "Multipliez les nombres premiers sur le côté pour obtenir le PGCD ; multipliez-les par les deux nombres restants en bas pour obtenir le PPCM."
+      },
+      "multiplesDiagram": {
+        "title": "Le PPCM comme premier multiple commun",
+        "intro": "Aligner les multiples de {a} et {b} sur une droite numérique montre exactement ce que signifie le PPCM : le premier point où les deux listes se rejoignent.",
+        "ariaLabel": "Droite numérique montrant les multiples de 12 sur une ligne et les multiples de 18 sur une autre, se rejoignant d'abord à 36",
+        "rowA": "Multiples de {a}",
+        "rowB": "Multiples de {b}",
+        "rowLcm": "Premier multiple commun (PPCM)",
+        "caption": "12 et 18 partagent d'abord un multiple à 36 — c'est le PPCM, atteint ici simplement en comptant, sans rien factoriser."
+      },
+      "factorTreeDiagram": {
+        "title": "Décomposer les nombres en facteurs premiers",
+        "intro": "Avant de pouvoir trouver le PGCD et le PPCM, chaque nombre est d'abord décomposé en facteurs premiers — les éléments qui ne peuvent plus être divisés. Voici comment 12 et 18 se ramifient jusqu'à leurs facteurs premiers.",
+        "labelA": "{a} = 2 × 2 × 3",
+        "labelB": "{b} = 2 × 3 × 3",
+        "legendPrime": "Facteur premier",
+        "caption": "12 = 2² × 3 et 18 = 2 × 3² — ce sont exactement les décompositions dont partent le diagramme de Venn et la méthode de l'échelle ci-dessus."
       }
     },
     "triangle-calculator": {

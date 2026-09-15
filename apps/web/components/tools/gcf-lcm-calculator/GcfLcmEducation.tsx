@@ -7,6 +7,8 @@ import AdSpace from "@/components/tool-ui/AdSpace";
 import GcfLcmConceptDiagram from "./GcfLcmConceptDiagram";
 import GcfLcmLadderDiagram from "./GcfLcmLadderDiagram";
 import GcfLcmRatioGauge from "./GcfLcmRatioGauge";
+import GcfLcmFactorTreeDiagram from "./GcfLcmFactorTreeDiagram";
+import GcfLcmMultiplesNumberLineDiagram from "./GcfLcmMultiplesNumberLineDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -27,9 +29,11 @@ export default async function GcfLcmEducation() {
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <GcfLcmFactorTreeDiagram />
         <p>{t("intro.paragraph2")}</p>
         <GcfLcmConceptDiagram />
         <GcfLcmLadderDiagram />
+        <GcfLcmMultiplesNumberLineDiagram />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>

@@ -1295,7 +1295,15 @@
         "lbUnit": "lb",
         "miniConverterTitle": "Quick Unit Converter",
         "miniConverterResultPrefix": "=",
-        "sentence": "A BMI of {bmi} falls in the {category} range."
+        "sentence": "A BMI of {bmi} falls in the {category} range.",
+        "bodyFatGaugeTitle": "Estimated Body Fat Range",
+        "bodyFatZones": {
+          "essential": "Essential",
+          "athletes": "Athletes",
+          "fitness": "Fitness",
+          "average": "Average",
+          "obese": "Obese"
+        }
       },
       "scenarios": {
         "underweightExample": "Underweight Example",
@@ -3694,6 +3702,18 @@
         },
         "notices": {
           "title": "Notices"
+        },
+        "frequencyDiagram": {
+          "title": "Does Compounding Frequency Really Matter?",
+          "intro": "For your own numbers — {rate}% over {years} years — here's the future value at each compounding frequency, from once a year to once a day:",
+          "frequencies": {
+            "annually": "Annually",
+            "semiannually": "Semiannually",
+            "quarterly": "Quarterly",
+            "monthly": "Monthly",
+            "daily": "Daily"
+          },
+          "gap": "The gap between annual and daily compounding on these numbers: {amount} — real, but smaller than most people expect."
         }
       }
     },
@@ -4084,6 +4104,11 @@
             "chartAriaLabel": "Bar chart comparing the maximum loan amount a $300 monthly payment supports at 5%, 8%, and 11% annual interest rates, each over a 5-year term",
             "rateLabel": "{rate}% rate",
             "caption": "Same $300 monthly payment, same 5-year term — only the rate changes: 5% supports a $15,897 loan, but 11% supports just $13,798. A 6-point rate difference is worth roughly $2,100 in borrowing power, which is why it pays to shop around."
+          },
+          "payoffDiagram": {
+            "chartAriaLabel": "Area chart showing a $20,000 loan's outstanding balance declining to zero over a 5-year term at 6% annual interest",
+            "yearLabel": "Yr {year}",
+            "caption": "A $20,000 loan at 6% over 5 years: the balance falls slowly at first (early payments are mostly interest) and faster near the end (later payments are mostly principal)."
           }
         },
         "variables": {
@@ -5547,6 +5572,11 @@
           "note": "Cajori documents al-Hassar's 12th-century use of the horizontal fraction bar and Fibonacci's adoption of the same notation in Liber Abaci (1202), while explicitly noting that al-Hassar's priority over Fibonacci is not fully certain.",
           "url": "https://archive.org/details/historyofmathema031756mbp",
           "readOriginal": "Read the Original Text"
+        },
+        "operations": {
+          "title": "Seeing the Operations Themselves",
+          "addIntro": "Adding or subtracting fractions with different denominators first requires rewriting them over a shared denominator — here's exactly how that looks for 1/2 + 1/3:",
+          "multiplyIntro": "Multiplying fractions has a clean visual: the \"area model\" below shows 2/3 × 3/4 as overlapping shaded regions of a grid."
         }
       },
       "scenarios": {
@@ -5578,6 +5608,16 @@
         "intro": "The same fraction drawn as pie slices instead of a bar — some people find one representation more intuitive than the other.",
         "ariaLabel": "A pie divided into {denominator} equal slices with {numerator} of them shaded",
         "caption": "{fraction} of the pie is shaded."
+      },
+      "additionDiagram": {
+        "rowA": "1/2 → 3/6",
+        "rowB": "1/3 → 2/6",
+        "rowSum": "5/6",
+        "caption": "To add 1/2 + 1/3, both fractions are rewritten over their common denominator (6) — 1/2 becomes 3/6 and 1/3 becomes 2/6 — then the shaded parts are simply combined: 3/6 + 2/6 = 5/6."
+      },
+      "multiplicationDiagram": {
+        "gridAriaLabel": "A 3-by-4 grid representing 2/3 times 3/4, with the overlapping 2-by-3 region shaded to show the product 6/12",
+        "caption": "2/3 × 3/4 as an area model: a grid of 3 columns × 4 rows (12 cells total) shaded 2 columns one way and 3 rows the other — the 6-cell overlap is the product's numerator, and all 12 cells are its denominator: 6/12 = 1/2."
       }
     },
     "scientific-notation-converter": {
@@ -9881,7 +9921,8 @@
           "determinant": {
             "title": "Determinant as Area",
             "description": "The determinant isn't just a formula to memorize — it's literally the area of the parallelogram a matrix maps the unit square onto (with a sign: positive when orientation is preserved, negative when the matrix flips the plane over). A matrix that stretches space out has a determinant greater than 1 in absolute value; one that compresses space has a determinant between 0 and 1; and a singular matrix (determinant 0) squashes the entire plane down to a line, which is why it destroys information and can't be undone.",
-            "diagramCaption": "Matrix A's image of the unit square, with its area — equal to |det(A)| — shaded and labeled."
+            "diagramCaption": "Matrix A's image of the unit square, with its area — equal to |det(A)| — shaded and labeled.",
+            "arithmeticCaption": "The two diagonal products: a11×a22 (main diagonal, added) minus a12×a21 (anti-diagonal, subtracted)."
           },
           "composition": {
             "title": "Matrix Multiplication as Composing Transformations",
@@ -17618,6 +17659,23 @@
         "intro": "Divide both numbers by a shared prime factor, write that prime to the side, and repeat until nothing more divides evenly — a fast way to find both the GCF and LCM by hand.",
         "ariaLabel": "A division ladder finding the GCF and LCM of 12 and 18",
         "caption": "Multiply the primes on the side for the GCF; multiply them by the two numbers left at the bottom for the LCM."
+      },
+      "multiplesDiagram": {
+        "title": "LCM as the First Shared Multiple",
+        "intro": "Lining up the multiples of {a} and {b} on a number line shows exactly what the LCM means: the first point where both lists meet.",
+        "ariaLabel": "Number line showing multiples of 12 on one row and multiples of 18 on another, meeting first at 36",
+        "rowA": "Multiples of {a}",
+        "rowB": "Multiples of {b}",
+        "rowLcm": "First shared multiple (LCM)",
+        "caption": "12 and 18 first share a multiple at 36 — that's the LCM, reached here just by counting, without factoring anything."
+      },
+      "factorTreeDiagram": {
+        "title": "Breaking Numbers Down to Their Prime Factors",
+        "intro": "Before the GCF and LCM can be found, each number is first broken down into prime factors — the building blocks that can't be divided any further. Here's how 12 and 18 branch down to their primes.",
+        "labelA": "{a} = 2 × 2 × 3",
+        "labelB": "{b} = 2 × 3 × 3",
+        "legendPrime": "Prime factor",
+        "caption": "12 = 2² × 3 and 18 = 2 × 3² — these are exactly the factorizations the Venn diagram and the ladder method above start from."
       }
     },
     "pace-calculator": {
@@ -18411,7 +18469,8 @@
               "room": "Room-Sized",
               "landmark": "Landmark-Sized"
             }
-          }
+          },
+          "paragraph3": "The area formula follows the same idea, just with the sectors instead of the rim: cut the circle into thin pie slices and lay them out edge to edge, and they approximate a rectangle whose height is the radius and whose base is half the circumference (πr) — giving an area of πr × r = πr²."
         },
         "examples": {
           "title": "Worked Examples",
@@ -18562,6 +18621,18 @@
         "intro": "If you could cut a circle's rim and lay it flat, it would stretch to exactly π diameters long — three full diameters plus a small leftover piece.",
         "ariaLabel": "A circle's circumference unrolled into a straight line of length pi times the diameter",
         "caption": "This is exactly why π ≈ 3.14159 — it's the fixed ratio between any circle's circumference and its diameter."
+      },
+      "areaDiagram": {
+        "areaSectorsCaption": "The circle's sectors unrolled into a strip approximating a base-πr, height-r rectangle — its area, πr × r = πr², is the circle's area formula.",
+        "areaHeightLabel": "height = r",
+        "areaBaseLabel": "base = πr"
+      },
+      "growthChart": {
+        "chartAriaLabel": "Line chart comparing circumference (growing linearly) and area (growing quadratically) as radius increases from 0 to 10",
+        "radiusLabel": "r = {r}",
+        "legendCircumference": "Circumference (2πr)",
+        "legendArea": "Area (πr²)",
+        "caption": "As the radius grows, circumference grows in direct proportion, but area grows with the square of the radius — doubling the radius roughly doubles the circumference but quadruples the area."
       }
     },
     "triangle-calculator": {

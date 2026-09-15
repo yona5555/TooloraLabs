@@ -6,6 +6,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import AffordableLoanRateChart from "./AffordableLoanRateChart";
 import AffordableLoanConceptDiagram from "./AffordableLoanConceptDiagram";
+import AffordableLoanPayoffCurveDiagram from "./AffordableLoanPayoffCurveDiagram";
 
 type ExampleRow = { scenario: string; maxLoanAmount: string; totalInterest: string };
 type VariableItem = { name: string; description: string };
@@ -27,6 +28,7 @@ export default async function AffordableLoanEducation() {
         <p>{t("intro.paragraph2")}</p>
         <AffordableLoanConceptDiagram />
         <AffordableLoanRateChart />
+        <AffordableLoanPayoffCurveDiagram />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>

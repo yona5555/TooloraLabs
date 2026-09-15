@@ -7,6 +7,8 @@ import AdSpace from "@/components/tool-ui/AdSpace";
 import FractionBarDiagram from "./FractionBarDiagram";
 import FractionPieDiagram from "./FractionPieDiagram";
 import FractionNumberLineGauge from "./FractionNumberLineGauge";
+import FractionAdditionDiagram from "./FractionAdditionDiagram";
+import FractionMultiplicationGridDiagram from "./FractionMultiplicationGridDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -27,6 +29,13 @@ export default async function FractionEducation() {
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
         <FractionPieDiagram />
+      </InfoSection>
+
+      <InfoSection title={t("operations.title")}>
+        <p>{t("operations.addIntro")}</p>
+        <FractionAdditionDiagram />
+        <p>{t("operations.multiplyIntro")}</p>
+        <FractionMultiplicationGridDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
