@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import BMRRangeGauge from "./BMRRangeGauge";
+import BMRAgeCurveDiagram from "./BMRAgeCurveDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 type FormulaItem = { title: string; description: string };
@@ -37,6 +38,8 @@ export default async function BMREducation() {
           ))}
         </div>
       </InfoSection>
+
+      <BMRAgeCurveDiagram />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>

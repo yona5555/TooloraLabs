@@ -6,6 +6,7 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import IdealWeightRangeGauge from "./IdealWeightRangeGauge";
 import IdealWeightFormulaDiagram from "./IdealWeightFormulaDiagram";
+import IdealWeightHeightCurveDiagram from "./IdealWeightHeightCurveDiagram";
 
 type ExampleRow = { scenario: string; average: string; range: string };
 
@@ -25,6 +26,8 @@ export default async function IdealWeightEducation() {
         <p>{t("intro.paragraph2")}</p>
         <IdealWeightFormulaDiagram />
       </InfoSection>
+
+      <IdealWeightHeightCurveDiagram />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
