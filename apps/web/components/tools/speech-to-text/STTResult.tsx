@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Mic } from "lucide-react";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import type { SpeechToTextOutput, ListeningState } from "./types";
+import STTShareExportModal from "./STTShareExportModal";
 
 type Props = {
   result: SpeechToTextOutput;
@@ -18,7 +19,20 @@ export default function STTResult({ result, interimText, listeningState }: Props
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        {result.transcript && <CopyButton text={result.transcript} className="!text-white dark:!text-white" />}
+        <div className="flex items-center gap-1">
+          {result.transcript && <CopyButton text={result.transcript} className="!text-white dark:!text-white" />}
+          {result.transcript && (
+            <STTShareExportModal
+              resultRows={[
+                { label: t("heading"), value: result.transcript },
+                { label: t("wordCountLabel"), value: String(result.wordCount) },
+              ]}
+              heroLabel={t("wordCountLabel")}
+              heroValue={String(result.wordCount)}
+              sentence={result.transcript}
+            />
+          )}
+        </div>
       </div>
       <div className="p-4 lg:p-6">
         <div className="mb-4 flex items-center justify-center gap-2">

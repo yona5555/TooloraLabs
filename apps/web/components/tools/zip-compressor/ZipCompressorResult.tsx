@@ -4,6 +4,7 @@ import { Download, FileArchive, FileIcon, Loader2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { formatBytes } from "../image-converter/formatBytes";
 import type { ZipMode } from "./ZipCompressorInputPanel";
+import ZipCompressorShareExportModal from "./ZipCompressorShareExportModal";
 
 export type ExtractedEntry = { name: string; url: string; size: number };
 
@@ -12,6 +13,7 @@ type ZipCompressorResultProps = {
   isProcessing: boolean;
   compressedReady: boolean;
   compressedSize: number;
+  originalSize: number;
   onDownloadZip: () => void;
   extractedEntries: ExtractedEntry[];
 };
@@ -21,10 +23,12 @@ export default function ZipCompressorResult({
   isProcessing,
   compressedReady,
   compressedSize,
+  originalSize,
   onDownloadZip,
   extractedEntries,
 }: ZipCompressorResultProps) {
   const t = useTranslations("tools.zip-compressor");
+  const tRoot = t;
 
   if (isProcessing) {
     return (
@@ -38,14 +42,51 @@ export default function ZipCompressorResult({
   }
 
   if (mode === "compress") {
+    const savedPercent = originalSize > 0 ? Math.max(0, Math.round((1 - compressedSize / originalSize) * 100)) : 0;
+
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard
+        title={t("aboveFold.resultTitle")}
+        action={
+          compressedReady ? (
+            <ZipCompressorShareExportModal
+              inputRows={[{ label: tRoot("shareExport.originalSizeLabel"), value: formatBytes(originalSize) }]}
+              resultRows={[
+                { label: tRoot("shareExport.compressedSizeLabel"), value: formatBytes(compressedSize) },
+                { label: tRoot("shareExport.savedPercentLabel"), value: `${savedPercent}%` },
+              ]}
+              heroLabel={tRoot("shareExport.savedPercentLabel")}
+              heroValue={`${savedPercent}%`}
+              sentence={tRoot("shareExport.sentence", {
+                original: formatBytes(originalSize),
+                compressed: formatBytes(compressedSize),
+                percent: savedPercent,
+              })}
+            />
+          ) : undefined
+        }
+      >
         {compressedReady ? (
           <div className="flex flex-col items-center gap-4 px-4 py-8 text-center">
             <FileArchive size={40} className="text-blue-600 dark:text-blue-400" />
             <p className="text-sm text-zinc-600 dark:text-zinc-300">
               {t("aboveFold.compressReady", { size: formatBytes(compressedSize) })}
             </p>
+            {originalSize > 0 && (
+              <div dir="ltr" className="w-full max-w-xs">
+                <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
+                  <span>{formatBytes(originalSize)}</span>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">-{savedPercent}%</span>
+                  <span>{formatBytes(compressedSize)}</span>
+                </div>
+                <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+                  <div
+                    className="h-full rounded-full bg-blue-600 dark:bg-blue-400"
+                    style={{ width: `${Math.max(4, 100 - savedPercent)}%` }}
+                  />
+                </div>
+              </div>
+            )}
             <button
               type="button"
               onClick={onDownloadZip}

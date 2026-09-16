@@ -59,7 +59,7 @@ export default function SpeechWordCountCalculator({ education }: { education: Re
               onClear={handleClear}
             />
           }
-          result={<SWResult result={result} digitStyle={digitStyle} />}
+          result={<SWResult result={result} digitStyle={digitStyle} wordsPerMinute={wordsPerMinute} />}
           sidebar={<RelatedToolsSidebar currentSlug="speech-word-count-calculator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">

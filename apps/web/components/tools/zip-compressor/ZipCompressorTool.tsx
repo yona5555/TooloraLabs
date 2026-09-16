@@ -10,6 +10,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ZipCompressorInputPanel, { type ZipMode } from "./ZipCompressorInputPanel";
 import ZipCompressorResult, { type ExtractedEntry } from "./ZipCompressorResult";
+import ZipCompressorReference from "./ZipCompressorReference";
 
 const MAX_TOTAL_BYTES = 50 * 1024 * 1024;
 let nextId = 0;
@@ -184,6 +185,7 @@ export default function ZipCompressorTool({ education }: { education: ReactNode 
               isProcessing={isProcessing}
               compressedReady={compressedBlob !== null}
               compressedSize={compressedBlob?.size ?? 0}
+              originalSize={compressFiles.reduce((sum, entry) => sum + entry.file.size, 0)}
               onDownloadZip={handleDownloadZip}
               extractedEntries={extractedEntries}
             />
@@ -193,6 +195,7 @@ export default function ZipCompressorTool({ education }: { education: ReactNode 
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="zip-compressor" />
               <SectionNav items={navItems} />
+              <ZipCompressorReference />
             </div>
           }
         />

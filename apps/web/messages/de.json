@@ -15576,6 +15576,36 @@
           "url": "https://doi.org/10.14429/dbit.23.1.3587",
           "readOriginal": "Originalartikel lesen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z. B. Jonas Meier",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z. B. jonas@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z. B. +49 151 23456789",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z. B. Meier GmbH",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, 12345 Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für",
+        "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
+        "inputSectionTitle": "Eingabe",
+        "resultSectionTitle": "Ergebnis",
+        "inputFileCountLabel": "Verwendete Dateien",
+        "sentence": "{mode, select, merge {{inputCount} Dateien zu einer PDF zusammengeführt.} other {PDF in {count} Datei(en) aufgeteilt.}}"
+      },
+      "reference": {
+        "title": "Kurzreferenz",
+        "intro": "Wie Zusammenführen und Aufteilen funktionieren, und die technischen Grenzen.",
+        "maxSizeLabel": "Maximale Gesamtgröße",
+        "rangeSyntaxLabel": "Seitenbereich-Syntax",
+        "rangeSyntaxNote": "Verwenden Sie Kommas, um Seiten oder Bereiche zu trennen, und Bindestriche für fortlaufende Bereiche."
       }
     },
     "zip-compressor": {
@@ -15722,6 +15752,39 @@
           "url": "https://doi.org/10.1109/tit.1977.1055714",
           "readOriginal": "Originalartikel lesen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z. B. Jonas Meier",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z. B. jonas@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z. B. +49 151 23456789",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z. B. Meier GmbH",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, 12345 Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für",
+        "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
+        "inputSectionTitle": "Eingabe",
+        "resultSectionTitle": "Ergebnis",
+        "originalSizeLabel": "Ursprüngliche Größe",
+        "compressedSizeLabel": "Komprimierte Größe",
+        "savedPercentLabel": "Eingesparter Platz",
+        "sentence": "{original} auf {compressed} komprimiert — {percent}% Platz gespart."
+      },
+      "reference": {
+        "title": "Komprimierungsreferenz",
+        "intro": "Typische Größenreduzierung nach Dateityp bei Komprimierung mit ZIP (DEFLATE).",
+        "textLabel": "Reiner Text",
+        "codeLabel": "Quellcode",
+        "compressedLabel": "Bereits komprimiert (JPG, MP4, ZIP)",
+        "note": "Bereits komprimierte Formate profitieren kaum oder gar nicht vom erneuten Zippen — die Daten enthalten keine sich wiederholenden Muster mehr, die entfernt werden könnten."
       }
     },
     "file-size-converter": {
@@ -22727,6 +22790,30 @@
           "url": "https://wicg.github.io/speech-api/",
           "readOriginal": "Spezifikation ansehen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z. B. Jonas Meier",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z. B. jonas@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z. B. +49 151 23456789",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z. B. Meier GmbH",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, 12345 Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für",
+        "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
+        "inputSectionTitle": "Eingabe",
+        "resultSectionTitle": "Ergebnis",
+        "rateLabel": "Sprechgeschwindigkeit",
+        "pitchLabel": "Tonhöhe",
+        "sentence": "{characters} Zeichen mit {rate}x Geschwindigkeit und Tonhöhe {pitch} in Sprache umgewandelt."
       }
     },
     "speech-to-text": {
@@ -22759,7 +22846,11 @@
       },
       "quickReference": {
         "title": "Gut zu wissen",
-        "intro": "Erkennungsgenauigkeit und verfügbare Sprachen hängen vollständig von deinem Browser und Betriebssystem ab."
+        "intro": "Erkennungsgenauigkeit und verfügbare Sprachen hängen vollständig von deinem Browser und Betriebssystem ab.",
+        "factorMicrophone": "Die Mikrofonqualität beeinflusst die Erkennungsgenauigkeit",
+        "factorNoise": "Hintergrundgeräusche verringern die Genauigkeit",
+        "factorPace": "Klare, gleichmäßige Sprache wird zuverlässiger erkannt als schnelle oder undeutliche Sprache",
+        "factorConnection": "Dieses Tool verwendet die integrierte Spracherkennung Ihres Browsers, die eine Internetverbindung erfordern kann"
       },
       "education": {
         "intro": {
@@ -22866,6 +22957,27 @@
           "url": "https://wicg.github.io/speech-api/",
           "readOriginal": "Spezifikation ansehen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z. B. Jonas Meier",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z. B. jonas@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z. B. +49 151 23456789",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z. B. Meier GmbH",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, 12345 Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für",
+        "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
+        "inputSectionTitle": "Eingabe",
+        "resultSectionTitle": "Ergebnis"
       }
     },
     "spelling-grammar-checker": {
@@ -23005,6 +23117,28 @@
           "url": "https://norvig.com/spell-correct.html",
           "readOriginal": "Artikel ansehen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z. B. Jonas Meier",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z. B. jonas@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z. B. +49 151 23456789",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z. B. Meier GmbH",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, 12345 Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für",
+        "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
+        "inputSectionTitle": "Eingabe",
+        "resultSectionTitle": "Ergebnis",
+        "sentence": "{words} Wörter geprüft und {issues} Problem(e) gefunden."
       }
     },
     "roman-numeral-converter": {
@@ -24027,7 +24161,10 @@
       },
       "quickReference": {
         "title": "Die Rechnung",
-        "intro": "Die Vortragszeit ist die Wortanzahl geteilt durch dein gewähltes Sprechtempo."
+        "intro": "Die Vortragszeit ist die Wortanzahl geteilt durch dein gewähltes Sprechtempo.",
+        "paceFormal": "Formale Präsentation",
+        "paceNormal": "Konversationstempo",
+        "paceFast": "Schnelles Sprechtempo"
       },
       "education": {
         "intro": {
@@ -24134,6 +24271,30 @@
           "url": "https://www.worldcat.org/title/psycholinguistics-experiments-in-spontaneous-speech/oclc/440680",
           "readOriginal": "Referenz ansehen"
         }
+      },
+      "shareExport": {
+        "triggerLabel": "Teilen / Exportieren",
+        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
+        "contactSectionTitle": "Erstellt für (optional)",
+        "contactName": "Name",
+        "contactNamePlaceholder": "z. B. Jonas Meier",
+        "contactEmail": "E-Mail",
+        "contactEmailPlaceholder": "z. B. jonas@example.com",
+        "contactPhone": "Telefon",
+        "contactPhonePlaceholder": "z. B. +49 151 23456789",
+        "contactOrganization": "Organisation",
+        "contactOrganizationPlaceholder": "z. B. Meier GmbH",
+        "contactAddress": "Adresse",
+        "contactAddressPlaceholder": "z. B. Musterstraße 1, 12345 Berlin",
+        "shareToSocial": "In sozialen Medien teilen",
+        "generatedOn": "Erstellt am",
+        "preparedForTitle": "Erstellt für",
+        "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
+        "inputSectionTitle": "Eingabe",
+        "resultSectionTitle": "Ergebnis",
+        "wordCountLabel": "Wortanzahl",
+        "paceLabel": "Sprechtempo",
+        "sentence": "{words} Wörter bei {wpm} WPM dauern etwa {time} beim Vortrag."
       }
     },
     "countdown-to-event-calculator": {

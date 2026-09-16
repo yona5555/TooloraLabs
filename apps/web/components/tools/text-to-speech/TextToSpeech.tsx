@@ -130,7 +130,7 @@ export default function TextToSpeech({ education }: { education: ReactNode }) {
               isSupported={isSupported}
             />
           }
-          result={<TTSResult result={result} playbackState={playbackState} />}
+          result={<TTSResult result={result} playbackState={playbackState} rate={rate} pitch={pitch} />}
           sidebar={<RelatedToolsSidebar currentSlug="text-to-speech" category="ai-tools" />}
           secondary={
             <div className="flex flex-col gap-6">

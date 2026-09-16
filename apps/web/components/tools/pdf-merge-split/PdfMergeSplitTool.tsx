@@ -11,6 +11,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PdfMergeSplitInputPanel, { type PdfMode } from "./PdfMergeSplitInputPanel";
 import PdfMergeSplitResult from "./PdfMergeSplitResult";
+import PdfMergeSplitReference from "./PdfMergeSplitReference";
 
 const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
 let nextId = 0;
@@ -215,6 +216,7 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
               isProcessing={isProcessing}
               resultReady={resultBlob !== null}
               resultCount={resultCount}
+              inputFileCount={mode === "merge" ? mergeFiles.length : splitFile ? 1 : 0}
               onDownload={handleDownload}
             />
           }
@@ -223,6 +225,7 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="pdf-merge-split" />
               <SectionNav items={navItems} />
+              <PdfMergeSplitReference />
             </div>
           }
         />

@@ -1,11 +1,14 @@
 import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import type { SpellingGrammarOutput, IssueType } from "./types";
+import SpellingGrammarShareExportModal from "./SpellingGrammarShareExportModal";
 
 type Props = {
   text: string;
   result: SpellingGrammarOutput;
 };
+
+const ISSUE_TYPES: IssueType[] = ["spelling", "grammar", "capitalization", "punctuation"];
 
 const TYPE_STYLES: Record<IssueType, string> = {
   spelling: "bg-red-100 decoration-red-500 decoration-2 underline dark:bg-red-500/20",
@@ -33,11 +36,33 @@ function renderHighlighted(text: string, issues: SpellingGrammarOutput["issues"]
 
 export default function SGResult({ text, result }: Props) {
   const t = useTranslations("tools.spelling-grammar-checker.result");
+  const tRoot = useTranslations("tools.spelling-grammar-checker");
+  const tLegend = useTranslations("tools.spelling-grammar-checker.quickReference.legend");
+
+  const countsByType = ISSUE_TYPES.reduce<Record<IssueType, number>>(
+    (acc, type) => {
+      acc[type] = result.issues.filter((issue) => issue.type === type).length;
+      return acc;
+    },
+    { spelling: 0, grammar: 0, capitalization: 0, punctuation: 0 },
+  );
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+      <div className="flex items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
+        {text.trim() && (
+          <SpellingGrammarShareExportModal
+            resultRows={[
+              { label: t("wordCountLabel"), value: String(result.wordCount) },
+              { label: t("issueCountLabel"), value: String(result.issues.length) },
+              ...ISSUE_TYPES.map((type) => ({ label: tLegend(type), value: String(countsByType[type]) })),
+            ]}
+            heroLabel={t("issueCountLabel")}
+            heroValue={String(result.issues.length)}
+            sentence={tRoot("shareExport.sentence", { words: result.wordCount, issues: result.issues.length })}
+          />
+        )}
       </div>
       <div className="p-4 lg:p-6">
         {!text.trim() ? (
@@ -58,6 +83,19 @@ export default function SGResult({ text, result }: Props) {
                 {result.issues.length}
               </span>
             </div>
+
+            {result.issues.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-2 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+                {ISSUE_TYPES.filter((type) => countsByType[type] > 0).map((type) => (
+                  <span
+                    key={type}
+                    className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${TYPE_STYLES[type].split(" ")[0]} text-zinc-700 dark:text-zinc-200`}
+                  >
+                    {tLegend(type)}: {countsByType[type]}
+                  </span>
+                ))}
+              </div>
+            )}
 
             <div
               dir="auto"
