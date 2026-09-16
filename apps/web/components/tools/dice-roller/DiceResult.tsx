@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import DiceFace from "./DiceFace";
+import DiceShareExportModal from "./DiceShareExportModal";
 import type { DiceRollerOutput, RollHistoryEntry } from "./types";
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 
 export default function DiceResult({ result, isRolling, history, onClearHistory }: Props) {
   const t = useTranslations("tools.dice-roller.result");
+  const tRoot = useTranslations("tools.dice-roller");
 
   if (result.error) {
     const messageKey = result.error === "invalid-dice-count" ? "invalidDiceCount" : "invalidFaces";
@@ -28,8 +30,18 @@ export default function DiceResult({ result, isRolling, history, onClearHistory 
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+      <div className="flex items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
+        <DiceShareExportModal
+          inputRows={[
+            { label: tRoot("shareExport.diceCountLabel"), value: String(result.rolls.length) },
+            { label: tRoot("shareExport.facesLabel"), value: `d${result.faces}` },
+          ]}
+          resultRows={result.rolls.map((value, i) => ({ label: `${tRoot("shareExport.rollLabel")} ${i + 1}`, value: String(value) }))}
+          heroLabel={t("totalLabel")}
+          heroValue={String(result.total)}
+          sentence={tRoot("shareExport.sentence", { count: result.rolls.length, faces: result.faces, rolls: result.rolls.join(", "), total: result.total })}
+        />
       </div>
       <div className="p-4 lg:p-6">
         <div dir="ltr" className="flex flex-wrap justify-center gap-3 rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">

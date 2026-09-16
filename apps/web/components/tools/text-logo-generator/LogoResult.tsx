@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import TextLogoShareExportModal from "./TextLogoShareExportModal";
 
 type StyledEntry = { style: string; text: string };
 
@@ -10,11 +11,21 @@ type Props = {
 
 export default function LogoResult({ entries, isEmpty }: Props) {
   const t = useTranslations("tools.text-logo-generator.result");
+  const tStyles = useTranslations("tools.text-logo-generator.result.styles");
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
+      <div className="flex items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
+        {!isEmpty && entries.length > 0 && (
+          <TextLogoShareExportModal
+            inputRows={[]}
+            resultRows={entries.map((entry) => ({ label: tStyles(entry.style), value: entry.text }))}
+            heroLabel={tStyles(entries[0].style)}
+            heroValue={entries[0].text}
+            sentence={entries[0].text}
+          />
+        )}
       </div>
       <div className="p-4 lg:p-6">
         {isEmpty ? (

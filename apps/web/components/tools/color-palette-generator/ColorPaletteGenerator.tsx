@@ -10,6 +10,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ColorPaletteInputPanel from "./ColorPaletteInputPanel";
 import ColorPaletteResult from "./ColorPaletteResult";
+import ColorPaletteQuickReference from "./ColorPaletteQuickReference";
 
 const DEFAULTS = { baseHex: "#3B82F6", harmony: "complementary" as HarmonyType };
 
@@ -60,6 +61,7 @@ export default function ColorPaletteGeneratorTool({ education }: { education: Re
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="color-palette-generator" />
               <SectionNav items={navItems} />
+              <ColorPaletteQuickReference />
             </div>
           }
         />

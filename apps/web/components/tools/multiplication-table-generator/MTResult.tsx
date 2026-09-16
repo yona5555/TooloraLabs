@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Printer } from "lucide-react";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import MultiplicationTableShareExportModal from "./MultiplicationTableShareExportModal";
 import type { MultiplicationTableOutput } from "./types";
 
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 
 export default function MTResult({ result, digitStyle }: Props) {
   const t = useTranslations("tools.multiplication-table-generator.result");
+  const tRoot = useTranslations("tools.multiplication-table-generator");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle);
 
   if (result.error) {
@@ -38,17 +39,31 @@ export default function MTResult({ result, digitStyle }: Props) {
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <button
-          type="button"
-          onClick={() => window.print()}
-          className="flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-white/20"
-        >
-          <Printer size={14} />
-          {t("print")}
-        </button>
+        <MultiplicationTableShareExportModal
+          inputRows={[]}
+          resultRows={
+            result.singleRows
+              ? result.singleRows.map((row) => ({ label: `× ${fmt(row.multiplier)}`, value: fmt(row.result) }))
+              : result.grid
+                ? result.grid.rows.map((row) => ({
+                    label: `${fmt(row.rowNumber)} ×`,
+                    value: row.cells.map((cell) => fmt(cell)).join(", "),
+                  }))
+                : []
+          }
+          heroLabel={t("heading")}
+          heroValue={
+            result.singleRows
+              ? `${fmt(result.singleRows[0]?.multiplier ?? 0)}…${fmt(result.singleRows[result.singleRows.length - 1]?.multiplier ?? 0)}`
+              : result.grid
+                ? `${fmt(result.grid.headers[0] ?? 0)}…${fmt(result.grid.headers[result.grid.headers.length - 1] ?? 0)}`
+                : ""
+          }
+          sentence={tRoot("shareExport.sentence")}
+        />
       </div>
       <div className="p-4 lg:p-6">
-        <div dir="ltr" data-print-area className="max-h-[28rem] overflow-auto">
+        <div dir="ltr" className="max-h-[28rem] overflow-auto">
           {result.singleRows ? (
             <table className="w-full min-w-[220px] border-collapse text-center text-sm">
               <tbody>

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { Check, Copy } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
+import ColorPaletteShareExportModal from "./ColorPaletteShareExportModal";
 import type { PaletteColor } from "@tooloralabs/tools";
 
 type ColorPaletteResultProps = {
@@ -37,7 +38,20 @@ export default function ColorPaletteResult({ palette }: ColorPaletteResultProps)
   const t = useTranslations("tools.color-palette-generator");
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      action={
+        palette.length > 0 ? (
+          <ColorPaletteShareExportModal
+            inputRows={[]}
+            resultRows={palette.map((color, i) => ({ label: `${t("aboveFold.resultTitle")} ${i + 1}`, value: `${color.hex} — ${color.rgb} — ${color.hsl}` }))}
+            heroLabel={t("form.baseColorLabel")}
+            heroValue={palette[0]?.hex ?? ""}
+            sentence={palette.map((color) => color.hex).join(", ")}
+          />
+        ) : undefined
+      }
+    >
       {palette.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {palette.map((color) => (

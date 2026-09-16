@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Quote as QuoteIcon } from "lucide-react";
 import CopyButton from "@/components/tool-ui/CopyButton";
+import QuoteShareExportModal from "./QuoteShareExportModal";
 import type { Quote } from "./types";
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 
 export default function QuoteResult({ quote }: Props) {
   const t = useTranslations("tools.random-quote-generator.result");
+  const tRoot = useTranslations("tools.random-quote-generator");
   const tCategories = useTranslations("tools.random-quote-generator.categories");
   const copyText = `"${quote.text}" — ${quote.author}`;
 
@@ -16,7 +18,19 @@ export default function QuoteResult({ quote }: Props) {
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
-        <CopyButton text={copyText} className="!text-white dark:!text-white" />
+        <div className="flex items-center gap-2">
+          <CopyButton text={copyText} className="!text-white dark:!text-white" />
+          <QuoteShareExportModal
+            inputRows={[{ label: tRoot("shareExport.categoryLabel"), value: tCategories(quote.category) }]}
+            resultRows={[
+              { label: tRoot("shareExport.authorLabel"), value: quote.author },
+              { label: tRoot("shareExport.sourceLabel"), value: quote.source },
+            ]}
+            heroLabel={tRoot("shareExport.quoteLabel")}
+            heroValue={quote.text}
+            sentence={copyText}
+          />
+        </div>
       </div>
       <div className="flex flex-col items-center gap-4 p-6 lg:p-8">
         <QuoteIcon size={28} className="text-blue-300 dark:text-blue-500/60" />
