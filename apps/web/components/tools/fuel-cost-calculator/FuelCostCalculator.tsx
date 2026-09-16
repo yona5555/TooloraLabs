@@ -15,9 +15,11 @@ import FuelQuickReference from "./FuelQuickReference";
 import { FUEL_DEFAULTS, type FuelRateMode, type FuelScenario } from "./types";
 
 const tool = new FuelCostTool();
+const RELATED_TOOLS = ["break-even-calculator", "inventory-valuation-calculator", "invoice-generator"];
 
 export default function FuelCostCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.fuel-cost-calculator.nav");
+  const t = useTranslations("tools.fuel-cost-calculator");
 
   const [distance, setDistance] = useState(FUEL_DEFAULTS.distance);
   const [rateMode, setRateMode] = useState<FuelRateMode>(FUEL_DEFAULTS.rateMode);
@@ -85,7 +87,14 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
               digitStyle={digitStyle}
             />
           }
-          sidebar={<RelatedToolsSidebar currentSlug="fuel-cost-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="fuel-cost-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

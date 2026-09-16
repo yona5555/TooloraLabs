@@ -7,7 +7,9 @@ import SectionCard from "@/components/tool-ui/SectionCard";
  * drive 100 km for four vehicle classes at a fixed reference fuel price,
  * distinct from FuelEfficiencyGauge (which compares raw L/100km efficiency,
  * not cost) and from FuelFlowDiagram (which traces one live calculation's
- * own distance -> fuel -> cost chain).
+ * own distance -> fuel -> cost chain). Shown as vertical columns (not the
+ * page's other horizontal-bar diagrams) so the four vehicle classes read as
+ * a lineup to scan left-to-right.
  */
 const REFERENCE_PRICE_PER_LITER = 1.5;
 const VEHICLES: { key: string; litersPer100km: number }[] = [
@@ -17,31 +19,46 @@ const VEHICLES: { key: string; litersPer100km: number }[] = [
   { key: "pickup", litersPer100km: 13 },
 ];
 
+const WIDTH = 320;
+const HEIGHT = 160;
+const COL_WIDTH = 46;
+const COL_GAP = 24;
+const PAD_TOP = 24;
+const PAD_BOTTOM = 40;
+
 export default function FuelCostComparisonDiagram() {
   const d = useTranslations("tools.fuel-cost-calculator.costComparisonDiagram");
   const tVehicles = useTranslations("tools.fuel-cost-calculator.costComparisonDiagram.vehicles");
 
   const costs = VEHICLES.map((v) => v.litersPer100km * REFERENCE_PRICE_PER_LITER);
   const maxCost = Math.max(...costs);
-  const barMaxWidth = 220;
+  const plotHeight = HEIGHT - PAD_TOP - PAD_BOTTOM;
+  const startX = (WIDTH - (VEHICLES.length * COL_WIDTH + (VEHICLES.length - 1) * COL_GAP)) / 2;
 
   return (
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
-      <div dir="ltr" className="mt-4 space-y-3">
-        {VEHICLES.map((v, i) => {
-          const cost = costs[i];
-          const width = (cost / maxCost) * barMaxWidth;
-          return (
-            <div key={v.key} className="flex items-center gap-3">
-              <span className="w-20 shrink-0 text-xs font-medium text-zinc-600 dark:text-zinc-300">{tVehicles(v.key)}</span>
-              <div className="flex-1">
-                <div className="h-6 rounded-md bg-blue-500/80 dark:bg-blue-400/80" style={{ width: `${width}px` }} />
-              </div>
-              <span className="w-16 shrink-0 font-mono text-xs font-semibold text-zinc-700 dark:text-zinc-200">${cost.toFixed(2)}</span>
-            </div>
-          );
-        })}
+      <div dir="ltr" className="mt-4 overflow-x-auto">
+        <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={d("title")} className="mx-auto block min-w-[300px] text-current">
+          <line x1={16} y1={HEIGHT - PAD_BOTTOM} x2={WIDTH - 16} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
+          {VEHICLES.map((v, i) => {
+            const cost = costs[i];
+            const colHeight = (cost / maxCost) * plotHeight;
+            const x = startX + i * (COL_WIDTH + COL_GAP);
+            const y = HEIGHT - PAD_BOTTOM - colHeight;
+            return (
+              <g key={v.key}>
+                <rect x={x} y={y} width={COL_WIDTH} height={colHeight} rx={6} className="fill-indigo-500/80 dark:fill-indigo-400/80" />
+                <text x={x + COL_WIDTH / 2} y={y - 8} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">
+                  ${cost.toFixed(2)}
+                </text>
+                <text x={x + COL_WIDTH / 2} y={HEIGHT - PAD_BOTTOM + 18} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.75}>
+                  {tVehicles(v.key)}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
       </div>
       <p className="mt-3 text-center text-sm opacity-80">{d("caption", { price: REFERENCE_PRICE_PER_LITER.toFixed(2) })}</p>
     </SectionCard>

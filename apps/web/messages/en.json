@@ -12761,6 +12761,65 @@
         "title": "Tip Sensitivity",
         "caption": "How much each person pays per person at different tip percentages, for your bill.",
         "xLabel": "Tip %"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
+      },
+      "formulaDiagram": {
+        "title": "How the Tip Is Calculated",
+        "intro": "A worked example: an $85 bill with an 18% tip.",
+        "bill": "Bill",
+        "tipPercent": "Tip %",
+        "tipAmount": "Tip amount",
+        "totalRow": "Total: ${value}"
+      },
+      "percentRangeComparisonChart": {
+        "title": "Total by Tip Percentage",
+        "caption": "Same ${bill} bill across four common tip rates."
+      },
+      "billSizeScalingChart": {
+        "title": "Tip Amount by Bill Size",
+        "caption": "Fixed {percent}% tip across four real bill sizes."
+      },
+      "splitPeopleChart": {
+        "title": "Per-Person Share by Group Size",
+        "caption": "Same ${total} total split across four group sizes.",
+        "people": "{count} people"
+      },
+      "roundUpDiagram": {
+        "title": "Rounding Up for Cash Tipping",
+        "intro": "A ${bill} bill with {percent}% tip, rounded up to the nearest $5.",
+        "exactLabel": "Exact total",
+        "roundedLabel": "Rounded up"
+      },
+      "serviceQualityScaleChart": {
+        "title": "Tip by Service Quality",
+        "caption": "US restaurant tipping convention, applied to a ${bill} bill.",
+        "tiers": {
+          "poor": "Poor service",
+          "average": "Average",
+          "good": "Good",
+          "excellent": "Excellent"
+        }
+      },
+      "cumulativeAnnualDiagram": {
+        "title": "Tips Add Up Over a Year",
+        "caption": "A ${weeklyTip} weekly tip, projected over time.",
+        "months": "{count} months"
+      },
+      "vsNoTipComparisonChart": {
+        "title": "Bill vs. Bill Plus Tip",
+        "caption": "The real dollar impact of tipping on the same bill.",
+        "billOnly": "Bill only",
+        "withTip": "With {percent}% tip"
+      },
+      "deliveryVsDineInChart": {
+        "title": "Tipping by Service Type",
+        "caption": "Documented convention for a ${order} order.",
+        "types": {
+          "delivery": "Delivery",
+          "dineIn": "Dine-in"
+        }
       }
     },
     "discount-calculator": {
@@ -13033,6 +13092,72 @@
         "title": "Savings at Different Price Points",
         "caption": "How much you'd save at this discount rate across a range of prices.",
         "xLabel": "Original Price"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
+      },
+      "formulaDiagram": {
+        "title": "How the Discount Is Calculated",
+        "intro": "A worked example: a $120 item at 25% off.",
+        "price": "Price",
+        "discountPercent": "Discount %",
+        "savings": "Savings",
+        "finalRow": "Final price: ${value}"
+      },
+      "percentComparisonChart": {
+        "title": "Final Price by Discount Percentage",
+        "caption": "Same ${price} item across four common discount rates."
+      },
+      "originalPriceScalingChart": {
+        "title": "Savings by Original Price",
+        "caption": "Fixed {percent}% off across four real price points."
+      },
+      "stackedVsCombinedChart": {
+        "title": "Stacked Discounts vs. One Flat Discount",
+        "caption": "Two 20%-then-10% discounts vs. one flat 30% discount, same ${price} item.",
+        "stacked": "20% then 10% (stacked)",
+        "flat": "30% flat",
+        "note": "Stacked percentage discounts apply to an already-reduced price, so they never add up to a simple sum."
+      },
+      "taxAfterDiscountDiagram": {
+        "title": "Discount Before Tax",
+        "intro": "US retail convention: the discount is applied first, then tax is computed on the reduced price.",
+        "original": "Original price",
+        "afterDiscount": "After {percent}% discount",
+        "afterTax": "After {percent}% tax"
+      },
+      "seasonalRangeChart": {
+        "title": "Typical Seasonal Discount Ranges",
+        "caption": "Documented US retail ranges, applied to the same $120 item.",
+        "seasons": {
+          "clearance": "Clearance",
+          "blackFriday": "Black Friday",
+          "backToSchool": "Back to School",
+          "regularSale": "Regular Sale"
+        }
+      },
+      "bulkQuantityChart": {
+        "title": "Bulk-Purchase Discount Tiers",
+        "caption": "A common tiered-discount structure, same ${price} base unit price.",
+        "tiers": {
+          "single": "1 unit",
+          "small": "{qty}+ units",
+          "medium": "{qty}+ units",
+          "large": "{qty}+ units"
+        }
+      },
+      "roundNumberPricingDiagram": {
+        "title": "Psychological Pricing",
+        "intro": "A {percent}% discount applied to a charm price vs. a round number.",
+        "charmLabel": "${price} charm price",
+        "roundLabel": "${price} round price",
+        "note": "Retailers often set prices just below a round number for psychological effect."
+      },
+      "dollarVsPercentCouponChart": {
+        "title": "Dollar-Off vs. Percent-Off Coupons",
+        "caption": "A flat ${flat}-off coupon vs. a {percent}%-off coupon, at two price points either side of the breakeven.",
+        "flatAt": "${price} item, ${flat} off",
+        "percentAt": "${price} item, {percent}% off"
       }
     },
     "sales-tax-calculator": {
@@ -22451,6 +22576,65 @@
       "sensitivityDiagram": {
         "caption": "How total cost changes as the fuel price moves",
         "xLabel": "Price per unit"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
+      },
+      "formulaDiagram": {
+        "title": "How the Cost Is Calculated",
+        "intro": "A worked example: 300 miles at 30 mpg, priced at $3.50 per gallon.",
+        "distance": "Distance",
+        "efficiency": "Efficiency",
+        "price": "Price",
+        "fuelUsedRow": "Fuel used: {value} gallons",
+        "totalCostRow": "Total cost: ${value}"
+      },
+      "efficiencyComparisonChart": {
+        "title": "Total Cost by Fuel Efficiency",
+        "caption": "Annual cost for {distance} miles at $​{price}/gallon, across five real efficiency levels."
+      },
+      "distanceScaleChart": {
+        "title": "Total Cost by Trip Distance",
+        "caption": "At {efficiency} mpg and ${price}/gallon.",
+        "labels": {
+          "commute": "Daily commute ({miles} mi)",
+          "weekendTrip": "Weekend trip ({miles} mi)",
+          "roadTrip": "Road trip ({miles} mi)",
+          "yearly": "Annual driving ({miles} mi)"
+        }
+      },
+      "annualProjectionChart": {
+        "title": "Projected Cost Over Time",
+        "caption": "At {distance} miles/month, {efficiency} mpg, ${price}/gallon.",
+        "months": "{count} months"
+      },
+      "priceBandChart": {
+        "title": "Total Cost by Fuel Price",
+        "caption": "For a {distance}-mile trip at {efficiency} mpg, across four real price points."
+      },
+      "typeCostComparisonChart": {
+        "title": "Cost by Power Source",
+        "caption": "Same {distance}-mile trip, four typical US average rate/price benchmarks run through the same formula.",
+        "note": "Rates are typical US averages and will vary by vehicle and location.",
+        "sources": {
+          "gasoline": "Gasoline",
+          "diesel": "Diesel",
+          "hybrid": "Hybrid",
+          "electric": "Electric"
+        }
+      },
+      "unitConversionDiagram": {
+        "title": "MPG ↔ L/100km",
+        "intro": "Fuel efficiency units convert directly using a fixed constant.",
+        "mpgLabel": "Miles per gallon",
+        "l100kmLabel": "Liters per 100 km",
+        "formula": "L/100km = 235.215 ÷ MPG"
+      },
+      "costPerMileVsKmChart": {
+        "title": "Cost per Mile vs. per Kilometer",
+        "caption": "Same ${cost} trip cost over {distance} miles, expressed in both units.",
+        "perMile": "Per mile",
+        "perKm": "Per kilometer"
       }
     },
     "batch-invoice-calculator": {
@@ -22646,6 +22830,73 @@
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result",
         "summarySentence": "{count, plural, one {# saved invoice} other {# saved invoices}} totaling {total}."
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
+      },
+      "formulaDiagram": {
+        "title": "How an Invoice Total Is Calculated",
+        "intro": "A worked example with two line items and 8.5% tax.",
+        "lineTotal": "{qty} × ${price} = line total",
+        "subtotal": "Subtotal (all line items)",
+        "tax": "Tax ({percent}%)",
+        "total": "Total"
+      },
+      "lineItemBreakdownChart": {
+        "title": "Line Item Breakdown",
+        "caption": "Each line item's own quantity × unit price.",
+        "items": {
+          "consulting": "Consulting Hours",
+          "supplies": "Office Supplies"
+        }
+      },
+      "taxRateComparisonChart": {
+        "title": "Total by Tax Rate",
+        "caption": "Same ${subtotal} subtotal at four real tax rates."
+      },
+      "batchAccumulationChart": {
+        "title": "Running Total Across a Batch",
+        "caption": "Cumulative total as invoices are added to a batch.",
+        "invoiceN": "After invoice {n}"
+      },
+      "quantityScalingChart": {
+        "title": "Line Total by Quantity",
+        "caption": "Same ${price} unit price at four quantities.",
+        "units": "{count} units"
+      },
+      "roundingImpactDiagram": {
+        "title": "Rounding to the Nearest Cent",
+        "intro": "Tax on a ${subtotal} subtotal at {percent}% computes with more precision than currency allows.",
+        "rawLabel": "Raw computed tax",
+        "billedLabel": "Amount billed",
+        "note": "Invoices round the computed tax to the nearest cent before billing."
+      },
+      "vendorSplitChart": {
+        "title": "Totals by Vendor",
+        "caption": "Two vendors in the same batch, each invoice's own total.",
+        "vendors": {
+          "acme": "Acme Supplies",
+          "globex": "Globex Corp"
+        }
+      },
+      "averageLineItemChart": {
+        "title": "Average Line Item Value",
+        "caption": "Five real line items in a batch and their computed average.",
+        "itemN": "Item {n}",
+        "average": "Average"
+      },
+      "paymentTermsDiagram": {
+        "title": "Net 30 Payment Terms",
+        "intro": "A common invoice term: payment is due {days} days after the issue date.",
+        "issueDate": "Issue date",
+        "dueDate": "Due date",
+        "daysLabel": "{days} days"
+      },
+      "discountEarlyPaymentChart": {
+        "title": "Early-Payment Discount",
+        "caption": "A common 2/10 net 30 term: 2% off if paid early.",
+        "fullTerm": "Paid at full term",
+        "earlyPayment": "Paid early ({percent}% off)"
       }
     },
     "text-to-speech": {

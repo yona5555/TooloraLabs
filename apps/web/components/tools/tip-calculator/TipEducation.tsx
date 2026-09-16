@@ -5,6 +5,15 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import TipPercentBarDiagram from "./TipPercentBarDiagram";
+import TipFormulaDiagram from "./TipFormulaDiagram";
+import TipPercentRangeComparisonChart from "./TipPercentRangeComparisonChart";
+import TipBillSizeScalingChart from "./TipBillSizeScalingChart";
+import TipSplitPeopleChart from "./TipSplitPeopleChart";
+import TipRoundUpDiagram from "./TipRoundUpDiagram";
+import TipServiceQualityScaleChart from "./TipServiceQualityScaleChart";
+import TipCumulativeAnnualDiagram from "./TipCumulativeAnnualDiagram";
+import TipVsNoTipComparisonChart from "./TipVsNoTipComparisonChart";
+import TipDeliveryVsDineInChart from "./TipDeliveryVsDineInChart";
 
 type ExampleRow = { scenario: string; tipAmount: string; totalPerPerson: string };
 type VariableItem = { name: string; description: string };
@@ -26,6 +35,8 @@ export default async function TipEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <TipPercentBarDiagram bars={diagramBars} caption={t("intro.diagram.caption")} />
+        <TipFormulaDiagram />
+        <TipPercentRangeComparisonChart />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -38,6 +49,8 @@ export default async function TipEducation() {
             </div>
           ))}
         </dl>
+        <TipBillSizeScalingChart />
+        <TipSplitPeopleChart />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -74,6 +87,9 @@ export default async function TipEducation() {
             </div>
           ))}
         </div>
+        <TipRoundUpDiagram />
+        <TipServiceQualityScaleChart />
+        <TipDeliveryVsDineInChart />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -96,6 +112,8 @@ export default async function TipEducation() {
           intro={t("behindTheTool.academicPath.intro")}
           universities={universities}
         />
+        <TipCumulativeAnnualDiagram />
+        <TipVsNoTipComparisonChart />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

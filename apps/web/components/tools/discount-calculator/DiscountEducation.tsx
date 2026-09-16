@@ -5,6 +5,15 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import DiscountStackDiagram from "./DiscountStackDiagram";
+import DiscountFormulaDiagram from "./DiscountFormulaDiagram";
+import DiscountPercentComparisonChart from "./DiscountPercentComparisonChart";
+import DiscountOriginalPriceScalingChart from "./DiscountOriginalPriceScalingChart";
+import DiscountStackedVsCombinedChart from "./DiscountStackedVsCombinedChart";
+import DiscountTaxAfterDiscountDiagram from "./DiscountTaxAfterDiscountDiagram";
+import DiscountSeasonalRangeChart from "./DiscountSeasonalRangeChart";
+import DiscountBulkQuantityChart from "./DiscountBulkQuantityChart";
+import DiscountRoundNumberPricingDiagram from "./DiscountRoundNumberPricingDiagram";
+import DiscountDollarVsPercentCouponChart from "./DiscountDollarVsPercentCouponChart";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -30,6 +39,8 @@ export default async function DiscountEducation() {
           afterSecondLabel={t("intro.diagram.afterSecondLabel")}
           caption={t("intro.diagram.caption")}
         />
+        <DiscountFormulaDiagram />
+        <DiscountPercentComparisonChart />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -42,6 +53,8 @@ export default async function DiscountEducation() {
             </div>
           ))}
         </dl>
+        <DiscountOriginalPriceScalingChart />
+        <DiscountStackedVsCombinedChart />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -64,6 +77,8 @@ export default async function DiscountEducation() {
             </tbody>
           </table>
         </div>
+        <DiscountTaxAfterDiscountDiagram />
+        <DiscountRoundNumberPricingDiagram />
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -76,6 +91,9 @@ export default async function DiscountEducation() {
             </div>
           ))}
         </div>
+        <DiscountSeasonalRangeChart />
+        <DiscountBulkQuantityChart />
+        <DiscountDollarVsPercentCouponChart />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

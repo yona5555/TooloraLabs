@@ -6,6 +6,14 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import FuelEfficiencyGauge from "./FuelEfficiencyGauge";
 import FuelCostComparisonDiagram from "./FuelCostComparisonDiagram";
+import FuelFormulaDiagram from "./FuelFormulaDiagram";
+import FuelDistanceScaleChart from "./FuelDistanceScaleChart";
+import FuelPriceBandChart from "./FuelPriceBandChart";
+import FuelEfficiencyComparisonChart from "./FuelEfficiencyComparisonChart";
+import FuelAnnualProjectionChart from "./FuelAnnualProjectionChart";
+import FuelTypeCostComparisonChart from "./FuelTypeCostComparisonChart";
+import FuelUnitConversionDiagram from "./FuelUnitConversionDiagram";
+import FuelCostPerMileVsKmChart from "./FuelCostPerMileVsKmChart";
 
 type ExampleRow = { scenario: string; result: string };
 type UseCaseItem = { title: string; description: string };
@@ -25,6 +33,7 @@ export default async function FuelEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <FuelFormulaDiagram />
         <FuelCostComparisonDiagram />
       </InfoSection>
 
@@ -38,6 +47,8 @@ export default async function FuelEducation() {
             </div>
           ))}
         </div>
+        <FuelDistanceScaleChart />
+        <FuelAnnualProjectionChart />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -60,6 +71,9 @@ export default async function FuelEducation() {
             </tbody>
           </table>
         </div>
+        <FuelPriceBandChart />
+        <FuelEfficiencyComparisonChart />
+        <FuelTypeCostComparisonChart />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -82,6 +96,8 @@ export default async function FuelEducation() {
           intro={t("behindTheTool.academicPath.intro")}
           universities={universities}
         />
+        <FuelUnitConversionDiagram />
+        <FuelCostPerMileVsKmChart />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

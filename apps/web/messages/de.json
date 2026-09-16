@@ -12761,6 +12761,65 @@
         "title": "Trinkgeld-Sensitivität",
         "caption": "Wie viel jede Person bei unterschiedlichen Trinkgeldprozentsätzen für Ihre Rechnung zahlt.",
         "xLabel": "Trinkgeld %"
+      },
+      "relatedTools": {
+        "title": "Verwandte Business-Tools"
+      },
+      "formulaDiagram": {
+        "title": "So wird das Trinkgeld berechnet",
+        "intro": "Ein Beispiel: eine Rechnung von 85 $ mit 18 % Trinkgeld.",
+        "bill": "Rechnung",
+        "tipPercent": "Trinkgeld %",
+        "tipAmount": "Trinkgeldbetrag",
+        "totalRow": "Gesamt: {value} $"
+      },
+      "percentRangeComparisonChart": {
+        "title": "Gesamtsumme nach Trinkgeldsatz",
+        "caption": "Gleiche Rechnung von {bill} $ über vier gängige Trinkgeldsätze."
+      },
+      "billSizeScalingChart": {
+        "title": "Trinkgeldbetrag nach Rechnungshöhe",
+        "caption": "Festes Trinkgeld von {percent} % über vier reale Rechnungshöhen."
+      },
+      "splitPeopleChart": {
+        "title": "Anteil pro Person nach Gruppengröße",
+        "caption": "Gleiche Gesamtsumme von {total} $, aufgeteilt auf vier Gruppengrößen.",
+        "people": "{count} Personen"
+      },
+      "roundUpDiagram": {
+        "title": "Aufrunden für Bartrinkgeld",
+        "intro": "Eine Rechnung von {bill} $ mit {percent} % Trinkgeld, aufgerundet auf die nächsten 5 $.",
+        "exactLabel": "Exakte Summe",
+        "roundedLabel": "Aufgerundet"
+      },
+      "serviceQualityScaleChart": {
+        "title": "Trinkgeld nach Servicequalität",
+        "caption": "US-Restaurant-Trinkgeldkonvention, angewendet auf eine Rechnung von {bill} $.",
+        "tiers": {
+          "poor": "Schlechter Service",
+          "average": "Durchschnittlich",
+          "good": "Gut",
+          "excellent": "Ausgezeichnet"
+        }
+      },
+      "cumulativeAnnualDiagram": {
+        "title": "Trinkgelder summieren sich über ein Jahr",
+        "caption": "Ein wöchentliches Trinkgeld von {weeklyTip} $, über die Zeit hochgerechnet.",
+        "months": "{count} Monate"
+      },
+      "vsNoTipComparisonChart": {
+        "title": "Rechnung vs. Rechnung plus Trinkgeld",
+        "caption": "Die tatsächliche finanzielle Auswirkung des Trinkgelds auf dieselbe Rechnung.",
+        "billOnly": "Nur Rechnung",
+        "withTip": "Mit {percent} % Trinkgeld"
+      },
+      "deliveryVsDineInChart": {
+        "title": "Trinkgeld nach Servicetyp",
+        "caption": "Dokumentierte Konvention für eine Bestellung von {order} $.",
+        "types": {
+          "delivery": "Lieferung",
+          "dineIn": "Im Restaurant"
+        }
       }
     },
     "discount-calculator": {
@@ -13033,6 +13092,72 @@
         "title": "Ersparnis bei unterschiedlichen Preispunkten",
         "caption": "Wie viel Sie bei diesem Rabattsatz über eine Preisspanne hinweg sparen würden.",
         "xLabel": "Originalpreis"
+      },
+      "relatedTools": {
+        "title": "Verwandte Business-Tools"
+      },
+      "formulaDiagram": {
+        "title": "So wird der Rabatt berechnet",
+        "intro": "Ein Beispiel: ein 120-$-Artikel mit 25 % Rabatt.",
+        "price": "Preis",
+        "discountPercent": "Rabatt %",
+        "savings": "Ersparnis",
+        "finalRow": "Endpreis: {value} $"
+      },
+      "percentComparisonChart": {
+        "title": "Endpreis nach Rabattsatz",
+        "caption": "Gleicher Artikel zu {price} $ über vier gängige Rabattsätze."
+      },
+      "originalPriceScalingChart": {
+        "title": "Ersparnis nach Originalpreis",
+        "caption": "Fester Rabatt von {percent} % über vier reale Preispunkte."
+      },
+      "stackedVsCombinedChart": {
+        "title": "Gestaffelte Rabatte vs. ein fester Rabatt",
+        "caption": "Zwei Rabatte von 20 % dann 10 % vs. ein fester Rabatt von 30 %, gleicher Artikel zu {price} $.",
+        "stacked": "20 % dann 10 % (gestaffelt)",
+        "flat": "30 % fest",
+        "note": "Gestaffelte prozentuale Rabatte gelten für einen bereits reduzierten Preis, sie summieren sich daher nie zu einer einfachen Summe."
+      },
+      "taxAfterDiscountDiagram": {
+        "title": "Rabatt vor Steuer",
+        "intro": "US-Einzelhandelskonvention: Der Rabatt wird zuerst angewendet, dann wird die Steuer auf den reduzierten Preis berechnet.",
+        "original": "Originalpreis",
+        "afterDiscount": "Nach {percent} % Rabatt",
+        "afterTax": "Nach {percent} % Steuer"
+      },
+      "seasonalRangeChart": {
+        "title": "Typische saisonale Rabattspannen",
+        "caption": "Dokumentierte US-Einzelhandelsspannen, angewendet auf denselben 120-$-Artikel.",
+        "seasons": {
+          "clearance": "Räumungsverkauf",
+          "blackFriday": "Black Friday",
+          "backToSchool": "Schulanfang",
+          "regularSale": "Regulärer Sale"
+        }
+      },
+      "bulkQuantityChart": {
+        "title": "Mengenrabatt-Stufen",
+        "caption": "Eine gängige Staffelrabattstruktur, gleicher Basis-Einzelpreis von {price} $.",
+        "tiers": {
+          "single": "1 Einheit",
+          "small": "{qty}+ Einheiten",
+          "medium": "{qty}+ Einheiten",
+          "large": "{qty}+ Einheiten"
+        }
+      },
+      "roundNumberPricingDiagram": {
+        "title": "Psychologische Preisgestaltung",
+        "intro": "Ein Rabatt von {percent} % auf einen Schwellenpreis vs. eine runde Zahl.",
+        "charmLabel": "Schwellenpreis {price} $",
+        "roundLabel": "Runder Preis {price} $",
+        "note": "Händler setzen Preise oft knapp unter eine runde Zahl für einen psychologischen Effekt."
+      },
+      "dollarVsPercentCouponChart": {
+        "title": "Festbetrag- vs. Prozent-Gutschein",
+        "caption": "Ein fester {flat}-$-Gutschein vs. ein {percent}-%-Gutschein, an zwei Preispunkten beiderseits des Breakeven.",
+        "flatAt": "{price}-$-Artikel, {flat} $ Rabatt",
+        "percentAt": "{price}-$-Artikel, {percent} % Rabatt"
       }
     },
     "sales-tax-calculator": {
@@ -22451,6 +22576,65 @@
       "sensitivityDiagram": {
         "caption": "Wie sich die Gesamtkosten mit dem Kraftstoffpreis ändern",
         "xLabel": "Preis pro Einheit"
+      },
+      "relatedTools": {
+        "title": "Verwandte Business-Tools"
+      },
+      "formulaDiagram": {
+        "title": "So wird die Kraftstoffkosten berechnet",
+        "intro": "Ein Beispiel: 300 Meilen bei 30 mpg, zu 3,50 $ pro Gallone.",
+        "distance": "Strecke",
+        "efficiency": "Effizienz",
+        "price": "Preis",
+        "fuelUsedRow": "Verbrauchter Kraftstoff: {value} Gallonen",
+        "totalCostRow": "Gesamtkosten: {value} $"
+      },
+      "efficiencyComparisonChart": {
+        "title": "Gesamtkosten nach Kraftstoffeffizienz",
+        "caption": "Jahreskosten für {distance} Meilen bei {price} $/Gallone, über fünf reale Effizienzstufen."
+      },
+      "distanceScaleChart": {
+        "title": "Gesamtkosten nach Fahrstrecke",
+        "caption": "Bei {efficiency} mpg und {price} $/Gallone.",
+        "labels": {
+          "commute": "Täglicher Arbeitsweg ({miles} mi)",
+          "weekendTrip": "Wochenendausflug ({miles} mi)",
+          "roadTrip": "Roadtrip ({miles} mi)",
+          "yearly": "Jährliche Fahrleistung ({miles} mi)"
+        }
+      },
+      "annualProjectionChart": {
+        "title": "Prognostizierte Kosten über die Zeit",
+        "caption": "Bei {distance} Meilen/Monat, {efficiency} mpg, {price} $/Gallone.",
+        "months": "{count} Monate"
+      },
+      "priceBandChart": {
+        "title": "Gesamtkosten nach Kraftstoffpreis",
+        "caption": "Für eine {distance}-Meilen-Fahrt bei {efficiency} mpg, über vier reale Preispunkte."
+      },
+      "typeCostComparisonChart": {
+        "title": "Kosten nach Antriebsart",
+        "caption": "Gleiche {distance}-Meilen-Fahrt, vier typische US-Durchschnittswerte, angewendet auf dieselbe Formel.",
+        "note": "Die Werte sind typische US-Durchschnitte und variieren je nach Fahrzeug und Ort.",
+        "sources": {
+          "gasoline": "Benzin",
+          "diesel": "Diesel",
+          "hybrid": "Hybrid",
+          "electric": "Elektrisch"
+        }
+      },
+      "unitConversionDiagram": {
+        "title": "MPG ↔ L/100km",
+        "intro": "Kraftstoffeffizienz-Einheiten lassen sich direkt über eine feste Konstante umrechnen.",
+        "mpgLabel": "Meilen pro Gallone",
+        "l100kmLabel": "Liter pro 100 km",
+        "formula": "L/100km = 235,215 ÷ MPG"
+      },
+      "costPerMileVsKmChart": {
+        "title": "Kosten pro Meile vs. pro Kilometer",
+        "caption": "Gleiche Fahrtkosten von {cost} $ über {distance} Meilen, in beiden Einheiten ausgedrückt.",
+        "perMile": "Pro Meile",
+        "perKm": "Pro Kilometer"
       }
     },
     "batch-invoice-calculator": {
@@ -22646,6 +22830,73 @@
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis",
         "summarySentence": "{count, plural, one {# gespeicherte Rechnung} other {# gespeicherte Rechnungen}} mit insgesamt {total}."
+      },
+      "relatedTools": {
+        "title": "Verwandte Business-Tools"
+      },
+      "formulaDiagram": {
+        "title": "So wird eine Rechnungssumme berechnet",
+        "intro": "Ein Beispiel mit zwei Positionen und 8,5 % Steuer.",
+        "lineTotal": "{qty} × {price} $ = Positionssumme",
+        "subtotal": "Zwischensumme (alle Positionen)",
+        "tax": "Steuer ({percent} %)",
+        "total": "Gesamtsumme"
+      },
+      "lineItemBreakdownChart": {
+        "title": "Aufschlüsselung der Rechnungspositionen",
+        "caption": "Menge × Einzelpreis je Position.",
+        "items": {
+          "consulting": "Beratungsstunden",
+          "supplies": "Bürobedarf"
+        }
+      },
+      "taxRateComparisonChart": {
+        "title": "Gesamtsumme nach Steuersatz",
+        "caption": "Gleiche Zwischensumme von {subtotal} $ bei vier realen Steuersätzen."
+      },
+      "batchAccumulationChart": {
+        "title": "Laufende Summe über eine Rechnungscharge",
+        "caption": "Kumulierte Summe beim Hinzufügen von Rechnungen zu einer Charge.",
+        "invoiceN": "Nach Rechnung {n}"
+      },
+      "quantityScalingChart": {
+        "title": "Positionssumme nach Menge",
+        "caption": "Gleicher Einzelpreis von {price} $ bei vier Mengen.",
+        "units": "{count} Einheiten"
+      },
+      "roundingImpactDiagram": {
+        "title": "Rundung auf den nächsten Cent",
+        "intro": "Die Steuer auf eine Zwischensumme von {subtotal} $ bei {percent} % wird präziser berechnet, als Währung erlaubt.",
+        "rawLabel": "Roh berechnete Steuer",
+        "billedLabel": "In Rechnung gestellter Betrag",
+        "note": "Rechnungen runden die berechnete Steuer vor der Abrechnung auf den nächsten Cent."
+      },
+      "vendorSplitChart": {
+        "title": "Summen nach Lieferant",
+        "caption": "Zwei Lieferanten in derselben Charge, jeweils eigene Rechnungssumme.",
+        "vendors": {
+          "acme": "Acme Supplies",
+          "globex": "Globex Corp"
+        }
+      },
+      "averageLineItemChart": {
+        "title": "Durchschnittlicher Positionswert",
+        "caption": "Fünf reale Positionen in einer Charge und ihr berechneter Durchschnitt.",
+        "itemN": "Position {n}",
+        "average": "Durchschnitt"
+      },
+      "paymentTermsDiagram": {
+        "title": "Zahlungsbedingung Netto 30",
+        "intro": "Eine gängige Rechnungsbedingung: Zahlung ist {days} Tage nach Ausstellungsdatum fällig.",
+        "issueDate": "Ausstellungsdatum",
+        "dueDate": "Fälligkeitsdatum",
+        "daysLabel": "{days} Tage"
+      },
+      "discountEarlyPaymentChart": {
+        "title": "Skonto bei früher Zahlung",
+        "caption": "Eine gängige 2/10-netto-30-Bedingung: 2 % Rabatt bei früher Zahlung.",
+        "fullTerm": "Zahlung zum vollen Zahlungsziel",
+        "earlyPayment": "Frühzahlung ({percent} % Rabatt)"
       }
     },
     "text-to-speech": {

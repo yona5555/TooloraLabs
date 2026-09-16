@@ -18,6 +18,7 @@ import TipSensitivityLineDiagram from "./TipSensitivityLineDiagram";
 import type { TipResult as Result } from "./types";
 
 const tool = new TipCalculatorTool();
+const RELATED_TOOLS = ["sales-tax-calculator", "discount-calculator", "fuel-cost-calculator"];
 
 const DEFAULTS = { billAmount: "64", tipPercent: "18", people: "2" };
 
@@ -180,7 +181,14 @@ export default function TipCalculator({ education }: { education: ReactNode }) {
             />
           }
           result={<TipResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />}
-          sidebar={<RelatedToolsSidebar currentSlug="tip-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="tip-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

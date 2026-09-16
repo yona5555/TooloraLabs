@@ -19,6 +19,7 @@ import { readStoredInvoices, writeStoredInvoices, subscribeToInvoiceStorage, get
 import { SAMPLE_INVOICE, type DraftLineItem, type SavedInvoice } from "./types";
 
 const tool = new BatchInvoiceTool();
+const RELATED_TOOLS = ["invoice-generator", "sales-tax-calculator", "break-even-calculator"];
 
 const EMPTY_LINE_ITEM: DraftLineItem = { itemName: "", quantity: "1", unitPrice: "" };
 
@@ -36,6 +37,7 @@ function toNumericLineItems(lineItems: DraftLineItem[]) {
 
 export default function BatchInvoiceCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.batch-invoice-calculator.nav");
+  const t = useTranslations("tools.batch-invoice-calculator");
 
   const invoices = useSyncExternalStore(subscribeToInvoiceStorage, readStoredInvoices, getServerInvoices);
 
@@ -179,7 +181,14 @@ export default function BatchInvoiceCalculator({ education }: { education: React
             />
           }
           result={<DraftPreview result={draftResult} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="batch-invoice-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="batch-invoice-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

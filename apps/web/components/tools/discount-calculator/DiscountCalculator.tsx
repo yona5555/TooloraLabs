@@ -18,6 +18,7 @@ import DiscountSavingsScalingDiagram from "./DiscountSavingsScalingDiagram";
 import type { DiscountMode, DiscountResult as Result } from "./types";
 
 const tool = new DiscountCalculatorTool();
+const RELATED_TOOLS = ["sales-tax-calculator", "tip-calculator", "break-even-calculator"];
 
 const APPLY_DEFAULTS = { price: "120", discounts: ["30", "10"] };
 const REVERSE_DEFAULTS = { price: "84", discounts: ["30"] };
@@ -198,7 +199,14 @@ export default function DiscountCalculator({ education }: { education: ReactNode
             />
           }
           result={<DiscountResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />}
-          sidebar={<RelatedToolsSidebar currentSlug="discount-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="discount-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

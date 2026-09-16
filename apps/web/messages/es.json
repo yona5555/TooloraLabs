@@ -12761,6 +12761,65 @@
         "title": "Sensibilidad de la Propina",
         "caption": "Cuánto paga cada persona por persona con distintos porcentajes de propina, para tu cuenta.",
         "xLabel": "Propina %"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
+      },
+      "formulaDiagram": {
+        "title": "Cómo se calcula la propina",
+        "intro": "Un ejemplo resuelto: una cuenta de $85 con 18% de propina.",
+        "bill": "Cuenta",
+        "tipPercent": "% de propina",
+        "tipAmount": "Monto de la propina",
+        "totalRow": "Total: ${value}"
+      },
+      "percentRangeComparisonChart": {
+        "title": "Total por porcentaje de propina",
+        "caption": "Misma cuenta de ${bill} en cuatro tasas de propina comunes."
+      },
+      "billSizeScalingChart": {
+        "title": "Monto de propina por tamaño de cuenta",
+        "caption": "Propina fija de {percent}% en cuatro tamaños de cuenta reales."
+      },
+      "splitPeopleChart": {
+        "title": "Parte por persona según tamaño del grupo",
+        "caption": "Mismo total de ${total} dividido entre cuatro tamaños de grupo.",
+        "people": "{count} personas"
+      },
+      "roundUpDiagram": {
+        "title": "Redondeo hacia arriba para propina en efectivo",
+        "intro": "Una cuenta de ${bill} con {percent}% de propina, redondeada al $5 más cercano hacia arriba.",
+        "exactLabel": "Total exacto",
+        "roundedLabel": "Redondeado hacia arriba"
+      },
+      "serviceQualityScaleChart": {
+        "title": "Propina según la calidad del servicio",
+        "caption": "Convención de propinas en restaurantes de EE. UU., aplicada a una cuenta de ${bill}.",
+        "tiers": {
+          "poor": "Servicio deficiente",
+          "average": "Promedio",
+          "good": "Bueno",
+          "excellent": "Excelente"
+        }
+      },
+      "cumulativeAnnualDiagram": {
+        "title": "Las propinas se acumulan durante un año",
+        "caption": "Una propina semanal de ${weeklyTip}, proyectada en el tiempo.",
+        "months": "{count} meses"
+      },
+      "vsNoTipComparisonChart": {
+        "title": "Cuenta vs. cuenta más propina",
+        "caption": "El impacto real en dólares de la propina sobre la misma cuenta.",
+        "billOnly": "Solo la cuenta",
+        "withTip": "Con {percent}% de propina"
+      },
+      "deliveryVsDineInChart": {
+        "title": "Propinas según el tipo de servicio",
+        "caption": "Convención documentada para un pedido de ${order}.",
+        "types": {
+          "delivery": "Entrega a domicilio",
+          "dineIn": "En el restaurante"
+        }
       }
     },
     "discount-calculator": {
@@ -13033,6 +13092,72 @@
         "title": "Ahorro en Diferentes Puntos de Precio",
         "caption": "Cuánto ahorrarías con esta tasa de descuento en un rango de precios.",
         "xLabel": "Precio Original"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
+      },
+      "formulaDiagram": {
+        "title": "Cómo se calcula el descuento",
+        "intro": "Un ejemplo resuelto: un artículo de $120 con 25% de descuento.",
+        "price": "Precio",
+        "discountPercent": "% de descuento",
+        "savings": "Ahorro",
+        "finalRow": "Precio final: ${value}"
+      },
+      "percentComparisonChart": {
+        "title": "Precio final por porcentaje de descuento",
+        "caption": "Mismo artículo de ${price} en cuatro tasas de descuento comunes."
+      },
+      "originalPriceScalingChart": {
+        "title": "Ahorro según el precio original",
+        "caption": "Descuento fijo de {percent}% en cuatro precios reales."
+      },
+      "stackedVsCombinedChart": {
+        "title": "Descuentos apilados vs. un descuento fijo",
+        "caption": "Dos descuentos de 20% y luego 10% vs. un descuento fijo del 30%, mismo artículo de ${price}.",
+        "stacked": "20% luego 10% (apilado)",
+        "flat": "30% fijo",
+        "note": "Los descuentos porcentuales apilados se aplican a un precio ya reducido, por lo que nunca suman una cifra simple."
+      },
+      "taxAfterDiscountDiagram": {
+        "title": "Descuento antes del impuesto",
+        "intro": "Convención minorista de EE. UU.: el descuento se aplica primero y luego el impuesto se calcula sobre el precio reducido.",
+        "original": "Precio original",
+        "afterDiscount": "Después de {percent}% de descuento",
+        "afterTax": "Después de {percent}% de impuesto"
+      },
+      "seasonalRangeChart": {
+        "title": "Rangos de descuento estacionales típicos",
+        "caption": "Rangos documentados del comercio minorista de EE. UU., aplicados al mismo artículo de $120.",
+        "seasons": {
+          "clearance": "Liquidación",
+          "blackFriday": "Black Friday",
+          "backToSchool": "Regreso a clases",
+          "regularSale": "Venta regular"
+        }
+      },
+      "bulkQuantityChart": {
+        "title": "Niveles de descuento por volumen",
+        "caption": "Una estructura de descuento escalonado común, mismo precio unitario base de ${price}.",
+        "tiers": {
+          "single": "1 unidad",
+          "small": "{qty}+ unidades",
+          "medium": "{qty}+ unidades",
+          "large": "{qty}+ unidades"
+        }
+      },
+      "roundNumberPricingDiagram": {
+        "title": "Precios psicológicos",
+        "intro": "Un descuento de {percent}% aplicado a un precio encantador vs. un número redondo.",
+        "charmLabel": "Precio encantador de ${price}",
+        "roundLabel": "Precio redondo de ${price}",
+        "note": "Los minoristas suelen fijar precios justo por debajo de un número redondo por efecto psicológico."
+      },
+      "dollarVsPercentCouponChart": {
+        "title": "Cupón de monto fijo vs. porcentaje",
+        "caption": "Un cupón fijo de ${flat} vs. un cupón de {percent}%, en dos precios a cada lado del punto de equilibrio.",
+        "flatAt": "Artículo de ${price}, ${flat} de descuento",
+        "percentAt": "Artículo de ${price}, {percent}% de descuento"
       }
     },
     "sales-tax-calculator": {
@@ -22451,6 +22576,65 @@
       "sensitivityDiagram": {
         "caption": "Cómo cambia el costo total según el precio del combustible",
         "xLabel": "Precio por unidad"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
+      },
+      "formulaDiagram": {
+        "title": "Cómo se calcula el costo",
+        "intro": "Un ejemplo resuelto: 300 millas a 30 mpg, a $3.50 por galón.",
+        "distance": "Distancia",
+        "efficiency": "Eficiencia",
+        "price": "Precio",
+        "fuelUsedRow": "Combustible usado: {value} galones",
+        "totalCostRow": "Costo total: ${value}"
+      },
+      "efficiencyComparisonChart": {
+        "title": "Costo total por eficiencia de combustible",
+        "caption": "Costo anual para {distance} millas a ${price}/galón, en cinco niveles reales de eficiencia."
+      },
+      "distanceScaleChart": {
+        "title": "Costo total por distancia del viaje",
+        "caption": "A {efficiency} mpg y ${price}/galón.",
+        "labels": {
+          "commute": "Trayecto diario ({miles} mi)",
+          "weekendTrip": "Viaje de fin de semana ({miles} mi)",
+          "roadTrip": "Viaje por carretera ({miles} mi)",
+          "yearly": "Conducción anual ({miles} mi)"
+        }
+      },
+      "annualProjectionChart": {
+        "title": "Costo proyectado en el tiempo",
+        "caption": "A {distance} millas/mes, {efficiency} mpg, ${price}/galón.",
+        "months": "{count} meses"
+      },
+      "priceBandChart": {
+        "title": "Costo total por precio del combustible",
+        "caption": "Para un viaje de {distance} millas a {efficiency} mpg, en cuatro precios reales."
+      },
+      "typeCostComparisonChart": {
+        "title": "Costo por tipo de fuente de energía",
+        "caption": "Mismo viaje de {distance} millas, cuatro referencias promedio típicas de EE. UU., aplicadas a la misma fórmula.",
+        "note": "Las tarifas son promedios típicos de EE. UU. y varían según el vehículo y la ubicación.",
+        "sources": {
+          "gasoline": "Gasolina",
+          "diesel": "Diésel",
+          "hybrid": "Híbrido",
+          "electric": "Eléctrico"
+        }
+      },
+      "unitConversionDiagram": {
+        "title": "MPG ↔ L/100km",
+        "intro": "Las unidades de eficiencia de combustible se convierten directamente con una constante fija.",
+        "mpgLabel": "Millas por galón",
+        "l100kmLabel": "Litros por 100 km",
+        "formula": "L/100km = 235.215 ÷ MPG"
+      },
+      "costPerMileVsKmChart": {
+        "title": "Costo por milla vs. por kilómetro",
+        "caption": "Mismo costo de viaje de ${cost} en {distance} millas, expresado en ambas unidades.",
+        "perMile": "Por milla",
+        "perKm": "Por kilómetro"
       }
     },
     "batch-invoice-calculator": {
@@ -22646,6 +22830,73 @@
         "inputSectionTitle": "Entrada",
         "resultSectionTitle": "Resultado",
         "summarySentence": "{count, plural, one {# factura guardada} other {# facturas guardadas}} por un total de {total}."
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
+      },
+      "formulaDiagram": {
+        "title": "Cómo se calcula el total de una factura",
+        "intro": "Un ejemplo resuelto con dos partidas y 8.5% de impuesto.",
+        "lineTotal": "{qty} × ${price} = total de la partida",
+        "subtotal": "Subtotal (todas las partidas)",
+        "tax": "Impuesto ({percent}%)",
+        "total": "Total"
+      },
+      "lineItemBreakdownChart": {
+        "title": "Desglose de partidas",
+        "caption": "Cantidad × precio unitario de cada partida.",
+        "items": {
+          "consulting": "Horas de consultoría",
+          "supplies": "Suministros de oficina"
+        }
+      },
+      "taxRateComparisonChart": {
+        "title": "Total por tasa de impuesto",
+        "caption": "Mismo subtotal de ${subtotal} con cuatro tasas de impuesto reales."
+      },
+      "batchAccumulationChart": {
+        "title": "Total acumulado en un lote",
+        "caption": "Total acumulado al añadir facturas a un lote.",
+        "invoiceN": "Después de la factura {n}"
+      },
+      "quantityScalingChart": {
+        "title": "Total de la partida por cantidad",
+        "caption": "Mismo precio unitario de ${price} en cuatro cantidades.",
+        "units": "{count} unidades"
+      },
+      "roundingImpactDiagram": {
+        "title": "Redondeo al centavo más cercano",
+        "intro": "El impuesto sobre un subtotal de ${subtotal} al {percent}% se calcula con más precisión de la que permite la moneda.",
+        "rawLabel": "Impuesto calculado sin redondear",
+        "billedLabel": "Monto facturado",
+        "note": "Las facturas redondean el impuesto calculado al centavo más cercano antes de facturar."
+      },
+      "vendorSplitChart": {
+        "title": "Totales por proveedor",
+        "caption": "Dos proveedores en el mismo lote, el total de cada factura.",
+        "vendors": {
+          "acme": "Acme Supplies",
+          "globex": "Globex Corp"
+        }
+      },
+      "averageLineItemChart": {
+        "title": "Valor promedio de partida",
+        "caption": "Cinco partidas reales en un lote y su promedio calculado.",
+        "itemN": "Partida {n}",
+        "average": "Promedio"
+      },
+      "paymentTermsDiagram": {
+        "title": "Condiciones de pago Net 30",
+        "intro": "Una condición de factura común: el pago vence {days} días después de la fecha de emisión.",
+        "issueDate": "Fecha de emisión",
+        "dueDate": "Fecha de vencimiento",
+        "daysLabel": "{days} días"
+      },
+      "discountEarlyPaymentChart": {
+        "title": "Descuento por pago anticipado",
+        "caption": "Una condición común 2/10 neto 30: 2% de descuento si se paga antes.",
+        "fullTerm": "Pagado en plazo completo",
+        "earlyPayment": "Pago anticipado ({percent}% de descuento)"
       }
     },
     "text-to-speech": {
