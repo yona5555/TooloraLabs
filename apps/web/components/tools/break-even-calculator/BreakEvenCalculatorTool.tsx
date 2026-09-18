@@ -17,6 +17,8 @@ import BreakEvenReference from "./BreakEvenReference";
 import BreakEvenSensitivityDiagram from "./BreakEvenSensitivityDiagram";
 import type { BreakEvenMode } from "./types";
 
+const RELATED_TOOLS = ["discount-calculator", "inventory-valuation-calculator", "fuel-cost-calculator"];
+
 const tool = new BreakEvenCalculator();
 
 const DEFAULTS = { fixedCosts: "5000", variableCostPerUnit: "20", pricePerUnit: "45", targetProfit: "10000" };
@@ -249,7 +251,14 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
               <BreakEvenModeTabs mode={mode} onModeChange={handleModeChange} />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="break-even-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="break-even-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t2("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

@@ -13243,6 +13243,22 @@
             "taxLabel": "+$8 tax",
             "totalLabel": "$108 (total)",
             "caption": "Sales tax grows a subtotal into a total — the reverse of a discount, which shrinks a price. $100 subtotal + 8% tax ($8) = $108 total."
+          },
+          "vsVatDiagram": {
+            "title": "Sales Tax vs. VAT: Where the Tax Is Collected",
+            "salesTaxLabel": "US Sales Tax",
+            "vatLabel": "VAT (most other countries)",
+            "stageLabel": "Stage",
+            "taxHereLabel": "Tax here",
+            "noTaxLabel": "No tax",
+            "caption": "Sales tax is collected once, only at the final retail sale. VAT is collected at every production stage along the way."
+          },
+          "rateStackDonut": {
+            "centerLabel": "combined rate",
+            "caption": "A real combined rate from the worked examples: 6.5% state + 1% county + 1.5% city = 9% charged at the register.",
+            "state": "State",
+            "county": "County",
+            "city": "City"
           }
         },
         "examples": {
@@ -13267,7 +13283,20 @@
               "scenario": "Receipt shows $108 total, 8% tax rate — find the pre-tax price",
               "result": "Pre-tax price was $100.00"
             }
-          ]
+          ],
+          "workedExamplesBar": {
+            "title": "Tax Amount by Scenario",
+            "caption": "The tax dollar amount from each worked example above, compared side by side.",
+            "label1": "$50 @ 6%",
+            "label2": "$250 @ 8.875%",
+            "label3": "$80 @ 9%",
+            "label4": "$108 total @ 8% (reverse)"
+          },
+          "noTaxStatesDiagram": {
+            "noTaxLabel": "No statewide sales tax",
+            "typicalLabel": "Typical combined rate",
+            "caption": "Delaware, Montana, New Hampshire, and Oregon charge no statewide sales tax at all — Alaska has no state-level tax either, but allows local municipalities to levy their own."
+          }
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -13378,7 +13407,17 @@
               "name": "Sales Tax Amount",
               "description": "The dollar amount of tax itself — the difference between the pre-tax price and the tax-inclusive total."
             }
-          ]
+          ],
+          "addReverseDiagram": {
+            "addModeLabel": "Add Mode",
+            "reverseModeLabel": "Reverse Mode",
+            "priceLabel": "Price",
+            "totalLabel": "Total",
+            "caption": "Add mode multiplies a known price by (1 + rate) to find the total; Reverse mode divides a known total by (1 + rate) to recover the price."
+          },
+          "rateGauge": {
+            "caption": "New York City's real combined rate (8.875%) sits in the \"typical\" zone for large US cities."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -13400,7 +13439,31 @@
               "title": "Invoicing and Quoting",
               "description": "Businesses quoting a pre-tax price to a customer use this same math to state the tax-inclusive total they'll actually be charged."
             }
-          ]
+          ],
+          "jurisdictionChart": {
+            "title": "Same $100 Item, Different Jurisdictions",
+            "caption": "The same $100 purchase costs a different total depending on where it's bought — from $100 in a no-tax state to $110.25 in Chicago's real combined rate.",
+            "oregon": "Oregon (0%)",
+            "typical": "Typical (7%)",
+            "nyc": "NYC (8.875%)",
+            "chicago": "Chicago (10.25%)"
+          },
+          "nexusTimeline": {
+            "quillLabel": "Quill Corp. v. North Dakota",
+            "wayfairLabel": "South Dakota v. Wayfair, Inc.",
+            "physicalLabel": "Physical presence required",
+            "economicLabel": "Economic nexus — no physical presence needed",
+            "caption": "Before 2018, a seller needed a physical presence in a state to owe its sales tax. Wayfair replaced that with economic nexus, based purely on sales volume."
+          },
+          "invoiceBar": {
+            "title": "A Multi-Item Invoice, Taxed Once",
+            "caption": "Three line items totaling $100, taxed once at the combined 9% rate — the same math this tool performs for any invoice.",
+            "taxLabel": "Tax",
+            "totalLabel": "Total",
+            "item1": "Item A",
+            "item2": "Item B",
+            "item3": "Item C"
+          }
         }
       },
       "errors": {
@@ -13432,6 +13495,9 @@
         "title": "Total Price by Tax Rate",
         "caption": "How the total price rises with the tax rate, for your purchase amount.",
         "xLabel": "Tax Rate"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
       }
     },
     "image-converter": {
@@ -16595,6 +16661,19 @@
             "taxLabel": "Tax",
             "totalLabel": "Total",
             "caption": "The fixed order of invoice math: discount is subtracted from the subtotal first, and tax is calculated on what's left — never on the original subtotal."
+          },
+          "net30Diagram": {
+            "issueLabel": "Issue Date",
+            "dueLabel": "Due Date",
+            "creditPeriodLabel": "14–30 days of interest-free credit",
+            "caption": "The gap between issue and due date is short-term financing the seller extends to the buyer — \"Net 30\" simply names that gap."
+          },
+          "twoExamplesBar": {
+            "title": "The Two Worked Examples, Compared",
+            "taxLabel": "lighter segment = tax",
+            "caption": "Both worked examples' totals, taxable amount and tax shown as one bar each — the second example is smaller pre-tax but pays less tax thanks to its discount.",
+            "label1": "Example 1",
+            "label2": "Example 2"
           }
         },
         "examples": {
@@ -16611,7 +16690,21 @@
               "scenario": "1 item: $1,000 consulting, 20% discount, 10% tax",
               "result": "Discount $200.00 → taxable $800.00 → tax $80.00 → total $880.00"
             }
-          ]
+          ],
+          "breakdownDonut": {
+            "centerLabel": "invoice total",
+            "caption": "Example 2's $880 total is 91% taxable amount and 9% tax — the discount was already subtracted before this split.",
+            "taxable": "Taxable Amount",
+            "tax": "Tax"
+          },
+          "lineBreakdownBar": {
+            "title": "Example 1's Full Build-Up",
+            "caption": "Example 1's two line items plus tax, stacked to show exactly how $598 is reached.",
+            "taxLabel": "Tax",
+            "totalLabel": "Total",
+            "item1": "Design work",
+            "item2": "Hosting"
+          }
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -16722,7 +16815,17 @@
               "name": "Taxable Amount",
               "description": "The subtotal after the discount is subtracted — this, not the original subtotal, is what the tax rate is applied to."
             }
-          ]
+          ],
+          "lineItemDiagram": {
+            "title": "Quantity × Unit Price = Line Total",
+            "lineTotalLabel": "",
+            "caption": "The two real line items from Example 1 — each line's total feeds into the subtotal before any discount or tax is applied.",
+            "item1": "Design work",
+            "item2": "Hosting"
+          },
+          "discountGauge": {
+            "caption": "This tool's worked example uses a 20% discount — a notable but not extreme discount rate."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -16744,7 +16847,36 @@
               "title": "Quotes and Estimates",
               "description": "The same itemized structure doubles as a pre-sale quote, showing a prospective client exactly how a price breaks down."
             }
-          ]
+          ],
+          "recurringChart": {
+            "title": "Recurring Client Billing",
+            "caption": "The same invoice structure and total repeated each billing cycle for a recurring client — consistent tax and discount rules applied automatically every time.",
+            "month1": "Month 1",
+            "month2": "Month 2",
+            "month3": "Month 3",
+            "month4": "Month 4"
+          },
+          "ublDiagram": {
+            "mandatedLabel": "Mandated e-invoicing (UBL/ISO 19845)",
+            "caption": "Structured, machine-readable e-invoicing is now legally required in these regions — accounting software on both ends processes the invoice automatically."
+          },
+          "quoteVsInvoice": {
+            "quoteLabel": "Quote",
+            "invoiceLabel": "Invoice",
+            "quoteTraits": [
+              "Sent before work begins",
+              "No due date",
+              "Not a payment demand",
+              "Can change before acceptance"
+            ],
+            "invoiceTraits": [
+              "Sent after work is delivered",
+              "Has a due date",
+              "A formal payment demand",
+              "Fixed once issued"
+            ],
+            "caption": "Same itemized math, different purpose: a quote proposes a price before the sale, an invoice demands payment after it."
+          }
         }
       },
       "shareExport": {
@@ -16781,6 +16913,9 @@
         "caption": "How much the discount saves your client on this invoice.",
         "beforeLabel": "Without Discount",
         "afterLabel": "With Discount"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
       }
     },
     "inventory-valuation-calculator": {
@@ -16874,6 +17009,28 @@
             "newestLabel": "Newest",
             "outLabel": "Sold first",
             "caption": "The same three purchase layers, drawn down in opposite order: FIFO consumes the oldest (bottom) layer first; LIFO consumes the newest (top) layer first."
+          },
+          "threeMethodBar": {
+            "title": "Ending Inventory Value by Method",
+            "caption": "Same purchase history (10 @ $5, 10 @ $8), 12 units sold — the three costing methods give three different ending values.",
+            "weightedAvg": "Weighted-avg"
+          },
+          "risingPriceDiagram": {
+            "fifoLabel": "FIFO in Rising Prices",
+            "lifoLabel": "LIFO in Rising Prices",
+            "fifoTraits": [
+              "Cheaper cost → COGS",
+              "Higher reported profit",
+              "Higher tax bill",
+              "Higher ending inventory value"
+            ],
+            "lifoTraits": [
+              "Pricier cost → COGS",
+              "Lower reported profit",
+              "Lower tax bill",
+              "Lower, stale-looking inventory value"
+            ],
+            "caption": "The same rising-price purchase history produces opposite effects on reported profit depending on which method is chosen."
           }
         },
         "examples": {
@@ -16890,7 +17047,16 @@
               "scenario": "Buy 10 units @ $5, sell none this period",
               "result": "All three methods agree: ending value $50"
             }
-          ]
+          ],
+          "valueLineChart": {
+            "title": "Ending Value as Units Sold Increases",
+            "caption": "As more units are sold from the same two batches, FIFO and LIFO's ending inventory values diverge further apart.",
+            "xLabel": "Units sold →"
+          },
+          "consistencyDonut": {
+            "centerLabel": "all 3 methods agree",
+            "caption": "When nothing is sold, there's nothing to draw down differently — all three costing methods report the identical $50 ending value."
+          }
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -17001,7 +17167,18 @@
               "name": "Ending Units",
               "description": "Units purchased minus units sold — the physical quantity remaining, the same across all three costing methods."
             }
-          ]
+          ],
+          "batchDiagram": {
+            "title": "Purchase Batches, Oldest to Newest",
+            "caption": "FIFO draws down from the oldest batch first; LIFO draws down from the newest batch first — same physical stock, opposite draw order.",
+            "fifoLabel": "FIFO draws from here",
+            "lifoLabel": "LIFO draws from here",
+            "batch1": "Batch 1",
+            "batch2": "Batch 2"
+          },
+          "endingUnitsGauge": {
+            "caption": "20 units purchased, 12 sold this period, leaving 8 units on hand — the same physical count regardless of costing method."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -17023,7 +17200,23 @@
               "title": "Comparing Costing Method Impact",
               "description": "Running the same purchase history through all three methods side by side shows exactly how much a costing choice would change reported figures."
             }
-          ]
+          ],
+          "taxImpactBar": {
+            "title": "Cost of Goods Sold by Method",
+            "caption": "For the same 12 units sold, LIFO assigns a higher COGS than FIFO during rising prices — directly shrinking reported profit and taxable income.",
+            "cogsLabel": "Cost of Goods Sold"
+          },
+          "thresholdDiagram": {
+            "currentLabel": "Current stock",
+            "thresholdLabel": "Reorder threshold",
+            "caption": "Once the current stock count crosses below the reorder threshold, this tool flags the item as low stock."
+          },
+          "rawMaterialsFlow": {
+            "rawLabel": "Raw materials, varying prices",
+            "logicLabel": "FIFO / LIFO / weighted-avg",
+            "finishedLabel": "Valued finished-goods inventory",
+            "caption": "Manufacturing raw materials bought at different times and prices are valued with the exact same costing logic as finished retail stock."
+          }
         }
       },
       "shareExport": {
@@ -17053,6 +17246,9 @@
         "caption": "How each item's purchased units split between sold and still on hand.",
         "soldLabel": "Units Sold",
         "endingLabel": "Ending Units"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
       }
     },
     "break-even-calculator": {
@@ -17164,6 +17360,28 @@
             "profitLabel": "Profit",
             "lossLabel": "Loss",
             "caption": "The classic CVP chart: fixed costs set a flat floor, total cost rises with volume, revenue rises faster — the crossing point is the break-even point, splitting the chart into a loss zone and a profit zone."
+          },
+          "businessTypeDiagram": {
+            "softwareLabel": "High Fixed Cost, High Margin (Software)",
+            "lowMarginLabel": "Low Fixed Cost, Thin Margin",
+            "softwareTraits": [
+              "Near-zero cost per extra user",
+              "Unprofitable at low volume",
+              "Extremely profitable at scale"
+            ],
+            "lowMarginTraits": [
+              "Breaks even quickly",
+              "Profit scales up slowly",
+              "Less sensitive to volume swings"
+            ],
+            "caption": "The same break-even math produces very different growth curves depending on a business's cost structure."
+          },
+          "marginBar": {
+            "title": "Where the $50 Price Goes",
+            "priceLabel": "Price",
+            "variableCostLabel": "Variable cost",
+            "marginLabel": "Contribution margin",
+            "caption": "Of every $50 sale, $20 covers the variable cost and $30 becomes contribution margin — the amount that goes toward fixed costs, then profit."
           }
         },
         "examples": {
@@ -17180,7 +17398,20 @@
               "scenario": "Same numbers, but with a $5,000 target profit",
               "result": "500 units needed ($25,000 revenue)"
             }
-          ]
+          ],
+          "scenarioCompareBar": {
+            "title": "Units Needed: Break-Even vs. Target Profit",
+            "caption": "Adding a $5,000 profit goal on top of fixed costs raises the units needed from 334 to 500.",
+            "label1": "Break-even only",
+            "label2": "With $5,000 profit goal"
+          },
+          "revenueDonut": {
+            "centerLabel": "revenue at 500 units",
+            "caption": "The $25,000 revenue from selling 500 units splits into fixed costs, variable costs, and the $5,000 target profit.",
+            "fixed": "Fixed Costs",
+            "variable": "Variable Costs",
+            "profit": "Target Profit"
+          }
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -17291,7 +17522,16 @@
               "name": "Contribution Margin",
               "description": "Price minus variable cost per unit — the amount each sale contributes toward covering fixed costs, before any profit begins."
             }
-          ]
+          ],
+          "marginGauge": {
+            "caption": "This tool's worked example has a 60% contribution margin ratio ($30 margin ÷ $50 price) — a healthy ratio by most standards."
+          },
+          "accumulationDiagram": {
+            "title": "Contribution Accumulating Toward Fixed Costs",
+            "fixedCostLabel": "Fixed costs",
+            "breakEvenLabel": "Break-even",
+            "caption": "Each unit adds $30 in contribution margin — accumulated contribution reaches the $10,000 fixed-cost line at exactly 334 units."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -17313,7 +17553,25 @@
               "title": "Investment and Expansion Decisions",
               "description": "Evaluating whether added fixed costs (new equipment, a new hire) are justified by the additional sales volume they would require."
             }
-          ]
+          ],
+          "priceImpactBar": {
+            "title": "Raising Price Lowers the Break-Even Point",
+            "caption": "Raising the price from $50 to $55 (with the same $20 variable cost) drops the break-even point from 334 units to 286 — a real example of a pricing decision's impact."
+          },
+          "monthlyPaceChart": {
+            "title": "Monthly Sales Pace to Break Even",
+            "breakEvenLabel": "334 units — break-even",
+            "caption": "Spreading 334 units evenly across 4 months means selling roughly 84 units per month to break even right on schedule.",
+            "month1": "Month 1",
+            "month2": "Month 2",
+            "month3": "Month 3",
+            "month4": "Month 4"
+          },
+          "fixedCostAddition": {
+            "beforeLabel": "Before new equipment",
+            "afterLabel": "After +$2,000 fixed cost",
+            "caption": "Adding $2,000 in new fixed costs (like equipment) raises the break-even point from 334 to 400 units — this tool answers exactly how much extra volume a fixed-cost decision requires."
+          }
         }
       },
       "costStructureDiagram": {
@@ -17325,6 +17583,9 @@
         "title": "Break-Even Sensitivity to Price",
         "caption": "How many units you'd need to sell at different prices, holding costs constant.",
         "xLabel": "Price per Unit"
+      },
+      "relatedTools": {
+        "title": "Related Business Tools"
       }
     },
     "graphing-calculator": {

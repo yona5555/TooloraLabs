@@ -17,6 +17,8 @@ import SalesTaxRateComparisonBarDiagram from "./SalesTaxRateComparisonBarDiagram
 import SalesTaxTotalByRateDiagram from "./SalesTaxTotalByRateDiagram";
 import type { SalesTaxMode, SalesTaxResult as Result } from "./types";
 
+const RELATED_TOOLS = ["discount-calculator", "invoice-generator", "batch-invoice-calculator"];
+
 const tool = new SalesTaxCalculatorTool();
 
 const ADD_DEFAULTS = { price: "100", taxRate: "8" };
@@ -189,7 +191,14 @@ export default function SalesTaxCalculator({ education }: { education: ReactNode
             />
           }
           result={<SalesTaxResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />}
-          sidebar={<RelatedToolsSidebar currentSlug="sales-tax-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="sales-tax-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

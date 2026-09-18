@@ -13243,6 +13243,22 @@
             "taxLabel": "+8 $ de impuesto",
             "totalLabel": "108 $ (total)",
             "caption": "El impuesto sobre las ventas hace crecer un subtotal hasta convertirlo en un total — lo contrario de un descuento, que reduce un precio. 100 $ de subtotal + 8 % de impuesto (8 $) = 108 $ de total."
+          },
+          "vsVatDiagram": {
+            "title": "Impuesto sobre ventas vs. IVA: dónde se cobra el impuesto",
+            "salesTaxLabel": "Impuesto sobre ventas de EE. UU.",
+            "vatLabel": "IVA (la mayoría de los demás países)",
+            "stageLabel": "Etapa",
+            "taxHereLabel": "Impuesto aquí",
+            "noTaxLabel": "Sin impuesto",
+            "caption": "El impuesto sobre ventas se cobra una sola vez, solo en la venta minorista final. El IVA se cobra en cada etapa de producción a lo largo de la cadena."
+          },
+          "rateStackDonut": {
+            "centerLabel": "tasa combinada",
+            "caption": "Una tasa combinada real de los ejemplos resueltos: 6.5% estatal + 1% condado + 1.5% ciudad = 9% cobrado en caja.",
+            "state": "Estado",
+            "county": "Condado",
+            "city": "Ciudad"
           }
         },
         "examples": {
@@ -13267,7 +13283,20 @@
               "scenario": "El recibo muestra un total de 108 $, con una tasa del 8 % — hallar el precio antes de impuestos",
               "result": "El precio antes de impuestos era de 100,00 $"
             }
-          ]
+          ],
+          "workedExamplesBar": {
+            "title": "Monto del impuesto por escenario",
+            "caption": "El monto del impuesto en dólares de cada ejemplo resuelto anterior, comparado lado a lado.",
+            "label1": "$50 al 6%",
+            "label2": "$250 al 8.875%",
+            "label3": "$80 al 9%",
+            "label4": "Total $108 al 8% (inverso)"
+          },
+          "noTaxStatesDiagram": {
+            "noTaxLabel": "Sin impuesto sobre ventas estatal",
+            "typicalLabel": "Tasa combinada típica",
+            "caption": "Delaware, Montana, New Hampshire y Oregón no cobran ningún impuesto sobre ventas estatal — Alaska tampoco tiene impuesto a nivel estatal, pero permite que los municipios locales impongan el suyo propio."
+          }
         },
         "faq": {
           "title": "Preguntas frecuentes",
@@ -13378,7 +13407,17 @@
               "name": "Monto del Impuesto sobre Ventas",
               "description": "El monto en dinero del impuesto en sí — la diferencia entre el precio antes de impuestos y el total con impuesto incluido."
             }
-          ]
+          ],
+          "addReverseDiagram": {
+            "addModeLabel": "Modo Sumar",
+            "reverseModeLabel": "Modo Inverso",
+            "priceLabel": "Precio",
+            "totalLabel": "Total",
+            "caption": "El modo Sumar multiplica un precio conocido por (1 + tasa) para hallar el total; el modo Inverso divide un total conocido entre (1 + tasa) para recuperar el precio."
+          },
+          "rateGauge": {
+            "caption": "La tasa combinada real de la ciudad de Nueva York (8.875%) se ubica en la zona \"típica\" para grandes ciudades de EE. UU."
+          }
         },
         "applications": {
           "title": "Aplicaciones",
@@ -13400,7 +13439,31 @@
               "title": "Facturación y Cotizaciones",
               "description": "Las empresas que cotizan un precio antes de impuestos a un cliente usan esta misma matemática para indicar el total con impuesto incluido que realmente se les cobrará."
             }
-          ]
+          ],
+          "jurisdictionChart": {
+            "title": "Mismo artículo de $100, distintas jurisdicciones",
+            "caption": "La misma compra de $100 cuesta un total distinto según dónde se compre — desde $100 en un estado sin impuesto hasta $110.25 con la tasa combinada real de Chicago.",
+            "oregon": "Oregón (0%)",
+            "typical": "Típico (7%)",
+            "nyc": "NYC (8.875%)",
+            "chicago": "Chicago (10.25%)"
+          },
+          "nexusTimeline": {
+            "quillLabel": "Quill Corp. v. North Dakota",
+            "wayfairLabel": "South Dakota v. Wayfair, Inc.",
+            "physicalLabel": "Presencia física requerida",
+            "economicLabel": "Nexo económico — sin necesidad de presencia física",
+            "caption": "Antes de 2018, un vendedor necesitaba presencia física en un estado para deber su impuesto sobre ventas. Wayfair lo reemplazó por el nexo económico, basado únicamente en el volumen de ventas."
+          },
+          "invoiceBar": {
+            "title": "Una factura con varios artículos, gravada una sola vez",
+            "caption": "Tres partidas que suman $100, gravadas una sola vez a la tasa combinada del 9% — el mismo cálculo que esta herramienta realiza para cualquier factura.",
+            "taxLabel": "Impuesto",
+            "totalLabel": "Total",
+            "item1": "Artículo A",
+            "item2": "Artículo B",
+            "item3": "Artículo C"
+          }
         }
       },
       "errors": {
@@ -13432,6 +13495,9 @@
         "title": "Precio Total por Tasa de Impuesto",
         "caption": "Cómo sube el precio total con la tasa de impuesto, para tu monto de compra.",
         "xLabel": "Tasa de Impuesto"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
       }
     },
     "image-converter": {
@@ -16595,6 +16661,19 @@
             "taxLabel": "Impuesto",
             "totalLabel": "Total",
             "caption": "El orden fijo de la aritmética de una factura: el descuento se resta primero del subtotal, y el impuesto se calcula sobre lo que queda — nunca sobre el subtotal original."
+          },
+          "net30Diagram": {
+            "issueLabel": "Fecha de emisión",
+            "dueLabel": "Fecha de vencimiento",
+            "creditPeriodLabel": "14–30 días de crédito sin intereses",
+            "caption": "La brecha entre la fecha de emisión y la de vencimiento es un financiamiento a corto plazo que el vendedor otorga al comprador — \"Net 30\" simplemente nombra esa brecha."
+          },
+          "twoExamplesBar": {
+            "title": "Los dos ejemplos resueltos, comparados",
+            "taxLabel": "segmento más claro = impuesto",
+            "caption": "Los totales de ambos ejemplos resueltos, mostrando el monto gravable y el impuesto en una barra cada uno — el segundo ejemplo es menor antes de impuestos pero paga menos impuesto gracias a su descuento.",
+            "label1": "Ejemplo 1",
+            "label2": "Ejemplo 2"
           }
         },
         "examples": {
@@ -16611,7 +16690,21 @@
               "scenario": "1 artículo: 1000 $ de consultoría, 20 % de descuento, 10 % de impuesto",
               "result": "Descuento 200,00 $ → base imponible 800,00 $ → impuesto 80,00 $ → total 880,00 $"
             }
-          ]
+          ],
+          "breakdownDonut": {
+            "centerLabel": "total de la factura",
+            "caption": "El total de $880 del Ejemplo 2 es 91% monto gravable y 9% impuesto — el descuento ya se restó antes de esta división.",
+            "taxable": "Monto gravable",
+            "tax": "Impuesto"
+          },
+          "lineBreakdownBar": {
+            "title": "La construcción completa del Ejemplo 1",
+            "caption": "Las dos partidas del Ejemplo 1 más el impuesto, apiladas para mostrar exactamente cómo se llega a $598.",
+            "taxLabel": "Impuesto",
+            "totalLabel": "Total",
+            "item1": "Trabajo de diseño",
+            "item2": "Hosting"
+          }
         },
         "faq": {
           "title": "Preguntas frecuentes",
@@ -16722,7 +16815,17 @@
               "name": "Monto Gravable",
               "description": "El subtotal después de restar el descuento — esto, no el subtotal original, es sobre lo que se aplica la tasa de impuesto."
             }
-          ]
+          ],
+          "lineItemDiagram": {
+            "title": "Cantidad × Precio unitario = Total de línea",
+            "lineTotalLabel": "",
+            "caption": "Las dos partidas reales del Ejemplo 1 — el total de cada línea alimenta el subtotal antes de aplicar cualquier descuento o impuesto.",
+            "item1": "Trabajo de diseño",
+            "item2": "Hosting"
+          },
+          "discountGauge": {
+            "caption": "El ejemplo resuelto de esta herramienta usa un descuento del 20% — una tasa de descuento notable pero no extrema."
+          }
         },
         "applications": {
           "title": "Aplicaciones",
@@ -16744,7 +16847,36 @@
               "title": "Cotizaciones y Presupuestos",
               "description": "La misma estructura detallada sirve también como cotización previa a la venta, mostrando a un cliente potencial exactamente cómo se desglosa un precio."
             }
-          ]
+          ],
+          "recurringChart": {
+            "title": "Facturación recurrente de clientes",
+            "caption": "La misma estructura y total de factura se repite en cada ciclo de facturación para un cliente recurrente — las mismas reglas de impuesto y descuento se aplican automáticamente cada vez.",
+            "month1": "Mes 1",
+            "month2": "Mes 2",
+            "month3": "Mes 3",
+            "month4": "Mes 4"
+          },
+          "ublDiagram": {
+            "mandatedLabel": "Facturación electrónica obligatoria (UBL/ISO 19845)",
+            "caption": "La facturación electrónica estructurada y legible por máquina ahora es legalmente obligatoria en estas regiones — el software contable de ambos extremos procesa la factura automáticamente."
+          },
+          "quoteVsInvoice": {
+            "quoteLabel": "Cotización",
+            "invoiceLabel": "Factura",
+            "quoteTraits": [
+              "Enviada antes de iniciar el trabajo",
+              "Sin fecha de vencimiento",
+              "No es una exigencia de pago",
+              "Puede cambiar antes de aceptarse"
+            ],
+            "invoiceTraits": [
+              "Enviada después de entregar el trabajo",
+              "Tiene fecha de vencimiento",
+              "Una exigencia formal de pago",
+              "Fija una vez emitida"
+            ],
+            "caption": "Mismo cálculo detallado, propósito distinto: una cotización propone un precio antes de la venta, una factura exige el pago después."
+          }
         }
       },
       "shareExport": {
@@ -16781,6 +16913,9 @@
         "caption": "Cuánto ahorra el descuento a tu cliente en esta factura.",
         "beforeLabel": "Sin Descuento",
         "afterLabel": "Con Descuento"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
       }
     },
     "inventory-valuation-calculator": {
@@ -16874,6 +17009,28 @@
             "newestLabel": "Más reciente",
             "outLabel": "Se vende primero",
             "caption": "Las mismas tres capas de compra, consumidas en orden opuesto: FIFO agota primero la capa más antigua (abajo); LIFO agota primero la más reciente (arriba)."
+          },
+          "threeMethodBar": {
+            "title": "Valor final del inventario por método",
+            "caption": "Mismo historial de compras (10 a $5, 10 a $8), 12 unidades vendidas — los tres métodos de costeo dan tres valores finales distintos.",
+            "weightedAvg": "Promedio ponderado"
+          },
+          "risingPriceDiagram": {
+            "fifoLabel": "FIFO con precios al alza",
+            "lifoLabel": "LIFO con precios al alza",
+            "fifoTraits": [
+              "Costo más barato → COGS",
+              "Mayor ganancia reportada",
+              "Mayor factura de impuestos",
+              "Mayor valor final de inventario"
+            ],
+            "lifoTraits": [
+              "Costo más caro → COGS",
+              "Menor ganancia reportada",
+              "Menor factura de impuestos",
+              "Valor de inventario menor y de aspecto obsoleto"
+            ],
+            "caption": "El mismo historial de compras con precios al alza produce efectos opuestos en la ganancia reportada según el método elegido."
           }
         },
         "examples": {
@@ -16890,7 +17047,16 @@
               "scenario": "Compra 10 unidades a $5, no vende nada en este período",
               "result": "Los tres métodos coinciden: valor final $50"
             }
-          ]
+          ],
+          "valueLineChart": {
+            "title": "Valor final al aumentar las unidades vendidas",
+            "caption": "A medida que se venden más unidades de los mismos dos lotes, los valores finales de inventario de FIFO y LIFO se separan aún más.",
+            "xLabel": "Unidades vendidas →"
+          },
+          "consistencyDonut": {
+            "centerLabel": "los 3 métodos coinciden",
+            "caption": "Cuando no se vende nada, no hay nada que consumir de forma distinta — los tres métodos de costeo reportan el mismo valor final de $50."
+          }
         },
         "faq": {
           "title": "Preguntas frecuentes",
@@ -17001,7 +17167,18 @@
               "name": "Unidades Finales",
               "description": "Unidades compradas menos unidades vendidas — la cantidad física restante, igual en los tres métodos de valoración."
             }
-          ]
+          ],
+          "batchDiagram": {
+            "title": "Lotes de compra, del más antiguo al más nuevo",
+            "caption": "FIFO consume primero el lote más antiguo; LIFO consume primero el lote más nuevo — mismo stock físico, orden de consumo opuesto.",
+            "fifoLabel": "FIFO consume desde aquí",
+            "lifoLabel": "LIFO consume desde aquí",
+            "batch1": "Lote 1",
+            "batch2": "Lote 2"
+          },
+          "endingUnitsGauge": {
+            "caption": "20 unidades compradas, 12 vendidas este período, quedando 8 unidades — el mismo conteo físico sin importar el método de costeo."
+          }
         },
         "applications": {
           "title": "Aplicaciones",
@@ -17023,7 +17200,23 @@
               "title": "Comparar el Impacto del Método de Valoración",
               "description": "Ejecutar el mismo historial de compras a través de los tres métodos lado a lado muestra exactamente cuánto cambiaría una elección de valoración las cifras reportadas."
             }
-          ]
+          ],
+          "taxImpactBar": {
+            "title": "Costo de bienes vendidos por método",
+            "caption": "Para las mismas 12 unidades vendidas, LIFO asigna un COGS más alto que FIFO durante precios al alza — reduciendo directamente la ganancia reportada y el ingreso gravable.",
+            "cogsLabel": "Costo de bienes vendidos"
+          },
+          "thresholdDiagram": {
+            "currentLabel": "Stock actual",
+            "thresholdLabel": "Umbral de reorden",
+            "caption": "Una vez que el stock actual cae por debajo del umbral de reorden, esta herramienta marca el artículo como stock bajo."
+          },
+          "rawMaterialsFlow": {
+            "rawLabel": "Materias primas, precios variables",
+            "logicLabel": "FIFO / LIFO / promedio ponderado",
+            "finishedLabel": "Inventario de bienes terminados valuado",
+            "caption": "Las materias primas de fabricación compradas en distintos momentos y precios se valúan con exactamente la misma lógica de costeo que el stock minorista terminado."
+          }
         }
       },
       "shareExport": {
@@ -17053,6 +17246,9 @@
         "caption": "Cómo se dividen las unidades compradas de cada artículo entre vendidas y aún en existencia.",
         "soldLabel": "Unidades Vendidas",
         "endingLabel": "Unidades Finales"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
       }
     },
     "break-even-calculator": {
@@ -17164,6 +17360,28 @@
             "profitLabel": "Utilidad",
             "lossLabel": "Pérdida",
             "caption": "El gráfico clásico de CVU: los costos fijos marcan un piso constante, el costo total aumenta con el volumen, los ingresos aumentan más rápido — el punto de cruce es el punto de equilibrio, que divide el gráfico en una zona de pérdida y una zona de utilidad."
+          },
+          "businessTypeDiagram": {
+            "softwareLabel": "Costo fijo alto, margen alto (software)",
+            "lowMarginLabel": "Costo fijo bajo, margen escaso",
+            "softwareTraits": [
+              "Costo casi nulo por usuario adicional",
+              "No rentable a bajo volumen",
+              "Extremadamente rentable a escala"
+            ],
+            "lowMarginTraits": [
+              "Llega al punto de equilibrio rápido",
+              "El beneficio escala lentamente",
+              "Menos sensible a las variaciones de volumen"
+            ],
+            "caption": "La misma matemática del punto de equilibrio produce curvas de crecimiento muy distintas según la estructura de costos del negocio."
+          },
+          "marginBar": {
+            "title": "A dónde va el precio de $50",
+            "priceLabel": "Precio",
+            "variableCostLabel": "Costo variable",
+            "marginLabel": "Margen de contribución",
+            "caption": "De cada venta de $50, $20 cubren el costo variable y $30 se convierten en margen de contribución — el monto que va hacia los costos fijos y luego la ganancia."
           }
         },
         "examples": {
@@ -17180,7 +17398,20 @@
               "scenario": "Los mismos números, pero con una utilidad objetivo de 5.000 $",
               "result": "Se necesitan 500 unidades (25.000 $ de ingresos)"
             }
-          ]
+          ],
+          "scenarioCompareBar": {
+            "title": "Unidades necesarias: equilibrio vs. meta de ganancia",
+            "caption": "Añadir una meta de ganancia de $5,000 sobre los costos fijos eleva las unidades necesarias de 334 a 500.",
+            "label1": "Solo equilibrio",
+            "label2": "Con meta de $5,000"
+          },
+          "revenueDonut": {
+            "centerLabel": "ingresos con 500 unidades",
+            "caption": "Los $25,000 de ingresos por vender 500 unidades se dividen en costos fijos, costos variables y la meta de ganancia de $5,000.",
+            "fixed": "Costos fijos",
+            "variable": "Costos variables",
+            "profit": "Meta de ganancia"
+          }
         },
         "faq": {
           "title": "Preguntas frecuentes",
@@ -17291,7 +17522,16 @@
               "name": "Margen de Contribución",
               "description": "Precio menos costo variable por unidad — el monto que cada venta aporta para cubrir los costos fijos, antes de que comience cualquier ganancia."
             }
-          ]
+          ],
+          "marginGauge": {
+            "caption": "El ejemplo resuelto de esta herramienta tiene una razón de margen de contribución del 60% ($30 margen ÷ $50 precio) — una razón saludable según la mayoría de los estándares."
+          },
+          "accumulationDiagram": {
+            "title": "Contribución acumulándose hacia los costos fijos",
+            "fixedCostLabel": "Costos fijos",
+            "breakEvenLabel": "Punto de equilibrio",
+            "caption": "Cada unidad añade $30 de margen de contribución — la contribución acumulada alcanza la línea de costos fijos de $10,000 en exactamente 334 unidades."
+          }
         },
         "applications": {
           "title": "Aplicaciones",
@@ -17313,7 +17553,25 @@
               "title": "Decisiones de Inversión y Expansión",
               "description": "Evaluar si los costos fijos adicionales (nuevo equipo, una nueva contratación) se justifican por el volumen de ventas adicional que requerirían."
             }
-          ]
+          ],
+          "priceImpactBar": {
+            "title": "Subir el precio reduce el punto de equilibrio",
+            "caption": "Subir el precio de $50 a $55 (con el mismo costo variable de $20) baja el punto de equilibrio de 334 a 286 unidades — un ejemplo real del impacto de una decisión de precios."
+          },
+          "monthlyPaceChart": {
+            "title": "Ritmo mensual de ventas para llegar al equilibrio",
+            "breakEvenLabel": "334 unidades — equilibrio",
+            "caption": "Distribuir 334 unidades uniformemente en 4 meses significa vender aproximadamente 84 unidades por mes para llegar al equilibrio según lo previsto.",
+            "month1": "Mes 1",
+            "month2": "Mes 2",
+            "month3": "Mes 3",
+            "month4": "Mes 4"
+          },
+          "fixedCostAddition": {
+            "beforeLabel": "Antes del nuevo equipo",
+            "afterLabel": "Después de +$2,000 en costo fijo",
+            "caption": "Añadir $2,000 en nuevos costos fijos (como equipo) eleva el punto de equilibrio de 334 a 400 unidades — esta herramienta responde exactamente cuánto volumen adicional requiere una decisión de costo fijo."
+          }
         }
       },
       "costStructureDiagram": {
@@ -17325,6 +17583,9 @@
         "title": "Sensibilidad del Equilibrio al Precio",
         "caption": "Cuántas unidades necesitarías vender a diferentes precios, manteniendo los costos constantes.",
         "xLabel": "Precio por Unidad"
+      },
+      "relatedTools": {
+        "title": "Herramientas de negocio relacionadas"
       }
     },
     "graphing-calculator": {

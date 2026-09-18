@@ -5,6 +5,15 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CostFlowDiagram from "./CostFlowDiagram";
+import InventoryThreeMethodCompareBar from "./InventoryThreeMethodCompareBar";
+import InventoryRisingPriceEffectDiagram from "./InventoryRisingPriceEffectDiagram";
+import InventoryPurchaseBatchDiagram from "./InventoryPurchaseBatchDiagram";
+import InventoryEndingUnitsGauge from "./InventoryEndingUnitsGauge";
+import InventoryMethodValueLineChart from "./InventoryMethodValueLineChart";
+import InventoryNoSalesConsistencyDonut from "./InventoryNoSalesConsistencyDonut";
+import InventoryTaxImpactBar from "./InventoryTaxImpactBar";
+import InventoryLowStockThresholdDiagram from "./InventoryLowStockThresholdDiagram";
+import InventoryRawMaterialsFlowDiagram from "./InventoryRawMaterialsFlowDiagram";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -32,6 +41,22 @@ export default async function InventoryEducation() {
           outLabel={t("intro.diagram.outLabel")}
           caption={t("intro.diagram.caption")}
         />
+        <InventoryThreeMethodCompareBar
+          title={t("intro.threeMethodBar.title")}
+          caption={t("intro.threeMethodBar.caption")}
+          bars={[
+            { key: "fifo", label: "FIFO", value: 64, colorClass: "fill-violet-500 dark:fill-violet-400" },
+            { key: "wavg", label: t("intro.threeMethodBar.weightedAvg"), value: 52, colorClass: "fill-violet-400 dark:fill-violet-500" },
+            { key: "lifo", label: "LIFO", value: 40, colorClass: "fill-violet-300 dark:fill-violet-600" },
+          ]}
+        />
+        <InventoryRisingPriceEffectDiagram
+          fifoLabel={t("intro.risingPriceDiagram.fifoLabel")}
+          lifoLabel={t("intro.risingPriceDiagram.lifoLabel")}
+          fifoTraits={t.raw("intro.risingPriceDiagram.fifoTraits") as string[]}
+          lifoTraits={t.raw("intro.risingPriceDiagram.lifoTraits") as string[]}
+          caption={t("intro.risingPriceDiagram.caption")}
+        />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -44,6 +69,21 @@ export default async function InventoryEducation() {
             </div>
           ))}
         </dl>
+        <InventoryPurchaseBatchDiagram
+          title={t("variables.batchDiagram.title")}
+          caption={t("variables.batchDiagram.caption")}
+          fifoLabel={t("variables.batchDiagram.fifoLabel")}
+          lifoLabel={t("variables.batchDiagram.lifoLabel")}
+          batches={[
+            { key: "b1", label: t("variables.batchDiagram.batch1"), qty: 10, unitCost: 5 },
+            { key: "b2", label: t("variables.batchDiagram.batch2"), qty: 10, unitCost: 8 },
+          ]}
+        />
+        <InventoryEndingUnitsGauge
+          valueLabel="8"
+          caption={t("variables.endingUnitsGauge.caption")}
+          captionColorClass="fill-emerald-600 dark:fill-emerald-400"
+        />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -66,6 +106,28 @@ export default async function InventoryEducation() {
             </tbody>
           </table>
         </div>
+        <InventoryMethodValueLineChart
+          title={t("examples.valueLineChart.title")}
+          caption={t("examples.valueLineChart.caption")}
+          fifoLabel="FIFO"
+          lifoLabel="LIFO"
+          xLabel={t("examples.valueLineChart.xLabel")}
+          fifoSeries={[
+            { unitsSold: 0, value: 130 },
+            { unitsSold: 4, value: 110 },
+            { unitsSold: 8, value: 90 },
+            { unitsSold: 10, value: 80 },
+            { unitsSold: 12, value: 64 },
+          ]}
+          lifoSeries={[
+            { unitsSold: 0, value: 130 },
+            { unitsSold: 4, value: 98 },
+            { unitsSold: 8, value: 66 },
+            { unitsSold: 10, value: 50 },
+            { unitsSold: 12, value: 40 },
+          ]}
+        />
+        <InventoryNoSalesConsistencyDonut centerLabel={t("examples.consistencyDonut.centerLabel")} caption={t("examples.consistencyDonut.caption")} />
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -78,6 +140,26 @@ export default async function InventoryEducation() {
             </div>
           ))}
         </div>
+        <InventoryTaxImpactBar
+          title={t("applications.taxImpactBar.title")}
+          caption={t("applications.taxImpactBar.caption")}
+          cogsLabel={t("applications.taxImpactBar.cogsLabel")}
+          columns={[
+            { key: "fifo", label: "FIFO", cogs: 66, colorClass: "fill-amber-400 dark:fill-amber-400/80" },
+            { key: "lifo", label: "LIFO", cogs: 90, colorClass: "fill-amber-600 dark:fill-amber-300" },
+          ]}
+        />
+        <InventoryLowStockThresholdDiagram
+          currentLabel={t("applications.thresholdDiagram.currentLabel")}
+          thresholdLabel={t("applications.thresholdDiagram.thresholdLabel")}
+          caption={t("applications.thresholdDiagram.caption")}
+        />
+        <InventoryRawMaterialsFlowDiagram
+          rawLabel={t("applications.rawMaterialsFlow.rawLabel")}
+          logicLabel={t("applications.rawMaterialsFlow.logicLabel")}
+          finishedLabel={t("applications.rawMaterialsFlow.finishedLabel")}
+          caption={t("applications.rawMaterialsFlow.caption")}
+        />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

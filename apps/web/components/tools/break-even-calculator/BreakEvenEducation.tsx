@@ -5,6 +5,15 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import CvpDiagram from "./CvpDiagram";
+import BreakEvenBusinessTypeDiagram from "./BreakEvenBusinessTypeDiagram";
+import BreakEvenContributionMarginBar from "./BreakEvenContributionMarginBar";
+import BreakEvenMarginRatioGauge from "./BreakEvenMarginRatioGauge";
+import BreakEvenFixedCostAccumulationDiagram from "./BreakEvenFixedCostAccumulationDiagram";
+import BreakEvenTwoScenarioCompareBar from "./BreakEvenTwoScenarioCompareBar";
+import BreakEvenRevenueDonut from "./BreakEvenRevenueDonut";
+import BreakEvenPriceChangeImpactBar from "./BreakEvenPriceChangeImpactBar";
+import BreakEvenMonthlyPaceLineChart from "./BreakEvenMonthlyPaceLineChart";
+import BreakEvenFixedCostAdditionDiagram from "./BreakEvenFixedCostAdditionDiagram";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -32,6 +41,20 @@ export default async function BreakEvenEducation() {
           lossLabel={t("intro.diagram.lossLabel")}
           caption={t("intro.diagram.caption")}
         />
+        <BreakEvenBusinessTypeDiagram
+          softwareLabel={t("intro.businessTypeDiagram.softwareLabel")}
+          lowMarginLabel={t("intro.businessTypeDiagram.lowMarginLabel")}
+          softwareTraits={t.raw("intro.businessTypeDiagram.softwareTraits") as string[]}
+          lowMarginTraits={t.raw("intro.businessTypeDiagram.lowMarginTraits") as string[]}
+          caption={t("intro.businessTypeDiagram.caption")}
+        />
+        <BreakEvenContributionMarginBar
+          title={t("intro.marginBar.title")}
+          priceLabel={t("intro.marginBar.priceLabel")}
+          variableCostLabel={t("intro.marginBar.variableCostLabel")}
+          marginLabel={t("intro.marginBar.marginLabel")}
+          caption={t("intro.marginBar.caption")}
+        />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -44,6 +67,17 @@ export default async function BreakEvenEducation() {
             </div>
           ))}
         </dl>
+        <BreakEvenMarginRatioGauge
+          valueLabel="60%"
+          caption={t("variables.marginGauge.caption")}
+          captionColorClass="fill-emerald-600 dark:fill-emerald-400"
+        />
+        <BreakEvenFixedCostAccumulationDiagram
+          title={t("variables.accumulationDiagram.title")}
+          fixedCostLabel={t("variables.accumulationDiagram.fixedCostLabel")}
+          breakEvenLabel={t("variables.accumulationDiagram.breakEvenLabel")}
+          caption={t("variables.accumulationDiagram.caption")}
+        />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -66,6 +100,24 @@ export default async function BreakEvenEducation() {
             </tbody>
           </table>
         </div>
+        <BreakEvenTwoScenarioCompareBar
+          title={t("examples.scenarioCompareBar.title")}
+          caption={t("examples.scenarioCompareBar.caption")}
+          scenarios={[
+            { key: "s1", label: t("examples.scenarioCompareBar.label1"), units: 334 },
+            { key: "s2", label: t("examples.scenarioCompareBar.label2"), units: 500 },
+          ]}
+        />
+        <BreakEvenRevenueDonut
+          centerValue="$25,000"
+          centerLabel={t("examples.revenueDonut.centerLabel")}
+          caption={t("examples.revenueDonut.caption")}
+          segments={[
+            { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
+            { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+            { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+          ]}
+        />
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -78,6 +130,30 @@ export default async function BreakEvenEducation() {
             </div>
           ))}
         </div>
+        <BreakEvenPriceChangeImpactBar
+          title={t("applications.priceImpactBar.title")}
+          caption={t("applications.priceImpactBar.caption")}
+          scenarios={[
+            { key: "p50", label: "$50", units: 334 },
+            { key: "p55", label: "$55", units: 286 },
+          ]}
+        />
+        <BreakEvenMonthlyPaceLineChart
+          title={t("applications.monthlyPaceChart.title")}
+          breakEvenLabel={t("applications.monthlyPaceChart.breakEvenLabel")}
+          caption={t("applications.monthlyPaceChart.caption")}
+          points={[
+            { key: "m1", label: t("applications.monthlyPaceChart.month1"), cumulativeUnits: 84 },
+            { key: "m2", label: t("applications.monthlyPaceChart.month2"), cumulativeUnits: 167 },
+            { key: "m3", label: t("applications.monthlyPaceChart.month3"), cumulativeUnits: 251 },
+            { key: "m4", label: t("applications.monthlyPaceChart.month4"), cumulativeUnits: 334 },
+          ]}
+        />
+        <BreakEvenFixedCostAdditionDiagram
+          beforeLabel={t("applications.fixedCostAddition.beforeLabel")}
+          afterLabel={t("applications.fixedCostAddition.afterLabel")}
+          caption={t("applications.fixedCostAddition.caption")}
+        />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

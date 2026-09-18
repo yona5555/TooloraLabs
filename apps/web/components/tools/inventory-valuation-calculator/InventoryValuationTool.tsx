@@ -17,6 +17,8 @@ import InventoryStockLevelBarDiagram from "./InventoryStockLevelBarDiagram";
 import InventoryPerItemCompositionBar from "./InventoryPerItemCompositionBar";
 import { emptyItem, type DraftItem } from "./types";
 
+const RELATED_TOOLS = ["break-even-calculator", "invoice-generator", "fuel-cost-calculator"];
+
 const tool = new InventoryValuationCalculator();
 
 const DEFAULT_ITEMS: DraftItem[] = [
@@ -157,7 +159,14 @@ export default function InventoryValuationTool({ education }: { education: React
             />
           }
           result={<InventoryResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />}
-          sidebar={<RelatedToolsSidebar currentSlug="inventory-valuation-calculator" category="business-finance" />}
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="inventory-valuation-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={tDiagrams("relatedTools.title")}
+            />
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} visible={navBarVisible} />

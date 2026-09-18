@@ -5,6 +5,15 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import SalesTaxAdditionDiagram from "./SalesTaxAdditionDiagram";
+import SalesTaxVsVatFlowDiagram from "./SalesTaxVsVatFlowDiagram";
+import SalesTaxRateStackDonut from "./SalesTaxRateStackDonut";
+import SalesTaxAddVsReverseModeDiagram from "./SalesTaxAddVsReverseModeDiagram";
+import SalesTaxRateGauge from "./SalesTaxRateGauge";
+import SalesTaxWorkedExamplesBar from "./SalesTaxWorkedExamplesBar";
+import SalesTaxNoTaxStatesDiagram from "./SalesTaxNoTaxStatesDiagram";
+import SalesTaxJurisdictionCompareChart from "./SalesTaxJurisdictionCompareChart";
+import SalesTaxNexusTimelineDiagram from "./SalesTaxNexusTimelineDiagram";
+import SalesTaxMultiItemInvoiceBar from "./SalesTaxMultiItemInvoiceBar";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -30,6 +39,25 @@ export default async function SalesTaxEducation() {
           totalLabel={t("intro.diagram.totalLabel")}
           caption={t("intro.diagram.caption")}
         />
+        <SalesTaxVsVatFlowDiagram
+          title={t("intro.vsVatDiagram.title")}
+          salesTaxLabel={t("intro.vsVatDiagram.salesTaxLabel")}
+          vatLabel={t("intro.vsVatDiagram.vatLabel")}
+          stageLabel={t("intro.vsVatDiagram.stageLabel")}
+          taxHereLabel={t("intro.vsVatDiagram.taxHereLabel")}
+          noTaxLabel={t("intro.vsVatDiagram.noTaxLabel")}
+          caption={t("intro.vsVatDiagram.caption")}
+        />
+        <SalesTaxRateStackDonut
+          centerValue="9%"
+          centerLabel={t("intro.rateStackDonut.centerLabel")}
+          caption={t("intro.rateStackDonut.caption")}
+          segments={[
+            { key: "state", value: 6.5, label: t("intro.rateStackDonut.state"), colorClass: "stroke-violet-500 dark:stroke-violet-400" },
+            { key: "county", value: 1, label: t("intro.rateStackDonut.county"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
+            { key: "city", value: 1.5, label: t("intro.rateStackDonut.city"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+          ]}
+        />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -42,6 +70,18 @@ export default async function SalesTaxEducation() {
             </div>
           ))}
         </dl>
+        <SalesTaxAddVsReverseModeDiagram
+          addModeLabel={t("variables.addReverseDiagram.addModeLabel")}
+          reverseModeLabel={t("variables.addReverseDiagram.reverseModeLabel")}
+          priceLabel={t("variables.addReverseDiagram.priceLabel")}
+          totalLabel={t("variables.addReverseDiagram.totalLabel")}
+          caption={t("variables.addReverseDiagram.caption")}
+        />
+        <SalesTaxRateGauge
+          valueLabel="8.875%"
+          caption={t("variables.rateGauge.caption")}
+          captionColorClass="fill-amber-600 dark:fill-amber-400"
+        />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -64,6 +104,22 @@ export default async function SalesTaxEducation() {
             </tbody>
           </table>
         </div>
+        <SalesTaxWorkedExamplesBar
+          title={t("examples.workedExamplesBar.title")}
+          caption={t("examples.workedExamplesBar.caption")}
+          bars={[
+            { key: "e1", label: t("examples.workedExamplesBar.label1"), value: 3.0 },
+            { key: "e2", label: t("examples.workedExamplesBar.label2"), value: 22.19 },
+            { key: "e3", label: t("examples.workedExamplesBar.label3"), value: 7.2 },
+            { key: "e4", label: t("examples.workedExamplesBar.label4"), value: 8.0 },
+          ]}
+        />
+        <SalesTaxNoTaxStatesDiagram
+          states={["DE", "MT", "NH", "OR"]}
+          noTaxLabel={t("examples.noTaxStatesDiagram.noTaxLabel")}
+          typicalLabel={t("examples.noTaxStatesDiagram.typicalLabel")}
+          caption={t("examples.noTaxStatesDiagram.caption")}
+        />
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -76,6 +132,37 @@ export default async function SalesTaxEducation() {
             </div>
           ))}
         </div>
+        <SalesTaxJurisdictionCompareChart
+          title={t("applications.jurisdictionChart.title")}
+          caption={t("applications.jurisdictionChart.caption")}
+          items={[
+            { key: "or", label: t("applications.jurisdictionChart.oregon"), totalCost: 100 },
+            { key: "typical", label: t("applications.jurisdictionChart.typical"), totalCost: 107 },
+            { key: "nyc", label: t("applications.jurisdictionChart.nyc"), totalCost: 108.88 },
+            { key: "chi", label: t("applications.jurisdictionChart.chicago"), totalCost: 110.25 },
+          ]}
+        />
+        <SalesTaxNexusTimelineDiagram
+          quillLabel={t("applications.nexusTimeline.quillLabel")}
+          quillYear="1992"
+          wayfairLabel={t("applications.nexusTimeline.wayfairLabel")}
+          wayfairYear="2018"
+          physicalLabel={t("applications.nexusTimeline.physicalLabel")}
+          economicLabel={t("applications.nexusTimeline.economicLabel")}
+          caption={t("applications.nexusTimeline.caption")}
+        />
+        <SalesTaxMultiItemInvoiceBar
+          title={t("applications.invoiceBar.title")}
+          caption={t("applications.invoiceBar.caption")}
+          taxAmount={9}
+          taxLabel={t("applications.invoiceBar.taxLabel")}
+          totalLabel={t("applications.invoiceBar.totalLabel")}
+          items={[
+            { key: "i1", label: t("applications.invoiceBar.item1"), amount: 40 },
+            { key: "i2", label: t("applications.invoiceBar.item2"), amount: 35 },
+            { key: "i3", label: t("applications.invoiceBar.item3"), amount: 25 },
+          ]}
+        />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

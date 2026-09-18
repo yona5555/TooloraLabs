@@ -13243,6 +13243,22 @@
             "taxLabel": "+8 $ de taxe",
             "totalLabel": "108 $ (total)",
             "caption": "La taxe de vente fait passer un sous-total à un total plus élevé — l'inverse d'une remise, qui réduit un prix. Sous-total de 100 $ + taxe de 8 % (8 $) = total de 108 $."
+          },
+          "vsVatDiagram": {
+            "title": "Taxe de vente vs. TVA : où la taxe est-elle perçue",
+            "salesTaxLabel": "Taxe de vente américaine",
+            "vatLabel": "TVA (la plupart des autres pays)",
+            "stageLabel": "Étape",
+            "taxHereLabel": "Taxe ici",
+            "noTaxLabel": "Pas de taxe",
+            "caption": "La taxe de vente est perçue une seule fois, uniquement lors de la vente au détail finale. La TVA est perçue à chaque étape de production tout au long de la chaîne."
+          },
+          "rateStackDonut": {
+            "centerLabel": "taux combiné",
+            "caption": "Un taux combiné réel tiré des exemples résolus : 6,5 % état + 1 % comté + 1,5 % ville = 9 % perçus à la caisse.",
+            "state": "État",
+            "county": "Comté",
+            "city": "Ville"
           }
         },
         "examples": {
@@ -13267,7 +13283,20 @@
               "scenario": "Le reçu indique un total de 108 $, taux de taxe de 8 % — retrouver le prix hors taxe",
               "result": "Le prix hors taxe était de 100,00 $"
             }
-          ]
+          ],
+          "workedExamplesBar": {
+            "title": "Montant de la taxe par scénario",
+            "caption": "Le montant de la taxe en dollars de chaque exemple résolu ci-dessus, comparé côte à côte.",
+            "label1": "50 $ à 6 %",
+            "label2": "250 $ à 8,875 %",
+            "label3": "80 $ à 9 %",
+            "label4": "Total 108 $ à 8 % (inverse)"
+          },
+          "noTaxStatesDiagram": {
+            "noTaxLabel": "Aucune taxe de vente à l'échelle de l'état",
+            "typicalLabel": "Taux combiné typique",
+            "caption": "Le Delaware, le Montana, le New Hampshire et l'Oregon ne perçoivent aucune taxe de vente à l'échelle de l'état — l'Alaska n'a pas non plus de taxe au niveau de l'état, mais permet aux municipalités locales de percevoir la leur."
+          }
         },
         "faq": {
           "title": "Questions fréquentes",
@@ -13378,7 +13407,17 @@
               "name": "Montant de la Taxe de Vente",
               "description": "Le montant en argent de la taxe elle-même — la différence entre le prix hors taxe et le total taxe incluse."
             }
-          ]
+          ],
+          "addReverseDiagram": {
+            "addModeLabel": "Mode Addition",
+            "reverseModeLabel": "Mode Inverse",
+            "priceLabel": "Prix",
+            "totalLabel": "Total",
+            "caption": "Le mode Addition multiplie un prix connu par (1 + taux) pour trouver le total ; le mode Inverse divise un total connu par (1 + taux) pour retrouver le prix."
+          },
+          "rateGauge": {
+            "caption": "Le taux combiné réel de New York (8,875 %) se situe dans la zone \"typique\" pour les grandes villes américaines."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -13400,7 +13439,31 @@
               "title": "Facturation et Devis",
               "description": "Les entreprises qui proposent un prix hors taxe à un client utilisent ce même calcul pour indiquer le total taxe incluse qui sera réellement facturé."
             }
-          ]
+          ],
+          "jurisdictionChart": {
+            "title": "Même article à 100 $, juridictions différentes",
+            "caption": "Le même achat de 100 $ coûte un total différent selon le lieu d'achat — de 100 $ dans un état sans taxe à 110,25 $ au taux combiné réel de Chicago.",
+            "oregon": "Oregon (0 %)",
+            "typical": "Typique (7 %)",
+            "nyc": "NYC (8,875 %)",
+            "chicago": "Chicago (10,25 %)"
+          },
+          "nexusTimeline": {
+            "quillLabel": "Quill Corp. c. North Dakota",
+            "wayfairLabel": "South Dakota c. Wayfair, Inc.",
+            "physicalLabel": "Présence physique requise",
+            "economicLabel": "Lien économique — aucune présence physique requise",
+            "caption": "Avant 2018, un vendeur devait avoir une présence physique dans un état pour devoir sa taxe de vente. Wayfair a remplacé cela par le lien économique, basé uniquement sur le volume des ventes."
+          },
+          "invoiceBar": {
+            "title": "Une facture à plusieurs articles, taxée une seule fois",
+            "caption": "Trois lignes totalisant 100 $, taxées une seule fois au taux combiné de 9 % — le même calcul que cet outil effectue pour toute facture.",
+            "taxLabel": "Taxe",
+            "totalLabel": "Total",
+            "item1": "Article A",
+            "item2": "Article B",
+            "item3": "Article C"
+          }
         }
       },
       "errors": {
@@ -13432,6 +13495,9 @@
         "title": "Prix Total selon le Taux de Taxe",
         "caption": "Comment le prix total augmente avec le taux de taxe, pour votre montant d'achat.",
         "xLabel": "Taux de Taxe"
+      },
+      "relatedTools": {
+        "title": "Outils professionnels associés"
       }
     },
     "image-converter": {
@@ -16595,6 +16661,19 @@
             "taxLabel": "Taxe",
             "totalLabel": "Total",
             "caption": "L'ordre fixe du calcul d'une facture : la remise est d'abord soustraite du sous-total, puis la taxe est calculée sur ce qui reste — jamais sur le sous-total d'origine."
+          },
+          "net30Diagram": {
+            "issueLabel": "Date d'émission",
+            "dueLabel": "Date d'échéance",
+            "creditPeriodLabel": "14 à 30 jours de crédit sans intérêt",
+            "caption": "L'écart entre la date d'émission et d'échéance est un financement à court terme que le vendeur accorde à l'acheteur — \"Net 30\" nomme simplement cet écart."
+          },
+          "twoExamplesBar": {
+            "title": "Les deux exemples résolus, comparés",
+            "taxLabel": "segment plus clair = taxe",
+            "caption": "Les totaux des deux exemples résolus, montrant le montant taxable et la taxe sur une barre chacun — le second exemple est plus petit avant taxe mais paie moins de taxe grâce à sa remise.",
+            "label1": "Exemple 1",
+            "label2": "Exemple 2"
           }
         },
         "examples": {
@@ -16611,7 +16690,21 @@
               "scenario": "1 article : 1 000 $ de conseil, remise de 20 %, taxe de 10 %",
               "result": "Remise 200,00 $ → montant imposable 800,00 $ → taxe 80,00 $ → total 880,00 $"
             }
-          ]
+          ],
+          "breakdownDonut": {
+            "centerLabel": "total de la facture",
+            "caption": "Le total de 880 $ de l'Exemple 2 est composé à 91 % du montant taxable et à 9 % de taxe — la remise a déjà été déduite avant cette répartition.",
+            "taxable": "Montant taxable",
+            "tax": "Taxe"
+          },
+          "lineBreakdownBar": {
+            "title": "La construction complète de l'Exemple 1",
+            "caption": "Les deux postes de l'Exemple 1 plus la taxe, empilés pour montrer exactement comment on atteint 598 $.",
+            "taxLabel": "Taxe",
+            "totalLabel": "Total",
+            "item1": "Travail de conception",
+            "item2": "Hébergement"
+          }
         },
         "faq": {
           "title": "Questions fréquentes",
@@ -16722,7 +16815,17 @@
               "name": "Montant Imposable",
               "description": "Le sous-total après déduction de la remise — c'est sur celui-ci, et non le sous-total d'origine, que le taux de taxe est appliqué."
             }
-          ]
+          ],
+          "lineItemDiagram": {
+            "title": "Quantité × Prix unitaire = Total de la ligne",
+            "lineTotalLabel": "",
+            "caption": "Les deux postes réels de l'Exemple 1 — le total de chaque ligne alimente le sous-total avant l'application de toute remise ou taxe.",
+            "item1": "Travail de conception",
+            "item2": "Hébergement"
+          },
+          "discountGauge": {
+            "caption": "L'exemple résolu de cet outil utilise une remise de 20 % — un taux de remise notable mais pas extrême."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -16744,7 +16847,36 @@
               "title": "Devis et Estimations",
               "description": "La même structure détaillée sert aussi de devis avant-vente, montrant à un client potentiel exactement comment un prix se décompose."
             }
-          ]
+          ],
+          "recurringChart": {
+            "title": "Facturation récurrente des clients",
+            "caption": "La même structure et le même total de facture se répètent à chaque cycle de facturation pour un client récurrent — les mêmes règles de taxe et de remise sont appliquées automatiquement à chaque fois.",
+            "month1": "Mois 1",
+            "month2": "Mois 2",
+            "month3": "Mois 3",
+            "month4": "Mois 4"
+          },
+          "ublDiagram": {
+            "mandatedLabel": "Facturation électronique obligatoire (UBL/ISO 19845)",
+            "caption": "La facturation électronique structurée et lisible par machine est désormais légalement obligatoire dans ces régions — le logiciel comptable des deux côtés traite la facture automatiquement."
+          },
+          "quoteVsInvoice": {
+            "quoteLabel": "Devis",
+            "invoiceLabel": "Facture",
+            "quoteTraits": [
+              "Envoyé avant le début des travaux",
+              "Pas de date d'échéance",
+              "N'est pas une demande de paiement",
+              "Peut changer avant acceptation"
+            ],
+            "invoiceTraits": [
+              "Envoyée après la livraison des travaux",
+              "A une date d'échéance",
+              "Une demande de paiement formelle",
+              "Fixe une fois émise"
+            ],
+            "caption": "Même calcul détaillé, objectif différent : un devis propose un prix avant la vente, une facture exige le paiement après."
+          }
         }
       },
       "shareExport": {
@@ -16781,6 +16913,9 @@
         "caption": "Combien la remise fait économiser à votre client sur cette facture.",
         "beforeLabel": "Sans Remise",
         "afterLabel": "Avec Remise"
+      },
+      "relatedTools": {
+        "title": "Outils professionnels associés"
       }
     },
     "inventory-valuation-calculator": {
@@ -16874,6 +17009,28 @@
             "newestLabel": "Plus récent",
             "outLabel": "Vendu en premier",
             "caption": "Les trois mêmes lots d'achat, décomptés dans un ordre opposé : le FIFO consomme d'abord le lot le plus ancien (en bas) ; le LIFO consomme d'abord le lot le plus récent (en haut)."
+          },
+          "threeMethodBar": {
+            "title": "Valeur finale du stock par méthode",
+            "caption": "Même historique d'achat (10 à 5 $, 10 à 8 $), 12 unités vendues — les trois méthodes de coût donnent trois valeurs finales différentes.",
+            "weightedAvg": "Moy. pondérée"
+          },
+          "risingPriceDiagram": {
+            "fifoLabel": "FIFO en hausse de prix",
+            "lifoLabel": "LIFO en hausse de prix",
+            "fifoTraits": [
+              "Coût moins cher → coût des ventes",
+              "Bénéfice déclaré plus élevé",
+              "Facture fiscale plus élevée",
+              "Valeur de stock final plus élevée"
+            ],
+            "lifoTraits": [
+              "Coût plus cher → coût des ventes",
+              "Bénéfice déclaré plus faible",
+              "Facture fiscale plus faible",
+              "Valeur de stock plus faible, paraissant obsolète"
+            ],
+            "caption": "Le même historique d'achat en hausse de prix produit des effets opposés sur le bénéfice déclaré selon la méthode choisie."
           }
         },
         "examples": {
@@ -16890,7 +17047,16 @@
               "scenario": "Achat de 10 unités à 5 $, aucune vente cette période",
               "result": "Les trois méthodes s'accordent : valeur finale 50 $"
             }
-          ]
+          ],
+          "valueLineChart": {
+            "title": "Valeur finale à mesure que les unités vendues augmentent",
+            "caption": "Plus on vend d'unités des deux mêmes lots, plus les valeurs de stock final de FIFO et LIFO divergent.",
+            "xLabel": "Unités vendues →"
+          },
+          "consistencyDonut": {
+            "centerLabel": "les 3 méthodes concordent",
+            "caption": "Quand rien n'est vendu, il n'y a rien à prélever différemment — les trois méthodes de coût déclarent la même valeur finale de 50 $."
+          }
         },
         "faq": {
           "title": "Questions fréquentes",
@@ -17001,7 +17167,18 @@
               "name": "Unités Finales",
               "description": "Unités achetées moins unités vendues — la quantité physique restante, identique dans les trois méthodes de valorisation."
             }
-          ]
+          ],
+          "batchDiagram": {
+            "title": "Lots d'achat, du plus ancien au plus récent",
+            "caption": "FIFO puise d'abord dans le lot le plus ancien ; LIFO puise d'abord dans le lot le plus récent — même stock physique, ordre de prélèvement opposé.",
+            "fifoLabel": "FIFO puise ici",
+            "lifoLabel": "LIFO puise ici",
+            "batch1": "Lot 1",
+            "batch2": "Lot 2"
+          },
+          "endingUnitsGauge": {
+            "caption": "20 unités achetées, 12 vendues cette période, laissant 8 unités en stock — le même décompte physique quelle que soit la méthode de coût."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -17023,7 +17200,23 @@
               "title": "Comparer l'Impact de la Méthode de Valorisation",
               "description": "Faire passer le même historique d'achats par les trois méthodes côte à côte montre exactement à quel point un choix de valorisation changerait les chiffres déclarés."
             }
-          ]
+          ],
+          "taxImpactBar": {
+            "title": "Coût des marchandises vendues par méthode",
+            "caption": "Pour les mêmes 12 unités vendues, LIFO attribue un coût des ventes plus élevé que FIFO en période de hausse des prix — réduisant directement le bénéfice déclaré et le revenu imposable.",
+            "cogsLabel": "Coût des marchandises vendues"
+          },
+          "thresholdDiagram": {
+            "currentLabel": "Stock actuel",
+            "thresholdLabel": "Seuil de réapprovisionnement",
+            "caption": "Dès que le stock actuel passe sous le seuil de réapprovisionnement, cet outil signale l'article comme stock faible."
+          },
+          "rawMaterialsFlow": {
+            "rawLabel": "Matières premières, prix variables",
+            "logicLabel": "FIFO / LIFO / moy. pondérée",
+            "finishedLabel": "Stock de produits finis valorisé",
+            "caption": "Les matières premières de fabrication achetées à différents moments et prix sont valorisées avec exactement la même logique de coût que le stock de détail fini."
+          }
         }
       },
       "shareExport": {
@@ -17053,6 +17246,9 @@
         "caption": "Comment les unités achetées de chaque article se répartissent entre vendues et encore en stock.",
         "soldLabel": "Unités Vendues",
         "endingLabel": "Unités Finales"
+      },
+      "relatedTools": {
+        "title": "Outils professionnels associés"
       }
     },
     "break-even-calculator": {
@@ -17164,6 +17360,28 @@
             "profitLabel": "Profit",
             "lossLabel": "Perte",
             "caption": "Le graphique CVP classique : les coûts fixes forment un plancher stable, le coût total augmente avec le volume, les revenus augmentent plus vite — le point de croisement est le seuil de rentabilité, qui divise le graphique en une zone de perte et une zone de profit."
+          },
+          "businessTypeDiagram": {
+            "softwareLabel": "Coûts fixes élevés, marge élevée (logiciel)",
+            "lowMarginLabel": "Coûts fixes faibles, marge mince",
+            "softwareTraits": [
+              "Coût quasi nul par utilisateur supplémentaire",
+              "Non rentable à faible volume",
+              "Extrêmement rentable à grande échelle"
+            ],
+            "lowMarginTraits": [
+              "Atteint rapidement le seuil de rentabilité",
+              "Le profit augmente lentement",
+              "Moins sensible aux variations de volume"
+            ],
+            "caption": "Le même calcul du seuil de rentabilité produit des courbes de croissance très différentes selon la structure de coûts de l'entreprise."
+          },
+          "marginBar": {
+            "title": "Où va le prix de 50 $",
+            "priceLabel": "Prix",
+            "variableCostLabel": "Coût variable",
+            "marginLabel": "Marge sur coûts variables",
+            "caption": "Sur chaque vente à 50 $, 20 $ couvrent le coût variable et 30 $ deviennent une marge sur coûts variables — le montant qui va vers les coûts fixes, puis le profit."
           }
         },
         "examples": {
@@ -17180,7 +17398,20 @@
               "scenario": "Mêmes chiffres, avec un profit cible de 5 000 $",
               "result": "500 unités nécessaires (25 000 $ de revenus)"
             }
-          ]
+          ],
+          "scenarioCompareBar": {
+            "title": "Unités nécessaires : seuil vs. objectif de profit",
+            "caption": "Ajouter un objectif de profit de 5 000 $ en plus des coûts fixes fait passer les unités nécessaires de 334 à 500.",
+            "label1": "Seuil seulement",
+            "label2": "Avec objectif de 5 000 $"
+          },
+          "revenueDonut": {
+            "centerLabel": "revenu à 500 unités",
+            "caption": "Les 25 000 $ de revenu tirés de la vente de 500 unités se répartissent en coûts fixes, coûts variables et l'objectif de profit de 5 000 $.",
+            "fixed": "Coûts fixes",
+            "variable": "Coûts variables",
+            "profit": "Objectif de profit"
+          }
         },
         "faq": {
           "title": "Questions fréquentes",
@@ -17291,7 +17522,16 @@
               "name": "Marge sur Coûts Variables",
               "description": "Prix moins coût variable par unité — le montant que chaque vente contribue à couvrir les coûts fixes, avant que ne commence tout profit."
             }
-          ]
+          ],
+          "marginGauge": {
+            "caption": "L'exemple résolu de cet outil a un taux de marge sur coûts variables de 60 % (marge de 30 $ ÷ prix de 50 $) — un taux sain selon la plupart des normes."
+          },
+          "accumulationDiagram": {
+            "title": "La marge s'accumule vers les coûts fixes",
+            "fixedCostLabel": "Coûts fixes",
+            "breakEvenLabel": "Seuil de rentabilité",
+            "caption": "Chaque unité ajoute 30 $ de marge sur coûts variables — la marge accumulée atteint la ligne des coûts fixes de 10 000 $ à exactement 334 unités."
+          }
         },
         "applications": {
           "title": "Applications",
@@ -17313,7 +17553,25 @@
               "title": "Décisions d'Investissement et d'Expansion",
               "description": "Évaluer si des coûts fixes supplémentaires (nouvel équipement, une nouvelle embauche) sont justifiés par le volume de ventes supplémentaire qu'ils exigeraient."
             }
-          ]
+          ],
+          "priceImpactBar": {
+            "title": "Augmenter le prix abaisse le seuil de rentabilité",
+            "caption": "Faire passer le prix de 50 $ à 55 $ (avec le même coût variable de 20 $) fait baisser le seuil de rentabilité de 334 à 286 unités — un exemple réel de l'impact d'une décision de prix."
+          },
+          "monthlyPaceChart": {
+            "title": "Rythme mensuel de ventes pour atteindre le seuil",
+            "breakEvenLabel": "334 unités — seuil de rentabilité",
+            "caption": "Répartir 334 unités uniformément sur 4 mois signifie vendre environ 84 unités par mois pour atteindre le seuil dans les délais.",
+            "month1": "Mois 1",
+            "month2": "Mois 2",
+            "month3": "Mois 3",
+            "month4": "Mois 4"
+          },
+          "fixedCostAddition": {
+            "beforeLabel": "Avant le nouvel équipement",
+            "afterLabel": "Après +2 000 $ de coûts fixes",
+            "caption": "Ajouter 2 000 $ de nouveaux coûts fixes (comme de l'équipement) fait passer le seuil de rentabilité de 334 à 400 unités — cet outil répond exactement au volume supplémentaire qu'exige une décision de coûts fixes."
+          }
         }
       },
       "costStructureDiagram": {
@@ -17325,6 +17583,9 @@
         "title": "Sensibilité du Seuil de Rentabilité au Prix",
         "caption": "Combien d'unités vous devriez vendre à différents prix, en maintenant les coûts constants.",
         "xLabel": "Prix par Unité"
+      },
+      "relatedTools": {
+        "title": "Outils professionnels associés"
       }
     },
     "graphing-calculator": {
