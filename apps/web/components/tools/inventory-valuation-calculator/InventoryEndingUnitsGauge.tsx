@@ -27,12 +27,11 @@ export default function InventoryEndingUnitsGauge({ valueLabel, caption, caption
           domainMax={20}
           zones={ZONES}
           valueLabel={valueLabel}
-          caption={caption}
-          captionColorClass={captionColorClass}
           ticks={TICKS}
           tickFormatter={(t) => `${t}`}
         />
       </div>
+      <figcaption className={`mt-2 max-w-xs text-center text-sm font-semibold ${captionColorClass ?? "text-emerald-600 dark:text-emerald-400"}`}>{caption}</figcaption>
     </figure>
   );
 }

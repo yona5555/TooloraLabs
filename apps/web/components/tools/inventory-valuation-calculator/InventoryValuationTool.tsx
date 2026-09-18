@@ -149,14 +149,17 @@ export default function InventoryValuationTool({ education }: { education: React
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <InventoryInputPanel
-              currency={currency}
-              onCurrencyChange={handleCurrencyChange}
-              items={items}
-              onItemsChange={setItems}
-              onCalculate={handleCalculate}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-3">
+              <InventoryInputPanel
+                currency={currency}
+                onCurrencyChange={handleCurrencyChange}
+                items={items}
+                onItemsChange={setItems}
+                onCalculate={handleCalculate}
+                onClear={handleClear}
+              />
+              <InventoryMethodReference />
+            </div>
           }
           result={<InventoryResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />}
           sidebar={
@@ -190,8 +193,6 @@ export default function InventoryValuationTool({ education }: { education: React
                   />
                 </div>
               )}
-
-              <InventoryMethodReference />
             </div>
           }
         />

@@ -11,22 +11,23 @@ type InventoryPurchaseBatchDiagramProps = {
 const WIDTH = 260;
 const BATCH_H = 44;
 const GAP = 8;
+const HEADER_H = 34;
 
 export default function InventoryPurchaseBatchDiagram({ batches, fifoLabel, lifoLabel, caption, title }: InventoryPurchaseBatchDiagramProps) {
-  const height = batches.length * (BATCH_H + GAP) + 20;
+  const height = HEADER_H + batches.length * (BATCH_H + GAP) + 20;
 
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={title} className="mx-auto block h-auto" style={{ width: 260 }}>
-          <text x={40} y={12} fontSize={8} fontWeight={700} className="fill-teal-600 dark:fill-teal-400">
+          <text x={WIDTH / 2} y={12} textAnchor="middle" fontSize={8} fontWeight={700} className="fill-teal-600 dark:fill-teal-400">
             ↓ {fifoLabel}
           </text>
-          <text x={WIDTH - 40} y={12} textAnchor="end" fontSize={8} fontWeight={700} className="fill-teal-800 dark:fill-teal-200">
-            {lifoLabel} ↑
+          <text x={WIDTH / 2} y={26} textAnchor="middle" fontSize={8} fontWeight={700} className="fill-teal-800 dark:fill-teal-200">
+            ↑ {lifoLabel}
           </text>
           {batches.map((batch, i) => {
-            const y = 18 + i * (BATCH_H + GAP);
+            const y = HEADER_H + i * (BATCH_H + GAP);
             const opacity = 0.35 + (i / Math.max(batches.length - 1, 1)) * 0.5;
             return (
               <g key={batch.key}>

@@ -32,6 +32,7 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
   const t = useTranslations("tools.inventory-valuation-calculator");
 
   const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
+  const moneyCompact = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
 
   if (!hasCalculated) {
     return (
@@ -123,10 +124,10 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
           <thead>
             <tr className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
               <th className="py-2 text-start font-semibold">{t("result.item")}</th>
-              <th className="py-2 text-end font-semibold">{t("result.endingUnits")}</th>
-              <th className="py-2 text-end font-semibold">{t("result.methodFifo")}</th>
-              <th className="py-2 text-end font-semibold">{t("result.methodLifo")}</th>
-              <th className="py-2 text-end font-semibold">{t("result.methodWeightedAverage")}</th>
+              <th className="py-2 ps-3 text-end font-semibold">{t("result.endingUnits")}</th>
+              <th className="py-2 ps-3 text-end font-semibold">{t("result.methodFifo")}</th>
+              <th className="py-2 ps-3 text-end font-semibold">{t("result.methodLifo")}</th>
+              <th className="py-2 ps-3 text-end font-semibold">{t("result.methodWeightedAverage")}</th>
             </tr>
           </thead>
           <tbody>
@@ -136,17 +137,17 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
                   {item.belowThreshold && <AlertTriangle size={14} className="text-amber-500" />}
                   {item.name}
                 </td>
-                <td dir="ltr" className="py-2 text-end text-zinc-700 dark:text-zinc-300">
+                <td dir="ltr" className="py-2 ps-3 text-end text-zinc-700 dark:text-zinc-300">
                   {formatLocalizedNumber(item.endingUnits, digitStyle)}
                 </td>
-                <td dir="ltr" className="py-2 text-end font-medium text-zinc-900 dark:text-zinc-100">
-                  {money(item.fifo.endingValue)}
+                <td dir="ltr" className="py-2 ps-3 text-end font-medium text-zinc-900 dark:text-zinc-100">
+                  {moneyCompact(item.fifo.endingValue)}
                 </td>
-                <td dir="ltr" className="py-2 text-end font-medium text-zinc-900 dark:text-zinc-100">
-                  {money(item.lifo.endingValue)}
+                <td dir="ltr" className="py-2 ps-3 text-end font-medium text-zinc-900 dark:text-zinc-100">
+                  {moneyCompact(item.lifo.endingValue)}
                 </td>
-                <td dir="ltr" className="py-2 text-end font-medium text-zinc-900 dark:text-zinc-100">
-                  {money(item.weightedAverage.endingValue)}
+                <td dir="ltr" className="py-2 ps-3 text-end font-medium text-zinc-900 dark:text-zinc-100">
+                  {moneyCompact(item.weightedAverage.endingValue)}
                 </td>
               </tr>
             ))}

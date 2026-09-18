@@ -82,7 +82,7 @@ export default async function InventoryEducation() {
         <InventoryEndingUnitsGauge
           valueLabel="8"
           caption={t("variables.endingUnitsGauge.caption")}
-          captionColorClass="fill-emerald-600 dark:fill-emerald-400"
+          captionColorClass="text-emerald-600 dark:text-emerald-400"
         />
       </InfoSection>
 

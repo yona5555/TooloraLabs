@@ -14,6 +14,7 @@ const BAR_HEIGHT = 26;
 const GAP = 14;
 const PAD = 6;
 const LABEL_W = 86;
+const VALUE_W = 56;
 
 export default function InventoryMethodChart({
   fifo,
@@ -31,7 +32,7 @@ export default function InventoryMethodChart({
     { label: weightedAverageLabel, value: weightedAverage },
   ];
   const max = Math.max(fifo, lifo, weightedAverage, 1);
-  const barAreaW = WIDTH - LABEL_W - PAD * 2;
+  const barAreaW = WIDTH - LABEL_W - VALUE_W - PAD * 2;
   const height = PAD * 2 + rows.length * (BAR_HEIGHT + GAP) - GAP;
 
   return (
@@ -54,9 +55,9 @@ export default function InventoryMethodChart({
               <rect x={LABEL_W} y={y} width={barAreaW} height={BAR_HEIGHT} fill="currentColor" opacity={0.08} rx={4} />
               <rect x={LABEL_W} y={y} width={w} height={BAR_HEIGHT} fill="currentColor" opacity={0.75} rx={4} />
               <text
-                x={LABEL_W + barAreaW - 4}
+                x={LABEL_W + barAreaW + 8}
                 y={y + BAR_HEIGHT / 2 + 4}
-                textAnchor="end"
+                textAnchor="start"
                 fontSize={11}
                 fontWeight={700}
                 fill="currentColor"
