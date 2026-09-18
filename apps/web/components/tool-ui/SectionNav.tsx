@@ -68,15 +68,27 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
    * `position: fixed`, which is anchored to the viewport instead of any
    * ancestor's height, so it keeps working regardless of how short that
    * ancestor is.
+   *
+   * `entry.isIntersecting` alone can't tell "scrolled past the sentinel"
+   * apart from "haven't scrolled down to the sentinel yet" — both report
+   * `false`. Whenever the viewport is shorter than the above-the-fold
+   * content (e.g. a 1440x900 laptop screen, or any short viewport in any
+   * locale), the sentinel sits below the fold on first paint, so the
+   * observer's initial callback fired `isIntersecting: false` and this
+   * flipped the nav to `fixed` immediately on load — pinning it over the
+   * page's own H1 before the visitor ever scrolled. `boundingClientRect.top`
+   * disambiguates the two cases directly: only a sentinel that has scrolled
+   * above the rootMargin-shifted line (top < STUCK_TOP_OFFSET) means "past
+   * it", regardless of why it isn't intersecting.
    */
   useEffect(() => {
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
 
-    const observer = new IntersectionObserver(([entry]) => setIsStuck(!entry.isIntersecting), {
-      rootMargin: `-${STUCK_TOP_OFFSET}px 0px 0px 0px`,
-      threshold: 0,
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsStuck(entry.boundingClientRect.top < STUCK_TOP_OFFSET),
+      { rootMargin: `-${STUCK_TOP_OFFSET}px 0px 0px 0px`, threshold: 0 }
+    );
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, []);
