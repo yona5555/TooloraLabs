@@ -6,7 +6,7 @@ type TipPercentBarDiagramProps = {
 const WIDTH = 320;
 const HEIGHT = 160;
 const MARGIN_BOTTOM = 24;
-const MARGIN_TOP = 10;
+const MARGIN_TOP = 22;
 const PLOT_HEIGHT = HEIGHT - MARGIN_BOTTOM - MARGIN_TOP;
 const BAR_GAP = 18;
 
