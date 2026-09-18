@@ -12,6 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FuelInputPanel from "./FuelInputPanel";
 import FuelResult from "./FuelResult";
 import FuelQuickReference from "./FuelQuickReference";
+import FuelReferenceTable from "./FuelReferenceTable";
 import { FUEL_DEFAULTS, type FuelRateMode, type FuelScenario } from "./types";
 
 const tool = new FuelCostTool();
@@ -66,26 +67,32 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <FuelInputPanel
-              distance={distance}
-              onDistanceChange={setDistance}
-              rateMode={rateMode}
-              onRateModeChange={setRateMode}
-              rateValue={rateValue}
-              onRateValueChange={setRateValue}
-              pricePerUnit={pricePerUnit}
-              onPricePerUnitChange={setPricePerUnit}
-              onScenarioPreset={handleScenarioPreset}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-4">
+              <FuelInputPanel
+                distance={distance}
+                onDistanceChange={setDistance}
+                rateMode={rateMode}
+                onRateModeChange={setRateMode}
+                rateValue={rateValue}
+                onRateValueChange={setRateValue}
+                pricePerUnit={pricePerUnit}
+                onPricePerUnitChange={setPricePerUnit}
+                onScenarioPreset={handleScenarioPreset}
+                onClear={handleClear}
+              />
+              <FuelQuickReference />
+            </div>
           }
           result={
-            <FuelResult
-              result={result}
-              distance={parseLocalizedNumber(distance) || 0}
-              pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-4">
+              <FuelResult
+                result={result}
+                distance={parseLocalizedNumber(distance) || 0}
+                pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
+                digitStyle={digitStyle}
+              />
+              <FuelReferenceTable />
+            </div>
           }
           sidebar={
             <RelatedToolsSidebar
@@ -99,7 +106,6 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="fuel-cost-calculator" />
-              <FuelQuickReference />
             </div>
           }
         />
