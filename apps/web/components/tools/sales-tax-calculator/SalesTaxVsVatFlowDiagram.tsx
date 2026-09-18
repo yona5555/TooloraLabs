@@ -54,7 +54,7 @@ export default function SalesTaxVsVatFlowDiagram({
             );
           })}
 
-          <text x={0} y={20 + ROW_H + ROW_GAP - 14} fontSize={10} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
+          <text x={0} y={ROW_H + ROW_GAP - 8} fontSize={10} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
             {vatLabel}
           </text>
           {stages.map((i) => {
