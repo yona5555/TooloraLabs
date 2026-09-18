@@ -180,7 +180,20 @@ export default function BatchInvoiceCalculator({ education }: { education: React
               isEditing={editingId !== null}
             />
           }
-          result={<DraftPreview result={draftResult} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <DraftPreview result={draftResult} digitStyle={digitStyle} />
+              <InvoiceSummary
+                summary={summary}
+                digitStyle={digitStyle}
+                onPrint={handlePrint}
+                onClearAll={handleClearAll}
+                invoices={invoices}
+                invoiceResults={invoiceResults}
+              />
+              <BatchInvoiceQuickReference />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar
               currentSlug="batch-invoice-calculator"
@@ -193,21 +206,12 @@ export default function BatchInvoiceCalculator({ education }: { education: React
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="batch-invoice-calculator" />
-              <BatchInvoiceQuickReference />
             </div>
           }
         />
 
-        <div className="mx-auto mt-8 grid max-w-6xl gap-6 px-4 lg:grid-cols-[1fr_320px] lg:px-0 print:hidden">
+        <div className="mx-auto mt-8 max-w-6xl px-4 lg:px-0 print:hidden">
           <InvoiceTable invoices={invoices} totals={totals} digitStyle={digitStyle} onEdit={handleEdit} onDelete={handleDelete} />
-          <InvoiceSummary
-            summary={summary}
-            digitStyle={digitStyle}
-            onPrint={handlePrint}
-            onClearAll={handleClearAll}
-            invoices={invoices}
-            invoiceResults={invoiceResults}
-          />
         </div>
 
         <PrintableSummary invoices={invoices} totals={totals} summary={summary} digitStyle={digitStyle} />
