@@ -50,11 +50,19 @@ export type OilSnapshot = {
   timestamp: number;
 };
 
-export async function getOilSnapshot(): Promise<OilSnapshot> {
-  const [wti, brent] = await Promise.all([getLatestPrice("WTI_USD"), getLatestPrice("BRENT_CRUDE_USD")]);
-  return {
-    wtiUsdPerBarrel: wti.priceUsdPerBarrel,
-    brentUsdPerBarrel: brent.priceUsdPerBarrel,
-    timestamp: Math.floor(new Date(wti.asOf).getTime() / 1000),
-  };
+/**
+ * Returns `null` instead of throwing on any failure (missing API key, network error, non-ok response) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead.
+ */
+export async function getOilSnapshot(): Promise<OilSnapshot | null> {
+  try {
+    const [wti, brent] = await Promise.all([getLatestPrice("WTI_USD"), getLatestPrice("BRENT_CRUDE_USD")]);
+    return {
+      wtiUsdPerBarrel: wti.priceUsdPerBarrel,
+      brentUsdPerBarrel: brent.priceUsdPerBarrel,
+      timestamp: Math.floor(new Date(wti.asOf).getTime() / 1000),
+    };
+  } catch (error) {
+    console.error("[commodities-tracker] getOilSnapshot failed:", error);
+    return null;
+  }
 }

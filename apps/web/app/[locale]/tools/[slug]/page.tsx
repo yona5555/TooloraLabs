@@ -358,8 +358,8 @@ export default async function ToolPage({
       const snapshot = await getForexSnapshot();
       component = (
         <ForexConverter
-          initialCurrencies={snapshot.currencies}
-          lastUpdatedUnix={snapshot.lastUpdatedUnix}
+          initialCurrencies={snapshot?.currencies ?? []}
+          lastUpdatedUnix={snapshot?.lastUpdatedUnix ?? null}
           education={<ForexEducation />}
         />
       );
@@ -367,14 +367,16 @@ export default async function ToolPage({
     }
     case "commodities-tracker": {
       const [metals, oil, forex] = await Promise.all([getMetalSnapshot(), getOilSnapshot(), getForexSnapshot()]);
-      const usdToSarRate = findCurrencyByCode(forex.currencies, "SAR")?.ratePerUsd ?? 3.75;
+      const usdToSarRate = forex ? (findCurrencyByCode(forex.currencies, "SAR")?.ratePerUsd ?? 3.75) : 3.75;
+      const lastUpdatedUnix =
+        metals && oil ? Math.min(metals.timestamp, oil.timestamp) : (metals?.timestamp ?? oil?.timestamp ?? null);
       component = (
         <CommodityConverter
-          goldUsdPerOunce={metals.goldUsdPerOunce}
-          silverUsdPerOunce={metals.silverUsdPerOunce}
-          wtiUsdPerBarrel={oil.wtiUsdPerBarrel}
+          goldUsdPerOunce={metals?.goldUsdPerOunce ?? null}
+          silverUsdPerOunce={metals?.silverUsdPerOunce ?? null}
+          wtiUsdPerBarrel={oil?.wtiUsdPerBarrel ?? null}
           usdToSarRate={usdToSarRate}
-          lastUpdatedUnix={Math.min(metals.timestamp, oil.timestamp)}
+          lastUpdatedUnix={lastUpdatedUnix}
           education={<CommodityEducation />}
         />
       );

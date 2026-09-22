@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { ArrowUpDown, RotateCcw } from "lucide-react";
+import { AlertTriangle, ArrowUpDown, RotateCcw } from "lucide-react";
 import type { CurrencyRate } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
@@ -8,6 +8,7 @@ import ForexCurrencyPicker from "./ForexCurrencyPicker";
 
 type ForexInputPanelProps = {
   currencies: CurrencyRate[];
+  dataUnavailable: boolean;
   amount: string;
   onAmountChange: (value: string) => void;
   fromCode: string;
@@ -20,6 +21,7 @@ type ForexInputPanelProps = {
 
 export default function ForexInputPanel({
   currencies,
+  dataUnavailable,
   amount,
   onAmountChange,
   fromCode,
@@ -34,6 +36,12 @@ export default function ForexInputPanel({
   return (
     <SectionCard title={t("converterTitle")}>
       <div className="space-y-5">
+        {dataUnavailable && (
+          <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
+            <AlertTriangle size={18} className="mt-0.5 shrink-0" />
+            <p>{t("dataUnavailable")}</p>
+          </div>
+        )}
         <ToolInput
           label={t("amountLabel")}
           type="text"

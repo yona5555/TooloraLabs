@@ -19,12 +19,12 @@ import type { CommodityId, DisplayCurrency, MetalWeightUnit } from "./types";
 import type { ReactNode } from "react";
 
 type CommodityConverterProps = {
-  goldUsdPerOunce: number;
-  silverUsdPerOunce: number;
-  wtiUsdPerBarrel: number;
+  goldUsdPerOunce: number | null;
+  silverUsdPerOunce: number | null;
+  wtiUsdPerBarrel: number | null;
   usdToSarRate: number;
-  /** Unix seconds — the more stale of the metals/oil provider timestamps, so "last updated" never overclaims freshness for the pair as a whole. */
-  lastUpdatedUnix: number;
+  /** Unix seconds — the more stale of the metals/oil provider timestamps, so "last updated" never overclaims freshness for the pair as a whole. `null` when both live-data fetches failed. */
+  lastUpdatedUnix: number | null;
   education: ReactNode;
 };
 
@@ -37,6 +37,7 @@ export default function CommodityConverter({
   education,
 }: CommodityConverterProps) {
   const tNav = useTranslations("tools.commodities-tracker.nav");
+  const dataUnavailable = goldUsdPerOunce === null || silverUsdPerOunce === null || wtiUsdPerBarrel === null;
   const [commodity, setCommodity] = useState<CommodityId>("gold");
   const [amount, setAmount] = useState("1");
   const [weightUnit, setWeightUnit] = useState<MetalWeightUnit>("gram");
@@ -54,11 +55,11 @@ export default function CommodityConverter({
 
   const convertedValue = useMemo(() => {
     const amountValue = parseLocalizedNumber(amount);
-    if (Number.isNaN(amountValue)) return 0;
-    if (commodity === "gold") return calculateMetalValue(amountValue, weightUnit, goldUsdPerOunce, fxRate);
-    if (commodity === "silver") return calculateMetalValue(amountValue, weightUnit, silverUsdPerOunce, fxRate);
-    return calculateOilValue(amountValue, wtiUsdPerBarrel, fxRate);
-  }, [amount, commodity, weightUnit, goldUsdPerOunce, silverUsdPerOunce, wtiUsdPerBarrel, fxRate]);
+    if (Number.isNaN(amountValue) || dataUnavailable) return 0;
+    if (commodity === "gold") return calculateMetalValue(amountValue, weightUnit, goldUsdPerOunce!, fxRate);
+    if (commodity === "silver") return calculateMetalValue(amountValue, weightUnit, silverUsdPerOunce!, fxRate);
+    return calculateOilValue(amountValue, wtiUsdPerBarrel!, fxRate);
+  }, [amount, commodity, weightUnit, goldUsdPerOunce, silverUsdPerOunce, wtiUsdPerBarrel, fxRate, dataUnavailable]);
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -94,6 +95,7 @@ export default function CommodityConverter({
               onCurrencyChange={setCurrency}
               usdToSarRate={usdToSarRate}
               lastUpdatedUnix={lastUpdatedUnix}
+              dataUnavailable={dataUnavailable}
               digitStyle={digitStyle}
             />
           }
@@ -103,7 +105,9 @@ export default function CommodityConverter({
               <SectionNav items={navItems} />
               <ViewDocsLink slug="commodities-tracker" />
               <CommodityHistoricalChart digitStyle={digitStyle} />
-              <CommodityGoldSilverRatioGauge goldUsdPerOunce={goldUsdPerOunce} silverUsdPerOunce={silverUsdPerOunce} />
+              {goldUsdPerOunce !== null && silverUsdPerOunce !== null && (
+                <CommodityGoldSilverRatioGauge goldUsdPerOunce={goldUsdPerOunce} silverUsdPerOunce={silverUsdPerOunce} />
+              )}
               <CommodityNews />
               <CommodityLearningResources />
             </div>

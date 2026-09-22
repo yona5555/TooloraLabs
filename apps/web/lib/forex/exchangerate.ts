@@ -44,28 +44,37 @@ export type ForexSnapshot = {
   nextUpdateUnix: number;
 };
 
-/** Every ExchangeRate-API rate is already USD-per-unit-of-base, i.e. `conversion_rates[code]` is units of `code` per 1 USD — the pivot every conversion in this tool goes through, the same way crypto-converter pivots through each coin's USD price. */
-export async function getForexSnapshot(): Promise<ForexSnapshot> {
-  const [ratesRes, names] = await Promise.all([
-    fetch(`${EXCHANGE_RATE_API_BASE}/${requireApiKey()}/latest/USD`, {
-      next: { revalidate: RATES_REVALIDATE_SECONDS },
-    }),
-    getCurrencyNames(),
-  ]);
-  if (!ratesRes.ok) {
-    throw new Error(`ExchangeRate-API latest request failed: ${ratesRes.status}`);
+/**
+ * Every ExchangeRate-API rate is already USD-per-unit-of-base, i.e. `conversion_rates[code]` is units of `code` per 1 USD — the pivot every conversion in this tool goes through, the same way crypto-converter pivots through each coin's USD price.
+ *
+ * Returns `null` instead of throwing on any failure (missing API key, network error, non-ok response, malformed payload) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead.
+ */
+export async function getForexSnapshot(): Promise<ForexSnapshot | null> {
+  try {
+    const [ratesRes, names] = await Promise.all([
+      fetch(`${EXCHANGE_RATE_API_BASE}/${requireApiKey()}/latest/USD`, {
+        next: { revalidate: RATES_REVALIDATE_SECONDS },
+      }),
+      getCurrencyNames(),
+    ]);
+    if (!ratesRes.ok) {
+      throw new Error(`ExchangeRate-API latest request failed: ${ratesRes.status}`);
+    }
+    const json = (await ratesRes.json()) as LatestRatesResponse;
+
+    const currencies: CurrencyRate[] = Object.entries(json.conversion_rates).map(([code, ratePerUsd]) => ({
+      code,
+      name: names.get(code) ?? code,
+      ratePerUsd,
+    }));
+
+    return {
+      currencies,
+      lastUpdatedUnix: json.time_last_update_unix,
+      nextUpdateUnix: json.time_next_update_unix,
+    };
+  } catch (error) {
+    console.error("[forex-converter] getForexSnapshot failed:", error);
+    return null;
   }
-  const json = (await ratesRes.json()) as LatestRatesResponse;
-
-  const currencies: CurrencyRate[] = Object.entries(json.conversion_rates).map(([code, ratePerUsd]) => ({
-    code,
-    name: names.get(code) ?? code,
-    ratePerUsd,
-  }));
-
-  return {
-    currencies,
-    lastUpdatedUnix: json.time_last_update_unix,
-    nextUpdateUnix: json.time_next_update_unix,
-  };
 }

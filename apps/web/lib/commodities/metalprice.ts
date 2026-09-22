@@ -34,22 +34,30 @@ export type MetalSnapshot = {
   timestamp: number;
 };
 
-export async function getMetalSnapshot(): Promise<MetalSnapshot> {
-  const url = `${METALPRICE_API_BASE}/latest?api_key=${requireApiKey()}&base=USD&currencies=XAU,XAG`;
-  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) {
-    throw new Error(`MetalpriceAPI latest request failed: ${res.status}`);
-  }
-  const json = (await res.json()) as LatestResponse;
-  if (!json.success) {
-    throw new Error("MetalpriceAPI latest request did not succeed");
-  }
+/**
+ * Returns `null` instead of throwing on any failure (missing API key, network error, non-ok response, `success: false`) — this is awaited directly in a page component with no error boundary of its own, so an uncaught throw here previously crashed the whole page with a 500. The caller renders a clear "data unavailable" state instead.
+ */
+export async function getMetalSnapshot(): Promise<MetalSnapshot | null> {
+  try {
+    const url = `${METALPRICE_API_BASE}/latest?api_key=${requireApiKey()}&base=USD&currencies=XAU,XAG`;
+    const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+    if (!res.ok) {
+      throw new Error(`MetalpriceAPI latest request failed: ${res.status}`);
+    }
+    const json = (await res.json()) as LatestResponse;
+    if (!json.success) {
+      throw new Error("MetalpriceAPI latest request did not succeed");
+    }
 
-  return {
-    goldUsdPerOunce: json.rates.USDXAU,
-    silverUsdPerOunce: json.rates.USDXAG,
-    timestamp: json.timestamp,
-  };
+    return {
+      goldUsdPerOunce: json.rates.USDXAU,
+      silverUsdPerOunce: json.rates.USDXAG,
+      timestamp: json.timestamp,
+    };
+  } catch (error) {
+    console.error("[commodities-tracker] getMetalSnapshot failed:", error);
+    return null;
+  }
 }
 
 export type GoldPricePoint = { date: string; priceUsdPerOunce: number };

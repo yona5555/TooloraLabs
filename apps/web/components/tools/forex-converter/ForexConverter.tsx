@@ -20,12 +20,13 @@ import type { ReactNode } from "react";
 
 type ForexConverterProps = {
   initialCurrencies: CurrencyRate[];
-  lastUpdatedUnix: number;
+  lastUpdatedUnix: number | null;
   education: ReactNode;
 };
 
 export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, education }: ForexConverterProps) {
   const tNav = useTranslations("tools.forex-converter.nav");
+  const dataUnavailable = initialCurrencies.length === 0;
   const [fromCode, setFromCode] = useState("USD");
   const [toCode, setToCode] = useState("EUR");
   const [amount, setAmount] = useState("1");
@@ -67,6 +68,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
           input={
             <ForexInputPanel
               currencies={initialCurrencies}
+              dataUnavailable={dataUnavailable}
               amount={amount}
               onAmountChange={setAmount}
               fromCode={fromCode}
@@ -85,6 +87,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
                 amount={amount}
                 convertedAmount={convertedAmount}
                 lastUpdatedUnix={lastUpdatedUnix}
+                dataUnavailable={dataUnavailable}
                 digitStyle={digitStyle}
               />
               <ForexQuickAmountsChart fromCurrency={fromCurrency} toCurrency={toCurrency} digitStyle={digitStyle} />
