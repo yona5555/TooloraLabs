@@ -63,7 +63,18 @@ export default function InvoiceDraftPanel({
           {t("clearDraft")}
         </button>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      {/*
+        Deliberately stacked, not a 2-col grid: this panel always renders in
+        the fixed ~320px-wide above-the-fold column (ToolAboveFold's
+        `[320px_minmax(360px,1fr)_320px]` template), so a viewport-relative
+        `sm:grid-cols-2` still activates at normal desktop widths even
+        though the actual available card width never grows — squeezing the
+        native date input below Chromium's minimum usable width and
+        truncating its day/month/year segments (confirmed in both English
+        and Arabic, so this isn't an RTL-specific issue despite how it was
+        first noticed).
+      */}
+      <div className="space-y-4">
         <ToolInput
           label={t("invoiceNumberLabel")}
           type="text"
@@ -71,7 +82,7 @@ export default function InvoiceDraftPanel({
           value={invoiceNumber}
           onChange={(e) => onInvoiceNumberChange(e.target.value)}
         />
-        <ToolInput label={t("dateLabel")} type="date" value={date} onChange={(e) => onDateChange(e.target.value)} />
+        <ToolInput label={t("dateLabel")} type="date" dir="ltr" value={date} onChange={(e) => onDateChange(e.target.value)} />
       </div>
 
       <div className="mt-4">

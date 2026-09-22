@@ -13,7 +13,10 @@ type Props = {
   dotColorClass?: string;
 };
 
-const WIDTH = 340;
+// Wide enough that 4 evenly-spaced points with long x-axis labels like
+// "After invoice 1" never collide with their start/middle/end-anchored
+// neighbors (confirmed via real screenshot at the previous, narrower WIDTH).
+const WIDTH = 460;
 const HEIGHT = 170;
 const PAD_LEFT = 44;
 const PAD_RIGHT = 16;
