@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
@@ -21,6 +21,8 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function SalesTaxEducation() {
   const t = await getTranslations("tools.sales-tax-calculator.education");
+  const locale = await getLocale();
+  const isRtl = locale === "ar";
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -47,6 +49,7 @@ export default async function SalesTaxEducation() {
           taxHereLabel={t("intro.vsVatDiagram.taxHereLabel")}
           noTaxLabel={t("intro.vsVatDiagram.noTaxLabel")}
           caption={t("intro.vsVatDiagram.caption")}
+          isRtl={isRtl}
         />
         <SalesTaxRateStackDonut
           centerValue="9%"

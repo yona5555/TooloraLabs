@@ -10,6 +10,7 @@ type SalesTaxBreakdownBarProps = {
 const WIDTH = 320;
 const BAR_HEIGHT = 32;
 const HEIGHT = BAR_HEIGHT + 22;
+const RADIUS = 8;
 
 export default function SalesTaxBreakdownBar({
   price,
@@ -33,15 +34,17 @@ export default function SalesTaxBreakdownBar({
           className="h-auto w-full text-current"
           style={{ minWidth: 260 }}
         >
-          <rect x={0} y={0} width={WIDTH} height={BAR_HEIGHT} rx={6} className="fill-zinc-100 dark:fill-zinc-800" />
-          <rect x={0} y={0} width={priceWidth} height={BAR_HEIGHT} rx={6} className="fill-blue-600 dark:fill-blue-400" />
-          <rect
-            x={priceWidth}
-            y={0}
-            width={taxWidth}
-            height={BAR_HEIGHT}
-            className="fill-amber-500 dark:fill-amber-400"
-          />
+          <defs>
+            <clipPath id="sales-tax-breakdown-bar-clip">
+              <rect x={0} y={0} width={WIDTH} height={BAR_HEIGHT} rx={RADIUS} />
+            </clipPath>
+          </defs>
+          {/* Both segments share one rounded-rect clip so the pair always reads as a single
+              clean pill, regardless of the split — no mismatched square corner at the seam. */}
+          <g clipPath="url(#sales-tax-breakdown-bar-clip)">
+            <rect x={0} y={0} width={priceWidth} height={BAR_HEIGHT} className="fill-blue-600 dark:fill-blue-400" />
+            <rect x={priceWidth} y={0} width={taxWidth} height={BAR_HEIGHT} className="fill-amber-500 dark:fill-amber-400" />
+          </g>
           {priceWidth > 50 && (
             <text x={10} y={BAR_HEIGHT / 2 + 4} fontSize={12} fontWeight={700} className="fill-white">
               {priceFormatted}
