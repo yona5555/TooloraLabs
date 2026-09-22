@@ -200,7 +200,6 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <KinematicsReferenceTable />
             </div>
           }
           result={
@@ -208,6 +207,7 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
               <KinematicsResult hasCalculated={hasCalculated} result={result} mode={mode} solveForTime={solveForTime} solveForDistance={solveForDistance} digitStyle={digitStyle} />
               <KinematicsModeTabs mode={mode} onModeChange={handleModeChange} />
               <KinematicsGForceCard acceleration={result.a} digitStyle={digitStyle} />
+              <KinematicsReferenceTable />
             </div>
           }
           sidebar={

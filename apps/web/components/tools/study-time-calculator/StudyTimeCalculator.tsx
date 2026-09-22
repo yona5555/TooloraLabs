@@ -91,13 +91,17 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
               onClear={handleClear}
             />
           }
-          result={<StudyTimeResult result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <StudyTimeResult result={result} digitStyle={digitStyle} />
+              <StudyTimeQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="study-time-calculator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="study-time-calculator" />
               <SectionNav items={navItems} />
-              <StudyTimeQuickReference />
             </div>
           }
         />

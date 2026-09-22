@@ -198,7 +198,12 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
         onScenarioPreset={handleScenarioPreset}
       />
     );
-    result = <PaceCalcResult result={calcResult} solveFor={solveFor} digitStyle={digitStyle} />;
+    result = (
+      <div className="flex flex-col gap-4">
+        <PaceCalcResult result={calcResult} solveFor={solveFor} digitStyle={digitStyle} />
+        <PaceQuickReference />
+      </div>
+    );
   } else if (topMode === "multipoint") {
     input = <MultipointInputPanel unit={multipointUnit} onUnitChange={setMultipointUnit} rows={multipointRows} onChange={setMultipointRows} />;
     result = <MultipointResult segments={multipointSegments} unit={multipointUnit} digitStyle={digitStyle} />;
@@ -252,7 +257,6 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="pace-calculator" />
-              {topMode === "calculator" && <PaceQuickReference />}
             </div>
           }
         />

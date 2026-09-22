@@ -119,14 +119,18 @@ export default function WorldTimeCalculator({ education }: { education: ReactNod
               onClear={handleClear}
             />
           }
-          result={<WorldTimeResult fromCity={fromCity} toCity={toCity} result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <WorldTimeResult fromCity={fromCity} toCity={toCity} result={result} digitStyle={digitStyle} />
+              <WorldClockList digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="world-time-converter" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="world-time-converter" />
               <SectionNav items={navItems} />
               <WorldTimeDisclaimer />
-              <WorldClockList digitStyle={digitStyle} />
               <MeetingPlanner fromCity={fromCity} toCity={toCity} referenceDate={nowSnapshot} digitStyle={digitStyle} />
             </div>
           }

@@ -55,13 +55,17 @@ export default function ColorPaletteGeneratorTool({ education }: { education: Re
               onClear={handleClear}
             />
           }
-          result={<ColorPaletteResult palette={palette} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <ColorPaletteResult palette={palette} />
+              <ColorPaletteQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="color-palette-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="color-palette-generator" />
               <SectionNav items={navItems} />
-              <ColorPaletteQuickReference />
             </div>
           }
         />

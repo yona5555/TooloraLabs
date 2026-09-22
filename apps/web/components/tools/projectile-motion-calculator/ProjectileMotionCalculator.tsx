@@ -175,7 +175,6 @@ export default function ProjectileMotionCalculator({ education }: { education: R
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <ProjectileMotionReferenceTable />
             </div>
           }
           result={
@@ -191,6 +190,7 @@ export default function ProjectileMotionCalculator({ education }: { education: R
                 digitStyle={digitStyle}
               />
               <ProjectileMotionHeightCard maxHeight={result.maxHeight} digitStyle={digitStyle} />
+              <ProjectileMotionReferenceTable />
             </div>
           }
           sidebar={

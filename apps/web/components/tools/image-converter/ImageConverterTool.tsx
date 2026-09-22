@@ -168,22 +168,24 @@ export default function ImageConverterTool({ education }: { education: ReactNode
             />
           }
           result={
-            <ImageResult
-              resultUrl={resultUrl}
-              resultSize={resultSize}
-              originalSize={file?.size ?? 0}
-              outputDimensions={outputDimensions}
-              isConverting={isConverting}
-              onDownload={download}
-              format={format}
-            />
+            <div className="flex flex-col gap-4">
+              <ImageResult
+                resultUrl={resultUrl}
+                resultSize={resultSize}
+                originalSize={file?.size ?? 0}
+                outputDimensions={outputDimensions}
+                isConverting={isConverting}
+                onDownload={download}
+                format={format}
+              />
+              <ImageFormatReference />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="image-converter" category="converters" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="image-converter" />
-              <ImageFormatReference />
             </div>
           }
         />

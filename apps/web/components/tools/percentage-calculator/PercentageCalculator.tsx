@@ -83,13 +83,17 @@ export default function PercentageCalculator({ education }: { education: ReactNo
               onScenarioPreset={handleScenarioPreset}
             />
           }
-          result={<PercentageResult result={result} computed={computed} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <PercentageResult result={result} computed={computed} />
+              <PercentageQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="percentage-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="percentage-calculator" />
-              <PercentageQuickReference />
             </div>
           }
         />

@@ -91,17 +91,20 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
             />
           }
           result={
-            <CryptoResult
-              fromCoin={fromCoin}
-              toCoin={toCoin}
-              amount={amount}
-              convertedAmount={convertedAmount}
-              fiatCurrency={fiatCurrency}
-              onFiatCurrencyChange={setFiatCurrency}
-              usdToSarRate={usdToSarRate}
-              lastUpdated={fetchedAt}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-4">
+              <CryptoResult
+                fromCoin={fromCoin}
+                toCoin={toCoin}
+                amount={amount}
+                convertedAmount={convertedAmount}
+                fiatCurrency={fiatCurrency}
+                onFiatCurrencyChange={setFiatCurrency}
+                usdToSarRate={usdToSarRate}
+                lastUpdated={fetchedAt}
+                digitStyle={digitStyle}
+              />
+              {globalStats && <CryptoGlobalIndicators stats={globalStats} digitStyle={digitStyle} />}
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="crypto-converter" category="financial-markets" />}
           secondary={
@@ -111,7 +114,6 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
               <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
               <CryptoHistoricalChart coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
               <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
-              {globalStats && <CryptoGlobalIndicators stats={globalStats} digitStyle={digitStyle} />}
               <CryptoNews />
               <CryptoLearningResources />
             </div>
