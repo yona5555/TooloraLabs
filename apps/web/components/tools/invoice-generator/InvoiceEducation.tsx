@@ -79,7 +79,7 @@ export default async function InvoiceEducation() {
         <InvoiceDiscountRateGauge
           valueLabel="20%"
           caption={t("variables.discountGauge.caption")}
-          captionColorClass="fill-amber-600 dark:fill-amber-400"
+          captionColorClass="text-amber-600 dark:text-amber-400"
         />
       </InfoSection>
 

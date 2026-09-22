@@ -22,18 +22,9 @@ export default function InvoiceDiscountRateGauge({ valueLabel, caption, captionC
   return (
     <figure className="my-2">
       <div dir="ltr">
-        <RatioGauge
-          value={VALUE}
-          domainMin={0}
-          domainMax={30}
-          zones={ZONES}
-          valueLabel={valueLabel}
-          caption={caption}
-          captionColorClass={captionColorClass}
-          ticks={TICKS}
-          tickFormatter={(t) => `${t}%`}
-        />
+        <RatioGauge value={VALUE} domainMin={0} domainMax={30} zones={ZONES} valueLabel={valueLabel} ticks={TICKS} tickFormatter={(t) => `${t}%`} />
       </div>
+      <figcaption className={`mt-2 max-w-xs text-center text-sm font-semibold ${captionColorClass}`}>{caption}</figcaption>
     </figure>
   );
 }
