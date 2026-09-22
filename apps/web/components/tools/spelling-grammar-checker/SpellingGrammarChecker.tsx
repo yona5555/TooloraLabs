@@ -40,13 +40,17 @@ export default function SpellingGrammarChecker({ education }: { education: React
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<SGInputPanel text={text} onTextChange={setText} onClear={handleClear} />}
-          result={<SGResult text={text} result={result} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <SGResult text={text} result={result} />
+              <SGQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="spelling-grammar-checker" category="ai-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="spelling-grammar-checker" />
-              <SGQuickReference />
             </div>
           }
         />

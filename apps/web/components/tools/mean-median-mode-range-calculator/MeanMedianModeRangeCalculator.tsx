@@ -45,13 +45,17 @@ export default function MeanMedianModeRangeCalculator({ education }: { education
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<MeanMedianModeRangeInputPanel draft={draft} onChange={setDraft} />}
-          result={<MeanMedianModeRangeResult result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <MeanMedianModeRangeResult result={result} digitStyle={digitStyle} />
+              <MeanMedianModeRangeQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="mean-median-mode-range-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="mean-median-mode-range-calculator" />
-              <MeanMedianModeRangeQuickReference />
             </div>
           }
         />

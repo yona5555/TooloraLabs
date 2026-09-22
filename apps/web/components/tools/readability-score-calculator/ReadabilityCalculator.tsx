@@ -40,13 +40,17 @@ export default function ReadabilityCalculator({ education }: { education: ReactN
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<ReadabilityInputPanel text={text} onTextChange={setText} onClear={handleClear} />}
-          result={<ReadabilityResult result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <ReadabilityResult result={result} digitStyle={digitStyle} />
+              <ReadabilityQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="readability-score-calculator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="readability-score-calculator" />
               <SectionNav items={navItems} />
-              <ReadabilityQuickReference />
             </div>
           }
         />

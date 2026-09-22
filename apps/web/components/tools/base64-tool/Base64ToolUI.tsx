@@ -63,21 +63,23 @@ export default function Base64ToolUI({ education }: { education: ReactNode }) {
             />
           }
           result={
-            <Base64Result
-              result={output?.result ?? ""}
-              errorMessage={errorMessage}
-              inputBytes={output?.inputBytes ?? 0}
-              outputBytes={output?.outputBytes ?? 0}
-              digitStyle={digitStyle}
-              mode={mode}
-            />
+            <div className="flex flex-col gap-4">
+              <Base64Result
+                result={output?.result ?? ""}
+                errorMessage={errorMessage}
+                inputBytes={output?.inputBytes ?? 0}
+                outputBytes={output?.outputBytes ?? 0}
+                digitStyle={digitStyle}
+                mode={mode}
+              />
+              <Base64FilePanel />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="base64-tool" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="base64-tool" />
               <SectionNav items={navItems} />
-              <Base64FilePanel />
             </div>
           }
         />

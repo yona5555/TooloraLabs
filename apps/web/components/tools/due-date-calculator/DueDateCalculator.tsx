@@ -76,13 +76,17 @@ export default function DueDateCalculator({ education }: { education: ReactNode 
               onClear={handleClear}
             />
           }
-          result={<DueDateResult result={result} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <DueDateResult result={result} />
+              <DueDateQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="due-date-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="due-date-calculator" />
-              <DueDateQuickReference />
             </div>
           }
         />

@@ -68,13 +68,17 @@ export default function ClassScheduleBuilder({ education }: { education: ReactNo
               onClear={handleClear}
             />
           }
-          result={<ScheduleResult result={result} digitStyle={digitStyle} classes={classes} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <ScheduleResult result={result} digitStyle={digitStyle} classes={classes} />
+              <ScheduleQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="class-schedule-builder" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="class-schedule-builder" />
               <SectionNav items={navItems} />
-              <ScheduleQuickReference />
             </div>
           }
         />
