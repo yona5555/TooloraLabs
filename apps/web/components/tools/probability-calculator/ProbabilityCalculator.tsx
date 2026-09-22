@@ -84,13 +84,17 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
               onScenarioPreset={handleScenarioPreset}
             />
           }
-          result={<ProbabilityResult mode={mode} singleResult={singleResult} compoundResult={compoundResult} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <ProbabilityResult mode={mode} singleResult={singleResult} compoundResult={compoundResult} digitStyle={digitStyle} />
+              <ProbabilityQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="probability-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="probability-calculator" />
-              <ProbabilityQuickReference />
             </div>
           }
         />

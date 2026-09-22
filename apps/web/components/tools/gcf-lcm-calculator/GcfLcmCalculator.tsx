@@ -45,13 +45,17 @@ export default function GcfLcmCalculator({ education }: { education: ReactNode }
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<GcfLcmInputPanel draft={draft} onChange={setDraft} />}
-          result={<GcfLcmResult result={result} digitStyle={digitStyle} draft={draft} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <GcfLcmResult result={result} digitStyle={digitStyle} draft={draft} />
+              <GcfLcmQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="gcf-lcm-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="gcf-lcm-calculator" />
-              <GcfLcmQuickReference />
             </div>
           }
         />

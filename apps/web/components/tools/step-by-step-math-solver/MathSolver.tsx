@@ -81,7 +81,12 @@ export default function MathSolver({ education }: { education: ReactNode }) {
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<MathSolverInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} />}
-          result={<MathSolverResult result={result} draft={committedDraft} hasCalculated={hasCalculated} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <MathSolverResult result={result} draft={committedDraft} hasCalculated={hasCalculated} />
+              <MathSolverQuickReference />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar
               currentSlug="step-by-step-math-solver"
@@ -94,7 +99,6 @@ export default function MathSolver({ education }: { education: ReactNode }) {
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="step-by-step-math-solver" />
-              <MathSolverQuickReference />
             </div>
           }
         />

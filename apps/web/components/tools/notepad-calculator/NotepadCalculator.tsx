@@ -37,7 +37,12 @@ export default function NotepadCalculator({ education }: { education: ReactNode 
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<NotepadInputPanel text={text} onChange={setText} onClear={handleClear} />}
-          result={<NotepadResult result={result} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <NotepadResult result={result} />
+              <NotepadQuickReference />
+            </div>
+          }
           sidebar={
             <RelatedToolsSidebar
               currentSlug="notepad-calculator"
@@ -50,7 +55,6 @@ export default function NotepadCalculator({ education }: { education: ReactNode 
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="notepad-calculator" />
-              <NotepadQuickReference />
             </div>
           }
         />

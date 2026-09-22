@@ -207,7 +207,6 @@ export default function ForceCalculator({ education }: { education: ReactNode })
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <ForceReferenceTable />
             </div>
           }
           result={
@@ -222,6 +221,7 @@ export default function ForceCalculator({ education }: { education: ReactNode })
               />
               <ForceModeTabs mode={mode} onModeChange={handleModeChange} />
               <ForceWeightCard force={result.force} digitStyle={digitStyle} />
+              <ForceReferenceTable />
             </div>
           }
           sidebar={

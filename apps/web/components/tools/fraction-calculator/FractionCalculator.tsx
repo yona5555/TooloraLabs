@@ -99,13 +99,17 @@ export default function FractionCalculator({ education }: { education: ReactNode
               onScenarioPreset={handleScenarioPreset}
             />
           }
-          result={<FractionResult result={result} computed={computed} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <FractionResult result={result} computed={computed} />
+              <FractionQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="fraction-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="fraction-calculator" />
-              <FractionQuickReference />
             </div>
           }
         />

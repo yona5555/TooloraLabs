@@ -82,13 +82,17 @@ export default function BMRCalculator({ education }: { education: ReactNode }) {
               onClear={handleClear}
             />
           }
-          result={<BMRResult result={result} digitStyle={digitStyle} gender={gender} weightKg={weightKg} heightCm={heightCm} age={age} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <BMRResult result={result} digitStyle={digitStyle} gender={gender} weightKg={weightKg} heightCm={heightCm} age={age} />
+              <BMRQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="bmr-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="bmr-calculator" />
-              <BMRQuickReference />
               <BMRDisclaimer />
             </div>
           }

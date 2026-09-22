@@ -33,13 +33,17 @@ export default function WordCounterTool({ education }: { education: ReactNode })
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<WordCounterInputPanel text={text} onTextChange={setText} />}
-          result={<WordCounterResult stats={stats} hasText={text.trim().length > 0} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <WordCounterResult stats={stats} hasText={text.trim().length > 0} digitStyle={digitStyle} />
+              <PlatformLimitsReference characters={stats.characters} />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="word-counter" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="word-counter" />
               <SectionNav items={navItems} />
-              <PlatformLimitsReference characters={stats.characters} />
             </div>
           }
         />
