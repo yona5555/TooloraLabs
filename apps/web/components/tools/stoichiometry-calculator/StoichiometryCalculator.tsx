@@ -187,7 +187,6 @@ export default function StoichiometryCalculator({ education }: { education: Reac
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <StoichiometryReferenceTable />
             </div>
           }
           result={
@@ -202,6 +201,7 @@ export default function StoichiometryCalculator({ education }: { education: Reac
                 digitStyle={digitStyle}
               />
               <StoichiometryMillimolesCard targetMoles={result.targetMoles} digitStyle={digitStyle} />
+              <StoichiometryReferenceTable />
             </div>
           }
           sidebar={

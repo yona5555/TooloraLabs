@@ -158,22 +158,13 @@ export default function InventoryValuationTool({ education }: { education: React
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <InventoryMethodReference />
             </div>
           }
-          result={<InventoryResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />}
-          sidebar={
-            <RelatedToolsSidebar
-              currentSlug="inventory-valuation-calculator"
-              category="business-finance"
-              relatedList={RELATED_TOOLS}
-              relatedListTitle={tDiagrams("relatedTools.title")}
-            />
-          }
-          secondary={
-            <div className="flex flex-col gap-6">
-              <SectionNav items={navItems} visible={navBarVisible} />
-              <ViewDocsLink slug="inventory-valuation-calculator" />
+          result={
+            <div className="flex flex-col gap-4">
+              <InventoryResult result={result} hasCalculated={hasCalculated} errorMessage={errorMessage} digitStyle={digitStyle} currency={currency} />
+
+              <InventoryMethodReference />
 
               {hasCalculated && stockLevelItems && stockLevelItems.length > 0 && (
                 <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
@@ -193,6 +184,20 @@ export default function InventoryValuationTool({ education }: { education: React
                   />
                 </div>
               )}
+            </div>
+          }
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="inventory-valuation-calculator"
+              category="business-finance"
+              relatedList={RELATED_TOOLS}
+              relatedListTitle={tDiagrams("relatedTools.title")}
+            />
+          }
+          secondary={
+            <div className="flex flex-col gap-6">
+              <SectionNav items={navItems} visible={navBarVisible} />
+              <ViewDocsLink slug="inventory-valuation-calculator" />
             </div>
           }
         />

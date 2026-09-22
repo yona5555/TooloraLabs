@@ -75,18 +75,20 @@ export default function LoveCalculator({ education }: { education: ReactNode }) 
             />
           }
           result={
-            hasCalculated ? (
-              <LoveResult result={displayResult} name1={name1} name2={name2} />
-            ) : (
-              <LoveResult result={{ error: "empty-name", percentage: 0 }} name1={name1} name2={name2} />
-            )
+            <div className="flex flex-col gap-4">
+              {hasCalculated ? (
+                <LoveResult result={displayResult} name1={name1} name2={name2} />
+              ) : (
+                <LoveResult result={{ error: "empty-name", percentage: 0 }} name1={name1} name2={name2} />
+              )}
+              <LoveQuickReference />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="love-calculator" category="fun-entertainment" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="love-calculator" />
-              <LoveQuickReference />
             </div>
           }
         />

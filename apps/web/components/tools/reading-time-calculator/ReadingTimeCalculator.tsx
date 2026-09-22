@@ -59,13 +59,17 @@ export default function ReadingTimeCalculator({ education }: { education: ReactN
               onClear={handleClear}
             />
           }
-          result={<RTResult result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <RTResult result={result} digitStyle={digitStyle} />
+              <RTQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="reading-time-calculator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="reading-time-calculator" />
               <SectionNav items={navItems} />
-              <RTQuickReference />
             </div>
           }
         />

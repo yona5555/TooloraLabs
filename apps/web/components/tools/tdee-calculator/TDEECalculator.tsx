@@ -20,6 +20,7 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TDEEInputPanel from "./TDEEInputPanel";
 import TDEEResult from "./TDEEResult";
+import TDEEActivityMultiplierReference from "./TDEEActivityMultiplierReference";
 import type { ActivityLevel, Gender, GoalDirection, TDEEScenario, UnitSystem } from "./types";
 
 const DEFAULTS = {
@@ -161,19 +162,22 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
             />
           }
           result={
-            <TDEEResult
-              bmr={bmr}
-              tdee={tdee}
-              goalDirection={goalDirection}
-              onGoalDirectionChange={setGoalDirection}
-              weeklyRateKg={weeklyRateKg}
-              onWeeklyRateKgChange={setWeeklyRateKg}
-              dailyCalorieTarget={goal.dailyCalorieTarget}
-              adjustmentPercentOfTDEE={goal.adjustmentPercentOfTDEE}
-              dailyAdjustment={goal.dailyAdjustment}
-              isAggressive={goal.isAggressive}
-              digitStyle={digitStyle}
-            />
+            <div className="flex flex-col gap-3">
+              <TDEEResult
+                bmr={bmr}
+                tdee={tdee}
+                goalDirection={goalDirection}
+                onGoalDirectionChange={setGoalDirection}
+                weeklyRateKg={weeklyRateKg}
+                onWeeklyRateKgChange={setWeeklyRateKg}
+                dailyCalorieTarget={goal.dailyCalorieTarget}
+                adjustmentPercentOfTDEE={goal.adjustmentPercentOfTDEE}
+                dailyAdjustment={goal.dailyAdjustment}
+                isAggressive={goal.isAggressive}
+                digitStyle={digitStyle}
+              />
+              <TDEEActivityMultiplierReference />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="tdee-calculator" category="health-fitness" />}
           secondary={

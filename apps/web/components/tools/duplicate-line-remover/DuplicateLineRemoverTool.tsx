@@ -69,13 +69,17 @@ export default function DuplicateLineRemoverTool({ education }: { education: Rea
               onClear={handleClear}
             />
           }
-          result={<DuplicateLineResult data={data} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <DuplicateLineResult data={data} digitStyle={digitStyle} />
+              <DedupeReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="duplicate-line-remover" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="duplicate-line-remover" />
               <SectionNav items={navItems} />
-              <DedupeReference />
             </div>
           }
         />

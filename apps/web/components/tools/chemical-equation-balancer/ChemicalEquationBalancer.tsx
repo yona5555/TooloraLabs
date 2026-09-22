@@ -124,13 +124,13 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <BalancerReferenceTable />
             </div>
           }
           result={
             <div className="flex flex-col gap-3">
               <BalancerResult hasCalculated={hasCalculated} result={result} digitStyle={digitStyle} />
               <BalancerCoefficientSumCard terms={result.terms} />
+              <BalancerReferenceTable />
             </div>
           }
           sidebar={

@@ -109,19 +109,21 @@ export default function GpaCalculator({ education }: { education: ReactNode }) {
                 onPlannedCreditsChange={setPlannedCredits}
                 onClear={handleClear}
               />
-              <GpaReferenceTable />
             </div>
           }
           result={
-            <GpaResult
-              result={result}
-              operation={operation}
-              digitStyle={digitStyle}
-              courseCount={courses.length}
-              courses={courses}
-              targetGpaInput={targetGpa}
-              plannedCreditsInput={plannedCredits}
-            />
+            <div className="flex flex-col gap-3">
+              <GpaResult
+                result={result}
+                operation={operation}
+                digitStyle={digitStyle}
+                courseCount={courses.length}
+                courses={courses}
+                targetGpaInput={targetGpa}
+                plannedCreditsInput={plannedCredits}
+              />
+              <GpaReferenceTable />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="gpa-calculator" category="student-productivity" />}
           secondary={
