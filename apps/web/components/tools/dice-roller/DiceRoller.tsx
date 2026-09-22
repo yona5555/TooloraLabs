@@ -82,19 +82,21 @@ export default function DiceRoller({ education }: { education: ReactNode }) {
             />
           }
           result={
-            <DiceResult
-              result={result}
-              isRolling={isRolling}
-              history={history}
-              onClearHistory={handleClearHistory}
-            />
+            <div className="flex flex-col gap-4">
+              <DiceResult
+                result={result}
+                isRolling={isRolling}
+                history={history}
+                onClearHistory={handleClearHistory}
+              />
+              <DiceQuickReference />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="dice-roller" category="fun-entertainment" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="dice-roller" />
-              <DiceQuickReference />
             </div>
           }
         />

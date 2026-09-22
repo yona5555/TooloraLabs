@@ -63,13 +63,17 @@ export default function RomanNumeralConverter({ education }: { education: ReactN
               onClear={handleClear}
             />
           }
-          result={<RomanResult result={result} direction={direction} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <RomanResult result={result} direction={direction} digitStyle={digitStyle} />
+              <RomanQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="roman-numeral-converter" category="converters" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="roman-numeral-converter" />
-              <RomanQuickReference />
             </div>
           }
         />

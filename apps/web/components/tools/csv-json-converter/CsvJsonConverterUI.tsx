@@ -84,21 +84,23 @@ export default function CsvJsonConverterUI({ education }: { education: ReactNode
             />
           }
           result={
-            <CsvJsonResult
-              isEmpty={!output}
-              result={output?.data.result ?? ""}
-              errorMessage={errorMessage}
-              filename={mode === "csvToJson" ? "converted.json" : "converted.csv"}
-              mimeType={mode === "csvToJson" ? "application/json;charset=utf-8" : "text/csv;charset=utf-8"}
-              modeLabel={mode === "csvToJson" ? tForm("csvToJson") : tForm("jsonToCsv")}
-            />
+            <div className="flex flex-col gap-4">
+              <CsvJsonResult
+                isEmpty={!output}
+                result={output?.data.result ?? ""}
+                errorMessage={errorMessage}
+                filename={mode === "csvToJson" ? "converted.json" : "converted.csv"}
+                mimeType={mode === "csvToJson" ? "application/json;charset=utf-8" : "text/csv;charset=utf-8"}
+                modeLabel={mode === "csvToJson" ? tForm("csvToJson") : tForm("jsonToCsv")}
+              />
+              <CsvVsJsonReference />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="csv-json-converter" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="csv-json-converter" />
               <SectionNav items={navItems} />
-              <CsvVsJsonReference />
             </div>
           }
         />

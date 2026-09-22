@@ -216,7 +216,6 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
               onReset={handleReset}
               onScenarioPreset={handleScenarioPreset}
             />
-            <BMIQuickInsight result={result} />
           </div>
         }
         result={
@@ -233,6 +232,7 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
               age={age}
               gender={gender}
             />
+            <BMIQuickInsight result={result} />
             <BMIMiniConverter />
           </div>
         }

@@ -84,13 +84,17 @@ export default function TriangleCalculator({ education }: { education: ReactNode
               onScenarioPreset={handleScenarioPreset}
             />
           }
-          result={<TriangleResult result={result ?? EMPTY_TRIANGLE_RESULT} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <TriangleResult result={result ?? EMPTY_TRIANGLE_RESULT} digitStyle={digitStyle} />
+              <TriangleQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="triangle-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="triangle-calculator" />
-              <TriangleQuickReference />
             </div>
           }
         />

@@ -93,15 +93,18 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
             />
           }
           result={
-            <BarcodeResult
-              segments={output.success ? output.data.segments : null}
-              displayText={output.success ? output.data.displayText : ""}
-              quietZoneModules={output.success ? output.data.quietZoneModules : 0}
-              errorMessage={errorMessage}
-              logoDataUrl={logoDataUrl}
-              logoPlacement={logoPlacement}
-              symbologyLabel={tForm(`symbology.${symbology}`)}
-            />
+            <div className="flex flex-col gap-4">
+              <BarcodeResult
+                segments={output.success ? output.data.segments : null}
+                displayText={output.success ? output.data.displayText : ""}
+                quietZoneModules={output.success ? output.data.quietZoneModules : 0}
+                errorMessage={errorMessage}
+                logoDataUrl={logoDataUrl}
+                logoPlacement={logoPlacement}
+                symbologyLabel={tForm(`symbology.${symbology}`)}
+              />
+              <BarcodeTypesReference />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="barcode-generator" category="developer-tools" />}
           secondary={
@@ -109,7 +112,6 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
               <ViewDocsLink slug="barcode-generator" />
               <SectionNav items={navItems} />
               <BarcodeDisclaimer />
-              <BarcodeTypesReference />
             </div>
           }
         />

@@ -124,13 +124,17 @@ export default function RandomNumberGenerator({ education }: { education: ReactN
               onClear={handleClear}
             />
           }
-          result={<RandomNumberResult result={result} digitStyle={digitStyle} rangeMin={toInt(min)} rangeMax={toInt(max)} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <RandomNumberResult result={result} digitStyle={digitStyle} rangeMin={toInt(min)} rangeMax={toInt(max)} />
+              <RandomNumberQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="random-number-generator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="random-number-generator" />
-              <RandomNumberQuickReference />
             </div>
           }
         />

@@ -101,13 +101,17 @@ export default function DateCalculator({ education }: { education: ReactNode }) 
               onClear={handleClear}
             />
           }
-          result={<DateResult mode={mode} result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4">
+              <DateResult mode={mode} result={result} digitStyle={digitStyle} />
+              <DateQuickReference />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="date-calculator" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="date-calculator" />
               <SectionNav items={navItems} />
-              <DateQuickReference />
             </div>
           }
         />

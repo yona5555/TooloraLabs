@@ -224,7 +224,6 @@ export default function MolarityCalculator({ education }: { education: ReactNode
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <MolarityReferenceTable />
             </div>
           }
           result={
@@ -232,6 +231,7 @@ export default function MolarityCalculator({ education }: { education: ReactNode
               <MolarityResult hasCalculated={hasCalculated} result={result} mode={mode} digitStyle={digitStyle} />
               <MolarityModeTabs mode={mode} onModeChange={handleModeChange} />
               <MolarityConcentrationCard mode={mode} molarity={result.molarity} c1={result.c1} c2={result.c2} digitStyle={digitStyle} />
+              <MolarityReferenceTable />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="molarity-calculator" category="chemistry" />}
