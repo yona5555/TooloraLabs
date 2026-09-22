@@ -70,7 +70,7 @@ export default async function BreakEvenEducation() {
         <BreakEvenMarginRatioGauge
           valueLabel="60%"
           caption={t("variables.marginGauge.caption")}
-          captionColorClass="fill-emerald-600 dark:fill-emerald-400"
+          captionColorClass="text-emerald-600 dark:text-emerald-400"
         />
         <BreakEvenFixedCostAccumulationDiagram
           title={t("variables.accumulationDiagram.title")}
