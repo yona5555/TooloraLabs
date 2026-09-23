@@ -62,7 +62,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
           {fmt(result.totalCost)}
         </p>
 
-        <div dir="ltr" className="mt-5 flex justify-center overflow-x-auto">
+        <div className="mt-5">
           <FuelFlowDiagram
             distanceLabel={fmt(distance, 0)}
             fuelLabel={fmt(result.fuelUsed)}
