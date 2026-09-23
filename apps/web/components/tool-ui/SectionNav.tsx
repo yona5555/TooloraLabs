@@ -18,18 +18,13 @@ type SectionNavProps = {
   visible?: boolean;
 };
 
-const STUCK_TOP_OFFSET = 72; // px — matches the `top-18` sticky/fixed offset below the site header.
-
-const navSurfaceClassName =
-  "z-40 border-b border-zinc-200 bg-white/90 px-4 py-2 backdrop-blur-xl sm:px-6 dark:border-zinc-800 dark:bg-zinc-950/90";
+const STUCK_TOP_OFFSET = 72; // px — matches the site header's own `h-18`/`top-18`.
 
 export default function SectionNav({ items, showJumpToBottom = false, visible = true }: SectionNavProps) {
   const t = useTranslations("common");
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
   const [isStuck, setIsStuck] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
-  const [narrowRect, setNarrowRect] = useState<{ left: number; width: number } | null>(null);
-  const [wideRect, setWideRect] = useState<{ left: number; width: number } | null>(null);
   const itemsRef = useRef(items);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -38,6 +33,7 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
     itemsRef.current = items;
   }, [items]);
 
+  // Which section heading is currently in view, to highlight the matching button.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -65,32 +61,103 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
    * caller nests this bar inside a short "secondary" column that ends long
    * before the page does, so plain CSS sticky can't reach page-bottom here.
    * A sentinel + IntersectionObserver reimplements sticky manually with
-   * `position: fixed`, which is anchored to the viewport instead of any
-   * ancestor's height, so it keeps working regardless of how short that
-   * ancestor is.
+   * `position: fixed`, anchored to the viewport instead of any ancestor's
+   * height.
    *
-   * `entry.isIntersecting` alone can't tell "scrolled past the sentinel"
-   * apart from "haven't scrolled down to the sentinel yet" — both report
-   * `false`. Whenever the viewport is shorter than the above-the-fold
-   * content (e.g. a 1440x900 laptop screen, or any short viewport in any
-   * locale), the sentinel sits below the fold on first paint, so the
-   * observer's initial callback fired `isIntersecting: false` and this
-   * flipped the nav to `fixed` immediately on load — pinning it over the
-   * page's own H1 before the visitor ever scrolled. `boundingClientRect.top`
-   * disambiguates the two cases directly: only a sentinel that has scrolled
-   * above the rootMargin-shifted line (top < STUCK_TOP_OFFSET) means "past
-   * it", regardless of why it isn't intersecting.
+   * ROOT CAUSE of the two prior bugs (both patched the symptom, not this):
+   *
+   * 1. "Pinned over the H1 on first load, in some locales only" — an
+   *    IntersectionObserver callback's `entry.boundingClientRect` is a
+   *    snapshot taken at the moment its intersection ratio crosses a
+   *    threshold. It does NOT re-fire on every layout shift — only on
+   *    threshold-crossing ones. A locale whose translated strings are
+   *    longer/shorter (a button wrapping to a second line, a scenario chip
+   *    row reflowing) changes the above-the-fold column's height *after*
+   *    hydration, once client components re-render with real translated
+   *    content. If that late shift doesn't happen to cross the observer's
+   *    own threshold again, `isStuck` is left set from a stale, pre-shift
+   *    measurement — wrong for whichever locale's content happened to
+   *    settle at a different height than what the first callback saw. This
+   *    is exactly why it "worked" for two locales and broke for a third:
+   *    it was never actually deterministic, just luck of the layout timing
+   *    per locale.
+   *
+   *    A first rewrite attempt kept IntersectionObserver for scroll-driven
+   *    detection too, reasoning it would simply re-fire on every crossing.
+   *    Instrumented testing disproved that: IntersectionObserver only
+   *    fires when `isIntersecting` *changes*. With a zero-height sentinel
+   *    and a single large scroll jump (restoring scroll position on load,
+   *    a fast Home-key/scrollbar-drag scroll, or this bar's own
+   *    `scrollToBottom` button), the sentinel can go from "below the
+   *    viewport" straight to "above the stuck line" within one sampled
+   *    frame — `isIntersecting` is `false` both before and after, so no
+   *    crossing is ever reported and the callback never fires again. This
+   *    was confirmed directly: `checkStuck()` ran 3 times at mount and
+   *    zero times after a scripted `window.scrollTo()` moved the sentinel
+   *    by thousands of pixels. Fixed by dropping edge-triggered
+   *    (threshold-crossing) detection entirely in favor of a `scroll`/
+   *    `resize` listener that re-runs a *fresh* `getBoundingClientRect()`
+   *    check on every actual scroll event, however large the jump — it
+   *    reads the current position directly instead of inferring it from a
+   *    boundary crossing, so it cannot skip a state. A `ResizeObserver` on
+   *    `document.body` is kept alongside it for the distinct case of a
+   *    layout shift with no scroll at all (late-hydrating content, font
+   *    swap) — not locale-specific, not guessing at which languages are
+   *    "long".
+   *
+   * 2. "Doesn't span full width when stuck (gap on one side)" — the old
+   *    code computed an explicit `left`/`width` in JS from two different
+   *    measured rects ("narrow" above-the-fold column vs. "wide" education
+   *    column) and applied them as inline styles on a `fixed` element. Two
+   *    separate JS measurements, swapped based on scroll position, are two
+   *    ways for this to be off by the time it renders. The site's own top
+   *    header (cited as the working reference) needs none of this: it's
+   *    `sticky`, unconditionally full-width, with its content centered via
+   *    plain CSS (`mx-auto max-w-*`). This bar can't use `sticky` (see
+   *    above), but it *can* borrow the same "don't measure width in JS"
+   *    principle: when stuck, it's `fixed inset-x-0` (always the full
+   *    viewport, like the header), and the same `mx-auto max-w-6xl`
+   *    wrapper that already centers its content in the non-stuck state
+   *    keeps centering it identically once fixed — zero measured rects,
+   *    nothing that can go stale or be locale-dependent.
    */
   useEffect(() => {
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsStuck(entry.boundingClientRect.top < STUCK_TOP_OFFSET),
-      { rootMargin: `-${STUCK_TOP_OFFSET}px 0px 0px 0px`, threshold: 0 }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
+    function checkStuck() {
+      if (!sentinel) return;
+      setIsStuck(sentinel.getBoundingClientRect().top < STUCK_TOP_OFFSET);
+    }
+
+    checkStuck();
+
+    // Fresh position check on every actual scroll/resize event — never
+    // infers state from a threshold crossing, so it can't skip a state
+    // when the sentinel jumps past the stuck line in a single frame.
+    let ticking = false;
+    function onScrollOrResize() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        checkStuck();
+        ticking = false;
+      });
+    }
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
+
+    // Catches a layout shift with no scroll at all (late-hydrating
+    // translated content, web font swap, scenario-chip row wrapping
+    // differently per locale, etc.).
+    const resizeObserver = new ResizeObserver(checkStuck);
+    resizeObserver.observe(document.body);
+
+    return () => {
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -102,57 +169,6 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
     });
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
-
-  /**
-   * When stuck, the bar can't just inherit its parent's width the way a
-   * normal-flow element does, since `position: fixed` takes it out of flow
-   * entirely. Two different widths are correct depending on scroll depth:
-   * narrow (this "secondary" column, via the sentinel, which stays in
-   * normal flow even while the nav is fixed) while the sidebar still sits
-   * to the side at the same vertical position, and wide (the page's actual
-   * content column, via `<main>`) once scrolled past the above-the-fold
-   * grid into the encyclopedic section, which has no sidebar and is wider.
-   * Which one applies is decided at render time from `activeId`.
-   */
-  useLayoutEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-
-    function measure() {
-      const rect = el!.getBoundingClientRect();
-      setNarrowRect({ left: rect.left, width: rect.width });
-    }
-
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(el);
-    window.addEventListener("resize", measure);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    function measure() {
-      const main = document.querySelector("main");
-      if (!main) return;
-      const rect = main.getBoundingClientRect();
-      const style = getComputedStyle(main);
-      const paddingLeft = parseFloat(style.paddingLeft) || 0;
-      const paddingRight = parseFloat(style.paddingRight) || 0;
-      setWideRect({ left: rect.left + paddingLeft, width: rect.width - paddingLeft - paddingRight });
-    }
-
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(document.querySelector("main") ?? document.body);
-    window.addEventListener("resize", measure);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", measure);
-    };
   }, []);
 
   function scrollToSection(id: string) {
@@ -169,9 +185,6 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
 
   if (items.length === 0) return null;
 
-  const pastAboveFold = activeId !== items[0]?.id;
-  const stuckRect = (pastAboveFold ? wideRect : narrowRect) ?? narrowRect;
-
   return (
     <>
       <div ref={sentinelRef} aria-hidden="true" />
@@ -179,10 +192,11 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
       <nav
         ref={navRef}
         aria-label={t("sectionNavLabel")}
-        className={`${isStuck ? `fixed top-18 ${navSurfaceClassName}` : `relative mb-6 ${navSurfaceClassName}`} transition-opacity duration-300 ${visible ? "opacity-100" : "pointer-events-none opacity-0"}`}
-        style={isStuck && stuckRect ? { left: stuckRect.left, width: stuckRect.width } : undefined}
+        className={`z-40 border-b border-zinc-200 bg-white/90 backdrop-blur-xl transition-opacity duration-300 dark:border-zinc-800 dark:bg-zinc-950/90 ${
+          isStuck ? "fixed inset-x-0 top-18" : "relative mb-6"
+        } ${visible ? "opacity-100" : "pointer-events-none opacity-0"}`}
       >
-        <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto">
+        <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6">
           {items.map((item) => (
             <button
               key={item.id}
