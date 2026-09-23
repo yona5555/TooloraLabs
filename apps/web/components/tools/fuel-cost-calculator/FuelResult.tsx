@@ -51,7 +51,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
         <h2 className="font-bold text-white">{t("heading")}</h2>
         <FuelShareExportModal
           inputRows={[{ label: t("fuelUsedLabel"), value: fmt(result.fuelUsed) }]}
-          resultRows={[{ label: t("costPerDistanceLabel"), value: fmt(result.costPerDistanceUnit, 3) }]}
+          resultRows={[{ label: t("costPerDistanceLabel"), value: fmt(result.costPerDistanceUnit, 2) }]}
           heroLabel={t("heading")}
           heroValue={fmt(result.totalCost)}
           sentence={sentence}
@@ -84,7 +84,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
           <li className="flex items-center justify-between gap-3">
             <span className="text-zinc-500 dark:text-zinc-400">{t("costPerDistanceLabel")}</span>
             <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">
-              {fmt(result.costPerDistanceUnit, 3)}
+              {fmt(result.costPerDistanceUnit, 2)}
             </span>
           </li>
         </ul>
