@@ -19,13 +19,14 @@ export default function KinematicsModeTabs({ mode, onModeChange }: KinematicsMod
           role="tab"
           aria-selected={mode === value}
           onClick={() => onModeChange(value)}
+          title={t(`mode.${value}`)}
           className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
             mode === value
               ? "border-blue-400 bg-blue-600 text-white"
               : "border-zinc-300 text-zinc-600 hover:bg-zinc-100 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-blue-600"
           }`}
         >
-          {t(`mode.${value}`)}
+          {t(`mode.${value}Short`)}
         </button>
       ))}
     </div>
