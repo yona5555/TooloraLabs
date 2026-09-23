@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { convertAmount } from "@/lib/currency";
+import { pickFontSizeClass } from "@/lib/dynamicFontSize";
 import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
@@ -24,6 +25,14 @@ export default function FuelCostPerMileVsKmChart() {
   const currency = live?.currency ?? "USD";
   const digitStyle = live?.digitStyle ?? "western";
   const money = (usd: number) => formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
+  const perMileValue = money(COST_PER_MILE);
+  const perKmValue = money(COST_PER_KM);
+  const comparisonSizeClass = pickFontSizeClass(perMileValue.length > perKmValue.length ? perMileValue : perKmValue, [
+    [6, "text-2xl"],
+    [9, "text-xl"],
+    [12, "text-lg"],
+    [Infinity, "text-base"],
+  ]);
 
   return (
     <SectionCard title={t("title")}>
@@ -32,7 +41,7 @@ export default function FuelCostPerMileVsKmChart() {
         <div dir="ltr" className="flex shrink-0 items-center justify-center gap-4">
           <div className="flex flex-col items-center rounded-lg border border-sky-300 bg-sky-50 px-4 py-5 dark:border-sky-500/40 dark:bg-sky-500/10">
             <span className="text-xs font-medium uppercase tracking-wide text-sky-600 dark:text-sky-300">{t("perMile")}</span>
-            <span className="mt-1 text-2xl font-bold text-sky-700 dark:text-sky-200">{money(COST_PER_MILE)}</span>
+            <span className={`mt-1 break-words font-bold text-sky-700 dark:text-sky-200 ${comparisonSizeClass}`}>{perMileValue}</span>
           </div>
           <svg width={40} height={24} viewBox="0 0 40 24" role="img" aria-label="=" className="shrink-0 text-current opacity-50">
             <line x1={4} y1={8} x2={32} y2={8} stroke="currentColor" strokeWidth={2} />
@@ -40,7 +49,7 @@ export default function FuelCostPerMileVsKmChart() {
           </svg>
           <div className="flex flex-col items-center rounded-lg border border-indigo-300 bg-indigo-50 px-4 py-5 dark:border-indigo-500/40 dark:bg-indigo-500/10">
             <span className="text-xs font-medium uppercase tracking-wide text-indigo-600 dark:text-indigo-300">{t("perKm")}</span>
-            <span className="mt-1 text-2xl font-bold text-indigo-700 dark:text-indigo-200">{money(COST_PER_KM)}</span>
+            <span className={`mt-1 break-words font-bold text-indigo-700 dark:text-indigo-200 ${comparisonSizeClass}`}>{perKmValue}</span>
           </div>
         </div>
         <FuelWorkedExampleNote

@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
+import { pickFontSizeClass } from "@/lib/dynamicFontSize";
 import FuelFlowDiagram from "./FuelFlowDiagram";
 import FuelPriceSensitivityDiagram from "./FuelPriceSensitivityDiagram";
 import FuelShareExportModal from "./FuelShareExportModal";
@@ -51,6 +52,18 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
     return { price, cost: fuelUsed * price };
   });
 
+  const heroValue = money(result.totalCost);
+  // A currency code plus a large grouped amount ("EGP 2,960.00") can run
+  // noticeably longer than "$60.00" — shrink the step by actual rendered
+  // length so it never overflows this card, whatever currency/number lands
+  // here, instead of a fixed size tuned to one currency.
+  const heroSizeClass = pickFontSizeClass(heroValue, [
+    [9, "text-3xl"],
+    [12, "text-2xl"],
+    [16, "text-xl"],
+    [Infinity, "text-lg"],
+  ]);
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
@@ -59,13 +72,13 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
           inputRows={[{ label: t("fuelUsedLabel"), value: fmt(result.fuelUsed) }]}
           resultRows={[{ label: t("costPerDistanceLabel"), value: money(result.costPerDistanceUnit) }]}
           heroLabel={t("heading")}
-          heroValue={money(result.totalCost)}
+          heroValue={heroValue}
           sentence={sentence}
         />
       </div>
       <div className="p-4 lg:p-6">
-        <p className="text-center font-mono text-3xl font-bold text-blue-700 dark:text-blue-300">
-          {money(result.totalCost)}
+        <p className={`text-center font-mono font-bold text-blue-700 dark:text-blue-300 break-words ${heroSizeClass}`}>
+          {heroValue}
         </p>
 
         {/* Stacked (not side-by-side) deliberately: this is the narrower above-the-fold
@@ -76,7 +89,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
           <FuelFlowDiagram
             distanceLabel={fmt(distance, 0)}
             fuelLabel={fmt(result.fuelUsed)}
-            costLabel={money(result.totalCost)}
+            costLabel={heroValue}
           />
           <FuelWorkedExampleNote
             title={tw("title")}
