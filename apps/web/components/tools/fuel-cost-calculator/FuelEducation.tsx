@@ -14,6 +14,7 @@ import FuelAnnualProjectionChart from "./FuelAnnualProjectionChart";
 import FuelTypeCostComparisonChart from "./FuelTypeCostComparisonChart";
 import FuelUnitConversionDiagram from "./FuelUnitConversionDiagram";
 import FuelCostPerMileVsKmChart from "./FuelCostPerMileVsKmChart";
+import FuelExamplesTable from "./FuelExamplesTable";
 
 type ExampleRow = { scenario: string; result: string };
 type UseCaseItem = { title: string; description: string };
@@ -53,24 +54,7 @@ export default async function FuelEducation() {
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
-        <div dir="ltr" className="overflow-x-auto">
-          <table className="w-full min-w-[420px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-current/30 text-start">
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnScenario")}</th>
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exampleRows.map((row) => (
-                <tr key={row.scenario} className="border-b border-current/10">
-                  <td className="px-3 py-2.5">{row.scenario}</td>
-                  <td className="px-3 py-2.5 font-semibold">{row.result}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <FuelExamplesTable rows={exampleRows} columnScenario={t("examples.columnScenario")} columnResult={t("examples.columnResult")} />
         <FuelPriceBandChart />
         <FuelEfficiencyComparisonChart />
         <FuelTypeCostComparisonChart />

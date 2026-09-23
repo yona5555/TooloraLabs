@@ -22732,16 +22732,16 @@
           "columnResult": "Result",
           "rows": [
             {
-              "scenario": "500 km trip, 8 L/100km, $1.50/L",
-              "result": "40 L used, $60.00 total"
+              "scenario": "500 km trip, 8 L/100km, {price}/L",
+              "result": "40 L used, {cost} total"
             },
             {
-              "scenario": "500 km trip, 12.5 km/L, $1.50/L",
-              "result": "40 L used, $60.00 total"
+              "scenario": "500 km trip, 12.5 km/L, {price}/L",
+              "result": "40 L used, {cost} total"
             },
             {
-              "scenario": "300 mi trip, 30 mpg, $3.50/gal",
-              "result": "10 gal used, $35.00 total"
+              "scenario": "300 mi trip, 30 mpg, {price}/gal",
+              "result": "10 gal used, {cost} total"
             }
           ]
         },
@@ -22854,7 +22854,7 @@
       "costComparisonDiagram": {
         "title": "Cost to Drive 100 km, by Vehicle Type",
         "intro": "Fuel efficiency translates directly into cost — here's what 100 km costs across common vehicle classes at a fixed reference fuel price.",
-        "caption": "Assumes a reference fuel price of ${price} per liter; your actual local price will change these figures proportionally.",
+        "caption": "Assumes a reference fuel price of {price} per liter; your actual local price will change these figures proportionally.",
         "vehicles": {
           "hybrid": "Hybrid",
           "sedan": "Sedan",
@@ -22877,23 +22877,23 @@
       },
       "formulaDiagram": {
         "title": "How the Cost Is Calculated",
-        "intro": "A worked example: 300 miles at 30 mpg, priced at $3.50 per gallon.",
+        "intro": "A worked example: 300 miles at 30 mpg, priced at {price} per gallon.",
         "distance": "Distance",
         "efficiency": "Efficiency",
         "price": "Price",
         "fuelUsedRow": "Fuel used: {value} gallons",
-        "totalCostRow": "Total cost: ${value}",
+        "totalCostRow": "Total cost: {value}",
         "ifDistanceDoubledLabel": "If Distance Doubled (600 mi)",
-        "ifPriceDoubledLabel": "If Price Doubled ($7.00)"
+        "ifPriceDoubledLabel": "If Price Doubled ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "Total Cost by Fuel Efficiency",
-        "caption": "Annual cost for {distance} miles at $​{price}/gallon, across five real efficiency levels.",
+        "caption": "Annual cost for {distance} miles at {price}/gallon, across five real efficiency levels.",
         "bestCaseLabel": "Best Case ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "Total Cost by Trip Distance",
-        "caption": "At {efficiency} mpg and ${price}/gallon.",
+        "caption": "At {efficiency} mpg and {price}/gallon.",
         "labels": {
           "commute": "Daily commute ({miles} mi)",
           "weekendTrip": "Weekend trip ({miles} mi)",
@@ -22903,14 +22903,14 @@
       },
       "annualProjectionChart": {
         "title": "Projected Cost Over Time",
-        "caption": "At {distance} miles/month, {efficiency} mpg, ${price}/gallon.",
+        "caption": "At {distance} miles/month, {efficiency} mpg, {price}/gallon.",
         "months": "{count} months",
         "monthlyCostLabel": "Monthly Cost"
       },
       "priceBandChart": {
         "title": "Total Cost by Fuel Price",
         "caption": "For a {distance}-mile trip at {efficiency} mpg, across four real price points.",
-        "rateLabel": "Cost per $0.50/gal Rise"
+        "rateLabel": "Cost per {step}/gal Rise"
       },
       "typeCostComparisonChart": {
         "title": "Cost by Power Source",
@@ -22934,7 +22934,7 @@
       },
       "costPerMileVsKmChart": {
         "title": "Cost per Mile vs. per Kilometer",
-        "caption": "Same ${cost} trip cost over {distance} miles, expressed in both units.",
+        "caption": "Same {cost} trip cost over {distance} miles, expressed in both units.",
         "perMile": "Per mile",
         "perKm": "Per kilometer",
         "per100kmLabel": "Per 100 km"

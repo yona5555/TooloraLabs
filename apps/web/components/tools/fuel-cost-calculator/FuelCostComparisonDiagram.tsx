@@ -1,5 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
+import { convertAmount } from "@/lib/currency";
+import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
@@ -33,6 +36,10 @@ export default function FuelCostComparisonDiagram() {
   const tVehicles = useTranslations("tools.fuel-cost-calculator.costComparisonDiagram.vehicles");
   const tf = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
   const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
+  const live = useFuelLiveInputs();
+  const currency = live?.currency ?? "USD";
+  const digitStyle = live?.digitStyle ?? "western";
+  const money = (usd: number) => formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   const costs = VEHICLES.map((v) => v.litersPer100km * REFERENCE_PRICE_PER_LITER);
   const maxCost = Math.max(...costs);
@@ -61,7 +68,7 @@ export default function FuelCostComparisonDiagram() {
                 <g key={v.key}>
                   <rect x={x} y={y} width={COL_WIDTH} height={colHeight} rx={6} className="fill-indigo-500/80 dark:fill-indigo-400/80" />
                   <text x={x + COL_WIDTH / 2} y={y - 8} textAnchor="middle" fontSize={11} fontWeight={700} fill="currentColor">
-                    ${cost.toFixed(2)}
+                    {money(cost)}
                   </text>
                   <text x={x + COL_WIDTH / 2} y={HEIGHT - PAD_BOTTOM + 18} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.75}>
                     {tVehicles(v.key)}
@@ -74,23 +81,23 @@ export default function FuelCostComparisonDiagram() {
         <FuelWorkedExampleNote
           title={tw("title")}
           rows={[
-            { label: tf("price"), value: `$${REFERENCE_PRICE_PER_LITER.toFixed(2)}/L` },
+            { label: tf("price"), value: `${money(REFERENCE_PRICE_PER_LITER)}/L` },
             { label: d("vehicleLabel"), value: tVehicles(example.key) },
             {
               label: d("costPer100kmLabel"),
-              value: `$${example.cost.toFixed(2)}`,
+              value: money(example.cost),
               emphasize: true,
               note: tw("comparisonMore", {
-                amount: ltrIsolate(`$${(example.cost - reference.cost).toFixed(2)}`),
-                label: `${tVehicles(reference.key)} (${ltrIsolate(`$${reference.cost.toFixed(2)}`)})`,
+                amount: ltrIsolate(money(example.cost - reference.cost)),
+                label: `${tVehicles(reference.key)} (${ltrIsolate(money(reference.cost))})`,
               }),
             },
-            { label: d("mostEfficientLabel"), value: `$${cheapest.cost.toFixed(2)}` },
-            { label: d("leastEfficientLabel"), value: `$${priciest.cost.toFixed(2)}` },
+            { label: d("mostEfficientLabel"), value: money(cheapest.cost) },
+            { label: d("leastEfficientLabel"), value: money(priciest.cost) },
           ]}
         />
       </div>
-      <p className="mt-3 text-center text-sm opacity-80">{d("caption", { price: REFERENCE_PRICE_PER_LITER.toFixed(2) })}</p>
+      <p className="mt-3 text-center text-sm opacity-80">{d("caption", { price: money(REFERENCE_PRICE_PER_LITER) })}</p>
     </SectionCard>
   );
 }

@@ -22732,16 +22732,16 @@
           "columnResult": "परिणाम",
           "rows": [
             {
-              "scenario": "500 km यात्रा, 8 L/100km, $1.50/L",
-              "result": "40 L उपयोग, $60.00 कुल"
+              "scenario": "500 km यात्रा, 8 L/100km, {price}/L",
+              "result": "40 L उपयोग, {cost} कुल"
             },
             {
-              "scenario": "500 km यात्रा, 12.5 km/L, $1.50/L",
-              "result": "40 L उपयोग, $60.00 कुल"
+              "scenario": "500 km यात्रा, 12.5 km/L, {price}/L",
+              "result": "40 L उपयोग, {cost} कुल"
             },
             {
-              "scenario": "300 mi यात्रा, 30 mpg, $3.50/gal",
-              "result": "10 gal उपयोग, $35.00 कुल"
+              "scenario": "300 mi यात्रा, 30 mpg, {price}/gal",
+              "result": "10 gal उपयोग, {cost} कुल"
             }
           ]
         },
@@ -22854,7 +22854,7 @@
       "costComparisonDiagram": {
         "title": "वाहन के प्रकार के अनुसार 100 किमी चलाने की लागत",
         "intro": "ईंधन दक्षता सीधे लागत में बदल जाती है — यहाँ एक निश्चित संदर्भ ईंधन मूल्य पर सामान्य वाहन श्रेणियों में 100 किमी की लागत दी गई है।",
-        "caption": "{price} डॉलर प्रति लीटर के संदर्भ ईंधन मूल्य पर आधारित; आपकी वास्तविक स्थानीय कीमत इन आँकड़ों को आनुपातिक रूप से बदल देगी।",
+        "caption": "{price} प्रति लीटर के संदर्भ ईंधन मूल्य पर आधारित; आपकी वास्तविक स्थानीय कीमत इन आँकड़ों को आनुपातिक रूप से बदल देगी।",
         "vehicles": {
           "hybrid": "हाइब्रिड",
           "sedan": "सेडान",
@@ -22877,23 +22877,23 @@
       },
       "formulaDiagram": {
         "title": "लागत की गणना कैसे होती है",
-        "intro": "एक हल किया गया उदाहरण: 30 mpg पर 300 मील, $3.50 प्रति गैलन की कीमत पर।",
+        "intro": "एक हल किया गया उदाहरण: 30 mpg पर 300 मील, {price} प्रति गैलन की कीमत पर।",
         "distance": "दूरी",
         "efficiency": "दक्षता",
         "price": "कीमत",
         "fuelUsedRow": "प्रयुक्त ईंधन: {value} गैलन",
-        "totalCostRow": "कुल लागत: ${value}",
+        "totalCostRow": "कुल लागत: {value}",
         "ifDistanceDoubledLabel": "यदि दूरी दोगुनी हो (600 mi)",
-        "ifPriceDoubledLabel": "यदि कीमत दोगुनी हो ($7.00)"
+        "ifPriceDoubledLabel": "यदि कीमत दोगुनी हो ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "ईंधन दक्षता के अनुसार कुल लागत",
-        "caption": "{distance} मील के लिए वार्षिक लागत ${price}/गैलन पर, पाँच वास्तविक दक्षता स्तरों में।",
+        "caption": "{distance} मील के लिए वार्षिक लागत {price}/गैलन पर, पाँच वास्तविक दक्षता स्तरों में।",
         "bestCaseLabel": "सर्वोत्तम स्थिति ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "यात्रा दूरी के अनुसार कुल लागत",
-        "caption": "{efficiency} mpg और ${price}/गैलन पर।",
+        "caption": "{efficiency} mpg और {price}/गैलन पर।",
         "labels": {
           "commute": "दैनिक आवागमन ({miles} मील)",
           "weekendTrip": "सप्ताहांत यात्रा ({miles} मील)",
@@ -22903,14 +22903,14 @@
       },
       "annualProjectionChart": {
         "title": "समय के साथ अनुमानित लागत",
-        "caption": "{distance} मील/माह, {efficiency} mpg, ${price}/गैलन पर।",
+        "caption": "{distance} मील/माह, {efficiency} mpg, {price}/गैलन पर।",
         "months": "{count} महीने",
         "monthlyCostLabel": "मासिक लागत"
       },
       "priceBandChart": {
         "title": "ईंधन कीमत के अनुसार कुल लागत",
         "caption": "{efficiency} mpg पर {distance}-मील की यात्रा के लिए, चार वास्तविक मूल्य बिंदुओं में।",
-        "rateLabel": "प्रति $0.50/गैलन वृद्धि लागत"
+        "rateLabel": "प्रति {step}/गैलन वृद्धि लागत"
       },
       "typeCostComparisonChart": {
         "title": "ऊर्जा स्रोत के अनुसार लागत",
@@ -22934,7 +22934,7 @@
       },
       "costPerMileVsKmChart": {
         "title": "प्रति मील बनाम प्रति किलोमीटर लागत",
-        "caption": "समान ${cost} यात्रा लागत {distance} मील पर, दोनों इकाइयों में व्यक्त।",
+        "caption": "समान {cost} यात्रा लागत {distance} मील पर, दोनों इकाइयों में व्यक्त।",
         "perMile": "प्रति मील",
         "perKm": "प्रति किलोमीटर",
         "per100kmLabel": "प्रति 100 किमी"

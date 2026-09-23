@@ -22732,16 +22732,16 @@
           "columnResult": "Résultat",
           "rows": [
             {
-              "scenario": "Trajet de 500 km, 8 L/100km, 1,50 $/L",
-              "result": "40 L utilisés, 60,00 $ au total"
+              "scenario": "Trajet de 500 km, 8 L/100km, {price}/L",
+              "result": "40 L utilisés, {cost} au total"
             },
             {
-              "scenario": "Trajet de 500 km, 12,5 km/L, 1,50 $/L",
-              "result": "40 L utilisés, 60,00 $ au total"
+              "scenario": "Trajet de 500 km, 12,5 km/L, {price}/L",
+              "result": "40 L utilisés, {cost} au total"
             },
             {
-              "scenario": "Trajet de 300 mi, 30 mpg, 3,50 $/gal",
-              "result": "10 gal utilisés, 35,00 $ au total"
+              "scenario": "Trajet de 300 mi, 30 mpg, {price}/gal",
+              "result": "10 gal utilisés, {cost} au total"
             }
           ]
         },
@@ -22854,7 +22854,7 @@
       "costComparisonDiagram": {
         "title": "Coût pour Parcourir 100 km, par Type de Véhicule",
         "intro": "L'efficacité énergétique se traduit directement en coût — voici ce que coûtent 100 km selon les classes de véhicules courantes, à un prix de carburant de référence fixe.",
-        "caption": "Suppose un prix de carburant de référence de {price} $ par litre ; votre prix local réel modifiera ces chiffres proportionnellement.",
+        "caption": "Suppose un prix de carburant de référence de {price} par litre ; votre prix local réel modifiera ces chiffres proportionnellement.",
         "vehicles": {
           "hybrid": "Hybride",
           "sedan": "Berline",
@@ -22877,23 +22877,23 @@
       },
       "formulaDiagram": {
         "title": "Comment le coût est calculé",
-        "intro": "Un exemple résolu : 300 miles à 30 mpg, au prix de 3,50 $ le gallon.",
+        "intro": "Un exemple résolu : 300 miles à 30 mpg, au prix de {price} le gallon.",
         "distance": "Distance",
         "efficiency": "Efficacité",
         "price": "Prix",
         "fuelUsedRow": "Carburant utilisé : {value} gallons",
-        "totalCostRow": "Coût total : {value} $",
+        "totalCostRow": "Coût total : {value}",
         "ifDistanceDoubledLabel": "Si la distance doublait (600 mi)",
-        "ifPriceDoubledLabel": "Si le prix doublait (7,00 $)"
+        "ifPriceDoubledLabel": "Si le prix doublait ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "Coût total selon l'efficacité énergétique",
-        "caption": "Coût annuel pour {distance} miles à {price} $/gallon, sur cinq niveaux d'efficacité réels.",
+        "caption": "Coût annuel pour {distance} miles à {price}/gallon, sur cinq niveaux d'efficacité réels.",
         "bestCaseLabel": "Meilleur cas ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "Coût total selon la distance du trajet",
-        "caption": "À {efficiency} mpg et {price} $/gallon.",
+        "caption": "À {efficiency} mpg et {price}/gallon.",
         "labels": {
           "commute": "Trajet quotidien ({miles} mi)",
           "weekendTrip": "Sortie de week-end ({miles} mi)",
@@ -22903,14 +22903,14 @@
       },
       "annualProjectionChart": {
         "title": "Coût projeté dans le temps",
-        "caption": "À {distance} miles/mois, {efficiency} mpg, {price} $/gallon.",
+        "caption": "À {distance} miles/mois, {efficiency} mpg, {price}/gallon.",
         "months": "{count} mois",
         "monthlyCostLabel": "Coût mensuel"
       },
       "priceBandChart": {
         "title": "Coût total selon le prix du carburant",
         "caption": "Pour un trajet de {distance} miles à {efficiency} mpg, sur quatre prix réels.",
-        "rateLabel": "Coût par hausse de 0,50 $/gal"
+        "rateLabel": "Coût par hausse de {step}/gal"
       },
       "typeCostComparisonChart": {
         "title": "Coût par source d'énergie",
@@ -22934,7 +22934,7 @@
       },
       "costPerMileVsKmChart": {
         "title": "Coût par mile vs. par kilomètre",
-        "caption": "Même coût de trajet de {cost} $ sur {distance} miles, exprimé dans les deux unités.",
+        "caption": "Même coût de trajet de {cost} sur {distance} miles, exprimé dans les deux unités.",
         "perMile": "Par mile",
         "perKm": "Par kilomètre",
         "per100kmLabel": "Par 100 km"

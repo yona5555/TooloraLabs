@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import { FUEL_SCENARIOS, type FuelRateMode, type FuelScenario } from "./types";
 
 type Props = {
@@ -14,6 +16,8 @@ type Props = {
   onRateValueChange: (value: string) => void;
   pricePerUnit: string;
   onPricePerUnitChange: (value: string) => void;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   onScenarioPreset: (scenario: FuelScenario) => void;
   onClear: () => void;
 };
@@ -27,6 +31,8 @@ export default function FuelInputPanel({
   onRateValueChange,
   pricePerUnit,
   onPricePerUnitChange,
+  currency,
+  onCurrencyChange,
   onScenarioPreset,
   onClear,
 }: Props) {
@@ -49,6 +55,8 @@ export default function FuelInputPanel({
       </div>
 
       <div className="space-y-4">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+
         <ToolInput
           label={t("distanceLabel")}
           type="text"

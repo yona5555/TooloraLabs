@@ -1,4 +1,8 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
+import { convertAmount } from "@/lib/currency";
+import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
@@ -11,15 +15,20 @@ const PRICE = 3.5;
 const MONTHLY_COST = (MONTHLY_DISTANCE / EFFICIENCY) * PRICE;
 const MONTH_MARKS = [3, 6, 9, 12];
 
-export default async function FuelAnnualProjectionChart() {
-  const t = await getTranslations("tools.fuel-cost-calculator.annualProjectionChart");
-  const tf = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
-  const td = await getTranslations("tools.fuel-cost-calculator.diagram");
-  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
+export default function FuelAnnualProjectionChart() {
+  const t = useTranslations("tools.fuel-cost-calculator.annualProjectionChart");
+  const tf = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const td = useTranslations("tools.fuel-cost-calculator.diagram");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
+  const live = useFuelLiveInputs();
+  const currency = live?.currency ?? "USD";
+  const digitStyle = live?.digitStyle ?? "western";
+  const money = (usd: number, maximumFractionDigits = 0) =>
+    formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits });
 
   const points = MONTH_MARKS.map((months) => {
     const cost = MONTHLY_COST * months;
-    return { x: months, label: t("months", { count: months }), value: cost, formatted: `$${Math.round(cost).toLocaleString("en-US")}` };
+    return { x: months, label: t("months", { count: months }), value: cost, formatted: money(cost) };
   });
 
   const finalPoint = points[points.length - 1]; // 12 months — the chart's own last plotted value
@@ -28,7 +37,7 @@ export default async function FuelAnnualProjectionChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
-        {t("caption", { distance: MONTHLY_DISTANCE.toLocaleString("en-US"), efficiency: EFFICIENCY, price: PRICE.toFixed(2) })}
+        {t("caption", { distance: MONTHLY_DISTANCE.toLocaleString("en-US"), efficiency: EFFICIENCY, price: money(PRICE, 2) })}
       </p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div className="shrink-0">
@@ -39,8 +48,8 @@ export default async function FuelAnnualProjectionChart() {
           rows={[
             { label: tf("distance"), value: `${MONTHLY_DISTANCE.toLocaleString("en-US")} mi/mo` },
             { label: tf("efficiency"), value: `${EFFICIENCY} mpg` },
-            { label: tf("price"), value: `$${PRICE.toFixed(2)}` },
-            { label: t("monthlyCostLabel"), value: `$${MONTHLY_COST.toFixed(0)}`, emphasize: true, note: `× ${finalPoint.label}` },
+            { label: tf("price"), value: money(PRICE, 2) },
+            { label: t("monthlyCostLabel"), value: money(MONTHLY_COST), emphasize: true, note: `× ${finalPoint.label}` },
             {
               label: td("totalCost"),
               value: finalPoint.formatted,

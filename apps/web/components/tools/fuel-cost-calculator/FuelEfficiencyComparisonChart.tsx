@@ -1,4 +1,8 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
+import { convertAmount } from "@/lib/currency";
+import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
@@ -9,15 +13,20 @@ const ANNUAL_DISTANCE = 12000;
 const PRICE = 3.5;
 const EFFICIENCIES = [20, 25, 30, 35, 40];
 
-export default async function FuelEfficiencyComparisonChart() {
-  const t = await getTranslations("tools.fuel-cost-calculator.efficiencyComparisonChart");
-  const tf = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
-  const td = await getTranslations("tools.fuel-cost-calculator.diagram");
-  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
+export default function FuelEfficiencyComparisonChart() {
+  const t = useTranslations("tools.fuel-cost-calculator.efficiencyComparisonChart");
+  const tf = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const td = useTranslations("tools.fuel-cost-calculator.diagram");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
+  const live = useFuelLiveInputs();
+  const currency = live?.currency ?? "USD";
+  const digitStyle = live?.digitStyle ?? "western";
+  const money = (usd: number, maximumFractionDigits = 0) =>
+    formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits });
 
   const points = EFFICIENCIES.map((mpg) => {
     const cost = (ANNUAL_DISTANCE / mpg) * PRICE;
-    return { x: mpg, label: `${mpg}`, value: cost, formatted: `$${Math.round(cost).toLocaleString("en-US")}` };
+    return { x: mpg, label: `${mpg}`, value: cost, formatted: money(cost) };
   });
 
   const example = points[2]; // 30 mpg — the middle of the five plotted efficiency levels
@@ -26,7 +35,7 @@ export default async function FuelEfficiencyComparisonChart() {
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { distance: ANNUAL_DISTANCE.toLocaleString("en-US"), price: PRICE.toFixed(2) })}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { distance: ANNUAL_DISTANCE.toLocaleString("en-US"), price: money(PRICE, 2) })}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div className="shrink-0">
           <EduLineChart points={points} ariaLabel={t("title")} lineColorClass="stroke-emerald-500 dark:stroke-emerald-400" dotColorClass="fill-emerald-500 dark:fill-emerald-400" />
@@ -40,13 +49,13 @@ export default async function FuelEfficiencyComparisonChart() {
               value: `${example.x} mpg`,
               note: tw("comparisonMore", { amount: ltrIsolate(`${(((example.x - worst.x) / worst.x) * 100).toFixed(0)}%`), label: ltrIsolate(`${worst.x} mpg`) }),
             },
-            { label: tf("price"), value: `$${PRICE.toFixed(2)}` },
+            { label: tf("price"), value: money(PRICE, 2) },
             {
               label: td("totalCost"),
               value: example.formatted,
               emphasize: true,
               note: tw("comparisonMore", {
-                amount: ltrIsolate(`$${(example.value - best.value).toFixed(0)}`),
+                amount: ltrIsolate(money(example.value - best.value)),
                 label: ltrIsolate(`${best.x} mpg (${best.formatted})`),
               }),
             },

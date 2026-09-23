@@ -1,4 +1,8 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
+import { convertAmount } from "@/lib/currency";
+import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
@@ -24,15 +28,21 @@ const AXIS_Y = 70;
 const PAD_LEFT = 20;
 const PAD_RIGHT = 20;
 
-export default async function FuelDistanceScaleChart() {
-  const t = await getTranslations("tools.fuel-cost-calculator.distanceScaleChart");
-  const tf = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
-  const td = await getTranslations("tools.fuel-cost-calculator.diagram");
-  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
+export default function FuelDistanceScaleChart() {
+  const t = useTranslations("tools.fuel-cost-calculator.distanceScaleChart");
+  const tf = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const td = useTranslations("tools.fuel-cost-calculator.diagram");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
+  const tc = useTranslations("tools.fuel-cost-calculator.costPerMileVsKmChart");
+  const live = useFuelLiveInputs();
+  const currency = live?.currency ?? "USD";
+  const digitStyle = live?.digitStyle ?? "western";
+  const money = (usd: number, maximumFractionDigits = 2) =>
+    formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits });
 
   const marks = DISTANCES.map((d) => {
     const cost = (d.miles / EFFICIENCY) * PRICE;
-    return { key: d.key, miles: d.miles, label: t(`labels.${d.key}`, { miles: d.miles.toLocaleString("en-US") }), formatted: `$${cost.toFixed(0)}` };
+    return { key: d.key, miles: d.miles, label: t(`labels.${d.key}`, { miles: d.miles.toLocaleString("en-US") }), cost, formatted: money(cost, 0) };
   });
 
   const logMin = Math.log10(marks[0].miles);
@@ -43,12 +53,11 @@ export default async function FuelDistanceScaleChart() {
   const example = marks[2]; // "roadTrip" (500 mi) — a clean, representative mid-range point already plotted on the axis
   const cheapest = marks[0]; // "commute" (20 mi) — the shortest trip already plotted, for the distance comparison
   const priciest = marks[3]; // "yearly" (12,000 mi) — the longest trip already plotted, for the cost comparison
-  const perMile = (parseFloat(example.formatted.slice(1)) / example.miles).toFixed(2);
-  const tc = await getTranslations("tools.fuel-cost-calculator.costPerMileVsKmChart");
+  const perMile = money(example.cost / example.miles);
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { efficiency: EFFICIENCY, price: PRICE.toFixed(2) })}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { efficiency: EFFICIENCY, price: money(PRICE) })}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
@@ -81,17 +90,17 @@ export default async function FuelDistanceScaleChart() {
               note: tw("comparisonTimes", { multiple: ltrIsolate((example.miles / cheapest.miles).toFixed(0)), label: ltrIsolate(cheapest.label) }),
             },
             { label: tf("efficiency"), value: `${EFFICIENCY} mpg` },
-            { label: tf("price"), value: `$${PRICE.toFixed(2)}` },
+            { label: tf("price"), value: money(PRICE) },
             {
               label: td("totalCost"),
               value: example.formatted,
               emphasize: true,
               note: tw("comparisonPercent", {
-                percent: ltrIsolate(((parseFloat(example.formatted.slice(1)) / parseFloat(priciest.formatted.slice(1))) * 100).toFixed(0)),
+                percent: ltrIsolate(((example.cost / priciest.cost) * 100).toFixed(0)),
                 label: ltrIsolate(priciest.label),
               }),
             },
-            { label: tc("perMile"), value: `$${perMile}` },
+            { label: tc("perMile"), value: perMile },
           ]}
         />
       </div>

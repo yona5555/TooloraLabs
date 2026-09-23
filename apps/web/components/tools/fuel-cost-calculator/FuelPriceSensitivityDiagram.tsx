@@ -1,3 +1,6 @@
+import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { CurrencyCode } from "@/lib/currency";
+
 type Point = { price: number; cost: number };
 
 type FuelPriceSensitivityDiagramProps = {
@@ -5,6 +8,8 @@ type FuelPriceSensitivityDiagramProps = {
   currentPrice: number;
   caption: string;
   xLabel: string;
+  currency: CurrencyCode;
+  digitStyle: DigitStyle;
 };
 
 const WIDTH = 320;
@@ -13,7 +18,8 @@ const MARGIN = { top: 14, right: 12, bottom: 26, left: 12 };
 const PLOT_WIDTH = WIDTH - MARGIN.left - MARGIN.right;
 const PLOT_HEIGHT = HEIGHT - MARGIN.top - MARGIN.bottom;
 
-export default function FuelPriceSensitivityDiagram({ points, currentPrice, caption, xLabel }: FuelPriceSensitivityDiagramProps) {
+export default function FuelPriceSensitivityDiagram({ points, currentPrice, caption, xLabel, currency, digitStyle }: FuelPriceSensitivityDiagramProps) {
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
   const minPrice = Math.min(...points.map((p) => p.price));
   const maxPrice = Math.max(...points.map((p) => p.price));
   const minCost = Math.min(...points.map((p) => p.cost));
@@ -37,10 +43,10 @@ export default function FuelPriceSensitivityDiagram({ points, currentPrice, capt
           <line x1={currentX} y1={MARGIN.top} x2={currentX} y2={MARGIN.top + PLOT_HEIGHT} strokeWidth={1} strokeDasharray="3 3" stroke="currentColor" opacity={0.4} />
           <circle cx={currentX} cy={currentY} r={4} className="fill-amber-600 dark:fill-amber-400" />
           <text x={MARGIN.left} y={HEIGHT - 6} fontSize={10} fill="currentColor" opacity={0.6}>
-            {minPrice.toFixed(2)}
+            {money(minPrice)}
           </text>
           <text x={WIDTH - MARGIN.right} y={HEIGHT - 6} textAnchor="end" fontSize={10} fill="currentColor" opacity={0.6}>
-            {maxPrice.toFixed(2)}
+            {money(maxPrice)}
           </text>
           <text x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.6}>
             {xLabel}

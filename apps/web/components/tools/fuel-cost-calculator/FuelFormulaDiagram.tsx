@@ -1,4 +1,8 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
+import { convertAmount } from "@/lib/currency";
+import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 
@@ -15,15 +19,19 @@ const GAP = 34;
 const WIDTH = BOX_W * 3 + GAP * 2 + 20;
 const HEIGHT = BOX_H + 20;
 
-export default async function FuelFormulaDiagram() {
-  const t = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
-  const td = await getTranslations("tools.fuel-cost-calculator.diagram");
-  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
+export default function FuelFormulaDiagram() {
+  const t = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const td = useTranslations("tools.fuel-cost-calculator.diagram");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
+  const live = useFuelLiveInputs();
+  const currency = live?.currency ?? "USD";
+  const digitStyle = live?.digitStyle ?? "western";
+  const money = (usd: number) => formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   const boxes = [
     { label: t("distance"), value: `${DISTANCE} mi` },
     { label: t("efficiency"), value: `${EFFICIENCY} mpg` },
-    { label: t("price"), value: `$${PRICE.toFixed(2)}` },
+    { label: t("price"), value: money(PRICE) },
   ];
 
   const doubleDistanceCost = (DISTANCE * 2) / EFFICIENCY * PRICE;
@@ -31,7 +39,7 @@ export default async function FuelFormulaDiagram() {
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { price: money(PRICE) })}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT + 70} viewBox={`0 0 ${WIDTH} ${HEIGHT + 70}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[380px] text-current">
@@ -59,7 +67,7 @@ export default async function FuelFormulaDiagram() {
             </text>
             <line x1={20} y1={106} x2={WIDTH - 20} y2={106} stroke="currentColor" strokeWidth={1} opacity={0.2} />
             <text x={WIDTH / 2} y={126} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-emerald-600 dark:fill-emerald-400">
-              {t("totalCostRow", { value: TOTAL_COST.toFixed(2) })}
+              {t("totalCostRow", { value: money(TOTAL_COST) })}
             </text>
           </svg>
         </div>
@@ -68,10 +76,10 @@ export default async function FuelFormulaDiagram() {
           rows={[
             { label: t("distance"), value: `${DISTANCE} mi` },
             { label: t("efficiency"), value: `${EFFICIENCY} mpg` },
-            { label: t("price"), value: `$${PRICE.toFixed(2)}` },
-            { label: td("totalCost"), value: `$${TOTAL_COST.toFixed(2)}`, emphasize: true },
-            { label: t("ifDistanceDoubledLabel"), value: `$${doubleDistanceCost.toFixed(2)}` },
-            { label: t("ifPriceDoubledLabel"), value: `$${doublePriceCost.toFixed(2)}` },
+            { label: t("price"), value: money(PRICE) },
+            { label: td("totalCost"), value: money(TOTAL_COST), emphasize: true },
+            { label: t("ifDistanceDoubledLabel"), value: money(doubleDistanceCost) },
+            { label: t("ifPriceDoubledLabel", { price: money(PRICE * 2) }), value: money(doublePriceCost) },
           ]}
         />
       </div>

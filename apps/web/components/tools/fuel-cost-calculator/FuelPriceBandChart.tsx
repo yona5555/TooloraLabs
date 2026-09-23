@@ -1,4 +1,8 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
+import { formatLocalizedNumber } from "@tooloralabs/core";
+import { convertAmount } from "@/lib/currency";
+import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "./EduBarChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
@@ -8,22 +12,27 @@ import { ltrIsolate } from "@/lib/bidi";
 const DISTANCE = 300;
 const EFFICIENCY = 30;
 const PRICES = [2.5, 3.0, 3.5, 4.0];
+const STEP = 0.5; // the price step between adjacent PRICES entries, and this chart's own "rate of rise" step
 
-export default async function FuelPriceBandChart() {
-  const t = await getTranslations("tools.fuel-cost-calculator.priceBandChart");
-  const tf = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
-  const td = await getTranslations("tools.fuel-cost-calculator.diagram");
-  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
+export default function FuelPriceBandChart() {
+  const t = useTranslations("tools.fuel-cost-calculator.priceBandChart");
+  const tf = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const td = useTranslations("tools.fuel-cost-calculator.diagram");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
+  const live = useFuelLiveInputs();
+  const currency = live?.currency ?? "USD";
+  const digitStyle = live?.digitStyle ?? "western";
+  const money = (usd: number) => formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   const bars = PRICES.map((price) => {
     const cost = (DISTANCE / EFFICIENCY) * price;
-    return { label: `$${price.toFixed(2)}`, value: cost, formatted: `$${cost.toFixed(2)}` };
+    return { label: money(price), value: cost, formatted: money(cost) };
   });
 
   const example = bars[2]; // $3.50/gal — the same reference price used elsewhere in this tool's education content
   const cheapest = bars[0]; // $2.50/gal — the lowest price shown, for the price comparison
   const priciest = bars[3]; // $4.00/gal — the highest price shown, for the cost comparison
-  const stepCost = ((DISTANCE / EFFICIENCY) * 0.5).toFixed(2); // cost added per $0.50/gal price rise, at this fixed distance/efficiency
+  const stepCost = (DISTANCE / EFFICIENCY) * STEP; // cost added per price-step rise, at this fixed distance/efficiency
 
   return (
     <SectionCard title={t("title")}>
@@ -40,18 +49,18 @@ export default async function FuelPriceBandChart() {
             {
               label: tf("price"),
               value: example.label,
-              note: tw("comparisonMore", { amount: ltrIsolate(`$${(PRICES[2] - PRICES[0]).toFixed(2)}`), label: ltrIsolate(cheapest.label) }),
+              note: tw("comparisonMore", { amount: ltrIsolate(money(PRICES[2] - PRICES[0])), label: ltrIsolate(cheapest.label) }),
             },
             {
               label: td("totalCost"),
               value: example.formatted,
               emphasize: true,
               note: tw("comparisonLess", {
-                amount: ltrIsolate(`$${(priciest.value - example.value).toFixed(2)}`),
+                amount: ltrIsolate(money(priciest.value - example.value)),
                 label: ltrIsolate(`${priciest.label}/gal (${priciest.formatted})`),
               }),
             },
-            { label: t("rateLabel"), value: `+$${stepCost}` },
+            { label: t("rateLabel", { step: money(STEP) }), value: `+${money(stepCost)}` },
           ]}
         />
       </div>
