@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
+import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 
 /** Cumulative cost at 3/6/9/12 months for a fixed monthly distance — same cost formula, projected over time as a running total, best read as a trend line. */
 const MONTHLY_DISTANCE = 1000;
@@ -11,19 +12,36 @@ const MONTH_MARKS = [3, 6, 9, 12];
 
 export default async function FuelAnnualProjectionChart() {
   const t = await getTranslations("tools.fuel-cost-calculator.annualProjectionChart");
+  const tf = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const td = await getTranslations("tools.fuel-cost-calculator.diagram");
+  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
 
   const points = MONTH_MARKS.map((months) => {
     const cost = MONTHLY_COST * months;
     return { x: months, label: t("months", { count: months }), value: cost, formatted: `$${Math.round(cost).toLocaleString("en-US")}` };
   });
 
+  const finalPoint = points[points.length - 1]; // 12 months — the chart's own last plotted value
+
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
         {t("caption", { distance: MONTHLY_DISTANCE.toLocaleString("en-US"), efficiency: EFFICIENCY, price: PRICE.toFixed(2) })}
       </p>
-      <div className="mt-4">
-        <EduLineChart points={points} ariaLabel={t("title")} lineColorClass="stroke-violet-500 dark:stroke-violet-400" dotColorClass="fill-violet-500 dark:fill-violet-400" />
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="shrink-0">
+          <EduLineChart points={points} ariaLabel={t("title")} lineColorClass="stroke-violet-500 dark:stroke-violet-400" dotColorClass="fill-violet-500 dark:fill-violet-400" />
+        </div>
+        <FuelWorkedExampleNote
+          title={tw("title")}
+          rows={[
+            { label: tf("distance"), value: `${MONTHLY_DISTANCE.toLocaleString("en-US")} mi/mo` },
+            { label: tf("efficiency"), value: `${EFFICIENCY} mpg` },
+            { label: tf("price"), value: `$${PRICE.toFixed(2)}` },
+            { label: t("monthlyCostLabel"), value: `$${MONTHLY_COST.toFixed(0)}`, emphasize: true, note: `× ${finalPoint.label}` },
+            { label: td("totalCost"), value: finalPoint.formatted, emphasize: true },
+          ]}
+        />
       </div>
     </SectionCard>
   );
