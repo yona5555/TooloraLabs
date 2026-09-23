@@ -22701,7 +22701,10 @@
               "efficient": "موفّر",
               "average": "متوسط",
               "thirsty": "كثير الاستهلاك"
-            }
+            },
+            "vehicleLabel": "المركبة",
+            "rateLabel": "معدل الاستهلاك",
+            "classificationLabel": "التصنيف"
           }
         },
         "useCases": {
@@ -22857,11 +22860,17 @@
           "sedan": "سيدان",
           "suv": "دفع رباعي (SUV)",
           "pickup": "شاحنة صغيرة"
-        }
+        },
+        "vehicleLabel": "المركبة",
+        "costPer100kmLabel": "التكلفة لكل 100 كم",
+        "mostEfficientLabel": "الأكثر كفاءة (هجينة)",
+        "leastEfficientLabel": "الأقل كفاءة (شاحنة)"
       },
       "sensitivityDiagram": {
         "caption": "كيف تتغيّر التكلفة الإجمالية مع تغيّر سعر الوقود",
-        "xLabel": "السعر لكل وحدة"
+        "xLabel": "السعر لكل وحدة",
+        "lowScenarioLabel": "لو انخفض السعر 40%",
+        "highScenarioLabel": "لو ارتفع السعر 60%"
       },
       "relatedTools": {
         "title": "أدوات أعمال ذات صلة"
@@ -22873,7 +22882,9 @@
         "efficiency": "الكفاءة",
         "price": "السعر",
         "fuelUsedRow": "الوقود المستهلك: {value} جالون",
-        "totalCostRow": "التكلفة الإجمالية: {value} دولار"
+        "totalCostRow": "التكلفة الإجمالية: {value} دولار",
+        "ifDistanceDoubledLabel": "لو تضاعفت المسافة (600 ميل)",
+        "ifPriceDoubledLabel": "لو تضاعف السعر (7.00$)"
       },
       "efficiencyComparisonChart": {
         "title": "التكلفة الإجمالية حسب كفاءة الوقود",
@@ -22917,13 +22928,16 @@
         "intro": "تتحول وحدات كفاءة الوقود مباشرة باستخدام ثابت رياضي.",
         "mpgLabel": "ميل لكل جالون",
         "l100kmLabel": "لتر لكل 100 كم",
-        "formula": "لتر/100كم = 235.215 ÷ ميل/جالون"
+        "formula": "لتر/100كم = 235.215 ÷ ميل/جالون",
+        "at40Label": "عند 40 ميل/جالون",
+        "at20Label": "عند 20 ميل/جالون"
       },
       "costPerMileVsKmChart": {
         "title": "التكلفة لكل ميل مقابل كل كيلومتر",
         "caption": "نفس تكلفة رحلة {cost} دولار على مسافة {distance} ميل، معبَّرًا عنها بالوحدتين.",
         "perMile": "لكل ميل",
-        "perKm": "لكل كيلومتر"
+        "perKm": "لكل كيلومتر",
+        "per100kmLabel": "لكل 100 كم"
       },
       "workedExample": {
         "title": "مثال محلول",

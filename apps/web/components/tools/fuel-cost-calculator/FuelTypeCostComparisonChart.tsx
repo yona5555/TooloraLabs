@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduDonutChart from "./EduDonutChart";
+import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import { ltrIsolate } from "@/lib/bidi";
 
 /**
  * Same 300-mile trip, run through the tool's own cost = distance / rate * price formula
@@ -20,17 +22,41 @@ const SOURCES = [
 export default async function FuelTypeCostComparisonChart() {
   const t = await getTranslations("tools.fuel-cost-calculator.typeCostComparisonChart");
   const tSources = await getTranslations("tools.fuel-cost-calculator.typeCostComparisonChart.sources");
+  const tf = await getTranslations("tools.fuel-cost-calculator.formulaDiagram");
+  const tw = await getTranslations("tools.fuel-cost-calculator.workedExample");
 
   const segments = SOURCES.map((s) => {
     const cost = (DISTANCE / s.rate) * s.price;
     return { key: s.key, label: tSources(s.key), value: cost, formatted: `$${cost.toFixed(2)}`, colorClass: s.colorClass, dotColorClass: s.dotColorClass };
   });
 
+  const cheapest = segments.reduce((min, s) => (s.value < min.value ? s : min), segments[0]);
+
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { distance: DISTANCE })}</p>
-      <div className="mt-4">
-        <EduDonutChart segments={segments} ariaLabel={t("title")} />
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="shrink-0">
+          <EduDonutChart segments={segments} ariaLabel={t("title")} />
+        </div>
+        <FuelWorkedExampleNote
+          title={tw("title")}
+          rows={[
+            { label: tf("distance"), value: `${DISTANCE} mi` },
+            ...segments.map((s) => ({
+              label: s.label,
+              value: s.formatted,
+              emphasize: s.key === "gasoline",
+              note:
+                s.key === "gasoline"
+                  ? tw("comparisonMore", {
+                      amount: ltrIsolate(`$${(s.value - cheapest.value).toFixed(2)}`),
+                      label: `${cheapest.label} (${ltrIsolate(cheapest.formatted)})`,
+                    })
+                  : undefined,
+            })),
+          ]}
+        />
       </div>
       <p className="mt-3 text-xs opacity-60">{t("note")}</p>
     </SectionCard>

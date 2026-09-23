@@ -22701,7 +22701,10 @@
               "efficient": "Sparsam",
               "average": "Durchschnittlich",
               "thirsty": "Durstig"
-            }
+            },
+            "vehicleLabel": "Fahrzeug",
+            "rateLabel": "Verbrauchsrate",
+            "classificationLabel": "Klassifizierung"
           }
         },
         "useCases": {
@@ -22857,11 +22860,17 @@
           "sedan": "Limousine",
           "suv": "SUV",
           "pickup": "Pick-up"
-        }
+        },
+        "vehicleLabel": "Fahrzeug",
+        "costPer100kmLabel": "Kosten pro 100 km",
+        "mostEfficientLabel": "Effizientest (Hybrid)",
+        "leastEfficientLabel": "Am wenigsten effizient (Pickup)"
       },
       "sensitivityDiagram": {
         "caption": "Wie sich die Gesamtkosten mit dem Kraftstoffpreis ändern",
-        "xLabel": "Preis pro Einheit"
+        "xLabel": "Preis pro Einheit",
+        "lowScenarioLabel": "Bei Preis -40%",
+        "highScenarioLabel": "Bei Preis +60%"
       },
       "relatedTools": {
         "title": "Verwandte Business-Tools"
@@ -22873,7 +22882,9 @@
         "efficiency": "Effizienz",
         "price": "Preis",
         "fuelUsedRow": "Verbrauchter Kraftstoff: {value} Gallonen",
-        "totalCostRow": "Gesamtkosten: {value} $"
+        "totalCostRow": "Gesamtkosten: {value} $",
+        "ifDistanceDoubledLabel": "Bei doppelter Strecke (600 mi)",
+        "ifPriceDoubledLabel": "Bei doppeltem Preis (7,00 $)"
       },
       "efficiencyComparisonChart": {
         "title": "Gesamtkosten nach Kraftstoffeffizienz",
@@ -22917,13 +22928,16 @@
         "intro": "Kraftstoffeffizienz-Einheiten lassen sich direkt über eine feste Konstante umrechnen.",
         "mpgLabel": "Meilen pro Gallone",
         "l100kmLabel": "Liter pro 100 km",
-        "formula": "L/100km = 235,215 ÷ MPG"
+        "formula": "L/100km = 235,215 ÷ MPG",
+        "at40Label": "Bei 40 MPG",
+        "at20Label": "Bei 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Kosten pro Meile vs. pro Kilometer",
         "caption": "Gleiche Fahrtkosten von {cost} $ über {distance} Meilen, in beiden Einheiten ausgedrückt.",
         "perMile": "Pro Meile",
-        "perKm": "Pro Kilometer"
+        "perKm": "Pro Kilometer",
+        "per100kmLabel": "Pro 100 km"
       },
       "workedExample": {
         "title": "Rechenbeispiel",

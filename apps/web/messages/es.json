@@ -22701,7 +22701,10 @@
               "efficient": "Eficiente",
               "average": "Promedio",
               "thirsty": "Sediento"
-            }
+            },
+            "vehicleLabel": "Vehículo",
+            "rateLabel": "Tasa de consumo",
+            "classificationLabel": "Clasificación"
           }
         },
         "useCases": {
@@ -22857,11 +22860,17 @@
           "sedan": "Sedán",
           "suv": "SUV",
           "pickup": "Camioneta"
-        }
+        },
+        "vehicleLabel": "Vehículo",
+        "costPer100kmLabel": "Costo por 100 km",
+        "mostEfficientLabel": "Más eficiente (Híbrido)",
+        "leastEfficientLabel": "Menos eficiente (Camioneta)"
       },
       "sensitivityDiagram": {
         "caption": "Cómo cambia el costo total según el precio del combustible",
-        "xLabel": "Precio por unidad"
+        "xLabel": "Precio por unidad",
+        "lowScenarioLabel": "Si el precio baja 40%",
+        "highScenarioLabel": "Si el precio sube 60%"
       },
       "relatedTools": {
         "title": "Herramientas de negocio relacionadas"
@@ -22873,7 +22882,9 @@
         "efficiency": "Eficiencia",
         "price": "Precio",
         "fuelUsedRow": "Combustible usado: {value} galones",
-        "totalCostRow": "Costo total: ${value}"
+        "totalCostRow": "Costo total: ${value}",
+        "ifDistanceDoubledLabel": "Si la distancia se duplicara (600 mi)",
+        "ifPriceDoubledLabel": "Si el precio se duplicara ($7.00)"
       },
       "efficiencyComparisonChart": {
         "title": "Costo total por eficiencia de combustible",
@@ -22917,13 +22928,16 @@
         "intro": "Las unidades de eficiencia de combustible se convierten directamente con una constante fija.",
         "mpgLabel": "Millas por galón",
         "l100kmLabel": "Litros por 100 km",
-        "formula": "L/100km = 235.215 ÷ MPG"
+        "formula": "L/100km = 235.215 ÷ MPG",
+        "at40Label": "A 40 MPG",
+        "at20Label": "A 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Costo por milla vs. por kilómetro",
         "caption": "Mismo costo de viaje de ${cost} en {distance} millas, expresado en ambas unidades.",
         "perMile": "Por milla",
-        "perKm": "Por kilómetro"
+        "perKm": "Por kilómetro",
+        "per100kmLabel": "Por 100 km"
       },
       "workedExample": {
         "title": "Ejemplo resuelto",

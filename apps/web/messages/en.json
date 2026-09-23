@@ -22701,7 +22701,10 @@
               "efficient": "Efficient",
               "average": "Average",
               "thirsty": "Thirsty"
-            }
+            },
+            "vehicleLabel": "Vehicle",
+            "rateLabel": "Consumption Rate",
+            "classificationLabel": "Classification"
           }
         },
         "useCases": {
@@ -22857,11 +22860,17 @@
           "sedan": "Sedan",
           "suv": "SUV",
           "pickup": "Pickup Truck"
-        }
+        },
+        "vehicleLabel": "Vehicle",
+        "costPer100kmLabel": "Cost per 100 km",
+        "mostEfficientLabel": "Most Efficient (Hybrid)",
+        "leastEfficientLabel": "Least Efficient (Pickup)"
       },
       "sensitivityDiagram": {
         "caption": "How total cost changes as the fuel price moves",
-        "xLabel": "Price per unit"
+        "xLabel": "Price per unit",
+        "lowScenarioLabel": "If Price -40%",
+        "highScenarioLabel": "If Price +60%"
       },
       "relatedTools": {
         "title": "Related Business Tools"
@@ -22873,7 +22882,9 @@
         "efficiency": "Efficiency",
         "price": "Price",
         "fuelUsedRow": "Fuel used: {value} gallons",
-        "totalCostRow": "Total cost: ${value}"
+        "totalCostRow": "Total cost: ${value}",
+        "ifDistanceDoubledLabel": "If Distance Doubled (600 mi)",
+        "ifPriceDoubledLabel": "If Price Doubled ($7.00)"
       },
       "efficiencyComparisonChart": {
         "title": "Total Cost by Fuel Efficiency",
@@ -22917,13 +22928,16 @@
         "intro": "Fuel efficiency units convert directly using a fixed constant.",
         "mpgLabel": "Miles per gallon",
         "l100kmLabel": "Liters per 100 km",
-        "formula": "L/100km = 235.215 ÷ MPG"
+        "formula": "L/100km = 235.215 ÷ MPG",
+        "at40Label": "At 40 MPG",
+        "at20Label": "At 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Cost per Mile vs. per Kilometer",
         "caption": "Same ${cost} trip cost over {distance} miles, expressed in both units.",
         "perMile": "Per mile",
-        "perKm": "Per kilometer"
+        "perKm": "Per kilometer",
+        "per100kmLabel": "Per 100 km"
       },
       "workedExample": {
         "title": "Worked Example",

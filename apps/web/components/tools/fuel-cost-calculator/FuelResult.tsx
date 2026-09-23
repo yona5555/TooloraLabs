@@ -3,6 +3,7 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import FuelFlowDiagram from "./FuelFlowDiagram";
 import FuelPriceSensitivityDiagram from "./FuelPriceSensitivityDiagram";
 import FuelShareExportModal from "./FuelShareExportModal";
+import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import type { FuelCostCalculatorOutput } from "./types";
 
 type Props = {
@@ -15,6 +16,8 @@ type Props = {
 export default function FuelResult({ result, distance, pricePerUnit, digitStyle }: Props) {
   const t = useTranslations("tools.fuel-cost-calculator.result");
   const ts = useTranslations("tools.fuel-cost-calculator.sensitivityDiagram");
+  const tform = useTranslations("tools.fuel-cost-calculator.form");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
   const fmt = (value: number, maxFractionDigits = 2) =>
     formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: maxFractionDigits });
 
@@ -62,17 +65,39 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
           {fmt(result.totalCost)}
         </p>
 
-        <div className="mt-5">
+        {/* Stacked (not side-by-side) deliberately: this is the narrower above-the-fold
+            result column, not a wide education card — at lg: viewport width the redesigned
+            full-width flow boxes and the table would compete for the same ~450px and both
+            get crushed (confirmed visually before this fix). Stacking keeps both legible. */}
+        <div className="mt-5 flex flex-col gap-4">
           <FuelFlowDiagram
             distanceLabel={fmt(distance, 0)}
             fuelLabel={fmt(result.fuelUsed)}
             costLabel={fmt(result.totalCost)}
           />
+          <FuelWorkedExampleNote
+            title={tw("title")}
+            rows={[
+              { label: t("fuelUsedLabel"), value: fmt(result.fuelUsed) },
+              { label: tform("priceLabel"), value: fmt(pricePerUnit) },
+              { label: t("heading"), value: fmt(result.totalCost), emphasize: true },
+              { label: t("costPerDistanceLabel"), value: fmt(result.costPerDistanceUnit, 2) },
+            ]}
+          />
         </div>
 
         {pricePerUnit > 0 && (
-          <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+          <div className="mt-5 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
             <FuelPriceSensitivityDiagram points={sensitivityPoints} currentPrice={pricePerUnit} caption={ts("caption")} xLabel={ts("xLabel")} />
+            <FuelWorkedExampleNote
+              title={tw("title")}
+              rows={[
+                { label: tform("priceLabel"), value: fmt(pricePerUnit) },
+                { label: t("heading"), value: fmt(sensitivityPoints[2].cost), emphasize: true },
+                { label: ts("lowScenarioLabel"), value: fmt(sensitivityPoints[0].cost) },
+                { label: ts("highScenarioLabel"), value: fmt(sensitivityPoints[5].cost) },
+              ]}
+            />
           </div>
         )}
 

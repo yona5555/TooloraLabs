@@ -22701,7 +22701,10 @@
               "efficient": "कुशल",
               "average": "औसत",
               "thirsty": "अधिक खपत"
-            }
+            },
+            "vehicleLabel": "वाहन",
+            "rateLabel": "खपत दर",
+            "classificationLabel": "वर्गीकरण"
           }
         },
         "useCases": {
@@ -22857,11 +22860,17 @@
           "sedan": "सेडान",
           "suv": "एसयूवी",
           "pickup": "पिकअप ट्रक"
-        }
+        },
+        "vehicleLabel": "वाहन",
+        "costPer100kmLabel": "प्रति 100 किमी लागत",
+        "mostEfficientLabel": "सबसे कुशल (हाइब्रिड)",
+        "leastEfficientLabel": "सबसे कम कुशल (पिकअप)"
       },
       "sensitivityDiagram": {
         "caption": "ईंधन की कीमत बदलने पर कुल लागत कैसे बदलती है",
-        "xLabel": "प्रति इकाई कीमत"
+        "xLabel": "प्रति इकाई कीमत",
+        "lowScenarioLabel": "यदि कीमत -40%",
+        "highScenarioLabel": "यदि कीमत +60%"
       },
       "relatedTools": {
         "title": "संबंधित बिज़नेस टूल"
@@ -22873,7 +22882,9 @@
         "efficiency": "दक्षता",
         "price": "कीमत",
         "fuelUsedRow": "प्रयुक्त ईंधन: {value} गैलन",
-        "totalCostRow": "कुल लागत: ${value}"
+        "totalCostRow": "कुल लागत: ${value}",
+        "ifDistanceDoubledLabel": "यदि दूरी दोगुनी हो (600 mi)",
+        "ifPriceDoubledLabel": "यदि कीमत दोगुनी हो ($7.00)"
       },
       "efficiencyComparisonChart": {
         "title": "ईंधन दक्षता के अनुसार कुल लागत",
@@ -22917,13 +22928,16 @@
         "intro": "ईंधन दक्षता इकाइयाँ एक निश्चित स्थिरांक का उपयोग करके सीधे परिवर्तित होती हैं।",
         "mpgLabel": "मील प्रति गैलन",
         "l100kmLabel": "लीटर प्रति 100 किमी",
-        "formula": "L/100km = 235.215 ÷ MPG"
+        "formula": "L/100km = 235.215 ÷ MPG",
+        "at40Label": "40 MPG पर",
+        "at20Label": "20 MPG पर"
       },
       "costPerMileVsKmChart": {
         "title": "प्रति मील बनाम प्रति किलोमीटर लागत",
         "caption": "समान ${cost} यात्रा लागत {distance} मील पर, दोनों इकाइयों में व्यक्त।",
         "perMile": "प्रति मील",
-        "perKm": "प्रति किलोमीटर"
+        "perKm": "प्रति किलोमीटर",
+        "per100kmLabel": "प्रति 100 किमी"
       },
       "workedExample": {
         "title": "हल किया गया उदाहरण",
