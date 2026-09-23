@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import { ltrIsolate } from "@/lib/bidi";
 
 /** Cumulative cost at 3/6/9/12 months for a fixed monthly distance — same cost formula, projected over time as a running total, best read as a trend line. */
 const MONTHLY_DISTANCE = 1000;
@@ -22,6 +23,7 @@ export default async function FuelAnnualProjectionChart() {
   });
 
   const finalPoint = points[points.length - 1]; // 12 months — the chart's own last plotted value
+  const firstPoint = points[0]; // 3 months — the chart's own first plotted value, for the total-cost comparison
 
   return (
     <SectionCard title={t("title")}>
@@ -39,7 +41,15 @@ export default async function FuelAnnualProjectionChart() {
             { label: tf("efficiency"), value: `${EFFICIENCY} mpg` },
             { label: tf("price"), value: `$${PRICE.toFixed(2)}` },
             { label: t("monthlyCostLabel"), value: `$${MONTHLY_COST.toFixed(0)}`, emphasize: true, note: `× ${finalPoint.label}` },
-            { label: td("totalCost"), value: finalPoint.formatted, emphasize: true },
+            {
+              label: td("totalCost"),
+              value: finalPoint.formatted,
+              emphasize: true,
+              note: tw("comparisonTimes", {
+                multiple: ltrIsolate((finalPoint.value / firstPoint.value).toFixed(0)),
+                label: `${firstPoint.label} (${ltrIsolate(firstPoint.formatted)})`,
+              }),
+            },
           ]}
         />
       </div>

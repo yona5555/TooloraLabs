@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import { ltrIsolate } from "@/lib/bidi";
 
 /** Same annual distance & price, five real-world efficiency levels — the tool's own inverse relationship (cost = distance / efficiency * price) is a continuous curve, so a line reads it better than discrete bars. */
 const ANNUAL_DISTANCE = 12000;
@@ -20,6 +21,8 @@ export default async function FuelEfficiencyComparisonChart() {
   });
 
   const example = points[2]; // 30 mpg — the middle of the five plotted efficiency levels
+  const worst = points[0]; // 20 mpg — least efficient shown, for the efficiency comparison
+  const best = points[4]; // 40 mpg — most efficient shown, for both the cost comparison and the extra row
 
   return (
     <SectionCard title={t("title")}>
@@ -32,9 +35,22 @@ export default async function FuelEfficiencyComparisonChart() {
           title={tw("title")}
           rows={[
             { label: tf("distance"), value: `${ANNUAL_DISTANCE.toLocaleString("en-US")} mi` },
-            { label: tf("efficiency"), value: `${example.x} mpg` },
+            {
+              label: tf("efficiency"),
+              value: `${example.x} mpg`,
+              note: tw("comparisonMore", { amount: ltrIsolate(`${(((example.x - worst.x) / worst.x) * 100).toFixed(0)}%`), label: ltrIsolate(`${worst.x} mpg`) }),
+            },
             { label: tf("price"), value: `$${PRICE.toFixed(2)}` },
-            { label: td("totalCost"), value: example.formatted, emphasize: true },
+            {
+              label: td("totalCost"),
+              value: example.formatted,
+              emphasize: true,
+              note: tw("comparisonMore", {
+                amount: ltrIsolate(`$${(example.value - best.value).toFixed(0)}`),
+                label: ltrIsolate(`${best.x} mpg (${best.formatted})`),
+              }),
+            },
+            { label: t("bestCaseLabel", { mpg: best.x }), value: best.formatted },
           ]}
         />
       </div>

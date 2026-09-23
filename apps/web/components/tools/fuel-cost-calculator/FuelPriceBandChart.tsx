@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "./EduBarChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import { ltrIsolate } from "@/lib/bidi";
 
 /** Same distance & efficiency, four realistic price points — shows the tool's own linear cost-vs-price relationship. */
 const DISTANCE = 300;
@@ -20,6 +21,9 @@ export default async function FuelPriceBandChart() {
   });
 
   const example = bars[2]; // $3.50/gal — the same reference price used elsewhere in this tool's education content
+  const cheapest = bars[0]; // $2.50/gal — the lowest price shown, for the price comparison
+  const priciest = bars[3]; // $4.00/gal — the highest price shown, for the cost comparison
+  const stepCost = ((DISTANCE / EFFICIENCY) * 0.5).toFixed(2); // cost added per $0.50/gal price rise, at this fixed distance/efficiency
 
   return (
     <SectionCard title={t("title")}>
@@ -33,8 +37,21 @@ export default async function FuelPriceBandChart() {
           rows={[
             { label: tf("distance"), value: `${DISTANCE} mi` },
             { label: tf("efficiency"), value: `${EFFICIENCY} mpg` },
-            { label: tf("price"), value: example.label },
-            { label: td("totalCost"), value: example.formatted, emphasize: true },
+            {
+              label: tf("price"),
+              value: example.label,
+              note: tw("comparisonMore", { amount: ltrIsolate(`$${(PRICES[2] - PRICES[0]).toFixed(2)}`), label: ltrIsolate(cheapest.label) }),
+            },
+            {
+              label: td("totalCost"),
+              value: example.formatted,
+              emphasize: true,
+              note: tw("comparisonLess", {
+                amount: ltrIsolate(`$${(priciest.value - example.value).toFixed(2)}`),
+                label: ltrIsolate(`${priciest.label}/gal (${priciest.formatted})`),
+              }),
+            },
+            { label: t("rateLabel"), value: `+$${stepCost}` },
           ]}
         />
       </div>
