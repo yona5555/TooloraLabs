@@ -76,6 +76,9 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    // Only linkable once the Notices section actually renders something —
+    // it's conditional on currency !== "USD" (see FuelNoticesSection.tsx).
+    ...(currency !== "USD" ? [{ id: "notices", label: tNav("notices") }] : []),
   ];
 
   return (

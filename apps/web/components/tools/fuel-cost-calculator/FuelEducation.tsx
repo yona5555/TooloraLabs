@@ -15,6 +15,7 @@ import FuelTypeCostComparisonChart from "./FuelTypeCostComparisonChart";
 import FuelUnitConversionDiagram from "./FuelUnitConversionDiagram";
 import FuelCostPerMileVsKmChart from "./FuelCostPerMileVsKmChart";
 import FuelExamplesTable from "./FuelExamplesTable";
+import FuelNoticesSection from "./FuelNoticesSection";
 
 type ExampleRow = { scenario: string; result: string };
 type UseCaseItem = { title: string; description: string };
@@ -98,6 +99,8 @@ export default async function FuelEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+
+      <FuelNoticesSection title={t("notices.title")} />
     </EncyclopediaPaper>
   );
 }

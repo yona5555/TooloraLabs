@@ -55,7 +55,11 @@ export default function FuelInputPanel({
       </div>
 
       <div className="space-y-4">
-        <CurrencySelector value={currency} onChange={onCurrencyChange} />
+        {/* The approximate-conversion note moves to the page's consolidated
+            Notices section (see FuelEducation.tsx) instead of showing inline
+            here — no warning/notice of any kind belongs inside the
+            calculator/result area itself. */}
+        <CurrencySelector value={currency} onChange={onCurrencyChange} showApproximateNote={false} />
 
         <ToolInput
           label={t("distanceLabel")}
