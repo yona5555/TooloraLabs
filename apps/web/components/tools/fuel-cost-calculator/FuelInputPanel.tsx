@@ -65,6 +65,7 @@ export default function FuelInputPanel({
             <button
               type="button"
               onClick={() => onRateModeChange("consumption")}
+              title={t("rateModes.consumptionExample")}
               className={`flex-1 rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${
                 rateMode === "consumption"
                   ? "border-blue-400 bg-blue-600 text-white"
@@ -76,6 +77,7 @@ export default function FuelInputPanel({
             <button
               type="button"
               onClick={() => onRateModeChange("efficiency")}
+              title={t("rateModes.efficiencyExample")}
               className={`flex-1 rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${
                 rateMode === "efficiency"
                   ? "border-blue-400 bg-blue-600 text-white"
@@ -85,6 +87,9 @@ export default function FuelInputPanel({
               {t("rateModes.efficiency")}
             </button>
           </div>
+          <span className="mt-1.5 block text-xs text-zinc-500 dark:text-zinc-400">
+            {rateMode === "consumption" ? t("rateModes.consumptionExample") : t("rateModes.efficiencyExample")}
+          </span>
         </div>
 
         <ToolInput
