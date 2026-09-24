@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { Route, Fuel as FuelIcon, Wallet, ChevronRight, type LucideIcon } from "lucide-react";
-import { pickFontSizeClass } from "@/lib/dynamicFontSize";
+import AutoFitText from "@/components/tool-ui/AutoFitText";
 
 type Props = {
   distanceLabel: string;
@@ -31,26 +31,23 @@ const COST_TONE: BoxTone = {
   valueClass: "text-purple-700 dark:text-purple-200",
 };
 
-// Applies to all three boxes (distance/fuel/cost) uniformly — a currency
-// code plus a large grouped total ("EGP 2,960.00") is just the longest
-// case in practice, not a special case; any value long enough gets the
-// same treatment, so this never needs a currency-specific branch.
-const VALUE_SIZE_STEPS: [maxLength: number, className: string][] = [
-  [6, "text-2xl"],
-  [9, "text-xl"],
-  [12, "text-lg"],
-  [Infinity, "text-base"],
-];
-
 function FlowBox({ icon: Icon, label, value, tone }: { icon: LucideIcon; label: string; value: string; tone: BoxTone }) {
-  const sizeClass = pickFontSizeClass(value, VALUE_SIZE_STEPS);
   return (
-    <div className={`flex min-w-[92px] flex-1 flex-col items-center gap-1.5 rounded-2xl px-3 py-4 text-center ${tone.bgClass}`}>
+    // `min-w-0` is load-bearing, not decorative: a flex item's default
+    // min-width is `auto`, which means it refuses to shrink below its own
+    // content's *unwrapped* natural width — so wrapping/shrinking inside it
+    // could never actually engage; the box just grew past its allotted flex
+    // space instead (confirmed via direct DOM measurement: a 12-char
+    // "EGP 2,960.00" value produced a 130px-wide box inside a 100px flex
+    // slot). `min-w-0` removes that content-driven floor so the box
+    // actually respects the row's `flex-1` distribution, and AutoFitText
+    // below measures against that real, now-correct width instead of
+    // guessing a font size from character count — which is what makes this
+    // hold for *any* length, not just the specific case that was tested.
+    <div className={`flex min-w-0 flex-1 flex-col items-center gap-1.5 rounded-2xl px-3 py-4 text-center ${tone.bgClass}`}>
       <Icon size={18} className={tone.iconClass} aria-hidden="true" />
       <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{label}</span>
-      <span dir="ltr" className={`break-words font-mono font-bold ${sizeClass} ${tone.valueClass}`}>
-        {value}
-      </span>
+      <AutoFitText dir="ltr" text={value} className={`font-mono font-bold ${tone.valueClass}`} />
     </div>
   );
 }

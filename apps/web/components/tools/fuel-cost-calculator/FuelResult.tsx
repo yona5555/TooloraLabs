@@ -1,12 +1,16 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
-import { pickFontSizeClass } from "@/lib/dynamicFontSize";
+import AutoFitText from "@/components/tool-ui/AutoFitText";
 import FuelFlowDiagram from "./FuelFlowDiagram";
 import FuelPriceSensitivityDiagram from "./FuelPriceSensitivityDiagram";
 import FuelShareExportModal from "./FuelShareExportModal";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import type { FuelCostCalculatorOutput } from "./types";
+
+// Module-level so it's a stable reference across renders (AutoFitText only
+// re-measures on `text`/`className` changes, not on `steps`).
+const HERO_STEPS = ["text-3xl", "text-2xl", "text-xl", "text-lg", "text-base", "text-sm"];
 
 type Props = {
   result: FuelCostCalculatorOutput;
@@ -53,16 +57,6 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
   });
 
   const heroValue = money(result.totalCost);
-  // A currency code plus a large grouped amount ("EGP 2,960.00") can run
-  // noticeably longer than "$60.00" — shrink the step by actual rendered
-  // length so it never overflows this card, whatever currency/number lands
-  // here, instead of a fixed size tuned to one currency.
-  const heroSizeClass = pickFontSizeClass(heroValue, [
-    [9, "text-3xl"],
-    [12, "text-2xl"],
-    [16, "text-xl"],
-    [Infinity, "text-lg"],
-  ]);
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
@@ -77,9 +71,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
         />
       </div>
       <div className="p-4 lg:p-6">
-        <p className={`text-center font-mono font-bold text-blue-700 dark:text-blue-300 break-words ${heroSizeClass}`}>
-          {heroValue}
-        </p>
+        <AutoFitText dir="ltr" text={heroValue} steps={HERO_STEPS} className="text-center font-mono font-bold text-blue-700 dark:text-blue-300" />
 
         {/* Stacked (not side-by-side) deliberately: this is the narrower above-the-fold
             result column, not a wide education card — at lg: viewport width the redesigned
