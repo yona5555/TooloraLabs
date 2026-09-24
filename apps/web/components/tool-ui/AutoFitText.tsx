@@ -8,6 +8,17 @@ type Props = {
   steps?: string[];
   className?: string;
   dir?: "ltr" | "rtl";
+  /**
+   * When false, a connected number/currency value NEVER breaks across lines
+   * — not even as a last-resort fallback beyond the smallest step. Splitting
+   * a single value like "₹4,200,000.00" mid-token ("₹4,20" / "0,000" / ".00")
+   * is worse than the overflow it was meant to prevent: an unreadable
+   * number, not just a tight one. Defaults to true (today's fallback
+   * behavior) so existing callers are unaffected; the flow-diagram boxes
+   * turn it off and rely on real space (the redesigned card widths) plus
+   * the smallest font step instead.
+   */
+  allowWrap?: boolean;
 };
 
 /**
@@ -36,7 +47,7 @@ type Props = {
  * recompute before the next `scrollWidth` read, so the whole loop settles
  * within one paint instead of flashing through intermediate sizes.
  */
-export default function AutoFitText({ text, steps = DEFAULT_STEPS, className = "", dir }: Props) {
+export default function AutoFitText({ text, steps = DEFAULT_STEPS, className = "", dir, allowWrap = true }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
 
   function shrinkToFit() {
@@ -51,9 +62,12 @@ export default function AutoFitText({ text, steps = DEFAULT_STEPS, className = "
       i += 1;
       el.className = `${className} ${steps[i]} inline-block whitespace-nowrap`.trim();
     }
-    // Settled step applied; re-enable wrapping as the final fallback in
-    // case even the smallest step still doesn't fit on one line.
-    el.className = `${className} ${steps[i]} block w-full break-words`.trim();
+    // Settled on the smallest step that fits (or the smallest step overall).
+    // Wrapping is re-enabled here only when the caller allows it as a final
+    // fallback — otherwise the value stays on one line, full stop.
+    el.className = allowWrap
+      ? `${className} ${steps[i]} block w-full break-words`.trim()
+      : `${className} ${steps[i]} inline-block whitespace-nowrap`.trim();
   }
 
   useLayoutEffect(() => {
@@ -70,8 +84,12 @@ export default function AutoFitText({ text, steps = DEFAULT_STEPS, className = "
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const initialClassName = allowWrap
+    ? `${className} ${steps[0]} block w-full break-words`.trim()
+    : `${className} ${steps[0]} inline-block whitespace-nowrap`.trim();
+
   return (
-    <span ref={ref} dir={dir} className={`${className} ${steps[0]} block w-full break-words`.trim()}>
+    <span ref={ref} dir={dir} className={initialClassName}>
       {text}
     </span>
   );
