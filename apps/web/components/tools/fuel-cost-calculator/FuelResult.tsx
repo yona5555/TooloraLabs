@@ -97,10 +97,13 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
         {pricePerUnit > 0 && (
           <div className="mt-5 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
             <FuelPriceSensitivityDiagram
-              points={sensitivityPoints}
-              currentPrice={pricePerUnit}
+              lowPoint={sensitivityPoints[0]}
+              currentPoint={sensitivityPoints[2]}
+              highPoint={sensitivityPoints[5]}
               caption={ts("caption")}
-              xLabel={ts("xLabel")}
+              lowLabel={ts("lowScenarioLabel")}
+              currentLabel={ts("currentScenarioLabel")}
+              highLabel={ts("highScenarioLabel")}
               currency={currency}
               digitStyle={digitStyle}
             />
