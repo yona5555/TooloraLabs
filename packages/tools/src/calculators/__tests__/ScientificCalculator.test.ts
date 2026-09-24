@@ -144,4 +144,70 @@ describe("ScientificCalculator - logarithms and exponentials", () => {
     expect(output.success).toBe(false);
     expect(output.metadata.error).toBe("DIVISION_BY_ZERO");
   });
+
+  it("computes an arbitrary-base logarithm", () => {
+    expect(tool.execute({ operation: "logBase", a: 8, b: 2 }, ctx).data.result).toBeCloseTo(3, 10);
+    expect(tool.execute({ operation: "logBase", a: 100, b: 10 }, ctx).data.result).toBeCloseTo(2, 10);
+  });
+
+  it("returns a DOMAIN_ERROR for a non-positive argument, non-positive base, or base of 1", () => {
+    expect(tool.execute({ operation: "logBase", a: -1, b: 2 }, ctx).success).toBe(false);
+    expect(tool.execute({ operation: "logBase", a: 8, b: -2 }, ctx).success).toBe(false);
+    expect(tool.execute({ operation: "logBase", a: 8, b: 1 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+  });
+});
+
+describe("ScientificCalculator - reciprocal trig (cot/sec/csc)", () => {
+  it("computes cot/sec/csc in degree mode", () => {
+    expect(tool.execute({ operation: "cot", a: 45, angleMode: "deg" }, ctx).data.result).toBeCloseTo(1, 10);
+    expect(tool.execute({ operation: "sec", a: 60, angleMode: "deg" }, ctx).data.result).toBeCloseTo(2, 10);
+    expect(tool.execute({ operation: "csc", a: 30, angleMode: "deg" }, ctx).data.result).toBeCloseTo(2, 10);
+  });
+
+  it("returns a clean 0 for cot(90°), not an error (cos(90°)/sin(90°) = 0/1)", () => {
+    expect(tool.execute({ operation: "cot", a: 90, angleMode: "deg" }, ctx).data.result).toBeCloseTo(0, 10);
+  });
+
+  it("returns DIVISION_BY_ZERO where the underlying cos/sin is exactly zero", () => {
+    expect(tool.execute({ operation: "cot", a: 0, angleMode: "deg" }, ctx).metadata.error).toBe("DIVISION_BY_ZERO");
+    expect(tool.execute({ operation: "sec", a: 90, angleMode: "deg" }, ctx).metadata.error).toBe("DIVISION_BY_ZERO");
+    expect(tool.execute({ operation: "csc", a: 0, angleMode: "deg" }, ctx).metadata.error).toBe("DIVISION_BY_ZERO");
+  });
+
+  it("returns DIVISION_BY_ZERO at 180°, where cos/sin is only a floating-point-imprecise near-zero, not exactly 0", () => {
+    // Math.PI is never exact, so Math.sin(Math.PI) is ~1.2e-16, not 0 — this
+    // is exactly the bug class that slipped through an earlier version of
+    // this file (checked the input for exact zero instead of the output for
+    // a blown-up magnitude).
+    expect(tool.execute({ operation: "cot", a: 180, angleMode: "deg" }, ctx).metadata.error).toBe("DIVISION_BY_ZERO");
+  });
+});
+
+describe("ScientificCalculator - factorial, absolute value, 2^x, percent", () => {
+  it("computes factorial of a non-negative integer", () => {
+    expect(tool.execute({ operation: "factorial", a: 0 }, ctx).data.result).toBe(1);
+    expect(tool.execute({ operation: "factorial", a: 5 }, ctx).data.result).toBe(120);
+  });
+
+  it("returns a DOMAIN_ERROR for a negative or non-integer input", () => {
+    expect(tool.execute({ operation: "factorial", a: -1 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+    expect(tool.execute({ operation: "factorial", a: 2.5 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+  });
+
+  it("returns an OUT_OF_RANGE error beyond 170!", () => {
+    expect(tool.execute({ operation: "factorial", a: 171 }, ctx).metadata.error).toBe("OUT_OF_RANGE");
+  });
+
+  it("computes absolute value", () => {
+    expect(tool.execute({ operation: "abs", a: -7.5 }, ctx).data.result).toBe(7.5);
+    expect(tool.execute({ operation: "abs", a: 7.5 }, ctx).data.result).toBe(7.5);
+  });
+
+  it("computes 2^x", () => {
+    expect(tool.execute({ operation: "twoPow", a: 10 }, ctx).data.result).toBe(1024);
+  });
+
+  it("computes percent as a fraction of 100", () => {
+    expect(tool.execute({ operation: "percent", a: 25 }, ctx).data.result).toBe(0.25);
+  });
 });

@@ -8,9 +8,13 @@ export type ScientificOperation =
   | "divide"
   | "power"
   | "root"
+  | "logBase"
   | "sin"
   | "cos"
   | "tan"
+  | "cot"
+  | "sec"
+  | "csc"
   | "asin"
   | "acos"
   | "atan"
@@ -22,7 +26,11 @@ export type ScientificOperation =
   | "log10"
   | "exp"
   | "pow10"
-  | "reciprocal";
+  | "twoPow"
+  | "reciprocal"
+  | "factorial"
+  | "abs"
+  | "percent";
 
 export type AngleMode = "deg" | "rad";
 
@@ -79,7 +87,47 @@ const BINARY_OPERATIONS = new Set<ScientificOperation>([
   "divide",
   "power",
   "root",
+  "logBase",
 ]);
+
+// sec/csc are 1/cos and 1/sin. At the angles where they're undefined (90°,
+// 0°, ...), cos/sin aren't exactly 0 in floating point (Math.PI/2 etc. are
+// never exact) — they're a tiny near-zero value, so the *reciprocal* is what
+// blows up to a huge finite number, not the input. Checking the computed
+// reciprocal's own magnitude (the same approach tan() already uses for
+// itself) catches this; checking the input would miss it entirely, since a
+// value like 6e-17 is neither exactly 0 nor huge.
+function reciprocalTrigOrError(
+  value: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isFinite(value)) {
+    return { error: "OUT_OF_RANGE" };
+  }
+  if (value === 0) {
+    return { error: "DIVISION_BY_ZERO" };
+  }
+  const reciprocal = 1 / value;
+  if (Math.abs(reciprocal) > TAN_MAGNITUDE_LIMIT) {
+    return { error: "DIVISION_BY_ZERO" };
+  }
+  return { value: reciprocal };
+}
+
+const FACTORIAL_MAX = 170; // 171! overflows to Infinity in IEEE-754 double precision.
+
+function factorialOrError(
+  a: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isInteger(a) || a < 0) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  if (a > FACTORIAL_MAX) {
+    return { error: "OUT_OF_RANGE" };
+  }
+  let result = 1;
+  for (let i = 2; i <= a; i++) result *= i;
+  return { value: result };
+}
 
 export class ScientificCalculator extends BaseCalculator<
   ScientificCalculatorInput,
@@ -143,6 +191,31 @@ export class ScientificCalculator extends BaseCalculator<
       case "tan":
         outcome = tanOrError(Math.tan(angleMode === "deg" ? toRadians(a) : a));
         break;
+      case "cot": {
+        // Derived as cos/sin directly rather than 1/tan: at 90°, tan()
+        // itself blows up to a huge (not infinite) finite value due to
+        // floating-point imprecision, which would falsely flag a perfectly
+        // clean result (cot(90°) = 0/1 = 0) as out of range. The result's
+        // own magnitude is checked (not just an exact-zero sin check) for
+        // the same reason sec/csc check their reciprocal's magnitude: at
+        // 180°, sin() is a tiny non-zero value, not exactly 0, so only the
+        // *computed* cot blows up large enough to catch.
+        const radians = angleMode === "deg" ? toRadians(a) : a;
+        const sinValue = Math.sin(radians);
+        if (sinValue === 0) {
+          outcome = { error: "DIVISION_BY_ZERO" };
+        } else {
+          const result = Math.cos(radians) / sinValue;
+          outcome = Math.abs(result) > TAN_MAGNITUDE_LIMIT ? { error: "DIVISION_BY_ZERO" } : finiteOrError(result);
+        }
+        break;
+      }
+      case "sec":
+        outcome = reciprocalTrigOrError(Math.cos(angleMode === "deg" ? toRadians(a) : a));
+        break;
+      case "csc":
+        outcome = reciprocalTrigOrError(Math.sin(angleMode === "deg" ? toRadians(a) : a));
+        break;
       case "asin":
         if (a < -1 || a > 1) {
           outcome = { error: "DOMAIN_ERROR" };
@@ -190,6 +263,25 @@ export class ScientificCalculator extends BaseCalculator<
         break;
       case "reciprocal":
         outcome = a === 0 ? { error: "DIVISION_BY_ZERO" } : { value: 1 / a };
+        break;
+      case "twoPow":
+        outcome = finiteOrError(Math.pow(2, a));
+        break;
+      case "factorial":
+        outcome = factorialOrError(a);
+        break;
+      case "abs":
+        outcome = { value: Math.abs(a) };
+        break;
+      case "percent":
+        outcome = { value: a / 100 };
+        break;
+      case "logBase":
+        if (a <= 0 || b <= 0 || b === 1) {
+          outcome = { error: "DOMAIN_ERROR" };
+        } else {
+          outcome = finiteOrError(Math.log(a) / Math.log(b));
+        }
         break;
     }
 
