@@ -1,31 +1,25 @@
-import { useTranslations } from "next-intl";
-import SearchBar from "./SearchBar";
 import HeroBackground from "./HeroBackground";
 import HeroMathDoodles from "./HeroMathDoodles";
-import ScientificCalculatorWidget from "@/components/tools/scientific-calculator/ScientificCalculatorWidget";
+import CategorySidebar from "@/components/home/CategorySidebar";
+import HomeCalculator from "@/components/home/calculator/HomeCalculator";
 
 export default function Hero() {
-  const t = useTranslations("hero");
-
   return (
     <section className="relative overflow-hidden">
       <HeroBackground />
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 py-16 text-center">
-        {/* HeroMathDoodles is absolutely positioned against THIS wrapper, so its inset-0 spans the
-            full hero without reaching past this section's own padding into whatever comes next on
-            the homepage. Every direct content child below is given its own "relative z-10" so it
-            paints above the doodle layer. */}
-        <HeroMathDoodles />
-        <div className="relative z-10 w-full">
-          <div className="mx-auto grid w-full max-w-6xl items-stretch gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-            <div className="min-w-0">
-              <ScientificCalculatorWidget />
-            </div>
-            <div className="flex min-w-0 flex-col gap-4">
-              <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
-            </div>
-          </div>
-        </div>
+      {/* HeroMathDoodles is absolutely positioned against THIS wrapper, so its inset-0 spans the
+          full hero without reaching past this section's own padding into whatever comes next on
+          the homepage. Every direct content child below is given its own "relative z-10" so it
+          paints above the doodle layer.
+
+          Unlike the rest of the site's sections, this content area is intentionally full-bleed
+          (no mx-auto max-w-* / px-* wrapper) — the category sidebar and calculator are meant to
+          fill the page edge to edge, with the two columns stretched to the same height via the
+          flex row's default cross-axis stretch (no fixed height needed on either side). */}
+      <HeroMathDoodles />
+      <div className="relative z-10 flex min-h-[640px] w-full flex-col border-y border-zinc-200 lg:flex-row dark:border-zinc-800">
+        <CategorySidebar />
+        <HomeCalculator />
       </div>
     </section>
   );
