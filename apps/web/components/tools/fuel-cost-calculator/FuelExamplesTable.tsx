@@ -31,7 +31,14 @@ export default function FuelExamplesTable({ rows, columnScenario, columnResult }
   const money = (usd: number) => formatLocalizedNumber(convertAmount(usd, "USD", currency), digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   return (
-    <div dir="ltr" className="overflow-x-auto">
+    // No `dir="ltr"` here: both columns hold full translated sentences (not
+    // a numeric-only column like ReferenceTableCard's), so forcing LTR
+    // pinned the Scenario column on the left and Result on the right
+    // regardless of page direction — the same column-order inversion fixed
+    // in ReferenceTableCard.tsx. An HTML table's column order already
+    // follows its inherited `dir` natively; each sentence's own embedded
+    // currency amount is already correctly formatted by `money()` above.
+    <div className="overflow-x-auto">
       <table className="w-full min-w-[420px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-current/30 text-start">
