@@ -2,7 +2,6 @@ import { useTranslations } from "next-intl";
 import SearchBar from "./SearchBar";
 import HeroBackground from "./HeroBackground";
 import HeroMathDoodles from "./HeroMathDoodles";
-import HeroCategories from "./HeroCategories";
 import ScientificCalculatorWidget from "@/components/tools/scientific-calculator/ScientificCalculatorWidget";
 
 export default function Hero() {
@@ -24,7 +23,6 @@ export default function Hero() {
             </div>
             <div className="flex min-w-0 flex-col gap-4">
               <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
-              <HeroCategories />
             </div>
           </div>
         </div>
