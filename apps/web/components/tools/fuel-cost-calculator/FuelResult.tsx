@@ -71,7 +71,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
         />
       </div>
       <div className="p-4 lg:p-6">
-        <AutoFitText dir="ltr" text={heroValue} steps={HERO_STEPS} className="text-center font-mono font-bold text-blue-700 dark:text-blue-300" />
+        <AutoFitText dir="ltr" text={heroValue} steps={HERO_STEPS} allowWrap={false} className="text-center font-mono font-bold text-blue-700 dark:text-blue-300" />
 
         {/* Stacked (not side-by-side) deliberately: this is the narrower above-the-fold
             result column, not a wide education card — at lg: viewport width the redesigned

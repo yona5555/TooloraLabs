@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
+import { Milestone, Ruler, Equal } from "lucide-react";
 import { convertAmount } from "@/lib/currency";
 import AutoFitText from "@/components/tool-ui/AutoFitText";
 import { useFuelLiveInputs } from "./FuelLiveInputsContext";
@@ -32,29 +33,30 @@ export default function FuelCostPerMileVsKmChart() {
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { cost: money(TOTAL_COST), distance: DISTANCE })}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        {/* Stacks vertically below `sm:` (640px), row layout above it — at
-            narrow viewports (confirmed via direct DOM measurement at 375px:
-            available row width 275px vs. 328px needed for two 128px boxes +
-            arrow + gaps) two fixed-width boxes side by side genuinely don't
-            fit, and neither box can shrink past its own uppercase
-            tracking-wide label's min-content width. Matches the same
-            stack-then-row pattern already used by EduDonutChart.tsx on this
-            same page, rather than a one-off fix here. */}
+        {/* §31 Type #11 (Side-by-Side Equivalence), upgraded execution:
+            gradient cards + icon, not plain bordered boxes with a bare "="
+            line-icon between them. Still stacks vertically below `sm:`
+            (640px), row layout above it — at narrow viewports (confirmed via
+            direct DOM measurement at 375px: available row width 275px vs.
+            328px needed for two 128px boxes + arrow + gaps) two fixed-width
+            boxes side by side genuinely don't fit, and neither box can
+            shrink past its own uppercase tracking-wide label's min-content
+            width. Matches the same stack-then-row pattern already used by
+            EduDonutChart.tsx on this same page. */}
         <div dir="ltr" className="flex shrink-0 flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           {/* Fixed width (not auto/content-sized) so AutoFitText has a real,
               bounded target to measure and shrink against — an auto-width
               box just grows with its content and never triggers a shrink. */}
-          <div className="flex w-32 flex-col items-center rounded-lg border border-sky-300 bg-sky-50 px-4 py-5 dark:border-sky-500/40 dark:bg-sky-500/10">
-            <span className="text-xs font-medium uppercase tracking-wide text-sky-600 dark:text-sky-300">{t("perMile")}</span>
-            <AutoFitText text={perMileValue} className="mt-1 font-bold text-sky-700 dark:text-sky-200" />
+          <div className="flex w-32 flex-col items-center gap-1 rounded-2xl bg-gradient-to-br from-sky-500 to-sky-700 px-4 py-5 text-center shadow-sm dark:from-sky-600 dark:to-sky-900">
+            <Milestone size={20} className="text-sky-100" aria-hidden="true" />
+            <span className="text-xs font-medium text-sky-100">{t("perMile")}</span>
+            <AutoFitText text={perMileValue} allowWrap={false} className="font-mono font-bold text-white" />
           </div>
-          <svg width={40} height={24} viewBox="0 0 40 24" role="img" aria-label="=" className="shrink-0 text-current opacity-50">
-            <line x1={4} y1={8} x2={32} y2={8} stroke="currentColor" strokeWidth={2} />
-            <line x1={4} y1={16} x2={32} y2={16} stroke="currentColor" strokeWidth={2} />
-          </svg>
-          <div className="flex w-32 flex-col items-center rounded-lg border border-indigo-300 bg-indigo-50 px-4 py-5 dark:border-indigo-500/40 dark:bg-indigo-500/10">
-            <span className="text-xs font-medium uppercase tracking-wide text-indigo-600 dark:text-indigo-300">{t("perKm")}</span>
-            <AutoFitText text={perKmValue} className="mt-1 font-bold text-indigo-700 dark:text-indigo-200" />
+          <Equal size={18} className="shrink-0 text-current opacity-50" aria-hidden="true" />
+          <div className="flex w-32 flex-col items-center gap-1 rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-700 px-4 py-5 text-center shadow-sm dark:from-indigo-600 dark:to-indigo-900">
+            <Ruler size={20} className="text-indigo-100" aria-hidden="true" />
+            <span className="text-xs font-medium text-indigo-100">{t("perKm")}</span>
+            <AutoFitText text={perKmValue} allowWrap={false} className="font-mono font-bold text-white" />
           </div>
         </div>
         <FuelWorkedExampleNote
