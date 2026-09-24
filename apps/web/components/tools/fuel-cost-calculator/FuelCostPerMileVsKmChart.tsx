@@ -32,7 +32,15 @@ export default function FuelCostPerMileVsKmChart() {
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { cost: money(TOTAL_COST), distance: DISTANCE })}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div dir="ltr" className="flex shrink-0 items-center justify-center gap-4">
+        {/* Stacks vertically below `sm:` (640px), row layout above it — at
+            narrow viewports (confirmed via direct DOM measurement at 375px:
+            available row width 275px vs. 328px needed for two 128px boxes +
+            arrow + gaps) two fixed-width boxes side by side genuinely don't
+            fit, and neither box can shrink past its own uppercase
+            tracking-wide label's min-content width. Matches the same
+            stack-then-row pattern already used by EduDonutChart.tsx on this
+            same page, rather than a one-off fix here. */}
+        <div dir="ltr" className="flex shrink-0 flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           {/* Fixed width (not auto/content-sized) so AutoFitText has a real,
               bounded target to measure and shrink against — an auto-width
               box just grows with its content and never triggers a shrink. */}
