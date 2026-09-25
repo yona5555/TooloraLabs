@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import BreakEvenWorkedExampleTable from "./BreakEvenWorkedExampleTable";
+import BreakEvenWorkedExampleNote from "./BreakEvenWorkedExampleNote";
 import BreakEvenBusinessTypeDiagram from "./BreakEvenBusinessTypeDiagram";
 import BreakEvenMarginRatioGauge from "./BreakEvenMarginRatioGauge";
 import BreakEvenFixedCostAccumulationDiagram from "./BreakEvenFixedCostAccumulationDiagram";
@@ -20,6 +21,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function BreakEvenEducation() {
   const t = await getTranslations("tools.break-even-calculator.education");
+  const tRoot = await getTranslations("tools.break-even-calculator");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -49,15 +51,29 @@ export default async function BreakEvenEducation() {
           lowMarginTraits={t.raw("intro.businessTypeDiagram.lowMarginTraits") as string[]}
           caption={t("intro.businessTypeDiagram.caption")}
         />
-        <BreakEvenRevenueDonut
-          centerValue="$50"
-          centerLabel={t("intro.marginBar.priceLabel")}
-          caption={t("intro.marginBar.caption")}
-          segments={[
-            { key: "variable", value: 20, label: t("intro.marginBar.variableCostLabel"), colorClass: "stroke-teal-300 dark:stroke-teal-600" },
-            { key: "margin", value: 30, label: t("intro.marginBar.marginLabel"), colorClass: "stroke-teal-600 dark:stroke-teal-400" },
-          ]}
-        />
+        {/* The site-wide reference layout for "donut + its own worked-example note", matching
+            fuel-cost-calculator's Cost-by-Power-Source section exactly: shrink-0 donut beside a
+            flex-1 note, stacked only below the lg breakpoint. */}
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+          <div className="shrink-0">
+            <BreakEvenRevenueDonut
+              ariaLabel={t("intro.marginBar.title")}
+              segments={[
+                { key: "variable", value: 20, label: t("intro.marginBar.variableCostLabel"), formatted: "$20", colorClass: "stroke-teal-300 dark:stroke-teal-600", dotColorClass: "bg-teal-300 dark:bg-teal-600" },
+                { key: "margin", value: 30, label: t("intro.marginBar.marginLabel"), formatted: "$30", colorClass: "stroke-teal-600 dark:stroke-teal-400", dotColorClass: "bg-teal-600 dark:bg-teal-400" },
+              ]}
+            />
+          </div>
+          <BreakEvenWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("intro.marginBar.priceLabel"), value: "$50" },
+              { label: t("intro.marginBar.variableCostLabel"), value: "$20" },
+              { label: t("intro.marginBar.marginLabel"), value: "$30", emphasize: true, note: t("intro.marginBar.marginPercentNote", { percent: "60%" }) },
+            ]}
+          />
+        </div>
+        <p className="mt-3 text-xs opacity-60">{t("intro.marginBar.caption")}</p>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -104,13 +120,12 @@ export default async function BreakEvenEducation() {
             </tbody>
           </table>
         </div>
-        {/* Both charts capped to the same max-width and placed side by side, rather than each
-            stretching to its own full container width — BreakEvenTwoScenarioCompareBar's fixed
-            280-wide viewBox scaled up to fill an arbitrarily wide card (growing its bars and text
-            along with it) sitting right above BreakEvenRevenueDonut's fixed 160px circle read as
-            two mismatched, unrelated pieces rather than one section. */}
-        <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-2">
-          <div className="mx-auto w-full max-w-xs">
+        {/* Same reference flex-row pattern as the $50-price section above (and the same
+            fuel-cost-calculator layout both are modeled on): both pieces shrink-0 at a
+            consistent, capped medium width, centered together — not two independently-scaled
+            charts stacked with mismatched effective sizes. */}
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-center">
+          <div className="w-full max-w-xs shrink-0">
             <BreakEvenTwoScenarioCompareBar
               title={t("examples.scenarioCompareBar.title")}
               caption={t("examples.scenarioCompareBar.caption")}
@@ -120,17 +135,16 @@ export default async function BreakEvenEducation() {
               ]}
             />
           </div>
-          <div className="mx-auto w-full max-w-xs">
+          <div className="shrink-0">
             <BreakEvenRevenueDonut
-              centerValue="$25,000"
-              centerLabel={t("examples.revenueDonut.centerLabel")}
-              caption={t("examples.revenueDonut.caption")}
+              ariaLabel={t("examples.revenueDonut.centerLabel")}
               segments={[
-                { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
-                { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
-                { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+                { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), formatted: "$10,000", colorClass: "stroke-rose-500 dark:stroke-rose-400", dotColorClass: "bg-rose-500 dark:bg-rose-400" },
+                { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), formatted: "$10,000", colorClass: "stroke-amber-500 dark:stroke-amber-400", dotColorClass: "bg-amber-500 dark:bg-amber-400" },
+                { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), formatted: "$5,000", colorClass: "stroke-emerald-500 dark:stroke-emerald-400", dotColorClass: "bg-emerald-500 dark:bg-emerald-400" },
               ]}
             />
+            <p className="mt-2 text-center text-xs opacity-70">{t("examples.revenueDonut.caption")}</p>
           </div>
         </div>
       </InfoSection>
@@ -145,14 +159,34 @@ export default async function BreakEvenEducation() {
             </div>
           ))}
         </div>
-        <BreakEvenPriceChangeImpactBar
-          title={t("applications.priceImpactBar.title")}
-          caption={t("applications.priceImpactBar.caption")}
-          scenarios={[
-            { key: "p50", label: "$50", units: 334 },
-            { key: "p55", label: "$55", units: 286 },
-          ]}
-        />
+        {/* Same reference flex-row pattern as this page's other indicator+note sections — the
+            bar chart capped to a medium max-width (it was previously alone at full card width,
+            scaling its bars and numbers up well past every other indicator's size on this page)
+            with a real worked-example note beside it instead of standing alone with no detail. */}
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+          <div className="w-full max-w-xs shrink-0">
+            <BreakEvenPriceChangeImpactBar
+              title={t("applications.priceImpactBar.title")}
+              scenarios={[
+                { key: "p50", label: "$50", units: 334 },
+                { key: "p55", label: "$55", units: 286 },
+              ]}
+            />
+          </div>
+          <BreakEvenWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("applications.priceImpactBar.rowLabelAt", { price: "$50" }), value: "334" },
+              {
+                label: t("applications.priceImpactBar.rowLabelAt", { price: "$55" }),
+                value: "286",
+                emphasize: true,
+                note: t("applications.priceImpactBar.noteFewerUnits", { count: 48 }),
+              },
+            ]}
+          />
+        </div>
+        <p className="mt-3 text-xs opacity-60">{t("applications.priceImpactBar.caption")}</p>
         <BreakEvenMonthlyPaceLineChart
           breakEvenLabel={t("applications.monthlyPaceChart.breakEvenLabel")}
           columnMonth={t("applications.monthlyPaceChart.columnMonth")}

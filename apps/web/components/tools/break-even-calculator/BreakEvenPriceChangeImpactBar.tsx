@@ -2,7 +2,8 @@ type PriceScenario = { key: string; label: string; units: number };
 
 type BreakEvenPriceChangeImpactBarProps = {
   scenarios: PriceScenario[];
-  caption: string;
+  /** Optional: omit when the caller renders its own caption below a wider layout (e.g. this chart sitting beside a worked-example note) instead of directly under the chart itself. */
+  caption?: string;
   title: string;
 };
 
@@ -40,7 +41,7 @@ export default function BreakEvenPriceChangeImpactBar({ scenarios, caption, titl
           })}
         </svg>
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
+      {caption && <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>}
     </figure>
   );
 }
