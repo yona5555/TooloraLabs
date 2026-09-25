@@ -34,6 +34,13 @@ export default async function BreakEvenEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        {/* This table needs its own signpost — without a heading + intro sentence it reads as a
+            stray fragment when scrolled past, easy to mistake for an unlabeled continuation of
+            the donut section further down. Its own angle (cost/revenue vs. sales VOLUME) is
+            explicitly distinguished here from the donut's angle (how one $50 sale's price
+            splits into cost + margin) per §32's "no duplicated/overlapping sections" rule. */}
+        <h3 className="mt-2 font-semibold">{t("intro.diagram.title")}</h3>
+        <p className="text-sm opacity-80">{t("intro.diagram.intro")}</p>
         <BreakEvenWorkedExampleTable
           columns={[t("intro.diagram.columnUnits"), t("intro.diagram.totalCostLabel"), t("intro.diagram.revenueLabel"), t("intro.diagram.columnResult")]}
           rows={[
@@ -44,11 +51,28 @@ export default async function BreakEvenEducation() {
           ]}
           caption={t("intro.diagram.caption")}
         />
+        {/* Distinct hypothetical businesses (not this page's $10,000/$20/$50 running example),
+            so their break-even/profit-at-scale numbers below don't duplicate any figure shown
+            elsewhere on the page — each card now carries its own real computed indicator instead
+            of narrative bullets alone, per §32's extension. */}
         <BreakEvenBusinessTypeDiagram
           softwareLabel={t("intro.businessTypeDiagram.softwareLabel")}
           lowMarginLabel={t("intro.businessTypeDiagram.lowMarginLabel")}
           softwareTraits={t.raw("intro.businessTypeDiagram.softwareTraits") as string[]}
           lowMarginTraits={t.raw("intro.businessTypeDiagram.lowMarginTraits") as string[]}
+          statsTitle={tRoot("workedExampleTitle")}
+          softwareStats={[
+            { label: t("intro.businessTypeDiagram.fixedCostsLabel"), value: "$45,000" },
+            { label: t("intro.businessTypeDiagram.marginPerUnitLabel"), value: "$90" },
+            { label: t("intro.businessTypeDiagram.breakEvenUnitsLabel"), value: "500", emphasize: true },
+            { label: t("intro.businessTypeDiagram.profitAtUnitsLabel", { units: "2,000" }), value: "$135,000" },
+          ]}
+          lowMarginStats={[
+            { label: t("intro.businessTypeDiagram.fixedCostsLabel"), value: "$2,000" },
+            { label: t("intro.businessTypeDiagram.marginPerUnitLabel"), value: "$2" },
+            { label: t("intro.businessTypeDiagram.breakEvenUnitsLabel"), value: "1,000", emphasize: true },
+            { label: t("intro.businessTypeDiagram.profitAtUnitsLabel", { units: "2,000" }), value: "$2,000" },
+          ]}
           caption={t("intro.businessTypeDiagram.caption")}
         />
         {/* The site-wide reference layout for "donut + its own worked-example note", matching
