@@ -35,47 +35,50 @@ export default async function BreakEvenEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        {/* This table needs its own signpost — without a heading + intro sentence it reads as a
-            stray fragment when scrolled past, easy to mistake for an unlabeled continuation of
-            the donut section further down. Its own angle (cost/revenue vs. sales VOLUME) is
-            explicitly distinguished here from the donut's angle (how one $50 sale's price
-            splits into cost + margin) per §32's "no duplicated/overlapping sections" rule. */}
-        <h3 className="mt-2 font-semibold">{t("intro.diagram.title")}</h3>
-        <p className="text-sm opacity-80">{t("intro.diagram.intro")}</p>
-        <BreakEvenWorkedExampleTable
-          columns={[t("intro.diagram.columnUnits"), t("intro.diagram.totalCostLabel"), t("intro.diagram.revenueLabel"), t("intro.diagram.columnResult")]}
-          rows={[
-            ["0", "$10,000", "$0", { text: t("intro.diagram.statusLoss"), kind: "loss" }],
-            ["167", "$13,340", "$8,350", { text: t("intro.diagram.statusLoss"), kind: "loss" }],
-            ["334", "$16,680", "$16,700", { text: t("intro.diagram.statusBreakeven"), kind: "breakeven" }],
-            ["500", "$20,000", "$25,000", { text: t("intro.diagram.statusProfit"), kind: "profit" }],
-          ]}
-          caption={t("intro.diagram.caption")}
-        />
+        {/* Every indicator on this page gets its own full-framed SectionCard (blue header bar +
+            title), no exceptions — §32 part 4/5. A standalone WORKED EXAMPLE table with no
+            companion chart still counts as an indicator and still needs the frame; the intro
+            sentence that used to sit above it as a bare <h3> now becomes the card's own body
+            intro instead, since the blue header already carries the heading. */}
+        <SectionCard title={t("intro.diagram.title")}>
+          <p className="text-sm opacity-80">{t("intro.diagram.intro")}</p>
+          <BreakEvenWorkedExampleTable
+            columns={[t("intro.diagram.columnUnits"), t("intro.diagram.totalCostLabel"), t("intro.diagram.revenueLabel"), t("intro.diagram.columnResult")]}
+            rows={[
+              ["0", "$10,000", "$0", { text: t("intro.diagram.statusLoss"), kind: "loss" }],
+              ["167", "$13,340", "$8,350", { text: t("intro.diagram.statusLoss"), kind: "loss" }],
+              ["334", "$16,680", "$16,700", { text: t("intro.diagram.statusBreakeven"), kind: "breakeven" }],
+              ["500", "$20,000", "$25,000", { text: t("intro.diagram.statusProfit"), kind: "profit" }],
+            ]}
+            caption={t("intro.diagram.caption")}
+          />
+        </SectionCard>
         {/* Distinct hypothetical businesses (not this page's $10,000/$20/$50 running example),
             so their break-even/profit-at-scale numbers below don't duplicate any figure shown
             elsewhere on the page — each card now carries its own real computed indicator instead
             of narrative bullets alone, per §32's extension. */}
-        <BreakEvenBusinessTypeDiagram
-          softwareLabel={t("intro.businessTypeDiagram.softwareLabel")}
-          lowMarginLabel={t("intro.businessTypeDiagram.lowMarginLabel")}
-          softwareTraits={t.raw("intro.businessTypeDiagram.softwareTraits") as string[]}
-          lowMarginTraits={t.raw("intro.businessTypeDiagram.lowMarginTraits") as string[]}
-          statsTitle={tRoot("workedExampleTitle")}
-          softwareStats={[
-            { label: t("intro.businessTypeDiagram.fixedCostsLabel"), value: "$45,000" },
-            { label: t("intro.businessTypeDiagram.marginPerUnitLabel"), value: "$90" },
-            { label: t("intro.businessTypeDiagram.breakEvenUnitsLabel"), value: "500", emphasize: true },
-            { label: t("intro.businessTypeDiagram.profitAtUnitsLabel", { units: "2,000" }), value: "$135,000" },
-          ]}
-          lowMarginStats={[
-            { label: t("intro.businessTypeDiagram.fixedCostsLabel"), value: "$2,000" },
-            { label: t("intro.businessTypeDiagram.marginPerUnitLabel"), value: "$2" },
-            { label: t("intro.businessTypeDiagram.breakEvenUnitsLabel"), value: "1,000", emphasize: true },
-            { label: t("intro.businessTypeDiagram.profitAtUnitsLabel", { units: "2,000" }), value: "$2,000" },
-          ]}
-          caption={t("intro.businessTypeDiagram.caption")}
-        />
+        <SectionCard title={t("intro.businessTypeDiagram.cardTitle")}>
+          <BreakEvenBusinessTypeDiagram
+            softwareLabel={t("intro.businessTypeDiagram.softwareLabel")}
+            lowMarginLabel={t("intro.businessTypeDiagram.lowMarginLabel")}
+            softwareTraits={t.raw("intro.businessTypeDiagram.softwareTraits") as string[]}
+            lowMarginTraits={t.raw("intro.businessTypeDiagram.lowMarginTraits") as string[]}
+            statsTitle={tRoot("workedExampleTitle")}
+            softwareStats={[
+              { label: t("intro.businessTypeDiagram.fixedCostsLabel"), value: "$45,000" },
+              { label: t("intro.businessTypeDiagram.marginPerUnitLabel"), value: "$90" },
+              { label: t("intro.businessTypeDiagram.breakEvenUnitsLabel"), value: "500", emphasize: true },
+              { label: t("intro.businessTypeDiagram.profitAtUnitsLabel", { units: "2,000" }), value: "$135,000" },
+            ]}
+            lowMarginStats={[
+              { label: t("intro.businessTypeDiagram.fixedCostsLabel"), value: "$2,000" },
+              { label: t("intro.businessTypeDiagram.marginPerUnitLabel"), value: "$2" },
+              { label: t("intro.businessTypeDiagram.breakEvenUnitsLabel"), value: "1,000", emphasize: true },
+              { label: t("intro.businessTypeDiagram.profitAtUnitsLabel", { units: "2,000" }), value: "$2,000" },
+            ]}
+            caption={t("intro.businessTypeDiagram.caption")}
+          />
+        </SectionCard>
         {/* Same full-framed-card structure as fuel-cost-calculator's "Cost by Power Source"
             section (SectionCard: rounded border + blue header bar + white bold title) — an
             "indicator + WORKED EXAMPLE table" pair is never left floating with no container or
@@ -114,67 +117,76 @@ export default async function BreakEvenEducation() {
             </div>
           ))}
         </dl>
-        <BreakEvenMarginRatioGauge
-          valueLabel="60%"
-          caption={t("variables.marginGauge.caption")}
-          captionColorClass="text-emerald-600 dark:text-emerald-400"
-        />
-        <BreakEvenFixedCostAccumulationDiagram
-          columnUnits={t("variables.accumulationDiagram.columnUnits")}
-          columnCumulativeMargin={t("variables.accumulationDiagram.columnCumulativeMargin")}
-          columnResult={t("variables.accumulationDiagram.columnResult")}
-          breakEvenLabel={t("variables.accumulationDiagram.breakEvenLabel")}
-          caption={t("variables.accumulationDiagram.caption")}
-        />
+        <SectionCard title={t("variables.marginGauge.cardTitle")}>
+          <BreakEvenMarginRatioGauge
+            valueLabel="60%"
+            caption={t("variables.marginGauge.caption")}
+            captionColorClass="text-emerald-600 dark:text-emerald-400"
+          />
+        </SectionCard>
+        <SectionCard title={t("variables.accumulationDiagram.cardTitle")}>
+          <BreakEvenFixedCostAccumulationDiagram
+            columnUnits={t("variables.accumulationDiagram.columnUnits")}
+            columnCumulativeMargin={t("variables.accumulationDiagram.columnCumulativeMargin")}
+            columnResult={t("variables.accumulationDiagram.columnResult")}
+            breakEvenLabel={t("variables.accumulationDiagram.breakEvenLabel")}
+            caption={t("variables.accumulationDiagram.caption")}
+          />
+        </SectionCard>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
-        <div dir="ltr" className="overflow-x-auto">
-          <table className="w-full min-w-[420px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-current/30 text-start">
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnScenario")}</th>
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exampleRows.map((row) => (
-                <tr key={row.scenario} className="border-b border-current/10">
-                  <td className="px-3 py-2.5">{row.scenario}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+        {/* The scenario summary table and the bar+donut below it are one continuous worked
+            example (both describe the same $5,000-profit-goal scenario), so they share a single
+            framed card instead of being split into two redundant back-to-back blue cards. */}
+        <SectionCard title={t("examples.scenarioCompareBar.title")}>
+          <div dir="ltr" className="overflow-x-auto">
+            <table className="w-full min-w-[420px] border-collapse text-sm">
+              <thead>
+                <tr className="border-b border-current/30 text-start">
+                  <th className="px-3 py-2 text-start font-semibold">{t("examples.columnScenario")}</th>
+                  <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {/* Same reference flex-row pattern as the $50-price section above (and the same
-            fuel-cost-calculator layout both are modeled on): both pieces shrink-0 at a
-            consistent, capped medium width, centered together — not two independently-scaled
-            charts stacked with mismatched effective sizes. */}
-        <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-center">
-          <div className="w-full max-w-xs shrink-0">
-            <BreakEvenTwoScenarioCompareBar
-              title={t("examples.scenarioCompareBar.title")}
-              caption={t("examples.scenarioCompareBar.caption")}
-              scenarios={[
-                { key: "s1", label: t("examples.scenarioCompareBar.label1"), units: 334 },
-                { key: "s2", label: t("examples.scenarioCompareBar.label2"), units: 500 },
-              ]}
-            />
+              </thead>
+              <tbody>
+                {exampleRows.map((row) => (
+                  <tr key={row.scenario} className="border-b border-current/10">
+                    <td className="px-3 py-2.5">{row.scenario}</td>
+                    <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="shrink-0">
-            <BreakEvenRevenueDonut
-              ariaLabel={t("examples.revenueDonut.centerLabel")}
-              segments={[
-                { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), formatted: "$10,000", colorClass: "stroke-rose-500 dark:stroke-rose-400", dotColorClass: "bg-rose-500 dark:bg-rose-400" },
-                { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), formatted: "$10,000", colorClass: "stroke-amber-500 dark:stroke-amber-400", dotColorClass: "bg-amber-500 dark:bg-amber-400" },
-                { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), formatted: "$5,000", colorClass: "stroke-emerald-500 dark:stroke-emerald-400", dotColorClass: "bg-emerald-500 dark:bg-emerald-400" },
-              ]}
-            />
-            <p className="mt-2 text-center text-xs opacity-70">{t("examples.revenueDonut.caption")}</p>
+          {/* Same reference flex-row pattern as the $50-price section above (and the same
+              fuel-cost-calculator layout both are modeled on): both pieces shrink-0 at a
+              consistent, capped medium width, centered together — not two independently-scaled
+              charts stacked with mismatched effective sizes. */}
+          <div className="mt-4 flex flex-col items-center gap-8 lg:flex-row lg:justify-center">
+            <div className="w-full max-w-xs shrink-0">
+              <BreakEvenTwoScenarioCompareBar
+                title={t("examples.scenarioCompareBar.title")}
+                caption={t("examples.scenarioCompareBar.caption")}
+                scenarios={[
+                  { key: "s1", label: t("examples.scenarioCompareBar.label1"), units: 334 },
+                  { key: "s2", label: t("examples.scenarioCompareBar.label2"), units: 500 },
+                ]}
+              />
+            </div>
+            <div className="shrink-0">
+              <BreakEvenRevenueDonut
+                ariaLabel={t("examples.revenueDonut.centerLabel")}
+                segments={[
+                  { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), formatted: "$10,000", colorClass: "stroke-rose-500 dark:stroke-rose-400", dotColorClass: "bg-rose-500 dark:bg-rose-400" },
+                  { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), formatted: "$10,000", colorClass: "stroke-amber-500 dark:stroke-amber-400", dotColorClass: "bg-amber-500 dark:bg-amber-400" },
+                  { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), formatted: "$5,000", colorClass: "stroke-emerald-500 dark:stroke-emerald-400", dotColorClass: "bg-emerald-500 dark:bg-emerald-400" },
+                ]}
+              />
+              <p className="mt-2 text-center text-xs opacity-70">{t("examples.revenueDonut.caption")}</p>
+            </div>
           </div>
-        </div>
+        </SectionCard>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -217,26 +229,30 @@ export default async function BreakEvenEducation() {
           </div>
           <p className="mt-3 text-xs opacity-60">{t("applications.priceImpactBar.caption")}</p>
         </SectionCard>
-        <BreakEvenMonthlyPaceLineChart
-          breakEvenLabel={t("applications.monthlyPaceChart.breakEvenLabel")}
-          columnMonth={t("applications.monthlyPaceChart.columnMonth")}
-          columnCumulativeUnits={t("applications.monthlyPaceChart.columnCumulativeUnits")}
-          columnPercentOfBreakEven={t("applications.monthlyPaceChart.columnPercentOfBreakEven")}
-          caption={t("applications.monthlyPaceChart.caption")}
-          points={[
-            { key: "m1", label: t("applications.monthlyPaceChart.month1"), cumulativeUnits: 84 },
-            { key: "m2", label: t("applications.monthlyPaceChart.month2"), cumulativeUnits: 167 },
-            { key: "m3", label: t("applications.monthlyPaceChart.month3"), cumulativeUnits: 251 },
-            { key: "m4", label: t("applications.monthlyPaceChart.month4"), cumulativeUnits: 334 },
-          ]}
-        />
-        <BreakEvenFixedCostAdditionDiagram
-          beforeLabel={t("applications.fixedCostAddition.beforeLabel")}
-          afterLabel={t("applications.fixedCostAddition.afterLabel")}
-          columnFixedCosts={t("applications.fixedCostAddition.columnFixedCosts")}
-          columnBreakEvenUnits={t("applications.fixedCostAddition.columnBreakEvenUnits")}
-          caption={t("applications.fixedCostAddition.caption")}
-        />
+        <SectionCard title={t("applications.monthlyPaceChart.cardTitle")}>
+          <BreakEvenMonthlyPaceLineChart
+            breakEvenLabel={t("applications.monthlyPaceChart.breakEvenLabel")}
+            columnMonth={t("applications.monthlyPaceChart.columnMonth")}
+            columnCumulativeUnits={t("applications.monthlyPaceChart.columnCumulativeUnits")}
+            columnPercentOfBreakEven={t("applications.monthlyPaceChart.columnPercentOfBreakEven")}
+            caption={t("applications.monthlyPaceChart.caption")}
+            points={[
+              { key: "m1", label: t("applications.monthlyPaceChart.month1"), cumulativeUnits: 84 },
+              { key: "m2", label: t("applications.monthlyPaceChart.month2"), cumulativeUnits: 167 },
+              { key: "m3", label: t("applications.monthlyPaceChart.month3"), cumulativeUnits: 251 },
+              { key: "m4", label: t("applications.monthlyPaceChart.month4"), cumulativeUnits: 334 },
+            ]}
+          />
+        </SectionCard>
+        <SectionCard title={t("applications.fixedCostAddition.cardTitle")}>
+          <BreakEvenFixedCostAdditionDiagram
+            beforeLabel={t("applications.fixedCostAddition.beforeLabel")}
+            afterLabel={t("applications.fixedCostAddition.afterLabel")}
+            columnFixedCosts={t("applications.fixedCostAddition.columnFixedCosts")}
+            columnBreakEvenUnits={t("applications.fixedCostAddition.columnBreakEvenUnits")}
+            caption={t("applications.fixedCostAddition.caption")}
+          />
+        </SectionCard>
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
