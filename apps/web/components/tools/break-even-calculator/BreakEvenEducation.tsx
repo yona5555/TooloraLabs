@@ -4,7 +4,7 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CvpDiagram from "./CvpDiagram";
+import BreakEvenWorkedExampleTable, { type WorkedExampleRow } from "./BreakEvenWorkedExampleTable";
 import BreakEvenBusinessTypeDiagram from "./BreakEvenBusinessTypeDiagram";
 import BreakEvenContributionMarginBar from "./BreakEvenContributionMarginBar";
 import BreakEvenMarginRatioGauge from "./BreakEvenMarginRatioGauge";
@@ -33,12 +33,19 @@ export default async function BreakEvenEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <CvpDiagram
-          fixedLabel={t("intro.diagram.fixedLabel")}
-          totalCostLabel={t("intro.diagram.totalCostLabel")}
-          revenueLabel={t("intro.diagram.revenueLabel")}
-          profitLabel={t("intro.diagram.profitLabel")}
-          lossLabel={t("intro.diagram.lossLabel")}
+        <BreakEvenWorkedExampleTable
+          columnUnits={t("intro.diagram.columnUnits")}
+          columnTotalCost={t("intro.diagram.totalCostLabel")}
+          columnRevenue={t("intro.diagram.revenueLabel")}
+          columnResult={t("intro.diagram.columnResult")}
+          rows={
+            [
+              { unitsLabel: "0", totalCost: "$10,000", revenue: "$0", statusLabel: t("intro.diagram.statusLoss"), statusKind: "loss" },
+              { unitsLabel: "167", totalCost: "$13,340", revenue: "$8,350", statusLabel: t("intro.diagram.statusLoss"), statusKind: "loss" },
+              { unitsLabel: "334", totalCost: "$16,680", revenue: "$16,700", statusLabel: t("intro.diagram.statusBreakeven"), statusKind: "breakeven" },
+              { unitsLabel: "500", totalCost: "$20,000", revenue: "$25,000", statusLabel: t("intro.diagram.statusProfit"), statusKind: "profit" },
+            ] satisfies WorkedExampleRow[]
+          }
           caption={t("intro.diagram.caption")}
         />
         <BreakEvenBusinessTypeDiagram
