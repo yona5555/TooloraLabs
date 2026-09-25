@@ -59,12 +59,12 @@ export default function CalculatorDisplay({ state, dispatch, archive }: Calculat
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1.4fr_1fr]">
       <div
         aria-label={tHome("display.mainLabel")}
-        className="flex min-h-[6.5rem] flex-col justify-end rounded-xl bg-zinc-50 px-4 py-3 dark:bg-zinc-800/70"
+        className="flex min-h-[6.5rem] flex-col justify-end rounded-xl border border-blue-100 bg-gradient-to-b from-zinc-50 to-blue-50/40 px-4 py-3 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] dark:border-blue-500/20 dark:from-zinc-800 dark:to-zinc-800/60 dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]"
       >
-        <div className="truncate text-end text-sm text-zinc-400 dark:text-zinc-500" dir="ltr">
+        <div className="truncate text-end text-sm text-zinc-500 dark:text-zinc-400" dir="ltr">
           {topText}
         </div>
-        <div className="mt-1 truncate text-end text-4xl font-bold text-zinc-900 dark:text-zinc-50" dir="ltr">
+        <div className="mt-1 truncate text-end text-4xl font-extrabold text-zinc-900 dark:text-white" dir="ltr">
           {bottomText}
         </div>
       </div>

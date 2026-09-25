@@ -21,19 +21,31 @@ type ButtonSpec = {
   active?: boolean;
 };
 
+/**
+ * Every variant gets a "raised keycap" bevel via a solid bottom-edge shadow
+ * (not a blurred drop shadow, which would look like it floats rather than
+ * has depth) that collapses to flat + a 1px downward shift on :active, so
+ * pressing a key actually looks pressed. Operators/equals/delete use solid,
+ * saturated fills (not pale tinted-white backgrounds) so they read as
+ * distinctly "different kinds of buttons" at a glance, and every dark-mode
+ * text color is pushed to near-white rather than mid-gray so it never washes
+ * out against these still-fairly-dark button fills.
+ */
 const VARIANT_CLASSES: Record<Variant, string> = {
   number:
-    "border border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700",
+    "border border-zinc-300 bg-white text-zinc-900 shadow-[0_2px_0_rgba(0,0,0,0.10)] hover:bg-zinc-50 active:translate-y-px active:shadow-none dark:border-zinc-600 dark:bg-zinc-700 dark:text-white dark:shadow-[0_2px_0_rgba(0,0,0,0.5)] dark:hover:bg-zinc-600",
   operator:
-    "border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-400 dark:hover:bg-blue-500/20",
+    "bg-blue-500 text-white shadow-[0_3px_0_rgba(29,78,216,0.9)] hover:bg-blue-400 active:translate-y-px active:shadow-[0_1px_0_rgba(29,78,216,0.9)] dark:bg-blue-500 dark:shadow-[0_3px_0_rgba(30,58,138,1)] dark:hover:bg-blue-400",
   function:
-    "border border-zinc-200 bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-300 dark:hover:bg-zinc-700",
-  clear: "border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-400 dark:hover:bg-blue-500/20",
+    "border border-zinc-200 bg-zinc-100 text-zinc-800 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none dark:border-zinc-600 dark:bg-zinc-700/80 dark:text-zinc-50 dark:shadow-[0_2px_0_rgba(0,0,0,0.4)] dark:hover:bg-zinc-600",
+  clear:
+    "bg-amber-500 text-white shadow-[0_3px_0_rgba(180,83,9,0.9)] hover:bg-amber-400 active:translate-y-px active:shadow-[0_1px_0_rgba(180,83,9,0.9)] dark:bg-amber-500 dark:shadow-[0_3px_0_rgba(120,53,15,1)] dark:hover:bg-amber-400",
   delete:
-    "border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 dark:border-red-500/20 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20",
-  equals: "bg-blue-600 text-white hover:bg-blue-700",
+    "bg-red-500 text-white shadow-[0_3px_0_rgba(185,28,28,0.9)] hover:bg-red-400 active:translate-y-px active:shadow-[0_1px_0_rgba(185,28,28,0.9)] dark:bg-red-500 dark:shadow-[0_3px_0_rgba(127,29,29,1)] dark:hover:bg-red-400",
+  equals:
+    "bg-blue-600 text-white shadow-[0_3px_0_rgba(30,58,138,0.9)] hover:bg-blue-500 active:translate-y-px active:shadow-[0_1px_0_rgba(30,58,138,0.9)] dark:bg-blue-600 dark:shadow-[0_3px_0_rgba(23,37,84,1)] dark:hover:bg-blue-500",
   toggle:
-    "border border-zinc-200 bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-300 dark:hover:bg-zinc-700",
+    "border border-zinc-200 bg-zinc-100 text-zinc-800 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none dark:border-zinc-600 dark:bg-zinc-700/80 dark:text-zinc-50 dark:shadow-[0_2px_0_rgba(0,0,0,0.4)] dark:hover:bg-zinc-600",
 };
 
 const TRIG_INVERSE: Record<string, { label: string; op: ScientificOperation }> = {

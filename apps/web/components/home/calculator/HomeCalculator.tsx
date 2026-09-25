@@ -33,7 +33,7 @@ export default function HomeCalculator() {
   }
 
   return (
-    <div className="flex h-full min-w-0 flex-1 flex-col overflow-hidden bg-white dark:bg-zinc-900">
+    <div className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
       <CalculatorTopBar mode={mode} setMode={setMode} />
 
       {mode === "scientific" ? (
@@ -42,7 +42,6 @@ export default function HomeCalculator() {
             <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} />
           </div>
           <FunctionCategoryRow dispatch={dispatch} />
-          <div className="flex-1" />
           <CalculatorKeypad state={state} dispatch={dispatch} />
           <CalculatorBottomBar state={state} onSaveHistory={handleSaveHistory} justSaved={justSaved} />
         </>

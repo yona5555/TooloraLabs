@@ -68,8 +68,12 @@ function getSnapshot(): HistoryEntry[] {
   return lastParsed;
 }
 
+// A shared, module-level constant — not a fresh `[]` literal per call, which would fail
+// useSyncExternalStore's referential-stability check and log a "should be cached" warning
+// (and re-render) on every single invocation, since `[] !== []` in every comparison.
+const EMPTY_ARCHIVE: HistoryEntry[] = [];
 function getServerSnapshot(): HistoryEntry[] {
-  return [];
+  return EMPTY_ARCHIVE;
 }
 
 export function useArchive() {
