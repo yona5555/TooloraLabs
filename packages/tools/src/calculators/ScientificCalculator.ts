@@ -30,7 +30,12 @@ export type ScientificOperation =
   | "reciprocal"
   | "factorial"
   | "abs"
-  | "percent";
+  | "percent"
+  | "nCr"
+  | "nPr"
+  | "numDerivativeSin"
+  | "numDerivativeSquare"
+  | "numIntegralSquare";
 
 export type AngleMode = "deg" | "rad";
 
@@ -88,6 +93,8 @@ const BINARY_OPERATIONS = new Set<ScientificOperation>([
   "power",
   "root",
   "logBase",
+  "nCr",
+  "nPr",
 ]);
 
 // sec/csc are 1/cos and 1/sin. At the angles where they're undefined (90°,
@@ -127,6 +134,78 @@ function factorialOrError(
   let result = 1;
   for (let i = 2; i <= a; i++) result *= i;
   return { value: result };
+}
+
+function permutationsOrError(
+  n: number,
+  r: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  if (r > n) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  // Multiplies the r terms n, n-1, ..., n-r+1 directly rather than n!/(n-r)!
+  // — computing the full n! first would overflow past FACTORIAL_MAX far
+  // sooner than the actual nPr result does for many valid (n, r) pairs.
+  let result = 1;
+  for (let i = 0; i < r; i++) {
+    result *= n - i;
+    if (!Number.isFinite(result)) return { error: "OUT_OF_RANGE" };
+  }
+  return { value: result };
+}
+
+function combinationsOrError(
+  n: number,
+  r: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  if (r > n) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  // nCr(n, r) === nCr(n, n-r); picking the smaller of the two keeps the
+  // multiplicative loop below as short as possible. Each step divides back
+  // down immediately (the running product times (n-i) is always evenly
+  // divisible by i+1 at that point in the classic incremental-binomial
+  // identity), which is why this stays numerically well-behaved without ever
+  // computing a full factorial.
+  const smaller = Math.min(r, n - r);
+  let result = 1;
+  for (let i = 0; i < smaller; i++) {
+    result = (result * (n - i)) / (i + 1);
+    if (!Number.isFinite(result)) return { error: "OUT_OF_RANGE" };
+  }
+  return { value: Math.round(result) };
+}
+
+// A small, fixed step for central-difference numerical differentiation —
+// small enough to closely approximate the true derivative, large enough
+// that (f(x+h) - f(x-h)) doesn't lose all its precision to floating-point
+// cancellation for typical calculator inputs.
+const DERIVATIVE_STEP = 1e-5;
+
+function centralDifference(f: (x: number) => number, x: number): number {
+  return (f(x + DERIVATIVE_STEP) - f(x - DERIVATIVE_STEP)) / (2 * DERIVATIVE_STEP);
+}
+
+// Composite Simpson's rule over [0, a] — a genuine numerical quadrature (not
+// the closed-form a^3/3 evaluated directly), so this stays correct even if
+// this function is later reused for an integrand whose antiderivative isn't
+// as simple to write down.
+function simpsonIntegral(f: (x: number) => number, a: number): number {
+  if (a === 0) return 0;
+  const n = 1000; // even, for Simpson's rule
+  const h = a / n;
+  let sum = f(0) + f(a);
+  for (let i = 1; i < n; i++) {
+    const x = i * h;
+    sum += (i % 2 === 0 ? 2 : 4) * f(x);
+  }
+  return (h / 3) * sum;
 }
 
 export class ScientificCalculator extends BaseCalculator<
@@ -282,6 +361,27 @@ export class ScientificCalculator extends BaseCalculator<
         } else {
           outcome = finiteOrError(Math.log(a) / Math.log(b));
         }
+        break;
+      case "nCr":
+        outcome = combinationsOrError(a, b);
+        break;
+      case "nPr":
+        outcome = permutationsOrError(a, b);
+        break;
+      case "numDerivativeSin": {
+        // Differentiates the same user-facing sin() this tool already
+        // exposes (angle-mode conversion included), via the limit
+        // definition — so in degree mode this correctly comes out to
+        // cos(x) * (pi/180) via pure numerics, not a hardcoded chain rule.
+        const f = (x: number) => Math.sin(angleMode === "deg" ? toRadians(x) : x);
+        outcome = finiteOrError(centralDifference(f, a));
+        break;
+      }
+      case "numDerivativeSquare":
+        outcome = finiteOrError(centralDifference((x) => x * x, a));
+        break;
+      case "numIntegralSquare":
+        outcome = a < 0 ? { error: "DOMAIN_ERROR" } : finiteOrError(simpsonIntegral((x) => x * x, a));
         break;
     }
 

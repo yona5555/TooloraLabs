@@ -211,3 +211,56 @@ describe("ScientificCalculator - factorial, absolute value, 2^x, percent", () =>
     expect(tool.execute({ operation: "percent", a: 25 }, ctx).data.result).toBe(0.25);
   });
 });
+
+describe("ScientificCalculator - combinations and permutations", () => {
+  it("computes nCr", () => {
+    expect(tool.execute({ operation: "nCr", a: 5, b: 3 }, ctx).data.result).toBe(10);
+    expect(tool.execute({ operation: "nCr", a: 10, b: 0 }, ctx).data.result).toBe(1);
+    expect(tool.execute({ operation: "nCr", a: 10, b: 10 }, ctx).data.result).toBe(1);
+    expect(tool.execute({ operation: "nCr", a: 52, b: 5 }, ctx).data.result).toBe(2598960);
+  });
+
+  it("computes nPr", () => {
+    expect(tool.execute({ operation: "nPr", a: 5, b: 3 }, ctx).data.result).toBe(60);
+    expect(tool.execute({ operation: "nPr", a: 10, b: 0 }, ctx).data.result).toBe(1);
+  });
+
+  it("returns a DOMAIN_ERROR when r > n, or for negative/non-integer inputs", () => {
+    expect(tool.execute({ operation: "nCr", a: 3, b: 5 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+    expect(tool.execute({ operation: "nPr", a: 3, b: 5 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+    expect(tool.execute({ operation: "nCr", a: -1, b: 2 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+    expect(tool.execute({ operation: "nCr", a: 5, b: 2.5 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+  });
+
+  it("stays numerically exact for a large nCr that a full-factorial approach would overflow on", () => {
+    // 200! overflows to Infinity, but C(200, 3) itself is a small, exact integer.
+    expect(tool.execute({ operation: "nCr", a: 200, b: 3 }, ctx).data.result).toBe(1313400);
+  });
+});
+
+describe("ScientificCalculator - numerical calculus", () => {
+  it("numerically differentiates sin (in degree mode) close to cos(x) * pi/180", () => {
+    const result = tool.execute({ operation: "numDerivativeSin", a: 60, angleMode: "deg" }, ctx).data.result;
+    const expected = Math.cos((60 * Math.PI) / 180) * (Math.PI / 180);
+    expect(result).toBeCloseTo(expected, 6);
+  });
+
+  it("numerically differentiates sin (in radian mode) close to cos(x)", () => {
+    const result = tool.execute({ operation: "numDerivativeSin", a: Math.PI / 3, angleMode: "rad" }, ctx).data.result;
+    expect(result).toBeCloseTo(Math.cos(Math.PI / 3), 6);
+  });
+
+  it("numerically differentiates x^2 close to 2x", () => {
+    expect(tool.execute({ operation: "numDerivativeSquare", a: 4 }, ctx).data.result).toBeCloseTo(8, 4);
+    expect(tool.execute({ operation: "numDerivativeSquare", a: 0 }, ctx).data.result).toBeCloseTo(0, 4);
+  });
+
+  it("numerically integrates x^2 over [0, a] close to a^3/3", () => {
+    expect(tool.execute({ operation: "numIntegralSquare", a: 3 }, ctx).data.result).toBeCloseTo(9, 6);
+    expect(tool.execute({ operation: "numIntegralSquare", a: 0 }, ctx).data.result).toBe(0);
+  });
+
+  it("returns a DOMAIN_ERROR for a negative integration bound", () => {
+    expect(tool.execute({ operation: "numIntegralSquare", a: -1 }, ctx).metadata.error).toBe("DOMAIN_ERROR");
+  });
+});
