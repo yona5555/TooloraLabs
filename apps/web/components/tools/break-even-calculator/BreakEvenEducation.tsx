@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
@@ -75,29 +76,32 @@ export default async function BreakEvenEducation() {
           ]}
           caption={t("intro.businessTypeDiagram.caption")}
         />
-        {/* The site-wide reference layout for "donut + its own worked-example note", matching
-            fuel-cost-calculator's Cost-by-Power-Source section exactly: shrink-0 donut beside a
-            flex-1 note, stacked only below the lg breakpoint. */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-          <div className="shrink-0">
-            <BreakEvenRevenueDonut
-              ariaLabel={t("intro.marginBar.title")}
-              segments={[
-                { key: "variable", value: 20, label: t("intro.marginBar.variableCostLabel"), formatted: "$20", colorClass: "stroke-teal-300 dark:stroke-teal-600", dotColorClass: "bg-teal-300 dark:bg-teal-600" },
-                { key: "margin", value: 30, label: t("intro.marginBar.marginLabel"), formatted: "$30", colorClass: "stroke-teal-600 dark:stroke-teal-400", dotColorClass: "bg-teal-600 dark:bg-teal-400" },
+        {/* Same full-framed-card structure as fuel-cost-calculator's "Cost by Power Source"
+            section (SectionCard: rounded border + blue header bar + white bold title) — an
+            "indicator + WORKED EXAMPLE table" pair is never left floating with no container or
+            heading of its own, per §32. */}
+        <SectionCard title={t("intro.marginBar.cardTitle")}>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+            <div className="shrink-0">
+              <BreakEvenRevenueDonut
+                ariaLabel={t("intro.marginBar.title")}
+                segments={[
+                  { key: "variable", value: 20, label: t("intro.marginBar.variableCostLabel"), formatted: "$20", colorClass: "stroke-teal-300 dark:stroke-teal-600", dotColorClass: "bg-teal-300 dark:bg-teal-600" },
+                  { key: "margin", value: 30, label: t("intro.marginBar.marginLabel"), formatted: "$30", colorClass: "stroke-teal-600 dark:stroke-teal-400", dotColorClass: "bg-teal-600 dark:bg-teal-400" },
+                ]}
+              />
+            </div>
+            <BreakEvenWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("intro.marginBar.priceLabel"), value: "$50" },
+                { label: t("intro.marginBar.variableCostLabel"), value: "$20" },
+                { label: t("intro.marginBar.marginLabel"), value: "$30", emphasize: true, note: t("intro.marginBar.marginPercentNote", { percent: "60%" }) },
               ]}
             />
           </div>
-          <BreakEvenWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: t("intro.marginBar.priceLabel"), value: "$50" },
-              { label: t("intro.marginBar.variableCostLabel"), value: "$20" },
-              { label: t("intro.marginBar.marginLabel"), value: "$30", emphasize: true, note: t("intro.marginBar.marginPercentNote", { percent: "60%" }) },
-            ]}
-          />
-        </div>
-        <p className="mt-3 text-xs opacity-60">{t("intro.marginBar.caption")}</p>
+          <p className="mt-3 text-xs opacity-60">{t("intro.marginBar.caption")}</p>
+        </SectionCard>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -183,34 +187,36 @@ export default async function BreakEvenEducation() {
             </div>
           ))}
         </div>
-        {/* Same reference flex-row pattern as this page's other indicator+note sections — the
-            bar chart capped to a medium max-width (it was previously alone at full card width,
-            scaling its bars and numbers up well past every other indicator's size on this page)
-            with a real worked-example note beside it instead of standing alone with no detail. */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-          <div className="w-full max-w-xs shrink-0">
-            <BreakEvenPriceChangeImpactBar
-              title={t("applications.priceImpactBar.title")}
-              scenarios={[
-                { key: "p50", label: "$50", units: 334 },
-                { key: "p55", label: "$55", units: 286 },
+        {/* Same full-framed-card structure as the $50-price section above and the
+            fuel-cost-calculator reference — the bar chart capped to a medium max-width (it was
+            previously alone at full card width, scaling its bars and numbers up well past every
+            other indicator's size on this page) with a real worked-example note beside it. */}
+        <SectionCard title={t("applications.priceImpactBar.cardTitle")}>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+            <div className="w-full max-w-xs shrink-0">
+              <BreakEvenPriceChangeImpactBar
+                title={t("applications.priceImpactBar.title")}
+                scenarios={[
+                  { key: "p50", label: "$50", units: 334 },
+                  { key: "p55", label: "$55", units: 286 },
+                ]}
+              />
+            </div>
+            <BreakEvenWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("applications.priceImpactBar.rowLabelAt", { price: "$50" }), value: "334" },
+                {
+                  label: t("applications.priceImpactBar.rowLabelAt", { price: "$55" }),
+                  value: "286",
+                  emphasize: true,
+                  note: t("applications.priceImpactBar.noteFewerUnits", { count: 48 }),
+                },
               ]}
             />
           </div>
-          <BreakEvenWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: t("applications.priceImpactBar.rowLabelAt", { price: "$50" }), value: "334" },
-              {
-                label: t("applications.priceImpactBar.rowLabelAt", { price: "$55" }),
-                value: "286",
-                emphasize: true,
-                note: t("applications.priceImpactBar.noteFewerUnits", { count: 48 }),
-              },
-            ]}
-          />
-        </div>
-        <p className="mt-3 text-xs opacity-60">{t("applications.priceImpactBar.caption")}</p>
+          <p className="mt-3 text-xs opacity-60">{t("applications.priceImpactBar.caption")}</p>
+        </SectionCard>
         <BreakEvenMonthlyPaceLineChart
           breakEvenLabel={t("applications.monthlyPaceChart.breakEvenLabel")}
           columnMonth={t("applications.monthlyPaceChart.columnMonth")}
