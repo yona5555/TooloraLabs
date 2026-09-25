@@ -17341,14 +17341,8 @@
           "breakEven": "You need to sell {units} units — {revenue} in revenue — to cover your fixed costs and break even.",
           "targetProfit": "To reach a target profit of {profit}, you need to sell {units} units."
         },
-        "chartFixedCosts": "Fixed costs",
         "chartTotalCost": "Total cost",
         "chartRevenue": "Revenue",
-        "chartBreakEven": "Where the revenue and total-cost lines cross is the break-even point — the exact unit count at which profit turns from negative to positive.",
-        "chartTargetProfit": "Target profit point",
-        "tooltipUnits": "Units",
-        "tooltipProfit": "Profit / Loss",
-        "chartAriaLabel": "Interactive chart of total cost versus revenue across unit volume, marking the break-even point",
         "glossary": {
           "title": "CVP Terms, Plainly",
           "intro": "The vocabulary of cost-volume-profit (CVP) analysis, defined without the jargon.",
@@ -17370,7 +17364,13 @@
               "meaning": "The exact sales volume where total revenue equals total cost — zero profit, zero loss."
             }
           ]
-        }
+        },
+        "columnUnits": "Units",
+        "columnResult": "Result",
+        "statusLoss": "Loss",
+        "statusBreakeven": "Break-even",
+        "statusProfit": "Profit",
+        "chartCaption": "A worked example at four unit counts, computed from your own inputs — before break-even you're at a loss, at it you break even, and past it you're in profit."
       },
       "form": {
         "inputTitle": "Your Costs",
@@ -17603,10 +17603,11 @@
             "caption": "This tool's worked example has a 60% contribution margin ratio ($30 margin ÷ $50 price) — a healthy ratio by most standards."
           },
           "accumulationDiagram": {
-            "title": "Contribution Accumulating Toward Fixed Costs",
-            "fixedCostLabel": "Fixed costs",
             "breakEvenLabel": "Break-even",
-            "caption": "Each unit adds $30 in contribution margin — accumulated contribution reaches the $10,000 fixed-cost line at exactly 334 units."
+            "caption": "Each unit adds $30 in contribution margin — accumulated contribution reaches the $10,000 fixed-cost line at exactly 334 units.",
+            "columnUnits": "Units Sold",
+            "columnCumulativeMargin": "Cumulative Margin",
+            "columnResult": "Result"
           }
         },
         "applications": {
@@ -17635,18 +17636,22 @@
             "caption": "Raising the price from $50 to $55 (with the same $20 variable cost) drops the break-even point from 334 units to 286 — a real example of a pricing decision's impact."
           },
           "monthlyPaceChart": {
-            "title": "Monthly Sales Pace to Break Even",
             "breakEvenLabel": "334 units — break-even",
             "caption": "Spreading 334 units evenly across 4 months means selling roughly 84 units per month to break even right on schedule.",
             "month1": "Month 1",
             "month2": "Month 2",
             "month3": "Month 3",
-            "month4": "Month 4"
+            "month4": "Month 4",
+            "columnMonth": "Month",
+            "columnCumulativeUnits": "Cumulative Units",
+            "columnPercentOfBreakEven": "% of Break-even"
           },
           "fixedCostAddition": {
             "beforeLabel": "Before new equipment",
             "afterLabel": "After +$2,000 fixed cost",
-            "caption": "Adding $2,000 in new fixed costs (like equipment) raises the break-even point from 334 to 400 units — this tool answers exactly how much extra volume a fixed-cost decision requires."
+            "caption": "Adding $2,000 in new fixed costs (like equipment) raises the break-even point from 334 to 400 units — this tool answers exactly how much extra volume a fixed-cost decision requires.",
+            "columnFixedCosts": "Fixed Costs",
+            "columnBreakEvenUnits": "Break-even Units"
           }
         }
       },
@@ -17658,7 +17663,9 @@
       "sensitivityDiagram": {
         "title": "Break-Even Sensitivity to Price",
         "caption": "How many units you'd need to sell at different prices, holding costs constant.",
-        "xLabel": "Price per Unit"
+        "columnPrice": "Price",
+        "columnUnits": "Break-even Units",
+        "currentPriceLabel": "current price"
       },
       "relatedTools": {
         "title": "Related Business Tools"

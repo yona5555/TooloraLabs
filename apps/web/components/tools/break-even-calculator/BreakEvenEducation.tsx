@@ -4,9 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import BreakEvenWorkedExampleTable, { type WorkedExampleRow } from "./BreakEvenWorkedExampleTable";
+import BreakEvenWorkedExampleTable from "./BreakEvenWorkedExampleTable";
 import BreakEvenBusinessTypeDiagram from "./BreakEvenBusinessTypeDiagram";
-import BreakEvenContributionMarginBar from "./BreakEvenContributionMarginBar";
 import BreakEvenMarginRatioGauge from "./BreakEvenMarginRatioGauge";
 import BreakEvenFixedCostAccumulationDiagram from "./BreakEvenFixedCostAccumulationDiagram";
 import BreakEvenTwoScenarioCompareBar from "./BreakEvenTwoScenarioCompareBar";
@@ -34,18 +33,13 @@ export default async function BreakEvenEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <BreakEvenWorkedExampleTable
-          columnUnits={t("intro.diagram.columnUnits")}
-          columnTotalCost={t("intro.diagram.totalCostLabel")}
-          columnRevenue={t("intro.diagram.revenueLabel")}
-          columnResult={t("intro.diagram.columnResult")}
-          rows={
-            [
-              { unitsLabel: "0", totalCost: "$10,000", revenue: "$0", statusLabel: t("intro.diagram.statusLoss"), statusKind: "loss" },
-              { unitsLabel: "167", totalCost: "$13,340", revenue: "$8,350", statusLabel: t("intro.diagram.statusLoss"), statusKind: "loss" },
-              { unitsLabel: "334", totalCost: "$16,680", revenue: "$16,700", statusLabel: t("intro.diagram.statusBreakeven"), statusKind: "breakeven" },
-              { unitsLabel: "500", totalCost: "$20,000", revenue: "$25,000", statusLabel: t("intro.diagram.statusProfit"), statusKind: "profit" },
-            ] satisfies WorkedExampleRow[]
-          }
+          columns={[t("intro.diagram.columnUnits"), t("intro.diagram.totalCostLabel"), t("intro.diagram.revenueLabel"), t("intro.diagram.columnResult")]}
+          rows={[
+            ["0", "$10,000", "$0", { text: t("intro.diagram.statusLoss"), kind: "loss" }],
+            ["167", "$13,340", "$8,350", { text: t("intro.diagram.statusLoss"), kind: "loss" }],
+            ["334", "$16,680", "$16,700", { text: t("intro.diagram.statusBreakeven"), kind: "breakeven" }],
+            ["500", "$20,000", "$25,000", { text: t("intro.diagram.statusProfit"), kind: "profit" }],
+          ]}
           caption={t("intro.diagram.caption")}
         />
         <BreakEvenBusinessTypeDiagram
@@ -55,12 +49,14 @@ export default async function BreakEvenEducation() {
           lowMarginTraits={t.raw("intro.businessTypeDiagram.lowMarginTraits") as string[]}
           caption={t("intro.businessTypeDiagram.caption")}
         />
-        <BreakEvenContributionMarginBar
-          title={t("intro.marginBar.title")}
-          priceLabel={t("intro.marginBar.priceLabel")}
-          variableCostLabel={t("intro.marginBar.variableCostLabel")}
-          marginLabel={t("intro.marginBar.marginLabel")}
+        <BreakEvenRevenueDonut
+          centerValue="$50"
+          centerLabel={t("intro.marginBar.priceLabel")}
           caption={t("intro.marginBar.caption")}
+          segments={[
+            { key: "variable", value: 20, label: t("intro.marginBar.variableCostLabel"), colorClass: "stroke-teal-300 dark:stroke-teal-600" },
+            { key: "margin", value: 30, label: t("intro.marginBar.marginLabel"), colorClass: "stroke-teal-600 dark:stroke-teal-400" },
+          ]}
         />
       </InfoSection>
 
@@ -80,8 +76,9 @@ export default async function BreakEvenEducation() {
           captionColorClass="text-emerald-600 dark:text-emerald-400"
         />
         <BreakEvenFixedCostAccumulationDiagram
-          title={t("variables.accumulationDiagram.title")}
-          fixedCostLabel={t("variables.accumulationDiagram.fixedCostLabel")}
+          columnUnits={t("variables.accumulationDiagram.columnUnits")}
+          columnCumulativeMargin={t("variables.accumulationDiagram.columnCumulativeMargin")}
+          columnResult={t("variables.accumulationDiagram.columnResult")}
           breakEvenLabel={t("variables.accumulationDiagram.breakEvenLabel")}
           caption={t("variables.accumulationDiagram.caption")}
         />
@@ -107,24 +104,35 @@ export default async function BreakEvenEducation() {
             </tbody>
           </table>
         </div>
-        <BreakEvenTwoScenarioCompareBar
-          title={t("examples.scenarioCompareBar.title")}
-          caption={t("examples.scenarioCompareBar.caption")}
-          scenarios={[
-            { key: "s1", label: t("examples.scenarioCompareBar.label1"), units: 334 },
-            { key: "s2", label: t("examples.scenarioCompareBar.label2"), units: 500 },
-          ]}
-        />
-        <BreakEvenRevenueDonut
-          centerValue="$25,000"
-          centerLabel={t("examples.revenueDonut.centerLabel")}
-          caption={t("examples.revenueDonut.caption")}
-          segments={[
-            { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
-            { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
-            { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
-          ]}
-        />
+        {/* Both charts capped to the same max-width and placed side by side, rather than each
+            stretching to its own full container width — BreakEvenTwoScenarioCompareBar's fixed
+            280-wide viewBox scaled up to fill an arbitrarily wide card (growing its bars and text
+            along with it) sitting right above BreakEvenRevenueDonut's fixed 160px circle read as
+            two mismatched, unrelated pieces rather than one section. */}
+        <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-2">
+          <div className="mx-auto w-full max-w-xs">
+            <BreakEvenTwoScenarioCompareBar
+              title={t("examples.scenarioCompareBar.title")}
+              caption={t("examples.scenarioCompareBar.caption")}
+              scenarios={[
+                { key: "s1", label: t("examples.scenarioCompareBar.label1"), units: 334 },
+                { key: "s2", label: t("examples.scenarioCompareBar.label2"), units: 500 },
+              ]}
+            />
+          </div>
+          <div className="mx-auto w-full max-w-xs">
+            <BreakEvenRevenueDonut
+              centerValue="$25,000"
+              centerLabel={t("examples.revenueDonut.centerLabel")}
+              caption={t("examples.revenueDonut.caption")}
+              segments={[
+                { key: "fixed", value: 10000, label: t("examples.revenueDonut.fixed"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
+                { key: "variable", value: 10000, label: t("examples.revenueDonut.variable"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+                { key: "profit", value: 5000, label: t("examples.revenueDonut.profit"), colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+              ]}
+            />
+          </div>
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -146,8 +154,10 @@ export default async function BreakEvenEducation() {
           ]}
         />
         <BreakEvenMonthlyPaceLineChart
-          title={t("applications.monthlyPaceChart.title")}
           breakEvenLabel={t("applications.monthlyPaceChart.breakEvenLabel")}
+          columnMonth={t("applications.monthlyPaceChart.columnMonth")}
+          columnCumulativeUnits={t("applications.monthlyPaceChart.columnCumulativeUnits")}
+          columnPercentOfBreakEven={t("applications.monthlyPaceChart.columnPercentOfBreakEven")}
           caption={t("applications.monthlyPaceChart.caption")}
           points={[
             { key: "m1", label: t("applications.monthlyPaceChart.month1"), cumulativeUnits: 84 },
@@ -159,6 +169,8 @@ export default async function BreakEvenEducation() {
         <BreakEvenFixedCostAdditionDiagram
           beforeLabel={t("applications.fixedCostAddition.beforeLabel")}
           afterLabel={t("applications.fixedCostAddition.afterLabel")}
+          columnFixedCosts={t("applications.fixedCostAddition.columnFixedCosts")}
+          columnBreakEvenUnits={t("applications.fixedCostAddition.columnBreakEvenUnits")}
           caption={t("applications.fixedCostAddition.caption")}
         />
       </InfoSection>

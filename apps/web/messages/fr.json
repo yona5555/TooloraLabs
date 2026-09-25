@@ -17336,10 +17336,8 @@
       "aboveFold": {
         "resultTitle": "Seuil de rentabilité",
         "placeholder": "Saisissez vos coûts fixes, votre coût variable et votre prix pour voir apparaître ici votre seuil de rentabilité.",
-        "chartFixedCosts": "Coûts fixes",
         "chartTotalCost": "Coût total",
         "chartRevenue": "Revenus",
-        "chartBreakEven": "Le point où les courbes des revenus et du coût total se croisent est le seuil de rentabilité — le nombre exact d'unités à partir duquel le profit passe du négatif au positif.",
         "emptyStateMessage": "Saisissez vos coûts et votre prix et cliquez sur « Calculer » pour voir vos résultats.",
         "sentences": {
           "breakEven": "Vous devez vendre {units} unités — {revenue} de revenus — pour couvrir vos coûts fixes et atteindre le seuil de rentabilité.",
@@ -17367,10 +17365,12 @@
             }
           ]
         },
-        "chartTargetProfit": "Point de profit cible",
-        "tooltipUnits": "Unités",
-        "tooltipProfit": "Profit / Perte",
-        "chartAriaLabel": "Graphique interactif du coût total par rapport aux revenus selon le volume d'unités, indiquant le seuil de rentabilité"
+        "columnUnits": "Unités",
+        "columnResult": "Résultat",
+        "statusLoss": "Perte",
+        "statusBreakeven": "Seuil de rentabilité",
+        "statusProfit": "Profit",
+        "chartCaption": "Un exemple chiffré à quatre quantités d'unités, calculé à partir de vos propres données — avant le seuil de rentabilité vous êtes en perte, à ce seuil vous êtes à l'équilibre, et au-delà vous êtes en profit."
       },
       "form": {
         "inputTitle": "Vos coûts",
@@ -17603,10 +17603,11 @@
             "caption": "L'exemple résolu de cet outil a un taux de marge sur coûts variables de 60 % (marge de 30 $ ÷ prix de 50 $) — un taux sain selon la plupart des normes."
           },
           "accumulationDiagram": {
-            "title": "La marge s'accumule vers les coûts fixes",
-            "fixedCostLabel": "Coûts fixes",
             "breakEvenLabel": "Seuil de rentabilité",
-            "caption": "Chaque unité ajoute 30 $ de marge sur coûts variables — la marge accumulée atteint la ligne des coûts fixes de 10 000 $ à exactement 334 unités."
+            "caption": "Chaque unité ajoute 30 $ de marge sur coûts variables — la marge accumulée atteint la ligne des coûts fixes de 10 000 $ à exactement 334 unités.",
+            "columnUnits": "Unités Vendues",
+            "columnCumulativeMargin": "Marge Cumulée",
+            "columnResult": "Résultat"
           }
         },
         "applications": {
@@ -17635,18 +17636,22 @@
             "caption": "Faire passer le prix de 50 $ à 55 $ (avec le même coût variable de 20 $) fait baisser le seuil de rentabilité de 334 à 286 unités — un exemple réel de l'impact d'une décision de prix."
           },
           "monthlyPaceChart": {
-            "title": "Rythme mensuel de ventes pour atteindre le seuil",
             "breakEvenLabel": "334 unités — seuil de rentabilité",
             "caption": "Répartir 334 unités uniformément sur 4 mois signifie vendre environ 84 unités par mois pour atteindre le seuil dans les délais.",
             "month1": "Mois 1",
             "month2": "Mois 2",
             "month3": "Mois 3",
-            "month4": "Mois 4"
+            "month4": "Mois 4",
+            "columnMonth": "Mois",
+            "columnCumulativeUnits": "Unités Cumulées",
+            "columnPercentOfBreakEven": "% du Seuil de Rentabilité"
           },
           "fixedCostAddition": {
             "beforeLabel": "Avant le nouvel équipement",
             "afterLabel": "Après +2 000 $ de coûts fixes",
-            "caption": "Ajouter 2 000 $ de nouveaux coûts fixes (comme de l'équipement) fait passer le seuil de rentabilité de 334 à 400 unités — cet outil répond exactement au volume supplémentaire qu'exige une décision de coûts fixes."
+            "caption": "Ajouter 2 000 $ de nouveaux coûts fixes (comme de l'équipement) fait passer le seuil de rentabilité de 334 à 400 unités — cet outil répond exactement au volume supplémentaire qu'exige une décision de coûts fixes.",
+            "columnFixedCosts": "Coûts Fixes",
+            "columnBreakEvenUnits": "Unités au Seuil de Rentabilité"
           }
         }
       },
@@ -17658,7 +17663,9 @@
       "sensitivityDiagram": {
         "title": "Sensibilité du Seuil de Rentabilité au Prix",
         "caption": "Combien d'unités vous devriez vendre à différents prix, en maintenant les coûts constants.",
-        "xLabel": "Prix par Unité"
+        "columnPrice": "Prix",
+        "columnUnits": "Unités au Seuil de Rentabilité",
+        "currentPriceLabel": "prix actuel"
       },
       "relatedTools": {
         "title": "Outils professionnels associés"

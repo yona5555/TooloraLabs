@@ -17336,10 +17336,8 @@
       "aboveFold": {
         "resultTitle": "Break-Even-Punkt",
         "placeholder": "Geben Sie Ihre Fixkosten, variablen Kosten und den Preis ein, um hier Ihren Break-Even-Punkt zu sehen.",
-        "chartFixedCosts": "Fixkosten",
         "chartTotalCost": "Gesamtkosten",
         "chartRevenue": "Umsatz",
-        "chartBreakEven": "Dort, wo sich die Linien von Umsatz und Gesamtkosten kreuzen, liegt der Break-Even-Punkt – die genaue Stückzahl, bei der der Gewinn von negativ auf positiv wechselt.",
         "emptyStateMessage": "Geben Sie Ihre Kosten und Ihren Preis ein und klicken Sie auf \"Berechnen\", um Ihre Ergebnisse zu sehen.",
         "sentences": {
           "breakEven": "Sie müssen {units} Einheiten verkaufen – {revenue} Umsatz –, um Ihre Fixkosten zu decken und die Gewinnschwelle zu erreichen.",
@@ -17367,10 +17365,12 @@
             }
           ]
         },
-        "chartTargetProfit": "Gewinnzielpunkt",
-        "tooltipUnits": "Einheiten",
-        "tooltipProfit": "Gewinn / Verlust",
-        "chartAriaLabel": "Interaktives Diagramm von Gesamtkosten im Vergleich zu Umsatz über die Stückzahl, mit Markierung des Break-Even-Punkts"
+        "columnUnits": "Einheiten",
+        "columnResult": "Ergebnis",
+        "statusLoss": "Verlust",
+        "statusBreakeven": "Break-even",
+        "statusProfit": "Gewinn",
+        "chartCaption": "Ein Rechenbeispiel bei vier Stückzahlen, berechnet aus Ihren eigenen Eingaben — vor dem Break-even machen Sie Verlust, dort brechen Sie gleich auf, danach erzielen Sie Gewinn."
       },
       "form": {
         "inputTitle": "Ihre Kosten",
@@ -17603,10 +17603,11 @@
             "caption": "Das Rechenbeispiel dieses Tools hat eine Deckungsbeitragsquote von 60 % (30 $ Marge ÷ 50 $ Preis) — nach den meisten Maßstäben eine gesunde Quote."
           },
           "accumulationDiagram": {
-            "title": "Deckungsbeitrag akkumuliert sich bis zu den Fixkosten",
-            "fixedCostLabel": "Fixkosten",
             "breakEvenLabel": "Gewinnschwelle",
-            "caption": "Jede Einheit fügt 30 $ Deckungsbeitrag hinzu — der akkumulierte Beitrag erreicht die Fixkostenlinie von 10.000 $ bei genau 334 Einheiten."
+            "caption": "Jede Einheit fügt 30 $ Deckungsbeitrag hinzu — der akkumulierte Beitrag erreicht die Fixkostenlinie von 10.000 $ bei genau 334 Einheiten.",
+            "columnUnits": "Verkaufte Einheiten",
+            "columnCumulativeMargin": "Kumulierte Marge",
+            "columnResult": "Ergebnis"
           }
         },
         "applications": {
@@ -17635,18 +17636,22 @@
             "caption": "Eine Preiserhöhung von 50 $ auf 55 $ (bei gleichen 20 $ variablen Kosten) senkt die Gewinnschwelle von 334 auf 286 Einheiten — ein reales Beispiel für die Auswirkung einer Preisentscheidung."
           },
           "monthlyPaceChart": {
-            "title": "Monatliches Verkaufstempo bis zur Gewinnschwelle",
             "breakEvenLabel": "334 Einheiten — Gewinnschwelle",
             "caption": "334 Einheiten gleichmäßig auf 4 Monate verteilt bedeutet, etwa 84 Einheiten pro Monat zu verkaufen, um die Gewinnschwelle planmäßig zu erreichen.",
             "month1": "Monat 1",
             "month2": "Monat 2",
             "month3": "Monat 3",
-            "month4": "Monat 4"
+            "month4": "Monat 4",
+            "columnMonth": "Monat",
+            "columnCumulativeUnits": "Kumulierte Einheiten",
+            "columnPercentOfBreakEven": "% des Break-even"
           },
           "fixedCostAddition": {
             "beforeLabel": "Vor neuer Ausrüstung",
             "afterLabel": "Nach +2.000 $ Fixkosten",
-            "caption": "2.000 $ neue Fixkosten (z. B. Ausrüstung) erhöhen die Gewinnschwelle von 334 auf 400 Einheiten — dieses Tool beantwortet genau, wie viel zusätzliches Volumen eine Fixkostenentscheidung erfordert."
+            "caption": "2.000 $ neue Fixkosten (z. B. Ausrüstung) erhöhen die Gewinnschwelle von 334 auf 400 Einheiten — dieses Tool beantwortet genau, wie viel zusätzliches Volumen eine Fixkostenentscheidung erfordert.",
+            "columnFixedCosts": "Fixkosten",
+            "columnBreakEvenUnits": "Break-even-Einheiten"
           }
         }
       },
@@ -17658,7 +17663,9 @@
       "sensitivityDiagram": {
         "title": "Break-Even-Sensitivität gegenüber dem Preis",
         "caption": "Wie viele Einheiten Sie bei unterschiedlichen Preisen verkaufen müssten, bei gleichbleibenden Kosten.",
-        "xLabel": "Preis pro Einheit"
+        "columnPrice": "Preis",
+        "columnUnits": "Break-even-Einheiten",
+        "currentPriceLabel": "aktueller Preis"
       },
       "relatedTools": {
         "title": "Verwandte Business-Tools"

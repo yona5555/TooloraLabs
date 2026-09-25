@@ -1,63 +1,33 @@
-type Point = { units: number; cumulative: number };
+import BreakEvenWorkedExampleTable from "./BreakEvenWorkedExampleTable";
 
 type BreakEvenFixedCostAccumulationDiagramProps = {
-  fixedCostLabel: string;
+  columnUnits: string;
+  columnCumulativeMargin: string;
+  columnResult: string;
   breakEvenLabel: string;
   caption: string;
-  title: string;
 };
 
-const WIDTH = 380;
-const HEIGHT = 140;
-const CHART_TOP = 16;
-const CHART_BOTTOM = HEIGHT - 26;
-const CHART_LEFT = 12;
-// The plotted line and its dots stop here, short of the SVG's own right edge,
-// so the break-even label never lands on top of (and gets camouflaged by)
-// the last data point's dot marker. The remaining width (WIDTH - PLOT_RIGHT)
-// must comfortably fit the full "<label>: 334" text at fontSize 8.5.
-const PLOT_RIGHT = WIDTH - 100;
-const LABEL_X = PLOT_RIGHT + 8;
 const FIXED_COST = 10000;
 const MARGIN_PER_UNIT = 30;
 const BREAK_EVEN_UNITS = 334;
+const SAMPLE_UNITS = [0, 100, 200, BREAK_EVEN_UNITS];
 
-const POINTS: Point[] = [0, 100, 200, 334].map((units) => ({ units, cumulative: units * MARGIN_PER_UNIT }));
+/**
+ * Was a line+dot chart (a path through 4 points, each marked with a
+ * circle, plus a dashed fixed-cost reference line) — the exact banned
+ * pattern. A table of the same 4 sample points showing cumulative
+ * contribution margin against the $10,000 fixed-cost target makes the same
+ * "margin accumulates until it covers fixed costs" point with real rows
+ * instead of a plotted line.
+ */
+export default function BreakEvenFixedCostAccumulationDiagram({ columnUnits, columnCumulativeMargin, columnResult, breakEvenLabel, caption }: BreakEvenFixedCostAccumulationDiagramProps) {
+  const rows = SAMPLE_UNITS.map((units) => {
+    const cumulative = units * MARGIN_PER_UNIT;
+    const remaining = FIXED_COST - cumulative;
+    const resultText = units >= BREAK_EVEN_UNITS ? breakEvenLabel : `$${remaining.toLocaleString("en-US")}`;
+    return [String(units), `$${cumulative.toLocaleString("en-US")}`, units >= BREAK_EVEN_UNITS ? { text: resultText, kind: "breakeven" as const } : resultText];
+  });
 
-export default function BreakEvenFixedCostAccumulationDiagram({ fixedCostLabel, breakEvenLabel, caption, title }: BreakEvenFixedCostAccumulationDiagramProps) {
-  const maxUnits = BREAK_EVEN_UNITS;
-  const maxValue = FIXED_COST * 1.05;
-
-  const path = POINTS.map((p, i) => {
-    const x = CHART_LEFT + (p.units / maxUnits) * (PLOT_RIGHT - CHART_LEFT);
-    const y = CHART_BOTTOM - (p.cumulative / maxValue) * (CHART_BOTTOM - CHART_TOP);
-    return `${i === 0 ? "M" : "L"} ${x} ${y}`;
-  }).join(" ");
-
-  const fixedCostY = CHART_BOTTOM - (FIXED_COST / maxValue) * (CHART_BOTTOM - CHART_TOP);
-  const lastPointY = CHART_BOTTOM - (POINTS[POINTS.length - 1].cumulative / maxValue) * (CHART_BOTTOM - CHART_TOP);
-
-  return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={title} className="h-auto w-full" style={{ minWidth: 300 }}>
-          <line x1={CHART_LEFT} y1={fixedCostY} x2={PLOT_RIGHT} y2={fixedCostY} className="stroke-rose-400 dark:stroke-rose-400/70" strokeWidth={1.5} strokeDasharray="4 3" />
-          <text x={CHART_LEFT} y={fixedCostY - 4} textAnchor="start" fontSize={8.5} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
-            {fixedCostLabel}: ${FIXED_COST.toLocaleString("en-US")}
-          </text>
-          <path d={path} fill="none" className="stroke-indigo-500 dark:stroke-indigo-400" strokeWidth={2.5} strokeLinejoin="round" />
-          {POINTS.map((p) => {
-            const x = CHART_LEFT + (p.units / maxUnits) * (PLOT_RIGHT - CHART_LEFT);
-            const y = CHART_BOTTOM - (p.cumulative / maxValue) * (CHART_BOTTOM - CHART_TOP);
-            return <circle key={p.units} cx={x} cy={y} r={3.5} className="fill-indigo-600 dark:fill-indigo-400" />;
-          })}
-          <text x={LABEL_X} y={lastPointY + 4} textAnchor="start" fontSize={8.5} fontWeight={700} className="fill-indigo-700 dark:fill-indigo-300">
-            {breakEvenLabel}: 334
-          </text>
-          <line x1={CHART_LEFT} y1={CHART_BOTTOM} x2={PLOT_RIGHT} y2={CHART_BOTTOM} stroke="currentColor" strokeWidth={1} opacity={0.2} />
-        </svg>
-      </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
-  );
+  return <BreakEvenWorkedExampleTable columns={[columnUnits, columnCumulativeMargin, columnResult]} rows={rows} caption={caption} />;
 }

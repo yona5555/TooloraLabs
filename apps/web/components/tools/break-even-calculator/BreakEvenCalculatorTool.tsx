@@ -270,8 +270,10 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
                   <BreakEvenSensitivityDiagram
                     points={sensitivityPoints}
                     currentPrice={activePricePerUnit}
+                    columnPrice={t2("sensitivityDiagram.columnPrice")}
+                    columnUnits={t2("sensitivityDiagram.columnUnits")}
+                    currentPriceLabel={t2("sensitivityDiagram.currentPriceLabel")}
                     caption={t2("sensitivityDiagram.caption")}
-                    xLabel={t2("sensitivityDiagram.xLabel")}
                   />
                 </div>
               )}

@@ -1,53 +1,34 @@
+import BreakEvenWorkedExampleTable from "./BreakEvenWorkedExampleTable";
+
 type Point = { price: number; units: number };
 
 type BreakEvenSensitivityDiagramProps = {
   points: Point[];
   currentPrice: number;
+  columnPrice: string;
+  columnUnits: string;
+  currentPriceLabel: string;
   caption: string;
-  xLabel: string;
 };
 
-const WIDTH = 320;
-const HEIGHT = 160;
-const MARGIN = { top: 14, right: 12, bottom: 26, left: 12 };
-const PLOT_WIDTH = WIDTH - MARGIN.left - MARGIN.right;
-const PLOT_HEIGHT = HEIGHT - MARGIN.top - MARGIN.bottom;
+/**
+ * Was a purple line-and-dot chart (a path through 6 price/units points, one
+ * highlighted with a circle at the user's current price) — the banned
+ * pattern, sitting in the tool page's own secondary column right above the
+ * long-form content, which is exactly the spot flagged as a partially
+ * visible line-chart fragment during a full top-to-bottom page sweep. A
+ * table of the same real, live-computed price/units pairs (still computed
+ * from the user's own typed inputs by the parent) makes the same
+ * sensitivity point without a plotted line, and highlights the row
+ * matching the user's current price instead of a dot on a curve.
+ */
+export default function BreakEvenSensitivityDiagram({ points, currentPrice, columnPrice, columnUnits, currentPriceLabel, caption }: BreakEvenSensitivityDiagramProps) {
+  const rows = points.map((p) => {
+    const isCurrent = Math.abs(p.price - currentPrice) < 0.01;
+    const priceText = Math.round(p.price).toLocaleString("en-US");
+    const unitsText = Math.round(p.units).toLocaleString("en-US");
+    return [priceText, isCurrent ? { text: `${unitsText} (${currentPriceLabel})`, kind: "highlight" as const } : unitsText];
+  });
 
-export default function BreakEvenSensitivityDiagram({ points, currentPrice, caption, xLabel }: BreakEvenSensitivityDiagramProps) {
-  const minPrice = Math.min(...points.map((p) => p.price));
-  const maxPrice = Math.max(...points.map((p) => p.price));
-  const minUnits = Math.min(...points.map((p) => p.units));
-  const maxUnits = Math.max(...points.map((p) => p.units), minUnits + 1);
-
-  const xAt = (price: number) => MARGIN.left + ((price - minPrice) / Math.max(maxPrice - minPrice, 1)) * PLOT_WIDTH;
-  const yAt = (units: number) => MARGIN.top + PLOT_HEIGHT - ((units - minUnits) / Math.max(maxUnits - minUnits, 1)) * PLOT_HEIGHT;
-
-  const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${xAt(p.price).toFixed(1)} ${yAt(p.units).toFixed(1)}`).join(" ");
-  const clampedCurrent = Math.min(Math.max(currentPrice, minPrice), maxPrice);
-  const currentX = xAt(clampedCurrent);
-  const nearest = points.reduce((closest, p) => (Math.abs(p.price - clampedCurrent) < Math.abs(closest.price - clampedCurrent) ? p : closest), points[0]);
-  const currentY = yAt(nearest.units);
-
-  return (
-    <figure className="my-2">
-      <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
-          <line x1={MARGIN.left} y1={MARGIN.top + PLOT_HEIGHT} x2={WIDTH - MARGIN.right} y2={MARGIN.top + PLOT_HEIGHT} stroke="currentColor" strokeWidth={1} opacity={0.3} />
-          <path d={pathD} fill="none" strokeWidth={2.5} className="stroke-purple-600 dark:stroke-purple-400" />
-          <line x1={currentX} y1={MARGIN.top} x2={currentX} y2={MARGIN.top + PLOT_HEIGHT} strokeWidth={1} strokeDasharray="3 3" stroke="currentColor" opacity={0.4} />
-          <circle cx={currentX} cy={currentY} r={4} className="fill-purple-600 dark:fill-purple-400" />
-          <text x={MARGIN.left} y={HEIGHT - 6} fontSize={10} fill="currentColor" opacity={0.6}>
-            {Math.round(minPrice)}
-          </text>
-          <text x={WIDTH - MARGIN.right} y={HEIGHT - 6} textAnchor="end" fontSize={10} fill="currentColor" opacity={0.6}>
-            {Math.round(maxPrice)}
-          </text>
-          <text x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.6}>
-            {xLabel}
-          </text>
-        </svg>
-      </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
-  );
+  return <BreakEvenWorkedExampleTable columns={[columnPrice, columnUnits]} rows={rows} caption={caption} />;
 }
