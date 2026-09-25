@@ -45,6 +45,7 @@ export type CalculatorAction =
   | { type: "decimal" }
   | { type: "operator"; symbol: "+" | "-" | "×" | "÷" | "^" }
   | { type: "logBase" }
+  | { type: "infixMarker"; text: "nCr" | "nPr" }
   | { type: "lparen" }
   | { type: "rparen" }
   | { type: "function"; token: string; requiresArg?: boolean }
@@ -130,6 +131,13 @@ export function calculatorReducer(state: CalculatorState, action: CalculatorActi
       if (/[+\-×÷^]$/.test(state.expression)) return state;
       const base = state.expression === "" ? (state.ans !== null ? String(state.ans) : "0") : state.expression;
       return { ...state, expression: base + "logᵧ", justEvaluated: false };
+    }
+
+    case "infixMarker": {
+      if (state.errorCode) return state;
+      if (/[+\-×÷^]$/.test(state.expression)) return state;
+      const base = state.expression === "" ? (state.ans !== null ? String(state.ans) : "0") : state.expression;
+      return { ...state, expression: base + action.text, justEvaluated: false };
     }
 
     case "lparen": {

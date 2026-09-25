@@ -107,14 +107,21 @@ export default function CalculatorKeypad({ state, dispatch }: CalculatorKeypadPr
       { label: "÷", onClick: () => operator("÷"), variant: "operator" },
     ],
     [
+      // π and ⅟x are placed BEFORE sec/csc (rather than after, where they
+      // originally filled this row's 2 empty trailing slots) specifically so
+      // 7/8/9 land in the same 3 columns as 4/5/6 (row below) and 1/2/3 (two
+      // rows below) — matching the standard calculator convention where the
+      // digit grid stacks in fixed columns with the operator column fixed on
+      // the far end, rather than drifting per row based on how many
+      // non-digit buttons happen to precede the digits in that row.
+      { label: "π", onClick: () => dispatch({ type: "constant", symbol: "π" }), variant: "function" },
+      { label: "⅟x", onClick: () => fn("reciprocal", "⅟x"), variant: "function" },
       { label: "sec", onClick: () => fn("sec", "sec"), variant: "function" },
       { label: "csc", onClick: () => fn("csc", "csc"), variant: "function" },
       { label: "7", onClick: () => digit("7"), variant: "number" },
       { label: "8", onClick: () => digit("8"), variant: "number" },
       { label: "9", onClick: () => digit("9"), variant: "number" },
       { label: "×", onClick: () => operator("×"), variant: "operator" },
-      { label: "π", onClick: () => dispatch({ type: "constant", symbol: "π" }), variant: "function" },
-      { label: "⅟x", onClick: () => fn("reciprocal", "⅟x"), variant: "function" },
     ],
     [
       { label: "x²", onClick: () => postfix("²"), variant: "function" },

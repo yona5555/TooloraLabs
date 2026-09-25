@@ -40,6 +40,9 @@ const FUNCTION_TOKENS: Record<string, ScientificOperation> = {
   "10ˣ": "pow10",
   "2ˣ": "twoPow",
   abs: "abs",
+  "d/dx sin": "numDerivativeSin",
+  "d/dx x²": "numDerivativeSquare",
+  "∫x²": "numIntegralSquare",
   // "⅟x" (U+215F, not the ASCII digit "1") is deliberately used here instead
   // of the more obvious "1/x" — a digit-led token would get swallowed by the
   // tokenizer's number-matching branch when it immediately follows a typed
@@ -57,7 +60,7 @@ const CONSTANT_TOKENS: Record<string, number> = {
 
 type Token =
   | { kind: "number"; value: number }
-  | { kind: "op"; op: "+" | "-" | "×" | "÷" | "^" | "logbase" }
+  | { kind: "op"; op: "+" | "-" | "×" | "÷" | "^" | "logbase" | "nCr" | "nPr" }
   | { kind: "lparen" }
   | { kind: "rparen" }
   | { kind: "func"; op: ScientificOperation }
@@ -99,6 +102,16 @@ function tokenize(expr: string): Token[] | null {
     if (expr.startsWith("logᵧ", i)) {
       tokens.push({ kind: "op", op: "logbase" });
       i += "logᵧ".length;
+      continue;
+    }
+    if (expr.startsWith("nCr", i)) {
+      tokens.push({ kind: "op", op: "nCr" });
+      i += "nCr".length;
+      continue;
+    }
+    if (expr.startsWith("nPr", i)) {
+      tokens.push({ kind: "op", op: "nPr" });
+      i += "nPr".length;
       continue;
     }
 
@@ -248,6 +261,11 @@ class Parser {
       this.pos++;
       const base2 = this.parsePower();
       return this.call("logBase", base, base2);
+    }
+    if (t?.kind === "op" && (t.op === "nCr" || t.op === "nPr")) {
+      this.pos++;
+      const r = this.parsePower();
+      return this.call(t.op, base, r);
     }
     return base;
   }
