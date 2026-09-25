@@ -1,26 +1,31 @@
 "use client";
 import { useReducer, useState } from "react";
-import { useTranslations } from "next-intl";
 import { calculatorReducer, initialCalculatorState } from "./homeCalculatorReducer";
 import { useArchive } from "./useArchive";
 import CalculatorTopBar from "./CalculatorTopBar";
 import CalculatorDisplay from "./CalculatorDisplay";
 import FunctionCategoryRow from "./FunctionCategoryRow";
 import CalculatorKeypad from "./CalculatorKeypad";
+import StandardKeypad from "./StandardKeypad";
 import CalculatorBottomBar from "./CalculatorBottomBar";
+import GraphCalculator from "./GraphCalculator";
+import ProgrammerCalculator from "./ProgrammerCalculator";
+import UnitConverter from "./UnitConverter";
 
 export type CalculatorMode = "standard" | "scientific" | "graph" | "programmer" | "converter";
 
 const SAVE_CONFIRMATION_MS = 1800;
 
 /**
- * The only fully-built mode is Scientific (the one the spec details keypad
- * row by row); the other four tabs/menu entries are real, clickable, and
- * switch `mode` — but render an honest "coming soon" placeholder instead of
- * faking functionality the spec never described.
+ * Every mode is real and working — Standard and Scientific share the same
+ * expression-engine state (only the keypad differs, so switching between
+ * them mid-calculation keeps your current expression and history), while
+ * Graph/Programmer/Converter are self-contained modes with their own local
+ * state, each backed by real computation (a genuine expression-plotting
+ * engine, real 32-bit bitwise arithmetic, and real unit-conversion factors
+ * respectively) rather than a placeholder.
  */
 export default function HomeCalculator() {
-  const tHome = useTranslations("homeCalculator");
   const [mode, setMode] = useState<CalculatorMode>("scientific");
   const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
   const { archive, saveEntries } = useArchive();
@@ -36,7 +41,7 @@ export default function HomeCalculator() {
     <div className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
       <CalculatorTopBar mode={mode} setMode={setMode} />
 
-      {mode === "scientific" ? (
+      {mode === "scientific" && (
         <>
           <div className="p-3 sm:p-4">
             <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} />
@@ -45,12 +50,21 @@ export default function HomeCalculator() {
           <CalculatorKeypad state={state} dispatch={dispatch} />
           <CalculatorBottomBar state={state} onSaveHistory={handleSaveHistory} justSaved={justSaved} />
         </>
-      ) : (
-        <div className="flex flex-1 flex-col items-center justify-center gap-2 px-6 py-16 text-center">
-          <p className="text-lg font-semibold text-zinc-700 dark:text-zinc-200">{tHome(`modes.${mode}`)}</p>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">{tHome("modes.comingSoon")}</p>
-        </div>
       )}
+
+      {mode === "standard" && (
+        <>
+          <div className="p-3 sm:p-4">
+            <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} />
+          </div>
+          <StandardKeypad dispatch={dispatch} />
+          <CalculatorBottomBar state={state} onSaveHistory={handleSaveHistory} justSaved={justSaved} />
+        </>
+      )}
+
+      {mode === "graph" && <GraphCalculator />}
+      {mode === "programmer" && <ProgrammerCalculator />}
+      {mode === "converter" && <UnitConverter />}
     </div>
   );
 }
