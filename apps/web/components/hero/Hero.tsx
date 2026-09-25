@@ -5,7 +5,13 @@ import HomeCalculatorDocs from "@/components/home/HomeCalculatorDocs";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    // No overflow-hidden here: it would silently disable position:sticky for
+    // every descendant (the category sidebar and the docs section's "On
+    // This Page" TOC both rely on it), since sticky is computed against the
+    // nearest ancestor that clips overflow. HeroBackground already clips its
+    // own decorative blobs via its own wrapper, so the section itself never
+    // needed this in the first place.
+    <section className="relative">
       <HeroBackground />
       {/* Unlike the rest of the site's sections, this content area is intentionally full-bleed (no
           mx-auto max-w-* / px-* wrapper) — the category sidebar and calculator column together fill
@@ -21,7 +27,10 @@ export default function Hero() {
         <CategorySidebar />
         <div className="flex min-w-0 flex-1 flex-col gap-4 bg-zinc-100 p-3 dark:bg-zinc-950 sm:p-4">
           <HomeCalculator />
-          <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+          {/* No overflow-hidden here either — this card holds the docs section's own sticky "On
+              This Page" TOC, and everything inside is already padded well clear of the rounded
+              corners (HomeCalculatorDocs starts at p-4+), so clipping was never load-bearing. */}
+          <div className="rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
             <HomeCalculatorDocs />
           </div>
         </div>

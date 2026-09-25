@@ -113,8 +113,8 @@ export default function CalculatorKeypad({ state, dispatch }: CalculatorKeypadPr
       { label: "8", onClick: () => digit("8"), variant: "number" },
       { label: "9", onClick: () => digit("9"), variant: "number" },
       { label: "×", onClick: () => operator("×"), variant: "operator" },
-      null,
-      null,
+      { label: "π", onClick: () => dispatch({ type: "constant", symbol: "π" }), variant: "function" },
+      { label: "⅟x", onClick: () => fn("reciprocal", "⅟x"), variant: "function" },
     ],
     [
       { label: "x²", onClick: () => postfix("²"), variant: "function" },

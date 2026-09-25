@@ -33,6 +33,8 @@ export default function CategorySidebar() {
   const tHero = useTranslations("hero");
   const tCommon = useTranslations("common");
   const tDocsNav = useTranslations("docsNav");
+  const tCategoriesSection = useTranslations("categoriesSection");
+  const tNavbar = useTranslations("navbar");
   const pathname = usePathname();
 
   const activeToolSlug = pathname.match(/^\/tools\/([^/]+)/)?.[1] ?? null;
@@ -70,7 +72,7 @@ export default function CategorySidebar() {
   return (
     <nav
       aria-label={tHome("sidebarNavLabel")}
-      className="flex w-full shrink-0 flex-col overflow-y-auto border-zinc-200 bg-white ltr:lg:border-r rtl:lg:border-l dark:border-zinc-800 dark:bg-zinc-900 lg:h-full lg:w-72 xl:w-80"
+      className="flex w-full shrink-0 flex-col border-zinc-200 bg-white ltr:lg:border-r rtl:lg:border-l dark:border-zinc-800 dark:bg-zinc-900 lg:sticky lg:top-0 lg:max-h-screen lg:w-72 lg:self-start lg:overflow-y-auto xl:w-80"
     >
       <div className="flex flex-col gap-2.5 p-3">
         <div className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 focus-within:border-blue-400 dark:border-zinc-700 dark:bg-zinc-800">
@@ -83,6 +85,7 @@ export default function CategorySidebar() {
             className="min-w-0 flex-1 bg-transparent text-sm text-zinc-700 outline-none placeholder:text-zinc-400 dark:text-zinc-200"
           />
         </div>
+        <p className="px-1 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400">{tHome("sidebarTotalTools", { count: tools.length })}</p>
         <div className="flex gap-1 border-b border-zinc-100 pb-2.5 dark:border-zinc-800">
           <Link
             href="/docs"
@@ -136,6 +139,22 @@ export default function CategorySidebar() {
             const categoryTools = TOOLS_BY_CATEGORY[category.slug] ?? [];
             const isActiveCategory = activeCategorySlug === category.slug;
 
+            if (categoryTools.length === 0) {
+              return (
+                <li key={category.slug}>
+                  <div aria-disabled="true" className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-zinc-400 opacity-60 dark:text-zinc-500">
+                    <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
+                      <Icon size={15} strokeWidth={2} />
+                    </span>
+                    <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
+                    <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500">
+                      {tNavbar("comingSoon")}
+                    </span>
+                  </div>
+                </li>
+              );
+            }
+
             return (
               <li key={category.slug}>
                 <button
@@ -152,6 +171,9 @@ export default function CategorySidebar() {
                     <Icon size={15} strokeWidth={2} />
                   </span>
                   <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
+                  <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                    {tCategoriesSection("toolCount", { count: categoryTools.length })}
+                  </span>
                   <ChevronRight size={14} className={`shrink-0 text-zinc-400 transition-transform ${isOpen ? "rotate-90" : ""}`} />
                 </button>
 

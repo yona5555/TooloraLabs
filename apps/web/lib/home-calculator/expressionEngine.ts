@@ -40,6 +40,14 @@ const FUNCTION_TOKENS: Record<string, ScientificOperation> = {
   "10ˣ": "pow10",
   "2ˣ": "twoPow",
   abs: "abs",
+  // "⅟x" (U+215F, not the ASCII digit "1") is deliberately used here instead
+  // of the more obvious "1/x" — a digit-led token would get swallowed by the
+  // tokenizer's number-matching branch when it immediately follows a typed
+  // digit with no separator (e.g. "5" then this button would read as "51/x("
+  // and misparse as the number 51 followed by a dangling, unrecognized
+  // "/x"). U+215F isn't in the digit charset, so it can never be absorbed
+  // into a preceding number, while still rendering as a recognizable "1/x".
+  "⅟x": "reciprocal",
 };
 
 const CONSTANT_TOKENS: Record<string, number> = {
