@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { ChevronRight, Search, BookOpen, LayoutList } from "lucide-react";
+import { ChevronRight, Search, BookOpen, LayoutList, ArrowRight } from "lucide-react";
 import { categories } from "@/data/categories";
 import { tools, type Tool } from "@/data/tools";
 import { getCategoryIcon } from "@/lib/category-icons";
@@ -13,6 +13,43 @@ const TOOLS_BY_CATEGORY = tools.reduce<Record<string, Tool[]>>((acc, tool) => {
   (acc[tool.category] ??= []).push(tool);
   return acc;
 }, {});
+
+/**
+ * A quick-overview preview for one tool, shown on hover/focus of its link in
+ * the sidebar (via the parent <li>'s "group" class) — a 2-3 line description
+ * plus a link to that tool's full /docs page, so a visitor can get a sense
+ * of what a tool does without leaving the homepage. Every tool here has a
+ * real /docs/[slug] page (DOCUMENTED_TOOL_SLUGS covers all 101, confirmed
+ * 1:1 against data/tools.ts), so the "view full docs" link is never dead.
+ *
+ * Deliberately an INLINE expansion (grid-rows 0fr -> 1fr, not a
+ * position:absolute flyout to the side) — the sidebar's own scroll
+ * container has overflow-y-auto, which (per the CSS overflow spec, an axis
+ * left as the implicit default becomes "auto" too once the other axis isn't
+ * "visible") clips overflow-x as well, so an absolutely-positioned popover
+ * escaping the column's edge would silently render clipped/invisible rather
+ * than beside it. Expanding in place has no such escape to clip.
+ */
+function ToolQuickPreview({ slug }: { slug: string }) {
+  const tTools = useTranslations("tools");
+  const tHome = useTranslations("homeCalculator");
+  return (
+    <div className="grid grid-rows-[0fr] overflow-hidden transition-all duration-200 group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]">
+      <div className="min-h-0">
+        <div className="mx-1 mb-1.5 rounded-lg border border-zinc-200 bg-zinc-50 p-2.5 dark:border-zinc-700 dark:bg-zinc-800/60">
+          <p className="line-clamp-3 text-xs leading-5 text-zinc-500 dark:text-zinc-400">{tTools(`${slug}.description`)}</p>
+          <Link
+            href={`/docs/${slug}`}
+            className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
+          >
+            {tHome("sidebarViewFullDocs")}
+            <ArrowRight size={12} className="rtl:rotate-180" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /**
  * A hierarchical, documentation-style side nav: a tool search box, Overview
@@ -72,7 +109,7 @@ export default function CategorySidebar() {
   return (
     <nav
       aria-label={tHome("sidebarNavLabel")}
-      className="flex w-full shrink-0 flex-col border-zinc-200 bg-white ltr:lg:border-r rtl:lg:border-l dark:border-zinc-800 dark:bg-zinc-900 lg:sticky lg:top-0 lg:max-h-screen lg:w-72 lg:self-start lg:overflow-y-auto xl:w-80"
+      className="no-scrollbar flex w-full shrink-0 flex-col border-zinc-200 bg-white ltr:lg:border-r rtl:lg:border-l dark:border-zinc-800 dark:bg-zinc-900 lg:sticky lg:top-0 lg:max-h-screen lg:w-72 lg:self-start lg:overflow-y-auto xl:w-80"
     >
       <div className="flex flex-col gap-2.5 p-3">
         <div className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 focus-within:border-blue-400 dark:border-zinc-700 dark:bg-zinc-800">
@@ -113,7 +150,7 @@ export default function CategorySidebar() {
               const ToolIcon = getToolIcon(tool.slug);
               const isActiveTool = activeToolSlug === tool.slug;
               return (
-                <li key={tool.slug}>
+                <li key={tool.slug} className="group relative">
                   <Link
                     href={`/tools/${tool.slug}`}
                     className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition ${
@@ -125,6 +162,7 @@ export default function CategorySidebar() {
                     <ToolIcon size={14} className="shrink-0 text-zinc-400" />
                     <span className="truncate">{tTools(`${tool.slug}.title`)}</span>
                   </Link>
+                  <ToolQuickPreview slug={tool.slug} />
                 </li>
               );
             })
@@ -183,7 +221,7 @@ export default function CategorySidebar() {
                       const ToolIcon = getToolIcon(tool.slug);
                       const isActiveTool = activeToolSlug === tool.slug;
                       return (
-                        <li key={tool.slug}>
+                        <li key={tool.slug} className="group relative">
                           <Link
                             href={`/tools/${tool.slug}`}
                             className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs transition ${
@@ -195,6 +233,7 @@ export default function CategorySidebar() {
                             <ToolIcon size={13} className="shrink-0" />
                             <span className="truncate">{tTools(`${tool.slug}.title`)}</span>
                           </Link>
+                          <ToolQuickPreview slug={tool.slug} />
                         </li>
                       );
                     })}

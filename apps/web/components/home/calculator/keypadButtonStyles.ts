@@ -21,17 +21,17 @@ export type KeypadVariant = "number" | "operator" | "function" | "clear" | "dele
  */
 export const KEYPAD_VARIANT_CLASSES: Record<KeypadVariant, string> = {
   number:
-    "border border-zinc-300 bg-white text-zinc-900 shadow-[0_3px_0_rgba(0,0,0,0.15)] hover:bg-zinc-50 active:translate-y-px active:shadow-none dark:border-zinc-400 dark:bg-zinc-500 dark:text-white dark:shadow-[0_3px_0_rgba(0,0,0,0.65)] dark:hover:bg-zinc-400",
+    "border border-zinc-300 bg-white text-zinc-900 shadow-[0_3px_0_rgba(0,0,0,0.15)] hover:bg-zinc-50 active:translate-y-px active:shadow-none calcdark:border-zinc-400 calcdark:bg-zinc-500 calcdark:text-white calcdark:shadow-[0_3px_0_rgba(0,0,0,0.65)] calcdark:hover:bg-zinc-400",
   operator:
-    "bg-blue-500 text-white shadow-[0_3px_0_rgba(29,78,216,0.9)] hover:bg-blue-400 active:translate-y-px active:shadow-[0_1px_0_rgba(29,78,216,0.9)] dark:bg-blue-500 dark:shadow-[0_3px_0_rgba(30,58,138,1)] dark:hover:bg-blue-400",
+    "bg-blue-500 text-white shadow-[0_3px_0_rgba(29,78,216,0.9)] hover:bg-blue-400 active:translate-y-px active:shadow-[0_1px_0_rgba(29,78,216,0.9)] calcdark:bg-blue-500 calcdark:shadow-[0_3px_0_rgba(30,58,138,1)] calcdark:hover:bg-blue-400",
   function:
-    "border border-zinc-200 bg-zinc-100 text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:shadow-[0_2px_0_rgba(0,0,0,0.35)] dark:hover:bg-zinc-700",
+    "border border-zinc-200 bg-zinc-100 text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none calcdark:border-zinc-700 calcdark:bg-zinc-800 calcdark:text-zinc-300 calcdark:shadow-[0_2px_0_rgba(0,0,0,0.35)] calcdark:hover:bg-zinc-700",
   clear:
-    "bg-amber-500 text-white shadow-[0_3px_0_rgba(180,83,9,0.9)] hover:bg-amber-400 active:translate-y-px active:shadow-[0_1px_0_rgba(180,83,9,0.9)] dark:bg-amber-500 dark:shadow-[0_3px_0_rgba(120,53,15,1)] dark:hover:bg-amber-400",
+    "bg-amber-500 text-white shadow-[0_3px_0_rgba(180,83,9,0.9)] hover:bg-amber-400 active:translate-y-px active:shadow-[0_1px_0_rgba(180,83,9,0.9)] calcdark:bg-amber-500 calcdark:shadow-[0_3px_0_rgba(120,53,15,1)] calcdark:hover:bg-amber-400",
   delete:
-    "bg-red-500 text-white shadow-[0_3px_0_rgba(185,28,28,0.9)] hover:bg-red-400 active:translate-y-px active:shadow-[0_1px_0_rgba(185,28,28,0.9)] dark:bg-red-500 dark:shadow-[0_3px_0_rgba(127,29,29,1)] dark:hover:bg-red-400",
+    "bg-red-500 text-white shadow-[0_3px_0_rgba(185,28,28,0.9)] hover:bg-red-400 active:translate-y-px active:shadow-[0_1px_0_rgba(185,28,28,0.9)] calcdark:bg-red-500 calcdark:shadow-[0_3px_0_rgba(127,29,29,1)] calcdark:hover:bg-red-400",
   equals:
-    "bg-blue-600 text-white shadow-[0_3px_0_rgba(30,58,138,0.9)] hover:bg-blue-500 active:translate-y-px active:shadow-[0_1px_0_rgba(30,58,138,0.9)] dark:bg-blue-600 dark:shadow-[0_3px_0_rgba(23,37,84,1)] dark:hover:bg-blue-500",
+    "bg-blue-600 text-white shadow-[0_3px_0_rgba(30,58,138,0.9)] hover:bg-blue-500 active:translate-y-px active:shadow-[0_1px_0_rgba(30,58,138,0.9)] calcdark:bg-blue-600 calcdark:shadow-[0_3px_0_rgba(23,37,84,1)] calcdark:hover:bg-blue-500",
   toggle:
-    "border border-zinc-200 bg-zinc-100 text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:shadow-[0_2px_0_rgba(0,0,0,0.35)] dark:hover:bg-zinc-700",
+    "border border-zinc-200 bg-zinc-100 text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] hover:bg-zinc-200 active:translate-y-px active:shadow-none calcdark:border-zinc-700 calcdark:bg-zinc-800 calcdark:text-zinc-300 calcdark:shadow-[0_2px_0_rgba(0,0,0,0.35)] calcdark:hover:bg-zinc-700",
 };

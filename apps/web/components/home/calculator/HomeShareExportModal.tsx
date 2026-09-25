@@ -122,7 +122,7 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        className="flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:bg-zinc-100 calcdark:border-zinc-700 calcdark:text-zinc-300 calcdark:hover:bg-zinc-800"
       >
         <Share2 size={14} />
         {t("shareExport.triggerLabel")}
@@ -135,7 +135,7 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
             aria-modal="true"
             aria-label={t("shareExport.modalTitle")}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-blue-200 bg-white shadow-xl dark:border-blue-500/30 dark:bg-zinc-900"
+            className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-blue-200 bg-white shadow-xl calcdark:border-blue-500/30 calcdark:bg-zinc-900"
           >
             <div className="flex items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-3 lg:px-6">
               <h2 className="font-bold text-white">{t("shareExport.modalTitle")}</h2>
@@ -154,14 +154,14 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
                 type="button"
                 onClick={handleDownloadPdf}
                 disabled={pdfState === "generating"}
-                className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 text-start transition hover:bg-zinc-50 disabled:opacity-60 dark:border-zinc-800 dark:hover:bg-zinc-800/60"
+                className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 text-start transition hover:bg-zinc-50 disabled:opacity-60 calcdark:border-zinc-800 calcdark:hover:bg-zinc-800/60"
               >
                 {pdfState === "done" ? (
-                  <Check size={18} className="shrink-0 text-blue-600 dark:text-blue-400" />
+                  <Check size={18} className="shrink-0 text-blue-600 calcdark:text-blue-400" />
                 ) : (
-                  <FileDown size={18} className="shrink-0 text-blue-600 dark:text-blue-400" />
+                  <FileDown size={18} className="shrink-0 text-blue-600 calcdark:text-blue-400" />
                 )}
-                <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                <span className="text-sm font-medium text-zinc-800 calcdark:text-zinc-200">
                   {pdfState === "generating" ? tActions("generatingPdf") : pdfState === "done" ? tActions("downloaded") : tActions("downloadPdf")}
                 </span>
               </button>
@@ -169,14 +169,14 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
               <button
                 type="button"
                 onClick={handlePrint}
-                className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 text-start transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-800/60"
+                className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 text-start transition hover:bg-zinc-50 calcdark:border-zinc-800 calcdark:hover:bg-zinc-800/60"
               >
-                <Printer size={18} className="shrink-0 text-blue-600 dark:text-blue-400" />
-                <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{tActions("print")}</span>
+                <Printer size={18} className="shrink-0 text-blue-600 calcdark:text-blue-400" />
+                <span className="text-sm font-medium text-zinc-800 calcdark:text-zinc-200">{tActions("print")}</span>
               </button>
 
-              <div className="rounded-xl border border-zinc-200 px-4 py-3 dark:border-zinc-800">
-                <p className="mb-2.5 text-sm font-medium text-zinc-800 dark:text-zinc-200">{t("shareExport.shareToSocial")}</p>
+              <div className="rounded-xl border border-zinc-200 px-4 py-3 calcdark:border-zinc-800">
+                <p className="mb-2.5 text-sm font-medium text-zinc-800 calcdark:text-zinc-200">{t("shareExport.shareToSocial")}</p>
                 <div className="flex items-center gap-2">
                   {socialLinks.map(({ key, href, Icon }) => (
                     <a
@@ -185,7 +185,7 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={tShare(key)}
-                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-500 dark:hover:text-blue-400"
+                      className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 calcdark:border-zinc-700 calcdark:text-zinc-300 calcdark:hover:border-blue-500 calcdark:hover:text-blue-400"
                     >
                       <Icon size={16} />
                     </a>
@@ -196,14 +196,14 @@ export default function HomeShareExportModal({ history, currentDisplay }: HomeSh
               <button
                 type="button"
                 onClick={handleCopyLink}
-                className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 text-start transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-800/60"
+                className="flex w-full items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 text-start transition hover:bg-zinc-50 calcdark:border-zinc-800 calcdark:hover:bg-zinc-800/60"
               >
-                {copied ? <Check size={18} className="shrink-0 text-blue-600 dark:text-blue-400" /> : <Copy size={18} className="shrink-0 text-blue-600 dark:text-blue-400" />}
-                <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{copied ? tShare("copied") : tShare("copyLink")}</span>
+                {copied ? <Check size={18} className="shrink-0 text-blue-600 calcdark:text-blue-400" /> : <Copy size={18} className="shrink-0 text-blue-600 calcdark:text-blue-400" />}
+                <span className="text-sm font-medium text-zinc-800 calcdark:text-zinc-200">{copied ? tShare("copied") : tShare("copyLink")}</span>
               </button>
 
-              <div className="border-t border-zinc-200 pt-3 dark:border-zinc-800">
-                <p className="mb-3 text-sm font-medium text-zinc-800 dark:text-zinc-200">{t("shareExport.contactSectionTitle")}</p>
+              <div className="border-t border-zinc-200 pt-3 calcdark:border-zinc-800">
+                <p className="mb-3 text-sm font-medium text-zinc-800 calcdark:text-zinc-200">{t("shareExport.contactSectionTitle")}</p>
                 <div className="space-y-3">
                   <ToolInput label={t("shareExport.contactName")} type="text" placeholder={t("shareExport.contactNamePlaceholder")} value={contactName} onChange={(e) => setContactName(e.target.value)} />
                   <ToolInput label={t("shareExport.contactEmail")} type="email" placeholder={t("shareExport.contactEmailPlaceholder")} value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />

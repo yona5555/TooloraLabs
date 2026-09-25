@@ -40,9 +40,9 @@ function useMainPaneText(state: CalculatorState, tHome: ReturnType<typeof useTra
 
 function EntryRow({ entry }: { entry: HistoryEntry }) {
   return (
-    <div className="border-b border-zinc-100 px-3 py-2.5 last:border-0 dark:border-zinc-800" dir="ltr">
-      <div className="truncate text-xs text-zinc-400 dark:text-zinc-500">{entry.expression}</div>
-      <div className="truncate text-lg font-semibold text-zinc-900 dark:text-zinc-50">{formatCalculatorNumber(entry.result)}</div>
+    <div className="border-b border-zinc-100 px-3 py-2.5 last:border-0 calcdark:border-zinc-800" dir="ltr">
+      <div className="truncate text-xs text-zinc-400 calcdark:text-zinc-500">{entry.expression}</div>
+      <div className="truncate text-lg font-semibold text-zinc-900 calcdark:text-zinc-50">{formatCalculatorNumber(entry.result)}</div>
     </div>
   );
 }
@@ -59,18 +59,18 @@ export default function CalculatorDisplay({ state, dispatch, archive }: Calculat
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1.4fr_1fr]">
       <div
         aria-label={tHome("display.mainLabel")}
-        className="flex min-h-[6.5rem] flex-col justify-end rounded-xl border border-blue-100 bg-gradient-to-b from-zinc-50 to-blue-50/40 px-4 py-3 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] dark:border-blue-500/20 dark:from-zinc-800 dark:to-zinc-800/60 dark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]"
+        className="flex min-h-[6.5rem] flex-col justify-end rounded-xl border border-blue-100 bg-gradient-to-b from-zinc-50 to-blue-50/40 px-4 py-3 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] calcdark:border-blue-500/20 calcdark:from-zinc-800 calcdark:to-zinc-800/60 calcdark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]"
       >
-        <div className="truncate text-end text-sm text-zinc-500 dark:text-zinc-400" dir="ltr">
+        <div className="truncate text-end text-sm text-zinc-500 calcdark:text-zinc-400" dir="ltr">
           {topText}
         </div>
-        <div className="mt-1 truncate text-end text-4xl font-extrabold text-zinc-900 dark:text-white" dir="ltr">
+        <div className="mt-1 truncate text-end text-4xl font-extrabold text-zinc-900 calcdark:text-white" dir="ltr">
           {bottomText}
         </div>
       </div>
 
-      <div className="flex min-h-[6.5rem] flex-col overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
-        <div className="flex border-b border-zinc-200 dark:border-zinc-700" role="tablist">
+      <div className="flex min-h-[6.5rem] flex-col overflow-hidden rounded-xl border border-zinc-200 calcdark:border-zinc-700">
+        <div className="flex border-b border-zinc-200 calcdark:border-zinc-700" role="tablist">
           {(["history", "archive"] as const).map((key) => (
             <button
               key={key}
@@ -80,24 +80,24 @@ export default function CalculatorDisplay({ state, dispatch, archive }: Calculat
               onClick={() => setTab(key)}
               className={`flex-1 px-3 py-2 text-xs font-semibold transition ${
                 tab === key
-                  ? "bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400"
-                  : "bg-zinc-50 text-zinc-500 hover:text-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400 dark:hover:text-zinc-200"
+                  ? "bg-white text-blue-600 calcdark:bg-zinc-900 calcdark:text-blue-400"
+                  : "bg-zinc-50 text-zinc-500 hover:text-zinc-700 calcdark:bg-zinc-800/40 calcdark:text-zinc-400 calcdark:hover:text-zinc-200"
               }`}
             >
               {tHome(key === "history" ? "display.historyTab" : "display.archiveTab")}
             </button>
           ))}
         </div>
-        <div className="max-h-32 flex-1 overflow-y-auto bg-white dark:bg-zinc-900">
+        <div className="max-h-32 flex-1 overflow-y-auto bg-white calcdark:bg-zinc-900">
           {entries.length === 0 ? (
-            <p className="px-3 py-4 text-center text-xs text-zinc-400 dark:text-zinc-500">{emptyText}</p>
+            <p className="px-3 py-4 text-center text-xs text-zinc-400 calcdark:text-zinc-500">{emptyText}</p>
           ) : (
             entries.map((entry) => (
               <button
                 key={entry.id}
                 type="button"
                 onClick={() => dispatch({ type: "loadHistory", entry })}
-                className="block w-full text-start transition hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
+                className="block w-full text-start transition hover:bg-zinc-50 calcdark:hover:bg-zinc-800/60"
               >
                 <EntryRow entry={entry} />
               </button>

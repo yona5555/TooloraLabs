@@ -115,14 +115,14 @@ export default function ProgrammerCalculator() {
 
   return (
     <div dir="ltr" className="flex flex-col gap-3 p-3 sm:p-4">
-      <div className="flex gap-1 rounded-lg border border-zinc-200 p-1 dark:border-zinc-700">
+      <div className="flex gap-1 rounded-lg border border-zinc-200 p-1 calcdark:border-zinc-700">
         {BASES.map(({ base, label }) => (
           <button
             key={base}
             type="button"
             onClick={() => selectBase(base)}
             className={`flex-1 rounded-md py-1.5 text-xs font-semibold transition ${
-              inputBase === base ? "bg-blue-500 text-white" : "text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+              inputBase === base ? "bg-blue-500 text-white" : "text-zinc-500 hover:bg-zinc-100 calcdark:text-zinc-400 calcdark:hover:bg-zinc-800"
             }`}
           >
             {label}
@@ -130,14 +130,14 @@ export default function ProgrammerCalculator() {
         ))}
       </div>
 
-      <div className="rounded-xl border border-blue-100 bg-gradient-to-b from-zinc-50 to-blue-50/40 p-3 dark:border-blue-500/20 dark:from-zinc-800 dark:to-zinc-800/60">
+      <div className="rounded-xl border border-blue-100 bg-gradient-to-b from-zinc-50 to-blue-50/40 p-3 calcdark:border-blue-500/20 calcdark:from-zinc-800 calcdark:to-zinc-800/60">
         {BASES.map(({ base, label }) => (
-          <div key={base} className={`flex items-center justify-between border-b border-zinc-200/60 py-1.5 last:border-0 dark:border-zinc-700/60 ${base === inputBase ? "font-bold text-blue-600 dark:text-blue-400" : "text-zinc-600 dark:text-zinc-300"}`}>
+          <div key={base} className={`flex items-center justify-between border-b border-zinc-200/60 py-1.5 last:border-0 calcdark:border-zinc-700/60 ${base === inputBase ? "font-bold text-blue-600 calcdark:text-blue-400" : "text-zinc-600 calcdark:text-zinc-300"}`}>
             <span className="text-xs">{label}</span>
             <span className="truncate font-mono text-sm">{toBase(currentValue, base)}</span>
           </div>
         ))}
-        {pending && <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">{toBase(pending.value, 10)} {pending.op} …</p>}
+        {pending && <p className="mt-2 text-xs text-zinc-400 calcdark:text-zinc-500">{toBase(pending.value, 10)} {pending.op} …</p>}
       </div>
 
       <div className="grid grid-cols-4 gap-1.5">
@@ -160,7 +160,7 @@ export default function ProgrammerCalculator() {
           }
           if (label === "NOT") {
             return (
-              <button key={label} type="button" onClick={pressNot} className="rounded-lg border border-zinc-200 bg-zinc-100 py-2.5 text-sm font-semibold text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] transition hover:bg-zinc-200 active:translate-y-px active:shadow-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+              <button key={label} type="button" onClick={pressNot} className="rounded-lg border border-zinc-200 bg-zinc-100 py-2.5 text-sm font-semibold text-zinc-700 shadow-[0_2px_0_rgba(0,0,0,0.06)] transition hover:bg-zinc-200 active:translate-y-px active:shadow-none calcdark:border-zinc-700 calcdark:bg-zinc-800 calcdark:text-zinc-300">
                 NOT
               </button>
             );
@@ -183,7 +183,7 @@ export default function ProgrammerCalculator() {
               type="button"
               disabled={disabled}
               onClick={() => pressDigit(label)}
-              className="rounded-lg border border-zinc-300 bg-white py-2.5 text-sm font-semibold text-zinc-900 shadow-[0_3px_0_rgba(0,0,0,0.15)] transition hover:bg-zinc-50 active:translate-y-px active:shadow-none disabled:cursor-not-allowed disabled:opacity-30 disabled:shadow-none dark:border-zinc-400 dark:bg-zinc-500 dark:text-white"
+              className="rounded-lg border border-zinc-300 bg-white py-2.5 text-sm font-semibold text-zinc-900 shadow-[0_3px_0_rgba(0,0,0,0.15)] transition hover:bg-zinc-50 active:translate-y-px active:shadow-none disabled:cursor-not-allowed disabled:opacity-30 disabled:shadow-none calcdark:border-zinc-400 calcdark:bg-zinc-500 calcdark:text-white"
             >
               {label}
             </button>

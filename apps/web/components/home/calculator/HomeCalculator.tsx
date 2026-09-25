@@ -30,6 +30,12 @@ export default function HomeCalculator() {
   const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
   const { archive, saveEntries } = useArchive();
   const [justSaved, setJustSaved] = useState(false);
+  // Independent of the site-wide theme: applying "calc-dark" here only
+  // activates `calcdark:` utilities within this subtree (see the calcdark
+  // custom variant in globals.css), never touching <html>'s own "dark"
+  // class, so this can disagree with the rest of the page in either
+  // direction.
+  const [calcDark, setCalcDark] = useState(false);
 
   function handleSaveHistory() {
     saveEntries(state.history);
@@ -38,8 +44,8 @@ export default function HomeCalculator() {
   }
 
   return (
-    <div className="flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
-      <CalculatorTopBar mode={mode} setMode={setMode} />
+    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 ${calcDark ? "calc-dark" : ""}`}>
+      <CalculatorTopBar mode={mode} setMode={setMode} calcDark={calcDark} onToggleCalcDark={() => setCalcDark((v) => !v)} />
 
       {mode === "scientific" && (
         <>

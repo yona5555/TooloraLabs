@@ -44,7 +44,7 @@ export default function UnitConverter() {
             type="button"
             onClick={() => selectCategory(cat)}
             className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
-              category === cat ? "bg-blue-500 text-white" : "border border-zinc-200 text-zinc-600 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              category === cat ? "bg-blue-500 text-white" : "border border-zinc-200 text-zinc-600 hover:bg-zinc-100 calcdark:border-zinc-700 calcdark:text-zinc-300 calcdark:hover:bg-zinc-800"
             }`}
           >
             {tHome(`converter.categories.${cat}`)}
@@ -54,17 +54,17 @@ export default function UnitConverter() {
 
       <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-2">
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{tHome("converter.from")}</label>
+          <label className="text-xs font-medium text-zinc-500 calcdark:text-zinc-400">{tHome("converter.from")}</label>
           <input
             type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-blue-400 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
+            className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-blue-400 calcdark:border-zinc-600 calcdark:bg-zinc-800 calcdark:text-zinc-100"
           />
           <select
             value={fromUnit}
             onChange={(e) => setFromUnit(e.target.value)}
-            className="rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-700 outline-none dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200"
+            className="rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-700 outline-none calcdark:border-zinc-600 calcdark:bg-zinc-800 calcdark:text-zinc-200"
           >
             {units.map((u) => (
               <option key={u} value={u}>
@@ -78,20 +78,20 @@ export default function UnitConverter() {
           type="button"
           onClick={swap}
           aria-label={tHome("converter.swap")}
-          className="mb-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-200 text-zinc-500 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800"
+          className="mb-1.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-200 text-zinc-500 transition hover:bg-zinc-100 calcdark:border-zinc-700 calcdark:text-zinc-400 calcdark:hover:bg-zinc-800"
         >
           <ArrowRightLeft size={15} />
         </button>
 
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{tHome("converter.to")}</label>
-          <div className="truncate rounded-lg border border-blue-200 bg-blue-50/50 px-3 py-2 text-sm font-semibold text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-400">
+          <label className="text-xs font-medium text-zinc-500 calcdark:text-zinc-400">{tHome("converter.to")}</label>
+          <div className="truncate rounded-lg border border-blue-200 bg-blue-50/50 px-3 py-2 text-sm font-semibold text-blue-700 calcdark:border-blue-500/30 calcdark:bg-blue-500/10 calcdark:text-blue-400">
             {result === null ? "—" : formatResult(result)}
           </div>
           <select
             value={toUnit}
             onChange={(e) => setToUnit(e.target.value)}
-            className="rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-700 outline-none dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200"
+            className="rounded-lg border border-zinc-300 bg-white px-2 py-1.5 text-sm text-zinc-700 outline-none calcdark:border-zinc-600 calcdark:bg-zinc-800 calcdark:text-zinc-200"
           >
             {units.map((u) => (
               <option key={u} value={u}>
@@ -103,7 +103,7 @@ export default function UnitConverter() {
       </div>
 
       {result !== null && (
-        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-center text-sm text-zinc-500 calcdark:text-zinc-400">
           {value} {fromUnit} = {formatResult(result)} {toUnit}
         </p>
       )}

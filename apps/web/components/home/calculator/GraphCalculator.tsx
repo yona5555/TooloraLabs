@@ -66,40 +66,40 @@ export default function GraphCalculator() {
 
   return (
     <div dir="ltr" className="flex flex-col gap-3 p-3 sm:p-4">
-      <div className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 dark:border-zinc-600 dark:bg-zinc-800">
-        <span className="shrink-0 font-mono text-sm font-semibold text-blue-600 dark:text-blue-400">y =</span>
+      <div className="flex items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 calcdark:border-zinc-600 calcdark:bg-zinc-800">
+        <span className="shrink-0 font-mono text-sm font-semibold text-blue-600 calcdark:text-blue-400">y =</span>
         <input
           type="text"
           value={formula}
           onChange={(e) => setFormula(e.target.value)}
           placeholder="x^2"
-          className="min-w-0 flex-1 bg-transparent font-mono text-sm text-zinc-900 outline-none placeholder:text-zinc-400 dark:text-zinc-100"
+          className="min-w-0 flex-1 bg-transparent font-mono text-sm text-zinc-900 outline-none placeholder:text-zinc-400 calcdark:text-zinc-100"
         />
       </div>
 
-      {invalid && <p className="text-xs text-red-600 dark:text-red-400">{tHome("graph.invalidFormula")}</p>}
+      {invalid && <p className="text-xs text-red-600 calcdark:text-red-400">{tHome("graph.invalidFormula")}</p>}
 
-      <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900">
+      <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white calcdark:border-zinc-700 calcdark:bg-zinc-900">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="h-auto w-full" role="img" aria-label={tHome("graph.chartLabel", { formula })}>
           {/* grid + ticks */}
           {TICKS.map((t) => (
-            <line key={`vx-${t}`} x1={xToPixel(t)} y1={MARGIN} x2={xToPixel(t)} y2={HEIGHT - MARGIN} className="stroke-zinc-100 dark:stroke-zinc-800" strokeWidth={1} />
+            <line key={`vx-${t}`} x1={xToPixel(t)} y1={MARGIN} x2={xToPixel(t)} y2={HEIGHT - MARGIN} className="stroke-zinc-100 calcdark:stroke-zinc-800" strokeWidth={1} />
           ))}
           {TICKS.map((t) => (
-            <line key={`vy-${t}`} x1={MARGIN} y1={yToPixel(t)} x2={WIDTH - MARGIN} y2={yToPixel(t)} className="stroke-zinc-100 dark:stroke-zinc-800" strokeWidth={1} />
+            <line key={`vy-${t}`} x1={MARGIN} y1={yToPixel(t)} x2={WIDTH - MARGIN} y2={yToPixel(t)} className="stroke-zinc-100 calcdark:stroke-zinc-800" strokeWidth={1} />
           ))}
 
           {/* axes */}
-          <line x1={MARGIN} y1={yToPixel(0)} x2={WIDTH - MARGIN} y2={yToPixel(0)} className="stroke-zinc-400 dark:stroke-zinc-500" strokeWidth={1.5} />
-          <line x1={xToPixel(0)} y1={MARGIN} x2={xToPixel(0)} y2={HEIGHT - MARGIN} className="stroke-zinc-400 dark:stroke-zinc-500" strokeWidth={1.5} />
+          <line x1={MARGIN} y1={yToPixel(0)} x2={WIDTH - MARGIN} y2={yToPixel(0)} className="stroke-zinc-400 calcdark:stroke-zinc-500" strokeWidth={1.5} />
+          <line x1={xToPixel(0)} y1={MARGIN} x2={xToPixel(0)} y2={HEIGHT - MARGIN} className="stroke-zinc-400 calcdark:stroke-zinc-500" strokeWidth={1.5} />
 
           {TICKS.map((t) => (
-            <text key={`lx-${t}`} x={xToPixel(t)} y={yToPixel(0) + 12} textAnchor="middle" fontSize={9} className="fill-zinc-400 dark:fill-zinc-500">
+            <text key={`lx-${t}`} x={xToPixel(t)} y={yToPixel(0) + 12} textAnchor="middle" fontSize={9} className="fill-zinc-400 calcdark:fill-zinc-500">
               {t}
             </text>
           ))}
           {TICKS.map((t) => (
-            <text key={`ly-${t}`} x={xToPixel(0) - 6} y={yToPixel(t) + 3} textAnchor="end" fontSize={9} className="fill-zinc-400 dark:fill-zinc-500">
+            <text key={`ly-${t}`} x={xToPixel(0) - 6} y={yToPixel(t) + 3} textAnchor="end" fontSize={9} className="fill-zinc-400 calcdark:fill-zinc-500">
               {t}
             </text>
           ))}
@@ -110,7 +110,7 @@ export default function GraphCalculator() {
               key={i}
               points={segment.map((p) => `${xToPixel(p.x)},${yToPixel(p.y)}`).join(" ")}
               fill="none"
-              className="stroke-blue-500 dark:stroke-blue-400"
+              className="stroke-blue-500 calcdark:stroke-blue-400"
               strokeWidth={2}
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -119,7 +119,7 @@ export default function GraphCalculator() {
         </svg>
       </div>
 
-      <p className="text-center text-xs text-zinc-400 dark:text-zinc-500">{tHome("graph.rangeCaption")}</p>
+      <p className="text-center text-xs text-zinc-400 calcdark:text-zinc-500">{tHome("graph.rangeCaption")}</p>
     </div>
   );
 }
