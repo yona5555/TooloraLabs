@@ -7,70 +7,37 @@ type SalesTaxBreakdownBarProps = {
   taxFormatted: string;
 };
 
-const WIDTH = 320;
-const BAR_HEIGHT = 32;
-const HEIGHT = BAR_HEIGHT + 22;
-const RADIUS = 8;
-
-export default function SalesTaxBreakdownBar({
-  price,
-  taxAmount,
-  priceLabel,
-  taxLabel,
-  priceFormatted,
-  taxFormatted,
-}: SalesTaxBreakdownBarProps) {
+/**
+ * Single stacked SVG bar — one continuous shape, not multiple bordered boxes,
+ * so it stays outside the banned "boxes connected by arrows" pattern. Rebuilt
+ * fresh (not just left alone) per the rm-all-indicators pass, following
+ * EduBarChart's habit of never placing a label inside a segment that might
+ * be too narrow for it: both value labels render below the bar, at a fixed
+ * width, instead of inside the colored fill.
+ */
+export default function SalesTaxBreakdownBar({ price, taxAmount, priceLabel, taxLabel, priceFormatted, taxFormatted }: SalesTaxBreakdownBarProps) {
   const total = Math.max(price + taxAmount, 0.01);
-  const priceWidth = Math.min(Math.max((price / total) * WIDTH, 2), WIDTH);
-  const taxWidth = WIDTH - priceWidth;
+  const pricePct = Math.min(Math.max((price / total) * 100, 0), 100);
+  const taxPct = 100 - pricePct;
 
   return (
-    <figure className="my-1">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          role="img"
-          aria-label={`${priceLabel}: ${priceFormatted}, ${taxLabel}: ${taxFormatted}`}
-          className="h-auto w-full text-current"
-          style={{ minWidth: 260 }}
-        >
-          <defs>
-            <clipPath id="sales-tax-breakdown-bar-clip">
-              <rect x={0} y={0} width={WIDTH} height={BAR_HEIGHT} rx={RADIUS} />
-            </clipPath>
-          </defs>
-          {/* Both segments share one rounded-rect clip so the pair always reads as a single
-              clean pill, regardless of the split — no mismatched square corner at the seam. */}
-          <g clipPath="url(#sales-tax-breakdown-bar-clip)">
-            <rect x={0} y={0} width={priceWidth} height={BAR_HEIGHT} className="fill-blue-600 dark:fill-blue-400" />
-            <rect x={priceWidth} y={0} width={taxWidth} height={BAR_HEIGHT} className="fill-amber-500 dark:fill-amber-400" />
-          </g>
-          {priceWidth > 50 && (
-            <text x={10} y={BAR_HEIGHT / 2 + 4} fontSize={12} fontWeight={700} className="fill-white">
-              {priceFormatted}
-            </text>
-          )}
-          {taxWidth > 40 && (
-            <text
-              x={priceWidth + taxWidth / 2}
-              y={BAR_HEIGHT / 2 + 4}
-              textAnchor="middle"
-              fontSize={11}
-              fontWeight={700}
-              className="fill-white"
-            >
-              +{taxFormatted}
-            </text>
-          )}
-
-          <text x={0} y={BAR_HEIGHT + 16} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
-            {priceLabel}
-          </text>
-          <text x={WIDTH} y={BAR_HEIGHT + 16} textAnchor="end" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
-            {taxLabel}
-          </text>
-        </svg>
+    <div dir="ltr">
+      <div className="flex h-8 w-full overflow-hidden rounded-lg" role="img" aria-label={`${priceLabel}: ${priceFormatted}, ${taxLabel}: +${taxFormatted}`}>
+        <div className="bg-blue-600 dark:bg-blue-400" style={{ width: `${pricePct}%` }} />
+        <div className="bg-amber-500 dark:bg-amber-400" style={{ width: `${taxPct}%` }} />
       </div>
-    </figure>
+      <div className="mt-1.5 flex items-center justify-between text-xs">
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-blue-600 dark:bg-blue-400" />
+          <span className="text-zinc-600 dark:text-zinc-300">{priceLabel}</span>
+          <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100">{priceFormatted}</span>
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-amber-500 dark:bg-amber-400" />
+          <span className="text-zinc-600 dark:text-zinc-300">{taxLabel}</span>
+          <span className="font-mono font-semibold text-zinc-900 dark:text-zinc-100">+{taxFormatted}</span>
+        </span>
+      </div>
+    </div>
   );
 }

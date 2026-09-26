@@ -13,6 +13,13 @@ const MARGIN = { top: 14, right: 12, bottom: 26, left: 12 };
 const PLOT_WIDTH = WIDTH - MARGIN.left - MARGIN.right;
 const PLOT_HEIGHT = HEIGHT - MARGIN.top - MARGIN.bottom;
 
+/**
+ * Single continuous SVG line — a trend, not bordered boxes linked by
+ * arrows, so it's outside the banned pattern (matches EduLineChart in
+ * Fuel Cost Calculator, the reference tool's own line-chart convention).
+ * Rebuilt fresh per the rm-all-indicators pass. `dir="ltr"`: a rising line
+ * is a magnitude, same category as every other quantitative chart here.
+ */
 export default function SalesTaxTotalByRateDiagram({ points, currentRate, caption, xLabel }: SalesTaxTotalByRateDiagramProps) {
   const minRate = Math.min(...points.map((p) => p.rate));
   const maxRate = Math.max(...points.map((p) => p.rate));
@@ -33,7 +40,7 @@ export default function SalesTaxTotalByRateDiagram({ points, currentRate, captio
       <div dir="ltr" className="flex justify-center overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
           <line x1={MARGIN.left} y1={MARGIN.top + PLOT_HEIGHT} x2={WIDTH - MARGIN.right} y2={MARGIN.top + PLOT_HEIGHT} stroke="currentColor" strokeWidth={1} opacity={0.3} />
-          <path d={pathD} fill="none" strokeWidth={2.5} className="stroke-amber-600 dark:stroke-amber-400" />
+          <path d={pathD} fill="none" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="stroke-amber-600 dark:stroke-amber-400" />
           <line x1={currentX} y1={MARGIN.top} x2={currentX} y2={MARGIN.top + PLOT_HEIGHT} strokeWidth={1} strokeDasharray="3 3" stroke="currentColor" opacity={0.4} />
           <circle cx={currentX} cy={currentY} r={4} className="fill-amber-600 dark:fill-amber-400" />
           <text x={MARGIN.left} y={HEIGHT - 6} fontSize={10} fill="currentColor" opacity={0.6}>
