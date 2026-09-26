@@ -5,60 +5,36 @@ type SalesTaxMultiItemInvoiceBarProps = {
   taxAmount: number;
   taxLabel: string;
   totalLabel: string;
-  caption: string;
-  title: string;
 };
 
-const WIDTH = 200;
-const HEIGHT = 160;
-const BAR_X = 70;
-const BAR_W = 60;
-const CHART_TOP = 10;
-const CHART_BOTTOM = HEIGHT - 12;
-const CHART_H = CHART_BOTTOM - CHART_TOP;
+const COLORS = ["bg-rose-400 dark:bg-rose-400/80", "bg-rose-500 dark:bg-rose-400", "bg-rose-600 dark:bg-rose-300"];
 
-const COLORS = [
-  "fill-rose-400 dark:fill-rose-400/80",
-  "fill-rose-500 dark:fill-rose-400",
-  "fill-rose-600 dark:fill-rose-300",
-];
-
-export default function SalesTaxMultiItemInvoiceBar({ items, taxAmount, taxLabel, totalLabel, caption, title }: SalesTaxMultiItemInvoiceBarProps) {
+/** Plain HTML stacked bar (CSS heights) — no SVG. */
+export default function SalesTaxMultiItemInvoiceBar({ items, taxAmount, taxLabel, totalLabel }: SalesTaxMultiItemInvoiceBarProps) {
   const total = items.reduce((s, i) => s + i.amount, 0) + taxAmount;
-  const scale = CHART_H / total;
-
-  const stackInputs = [
+  const segments = [
     ...items.map((item, i) => ({ key: item.key, label: item.label, amount: item.amount, colorClass: COLORS[i % COLORS.length] })),
-    { key: "tax", label: taxLabel, amount: taxAmount, colorClass: "fill-amber-500 dark:fill-amber-400" },
+    { key: "tax", label: taxLabel, amount: taxAmount, colorClass: "bg-amber-500 dark:bg-amber-400" },
   ];
-  const { segments } = stackInputs.reduce<{ segments: { key: string; label: string; y: number; h: number; colorClass: string }[]; cursor: number }>(
-    (acc, input) => {
-      const h = input.amount * scale;
-      const y = acc.cursor - h;
-      return { segments: [...acc.segments, { key: input.key, label: input.label, y, h, colorClass: input.colorClass }], cursor: y };
-    },
-    { segments: [], cursor: CHART_BOTTOM },
-  );
 
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={title} className="mx-auto block h-auto" style={{ width: 200 }}>
-          <line x1={BAR_X} y1={CHART_BOTTOM} x2={BAR_X + BAR_W} y2={CHART_BOTTOM} stroke="currentColor" strokeWidth={1} opacity={0.2} />
-          {segments.map((seg) => (
-            <g key={seg.key}>
-              <rect x={BAR_X} y={seg.y} width={BAR_W} height={Math.max(seg.h, 2)} className={seg.colorClass} />
-              <text x={BAR_X - 6} y={seg.y + seg.h / 2 + 3} textAnchor="end" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">
-                {seg.label}
-              </text>
-            </g>
-          ))}
-          <text x={BAR_X + BAR_W / 2} y={CHART_TOP - 2} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-rose-700 dark:fill-rose-300">
-            {totalLabel}: ${total.toFixed(2)}
-          </text>
-        </svg>
+    <div dir="ltr" className="flex flex-col items-center">
+      <span className="mb-2 text-sm font-bold text-rose-700 dark:text-rose-300">
+        {totalLabel}: ${total.toFixed(2)}
+      </span>
+      <div className="flex w-24 flex-col overflow-hidden rounded-xl" style={{ height: 160 }}>
+        {segments.map((seg) => (
+          <div key={seg.key} className={`flex items-center justify-center ${seg.colorClass}`} style={{ height: `${(seg.amount / total) * 100}%` }} />
+        ))}
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+      <div className="mt-3 space-y-1 text-xs">
+        {segments.map((seg) => (
+          <div key={seg.key} className="flex items-center gap-1.5">
+            <span className={`h-2 w-2 shrink-0 rounded-full ${seg.colorClass}`} />
+            <span className="text-zinc-600 dark:text-zinc-300">{seg.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

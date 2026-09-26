@@ -1,40 +1,53 @@
+import { ChevronRight } from "lucide-react";
+
 type SalesTaxAddVsReverseModeDiagramProps = {
   addModeLabel: string;
   reverseModeLabel: string;
-  caption: string;
+  priceLabel: string;
+  totalLabel: string;
 };
 
 const PRICE = 100;
 const RATE = 0.08;
 const TOTAL = PRICE * (1 + RATE);
 
-/**
- * Previously two rows of bordered boxes connected by ×(1+r)/÷(1+r) operator
- * symbols and arrows — the banned "boxes linked by an arithmetic symbol"
- * pattern. Replaced with a plain two-row worked-example table: the formula
- * lives as ordinary text inside one cell, not as a glyph floating between
- * two separately-bordered shapes.
- */
-export default function SalesTaxAddVsReverseModeDiagram({ addModeLabel, reverseModeLabel, caption }: SalesTaxAddVsReverseModeDiagramProps) {
+function MiniBox({ label, value, colorClass }: { label: string; value: string; colorClass: string }) {
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
-        <dl className="space-y-3 text-sm">
-          <div>
-            <dt className="font-semibold text-teal-700 dark:text-teal-300">{addModeLabel}</dt>
-            <dd className="mt-0.5 font-mono text-zinc-700 dark:text-zinc-200">
-              ${PRICE.toFixed(2)} × {(1 + RATE).toFixed(2)} = <span className="font-bold text-teal-700 dark:text-teal-300">${TOTAL.toFixed(2)}</span>
-            </dd>
-          </div>
-          <div className="border-t border-zinc-200 pt-3 dark:border-zinc-700">
-            <dt className="font-semibold text-sky-700 dark:text-sky-300">{reverseModeLabel}</dt>
-            <dd className="mt-0.5 font-mono text-zinc-700 dark:text-zinc-200">
-              ${TOTAL.toFixed(2)} ÷ {(1 + RATE).toFixed(2)} = <span className="font-bold text-sky-700 dark:text-sky-300">${PRICE.toFixed(2)}</span>
-            </dd>
-          </div>
-        </dl>
+    <div className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl px-3 py-3 text-center ${colorClass}`}>
+      <span className="text-[10px] font-medium opacity-80">{label}</span>
+      <span dir="ltr" className="font-mono text-sm font-bold">
+        {value}
+      </span>
+    </div>
+  );
+}
+
+/**
+ * Plain HTML: two small boxes joined by a single chevron icon — the exact
+ * hierarchical pattern FuelFlowDiagram already established as the fix for
+ * "boxes connected by an operator/arrow," ported here in place of the
+ * previous two rows of bordered SVG boxes linked by ×(1+r)/÷(1+r) text and
+ * arrow glyphs.
+ */
+export default function SalesTaxAddVsReverseModeDiagram({ addModeLabel, reverseModeLabel, priceLabel, totalLabel }: SalesTaxAddVsReverseModeDiagramProps) {
+  return (
+    <div className="space-y-4">
+      <div>
+        <p className="mb-1.5 text-xs font-bold text-teal-600 dark:text-teal-400">{addModeLabel}</p>
+        <div className="flex items-center gap-2">
+          <MiniBox label={priceLabel} value={`$${PRICE.toFixed(2)}`} colorClass="bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300" />
+          <ChevronRight size={16} className="shrink-0 rtl:rotate-180 text-teal-400 dark:text-teal-500" aria-hidden="true" />
+          <MiniBox label={totalLabel} value={`$${TOTAL.toFixed(2)}`} colorClass="bg-teal-600 text-white dark:bg-teal-500" />
+        </div>
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+      <div>
+        <p className="mb-1.5 text-xs font-bold text-sky-600 dark:text-sky-400">{reverseModeLabel}</p>
+        <div className="flex items-center gap-2">
+          <MiniBox label={totalLabel} value={`$${TOTAL.toFixed(2)}`} colorClass="bg-sky-600 text-white dark:bg-sky-500" />
+          <ChevronRight size={16} className="shrink-0 rtl:rotate-180 text-sky-400 dark:text-sky-500" aria-hidden="true" />
+          <MiniBox label={priceLabel} value={`$${PRICE.toFixed(2)}`} colorClass="bg-sky-50 text-sky-700 dark:bg-sky-500/10 dark:text-sky-300" />
+        </div>
+      </div>
+    </div>
   );
 }

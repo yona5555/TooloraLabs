@@ -1,100 +1,79 @@
 type SalesTaxVsVatFlowDiagramProps = {
-  title: string;
   salesTaxLabel: string;
   vatLabel: string;
   stageLabel: string;
   taxHereLabel: string;
   noTaxLabel: string;
-  caption: string;
-  /** When true, the stage sequence is laid out right-to-left (stage 1 on the
-   * right) and the connecting arrows point left, matching RTL reading order
-   * instead of forcing an LTR-looking flow inside an Arabic page. */
-  isRtl?: boolean;
 };
 
-const WIDTH = 340;
-const STAGE_W = 84;
-const STAGE_GAP = 14;
-const ROW_H = 46;
-const ROW_GAP = 34;
 const STAGE_COUNT = 3;
 
-export default function SalesTaxVsVatFlowDiagram({
-  title,
-  salesTaxLabel,
-  vatLabel,
-  stageLabel,
-  taxHereLabel,
-  noTaxLabel,
-  caption,
-  isRtl = false,
-}: SalesTaxVsVatFlowDiagramProps) {
-  const height = ROW_H * 2 + ROW_GAP + 24;
-  const arrow = isRtl ? "←" : "→";
+type StageRowProps = {
+  label: string;
+  colorClass: string;
+  dotColorClass: string;
+  lineColorClass: string;
+  stageLabel: string;
+  taxHereLabel: string;
+  noTaxLabel: string;
+  taxAt: (stage: number) => boolean;
+};
 
-  // Physical slot j (always left-to-right on screen) shows logical stage
-  // `stageAt(j)`. In RTL, stage 1 sits in the rightmost slot so the sequence
-  // still reads first-to-last in the page's natural reading direction.
-  function stageAt(slot: number) {
-    return isRtl ? STAGE_COUNT - 1 - slot : slot;
-  }
-
+function StageRow({ label, colorClass, dotColorClass, lineColorClass, stageLabel, taxHereLabel, noTaxLabel, taxAt }: StageRowProps) {
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={title} className="h-auto w-full" style={{ minWidth: 300 }}>
-          <text x={0} y={12} fontSize={10} fontWeight={700} className="fill-indigo-600 dark:fill-indigo-400">
-            {salesTaxLabel}
-          </text>
-          {Array.from({ length: STAGE_COUNT }, (_, slot) => {
-            const x = slot * (STAGE_W + STAGE_GAP);
-            const stage = stageAt(slot);
-            const isLast = stage === STAGE_COUNT - 1;
-            return (
-              <g key={`st-${slot}`}>
-                <rect x={x} y={20} width={STAGE_W} height={ROW_H} rx={6} className={isLast ? "fill-indigo-100 stroke-indigo-500 dark:fill-indigo-500/20 dark:stroke-indigo-400" : "fill-zinc-50 stroke-zinc-300 dark:fill-zinc-800 dark:stroke-zinc-600"} strokeWidth={1.5} />
-                <text x={x + STAGE_W / 2} y={20 + ROW_H / 2 - 3} textAnchor="middle" fontSize={9} className="fill-zinc-600 dark:fill-zinc-300">
-                  {stageLabel} {stage + 1}
-                </text>
-                <text x={x + STAGE_W / 2} y={20 + ROW_H / 2 + 12} textAnchor="middle" fontSize={9} fontWeight={700} className={isLast ? "fill-indigo-700 dark:fill-indigo-300" : "fill-zinc-400 dark:fill-zinc-500"}>
-                  {isLast ? taxHereLabel : noTaxLabel}
-                </text>
-                {slot < STAGE_COUNT - 1 && (
-                  <text x={x + STAGE_W + STAGE_GAP / 2} y={20 + ROW_H / 2 + 4} textAnchor="middle" fontSize={12} className="fill-zinc-400 dark:fill-zinc-500">
-                    {arrow}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-
-          <text x={0} y={ROW_H + ROW_GAP - 8} fontSize={10} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
-            {vatLabel}
-          </text>
-          {Array.from({ length: STAGE_COUNT }, (_, slot) => {
-            const x = slot * (STAGE_W + STAGE_GAP);
-            const y = ROW_H + ROW_GAP;
-            const stage = stageAt(slot);
-            return (
-              <g key={`vat-${slot}`}>
-                <rect x={x} y={y} width={STAGE_W} height={ROW_H} rx={6} className="fill-rose-50 stroke-rose-400 dark:fill-rose-500/10 dark:stroke-rose-400/60" strokeWidth={1.5} />
-                <text x={x + STAGE_W / 2} y={y + ROW_H / 2 - 3} textAnchor="middle" fontSize={9} className="fill-zinc-600 dark:fill-zinc-300">
-                  {stageLabel} {stage + 1}
-                </text>
-                <text x={x + STAGE_W / 2} y={y + ROW_H / 2 + 12} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-rose-600 dark:fill-rose-400">
-                  {taxHereLabel}
-                </text>
-                {slot < STAGE_COUNT - 1 && (
-                  <text x={x + STAGE_W + STAGE_GAP / 2} y={y + ROW_H / 2 + 4} textAnchor="middle" fontSize={12} className="fill-zinc-400 dark:fill-zinc-500">
-                    {arrow}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
+    <div>
+      <p className={`text-xs font-bold ${colorClass}`}>{label}</p>
+      <div className="mt-2 flex items-center">
+        {Array.from({ length: STAGE_COUNT }, (_, i) => (
+          <div key={i} className="flex flex-1 items-center last:flex-none">
+            <div className="flex shrink-0 flex-col items-center gap-1 text-center">
+              <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white ${taxAt(i) ? dotColorClass : "bg-zinc-300 dark:bg-zinc-600"}`}>{i + 1}</span>
+              <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
+                {stageLabel} {i + 1}
+              </span>
+              <span className={`text-[10px] font-bold ${taxAt(i) ? colorClass : "text-zinc-400 dark:text-zinc-500"}`}>{taxAt(i) ? taxHereLabel : noTaxLabel}</span>
+            </div>
+            {i < STAGE_COUNT - 1 && <span className={`mx-1 h-0.5 flex-1 rounded ${lineColorClass}`} aria-hidden="true" />}
+          </div>
+        ))}
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+    </div>
+  );
+}
+
+/**
+ * Plain HTML row of numbered stage badges connected by a bare CSS line —
+ * no bordered boxes, no arrow glyphs. Previously three SVG <rect> stages
+ * per row linked by "→"/"←" text — the exact banned "boxes connected by an
+ * arrow" pattern, forced into `dir="ltr"` so the stage order never
+ * actually flipped on the Arabic page despite the isRtl prop it carried.
+ * A plain HTML flex row has no such problem: it reverses on its own under
+ * `dir="rtl"`, the same way BreakEvenBusinessTypeDiagram already does with
+ * zero direction-handling code, so this component carries none either.
+ */
+export default function SalesTaxVsVatFlowDiagram({ salesTaxLabel, vatLabel, stageLabel, taxHereLabel, noTaxLabel }: SalesTaxVsVatFlowDiagramProps) {
+  return (
+    <div className="space-y-5">
+      <StageRow
+        label={salesTaxLabel}
+        colorClass="text-indigo-600 dark:text-indigo-400"
+        dotColorClass="bg-indigo-600 dark:bg-indigo-400"
+        lineColorClass="bg-indigo-200 dark:bg-indigo-500/30"
+        stageLabel={stageLabel}
+        taxHereLabel={taxHereLabel}
+        noTaxLabel={noTaxLabel}
+        taxAt={(i) => i === STAGE_COUNT - 1}
+      />
+      <StageRow
+        label={vatLabel}
+        colorClass="text-rose-600 dark:text-rose-400"
+        dotColorClass="bg-rose-500 dark:bg-rose-400"
+        lineColorClass="bg-rose-200 dark:bg-rose-500/30"
+        stageLabel={stageLabel}
+        taxHereLabel={taxHereLabel}
+        noTaxLabel={noTaxLabel}
+        taxAt={() => true}
+      />
+    </div>
   );
 }
