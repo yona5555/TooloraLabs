@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import InventoryInputPanel from "./InventoryInputPanel";
@@ -167,22 +168,20 @@ export default function InventoryValuationTool({ education }: { education: React
               <InventoryMethodReference />
 
               {hasCalculated && stockLevelItems && stockLevelItems.length > 0 && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{tDiagrams("stockLevelDiagram.title")}</h3>
+                <SectionCard title={tDiagrams("stockLevelDiagram.title")}>
                   <InventoryStockLevelBarDiagram items={stockLevelItems} caption={tDiagrams("stockLevelDiagram.caption")} />
-                </div>
+                </SectionCard>
               )}
 
               {hasCalculated && compositionItems && compositionItems.length > 0 && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{tDiagrams("compositionDiagram.title")}</h3>
+                <SectionCard title={tDiagrams("compositionDiagram.title")}>
                   <InventoryPerItemCompositionBar
                     items={compositionItems}
                     soldLabel={tDiagrams("compositionDiagram.soldLabel")}
                     endingLabel={tDiagrams("compositionDiagram.endingLabel")}
                     caption={tDiagrams("compositionDiagram.caption")}
                   />
-                </div>
+                </SectionCard>
               )}
             </div>
           }
