@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
@@ -14,6 +15,7 @@ import InvoiceExampleLineBreakdownBar from "./InvoiceExampleLineBreakdownBar";
 import InvoiceRecurringBillingLineChart from "./InvoiceRecurringBillingLineChart";
 import InvoiceUblAdoptionDiagram from "./InvoiceUblAdoptionDiagram";
 import InvoiceQuoteVsInvoiceDiagram from "./InvoiceQuoteVsInvoiceDiagram";
+import InvoiceWorkedExampleNote from "./InvoiceWorkedExampleNote";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -21,6 +23,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function InvoiceEducation() {
   const t = await getTranslations("tools.invoice-generator.education");
+  const tRoot = await getTranslations("tools.invoice-generator");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -33,28 +36,57 @@ export default async function InvoiceEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <InvoiceFlowDiagram
-          subtotalLabel={t("intro.diagram.subtotalLabel")}
-          discountLabel={t("intro.diagram.discountLabel")}
-          taxLabel={t("intro.diagram.taxLabel")}
-          totalLabel={t("intro.diagram.totalLabel")}
-          caption={t("intro.diagram.caption")}
-        />
-        <InvoiceNet30TimelineDiagram
-          issueLabel={t("intro.net30Diagram.issueLabel")}
-          dueLabel={t("intro.net30Diagram.dueLabel")}
-          creditPeriodLabel={t("intro.net30Diagram.creditPeriodLabel")}
-          caption={t("intro.net30Diagram.caption")}
-        />
-        <InvoiceTwoExamplesCompareBar
-          title={t("intro.twoExamplesBar.title")}
-          taxLabel={t("intro.twoExamplesBar.taxLabel")}
-          caption={t("intro.twoExamplesBar.caption")}
-          examples={[
-            { key: "ex1", label: t("intro.twoExamplesBar.label1"), taxable: 520, tax: 78 },
-            { key: "ex2", label: t("intro.twoExamplesBar.label2"), taxable: 800, tax: 80 },
-          ]}
-        />
+
+        <SectionCard title={t("intro.diagram.title")}>
+          <InvoiceFlowDiagram
+            subtotalLabel={t("intro.diagram.subtotalLabel")}
+            discountLabel={t("intro.diagram.discountLabel")}
+            taxLabel={t("intro.diagram.taxLabel")}
+            totalLabel={t("intro.diagram.totalLabel")}
+            caption={t("intro.diagram.caption")}
+            workedExampleTitle={tRoot("workedExampleTitle")}
+          />
+        </SectionCard>
+
+        <SectionCard title={t("intro.net30Diagram.title")}>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+            <div className="min-w-0 flex-1">
+              <InvoiceNet30TimelineDiagram
+                issueLabel={t("intro.net30Diagram.issueLabel")}
+                dueLabel={t("intro.net30Diagram.dueLabel")}
+                creditPeriodLabel={t("intro.net30Diagram.creditPeriodLabel")}
+                caption={t("intro.net30Diagram.caption")}
+              />
+            </div>
+            <InvoiceWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("intro.net30Diagram.issueLabel"), value: "Mar 1" },
+                { label: t("intro.net30Diagram.dueLabel"), value: "Mar 31" },
+                { label: "Net", value: "30 days", emphasize: true },
+              ]}
+            />
+          </div>
+        </SectionCard>
+
+        <SectionCard title={t("intro.twoExamplesBar.title")}>
+          <InvoiceTwoExamplesCompareBar
+            title={t("intro.twoExamplesBar.title")}
+            taxLabel={t("intro.twoExamplesBar.taxLabel")}
+            caption={t("intro.twoExamplesBar.caption")}
+            examples={[
+              { key: "ex1", label: t("intro.twoExamplesBar.label1"), taxable: 520, tax: 78 },
+              { key: "ex2", label: t("intro.twoExamplesBar.label2"), taxable: 800, tax: 80 },
+            ]}
+          />
+          <InvoiceWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("intro.twoExamplesBar.label1"), value: "$598.00" },
+              { label: t("intro.twoExamplesBar.label2"), value: "$880.00" },
+            ]}
+          />
+        </SectionCard>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -67,20 +99,44 @@ export default async function InvoiceEducation() {
             </div>
           ))}
         </dl>
-        <InvoiceLineItemQtyPriceDiagram
-          title={t("variables.lineItemDiagram.title")}
-          lineTotalLabel={t("variables.lineItemDiagram.lineTotalLabel")}
-          caption={t("variables.lineItemDiagram.caption")}
-          items={[
-            { key: "design", label: t("variables.lineItemDiagram.item1"), qty: 10, unitPrice: 50 },
-            { key: "hosting", label: t("variables.lineItemDiagram.item2"), qty: 1, unitPrice: 20 },
-          ]}
-        />
-        <InvoiceDiscountRateGauge
-          valueLabel="20%"
-          caption={t("variables.discountGauge.caption")}
-          captionColorClass="text-amber-600 dark:text-amber-400"
-        />
+
+        <SectionCard title={t("variables.lineItemDiagram.title")}>
+          <InvoiceLineItemQtyPriceDiagram
+            title={t("variables.lineItemDiagram.title")}
+            lineTotalLabel={t("variables.lineItemDiagram.lineTotalLabel")}
+            caption={t("variables.lineItemDiagram.caption")}
+            items={[
+              { key: "design", label: t("variables.lineItemDiagram.item1"), qty: 10, unitPrice: 50 },
+              { key: "hosting", label: t("variables.lineItemDiagram.item2"), qty: 1, unitPrice: 20 },
+            ]}
+          />
+          <InvoiceWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("variables.lineItemDiagram.item1"), value: "10 × $50.00 = $500.00" },
+              { label: t("variables.lineItemDiagram.item2"), value: "1 × $20.00 = $20.00" },
+              { label: "Subtotal", value: "$520.00", emphasize: true },
+            ]}
+          />
+        </SectionCard>
+
+        <SectionCard title={t("variables.discountGauge.title")}>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+            <div className="shrink-0">
+              <InvoiceDiscountRateGauge valueLabel="20%" caption={t("variables.discountGauge.caption")} captionColorClass="text-amber-600 dark:text-amber-400" />
+            </div>
+            <InvoiceWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: "None", value: "0–5%" },
+                { label: "Modest", value: "5–15%" },
+                { label: "Notable", value: "15–25%" },
+                { label: "Steep", value: "25–30%" },
+                { label: "This example", value: "20%", emphasize: true },
+              ]}
+            />
+          </div>
+        </SectionCard>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -103,26 +159,49 @@ export default async function InvoiceEducation() {
             </tbody>
           </table>
         </div>
-        <InvoiceExampleBreakdownDonut
-          centerValue="$880"
-          centerLabel={t("examples.breakdownDonut.centerLabel")}
-          caption={t("examples.breakdownDonut.caption")}
-          segments={[
-            { key: "taxable", value: 800, label: t("examples.breakdownDonut.taxable"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
-            { key: "tax", value: 80, label: t("examples.breakdownDonut.tax"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
-          ]}
-        />
-        <InvoiceExampleLineBreakdownBar
-          title={t("examples.lineBreakdownBar.title")}
-          caption={t("examples.lineBreakdownBar.caption")}
-          taxAmount={78}
-          taxLabel={t("examples.lineBreakdownBar.taxLabel")}
-          totalLabel={t("examples.lineBreakdownBar.totalLabel")}
-          items={[
-            { key: "design", label: t("examples.lineBreakdownBar.item1"), amount: 500 },
-            { key: "hosting", label: t("examples.lineBreakdownBar.item2"), amount: 20 },
-          ]}
-        />
+
+        <SectionCard title={t("examples.breakdownDonut.title")}>
+          <InvoiceExampleBreakdownDonut
+            centerValue="$880"
+            centerLabel={t("examples.breakdownDonut.centerLabel")}
+            caption={t("examples.breakdownDonut.caption")}
+            segments={[
+              { key: "taxable", value: 800, label: t("examples.breakdownDonut.taxable"), colorClass: "stroke-rose-500 dark:stroke-rose-400" },
+              { key: "tax", value: 80, label: t("examples.breakdownDonut.tax"), colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+            ]}
+          />
+          <InvoiceWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("examples.breakdownDonut.taxable"), value: "$800.00" },
+              { label: t("examples.breakdownDonut.tax"), value: "$80.00" },
+              { label: t("examples.breakdownDonut.centerLabel"), value: "$880.00", emphasize: true },
+            ]}
+          />
+        </SectionCard>
+
+        <SectionCard title={t("examples.lineBreakdownBar.title")}>
+          <InvoiceExampleLineBreakdownBar
+            title={t("examples.lineBreakdownBar.title")}
+            caption={t("examples.lineBreakdownBar.caption")}
+            taxAmount={78}
+            taxLabel={t("examples.lineBreakdownBar.taxLabel")}
+            totalLabel={t("examples.lineBreakdownBar.totalLabel")}
+            items={[
+              { key: "design", label: t("examples.lineBreakdownBar.item1"), amount: 500 },
+              { key: "hosting", label: t("examples.lineBreakdownBar.item2"), amount: 20 },
+            ]}
+          />
+          <InvoiceWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("examples.lineBreakdownBar.item1"), value: "$500.00" },
+              { label: t("examples.lineBreakdownBar.item2"), value: "$20.00" },
+              { label: t("examples.lineBreakdownBar.taxLabel"), value: "$78.00" },
+              { label: t("examples.lineBreakdownBar.totalLabel"), value: "$598.00", emphasize: true },
+            ]}
+          />
+        </SectionCard>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -135,28 +214,49 @@ export default async function InvoiceEducation() {
             </div>
           ))}
         </div>
-        <InvoiceRecurringBillingLineChart
-          title={t("applications.recurringChart.title")}
-          caption={t("applications.recurringChart.caption")}
-          points={[
-            { key: "m1", label: t("applications.recurringChart.month1"), total: 598 },
-            { key: "m2", label: t("applications.recurringChart.month2"), total: 598 },
-            { key: "m3", label: t("applications.recurringChart.month3"), total: 598 },
-            { key: "m4", label: t("applications.recurringChart.month4"), total: 598 },
-          ]}
-        />
-        <InvoiceUblAdoptionDiagram
-          regions={["EU", "Turkey", "Peru", "Colombia", "Panama"]}
-          mandatedLabel={t("applications.ublDiagram.mandatedLabel")}
-          caption={t("applications.ublDiagram.caption")}
-        />
-        <InvoiceQuoteVsInvoiceDiagram
-          quoteLabel={t("applications.quoteVsInvoice.quoteLabel")}
-          invoiceLabel={t("applications.quoteVsInvoice.invoiceLabel")}
-          quoteTraits={t.raw("applications.quoteVsInvoice.quoteTraits") as string[]}
-          invoiceTraits={t.raw("applications.quoteVsInvoice.invoiceTraits") as string[]}
-          caption={t("applications.quoteVsInvoice.caption")}
-        />
+
+        <SectionCard title={t("applications.recurringChart.title")}>
+          <InvoiceRecurringBillingLineChart
+            title={t("applications.recurringChart.title")}
+            caption={t("applications.recurringChart.caption")}
+            points={[
+              { key: "m1", label: t("applications.recurringChart.month1"), total: 598 },
+              { key: "m2", label: t("applications.recurringChart.month2"), total: 598 },
+              { key: "m3", label: t("applications.recurringChart.month3"), total: 598 },
+              { key: "m4", label: t("applications.recurringChart.month4"), total: 598 },
+            ]}
+          />
+          <InvoiceWorkedExampleNote
+            title={tRoot("workedExampleTitle")}
+            rows={[
+              { label: t("applications.recurringChart.month1"), value: "$598.00" },
+              { label: t("applications.recurringChart.month4"), value: "$598.00" },
+              { label: "4-month total", value: "$2,392.00", emphasize: true },
+            ]}
+          />
+        </SectionCard>
+
+        {/* Country names here are real regulatory facts (which jurisdictions legally mandate
+            structured e-invoicing), not decorative "flavor" content — the same category as
+            Sales Tax Calculator's nexus case law and state tax rates, kept intact for the
+            same reason. */}
+        <SectionCard title={t("applications.ublDiagram.title")}>
+          <InvoiceUblAdoptionDiagram
+            regions={["EU", "Turkey", "Peru", "Colombia", "Panama"]}
+            mandatedLabel={t("applications.ublDiagram.mandatedLabel")}
+            caption={t("applications.ublDiagram.caption")}
+          />
+        </SectionCard>
+
+        <SectionCard title={t("applications.quoteVsInvoice.title")}>
+          <InvoiceQuoteVsInvoiceDiagram
+            quoteLabel={t("applications.quoteVsInvoice.quoteLabel")}
+            invoiceLabel={t("applications.quoteVsInvoice.invoiceLabel")}
+            quoteTraits={t.raw("applications.quoteVsInvoice.quoteTraits") as string[]}
+            invoiceTraits={t.raw("applications.quoteVsInvoice.invoiceTraits") as string[]}
+            caption={t("applications.quoteVsInvoice.caption")}
+          />
+        </SectionCard>
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

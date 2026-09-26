@@ -259,22 +259,19 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
               <ViewDocsLink slug="invoice-generator" />
 
               {hasCalculated && lineItemBars && lineItemBars.length > 1 && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{tDiagrams("lineItemsDiagram.title")}</h3>
+                <SectionCard title={tDiagrams("lineItemsDiagram.title")}>
                   <InvoiceLineItemsBarDiagram items={lineItemBars} formatValue={money} caption={tDiagrams("lineItemsDiagram.caption")} />
-                </div>
+                </SectionCard>
               )}
 
               {hasCalculated && waterfallStages && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{tDiagrams("waterfallDiagram.title")}</h3>
+                <SectionCard title={tDiagrams("waterfallDiagram.title")}>
                   <InvoiceRunningTotalWaterfall stages={waterfallStages} formatValue={money} caption={tDiagrams("waterfallDiagram.caption")} />
-                </div>
+                </SectionCard>
               )}
 
               {hasCalculated && showBeforeAfterDiscount && result && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{tDiagrams("discountCompareDiagram.title")}</h3>
+                <SectionCard title={tDiagrams("discountCompareDiagram.title")}>
                   <InvoiceBeforeAfterDiscountBar
                     beforeLabel={tDiagrams("discountCompareDiagram.beforeLabel")}
                     afterLabel={tDiagrams("discountCompareDiagram.afterLabel")}
@@ -284,7 +281,7 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
                     afterFormatted={money(result.total)}
                     caption={tDiagrams("discountCompareDiagram.caption")}
                   />
-                </div>
+                </SectionCard>
               )}
 
               <InvoiceChecklistReference />
