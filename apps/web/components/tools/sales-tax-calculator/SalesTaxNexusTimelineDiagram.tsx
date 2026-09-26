@@ -9,8 +9,9 @@ type SalesTaxNexusTimelineDiagramProps = {
 };
 
 const WIDTH = 320;
-const HEIGHT = 96;
+const HEIGHT = 112;
 const LINE_Y = 50;
+const LABEL_W = 140;
 
 export default function SalesTaxNexusTimelineDiagram({
   quillLabel,
@@ -35,23 +36,23 @@ export default function SalesTaxNexusTimelineDiagram({
           <text x={10} y={LINE_Y - 12} textAnchor="start" fontSize={9} fontWeight={700} className="fill-zinc-500 dark:fill-zinc-400">
             {quillYear}
           </text>
-          <text x={10} y={LINE_Y + 24} textAnchor="start" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">
-            {quillLabel}
-          </text>
-          <text x={10} y={LINE_Y + 36} textAnchor="start" fontSize={8} fontWeight={700} className="fill-zinc-600 dark:fill-zinc-300">
-            {physicalLabel}
-          </text>
+          <foreignObject x={0} y={LINE_Y + 10} width={LABEL_W} height={HEIGHT - LINE_Y - 10}>
+            <div dir="ltr" className="text-[8px] leading-tight text-zinc-500 dark:text-zinc-400">
+              {quillLabel}
+              <div className="mt-0.5 font-bold text-zinc-600 dark:text-zinc-300">{physicalLabel}</div>
+            </div>
+          </foreignObject>
 
           <circle cx={midX} cy={LINE_Y} r={6} className="fill-fuchsia-500 dark:fill-fuchsia-400" />
           <text x={midX + 8} y={LINE_Y - 12} textAnchor="start" fontSize={9} fontWeight={700} className="fill-fuchsia-600 dark:fill-fuchsia-400">
             {wayfairYear}
           </text>
-          <text x={midX + 8} y={LINE_Y + 24} textAnchor="start" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">
-            {wayfairLabel}
-          </text>
-          <text x={midX + 8} y={LINE_Y + 36} textAnchor="start" fontSize={8} fontWeight={700} className="fill-fuchsia-700 dark:fill-fuchsia-300">
-            {economicLabel}
-          </text>
+          <foreignObject x={midX + 8} y={LINE_Y + 10} width={WIDTH - midX - 8} height={HEIGHT - LINE_Y - 10}>
+            <div dir="ltr" className="text-[8px] leading-tight text-zinc-500 dark:text-zinc-400">
+              {wayfairLabel}
+              <div className="mt-0.5 font-bold text-fuchsia-700 dark:text-fuchsia-300">{economicLabel}</div>
+            </div>
+          </foreignObject>
         </svg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>

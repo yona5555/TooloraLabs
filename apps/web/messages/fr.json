@@ -13328,7 +13328,8 @@
             "subtotalLabel": "100 $ (sous-total)",
             "taxLabel": "+8 $ de taxe",
             "totalLabel": "108 $ (total)",
-            "caption": "La taxe de vente fait passer un sous-total à un total plus élevé — l'inverse d'une remise, qui réduit un prix. Sous-total de 100 $ + taxe de 8 % (8 $) = total de 108 $."
+            "caption": "La taxe de vente fait passer un sous-total à un total plus élevé — l'inverse d'une remise, qui réduit un prix. Sous-total de 100 $ + taxe de 8 % (8 $) = total de 108 $.",
+            "title": "D'un sous-total à un total"
           },
           "vsVatDiagram": {
             "title": "Taxe de vente vs. TVA : où la taxe est-elle perçue",
@@ -13337,14 +13338,17 @@
             "stageLabel": "Étape",
             "taxHereLabel": "Taxe ici",
             "noTaxLabel": "Pas de taxe",
-            "caption": "La taxe de vente est perçue une seule fois, uniquement lors de la vente au détail finale. La TVA est perçue à chaque étape de production tout au long de la chaîne."
+            "caption": "La taxe de vente est perçue une seule fois, uniquement lors de la vente au détail finale. La TVA est perçue à chaque étape de production tout au long de la chaîne.",
+            "oneTimeLabel": "Perçue une fois, à la vente finale",
+            "everyStageLabel": "Perçue à chaque étape"
           },
           "rateStackDonut": {
             "centerLabel": "taux combiné",
             "caption": "Un taux combiné réel tiré des exemples résolus : 6,5 % état + 1 % comté + 1,5 % ville = 9 % perçus à la caisse.",
             "state": "État",
             "county": "Comté",
-            "city": "Ville"
+            "city": "Ville",
+            "title": "Un taux combiné, par paliers"
           }
         },
         "examples": {
@@ -13381,7 +13385,8 @@
           "noTaxStatesDiagram": {
             "noTaxLabel": "Aucune taxe de vente à l'échelle de l'état",
             "typicalLabel": "Taux combiné typique",
-            "caption": "Le Delaware, le Montana, le New Hampshire et l'Oregon ne perçoivent aucune taxe de vente à l'échelle de l'état — l'Alaska n'a pas non plus de taxe au niveau de l'état, mais permet aux municipalités locales de percevoir la leur."
+            "caption": "Le Delaware, le Montana, le New Hampshire et l'Oregon ne perçoivent aucune taxe de vente à l'échelle de l'état — l'Alaska n'a pas non plus de taxe au niveau de l'état, mais permet aux municipalités locales de percevoir la leur.",
+            "title": "États sans taxe de vente"
           }
         },
         "faq": {
@@ -13499,10 +13504,16 @@
             "reverseModeLabel": "Mode Inverse",
             "priceLabel": "Prix",
             "totalLabel": "Total",
-            "caption": "Le mode Addition multiplie un prix connu par (1 + taux) pour trouver le total ; le mode Inverse divise un total connu par (1 + taux) pour retrouver le prix."
+            "caption": "Le mode Addition multiplie un prix connu par (1 + taux) pour trouver le total ; le mode Inverse divise un total connu par (1 + taux) pour retrouver le prix.",
+            "title": "Ajouter la taxe vs. l'extraire"
           },
           "rateGauge": {
-            "caption": "Le taux combiné réel de New York (8,875 %) se situe dans la zone \"typique\" pour les grandes villes américaines."
+            "caption": "Le taux combiné réel de New York (8,875 %) se situe dans la zone \"typique\" pour les grandes villes américaines.",
+            "title": "Où se situe un taux",
+            "zoneNone": "Aucun",
+            "zoneLow": "Faible",
+            "zoneTypical": "Typique",
+            "zoneHigh": "Élevé"
           }
         },
         "applications": {
@@ -13539,7 +13550,8 @@
             "wayfairLabel": "South Dakota c. Wayfair, Inc.",
             "physicalLabel": "Présence physique requise",
             "economicLabel": "Lien économique — aucune présence physique requise",
-            "caption": "Avant 2018, un vendeur devait avoir une présence physique dans un état pour devoir sa taxe de vente. Wayfair a remplacé cela par le lien économique, basé uniquement sur le volume des ventes."
+            "caption": "Avant 2018, un vendeur devait avoir une présence physique dans un état pour devoir sa taxe de vente. Wayfair a remplacé cela par le lien économique, basé uniquement sur le volume des ventes.",
+            "title": "Quand les règles de lien fiscal ont changé"
           },
           "invoiceBar": {
             "title": "Une facture à plusieurs articles, taxée une seule fois",
@@ -13584,7 +13596,8 @@
       },
       "relatedTools": {
         "title": "Outils professionnels associés"
-      }
+      },
+      "workedExampleTitle": "Exemple Chiffré"
     },
     "image-converter": {
       "title": "Convertisseur d'images",

@@ -13328,7 +13328,8 @@
             "subtotalLabel": "100 $ (subtotal)",
             "taxLabel": "+8 $ de impuesto",
             "totalLabel": "108 $ (total)",
-            "caption": "El impuesto sobre las ventas hace crecer un subtotal hasta convertirlo en un total — lo contrario de un descuento, que reduce un precio. 100 $ de subtotal + 8 % de impuesto (8 $) = 108 $ de total."
+            "caption": "El impuesto sobre las ventas hace crecer un subtotal hasta convertirlo en un total — lo contrario de un descuento, que reduce un precio. 100 $ de subtotal + 8 % de impuesto (8 $) = 108 $ de total.",
+            "title": "De un subtotal a un total"
           },
           "vsVatDiagram": {
             "title": "Impuesto sobre ventas vs. IVA: dónde se cobra el impuesto",
@@ -13337,14 +13338,17 @@
             "stageLabel": "Etapa",
             "taxHereLabel": "Impuesto aquí",
             "noTaxLabel": "Sin impuesto",
-            "caption": "El impuesto sobre ventas se cobra una sola vez, solo en la venta minorista final. El IVA se cobra en cada etapa de producción a lo largo de la cadena."
+            "caption": "El impuesto sobre ventas se cobra una sola vez, solo en la venta minorista final. El IVA se cobra en cada etapa de producción a lo largo de la cadena.",
+            "oneTimeLabel": "Se cobra una vez, en la venta final",
+            "everyStageLabel": "Se cobra en cada etapa"
           },
           "rateStackDonut": {
             "centerLabel": "tasa combinada",
             "caption": "Una tasa combinada real de los ejemplos resueltos: 6.5% estatal + 1% condado + 1.5% ciudad = 9% cobrado en caja.",
             "state": "Estado",
             "county": "Condado",
-            "city": "Ciudad"
+            "city": "Ciudad",
+            "title": "Una tasa combinada, por capas"
           }
         },
         "examples": {
@@ -13381,7 +13385,8 @@
           "noTaxStatesDiagram": {
             "noTaxLabel": "Sin impuesto sobre ventas estatal",
             "typicalLabel": "Tasa combinada típica",
-            "caption": "Delaware, Montana, New Hampshire y Oregón no cobran ningún impuesto sobre ventas estatal — Alaska tampoco tiene impuesto a nivel estatal, pero permite que los municipios locales impongan el suyo propio."
+            "caption": "Delaware, Montana, New Hampshire y Oregón no cobran ningún impuesto sobre ventas estatal — Alaska tampoco tiene impuesto a nivel estatal, pero permite que los municipios locales impongan el suyo propio.",
+            "title": "Estados sin impuesto sobre ventas"
           }
         },
         "faq": {
@@ -13499,10 +13504,16 @@
             "reverseModeLabel": "Modo Inverso",
             "priceLabel": "Precio",
             "totalLabel": "Total",
-            "caption": "El modo Sumar multiplica un precio conocido por (1 + tasa) para hallar el total; el modo Inverso divide un total conocido entre (1 + tasa) para recuperar el precio."
+            "caption": "El modo Sumar multiplica un precio conocido por (1 + tasa) para hallar el total; el modo Inverso divide un total conocido entre (1 + tasa) para recuperar el precio.",
+            "title": "Añadir impuesto frente a extraerlo"
           },
           "rateGauge": {
-            "caption": "La tasa combinada real de la ciudad de Nueva York (8.875%) se ubica en la zona \"típica\" para grandes ciudades de EE. UU."
+            "caption": "La tasa combinada real de la ciudad de Nueva York (8.875%) se ubica en la zona \"típica\" para grandes ciudades de EE. UU.",
+            "title": "Dónde cae una tasa",
+            "zoneNone": "Ninguna",
+            "zoneLow": "Baja",
+            "zoneTypical": "Típica",
+            "zoneHigh": "Alta"
           }
         },
         "applications": {
@@ -13539,7 +13550,8 @@
             "wayfairLabel": "South Dakota v. Wayfair, Inc.",
             "physicalLabel": "Presencia física requerida",
             "economicLabel": "Nexo económico — sin necesidad de presencia física",
-            "caption": "Antes de 2018, un vendedor necesitaba presencia física en un estado para deber su impuesto sobre ventas. Wayfair lo reemplazó por el nexo económico, basado únicamente en el volumen de ventas."
+            "caption": "Antes de 2018, un vendedor necesitaba presencia física en un estado para deber su impuesto sobre ventas. Wayfair lo reemplazó por el nexo económico, basado únicamente en el volumen de ventas.",
+            "title": "Cuando cambiaron las reglas de nexo"
           },
           "invoiceBar": {
             "title": "Una factura con varios artículos, gravada una sola vez",
@@ -13584,7 +13596,8 @@
       },
       "relatedTools": {
         "title": "Herramientas de negocio relacionadas"
-      }
+      },
+      "workedExampleTitle": "Ejemplo Calculado"
     },
     "image-converter": {
       "title": "Conversor de imágenes",

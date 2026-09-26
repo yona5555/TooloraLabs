@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SalesTaxInputPanel from "./SalesTaxInputPanel";
@@ -205,17 +206,15 @@ export default function SalesTaxCalculator({ education }: { education: ReactNode
               <ViewDocsLink slug="sales-tax-calculator" />
 
               {hasCalculated && comparisonBars && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t("comparisonDiagram.title")}</h3>
+                <SectionCard title={t("comparisonDiagram.title")}>
                   <SalesTaxRateComparisonBarDiagram bars={comparisonBars} formatValue={money} caption={t("comparisonDiagram.caption")} />
-                </div>
+                </SectionCard>
               )}
 
               {hasCalculated && totalByRatePoints && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t("totalByRateDiagram.title")}</h3>
+                <SectionCard title={t("totalByRateDiagram.title")}>
                   <SalesTaxTotalByRateDiagram points={totalByRatePoints} currentRate={result?.taxRate ?? 0} caption={t("totalByRateDiagram.caption")} xLabel={t("totalByRateDiagram.xLabel")} />
-                </div>
+                </SectionCard>
               )}
 
               <SalesTaxRatesReference />
