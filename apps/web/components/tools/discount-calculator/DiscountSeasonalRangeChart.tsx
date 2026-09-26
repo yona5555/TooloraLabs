@@ -1,8 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduDonutChart from "./EduDonutChart";
+import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
 
-/** Typical documented US retail seasonal discount ranges, applied to the same $120 item via the tool's own formula — shown as a donut of final prices rather than a bar list. */
+/** Typical documented retail seasonal discount ranges, applied to the same $120 item via the tool's own formula — shown as a donut of final prices rather than a bar list. */
 const PRICE = 120;
 const SEASONS = [
   { key: "clearance", percent: 50, colorClass: "stroke-rose-500 dark:stroke-rose-400", dotColorClass: "bg-rose-500 dark:bg-rose-400" },
@@ -14,6 +15,7 @@ const SEASONS = [
 export default async function DiscountSeasonalRangeChart() {
   const t = await getTranslations("tools.discount-calculator.seasonalRangeChart");
   const tSeasons = await getTranslations("tools.discount-calculator.seasonalRangeChart.seasons");
+  const tRoot = await getTranslations("tools.discount-calculator");
 
   const segments = SEASONS.map((s) => {
     const final = PRICE * (1 - s.percent / 100);
@@ -23,8 +25,11 @@ export default async function DiscountSeasonalRangeChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { price: PRICE.toFixed(2) })}</p>
-      <div className="mt-4">
-        <EduDonutChart segments={segments} ariaLabel={t("title")} />
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="shrink-0">
+          <EduDonutChart segments={segments} ariaLabel={t("title")} />
+        </div>
+        <DiscountWorkedExampleNote title={tRoot("workedExampleTitle")} rows={segments.map((s) => ({ label: s.label, value: s.formatted }))} />
       </div>
     </SectionCard>
   );

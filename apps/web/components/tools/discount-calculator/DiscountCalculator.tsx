@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DiscountInputPanel from "./DiscountInputPanel";
@@ -213,22 +214,20 @@ export default function DiscountCalculator({ education }: { education: ReactNode
               <ViewDocsLink slug="discount-calculator" />
 
               {hasCalculated && waterfallStages && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t("waterfallDiagram.title")}</h3>
+                <SectionCard title={t("waterfallDiagram.title")}>
                   <DiscountLiveWaterfallDiagram stages={waterfallStages} formatValue={money} caption={t("waterfallDiagram.caption")} />
-                </div>
+                </SectionCard>
               )}
 
               {hasCalculated && scalingPoints && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t("scalingDiagram.title")}</h3>
+                <SectionCard title={t("scalingDiagram.title")}>
                   <DiscountSavingsScalingDiagram
                     points={scalingPoints}
                     currentPrice={result?.originalPrice ?? 0}
                     caption={t("scalingDiagram.caption")}
                     xLabel={t("scalingDiagram.xLabel")}
                   />
-                </div>
+                </SectionCard>
               )}
 
               <DiscountStackingReference />

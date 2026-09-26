@@ -12979,7 +12979,11 @@
             "startLabel": "$100 (start)",
             "afterFirstLabel": "$70 (after 30% off)",
             "afterSecondLabel": "$63 (after another 10% off)",
-            "caption": "Each discount applies to the already-discounted price, not the original — so two discounts stack to less than their sum: 30% + 10% is 37% off in total, not 40%."
+            "caption": "Each discount applies to the already-discounted price, not the original — so two discounts stack to less than their sum: 30% + 10% is 37% off in total, not 40%.",
+            "title": "Stacked Discount Path",
+            "step1": "Starting price",
+            "step2": "After first discount",
+            "step3": "After second discount"
           }
         },
         "examples": {
@@ -13181,7 +13185,8 @@
         "price": "Price",
         "discountPercent": "Discount %",
         "savings": "Savings",
-        "finalRow": "Final price: ${value}"
+        "finalRow": "Final price: ${value}",
+        "finalLabel": "Final price"
       },
       "percentComparisonChart": {
         "title": "Final Price by Discount Percentage",
@@ -13196,7 +13201,8 @@
         "caption": "Two 20%-then-10% discounts vs. one flat 30% discount, same ${price} item.",
         "stacked": "20% then 10% (stacked)",
         "flat": "30% flat",
-        "note": "Stacked percentage discounts apply to an already-reduced price, so they never add up to a simple sum."
+        "note": "Stacked percentage discounts apply to an already-reduced price, so they never add up to a simple sum.",
+        "differenceLabel": "Stacked costs more by"
       },
       "taxAfterDiscountDiagram": {
         "title": "Discount Before Tax",
@@ -13237,7 +13243,8 @@
         "caption": "A flat ${flat}-off coupon vs. a {percent}%-off coupon, at two price points either side of the breakeven.",
         "flatAt": "${price} item, ${flat} off",
         "percentAt": "${price} item, {percent}% off"
-      }
+      },
+      "workedExampleTitle": "Worked Example"
     },
     "sales-tax-calculator": {
       "title": "Sales Tax Calculator",

@@ -33,12 +33,7 @@ export default async function DiscountEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <DiscountStackDiagram
-          startLabel={t("intro.diagram.startLabel")}
-          afterFirstLabel={t("intro.diagram.afterFirstLabel")}
-          afterSecondLabel={t("intro.diagram.afterSecondLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <DiscountStackDiagram />
         <DiscountFormulaDiagram />
         <DiscountPercentComparisonChart />
       </InfoSection>

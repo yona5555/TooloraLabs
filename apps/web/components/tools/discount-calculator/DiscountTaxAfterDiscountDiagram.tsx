@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
-/** Real US retail convention: discount is applied to the price first, then sales tax is computed on the discounted amount, not the original. */
+/** Real retail convention: discount is applied to the price first, then sales tax is computed on the discounted amount, not the original. */
 const PRICE = 120;
 const DISCOUNT_PERCENT = 25;
 const AFTER_DISCOUNT = PRICE * (1 - DISCOUNT_PERCENT / 100);
