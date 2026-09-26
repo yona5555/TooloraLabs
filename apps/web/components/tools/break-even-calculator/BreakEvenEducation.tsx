@@ -156,11 +156,14 @@ export default async function BreakEvenEducation() {
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
-        {/* The scenario summary table and the bar+donut below it are one continuous worked
-            example (both describe the same $5,000-profit-goal scenario), so they share a single
-            framed card instead of being split into two redundant back-to-back blue cards. */}
+        {/* §32 part 6: two genuinely different indicator types (a bar-pair comparison of unit
+            counts, and a donut composition of dollar amounts) were previously merged under one
+            shared SectionCard and one shared scenario table — now fully split into two
+            independent cards, each with its own heading, intro sentence, and WORKED EXAMPLE
+            table that explains only that indicator's own comparison. */}
         <SectionCard title={t("examples.scenarioCompareBar.title")}>
-          <div dir="ltr" className="overflow-x-auto">
+          <p className="text-sm opacity-80">{t("examples.scenarioCompareBar.intro")}</p>
+          <div dir="ltr" className="mt-3 overflow-x-auto">
             <table className="w-full min-w-[420px] border-collapse text-sm">
               <thead>
                 <tr className="border-b border-current/30 text-start">
@@ -178,11 +181,7 @@ export default async function BreakEvenEducation() {
               </tbody>
             </table>
           </div>
-          {/* Same reference flex-row pattern as the $50-price section above (and the same
-              fuel-cost-calculator layout both are modeled on): both pieces shrink-0 at a
-              consistent, capped medium width, centered together — not two independently-scaled
-              charts stacked with mismatched effective sizes. */}
-          <div className="mt-4 flex flex-col items-center gap-8 lg:flex-row lg:justify-center">
+          <div className="mt-4 flex flex-col items-center gap-6 lg:flex-row lg:justify-center">
             <div className="w-full max-w-xs shrink-0">
               <BreakEvenTwoScenarioCompareBar
                 title={t("examples.scenarioCompareBar.title")}
@@ -193,6 +192,25 @@ export default async function BreakEvenEducation() {
                 ]}
               />
             </div>
+            <BreakEvenWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("examples.scenarioCompareBar.label1"), value: "334" },
+                { label: t("examples.scenarioCompareBar.label2"), value: "500" },
+                {
+                  label: t("examples.scenarioCompareBar.diffLabel"),
+                  value: "+166",
+                  emphasize: true,
+                  note: t("examples.scenarioCompareBar.diffNote", { percent: "+49.7%" }),
+                },
+              ]}
+            />
+          </div>
+        </SectionCard>
+
+        <SectionCard title={t("examples.revenueDonut.title")}>
+          <p className="text-sm opacity-80">{t("examples.revenueDonut.intro")}</p>
+          <div className="mt-4 flex flex-col items-center gap-6 lg:flex-row lg:justify-center">
             <div className="shrink-0">
               <BreakEvenRevenueDonut
                 ariaLabel={t("examples.revenueDonut.centerLabel")}
@@ -204,6 +222,15 @@ export default async function BreakEvenEducation() {
               />
               <p className="mt-2 text-center text-xs opacity-70">{t("examples.revenueDonut.caption")}</p>
             </div>
+            <BreakEvenWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("examples.revenueDonut.fixed"), value: "$10,000" },
+                { label: t("examples.revenueDonut.variable"), value: "$10,000" },
+                { label: t("examples.revenueDonut.profit"), value: "$5,000" },
+                { label: t("examples.revenueDonut.totalLabel"), value: "$25,000", emphasize: true },
+              ]}
+            />
           </div>
         </SectionCard>
       </InfoSection>
