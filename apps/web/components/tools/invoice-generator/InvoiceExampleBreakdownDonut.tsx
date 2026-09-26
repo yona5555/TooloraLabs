@@ -4,7 +4,6 @@ type InvoiceExampleBreakdownDonutProps = {
   segments: Segment[];
   centerValue: string;
   centerLabel: string;
-  caption: string;
 };
 
 const SIZE = 168;
@@ -12,7 +11,8 @@ const STROKE = 20;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-export default function InvoiceExampleBreakdownDonut({ segments, centerValue, centerLabel, caption }: InvoiceExampleBreakdownDonutProps) {
+/** Single continuous SVG ring — a legitimate quantitative shape, not bordered boxes linked by arrows. */
+export default function InvoiceExampleBreakdownDonut({ segments, centerValue, centerLabel }: InvoiceExampleBreakdownDonutProps) {
   const total = segments.reduce((sum, s) => sum + s.value, 0);
   const center = SIZE / 2;
 
@@ -28,7 +28,7 @@ export default function InvoiceExampleBreakdownDonut({ segments, centerValue, ce
   );
 
   return (
-    <figure className="my-2 flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div dir="ltr">
         <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-40">
           <circle cx={center} cy={center} r={RADIUS} fill="none" strokeWidth={STROKE} className="stroke-zinc-100 dark:stroke-zinc-800" />
@@ -65,7 +65,6 @@ export default function InvoiceExampleBreakdownDonut({ segments, centerValue, ce
           </div>
         ))}
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+    </div>
   );
 }

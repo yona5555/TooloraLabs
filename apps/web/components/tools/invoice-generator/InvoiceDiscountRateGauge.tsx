@@ -2,8 +2,6 @@ import RatioGauge from "@/components/tool-ui/RatioGauge";
 
 type InvoiceDiscountRateGaugeProps = {
   valueLabel: string;
-  caption: string;
-  captionColorClass: string;
 };
 
 const ZONES = [
@@ -18,13 +16,11 @@ const TICKS = [0, 10, 20, 30];
 // The tool's own worked example: a 20% discount.
 const VALUE = 20;
 
-export default function InvoiceDiscountRateGauge({ valueLabel, caption, captionColorClass }: InvoiceDiscountRateGaugeProps) {
+/** Shared RatioGauge — its own forced dir="ltr" is correct and untouched (numeric ticks must stay LTR even on Arabic pages). */
+export default function InvoiceDiscountRateGauge({ valueLabel }: InvoiceDiscountRateGaugeProps) {
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="flex justify-center">
-        <RatioGauge value={VALUE} domainMin={0} domainMax={30} zones={ZONES} valueLabel={valueLabel} ticks={TICKS} tickFormatter={(t) => `${t}%`} />
-      </div>
-      <figcaption className={`mt-2 max-w-xs text-center text-sm font-semibold ${captionColorClass}`}>{caption}</figcaption>
-    </figure>
+    <div className="flex justify-center">
+      <RatioGauge value={VALUE} domainMin={0} domainMax={30} zones={ZONES} valueLabel={valueLabel} ticks={TICKS} tickFormatter={(t) => `${t}%`} />
+    </div>
   );
 }

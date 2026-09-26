@@ -1,45 +1,20 @@
 type InvoiceUblAdoptionDiagramProps = {
   regions: string[];
   mandatedLabel: string;
-  caption: string;
 };
 
-const WIDTH = 300;
-
-export default function InvoiceUblAdoptionDiagram({ regions, mandatedLabel, caption }: InvoiceUblAdoptionDiagramProps) {
-  const chipW = 54;
-  const chipH = 24;
-  const gap = 6;
-  const perRow = 4;
-  const rows = Math.ceil(regions.length / perRow);
-  const rowW = perRow * chipW + (perRow - 1) * gap;
-  const startX = (WIDTH - rowW) / 2;
-  const height = 24 + rows * (chipH + gap);
-
+/** Plain HTML wrapping chips — no fixed-width SVG rects, no overflow risk for longer translated region names. */
+export default function InvoiceUblAdoptionDiagram({ regions, mandatedLabel }: InvoiceUblAdoptionDiagramProps) {
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={mandatedLabel} className="h-auto w-full" style={{ minWidth: 280 }}>
-          <text x={WIDTH / 2} y={12} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-cyan-600 dark:fill-cyan-400">
-            {mandatedLabel}
-          </text>
-          {regions.map((region, i) => {
-            const row = Math.floor(i / perRow);
-            const col = i % perRow;
-            const x = startX + col * (chipW + gap);
-            const y = 22 + row * (chipH + gap);
-            return (
-              <g key={region}>
-                <rect x={x} y={y} width={chipW} height={chipH} rx={12} className="fill-cyan-50 stroke-cyan-500 dark:fill-cyan-500/10 dark:stroke-cyan-400" strokeWidth={1.5} />
-                <text x={x + chipW / 2} y={y + chipH / 2 + 4} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-cyan-700 dark:fill-cyan-300">
-                  {region}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
+    <div>
+      <p className="text-center text-xs font-bold text-cyan-600 dark:text-cyan-400">{mandatedLabel}</p>
+      <div className="mt-2 flex flex-wrap justify-center gap-2" role="img" aria-label={mandatedLabel}>
+        {regions.map((region) => (
+          <span key={region} className="rounded-full border-2 border-cyan-500 bg-cyan-50 px-3 py-1 text-sm font-bold text-cyan-700 dark:border-cyan-400 dark:bg-cyan-500/10 dark:text-cyan-300">
+            {region}
+          </span>
+        ))}
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+    </div>
   );
 }

@@ -16,6 +16,7 @@ const STROKE = 22;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
+/** Single continuous SVG ring — a legitimate quantitative shape, not bordered boxes linked by arrows. */
 export default function InvoiceCompositionDonut({ segments, centerValue, centerLabel }: InvoiceCompositionDonutProps) {
   const total = segments.reduce((sum, s) => sum + s.value, 0);
   const center = SIZE / 2;

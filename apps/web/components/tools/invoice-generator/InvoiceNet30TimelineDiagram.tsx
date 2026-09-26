@@ -2,33 +2,22 @@ type InvoiceNet30TimelineDiagramProps = {
   issueLabel: string;
   dueLabel: string;
   creditPeriodLabel: string;
-  caption: string;
 };
 
-const WIDTH = 300;
-const HEIGHT = 76;
-const LINE_Y = 40;
-
-export default function InvoiceNet30TimelineDiagram({ issueLabel, dueLabel, creditPeriodLabel, caption }: InvoiceNet30TimelineDiagramProps) {
+/** Plain HTML dot-line-dot timeline — a chronological span, not bordered boxes linked by arrows. */
+export default function InvoiceNet30TimelineDiagram({ issueLabel, dueLabel, creditPeriodLabel }: InvoiceNet30TimelineDiagramProps) {
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={`${issueLabel} → ${dueLabel}`} className="h-auto w-full" style={{ minWidth: 280 }}>
-          <line x1={20} y1={LINE_Y} x2={WIDTH - 20} y2={LINE_Y} className="stroke-sky-400 dark:stroke-sky-400/70" strokeWidth={4} strokeLinecap="round" />
-          <circle cx={20} cy={LINE_Y} r={6} className="fill-sky-600 dark:fill-sky-400" />
-          <circle cx={WIDTH - 20} cy={LINE_Y} r={6} className="fill-sky-700 dark:fill-sky-300" />
-          <text x={20} y={LINE_Y - 14} textAnchor="start" fontSize={10} fontWeight={700} className="fill-sky-700 dark:fill-sky-300">
-            {issueLabel}
-          </text>
-          <text x={WIDTH - 20} y={LINE_Y - 14} textAnchor="end" fontSize={10} fontWeight={700} className="fill-sky-800 dark:fill-sky-200">
-            {dueLabel}
-          </text>
-          <text x={WIDTH / 2} y={LINE_Y + 22} textAnchor="middle" fontSize={10} fontWeight={700} className="fill-sky-600 dark:fill-sky-400">
-            {creditPeriodLabel}
-          </text>
-        </svg>
+    <div dir="ltr" className="w-full" role="img" aria-label={`${issueLabel} → ${dueLabel}`}>
+      <div className="flex items-center">
+        <span className="h-3 w-3 shrink-0 rounded-full bg-sky-600 dark:bg-sky-400" />
+        <span className="mx-1 h-1 flex-1 rounded bg-sky-300 dark:bg-sky-400/50" aria-hidden="true" />
+        <span className="h-3.5 w-3.5 shrink-0 rounded-full bg-sky-700 dark:bg-sky-300" />
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+      <div className="mt-2 flex items-start justify-between gap-4">
+        <span className="text-xs font-bold text-sky-700 dark:text-sky-300">{issueLabel}</span>
+        <span className="text-xs font-bold text-sky-600 dark:text-sky-400">{creditPeriodLabel}</span>
+        <span className="text-xs font-bold text-sky-800 dark:text-sky-200">{dueLabel}</span>
+      </div>
+    </div>
   );
 }
