@@ -8,6 +8,7 @@ const WIDTH = 320;
 const ROW_HEIGHT = 26;
 const ROW_GAP = 10;
 const LABEL_WIDTH = 96;
+const VALUE_WIDTH = 46;
 const MARGIN_TOP = 6;
 const MAX_ROWS = 8;
 
@@ -16,7 +17,7 @@ export default function InvoiceLineItemsBarDiagram({ items, formatValue, caption
   const overflow = items.length - rows.length;
   const maxValue = Math.max(...rows.map((r) => r.value), 0.01);
   const height = MARGIN_TOP * 2 + rows.length * (ROW_HEIGHT + ROW_GAP) - ROW_GAP;
-  const barMaxWidth = WIDTH - LABEL_WIDTH - 8;
+  const barMaxWidth = WIDTH - LABEL_WIDTH - VALUE_WIDTH - 8;
 
   return (
     <figure className="my-2">

@@ -33,17 +33,23 @@ export default function InvoiceRecurringBillingLineChart({ points, caption, titl
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={title} className="h-auto w-full" style={{ minWidth: 280 }}>
           <line x1={CHART_LEFT} y1={CHART_BOTTOM} x2={CHART_RIGHT} y2={CHART_BOTTOM} stroke="currentColor" strokeWidth={1} opacity={0.2} />
           <path d={path} fill="none" className="stroke-indigo-500 dark:stroke-indigo-400" strokeWidth={2.5} strokeLinejoin="round" />
-          {coords.map((c) => (
-            <g key={c.key}>
-              <circle cx={c.x} cy={c.y} r={4} className="fill-indigo-600 dark:fill-indigo-400" />
-              <text x={c.x} y={c.y - 10} textAnchor="middle" fontSize={9} fontWeight={700} className="fill-indigo-700 dark:fill-indigo-300">
-                ${c.total.toFixed(0)}
-              </text>
-              <text x={c.x} y={CHART_BOTTOM + 14} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
-                {c.label}
-              </text>
-            </g>
-          ))}
+          {coords.map((c, i) => {
+            // The first/last point's label would otherwise center on x=CHART_LEFT/CHART_RIGHT,
+            // pushing half its text past the viewBox edge and clipping it — anchor those two
+            // inward instead, same pattern used by RatioGauge's own extreme-tick labels.
+            const anchor = i === 0 ? "start" : i === coords.length - 1 ? "end" : "middle";
+            return (
+              <g key={c.key}>
+                <circle cx={c.x} cy={c.y} r={4} className="fill-indigo-600 dark:fill-indigo-400" />
+                <text x={c.x} y={c.y - 10} textAnchor={anchor} fontSize={9} fontWeight={700} className="fill-indigo-700 dark:fill-indigo-300">
+                  ${c.total.toFixed(0)}
+                </text>
+                <text x={c.x} y={CHART_BOTTOM + 14} textAnchor={anchor} fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+                  {c.label}
+                </text>
+              </g>
+            );
+          })}
         </svg>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>

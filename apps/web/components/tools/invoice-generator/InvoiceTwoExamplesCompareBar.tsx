@@ -11,10 +11,11 @@ const WIDTH = 300;
 const ROW_H = 34;
 const ROW_GAP = 14;
 const LABEL_W = 110;
+const VALUE_W = 50;
 
 export default function InvoiceTwoExamplesCompareBar({ examples, title, taxLabel, caption }: InvoiceTwoExamplesCompareBarProps) {
   const max = Math.max(...examples.map((e) => e.taxable + e.tax), 1);
-  const trackW = WIDTH - LABEL_W - 10;
+  const trackW = WIDTH - LABEL_W - VALUE_W - 10;
   const height = examples.length * (ROW_H + ROW_GAP);
 
   return (
@@ -33,7 +34,7 @@ export default function InvoiceTwoExamplesCompareBar({ examples, title, taxLabel
                 </text>
                 <rect x={LABEL_W} y={y} width={taxableW} height={ROW_H - 10} rx={3} className="fill-violet-500 dark:fill-violet-400" />
                 <rect x={LABEL_W + taxableW} y={y} width={taxW} height={ROW_H - 10} rx={3} className="fill-violet-300 dark:fill-violet-600" />
-                <text x={LABEL_W + taxableW + taxW + 6} y={y + (ROW_H - 10) / 2 + 4} fontSize={10} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">
+                <text x={LABEL_W + trackW + 8} y={y + (ROW_H - 10) / 2 + 4} fontSize={10} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">
                   ${total.toFixed(2)}
                 </text>
               </g>

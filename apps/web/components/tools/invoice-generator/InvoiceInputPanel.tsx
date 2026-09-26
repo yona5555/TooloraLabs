@@ -74,9 +74,19 @@ export default function InvoiceInputPanel({
           <CurrencySelector value={currency} onChange={onCurrencyChange} />
         </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <ToolInput label={t("issueDateLabel")} type="date" value={issueDate} onChange={(e) => onIssueDateChange(e.target.value)} />
-          <ToolInput label={t("dueDateLabel")} type="date" value={dueDate} onChange={(e) => onDueDateChange(e.target.value)} />
+        {/*
+          Deliberately stacked, not a 2-col grid: this panel always renders in
+          the fixed ~320px-wide above-the-fold column (ToolAboveFold's
+          `[320px_minmax(360px,1fr)_320px]` template), so a viewport-relative
+          `sm:grid-cols-2` still activates at normal desktop widths even
+          though the actual available card width never grows — squeezing the
+          native date input below Chromium's minimum usable width and
+          truncating its day/month/year segments (confirmed in English, same
+          root cause already fixed on batch-invoice-calculator).
+        */}
+        <div className="mt-4 space-y-4">
+          <ToolInput label={t("issueDateLabel")} type="date" dir="ltr" value={issueDate} onChange={(e) => onIssueDateChange(e.target.value)} />
+          <ToolInput label={t("dueDateLabel")} type="date" dir="ltr" value={dueDate} onChange={(e) => onDueDateChange(e.target.value)} />
         </div>
 
         <div className="mt-5 space-y-3 border-t border-zinc-200 pt-5 dark:border-zinc-800">
