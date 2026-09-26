@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import CostFlowDiagram from "./CostFlowDiagram";
 import InventoryThreeMethodCompareBar from "./InventoryThreeMethodCompareBar";
 import InventoryRisingPriceEffectDiagram from "./InventoryRisingPriceEffectDiagram";
@@ -15,7 +16,6 @@ import InventoryNoSalesConsistencyDonut from "./InventoryNoSalesConsistencyDonut
 import InventoryTaxImpactBar from "./InventoryTaxImpactBar";
 import InventoryLowStockThresholdDiagram from "./InventoryLowStockThresholdDiagram";
 import InventoryRawMaterialsFlowDiagram from "./InventoryRawMaterialsFlowDiagram";
-import InventoryWorkedExampleNote from "./InventoryWorkedExampleNote";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -38,45 +38,40 @@ export default async function InventoryEducation() {
         <p>{t("intro.paragraph2")}</p>
 
         <SectionCard title={t("intro.diagram.title")}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-            <div className="min-w-0 flex-1">
-              <CostFlowDiagram
-                fifoTitle={t("intro.diagram.fifoTitle")}
-                lifoTitle={t("intro.diagram.lifoTitle")}
-                oldestLabel={t("intro.diagram.oldestLabel")}
-                newestLabel={t("intro.diagram.newestLabel")}
-                outLabel={t("intro.diagram.outLabel")}
-                caption={t("intro.diagram.caption")}
-              />
-            </div>
-            <InventoryWorkedExampleNote
-              title={tRoot("workedExampleTitle")}
-              rows={[
-                { label: t("intro.diagram.fifoTitle"), value: `${t("intro.diagram.oldestLabel")} ${t("intro.diagram.outLabel").toLowerCase()}` },
-                { label: t("intro.diagram.lifoTitle"), value: `${t("intro.diagram.newestLabel")} ${t("intro.diagram.outLabel").toLowerCase()}` },
-              ]}
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro.diagram.caption")}</p>
+          <div className="mt-4">
+            <CostFlowDiagram
+              fifoTitle={t("intro.diagram.fifoTitle")}
+              lifoTitle={t("intro.diagram.lifoTitle")}
+              oldestLabel={t("intro.diagram.oldestLabel")}
+              newestLabel={t("intro.diagram.newestLabel")}
+              outLabel={t("intro.diagram.outLabel")}
             />
           </div>
         </SectionCard>
 
         <SectionCard title={t("intro.threeMethodBar.title")}>
-          <InventoryThreeMethodCompareBar
-            title={t("intro.threeMethodBar.title")}
-            caption={t("intro.threeMethodBar.caption")}
-            bars={[
-              { key: "fifo", label: "FIFO", value: 64, colorClass: "fill-violet-500 dark:fill-violet-400" },
-              { key: "wavg", label: t("intro.threeMethodBar.weightedAvg"), value: 52, colorClass: "fill-violet-400 dark:fill-violet-500" },
-              { key: "lifo", label: "LIFO", value: 40, colorClass: "fill-violet-300 dark:fill-violet-600" },
-            ]}
-          />
-          <InventoryWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: "FIFO", value: "$64.00" },
-              { label: t("intro.threeMethodBar.weightedAvg"), value: "$52.00" },
-              { label: "LIFO", value: "$40.00" },
-            ]}
-          />
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro.threeMethodBar.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={
+                <InventoryThreeMethodCompareBar
+                  title={t("intro.threeMethodBar.title")}
+                  bars={[
+                    { key: "fifo", label: "FIFO", value: 64, colorClass: "bg-violet-500 dark:bg-violet-400" },
+                    { key: "wavg", label: t("intro.threeMethodBar.weightedAvg"), value: 52, colorClass: "bg-violet-400 dark:bg-violet-500" },
+                    { key: "lifo", label: "LIFO", value: 40, colorClass: "bg-violet-300 dark:bg-violet-600" },
+                  ]}
+                />
+              }
+              workedExampleTitle={tRoot("workedExampleTitle")}
+              rows={[
+                { label: "FIFO", value: "$64.00" },
+                { label: t("intro.threeMethodBar.weightedAvg"), value: "$52.00" },
+                { label: "LIFO", value: "$40.00" },
+              ]}
+            />
+          </div>
         </SectionCard>
 
         <SectionCard title={t("intro.risingPriceDiagram.fifoLabel") + " / " + t("intro.risingPriceDiagram.lifoLabel")}>
@@ -102,33 +97,36 @@ export default async function InventoryEducation() {
         </dl>
 
         <SectionCard title={t("variables.batchDiagram.title")}>
-          <InventoryPurchaseBatchDiagram
-            title={t("variables.batchDiagram.title")}
-            caption={t("variables.batchDiagram.caption")}
-            fifoLabel={t("variables.batchDiagram.fifoLabel")}
-            lifoLabel={t("variables.batchDiagram.lifoLabel")}
-            batches={[
-              { key: "b1", label: t("variables.batchDiagram.batch1"), qty: 10, unitCost: 5 },
-              { key: "b2", label: t("variables.batchDiagram.batch2"), qty: 10, unitCost: 8 },
-            ]}
-          />
-          <InventoryWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: t("variables.batchDiagram.batch1"), value: "10 × $5.00 = $50.00" },
-              { label: t("variables.batchDiagram.batch2"), value: "10 × $8.00 = $80.00" },
-              { label: "Total purchased", value: "$130.00", emphasize: true },
-            ]}
-          />
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("variables.batchDiagram.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={
+                <InventoryPurchaseBatchDiagram
+                  title={t("variables.batchDiagram.title")}
+                  fifoLabel={t("variables.batchDiagram.fifoLabel")}
+                  lifoLabel={t("variables.batchDiagram.lifoLabel")}
+                  batches={[
+                    { key: "b1", label: t("variables.batchDiagram.batch1"), qty: 10, unitCost: 5 },
+                    { key: "b2", label: t("variables.batchDiagram.batch2"), qty: 10, unitCost: 8 },
+                  ]}
+                />
+              }
+              workedExampleTitle={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("variables.batchDiagram.batch1"), value: "10 × $5.00 = $50.00" },
+                { label: t("variables.batchDiagram.batch2"), value: "10 × $8.00 = $80.00" },
+                { label: "Total purchased", value: "$130.00", emphasize: true },
+              ]}
+            />
+          </div>
         </SectionCard>
 
         <SectionCard title={t("variables.endingUnitsGauge.title")}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-            <div className="shrink-0">
-              <InventoryEndingUnitsGauge valueLabel="8" caption={t("variables.endingUnitsGauge.caption")} captionColorClass="text-emerald-600 dark:text-emerald-400" />
-            </div>
-            <InventoryWorkedExampleNote
-              title={tRoot("workedExampleTitle")}
+          <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">{t("variables.endingUnitsGauge.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={<InventoryEndingUnitsGauge valueLabel="8" />}
+              workedExampleTitle={tRoot("workedExampleTitle")}
               rows={[
                 { label: "Purchased", value: "20 units" },
                 { label: "Sold", value: "12 units" },
@@ -161,47 +159,54 @@ export default async function InventoryEducation() {
         </div>
 
         <SectionCard title={t("examples.valueLineChart.title")}>
-          <InventoryMethodValueLineChart
-            title={t("examples.valueLineChart.title")}
-            caption={t("examples.valueLineChart.caption")}
-            fifoLabel="FIFO"
-            lifoLabel="LIFO"
-            xLabel={t("examples.valueLineChart.xLabel")}
-            fifoSeries={[
-              { unitsSold: 0, value: 130 },
-              { unitsSold: 4, value: 110 },
-              { unitsSold: 8, value: 90 },
-              { unitsSold: 10, value: 80 },
-              { unitsSold: 12, value: 64 },
-            ]}
-            lifoSeries={[
-              { unitsSold: 0, value: 130 },
-              { unitsSold: 4, value: 98 },
-              { unitsSold: 8, value: 66 },
-              { unitsSold: 10, value: 50 },
-              { unitsSold: 12, value: 40 },
-            ]}
-          />
-          <InventoryWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: "FIFO at 12 sold", value: "$64.00" },
-              { label: "LIFO at 12 sold", value: "$40.00" },
-              { label: "Gap", value: "$24.00", emphasize: true },
-            ]}
-          />
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("examples.valueLineChart.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={
+                <InventoryMethodValueLineChart
+                  title={t("examples.valueLineChart.title")}
+                  fifoLabel="FIFO"
+                  lifoLabel="LIFO"
+                  xLabel={t("examples.valueLineChart.xLabel")}
+                  fifoSeries={[
+                    { unitsSold: 0, value: 130 },
+                    { unitsSold: 4, value: 110 },
+                    { unitsSold: 8, value: 90 },
+                    { unitsSold: 10, value: 80 },
+                    { unitsSold: 12, value: 64 },
+                  ]}
+                  lifoSeries={[
+                    { unitsSold: 0, value: 130 },
+                    { unitsSold: 4, value: 98 },
+                    { unitsSold: 8, value: 66 },
+                    { unitsSold: 10, value: 50 },
+                    { unitsSold: 12, value: 40 },
+                  ]}
+                />
+              }
+              workedExampleTitle={tRoot("workedExampleTitle")}
+              rows={[
+                { label: "FIFO at 12 sold", value: "$64.00" },
+                { label: "LIFO at 12 sold", value: "$40.00" },
+                { label: "Gap", value: "$24.00", emphasize: true },
+              ]}
+            />
+          </div>
         </SectionCard>
 
         <SectionCard title={t("examples.consistencyDonut.title")}>
-          <InventoryNoSalesConsistencyDonut centerLabel={t("examples.consistencyDonut.centerLabel")} caption={t("examples.consistencyDonut.caption")} />
-          <InventoryWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: "FIFO", value: "$50.00" },
-              { label: t("intro.threeMethodBar.weightedAvg"), value: "$50.00" },
-              { label: "LIFO", value: "$50.00" },
-            ]}
-          />
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("examples.consistencyDonut.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={<InventoryNoSalesConsistencyDonut centerLabel={t("examples.consistencyDonut.centerLabel")} />}
+              workedExampleTitle={tRoot("workedExampleTitle")}
+              rows={[
+                { label: "FIFO", value: "$50.00" },
+                { label: t("intro.threeMethodBar.weightedAvg"), value: "$50.00" },
+                { label: "LIFO", value: "$50.00" },
+              ]}
+            />
+          </div>
         </SectionCard>
       </InfoSection>
 
@@ -217,36 +222,40 @@ export default async function InventoryEducation() {
         </div>
 
         <SectionCard title={t("applications.taxImpactBar.title")}>
-          <InventoryTaxImpactBar
-            title={t("applications.taxImpactBar.title")}
-            caption={t("applications.taxImpactBar.caption")}
-            cogsLabel={t("applications.taxImpactBar.cogsLabel")}
-            columns={[
-              { key: "fifo", label: "FIFO", cogs: 66, colorClass: "fill-amber-400 dark:fill-amber-400/80" },
-              { key: "lifo", label: "LIFO", cogs: 90, colorClass: "fill-amber-600 dark:fill-amber-300" },
-            ]}
-          />
-          <InventoryWorkedExampleNote
-            title={tRoot("workedExampleTitle")}
-            rows={[
-              { label: "FIFO COGS", value: "$66.00" },
-              { label: "LIFO COGS", value: "$90.00" },
-              { label: "Difference", value: "$24.00", emphasize: true },
-            ]}
-          />
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("applications.taxImpactBar.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={
+                <InventoryTaxImpactBar
+                  title={t("applications.taxImpactBar.title")}
+                  cogsLabel={t("applications.taxImpactBar.cogsLabel")}
+                  columns={[
+                    { key: "fifo", label: "FIFO", cogs: 66, colorClass: "bg-amber-400 dark:bg-amber-400/80" },
+                    { key: "lifo", label: "LIFO", cogs: 90, colorClass: "bg-amber-600 dark:bg-amber-300" },
+                  ]}
+                />
+              }
+              workedExampleTitle={tRoot("workedExampleTitle")}
+              rows={[
+                { label: "FIFO COGS", value: "$66.00" },
+                { label: "LIFO COGS", value: "$90.00" },
+                { label: "Difference", value: "$24.00", emphasize: true },
+              ]}
+            />
+          </div>
         </SectionCard>
 
         <SectionCard title={t("applications.thresholdDiagram.title")}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-            <div className="min-w-0 flex-1">
-              <InventoryLowStockThresholdDiagram
-                currentLabel={t("applications.thresholdDiagram.currentLabel")}
-                thresholdLabel={t("applications.thresholdDiagram.thresholdLabel")}
-                caption={t("applications.thresholdDiagram.caption")}
-              />
-            </div>
-            <InventoryWorkedExampleNote
-              title={tRoot("workedExampleTitle")}
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("applications.thresholdDiagram.caption")}</p>
+          <div className="mt-4">
+            <IndicatorWithTable
+              indicator={
+                <InventoryLowStockThresholdDiagram
+                  currentLabel={t("applications.thresholdDiagram.currentLabel")}
+                  thresholdLabel={t("applications.thresholdDiagram.thresholdLabel")}
+                />
+              }
+              workedExampleTitle={tRoot("workedExampleTitle")}
               rows={[
                 { label: t("applications.thresholdDiagram.currentLabel"), value: "8 units" },
                 { label: t("applications.thresholdDiagram.thresholdLabel"), value: "10 units", emphasize: true },

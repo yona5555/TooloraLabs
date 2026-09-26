@@ -9,13 +9,7 @@ type InventoryMethodChartProps = {
   formatValue: (value: number) => string;
 };
 
-const WIDTH = 320;
-const BAR_HEIGHT = 26;
-const GAP = 14;
-const PAD = 6;
-const LABEL_W = 86;
-const VALUE_W = 56;
-
+/** Plain HTML horizontal bars — label above a full-width track, value at the track's end. */
 export default function InventoryMethodChart({
   fifo,
   lifo,
@@ -27,48 +21,25 @@ export default function InventoryMethodChart({
   formatValue,
 }: InventoryMethodChartProps) {
   const rows = [
-    { label: fifoLabel, value: fifo },
-    { label: lifoLabel, value: lifo },
-    { label: weightedAverageLabel, value: weightedAverage },
+    { key: "fifo", label: fifoLabel, value: fifo },
+    { key: "lifo", label: lifoLabel, value: lifo },
+    { key: "wavg", label: weightedAverageLabel, value: weightedAverage },
   ];
   const max = Math.max(fifo, lifo, weightedAverage, 1);
-  const barAreaW = WIDTH - LABEL_W - VALUE_W - PAD * 2;
-  const height = PAD * 2 + rows.length * (BAR_HEIGHT + GAP) - GAP;
 
   return (
-    <div dir="ltr" className="overflow-x-auto">
-      <svg
-        viewBox={`0 0 ${WIDTH} ${height}`}
-        role="img"
-        aria-label={chartLabel}
-        className="h-auto w-full text-current"
-        style={{ minWidth: 280 }}
-      >
-        {rows.map((row, i) => {
-          const y = PAD + i * (BAR_HEIGHT + GAP);
-          const w = (row.value / max) * barAreaW;
-          return (
-            <g key={row.label}>
-              <text x={0} y={y + BAR_HEIGHT / 2 + 4} fontSize={11} fill="currentColor">
-                {row.label}
-              </text>
-              <rect x={LABEL_W} y={y} width={barAreaW} height={BAR_HEIGHT} fill="currentColor" opacity={0.08} rx={4} />
-              <rect x={LABEL_W} y={y} width={w} height={BAR_HEIGHT} fill="currentColor" opacity={0.75} rx={4} />
-              <text
-                x={LABEL_W + barAreaW + 8}
-                y={y + BAR_HEIGHT / 2 + 4}
-                textAnchor="start"
-                fontSize={11}
-                fontWeight={700}
-                fill="currentColor"
-                style={{ unicodeBidi: "bidi-override", direction: "ltr" }}
-              >
-                {formatValue(row.value)}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
+    <div dir="ltr" className="space-y-2.5" role="img" aria-label={chartLabel}>
+      {rows.map((row) => (
+        <div key={row.key} className="text-sm">
+          <div className="mb-1 flex items-baseline justify-between gap-3">
+            <span className="text-zinc-600 dark:text-zinc-300">{row.label}</span>
+            <span className="shrink-0 font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">{formatValue(row.value)}</span>
+          </div>
+          <div className="h-3 w-full rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <div className="h-3 rounded-full bg-blue-600 dark:bg-blue-400" style={{ width: `${Math.max((row.value / max) * 100, 4)}%` }} />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

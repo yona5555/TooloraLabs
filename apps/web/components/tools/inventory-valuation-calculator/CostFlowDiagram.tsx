@@ -4,97 +4,56 @@ type CostFlowDiagramProps = {
   oldestLabel: string;
   newestLabel: string;
   outLabel: string;
-  caption: string;
 };
 
-const WIDTH = 480;
-const HEIGHT = 230;
-const LAYER_W = 100;
-const LAYER_H = 34;
-const GAP = 4;
-const STACK_BASE_Y = 190;
-
-function Stack({
-  x,
-  title,
-  arrowAtTop,
-  oldestLabel,
-  newestLabel,
-  outLabel,
-}: {
-  x: number;
+/**
+ * Plain HTML two-column comparison — no bordered boxes connected by an
+ * arrow. Each column is one vertical stack of purchase layers (newest on
+ * top, like real purchases piling up); which layer is consumed first is
+ * shown by highlighting that row and tagging it with `outLabel` directly,
+ * not by drawing a line from the row to a separate label. Matches the
+ * grid-cols-2 comparison-card pattern from BreakEvenBusinessTypeDiagram.
+ */
+function Stack({ title, consumeTop, oldestLabel, newestLabel, outLabel, accentClass, highlightClass }: {
   title: string;
-  arrowAtTop: boolean;
+  consumeTop: boolean;
   oldestLabel: string;
   newestLabel: string;
   outLabel: string;
+  accentClass: string;
+  highlightClass: string;
 }) {
   const layers = [
-    { label: oldestLabel, opacity: 0.35 },
-    { label: "", opacity: 0.55 },
-    { label: newestLabel, opacity: 0.8 },
+    { label: newestLabel, consumed: consumeTop },
+    { label: "", consumed: false },
+    { label: oldestLabel, consumed: !consumeTop },
   ];
 
   return (
-    <g>
-      <text x={x + LAYER_W / 2} y={22} textAnchor="middle" fontSize={13} fontWeight={700} fill="currentColor">
-        {title}
-      </text>
-      {layers.map((layer, i) => {
-        const y = STACK_BASE_Y - (i + 1) * (LAYER_H + GAP);
-        return (
-          <g key={i}>
-            <rect x={x} y={y} width={LAYER_W} height={LAYER_H} rx={4} fill="currentColor" opacity={layer.opacity} />
-            {layer.label && (
-              <text x={x + LAYER_W / 2} y={y + LAYER_H / 2 + 4} textAnchor="middle" fontSize={10} fill="white">
-                {layer.label}
-              </text>
-            )}
-          </g>
-        );
-      })}
-      {/* arrow pointing out of the layer consumed first */}
-      {arrowAtTop ? (
-        <g>
-          <line x1={x + LAYER_W / 2} y1={STACK_BASE_Y - 3 * (LAYER_H + GAP) + LAYER_H / 2} x2={x + LAYER_W / 2} y2={12 + 14} stroke="currentColor" strokeWidth={1.5} markerEnd="url(#arrowhead)" opacity={0.9} />
-        </g>
-      ) : (
-        <g>
-          <line x1={x + LAYER_W / 2} y1={STACK_BASE_Y - LAYER_H / 2} x2={x + LAYER_W / 2} y2={STACK_BASE_Y + 22} stroke="currentColor" strokeWidth={1.5} markerEnd="url(#arrowhead)" opacity={0.9} />
-        </g>
-      )}
-      <text x={x + LAYER_W / 2} y={STACK_BASE_Y + 40} textAnchor="middle" fontSize={10} fontWeight={700} fill="currentColor">
-        {outLabel}
-      </text>
-    </g>
+    <div className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800/60">
+      <p className={`text-center text-sm font-bold ${accentClass}`}>{title}</p>
+      <div className="mt-3 flex flex-col gap-1.5">
+        {layers.map((layer, i) => (
+          <div
+            key={i}
+            className={`flex items-center justify-between rounded-lg px-3 py-2.5 text-xs font-semibold ${
+              layer.consumed ? `${highlightClass} text-white` : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+            }`}
+          >
+            <span>{layer.label}</span>
+            {layer.consumed && <span className="text-[10px] font-bold tracking-wide uppercase opacity-90">{outLabel}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-export default function CostFlowDiagram({
-  fifoTitle,
-  lifoTitle,
-  oldestLabel,
-  newestLabel,
-  outLabel,
-  caption,
-}: CostFlowDiagramProps) {
-  const fifoX = 60;
-  const lifoX = WIDTH - 60 - LAYER_W;
-
+export default function CostFlowDiagram({ fifoTitle, lifoTitle, oldestLabel, newestLabel, outLabel }: CostFlowDiagramProps) {
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 420 }}>
-          <defs>
-            <marker id="arrowhead" markerWidth={8} markerHeight={8} refX={4} refY={4} orient="auto">
-              <path d="M0,0 L8,4 L0,8 Z" fill="currentColor" opacity={0.9} />
-            </marker>
-          </defs>
-          <Stack x={fifoX} title={fifoTitle} arrowAtTop={false} oldestLabel={oldestLabel} newestLabel={newestLabel} outLabel={outLabel} />
-          <Stack x={lifoX} title={lifoTitle} arrowAtTop={true} oldestLabel={oldestLabel} newestLabel={newestLabel} outLabel={outLabel} />
-        </svg>
-      </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <Stack title={fifoTitle} consumeTop={false} oldestLabel={oldestLabel} newestLabel={newestLabel} outLabel={outLabel} accentClass="text-teal-600 dark:text-teal-400" highlightClass="bg-teal-600 dark:bg-teal-500" />
+      <Stack title={lifoTitle} consumeTop={true} oldestLabel={oldestLabel} newestLabel={newestLabel} outLabel={outLabel} accentClass="text-orange-600 dark:text-orange-400" highlightClass="bg-orange-600 dark:bg-orange-500" />
+    </div>
   );
 }

@@ -1,40 +1,47 @@
 type InventoryLowStockThresholdDiagramProps = {
   currentLabel: string;
   thresholdLabel: string;
-  caption: string;
 };
 
-const WIDTH = 280;
-const HEIGHT = 72;
-const LINE_Y = 36;
 const MAX_UNITS = 20;
 const CURRENT_UNITS = 8;
 const THRESHOLD_UNITS = 10;
 
-export default function InventoryLowStockThresholdDiagram({ currentLabel, thresholdLabel, caption }: InventoryLowStockThresholdDiagramProps) {
-  const scaleX = (units: number) => 20 + (units / MAX_UNITS) * (WIDTH - 40);
-  const currentX = scaleX(CURRENT_UNITS);
-  const thresholdX = scaleX(THRESHOLD_UNITS);
+/**
+ * Plain HTML magnitude scale — a current-value dot against a threshold
+ * marker on one continuous track, not bordered boxes linked by arrows.
+ * The two markers sit close together on the track (8 vs 10 of 20), so their
+ * labels live in a fixed legend row below instead of being positioned at
+ * each marker's own percentage offset — that first approach let the two
+ * text labels overlap and interleave into unreadable text whenever the
+ * values were close. `dir="ltr"`: the track fill is a magnitude, same
+ * category as every other quantitative chart in this codebase.
+ */
+export default function InventoryLowStockThresholdDiagram({ currentLabel, thresholdLabel }: InventoryLowStockThresholdDiagramProps) {
+  const currentPct = (CURRENT_UNITS / MAX_UNITS) * 100;
+  const thresholdPct = (THRESHOLD_UNITS / MAX_UNITS) * 100;
 
   return (
-    <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={`${currentLabel} / ${thresholdLabel}`} className="h-auto w-full" style={{ minWidth: 260 }}>
-          <line x1={20} y1={LINE_Y} x2={WIDTH - 20} y2={LINE_Y} stroke="currentColor" strokeWidth={2} opacity={0.2} />
-          <rect x={20} y={LINE_Y - 1} width={thresholdX - 20} height={2} className="fill-rose-400 dark:fill-rose-400/70" opacity={0.6} />
-
-          <line x1={thresholdX} y1={LINE_Y - 10} x2={thresholdX} y2={LINE_Y + 10} className="stroke-cyan-600 dark:stroke-cyan-400" strokeWidth={2} strokeDasharray="3 2" />
-          <text x={thresholdX} y={LINE_Y - 16} textAnchor="middle" fontSize={8.5} fontWeight={700} className="fill-cyan-700 dark:fill-cyan-300">
-            {thresholdLabel} (10)
-          </text>
-
-          <circle cx={currentX} cy={LINE_Y} r={6} className="fill-cyan-500 dark:fill-cyan-400" />
-          <text x={currentX} y={LINE_Y + 22} textAnchor="middle" fontSize={8.5} fontWeight={700} className="fill-cyan-700 dark:fill-cyan-300">
-            {currentLabel} (8)
-          </text>
-        </svg>
+    <div dir="ltr" role="img" aria-label={`${currentLabel} (${CURRENT_UNITS}) / ${thresholdLabel} (${THRESHOLD_UNITS})`}>
+      <div className="relative h-2 w-full rounded-full bg-zinc-100 dark:bg-zinc-800">
+        <div className="absolute inset-y-0 start-0 rounded-full bg-rose-300 dark:bg-rose-400/50" style={{ width: `${thresholdPct}%` }} />
+        <div className="absolute top-1/2 h-4 w-0.5 -translate-y-1/2 bg-cyan-600 dark:bg-cyan-400" style={{ insetInlineStart: `${thresholdPct}%` }} />
+        <div className="absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 -translate-x-1/2 rounded-full bg-cyan-500 dark:bg-cyan-400 rtl:translate-x-1/2" style={{ insetInlineStart: `${currentPct}%` }} />
       </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs font-semibold">
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-cyan-500 dark:bg-cyan-400" />
+          <span className="text-cyan-700 dark:text-cyan-300">
+            {currentLabel} ({CURRENT_UNITS})
+          </span>
+        </span>
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-0.5 shrink-0 bg-cyan-600 dark:bg-cyan-400" />
+          <span className="text-cyan-700 dark:text-cyan-300">
+            {thresholdLabel} ({THRESHOLD_UNITS})
+          </span>
+        </span>
+      </div>
+    </div>
   );
 }
