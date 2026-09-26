@@ -12557,31 +12557,31 @@
         "roundedUpNote": "Arrondi pour que personne n'ait besoin de monnaie exacte.",
         "internationalNorms": {
           "title": "Le pourboire à travers le monde",
-          "intro": "Les usages du pourboire varient fortement d'un pays à l'autre — ce qui est attendu ici peut être inhabituel, voire refusé, ailleurs.",
+          "intro": "Les usages en matière de pourboire varient fortement selon la structure salariale et les attentes culturelles — ce qui est attendu dans un contexte peut sembler inhabituel, voire être refusé, dans un autre.",
           "rows": [
             {
-              "region": "États-Unis et Canada",
-              "norm": "15 à 20 % est la norme dans les restaurants avec service à table ; le personnel qui reçoit des pourboires perçoit souvent un salaire de base plus faible, calculé en tenant compte de cet apport."
+              "context": "Restaurant service complet, salaires dépendant des pourboires",
+              "norm": "15–20 % est l'attente standard ; le personnel touche souvent un salaire de base plus bas qui en tient compte."
             },
             {
-              "region": "Royaume-Uni",
-              "norm": "10 à 15 % est courant lorsque des frais de service ne sont pas déjà inclus dans l'addition — vérifiez d'abord le ticket."
+              "context": "Restaurant service complet, frais de service pas toujours inclus",
+              "norm": "10–15 % est courant quand des frais de service ne sont pas déjà ajoutés à l'addition — vérifiez d'abord le reçu."
             },
             {
-              "region": "Europe de l'Ouest (France, Allemagne, Italie, Espagne)",
-              "norm": "Le service est généralement déjà inclus dans le prix (service compris) ; arrondir ou laisser la monnaie est apprécié, mais non attendu."
+              "context": "Établissements où le service est inclus dans le prix du menu",
+              "norm": "Déjà inclus dans le prix ; arrondir ou laisser la monnaie est apprécié, mais pas attendu."
             },
             {
-              "region": "Japon",
-              "norm": "Ce n'est pas une coutume et cela peut même être perçu comme gênant, voire impoli — un service excellent est déjà considéré comme faisant partie du prix."
+              "context": "Cultures où le pourboire n'est pas une coutume",
+              "norm": "Peut sembler gênant, voire impoli — un excellent service est déjà considéré comme inclus dans le prix."
             },
             {
-              "region": "Australie et Nouvelle-Zélande",
-              "norm": "Non attendu ; le personnel de l'hôtellerie-restauration touche un salaire minimum complet, le pourboire reste donc un bonus discrétionnaire pour un service exceptionnel."
+              "context": "Personnel d'hôtellerie-restauration payé au salaire minimum complet",
+              "norm": "Non attendu ; le personnel touche un salaire complet, le pourboire est un bonus discrétionnaire pour un service exceptionnel."
             },
             {
-              "region": "Pays du Golfe (Émirats arabes unis, Arabie saoudite, Qatar)",
-              "norm": "Des frais de service sont fréquemment inclus dans l'addition ; un petit pourboire supplémentaire en espèces pour un bon service est apprécié, mais reste facultatif."
+              "context": "Établissements avec frais de service obligatoires sur l'addition",
+              "norm": "Un petit pourboire en espèces supplémentaire pour un bon service est apprécié mais facultatif."
             }
           ],
           "disclaimer": "Indication générale uniquement — les usages locaux varient selon l'établissement et évoluent avec le temps ; en cas de doute, vérifiez si des frais de service sont déjà inclus dans l'addition."
@@ -12640,7 +12640,8 @@
                 "value": 15
               }
             ],
-            "caption": "Le montant du pourboire sur une addition de 60 $ à quatre taux courants — de petits écarts de taux s'accumulent vite à mesure que l'addition augmente."
+            "caption": "Le montant du pourboire sur une addition de 60 $ à quatre taux courants — de petits écarts de taux s'accumulent vite à mesure que l'addition augmente.",
+            "title": "Pourboire selon le pourcentage"
           }
         },
         "examples": {
@@ -12845,7 +12846,8 @@
         "bill": "Addition",
         "tipPercent": "% de pourboire",
         "tipAmount": "Montant du pourboire",
-        "totalRow": "Total : {value} $"
+        "totalRow": "Total : {value} $",
+        "totalLabel": "Total"
       },
       "percentRangeComparisonChart": {
         "title": "Total selon le pourcentage de pourboire",
@@ -12864,11 +12866,12 @@
         "title": "Arrondi pour un pourboire en espèces",
         "intro": "Une addition de {bill} $ avec {percent} % de pourboire, arrondie au 5 $ supérieur.",
         "exactLabel": "Total exact",
-        "roundedLabel": "Arrondi"
+        "roundedLabel": "Arrondi",
+        "extraLabel": "Supplément dû à l'arrondi"
       },
       "serviceQualityScaleChart": {
         "title": "Pourboire selon la qualité du service",
-        "caption": "Convention de pourboire des restaurants américains, appliquée à une addition de {bill} $.",
+        "caption": "Une convention de pourboire courante pour les restaurants à service complet, appliquée à une addition de {bill} $.",
         "tiers": {
           "poor": "Service médiocre",
           "average": "Moyen",
@@ -12885,7 +12888,8 @@
         "title": "Addition vs. addition plus pourboire",
         "caption": "L'impact financier réel du pourboire sur la même addition.",
         "billOnly": "Addition seule",
-        "withTip": "Avec {percent} % de pourboire"
+        "withTip": "Avec {percent} % de pourboire",
+        "tipAddedLabel": "Pourboire ajouté"
       },
       "deliveryVsDineInChart": {
         "title": "Pourboire selon le type de service",
@@ -12894,7 +12898,8 @@
           "delivery": "Livraison",
           "dineIn": "Sur place"
         }
-      }
+      },
+      "workedExampleTitle": "Exemple Chiffré"
     },
     "discount-calculator": {
       "title": "Calculateur de remise",

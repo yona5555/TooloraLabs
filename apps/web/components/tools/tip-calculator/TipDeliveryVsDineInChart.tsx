@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduDonutChart from "./EduDonutChart";
+import TipWorkedExampleNote from "./TipWorkedExampleNote";
 
 /** Documented service-type tipping conventions (distinct from country-based norms): delivery vs dine-in, same $30 order — shown as a donut split rather than a bar list. */
 const ORDER = 30;
@@ -12,6 +13,7 @@ const SERVICE_TYPES = [
 export default async function TipDeliveryVsDineInChart() {
   const t = await getTranslations("tools.tip-calculator.deliveryVsDineInChart");
   const tTypes = await getTranslations("tools.tip-calculator.deliveryVsDineInChart.types");
+  const tRoot = await getTranslations("tools.tip-calculator");
 
   const segments = SERVICE_TYPES.map((s) => {
     const tip = ORDER * (s.percent / 100);
@@ -21,8 +23,11 @@ export default async function TipDeliveryVsDineInChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { order: ORDER.toFixed(2) })}</p>
-      <div className="mt-4">
-        <EduDonutChart segments={segments} ariaLabel={t("title")} />
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="shrink-0">
+          <EduDonutChart segments={segments} ariaLabel={t("title")} />
+        </div>
+        <TipWorkedExampleNote title={tRoot("workedExampleTitle")} rows={segments.map((s) => ({ label: s.label, value: s.formatted }))} />
       </div>
     </SectionCard>
   );

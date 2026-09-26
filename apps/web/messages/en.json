@@ -12557,31 +12557,31 @@
         "roundedUpNote": "Rounded up so nobody needs exact change.",
         "internationalNorms": {
           "title": "Tipping Around the World",
-          "intro": "Tipping customs vary sharply by country — what's expected in one place can be unusual, or even declined, in another.",
+          "intro": "Tipping customs vary sharply by wage structure and cultural expectation — what's expected in one setting can be unusual, or even declined, in another.",
           "rows": [
             {
-              "region": "United States & Canada",
-              "norm": "15–20% is the standard expectation at sit-down restaurants; tipped workers often earn a lower base wage that assumes it."
+              "context": "Full-service dining with tip-dependent wages",
+              "norm": "15–20% is the standard expectation; tipped workers often earn a lower base wage that assumes it."
             },
             {
-              "region": "United Kingdom",
+              "context": "Full-service dining, service charge not always included",
               "norm": "10–15% is common when a service charge isn't already added to the bill — check the receipt first."
             },
             {
-              "region": "Western Europe (France, Germany, Italy, Spain)",
-              "norm": "Service is usually already included in the price (service compris); rounding up or leaving small change is appreciated, not expected."
+              "context": "Dining where service is priced into the menu",
+              "norm": "Already included in the price; rounding up or leaving small change is appreciated, not expected."
             },
             {
-              "region": "Japan",
-              "norm": "Not customary and can be seen as awkward or even impolite — excellent service is already considered part of the price."
+              "context": "Cultures where tipping isn't customary",
+              "norm": "Can be seen as awkward or even impolite — excellent service is already considered part of the price."
             },
             {
-              "region": "Australia & New Zealand",
-              "norm": "Not expected; hospitality staff are paid a full minimum wage, so tipping is a discretionary bonus for exceptional service."
+              "context": "Full minimum-wage hospitality staff",
+              "norm": "Not expected; staff are paid a full wage, so tipping is a discretionary bonus for exceptional service."
             },
             {
-              "region": "Gulf countries (UAE, Saudi Arabia, Qatar)",
-              "norm": "A service charge is frequently included on the bill; a small additional cash tip for good service is appreciated but optional."
+              "context": "Venues with a mandatory service charge on the bill",
+              "norm": "A small additional cash tip for good service is appreciated but optional."
             }
           ],
           "disclaimer": "General guidance only — local customs vary by venue and change over time; when in doubt, check the bill for a service charge that may already be included."
@@ -12640,7 +12640,8 @@
                 "value": 15
               }
             ],
-            "caption": "The tip amount on a $60 bill at four common percentages — small differences in the rate compound quickly as the bill grows."
+            "caption": "The tip amount on a $60 bill at four common percentages — small differences in the rate compound quickly as the bill grows.",
+            "title": "Tip by Percentage"
           }
         },
         "examples": {
@@ -12845,7 +12846,8 @@
         "bill": "Bill",
         "tipPercent": "Tip %",
         "tipAmount": "Tip amount",
-        "totalRow": "Total: ${value}"
+        "totalRow": "Total: ${value}",
+        "totalLabel": "Total"
       },
       "percentRangeComparisonChart": {
         "title": "Total by Tip Percentage",
@@ -12864,11 +12866,12 @@
         "title": "Rounding Up for Cash Tipping",
         "intro": "A ${bill} bill with {percent}% tip, rounded up to the nearest $5.",
         "exactLabel": "Exact total",
-        "roundedLabel": "Rounded up"
+        "roundedLabel": "Rounded up",
+        "extraLabel": "Extra from rounding"
       },
       "serviceQualityScaleChart": {
         "title": "Tip by Service Quality",
-        "caption": "US restaurant tipping convention, applied to a ${bill} bill.",
+        "caption": "A common full-service-dining tipping convention, applied to a ${bill} bill.",
         "tiers": {
           "poor": "Poor service",
           "average": "Average",
@@ -12885,7 +12888,8 @@
         "title": "Bill vs. Bill Plus Tip",
         "caption": "The real dollar impact of tipping on the same bill.",
         "billOnly": "Bill only",
-        "withTip": "With {percent}% tip"
+        "withTip": "With {percent}% tip",
+        "tipAddedLabel": "Tip added"
       },
       "deliveryVsDineInChart": {
         "title": "Tipping by Service Type",
@@ -12894,7 +12898,8 @@
           "delivery": "Delivery",
           "dineIn": "Dine-in"
         }
-      }
+      },
+      "workedExampleTitle": "Worked Example"
     },
     "discount-calculator": {
       "title": "Discount Calculator",

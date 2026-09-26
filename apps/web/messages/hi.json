@@ -12557,31 +12557,31 @@
         "roundedUpNote": "राउंड अप किया गया ताकि किसी को खुले पैसों की ज़रूरत न पड़े।",
         "internationalNorms": {
           "title": "दुनिया भर में टिपिंग",
-          "intro": "टिपिंग के रिवाज़ हर देश में काफ़ी अलग होते हैं — जो एक जगह अपेक्षित है, वह कहीं और असामान्य या यहाँ तक कि अस्वीकार्य भी हो सकता है।",
+          "intro": "टिप देने की प्रथाएँ वेतन संरचना और सांस्कृतिक अपेक्षा के अनुसार बहुत भिन्न होती हैं — एक संदर्भ में जो अपेक्षित है, वह दूसरे में असामान्य या यहाँ तक कि अस्वीकृत भी हो सकता है।",
           "rows": [
             {
-              "region": "United States & Canada",
-              "norm": "15–20% is the standard expectation at sit-down restaurants; tipped workers often earn a lower base wage that assumes it."
+              "context": "पूर्ण-सेवा भोजनालय, टिप-निर्भर वेतन",
+              "norm": "15–20% सामान्य अपेक्षा है; सेवा कर्मचारियों को अक्सर कम आधार वेतन मिलता है जो इसे मानकर चलता है।"
             },
             {
-              "region": "United Kingdom",
-              "norm": "10–15% is common when a service charge isn't already added to the bill — check the receipt first."
+              "context": "पूर्ण-सेवा भोजनालय, सेवा शुल्क हमेशा शामिल नहीं",
+              "norm": "जब बिल में पहले से सेवा शुल्क शामिल न हो तो 10–15% आम है — पहले रसीद जांचें।"
             },
             {
-              "region": "Western Europe (France, Germany, Italy, Spain)",
-              "norm": "Service is usually already included in the price (service compris); rounding up or leaving small change is appreciated, not expected."
+              "context": "जहाँ सेवा मेन्यू की कीमत में ही शामिल होती है",
+              "norm": "पहले से कीमत में शामिल; ऊपर की ओर गोल करना या थोड़े खुले पैसे छोड़ना सराहनीय है, अपेक्षित नहीं।"
             },
             {
-              "region": "Japan",
-              "norm": "Not customary and can be seen as awkward or even impolite — excellent service is already considered part of the price."
+              "context": "ऐसी संस्कृतियाँ जहाँ टिप देना प्रचलित नहीं है",
+              "norm": "अजीब या असभ्य भी लग सकता है — उत्कृष्ट सेवा को पहले ही कीमत का हिस्सा माना जाता है।"
             },
             {
-              "region": "Australia & New Zealand",
-              "norm": "Not expected; hospitality staff are paid a full minimum wage, so tipping is a discretionary bonus for exceptional service."
+              "context": "पूर्ण न्यूनतम वेतन वाला आतिथ्य स्टाफ",
+              "norm": "अपेक्षित नहीं; स्टाफ को पूरा वेतन मिलता है, इसलिए टिप असाधारण सेवा के लिए एक वैकल्पिक बोनस है।"
             },
             {
-              "region": "Gulf countries (UAE, Saudi Arabia, Qatar)",
-              "norm": "A service charge is frequently included on the bill; a small additional cash tip for good service is appreciated but optional."
+              "context": "अनिवार्य सेवा शुल्क वाले बिल",
+              "norm": "अच्छी सेवा के लिए थोड़ी अतिरिक्त नकद टिप सराहनीय है लेकिन वैकल्पिक है।"
             }
           ],
           "disclaimer": "यह केवल सामान्य मार्गदर्शन है — स्थानीय रिवाज़ जगह के अनुसार अलग होते हैं और समय के साथ बदलते रहते हैं; अगर संदेह हो, तो बिल में पहले से शामिल हो सकने वाले सर्विस चार्ज के लिए जाँच लें।"
@@ -12640,7 +12640,8 @@
                 "value": 15
               }
             ],
-            "caption": "$60 के बिल पर चार आम प्रतिशतों पर टिप राशि — दर में छोटे अंतर बिल बढ़ने के साथ तेज़ी से बड़ा फ़र्क़ बना देते हैं।"
+            "caption": "$60 के बिल पर चार आम प्रतिशतों पर टिप राशि — दर में छोटे अंतर बिल बढ़ने के साथ तेज़ी से बड़ा फ़र्क़ बना देते हैं।",
+            "title": "प्रतिशत के अनुसार टिप"
           }
         },
         "examples": {
@@ -12845,7 +12846,8 @@
         "bill": "बिल",
         "tipPercent": "टिप %",
         "tipAmount": "टिप राशि",
-        "totalRow": "कुल: ${value}"
+        "totalRow": "कुल: ${value}",
+        "totalLabel": "कुल"
       },
       "percentRangeComparisonChart": {
         "title": "टिप प्रतिशत के अनुसार कुल",
@@ -12864,11 +12866,12 @@
         "title": "नकद टिपिंग के लिए राउंड अप",
         "intro": "{percent}% टिप के साथ ${bill} बिल, निकटतम $5 तक राउंड अप।",
         "exactLabel": "सटीक कुल",
-        "roundedLabel": "राउंड अप के बाद"
+        "roundedLabel": "राउंड अप के बाद",
+        "extraLabel": "पूर्णांकन से अतिरिक्त"
       },
       "serviceQualityScaleChart": {
         "title": "सेवा गुणवत्ता के अनुसार टिप",
-        "caption": "अमेरिकी रेस्तरां टिपिंग परंपरा, ${bill} बिल पर लागू।",
+        "caption": "पूर्ण-सेवा भोजनालयों में आम टिपिंग परंपरा, ${bill} बिल पर लागू।",
         "tiers": {
           "poor": "खराब सेवा",
           "average": "औसत",
@@ -12885,7 +12888,8 @@
         "title": "बिल बनाम बिल प्लस टिप",
         "caption": "समान बिल पर टिपिंग का वास्तविक डॉलर प्रभाव।",
         "billOnly": "केवल बिल",
-        "withTip": "{percent}% टिप सहित"
+        "withTip": "{percent}% टिप सहित",
+        "tipAddedLabel": "जोड़ी गई टिप"
       },
       "deliveryVsDineInChart": {
         "title": "सेवा प्रकार के अनुसार टिपिंग",
@@ -12894,7 +12898,8 @@
           "delivery": "डिलीवरी",
           "dineIn": "डाइन-इन"
         }
-      }
+      },
+      "workedExampleTitle": "हल किया गया उदाहरण"
     },
     "discount-calculator": {
       "title": "डिस्काउंट कैलकुलेटर",

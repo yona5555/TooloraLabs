@@ -12557,31 +12557,31 @@
         "roundedUpNote": "Aufgerundet, damit niemand passendes Kleingeld braucht.",
         "internationalNorms": {
           "title": "Trinkgeld weltweit",
-          "intro": "Trinkgeldbräuche unterscheiden sich stark von Land zu Land – was an einem Ort erwartet wird, kann anderswo ungewöhnlich oder sogar unerwünscht sein.",
+          "intro": "Trinkgeldbräuche unterscheiden sich stark je nach Lohnstruktur und kultureller Erwartung — was in einem Umfeld erwartet wird, kann in einem anderen ungewöhnlich oder sogar unerwünscht sein.",
           "rows": [
             {
-              "region": "USA & Kanada",
-              "norm": "15–20% sind der Standard in Restaurants mit Bedienung; Servicekräfte erhalten oft einen niedrigeren Grundlohn, der dies bereits einkalkuliert."
+              "context": "Restaurant mit vollem Service, trinkgeldabhängige Löhne",
+              "norm": "15–20 % sind die übliche Erwartung; Servicekräfte erhalten oft einen niedrigeren Grundlohn, der dies einkalkuliert."
             },
             {
-              "region": "Vereinigtes Königreich",
-              "norm": "10–15% sind üblich, wenn nicht bereits eine Servicegebühr auf der Rechnung steht – prüfen Sie zuerst den Bon."
+              "context": "Restaurant mit vollem Service, Servicegebühr nicht immer enthalten",
+              "norm": "10–15 % sind üblich, wenn noch keine Servicegebühr auf der Rechnung steht — zuerst den Beleg prüfen."
             },
             {
-              "region": "Westeuropa (Frankreich, Deutschland, Italien, Spanien)",
-              "norm": "Der Service ist meist schon im Preis enthalten (service compris); Aufrunden oder Kleingeld dazulassen wird geschätzt, aber nicht erwartet."
+              "context": "Restaurants, bei denen der Service im Menüpreis enthalten ist",
+              "norm": "Bereits im Preis enthalten; Aufrunden oder etwas Wechselgeld dazulassen wird geschätzt, aber nicht erwartet."
             },
             {
-              "region": "Japan",
-              "norm": "Nicht üblich und kann als befremdlich oder sogar unhöflich empfunden werden – exzellenter Service gilt bereits als Teil des Preises."
+              "context": "Kulturen, in denen Trinkgeld unüblich ist",
+              "norm": "Kann als unangebracht oder sogar unhöflich gelten — exzellenter Service gilt bereits als im Preis enthalten."
             },
             {
-              "region": "Australien & Neuseeland",
-              "norm": "Nicht erwartet; Servicekräfte erhalten den vollen Mindestlohn, sodass Trinkgeld ein freiwilliger Bonus für außergewöhnlichen Service ist."
+              "context": "Servicepersonal mit vollem Mindestlohn",
+              "norm": "Nicht erwartet; das Personal erhält einen vollen Lohn, Trinkgeld ist ein freiwilliger Bonus für außergewöhnlichen Service."
             },
             {
-              "region": "Golfstaaten (VAE, Saudi-Arabien, Katar)",
-              "norm": "Eine Servicegebühr ist häufig bereits auf der Rechnung enthalten; ein kleines zusätzliches Bar-Trinkgeld für guten Service wird geschätzt, ist aber optional."
+              "context": "Lokale mit verpflichtender Servicegebühr auf der Rechnung",
+              "norm": "Ein kleines zusätzliches Bargeld-Trinkgeld für guten Service wird geschätzt, ist aber optional."
             }
           ],
           "disclaimer": "Nur allgemeine Orientierung – örtliche Gepflogenheiten variieren je nach Lokal und ändern sich mit der Zeit; prüfen Sie im Zweifel die Rechnung auf eine bereits enthaltene Servicegebühr."
@@ -12640,7 +12640,8 @@
                 "value": 15
               }
             ],
-            "caption": "Der Trinkgeldbetrag bei einer Rechnung von 60 $ bei vier gängigen Prozentsätzen – kleine Unterschiede im Satz summieren sich schnell, je größer die Rechnung wird."
+            "caption": "Der Trinkgeldbetrag bei einer Rechnung von 60 $ bei vier gängigen Prozentsätzen – kleine Unterschiede im Satz summieren sich schnell, je größer die Rechnung wird.",
+            "title": "Trinkgeld nach Prozentsatz"
           }
         },
         "examples": {
@@ -12845,7 +12846,8 @@
         "bill": "Rechnung",
         "tipPercent": "Trinkgeld %",
         "tipAmount": "Trinkgeldbetrag",
-        "totalRow": "Gesamt: {value} $"
+        "totalRow": "Gesamt: {value} $",
+        "totalLabel": "Gesamt"
       },
       "percentRangeComparisonChart": {
         "title": "Gesamtsumme nach Trinkgeldsatz",
@@ -12864,11 +12866,12 @@
         "title": "Aufrunden für Bartrinkgeld",
         "intro": "Eine Rechnung von {bill} $ mit {percent} % Trinkgeld, aufgerundet auf die nächsten 5 $.",
         "exactLabel": "Exakte Summe",
-        "roundedLabel": "Aufgerundet"
+        "roundedLabel": "Aufgerundet",
+        "extraLabel": "Zusätzlich durch Rundung"
       },
       "serviceQualityScaleChart": {
         "title": "Trinkgeld nach Servicequalität",
-        "caption": "US-Restaurant-Trinkgeldkonvention, angewendet auf eine Rechnung von {bill} $.",
+        "caption": "Eine gängige Trinkgeldkonvention für Restaurants mit vollem Service, angewendet auf eine Rechnung von {bill} $.",
         "tiers": {
           "poor": "Schlechter Service",
           "average": "Durchschnittlich",
@@ -12885,7 +12888,8 @@
         "title": "Rechnung vs. Rechnung plus Trinkgeld",
         "caption": "Die tatsächliche finanzielle Auswirkung des Trinkgelds auf dieselbe Rechnung.",
         "billOnly": "Nur Rechnung",
-        "withTip": "Mit {percent} % Trinkgeld"
+        "withTip": "Mit {percent} % Trinkgeld",
+        "tipAddedLabel": "Hinzugefügtes Trinkgeld"
       },
       "deliveryVsDineInChart": {
         "title": "Trinkgeld nach Servicetyp",
@@ -12894,7 +12898,8 @@
           "delivery": "Lieferung",
           "dineIn": "Im Restaurant"
         }
-      }
+      },
+      "workedExampleTitle": "Rechenbeispiel"
     },
     "discount-calculator": {
       "title": "Rabattrechner",

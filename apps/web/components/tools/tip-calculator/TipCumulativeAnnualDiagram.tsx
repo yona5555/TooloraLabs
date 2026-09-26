@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
+import TipWorkedExampleNote from "./TipWorkedExampleNote";
 
 /** Real weekly-dining projection: the tool's own per-visit tip amount, multiplied across a year — a running total over time, best read as a trend line. */
 const WEEKLY_TIP = 15.3;
@@ -9,6 +10,7 @@ const WEEKS_PER_MONTH = 4.33;
 
 export default async function TipCumulativeAnnualDiagram() {
   const t = await getTranslations("tools.tip-calculator.cumulativeAnnualDiagram");
+  const tRoot = await getTranslations("tools.tip-calculator");
 
   const points = MONTH_MARKS.map((months) => {
     const total = WEEKLY_TIP * WEEKS_PER_MONTH * months;
@@ -18,8 +20,11 @@ export default async function TipCumulativeAnnualDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { weeklyTip: WEEKLY_TIP.toFixed(2) })}</p>
-      <div className="mt-4">
-        <EduLineChart points={points} ariaLabel={t("title")} lineColorClass="stroke-violet-500 dark:stroke-violet-400" dotColorClass="fill-violet-500 dark:fill-violet-400" />
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="min-w-0 flex-1">
+          <EduLineChart points={points} ariaLabel={t("title")} lineColorClass="stroke-violet-500 dark:stroke-violet-400" dotColorClass="fill-violet-500 dark:fill-violet-400" />
+        </div>
+        <TipWorkedExampleNote title={tRoot("workedExampleTitle")} rows={points.map((p) => ({ label: p.label, value: p.formatted }))} />
       </div>
     </SectionCard>
   );

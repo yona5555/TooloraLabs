@@ -27,14 +27,13 @@ export default async function TipEducation() {
   const applicationItems = t.raw("applications.items") as ApplicationItem[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
-  const diagramBars = t.raw("intro.diagram.bars") as { label: string; value: number }[];
 
   return (
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <TipPercentBarDiagram bars={diagramBars} caption={t("intro.diagram.caption")} />
+        <TipPercentBarDiagram />
         <TipFormulaDiagram />
         <TipPercentRangeComparisonChart />
       </InfoSection>

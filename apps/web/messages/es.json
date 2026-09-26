@@ -12557,31 +12557,31 @@
         "roundedUpNote": "Redondeado hacia arriba para que nadie necesite cambio exacto.",
         "internationalNorms": {
           "title": "La propina alrededor del mundo",
-          "intro": "Las costumbres de propina varían mucho según el país: lo habitual en un lugar puede resultar inusual, o incluso rechazarse, en otro.",
+          "intro": "Las costumbres de propina varían mucho según la estructura salarial y la expectativa cultural — lo habitual en un contexto puede resultar inusual, o incluso rechazado, en otro.",
           "rows": [
             {
-              "region": "Estados Unidos y Canadá",
-              "norm": "Entre el 15 % y el 20 % es lo esperado en restaurantes con servicio de mesa; el personal que recibe propinas suele cobrar un salario base más bajo que da esto por hecho."
+              "context": "Restaurantes con servicio completo y salarios que dependen de la propina",
+              "norm": "15–20% es lo habitual; el personal suele cobrar un salario base más bajo que ya cuenta con ello."
             },
             {
-              "region": "Reino Unido",
-              "norm": "Entre el 10 % y el 15 % es habitual cuando la cuenta no incluye ya un cargo por servicio — conviene revisar el recibo primero."
+              "context": "Restaurantes con servicio completo, cargo por servicio no siempre incluido",
+              "norm": "10–15% es común cuando el cargo por servicio no está ya incluido en la cuenta — revisa el recibo primero."
             },
             {
-              "region": "Europa Occidental (Francia, Alemania, Italia, España)",
-              "norm": "El servicio suele estar ya incluido en el precio (service compris); redondear o dejar algo de cambio se agradece, pero no se espera."
+              "context": "Lugares donde el servicio está incluido en el precio del menú",
+              "norm": "Ya incluido en el precio; redondear o dejar cambio suelto se aprecia, pero no se espera."
             },
             {
-              "region": "Japón",
-              "norm": "No es costumbre y puede resultar incómodo o incluso descortés: un servicio excelente ya se considera parte del precio."
+              "context": "Culturas donde dar propina no es costumbre",
+              "norm": "Puede parecer incómodo o incluso descortés — un servicio excelente ya se considera parte del precio."
             },
             {
-              "region": "Australia y Nueva Zelanda",
-              "norm": "No se espera; el personal de hostelería cobra el salario mínimo completo, así que la propina es un extra opcional por un servicio excepcional."
+              "context": "Personal de hostelería con salario mínimo completo",
+              "norm": "No se espera; el personal cobra un salario completo, así que la propina es un extra opcional por un servicio excepcional."
             },
             {
-              "region": "Países del Golfo (EAU, Arabia Saudí, Catar)",
-              "norm": "Con frecuencia la cuenta ya incluye un cargo por servicio; una pequeña propina adicional en efectivo por buen servicio se agradece, pero es opcional."
+              "context": "Locales con cargo por servicio obligatorio en la cuenta",
+              "norm": "Una pequeña propina adicional en efectivo por buen servicio se aprecia, pero es opcional."
             }
           ],
           "disclaimer": "Orientación general únicamente — las costumbres locales varían según el establecimiento y cambian con el tiempo; ante la duda, revisa si la cuenta ya incluye un cargo por servicio."
@@ -12640,7 +12640,8 @@
                 "value": 15
               }
             ],
-            "caption": "El importe de la propina sobre una cuenta de 60 $ con cuatro porcentajes habituales — pequeñas diferencias en el porcentaje se acumulan rápido a medida que crece la cuenta."
+            "caption": "El importe de la propina sobre una cuenta de 60 $ con cuatro porcentajes habituales — pequeñas diferencias en el porcentaje se acumulan rápido a medida que crece la cuenta.",
+            "title": "Propina según el porcentaje"
           }
         },
         "examples": {
@@ -12845,7 +12846,8 @@
         "bill": "Cuenta",
         "tipPercent": "% de propina",
         "tipAmount": "Monto de la propina",
-        "totalRow": "Total: ${value}"
+        "totalRow": "Total: ${value}",
+        "totalLabel": "Total"
       },
       "percentRangeComparisonChart": {
         "title": "Total por porcentaje de propina",
@@ -12864,11 +12866,12 @@
         "title": "Redondeo hacia arriba para propina en efectivo",
         "intro": "Una cuenta de ${bill} con {percent}% de propina, redondeada al $5 más cercano hacia arriba.",
         "exactLabel": "Total exacto",
-        "roundedLabel": "Redondeado hacia arriba"
+        "roundedLabel": "Redondeado hacia arriba",
+        "extraLabel": "Extra por redondeo"
       },
       "serviceQualityScaleChart": {
         "title": "Propina según la calidad del servicio",
-        "caption": "Convención de propinas en restaurantes de EE. UU., aplicada a una cuenta de ${bill}.",
+        "caption": "Una convención de propinas común en restaurantes con servicio completo, aplicada a una cuenta de ${bill}.",
         "tiers": {
           "poor": "Servicio deficiente",
           "average": "Promedio",
@@ -12885,7 +12888,8 @@
         "title": "Cuenta vs. cuenta más propina",
         "caption": "El impacto real en dólares de la propina sobre la misma cuenta.",
         "billOnly": "Solo la cuenta",
-        "withTip": "Con {percent}% de propina"
+        "withTip": "Con {percent}% de propina",
+        "tipAddedLabel": "Propina añadida"
       },
       "deliveryVsDineInChart": {
         "title": "Propinas según el tipo de servicio",
@@ -12894,7 +12898,8 @@
           "delivery": "Entrega a domicilio",
           "dineIn": "En el restaurante"
         }
-      }
+      },
+      "workedExampleTitle": "Ejemplo Calculado"
     },
     "discount-calculator": {
       "title": "Calculadora de descuentos",
