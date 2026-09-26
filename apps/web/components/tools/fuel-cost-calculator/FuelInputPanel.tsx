@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import { FUEL_SCENARIOS, type FuelRateMode, type FuelScenario } from "./types";
 
 type Props = {
@@ -14,6 +16,8 @@ type Props = {
   onRateValueChange: (value: string) => void;
   pricePerUnit: string;
   onPricePerUnitChange: (value: string) => void;
+  currency: CurrencyCode;
+  onCurrencyChange: (value: CurrencyCode) => void;
   onScenarioPreset: (scenario: FuelScenario) => void;
   onClear: () => void;
 };
@@ -27,6 +31,8 @@ export default function FuelInputPanel({
   onRateValueChange,
   pricePerUnit,
   onPricePerUnitChange,
+  currency,
+  onCurrencyChange,
   onScenarioPreset,
   onClear,
 }: Props) {
@@ -49,6 +55,12 @@ export default function FuelInputPanel({
       </div>
 
       <div className="space-y-4">
+        {/* The approximate-conversion note moves to the page's consolidated
+            Notices section (see FuelEducation.tsx) instead of showing inline
+            here — no warning/notice of any kind belongs inside the
+            calculator/result area itself. */}
+        <CurrencySelector value={currency} onChange={onCurrencyChange} showApproximateNote={false} />
+
         <ToolInput
           label={t("distanceLabel")}
           type="text"
@@ -65,6 +77,7 @@ export default function FuelInputPanel({
             <button
               type="button"
               onClick={() => onRateModeChange("consumption")}
+              title={t("rateModes.consumptionExample")}
               className={`flex-1 rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${
                 rateMode === "consumption"
                   ? "border-blue-400 bg-blue-600 text-white"
@@ -76,6 +89,7 @@ export default function FuelInputPanel({
             <button
               type="button"
               onClick={() => onRateModeChange("efficiency")}
+              title={t("rateModes.efficiencyExample")}
               className={`flex-1 rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${
                 rateMode === "efficiency"
                   ? "border-blue-400 bg-blue-600 text-white"
@@ -85,6 +99,9 @@ export default function FuelInputPanel({
               {t("rateModes.efficiency")}
             </button>
           </div>
+          <span className="mt-1.5 block text-xs text-zinc-500 dark:text-zinc-400">
+            {rateMode === "consumption" ? t("rateModes.consumptionExample") : t("rateModes.efficiencyExample")}
+          </span>
         </div>
 
         <ToolInput

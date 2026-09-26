@@ -1,18 +1,25 @@
-type Segment = { key: string; value: number; label: string; colorClass: string };
+type Segment = { key: string; value: number; label: string; formatted: string; colorClass: string; dotColorClass: string };
 
 type BreakEvenRevenueDonutProps = {
   segments: Segment[];
-  centerValue: string;
-  centerLabel: string;
-  caption: string;
+  ariaLabel: string;
 };
 
 const SIZE = 168;
-const STROKE = 20;
+const STROKE = 24;
 const RADIUS = (SIZE - STROKE) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
-export default function BreakEvenRevenueDonut({ segments, centerValue, centerLabel, caption }: BreakEvenRevenueDonutProps) {
+/**
+ * Matches fuel-cost-calculator's EduDonutChart exactly — the site-wide
+ * reference for how a donut + its own legend renders (fixed 168x168 SVG
+ * via width/height attributes, not a scaling CSS class, so it never grows
+ * or shrinks with an arbitrarily wide container; legend beside it on
+ * larger screens, below it on narrow ones). Every donut in this tool now
+ * shares this one component instead of each having its own slightly
+ * different size/layout.
+ */
+export default function BreakEvenRevenueDonut({ segments, ariaLabel }: BreakEvenRevenueDonutProps) {
   const total = segments.reduce((sum, s) => sum + s.value, 0);
   const center = SIZE / 2;
 
@@ -24,48 +31,38 @@ export default function BreakEvenRevenueDonut({ segments, centerValue, centerLab
       const dashoffset = -acc.offset;
       return { arcs: [...acc.arcs, { ...segment, dasharray, dashoffset }], offset: acc.offset + arcLength };
     },
-    { arcs: [], offset: 0 },
+    { arcs: [], offset: 0 }
   );
 
   return (
-    <figure className="my-2 flex flex-col items-center">
-      <div dir="ltr">
-        <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-40">
-          <circle cx={center} cy={center} r={RADIUS} fill="none" strokeWidth={STROKE} className="stroke-zinc-100 dark:stroke-zinc-800" />
-          {arcs.map((arc) => (
-            <circle
-              key={arc.key}
-              cx={center}
-              cy={center}
-              r={RADIUS}
-              fill="none"
-              strokeWidth={STROKE}
-              strokeDasharray={arc.dasharray}
-              strokeDashoffset={arc.dashoffset}
-              transform={`rotate(-90 ${center} ${center})`}
-              className={arc.colorClass}
-            />
-          ))}
-          <text x={center} y={center - 4} textAnchor="middle" fontSize={16} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-50">
-            {centerValue}
-          </text>
-          <text x={center} y={center + 15} textAnchor="middle" fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
-            {centerLabel}
-          </text>
-        </svg>
-      </div>
-      <div className="mt-2 grid w-full max-w-[220px] grid-cols-1 gap-1 text-xs">
-        {segments.map((s) => (
-          <div key={s.key} className="flex items-center justify-between gap-2">
-            <span className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300">
-              <span className={`h-2 w-2 rounded-full ${s.colorClass.replace(/stroke-/g, "bg-")}`} />
-              {s.label}
-            </span>
-            <span className="font-mono font-medium text-zinc-900 dark:text-zinc-100">${s.value.toLocaleString("en-US")}</span>
-          </div>
+    <div dir="ltr" className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:justify-center">
+      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={ariaLabel} width={SIZE} height={SIZE} className="shrink-0">
+        <circle cx={center} cy={center} r={RADIUS} fill="none" strokeWidth={STROKE} className="stroke-zinc-100 dark:stroke-zinc-800" />
+        {arcs.map((arc) => (
+          <circle
+            key={arc.key}
+            cx={center}
+            cy={center}
+            r={RADIUS}
+            fill="none"
+            strokeWidth={STROKE}
+            strokeDasharray={arc.dasharray}
+            strokeDashoffset={arc.dashoffset}
+            strokeLinecap="butt"
+            className={arc.colorClass}
+            transform={`rotate(-90 ${center} ${center})`}
+          />
         ))}
-      </div>
-      <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
-    </figure>
+      </svg>
+      <ul className="flex flex-col gap-2 text-sm">
+        {segments.map((s) => (
+          <li key={s.key} className="flex items-center gap-2">
+            <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${s.dotColorClass}`} />
+            <span className="text-zinc-600 dark:text-zinc-300">{s.label}</span>
+            <span className="font-semibold text-zinc-900 dark:text-zinc-100">{s.formatted}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

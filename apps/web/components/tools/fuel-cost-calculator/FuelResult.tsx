@@ -1,22 +1,33 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { CurrencyCode } from "@/lib/currency";
+import AutoFitText from "@/components/tool-ui/AutoFitText";
 import FuelFlowDiagram from "./FuelFlowDiagram";
 import FuelPriceSensitivityDiagram from "./FuelPriceSensitivityDiagram";
 import FuelShareExportModal from "./FuelShareExportModal";
+import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import type { FuelCostCalculatorOutput } from "./types";
+
+// Module-level so it's a stable reference across renders (AutoFitText only
+// re-measures on `text`/`className` changes, not on `steps`).
+const HERO_STEPS = ["text-3xl", "text-2xl", "text-xl", "text-lg", "text-base", "text-sm"];
 
 type Props = {
   result: FuelCostCalculatorOutput;
   distance: number;
   pricePerUnit: number;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
 };
 
-export default function FuelResult({ result, distance, pricePerUnit, digitStyle }: Props) {
+export default function FuelResult({ result, distance, pricePerUnit, digitStyle, currency }: Props) {
   const t = useTranslations("tools.fuel-cost-calculator.result");
   const ts = useTranslations("tools.fuel-cost-calculator.sensitivityDiagram");
+  const tform = useTranslations("tools.fuel-cost-calculator.form");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
   const fmt = (value: number, maxFractionDigits = 2) =>
     formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: maxFractionDigits });
+  const money = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   if (result.error) {
     const messageKey =
@@ -37,7 +48,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
     );
   }
 
-  const sentence = t("sentence", { distance: fmt(distance, 0), cost: fmt(result.totalCost) });
+  const sentence = t("sentence", { distance: fmt(distance, 0), cost: money(result.totalCost) });
 
   const fuelUsed = result.fuelUsed;
   const sensitivityPoints = [0.6, 0.8, 1, 1.2, 1.4, 1.6].map((multiplier) => {
@@ -45,34 +56,66 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
     return { price, cost: fuelUsed * price };
   });
 
+  const heroValue = money(result.totalCost);
+
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
         <FuelShareExportModal
           inputRows={[{ label: t("fuelUsedLabel"), value: fmt(result.fuelUsed) }]}
-          resultRows={[{ label: t("costPerDistanceLabel"), value: fmt(result.costPerDistanceUnit, 3) }]}
+          resultRows={[{ label: t("costPerDistanceLabel"), value: money(result.costPerDistanceUnit) }]}
           heroLabel={t("heading")}
-          heroValue={fmt(result.totalCost)}
+          heroValue={heroValue}
           sentence={sentence}
         />
       </div>
       <div className="p-4 lg:p-6">
-        <p className="text-center font-mono text-3xl font-bold text-blue-700 dark:text-blue-300">
-          {fmt(result.totalCost)}
-        </p>
+        <AutoFitText dir="ltr" text={heroValue} steps={HERO_STEPS} allowWrap={false} className="text-center font-mono font-bold text-blue-700 dark:text-blue-300" />
 
-        <div dir="ltr" className="mt-5 flex justify-center overflow-x-auto">
+        {/* Stacked (not side-by-side) deliberately: this is the narrower above-the-fold
+            result column, not a wide education card — at lg: viewport width the redesigned
+            full-width flow boxes and the table would compete for the same ~450px and both
+            get crushed (confirmed visually before this fix). Stacking keeps both legible. */}
+        <div className="mt-5 flex flex-col gap-4">
           <FuelFlowDiagram
             distanceLabel={fmt(distance, 0)}
             fuelLabel={fmt(result.fuelUsed)}
-            costLabel={fmt(result.totalCost)}
+            costLabel={heroValue}
+          />
+          <FuelWorkedExampleNote
+            title={tw("title")}
+            rows={[
+              { label: t("fuelUsedLabel"), value: fmt(result.fuelUsed) },
+              { label: tform("priceLabel"), value: money(pricePerUnit) },
+              { label: t("heading"), value: money(result.totalCost), emphasize: true },
+              { label: t("costPerDistanceLabel"), value: money(result.costPerDistanceUnit) },
+            ]}
           />
         </div>
 
         {pricePerUnit > 0 && (
-          <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
-            <FuelPriceSensitivityDiagram points={sensitivityPoints} currentPrice={pricePerUnit} caption={ts("caption")} xLabel={ts("xLabel")} />
+          <div className="mt-5 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <FuelPriceSensitivityDiagram
+              lowPoint={sensitivityPoints[0]}
+              currentPoint={sensitivityPoints[2]}
+              highPoint={sensitivityPoints[5]}
+              caption={ts("caption")}
+              lowLabel={ts("lowScenarioLabel")}
+              currentLabel={ts("currentScenarioLabel")}
+              highLabel={ts("highScenarioLabel")}
+              currency={currency}
+              digitStyle={digitStyle}
+            />
+            <FuelWorkedExampleNote
+              title={tw("title")}
+              rows={[
+                { label: tform("priceLabel"), value: money(pricePerUnit) },
+                { label: t("heading"), value: money(sensitivityPoints[2].cost), emphasize: true },
+                { label: ts("lowScenarioLabel"), value: money(sensitivityPoints[0].cost) },
+                { label: ts("highScenarioLabel"), value: money(sensitivityPoints[5].cost) },
+              ]}
+            />
           </div>
         )}
 
@@ -84,7 +127,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle 
           <li className="flex items-center justify-between gap-3">
             <span className="text-zinc-500 dark:text-zinc-400">{t("costPerDistanceLabel")}</span>
             <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">
-              {fmt(result.costPerDistanceUnit, 3)}
+              {money(result.costPerDistanceUnit)}
             </span>
           </li>
         </ul>

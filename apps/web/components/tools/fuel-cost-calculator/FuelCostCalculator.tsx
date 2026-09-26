@@ -5,6 +5,7 @@ import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { FuelCostCalculator as FuelCostTool } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
@@ -13,6 +14,7 @@ import FuelInputPanel from "./FuelInputPanel";
 import FuelResult from "./FuelResult";
 import FuelQuickReference from "./FuelQuickReference";
 import FuelReferenceTable from "./FuelReferenceTable";
+import { FuelLiveInputsProvider } from "./FuelLiveInputsContext";
 import { FUEL_DEFAULTS, type FuelRateMode, type FuelScenario } from "./types";
 
 const tool = new FuelCostTool();
@@ -26,12 +28,16 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
   const [rateMode, setRateMode] = useState<FuelRateMode>(FUEL_DEFAULTS.rateMode);
   const [rateValue, setRateValue] = useState(FUEL_DEFAULTS.rateValue);
   const [pricePerUnit, setPricePerUnit] = useState(FUEL_DEFAULTS.pricePerUnit);
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
 
   function handleScenarioPreset(scenario: FuelScenario) {
     setDistance(scenario.distance);
     setRateMode(scenario.rateMode);
     setRateValue(scenario.rateValue);
-    setPricePerUnit(scenario.pricePerUnit);
+    // Scenario presets are authored in USD — convert to whatever currency is
+    // currently selected so picking a preset never silently reverts the price
+    // display back to USD-denominated numbers under a non-USD symbol.
+    setPricePerUnit(convertAmountString(scenario.pricePerUnit, "USD", currency, (raw) => parseLocalizedNumber(raw) || 0));
   }
 
   function handleClear() {
@@ -39,6 +45,16 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
     setRateMode(FUEL_DEFAULTS.rateMode);
     setRateValue(FUEL_DEFAULTS.rateValue);
     setPricePerUnit(FUEL_DEFAULTS.pricePerUnit);
+    setCurrency(DEFAULT_CURRENCY);
+  }
+
+  // Currency is a pure unit conversion on the already-entered price, not a new
+  // calculation — it takes effect immediately, matching every other
+  // currency-aware tool on the site (see Break-Even/Compound Interest Calculator).
+  function handleCurrencyChange(next: CurrencyCode) {
+    if (next === currency) return;
+    setPricePerUnit((prev) => convertAmountString(prev, currency, next, (raw) => parseLocalizedNumber(raw) || 0));
+    setCurrency(next);
   }
 
   const digitStyle: DigitStyle = resolveDigitStyle(distance, rateValue, pricePerUnit);
@@ -60,10 +76,13 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    // Only linkable once the Notices section actually renders something —
+    // it's conditional on currency !== "USD" (see FuelNoticesSection.tsx).
+    ...(currency !== "USD" ? [{ id: "notices", label: tNav("notices") }] : []),
   ];
 
   return (
-    <>
+    <FuelLiveInputsProvider value={{ currency, digitStyle }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -77,6 +96,8 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
                 onRateValueChange={setRateValue}
                 pricePerUnit={pricePerUnit}
                 onPricePerUnitChange={setPricePerUnit}
+                currency={currency}
+                onCurrencyChange={handleCurrencyChange}
                 onScenarioPreset={handleScenarioPreset}
                 onClear={handleClear}
               />
@@ -90,6 +111,7 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
                 distance={parseLocalizedNumber(distance) || 0}
                 pricePerUnit={parseLocalizedNumber(pricePerUnit) || 0}
                 digitStyle={digitStyle}
+                currency={currency}
               />
               <FuelReferenceTable />
             </div>
@@ -112,6 +134,6 @@ export default function FuelCostCalculator({ education }: { education: ReactNode
       </div>
 
       {education}
-    </>
+    </FuelLiveInputsProvider>
   );
 }

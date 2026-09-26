@@ -107,14 +107,14 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
           breakEvenUnits={result.breakEvenUnits}
           targetProfitUnits={mode === "targetProfit" ? result.targetProfitUnits : 0}
           digitStyle={digitStyle}
-          fixedCostsLabel={t("aboveFold.chartFixedCosts")}
-          totalCostLabel={t("aboveFold.chartTotalCost")}
-          revenueLabel={t("aboveFold.chartRevenue")}
-          breakEvenLabel={t("aboveFold.chartBreakEven")}
-          targetProfitLabel={t("aboveFold.chartTargetProfit")}
-          tooltipUnitsLabel={t("aboveFold.tooltipUnits")}
-          tooltipProfitLabel={t("aboveFold.tooltipProfit")}
-          chartAriaLabel={t("aboveFold.chartAriaLabel")}
+          columnUnits={t("aboveFold.columnUnits")}
+          columnTotalCost={t("aboveFold.chartTotalCost")}
+          columnRevenue={t("aboveFold.chartRevenue")}
+          columnResult={t("aboveFold.columnResult")}
+          statusLossLabel={t("aboveFold.statusLoss")}
+          statusBreakEvenLabel={t("aboveFold.statusBreakeven")}
+          statusProfitLabel={t("aboveFold.statusProfit")}
+          caption={t("aboveFold.chartCaption")}
         />
       </div>
 

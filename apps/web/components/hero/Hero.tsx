@@ -1,31 +1,37 @@
-import { useTranslations } from "next-intl";
-import SearchBar from "./SearchBar";
 import HeroBackground from "./HeroBackground";
-import HeroMathDoodles from "./HeroMathDoodles";
-import HeroCategories from "./HeroCategories";
-import ScientificCalculatorWidget from "@/components/tools/scientific-calculator/ScientificCalculatorWidget";
+import CategorySidebar from "@/components/home/CategorySidebar";
+import HomeCalculator from "@/components/home/calculator/HomeCalculator";
+import HomeCalculatorDocs from "@/components/home/HomeCalculatorDocs";
 
 export default function Hero() {
-  const t = useTranslations("hero");
-
   return (
-    <section className="relative overflow-hidden">
+    // No overflow-hidden here: it would silently disable position:sticky for
+    // every descendant (the category sidebar and the docs section's "On
+    // This Page" TOC both rely on it), since sticky is computed against the
+    // nearest ancestor that clips overflow. HeroBackground already clips its
+    // own decorative blobs via its own wrapper, so the section itself never
+    // needed this in the first place.
+    <section className="relative">
       <HeroBackground />
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 py-16 text-center">
-        {/* HeroMathDoodles is absolutely positioned against THIS wrapper, so its inset-0 spans the
-            full hero without reaching past this section's own padding into whatever comes next on
-            the homepage. Every direct content child below is given its own "relative z-10" so it
-            paints above the doodle layer. */}
-        <HeroMathDoodles />
-        <div className="relative z-10 w-full">
-          <div className="mx-auto grid w-full max-w-6xl items-stretch gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-            <div className="min-w-0">
-              <ScientificCalculatorWidget />
-            </div>
-            <div className="flex min-w-0 flex-col gap-4">
-              <SearchBar placeholder={t("searchPlaceholder")} searchLabel={t("search")} />
-              <HeroCategories />
-            </div>
+      {/* Unlike the rest of the site's sections, this content area is intentionally full-bleed (no
+          mx-auto max-w-* / px-* wrapper) — the category sidebar and calculator column together fill
+          the page edge to edge at every width, with the two columns stretched to the same height via
+          the flex row's default cross-axis stretch (no fixed height needed on either side).
+
+          The center column gets its own subtle page-background fill (distinct from the calculator
+          and docs cards' own white/zinc-900) plus a small uniform gutter, so the calculator and docs
+          sections read as independent elevated cards with real depth rather than flush, flat panels
+          — while the gutter itself stays inside this full-bleed row, never opening a true empty
+          margin at the row's own left/right edges (the sidebar still touches those). */}
+      <div className="relative z-10 flex min-h-[640px] w-full flex-col border-y border-zinc-200 lg:flex-row dark:border-zinc-800">
+        <CategorySidebar />
+        <div className="flex min-w-0 flex-1 flex-col gap-4 bg-zinc-100 p-3 dark:bg-zinc-950 sm:p-4">
+          <HomeCalculator />
+          {/* No overflow-hidden here either — this card holds the docs section's own sticky "On
+              This Page" TOC, and everything inside is already padded well clear of the rounded
+              corners (HomeCalculatorDocs starts at p-4+), so clipping was never load-bearing. */}
+          <div className="rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+            <HomeCalculatorDocs />
           </div>
         </div>
       </div>

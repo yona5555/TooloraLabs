@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BreakEvenModeTabs from "./BreakEvenModeTabs";
@@ -265,15 +266,16 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
               <ViewDocsLink slug="break-even-calculator" />
 
               {hasCalculated[mode] && sensitivityPoints && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t2("sensitivityDiagram.title")}</h3>
+                <SectionCard title={t2("sensitivityDiagram.title")}>
                   <BreakEvenSensitivityDiagram
                     points={sensitivityPoints}
                     currentPrice={activePricePerUnit}
+                    columnPrice={t2("sensitivityDiagram.columnPrice")}
+                    columnUnits={t2("sensitivityDiagram.columnUnits")}
+                    currentPriceLabel={t2("sensitivityDiagram.currentPriceLabel")}
                     caption={t2("sensitivityDiagram.caption")}
-                    xLabel={t2("sensitivityDiagram.xLabel")}
                   />
-                </div>
+                </SectionCard>
               )}
 
               <BreakEvenReference />

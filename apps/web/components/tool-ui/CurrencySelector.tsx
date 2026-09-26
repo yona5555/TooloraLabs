@@ -6,9 +6,11 @@ type CurrencySelectorProps = {
   value: CurrencyCode;
   onChange: (currency: CurrencyCode) => void;
   className?: string;
+  /** Off only for callers that show this same note themselves elsewhere (e.g. a page's consolidated Notices section). On by default so every other caller is unaffected. */
+  showApproximateNote?: boolean;
 };
 
-export default function CurrencySelector({ value, onChange, className = "" }: CurrencySelectorProps) {
+export default function CurrencySelector({ value, onChange, className = "", showApproximateNote = true }: CurrencySelectorProps) {
   const t = useTranslations("common.currency");
 
   return (
@@ -26,7 +28,7 @@ export default function CurrencySelector({ value, onChange, className = "" }: Cu
           </option>
         ))}
       </select>
-      {value !== "USD" && <span className="block text-xs text-amber-600 dark:text-amber-400">{t("approximateNote")}</span>}
+      {showApproximateNote && value !== "USD" && <span className="block text-xs text-amber-600 dark:text-amber-400">{t("approximateNote")}</span>}
     </div>
   );
 }

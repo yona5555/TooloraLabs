@@ -170,16 +170,81 @@
     "shareViaApps": "Partager via des applications"
   },
   "hero": {
-    "searchPlaceholder": "Rechercher des calculateurs, convertisseurs, générateurs...",
-    "search": "Rechercher",
-    "searchNoResults": "Aucun outil trouvé pour « {query} »"
+    "searchPlaceholder": "Rechercher des calculateurs, convertisseurs, générateurs..."
   },
-  "heroCalculatorLog": {
-    "title": "Journal des calculs",
-    "empty": "Vos calculs s'afficheront ici.",
-    "copy": "Copier le journal",
-    "download": "Télécharger le journal",
-    "error": "Erreur"
+  "homeCalculator": {
+    "sidebarNavLabel": "Parcourir les catégories",
+    "modes": {
+      "menuLabel": "Modes de la calculatrice",
+      "standard": "Standard",
+      "scientific": "Scientifique",
+      "graph": "Graphique",
+      "programmer": "Programmeur",
+      "converter": "Convertisseur"
+    },
+    "display": {
+      "mainLabel": "Calcul en cours",
+      "historyTab": "Historique",
+      "archiveTab": "Archive",
+      "emptyHistory": "Vos calculs apparaîtront ici",
+      "emptyArchive": "Les entrées enregistrées apparaîtront ici"
+    },
+    "functionCategories": {
+      "trigonometry": "Trigonométrie",
+      "probability": "Probabilité",
+      "calculus": "Analyse",
+      "probabilityHint": "Saisissez n, appuyez sur nCr ou nPr, saisissez r, puis =",
+      "calculusHint": "Approximation numérique — appuyez sur une fonction, saisissez un point ou une borne, puis ="
+    },
+    "buttons": {
+      "secondFunction": "Deuxième fonction",
+      "memoryRecall": "Rappel mémoire",
+      "memoryAdd": "Ajouter à la mémoire",
+      "memorySubtract": "Soustraire de la mémoire",
+      "memoryClear": "Effacer la mémoire",
+      "clearEntry": "Effacer l'entrée",
+      "clearAll": "Tout effacer",
+      "backspace": "Supprimer le dernier caractère",
+      "angleMode": "Basculer degrés/radians",
+      "plusMinus": "Changer le signe",
+      "equals": "Égal",
+      "logBase": "Logarithme avec base personnalisée",
+      "toggleCalculatorTheme": "Basculer le thème de la calculatrice"
+    },
+    "bottomBar": {
+      "saveHistory": "Enregistrer l'historique",
+      "savedConfirmation": "Enregistré dans l'archive"
+    },
+    "errors": {
+      "DIVISION_BY_ZERO": "Impossible de diviser par zéro",
+      "DOMAIN_ERROR": "Non défini pour cette entrée",
+      "OUT_OF_RANGE": "Le résultat est hors limites",
+      "SYNTAX_ERROR": "Vérifiez votre expression"
+    },
+    "shareExport": {
+      "title": "Calculatrice scientifique de la page d'accueil",
+      "historyTableTitle": "Historique des calculs",
+      "expressionColumn": "Expression",
+      "resultColumn": "Résultat"
+    },
+    "sidebarTotalTools": "{count, plural, one {# Outil disponible} other {# Outils disponibles}}",
+    "graph": {
+      "invalidFormula": "Saisissez une formule valide, ex. x^2 ou sin(x)",
+      "chartLabel": "Graphique de y = {formula}",
+      "rangeCaption": "x et y affichés de -10 à 10"
+    },
+    "converter": {
+      "categories": {
+        "length": "Longueur",
+        "weight": "Poids",
+        "temperature": "Température",
+        "volume": "Volume"
+      },
+      "from": "De",
+      "to": "Vers",
+      "swap": "Échanger les unités"
+    },
+    "sidebarViewFullDocs": "Voir la documentation complète"
   },
   "featuredTools": {
     "badge": "Outils à la une",
@@ -8241,7 +8306,9 @@
         "modeLabel": "Grandeurs Connues",
         "mode": {
           "timeBased": "Vitesse, Accélération et Temps (sans distance)",
-          "distanceBased": "Vitesse, Accélération et Déplacement (sans temps)"
+          "distanceBased": "Vitesse, Accélération et Déplacement (sans temps)",
+          "timeBasedShort": "Selon le Temps",
+          "distanceBasedShort": "Selon la Distance"
         },
         "solveForLabel": "Calculer",
         "solveForTime": {
@@ -13128,14 +13195,14 @@
       },
       "taxAfterDiscountDiagram": {
         "title": "Remise avant taxe",
-        "intro": "Convention du commerce de détail américain : la remise est appliquée en premier, puis la taxe est calculée sur le prix réduit.",
+        "intro": "Convention du commerce de détail : la remise est appliquée en premier, puis la taxe est calculée sur le prix réduit.",
         "original": "Prix initial",
         "afterDiscount": "Après {percent} % de remise",
         "afterTax": "Après {percent} % de taxe"
       },
       "seasonalRangeChart": {
         "title": "Fourchettes de remises saisonnières typiques",
-        "caption": "Fourchettes documentées du commerce de détail américain, appliquées au même article à 120 $.",
+        "caption": "Fourchettes documentées du commerce de détail, appliquées au même article à 120 $.",
         "seasons": {
           "clearance": "Liquidation",
           "blackFriday": "Black Friday",
@@ -17269,10 +17336,8 @@
       "aboveFold": {
         "resultTitle": "Seuil de rentabilité",
         "placeholder": "Saisissez vos coûts fixes, votre coût variable et votre prix pour voir apparaître ici votre seuil de rentabilité.",
-        "chartFixedCosts": "Coûts fixes",
         "chartTotalCost": "Coût total",
         "chartRevenue": "Revenus",
-        "chartBreakEven": "Le point où les courbes des revenus et du coût total se croisent est le seuil de rentabilité — le nombre exact d'unités à partir duquel le profit passe du négatif au positif.",
         "emptyStateMessage": "Saisissez vos coûts et votre prix et cliquez sur « Calculer » pour voir vos résultats.",
         "sentences": {
           "breakEven": "Vous devez vendre {units} unités — {revenue} de revenus — pour couvrir vos coûts fixes et atteindre le seuil de rentabilité.",
@@ -17300,10 +17365,12 @@
             }
           ]
         },
-        "chartTargetProfit": "Point de profit cible",
-        "tooltipUnits": "Unités",
-        "tooltipProfit": "Profit / Perte",
-        "chartAriaLabel": "Graphique interactif du coût total par rapport aux revenus selon le volume d'unités, indiquant le seuil de rentabilité"
+        "columnUnits": "Unités",
+        "columnResult": "Résultat",
+        "statusLoss": "Perte",
+        "statusBreakeven": "Seuil de rentabilité",
+        "statusProfit": "Profit",
+        "chartCaption": "Un exemple chiffré à quatre quantités d'unités, calculé à partir de vos propres données — avant le seuil de rentabilité vous êtes en perte, à ce seuil vous êtes à l'équilibre, et au-delà vous êtes en profit."
       },
       "form": {
         "inputTitle": "Vos coûts",
@@ -17361,12 +17428,16 @@
           "paragraph1": "Chaque unité vendue apporte un montant fixe — sa marge sur coût variable, soit le prix moins le coût variable — à la couverture des coûts fixes de l'entreprise, qui ne varient pas quel que soit le nombre d'unités vendues. Le seuil de rentabilité est simplement le moment où ces marges cumulées égalent exactement les coûts fixes : vendre moins d'unités que cela place l'entreprise en perte, en vendre davantage transforme la marge de chaque unité supplémentaire en profit pur, puisque les coûts fixes sont déjà entièrement couverts.",
           "paragraph2": "C'est précisément pourquoi une entreprise avec des coûts fixes élevés mais une forte marge par unité (comme le logiciel, où le coût marginal de chaque utilisateur supplémentaire est quasi nul) peut être déficitaire à faible volume et extrêmement rentable à grande échelle, tandis qu'une entreprise avec des coûts fixes faibles mais des marges unitaires réduites atteint rapidement son seuil de rentabilité mais voit son profit croître beaucoup plus lentement. Le même raisonnement va au-delà du simple seuil de rentabilité : ajouter un profit cible aux coûts fixes puis diviser par la marge sur coût variable répond à une question bien plus utile — non pas « à partir de quand est-ce que j'arrête de perdre de l'argent ? », mais « combien d'unités me faut-il pour atteindre le profit que je vise réellement ? ».",
           "diagram": {
-            "fixedLabel": "Coûts fixes",
             "totalCostLabel": "Coût total",
             "revenueLabel": "Revenus",
-            "profitLabel": "Profit",
-            "lossLabel": "Perte",
-            "caption": "Le graphique CVP classique : les coûts fixes forment un plancher stable, le coût total augmente avec le volume, les revenus augmentent plus vite — le point de croisement est le seuil de rentabilité, qui divise le graphique en une zone de perte et une zone de profit."
+            "columnUnits": "Unités Vendues",
+            "columnResult": "Résultat",
+            "statusLoss": "Perte",
+            "statusBreakeven": "Seuil de rentabilité",
+            "statusProfit": "Profit",
+            "caption": "Un exemple chiffré : à mesure que les unités vendues augmentent, le coût total et les revenus se rapprochent — avant le seuil de rentabilité vous êtes en perte, à ce seuil vous êtes à l'équilibre, et au-delà vous êtes en profit.",
+            "title": "L'échelle des unités jusqu'au profit",
+            "intro": "Le tableau ci-dessous suit ce même exemple à travers quatre paliers de volume — de zéro unité vendue jusqu'à bien au-delà du seuil de rentabilité — pour montrer comment le coût total et les revenus évoluent avec le volume, une question différente de la répartition d'une seule vente à 50 $ entre coût et marge."
           },
           "businessTypeDiagram": {
             "softwareLabel": "Coûts fixes élevés, marge élevée (logiciel)",
@@ -17381,14 +17452,21 @@
               "Le profit augmente lentement",
               "Moins sensible aux variations de volume"
             ],
-            "caption": "Le même calcul du seuil de rentabilité produit des courbes de croissance très différentes selon la structure de coûts de l'entreprise."
+            "caption": "Le même calcul du seuil de rentabilité produit des courbes de croissance très différentes selon la structure de coûts de l'entreprise.",
+            "fixedCostsLabel": "Coûts fixes",
+            "marginPerUnitLabel": "Marge par unité",
+            "breakEvenUnitsLabel": "Seuil de rentabilité",
+            "profitAtUnitsLabel": "Profit à {units} unités",
+            "cardTitle": "Comparaison des structures de coûts"
           },
           "marginBar": {
             "title": "Où va le prix de 50 $",
             "priceLabel": "Prix",
             "variableCostLabel": "Coût variable",
             "marginLabel": "Marge sur coûts variables",
-            "caption": "Sur chaque vente à 50 $, 20 $ couvrent le coût variable et 30 $ deviennent une marge sur coûts variables — le montant qui va vers les coûts fixes, puis le profit."
+            "caption": "Sur chaque vente à 50 $, 20 $ couvrent le coût variable et 30 $ deviennent une marge sur coûts variables — le montant qui va vers les coûts fixes, puis le profit.",
+            "marginPercentNote": "{percent} du prix",
+            "cardTitle": "Répartition du prix"
           }
         },
         "examples": {
@@ -17531,13 +17609,16 @@
             }
           ],
           "marginGauge": {
-            "caption": "L'exemple résolu de cet outil a un taux de marge sur coûts variables de 60 % (marge de 30 $ ÷ prix de 50 $) — un taux sain selon la plupart des normes."
+            "caption": "L'exemple résolu de cet outil a un taux de marge sur coûts variables de 60 % (marge de 30 $ ÷ prix de 50 $) — un taux sain selon la plupart des normes.",
+            "cardTitle": "Ratio de marge sur coûts variables"
           },
           "accumulationDiagram": {
-            "title": "La marge s'accumule vers les coûts fixes",
-            "fixedCostLabel": "Coûts fixes",
             "breakEvenLabel": "Seuil de rentabilité",
-            "caption": "Chaque unité ajoute 30 $ de marge sur coûts variables — la marge accumulée atteint la ligne des coûts fixes de 10 000 $ à exactement 334 unités."
+            "caption": "Chaque unité ajoute 30 $ de marge sur coûts variables — la marge accumulée atteint la ligne des coûts fixes de 10 000 $ à exactement 334 unités.",
+            "columnUnits": "Unités Vendues",
+            "columnCumulativeMargin": "Marge Cumulée",
+            "columnResult": "Résultat",
+            "cardTitle": "Accumulation de la marge jusqu'au seuil de rentabilité"
           }
         },
         "applications": {
@@ -17563,21 +17644,30 @@
           ],
           "priceImpactBar": {
             "title": "Augmenter le prix abaisse le seuil de rentabilité",
-            "caption": "Faire passer le prix de 50 $ à 55 $ (avec le même coût variable de 20 $) fait baisser le seuil de rentabilité de 334 à 286 unités — un exemple réel de l'impact d'une décision de prix."
+            "caption": "Faire passer le prix de 50 $ à 55 $ (avec le même coût variable de 20 $) fait baisser le seuil de rentabilité de 334 à 286 unités — un exemple réel de l'impact d'une décision de prix.",
+            "rowLabelAt": "À {price}",
+            "noteFewerUnits": "{count} unités de moins nécessaires",
+            "cardTitle": "Impact du changement de prix"
           },
           "monthlyPaceChart": {
-            "title": "Rythme mensuel de ventes pour atteindre le seuil",
             "breakEvenLabel": "334 unités — seuil de rentabilité",
             "caption": "Répartir 334 unités uniformément sur 4 mois signifie vendre environ 84 unités par mois pour atteindre le seuil dans les délais.",
             "month1": "Mois 1",
             "month2": "Mois 2",
             "month3": "Mois 3",
-            "month4": "Mois 4"
+            "month4": "Mois 4",
+            "columnMonth": "Mois",
+            "columnCumulativeUnits": "Unités Cumulées",
+            "columnPercentOfBreakEven": "% du Seuil de Rentabilité",
+            "cardTitle": "Rythme mensuel vers le seuil de rentabilité"
           },
           "fixedCostAddition": {
             "beforeLabel": "Avant le nouvel équipement",
             "afterLabel": "Après +2 000 $ de coûts fixes",
-            "caption": "Ajouter 2 000 $ de nouveaux coûts fixes (comme de l'équipement) fait passer le seuil de rentabilité de 334 à 400 unités — cet outil répond exactement au volume supplémentaire qu'exige une décision de coûts fixes."
+            "caption": "Ajouter 2 000 $ de nouveaux coûts fixes (comme de l'équipement) fait passer le seuil de rentabilité de 334 à 400 unités — cet outil répond exactement au volume supplémentaire qu'exige une décision de coûts fixes.",
+            "columnFixedCosts": "Coûts Fixes",
+            "columnBreakEvenUnits": "Unités au Seuil de Rentabilité",
+            "cardTitle": "Ajout de coûts fixes"
           }
         }
       },
@@ -17589,11 +17679,14 @@
       "sensitivityDiagram": {
         "title": "Sensibilité du Seuil de Rentabilité au Prix",
         "caption": "Combien d'unités vous devriez vendre à différents prix, en maintenant les coûts constants.",
-        "xLabel": "Prix par Unité"
+        "columnPrice": "Prix",
+        "columnUnits": "Unités au Seuil de Rentabilité",
+        "currentPriceLabel": "prix actuel"
       },
       "relatedTools": {
         "title": "Outils professionnels associés"
-      }
+      },
+      "workedExampleTitle": "Exemple Chiffré"
     },
     "graphing-calculator": {
       "title": "Calculatrice graphique",
@@ -22626,15 +22719,18 @@
       "nav": {
         "tool": "Calculatrice",
         "faq": "FAQ",
-        "behindTheTool": "Dans les coulisses"
+        "behindTheTool": "Dans les coulisses",
+        "notices": "Avis"
       },
       "form": {
         "inputTitle": "Détails du Trajet",
         "distanceLabel": "Distance du Trajet",
         "rateModeLabel": "Type de Taux",
         "rateModes": {
-          "consumption": "Carburant par distance (ex. L/100km)",
-          "efficiency": "Distance par carburant (ex. km/L, mpg)"
+          "consumption": "Consommation de Carburant",
+          "efficiency": "Efficacité du Carburant",
+          "consumptionExample": "ex. L/100km",
+          "efficiencyExample": "ex. km/L, mpg"
         },
         "rateValueLabelConsumption": "Taux de Consommation de Carburant",
         "rateValueLabelEfficiency": "Taux d'Efficacité du Carburant",
@@ -22669,10 +22765,10 @@
         "columnClass": "Catégorie de véhicule",
         "columnRate": "Valeur typique",
         "classes": {
-          "subcompact": "Citadine / voiture compacte",
+          "subcompact": "Voiture compacte",
           "midsize": "Berline intermédiaire",
           "compactSuv": "SUV compact",
-          "fullsizeSuv": "SUV grand format / pick-up",
+          "fullsizeSuv": "Grand SUV",
           "pickupTruck": "Pick-up",
           "hybridSedan": "Berline hybride"
         }
@@ -22697,7 +22793,10 @@
               "efficient": "Économe",
               "average": "Moyenne",
               "thirsty": "Gourmand"
-            }
+            },
+            "vehicleLabel": "Véhicule",
+            "rateLabel": "Taux de consommation",
+            "classificationLabel": "Classification"
           }
         },
         "useCases": {
@@ -22725,16 +22824,16 @@
           "columnResult": "Résultat",
           "rows": [
             {
-              "scenario": "Trajet de 500 km, 8 L/100km, 1,50 $/L",
-              "result": "40 L utilisés, 60,00 $ au total"
+              "scenario": "Trajet de 500 km, 8 L/100km, {price}/L",
+              "result": "40 L utilisés, {cost} au total"
             },
             {
-              "scenario": "Trajet de 500 km, 12,5 km/L, 1,50 $/L",
-              "result": "40 L utilisés, 60,00 $ au total"
+              "scenario": "Trajet de 500 km, 12,5 km/L, {price}/L",
+              "result": "40 L utilisés, {cost} au total"
             },
             {
-              "scenario": "Trajet de 300 mi, 30 mpg, 3,50 $/gal",
-              "result": "10 gal utilisés, 35,00 $ au total"
+              "scenario": "Trajet de 300 mi, 30 mpg, {price}/gal",
+              "result": "10 gal utilisés, {cost} au total"
             }
           ]
         },
@@ -22818,13 +22917,16 @@
           "note": "La référence officielle du gouvernement américain expliquant comment la consommation de carburant est testée et évaluée, et comment la conduite réelle affecte la consommation de carburant.",
           "url": "https://www.fueleconomy.gov/",
           "readOriginal": "Consulter la Référence"
+        },
+        "notices": {
+          "title": "Avis"
         }
       },
       "scenarios": {
         "dailyCommute": "Trajet quotidien",
         "roadTrip": "Road trip",
         "efficientHybrid": "Hybride économe",
-        "usPickupTruck": "Pick-up américain"
+        "usPickupTruck": "Grand Pick-up"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -22847,37 +22949,44 @@
       "costComparisonDiagram": {
         "title": "Coût pour Parcourir 100 km, par Type de Véhicule",
         "intro": "L'efficacité énergétique se traduit directement en coût — voici ce que coûtent 100 km selon les classes de véhicules courantes, à un prix de carburant de référence fixe.",
-        "caption": "Suppose un prix de carburant de référence de {price} $ par litre ; votre prix local réel modifiera ces chiffres proportionnellement.",
+        "caption": "Suppose un prix de carburant de référence de {price} par litre ; votre prix local réel modifiera ces chiffres proportionnellement.",
         "vehicles": {
           "hybrid": "Hybride",
           "sedan": "Berline",
           "suv": "SUV",
           "pickup": "Pick-up"
-        }
+        },
+        "vehicleLabel": "Véhicule",
+        "costPer100kmLabel": "Coût par 100 km",
+        "mostEfficientLabel": "Le plus efficace (Hybride)",
+        "leastEfficientLabel": "Le moins efficace (Pick-up)"
       },
       "sensitivityDiagram": {
         "caption": "Comment le coût total varie selon le prix du carburant",
-        "xLabel": "Prix par unité"
+        "lowScenarioLabel": "Si le prix baisse de 40 %",
+        "currentScenarioLabel": "Au prix actuel",
+        "highScenarioLabel": "Si le prix augmente de 60 %"
       },
       "relatedTools": {
         "title": "Outils professionnels associés"
       },
       "formulaDiagram": {
         "title": "Comment le coût est calculé",
-        "intro": "Un exemple résolu : 300 miles à 30 mpg, au prix de 3,50 $ le gallon.",
+        "intro": "Un exemple résolu : 300 miles à 30 mpg, au prix de {price} le gallon.",
         "distance": "Distance",
         "efficiency": "Efficacité",
         "price": "Prix",
-        "fuelUsedRow": "Carburant utilisé : {value} gallons",
-        "totalCostRow": "Coût total : {value} $"
+        "ifDistanceDoubledLabel": "Si la distance doublait (600 mi)",
+        "ifPriceDoubledLabel": "Si le prix doublait ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "Coût total selon l'efficacité énergétique",
-        "caption": "Coût annuel pour {distance} miles à {price} $/gallon, sur cinq niveaux d'efficacité réels."
+        "caption": "Coût annuel pour {distance} miles à {price}/gallon, sur cinq niveaux d'efficacité réels.",
+        "bestCaseLabel": "Meilleur cas ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "Coût total selon la distance du trajet",
-        "caption": "À {efficiency} mpg et {price} $/gallon.",
+        "caption": "À {efficiency} mpg et {price}/gallon.",
         "labels": {
           "commute": "Trajet quotidien ({miles} mi)",
           "weekendTrip": "Sortie de week-end ({miles} mi)",
@@ -22887,17 +22996,19 @@
       },
       "annualProjectionChart": {
         "title": "Coût projeté dans le temps",
-        "caption": "À {distance} miles/mois, {efficiency} mpg, {price} $/gallon.",
-        "months": "{count} mois"
+        "caption": "À {distance} miles/mois, {efficiency} mpg, {price}/gallon.",
+        "months": "{count} mois",
+        "monthlyCostLabel": "Coût mensuel"
       },
       "priceBandChart": {
         "title": "Coût total selon le prix du carburant",
-        "caption": "Pour un trajet de {distance} miles à {efficiency} mpg, sur quatre prix réels."
+        "caption": "Pour un trajet de {distance} miles à {efficiency} mpg, sur quatre prix réels.",
+        "rateLabel": "Coût par hausse de {step}/gal"
       },
       "typeCostComparisonChart": {
         "title": "Coût par source d'énergie",
-        "caption": "Même trajet de {distance} miles, quatre références moyennes typiques aux États-Unis, appliquées à la même formule.",
-        "note": "Les tarifs sont des moyennes américaines typiques et varient selon le véhicule et le lieu.",
+        "caption": "Même trajet de {distance} miles, quatre références moyennes typiques, appliquées à la même formule.",
+        "note": "Les tarifs sont des moyennes typiques et varient selon le véhicule et le lieu.",
         "sources": {
           "gasoline": "Essence",
           "diesel": "Diesel",
@@ -22910,13 +23021,23 @@
         "intro": "Les unités d'efficacité énergétique se convertissent directement via une constante fixe.",
         "mpgLabel": "Miles par gallon",
         "l100kmLabel": "Litres par 100 km",
-        "formula": "L/100km = 235,215 ÷ MPG"
+        "formula": "L/100km = 235,215 ÷ MPG",
+        "at40Label": "À 40 MPG",
+        "at20Label": "À 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Coût par mile vs. par kilomètre",
-        "caption": "Même coût de trajet de {cost} $ sur {distance} miles, exprimé dans les deux unités.",
+        "caption": "Même coût de trajet de {cost} sur {distance} miles, exprimé dans les deux unités.",
         "perMile": "Par mile",
-        "perKm": "Par kilomètre"
+        "perKm": "Par kilomètre",
+        "per100kmLabel": "Par 100 km"
+      },
+      "workedExample": {
+        "title": "Exemple résolu",
+        "comparisonTimes": "{multiple}× {label}",
+        "comparisonMore": "{amount} de plus que {label}",
+        "comparisonLess": "{amount} de moins que {label}",
+        "comparisonPercent": "{percent}% de {label}"
       }
     },
     "batch-invoice-calculator": {

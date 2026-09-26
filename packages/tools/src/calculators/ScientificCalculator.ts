@@ -8,9 +8,13 @@ export type ScientificOperation =
   | "divide"
   | "power"
   | "root"
+  | "logBase"
   | "sin"
   | "cos"
   | "tan"
+  | "cot"
+  | "sec"
+  | "csc"
   | "asin"
   | "acos"
   | "atan"
@@ -22,7 +26,16 @@ export type ScientificOperation =
   | "log10"
   | "exp"
   | "pow10"
-  | "reciprocal";
+  | "twoPow"
+  | "reciprocal"
+  | "factorial"
+  | "abs"
+  | "percent"
+  | "nCr"
+  | "nPr"
+  | "numDerivativeSin"
+  | "numDerivativeSquare"
+  | "numIntegralSquare";
 
 export type AngleMode = "deg" | "rad";
 
@@ -79,7 +92,121 @@ const BINARY_OPERATIONS = new Set<ScientificOperation>([
   "divide",
   "power",
   "root",
+  "logBase",
+  "nCr",
+  "nPr",
 ]);
+
+// sec/csc are 1/cos and 1/sin. At the angles where they're undefined (90°,
+// 0°, ...), cos/sin aren't exactly 0 in floating point (Math.PI/2 etc. are
+// never exact) — they're a tiny near-zero value, so the *reciprocal* is what
+// blows up to a huge finite number, not the input. Checking the computed
+// reciprocal's own magnitude (the same approach tan() already uses for
+// itself) catches this; checking the input would miss it entirely, since a
+// value like 6e-17 is neither exactly 0 nor huge.
+function reciprocalTrigOrError(
+  value: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isFinite(value)) {
+    return { error: "OUT_OF_RANGE" };
+  }
+  if (value === 0) {
+    return { error: "DIVISION_BY_ZERO" };
+  }
+  const reciprocal = 1 / value;
+  if (Math.abs(reciprocal) > TAN_MAGNITUDE_LIMIT) {
+    return { error: "DIVISION_BY_ZERO" };
+  }
+  return { value: reciprocal };
+}
+
+const FACTORIAL_MAX = 170; // 171! overflows to Infinity in IEEE-754 double precision.
+
+function factorialOrError(
+  a: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isInteger(a) || a < 0) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  if (a > FACTORIAL_MAX) {
+    return { error: "OUT_OF_RANGE" };
+  }
+  let result = 1;
+  for (let i = 2; i <= a; i++) result *= i;
+  return { value: result };
+}
+
+function permutationsOrError(
+  n: number,
+  r: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  if (r > n) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  // Multiplies the r terms n, n-1, ..., n-r+1 directly rather than n!/(n-r)!
+  // — computing the full n! first would overflow past FACTORIAL_MAX far
+  // sooner than the actual nPr result does for many valid (n, r) pairs.
+  let result = 1;
+  for (let i = 0; i < r; i++) {
+    result *= n - i;
+    if (!Number.isFinite(result)) return { error: "OUT_OF_RANGE" };
+  }
+  return { value: result };
+}
+
+function combinationsOrError(
+  n: number,
+  r: number
+): { value: number } | { error: ScientificCalculatorErrorCode } {
+  if (!Number.isInteger(n) || !Number.isInteger(r) || n < 0 || r < 0) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  if (r > n) {
+    return { error: "DOMAIN_ERROR" };
+  }
+  // nCr(n, r) === nCr(n, n-r); picking the smaller of the two keeps the
+  // multiplicative loop below as short as possible. Each step divides back
+  // down immediately (the running product times (n-i) is always evenly
+  // divisible by i+1 at that point in the classic incremental-binomial
+  // identity), which is why this stays numerically well-behaved without ever
+  // computing a full factorial.
+  const smaller = Math.min(r, n - r);
+  let result = 1;
+  for (let i = 0; i < smaller; i++) {
+    result = (result * (n - i)) / (i + 1);
+    if (!Number.isFinite(result)) return { error: "OUT_OF_RANGE" };
+  }
+  return { value: Math.round(result) };
+}
+
+// A small, fixed step for central-difference numerical differentiation —
+// small enough to closely approximate the true derivative, large enough
+// that (f(x+h) - f(x-h)) doesn't lose all its precision to floating-point
+// cancellation for typical calculator inputs.
+const DERIVATIVE_STEP = 1e-5;
+
+function centralDifference(f: (x: number) => number, x: number): number {
+  return (f(x + DERIVATIVE_STEP) - f(x - DERIVATIVE_STEP)) / (2 * DERIVATIVE_STEP);
+}
+
+// Composite Simpson's rule over [0, a] — a genuine numerical quadrature (not
+// the closed-form a^3/3 evaluated directly), so this stays correct even if
+// this function is later reused for an integrand whose antiderivative isn't
+// as simple to write down.
+function simpsonIntegral(f: (x: number) => number, a: number): number {
+  if (a === 0) return 0;
+  const n = 1000; // even, for Simpson's rule
+  const h = a / n;
+  let sum = f(0) + f(a);
+  for (let i = 1; i < n; i++) {
+    const x = i * h;
+    sum += (i % 2 === 0 ? 2 : 4) * f(x);
+  }
+  return (h / 3) * sum;
+}
 
 export class ScientificCalculator extends BaseCalculator<
   ScientificCalculatorInput,
@@ -143,6 +270,31 @@ export class ScientificCalculator extends BaseCalculator<
       case "tan":
         outcome = tanOrError(Math.tan(angleMode === "deg" ? toRadians(a) : a));
         break;
+      case "cot": {
+        // Derived as cos/sin directly rather than 1/tan: at 90°, tan()
+        // itself blows up to a huge (not infinite) finite value due to
+        // floating-point imprecision, which would falsely flag a perfectly
+        // clean result (cot(90°) = 0/1 = 0) as out of range. The result's
+        // own magnitude is checked (not just an exact-zero sin check) for
+        // the same reason sec/csc check their reciprocal's magnitude: at
+        // 180°, sin() is a tiny non-zero value, not exactly 0, so only the
+        // *computed* cot blows up large enough to catch.
+        const radians = angleMode === "deg" ? toRadians(a) : a;
+        const sinValue = Math.sin(radians);
+        if (sinValue === 0) {
+          outcome = { error: "DIVISION_BY_ZERO" };
+        } else {
+          const result = Math.cos(radians) / sinValue;
+          outcome = Math.abs(result) > TAN_MAGNITUDE_LIMIT ? { error: "DIVISION_BY_ZERO" } : finiteOrError(result);
+        }
+        break;
+      }
+      case "sec":
+        outcome = reciprocalTrigOrError(Math.cos(angleMode === "deg" ? toRadians(a) : a));
+        break;
+      case "csc":
+        outcome = reciprocalTrigOrError(Math.sin(angleMode === "deg" ? toRadians(a) : a));
+        break;
       case "asin":
         if (a < -1 || a > 1) {
           outcome = { error: "DOMAIN_ERROR" };
@@ -190,6 +342,46 @@ export class ScientificCalculator extends BaseCalculator<
         break;
       case "reciprocal":
         outcome = a === 0 ? { error: "DIVISION_BY_ZERO" } : { value: 1 / a };
+        break;
+      case "twoPow":
+        outcome = finiteOrError(Math.pow(2, a));
+        break;
+      case "factorial":
+        outcome = factorialOrError(a);
+        break;
+      case "abs":
+        outcome = { value: Math.abs(a) };
+        break;
+      case "percent":
+        outcome = { value: a / 100 };
+        break;
+      case "logBase":
+        if (a <= 0 || b <= 0 || b === 1) {
+          outcome = { error: "DOMAIN_ERROR" };
+        } else {
+          outcome = finiteOrError(Math.log(a) / Math.log(b));
+        }
+        break;
+      case "nCr":
+        outcome = combinationsOrError(a, b);
+        break;
+      case "nPr":
+        outcome = permutationsOrError(a, b);
+        break;
+      case "numDerivativeSin": {
+        // Differentiates the same user-facing sin() this tool already
+        // exposes (angle-mode conversion included), via the limit
+        // definition — so in degree mode this correctly comes out to
+        // cos(x) * (pi/180) via pure numerics, not a hardcoded chain rule.
+        const f = (x: number) => Math.sin(angleMode === "deg" ? toRadians(x) : x);
+        outcome = finiteOrError(centralDifference(f, a));
+        break;
+      }
+      case "numDerivativeSquare":
+        outcome = finiteOrError(centralDifference((x) => x * x, a));
+        break;
+      case "numIntegralSquare":
+        outcome = a < 0 ? { error: "DOMAIN_ERROR" } : finiteOrError(simpsonIntegral((x) => x * x, a));
         break;
     }
 

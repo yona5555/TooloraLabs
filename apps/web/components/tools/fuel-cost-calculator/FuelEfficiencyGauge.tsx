@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import EncyclopediaLiveWidget from "@/components/tool-ui/EncyclopediaLiveWidget";
+import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import { ltrIsolate } from "@/lib/bidi";
 
 type ZoneKey = "efficient" | "average" | "thirsty";
 
@@ -38,46 +40,81 @@ export default function FuelEfficiencyGauge() {
   const t = useTranslations("tools.fuel-cost-calculator.education.intro.efficiencyGauge");
   const tExamples = useTranslations("tools.fuel-cost-calculator.education.intro.efficiencyGauge.examples");
   const tZones = useTranslations("tools.fuel-cost-calculator.education.intro.efficiencyGauge.zones");
+  const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
   const [selectedKey, setSelectedKey] = useState("compactSedan");
 
   const selected = useMemo(() => EXAMPLES.find((e) => e.key === selectedKey) ?? EXAMPLES[1], [selectedKey]);
   const zone = zoneForRate(selected.litersPer100km);
   const classification = tZones(zone);
 
+  const mostEfficient = EXAMPLES[0];
+  const leastEfficient = EXAMPLES[EXAMPLES.length - 1];
+  const vsMostEfficient =
+    selected.key !== mostEfficient.key
+      ? tw("comparisonMore", {
+          amount: ltrIsolate(`${(((selected.litersPer100km - mostEfficient.litersPer100km) / mostEfficient.litersPer100km) * 100).toFixed(0)}%`),
+          label: `${tExamples(mostEfficient.key)} (${ltrIsolate(`${mostEfficient.litersPer100km} L/100km`)})`,
+        })
+      : undefined;
+  const vsLeastEfficient =
+    selected.key !== leastEfficient.key
+      ? tw("comparisonLess", {
+          amount: ltrIsolate(`${(((leastEfficient.litersPer100km - selected.litersPer100km) / leastEfficient.litersPer100km) * 100).toFixed(0)}%`),
+          label: `${tExamples(leastEfficient.key)} (${ltrIsolate(`${leastEfficient.litersPer100km} L/100km`)})`,
+        })
+      : undefined;
+
   return (
     <EncyclopediaLiveWidget title={t("title")}>
       <p className="mb-4 text-sm leading-6 opacity-80">{t("intro")}</p>
 
-      <div dir="ltr">
-        <RatioGauge
-          value={selected.litersPer100km}
-          domainMin={DOMAIN_MIN}
-          domainMax={DOMAIN_MAX}
-          zones={ZONES}
-          valueLabel={`${selected.litersPer100km} L/100km`}
-          caption={classification}
-          captionColorClass={CAPTION_COLOR[zone]}
-          ticks={TICKS}
-        />
-      </div>
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="shrink-0">
+          <div dir="ltr">
+            <RatioGauge
+              value={selected.litersPer100km}
+              domainMin={DOMAIN_MIN}
+              domainMax={DOMAIN_MAX}
+              zones={ZONES}
+              valueLabel={`${selected.litersPer100km} L/100km`}
+              caption={classification}
+              captionColorClass={CAPTION_COLOR[zone]}
+              ticks={TICKS}
+            />
+          </div>
 
-      <div role="tablist" className="mt-2 flex flex-wrap justify-center gap-2">
-        {EXAMPLES.map((example) => (
-          <button
-            key={example.key}
-            type="button"
-            role="tab"
-            aria-selected={selectedKey === example.key}
-            onClick={() => setSelectedKey(example.key)}
-            className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
-              selectedKey === example.key
-                ? "border-blue-400 bg-blue-600 text-white"
-                : "border-current/20 bg-transparent text-current/70 hover:border-blue-300 hover:text-current"
-            }`}
-          >
-            {tExamples(example.key)}
-          </button>
-        ))}
+          <div role="tablist" className="mt-2 flex flex-wrap justify-center gap-2">
+            {EXAMPLES.map((example) => (
+              <button
+                key={example.key}
+                type="button"
+                role="tab"
+                aria-selected={selectedKey === example.key}
+                onClick={() => setSelectedKey(example.key)}
+                className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
+                  selectedKey === example.key
+                    ? "border-blue-400 bg-blue-600 text-white"
+                    : "border-current/20 bg-transparent text-current/70 hover:border-blue-300 hover:text-current"
+                }`}
+              >
+                {tExamples(example.key)}
+              </button>
+            ))}
+          </div>
+        </div>
+        <FuelWorkedExampleNote
+          title={tw("title")}
+          rows={[
+            { label: t("vehicleLabel"), value: tExamples(selected.key) },
+            {
+              label: t("rateLabel"),
+              value: `${selected.litersPer100km} L/100km`,
+              emphasize: true,
+              note: vsMostEfficient,
+            },
+            { label: t("classificationLabel"), value: classification, note: vsLeastEfficient },
+          ]}
+        />
       </div>
 
       <p className="mt-4 text-center text-sm leading-6">{t("verdict", { example: tExamples(selectedKey), classification })}</p>

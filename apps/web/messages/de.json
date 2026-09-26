@@ -170,16 +170,81 @@
     "shareViaApps": "Über Apps teilen"
   },
   "hero": {
-    "searchPlaceholder": "Rechner, Umrechner, Generatoren durchsuchen...",
-    "search": "Suchen",
-    "searchNoResults": "Keine Tools gefunden für „{query}“"
+    "searchPlaceholder": "Rechner, Umrechner, Generatoren durchsuchen..."
   },
-  "heroCalculatorLog": {
-    "title": "Rechenprotokoll",
-    "empty": "Ihre Berechnungen werden hier angezeigt.",
-    "copy": "Protokoll kopieren",
-    "download": "Protokoll herunterladen",
-    "error": "Fehler"
+  "homeCalculator": {
+    "sidebarNavLabel": "Kategorien durchsuchen",
+    "modes": {
+      "menuLabel": "Rechnermodi",
+      "standard": "Standard",
+      "scientific": "Wissenschaftlich",
+      "graph": "Graph",
+      "programmer": "Programmierer",
+      "converter": "Umrechner"
+    },
+    "display": {
+      "mainLabel": "Aktuelle Berechnung",
+      "historyTab": "Verlauf",
+      "archiveTab": "Archiv",
+      "emptyHistory": "Ihre Berechnungen werden hier angezeigt",
+      "emptyArchive": "Gespeicherte Einträge werden hier angezeigt"
+    },
+    "functionCategories": {
+      "trigonometry": "Trigonometrie",
+      "probability": "Wahrscheinlichkeit",
+      "calculus": "Analysis",
+      "probabilityHint": "n eingeben, nCr oder nPr drücken, r eingeben, dann =",
+      "calculusHint": "Numerische Näherung — Funktion drücken, Punkt oder Grenze eingeben, dann ="
+    },
+    "buttons": {
+      "secondFunction": "Zweite Funktion",
+      "memoryRecall": "Speicher abrufen",
+      "memoryAdd": "Zum Speicher addieren",
+      "memorySubtract": "Vom Speicher subtrahieren",
+      "memoryClear": "Speicher löschen",
+      "clearEntry": "Eingabe löschen",
+      "clearAll": "Alles löschen",
+      "backspace": "Letztes Zeichen löschen",
+      "angleMode": "Grad/Radiant umschalten",
+      "plusMinus": "Vorzeichen umkehren",
+      "equals": "Gleich",
+      "logBase": "Logarithmus mit eigener Basis",
+      "toggleCalculatorTheme": "Rechnerdesign umschalten"
+    },
+    "bottomBar": {
+      "saveHistory": "Verlauf speichern",
+      "savedConfirmation": "Im Archiv gespeichert"
+    },
+    "errors": {
+      "DIVISION_BY_ZERO": "Division durch null nicht möglich",
+      "DOMAIN_ERROR": "Für diese Eingabe nicht definiert",
+      "OUT_OF_RANGE": "Ergebnis außerhalb des Bereichs",
+      "SYNTAX_ERROR": "Überprüfen Sie Ihren Ausdruck"
+    },
+    "shareExport": {
+      "title": "Wissenschaftlicher Rechner der Startseite",
+      "historyTableTitle": "Berechnungsverlauf",
+      "expressionColumn": "Ausdruck",
+      "resultColumn": "Ergebnis"
+    },
+    "sidebarTotalTools": "{count, plural, one {# Tool verfügbar} other {# Tools verfügbar}}",
+    "graph": {
+      "invalidFormula": "Geben Sie eine gültige Formel ein, z. B. x^2 oder sin(x)",
+      "chartLabel": "Graph von y = {formula}",
+      "rangeCaption": "x und y werden von -10 bis 10 angezeigt"
+    },
+    "converter": {
+      "categories": {
+        "length": "Länge",
+        "weight": "Gewicht",
+        "temperature": "Temperatur",
+        "volume": "Volumen"
+      },
+      "from": "Von",
+      "to": "Zu",
+      "swap": "Einheiten tauschen"
+    },
+    "sidebarViewFullDocs": "Vollständige Doku ansehen"
   },
   "featuredTools": {
     "badge": "Beliebte Tools",
@@ -8241,7 +8306,9 @@
         "modeLabel": "Bekannte Größen",
         "mode": {
           "timeBased": "Geschwindigkeit, Beschleunigung & Zeit (ohne Strecke)",
-          "distanceBased": "Geschwindigkeit, Beschleunigung & Verschiebung (ohne Zeit)"
+          "distanceBased": "Geschwindigkeit, Beschleunigung & Verschiebung (ohne Zeit)",
+          "timeBasedShort": "Zeitbasiert",
+          "distanceBasedShort": "Streckenbasiert"
         },
         "solveForLabel": "Berechnen",
         "solveForTime": {
@@ -13128,14 +13195,14 @@
       },
       "taxAfterDiscountDiagram": {
         "title": "Rabatt vor Steuer",
-        "intro": "US-Einzelhandelskonvention: Der Rabatt wird zuerst angewendet, dann wird die Steuer auf den reduzierten Preis berechnet.",
+        "intro": "Einzelhandelskonvention: Der Rabatt wird zuerst angewendet, dann wird die Steuer auf den reduzierten Preis berechnet.",
         "original": "Originalpreis",
         "afterDiscount": "Nach {percent} % Rabatt",
         "afterTax": "Nach {percent} % Steuer"
       },
       "seasonalRangeChart": {
         "title": "Typische saisonale Rabattspannen",
-        "caption": "Dokumentierte US-Einzelhandelsspannen, angewendet auf denselben 120-$-Artikel.",
+        "caption": "Dokumentierte Einzelhandelsspannen, angewendet auf denselben 120-$-Artikel.",
         "seasons": {
           "clearance": "Räumungsverkauf",
           "blackFriday": "Black Friday",
@@ -17269,10 +17336,8 @@
       "aboveFold": {
         "resultTitle": "Break-Even-Punkt",
         "placeholder": "Geben Sie Ihre Fixkosten, variablen Kosten und den Preis ein, um hier Ihren Break-Even-Punkt zu sehen.",
-        "chartFixedCosts": "Fixkosten",
         "chartTotalCost": "Gesamtkosten",
         "chartRevenue": "Umsatz",
-        "chartBreakEven": "Dort, wo sich die Linien von Umsatz und Gesamtkosten kreuzen, liegt der Break-Even-Punkt – die genaue Stückzahl, bei der der Gewinn von negativ auf positiv wechselt.",
         "emptyStateMessage": "Geben Sie Ihre Kosten und Ihren Preis ein und klicken Sie auf \"Berechnen\", um Ihre Ergebnisse zu sehen.",
         "sentences": {
           "breakEven": "Sie müssen {units} Einheiten verkaufen – {revenue} Umsatz –, um Ihre Fixkosten zu decken und die Gewinnschwelle zu erreichen.",
@@ -17300,10 +17365,12 @@
             }
           ]
         },
-        "chartTargetProfit": "Gewinnzielpunkt",
-        "tooltipUnits": "Einheiten",
-        "tooltipProfit": "Gewinn / Verlust",
-        "chartAriaLabel": "Interaktives Diagramm von Gesamtkosten im Vergleich zu Umsatz über die Stückzahl, mit Markierung des Break-Even-Punkts"
+        "columnUnits": "Einheiten",
+        "columnResult": "Ergebnis",
+        "statusLoss": "Verlust",
+        "statusBreakeven": "Break-even",
+        "statusProfit": "Gewinn",
+        "chartCaption": "Ein Rechenbeispiel bei vier Stückzahlen, berechnet aus Ihren eigenen Eingaben — vor dem Break-even machen Sie Verlust, dort brechen Sie gleich auf, danach erzielen Sie Gewinn."
       },
       "form": {
         "inputTitle": "Ihre Kosten",
@@ -17361,12 +17428,16 @@
           "paragraph1": "Jede verkaufte Einheit trägt einen festen Betrag – ihren Deckungsbeitrag, Preis minus variable Kosten – zur Deckung der Fixkosten des Unternehmens bei, die sich unabhängig von der verkauften Stückzahl nicht ändern. Der Break-Even-Punkt ist einfach der Moment, in dem diese aufsummierten Deckungsbeiträge genau den Fixkosten entsprechen: Werden weniger Einheiten verkauft, macht das Unternehmen Verlust; werden mehr verkauft, wird der Deckungsbeitrag jeder weiteren Einheit zu reinem Gewinn, da die Fixkosten bereits vollständig gedeckt sind.",
           "paragraph2": "Genau deshalb kann ein Unternehmen mit hohen Fixkosten, aber hohem Deckungsbeitrag pro Einheit (wie Software, bei der die Grenzkosten pro zusätzlichem Nutzer nahe null liegen) bei geringem Volumen unrentabel und bei hohem Volumen extrem profitabel sein, während ein Unternehmen mit niedrigen Fixkosten, aber schmalen Margen pro Einheit schnell die Gewinnschwelle erreicht, den Gewinn danach aber viel langsamer steigert. Dieselbe Mathematik geht über das bloße Erreichen der Gewinnschwelle hinaus: Ein Gewinnziel zu den Fixkosten zu addieren und durch den Deckungsbeitrag zu teilen, beantwortet eine nützlichere, reale Frage – nicht „wann höre ich auf, Geld zu verlieren\", sondern „wie viele Einheiten bringen mich zu dem Gewinn, den ich tatsächlich will\".",
           "diagram": {
-            "fixedLabel": "Fixkosten",
             "totalCostLabel": "Gesamtkosten",
             "revenueLabel": "Umsatz",
-            "profitLabel": "Gewinn",
-            "lossLabel": "Verlust",
-            "caption": "Das klassische CVP-Diagramm: Fixkosten setzen einen flachen Boden, die Gesamtkosten steigen mit dem Volumen, der Umsatz steigt schneller – der Schnittpunkt ist der Break-Even-Punkt, der das Diagramm in eine Verlust- und eine Gewinnzone teilt."
+            "columnUnits": "Verkaufte Einheiten",
+            "columnResult": "Ergebnis",
+            "statusLoss": "Verlust",
+            "statusBreakeven": "Break-even",
+            "statusProfit": "Gewinn",
+            "caption": "Ein Rechenbeispiel: Mit steigender Stückzahl nähern sich Gesamtkosten und Umsatz einander an — vor dem Break-Even-Punkt machen Sie Verlust, dort brechen Sie gleich auf, und danach erzielen Sie Gewinn.",
+            "title": "Die Stufenleiter von Einheiten zum Gewinn",
+            "intro": "Die Tabelle unten verfolgt dasselbe Beispiel über vier Absatzmengen-Etappen — von null verkauften Einheiten bis weit über den Break-even hinaus — und zeigt, wie sich Gesamtkosten und Umsatz mit wachsendem Volumen entwickeln, eine andere Frage als die, wie sich ein einzelner 50-$-Verkauf in Kosten und Marge aufteilt."
           },
           "businessTypeDiagram": {
             "softwareLabel": "Hohe Fixkosten, hohe Marge (Software)",
@@ -17381,14 +17452,21 @@
               "Gewinn wächst langsam",
               "Weniger empfindlich gegenüber Volumenschwankungen"
             ],
-            "caption": "Dieselbe Break-even-Mathematik erzeugt je nach Kostenstruktur eines Unternehmens sehr unterschiedliche Wachstumskurven."
+            "caption": "Dieselbe Break-even-Mathematik erzeugt je nach Kostenstruktur eines Unternehmens sehr unterschiedliche Wachstumskurven.",
+            "fixedCostsLabel": "Fixkosten",
+            "marginPerUnitLabel": "Marge pro Einheit",
+            "breakEvenUnitsLabel": "Break-even",
+            "profitAtUnitsLabel": "Gewinn bei {units} Einheiten",
+            "cardTitle": "Vergleich der Kostenstrukturen"
           },
           "marginBar": {
             "title": "Wohin der Preis von 50 $ geht",
             "priceLabel": "Preis",
             "variableCostLabel": "Variable Kosten",
             "marginLabel": "Deckungsbeitrag",
-            "caption": "Von jedem Verkauf zu 50 $ decken 20 $ die variablen Kosten, und 30 $ werden zum Deckungsbeitrag — der Betrag, der zu den Fixkosten und dann zum Gewinn beiträgt."
+            "caption": "Von jedem Verkauf zu 50 $ decken 20 $ die variablen Kosten, und 30 $ werden zum Deckungsbeitrag — der Betrag, der zu den Fixkosten und dann zum Gewinn beiträgt.",
+            "marginPercentNote": "{percent} des Preises",
+            "cardTitle": "Preisaufschlüsselung"
           }
         },
         "examples": {
@@ -17531,13 +17609,16 @@
             }
           ],
           "marginGauge": {
-            "caption": "Das Rechenbeispiel dieses Tools hat eine Deckungsbeitragsquote von 60 % (30 $ Marge ÷ 50 $ Preis) — nach den meisten Maßstäben eine gesunde Quote."
+            "caption": "Das Rechenbeispiel dieses Tools hat eine Deckungsbeitragsquote von 60 % (30 $ Marge ÷ 50 $ Preis) — nach den meisten Maßstäben eine gesunde Quote.",
+            "cardTitle": "Deckungsbeitragsquote"
           },
           "accumulationDiagram": {
-            "title": "Deckungsbeitrag akkumuliert sich bis zu den Fixkosten",
-            "fixedCostLabel": "Fixkosten",
             "breakEvenLabel": "Gewinnschwelle",
-            "caption": "Jede Einheit fügt 30 $ Deckungsbeitrag hinzu — der akkumulierte Beitrag erreicht die Fixkostenlinie von 10.000 $ bei genau 334 Einheiten."
+            "caption": "Jede Einheit fügt 30 $ Deckungsbeitrag hinzu — der akkumulierte Beitrag erreicht die Fixkostenlinie von 10.000 $ bei genau 334 Einheiten.",
+            "columnUnits": "Verkaufte Einheiten",
+            "columnCumulativeMargin": "Kumulierte Marge",
+            "columnResult": "Ergebnis",
+            "cardTitle": "Margenaufbau bis zum Break-even"
           }
         },
         "applications": {
@@ -17563,21 +17644,30 @@
           ],
           "priceImpactBar": {
             "title": "Preiserhöhung senkt die Gewinnschwelle",
-            "caption": "Eine Preiserhöhung von 50 $ auf 55 $ (bei gleichen 20 $ variablen Kosten) senkt die Gewinnschwelle von 334 auf 286 Einheiten — ein reales Beispiel für die Auswirkung einer Preisentscheidung."
+            "caption": "Eine Preiserhöhung von 50 $ auf 55 $ (bei gleichen 20 $ variablen Kosten) senkt die Gewinnschwelle von 334 auf 286 Einheiten — ein reales Beispiel für die Auswirkung einer Preisentscheidung.",
+            "rowLabelAt": "Bei {price}",
+            "noteFewerUnits": "{count} weniger Einheiten nötig",
+            "cardTitle": "Auswirkung der Preisänderung"
           },
           "monthlyPaceChart": {
-            "title": "Monatliches Verkaufstempo bis zur Gewinnschwelle",
             "breakEvenLabel": "334 Einheiten — Gewinnschwelle",
             "caption": "334 Einheiten gleichmäßig auf 4 Monate verteilt bedeutet, etwa 84 Einheiten pro Monat zu verkaufen, um die Gewinnschwelle planmäßig zu erreichen.",
             "month1": "Monat 1",
             "month2": "Monat 2",
             "month3": "Monat 3",
-            "month4": "Monat 4"
+            "month4": "Monat 4",
+            "columnMonth": "Monat",
+            "columnCumulativeUnits": "Kumulierte Einheiten",
+            "columnPercentOfBreakEven": "% des Break-even",
+            "cardTitle": "Monatliches Tempo bis zum Break-even"
           },
           "fixedCostAddition": {
             "beforeLabel": "Vor neuer Ausrüstung",
             "afterLabel": "Nach +2.000 $ Fixkosten",
-            "caption": "2.000 $ neue Fixkosten (z. B. Ausrüstung) erhöhen die Gewinnschwelle von 334 auf 400 Einheiten — dieses Tool beantwortet genau, wie viel zusätzliches Volumen eine Fixkostenentscheidung erfordert."
+            "caption": "2.000 $ neue Fixkosten (z. B. Ausrüstung) erhöhen die Gewinnschwelle von 334 auf 400 Einheiten — dieses Tool beantwortet genau, wie viel zusätzliches Volumen eine Fixkostenentscheidung erfordert.",
+            "columnFixedCosts": "Fixkosten",
+            "columnBreakEvenUnits": "Break-even-Einheiten",
+            "cardTitle": "Hinzufügen von Fixkosten"
           }
         }
       },
@@ -17589,11 +17679,14 @@
       "sensitivityDiagram": {
         "title": "Break-Even-Sensitivität gegenüber dem Preis",
         "caption": "Wie viele Einheiten Sie bei unterschiedlichen Preisen verkaufen müssten, bei gleichbleibenden Kosten.",
-        "xLabel": "Preis pro Einheit"
+        "columnPrice": "Preis",
+        "columnUnits": "Break-even-Einheiten",
+        "currentPriceLabel": "aktueller Preis"
       },
       "relatedTools": {
         "title": "Verwandte Business-Tools"
-      }
+      },
+      "workedExampleTitle": "Rechenbeispiel"
     },
     "graphing-calculator": {
       "title": "Grafikrechner",
@@ -22626,15 +22719,18 @@
       "nav": {
         "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Hintergrund"
+        "behindTheTool": "Hintergrund",
+        "notices": "Hinweise"
       },
       "form": {
         "inputTitle": "Fahrtdetails",
         "distanceLabel": "Fahrtstrecke",
         "rateModeLabel": "Angabetyp",
         "rateModes": {
-          "consumption": "Kraftstoff pro Strecke (z.B. L/100km)",
-          "efficiency": "Strecke pro Kraftstoff (z.B. km/L, mpg)"
+          "consumption": "Kraftstoffverbrauch",
+          "efficiency": "Kraftstoffeffizienz",
+          "consumptionExample": "z.B. L/100km",
+          "efficiencyExample": "z.B. km/L, mpg"
         },
         "rateValueLabelConsumption": "Kraftstoffverbrauchsrate",
         "rateValueLabelEfficiency": "Kraftstoffeffizienzrate",
@@ -22669,10 +22765,10 @@
         "columnClass": "Fahrzeugklasse",
         "columnRate": "Typischer Wert",
         "classes": {
-          "subcompact": "Kleinwagen / Kompaktwagen",
+          "subcompact": "Kompaktwagen",
           "midsize": "Mittelklasse-Limousine",
           "compactSuv": "Kompakt-SUV",
-          "fullsizeSuv": "Vollgroßes SUV / Pickup",
+          "fullsizeSuv": "Groß-SUV",
           "pickupTruck": "Pickup-Truck",
           "hybridSedan": "Hybrid-Limousine"
         }
@@ -22697,7 +22793,10 @@
               "efficient": "Sparsam",
               "average": "Durchschnittlich",
               "thirsty": "Durstig"
-            }
+            },
+            "vehicleLabel": "Fahrzeug",
+            "rateLabel": "Verbrauchsrate",
+            "classificationLabel": "Klassifizierung"
           }
         },
         "useCases": {
@@ -22725,16 +22824,16 @@
           "columnResult": "Ergebnis",
           "rows": [
             {
-              "scenario": "500 km Fahrt, 8 L/100km, 1,50$/L",
-              "result": "40 L verbraucht, 60,00$ gesamt"
+              "scenario": "500 km Fahrt, 8 L/100km, {price}/L",
+              "result": "40 L verbraucht, {cost} gesamt"
             },
             {
-              "scenario": "500 km Fahrt, 12,5 km/L, 1,50$/L",
-              "result": "40 L verbraucht, 60,00$ gesamt"
+              "scenario": "500 km Fahrt, 12,5 km/L, {price}/L",
+              "result": "40 L verbraucht, {cost} gesamt"
             },
             {
-              "scenario": "300 Meilen Fahrt, 30 mpg, 3,50$/gal",
-              "result": "10 gal verbraucht, 35,00$ gesamt"
+              "scenario": "300 Meilen Fahrt, 30 mpg, {price}/gal",
+              "result": "10 gal verbraucht, {cost} gesamt"
             }
           ]
         },
@@ -22818,13 +22917,16 @@
           "note": "Die offizielle Referenz der US-Regierung, die erklärt, wie Kraftstoffverbrauch getestet und bewertet wird und wie sich reales Fahren auf den Kraftstoffverbrauch auswirkt.",
           "url": "https://www.fueleconomy.gov/",
           "readOriginal": "Referenz ansehen"
+        },
+        "notices": {
+          "title": "Hinweise"
         }
       },
       "scenarios": {
         "dailyCommute": "Täglicher Arbeitsweg",
         "roadTrip": "Roadtrip",
         "efficientHybrid": "Effizienter Hybrid",
-        "usPickupTruck": "US-Pickup-Truck"
+        "usPickupTruck": "Großer Pickup-Truck"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -22847,37 +22949,44 @@
       "costComparisonDiagram": {
         "title": "Kosten für 100 km je Fahrzeugtyp",
         "intro": "Kraftstoffeffizienz wirkt sich direkt auf die Kosten aus — hier die Kosten für 100 km bei gängigen Fahrzeugklassen zu einem festen Referenzpreis.",
-        "caption": "Basierend auf einem Referenzpreis von {price} $ pro Liter; Ihr tatsächlicher lokaler Preis ändert diese Zahlen proportional.",
+        "caption": "Basierend auf einem Referenzpreis von {price} pro Liter; Ihr tatsächlicher lokaler Preis ändert diese Zahlen proportional.",
         "vehicles": {
           "hybrid": "Hybrid",
           "sedan": "Limousine",
           "suv": "SUV",
           "pickup": "Pick-up"
-        }
+        },
+        "vehicleLabel": "Fahrzeug",
+        "costPer100kmLabel": "Kosten pro 100 km",
+        "mostEfficientLabel": "Effizientest (Hybrid)",
+        "leastEfficientLabel": "Am wenigsten effizient (Pickup)"
       },
       "sensitivityDiagram": {
         "caption": "Wie sich die Gesamtkosten mit dem Kraftstoffpreis ändern",
-        "xLabel": "Preis pro Einheit"
+        "lowScenarioLabel": "Bei Preis -40%",
+        "currentScenarioLabel": "Zum aktuellen Preis",
+        "highScenarioLabel": "Bei Preis +60%"
       },
       "relatedTools": {
         "title": "Verwandte Business-Tools"
       },
       "formulaDiagram": {
         "title": "So wird die Kraftstoffkosten berechnet",
-        "intro": "Ein Beispiel: 300 Meilen bei 30 mpg, zu 3,50 $ pro Gallone.",
+        "intro": "Ein Beispiel: 300 Meilen bei 30 mpg, zu {price} pro Gallone.",
         "distance": "Strecke",
         "efficiency": "Effizienz",
         "price": "Preis",
-        "fuelUsedRow": "Verbrauchter Kraftstoff: {value} Gallonen",
-        "totalCostRow": "Gesamtkosten: {value} $"
+        "ifDistanceDoubledLabel": "Bei doppelter Strecke (600 mi)",
+        "ifPriceDoubledLabel": "Bei doppeltem Preis ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "Gesamtkosten nach Kraftstoffeffizienz",
-        "caption": "Jahreskosten für {distance} Meilen bei {price} $/Gallone, über fünf reale Effizienzstufen."
+        "caption": "Jahreskosten für {distance} Meilen bei {price}/Gallone, über fünf reale Effizienzstufen.",
+        "bestCaseLabel": "Bestfall ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "Gesamtkosten nach Fahrstrecke",
-        "caption": "Bei {efficiency} mpg und {price} $/Gallone.",
+        "caption": "Bei {efficiency} mpg und {price}/Gallone.",
         "labels": {
           "commute": "Täglicher Arbeitsweg ({miles} mi)",
           "weekendTrip": "Wochenendausflug ({miles} mi)",
@@ -22887,17 +22996,19 @@
       },
       "annualProjectionChart": {
         "title": "Prognostizierte Kosten über die Zeit",
-        "caption": "Bei {distance} Meilen/Monat, {efficiency} mpg, {price} $/Gallone.",
-        "months": "{count} Monate"
+        "caption": "Bei {distance} Meilen/Monat, {efficiency} mpg, {price}/Gallone.",
+        "months": "{count} Monate",
+        "monthlyCostLabel": "Monatliche Kosten"
       },
       "priceBandChart": {
         "title": "Gesamtkosten nach Kraftstoffpreis",
-        "caption": "Für eine {distance}-Meilen-Fahrt bei {efficiency} mpg, über vier reale Preispunkte."
+        "caption": "Für eine {distance}-Meilen-Fahrt bei {efficiency} mpg, über vier reale Preispunkte.",
+        "rateLabel": "Kosten pro {step}/gal Anstieg"
       },
       "typeCostComparisonChart": {
         "title": "Kosten nach Antriebsart",
-        "caption": "Gleiche {distance}-Meilen-Fahrt, vier typische US-Durchschnittswerte, angewendet auf dieselbe Formel.",
-        "note": "Die Werte sind typische US-Durchschnitte und variieren je nach Fahrzeug und Ort.",
+        "caption": "Gleiche {distance}-Meilen-Fahrt, vier typische Durchschnittswerte, angewendet auf dieselbe Formel.",
+        "note": "Die Werte sind typische Durchschnitte und variieren je nach Fahrzeug und Ort.",
         "sources": {
           "gasoline": "Benzin",
           "diesel": "Diesel",
@@ -22910,13 +23021,23 @@
         "intro": "Kraftstoffeffizienz-Einheiten lassen sich direkt über eine feste Konstante umrechnen.",
         "mpgLabel": "Meilen pro Gallone",
         "l100kmLabel": "Liter pro 100 km",
-        "formula": "L/100km = 235,215 ÷ MPG"
+        "formula": "L/100km = 235,215 ÷ MPG",
+        "at40Label": "Bei 40 MPG",
+        "at20Label": "Bei 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Kosten pro Meile vs. pro Kilometer",
-        "caption": "Gleiche Fahrtkosten von {cost} $ über {distance} Meilen, in beiden Einheiten ausgedrückt.",
+        "caption": "Gleiche Fahrtkosten von {cost} über {distance} Meilen, in beiden Einheiten ausgedrückt.",
         "perMile": "Pro Meile",
-        "perKm": "Pro Kilometer"
+        "perKm": "Pro Kilometer",
+        "per100kmLabel": "Pro 100 km"
+      },
+      "workedExample": {
+        "title": "Rechenbeispiel",
+        "comparisonTimes": "{multiple}× {label}",
+        "comparisonMore": "{amount} mehr als {label}",
+        "comparisonLess": "{amount} weniger als {label}",
+        "comparisonPercent": "{percent}% von {label}"
       }
     },
     "batch-invoice-calculator": {

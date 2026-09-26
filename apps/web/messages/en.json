@@ -170,16 +170,81 @@
     "shareViaApps": "Share via Apps"
   },
   "hero": {
-    "searchPlaceholder": "Search calculators, converters, generators...",
-    "search": "Search",
-    "searchNoResults": "No tools found for \"{query}\""
+    "searchPlaceholder": "Search calculators, converters, generators..."
   },
-  "heroCalculatorLog": {
-    "title": "Calculation Log",
-    "empty": "Your calculations will appear here.",
-    "copy": "Copy log",
-    "download": "Download log",
-    "error": "Error"
+  "homeCalculator": {
+    "sidebarNavLabel": "Browse categories",
+    "modes": {
+      "menuLabel": "Calculator modes",
+      "standard": "Standard",
+      "scientific": "Scientific",
+      "graph": "Graph",
+      "programmer": "Programmer",
+      "converter": "Converter"
+    },
+    "display": {
+      "mainLabel": "Current calculation",
+      "historyTab": "History",
+      "archiveTab": "Archive",
+      "emptyHistory": "Your calculations will appear here",
+      "emptyArchive": "Entries you save will appear here"
+    },
+    "functionCategories": {
+      "trigonometry": "Trigonometry",
+      "probability": "Probability",
+      "calculus": "Calculus",
+      "probabilityHint": "Type n, press nCr or nPr, type r, then =",
+      "calculusHint": "Numerical approximation — press a function, type a point or bound, then ="
+    },
+    "buttons": {
+      "secondFunction": "Second function",
+      "memoryRecall": "Memory recall",
+      "memoryAdd": "Memory add",
+      "memorySubtract": "Memory subtract",
+      "memoryClear": "Memory clear",
+      "clearEntry": "Clear entry",
+      "clearAll": "Clear all",
+      "backspace": "Delete last character",
+      "angleMode": "Toggle degrees/radians",
+      "plusMinus": "Toggle sign",
+      "equals": "Equals",
+      "logBase": "Logarithm with custom base",
+      "toggleCalculatorTheme": "Toggle calculator theme"
+    },
+    "bottomBar": {
+      "saveHistory": "Save History",
+      "savedConfirmation": "Saved to archive"
+    },
+    "errors": {
+      "DIVISION_BY_ZERO": "Cannot divide by zero",
+      "DOMAIN_ERROR": "Undefined for this input",
+      "OUT_OF_RANGE": "Result is out of range",
+      "SYNTAX_ERROR": "Check your expression"
+    },
+    "shareExport": {
+      "title": "Homepage Scientific Calculator",
+      "historyTableTitle": "Calculation History",
+      "expressionColumn": "Expression",
+      "resultColumn": "Result"
+    },
+    "sidebarTotalTools": "{count, plural, one {# tool available} other {# tools available}}",
+    "graph": {
+      "invalidFormula": "Enter a valid formula, e.g. x^2 or sin(x)",
+      "chartLabel": "Graph of y = {formula}",
+      "rangeCaption": "Showing x and y from -10 to 10"
+    },
+    "converter": {
+      "categories": {
+        "length": "Length",
+        "weight": "Weight",
+        "temperature": "Temperature",
+        "volume": "Volume"
+      },
+      "from": "From",
+      "to": "To",
+      "swap": "Swap units"
+    },
+    "sidebarViewFullDocs": "View Full Docs"
   },
   "featuredTools": {
     "badge": "Featured Tools",
@@ -8241,7 +8306,9 @@
         "modeLabel": "Known Quantities",
         "mode": {
           "timeBased": "Velocity, Acceleration & Time (no distance)",
-          "distanceBased": "Velocity, Acceleration & Displacement (no time)"
+          "distanceBased": "Velocity, Acceleration & Displacement (no time)",
+          "timeBasedShort": "Time-Based",
+          "distanceBasedShort": "Distance-Based"
         },
         "solveForLabel": "Solve For",
         "solveForTime": {
@@ -13128,14 +13195,14 @@
       },
       "taxAfterDiscountDiagram": {
         "title": "Discount Before Tax",
-        "intro": "US retail convention: the discount is applied first, then tax is computed on the reduced price.",
+        "intro": "Retail convention: the discount is applied first, then tax is computed on the reduced price.",
         "original": "Original price",
         "afterDiscount": "After {percent}% discount",
         "afterTax": "After {percent}% tax"
       },
       "seasonalRangeChart": {
         "title": "Typical Seasonal Discount Ranges",
-        "caption": "Documented US retail ranges, applied to the same $120 item.",
+        "caption": "Documented retail ranges, applied to the same $120 item.",
         "seasons": {
           "clearance": "Clearance",
           "blackFriday": "Black Friday",
@@ -17274,14 +17341,8 @@
           "breakEven": "You need to sell {units} units — {revenue} in revenue — to cover your fixed costs and break even.",
           "targetProfit": "To reach a target profit of {profit}, you need to sell {units} units."
         },
-        "chartFixedCosts": "Fixed costs",
         "chartTotalCost": "Total cost",
         "chartRevenue": "Revenue",
-        "chartBreakEven": "Where the revenue and total-cost lines cross is the break-even point — the exact unit count at which profit turns from negative to positive.",
-        "chartTargetProfit": "Target profit point",
-        "tooltipUnits": "Units",
-        "tooltipProfit": "Profit / Loss",
-        "chartAriaLabel": "Interactive chart of total cost versus revenue across unit volume, marking the break-even point",
         "glossary": {
           "title": "CVP Terms, Plainly",
           "intro": "The vocabulary of cost-volume-profit (CVP) analysis, defined without the jargon.",
@@ -17303,7 +17364,13 @@
               "meaning": "The exact sales volume where total revenue equals total cost — zero profit, zero loss."
             }
           ]
-        }
+        },
+        "columnUnits": "Units",
+        "columnResult": "Result",
+        "statusLoss": "Loss",
+        "statusBreakeven": "Break-even",
+        "statusProfit": "Profit",
+        "chartCaption": "A worked example at four unit counts, computed from your own inputs — before break-even you're at a loss, at it you break even, and past it you're in profit."
       },
       "form": {
         "inputTitle": "Your Costs",
@@ -17361,12 +17428,16 @@
           "paragraph1": "Every unit sold contributes a fixed amount — its contribution margin, price minus variable cost — toward covering the business's fixed costs, which don't change no matter how many units are sold. The break-even point is simply the moment those accumulated contributions exactly equal the fixed costs: sell fewer units than that and the business runs at a loss, sell more and every additional unit's contribution margin becomes pure profit, since the fixed costs are already fully covered.",
           "paragraph2": "This is exactly why a business with high fixed costs but a high contribution margin per unit (like software, where marginal cost per additional user is near zero) can be unprofitable at low volume and extremely profitable at scale, while a business with low fixed costs but thin per-unit margins breaks even quickly but scales up profit much more slowly. The same math extends past simply breaking even: adding a target profit on top of fixed costs and dividing by the contribution margin answers a more useful real question — not \"when do I stop losing money,\" but \"how many units get me to the profit I actually want.\"",
           "diagram": {
-            "fixedLabel": "Fixed costs",
             "totalCostLabel": "Total cost",
             "revenueLabel": "Revenue",
-            "profitLabel": "Profit",
-            "lossLabel": "Loss",
-            "caption": "The classic CVP chart: fixed costs set a flat floor, total cost rises with volume, revenue rises faster — the crossing point is the break-even point, splitting the chart into a loss zone and a profit zone."
+            "columnUnits": "Units Sold",
+            "columnResult": "Result",
+            "statusLoss": "Loss",
+            "statusBreakeven": "Break-even",
+            "statusProfit": "Profit",
+            "caption": "A worked example: as units sold increase, total cost and revenue get closer together — before the break-even point you're operating at a loss, at it you break even, and past it you're in profit.",
+            "title": "Units-to-Profit Ladder",
+            "intro": "The table below tracks that same example across four volume milestones — from zero units sold to well past break-even — to show how total cost and revenue move as volume grows, a different question from how a single $50 sale splits into cost and margin."
           },
           "businessTypeDiagram": {
             "softwareLabel": "High Fixed Cost, High Margin (Software)",
@@ -17381,14 +17452,21 @@
               "Profit scales up slowly",
               "Less sensitive to volume swings"
             ],
-            "caption": "The same break-even math produces very different growth curves depending on a business's cost structure."
+            "caption": "The same break-even math produces very different growth curves depending on a business's cost structure.",
+            "fixedCostsLabel": "Fixed costs",
+            "marginPerUnitLabel": "Margin per unit",
+            "breakEvenUnitsLabel": "Break-even",
+            "profitAtUnitsLabel": "Profit at {units} units",
+            "cardTitle": "Cost Structure Comparison"
           },
           "marginBar": {
             "title": "Where the $50 Price Goes",
             "priceLabel": "Price",
             "variableCostLabel": "Variable cost",
             "marginLabel": "Contribution margin",
-            "caption": "Of every $50 sale, $20 covers the variable cost and $30 becomes contribution margin — the amount that goes toward fixed costs, then profit."
+            "caption": "Of every $50 sale, $20 covers the variable cost and $30 becomes contribution margin — the amount that goes toward fixed costs, then profit.",
+            "marginPercentNote": "{percent} of price",
+            "cardTitle": "Price Breakdown"
           }
         },
         "examples": {
@@ -17531,13 +17609,16 @@
             }
           ],
           "marginGauge": {
-            "caption": "This tool's worked example has a 60% contribution margin ratio ($30 margin ÷ $50 price) — a healthy ratio by most standards."
+            "caption": "This tool's worked example has a 60% contribution margin ratio ($30 margin ÷ $50 price) — a healthy ratio by most standards.",
+            "cardTitle": "Contribution Margin Ratio"
           },
           "accumulationDiagram": {
-            "title": "Contribution Accumulating Toward Fixed Costs",
-            "fixedCostLabel": "Fixed costs",
             "breakEvenLabel": "Break-even",
-            "caption": "Each unit adds $30 in contribution margin — accumulated contribution reaches the $10,000 fixed-cost line at exactly 334 units."
+            "caption": "Each unit adds $30 in contribution margin — accumulated contribution reaches the $10,000 fixed-cost line at exactly 334 units.",
+            "columnUnits": "Units Sold",
+            "columnCumulativeMargin": "Cumulative Margin",
+            "columnResult": "Result",
+            "cardTitle": "Margin Accumulation to Break-Even"
           }
         },
         "applications": {
@@ -17563,21 +17644,30 @@
           ],
           "priceImpactBar": {
             "title": "Raising Price Lowers the Break-Even Point",
-            "caption": "Raising the price from $50 to $55 (with the same $20 variable cost) drops the break-even point from 334 units to 286 — a real example of a pricing decision's impact."
+            "caption": "Raising the price from $50 to $55 (with the same $20 variable cost) drops the break-even point from 334 units to 286 — a real example of a pricing decision's impact.",
+            "rowLabelAt": "At {price}",
+            "noteFewerUnits": "{count} fewer units needed",
+            "cardTitle": "Price Change Impact"
           },
           "monthlyPaceChart": {
-            "title": "Monthly Sales Pace to Break Even",
             "breakEvenLabel": "334 units — break-even",
             "caption": "Spreading 334 units evenly across 4 months means selling roughly 84 units per month to break even right on schedule.",
             "month1": "Month 1",
             "month2": "Month 2",
             "month3": "Month 3",
-            "month4": "Month 4"
+            "month4": "Month 4",
+            "columnMonth": "Month",
+            "columnCumulativeUnits": "Cumulative Units",
+            "columnPercentOfBreakEven": "% of Break-even",
+            "cardTitle": "Monthly Pace to Break-Even"
           },
           "fixedCostAddition": {
             "beforeLabel": "Before new equipment",
             "afterLabel": "After +$2,000 fixed cost",
-            "caption": "Adding $2,000 in new fixed costs (like equipment) raises the break-even point from 334 to 400 units — this tool answers exactly how much extra volume a fixed-cost decision requires."
+            "caption": "Adding $2,000 in new fixed costs (like equipment) raises the break-even point from 334 to 400 units — this tool answers exactly how much extra volume a fixed-cost decision requires.",
+            "columnFixedCosts": "Fixed Costs",
+            "columnBreakEvenUnits": "Break-even Units",
+            "cardTitle": "Adding Fixed Costs"
           }
         }
       },
@@ -17589,11 +17679,14 @@
       "sensitivityDiagram": {
         "title": "Break-Even Sensitivity to Price",
         "caption": "How many units you'd need to sell at different prices, holding costs constant.",
-        "xLabel": "Price per Unit"
+        "columnPrice": "Price",
+        "columnUnits": "Break-even Units",
+        "currentPriceLabel": "current price"
       },
       "relatedTools": {
         "title": "Related Business Tools"
-      }
+      },
+      "workedExampleTitle": "Worked Example"
     },
     "graphing-calculator": {
       "title": "Graphing Calculator",
@@ -22626,15 +22719,18 @@
       "nav": {
         "tool": "Calculator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Behind the Tool",
+        "notices": "Notices"
       },
       "form": {
         "inputTitle": "Trip Details",
         "distanceLabel": "Trip Distance",
         "rateModeLabel": "Rate Type",
         "rateModes": {
-          "consumption": "Fuel per Distance (e.g. L/100km)",
-          "efficiency": "Distance per Fuel (e.g. km/L, mpg)"
+          "consumption": "Fuel Consumption",
+          "efficiency": "Fuel Efficiency",
+          "consumptionExample": "e.g. L/100km",
+          "efficiencyExample": "e.g. km/L, mpg"
         },
         "rateValueLabelConsumption": "Fuel Consumption Rate",
         "rateValueLabelEfficiency": "Fuel Efficiency Rate",
@@ -22669,10 +22765,10 @@
         "columnClass": "Vehicle Class",
         "columnRate": "Typical Rate",
         "classes": {
-          "subcompact": "Subcompact / Compact Car",
+          "subcompact": "Compact Car",
           "midsize": "Midsize Sedan",
           "compactSuv": "Compact SUV",
-          "fullsizeSuv": "Full-Size SUV / Truck",
+          "fullsizeSuv": "Full-Size SUV",
           "pickupTruck": "Pickup Truck",
           "hybridSedan": "Hybrid Sedan"
         }
@@ -22697,7 +22793,10 @@
               "efficient": "Efficient",
               "average": "Average",
               "thirsty": "Thirsty"
-            }
+            },
+            "vehicleLabel": "Vehicle",
+            "rateLabel": "Consumption Rate",
+            "classificationLabel": "Classification"
           }
         },
         "useCases": {
@@ -22725,16 +22824,16 @@
           "columnResult": "Result",
           "rows": [
             {
-              "scenario": "500 km trip, 8 L/100km, $1.50/L",
-              "result": "40 L used, $60.00 total"
+              "scenario": "500 km trip, 8 L/100km, {price}/L",
+              "result": "40 L used, {cost} total"
             },
             {
-              "scenario": "500 km trip, 12.5 km/L, $1.50/L",
-              "result": "40 L used, $60.00 total"
+              "scenario": "500 km trip, 12.5 km/L, {price}/L",
+              "result": "40 L used, {cost} total"
             },
             {
-              "scenario": "300 mi trip, 30 mpg, $3.50/gal",
-              "result": "10 gal used, $35.00 total"
+              "scenario": "300 mi trip, 30 mpg, {price}/gal",
+              "result": "10 gal used, {cost} total"
             }
           ]
         },
@@ -22818,13 +22917,16 @@
           "note": "The official U.S. government reference explaining how fuel economy is tested and rated, and how real-world driving affects fuel consumption.",
           "url": "https://www.fueleconomy.gov/",
           "readOriginal": "View the Reference"
+        },
+        "notices": {
+          "title": "Notices"
         }
       },
       "scenarios": {
         "dailyCommute": "Daily Commute",
         "roadTrip": "Road Trip",
         "efficientHybrid": "Efficient Hybrid",
-        "usPickupTruck": "US Pickup Truck"
+        "usPickupTruck": "Large Pickup Truck"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -22847,37 +22949,44 @@
       "costComparisonDiagram": {
         "title": "Cost to Drive 100 km, by Vehicle Type",
         "intro": "Fuel efficiency translates directly into cost — here's what 100 km costs across common vehicle classes at a fixed reference fuel price.",
-        "caption": "Assumes a reference fuel price of ${price} per liter; your actual local price will change these figures proportionally.",
+        "caption": "Assumes a reference fuel price of {price} per liter; your actual local price will change these figures proportionally.",
         "vehicles": {
           "hybrid": "Hybrid",
           "sedan": "Sedan",
           "suv": "SUV",
           "pickup": "Pickup Truck"
-        }
+        },
+        "vehicleLabel": "Vehicle",
+        "costPer100kmLabel": "Cost per 100 km",
+        "mostEfficientLabel": "Most Efficient (Hybrid)",
+        "leastEfficientLabel": "Least Efficient (Pickup)"
       },
       "sensitivityDiagram": {
         "caption": "How total cost changes as the fuel price moves",
-        "xLabel": "Price per unit"
+        "lowScenarioLabel": "If Price -40%",
+        "currentScenarioLabel": "At Current Price",
+        "highScenarioLabel": "If Price +60%"
       },
       "relatedTools": {
         "title": "Related Business Tools"
       },
       "formulaDiagram": {
         "title": "How the Cost Is Calculated",
-        "intro": "A worked example: 300 miles at 30 mpg, priced at $3.50 per gallon.",
+        "intro": "A worked example: 300 miles at 30 mpg, priced at {price} per gallon.",
         "distance": "Distance",
         "efficiency": "Efficiency",
         "price": "Price",
-        "fuelUsedRow": "Fuel used: {value} gallons",
-        "totalCostRow": "Total cost: ${value}"
+        "ifDistanceDoubledLabel": "If Distance Doubled (600 mi)",
+        "ifPriceDoubledLabel": "If Price Doubled ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "Total Cost by Fuel Efficiency",
-        "caption": "Annual cost for {distance} miles at $​{price}/gallon, across five real efficiency levels."
+        "caption": "Annual cost for {distance} miles at {price}/gallon, across five real efficiency levels.",
+        "bestCaseLabel": "Best Case ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "Total Cost by Trip Distance",
-        "caption": "At {efficiency} mpg and ${price}/gallon.",
+        "caption": "At {efficiency} mpg and {price}/gallon.",
         "labels": {
           "commute": "Daily commute ({miles} mi)",
           "weekendTrip": "Weekend trip ({miles} mi)",
@@ -22887,17 +22996,19 @@
       },
       "annualProjectionChart": {
         "title": "Projected Cost Over Time",
-        "caption": "At {distance} miles/month, {efficiency} mpg, ${price}/gallon.",
-        "months": "{count} months"
+        "caption": "At {distance} miles/month, {efficiency} mpg, {price}/gallon.",
+        "months": "{count} months",
+        "monthlyCostLabel": "Monthly Cost"
       },
       "priceBandChart": {
         "title": "Total Cost by Fuel Price",
-        "caption": "For a {distance}-mile trip at {efficiency} mpg, across four real price points."
+        "caption": "For a {distance}-mile trip at {efficiency} mpg, across four real price points.",
+        "rateLabel": "Cost per {step}/gal Rise"
       },
       "typeCostComparisonChart": {
         "title": "Cost by Power Source",
-        "caption": "Same {distance}-mile trip, four typical US average rate/price benchmarks run through the same formula.",
-        "note": "Rates are typical US averages and will vary by vehicle and location.",
+        "caption": "Same {distance}-mile trip, four typical average rate/price benchmarks run through the same formula.",
+        "note": "Rates are typical averages and will vary by vehicle and location.",
         "sources": {
           "gasoline": "Gasoline",
           "diesel": "Diesel",
@@ -22910,13 +23021,23 @@
         "intro": "Fuel efficiency units convert directly using a fixed constant.",
         "mpgLabel": "Miles per gallon",
         "l100kmLabel": "Liters per 100 km",
-        "formula": "L/100km = 235.215 ÷ MPG"
+        "formula": "L/100km = 235.215 ÷ MPG",
+        "at40Label": "At 40 MPG",
+        "at20Label": "At 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Cost per Mile vs. per Kilometer",
-        "caption": "Same ${cost} trip cost over {distance} miles, expressed in both units.",
+        "caption": "Same {cost} trip cost over {distance} miles, expressed in both units.",
         "perMile": "Per mile",
-        "perKm": "Per kilometer"
+        "perKm": "Per kilometer",
+        "per100kmLabel": "Per 100 km"
+      },
+      "workedExample": {
+        "title": "Worked Example",
+        "comparisonTimes": "{multiple}× {label}",
+        "comparisonMore": "{amount} more than {label}",
+        "comparisonLess": "{amount} less than {label}",
+        "comparisonPercent": "{percent}% of {label}"
       }
     },
     "batch-invoice-calculator": {

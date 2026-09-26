@@ -2,6 +2,29 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * A separate dark-mode variant scoped ONLY to the homepage calculator card,
+ * completely independent of the site-wide `.dark` chain above. Reusing
+ * `dark:` for the calculator would mean its appearance is still controlled
+ * by whatever ancestor has `.dark` (the <html> element) — a calculator-only
+ * toggle could add `.dark` locally to go dark while the site is light, but
+ * could never go LIGHT while the site is dark, since `.dark *` matches any
+ * descendant of any `.dark`-classed ancestor no matter what class the
+ * descendant itself carries. `calcdark:` classes only react to `.calc-dark`
+ * within the calculator's own subtree, so the two toggles can disagree in
+ * either direction.
+ */
+@custom-variant calcdark (&:where(.calc-dark, .calc-dark *));
+
+/* Keeps an element's native scroll behavior fully functional while hiding the browser's own scrollbar chrome — used where a custom-designed panel (e.g. the homepage category sidebar) needs to scroll without the OS/browser's default scrollbar clashing with its design. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

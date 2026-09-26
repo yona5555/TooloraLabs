@@ -1,43 +1,85 @@
+type Stat = { label: string; value: string; emphasize?: boolean };
+
 type BreakEvenBusinessTypeDiagramProps = {
   softwareLabel: string;
   lowMarginLabel: string;
   softwareTraits: string[];
   lowMarginTraits: string[];
+  statsTitle: string;
+  softwareStats: Stat[];
+  lowMarginStats: Stat[];
   caption: string;
 };
 
-const WIDTH = 300;
-const BOX_W = 134;
-const BOX_GAP = 16;
+function StatBlock({ title, stats }: { title: string; stats: Stat[] }) {
+  return (
+    <dl className="mt-3 space-y-1.5 border-t border-current/15 pt-3 text-sm">
+      <p className="text-[10px] font-semibold uppercase tracking-wide opacity-60">{title}</p>
+      {stats.map((stat, i) => (
+        <div key={i} className={`flex items-baseline justify-between gap-3 ${stat.emphasize ? "font-bold" : ""}`}>
+          <dt>{stat.label}</dt>
+          <dd dir="ltr" className="font-mono">
+            {stat.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
-export default function BreakEvenBusinessTypeDiagram({ softwareLabel, lowMarginLabel, softwareTraits, lowMarginTraits, caption }: BreakEvenBusinessTypeDiagramProps) {
-  const rowH = 15;
-  const boxH = 40 + Math.max(softwareTraits.length, lowMarginTraits.length) * rowH;
-
+/**
+ * Plain HTML two-column cards, not the fixed-width SVG diagram this used to
+ * be. The SVG version drew each trait as an un-wrapping <text> element
+ * inside a fixed 134px-wide <rect> — a string like "Near-zero cost per
+ * extra user" at that font size needs more width than the box itself, so
+ * it spilled past the box's own edge and into the neighboring box's space
+ * (only a 16px gap separated them), reading as the two cards overlapping
+ * with clipped, unreadable text on both sides. Real HTML text wraps to fit
+ * its container at any width — this class of bug can't recur here no
+ * matter how long a trait string is or how narrow the viewport gets.
+ */
+export default function BreakEvenBusinessTypeDiagram({
+  softwareLabel,
+  lowMarginLabel,
+  softwareTraits,
+  lowMarginTraits,
+  statsTitle,
+  softwareStats,
+  lowMarginStats,
+  caption,
+}: BreakEvenBusinessTypeDiagramProps) {
   return (
     <figure className="my-2">
-      <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${boxH + 12}`} role="img" aria-label={`${softwareLabel} vs ${lowMarginLabel}`} className="h-auto w-full" style={{ minWidth: 280 }}>
-          <rect x={0} y={0} width={BOX_W} height={boxH} rx={8} className="fill-violet-50 stroke-violet-400 dark:fill-violet-500/10 dark:stroke-violet-400/60" strokeWidth={1.5} />
-          <text x={BOX_W / 2} y={20} textAnchor="middle" fontSize={10.5} fontWeight={700} className="fill-violet-700 dark:fill-violet-300">
-            {softwareLabel}
-          </text>
-          {softwareTraits.map((tItem, i) => (
-            <text key={tItem} x={12} y={38 + i * rowH} fontSize={8.5} className="fill-violet-700 dark:fill-violet-300">
-              • {tItem}
-            </text>
-          ))}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="rounded-xl border border-violet-400 bg-violet-50 p-4 dark:border-violet-400/60 dark:bg-violet-500/10">
+          <p className="font-bold text-violet-700 dark:text-violet-300">{softwareLabel}</p>
+          <ul className="mt-2 space-y-1.5 text-sm text-violet-700 dark:text-violet-300">
+            {softwareTraits.map((trait) => (
+              <li key={trait} className="flex gap-1.5">
+                <span aria-hidden="true">•</span>
+                <span>{trait}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="text-violet-700 dark:text-violet-300">
+            <StatBlock title={statsTitle} stats={softwareStats} />
+          </div>
+        </div>
 
-          <rect x={BOX_W + BOX_GAP} y={0} width={BOX_W} height={boxH} rx={8} className="fill-violet-100 stroke-violet-600 dark:fill-violet-500/20 dark:stroke-violet-400" strokeWidth={1.5} />
-          <text x={BOX_W + BOX_GAP + BOX_W / 2} y={20} textAnchor="middle" fontSize={10.5} fontWeight={700} className="fill-violet-800 dark:fill-violet-200">
-            {lowMarginLabel}
-          </text>
-          {lowMarginTraits.map((tItem, i) => (
-            <text key={tItem} x={BOX_W + BOX_GAP + 12} y={38 + i * rowH} fontSize={8.5} className="fill-violet-800 dark:fill-violet-200">
-              • {tItem}
-            </text>
-          ))}
-        </svg>
+        <div className="rounded-xl border border-violet-600 bg-violet-100 p-4 dark:border-violet-400 dark:bg-violet-500/20">
+          <p className="font-bold text-violet-800 dark:text-violet-200">{lowMarginLabel}</p>
+          <ul className="mt-2 space-y-1.5 text-sm text-violet-800 dark:text-violet-200">
+            {lowMarginTraits.map((trait) => (
+              <li key={trait} className="flex gap-1.5">
+                <span aria-hidden="true">•</span>
+                <span>{trait}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="text-violet-800 dark:text-violet-200">
+            <StatBlock title={statsTitle} stats={lowMarginStats} />
+          </div>
+        </div>
       </div>
       <figcaption className="mt-2 text-center text-sm opacity-70">{caption}</figcaption>
     </figure>

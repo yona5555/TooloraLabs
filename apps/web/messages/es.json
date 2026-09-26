@@ -170,16 +170,81 @@
     "shareViaApps": "Compartir mediante aplicaciones"
   },
   "hero": {
-    "searchPlaceholder": "Buscar calculadoras, convertidores, generadores...",
-    "search": "Buscar",
-    "searchNoResults": "No se encontraron herramientas para \"{query}\""
+    "searchPlaceholder": "Buscar calculadoras, convertidores, generadores..."
   },
-  "heroCalculatorLog": {
-    "title": "Registro de cálculos",
-    "empty": "Tus cálculos aparecerán aquí.",
-    "copy": "Copiar registro",
-    "download": "Descargar registro",
-    "error": "Error"
+  "homeCalculator": {
+    "sidebarNavLabel": "Explorar categorías",
+    "modes": {
+      "menuLabel": "Modos de la calculadora",
+      "standard": "Estándar",
+      "scientific": "Científica",
+      "graph": "Gráfica",
+      "programmer": "Programador",
+      "converter": "Conversor"
+    },
+    "display": {
+      "mainLabel": "Cálculo actual",
+      "historyTab": "Historial",
+      "archiveTab": "Archivo",
+      "emptyHistory": "Tus cálculos aparecerán aquí",
+      "emptyArchive": "Las entradas que guardes aparecerán aquí"
+    },
+    "functionCategories": {
+      "trigonometry": "Trigonometría",
+      "probability": "Probabilidad",
+      "calculus": "Cálculo",
+      "probabilityHint": "Escribe n, pulsa nCr o nPr, escribe r, luego =",
+      "calculusHint": "Aproximación numérica — pulsa una función, escribe un punto o límite, luego ="
+    },
+    "buttons": {
+      "secondFunction": "Segunda función",
+      "memoryRecall": "Recuperar memoria",
+      "memoryAdd": "Sumar a memoria",
+      "memorySubtract": "Restar de memoria",
+      "memoryClear": "Borrar memoria",
+      "clearEntry": "Borrar entrada",
+      "clearAll": "Borrar todo",
+      "backspace": "Eliminar último carácter",
+      "angleMode": "Alternar grados/radianes",
+      "plusMinus": "Cambiar signo",
+      "equals": "Igual",
+      "logBase": "Logaritmo con base personalizada",
+      "toggleCalculatorTheme": "Alternar tema de la calculadora"
+    },
+    "bottomBar": {
+      "saveHistory": "Guardar historial",
+      "savedConfirmation": "Guardado en el archivo"
+    },
+    "errors": {
+      "DIVISION_BY_ZERO": "No se puede dividir entre cero",
+      "DOMAIN_ERROR": "No definido para esta entrada",
+      "OUT_OF_RANGE": "El resultado está fuera de rango",
+      "SYNTAX_ERROR": "Revisa tu expresión"
+    },
+    "shareExport": {
+      "title": "Calculadora científica de la página principal",
+      "historyTableTitle": "Historial de cálculos",
+      "expressionColumn": "Expresión",
+      "resultColumn": "Resultado"
+    },
+    "sidebarTotalTools": "{count, plural, one {# Herramienta disponible} other {# Herramientas disponibles}}",
+    "graph": {
+      "invalidFormula": "Introduce una fórmula válida, p. ej. x^2 o sin(x)",
+      "chartLabel": "Gráfica de y = {formula}",
+      "rangeCaption": "Se muestran x e y de -10 a 10"
+    },
+    "converter": {
+      "categories": {
+        "length": "Longitud",
+        "weight": "Peso",
+        "temperature": "Temperatura",
+        "volume": "Volumen"
+      },
+      "from": "De",
+      "to": "A",
+      "swap": "Intercambiar unidades"
+    },
+    "sidebarViewFullDocs": "Ver documentación completa"
   },
   "featuredTools": {
     "badge": "Herramientas Destacadas",
@@ -8241,7 +8306,9 @@
         "modeLabel": "Cantidades Conocidas",
         "mode": {
           "timeBased": "Velocidad, Aceleración y Tiempo (sin distancia)",
-          "distanceBased": "Velocidad, Aceleración y Desplazamiento (sin tiempo)"
+          "distanceBased": "Velocidad, Aceleración y Desplazamiento (sin tiempo)",
+          "timeBasedShort": "Según el Tiempo",
+          "distanceBasedShort": "Según la Distancia"
         },
         "solveForLabel": "Calcular",
         "solveForTime": {
@@ -13128,14 +13195,14 @@
       },
       "taxAfterDiscountDiagram": {
         "title": "Descuento antes del impuesto",
-        "intro": "Convención minorista de EE. UU.: el descuento se aplica primero y luego el impuesto se calcula sobre el precio reducido.",
+        "intro": "Convención minorista: el descuento se aplica primero y luego el impuesto se calcula sobre el precio reducido.",
         "original": "Precio original",
         "afterDiscount": "Después de {percent}% de descuento",
         "afterTax": "Después de {percent}% de impuesto"
       },
       "seasonalRangeChart": {
         "title": "Rangos de descuento estacionales típicos",
-        "caption": "Rangos documentados del comercio minorista de EE. UU., aplicados al mismo artículo de $120.",
+        "caption": "Rangos documentados del comercio minorista, aplicados al mismo artículo de $120.",
         "seasons": {
           "clearance": "Liquidación",
           "blackFriday": "Black Friday",
@@ -17269,10 +17336,8 @@
       "aboveFold": {
         "resultTitle": "Punto de equilibrio",
         "placeholder": "Introduce tus costos fijos, el costo variable y el precio para ver aquí tu punto de equilibrio.",
-        "chartFixedCosts": "Costos fijos",
         "chartTotalCost": "Costo total",
         "chartRevenue": "Ingresos",
-        "chartBreakEven": "El punto donde se cruzan las líneas de ingresos y costo total es el punto de equilibrio — la cantidad exacta de unidades en la que la utilidad pasa de negativa a positiva.",
         "emptyStateMessage": "Introduce tus costos y precio y pulsa \"Calcular\" para ver tus resultados.",
         "sentences": {
           "breakEven": "Necesitas vender {units} unidades — {revenue} en ingresos — para cubrir tus costos fijos y llegar al punto de equilibrio.",
@@ -17300,10 +17365,12 @@
             }
           ]
         },
-        "chartTargetProfit": "Punto de utilidad objetivo",
-        "tooltipUnits": "Unidades",
-        "tooltipProfit": "Utilidad / Pérdida",
-        "chartAriaLabel": "Gráfico interactivo de costo total frente a ingresos según el volumen de unidades, marcando el punto de equilibrio"
+        "columnUnits": "Unidades",
+        "columnResult": "Resultado",
+        "statusLoss": "Pérdida",
+        "statusBreakeven": "Punto de equilibrio",
+        "statusProfit": "Utilidad",
+        "chartCaption": "Un ejemplo calculado en cuatro cantidades de unidades, a partir de tus propios datos — antes del punto de equilibrio hay pérdida, en él se equilibra, y después hay utilidad."
       },
       "form": {
         "inputTitle": "Tus costos",
@@ -17361,12 +17428,16 @@
           "paragraph1": "Cada unidad vendida aporta una cantidad fija —su margen de contribución, es decir, el precio menos el costo variable— para cubrir los costos fijos del negocio, que no cambian sin importar cuántas unidades se vendan. El punto de equilibrio es simplemente el momento en que esas contribuciones acumuladas igualan exactamente los costos fijos: vender menos unidades que esa cifra genera pérdidas, y vender más convierte el margen de contribución de cada unidad adicional en utilidad pura, ya que los costos fijos ya están totalmente cubiertos.",
           "paragraph2": "Esto explica por qué un negocio con costos fijos altos pero un margen de contribución por unidad elevado (como el software, donde el costo marginal de cada usuario adicional es casi cero) puede ser poco rentable con bajo volumen y extremadamente rentable a gran escala, mientras que un negocio con costos fijos bajos pero márgenes por unidad reducidos llega rápido al equilibrio, pero aumenta su utilidad mucho más despacio. El mismo cálculo va más allá del simple equilibrio: sumar una utilidad objetivo a los costos fijos y dividir el resultado entre el margen de contribución responde una pregunta aún más útil — no «¿cuándo dejo de perder dinero?», sino «¿cuántas unidades necesito para alcanzar la utilidad que realmente quiero?».",
           "diagram": {
-            "fixedLabel": "Costos fijos",
             "totalCostLabel": "Costo total",
             "revenueLabel": "Ingresos",
-            "profitLabel": "Utilidad",
-            "lossLabel": "Pérdida",
-            "caption": "El gráfico clásico de CVU: los costos fijos marcan un piso constante, el costo total aumenta con el volumen, los ingresos aumentan más rápido — el punto de cruce es el punto de equilibrio, que divide el gráfico en una zona de pérdida y una zona de utilidad."
+            "columnUnits": "Unidades Vendidas",
+            "columnResult": "Resultado",
+            "statusLoss": "Pérdida",
+            "statusBreakeven": "Punto de equilibrio",
+            "statusProfit": "Utilidad",
+            "caption": "Un ejemplo calculado: a medida que aumentan las unidades vendidas, el costo total y los ingresos se acercan — antes del punto de equilibrio hay pérdida, en él se equilibra, y después hay utilidad.",
+            "title": "La escalera de unidades a la utilidad",
+            "intro": "La tabla de abajo sigue ese mismo ejemplo a través de cuatro hitos de volumen — desde cero unidades vendidas hasta bien pasado el punto de equilibrio — para mostrar cómo se mueven el costo total y los ingresos a medida que crece el volumen, una pregunta distinta de cómo se divide una sola venta de $50 entre costo y margen."
           },
           "businessTypeDiagram": {
             "softwareLabel": "Costo fijo alto, margen alto (software)",
@@ -17381,14 +17452,21 @@
               "El beneficio escala lentamente",
               "Menos sensible a las variaciones de volumen"
             ],
-            "caption": "La misma matemática del punto de equilibrio produce curvas de crecimiento muy distintas según la estructura de costos del negocio."
+            "caption": "La misma matemática del punto de equilibrio produce curvas de crecimiento muy distintas según la estructura de costos del negocio.",
+            "fixedCostsLabel": "Costos fijos",
+            "marginPerUnitLabel": "Margen por unidad",
+            "breakEvenUnitsLabel": "Punto de equilibrio",
+            "profitAtUnitsLabel": "Utilidad con {units} unidades",
+            "cardTitle": "Comparación de estructuras de costos"
           },
           "marginBar": {
             "title": "A dónde va el precio de $50",
             "priceLabel": "Precio",
             "variableCostLabel": "Costo variable",
             "marginLabel": "Margen de contribución",
-            "caption": "De cada venta de $50, $20 cubren el costo variable y $30 se convierten en margen de contribución — el monto que va hacia los costos fijos y luego la ganancia."
+            "caption": "De cada venta de $50, $20 cubren el costo variable y $30 se convierten en margen de contribución — el monto que va hacia los costos fijos y luego la ganancia.",
+            "marginPercentNote": "{percent} del precio",
+            "cardTitle": "Desglose del precio"
           }
         },
         "examples": {
@@ -17531,13 +17609,16 @@
             }
           ],
           "marginGauge": {
-            "caption": "El ejemplo resuelto de esta herramienta tiene una razón de margen de contribución del 60% ($30 margen ÷ $50 precio) — una razón saludable según la mayoría de los estándares."
+            "caption": "El ejemplo resuelto de esta herramienta tiene una razón de margen de contribución del 60% ($30 margen ÷ $50 precio) — una razón saludable según la mayoría de los estándares.",
+            "cardTitle": "Ratio de margen de contribución"
           },
           "accumulationDiagram": {
-            "title": "Contribución acumulándose hacia los costos fijos",
-            "fixedCostLabel": "Costos fijos",
             "breakEvenLabel": "Punto de equilibrio",
-            "caption": "Cada unidad añade $30 de margen de contribución — la contribución acumulada alcanza la línea de costos fijos de $10,000 en exactamente 334 unidades."
+            "caption": "Cada unidad añade $30 de margen de contribución — la contribución acumulada alcanza la línea de costos fijos de $10,000 en exactamente 334 unidades.",
+            "columnUnits": "Unidades Vendidas",
+            "columnCumulativeMargin": "Margen Acumulado",
+            "columnResult": "Resultado",
+            "cardTitle": "Acumulación del margen hasta el punto de equilibrio"
           }
         },
         "applications": {
@@ -17563,21 +17644,30 @@
           ],
           "priceImpactBar": {
             "title": "Subir el precio reduce el punto de equilibrio",
-            "caption": "Subir el precio de $50 a $55 (con el mismo costo variable de $20) baja el punto de equilibrio de 334 a 286 unidades — un ejemplo real del impacto de una decisión de precios."
+            "caption": "Subir el precio de $50 a $55 (con el mismo costo variable de $20) baja el punto de equilibrio de 334 a 286 unidades — un ejemplo real del impacto de una decisión de precios.",
+            "rowLabelAt": "A {price}",
+            "noteFewerUnits": "{count} unidades menos necesarias",
+            "cardTitle": "Impacto del cambio de precio"
           },
           "monthlyPaceChart": {
-            "title": "Ritmo mensual de ventas para llegar al equilibrio",
             "breakEvenLabel": "334 unidades — equilibrio",
             "caption": "Distribuir 334 unidades uniformemente en 4 meses significa vender aproximadamente 84 unidades por mes para llegar al equilibrio según lo previsto.",
             "month1": "Mes 1",
             "month2": "Mes 2",
             "month3": "Mes 3",
-            "month4": "Mes 4"
+            "month4": "Mes 4",
+            "columnMonth": "Mes",
+            "columnCumulativeUnits": "Unidades Acumuladas",
+            "columnPercentOfBreakEven": "% del Punto de Equilibrio",
+            "cardTitle": "Ritmo mensual hacia el punto de equilibrio"
           },
           "fixedCostAddition": {
             "beforeLabel": "Antes del nuevo equipo",
             "afterLabel": "Después de +$2,000 en costo fijo",
-            "caption": "Añadir $2,000 en nuevos costos fijos (como equipo) eleva el punto de equilibrio de 334 a 400 unidades — esta herramienta responde exactamente cuánto volumen adicional requiere una decisión de costo fijo."
+            "caption": "Añadir $2,000 en nuevos costos fijos (como equipo) eleva el punto de equilibrio de 334 a 400 unidades — esta herramienta responde exactamente cuánto volumen adicional requiere una decisión de costo fijo.",
+            "columnFixedCosts": "Costos Fijos",
+            "columnBreakEvenUnits": "Unidades de Equilibrio",
+            "cardTitle": "Agregar costos fijos"
           }
         }
       },
@@ -17589,11 +17679,14 @@
       "sensitivityDiagram": {
         "title": "Sensibilidad del Equilibrio al Precio",
         "caption": "Cuántas unidades necesitarías vender a diferentes precios, manteniendo los costos constantes.",
-        "xLabel": "Precio por Unidad"
+        "columnPrice": "Precio",
+        "columnUnits": "Unidades de Equilibrio",
+        "currentPriceLabel": "precio actual"
       },
       "relatedTools": {
         "title": "Herramientas de negocio relacionadas"
-      }
+      },
+      "workedExampleTitle": "Ejemplo Calculado"
     },
     "graphing-calculator": {
       "title": "Calculadora Gráfica",
@@ -22626,15 +22719,18 @@
       "nav": {
         "tool": "Calculadora",
         "faq": "Preguntas frecuentes",
-        "behindTheTool": "Detrás de la herramienta"
+        "behindTheTool": "Detrás de la herramienta",
+        "notices": "Avisos"
       },
       "form": {
         "inputTitle": "Detalles del Viaje",
         "distanceLabel": "Distancia del Viaje",
         "rateModeLabel": "Tipo de Tasa",
         "rateModes": {
-          "consumption": "Combustible por distancia (p. ej. L/100km)",
-          "efficiency": "Distancia por combustible (p. ej. km/L, mpg)"
+          "consumption": "Consumo de Combustible",
+          "efficiency": "Eficiencia de Combustible",
+          "consumptionExample": "p. ej. L/100km",
+          "efficiencyExample": "p. ej. km/L, mpg"
         },
         "rateValueLabelConsumption": "Tasa de Consumo de Combustible",
         "rateValueLabelEfficiency": "Tasa de Eficiencia de Combustible",
@@ -22669,10 +22765,10 @@
         "columnClass": "Clase de vehículo",
         "columnRate": "Valor típico",
         "classes": {
-          "subcompact": "Auto subcompacto o compacto",
+          "subcompact": "Auto compacto",
           "midsize": "Sedán mediano",
           "compactSuv": "SUV compacta",
-          "fullsizeSuv": "SUV grande o camioneta",
+          "fullsizeSuv": "SUV grande",
           "pickupTruck": "Camioneta pickup",
           "hybridSedan": "Sedán híbrido"
         }
@@ -22697,7 +22793,10 @@
               "efficient": "Eficiente",
               "average": "Promedio",
               "thirsty": "Sediento"
-            }
+            },
+            "vehicleLabel": "Vehículo",
+            "rateLabel": "Tasa de consumo",
+            "classificationLabel": "Clasificación"
           }
         },
         "useCases": {
@@ -22725,16 +22824,16 @@
           "columnResult": "Resultado",
           "rows": [
             {
-              "scenario": "Viaje de 500 km, 8 L/100km, $1.50/L",
-              "result": "40 L usados, $60.00 total"
+              "scenario": "Viaje de 500 km, 8 L/100km, {price}/L",
+              "result": "40 L usados, {cost} total"
             },
             {
-              "scenario": "Viaje de 500 km, 12.5 km/L, $1.50/L",
-              "result": "40 L usados, $60.00 total"
+              "scenario": "Viaje de 500 km, 12.5 km/L, {price}/L",
+              "result": "40 L usados, {cost} total"
             },
             {
-              "scenario": "Viaje de 300 mi, 30 mpg, $3.50/gal",
-              "result": "10 gal usados, $35.00 total"
+              "scenario": "Viaje de 300 mi, 30 mpg, {price}/gal",
+              "result": "10 gal usados, {cost} total"
             }
           ]
         },
@@ -22818,13 +22917,16 @@
           "note": "La referencia oficial del gobierno de EE. UU. que explica cómo se prueba y califica la economía de combustible, y cómo la conducción real afecta el consumo de combustible.",
           "url": "https://www.fueleconomy.gov/",
           "readOriginal": "Ver la Referencia"
+        },
+        "notices": {
+          "title": "Avisos"
         }
       },
       "scenarios": {
         "dailyCommute": "Trayecto diario",
         "roadTrip": "Viaje por carretera",
         "efficientHybrid": "Híbrido eficiente",
-        "usPickupTruck": "Camioneta pickup de EE. UU."
+        "usPickupTruck": "Camioneta Pickup Grande"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -22847,37 +22949,44 @@
       "costComparisonDiagram": {
         "title": "Costo de Conducir 100 km, por Tipo de Vehículo",
         "intro": "La eficiencia de combustible se traduce directamente en costo — esto es lo que cuestan 100 km en clases comunes de vehículos a un precio de combustible de referencia fijo.",
-        "caption": "Supone un precio de combustible de referencia de ${price} por litro; tu precio local real cambiará estas cifras proporcionalmente.",
+        "caption": "Supone un precio de combustible de referencia de {price} por litro; tu precio local real cambiará estas cifras proporcionalmente.",
         "vehicles": {
           "hybrid": "Híbrido",
           "sedan": "Sedán",
           "suv": "SUV",
           "pickup": "Camioneta"
-        }
+        },
+        "vehicleLabel": "Vehículo",
+        "costPer100kmLabel": "Costo por 100 km",
+        "mostEfficientLabel": "Más eficiente (Híbrido)",
+        "leastEfficientLabel": "Menos eficiente (Camioneta)"
       },
       "sensitivityDiagram": {
         "caption": "Cómo cambia el costo total según el precio del combustible",
-        "xLabel": "Precio por unidad"
+        "lowScenarioLabel": "Si el precio baja 40%",
+        "currentScenarioLabel": "Al precio actual",
+        "highScenarioLabel": "Si el precio sube 60%"
       },
       "relatedTools": {
         "title": "Herramientas de negocio relacionadas"
       },
       "formulaDiagram": {
         "title": "Cómo se calcula el costo",
-        "intro": "Un ejemplo resuelto: 300 millas a 30 mpg, a $3.50 por galón.",
+        "intro": "Un ejemplo resuelto: 300 millas a 30 mpg, a {price} por galón.",
         "distance": "Distancia",
         "efficiency": "Eficiencia",
         "price": "Precio",
-        "fuelUsedRow": "Combustible usado: {value} galones",
-        "totalCostRow": "Costo total: ${value}"
+        "ifDistanceDoubledLabel": "Si la distancia se duplicara (600 mi)",
+        "ifPriceDoubledLabel": "Si el precio se duplicara ({price})"
       },
       "efficiencyComparisonChart": {
         "title": "Costo total por eficiencia de combustible",
-        "caption": "Costo anual para {distance} millas a ${price}/galón, en cinco niveles reales de eficiencia."
+        "caption": "Costo anual para {distance} millas a {price}/galón, en cinco niveles reales de eficiencia.",
+        "bestCaseLabel": "Mejor caso ({mpg} mpg)"
       },
       "distanceScaleChart": {
         "title": "Costo total por distancia del viaje",
-        "caption": "A {efficiency} mpg y ${price}/galón.",
+        "caption": "A {efficiency} mpg y {price}/galón.",
         "labels": {
           "commute": "Trayecto diario ({miles} mi)",
           "weekendTrip": "Viaje de fin de semana ({miles} mi)",
@@ -22887,17 +22996,19 @@
       },
       "annualProjectionChart": {
         "title": "Costo proyectado en el tiempo",
-        "caption": "A {distance} millas/mes, {efficiency} mpg, ${price}/galón.",
-        "months": "{count} meses"
+        "caption": "A {distance} millas/mes, {efficiency} mpg, {price}/galón.",
+        "months": "{count} meses",
+        "monthlyCostLabel": "Costo mensual"
       },
       "priceBandChart": {
         "title": "Costo total por precio del combustible",
-        "caption": "Para un viaje de {distance} millas a {efficiency} mpg, en cuatro precios reales."
+        "caption": "Para un viaje de {distance} millas a {efficiency} mpg, en cuatro precios reales.",
+        "rateLabel": "Costo por cada {step}/gal de aumento"
       },
       "typeCostComparisonChart": {
         "title": "Costo por tipo de fuente de energía",
-        "caption": "Mismo viaje de {distance} millas, cuatro referencias promedio típicas de EE. UU., aplicadas a la misma fórmula.",
-        "note": "Las tarifas son promedios típicos de EE. UU. y varían según el vehículo y la ubicación.",
+        "caption": "Mismo viaje de {distance} millas, cuatro referencias promedio típicas, aplicadas a la misma fórmula.",
+        "note": "Las tarifas son promedios típicos y varían según el vehículo y la ubicación.",
         "sources": {
           "gasoline": "Gasolina",
           "diesel": "Diésel",
@@ -22910,13 +23021,23 @@
         "intro": "Las unidades de eficiencia de combustible se convierten directamente con una constante fija.",
         "mpgLabel": "Millas por galón",
         "l100kmLabel": "Litros por 100 km",
-        "formula": "L/100km = 235.215 ÷ MPG"
+        "formula": "L/100km = 235.215 ÷ MPG",
+        "at40Label": "A 40 MPG",
+        "at20Label": "A 20 MPG"
       },
       "costPerMileVsKmChart": {
         "title": "Costo por milla vs. por kilómetro",
-        "caption": "Mismo costo de viaje de ${cost} en {distance} millas, expresado en ambas unidades.",
+        "caption": "Mismo costo de viaje de {cost} en {distance} millas, expresado en ambas unidades.",
         "perMile": "Por milla",
-        "perKm": "Por kilómetro"
+        "perKm": "Por kilómetro",
+        "per100kmLabel": "Por 100 km"
+      },
+      "workedExample": {
+        "title": "Ejemplo resuelto",
+        "comparisonTimes": "{multiple}× {label}",
+        "comparisonMore": "{amount} más que {label}",
+        "comparisonLess": "{amount} menos que {label}",
+        "comparisonPercent": "{percent}% de {label}"
       }
     },
     "batch-invoice-calculator": {
