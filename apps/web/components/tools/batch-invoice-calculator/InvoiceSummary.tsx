@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { Printer, Trash2 } from "lucide-react";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { BatchInvoiceCalculatorOutput, BatchSummary } from "@tooloralabs/tools";
+import AutoFitText from "@/components/tool-ui/AutoFitText";
+import type { CurrencyCode } from "@/lib/currency";
 import InvoiceBatchComparisonChart from "./InvoiceBatchComparisonChart";
 import BatchInvoiceShareExportModal from "./BatchInvoiceShareExportModal";
 import type { SavedInvoice } from "./types";
@@ -10,16 +12,17 @@ import type { SavedInvoice } from "./types";
 type Props = {
   summary: BatchSummary;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
   onPrint: () => void;
   onClearAll: () => void;
   invoices: SavedInvoice[];
   invoiceResults: BatchInvoiceCalculatorOutput[];
 };
 
-export default function InvoiceSummary({ summary, digitStyle, onPrint, onClearAll, invoices, invoiceResults }: Props) {
+export default function InvoiceSummary({ summary, digitStyle, currency, onPrint, onClearAll, invoices, invoiceResults }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator.summary");
   const tRoot = useTranslations("tools.batch-invoice-calculator");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
+  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   return (
     <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
@@ -45,26 +48,33 @@ export default function InvoiceSummary({ summary, digitStyle, onPrint, onClearAl
           invoices={invoices}
           results={invoiceResults}
           digitStyle={digitStyle}
+          currency={currency}
           netLabel={t("netBeforeTaxLabel")}
           taxLabel={t("taxTotalLabel")}
           caption={t("comparisonChartCaption")}
         />
         <ul className="space-y-1.5 text-sm">
           <li className="flex items-center justify-between gap-3">
-            <span className="text-zinc-500 dark:text-zinc-400">{t("invoiceCountLabel")}</span>
+            <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{t("invoiceCountLabel")}</span>
             <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{summary.invoiceCount}</span>
           </li>
           <li className="flex items-center justify-between gap-3">
-            <span className="text-zinc-500 dark:text-zinc-400">{t("netBeforeTaxLabel")}</span>
-            <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(summary.netBeforeTax)}</span>
+            <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{t("netBeforeTaxLabel")}</span>
+            <span className="min-w-0 flex-1 text-end">
+              <AutoFitText text={fmt(summary.netBeforeTax)} dir="ltr" allowWrap={false} steps={["text-sm", "text-xs"]} className="font-mono font-semibold text-zinc-800 dark:text-zinc-100" />
+            </span>
           </li>
           <li className="flex items-center justify-between gap-3">
-            <span className="text-zinc-500 dark:text-zinc-400">{t("taxTotalLabel")}</span>
-            <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(summary.taxTotal)}</span>
+            <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{t("taxTotalLabel")}</span>
+            <span className="min-w-0 flex-1 text-end">
+              <AutoFitText text={fmt(summary.taxTotal)} dir="ltr" allowWrap={false} steps={["text-sm", "text-xs"]} className="font-mono font-semibold text-zinc-800 dark:text-zinc-100" />
+            </span>
           </li>
           <li className="flex items-center justify-between gap-3 border-t border-zinc-100 pt-1.5 dark:border-zinc-800">
-            <span className="font-semibold text-zinc-700 dark:text-zinc-200">{t("grandTotalLabel")}</span>
-            <span className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{fmt(summary.grandTotal)}</span>
+            <span className="shrink-0 font-semibold text-zinc-700 dark:text-zinc-200">{t("grandTotalLabel")}</span>
+            <span className="min-w-0 flex-1 text-end">
+              <AutoFitText text={fmt(summary.grandTotal)} dir="ltr" allowWrap={false} steps={["text-lg", "text-base", "text-sm", "text-xs"]} className="font-mono font-bold text-blue-700 dark:text-blue-300" />
+            </span>
           </li>
         </ul>
 

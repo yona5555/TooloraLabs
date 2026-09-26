@@ -1,15 +1,18 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import AutoFitText from "@/components/tool-ui/AutoFitText";
+import type { CurrencyCode } from "@/lib/currency";
 import type { BatchInvoiceCalculatorOutput } from "./types";
 
 type Props = {
   result: BatchInvoiceCalculatorOutput;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
 };
 
-export default function DraftPreview({ result, digitStyle }: Props) {
+export default function DraftPreview({ result, digitStyle, currency }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator.draftPreview");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
+  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   const message =
     result.error === "no-line-items"
@@ -31,16 +34,22 @@ export default function DraftPreview({ result, digitStyle }: Props) {
         ) : (
           <ul className="space-y-1.5 text-sm">
             <li className="flex items-center justify-between gap-3">
-              <span className="text-zinc-500 dark:text-zinc-400">{t("subtotalLabel")}</span>
-              <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(result.subtotal)}</span>
+              <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{t("subtotalLabel")}</span>
+              <span className="min-w-0 flex-1 text-end">
+                <AutoFitText text={fmt(result.subtotal)} dir="ltr" allowWrap={false} steps={["text-sm", "text-xs"]} className="font-mono font-semibold text-zinc-800 dark:text-zinc-100" />
+              </span>
             </li>
             <li className="flex items-center justify-between gap-3">
-              <span className="text-zinc-500 dark:text-zinc-400">{t("taxLabel")}</span>
-              <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(result.taxAmount)}</span>
+              <span className="shrink-0 text-zinc-500 dark:text-zinc-400">{t("taxLabel")}</span>
+              <span className="min-w-0 flex-1 text-end">
+                <AutoFitText text={fmt(result.taxAmount)} dir="ltr" allowWrap={false} steps={["text-sm", "text-xs"]} className="font-mono font-semibold text-zinc-800 dark:text-zinc-100" />
+              </span>
             </li>
             <li className="flex items-center justify-between gap-3 border-t border-zinc-100 pt-1.5 dark:border-zinc-800">
-              <span className="font-semibold text-zinc-700 dark:text-zinc-200">{t("totalLabel")}</span>
-              <span className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{fmt(result.total)}</span>
+              <span className="shrink-0 font-semibold text-zinc-700 dark:text-zinc-200">{t("totalLabel")}</span>
+              <span className="min-w-0 flex-1 text-end">
+                <AutoFitText text={fmt(result.total)} dir="ltr" allowWrap={false} steps={["text-lg", "text-base", "text-sm", "text-xs"]} className="font-mono font-bold text-blue-700 dark:text-blue-300" />
+              </span>
             </li>
           </ul>
         )}

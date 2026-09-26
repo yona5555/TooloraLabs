@@ -1,9 +1,11 @@
 import { getTranslations } from "next-intl/server";
+import { Briefcase, Receipt, Calculator } from "lucide-react";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import NeumorphicIconBadge from "@/components/tool-ui/NeumorphicIconBadge";
 import InvoiceFormulaDiagram from "./InvoiceFormulaDiagram";
 import InvoiceLineItemBreakdownChart from "./InvoiceLineItemBreakdownChart";
 import InvoiceTaxRateComparisonChart from "./InvoiceTaxRateComparisonChart";
@@ -21,6 +23,7 @@ export default async function BatchInvoiceEducation() {
   const t = await getTranslations("tools.batch-invoice-calculator.education");
 
   const useCaseItems = t.raw("useCases.items") as UseCaseItem[];
+  const useCaseIcons = [Briefcase, Receipt, Calculator];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
@@ -36,10 +39,13 @@ export default async function BatchInvoiceEducation() {
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
         <div className="space-y-4">
-          {useCaseItems.map((item) => (
-            <div key={item.title}>
-              <h3 className="font-semibold">{item.title}</h3>
-              <p className="mt-1">{item.description}</p>
+          {useCaseItems.map((item, i) => (
+            <div key={item.title} className="flex items-start gap-3">
+              <NeumorphicIconBadge icon={useCaseIcons[i] ?? Briefcase} className="mt-0.5" />
+              <div>
+                <h3 className="font-semibold">{item.title}</h3>
+                <p className="mt-1">{item.description}</p>
+              </div>
             </div>
           ))}
         </div>

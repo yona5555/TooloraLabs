@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { BatchSummary } from "@tooloralabs/tools";
+import type { CurrencyCode } from "@/lib/currency";
 import type { SavedInvoice } from "./types";
 
 type Props = {
@@ -8,13 +9,14 @@ type Props = {
   totals: number[];
   summary: BatchSummary;
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
 };
 
-export default function PrintableSummary({ invoices, totals, summary, digitStyle }: Props) {
+export default function PrintableSummary({ invoices, totals, summary, digitStyle, currency }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator");
   const tTable = useTranslations("tools.batch-invoice-calculator.table");
   const tSummary = useTranslations("tools.batch-invoice-calculator.summary");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
+  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   return (
     <div data-print-area className="hidden bg-white p-8 text-black print:block">

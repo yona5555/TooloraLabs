@@ -1,10 +1,11 @@
 "use client";
-import { useMemo, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { BatchInvoiceCalculator as BatchInvoiceTool, summarizeInvoices } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
+import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
@@ -47,6 +48,47 @@ export default function BatchInvoiceCalculator({ education }: { education: React
   const [lineItems, setLineItems] = useState<DraftLineItem[]>([{ ...EMPTY_LINE_ITEM }]);
   const [taxPercent, setTaxPercent] = useState("0");
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [currency, setCurrency] = useState<CurrencyCode>(DEFAULT_CURRENCY);
+
+  const [navBarVisible, setNavBarVisible] = useState(false);
+  const headerSentinelRef = useRef<HTMLDivElement>(null);
+
+  // Same dual-observer hysteresis technique as Break-Even/Discount/Sales Tax Calculator: two
+  // margins (a deeper "show" line, a shallower "hide" line) create a dead zone so momentum-
+  // scroll jitter near either line can't flip visibility back and forth every frame, and the bar
+  // never renders pinned over the H1 on first load.
+  useEffect(() => {
+    const el = headerSentinelRef.current;
+    if (!el) return;
+
+    let isVisible = false;
+
+    const showObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && !isVisible) {
+          isVisible = true;
+          setNavBarVisible(true);
+        }
+      },
+      { rootMargin: "-88px 0px 0px 0px", threshold: 0 }
+    );
+    const hideObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && isVisible) {
+          isVisible = false;
+          setNavBarVisible(false);
+        }
+      },
+      { rootMargin: "-56px 0px 0px 0px", threshold: 0 }
+    );
+
+    showObserver.observe(el);
+    hideObserver.observe(el);
+    return () => {
+      showObserver.disconnect();
+      hideObserver.disconnect();
+    };
+  }, []);
 
   const digitStyle: DigitStyle = resolveDigitStyle(taxPercent, ...lineItems.map((l) => l.quantity + l.unitPrice));
 
@@ -80,6 +122,14 @@ export default function BatchInvoiceCalculator({ education }: { education: React
 
   function handleUpdateLineItem(index: number, patch: Partial<DraftLineItem>) {
     setLineItems((prev) => prev.map((item, i) => (i === index ? { ...item, ...patch } : item)));
+  }
+
+  function handleCurrencyChange(next: CurrencyCode) {
+    if (next === currency) return;
+    setLineItems((prev) =>
+      prev.map((item) => ({ ...item, unitPrice: convertAmountString(item.unitPrice, currency, next, (raw) => parseLocalizedNumber(raw) || 0) }))
+    );
+    setCurrency(next);
   }
 
   function handleAddLineItem() {
@@ -158,6 +208,7 @@ export default function BatchInvoiceCalculator({ education }: { education: React
 
   return (
     <>
+      <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -168,6 +219,8 @@ export default function BatchInvoiceCalculator({ education }: { education: React
               onDateChange={setDate}
               vendor={vendor}
               onVendorChange={setVendor}
+              currency={currency}
+              onCurrencyChange={handleCurrencyChange}
               lineItems={lineItems}
               onUpdateLineItem={handleUpdateLineItem}
               onAddLineItem={handleAddLineItem}
@@ -182,10 +235,11 @@ export default function BatchInvoiceCalculator({ education }: { education: React
           }
           result={
             <div className="flex flex-col gap-4">
-              <DraftPreview result={draftResult} digitStyle={digitStyle} />
+              <DraftPreview result={draftResult} digitStyle={digitStyle} currency={currency} />
               <InvoiceSummary
                 summary={summary}
                 digitStyle={digitStyle}
+                currency={currency}
                 onPrint={handlePrint}
                 onClearAll={handleClearAll}
                 invoices={invoices}
@@ -204,17 +258,17 @@ export default function BatchInvoiceCalculator({ education }: { education: React
           }
           secondary={
             <div className="flex flex-col gap-6">
-              <SectionNav items={navItems} />
+              <SectionNav items={navItems} visible={navBarVisible} />
               <ViewDocsLink slug="batch-invoice-calculator" />
             </div>
           }
         />
 
         <div className="mx-auto mt-8 max-w-6xl px-4 lg:px-0 print:hidden">
-          <InvoiceTable invoices={invoices} totals={totals} digitStyle={digitStyle} onEdit={handleEdit} onDelete={handleDelete} />
+          <InvoiceTable invoices={invoices} totals={totals} digitStyle={digitStyle} currency={currency} onEdit={handleEdit} onDelete={handleDelete} />
         </div>
 
-        <PrintableSummary invoices={invoices} totals={totals} summary={summary} digitStyle={digitStyle} />
+        <PrintableSummary invoices={invoices} totals={totals} summary={summary} digitStyle={digitStyle} currency={currency} />
       </div>
 
       {education}

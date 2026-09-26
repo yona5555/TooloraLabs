@@ -1,19 +1,22 @@
 import { useTranslations } from "next-intl";
 import { Pencil, Trash2 } from "lucide-react";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import AutoFitText from "@/components/tool-ui/AutoFitText";
+import type { CurrencyCode } from "@/lib/currency";
 import type { SavedInvoice } from "./types";
 
 type Props = {
   invoices: SavedInvoice[];
   totals: number[];
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
 };
 
-export default function InvoiceTable({ invoices, totals, digitStyle, onEdit, onDelete }: Props) {
+export default function InvoiceTable({ invoices, totals, digitStyle, currency, onEdit, onDelete }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator.table");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
+  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
 
   if (invoices.length === 0) {
     return (
@@ -41,8 +44,8 @@ export default function InvoiceTable({ invoices, totals, digitStyle, onEdit, onD
               <td className="px-4 py-2.5">{invoice.invoiceNumber || t("noNumber")}</td>
               <td className="px-4 py-2.5">{invoice.date}</td>
               <td className="px-4 py-2.5">{invoice.vendor || t("noVendor")}</td>
-              <td className="px-4 py-2.5 text-end font-mono font-semibold text-zinc-800 dark:text-zinc-100">
-                {fmt(totals[i] ?? 0)}
+              <td className="max-w-[9rem] px-4 py-2.5 text-end">
+                <AutoFitText text={fmt(totals[i] ?? 0)} dir="ltr" allowWrap={false} steps={["text-sm", "text-xs"]} className="font-mono font-semibold text-zinc-800 dark:text-zinc-100" />
               </td>
               <td className="px-4 py-2.5">
                 <div className="flex justify-end gap-1.5">

@@ -1,5 +1,6 @@
 "use client";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { CurrencyCode } from "@/lib/currency";
 import type { SavedInvoice } from "./types";
 import type { BatchInvoiceCalculatorOutput } from "@tooloralabs/tools";
 
@@ -7,6 +8,7 @@ type Props = {
   invoices: SavedInvoice[];
   results: BatchInvoiceCalculatorOutput[];
   digitStyle: DigitStyle;
+  currency: CurrencyCode;
   netLabel: string;
   taxLabel: string;
   caption: string;
@@ -22,10 +24,10 @@ const MAX_BARS = 8;
  * bar), so a batch of invoices with very different tax rates is visually
  * distinguishable, not just their grand totals.
  */
-export default function InvoiceBatchComparisonChart({ invoices, results, digitStyle, netLabel, taxLabel, caption }: Props) {
+export default function InvoiceBatchComparisonChart({ invoices, results, digitStyle, currency, netLabel, taxLabel, caption }: Props) {
   if (invoices.length < 2) return null;
 
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
+  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 0 });
 
   const rows = invoices.slice(-MAX_BARS).map((invoice, idx) => {
     const resultIndex = invoices.length - Math.min(invoices.length, MAX_BARS) + idx;
@@ -34,7 +36,8 @@ export default function InvoiceBatchComparisonChart({ invoices, results, digitSt
 
   const maxTotal = Math.max(...rows.map((r) => r.result?.total ?? 0), 1);
   const LEFT_MARGIN = 90;
-  const RIGHT_MARGIN = 60;
+  // Widened from 60: a currency-coded value (e.g. "AED 12,345") runs longer than a bare number.
+  const RIGHT_MARGIN = 84;
   const chartWidth = 230;
   const viewBoxWidth = LEFT_MARGIN + chartWidth + RIGHT_MARGIN;
   const height = rows.length * (BAR_HEIGHT + BAR_GAP) + BAR_GAP;

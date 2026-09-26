@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { Plus, Trash2, Save, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import type { CurrencyCode } from "@/lib/currency";
 import type { DraftLineItem } from "./types";
 
 type Props = {
@@ -12,6 +14,8 @@ type Props = {
   onDateChange: (value: string) => void;
   vendor: string;
   onVendorChange: (value: string) => void;
+  currency: CurrencyCode;
+  onCurrencyChange: (currency: CurrencyCode) => void;
   lineItems: DraftLineItem[];
   onUpdateLineItem: (index: number, patch: Partial<DraftLineItem>) => void;
   onAddLineItem: () => void;
@@ -31,6 +35,8 @@ export default function InvoiceDraftPanel({
   onDateChange,
   vendor,
   onVendorChange,
+  currency,
+  onCurrencyChange,
   lineItems,
   onUpdateLineItem,
   onAddLineItem,
@@ -75,6 +81,7 @@ export default function InvoiceDraftPanel({
         first noticed).
       */}
       <div className="space-y-4">
+        <CurrencySelector value={currency} onChange={onCurrencyChange} />
         <ToolInput
           label={t("invoiceNumberLabel")}
           type="text"
