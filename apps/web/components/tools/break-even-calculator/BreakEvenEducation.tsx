@@ -117,12 +117,31 @@ export default async function BreakEvenEducation() {
             </div>
           ))}
         </dl>
+        {/* This gauge previously stood alone with only a short qualitative caption ("a healthy
+            ratio by most standards") while every other indicator on the page carries a full
+            WORKED EXAMPLE breakdown beside it — same inconsistency §32 already fixed elsewhere.
+            Reuses the exact same $50/$20/$30/60% figures and translation keys as the "Price
+            Breakdown" donut above (intro.marginBar.*), since both describe the identical worked
+            example from a different angle: that section shows the split as a proportion, this
+            one shows where 60% sits on the thin/healthy/rich spectrum. */}
         <SectionCard title={t("variables.marginGauge.cardTitle")}>
-          <BreakEvenMarginRatioGauge
-            valueLabel="60%"
-            caption={t("variables.marginGauge.caption")}
-            captionColorClass="text-emerald-600 dark:text-emerald-400"
-          />
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+            <div className="shrink-0">
+              <BreakEvenMarginRatioGauge
+                valueLabel="60%"
+                caption={t("variables.marginGauge.caption")}
+                captionColorClass="text-emerald-600 dark:text-emerald-400"
+              />
+            </div>
+            <BreakEvenWorkedExampleNote
+              title={tRoot("workedExampleTitle")}
+              rows={[
+                { label: t("intro.marginBar.priceLabel"), value: "$50" },
+                { label: t("intro.marginBar.variableCostLabel"), value: "$20" },
+                { label: t("intro.marginBar.marginLabel"), value: "$30", emphasize: true, note: t("intro.marginBar.marginPercentNote", { percent: "60%" }) },
+              ]}
+            />
+          </div>
         </SectionCard>
         <SectionCard title={t("variables.accumulationDiagram.cardTitle")}>
           <BreakEvenFixedCostAccumulationDiagram
