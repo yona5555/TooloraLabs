@@ -8,6 +8,7 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/currency";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TipInputPanel from "./TipInputPanel";
@@ -195,27 +196,25 @@ export default function TipCalculator({ education }: { education: ReactNode }) {
               <ViewDocsLink slug="tip-calculator" />
 
               {hasCalculated && result && result.people > 1 && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t("splitDiagram.title")}</h3>
+                <SectionCard title={t("splitDiagram.title")}>
                   <TipPerPersonSplitDiagram
                     people={result.people}
                     amountPerPerson={result.totalPerPerson}
                     formatValue={(value) => value.toFixed(2)}
                     caption={t("splitDiagram.caption", { count: result.people })}
                   />
-                </div>
+                </SectionCard>
               )}
 
               {hasCalculated && result && sensitivityPoints && (
-                <div className="rounded-2xl border border-blue-200 bg-white p-4 dark:border-blue-500/30 dark:bg-zinc-900 lg:p-6">
-                  <h3 className="mb-1 font-bold text-zinc-900 dark:text-zinc-100">{t("sensitivityDiagram.title")}</h3>
+                <SectionCard title={t("sensitivityDiagram.title")}>
                   <TipSensitivityLineDiagram
                     points={sensitivityPoints}
                     currentTipPercent={result.tipPercent}
                     caption={t("sensitivityDiagram.caption")}
                     xLabel={t("sensitivityDiagram.xLabel")}
                   />
-                </div>
+                </SectionCard>
               )}
 
               <TipInternationalNorms />
