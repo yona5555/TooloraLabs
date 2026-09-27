@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type ToolPageLayoutProps = {
   category: string;
@@ -31,14 +30,7 @@ export default function ToolPageLayout({
     return (
       <main className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
-          <Link
-            href={`/categories/${categorySlug}`}
-            aria-label={backLabel}
-            title={backLabel}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-zinc-500 transition hover:bg-zinc-100 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-blue-400"
-          >
-            <ArrowLeft size={20} />
-          </Link>
+          <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" />
 
           <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50">
             {title}
@@ -52,22 +44,16 @@ export default function ToolPageLayout({
 
   return (
     <main className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
-      <Link
-        href={`/categories/${categorySlug}`}
-        aria-label={backLabel}
-        className="-my-3 inline-flex items-center gap-2 py-3 text-sm font-medium text-zinc-500 transition hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
-      >
-        <ArrowLeft size={16} />
-        {backLabel}
-      </Link>
-
-      <span className="mt-4 block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 lg:mt-6">
+      <span className="block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {category}
       </span>
 
-      <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-zinc-900 lg:mt-6 lg:text-5xl dark:text-zinc-50">
-        {title}
-      </h1>
+      <div className="mt-4 flex items-center gap-3 lg:mt-6">
+        <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={22} className="h-12 w-12" />
+        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-5xl dark:text-zinc-50">
+          {title}
+        </h1>
+      </div>
 
       <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 lg:mt-6 lg:text-lg lg:leading-8 dark:text-zinc-300">
         {description}

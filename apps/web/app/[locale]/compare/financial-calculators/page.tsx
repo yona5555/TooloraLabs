@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -28,14 +29,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CompareFinancialCalculatorsPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "compareFinancialCalculators" });
+  const tp = await getTranslations({ locale, namespace: "toolPage" });
+  const tc = await getTranslations({ locale, namespace: "categories" });
   const rows = t.raw("rows") as CompareRow[];
   const guidance = t.raw("guidance") as { title: string; body: string }[];
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-4xl dark:text-zinc-50">
-        {t("title")}
-      </h1>
+      <div className="flex items-center gap-3">
+        <BackButton
+          href="/categories/financial-calculators"
+          label={tp("back", { category: tc("financial-calculators.title") })}
+          size={20}
+          className="h-10 w-10"
+        />
+        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-4xl dark:text-zinc-50">
+          {t("title")}
+        </h1>
+      </div>
       <p className="mt-4 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
 
       <div className="mt-10 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">

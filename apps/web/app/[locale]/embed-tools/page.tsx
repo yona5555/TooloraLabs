@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EmbedCodeGenerator from "@/components/embed/EmbedCodeGenerator";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -19,14 +20,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function EmbedToolsPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "embedTools.docsPage" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
   const steps = t.raw("steps") as string[];
   const faqItems = t.raw("faq") as { question: string; answer: string }[];
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-4xl dark:text-zinc-50">
-        {t("title")}
-      </h1>
+      <div className="flex items-center gap-3">
+        <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
+        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-4xl dark:text-zinc-50">
+          {t("title")}
+        </h1>
+      </div>
       <p className="mt-4 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
 
       <div className="mt-10">

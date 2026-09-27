@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { getTranslations } from "next-intl/server";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type Section = {
   heading: string;
@@ -13,18 +15,23 @@ type Props = {
   children?: ReactNode;
 };
 
-export default function LegalPageLayout({
+export default async function LegalPageLayout({
   title,
   updated,
   intro,
   sections,
   children,
 }: Props) {
+  const tCommon = await getTranslations("common");
+
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
-      <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-        {title}
-      </h1>
+      <div className="flex items-center gap-3">
+        <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
+        <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+          {title}
+        </h1>
+      </div>
 
       {updated && (
         <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{updated}</p>

@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight, Clock } from "lucide-react";
 import { comingSoonPhaseIds, comingSoonPhases } from "@/data/comingSoon";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type ComingSoonPageProps = {
   params: Promise<{ locale: string }>;
@@ -22,6 +23,7 @@ export default async function ComingSoonPage({ params }: ComingSoonPageProps) {
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "comingSoonPage" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-24">
@@ -30,9 +32,12 @@ export default async function ComingSoonPage({ params }: ComingSoonPageProps) {
           <Clock size={16} />
           {t("badge")}
         </span>
-        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-          {t("heading")}
-        </h1>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
+          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+            {t("heading")}
+          </h1>
+        </div>
         <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-300">{t("subtitle")}</p>
       </div>
 

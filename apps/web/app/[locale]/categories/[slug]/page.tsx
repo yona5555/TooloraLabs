@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import DecoratedToolCard from "@/components/tool-ui/DecoratedToolCard";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type CategoryPageProps = {
   params: Promise<{
@@ -50,6 +51,7 @@ export default async function CategoryPage({
   const tSection = await getTranslations({ locale, namespace: "categoriesSection" });
   const tTools = await getTranslations({ locale, namespace: "tools" });
   const tToolsPage = await getTranslations({ locale, namespace: "toolsPage" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   const categoryTools = tools.filter((tool) => tool.category === slug);
 
@@ -59,9 +61,12 @@ export default async function CategoryPage({
         {t("badge")}
       </span>
 
-      <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-        {tc(`${slug}.title`)}
-      </h1>
+      <div className="mt-6 flex items-center gap-3">
+        <BackButton href="/" label={tCommon("backToHome")} size={22} className="h-12 w-12" />
+        <h1 className="text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+          {tc(`${slug}.title`)}
+        </h1>
+      </div>
 
       <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
         {tc(`${slug}.description`)}

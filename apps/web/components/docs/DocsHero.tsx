@@ -1,13 +1,19 @@
+import { getTranslations } from "next-intl/server";
+import BackButton from "@/components/tool-ui/BackButton";
+
 type Props = {
   title: string;
   version: string;
   description: string;
 };
 
-export default function DocsHero({ title, version, description }: Props) {
+export default async function DocsHero({ title, version, description }: Props) {
+  const tCommon = await getTranslations("common");
+
   return (
     <div className="mb-8">
       <div className="flex flex-wrap items-center gap-3">
+        <BackButton href="/docs" label={tCommon("backToDocs")} size={18} className="h-9 w-9" />
         <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">{title}</h1>
         <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">{version}</span>
       </div>

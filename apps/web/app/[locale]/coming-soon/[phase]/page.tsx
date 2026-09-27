@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { ArrowLeft, Clock } from "lucide-react";
+import { Clock } from "lucide-react";
 import { comingSoonPhaseIds, comingSoonPhases, type ComingSoonPhaseId } from "@/data/comingSoon";
 import { getComingSoonIcon } from "@/lib/coming-soon-icons";
+import BackButton from "@/components/tool-ui/BackButton";
 
 type ComingSoonPhasePageProps = {
   params: Promise<{
@@ -47,22 +47,17 @@ export default async function ComingSoonPhasePage({ params }: ComingSoonPhasePag
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-24">
-      <Link
-        href="/coming-soon"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 transition hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400"
-      >
-        <ArrowLeft size={16} className="rtl:rotate-180" />
-        {t("backToComingSoon")}
-      </Link>
-
-      <span className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+      <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         <Clock size={16} />
         {t(`phase.${phase}.estimatedDate`)}
       </span>
 
-      <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-        {t(`phase.${phase}.title`)}
-      </h1>
+      <div className="mt-6 flex items-center gap-3">
+        <BackButton href="/coming-soon" label={t("backToComingSoon")} size={20} className="h-10 w-10" />
+        <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+          {t(`phase.${phase}.title`)}
+        </h1>
+      </div>
 
       <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-300">
         {t(`phase.${phase}.description`)}

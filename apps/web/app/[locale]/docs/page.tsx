@@ -8,6 +8,7 @@ import { getCategoryIcon } from "@/lib/category-icons";
 import { getToolIcon } from "@/lib/tool-icons";
 import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
+import BackButton from "@/components/tool-ui/BackButton";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -19,6 +20,7 @@ export default async function DocsIndexPage() {
   const t = await getTranslations("docsNav");
   const tTools = await getTranslations("tools");
   const tCategories = await getTranslations("categories");
+  const tCommon = await getTranslations("common");
 
   const documentedByCategory = categories
     .map((category) => ({
@@ -29,7 +31,10 @@ export default async function DocsIndexPage() {
 
   return (
     <DocsLayout toc={null}>
-      <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">{t("overview")}</h1>
+      <div className="mb-3 flex items-center gap-3">
+        <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
+        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">{t("overview")}</h1>
+      </div>
       <p className="mb-8 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-300">{t("indexIntro")}</p>
 
       <h2 className="mb-4 text-lg font-bold text-zinc-900 dark:text-zinc-50">{t("indexAvailableNow")}</h2>
