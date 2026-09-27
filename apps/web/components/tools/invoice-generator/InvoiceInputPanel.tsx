@@ -1,11 +1,11 @@
 "use client";
 import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
-import { Plus, Trash2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import { HierarchicalItemCard, ItemFieldsGrid, AddRowButton } from "@/components/tool-ui/HierarchicalItemInputPanel";
 import type { CurrencyCode } from "@/lib/currency";
 
 export type DraftLine = { description: string; quantity: string; unitPrice: string };
@@ -92,46 +92,42 @@ export default function InvoiceInputPanel({
         <div className="mt-5 space-y-3 border-t border-zinc-200 pt-5 dark:border-zinc-800">
           <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("itemsLabel")}</span>
           {lines.map((line, index) => (
-            <div key={index} className="grid gap-2 sm:grid-cols-[2fr_1fr_1fr_auto]">
-              <ToolInput
-                type="text"
-                placeholder={t("itemDescriptionPlaceholder")}
-                value={line.description}
-                onChange={(e) => onUpdateLine(index, { description: e.target.value })}
-              />
-              <ToolInput
-                type="text"
-                inputMode="decimal"
-                placeholder={t("itemQuantity")}
-                value={line.quantity}
-                onChange={(e) => onUpdateLine(index, { quantity: e.target.value })}
-              />
-              <ToolInput
-                type="text"
-                inputMode="decimal"
-                placeholder={t("itemUnitPrice")}
-                value={line.unitPrice}
-                onChange={(e) => onUpdateLine(index, { unitPrice: e.target.value })}
-              />
-              <button
-                type="button"
-                onClick={() => onRemoveLine(index)}
-                aria-label={t("removeItem")}
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-zinc-300 text-zinc-500 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
-              >
-                <Trash2 size={18} />
-              </button>
-            </div>
+            <HierarchicalItemCard
+              key={index}
+              identity={
+                <ToolInput
+                  type="text"
+                  placeholder={t("itemDescriptionPlaceholder")}
+                  value={line.description}
+                  onChange={(e) => onUpdateLine(index, { description: e.target.value })}
+                />
+              }
+              onRemove={() => onRemoveLine(index)}
+              removeLabel={t("removeItem")}
+              removeDisabled={lines.length <= 1}
+            >
+              <ItemFieldsGrid>
+                <ToolInput
+                  label={t("itemQuantity")}
+                  type="text"
+                  inputMode="decimal"
+                  placeholder={t("itemQuantity")}
+                  value={line.quantity}
+                  onChange={(e) => onUpdateLine(index, { quantity: e.target.value })}
+                />
+                <ToolInput
+                  label={t("itemUnitPrice")}
+                  type="text"
+                  inputMode="decimal"
+                  placeholder={t("itemUnitPrice")}
+                  value={line.unitPrice}
+                  onChange={(e) => onUpdateLine(index, { unitPrice: e.target.value })}
+                />
+              </ItemFieldsGrid>
+            </HierarchicalItemCard>
           ))}
 
-          <button
-            type="button"
-            onClick={onAddLine}
-            className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-dashed border-zinc-300 py-2.5 text-sm font-semibold text-blue-600 transition hover:bg-blue-50 dark:border-zinc-700 dark:text-blue-400 dark:hover:bg-blue-500/10"
-          >
-            <Plus size={16} />
-            {t("addItem")}
-          </button>
+          <AddRowButton onClick={onAddLine} label={t("addItem")} />
         </div>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">

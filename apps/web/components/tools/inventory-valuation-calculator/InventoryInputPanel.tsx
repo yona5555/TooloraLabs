@@ -1,11 +1,11 @@
 "use client";
 import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
-import { Plus, Trash2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import CurrencySelector from "@/components/tool-ui/CurrencySelector";
+import { HierarchicalItemCard, ItemFieldsGrid, NestedItemSection, RemoveRowButton, AddRowButton } from "@/components/tool-ui/HierarchicalItemInputPanel";
 import type { CurrencyCode } from "@/lib/currency";
 import { emptyBatch, emptyItem, type DraftItem } from "./types";
 
@@ -49,17 +49,21 @@ export default function InventoryInputPanel({ currency, onCurrencyChange, items,
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 
         {items.map((item, itemIndex) => (
-          <div
+          <HierarchicalItemCard
             key={itemIndex}
-            className="space-y-3 rounded-xl border border-zinc-100 p-4 dark:border-zinc-800/60"
-          >
-            <div className="grid gap-3 sm:grid-cols-[2fr_1fr_1fr_auto]">
+            identity={
               <ToolInput
                 label={t("itemName")}
                 placeholder={t("itemNamePlaceholder")}
                 value={item.name}
                 onChange={(e) => updateItem(itemIndex, { name: e.target.value })}
               />
+            }
+            onRemove={() => removeItem(itemIndex)}
+            removeLabel={t("removeItem")}
+            removeDisabled={items.length <= 1}
+          >
+            <ItemFieldsGrid>
               <ToolInput
                 label={t("unitsSold")}
                 hint={t("unitsSoldHint")}
@@ -77,66 +81,41 @@ export default function InventoryInputPanel({ currency, onCurrencyChange, items,
                 value={item.reorderThreshold}
                 onChange={(e) => updateItem(itemIndex, { reorderThreshold: e.target.value })}
               />
-              <button
-                type="button"
-                onClick={() => removeItem(itemIndex)}
-                aria-label={t("removeItem")}
-                className="flex h-12 w-12 items-center justify-center self-end rounded-xl border border-zinc-300 text-zinc-500 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
-              >
-                <Trash2 size={18} />
-              </button>
-            </div>
+            </ItemFieldsGrid>
 
-            <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                {t("batchesTitle")}
-              </p>
+            <NestedItemSection title={t("batchesTitle")}>
               {item.batches.map((batch, batchIndex) => (
-                <div key={batchIndex} className="grid gap-2 sm:grid-cols-[1fr_1fr_auto]">
-                  <ToolInput
-                    label={batchIndex === 0 ? t("batchQuantity") : undefined}
-                    type="text"
-                    inputMode="decimal"
-                    value={batch.quantity}
-                    onChange={(e) => updateBatch(itemIndex, batchIndex, { quantity: e.target.value })}
-                  />
-                  <ToolInput
-                    label={batchIndex === 0 ? t("batchUnitCost") : undefined}
-                    type="text"
-                    inputMode="decimal"
-                    value={batch.unitCost}
-                    onChange={(e) => updateBatch(itemIndex, batchIndex, { unitCost: e.target.value })}
-                  />
-                  <button
-                    type="button"
+                <div key={batchIndex} className="flex items-end gap-2">
+                  <ItemFieldsGrid className="flex-1" minFieldWidth={90}>
+                    <ToolInput
+                      label={t("batchQuantity")}
+                      type="text"
+                      inputMode="decimal"
+                      value={batch.quantity}
+                      onChange={(e) => updateBatch(itemIndex, batchIndex, { quantity: e.target.value })}
+                    />
+                    <ToolInput
+                      label={t("batchUnitCost")}
+                      type="text"
+                      inputMode="decimal"
+                      value={batch.unitCost}
+                      onChange={(e) => updateBatch(itemIndex, batchIndex, { unitCost: e.target.value })}
+                    />
+                  </ItemFieldsGrid>
+                  <RemoveRowButton
                     onClick={() => removeBatch(itemIndex, batchIndex)}
-                    aria-label={t("removeBatch")}
-                    className="flex h-12 w-12 items-center justify-center self-end rounded-xl border border-zinc-300 text-zinc-500 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                    label={t("removeBatch")}
+                    disabled={item.batches.length <= 1}
+                    size="sm"
+                  />
                 </div>
               ))}
-              <button
-                type="button"
-                onClick={() => addBatch(itemIndex)}
-                className="flex items-center gap-2 rounded-xl border border-dashed border-zinc-300 px-3 py-2 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
-              >
-                <Plus size={14} />
-                {t("addBatch")}
-              </button>
-            </div>
-          </div>
+              <AddRowButton onClick={() => addBatch(itemIndex)} label={t("addBatch")} />
+            </NestedItemSection>
+          </HierarchicalItemCard>
         ))}
 
-        <button
-          type="button"
-          onClick={addItem}
-          className="flex items-center gap-2 rounded-xl border border-dashed border-zinc-300 px-4 py-3 text-sm font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
-        >
-          <Plus size={16} />
-          {t("addItem")}
-        </button>
+        <AddRowButton onClick={addItem} label={t("addItem")} />
 
         <div className="flex flex-wrap gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
           <ToolButton type="submit">{t("calculate")}</ToolButton>
