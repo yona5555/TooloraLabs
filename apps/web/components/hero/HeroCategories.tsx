@@ -43,6 +43,7 @@ export default function HeroCategories() {
             textVariant={text}
             Icon={Icon}
             seed={category.slug}
+            title={tc(`${category.slug}.title`)}
             size="compact"
             disabled={isComingSoon}
           >

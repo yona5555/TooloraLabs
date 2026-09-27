@@ -10,6 +10,12 @@ import type { LucideIcon } from "lucide-react";
  * hand-authored per item, so adding a category or tool never means writing
  * new decoration code, and the same seed always renders the same layout
  * (stable across server re-renders, no client hooks needed).
+ *
+ * The icon has its own small hover zone (not the whole header): hovering it
+ * fades the icon out and fades in the item's title, in a white/dark pill
+ * colored with the card's own hex so it stays readable regardless of how
+ * light the header color is. Pure CSS (`group`/`group-hover`), no client
+ * component needed.
  */
 
 const MATH_SYMBOLS = ["+", "−", "×", "÷", "=", "%"];
@@ -18,8 +24,11 @@ const GEOMETRIC_SYMBOLS = ["△", "○", "□", "◇"];
 const SYMBOL_POOL = [...MATH_SYMBOLS, ...FINANCIAL_SYMBOLS, ...GEOMETRIC_SYMBOLS];
 
 const SIZE_CLASSES = ["text-[11px] sm:text-xs", "text-xs sm:text-sm", "text-sm sm:text-base", "text-sm sm:text-lg"];
-const OPACITY_WHITE = ["text-white/25", "text-white/30", "text-white/35", "text-white/40"];
+// Icon and decoration are always dark now (§34 revision) — every palette color in
+// lib/category-palette.ts is a calm/pastel tone, and dark reads more clearly on all
+// of them than white did on the ones near the light end of the palette.
 const OPACITY_DARK = ["text-black/20", "text-black/25", "text-black/30", "text-black/35"];
+const ICON_COLOR_CLASS = "text-[#161616]";
 
 function hashSeed(seed: string): number {
   let h = 2166136261;
@@ -51,26 +60,30 @@ function shuffle<T>(arr: T[], rng: () => number): T[] {
 
 export type DecoratedIconHeaderSize = "compact" | "regular" | "small";
 
-const SIZE_CONFIG: Record<DecoratedIconHeaderSize, { heightClass: string; iconSize: number; iconClass: string; symbolCount: number }> = {
-  compact: { heightClass: "h-16 sm:h-[4.5rem]", iconSize: 30, iconClass: "sm:h-9 sm:w-9", symbolCount: 11 },
-  regular: { heightClass: "h-24", iconSize: 34, iconClass: "", symbolCount: 13 },
-  small: { heightClass: "h-14", iconSize: 22, iconClass: "", symbolCount: 7 },
+const SIZE_CONFIG: Record<
+  DecoratedIconHeaderSize,
+  { heightClass: string; iconSize: number; iconClass: string; symbolCount: number; hoverZoneClass: string; titleTextClass: string }
+> = {
+  compact: { heightClass: "h-16 sm:h-[4.5rem]", iconSize: 30, iconClass: "sm:h-9 sm:w-9", symbolCount: 11, hoverZoneClass: "h-10 w-10 sm:h-11 sm:w-11", titleTextClass: "text-[7px] sm:text-[8px]" },
+  regular: { heightClass: "h-24", iconSize: 34, iconClass: "", symbolCount: 13, hoverZoneClass: "h-16 w-16", titleTextClass: "text-[10px]" },
+  small: { heightClass: "h-14", iconSize: 22, iconClass: "", symbolCount: 7, hoverZoneClass: "h-10 w-10", titleTextClass: "text-[8px]" },
 };
 
 type DecoratedIconHeaderProps = {
   colorHex: string;
+  /** Kept for API compatibility with the color palette's per-color contrast decision; icon/decoration color is now always dark (see module comment), so this no longer changes rendering. */
   textVariant: "white" | "dark";
   Icon: LucideIcon;
   seed: string;
+  /** Item title, shown in place of the icon on hover of the icon zone only. */
+  title: string;
   size?: DecoratedIconHeaderSize;
 };
 
-export default function DecoratedIconHeader({ colorHex, textVariant, Icon, seed, size = "regular" }: DecoratedIconHeaderProps) {
+export default function DecoratedIconHeader({ colorHex, Icon, seed, title, size = "regular" }: DecoratedIconHeaderProps) {
   const cfg = SIZE_CONFIG[size];
   const rng = mulberry32(hashSeed(seed));
   const symbols = shuffle(SYMBOL_POOL, rng).slice(0, cfg.symbolCount);
-  const opacityPool = textVariant === "white" ? OPACITY_WHITE : OPACITY_DARK;
-  const iconColorClass = textVariant === "white" ? "text-white" : "text-[#1c1917]";
 
   return (
     <div className={`relative flex ${cfg.heightClass} items-center justify-center overflow-hidden`} style={{ backgroundColor: colorHex }}>
@@ -81,7 +94,7 @@ export default function DecoratedIconHeader({ colorHex, textVariant, Icon, seed,
           const sideLeft = rng() < 0.5;
           const horizontal = 3 + rng() * 34;
           const sizeClass = SIZE_CLASSES[Math.floor(rng() * SIZE_CLASSES.length)];
-          const opacityClass = opacityPool[Math.floor(rng() * opacityPool.length)];
+          const opacityClass = OPACITY_DARK[Math.floor(rng() * OPACITY_DARK.length)];
           const style: CSSProperties = {
             [useTop ? "top" : "bottom"]: `${vertical}%`,
             [sideLeft ? "left" : "right"]: `${horizontal}%`,
@@ -93,7 +106,15 @@ export default function DecoratedIconHeader({ colorHex, textVariant, Icon, seed,
           );
         })}
       </span>
-      <Icon size={cfg.iconSize} strokeWidth={1.75} className={`relative ${iconColorClass} ${cfg.iconClass}`} />
+
+      <div className={`group/icon relative z-10 flex items-center justify-center rounded-full ${cfg.hoverZoneClass}`}>
+        <Icon size={cfg.iconSize} strokeWidth={1.75} className={`${ICON_COLOR_CLASS} ${cfg.iconClass} transition-opacity duration-300 group-hover/icon:opacity-0`} />
+        <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white p-1 text-center opacity-0 shadow-sm transition-opacity duration-300 group-hover/icon:opacity-100 dark:bg-zinc-950">
+          <span className={`line-clamp-3 font-bold leading-tight ${cfg.titleTextClass}`} style={{ color: colorHex }}>
+            {title}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

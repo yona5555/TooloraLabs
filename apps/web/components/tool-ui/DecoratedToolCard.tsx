@@ -31,7 +31,7 @@ export default function DecoratedToolCard({ tool, titleText, descriptionText, fe
   const isCompact = size === "small";
 
   return (
-    <DecoratedCard href={`/tools/${tool.slug}`} colorHex={hex} textVariant={text} Icon={Icon} seed={tool.slug} size={size}>
+    <DecoratedCard href={`/tools/${tool.slug}`} colorHex={hex} textVariant={text} Icon={Icon} seed={tool.slug} title={titleText} size={size}>
       <div className={`flex flex-1 flex-col gap-2.5 ${isCompact ? "p-4" : "p-6"}`}>
         <div className="flex items-center gap-2">
           <h3 className={`font-bold text-zinc-900 dark:text-zinc-50 ${isCompact ? "text-base" : "text-lg"}`}>{titleText}</h3>
