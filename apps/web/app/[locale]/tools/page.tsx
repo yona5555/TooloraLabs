@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
-import { getToolIcon } from "@/lib/tool-icons";
-import { getCategoryIconColor } from "@/lib/category-colors";
+import DecoratedToolCard from "@/components/tool-ui/DecoratedToolCard";
 
 type ToolsPageProps = {
   params: Promise<{ locale: string }>;
@@ -54,30 +52,15 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
               </h2>
 
               <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {categoryTools.map((tool) => {
-                  const Icon = getToolIcon(tool.slug);
-                  return (
-                    <Link
-                      key={tool.slug}
-                      href={`/tools/${tool.slug}`}
-                      className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none dark:hover:border-blue-500/40"
-                    >
-                      <div
-                        className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${getCategoryIconColor(tool.category)}`}
-                      >
-                        <Icon size={22} strokeWidth={2} />
-                      </div>
-
-                      <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-                        {tTools(`${tool.slug}.title`)}
-                      </h3>
-
-                      <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-                        {tTools(`${tool.slug}.description`)}
-                      </p>
-                    </Link>
-                  );
-                })}
+                {categoryTools.map((tool) => (
+                  <DecoratedToolCard
+                    key={tool.slug}
+                    tool={tool}
+                    titleText={tTools(`${tool.slug}.title`)}
+                    descriptionText={tTools(`${tool.slug}.description`)}
+                    featuredLabel={t("featuredBadge")}
+                  />
+                ))}
               </div>
             </section>
           );
