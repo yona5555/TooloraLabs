@@ -28,20 +28,21 @@ type DecoratedCardProps = {
   Icon: LucideIcon;
   seed: string;
   title: string;
+  description: string;
   size?: DecoratedIconHeaderSize;
   children: ReactNode;
   className?: string;
   disabled?: boolean;
 };
 
-export default function DecoratedCard({ href, colorHex, textVariant, Icon, seed, title, size, children, className = "", disabled = false }: DecoratedCardProps) {
+export default function DecoratedCard({ href, colorHex, textVariant, Icon, seed, title, description, size, children, className = "", disabled = false }: DecoratedCardProps) {
   const chrome = `flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-md transition-all duration-300 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-lg dark:shadow-black/40 ${
     disabled ? "opacity-60" : "hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:hover:border-blue-500/40 dark:hover:shadow-black/60"
   } ${className}`;
 
   const content = (
     <>
-      <DecoratedIconHeader colorHex={colorHex} textVariant={textVariant} Icon={Icon} seed={seed} title={title} size={size} />
+      <DecoratedIconHeader colorHex={colorHex} textVariant={textVariant} Icon={Icon} seed={seed} title={title} description={description} size={size} />
       {children}
     </>
   );

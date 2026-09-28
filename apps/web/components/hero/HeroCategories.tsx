@@ -44,6 +44,7 @@ export default function HeroCategories() {
             Icon={Icon}
             seed={category.slug}
             title={tc(`${category.slug}.title`)}
+            description={tc(`${category.slug}.description`)}
             size="compact"
             disabled={isComingSoon}
           >

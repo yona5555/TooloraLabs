@@ -11,11 +11,12 @@ import type { LucideIcon } from "lucide-react";
  * new decoration code, and the same seed always renders the same layout
  * (stable across server re-renders, no client hooks needed).
  *
- * The icon has its own small hover zone (not the whole header): hovering it
- * fades the icon out and fades in the item's title, in a white/dark pill
- * colored with the card's own hex so it stays readable regardless of how
- * light the header color is. Pure CSS (`group`/`group-hover`), no client
- * component needed.
+ * Hovering the icon (a small hitbox, not the whole card) fades out the icon
+ * and decoration and reveals the item's title + a short description filling
+ * the *entire* colored header block, in text colored directly against the
+ * header's own background (`textVariant`, the palette's precomputed
+ * light/dark contrast decision) — no intervening white pill. Pure CSS
+ * (`peer`/`peer-hover`, `group`/`group-hover`), no client component needed.
  */
 
 const MATH_SYMBOLS = ["+", "−", "×", "÷", "=", "%"];
@@ -62,32 +63,83 @@ export type DecoratedIconHeaderSize = "compact" | "regular" | "small";
 
 const SIZE_CONFIG: Record<
   DecoratedIconHeaderSize,
-  { heightClass: string; iconSize: number; iconClass: string; symbolCount: number; hoverZoneClass: string; titleTextClass: string }
+  {
+    heightClass: string;
+    iconSize: number;
+    iconClass: string;
+    symbolCount: number;
+    hoverZoneClass: string;
+    titleTextClass: string;
+    descTextClass: string;
+    descLineClamp: string;
+    overlayPadding: string;
+  }
 > = {
-  compact: { heightClass: "h-16 sm:h-[4.5rem]", iconSize: 30, iconClass: "sm:h-9 sm:w-9", symbolCount: 11, hoverZoneClass: "h-10 w-10 sm:h-11 sm:w-11", titleTextClass: "text-[7px] sm:text-[8px]" },
-  regular: { heightClass: "h-24", iconSize: 34, iconClass: "", symbolCount: 13, hoverZoneClass: "h-16 w-16", titleTextClass: "text-[10px]" },
-  small: { heightClass: "h-14", iconSize: 22, iconClass: "", symbolCount: 7, hoverZoneClass: "h-10 w-10", titleTextClass: "text-[8px]" },
+  compact: {
+    heightClass: "h-16 sm:h-[4.5rem]",
+    iconSize: 30,
+    iconClass: "sm:h-9 sm:w-9",
+    symbolCount: 11,
+    hoverZoneClass: "h-10 w-10 sm:h-11 sm:w-11",
+    titleTextClass: "text-[10px] sm:text-xs",
+    descTextClass: "text-[8px] sm:text-[9px]",
+    descLineClamp: "line-clamp-1",
+    overlayPadding: "px-2",
+  },
+  regular: {
+    heightClass: "h-24",
+    iconSize: 34,
+    iconClass: "",
+    symbolCount: 13,
+    hoverZoneClass: "h-16 w-16",
+    titleTextClass: "text-sm sm:text-base",
+    descTextClass: "text-[11px] sm:text-xs",
+    descLineClamp: "line-clamp-2",
+    overlayPadding: "px-4",
+  },
+  small: {
+    heightClass: "h-14",
+    iconSize: 22,
+    iconClass: "",
+    symbolCount: 7,
+    hoverZoneClass: "h-10 w-10",
+    titleTextClass: "text-[10px]",
+    descTextClass: "text-[8px]",
+    descLineClamp: "line-clamp-1",
+    overlayPadding: "px-2",
+  },
 };
 
 type DecoratedIconHeaderProps = {
   colorHex: string;
-  /** Kept for API compatibility with the color palette's per-color contrast decision; icon/decoration color is now always dark (see module comment), so this no longer changes rendering. */
+  /** Precomputed light/dark contrast decision for this color (see lib/category-palette.ts) — used for the hover title/description text, which sits directly on colorHex with no intervening pill. */
   textVariant: "white" | "dark";
   Icon: LucideIcon;
   seed: string;
-  /** Item title, shown in place of the icon on hover of the icon zone only. */
+  /** Item title, shown full-header on hover of the icon zone only. */
   title: string;
+  /** Short description shown below the title, same hover reveal. */
+  description: string;
   size?: DecoratedIconHeaderSize;
 };
 
-export default function DecoratedIconHeader({ colorHex, Icon, seed, title, size = "regular" }: DecoratedIconHeaderProps) {
+export default function DecoratedIconHeader({ colorHex, textVariant, Icon, seed, title, description, size = "regular" }: DecoratedIconHeaderProps) {
   const cfg = SIZE_CONFIG[size];
   const rng = mulberry32(hashSeed(seed));
   const symbols = shuffle(SYMBOL_POOL, rng).slice(0, cfg.symbolCount);
+  const textColorClass = textVariant === "white" ? "text-white" : "text-[#1c1917]";
 
   return (
     <div className={`relative flex ${cfg.heightClass} items-center justify-center overflow-hidden`} style={{ backgroundColor: colorHex }}>
-      <span className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
+      {/* Icon hover hitbox — stays small and centered; hovering it is what triggers the reveal below. */}
+      <div className={`peer group relative z-10 flex items-center justify-center ${cfg.hoverZoneClass}`}>
+        <Icon size={cfg.iconSize} strokeWidth={1.75} className={`${ICON_COLOR_CLASS} ${cfg.iconClass} transition-opacity duration-300 group-hover:opacity-0`} />
+      </div>
+
+      <span
+        className="pointer-events-none absolute inset-0 select-none transition-opacity duration-300 peer-hover:opacity-0"
+        aria-hidden="true"
+      >
         {symbols.map((sym, i) => {
           const useTop = rng() < 0.5;
           const vertical = 2 + rng() * 30;
@@ -107,13 +159,12 @@ export default function DecoratedIconHeader({ colorHex, Icon, seed, title, size 
         })}
       </span>
 
-      <div className={`group/icon relative z-10 flex items-center justify-center rounded-full ${cfg.hoverZoneClass}`}>
-        <Icon size={cfg.iconSize} strokeWidth={1.75} className={`${ICON_COLOR_CLASS} ${cfg.iconClass} transition-opacity duration-300 group-hover/icon:opacity-0`} />
-        <div className="absolute inset-0 flex items-center justify-center rounded-full bg-white p-1 text-center opacity-0 shadow-sm transition-opacity duration-300 group-hover/icon:opacity-100 dark:bg-zinc-950">
-          <span className={`line-clamp-3 font-bold leading-tight ${cfg.titleTextClass}`} style={{ color: colorHex }}>
-            {title}
-          </span>
-        </div>
+      {/* Full-header reveal — fills the entire colored block, text sits directly on colorHex. */}
+      <div
+        className={`pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center gap-0.5 ${cfg.overlayPadding} text-center opacity-0 transition-opacity duration-300 peer-hover:opacity-100 ${textColorClass}`}
+      >
+        <span className={`line-clamp-2 font-bold leading-tight ${cfg.titleTextClass}`}>{title}</span>
+        <span className={`${cfg.descLineClamp} leading-snug opacity-90 ${cfg.descTextClass}`}>{description}</span>
       </div>
     </div>
   );
