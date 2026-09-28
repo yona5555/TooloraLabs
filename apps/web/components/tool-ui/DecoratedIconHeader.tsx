@@ -30,6 +30,11 @@ const SIZE_CLASSES = ["text-[11px] sm:text-xs", "text-xs sm:text-sm", "text-sm s
 // of them than white did on the ones near the light end of the palette.
 const OPACITY_DARK = ["text-black/20", "text-black/25", "text-black/30", "text-black/35"];
 const ICON_COLOR_CLASS = "text-[#161616]";
+// Soft "raised button" badge behind the icon (2026-09-30) — a light circle with an
+// embossed two-tone shadow (dark offset one side, light highlight the other), same in
+// both themes since the reference is a light-UI icon-set look, not theme-derived.
+const ICON_BADGE_CLASS =
+  "rounded-full bg-[#f4f4f5] shadow-[3px_4px_10px_rgba(0,0,0,0.2),-3px_-3px_8px_rgba(255,255,255,0.9)] ring-1 ring-black/5";
 
 function hashSeed(seed: string): number {
   let h = 2166136261;
@@ -131,9 +136,11 @@ export default function DecoratedIconHeader({ colorHex, textVariant, Icon, seed,
 
   return (
     <div className={`relative flex ${cfg.heightClass} items-center justify-center overflow-hidden`} style={{ backgroundColor: colorHex }}>
-      {/* Icon hover hitbox — stays small and centered; hovering it is what triggers the reveal below. */}
-      <div className={`peer group relative z-10 flex items-center justify-center ${cfg.hoverZoneClass}`}>
-        <Icon size={cfg.iconSize} strokeWidth={2.5} className={`${ICON_COLOR_CLASS} ${cfg.iconClass} transition-opacity duration-300 group-hover:opacity-0`} />
+      {/* Icon badge + hover hitbox — stays small and centered; hovering it is what triggers the reveal below. */}
+      <div
+        className={`peer relative z-10 flex items-center justify-center transition-opacity duration-300 hover:opacity-0 ${ICON_BADGE_CLASS} ${cfg.hoverZoneClass}`}
+      >
+        <Icon size={cfg.iconSize} strokeWidth={1.75} className={`${ICON_COLOR_CLASS} ${cfg.iconClass}`} />
       </div>
 
       <span
