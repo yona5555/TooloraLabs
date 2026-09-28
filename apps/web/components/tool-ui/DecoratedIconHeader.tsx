@@ -34,7 +34,7 @@ const ICON_COLOR_CLASS = "text-[#161616]";
 // embossed two-tone shadow (dark offset one side, light highlight the other), same in
 // both themes since the reference is a light-UI icon-set look, not theme-derived.
 const ICON_BADGE_CLASS =
-  "rounded-full bg-[#f4f4f5] shadow-[3px_4px_10px_rgba(0,0,0,0.2),-3px_-3px_8px_rgba(255,255,255,0.9)] ring-1 ring-black/5";
+  "rounded-full bg-[#dcd9d2] shadow-[3px_4px_10px_rgba(0,0,0,0.2),-3px_-3px_8px_rgba(255,255,255,0.7)] ring-1 ring-black/5";
 
 function hashSeed(seed: string): number {
   let h = 2166136261;
