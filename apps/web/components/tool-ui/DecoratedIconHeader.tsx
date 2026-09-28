@@ -133,7 +133,7 @@ export default function DecoratedIconHeader({ colorHex, textVariant, Icon, seed,
     <div className={`relative flex ${cfg.heightClass} items-center justify-center overflow-hidden`} style={{ backgroundColor: colorHex }}>
       {/* Icon hover hitbox — stays small and centered; hovering it is what triggers the reveal below. */}
       <div className={`peer group relative z-10 flex items-center justify-center ${cfg.hoverZoneClass}`}>
-        <Icon size={cfg.iconSize} strokeWidth={1.75} className={`${ICON_COLOR_CLASS} ${cfg.iconClass} transition-opacity duration-300 group-hover:opacity-0`} />
+        <Icon size={cfg.iconSize} strokeWidth={2.5} className={`${ICON_COLOR_CLASS} ${cfg.iconClass} transition-opacity duration-300 group-hover:opacity-0`} />
       </div>
 
       <span
