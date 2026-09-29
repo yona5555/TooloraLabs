@@ -33,32 +33,19 @@ export default async function TriangleEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* The page's drag-interactive (Mafs) indicators stay grouped here, at the top — none of
+          them relocated as part of distributing the other twelve, static-once-laid-out
+          indicators across the encyclopedic content below. */}
       <TriangleInteractivePlayground />
-
       <TriangleAngleGauge />
+      <TriangleAngleDragSensitivity />
+      <TriangleAngleReferenceDrag />
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <TriangleAngleSumDiagram />
-      </InfoSection>
-
-      <InfoSection title={t("lab.sectionTitle")}>
-        <p>{t("lab.sectionIntro")}</p>
-        <div className="space-y-6">
-          <TriangleSolvingTimeline />
-          <TriangleSideLengthChart />
-          <TriangleAltitudesBarList />
-          <TriangleHeronFormulaDiagram />
-          <TrianglePerimeterStackedBar />
-          <TriangleCompactnessZoneStrip />
-          <TriangleLawOfSinesRatioBars />
-          <TriangleAngleDragSensitivity />
-          <TriangleRadiiComparisonCards />
-          <TriangleAngleReferenceDrag />
-          <TriangleSpecialTypesTable />
-          <TriangleUnitConversionEquivalence />
-        </div>
+        <TriangleSpecialTypesTable />
       </InfoSection>
 
       <InfoSection title={t("modes.title")}>
@@ -70,6 +57,10 @@ export default async function TriangleEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <TriangleSolvingTimeline />
+          <TriangleLawOfSinesRatioBars />
         </div>
       </InfoSection>
 
@@ -93,8 +84,26 @@ export default async function TriangleEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <TriangleSideLengthChart />
+          <TrianglePerimeterStackedBar />
+          <TriangleHeronFormulaDiagram />
+          <TriangleAltitudesBarList />
+        </div>
       </InfoSection>
 
+      <InfoSection title={t("deeperProperties.title")}>
+        <p>{t("deeperProperties.intro")}</p>
+        <div className="space-y-6">
+          <TriangleCompactnessZoneStrip />
+          <TriangleRadiiComparisonCards />
+        </div>
+      </InfoSection>
+
+      {/* §8.7: leaderboard placement is a manual, per-tool editorial decision — two
+          well-spaced positions, matching the site's established precedent (e.g. BMI:
+          after the solved/worked content, and after Behind the Tool), not one ad per
+          redistributed indicator. */}
       <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
@@ -110,6 +119,7 @@ export default async function TriangleEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <TriangleUnitConversionEquivalence />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
