@@ -1,0 +1,20 @@
+/*
+ * Mafs' own core.css sets `--mafs-bg`/`--mafs-fg` directly on `.MafsView` itself (not just as a
+ * fallback), so an ancestor override of those same custom properties is always shadowed by
+ * Mafs' own declaration on the element that reads them — only a selector at least as specific
+ * as `.MafsView` can win. This file re-themes Mafs' black default canvas to match the site's
+ * light/dark surfaces instead, scoped to `.triangle-mafs` wrappers only.
+ */
+.triangle-mafs .MafsView {
+  --mafs-bg: #fafafa;
+  --mafs-fg: #3f3f46;
+  --mafs-line-color: #a1a1aa;
+  --grid-line-subdivision-color: #e4e4e7;
+}
+
+.dark .triangle-mafs .MafsView {
+  --mafs-bg: #18181b;
+  --mafs-fg: #d4d4d8;
+  --mafs-line-color: #52525b;
+  --grid-line-subdivision-color: #27272a;
+}

@@ -6,6 +6,19 @@ import AcademicPathSection, { type University } from "@/components/tool-ui/Acade
 import AdSpace from "@/components/tool-ui/AdSpace";
 import TriangleAngleGauge from "./TriangleAngleGauge";
 import TriangleAngleSumDiagram from "./TriangleAngleSumDiagram";
+import TriangleSolvingTimeline from "./TriangleSolvingTimeline";
+import TriangleInteractivePlayground from "./TriangleInteractivePlayground";
+import TriangleSideLengthChart from "./TriangleSideLengthChart";
+import TriangleAltitudesBarList from "./TriangleAltitudesBarList";
+import TriangleHeronFormulaDiagram from "./TriangleHeronFormulaDiagram";
+import TrianglePerimeterStackedBar from "./TrianglePerimeterStackedBar";
+import TriangleCompactnessZoneStrip from "./TriangleCompactnessZoneStrip";
+import TriangleLawOfSinesRatioBars from "./TriangleLawOfSinesRatioBars";
+import TriangleAngleDragSensitivity from "./TriangleAngleDragSensitivity";
+import TriangleRadiiComparisonCards from "./TriangleRadiiComparisonCards";
+import TriangleAngleReferenceDrag from "./TriangleAngleReferenceDrag";
+import TriangleSpecialTypesTable from "./TriangleSpecialTypesTable";
+import TriangleUnitConversionEquivalence from "./TriangleUnitConversionEquivalence";
 
 type ExampleRow = { calculation: string; result: string };
 type ModeItem = { title: string; description: string };
@@ -26,6 +39,25 @@ export default async function TriangleEducation() {
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
         <TriangleAngleSumDiagram />
+      </InfoSection>
+
+      <InfoSection title={t("lab.sectionTitle")}>
+        <p>{t("lab.sectionIntro")}</p>
+        <div className="space-y-6">
+          <TriangleSolvingTimeline />
+          <TriangleInteractivePlayground />
+          <TriangleSideLengthChart />
+          <TriangleAltitudesBarList />
+          <TriangleHeronFormulaDiagram />
+          <TrianglePerimeterStackedBar />
+          <TriangleCompactnessZoneStrip />
+          <TriangleLawOfSinesRatioBars />
+          <TriangleAngleDragSensitivity />
+          <TriangleRadiiComparisonCards />
+          <TriangleAngleReferenceDrag />
+          <TriangleSpecialTypesTable />
+          <TriangleUnitConversionEquivalence />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("modes.title")}>

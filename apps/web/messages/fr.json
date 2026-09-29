@@ -19501,6 +19501,13 @@
               "acute": "Triangle acutangle",
               "right": "Triangle rectangle",
               "obtuse": "Triangle obtusangle"
+            },
+            "worked": {
+              "title": "Exemple résolu",
+              "angleA": "Angle A",
+              "angleB": "Angle B",
+              "angleC": "Angle C",
+              "largest": "Angle le plus grand"
             }
           }
         },
@@ -19630,6 +19637,185 @@
           "note": "Les propositions originales d'Euclide sur la congruence des triangles et le théorème de la somme des angles — les résultats fondamentaux qui garantissent que trois mesures connues peuvent déterminer un triangle de façon unique.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Lire les Éléments d'Euclide, Livre I"
+        },
+        "lab": {
+          "sectionTitle": "Explorez les chiffres : 13 indicateurs en direct",
+          "sectionIntro": "Chaque graphique ci-dessous est calculé à partir d'un même triangle scalène réel 5-6-7 — le même exemple tout au long de la page, pour que les chiffres se répondent d'un graphique à l'autre. Trois d'entre eux réagissent à un glissement en direct, pas seulement à un clic.",
+          "playground": {
+            "title": "Faites glisser le triangle",
+            "intro": "Faites glisser l'un des trois sommets ci-dessous. Chaque longueur de côté et l'aire totale se recalculent instantanément à partir des nouvelles coordonnées, avec deux formules indépendantes toujours en accord.",
+            "hint": "Faites glisser un sommet (A, B ou C) pour déformer le triangle.",
+            "worked": {
+              "title": "Exemple résolu",
+              "degenerate": "Écartez les points pour former un triangle",
+              "sideA": "Côté a",
+              "sideB": "Côté b",
+              "sideC": "Côté c",
+              "areaHeron": "Aire (formule de Héron)",
+              "areaShoelace": "Aire (coordonnées)",
+              "matchNote": "Même triangle, deux formules indépendantes"
+            }
+          },
+          "angleSensitivity": {
+            "title": "Le côté c est-il sensible à l'angle C ?",
+            "intro": "Les côtés a et b restent fixés à 5 et 6. Faites glisser le point sur l'arc pour changer l'angle C et observez la réponse du côté c via la loi des cosinus.",
+            "hint": "Faites glisser le point bleu le long de l'arc.",
+            "worked": {
+              "title": "Exemple résolu",
+              "angle": "Angle C",
+              "sideAFixed": "Côté a (fixe)",
+              "sideBFixed": "Côté b (fixe)",
+              "lowerC": "Côté c à −10°",
+              "higherC": "Côté c à +10°",
+              "measuredC": "Côté c (mesuré)",
+              "formulaNote": "La loi des cosinus prédit {formula} — correspond"
+            }
+          },
+          "angleReference": {
+            "title": "Où se situe ce triangle ?",
+            "intro": "Faites glisser le point le long de la ligne 0°-180° pour comparer n'importe quel angle maximal à cinq triangles nommés.",
+            "hint": "Faites glisser le point rose le long de la ligne.",
+            "classes": {
+              "acute": "Acutangle",
+              "right": "Rectangle",
+              "obtuse": "Obtusangle"
+            },
+            "names": {
+              "equilateral": "Équilatéral",
+              "isoscelesRight": "Isocèle rectangle",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "Cet exemple (5-6-7)",
+              "sliver": "Éclat très obtus"
+            },
+            "worked": {
+              "title": "Exemple résolu",
+              "angle": "Angle le plus grand",
+              "classification": "Classification",
+              "nearest": "Triangle nommé le plus proche",
+              "nearestNote": "à {angle}°"
+            }
+          },
+          "sideLengths": {
+            "title": "Comparer les trois côtés",
+            "intro": "Les côtés du triangle d'exemple — 5, 6 et 7 — sont tous de longueurs différentes, ce qui en fait précisément un triangle scalène.",
+            "sideA": "Côté a",
+            "sideB": "Côté b",
+            "sideC": "Côté c",
+            "worked": {
+              "title": "Exemple résolu",
+              "perimeter": "Périmètre",
+              "perimeterNote": "Somme des trois côtés"
+            }
+          },
+          "altitudes": {
+            "title": "Les trois hauteurs",
+            "intro": "Chaque côté a sa propre hauteur, mesurée perpendiculairement depuis le sommet opposé — le côté le plus long porte toujours la hauteur la plus courte.",
+            "toSide": "Vers le côté {side}",
+            "worked": {
+              "title": "Exemple résolu",
+              "longestNote": "Hauteur la plus courte, car elle tombe sur le côté le plus long"
+            }
+          },
+          "heron": {
+            "title": "La formule de Héron, étape par étape",
+            "intro": "L'aire à partir des trois côtés seuls, sans angle : la moitié du périmètre (s), puis s moins chaque côté, multipliés puis mis sous racine carrée.",
+            "worked": {
+              "title": "Exemple résolu",
+              "area": "Aire"
+            }
+          },
+          "perimeterBar": {
+            "title": "Composition du périmètre",
+            "intro": "Le périmètre de 18 unités décomposé en ses trois côtés réels.",
+            "segments": {
+              "a": "Côté a",
+              "b": "Côté b",
+              "c": "Côté c"
+            },
+            "worked": {
+              "title": "Exemple résolu",
+              "total": "Périmètre total"
+            }
+          },
+          "compactness": {
+            "title": "À quel point cette forme est-elle compacte ?",
+            "intro": "Le ratio isopérimétrique (périmètre² ÷ aire) mesure la proximité d'un triangle avec l'équilatéral — plus bas est plus compact, plus haut est plus allongé.",
+            "zones": {
+              "compact": "Compact",
+              "balanced": "Équilibré",
+              "elongated": "Allongé"
+            },
+            "worked": {
+              "title": "Exemple résolu",
+              "perimeter": "Périmètre",
+              "area": "Aire",
+              "index": "Indice de compacité",
+              "indexNote": "Proche du minimum équilatéral (~20,78)"
+            }
+          },
+          "lawOfSines": {
+            "title": "Démontrer la loi des sinus",
+            "intro": "Divisez chaque côté par le sinus de son angle opposé — les trois résultats sont toujours identiques, égaux au diamètre du cercle passant par les trois sommets.",
+            "ratioA": "a / sin(A)",
+            "ratioB": "b / sin(B)",
+            "ratioC": "c / sin(C)",
+            "worked": {
+              "title": "Exemple résolu",
+              "circumdiameter": "Diamètre circonscrit (2R)",
+              "circumdiameterNote": "Même valeur que les trois ratios ci-dessus"
+            }
+          },
+          "radii": {
+            "title": "Cercle inscrit vs. cercle circonscrit",
+            "intro": "Chaque triangle possède exactement un cercle inscrit à l'intérieur (tangent aux trois côtés) et un cercle circonscrit autour (passant par les trois sommets).",
+            "radiusLabel": "Rayon",
+            "diameterLabel": "Diamètre",
+            "note": "Le rayon circonscrit vaut environ {ratio} fois le rayon inscrit pour ce triangle.",
+            "incircle": {
+              "title": "Cercle inscrit",
+              "description": "Tangent aux trois côtés, centré sur le centre du cercle inscrit."
+            },
+            "circumcircle": {
+              "title": "Cercle circonscrit",
+              "description": "Passe par les trois sommets, centré sur le centre du cercle circonscrit."
+            }
+          },
+          "specialTypes": {
+            "title": "Triangles particuliers, classés",
+            "intro": "Cinq triangles nommés, chacun réellement résolu et étiqueté selon sa vraie classification par angle maximal.",
+            "columnName": "Triangle",
+            "columnSides": "Côtés",
+            "sideClasses": {
+              "equilateral": "équilatéral",
+              "isosceles": "isocèle",
+              "scalene": "scalène"
+            },
+            "names": {
+              "equilateral": "Équilatéral",
+              "isoscelesRight": "Isocèle rectangle",
+              "classicRight": "Triangle rectangle 3-4-5",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "Cet exemple"
+            }
+          },
+          "unitConversion": {
+            "title": "Le côté c dans un autre système d'unités",
+            "intro": "La même longueur physique, exprimée autrement — utile quand les mesures d'un triangle proviennent d'une source utilisant une autre unité.",
+            "meters": "Mètres",
+            "feet": "Pieds",
+            "note": "1 mètre = 3,28084 pieds."
+          },
+          "timeline": {
+            "title": "Comment ce triangle est résolu (CCC)",
+            "intro": "La séquence exacte suivie par cette calculatrice lorsqu'on lui donne trois longueurs de côtés, dans l'ordre.",
+            "stations": {
+              "given": "Côtés donnés",
+              "angleA": "Angle A (loi des cosinus)",
+              "angleB": "Angle B (loi des cosinus)",
+              "angleC": "Angle C",
+              "area": "Aire (formule de Héron)"
+            }
+          }
         }
       },
       "scenarios": {
@@ -19661,7 +19847,14 @@
         "intro": "Détachez les trois coins d'un triangle et alignez-les le long d'un bord droit — ils s'emboîtent toujours parfaitement, car une ligne droite mesure exactement 180°.",
         "ariaLabel": "Les trois angles d'un triangle réarrangés le long d'une ligne droite pour montrer qu'ils totalisent 180 degrés",
         "caption180": "180°",
-        "caption": "Cela vaut pour tout triangle, quelle que soit sa forme ou sa taille."
+        "caption": "Cela vaut pour tout triangle, quelle que soit sa forme ou sa taille.",
+        "worked": {
+          "title": "Coins détachés",
+          "angle1": "Premier coin",
+          "angle2": "Deuxième coin",
+          "angle3": "Troisième coin",
+          "sum": "Somme"
+        }
       }
     },
     "probability-calculator": {

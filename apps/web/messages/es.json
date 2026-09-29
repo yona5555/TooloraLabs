@@ -19501,6 +19501,13 @@
               "acute": "Triángulo acutángulo",
               "right": "Triángulo rectángulo",
               "obtuse": "Triángulo obtusángulo"
+            },
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "angleA": "Ángulo A",
+              "angleB": "Ángulo B",
+              "angleC": "Ángulo C",
+              "largest": "Ángulo mayor"
             }
           }
         },
@@ -19630,6 +19637,185 @@
           "note": "Las proposiciones originales de Euclides sobre la congruencia de triángulos y el teorema de la suma de ángulos — los resultados fundamentales que garantizan que tres medidas conocidas puedan determinar un triángulo de forma única.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Leer los Elementos de Euclides, Libro I"
+        },
+        "lab": {
+          "sectionTitle": "Explora los números: 13 indicadores en vivo",
+          "sectionIntro": "Cada gráfico de abajo se calcula a partir de un mismo triángulo escaleno real de 5-6-7 — el mismo ejemplo en toda la página, para que los números se conecten de un gráfico a otro. Tres de ellos responden a un arrastre en vivo, no solo a un clic.",
+          "playground": {
+            "title": "Arrastra el triángulo",
+            "intro": "Arrastra cualquiera de los tres vértices. Cada lado y el área total se recalculan al instante a partir de las nuevas coordenadas, con dos fórmulas independientes que siempre coinciden.",
+            "hint": "Arrastra un vértice (A, B o C) para cambiar la forma del triángulo.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "degenerate": "Separa los puntos para formar un triángulo",
+              "sideA": "Lado a",
+              "sideB": "Lado b",
+              "sideC": "Lado c",
+              "areaHeron": "Área (fórmula de Herón)",
+              "areaShoelace": "Área (coordenadas)",
+              "matchNote": "El mismo triángulo, dos fórmulas independientes"
+            }
+          },
+          "angleSensitivity": {
+            "title": "¿Qué tan sensible es el lado c al ángulo C?",
+            "intro": "Los lados a y b permanecen fijos en 5 y 6. Arrastra el punto por el arco para cambiar el ángulo C y observa cómo responde el lado c mediante el teorema del coseno.",
+            "hint": "Arrastra el punto azul a lo largo del arco.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "angle": "Ángulo C",
+              "sideAFixed": "Lado a (fijo)",
+              "sideBFixed": "Lado b (fijo)",
+              "lowerC": "Lado c a −10°",
+              "higherC": "Lado c a +10°",
+              "measuredC": "Lado c (medido)",
+              "formulaNote": "El teorema del coseno predice {formula} — coincide"
+            }
+          },
+          "angleReference": {
+            "title": "¿Dónde se ubica este triángulo?",
+            "intro": "Arrastra el punto por la línea de 0°-180° para comparar cualquier ángulo mayor con cinco triángulos con nombre.",
+            "hint": "Arrastra el punto rosa a lo largo de la línea.",
+            "classes": {
+              "acute": "Acutángulo",
+              "right": "Rectángulo",
+              "obtuse": "Obtusángulo"
+            },
+            "names": {
+              "equilateral": "Equilátero",
+              "isoscelesRight": "Isósceles rectángulo",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "Este ejemplo (5-6-7)",
+              "sliver": "Astilla muy obtusa"
+            },
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "angle": "Ángulo mayor",
+              "classification": "Clasificación",
+              "nearest": "Triángulo con nombre más cercano",
+              "nearestNote": "a {angle}°"
+            }
+          },
+          "sideLengths": {
+            "title": "Comparando los tres lados",
+            "intro": "Los lados del triángulo de ejemplo — 5, 6 y 7 — tienen longitudes distintas, lo que lo hace precisamente escaleno.",
+            "sideA": "Lado a",
+            "sideB": "Lado b",
+            "sideC": "Lado c",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "perimeter": "Perímetro",
+              "perimeterNote": "Suma de los tres lados"
+            }
+          },
+          "altitudes": {
+            "title": "Las tres alturas",
+            "intro": "Cada lado tiene su propia altura, medida perpendicularmente desde el vértice opuesto — el lado más largo siempre tiene la altura más corta.",
+            "toSide": "Al lado {side}",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "longestNote": "La altura más corta, porque cae sobre el lado más largo"
+            }
+          },
+          "heron": {
+            "title": "La fórmula de Herón, paso a paso",
+            "intro": "El área a partir de los tres lados únicamente, sin ángulos: la mitad del perímetro (s), luego s menos cada lado, multiplicados y con raíz cuadrada.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "area": "Área"
+            }
+          },
+          "perimeterBar": {
+            "title": "Composición del perímetro",
+            "intro": "El perímetro de 18 unidades desglosado en sus tres lados reales.",
+            "segments": {
+              "a": "Lado a",
+              "b": "Lado b",
+              "c": "Lado c"
+            },
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "total": "Perímetro total"
+            }
+          },
+          "compactness": {
+            "title": "¿Qué tan compacta es esta forma?",
+            "intro": "La razón isoperimétrica (perímetro² ÷ área) mide qué tan cerca está un triángulo de ser equilátero — más baja es más compacto, más alta es más alargado.",
+            "zones": {
+              "compact": "Compacto",
+              "balanced": "Equilibrado",
+              "elongated": "Alargado"
+            },
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "perimeter": "Perímetro",
+              "area": "Área",
+              "index": "Índice de compacidad",
+              "indexNote": "Cercano al mínimo del equilátero (~20.78)"
+            }
+          },
+          "lawOfSines": {
+            "title": "Demostrando el teorema del seno",
+            "intro": "Divide cada lado entre el seno de su ángulo opuesto — los tres resultados son siempre idénticos, iguales al diámetro de la circunferencia que pasa por los tres vértices.",
+            "ratioA": "a / sen(A)",
+            "ratioB": "b / sen(B)",
+            "ratioC": "c / sen(C)",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "circumdiameter": "Diámetro circunscrito (2R)",
+              "circumdiameterNote": "El mismo valor que las tres razones anteriores"
+            }
+          },
+          "radii": {
+            "title": "Circunferencia inscrita vs. circunscrita",
+            "intro": "Todo triángulo tiene exactamente una circunferencia inscrita en su interior (tangente a los tres lados) y una circunscrita a su alrededor (que pasa por los tres vértices).",
+            "radiusLabel": "Radio",
+            "diameterLabel": "Diámetro",
+            "note": "El radio circunscrito es unas {ratio} veces el radio inscrito en este triángulo.",
+            "incircle": {
+              "title": "Circunferencia inscrita",
+              "description": "Tangente a los tres lados, centrada en el incentro."
+            },
+            "circumcircle": {
+              "title": "Circunferencia circunscrita",
+              "description": "Pasa por los tres vértices, centrada en el circuncentro."
+            }
+          },
+          "specialTypes": {
+            "title": "Triángulos especiales, clasificados",
+            "intro": "Cinco triángulos con nombre, cada uno resuelto de verdad y etiquetado según su clasificación real por ángulo mayor.",
+            "columnName": "Triángulo",
+            "columnSides": "Lados",
+            "sideClasses": {
+              "equilateral": "equilátero",
+              "isosceles": "isósceles",
+              "scalene": "escaleno"
+            },
+            "names": {
+              "equilateral": "Equilátero",
+              "isoscelesRight": "Isósceles rectángulo",
+              "classicRight": "Triángulo rectángulo 3-4-5",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "Este ejemplo"
+            }
+          },
+          "unitConversion": {
+            "title": "El lado c en otro sistema de unidades",
+            "intro": "La misma longitud física, expresada de otra forma — útil cuando las medidas de un triángulo provienen de una fuente que usa otra unidad.",
+            "meters": "Metros",
+            "feet": "Pies",
+            "note": "1 metro = 3.28084 pies."
+          },
+          "timeline": {
+            "title": "Cómo se resuelve este triángulo (LLL)",
+            "intro": "La secuencia exacta que ejecuta esta calculadora al recibir tres longitudes de lado, en orden.",
+            "stations": {
+              "given": "Lados dados",
+              "angleA": "Ángulo A (teorema del coseno)",
+              "angleB": "Ángulo B (teorema del coseno)",
+              "angleC": "Ángulo C",
+              "area": "Área (fórmula de Herón)"
+            }
+          }
         }
       },
       "scenarios": {
@@ -19661,7 +19847,14 @@
         "intro": "Separa las tres esquinas de un triángulo y alinéalas sobre un borde recto — siempre encajan perfectamente, porque una línea recta mide exactamente 180°.",
         "ariaLabel": "Los tres ángulos de un triángulo reorganizados sobre una línea recta para mostrar que suman 180 grados",
         "caption180": "180°",
-        "caption": "Esto se cumple para todo triángulo, sin importar su forma o tamaño."
+        "caption": "Esto se cumple para todo triángulo, sin importar su forma o tamaño.",
+        "worked": {
+          "title": "Esquinas separadas",
+          "angle1": "Primera esquina",
+          "angle2": "Segunda esquina",
+          "angle3": "Tercera esquina",
+          "sum": "Suma"
+        }
       }
     },
     "probability-calculator": {

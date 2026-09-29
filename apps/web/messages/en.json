@@ -19501,6 +19501,13 @@
               "acute": "Acute Triangle",
               "right": "Right Triangle",
               "obtuse": "Obtuse Triangle"
+            },
+            "worked": {
+              "title": "Worked Example",
+              "angleA": "Angle A",
+              "angleB": "Angle B",
+              "angleC": "Angle C",
+              "largest": "Largest angle"
             }
           }
         },
@@ -19630,6 +19637,185 @@
           "note": "Euclid's original propositions on triangle congruence and the angle-sum theorem, the foundational results that guarantee three known measurements can uniquely determine a triangle.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Read Euclid's Elements, Book I"
+        },
+        "lab": {
+          "sectionTitle": "Explore the Numbers: 13 Live Indicators",
+          "sectionIntro": "Every chart below is computed from one real 5-6-7 scalene triangle — the same example throughout, so the numbers connect from one chart to the next. Three of them respond to a live drag, not just a click.",
+          "playground": {
+            "title": "Drag the Triangle",
+            "intro": "Drag any of the three vertices below. Every side length and the total area recompute instantly from the new coordinates, using two independent formulas that always agree.",
+            "hint": "Drag a vertex (A, B, or C) to reshape the triangle.",
+            "worked": {
+              "title": "Worked Example",
+              "degenerate": "Drag apart to form a triangle",
+              "sideA": "Side a",
+              "sideB": "Side b",
+              "sideC": "Side c",
+              "areaHeron": "Area (Heron's formula)",
+              "areaShoelace": "Area (coordinates)",
+              "matchNote": "Same triangle, two independent formulas"
+            }
+          },
+          "angleSensitivity": {
+            "title": "How Sensitive Is Side c to Angle C?",
+            "intro": "Sides a and b stay fixed at 5 and 6. Drag the point around the arc to change angle C and watch side c respond through the Law of Cosines.",
+            "hint": "Drag the blue point along the arc.",
+            "worked": {
+              "title": "Worked Example",
+              "angle": "Angle C",
+              "sideAFixed": "Side a (fixed)",
+              "sideBFixed": "Side b (fixed)",
+              "lowerC": "Side c at −10°",
+              "higherC": "Side c at +10°",
+              "measuredC": "Side c (measured)",
+              "formulaNote": "Law of Cosines predicts {formula} — matches"
+            }
+          },
+          "angleReference": {
+            "title": "Where Does This Triangle Sit?",
+            "intro": "Drag the point along the 0°-180° line to compare any largest angle against five named triangles.",
+            "hint": "Drag the pink point along the line.",
+            "classes": {
+              "acute": "Acute",
+              "right": "Right",
+              "obtuse": "Obtuse"
+            },
+            "names": {
+              "equilateral": "Equilateral",
+              "isoscelesRight": "Isosceles Right",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "This Example (5-6-7)",
+              "sliver": "Very Obtuse Sliver"
+            },
+            "worked": {
+              "title": "Worked Example",
+              "angle": "Largest angle",
+              "classification": "Classification",
+              "nearest": "Nearest named triangle",
+              "nearestNote": "at {angle}°"
+            }
+          },
+          "sideLengths": {
+            "title": "Comparing the Three Sides",
+            "intro": "The example triangle's sides — 5, 6, and 7 — are all different lengths, which is exactly what makes it scalene.",
+            "sideA": "Side a",
+            "sideB": "Side b",
+            "sideC": "Side c",
+            "worked": {
+              "title": "Worked Example",
+              "perimeter": "Perimeter",
+              "perimeterNote": "Sum of all three sides"
+            }
+          },
+          "altitudes": {
+            "title": "The Three Altitudes",
+            "intro": "Each side has its own altitude (height), measured perpendicular to it from the opposite vertex — the longest side always carries the shortest altitude.",
+            "toSide": "To side {side}",
+            "worked": {
+              "title": "Worked Example",
+              "longestNote": "Shortest altitude, since it drops to the longest side"
+            }
+          },
+          "heron": {
+            "title": "Heron's Formula, Step by Step",
+            "intro": "Area from the three sides alone, no angles required: half the perimeter (s), then s minus each side, multiplied together and square-rooted.",
+            "worked": {
+              "title": "Worked Example",
+              "area": "Area"
+            }
+          },
+          "perimeterBar": {
+            "title": "Perimeter Composition",
+            "intro": "The 18-unit perimeter broken into its three real side lengths.",
+            "segments": {
+              "a": "Side a",
+              "b": "Side b",
+              "c": "Side c"
+            },
+            "worked": {
+              "title": "Worked Example",
+              "total": "Total perimeter"
+            }
+          },
+          "compactness": {
+            "title": "How Compact Is This Shape?",
+            "intro": "The isoperimetric ratio (perimeter² ÷ area) measures how close a triangle is to equilateral — lower is more compact, higher is more elongated.",
+            "zones": {
+              "compact": "Compact",
+              "balanced": "Balanced",
+              "elongated": "Elongated"
+            },
+            "worked": {
+              "title": "Worked Example",
+              "perimeter": "Perimeter",
+              "area": "Area",
+              "index": "Compactness index",
+              "indexNote": "Close to the equilateral minimum (~20.78)"
+            }
+          },
+          "lawOfSines": {
+            "title": "Proving the Law of Sines",
+            "intro": "Divide each side by the sine of its opposite angle — the three results are always identical, equal to the diameter of the circle passing through all three vertices.",
+            "ratioA": "a / sin(A)",
+            "ratioB": "b / sin(B)",
+            "ratioC": "c / sin(C)",
+            "worked": {
+              "title": "Worked Example",
+              "circumdiameter": "Circumdiameter (2R)",
+              "circumdiameterNote": "Same value as all three ratios above"
+            }
+          },
+          "radii": {
+            "title": "Incircle vs. Circumcircle",
+            "intro": "Every triangle has exactly one circle inscribed inside it (tangent to all three sides) and one circumscribed around it (passing through all three vertices).",
+            "radiusLabel": "Radius",
+            "diameterLabel": "Diameter",
+            "note": "The circumradius is about {ratio}x the inradius for this triangle.",
+            "incircle": {
+              "title": "Incircle",
+              "description": "Tangent to all three sides, centered at the incenter."
+            },
+            "circumcircle": {
+              "title": "Circumcircle",
+              "description": "Passes through all three vertices, centered at the circumcenter."
+            }
+          },
+          "specialTypes": {
+            "title": "Special Triangles, Classified",
+            "intro": "Five named triangles, each solved for real and tagged by its actual largest-angle classification.",
+            "columnName": "Triangle",
+            "columnSides": "Sides",
+            "sideClasses": {
+              "equilateral": "equilateral",
+              "isosceles": "isosceles",
+              "scalene": "scalene"
+            },
+            "names": {
+              "equilateral": "Equilateral",
+              "isoscelesRight": "Isosceles Right",
+              "classicRight": "3-4-5 Right Triangle",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "This Example"
+            }
+          },
+          "unitConversion": {
+            "title": "Side c in Another Unit System",
+            "intro": "The same physical length, re-expressed — useful when a triangle's measurements come from a source using a different unit.",
+            "meters": "Meters",
+            "feet": "Feet",
+            "note": "1 meter = 3.28084 feet."
+          },
+          "timeline": {
+            "title": "How This Triangle Gets Solved (SSS)",
+            "intro": "The exact sequence this calculator runs when given three side lengths, in order.",
+            "stations": {
+              "given": "Given sides",
+              "angleA": "Angle A (Law of Cosines)",
+              "angleB": "Angle B (Law of Cosines)",
+              "angleC": "Angle C",
+              "area": "Area (Heron's formula)"
+            }
+          }
         }
       },
       "scenarios": {
@@ -19661,7 +19847,14 @@
         "intro": "Tear off a triangle's three corners and line them up along a straight edge — they always fit together perfectly, because a straight line measures exactly 180°.",
         "ariaLabel": "The three angles of a triangle rearranged along a straight line to show they sum to 180 degrees",
         "caption180": "180°",
-        "caption": "This holds for every triangle, no matter its shape or size."
+        "caption": "This holds for every triangle, no matter its shape or size.",
+        "worked": {
+          "title": "Torn-Off Corners",
+          "angle1": "First corner",
+          "angle2": "Second corner",
+          "angle3": "Third corner",
+          "sum": "Sum"
+        }
       }
     },
     "probability-calculator": {

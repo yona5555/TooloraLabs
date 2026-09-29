@@ -19501,6 +19501,13 @@
               "acute": "Spitzwinkliges Dreieck",
               "right": "Rechtwinkliges Dreieck",
               "obtuse": "Stumpfwinkliges Dreieck"
+            },
+            "worked": {
+              "title": "Rechenbeispiel",
+              "angleA": "Winkel A",
+              "angleB": "Winkel B",
+              "angleC": "Winkel C",
+              "largest": "Größter Winkel"
             }
           }
         },
@@ -19630,6 +19637,185 @@
           "note": "Euklids ursprüngliche Sätze zur Dreieckskongruenz und zum Winkelsummensatz — die grundlegenden Ergebnisse, die garantieren, dass drei bekannte Größen ein Dreieck eindeutig bestimmen können.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Euklids Elemente, Buch I lesen"
+        },
+        "lab": {
+          "sectionTitle": "Die Zahlen erkunden: 13 Live-Indikatoren",
+          "sectionIntro": "Jedes Diagramm unten wird aus demselben realen ungleichseitigen 5-6-7-Dreieck berechnet — dasselbe Beispiel auf der ganzen Seite, sodass sich die Zahlen von einem Diagramm zum nächsten verbinden. Drei davon reagieren auf echtes Ziehen, nicht nur auf einen Klick.",
+          "playground": {
+            "title": "Ziehe am Dreieck",
+            "intro": "Ziehe einen der drei Eckpunkte unten. Jede Seitenlänge und die Gesamtfläche werden sofort aus den neuen Koordinaten neu berechnet, mit zwei unabhängigen Formeln, die immer übereinstimmen.",
+            "hint": "Ziehe einen Eckpunkt (A, B oder C), um das Dreieck zu verformen.",
+            "worked": {
+              "title": "Rechenbeispiel",
+              "degenerate": "Punkte auseinanderziehen, um ein Dreieck zu bilden",
+              "sideA": "Seite a",
+              "sideB": "Seite b",
+              "sideC": "Seite c",
+              "areaHeron": "Fläche (Formel von Heron)",
+              "areaShoelace": "Fläche (Koordinaten)",
+              "matchNote": "Dasselbe Dreieck, zwei unabhängige Formeln"
+            }
+          },
+          "angleSensitivity": {
+            "title": "Wie empfindlich reagiert Seite c auf Winkel C?",
+            "intro": "Die Seiten a und b bleiben fest bei 5 und 6. Ziehe den Punkt entlang des Bogens, um Winkel C zu ändern, und beobachte, wie Seite c über den Kosinussatz reagiert.",
+            "hint": "Ziehe den blauen Punkt entlang des Bogens.",
+            "worked": {
+              "title": "Rechenbeispiel",
+              "angle": "Winkel C",
+              "sideAFixed": "Seite a (fest)",
+              "sideBFixed": "Seite b (fest)",
+              "lowerC": "Seite c bei −10°",
+              "higherC": "Seite c bei +10°",
+              "measuredC": "Seite c (gemessen)",
+              "formulaNote": "Der Kosinussatz sagt {formula} voraus — stimmt überein"
+            }
+          },
+          "angleReference": {
+            "title": "Wo steht dieses Dreieck?",
+            "intro": "Ziehe den Punkt entlang der 0°-180°-Linie, um jeden größten Winkel mit fünf benannten Dreiecken zu vergleichen.",
+            "hint": "Ziehe den pinken Punkt entlang der Linie.",
+            "classes": {
+              "acute": "Spitzwinklig",
+              "right": "Rechtwinklig",
+              "obtuse": "Stumpfwinklig"
+            },
+            "names": {
+              "equilateral": "Gleichseitig",
+              "isoscelesRight": "Gleichschenklig-rechtwinklig",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "Dieses Beispiel (5-6-7)",
+              "sliver": "Sehr stumpfwinkliger Splitter"
+            },
+            "worked": {
+              "title": "Rechenbeispiel",
+              "angle": "Größter Winkel",
+              "classification": "Klassifikation",
+              "nearest": "Nächstes benanntes Dreieck",
+              "nearestNote": "bei {angle}°"
+            }
+          },
+          "sideLengths": {
+            "title": "Die drei Seiten im Vergleich",
+            "intro": "Die Seiten des Beispieldreiecks — 5, 6 und 7 — haben alle unterschiedliche Längen, genau das macht es ungleichseitig.",
+            "sideA": "Seite a",
+            "sideB": "Seite b",
+            "sideC": "Seite c",
+            "worked": {
+              "title": "Rechenbeispiel",
+              "perimeter": "Umfang",
+              "perimeterNote": "Summe aller drei Seiten"
+            }
+          },
+          "altitudes": {
+            "title": "Die drei Höhen",
+            "intro": "Jede Seite hat ihre eigene Höhe, senkrecht von der gegenüberliegenden Ecke aus gemessen — die längste Seite trägt immer die kürzeste Höhe.",
+            "toSide": "Zu Seite {side}",
+            "worked": {
+              "title": "Rechenbeispiel",
+              "longestNote": "Kürzeste Höhe, da sie auf die längste Seite fällt"
+            }
+          },
+          "heron": {
+            "title": "Die Formel von Heron, Schritt für Schritt",
+            "intro": "Die Fläche allein aus den drei Seiten, ohne Winkel: halber Umfang (s), dann s minus jede Seite, miteinander multipliziert und daraus die Quadratwurzel.",
+            "worked": {
+              "title": "Rechenbeispiel",
+              "area": "Fläche"
+            }
+          },
+          "perimeterBar": {
+            "title": "Zusammensetzung des Umfangs",
+            "intro": "Der Umfang von 18 Einheiten, aufgeteilt in seine drei realen Seitenlängen.",
+            "segments": {
+              "a": "Seite a",
+              "b": "Seite b",
+              "c": "Seite c"
+            },
+            "worked": {
+              "title": "Rechenbeispiel",
+              "total": "Gesamtumfang"
+            }
+          },
+          "compactness": {
+            "title": "Wie kompakt ist diese Form?",
+            "intro": "Das isoperimetrische Verhältnis (Umfang² ÷ Fläche) misst, wie nah ein Dreieck einem gleichseitigen Dreieck ist — niedriger ist kompakter, höher ist gestreckter.",
+            "zones": {
+              "compact": "Kompakt",
+              "balanced": "Ausgewogen",
+              "elongated": "Gestreckt"
+            },
+            "worked": {
+              "title": "Rechenbeispiel",
+              "perimeter": "Umfang",
+              "area": "Fläche",
+              "index": "Kompaktheitsindex",
+              "indexNote": "Nahe am gleichseitigen Minimum (~20,78)"
+            }
+          },
+          "lawOfSines": {
+            "title": "Der Sinussatz im Beweis",
+            "intro": "Teile jede Seite durch den Sinus ihres gegenüberliegenden Winkels — die drei Ergebnisse sind immer identisch und gleich dem Durchmesser des Kreises durch alle drei Eckpunkte.",
+            "ratioA": "a / sin(A)",
+            "ratioB": "b / sin(B)",
+            "ratioC": "c / sin(C)",
+            "worked": {
+              "title": "Rechenbeispiel",
+              "circumdiameter": "Umkreisdurchmesser (2R)",
+              "circumdiameterNote": "Gleicher Wert wie alle drei Verhältnisse oben"
+            }
+          },
+          "radii": {
+            "title": "Inkreis vs. Umkreis",
+            "intro": "Jedes Dreieck hat genau einen Inkreis (tangential zu allen drei Seiten) und einen Umkreis (durch alle drei Eckpunkte).",
+            "radiusLabel": "Radius",
+            "diameterLabel": "Durchmesser",
+            "note": "Der Umkreisradius ist bei diesem Dreieck etwa {ratio}-mal so groß wie der Inkreisradius.",
+            "incircle": {
+              "title": "Inkreis",
+              "description": "Tangential zu allen drei Seiten, zentriert im Inkreismittelpunkt."
+            },
+            "circumcircle": {
+              "title": "Umkreis",
+              "description": "Verläuft durch alle drei Eckpunkte, zentriert im Umkreismittelpunkt."
+            }
+          },
+          "specialTypes": {
+            "title": "Besondere Dreiecke, klassifiziert",
+            "intro": "Fünf benannte Dreiecke, jedes real gelöst und mit seiner tatsächlichen Klassifikation nach größtem Winkel markiert.",
+            "columnName": "Dreieck",
+            "columnSides": "Seiten",
+            "sideClasses": {
+              "equilateral": "gleichseitig",
+              "isosceles": "gleichschenklig",
+              "scalene": "ungleichseitig"
+            },
+            "names": {
+              "equilateral": "Gleichseitig",
+              "isoscelesRight": "Gleichschenklig-rechtwinklig",
+              "classicRight": "3-4-5-Rechtwinkliges Dreieck",
+              "thirtySixtyNinety": "30-60-90",
+              "example": "Dieses Beispiel"
+            }
+          },
+          "unitConversion": {
+            "title": "Seite c in einem anderen Einheitensystem",
+            "intro": "Dieselbe physische Länge, anders ausgedrückt — nützlich, wenn die Maße eines Dreiecks aus einer Quelle mit einer anderen Einheit stammen.",
+            "meters": "Meter",
+            "feet": "Fuß",
+            "note": "1 Meter = 3,28084 Fuß."
+          },
+          "timeline": {
+            "title": "Wie dieses Dreieck gelöst wird (SSS)",
+            "intro": "Die genaue Reihenfolge, die dieser Rechner bei drei gegebenen Seitenlängen durchläuft.",
+            "stations": {
+              "given": "Gegebene Seiten",
+              "angleA": "Winkel A (Kosinussatz)",
+              "angleB": "Winkel B (Kosinussatz)",
+              "angleC": "Winkel C",
+              "area": "Fläche (Formel von Heron)"
+            }
+          }
         }
       },
       "scenarios": {
@@ -19661,7 +19847,14 @@
         "intro": "Reißen Sie die drei Ecken eines Dreiecks ab und legen Sie sie entlang einer geraden Kante aneinander — sie passen immer perfekt zusammen, denn eine gerade Linie misst genau 180°.",
         "ariaLabel": "Die drei Winkel eines Dreiecks entlang einer geraden Linie angeordnet, um zu zeigen, dass sie 180 Grad ergeben",
         "caption180": "180°",
-        "caption": "Das gilt für jedes Dreieck, unabhängig von seiner Form oder Größe."
+        "caption": "Das gilt für jedes Dreieck, unabhängig von seiner Form oder Größe.",
+        "worked": {
+          "title": "Abgetrennte Ecken",
+          "angle1": "Erste Ecke",
+          "angle2": "Zweite Ecke",
+          "angle3": "Dritte Ecke",
+          "sum": "Summe"
+        }
       }
     },
     "probability-calculator": {
