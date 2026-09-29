@@ -60,6 +60,7 @@ export * from "./StandardDeviationCalculator";
 export * from "./CircleCalculator";
 export * from "./TriangleCalculator";
 export * from "./TriangleActiveAngleGeometry";
+export * from "./UnitCircleGeometry";
 export * from "./ProbabilityCalculator";
 export * from "./MeanMedianModeRangeCalculator";
 export * from "./TargetHeartRateCalculator";

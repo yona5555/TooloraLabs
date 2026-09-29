@@ -427,11 +427,21 @@
           "paragraph1": "Esta calculadora evalúa las operaciones igual que lo hace una calculadora científica física: de forma secuencial, a medida que las introduces, en lugar de analizar una expresión completa escrita con paréntesis. Al pulsar un operador se resuelve de inmediato el cálculo pendiente y se encola el nuevo; al pulsar una tecla de función (sin, √x, ln, y el resto) se aplica al instante sobre el número que hay en pantalla. Esto cubre cuatro familias de operaciones —aritmética básica, potencias y raíces, logaritmos y exponenciales, y trigonometría— accesibles todas desde el teclado sin cambiar de modo.",
           "paragraph2": "Dos detalles son importantes para obtener un resultado correcto. Primero, el interruptor Grados/Radianes cambia cómo interpreta cada función trigonométrica e inversa su entrada y su salida: la misma secuencia de teclas da un resultado numérico distinto en cada modo, así que conviene comprobarlo antes de leer un resultado trigonométrico. Segundo, algunas entradas no tienen una respuesta real en absoluto: dividir entre cero, calcular la raíz cuadrada o el logaritmo de un número negativo, o pedir el arcoseno de un valor fuera del rango −1 a 1. En lugar de devolver silenciosamente un número inválido, esta calculadora señala estos casos como errores explícitos, de modo que una entrada incorrecta nunca se confunda con un resultado real.",
           "diagram": {
-            "sinLabel": "sen θ",
-            "cosLabel": "cos θ",
-            "angleLabel": "θ",
-            "caption": "En una circunferencia de radio 1, el seno y el coseno de un ángulo θ son simplemente la posición vertical y horizontal del punto que traza ese ángulo: la definición geométrica que hay detrás de cada tecla trigonométrica de esta calculadora."
+            "caption": "En una circunferencia de radio 1, el seno y el coseno de un ángulo θ son simplemente la posición vertical y horizontal del punto que traza ese ángulo: la definición geométrica que hay detrás de cada tecla trigonométrica de esta calculadora.",
+            "sinTooltip": "sin θ = {value}",
+            "cosTooltip": "cos θ = {value}",
+            "radiusTooltip": "Radio = 1 (esta es la circunferencia unitaria)",
+            "originTooltip": "Centro del círculo — aquí sin(0°) = 0 y cos(0°) = 1",
+            "hint": "Arrastra el punto alrededor del círculo — sin, cos y tan se actualizan en vivo."
           }
+        },
+        "functionsPowerRoots": {
+          "title": "Potencias, raíces y logaritmos",
+          "intro": "Cuatro teclas que transforman un número según una regla fija: elevar al cuadrado y al cubo lo multiplican por sí mismo, las raíces invierten eso, y los logaritmos preguntan qué exponente lo produce."
+        },
+        "functionsTrig": {
+          "title": "Trigonometría, crecimiento y conteo",
+          "intro": "Las teclas de trigonometría, factorial y combinatoria de la calculadora, cada una mostrada con la curva, escala o tabla real detrás del número que devuelve."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -460,6 +470,10 @@
               "result": "3"
             }
           ]
+        },
+        "functionsMemory": {
+          "title": "Memoria, porcentajes y extras de cálculo",
+          "intro": "Las teclas con estado y avanzadas de la calculadora — la memoria M+/M−/MR, la tecla %, y las dos funciones numéricas de cálculo (derivada e integral) del menú de funciones."
         },
         "faq": {
           "title": "Preguntas frecuentes",
@@ -549,6 +563,171 @@
           "note": "Una historia técnica documentada de la HP-35, la calculadora de Hewlett-Packard de 1972 que sustituyó a la regla de cálculo y estableció la disposición de funciones trigonométricas, logarítmicas y exponenciales que esta herramienta sigue reproduciendo.",
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
           "readOriginal": "Leer el artículo original"
+        },
+        "functions": {
+          "powerRoot": {
+            "title": "Cuadrado, cubo y sus raíces",
+            "intro": "El mismo valor de entrada, {x}, pasa por las cuatro teclas de esta familia — elevar al cuadrado y al cubo lo hacen crecer, la raíz cuadrada y cúbica lo reducen de nuevo.",
+            "square": "x²",
+            "cube": "x³",
+            "sqrt": "√x",
+            "cbrt": "∛x",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "square": "Cuadrado (x²)",
+              "cube": "Cubo (x³)",
+              "cubeNote": "Crece más rápido de las cuatro para x > 1",
+              "sqrt": "Raíz cuadrada (√x)",
+              "cbrt": "Raíz cúbica (∛x)"
+            }
+          },
+          "logComparison": {
+            "title": "Comparando bases de logaritmo",
+            "intro": "El mismo valor de entrada, {x}, a través de las tres teclas de logaritmo de la calculadora — ln (base e), log (base 10) y logaritmo base 2 — cada una hace la misma pregunta en una base distinta: ¿qué exponente te devuelve a {x}?",
+            "log2": "log₂",
+            "ln": "ln",
+            "log10": "log₁₀",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "log2": "Base 2",
+              "ln": "Base e (ln)",
+              "log10": "Base 10 (log)",
+              "log10Note": "El resultado más pequeño — la base 10 es la mayor de las tres"
+            }
+          },
+          "exponential": {
+            "title": "La pendiente propia de la función exponencial",
+            "intro": "y = eˣ es la única función cuya pendiente en cualquier punto es igual a su propio valor ahí — la tangente en x = 1 tiene exactamente la misma pendiente que la altura de la curva.",
+            "hint": "La línea discontinua es la tangente en x = 1 — observa que su pendiente coincide con la altura de la curva ahí.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "x": "x",
+              "value": "eˣ",
+              "slope": "Pendiente en x",
+              "slopeNote": "Siempre igual a eˣ misma — la propiedad que define a exp"
+            }
+          },
+          "trigWave": {
+            "title": "Seno y coseno como ondas continuas",
+            "intro": "Las mismas teclas sin y cos de la circunferencia unitaria de arriba, ahora graficadas como una curva continua a lo largo de una vuelta y media en cada dirección — la vista gráfica de esas dos funciones.",
+            "hint": "Cada onda se repite cada 360° — el período que define a ambas funciones.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "angle": "Ángulo",
+              "sin": "sin",
+              "cos": "cos",
+              "period": "Período",
+              "periodNote": "Ambas curvas se repiten de forma idéntica cada 360°"
+            }
+          },
+          "inverseTrigRange": {
+            "title": "Por qué sin⁻¹ nunca supera ±90°",
+            "intro": "La tecla de arcoseno responde \"¿qué ángulo tiene este seno?\" — pero infinitos ángulos comparten el mismo seno, así que la calculadora siempre devuelve el que está dentro de una ventana fija de -90° a 90°.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "input": "Entrada",
+              "result": "Resultado",
+              "range": "Rango posible",
+              "rangeNote": "sin⁻¹ nunca puede devolver un ángulo fuera de esta ventana"
+            }
+          },
+          "factorial": {
+            "title": "Qué tan rápido crece el factorial",
+            "intro": "De 0! a 10! se abarcan seis órdenes de magnitud, así que una escala lineal normal aplastaría los valores pequeños en una franja ilegible — mostrado aquí en escala logarítmica en su lugar.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "note": "10! es más de 3.6 millones de veces mayor que 0!"
+            }
+          },
+          "combinatorics": {
+            "title": "Combinaciones vs. permutaciones",
+            "intro": "Para n = {n}, nCr y nPr para cada r posible — las permutaciones cuentan el orden, así que nPr siempre es al menos tan grande como nCr, y ambas solo coinciden cuando r es 0 o {n}.",
+            "tagSame": "Iguales",
+            "tagOrdered": "El orden importa",
+            "columnR": "r",
+            "columnValues": "nCr, nPr"
+          },
+          "angleMode": {
+            "title": "Grados y radianes son el mismo ángulo",
+            "intro": "El interruptor Deg/Rad no cambia el ángulo físico — solo cómo lo etiqueta la calculadora. Ambos números de abajo señalan exactamente la misma rotación.",
+            "degMode": "Modo Grados",
+            "radMode": "Modo Radianes",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "formula": "Fórmula",
+              "result": "Resultado"
+            }
+          },
+          "constants": {
+            "title": "Las constantes integradas de la calculadora",
+            "intro": "Dos números irracionales tan comunes en el trabajo científico que esta calculadora le da a cada uno su propia tecla dedicada en vez de obligarte a escribir los dígitos.",
+            "pi": {
+              "def": "La razón entre la circunferencia de un círculo y su diámetro.",
+              "use": "Usado por cada tecla trigonométrica una vez que un ángulo se convierte a radianes."
+            },
+            "e": {
+              "def": "La base para la cual eˣ es su propia derivada (ver la curva exponencial arriba).",
+              "use": "Usado en los cálculos de ln, exp y crecimiento continuo que admite esta calculadora."
+            },
+            "worked": {
+              "title": "Precisión completa"
+            }
+          },
+          "memory": {
+            "title": "Cómo se acumula la memoria",
+            "intro": "Una secuencia real M+ / M+ / M−, con el total acumulado mostrado en cada paso — el valor persistente que recupera MR, independiente de lo que Ans contenga en ese momento.",
+            "startLabel": "Inicio",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "step": "Paso",
+              "finalNote": "Esto es lo que MR recuperaría tras estas tres pulsaciones"
+            }
+          },
+          "percentFlow": {
+            "title": "Qué hace realmente la tecla %",
+            "intro": "La tecla % no solo divide entre 100 — combinada con la operación + pendiente, suma un porcentaje del número en pantalla directamente sobre él.",
+            "startLabel": "Inicio",
+            "percentLabel": "Tecla de porcentaje",
+            "resultLabel": "Resultado",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "formula": "Fórmula",
+              "result": "Resultado"
+            }
+          },
+          "derivative": {
+            "title": "La derivada numérica, leída en una curva",
+            "intro": "La función de derivada numérica de esta calculadora estima la pendiente de sin(x) en un punto elegido — la línea tangente de abajo confirma que coincide exactamente con cos(x), la derivada conocida del seno.",
+            "hint": "La línea discontinua es la tangente en x = π/3 — su pendiente es la respuesta de la derivada.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "x": "x",
+              "value": "sin(x)",
+              "slope": "Derivada",
+              "slopeNote": "Coincide exactamente con cos(x), como predice el cálculo"
+            }
+          },
+          "integral": {
+            "title": "La integral numérica, como área real",
+            "intro": "La función de integral numérica de esta calculadora estima el área bajo una curva entre dos límites — sombreada aquí para y = x² de 0 a 3, coincidiendo exactamente con la forma cerrada x³/3.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "function": "Función",
+              "bounds": "Límites",
+              "area": "Área",
+              "areaNote": "Coincide exactamente con la antiderivada cerrada x³/3"
+            }
+          },
+          "signPolarity": {
+            "title": "Qué hace la tecla |x| con un número negativo",
+            "intro": "La tecla de valor absoluto refleja cualquier entrada negativa a través del cero hacia su imagen espejo positiva — la distancia al cero permanece idéntica, solo cambia el signo.",
+            "worked": {
+              "title": "Ejemplo resuelto",
+              "input": "Entrada",
+              "output": "Salida",
+              "note": "Misma distancia al cero, lado opuesto"
+            }
+          }
         }
       },
       "shareExport": {

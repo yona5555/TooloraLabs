@@ -7,7 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
  * standard order of operations (parentheses → exponents → ×÷ → +−) that this
  * calculator's expression parser follows — directly explains HOW a
  * multi-operator expression typed into the keypad above resolves to a
- * single result, distinct from UnitCircleDiagram (which covers trig only).
+ * single result, distinct from ScientificUnitCircleDiagram (which covers trig only).
  */
 const STEPS: { key: string; expression: string }[] = [
   { key: "start", expression: "3 + 4 × 2² − 1" },

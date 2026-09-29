@@ -427,11 +427,21 @@
           "paragraph1": "Cette calculatrice évalue les opérations comme le ferait une calculatrice scientifique physique : de façon séquentielle, à mesure que vous les saisissez, plutôt qu'en analysant une expression complète écrite avec des parenthèses. Appuyer sur un opérateur résout immédiatement le calcul en attente, puis met le nouveau en file d'attente ; appuyer sur une touche de fonction (sin, √x, ln, etc.) s'applique instantanément au nombre actuellement affiché à l'écran. Cela couvre quatre familles d'opérations — arithmétique de base, puissances et racines, logarithmes et exponentielles, et trigonométrie — chacune accessible depuis le clavier sans changer de mode.",
           "paragraph2": "Deux détails comptent pour obtenir un résultat correct. D'abord, le bouton Deg/Rad change la façon dont chaque fonction trigonométrique et trigonométrique inverse interprète son entrée et sa sortie — la même séquence de touches donne une réponse numérique différente selon le mode, il vaut donc mieux le vérifier avant de lire un résultat trigonométrique. Ensuite, certaines entrées n'ont tout simplement pas de réponse réelle : diviser par zéro, prendre la racine carrée ou le logarithme d'un nombre négatif, ou demander l'arc sinus d'une valeur en dehors de l'intervalle −1 à 1. Plutôt que de renvoyer silencieusement un nombre invalide, cette calculatrice signale ces cas par des erreurs explicites, afin qu'une saisie erronée ne soit jamais confondue avec un résultat réel.",
           "diagram": {
-            "sinLabel": "sin θ",
-            "cosLabel": "cos θ",
-            "angleLabel": "θ",
-            "caption": "Sur un cercle de rayon 1, le sinus et le cosinus d'un angle θ correspondent simplement à la position verticale et horizontale du point que cet angle trace — la définition géométrique derrière chaque touche trigonométrique de cette calculatrice."
+            "caption": "Sur un cercle de rayon 1, le sinus et le cosinus d'un angle θ correspondent simplement à la position verticale et horizontale du point que cet angle trace — la définition géométrique derrière chaque touche trigonométrique de cette calculatrice.",
+            "sinTooltip": "sin θ = {value}",
+            "cosTooltip": "cos θ = {value}",
+            "radiusTooltip": "Rayon = 1 (c'est le cercle unité)",
+            "originTooltip": "Centre du cercle — ici sin(0°) = 0 et cos(0°) = 1",
+            "hint": "Faites glisser le point autour du cercle — sin, cos et tan se mettent à jour en direct."
           }
+        },
+        "functionsPowerRoots": {
+          "title": "Puissances, racines et logarithmes",
+          "intro": "Quatre touches qui transforment un nombre selon une règle fixe : élever au carré et au cube le multiplient par lui-même, les racines inversent cela, et les logarithmes demandent quel exposant le produit."
+        },
+        "functionsTrig": {
+          "title": "Trigonométrie, croissance et dénombrement",
+          "intro": "Les touches de trigonométrie, factorielle et combinatoire de la calculatrice, chacune montrée avec la courbe, l'échelle ou le tableau réel derrière le nombre qu'elle renvoie."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -460,6 +470,10 @@
               "result": "3"
             }
           ]
+        },
+        "functionsMemory": {
+          "title": "Mémoire, pourcentages et extras de calcul infinitésimal",
+          "intro": "Les touches à état et avancées de la calculatrice — l'emplacement mémoire M+/M−/MR, la touche %, et les deux fonctions numériques de calcul infinitésimal (dérivée et intégrale) du menu des fonctions."
         },
         "faq": {
           "title": "Questions fréquentes",
@@ -549,6 +563,171 @@
           "note": "Un historique technique documenté de la HP-35, la calculatrice Hewlett-Packard de 1972 qui a remplacé la règle à calcul et établi la disposition des fonctions trigonométriques, logarithmiques et exponentielles que cet outil suit encore.",
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
           "readOriginal": "Lire l'article original"
+        },
+        "functions": {
+          "powerRoot": {
+            "title": "Carré, cube et leurs racines",
+            "intro": "La même valeur d'entrée, {x}, passe par les quatre touches de cette famille — élever au carré et au cube l'agrandissent, la racine carrée et cubique le réduisent à nouveau.",
+            "square": "x²",
+            "cube": "x³",
+            "sqrt": "√x",
+            "cbrt": "∛x",
+            "worked": {
+              "title": "Exemple résolu",
+              "square": "Carré (x²)",
+              "cube": "Cube (x³)",
+              "cubeNote": "Croît le plus vite des quatre pour x > 1",
+              "sqrt": "Racine carrée (√x)",
+              "cbrt": "Racine cubique (∛x)"
+            }
+          },
+          "logComparison": {
+            "title": "Comparaison des bases de logarithme",
+            "intro": "La même valeur d'entrée, {x}, à travers les trois touches de logarithme de la calculatrice — ln (base e), log (base 10) et logarithme base 2 — chacune pose la même question dans une base différente : quel exposant ramène à {x} ?",
+            "log2": "log₂",
+            "ln": "ln",
+            "log10": "log₁₀",
+            "worked": {
+              "title": "Exemple résolu",
+              "log2": "Base 2",
+              "ln": "Base e (ln)",
+              "log10": "Base 10 (log)",
+              "log10Note": "Résultat le plus petit — la base 10 est la plus grande des trois"
+            }
+          },
+          "exponential": {
+            "title": "La pente propre de la fonction exponentielle",
+            "intro": "y = eˣ est la seule fonction dont la pente en tout point égale sa propre valeur à cet endroit — la tangente en x = 1 a exactement la même pente que la hauteur de la courbe.",
+            "hint": "La ligne pointillée est la tangente en x = 1 — remarquez que sa pente correspond à la hauteur de la courbe à cet endroit.",
+            "worked": {
+              "title": "Exemple résolu",
+              "x": "x",
+              "value": "eˣ",
+              "slope": "Pente en x",
+              "slopeNote": "Toujours égale à eˣ elle-même — la propriété qui définit exp"
+            }
+          },
+          "trigWave": {
+            "title": "Sinus et cosinus comme ondes continues",
+            "intro": "Les mêmes touches sin et cos du cercle unité ci-dessus, maintenant tracées comme une courbe continue sur un tour et demi dans chaque direction — la vue graphique de ces deux fonctions.",
+            "hint": "Chaque onde se répète tous les 360° — la période qui définit les deux fonctions.",
+            "worked": {
+              "title": "Exemple résolu",
+              "angle": "Angle",
+              "sin": "sin",
+              "cos": "cos",
+              "period": "Période",
+              "periodNote": "Les deux courbes se répètent à l'identique tous les 360°"
+            }
+          },
+          "inverseTrigRange": {
+            "title": "Pourquoi sin⁻¹ ne dépasse jamais ±90°",
+            "intro": "La touche arcsinus répond à \"quel angle a ce sinus ?\" — mais une infinité d'angles partagent le même sinus, donc la calculatrice renvoie toujours celui compris dans une fenêtre fixe de -90° à 90°.",
+            "worked": {
+              "title": "Exemple résolu",
+              "input": "Entrée",
+              "result": "Résultat",
+              "range": "Plage possible",
+              "rangeNote": "sin⁻¹ ne peut jamais renvoyer un angle hors de cette fenêtre"
+            }
+          },
+          "factorial": {
+            "title": "À quelle vitesse la factorielle croît",
+            "intro": "De 0! à 10!, on couvre six ordres de grandeur, donc une échelle linéaire normale écraserait les petites valeurs en une bande illisible — montré ici sur une échelle logarithmique à la place.",
+            "worked": {
+              "title": "Exemple résolu",
+              "note": "10! est plus de 3,6 millions de fois plus grand que 0!"
+            }
+          },
+          "combinatorics": {
+            "title": "Combinaisons vs. permutations",
+            "intro": "Pour n = {n}, nCr et nPr pour chaque r possible — les permutations comptent l'ordre, donc nPr est toujours au moins aussi grand que nCr, et les deux ne coïncident que lorsque r vaut 0 ou {n}.",
+            "tagSame": "Égaux",
+            "tagOrdered": "L'ordre compte",
+            "columnR": "r",
+            "columnValues": "nCr, nPr"
+          },
+          "angleMode": {
+            "title": "Degrés et radians sont le même angle",
+            "intro": "Le commutateur Deg/Rad ne change pas l'angle physique — seulement la façon dont la calculatrice l'étiquette. Les deux nombres ci-dessous désignent exactement la même rotation.",
+            "degMode": "Mode Degrés",
+            "radMode": "Mode Radians",
+            "worked": {
+              "title": "Exemple résolu",
+              "formula": "Formule",
+              "result": "Résultat"
+            }
+          },
+          "constants": {
+            "title": "Les constantes intégrées de la calculatrice",
+            "intro": "Deux nombres irrationnels si courants en travail scientifique que cette calculatrice donne à chacun sa propre touche dédiée plutôt que de faire taper les chiffres.",
+            "pi": {
+              "def": "Le rapport entre la circonférence d'un cercle et son diamètre.",
+              "use": "Utilisé par chaque touche trigonométrique une fois un angle converti en radians."
+            },
+            "e": {
+              "def": "La base pour laquelle eˣ est sa propre dérivée (voir la courbe exponentielle ci-dessus).",
+              "use": "Utilisé pour ln, exp et les calculs de croissance continue que cette calculatrice prend en charge."
+            },
+            "worked": {
+              "title": "Précision complète"
+            }
+          },
+          "memory": {
+            "title": "Comment l'emplacement mémoire s'accumule",
+            "intro": "Une vraie séquence M+ / M+ / M−, avec le total courant affiché à chaque étape — la valeur persistante que MR rappelle, indépendamment de ce que Ans contient actuellement.",
+            "startLabel": "Départ",
+            "worked": {
+              "title": "Exemple résolu",
+              "step": "Étape",
+              "finalNote": "C'est ce que MR rappellerait après ces trois pressions de touche"
+            }
+          },
+          "percentFlow": {
+            "title": "Ce que fait vraiment la touche %",
+            "intro": "La touche % ne divise pas simplement par 100 — combinée à l'opération + en attente, elle ajoute un pourcentage du nombre affiché directement dessus.",
+            "startLabel": "Départ",
+            "percentLabel": "Touche pourcentage",
+            "resultLabel": "Résultat",
+            "worked": {
+              "title": "Exemple résolu",
+              "formula": "Formule",
+              "result": "Résultat"
+            }
+          },
+          "derivative": {
+            "title": "La dérivée numérique, lue sur une courbe",
+            "intro": "La fonction de dérivée numérique de cette calculatrice estime la pente de sin(x) en un point choisi — la tangente ci-dessous confirme qu'elle correspond exactement à cos(x), la dérivée connue du sinus.",
+            "hint": "La ligne pointillée est la tangente en x = π/3 — sa pente est la réponse de la dérivée.",
+            "worked": {
+              "title": "Exemple résolu",
+              "x": "x",
+              "value": "sin(x)",
+              "slope": "Dérivée",
+              "slopeNote": "Correspond exactement à cos(x), comme le prédit le calcul infinitésimal"
+            }
+          },
+          "integral": {
+            "title": "L'intégrale numérique, comme aire réelle",
+            "intro": "La fonction d'intégrale numérique de cette calculatrice estime l'aire sous une courbe entre deux bornes — ombrée ici pour y = x² de 0 à 3, correspondant exactement à la forme close x³/3.",
+            "worked": {
+              "title": "Exemple résolu",
+              "function": "Fonction",
+              "bounds": "Bornes",
+              "area": "Aire",
+              "areaNote": "Correspond exactement à la primitive close x³/3"
+            }
+          },
+          "signPolarity": {
+            "title": "Ce que fait la touche |x| à un nombre négatif",
+            "intro": "La touche valeur absolue reflète toute entrée négative à travers zéro vers son image miroir positive — la distance à zéro reste identique, seul le signe change.",
+            "worked": {
+              "title": "Exemple résolu",
+              "input": "Entrée",
+              "output": "Sortie",
+              "note": "Même distance à zéro, côté opposé"
+            }
+          }
         }
       },
       "shareExport": {

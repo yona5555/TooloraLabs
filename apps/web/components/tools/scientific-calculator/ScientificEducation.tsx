@@ -4,8 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import UnitCircleDiagram from "./UnitCircleDiagram";
+import ScientificUnitCircleDiagram from "./ScientificUnitCircleDiagram";
 import OrderOfOperationsDiagram from "./OrderOfOperationsDiagram";
+import PowerRootBarChart from "./PowerRootBarChart";
+import LogComparisonBarList from "./LogComparisonBarList";
+import ExponentialTangentCurve from "./ExponentialTangentCurve";
+import TrigWaveCurve from "./TrigWaveCurve";
+import InverseTrigRangeZone from "./InverseTrigRangeZone";
+import FactorialMagnitudeScale from "./FactorialMagnitudeScale";
+import CombinatoricsTable from "./CombinatoricsTable";
+import AngleModeEquivalence from "./AngleModeEquivalence";
+import MathConstantsCards from "./MathConstantsCards";
+import MemoryTimelineDiagram from "./MemoryTimelineDiagram";
+import PercentFlowDiagram from "./PercentFlowDiagram";
+import DerivativeSlopeDiagram from "./DerivativeSlopeDiagram";
+import IntegralAreaDiagram from "./IntegralAreaDiagram";
+import SignPolarityBalance from "./SignPolarityBalance";
 
 type ExampleRow = { expression: string; result: string };
 
@@ -21,14 +35,30 @@ export default async function ScientificEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <UnitCircleDiagram
-          sinLabel={t("intro.diagram.sinLabel")}
-          cosLabel={t("intro.diagram.cosLabel")}
-          angleLabel={t("intro.diagram.angleLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <ScientificUnitCircleDiagram />
         <OrderOfOperationsDiagram />
       </InfoSection>
+
+      <InfoSection title={t("functionsPowerRoots.title")}>
+        <p>{t("functionsPowerRoots.intro")}</p>
+        <div className="space-y-6">
+          <PowerRootBarChart />
+          <LogComparisonBarList />
+          <ExponentialTangentCurve />
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("functionsTrig.title")}>
+        <p>{t("functionsTrig.intro")}</p>
+        <div className="space-y-6">
+          <TrigWaveCurve />
+          <InverseTrigRangeZone />
+          <FactorialMagnitudeScale />
+          <CombinatoricsTable />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -50,9 +80,22 @@ export default async function ScientificEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <AngleModeEquivalence />
+          <MathConstantsCards />
+        </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+      <InfoSection title={t("functionsMemory.title")}>
+        <p>{t("functionsMemory.intro")}</p>
+        <div className="space-y-6">
+          <MemoryTimelineDiagram />
+          <PercentFlowDiagram />
+          <DerivativeSlopeDiagram />
+          <IntegralAreaDiagram />
+          <SignPolarityBalance />
+        </div>
+      </InfoSection>
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
