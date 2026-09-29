@@ -58,6 +58,11 @@ export default function TriangleCalculator({ education }: { education: ReactNode
     setFields((prev) => ({ ...prev, sss: scenario.sides }));
   }
 
+  function handleVerticesCommit(a: number, b: number, c: number) {
+    setMode("sss");
+    setFields((prev) => ({ ...prev, sss: [String(a), String(b), String(c)] }));
+  }
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -86,7 +91,7 @@ export default function TriangleCalculator({ education }: { education: ReactNode
           }
           result={
             <div className="flex flex-col gap-4">
-              <TriangleResult result={result ?? EMPTY_TRIANGLE_RESULT} digitStyle={digitStyle} />
+              <TriangleResult result={result ?? EMPTY_TRIANGLE_RESULT} digitStyle={digitStyle} onVerticesCommit={handleVerticesCommit} />
               <TriangleQuickReference />
             </div>
           }
