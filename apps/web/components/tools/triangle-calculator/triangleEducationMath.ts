@@ -96,7 +96,7 @@ export const round = (n: number, digits = 2) => {
   return Math.round(n * factor) / factor;
 };
 
-function classifyBySides(a: number, b: number, c: number): "equilateral" | "isosceles" | "scalene" {
+export function classifyBySides(a: number, b: number, c: number): "equilateral" | "isosceles" | "scalene" {
   const EPS = 1e-6;
   const equalPairs = [Math.abs(a - b) < EPS, Math.abs(b - c) < EPS, Math.abs(a - c) < EPS].filter(Boolean).length;
   if (equalPairs === 3) return "equilateral";

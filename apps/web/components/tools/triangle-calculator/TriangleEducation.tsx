@@ -33,6 +33,8 @@ export default async function TriangleEducation() {
 
   return (
     <EncyclopediaPaper>
+      <TriangleInteractivePlayground />
+
       <TriangleAngleGauge />
 
       <InfoSection title={t("intro.title")}>
@@ -45,7 +47,6 @@ export default async function TriangleEducation() {
         <p>{t("lab.sectionIntro")}</p>
         <div className="space-y-6">
           <TriangleSolvingTimeline />
-          <TriangleInteractivePlayground />
           <TriangleSideLengthChart />
           <TriangleAltitudesBarList />
           <TriangleHeronFormulaDiagram />

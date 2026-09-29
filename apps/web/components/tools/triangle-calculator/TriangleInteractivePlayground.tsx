@@ -5,21 +5,29 @@ import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
-import { EXAMPLE } from "./triangleEducationMath";
+import { EXAMPLE, classifyByAngle, classifyBySides } from "./triangleEducationMath";
 
 const dist = (p: [number, number], q: [number, number]) => Math.hypot(p[0] - q[0], p[1] - q[1]);
 const round = (n: number) => Math.round(n * 100) / 100;
+const clamp = (v: number) => Math.min(1, Math.max(-1, v));
+const toDeg = (rad: number) => (rad * 180) / Math.PI;
+/** Interior angle opposite `opp`, between the two sides `adj1`/`adj2`, via the Law of Cosines. */
+const angleAt = (opp: number, adj1: number, adj2: number) => toDeg(Math.acos(clamp((adj1 * adj1 + adj2 * adj2 - opp * opp) / (2 * adj1 * adj2))));
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 /**
- * The hero interactive indicator: drag any of the three vertices and every downstream number
- * (side lengths, area computed two independent ways) recomputes live from the actual dragged
- * coordinates — a real client-side "island" (§18) rather than a fixed illustration, built with
- * Mafs specifically because genuine continuous drag interaction over a coordinate plane is what
- * this indicator needs, unlike the click-to-select chips used elsewhere on this page.
+ * The page's hero indicator: drag any of the three vertices and every downstream number — all
+ * three sides, all three angles (Law of Cosines), the area (shoelace formula, cross-checked
+ * against Heron's), the perimeter, and the live side/angle classification — recomputes from the
+ * actual dragged coordinates alone. A real client-side "island" (§18), built with Mafs
+ * specifically because genuine continuous drag interaction over a coordinate plane is what this
+ * indicator needs, unlike the click-to-select chips used elsewhere on this page.
  */
 export default function TriangleInteractivePlayground() {
   const t = useTranslations("tools.triangle-calculator.education.lab.playground");
   const tw = useTranslations("tools.triangle-calculator.education.lab.playground.worked");
+  const tAngleClass = useTranslations("tools.triangle-calculator.education.lab.angleReference.classes");
+  const tSideClass = useTranslations("tools.triangle-calculator.education.lab.specialTypes.sideClasses");
 
   const A = useMovablePoint([EXAMPLE.vertices[0].x, EXAMPLE.vertices[0].y], { color: Theme.blue });
   const B = useMovablePoint([EXAMPLE.vertices[1].x, EXAMPLE.vertices[1].y], { color: Theme.green });
@@ -28,16 +36,28 @@ export default function TriangleInteractivePlayground() {
   const sideA = dist(B.point, C.point); // opposite vertex A
   const sideB = dist(A.point, C.point); // opposite vertex B
   const sideC = dist(A.point, B.point); // opposite vertex C
+  const perimeter = sideA + sideB + sideC;
 
-  const s = (sideA + sideB + sideC) / 2;
-  const heronProduct = s * (s - sideA) * (s - sideB) * (s - sideC);
-  const areaHeron = heronProduct > 0 ? Math.sqrt(heronProduct) : 0;
-
-  // Shoelace formula: an entirely independent way of computing the same area straight from
-  // the three draggable coordinates, with no reference to side lengths at all.
+  // Shoelace formula: area straight from the three dragged coordinates, with no reference to
+  // side lengths at all — the most directly "live" of the two area formulas.
   const areaShoelace = Math.abs(A.point[0] * (B.point[1] - C.point[1]) + B.point[0] * (C.point[1] - A.point[1]) + C.point[0] * (A.point[1] - B.point[1])) / 2;
 
   const degenerate = areaShoelace < 0.05;
+
+  const angleA = angleAt(sideA, sideB, sideC);
+  const angleB = angleAt(sideB, sideA, sideC);
+  const angleC = angleAt(sideC, sideA, sideB);
+  const largestAngle = Math.max(angleA, angleB, angleC);
+
+  // Independent cross-check via Heron's formula, from the same live side lengths.
+  const s = perimeter / 2;
+  const heronProduct = s * (s - sideA) * (s - sideB) * (s - sideC);
+  const areaHeron = heronProduct > 0 ? Math.sqrt(heronProduct) : 0;
+  const areasMatch = Math.abs(areaHeron - areaShoelace) < 0.02;
+
+  const sideClass = classifyBySides(sideA, sideB, sideC);
+  const angleClass = classifyByAngle(largestAngle);
+  const classification = `${capitalize(tSideClass(sideClass))} · ${tAngleClass(angleClass)}`;
 
   return (
     <SectionCard title={t("title")}>
@@ -47,7 +67,7 @@ export default function TriangleInteractivePlayground() {
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[320px]"
         >
-          <Mafs viewBox={{ x: [-2, 9], y: [-2, 7] }} height={260} pan={false} zoom={false}>
+          <Mafs viewBox={{ x: [-2, 9], y: [-2, 7] }} height={280} pan={false} zoom={false}>
             <Coordinates.Cartesian xAxis={{ lines: 2 }} yAxis={{ lines: 2 }} />
             <Polygon points={[A.point, B.point, C.point]} color={Theme.blue} fillOpacity={0.12} />
             {A.element}
@@ -64,8 +84,12 @@ export default function TriangleInteractivePlayground() {
                   { label: tw("sideA"), value: `${round(sideA)}` },
                   { label: tw("sideB"), value: `${round(sideB)}` },
                   { label: tw("sideC"), value: `${round(sideC)}` },
-                  { label: tw("areaHeron"), value: round(areaHeron).toString() },
-                  { label: tw("areaShoelace"), value: round(areaShoelace).toString(), emphasize: true, note: tw("matchNote") },
+                  { label: tw("angleA"), value: `${round(angleA)}°` },
+                  { label: tw("angleB"), value: `${round(angleB)}°` },
+                  { label: tw("angleC"), value: `${round(angleC)}°` },
+                  { label: tw("area"), value: round(areaShoelace).toString(), note: areasMatch ? tw("matchNote") : undefined },
+                  { label: tw("perimeter"), value: round(perimeter).toString() },
+                  { label: tw("classification"), value: classification, emphasize: true },
                 ]
           }
         />
