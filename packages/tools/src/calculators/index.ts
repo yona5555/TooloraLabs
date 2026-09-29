@@ -61,6 +61,7 @@ export * from "./CircleCalculator";
 export * from "./TriangleCalculator";
 export * from "./TriangleActiveAngleGeometry";
 export * from "./UnitCircleGeometry";
+export * from "./FractionNumberLineGeometry";
 export * from "./ProbabilityCalculator";
 export * from "./MeanMedianModeRangeCalculator";
 export * from "./TargetHeartRateCalculator";

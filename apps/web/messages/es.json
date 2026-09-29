@@ -5721,12 +5721,16 @@
         "decimalLabel": "Equivalente decimal"
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Dos puntos arrastrables en una recta numérica, cada uno una fracción, con su suma en vivo mostrada como una tercera barra",
+          "aTooltip": "A = {value} = {decimal}",
+          "bTooltip": "B = {value} = {decimal}",
+          "sumTooltip": "{a} + {b} = {sum} = {decimal}",
+          "hint": "Arrastra cualquiera de los puntos sobre su línea — ambas fracciones y su suma abajo se actualizan en vivo."
+        },
         "intro": {
           "title": "Cómo Funcionan las Fracciones",
           "paragraph1": "Una fracción representa una parte de un todo, escrita como un número entero (el numerador) sobre otro (el denominador), separados por una línea horizontal. El numerador indica cuántas partes iguales se toman; el denominador indica en cuántas partes iguales se dividió el todo. Una fracción es propia cuando su valor es menor que 1 (el numerador es menor que el denominador, como en 3/4), impropia cuando su valor es 1 o más (el numerador es igual o mayor que el denominador, como en 7/4), y un número mixto expresa una fracción impropia como un número entero más una fracción propia, como en 1 3/4.",
-          "diagram": {
-            "caption": "3/8 — tres de ocho partes iguales están sombreadas."
-          },
           "paragraph2": "Las cuatro operaciones se comportan de forma distinta. La suma y la resta requieren primero un denominador común, porque solo pueden combinarse directamente partes del mismo tamaño — esta herramienta convierte ambas fracciones al mínimo común denominador antes de combinar sus numeradores. La multiplicación nunca necesita un denominador común: basta con multiplicar los dos numeradores entre sí y los dos denominadores entre sí. La división funciona multiplicando por el recíproco de la segunda fracción — invirtiendo su numerador y denominador —, lo cual equivale matemáticamente a dividir directamente. Cada resultado se reduce automáticamente a su forma más simple dividiendo el numerador y el denominador entre su máximo común divisor (MCD).",
           "paragraph3": "Mantener un cálculo en fracciones exactas, en lugar de convertirlo pronto a decimal, evita los errores de redondeo que se acumulan a partir de decimales periódicos — 1/3 es exactamente 1/3, pero 0.333 no es exactamente un tercio. Esta distinción importa al escalar recetas, en medidas de construcción y en cualquier reparto de partes o cantidades cuyas piezas deban sumar exactamente el todo, no de forma aproximada.",
           "numberLineGauge": {
@@ -5868,7 +5872,195 @@
         "operations": {
           "title": "Ver las operaciones en sí",
           "addIntro": "Sumar o restar fracciones con distinto denominador requiere primero reescribirlas con un denominador común — así es exactamente para 1/2 + 1/3:",
-          "multiplyIntro": "Multiplicar fracciones tiene una representación visual clara: el \"modelo de área\" de abajo muestra 2/3 × 3/4 como regiones sombreadas superpuestas de una cuadrícula."
+          "multiplyIntro": "Multiplicar fracciones tiene una representación visual clara: el \"modelo de área\" de abajo muestra 2/3 × 3/4 como regiones sombreadas superpuestas de una cuadrícula.",
+          "subtractIntro": "La resta sigue el mismo camino de reescalar y combinar que la suma, solo que los numeradores se restan en vez de sumarse — así se ve exactamente para 3/4 − 1/6:",
+          "divideIntro": "Dividir entre una fracción tiene un atajo memorable: \"mantener, cambiar, voltear\" — mantener la primera fracción, cambiar la división por multiplicación, y voltear (tomar el recíproco de) la segunda fracción.",
+          "scaleIntro": "Multiplicar una fracción por un número entero —escalar una medida— es en realidad solo multiplicar por ese número entero escrito como fracción sobre 1."
+        },
+        "simplifyCompare": {
+          "title": "Simplificar, comparar y fracciones equivalentes",
+          "intro": "El mismo valor se puede escribir de infinitas maneras — estos cinco indicadores muestran cómo hallar la forma más simple, comparar fracciones con distinto denominador y generar fracciones equivalentes a propósito."
+        },
+        "addition": {
+          "title": "Cómo funciona realmente la suma",
+          "intro": "Tres estaciones reales: las fracciones originales, ambas reescritas sobre su mínimo común denominador, y luego combinadas — para 1/2 + 1/3.",
+          "steps": {
+            "original": "Original",
+            "rescaled": "Reescalado",
+            "combined": "Combinado"
+          },
+          "resultBadge": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "lcd": "mcd",
+            "why": "Por qué este mcd",
+            "result": "Resultado final"
+          }
+        },
+        "subtraction": {
+          "title": "Cómo funciona realmente la resta",
+          "intro": "Las mismas tres estaciones que la suma, en reversa para 3/4 − 1/6 — nota que el mcd (12) es mayor que cualquiera de los denominadores originales.",
+          "steps": {
+            "original": "Original",
+            "rescaled": "Reescalado",
+            "combined": "Combinado"
+          },
+          "resultBadge": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "lcd": "mcd",
+            "why": "Por qué este mcd",
+            "result": "Resultado final"
+          }
+        },
+        "multiplication": {
+          "title": "El modelo de área para la multiplicación",
+          "intro": "{a} × {b}, mostrado como una cuadrícula: el numerador de {a} sombrea columnas, el numerador de {b} sombrea filas, y la superposición es el producto real.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "a": "Fracción A",
+            "b": "Fracción B",
+            "numerator": "Nuevo numerador",
+            "denominator": "Nuevo denominador",
+            "result": "Resultado",
+            "simplifyNote": "Simplificado de {raw}"
+          }
+        },
+        "division": {
+          "title": "Mantener, cambiar, voltear",
+          "intro": "La regla real de tres pasos que sigue la división de esta calculadora — para 1/2 ÷ 1/4, el recíproco de la segunda fracción convierte el problema en una multiplicación ordinaria.",
+          "keepLabel": "Problema original",
+          "flipLabel": "Recíproco sustituido",
+          "resultLabel": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "reciprocal": "Recíproco de B",
+            "multiply": "Multiplicar en cruz",
+            "result": "Resultado"
+          }
+        },
+        "simplification": {
+          "title": "Reducir una fracción a su mínima expresión",
+          "intro": "8/12 no está en su forma más simple — hallar el máximo común divisor de ambos números la reduce en una sola división.",
+          "steps": {
+            "start": "Inicio",
+            "gcd": "Máximo común divisor",
+            "divide": "Dividir ambos entre él"
+          },
+          "resultBadge": "Forma más simple",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "original": "Original",
+            "divisor": "Divisor",
+            "simplified": "Simplificado",
+            "note": "Ningún número mayor divide a ambos exactamente"
+          }
+        },
+        "decimalPercent": {
+          "title": "Un valor, tres notaciones",
+          "intro": "5/8 escrito como fracción, decimal y porcentaje — el mismo número real cada vez, solo reexpresado.",
+          "fractionLabel": "Fracción",
+          "decimalLabel": "Decimal",
+          "percentLabel": "Porcentaje",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "divide": "Fracción → decimal",
+            "multiply": "Decimal → porcentaje"
+          }
+        },
+        "mixedNumber": {
+          "title": "De fracción impropia a número mixto",
+          "intro": "17/5 es impropia (su valor es mayor que 1) — convertirla en número mixto facilita imaginar su tamaño de un vistazo.",
+          "improperLabel": "Fracción impropia",
+          "divideLabel": "Dividir con resto",
+          "mixedLabel": "Número mixto",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "wholePart": "Parte entera",
+            "remainder": "Resto",
+            "result": "Número mixto"
+          }
+        },
+        "comparison": {
+          "title": "Comparar fracciones con distinto denominador",
+          "intro": "1/2, 2/3, 3/8 y 5/6 no se pueden comparar solo por sus numeradores — solo sus valores decimales reales revelan el orden verdadero.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "largestNote": "La mayor de las cuatro"
+          }
+        },
+        "unitFractions": {
+          "title": "Fracciones unitarias y sus decimales",
+          "intro": "1/n para n de 2 a 10 — algunas terminan limpiamente, otras se repiten para siempre, según los factores primos del denominador.",
+          "tagTerminating": "Termina",
+          "tagRepeating": "Se repite",
+          "columnFraction": "Fracción",
+          "columnDecimal": "Decimal"
+        },
+        "benchmark": {
+          "title": "Dónde se ubica una fracción frente a referencias comunes",
+          "intro": "{value} comparada con las cinco fracciones de referencia contra las que la mayoría estima: 0, 1/4, 1/2, 3/4 y 1.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "value": "Valor",
+            "nearest": "Referencia más cercana"
+          }
+        },
+        "reciprocal": {
+          "title": "Una fracción y su recíproco",
+          "intro": "{value} invertida — intercambiar numerador y denominador siempre produce un valor al lado opuesto de 1, y ambos multiplicados dan siempre exactamente 1.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "original": "Original",
+            "reciprocal": "Recíproco",
+            "product": "Producto",
+            "note": "Siempre cierto para cualquier fracción y su recíproco"
+          }
+        },
+        "operationFlow": {
+          "title": "Escalar una fracción por un número entero",
+          "intro": "2/5 triplicada — un número entero es en realidad ese número escrito como fracción sobre 1, pasando por la misma regla de multiplicación que cualquier otra fracción.",
+          "startLabel": "Inicio",
+          "scaleLabel": "Factor de escala",
+          "resultLabel": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "improper": "Fracción impropia",
+            "mixed": "Como número mixto"
+          }
+        },
+        "lcd": {
+          "title": "De dónde viene el mínimo común denominador",
+          "intro": "Los denominadores {a} y {b} no comparten un múltiplo común hasta buscar su mcm — así de grande termina siendo ese mcd.",
+          "denA": "Denominador A",
+          "denB": "Denominador B",
+          "lcdLabel": "mcd",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "product": "Producto de ambos",
+            "gcd": "Su MCD",
+            "lcd": "mcd (producto ÷ MCD)"
+          }
+        },
+        "equivalentChain": {
+          "title": "Generar fracciones equivalentes a propósito",
+          "intro": "Cinco fracciones de apariencia distinta, todas exactamente iguales a {value} — cada una construida multiplicando numerador y denominador por el mismo número real.",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "segmentedBar": {
+          "title": "Cómo se ve una fracción",
+          "intro": "{value} — un entero dividido en 8 segmentos iguales, con 7 de ellos rellenos, dejando un hueco real y visible.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "filled": "Segmentos rellenos",
+            "total": "Segmentos totales",
+            "leftover": "Sobrante",
+            "leftoverNote": "La parte sin sombrear",
+            "decimal": "Como decimal"
+          }
         }
       },
       "scenarios": {

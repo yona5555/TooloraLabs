@@ -5721,12 +5721,16 @@
         "decimalLabel": "Dezimaläquivalent"
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Zwei ziehbare Punkte auf einer Zahlengeraden, je ein Bruch, mit ihrer Live-Summe als dritter Balken",
+          "aTooltip": "A = {value} = {decimal}",
+          "bTooltip": "B = {value} = {decimal}",
+          "sumTooltip": "{a} + {b} = {sum} = {decimal}",
+          "hint": "Ziehen Sie einen der Punkte entlang seiner Linie — beide Brüche und ihre Summe unten aktualisieren sich live."
+        },
         "intro": {
           "title": "Brüche verstehen",
           "paragraph1": "Ein Bruch stellt einen Teil eines Ganzen dar und wird als eine ganze Zahl (der Zähler) über einer anderen (dem Nenner) geschrieben, getrennt durch einen waagerechten Strich. Der Zähler gibt an, wie viele gleich große Teile genommen werden; der Nenner gibt an, in wie viele gleich große Teile das Ganze geteilt wurde. Ein Bruch heißt echt, wenn sein Wert kleiner als 1 ist (der Zähler ist kleiner als der Nenner, wie bei 3/4), unecht, wenn sein Wert 1 oder größer ist (der Zähler ist gleich groß wie der Nenner oder größer, wie bei 7/4), und eine gemischte Zahl schreibt einen unechten Bruch als ganze Zahl plus echten Bruch, wie bei 1 3/4.",
-          "diagram": {
-            "caption": "3/8 — drei von acht gleich großen Teilen sind markiert."
-          },
           "paragraph2": "Die vier Rechenarten verhalten sich unterschiedlich. Addition und Subtraktion benötigen zunächst einen gemeinsamen Nenner, da nur gleich große Teile direkt zusammengefasst werden können — dieses Tool wandelt beide Brüche zunächst in den kleinsten gemeinsamen Nenner um, bevor ihre Zähler zusammengeführt werden. Die Multiplikation benötigt niemals einen gemeinsamen Nenner: Es genügt, die beiden Zähler miteinander und die beiden Nenner miteinander zu multiplizieren. Die Division funktioniert, indem stattdessen mit dem Kehrwert des zweiten Bruchs multipliziert wird — also mit vertauschtem Zähler und Nenner —, was mathematisch der direkten Division entspricht. Jedes Ergebnis wird anschließend automatisch auf seine einfachste Form gekürzt, indem Zähler und Nenner durch ihren größten gemeinsamen Teiler (ggT) geteilt werden.",
           "paragraph3": "Eine Berechnung in exakten Brüchen zu belassen, statt sie frühzeitig in eine Dezimalzahl umzuwandeln, vermeidet die Rundungsfehler, die sich aus periodischen Dezimalzahlen aufbauen — 1/3 ist exakt 1/3, aber 0,333 ist nicht exakt ein Drittel. Dieser Unterschied ist bei der Skalierung von Rezepten, bei Baumessungen und bei jeder Aufteilung von Anteilen oder Mengen wichtig, deren Teile sich exakt und nicht nur näherungsweise wieder zum Ganzen zusammenfügen müssen.",
           "numberLineGauge": {
@@ -5868,7 +5872,195 @@
         "operations": {
           "title": "Die Operationen selbst sehen",
           "addIntro": "Das Addieren oder Subtrahieren von Brüchen mit unterschiedlichen Nennern erfordert zunächst, sie auf einen gemeinsamen Nenner zu bringen — so sieht das genau für 1/2 + 1/3 aus:",
-          "multiplyIntro": "Das Multiplizieren von Brüchen hat eine anschauliche Darstellung: Das „Flächenmodell“ unten zeigt 2/3 × 3/4 als überlappende schattierte Bereiche eines Rasters."
+          "multiplyIntro": "Das Multiplizieren von Brüchen hat eine anschauliche Darstellung: Das „Flächenmodell“ unten zeigt 2/3 × 3/4 als überlappende schattierte Bereiche eines Rasters.",
+          "subtractIntro": "Die Subtraktion folgt demselben Weg aus Neuskalierung und Kombination wie die Addition, nur werden die Zähler subtrahiert statt addiert — so sieht das für 3/4 − 1/6 genau aus:",
+          "divideIntro": "Die Division durch einen Bruch hat eine einprägsame Abkürzung: \"behalten, ändern, kehren\" — den ersten Bruch behalten, Division in Multiplikation ändern, und den zweiten Bruch umkehren (seinen Kehrwert bilden).",
+          "scaleIntro": "Einen Bruch mit einer ganzen Zahl zu multiplizieren — eine Messung hochzuskalieren — ist eigentlich nur eine Multiplikation mit dieser ganzen Zahl, geschrieben als Bruch über 1."
+        },
+        "simplifyCompare": {
+          "title": "Kürzen, Vergleichen und äquivalente Brüche",
+          "intro": "Derselbe Wert lässt sich auf unendlich viele Arten schreiben — diese fünf Indikatoren zeigen, wie man die einfachste Form findet, Brüche mit unterschiedlichen Nennern vergleicht und absichtlich äquivalente Brüche erzeugt."
+        },
+        "addition": {
+          "title": "Wie die Addition wirklich funktioniert",
+          "intro": "Drei echte Stationen: die ursprünglichen Brüche, beide auf ihren kleinsten gemeinsamen Nenner umgeschrieben, dann kombiniert — für 1/2 + 1/3.",
+          "steps": {
+            "original": "Original",
+            "rescaled": "Umskaliert",
+            "combined": "Kombiniert"
+          },
+          "resultBadge": "Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "lcd": "kgV",
+            "why": "Warum dieser kgV",
+            "result": "Endergebnis"
+          }
+        },
+        "subtraction": {
+          "title": "Wie die Subtraktion wirklich funktioniert",
+          "intro": "Dieselben drei Stationen wie bei der Addition, umgekehrt für 3/4 − 1/6 — beachten Sie, dass der kgV (12) größer ist als jeder der ursprünglichen Nenner.",
+          "steps": {
+            "original": "Original",
+            "rescaled": "Umskaliert",
+            "combined": "Kombiniert"
+          },
+          "resultBadge": "Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "lcd": "kgV",
+            "why": "Warum dieser kgV",
+            "result": "Endergebnis"
+          }
+        },
+        "multiplication": {
+          "title": "Das Flächenmodell für die Multiplikation",
+          "intro": "{a} × {b}, als Gitter dargestellt: der Zähler von {a} schattiert Spalten, der Zähler von {b} schattiert Zeilen, und die Überlappung ist das tatsächliche Produkt.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "a": "Bruch A",
+            "b": "Bruch B",
+            "numerator": "Neuer Zähler",
+            "denominator": "Neuer Nenner",
+            "result": "Ergebnis",
+            "simplifyNote": "Gekürzt von {raw}"
+          }
+        },
+        "division": {
+          "title": "Behalten, ändern, kehren",
+          "intro": "Die tatsächliche dreistufige Regel, der die Division dieses Rechners folgt — für 1/2 ÷ 1/4 verwandelt der Kehrwert des zweiten Bruchs die Aufgabe in eine gewöhnliche Multiplikation.",
+          "keepLabel": "Ursprüngliche Aufgabe",
+          "flipLabel": "Kehrwert eingesetzt",
+          "resultLabel": "Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "reciprocal": "Kehrwert von B",
+            "multiply": "Direkt kreuzweise multiplizieren",
+            "result": "Ergebnis"
+          }
+        },
+        "simplification": {
+          "title": "Einen Bruch auf die niedrigsten Terme kürzen",
+          "intro": "8/12 ist nicht in seiner einfachsten Form — den größten gemeinsamen Teiler beider Zahlen zu finden, kürzt ihn in einer einzigen Division.",
+          "steps": {
+            "start": "Start",
+            "gcd": "Größter gemeinsamer Teiler",
+            "divide": "Beide dadurch teilen"
+          },
+          "resultBadge": "Einfachste Form",
+          "worked": {
+            "title": "Musterbeispiel",
+            "original": "Original",
+            "divisor": "Teiler",
+            "simplified": "Gekürzt",
+            "note": "Keine größere Zahl teilt beide restlos"
+          }
+        },
+        "decimalPercent": {
+          "title": "Ein Wert, drei Schreibweisen",
+          "intro": "5/8, geschrieben als Bruch, Dezimalzahl und Prozentsatz — jedes Mal dieselbe reale Zahl, nur anders ausgedrückt.",
+          "fractionLabel": "Bruch",
+          "decimalLabel": "Dezimalzahl",
+          "percentLabel": "Prozent",
+          "worked": {
+            "title": "Musterbeispiel",
+            "divide": "Bruch → Dezimalzahl",
+            "multiply": "Dezimalzahl → Prozent"
+          }
+        },
+        "mixedNumber": {
+          "title": "Unechter Bruch zu gemischter Zahl",
+          "intro": "17/5 ist unecht (sein Wert ist größer als 1) — die Umwandlung in eine gemischte Zahl macht seine Größe auf einen Blick leichter vorstellbar.",
+          "improperLabel": "Unechter Bruch",
+          "divideLabel": "Division mit Rest",
+          "mixedLabel": "Gemischte Zahl",
+          "worked": {
+            "title": "Musterbeispiel",
+            "wholePart": "Ganzzahliger Teil",
+            "remainder": "Rest",
+            "result": "Gemischte Zahl"
+          }
+        },
+        "comparison": {
+          "title": "Brüche mit unterschiedlichen Nennern vergleichen",
+          "intro": "1/2, 2/3, 3/8 und 5/6 lassen sich nicht allein anhand ihrer Zähler vergleichen — nur ihre tatsächlichen Dezimalwerte zeigen die wahre Reihenfolge.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "largestNote": "Größter der vier"
+          }
+        },
+        "unitFractions": {
+          "title": "Stammbrüche und ihre Dezimalwerte",
+          "intro": "1/n für n von 2 bis 10 — manche enden sauber, andere wiederholen sich unendlich, ganz abhängig von den Primfaktoren des Nenners.",
+          "tagTerminating": "Endet",
+          "tagRepeating": "Wiederholt sich",
+          "columnFraction": "Bruch",
+          "columnDecimal": "Dezimalzahl"
+        },
+        "benchmark": {
+          "title": "Wo ein Bruch im Vergleich zu gängigen Referenzwerten liegt",
+          "intro": "{value} verglichen mit den fünf Referenzbrüchen, an denen sich die meisten Menschen orientieren: 0, 1/4, 1/2, 3/4 und 1.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "value": "Wert",
+            "nearest": "Nächster Referenzwert"
+          }
+        },
+        "reciprocal": {
+          "title": "Ein Bruch und sein Kehrwert",
+          "intro": "{value} umgekehrt — das Vertauschen von Zähler und Nenner erzeugt immer einen Wert auf der gegenüberliegenden Seite von 1, und die beiden ergeben multipliziert immer genau 1.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "original": "Original",
+            "reciprocal": "Kehrwert",
+            "product": "Produkt",
+            "note": "Gilt immer für jeden Bruch und seinen Kehrwert"
+          }
+        },
+        "operationFlow": {
+          "title": "Einen Bruch mit einer ganzen Zahl skalieren",
+          "intro": "2/5 verdreifacht — eine ganze Zahl ist eigentlich nur diese Zahl, geschrieben als Bruch über 1, die durch dieselbe Multiplikationsregel wie jeder andere Bruch läuft.",
+          "startLabel": "Start",
+          "scaleLabel": "Skalierungsfaktor",
+          "resultLabel": "Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "improper": "Unechter Bruch",
+            "mixed": "Als gemischte Zahl"
+          }
+        },
+        "lcd": {
+          "title": "Woher der kleinste gemeinsame Nenner kommt",
+          "intro": "Die Nenner {a} und {b} teilen sich kein gemeinsames Vielfaches, bis man nach ihrem kgV sucht — so groß wird dieser kgV am Ende genau.",
+          "denA": "Nenner A",
+          "denB": "Nenner B",
+          "lcdLabel": "kgV",
+          "worked": {
+            "title": "Musterbeispiel",
+            "product": "Produkt beider",
+            "gcd": "Ihr ggT",
+            "lcd": "kgV (Produkt ÷ ggT)"
+          }
+        },
+        "equivalentChain": {
+          "title": "Absichtlich äquivalente Brüche erzeugen",
+          "intro": "Fünf unterschiedlich aussehende Brüche, alle exakt gleich {value} — jeder erzeugt, indem Zähler und Nenner mit derselben reellen Zahl multipliziert werden.",
+          "worked": {
+            "title": "Musterbeispiel"
+          }
+        },
+        "segmentedBar": {
+          "title": "Wie ein Bruch aussieht",
+          "intro": "{value} — ein Ganzes, aufgeteilt in 8 gleiche Segmente, wovon 7 gefüllt sind — eine echte, sichtbare Lücke bleibt übrig.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "filled": "Gefüllte Segmente",
+            "total": "Segmente insgesamt",
+            "leftover": "Übrig",
+            "leftoverNote": "Der nicht schattierte Teil",
+            "decimal": "Als Dezimalzahl"
+          }
         }
       },
       "scenarios": {

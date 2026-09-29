@@ -4,11 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import FractionBarDiagram from "./FractionBarDiagram";
-import FractionPieDiagram from "./FractionPieDiagram";
-import FractionNumberLineGauge from "./FractionNumberLineGauge";
-import FractionAdditionDiagram from "./FractionAdditionDiagram";
-import FractionMultiplicationGridDiagram from "./FractionMultiplicationGridDiagram";
+import FractionNumberLineDrag from "./FractionNumberLineDrag";
+import FractionSegmentedBarDiagram from "./FractionSegmentedBarDiagram";
+import FractionAdditionMechanicsDiagram from "./FractionAdditionMechanicsDiagram";
+import FractionSubtractionMechanicsDiagram from "./FractionSubtractionMechanicsDiagram";
+import FractionMultiplicationAreaDiagram from "./FractionMultiplicationAreaDiagram";
+import FractionDivisionFlipDiagram from "./FractionDivisionFlipDiagram";
+import FractionOperationFlowDiagram from "./FractionOperationFlowDiagram";
+import FractionSimplificationSteps from "./FractionSimplificationSteps";
+import FractionLCDBarChart from "./FractionLCDBarChart";
+import FractionComparisonBarList from "./FractionComparisonBarList";
+import FractionBenchmarkZoneStrip from "./FractionBenchmarkZoneStrip";
+import FractionEquivalentChainDiagram from "./FractionEquivalentChainDiagram";
+import FractionDecimalPercentChain from "./FractionDecimalPercentChain";
+import FractionMixedNumberConversion from "./FractionMixedNumberConversion";
+import FractionUnitFractionsTable from "./FractionUnitFractionsTable";
+import FractionReciprocalBalance from "./FractionReciprocalBalance";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -21,21 +32,38 @@ export default async function FractionEducation() {
 
   return (
     <EncyclopediaPaper>
-      <FractionNumberLineGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <FractionBarDiagram numerator={3} denominator={8} caption={t("intro.diagram.caption")} />
+        <FractionNumberLineDrag />
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
-        <FractionPieDiagram />
+        <FractionSegmentedBarDiagram />
       </InfoSection>
 
       <InfoSection title={t("operations.title")}>
         <p>{t("operations.addIntro")}</p>
-        <FractionAdditionDiagram />
+        <FractionAdditionMechanicsDiagram />
+        <p>{t("operations.subtractIntro")}</p>
+        <FractionSubtractionMechanicsDiagram />
         <p>{t("operations.multiplyIntro")}</p>
-        <FractionMultiplicationGridDiagram />
+        <FractionMultiplicationAreaDiagram />
+        <p>{t("operations.divideIntro")}</p>
+        <FractionDivisionFlipDiagram />
+        <p>{t("operations.scaleIntro")}</p>
+        <FractionOperationFlowDiagram />
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <InfoSection title={t("simplifyCompare.title")}>
+        <p>{t("simplifyCompare.intro")}</p>
+        <div className="space-y-6">
+          <FractionSimplificationSteps />
+          <FractionLCDBarChart />
+          <FractionComparisonBarList />
+          <FractionBenchmarkZoneStrip />
+          <FractionEquivalentChainDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -58,9 +86,13 @@ export default async function FractionEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <FractionDecimalPercentChain />
+          <FractionMixedNumberConversion />
+          <FractionUnitFractionsTable />
+          <FractionReciprocalBalance />
+        </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />

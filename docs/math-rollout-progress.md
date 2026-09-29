@@ -10,6 +10,15 @@ Shared infrastructure built once, reused by every tool below (not duplicated per
 - `apps/web/lib/use-dark-mode.ts` — dark-mode detection hook
 - `apps/web/components/tool-ui/mafsTheme.css` — generic Mafs canvas theme fix (`.mafs-canvas` scope)
 - `apps/web/components/tool-ui/MafsHoverPrimitives.tsx` — generic hover-tooltip primitives for Mafs children
+- `apps/web/components/tool-ui/WorkedExampleNote.tsx`, `apps/web/components/tool-ui/EduBarChart.tsx` — generic worked-example note / bar chart
+
+**Standing rule (clarified 2026-09-30, applies to tool 2 onward):** any indicator a tool already
+has, if reused verbatim during its rollout pass, must still be rebuilt to the same depth bar as a
+brand-new one — a real worked example, real computed numbers, genuine dynamism where the tool's
+nature allows it. Never keep a shallow pre-existing diagram just because deleting it is more work;
+delete it and build its replacement fresh. (Applied starting with fraction-calculator, whose 5 old
+static diagrams were deleted and rebuilt; scientific-calculator's `OrderOfOperationsDiagram.tsx`
+predates this clarification and is flagged here as a candidate for a follow-up pass if revisited.)
 
 ## Status legend
 - `not started`
@@ -20,8 +29,8 @@ Shared infrastructure built once, reused by every tool below (not duplicated per
 
 | # | Slug | Status | Commit |
 |---|---|---|---|
-| 1 | scientific-calculator | done | (pending push) |
-| 2 | fraction-calculator | not started | |
+| 1 | scientific-calculator | done | e0854da |
+| 2 | fraction-calculator | done | (pending push) |
 | 3 | scientific-notation-converter | not started | |
 | 4 | significant-figures-calculator | not started | |
 | 5 | statistics-calculator | not started | |

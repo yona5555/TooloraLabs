@@ -5721,12 +5721,16 @@
         "decimalLabel": "Decimal Equivalent"
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Two draggable points on a number line, each a fraction, with their live sum shown as a third bar",
+          "aTooltip": "A = {value} = {decimal}",
+          "bTooltip": "B = {value} = {decimal}",
+          "sumTooltip": "{a} + {b} = {sum} = {decimal}",
+          "hint": "Drag either point along its line — both fractions and their sum below update live."
+        },
         "intro": {
           "title": "Understanding Fractions",
           "paragraph1": "A fraction represents a part of a whole, written as one integer (the numerator) over another (the denominator) and separated by a horizontal bar. The numerator counts how many equal parts are taken; the denominator states how many equal parts the whole was divided into. A fraction is proper when its value is less than 1 (the numerator is smaller than the denominator, as in 3/4), improper when its value is 1 or more (the numerator is equal to or larger than the denominator, as in 7/4), and a mixed number writes an improper fraction as a whole number plus a proper fraction, as in 1 3/4.",
-          "diagram": {
-            "caption": "3/8 — three of eight equal parts are shaded."
-          },
           "paragraph2": "The four operations behave differently. Addition and subtraction require a common denominator first, because only equally-sized parts can be combined directly — this tool converts both fractions to the least common denominator before combining their numerators. Multiplication never needs a common denominator: it simply multiplies the two numerators together and the two denominators together. Division works by multiplying by the reciprocal of the second fraction instead — flipping its numerator and denominator — which is mathematically equivalent to dividing directly. Every result is then automatically reduced to its simplest form by dividing both the numerator and denominator by their greatest common divisor (GCD).",
           "paragraph3": "Keeping a calculation in exact fractions rather than converting early to a decimal avoids the rounding errors that build up from repeating decimals — 1/3 is exactly 1/3, but 0.333 is not exactly one third. This distinction matters in recipe scaling, construction measurements, and any split of shares or quantities where the parts must add back up to the whole exactly, not approximately.",
           "numberLineGauge": {
@@ -5868,7 +5872,195 @@
         "operations": {
           "title": "Seeing the Operations Themselves",
           "addIntro": "Adding or subtracting fractions with different denominators first requires rewriting them over a shared denominator — here's exactly how that looks for 1/2 + 1/3:",
-          "multiplyIntro": "Multiplying fractions has a clean visual: the \"area model\" below shows 2/3 × 3/4 as overlapping shaded regions of a grid."
+          "multiplyIntro": "Multiplying fractions has a clean visual: the \"area model\" below shows 2/3 × 3/4 as overlapping shaded regions of a grid.",
+          "subtractIntro": "Subtraction follows the identical rescale-then-combine path as addition, just with the numerators subtracted instead of added — here's exactly how that looks for 3/4 − 1/6:",
+          "divideIntro": "Dividing by a fraction has a memorable shortcut: \"keep, change, flip\" — keep the first fraction, change division to multiplication, and flip (take the reciprocal of) the second fraction.",
+          "scaleIntro": "Multiplying a fraction by a whole number — scaling a measurement up — is really just multiplying by that whole number written as a fraction over 1."
+        },
+        "simplifyCompare": {
+          "title": "Simplifying, Comparing, and Equivalent Fractions",
+          "intro": "The same value can be written infinitely many ways — these five indicators show how to find the simplest form, compare fractions with different denominators, and generate equivalent fractions on purpose."
+        },
+        "addition": {
+          "title": "How Addition Actually Works",
+          "intro": "Three real stations: the original fractions, both rewritten over their least common denominator, then combined — for 1/2 + 1/3.",
+          "steps": {
+            "original": "Original",
+            "rescaled": "Rescaled",
+            "combined": "Combined"
+          },
+          "resultBadge": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "lcd": "LCD",
+            "why": "Why this LCD",
+            "result": "Final result"
+          }
+        },
+        "subtraction": {
+          "title": "How Subtraction Actually Works",
+          "intro": "The same three stations as addition, run in reverse for 3/4 − 1/6 — notice the LCD (12) is larger than either original denominator.",
+          "steps": {
+            "original": "Original",
+            "rescaled": "Rescaled",
+            "combined": "Combined"
+          },
+          "resultBadge": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "lcd": "LCD",
+            "why": "Why this LCD",
+            "result": "Final result"
+          }
+        },
+        "multiplication": {
+          "title": "The Area Model for Multiplication",
+          "intro": "{a} × {b}, shown as a grid: {a}'s numerator shades columns, {b}'s numerator shades rows, and the overlap is the real product.",
+          "worked": {
+            "title": "Worked Example",
+            "a": "Fraction A",
+            "b": "Fraction B",
+            "numerator": "New numerator",
+            "denominator": "New denominator",
+            "result": "Result",
+            "simplifyNote": "Simplified down from {raw}"
+          }
+        },
+        "division": {
+          "title": "Keep, Change, Flip",
+          "intro": "The actual three-step rule this tool's division follows — for 1/2 ÷ 1/4, the second fraction's reciprocal turns the problem into an ordinary multiplication.",
+          "keepLabel": "Original problem",
+          "flipLabel": "Reciprocal substituted",
+          "resultLabel": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "reciprocal": "Reciprocal of B",
+            "multiply": "Multiply straight across",
+            "result": "Result"
+          }
+        },
+        "simplification": {
+          "title": "Reducing a Fraction to Lowest Terms",
+          "intro": "8/12 isn't in its simplest form — finding the greatest common divisor of both numbers reduces it in a single division.",
+          "steps": {
+            "start": "Start",
+            "gcd": "Greatest common divisor",
+            "divide": "Divide both by it"
+          },
+          "resultBadge": "Simplest form",
+          "worked": {
+            "title": "Worked Example",
+            "original": "Original",
+            "divisor": "Divisor",
+            "simplified": "Simplified",
+            "note": "No number bigger than this divides both evenly"
+          }
+        },
+        "decimalPercent": {
+          "title": "One Value, Three Notations",
+          "intro": "5/8 written as a fraction, a decimal, and a percentage — the same real number every time, just re-expressed.",
+          "fractionLabel": "Fraction",
+          "decimalLabel": "Decimal",
+          "percentLabel": "Percent",
+          "worked": {
+            "title": "Worked Example",
+            "divide": "Fraction → decimal",
+            "multiply": "Decimal → percent"
+          }
+        },
+        "mixedNumber": {
+          "title": "Improper Fraction to Mixed Number",
+          "intro": "17/5 is improper (its value is more than 1) — converting it to a mixed number makes its size easier to picture at a glance.",
+          "improperLabel": "Improper fraction",
+          "divideLabel": "Divide with remainder",
+          "mixedLabel": "Mixed number",
+          "worked": {
+            "title": "Worked Example",
+            "wholePart": "Whole part",
+            "remainder": "Remainder",
+            "result": "Mixed number"
+          }
+        },
+        "comparison": {
+          "title": "Comparing Fractions with Different Denominators",
+          "intro": "1/2, 2/3, 3/8, and 5/6 can't be compared from their numerators alone — only their actual decimal values reveal the real order.",
+          "worked": {
+            "title": "Worked Example",
+            "largestNote": "Largest of the four"
+          }
+        },
+        "unitFractions": {
+          "title": "Unit Fractions and Their Decimals",
+          "intro": "1/n for n from 2 to 10 — some terminate cleanly, others repeat forever, depending entirely on the denominator's prime factors.",
+          "tagTerminating": "Terminates",
+          "tagRepeating": "Repeats",
+          "columnFraction": "Fraction",
+          "columnDecimal": "Decimal"
+        },
+        "benchmark": {
+          "title": "Where a Fraction Sits Against Common Benchmarks",
+          "intro": "{value} compared against the five benchmark fractions most people estimate against: 0, 1/4, 1/2, 3/4, and 1.",
+          "worked": {
+            "title": "Worked Example",
+            "value": "Value",
+            "nearest": "Nearest benchmark"
+          }
+        },
+        "reciprocal": {
+          "title": "A Fraction and Its Reciprocal",
+          "intro": "{value} flipped — swapping numerator and denominator always produces a value on the opposite side of 1, and the two always multiply to exactly 1.",
+          "worked": {
+            "title": "Worked Example",
+            "original": "Original",
+            "reciprocal": "Reciprocal",
+            "product": "Product",
+            "note": "Always true for any fraction and its reciprocal"
+          }
+        },
+        "operationFlow": {
+          "title": "Scaling a Fraction by a Whole Number",
+          "intro": "2/5 tripled — a whole number is really just that number written as a fraction over 1, flowing through the same multiply rule as any other fraction.",
+          "startLabel": "Start",
+          "scaleLabel": "Scale factor",
+          "resultLabel": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "improper": "Improper fraction",
+            "mixed": "As a mixed number"
+          }
+        },
+        "lcd": {
+          "title": "Where the Least Common Denominator Comes From",
+          "intro": "Denominators {a} and {b} don't share a common multiple until you go looking for their LCM — here's exactly how big that LCD ends up being.",
+          "denA": "Denominator A",
+          "denB": "Denominator B",
+          "lcdLabel": "LCD",
+          "worked": {
+            "title": "Worked Example",
+            "product": "Product of both",
+            "gcd": "Their GCD",
+            "lcd": "LCD (product ÷ GCD)"
+          }
+        },
+        "equivalentChain": {
+          "title": "Generating Equivalent Fractions on Purpose",
+          "intro": "Five different-looking fractions, all exactly equal to {value} — each one built by multiplying both the numerator and denominator by the same real number.",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "segmentedBar": {
+          "title": "What a Fraction Looks Like",
+          "intro": "{value} — a whole split into 8 equal segments, with 7 of them filled in, leaving one real, visible gap.",
+          "worked": {
+            "title": "Worked Example",
+            "filled": "Filled segments",
+            "total": "Total segments",
+            "leftover": "Left over",
+            "leftoverNote": "The part not shaded",
+            "decimal": "As a decimal"
+          }
         }
       },
       "scenarios": {
