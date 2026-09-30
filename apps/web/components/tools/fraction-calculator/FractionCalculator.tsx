@@ -12,6 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import FractionInputPanel from "./FractionInputPanel";
 import FractionResult from "./FractionResult";
 import FractionQuickReference from "./FractionQuickReference";
+import { FractionLiveProvider } from "./FractionLiveContext";
 import type { FractionOperation, FractionScenario } from "./types";
 
 const tool = new FractionCalculatorTool();
@@ -79,8 +80,24 @@ export default function FractionCalculator({ education }: { education: ReactNode
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
+  const liveDims = {
+    operation,
+    numeratorA: parseLocalizedNumber(numeratorA) || 0,
+    denominatorA: parseLocalizedNumber(denominatorA) || 0,
+    numeratorB: parseLocalizedNumber(numeratorB) || 0,
+    denominatorB: parseLocalizedNumber(denominatorB) || 0,
+  };
+
+  function setLiveDim<K extends keyof typeof liveDims>(key: K, value: (typeof liveDims)[K]) {
+    if (key === "operation") setOperation(value as FractionOperation);
+    else if (key === "numeratorA") setNumeratorA(String(value));
+    else if (key === "denominatorA") setDenominatorA(String(value));
+    else if (key === "numeratorB") setNumeratorB(String(value));
+    else if (key === "denominatorB") setDenominatorB(String(value));
+  }
+
   return (
-    <>
+    <FractionLiveProvider value={{ dims: liveDims, setDim: setLiveDim }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -116,6 +133,6 @@ export default function FractionCalculator({ education }: { education: ReactNode
       </div>
 
       {education}
-    </>
+    </FractionLiveProvider>
   );
 }

@@ -1,33 +1,35 @@
 "use client";
+import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useFractionLive } from "./FractionLiveContext";
 
-const N = 1;
-const D = 2;
-const MULTIPLIERS = [1, 2, 3, 4, 5];
+const MULTIPLIERS = [2, 3, 4];
 
-/** Type #13 (Stepped Diagram): five equivalent fractions to 1/2, each built by multiplying both numerator and denominator by the same real factor — every step is a genuinely different fraction that still equals exactly 0.5. */
+/** Type #11-style equivalence chain: the live fraction A, scaled up by 2, 3, and 4 — the same real value every time, proof that multiplying the numerator and denominator by the same number never changes what a fraction represents. */
 export default function FractionEquivalentChainDiagram() {
   const t = useTranslations("tools.fraction-calculator.education.equivalentChain");
+  const { dims } = useFractionLive();
+  if (dims.denominatorA === 0) return null;
+
+  const chain = [1, ...MULTIPLIERS].map((m) => ({ numerator: dims.numeratorA * m, denominator: dims.denominatorA * m }));
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: `${N}/${D}` })}</p>
-      <div dir="ltr" className="mt-5 flex flex-wrap items-end gap-3">
-        {MULTIPLIERS.map((m, i) => (
-          <div key={m} className="flex flex-col items-center gap-1.5" style={{ marginTop: `${(MULTIPLIERS.length - 1 - i) * 6}px` }}>
-            <div className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
-              <p className="font-mono text-sm font-bold text-blue-700 dark:text-blue-300">{`${N * m}/${D * m}`}</p>
-            </div>
-            <p className="text-[11px] text-zinc-400">{`×${m}`}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
+      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-2 font-mono text-base">
+        {chain.map((f, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className={i === 0 ? "font-bold text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}>{`${f.numerator}/${f.denominator}`}</span>
+            {i < chain.length - 1 && <ArrowRight className="text-zinc-300 dark:text-zinc-600" size={16} />}
           </div>
         ))}
       </div>
-      <div className="mt-5">
+      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
-          rows={MULTIPLIERS.map((m) => ({ label: `×${m}`, value: `${N * m}/${D * m} = ${(N * m) / (D * m)}`, emphasize: m === 1 }))}
+          rows={chain.map((f, i) => ({ label: i === 0 ? t("worked.original") : t("worked.timesN", { n: MULTIPLIERS[i - 1] }), value: `${f.numerator}/${f.denominator}`, emphasize: i === 0 }))}
         />
       </div>
     </SectionCard>

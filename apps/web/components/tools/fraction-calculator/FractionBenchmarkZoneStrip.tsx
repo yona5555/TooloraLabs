@@ -2,39 +2,57 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useFractionLive } from "./FractionLiveContext";
 
-const NUM = 5;
-const DEN = 8;
-const BENCHMARKS = [0, 0.25, 0.5, 0.75, 1];
+function round3(n: number): number {
+  return Math.round(n * 1000) / 1000;
+}
 
-/** Type #19 (Zone Strip): where 5/8 actually sits among the five benchmark fractions (0, 1/4, 1/2, 3/4, 1) most people estimate against — a real position, not a guess. */
+function clampPct(decimal: number): number {
+  return Math.min(100, Math.max(0, decimal * 100));
+}
+
+function benchmarkLabel(decimal: number, t: (key: string) => string): string {
+  if (decimal <= 0) return t("zones.atZero");
+  if (decimal < 0.5) return t("zones.belowHalf");
+  if (Math.abs(decimal - 0.5) < 0.01) return t("zones.atHalf");
+  if (decimal < 1) return t("zones.aboveHalf");
+  return t("zones.atOrAboveOne");
+}
+
+/** Type #19 (Zone Strip): where the live A and B fractions actually sit relative to the classic 0, ½, 1 benchmarks used to estimate fraction size at a glance. */
 export default function FractionBenchmarkZoneStrip() {
-  const t = useTranslations("tools.fraction-calculator.education.benchmark");
-  const value = NUM / DEN;
-  const pct = value * 100;
-  const nearest = BENCHMARKS.reduce((closest, b) => (Math.abs(b - value) < Math.abs(closest - value) ? b : closest));
+  const t = useTranslations("tools.fraction-calculator.education.benchmarkZone");
+  const { dims } = useFractionLive();
+  if (dims.denominatorA === 0 || dims.denominatorB === 0) return null;
+
+  const decA = dims.numeratorA / dims.denominatorA;
+  const decB = dims.numeratorB / dims.denominatorB;
+  const pctA = clampPct(decA);
+  const pctB = clampPct(decB);
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: `${NUM}/${DEN}` })}</p>
-      <div dir="ltr" className="mt-5">
-        <div className="relative h-8 overflow-hidden rounded-full bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 dark:from-blue-500/10 dark:via-blue-500/30 dark:to-blue-500/60">
-          <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-zinc-900 shadow dark:border-zinc-900 dark:bg-white" style={{ left: `${pct}%` }} />
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
+      <div dir="ltr" className="mt-6 w-full">
+        <div className="relative h-3 w-full overflow-hidden rounded-full">
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-amber-300/70 dark:bg-amber-500/50" />
+          <div className="absolute inset-y-0 left-1/2 w-1/2 bg-emerald-300/70 dark:bg-emerald-500/50" />
+          <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-blue-700 transition-all duration-300 dark:bg-blue-300" style={{ left: `calc(${pctA}% - 3px)` }} />
+          <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-rose-700 transition-all duration-300 dark:bg-rose-300" style={{ left: `calc(${pctB}% - 3px)` }} />
         </div>
-        <div className="relative mt-1.5 h-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-          {BENCHMARKS.map((b) => (
-            <span key={b} className="absolute -translate-x-1/2" style={{ left: `${b * 100}%` }}>
-              {b === 0 ? "0" : b === 1 ? "1" : b === 0.5 ? "1/2" : b === 0.25 ? "1/4" : "3/4"}
-            </span>
-          ))}
+        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <span>0</span>
+          <span>½</span>
+          <span>1</span>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: t("worked.value"), value: `${NUM}/${DEN} = ${value}` },
-            { label: t("worked.nearest"), value: nearest === 0.5 ? "1/2" : nearest === 0.25 ? "1/4" : nearest === 0.75 ? "3/4" : `${nearest}`, emphasize: true },
+            { label: `A = ${dims.numeratorA}/${dims.denominatorA}`, value: benchmarkLabel(decA, t) },
+            { label: `B = ${dims.numeratorB}/${dims.denominatorB}`, value: benchmarkLabel(decB, t), note: `${round3(decA)} vs ${round3(decB)}` },
           ]}
         />
       </div>

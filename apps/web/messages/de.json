@@ -5722,13 +5722,6 @@
         "decimalLabel": "Dezimaläquivalent"
       },
       "education": {
-        "hero": {
-          "ariaLabel": "Zwei ziehbare Punkte auf einer Zahlengeraden, je ein Bruch, mit ihrer Live-Summe als dritter Balken",
-          "aTooltip": "A = {value} = {decimal}",
-          "bTooltip": "B = {value} = {decimal}",
-          "sumTooltip": "{a} + {b} = {sum} = {decimal}",
-          "hint": "Ziehen Sie einen der Punkte entlang seiner Linie — beide Brüche und ihre Summe unten aktualisieren sich live."
-        },
         "intro": {
           "title": "Brüche verstehen",
           "paragraph1": "Ein Bruch stellt einen Teil eines Ganzen dar und wird als eine ganze Zahl (der Zähler) über einer anderen (dem Nenner) geschrieben, getrennt durch einen waagerechten Strich. Der Zähler gibt an, wie viele gleich große Teile genommen werden; der Nenner gibt an, in wie viele gleich große Teile das Ganze geteilt wurde. Ein Bruch heißt echt, wenn sein Wert kleiner als 1 ist (der Zähler ist kleiner als der Nenner, wie bei 3/4), unecht, wenn sein Wert 1 oder größer ist (der Zähler ist gleich groß wie der Nenner oder größer, wie bei 7/4), und eine gemischte Zahl schreibt einen unechten Bruch als ganze Zahl plus echten Bruch, wie bei 1 3/4.",
@@ -5882,185 +5875,174 @@
           "title": "Kürzen, Vergleichen und äquivalente Brüche",
           "intro": "Derselbe Wert lässt sich auf unendlich viele Arten schreiben — diese fünf Indikatoren zeigen, wie man die einfachste Form findet, Brüche mit unterschiedlichen Nennern vergleicht und absichtlich äquivalente Brüche erzeugt."
         },
-        "addition": {
-          "title": "Wie die Addition wirklich funktioniert",
-          "intro": "Drei echte Stationen: die ursprünglichen Brüche, beide auf ihren kleinsten gemeinsamen Nenner umgeschrieben, dann kombiniert — für 1/2 + 1/3.",
-          "steps": {
-            "original": "Original",
-            "rescaled": "Umskaliert",
-            "combined": "Kombiniert"
-          },
-          "resultBadge": "Ergebnis",
-          "worked": {
-            "title": "Musterbeispiel",
-            "lcd": "kgV",
-            "why": "Warum dieser kgV",
-            "result": "Endergebnis"
-          }
+        "hero": {
+          "ariaLabel": "Zwei ziehbare Bruchpunkte auf einer gemeinsamen Zahlengeraden, mit einem dritten Marker für das live Ergebnis der jeweils gewählten Operation",
+          "pointTooltip": "{label} = {value}",
+          "hint": "Ziehen Sie einen der Punkte — das ändert live den Zähler dieses Bruchs, und jede Anzeige auf dieser Seite aktualisiert sich mit."
         },
-        "subtraction": {
-          "title": "Wie die Subtraktion wirklich funktioniert",
-          "intro": "Dieselben drei Stationen wie bei der Addition, umgekehrt für 3/4 − 1/6 — beachten Sie, dass der kgV (12) größer ist als jeder der ursprünglichen Nenner.",
-          "steps": {
-            "original": "Original",
-            "rescaled": "Umskaliert",
-            "combined": "Kombiniert"
-          },
-          "resultBadge": "Ergebnis",
+        "additionMechanics": {
+          "title": "Wie Addition wirklich funktioniert",
+          "intro": "Die live Brüche A und B, umgeschrieben auf ihren echten gemeinsamen Nenner, dann addiert — hier immer Addition, unabhängig davon, welche Operation oben ausgewählt ist.",
           "worked": {
-            "title": "Musterbeispiel",
-            "lcd": "kgV",
-            "why": "Warum dieser kgV",
-            "result": "Endergebnis"
-          }
-        },
-        "multiplication": {
-          "title": "Das Flächenmodell für die Multiplikation",
-          "intro": "{a} × {b}, als Gitter dargestellt: der Zähler von {a} schattiert Spalten, der Zähler von {b} schattiert Zeilen, und die Überlappung ist das tatsächliche Produkt.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "a": "Bruch A",
-            "b": "Bruch B",
-            "numerator": "Neuer Zähler",
-            "denominator": "Neuer Nenner",
-            "result": "Ergebnis",
-            "simplifyNote": "Gekürzt von {raw}"
-          }
-        },
-        "division": {
-          "title": "Behalten, ändern, kehren",
-          "intro": "Die tatsächliche dreistufige Regel, der die Division dieses Rechners folgt — für 1/2 ÷ 1/4 verwandelt der Kehrwert des zweiten Bruchs die Aufgabe in eine gewöhnliche Multiplikation.",
-          "keepLabel": "Ursprüngliche Aufgabe",
-          "flipLabel": "Kehrwert eingesetzt",
-          "resultLabel": "Ergebnis",
-          "worked": {
-            "title": "Musterbeispiel",
-            "reciprocal": "Kehrwert von B",
-            "multiply": "Direkt kreuzweise multiplizieren",
+            "title": "Rechenbeispiel",
+            "commonDenominator": "Gemeinsamer Nenner",
+            "scaledA": "A umskaliert",
+            "scaledB": "B umskaliert",
             "result": "Ergebnis"
           }
         },
-        "simplification": {
-          "title": "Einen Bruch auf die niedrigsten Terme kürzen",
-          "intro": "8/12 ist nicht in seiner einfachsten Form — den größten gemeinsamen Teiler beider Zahlen zu finden, kürzt ihn in einer einzigen Division.",
-          "steps": {
-            "start": "Start",
-            "gcd": "Größter gemeinsamer Teiler",
-            "divide": "Beide dadurch teilen"
-          },
-          "resultBadge": "Einfachste Form",
+        "subtractionMechanics": {
+          "title": "Wie Subtraktion wirklich funktioniert",
+          "intro": "Dieselbe Mechanik des gemeinsamen Nenners wie bei der Addition, nur werden die umskalierten Zähler subtrahiert.",
           "worked": {
-            "title": "Musterbeispiel",
-            "original": "Original",
-            "divisor": "Teiler",
-            "simplified": "Gekürzt",
-            "note": "Keine größere Zahl teilt beide restlos"
+            "title": "Rechenbeispiel",
+            "commonDenominator": "Gemeinsamer Nenner",
+            "scaledA": "A umskaliert",
+            "scaledB": "B umskaliert",
+            "result": "Ergebnis"
           }
         },
-        "decimalPercent": {
-          "title": "Ein Wert, drei Schreibweisen",
-          "intro": "5/8, geschrieben als Bruch, Dezimalzahl und Prozentsatz — jedes Mal dieselbe reale Zahl, nur anders ausgedrückt.",
-          "fractionLabel": "Bruch",
-          "decimalLabel": "Dezimalzahl",
-          "percentLabel": "Prozent",
+        "multiplicationArea": {
+          "title": "Multiplikation als echtes Flächenmodell",
+          "intro": "Ein live Raster — nennerA mal nennerB Zellen, mit zählerA mal zählerB davon schattiert — ist genau das, was die Multiplikation zweier Brüche bedeutet.",
+          "gridTooLarge": "Zu viele Zellen, um sie in dieser Größe zu zeichnen — die Zahlen unten sind trotzdem exakt.",
           "worked": {
-            "title": "Musterbeispiel",
-            "divide": "Bruch → Dezimalzahl",
-            "multiply": "Dezimalzahl → Prozent"
+            "title": "Rechenbeispiel",
+            "formula": "Formel",
+            "numerators": "Zähler multiplizieren sich",
+            "denominators": "Nenner multiplizieren sich",
+            "result": "Ergebnis"
           }
         },
-        "mixedNumber": {
-          "title": "Unechter Bruch zu gemischter Zahl",
-          "intro": "17/5 ist unecht (sein Wert ist größer als 1) — die Umwandlung in eine gemischte Zahl macht seine Größe auf einen Blick leichter vorstellbar.",
-          "improperLabel": "Unechter Bruch",
-          "divideLabel": "Division mit Rest",
-          "mixedLabel": "Gemischte Zahl",
+        "divisionFlip": {
+          "title": "Division ist eigentlich Multiplikation mit dem Kehrwert",
+          "intro": "Die Division durch den live Bruch B ist mathematisch identisch mit der Multiplikation mit dem Kehrwert von B — sehen Sie, wie sich die Aufgabe live verwandelt.",
           "worked": {
-            "title": "Musterbeispiel",
-            "wholePart": "Ganzzahliger Teil",
-            "remainder": "Rest",
-            "result": "Gemischte Zahl"
-          }
-        },
-        "comparison": {
-          "title": "Brüche mit unterschiedlichen Nennern vergleichen",
-          "intro": "1/2, 2/3, 3/8 und 5/6 lassen sich nicht allein anhand ihrer Zähler vergleichen — nur ihre tatsächlichen Dezimalwerte zeigen die wahre Reihenfolge.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "largestNote": "Größter der vier"
-          }
-        },
-        "unitFractions": {
-          "title": "Stammbrüche und ihre Dezimalwerte",
-          "intro": "1/n für n von 2 bis 10 — manche enden sauber, andere wiederholen sich unendlich, ganz abhängig von den Primfaktoren des Nenners.",
-          "tagTerminating": "Endet",
-          "tagRepeating": "Wiederholt sich",
-          "columnFraction": "Bruch",
-          "columnDecimal": "Dezimalzahl"
-        },
-        "benchmark": {
-          "title": "Wo ein Bruch im Vergleich zu gängigen Referenzwerten liegt",
-          "intro": "{value} verglichen mit den fünf Referenzbrüchen, an denen sich die meisten Menschen orientieren: 0, 1/4, 1/2, 3/4 und 1.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "value": "Wert",
-            "nearest": "Nächster Referenzwert"
-          }
-        },
-        "reciprocal": {
-          "title": "Ein Bruch und sein Kehrwert",
-          "intro": "{value} umgekehrt — das Vertauschen von Zähler und Nenner erzeugt immer einen Wert auf der gegenüberliegenden Seite von 1, und die beiden ergeben multipliziert immer genau 1.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "original": "Original",
-            "reciprocal": "Kehrwert",
-            "product": "Produkt",
-            "note": "Gilt immer für jeden Bruch und seinen Kehrwert"
+            "title": "Rechenbeispiel",
+            "reciprocal": "Kehrwert von B",
+            "result": "Ergebnis"
           }
         },
         "operationFlow": {
-          "title": "Einen Bruch mit einer ganzen Zahl skalieren",
-          "intro": "2/5 verdreifacht — eine ganze Zahl ist eigentlich nur diese Zahl, geschrieben als Bruch über 1, die durch dieselbe Multiplikationsregel wie jeder andere Bruch läuft.",
-          "startLabel": "Start",
-          "scaleLabel": "Skalierungsfaktor",
-          "resultLabel": "Ergebnis",
+          "title": "Welche Operation auch immer gerade ausgewählt ist",
+          "intro": "Im Moment ist das {operation} — die einzige Anzeige auf dieser Seite, deren eigene Form sich mit der Operationsauswahl ändert, nicht nur mit A und B.",
+          "opNames": {
+            "add": "Addition",
+            "subtract": "Subtraktion",
+            "multiply": "Multiplikation",
+            "divide": "Division"
+          },
           "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "improper": "Unechter Bruch",
-            "mixed": "Als gemischte Zahl"
+            "title": "Rechenbeispiel",
+            "operation": "Operation",
+            "decimal": "Als Dezimalzahl",
+            "result": "Ergebnis"
           }
         },
-        "lcd": {
-          "title": "Woher der kleinste gemeinsame Nenner kommt",
-          "intro": "Die Nenner {a} und {b} teilen sich kein gemeinsames Vielfaches, bis man nach ihrem kgV sucht — so groß wird dieser kgV am Ende genau.",
-          "denA": "Nenner A",
-          "denB": "Nenner B",
+        "simplificationSteps": {
+          "title": "Das live Ergebnis vereinfachen",
+          "intro": "Der rohe Bruch, den die ausgewählte Operation tatsächlich vor der Kürzung erzeugt, dann der echte ggT-Schritt hinunter zu seiner einfachsten Form.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "raw": "Roher Bruch",
+            "gcd": "Größter gemeinsamer Teiler",
+            "result": "Vereinfachtes Ergebnis",
+            "alreadySimplified": "Bereits in einfachster Form — ggT ist 1"
+          }
+        },
+        "lcdChart": {
+          "title": "Kleinster gemeinsamer Nenner im Vergleich",
+          "intro": "Die live Nenner von A und B, verglichen mit ihrem echten kleinsten gemeinsamen Nenner.",
+          "denomALabel": "Nenner von A",
+          "denomBLabel": "Nenner von B",
           "lcdLabel": "kgV",
           "worked": {
-            "title": "Musterbeispiel",
-            "product": "Produkt beider",
-            "gcd": "Ihr ggT",
-            "lcd": "kgV (Produkt ÷ ggT)"
+            "title": "Rechenbeispiel",
+            "gcdOfDenoms": "ggT der beiden Nenner",
+            "lcd": "Kleinster gemeinsamer Nenner",
+            "rescaledA": "A umskaliert auf das kgV",
+            "rescaledB": "B umskaliert auf das kgV"
+          }
+        },
+        "comparison": {
+          "title": "Welcher Bruch ist tatsächlich größer",
+          "intro": "A und B nach ihrem echten Dezimalwert gereiht — die Zähler allein verraten es nicht, da sich die Nenner unterscheiden.",
+          "worked": {
+            "title": "Rechenbeispiel"
+          }
+        },
+        "benchmarkZone": {
+          "title": "Wo A und B im Verhältnis zu 0, ½ und 1 liegen",
+          "intro": "Die klassischen Referenzwerte, um die Größe eines Bruchs auf einen Blick abzuschätzen — live für sowohl A als auch B.",
+          "zones": {
+            "atZero": "Bei oder unter null",
+            "belowHalf": "Unter einem Halb",
+            "atHalf": "Bei genau einem Halb",
+            "aboveHalf": "Über einem Halb, unter eins",
+            "atOrAboveOne": "Bei oder über eins"
+          },
+          "worked": {
+            "title": "Rechenbeispiel"
           }
         },
         "equivalentChain": {
           "title": "Absichtlich äquivalente Brüche erzeugen",
-          "intro": "Fünf unterschiedlich aussehende Brüche, alle exakt gleich {value} — jeder erzeugt, indem Zähler und Nenner mit derselben reellen Zahl multipliziert werden.",
+          "intro": "Der live Bruch A, hochskaliert um 2, 3 und 4 — jedes Mal derselbe echte Wert, da die Multiplikation von Zähler und Nenner mit derselben Zahl nie ändert, was ein Bruch darstellt.",
           "worked": {
-            "title": "Musterbeispiel"
+            "title": "Rechenbeispiel",
+            "original": "Original",
+            "timesN": "× {n}"
+          }
+        },
+        "decimalPercent": {
+          "title": "Ein Wert, drei Schreibweisen",
+          "intro": "Der live Bruch A, geschrieben als Bruch, Dezimalzahl und Prozentsatz — jedes Mal dieselbe echte Zahl, nur anders ausgedrückt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "decimal": "Dezimalzahl",
+            "percent": "Prozent"
+          }
+        },
+        "mixedNumber": {
+          "title": "Unechter Bruch zu gemischter Zahl",
+          "intro": "Das live Ergebnis, in eine gemischte Zahl umgewandelt, wenn es tatsächlich unecht ist — sonst tatsächlich abwesend, nie erzwungen.",
+          "isWholeOnly": "Das Ergebnis ist genau {value}, eine ganze Zahl — es bleibt kein Bruchteil zum Umwandeln übrig.",
+          "properAlready": "{value} ist bereits ein echter Bruch — nichts umzuwandeln.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "improper": "Unechter Bruch",
+            "mixed": "Gemischte Zahl"
+          }
+        },
+        "unitFractions": {
+          "title": "Jedes Vielfache von 1/{denom}",
+          "intro": "Jedes Vielfache des live Stammbruchs 1/{denom}, bis zum Ganzen — hervorgehoben ist das, welches dem Zähler von A selbst entspricht.",
+          "columnFraction": "Bruch",
+          "columnDecimal": "Dezimalzahl",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "unitFraction": "Stammbruch",
+            "currentA": "A gerade jetzt"
+          },
+          "columnMatch": "Stimmt mit A überein?",
+          "matchMarker": "← A ist hier"
+        },
+        "reciprocalBalance": {
+          "title": "Ein Bruch und sein Kehrwert",
+          "intro": "Der live Bruch B und sein Kehrwert — die Multiplikation eines beliebigen von null verschiedenen Bruchs mit seinem eigenen Kehrwert ergibt immer genau 1.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "product": "B × (1/B)",
+            "alwaysOne": "Immer genau 1 — die Identität, auf der die Division beruht"
           }
         },
         "segmentedBar": {
-          "title": "Wie ein Bruch aussieht",
-          "intro": "{value} — ein Ganzes, aufgeteilt in 8 gleiche Segmente, wovon 7 gefüllt sind — eine echte, sichtbare Lücke bleibt übrig.",
+          "title": "Wie ein Bruch tatsächlich aussieht",
+          "intro": "Der live Bruch A, gezeichnet als echte gefüllte Segmente aus seinem eigenen Nenner.",
           "worked": {
-            "title": "Musterbeispiel",
+            "title": "Rechenbeispiel",
             "filled": "Gefüllte Segmente",
-            "total": "Segmente insgesamt",
-            "leftover": "Übrig",
-            "leftoverNote": "Der nicht schattierte Teil",
-            "decimal": "Als Dezimalzahl"
+            "fraction": "Bruch"
           }
         }
       },

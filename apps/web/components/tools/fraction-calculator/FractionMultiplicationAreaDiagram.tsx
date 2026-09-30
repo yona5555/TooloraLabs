@@ -1,77 +1,50 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { FractionCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { FractionCalculator } from "@tooloralabs/tools";
+import { useFractionLive } from "./FractionLiveContext";
 
 const tool = new FractionCalculator();
-const A = { n: 2, d: 3 };
-const B = { n: 3, d: 4 };
-const CELL = 24;
-const GAP = 2;
+const MAX_GRID_CELLS = 144;
 
-/** Area model: a denominatorA x denominatorB grid where numeratorA columns and numeratorB rows are shaded — the overlap cell count is exactly the product's numerator, and the grid's total cell count is the product's denominator. This is literally the arithmetic this tool's multiply operation performs, made visible. */
+/** Type #18 (Formula Diagram): multiplying the live A and B fractions as a real area model — a denominatorA × denominatorB grid with numeratorA × numeratorB cells shaded, live as either fraction changes. */
 export default function FractionMultiplicationAreaDiagram() {
-  const t = useTranslations("tools.fraction-calculator.education.multiplication");
-  const output = tool.execute({ operation: "multiply", numeratorA: A.n, denominatorA: A.d, numeratorB: B.n, denominatorB: B.d }, { locale: "en-US" });
-  if (!output.success) return null;
+  const t = useTranslations("tools.fraction-calculator.education.multiplicationArea");
+  const { dims } = useFractionLive();
+  const output = tool.execute({ operation: "multiply", numeratorA: dims.numeratorA, denominatorA: dims.denominatorA, numeratorB: dims.numeratorB, denominatorB: dims.denominatorB }, { locale: "en-US" });
+  if (!output.success || output.data.error) return null;
   const { result } = output.data;
-  const rawNumerator = A.n * B.n;
-  const rawDenominator = A.d * B.d;
-  const wasSimplified = rawDenominator !== result.denominator;
 
-  const cols = A.d;
-  const rows = B.d;
-  const width = cols * CELL + (cols - 1) * GAP;
-  const height = rows * CELL + (rows - 1) * GAP;
+  const dA = Math.abs(Math.round(dims.denominatorA));
+  const dB = Math.abs(Math.round(dims.denominatorB));
+  const nA = Math.abs(Math.round(dims.numeratorA));
+  const nB = Math.abs(Math.round(dims.numeratorB));
+  const canRenderGrid = dA > 0 && dB > 0 && dA * dB <= MAX_GRID_CELLS;
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { a: `${A.n}/${A.d}`, b: `${B.n}/${B.d}` })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={t("title")} className="block">
-            {Array.from({ length: rows }).map((_, r) =>
-              Array.from({ length: cols }).map((_, c) => {
-                const shadedCol = c < A.n;
-                const shadedRow = r < B.n;
-                const both = shadedCol && shadedRow;
-                const x = c * (CELL + GAP);
-                const y = r * (CELL + GAP);
-                return (
-                  <rect
-                    key={`${r}-${c}`}
-                    x={x}
-                    y={y}
-                    width={CELL}
-                    height={CELL}
-                    rx={3}
-                    className={
-                      both
-                        ? "fill-blue-600 dark:fill-blue-400"
-                        : shadedCol || shadedRow
-                          ? "fill-blue-200 dark:fill-blue-500/30"
-                          : "fill-zinc-100 dark:fill-zinc-800"
-                    }
-                  />
-                );
-              }),
-            )}
-          </svg>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
+      {canRenderGrid ? (
+        <div dir="ltr" className="mx-auto mt-4 grid w-fit gap-px rounded bg-zinc-200 p-px dark:bg-zinc-700" style={{ gridTemplateColumns: `repeat(${dB}, 18px)` }}>
+          {Array.from({ length: dA * dB }).map((_, i) => {
+            const row = Math.floor(i / dB);
+            const col = i % dB;
+            const shaded = row < nA && col < nB;
+            return <div key={i} className={`h-[18px] w-[18px] ${shaded ? "bg-blue-600/70 dark:bg-blue-400/70" : "bg-white dark:bg-zinc-900"}`} />;
+          })}
         </div>
+      ) : (
+        <p className="mt-4 text-center text-xs text-zinc-400 dark:text-zinc-500">{t("gridTooLarge")}</p>
+      )}
+      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: t("worked.a"), value: `${A.n}/${A.d}` },
-            { label: t("worked.b"), value: `${B.n}/${B.d}` },
-            { label: t("worked.numerator"), value: `${A.n} × ${B.n} = ${A.n * B.n}` },
-            { label: t("worked.denominator"), value: `${A.d} × ${B.d} = ${A.d * B.d}` },
-            {
-              label: t("worked.result"),
-              value: `${result.numerator}/${result.denominator}`,
-              emphasize: true,
-              note: wasSimplified ? t("worked.simplifyNote", { raw: `${rawNumerator}/${rawDenominator}` }) : undefined,
-            },
+            { label: t("worked.formula"), value: `${dims.numeratorA}/${dims.denominatorA} × ${dims.numeratorB}/${dims.denominatorB}` },
+            { label: t("worked.numerators"), value: `${dims.numeratorA} × ${dims.numeratorB} = ${dims.numeratorA * dims.numeratorB}` },
+            { label: t("worked.denominators"), value: `${dims.denominatorA} × ${dims.denominatorB} = ${dims.denominatorA * dims.denominatorB}` },
+            { label: t("worked.result"), value: `${result.numerator}/${result.denominator}`, emphasize: true },
           ]}
         />
       </div>

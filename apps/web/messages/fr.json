@@ -5722,13 +5722,6 @@
         "decimalLabel": "Équivalent décimal"
       },
       "education": {
-        "hero": {
-          "ariaLabel": "Deux points déplaçables sur une droite numérique, chacun une fraction, avec leur somme en direct affichée comme une troisième barre",
-          "aTooltip": "A = {value} = {decimal}",
-          "bTooltip": "B = {value} = {decimal}",
-          "sumTooltip": "{a} + {b} = {sum} = {decimal}",
-          "hint": "Faites glisser l'un ou l'autre point sur sa ligne — les deux fractions et leur somme ci-dessous se mettent à jour en direct."
-        },
         "intro": {
           "title": "Comprendre les Fractions",
           "paragraph1": "Une fraction représente une partie d'un tout, écrite sous la forme d'un entier (le numérateur) au-dessus d'un autre (le dénominateur), séparés par une barre horizontale. Le numérateur indique combien de parts égales sont prises ; le dénominateur indique en combien de parts égales le tout a été divisé. Une fraction est propre lorsque sa valeur est inférieure à 1 (le numérateur est plus petit que le dénominateur, comme dans 3/4), impropre lorsque sa valeur est égale ou supérieure à 1 (le numérateur est égal ou supérieur au dénominateur, comme dans 7/4), et un nombre fractionnaire écrit une fraction impropre sous la forme d'un entier plus une fraction propre, comme dans 1 3/4.",
@@ -5882,185 +5875,174 @@
           "title": "Simplifier, comparer et fractions équivalentes",
           "intro": "La même valeur peut s'écrire d'une infinité de façons — ces cinq indicateurs montrent comment trouver la forme la plus simple, comparer des fractions à dénominateurs différents et générer des fractions équivalentes exprès."
         },
-        "addition": {
-          "title": "Comment fonctionne réellement l'addition",
-          "intro": "Trois vraies étapes : les fractions d'origine, toutes deux réécrites sur leur plus petit dénominateur commun, puis combinées — pour 1/2 + 1/3.",
-          "steps": {
-            "original": "Original",
-            "rescaled": "Remis à l'échelle",
-            "combined": "Combiné"
-          },
-          "resultBadge": "Résultat",
-          "worked": {
-            "title": "Exemple résolu",
-            "lcd": "PPCM",
-            "why": "Pourquoi ce PPCM",
-            "result": "Résultat final"
-          }
+        "hero": {
+          "ariaLabel": "Deux points de fraction déplaçables sur une droite numérique partagée, avec un troisième marqueur montrant le résultat en direct de l'opération sélectionnée",
+          "pointTooltip": "{label} = {value}",
+          "hint": "Faites glisser l'un des points — cela change en direct le numérateur de cette fraction, et chaque indicateur de cette page se met à jour avec lui."
         },
-        "subtraction": {
-          "title": "Comment fonctionne réellement la soustraction",
-          "intro": "Les mêmes trois étapes que l'addition, à l'envers pour 3/4 − 1/6 — remarquez que le PPCM (12) est plus grand que chacun des dénominateurs d'origine.",
-          "steps": {
-            "original": "Original",
-            "rescaled": "Remis à l'échelle",
-            "combined": "Combiné"
-          },
-          "resultBadge": "Résultat",
+        "additionMechanics": {
+          "title": "Comment l'addition fonctionne vraiment",
+          "intro": "Les fractions en direct A et B, réécrites sur leur véritable dénominateur commun, puis combinées — toujours une addition ici, quelle que soit l'opération sélectionnée ci-dessus.",
           "worked": {
             "title": "Exemple résolu",
-            "lcd": "PPCM",
-            "why": "Pourquoi ce PPCM",
-            "result": "Résultat final"
-          }
-        },
-        "multiplication": {
-          "title": "Le modèle d'aire pour la multiplication",
-          "intro": "{a} × {b}, représenté comme une grille : le numérateur de {a} ombre des colonnes, le numérateur de {b} ombre des lignes, et le chevauchement est le produit réel.",
-          "worked": {
-            "title": "Exemple résolu",
-            "a": "Fraction A",
-            "b": "Fraction B",
-            "numerator": "Nouveau numérateur",
-            "denominator": "Nouveau dénominateur",
-            "result": "Résultat",
-            "simplifyNote": "Simplifié depuis {raw}"
-          }
-        },
-        "division": {
-          "title": "Garder, changer, inverser",
-          "intro": "La véritable règle en trois étapes que suit la division de cet outil — pour 1/2 ÷ 1/4, l'inverse de la seconde fraction transforme le problème en une multiplication ordinaire.",
-          "keepLabel": "Problème d'origine",
-          "flipLabel": "Inverse substitué",
-          "resultLabel": "Résultat",
-          "worked": {
-            "title": "Exemple résolu",
-            "reciprocal": "Inverse de B",
-            "multiply": "Multiplier en croix",
+            "commonDenominator": "Dénominateur commun",
+            "scaledA": "A remise à l'échelle",
+            "scaledB": "B remise à l'échelle",
             "result": "Résultat"
           }
         },
-        "simplification": {
-          "title": "Réduire une fraction à sa forme la plus simple",
-          "intro": "8/12 n'est pas sous sa forme la plus simple — trouver le plus grand diviseur commun des deux nombres la réduit en une seule division.",
-          "steps": {
-            "start": "Départ",
-            "gcd": "Plus grand diviseur commun",
-            "divide": "Diviser les deux par celui-ci"
-          },
-          "resultBadge": "Forme la plus simple",
+        "subtractionMechanics": {
+          "title": "Comment la soustraction fonctionne vraiment",
+          "intro": "Le même mécanisme de dénominateur commun que l'addition, avec les numérateurs remis à l'échelle soustraits à la place.",
           "worked": {
             "title": "Exemple résolu",
-            "original": "Original",
-            "divisor": "Diviseur",
-            "simplified": "Simplifié",
-            "note": "Aucun nombre plus grand ne divise les deux exactement"
+            "commonDenominator": "Dénominateur commun",
+            "scaledA": "A remise à l'échelle",
+            "scaledB": "B remise à l'échelle",
+            "result": "Résultat"
           }
         },
-        "decimalPercent": {
-          "title": "Une valeur, trois notations",
-          "intro": "5/8 écrit comme une fraction, un nombre décimal et un pourcentage — le même nombre réel à chaque fois, simplement réexprimé.",
-          "fractionLabel": "Fraction",
-          "decimalLabel": "Décimal",
-          "percentLabel": "Pourcentage",
-          "worked": {
-            "title": "Exemple résolu",
-            "divide": "Fraction → décimal",
-            "multiply": "Décimal → pourcentage"
-          }
-        },
-        "mixedNumber": {
-          "title": "De fraction impropre à nombre fractionnaire",
-          "intro": "17/5 est impropre (sa valeur dépasse 1) — la convertir en nombre fractionnaire rend sa taille plus facile à imaginer d'un coup d'œil.",
-          "improperLabel": "Fraction impropre",
-          "divideLabel": "Division avec reste",
-          "mixedLabel": "Nombre fractionnaire",
-          "worked": {
-            "title": "Exemple résolu",
-            "wholePart": "Partie entière",
-            "remainder": "Reste",
-            "result": "Nombre fractionnaire"
-          }
-        },
-        "comparison": {
-          "title": "Comparer des fractions à dénominateurs différents",
-          "intro": "1/2, 2/3, 3/8 et 5/6 ne peuvent pas être comparées à partir de leurs seuls numérateurs — seules leurs valeurs décimales réelles révèlent le véritable ordre.",
-          "worked": {
-            "title": "Exemple résolu",
-            "largestNote": "La plus grande des quatre"
-          }
-        },
-        "unitFractions": {
-          "title": "Fractions unitaires et leurs décimales",
-          "intro": "1/n pour n de 2 à 10 — certaines se terminent proprement, d'autres se répètent indéfiniment, selon les facteurs premiers du dénominateur.",
-          "tagTerminating": "Se termine",
-          "tagRepeating": "Se répète",
-          "columnFraction": "Fraction",
-          "columnDecimal": "Décimal"
-        },
-        "benchmark": {
-          "title": "Où se situe une fraction par rapport aux repères courants",
-          "intro": "{value} comparée aux cinq fractions de référence utilisées par la plupart des gens pour estimer : 0, 1/4, 1/2, 3/4 et 1.",
-          "worked": {
-            "title": "Exemple résolu",
-            "value": "Valeur",
-            "nearest": "Repère le plus proche"
-          }
-        },
-        "reciprocal": {
-          "title": "Une fraction et son inverse",
-          "intro": "{value} inversée — échanger numérateur et dénominateur produit toujours une valeur du côté opposé de 1, et les deux multipliés donnent toujours exactement 1.",
-          "worked": {
-            "title": "Exemple résolu",
-            "original": "Original",
-            "reciprocal": "Inverse",
-            "product": "Produit",
-            "note": "Toujours vrai pour toute fraction et son inverse"
-          }
-        },
-        "operationFlow": {
-          "title": "Mettre une fraction à l'échelle par un nombre entier",
-          "intro": "2/5 triplé — un nombre entier n'est en fait que ce nombre écrit comme une fraction sur 1, passant par la même règle de multiplication que toute autre fraction.",
-          "startLabel": "Départ",
-          "scaleLabel": "Facteur d'échelle",
-          "resultLabel": "Résultat",
+        "multiplicationArea": {
+          "title": "La multiplication comme un vrai modèle d'aire",
+          "intro": "Une grille en direct — dénominateurA sur dénominateurB cellules, avec numérateurA sur numérateurB d'entre elles ombrées — c'est exactement ce que signifie multiplier deux fractions.",
+          "gridTooLarge": "Trop de cellules pour être dessinées à cette taille — les chiffres ci-dessous restent exacts.",
           "worked": {
             "title": "Exemple résolu",
             "formula": "Formule",
-            "improper": "Fraction impropre",
-            "mixed": "Comme nombre fractionnaire"
+            "numerators": "Les numérateurs se multiplient",
+            "denominators": "Les dénominateurs se multiplient",
+            "result": "Résultat"
           }
         },
-        "lcd": {
-          "title": "D'où vient le plus petit dénominateur commun",
-          "intro": "Les dénominateurs {a} et {b} ne partagent aucun multiple commun avant de chercher leur PPCM — voici exactement la taille de ce PPCM.",
-          "denA": "Dénominateur A",
-          "denB": "Dénominateur B",
+        "divisionFlip": {
+          "title": "Diviser, c'est en réalité multiplier par un inverse",
+          "intro": "Diviser par la fraction en direct B est mathématiquement identique à multiplier par l'inverse de B — regardez le problème se transformer en direct.",
+          "worked": {
+            "title": "Exemple résolu",
+            "reciprocal": "Inverse de B",
+            "result": "Résultat"
+          }
+        },
+        "operationFlow": {
+          "title": "Quelle que soit l'opération réellement sélectionnée",
+          "intro": "En ce moment, c'est {operation} — le seul indicateur de cette page dont la forme même change avec le sélecteur d'opération, pas seulement avec A et B.",
+          "opNames": {
+            "add": "addition",
+            "subtract": "soustraction",
+            "multiply": "multiplication",
+            "divide": "division"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "operation": "Opération",
+            "decimal": "En décimal",
+            "result": "Résultat"
+          }
+        },
+        "simplificationSteps": {
+          "title": "Simplifier le résultat en direct",
+          "intro": "La fraction brute que l'opération sélectionnée produit réellement avant réduction, puis la véritable étape du PGCD jusqu'à sa forme la plus simple.",
+          "worked": {
+            "title": "Exemple résolu",
+            "raw": "Fraction brute",
+            "gcd": "Plus grand commun diviseur",
+            "result": "Résultat simplifié",
+            "alreadySimplified": "Déjà sous sa forme la plus simple — le PGCD vaut 1"
+          }
+        },
+        "lcdChart": {
+          "title": "Plus petit dénominateur commun, comparé",
+          "intro": "Les dénominateurs en direct de A et B, comparés à leur véritable plus petit dénominateur commun.",
+          "denomALabel": "Dénominateur de A",
+          "denomBLabel": "Dénominateur de B",
           "lcdLabel": "PPCM",
           "worked": {
             "title": "Exemple résolu",
-            "product": "Produit des deux",
-            "gcd": "Leur PGCD",
-            "lcd": "PPCM (produit ÷ PGCD)"
+            "gcdOfDenoms": "PGCD des deux dénominateurs",
+            "lcd": "Plus petit dénominateur commun",
+            "rescaledA": "A remise à l'échelle du PPCM",
+            "rescaledB": "B remise à l'échelle du PPCM"
           }
         },
-        "equivalentChain": {
-          "title": "Générer des fractions équivalentes exprès",
-          "intro": "Cinq fractions d'apparence différente, toutes exactement égales à {value} — chacune construite en multipliant numérateur et dénominateur par le même nombre réel.",
+        "comparison": {
+          "title": "Quelle fraction est réellement la plus grande",
+          "intro": "A et B classées selon leur véritable valeur décimale — les numérateurs seuls ne le révèlent pas, puisque les dénominateurs diffèrent.",
           "worked": {
             "title": "Exemple résolu"
           }
         },
+        "benchmarkZone": {
+          "title": "Où se situent A et B par rapport à 0, ½ et 1",
+          "intro": "Les repères classiques pour estimer la taille d'une fraction d'un coup d'œil — en direct pour A comme pour B.",
+          "zones": {
+            "atZero": "À zéro ou en dessous",
+            "belowHalf": "En dessous d'un demi",
+            "atHalf": "Exactement à un demi",
+            "aboveHalf": "Au-dessus d'un demi, en dessous de un",
+            "atOrAboveOne": "À un ou au-dessus"
+          },
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "equivalentChain": {
+          "title": "Générer des fractions équivalentes exprès",
+          "intro": "La fraction en direct A, mise à l'échelle par 2, 3 et 4 — la même valeur réelle à chaque fois, puisque multiplier le numérateur et le dénominateur par le même nombre ne change jamais ce qu'une fraction représente.",
+          "worked": {
+            "title": "Exemple résolu",
+            "original": "Original",
+            "timesN": "× {n}"
+          }
+        },
+        "decimalPercent": {
+          "title": "Une valeur, trois notations",
+          "intro": "La fraction en direct A, écrite comme une fraction, un décimal et un pourcentage — le même nombre réel à chaque fois, simplement réexprimé.",
+          "worked": {
+            "title": "Exemple résolu",
+            "decimal": "Décimal",
+            "percent": "Pourcentage"
+          }
+        },
+        "mixedNumber": {
+          "title": "Fraction impropre vers nombre fractionnaire",
+          "intro": "Le résultat en direct, converti en nombre fractionnaire quand il est réellement impropre — réellement absent sinon, jamais forcé.",
+          "isWholeOnly": "Le résultat vaut exactement {value}, un nombre entier — il ne reste aucune partie fractionnaire à convertir.",
+          "properAlready": "{value} est déjà une fraction propre — rien à convertir.",
+          "worked": {
+            "title": "Exemple résolu",
+            "improper": "Fraction impropre",
+            "mixed": "Nombre fractionnaire"
+          }
+        },
+        "unitFractions": {
+          "title": "Chaque multiple de 1/{denom}",
+          "intro": "Chaque multiple de la fraction unitaire en direct 1/{denom}, jusqu'à l'entier — en surlignant celui qui correspond au numérateur de A lui-même.",
+          "columnFraction": "Fraction",
+          "columnDecimal": "Décimal",
+          "worked": {
+            "title": "Exemple résolu",
+            "unitFraction": "Fraction unitaire",
+            "currentA": "A en ce moment"
+          },
+          "columnMatch": "Correspond à A ?",
+          "matchMarker": "← A est ici"
+        },
+        "reciprocalBalance": {
+          "title": "Une fraction et son inverse",
+          "intro": "La fraction en direct B et son inverse — multiplier n'importe quelle fraction non nulle par son propre inverse donne toujours exactement 1.",
+          "worked": {
+            "title": "Exemple résolu",
+            "product": "B × (1/B)",
+            "alwaysOne": "Toujours exactement 1 — l'identité dont dépend la division"
+          }
+        },
         "segmentedBar": {
-          "title": "À quoi ressemble une fraction",
-          "intro": "{value} — un tout divisé en 8 segments égaux, dont 7 remplis, laissant un vrai vide visible.",
+          "title": "À quoi ressemble vraiment une fraction",
+          "intro": "La fraction en direct A, dessinée comme de vrais segments remplis issus de son propre dénominateur.",
           "worked": {
             "title": "Exemple résolu",
             "filled": "Segments remplis",
-            "total": "Segments au total",
-            "leftover": "Restant",
-            "leftoverNote": "La partie non ombrée",
-            "decimal": "En décimal"
+            "fraction": "Fraction"
           }
         }
       },

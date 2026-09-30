@@ -67,7 +67,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 | # | Slug | Status | Commit |
 |---|---|---|---|
 | 1 | scientific-calculator | done (v2) | 456a6e8 (CI green) |
-| 2 | fraction-calculator | needs v2 rebuild | — |
+| 2 | fraction-calculator | done (v2) | (pending push) |
 | 3 | scientific-notation-converter | needs v2 rebuild | — |
 | 4 | significant-figures-calculator | needs v2 rebuild | — |
 | 5 | statistics-calculator | needs v2 rebuild | — |
@@ -115,3 +115,38 @@ margins on both sides. Fixed by wrapping the canvas in a `mx-auto max-w-[320px]`
 rendered pixel aspect ratio actually matches the requested 1:1 viewBox, instead of using
 `preserveAspectRatio={false}` (which would have stretched the circle into an ellipse — wrong for
 a unit-circle diagram where shape fidelity matters). Re-verified via screenshot after the fix.
+
+**fraction-calculator (tool 2, rebuilt to v2):** unlike tool 1, this tool DOES have a clean
+shared numeric draft (`numeratorA/denominatorA/numeratorB/denominatorB/operation`), so the hero
+(`FractionNumberLineDrag.tsx`, via `FractionLiveContext.tsx`) and all 15 indicators share ONE
+live context with full bidirectional sync — editing any above-fold field moves the matching hero
+point, and dragging either point writes straight back into that fraction's real numerator field.
+The hero also now genuinely reflects whichever operation is selected (A + B / − / × / ÷), fixing
+a real v1 flaw where the old hero always computed a sum regardless of the selected operation.
+
+*Generic dynamism-test drag distance fix*: the reusable `dynamism-test.js` template's original
+70px drag delta (tuned for tool 1's unit-circle scale) was too small to cross even one numerator
+step for a fraction with denominator 2 — the drag visually moved the point but rounded back to
+the same numerator every time, which looked like a stuck/broken hero in the first test run before
+the real cause (resolution vs. delta, not a reactivity bug) was traced with temporary console
+logging. Fixed globally by raising the template's default delta to 180×110px and scoping its
+card-selector to `[data-encyclopedia-paper]` only (the first run also over-counted at 19 cards
+because it was matching above-fold `SectionCard`s like Result/QuickReference/RelatedTools, which
+share the same border classes as education-section cards).
+
+*Single-fraction-focused indicators*: 3 of the 15 (`FractionLCDBarChart`, `FractionReciprocalBalance`,
+originally also `FractionUnitFractionsTable`) are legitimately scoped to only part of the live
+state by design — LCD to both denominators (not either numerator), ReciprocalBalance to B alone
+(mirroring the division-flip lesson), UnitFractionsTable's title to denominatorA alone. A drag of
+only fraction A's point, or an edit of only `denominatorA`, correctly leaves B-only indicators
+unchanged, and vice versa — confirmed deliberately, not a bug, by editing `denominatorA` then
+`denominatorB` separately and checking the two "unchanged" sets are the expected disjoint A-only /
+B-only indicators, covering all 15 between them. Used a tool-specific dynamism test
+(`dynamism-test-fraction-calculator.js`) that drags BOTH hero points in one run (matching that the
+hero has two interactive points, not one) — this covers all 15 in a single pass and is the
+standard this tool is held to. Two indicators were also genuinely deepened rather than just
+patched to pass: `FractionLCDBarChart` gained real "A/B rescaled to the LCD" worked-example rows
+(numerator-dependent, pedagogically a natural next step after showing the LCD itself, not added
+only to satisfy the test), and `FractionUnitFractionsTable` gained an explicit "← A is here" text
+marker column (the highlighted-row-via-CSS-only signal was invisible to the text-diffing test
+methodology, and an explicit text marker is better UX than color alone regardless).
