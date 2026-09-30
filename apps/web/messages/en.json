@@ -12925,6 +12925,214 @@
           "note": "Archimedes' original proof that a sphere's surface area equals two-thirds that of its circumscribing cylinder — the same relationship this calculator's sphere and cylinder formulas embody.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Read The Works of Archimedes"
+        },
+        "hero": {
+          "lengthLabel": "Length",
+          "heightLabel": "Height",
+          "widthLabel": "Width",
+          "totalLabel": "Total surface area",
+          "ariaLabel": "Interactive net diagram of a rectangular prism — drag the blue point to resize length and height",
+          "faceTooltip": "{face}: {value}",
+          "hint": "Drag the blue point to resize the box. Hover any face to see its own area.",
+          "faces": {
+            "front": "Front",
+            "back": "Back",
+            "top": "Top",
+            "bottom": "Bottom",
+            "left": "Left",
+            "right": "Right"
+          }
+        },
+        "shapeFamily": {
+          "title": "The Six Solids This Calculator Supports",
+          "intro": "Every solid below needs its own combination of dimensions, but each formula follows the same idea: add up the area of every face.",
+          "shapes": {
+            "cube": "Cube",
+            "rectangularPrism": "Rectangular Prism",
+            "sphere": "Sphere",
+            "cylinder": "Cylinder",
+            "cone": "Cone",
+            "squarePyramid": "Square Pyramid"
+          },
+          "dimsTag": "{count} dimension(s)",
+          "columnShape": "Solid",
+          "columnFormula": "Formula"
+        },
+        "basicFormulas": {
+          "title": "Basic Surface Area Formulas",
+          "intro": "The three most common solids, each broken down into the real faces that make up its total surface area."
+        },
+        "moreFormulas": {
+          "title": "More Surface Area Formulas",
+          "intro": "Three more solids that need a derived slant height or a wrap-around lateral surface — plus a look at how a flat net folds into a closed cube."
+        },
+        "cubeFormula": {
+          "title": "Cube: Six Identical Squares",
+          "intro": "A cube's surface area is simply six copies of the same square face.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Surface area"
+          }
+        },
+        "sphereFormula": {
+          "title": "Sphere: Four Times the Great Circle",
+          "intro": "A sphere's surface area is exactly four times the area of its own great circle — a real geometric fact, not an approximation.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "greatCircle": "One great circle",
+            "greatCircleNote": "The circle exactly around the sphere's widest point",
+            "result": "Surface area"
+          }
+        },
+        "cylinderFormula": {
+          "title": "Cylinder: Two Caps Plus a Wrapped Label",
+          "intro": "A cylinder's surface splits into two circular caps and one rectangular label that wraps around it — the label's width is the circle's own circumference, unrolled flat.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "caps": "Both caps",
+            "capsNote": "Two circles, each πr²",
+            "lateral": "Lateral surface",
+            "lateralNote": "The unrolled label, 2πr wide and h tall",
+            "result": "Surface area"
+          }
+        },
+        "coneFormula": {
+          "title": "Cone: Base Plus a Derived Slant Height",
+          "intro": "A cone's surface adds a circular base to a curved lateral surface — but the lateral formula needs the slant height, not the perpendicular height this tool actually asks for, so it's derived via the Pythagorean theorem.",
+          "worked": {
+            "title": "Worked Example",
+            "slantFormula": "Slant height",
+            "base": "Base",
+            "lateral": "Lateral surface",
+            "result": "Surface area"
+          }
+        },
+        "pyramidFormula": {
+          "title": "Square Pyramid: Base Plus Four Triangles",
+          "intro": "A square pyramid adds one square base to four identical triangular sides — like the cone, the triangles need a slant height derived from the perpendicular height and half the base.",
+          "worked": {
+            "title": "Worked Example",
+            "slantFormula": "Slant height",
+            "base": "Base",
+            "oneTriangle": "One triangular face",
+            "triangleNote": "There are four of these, all identical",
+            "result": "Surface area"
+          }
+        },
+        "prismBreakdown": {
+          "title": "Rectangular Prism: Three Real Face Pairs",
+          "intro": "A box with length {l}, width {w}, and height {h} has three pairs of opposite faces — each pair genuinely different in size unless two dimensions happen to match.",
+          "worked": {
+            "title": "Worked Example",
+            "topBottom": "Top + bottom",
+            "frontBack": "Front + back",
+            "leftRight": "Left + right",
+            "total": "Total surface area"
+          }
+        },
+        "netFolding": {
+          "title": "Watching a Net Fold Into a Cube",
+          "intro": "The same six real squares, tracked through the physical stations of folding a flat net into a closed cube — the total surface area never changes, only its shape does.",
+          "stations": {
+            "flat": "Flat net",
+            "fold1": "First fold",
+            "fold2": "Second fold",
+            "fold3": "Third fold",
+            "closed": "Closed cube"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "perFace": "Area per face",
+            "faceCount": "Number of faces",
+            "total": "Total surface area",
+            "invariantNote": "Folding never adds or removes any area"
+          }
+        },
+        "unitConversion": {
+          "title": "Same Box, Two Units",
+          "intro": "A real storage box's surface area, measured once in meters and once in feet — since area scales with length squared, the conversion factor for surface area is the square of the linear factor.",
+          "worked": {
+            "title": "Worked Example",
+            "linearFactor": "Linear conversion",
+            "areaFactor": "Area conversion factor",
+            "note": "Squaring the linear factor gives the area factor"
+          }
+        },
+        "shapeComparison": {
+          "title": "Cube vs. Sphere at Matched Size",
+          "intro": "A cube and a sphere both built from a {dim}-unit characteristic size — shape alone changes the surface area substantially, even at matched size.",
+          "cubeLabel": "Cube",
+          "sphereLabel": "Sphere",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "doublingEffect": {
+          "title": "Doubling a Dimension Quadruples the Area",
+          "intro": "Doubling a cube's side doesn't double its surface area — every formula on this page scales with dimensions squared, so doubling one length always quadruples the corresponding area.",
+          "worked": {
+            "title": "Worked Example",
+            "ratio": "Area ratio",
+            "note": "2² = 4, exactly"
+          }
+        },
+        "sphereVsCube": {
+          "title": "Same Volume, Less Surface",
+          "intro": "A cube and a sphere holding the exact same real volume of {volume} cubic units — the sphere always needs less surface area to enclose it, the reason bubbles and planets are spherical.",
+          "sphereLabel": "Sphere",
+          "cubeLabel": "Cube",
+          "worked": {
+            "title": "Worked Example",
+            "radius": "Matching sphere radius",
+            "sphereArea": "Sphere surface area",
+            "cubeArea": "Cube surface area",
+            "note": "Less surface for the same volume — maximum efficiency"
+          }
+        },
+        "svRatio": {
+          "title": "Surface-to-Volume Ratio",
+          "intro": "A cube's real surface-to-volume ratio (6s² ÷ s³ = 6/s) across six doublings of size — the reason a snowflake melts in seconds while an iceberg lasts for years.",
+          "zones": {
+            "high": "High ratio",
+            "medium": "Medium ratio",
+            "low": "Low ratio"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "small": "Smallest cube",
+            "large": "Largest cube",
+            "note": "Smaller objects have dramatically more surface relative to their own volume"
+          }
+        },
+        "paintCoverage": {
+          "title": "From Surface Area to Paint Needed",
+          "intro": "A real storage cube's total surface area, divided by a real paint can's coverage rate — the actual reason this calculator matters outside a classroom.",
+          "areaLabel": "Surface area",
+          "coverageLabel": "Coverage rate",
+          "resultLabel": "Paint needed",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "realWorldScale": {
+          "title": "Real Surface Areas, From a Marble to a Stadium",
+          "intro": "Real-world surface areas spanning more than seven orders of magnitude — only a log scale keeps every one of them readable together.",
+          "items": {
+            "marble": "Marble",
+            "basketball": "Basketball",
+            "refrigerator": "Refrigerator",
+            "car": "Car",
+            "house": "House",
+            "stadium": "Stadium roof"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "spanNote": "More than seven orders of magnitude apart"
+          }
         }
       },
       "relatedTools": {

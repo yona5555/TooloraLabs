@@ -12925,6 +12925,214 @@
           "note": "La démonstration originale d'Archimède selon laquelle la surface d'une sphère équivaut aux deux tiers de celle du cylindre qui la circonscrit — la même relation qu'incarnent les formules de la sphère et du cylindre dans ce calculateur.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Lire les Œuvres d'Archimède"
+        },
+        "hero": {
+          "lengthLabel": "Longueur",
+          "heightLabel": "Hauteur",
+          "widthLabel": "Largeur",
+          "totalLabel": "Aire totale",
+          "ariaLabel": "Diagramme de patron interactif d'un parallélépipède rectangle — faites glisser le point bleu pour modifier la longueur et la hauteur",
+          "faceTooltip": "{face} : {value}",
+          "hint": "Faites glisser le point bleu pour redimensionner la boîte. Survolez une face pour voir sa propre aire.",
+          "faces": {
+            "front": "Avant",
+            "back": "Arrière",
+            "top": "Dessus",
+            "bottom": "Dessous",
+            "left": "Gauche",
+            "right": "Droite"
+          }
+        },
+        "shapeFamily": {
+          "title": "Les six solides pris en charge par cette calculatrice",
+          "intro": "Chaque solide ci-dessous exige sa propre combinaison de dimensions, mais chaque formule suit la même idée : additionner l'aire de chaque face.",
+          "shapes": {
+            "cube": "Cube",
+            "rectangularPrism": "Parallélépipède rectangle",
+            "sphere": "Sphère",
+            "cylinder": "Cylindre",
+            "cone": "Cône",
+            "squarePyramid": "Pyramide à base carrée"
+          },
+          "dimsTag": "{count} dimension(s)",
+          "columnShape": "Solide",
+          "columnFormula": "Formule"
+        },
+        "basicFormulas": {
+          "title": "Formules de base de l'aire de surface",
+          "intro": "Les trois solides les plus courants, chacun décomposé en faces réelles qui composent son aire totale."
+        },
+        "moreFormulas": {
+          "title": "Autres formules d'aire de surface",
+          "intro": "Trois autres solides qui nécessitent une hauteur oblique dérivée ou une surface latérale enveloppante — avec un aperçu de la façon dont un patron plat se replie en un cube fermé."
+        },
+        "cubeFormula": {
+          "title": "Cube : six carrés identiques",
+          "intro": "L'aire de surface d'un cube n'est que six copies de la même face carrée.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Aire de surface"
+          }
+        },
+        "sphereFormula": {
+          "title": "Sphère : quatre fois le grand cercle",
+          "intro": "L'aire de surface d'une sphère vaut exactement quatre fois l'aire de son propre grand cercle — un fait géométrique réel, non une approximation.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "greatCircle": "Un grand cercle",
+            "greatCircleNote": "Le cercle exactement autour du point le plus large de la sphère",
+            "result": "Aire de surface"
+          }
+        },
+        "cylinderFormula": {
+          "title": "Cylindre : deux couvercles et une étiquette enroulée",
+          "intro": "La surface d'un cylindre se divise en deux couvercles circulaires et une étiquette rectangulaire qui l'entoure — la largeur de l'étiquette est la circonférence même du cercle, déroulée à plat.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "caps": "Les deux couvercles",
+            "capsNote": "Deux cercles, chacun πr²",
+            "lateral": "Surface latérale",
+            "lateralNote": "L'étiquette déroulée, large de 2πr et haute de h",
+            "result": "Aire de surface"
+          }
+        },
+        "coneFormula": {
+          "title": "Cône : base plus une hauteur oblique dérivée",
+          "intro": "La surface d'un cône ajoute une base circulaire à une surface latérale courbe — mais la formule latérale a besoin de la hauteur oblique, non de la hauteur perpendiculaire que cet outil demande réellement, elle est donc dérivée via le théorème de Pythagore.",
+          "worked": {
+            "title": "Exemple résolu",
+            "slantFormula": "Hauteur oblique",
+            "base": "Base",
+            "lateral": "Surface latérale",
+            "result": "Aire de surface"
+          }
+        },
+        "pyramidFormula": {
+          "title": "Pyramide à base carrée : base plus quatre triangles",
+          "intro": "Une pyramide à base carrée ajoute une base carrée à quatre faces triangulaires identiques — comme pour le cône, les triangles ont besoin d'une hauteur oblique dérivée de la hauteur perpendiculaire et de la moitié de la base.",
+          "worked": {
+            "title": "Exemple résolu",
+            "slantFormula": "Hauteur oblique",
+            "base": "Base",
+            "oneTriangle": "Une face triangulaire",
+            "triangleNote": "Il y en a quatre, toutes identiques",
+            "result": "Aire de surface"
+          }
+        },
+        "prismBreakdown": {
+          "title": "Parallélépipède rectangle : trois vraies paires de faces",
+          "intro": "Une boîte de longueur {l}, de largeur {w} et de hauteur {h} a trois paires de faces opposées — chaque paire diffère réellement en taille, sauf si deux dimensions coïncident par hasard.",
+          "worked": {
+            "title": "Exemple résolu",
+            "topBottom": "Dessus + dessous",
+            "frontBack": "Avant + arrière",
+            "leftRight": "Gauche + droite",
+            "total": "Aire totale"
+          }
+        },
+        "netFolding": {
+          "title": "Voir un patron se replier en cube",
+          "intro": "Les six mêmes carrés réels, suivis à travers les étapes physiques du pliage d'un patron plat en un cube fermé — l'aire totale ne change jamais, seule sa forme change.",
+          "stations": {
+            "flat": "Patron à plat",
+            "fold1": "Premier pli",
+            "fold2": "Deuxième pli",
+            "fold3": "Troisième pli",
+            "closed": "Cube fermé"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "perFace": "Aire par face",
+            "faceCount": "Nombre de faces",
+            "total": "Aire totale",
+            "invariantNote": "Le pliage n'ajoute ni ne retire jamais d'aire"
+          }
+        },
+        "unitConversion": {
+          "title": "La même boîte, deux unités",
+          "intro": "L'aire de surface d'une vraie boîte de rangement, mesurée une fois en mètres et une fois en pieds — comme l'aire évolue avec le carré de la longueur, le facteur de conversion de l'aire de surface est le carré du facteur linéaire.",
+          "worked": {
+            "title": "Exemple résolu",
+            "linearFactor": "Conversion linéaire",
+            "areaFactor": "Facteur de conversion de l'aire",
+            "note": "Élever au carré le facteur linéaire donne le facteur d'aire"
+          }
+        },
+        "shapeComparison": {
+          "title": "Cube contre sphère de taille équivalente",
+          "intro": "Un cube et une sphère, tous deux construits à partir d'une taille caractéristique de {dim} unités — la forme seule change considérablement l'aire de surface, même à taille égale.",
+          "cubeLabel": "Cube",
+          "sphereLabel": "Sphère",
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "doublingEffect": {
+          "title": "Doubler une dimension quadruple l'aire",
+          "intro": "Doubler le côté d'un cube ne double pas son aire de surface — chaque formule de cette page évolue avec le carré des dimensions, donc doubler une longueur quadruple toujours l'aire correspondante.",
+          "worked": {
+            "title": "Exemple résolu",
+            "ratio": "Rapport d'aire",
+            "note": "2² = 4, exactement"
+          }
+        },
+        "sphereVsCube": {
+          "title": "Même volume, moins de surface",
+          "intro": "Un cube et une sphère contenant exactement le même volume réel de {volume} unités cubiques — la sphère a toujours besoin de moins de surface pour le contenir, la raison pour laquelle les bulles et les planètes sont sphériques.",
+          "sphereLabel": "Sphère",
+          "cubeLabel": "Cube",
+          "worked": {
+            "title": "Exemple résolu",
+            "radius": "Rayon de sphère équivalent",
+            "sphereArea": "Aire de surface de la sphère",
+            "cubeArea": "Aire de surface du cube",
+            "note": "Moins de surface pour le même volume — efficacité maximale"
+          }
+        },
+        "svRatio": {
+          "title": "Rapport surface-volume",
+          "intro": "Le rapport surface-volume réel d'un cube (6s² ÷ s³ = 6/s) à travers six doublements de taille — la raison pour laquelle un flocon de neige fond en quelques secondes alors qu'un iceberg dure des années.",
+          "zones": {
+            "high": "Rapport élevé",
+            "medium": "Rapport moyen",
+            "low": "Rapport faible"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "small": "Plus petit cube",
+            "large": "Plus grand cube",
+            "note": "Les objets plus petits ont bien plus de surface par rapport à leur propre volume"
+          }
+        },
+        "paintCoverage": {
+          "title": "De l'aire de surface à la peinture nécessaire",
+          "intro": "L'aire de surface totale d'une vraie boîte de rangement cubique, divisée par le rendement d'un vrai pot de peinture — la vraie raison pour laquelle cette calculatrice compte en dehors d'une salle de classe.",
+          "areaLabel": "Aire de surface",
+          "coverageLabel": "Rendement",
+          "resultLabel": "Peinture nécessaire",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "realWorldScale": {
+          "title": "Aires de surface réelles, d'une bille à un stade",
+          "intro": "Des aires de surface du monde réel s'étendant sur plus de sept ordres de grandeur — seule une échelle logarithmique les garde toutes lisibles ensemble.",
+          "items": {
+            "marble": "Bille",
+            "basketball": "Ballon de basket",
+            "refrigerator": "Réfrigérateur",
+            "car": "Voiture",
+            "house": "Maison",
+            "stadium": "Toit de stade"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "spanNote": "Plus de sept ordres de grandeur d'écart"
+          }
         }
       },
       "relatedTools": {

@@ -12925,6 +12925,214 @@
           "note": "La demostración original de Arquímedes de que el área de superficie de una esfera equivale a dos tercios de la del cilindro que la circunscribe: la misma relación que encarnan las fórmulas de esta calculadora para la esfera y el cilindro.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Leer Las obras de Arquímedes"
+        },
+        "hero": {
+          "lengthLabel": "Longitud",
+          "heightLabel": "Altura",
+          "widthLabel": "Anchura",
+          "totalLabel": "Área de superficie total",
+          "ariaLabel": "Diagrama de desarrollo interactivo de un prisma rectangular — arrastra el punto azul para cambiar la longitud y la altura",
+          "faceTooltip": "{face}: {value}",
+          "hint": "Arrastra el punto azul para redimensionar la caja. Pasa el cursor sobre cualquier cara para ver su propia área.",
+          "faces": {
+            "front": "Frontal",
+            "back": "Posterior",
+            "top": "Superior",
+            "bottom": "Inferior",
+            "left": "Izquierda",
+            "right": "Derecha"
+          }
+        },
+        "shapeFamily": {
+          "title": "Los seis sólidos que admite esta calculadora",
+          "intro": "Cada sólido de abajo necesita su propia combinación de dimensiones, pero cada fórmula sigue la misma idea: sumar el área de cada cara.",
+          "shapes": {
+            "cube": "Cubo",
+            "rectangularPrism": "Prisma rectangular",
+            "sphere": "Esfera",
+            "cylinder": "Cilindro",
+            "cone": "Cono",
+            "squarePyramid": "Pirámide cuadrada"
+          },
+          "dimsTag": "{count} dimensión(es)",
+          "columnShape": "Sólido",
+          "columnFormula": "Fórmula"
+        },
+        "basicFormulas": {
+          "title": "Fórmulas básicas de área de superficie",
+          "intro": "Los tres sólidos más comunes, cada uno desglosado en las caras reales que componen su área de superficie total."
+        },
+        "moreFormulas": {
+          "title": "Más fórmulas de área de superficie",
+          "intro": "Tres sólidos más que necesitan una altura inclinada derivada o una superficie lateral envolvente, además de un vistazo a cómo un desarrollo plano se pliega en un cubo cerrado."
+        },
+        "cubeFormula": {
+          "title": "Cubo: seis cuadrados idénticos",
+          "intro": "El área de superficie de un cubo es simplemente seis copias de la misma cara cuadrada.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Área de superficie"
+          }
+        },
+        "sphereFormula": {
+          "title": "Esfera: cuatro veces el círculo máximo",
+          "intro": "El área de superficie de una esfera es exactamente cuatro veces el área de su propio círculo máximo — un hecho geométrico real, no una aproximación.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "greatCircle": "Un círculo máximo",
+            "greatCircleNote": "El círculo exactamente alrededor del punto más ancho de la esfera",
+            "result": "Área de superficie"
+          }
+        },
+        "cylinderFormula": {
+          "title": "Cilindro: dos tapas más una etiqueta envolvente",
+          "intro": "La superficie de un cilindro se divide en dos tapas circulares y una etiqueta rectangular que lo envuelve — el ancho de la etiqueta es la propia circunferencia del círculo, desenrollada.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "caps": "Ambas tapas",
+            "capsNote": "Dos círculos, cada uno πr²",
+            "lateral": "Superficie lateral",
+            "lateralNote": "La etiqueta desenrollada, de ancho 2πr y alto h",
+            "result": "Área de superficie"
+          }
+        },
+        "coneFormula": {
+          "title": "Cono: base más una altura inclinada derivada",
+          "intro": "La superficie de un cono suma una base circular a una superficie lateral curva — pero la fórmula lateral necesita la altura inclinada, no la altura perpendicular que esta herramienta realmente pide, así que se deriva mediante el teorema de Pitágoras.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "slantFormula": "Altura inclinada",
+            "base": "Base",
+            "lateral": "Superficie lateral",
+            "result": "Área de superficie"
+          }
+        },
+        "pyramidFormula": {
+          "title": "Pirámide cuadrada: base más cuatro triángulos",
+          "intro": "Una pirámide cuadrada suma una base cuadrada a cuatro caras triangulares idénticas — como en el cono, los triángulos necesitan una altura inclinada derivada de la altura perpendicular y la mitad de la base.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "slantFormula": "Altura inclinada",
+            "base": "Base",
+            "oneTriangle": "Una cara triangular",
+            "triangleNote": "Hay cuatro de estas, todas idénticas",
+            "result": "Área de superficie"
+          }
+        },
+        "prismBreakdown": {
+          "title": "Prisma rectangular: tres pares reales de caras",
+          "intro": "Una caja con longitud {l}, anchura {w} y altura {h} tiene tres pares de caras opuestas — cada par es realmente diferente en tamaño, salvo que dos dimensiones coincidan por casualidad.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "topBottom": "Superior + inferior",
+            "frontBack": "Frontal + posterior",
+            "leftRight": "Izquierda + derecha",
+            "total": "Área de superficie total"
+          }
+        },
+        "netFolding": {
+          "title": "Ver cómo un desarrollo se pliega en un cubo",
+          "intro": "Los mismos seis cuadrados reales, seguidos a través de las etapas físicas de plegar un desarrollo plano en un cubo cerrado — el área de superficie total nunca cambia, solo su forma.",
+          "stations": {
+            "flat": "Desarrollo plano",
+            "fold1": "Primer pliegue",
+            "fold2": "Segundo pliegue",
+            "fold3": "Tercer pliegue",
+            "closed": "Cubo cerrado"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "perFace": "Área por cara",
+            "faceCount": "Número de caras",
+            "total": "Área de superficie total",
+            "invariantNote": "Plegar nunca añade ni quita área"
+          }
+        },
+        "unitConversion": {
+          "title": "La misma caja, dos unidades",
+          "intro": "El área de superficie de una caja de almacenamiento real, medida una vez en metros y otra en pies — como el área escala con el cuadrado de la longitud, el factor de conversión del área de superficie es el cuadrado del factor lineal.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "linearFactor": "Conversión lineal",
+            "areaFactor": "Factor de conversión de área",
+            "note": "Elevar al cuadrado el factor lineal da el factor de área"
+          }
+        },
+        "shapeComparison": {
+          "title": "Cubo vs. esfera con el mismo tamaño",
+          "intro": "Un cubo y una esfera, ambos construidos con un tamaño característico de {dim} unidades — la forma por sí sola cambia sustancialmente el área de superficie, incluso con el mismo tamaño.",
+          "cubeLabel": "Cubo",
+          "sphereLabel": "Esfera",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "doublingEffect": {
+          "title": "Duplicar una dimensión cuadruplica el área",
+          "intro": "Duplicar el lado de un cubo no duplica su área de superficie — cada fórmula de esta página escala con el cuadrado de las dimensiones, así que duplicar una longitud siempre cuadruplica el área correspondiente.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "ratio": "Razón de área",
+            "note": "2² = 4, exactamente"
+          }
+        },
+        "sphereVsCube": {
+          "title": "Mismo volumen, menos superficie",
+          "intro": "Un cubo y una esfera que contienen exactamente el mismo volumen real de {volume} unidades cúbicas — la esfera siempre necesita menos área de superficie para contenerlo, la razón por la que las burbujas y los planetas son esféricos.",
+          "sphereLabel": "Esfera",
+          "cubeLabel": "Cubo",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "radius": "Radio de esfera equivalente",
+            "sphereArea": "Área de superficie de la esfera",
+            "cubeArea": "Área de superficie del cubo",
+            "note": "Menos superficie para el mismo volumen — máxima eficiencia"
+          }
+        },
+        "svRatio": {
+          "title": "Relación superficie-volumen",
+          "intro": "La relación real superficie-volumen de un cubo (6s² ÷ s³ = 6/s) a lo largo de seis duplicaciones de tamaño — la razón por la que un copo de nieve se derrite en segundos mientras un iceberg dura años.",
+          "zones": {
+            "high": "Relación alta",
+            "medium": "Relación media",
+            "low": "Relación baja"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "small": "Cubo más pequeño",
+            "large": "Cubo más grande",
+            "note": "Los objetos más pequeños tienen muchísima más superficie en relación con su propio volumen"
+          }
+        },
+        "paintCoverage": {
+          "title": "Del área de superficie a la pintura necesaria",
+          "intro": "El área de superficie total de una caja de almacenamiento cúbica real, dividida por el rendimiento de una lata de pintura real — la razón real por la que esta calculadora importa fuera del aula.",
+          "areaLabel": "Área de superficie",
+          "coverageLabel": "Rendimiento",
+          "resultLabel": "Pintura necesaria",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "realWorldScale": {
+          "title": "Áreas de superficie reales, de una canica a un estadio",
+          "intro": "Áreas de superficie del mundo real que abarcan más de siete órdenes de magnitud — solo una escala logarítmica las mantiene todas legibles juntas.",
+          "items": {
+            "marble": "Canica",
+            "basketball": "Balón de baloncesto",
+            "refrigerator": "Refrigerador",
+            "car": "Automóvil",
+            "house": "Casa",
+            "stadium": "Techo de estadio"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "spanNote": "Más de siete órdenes de magnitud de diferencia"
+          }
         }
       },
       "relatedTools": {

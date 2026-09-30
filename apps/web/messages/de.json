@@ -12925,6 +12925,214 @@
           "note": "Archimedes' ursprünglicher Beweis, dass die Oberfläche einer Kugel zwei Drittel der Oberfläche ihres umschreibenden Zylinders beträgt — dieselbe Beziehung, die den Kugel- und Zylinderformeln dieses Rechners zugrunde liegt.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Die Werke des Archimedes lesen"
+        },
+        "hero": {
+          "lengthLabel": "Länge",
+          "heightLabel": "Höhe",
+          "widthLabel": "Breite",
+          "totalLabel": "Gesamtoberfläche",
+          "ariaLabel": "Interaktives Netzdiagramm eines Quaders — ziehen Sie den blauen Punkt, um Länge und Höhe zu ändern",
+          "faceTooltip": "{face}: {value}",
+          "hint": "Ziehen Sie den blauen Punkt, um die Box zu skalieren. Fahren Sie über eine Fläche, um ihre eigene Fläche zu sehen.",
+          "faces": {
+            "front": "Vorderseite",
+            "back": "Rückseite",
+            "top": "Oben",
+            "bottom": "Unten",
+            "left": "Links",
+            "right": "Rechts"
+          }
+        },
+        "shapeFamily": {
+          "title": "Die sechs Körper, die dieser Rechner unterstützt",
+          "intro": "Jeder Körper unten braucht seine eigene Kombination von Abmessungen, aber jede Formel folgt derselben Idee: die Fläche jeder Seite addieren.",
+          "shapes": {
+            "cube": "Würfel",
+            "rectangularPrism": "Quader",
+            "sphere": "Kugel",
+            "cylinder": "Zylinder",
+            "cone": "Kegel",
+            "squarePyramid": "quadratische Pyramide"
+          },
+          "dimsTag": "{count} Dimension(en)",
+          "columnShape": "Körper",
+          "columnFormula": "Formel"
+        },
+        "basicFormulas": {
+          "title": "Grundlegende Oberflächenformeln",
+          "intro": "Die drei häufigsten Körper, jeweils aufgeschlüsselt in die echten Flächen, aus denen sich ihre Gesamtoberfläche zusammensetzt."
+        },
+        "moreFormulas": {
+          "title": "Weitere Oberflächenformeln",
+          "intro": "Drei weitere Körper, die eine abgeleitete Schrägenhöhe oder eine umlaufende Mantelfläche benötigen — dazu ein Blick darauf, wie sich ein flaches Netz zu einem geschlossenen Würfel faltet."
+        },
+        "cubeFormula": {
+          "title": "Würfel: sechs identische Quadrate",
+          "intro": "Die Oberfläche eines Würfels besteht einfach aus sechs Kopien derselben quadratischen Fläche.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel",
+            "result": "Oberfläche"
+          }
+        },
+        "sphereFormula": {
+          "title": "Kugel: das Vierfache des Großkreises",
+          "intro": "Die Oberfläche einer Kugel ist genau viermal so groß wie die Fläche ihres eigenen Großkreises — eine echte geometrische Tatsache, keine Näherung.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel",
+            "greatCircle": "Ein Großkreis",
+            "greatCircleNote": "Der Kreis genau um den breitesten Punkt der Kugel",
+            "result": "Oberfläche"
+          }
+        },
+        "cylinderFormula": {
+          "title": "Zylinder: zwei Deckel plus ein umwickeltes Etikett",
+          "intro": "Die Oberfläche eines Zylinders teilt sich in zwei kreisförmige Deckel und ein rechteckiges Etikett, das sich um ihn wickelt — die Breite des Etiketts ist der Umfang des Kreises selbst, flach abgerollt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel",
+            "caps": "Beide Deckel",
+            "capsNote": "Zwei Kreise, je πr²",
+            "lateral": "Mantelfläche",
+            "lateralNote": "Das abgerollte Etikett, 2πr breit und h hoch",
+            "result": "Oberfläche"
+          }
+        },
+        "coneFormula": {
+          "title": "Kegel: Grundfläche plus abgeleitete Schrägenhöhe",
+          "intro": "Die Oberfläche eines Kegels addiert eine kreisförmige Grundfläche zu einer gekrümmten Mantelfläche — aber die Mantelformel braucht die Schrägenhöhe, nicht die senkrechte Höhe, nach der dieses Tool eigentlich fragt, also wird sie über den Satz des Pythagoras abgeleitet.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "slantFormula": "Schrägenhöhe",
+            "base": "Grundfläche",
+            "lateral": "Mantelfläche",
+            "result": "Oberfläche"
+          }
+        },
+        "pyramidFormula": {
+          "title": "Quadratische Pyramide: Grundfläche plus vier Dreiecke",
+          "intro": "Eine quadratische Pyramide addiert eine quadratische Grundfläche zu vier identischen dreieckigen Seiten — wie beim Kegel brauchen die Dreiecke eine Schrägenhöhe, abgeleitet aus der senkrechten Höhe und der halben Grundseite.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "slantFormula": "Schrägenhöhe",
+            "base": "Grundfläche",
+            "oneTriangle": "Eine Dreiecksfläche",
+            "triangleNote": "Es gibt vier davon, alle identisch",
+            "result": "Oberfläche"
+          }
+        },
+        "prismBreakdown": {
+          "title": "Quader: drei echte Flächenpaare",
+          "intro": "Ein Quader mit Länge {l}, Breite {w} und Höhe {h} hat drei Paare gegenüberliegender Flächen — jedes Paar ist tatsächlich unterschiedlich groß, außer zwei Abmessungen stimmen zufällig überein.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "topBottom": "Oben + unten",
+            "frontBack": "Vorne + hinten",
+            "leftRight": "Links + rechts",
+            "total": "Gesamtoberfläche"
+          }
+        },
+        "netFolding": {
+          "title": "Wie sich ein Netz zu einem Würfel faltet",
+          "intro": "Dieselben sechs echten Quadrate, verfolgt durch die physischen Stationen, in denen sich ein flaches Netz zu einem geschlossenen Würfel faltet — die Gesamtoberfläche ändert sich nie, nur ihre Form.",
+          "stations": {
+            "flat": "Flaches Netz",
+            "fold1": "Erste Faltung",
+            "fold2": "Zweite Faltung",
+            "fold3": "Dritte Faltung",
+            "closed": "Geschlossener Würfel"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "perFace": "Fläche pro Seite",
+            "faceCount": "Anzahl der Flächen",
+            "total": "Gesamtoberfläche",
+            "invariantNote": "Falten fügt niemals Fläche hinzu oder entfernt welche"
+          }
+        },
+        "unitConversion": {
+          "title": "Dieselbe Box, zwei Einheiten",
+          "intro": "Die Oberfläche einer echten Lagerbox, einmal in Metern und einmal in Fuß gemessen — da die Fläche mit dem Quadrat der Länge skaliert, ist der Umrechnungsfaktor für die Oberfläche das Quadrat des linearen Faktors.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "linearFactor": "Lineare Umrechnung",
+            "areaFactor": "Flächen-Umrechnungsfaktor",
+            "note": "Das Quadrieren des linearen Faktors ergibt den Flächenfaktor"
+          }
+        },
+        "shapeComparison": {
+          "title": "Würfel vs. Kugel bei gleicher Größe",
+          "intro": "Ein Würfel und eine Kugel, beide aus einer charakteristischen Größe von {dim} Einheiten — die Form allein verändert die Oberfläche erheblich, selbst bei gleicher Größe.",
+          "cubeLabel": "Würfel",
+          "sphereLabel": "Kugel",
+          "worked": {
+            "title": "Rechenbeispiel"
+          }
+        },
+        "doublingEffect": {
+          "title": "Eine Abmessung zu verdoppeln vervierfacht die Fläche",
+          "intro": "Die Seite eines Würfels zu verdoppeln verdoppelt nicht seine Oberfläche — jede Formel auf dieser Seite skaliert mit dem Quadrat der Abmessungen, also vervierfacht das Verdoppeln einer Länge immer die entsprechende Fläche.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "ratio": "Flächenverhältnis",
+            "note": "2² = 4, exakt"
+          }
+        },
+        "sphereVsCube": {
+          "title": "Gleiches Volumen, weniger Oberfläche",
+          "intro": "Ein Würfel und eine Kugel mit genau demselben echten Volumen von {volume} Kubikeinheiten — die Kugel benötigt immer weniger Oberfläche, um es zu umschließen, der Grund, warum Blasen und Planeten kugelförmig sind.",
+          "sphereLabel": "Kugel",
+          "cubeLabel": "Würfel",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "radius": "Passender Kugelradius",
+            "sphereArea": "Oberfläche der Kugel",
+            "cubeArea": "Oberfläche des Würfels",
+            "note": "Weniger Oberfläche bei gleichem Volumen — maximale Effizienz"
+          }
+        },
+        "svRatio": {
+          "title": "Oberfläche-zu-Volumen-Verhältnis",
+          "intro": "Das echte Oberfläche-zu-Volumen-Verhältnis eines Würfels (6s² ÷ s³ = 6/s) über sechs Verdopplungen der Größe — der Grund, warum eine Schneeflocke in Sekunden schmilzt, während ein Eisberg Jahre überdauert.",
+          "zones": {
+            "high": "Hohes Verhältnis",
+            "medium": "Mittleres Verhältnis",
+            "low": "Niedriges Verhältnis"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "small": "Kleinster Würfel",
+            "large": "Größter Würfel",
+            "note": "Kleinere Objekte haben dramatisch mehr Oberfläche im Verhältnis zu ihrem eigenen Volumen"
+          }
+        },
+        "paintCoverage": {
+          "title": "Von der Oberfläche zur benötigten Farbmenge",
+          "intro": "Die Gesamtoberfläche eines echten würfelförmigen Lagerbehälters, geteilt durch die Ergiebigkeit einer echten Farbdose — der eigentliche Grund, warum dieser Rechner außerhalb des Klassenzimmers wichtig ist.",
+          "areaLabel": "Oberfläche",
+          "coverageLabel": "Ergiebigkeit",
+          "resultLabel": "Benötigte Farbe",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "realWorldScale": {
+          "title": "Echte Oberflächen, von einer Murmel bis zu einem Stadion",
+          "intro": "Reale Oberflächen, die mehr als sieben Größenordnungen umspannen — nur eine logarithmische Skala hält sie alle gemeinsam lesbar.",
+          "items": {
+            "marble": "Murmel",
+            "basketball": "Basketball",
+            "refrigerator": "Kühlschrank",
+            "car": "Auto",
+            "house": "Haus",
+            "stadium": "Stadiondach"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "spanNote": "Mehr als sieben Größenordnungen auseinander"
+          }
         }
       },
       "relatedTools": {
