@@ -1,38 +1,45 @@
 "use client";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { ScientificCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 
-/** Type #16 (Side-by-Side Comparison Cards): the calculator's two built-in constant keys, same card structure, each with its value, defining property, and one real use inside this calculator. */
-export default function MathConstantsCards() {
-  const t = useTranslations("tools.scientific-calculator.education.functions.constants");
+const tool = new ScientificCalculator();
+const PHI = (1 + Math.sqrt(5)) / 2;
 
-  const cards = [
-    { key: "pi", symbol: "π", value: Math.PI.toFixed(6), defLabel: t("pi.def"), useLabel: t("pi.use") },
-    { key: "e", symbol: "e", value: Math.E.toFixed(6), defLabel: t("e.def"), useLabel: t("e.use") },
+/** Type #16 (Side-by-Side Comparison Cards): a live precision slider reveals more digits of four real constants at once — √2 computed live through the calculator's own sqrt() operation, the other three from their defining formulas. */
+export default function MathConstantsCards() {
+  const t = useTranslations("tools.scientific-calculator.education.mathConstants");
+  const [precision, setPrecision] = useState(4);
+
+  const sqrt2Out = tool.execute({ operation: "sqrt", a: 2 }, { locale: "en-US" });
+  if (!sqrt2Out.success) return null;
+
+  const constants = [
+    { key: "pi", symbol: "π", value: Math.PI },
+    { key: "e", symbol: "e", value: Math.E },
+    { key: "phi", symbol: "φ", value: PHI },
+    { key: "sqrt2", symbol: "√2", value: sqrt2Out.data.result },
   ];
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {cards.map((c) => (
-          <div key={c.key} className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-            <p className="text-3xl font-bold text-blue-700 dark:text-blue-300">{c.symbol}</p>
-            <p className="mt-1 font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-100">{c.value}</p>
-            <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{c.defLabel}</p>
-            <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">{c.useLabel}</p>
+      <div dir="ltr" className="mx-auto mt-4 max-w-sm">
+        <input type="range" min={0} max={10} step={1} value={precision} onChange={(e) => setPrecision(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
+        <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`${t("precisionLabel")}: ${precision}`}</p>
+      </div>
+      <div dir="ltr" className="mt-4 grid grid-cols-2 gap-3">
+        {constants.map((c) => (
+          <div key={c.key} className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-center dark:border-zinc-700 dark:bg-zinc-800/40">
+            <p className="text-lg font-bold text-blue-700 dark:text-blue-300">{c.symbol}</p>
+            <p className="mt-1 break-all font-mono text-sm text-zinc-700 dark:text-zinc-200">{c.value.toFixed(precision)}</p>
           </div>
         ))}
       </div>
       <div className="mt-4">
-        <WorkedExampleNote
-          title={t("worked.title")}
-          rows={[
-            { label: "π", value: Math.PI.toFixed(8) },
-            { label: "e", value: Math.E.toFixed(8) },
-          ]}
-        />
+        <WorkedExampleNote title={t("worked.title")} rows={constants.map((c) => ({ label: t(`names.${c.key}`), value: c.value.toFixed(precision) }))} />
       </div>
     </SectionCard>
   );

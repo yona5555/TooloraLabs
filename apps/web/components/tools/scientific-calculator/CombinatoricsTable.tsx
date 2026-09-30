@@ -1,36 +1,45 @@
 "use client";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import ReferenceTableCard, { type ReferenceTableRow } from "@/components/tool-ui/ReferenceTableCard";
+import { ScientificCalculator } from "@tooloralabs/tools";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 
-const N = 5;
+const tool = new ScientificCalculator();
 
-function factorial(n: number): number {
-  let result = 1;
-  for (let i = 2; i <= n; i++) result *= i;
-  return result;
-}
-function nPr(n: number, r: number): number {
-  return factorial(n) / factorial(n - r);
-}
-function nCr(n: number, r: number): number {
-  return nPr(n, r) / factorial(r);
-}
-
-/** Type #17 (Tagged Reference Table): nCr and nPr for every r from 0 to 5 out of 5 — the combinations/permutations keys — tagged by which grows faster (permutations always order-sensitive, so nPr >= nCr at every r > 1). */
+/** Type #17 (Tagged Reference Table): live n and r sliders drive the calculator's real nPr and nCr operations together — dragging either slider updates both rows, showing why permutations always outnumber (or match) combinations for the same pair. */
 export default function CombinatoricsTable() {
-  const t = useTranslations("tools.scientific-calculator.education.functions.combinatorics");
+  const t = useTranslations("tools.scientific-calculator.education.combinatorics");
+  const [n, setN] = useState(6);
+  const [r, setR] = useState(3);
+  const clampedR = Math.min(r, n);
 
-  const rows: ReferenceTableRow[] = Array.from({ length: N + 1 }, (_, r) => {
-    const combos = nCr(N, r);
-    const perms = nPr(N, r);
-    const same = combos === perms;
-    return {
-      key: `r${r}`,
-      label: `r = ${r}`,
-      value: `C = ${combos}, P = ${perms}`,
-      tag: same ? { text: t("tagSame"), colorClass: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300" } : { text: t("tagOrdered"), colorClass: "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300" },
-    };
-  });
+  const nPr = tool.execute({ operation: "nPr", a: n, b: clampedR }, { locale: "en-US" });
+  const nCr = tool.execute({ operation: "nCr", a: n, b: clampedR }, { locale: "en-US" });
+  if (!nPr.success || !nCr.success) return null;
 
-  return <ReferenceTableCard title={t("title")} caption={t("intro", { n: N })} columnLabel={t("columnR")} columnValue={t("columnValues")} rows={rows} />;
+  return (
+    <SectionCard title={t("title")}>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
+      <div dir="ltr" className="mx-auto mt-4 max-w-sm space-y-3">
+        <div>
+          <input type="range" min={1} max={12} step={1} value={n} onChange={(e) => setN(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("nSliderLabel")} />
+          <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`n = ${n}`}</p>
+        </div>
+        <div>
+          <input type="range" min={0} max={n} step={1} value={clampedR} onChange={(e) => setR(Number(e.target.value))} className="w-full accent-emerald-600 dark:accent-emerald-400" aria-label={t("rSliderLabel")} />
+          <p className="mt-1 text-center text-xs font-semibold text-emerald-700 dark:text-emerald-300">{`r = ${clampedR}`}</p>
+        </div>
+      </div>
+      <div className="mt-4">
+        <WorkedExampleNote
+          title={t("worked.title")}
+          rows={[
+            { label: "nPr", value: nPr.data.result.toLocaleString("en-US"), emphasize: true, note: t("worked.orderedNote") },
+            { label: "nCr", value: nCr.data.result.toLocaleString("en-US"), note: t("worked.unorderedNote") },
+          ]}
+        />
+      </div>
+    </SectionCard>
+  );
 }

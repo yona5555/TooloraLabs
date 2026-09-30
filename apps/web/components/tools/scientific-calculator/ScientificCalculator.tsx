@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, type ReactNode } from "react";
+import { useEffect, useReducer, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
@@ -10,12 +10,14 @@ import { calculatorReducer, initialState } from "./reducer";
 import ScientificKeypad from "./ScientificKeypad";
 import ScientificHistoryPanel from "./ScientificHistoryPanel";
 import FunctionReferenceCard from "./FunctionReferenceCard";
+import { ScientificAngleProvider } from "./ScientificAngleContext";
 
 const KEY_TO_DIGIT = new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
 
 export default function ScientificCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.scientific-calculator.nav");
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
+  const [angleDeg, setAngleDeg] = useState(40);
 
   useEffect(() => {
     function handleKeydown(event: KeyboardEvent) {
@@ -78,7 +80,7 @@ export default function ScientificCalculator({ education }: { education: ReactNo
   ];
 
   return (
-    <>
+    <ScientificAngleProvider value={{ dims: { angleDeg }, setDim: (key, value) => key === "angleDeg" && setAngleDeg(value) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -100,6 +102,6 @@ export default function ScientificCalculator({ education }: { education: ReactNo
       </div>
 
       {education}
-    </>
+    </ScientificAngleProvider>
   );
 }

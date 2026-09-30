@@ -425,15 +425,7 @@
         "intro": {
           "title": "Cómo evalúa esta calculadora una expresión",
           "paragraph1": "Esta calculadora evalúa las operaciones igual que lo hace una calculadora científica física: de forma secuencial, a medida que las introduces, en lugar de analizar una expresión completa escrita con paréntesis. Al pulsar un operador se resuelve de inmediato el cálculo pendiente y se encola el nuevo; al pulsar una tecla de función (sin, √x, ln, y el resto) se aplica al instante sobre el número que hay en pantalla. Esto cubre cuatro familias de operaciones —aritmética básica, potencias y raíces, logaritmos y exponenciales, y trigonometría— accesibles todas desde el teclado sin cambiar de modo.",
-          "paragraph2": "Dos detalles son importantes para obtener un resultado correcto. Primero, el interruptor Grados/Radianes cambia cómo interpreta cada función trigonométrica e inversa su entrada y su salida: la misma secuencia de teclas da un resultado numérico distinto en cada modo, así que conviene comprobarlo antes de leer un resultado trigonométrico. Segundo, algunas entradas no tienen una respuesta real en absoluto: dividir entre cero, calcular la raíz cuadrada o el logaritmo de un número negativo, o pedir el arcoseno de un valor fuera del rango −1 a 1. En lugar de devolver silenciosamente un número inválido, esta calculadora señala estos casos como errores explícitos, de modo que una entrada incorrecta nunca se confunda con un resultado real.",
-          "diagram": {
-            "caption": "En una circunferencia de radio 1, el seno y el coseno de un ángulo θ son simplemente la posición vertical y horizontal del punto que traza ese ángulo: la definición geométrica que hay detrás de cada tecla trigonométrica de esta calculadora.",
-            "sinTooltip": "sin θ = {value}",
-            "cosTooltip": "cos θ = {value}",
-            "radiusTooltip": "Radio = 1 (esta es la circunferencia unitaria)",
-            "originTooltip": "Centro del círculo — aquí sin(0°) = 0 y cos(0°) = 1",
-            "hint": "Arrastra el punto alrededor del círculo — sin, cos y tan se actualizan en vivo."
-          }
+          "paragraph2": "Dos detalles son importantes para obtener un resultado correcto. Primero, el interruptor Grados/Radianes cambia cómo interpreta cada función trigonométrica e inversa su entrada y su salida: la misma secuencia de teclas da un resultado numérico distinto en cada modo, así que conviene comprobarlo antes de leer un resultado trigonométrico. Segundo, algunas entradas no tienen una respuesta real en absoluto: dividir entre cero, calcular la raíz cuadrada o el logaritmo de un número negativo, o pedir el arcoseno de un valor fuera del rango −1 a 1. En lugar de devolver silenciosamente un número inválido, esta calculadora señala estos casos como errores explícitos, de modo que una entrada incorrecta nunca se confunda con un resultado real."
         },
         "functionsPowerRoots": {
           "title": "Potencias, raíces y logaritmos",
@@ -564,170 +556,191 @@
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
           "readOriginal": "Leer el artículo original"
         },
-        "functions": {
-          "powerRoot": {
-            "title": "Cuadrado, cubo y sus raíces",
-            "intro": "El mismo valor de entrada, {x}, pasa por las cuatro teclas de esta familia — elevar al cuadrado y al cubo lo hacen crecer, la raíz cuadrada y cúbica lo reducen de nuevo.",
-            "square": "x²",
-            "cube": "x³",
-            "sqrt": "√x",
-            "cbrt": "∛x",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "square": "Cuadrado (x²)",
-              "cube": "Cubo (x³)",
-              "cubeNote": "Crece más rápido de las cuatro para x > 1",
-              "sqrt": "Raíz cuadrada (√x)",
-              "cbrt": "Raíz cúbica (∛x)"
-            }
-          },
-          "logComparison": {
-            "title": "Comparando bases de logaritmo",
-            "intro": "El mismo valor de entrada, {x}, a través de las tres teclas de logaritmo de la calculadora — ln (base e), log (base 10) y logaritmo base 2 — cada una hace la misma pregunta en una base distinta: ¿qué exponente te devuelve a {x}?",
-            "log2": "log₂",
-            "ln": "ln",
-            "log10": "log₁₀",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "log2": "Base 2",
-              "ln": "Base e (ln)",
-              "log10": "Base 10 (log)",
-              "log10Note": "El resultado más pequeño — la base 10 es la mayor de las tres"
-            }
-          },
-          "exponential": {
-            "title": "La pendiente propia de la función exponencial",
-            "intro": "y = eˣ es la única función cuya pendiente en cualquier punto es igual a su propio valor ahí — la tangente en x = 1 tiene exactamente la misma pendiente que la altura de la curva.",
-            "hint": "La línea discontinua es la tangente en x = 1 — observa que su pendiente coincide con la altura de la curva ahí.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "x": "x",
-              "value": "eˣ",
-              "slope": "Pendiente en x",
-              "slopeNote": "Siempre igual a eˣ misma — la propiedad que define a exp"
-            }
-          },
-          "trigWave": {
-            "title": "Seno y coseno como ondas continuas",
-            "intro": "Las mismas teclas sin y cos de la circunferencia unitaria de arriba, ahora graficadas como una curva continua a lo largo de una vuelta y media en cada dirección — la vista gráfica de esas dos funciones.",
-            "hint": "Cada onda se repite cada 360° — el período que define a ambas funciones.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "angle": "Ángulo",
-              "sin": "sin",
-              "cos": "cos",
-              "period": "Período",
-              "periodNote": "Ambas curvas se repiten de forma idéntica cada 360°"
-            }
-          },
-          "inverseTrigRange": {
-            "title": "Por qué sin⁻¹ nunca supera ±90°",
-            "intro": "La tecla de arcoseno responde \"¿qué ángulo tiene este seno?\" — pero infinitos ángulos comparten el mismo seno, así que la calculadora siempre devuelve el que está dentro de una ventana fija de -90° a 90°.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "input": "Entrada",
-              "result": "Resultado",
-              "range": "Rango posible",
-              "rangeNote": "sin⁻¹ nunca puede devolver un ángulo fuera de esta ventana"
-            }
-          },
-          "factorial": {
-            "title": "Qué tan rápido crece el factorial",
-            "intro": "De 0! a 10! se abarcan seis órdenes de magnitud, así que una escala lineal normal aplastaría los valores pequeños en una franja ilegible — mostrado aquí en escala logarítmica en su lugar.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "note": "10! es más de 3.6 millones de veces mayor que 0!"
-            }
-          },
-          "combinatorics": {
-            "title": "Combinaciones vs. permutaciones",
-            "intro": "Para n = {n}, nCr y nPr para cada r posible — las permutaciones cuentan el orden, así que nPr siempre es al menos tan grande como nCr, y ambas solo coinciden cuando r es 0 o {n}.",
-            "tagSame": "Iguales",
-            "tagOrdered": "El orden importa",
-            "columnR": "r",
-            "columnValues": "nCr, nPr"
-          },
-          "angleMode": {
-            "title": "Grados y radianes son el mismo ángulo",
-            "intro": "El interruptor Deg/Rad no cambia el ángulo físico — solo cómo lo etiqueta la calculadora. Ambos números de abajo señalan exactamente la misma rotación.",
-            "degMode": "Modo Grados",
-            "radMode": "Modo Radianes",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "formula": "Fórmula",
-              "result": "Resultado"
-            }
-          },
-          "constants": {
-            "title": "Las constantes integradas de la calculadora",
-            "intro": "Dos números irracionales tan comunes en el trabajo científico que esta calculadora le da a cada uno su propia tecla dedicada en vez de obligarte a escribir los dígitos.",
-            "pi": {
-              "def": "La razón entre la circunferencia de un círculo y su diámetro.",
-              "use": "Usado por cada tecla trigonométrica una vez que un ángulo se convierte a radianes."
-            },
-            "e": {
-              "def": "La base para la cual eˣ es su propia derivada (ver la curva exponencial arriba).",
-              "use": "Usado en los cálculos de ln, exp y crecimiento continuo que admite esta calculadora."
-            },
-            "worked": {
-              "title": "Precisión completa"
-            }
-          },
-          "memory": {
-            "title": "Cómo se acumula la memoria",
-            "intro": "Una secuencia real M+ / M+ / M−, con el total acumulado mostrado en cada paso — el valor persistente que recupera MR, independiente de lo que Ans contenga en ese momento.",
-            "startLabel": "Inicio",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "step": "Paso",
-              "finalNote": "Esto es lo que MR recuperaría tras estas tres pulsaciones"
-            }
-          },
-          "percentFlow": {
-            "title": "Qué hace realmente la tecla %",
-            "intro": "La tecla % no solo divide entre 100 — combinada con la operación + pendiente, suma un porcentaje del número en pantalla directamente sobre él.",
-            "startLabel": "Inicio",
-            "percentLabel": "Tecla de porcentaje",
-            "resultLabel": "Resultado",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "formula": "Fórmula",
-              "result": "Resultado"
-            }
-          },
-          "derivative": {
-            "title": "La derivada numérica, leída en una curva",
-            "intro": "La función de derivada numérica de esta calculadora estima la pendiente de sin(x) en un punto elegido — la línea tangente de abajo confirma que coincide exactamente con cos(x), la derivada conocida del seno.",
-            "hint": "La línea discontinua es la tangente en x = π/3 — su pendiente es la respuesta de la derivada.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "x": "x",
-              "value": "sin(x)",
-              "slope": "Derivada",
-              "slopeNote": "Coincide exactamente con cos(x), como predice el cálculo"
-            }
-          },
-          "integral": {
-            "title": "La integral numérica, como área real",
-            "intro": "La función de integral numérica de esta calculadora estima el área bajo una curva entre dos límites — sombreada aquí para y = x² de 0 a 3, coincidiendo exactamente con la forma cerrada x³/3.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "function": "Función",
-              "bounds": "Límites",
-              "area": "Área",
-              "areaNote": "Coincide exactamente con la antiderivada cerrada x³/3"
-            }
-          },
-          "signPolarity": {
-            "title": "Qué hace la tecla |x| con un número negativo",
-            "intro": "La tecla de valor absoluto refleja cualquier entrada negativa a través del cero hacia su imagen espejo positiva — la distancia al cero permanece idéntica, solo cambia el signo.",
-            "worked": {
-              "title": "Ejemplo resuelto",
-              "input": "Entrada",
-              "output": "Salida",
-              "note": "Misma distancia al cero, lado opuesto"
-            }
+        "hero": {
+          "angleLabel": "Ángulo",
+          "ariaLabel": "Diagrama interactivo del círculo unitario — arrastra el punto alrededor del círculo para cambiar el ángulo",
+          "cosTooltip": "cos θ = {value}",
+          "sinTooltip": "sen θ = {value}",
+          "hint": "Arrastra el punto alrededor del círculo — todos los indicadores trigonométricos de esta página se actualizan con él."
+        },
+        "trigWave": {
+          "title": "Seno y coseno, un giro completo",
+          "intro": "Las mismas teclas sen y cos del teclado, graficadas a la vez en cada ángulo de 0° a 360°.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "angle": "Ángulo"
           }
+        },
+        "derivativeSlope": {
+          "title": "La pendiente del seno, calculada en vivo",
+          "intro": "La derivada numérica real de la calculadora — no un cos(x) fijo — evaluada en el ángulo actual del héroe y dibujada como la línea tangente en vivo de la curva.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "angle": "Ángulo",
+            "sinValue": "sen(ángulo)",
+            "slope": "Derivada",
+            "note": "Calculada por diferencia central, el mismo método que usa la tecla ƒ'(x)"
+          }
+        },
+        "integralArea": {
+          "title": "El área bajo el seno, barrida en vivo",
+          "intro": "El área real bajo la curva del seno desde 0° hasta el ángulo actual del héroe, sombreada mientras cambia el ángulo.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "angle": "Ángulo",
+            "area": "Área"
+          }
+        },
+        "tangentCurve": {
+          "title": "La tangente y sus dos asíntotas",
+          "intro": "A diferencia del seno y el coseno, la tangente se dispara al infinito dos veces por giro — justo donde la propia tecla tan() de la calculadora devuelve un error.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "angle": "Ángulo",
+            "undefined": "Indefinido",
+            "asymptoteNote": "Este ángulo cae justo sobre una asíntota"
+          }
+        },
+        "inverseTrigRange": {
+          "title": "Por qué asin(sen(x)) no siempre devuelve x",
+          "intro": "El arcoseno solo devuelve un ángulo entre −90° y 90° — arrastra el héroe más allá de ese rango y observa cómo el viaje de ida y vuelta deja de coincidir.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "angle": "Ángulo",
+            "sinValue": "sen(ángulo)",
+            "asinResult": "asin(sen(ángulo))",
+            "match": "Viaje de ida y vuelta",
+            "matchYes": "Coincide con el ángulo original",
+            "matchNo": "No coincide",
+            "matchNote": "Fuera del rango del arcoseno de −90° a 90°, devuelve un ángulo equivalente en su lugar"
+          }
+        },
+        "angleMode": {
+          "title": "Un ángulo, tres unidades",
+          "intro": "El ángulo actual del héroe, convertido en vivo a cada unidad entre la que puede cambiar el modo de ángulo de una calculadora.",
+          "degreesLabel": "Grados",
+          "radiansLabel": "Radianes",
+          "gradiansLabel": "Gradianes",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "degToRad": "Grados → radianes",
+            "degToGrad": "Grados → gradianes"
+          }
+        },
+        "powerRoot": {
+          "title": "Cuadrados, cubos y sus raíces",
+          "intro": "Un control deslizante en vivo mueve juntas las teclas de cuadrado, cubo, raíz cuadrada y raíz cúbica de la calculadora.",
+          "sliderLabel": "Valor base",
+          "squareLabel": "x²",
+          "cubeLabel": "x³",
+          "sqrtLabel": "√x",
+          "cbrtLabel": "∛x",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "logComparison": {
+          "title": "Tres bases de logaritmo, clasificadas",
+          "intro": "El mismo x en vivo, pasado por las teclas log₁₀, ln y log₂ de la calculadora — clasificadas según cuál da el resultado más grande.",
+          "sliderLabel": "x",
+          "log10Label": "log₁₀(x)",
+          "lnLabel": "ln(x)",
+          "log2Label": "log₂(x)",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "factorialMagnitude": {
+          "title": "Qué tan rápido crece en realidad el factorial",
+          "intro": "Arrastra n y observa cómo la tecla de factorial real de la calculadora explota más allá de lo que una escala lineal podría mostrar.",
+          "sliderLabel": "n",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "factorial": "Factorial",
+            "result": "Resultado"
+          }
+        },
+        "combinatorics": {
+          "title": "Permutaciones vs. combinaciones, en vivo",
+          "intro": "Dos controles deslizantes en vivo mueven juntas las teclas nPr y nCr de la calculadora — el orden siempre importa para una, nunca para la otra.",
+          "nSliderLabel": "n",
+          "rSliderLabel": "r",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "orderedNote": "El orden importa",
+            "unorderedNote": "El orden no importa"
+          }
+        },
+        "memoryTimeline": {
+          "title": "Construyendo una línea de tiempo de memoria real",
+          "intro": "Pulsa M+, M− y MC de la misma manera que funcionan las propias teclas de memoria del teclado, y observa cómo se construye un total acumulado real paso a paso.",
+          "amountSliderLabel": "Cantidad a sumar o restar",
+          "amountLabel": "Cantidad",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "currentMemory": "Memoria actual"
+          }
+        },
+        "signPolarity": {
+          "title": "Un valor y su valor absoluto",
+          "intro": "Arrastra un valor con signo y observa cómo la tecla abs() real de la calculadora lo devuelve al lado positivo.",
+          "sliderLabel": "x",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "percentFlow": {
+          "title": "Porcentaje de un valor, en vivo",
+          "intro": "Dos controles deslizantes en vivo alimentan la tecla % real de la calculadora — la misma operación que realiza su botón de porcentaje.",
+          "baseSliderLabel": "Valor base",
+          "baseLabel": "Base",
+          "percentSliderLabel": "Porcentaje",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "mathConstants": {
+          "title": "Cuatro constantes, tantas cifras como quieras",
+          "intro": "Arrastra el control de precisión para revelar más cifras de π, e, la proporción áurea y √2 — esta última calculada en vivo mediante la tecla real de raíz cuadrada de la calculadora.",
+          "sliderLabel": "Precisión",
+          "precisionLabel": "Cifras decimales",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          },
+          "names": {
+            "pi": "Pi",
+            "e": "Número de Euler",
+            "phi": "Proporción áurea",
+            "sqrt2": "Raíz cuadrada de 2"
+          }
+        },
+        "orderOfOperations": {
+          "title": "Orden de operaciones, paso a paso",
+          "intro": "Avanza haciendo clic por la evaluación de una expresión real, una regla de precedencia a la vez — primero los exponentes, luego los paréntesis, luego la multiplicación, luego la suma.",
+          "next": "Siguiente",
+          "prev": "Anterior",
+          "steps": {
+            "start": "Expresión inicial, nada evaluado todavía",
+            "exponent": "Los exponentes se resuelven primero: 2³ = 8",
+            "parens": "Luego los paréntesis: 8 − 1 = 7",
+            "multiply": "Luego la multiplicación: 4 × 7 = 28",
+            "add": "Finalmente la suma: 3 + 28 = 31"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "stepNumber": "Paso",
+            "partialResult": "Resultado parcial"
+          }
+        },
+        "calculusPreview": {
+          "title": "Un primer vistazo al cálculo",
+          "intro": "Dos de las teclas de función de la calculadora se adentran en el cálculo — una derivada numérica y una integral numérica, ambas construidas sobre la misma curva del seno que esta página ya explora."
+        },
+        "combinatoricsAndConstants": {
+          "title": "Contar, y las constantes detrás de ello",
+          "intro": "Permutaciones, combinaciones, factoriales y cuatro de las constantes más famosas de las matemáticas — todas en vivo, todas calculadas por las propias teclas de la calculadora."
         }
       },
       "shareExport": {
@@ -752,18 +765,6 @@
         "currentResultLabel": "Resultado Actual",
         "summarySentence": "Valor actual mostrado: {value}.",
         "resultSectionTitle": "Resultado"
-      },
-      "orderOfOperationsDiagram": {
-        "title": "Orden de las Operaciones",
-        "intro": "La misma secuencia —paréntesis → exponentes → multiplicación/división → suma/resta— que sigue el analizador de expresiones de esta calculadora en cada entrada con varios operadores.",
-        "steps": {
-          "start": "Inicio",
-          "exponent": "Exponente",
-          "multiply": "Multiplicación",
-          "addSubtract": "Suma/Resta"
-        },
-        "resultBadge": "Resultado",
-        "caption": "Orden de las operaciones: paréntesis, exponentes, multiplicación/división (de izquierda a derecha), suma/resta (de izquierda a derecha)."
       }
     },
     "age-calculator": {

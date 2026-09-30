@@ -1,51 +1,57 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Mafs, Coordinates, Plot, Line, Point } from "mafs";
+import { Mafs, Coordinates, Plot, Point, Line } from "mafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
+import { ScientificCalculator } from "@tooloralabs/tools";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useScientificAngle } from "./ScientificAngleContext";
 
-const LIGHT = { curve: "#2563eb", tangent: "#dc2626" };
-const DARK = { curve: "#60a5fa", tangent: "#f87171" };
-const X0 = 1;
+const tool = new ScientificCalculator();
+const LIGHT = { amber: "#d97706", zinc: "#a1a1aa" };
+const DARK = { amber: "#fbbf24", zinc: "#71717a" };
 
 function round3(n: number): number {
   return Math.round(n * 1000) / 1000;
 }
 
-/** Type #7 (trend line + reference point): y = eˣ, with the tangent line at x=1 drawn explicitly — its slope is eˣ itself, the defining property of this calculator's exp key (the function that is its own derivative). */
+/** Type #7 (Trend Line with Highlighted Reference Point): the real tangent curve, whose own two vertical asymptotes near 90° and 270° are exactly where the calculator's tan() operation itself returns an out-of-range error. */
 export default function ExponentialTangentCurve() {
-  const t = useTranslations("tools.scientific-calculator.education.functions.exponential");
+  const t = useTranslations("tools.scientific-calculator.education.tangentCurve");
   const isDark = useIsDarkMode();
   const colors = isDark ? DARK : LIGHT;
+  const { dims } = useScientificAngle();
 
-  const y0 = round3(Math.exp(X0));
-  const slope = y0; // d/dx e^x = e^x
+  const tanOut = tool.execute({ operation: "tan", a: dims.angleDeg, angleMode: "deg" }, { locale: "en-US" });
+  const isDefined = tanOut.success;
+  const tanValue = isDefined ? round3(tanOut.data.result) : null;
+  const clampedTan = isDefined ? Math.max(-8, Math.min(8, tanOut.data.result)) : 0;
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div dir="ltr" className="mafs-canvas w-full shrink-0 overflow-hidden rounded-xl lg:w-[320px]">
-          <Mafs viewBox={{ x: [-2, 2.5], y: [-1, 8] }} height={260} pan={false} zoom={false}>
-            <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 2 }} />
-            <Plot.OfX y={(x) => Math.exp(x)} domain={[-2, 2.2]} color={colors.curve} weight={2.5} />
-            <Line.Segment point1={[X0 - 1, y0 - slope]} point2={[X0 + 1, y0 + slope]} color={colors.tangent} weight={2} style="dashed" />
-            <Point x={X0} y={y0} color={colors.tangent} svgCircleProps={{ r: 4.5 }} />
-          </Mafs>
-        </div>
+      <div dir="ltr" className="mafs-canvas mt-4 w-full overflow-hidden rounded-xl">
+        <Mafs viewBox={{ x: [0, 360], y: [-8, 8] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+          <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 2 }} />
+          <Line.Segment point1={[90, -8]} point2={[90, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
+          <Line.Segment point1={[270, -8]} point2={[270, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
+          <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[0, 89]} color={colors.amber} />
+          <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[91, 269]} color={colors.amber} />
+          <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[271, 360]} color={colors.amber} />
+          {isDefined && <Point x={dims.angleDeg} y={clampedTan} color={colors.amber} />}
+        </Mafs>
+      </div>
+      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: t("worked.x"), value: `${X0}` },
-            { label: t("worked.value"), value: `e^${X0} = ${y0}` },
-            { label: t("worked.slope"), value: `${slope}`, emphasize: true, note: t("worked.slopeNote") },
+            { label: t("worked.angle"), value: `${round3(dims.angleDeg)}°` },
+            { label: "tan", value: isDefined ? `${tanValue}` : t("worked.undefined"), emphasize: true, note: isDefined ? undefined : t("worked.asymptoteNote") },
           ]}
         />
       </div>
-      <p className="mt-3 text-xs opacity-60">{t("hint")}</p>
     </SectionCard>
   );
 }

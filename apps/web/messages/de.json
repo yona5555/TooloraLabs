@@ -425,15 +425,7 @@
         "intro": {
           "title": "So wertet dieser Rechner einen Ausdruck aus",
           "paragraph1": "Dieser Rechner wertet Operationen so aus, wie es ein physischer wissenschaftlicher Taschenrechner tut: sequenziell, während Sie sie eingeben, statt einen vollständig getippten Ausdruck mit Klammern zu analysieren. Das Drücken eines Operators löst sofort die anstehende Berechnung auf und reiht die neue ein; das Drücken einer Funktionstaste (sin, √x, ln und die übrigen) wirkt unmittelbar auf die gerade angezeigte Zahl. Damit sind vier Operationsfamilien abgedeckt – Grundrechenarten, Potenzen und Wurzeln, Logarithmen und Exponentialfunktionen sowie Trigonometrie –, jede über die Tastatur erreichbar, ohne den Modus zu wechseln.",
-          "paragraph2": "Zwei Details sind für ein korrektes Ergebnis entscheidend. Erstens verändert der Grad-/Radiant-Umschalter, wie jede trigonometrische und inverse trigonometrische Funktion ihre Ein- und Ausgabe interpretiert – dieselbe Tastenfolge liefert in jedem Modus ein anderes Zahlenergebnis, weshalb es sich lohnt, dies vor dem Ablesen eines trigonometrischen Ergebnisses zu prüfen. Zweitens haben manche Eingaben überhaupt keine reelle Lösung: die Division durch null, das Ziehen der Quadratwurzel oder des Logarithmus einer negativen Zahl oder die Frage nach dem Arkussinus eines Werts außerhalb von −1 bis 1. Statt stillschweigend eine ungültige Zahl zurückzugeben, kennzeichnet dieser Rechner solche Fälle als ausdrückliche Fehler, damit eine falsche Eingabe niemals mit einem echten Ergebnis verwechselt wird.",
-          "diagram": {
-            "caption": "Auf einem Kreis mit Radius 1 entsprechen Sinus und Kosinus eines Winkels θ einfach der senkrechten und waagerechten Position des Punkts, den dieser Winkel beschreibt – die geometrische Definition hinter jeder trigonometrischen Taste dieses Rechners.",
-            "sinTooltip": "sin θ = {value}",
-            "cosTooltip": "cos θ = {value}",
-            "radiusTooltip": "Radius = 1 (dies ist der Einheitskreis)",
-            "originTooltip": "Kreismittelpunkt — hier gilt sin(0°) = 0 und cos(0°) = 1",
-            "hint": "Ziehen Sie den Punkt um den Kreis — sin, cos und tan aktualisieren sich live."
-          }
+          "paragraph2": "Zwei Details sind für ein korrektes Ergebnis entscheidend. Erstens verändert der Grad-/Radiant-Umschalter, wie jede trigonometrische und inverse trigonometrische Funktion ihre Ein- und Ausgabe interpretiert – dieselbe Tastenfolge liefert in jedem Modus ein anderes Zahlenergebnis, weshalb es sich lohnt, dies vor dem Ablesen eines trigonometrischen Ergebnisses zu prüfen. Zweitens haben manche Eingaben überhaupt keine reelle Lösung: die Division durch null, das Ziehen der Quadratwurzel oder des Logarithmus einer negativen Zahl oder die Frage nach dem Arkussinus eines Werts außerhalb von −1 bis 1. Statt stillschweigend eine ungültige Zahl zurückzugeben, kennzeichnet dieser Rechner solche Fälle als ausdrückliche Fehler, damit eine falsche Eingabe niemals mit einem echten Ergebnis verwechselt wird."
         },
         "functionsPowerRoots": {
           "title": "Potenzen, Wurzeln & Logarithmen",
@@ -564,170 +556,191 @@
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
           "readOriginal": "Originalartikel lesen"
         },
-        "functions": {
-          "powerRoot": {
-            "title": "Quadrat, Kubik und ihre Wurzeln",
-            "intro": "Derselbe Eingabewert, {x}, durchläuft alle vier Tasten dieser Familie — Quadrieren und Kubieren lassen ihn wachsen, Quadrat- und Kubikwurzel verkleinern ihn wieder.",
-            "square": "x²",
-            "cube": "x³",
-            "sqrt": "√x",
-            "cbrt": "∛x",
-            "worked": {
-              "title": "Musterbeispiel",
-              "square": "Quadrat (x²)",
-              "cube": "Kubik (x³)",
-              "cubeNote": "Wächst von allen vieren am schnellsten für x > 1",
-              "sqrt": "Quadratwurzel (√x)",
-              "cbrt": "Kubikwurzel (∛x)"
-            }
-          },
-          "logComparison": {
-            "title": "Vergleich der Logarithmusbasen",
-            "intro": "Derselbe Eingabewert, {x}, durch die drei Logarithmus-Tasten des Rechners — ln (Basis e), log (Basis 10) und Logarithmus zur Basis 2 — jede stellt dieselbe Frage in einer anderen Basis: Welcher Exponent führt zurück zu {x}?",
-            "log2": "log₂",
-            "ln": "ln",
-            "log10": "log₁₀",
-            "worked": {
-              "title": "Musterbeispiel",
-              "log2": "Basis 2",
-              "ln": "Basis e (ln)",
-              "log10": "Basis 10 (log)",
-              "log10Note": "Kleinstes Ergebnis — Basis 10 ist die größte der drei Basen"
-            }
-          },
-          "exponential": {
-            "title": "Die eigene Steigung der Exponentialfunktion",
-            "intro": "y = eˣ ist die einzige Funktion, deren Steigung an jedem Punkt genau ihrem eigenen Wert dort entspricht — die Tangente bei x = 1 hat exakt dieselbe Steigung wie die Höhe der Kurve.",
-            "hint": "Die gestrichelte Linie ist die Tangente bei x = 1 — ihre Steigung entspricht dort der Kurvenhöhe.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "x": "x",
-              "value": "eˣ",
-              "slope": "Steigung bei x",
-              "slopeNote": "Immer gleich eˣ selbst — die definierende Eigenschaft von exp"
-            }
-          },
-          "trigWave": {
-            "title": "Sinus und Kosinus als kontinuierliche Wellen",
-            "intro": "Dieselben sin- und cos-Tasten vom Einheitskreis oben, jetzt als durchgehende Kurve über anderthalb volle Umdrehungen in jede Richtung geplottet — die grafische Ansicht dieser beiden Funktionen.",
-            "hint": "Jede Welle wiederholt sich alle 360° — die definierende Periode beider Funktionen.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "angle": "Winkel",
-              "sin": "sin",
-              "cos": "cos",
-              "period": "Periode",
-              "periodNote": "Beide Kurven wiederholen sich identisch alle 360°"
-            }
-          },
-          "inverseTrigRange": {
-            "title": "Warum sin⁻¹ nie über ±90° hinausgeht",
-            "intro": "Die Arkussinus-Taste beantwortet \"welcher Winkel hat diesen Sinus?\" — aber unendlich viele Winkel teilen denselben Sinus, daher gibt der Rechner immer den Winkel innerhalb eines festen Fensters von -90° bis 90° zurück.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "input": "Eingabe",
-              "result": "Ergebnis",
-              "range": "Möglicher Bereich",
-              "rangeNote": "sin⁻¹ kann nie einen Winkel außerhalb dieses Fensters zurückgeben"
-            }
-          },
-          "factorial": {
-            "title": "Wie schnell die Fakultät wächst",
-            "intro": "0! bis 10! überspannen sechs Größenordnungen — eine normale lineare Skala würde die kleinen Werte zu einem unlesbaren Streifen zusammenpressen, daher hier auf einer logarithmischen Skala dargestellt.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "note": "10! ist über 3,6 Millionen Mal größer als 0!"
-            }
-          },
-          "combinatorics": {
-            "title": "Kombinationen vs. Permutationen",
-            "intro": "Für n = {n}: nCr und nPr für jedes mögliche r — Permutationen zählen die Reihenfolge, daher ist nPr immer mindestens so groß wie nCr, und beide stimmen nur überein, wenn r gleich 0 oder {n} ist.",
-            "tagSame": "Gleich",
-            "tagOrdered": "Reihenfolge zählt",
-            "columnR": "r",
-            "columnValues": "nCr, nPr"
-          },
-          "angleMode": {
-            "title": "Grad und Radiant sind derselbe Winkel",
-            "intro": "Der Grad/Radiant-Schalter ändert nicht den physikalischen Winkel — nur wie der Rechner ihn beschriftet. Beide Zahlen unten bezeichnen exakt dieselbe Drehung.",
-            "degMode": "Grad-Modus",
-            "radMode": "Radiant-Modus",
-            "worked": {
-              "title": "Musterbeispiel",
-              "formula": "Formel",
-              "result": "Ergebnis"
-            }
-          },
-          "constants": {
-            "title": "Die eingebauten Konstanten des Rechners",
-            "intro": "Zwei irrationale Zahlen, die in wissenschaftlicher Arbeit so häufig vorkommen, dass dieser Rechner jeder eine eigene Taste gibt, statt die Ziffern eintippen zu lassen.",
-            "pi": {
-              "def": "Das Verhältnis des Kreisumfangs zu seinem Durchmesser.",
-              "use": "Wird von jeder Trigonometrie-Taste verwendet, sobald ein Winkel in Radiant umgerechnet ist."
-            },
-            "e": {
-              "def": "Die Basis, für die eˣ seine eigene Ableitung ist (siehe Exponentialkurve oben).",
-              "use": "Wird für ln, exp und die kontinuierlichen Wachstumsberechnungen dieses Rechners verwendet."
-            },
-            "worked": {
-              "title": "Volle Genauigkeit"
-            }
-          },
-          "memory": {
-            "title": "Wie sich der Speicherplatz aufsummiert",
-            "intro": "Eine echte M+ / M+ / M−-Abfolge, mit der laufenden Summe bei jedem Schritt — der dauerhafte Wert, den MR abruft, unabhängig davon, was Ans gerade enthält.",
-            "startLabel": "Start",
-            "worked": {
-              "title": "Musterbeispiel",
-              "step": "Schritt",
-              "finalNote": "Das würde MR nach diesen drei Tastendrücken abrufen"
-            }
-          },
-          "percentFlow": {
-            "title": "Was die %-Taste wirklich tut",
-            "intro": "Die %-Taste teilt nicht einfach durch 100 — zusammen mit der ausstehenden +-Operation addiert sie einen Prozentsatz der angezeigten Zahl direkt darauf.",
-            "startLabel": "Start",
-            "percentLabel": "Prozent-Taste",
-            "resultLabel": "Ergebnis",
-            "worked": {
-              "title": "Musterbeispiel",
-              "formula": "Formel",
-              "result": "Ergebnis"
-            }
-          },
-          "derivative": {
-            "title": "Die numerische Ableitung, von einer Kurve abgelesen",
-            "intro": "Die numerische Ableitungsfunktion dieses Rechners schätzt die Steigung von sin(x) an einem gewählten Punkt — die Tangente unten bestätigt, dass sie exakt cos(x) entspricht, der bekannten Ableitung des Sinus.",
-            "hint": "Die gestrichelte Linie ist die Tangente bei x = π/3 — ihre Steigung ist das Ergebnis der Ableitung.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "x": "x",
-              "value": "sin(x)",
-              "slope": "Ableitung",
-              "slopeNote": "Entspricht exakt cos(x), wie die Analysis vorhersagt"
-            }
-          },
-          "integral": {
-            "title": "Das numerische Integral als reale Fläche",
-            "intro": "Die numerische Integralfunktion dieses Rechners schätzt die Fläche unter einer Kurve zwischen zwei Grenzen — hier schattiert für y = x² von 0 bis 3, was exakt der geschlossenen Form x³/3 entspricht.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "function": "Funktion",
-              "bounds": "Grenzen",
-              "area": "Fläche",
-              "areaNote": "Entspricht exakt der geschlossenen Stammfunktion x³/3"
-            }
-          },
-          "signPolarity": {
-            "title": "Was die |x|-Taste mit einer negativen Zahl macht",
-            "intro": "Die Betrag-Taste spiegelt jede negative Eingabe über null an ihrem positiven Spiegelbild — der Abstand von null bleibt identisch, nur das Vorzeichen ändert sich.",
-            "worked": {
-              "title": "Musterbeispiel",
-              "input": "Eingabe",
-              "output": "Ausgabe",
-              "note": "Gleicher Abstand von null, entgegengesetzte Seite"
-            }
+        "hero": {
+          "angleLabel": "Winkel",
+          "ariaLabel": "Interaktives Einheitskreis-Diagramm — ziehen Sie den Punkt um den Kreis, um den Winkel zu ändern",
+          "cosTooltip": "cos θ = {value}",
+          "sinTooltip": "sin θ = {value}",
+          "hint": "Ziehen Sie den Punkt um den Kreis — jede trigonometrische Anzeige auf dieser Seite aktualisiert sich mit."
+        },
+        "trigWave": {
+          "title": "Sinus und Kosinus, eine volle Umdrehung",
+          "intro": "Dieselben sin- und cos-Tasten der Tastatur, aufgetragen über jeden Winkel von 0° bis 360° gleichzeitig.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "angle": "Winkel"
           }
+        },
+        "derivativeSlope": {
+          "title": "Die Steigung des Sinus, live berechnet",
+          "intro": "Die echte numerische Ableitung des Rechners — kein fest codiertes cos(x) — ausgewertet am aktuellen Winkel des Hero-Elements und als lebendige Tangente an die Kurve gezeichnet.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "angle": "Winkel",
+            "sinValue": "sin(Winkel)",
+            "slope": "Ableitung",
+            "note": "Berechnet per zentralem Differenzenquotient, derselben Methode, die die Taste ƒ'(x) verwendet"
+          }
+        },
+        "integralArea": {
+          "title": "Die Fläche unter dem Sinus, live überstrichen",
+          "intro": "Die echte Fläche unter der Sinuskurve von 0° bis zum aktuellen Winkel des Hero-Elements, schattiert während sich der Winkel ändert.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel",
+            "angle": "Winkel",
+            "area": "Fläche"
+          }
+        },
+        "tangentCurve": {
+          "title": "Tangens und seine zwei Asymptoten",
+          "intro": "Anders als Sinus und Kosinus schießt der Tangens zweimal pro Umdrehung ins Unendliche — genau dort, wo die tan()-Taste des Rechners einen Fehler zurückgibt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "angle": "Winkel",
+            "undefined": "Undefiniert",
+            "asymptoteNote": "Dieser Winkel liegt genau auf einer Asymptote"
+          }
+        },
+        "inverseTrigRange": {
+          "title": "Warum asin(sin(x)) nicht immer x zurückgibt",
+          "intro": "Arkussinus liefert immer nur einen Winkel zwischen −90° und 90° — ziehen Sie das Hero-Element über diesen Bereich hinaus und beobachten Sie, wie der Hin- und Rückweg nicht mehr übereinstimmt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "angle": "Winkel",
+            "sinValue": "sin(Winkel)",
+            "asinResult": "asin(sin(Winkel))",
+            "match": "Hin- und Rückweg",
+            "matchYes": "Stimmt mit dem ursprünglichen Winkel überein",
+            "matchNo": "Stimmt nicht überein",
+            "matchNote": "Außerhalb des Arkussinus-Bereichs von −90° bis 90° liefert er stattdessen einen äquivalenten Winkel"
+          }
+        },
+        "angleMode": {
+          "title": "Ein Winkel, drei Einheiten",
+          "intro": "Der aktuelle Winkel des Hero-Elements, live umgerechnet in jede Einheit, zwischen der die Winkelmodus-Einstellung eines Rechners wechseln kann.",
+          "degreesLabel": "Grad",
+          "radiansLabel": "Radiant",
+          "gradiansLabel": "Gon",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "degToRad": "Grad → Radiant",
+            "degToGrad": "Grad → Gon"
+          }
+        },
+        "powerRoot": {
+          "title": "Quadrate, Kuben und ihre Wurzeln",
+          "intro": "Ein live Schieberegler steuert die Quadrat-, Kubik-, Quadratwurzel- und Kubikwurzel-Tasten des Rechners gemeinsam.",
+          "sliderLabel": "Basiswert",
+          "squareLabel": "x²",
+          "cubeLabel": "x³",
+          "sqrtLabel": "√x",
+          "cbrtLabel": "∛x",
+          "worked": {
+            "title": "Rechenbeispiel"
+          }
+        },
+        "logComparison": {
+          "title": "Drei Logarithmusbasen im Vergleich",
+          "intro": "Dasselbe live x, durch die log₁₀-, ln- und log₂-Tasten des Rechners geschickt — gereiht nach dem größten Ergebnis.",
+          "sliderLabel": "x",
+          "log10Label": "log₁₀(x)",
+          "lnLabel": "ln(x)",
+          "log2Label": "log₂(x)",
+          "worked": {
+            "title": "Rechenbeispiel"
+          }
+        },
+        "factorialMagnitude": {
+          "title": "Wie schnell die Fakultät wirklich wächst",
+          "intro": "Ziehen Sie n und beobachten Sie, wie die echte Fakultät-Taste des Rechners alles sprengt, was eine lineare Skala zeigen könnte.",
+          "sliderLabel": "n",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "factorial": "Fakultät",
+            "result": "Ergebnis"
+          }
+        },
+        "combinatorics": {
+          "title": "Permutationen vs. Kombinationen, live",
+          "intro": "Zwei live Schieberegler steuern die nPr- und nCr-Tasten des Rechners gemeinsam — bei der einen zählt die Reihenfolge immer, bei der anderen nie.",
+          "nSliderLabel": "n",
+          "rSliderLabel": "r",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "orderedNote": "Reihenfolge zählt",
+            "unorderedNote": "Reihenfolge zählt nicht"
+          }
+        },
+        "memoryTimeline": {
+          "title": "Eine echte Speicher-Zeitleiste aufbauen",
+          "intro": "Drücken Sie M+, M− und MC genauso, wie es die Speichertasten der Tastatur selbst tun, und beobachten Sie, wie sich eine echte laufende Summe Schritt für Schritt aufbaut.",
+          "amountSliderLabel": "Zu addierender oder subtrahierender Betrag",
+          "amountLabel": "Betrag",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "currentMemory": "Aktueller Speicher"
+          }
+        },
+        "signPolarity": {
+          "title": "Ein Wert und sein Betrag",
+          "intro": "Ziehen Sie einen vorzeichenbehafteten Wert und beobachten Sie, wie die echte abs()-Taste des Rechners ihn auf die positive Seite zieht.",
+          "sliderLabel": "x",
+          "worked": {
+            "title": "Rechenbeispiel"
+          }
+        },
+        "percentFlow": {
+          "title": "Prozent eines Werts, live",
+          "intro": "Zwei live Schieberegler speisen die echte %-Taste des Rechners — dieselbe Operation, die seine Prozent-Taste ausführt.",
+          "baseSliderLabel": "Basiswert",
+          "baseLabel": "Basis",
+          "percentSliderLabel": "Prozent",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "mathConstants": {
+          "title": "Vier Konstanten, so viele Stellen wie Sie wollen",
+          "intro": "Ziehen Sie den Präzisions-Schieberegler, um mehr Stellen von π, e, dem Goldenen Schnitt und √2 sichtbar zu machen — Letzteres live über die echte Quadratwurzel-Taste des Rechners berechnet.",
+          "sliderLabel": "Präzision",
+          "precisionLabel": "Nachkommastellen",
+          "worked": {
+            "title": "Rechenbeispiel"
+          },
+          "names": {
+            "pi": "Pi",
+            "e": "Eulersche Zahl",
+            "phi": "Goldener Schnitt",
+            "sqrt2": "Quadratwurzel aus 2"
+          }
+        },
+        "orderOfOperations": {
+          "title": "Rechenreihenfolge, Schritt für Schritt",
+          "intro": "Klicken Sie sich durch die Auswertung eines echten Ausdrucks, eine Vorrangregel nach der anderen — zuerst Potenzen, dann die Klammern, dann Multiplikation, dann Addition.",
+          "next": "Weiter",
+          "prev": "Zurück",
+          "steps": {
+            "start": "Ausgangsausdruck, noch nichts ausgewertet",
+            "exponent": "Potenzen werden zuerst aufgelöst: 2³ = 8",
+            "parens": "Dann die Klammern: 8 − 1 = 7",
+            "multiply": "Dann die Multiplikation: 4 × 7 = 28",
+            "add": "Zuletzt die Addition: 3 + 28 = 31"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "stepNumber": "Schritt",
+            "partialResult": "Zwischenergebnis"
+          }
+        },
+        "calculusPreview": {
+          "title": "Ein erster Blick auf die Analysis",
+          "intro": "Zwei der Funktionstasten des Rechners reichen in die Analysis hinein — eine numerische Ableitung und ein numerisches Integral, beide auf derselben Sinuskurve aufgebaut, die diese Seite bereits erkundet."
+        },
+        "combinatoricsAndConstants": {
+          "title": "Zählen, und die Konstanten dahinter",
+          "intro": "Permutationen, Kombinationen, Fakultäten und vier der berühmtesten Konstanten der Mathematik — alle live, alle von den echten Tasten des Rechners berechnet."
         }
       },
       "shareExport": {
@@ -752,18 +765,6 @@
         "currentResultLabel": "Aktuelles Ergebnis",
         "summarySentence": "Aktueller Anzeigewert: {value}.",
         "resultSectionTitle": "Ergebnis"
-      },
-      "orderOfOperationsDiagram": {
-        "title": "Rechenreihenfolge",
-        "intro": "Dieselbe Reihenfolge — Klammern → Potenzen → Multiplikation/Division → Addition/Subtraktion —, der der Ausdrucksparser dieses Rechners bei jeder Eingabe mit mehreren Operatoren folgt.",
-        "steps": {
-          "start": "Start",
-          "exponent": "Potenz",
-          "multiply": "Multiplikation",
-          "addSubtract": "Addition/Subtraktion"
-        },
-        "resultBadge": "Ergebnis",
-        "caption": "Rechenreihenfolge: Klammern, Potenzen, Multiplikation/Division (von links nach rechts), Addition/Subtraktion (von links nach rechts)."
       }
     },
     "age-calculator": {

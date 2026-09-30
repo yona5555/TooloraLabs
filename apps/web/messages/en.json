@@ -425,15 +425,7 @@
         "intro": {
           "title": "How This Calculator Evaluates an Expression",
           "paragraph1": "This calculator evaluates operations the way a physical scientific calculator does: sequentially, as you enter them, rather than parsing a fully typed-out expression with parentheses. Pressing an operator immediately resolves whatever calculation is pending, then queues the new one; pressing a function key (sin, √x, ln, and the rest) applies instantly to the number currently on screen. This covers four families of operations — basic arithmetic, powers and roots, logarithms and exponentials, and trigonometry — each accessible from the keypad without switching modes.",
-          "paragraph2": "Two details matter for getting a correct result. First, the Deg/Rad toggle changes how every trigonometric and inverse-trigonometric function interprets its input and output — the same button sequence gives a different numeric answer in each mode, so it's worth checking before reading a trig result. Second, some inputs have no real answer at all: dividing by zero, taking the square root or logarithm of a negative number, or asking for the arcsine of a value outside −1 to 1. Rather than returning an invalid number silently, this calculator flags these as explicit errors so a wrong input is never mistaken for a real result.",
-          "diagram": {
-            "caption": "On a circle of radius 1, the sine and cosine of an angle θ are simply the vertical and horizontal position of the point that angle traces out — the geometric definition behind every trigonometric key on this calculator.",
-            "sinTooltip": "sin θ = {value}",
-            "cosTooltip": "cos θ = {value}",
-            "radiusTooltip": "Radius = 1 (this is the unit circle)",
-            "originTooltip": "Center of the circle — sin(0°) = 0, cos(0°) = 1 here",
-            "hint": "Drag the point around the circle — sin, cos, and tan update live."
-          }
+          "paragraph2": "Two details matter for getting a correct result. First, the Deg/Rad toggle changes how every trigonometric and inverse-trigonometric function interprets its input and output — the same button sequence gives a different numeric answer in each mode, so it's worth checking before reading a trig result. Second, some inputs have no real answer at all: dividing by zero, taking the square root or logarithm of a negative number, or asking for the arcsine of a value outside −1 to 1. Rather than returning an invalid number silently, this calculator flags these as explicit errors so a wrong input is never mistaken for a real result."
         },
         "functionsPowerRoots": {
           "title": "Powers, Roots & Logarithms",
@@ -564,170 +556,191 @@
           "url": "https://ethw.org/Milestones:Development_of_the_HP-35,_the_First_Handheld_Scientific_Calculator,_1972",
           "readOriginal": "Read the Original Article"
         },
-        "functions": {
-          "powerRoot": {
-            "title": "Square, Cube, and Their Roots",
-            "intro": "The same input, {x}, run through all four keys in this family — squaring and cubing grow it, square root and cube root shrink it back down.",
-            "square": "x²",
-            "cube": "x³",
-            "sqrt": "√x",
-            "cbrt": "∛x",
-            "worked": {
-              "title": "Worked Example",
-              "square": "Square (x²)",
-              "cube": "Cube (x³)",
-              "cubeNote": "Grows fastest of the four for x > 1",
-              "sqrt": "Square root (√x)",
-              "cbrt": "Cube root (∛x)"
-            }
-          },
-          "logComparison": {
-            "title": "Comparing Logarithm Bases",
-            "intro": "The same input, {x}, through the calculator's three logarithm keys — ln (base e), log (base 10), and log base 2 — each asking the same question in a different base: what exponent gets you back to {x}?",
-            "log2": "log₂",
-            "ln": "ln",
-            "log10": "log₁₀",
-            "worked": {
-              "title": "Worked Example",
-              "log2": "Base 2",
-              "ln": "Base e (ln)",
-              "log10": "Base 10 (log)",
-              "log10Note": "Smallest result — base 10 is the largest base of the three"
-            }
-          },
-          "exponential": {
-            "title": "The Exponential Function's Own Slope",
-            "intro": "y = eˣ is the one function whose slope at any point equals its own value there — the tangent line at x = 1 has exactly the same slope as the curve's height.",
-            "hint": "The dashed line is the tangent at x = 1 — notice its slope matches the curve's height there.",
-            "worked": {
-              "title": "Worked Example",
-              "x": "x",
-              "value": "eˣ",
-              "slope": "Slope at x",
-              "slopeNote": "Always equal to eˣ itself — exp's defining property"
-            }
-          },
-          "trigWave": {
-            "title": "Sine and Cosine as Continuous Waves",
-            "intro": "The same sin and cos keys from the unit circle above, now plotted as a continuous curve over a full turn and a half in each direction — the graphing view of those two functions.",
-            "hint": "Each wave repeats every 360° — the defining period of both functions.",
-            "worked": {
-              "title": "Worked Example",
-              "angle": "Angle",
-              "sin": "sin",
-              "cos": "cos",
-              "period": "Period",
-              "periodNote": "Both curves repeat identically every 360°"
-            }
-          },
-          "inverseTrigRange": {
-            "title": "Why sin⁻¹ Never Returns Past ±90°",
-            "intro": "The arcsine key answers \"which angle has this sine?\" — but infinitely many angles share the same sine, so the calculator always returns the one inside a fixed -90° to 90° window.",
-            "worked": {
-              "title": "Worked Example",
-              "input": "Input",
-              "result": "Result",
-              "range": "Possible range",
-              "rangeNote": "sin⁻¹ can never return an angle outside this window"
-            }
-          },
-          "factorial": {
-            "title": "How Fast Factorial Grows",
-            "intro": "0! through 10! span six orders of magnitude, so a normal linear scale would crush the small values into an unreadable sliver — shown here on a log scale instead.",
-            "worked": {
-              "title": "Worked Example",
-              "note": "10! is over 3.6 million times larger than 0!"
-            }
-          },
-          "combinatorics": {
-            "title": "Combinations vs. Permutations",
-            "intro": "For n = {n}, nCr and nPr at every possible r — permutations count order, so nPr is always at least as large as nCr, and the two only match when r is 0 or {n}.",
-            "tagSame": "Equal",
-            "tagOrdered": "Order matters",
-            "columnR": "r",
-            "columnValues": "nCr, nPr"
-          },
-          "angleMode": {
-            "title": "Degrees and Radians Are the Same Angle",
-            "intro": "The Deg/Rad toggle doesn't change the physical angle — only how the calculator labels it. Both numbers below point to the exact same rotation.",
-            "degMode": "Deg mode",
-            "radMode": "Rad mode",
-            "worked": {
-              "title": "Worked Example",
-              "formula": "Formula",
-              "result": "Result"
-            }
-          },
-          "constants": {
-            "title": "The Calculator's Built-In Constants",
-            "intro": "Two irrational numbers so common in scientific work that this calculator gives each its own dedicated key instead of making you type the digits.",
-            "pi": {
-              "def": "The ratio of a circle's circumference to its diameter.",
-              "use": "Used by every trig key once an angle is converted to radians."
-            },
-            "e": {
-              "def": "The base for which eˣ is its own derivative (see the exponential curve above).",
-              "use": "Used by the ln, exp, and continuous-growth calculations this calculator supports."
-            },
-            "worked": {
-              "title": "Full Precision"
-            }
-          },
-          "memory": {
-            "title": "How the Memory Slot Accumulates",
-            "intro": "A real M+ / M+ / M− sequence, with the running total shown at each step — the persistent value MR recalls, independent of whatever Ans currently holds.",
-            "startLabel": "Start",
-            "worked": {
-              "title": "Worked Example",
-              "step": "Step",
-              "finalNote": "This is what MR would recall after these three key presses"
-            }
-          },
-          "percentFlow": {
-            "title": "What the % Key Actually Does",
-            "intro": "The % key doesn't just divide by 100 — combined with the pending + operator, it adds a percentage of the number on screen directly onto it.",
-            "startLabel": "Start",
-            "percentLabel": "Percent key",
-            "resultLabel": "Result",
-            "worked": {
-              "title": "Worked Example",
-              "formula": "Formula",
-              "result": "Result"
-            }
-          },
-          "derivative": {
-            "title": "The Numeric Derivative, Read Off a Curve",
-            "intro": "This calculator's numeric-derivative function estimates the slope of sin(x) at a chosen point — which the tangent line below confirms matches cos(x) exactly, the known derivative of sine.",
-            "hint": "The dashed line is the tangent at x = π/3 — its slope is the derivative's answer.",
-            "worked": {
-              "title": "Worked Example",
-              "x": "x",
-              "value": "sin(x)",
-              "slope": "Derivative",
-              "slopeNote": "Matches cos(x) exactly, as calculus predicts"
-            }
-          },
-          "integral": {
-            "title": "The Numeric Integral, as Real Area",
-            "intro": "This calculator's numeric-integral function estimates the area under a curve between two bounds — shaded here for y = x² from 0 to 3, matching the closed-form x³/3 exactly.",
-            "worked": {
-              "title": "Worked Example",
-              "function": "Function",
-              "bounds": "Bounds",
-              "area": "Area",
-              "areaNote": "Matches the closed-form antiderivative x³/3"
-            }
-          },
-          "signPolarity": {
-            "title": "What the |x| Key Does to a Negative",
-            "intro": "The absolute-value key reflects any negative input across zero onto its positive mirror image — the distance from zero stays identical, only the sign changes.",
-            "worked": {
-              "title": "Worked Example",
-              "input": "Input",
-              "output": "Output",
-              "note": "Same distance from zero, opposite side"
-            }
+        "hero": {
+          "angleLabel": "Angle",
+          "ariaLabel": "Interactive unit-circle diagram — drag the point around the circle to change the angle",
+          "cosTooltip": "cos θ = {value}",
+          "sinTooltip": "sin θ = {value}",
+          "hint": "Drag the point around the circle — every trig-based indicator on this page updates with it."
+        },
+        "trigWave": {
+          "title": "Sine and Cosine, One Full Turn",
+          "intro": "The same sin and cos keys on the keypad, plotted across every angle from 0° to 360° at once.",
+          "worked": {
+            "title": "Worked Example",
+            "angle": "Angle"
           }
+        },
+        "derivativeSlope": {
+          "title": "The Slope of Sine, Computed Live",
+          "intro": "The calculator's own numerical derivative — not a hardcoded cos(x) — evaluated at the hero's current angle and drawn as the curve's live tangent line.",
+          "worked": {
+            "title": "Worked Example",
+            "angle": "Angle",
+            "sinValue": "sin(angle)",
+            "slope": "Derivative",
+            "note": "Computed by central difference, the same method the ƒ'(x) key uses"
+          }
+        },
+        "integralArea": {
+          "title": "The Area Under Sine, Swept Live",
+          "intro": "The real area under the sine curve from 0° to the hero's current angle, shaded as the angle changes.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "angle": "Angle",
+            "area": "Area"
+          }
+        },
+        "tangentCurve": {
+          "title": "Tangent and Its Two Asymptotes",
+          "intro": "Unlike sine and cosine, tangent shoots off to infinity twice per turn — exactly where the calculator's own tan() key returns an error.",
+          "worked": {
+            "title": "Worked Example",
+            "angle": "Angle",
+            "undefined": "Undefined",
+            "asymptoteNote": "This angle sits right on an asymptote"
+          }
+        },
+        "inverseTrigRange": {
+          "title": "Why asin(sin(x)) Doesn't Always Give Back x",
+          "intro": "arcsine only ever returns an angle between −90° and 90° — drag the hero past that range and watch the round trip stop matching.",
+          "worked": {
+            "title": "Worked Example",
+            "angle": "Angle",
+            "sinValue": "sin(angle)",
+            "asinResult": "asin(sin(angle))",
+            "match": "Round trip",
+            "matchYes": "Matches the original angle",
+            "matchNo": "Does not match",
+            "matchNote": "Outside arcsine's −90° to 90° range, it returns an equivalent angle instead"
+          }
+        },
+        "angleMode": {
+          "title": "One Angle, Three Units",
+          "intro": "The hero's current angle, converted live into every unit a calculator's angle-mode setting can switch between.",
+          "degreesLabel": "Degrees",
+          "radiansLabel": "Radians",
+          "gradiansLabel": "Gradians",
+          "worked": {
+            "title": "Worked Example",
+            "degToRad": "Degrees → radians",
+            "degToGrad": "Degrees → gradians"
+          }
+        },
+        "powerRoot": {
+          "title": "Squares, Cubes, and Their Roots",
+          "intro": "One live slider drives the calculator's own square, cube, square-root, and cube-root keys together.",
+          "sliderLabel": "Base value",
+          "squareLabel": "x²",
+          "cubeLabel": "x³",
+          "sqrtLabel": "√x",
+          "cbrtLabel": "∛x",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "logComparison": {
+          "title": "Three Logarithm Bases, Ranked",
+          "intro": "The same live x run through the calculator's log₁₀, ln, and log₂ keys — ranked by which gives the largest result.",
+          "sliderLabel": "x",
+          "log10Label": "log₁₀(x)",
+          "lnLabel": "ln(x)",
+          "log2Label": "log₂(x)",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "factorialMagnitude": {
+          "title": "How Fast Factorial Actually Grows",
+          "intro": "Drag n and watch the calculator's real factorial key explode past anything a linear scale could show.",
+          "sliderLabel": "n",
+          "worked": {
+            "title": "Worked Example",
+            "factorial": "Factorial",
+            "result": "Result"
+          }
+        },
+        "combinatorics": {
+          "title": "Permutations vs. Combinations, Live",
+          "intro": "Two live sliders drive the calculator's own nPr and nCr keys together — order always counts for one, never for the other.",
+          "nSliderLabel": "n",
+          "rSliderLabel": "r",
+          "worked": {
+            "title": "Worked Example",
+            "orderedNote": "Order matters",
+            "unorderedNote": "Order doesn't matter"
+          }
+        },
+        "memoryTimeline": {
+          "title": "Building a Real Memory Timeline",
+          "intro": "Press M+, M−, and MC the same way the keypad's own memory keys work, and watch a real running total build up step by step.",
+          "amountSliderLabel": "Amount to add or subtract",
+          "amountLabel": "Amount",
+          "worked": {
+            "title": "Worked Example",
+            "currentMemory": "Current memory"
+          }
+        },
+        "signPolarity": {
+          "title": "A Value and Its Absolute Value",
+          "intro": "Drag a signed value and watch the calculator's real abs() key pull it back to the positive side.",
+          "sliderLabel": "x",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "percentFlow": {
+          "title": "Percent of a Value, Live",
+          "intro": "Two live sliders feed the calculator's own % key — the same operation its percent button performs.",
+          "baseSliderLabel": "Base value",
+          "baseLabel": "Base",
+          "percentSliderLabel": "Percent",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "mathConstants": {
+          "title": "Four Constants, as Many Digits as You Want",
+          "intro": "Drag the precision slider to reveal more digits of π, e, the golden ratio, and √2 — the last one computed live through the calculator's own square-root key.",
+          "sliderLabel": "Precision",
+          "precisionLabel": "Decimal places",
+          "worked": {
+            "title": "Worked Example"
+          },
+          "names": {
+            "pi": "Pi",
+            "e": "Euler's number",
+            "phi": "Golden ratio",
+            "sqrt2": "Square root of 2"
+          }
+        },
+        "orderOfOperations": {
+          "title": "Order of Operations, Step by Step",
+          "intro": "Click through a real expression's evaluation one precedence rule at a time — exponents first, then the parentheses, then multiplication, then addition.",
+          "next": "Next",
+          "prev": "Previous",
+          "steps": {
+            "start": "Starting expression, nothing evaluated yet",
+            "exponent": "Exponents resolve first: 2³ = 8",
+            "parens": "Then the parentheses: 8 − 1 = 7",
+            "multiply": "Then multiplication: 4 × 7 = 28",
+            "add": "Finally addition: 3 + 28 = 31"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "stepNumber": "Step",
+            "partialResult": "Partial result"
+          }
+        },
+        "calculusPreview": {
+          "title": "A First Look at Calculus",
+          "intro": "Two of the calculator's function keys reach into calculus — a numerical derivative and a numerical integral, both built on the same sine curve this page already explores."
+        },
+        "combinatoricsAndConstants": {
+          "title": "Counting, and the Constants Behind It",
+          "intro": "Permutations, combinations, factorials, and four of mathematics' most famous constants — all live, all computed by the calculator's own keys."
         }
       },
       "shareExport": {
@@ -752,18 +765,6 @@
         "currentResultLabel": "Current Result",
         "summarySentence": "Current display value: {value}.",
         "resultSectionTitle": "Result"
-      },
-      "orderOfOperationsDiagram": {
-        "title": "Order of Operations",
-        "intro": "The same parentheses → exponents → multiply/divide → add/subtract sequence this calculator's expression parser follows on every multi-operator entry.",
-        "steps": {
-          "start": "Start",
-          "exponent": "Exponent",
-          "multiply": "Multiply",
-          "addSubtract": "Add/Subtract"
-        },
-        "resultBadge": "Result",
-        "caption": "PEMDAS: parentheses, exponents, multiplication/division (left to right), addition/subtraction (left to right)."
       }
     },
     "age-calculator": {
