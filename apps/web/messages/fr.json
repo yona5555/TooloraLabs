@@ -12293,22 +12293,6 @@
         "faq": "FAQ",
         "behindTheTool": "Dans les coulisses"
       },
-      "aboveFold": {
-        "widthLabel": "Largeur",
-        "heightLabel": "Hauteur",
-        "baseLabel": "Base",
-        "quickReference": {
-          "title": "Formules d'aire",
-          "intro": "La formule d'aire classique, sous forme close, que ce calculateur applique pour chaque forme."
-        },
-        "conceptDiagram": {
-          "title": "Ce que mesure vraiment une dimension",
-          "intro": "Chaque formule d'aire repose sur un petit nombre de mesures — des longueurs ou un angle — voici ce que ces lignes représentent sur trois formes types.",
-          "ariaLabel": "Diagramme d'un rectangle avec sa largeur et sa hauteur indiquées, d'un cercle avec son rayon indiqué, et d'un triangle avec sa base et sa hauteur perpendiculaire indiquées, chacun accompagné de sa formule d'aire",
-          "rectangleCaption": "Deux côtés perpendiculaires",
-          "circleCaption": "Un rayon, du centre au bord"
-        }
-      },
       "form": {
         "inputTitle": "Forme et dimensions",
         "shapeLabel": "Forme",
@@ -12357,10 +12341,28 @@
         "emptyStateMessage": "Saisissez les dimensions de la forme et cliquez sur « Calculer » pour voir son aire."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Un point d'angle déplaçable qui fixe la largeur et la hauteur d'un rectangle, avec l'aire et le périmètre recalculés en direct",
+          "widthLabel": "Largeur",
+          "heightLabel": "Hauteur",
+          "areaLabel": "Aire",
+          "perimeterLabel": "Périmètre",
+          "widthTooltip": "Largeur = {value}",
+          "heightTooltip": "Hauteur = {value}",
+          "hint": "Faites glisser le point d'angle — largeur, hauteur, aire et périmètre se mettent tous à jour en direct."
+        },
         "intro": {
           "title": "Comprendre l'aire",
           "paragraph1": "L'aire mesure la surface couverte par une forme plane, exprimée en unités carrées — le nombre de carrés unitaires qui la paveraient exactement. Chaque figure plane possède sa propre formule sous forme close permettant de calculer cette valeur à partir de quelques dimensions mesurables, établie une fois pour toutes plutôt qu'approximée en comptant réellement des carrés unitaires.",
           "paragraph2": "Ce calculateur applique la formule d'aire classique de la géométrie euclidienne pour chacune des huit formes courantes, du simple côté² d'un carré à la fraction, proportionnelle à l'angle, de l'aire d'un cercle complet pour un secteur circulaire. Chaque dimension saisie est validée comme un nombre strictement positif avant d'être utilisée, car une longueur ou un angle négatif ou nul ne correspond à aucune forme physique."
+        },
+        "basicFormulas": {
+          "title": "Les formules d'aire de base",
+          "intro": "Quatre des huit formes que cet outil résout, chacune avec sa vraie formule fermée et un exemple résolu."
+        },
+        "moreFormulas": {
+          "title": "D'autres formules d'aire",
+          "intro": "Les formes restantes — chaque formule vraiment différente en structure des quatre formes de base ci-dessus."
         },
         "variables": {
           "title": "Variables en jeu",
@@ -12514,6 +12516,173 @@
           "note": "Les démonstrations géométriques d'Euclide établissant que l'aire d'un parallélogramme égale base × hauteur, ainsi que la relation pythagoricienne qui sous-tend l'aire des triangles rectangles — les mêmes identités que les formules de ce calculateur codent aujourd'hui symboliquement.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Lire les Éléments d'Euclide, Livre I"
+        },
+        "squareFormula": {
+          "title": "Carré : côté fois lui-même",
+          "intro": "La plus simple des huit formes — une dimension, au carré.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Résultat"
+          }
+        },
+        "triangleFormula": {
+          "title": "Triangle : moitié de la base fois la hauteur",
+          "intro": "La \"moitié\" vient d'un vrai fait géométrique : tout triangle est exactement la moitié du parallélogramme formé en le dupliquant et le faisant pivoter.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Résultat"
+          }
+        },
+        "circleFormula": {
+          "title": "Cercle : pi fois le rayon au carré",
+          "intro": "L'exposant au carré a une vraie conséquence : doubler le rayon ne double pas l'aire.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Résultat",
+            "doubled": "Rayon doublé",
+            "doubledNote": "Quadruplée, pas doublée — l'exposant au carré à l'œuvre"
+          }
+        },
+        "ellipseFormula": {
+          "title": "Ellipse : pi fois les deux demi-axes",
+          "intro": "Les deux rayons indépendants d'une ellipse — le demi-grand axe et le demi-petit axe.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Résultat",
+            "note": "Égalisez les deux axes et cela devient exactement la formule du cercle"
+          }
+        },
+        "trapezoidFormula": {
+          "title": "Trapèze : moyenne des bases, fois la hauteur",
+          "intro": "La seule formule de cette page avec deux mesures de base indépendantes au lieu d'une.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Résultat"
+          }
+        },
+        "parallelogramFormula": {
+          "title": "Parallélogramme : base fois hauteur",
+          "intro": "Structurellement identique à la formule d'un rectangle — l'inclinaison change la forme, pas l'aire.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "result": "Résultat",
+            "note": "Une tranche triangulaire coupée d'un côté comble exactement l'espace de l'autre"
+          }
+        },
+        "sectorFormula": {
+          "title": "Secteur : une fraction du cercle complet",
+          "intro": "Un secteur est l'aire du cercle complet, réduite exactement par la fraction d'angle qu'il couvre.",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "fullCircle": "Aire du cercle complet",
+            "result": "Aire du secteur",
+            "note": "Exactement un quart du cercle complet, puisque 90/360 = 1/4"
+          }
+        },
+        "trapezoidTransform": {
+          "title": "Pourquoi la formule du trapèze fait la moyenne de ses bases",
+          "intro": "Un trapèze avec deux bases différentes a exactement la même aire qu'un rectangle dont la largeur est leur moyenne.",
+          "trapezoidLabel": "Trapèze",
+          "rectangleLabel": "Rectangle équivalent",
+          "worked": {
+            "title": "Exemple résolu",
+            "avgBase": "Base moyenne",
+            "trapezoidArea": "Aire du trapèze",
+            "rectangleArea": "Aire du rectangle",
+            "note": "Exactement égales — c'est pourquoi la formule fait la moyenne, et non la somme, des deux bases"
+          }
+        },
+        "unitConversion": {
+          "title": "Pourquoi les unités d'aire se convertissent par un facteur au carré",
+          "intro": "L'aire évolue avec le carré de la longueur, donc son facteur de conversion est le carré du facteur linéaire.",
+          "worked": {
+            "title": "Exemple résolu",
+            "linearFactor": "Facteur linéaire",
+            "areaFactor": "Facteur d'aire (au carré)",
+            "note": "Utiliser directement le facteur linéaire sur une aire serait une erreur réelle courante"
+          }
+        },
+        "shapeComparison": {
+          "title": "Même largeur, aires différentes",
+          "intro": "Un carré, un cercle et un triangle, tous construits à partir de la même largeur caractéristique de {width} unités.",
+          "squareLabel": "Carré",
+          "circleLabel": "Cercle",
+          "triangleLabel": "Triangle",
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "compositeArea": {
+          "title": "Résoudre une forme composite",
+          "intro": "Un vrai plan de maison — un mur rectangulaire avec un pignon triangulaire — divisé en les deux formes de base que cet outil résout déjà.",
+          "wallLabel": "Mur (rectangle)",
+          "gableLabel": "Pignon (triangle)",
+          "totalLabel": "Total",
+          "worked": {
+            "title": "Exemple résolu",
+            "rectangle": "Rectangle",
+            "triangle": "Triangle",
+            "total": "Aire totale"
+          }
+        },
+        "perimeterVsArea": {
+          "title": "Même périmètre, aire différente",
+          "intro": "Deux rectangles, tous deux avec un périmètre de exactement 20 — prouve que la même longueur de clôture peut enclore des surfaces de terrain très différentes.",
+          "perimeterLabel": "Périmètre",
+          "areaLabel": "Aire",
+          "note": "Un rectangle long et étroit gaspille de l'aire enclose par rapport à un rectangle plus carré de même périmètre."
+        },
+        "circleVsSquare": {
+          "title": "Le véritable avantage du cercle",
+          "intro": "Un carré et un cercle, tous deux construits à partir du même périmètre de {perimeter} unités.",
+          "squareLabel": "Carré",
+          "circleLabel": "Cercle",
+          "worked": {
+            "title": "Exemple résolu",
+            "square": "Aire du carré",
+            "circle": "Aire du cercle",
+            "note": "Le cercle enclot toujours plus d'aire que toute autre forme à périmètre égal"
+          }
+        },
+        "shapeFamily": {
+          "title": "Les huit formes, une référence",
+          "intro": "Chaque forme que cette calculatrice prend réellement en charge, avec sa vraie formule.",
+          "shapes": {
+            "square": "Carré",
+            "rectangle": "Rectangle",
+            "triangle": "Triangle",
+            "circle": "Cercle",
+            "ellipse": "Ellipse",
+            "trapezoid": "Trapèze",
+            "parallelogram": "Parallélogramme",
+            "sector": "Secteur"
+          },
+          "dimsTag": "{count} dimension(s)",
+          "columnShape": "Forme",
+          "columnFormula": "Formule"
+        },
+        "realWorldScale": {
+          "title": "Des aires réelles, d'un timbre à un parc",
+          "intro": "Des aires du monde réel couvrant plus de dix ordres de grandeur — seule une échelle logarithmique les garde toutes lisibles sur une ligne.",
+          "items": {
+            "postageStamp": "Timbre-poste",
+            "a4Paper": "Feuille A4",
+            "parkingSpace": "Place de parking",
+            "tennisCourt": "Court de tennis",
+            "footballField": "Terrain de football",
+            "centralPark": "Un parc urbain"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "spanNote": "Plus de 10 ordres de grandeur d'écart"
+          }
         }
       },
       "relatedTools": {
@@ -12536,15 +12705,6 @@
         "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
         "contactOrganizationPlaceholder": "ex. Société SARL",
         "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
-      },
-      "shapeComparisonDiagram": {
-        "title": "Même Largeur, Aire Différente",
-        "intro": "Un carré, un cercle et un triangle équilatéral, tous de la même largeur de {side} unités — seule la forme change l'aire.",
-        "square": "Carré",
-        "circle": "Cercle",
-        "triangle": "Triangle",
-        "unitsSquared": "unités²",
-        "caption": "À largeur égale, un cercle couvre environ 79% de l'aire du carré, et un triangle équilatéral seulement environ 43%."
       }
     },
     "surface-area-calculator": {

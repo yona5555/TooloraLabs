@@ -12293,22 +12293,6 @@
         "faq": "FAQ",
         "behindTheTool": "Hintergrund"
       },
-      "aboveFold": {
-        "widthLabel": "Breite",
-        "heightLabel": "Höhe",
-        "baseLabel": "Grundseite",
-        "quickReference": {
-          "title": "Flächenformeln",
-          "intro": "Die geschlossene Standardformel, mit der dieser Rechner die Fläche jeder Form berechnet."
-        },
-        "conceptDiagram": {
-          "title": "Was eine Dimension tatsächlich misst",
-          "intro": "Jede Flächenformel greift auf eine kleine Menge an Strecken- oder Winkelmaßen zurück — hier sehen Sie, was diese Linien an drei typischen Formen bedeuten.",
-          "ariaLabel": "Diagramm eines Rechtecks mit beschrifteter Breite und Höhe, eines Kreises mit beschriftetem Radius und eines Dreiecks mit beschrifteter Grundseite und senkrechter Höhe, jeweils mit der darunter stehenden Flächenformel",
-          "rectangleCaption": "Zwei zueinander senkrechte Seiten",
-          "circleCaption": "Ein Radius, vom Mittelpunkt zum Rand"
-        }
-      },
       "form": {
         "inputTitle": "Form & Abmessungen",
         "shapeLabel": "Form",
@@ -12357,10 +12341,28 @@
         "emptyStateMessage": "Geben Sie die Abmessungen der Form ein und klicken Sie auf „Berechnen“, um die Fläche zu sehen."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Ein ziehbarer Eckpunkt, der Breite und Höhe eines Rechtecks festlegt, mit live neu berechneter Fläche und Umfang",
+          "widthLabel": "Breite",
+          "heightLabel": "Höhe",
+          "areaLabel": "Fläche",
+          "perimeterLabel": "Umfang",
+          "widthTooltip": "Breite = {value}",
+          "heightTooltip": "Höhe = {value}",
+          "hint": "Ziehen Sie den Eckpunkt — Breite, Höhe, Fläche und Umfang aktualisieren sich alle live."
+        },
         "intro": {
           "title": "Fläche verstehen",
           "paragraph1": "Die Fläche misst, wie viel Oberfläche eine ebene Form bedeckt, angegeben in Quadrateinheiten — der Anzahl an Einheitsquadraten, mit denen sich die Form exakt auslegen ließe. Jede ebene Figur besitzt ihre eigene geschlossene Formel, um diesen Wert aus wenigen messbaren Abmessungen zu berechnen — einmal hergeleitet und seither immer wiederverwendet, statt durch tatsächliches Auszählen von Einheitsquadraten angenähert zu werden.",
           "paragraph2": "Dieser Rechner wendet für jede der acht gängigen Formen die klassische Formel der euklidischen Geometrie an, vom einfachen Seite² eines Quadrats bis zum winkelskalierten Bruchteil der Fläche eines Vollkreises bei einem Kreissektor. Jede eingegebene Abmessung wird als streng positive Zahl geprüft, bevor sie verwendet wird, da eine negative oder null-wertige Länge oder ein solcher Winkel keiner physischen Form entspricht."
+        },
+        "basicFormulas": {
+          "title": "Die grundlegenden Flächenformeln",
+          "intro": "Vier der acht Formen, die dieser Rechner löst, jede mit ihrer echten geschlossenen Formel und einem Musterbeispiel."
+        },
+        "moreFormulas": {
+          "title": "Weitere Flächenformeln",
+          "intro": "Die übrigen Formen — jede Formel strukturell wirklich anders als die vier Grundformen oben."
         },
         "variables": {
           "title": "Beteiligte Variablen",
@@ -12514,6 +12516,173 @@
           "note": "Euklids geometrische Beweise dafür, dass die Fläche eines Parallelogramms gleich Grundseite × Höhe ist, sowie die pythagoreische Beziehung, die der Fläche rechtwinkliger Dreiecke zugrunde liegt — dieselben Identitäten, die die Formeln dieses Rechners heute symbolisch abbilden.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Euklids Elemente, Buch I, lesen"
+        },
+        "squareFormula": {
+          "title": "Quadrat: Seite mal sich selbst",
+          "intro": "Die einfachste aller acht Formen — eine Dimension, quadriert.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "result": "Ergebnis"
+          }
+        },
+        "triangleFormula": {
+          "title": "Dreieck: Halbe Grundseite mal Höhe",
+          "intro": "Das \"Halbe\" kommt von einer echten geometrischen Tatsache: Jedes Dreieck ist genau die Hälfte des Parallelogramms, das durch Duplizieren und Drehen entsteht.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "result": "Ergebnis"
+          }
+        },
+        "circleFormula": {
+          "title": "Kreis: Pi mal Radius im Quadrat",
+          "intro": "Der quadrierte Exponent hat eine echte Konsequenz: Eine Verdopplung des Radius verdoppelt nicht die Fläche.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "result": "Ergebnis",
+            "doubled": "Radius verdoppelt",
+            "doubledNote": "Vervierfacht, nicht verdoppelt — der quadrierte Exponent bei der Arbeit"
+          }
+        },
+        "ellipseFormula": {
+          "title": "Ellipse: Pi mal beide Halbachsen",
+          "intro": "Die zwei unabhängigen Radien einer Ellipse — die große und die kleine Halbachse.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "result": "Ergebnis",
+            "note": "Setzen Sie beide Achsen gleich, und das wird exakt die Kreisformel"
+          }
+        },
+        "trapezoidFormula": {
+          "title": "Trapez: Durchschnitt der Grundseiten, mal Höhe",
+          "intro": "Die einzige Formel auf dieser Seite mit zwei unabhängigen Grundseitenmaßen statt einem.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "result": "Ergebnis"
+          }
+        },
+        "parallelogramFormula": {
+          "title": "Parallelogramm: Grundseite mal Höhe",
+          "intro": "Strukturell identisch mit der Rechteckformel — die Schräge ändert die Form, nicht die Fläche.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "result": "Ergebnis",
+            "note": "Ein dreieckiger Streifen, von einem Ende abgeschnitten, füllt genau die Lücke am anderen Ende"
+          }
+        },
+        "sectorFormula": {
+          "title": "Kreissektor: Ein Bruchteil des Vollkreises",
+          "intro": "Ein Sektor ist die Fläche des Vollkreises, genau um den Winkelanteil verkleinert, den er umfasst.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel",
+            "fullCircle": "Vollkreisfläche",
+            "result": "Sektorfläche",
+            "note": "Genau ein Viertel des Vollkreises, da 90/360 = 1/4"
+          }
+        },
+        "trapezoidTransform": {
+          "title": "Warum die Trapezformel ihre Grundseiten mittelt",
+          "intro": "Ein Trapez mit zwei unterschiedlichen Grundseiten hat exakt dieselbe Fläche wie ein Rechteck, dessen Breite ihr Durchschnitt ist.",
+          "trapezoidLabel": "Trapez",
+          "rectangleLabel": "Äquivalentes Rechteck",
+          "worked": {
+            "title": "Musterbeispiel",
+            "avgBase": "Durchschnittliche Grundseite",
+            "trapezoidArea": "Trapezfläche",
+            "rectangleArea": "Rechteckfläche",
+            "note": "Exakt gleich — deshalb mittelt die Formel die beiden Grundseiten, statt sie zu addieren"
+          }
+        },
+        "unitConversion": {
+          "title": "Warum sich Flächeneinheiten mit einem quadrierten Faktor umrechnen",
+          "intro": "Die Fläche skaliert mit dem Quadrat der Länge, daher ist ihr Umrechnungsfaktor das Quadrat des linearen Faktors.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "linearFactor": "Linearer Faktor",
+            "areaFactor": "Flächenfaktor (quadriert)",
+            "note": "Den linearen Faktor direkt auf eine Fläche anzuwenden wäre ein häufiger echter Fehler"
+          }
+        },
+        "shapeComparison": {
+          "title": "Gleiche Breite, unterschiedliche Flächen",
+          "intro": "Ein Quadrat, ein Kreis und ein Dreieck, alle aus derselben charakteristischen Breite von {width} Einheiten gebaut.",
+          "squareLabel": "Quadrat",
+          "circleLabel": "Kreis",
+          "triangleLabel": "Dreieck",
+          "worked": {
+            "title": "Musterbeispiel"
+          }
+        },
+        "compositeArea": {
+          "title": "Eine zusammengesetzte Form lösen",
+          "intro": "Ein echter hausförmiger Grundriss — eine rechteckige Wand mit einem dreieckigen Dachgiebel — aufgeteilt in die zwei Grundformen, die dieser Rechner bereits löst.",
+          "wallLabel": "Wand (Rechteck)",
+          "gableLabel": "Giebel (Dreieck)",
+          "totalLabel": "Gesamt",
+          "worked": {
+            "title": "Musterbeispiel",
+            "rectangle": "Rechteck",
+            "triangle": "Dreieck",
+            "total": "Gesamtfläche"
+          }
+        },
+        "perimeterVsArea": {
+          "title": "Gleicher Umfang, unterschiedliche Fläche",
+          "intro": "Zwei Rechtecke, beide mit einem Umfang von genau 20 — beweist, dass dieselbe Zaunlänge sehr unterschiedliche Landflächen einschließen kann.",
+          "perimeterLabel": "Umfang",
+          "areaLabel": "Fläche",
+          "note": "Ein langes, schmales Rechteck verschenkt eingeschlossene Fläche im Vergleich zu einem quadratähnlicheren mit demselben Umfang."
+        },
+        "circleVsSquare": {
+          "title": "Der echte Vorteil des Kreises",
+          "intro": "Ein Quadrat und ein Kreis, beide aus demselben Umfang von {perimeter} Einheiten gebaut.",
+          "squareLabel": "Quadrat",
+          "circleLabel": "Kreis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "square": "Quadratfläche",
+            "circle": "Kreisfläche",
+            "note": "Der Kreis umschließt immer mehr Fläche als jede andere Form mit gleichem Umfang"
+          }
+        },
+        "shapeFamily": {
+          "title": "Alle acht Formen, eine Referenz",
+          "intro": "Jede Form, die dieser Rechner tatsächlich unterstützt, mit ihrer echten Formel.",
+          "shapes": {
+            "square": "Quadrat",
+            "rectangle": "Rechteck",
+            "triangle": "Dreieck",
+            "circle": "Kreis",
+            "ellipse": "Ellipse",
+            "trapezoid": "Trapez",
+            "parallelogram": "Parallelogramm",
+            "sector": "Kreissektor"
+          },
+          "dimsTag": "{count} Dimension(en)",
+          "columnShape": "Form",
+          "columnFormula": "Formel"
+        },
+        "realWorldScale": {
+          "title": "Reale Flächen, von einer Briefmarke bis zum Park",
+          "intro": "Reale Flächen über mehr als zehn Größenordnungen hinweg — nur eine logarithmische Skala hält sie alle auf einer Linie lesbar.",
+          "items": {
+            "postageStamp": "Briefmarke",
+            "a4Paper": "Ein A4-Blatt",
+            "parkingSpace": "Parkplatz",
+            "tennisCourt": "Tennisplatz",
+            "footballField": "Fußballfeld",
+            "centralPark": "Ein Stadtpark"
+          },
+          "worked": {
+            "title": "Musterbeispiel",
+            "spanNote": "Über 10 Größenordnungen auseinander"
+          }
         }
       },
       "relatedTools": {
@@ -12536,15 +12705,6 @@
         "contactPhonePlaceholder": "z. B. +49 30 123456",
         "contactOrganizationPlaceholder": "z. B. Muster GmbH",
         "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
-      },
-      "shapeComparisonDiagram": {
-        "title": "Gleiche Breite, unterschiedliche Fläche",
-        "intro": "Ein Quadrat, ein Kreis und ein gleichseitiges Dreieck, alle mit derselben Breite von {side} Einheiten — allein die Form verändert die Fläche.",
-        "square": "Quadrat",
-        "circle": "Kreis",
-        "triangle": "Dreieck",
-        "unitsSquared": "Einheiten²",
-        "caption": "Bei gleicher Breite bedeckt ein Kreis etwa 79 % der Fläche des Quadrats, ein gleichseitiges Dreieck nur etwa 43 %."
       }
     },
     "surface-area-calculator": {

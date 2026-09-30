@@ -33,8 +33,8 @@ predates this clarification and is flagged here as a candidate for a follow-up p
 | 2 | fraction-calculator | done | b3b87c1 (CI green) |
 | 3 | scientific-notation-converter | done | 7b088b6 (CI green) |
 | 4 | significant-figures-calculator | done | 05c44e6 (CI green) |
-| 5 | statistics-calculator | done | (pending push) |
-| 6 | area-calculator | not started | |
+| 5 | statistics-calculator | done | c5218b2 (CI green) |
+| 6 | area-calculator | done | (pending push) |
 | 7 | surface-area-calculator | not started | |
 | 8 | volume-calculator | not started | |
 | 9 | step-by-step-math-solver | not started | |

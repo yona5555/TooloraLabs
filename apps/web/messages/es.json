@@ -12293,22 +12293,6 @@
         "faq": "Preguntas frecuentes",
         "behindTheTool": "Sobre esta herramienta"
       },
-      "aboveFold": {
-        "widthLabel": "Ancho",
-        "heightLabel": "Altura",
-        "baseLabel": "Base",
-        "quickReference": {
-          "title": "Fórmulas de área",
-          "intro": "La fórmula de área estándar, en forma cerrada, que esta calculadora aplica para cada figura."
-        },
-        "conceptDiagram": {
-          "title": "Qué mide realmente una dimensión",
-          "intro": "Toda fórmula de área se apoya en un pequeño conjunto de medidas de longitud o de ángulo — esto es lo que representan esas líneas en tres figuras representativas.",
-          "ariaLabel": "Diagrama de un rectángulo con su ancho y su altura indicados, un círculo con su radio indicado y un triángulo con su base y su altura perpendicular indicadas, cada uno con su fórmula de área escrita debajo",
-          "rectangleCaption": "Dos lados perpendiculares",
-          "circleCaption": "Un radio, del centro al borde"
-        }
-      },
       "form": {
         "inputTitle": "Figura y dimensiones",
         "shapeLabel": "Figura",
@@ -12357,10 +12341,28 @@
         "emptyStateMessage": "Introduce las dimensiones de la figura y pulsa \"Calcular\" para ver su área."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Un punto de esquina arrastrable que fija el ancho y alto de un rectángulo, con el área y perímetro recalculados en vivo",
+          "widthLabel": "Ancho",
+          "heightLabel": "Alto",
+          "areaLabel": "Área",
+          "perimeterLabel": "Perímetro",
+          "widthTooltip": "Ancho = {value}",
+          "heightTooltip": "Alto = {value}",
+          "hint": "Arrastra el punto de esquina — ancho, alto, área y perímetro se actualizan en vivo."
+        },
         "intro": {
           "title": "Entender el área",
           "paragraph1": "El área mide cuánta superficie cubre una figura plana, expresada en unidades cuadradas — el número de cuadrados unitarios que la cubrirían exactamente. Cada figura plana tiene su propia fórmula en forma cerrada para calcular ese valor a partir de unas pocas dimensiones medibles, deducida una vez y reutilizada siempre, en lugar de aproximarse contando cuadrados unitarios uno a uno.",
           "paragraph2": "Esta calculadora aplica la fórmula estándar de la geometría euclidiana para cada una de las ocho figuras habituales, desde el simple lado² de un cuadrado hasta la fracción, escalada por el ángulo, del área de un círculo completo en un sector circular. Cada dimensión que introduces se valida como un número estrictamente positivo antes de usarse, ya que una longitud o un ángulo negativo o nulo no corresponde a ninguna figura física."
+        },
+        "basicFormulas": {
+          "title": "Las fórmulas básicas de área",
+          "intro": "Cuatro de las ocho formas que resuelve esta herramienta, cada una con su fórmula cerrada real y un ejemplo resuelto."
+        },
+        "moreFormulas": {
+          "title": "Más fórmulas de área",
+          "intro": "Las formas restantes — cada fórmula genuinamente distinta en estructura de las cuatro básicas anteriores."
         },
         "variables": {
           "title": "Variables implicadas",
@@ -12514,6 +12516,173 @@
           "note": "Las demostraciones geométricas de Euclides que establecen que el área de un paralelogramo es base × altura, y la relación pitagórica que subyace al área de los triángulos rectángulos — las mismas identidades que las fórmulas de esta calculadora codifican hoy de forma simbólica.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Leer los Elementos de Euclides, Libro I"
+        },
+        "squareFormula": {
+          "title": "Cuadrado: Lado por sí mismo",
+          "intro": "La más simple de las ocho formas — una dimensión, al cuadrado.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado"
+          }
+        },
+        "triangleFormula": {
+          "title": "Triángulo: Mitad de base por altura",
+          "intro": "La \"mitad\" viene de un hecho geométrico real: cualquier triángulo es exactamente la mitad del paralelogramo formado al duplicarlo y rotarlo.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado"
+          }
+        },
+        "circleFormula": {
+          "title": "Círculo: Pi por el radio al cuadrado",
+          "intro": "El exponente al cuadrado tiene una consecuencia real: duplicar el radio no duplica el área.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado",
+            "doubled": "Radio duplicado",
+            "doubledNote": "Se cuadruplicó, no se duplicó — el exponente al cuadrado en acción"
+          }
+        },
+        "ellipseFormula": {
+          "title": "Elipse: Pi por ambos semiejes",
+          "intro": "Los dos radios independientes de una elipse — el semieje mayor y el semieje menor.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado",
+            "note": "Iguala ambos ejes y esto se convierte exactamente en la fórmula del círculo"
+          }
+        },
+        "trapezoidFormula": {
+          "title": "Trapecio: Promedio de las bases, por altura",
+          "intro": "La única fórmula en esta página con dos medidas de base independientes en vez de una.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado"
+          }
+        },
+        "parallelogramFormula": {
+          "title": "Paralelogramo: Base por altura",
+          "intro": "Estructuralmente idéntica a la fórmula de un rectángulo — la inclinación cambia la forma, no el área.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado",
+            "note": "Una porción triangular cortada de un extremo llena exactamente el hueco del otro"
+          }
+        },
+        "sectorFormula": {
+          "title": "Sector: Una fracción del círculo completo",
+          "intro": "Un sector es el área del círculo completo, reducida exactamente por la fracción de ángulo que abarca.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "fullCircle": "Área del círculo completo",
+            "result": "Área del sector",
+            "note": "Exactamente un cuarto del círculo completo, ya que 90/360 = 1/4"
+          }
+        },
+        "trapezoidTransform": {
+          "title": "Por qué la fórmula del trapecio promedia sus bases",
+          "intro": "Un trapecio con dos bases distintas tiene exactamente la misma área que un rectángulo cuyo ancho es su promedio.",
+          "trapezoidLabel": "Trapecio",
+          "rectangleLabel": "Rectángulo equivalente",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "avgBase": "Base promedio",
+            "trapezoidArea": "Área del trapecio",
+            "rectangleArea": "Área del rectángulo",
+            "note": "Exactamente iguales — por eso la fórmula promedia, no suma, las dos bases"
+          }
+        },
+        "unitConversion": {
+          "title": "Por qué las unidades de área convierten con un factor al cuadrado",
+          "intro": "El área escala con el cuadrado de la longitud, así que su factor de conversión es el cuadrado del factor lineal.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "linearFactor": "Factor lineal",
+            "areaFactor": "Factor de área (al cuadrado)",
+            "note": "Usar el factor lineal directamente sobre un área sería un error real común"
+          }
+        },
+        "shapeComparison": {
+          "title": "Mismo ancho, áreas distintas",
+          "intro": "Un cuadrado, un círculo y un triángulo, todos construidos con el mismo ancho característico de {width} unidades.",
+          "squareLabel": "Cuadrado",
+          "circleLabel": "Círculo",
+          "triangleLabel": "Triángulo",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "compositeArea": {
+          "title": "Resolver una forma compuesta",
+          "intro": "Un plano de planta real con forma de casa —una pared rectangular con un frontón triangular— dividido en las dos formas básicas que esta herramienta ya resuelve.",
+          "wallLabel": "Pared (rectángulo)",
+          "gableLabel": "Frontón (triángulo)",
+          "totalLabel": "Total",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "rectangle": "Rectángulo",
+            "triangle": "Triángulo",
+            "total": "Área total"
+          }
+        },
+        "perimeterVsArea": {
+          "title": "Mismo perímetro, área distinta",
+          "intro": "Dos rectángulos, ambos con un perímetro de exactamente 20 — prueba que la misma cantidad de cerca puede encerrar cantidades de terreno muy distintas.",
+          "perimeterLabel": "Perímetro",
+          "areaLabel": "Área",
+          "note": "Un rectángulo largo y estrecho desperdicia área encerrada comparado con uno más parecido a un cuadrado con el mismo perímetro."
+        },
+        "circleVsSquare": {
+          "title": "La ventaja real del círculo",
+          "intro": "Un cuadrado y un círculo, ambos construidos con el mismo perímetro de {perimeter} unidades.",
+          "squareLabel": "Cuadrado",
+          "circleLabel": "Círculo",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "square": "Área del cuadrado",
+            "circle": "Área del círculo",
+            "note": "El círculo siempre encierra más área que cualquier otra forma con igual perímetro"
+          }
+        },
+        "shapeFamily": {
+          "title": "Las ocho formas, una referencia",
+          "intro": "Cada forma que esta calculadora realmente admite, con su fórmula real.",
+          "shapes": {
+            "square": "Cuadrado",
+            "rectangle": "Rectángulo",
+            "triangle": "Triángulo",
+            "circle": "Círculo",
+            "ellipse": "Elipse",
+            "trapezoid": "Trapecio",
+            "parallelogram": "Paralelogramo",
+            "sector": "Sector"
+          },
+          "dimsTag": "{count} dimensión(es)",
+          "columnShape": "Forma",
+          "columnFormula": "Fórmula"
+        },
+        "realWorldScale": {
+          "title": "Áreas reales, de un sello a un parque",
+          "intro": "Áreas del mundo real que abarcan más de diez órdenes de magnitud — solo una escala logarítmica las mantiene todas legibles en una línea.",
+          "items": {
+            "postageStamp": "Sello postal",
+            "a4Paper": "Hoja A4",
+            "parkingSpace": "Plaza de aparcamiento",
+            "tennisCourt": "Cancha de tenis",
+            "footballField": "Campo de fútbol",
+            "centralPark": "Un parque urbano"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "spanNote": "Más de 10 órdenes de magnitud de diferencia"
+          }
         }
       },
       "relatedTools": {
@@ -12536,15 +12705,6 @@
         "contactPhonePlaceholder": "p. ej. +34 612 345 678",
         "contactOrganizationPlaceholder": "p. ej. Empresa S.L.",
         "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Madrid"
-      },
-      "shapeComparisonDiagram": {
-        "title": "Mismo Ancho, Área Diferente",
-        "intro": "Un cuadrado, un círculo y un triángulo equilátero, todos con el mismo ancho de {side} unidades: solo la forma cambia el área.",
-        "square": "Cuadrado",
-        "circle": "Círculo",
-        "triangle": "Triángulo",
-        "unitsSquared": "unidades²",
-        "caption": "Con el mismo ancho, un círculo cubre alrededor del 79% del área del cuadrado, y un triángulo equilátero solo cerca del 43%."
       }
     },
     "surface-area-calculator": {

@@ -12293,22 +12293,6 @@
         "faq": "FAQ",
         "behindTheTool": "Behind the Tool"
       },
-      "aboveFold": {
-        "widthLabel": "Width",
-        "heightLabel": "Height",
-        "baseLabel": "Base",
-        "quickReference": {
-          "title": "Area Formulas",
-          "intro": "The standard closed-form area formula this calculator applies for each shape."
-        },
-        "conceptDiagram": {
-          "title": "What a Dimension Actually Measures",
-          "intro": "Every area formula consumes a small set of straight-line or angle measurements — here's what those lines mean on three representative shapes.",
-          "ariaLabel": "Diagram of a rectangle with its width and height labeled, a circle with its radius labeled, and a triangle with its base and perpendicular height labeled, each with its area formula written beneath it",
-          "rectangleCaption": "Two perpendicular sides",
-          "circleCaption": "One radius, from center to edge"
-        }
-      },
       "form": {
         "inputTitle": "Shape & Dimensions",
         "shapeLabel": "Shape",
@@ -12357,10 +12341,28 @@
         "emptyStateMessage": "Enter the shape's dimensions and press Calculate to see its area."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "A draggable corner point that sets a rectangle's width and height, with the area and perimeter recomputed live",
+          "widthLabel": "Width",
+          "heightLabel": "Height",
+          "areaLabel": "Area",
+          "perimeterLabel": "Perimeter",
+          "widthTooltip": "Width = {value}",
+          "heightTooltip": "Height = {value}",
+          "hint": "Drag the corner point — width, height, area, and perimeter all update live."
+        },
         "intro": {
           "title": "Understanding Area",
           "paragraph1": "Area measures how much surface a flat shape covers, expressed in square units — the number of unit squares that would tile the shape exactly. Every plane figure has its own closed-form formula for computing this from a handful of measurable dimensions, derived once and reused forever rather than approximated by actually counting unit squares.",
           "paragraph2": "This calculator applies the standard Euclidean-geometry formula for each of eight common shapes, from a square's simple side² to a circular sector's angle-scaled fraction of a full circle's area. Every dimension you enter is validated as a strictly positive number before it's used, since a negative or zero length or angle has no physical shape to correspond to."
+        },
+        "basicFormulas": {
+          "title": "The Basic Area Formulas",
+          "intro": "Four of the eight shapes this tool solves, each with its real closed-form formula and a worked example."
+        },
+        "moreFormulas": {
+          "title": "More Area Formulas",
+          "intro": "The remaining shapes — each formula genuinely different in structure from the basic four above."
         },
         "variables": {
           "title": "Variables Involved",
@@ -12514,6 +12516,173 @@
           "note": "Euclid's geometric proofs establishing that a parallelogram's area equals base × height and the Pythagorean relationship underlying right-triangle area — the same identities this calculator's formulas encode symbolically today.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Read Euclid's Elements, Book I"
+        },
+        "squareFormula": {
+          "title": "Square: Side Times Itself",
+          "intro": "The simplest of all eight shapes — one dimension, squared.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result"
+          }
+        },
+        "triangleFormula": {
+          "title": "Triangle: Half of Base Times Height",
+          "intro": "The \"half\" comes from a real geometric fact: any triangle is exactly half of the parallelogram formed by duplicating and rotating it.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result"
+          }
+        },
+        "circleFormula": {
+          "title": "Circle: Pi Times Radius Squared",
+          "intro": "The squared exponent has a real consequence: doubling the radius doesn't double the area.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result",
+            "doubled": "Radius doubled",
+            "doubledNote": "Quadrupled, not doubled — the squared exponent at work"
+          }
+        },
+        "ellipseFormula": {
+          "title": "Ellipse: Pi Times Both Semi-Axes",
+          "intro": "An ellipse's two independent radii — the semi-major and semi-minor axes.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result",
+            "note": "Set both axes equal and this becomes exactly the circle formula"
+          }
+        },
+        "trapezoidFormula": {
+          "title": "Trapezoid: Average of the Bases, Times Height",
+          "intro": "The only formula on this page with two independent base measurements instead of one.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result"
+          }
+        },
+        "parallelogramFormula": {
+          "title": "Parallelogram: Base Times Height",
+          "intro": "Structurally identical to a rectangle's formula — the slant changes the shape, not the area.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result",
+            "note": "A triangular sliver cut from one end exactly fills the gap on the other"
+          }
+        },
+        "sectorFormula": {
+          "title": "Sector: A Fraction of the Full Circle",
+          "intro": "A sector is the full circle's area, scaled down by exactly the angle fraction it spans.",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "fullCircle": "Full circle area",
+            "result": "Sector area",
+            "note": "Exactly one quarter of the full circle, since 90/360 = 1/4"
+          }
+        },
+        "trapezoidTransform": {
+          "title": "Why the Trapezoid Formula Averages Its Bases",
+          "intro": "A trapezoid with two different bases has the exact same area as a rectangle whose width is their average.",
+          "trapezoidLabel": "Trapezoid",
+          "rectangleLabel": "Equivalent rectangle",
+          "worked": {
+            "title": "Worked Example",
+            "avgBase": "Average base",
+            "trapezoidArea": "Trapezoid area",
+            "rectangleArea": "Rectangle area",
+            "note": "Exactly equal — this is why the formula averages, not adds, the two bases"
+          }
+        },
+        "unitConversion": {
+          "title": "Why Area Units Convert by a Squared Factor",
+          "intro": "Area scales with the square of length, so its conversion factor is the square of the linear one.",
+          "worked": {
+            "title": "Worked Example",
+            "linearFactor": "Linear factor",
+            "areaFactor": "Area factor (squared)",
+            "note": "Using the linear factor directly on an area would be a common real mistake"
+          }
+        },
+        "shapeComparison": {
+          "title": "Same Width, Different Areas",
+          "intro": "A square, circle, and triangle, all built from the same {width}-unit characteristic width.",
+          "squareLabel": "Square",
+          "circleLabel": "Circle",
+          "triangleLabel": "Triangle",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "compositeArea": {
+          "title": "Solving a Composite Shape",
+          "intro": "A real house-shaped floor plan — a rectangular wall with a triangular roof gable — split into the two basic shapes this tool already solves.",
+          "wallLabel": "Wall (rectangle)",
+          "gableLabel": "Gable (triangle)",
+          "totalLabel": "Total",
+          "worked": {
+            "title": "Worked Example",
+            "rectangle": "Rectangle",
+            "triangle": "Triangle",
+            "total": "Total area"
+          }
+        },
+        "perimeterVsArea": {
+          "title": "Same Perimeter, Different Area",
+          "intro": "Two rectangles, both with a perimeter of exactly 20 — proving the same amount of fencing can enclose very different amounts of land.",
+          "perimeterLabel": "Perimeter",
+          "areaLabel": "Area",
+          "note": "A long, narrow rectangle wastes enclosed area compared to a more square-like one with the same perimeter."
+        },
+        "circleVsSquare": {
+          "title": "The Circle's Real Advantage",
+          "intro": "A square and a circle, both built from the exact same {perimeter}-unit perimeter.",
+          "squareLabel": "Square",
+          "circleLabel": "Circle",
+          "worked": {
+            "title": "Worked Example",
+            "square": "Square area",
+            "circle": "Circle area",
+            "note": "The circle always encloses more area than any other shape with equal perimeter"
+          }
+        },
+        "shapeFamily": {
+          "title": "All Eight Shapes, One Reference",
+          "intro": "Every shape this calculator actually supports, with its real formula.",
+          "shapes": {
+            "square": "Square",
+            "rectangle": "Rectangle",
+            "triangle": "Triangle",
+            "circle": "Circle",
+            "ellipse": "Ellipse",
+            "trapezoid": "Trapezoid",
+            "parallelogram": "Parallelogram",
+            "sector": "Sector"
+          },
+          "dimsTag": "{count} dimension(s)",
+          "columnShape": "Shape",
+          "columnFormula": "Formula"
+        },
+        "realWorldScale": {
+          "title": "Real Areas, From a Stamp to a Park",
+          "intro": "Real-world areas spanning more than ten orders of magnitude — only a log scale keeps them all readable on one line.",
+          "items": {
+            "postageStamp": "Postage stamp",
+            "a4Paper": "A4 sheet of paper",
+            "parkingSpace": "Parking space",
+            "tennisCourt": "Tennis court",
+            "footballField": "Football field",
+            "centralPark": "A city park"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "spanNote": "Over 10 orders of magnitude apart"
+          }
         }
       },
       "relatedTools": {
@@ -12536,15 +12705,6 @@
         "contactPhonePlaceholder": "e.g. +1 555 123 4567",
         "contactOrganizationPlaceholder": "e.g. Acme Financial",
         "contactAddressPlaceholder": "e.g. 123 Main St, City"
-      },
-      "shapeComparisonDiagram": {
-        "title": "Same Width, Different Area",
-        "intro": "A square, circle, and equilateral triangle, all sized to the same {side}-unit width — shape alone changes the area.",
-        "square": "Square",
-        "circle": "Circle",
-        "triangle": "Triangle",
-        "unitsSquared": "units²",
-        "caption": "At matching width, a circle covers about 79% of the square's area, and an equilateral triangle only about 43%."
       }
     },
     "surface-area-calculator": {

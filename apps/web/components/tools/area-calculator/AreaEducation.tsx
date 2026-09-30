@@ -4,8 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import AreaConceptDiagram from "./AreaConceptDiagram";
-import AreaShapeComparisonDiagram from "./AreaShapeComparisonDiagram";
+import AreaRectangleDrag from "./AreaRectangleDrag";
+import ShapeFamilyTable from "./ShapeFamilyTable";
+import SquareFormulaDiagram from "./SquareFormulaDiagram";
+import TriangleFormulaDiagram from "./TriangleFormulaDiagram";
+import CircleFormulaDiagram from "./CircleFormulaDiagram";
+import EllipseFormulaDiagram from "./EllipseFormulaDiagram";
+import TrapezoidFormulaDiagram from "./TrapezoidFormulaDiagram";
+import ParallelogramFormulaDiagram from "./ParallelogramFormulaDiagram";
+import SectorFormulaDiagram from "./SectorFormulaDiagram";
+import TrapezoidToRectangleTransform from "./TrapezoidToRectangleTransform";
+import UnitConversionEquivalence from "./UnitConversionEquivalence";
+import ShapeAreaComparisonBarChart from "./ShapeAreaComparisonBarChart";
+import CompositeAreaFlowDiagram from "./CompositeAreaFlowDiagram";
+import PerimeterVsAreaComparison from "./PerimeterVsAreaComparison";
+import CircleVsSquareEfficiency from "./CircleVsSquareEfficiency";
+import RealWorldAreaScaleBar from "./RealWorldAreaScaleBar";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -24,9 +38,31 @@ export default async function AreaEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <AreaRectangleDrag />
         <p>{t("intro.paragraph2")}</p>
-        <AreaConceptDiagram />
-        <AreaShapeComparisonDiagram />
+        <ShapeFamilyTable />
+      </InfoSection>
+
+      <InfoSection title={t("basicFormulas.title")}>
+        <p>{t("basicFormulas.intro")}</p>
+        <div className="space-y-6">
+          <SquareFormulaDiagram />
+          <TriangleFormulaDiagram />
+          <CircleFormulaDiagram />
+          <EllipseFormulaDiagram />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <InfoSection title={t("moreFormulas.title")}>
+        <p>{t("moreFormulas.intro")}</p>
+        <div className="space-y-6">
+          <TrapezoidFormulaDiagram />
+          <ParallelogramFormulaDiagram />
+          <SectorFormulaDiagram />
+          <TrapezoidToRectangleTransform />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -39,6 +75,7 @@ export default async function AreaEducation() {
             </div>
           ))}
         </dl>
+        <UnitConversionEquivalence />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -61,6 +98,10 @@ export default async function AreaEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <ShapeAreaComparisonBarChart />
+          <CompositeAreaFlowDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -73,9 +114,12 @@ export default async function AreaEducation() {
             </div>
           ))}
         </div>
+        <div className="space-y-6">
+          <PerimeterVsAreaComparison />
+          <CircleVsSquareEfficiency />
+          <RealWorldAreaScaleBar />
+        </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
