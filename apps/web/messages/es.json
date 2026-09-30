@@ -6164,14 +6164,49 @@
         }
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Un punto arrastrable cuya posición horizontal fija el exponente y cuya posición vertical fija el coeficiente, con magnitudes de referencia del mundo real marcadas en el mismo eje",
+          "standardLabel": "Forma estándar",
+          "hint": "Arrastra el punto — el coeficiente, el exponente y la forma estándar se actualizan en vivo.",
+          "numberNames": {
+            "thousand": "En los miles",
+            "million": "En los millones",
+            "billion": "En los miles de millones",
+            "trillion": "En los billones",
+            "quadrillion": "En los mil billones",
+            "thousandth": "Milésimas",
+            "millionth": "Millonésimas",
+            "billionth": "Milmillonésimas",
+            "trillionth": "Billonésimas"
+          },
+          "references": {
+            "atom": "Un átomo de hidrógeno tiene aproximadamente este tamaño",
+            "atomShort": "átomo",
+            "speck": "Una mota de polvo tiene aproximadamente este tamaño",
+            "speckShort": "polvo",
+            "one": "Uno",
+            "oneShort": "1",
+            "million": "Un millón",
+            "millionShort": "millón",
+            "billion": "Mil millones",
+            "billionShort": "mil millones",
+            "earthPopulationDigits": "Aproximadamente la población mundial en células (orden de magnitud)",
+            "earthPopulationDigitsShort": "≈células"
+          }
+        },
         "intro": {
           "title": "Cómo Funciona la Notación Científica",
           "paragraph1": "La notación científica escribe cualquier número como un coeficiente entre 1 y 10 multiplicado por una potencia de diez, como 1.234 × 10^8 en lugar de 123.400.000. El exponente indica cuántas posiciones se desplazó el punto decimal desde el número estándar hasta ese único dígito inicial: un exponente positivo para números grandes y uno negativo para números menores que 1. Esto facilita mucho leer, comparar y calcular con números que de otro modo serían una larga cadena de dígitos.",
-          "diagram": {
-            "caption": "El número de Avogadro, 6,02 × 10^23, se sitúa muy a la derecha en una escala logarítmica de magnitud."
-          },
           "paragraph2": "La notación de ingeniería es una prima cercana que restringe el exponente a un múltiplo de 3, alineándolo con los prefijos métricos (kilo-, mega-, giga-, mili-, micro-, nano-) usados en toda la ciencia y la ingeniería — 1,5 × 10^8 en notación científica se convierte en 150 × 10^6 en notación de ingeniería, que se lee de inmediato como «150 millones». Esta herramienta muestra ambas formas para cada resultado, junto con el nombre cotidiano de la magnitud siempre que el número caiga dentro de un rango con nombre común.",
           "paragraph3": "Multiplicar o dividir números ya expresados en notación científica sigue dos reglas simples: multiplicar (o dividir) los coeficientes directamente y sumar (o restar) los exponentes, una consecuencia directa de las leyes de los exponentes. El resultado se renormaliza después si el coeficiente queda fuera del rango de 1 a 10, tal como hace esta herramienta automáticamente."
+        },
+        "arithmetic": {
+          "title": "Multiplicar y dividir en notación científica",
+          "intro": "Ninguna de las dos operaciones requiere que los números compartan primero un exponente — a diferencia de la suma, la multiplicación y la división operan directamente sobre los coeficientes y exponentes por separado."
+        },
+        "precision": {
+          "title": "Precisión, normalización y formas alternativas",
+          "intro": "No todo par (coeficiente, exponente) que equivale al número correcto cuenta como notación científica correctamente escrita — estos cinco indicadores cubren las reglas reales y las formas alternativas."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -6196,6 +6231,10 @@
               "result": "3 × 10^4"
             }
           ]
+        },
+        "realWorld": {
+          "title": "Escala en el mundo real",
+          "intro": "La notación científica existe porque las cantidades físicas reales abarcan un rango asombroso de magnitudes — desde un solo átomo hasta la distancia que recorre la luz en un año."
         },
         "faq": {
           "title": "Preguntas Frecuentes",
@@ -6285,6 +6324,191 @@
           "note": "La traducción de Heath de El Contador de Arena documenta el sistema de Arquímedes para nombrar y acotar cantidades enormes mediante una jerarquía de «órdenes» numéricos, incluida una regla de combinación de exponentes equivalente a la ley moderna bᵐ × bⁿ = bᵐ⁺ⁿ.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Leer el texto original"
+        },
+        "largeSteps": {
+          "title": "Convertir un número estándar grande",
+          "intro": "45.000.000 recorrido por las tres estaciones reales que ejecuta la operación toScientific de esta herramienta para llegar a su forma normalizada.",
+          "steps": {
+            "standard": "Forma estándar",
+            "decimalPlaced": "Decimal tras la primera cifra",
+            "exponentCounted": "Exponente contado"
+          },
+          "resultBadge": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "digitsAfterFirst": "Posiciones desplazadas",
+            "result": "Resultado"
+          }
+        },
+        "smallSteps": {
+          "title": "Convertir un decimal pequeño",
+          "intro": "0,0000032 por las mismas tres estaciones — el punto decimal se mueve a la derecha en vez de a la izquierda, así que el exponente resulta negativo.",
+          "steps": {
+            "standard": "Forma estándar",
+            "decimalPlaced": "Decimal tras la primera cifra",
+            "exponentCounted": "Exponente contado"
+          },
+          "resultBadge": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "direction": "Dirección del movimiento",
+            "directionValue": "Derecha (número < 1)",
+            "result": "Resultado"
+          }
+        },
+        "multiply": {
+          "title": "Multiplicar dos números en notación científica",
+          "intro": "(2×10³) × (3×10⁵) — los coeficientes se multiplican entre sí, los exponentes se suman entre sí.",
+          "problemLabel": "Problema",
+          "ruleLabel": "Regla aplicada",
+          "resultLabel": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "coefficients": "Coeficientes",
+            "exponents": "Exponentes",
+            "result": "Resultado",
+            "renormalizedNote": "Renormalizado desde {raw} porque el coeficiente alcanzó 10 o más"
+          }
+        },
+        "divide": {
+          "title": "Dividir dos números en notación científica",
+          "intro": "(8×10⁹) ÷ (2×10⁴) — los coeficientes se dividen, los exponentes se restan, la imagen especular de la multiplicación.",
+          "problemLabel": "Problema",
+          "ruleLabel": "Regla aplicada",
+          "resultLabel": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "coefficients": "Coeficientes",
+            "exponents": "Exponentes",
+            "result": "Resultado"
+          }
+        },
+        "engineering": {
+          "title": "Notación científica vs. notación de ingeniería",
+          "intro": "45.700.000 en las tres formas — la notación de ingeniería restringe el exponente a un múltiplo de 3 para alinearse con los prefijos de unidad con nombre (kilo-, mega-, giga-), a costa de un coeficiente que puede superar 10.",
+          "standardLabel": "Estándar",
+          "scientificLabel": "Científica",
+          "engineeringLabel": "Ingeniería",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "sciExponent": "Exponente científico",
+            "engExponent": "Exponente de ingeniería",
+            "engNote": "Siempre un múltiplo de 3",
+            "engCoefficient": "Coeficiente de ingeniería"
+          }
+        },
+        "namedMagnitudes": {
+          "title": "Magnitudes con nombre, grandes y pequeñas",
+          "intro": "Todo orden de magnitud con nombre que esta herramienta reconoce automáticamente — desde una milésima hasta un mil billones.",
+          "tagFraction": "Fracción",
+          "tagMultiple": "Múltiplo",
+          "columnName": "Nombre",
+          "columnExponent": "Potencia de diez",
+          "names": {
+            "thousandth": "Milésima",
+            "millionth": "Millonésima",
+            "billionth": "Milmillonésima",
+            "trillionth": "Billonésima",
+            "thousand": "Mil",
+            "million": "Millón",
+            "billion": "Mil millones",
+            "trillion": "Billón",
+            "quadrillion": "Mil billones"
+          }
+        },
+        "exponentSign": {
+          "title": "Exponentes positivos vs. negativos",
+          "intro": "El mismo coeficiente, 5, con el signo del exponente invertido — efectos genuinamente opuestos, en lados opuestos de 1.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "negative": "Exponente negativo",
+            "negativeNote": "Divide entre una potencia de 10 — menor que 1",
+            "positive": "Exponente positivo",
+            "positiveNote": "Multiplica por una potencia de 10 — mayor que 1"
+          }
+        },
+        "digitCount": {
+          "title": "Cuánto se acorta realmente la notación científica",
+          "intro": "Cantidad de caracteres de la cadena en forma estándar frente a su equivalente científico, para tres números de tamaño creciente.",
+          "standardLabel": "Estándar",
+          "scientificLabel": "Científica",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "note": "24 caracteres reducidos a 6 — por eso los químicos y astrónomos nunca escriben números como la constante de Avogadro completos"
+          }
+        },
+        "exponentArithmetic": {
+          "title": "Reglas de exponentes en las cuatro operaciones",
+          "intro": "{a} y {b}, procesados por multiplicación y división — ordenados por el exponente resultante, mostrando sumar-en-multiplicación y restar-en-división uno junto al otro.",
+          "multiplyLabel": "Multiplicar",
+          "divideLabel": "Dividir",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "unitScale": {
+          "title": "Notación científica en la conversión de unidades",
+          "intro": "750 nanómetros — una longitud de onda de luz roja visible — convertidos a metros usando el factor exacto 10⁻⁹ que define el prefijo \"nano-\".",
+          "startLabel": "Inicio",
+          "factorLabel": "Factor de conversión",
+          "resultLabel": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "result": "Resultado",
+            "note": "Cada prefijo métrico (nano-, micro-, kilo-, mega-...) es simplemente una potencia de 10 con nombre"
+          }
+        },
+        "magnitudeCompare": {
+          "title": "Comparar dos magnitudes reales",
+          "intro": "Una bacteria típica junto a un virus típico — ambos se describen como \"microscópicos\", pero la notación científica muestra que difieren por un factor real y calculable.",
+          "unitLabel": "metros (aprox.)",
+          "items": {
+            "bacterium": "Bacteria",
+            "virus": "Virus"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "ratio": "Relación de tamaño",
+            "ratioNote": "La bacteria es aproximadamente así de veces más grande"
+          }
+        },
+        "normalization": {
+          "title": "Solo una forma normalizada correcta",
+          "intro": "Cuatro pares (coeficiente, exponente), todos iguales al mismo número real exacto — solo el que tiene un coeficiente en [1, 10) cuenta como correctamente normalizado.",
+          "normalizedLabel": "Normalizado",
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "sigFigs": {
+          "title": "La notación científica elimina la ambigüedad de cifras significativas",
+          "intro": "El mismo valor redondeado, 1.200, escrito con 2, 3 o 4 cifras significativas en notación científica — cada cero final tras el punto decimal ahora es inequívoco, a diferencia de la forma estándar.",
+          "sigFigsLabel": "{count} cifras sig.",
+          "standardAmbiguous": "En forma estándar, \"1.200\" por sí sola podría ser cualquiera de estas tres precisiones — no hay forma de saberlo.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "ambiguous": "Podría ser 2, 3 o 4 cifras sig.",
+            "unambiguous": "Inequívocamente 4 cifras sig."
+          }
+        },
+        "realWorldScale": {
+          "title": "26 órdenes de magnitud, una sola escala",
+          "intro": "Tamaños físicos reales, desde un átomo de hidrógeno hasta un año luz, colocados en la misma escala logarítmica — una escala lineal no podría mostrar todo esto en una línea legible.",
+          "items": {
+            "hydrogenAtom": "Átomo de hidrógeno",
+            "virus": "Virus",
+            "humanHair": "Ancho de un cabello humano",
+            "humanHeight": "Altura humana",
+            "mountEverest": "Monte Everest",
+            "earthDiameter": "Diámetro de la Tierra",
+            "distanceToSun": "Distancia al Sol",
+            "lightYear": "Un año luz"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "spanNote": "Separados por 26 órdenes de magnitud"
+          }
         }
       },
       "shareExport": {

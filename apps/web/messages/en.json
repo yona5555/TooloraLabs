@@ -6164,14 +6164,49 @@
         }
       },
       "education": {
+        "hero": {
+          "ariaLabel": "A draggable point whose horizontal position sets the exponent and vertical position sets the coefficient, with real-world reference magnitudes marked along the same axis",
+          "standardLabel": "Standard form",
+          "hint": "Drag the point — the coefficient, exponent, and standard form all update live.",
+          "numberNames": {
+            "thousand": "In the thousands",
+            "million": "In the millions",
+            "billion": "In the billions",
+            "trillion": "In the trillions",
+            "quadrillion": "In the quadrillions",
+            "thousandth": "Thousandths",
+            "millionth": "Millionths",
+            "billionth": "Billionths",
+            "trillionth": "Trillionths"
+          },
+          "references": {
+            "atom": "A hydrogen atom is about this size",
+            "atomShort": "atom",
+            "speck": "A speck of dust is about this size",
+            "speckShort": "dust",
+            "one": "One",
+            "oneShort": "1",
+            "million": "One million",
+            "millionShort": "million",
+            "billion": "One billion",
+            "billionShort": "billion",
+            "earthPopulationDigits": "Roughly the world's population in cells (order of magnitude)",
+            "earthPopulationDigitsShort": "≈cells"
+          }
+        },
         "intro": {
           "title": "Understanding Scientific Notation",
           "paragraph1": "Scientific notation writes any number as a coefficient between 1 and 10 multiplied by a power of ten, such as 1.234 × 10^8 instead of 123,400,000. The exponent counts how many places the decimal point moved to get from the standard number to that single leading digit — a positive exponent for large numbers, a negative exponent for numbers smaller than 1. This makes it far easier to read, compare, and calculate with numbers that would otherwise be a long string of digits.",
-          "diagram": {
-            "caption": "Avogadro's number, 6.02 × 10^23, sits far to the right on a logarithmic magnitude scale."
-          },
           "paragraph2": "Engineering notation is a close relative that restricts the exponent to a multiple of 3, matching the metric prefixes (kilo-, mega-, giga-, milli-, micro-, nano-) used throughout science and engineering — 1.5 × 10^8 in scientific notation becomes 150 × 10^6 in engineering notation, immediately readable as \"150 million.\" This tool shows both forms for every result, along with the everyday name of the magnitude whenever the number falls in a commonly named range.",
           "paragraph3": "Multiplying or dividing numbers already in scientific notation follows two simple rules: multiply (or divide) the coefficients directly, and add (or subtract) the exponents — a direct consequence of the laws of exponents. The result is then renormalized if the coefficient lands outside the 1-to-10 range, exactly as this tool does automatically."
+        },
+        "arithmetic": {
+          "title": "Multiplying and Dividing in Scientific Notation",
+          "intro": "Neither operation needs the two numbers to share an exponent first — unlike addition, multiplication and division work directly on the coefficients and exponents separately."
+        },
+        "precision": {
+          "title": "Precision, Normalization, and Alternate Forms",
+          "intro": "Not every (coefficient, exponent) pair that equals the right number counts as correctly written scientific notation — these five indicators cover the real rules and alternate forms."
         },
         "examples": {
           "title": "Worked Examples",
@@ -6196,6 +6231,10 @@
               "result": "3 × 10^4"
             }
           ]
+        },
+        "realWorld": {
+          "title": "Scale in the Real World",
+          "intro": "Scientific notation exists because real physical quantities span a staggering range of magnitudes — from a single atom to the distance light travels in a year."
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -6285,6 +6324,191 @@
           "note": "Heath's translation of The Sand-Reckoner documents Archimedes' system for naming and bounding enormous quantities using a hierarchy of numerical \"orders,\" including an exponent-combination rule equivalent to the modern law bᵐ × bⁿ = bᵐ⁺ⁿ.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Read the Original Text"
+        },
+        "largeSteps": {
+          "title": "Converting a Large Standard Number",
+          "intro": "45,000,000 walked through the exact three stations this tool's toScientific operation runs to reach its normalized form.",
+          "steps": {
+            "standard": "Standard form",
+            "decimalPlaced": "Decimal after first digit",
+            "exponentCounted": "Exponent counted"
+          },
+          "resultBadge": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "digitsAfterFirst": "Places moved",
+            "result": "Result"
+          }
+        },
+        "smallSteps": {
+          "title": "Converting a Small Decimal",
+          "intro": "0.0000032 through the same three stations — the decimal point moves right instead of left, so the exponent comes out negative.",
+          "steps": {
+            "standard": "Standard form",
+            "decimalPlaced": "Decimal after first digit",
+            "exponentCounted": "Exponent counted"
+          },
+          "resultBadge": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "direction": "Direction moved",
+            "directionValue": "Right (decimal < 1)",
+            "result": "Result"
+          }
+        },
+        "multiply": {
+          "title": "Multiplying Two Scientific-Notation Numbers",
+          "intro": "(2×10³) × (3×10⁵) — coefficients multiply together, exponents add together.",
+          "problemLabel": "Problem",
+          "ruleLabel": "Rule applied",
+          "resultLabel": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "coefficients": "Coefficients",
+            "exponents": "Exponents",
+            "result": "Result",
+            "renormalizedNote": "Renormalized from {raw} since the coefficient reached 10 or more"
+          }
+        },
+        "divide": {
+          "title": "Dividing Two Scientific-Notation Numbers",
+          "intro": "(8×10⁹) ÷ (2×10⁴) — coefficients divide, exponents subtract, the mirror image of multiplication.",
+          "problemLabel": "Problem",
+          "ruleLabel": "Rule applied",
+          "resultLabel": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "coefficients": "Coefficients",
+            "exponents": "Exponents",
+            "result": "Result"
+          }
+        },
+        "engineering": {
+          "title": "Scientific vs. Engineering Notation",
+          "intro": "45,700,000 in all three forms — engineering notation restricts the exponent to a multiple of 3 so it lines up with named unit prefixes (kilo-, mega-, giga-), at the cost of a coefficient that can run past 10.",
+          "standardLabel": "Standard",
+          "scientificLabel": "Scientific",
+          "engineeringLabel": "Engineering",
+          "worked": {
+            "title": "Worked Example",
+            "sciExponent": "Scientific exponent",
+            "engExponent": "Engineering exponent",
+            "engNote": "Always a multiple of 3",
+            "engCoefficient": "Engineering coefficient"
+          }
+        },
+        "namedMagnitudes": {
+          "title": "Named Magnitudes, Large and Small",
+          "intro": "Every named order of magnitude this tool recognizes automatically — from a thousandth up to a quadrillion.",
+          "tagFraction": "Fraction",
+          "tagMultiple": "Multiple",
+          "columnName": "Name",
+          "columnExponent": "Power of ten",
+          "names": {
+            "thousandth": "Thousandth",
+            "millionth": "Millionth",
+            "billionth": "Billionth",
+            "trillionth": "Trillionth",
+            "thousand": "Thousand",
+            "million": "Million",
+            "billion": "Billion",
+            "trillion": "Trillion",
+            "quadrillion": "Quadrillion"
+          }
+        },
+        "exponentSign": {
+          "title": "Positive vs. Negative Exponents",
+          "intro": "The same coefficient, 5, with the sign of the exponent flipped — genuinely opposite effects, landing on opposite sides of 1.",
+          "worked": {
+            "title": "Worked Example",
+            "negative": "Negative exponent",
+            "negativeNote": "Divides by a power of 10 — smaller than 1",
+            "positive": "Positive exponent",
+            "positiveNote": "Multiplies by a power of 10 — larger than 1"
+          }
+        },
+        "digitCount": {
+          "title": "How Much Shorter Scientific Notation Gets",
+          "intro": "Character count of the standard-notation string versus its scientific-notation equivalent, for three numbers of increasing size.",
+          "standardLabel": "Standard",
+          "scientificLabel": "Scientific",
+          "worked": {
+            "title": "Worked Example",
+            "note": "24 characters shortened to 6 — this is why chemists and astronomers never write out numbers like Avogadro's constant in full"
+          }
+        },
+        "exponentArithmetic": {
+          "title": "Exponent Rules Across All Four Operations",
+          "intro": "{a} and {b}, run through multiply and divide — ranked by the resulting exponent, showing add-for-multiply and subtract-for-divide side by side.",
+          "multiplyLabel": "Multiply",
+          "divideLabel": "Divide",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "unitScale": {
+          "title": "Scientific Notation in Unit Conversion",
+          "intro": "750 nanometers — a wavelength of visible red light — converted to meters using the exact 10⁻⁹ factor that defines the \"nano-\" prefix.",
+          "startLabel": "Start",
+          "factorLabel": "Conversion factor",
+          "resultLabel": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "result": "Result",
+            "note": "Every metric prefix (nano-, micro-, kilo-, mega-...) is just a named power of 10"
+          }
+        },
+        "magnitudeCompare": {
+          "title": "Comparing Two Real Magnitudes",
+          "intro": "A typical bacterium next to a typical virus — both are described as \"microscopic,\" but scientific notation shows they differ by a real, computable factor.",
+          "unitLabel": "meters (approx.)",
+          "items": {
+            "bacterium": "Bacterium",
+            "virus": "Virus"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "ratio": "Size ratio",
+            "ratioNote": "The bacterium is about this many times larger"
+          }
+        },
+        "normalization": {
+          "title": "Only One Correct Normalized Form",
+          "intro": "Four (coefficient, exponent) pairs, all equal to the exact same real number — only the one with a coefficient in [1, 10) counts as properly normalized.",
+          "normalizedLabel": "Normalized",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "sigFigs": {
+          "title": "Scientific Notation Removes Significant-Figure Ambiguity",
+          "intro": "The same rounded value, 1,200, written with 2, 3, or 4 significant figures in scientific notation — each trailing zero after the decimal point is now unambiguous, unlike in standard form.",
+          "sigFigsLabel": "{count} sig figs",
+          "standardAmbiguous": "In standard form, \"1,200\" alone could be any of these three precisions — there's no way to tell.",
+          "worked": {
+            "title": "Worked Example",
+            "ambiguous": "Could be 2, 3, or 4 sig figs",
+            "unambiguous": "Unambiguously 4 sig figs"
+          }
+        },
+        "realWorldScale": {
+          "title": "26 Orders of Magnitude, One Scale",
+          "intro": "Real physical sizes, from a hydrogen atom to a light-year, placed on the same logarithmic scale — a linear scale couldn't show all of these on one readable line.",
+          "items": {
+            "hydrogenAtom": "Hydrogen atom",
+            "virus": "Virus",
+            "humanHair": "Human hair width",
+            "humanHeight": "Human height",
+            "mountEverest": "Mount Everest",
+            "earthDiameter": "Earth's diameter",
+            "distanceToSun": "Distance to the Sun",
+            "lightYear": "One light-year"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "spanNote": "26 orders of magnitude apart"
+          }
         }
       },
       "shareExport": {

@@ -30,8 +30,8 @@ predates this clarification and is flagged here as a candidate for a follow-up p
 | # | Slug | Status | Commit |
 |---|---|---|---|
 | 1 | scientific-calculator | done | e0854da |
-| 2 | fraction-calculator | done | (pending push) |
-| 3 | scientific-notation-converter | not started | |
+| 2 | fraction-calculator | done | b3b87c1 (CI green) |
+| 3 | scientific-notation-converter | done | (pending push) |
 | 4 | significant-figures-calculator | not started | |
 | 5 | statistics-calculator | not started | |
 | 6 | area-calculator | not started | |

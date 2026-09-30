@@ -4,7 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MagnitudeScaleDiagram from "./MagnitudeScaleDiagram";
+import ScientificNotationMagnitudeDrag from "./ScientificNotationMagnitudeDrag";
+import LargeNumberConversionSteps from "./LargeNumberConversionSteps";
+import SmallNumberConversionSteps from "./SmallNumberConversionSteps";
+import MultiplyFormulaDiagram from "./MultiplyFormulaDiagram";
+import DivideFormulaDiagram from "./DivideFormulaDiagram";
+import ExponentArithmeticComparison from "./ExponentArithmeticComparison";
+import CoefficientRangeZoneStrip from "./CoefficientRangeZoneStrip";
+import NormalizationSteppedDiagram from "./NormalizationSteppedDiagram";
+import EngineeringNotationEquivalence from "./EngineeringNotationEquivalence";
+import SignificantFiguresAmbiguity from "./SignificantFiguresAmbiguity";
+import DigitCountComparisonBarChart from "./DigitCountComparisonBarChart";
+import NamedMagnitudesTable from "./NamedMagnitudesTable";
+import ExponentSignBalance from "./ExponentSignBalance";
+import RealWorldScaleBar from "./RealWorldScaleBar";
+import MagnitudeComparisonCards from "./MagnitudeComparisonCards";
+import UnitScaleFlowDiagram from "./UnitScaleFlowDiagram";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -19,9 +34,35 @@ export default async function ScientificNotationEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <MagnitudeScaleDiagram logPosition={23.78} caption={t("intro.diagram.caption")} />
+        <ScientificNotationMagnitudeDrag />
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <div className="space-y-6">
+          <LargeNumberConversionSteps />
+          <SmallNumberConversionSteps />
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("arithmetic.title")}>
+        <p>{t("arithmetic.intro")}</p>
+        <div className="space-y-6">
+          <MultiplyFormulaDiagram />
+          <DivideFormulaDiagram />
+          <ExponentArithmeticComparison />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <InfoSection title={t("precision.title")}>
+        <p>{t("precision.intro")}</p>
+        <div className="space-y-6">
+          <CoefficientRangeZoneStrip />
+          <NormalizationSteppedDiagram />
+          <EngineeringNotationEquivalence />
+          <SignificantFiguresAmbiguity />
+          <DigitCountComparisonBarChart />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -44,9 +85,20 @@ export default async function ScientificNotationEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <NamedMagnitudesTable />
+          <ExponentSignBalance />
+        </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+      <InfoSection title={t("realWorld.title")}>
+        <p>{t("realWorld.intro")}</p>
+        <div className="space-y-6">
+          <RealWorldScaleBar />
+          <MagnitudeComparisonCards />
+          <UnitScaleFlowDiagram />
+        </div>
+      </InfoSection>
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
