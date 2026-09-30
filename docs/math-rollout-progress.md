@@ -35,7 +35,7 @@ predates this clarification and is flagged here as a candidate for a follow-up p
 | 4 | significant-figures-calculator | done | 05c44e6 (CI green) |
 | 5 | statistics-calculator | done | c5218b2 (CI green) |
 | 6 | area-calculator | done | 7d947cb |
-| 7 | surface-area-calculator | done | (pending push) |
+| 7 | surface-area-calculator | done | ba7a165 |
 | 8 | volume-calculator | not started | |
 | 9 | step-by-step-math-solver | not started | |
 | 10 | matrix-calculator | not started | |
