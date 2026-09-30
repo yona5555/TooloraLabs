@@ -6597,14 +6597,24 @@
         "stepMultiplyDivide": "La première valeur comporte {sigFigsA} chiffres significatifs et la seconde {sigFigsB} — le résultat ne peut être fiable qu'à hauteur du plus petit des deux, soit {sigFigs} chiffres significatifs."
       },
       "education": {
+        "hero": {
+          "sigFigsUnit": "chiffres sig.",
+          "ariaLabel": "Un point déplaçable sur un axe d'entiers de 1 à 8 qui fixe à combien de chiffres significatifs pi est arrondi",
+          "hint": "Faites glisser le point — pi est arrondi en direct à ce nombre de chiffres significatifs, chaque chiffre survivant étant mis en évidence."
+        },
         "intro": {
           "title": "Comprendre les Chiffres Significatifs",
           "paragraph1": "Les chiffres significatifs sont les chiffres d'une valeur mesurée qui portent une information réelle sur sa précision — tout chiffre non nul, plus tout zéro situé soit entre deux chiffres non nuls, soit après une virgule décimale une fois qu'un chiffre non nul est apparu. Une mesure de « 12,50 cm » indique quatre chiffres significatifs, signalant au lecteur que l'instrument était assez précis pour distinguer 12,50 de 12,49 ou 12,51 ; écrire la même longueur « 12,5 cm » revendique au contraire une précision moindre, seulement trois chiffres significatifs.",
-          "diagram": {
-            "caption": "0,0050 comporte 2 chiffres significatifs : les zéros initiaux ne sont pas significatifs, mais le zéro après le 5 l'est, car une virgule décimale est présente."
-          },
           "paragraph2": "Les zéros initiaux ne sont jamais significatifs car ils ne font que fixer la position de la virgule décimale, pas la précision de la mesure — 0,0050 et 5,0 (une fois convertis dans la même unité) représentent la même précision, 2 chiffres significatifs, quel que soit le nombre de zéros initiaux qu'exige la plus petite unité. Les zéros finaux constituent le cas véritablement ambigu : « 100 mL » pourrait signifier de 1 à 3 chiffres significatifs selon la précision réelle de la mesure, et c'est exactement pour cela que la notation scientifique (1 × 10^2, 1,0 × 10^2 ou 1,00 × 10^2) existe comme moyen non ambigu d'indiquer la précision d'une mesure.",
           "paragraph3": "Un calcul ne peut pas être plus précis que sa donnée d'entrée la moins précise, c'est pourquoi multiplier ou diviser des valeurs mesurées arrondit le résultat au plus petit nombre de chiffres significatifs parmi les opérandes, tandis qu'additionner ou soustraire arrondit plutôt à la décimale la moins précise — une règle distincte, car l'addition et la soustraction combinent la précision absolue (les décimales) plutôt que la précision relative (les chiffres significatifs)."
+        },
+        "arithmetic": {
+          "title": "Arithmétique avec chiffres significatifs",
+          "intro": "L'addition et la multiplication suivent des règles d'arrondi véritablement différentes — les confondre est l'erreur la plus courante dès que de vrais nombres entrent en jeu."
+        },
+        "precision": {
+          "title": "Précision, ambiguïté et règles d'arrondi",
+          "intro": "Tout nombre écrit n'indique pas sa précision sans ambiguïté — ces quatre indicateurs couvrent les vraies règles de comptage et les cas que la notation standard seule ne résout pas."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -6637,6 +6647,10 @@
               "result": "3,3"
             }
           ]
+        },
+        "measurement": {
+          "title": "La mesure en pratique",
+          "intro": "Les chiffres significatifs existent parce que les mesures réelles ne sont jamais parfaitement exactes — ces trois indicateurs relient les règles de comptage abstraites à de vrais instruments et à l'incertitude."
         },
         "faq": {
           "title": "Questions Fréquentes",
@@ -6726,6 +6740,179 @@
           "note": "La revue historique de Carter documente que les règles normalisées de chiffres significatifs utilisées aujourd'hui étaient encore largement absentes des manuels de physique d'introduction au début des années 1980, retraçant leur adoption progressive plutôt que de les attribuer à une source unique.",
           "url": "https://doi.org/10.1119/1.4818368",
           "readOriginal": "Lire le texte original"
+        },
+        "addSubtract": {
+          "title": "L'addition utilise les décimales, pas les chiffres sig.",
+          "intro": "12,11 + 18,0 — le résultat est limité par le nombre ayant le moins de chiffres après la virgule, pas le moins de chiffres significatifs.",
+          "problemLabel": "Problème",
+          "rawLabel": "Somme brute",
+          "resultLabel": "Résultat arrondi",
+          "worked": {
+            "title": "Exemple résolu",
+            "decimalPlaces": "{count} décimales",
+            "limitedBy": "Limité par",
+            "result": "Résultat",
+            "resultNote": "Arrondi à {count} décimale(s)"
+          }
+        },
+        "multiplyDivide": {
+          "title": "La multiplication utilise les chiffres sig., pas les décimales",
+          "intro": "4,52 × 3,2 — le résultat est limité par le nombre ayant le moins de chiffres significatifs, pas de décimales, l'image miroir de la règle d'addition.",
+          "problemLabel": "Problème",
+          "rawLabel": "Produit brut",
+          "resultLabel": "Résultat arrondi",
+          "worked": {
+            "title": "Exemple résolu",
+            "sigFigs": "{count} chiffres sig.",
+            "limitedBy": "Limité par",
+            "result": "Résultat",
+            "resultNote": "Arrondi à {count} chiffre(s) significatif(s)"
+          }
+        },
+        "zeroTypes": {
+          "title": "Zéros initiaux vs. zéros décimaux finaux",
+          "intro": "Deux règles véritablement opposées : les zéros initiaux ne sont jamais significatifs (purs espaces réservés), tandis que les zéros après une virgule décimale le sont toujours (ils ont été réellement mesurés).",
+          "midLabel": "vs.",
+          "worked": {
+            "title": "Exemple résolu",
+            "leadingCount": "{count} chiffre(s) sig.",
+            "leadingNote": "Les zéros initiaux ne comptent pas — simples espaces réservés",
+            "trailingCount": "{count} chiffres sig.",
+            "trailingNote": "Chaque chiffre compte — la virgule décimale rend les zéros finaux réels"
+          }
+        },
+        "rulesTable": {
+          "title": "Cinq nombres réels, cinq règles de comptage",
+          "intro": "Chacun de ces cinq nombres est régi par une règle de comptage spécifique différente — calculée en direct, pas consultée dans un tableau.",
+          "sigFigsValue": "{count} chiffres sig.",
+          "columnNumber": "Nombre",
+          "columnCount": "Chiffres sig.",
+          "rules": {
+            "nonZero": "Tous les chiffres non nuls comptent",
+            "embeddedZero": "Les zéros entre chiffres non nuls comptent",
+            "leadingZero": "Les zéros initiaux ne comptent jamais",
+            "trailingWithDecimal": "Les zéros finaux comptent — a une virgule décimale",
+            "trailingNoDecimal": "Zéros finaux ambigus — pas de virgule décimale"
+          }
+        },
+        "decimalVsSigFigs": {
+          "title": "Décimales vs. chiffres significatifs",
+          "intro": "Deux comptages différents pour les mêmes deux nombres — les décimales comptent seulement les chiffres après la virgule ; les chiffres significatifs comptent la précision réellement mesurée, zéros initiaux compris.",
+          "decimalPlacesLabel": "Décimales",
+          "sigFigsLabel": "Chiffres significatifs",
+          "note": "0,008 a 3 décimales mais seulement 1 chiffre significatif — ses zéros initiaux ne comptent pas comme précision."
+        },
+        "ambiguousZeros": {
+          "title": "Résoudre l'ambiguïté des zéros finaux",
+          "intro": "\"1500\" seul pourrait être 2, 3 ou 4 chiffres significatifs — impossible de le savoir en notation standard. La notation scientifique règle cela complètement.",
+          "worked": {
+            "title": "Exemple résolu",
+            "count": "{count} chiffres sig.",
+            "ambiguous": "Ambigu — pourrait être 2, 3 ou 4"
+          }
+        },
+        "countComparison": {
+          "title": "Les zéros finaux changent le compte",
+          "intro": "Quatre nombres qui semblent presque identiques, comparés par leur nombre réel de chiffres significatifs — trois ne diffèrent que par les zéros finaux, mais chacun porte une précision différente.",
+          "worked": {
+            "title": "Exemple résolu",
+            "count": "{count} chiffres sig."
+          }
+        },
+        "cascade": {
+          "title": "La précision perdue tôt ne revient jamais",
+          "intro": "Un vrai calcul en deux étapes — multiplier, puis additionner — la précision se dégrade dès la première étape et chaque étape suivante hérite de cette limite.",
+          "steps": {
+            "multiply": "Étape 1 : Multiplier",
+            "add": "Étape 2 : Additionner"
+          },
+          "resultBadge": "Résultat final",
+          "worked": {
+            "title": "Exemple résolu",
+            "sigFigs": "{count} chiffres sig.",
+            "afterStep1": "Après l'étape 1",
+            "afterStep2": "Après l'étape 2 (finale)",
+            "note": "La limite de 2 chiffres sig. de l'étape 1 se poursuit jusqu'à la fin"
+          }
+        },
+        "uncertainty": {
+          "title": "Ce que le dernier chiffre d'une mesure signifie vraiment",
+          "intro": "Une mesure de {value} n'est pas infiniment exacte — son dernier chiffre écrit implique que la vraie valeur se situe plausiblement quelque part dans une plage réelle autour d'elle.",
+          "worked": {
+            "title": "Exemple résolu",
+            "written": "Valeur écrite",
+            "impliedRange": "Plage plausible",
+            "note": "Une demi-unité à la dernière position, dans chaque direction"
+          }
+        },
+        "sciEquivalence": {
+          "title": "La notation scientifique règle l'ambiguïté",
+          "intro": "50 000 écrit en forme standard laisse sa précision véritablement floue — la forme en notation scientifique la fixe exactement.",
+          "standardLabel": "Standard (ambiguë)",
+          "scientificLabel": "Scientifique (exacte)",
+          "worked": {
+            "title": "Exemple résolu",
+            "unclear": "Pourrait être 1 à 5 chiffres sig.",
+            "count": "Exactement {count} chiffres sig."
+          }
+        },
+        "precisionRanked": {
+          "title": "Classer les relevés d'instruments par précision",
+          "intro": "Quatre relevés de la même valeur par quatre instruments différents, classés par nombre réel de chiffres significatifs — plus de chiffres signifie un outil plus précis, pas une mesure différente.",
+          "worked": {
+            "title": "Exemple résolu",
+            "count": "{count} chiffres sig.",
+            "mostPrecise": "Relevé le plus précis"
+          }
+        },
+        "exactVsMeasured": {
+          "title": "Nombres exacts vs. nombres mesurés",
+          "intro": "Un nombre défini ou compté ne limite jamais la précision d'un calcul — seuls les nombres mesurés le font.",
+          "exact": {
+            "title": "Exact (défini)",
+            "unit": "pouces par pied",
+            "sigFigs": "Chiffres sig. infinis — jamais le nombre limitant"
+          },
+          "measured": {
+            "title": "Mesuré",
+            "unit": "une lecture de règle, cm",
+            "sigFigs": "3 chiffres sig. — peut être le nombre limitant"
+          },
+          "note": "Quand un nombre exact apparaît dans un calcul aux côtés d'un nombre mesuré, seule la précision du nombre mesuré compte."
+        },
+        "countingSteps": {
+          "title": "Compter un cas véritablement délicat",
+          "intro": "0,007060 — les zéros initiaux sont entièrement ignorés, puis chaque chiffre à partir du premier chiffre non nul compte, zéro final inclus.",
+          "steps": {
+            "start": "Nombre de départ",
+            "skipLeading": "Ignorer les zéros initiaux",
+            "countRest": "Compter le reste"
+          },
+          "resultBadge": "Résultat",
+          "worked": {
+            "title": "Exemple résolu",
+            "digits": "Chiffres comptés",
+            "result": "Total",
+            "count": "{count} chiffres sig."
+          }
+        },
+        "instruments": {
+          "title": "La précision est une propriété de l'instrument",
+          "intro": "La même longueur physique, mesurée par trois outils réels de précision croissante — le nombre de chiffres significatifs de chaque relevé reflète l'outil, pas l'objet mesuré.",
+          "items": {
+            "ruler": "Règle",
+            "calipers": "Pied à coulisse",
+            "micrometer": "Micromètre"
+          },
+          "sigFigsLabel": "{count} chiffres sig."
+        },
+        "operationTable": {
+          "title": "Référence rapide : quelle règle s'applique",
+          "intro": "Quatre paires réelles d'addition/multiplication, chacune marquée par la règle qui a régi son résultat — décimales pour l'addition, chiffres significatifs pour la multiplication.",
+          "tagDecimal": "Règle des décimales",
+          "tagSigFig": "Règle des chiffres sig.",
+          "columnProblem": "Problème",
+          "columnResult": "Résultat"
         }
       },
       "shareExport": {

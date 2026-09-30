@@ -4,7 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import DigitSignificanceDisplay from "./DigitSignificanceDisplay";
+import SignificantFiguresRoundingDrag from "./SignificantFiguresRoundingDrag";
+import CountingStepsTimeline from "./CountingStepsTimeline";
+import ZeroTypesBalance from "./ZeroTypesBalance";
+import AddSubtractWorkedFlow from "./AddSubtractWorkedFlow";
+import MultiplyDivideWorkedFlow from "./MultiplyDivideWorkedFlow";
+import PrecisionLossCascade from "./PrecisionLossCascade";
+import SigFigsAfterOperationTable from "./SigFigsAfterOperationTable";
+import RoundingRulesTable from "./RoundingRulesTable";
+import AmbiguousTrailingZerosZone from "./AmbiguousTrailingZerosZone";
+import DecimalPlacesVsSigFigsComparison from "./DecimalPlacesVsSigFigsComparison";
+import ScientificVsStandardSigFigsEquivalence from "./ScientificVsStandardSigFigsEquivalence";
+import SigFigCountComparisonBarChart from "./SigFigCountComparisonBarChart";
+import PrecisionRankedComparison from "./PrecisionRankedComparison";
+import MeasurementUncertaintyZoneStrip from "./MeasurementUncertaintyZoneStrip";
+import ExactNumbersVsMeasuredNumbers from "./ExactNumbersVsMeasuredNumbers";
+import PrecisionInstrumentsCards from "./PrecisionInstrumentsCards";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -19,9 +34,35 @@ export default async function SignificantFiguresEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <DigitSignificanceDisplay raw="0.0050" caption={t("intro.diagram.caption")} />
+        <SignificantFiguresRoundingDrag />
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <div className="space-y-6">
+          <CountingStepsTimeline />
+          <ZeroTypesBalance />
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("arithmetic.title")}>
+        <p>{t("arithmetic.intro")}</p>
+        <div className="space-y-6">
+          <AddSubtractWorkedFlow />
+          <MultiplyDivideWorkedFlow />
+          <PrecisionLossCascade />
+          <SigFigsAfterOperationTable />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <InfoSection title={t("precision.title")}>
+        <p>{t("precision.intro")}</p>
+        <div className="space-y-6">
+          <RoundingRulesTable />
+          <AmbiguousTrailingZerosZone />
+          <DecimalPlacesVsSigFigsComparison />
+          <ScientificVsStandardSigFigsEquivalence />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -44,9 +85,20 @@ export default async function SignificantFiguresEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <SigFigCountComparisonBarChart />
+          <PrecisionRankedComparison />
+        </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+      <InfoSection title={t("measurement.title")}>
+        <p>{t("measurement.intro")}</p>
+        <div className="space-y-6">
+          <MeasurementUncertaintyZoneStrip />
+          <ExactNumbersVsMeasuredNumbers />
+          <PrecisionInstrumentsCards />
+        </div>
+      </InfoSection>
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />

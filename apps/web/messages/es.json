@@ -6597,14 +6597,24 @@
         "stepMultiplyDivide": "El primer valor tiene {sigFigsA} cifras significativas y el segundo tiene {sigFigsB} — el resultado solo puede confiarse hasta el menor de los dos, {sigFigs} cifras significativas."
       },
       "education": {
+        "hero": {
+          "sigFigsUnit": "cifras sig.",
+          "ariaLabel": "Un punto arrastrable en un eje de enteros del 1 al 8 que fija a cuántas cifras significativas se redondea pi",
+          "hint": "Arrastra el punto — pi se redondea en vivo a esa cantidad de cifras significativas, con cada dígito superviviente resaltado."
+        },
         "intro": {
           "title": "Cómo Funcionan las Cifras Significativas",
           "paragraph1": "Las cifras significativas son los dígitos de un valor medido que aportan un significado real sobre su precisión — todo dígito distinto de cero, más cualquier cero que esté entre dos dígitos distintos de cero o que aparezca después de un punto decimal una vez que ya apareció un dígito distinto de cero. Una medición de «12.50 cm» reporta cuatro cifras significativas, indicando al lector que el instrumento era lo bastante preciso para distinguir 12.50 de 12.49 o 12.51; escribir la misma longitud como «12.5 cm» reclama en cambio menos precisión, solo tres cifras significativas.",
-          "diagram": {
-            "caption": "0.0050 tiene 2 cifras significativas: los ceros iniciales no son significativos, pero el cero después del 5 sí lo es, porque hay un punto decimal presente."
-          },
           "paragraph2": "Los ceros iniciales nunca son significativos porque solo fijan la posición del punto decimal, no la precisión de la medición — 0.0050 y 5.0 (una vez convertidos a la misma unidad) representan la misma precisión, 2 cifras significativas, sin importar cuántos ceros iniciales exija la unidad más pequeña. Los ceros finales son el caso genuinamente ambiguo: «100 mL» podría significar entre 1 y 3 cifras significativas según qué tan precisamente se midió, y por eso existe precisamente la notación científica (1 × 10^2, 1.0 × 10^2 o 1.00 × 10^2) como forma inequívoca de indicar la precisión de una medición.",
           "paragraph3": "Un cálculo no puede ser más preciso que su dato de entrada menos preciso, por lo que multiplicar o dividir valores medidos redondea el resultado al menor número de cifras significativas entre los operandos, mientras que sumar o restar en cambio redondea al decimal menos preciso — una regla distinta, porque la suma y la resta combinan precisión absoluta (decimales) en lugar de precisión relativa (cifras significativas)."
+        },
+        "arithmetic": {
+          "title": "Aritmética con cifras significativas",
+          "intro": "La suma y la multiplicación siguen reglas de redondeo genuinamente diferentes — confundirlas es el error más común en cuanto intervienen números reales."
+        },
+        "precision": {
+          "title": "Precisión, ambigüedad y reglas de redondeo",
+          "intro": "No todo número escrito indica su precisión sin ambigüedad — estos cuatro indicadores cubren las reglas reales de conteo y los casos que la notación estándar por sí sola no resuelve."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -6637,6 +6647,10 @@
               "result": "3.3"
             }
           ]
+        },
+        "measurement": {
+          "title": "La medición en la práctica",
+          "intro": "Las cifras significativas existen porque las mediciones reales nunca son perfectamente exactas — estos tres indicadores conectan las reglas abstractas de conteo con instrumentos reales y la incertidumbre."
         },
         "faq": {
           "title": "Preguntas Frecuentes",
@@ -6726,6 +6740,179 @@
           "note": "La revisión histórica de Carter documenta que las reglas estandarizadas de cifras significativas usadas hoy estaban en gran medida ausentes de los libros de texto introductorios de física hasta principios de la década de 1980, siguiendo su adopción gradual en lugar de atribuirlas a una sola fuente.",
           "url": "https://doi.org/10.1119/1.4818368",
           "readOriginal": "Leer el texto original"
+        },
+        "addSubtract": {
+          "title": "La suma usa decimales, no cifras significativas",
+          "intro": "12.11 + 18.0 — el resultado está limitado por el número con menos dígitos después del punto decimal, no por el de menos cifras significativas.",
+          "problemLabel": "Problema",
+          "rawLabel": "Suma bruta",
+          "resultLabel": "Resultado redondeado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "decimalPlaces": "{count} decimales",
+            "limitedBy": "Limitado por",
+            "result": "Resultado",
+            "resultNote": "Redondeado a {count} decimal(es)"
+          }
+        },
+        "multiplyDivide": {
+          "title": "La multiplicación usa cifras sig., no decimales",
+          "intro": "4.52 × 3.2 — el resultado está limitado por el número con menos cifras significativas, no decimales, la imagen especular de la regla de la suma.",
+          "problemLabel": "Problema",
+          "rawLabel": "Producto bruto",
+          "resultLabel": "Resultado redondeado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "sigFigs": "{count} cifras sig.",
+            "limitedBy": "Limitado por",
+            "result": "Resultado",
+            "resultNote": "Redondeado a {count} cifra(s) significativa(s)"
+          }
+        },
+        "zeroTypes": {
+          "title": "Ceros iniciales vs. ceros decimales finales",
+          "intro": "Dos reglas genuinamente opuestas: los ceros iniciales nunca son significativos (marcadores de posición puros), mientras que los ceros después de un punto decimal siempre lo son (se midieron realmente).",
+          "midLabel": "vs.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "leadingCount": "{count} cifra(s) sig.",
+            "leadingNote": "Los ceros iniciales no cuentan — solo marcadores",
+            "trailingCount": "{count} cifras sig.",
+            "trailingNote": "Cada dígito cuenta — el punto decimal hace reales los ceros finales"
+          }
+        },
+        "rulesTable": {
+          "title": "Cinco números reales, cinco reglas de conteo",
+          "intro": "Cada uno de estos cinco números se rige por una regla de conteo específica distinta — calculada en vivo, no consultada en una tabla.",
+          "sigFigsValue": "{count} cifras sig.",
+          "columnNumber": "Número",
+          "columnCount": "Cifras sig.",
+          "rules": {
+            "nonZero": "Todos los dígitos distintos de cero cuentan",
+            "embeddedZero": "Los ceros entre dígitos distintos de cero cuentan",
+            "leadingZero": "Los ceros iniciales nunca cuentan",
+            "trailingWithDecimal": "Los ceros finales cuentan — tiene punto decimal",
+            "trailingNoDecimal": "Ceros finales ambiguos — sin punto decimal"
+          }
+        },
+        "decimalVsSigFigs": {
+          "title": "Decimales vs. cifras significativas",
+          "intro": "Dos conteos distintos para los mismos dos números — los decimales solo cuentan dígitos después del punto; las cifras significativas cuentan la precisión realmente medida, ceros iniciales incluidos.",
+          "decimalPlacesLabel": "Decimales",
+          "sigFigsLabel": "Cifras significativas",
+          "note": "0.008 tiene 3 decimales pero solo 1 cifra significativa — sus ceros iniciales no cuentan como precisión."
+        },
+        "ambiguousZeros": {
+          "title": "Resolver la ambigüedad de los ceros finales",
+          "intro": "\"1500\" por sí sola podría ser 2, 3 o 4 cifras significativas — no hay forma de saberlo en notación estándar. La notación científica lo resuelve por completo.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "count": "{count} cifras sig.",
+            "ambiguous": "Ambiguo — podría ser 2, 3 o 4"
+          }
+        },
+        "countComparison": {
+          "title": "Los ceros finales cambian el conteo",
+          "intro": "Cuatro números que parecen casi idénticos, comparados por su cifra significativa real — tres difieren solo en ceros finales, pero cada uno tiene una precisión distinta.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "count": "{count} cifras sig."
+          }
+        },
+        "cascade": {
+          "title": "La precisión perdida temprano nunca regresa",
+          "intro": "Un cálculo real de dos pasos —multiplicar, luego sumar— la precisión se degrada en el primer paso y cada paso posterior hereda ese límite.",
+          "steps": {
+            "multiply": "Paso 1: Multiplicar",
+            "add": "Paso 2: Sumar"
+          },
+          "resultBadge": "Resultado final",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "sigFigs": "{count} cifras sig.",
+            "afterStep1": "Después del paso 1",
+            "afterStep2": "Después del paso 2 (final)",
+            "note": "El límite de 2 cifras sig. del paso 1 se mantiene hasta el final"
+          }
+        },
+        "uncertainty": {
+          "title": "Qué significa realmente el último dígito de una medición",
+          "intro": "Una medición de {value} no es infinitamente exacta — su último dígito escrito implica que el valor verdadero probablemente caiga en algún lugar dentro de un rango real a su alrededor.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "written": "Valor escrito",
+            "impliedRange": "Rango plausible",
+            "note": "Media unidad en la última posición, en cada dirección"
+          }
+        },
+        "sciEquivalence": {
+          "title": "La notación científica resuelve la ambigüedad",
+          "intro": "50,000 escrito en forma estándar deja su precisión genuinamente poco clara — la forma en notación científica la fija exactamente.",
+          "standardLabel": "Estándar (ambigua)",
+          "scientificLabel": "Científica (exacta)",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "unclear": "Podría ser de 1 a 5 cifras sig.",
+            "count": "Exactamente {count} cifras sig."
+          }
+        },
+        "precisionRanked": {
+          "title": "Clasificar lecturas de instrumentos por precisión",
+          "intro": "Cuatro lecturas del mismo valor de cuatro instrumentos distintos, clasificadas por su cifra significativa real — más dígitos significa una herramienta más precisa, no una medición distinta.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "count": "{count} cifras sig.",
+            "mostPrecise": "Lectura más precisa"
+          }
+        },
+        "exactVsMeasured": {
+          "title": "Números exactos vs. números medidos",
+          "intro": "Un número definido o contado nunca limita la precisión de un cálculo — solo lo hacen los números medidos.",
+          "exact": {
+            "title": "Exacto (definido)",
+            "unit": "pulgadas en un pie",
+            "sigFigs": "Cifras sig. infinitas — nunca el número limitante"
+          },
+          "measured": {
+            "title": "Medido",
+            "unit": "una lectura de regla, cm",
+            "sigFigs": "3 cifras sig. — puede ser el número limitante"
+          },
+          "note": "Cuando un número exacto aparece en un cálculo junto a uno medido, solo importa la precisión del número medido."
+        },
+        "countingSteps": {
+          "title": "Contar un caso genuinamente complicado",
+          "intro": "0.007060 — los ceros iniciales se omiten por completo, luego cuenta cada dígito desde el primer dígito distinto de cero en adelante, cero final incluido.",
+          "steps": {
+            "start": "Número inicial",
+            "skipLeading": "Omitir ceros iniciales",
+            "countRest": "Contar el resto"
+          },
+          "resultBadge": "Resultado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "digits": "Dígitos contados",
+            "result": "Total",
+            "count": "{count} cifras sig."
+          }
+        },
+        "instruments": {
+          "title": "La precisión es una propiedad del instrumento",
+          "intro": "La misma longitud física, medida por tres herramientas reales de precisión creciente — la cifra significativa de cada lectura refleja la herramienta, no el objeto medido.",
+          "items": {
+            "ruler": "Regla",
+            "calipers": "Calibrador",
+            "micrometer": "Micrómetro"
+          },
+          "sigFigsLabel": "{count} cifras sig."
+        },
+        "operationTable": {
+          "title": "Referencia rápida: qué regla aplica",
+          "intro": "Cuatro pares reales de suma/multiplicación, cada uno etiquetado con la regla que rigió su resultado — decimales para la suma, cifras significativas para la multiplicación.",
+          "tagDecimal": "Regla de decimales",
+          "tagSigFig": "Regla de cifras sig.",
+          "columnProblem": "Problema",
+          "columnResult": "Resultado"
         }
       },
       "shareExport": {

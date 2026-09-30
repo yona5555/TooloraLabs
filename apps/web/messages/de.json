@@ -6597,14 +6597,24 @@
         "stepMultiplyDivide": "Der erste Wert hat {sigFigsA} signifikante Stellen, der zweite {sigFigsB} — dem Ergebnis kann nur bis zur kleineren der beiden Zahlen vertraut werden, {sigFigs} signifikante Stellen."
       },
       "education": {
+        "hero": {
+          "sigFigsUnit": "sig. Stellen",
+          "ariaLabel": "Ein ziehbarer Punkt auf einer Ganzzahlachse von 1 bis 8, der festlegt, auf wie viele signifikante Stellen Pi gerundet wird",
+          "hint": "Ziehen Sie den Punkt — Pi wird live auf so viele signifikante Stellen gerundet, jede erhaltene Ziffer wird hervorgehoben."
+        },
         "intro": {
           "title": "Signifikante Stellen verstehen",
           "paragraph1": "Signifikante Stellen sind die Ziffern eines Messwerts, die eine echte Aussage über seine Genauigkeit tragen — jede Ziffer ungleich null, plus jede Null, die entweder zwischen zwei Ziffern ungleich null steht oder nach einem Dezimalkomma erscheint, sobald bereits eine Ziffer ungleich null aufgetreten ist. Eine Messung von „12,50 cm“ gibt vier signifikante Stellen an und teilt dem Leser mit, dass das Messgerät präzise genug war, um 12,50 von 12,49 oder 12,51 zu unterscheiden; dieselbe Länge als „12,5 cm“ zu schreiben, beansprucht dagegen weniger Genauigkeit, nur drei signifikante Stellen.",
-          "diagram": {
-            "caption": "0,0050 hat 2 signifikante Stellen: Die führenden Nullen sind nicht signifikant, die Null nach der 5 hingegen schon, weil ein Dezimalkomma vorhanden ist."
-          },
           "paragraph2": "Führende Nullen sind nie signifikant, da sie nur die Position des Dezimalkommas festlegen, nicht die Genauigkeit der Messung — 0,0050 und 5,0 (nach Umrechnung auf dieselbe Einheit) stellen dieselbe Genauigkeit dar, 2 signifikante Stellen, unabhängig davon, wie viele führende Nullen die kleinere Einheit erfordert. Nachgestellte Nullen sind der wirklich mehrdeutige Fall: „100 mL“ könnte je nach tatsächlicher Messgenauigkeit zwischen 1 und 3 signifikanten Stellen bedeuten — genau deshalb gibt es die wissenschaftliche Notation (1 × 10^2, 1,0 × 10^2 oder 1,00 × 10^2) als eindeutige Methode, die Genauigkeit einer Messung anzugeben.",
           "paragraph3": "Eine Berechnung kann nicht genauer sein als ihr ungenauester Eingabewert. Deshalb wird das Ergebnis beim Multiplizieren oder Dividieren von Messwerten auf die geringste Anzahl signifikanter Stellen unter den Operanden gerundet, während beim Addieren oder Subtrahieren stattdessen auf die ungenaueste Nachkommastelle gerundet wird — eine eigene Regel, da Addition und Subtraktion absolute Genauigkeit (Nachkommastellen) statt relativer Genauigkeit (signifikante Stellen) kombinieren."
+        },
+        "arithmetic": {
+          "title": "Arithmetik mit signifikanten Stellen",
+          "intro": "Addition und Multiplikation folgen wirklich unterschiedlichen Rundungsregeln — sie zu verwechseln ist der häufigste Fehler, sobald echte Zahlen im Spiel sind."
+        },
+        "precision": {
+          "title": "Präzision, Mehrdeutigkeit und Rundungsregeln",
+          "intro": "Nicht jede geschriebene Zahl gibt ihre Präzision eindeutig an — diese vier Indikatoren decken die echten Zählregeln und die Fälle ab, die die Standardnotation allein nicht klärt."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -6637,6 +6647,10 @@
               "result": "3,3"
             }
           ]
+        },
+        "measurement": {
+          "title": "Messung in der Praxis",
+          "intro": "Signifikante Stellen existieren, weil reale Messungen nie perfekt exakt sind — diese drei Indikatoren verbinden die abstrakten Zählregeln mit echten Instrumenten und Unsicherheit."
         },
         "faq": {
           "title": "Häufig gestellte Fragen",
@@ -6726,6 +6740,179 @@
           "note": "Carters historische Übersichtsarbeit dokumentiert, dass die heute standardisierten Regeln für signifikante Stellen noch bis in die frühen 1980er-Jahre weitgehend in einführenden Physiklehrbüchern fehlten, und zeichnet ihre schrittweise Übernahme nach, statt sie einer einzelnen Quelle zuzuschreiben.",
           "url": "https://doi.org/10.1119/1.4818368",
           "readOriginal": "Originaltext lesen"
+        },
+        "addSubtract": {
+          "title": "Addition nutzt Dezimalstellen, nicht sig. Stellen",
+          "intro": "12,11 + 18,0 — das Ergebnis wird durch die Zahl mit den wenigsten Nachkommastellen begrenzt, nicht den wenigsten signifikanten Stellen.",
+          "problemLabel": "Aufgabe",
+          "rawLabel": "Rohsumme",
+          "resultLabel": "Gerundetes Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "decimalPlaces": "{count} Dezimalstellen",
+            "limitedBy": "Begrenzt durch",
+            "result": "Ergebnis",
+            "resultNote": "Auf {count} Dezimalstelle(n) gerundet"
+          }
+        },
+        "multiplyDivide": {
+          "title": "Multiplikation nutzt sig. Stellen, nicht Dezimalstellen",
+          "intro": "4,52 × 3,2 — das Ergebnis wird durch die Zahl mit den wenigsten signifikanten Stellen begrenzt, nicht Dezimalstellen — das Spiegelbild der Additionsregel.",
+          "problemLabel": "Aufgabe",
+          "rawLabel": "Rohprodukt",
+          "resultLabel": "Gerundetes Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "sigFigs": "{count} sig. Stellen",
+            "limitedBy": "Begrenzt durch",
+            "result": "Ergebnis",
+            "resultNote": "Auf {count} signifikante Stelle(n) gerundet"
+          }
+        },
+        "zeroTypes": {
+          "title": "Führende Nullen vs. nachgestellte Dezimalnullen",
+          "intro": "Zwei wirklich gegensätzliche Regeln: führende Nullen sind nie signifikant (reine Platzhalter), während Nullen nach einem Dezimalpunkt immer signifikant sind (sie wurden tatsächlich gemessen).",
+          "midLabel": "vs.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "leadingCount": "{count} sig. Stelle(n)",
+            "leadingNote": "Führende Nullen zählen nicht — nur Platzhalter",
+            "trailingCount": "{count} sig. Stellen",
+            "trailingNote": "Jede Ziffer zählt — der Dezimalpunkt macht nachgestellte Nullen real"
+          }
+        },
+        "rulesTable": {
+          "title": "Fünf echte Zahlen, fünf Zählregeln",
+          "intro": "Jede dieser fünf Zahlen unterliegt einer anderen spezifischen Zählregel — live berechnet, nicht aus einer Tabelle abgelesen.",
+          "sigFigsValue": "{count} sig. Stellen",
+          "columnNumber": "Zahl",
+          "columnCount": "Sig. Stellen",
+          "rules": {
+            "nonZero": "Alle Ziffern ungleich Null zählen",
+            "embeddedZero": "Nullen zwischen Ziffern ungleich Null zählen",
+            "leadingZero": "Führende Nullen zählen nie",
+            "trailingWithDecimal": "Nachgestellte Nullen zählen — hat Dezimalpunkt",
+            "trailingNoDecimal": "Nachgestellte Nullen mehrdeutig — kein Dezimalpunkt"
+          }
+        },
+        "decimalVsSigFigs": {
+          "title": "Dezimalstellen vs. signifikante Stellen",
+          "intro": "Zwei verschiedene Zählweisen für dieselben zwei Zahlen — Dezimalstellen zählt nur Ziffern nach dem Punkt; signifikante Stellen zählt tatsächliche gemessene Präzision, führende Nullen eingeschlossen.",
+          "decimalPlacesLabel": "Dezimalstellen",
+          "sigFigsLabel": "Signifikante Stellen",
+          "note": "0,008 hat 3 Dezimalstellen, aber nur 1 signifikante Stelle — ihre führenden Nullen zählen nicht als Präzision."
+        },
+        "ambiguousZeros": {
+          "title": "Mehrdeutigkeit nachgestellter Nullen auflösen",
+          "intro": "\"1500\" allein könnte 2, 3 oder 4 signifikante Stellen sein — aus der Standardnotation ist es nicht erkennbar. Die wissenschaftliche Notation klärt es vollständig.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "count": "{count} sig. Stellen",
+            "ambiguous": "Mehrdeutig — könnte 2, 3 oder 4 sein"
+          }
+        },
+        "countComparison": {
+          "title": "Nachgestellte Nullen ändern die Zählung",
+          "intro": "Vier Zahlen, die fast identisch aussehen, verglichen nach ihrer echten signifikanten Stellenzahl — drei unterscheiden sich nur durch nachgestellte Nullen, tragen aber unterschiedliche Präzision.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "count": "{count} sig. Stellen"
+          }
+        },
+        "cascade": {
+          "title": "Früh verlorene Präzision kommt nie zurück",
+          "intro": "Eine echte zweistufige Berechnung — multiplizieren, dann addieren — Präzision geht im ersten Schritt verloren, und jeder spätere Schritt erbt diese Grenze.",
+          "steps": {
+            "multiply": "Schritt 1: Multiplizieren",
+            "add": "Schritt 2: Addieren"
+          },
+          "resultBadge": "Endergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "sigFigs": "{count} sig. Stellen",
+            "afterStep1": "Nach Schritt 1",
+            "afterStep2": "Nach Schritt 2 (final)",
+            "note": "Die 2-sig.-Stellen-Grenze aus Schritt 1 zieht sich bis zum Ende durch"
+          }
+        },
+        "uncertainty": {
+          "title": "Was die letzte Ziffer einer Messung wirklich bedeutet",
+          "intro": "Eine Messung von {value} ist nicht unendlich exakt — ihre letzte geschriebene Ziffer impliziert, dass der wahre Wert plausibel irgendwo in einem echten Bereich darum liegt.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "written": "Geschriebener Wert",
+            "impliedRange": "Plausibler Bereich",
+            "note": "Eine halbe Einheit an der letzten Stelle, in jede Richtung"
+          }
+        },
+        "sciEquivalence": {
+          "title": "Wissenschaftliche Notation klärt die Mehrdeutigkeit",
+          "intro": "50.000 in Standardform lässt ihre Präzision wirklich unklar — die wissenschaftliche Notation legt sie exakt fest.",
+          "standardLabel": "Standard (mehrdeutig)",
+          "scientificLabel": "Wissenschaftlich (exakt)",
+          "worked": {
+            "title": "Musterbeispiel",
+            "unclear": "Könnte 1 bis 5 sig. Stellen sein",
+            "count": "Genau {count} sig. Stellen"
+          }
+        },
+        "precisionRanked": {
+          "title": "Instrumentenablesungen nach Präzision ordnen",
+          "intro": "Vier Ablesungen desselben Werts von vier verschiedenen Instrumenten, geordnet nach echter signifikanter Stellenzahl — mehr Ziffern bedeutet ein präziseres Werkzeug, keine andere Messung.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "count": "{count} sig. Stellen",
+            "mostPrecise": "Präziseste Ablesung"
+          }
+        },
+        "exactVsMeasured": {
+          "title": "Exakte Zahlen vs. gemessene Zahlen",
+          "intro": "Eine definierte oder gezählte Zahl begrenzt nie die Präzision einer Berechnung — nur gemessene Zahlen tun das.",
+          "exact": {
+            "title": "Exakt (definiert)",
+            "unit": "Zoll pro Fuß",
+            "sigFigs": "Unendlich viele sig. Stellen — nie die begrenzende Zahl"
+          },
+          "measured": {
+            "title": "Gemessen",
+            "unit": "eine Linealablesung, cm",
+            "sigFigs": "3 sig. Stellen — kann die begrenzende Zahl sein"
+          },
+          "note": "Wenn eine exakte Zahl zusammen mit einer gemessenen in einer Berechnung auftaucht, zählt nur die Präzision der gemessenen Zahl."
+        },
+        "countingSteps": {
+          "title": "Einen wirklich kniffligen Fall zählen",
+          "intro": "0,007060 — führende Nullen werden komplett übersprungen, dann zählt jede Ziffer ab der ersten Ziffer ungleich Null, nachgestellte Null eingeschlossen.",
+          "steps": {
+            "start": "Ausgangszahl",
+            "skipLeading": "Führende Nullen überspringen",
+            "countRest": "Rest zählen"
+          },
+          "resultBadge": "Ergebnis",
+          "worked": {
+            "title": "Musterbeispiel",
+            "digits": "Gezählte Ziffern",
+            "result": "Gesamt",
+            "count": "{count} sig. Stellen"
+          }
+        },
+        "instruments": {
+          "title": "Präzision ist eine Eigenschaft des Instruments",
+          "intro": "Dieselbe physische Länge, gemessen mit drei echten Werkzeugen zunehmender Präzision — die signifikante Stellenzahl jeder Ablesung spiegelt das Werkzeug wider, nicht das gemessene Objekt.",
+          "items": {
+            "ruler": "Lineal",
+            "calipers": "Messschieber",
+            "micrometer": "Mikrometer"
+          },
+          "sigFigsLabel": "{count} sig. Stellen"
+        },
+        "operationTable": {
+          "title": "Kurzreferenz: Welche Regel gilt",
+          "intro": "Vier echte Additions-/Multiplikationspaare, jeweils markiert mit der Regel, die ihr Ergebnis bestimmte — Dezimalstellen für Addition, signifikante Stellen für Multiplikation.",
+          "tagDecimal": "Dezimalstellen-Regel",
+          "tagSigFig": "Sig.-Stellen-Regel",
+          "columnProblem": "Aufgabe",
+          "columnResult": "Ergebnis"
         }
       },
       "shareExport": {
