@@ -4,11 +4,24 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import StatisticsDotPlotDiagram from "./StatisticsDotPlotDiagram";
+import StatisticsDataPointsDrag from "./StatisticsDataPointsDrag";
+import MeanMedianModeComparison from "./MeanMedianModeComparison";
+import OutlierEffectOnMeanDiagram from "./OutlierEffectOnMeanDiagram";
+import SumToMeanFlowDiagram from "./SumToMeanFlowDiagram";
+import MedianEvenOddDiagram from "./MedianEvenOddDiagram";
+import ModeFrequencyTable from "./ModeFrequencyTable";
+import MinMaxRangeFlowDiagram from "./MinMaxRangeFlowDiagram";
+import VarianceCalculationSteps from "./VarianceCalculationSteps";
+import PopulationVsSampleVarianceEquivalence from "./PopulationVsSampleVarianceEquivalence";
+import RangeVsStdDevComparison from "./RangeVsStdDevComparison";
+import StdDevZoneStrip from "./StdDevZoneStrip";
+import DeviationFromMeanBarChart from "./DeviationFromMeanBarChart";
+import SkewedVsSymmetricComparison from "./SkewedVsSymmetricComparison";
+import DataSpreadRankedComparison from "./DataSpreadRankedComparison";
+import SampleSizeVsPrecisionDiagram from "./SampleSizeVsPrecisionDiagram";
+import CoefficientOfVariationCards from "./CoefficientOfVariationCards";
 
 type ExampleRow = { calculation: string; result: string };
-
-const SAMPLE_VALUES = [2, 4, 4, 4, 5, 5, 7, 9];
 
 export default async function StatisticsEducation() {
   const t = await getTranslations("tools.statistics-calculator.education");
@@ -21,16 +34,35 @@ export default async function StatisticsEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <StatisticsDotPlotDiagram
-          values={SAMPLE_VALUES}
-          mean={5}
-          median={4.5}
-          meanLabel={t("intro.diagram.meanLabel")}
-          medianLabel={t("intro.diagram.medianLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <StatisticsDataPointsDrag />
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <div className="space-y-6">
+          <MeanMedianModeComparison />
+          <OutlierEffectOnMeanDiagram />
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("coreStats.title")}>
+        <p>{t("coreStats.intro")}</p>
+        <div className="space-y-6">
+          <SumToMeanFlowDiagram />
+          <MedianEvenOddDiagram />
+          <ModeFrequencyTable />
+          <MinMaxRangeFlowDiagram />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <InfoSection title={t("spread.title")}>
+        <p>{t("spread.intro")}</p>
+        <div className="space-y-6">
+          <VarianceCalculationSteps />
+          <PopulationVsSampleVarianceEquivalence />
+          <RangeVsStdDevComparison />
+          <StdDevZoneStrip />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -53,9 +85,20 @@ export default async function StatisticsEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <DeviationFromMeanBarChart />
+          <SkewedVsSymmetricComparison />
+        </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+      <InfoSection title={t("comparing.title")}>
+        <p>{t("comparing.intro")}</p>
+        <div className="space-y-6">
+          <DataSpreadRankedComparison />
+          <SampleSizeVsPrecisionDiagram />
+          <CoefficientOfVariationCards />
+        </div>
+      </InfoSection>
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />

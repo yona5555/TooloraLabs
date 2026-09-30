@@ -8050,16 +8050,32 @@
         "diagramCaption": "Each value plotted on a number line, with the mean (▲) and median (⏐) marked."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Six draggable data points on a shared number line, with the live mean, median, and standard deviation shown above and below",
+          "meanLabel": "Mean",
+          "medianLabel": "Median",
+          "stdDevLabel": "Std dev",
+          "meanShort": "x̄",
+          "medianShort": "M̃",
+          "meanTooltip": "Mean = {value}",
+          "medianTooltip": "Median = {value}",
+          "stdDevTooltip": "Population std dev = {value}",
+          "pointTooltip": "{value}",
+          "hint": "Drag any point — the mean, median, and standard deviation all update live."
+        },
         "intro": {
           "title": "Understanding Descriptive Statistics",
           "paragraph1": "Descriptive statistics summarize a data set with a handful of representative numbers. The mean (arithmetic average) sums every value and divides by the count; the median is the middle value once the data is sorted, unaffected by how extreme the highest or lowest values are; and the mode is whichever value (or values) occurs most often, with no mode at all if every value is unique.",
-          "diagram": {
-            "meanLabel": "mean",
-            "medianLabel": "median",
-            "caption": "The data set 2, 4, 4, 4, 5, 5, 7, 9 — mean 5.0 (▲) sits slightly above the median 4.5 (⏐) because of the higher-value outlier at 9."
-          },
           "paragraph2": "Variance measures how spread out the data is by averaging the squared distance of every value from the mean; standard deviation is simply variance's square root, which brings the units back in line with the original data (a data set of dollar values has a standard deviation in dollars, not squared dollars). A small standard deviation means values cluster tightly around the mean; a large one means they're spread widely.",
           "paragraph3": "This calculator reports both population and sample statistics because the divisor differs: population variance divides by n (the full count), used when the data set is the entire group of interest, while sample variance divides by n − 1, used when the data set is only a sample drawn from a larger population — that smaller divisor (Bessel's correction) compensates for a sample systematically underestimating the true population variance."
+        },
+        "coreStats": {
+          "title": "How the Core Statistics Are Computed",
+          "intro": "Mean, median, mode, and range each answer a genuinely different question about a data set — these four indicators show the real formula or rule behind each one."
+        },
+        "spread": {
+          "title": "Measuring Spread",
+          "intro": "A mean or median alone says nothing about how tightly clustered or scattered the data actually is — variance and standard deviation fill that gap, computed here step by step."
         },
         "examples": {
           "title": "Worked Examples",
@@ -8084,6 +8100,10 @@
               "result": "Population std. dev. ≈ 4.9, sample std. dev. ≈ 5.24"
             }
           ]
+        },
+        "comparing": {
+          "title": "Comparing Data Sets",
+          "intro": "Raw statistics can mislead when data sets differ in scale or size — these three indicators show how to compare spread fairly."
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -8169,6 +8189,180 @@
           "note": "Stigler, a leading historian of statistics, traces how Karl Pearson's technical work — including the standard deviation and much of the vocabulary this calculator uses — reshaped statistics into a modern mathematical discipline.",
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Read the Original Text"
+        },
+        "centralTendency": {
+          "title": "Mean, Median, and Mode Can All Disagree",
+          "intro": "For {values} — a single outlier pulls the mean up, while the median and mode stay anchored to where most of the data actually sits.",
+          "meanLabel": "Mean",
+          "medianLabel": "Median",
+          "modeLabel": "Mode",
+          "noMode": "None",
+          "note": "When they diverge this much, the median usually describes a \"typical\" value better than the mean."
+        },
+        "outlierEffect": {
+          "title": "How Much One Outlier Moves the Mean",
+          "intro": "The same five real values, before and after a single extreme point (95) is added.",
+          "meanLabel": "Mean",
+          "outlierLabel": "New point",
+          "worked": {
+            "title": "Worked Example",
+            "meanBefore": "Mean before",
+            "meanAfter": "Mean after",
+            "meanNote": "Jumped sharply from one added point",
+            "medianBefore": "Median before",
+            "medianAfter": "Median after",
+            "medianNote": "Barely moved — resistant to outliers"
+          }
+        },
+        "sumToMean": {
+          "title": "The Mean Is Just Sum Divided by Count",
+          "intro": "For {values} — the formula behind the most familiar statistic, with real numbers.",
+          "sumLabel": "Sum",
+          "countLabel": "Count",
+          "meanLabel": "Mean",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "medianParity": {
+          "title": "Median Depends on Whether Count Is Odd or Even",
+          "intro": "The same five values, then a sixth added — the median rule genuinely branches depending on whether the count is odd or even.",
+          "oddTitle": "Odd count (n = {n})",
+          "evenTitle": "Even count (n = {n})",
+          "worked": {
+            "title": "Worked Example",
+            "odd": "Odd rule",
+            "oddRule": "The single middle value, once sorted",
+            "even": "Even rule"
+          }
+        },
+        "modeFrequency": {
+          "title": "The Mode Is Whichever Value Repeats Most",
+          "intro": "Real frequency count for {values} — the mode is whichever value actually appears the most times, not a guess.",
+          "tagMode": "Mode",
+          "tagOther": "Not mode",
+          "columnValue": "Value",
+          "columnFrequency": "Frequency"
+        },
+        "minMaxRange": {
+          "title": "Range Is the Simplest Spread Measure",
+          "intro": "For {values} — just the distance between the two most extreme values.",
+          "maxLabel": "Max",
+          "minLabel": "Min",
+          "rangeLabel": "Range",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "varianceSteps": {
+          "title": "From Raw Data to Standard Deviation",
+          "intro": "The real four-station path variance and standard deviation actually take, for a small, fully traceable data set.",
+          "steps": {
+            "deviations": "1. Deviations from mean",
+            "squared": "2. Squared",
+            "averaged": "3. Averaged",
+            "rooted": "4. Square root"
+          },
+          "resultBadge": "Standard deviation",
+          "worked": {
+            "title": "Worked Example",
+            "mean": "Mean",
+            "stdDev": "Std dev"
+          }
+        },
+        "popVsSample": {
+          "title": "Population vs. Sample Variance",
+          "intro": "The exact same 5 numbers, {values} — variance computed with two different divisors.",
+          "populationLabel": "Population (÷n)",
+          "sampleLabel": "Sample (÷n−1)",
+          "worked": {
+            "title": "Worked Example",
+            "divisorPop": "Population divisor",
+            "divisorSample": "Sample divisor",
+            "note": "Dividing by a smaller number always gives a larger result"
+          }
+        },
+        "rangeVsStdDev": {
+          "title": "Range vs. Standard Deviation with an Outlier",
+          "intro": "For {values} — one outlier (30) inflates the range dramatically but barely moves the standard deviation, which weighs every point.",
+          "rangeLabel": "Range",
+          "stdDevLabel": "Std dev",
+          "worked": {
+            "title": "Worked Example",
+            "range": "Range",
+            "rangeNote": "Determined entirely by the two extreme points",
+            "stdDev": "Standard deviation",
+            "stdDevNote": "Every point contributes, so one outlier matters less"
+          }
+        },
+        "stdDevZone": {
+          "title": "Where a Value Sits Relative to One Standard Deviation",
+          "intro": "A real 10-point data set's mean ± one standard deviation, with a specific value from the set marked against that band.",
+          "worked": {
+            "title": "Worked Example",
+            "band": "Mean ± 1 SD band",
+            "inside": "Inside the typical band",
+            "outside": "Outside the typical band"
+          }
+        },
+        "deviations": {
+          "title": "Every Point's Real Distance from the Mean",
+          "intro": "Mean = {mean} — each value's signed deviation, the raw ingredient variance squares and averages.",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "skewComparison": {
+          "title": "Symmetric vs. Skewed Data",
+          "intro": "Two real 5-point data sets, same structure — in one, mean and median coincide; in the other, they genuinely diverge.",
+          "symmetric": {
+            "title": "Symmetric"
+          },
+          "skewed": {
+            "title": "Skewed"
+          },
+          "meanLabel": "Mean",
+          "medianLabel": "Median",
+          "note": "Mean equals median only when the data is genuinely symmetric around its center."
+        },
+        "spreadRanked": {
+          "title": "Ranking Data Sets by How Spread Out They Are",
+          "intro": "Three real data sets, ranked by their actual standard deviation — proving the mean alone never tells you how scattered the data is.",
+          "sets": {
+            "a": "Tightly clustered",
+            "b": "Moderately spread",
+            "c": "Widely spread"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "mean": "mean",
+            "stdDev": "std dev"
+          }
+        },
+        "sampleSizeEffect": {
+          "title": "Why the Sample Correction Matters More for Small Data",
+          "intro": "The percentage gap between population and sample standard deviation, for a small (n=3) set versus a larger (n=12) one — the n−1 correction matters most exactly when data is scarce.",
+          "smallLabel": "n = {n}",
+          "largeLabel": "n = {n}",
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "coefficientOfVariation": {
+          "title": "The Same Std Dev Can Mean Very Different Things",
+          "intro": "Two data sets with the exact same standard deviation but very different means — relative to their own scale, one is far more variable than the other.",
+          "small": {
+            "title": "Small-scale data"
+          },
+          "large": {
+            "title": "Large-scale data"
+          },
+          "meanLabel": "Mean",
+          "stdDevLabel": "Std dev",
+          "cvLabel": "Coefficient of variation",
+          "note": "Coefficient of variation (std dev ÷ mean) puts spread in context — raw std dev alone can't do that across different scales."
         }
       },
       "scenarios": {

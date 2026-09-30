@@ -8050,16 +8050,32 @@
         "diagramCaption": "Jeder Wert auf einer Zahlengeraden dargestellt, mit markiertem Mittelwert (▲) und Median (⏐)."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Sechs ziehbare Datenpunkte auf einer gemeinsamen Zahlengeraden, mit dem live berechneten Mittelwert, Median und Standardabweichung oben und unten angezeigt",
+          "meanLabel": "Mittelwert",
+          "medianLabel": "Median",
+          "stdDevLabel": "Std.-Abw.",
+          "meanShort": "x̄",
+          "medianShort": "M̃",
+          "meanTooltip": "Mittelwert = {value}",
+          "medianTooltip": "Median = {value}",
+          "stdDevTooltip": "Populations-Std.-Abw. = {value}",
+          "pointTooltip": "{value}",
+          "hint": "Ziehen Sie einen Punkt — Mittelwert, Median und Standardabweichung aktualisieren sich alle live."
+        },
         "intro": {
           "title": "Deskriptive Statistik verstehen",
           "paragraph1": "Deskriptive Statistik fasst einen Datensatz mit einer Handvoll aussagekräftiger Zahlen zusammen. Der Mittelwert (arithmetisches Mittel) summiert alle Werte und teilt durch deren Anzahl; der Median ist der mittlere Wert nach dem Sortieren der Daten, unbeeinflusst davon, wie extrem der höchste oder niedrigste Wert ist; und der Modus ist der Wert (oder die Werte), der am häufigsten vorkommt, wobei es keinen Modus gibt, wenn jeder Wert einzigartig ist.",
-          "diagram": {
-            "meanLabel": "Mittelwert",
-            "medianLabel": "Median",
-            "caption": "Der Datensatz 2, 4, 4, 4, 5, 5, 7, 9 — der Mittelwert 5,0 (▲) liegt aufgrund des höheren Ausreißers bei 9 leicht über dem Median 4,5 (⏐)."
-          },
           "paragraph2": "Die Varianz misst, wie stark die Daten streuen, indem der quadrierte Abstand jedes Werts vom Mittelwert gemittelt wird; die Standardabweichung ist einfach die Quadratwurzel der Varianz, was die Einheiten wieder mit den Originaldaten in Einklang bringt (ein Datensatz mit Dollarwerten hat eine Standardabweichung in Dollar, nicht in Quadratdollar). Eine kleine Standardabweichung bedeutet, dass sich die Werte eng um den Mittelwert gruppieren; eine große bedeutet, dass sie weit gestreut sind.",
           "paragraph3": "Dieser Rechner gibt sowohl Grundgesamtheits- als auch Stichprobenstatistiken an, da sich der Divisor unterscheidet: Die Varianz der Grundgesamtheit teilt durch n (die Gesamtzahl), verwendet, wenn der Datensatz die gesamte interessierende Gruppe ist, während die Varianz der Stichprobe durch n − 1 teilt, verwendet, wenn der Datensatz nur eine aus einer größeren Grundgesamtheit gezogene Stichprobe ist — dieser kleinere Divisor (die Bessel-Korrektur) gleicht aus, dass eine Stichprobe die wahre Varianz der Grundgesamtheit systematisch unterschätzt."
+        },
+        "coreStats": {
+          "title": "Wie die Kernstatistiken berechnet werden",
+          "intro": "Mittelwert, Median, Modus und Spannweite beantworten jeweils eine wirklich andere Frage zu einem Datensatz — diese vier Indikatoren zeigen die echte Formel oder Regel hinter jedem."
+        },
+        "spread": {
+          "title": "Streuung messen",
+          "intro": "Ein Mittelwert oder Median allein sagt nichts darüber aus, wie eng gebündelt oder verstreut die Daten tatsächlich sind — Varianz und Standardabweichung schließen diese Lücke, hier Schritt für Schritt berechnet."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8084,6 +8100,10 @@
               "result": "Standardabw. Grundgesamtheit ≈ 4,9, Stichprobe ≈ 5,24"
             }
           ]
+        },
+        "comparing": {
+          "title": "Datensätze vergleichen",
+          "intro": "Rohe Statistiken können irreführen, wenn sich Datensätze in Skala oder Größe unterscheiden — diese drei Indikatoren zeigen, wie man Streuung fair vergleicht."
         },
         "faq": {
           "title": "Häufige Fragen",
@@ -8169,6 +8189,180 @@
           "note": "Stigler, ein führender Statistikhistoriker, zeichnet nach, wie Karl Pearsons technische Arbeit — einschließlich der Standardabweichung und eines Großteils des von diesem Rechner verwendeten Vokabulars — die Statistik zu einer modernen mathematischen Disziplin umgestaltete.",
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Originaltext lesen"
+        },
+        "centralTendency": {
+          "title": "Mittelwert, Median und Modus können alle uneinig sein",
+          "intro": "Für {values} — ein einzelner Ausreißer zieht den Mittelwert nach oben, während Median und Modus dort verankert bleiben, wo die meisten Daten tatsächlich liegen.",
+          "meanLabel": "Mittelwert",
+          "medianLabel": "Median",
+          "modeLabel": "Modus",
+          "noMode": "Keiner",
+          "note": "Wenn sie so stark voneinander abweichen, beschreibt der Median meist einen \"typischen\" Wert besser als der Mittelwert."
+        },
+        "outlierEffect": {
+          "title": "Wie stark ein Ausreißer den Mittelwert verschiebt",
+          "intro": "Dieselben fünf echten Werte, vor und nach dem Hinzufügen eines einzelnen Extremwerts (95).",
+          "meanLabel": "Mittelwert",
+          "outlierLabel": "Neuer Punkt",
+          "worked": {
+            "title": "Musterbeispiel",
+            "meanBefore": "Mittelwert vorher",
+            "meanAfter": "Mittelwert nachher",
+            "meanNote": "Sprang stark durch einen hinzugefügten Punkt",
+            "medianBefore": "Median vorher",
+            "medianAfter": "Median nachher",
+            "medianNote": "Kaum bewegt — robust gegenüber Ausreißern"
+          }
+        },
+        "sumToMean": {
+          "title": "Der Mittelwert ist einfach Summe geteilt durch Anzahl",
+          "intro": "Für {values} — die Formel hinter der bekanntesten Statistik, mit echten Zahlen.",
+          "sumLabel": "Summe",
+          "countLabel": "Anzahl",
+          "meanLabel": "Mittelwert",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "medianParity": {
+          "title": "Der Median hängt davon ab, ob die Anzahl gerade oder ungerade ist",
+          "intro": "Dieselben fünf Werte, dann ein sechster hinzugefügt — die Median-Regel verzweigt sich tatsächlich je nachdem, ob die Anzahl gerade oder ungerade ist.",
+          "oddTitle": "Ungerade Anzahl (n = {n})",
+          "evenTitle": "Gerade Anzahl (n = {n})",
+          "worked": {
+            "title": "Musterbeispiel",
+            "odd": "Ungerade Regel",
+            "oddRule": "Der einzelne mittlere Wert, sobald sortiert",
+            "even": "Gerade Regel"
+          }
+        },
+        "modeFrequency": {
+          "title": "Der Modus ist der Wert, der am häufigsten vorkommt",
+          "intro": "Echte Häufigkeitszählung für {values} — der Modus ist der Wert, der tatsächlich am häufigsten auftritt, keine Vermutung.",
+          "tagMode": "Modus",
+          "tagOther": "Kein Modus",
+          "columnValue": "Wert",
+          "columnFrequency": "Häufigkeit"
+        },
+        "minMaxRange": {
+          "title": "Die Spannweite ist das einfachste Streuungsmaß",
+          "intro": "Für {values} — einfach der Abstand zwischen den beiden Extremwerten.",
+          "maxLabel": "Max",
+          "minLabel": "Min",
+          "rangeLabel": "Spannweite",
+          "worked": {
+            "title": "Musterbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "varianceSteps": {
+          "title": "Von Rohdaten zur Standardabweichung",
+          "intro": "Der echte vierstufige Weg, den Varianz und Standardabweichung tatsächlich nehmen, für einen kleinen, vollständig nachvollziehbaren Datensatz.",
+          "steps": {
+            "deviations": "1. Abweichungen vom Mittelwert",
+            "squared": "2. Quadriert",
+            "averaged": "3. Gemittelt",
+            "rooted": "4. Quadratwurzel"
+          },
+          "resultBadge": "Standardabweichung",
+          "worked": {
+            "title": "Musterbeispiel",
+            "mean": "Mittelwert",
+            "stdDev": "Std.-Abw."
+          }
+        },
+        "popVsSample": {
+          "title": "Populations- vs. Stichprobenvarianz",
+          "intro": "Genau dieselben 5 Zahlen, {values} — Varianz mit zwei verschiedenen Divisoren berechnet.",
+          "populationLabel": "Population (÷n)",
+          "sampleLabel": "Stichprobe (÷n−1)",
+          "worked": {
+            "title": "Musterbeispiel",
+            "divisorPop": "Populationsdivisor",
+            "divisorSample": "Stichprobendivisor",
+            "note": "Die Division durch eine kleinere Zahl ergibt immer ein größeres Ergebnis"
+          }
+        },
+        "rangeVsStdDev": {
+          "title": "Spannweite vs. Standardabweichung mit einem Ausreißer",
+          "intro": "Für {values} — ein Ausreißer (30) bläht die Spannweite dramatisch auf, bewegt aber die Standardabweichung, die jeden Punkt gewichtet, kaum.",
+          "rangeLabel": "Spannweite",
+          "stdDevLabel": "Std.-Abw.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "range": "Spannweite",
+            "rangeNote": "Vollständig durch die beiden Extrempunkte bestimmt",
+            "stdDev": "Standardabweichung",
+            "stdDevNote": "Jeder Punkt trägt bei, daher zählt ein Ausreißer weniger"
+          }
+        },
+        "stdDevZone": {
+          "title": "Wo ein Wert relativ zu einer Standardabweichung liegt",
+          "intro": "Der Mittelwert ± eine Standardabweichung eines echten 10-Punkte-Datensatzes, mit einem bestimmten Wert aus dem Datensatz gegen dieses Band markiert.",
+          "worked": {
+            "title": "Musterbeispiel",
+            "band": "Mittelwert ± 1 SD Band",
+            "inside": "Innerhalb des typischen Bandes",
+            "outside": "Außerhalb des typischen Bandes"
+          }
+        },
+        "deviations": {
+          "title": "Der echte Abstand jedes Punkts vom Mittelwert",
+          "intro": "Mittelwert = {mean} — die vorzeichenbehaftete Abweichung jedes Werts, die rohe Zutat, die die Varianz quadriert und mittelt.",
+          "worked": {
+            "title": "Musterbeispiel"
+          }
+        },
+        "skewComparison": {
+          "title": "Symmetrische vs. schiefe Daten",
+          "intro": "Zwei echte 5-Punkte-Datensätze, gleiche Struktur — in einem stimmen Mittelwert und Median überein; im anderen weichen sie tatsächlich voneinander ab.",
+          "symmetric": {
+            "title": "Symmetrisch"
+          },
+          "skewed": {
+            "title": "Schief"
+          },
+          "meanLabel": "Mittelwert",
+          "medianLabel": "Median",
+          "note": "Mittelwert gleich Median gilt nur, wenn die Daten tatsächlich symmetrisch um ihr Zentrum liegen."
+        },
+        "spreadRanked": {
+          "title": "Datensätze nach Streuung ordnen",
+          "intro": "Drei echte Datensätze, geordnet nach ihrer tatsächlichen Standardabweichung — beweist, dass der Mittelwert allein nie sagt, wie verstreut die Daten sind.",
+          "sets": {
+            "a": "Eng gebündelt",
+            "b": "Mäßig gestreut",
+            "c": "Weit gestreut"
+          },
+          "worked": {
+            "title": "Musterbeispiel",
+            "mean": "Mittelwert",
+            "stdDev": "Std.-Abw."
+          }
+        },
+        "sampleSizeEffect": {
+          "title": "Warum die Stichprobenkorrektur bei kleinen Daten wichtiger ist",
+          "intro": "Die prozentuale Lücke zwischen Populations- und Stichproben-Standardabweichung, für einen kleinen (n=3) gegenüber einem größeren (n=12) Datensatz — die n−1-Korrektur zählt am meisten, wenn Daten knapp sind.",
+          "smallLabel": "n = {n}",
+          "largeLabel": "n = {n}",
+          "worked": {
+            "title": "Musterbeispiel"
+          }
+        },
+        "coefficientOfVariation": {
+          "title": "Dieselbe Std.-Abw. kann sehr Unterschiedliches bedeuten",
+          "intro": "Zwei Datensätze mit exakt derselben Standardabweichung, aber sehr unterschiedlichen Mittelwerten — relativ zu ihrer eigenen Skala ist einer weit variabler als der andere.",
+          "small": {
+            "title": "Kleinskalige Daten"
+          },
+          "large": {
+            "title": "Großskalige Daten"
+          },
+          "meanLabel": "Mittelwert",
+          "stdDevLabel": "Std.-Abw.",
+          "cvLabel": "Variationskoeffizient",
+          "note": "Der Variationskoeffizient (Std.-Abw. ÷ Mittelwert) setzt Streuung in Kontext — die rohe Std.-Abw. allein kann das über verschiedene Skalen hinweg nicht."
         }
       },
       "scenarios": {

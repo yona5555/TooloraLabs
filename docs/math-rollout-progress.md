@@ -32,8 +32,8 @@ predates this clarification and is flagged here as a candidate for a follow-up p
 | 1 | scientific-calculator | done | e0854da |
 | 2 | fraction-calculator | done | b3b87c1 (CI green) |
 | 3 | scientific-notation-converter | done | 7b088b6 (CI green) |
-| 4 | significant-figures-calculator | done | (pending push) |
-| 5 | statistics-calculator | not started | |
+| 4 | significant-figures-calculator | done | 05c44e6 (CI green) |
+| 5 | statistics-calculator | done | (pending push) |
 | 6 | area-calculator | not started | |
 | 7 | surface-area-calculator | not started | |
 | 8 | volume-calculator | not started | |

@@ -8050,16 +8050,32 @@
         "diagramCaption": "Chaque valeur placée sur une droite numérique, avec la moyenne (▲) et la médiane (⏐) indiquées."
       },
       "education": {
+        "hero": {
+          "ariaLabel": "Six points de données déplaçables sur une droite numérique partagée, avec la moyenne, la médiane et l'écart-type en direct affichés au-dessus et au-dessous",
+          "meanLabel": "Moyenne",
+          "medianLabel": "Médiane",
+          "stdDevLabel": "Écart-type",
+          "meanShort": "x̄",
+          "medianShort": "M̃",
+          "meanTooltip": "Moyenne = {value}",
+          "medianTooltip": "Médiane = {value}",
+          "stdDevTooltip": "Écart-type de population = {value}",
+          "pointTooltip": "{value}",
+          "hint": "Faites glisser un point — la moyenne, la médiane et l'écart-type se mettent tous à jour en direct."
+        },
         "intro": {
           "title": "Comprendre les Statistiques Descriptives",
           "paragraph1": "Les statistiques descriptives résument un jeu de données par une poignée de nombres représentatifs. La moyenne (moyenne arithmétique) additionne toutes les valeurs et divise par leur nombre ; la médiane est la valeur centrale une fois les données triées, non affectée par le caractère extrême des valeurs les plus hautes ou les plus basses ; et le mode est la valeur (ou les valeurs) qui revient le plus souvent, avec aucun mode du tout si chaque valeur est unique.",
-          "diagram": {
-            "meanLabel": "moyenne",
-            "medianLabel": "médiane",
-            "caption": "Le jeu de données 2, 4, 4, 4, 5, 5, 7, 9 — la moyenne 5,0 (▲) se situe légèrement au-dessus de la médiane 4,5 (⏐) en raison de la valeur atypique élevée à 9."
-          },
           "paragraph2": "La variance mesure la dispersion des données en faisant la moyenne de la distance au carré de chaque valeur par rapport à la moyenne ; l'écart-type est simplement la racine carrée de la variance, ce qui ramène les unités à celles des données d'origine (un jeu de données en dollars a un écart-type en dollars, non en dollars au carré). Un écart-type faible signifie que les valeurs se regroupent étroitement autour de la moyenne ; un écart-type élevé signifie qu'elles sont largement dispersées.",
           "paragraph3": "Ce calculateur indique à la fois les statistiques de population et d'échantillon car le diviseur diffère : la variance de population divise par n (l'effectif total), utilisée lorsque le jeu de données représente l'ensemble du groupe étudié, tandis que la variance d'échantillon divise par n − 1, utilisée lorsque le jeu de données n'est qu'un échantillon tiré d'une population plus vaste — ce diviseur plus petit (la correction de Bessel) compense le fait qu'un échantillon sous-estime systématiquement la variance réelle de la population."
+        },
+        "coreStats": {
+          "title": "Comment les statistiques de base sont calculées",
+          "intro": "La moyenne, la médiane, le mode et l'étendue répondent chacun à une question véritablement différente sur un jeu de données — ces quatre indicateurs montrent la vraie formule ou règle derrière chacun."
+        },
+        "spread": {
+          "title": "Mesurer la dispersion",
+          "intro": "Une moyenne ou une médiane seule ne dit rien sur le degré de regroupement ou de dispersion réel des données — la variance et l'écart-type comblent cette lacune, calculés ici étape par étape."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -8084,6 +8100,10 @@
               "result": "Écart-type de population ≈ 4,9, d'échantillon ≈ 5,24"
             }
           ]
+        },
+        "comparing": {
+          "title": "Comparer des jeux de données",
+          "intro": "Les statistiques brutes peuvent induire en erreur quand les jeux de données diffèrent en échelle ou en taille — ces trois indicateurs montrent comment comparer la dispersion équitablement."
         },
         "faq": {
           "title": "Questions Fréquentes",
@@ -8169,6 +8189,180 @@
           "note": "Stigler, historien de premier plan des statistiques, retrace comment le travail technique de Karl Pearson — dont l'écart-type et une grande partie du vocabulaire qu'utilise ce calculateur — a transformé la statistique en une discipline mathématique moderne.",
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Lire le Texte Original"
+        },
+        "centralTendency": {
+          "title": "Moyenne, médiane et mode peuvent tous diverger",
+          "intro": "Pour {values} — une seule valeur aberrante tire la moyenne vers le haut, tandis que la médiane et le mode restent ancrés là où se trouve réellement la majorité des données.",
+          "meanLabel": "Moyenne",
+          "medianLabel": "Médiane",
+          "modeLabel": "Mode",
+          "noMode": "Aucun",
+          "note": "Quand ils divergent autant, la médiane décrit généralement mieux une valeur \"typique\" que la moyenne."
+        },
+        "outlierEffect": {
+          "title": "Combien une valeur aberrante déplace la moyenne",
+          "intro": "Les mêmes cinq valeurs réelles, avant et après l'ajout d'un seul point extrême (95).",
+          "meanLabel": "Moyenne",
+          "outlierLabel": "Nouveau point",
+          "worked": {
+            "title": "Exemple résolu",
+            "meanBefore": "Moyenne avant",
+            "meanAfter": "Moyenne après",
+            "meanNote": "A bondi fortement à cause d'un point ajouté",
+            "medianBefore": "Médiane avant",
+            "medianAfter": "Médiane après",
+            "medianNote": "A à peine bougé — résistante aux valeurs aberrantes"
+          }
+        },
+        "sumToMean": {
+          "title": "La moyenne est simplement la somme divisée par le nombre",
+          "intro": "Pour {values} — la formule derrière la statistique la plus connue, avec de vrais nombres.",
+          "sumLabel": "Somme",
+          "countLabel": "Nombre",
+          "meanLabel": "Moyenne",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "medianParity": {
+          "title": "La médiane dépend de la parité du nombre de valeurs",
+          "intro": "Les mêmes cinq valeurs, puis une sixième ajoutée — la règle de la médiane bifurque véritablement selon que le nombre est pair ou impair.",
+          "oddTitle": "Nombre impair (n = {n})",
+          "evenTitle": "Nombre pair (n = {n})",
+          "worked": {
+            "title": "Exemple résolu",
+            "odd": "Règle impaire",
+            "oddRule": "La seule valeur du milieu, une fois triée",
+            "even": "Règle paire"
+          }
+        },
+        "modeFrequency": {
+          "title": "Le mode est la valeur qui se répète le plus",
+          "intro": "Comptage réel des fréquences pour {values} — le mode est la valeur qui apparaît réellement le plus de fois, pas une supposition.",
+          "tagMode": "Mode",
+          "tagOther": "Pas le mode",
+          "columnValue": "Valeur",
+          "columnFrequency": "Fréquence"
+        },
+        "minMaxRange": {
+          "title": "L'étendue est la mesure de dispersion la plus simple",
+          "intro": "Pour {values} — simplement la distance entre les deux valeurs les plus extrêmes.",
+          "maxLabel": "Max",
+          "minLabel": "Min",
+          "rangeLabel": "Étendue",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "varianceSteps": {
+          "title": "Des données brutes à l'écart-type",
+          "intro": "Le vrai chemin en quatre étapes que suivent réellement la variance et l'écart-type, pour un petit jeu de données entièrement traçable.",
+          "steps": {
+            "deviations": "1. Écarts à la moyenne",
+            "squared": "2. Au carré",
+            "averaged": "3. Moyennés",
+            "rooted": "4. Racine carrée"
+          },
+          "resultBadge": "Écart-type",
+          "worked": {
+            "title": "Exemple résolu",
+            "mean": "Moyenne",
+            "stdDev": "Écart-type"
+          }
+        },
+        "popVsSample": {
+          "title": "Variance de population vs. d'échantillon",
+          "intro": "Exactement les mêmes 5 nombres, {values} — variance calculée avec deux diviseurs différents.",
+          "populationLabel": "Population (÷n)",
+          "sampleLabel": "Échantillon (÷n−1)",
+          "worked": {
+            "title": "Exemple résolu",
+            "divisorPop": "Diviseur de population",
+            "divisorSample": "Diviseur d'échantillon",
+            "note": "Diviser par un nombre plus petit donne toujours un résultat plus grand"
+          }
+        },
+        "rangeVsStdDev": {
+          "title": "Étendue vs. écart-type avec une valeur aberrante",
+          "intro": "Pour {values} — une valeur aberrante (30) gonfle l'étendue de façon spectaculaire mais déplace à peine l'écart-type, qui pondère chaque point.",
+          "rangeLabel": "Étendue",
+          "stdDevLabel": "Écart-type",
+          "worked": {
+            "title": "Exemple résolu",
+            "range": "Étendue",
+            "rangeNote": "Entièrement déterminée par les deux points extrêmes",
+            "stdDev": "Écart-type",
+            "stdDevNote": "Chaque point contribue, donc une valeur aberrante compte moins"
+          }
+        },
+        "stdDevZone": {
+          "title": "Où se situe une valeur par rapport à un écart-type",
+          "intro": "La moyenne ± un écart-type d'un vrai jeu de données de 10 points, avec une valeur spécifique de l'ensemble marquée par rapport à cette bande.",
+          "worked": {
+            "title": "Exemple résolu",
+            "band": "Bande moyenne ± 1 ET",
+            "inside": "Dans la bande typique",
+            "outside": "Hors de la bande typique"
+          }
+        },
+        "deviations": {
+          "title": "La distance réelle de chaque point à la moyenne",
+          "intro": "Moyenne = {mean} — l'écart signé de chaque valeur, l'ingrédient brut que la variance met au carré et moyenne.",
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "skewComparison": {
+          "title": "Données symétriques vs. asymétriques",
+          "intro": "Deux jeux réels de 5 points, même structure — dans l'un, moyenne et médiane coïncident ; dans l'autre, elles divergent véritablement.",
+          "symmetric": {
+            "title": "Symétrique"
+          },
+          "skewed": {
+            "title": "Asymétrique"
+          },
+          "meanLabel": "Moyenne",
+          "medianLabel": "Médiane",
+          "note": "La moyenne n'égale la médiane que lorsque les données sont véritablement symétriques autour de leur centre."
+        },
+        "spreadRanked": {
+          "title": "Classer les jeux de données par dispersion",
+          "intro": "Trois jeux de données réels, classés par leur écart-type réel — prouvant que la moyenne seule ne dit jamais à quel point les données sont dispersées.",
+          "sets": {
+            "a": "Très regroupées",
+            "b": "Modérément dispersées",
+            "c": "Largement dispersées"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "mean": "moyenne",
+            "stdDev": "écart-type"
+          }
+        },
+        "sampleSizeEffect": {
+          "title": "Pourquoi la correction d'échantillon compte plus pour peu de données",
+          "intro": "L'écart en pourcentage entre l'écart-type de population et d'échantillon, pour un petit ensemble (n=3) contre un plus grand (n=12) — la correction n−1 compte le plus exactement quand les données sont rares.",
+          "smallLabel": "n = {n}",
+          "largeLabel": "n = {n}",
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "coefficientOfVariation": {
+          "title": "Le même écart-type peut signifier des choses très différentes",
+          "intro": "Deux jeux de données avec exactement le même écart-type mais des moyennes très différentes — par rapport à leur propre échelle, l'un est bien plus variable que l'autre.",
+          "small": {
+            "title": "Données à petite échelle"
+          },
+          "large": {
+            "title": "Données à grande échelle"
+          },
+          "meanLabel": "Moyenne",
+          "stdDevLabel": "Écart-type",
+          "cvLabel": "Coefficient de variation",
+          "note": "Le coefficient de variation (écart-type ÷ moyenne) replace la dispersion dans son contexte — l'écart-type brut seul ne peut pas le faire entre échelles différentes."
         }
       },
       "scenarios": {
