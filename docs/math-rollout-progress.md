@@ -81,7 +81,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 | 4 | significant-figures-calculator | done (v2) | f21f9b4, layout fix 37dbf3f (CI green) |
 | 5 | statistics-calculator | done (v2) | 7101000, layout fix 8497ae5 (CI green) |
 | 6 | area-calculator | done (v2) | 65511c2 (CI green) |
-| 7 | surface-area-calculator | needs v2 rebuild | — |
+| 7 | surface-area-calculator | done (v2) | d1e2a40, area-calculator drag-bound fix 5b4ec58 (CI green) |
 | 8 | volume-calculator | not started (v2 from the start) | |
 | 9 | step-by-step-math-solver | not started | |
 | 10 | matrix-calculator | not started | |
@@ -335,3 +335,52 @@ copies flow and a real cost-per-area estimator (each with its own embedded live 
 a unit-conversion equivalence; a real-world log-scale placement bar; and a two-dimension
 comparison card pair. Verified across all 8 shapes manually (not just the default square) — every
 shape produces the correct point count (1 or 2) and genuinely recomputes area/perimeter on drag.
+
+*Real bug caught visually while reviewing area-calculator's post-drag screenshot, not by any
+automated test* (the dynamism test only checks "did the text change", not "is the new value
+sane" — it passed throughout): a single ordinary drag gesture (a 160×-160px diagonal) sent a
+square's side from 4 to 1679.97. Root cause — the Mafs `viewBox` is re-derived every render from
+the SAME live dimension a handle drags, and the `constrain` functions only enforced a lower
+`MIN_DIM` bound, never an upper one. Mid-drag, each mousemove-triggered render expands the
+viewBox, which rescales how far the next constant-pixel mouse delta maps in Mafs coordinate
+space — a positive feedback loop compounding across the dozens of intermediate renders in one
+gesture. Fixed by adding a sane per-shape maximum to every `constrainA`/`constrainB` clamp (far
+more than enough range for real exploration, nowhere near runaway) in both area-calculator's
+hero (follow-up commit `5b4ec58`, since it already shipped) and surface-area-calculator's hero
+(fixed before its first commit, once the same pattern was recognized here first). **Any future
+hero whose Mafs `viewBox` is computed from a live dimension that a drag handle also controls
+needs an explicit upper bound on that handle's constrain function, not just a lower one** — the
+lower bound alone only prevents degenerate near-zero sizes, not this runaway-growth direction.
+
+**surface-area-calculator (tool 7, rebuilt to v2):** structurally the 3D sibling of
+area-calculator (6 solids behind one shape selector — cube, rectangular prism, sphere, cylinder,
+cone, square pyramid — instead of 8 flat shapes), with the hero (`SurfaceAreaNetDrag.tsx`)
+redrawing whichever solid is active as a genuine **unfolded net** — the actual 2D pattern a
+face-sum surface-area formula is built from — rather than attempting a fake-3D projection. Net
+layouts per solid: a classic 6-square cross for the cube; the v1 hero's 6-rectangle layout for
+the rectangular prism (front/back/top/bottom/left/right), now genuinely shape-selector-aware
+instead of hardcoded to always show a prism regardless of the real selection; 4 side-by-side
+circles for the sphere (SA = 4×a great circle's own area, a real identity, not a visual trick);
+2 circles + 1 rectangle (width = live circumference) for the cylinder; 1 circle + 1 sector (its
+angle derived from r/slant, not independently draggable) for the cone; 1 square + 4 triangles for
+the square pyramid. 1-2 draggable handles per solid, mapped the same way as area-calculator
+(corner-drag encodes 2 values from 1 point for the rectangular prism; polar-style encoding kept
+for the sector-bearing cone's radius+height pair via 2 separate handles, not 1, since the cone's
+second dimension is a true independent height, unlike area-calculator's sector where radius and
+angle both come from ONE point).
+
+Reused the existing `VolumeCalculator` engine class directly (`@tooloralabs/tools`, already
+built and tested, sharing the exact same `Solid3DShape` type and field names as
+`SurfaceAreaCalculator`) for a genuine surface-to-volume-ratio indicator — the real physical
+quantity behind why small objects exchange heat far faster than large ones — rather than
+re-deriving volume formulas that already existed. Also added a 3D isoperimetric compactness
+indicator (4π×Area/Perimeter² has no 3D analogue; the real one is
+π^(1/3)×(6V)^(2/3)÷SurfaceArea, reaching exactly 100% only for a sphere) as a second, genuinely
+distinct zone-strip indicator alongside the surface-to-volume one — different physical concept,
+different formula, satisfying §31's "different purposes" requirement for two indicators sharing
+a visual type.
+
+*Same proactive empty-default fix as area-calculator, applied before writing any indicator this
+time*: switching the shape selector left every solid but the page's own default (cube) with
+empty dimension fields. Fixed with `SHAPE_DEFAULTS` wired into the shape `<select>`'s `onChange`
+in `SurfaceAreaInputPanel.tsx`, mirroring area-calculator's fix exactly.
