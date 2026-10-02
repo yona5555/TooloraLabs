@@ -68,7 +68,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 |---|---|---|---|
 | 1 | scientific-calculator | done (v2) | 456a6e8 (CI green) |
 | 2 | fraction-calculator | done (v2) | d91a318 (CI green) |
-| 3 | scientific-notation-converter | done (v2) | (pending push) |
+| 3 | scientific-notation-converter | done (v2) | a6bd5fe (CI green) |
 | 4 | significant-figures-calculator | needs v2 rebuild | — |
 | 5 | statistics-calculator | needs v2 rebuild | — |
 | 6 | area-calculator | needs v2 rebuild | — |
