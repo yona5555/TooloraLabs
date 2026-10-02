@@ -12302,14 +12302,10 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Un punto de esquina arrastrable que fija el ancho y alto de un rectángulo, con el área y perímetro recalculados en vivo",
-          "widthLabel": "Ancho",
-          "heightLabel": "Alto",
+          "ariaLabel": "Una forma {shape} en vivo, redibujada a partir de sus propias dimensiones reales, con uno o dos controles arrastrables que las gobiernan directamente",
           "areaLabel": "Área",
           "perimeterLabel": "Perímetro",
-          "widthTooltip": "Ancho = {value}",
-          "heightTooltip": "Alto = {value}",
-          "hint": "Arrastra el punto de esquina — ancho, alto, área y perímetro se actualizan en vivo."
+          "hint": "Arrastra un control, o edita los campos de arriba — la forma, su área y cada indicador de abajo se actualizan en vivo."
         },
         "intro": {
           "title": "Entender el área",
@@ -12477,171 +12473,197 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Leer los Elementos de Euclides, Libro I"
         },
-        "squareFormula": {
-          "title": "Cuadrado: Lado por sí mismo",
-          "intro": "La más simple de las ocho formas — una dimensión, al cuadrado.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Resultado"
-          }
-        },
-        "triangleFormula": {
-          "title": "Triángulo: Mitad de base por altura",
-          "intro": "La \"mitad\" viene de un hecho geométrico real: cualquier triángulo es exactamente la mitad del paralelogramo formado al duplicarlo y rotarlo.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Resultado"
-          }
-        },
-        "circleFormula": {
-          "title": "Círculo: Pi por el radio al cuadrado",
-          "intro": "El exponente al cuadrado tiene una consecuencia real: duplicar el radio no duplica el área.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Resultado",
-            "doubled": "Radio duplicado",
-            "doubledNote": "Se cuadruplicó, no se duplicó — el exponente al cuadrado en acción"
-          }
-        },
-        "ellipseFormula": {
-          "title": "Elipse: Pi por ambos semiejes",
-          "intro": "Los dos radios independientes de una elipse — el semieje mayor y el semieje menor.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Resultado",
-            "note": "Iguala ambos ejes y esto se convierte exactamente en la fórmula del círculo"
-          }
-        },
-        "trapezoidFormula": {
-          "title": "Trapecio: Promedio de las bases, por altura",
-          "intro": "La única fórmula en esta página con dos medidas de base independientes en vez de una.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Resultado"
-          }
-        },
-        "parallelogramFormula": {
-          "title": "Paralelogramo: Base por altura",
-          "intro": "Estructuralmente idéntica a la fórmula de un rectángulo — la inclinación cambia la forma, no el área.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Resultado",
-            "note": "Una porción triangular cortada de un extremo llena exactamente el hueco del otro"
-          }
-        },
-        "sectorFormula": {
-          "title": "Sector: Una fracción del círculo completo",
-          "intro": "Un sector es el área del círculo completo, reducida exactamente por la fracción de ángulo que abarca.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "fullCircle": "Área del círculo completo",
-            "result": "Área del sector",
-            "note": "Exactamente un cuarto del círculo completo, ya que 90/360 = 1/4"
-          }
-        },
-        "trapezoidTransform": {
-          "title": "Por qué la fórmula del trapecio promedia sus bases",
-          "intro": "Un trapecio con dos bases distintas tiene exactamente la misma área que un rectángulo cuyo ancho es su promedio.",
-          "trapezoidLabel": "Trapecio",
-          "rectangleLabel": "Rectángulo equivalente",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "avgBase": "Base promedio",
-            "trapezoidArea": "Área del trapecio",
-            "rectangleArea": "Área del rectángulo",
-            "note": "Exactamente iguales — por eso la fórmula promedia, no suma, las dos bases"
-          }
-        },
         "unitConversion": {
-          "title": "Por qué las unidades de área convierten con un factor al cuadrado",
-          "intro": "El área escala con el cuadrado de la longitud, así que su factor de conversión es el cuadrado del factor lineal.",
+          "title": "El área en vivo en otras unidades",
+          "intro": "Exactamente la misma área real, reexpresada en pies cuadrados y acres — cifras que un visitante planeando un proyecto real realmente necesitaría.",
           "worked": {
             "title": "Ejemplo resuelto",
-            "linearFactor": "Factor lineal",
-            "areaFactor": "Factor de área (al cuadrado)",
-            "note": "Usar el factor lineal directamente sobre un área sería un error real común"
-          }
-        },
-        "shapeComparison": {
-          "title": "Mismo ancho, áreas distintas",
-          "intro": "Un cuadrado, un círculo y un triángulo, todos construidos con el mismo ancho característico de {width} unidades.",
-          "squareLabel": "Cuadrado",
-          "circleLabel": "Círculo",
-          "triangleLabel": "Triángulo",
-          "worked": {
-            "title": "Ejemplo resuelto"
-          }
-        },
-        "compositeArea": {
-          "title": "Resolver una forma compuesta",
-          "intro": "Un plano de planta real con forma de casa —una pared rectangular con un frontón triangular— dividido en las dos formas básicas que esta herramienta ya resuelve.",
-          "wallLabel": "Pared (rectángulo)",
-          "gableLabel": "Frontón (triángulo)",
-          "totalLabel": "Total",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "rectangle": "Rectángulo",
-            "triangle": "Triángulo",
-            "total": "Área total"
-          }
-        },
-        "perimeterVsArea": {
-          "title": "Mismo perímetro, área distinta",
-          "intro": "Dos rectángulos, ambos con un perímetro de exactamente 20 — prueba que la misma cantidad de cerca puede encerrar cantidades de terreno muy distintas.",
-          "perimeterLabel": "Perímetro",
-          "areaLabel": "Área",
-          "note": "Un rectángulo largo y estrecho desperdicia área encerrada comparado con uno más parecido a un cuadrado con el mismo perímetro."
-        },
-        "circleVsSquare": {
-          "title": "La ventaja real del círculo",
-          "intro": "Un cuadrado y un círculo, ambos construidos con el mismo perímetro de {perimeter} unidades.",
-          "squareLabel": "Cuadrado",
-          "circleLabel": "Círculo",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "square": "Área del cuadrado",
-            "circle": "Área del círculo",
-            "note": "El círculo siempre encierra más área que cualquier otra forma con igual perímetro"
+            "factor": "Factor de conversión",
+            "result": "Resultado"
           }
         },
         "shapeFamily": {
-          "title": "Las ocho formas, una referencia",
-          "intro": "Cada forma que esta calculadora realmente admite, con su fórmula real.",
-          "shapes": {
-            "square": "Cuadrado",
-            "rectangle": "Rectángulo",
-            "triangle": "Triángulo",
-            "circle": "Círculo",
-            "ellipse": "Elipse",
-            "trapezoid": "Trapecio",
-            "parallelogram": "Paralelogramo",
-            "sector": "Sector"
-          },
-          "dimsTag": "{count} dimensión(es)",
+          "title": "Las ocho formas, clasificadas al mismo tamaño",
+          "intro": "Cada forma que esta calculadora admite, evaluada con la misma longitud característica en vivo ({length}) que la forma actualmente seleccionada — la fila activa está etiquetada.",
           "columnShape": "Forma",
-          "columnFormula": "Fórmula"
+          "columnArea": "Área",
+          "activeTag": "Activa",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "length": "Longitud característica usada",
+            "winner": "Área mayor a esta longitud"
+          }
         },
         "realWorldScale": {
-          "title": "Áreas reales, de un sello a un parque",
-          "intro": "Áreas del mundo real que abarcan más de diez órdenes de magnitud — solo una escala logarítmica las mantiene todas legibles en una línea.",
+          "title": "Dónde se ubica realmente el área en vivo",
+          "intro": "El área en vivo situada entre áreas de referencia del mundo real que abarcan más de siete órdenes de magnitud — solo una escala logarítmica mantiene legibles un sello postal y un campo de fútbol en la misma línea.",
           "items": {
-            "postageStamp": "Sello postal",
-            "a4Paper": "Hoja A4",
+            "stamp": "Sello postal",
+            "paper": "Hoja de papel",
             "parkingSpace": "Plaza de aparcamiento",
             "tennisCourt": "Cancha de tenis",
-            "footballField": "Campo de fútbol",
-            "centralPark": "Un parque urbano"
+            "footballPitch": "Campo de fútbol"
           },
           "worked": {
             "title": "Ejemplo resuelto",
-            "spanNote": "Más de 10 órdenes de magnitud de diferencia"
+            "liveArea": "Área en vivo",
+            "closest": "Coincidencia real más cercana"
+          }
+        },
+        "formulaDiagram": {
+          "title": "La propia fórmula de la forma en vivo, completada",
+          "intro": "La fórmula real del área para {shape}, con sus propias dimensiones actuales sustituidas directamente en cada casilla.",
+          "areaLabel": "Área",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "shape": "Forma",
+            "area": "Área"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Qué forma contiene más área",
+          "intro": "Las cinco formas con mayor área, todas evaluadas con la misma longitud en vivo ({length}) que la forma actualmente seleccionada.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "topShape": "Forma mayor",
+            "vsSquare": "Veces el área de un cuadrado del mismo tamaño"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Mismo tamaño, forma diferente",
+          "intro": "El área real en vivo de la forma {shape}, comparada directamente con un cuadrado construido con la misma longitud característica {length}.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "difference": "Diferencia de área",
+            "winner": "Contiene más área"
+          }
+        },
+        "boundingBoxRatio": {
+          "title": "Cuánto llena su propio rectángulo envolvente",
+          "intro": "El área real de la forma en vivo como proporción del rectángulo más pequeño que podría contenerla por completo — un cuadrado o rectángulo siempre llena el 100 %, pero un círculo, triángulo o sector nunca lo hace.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "boundingBox": "Área del rectángulo envolvente",
+            "fill": "Porcentaje de llenado"
+          },
+          "zones": {
+            "sparse": "Disperso",
+            "fills": "Llena por completo"
+          }
+        },
+        "compactnessZone": {
+          "title": "Qué tan cerca de un círculo perfecto",
+          "intro": "La compacidad isoperimétrica de la forma en vivo — 4π × área ÷ perímetro² —, que alcanza exactamente el 100 % solo en un círculo, y disminuye cuanto más alargada es realmente la forma.",
+          "notApplicable": "El perímetro de una forma {shape} no queda determinado solo por estas dimensiones, así que la compacidad no se puede calcular aquí — prueba con un cuadrado, rectángulo, círculo o sector.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "area": "Área",
+            "perimeter": "Perímetro",
+            "compactness": "Compacidad"
+          },
+          "zones": {
+            "elongated": "Alargada",
+            "circleLike": "Parecida a un círculo"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Lo que realmente costaría un error de medición del 20 %",
+          "intro": "El área real de la forma en vivo si cada una de sus dimensiones se midiera un 20 % más pequeña o un 20 % más grande de lo que realmente es.",
+          "smallerLabel": "20 % más pequeña",
+          "currentLabel": "Actual",
+          "largerLabel": "20 % más grande",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "swing": "Variación por un error del 20 %",
+            "note": "Un error de medición lineal se duplica aproximadamente en su efecto sobre el área."
+          }
+        },
+        "scaleCurve": {
+          "title": "El área crece con el cuadrado de la escala",
+          "intro": "El área propia de la forma en vivo mientras cada dimensión se escala en conjunto desde la mitad hasta el doble de su tamaño actual — una curva continua, nunca una línea recta.",
+          "ariaLabel": "Una curva del área frente al factor de escala, con el punto actual en vivo marcado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "half": "A escala 0,5×",
+            "current": "A escala 1× (ahora)",
+            "double": "A escala 2×",
+            "note": "Se cuadruplica, no se duplica"
+          }
+        },
+        "doublingSteps": {
+          "title": "Duplicar cada dimensión cuadruplica el área",
+          "intro": "El área propia de la forma en vivo en su tamaño actual, luego al doble y al cuádruple de cada una de sus dimensiones.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "oneX": "A 1× (ahora)",
+            "fourX": "A 4×",
+            "note": "16 veces el área original, no 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "Cuánta área necesitarían N copias idénticas",
+          "intro": "El área propia de la forma {shape} en vivo, multiplicada por el número de copias idénticas que realmente necesitaría un trabajo real de embaldosado o revestimiento.",
+          "countChip": "{count}×",
+          "oneLabel": "Una forma",
+          "countLabel": "Copias",
+          "totalLabel": "Área total",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "costEstimator": {
+          "title": "Lo que realmente costaría cubrir esta área",
+          "intro": "El área en vivo multiplicada por un precio real por unidad de área — una estimación práctica de materiales y mano de obra, no un número abstracto.",
+          "areaLabel": "Área",
+          "priceLabel": "Precio/unidad",
+          "totalLabel": "Costo total",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "computationSteps": {
+          "title": "Los pasos reales detrás del área de esta forma",
+          "intro": "La secuencia real de operaciones que ejecuta la calculadora para la forma activa en vivo, cada estación con su propio valor intermedio real.",
+          "stations": {
+            "given": "Dimensiones dadas",
+            "square": "Elevar al cuadrado",
+            "multiply": "Multiplicar",
+            "half": "Dividir entre dos",
+            "pi": "Multiplicar por π",
+            "sum": "Sumar las bases",
+            "fullCircle": "Área del círculo completo",
+            "fraction": "Escalar por la fracción del ángulo"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "area": "Área"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Las dos dimensiones que definen la forma en vivo",
+          "intro": "Los dos números reales que realmente definen el tamaño de la forma actual, comparados directamente — no asumidos, leídos directamente de los valores en vivo.",
+          "labels": {
+            "side": "Lado",
+            "width": "Ancho",
+            "height": "Altura",
+            "base": "Base",
+            "radius": "Radio",
+            "semiMajorAxis": "Semieje mayor",
+            "semiMinorAxis": "Semieje menor",
+            "base1": "Base 1",
+            "base2": "Base 2",
+            "angleDegrees": "Ángulo",
+            "none": "—"
+          },
+          "singleDimension": "Forma de una sola dimensión",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "larger": "Realmente mayor",
+            "note": "Nota",
+            "differentUnits": "Una longitud y un ángulo no son directamente comparables",
+            "onlyOneDimension": "Esta forma tiene solo una dimensión que la define"
           }
         }
       },
@@ -12665,6 +12687,12 @@
         "contactPhonePlaceholder": "p. ej. +34 612 345 678",
         "contactOrganizationPlaceholder": "p. ej. Empresa S.L.",
         "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Madrid"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Referencia rápida de fórmulas",
+          "intro": "La fórmula del área de cada forma, de un vistazo."
+        }
       }
     },
     "surface-area-calculator": {

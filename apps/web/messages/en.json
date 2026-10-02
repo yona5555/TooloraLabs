@@ -12302,14 +12302,10 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "A draggable corner point that sets a rectangle's width and height, with the area and perimeter recomputed live",
-          "widthLabel": "Width",
-          "heightLabel": "Height",
+          "ariaLabel": "A live {shape}, redrawn from its own real dimensions, with one or two draggable handles that control them directly",
           "areaLabel": "Area",
           "perimeterLabel": "Perimeter",
-          "widthTooltip": "Width = {value}",
-          "heightTooltip": "Height = {value}",
-          "hint": "Drag the corner point — width, height, area, and perimeter all update live."
+          "hint": "Drag a handle, or edit the fields above — the shape, its area, and every indicator below all update live."
         },
         "intro": {
           "title": "Understanding Area",
@@ -12477,171 +12473,197 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Read Euclid's Elements, Book I"
         },
-        "squareFormula": {
-          "title": "Square: Side Times Itself",
-          "intro": "The simplest of all eight shapes — one dimension, squared.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result"
-          }
-        },
-        "triangleFormula": {
-          "title": "Triangle: Half of Base Times Height",
-          "intro": "The \"half\" comes from a real geometric fact: any triangle is exactly half of the parallelogram formed by duplicating and rotating it.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result"
-          }
-        },
-        "circleFormula": {
-          "title": "Circle: Pi Times Radius Squared",
-          "intro": "The squared exponent has a real consequence: doubling the radius doesn't double the area.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result",
-            "doubled": "Radius doubled",
-            "doubledNote": "Quadrupled, not doubled — the squared exponent at work"
-          }
-        },
-        "ellipseFormula": {
-          "title": "Ellipse: Pi Times Both Semi-Axes",
-          "intro": "An ellipse's two independent radii — the semi-major and semi-minor axes.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result",
-            "note": "Set both axes equal and this becomes exactly the circle formula"
-          }
-        },
-        "trapezoidFormula": {
-          "title": "Trapezoid: Average of the Bases, Times Height",
-          "intro": "The only formula on this page with two independent base measurements instead of one.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result"
-          }
-        },
-        "parallelogramFormula": {
-          "title": "Parallelogram: Base Times Height",
-          "intro": "Structurally identical to a rectangle's formula — the slant changes the shape, not the area.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result",
-            "note": "A triangular sliver cut from one end exactly fills the gap on the other"
-          }
-        },
-        "sectorFormula": {
-          "title": "Sector: A Fraction of the Full Circle",
-          "intro": "A sector is the full circle's area, scaled down by exactly the angle fraction it spans.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "fullCircle": "Full circle area",
-            "result": "Sector area",
-            "note": "Exactly one quarter of the full circle, since 90/360 = 1/4"
-          }
-        },
-        "trapezoidTransform": {
-          "title": "Why the Trapezoid Formula Averages Its Bases",
-          "intro": "A trapezoid with two different bases has the exact same area as a rectangle whose width is their average.",
-          "trapezoidLabel": "Trapezoid",
-          "rectangleLabel": "Equivalent rectangle",
-          "worked": {
-            "title": "Worked Example",
-            "avgBase": "Average base",
-            "trapezoidArea": "Trapezoid area",
-            "rectangleArea": "Rectangle area",
-            "note": "Exactly equal — this is why the formula averages, not adds, the two bases"
-          }
-        },
         "unitConversion": {
-          "title": "Why Area Units Convert by a Squared Factor",
-          "intro": "Area scales with the square of length, so its conversion factor is the square of the linear one.",
+          "title": "The Live Area in Other Units",
+          "intro": "The exact same real area, re-expressed in square feet and acres — figures a visitor planning a real project would actually need.",
           "worked": {
             "title": "Worked Example",
-            "linearFactor": "Linear factor",
-            "areaFactor": "Area factor (squared)",
-            "note": "Using the linear factor directly on an area would be a common real mistake"
-          }
-        },
-        "shapeComparison": {
-          "title": "Same Width, Different Areas",
-          "intro": "A square, circle, and triangle, all built from the same {width}-unit characteristic width.",
-          "squareLabel": "Square",
-          "circleLabel": "Circle",
-          "triangleLabel": "Triangle",
-          "worked": {
-            "title": "Worked Example"
-          }
-        },
-        "compositeArea": {
-          "title": "Solving a Composite Shape",
-          "intro": "A real house-shaped floor plan — a rectangular wall with a triangular roof gable — split into the two basic shapes this tool already solves.",
-          "wallLabel": "Wall (rectangle)",
-          "gableLabel": "Gable (triangle)",
-          "totalLabel": "Total",
-          "worked": {
-            "title": "Worked Example",
-            "rectangle": "Rectangle",
-            "triangle": "Triangle",
-            "total": "Total area"
-          }
-        },
-        "perimeterVsArea": {
-          "title": "Same Perimeter, Different Area",
-          "intro": "Two rectangles, both with a perimeter of exactly 20 — proving the same amount of fencing can enclose very different amounts of land.",
-          "perimeterLabel": "Perimeter",
-          "areaLabel": "Area",
-          "note": "A long, narrow rectangle wastes enclosed area compared to a more square-like one with the same perimeter."
-        },
-        "circleVsSquare": {
-          "title": "The Circle's Real Advantage",
-          "intro": "A square and a circle, both built from the exact same {perimeter}-unit perimeter.",
-          "squareLabel": "Square",
-          "circleLabel": "Circle",
-          "worked": {
-            "title": "Worked Example",
-            "square": "Square area",
-            "circle": "Circle area",
-            "note": "The circle always encloses more area than any other shape with equal perimeter"
+            "factor": "Conversion factor",
+            "result": "Result"
           }
         },
         "shapeFamily": {
-          "title": "All Eight Shapes, One Reference",
-          "intro": "Every shape this calculator actually supports, with its real formula.",
-          "shapes": {
-            "square": "Square",
-            "rectangle": "Rectangle",
-            "triangle": "Triangle",
-            "circle": "Circle",
-            "ellipse": "Ellipse",
-            "trapezoid": "Trapezoid",
-            "parallelogram": "Parallelogram",
-            "sector": "Sector"
-          },
-          "dimsTag": "{count} dimension(s)",
+          "title": "All Eight Shapes, Ranked at the Same Size",
+          "intro": "Every shape this calculator supports, each evaluated at the same live characteristic length ({length}) as the one you currently have selected — the active row is tagged.",
           "columnShape": "Shape",
-          "columnFormula": "Formula"
+          "columnArea": "Area",
+          "activeTag": "Active",
+          "worked": {
+            "title": "Worked Example",
+            "length": "Characteristic length used",
+            "winner": "Largest area at this length"
+          }
         },
         "realWorldScale": {
-          "title": "Real Areas, From a Stamp to a Park",
-          "intro": "Real-world areas spanning more than ten orders of magnitude — only a log scale keeps them all readable on one line.",
+          "title": "Where the Live Area Actually Sits",
+          "intro": "The live area placed among real-world reference areas spanning more than seven orders of magnitude — only a log scale keeps a postage stamp and a football pitch readable on the same line.",
           "items": {
-            "postageStamp": "Postage stamp",
-            "a4Paper": "A4 sheet of paper",
+            "stamp": "Postage stamp",
+            "paper": "Sheet of paper",
             "parkingSpace": "Parking space",
             "tennisCourt": "Tennis court",
-            "footballField": "Football field",
-            "centralPark": "A city park"
+            "footballPitch": "Football pitch"
           },
           "worked": {
             "title": "Worked Example",
-            "spanNote": "Over 10 orders of magnitude apart"
+            "liveArea": "Live area",
+            "closest": "Closest real-world match"
+          }
+        },
+        "formulaDiagram": {
+          "title": "The Live Shape's Own Formula, Filled In",
+          "intro": "The real area formula for a {shape}, with its own current dimensions substituted directly into each box.",
+          "areaLabel": "Area",
+          "worked": {
+            "title": "Worked Example",
+            "shape": "Shape",
+            "area": "Area"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Which Shape Packs In the Most Area",
+          "intro": "The top five shapes by area, all evaluated at the same live length ({length}) as the shape you currently have selected.",
+          "worked": {
+            "title": "Worked Example",
+            "topShape": "Largest shape",
+            "vsSquare": "Times the area of a same-size square"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Same Size, Different Shape",
+          "intro": "The live {shape}'s own area, measured head-to-head against a square built from the same {length} characteristic length.",
+          "worked": {
+            "title": "Worked Example",
+            "difference": "Area difference",
+            "winner": "Encloses more area"
+          }
+        },
+        "boundingBoxRatio": {
+          "title": "How Much of Its Own Bounding Box It Fills",
+          "intro": "The live shape's real area as a share of the smallest rectangle that could fully contain it — a square or rectangle always fills 100%, but a circle, triangle, or sector never does.",
+          "worked": {
+            "title": "Worked Example",
+            "boundingBox": "Bounding box area",
+            "fill": "Fill percentage"
+          },
+          "zones": {
+            "sparse": "Sparse",
+            "fills": "Fills tightly"
+          }
+        },
+        "compactnessZone": {
+          "title": "How Close to a Perfect Circle",
+          "intro": "The isoperimetric compactness of the live shape — 4π × area ÷ perimeter² — which reaches exactly 100% only for a circle, and falls the more elongated the shape actually is.",
+          "notApplicable": "A {shape}'s perimeter isn't fixed by these dimensions alone, so compactness can't be computed here — try a square, rectangle, circle, or sector instead.",
+          "worked": {
+            "title": "Worked Example",
+            "area": "Area",
+            "perimeter": "Perimeter",
+            "compactness": "Compactness"
+          },
+          "zones": {
+            "elongated": "Elongated",
+            "circleLike": "Circle-like"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "What a 20% Measurement Error Would Actually Cost",
+          "intro": "The live shape's real area if every one of its own dimensions were measured 20% smaller or 20% larger than they actually are.",
+          "smallerLabel": "20% smaller",
+          "currentLabel": "Current",
+          "largerLabel": "20% larger",
+          "worked": {
+            "title": "Worked Example",
+            "swing": "Swing from a 20% error",
+            "note": "A linear measurement error gets roughly doubled in its effect on area."
+          }
+        },
+        "scaleCurve": {
+          "title": "Area Grows with the Square of Scale",
+          "intro": "The live shape's own area as every dimension is scaled together from half to double its current size — a continuous curve, never a straight line.",
+          "ariaLabel": "A curve of area versus scale factor, with the live current point marked",
+          "worked": {
+            "title": "Worked Example",
+            "half": "At 0.5× scale",
+            "current": "At 1× scale (now)",
+            "double": "At 2× scale",
+            "note": "Quadrupled, not doubled"
+          }
+        },
+        "doublingSteps": {
+          "title": "Doubling Every Dimension Quadruples the Area",
+          "intro": "The live shape's own area at its current size, then at twice and four times every one of its dimensions.",
+          "worked": {
+            "title": "Worked Example",
+            "oneX": "At 1× (now)",
+            "fourX": "At 4×",
+            "note": "16 times the original area, not 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "How Much Area N Identical Copies Would Need",
+          "intro": "The live {shape}'s own area, multiplied by however many identical copies a real tiling or paneling job would actually need.",
+          "countChip": "{count}×",
+          "oneLabel": "One shape",
+          "countLabel": "Copies",
+          "totalLabel": "Total area",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "costEstimator": {
+          "title": "What Covering This Area Would Actually Cost",
+          "intro": "The live area multiplied by a real price per unit area — a practical materials-and-labor estimate, not just an abstract number.",
+          "areaLabel": "Area",
+          "priceLabel": "Price/unit",
+          "totalLabel": "Total cost",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "computationSteps": {
+          "title": "The Real Steps Behind This Shape's Area",
+          "intro": "The actual sequence of operations the calculator runs for the live active shape, each station carrying its own real intermediate value.",
+          "stations": {
+            "given": "Given dimensions",
+            "square": "Square it",
+            "multiply": "Multiply",
+            "half": "Halve it",
+            "pi": "Multiply by π",
+            "sum": "Add the bases",
+            "fullCircle": "Full circle area",
+            "fraction": "Scale by the angle fraction"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "area": "Area"
+          }
+        },
+        "dimensionCompare": {
+          "title": "The Live Shape's Two Defining Dimensions",
+          "intro": "The two real numbers that actually define the current shape's size, compared directly — not assumed, read straight from the live values.",
+          "labels": {
+            "side": "Side",
+            "width": "Width",
+            "height": "Height",
+            "base": "Base",
+            "radius": "Radius",
+            "semiMajorAxis": "Semi-major axis",
+            "semiMinorAxis": "Semi-minor axis",
+            "base1": "Base 1",
+            "base2": "Base 2",
+            "angleDegrees": "Angle",
+            "none": "—"
+          },
+          "singleDimension": "Single-dimension shape",
+          "worked": {
+            "title": "Worked Example",
+            "larger": "Actually larger",
+            "note": "Note",
+            "differentUnits": "A length and an angle aren't directly comparable",
+            "onlyOneDimension": "This shape has only one defining dimension"
           }
         }
       },
@@ -12665,6 +12687,12 @@
         "contactPhonePlaceholder": "e.g. +1 555 123 4567",
         "contactOrganizationPlaceholder": "e.g. Acme Financial",
         "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formula Quick Reference",
+          "intro": "Every shape's area formula, at a glance."
+        }
       }
     },
     "surface-area-calculator": {

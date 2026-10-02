@@ -12302,14 +12302,10 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Un point d'angle déplaçable qui fixe la largeur et la hauteur d'un rectangle, avec l'aire et le périmètre recalculés en direct",
-          "widthLabel": "Largeur",
-          "heightLabel": "Hauteur",
+          "ariaLabel": "Une forme {shape} en direct, redessinée à partir de ses propres dimensions réelles, avec une ou deux poignées déplaçables qui les contrôlent directement",
           "areaLabel": "Aire",
           "perimeterLabel": "Périmètre",
-          "widthTooltip": "Largeur = {value}",
-          "heightTooltip": "Hauteur = {value}",
-          "hint": "Faites glisser le point d'angle — largeur, hauteur, aire et périmètre se mettent tous à jour en direct."
+          "hint": "Faites glisser une poignée, ou modifiez les champs ci-dessus — la forme, son aire et chaque indicateur ci-dessous se mettent à jour en direct."
         },
         "intro": {
           "title": "Comprendre l'aire",
@@ -12477,171 +12473,197 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Lire les Éléments d'Euclide, Livre I"
         },
-        "squareFormula": {
-          "title": "Carré : côté fois lui-même",
-          "intro": "La plus simple des huit formes — une dimension, au carré.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat"
-          }
-        },
-        "triangleFormula": {
-          "title": "Triangle : moitié de la base fois la hauteur",
-          "intro": "La \"moitié\" vient d'un vrai fait géométrique : tout triangle est exactement la moitié du parallélogramme formé en le dupliquant et le faisant pivoter.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat"
-          }
-        },
-        "circleFormula": {
-          "title": "Cercle : pi fois le rayon au carré",
-          "intro": "L'exposant au carré a une vraie conséquence : doubler le rayon ne double pas l'aire.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat",
-            "doubled": "Rayon doublé",
-            "doubledNote": "Quadruplée, pas doublée — l'exposant au carré à l'œuvre"
-          }
-        },
-        "ellipseFormula": {
-          "title": "Ellipse : pi fois les deux demi-axes",
-          "intro": "Les deux rayons indépendants d'une ellipse — le demi-grand axe et le demi-petit axe.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat",
-            "note": "Égalisez les deux axes et cela devient exactement la formule du cercle"
-          }
-        },
-        "trapezoidFormula": {
-          "title": "Trapèze : moyenne des bases, fois la hauteur",
-          "intro": "La seule formule de cette page avec deux mesures de base indépendantes au lieu d'une.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat"
-          }
-        },
-        "parallelogramFormula": {
-          "title": "Parallélogramme : base fois hauteur",
-          "intro": "Structurellement identique à la formule d'un rectangle — l'inclinaison change la forme, pas l'aire.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat",
-            "note": "Une tranche triangulaire coupée d'un côté comble exactement l'espace de l'autre"
-          }
-        },
-        "sectorFormula": {
-          "title": "Secteur : une fraction du cercle complet",
-          "intro": "Un secteur est l'aire du cercle complet, réduite exactement par la fraction d'angle qu'il couvre.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "fullCircle": "Aire du cercle complet",
-            "result": "Aire du secteur",
-            "note": "Exactement un quart du cercle complet, puisque 90/360 = 1/4"
-          }
-        },
-        "trapezoidTransform": {
-          "title": "Pourquoi la formule du trapèze fait la moyenne de ses bases",
-          "intro": "Un trapèze avec deux bases différentes a exactement la même aire qu'un rectangle dont la largeur est leur moyenne.",
-          "trapezoidLabel": "Trapèze",
-          "rectangleLabel": "Rectangle équivalent",
-          "worked": {
-            "title": "Exemple résolu",
-            "avgBase": "Base moyenne",
-            "trapezoidArea": "Aire du trapèze",
-            "rectangleArea": "Aire du rectangle",
-            "note": "Exactement égales — c'est pourquoi la formule fait la moyenne, et non la somme, des deux bases"
-          }
-        },
         "unitConversion": {
-          "title": "Pourquoi les unités d'aire se convertissent par un facteur au carré",
-          "intro": "L'aire évolue avec le carré de la longueur, donc son facteur de conversion est le carré du facteur linéaire.",
+          "title": "L'aire en direct dans d'autres unités",
+          "intro": "Exactement la même aire réelle, réexprimée en pieds carrés et en acres — des chiffres dont un visiteur planifiant un projet réel aurait réellement besoin.",
           "worked": {
             "title": "Exemple résolu",
-            "linearFactor": "Facteur linéaire",
-            "areaFactor": "Facteur d'aire (au carré)",
-            "note": "Utiliser directement le facteur linéaire sur une aire serait une erreur réelle courante"
-          }
-        },
-        "shapeComparison": {
-          "title": "Même largeur, aires différentes",
-          "intro": "Un carré, un cercle et un triangle, tous construits à partir de la même largeur caractéristique de {width} unités.",
-          "squareLabel": "Carré",
-          "circleLabel": "Cercle",
-          "triangleLabel": "Triangle",
-          "worked": {
-            "title": "Exemple résolu"
-          }
-        },
-        "compositeArea": {
-          "title": "Résoudre une forme composite",
-          "intro": "Un vrai plan de maison — un mur rectangulaire avec un pignon triangulaire — divisé en les deux formes de base que cet outil résout déjà.",
-          "wallLabel": "Mur (rectangle)",
-          "gableLabel": "Pignon (triangle)",
-          "totalLabel": "Total",
-          "worked": {
-            "title": "Exemple résolu",
-            "rectangle": "Rectangle",
-            "triangle": "Triangle",
-            "total": "Aire totale"
-          }
-        },
-        "perimeterVsArea": {
-          "title": "Même périmètre, aire différente",
-          "intro": "Deux rectangles, tous deux avec un périmètre de exactement 20 — prouve que la même longueur de clôture peut enclore des surfaces de terrain très différentes.",
-          "perimeterLabel": "Périmètre",
-          "areaLabel": "Aire",
-          "note": "Un rectangle long et étroit gaspille de l'aire enclose par rapport à un rectangle plus carré de même périmètre."
-        },
-        "circleVsSquare": {
-          "title": "Le véritable avantage du cercle",
-          "intro": "Un carré et un cercle, tous deux construits à partir du même périmètre de {perimeter} unités.",
-          "squareLabel": "Carré",
-          "circleLabel": "Cercle",
-          "worked": {
-            "title": "Exemple résolu",
-            "square": "Aire du carré",
-            "circle": "Aire du cercle",
-            "note": "Le cercle enclot toujours plus d'aire que toute autre forme à périmètre égal"
+            "factor": "Facteur de conversion",
+            "result": "Résultat"
           }
         },
         "shapeFamily": {
-          "title": "Les huit formes, une référence",
-          "intro": "Chaque forme que cette calculatrice prend réellement en charge, avec sa vraie formule.",
-          "shapes": {
-            "square": "Carré",
-            "rectangle": "Rectangle",
-            "triangle": "Triangle",
-            "circle": "Cercle",
-            "ellipse": "Ellipse",
-            "trapezoid": "Trapèze",
-            "parallelogram": "Parallélogramme",
-            "sector": "Secteur"
-          },
-          "dimsTag": "{count} dimension(s)",
+          "title": "Les huit formes, classées à la même taille",
+          "intro": "Chaque forme prise en charge par cette calculatrice, évaluée à la même longueur caractéristique en direct ({length}) que la forme actuellement sélectionnée — la ligne active est marquée.",
           "columnShape": "Forme",
-          "columnFormula": "Formule"
+          "columnArea": "Aire",
+          "activeTag": "Active",
+          "worked": {
+            "title": "Exemple résolu",
+            "length": "Longueur caractéristique utilisée",
+            "winner": "Aire la plus grande à cette longueur"
+          }
         },
         "realWorldScale": {
-          "title": "Des aires réelles, d'un timbre à un parc",
-          "intro": "Des aires du monde réel couvrant plus de dix ordres de grandeur — seule une échelle logarithmique les garde toutes lisibles sur une ligne.",
+          "title": "Où se situe réellement l'aire en direct",
+          "intro": "L'aire en direct placée parmi des aires de référence du monde réel couvrant plus de sept ordres de grandeur — seule une échelle logarithmique garde un timbre-poste et un terrain de football lisibles sur la même ligne.",
           "items": {
-            "postageStamp": "Timbre-poste",
-            "a4Paper": "Feuille A4",
+            "stamp": "Timbre-poste",
+            "paper": "Feuille de papier",
             "parkingSpace": "Place de parking",
             "tennisCourt": "Court de tennis",
-            "footballField": "Terrain de football",
-            "centralPark": "Un parc urbain"
+            "footballPitch": "Terrain de football"
           },
           "worked": {
             "title": "Exemple résolu",
-            "spanNote": "Plus de 10 ordres de grandeur d'écart"
+            "liveArea": "Aire en direct",
+            "closest": "Correspondance réelle la plus proche"
+          }
+        },
+        "formulaDiagram": {
+          "title": "La formule propre de la forme en direct, complétée",
+          "intro": "La formule réelle de l'aire pour {shape}, avec ses propres dimensions actuelles substituées directement dans chaque case.",
+          "areaLabel": "Aire",
+          "worked": {
+            "title": "Exemple résolu",
+            "shape": "Forme",
+            "area": "Aire"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Quelle forme contient le plus d'aire",
+          "intro": "Les cinq formes les plus grandes par aire, toutes évaluées à la même longueur en direct ({length}) que la forme actuellement sélectionnée.",
+          "worked": {
+            "title": "Exemple résolu",
+            "topShape": "Forme la plus grande",
+            "vsSquare": "Fois l'aire d'un carré de même taille"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Même taille, forme différente",
+          "intro": "L'aire réelle en direct de la forme {shape}, comparée directement à un carré construit avec la même longueur caractéristique {length}.",
+          "worked": {
+            "title": "Exemple résolu",
+            "difference": "Différence d'aire",
+            "winner": "Englobe plus d'aire"
+          }
+        },
+        "boundingBoxRatio": {
+          "title": "Combien elle remplit sa propre boîte englobante",
+          "intro": "L'aire réelle de la forme en direct en proportion du plus petit rectangle qui pourrait la contenir entièrement — un carré ou un rectangle remplit toujours 100 %, mais un cercle, un triangle ou un secteur jamais.",
+          "worked": {
+            "title": "Exemple résolu",
+            "boundingBox": "Aire de la boîte englobante",
+            "fill": "Pourcentage de remplissage"
+          },
+          "zones": {
+            "sparse": "Clairsemée",
+            "fills": "Remplit étroitement"
+          }
+        },
+        "compactnessZone": {
+          "title": "À quel point proche d'un cercle parfait",
+          "intro": "La compacité isopérimétrique de la forme en direct — 4π × aire ÷ périmètre² —, qui n'atteint exactement 100 % que pour un cercle, et diminue réellement à mesure que la forme s'allonge.",
+          "notApplicable": "Le périmètre d'une forme {shape} n'est pas déterminé par ces seules dimensions, la compacité ne peut donc pas être calculée ici — essayez plutôt un carré, un rectangle, un cercle ou un secteur.",
+          "worked": {
+            "title": "Exemple résolu",
+            "area": "Aire",
+            "perimeter": "Périmètre",
+            "compactness": "Compacité"
+          },
+          "zones": {
+            "elongated": "Allongée",
+            "circleLike": "Proche d'un cercle"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Ce que coûterait réellement une erreur de mesure de 20 %",
+          "intro": "L'aire réelle de la forme en direct si chacune de ses propres dimensions était mesurée 20 % plus petite ou 20 % plus grande qu'elle ne l'est réellement.",
+          "smallerLabel": "20 % plus petite",
+          "currentLabel": "Actuelle",
+          "largerLabel": "20 % plus grande",
+          "worked": {
+            "title": "Exemple résolu",
+            "swing": "Variation due à une erreur de 20 %",
+            "note": "Une erreur de mesure linéaire voit son effet sur l'aire à peu près doublé."
+          }
+        },
+        "scaleCurve": {
+          "title": "L'aire croît avec le carré de l'échelle",
+          "intro": "L'aire propre de la forme en direct à mesure que chaque dimension est mise à l'échelle ensemble, de la moitié au double de sa taille actuelle — une courbe continue, jamais une ligne droite.",
+          "ariaLabel": "Une courbe de l'aire en fonction du facteur d'échelle, avec le point actuel en direct marqué",
+          "worked": {
+            "title": "Exemple résolu",
+            "half": "À l'échelle 0,5×",
+            "current": "À l'échelle 1× (maintenant)",
+            "double": "À l'échelle 2×",
+            "note": "Quadruplée, pas doublée"
+          }
+        },
+        "doublingSteps": {
+          "title": "Doubler chaque dimension quadruple l'aire",
+          "intro": "L'aire propre de la forme en direct à sa taille actuelle, puis au double et au quadruple de chacune de ses dimensions.",
+          "worked": {
+            "title": "Exemple résolu",
+            "oneX": "À 1× (maintenant)",
+            "fourX": "À 4×",
+            "note": "16 fois l'aire d'origine, pas 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "Combien d'aire N copies identiques nécessiteraient",
+          "intro": "L'aire propre de la forme {shape} en direct, multipliée par le nombre de copies identiques qu'un véritable projet de carrelage ou de revêtement nécessiterait réellement.",
+          "countChip": "{count}×",
+          "oneLabel": "Une forme",
+          "countLabel": "Copies",
+          "totalLabel": "Aire totale",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "costEstimator": {
+          "title": "Ce que couvrir cette aire coûterait réellement",
+          "intro": "L'aire en direct multipliée par un prix réel par unité d'aire — une estimation pratique des matériaux et de la main-d'œuvre, pas un nombre abstrait.",
+          "areaLabel": "Aire",
+          "priceLabel": "Prix/unité",
+          "totalLabel": "Coût total",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "computationSteps": {
+          "title": "Les étapes réelles derrière l'aire de cette forme",
+          "intro": "La séquence réelle d'opérations que la calculatrice exécute pour la forme active en direct, chaque étape portant sa propre valeur intermédiaire réelle.",
+          "stations": {
+            "given": "Dimensions données",
+            "square": "L'élever au carré",
+            "multiply": "Multiplier",
+            "half": "La diviser par deux",
+            "pi": "Multiplier par π",
+            "sum": "Additionner les bases",
+            "fullCircle": "Aire du cercle complet",
+            "fraction": "Mettre à l'échelle par la fraction d'angle"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "area": "Aire"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Les deux dimensions déterminantes de la forme en direct",
+          "intro": "Les deux nombres réels qui déterminent réellement la taille de la forme actuelle, comparés directement — non supposés, lus directement à partir des valeurs en direct.",
+          "labels": {
+            "side": "Côté",
+            "width": "Largeur",
+            "height": "Hauteur",
+            "base": "Base",
+            "radius": "Rayon",
+            "semiMajorAxis": "Demi-grand axe",
+            "semiMinorAxis": "Demi-petit axe",
+            "base1": "Base 1",
+            "base2": "Base 2",
+            "angleDegrees": "Angle",
+            "none": "—"
+          },
+          "singleDimension": "Forme à une seule dimension",
+          "worked": {
+            "title": "Exemple résolu",
+            "larger": "Réellement plus grande",
+            "note": "Remarque",
+            "differentUnits": "Une longueur et un angle ne sont pas directement comparables",
+            "onlyOneDimension": "Cette forme n'a qu'une seule dimension déterminante"
           }
         }
       },
@@ -12665,6 +12687,12 @@
         "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
         "contactOrganizationPlaceholder": "ex. Société SARL",
         "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Référence rapide des formules",
+          "intro": "La formule de l'aire de chaque forme, en un coup d'œil."
+        }
       }
     },
     "surface-area-calculator": {

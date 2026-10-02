@@ -3,40 +3,42 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { AreaCalculator } from "@tooloralabs/tools";
+import { useAreaLive } from "./AreaLiveContext";
+import { parseAreaDims, characteristicLength, areaAtLength, ALL_SHAPES, round } from "./areaEducationMath";
 
-const tool = new AreaCalculator();
-const WIDTH = 10;
-
-function round2(n: number): number {
-  return Math.round(n * 100) / 100;
-}
-
-/** Type #1 (Labeled Bar Chart): a square, circle, and equilateral-triangle-like shape all built from the same 10-unit characteristic width, compared by their real computed area — shape alone changes the area by more than 2x even at identical width. */
+/** Type #1 (Labeled Bar Chart): every shape's area at the SAME live characteristic length, ranked visually — how much more area a circle or ellipse packs in than a triangle at an identical "size". */
 export default function ShapeAreaComparisonBarChart() {
-  const t = useTranslations("tools.area-calculator.education.shapeComparison");
+  const t = useTranslations("tools.area-calculator.education.shapeAreaBars");
+  const tShape = useTranslations("tools.area-calculator.form");
+  const { dims } = useAreaLive();
+  const n = parseAreaDims(dims);
+  const length = characteristicLength(n);
 
-  const square = tool.execute({ shape: "square", side: WIDTH }, { locale: "en-US" });
-  const circle = tool.execute({ shape: "circle", radius: WIDTH / 2 }, { locale: "en-US" });
-  const triangle = tool.execute({ shape: "triangle", base: WIDTH, height: (Math.sqrt(3) / 2) * WIDTH }, { locale: "en-US" });
-  if (!square.success || square.data.error || !circle.success || circle.data.error || !triangle.success || triangle.data.error) return null;
+  const data = ALL_SHAPES.map((shape) => ({ shape, area: areaAtLength(shape, length) })).sort((a, b) => b.area - a.area);
+  const squareArea = data.find((d) => d.shape === "square")?.area ?? 1;
+  const topArea = data[0].area;
 
-  const rows = [
-    { key: "square", label: t("squareLabel"), value: round2(square.data.area) },
-    { key: "circle", label: t("circleLabel"), value: round2(circle.data.area) },
-    { key: "triangle", label: t("triangleLabel"), value: round2(triangle.data.area) },
-  ].sort((a, b) => b.value - a.value);
-
-  const bars = rows.map((r, i) => ({ label: r.label, value: r.value, formatted: `${r.value}`, highlight: i === 0 }));
+  const bars = data.slice(0, 5).map((d) => ({
+    label: tShape(`shape.${d.shape}`),
+    value: d.area,
+    formatted: `${round(d.area)}`,
+    highlight: d.shape === dims.shape,
+  }));
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { width: WIDTH })}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div className="shrink-0">
+        <div dir="ltr" className="w-full lg:flex-1">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
-        <WorkedExampleNote title={t("worked.title")} rows={rows.map((r) => ({ label: r.label, value: `${r.value}` }))} />
+        <WorkedExampleNote
+          title={t("worked.title")}
+          rows={[
+            { label: t("worked.topShape"), value: tShape(`shape.${data[0].shape}`) },
+            { label: t("worked.vsSquare"), value: `${round(topArea / squareArea)}×`, emphasize: true },
+          ]}
+        />
       </div>
     </SectionCard>
   );

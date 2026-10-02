@@ -4,21 +4,21 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import AreaRectangleDrag from "./AreaRectangleDrag";
+import AreaShapeDrag from "./AreaShapeDrag";
+import ActiveShapeFormulaDiagram from "./ActiveShapeFormulaDiagram";
 import ShapeFamilyTable from "./ShapeFamilyTable";
-import SquareFormulaDiagram from "./SquareFormulaDiagram";
-import TriangleFormulaDiagram from "./TriangleFormulaDiagram";
-import CircleFormulaDiagram from "./CircleFormulaDiagram";
-import EllipseFormulaDiagram from "./EllipseFormulaDiagram";
-import TrapezoidFormulaDiagram from "./TrapezoidFormulaDiagram";
-import ParallelogramFormulaDiagram from "./ParallelogramFormulaDiagram";
-import SectorFormulaDiagram from "./SectorFormulaDiagram";
-import TrapezoidToRectangleTransform from "./TrapezoidToRectangleTransform";
-import UnitConversionEquivalence from "./UnitConversionEquivalence";
+import ComputationStepsTimeline from "./ComputationStepsTimeline";
+import DimensionComparisonCards from "./DimensionComparisonCards";
 import ShapeAreaComparisonBarChart from "./ShapeAreaComparisonBarChart";
+import SameSizeDifferentShapeBalance from "./SameSizeDifferentShapeBalance";
+import AreaToBoundingBoxRatioZone from "./AreaToBoundingBoxRatioZone";
+import PerimeterToAreaCompactnessZone from "./PerimeterToAreaCompactnessZone";
+import DimensionSensitivityTrio from "./DimensionSensitivityTrio";
+import AreaVsScaleFactorCurve from "./AreaVsScaleFactorCurve";
+import AreaDoublingStepsDiagram from "./AreaDoublingStepsDiagram";
 import CompositeAreaFlowDiagram from "./CompositeAreaFlowDiagram";
-import PerimeterVsAreaComparison from "./PerimeterVsAreaComparison";
-import CircleVsSquareEfficiency from "./CircleVsSquareEfficiency";
+import CostEstimatorFlowDiagram from "./CostEstimatorFlowDiagram";
+import UnitConversionEquivalence from "./UnitConversionEquivalence";
 import RealWorldAreaScaleBar from "./RealWorldAreaScaleBar";
 
 type ExampleRow = { calculation: string; result: string };
@@ -38,18 +38,19 @@ export default async function AreaEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <AreaRectangleDrag />
+        <AreaShapeDrag />
         <p>{t("intro.paragraph2")}</p>
-        <ShapeFamilyTable />
+        <div className="space-y-6">
+          <ActiveShapeFormulaDiagram />
+          <ComputationStepsTimeline />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("basicFormulas.title")}>
         <p>{t("basicFormulas.intro")}</p>
         <div className="space-y-6">
-          <SquareFormulaDiagram />
-          <TriangleFormulaDiagram />
-          <CircleFormulaDiagram />
-          <EllipseFormulaDiagram />
+          <ShapeFamilyTable />
+          <DimensionComparisonCards />
         </div>
       </InfoSection>
 
@@ -58,10 +59,10 @@ export default async function AreaEducation() {
       <InfoSection title={t("moreFormulas.title")}>
         <p>{t("moreFormulas.intro")}</p>
         <div className="space-y-6">
-          <TrapezoidFormulaDiagram />
-          <ParallelogramFormulaDiagram />
-          <SectorFormulaDiagram />
-          <TrapezoidToRectangleTransform />
+          <ShapeAreaComparisonBarChart />
+          <SameSizeDifferentShapeBalance />
+          <AreaToBoundingBoxRatioZone />
+          <PerimeterToAreaCompactnessZone />
         </div>
       </InfoSection>
 
@@ -75,7 +76,11 @@ export default async function AreaEducation() {
             </div>
           ))}
         </dl>
-        <UnitConversionEquivalence />
+        <div className="space-y-6">
+          <DimensionSensitivityTrio />
+          <AreaVsScaleFactorCurve />
+          <AreaDoublingStepsDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -99,8 +104,8 @@ export default async function AreaEducation() {
           </table>
         </div>
         <div className="space-y-6">
-          <ShapeAreaComparisonBarChart />
           <CompositeAreaFlowDiagram />
+          <CostEstimatorFlowDiagram />
         </div>
       </InfoSection>
 
@@ -115,8 +120,7 @@ export default async function AreaEducation() {
           ))}
         </div>
         <div className="space-y-6">
-          <PerimeterVsAreaComparison />
-          <CircleVsSquareEfficiency />
+          <UnitConversionEquivalence />
           <RealWorldAreaScaleBar />
         </div>
       </InfoSection>

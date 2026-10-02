@@ -5,6 +5,7 @@ import ToolButton from "@/components/tool-ui/ToolButton";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import type { AreaShape } from "@tooloralabs/tools";
 import type { AreaDraft } from "./types";
+import { SHAPE_DEFAULTS } from "./types";
 import type { FormEvent } from "react";
 
 const SHAPES: AreaShape[] = ["square", "rectangle", "triangle", "circle", "ellipse", "trapezoid", "parallelogram", "sector"];
@@ -41,7 +42,10 @@ export default function AreaInputPanel({ draft, onChange, onCalculate, onClear }
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("shapeLabel")}</span>
         <select
           value={draft.shape}
-          onChange={(e) => patch({ shape: e.target.value as AreaShape })}
+          onChange={(e) => {
+            const shape = e.target.value as AreaShape;
+            patch({ shape, ...SHAPE_DEFAULTS[shape] });
+          }}
           className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
         >
           {SHAPES.map((shape) => (

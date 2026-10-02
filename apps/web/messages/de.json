@@ -12302,14 +12302,10 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Ein ziehbarer Eckpunkt, der Breite und Höhe eines Rechtecks festlegt, mit live neu berechneter Fläche und Umfang",
-          "widthLabel": "Breite",
-          "heightLabel": "Höhe",
+          "ariaLabel": "Die aktuell gewählte Form ({shape}), live aus ihren eigenen realen Abmessungen gezeichnet, mit ein oder zwei ziehbaren Griffen, die diese Abmessungen direkt steuern",
           "areaLabel": "Fläche",
           "perimeterLabel": "Umfang",
-          "widthTooltip": "Breite = {value}",
-          "heightTooltip": "Höhe = {value}",
-          "hint": "Ziehen Sie den Eckpunkt — Breite, Höhe, Fläche und Umfang aktualisieren sich alle live."
+          "hint": "Ziehe einen Griff oder bearbeite die Felder oben — die Form, ihre Fläche und jeder Indikator unten aktualisieren sich live."
         },
         "intro": {
           "title": "Fläche verstehen",
@@ -12477,171 +12473,197 @@
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/bookI.html",
           "readOriginal": "Euklids Elemente, Buch I, lesen"
         },
-        "squareFormula": {
-          "title": "Quadrat: Seite mal sich selbst",
-          "intro": "Die einfachste aller acht Formen — eine Dimension, quadriert.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis"
-          }
-        },
-        "triangleFormula": {
-          "title": "Dreieck: Halbe Grundseite mal Höhe",
-          "intro": "Das \"Halbe\" kommt von einer echten geometrischen Tatsache: Jedes Dreieck ist genau die Hälfte des Parallelogramms, das durch Duplizieren und Drehen entsteht.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis"
-          }
-        },
-        "circleFormula": {
-          "title": "Kreis: Pi mal Radius im Quadrat",
-          "intro": "Der quadrierte Exponent hat eine echte Konsequenz: Eine Verdopplung des Radius verdoppelt nicht die Fläche.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis",
-            "doubled": "Radius verdoppelt",
-            "doubledNote": "Vervierfacht, nicht verdoppelt — der quadrierte Exponent bei der Arbeit"
-          }
-        },
-        "ellipseFormula": {
-          "title": "Ellipse: Pi mal beide Halbachsen",
-          "intro": "Die zwei unabhängigen Radien einer Ellipse — die große und die kleine Halbachse.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis",
-            "note": "Setzen Sie beide Achsen gleich, und das wird exakt die Kreisformel"
-          }
-        },
-        "trapezoidFormula": {
-          "title": "Trapez: Durchschnitt der Grundseiten, mal Höhe",
-          "intro": "Die einzige Formel auf dieser Seite mit zwei unabhängigen Grundseitenmaßen statt einem.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis"
-          }
-        },
-        "parallelogramFormula": {
-          "title": "Parallelogramm: Grundseite mal Höhe",
-          "intro": "Strukturell identisch mit der Rechteckformel — die Schräge ändert die Form, nicht die Fläche.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis",
-            "note": "Ein dreieckiger Streifen, von einem Ende abgeschnitten, füllt genau die Lücke am anderen Ende"
-          }
-        },
-        "sectorFormula": {
-          "title": "Kreissektor: Ein Bruchteil des Vollkreises",
-          "intro": "Ein Sektor ist die Fläche des Vollkreises, genau um den Winkelanteil verkleinert, den er umfasst.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "fullCircle": "Vollkreisfläche",
-            "result": "Sektorfläche",
-            "note": "Genau ein Viertel des Vollkreises, da 90/360 = 1/4"
-          }
-        },
-        "trapezoidTransform": {
-          "title": "Warum die Trapezformel ihre Grundseiten mittelt",
-          "intro": "Ein Trapez mit zwei unterschiedlichen Grundseiten hat exakt dieselbe Fläche wie ein Rechteck, dessen Breite ihr Durchschnitt ist.",
-          "trapezoidLabel": "Trapez",
-          "rectangleLabel": "Äquivalentes Rechteck",
-          "worked": {
-            "title": "Musterbeispiel",
-            "avgBase": "Durchschnittliche Grundseite",
-            "trapezoidArea": "Trapezfläche",
-            "rectangleArea": "Rechteckfläche",
-            "note": "Exakt gleich — deshalb mittelt die Formel die beiden Grundseiten, statt sie zu addieren"
-          }
-        },
         "unitConversion": {
-          "title": "Warum sich Flächeneinheiten mit einem quadrierten Faktor umrechnen",
-          "intro": "Die Fläche skaliert mit dem Quadrat der Länge, daher ist ihr Umrechnungsfaktor das Quadrat des linearen Faktors.",
+          "title": "Die Live-Fläche in anderen Einheiten",
+          "intro": "Exakt dieselbe reale Fläche, neu ausgedrückt in Quadratfuß und Acres — Werte, die ein Besucher bei der Planung eines realen Projekts tatsächlich brauchen würde.",
           "worked": {
-            "title": "Musterbeispiel",
-            "linearFactor": "Linearer Faktor",
-            "areaFactor": "Flächenfaktor (quadriert)",
-            "note": "Den linearen Faktor direkt auf eine Fläche anzuwenden wäre ein häufiger echter Fehler"
-          }
-        },
-        "shapeComparison": {
-          "title": "Gleiche Breite, unterschiedliche Flächen",
-          "intro": "Ein Quadrat, ein Kreis und ein Dreieck, alle aus derselben charakteristischen Breite von {width} Einheiten gebaut.",
-          "squareLabel": "Quadrat",
-          "circleLabel": "Kreis",
-          "triangleLabel": "Dreieck",
-          "worked": {
-            "title": "Musterbeispiel"
-          }
-        },
-        "compositeArea": {
-          "title": "Eine zusammengesetzte Form lösen",
-          "intro": "Ein echter hausförmiger Grundriss — eine rechteckige Wand mit einem dreieckigen Dachgiebel — aufgeteilt in die zwei Grundformen, die dieser Rechner bereits löst.",
-          "wallLabel": "Wand (Rechteck)",
-          "gableLabel": "Giebel (Dreieck)",
-          "totalLabel": "Gesamt",
-          "worked": {
-            "title": "Musterbeispiel",
-            "rectangle": "Rechteck",
-            "triangle": "Dreieck",
-            "total": "Gesamtfläche"
-          }
-        },
-        "perimeterVsArea": {
-          "title": "Gleicher Umfang, unterschiedliche Fläche",
-          "intro": "Zwei Rechtecke, beide mit einem Umfang von genau 20 — beweist, dass dieselbe Zaunlänge sehr unterschiedliche Landflächen einschließen kann.",
-          "perimeterLabel": "Umfang",
-          "areaLabel": "Fläche",
-          "note": "Ein langes, schmales Rechteck verschenkt eingeschlossene Fläche im Vergleich zu einem quadratähnlicheren mit demselben Umfang."
-        },
-        "circleVsSquare": {
-          "title": "Der echte Vorteil des Kreises",
-          "intro": "Ein Quadrat und ein Kreis, beide aus demselben Umfang von {perimeter} Einheiten gebaut.",
-          "squareLabel": "Quadrat",
-          "circleLabel": "Kreis",
-          "worked": {
-            "title": "Musterbeispiel",
-            "square": "Quadratfläche",
-            "circle": "Kreisfläche",
-            "note": "Der Kreis umschließt immer mehr Fläche als jede andere Form mit gleichem Umfang"
+            "title": "Rechenbeispiel",
+            "factor": "Umrechnungsfaktor",
+            "result": "Ergebnis"
           }
         },
         "shapeFamily": {
-          "title": "Alle acht Formen, eine Referenz",
-          "intro": "Jede Form, die dieser Rechner tatsächlich unterstützt, mit ihrer echten Formel.",
-          "shapes": {
-            "square": "Quadrat",
-            "rectangle": "Rechteck",
-            "triangle": "Dreieck",
-            "circle": "Kreis",
-            "ellipse": "Ellipse",
-            "trapezoid": "Trapez",
-            "parallelogram": "Parallelogramm",
-            "sector": "Kreissektor"
-          },
-          "dimsTag": "{count} Dimension(en)",
+          "title": "Alle acht Formen, bei gleicher Größe eingeordnet",
+          "intro": "Jede von diesem Rechner unterstützte Form, jeweils bei derselben live berechneten charakteristischen Länge ({length}) wie die aktuell gewählte Form ausgewertet — die aktive Zeile ist markiert.",
           "columnShape": "Form",
-          "columnFormula": "Formel"
+          "columnArea": "Fläche",
+          "activeTag": "Aktiv",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "length": "Verwendete charakteristische Länge",
+            "winner": "Größte Fläche bei dieser Länge"
+          }
         },
         "realWorldScale": {
-          "title": "Reale Flächen, von einer Briefmarke bis zum Park",
-          "intro": "Reale Flächen über mehr als zehn Größenordnungen hinweg — nur eine logarithmische Skala hält sie alle auf einer Linie lesbar.",
+          "title": "Wo die Live-Fläche tatsächlich liegt",
+          "intro": "Die Live-Fläche platziert zwischen realen Referenzflächen über mehr als sieben Größenordnungen hinweg — nur eine logarithmische Skala hält eine Briefmarke und ein Fußballfeld auf derselben Linie lesbar.",
           "items": {
-            "postageStamp": "Briefmarke",
-            "a4Paper": "Ein A4-Blatt",
+            "stamp": "Briefmarke",
+            "paper": "Blatt Papier",
             "parkingSpace": "Parkplatz",
             "tennisCourt": "Tennisplatz",
-            "footballField": "Fußballfeld",
-            "centralPark": "Ein Stadtpark"
+            "footballPitch": "Fußballfeld"
           },
           "worked": {
-            "title": "Musterbeispiel",
-            "spanNote": "Über 10 Größenordnungen auseinander"
+            "title": "Rechenbeispiel",
+            "liveArea": "Live-Fläche",
+            "closest": "Nächste reale Entsprechung"
+          }
+        },
+        "formulaDiagram": {
+          "title": "Die eigene Formel der Live-Form, ausgefüllt",
+          "intro": "Die reale Flächenformel für {shape}, mit ihren eigenen aktuellen Abmessungen direkt in jedes Feld eingesetzt.",
+          "areaLabel": "Fläche",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "shape": "Form",
+            "area": "Fläche"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Welche Form die meiste Fläche bietet",
+          "intro": "Die fünf flächengrößten Formen, alle bei derselben live berechneten Länge ({length}) wie die aktuell gewählte Form ausgewertet.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "topShape": "Größte Form",
+            "vsSquare": "Mal so groß wie ein gleich großes Quadrat"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Gleiche Größe, andere Form",
+          "intro": "Die reale, live berechnete Fläche der Form {shape}, direkt verglichen mit einem Quadrat aus derselben charakteristischen Länge {length}.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "difference": "Flächenunterschied",
+            "winner": "Umschließt mehr Fläche"
+          }
+        },
+        "boundingBoxRatio": {
+          "title": "Wie viel vom eigenen Begrenzungsrechteck sie füllt",
+          "intro": "Die reale Fläche der Live-Form als Anteil des kleinsten Rechtecks, das sie vollständig enthalten könnte — ein Quadrat oder Rechteck füllt immer 100 %, ein Kreis, Dreieck oder Kreissektor dagegen nie.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "boundingBox": "Fläche des Begrenzungsrechtecks",
+            "fill": "Füllanteil"
+          },
+          "zones": {
+            "sparse": "Spärlich",
+            "fills": "Füllt dicht"
+          }
+        },
+        "compactnessZone": {
+          "title": "Wie nah an einem perfekten Kreis",
+          "intro": "Die isoperimetrische Kompaktheit der Live-Form — 4π × Fläche ÷ Umfang² —, die nur bei einem Kreis genau 100 % erreicht und mit zunehmender Länglichkeit der Form tatsächlich sinkt.",
+          "notApplicable": "Der Umfang einer Form vom Typ {shape} ergibt sich nicht allein aus diesen Abmessungen, daher lässt sich die Kompaktheit hier nicht berechnen — versuche stattdessen ein Quadrat, Rechteck, einen Kreis oder Kreissektor.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "area": "Fläche",
+            "perimeter": "Umfang",
+            "compactness": "Kompaktheit"
+          },
+          "zones": {
+            "elongated": "Länglich",
+            "circleLike": "Kreisähnlich"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Was ein 20%iger Messfehler tatsächlich kostet",
+          "intro": "Die reale Fläche der Live-Form, wenn jede ihrer eigenen Abmessungen tatsächlich 20 % kleiner oder 20 % größer gemessen würde.",
+          "smallerLabel": "20 % kleiner",
+          "currentLabel": "Aktuell",
+          "largerLabel": "20 % größer",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "swing": "Schwankung durch einen 20%-Fehler",
+            "note": "Ein linearer Messfehler wirkt sich auf die Fläche etwa doppelt so stark aus."
+          }
+        },
+        "scaleCurve": {
+          "title": "Die Fläche wächst mit dem Quadrat des Maßstabs",
+          "intro": "Die eigene Fläche der Live-Form, während jede Abmessung gemeinsam von der Hälfte bis zum Doppelten der aktuellen Größe skaliert wird — eine stetige Kurve, nie eine Gerade.",
+          "ariaLabel": "Eine Kurve der Fläche gegenüber dem Skalierungsfaktor, mit dem live markierten aktuellen Punkt",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "half": "Bei 0,5× Maßstab",
+            "current": "Bei 1× Maßstab (jetzt)",
+            "double": "Bei 2× Maßstab",
+            "note": "Vervierfacht, nicht verdoppelt"
+          }
+        },
+        "doublingSteps": {
+          "title": "Jede Abmessung zu verdoppeln vervierfacht die Fläche",
+          "intro": "Die eigene Fläche der Live-Form bei ihrer aktuellen Größe, dann beim Doppelten und beim Vierfachen jeder ihrer Abmessungen.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "oneX": "Bei 1× (jetzt)",
+            "fourX": "Bei 4×",
+            "note": "16-fache, nicht 4-fache Fläche"
+          }
+        },
+        "compositeFlow": {
+          "title": "Wie viel Fläche N identische Kopien brauchen",
+          "intro": "Die eigene Fläche der Live-Form {shape}, multipliziert mit so vielen identischen Kopien, wie ein reales Verlege- oder Verkleidungsprojekt tatsächlich benötigen würde.",
+          "countChip": "{count}×",
+          "oneLabel": "Eine Form",
+          "countLabel": "Kopien",
+          "totalLabel": "Gesamtfläche",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "costEstimator": {
+          "title": "Was die Deckung dieser Fläche tatsächlich kosten würde",
+          "intro": "Die Live-Fläche multipliziert mit einem realen Preis pro Flächeneinheit — eine praktische Material- und Arbeitskostenschätzung, keine abstrakte Zahl.",
+          "areaLabel": "Fläche",
+          "priceLabel": "Preis/Einheit",
+          "totalLabel": "Gesamtkosten",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "computationSteps": {
+          "title": "Die realen Schritte hinter der Fläche dieser Form",
+          "intro": "Die tatsächliche Abfolge der Operationen, die der Rechner für die live aktive Form ausführt, wobei jede Station ihren eigenen realen Zwischenwert trägt.",
+          "stations": {
+            "given": "Gegebene Abmessungen",
+            "square": "Quadrieren",
+            "multiply": "Multiplizieren",
+            "half": "Halbieren",
+            "pi": "Mit π multiplizieren",
+            "sum": "Grundseiten addieren",
+            "fullCircle": "Fläche des vollen Kreises",
+            "fraction": "Mit dem Winkelanteil skalieren"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "area": "Fläche"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Die beiden bestimmenden Abmessungen der Live-Form",
+          "intro": "Die beiden realen Zahlen, die die Größe der aktuellen Form tatsächlich bestimmen, direkt verglichen — nicht angenommen, sondern direkt aus den Live-Werten gelesen.",
+          "labels": {
+            "side": "Seite",
+            "width": "Breite",
+            "height": "Höhe",
+            "base": "Grundseite",
+            "radius": "Radius",
+            "semiMajorAxis": "Große Halbachse",
+            "semiMinorAxis": "Kleine Halbachse",
+            "base1": "Grundseite 1",
+            "base2": "Grundseite 2",
+            "angleDegrees": "Winkel",
+            "none": "—"
+          },
+          "singleDimension": "Form mit nur einer Abmessung",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "larger": "Tatsächlich größer",
+            "note": "Hinweis",
+            "differentUnits": "Eine Länge und ein Winkel sind nicht direkt vergleichbar",
+            "onlyOneDimension": "Diese Form hat nur eine bestimmende Abmessung"
           }
         }
       },
@@ -12665,6 +12687,12 @@
         "contactPhonePlaceholder": "z. B. +49 30 123456",
         "contactOrganizationPlaceholder": "z. B. Muster GmbH",
         "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
+      },
+      "aboveFold": {
+        "quickReference": {
+          "title": "Formel-Schnellübersicht",
+          "intro": "Die Flächenformel jeder Form, auf einen Blick."
+        }
       }
     },
     "surface-area-calculator": {

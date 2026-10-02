@@ -13,6 +13,7 @@ import AreaInputPanel from "./AreaInputPanel";
 import AreaResult from "./AreaResult";
 import AreaQuickReference from "./AreaQuickReference";
 import { emptyAreaDraft, type AreaDraft } from "./types";
+import { AreaLiveProvider } from "./AreaLiveContext";
 
 const tool = new AreaCalculatorTool();
 
@@ -76,7 +77,7 @@ export default function AreaCalculator({ education }: { education: ReactNode }) 
   ];
 
   return (
-    <>
+    <AreaLiveProvider value={{ dims: draft, setDim: (key, value) => setDraft((prev) => ({ ...prev, [key]: value })) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<AreaInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} />}
@@ -100,6 +101,6 @@ export default function AreaCalculator({ education }: { education: ReactNode }) 
       </div>
 
       {education}
-    </>
+    </AreaLiveProvider>
   );
 }
