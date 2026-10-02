@@ -17,15 +17,15 @@ export default function FractionSegmentedBarDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { fraction: `${dims.numeratorA}/${dims.denominatorA}` })}</p>
-      <div dir="ltr" className="mt-4 flex h-10 w-full overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700">
-        {Array.from({ length: denom }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-full flex-1 border-e border-zinc-200 transition-colors duration-300 last:border-e-0 dark:border-zinc-700 ${i < numer ? "bg-blue-600 dark:bg-blue-400" : "bg-white dark:bg-zinc-900"}`}
-          />
-        ))}
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex h-10 w-full overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-700 lg:flex-1">
+          {Array.from({ length: denom }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-full flex-1 border-e border-zinc-200 transition-colors duration-300 last:border-e-0 dark:border-zinc-700 ${i < numer ? "bg-blue-600 dark:bg-blue-400" : "bg-white dark:bg-zinc-900"}`}
+            />
+          ))}
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

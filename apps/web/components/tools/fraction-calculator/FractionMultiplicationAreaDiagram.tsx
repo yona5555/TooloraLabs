@@ -25,19 +25,19 @@ export default function FractionMultiplicationAreaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      {canRenderGrid ? (
-        <div dir="ltr" className="mx-auto mt-4 grid w-fit gap-px rounded bg-zinc-200 p-px dark:bg-zinc-700" style={{ gridTemplateColumns: `repeat(${dB}, 18px)` }}>
-          {Array.from({ length: dA * dB }).map((_, i) => {
-            const row = Math.floor(i / dB);
-            const col = i % dB;
-            const shaded = row < nA && col < nB;
-            return <div key={i} className={`h-[18px] w-[18px] ${shaded ? "bg-blue-600/70 dark:bg-blue-400/70" : "bg-white dark:bg-zinc-900"}`} />;
-          })}
-        </div>
-      ) : (
-        <p className="mt-4 text-center text-xs text-zinc-400 dark:text-zinc-500">{t("gridTooLarge")}</p>
-      )}
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        {canRenderGrid ? (
+          <div dir="ltr" className="mx-auto shrink-0 grid w-fit gap-px rounded bg-zinc-200 p-px dark:bg-zinc-700" style={{ gridTemplateColumns: `repeat(${dB}, 18px)` }}>
+            {Array.from({ length: dA * dB }).map((_, i) => {
+              const row = Math.floor(i / dB);
+              const col = i % dB;
+              const shaded = row < nA && col < nB;
+              return <div key={i} className={`h-[18px] w-[18px] ${shaded ? "bg-blue-600/70 dark:bg-blue-400/70" : "bg-white dark:bg-zinc-900"}`} />;
+            })}
+          </div>
+        ) : (
+          <p className="text-center text-xs text-zinc-400 dark:text-zinc-500">{t("gridTooLarge")}</p>
+        )}
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

@@ -21,31 +21,31 @@ export default function FractionUnitFractionsTable() {
   return (
     <SectionCard title={t("title", { denom })}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { denom })}</p>
-      <div dir="ltr" className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[280px] border-collapse text-sm">
-          <thead>
-            <tr className="border-b border-zinc-200 text-start dark:border-zinc-700">
-              <th className="px-3 py-2 text-start font-semibold">{t("columnFraction")}</th>
-              <th className="px-3 py-2 text-start font-semibold">{t("columnDecimal")}</th>
-              <th className="px-3 py-2 text-start font-semibold">{t("columnMatch")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.from({ length: rowCount }).map((_, i) => {
-              const n = i + 1;
-              const isMatch = n === Math.round(dims.numeratorA) && denom === Math.round(dims.denominatorA);
-              return (
-                <tr key={n} className={`border-b border-zinc-100 dark:border-zinc-800 ${isMatch ? "bg-blue-50 dark:bg-blue-500/10" : ""}`}>
-                  <td className={`px-3 py-2 font-mono ${isMatch ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}>{`${n}/${denom}`}</td>
-                  <td className="px-3 py-2 font-mono">{round3(n / denom)}</td>
-                  <td className="px-3 py-2 font-semibold text-blue-700 dark:text-blue-300">{isMatch ? t("matchMarker") : ""}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="shrink-0 overflow-x-auto">
+          <table className="w-full min-w-[280px] border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-zinc-200 text-start dark:border-zinc-700">
+                <th className="px-3 py-2 text-start font-semibold">{t("columnFraction")}</th>
+                <th className="px-3 py-2 text-start font-semibold">{t("columnDecimal")}</th>
+                <th className="px-3 py-2 text-start font-semibold">{t("columnMatch")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: rowCount }).map((_, i) => {
+                const n = i + 1;
+                const isMatch = n === Math.round(dims.numeratorA) && denom === Math.round(dims.denominatorA);
+                return (
+                  <tr key={n} className={`border-b border-zinc-100 dark:border-zinc-800 ${isMatch ? "bg-blue-50 dark:bg-blue-500/10" : ""}`}>
+                    <td className={`px-3 py-2 font-mono ${isMatch ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}>{`${n}/${denom}`}</td>
+                    <td className="px-3 py-2 font-mono">{round3(n / denom)}</td>
+                    <td className="px-3 py-2 font-semibold text-blue-700 dark:text-blue-300">{isMatch ? t("matchMarker") : ""}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
