@@ -12915,36 +12915,21 @@
           "readOriginal": "Lire les Œuvres d'Archimède"
         },
         "hero": {
-          "lengthLabel": "Longueur",
-          "heightLabel": "Hauteur",
-          "widthLabel": "Largeur",
+          "ariaLabel": "Un patron en direct pour {shape}, redessiné à partir de ses propres dimensions réelles, avec une ou deux poignées déplaçables qui les contrôlent directement",
           "totalLabel": "Aire totale",
-          "ariaLabel": "Diagramme de patron interactif d'un parallélépipède rectangle — faites glisser le point bleu pour modifier la longueur et la hauteur",
-          "faceTooltip": "{face} : {value}",
-          "hint": "Faites glisser le point bleu pour redimensionner la boîte. Survolez une face pour voir sa propre aire.",
-          "faces": {
-            "front": "Avant",
-            "back": "Arrière",
-            "top": "Dessus",
-            "bottom": "Dessous",
-            "left": "Gauche",
-            "right": "Droite"
-          }
+          "hint": "Faites glisser une poignée, ou modifiez les champs ci-dessus — le patron, son aire totale et chaque indicateur ci-dessous se mettent à jour en direct."
         },
         "shapeFamily": {
-          "title": "Les six solides pris en charge par cette calculatrice",
-          "intro": "Chaque solide ci-dessous exige sa propre combinaison de dimensions, mais chaque formule suit la même idée : additionner l'aire de chaque face.",
-          "shapes": {
-            "cube": "Cube",
-            "rectangularPrism": "Parallélépipède rectangle",
-            "sphere": "Sphère",
-            "cylinder": "Cylindre",
-            "cone": "Cône",
-            "squarePyramid": "Pyramide à base carrée"
-          },
-          "dimsTag": "{count} dimension(s)",
+          "title": "Les six solides, classés à la même taille",
+          "intro": "Chaque solide pris en charge par cette calculatrice, évalué à la même longueur caractéristique en direct ({length}) que le solide actuellement sélectionné — la ligne active est marquée.",
           "columnShape": "Solide",
-          "columnFormula": "Formule"
+          "columnArea": "Aire",
+          "activeTag": "Actif",
+          "worked": {
+            "title": "Exemple résolu",
+            "length": "Longueur caractéristique utilisée",
+            "winner": "Aire la plus grande à cette longueur"
+          }
         },
         "basicFormulas": {
           "title": "Formules de base de l'aire de surface",
@@ -12954,172 +12939,182 @@
           "title": "Autres formules d'aire de surface",
           "intro": "Trois autres solides qui nécessitent une hauteur oblique dérivée ou une surface latérale enveloppante — avec un aperçu de la façon dont un patron plat se replie en un cube fermé."
         },
-        "cubeFormula": {
-          "title": "Cube : six carrés identiques",
-          "intro": "L'aire de surface d'un cube n'est que six copies de la même face carrée.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Aire de surface"
-          }
-        },
-        "sphereFormula": {
-          "title": "Sphère : quatre fois le grand cercle",
-          "intro": "L'aire de surface d'une sphère vaut exactement quatre fois l'aire de son propre grand cercle — un fait géométrique réel, non une approximation.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "greatCircle": "Un grand cercle",
-            "greatCircleNote": "Le cercle exactement autour du point le plus large de la sphère",
-            "result": "Aire de surface"
-          }
-        },
-        "cylinderFormula": {
-          "title": "Cylindre : deux couvercles et une étiquette enroulée",
-          "intro": "La surface d'un cylindre se divise en deux couvercles circulaires et une étiquette rectangulaire qui l'entoure — la largeur de l'étiquette est la circonférence même du cercle, déroulée à plat.",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "caps": "Les deux couvercles",
-            "capsNote": "Deux cercles, chacun πr²",
-            "lateral": "Surface latérale",
-            "lateralNote": "L'étiquette déroulée, large de 2πr et haute de h",
-            "result": "Aire de surface"
-          }
-        },
-        "coneFormula": {
-          "title": "Cône : base plus une hauteur oblique dérivée",
-          "intro": "La surface d'un cône ajoute une base circulaire à une surface latérale courbe — mais la formule latérale a besoin de la hauteur oblique, non de la hauteur perpendiculaire que cet outil demande réellement, elle est donc dérivée via le théorème de Pythagore.",
-          "worked": {
-            "title": "Exemple résolu",
-            "slantFormula": "Hauteur oblique",
-            "base": "Base",
-            "lateral": "Surface latérale",
-            "result": "Aire de surface"
-          }
-        },
-        "pyramidFormula": {
-          "title": "Pyramide à base carrée : base plus quatre triangles",
-          "intro": "Une pyramide à base carrée ajoute une base carrée à quatre faces triangulaires identiques — comme pour le cône, les triangles ont besoin d'une hauteur oblique dérivée de la hauteur perpendiculaire et de la moitié de la base.",
-          "worked": {
-            "title": "Exemple résolu",
-            "slantFormula": "Hauteur oblique",
-            "base": "Base",
-            "oneTriangle": "Une face triangulaire",
-            "triangleNote": "Il y en a quatre, toutes identiques",
-            "result": "Aire de surface"
-          }
-        },
-        "prismBreakdown": {
-          "title": "Parallélépipède rectangle : trois vraies paires de faces",
-          "intro": "Une boîte de longueur {l}, de largeur {w} et de hauteur {h} a trois paires de faces opposées — chaque paire diffère réellement en taille, sauf si deux dimensions coïncident par hasard.",
-          "worked": {
-            "title": "Exemple résolu",
-            "topBottom": "Dessus + dessous",
-            "frontBack": "Avant + arrière",
-            "leftRight": "Gauche + droite",
-            "total": "Aire totale"
-          }
-        },
-        "netFolding": {
-          "title": "Voir un patron se replier en cube",
-          "intro": "Les six mêmes carrés réels, suivis à travers les étapes physiques du pliage d'un patron plat en un cube fermé — l'aire totale ne change jamais, seule sa forme change.",
-          "stations": {
-            "flat": "Patron à plat",
-            "fold1": "Premier pli",
-            "fold2": "Deuxième pli",
-            "fold3": "Troisième pli",
-            "closed": "Cube fermé"
-          },
-          "worked": {
-            "title": "Exemple résolu",
-            "perFace": "Aire par face",
-            "faceCount": "Nombre de faces",
-            "total": "Aire totale",
-            "invariantNote": "Le pliage n'ajoute ni ne retire jamais d'aire"
-          }
-        },
         "unitConversion": {
-          "title": "La même boîte, deux unités",
-          "intro": "L'aire de surface d'une vraie boîte de rangement, mesurée une fois en mètres et une fois en pieds — comme l'aire évolue avec le carré de la longueur, le facteur de conversion de l'aire de surface est le carré du facteur linéaire.",
+          "title": "L'aire en direct dans d'autres unités",
+          "intro": "Exactement la même aire réelle, réexprimée en pieds carrés et en pouces carrés — des chiffres dont un visiteur planifiant un projet réel aurait réellement besoin.",
           "worked": {
             "title": "Exemple résolu",
-            "linearFactor": "Conversion linéaire",
-            "areaFactor": "Facteur de conversion de l'aire",
-            "note": "Élever au carré le facteur linéaire donne le facteur d'aire"
-          }
-        },
-        "shapeComparison": {
-          "title": "Cube contre sphère de taille équivalente",
-          "intro": "Un cube et une sphère, tous deux construits à partir d'une taille caractéristique de {dim} unités — la forme seule change considérablement l'aire de surface, même à taille égale.",
-          "cubeLabel": "Cube",
-          "sphereLabel": "Sphère",
-          "worked": {
-            "title": "Exemple résolu"
-          }
-        },
-        "doublingEffect": {
-          "title": "Doubler une dimension quadruple l'aire",
-          "intro": "Doubler le côté d'un cube ne double pas son aire de surface — chaque formule de cette page évolue avec le carré des dimensions, donc doubler une longueur quadruple toujours l'aire correspondante.",
-          "worked": {
-            "title": "Exemple résolu",
-            "ratio": "Rapport d'aire",
-            "note": "2² = 4, exactement"
-          }
-        },
-        "sphereVsCube": {
-          "title": "Même volume, moins de surface",
-          "intro": "Un cube et une sphère contenant exactement le même volume réel de {volume} unités cubiques — la sphère a toujours besoin de moins de surface pour le contenir, la raison pour laquelle les bulles et les planètes sont sphériques.",
-          "sphereLabel": "Sphère",
-          "cubeLabel": "Cube",
-          "worked": {
-            "title": "Exemple résolu",
-            "radius": "Rayon de sphère équivalent",
-            "sphereArea": "Aire de surface de la sphère",
-            "cubeArea": "Aire de surface du cube",
-            "note": "Moins de surface pour le même volume — efficacité maximale"
-          }
-        },
-        "svRatio": {
-          "title": "Rapport surface-volume",
-          "intro": "Le rapport surface-volume réel d'un cube (6s² ÷ s³ = 6/s) à travers six doublements de taille — la raison pour laquelle un flocon de neige fond en quelques secondes alors qu'un iceberg dure des années.",
-          "zones": {
-            "high": "Rapport élevé",
-            "medium": "Rapport moyen",
-            "low": "Rapport faible"
-          },
-          "worked": {
-            "title": "Exemple résolu",
-            "small": "Plus petit cube",
-            "large": "Plus grand cube",
-            "note": "Les objets plus petits ont bien plus de surface par rapport à leur propre volume"
+            "factor": "Facteur de conversion",
+            "result": "Résultat"
           }
         },
         "paintCoverage": {
-          "title": "De l'aire de surface à la peinture nécessaire",
-          "intro": "L'aire de surface totale d'une vraie boîte de rangement cubique, divisée par le rendement d'un vrai pot de peinture — la vraie raison pour laquelle cette calculatrice compte en dehors d'une salle de classe.",
-          "areaLabel": "Aire de surface",
-          "coverageLabel": "Rendement",
-          "resultLabel": "Peinture nécessaire",
+          "title": "Combien de pots de peinture cela prendrait réellement",
+          "intro": "L'aire en direct divisée par le taux de couverture réel d'un pot de peinture — une estimation pratique des matériaux, pas un nombre abstrait.",
+          "areaLabel": "Aire",
+          "coverageLabel": "Couverture/pot",
+          "cansLabel": "Pots nécessaires",
           "worked": {
             "title": "Exemple résolu",
             "formula": "Formule"
           }
         },
         "realWorldScale": {
-          "title": "Aires de surface réelles, d'une bille à un stade",
-          "intro": "Des aires de surface du monde réel s'étendant sur plus de sept ordres de grandeur — seule une échelle logarithmique les garde toutes lisibles ensemble.",
+          "title": "Où se situe réellement l'aire en direct",
+          "intro": "L'aire en direct placée parmi des aires de référence du monde réel couvrant plus de cinq ordres de grandeur — seule une échelle logarithmique garde une bille et une maison lisibles sur la même ligne.",
           "items": {
             "marble": "Bille",
             "basketball": "Ballon de basket",
             "refrigerator": "Réfrigérateur",
             "car": "Voiture",
-            "house": "Maison",
-            "stadium": "Toit de stade"
+            "house": "Maison"
           },
           "worked": {
             "title": "Exemple résolu",
-            "spanNote": "Plus de sept ordres de grandeur d'écart"
+            "liveArea": "Aire en direct",
+            "closest": "Correspondance réelle la plus proche"
+          }
+        },
+        "formulaDiagram": {
+          "title": "La formule propre du solide en direct, complétée",
+          "intro": "La formule réelle de l'aire pour {shape}, avec ses propres dimensions actuelles substituées directement dans chaque case.",
+          "totalLabel": "Total",
+          "worked": {
+            "title": "Exemple résolu",
+            "shape": "Forme",
+            "total": "Aire totale"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Quel solide a le plus d'aire",
+          "intro": "Les six solides classés par aire, tous évalués à la même longueur en direct ({length}) que le solide actuellement sélectionné.",
+          "worked": {
+            "title": "Exemple résolu",
+            "topShape": "Solide le plus grand",
+            "vsSphere": "Fois l'aire d'une sphère de même taille"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Même taille, forme différente",
+          "intro": "L'aire réelle en direct du solide {shape}, comparée directement à un cube construit avec la même longueur caractéristique {length}.",
+          "worked": {
+            "title": "Exemple résolu",
+            "difference": "Différence d'aire",
+            "winner": "A plus d'aire"
+          }
+        },
+        "surfaceToVolume": {
+          "title": "Aire par rapport au volume",
+          "intro": "Le rapport réel entre l'aire et le volume du solide en direct — la grandeur physique expliquant pourquoi les petits objets perdent ou gagnent de la chaleur bien plus vite que les grands.",
+          "worked": {
+            "title": "Exemple résolu",
+            "area": "Aire",
+            "volume": "Volume",
+            "ratio": "Rapport (aire:volume)"
+          },
+          "zones": {
+            "volumeDominated": "Dominé par le volume (grand)",
+            "surfaceDominated": "Dominé par la surface (petit)"
+          }
+        },
+        "compactnessZone": {
+          "title": "À quel point proche d'une sphère parfaite",
+          "intro": "La compacité isopérimétrique 3D du solide en direct — la sphère est la seule forme qui renferme un volume donné avec la plus petite aire possible, donc toute autre forme obtient moins de 100 %.",
+          "worked": {
+            "title": "Exemple résolu",
+            "volume": "Volume",
+            "compactness": "Compacité"
+          },
+          "zones": {
+            "angular": "Anguleux",
+            "sphereLike": "Proche d'une sphère"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Ce que coûterait réellement une erreur de mesure de 20 %",
+          "intro": "L'aire réelle du solide en direct si chacune de ses propres dimensions était mesurée 20 % plus petite ou 20 % plus grande qu'elle ne l'est réellement.",
+          "smallerLabel": "20 % plus petite",
+          "currentLabel": "Actuelle",
+          "largerLabel": "20 % plus grande",
+          "worked": {
+            "title": "Exemple résolu",
+            "swing": "Variation due à une erreur de 20 %",
+            "note": "Une erreur de mesure linéaire voit son effet sur l'aire à peu près doublé."
+          }
+        },
+        "scaleCurve": {
+          "title": "L'aire croît avec le carré de l'échelle",
+          "intro": "L'aire propre du solide en direct à mesure que chaque dimension est mise à l'échelle ensemble, de la moitié au double de sa taille actuelle — une courbe continue, jamais une ligne droite.",
+          "ariaLabel": "Une courbe de l'aire en fonction du facteur d'échelle, avec le point actuel en direct marqué",
+          "worked": {
+            "title": "Exemple résolu",
+            "half": "À l'échelle 0,5×",
+            "current": "À l'échelle 1× (maintenant)",
+            "double": "À l'échelle 2×",
+            "note": "Quadruplée, pas doublée"
+          }
+        },
+        "doublingSteps": {
+          "title": "Doubler chaque dimension quadruple l'aire",
+          "intro": "L'aire propre du solide en direct à sa taille actuelle, puis au double et au quadruple de chacune de ses dimensions.",
+          "worked": {
+            "title": "Exemple résolu",
+            "oneX": "À 1× (maintenant)",
+            "fourX": "À 4×",
+            "note": "16 fois l'aire d'origine, pas 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "Combien d'aire N copies identiques nécessiteraient",
+          "intro": "L'aire propre du solide {shape} en direct, multipliée par le nombre de copies identiques qu'un véritable projet de peinture en série ou de fabrication nécessiterait réellement.",
+          "countChip": "{count}×",
+          "oneLabel": "Un solide",
+          "countLabel": "Copies",
+          "totalLabel": "Aire totale",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "computationSteps": {
+          "title": "Les étapes réelles derrière l'aire de ce solide",
+          "intro": "La séquence réelle d'opérations que la calculatrice exécute pour le solide actif en direct, chaque étape portant sa propre valeur intermédiaire réelle.",
+          "stations": {
+            "given": "Dimensions données",
+            "square": "L'élever au carré",
+            "sixFaces": "× 6 faces",
+            "pairProducts": "Additionner les paires de faces",
+            "double": "× 2",
+            "fourPi": "× 4π",
+            "sum": "Additionner rayon et hauteur",
+            "twoPiR": "× 2πr",
+            "slant": "Trouver la hauteur oblique",
+            "piR": "× πr",
+            "baseArea": "Élever la base au carré",
+            "addTriangles": "Additionner les 4 faces triangulaires"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "total": "Aire totale"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Les deux dimensions déterminantes du solide en direct",
+          "intro": "Les deux nombres réels qui déterminent réellement la taille du solide actuel, comparés directement — non supposés, lus directement à partir des valeurs en direct.",
+          "labels": {
+            "side": "Côté",
+            "length": "Longueur",
+            "height": "Hauteur",
+            "radius": "Rayon",
+            "baseSide": "Côté de la base",
+            "none": "—"
+          },
+          "singleDimension": "Solide à une seule dimension",
+          "worked": {
+            "title": "Exemple résolu",
+            "larger": "Réellement plus grande",
+            "note": "Remarque",
+            "onlyOneDimension": "Ce solide n'a qu'une seule dimension déterminante"
           }
         }
       },

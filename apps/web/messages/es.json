@@ -12915,36 +12915,21 @@
           "readOriginal": "Leer Las obras de Arquímedes"
         },
         "hero": {
-          "lengthLabel": "Longitud",
-          "heightLabel": "Altura",
-          "widthLabel": "Anchura",
+          "ariaLabel": "Un desarrollo plano en vivo para {shape}, redibujado a partir de sus propias dimensiones reales, con uno o dos controles arrastrables que las gobiernan directamente",
           "totalLabel": "Área de superficie total",
-          "ariaLabel": "Diagrama de desarrollo interactivo de un prisma rectangular — arrastra el punto azul para cambiar la longitud y la altura",
-          "faceTooltip": "{face}: {value}",
-          "hint": "Arrastra el punto azul para redimensionar la caja. Pasa el cursor sobre cualquier cara para ver su propia área.",
-          "faces": {
-            "front": "Frontal",
-            "back": "Posterior",
-            "top": "Superior",
-            "bottom": "Inferior",
-            "left": "Izquierda",
-            "right": "Derecha"
-          }
+          "hint": "Arrastra un control, o edita los campos de arriba — el desarrollo, su área de superficie total y cada indicador de abajo se actualizan en vivo."
         },
         "shapeFamily": {
-          "title": "Los seis sólidos que admite esta calculadora",
-          "intro": "Cada sólido de abajo necesita su propia combinación de dimensiones, pero cada fórmula sigue la misma idea: sumar el área de cada cara.",
-          "shapes": {
-            "cube": "Cubo",
-            "rectangularPrism": "Prisma rectangular",
-            "sphere": "Esfera",
-            "cylinder": "Cilindro",
-            "cone": "Cono",
-            "squarePyramid": "Pirámide cuadrada"
-          },
-          "dimsTag": "{count} dimensión(es)",
+          "title": "Los seis sólidos, clasificados al mismo tamaño",
+          "intro": "Cada sólido que esta calculadora admite, evaluado con la misma longitud característica en vivo ({length}) que el sólido actualmente seleccionado — la fila activa está etiquetada.",
           "columnShape": "Sólido",
-          "columnFormula": "Fórmula"
+          "columnArea": "Área de superficie",
+          "activeTag": "Activo",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "length": "Longitud característica usada",
+            "winner": "Mayor área de superficie a esta longitud"
+          }
         },
         "basicFormulas": {
           "title": "Fórmulas básicas de área de superficie",
@@ -12954,172 +12939,182 @@
           "title": "Más fórmulas de área de superficie",
           "intro": "Tres sólidos más que necesitan una altura inclinada derivada o una superficie lateral envolvente, además de un vistazo a cómo un desarrollo plano se pliega en un cubo cerrado."
         },
-        "cubeFormula": {
-          "title": "Cubo: seis cuadrados idénticos",
-          "intro": "El área de superficie de un cubo es simplemente seis copias de la misma cara cuadrada.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "result": "Área de superficie"
-          }
-        },
-        "sphereFormula": {
-          "title": "Esfera: cuatro veces el círculo máximo",
-          "intro": "El área de superficie de una esfera es exactamente cuatro veces el área de su propio círculo máximo — un hecho geométrico real, no una aproximación.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "greatCircle": "Un círculo máximo",
-            "greatCircleNote": "El círculo exactamente alrededor del punto más ancho de la esfera",
-            "result": "Área de superficie"
-          }
-        },
-        "cylinderFormula": {
-          "title": "Cilindro: dos tapas más una etiqueta envolvente",
-          "intro": "La superficie de un cilindro se divide en dos tapas circulares y una etiqueta rectangular que lo envuelve — el ancho de la etiqueta es la propia circunferencia del círculo, desenrollada.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "formula": "Fórmula",
-            "caps": "Ambas tapas",
-            "capsNote": "Dos círculos, cada uno πr²",
-            "lateral": "Superficie lateral",
-            "lateralNote": "La etiqueta desenrollada, de ancho 2πr y alto h",
-            "result": "Área de superficie"
-          }
-        },
-        "coneFormula": {
-          "title": "Cono: base más una altura inclinada derivada",
-          "intro": "La superficie de un cono suma una base circular a una superficie lateral curva — pero la fórmula lateral necesita la altura inclinada, no la altura perpendicular que esta herramienta realmente pide, así que se deriva mediante el teorema de Pitágoras.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "slantFormula": "Altura inclinada",
-            "base": "Base",
-            "lateral": "Superficie lateral",
-            "result": "Área de superficie"
-          }
-        },
-        "pyramidFormula": {
-          "title": "Pirámide cuadrada: base más cuatro triángulos",
-          "intro": "Una pirámide cuadrada suma una base cuadrada a cuatro caras triangulares idénticas — como en el cono, los triángulos necesitan una altura inclinada derivada de la altura perpendicular y la mitad de la base.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "slantFormula": "Altura inclinada",
-            "base": "Base",
-            "oneTriangle": "Una cara triangular",
-            "triangleNote": "Hay cuatro de estas, todas idénticas",
-            "result": "Área de superficie"
-          }
-        },
-        "prismBreakdown": {
-          "title": "Prisma rectangular: tres pares reales de caras",
-          "intro": "Una caja con longitud {l}, anchura {w} y altura {h} tiene tres pares de caras opuestas — cada par es realmente diferente en tamaño, salvo que dos dimensiones coincidan por casualidad.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "topBottom": "Superior + inferior",
-            "frontBack": "Frontal + posterior",
-            "leftRight": "Izquierda + derecha",
-            "total": "Área de superficie total"
-          }
-        },
-        "netFolding": {
-          "title": "Ver cómo un desarrollo se pliega en un cubo",
-          "intro": "Los mismos seis cuadrados reales, seguidos a través de las etapas físicas de plegar un desarrollo plano en un cubo cerrado — el área de superficie total nunca cambia, solo su forma.",
-          "stations": {
-            "flat": "Desarrollo plano",
-            "fold1": "Primer pliegue",
-            "fold2": "Segundo pliegue",
-            "fold3": "Tercer pliegue",
-            "closed": "Cubo cerrado"
-          },
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "perFace": "Área por cara",
-            "faceCount": "Número de caras",
-            "total": "Área de superficie total",
-            "invariantNote": "Plegar nunca añade ni quita área"
-          }
-        },
         "unitConversion": {
-          "title": "La misma caja, dos unidades",
-          "intro": "El área de superficie de una caja de almacenamiento real, medida una vez en metros y otra en pies — como el área escala con el cuadrado de la longitud, el factor de conversión del área de superficie es el cuadrado del factor lineal.",
+          "title": "El área de superficie en vivo en otras unidades",
+          "intro": "Exactamente la misma área de superficie real, reexpresada en pies cuadrados y pulgadas cuadradas — cifras que un visitante planeando un proyecto real realmente necesitaría.",
           "worked": {
             "title": "Ejemplo resuelto",
-            "linearFactor": "Conversión lineal",
-            "areaFactor": "Factor de conversión de área",
-            "note": "Elevar al cuadrado el factor lineal da el factor de área"
-          }
-        },
-        "shapeComparison": {
-          "title": "Cubo vs. esfera con el mismo tamaño",
-          "intro": "Un cubo y una esfera, ambos construidos con un tamaño característico de {dim} unidades — la forma por sí sola cambia sustancialmente el área de superficie, incluso con el mismo tamaño.",
-          "cubeLabel": "Cubo",
-          "sphereLabel": "Esfera",
-          "worked": {
-            "title": "Ejemplo resuelto"
-          }
-        },
-        "doublingEffect": {
-          "title": "Duplicar una dimensión cuadruplica el área",
-          "intro": "Duplicar el lado de un cubo no duplica su área de superficie — cada fórmula de esta página escala con el cuadrado de las dimensiones, así que duplicar una longitud siempre cuadruplica el área correspondiente.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "ratio": "Razón de área",
-            "note": "2² = 4, exactamente"
-          }
-        },
-        "sphereVsCube": {
-          "title": "Mismo volumen, menos superficie",
-          "intro": "Un cubo y una esfera que contienen exactamente el mismo volumen real de {volume} unidades cúbicas — la esfera siempre necesita menos área de superficie para contenerlo, la razón por la que las burbujas y los planetas son esféricos.",
-          "sphereLabel": "Esfera",
-          "cubeLabel": "Cubo",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "radius": "Radio de esfera equivalente",
-            "sphereArea": "Área de superficie de la esfera",
-            "cubeArea": "Área de superficie del cubo",
-            "note": "Menos superficie para el mismo volumen — máxima eficiencia"
-          }
-        },
-        "svRatio": {
-          "title": "Relación superficie-volumen",
-          "intro": "La relación real superficie-volumen de un cubo (6s² ÷ s³ = 6/s) a lo largo de seis duplicaciones de tamaño — la razón por la que un copo de nieve se derrite en segundos mientras un iceberg dura años.",
-          "zones": {
-            "high": "Relación alta",
-            "medium": "Relación media",
-            "low": "Relación baja"
-          },
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "small": "Cubo más pequeño",
-            "large": "Cubo más grande",
-            "note": "Los objetos más pequeños tienen muchísima más superficie en relación con su propio volumen"
+            "factor": "Factor de conversión",
+            "result": "Resultado"
           }
         },
         "paintCoverage": {
-          "title": "Del área de superficie a la pintura necesaria",
-          "intro": "El área de superficie total de una caja de almacenamiento cúbica real, dividida por el rendimiento de una lata de pintura real — la razón real por la que esta calculadora importa fuera del aula.",
+          "title": "Cuántos botes de pintura necesitaría esto realmente",
+          "intro": "El área de superficie en vivo dividida entre la tasa de cobertura real de un bote de pintura — una estimación práctica de materiales, no un número abstracto.",
           "areaLabel": "Área de superficie",
-          "coverageLabel": "Rendimiento",
-          "resultLabel": "Pintura necesaria",
+          "coverageLabel": "Cobertura/bote",
+          "cansLabel": "Botes necesarios",
           "worked": {
             "title": "Ejemplo resuelto",
             "formula": "Fórmula"
           }
         },
         "realWorldScale": {
-          "title": "Áreas de superficie reales, de una canica a un estadio",
-          "intro": "Áreas de superficie del mundo real que abarcan más de siete órdenes de magnitud — solo una escala logarítmica las mantiene todas legibles juntas.",
+          "title": "Dónde se ubica realmente el área de superficie en vivo",
+          "intro": "El área de superficie en vivo situada entre áreas de superficie de referencia del mundo real que abarcan más de cinco órdenes de magnitud — solo una escala logarítmica mantiene legibles una canica y una casa en la misma línea.",
           "items": {
             "marble": "Canica",
             "basketball": "Balón de baloncesto",
             "refrigerator": "Refrigerador",
-            "car": "Automóvil",
-            "house": "Casa",
-            "stadium": "Techo de estadio"
+            "car": "Coche",
+            "house": "Casa"
           },
           "worked": {
             "title": "Ejemplo resuelto",
-            "spanNote": "Más de siete órdenes de magnitud de diferencia"
+            "liveArea": "Área de superficie en vivo",
+            "closest": "Coincidencia real más cercana"
+          }
+        },
+        "formulaDiagram": {
+          "title": "La propia fórmula del sólido en vivo, completada",
+          "intro": "La fórmula real del área de superficie para {shape}, con sus propias dimensiones actuales sustituidas directamente en cada casilla.",
+          "totalLabel": "Total",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "shape": "Forma",
+            "total": "Área de superficie total"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Qué sólido tiene más área de superficie",
+          "intro": "Los seis sólidos clasificados por área de superficie, todos evaluados con la misma longitud en vivo ({length}) que el sólido actualmente seleccionado.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "topShape": "Sólido mayor",
+            "vsSphere": "Veces el área de superficie de una esfera del mismo tamaño"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Mismo tamaño, forma diferente",
+          "intro": "El área de superficie real en vivo del sólido {shape}, comparada directamente con un cubo construido con la misma longitud característica {length}.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "difference": "Diferencia de área de superficie",
+            "winner": "Tiene más área de superficie"
+          }
+        },
+        "surfaceToVolume": {
+          "title": "Área de superficie en relación con el volumen",
+          "intro": "La proporción real de área de superficie a volumen del sólido en vivo — la magnitud física detrás de por qué los objetos pequeños pierden o ganan calor mucho más rápido que los grandes.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "area": "Área de superficie",
+            "volume": "Volumen",
+            "ratio": "Proporción (área:volumen)"
+          },
+          "zones": {
+            "volumeDominated": "Dominado por el volumen (grande)",
+            "surfaceDominated": "Dominado por la superficie (pequeño)"
+          }
+        },
+        "compactnessZone": {
+          "title": "Qué tan cerca de una esfera perfecta",
+          "intro": "La compacidad isoperimétrica 3D del sólido en vivo — la esfera es la única forma que encierra un volumen dado con la menor área de superficie posible, así que cualquier otra forma obtiene menos del 100 %.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "volume": "Volumen",
+            "compactness": "Compacidad"
+          },
+          "zones": {
+            "angular": "Angular",
+            "sphereLike": "Parecida a una esfera"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Lo que realmente costaría un error de medición del 20 %",
+          "intro": "El área de superficie real del sólido en vivo si cada una de sus dimensiones se midiera un 20 % más pequeña o un 20 % más grande de lo que realmente es.",
+          "smallerLabel": "20 % más pequeña",
+          "currentLabel": "Actual",
+          "largerLabel": "20 % más grande",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "swing": "Variación por un error del 20 %",
+            "note": "Un error de medición lineal se duplica aproximadamente en su efecto sobre el área de superficie."
+          }
+        },
+        "scaleCurve": {
+          "title": "El área de superficie crece con el cuadrado de la escala",
+          "intro": "El área de superficie propia del sólido en vivo mientras cada dimensión se escala en conjunto desde la mitad hasta el doble de su tamaño actual — una curva continua, nunca una línea recta.",
+          "ariaLabel": "Una curva del área de superficie frente al factor de escala, con el punto actual en vivo marcado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "half": "A escala 0,5×",
+            "current": "A escala 1× (ahora)",
+            "double": "A escala 2×",
+            "note": "Se cuadruplica, no se duplica"
+          }
+        },
+        "doublingSteps": {
+          "title": "Duplicar cada dimensión cuadruplica el área de superficie",
+          "intro": "El área de superficie propia del sólido en vivo en su tamaño actual, luego al doble y al cuádruple de cada una de sus dimensiones.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "oneX": "A 1× (ahora)",
+            "fourX": "A 4×",
+            "note": "16 veces el área de superficie original, no 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "Cuánta área de superficie necesitarían N copias idénticas",
+          "intro": "El área de superficie propia del sólido {shape} en vivo, multiplicada por el número de copias idénticas que realmente necesitaría un trabajo real de pintura por lotes o fabricación.",
+          "countChip": "{count}×",
+          "oneLabel": "Un sólido",
+          "countLabel": "Copias",
+          "totalLabel": "Área de superficie total",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "computationSteps": {
+          "title": "Los pasos reales detrás del área de superficie de este sólido",
+          "intro": "La secuencia real de operaciones que ejecuta la calculadora para el sólido activo en vivo, cada estación con su propio valor intermedio real.",
+          "stations": {
+            "given": "Dimensiones dadas",
+            "square": "Elevar al cuadrado",
+            "sixFaces": "× 6 caras",
+            "pairProducts": "Sumar los pares de caras",
+            "double": "× 2",
+            "fourPi": "× 4π",
+            "sum": "Sumar radio y altura",
+            "twoPiR": "× 2πr",
+            "slant": "Hallar la altura inclinada",
+            "piR": "× πr",
+            "baseArea": "Elevar al cuadrado la base",
+            "addTriangles": "Sumar las 4 caras triangulares"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "total": "Área de superficie total"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Las dos dimensiones que definen el sólido en vivo",
+          "intro": "Los dos números reales que realmente definen el tamaño del sólido actual, comparados directamente — no asumidos, leídos directamente de los valores en vivo.",
+          "labels": {
+            "side": "Lado",
+            "length": "Longitud",
+            "height": "Altura",
+            "radius": "Radio",
+            "baseSide": "Lado de la base",
+            "none": "—"
+          },
+          "singleDimension": "Sólido de una sola dimensión",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "larger": "Realmente mayor",
+            "note": "Nota",
+            "onlyOneDimension": "Este sólido tiene solo una dimensión que lo define"
           }
         }
       },

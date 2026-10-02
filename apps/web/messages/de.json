@@ -12915,36 +12915,21 @@
           "readOriginal": "Die Werke des Archimedes lesen"
         },
         "hero": {
-          "lengthLabel": "Länge",
-          "heightLabel": "Höhe",
-          "widthLabel": "Breite",
+          "ariaLabel": "Ein live abgewickeltes Netz für {shape}, aus seinen eigenen realen Abmessungen neu gezeichnet, mit ein oder zwei ziehbaren Griffen, die sie direkt steuern",
           "totalLabel": "Gesamtoberfläche",
-          "ariaLabel": "Interaktives Netzdiagramm eines Quaders — ziehen Sie den blauen Punkt, um Länge und Höhe zu ändern",
-          "faceTooltip": "{face}: {value}",
-          "hint": "Ziehen Sie den blauen Punkt, um die Box zu skalieren. Fahren Sie über eine Fläche, um ihre eigene Fläche zu sehen.",
-          "faces": {
-            "front": "Vorderseite",
-            "back": "Rückseite",
-            "top": "Oben",
-            "bottom": "Unten",
-            "left": "Links",
-            "right": "Rechts"
-          }
+          "hint": "Ziehe einen Griff oder bearbeite die Felder oben — das Netz, seine Gesamtoberfläche und jeder Indikator unten aktualisieren sich live."
         },
         "shapeFamily": {
-          "title": "Die sechs Körper, die dieser Rechner unterstützt",
-          "intro": "Jeder Körper unten braucht seine eigene Kombination von Abmessungen, aber jede Formel folgt derselben Idee: die Fläche jeder Seite addieren.",
-          "shapes": {
-            "cube": "Würfel",
-            "rectangularPrism": "Quader",
-            "sphere": "Kugel",
-            "cylinder": "Zylinder",
-            "cone": "Kegel",
-            "squarePyramid": "quadratische Pyramide"
-          },
-          "dimsTag": "{count} Dimension(en)",
+          "title": "Alle sechs Körper, bei gleicher Größe eingeordnet",
+          "intro": "Jeder von diesem Rechner unterstützte Körper, jeweils bei derselben live berechneten charakteristischen Länge ({length}) wie der aktuell gewählte Körper ausgewertet — die aktive Zeile ist markiert.",
           "columnShape": "Körper",
-          "columnFormula": "Formel"
+          "columnArea": "Oberfläche",
+          "activeTag": "Aktiv",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "length": "Verwendete charakteristische Länge",
+            "winner": "Größte Oberfläche bei dieser Länge"
+          }
         },
         "basicFormulas": {
           "title": "Grundlegende Oberflächenformeln",
@@ -12954,172 +12939,182 @@
           "title": "Weitere Oberflächenformeln",
           "intro": "Drei weitere Körper, die eine abgeleitete Schrägenhöhe oder eine umlaufende Mantelfläche benötigen — dazu ein Blick darauf, wie sich ein flaches Netz zu einem geschlossenen Würfel faltet."
         },
-        "cubeFormula": {
-          "title": "Würfel: sechs identische Quadrate",
-          "intro": "Die Oberfläche eines Würfels besteht einfach aus sechs Kopien derselben quadratischen Fläche.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "formula": "Formel",
-            "result": "Oberfläche"
-          }
-        },
-        "sphereFormula": {
-          "title": "Kugel: das Vierfache des Großkreises",
-          "intro": "Die Oberfläche einer Kugel ist genau viermal so groß wie die Fläche ihres eigenen Großkreises — eine echte geometrische Tatsache, keine Näherung.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "formula": "Formel",
-            "greatCircle": "Ein Großkreis",
-            "greatCircleNote": "Der Kreis genau um den breitesten Punkt der Kugel",
-            "result": "Oberfläche"
-          }
-        },
-        "cylinderFormula": {
-          "title": "Zylinder: zwei Deckel plus ein umwickeltes Etikett",
-          "intro": "Die Oberfläche eines Zylinders teilt sich in zwei kreisförmige Deckel und ein rechteckiges Etikett, das sich um ihn wickelt — die Breite des Etiketts ist der Umfang des Kreises selbst, flach abgerollt.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "formula": "Formel",
-            "caps": "Beide Deckel",
-            "capsNote": "Zwei Kreise, je πr²",
-            "lateral": "Mantelfläche",
-            "lateralNote": "Das abgerollte Etikett, 2πr breit und h hoch",
-            "result": "Oberfläche"
-          }
-        },
-        "coneFormula": {
-          "title": "Kegel: Grundfläche plus abgeleitete Schrägenhöhe",
-          "intro": "Die Oberfläche eines Kegels addiert eine kreisförmige Grundfläche zu einer gekrümmten Mantelfläche — aber die Mantelformel braucht die Schrägenhöhe, nicht die senkrechte Höhe, nach der dieses Tool eigentlich fragt, also wird sie über den Satz des Pythagoras abgeleitet.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "slantFormula": "Schrägenhöhe",
-            "base": "Grundfläche",
-            "lateral": "Mantelfläche",
-            "result": "Oberfläche"
-          }
-        },
-        "pyramidFormula": {
-          "title": "Quadratische Pyramide: Grundfläche plus vier Dreiecke",
-          "intro": "Eine quadratische Pyramide addiert eine quadratische Grundfläche zu vier identischen dreieckigen Seiten — wie beim Kegel brauchen die Dreiecke eine Schrägenhöhe, abgeleitet aus der senkrechten Höhe und der halben Grundseite.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "slantFormula": "Schrägenhöhe",
-            "base": "Grundfläche",
-            "oneTriangle": "Eine Dreiecksfläche",
-            "triangleNote": "Es gibt vier davon, alle identisch",
-            "result": "Oberfläche"
-          }
-        },
-        "prismBreakdown": {
-          "title": "Quader: drei echte Flächenpaare",
-          "intro": "Ein Quader mit Länge {l}, Breite {w} und Höhe {h} hat drei Paare gegenüberliegender Flächen — jedes Paar ist tatsächlich unterschiedlich groß, außer zwei Abmessungen stimmen zufällig überein.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "topBottom": "Oben + unten",
-            "frontBack": "Vorne + hinten",
-            "leftRight": "Links + rechts",
-            "total": "Gesamtoberfläche"
-          }
-        },
-        "netFolding": {
-          "title": "Wie sich ein Netz zu einem Würfel faltet",
-          "intro": "Dieselben sechs echten Quadrate, verfolgt durch die physischen Stationen, in denen sich ein flaches Netz zu einem geschlossenen Würfel faltet — die Gesamtoberfläche ändert sich nie, nur ihre Form.",
-          "stations": {
-            "flat": "Flaches Netz",
-            "fold1": "Erste Faltung",
-            "fold2": "Zweite Faltung",
-            "fold3": "Dritte Faltung",
-            "closed": "Geschlossener Würfel"
-          },
-          "worked": {
-            "title": "Rechenbeispiel",
-            "perFace": "Fläche pro Seite",
-            "faceCount": "Anzahl der Flächen",
-            "total": "Gesamtoberfläche",
-            "invariantNote": "Falten fügt niemals Fläche hinzu oder entfernt welche"
-          }
-        },
         "unitConversion": {
-          "title": "Dieselbe Box, zwei Einheiten",
-          "intro": "Die Oberfläche einer echten Lagerbox, einmal in Metern und einmal in Fuß gemessen — da die Fläche mit dem Quadrat der Länge skaliert, ist der Umrechnungsfaktor für die Oberfläche das Quadrat des linearen Faktors.",
+          "title": "Die Live-Oberfläche in anderen Einheiten",
+          "intro": "Exakt dieselbe reale Oberfläche, neu ausgedrückt in Quadratfuß und Quadratzoll — Werte, die ein Besucher bei der Planung eines realen Projekts tatsächlich brauchen würde.",
           "worked": {
             "title": "Rechenbeispiel",
-            "linearFactor": "Lineare Umrechnung",
-            "areaFactor": "Flächen-Umrechnungsfaktor",
-            "note": "Das Quadrieren des linearen Faktors ergibt den Flächenfaktor"
-          }
-        },
-        "shapeComparison": {
-          "title": "Würfel vs. Kugel bei gleicher Größe",
-          "intro": "Ein Würfel und eine Kugel, beide aus einer charakteristischen Größe von {dim} Einheiten — die Form allein verändert die Oberfläche erheblich, selbst bei gleicher Größe.",
-          "cubeLabel": "Würfel",
-          "sphereLabel": "Kugel",
-          "worked": {
-            "title": "Rechenbeispiel"
-          }
-        },
-        "doublingEffect": {
-          "title": "Eine Abmessung zu verdoppeln vervierfacht die Fläche",
-          "intro": "Die Seite eines Würfels zu verdoppeln verdoppelt nicht seine Oberfläche — jede Formel auf dieser Seite skaliert mit dem Quadrat der Abmessungen, also vervierfacht das Verdoppeln einer Länge immer die entsprechende Fläche.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "ratio": "Flächenverhältnis",
-            "note": "2² = 4, exakt"
-          }
-        },
-        "sphereVsCube": {
-          "title": "Gleiches Volumen, weniger Oberfläche",
-          "intro": "Ein Würfel und eine Kugel mit genau demselben echten Volumen von {volume} Kubikeinheiten — die Kugel benötigt immer weniger Oberfläche, um es zu umschließen, der Grund, warum Blasen und Planeten kugelförmig sind.",
-          "sphereLabel": "Kugel",
-          "cubeLabel": "Würfel",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "radius": "Passender Kugelradius",
-            "sphereArea": "Oberfläche der Kugel",
-            "cubeArea": "Oberfläche des Würfels",
-            "note": "Weniger Oberfläche bei gleichem Volumen — maximale Effizienz"
-          }
-        },
-        "svRatio": {
-          "title": "Oberfläche-zu-Volumen-Verhältnis",
-          "intro": "Das echte Oberfläche-zu-Volumen-Verhältnis eines Würfels (6s² ÷ s³ = 6/s) über sechs Verdopplungen der Größe — der Grund, warum eine Schneeflocke in Sekunden schmilzt, während ein Eisberg Jahre überdauert.",
-          "zones": {
-            "high": "Hohes Verhältnis",
-            "medium": "Mittleres Verhältnis",
-            "low": "Niedriges Verhältnis"
-          },
-          "worked": {
-            "title": "Rechenbeispiel",
-            "small": "Kleinster Würfel",
-            "large": "Größter Würfel",
-            "note": "Kleinere Objekte haben dramatisch mehr Oberfläche im Verhältnis zu ihrem eigenen Volumen"
+            "factor": "Umrechnungsfaktor",
+            "result": "Ergebnis"
           }
         },
         "paintCoverage": {
-          "title": "Von der Oberfläche zur benötigten Farbmenge",
-          "intro": "Die Gesamtoberfläche eines echten würfelförmigen Lagerbehälters, geteilt durch die Ergiebigkeit einer echten Farbdose — der eigentliche Grund, warum dieser Rechner außerhalb des Klassenzimmers wichtig ist.",
+          "title": "Wie viele Farbdosen das tatsächlich bräuchte",
+          "intro": "Die Live-Oberfläche geteilt durch die reale Deckungsrate einer Farbdose — eine praktische Materialschätzung, keine abstrakte Zahl.",
           "areaLabel": "Oberfläche",
-          "coverageLabel": "Ergiebigkeit",
-          "resultLabel": "Benötigte Farbe",
+          "coverageLabel": "Deckung/Dose",
+          "cansLabel": "Benötigte Dosen",
           "worked": {
             "title": "Rechenbeispiel",
             "formula": "Formel"
           }
         },
         "realWorldScale": {
-          "title": "Echte Oberflächen, von einer Murmel bis zu einem Stadion",
-          "intro": "Reale Oberflächen, die mehr als sieben Größenordnungen umspannen — nur eine logarithmische Skala hält sie alle gemeinsam lesbar.",
+          "title": "Wo die Live-Oberfläche tatsächlich liegt",
+          "intro": "Die Live-Oberfläche platziert zwischen realen Referenzoberflächen über mehr als fünf Größenordnungen hinweg — nur eine logarithmische Skala hält eine Murmel und ein Haus auf derselben Linie lesbar.",
           "items": {
             "marble": "Murmel",
             "basketball": "Basketball",
             "refrigerator": "Kühlschrank",
             "car": "Auto",
-            "house": "Haus",
-            "stadium": "Stadiondach"
+            "house": "Haus"
           },
           "worked": {
             "title": "Rechenbeispiel",
-            "spanNote": "Mehr als sieben Größenordnungen auseinander"
+            "liveArea": "Live-Oberfläche",
+            "closest": "Nächste reale Entsprechung"
+          }
+        },
+        "formulaDiagram": {
+          "title": "Die eigene Formel des Live-Körpers, ausgefüllt",
+          "intro": "Die reale Oberflächenformel für {shape}, mit ihren eigenen aktuellen Abmessungen direkt in jedes Feld eingesetzt.",
+          "totalLabel": "Gesamt",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "shape": "Form",
+            "total": "Gesamtoberfläche"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Welcher Körper die meiste Oberfläche hat",
+          "intro": "Alle sechs Körper nach Oberfläche eingeordnet, ausgewertet bei derselben live berechneten Länge ({length}) wie der aktuell gewählte Körper.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "topShape": "Größter Körper",
+            "vsSphere": "Mal so groß wie eine gleich große Kugel"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Gleiche Größe, andere Form",
+          "intro": "Die reale, live berechnete Oberfläche des Körpers {shape}, direkt verglichen mit einem Würfel aus derselben charakteristischen Länge {length}.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "difference": "Oberflächenunterschied",
+            "winner": "Hat mehr Oberfläche"
+          }
+        },
+        "surfaceToVolume": {
+          "title": "Oberfläche im Verhältnis zum Volumen",
+          "intro": "Das reale Verhältnis von Oberfläche zu Volumen des Live-Körpers — die physikalische Größe dahinter, warum kleine Objekte Wärme weit schneller verlieren oder aufnehmen als große.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "area": "Oberfläche",
+            "volume": "Volumen",
+            "ratio": "Verhältnis (Fläche:Volumen)"
+          },
+          "zones": {
+            "volumeDominated": "Volumendominiert (groß)",
+            "surfaceDominated": "Oberflächendominiert (klein)"
+          }
+        },
+        "compactnessZone": {
+          "title": "Wie nah an einer perfekten Kugel",
+          "intro": "Die dreidimensionale isoperimetrische Kompaktheit des Live-Körpers — die Kugel ist die einzige Form, die ein gegebenes Volumen mit der geringstmöglichen Oberfläche umschließt, jede andere Form erreicht weniger als 100 %.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "volume": "Volumen",
+            "compactness": "Kompaktheit"
+          },
+          "zones": {
+            "angular": "Kantig",
+            "sphereLike": "Kugelähnlich"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Was ein 20%iger Messfehler tatsächlich kostet",
+          "intro": "Die reale Oberfläche des Live-Körpers, wenn jede seiner eigenen Abmessungen tatsächlich 20 % kleiner oder 20 % größer gemessen würde.",
+          "smallerLabel": "20 % kleiner",
+          "currentLabel": "Aktuell",
+          "largerLabel": "20 % größer",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "swing": "Schwankung durch einen 20%-Fehler",
+            "note": "Ein linearer Messfehler wirkt sich auf die Oberfläche etwa doppelt so stark aus."
+          }
+        },
+        "scaleCurve": {
+          "title": "Die Oberfläche wächst mit dem Quadrat des Maßstabs",
+          "intro": "Die eigene Oberfläche des Live-Körpers, während jede Abmessung gemeinsam von der Hälfte bis zum Doppelten der aktuellen Größe skaliert wird — eine stetige Kurve, nie eine Gerade.",
+          "ariaLabel": "Eine Kurve der Oberfläche gegenüber dem Skalierungsfaktor, mit dem live markierten aktuellen Punkt",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "half": "Bei 0,5× Maßstab",
+            "current": "Bei 1× Maßstab (jetzt)",
+            "double": "Bei 2× Maßstab",
+            "note": "Vervierfacht, nicht verdoppelt"
+          }
+        },
+        "doublingSteps": {
+          "title": "Jede Abmessung zu verdoppeln vervierfacht die Oberfläche",
+          "intro": "Die eigene Oberfläche des Live-Körpers bei seiner aktuellen Größe, dann beim Doppelten und beim Vierfachen jeder seiner Abmessungen.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "oneX": "Bei 1× (jetzt)",
+            "fourX": "Bei 4×",
+            "note": "16-fache, nicht 4-fache Oberfläche"
+          }
+        },
+        "compositeFlow": {
+          "title": "Wie viel Oberfläche N identische Kopien brauchen",
+          "intro": "Die eigene Oberfläche des Live-Körpers {shape}, multipliziert mit so vielen identischen Kopien, wie ein reales Lackier- oder Fertigungsprojekt tatsächlich benötigen würde.",
+          "countChip": "{count}×",
+          "oneLabel": "Ein Körper",
+          "countLabel": "Kopien",
+          "totalLabel": "Gesamtoberfläche",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "computationSteps": {
+          "title": "Die realen Schritte hinter der Oberfläche dieses Körpers",
+          "intro": "Die tatsächliche Abfolge der Operationen, die der Rechner für den live aktiven Körper ausführt, wobei jede Station ihren eigenen realen Zwischenwert trägt.",
+          "stations": {
+            "given": "Gegebene Abmessungen",
+            "square": "Quadrieren",
+            "sixFaces": "× 6 Seiten",
+            "pairProducts": "Flächenpaare summieren",
+            "double": "× 2",
+            "fourPi": "× 4π",
+            "sum": "Radius und Höhe addieren",
+            "twoPiR": "× 2πr",
+            "slant": "Mantellinie bestimmen",
+            "piR": "× πr",
+            "baseArea": "Grundfläche quadrieren",
+            "addTriangles": "Die 4 Dreiecksflächen addieren"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "total": "Gesamtoberfläche"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Die beiden bestimmenden Abmessungen des Live-Körpers",
+          "intro": "Die beiden realen Zahlen, die die Größe des aktuellen Körpers tatsächlich bestimmen, direkt verglichen — nicht angenommen, sondern direkt aus den Live-Werten gelesen.",
+          "labels": {
+            "side": "Seite",
+            "length": "Länge",
+            "height": "Höhe",
+            "radius": "Radius",
+            "baseSide": "Grundseite",
+            "none": "—"
+          },
+          "singleDimension": "Körper mit nur einer Abmessung",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "larger": "Tatsächlich größer",
+            "note": "Hinweis",
+            "onlyOneDimension": "Dieser Körper hat nur eine bestimmende Abmessung"
           }
         }
       },

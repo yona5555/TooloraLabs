@@ -13,6 +13,7 @@ import SurfaceAreaInputPanel from "./SurfaceAreaInputPanel";
 import SurfaceAreaResult from "./SurfaceAreaResult";
 import SurfaceAreaQuickReference from "./SurfaceAreaQuickReference";
 import { emptySolid3DDraft, type Solid3DDraft } from "./types";
+import { SurfaceAreaLiveProvider } from "./SurfaceAreaLiveContext";
 
 const tool = new SurfaceAreaCalculatorTool();
 
@@ -70,7 +71,7 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
   ];
 
   return (
-    <>
+    <SurfaceAreaLiveProvider value={{ dims: draft, setDim: (key, value) => setDraft((prev) => ({ ...prev, [key]: value })) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<SurfaceAreaInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} />}
@@ -94,6 +95,6 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
       </div>
 
       {education}
-    </>
+    </SurfaceAreaLiveProvider>
   );
 }

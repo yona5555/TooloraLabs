@@ -5,20 +5,20 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import SurfaceAreaNetDrag from "./SurfaceAreaNetDrag";
+import ActiveShapeFormulaDiagram from "./ActiveShapeFormulaDiagram";
 import ShapeFamilyTable from "./ShapeFamilyTable";
-import CubeFormulaDiagram from "./CubeFormulaDiagram";
-import RectangularPrismFaceBreakdown from "./RectangularPrismFaceBreakdown";
-import SphereFormulaDiagram from "./SphereFormulaDiagram";
-import CylinderFormulaDiagram from "./CylinderFormulaDiagram";
-import ConeFormulaDiagram from "./ConeFormulaDiagram";
-import SquarePyramidFormulaDiagram from "./SquarePyramidFormulaDiagram";
-import CubeNetFoldingSteps from "./CubeNetFoldingSteps";
-import UnitConversionEquivalence from "./UnitConversionEquivalence";
+import ComputationStepsTimeline from "./ComputationStepsTimeline";
+import DimensionComparisonCards from "./DimensionComparisonCards";
 import ShapeSurfaceAreaComparisonBarChart from "./ShapeSurfaceAreaComparisonBarChart";
-import DoublingDimensionsEffect from "./DoublingDimensionsEffect";
-import SphereVsCubeEfficiency from "./SphereVsCubeEfficiency";
+import SameSizeDifferentShapeBalance from "./SameSizeDifferentShapeBalance";
 import SurfaceToVolumeRatioZoneStrip from "./SurfaceToVolumeRatioZoneStrip";
+import IsoperimetricCompactnessZone from "./IsoperimetricCompactnessZone";
+import DimensionSensitivityTrio from "./DimensionSensitivityTrio";
+import SurfaceAreaVsScaleFactorCurve from "./SurfaceAreaVsScaleFactorCurve";
+import SurfaceAreaDoublingStepsDiagram from "./SurfaceAreaDoublingStepsDiagram";
+import CompositeSurfaceAreaFlowDiagram from "./CompositeSurfaceAreaFlowDiagram";
 import PaintCoverageFlowDiagram from "./PaintCoverageFlowDiagram";
+import UnitConversionEquivalence from "./UnitConversionEquivalence";
 import RealWorldSurfaceAreaScaleBar from "./RealWorldSurfaceAreaScaleBar";
 
 type ExampleRow = { calculation: string; result: string };
@@ -40,15 +40,17 @@ export default async function SurfaceAreaEducation() {
         <p>{t("intro.paragraph1")}</p>
         <SurfaceAreaNetDrag />
         <p>{t("intro.paragraph2")}</p>
-        <ShapeFamilyTable />
+        <div className="space-y-6">
+          <ActiveShapeFormulaDiagram />
+          <ComputationStepsTimeline />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("basicFormulas.title")}>
         <p>{t("basicFormulas.intro")}</p>
         <div className="space-y-6">
-          <CubeFormulaDiagram />
-          <RectangularPrismFaceBreakdown />
-          <SphereFormulaDiagram />
+          <ShapeFamilyTable />
+          <DimensionComparisonCards />
         </div>
       </InfoSection>
 
@@ -57,10 +59,10 @@ export default async function SurfaceAreaEducation() {
       <InfoSection title={t("moreFormulas.title")}>
         <p>{t("moreFormulas.intro")}</p>
         <div className="space-y-6">
-          <CylinderFormulaDiagram />
-          <ConeFormulaDiagram />
-          <SquarePyramidFormulaDiagram />
-          <CubeNetFoldingSteps />
+          <ShapeSurfaceAreaComparisonBarChart />
+          <SameSizeDifferentShapeBalance />
+          <SurfaceToVolumeRatioZoneStrip />
+          <IsoperimetricCompactnessZone />
         </div>
       </InfoSection>
 
@@ -74,7 +76,11 @@ export default async function SurfaceAreaEducation() {
             </div>
           ))}
         </dl>
-        <UnitConversionEquivalence />
+        <div className="space-y-6">
+          <DimensionSensitivityTrio />
+          <SurfaceAreaVsScaleFactorCurve />
+          <SurfaceAreaDoublingStepsDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -98,8 +104,8 @@ export default async function SurfaceAreaEducation() {
           </table>
         </div>
         <div className="space-y-6">
-          <ShapeSurfaceAreaComparisonBarChart />
-          <DoublingDimensionsEffect />
+          <CompositeSurfaceAreaFlowDiagram />
+          <PaintCoverageFlowDiagram />
         </div>
       </InfoSection>
 
@@ -114,9 +120,7 @@ export default async function SurfaceAreaEducation() {
           ))}
         </div>
         <div className="space-y-6">
-          <SphereVsCubeEfficiency />
-          <SurfaceToVolumeRatioZoneStrip />
-          <PaintCoverageFlowDiagram />
+          <UnitConversionEquivalence />
           <RealWorldSurfaceAreaScaleBar />
         </div>
       </InfoSection>

@@ -2,44 +2,43 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { SurfaceAreaCalculator } from "@tooloralabs/tools";
+import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
+import { parseSurfaceDims, computeSurfaceAreaFor, round } from "./surfaceAreaEducationMath";
 
-const tool = new SurfaceAreaCalculator();
-const SIDE_METERS = 2;
-const METERS_TO_FEET = 3.28084;
+const M2_TO_FT2 = 10.7639;
+const M2_TO_IN2 = 1550.0031;
 
-function round2(n: number): number {
-  return Math.round(n * 100) / 100;
-}
-
-/** Type #11 (Side-by-Side Equivalence): a real storage box's surface area, measured once in meters and once in feet — since area scales with length squared, the conversion factor for surface area is the square of the linear factor. */
+/** Type #11 (Side-by-Side Equivalence): the live total surface area re-expressed in square feet and square inches — the same real quantity, three different units a visitor might actually need. */
 export default function UnitConversionEquivalence() {
   const t = useTranslations("tools.surface-area-calculator.education.unitConversion");
-  const metersOut = tool.execute({ shape: "cube", side: SIDE_METERS }, { locale: "en-US" });
-  const sideFeet = round2(SIDE_METERS * METERS_TO_FEET);
-  const feetOut = tool.execute({ shape: "cube", side: sideFeet }, { locale: "en-US" });
-  if (!metersOut.success || metersOut.data.error || !feetOut.success || feetOut.data.error) return null;
+  const { dims } = useSurfaceAreaLive();
+  const n = parseSurfaceDims(dims);
+  const m2 = computeSurfaceAreaFor(n);
+  const ft2 = m2 * M2_TO_FT2;
+  const in2 = m2 * M2_TO_IN2;
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-3">
-        <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-5 py-3 text-center dark:border-zinc-700 dark:bg-zinc-800/40">
-          <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${round2(metersOut.data.surfaceArea)} m²`}</p>
-          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{`s = ${SIDE_METERS}m`}</p>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-3">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
+            <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${round(m2)} m²`}</p>
+          </div>
+          <span className="text-lg font-bold text-zinc-400">=</span>
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-3 text-center dark:border-emerald-500/30 dark:bg-emerald-500/10">
+            <p className="font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{`${round(ft2)} ft²`}</p>
+          </div>
+          <span className="text-lg font-bold text-zinc-400">=</span>
+          <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-3 text-center dark:border-amber-500/30 dark:bg-amber-500/10">
+            <p className="font-mono text-lg font-bold text-amber-700 dark:text-amber-300">{`${round(in2, 0)} in²`}</p>
+          </div>
         </div>
-        <span className="text-xl font-bold text-zinc-400 dark:text-zinc-500">=</span>
-        <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-5 py-3 text-center dark:border-zinc-700 dark:bg-zinc-800/40">
-          <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${round2(feetOut.data.surfaceArea)} ft²`}</p>
-          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{`s = ${sideFeet}ft`}</p>
-        </div>
-      </div>
-      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: t("worked.linearFactor"), value: `1 m = ${METERS_TO_FEET} ft` },
-            { label: t("worked.areaFactor"), value: `${round2(METERS_TO_FEET ** 2)}`, emphasize: true, note: t("worked.note") },
+            { label: t("worked.factor"), value: `× ${M2_TO_FT2}` },
+            { label: t("worked.result"), value: `${round(ft2)} ft²`, emphasize: true },
           ]}
         />
       </div>

@@ -12915,36 +12915,21 @@
           "readOriginal": "Read The Works of Archimedes"
         },
         "hero": {
-          "lengthLabel": "Length",
-          "heightLabel": "Height",
-          "widthLabel": "Width",
-          "totalLabel": "Total surface area",
-          "ariaLabel": "Interactive net diagram of a rectangular prism — drag the blue point to resize length and height",
-          "faceTooltip": "{face}: {value}",
-          "hint": "Drag the blue point to resize the box. Hover any face to see its own area.",
-          "faces": {
-            "front": "Front",
-            "back": "Back",
-            "top": "Top",
-            "bottom": "Bottom",
-            "left": "Left",
-            "right": "Right"
-          }
+          "ariaLabel": "A live unfolded net for a {shape}, redrawn from its own real dimensions, with one or two draggable handles that control them directly",
+          "totalLabel": "Total Surface Area",
+          "hint": "Drag a handle, or edit the fields above — the net, its total surface area, and every indicator below all update live."
         },
         "shapeFamily": {
-          "title": "The Six Solids This Calculator Supports",
-          "intro": "Every solid below needs its own combination of dimensions, but each formula follows the same idea: add up the area of every face.",
-          "shapes": {
-            "cube": "Cube",
-            "rectangularPrism": "Rectangular Prism",
-            "sphere": "Sphere",
-            "cylinder": "Cylinder",
-            "cone": "Cone",
-            "squarePyramid": "Square Pyramid"
-          },
-          "dimsTag": "{count} dimension(s)",
+          "title": "All Six Solids, Ranked at the Same Size",
+          "intro": "Every solid this calculator supports, each evaluated at the same live characteristic length ({length}) as the one you currently have selected — the active row is tagged.",
           "columnShape": "Solid",
-          "columnFormula": "Formula"
+          "columnArea": "Surface Area",
+          "activeTag": "Active",
+          "worked": {
+            "title": "Worked Example",
+            "length": "Characteristic length used",
+            "winner": "Largest surface area at this length"
+          }
         },
         "basicFormulas": {
           "title": "Basic Surface Area Formulas",
@@ -12954,172 +12939,182 @@
           "title": "More Surface Area Formulas",
           "intro": "Three more solids that need a derived slant height or a wrap-around lateral surface — plus a look at how a flat net folds into a closed cube."
         },
-        "cubeFormula": {
-          "title": "Cube: Six Identical Squares",
-          "intro": "A cube's surface area is simply six copies of the same square face.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Surface area"
-          }
-        },
-        "sphereFormula": {
-          "title": "Sphere: Four Times the Great Circle",
-          "intro": "A sphere's surface area is exactly four times the area of its own great circle — a real geometric fact, not an approximation.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "greatCircle": "One great circle",
-            "greatCircleNote": "The circle exactly around the sphere's widest point",
-            "result": "Surface area"
-          }
-        },
-        "cylinderFormula": {
-          "title": "Cylinder: Two Caps Plus a Wrapped Label",
-          "intro": "A cylinder's surface splits into two circular caps and one rectangular label that wraps around it — the label's width is the circle's own circumference, unrolled flat.",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "caps": "Both caps",
-            "capsNote": "Two circles, each πr²",
-            "lateral": "Lateral surface",
-            "lateralNote": "The unrolled label, 2πr wide and h tall",
-            "result": "Surface area"
-          }
-        },
-        "coneFormula": {
-          "title": "Cone: Base Plus a Derived Slant Height",
-          "intro": "A cone's surface adds a circular base to a curved lateral surface — but the lateral formula needs the slant height, not the perpendicular height this tool actually asks for, so it's derived via the Pythagorean theorem.",
-          "worked": {
-            "title": "Worked Example",
-            "slantFormula": "Slant height",
-            "base": "Base",
-            "lateral": "Lateral surface",
-            "result": "Surface area"
-          }
-        },
-        "pyramidFormula": {
-          "title": "Square Pyramid: Base Plus Four Triangles",
-          "intro": "A square pyramid adds one square base to four identical triangular sides — like the cone, the triangles need a slant height derived from the perpendicular height and half the base.",
-          "worked": {
-            "title": "Worked Example",
-            "slantFormula": "Slant height",
-            "base": "Base",
-            "oneTriangle": "One triangular face",
-            "triangleNote": "There are four of these, all identical",
-            "result": "Surface area"
-          }
-        },
-        "prismBreakdown": {
-          "title": "Rectangular Prism: Three Real Face Pairs",
-          "intro": "A box with length {l}, width {w}, and height {h} has three pairs of opposite faces — each pair genuinely different in size unless two dimensions happen to match.",
-          "worked": {
-            "title": "Worked Example",
-            "topBottom": "Top + bottom",
-            "frontBack": "Front + back",
-            "leftRight": "Left + right",
-            "total": "Total surface area"
-          }
-        },
-        "netFolding": {
-          "title": "Watching a Net Fold Into a Cube",
-          "intro": "The same six real squares, tracked through the physical stations of folding a flat net into a closed cube — the total surface area never changes, only its shape does.",
-          "stations": {
-            "flat": "Flat net",
-            "fold1": "First fold",
-            "fold2": "Second fold",
-            "fold3": "Third fold",
-            "closed": "Closed cube"
-          },
-          "worked": {
-            "title": "Worked Example",
-            "perFace": "Area per face",
-            "faceCount": "Number of faces",
-            "total": "Total surface area",
-            "invariantNote": "Folding never adds or removes any area"
-          }
-        },
         "unitConversion": {
-          "title": "Same Box, Two Units",
-          "intro": "A real storage box's surface area, measured once in meters and once in feet — since area scales with length squared, the conversion factor for surface area is the square of the linear factor.",
+          "title": "The Live Surface Area in Other Units",
+          "intro": "The exact same real surface area, re-expressed in square feet and square inches — figures a visitor planning a real project would actually need.",
           "worked": {
             "title": "Worked Example",
-            "linearFactor": "Linear conversion",
-            "areaFactor": "Area conversion factor",
-            "note": "Squaring the linear factor gives the area factor"
-          }
-        },
-        "shapeComparison": {
-          "title": "Cube vs. Sphere at Matched Size",
-          "intro": "A cube and a sphere both built from a {dim}-unit characteristic size — shape alone changes the surface area substantially, even at matched size.",
-          "cubeLabel": "Cube",
-          "sphereLabel": "Sphere",
-          "worked": {
-            "title": "Worked Example"
-          }
-        },
-        "doublingEffect": {
-          "title": "Doubling a Dimension Quadruples the Area",
-          "intro": "Doubling a cube's side doesn't double its surface area — every formula on this page scales with dimensions squared, so doubling one length always quadruples the corresponding area.",
-          "worked": {
-            "title": "Worked Example",
-            "ratio": "Area ratio",
-            "note": "2² = 4, exactly"
-          }
-        },
-        "sphereVsCube": {
-          "title": "Same Volume, Less Surface",
-          "intro": "A cube and a sphere holding the exact same real volume of {volume} cubic units — the sphere always needs less surface area to enclose it, the reason bubbles and planets are spherical.",
-          "sphereLabel": "Sphere",
-          "cubeLabel": "Cube",
-          "worked": {
-            "title": "Worked Example",
-            "radius": "Matching sphere radius",
-            "sphereArea": "Sphere surface area",
-            "cubeArea": "Cube surface area",
-            "note": "Less surface for the same volume — maximum efficiency"
-          }
-        },
-        "svRatio": {
-          "title": "Surface-to-Volume Ratio",
-          "intro": "A cube's real surface-to-volume ratio (6s² ÷ s³ = 6/s) across six doublings of size — the reason a snowflake melts in seconds while an iceberg lasts for years.",
-          "zones": {
-            "high": "High ratio",
-            "medium": "Medium ratio",
-            "low": "Low ratio"
-          },
-          "worked": {
-            "title": "Worked Example",
-            "small": "Smallest cube",
-            "large": "Largest cube",
-            "note": "Smaller objects have dramatically more surface relative to their own volume"
+            "factor": "Conversion factor",
+            "result": "Result"
           }
         },
         "paintCoverage": {
-          "title": "From Surface Area to Paint Needed",
-          "intro": "A real storage cube's total surface area, divided by a real paint can's coverage rate — the actual reason this calculator matters outside a classroom.",
+          "title": "How Many Cans of Paint This Would Actually Take",
+          "intro": "The live surface area divided by a real paint can's coverage rate — a practical materials estimate, not just an abstract number.",
           "areaLabel": "Surface area",
-          "coverageLabel": "Coverage rate",
-          "resultLabel": "Paint needed",
+          "coverageLabel": "Coverage/can",
+          "cansLabel": "Cans needed",
           "worked": {
             "title": "Worked Example",
             "formula": "Formula"
           }
         },
         "realWorldScale": {
-          "title": "Real Surface Areas, From a Marble to a Stadium",
-          "intro": "Real-world surface areas spanning more than seven orders of magnitude — only a log scale keeps every one of them readable together.",
+          "title": "Where the Live Surface Area Actually Sits",
+          "intro": "The live surface area placed among real-world reference surface areas spanning more than five orders of magnitude — only a log scale keeps a marble and a house readable on the same line.",
           "items": {
             "marble": "Marble",
             "basketball": "Basketball",
             "refrigerator": "Refrigerator",
             "car": "Car",
-            "house": "House",
-            "stadium": "Stadium roof"
+            "house": "House"
           },
           "worked": {
             "title": "Worked Example",
-            "spanNote": "More than seven orders of magnitude apart"
+            "liveArea": "Live surface area",
+            "closest": "Closest real-world match"
+          }
+        },
+        "formulaDiagram": {
+          "title": "The Live Solid's Own Formula, Filled In",
+          "intro": "The real surface-area formula for a {shape}, with its own current dimensions substituted directly into each box.",
+          "totalLabel": "Total",
+          "worked": {
+            "title": "Worked Example",
+            "shape": "Shape",
+            "total": "Total surface area"
+          }
+        },
+        "shapeAreaBars": {
+          "title": "Which Solid Has the Most Surface Area",
+          "intro": "All six solids ranked by surface area, evaluated at the same live length ({length}) as the one you currently have selected.",
+          "worked": {
+            "title": "Worked Example",
+            "topShape": "Largest solid",
+            "vsSphere": "Times the surface area of a same-size sphere"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Same Size, Different Shape",
+          "intro": "The live {shape}'s own surface area, measured head-to-head against a cube built from the same {length} characteristic length.",
+          "worked": {
+            "title": "Worked Example",
+            "difference": "Surface-area difference",
+            "winner": "Has more surface area"
+          }
+        },
+        "surfaceToVolume": {
+          "title": "Surface Area Relative to Volume",
+          "intro": "The live solid's real surface-area-to-volume ratio — the physical quantity behind why small objects lose or gain heat far faster than large ones.",
+          "worked": {
+            "title": "Worked Example",
+            "area": "Surface area",
+            "volume": "Volume",
+            "ratio": "Ratio (area:volume)"
+          },
+          "zones": {
+            "volumeDominated": "Volume-dominated (large)",
+            "surfaceDominated": "Surface-dominated (small)"
+          }
+        },
+        "compactnessZone": {
+          "title": "How Close to a Perfect Sphere",
+          "intro": "The 3D isoperimetric compactness of the live solid — the sphere is the one shape that encloses a given volume with the least possible surface area, so every other shape scores below 100%.",
+          "worked": {
+            "title": "Worked Example",
+            "volume": "Volume",
+            "compactness": "Compactness"
+          },
+          "zones": {
+            "angular": "Angular",
+            "sphereLike": "Sphere-like"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "What a 20% Measurement Error Would Actually Cost",
+          "intro": "The live solid's real surface area if every one of its own dimensions were measured 20% smaller or 20% larger than they actually are.",
+          "smallerLabel": "20% smaller",
+          "currentLabel": "Current",
+          "largerLabel": "20% larger",
+          "worked": {
+            "title": "Worked Example",
+            "swing": "Swing from a 20% error",
+            "note": "A linear measurement error gets roughly doubled in its effect on surface area."
+          }
+        },
+        "scaleCurve": {
+          "title": "Surface Area Grows with the Square of Scale",
+          "intro": "The live solid's own surface area as every dimension is scaled together from half to double its current size — a continuous curve, never a straight line.",
+          "ariaLabel": "A curve of surface area versus scale factor, with the live current point marked",
+          "worked": {
+            "title": "Worked Example",
+            "half": "At 0.5× scale",
+            "current": "At 1× scale (now)",
+            "double": "At 2× scale",
+            "note": "Quadrupled, not doubled"
+          }
+        },
+        "doublingSteps": {
+          "title": "Doubling Every Dimension Quadruples the Surface Area",
+          "intro": "The live solid's own surface area at its current size, then at twice and four times every one of its dimensions.",
+          "worked": {
+            "title": "Worked Example",
+            "oneX": "At 1× (now)",
+            "fourX": "At 4×",
+            "note": "16 times the original surface area, not 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "How Much Surface Area N Identical Copies Would Need",
+          "intro": "The live {shape}'s own surface area, multiplied by however many identical copies a real batch-coating or manufacturing job would actually need.",
+          "countChip": "{count}×",
+          "oneLabel": "One solid",
+          "countLabel": "Copies",
+          "totalLabel": "Total surface area",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "computationSteps": {
+          "title": "The Real Steps Behind This Solid's Surface Area",
+          "intro": "The actual sequence of operations the calculator runs for the live active solid, each station carrying its own real intermediate value.",
+          "stations": {
+            "given": "Given dimensions",
+            "square": "Square it",
+            "sixFaces": "× 6 faces",
+            "pairProducts": "Sum the face pairs",
+            "double": "× 2",
+            "fourPi": "× 4π",
+            "sum": "Add radius and height",
+            "twoPiR": "× 2πr",
+            "slant": "Find the slant height",
+            "piR": "× πr",
+            "baseArea": "Square the base",
+            "addTriangles": "Add the 4 triangular faces"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "total": "Total surface area"
+          }
+        },
+        "dimensionCompare": {
+          "title": "The Live Solid's Two Defining Dimensions",
+          "intro": "The two real numbers that actually define the current solid's size, compared directly — not assumed, read straight from the live values.",
+          "labels": {
+            "side": "Side",
+            "length": "Length",
+            "height": "Height",
+            "radius": "Radius",
+            "baseSide": "Base side",
+            "none": "—"
+          },
+          "singleDimension": "Single-dimension solid",
+          "worked": {
+            "title": "Worked Example",
+            "larger": "Actually larger",
+            "note": "Note",
+            "onlyOneDimension": "This solid has only one defining dimension"
           }
         }
       },
