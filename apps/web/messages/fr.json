@@ -13352,6 +13352,207 @@
           "note": "La démonstration originale d'Archimède selon laquelle le volume d'une sphère équivaut aux deux tiers de celui du cylindre qui la circonscrit — le résultat complémentaire, dans le même traité, à la relation de surface citée par le Calculateur de surface de ce site.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Lire les Œuvres d'Archimède"
+        },
+        "hero": {
+          "ariaLabel": "Une esquisse 3D en direct d'un {shape}, redessinée à partir de ses propres dimensions réelles, avec une ou deux poignées déplaçables qui les contrôlent directement",
+          "volumeLabel": "Volume",
+          "hint": "Faites glisser une poignée, ou modifiez les champs ci-dessus — le solide, son volume et chaque indicateur ci-dessous se mettent à jour en direct."
+        },
+        "shapeFamilySection": {
+          "title": "Les six solides, une référence",
+          "intro": "Chaque solide pris en charge par cette calculatrice, avec sa propre formule réelle de volume et ses dimensions."
+        },
+        "comparisonsSection": {
+          "title": "Comparer les solides",
+          "intro": "Le volume brut seul peut tromper lorsque les solides diffèrent en forme — ces quatre indicateurs comparent le volume équitablement, le mettent à l'échelle, et mesurent à quel point chaque forme enferme réellement l'espace efficacement."
+        },
+        "formulaDiagram": {
+          "title": "La formule propre du solide en direct, complétée",
+          "intro": "La formule réelle du volume pour {shape}, avec ses propres dimensions actuelles substituées directement dans chaque case.",
+          "volumeLabel": "Volume",
+          "worked": {
+            "title": "Exemple résolu",
+            "shape": "Forme",
+            "volume": "Volume"
+          }
+        },
+        "shapeFamily": {
+          "title": "Les six solides, classés à la même taille",
+          "intro": "Chaque solide pris en charge par cette calculatrice, évalué à la même longueur caractéristique en direct ({length}) que le solide actuellement sélectionné — la ligne active est marquée.",
+          "columnShape": "Solide",
+          "columnVolume": "Volume",
+          "activeTag": "Actif",
+          "worked": {
+            "title": "Exemple résolu",
+            "length": "Longueur caractéristique utilisée",
+            "winner": "Volume le plus grand à cette longueur"
+          }
+        },
+        "shapeVolumeBars": {
+          "title": "Quel solide contient le plus de volume",
+          "intro": "Les six solides classés par volume, tous évalués à la même longueur en direct ({length}) que le solide actuellement sélectionné.",
+          "worked": {
+            "title": "Exemple résolu",
+            "topShape": "Solide le plus grand",
+            "vsCone": "Fois le volume d'un cône de même taille"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Même taille, forme différente",
+          "intro": "Le volume réel en direct du solide {shape}, comparé directement à un cube construit avec la même longueur caractéristique {length}.",
+          "worked": {
+            "title": "Exemple résolu",
+            "difference": "Différence de volume",
+            "winner": "Contient plus de volume"
+          }
+        },
+        "volumeToSurface": {
+          "title": "Volume contenu par unité de surface",
+          "intro": "Combien de volume réel le solide en direct contient par unité de sa propre surface — les solides plus grands contiennent un volume disproportionnellement plus important par unité de limite que les petits, car le volume croît plus vite que la surface à mesure que la taille augmente.",
+          "worked": {
+            "title": "Exemple résolu",
+            "volume": "Volume",
+            "area": "Surface",
+            "ratio": "Rapport (volume:surface)"
+          },
+          "zones": {
+            "thin": "Fin (peu de volume par unité)",
+            "chunky": "Massif (beaucoup de volume par unité)"
+          }
+        },
+        "compactnessZone": {
+          "title": "À quel point il contient efficacement son propre volume",
+          "intro": "L'efficacité isopérimétrique 3D du solide en direct — la sphère est la seule forme qui renferme un volume donné avec la plus petite surface possible, donc toute autre forme obtient moins de 100 %.",
+          "worked": {
+            "title": "Exemple résolu",
+            "volume": "Volume",
+            "efficiency": "Efficacité de remplissage"
+          },
+          "zones": {
+            "wasteful": "Peu efficace",
+            "efficient": "Efficace"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Ce que coûterait réellement une erreur de mesure de 20 %",
+          "intro": "Le volume réel du solide en direct si chacune de ses propres dimensions était mesurée 20 % plus petite ou 20 % plus grande qu'elle ne l'est réellement — le volume est bien plus sensible à l'erreur de mesure que la surface.",
+          "smallerLabel": "20 % plus petit",
+          "currentLabel": "Actuel",
+          "largerLabel": "20 % plus grand",
+          "worked": {
+            "title": "Exemple résolu",
+            "swing": "Rapport, plus grand ÷ plus petit",
+            "note": "Une erreur linéaire de 20 % fait varier le volume d'environ ±50 %, pas ±20 %."
+          }
+        },
+        "scaleCurve": {
+          "title": "Le volume croît avec le cube de l'échelle",
+          "intro": "Le volume propre du solide en direct à mesure que chaque dimension est mise à l'échelle ensemble, de la moitié au double de sa taille actuelle — le volume croît encore plus vite que la surface, avec le point actuel en direct marqué sur la courbe.",
+          "ariaLabel": "Une courbe du volume en fonction du facteur d'échelle, avec le point actuel en direct marqué",
+          "worked": {
+            "title": "Exemple résolu",
+            "half": "À l'échelle 0,5×",
+            "current": "À l'échelle 1× (maintenant)",
+            "double": "À l'échelle 2×",
+            "note": "Multiplié par huit, pas quadruplé"
+          }
+        },
+        "doublingSteps": {
+          "title": "Doubler chaque dimension multiplie le volume par huit",
+          "intro": "Le volume propre du solide en direct à sa taille actuelle, puis au double et au quadruple de chacune de ses dimensions.",
+          "worked": {
+            "title": "Exemple résolu",
+            "oneX": "À 1× (maintenant)",
+            "fourX": "À 4×",
+            "note": "64 fois le volume d'origine, pas 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "Combien de volume N copies identiques nécessiteraient",
+          "intro": "Le volume propre du solide {shape} en direct, multiplié par le nombre de copies identiques qu'un véritable projet de stockage ou d'emballage nécessiterait réellement.",
+          "countChip": "{count}×",
+          "oneLabel": "Un solide",
+          "countLabel": "Copies",
+          "totalLabel": "Volume total",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "capacityFlow": {
+          "title": "Combien de contenants cela remplirait réellement",
+          "intro": "Le volume en direct (en litres) divisé par la capacité réelle d'un contenant — une estimation pratique d'emballage ou de stockage, pas un nombre abstrait.",
+          "litersLabel": "Volume",
+          "containerLabel": "Contenant",
+          "countLabel": "Contenants nécessaires",
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule"
+          }
+        },
+        "computationSteps": {
+          "title": "Les étapes réelles derrière le volume de ce solide",
+          "intro": "La séquence réelle d'opérations que la calculatrice exécute pour le solide actif en direct, chaque étape portant sa propre valeur intermédiaire réelle.",
+          "stations": {
+            "given": "Dimensions données",
+            "cube": "Élever au cube",
+            "multiply": "Multiplier",
+            "timesHeight": "× hauteur",
+            "cubeIt": "Élever au cube",
+            "fourThirdsPi": "× (4/3)π",
+            "square": "Élever au carré",
+            "piTimesH": "× πh",
+            "oneThirdPiH": "× (1/3)πh",
+            "oneThirdH": "× (1/3)h"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "volume": "Volume"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Les deux dimensions déterminantes du solide en direct",
+          "intro": "Les deux nombres réels qui déterminent réellement la taille du solide actuel, comparés directement — non supposés, lus directement à partir des valeurs en direct.",
+          "labels": {
+            "side": "Côté",
+            "length": "Longueur",
+            "height": "Hauteur",
+            "radius": "Rayon",
+            "baseSide": "Côté de la base",
+            "none": "—"
+          },
+          "singleDimension": "Solide à une seule dimension",
+          "worked": {
+            "title": "Exemple résolu",
+            "larger": "Réellement plus grand",
+            "note": "Remarque",
+            "onlyOneDimension": "Ce solide n'a qu'une seule dimension déterminante"
+          }
+        },
+        "unitConversion": {
+          "title": "Le volume en direct dans d'autres unités",
+          "intro": "Exactement le même volume réel, réexprimé en litres et en gallons américains — des chiffres dont un visiteur planifiant un projet réel aurait réellement besoin.",
+          "worked": {
+            "title": "Exemple résolu",
+            "factor": "Facteur de conversion",
+            "result": "Résultat"
+          }
+        },
+        "realWorldScale": {
+          "title": "Où se situe réellement le volume en direct",
+          "intro": "Le volume en direct placé parmi des volumes de référence du monde réel couvrant plus de sept ordres de grandeur — seule une échelle logarithmique garde une cuillère à café et une piscine lisibles sur la même ligne.",
+          "items": {
+            "teaspoon": "Cuillère à café",
+            "bottle": "Bouteille de 2 litres",
+            "bathtub": "Baignoire",
+            "car": "Voiture (intérieur)",
+            "pool": "Piscine"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "liveVolume": "Volume en direct",
+            "closest": "Correspondance réelle la plus proche"
+          }
         }
       },
       "relatedTools": {

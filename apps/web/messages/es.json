@@ -13352,6 +13352,207 @@
           "note": "La demostración original de Arquímedes de que el volumen de una esfera equivale a dos tercios del volumen del cilindro que la circunscribe — el resultado complementario, en el mismo tratado, a la relación de superficie citada por la Calculadora de área de superficie de este sitio.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Leer Las obras de Arquímedes"
+        },
+        "hero": {
+          "ariaLabel": "Un boceto 3D en vivo de {shape}, redibujado a partir de sus propias dimensiones reales, con uno o dos controles arrastrables que las gobiernan directamente",
+          "volumeLabel": "Volumen",
+          "hint": "Arrastra un control, o edita los campos de arriba — el sólido, su volumen y cada indicador de abajo se actualizan en vivo."
+        },
+        "shapeFamilySection": {
+          "title": "Los seis sólidos, una referencia",
+          "intro": "Cada sólido que esta calculadora admite, con su propia fórmula real de volumen y sus dimensiones."
+        },
+        "comparisonsSection": {
+          "title": "Comparando sólidos",
+          "intro": "El volumen bruto por sí solo puede engañar cuando los sólidos difieren en forma — estos cuatro indicadores comparan el volumen de forma justa, lo escalan y miden qué tan eficientemente encierra espacio cada forma realmente."
+        },
+        "formulaDiagram": {
+          "title": "La propia fórmula del sólido en vivo, completada",
+          "intro": "La fórmula real del volumen para {shape}, con sus propias dimensiones actuales sustituidas directamente en cada casilla.",
+          "volumeLabel": "Volumen",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "shape": "Forma",
+            "volume": "Volumen"
+          }
+        },
+        "shapeFamily": {
+          "title": "Los seis sólidos, clasificados al mismo tamaño",
+          "intro": "Cada sólido que esta calculadora admite, evaluado con la misma longitud característica en vivo ({length}) que el sólido actualmente seleccionado — la fila activa está etiquetada.",
+          "columnShape": "Sólido",
+          "columnVolume": "Volumen",
+          "activeTag": "Activo",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "length": "Longitud característica usada",
+            "winner": "Mayor volumen a esta longitud"
+          }
+        },
+        "shapeVolumeBars": {
+          "title": "Qué sólido contiene más volumen",
+          "intro": "Los seis sólidos clasificados por volumen, todos evaluados con la misma longitud en vivo ({length}) que el sólido actualmente seleccionado.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "topShape": "Sólido mayor",
+            "vsCone": "Veces el volumen de un cono del mismo tamaño"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Mismo tamaño, forma diferente",
+          "intro": "El volumen real en vivo del sólido {shape}, comparado directamente con un cubo construido con la misma longitud característica {length}.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "difference": "Diferencia de volumen",
+            "winner": "Contiene más volumen"
+          }
+        },
+        "volumeToSurface": {
+          "title": "Volumen contenido por unidad de superficie",
+          "intro": "Cuánto volumen real contiene el sólido en vivo por cada unidad de su propia área de superficie — los sólidos más grandes contienen desproporcionadamente más volumen por unidad de límite que los pequeños, porque el volumen crece más rápido que la superficie a medida que aumenta el tamaño.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "volume": "Volumen",
+            "area": "Área de superficie",
+            "ratio": "Proporción (volumen:área)"
+          },
+          "zones": {
+            "thin": "Delgado (poco volumen por unidad)",
+            "chunky": "Macizo (mucho volumen por unidad)"
+          }
+        },
+        "compactnessZone": {
+          "title": "Qué tan eficientemente contiene su propio volumen",
+          "intro": "La eficiencia isoperimétrica 3D del sólido en vivo — la esfera es la única forma que encierra un volumen dado con la menor área de superficie posible, así que cualquier otra forma obtiene menos del 100 %.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "volume": "Volumen",
+            "efficiency": "Eficiencia de empaquetado"
+          },
+          "zones": {
+            "wasteful": "Ineficiente",
+            "efficient": "Eficiente"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Lo que realmente costaría un error de medición del 20 %",
+          "intro": "El volumen real del sólido en vivo si cada una de sus dimensiones se midiera un 20 % más pequeña o un 20 % más grande de lo que realmente es — el volumen es mucho más sensible al error de medición que el área.",
+          "smallerLabel": "20 % más pequeño",
+          "currentLabel": "Actual",
+          "largerLabel": "20 % más grande",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "swing": "Proporción, mayor ÷ menor",
+            "note": "Un error lineal del 20 % hace que el volumen varíe aproximadamente ±50 %, no ±20 %."
+          }
+        },
+        "scaleCurve": {
+          "title": "El volumen crece con el cubo de la escala",
+          "intro": "El volumen propio del sólido en vivo mientras cada dimensión se escala en conjunto desde la mitad hasta el doble de su tamaño actual — el volumen crece incluso más rápido que el área, con el punto actual en vivo marcado en la curva.",
+          "ariaLabel": "Una curva del volumen frente al factor de escala, con el punto actual en vivo marcado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "half": "A escala 0,5×",
+            "current": "A escala 1× (ahora)",
+            "double": "A escala 2×",
+            "note": "Se multiplica por ocho, no se cuadruplica"
+          }
+        },
+        "doublingSteps": {
+          "title": "Duplicar cada dimensión multiplica el volumen por ocho",
+          "intro": "El volumen propio del sólido en vivo en su tamaño actual, luego al doble y al cuádruple de cada una de sus dimensiones.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "oneX": "A 1× (ahora)",
+            "fourX": "A 4×",
+            "note": "64 veces el volumen original, no 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "Cuánto volumen necesitarían N copias idénticas",
+          "intro": "El volumen propio del sólido {shape} en vivo, multiplicado por el número de copias idénticas que realmente necesitaría un trabajo real de almacenamiento o empaquetado.",
+          "countChip": "{count}×",
+          "oneLabel": "Un sólido",
+          "countLabel": "Copias",
+          "totalLabel": "Volumen total",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "capacityFlow": {
+          "title": "Cuántos recipientes llenaría esto realmente",
+          "intro": "El volumen en vivo (en litros) dividido entre la capacidad real de un recipiente — una estimación práctica de empaquetado o almacenamiento, no un número abstracto.",
+          "litersLabel": "Volumen",
+          "containerLabel": "Recipiente",
+          "countLabel": "Recipientes necesarios",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula"
+          }
+        },
+        "computationSteps": {
+          "title": "Los pasos reales detrás del volumen de este sólido",
+          "intro": "La secuencia real de operaciones que ejecuta la calculadora para el sólido activo en vivo, cada estación con su propio valor intermedio real.",
+          "stations": {
+            "given": "Dimensiones dadas",
+            "cube": "Elevar al cubo",
+            "multiply": "Multiplicar",
+            "timesHeight": "× altura",
+            "cubeIt": "Elevar al cubo",
+            "fourThirdsPi": "× (4/3)π",
+            "square": "Elevar al cuadrado",
+            "piTimesH": "× πh",
+            "oneThirdPiH": "× (1/3)πh",
+            "oneThirdH": "× (1/3)h"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "volume": "Volumen"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Las dos dimensiones que definen el sólido en vivo",
+          "intro": "Los dos números reales que realmente definen el tamaño del sólido actual, comparados directamente — no asumidos, leídos directamente de los valores en vivo.",
+          "labels": {
+            "side": "Lado",
+            "length": "Longitud",
+            "height": "Altura",
+            "radius": "Radio",
+            "baseSide": "Lado de la base",
+            "none": "—"
+          },
+          "singleDimension": "Sólido de una sola dimensión",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "larger": "Realmente mayor",
+            "note": "Nota",
+            "onlyOneDimension": "Este sólido tiene solo una dimensión que lo define"
+          }
+        },
+        "unitConversion": {
+          "title": "El volumen en vivo en otras unidades",
+          "intro": "Exactamente el mismo volumen real, reexpresado en litros y galones estadounidenses — cifras que un visitante planeando un proyecto real realmente necesitaría.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "factor": "Factor de conversión",
+            "result": "Resultado"
+          }
+        },
+        "realWorldScale": {
+          "title": "Dónde se ubica realmente el volumen en vivo",
+          "intro": "El volumen en vivo situado entre volúmenes de referencia del mundo real que abarcan más de siete órdenes de magnitud — solo una escala logarítmica mantiene legibles una cucharadita y una piscina en la misma línea.",
+          "items": {
+            "teaspoon": "Cucharadita",
+            "bottle": "Botella de 2 litros",
+            "bathtub": "Bañera",
+            "car": "Coche (interior)",
+            "pool": "Piscina"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "liveVolume": "Volumen en vivo",
+            "closest": "Coincidencia real más cercana"
+          }
         }
       },
       "relatedTools": {

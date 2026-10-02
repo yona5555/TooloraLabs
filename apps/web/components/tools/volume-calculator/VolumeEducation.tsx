@@ -4,7 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import VolumeConceptDiagram from "./VolumeConceptDiagram";
+import VolumeShapeDrag from "./VolumeShapeDrag";
+import ActiveShapeFormulaDiagram from "./ActiveShapeFormulaDiagram";
+import ShapeFamilyTable from "./ShapeFamilyTable";
+import ComputationStepsTimeline from "./ComputationStepsTimeline";
+import DimensionComparisonCards from "./DimensionComparisonCards";
+import ShapeVolumeComparisonBarChart from "./ShapeVolumeComparisonBarChart";
+import SameSizeDifferentShapeBalance from "./SameSizeDifferentShapeBalance";
+import VolumeToSurfaceAreaRatioZone from "./VolumeToSurfaceAreaRatioZone";
+import IsoperimetricCompactnessZone from "./IsoperimetricCompactnessZone";
+import DimensionSensitivityTrio from "./DimensionSensitivityTrio";
+import VolumeVsScaleFactorCurve from "./VolumeVsScaleFactorCurve";
+import VolumeDoublingStepsDiagram from "./VolumeDoublingStepsDiagram";
+import CompositeVolumeFlowDiagram from "./CompositeVolumeFlowDiagram";
+import CapacityFlowDiagram from "./CapacityFlowDiagram";
+import UnitConversionEquivalence from "./UnitConversionEquivalence";
+import RealWorldVolumeScaleBar from "./RealWorldVolumeScaleBar";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -23,8 +38,32 @@ export default async function VolumeEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <VolumeShapeDrag />
         <p>{t("intro.paragraph2")}</p>
-        <VolumeConceptDiagram />
+        <div className="space-y-6">
+          <ActiveShapeFormulaDiagram />
+          <ComputationStepsTimeline />
+        </div>
+      </InfoSection>
+
+      <InfoSection title={t("shapeFamilySection.title")}>
+        <p>{t("shapeFamilySection.intro")}</p>
+        <div className="space-y-6">
+          <ShapeFamilyTable />
+          <DimensionComparisonCards />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <InfoSection title={t("comparisonsSection.title")}>
+        <p>{t("comparisonsSection.intro")}</p>
+        <div className="space-y-6">
+          <ShapeVolumeComparisonBarChart />
+          <SameSizeDifferentShapeBalance />
+          <VolumeToSurfaceAreaRatioZone />
+          <IsoperimetricCompactnessZone />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -37,6 +76,11 @@ export default async function VolumeEducation() {
             </div>
           ))}
         </dl>
+        <div className="space-y-6">
+          <DimensionSensitivityTrio />
+          <VolumeVsScaleFactorCurve />
+          <VolumeDoublingStepsDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -59,6 +103,10 @@ export default async function VolumeEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <CompositeVolumeFlowDiagram />
+          <CapacityFlowDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -71,9 +119,11 @@ export default async function VolumeEducation() {
             </div>
           ))}
         </div>
+        <div className="space-y-6">
+          <UnitConversionEquivalence />
+          <RealWorldVolumeScaleBar />
+        </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />

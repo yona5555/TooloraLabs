@@ -13352,6 +13352,207 @@
           "note": "Archimedes' original proof that a sphere's volume equals two-thirds that of its circumscribing cylinder — the companion result, in the same treatise, to the surface-area relationship cited by this site's Surface Area Calculator.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Read The Works of Archimedes"
+        },
+        "hero": {
+          "ariaLabel": "A live 3D sketch of a {shape}, redrawn from its own real dimensions, with one or two draggable handles that control them directly",
+          "volumeLabel": "Volume",
+          "hint": "Drag a handle, or edit the fields above — the solid, its volume, and every indicator below all update live."
+        },
+        "shapeFamilySection": {
+          "title": "All Six Solids, One Reference",
+          "intro": "Every solid this calculator supports, with its own real volume formula and dimensions."
+        },
+        "comparisonsSection": {
+          "title": "Comparing Solids",
+          "intro": "Raw volume alone can mislead when solids differ in shape — these four indicators compare volume fairly, scale it, and measure how efficiently each shape actually encloses space."
+        },
+        "formulaDiagram": {
+          "title": "The Live Solid's Own Formula, Filled In",
+          "intro": "The real volume formula for a {shape}, with its own current dimensions substituted directly into each box.",
+          "volumeLabel": "Volume",
+          "worked": {
+            "title": "Worked Example",
+            "shape": "Shape",
+            "volume": "Volume"
+          }
+        },
+        "shapeFamily": {
+          "title": "All Six Solids, Ranked at the Same Size",
+          "intro": "Every solid this calculator supports, each evaluated at the same live characteristic length ({length}) as the one you currently have selected — the active row is tagged.",
+          "columnShape": "Solid",
+          "columnVolume": "Volume",
+          "activeTag": "Active",
+          "worked": {
+            "title": "Worked Example",
+            "length": "Characteristic length used",
+            "winner": "Largest volume at this length"
+          }
+        },
+        "shapeVolumeBars": {
+          "title": "Which Solid Encloses the Most Volume",
+          "intro": "All six solids ranked by volume, evaluated at the same live length ({length}) as the one you currently have selected.",
+          "worked": {
+            "title": "Worked Example",
+            "topShape": "Largest solid",
+            "vsCone": "Times the volume of a same-size cone"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Same Size, Different Shape",
+          "intro": "The live {shape}'s own volume, measured head-to-head against a cube built from the same {length} characteristic length.",
+          "worked": {
+            "title": "Worked Example",
+            "difference": "Volume difference",
+            "winner": "Encloses more volume"
+          }
+        },
+        "volumeToSurface": {
+          "title": "Volume Packed Per Unit of Surface",
+          "intro": "How much real volume the live solid packs in for every unit of its own surface area — larger solids pack in disproportionately more volume per unit of boundary than small ones, since volume outgrows surface area as size increases.",
+          "worked": {
+            "title": "Worked Example",
+            "volume": "Volume",
+            "area": "Surface area",
+            "ratio": "Ratio (volume:area)"
+          },
+          "zones": {
+            "thin": "Thin (little volume per unit)",
+            "chunky": "Chunky (lots of volume per unit)"
+          }
+        },
+        "compactnessZone": {
+          "title": "How Efficiently It Packs Its Own Volume",
+          "intro": "The live solid's 3D isoperimetric efficiency — the sphere is the one shape that encloses a given volume using the least possible surface area, so every other shape scores below 100%.",
+          "worked": {
+            "title": "Worked Example",
+            "volume": "Volume",
+            "efficiency": "Packing efficiency"
+          },
+          "zones": {
+            "wasteful": "Wasteful",
+            "efficient": "Efficient"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "What a 20% Measurement Error Would Actually Cost",
+          "intro": "The live solid's real volume if every one of its own dimensions were measured 20% smaller or 20% larger than they actually are — volume is far more sensitive to measurement error than area is.",
+          "smallerLabel": "20% smaller",
+          "currentLabel": "Current",
+          "largerLabel": "20% larger",
+          "worked": {
+            "title": "Worked Example",
+            "swing": "Ratio, larger ÷ smaller",
+            "note": "A 20% linear error swings volume by roughly ±50%, not ±20%."
+          }
+        },
+        "scaleCurve": {
+          "title": "Volume Grows with the Cube of Scale",
+          "intro": "The live solid's own volume as every dimension is scaled together from half to double its current size — volume grows even faster than area, with the real current point marked on the curve.",
+          "ariaLabel": "A curve of volume versus scale factor, with the live current point marked",
+          "worked": {
+            "title": "Worked Example",
+            "half": "At 0.5× scale",
+            "current": "At 1× scale (now)",
+            "double": "At 2× scale",
+            "note": "Eight times, not quadrupled"
+          }
+        },
+        "doublingSteps": {
+          "title": "Doubling Every Dimension Multiplies Volume by Eight",
+          "intro": "The live solid's own volume at its current size, then at twice and four times every one of its dimensions.",
+          "worked": {
+            "title": "Worked Example",
+            "oneX": "At 1× (now)",
+            "fourX": "At 4×",
+            "note": "64 times the original volume, not 4"
+          }
+        },
+        "compositeFlow": {
+          "title": "How Much Volume N Identical Copies Would Need",
+          "intro": "The live {shape}'s own volume, multiplied by however many identical copies a real storage or packaging job would actually need.",
+          "countChip": "{count}×",
+          "oneLabel": "One solid",
+          "countLabel": "Copies",
+          "totalLabel": "Total volume",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "capacityFlow": {
+          "title": "How Many Containers This Would Actually Fill",
+          "intro": "The live volume (in liters) divided by a real container's capacity — a practical packaging or storage estimate, not just an abstract number.",
+          "litersLabel": "Volume",
+          "containerLabel": "Container",
+          "countLabel": "Containers",
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula"
+          }
+        },
+        "computationSteps": {
+          "title": "The Real Steps Behind This Solid's Volume",
+          "intro": "The actual sequence of operations the calculator runs for the live active solid, each station carrying its own real intermediate value.",
+          "stations": {
+            "given": "Given dimensions",
+            "cube": "Cube it",
+            "multiply": "Multiply",
+            "timesHeight": "× height",
+            "cubeIt": "Cube it",
+            "fourThirdsPi": "× (4/3)π",
+            "square": "Square it",
+            "piTimesH": "× πh",
+            "oneThirdPiH": "× (1/3)πh",
+            "oneThirdH": "× (1/3)h"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "volume": "Volume"
+          }
+        },
+        "dimensionCompare": {
+          "title": "The Live Solid's Two Defining Dimensions",
+          "intro": "The two real numbers that actually define the current solid's size, compared directly — not assumed, read straight from the live values.",
+          "labels": {
+            "side": "Side",
+            "length": "Length",
+            "height": "Height",
+            "radius": "Radius",
+            "baseSide": "Base side",
+            "none": "—"
+          },
+          "singleDimension": "Single-dimension solid",
+          "worked": {
+            "title": "Worked Example",
+            "larger": "Actually larger",
+            "note": "Note",
+            "onlyOneDimension": "This solid has only one defining dimension"
+          }
+        },
+        "unitConversion": {
+          "title": "The Live Volume in Other Units",
+          "intro": "The exact same real volume, re-expressed in liters and US gallons — figures a visitor planning a real project would actually need.",
+          "worked": {
+            "title": "Worked Example",
+            "factor": "Conversion factor",
+            "result": "Result"
+          }
+        },
+        "realWorldScale": {
+          "title": "Where the Live Volume Actually Sits",
+          "intro": "The live volume placed among real-world reference volumes spanning more than seven orders of magnitude — only a log scale keeps a teaspoon and a swimming pool readable on the same line.",
+          "items": {
+            "teaspoon": "Teaspoon",
+            "bottle": "2-liter bottle",
+            "bathtub": "Bathtub",
+            "car": "Car (interior)",
+            "pool": "Swimming pool"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "liveVolume": "Live volume",
+            "closest": "Closest real-world match"
+          }
         }
       },
       "relatedTools": {

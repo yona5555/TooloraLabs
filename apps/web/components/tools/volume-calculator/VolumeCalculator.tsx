@@ -13,6 +13,7 @@ import VolumeInputPanel from "./VolumeInputPanel";
 import VolumeResult from "./VolumeResult";
 import VolumeQuickReference from "./VolumeQuickReference";
 import { emptySolid3DDraft, type Solid3DDraft } from "./types";
+import { VolumeLiveProvider } from "./VolumeLiveContext";
 
 const tool = new VolumeCalculatorTool();
 
@@ -70,7 +71,7 @@ export default function VolumeCalculator({ education }: { education: ReactNode }
   ];
 
   return (
-    <>
+    <VolumeLiveProvider value={{ dims: draft, setDim: (key, value) => setDraft((prev) => ({ ...prev, [key]: value })) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<VolumeInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} />}
@@ -94,6 +95,6 @@ export default function VolumeCalculator({ education }: { education: ReactNode }
       </div>
 
       {education}
-    </>
+    </VolumeLiveProvider>
   );
 }

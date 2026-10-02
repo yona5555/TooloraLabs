@@ -13352,6 +13352,207 @@
           "note": "Archimedes' ursprünglicher Beweis, dass das Volumen einer Kugel zwei Drittel des Volumens ihres umschreibenden Zylinders beträgt — das zu derselben Abhandlung gehörende Gegenstück zu der Oberflächenbeziehung, die im Oberflächenrechner dieser Website zitiert wird.",
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Die Werke des Archimedes lesen"
+        },
+        "hero": {
+          "ariaLabel": "Eine live 3D-Skizze eines {shape}, aus seinen eigenen realen Abmessungen neu gezeichnet, mit ein oder zwei ziehbaren Griffen, die sie direkt steuern",
+          "volumeLabel": "Volumen",
+          "hint": "Ziehe einen Griff oder bearbeite die Felder oben — der Körper, sein Volumen und jeder Indikator unten aktualisieren sich live."
+        },
+        "shapeFamilySection": {
+          "title": "Alle sechs Körper, eine Übersicht",
+          "intro": "Jeder von diesem Rechner unterstützte Körper, mit seiner eigenen realen Volumenformel und seinen Abmessungen."
+        },
+        "comparisonsSection": {
+          "title": "Körper vergleichen",
+          "intro": "Das reine Volumen allein kann täuschen, wenn sich Körper in der Form unterscheiden — diese vier Indikatoren vergleichen das Volumen fair, skalieren es und messen, wie effizient jede Form tatsächlich Raum einschließt."
+        },
+        "formulaDiagram": {
+          "title": "Die eigene Formel des Live-Körpers, ausgefüllt",
+          "intro": "Die reale Volumenformel für {shape}, mit ihren eigenen aktuellen Abmessungen direkt in jedes Feld eingesetzt.",
+          "volumeLabel": "Volumen",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "shape": "Form",
+            "volume": "Volumen"
+          }
+        },
+        "shapeFamily": {
+          "title": "Alle sechs Körper, bei gleicher Größe eingeordnet",
+          "intro": "Jeder von diesem Rechner unterstützte Körper, jeweils bei derselben live berechneten charakteristischen Länge ({length}) wie der aktuell gewählte Körper ausgewertet — die aktive Zeile ist markiert.",
+          "columnShape": "Körper",
+          "columnVolume": "Volumen",
+          "activeTag": "Aktiv",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "length": "Verwendete charakteristische Länge",
+            "winner": "Größtes Volumen bei dieser Länge"
+          }
+        },
+        "shapeVolumeBars": {
+          "title": "Welcher Körper das meiste Volumen fasst",
+          "intro": "Alle sechs Körper nach Volumen eingeordnet, ausgewertet bei derselben live berechneten Länge ({length}) wie der aktuell gewählte Körper.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "topShape": "Größter Körper",
+            "vsCone": "Mal so groß wie ein gleich großer Kegel"
+          }
+        },
+        "sameSizeBalance": {
+          "title": "Gleiche Größe, andere Form",
+          "intro": "Das reale, live berechnete Volumen des Körpers {shape}, direkt verglichen mit einem Würfel aus derselben charakteristischen Länge {length}.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "difference": "Volumenunterschied",
+            "winner": "Fasst mehr Volumen"
+          }
+        },
+        "volumeToSurface": {
+          "title": "Volumen pro Oberflächeneinheit",
+          "intro": "Wie viel reales Volumen der Live-Körper pro Einheit seiner eigenen Oberfläche fasst — größere Körper fassen unverhältnismäßig mehr Volumen pro Oberflächeneinheit als kleine, weil das Volumen mit zunehmender Größe schneller wächst als die Oberfläche.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "volume": "Volumen",
+            "area": "Oberfläche",
+            "ratio": "Verhältnis (Volumen:Fläche)"
+          },
+          "zones": {
+            "thin": "Dünn (wenig Volumen pro Einheit)",
+            "chunky": "Massig (viel Volumen pro Einheit)"
+          }
+        },
+        "compactnessZone": {
+          "title": "Wie effizient es sein eigenes Volumen fasst",
+          "intro": "Die dreidimensionale isoperimetrische Effizienz des Live-Körpers — die Kugel ist die einzige Form, die ein gegebenes Volumen mit der geringstmöglichen Oberfläche umschließt, jede andere Form erreicht weniger als 100 %.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "volume": "Volumen",
+            "efficiency": "Packeffizienz"
+          },
+          "zones": {
+            "wasteful": "Verschwenderisch",
+            "efficient": "Effizient"
+          }
+        },
+        "sensitivityTrio": {
+          "title": "Was ein 20%iger Messfehler tatsächlich kostet",
+          "intro": "Das reale Volumen des Live-Körpers, wenn jede seiner eigenen Abmessungen tatsächlich 20 % kleiner oder 20 % größer gemessen würde — Volumen reagiert weit empfindlicher auf Messfehler als Fläche.",
+          "smallerLabel": "20 % kleiner",
+          "currentLabel": "Aktuell",
+          "largerLabel": "20 % größer",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "swing": "Verhältnis, größer ÷ kleiner",
+            "note": "Ein linearer 20%-Fehler lässt das Volumen um etwa ±50 % schwanken, nicht ±20 %."
+          }
+        },
+        "scaleCurve": {
+          "title": "Das Volumen wächst mit dem Kubus des Maßstabs",
+          "intro": "Das eigene Volumen des Live-Körpers, während jede Abmessung gemeinsam von der Hälfte bis zum Doppelten der aktuellen Größe skaliert wird — Volumen wächst sogar noch schneller als Fläche, mit dem live markierten aktuellen Punkt auf der Kurve.",
+          "ariaLabel": "Eine Kurve des Volumens gegenüber dem Skalierungsfaktor, mit dem live markierten aktuellen Punkt",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "half": "Bei 0,5× Maßstab",
+            "current": "Bei 1× Maßstab (jetzt)",
+            "double": "Bei 2× Maßstab",
+            "note": "Verachtfacht, nicht vervierfacht"
+          }
+        },
+        "doublingSteps": {
+          "title": "Jede Abmessung zu verdoppeln verachtfacht das Volumen",
+          "intro": "Das eigene Volumen des Live-Körpers bei seiner aktuellen Größe, dann beim Doppelten und beim Vierfachen jeder seiner Abmessungen.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "oneX": "Bei 1× (jetzt)",
+            "fourX": "Bei 4×",
+            "note": "64-faches, nicht 4-faches Volumen"
+          }
+        },
+        "compositeFlow": {
+          "title": "Wie viel Volumen N identische Kopien brauchen",
+          "intro": "Das eigene Volumen des Live-Körpers {shape}, multipliziert mit so vielen identischen Kopien, wie ein reales Lager- oder Verpackungsprojekt tatsächlich benötigen würde.",
+          "countChip": "{count}×",
+          "oneLabel": "Ein Körper",
+          "countLabel": "Kopien",
+          "totalLabel": "Gesamtvolumen",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "capacityFlow": {
+          "title": "Wie viele Behälter das tatsächlich füllen würde",
+          "intro": "Das Live-Volumen (in Litern) geteilt durch das reale Fassungsvermögen eines Behälters — eine praktische Verpackungs- oder Lagerschätzung, keine abstrakte Zahl.",
+          "litersLabel": "Volumen",
+          "containerLabel": "Behälter",
+          "countLabel": "Behälter benötigt",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel"
+          }
+        },
+        "computationSteps": {
+          "title": "Die realen Schritte hinter dem Volumen dieses Körpers",
+          "intro": "Die tatsächliche Abfolge der Operationen, die der Rechner für den live aktiven Körper ausführt, wobei jede Station ihren eigenen realen Zwischenwert trägt.",
+          "stations": {
+            "given": "Gegebene Abmessungen",
+            "cube": "Kubieren",
+            "multiply": "Multiplizieren",
+            "timesHeight": "× Höhe",
+            "cubeIt": "Kubieren",
+            "fourThirdsPi": "× (4/3)π",
+            "square": "Quadrieren",
+            "piTimesH": "× πh",
+            "oneThirdPiH": "× (1/3)πh",
+            "oneThirdH": "× (1/3)h"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "volume": "Volumen"
+          }
+        },
+        "dimensionCompare": {
+          "title": "Die beiden bestimmenden Abmessungen des Live-Körpers",
+          "intro": "Die beiden realen Zahlen, die die Größe des aktuellen Körpers tatsächlich bestimmen, direkt verglichen — nicht angenommen, sondern direkt aus den Live-Werten gelesen.",
+          "labels": {
+            "side": "Seite",
+            "length": "Länge",
+            "height": "Höhe",
+            "radius": "Radius",
+            "baseSide": "Grundseite",
+            "none": "—"
+          },
+          "singleDimension": "Körper mit nur einer Abmessung",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "larger": "Tatsächlich größer",
+            "note": "Hinweis",
+            "onlyOneDimension": "Dieser Körper hat nur eine bestimmende Abmessung"
+          }
+        },
+        "unitConversion": {
+          "title": "Das Live-Volumen in anderen Einheiten",
+          "intro": "Exakt dasselbe reale Volumen, neu ausgedrückt in Litern und US-Gallonen — Werte, die ein Besucher bei der Planung eines realen Projekts tatsächlich brauchen würde.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "factor": "Umrechnungsfaktor",
+            "result": "Ergebnis"
+          }
+        },
+        "realWorldScale": {
+          "title": "Wo das Live-Volumen tatsächlich liegt",
+          "intro": "Das Live-Volumen platziert zwischen realen Referenzvolumina über mehr als sieben Größenordnungen hinweg — nur eine logarithmische Skala hält einen Teelöffel und ein Schwimmbecken auf derselben Linie lesbar.",
+          "items": {
+            "teaspoon": "Teelöffel",
+            "bottle": "2-Liter-Flasche",
+            "bathtub": "Badewanne",
+            "car": "Auto (Innenraum)",
+            "pool": "Schwimmbecken"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "liveVolume": "Live-Volumen",
+            "closest": "Nächste reale Entsprechung"
+          }
         }
       },
       "relatedTools": {
