@@ -29,17 +29,17 @@ export default function MedianEvenOddDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { count })}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-1.5 font-mono text-sm">
-        {sorted.map((v, i) => {
-          const isMiddle = isOdd ? i === midIndex : i === midIndex || i === midIndex + 1;
-          return (
-            <span key={i} className={`rounded-lg px-2 py-1.5 transition-colors duration-300 ${isMiddle ? "bg-blue-600 font-bold text-white" : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"}`}>
-              {round2(v)}
-            </span>
-          );
-        })}
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-1.5 font-mono text-sm">
+          {sorted.map((v, i) => {
+            const isMiddle = isOdd ? i === midIndex : i === midIndex || i === midIndex + 1;
+            return (
+              <span key={i} className={`rounded-lg px-2 py-1.5 transition-colors duration-300 ${isMiddle ? "bg-blue-600 font-bold text-white" : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"}`}>
+                {round2(v)}
+              </span>
+            );
+          })}
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

@@ -26,14 +26,14 @@ export default function VarianceCalculationSteps() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center font-mono text-sm">
-        <span className="rounded-lg bg-zinc-100 px-2.5 py-1.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{t("worked.step1Short", { mean: round3(mean) })}</span>
-        <span className="text-zinc-300 dark:text-zinc-600">→</span>
-        <span className="rounded-lg bg-zinc-100 px-2.5 py-1.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{t("worked.step2Short", { sum: round3(sumSquaredDeviations) })}</span>
-        <span className="text-zinc-300 dark:text-zinc-600">→</span>
-        <span className="rounded-lg bg-emerald-50 px-2.5 py-1.5 font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">{t("worked.step3Short", { variance: round3(populationVariance) })}</span>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-2 text-center font-mono text-sm">
+          <span className="rounded-lg bg-zinc-100 px-2.5 py-1.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{t("worked.step1Short", { mean: round3(mean) })}</span>
+          <span className="text-zinc-300 dark:text-zinc-600">→</span>
+          <span className="rounded-lg bg-zinc-100 px-2.5 py-1.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{t("worked.step2Short", { sum: round3(sumSquaredDeviations) })}</span>
+          <span className="text-zinc-300 dark:text-zinc-600">→</span>
+          <span className="rounded-lg bg-emerald-50 px-2.5 py-1.5 font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400">{t("worked.step3Short", { variance: round3(populationVariance) })}</span>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

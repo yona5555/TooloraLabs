@@ -27,19 +27,19 @@ export default function StdDevZoneStrip() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-6 w-full">
-        <div className="relative h-3 w-full overflow-hidden rounded-full">
-          <div className="absolute inset-y-0 left-0 w-[16%] bg-amber-300/70 dark:bg-amber-500/50" />
-          <div className="absolute inset-y-0 left-[16%] w-[68%] bg-emerald-300/70 dark:bg-emerald-500/50" />
-          <div className="absolute inset-y-0 right-0 w-[16%] bg-amber-300/70 dark:bg-amber-500/50" />
+      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="w-full lg:flex-1">
+          <div className="relative h-3 w-full overflow-hidden rounded-full">
+            <div className="absolute inset-y-0 left-0 w-[16%] bg-amber-300/70 dark:bg-amber-500/50" />
+            <div className="absolute inset-y-0 left-[16%] w-[68%] bg-emerald-300/70 dark:bg-emerald-500/50" />
+            <div className="absolute inset-y-0 right-0 w-[16%] bg-amber-300/70 dark:bg-amber-500/50" />
+          </div>
+          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            <span>{"−σ"}</span>
+            <span>{t("zones.within1")}</span>
+            <span>{"+σ"}</span>
+          </div>
         </div>
-        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
-          <span>{"−σ"}</span>
-          <span>{t("zones.within1")}</span>
-          <span>{"+σ"}</span>
-        </div>
-      </div>
-      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

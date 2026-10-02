@@ -22,25 +22,25 @@ export default function ModeFrequencyTable() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[240px] border-collapse text-sm">
-          <thead>
-            <tr className="border-b border-zinc-200 text-start dark:border-zinc-700">
-              <th className="px-3 py-2 text-start font-semibold">{t("columnValue")}</th>
-              <th className="px-3 py-2 text-start font-semibold">{t("columnFrequency")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(([value, count]) => (
-              <tr key={value} className={`border-b border-zinc-100 dark:border-zinc-800 ${count === maxFreq && maxFreq > 1 ? "bg-blue-50 dark:bg-blue-500/10" : ""}`}>
-                <td className={`px-3 py-2 font-mono ${count === maxFreq && maxFreq > 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}>{round2(value)}</td>
-                <td className="px-3 py-2 font-mono">{count}</td>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="shrink-0 overflow-x-auto">
+          <table className="w-full min-w-[240px] border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-zinc-200 text-start dark:border-zinc-700">
+                <th className="px-3 py-2 text-start font-semibold">{t("columnValue")}</th>
+                <th className="px-3 py-2 text-start font-semibold">{t("columnFrequency")}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mt-4">
+            </thead>
+            <tbody>
+              {rows.map(([value, count]) => (
+                <tr key={value} className={`border-b border-zinc-100 dark:border-zinc-800 ${count === maxFreq && maxFreq > 1 ? "bg-blue-50 dark:bg-blue-500/10" : ""}`}>
+                  <td className={`px-3 py-2 font-mono ${count === maxFreq && maxFreq > 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}>{round2(value)}</td>
+                  <td className="px-3 py-2 font-mono">{count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.highestFrequency"), value: `${maxFreq}`, emphasize: true, note: maxFreq <= 1 ? t("worked.noMode") : undefined }]} />
       </div>
     </SectionCard>

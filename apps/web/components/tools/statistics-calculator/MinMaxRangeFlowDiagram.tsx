@@ -26,23 +26,23 @@ export default function MinMaxRangeFlowDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center">
-        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-500/30 dark:bg-blue-500/10">
-          <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(max)}</p>
-          <p className="text-xs text-blue-500/80">{t("maxLabel")}</p>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-2 text-center">
+          <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-500/30 dark:bg-blue-500/10">
+            <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(max)}</p>
+            <p className="text-xs text-blue-500/80">{t("maxLabel")}</p>
+          </div>
+          <span className="text-xl font-bold text-zinc-400">−</span>
+          <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 dark:border-rose-500/30 dark:bg-rose-500/10">
+            <p className="font-mono text-lg font-bold text-rose-700 dark:text-rose-300">{round2(min)}</p>
+            <p className="text-xs text-rose-500/80">{t("minLabel")}</p>
+          </div>
+          <ArrowRight className="shrink-0 text-zinc-400" size={20} />
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
+            <p className="font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{round2(range)}</p>
+            <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("rangeLabel")}</p>
+          </div>
         </div>
-        <span className="text-xl font-bold text-zinc-400">−</span>
-        <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 dark:border-rose-500/30 dark:bg-rose-500/10">
-          <p className="font-mono text-lg font-bold text-rose-700 dark:text-rose-300">{round2(min)}</p>
-          <p className="text-xs text-rose-500/80">{t("minLabel")}</p>
-        </div>
-        <ArrowRight className="shrink-0 text-zinc-400" size={20} />
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
-          <p className="font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{round2(range)}</p>
-          <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("rangeLabel")}</p>
-        </div>
-      </div>
-      <div className="mt-4">
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.formula"), value: `${round2(max)} − ${round2(min)} = ${round2(range)}`, emphasize: true }]} />
       </div>
     </SectionCard>

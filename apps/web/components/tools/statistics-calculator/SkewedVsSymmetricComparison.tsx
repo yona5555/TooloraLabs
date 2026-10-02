@@ -30,15 +30,17 @@ export default function SkewedVsSymmetricComparison() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="relative mt-5 h-2 rounded-full bg-zinc-200 dark:bg-zinc-700">
-        <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${meanPct}%` }} />
-        <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-emerald-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${medianPct}%` }} />
-      </div>
-      <div dir="ltr" className="mt-2 flex justify-between text-sm font-semibold">
-        <span className="text-blue-700 dark:text-blue-400">{`${t("meanLabel")}: ${round2(mean)}`}</span>
-        <span className="text-emerald-700 dark:text-emerald-400">{`${t("medianLabel")}: ${round2(median)}`}</span>
-      </div>
-      <div className="mt-4">
+      <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="w-full lg:flex-1">
+          <div className="relative h-2 rounded-full bg-zinc-200 dark:bg-zinc-700">
+            <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${meanPct}%` }} />
+            <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-emerald-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${medianPct}%` }} />
+          </div>
+          <div className="mt-2 flex justify-between text-sm font-semibold">
+            <span className="text-blue-700 dark:text-blue-400">{`${t("meanLabel")}: ${round2(mean)}`}</span>
+            <span className="text-emerald-700 dark:text-emerald-400">{`${t("medianLabel")}: ${round2(median)}`}</span>
+          </div>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

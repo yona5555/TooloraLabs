@@ -27,16 +27,16 @@ export default function SampleSizeVsPrecisionDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { n: count })}</p>
-      <div dir="ltr" className="mt-6 w-full">
-        <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
-          <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
+      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="w-full lg:flex-1">
+          <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
+            <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
+          </div>
+          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            <span>{t("zones.smallN")}</span>
+            <span>{t("zones.largeN")}</span>
+          </div>
         </div>
-        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
-          <span>{t("zones.smallN")}</span>
-          <span>{t("zones.largeN")}</span>
-        </div>
-      </div>
-      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
