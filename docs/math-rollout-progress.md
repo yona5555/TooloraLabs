@@ -82,7 +82,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 | 5 | statistics-calculator | done (v2) | 7101000, layout fix 8497ae5 (CI green) |
 | 6 | area-calculator | done (v2) | 65511c2 (CI green) |
 | 7 | surface-area-calculator | done (v2) | d1e2a40, area-calculator drag-bound fix 5b4ec58 (CI green) |
-| 8 | volume-calculator | not started (v2 from the start) | |
+| 8 | volume-calculator | done (v2) | 20e4348 (CI green after retrying a transient Google-Fonts build flake, unrelated to this change) |
 | 9 | step-by-step-math-solver | not started | |
 | 10 | matrix-calculator | not started | |
 | 11 | vector-calculator | not started | |
@@ -384,3 +384,53 @@ a visual type.
 time*: switching the shape selector left every solid but the page's own default (cube) with
 empty dimension fields. Fixed with `SHAPE_DEFAULTS` wired into the shape `<select>`'s `onChange`
 in `SurfaceAreaInputPanel.tsx`, mirroring area-calculator's fix exactly.
+
+**volume-calculator (tool 8, built v2 from the start):** this tool had no v1 at all — only a
+bare `VolumeEducation.tsx` with one static `VolumeConceptDiagram` existed before this session,
+no hero, no 15-indicator section. Built the entire structure from scratch, reusing the same
+`Solid3DDraft`/`Solid3DShape` plumbing as surface-area-calculator (identical 6 shapes, identical
+field names by design in the underlying engines) but with a genuinely different hero rendering
+approach: since volume has no flat "net" the way surface area does, the hero
+(`VolumeShapeDrag.tsx`) draws a pseudo-3D side-view sketch instead — a skewed-depth box for
+cube/rectangular-prism (reusing the exact depth-skew trick for both, `width`/`side` driving how
+far the top/right faces offset), an ellipse-capped cylinder (two `Ellipse` caps + a connecting
+rectangle), a triangular cone/pyramid silhouette with a single ellipse or flat base, and a plain
+circle for the sphere — all built from Mafs primitives already proven in the two prior tools
+(`Polygon`, `Circle`, `Ellipse`), never a literal 3D projection library.
+
+*Applied the area-calculator runaway-drag lesson proactively this time, not reactively*: both
+prior 3D-adjacent heroes (area-calculator, then surface-area-calculator) needed a real bug fix
+for unbounded `constrain` functions feeding back into a live-dimension-derived `viewBox`. This
+tool's hero was written with the `MAX_PRIMARY`/`MAX_SECONDARY` upper-bound clamps already in
+place from the very first draft — confirmed via the same drag-bound screenshot check (cube side
+clamped cleanly at 15, volume 3375 = 15³, no runaway) that caught the bug the first two times.
+
+*A second real bug caught and fixed before any i18n content was written, not after*: the first
+draft of `VolumeEducation.tsx` gave the "All Six Solids, One Reference" `InfoSection` header and
+the `ShapeFamilyTable` indicator component the SAME translation namespace
+(`education.shapeFamily`) — the section wrapper's own `t("shapeFamily.title")` call would have
+silently resolved to the exact same key as the indicator's internal `t("title")`
+(`tools.volume-calculator.education.shapeFamily.title`), so writing distinct content for each
+would have been impossible without one silently overwriting the other. Caught by reviewing the
+education file's own key usage before locking the i18n script, not by a failing test — renamed
+the two outer `InfoSection` wrapper namespaces to `shapeFamilySection`/`comparisonsSection` to
+keep them distinct from every indicator component's own namespace, the same discipline already
+used in area-calculator and surface-area-calculator (`basicFormulas`/`moreFormulas` as distinct
+section-level names, never reused by an indicator below them) — just not followed carefully
+enough on the first pass here.
+
+*Indicator set adapted around volume's own defining mathematical property — the CUBIC scaling
+law* (doubling every dimension multiplies volume by 8, not 4, and a 20% linear measurement error
+swings volume by roughly ±50%, not ±20%): the sensitivity trio, scale-factor curve, and doubling-
+steps indicators all state this explicitly with real computed numbers, not just by analogy to
+the area/surface-area tools' square-law versions. The volume-to-surface-area ratio and the 3D
+isoperimetric packing-efficiency indicators both reuse the existing `SurfaceAreaCalculator`
+engine directly (same `Solid3DShape` type, same field names) rather than re-deriving surface-area
+formulas a third time in this rollout.
+
+**CI note:** the first push's `Build web app` step failed in GitHub Actions on an unrelated
+`next/font/google` resolution error fetching Noto Sans Devanagari in `app/embed/[slug]/page.tsx`
+— a file this commit never touched, and the identical local build had just succeeded cleanly
+moments before pushing. Re-ran the same CI job (`gh run rerun --failed`) without any code change;
+it passed on the retry, confirming a transient Google Fonts network flake in the runner, not a
+real regression.
