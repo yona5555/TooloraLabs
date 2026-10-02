@@ -26,20 +26,20 @@ export default function PrecisionInstrumentsCards() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: dims.rawValueA })}</p>
-      <div dir="ltr" className="mt-4 grid grid-cols-2 gap-2.5">
-        {INSTRUMENTS.map((inst) => (
-          <div
-            key={inst.key}
-            className={`rounded-xl border p-3 text-center transition ${
-              inst.key === match.key ? "border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"
-            }`}
-          >
-            <p className={`text-xs font-semibold ${inst.key === match.key ? "text-blue-700 dark:text-blue-300" : "text-zinc-500 dark:text-zinc-400"}`}>{t(`instruments.${inst.key}`)}</p>
-            <p className="mt-1 font-mono text-[11px] text-zinc-400 dark:text-zinc-500">{t("decimalsLabel", { count: inst.minDecimals })}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="grid shrink-0 grid-cols-2 gap-2.5">
+          {INSTRUMENTS.map((inst) => (
+            <div
+              key={inst.key}
+              className={`rounded-xl border p-3 text-center transition ${
+                inst.key === match.key ? "border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"
+              }`}
+            >
+              <p className={`text-xs font-semibold ${inst.key === match.key ? "text-blue-700 dark:text-blue-300" : "text-zinc-500 dark:text-zinc-400"}`}>{t(`instruments.${inst.key}`)}</p>
+              <p className="mt-1 font-mono text-[11px] text-zinc-400 dark:text-zinc-500">{t("decimalsLabel", { count: inst.minDecimals })}</p>
+            </div>
+          ))}
+        </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.bestMatch"), value: t(`instruments.${match.key}`), emphasize: true }]} />
       </div>
     </SectionCard>

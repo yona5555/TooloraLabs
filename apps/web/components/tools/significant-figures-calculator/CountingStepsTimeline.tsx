@@ -18,21 +18,21 @@ export default function CountingStepsTimeline() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: dims.rawValueA })}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
-        {mask.map((entry, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span
-              className={`flex h-9 w-7 items-center justify-center rounded-lg font-mono text-base font-bold transition-colors duration-300 ${
-                entry.significant ? "bg-blue-600 text-white" : "border border-dashed border-zinc-300 text-zinc-400 dark:border-zinc-700 dark:text-zinc-600"
-              }`}
-            >
-              {entry.char}
-            </span>
-            {i === firstSignificantIndex && <span className="text-[9px] font-semibold text-blue-600 dark:text-blue-400">{t("startHere")}</span>}
-          </div>
-        ))}
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-1.5">
+          {mask.map((entry, i) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <span
+                className={`flex h-9 w-7 items-center justify-center rounded-lg font-mono text-base font-bold transition-colors duration-300 ${
+                  entry.significant ? "bg-blue-600 text-white" : "border border-dashed border-zinc-300 text-zinc-400 dark:border-zinc-700 dark:text-zinc-600"
+                }`}
+              >
+                {entry.char}
+              </span>
+              {i === firstSignificantIndex && <span className="text-[9px] font-semibold text-blue-600 dark:text-blue-400">{t("startHere")}</span>}
+            </div>
+          ))}
+        </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.totalCounted"), value: `${sigFigs}`, emphasize: true }]} />
       </div>
     </SectionCard>

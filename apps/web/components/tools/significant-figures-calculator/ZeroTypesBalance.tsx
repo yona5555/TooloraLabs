@@ -35,24 +35,24 @@ export default function ZeroTypesBalance() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: dims.rawValueA })}</p>
-      <div dir="ltr" className="mt-4 flex h-10 w-full overflow-hidden rounded-lg">
-        {counts.leading > 0 && (
-          <div className="flex items-center justify-center bg-zinc-400 text-xs font-bold text-white dark:bg-zinc-600" style={{ width: `${(counts.leading / total) * 100}%` }}>
-            {counts.leading}
-          </div>
-        )}
-        {counts.captive > 0 && (
-          <div className="flex items-center justify-center bg-blue-600 text-xs font-bold text-white" style={{ width: `${(counts.captive / total) * 100}%` }}>
-            {counts.captive}
-          </div>
-        )}
-        {counts.trailing > 0 && (
-          <div className="flex items-center justify-center bg-emerald-600 text-xs font-bold text-white" style={{ width: `${(counts.trailing / total) * 100}%` }}>
-            {counts.trailing}
-          </div>
-        )}
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="flex h-10 w-full overflow-hidden rounded-lg lg:flex-1">
+          {counts.leading > 0 && (
+            <div className="flex items-center justify-center bg-zinc-400 text-xs font-bold text-white dark:bg-zinc-600" style={{ width: `${(counts.leading / total) * 100}%` }}>
+              {counts.leading}
+            </div>
+          )}
+          {counts.captive > 0 && (
+            <div className="flex items-center justify-center bg-blue-600 text-xs font-bold text-white" style={{ width: `${(counts.captive / total) * 100}%` }}>
+              {counts.captive}
+            </div>
+          )}
+          {counts.trailing > 0 && (
+            <div className="flex items-center justify-center bg-emerald-600 text-xs font-bold text-white" style={{ width: `${(counts.trailing / total) * 100}%` }}>
+              {counts.trailing}
+            </div>
+          )}
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
