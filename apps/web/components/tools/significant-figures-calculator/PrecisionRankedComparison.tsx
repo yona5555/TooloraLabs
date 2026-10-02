@@ -1,30 +1,38 @@
 "use client";
 import { useTranslations } from "next-intl";
-import SectionCard from "@/components/tool-ui/SectionCard";
-import EduBarChart from "@/components/tool-ui/EduBarChart";
-import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { countSignificantFigures } from "@tooloralabs/tools";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useSignificantFiguresLive } from "./SignificantFiguresLiveContext";
 
-const READINGS = ["7.5", "7.50", "7.500", "7.5000"];
-
-/** Type #5 (Ranked Horizontal Bar List): four readings of the same physical quantity from four different instruments, ranked by how many significant figures each one actually reports — more digits after the same value means a more precise instrument, not a "more correct" one. */
+/** Type #5 (Ranked Horizontal Bar List): the live A and B ranked by real precision — whichever has fewer significant figures is the less precise measurement, regardless of which number looks bigger. */
 export default function PrecisionRankedComparison() {
   const t = useTranslations("tools.significant-figures-calculator.education.precisionRanked");
+  const { dims } = useSignificantFiguresLive();
+  if (dims.rawValueB.trim() === "") return null;
 
-  const rows = READINGS.map((r) => ({ label: r, count: countSignificantFigures(r) })).sort((a, b) => b.count - a.count);
-  const bars = rows.map((r, i) => ({ label: r.label, value: r.count, formatted: `${r.count}`, highlight: i === 0 }));
+  const rows = [
+    { key: "a", label: "A", raw: dims.rawValueA, sigFigs: countSignificantFigures(dims.rawValueA) },
+    { key: "b", label: "B", raw: dims.rawValueB, sigFigs: countSignificantFigures(dims.rawValueB) },
+  ].sort((x, y) => y.sigFigs - x.sigFigs);
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div className="shrink-0">
-          <EduBarChart bars={bars} ariaLabel={t("title")} />
-        </div>
-        <WorkedExampleNote
-          title={t("worked.title")}
-          rows={rows.map((r, i) => ({ label: r.label, value: t("worked.count", { count: r.count }), emphasize: i === 0, note: i === 0 ? t("worked.mostPrecise") : undefined }))}
-        />
+      <div dir="ltr" className="mt-4 space-y-2">
+        {rows.map((r, i) => (
+          <div key={r.key} className="flex items-center gap-3">
+            <span className="w-16 shrink-0 font-mono text-sm font-semibold text-zinc-600 dark:text-zinc-300">{`${r.label}: ${r.raw}`}</span>
+            <div className="h-6 flex-1 overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800">
+              <div className={`flex h-full items-center justify-end pe-2 text-xs font-bold text-white transition-all duration-300 ${i === 0 ? "bg-blue-600" : "bg-zinc-400 dark:bg-zinc-600"}`} style={{ width: `${(r.sigFigs / 8) * 100}%` }}>
+                {r.sigFigs}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4">
+        <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.morePrecise"), value: rows[0].label, emphasize: true }]} />
       </div>
     </SectionCard>
   );

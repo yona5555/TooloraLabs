@@ -69,7 +69,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 | 1 | scientific-calculator | done (v2) | 456a6e8 (CI green) |
 | 2 | fraction-calculator | done (v2) | d91a318 (CI green) |
 | 3 | scientific-notation-converter | done (v2) | a6bd5fe (CI green) |
-| 4 | significant-figures-calculator | needs v2 rebuild | — |
+| 4 | significant-figures-calculator | done (v2) | (pending push) |
 | 5 | statistics-calculator | needs v2 rebuild | — |
 | 6 | area-calculator | needs v2 rebuild | — |
 | 7 | surface-area-calculator | needs v2 rebuild | — |
@@ -196,3 +196,46 @@ A's current exponent explicitly in text, which is also better UX than relying on
 conditional tag. All 15/15 pass the generic dynamism test (single-point drag, toScientific mode)
 and gaps test; multiply-mode (two-point) behavior spot-checked manually and confirmed correct
 (A × B recomputes and renormalizes live).
+
+**significant-figures-calculator (tool 4, rebuilt to v2):** `rawValueA`/`rawValueB` are STRINGS
+here, not parsed numbers — significant figures are a property of how a number was *written*
+("100" vs "100." carry different precision despite being numerically equal), so the live context
+(`SignificantFiguresLiveContext.tsx`) keeps them as strings rather than following the earlier
+tools' pattern of storing parsed numbers. Reused the engine's own exported pure functions
+(`countSignificantFigures`, `countDecimalPlaces`, `roundToSigFigs`) directly in indicators rather
+than calling `execute()` for the ones that are really about digit structure, not a full
+calculation — matching the established "reuse already-exported pure functions" precedent from
+the original (v1) rollout. Kept `DigitSignificanceDisplay.tsx`'s own exported
+`computeDigitSignificance` (used above-fold) as a shared rendering utility, reused by both the
+hero and `CountingStepsTimeline`.
+
+*Same systemic empty-default bug as tool 3, caught before building indicators this time*: the
+default "count" and "round" operation modes had `valueB: ""` (empty), which would have made every
+B-dependent indicator (AddSubtractWorkedFlow, MultiplyDivideWorkedFlow, SigFigCountComparisonBarChart,
+PrecisionRankedComparison, SigFigsAfterOperationTable) silently vanish on the tool's own default
+page load. Fixed by giving `count`/`round` a real non-empty `valueB` default ("2.33") before
+writing any indicator that depends on it, rather than discovering it via a failing test run again.
+
+*Legitimately federated hero*: the hero drags `roundToDigits` (an integer precision target, 1-8)
+— a real, independently meaningful live dimension, but one essentially unrelated to most of these
+15 indicators' own topics (zero classification, decimal-vs-sigfig count, trailing-zero ambiguity,
+etc., which are about `rawValueA`'s own *written structure*, not about a chosen rounding target).
+Forcing all 15 to depend on `roundToDigits` would be the artificial §23 connection the rollout's
+own rule forbids. Only the hero itself and `RoundingRulesTable` (which explicitly highlights the
+current rounding level among five precomputed rows) are genuinely `roundToDigits`-aware; the
+other 14 are `rawValueA`/`rawValueB`-dependent. Used a tool-specific dynamism test
+(`dynamism-test-significant-figures-calculator.js`) verifying both real interaction paths: hero
+drag → hero + RoundingRulesTable change; editing the real `valueA` field → all 14 other
+A-dependent indicators change. All 15 pass. (The generic template's hero-signature selector also
+grabbed the wrong DOM sibling for this tool specifically — the digit-significance mask row sits
+between the badges and the Mafs canvas, so `canvas.previousElementSibling` caught the mask, not
+the badges; confirmed via direct inspection that the real badges did update correctly before
+concluding a tool-specific test — not a product bug — was needed.)
+
+*One computation kept deliberately separate from the engine's own `execute()`*:
+`ExactNumbersVsMeasuredNumbers` models an exact count (12, infinite implied precision) multiplied
+by the measured live A — the calculator's own multiply operation has no concept of "exact"
+inputs and would incorrectly apply `min(sigFigsA, sigFigsB)`, treating "12" as a 2-sig-fig
+measurement and corrupting the real answer. Computed directly with the exported `roundToSigFigs`
+using `sigFigsA` alone instead, rather than calling `execute()` and reporting a plausible-looking
+but actually wrong number.

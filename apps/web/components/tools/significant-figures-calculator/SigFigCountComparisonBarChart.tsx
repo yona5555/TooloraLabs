@@ -1,17 +1,24 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { countSignificantFigures } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { countSignificantFigures } from "@tooloralabs/tools";
+import { useSignificantFiguresLive } from "./SignificantFiguresLiveContext";
 
-const VALUES = ["3.0", "3.00", "3.000", "0.003"];
-
-/** Type #1 (Labeled Bar Chart): four numbers that look almost identical at a glance, compared by their real computed significant-figure count — three of them differ only by trailing zeros, yet each carries genuinely different precision. */
+/** Type #1 (Labeled Bar Chart): the live A and B's own significant-figure counts, ranked side by side — whichever is less precise sets the real limit for any calculation combining them. */
 export default function SigFigCountComparisonBarChart() {
-  const t = useTranslations("tools.significant-figures-calculator.education.countComparison");
+  const t = useTranslations("tools.significant-figures-calculator.education.sigFigCompare");
+  const { dims } = useSignificantFiguresLive();
+  if (dims.rawValueB.trim() === "") return null;
 
-  const bars = VALUES.map((v, i) => ({ label: v, value: countSignificantFigures(v), formatted: `${countSignificantFigures(v)}`, highlight: i === 2 }));
+  const sfA = countSignificantFigures(dims.rawValueA);
+  const sfB = countSignificantFigures(dims.rawValueB);
+  const rows = [
+    { key: "a", label: `A (${dims.rawValueA})`, value: sfA },
+    { key: "b", label: `B (${dims.rawValueB})`, value: sfB },
+  ].sort((x, y) => y.value - x.value);
+  const bars = rows.map((r, i) => ({ label: r.label, value: r.value, formatted: `${r.value}`, highlight: i === rows.length - 1 }));
 
   return (
     <SectionCard title={t("title")}>
@@ -20,10 +27,7 @@ export default function SigFigCountComparisonBarChart() {
         <div className="shrink-0">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
-        <WorkedExampleNote
-          title={t("worked.title")}
-          rows={VALUES.map((v) => ({ label: v, value: t("worked.count", { count: countSignificantFigures(v) }) }))}
-        />
+        <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.limitingFigure"), value: `${Math.min(sfA, sfB)}`, emphasize: true, note: t("worked.note") }]} />
       </div>
     </SectionCard>
   );

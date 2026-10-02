@@ -10,13 +10,14 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import SignificantFiguresInputPanel from "./SignificantFiguresInputPanel";
 import SignificantFiguresResult from "./SignificantFiguresResult";
 import SignificantFiguresQuickReference from "./SignificantFiguresQuickReference";
+import { SignificantFiguresLiveProvider } from "./SignificantFiguresLiveContext";
 import type { SignificantFiguresOperation } from "./types";
 
 const tool = new SignificantFiguresCalculatorTool();
 
 const DEFAULTS: Record<SignificantFiguresOperation, { valueA: string; valueB: string; roundToDigits: string }> = {
-  count: { valueA: "0.00500", valueB: "", roundToDigits: "3" },
-  round: { valueA: "12345", valueB: "", roundToDigits: "3" },
+  count: { valueA: "0.00500", valueB: "2.33", roundToDigits: "3" },
+  round: { valueA: "12345", valueB: "2.33", roundToDigits: "3" },
   add: { valueA: "12.5", valueB: "0.234", roundToDigits: "0" },
   subtract: { valueA: "18.0", valueB: "2.545", roundToDigits: "0" },
   multiply: { valueA: "4.5", valueB: "2.33", roundToDigits: "0" },
@@ -63,8 +64,17 @@ export default function SignificantFiguresCalculator({ education }: { education:
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
+  const liveDims = { operation, rawValueA: valueA, rawValueB: valueB, roundToDigits: Number(roundToDigits) || 1 };
+
+  function setLiveDim<K extends keyof typeof liveDims>(key: K, value: (typeof liveDims)[K]) {
+    if (key === "operation") setOperation(value as SignificantFiguresOperation);
+    else if (key === "rawValueA") setValueA(value as string);
+    else if (key === "rawValueB") setValueB(value as string);
+    else if (key === "roundToDigits") setRoundToDigits(String(value));
+  }
+
   return (
-    <>
+    <SignificantFiguresLiveProvider value={{ dims: liveDims, setDim: setLiveDim }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -93,6 +103,6 @@ export default function SignificantFiguresCalculator({ education }: { education:
       </div>
 
       {education}
-    </>
+    </SignificantFiguresLiveProvider>
   );
 }

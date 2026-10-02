@@ -6550,11 +6550,6 @@
         "stepMultiplyDivide": "The first value has {sigFigsA} significant figures and the second has {sigFigsB} — the result can only be trusted to the fewer of the two, {sigFigs} significant figures."
       },
       "education": {
-        "hero": {
-          "sigFigsUnit": "sig figs",
-          "ariaLabel": "A draggable point on an integer axis from 1 to 8 that sets how many significant figures pi gets rounded to",
-          "hint": "Drag the point — pi gets rounded live to that many significant figures, with each surviving digit highlighted."
-        },
         "intro": {
           "title": "Understanding Significant Figures",
           "paragraph1": "Significant figures are the digits in a measured value that carry real meaning about its precision — every nonzero digit, plus any zero that either sits between two nonzero digits or comes after a decimal point once a nonzero digit has appeared. A measurement of \"12.50 cm\" reports four significant figures, telling the reader the instrument was precise enough to distinguish 12.50 from 12.49 or 12.51; writing the same length as \"12.5 cm\" instead claims less precision, only three significant figures.",
@@ -6694,178 +6689,190 @@
           "url": "https://doi.org/10.1119/1.4818368",
           "readOriginal": "Read the Original Text"
         },
-        "addSubtract": {
-          "title": "Addition Uses Decimal Places, Not Sig Figs",
-          "intro": "12.11 + 18.0 — the result is limited by whichever number has the fewest digits after the decimal point, not the fewest significant figures.",
-          "problemLabel": "Problem",
-          "rawLabel": "Raw sum",
-          "resultLabel": "Rounded result",
+        "hero": {
+          "ariaLabel": "A draggable precision selector from 1 to 8 significant figures, rounding the real value typed above the fold",
+          "valueLabel": "Value A",
+          "digitsLabel": "Round to",
+          "roundedLabel": "Rounded",
+          "axisHint": "significant figures",
+          "hint": "Drag the point — it sets how many significant figures the real value above is rounded to, and every indicator on this page updates with it."
+        },
+        "addSubtractFlow": {
+          "title": "How Addition Actually Works",
+          "intro": "The live A and B added — always addition here, regardless of which operation is actually selected above.",
           "worked": {
             "title": "Worked Example",
-            "decimalPlaces": "{count} decimal places",
-            "limitedBy": "Limited by",
-            "result": "Result",
-            "resultNote": "Rounded to {count} decimal place(s)"
+            "decimalPlacesA": "Decimal places in A",
+            "decimalPlacesB": "Decimal places in B",
+            "rule": "Rule",
+            "ruleValue": "Round to {count} decimal place(s) — the fewer of the two",
+            "result": "Result"
           }
         },
-        "multiplyDivide": {
-          "title": "Multiplication Uses Sig Figs, Not Decimal Places",
-          "intro": "4.52 × 3.2 — the result is limited by whichever number has the fewest significant figures, not decimal places, the mirror image of the addition rule.",
-          "problemLabel": "Problem",
-          "rawLabel": "Raw product",
-          "resultLabel": "Rounded result",
+        "multiplyDivideFlow": {
+          "title": "How Multiplication Actually Works",
+          "intro": "The live A and B multiplied — always multiplication here — limited by significant figures instead of decimal places.",
           "worked": {
             "title": "Worked Example",
-            "sigFigs": "{count} sig figs",
-            "limitedBy": "Limited by",
-            "result": "Result",
-            "resultNote": "Rounded to {count} significant figure(s)"
+            "sigFigsA": "Significant figures in A",
+            "sigFigsB": "Significant figures in B",
+            "rule": "Rule",
+            "ruleValue": "Round to {count} significant figure(s) — the fewer of the two",
+            "result": "Result"
           }
         },
         "zeroTypes": {
-          "title": "Leading Zeros vs. Trailing Decimal Zeros",
-          "intro": "Two genuinely opposite rules: leading zeros are never significant (pure placeholders), while zeros after a decimal point are always significant (they were actually measured).",
-          "midLabel": "vs.",
+          "title": "The Live A's Own Zeros, Classified",
+          "intro": "Every zero in {value}, sorted by the real rule that decides whether it counts.",
           "worked": {
             "title": "Worked Example",
-            "leadingCount": "{count} sig fig(s)",
-            "leadingNote": "Leading zeros don't count — placeholders only",
-            "trailingCount": "{count} sig figs",
-            "trailingNote": "Every digit counts — the decimal point makes trailing zeros real"
+            "leading": "Leading zeros",
+            "leadingNote": "Never significant",
+            "captive": "Captive zeros",
+            "captiveNote": "Always significant",
+            "trailing": "Trailing zeros",
+            "trailingNote": "Significant only with a decimal point present"
           }
         },
-        "rulesTable": {
-          "title": "Five Real Numbers, Five Counting Rules",
-          "intro": "Each of these five numbers is governed by a different specific counting rule — computed live, not looked up from a chart.",
-          "sigFigsValue": "{count} sig figs",
-          "columnNumber": "Number",
-          "columnCount": "Sig figs",
-          "rules": {
-            "nonZero": "All non-zero digits count",
-            "embeddedZero": "Zeros between non-zero digits count",
-            "leadingZero": "Leading zeros never count",
-            "trailingWithDecimal": "Trailing zeros count — has a decimal point",
-            "trailingNoDecimal": "Trailing zeros ambiguous — no decimal point"
+        "roundingRules": {
+          "title": "Rounding the Live A to Every Precision Level",
+          "intro": "{value}, rounded to 1 through 5 significant figures at once — the current round-to level highlighted.",
+          "columnDigits": "Significant figures",
+          "columnResult": "Result",
+          "worked": {
+            "title": "Worked Example",
+            "currentLevel": "Current level"
           }
         },
         "decimalVsSigFigs": {
           "title": "Decimal Places vs. Significant Figures",
-          "intro": "Two different counts for the same two numbers — decimal places just counts digits after the point; significant figures counts actual measured precision, leading zeros and all.",
+          "intro": "{value}'s own two different precision counts — they don't always agree.",
           "decimalPlacesLabel": "Decimal places",
           "sigFigsLabel": "Significant figures",
-          "note": "0.008 has 3 decimal places but only 1 significant figure — its leading zeros don't count as precision."
+          "worked": {
+            "title": "Worked Example",
+            "sameCount": "Same count?",
+            "yes": "Yes, they happen to match",
+            "no": "No, they genuinely differ",
+            "note": "Two different real measures of precision"
+          }
         },
         "ambiguousZeros": {
-          "title": "Resolving Trailing-Zero Ambiguity",
-          "intro": "\"1500\" alone could be 2, 3, or 4 significant figures — there's no way to tell from standard notation. Scientific notation settles it completely.",
-          "worked": {
-            "title": "Worked Example",
-            "count": "{count} sig figs",
-            "ambiguous": "Ambiguous — could be 2, 3, or 4"
-          }
-        },
-        "countComparison": {
-          "title": "Trailing Zeros Change the Count",
-          "intro": "Four numbers that look almost identical, compared by their real significant-figure count — three differ only by trailing zeros, yet each carries different precision.",
-          "worked": {
-            "title": "Worked Example",
-            "count": "{count} sig figs"
-          }
-        },
-        "cascade": {
-          "title": "Precision Lost Early Never Comes Back",
-          "intro": "A real two-step calculation — multiply, then add — precision degrades at the first step and every later step inherits that limit.",
-          "steps": {
-            "multiply": "Step 1: Multiply",
-            "add": "Step 2: Add"
+          "title": "Are A's Trailing Zeros Ambiguous?",
+          "intro": "{value} — whether its own trailing zeros are genuinely ambiguous depends entirely on the decimal point.",
+          "zones": {
+            "resolved": "Resolved",
+            "ambiguous": "Ambiguous"
           },
-          "resultBadge": "Final result",
           "worked": {
             "title": "Worked Example",
-            "sigFigs": "{count} sig figs",
-            "afterStep1": "After step 1",
-            "afterStep2": "After step 2 (final)",
-            "note": "The 2-sig-fig limit from step 1 carries through to the end"
+            "sigFigsAsWritten": "Significant figures as written",
+            "status": "Status",
+            "isAmbiguous": "Ambiguous — no decimal point to confirm them",
+            "isResolved": "Resolved — the decimal point confirms every digit"
           }
         },
-        "uncertainty": {
-          "title": "What a Measurement's Last Digit Really Means",
-          "intro": "A measurement of {value} isn't infinitely exact — its last written digit implies the true value plausibly falls somewhere in a real range around it.",
+        "sigFigCompare": {
+          "title": "A vs. B, by Real Significant Figures",
+          "intro": "The live A and B's own significant-figure counts, ranked.",
           "worked": {
             "title": "Worked Example",
-            "written": "Written value",
-            "impliedRange": "Plausible range",
-            "note": "Half a unit in the last place, in each direction"
+            "limitingFigure": "Limiting figure count",
+            "note": "The lower of the two always wins"
           }
         },
-        "sciEquivalence": {
-          "title": "Scientific Notation Settles the Ambiguity",
-          "intro": "50,000 written in standard form leaves its precision genuinely unclear — the scientific-notation form pins it down exactly.",
-          "standardLabel": "Standard (ambiguous)",
-          "scientificLabel": "Scientific (exact)",
+        "precisionCascade": {
+          "title": "Precision Through a Real Operation Chain",
+          "intro": "{value}, carried through three real chained operations — watch its significant figures only ever shrink or hold.",
           "worked": {
             "title": "Worked Example",
-            "unclear": "Could be 1 to 5 sig figs",
-            "count": "Exactly {count} sig figs"
+            "step1": "Step 1: + 0.1",
+            "step2": "Step 2: × 2.5",
+            "step3": "Step 3: ÷ 1.5",
+            "sf": "sf"
+          }
+        },
+        "measurementUncertainty": {
+          "title": "The Real Uncertainty Hiding in A",
+          "intro": "{value}'s own implied uncertainty — half of its last written decimal place.",
+          "zones": {
+            "coarse": "Coarse",
+            "fine": "Fine"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "decimalPlaces": "Decimal places",
+            "impliedUncertainty": "Implied uncertainty"
+          }
+        },
+        "scientificEquivalence": {
+          "title": "A, Standard Form vs. Scientific Notation",
+          "intro": "The live A, written both ways — scientific notation removes every bit of the ambiguity standard form can carry.",
+          "standardLabel": "Standard form",
+          "scientificLabel": "Scientific notation",
+          "worked": {
+            "title": "Worked Example",
+            "sigFigs": "Significant figures"
           }
         },
         "precisionRanked": {
-          "title": "Ranking Instrument Readings by Precision",
-          "intro": "Four readings of the same value from four different instruments, ranked by real significant-figure count — more digits means a more precise tool, not a different measurement.",
+          "title": "A vs. B, Ranked by Real Precision",
+          "intro": "The live A and B ranked by actual significant-figure count — not by which number looks bigger.",
           "worked": {
             "title": "Worked Example",
-            "count": "{count} sig figs",
-            "mostPrecise": "Most precise reading"
+            "morePrecise": "More precise"
           }
         },
         "exactVsMeasured": {
-          "title": "Exact Numbers vs. Measured Numbers",
-          "intro": "A defined or counted number never limits a calculation's precision — only measured numbers do.",
-          "exact": {
-            "title": "Exact (defined)",
-            "unit": "inches in a foot",
-            "sigFigs": "Infinite sig figs — never the limiting number"
-          },
-          "measured": {
-            "title": "Measured",
-            "unit": "a ruler reading, cm",
-            "sigFigs": "3 sig figs — can be the limiting number"
-          },
-          "note": "When an exact number appears in a calculation alongside a measured one, only the measured number's precision matters."
-        },
-        "countingSteps": {
-          "title": "Counting a Genuinely Tricky Case",
-          "intro": "0.007060 — leading zeros skipped entirely, then every digit from the first non-zero digit onward counts, trailing zero included.",
-          "steps": {
-            "start": "Starting number",
-            "skipLeading": "Skip leading zeros",
-            "countRest": "Count the rest"
-          },
-          "resultBadge": "Result",
+          "title": "An Exact Count Beside a Real Measurement",
+          "intro": "{value}, treated as a real measurement, multiplied by an exact count of 12 — a number with infinite implied precision.",
+          "measuredLabel": "Measured (A)",
+          "exactLabel": "Exact count",
+          "infinitePrecision": "Infinite precision",
+          "sigFigsCount": "{count} significant figure(s)",
           "worked": {
             "title": "Worked Example",
-            "digits": "Counted digits",
-            "result": "Total",
-            "count": "{count} sig figs"
+            "rawProduct": "Raw product",
+            "result": "Result",
+            "limitedByMeasured": "Limited only by the measured value's own precision"
           }
         },
-        "instruments": {
-          "title": "Precision Is a Property of the Instrument",
-          "intro": "The same physical length, measured by three real tools of increasing precision — each reading's significant-figure count reflects the tool, not the object being measured.",
-          "items": {
-            "ruler": "Ruler",
-            "calipers": "Calipers",
-            "micrometer": "Micrometer"
-          },
-          "sigFigsLabel": "{count} sig figs"
+        "countingSteps": {
+          "title": "Counting A's Significant Figures, Left to Right",
+          "intro": "{value}'s own digits, walked through the real counting rule one at a time.",
+          "startHere": "Start here",
+          "worked": {
+            "title": "Worked Example",
+            "totalCounted": "Total counted"
+          }
         },
-        "operationTable": {
-          "title": "Quick Reference: Which Rule Applies",
-          "intro": "Four real add/multiply pairs, each tagged by which rule governed its result — decimal places for addition, significant figures for multiplication.",
-          "tagDecimal": "Decimal-place rule",
-          "tagSigFig": "Sig-fig rule",
-          "columnProblem": "Problem",
-          "columnResult": "Result"
+        "precisionInstruments": {
+          "title": "What Kind of Instrument Reads This Precisely?",
+          "intro": "{value}'s own decimal places matched to the kind of real instrument that could plausibly produce a reading that precise.",
+          "decimalsLabel": "{count}+ decimal places",
+          "instruments": {
+            "bathroomScale": "Bathroom scale",
+            "kitchenScale": "Kitchen scale",
+            "digitalCaliper": "Digital caliper",
+            "analyticalBalance": "Analytical balance"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "bestMatch": "Best match"
+          }
+        },
+        "sigFigsAfterOp": {
+          "title": "All Four Operations on A and B at Once",
+          "intro": "{a} and {b}, run through every real arithmetic operation this calculator supports — the actually selected one highlighted.",
+          "columnOperation": "Operation",
+          "columnResult": "Result",
+          "selectedTag": "Selected",
+          "opNames": {
+            "add": "Addition",
+            "subtract": "Subtraction",
+            "multiply": "Multiplication",
+            "divide": "Division"
+          }
         }
       },
       "shareExport": {

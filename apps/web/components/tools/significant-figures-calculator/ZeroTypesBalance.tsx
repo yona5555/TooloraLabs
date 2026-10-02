@@ -2,38 +2,63 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { countSignificantFigures } from "@tooloralabs/tools";
+import { useSignificantFiguresLive } from "./SignificantFiguresLiveContext";
 
-const LEADING = "0.0025";
-const TRAILING = "2.500";
+type ZeroCounts = { leading: number; captive: number; trailing: number };
 
-/** Type #14 (Balance Indicator): leading zeros (never significant — they're placeholders) versus trailing zeros after a decimal point (always significant — they were actually measured) — a genuinely bipolar rule, the single most common sig-fig mistake. */
+function classifyZeros(raw: string): ZeroCounts {
+  const s = raw.trim().replace(/^[+-]/, "");
+  const digitsOnly = s.replace(".", "");
+  const firstNonZero = digitsOnly.search(/[1-9]/);
+  if (firstNonZero === -1) return { leading: 0, captive: 0, trailing: 0 };
+  const lastNonZero = digitsOnly.length - 1 - [...digitsOnly].reverse().join("").search(/[1-9]/);
+
+  let leading = 0;
+  let captive = 0;
+  let trailing = 0;
+  for (let i = 0; i < digitsOnly.length; i++) {
+    if (digitsOnly[i] !== "0") continue;
+    if (i < firstNonZero) leading++;
+    else if (i < lastNonZero) captive++;
+    else trailing++;
+  }
+  return { leading, captive, trailing };
+}
+
+/** Type #14 (Balance Indicator): the live A's own zeros, classified by real position — leading zeros never count, captive zeros always do, trailing zeros depend on the decimal point actually being present. */
 export default function ZeroTypesBalance() {
   const t = useTranslations("tools.significant-figures-calculator.education.zeroTypes");
-  const leadingCount = countSignificantFigures(LEADING);
-  const trailingCount = countSignificantFigures(TRAILING);
+  const { dims } = useSignificantFiguresLive();
+  const counts = classifyZeros(dims.rawValueA);
+  const total = counts.leading + counts.captive + counts.trailing || 1;
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-5">
-        <div className="relative h-2 rounded-full bg-zinc-200 dark:bg-zinc-700">
-          <div className="absolute left-1/2 top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 bg-zinc-400 dark:bg-zinc-500" />
-          <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-red-600 dark:border-zinc-900" style={{ left: "14%" }} />
-          <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-emerald-600 dark:border-zinc-900" style={{ left: "86%" }} />
-        </div>
-        <div className="mt-2 flex justify-between text-sm font-semibold">
-          <span className="text-red-700 dark:text-red-400">{LEADING}</span>
-          <span className="text-zinc-400">{t("midLabel")}</span>
-          <span className="text-emerald-700 dark:text-emerald-400">{TRAILING}</span>
-        </div>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: dims.rawValueA })}</p>
+      <div dir="ltr" className="mt-4 flex h-10 w-full overflow-hidden rounded-lg">
+        {counts.leading > 0 && (
+          <div className="flex items-center justify-center bg-zinc-400 text-xs font-bold text-white dark:bg-zinc-600" style={{ width: `${(counts.leading / total) * 100}%` }}>
+            {counts.leading}
+          </div>
+        )}
+        {counts.captive > 0 && (
+          <div className="flex items-center justify-center bg-blue-600 text-xs font-bold text-white" style={{ width: `${(counts.captive / total) * 100}%` }}>
+            {counts.captive}
+          </div>
+        )}
+        {counts.trailing > 0 && (
+          <div className="flex items-center justify-center bg-emerald-600 text-xs font-bold text-white" style={{ width: `${(counts.trailing / total) * 100}%` }}>
+            {counts.trailing}
+          </div>
+        )}
       </div>
       <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: LEADING, value: t("worked.leadingCount", { count: leadingCount }), note: t("worked.leadingNote") },
-            { label: TRAILING, value: t("worked.trailingCount", { count: trailingCount }), emphasize: true, note: t("worked.trailingNote") },
+            { label: t("worked.leading"), value: `${counts.leading}`, note: t("worked.leadingNote") },
+            { label: t("worked.captive"), value: `${counts.captive}`, note: t("worked.captiveNote") },
+            { label: t("worked.trailing"), value: `${counts.trailing}`, emphasize: true, note: t("worked.trailingNote") },
           ]}
         />
       </div>

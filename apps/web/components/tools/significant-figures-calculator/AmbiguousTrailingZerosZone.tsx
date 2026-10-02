@@ -1,41 +1,44 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { countSignificantFigures } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { countSignificantFigures } from "@tooloralabs/tools";
+import { useSignificantFiguresLive } from "./SignificantFiguresLiveContext";
 
-const CANDIDATES = [
-  { form: "1500", sci: null },
-  { form: "1.5×10³", sci: "1.5" },
-  { form: "1.50×10³", sci: "1.50" },
-  { form: "1.500×10³", sci: "1.500" },
-];
+function hasAmbiguousTrailingZeros(raw: string): boolean {
+  const s = raw.trim().replace(/^[+-]/, "");
+  if (s.includes(".")) return false;
+  return /0$/.test(s.replace(/^0+/, ""));
+}
 
-/** Type #19 (Zone Strip): "1500" alone is genuinely ambiguous (2, 3, or 4 sig figs, no way to tell) — the three scientific-notation rewrites next to it each resolve the ambiguity completely, landing at different fixed points. */
+/** Type #19 (Zone Strip): whether the live A's own trailing zeros are genuinely ambiguous (no decimal point, so a calculator can't tell if they were measured) or fully resolved by the decimal point actually being present. */
 export default function AmbiguousTrailingZerosZone() {
   const t = useTranslations("tools.significant-figures-calculator.education.ambiguousZeros");
-  const counts = CANDIDATES.map((c) => (c.sci ? countSignificantFigures(c.sci) : null));
+  const { dims } = useSignificantFiguresLive();
+  const ambiguous = hasAmbiguousTrailingZeros(dims.rawValueA);
+  const sigFigs = countSignificantFigures(dims.rawValueA);
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-5">
-        <div className="relative h-8 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-100 to-emerald-200 dark:from-amber-500/15 dark:to-emerald-500/25" />
-          {[2, 3, 4].map((n) => (
-            <div key={n} className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 dark:border-zinc-900" style={{ left: `${((n - 2) / 2) * 80 + 10}%` }} />
-          ))}
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: dims.rawValueA })}</p>
+      <div dir="ltr" className="mt-6 w-full">
+        <div className="relative h-3 w-full overflow-hidden rounded-full">
+          <div className="absolute inset-y-0 left-0 w-1/2 bg-emerald-300/70 dark:bg-emerald-500/50" />
+          <div className="absolute inset-y-0 left-1/2 w-1/2 bg-amber-300/70 dark:bg-amber-500/50" />
+          <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-blue-700 transition-all duration-300 dark:bg-blue-300" style={{ left: ambiguous ? "calc(75% - 3px)" : "calc(25% - 3px)" }} />
         </div>
-        <div className="mt-1.5 flex justify-between text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-          <span>2 sf</span>
-          <span>3 sf</span>
-          <span>4 sf</span>
+        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <span>{t("zones.resolved")}</span>
+          <span>{t("zones.ambiguous")}</span>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
-          rows={CANDIDATES.map((c, i) => ({ label: c.form, value: counts[i] ? t("worked.count", { count: counts[i] }) : t("worked.ambiguous"), emphasize: i === 0 }))}
+          rows={[
+            { label: t("worked.sigFigsAsWritten"), value: `${sigFigs}` },
+            { label: t("worked.status"), value: ambiguous ? t("worked.isAmbiguous") : t("worked.isResolved"), emphasize: true },
+          ]}
         />
       </div>
     </SectionCard>
