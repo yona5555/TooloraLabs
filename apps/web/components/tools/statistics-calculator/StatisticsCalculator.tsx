@@ -12,6 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import StatisticsInputPanel from "./StatisticsInputPanel";
 import StatisticsResult from "./StatisticsResult";
 import StatisticsQuickReference from "./StatisticsQuickReference";
+import { StatisticsLiveProvider } from "./StatisticsLiveContext";
 import { parseDataSet, type StatisticsScenario } from "./types";
 
 const tool = new StatisticsCalculatorTool();
@@ -45,7 +46,7 @@ export default function StatisticsCalculator({ education }: { education: ReactNo
   ];
 
   return (
-    <>
+    <StatisticsLiveProvider value={{ dims: { rawData }, setDim: (key, value) => key === "rawData" && setRawData(value as string) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -69,6 +70,6 @@ export default function StatisticsCalculator({ education }: { education: ReactNo
       </div>
 
       {education}
-    </>
+    </StatisticsLiveProvider>
   );
 }

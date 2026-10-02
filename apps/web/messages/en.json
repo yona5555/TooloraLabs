@@ -8011,17 +8011,14 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Six draggable data points on a shared number line, with the live mean, median, and standard deviation shown above and below",
+          "ariaLabel": "A number line holding up to eight draggable data points, alongside the live count, mean, median, and standard deviation of the full dataset",
+          "countLabel": "Count",
           "meanLabel": "Mean",
           "medianLabel": "Median",
           "stdDevLabel": "Std dev",
-          "meanShort": "x̄",
-          "medianShort": "M̃",
-          "meanTooltip": "Mean = {value}",
-          "medianTooltip": "Median = {value}",
-          "stdDevTooltip": "Population std dev = {value}",
-          "pointTooltip": "{value}",
-          "hint": "Drag any point — the mean, median, and standard deviation all update live."
+          "meanMarker": "mean",
+          "overflowNote": "{count} more values are folded into the statistics above without a point of their own on this line.",
+          "hint": "Drag any point left or right, or edit the data field above — the count, mean, median, and standard deviation all update live, and so does every indicator below."
         },
         "intro": {
           "title": "Understanding Descriptive Statistics",
@@ -8150,33 +8147,19 @@
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Read the Original Text"
         },
-        "centralTendency": {
-          "title": "Mean, Median, and Mode Can All Disagree",
-          "intro": "For {values} — a single outlier pulls the mean up, while the median and mode stay anchored to where most of the data actually sits.",
-          "meanLabel": "Mean",
-          "medianLabel": "Median",
-          "modeLabel": "Mode",
-          "noMode": "None",
-          "note": "When they diverge this much, the median usually describes a \"typical\" value better than the mean."
-        },
         "outlierEffect": {
-          "title": "How Much One Outlier Moves the Mean",
-          "intro": "The same five real values, before and after a single extreme point (95) is added.",
-          "meanLabel": "Mean",
-          "outlierLabel": "New point",
+          "title": "How Much the Furthest Point Moves the Mean",
+          "intro": "The live dataset's own furthest value from the mean ({value}) is temporarily removed, showing exactly how far that one point pulls the average.",
+          "withLabel": "Mean (full set)",
+          "withoutLabel": "Mean (outlier removed)",
           "worked": {
             "title": "Worked Example",
-            "meanBefore": "Mean before",
-            "meanAfter": "Mean after",
-            "meanNote": "Jumped sharply from one added point",
-            "medianBefore": "Median before",
-            "medianAfter": "Median after",
-            "medianNote": "Barely moved — resistant to outliers"
+            "shift": "How far the mean moved"
           }
         },
         "sumToMean": {
           "title": "The Mean Is Just Sum Divided by Count",
-          "intro": "For {values} — the formula behind the most familiar statistic, with real numbers.",
+          "intro": "The live dataset's own total, divided by how many values went into it — the formula behind the most familiar statistic, worked with real numbers.",
           "sumLabel": "Sum",
           "countLabel": "Count",
           "meanLabel": "Mean",
@@ -8185,31 +8168,22 @@
             "formula": "Formula"
           }
         },
-        "medianParity": {
-          "title": "Median Depends on Whether Count Is Odd or Even",
-          "intro": "The same five values, then a sixth added — the median rule genuinely branches depending on whether the count is odd or even.",
-          "oddTitle": "Odd count (n = {n})",
-          "evenTitle": "Even count (n = {n})",
-          "worked": {
-            "title": "Worked Example",
-            "odd": "Odd rule",
-            "oddRule": "The single middle value, once sorted",
-            "even": "Even rule"
-          }
-        },
         "modeFrequency": {
           "title": "The Mode Is Whichever Value Repeats Most",
-          "intro": "Real frequency count for {values} — the mode is whichever value actually appears the most times, not a guess.",
-          "tagMode": "Mode",
-          "tagOther": "Not mode",
+          "intro": "Every distinct value in the live dataset with its real frequency — the mode is whichever row (or rows) actually has the highest count.",
           "columnValue": "Value",
-          "columnFrequency": "Frequency"
+          "columnFrequency": "Frequency",
+          "worked": {
+            "title": "Worked Example",
+            "highestFrequency": "Highest frequency",
+            "noMode": "No value repeats, so this dataset has no mode"
+          }
         },
         "minMaxRange": {
           "title": "Range Is the Simplest Spread Measure",
-          "intro": "For {values} — just the distance between the two most extreme values.",
-          "maxLabel": "Max",
+          "intro": "The live dataset's own maximum minus its minimum — just the distance between the two most extreme values actually entered.",
           "minLabel": "Min",
+          "maxLabel": "Max",
           "rangeLabel": "Range",
           "worked": {
             "title": "Worked Example",
@@ -8217,36 +8191,21 @@
           }
         },
         "varianceSteps": {
-          "title": "From Raw Data to Standard Deviation",
-          "intro": "The real four-station path variance and standard deviation actually take, for a small, fully traceable data set.",
-          "steps": {
-            "deviations": "1. Deviations from mean",
-            "squared": "2. Squared",
-            "averaged": "3. Averaged",
-            "rooted": "4. Square root"
-          },
-          "resultBadge": "Standard deviation",
+          "title": "From Raw Data to Variance, Three Real Stations",
+          "intro": "The live dataset's own population variance, built step by step — deviations from the mean, squared, then averaged across every real value.",
           "worked": {
             "title": "Worked Example",
-            "mean": "Mean",
-            "stdDev": "Std dev"
-          }
-        },
-        "popVsSample": {
-          "title": "Population vs. Sample Variance",
-          "intro": "The exact same 5 numbers, {values} — variance computed with two different divisors.",
-          "populationLabel": "Population (÷n)",
-          "sampleLabel": "Sample (÷n−1)",
-          "worked": {
-            "title": "Worked Example",
-            "divisorPop": "Population divisor",
-            "divisorSample": "Sample divisor",
-            "note": "Dividing by a smaller number always gives a larger result"
+            "step1Short": "x − {mean}",
+            "step2Short": "Σ = {sum}",
+            "step3Short": "÷n = {variance}",
+            "count": "Count (n)",
+            "sumSquaredDeviations": "Sum of squared deviations",
+            "variance": "Population variance"
           }
         },
         "rangeVsStdDev": {
-          "title": "Range vs. Standard Deviation with an Outlier",
-          "intro": "For {values} — one outlier (30) inflates the range dramatically but barely moves the standard deviation, which weighs every point.",
+          "title": "Range vs. Standard Deviation",
+          "intro": "The live dataset's range, which only looks at its two extreme values, next to its standard deviation, which weighs every point — drag an extreme value and watch which one moves more.",
           "rangeLabel": "Range",
           "stdDevLabel": "Std dev",
           "worked": {
@@ -8254,75 +8213,116 @@
             "range": "Range",
             "rangeNote": "Determined entirely by the two extreme points",
             "stdDev": "Standard deviation",
-            "stdDevNote": "Every point contributes, so one outlier matters less"
+            "stdDevNote": "Every point contributes, so a single outlier matters less"
           }
         },
         "stdDevZone": {
-          "title": "Where a Value Sits Relative to One Standard Deviation",
-          "intro": "A real 10-point data set's mean ± one standard deviation, with a specific value from the set marked against that band.",
-          "worked": {
-            "title": "Worked Example",
-            "band": "Mean ± 1 SD band",
-            "inside": "Inside the typical band",
-            "outside": "Outside the typical band"
-          }
-        },
-        "deviations": {
-          "title": "Every Point's Real Distance from the Mean",
-          "intro": "Mean = {mean} — each value's signed deviation, the raw ingredient variance squares and averages.",
-          "worked": {
-            "title": "Worked Example"
-          }
-        },
-        "skewComparison": {
-          "title": "Symmetric vs. Skewed Data",
-          "intro": "Two real 5-point data sets, same structure — in one, mean and median coincide; in the other, they genuinely diverge.",
-          "symmetric": {
-            "title": "Symmetric"
-          },
-          "skewed": {
-            "title": "Skewed"
-          },
-          "meanLabel": "Mean",
-          "medianLabel": "Median",
-          "note": "Mean equals median only when the data is genuinely symmetric around its center."
-        },
-        "spreadRanked": {
-          "title": "Ranking Data Sets by How Spread Out They Are",
-          "intro": "Three real data sets, ranked by their actual standard deviation — proving the mean alone never tells you how scattered the data is.",
-          "sets": {
-            "a": "Tightly clustered",
-            "b": "Moderately spread",
-            "c": "Widely spread"
+          "title": "Share of Data Within One Standard Deviation",
+          "intro": "The live dataset's own real share of values within one standard deviation of its mean, compared against the roughly 68% a normal distribution would predict.",
+          "zones": {
+            "within1": "Within ±1σ"
           },
           "worked": {
             "title": "Worked Example",
-            "mean": "mean",
-            "stdDev": "std dev"
-          }
-        },
-        "sampleSizeEffect": {
-          "title": "Why the Sample Correction Matters More for Small Data",
-          "intro": "The percentage gap between population and sample standard deviation, for a small (n=3) set versus a larger (n=12) one — the n−1 correction matters most exactly when data is scarce.",
-          "smallLabel": "n = {n}",
-          "largeLabel": "n = {n}",
-          "worked": {
-            "title": "Worked Example"
+            "actualShare": "Actual share within ±1σ",
+            "normalPrediction": "Normal-distribution prediction",
+            "note": "Small or unusually shaped datasets can land well above or below this rule of thumb."
           }
         },
         "coefficientOfVariation": {
-          "title": "The Same Std Dev Can Mean Very Different Things",
-          "intro": "Two data sets with the exact same standard deviation but very different means — relative to their own scale, one is far more variable than the other.",
-          "small": {
-            "title": "Small-scale data"
-          },
-          "large": {
-            "title": "Large-scale data"
-          },
-          "meanLabel": "Mean",
+          "title": "Standard Deviation, Scaled by the Mean",
+          "intro": "The live dataset's standard deviation expressed as a percentage of its own mean — the one spread measure that stays meaningful when comparing datasets on very different scales.",
           "stdDevLabel": "Std dev",
           "cvLabel": "Coefficient of variation",
-          "note": "Coefficient of variation (std dev ÷ mean) puts spread in context — raw std dev alone can't do that across different scales."
+          "worked": {
+            "title": "Worked Example",
+            "formula": "Formula",
+            "variability": "Variability",
+            "low": "Low — values stay close to the mean",
+            "high": "High — values spread widely relative to the mean"
+          }
+        },
+        "meanMedianMode": {
+          "title": "Three Measures of Center, Side by Side",
+          "intro": "The live dataset's mean, median, and mode at once — they only land on the exact same number when the distribution is perfectly symmetric.",
+          "meanLabel": "Mean",
+          "medianLabel": "Median",
+          "modeLabel": "Mode",
+          "noMode": "None",
+          "worked": {
+            "title": "Worked Example",
+            "allAgree": "Do all three agree?",
+            "yes": "Yes — a perfectly symmetric set",
+            "no": "No — they diverge"
+          }
+        },
+        "medianEvenOdd": {
+          "title": "The Median Rule Branches on Odd vs. Even Count",
+          "intro": "The live dataset, sorted — with {count} values, the median rule that actually applies depends on whether that count is odd or even.",
+          "worked": {
+            "title": "Worked Example",
+            "parity": "Count parity",
+            "odd": "Odd — the single middle value",
+            "even": "Even — average of the two middle values",
+            "median": "Median"
+          }
+        },
+        "popVsSampleVariance": {
+          "title": "Population vs. Sample Variance",
+          "intro": "The exact same live dataset, variance computed with two different divisors — one for when it's the whole population, one for when it's a sample drawn from a larger one.",
+          "populationLabel": "Population variance",
+          "sampleLabel": "Sample variance",
+          "divideBy": "Divides by {n}",
+          "worked": {
+            "title": "Worked Example",
+            "difference": "Difference",
+            "note": "Dividing by a smaller number always gives a larger result — Bessel's correction, which compensates for a sample systematically underestimating spread."
+          }
+        },
+        "deviationFromMean": {
+          "title": "Every Point's Real Distance from the Mean",
+          "intro": "With a mean of {mean}, each live value's own signed deviation — the raw ingredient that variance squares and averages.",
+          "overflowNote": "{count} more values are included in the sum below but not drawn as individual bars here.",
+          "worked": {
+            "title": "Worked Example",
+            "sumOfDeviations": "Sum of all deviations",
+            "note": "The signed deviations of a complete dataset always sum to exactly zero — positive and negative distances cancel out."
+          }
+        },
+        "skewedVsSymmetric": {
+          "title": "How Far the Mean Sits from the Median",
+          "intro": "The live dataset's mean and median, placed on the same line — the closer together, the more symmetric the shape; the further apart, the more skewed it actually is.",
+          "meanLabel": "Mean",
+          "medianLabel": "Median",
+          "worked": {
+            "title": "Worked Example",
+            "gap": "Gap between mean and median",
+            "shape": "Shape",
+            "symmetric": "Roughly symmetric",
+            "skewed": "Skewed"
+          }
+        },
+        "dataSpreadRanked": {
+          "title": "Which Points Pull the Spread the Most",
+          "intro": "The live dataset's own values, ranked by their real distance from the mean — the furthest point contributes the most to the variance.",
+          "worked": {
+            "title": "Worked Example",
+            "furthest": "Furthest value from the mean"
+          }
+        },
+        "sampleSizePrecision": {
+          "title": "Why Sample Size Changes How Much Correction Matters",
+          "intro": "With a real sample size of n = {n}, this shows exactly how much Bessel's correction inflates the sample standard deviation above the population standard deviation — a gap that shrinks as n grows.",
+          "zones": {
+            "smallN": "Small n — correction matters more",
+            "largeN": "Large n — correction matters less"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "populationStdDev": "Population std dev",
+            "sampleStdDev": "Sample std dev",
+            "inflation": "Inflation from the correction"
+          }
         }
       },
       "scenarios": {

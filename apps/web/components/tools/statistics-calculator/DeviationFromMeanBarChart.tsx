@@ -1,53 +1,55 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { StatisticsCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { StatisticsCalculator } from "@tooloralabs/tools";
+import { parseDataSet } from "./types";
+import { useStatisticsLive } from "./StatisticsLiveContext";
 
 const tool = new StatisticsCalculator();
-const VALUES = [8, 12, 15, 9, 16];
+const MAX_BARS = 8;
 
 function round2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
-/** Type #1 (Labeled Bar Chart), signed: every value's real deviation from the mean — the building block variance actually squares and averages, shown here before any squaring happens. */
+/** Type #15 (Stacked Segmented Bar): each live value's own real signed deviation from the dataset's mean — the bars that variance itself is built from. */
 export default function DeviationFromMeanBarChart() {
-  const t = useTranslations("tools.statistics-calculator.education.deviations");
-  const output = tool.execute({ values: VALUES }, { locale: "en-US" });
+  const t = useTranslations("tools.statistics-calculator.education.deviationFromMean");
+  const { dims } = useStatisticsLive();
+  const values = parseDataSet(dims.rawData);
+  if (values.length === 0) return null;
+  const output = tool.execute({ values }, { locale: "en-US" });
   if (!output.success || output.data.error) return null;
-  const { mean } = output.data;
-
-  const deviations = VALUES.map((v) => round2(v - mean));
-  const maxAbs = Math.max(...deviations.map((d) => Math.abs(d)), 1);
+  const mean = output.data.mean;
+  const shown = values.slice(0, MAX_BARS);
+  const maxAbsDev = Math.max(...shown.map((v) => Math.abs(v - mean)), 1);
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { mean: round2(mean) })}</p>
-      <div dir="ltr" className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div className="flex shrink-0 flex-col gap-1.5">
-          {VALUES.map((v, i) => {
-            const dev = deviations[i];
-            const pct = (Math.abs(dev) / maxAbs) * 50;
-            return (
-              <div key={i} className="flex items-center gap-2 text-xs">
-                <span className="w-8 shrink-0 font-mono text-zinc-500 dark:text-zinc-400">{v}</span>
-                <div className="relative h-5 w-48 rounded bg-zinc-100 dark:bg-zinc-800">
-                  <div className="absolute left-1/2 h-full w-px bg-zinc-300 dark:bg-zinc-600" />
-                  <div
-                    className={`absolute top-0 h-full rounded ${dev >= 0 ? "bg-blue-500" : "bg-red-500"}`}
-                    style={dev >= 0 ? { left: "50%", width: `${pct}%` } : { right: "50%", width: `${pct}%` }}
-                  />
-                </div>
-                <span className="w-12 shrink-0 font-mono font-semibold text-zinc-700 dark:text-zinc-200">{dev >= 0 ? `+${dev}` : dev}</span>
+      <div dir="ltr" className="mt-4 space-y-1.5">
+        {shown.map((v, i) => {
+          const dev = v - mean;
+          const pct = (Math.abs(dev) / maxAbsDev) * 50;
+          return (
+            <div key={i} className="flex items-center gap-2 text-xs">
+              <span className="w-10 shrink-0 font-mono text-zinc-500 dark:text-zinc-400">{round2(v)}</span>
+              <div className="relative h-4 flex-1 bg-zinc-100 dark:bg-zinc-800">
+                <div className="absolute inset-y-0 left-1/2 w-px bg-zinc-300 dark:bg-zinc-600" />
+                <div
+                  className={`absolute inset-y-0 transition-all duration-300 ${dev >= 0 ? "bg-blue-600" : "bg-rose-600"}`}
+                  style={dev >= 0 ? { left: "50%", width: `${pct}%` } : { right: "50%", width: `${pct}%` }}
+                />
               </div>
-            );
-          })}
-        </div>
-        <WorkedExampleNote
-          title={t("worked.title")}
-          rows={VALUES.map((v, i) => ({ label: `${v}`, value: `${deviations[i] >= 0 ? "+" : ""}${deviations[i]}` }))}
-        />
+              <span className="w-12 shrink-0 text-end font-mono text-zinc-500 dark:text-zinc-400">{dev >= 0 ? `+${round2(dev)}` : round2(dev)}</span>
+            </div>
+          );
+        })}
+      </div>
+      {values.length > MAX_BARS && <p className="mt-2 text-center text-xs text-zinc-400 dark:text-zinc-500">{t("overflowNote", { count: values.length - MAX_BARS })}</p>}
+      <div className="mt-4">
+        <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.sumOfDeviations"), value: `${round2(values.reduce((s, v) => s + (v - mean), 0))}`, emphasize: true, note: t("worked.note") }]} />
       </div>
     </SectionCard>
   );

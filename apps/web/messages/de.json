@@ -8011,17 +8011,14 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Sechs ziehbare Datenpunkte auf einer gemeinsamen Zahlengeraden, mit dem live berechneten Mittelwert, Median und Standardabweichung oben und unten angezeigt",
+          "ariaLabel": "Eine Zahlengerade mit bis zu acht verschiebbaren Datenpunkten, zusammen mit der live berechneten Anzahl, dem Mittelwert, dem Median und der Standardabweichung des gesamten Datensatzes",
+          "countLabel": "Anzahl",
           "meanLabel": "Mittelwert",
           "medianLabel": "Median",
           "stdDevLabel": "Std.-Abw.",
-          "meanShort": "x̄",
-          "medianShort": "M̃",
-          "meanTooltip": "Mittelwert = {value}",
-          "medianTooltip": "Median = {value}",
-          "stdDevTooltip": "Populations-Std.-Abw. = {value}",
-          "pointTooltip": "{value}",
-          "hint": "Ziehen Sie einen Punkt — Mittelwert, Median und Standardabweichung aktualisieren sich alle live."
+          "meanMarker": "Mittelwert",
+          "overflowNote": "{count} weitere Werte sind in der obigen Statistik enthalten, aber hier nicht als eigener Punkt dargestellt.",
+          "hint": "Ziehe einen beliebigen Punkt nach links oder rechts oder bearbeite das Datenfeld oben — Anzahl, Mittelwert, Median und Standardabweichung aktualisieren sich sofort, ebenso jeder Indikator unten."
         },
         "intro": {
           "title": "Deskriptive Statistik verstehen",
@@ -8150,179 +8147,182 @@
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Originaltext lesen"
         },
-        "centralTendency": {
-          "title": "Mittelwert, Median und Modus können alle uneinig sein",
-          "intro": "Für {values} — ein einzelner Ausreißer zieht den Mittelwert nach oben, während Median und Modus dort verankert bleiben, wo die meisten Daten tatsächlich liegen.",
-          "meanLabel": "Mittelwert",
-          "medianLabel": "Median",
-          "modeLabel": "Modus",
-          "noMode": "Keiner",
-          "note": "Wenn sie so stark voneinander abweichen, beschreibt der Median meist einen \"typischen\" Wert besser als der Mittelwert."
-        },
         "outlierEffect": {
-          "title": "Wie stark ein Ausreißer den Mittelwert verschiebt",
-          "intro": "Dieselben fünf echten Werte, vor und nach dem Hinzufügen eines einzelnen Extremwerts (95).",
-          "meanLabel": "Mittelwert",
-          "outlierLabel": "Neuer Punkt",
+          "title": "Wie stark der entfernteste Punkt den Mittelwert verschiebt",
+          "intro": "Der vom Mittelwert am weitesten entfernte Live-Wert ({value}) wird vorübergehend entfernt, um zu zeigen, wie stark genau dieser eine Punkt den Durchschnitt zieht.",
+          "withLabel": "Mittelwert (vollständiger Datensatz)",
+          "withoutLabel": "Mittelwert (ohne Ausreißer)",
           "worked": {
-            "title": "Musterbeispiel",
-            "meanBefore": "Mittelwert vorher",
-            "meanAfter": "Mittelwert nachher",
-            "meanNote": "Sprang stark durch einen hinzugefügten Punkt",
-            "medianBefore": "Median vorher",
-            "medianAfter": "Median nachher",
-            "medianNote": "Kaum bewegt — robust gegenüber Ausreißern"
+            "title": "Rechenbeispiel",
+            "shift": "Wie weit sich der Mittelwert verschoben hat"
           }
         },
         "sumToMean": {
-          "title": "Der Mittelwert ist einfach Summe geteilt durch Anzahl",
-          "intro": "Für {values} — die Formel hinter der bekanntesten Statistik, mit echten Zahlen.",
+          "title": "Der Mittelwert ist nur Summe geteilt durch Anzahl",
+          "intro": "Die Summe des live berechneten Datensatzes, geteilt durch die Anzahl seiner Werte — die Formel hinter der bekanntesten Kennzahl, mit echten Zahlen.",
           "sumLabel": "Summe",
           "countLabel": "Anzahl",
           "meanLabel": "Mittelwert",
           "worked": {
-            "title": "Musterbeispiel",
+            "title": "Rechenbeispiel",
             "formula": "Formel"
           }
         },
-        "medianParity": {
-          "title": "Der Median hängt davon ab, ob die Anzahl gerade oder ungerade ist",
-          "intro": "Dieselben fünf Werte, dann ein sechster hinzugefügt — die Median-Regel verzweigt sich tatsächlich je nachdem, ob die Anzahl gerade oder ungerade ist.",
-          "oddTitle": "Ungerade Anzahl (n = {n})",
-          "evenTitle": "Gerade Anzahl (n = {n})",
-          "worked": {
-            "title": "Musterbeispiel",
-            "odd": "Ungerade Regel",
-            "oddRule": "Der einzelne mittlere Wert, sobald sortiert",
-            "even": "Gerade Regel"
-          }
-        },
         "modeFrequency": {
-          "title": "Der Modus ist der Wert, der am häufigsten vorkommt",
-          "intro": "Echte Häufigkeitszählung für {values} — der Modus ist der Wert, der tatsächlich am häufigsten auftritt, keine Vermutung.",
-          "tagMode": "Modus",
-          "tagOther": "Kein Modus",
+          "title": "Der Modus ist der am häufigsten vorkommende Wert",
+          "intro": "Jeder einzelne Wert im live berechneten Datensatz mit seiner tatsächlichen Häufigkeit — der Modus ist die Zeile (oder Zeilen) mit der höchsten tatsächlichen Häufigkeit.",
           "columnValue": "Wert",
-          "columnFrequency": "Häufigkeit"
+          "columnFrequency": "Häufigkeit",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "highestFrequency": "Höchste Häufigkeit",
+            "noMode": "Kein Wert wiederholt sich, dieser Datensatz hat also keinen Modus"
+          }
         },
         "minMaxRange": {
           "title": "Die Spannweite ist das einfachste Streuungsmaß",
-          "intro": "Für {values} — einfach der Abstand zwischen den beiden Extremwerten.",
-          "maxLabel": "Max",
+          "intro": "Der Maximalwert des live berechneten Datensatzes minus sein Minimalwert — einfach der Abstand zwischen den beiden tatsächlich eingegebenen Extremwerten.",
           "minLabel": "Min",
+          "maxLabel": "Max",
           "rangeLabel": "Spannweite",
           "worked": {
-            "title": "Musterbeispiel",
+            "title": "Rechenbeispiel",
             "formula": "Formel"
           }
         },
         "varianceSteps": {
-          "title": "Von Rohdaten zur Standardabweichung",
-          "intro": "Der echte vierstufige Weg, den Varianz und Standardabweichung tatsächlich nehmen, für einen kleinen, vollständig nachvollziehbaren Datensatz.",
-          "steps": {
-            "deviations": "1. Abweichungen vom Mittelwert",
-            "squared": "2. Quadriert",
-            "averaged": "3. Gemittelt",
-            "rooted": "4. Quadratwurzel"
-          },
-          "resultBadge": "Standardabweichung",
+          "title": "Von Rohdaten zur Varianz, in drei realen Schritten",
+          "intro": "Die Populationsvarianz des live berechneten Datensatzes, Schritt für Schritt aufgebaut — Abweichungen vom Mittelwert, dann quadriert, dann über jeden tatsächlichen Wert gemittelt.",
           "worked": {
-            "title": "Musterbeispiel",
-            "mean": "Mittelwert",
-            "stdDev": "Std.-Abw."
-          }
-        },
-        "popVsSample": {
-          "title": "Populations- vs. Stichprobenvarianz",
-          "intro": "Genau dieselben 5 Zahlen, {values} — Varianz mit zwei verschiedenen Divisoren berechnet.",
-          "populationLabel": "Population (÷n)",
-          "sampleLabel": "Stichprobe (÷n−1)",
-          "worked": {
-            "title": "Musterbeispiel",
-            "divisorPop": "Populationsdivisor",
-            "divisorSample": "Stichprobendivisor",
-            "note": "Die Division durch eine kleinere Zahl ergibt immer ein größeres Ergebnis"
+            "title": "Rechenbeispiel",
+            "step1Short": "x − {mean}",
+            "step2Short": "Σ = {sum}",
+            "step3Short": "÷n = {variance}",
+            "count": "Anzahl (n)",
+            "sumSquaredDeviations": "Summe der quadrierten Abweichungen",
+            "variance": "Populationsvarianz"
           }
         },
         "rangeVsStdDev": {
-          "title": "Spannweite vs. Standardabweichung mit einem Ausreißer",
-          "intro": "Für {values} — ein Ausreißer (30) bläht die Spannweite dramatisch auf, bewegt aber die Standardabweichung, die jeden Punkt gewichtet, kaum.",
+          "title": "Spannweite vs. Standardabweichung",
+          "intro": "Die Spannweite des live berechneten Datensatzes, die nur seine zwei Extremwerte betrachtet, neben seiner Standardabweichung, die jeden Punkt gewichtet — ziehe einen Extremwert und beobachte, welche Kennzahl sich stärker verändert.",
           "rangeLabel": "Spannweite",
           "stdDevLabel": "Std.-Abw.",
           "worked": {
-            "title": "Musterbeispiel",
+            "title": "Rechenbeispiel",
             "range": "Spannweite",
-            "rangeNote": "Vollständig durch die beiden Extrempunkte bestimmt",
+            "rangeNote": "Wird vollständig durch die beiden Extremwerte bestimmt",
             "stdDev": "Standardabweichung",
-            "stdDevNote": "Jeder Punkt trägt bei, daher zählt ein Ausreißer weniger"
+            "stdDevNote": "Jeder Punkt trägt dazu bei, ein einzelner Ausreißer fällt also weniger ins Gewicht"
           }
         },
         "stdDevZone": {
-          "title": "Wo ein Wert relativ zu einer Standardabweichung liegt",
-          "intro": "Der Mittelwert ± eine Standardabweichung eines echten 10-Punkte-Datensatzes, mit einem bestimmten Wert aus dem Datensatz gegen dieses Band markiert.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "band": "Mittelwert ± 1 SD Band",
-            "inside": "Innerhalb des typischen Bandes",
-            "outside": "Außerhalb des typischen Bandes"
-          }
-        },
-        "deviations": {
-          "title": "Der echte Abstand jedes Punkts vom Mittelwert",
-          "intro": "Mittelwert = {mean} — die vorzeichenbehaftete Abweichung jedes Werts, die rohe Zutat, die die Varianz quadriert und mittelt.",
-          "worked": {
-            "title": "Musterbeispiel"
-          }
-        },
-        "skewComparison": {
-          "title": "Symmetrische vs. schiefe Daten",
-          "intro": "Zwei echte 5-Punkte-Datensätze, gleiche Struktur — in einem stimmen Mittelwert und Median überein; im anderen weichen sie tatsächlich voneinander ab.",
-          "symmetric": {
-            "title": "Symmetrisch"
-          },
-          "skewed": {
-            "title": "Schief"
-          },
-          "meanLabel": "Mittelwert",
-          "medianLabel": "Median",
-          "note": "Mittelwert gleich Median gilt nur, wenn die Daten tatsächlich symmetrisch um ihr Zentrum liegen."
-        },
-        "spreadRanked": {
-          "title": "Datensätze nach Streuung ordnen",
-          "intro": "Drei echte Datensätze, geordnet nach ihrer tatsächlichen Standardabweichung — beweist, dass der Mittelwert allein nie sagt, wie verstreut die Daten sind.",
-          "sets": {
-            "a": "Eng gebündelt",
-            "b": "Mäßig gestreut",
-            "c": "Weit gestreut"
+          "title": "Anteil der Daten innerhalb einer Standardabweichung",
+          "intro": "Der tatsächliche, live berechnete Anteil der Werte innerhalb einer Standardabweichung vom Mittelwert, verglichen mit den rund 68 %, die eine Normalverteilung vorhersagen würde.",
+          "zones": {
+            "within1": "Innerhalb ±1σ"
           },
           "worked": {
-            "title": "Musterbeispiel",
-            "mean": "Mittelwert",
-            "stdDev": "Std.-Abw."
-          }
-        },
-        "sampleSizeEffect": {
-          "title": "Warum die Stichprobenkorrektur bei kleinen Daten wichtiger ist",
-          "intro": "Die prozentuale Lücke zwischen Populations- und Stichproben-Standardabweichung, für einen kleinen (n=3) gegenüber einem größeren (n=12) Datensatz — die n−1-Korrektur zählt am meisten, wenn Daten knapp sind.",
-          "smallLabel": "n = {n}",
-          "largeLabel": "n = {n}",
-          "worked": {
-            "title": "Musterbeispiel"
+            "title": "Rechenbeispiel",
+            "actualShare": "Tatsächlicher Anteil innerhalb ±1σ",
+            "normalPrediction": "Vorhersage der Normalverteilung",
+            "note": "Kleine oder ungewöhnlich geformte Datensätze können deutlich über oder unter dieser Faustregel liegen."
           }
         },
         "coefficientOfVariation": {
-          "title": "Dieselbe Std.-Abw. kann sehr Unterschiedliches bedeuten",
-          "intro": "Zwei Datensätze mit exakt derselben Standardabweichung, aber sehr unterschiedlichen Mittelwerten — relativ zu ihrer eigenen Skala ist einer weit variabler als der andere.",
-          "small": {
-            "title": "Kleinskalige Daten"
-          },
-          "large": {
-            "title": "Großskalige Daten"
-          },
-          "meanLabel": "Mittelwert",
+          "title": "Standardabweichung im Verhältnis zum Mittelwert",
+          "intro": "Die Standardabweichung des live berechneten Datensatzes, ausgedrückt als Prozentsatz seines eigenen Mittelwerts — das einzige Streuungsmaß, das beim Vergleich von Datensätzen mit sehr unterschiedlichen Skalen aussagekräftig bleibt.",
           "stdDevLabel": "Std.-Abw.",
           "cvLabel": "Variationskoeffizient",
-          "note": "Der Variationskoeffizient (Std.-Abw. ÷ Mittelwert) setzt Streuung in Kontext — die rohe Std.-Abw. allein kann das über verschiedene Skalen hinweg nicht."
+          "worked": {
+            "title": "Rechenbeispiel",
+            "formula": "Formel",
+            "variability": "Variabilität",
+            "low": "Niedrig — die Werte bleiben nahe am Mittelwert",
+            "high": "Hoch — die Werte streuen stark im Verhältnis zum Mittelwert"
+          }
+        },
+        "meanMedianMode": {
+          "title": "Drei Lagemaße im direkten Vergleich",
+          "intro": "Mittelwert, Median und Modus des live berechneten Datensatzes gleichzeitig — sie treffen nur bei einer exakt symmetrischen Verteilung auf dieselbe Zahl.",
+          "meanLabel": "Mittelwert",
+          "medianLabel": "Median",
+          "modeLabel": "Modus",
+          "noMode": "Keiner",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "allAgree": "Stimmen alle drei überein?",
+            "yes": "Ja — ein perfekt symmetrischer Datensatz",
+            "no": "Nein — sie weichen voneinander ab"
+          }
+        },
+        "medianEvenOdd": {
+          "title": "Die Median-Regel verzweigt sich je nach gerader oder ungerader Anzahl",
+          "intro": "Der live berechnete, sortierte Datensatz — bei {count} Werten hängt die tatsächlich geltende Median-Regel davon ab, ob diese Anzahl gerade oder ungerade ist.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "parity": "Parität der Anzahl",
+            "odd": "Ungerade — der eine mittlere Wert",
+            "even": "Gerade — Mittelwert der beiden mittleren Werte",
+            "median": "Median"
+          }
+        },
+        "popVsSampleVariance": {
+          "title": "Populationsvarianz vs. Stichprobenvarianz",
+          "intro": "Derselbe live berechnete Datensatz, dessen Varianz mit zwei verschiedenen Divisoren berechnet wird — einer für den Fall, dass die Daten die gesamte Population sind, einer für den Fall, dass sie nur eine Stichprobe aus einer größeren Population sind.",
+          "populationLabel": "Populationsvarianz",
+          "sampleLabel": "Stichprobenvarianz",
+          "divideBy": "Teilt durch {n}",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "difference": "Differenz",
+            "note": "Die Division durch eine kleinere Zahl ergibt immer ein größeres Ergebnis — die Bessel-Korrektur, die ausgleicht, dass eine Stichprobe die wahre Varianz der Population systematisch unterschätzt."
+          }
+        },
+        "deviationFromMean": {
+          "title": "Der reale Abstand jedes Punkts vom Mittelwert",
+          "intro": "Bei einem Mittelwert von {mean}, die vorzeichenbehaftete Abweichung jedes live berechneten Werts — die Rohzutat, die die Varianz quadriert und mittelt.",
+          "overflowNote": "{count} weitere Werte sind in der Summe unten enthalten, aber hier nicht als eigene Balken dargestellt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "sumOfDeviations": "Summe aller Abweichungen",
+            "note": "Die vorzeichenbehafteten Abweichungen eines vollständigen Datensatzes summieren sich immer exakt zu null — positive und negative Abstände heben sich gegenseitig auf."
+          }
+        },
+        "skewedVsSymmetric": {
+          "title": "Wie weit der Mittelwert vom Median entfernt liegt",
+          "intro": "Mittelwert und Median des live berechneten Datensatzes, auf derselben Linie platziert — je näher sie beieinanderliegen, desto symmetrischer die Form; je weiter sie auseinanderliegen, desto schiefer ist sie tatsächlich.",
+          "meanLabel": "Mittelwert",
+          "medianLabel": "Median",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "gap": "Abstand zwischen Mittelwert und Median",
+            "shape": "Form",
+            "symmetric": "Annähernd symmetrisch",
+            "skewed": "Schief"
+          }
+        },
+        "dataSpreadRanked": {
+          "title": "Welche Punkte die Streuung am meisten antreiben",
+          "intro": "Die Werte des live berechneten Datensatzes, nach ihrem tatsächlichen Abstand vom Mittelwert geordnet — der am weitesten entfernte Punkt trägt am meisten zur Varianz bei.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "furthest": "Am weitesten vom Mittelwert entfernter Wert"
+          }
+        },
+        "sampleSizePrecision": {
+          "title": "Warum die Stichprobengröße beeinflusst, wie stark die Korrektur wirkt",
+          "intro": "Bei einer tatsächlichen Stichprobengröße von n = {n} zeigt dies genau, wie stark die Bessel-Korrektur die Stichproben-Standardabweichung gegenüber der Populations-Standardabweichung aufbläht — eine Lücke, die mit wachsendem n schrumpft.",
+          "zones": {
+            "smallN": "Kleines n — Korrektur wichtiger",
+            "largeN": "Großes n — Korrektur weniger wichtig"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "populationStdDev": "Populations-Std.-Abw.",
+            "sampleStdDev": "Stichproben-Std.-Abw.",
+            "inflation": "Aufblähung durch die Korrektur"
+          }
         }
       },
       "scenarios": {

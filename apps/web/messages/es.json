@@ -8011,17 +8011,14 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Seis puntos de datos arrastrables en una recta numérica compartida, con la media, mediana y desviación estándar en vivo mostradas arriba y abajo",
+          "ariaLabel": "Una recta numérica con hasta ocho puntos de datos arrastrables, junto con el recuento, la media, la mediana y la desviación estándar en vivo de todo el conjunto",
+          "countLabel": "Recuento",
           "meanLabel": "Media",
           "medianLabel": "Mediana",
-          "stdDevLabel": "Desv. est.",
-          "meanShort": "x̄",
-          "medianShort": "M̃",
-          "meanTooltip": "Media = {value}",
-          "medianTooltip": "Mediana = {value}",
-          "stdDevTooltip": "Desv. est. poblacional = {value}",
-          "pointTooltip": "{value}",
-          "hint": "Arrastra cualquier punto — la media, mediana y desviación estándar se actualizan en vivo."
+          "stdDevLabel": "Desv. estándar",
+          "meanMarker": "media",
+          "overflowNote": "{count} valores adicionales se incluyen en las estadísticas de arriba, pero no se muestran como puntos individuales aquí.",
+          "hint": "Arrastra cualquier punto a izquierda o derecha, o edita el campo de datos de arriba — el recuento, la media, la mediana y la desviación estándar se actualizan al instante, igual que cada indicador de abajo."
         },
         "intro": {
           "title": "Entendiendo la Estadística Descriptiva",
@@ -8150,66 +8147,43 @@
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Leer el Texto Original"
         },
-        "centralTendency": {
-          "title": "Media, mediana y moda pueden discrepar",
-          "intro": "Para {values} — un solo valor atípico arrastra la media hacia arriba, mientras la mediana y la moda permanecen ancladas donde realmente está la mayoría de los datos.",
-          "meanLabel": "Media",
-          "medianLabel": "Mediana",
-          "modeLabel": "Moda",
-          "noMode": "Ninguna",
-          "note": "Cuando divergen tanto, la mediana suele describir mejor un valor \"típico\" que la media."
-        },
         "outlierEffect": {
-          "title": "Cuánto mueve un valor atípico a la media",
-          "intro": "Los mismos cinco valores reales, antes y después de añadir un punto extremo (95).",
-          "meanLabel": "Media",
-          "outlierLabel": "Punto nuevo",
+          "title": "Cuánto mueve la media el punto más alejado",
+          "intro": "El valor en vivo más alejado de la media ({value}) se elimina temporalmente para mostrar exactamente cuánto arrastra ese único punto al promedio.",
+          "withLabel": "Media (conjunto completo)",
+          "withoutLabel": "Media (sin el valor atípico)",
           "worked": {
             "title": "Ejemplo resuelto",
-            "meanBefore": "Media antes",
-            "meanAfter": "Media después",
-            "meanNote": "Saltó bruscamente por un punto añadido",
-            "medianBefore": "Mediana antes",
-            "medianAfter": "Mediana después",
-            "medianNote": "Apenas se movió — resistente a valores atípicos"
+            "shift": "Cuánto se movió la media"
           }
         },
         "sumToMean": {
-          "title": "La media es solo la suma dividida entre el conteo",
-          "intro": "Para {values} — la fórmula detrás de la estadística más conocida, con números reales.",
+          "title": "La media es solo la suma dividida entre el recuento",
+          "intro": "La suma del conjunto de datos en vivo, dividida entre la cantidad de valores que la componen — la fórmula detrás de la estadística más conocida, con números reales.",
           "sumLabel": "Suma",
-          "countLabel": "Conteo",
+          "countLabel": "Recuento",
           "meanLabel": "Media",
           "worked": {
             "title": "Ejemplo resuelto",
             "formula": "Fórmula"
           }
         },
-        "medianParity": {
-          "title": "La mediana depende de si el conteo es par o impar",
-          "intro": "Los mismos cinco valores, luego se añade un sexto — la regla de la mediana genuinamente se ramifica según si el conteo es par o impar.",
-          "oddTitle": "Conteo impar (n = {n})",
-          "evenTitle": "Conteo par (n = {n})",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "odd": "Regla impar",
-            "oddRule": "El único valor central, ya ordenado",
-            "even": "Regla par"
-          }
-        },
         "modeFrequency": {
           "title": "La moda es el valor que más se repite",
-          "intro": "Conteo real de frecuencias para {values} — la moda es el valor que realmente aparece más veces, no una suposición.",
-          "tagMode": "Moda",
-          "tagOther": "No es moda",
+          "intro": "Cada valor distinto del conjunto de datos en vivo con su frecuencia real — la moda es la fila (o filas) con la frecuencia real más alta.",
           "columnValue": "Valor",
-          "columnFrequency": "Frecuencia"
+          "columnFrequency": "Frecuencia",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "highestFrequency": "Frecuencia más alta",
+            "noMode": "Ningún valor se repite, así que este conjunto no tiene moda"
+          }
         },
         "minMaxRange": {
           "title": "El rango es la medida de dispersión más simple",
-          "intro": "Para {values} — solo la distancia entre los dos valores más extremos.",
-          "maxLabel": "Máx",
+          "intro": "El valor máximo del conjunto de datos en vivo menos su valor mínimo — simplemente la distancia entre los dos valores extremos realmente introducidos.",
           "minLabel": "Mín",
+          "maxLabel": "Máx",
           "rangeLabel": "Rango",
           "worked": {
             "title": "Ejemplo resuelto",
@@ -8217,112 +8191,138 @@
           }
         },
         "varianceSteps": {
-          "title": "De los datos brutos a la desviación estándar",
-          "intro": "El camino real de cuatro estaciones que realmente siguen la varianza y la desviación estándar, para un conjunto de datos pequeño y totalmente rastreable.",
-          "steps": {
-            "deviations": "1. Desviaciones de la media",
-            "squared": "2. Al cuadrado",
-            "averaged": "3. Promediadas",
-            "rooted": "4. Raíz cuadrada"
-          },
-          "resultBadge": "Desviación estándar",
+          "title": "De los datos brutos a la varianza, en tres pasos reales",
+          "intro": "La varianza poblacional del conjunto de datos en vivo, construida paso a paso — desviaciones respecto a la media, luego elevadas al cuadrado, luego promediadas sobre cada valor real.",
           "worked": {
             "title": "Ejemplo resuelto",
-            "mean": "Media",
-            "stdDev": "Desv. est."
-          }
-        },
-        "popVsSample": {
-          "title": "Varianza poblacional vs. muestral",
-          "intro": "Exactamente los mismos 5 números, {values} — varianza calculada con dos divisores distintos.",
-          "populationLabel": "Población (÷n)",
-          "sampleLabel": "Muestra (÷n−1)",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "divisorPop": "Divisor poblacional",
-            "divisorSample": "Divisor muestral",
-            "note": "Dividir entre un número más pequeño siempre da un resultado mayor"
+            "step1Short": "x − {mean}",
+            "step2Short": "Σ = {sum}",
+            "step3Short": "÷n = {variance}",
+            "count": "Recuento (n)",
+            "sumSquaredDeviations": "Suma de las desviaciones al cuadrado",
+            "variance": "Varianza poblacional"
           }
         },
         "rangeVsStdDev": {
-          "title": "Rango vs. desviación estándar con un valor atípico",
-          "intro": "Para {values} — un valor atípico (30) infla el rango dramáticamente pero apenas mueve la desviación estándar, que pondera cada punto.",
+          "title": "Rango vs. desviación estándar",
+          "intro": "El rango del conjunto de datos en vivo, que solo mira sus dos valores extremos, junto a su desviación estándar, que pondera cada punto — arrastra un valor extremo y observa cuál se mueve más.",
           "rangeLabel": "Rango",
-          "stdDevLabel": "Desv. est.",
+          "stdDevLabel": "Desv. estándar",
           "worked": {
             "title": "Ejemplo resuelto",
             "range": "Rango",
             "rangeNote": "Determinado enteramente por los dos puntos extremos",
             "stdDev": "Desviación estándar",
-            "stdDevNote": "Cada punto contribuye, así que un valor atípico importa menos"
+            "stdDevNote": "Cada punto contribuye, así que un solo valor atípico pesa menos"
           }
         },
         "stdDevZone": {
-          "title": "Dónde se ubica un valor respecto a una desviación estándar",
-          "intro": "La media ± una desviación estándar de un conjunto real de 10 puntos, con un valor específico del conjunto marcado contra esa banda.",
-          "worked": {
-            "title": "Ejemplo resuelto",
-            "band": "Banda media ± 1 DE",
-            "inside": "Dentro de la banda típica",
-            "outside": "Fuera de la banda típica"
-          }
-        },
-        "deviations": {
-          "title": "La distancia real de cada punto respecto a la media",
-          "intro": "Media = {mean} — la desviación con signo de cada valor, el ingrediente bruto que la varianza eleva al cuadrado y promedia.",
-          "worked": {
-            "title": "Ejemplo resuelto"
-          }
-        },
-        "skewComparison": {
-          "title": "Datos simétricos vs. sesgados",
-          "intro": "Dos conjuntos reales de 5 puntos, misma estructura — en uno, media y mediana coinciden; en el otro, divergen genuinamente.",
-          "symmetric": {
-            "title": "Simétrico"
-          },
-          "skewed": {
-            "title": "Sesgado"
-          },
-          "meanLabel": "Media",
-          "medianLabel": "Mediana",
-          "note": "La media es igual a la mediana solo cuando los datos son genuinamente simétricos respecto a su centro."
-        },
-        "spreadRanked": {
-          "title": "Clasificar conjuntos de datos por su dispersión",
-          "intro": "Tres conjuntos de datos reales, clasificados por su desviación estándar real — demuestra que la media sola nunca indica cuán disperso está realmente el dato.",
-          "sets": {
-            "a": "Muy agrupados",
-            "b": "Moderadamente dispersos",
-            "c": "Ampliamente dispersos"
+          "title": "Proporción de los datos dentro de una desviación estándar",
+          "intro": "La proporción real y en vivo de los valores dentro de una desviación estándar de la media, comparada con el aproximadamente 68 % que predeciría una distribución normal.",
+          "zones": {
+            "within1": "Dentro de ±1σ"
           },
           "worked": {
             "title": "Ejemplo resuelto",
-            "mean": "media",
-            "stdDev": "desv. est."
-          }
-        },
-        "sampleSizeEffect": {
-          "title": "Por qué la corrección muestral importa más con pocos datos",
-          "intro": "La brecha porcentual entre la desviación estándar poblacional y muestral, para un conjunto pequeño (n=3) frente a uno mayor (n=12) — la corrección n−1 importa más exactamente cuando los datos escasean.",
-          "smallLabel": "n = {n}",
-          "largeLabel": "n = {n}",
-          "worked": {
-            "title": "Ejemplo resuelto"
+            "actualShare": "Proporción real dentro de ±1σ",
+            "normalPrediction": "Predicción de la distribución normal",
+            "note": "Los conjuntos de datos pequeños o con formas inusuales pueden quedar claramente por encima o por debajo de esta regla general."
           }
         },
         "coefficientOfVariation": {
-          "title": "La misma desv. est. puede significar cosas muy distintas",
-          "intro": "Dos conjuntos de datos con exactamente la misma desviación estándar pero medias muy diferentes — en relación con su propia escala, uno es mucho más variable que el otro.",
-          "small": {
-            "title": "Datos a pequeña escala"
-          },
-          "large": {
-            "title": "Datos a gran escala"
-          },
-          "meanLabel": "Media",
-          "stdDevLabel": "Desv. est.",
+          "title": "Desviación estándar, escalada por la media",
+          "intro": "La desviación estándar del conjunto de datos en vivo, expresada como porcentaje de su propia media — la única medida de dispersión que sigue siendo significativa al comparar conjuntos de datos en escalas muy distintas.",
+          "stdDevLabel": "Desv. estándar",
           "cvLabel": "Coeficiente de variación",
-          "note": "El coeficiente de variación (desv. est. ÷ media) pone la dispersión en contexto — la desv. est. bruta sola no puede hacerlo entre escalas distintas."
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "formula": "Fórmula",
+            "variability": "Variabilidad",
+            "low": "Baja — los valores se mantienen cerca de la media",
+            "high": "Alta — los valores se dispersan mucho respecto a la media"
+          }
+        },
+        "meanMedianMode": {
+          "title": "Tres medidas de centro, una junto a otra",
+          "intro": "La media, la mediana y la moda en vivo del conjunto de datos a la vez — solo coinciden exactamente en el mismo número cuando la distribución es perfectamente simétrica.",
+          "meanLabel": "Media",
+          "medianLabel": "Mediana",
+          "modeLabel": "Moda",
+          "noMode": "Ninguna",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "allAgree": "¿Coinciden las tres?",
+            "yes": "Sí — un conjunto perfectamente simétrico",
+            "no": "No — difieren"
+          }
+        },
+        "medianEvenOdd": {
+          "title": "La regla de la mediana se bifurca según sea par o impar",
+          "intro": "El conjunto de datos en vivo, ordenado — con {count} valores, la regla de la mediana que realmente se aplica depende de si ese recuento es par o impar.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "parity": "Paridad del recuento",
+            "odd": "Impar — el único valor central",
+            "even": "Par — promedio de los dos valores centrales",
+            "median": "Mediana"
+          }
+        },
+        "popVsSampleVariance": {
+          "title": "Varianza poblacional vs. varianza muestral",
+          "intro": "El mismo conjunto de datos en vivo, con la varianza calculada con dos divisores distintos — uno para cuando los datos son toda la población, otro para cuando son solo una muestra tomada de una población mayor.",
+          "populationLabel": "Varianza poblacional",
+          "sampleLabel": "Varianza muestral",
+          "divideBy": "Divide entre {n}",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "difference": "Diferencia",
+            "note": "Dividir entre un número más pequeño siempre da un resultado mayor — la corrección de Bessel, que compensa que una muestra subestime sistemáticamente la varianza real de la población."
+          }
+        },
+        "deviationFromMean": {
+          "title": "La distancia real de cada punto respecto a la media",
+          "intro": "Con una media de {mean}, la desviación con signo de cada valor en vivo — el ingrediente crudo que la varianza eleva al cuadrado y promedia.",
+          "overflowNote": "{count} valores adicionales se incluyen en la suma de abajo, pero no se dibujan como barras individuales aquí.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "sumOfDeviations": "Suma de todas las desviaciones",
+            "note": "Las desviaciones con signo de un conjunto de datos completo siempre suman exactamente cero — las distancias positivas y negativas se cancelan entre sí."
+          }
+        },
+        "skewedVsSymmetric": {
+          "title": "Qué tan lejos está la media de la mediana",
+          "intro": "La media y la mediana del conjunto de datos en vivo, colocadas en la misma línea — cuanto más cerca estén, más simétrica es la forma; cuanto más lejos, más sesgada es realmente.",
+          "meanLabel": "Media",
+          "medianLabel": "Mediana",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "gap": "Distancia entre media y mediana",
+            "shape": "Forma",
+            "symmetric": "Aproximadamente simétrica",
+            "skewed": "Sesgada"
+          }
+        },
+        "dataSpreadRanked": {
+          "title": "Qué puntos impulsan más la dispersión",
+          "intro": "Los valores del conjunto de datos en vivo, clasificados por su distancia real respecto a la media — el punto más alejado es el que más contribuye a la varianza.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "furthest": "Valor más alejado de la media"
+          }
+        },
+        "sampleSizePrecision": {
+          "title": "Por qué el tamaño de la muestra cambia cuánto importa la corrección",
+          "intro": "Con un tamaño de muestra real de n = {n}, esto muestra exactamente cuánto infla la corrección de Bessel la desviación estándar muestral por encima de la poblacional — una brecha que se reduce a medida que n crece.",
+          "zones": {
+            "smallN": "n pequeño — la corrección importa más",
+            "largeN": "n grande — la corrección importa menos"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "populationStdDev": "Desv. estándar poblacional",
+            "sampleStdDev": "Desv. estándar muestral",
+            "inflation": "Inflación debida a la corrección"
+          }
         }
       },
       "scenarios": {

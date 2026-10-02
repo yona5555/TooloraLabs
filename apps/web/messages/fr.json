@@ -8011,17 +8011,14 @@
       },
       "education": {
         "hero": {
-          "ariaLabel": "Six points de données déplaçables sur une droite numérique partagée, avec la moyenne, la médiane et l'écart-type en direct affichés au-dessus et au-dessous",
+          "ariaLabel": "Une droite numérique avec jusqu'à huit points de données déplaçables, ainsi que le nombre, la moyenne, la médiane et l'écart type en direct de l'ensemble complet",
+          "countLabel": "Nombre",
           "meanLabel": "Moyenne",
           "medianLabel": "Médiane",
-          "stdDevLabel": "Écart-type",
-          "meanShort": "x̄",
-          "medianShort": "M̃",
-          "meanTooltip": "Moyenne = {value}",
-          "medianTooltip": "Médiane = {value}",
-          "stdDevTooltip": "Écart-type de population = {value}",
-          "pointTooltip": "{value}",
-          "hint": "Faites glisser un point — la moyenne, la médiane et l'écart-type se mettent tous à jour en direct."
+          "stdDevLabel": "Écart type",
+          "meanMarker": "moyenne",
+          "overflowNote": "{count} valeurs supplémentaires sont incluses dans les statistiques ci-dessus mais ne sont pas représentées individuellement ici.",
+          "hint": "Faites glisser un point vers la gauche ou la droite, ou modifiez le champ de données ci-dessus — le nombre, la moyenne, la médiane et l'écart type se mettent à jour instantanément, tout comme chaque indicateur ci-dessous."
         },
         "intro": {
           "title": "Comprendre les Statistiques Descriptives",
@@ -8150,33 +8147,19 @@
           "url": "https://doi.org/10.1214/08-STS256",
           "readOriginal": "Lire le Texte Original"
         },
-        "centralTendency": {
-          "title": "Moyenne, médiane et mode peuvent tous diverger",
-          "intro": "Pour {values} — une seule valeur aberrante tire la moyenne vers le haut, tandis que la médiane et le mode restent ancrés là où se trouve réellement la majorité des données.",
-          "meanLabel": "Moyenne",
-          "medianLabel": "Médiane",
-          "modeLabel": "Mode",
-          "noMode": "Aucun",
-          "note": "Quand ils divergent autant, la médiane décrit généralement mieux une valeur \"typique\" que la moyenne."
-        },
         "outlierEffect": {
-          "title": "Combien une valeur aberrante déplace la moyenne",
-          "intro": "Les mêmes cinq valeurs réelles, avant et après l'ajout d'un seul point extrême (95).",
-          "meanLabel": "Moyenne",
-          "outlierLabel": "Nouveau point",
+          "title": "À quel point le point le plus éloigné déplace la moyenne",
+          "intro": "La valeur en direct la plus éloignée de la moyenne ({value}) est temporairement retirée pour montrer exactement de combien ce seul point tire la moyenne.",
+          "withLabel": "Moyenne (ensemble complet)",
+          "withoutLabel": "Moyenne (valeur aberrante retirée)",
           "worked": {
             "title": "Exemple résolu",
-            "meanBefore": "Moyenne avant",
-            "meanAfter": "Moyenne après",
-            "meanNote": "A bondi fortement à cause d'un point ajouté",
-            "medianBefore": "Médiane avant",
-            "medianAfter": "Médiane après",
-            "medianNote": "A à peine bougé — résistante aux valeurs aberrantes"
+            "shift": "De combien la moyenne s'est déplacée"
           }
         },
         "sumToMean": {
-          "title": "La moyenne est simplement la somme divisée par le nombre",
-          "intro": "Pour {values} — la formule derrière la statistique la plus connue, avec de vrais nombres.",
+          "title": "La moyenne n'est que la somme divisée par le nombre",
+          "intro": "La somme de l'ensemble de données en direct, divisée par le nombre de valeurs qui la composent — la formule derrière la statistique la plus connue, avec de vrais nombres.",
           "sumLabel": "Somme",
           "countLabel": "Nombre",
           "meanLabel": "Moyenne",
@@ -8185,31 +8168,22 @@
             "formula": "Formule"
           }
         },
-        "medianParity": {
-          "title": "La médiane dépend de la parité du nombre de valeurs",
-          "intro": "Les mêmes cinq valeurs, puis une sixième ajoutée — la règle de la médiane bifurque véritablement selon que le nombre est pair ou impair.",
-          "oddTitle": "Nombre impair (n = {n})",
-          "evenTitle": "Nombre pair (n = {n})",
+        "modeFrequency": {
+          "title": "Le mode est la valeur qui revient le plus souvent",
+          "intro": "Chaque valeur distincte de l'ensemble de données en direct avec sa fréquence réelle — le mode est la ligne (ou les lignes) ayant la fréquence réelle la plus élevée.",
+          "columnValue": "Valeur",
+          "columnFrequency": "Fréquence",
           "worked": {
             "title": "Exemple résolu",
-            "odd": "Règle impaire",
-            "oddRule": "La seule valeur du milieu, une fois triée",
-            "even": "Règle paire"
+            "highestFrequency": "Fréquence la plus élevée",
+            "noMode": "Aucune valeur ne se répète, cet ensemble n'a donc pas de mode"
           }
-        },
-        "modeFrequency": {
-          "title": "Le mode est la valeur qui se répète le plus",
-          "intro": "Comptage réel des fréquences pour {values} — le mode est la valeur qui apparaît réellement le plus de fois, pas une supposition.",
-          "tagMode": "Mode",
-          "tagOther": "Pas le mode",
-          "columnValue": "Valeur",
-          "columnFrequency": "Fréquence"
         },
         "minMaxRange": {
           "title": "L'étendue est la mesure de dispersion la plus simple",
-          "intro": "Pour {values} — simplement la distance entre les deux valeurs les plus extrêmes.",
-          "maxLabel": "Max",
+          "intro": "Le maximum de l'ensemble de données en direct moins son minimum — simplement la distance entre les deux valeurs extrêmes réellement saisies.",
           "minLabel": "Min",
+          "maxLabel": "Max",
           "rangeLabel": "Étendue",
           "worked": {
             "title": "Exemple résolu",
@@ -8217,112 +8191,138 @@
           }
         },
         "varianceSteps": {
-          "title": "Des données brutes à l'écart-type",
-          "intro": "Le vrai chemin en quatre étapes que suivent réellement la variance et l'écart-type, pour un petit jeu de données entièrement traçable.",
-          "steps": {
-            "deviations": "1. Écarts à la moyenne",
-            "squared": "2. Au carré",
-            "averaged": "3. Moyennés",
-            "rooted": "4. Racine carrée"
-          },
-          "resultBadge": "Écart-type",
+          "title": "Des données brutes à la variance, en trois étapes réelles",
+          "intro": "La variance de population de l'ensemble de données en direct, construite étape par étape — écarts à la moyenne, puis élevés au carré, puis moyennés sur chaque valeur réelle.",
           "worked": {
             "title": "Exemple résolu",
-            "mean": "Moyenne",
-            "stdDev": "Écart-type"
-          }
-        },
-        "popVsSample": {
-          "title": "Variance de population vs. d'échantillon",
-          "intro": "Exactement les mêmes 5 nombres, {values} — variance calculée avec deux diviseurs différents.",
-          "populationLabel": "Population (÷n)",
-          "sampleLabel": "Échantillon (÷n−1)",
-          "worked": {
-            "title": "Exemple résolu",
-            "divisorPop": "Diviseur de population",
-            "divisorSample": "Diviseur d'échantillon",
-            "note": "Diviser par un nombre plus petit donne toujours un résultat plus grand"
+            "step1Short": "x − {mean}",
+            "step2Short": "Σ = {sum}",
+            "step3Short": "÷n = {variance}",
+            "count": "Nombre (n)",
+            "sumSquaredDeviations": "Somme des écarts au carré",
+            "variance": "Variance de population"
           }
         },
         "rangeVsStdDev": {
-          "title": "Étendue vs. écart-type avec une valeur aberrante",
-          "intro": "Pour {values} — une valeur aberrante (30) gonfle l'étendue de façon spectaculaire mais déplace à peine l'écart-type, qui pondère chaque point.",
+          "title": "Étendue vs. écart type",
+          "intro": "L'étendue de l'ensemble de données en direct, qui ne regarde que ses deux valeurs extrêmes, à côté de son écart type, qui pondère chaque point — faites glisser une valeur extrême et observez laquelle bouge le plus.",
           "rangeLabel": "Étendue",
-          "stdDevLabel": "Écart-type",
+          "stdDevLabel": "Écart type",
           "worked": {
             "title": "Exemple résolu",
             "range": "Étendue",
             "rangeNote": "Entièrement déterminée par les deux points extrêmes",
-            "stdDev": "Écart-type",
-            "stdDevNote": "Chaque point contribue, donc une valeur aberrante compte moins"
+            "stdDev": "Écart type",
+            "stdDevNote": "Chaque point contribue, une seule valeur aberrante pèse donc moins"
           }
         },
         "stdDevZone": {
-          "title": "Où se situe une valeur par rapport à un écart-type",
-          "intro": "La moyenne ± un écart-type d'un vrai jeu de données de 10 points, avec une valeur spécifique de l'ensemble marquée par rapport à cette bande.",
-          "worked": {
-            "title": "Exemple résolu",
-            "band": "Bande moyenne ± 1 ET",
-            "inside": "Dans la bande typique",
-            "outside": "Hors de la bande typique"
-          }
-        },
-        "deviations": {
-          "title": "La distance réelle de chaque point à la moyenne",
-          "intro": "Moyenne = {mean} — l'écart signé de chaque valeur, l'ingrédient brut que la variance met au carré et moyenne.",
-          "worked": {
-            "title": "Exemple résolu"
-          }
-        },
-        "skewComparison": {
-          "title": "Données symétriques vs. asymétriques",
-          "intro": "Deux jeux réels de 5 points, même structure — dans l'un, moyenne et médiane coïncident ; dans l'autre, elles divergent véritablement.",
-          "symmetric": {
-            "title": "Symétrique"
-          },
-          "skewed": {
-            "title": "Asymétrique"
-          },
-          "meanLabel": "Moyenne",
-          "medianLabel": "Médiane",
-          "note": "La moyenne n'égale la médiane que lorsque les données sont véritablement symétriques autour de leur centre."
-        },
-        "spreadRanked": {
-          "title": "Classer les jeux de données par dispersion",
-          "intro": "Trois jeux de données réels, classés par leur écart-type réel — prouvant que la moyenne seule ne dit jamais à quel point les données sont dispersées.",
-          "sets": {
-            "a": "Très regroupées",
-            "b": "Modérément dispersées",
-            "c": "Largement dispersées"
+          "title": "Part des données à moins d'un écart type",
+          "intro": "La part réelle et en direct des valeurs situées à moins d'un écart type de la moyenne, comparée aux environ 68 % que prédirait une distribution normale.",
+          "zones": {
+            "within1": "Dans ±1σ"
           },
           "worked": {
             "title": "Exemple résolu",
-            "mean": "moyenne",
-            "stdDev": "écart-type"
-          }
-        },
-        "sampleSizeEffect": {
-          "title": "Pourquoi la correction d'échantillon compte plus pour peu de données",
-          "intro": "L'écart en pourcentage entre l'écart-type de population et d'échantillon, pour un petit ensemble (n=3) contre un plus grand (n=12) — la correction n−1 compte le plus exactement quand les données sont rares.",
-          "smallLabel": "n = {n}",
-          "largeLabel": "n = {n}",
-          "worked": {
-            "title": "Exemple résolu"
+            "actualShare": "Part réelle dans ±1σ",
+            "normalPrediction": "Prédiction de la distribution normale",
+            "note": "Les ensembles de données petits ou de forme inhabituelle peuvent se situer nettement au-dessus ou en dessous de cette règle empirique."
           }
         },
         "coefficientOfVariation": {
-          "title": "Le même écart-type peut signifier des choses très différentes",
-          "intro": "Deux jeux de données avec exactement le même écart-type mais des moyennes très différentes — par rapport à leur propre échelle, l'un est bien plus variable que l'autre.",
-          "small": {
-            "title": "Données à petite échelle"
-          },
-          "large": {
-            "title": "Données à grande échelle"
-          },
-          "meanLabel": "Moyenne",
-          "stdDevLabel": "Écart-type",
+          "title": "L'écart type, rapporté à la moyenne",
+          "intro": "L'écart type de l'ensemble de données en direct, exprimé en pourcentage de sa propre moyenne — la seule mesure de dispersion qui reste significative lorsqu'on compare des ensembles de données à des échelles très différentes.",
+          "stdDevLabel": "Écart type",
           "cvLabel": "Coefficient de variation",
-          "note": "Le coefficient de variation (écart-type ÷ moyenne) replace la dispersion dans son contexte — l'écart-type brut seul ne peut pas le faire entre échelles différentes."
+          "worked": {
+            "title": "Exemple résolu",
+            "formula": "Formule",
+            "variability": "Variabilité",
+            "low": "Faible — les valeurs restent proches de la moyenne",
+            "high": "Élevée — les valeurs se dispersent fortement par rapport à la moyenne"
+          }
+        },
+        "meanMedianMode": {
+          "title": "Trois mesures de tendance centrale, côte à côte",
+          "intro": "La moyenne, la médiane et le mode en direct de l'ensemble de données à la fois — ils ne tombent sur le même nombre que lorsque la distribution est parfaitement symétrique.",
+          "meanLabel": "Moyenne",
+          "medianLabel": "Médiane",
+          "modeLabel": "Mode",
+          "noMode": "Aucun",
+          "worked": {
+            "title": "Exemple résolu",
+            "allAgree": "Les trois concordent-ils ?",
+            "yes": "Oui — un ensemble parfaitement symétrique",
+            "no": "Non — ils divergent"
+          }
+        },
+        "medianEvenOdd": {
+          "title": "La règle de la médiane se divise selon la parité du nombre",
+          "intro": "L'ensemble de données en direct, trié — avec {count} valeurs, la règle de la médiane réellement applicable dépend du fait que ce nombre soit pair ou impair.",
+          "worked": {
+            "title": "Exemple résolu",
+            "parity": "Parité du nombre",
+            "odd": "Impair — la seule valeur centrale",
+            "even": "Pair — moyenne des deux valeurs centrales",
+            "median": "Médiane"
+          }
+        },
+        "popVsSampleVariance": {
+          "title": "Variance de population vs. variance d'échantillon",
+          "intro": "Le même ensemble de données en direct, avec la variance calculée avec deux diviseurs différents — l'un pour le cas où les données constituent la population entière, l'autre pour le cas où elles ne sont qu'un échantillon tiré d'une population plus large.",
+          "populationLabel": "Variance de population",
+          "sampleLabel": "Variance d'échantillon",
+          "divideBy": "Divise par {n}",
+          "worked": {
+            "title": "Exemple résolu",
+            "difference": "Différence",
+            "note": "Diviser par un nombre plus petit donne toujours un résultat plus grand — la correction de Bessel, qui compense le fait qu'un échantillon sous-estime systématiquement la vraie variance de la population."
+          }
+        },
+        "deviationFromMean": {
+          "title": "La distance réelle de chaque point à la moyenne",
+          "intro": "Avec une moyenne de {mean}, l'écart signé de chaque valeur en direct — l'ingrédient brut que la variance élève au carré et moyenne.",
+          "overflowNote": "{count} valeurs supplémentaires sont incluses dans la somme ci-dessous mais ne sont pas représentées par des barres individuelles ici.",
+          "worked": {
+            "title": "Exemple résolu",
+            "sumOfDeviations": "Somme de tous les écarts",
+            "note": "Les écarts signés d'un ensemble de données complet totalisent toujours exactement zéro — les distances positives et négatives s'annulent."
+          }
+        },
+        "skewedVsSymmetric": {
+          "title": "À quelle distance la moyenne se trouve de la médiane",
+          "intro": "La moyenne et la médiane de l'ensemble de données en direct, placées sur la même ligne — plus elles sont proches, plus la forme est symétrique ; plus elles sont éloignées, plus elle est réellement asymétrique.",
+          "meanLabel": "Moyenne",
+          "medianLabel": "Médiane",
+          "worked": {
+            "title": "Exemple résolu",
+            "gap": "Écart entre moyenne et médiane",
+            "shape": "Forme",
+            "symmetric": "À peu près symétrique",
+            "skewed": "Asymétrique"
+          }
+        },
+        "dataSpreadRanked": {
+          "title": "Quels points tirent le plus la dispersion",
+          "intro": "Les valeurs de l'ensemble de données en direct, classées par leur distance réelle à la moyenne — le point le plus éloigné contribue le plus à la variance.",
+          "worked": {
+            "title": "Exemple résolu",
+            "furthest": "Valeur la plus éloignée de la moyenne"
+          }
+        },
+        "sampleSizePrecision": {
+          "title": "Pourquoi la taille de l'échantillon change l'importance de la correction",
+          "intro": "Avec une taille d'échantillon réelle de n = {n}, ceci montre exactement de combien la correction de Bessel gonfle l'écart type d'échantillon par rapport à l'écart type de population — un écart qui se réduit à mesure que n augmente.",
+          "zones": {
+            "smallN": "n petit — la correction compte plus",
+            "largeN": "n grand — la correction compte moins"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "populationStdDev": "Écart type de population",
+            "sampleStdDev": "Écart type d'échantillon",
+            "inflation": "Gonflement dû à la correction"
+          }
         }
       },
       "scenarios": {

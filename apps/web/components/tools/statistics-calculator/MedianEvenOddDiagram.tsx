@@ -1,45 +1,50 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { StatisticsCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { StatisticsCalculator } from "@tooloralabs/tools";
+import { parseDataSet } from "./types";
+import { useStatisticsLive } from "./StatisticsLiveContext";
 
 const tool = new StatisticsCalculator();
-const ODD = [3, 7, 9, 12, 21];
-const EVEN = [3, 7, 9, 12, 21, 25];
+const MAX_SHOWN = 10;
 
 function round2(n: number): number {
   return Math.round(n * 100) / 100;
 }
 
-/** Type #18 (Formula Diagram): the median rule genuinely branches on count parity — an odd-count set has one real middle value, an even-count set averages its two real middle values — shown for the same data with and without one more point. */
+/** Type #13 (Stepped Diagram): the live dataset's own real sorted order, with the median read off differently depending on whether the real count is odd (one middle value) or even (average of two middle values). */
 export default function MedianEvenOddDiagram() {
-  const t = useTranslations("tools.statistics-calculator.education.medianParity");
-  const oddOut = tool.execute({ values: ODD }, { locale: "en-US" });
-  const evenOut = tool.execute({ values: EVEN }, { locale: "en-US" });
-  if (!oddOut.success || oddOut.data.error || !evenOut.success || evenOut.data.error) return null;
+  const t = useTranslations("tools.statistics-calculator.education.medianEvenOdd");
+  const { dims } = useStatisticsLive();
+  const values = parseDataSet(dims.rawData);
+  if (values.length === 0) return null;
+  const output = tool.execute({ values }, { locale: "en-US" });
+  if (!output.success || output.data.error) return null;
+  const { median, count } = output.data;
+  const sorted = [...values].sort((a, b) => a - b).slice(0, MAX_SHOWN);
+  const isOdd = count % 2 === 1;
+  const midIndex = Math.floor((sorted.length - 1) / 2);
 
   return (
     <SectionCard title={t("title")}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-          <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-200">{t("oddTitle", { n: ODD.length })}</p>
-          <p className="mt-1 font-mono text-xs text-zinc-400">{`3, 7, [9], 12, 21`}</p>
-          <p className="mt-2 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(oddOut.data.median)}</p>
-        </div>
-        <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-          <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-200">{t("evenTitle", { n: EVEN.length })}</p>
-          <p className="mt-1 font-mono text-xs text-zinc-400">{`3, 7, [9, 12], 21, 25`}</p>
-          <p className="mt-2 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{round2(evenOut.data.median)}</p>
-        </div>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { count })}</p>
+      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-1.5 font-mono text-sm">
+        {sorted.map((v, i) => {
+          const isMiddle = isOdd ? i === midIndex : i === midIndex || i === midIndex + 1;
+          return (
+            <span key={i} className={`rounded-lg px-2 py-1.5 transition-colors duration-300 ${isMiddle ? "bg-blue-600 font-bold text-white" : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"}`}>
+              {round2(v)}
+            </span>
+          );
+        })}
       </div>
       <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: t("worked.odd"), value: t("worked.oddRule") },
-            { label: t("worked.even"), value: `(9 + 12) / 2 = ${round2(evenOut.data.median)}`, emphasize: true },
+            { label: t("worked.parity"), value: isOdd ? t("worked.odd") : t("worked.even") },
+            { label: t("worked.median"), value: `${round2(median)}`, emphasize: true },
           ]}
         />
       </div>
