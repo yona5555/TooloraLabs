@@ -6147,36 +6147,6 @@
         }
       },
       "education": {
-        "hero": {
-          "ariaLabel": "Un point déplaçable dont la position horizontale fixe l'exposant et la position verticale fixe le coefficient, avec des grandeurs de référence du monde réel marquées sur le même axe",
-          "standardLabel": "Forme standard",
-          "hint": "Faites glisser le point — le coefficient, l'exposant et la forme standard se mettent à jour en direct.",
-          "numberNames": {
-            "thousand": "Dans les milliers",
-            "million": "Dans les millions",
-            "billion": "Dans les milliards",
-            "trillion": "Dans les billions",
-            "quadrillion": "Dans les billiards",
-            "thousandth": "Millièmes",
-            "millionth": "Millionièmes",
-            "billionth": "Milliardièmes",
-            "trillionth": "Billionièmes"
-          },
-          "references": {
-            "atom": "Un atome d'hydrogène fait à peu près cette taille",
-            "atomShort": "atome",
-            "speck": "Un grain de poussière fait à peu près cette taille",
-            "speckShort": "poussière",
-            "one": "Un",
-            "oneShort": "1",
-            "million": "Un million",
-            "millionShort": "million",
-            "billion": "Un milliard",
-            "billionShort": "milliard",
-            "earthPopulationDigits": "Environ la population mondiale en cellules (ordre de grandeur)",
-            "earthPopulationDigitsShort": "≈cellules"
-          }
-        },
         "intro": {
           "title": "Comprendre la Notation Scientifique",
           "paragraph1": "La notation scientifique écrit tout nombre sous la forme d'un coefficient compris entre 1 et 10 multiplié par une puissance de dix, comme 1,234 × 10^8 au lieu de 123 400 000. L'exposant compte le nombre de positions dont la virgule décimale s'est déplacée entre le nombre standard et ce seul chiffre initial — un exposant positif pour les grands nombres, un exposant négatif pour les nombres inférieurs à 1. Cela rend beaucoup plus facile la lecture, la comparaison et le calcul de nombres qui seraient autrement une longue suite de chiffres.",
@@ -6308,189 +6278,189 @@
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Lire le texte original"
         },
-        "largeSteps": {
+        "hero": {
+          "ariaLabel": "Un point déplaçable sur une grille coefficient par exposant, représentant la valeur en direct réellement en jeu ci-dessus — un second point apparaît pour B lors d'une multiplication ou division",
+          "resultLabel": "Résultat",
+          "axisHint": "coefficient (y) × 10^exposant (x)",
+          "hint": "Faites glisser l'un des points — chaque indicateur de cette page se met à jour avec lui, et le résultat réel se recalcule en direct."
+        },
+        "largeNumberSteps": {
           "title": "Convertir un grand nombre standard",
-          "intro": "45 000 000, parcouru à travers les trois vraies étapes que l'opération toScientific de cet outil exécute pour atteindre sa forme normalisée.",
-          "steps": {
-            "standard": "Forme standard",
-            "decimalPlaced": "Décimale après le premier chiffre",
-            "exponentCounted": "Exposant compté"
-          },
-          "resultBadge": "Résultat",
+          "intro": "La valeur en direct en forme standard, parcourue à travers la véritable conversion en notation scientifique, un déplacement décimal à la fois.",
           "worked": {
             "title": "Exemple résolu",
-            "digitsAfterFirst": "Positions déplacées",
+            "placesMoved": "Positions déplacées",
             "result": "Résultat"
           }
         },
-        "smallSteps": {
-          "title": "Convertir une petite décimale",
-          "intro": "0,0000032 à travers les mêmes trois étapes — la virgule se déplace vers la droite au lieu de la gauche, donc l'exposant devient négatif.",
-          "steps": {
-            "standard": "Forme standard",
-            "decimalPlaced": "Décimale après le premier chiffre",
-            "exponentCounted": "Exposant compté"
-          },
-          "resultBadge": "Résultat",
+        "smallNumberSteps": {
+          "title": "Convertir un petit nombre standard",
+          "intro": "L'inverse de la valeur en direct en forme standard — un véritable petit nombre — converti de la même manière, aboutissant à un véritable exposant négatif.",
           "worked": {
             "title": "Exemple résolu",
-            "direction": "Direction du déplacement",
-            "directionValue": "Droite (nombre < 1)",
-            "result": "Résultat"
-          }
-        },
-        "multiply": {
-          "title": "Multiplier deux nombres en notation scientifique",
-          "intro": "(2×10³) × (3×10⁵) — les coefficients se multiplient entre eux, les exposants s'additionnent entre eux.",
-          "problemLabel": "Problème",
-          "ruleLabel": "Règle appliquée",
-          "resultLabel": "Résultat",
-          "worked": {
-            "title": "Exemple résolu",
-            "coefficients": "Coefficients",
-            "exponents": "Exposants",
+            "placesMoved": "Positions déplacées",
             "result": "Résultat",
-            "renormalizedNote": "Renormalisé depuis {raw} car le coefficient a atteint 10 ou plus"
+            "negativeNote": "Exposant négatif — la virgule s'est déplacée vers la droite, pas vers la gauche"
           }
         },
-        "divide": {
-          "title": "Diviser deux nombres en notation scientifique",
-          "intro": "(8×10⁹) ÷ (2×10⁴) — les coefficients se divisent, les exposants se soustraient, l'image miroir de la multiplication.",
-          "problemLabel": "Problème",
-          "ruleLabel": "Règle appliquée",
-          "resultLabel": "Résultat",
+        "multiplyFormula": {
+          "title": "Multiplier deux nombres en notation scientifique",
+          "intro": "Les A et B en direct multipliés — les coefficients se multiplient, les exposants s'additionnent.",
           "worked": {
             "title": "Exemple résolu",
-            "coefficients": "Coefficients",
-            "exponents": "Exposants",
+            "coefficients": "Les coefficients se multiplient",
+            "exponents": "Les exposants s'additionnent",
             "result": "Résultat"
           }
         },
-        "engineering": {
-          "title": "Notation scientifique vs. notation ingénieur",
-          "intro": "45 700 000 sous les trois formes — la notation ingénieur restreint l'exposant à un multiple de 3 pour s'aligner sur les préfixes d'unités nommés (kilo-, méga-, giga-), au prix d'un coefficient pouvant dépasser 10.",
-          "standardLabel": "Standard",
-          "scientificLabel": "Scientifique",
-          "engineeringLabel": "Ingénieur",
+        "divideFormula": {
+          "title": "Diviser deux nombres en notation scientifique",
+          "intro": "Le A en direct divisé par B — les coefficients se divisent, les exposants se soustraient.",
           "worked": {
             "title": "Exemple résolu",
-            "sciExponent": "Exposant scientifique",
-            "engExponent": "Exposant ingénieur",
-            "engNote": "Toujours un multiple de 3",
-            "engCoefficient": "Coefficient ingénieur"
+            "coefficients": "Les coefficients se divisent",
+            "exponents": "Les exposants se soustraient",
+            "result": "Résultat"
+          }
+        },
+        "engineeringEquivalence": {
+          "title": "Notation scientifique contre notation d'ingénierie",
+          "intro": "Le A en direct, en véritable notation scientifique à côté de son véritable équivalent en notation d'ingénierie — la convention que les préfixes d'unités suivent réellement.",
+          "scientificLabel": "Notation scientifique",
+          "engineeringLabel": "Notation d'ingénierie",
+          "worked": {
+            "title": "Exemple résolu",
+            "rule": "Règle",
+            "ruleValue": "L'exposant est toujours un multiple de 3",
+            "result": "Résultat"
           }
         },
         "namedMagnitudes": {
-          "title": "Ordres de grandeur nommés, grands et petits",
-          "intro": "Chaque ordre de grandeur nommé que cet outil reconnaît automatiquement — d'un millième à un billiard.",
-          "tagFraction": "Fraction",
-          "tagMultiple": "Multiple",
+          "title": "Grandeurs nommées, grandes et petites",
+          "intro": "Chaque ordre de grandeur nommé que cet outil reconnaît réellement — le propre exposant de A est actuellement 10^{exponent}, en surlignant celui qui lui correspond exactement.",
+          "matchTag": "C'est A",
           "columnName": "Nom",
-          "columnExponent": "Puissance de dix",
+          "columnValue": "Puissance de dix",
           "names": {
-            "thousandth": "Millième",
-            "millionth": "Millionième",
-            "billionth": "Milliardième",
-            "trillionth": "Billionième",
             "thousand": "Mille",
             "million": "Million",
             "billion": "Milliard",
             "trillion": "Billion",
-            "quadrillion": "Billiard"
-          }
-        },
-        "exponentSign": {
-          "title": "Exposants positifs vs. négatifs",
-          "intro": "Le même coefficient, 5, avec le signe de l'exposant inversé — des effets véritablement opposés, de part et d'autre de 1.",
-          "worked": {
-            "title": "Exemple résolu",
-            "negative": "Exposant négatif",
-            "negativeNote": "Divise par une puissance de 10 — plus petit que 1",
-            "positive": "Exposant positif",
-            "positiveNote": "Multiplie par une puissance de 10 — plus grand que 1"
-          }
-        },
-        "digitCount": {
-          "title": "À quel point la notation scientifique raccourcit",
-          "intro": "Nombre de caractères de la chaîne en notation standard par rapport à son équivalent scientifique, pour trois nombres de taille croissante.",
-          "standardLabel": "Standard",
-          "scientificLabel": "Scientifique",
-          "worked": {
-            "title": "Exemple résolu",
-            "note": "24 caractères raccourcis à 6 — c'est pourquoi les chimistes et astronomes n'écrivent jamais en entier des nombres comme la constante d'Avogadro"
-          }
-        },
-        "exponentArithmetic": {
-          "title": "Règles des exposants pour les quatre opérations",
-          "intro": "{a} et {b}, passés par la multiplication et la division — classés par exposant résultant, montrant côte à côte l'addition pour la multiplication et la soustraction pour la division.",
-          "multiplyLabel": "Multiplier",
-          "divideLabel": "Diviser",
-          "worked": {
-            "title": "Exemple résolu"
-          }
-        },
-        "unitScale": {
-          "title": "La notation scientifique dans la conversion d'unités",
-          "intro": "750 nanomètres — une longueur d'onde de lumière rouge visible — convertis en mètres à l'aide du facteur exact 10⁻⁹ qui définit le préfixe \"nano-\".",
-          "startLabel": "Départ",
-          "factorLabel": "Facteur de conversion",
-          "resultLabel": "Résultat",
-          "worked": {
-            "title": "Exemple résolu",
-            "formula": "Formule",
-            "result": "Résultat",
-            "note": "Chaque préfixe métrique (nano-, micro-, kilo-, méga-...) est simplement une puissance de 10 nommée"
-          }
-        },
-        "magnitudeCompare": {
-          "title": "Comparer deux grandeurs réelles",
-          "intro": "Une bactérie typique à côté d'un virus typique — les deux sont décrits comme \"microscopiques\", mais la notation scientifique montre qu'ils diffèrent par un facteur réel et calculable.",
-          "unitLabel": "mètres (environ)",
-          "items": {
-            "bacterium": "Bactérie",
-            "virus": "Virus"
-          },
-          "worked": {
-            "title": "Exemple résolu",
-            "ratio": "Rapport de taille",
-            "ratioNote": "La bactérie est environ ce nombre de fois plus grande"
-          }
-        },
-        "normalization": {
-          "title": "Une seule forme normalisée correcte",
-          "intro": "Quatre paires (coefficient, exposant), toutes égales exactement au même nombre réel — seule celle avec un coefficient dans [1, 10) compte comme correctement normalisée.",
-          "normalizedLabel": "Normalisée",
-          "worked": {
-            "title": "Exemple résolu"
-          }
-        },
-        "sigFigs": {
-          "title": "La notation scientifique élimine l'ambiguïté des chiffres significatifs",
-          "intro": "La même valeur arrondie, 1 200, écrite avec 2, 3 ou 4 chiffres significatifs en notation scientifique — chaque zéro final après la virgule est désormais sans ambiguïté, contrairement à la forme standard.",
-          "sigFigsLabel": "{count} chiffres sig.",
-          "standardAmbiguous": "En forme standard, \"1 200\" seul pourrait correspondre à n'importe laquelle de ces trois précisions — impossible de le savoir.",
-          "worked": {
-            "title": "Exemple résolu",
-            "ambiguous": "Pourrait être 2, 3 ou 4 chiffres sig.",
-            "unambiguous": "Sans ambiguïté 4 chiffres sig."
+            "quadrillion": "Billiard",
+            "thousandth": "Millième",
+            "millionth": "Millionième",
+            "billionth": "Milliardième",
+            "trillionth": "Billionième"
           }
         },
         "realWorldScale": {
-          "title": "26 ordres de grandeur, une seule échelle",
-          "intro": "Des tailles physiques réelles, d'un atome d'hydrogène à une année-lumière, placées sur la même échelle logarithmique — une échelle linéaire ne pourrait pas montrer tout cela sur une seule ligne lisible.",
+          "title": "Échelle du monde réel, de l'atome à l'année-lumière",
+          "intro": "Des tailles physiques réelles sur une échelle logarithmique, avec un marqueur en direct montrant exactement où se situe le propre exposant de A parmi elles.",
           "items": {
-            "hydrogenAtom": "Atome d'hydrogène",
+            "atom": "Atome d'hydrogène",
             "virus": "Virus",
-            "humanHair": "Largeur d'un cheveu humain",
-            "humanHeight": "Taille humaine",
-            "mountEverest": "Mont Everest",
+            "grain": "Grain de sable",
+            "human": "Taille humaine",
+            "building": "Immeuble de grande hauteur",
             "earthDiameter": "Diamètre de la Terre",
-            "distanceToSun": "Distance au Soleil",
-            "lightYear": "Une année-lumière"
+            "lightYear": "Année-lumière"
           },
           "worked": {
             "title": "Exemple résolu",
-            "spanNote": "Séparés par 26 ordres de grandeur"
+            "currentExponent": "Le propre exposant de A"
+          }
+        },
+        "coefficientRange": {
+          "title": "Le coefficient est-il réellement dans la plage ?",
+          "intro": "Une véritable notation scientifique exige un coefficient entre 1 et 10 — cette bande montre en direct si le propre coefficient de A est réellement dans cette plage.",
+          "worked": {
+            "title": "Exemple résolu",
+            "coefficient": "Coefficient de A",
+            "status": "Statut",
+            "inRange": "Dans la plage",
+            "outOfRange": "Hors de la plage",
+            "needsNormalizing": "Cela devrait être normalisé avant de compter comme une véritable notation scientifique"
+          }
+        },
+        "exponentSign": {
+          "title": "Exposants positifs et négatifs, équilibrés",
+          "intro": "Les exposants en direct de A et B sur une balance commune — positif signifie un grand nombre, négatif signifie petit.",
+          "worked": {
+            "title": "Exemple résolu",
+            "large": "Grand nombre (exposant positif)",
+            "small": "Petit nombre (exposant négatif)"
+          }
+        },
+        "digitCount": {
+          "title": "Combien de chiffres, sans les écrire",
+          "intro": "Le véritable nombre de chiffres de A et B en forme standard complète — l'exposant seul vous le dit, sans avoir besoin d'écrire le nombre en entier.",
+          "worked": {
+            "title": "Exemple résolu",
+            "digitsCount": "{count} chiffre(s)"
+          }
+        },
+        "exponentArithmetic": {
+          "title": "Les exposants s'additionnent pour la multiplication, se soustraient pour la division",
+          "intro": "Les exposants en direct de A et B, combinés des deux façons réelles côte à côte.",
+          "multiplyLabel": "Multiplication",
+          "divideLabel": "Division",
+          "worked": {
+            "title": "Exemple résolu",
+            "exponentA": "Exposant de A",
+            "exponentB": "Exposant de B"
+          }
+        },
+        "unitScale": {
+          "title": "Notation scientifique dans les vrais préfixes d'unités",
+          "intro": "L'exposant du A en direct, associé à son véritable préfixe métrique le plus proche — les mêmes unités d'échelle nano/micro/milli/kilo/méga/giga réellement utilisées.",
+          "names": {
+            "nano": "nano",
+            "micro": "micro",
+            "milli": "milli",
+            "base": "base",
+            "kilo": "kilo",
+            "mega": "méga",
+            "giga": "giga"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "nearestPrefix": "Préfixe le plus proche",
+            "remainder": "Facteur restant",
+            "exactMatch": "Une correspondance exacte — aucun facteur restant"
+          }
+        },
+        "magnitudeComparison": {
+          "title": "A contre B, par véritable ordre de grandeur",
+          "intro": "Les A et B en direct, comparés directement par taille réelle — pas seulement par quel coefficient paraît plus grand.",
+          "worked": {
+            "title": "Exemple résolu",
+            "bigger": "Valeur la plus grande",
+            "orderGap": "Écart d'ordre de grandeur",
+            "ordersOfMagnitude": "{count} ordre(s) de grandeur"
+          }
+        },
+        "normalizationSteps": {
+          "title": "Normaliser un coefficient pour revenir dans la plage",
+          "intro": "Le propre coefficient et exposant du A en direct, parcourus à travers les véritables étapes de normalisation qu'une calculatrice exécute en interne dès qu'un coefficient sort de [1, 10).",
+          "worked": {
+            "title": "Exemple résolu",
+            "stepsTaken": "Étapes effectuées",
+            "alreadyNormalized": "Déjà dans la bonne plage — aucune étape nécessaire",
+            "result": "Résultat"
+          }
+        },
+        "sigFigsAmbiguity": {
+          "title": "Ce que la forme standard cache sur la précision",
+          "intro": "Le coefficient du A en direct porte un nombre réel et sans ambiguïté de chiffres significatifs — exactement ce qui se perd dès que cette même valeur est complétée en simple forme standard.",
+          "worked": {
+            "title": "Exemple résolu",
+            "unambiguous": "Sans ambiguïté — chaque chiffre affiché est significatif",
+            "ambiguous": "Ambigu — les zéros de fin pourraient être de vrais chiffres ou de simples espaces réservés",
+            "notAmbiguous": "Pas ambigu à cette taille",
+            "sigFigs": "Chiffres significatifs",
+            "note": "Remarque",
+            "trailingZerosNote": "Les zéros de fin ne révèlent pas combien de chiffres ont réellement été mesurés",
+            "noTrailingZerosNote": "Aucun zéro de fin ici pour créer une ambiguïté"
           }
         }
       },

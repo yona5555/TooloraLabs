@@ -6147,36 +6147,6 @@
         }
       },
       "education": {
-        "hero": {
-          "ariaLabel": "A draggable point whose horizontal position sets the exponent and vertical position sets the coefficient, with real-world reference magnitudes marked along the same axis",
-          "standardLabel": "Standard form",
-          "hint": "Drag the point — the coefficient, exponent, and standard form all update live.",
-          "numberNames": {
-            "thousand": "In the thousands",
-            "million": "In the millions",
-            "billion": "In the billions",
-            "trillion": "In the trillions",
-            "quadrillion": "In the quadrillions",
-            "thousandth": "Thousandths",
-            "millionth": "Millionths",
-            "billionth": "Billionths",
-            "trillionth": "Trillionths"
-          },
-          "references": {
-            "atom": "A hydrogen atom is about this size",
-            "atomShort": "atom",
-            "speck": "A speck of dust is about this size",
-            "speckShort": "dust",
-            "one": "One",
-            "oneShort": "1",
-            "million": "One million",
-            "millionShort": "million",
-            "billion": "One billion",
-            "billionShort": "billion",
-            "earthPopulationDigits": "Roughly the world's population in cells (order of magnitude)",
-            "earthPopulationDigitsShort": "≈cells"
-          }
-        },
         "intro": {
           "title": "Understanding Scientific Notation",
           "paragraph1": "Scientific notation writes any number as a coefficient between 1 and 10 multiplied by a power of ten, such as 1.234 × 10^8 instead of 123,400,000. The exponent counts how many places the decimal point moved to get from the standard number to that single leading digit — a positive exponent for large numbers, a negative exponent for numbers smaller than 1. This makes it far easier to read, compare, and calculate with numbers that would otherwise be a long string of digits.",
@@ -6308,189 +6278,189 @@
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Read the Original Text"
         },
-        "largeSteps": {
+        "hero": {
+          "ariaLabel": "A draggable point on a coefficient-by-exponent grid, representing the live value actually in play above the fold — a second point appears for B when multiplying or dividing",
+          "resultLabel": "Result",
+          "axisHint": "coefficient (y) × 10^exponent (x)",
+          "hint": "Drag either point — every indicator on this page updates with it, and the real result recalculates live."
+        },
+        "largeNumberSteps": {
           "title": "Converting a Large Standard Number",
-          "intro": "45,000,000 walked through the exact three stations this tool's toScientific operation runs to reach its normalized form.",
-          "steps": {
-            "standard": "Standard form",
-            "decimalPlaced": "Decimal after first digit",
-            "exponentCounted": "Exponent counted"
-          },
-          "resultBadge": "Result",
+          "intro": "The live standard-form value, walked through the real conversion to scientific notation one decimal placement at a time.",
           "worked": {
             "title": "Worked Example",
-            "digitsAfterFirst": "Places moved",
+            "placesMoved": "Places moved",
             "result": "Result"
           }
         },
-        "smallSteps": {
-          "title": "Converting a Small Decimal",
-          "intro": "0.0000032 through the same three stations — the decimal point moves right instead of left, so the exponent comes out negative.",
-          "steps": {
-            "standard": "Standard form",
-            "decimalPlaced": "Decimal after first digit",
-            "exponentCounted": "Exponent counted"
-          },
-          "resultBadge": "Result",
+        "smallNumberSteps": {
+          "title": "Converting a Small Standard Number",
+          "intro": "The reciprocal of the live standard-form value — a genuine small number — converted the same way, landing on a real negative exponent.",
           "worked": {
             "title": "Worked Example",
-            "direction": "Direction moved",
-            "directionValue": "Right (decimal < 1)",
-            "result": "Result"
-          }
-        },
-        "multiply": {
-          "title": "Multiplying Two Scientific-Notation Numbers",
-          "intro": "(2×10³) × (3×10⁵) — coefficients multiply together, exponents add together.",
-          "problemLabel": "Problem",
-          "ruleLabel": "Rule applied",
-          "resultLabel": "Result",
-          "worked": {
-            "title": "Worked Example",
-            "coefficients": "Coefficients",
-            "exponents": "Exponents",
+            "placesMoved": "Places moved",
             "result": "Result",
-            "renormalizedNote": "Renormalized from {raw} since the coefficient reached 10 or more"
+            "negativeNote": "Negative exponent — the decimal moved right, not left"
           }
         },
-        "divide": {
-          "title": "Dividing Two Scientific-Notation Numbers",
-          "intro": "(8×10⁹) ÷ (2×10⁴) — coefficients divide, exponents subtract, the mirror image of multiplication.",
-          "problemLabel": "Problem",
-          "ruleLabel": "Rule applied",
-          "resultLabel": "Result",
+        "multiplyFormula": {
+          "title": "Multiplying Two Numbers in Scientific Notation",
+          "intro": "The live A and B multiplied — coefficients multiply together, exponents add.",
           "worked": {
             "title": "Worked Example",
-            "coefficients": "Coefficients",
-            "exponents": "Exponents",
+            "coefficients": "Coefficients multiply",
+            "exponents": "Exponents add",
             "result": "Result"
           }
         },
-        "engineering": {
-          "title": "Scientific vs. Engineering Notation",
-          "intro": "45,700,000 in all three forms — engineering notation restricts the exponent to a multiple of 3 so it lines up with named unit prefixes (kilo-, mega-, giga-), at the cost of a coefficient that can run past 10.",
-          "standardLabel": "Standard",
-          "scientificLabel": "Scientific",
-          "engineeringLabel": "Engineering",
+        "divideFormula": {
+          "title": "Dividing Two Numbers in Scientific Notation",
+          "intro": "The live A divided by B — coefficients divide, exponents subtract.",
           "worked": {
             "title": "Worked Example",
-            "sciExponent": "Scientific exponent",
-            "engExponent": "Engineering exponent",
-            "engNote": "Always a multiple of 3",
-            "engCoefficient": "Engineering coefficient"
+            "coefficients": "Coefficients divide",
+            "exponents": "Exponents subtract",
+            "result": "Result"
+          }
+        },
+        "engineeringEquivalence": {
+          "title": "Scientific Notation vs. Engineering Notation",
+          "intro": "The live A, in real scientific notation next to its real engineering-notation equivalent — the convention unit prefixes actually follow.",
+          "scientificLabel": "Scientific notation",
+          "engineeringLabel": "Engineering notation",
+          "worked": {
+            "title": "Worked Example",
+            "rule": "Rule",
+            "ruleValue": "Exponent is always a multiple of 3",
+            "result": "Result"
           }
         },
         "namedMagnitudes": {
           "title": "Named Magnitudes, Large and Small",
-          "intro": "Every named order of magnitude this tool recognizes automatically — from a thousandth up to a quadrillion.",
-          "tagFraction": "Fraction",
-          "tagMultiple": "Multiple",
+          "intro": "Every named order of magnitude this tool actually recognizes — A's own exponent is currently 10^{exponent}, highlighting whichever one matches it exactly.",
+          "matchTag": "This is A",
           "columnName": "Name",
-          "columnExponent": "Power of ten",
+          "columnValue": "Power of ten",
           "names": {
-            "thousandth": "Thousandth",
-            "millionth": "Millionth",
-            "billionth": "Billionth",
-            "trillionth": "Trillionth",
             "thousand": "Thousand",
             "million": "Million",
             "billion": "Billion",
             "trillion": "Trillion",
-            "quadrillion": "Quadrillion"
-          }
-        },
-        "exponentSign": {
-          "title": "Positive vs. Negative Exponents",
-          "intro": "The same coefficient, 5, with the sign of the exponent flipped — genuinely opposite effects, landing on opposite sides of 1.",
-          "worked": {
-            "title": "Worked Example",
-            "negative": "Negative exponent",
-            "negativeNote": "Divides by a power of 10 — smaller than 1",
-            "positive": "Positive exponent",
-            "positiveNote": "Multiplies by a power of 10 — larger than 1"
-          }
-        },
-        "digitCount": {
-          "title": "How Much Shorter Scientific Notation Gets",
-          "intro": "Character count of the standard-notation string versus its scientific-notation equivalent, for three numbers of increasing size.",
-          "standardLabel": "Standard",
-          "scientificLabel": "Scientific",
-          "worked": {
-            "title": "Worked Example",
-            "note": "24 characters shortened to 6 — this is why chemists and astronomers never write out numbers like Avogadro's constant in full"
-          }
-        },
-        "exponentArithmetic": {
-          "title": "Exponent Rules Across All Four Operations",
-          "intro": "{a} and {b}, run through multiply and divide — ranked by the resulting exponent, showing add-for-multiply and subtract-for-divide side by side.",
-          "multiplyLabel": "Multiply",
-          "divideLabel": "Divide",
-          "worked": {
-            "title": "Worked Example"
-          }
-        },
-        "unitScale": {
-          "title": "Scientific Notation in Unit Conversion",
-          "intro": "750 nanometers — a wavelength of visible red light — converted to meters using the exact 10⁻⁹ factor that defines the \"nano-\" prefix.",
-          "startLabel": "Start",
-          "factorLabel": "Conversion factor",
-          "resultLabel": "Result",
-          "worked": {
-            "title": "Worked Example",
-            "formula": "Formula",
-            "result": "Result",
-            "note": "Every metric prefix (nano-, micro-, kilo-, mega-...) is just a named power of 10"
-          }
-        },
-        "magnitudeCompare": {
-          "title": "Comparing Two Real Magnitudes",
-          "intro": "A typical bacterium next to a typical virus — both are described as \"microscopic,\" but scientific notation shows they differ by a real, computable factor.",
-          "unitLabel": "meters (approx.)",
-          "items": {
-            "bacterium": "Bacterium",
-            "virus": "Virus"
-          },
-          "worked": {
-            "title": "Worked Example",
-            "ratio": "Size ratio",
-            "ratioNote": "The bacterium is about this many times larger"
-          }
-        },
-        "normalization": {
-          "title": "Only One Correct Normalized Form",
-          "intro": "Four (coefficient, exponent) pairs, all equal to the exact same real number — only the one with a coefficient in [1, 10) counts as properly normalized.",
-          "normalizedLabel": "Normalized",
-          "worked": {
-            "title": "Worked Example"
-          }
-        },
-        "sigFigs": {
-          "title": "Scientific Notation Removes Significant-Figure Ambiguity",
-          "intro": "The same rounded value, 1,200, written with 2, 3, or 4 significant figures in scientific notation — each trailing zero after the decimal point is now unambiguous, unlike in standard form.",
-          "sigFigsLabel": "{count} sig figs",
-          "standardAmbiguous": "In standard form, \"1,200\" alone could be any of these three precisions — there's no way to tell.",
-          "worked": {
-            "title": "Worked Example",
-            "ambiguous": "Could be 2, 3, or 4 sig figs",
-            "unambiguous": "Unambiguously 4 sig figs"
+            "quadrillion": "Quadrillion",
+            "thousandth": "Thousandth",
+            "millionth": "Millionth",
+            "billionth": "Billionth",
+            "trillionth": "Trillionth"
           }
         },
         "realWorldScale": {
-          "title": "26 Orders of Magnitude, One Scale",
-          "intro": "Real physical sizes, from a hydrogen atom to a light-year, placed on the same logarithmic scale — a linear scale couldn't show all of these on one readable line.",
+          "title": "Real-World Scale, Atom to Light-Year",
+          "intro": "Real physical sizes on a logarithmic scale, with a live marker showing exactly where A's own exponent falls among them.",
           "items": {
-            "hydrogenAtom": "Hydrogen atom",
+            "atom": "Hydrogen atom",
             "virus": "Virus",
-            "humanHair": "Human hair width",
-            "humanHeight": "Human height",
-            "mountEverest": "Mount Everest",
+            "grain": "Grain of sand",
+            "human": "Human height",
+            "building": "Tall building",
             "earthDiameter": "Earth's diameter",
-            "distanceToSun": "Distance to the Sun",
-            "lightYear": "One light-year"
+            "lightYear": "Light-year"
           },
           "worked": {
             "title": "Worked Example",
-            "spanNote": "26 orders of magnitude apart"
+            "currentExponent": "A's own exponent"
+          }
+        },
+        "coefficientRange": {
+          "title": "Is the Coefficient Actually in Range?",
+          "intro": "Proper scientific notation requires a coefficient between 1 and 10 — this strip shows live whether A's own coefficient is actually inside that range.",
+          "worked": {
+            "title": "Worked Example",
+            "coefficient": "A's coefficient",
+            "status": "Status",
+            "inRange": "In range",
+            "outOfRange": "Out of range",
+            "needsNormalizing": "This would need normalizing before it counts as proper scientific notation"
+          }
+        },
+        "exponentSign": {
+          "title": "Positive and Negative Exponents, Balanced",
+          "intro": "The live A and B exponents on a shared balance — positive means a large number, negative means small.",
+          "worked": {
+            "title": "Worked Example",
+            "large": "Large number (positive exponent)",
+            "small": "Small number (negative exponent)"
+          }
+        },
+        "digitCount": {
+          "title": "How Many Digits, Without Writing Them Out",
+          "intro": "The live A and B's real digit counts in full standard form — the exponent alone tells you, no need to write the number out.",
+          "worked": {
+            "title": "Worked Example",
+            "digitsCount": "{count} digit(s)"
+          }
+        },
+        "exponentArithmetic": {
+          "title": "Exponents Add for Multiplication, Subtract for Division",
+          "intro": "The live A and B exponents, combined both real ways side by side.",
+          "multiplyLabel": "Multiplication",
+          "divideLabel": "Division",
+          "worked": {
+            "title": "Worked Example",
+            "exponentA": "Exponent of A",
+            "exponentB": "Exponent of B"
+          }
+        },
+        "unitScale": {
+          "title": "Scientific Notation in Real Unit Prefixes",
+          "intro": "The live A's exponent matched to its nearest real metric prefix — the same nano/micro/milli/kilo/mega/giga scale units actually use.",
+          "names": {
+            "nano": "nano",
+            "micro": "micro",
+            "milli": "milli",
+            "base": "base",
+            "kilo": "kilo",
+            "mega": "mega",
+            "giga": "giga"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "nearestPrefix": "Nearest prefix",
+            "remainder": "Remaining factor",
+            "exactMatch": "An exact match — no remaining factor"
+          }
+        },
+        "magnitudeComparison": {
+          "title": "A vs. B, by Real Order of Magnitude",
+          "intro": "The live A and B, compared directly by actual size — not just which coefficient looks bigger.",
+          "worked": {
+            "title": "Worked Example",
+            "bigger": "Bigger value",
+            "orderGap": "Order-of-magnitude gap",
+            "ordersOfMagnitude": "{count} order(s) of magnitude"
+          }
+        },
+        "normalizationSteps": {
+          "title": "Normalizing a Coefficient Back Into Range",
+          "intro": "The live A's own coefficient and exponent, walked through the real normalization steps a calculator runs internally whenever a coefficient strays outside [1, 10).",
+          "worked": {
+            "title": "Worked Example",
+            "stepsTaken": "Steps taken",
+            "alreadyNormalized": "Already in proper range — no steps needed",
+            "result": "Result"
+          }
+        },
+        "sigFigsAmbiguity": {
+          "title": "What Standard Form Hides About Precision",
+          "intro": "The live A's coefficient carries a real, unambiguous number of significant figures — exactly what gets lost the moment the same value is padded into plain standard form.",
+          "worked": {
+            "title": "Worked Example",
+            "unambiguous": "Unambiguous — every digit shown is significant",
+            "ambiguous": "Ambiguous — trailing zeros could be real digits or just placeholders",
+            "notAmbiguous": "Not ambiguous at this size",
+            "sigFigs": "Significant figures",
+            "note": "Note",
+            "trailingZerosNote": "The trailing zeros don't reveal how many digits were actually measured",
+            "noTrailingZerosNote": "No trailing zeros here to create ambiguity"
           }
         }
       },

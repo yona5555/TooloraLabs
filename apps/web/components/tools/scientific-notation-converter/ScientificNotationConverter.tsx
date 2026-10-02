@@ -12,6 +12,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import ScientificNotationInputPanel from "./ScientificNotationInputPanel";
 import ScientificNotationResult from "./ScientificNotationResult";
 import ScientificNotationQuickReference from "./ScientificNotationQuickReference";
+import { ScientificNotationLiveProvider } from "./ScientificNotationLiveContext";
 import type { ScientificNotationOperation } from "./types";
 
 const tool = new ScientificNotationConverterTool();
@@ -20,8 +21,8 @@ const DEFAULTS: Record<
   ScientificNotationOperation,
   { standardValue: string; coefficientA: string; exponentA: string; coefficientB: string; exponentB: string }
 > = {
-  toScientific: { standardValue: "299792458", coefficientA: "0", exponentA: "0", coefficientB: "0", exponentB: "0" },
-  toStandard: { standardValue: "0", coefficientA: "6.02", exponentA: "23", coefficientB: "0", exponentB: "0" },
+  toScientific: { standardValue: "299792458", coefficientA: "45.2", exponentA: "3", coefficientB: "3", exponentB: "4" },
+  toStandard: { standardValue: "0", coefficientA: "6.02", exponentA: "23", coefficientB: "3", exponentB: "4" },
   multiply: { standardValue: "0", coefficientA: "5", exponentA: "3", coefficientB: "3", exponentB: "4" },
   divide: { standardValue: "0", coefficientA: "6", exponentA: "7", coefficientB: "2", exponentB: "3" },
 };
@@ -78,8 +79,26 @@ export default function ScientificNotationConverter({ education }: { education: 
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
+  const liveDims = {
+    operation,
+    standardValue: parseLocalizedNumber(standardValue) || 0,
+    coefficientA: parseLocalizedNumber(coefficientA) || 0,
+    exponentA: parseLocalizedNumber(exponentA) || 0,
+    coefficientB: parseLocalizedNumber(coefficientB) || 0,
+    exponentB: parseLocalizedNumber(exponentB) || 0,
+  };
+
+  function setLiveDim<K extends keyof typeof liveDims>(key: K, value: (typeof liveDims)[K]) {
+    if (key === "operation") setOperation(value as ScientificNotationOperation);
+    else if (key === "standardValue") setStandardValue(String(value));
+    else if (key === "coefficientA") setCoefficientA(String(value));
+    else if (key === "exponentA") setExponentA(String(value));
+    else if (key === "coefficientB") setCoefficientB(String(value));
+    else if (key === "exponentB") setExponentB(String(value));
+  }
+
   return (
-    <>
+    <ScientificNotationLiveProvider value={{ dims: liveDims, setDim: setLiveDim }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
@@ -112,6 +131,6 @@ export default function ScientificNotationConverter({ education }: { education: 
       </div>
 
       {education}
-    </>
+    </ScientificNotationLiveProvider>
   );
 }

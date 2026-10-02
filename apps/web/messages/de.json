@@ -6147,36 +6147,6 @@
         }
       },
       "education": {
-        "hero": {
-          "ariaLabel": "Ein ziehbarer Punkt, dessen horizontale Position den Exponenten und dessen vertikale Position den Koeffizienten festlegt, mit realen Referenzgrößen auf derselben Achse",
-          "standardLabel": "Standardform",
-          "hint": "Ziehen Sie den Punkt — Koeffizient, Exponent und Standardform aktualisieren sich live.",
-          "numberNames": {
-            "thousand": "Im Tausenderbereich",
-            "million": "Im Millionenbereich",
-            "billion": "Im Milliardenbereich",
-            "trillion": "Im Billionenbereich",
-            "quadrillion": "Im Billiardenbereich",
-            "thousandth": "Tausendstel",
-            "millionth": "Millionstel",
-            "billionth": "Milliardstel",
-            "trillionth": "Billionstel"
-          },
-          "references": {
-            "atom": "Ein Wasserstoffatom ist etwa so groß",
-            "atomShort": "Atom",
-            "speck": "Ein Staubkorn ist etwa so groß",
-            "speckShort": "Staub",
-            "one": "Eins",
-            "oneShort": "1",
-            "million": "Eine Million",
-            "millionShort": "Million",
-            "billion": "Eine Milliarde",
-            "billionShort": "Milliarde",
-            "earthPopulationDigits": "Ungefähr die Weltbevölkerung in Zellen (Größenordnung)",
-            "earthPopulationDigitsShort": "≈Zellen"
-          }
-        },
         "intro": {
           "title": "Wissenschaftliche Notation verstehen",
           "paragraph1": "Die wissenschaftliche Notation schreibt jede Zahl als Koeffizienten zwischen 1 und 10, multipliziert mit einer Zehnerpotenz, etwa 1,234 × 10^8 statt 123.400.000. Der Exponent zählt, um wie viele Stellen sich das Dezimalkomma von der Standardzahl bis zu dieser einen führenden Ziffer verschoben hat — ein positiver Exponent für große Zahlen, ein negativer für Zahlen kleiner als 1. Dadurch lassen sich Zahlen, die sonst eine lange Ziffernfolge wären, viel leichter lesen, vergleichen und berechnen.",
@@ -6308,189 +6278,189 @@
           "url": "https://archive.org/details/worksofarchimede00arch",
           "readOriginal": "Originaltext lesen"
         },
-        "largeSteps": {
+        "hero": {
+          "ariaLabel": "Ein ziehbarer Punkt auf einem Koeffizient-mal-Exponent-Raster, der den tatsächlich live oben verwendeten Wert darstellt — ein zweiter Punkt erscheint für B beim Multiplizieren oder Dividieren",
+          "resultLabel": "Ergebnis",
+          "axisHint": "Koeffizient (y) × 10^Exponent (x)",
+          "hint": "Ziehen Sie einen der Punkte — jede Anzeige auf dieser Seite aktualisiert sich mit, und das echte Ergebnis wird live neu berechnet."
+        },
+        "largeNumberSteps": {
           "title": "Eine große Standardzahl umwandeln",
-          "intro": "45.000.000, durch die drei echten Stationen geführt, die die toScientific-Operation dieses Rechners durchläuft, um ihre normalisierte Form zu erreichen.",
-          "steps": {
-            "standard": "Standardform",
-            "decimalPlaced": "Dezimalpunkt nach erster Ziffer",
-            "exponentCounted": "Exponent gezählt"
-          },
-          "resultBadge": "Ergebnis",
+          "intro": "Der live Wert in Standardform, Schritt für Schritt durch die echte Umwandlung in wissenschaftliche Schreibweise geführt.",
           "worked": {
-            "title": "Musterbeispiel",
-            "digitsAfterFirst": "Verschobene Stellen",
+            "title": "Rechenbeispiel",
+            "placesMoved": "Verschobene Stellen",
             "result": "Ergebnis"
           }
         },
-        "smallSteps": {
-          "title": "Eine kleine Dezimalzahl umwandeln",
-          "intro": "0,0000032 durch dieselben drei Stationen — der Dezimalpunkt bewegt sich nach rechts statt nach links, sodass der Exponent negativ wird.",
-          "steps": {
-            "standard": "Standardform",
-            "decimalPlaced": "Dezimalpunkt nach erster Ziffer",
-            "exponentCounted": "Exponent gezählt"
-          },
-          "resultBadge": "Ergebnis",
+        "smallNumberSteps": {
+          "title": "Eine kleine Standardzahl umwandeln",
+          "intro": "Der Kehrwert des live Werts in Standardform — eine echte kleine Zahl — auf dieselbe Weise umgewandelt, mit einem echten negativen Exponenten als Ergebnis.",
           "worked": {
-            "title": "Musterbeispiel",
-            "direction": "Bewegungsrichtung",
-            "directionValue": "Rechts (Zahl < 1)",
-            "result": "Ergebnis"
-          }
-        },
-        "multiply": {
-          "title": "Zwei Zahlen in wissenschaftlicher Notation multiplizieren",
-          "intro": "(2×10³) × (3×10⁵) — Koeffizienten werden multipliziert, Exponenten addiert.",
-          "problemLabel": "Aufgabe",
-          "ruleLabel": "Angewandte Regel",
-          "resultLabel": "Ergebnis",
-          "worked": {
-            "title": "Musterbeispiel",
-            "coefficients": "Koeffizienten",
-            "exponents": "Exponenten",
+            "title": "Rechenbeispiel",
+            "placesMoved": "Verschobene Stellen",
             "result": "Ergebnis",
-            "renormalizedNote": "Von {raw} neu normalisiert, da der Koeffizient 10 oder mehr erreichte"
+            "negativeNote": "Negativer Exponent — das Komma wandert nach rechts, nicht nach links"
           }
         },
-        "divide": {
-          "title": "Zwei Zahlen in wissenschaftlicher Notation dividieren",
-          "intro": "(8×10⁹) ÷ (2×10⁴) — Koeffizienten werden dividiert, Exponenten subtrahiert, das Spiegelbild der Multiplikation.",
-          "problemLabel": "Aufgabe",
-          "ruleLabel": "Angewandte Regel",
-          "resultLabel": "Ergebnis",
+        "multiplyFormula": {
+          "title": "Zwei Zahlen in wissenschaftlicher Schreibweise multiplizieren",
+          "intro": "Die live A und B multipliziert — Koeffizienten multiplizieren sich, Exponenten addieren sich.",
           "worked": {
-            "title": "Musterbeispiel",
-            "coefficients": "Koeffizienten",
-            "exponents": "Exponenten",
+            "title": "Rechenbeispiel",
+            "coefficients": "Koeffizienten multiplizieren sich",
+            "exponents": "Exponenten addieren sich",
             "result": "Ergebnis"
           }
         },
-        "engineering": {
-          "title": "Wissenschaftliche vs. technische Notation",
-          "intro": "45.700.000 in allen drei Formen — die technische Notation beschränkt den Exponenten auf ein Vielfaches von 3, damit er zu benannten Einheitenpräfixen (Kilo-, Mega-, Giga-) passt, auf Kosten eines Koeffizienten, der über 10 hinausgehen kann.",
-          "standardLabel": "Standard",
-          "scientificLabel": "Wissenschaftlich",
-          "engineeringLabel": "Technisch",
+        "divideFormula": {
+          "title": "Zwei Zahlen in wissenschaftlicher Schreibweise dividieren",
+          "intro": "Die live A geteilt durch B — Koeffizienten dividieren sich, Exponenten subtrahieren sich.",
           "worked": {
-            "title": "Musterbeispiel",
-            "sciExponent": "Wissenschaftlicher Exponent",
-            "engExponent": "Technischer Exponent",
-            "engNote": "Immer ein Vielfaches von 3",
-            "engCoefficient": "Technischer Koeffizient"
+            "title": "Rechenbeispiel",
+            "coefficients": "Koeffizienten dividieren sich",
+            "exponents": "Exponenten subtrahieren sich",
+            "result": "Ergebnis"
+          }
+        },
+        "engineeringEquivalence": {
+          "title": "Wissenschaftliche vs. technische Schreibweise",
+          "intro": "Die live A, in echter wissenschaftlicher Schreibweise neben ihrem echten Äquivalent in technischer Schreibweise — der Konvention, der Einheitenpräfixe tatsächlich folgen.",
+          "scientificLabel": "Wissenschaftliche Schreibweise",
+          "engineeringLabel": "Technische Schreibweise",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "rule": "Regel",
+            "ruleValue": "Der Exponent ist immer ein Vielfaches von 3",
+            "result": "Ergebnis"
           }
         },
         "namedMagnitudes": {
           "title": "Benannte Größenordnungen, groß und klein",
-          "intro": "Jede benannte Größenordnung, die dieser Rechner automatisch erkennt — von einem Tausendstel bis zu einer Billiarde.",
-          "tagFraction": "Bruchteil",
-          "tagMultiple": "Vielfaches",
+          "intro": "Jede benannte Größenordnung, die dieses Tool tatsächlich erkennt — der Exponent von A selbst ist derzeit 10^{exponent}, hervorgehoben ist die, die genau dazu passt.",
+          "matchTag": "Das ist A",
           "columnName": "Name",
-          "columnExponent": "Zehnerpotenz",
+          "columnValue": "Zehnerpotenz",
           "names": {
-            "thousandth": "Tausendstel",
-            "millionth": "Millionstel",
-            "billionth": "Milliardstel",
-            "trillionth": "Billionstel",
             "thousand": "Tausend",
             "million": "Million",
             "billion": "Milliarde",
             "trillion": "Billion",
-            "quadrillion": "Billiarde"
-          }
-        },
-        "exponentSign": {
-          "title": "Positive vs. negative Exponenten",
-          "intro": "Derselbe Koeffizient, 5, mit umgekehrtem Vorzeichen des Exponenten — tatsächlich gegensätzliche Effekte, auf entgegengesetzten Seiten von 1.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "negative": "Negativer Exponent",
-            "negativeNote": "Teilt durch eine Zehnerpotenz — kleiner als 1",
-            "positive": "Positiver Exponent",
-            "positiveNote": "Multipliziert mit einer Zehnerpotenz — größer als 1"
-          }
-        },
-        "digitCount": {
-          "title": "Wie viel kürzer wissenschaftliche Notation wird",
-          "intro": "Zeichenanzahl der Standardform-Zeichenkette gegenüber ihrem wissenschaftlichen Äquivalent, für drei Zahlen wachsender Größe.",
-          "standardLabel": "Standard",
-          "scientificLabel": "Wissenschaftlich",
-          "worked": {
-            "title": "Musterbeispiel",
-            "note": "24 Zeichen auf 6 verkürzt — deshalb schreiben Chemiker und Astronomen Zahlen wie die Avogadro-Konstante nie vollständig aus"
-          }
-        },
-        "exponentArithmetic": {
-          "title": "Exponentenregeln über alle vier Operationen",
-          "intro": "{a} und {b}, durch Multiplikation und Division geführt — nach dem resultierenden Exponenten geordnet, zeigt Addieren-bei-Multiplikation und Subtrahieren-bei-Division nebeneinander.",
-          "multiplyLabel": "Multiplikation",
-          "divideLabel": "Division",
-          "worked": {
-            "title": "Musterbeispiel"
-          }
-        },
-        "unitScale": {
-          "title": "Wissenschaftliche Notation bei der Einheitenumrechnung",
-          "intro": "750 Nanometer — eine Wellenlänge sichtbaren roten Lichts — umgerechnet in Meter mit genau dem Faktor 10⁻⁹, der das Präfix \"Nano-\" definiert.",
-          "startLabel": "Start",
-          "factorLabel": "Umrechnungsfaktor",
-          "resultLabel": "Ergebnis",
-          "worked": {
-            "title": "Musterbeispiel",
-            "formula": "Formel",
-            "result": "Ergebnis",
-            "note": "Jedes metrische Präfix (Nano-, Mikro-, Kilo-, Mega-...) ist einfach eine benannte Zehnerpotenz"
-          }
-        },
-        "magnitudeCompare": {
-          "title": "Zwei reale Größenordnungen vergleichen",
-          "intro": "Ein typisches Bakterium neben einem typischen Virus — beide werden als \"mikroskopisch\" beschrieben, aber die wissenschaftliche Notation zeigt, dass sie sich um einen echten, berechenbaren Faktor unterscheiden.",
-          "unitLabel": "Meter (ungefähr)",
-          "items": {
-            "bacterium": "Bakterium",
-            "virus": "Virus"
-          },
-          "worked": {
-            "title": "Musterbeispiel",
-            "ratio": "Größenverhältnis",
-            "ratioNote": "Das Bakterium ist etwa so viele Male größer"
-          }
-        },
-        "normalization": {
-          "title": "Nur eine korrekte normalisierte Form",
-          "intro": "Vier (Koeffizient, Exponent)-Paare, alle gleich derselben realen Zahl — nur das mit einem Koeffizienten in [1, 10) zählt als korrekt normalisiert.",
-          "normalizedLabel": "Normalisiert",
-          "worked": {
-            "title": "Musterbeispiel"
-          }
-        },
-        "sigFigs": {
-          "title": "Wissenschaftliche Notation beseitigt Mehrdeutigkeit bei signifikanten Stellen",
-          "intro": "Derselbe gerundete Wert, 1.200, geschrieben mit 2, 3 oder 4 signifikanten Stellen in wissenschaftlicher Notation — jede Nachkommanull ist jetzt eindeutig, anders als in der Standardform.",
-          "sigFigsLabel": "{count} sig. Stellen",
-          "standardAmbiguous": "In Standardform könnte \"1.200\" allein jede dieser drei Genauigkeiten bedeuten — es gibt keine Möglichkeit, es zu erkennen.",
-          "worked": {
-            "title": "Musterbeispiel",
-            "ambiguous": "Könnte 2, 3 oder 4 sig. Stellen sein",
-            "unambiguous": "Eindeutig 4 sig. Stellen"
+            "quadrillion": "Billiarde",
+            "thousandth": "Tausendstel",
+            "millionth": "Millionstel",
+            "billionth": "Milliardstel",
+            "trillionth": "Billionstel"
           }
         },
         "realWorldScale": {
-          "title": "26 Größenordnungen, eine Skala",
-          "intro": "Reale physikalische Größen, von einem Wasserstoffatom bis zu einem Lichtjahr, auf derselben logarithmischen Skala platziert — eine lineare Skala könnte all dies nicht auf einer lesbaren Linie zeigen.",
+          "title": "Reale Größenordnung, vom Atom bis zum Lichtjahr",
+          "intro": "Reale physikalische Größen auf einer logarithmischen Skala, mit einem live Marker, der genau zeigt, wo der Exponent von A selbst unter ihnen liegt.",
           "items": {
-            "hydrogenAtom": "Wasserstoffatom",
+            "atom": "Wasserstoffatom",
             "virus": "Virus",
-            "humanHair": "Breite eines menschlichen Haares",
-            "humanHeight": "Menschliche Körpergröße",
-            "mountEverest": "Mount Everest",
+            "grain": "Sandkorn",
+            "human": "Menschliche Körpergröße",
+            "building": "Hochhaus",
             "earthDiameter": "Erddurchmesser",
-            "distanceToSun": "Entfernung zur Sonne",
-            "lightYear": "Ein Lichtjahr"
+            "lightYear": "Lichtjahr"
           },
           "worked": {
-            "title": "Musterbeispiel",
-            "spanNote": "26 Größenordnungen auseinander"
+            "title": "Rechenbeispiel",
+            "currentExponent": "Exponent von A selbst"
+          }
+        },
+        "coefficientRange": {
+          "title": "Liegt der Koeffizient tatsächlich im Bereich?",
+          "intro": "Echte wissenschaftliche Schreibweise erfordert einen Koeffizienten zwischen 1 und 10 — dieser Streifen zeigt live, ob der Koeffizient von A tatsächlich in diesem Bereich liegt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "coefficient": "Koeffizient von A",
+            "status": "Status",
+            "inRange": "Im Bereich",
+            "outOfRange": "Außerhalb des Bereichs",
+            "needsNormalizing": "Dies müsste normalisiert werden, bevor es als korrekte wissenschaftliche Schreibweise zählt"
+          }
+        },
+        "exponentSign": {
+          "title": "Positive und negative Exponenten, ausbalanciert",
+          "intro": "Die live Exponenten von A und B auf einer gemeinsamen Waage — positiv bedeutet eine große Zahl, negativ eine kleine.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "large": "Große Zahl (positiver Exponent)",
+            "small": "Kleine Zahl (negativer Exponent)"
+          }
+        },
+        "digitCount": {
+          "title": "Wie viele Stellen, ohne sie auszuschreiben",
+          "intro": "Die echte Stellenanzahl von A und B in voller Standardform — der Exponent allein verrät es, ohne die Zahl ausschreiben zu müssen.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "digitsCount": "{count} Stelle(n)"
+          }
+        },
+        "exponentArithmetic": {
+          "title": "Exponenten addieren sich bei Multiplikation, subtrahieren sich bei Division",
+          "intro": "Die live Exponenten von A und B, auf beide echten Arten nebeneinander kombiniert.",
+          "multiplyLabel": "Multiplikation",
+          "divideLabel": "Division",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "exponentA": "Exponent von A",
+            "exponentB": "Exponent von B"
+          }
+        },
+        "unitScale": {
+          "title": "Wissenschaftliche Schreibweise in echten Einheitenpräfixen",
+          "intro": "Der Exponent der live A, abgeglichen mit dem nächstgelegenen echten metrischen Präfix — denselben Nano-/Mikro-/Milli-/Kilo-/Mega-/Giga-Skaleneinheiten, die tatsächlich verwendet werden.",
+          "names": {
+            "nano": "Nano",
+            "micro": "Mikro",
+            "milli": "Milli",
+            "base": "Basis",
+            "kilo": "Kilo",
+            "mega": "Mega",
+            "giga": "Giga"
+          },
+          "worked": {
+            "title": "Rechenbeispiel",
+            "nearestPrefix": "Nächstes Präfix",
+            "remainder": "Verbleibender Faktor",
+            "exactMatch": "Eine exakte Übereinstimmung — kein verbleibender Faktor"
+          }
+        },
+        "magnitudeComparison": {
+          "title": "A vs. B, nach echter Größenordnung",
+          "intro": "Die live A und B, direkt nach tatsächlicher Größe verglichen — nicht nur danach, welcher Koeffizient größer aussieht.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "bigger": "Größerer Wert",
+            "orderGap": "Größenordnungsunterschied",
+            "ordersOfMagnitude": "{count} Größenordnung(en)"
+          }
+        },
+        "normalizationSteps": {
+          "title": "Einen Koeffizienten zurück in den Bereich normalisieren",
+          "intro": "Der Koeffizient und Exponent der live A, Schritt für Schritt durch die echten Normalisierungsschritte geführt, die ein Rechner intern durchführt, sobald ein Koeffizient außerhalb von [1, 10) liegt.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "stepsTaken": "Durchgeführte Schritte",
+            "alreadyNormalized": "Bereits im richtigen Bereich — keine Schritte nötig",
+            "result": "Ergebnis"
+          }
+        },
+        "sigFigsAmbiguity": {
+          "title": "Was die Standardform über Präzision verbirgt",
+          "intro": "Der Koeffizient der live A trägt eine echte, eindeutige Anzahl signifikanter Stellen — genau das, was verloren geht, sobald derselbe Wert in einfache Standardform aufgefüllt wird.",
+          "worked": {
+            "title": "Rechenbeispiel",
+            "unambiguous": "Eindeutig — jede gezeigte Ziffer ist signifikant",
+            "ambiguous": "Mehrdeutig — nachgestellte Nullen könnten echte Ziffern oder nur Platzhalter sein",
+            "notAmbiguous": "Bei dieser Größe nicht mehrdeutig",
+            "sigFigs": "Signifikante Stellen",
+            "note": "Hinweis",
+            "trailingZerosNote": "Die nachgestellten Nullen verraten nicht, wie viele Stellen tatsächlich gemessen wurden",
+            "noTrailingZerosNote": "Keine nachgestellten Nullen hier, die Mehrdeutigkeit erzeugen könnten"
           }
         }
       },

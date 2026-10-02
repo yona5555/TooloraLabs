@@ -2,46 +2,52 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useScientificNotationLive, deriveEffectiveA } from "./ScientificNotationLiveContext";
 
-const FORMS = [
-  { coefficient: 450, exponent: 5 },
-  { coefficient: 45, exponent: 6 },
-  { coefficient: 4.5, exponent: 7 },
-  { coefficient: 0.45, exponent: 8 },
-];
+type Step = { coefficient: number; exponent: number };
 
-/** Type #13 (Stepped Diagram): four different-looking (coefficient, exponent) pairs that all equal the exact same real number — only one of them (coefficient in [1, 10)) is the properly normalized form this tool's output always uses. */
+/** Type #13 (Stepped Diagram): the live A's own coefficient and exponent, walked through the real normalization steps a calculator runs internally whenever a coefficient strays outside [1, 10). In toScientific mode A is the engine's own normalized reading of standardValue (always already in range); switch to toStandard/multiply/divide to type a genuinely out-of-range coefficient and see real steps. */
 export default function NormalizationSteppedDiagram() {
-  const t = useTranslations("tools.scientific-notation-converter.education.normalization");
+  const t = useTranslations("tools.scientific-notation-converter.education.normalizationSteps");
+  const { dims } = useScientificNotationLive();
+  const a = deriveEffectiveA(dims);
+  if (a.coefficient === 0) return null;
+
+  const steps: Step[] = [{ coefficient: a.coefficient, exponent: Math.round(a.exponent) }];
+  let c = a.coefficient;
+  let e = Math.round(a.exponent);
+  let guard = 0;
+  while (Math.abs(c) >= 10 && guard < 20) {
+    c /= 10;
+    e += 1;
+    steps.push({ coefficient: Math.round(c * 1000) / 1000, exponent: e });
+    guard++;
+  }
+  while (Math.abs(c) < 1 && guard < 40) {
+    c *= 10;
+    e -= 1;
+    steps.push({ coefficient: Math.round(c * 1000) / 1000, exponent: e });
+    guard++;
+  }
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-5 flex flex-wrap items-end gap-3">
-        {FORMS.map((f, i) => {
-          const isNormalized = f.coefficient >= 1 && f.coefficient < 10;
-          return (
-            <div key={i} className="flex flex-col items-center gap-1.5" style={{ marginTop: `${i * 8}px` }}>
-              <div
-                className={`rounded-lg border px-3 py-2 text-center ${
-                  isNormalized ? "border-emerald-300 bg-emerald-50 dark:border-emerald-500/40 dark:bg-emerald-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"
-                }`}
-              >
-                <p className={`font-mono text-sm font-bold ${isNormalized ? "text-emerald-700 dark:text-emerald-300" : "text-zinc-700 dark:text-zinc-200"}`}>{`${f.coefficient}×10^${f.exponent}`}</p>
-              </div>
-              {isNormalized && <p className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">{t("normalizedLabel")}</p>}
-            </div>
-          );
-        })}
+      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-2 font-mono text-sm">
+        {steps.map((s, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className={i === steps.length - 1 ? "rounded-lg bg-emerald-50 px-2 py-1 font-bold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400" : "text-zinc-500 dark:text-zinc-400"}>{`${s.coefficient} × 10^${s.exponent}`}</span>
+            {i < steps.length - 1 && <span className="text-zinc-300 dark:text-zinc-600">→</span>}
+          </div>
+        ))}
       </div>
-      <div className="mt-5">
+      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
-          rows={FORMS.map((f) => ({
-            label: `${f.coefficient}×10^${f.exponent}`,
-            value: `${f.coefficient * Math.pow(10, f.exponent)}`,
-            emphasize: f.coefficient >= 1 && f.coefficient < 10,
-          }))}
+          rows={[
+            { label: t("worked.stepsTaken"), value: `${steps.length - 1}`, note: steps.length === 1 ? t("worked.alreadyNormalized") : undefined },
+            { label: t("worked.result"), value: `${steps[steps.length - 1].coefficient} × 10^${steps[steps.length - 1].exponent}`, emphasize: true },
+          ]}
         />
       </div>
     </SectionCard>

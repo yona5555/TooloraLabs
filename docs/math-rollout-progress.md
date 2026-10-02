@@ -68,7 +68,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 |---|---|---|---|
 | 1 | scientific-calculator | done (v2) | 456a6e8 (CI green) |
 | 2 | fraction-calculator | done (v2) | d91a318 (CI green) |
-| 3 | scientific-notation-converter | needs v2 rebuild | — |
+| 3 | scientific-notation-converter | done (v2) | (pending push) |
 | 4 | significant-figures-calculator | needs v2 rebuild | — |
 | 5 | statistics-calculator | needs v2 rebuild | — |
 | 6 | area-calculator | needs v2 rebuild | — |
@@ -150,3 +150,49 @@ patched to pass: `FractionLCDBarChart` gained real "A/B rescaled to the LCD" wor
 only to satisfy the test), and `FractionUnitFractionsTable` gained an explicit "← A is here" text
 marker column (the highlighted-row-via-CSS-only signal was invisible to the text-diffing test
 methodology, and an explicit text marker is better UX than color alone regardless).
+
+**scientific-notation-converter (tool 3, rebuilt to v2):** this tool has FOUR operation modes
+(toScientific, toStandard, multiply, divide), each using a different subset of the shared fields
+(`standardValue`, `coefficientA/exponentA`, `coefficientB/exponentB`). "A" conceptually means a
+different live source depending on mode: in toScientific mode the real A is the engine's own
+normalization of `standardValue` (the raw coefficientA/exponentA fields sit inert, unshown in the
+input panel in that mode); in every other mode A maps directly to the user-edited
+coefficientA/exponentA. Added `deriveEffectiveA(dims)` to `ScientificNotationLiveContext.tsx` —
+one shared helper every indicator and the hero itself now call, so "A" means the same thing
+everywhere instead of each file re-deriving it (or worse, several reading the inert raw fields
+directly). The hero shows one draggable point for A always, plus a second for B that appears only
+in multiply/divide mode — dragging A in toScientific mode writes a recomputed `standardValue`
+back; in other modes it writes coefficientA/exponentA directly.
+
+*Real systemic bug caught before shipping, not via screenshot this time but via the dynamism
+test's first failing run*: 13 of the 15 new indicators read `dims.coefficientA`/`exponentA`
+directly instead of deriving A properly — meaning on the tool's own default page load (mode =
+toScientific, where those raw fields are literally `"0"`, unused placeholders), nearly every
+indicator was silently rendering degenerate "0 × 10^0" content instead of the real normalized
+form of the default `standardValue` (299792458). Only 3 of 15 had explicit `=== 0` null-guards
+(DivideFormulaDiagram, NormalizationSteppedDiagram, SignificantFiguresAmbiguity) and so simply
+vanished instead of showing wrong data — worse for test visibility, but the same underlying bug.
+Fixed systemically by adding `deriveEffectiveA` and switching every A-reading indicator to call
+it instead of touching `dims.coefficientA`/`exponentA` raw, rather than patching each file's
+symptom separately.
+
+*Two indicators intentionally keep the RAW coefficientA* (`CoefficientRangeZoneStrip`,
+`NormalizationSteppedDiagram`) even after adopting `deriveEffectiveA` — their entire pedagogical
+point is showing a coefficient that can legitimately fall outside [1, 10), which the engine's own
+normalized output never does by construction. Also changed the toScientific mode's default raw
+`coefficientA` from the inert `"0"` to a deliberately out-of-range `"45.2"` (exponent `"3"`) and
+toScientific/toStandard's default `coefficientB`/`exponentB` from `"0"`/`"0"` to `"3"`/`"4"` —
+the old all-zero placeholders were themselves the root design flaw, not just incidentally
+unused; every indicator now has a real, meaningful number to show in every mode without the user
+needing to switch modes first.
+
+*Text-diffing blind spot caught and fixed*: `NamedMagnitudesTable`'s only live element was a
+conditional highlight tag that doesn't appear at all unless A's exponent exactly matches one of
+nine named magnitudes — dragging the hero to an exponent that matches no name left the card's
+text byte-identical before/after (genuinely reactive internally, invisible to text-diffing). Fixed
+by discovering the translation itself never interpolated the `{exponent}` parameter it was already
+being passed — corrected `namedMagnitudes.intro` across all 6 locales so the caption always states
+A's current exponent explicitly in text, which is also better UX than relying on an easily-missed
+conditional tag. All 15/15 pass the generic dynamism test (single-point drag, toScientific mode)
+and gaps test; multiply-mode (two-point) behavior spot-checked manually and confirmed correct
+(A × B recomputes and renormalizes live).

@@ -3,21 +3,25 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useScientificNotationLive, deriveEffectiveA } from "./ScientificNotationLiveContext";
 
-const VALUES = [
-  { standard: "602", scientific: "6.02×10²" },
-  { standard: "602,000,000", scientific: "6.02×10⁸" },
-  { standard: "602,000,000,000,000,000,000,000", scientific: "6.02×10²³" },
-];
+function digitsBeforeDecimal(exponent: number): number {
+  return exponent >= 0 ? exponent + 1 : 1;
+}
 
-/** Type #1 (Labeled Bar Chart): character length of the standard-notation string vs. its scientific-notation equivalent, for three real numbers of increasing size — the gap only grows, which is exactly why scientific notation exists. */
+/** Type #1 (Labeled Bar Chart): how many real digits the live A and B would need written out in full standard form — exponent alone tells you, without ever writing the number out. */
 export default function DigitCountComparisonBarChart() {
   const t = useTranslations("tools.scientific-notation-converter.education.digitCount");
+  const { dims } = useScientificNotationLive();
+  const exponentA = Math.round(deriveEffectiveA(dims).exponent);
 
-  const bars = VALUES.flatMap((v, i) => [
-    { label: `${t("standardLabel")} ${i + 1}`, value: v.standard.length, formatted: `${v.standard.length}` },
-    { label: `${t("scientificLabel")} ${i + 1}`, value: v.scientific.length, formatted: `${v.scientific.length}`, highlight: true },
-  ]);
+  const digitsA = digitsBeforeDecimal(exponentA);
+  const digitsB = digitsBeforeDecimal(Math.round(dims.exponentB));
+  const rows = [
+    { key: "a", label: "A", value: digitsA, exponent: exponentA },
+    { key: "b", label: "B", value: digitsB, exponent: Math.round(dims.exponentB) },
+  ].sort((x, y) => y.value - x.value);
+  const bars = rows.map((r, i) => ({ label: `${r.label} (10^${r.exponent})`, value: r.value, formatted: `${r.value}`, highlight: i === 0 }));
 
   return (
     <SectionCard title={t("title")}>
@@ -26,10 +30,7 @@ export default function DigitCountComparisonBarChart() {
         <div className="shrink-0">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
-        <WorkedExampleNote
-          title={t("worked.title")}
-          rows={VALUES.map((v, i) => ({ label: `#${i + 1}`, value: `${v.standard} = ${v.scientific}`, emphasize: i === 2, note: i === 2 ? t("worked.note") : undefined }))}
-        />
+        <WorkedExampleNote title={t("worked.title")} rows={rows.map((r) => ({ label: r.label, value: t("worked.digitsCount", { count: r.value }) }))} />
       </div>
     </SectionCard>
   );

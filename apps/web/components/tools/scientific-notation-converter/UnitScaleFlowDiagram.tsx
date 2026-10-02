@@ -1,42 +1,55 @@
 "use client";
-import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useScientificNotationLive, deriveEffectiveA } from "./ScientificNotationLiveContext";
 
-const NANOMETERS = 750;
-const CONVERSION_EXPONENT = -9;
+const PREFIXES: { key: string; symbol: string; exponent: number }[] = [
+  { key: "nano", symbol: "n", exponent: -9 },
+  { key: "micro", symbol: "µ", exponent: -6 },
+  { key: "milli", symbol: "m", exponent: -3 },
+  { key: "base", symbol: "", exponent: 0 },
+  { key: "kilo", symbol: "k", exponent: 3 },
+  { key: "mega", symbol: "M", exponent: 6 },
+  { key: "giga", symbol: "G", exponent: 9 },
+];
 
-/** Type #2 (Flow Arrow with Embedded Numbers): a real wavelength of visible red light, in nanometers, converted to meters via its own scientific-notation factor — the same 10^-9 that defines the "nano-" prefix. */
+function closestPrefix(exponent: number) {
+  return PREFIXES.reduce((best, p) => (Math.abs(p.exponent - exponent) < Math.abs(best.exponent - exponent) ? p : best));
+}
+
+/** Type #2 (Flow Arrow with Embedded Numbers): the live A's exponent matched to its nearest real metric prefix — the same nano/micro/milli/kilo/mega/giga scale unit conversions actually use. */
 export default function UnitScaleFlowDiagram() {
   const t = useTranslations("tools.scientific-notation-converter.education.unitScale");
-  const meters = NANOMETERS * Math.pow(10, CONVERSION_EXPONENT);
+  const { dims } = useScientificNotationLive();
+  const exponentA = Math.round(deriveEffectiveA(dims).exponent);
+  const match = closestPrefix(exponentA);
+  const remainder = exponentA - match.exponent;
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center">
-        <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800/40">
-          <p className="font-mono text-lg font-bold text-zinc-800 dark:text-zinc-100">{`${NANOMETERS} nm`}</p>
-          <p className="text-xs text-zinc-400">{t("startLabel")}</p>
-        </div>
-        <ArrowRight className="shrink-0 text-blue-500" size={20} />
-        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 dark:border-blue-500/30 dark:bg-blue-500/10">
-          <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`× 10^${CONVERSION_EXPONENT}`}</p>
-          <p className="text-xs text-blue-500/80">{t("factorLabel")}</p>
-        </div>
-        <ArrowRight className="shrink-0 text-blue-500" size={20} />
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
-          <p className="font-mono text-lg font-bold text-emerald-700 dark:text-emerald-300">{`${meters} m`}</p>
-          <p className="text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("resultLabel")}</p>
-        </div>
+      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
+        {PREFIXES.map((p) => (
+          <div
+            key={p.key}
+            className={`rounded-lg border px-2.5 py-1.5 text-center text-xs font-semibold transition ${
+              p.key === match.key
+                ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-500/40 dark:bg-blue-500/10 dark:text-blue-300"
+                : "border-zinc-200 bg-zinc-50 text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400"
+            }`}
+          >
+            <div>{t(`names.${p.key}`)}</div>
+            <div className="font-mono">{`10^${p.exponent}`}</div>
+          </div>
+        ))}
       </div>
       <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: t("worked.formula"), value: `${NANOMETERS} × 10^${CONVERSION_EXPONENT}` },
-            { label: t("worked.result"), value: `${meters} m`, emphasize: true, note: t("worked.note") },
+            { label: t("worked.nearestPrefix"), value: t(`names.${match.key}`), emphasize: true },
+            { label: t("worked.remainder"), value: `10^${remainder}`, note: remainder === 0 ? t("worked.exactMatch") : undefined },
           ]}
         />
       </div>

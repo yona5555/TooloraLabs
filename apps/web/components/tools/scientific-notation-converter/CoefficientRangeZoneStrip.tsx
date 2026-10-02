@@ -2,41 +2,41 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useScientificNotationLive, deriveEffectiveA } from "./ScientificNotationLiveContext";
 
-const VALID_EXAMPLE = 6.02;
-const INVALID_HIGH = 60.2;
-const INVALID_LOW = 0.602;
-
-/** Type #19 (Zone Strip): properly normalized scientific notation requires the coefficient to sit in [1, 10) — this strip marks a valid coefficient inside that window against two common mistakes that land outside it. */
+/** Type #19 (Zone Strip): proper scientific notation requires the coefficient to sit in [1, 10) — this strip shows live whether A's own coefficient is actually inside that valid zone or needs normalizing. In toScientific mode A is the engine's own normalized reading of standardValue (always in range by construction); switch to toStandard/multiply/divide to type a genuinely out-of-range coefficient. */
 export default function CoefficientRangeZoneStrip() {
   const t = useTranslations("tools.scientific-notation-converter.education.coefficientRange");
-
-  const toPct = (v: number) => Math.min(96, Math.max(4, (v / 12) * 100));
+  const { dims } = useScientificNotationLive();
+  const coefficientA = deriveEffectiveA(dims).coefficient;
+  const pct = Math.min(100, Math.max(0, (coefficientA / 10) * 100));
+  const inRange = coefficientA >= 1 && coefficientA < 10;
 
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-5">
-        <div className="relative h-8 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
-          <div className="absolute h-full bg-emerald-200 dark:bg-emerald-500/20" style={{ left: `${toPct(1)}%`, width: `${toPct(10) - toPct(1)}%` }} />
-          <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-emerald-600 dark:border-zinc-900" style={{ left: `${toPct(VALID_EXAMPLE)}%` }} />
-          <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-red-600 dark:border-zinc-900" style={{ left: `${toPct(INVALID_HIGH)}%` }} />
-          <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-red-600 dark:border-zinc-900" style={{ left: `${toPct(INVALID_LOW)}%` }} />
+      <div dir="ltr" className="mt-6 w-full">
+        <div className="relative h-3 w-full overflow-hidden rounded-full">
+          <div className="absolute inset-y-0" style={{ left: "0%", width: "10%" }}>
+            <div className="h-full bg-amber-300/70 dark:bg-amber-500/50" />
+          </div>
+          <div className="absolute inset-y-0" style={{ left: "10%", width: "90%" }}>
+            <div className="h-full bg-emerald-300/70 dark:bg-emerald-500/50" />
+          </div>
+          <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-blue-700 transition-all duration-300 dark:bg-blue-300" style={{ left: `calc(${pct}% - 3px)` }} />
         </div>
-        <div className="mt-1.5 flex justify-between text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
           <span>0</span>
           <span>1</span>
           <span>10</span>
-          <span>12</span>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
-            { label: `${VALID_EXAMPLE}`, value: t("worked.valid"), emphasize: true },
-            { label: `${INVALID_HIGH}`, value: t("worked.tooHigh") },
-            { label: `${INVALID_LOW}`, value: t("worked.tooLow") },
+            { label: t("worked.coefficient"), value: `${Math.round(coefficientA * 1000) / 1000}` },
+            { label: t("worked.status"), value: inRange ? t("worked.inRange") : t("worked.outOfRange"), emphasize: true, note: inRange ? undefined : t("worked.needsNormalizing") },
           ]}
         />
       </div>
