@@ -75,10 +75,10 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 
 | # | Slug | Status | Commit |
 |---|---|---|---|
-| 1 | scientific-calculator | done (v2) | 456a6e8 (CI green) |
-| 2 | fraction-calculator | done (v2) | d91a318 (CI green) |
-| 3 | scientific-notation-converter | done (v2) | a6bd5fe (CI green) |
-| 4 | significant-figures-calculator | done (v2) | f21f9b4 (CI green) |
+| 1 | scientific-calculator | done (v2) | 456a6e8, layout fix c60905e (CI green) |
+| 2 | fraction-calculator | done (v2) | d91a318, layout fix 0e2de64 (CI green) |
+| 3 | scientific-notation-converter | done (v2) | a6bd5fe, layout fix 48dc7e8 (CI green) |
+| 4 | significant-figures-calculator | done (v2) | f21f9b4, layout fix 37dbf3f (CI green) |
 | 5 | statistics-calculator | done (v2) | 7101000, layout fix 8497ae5 (CI green) |
 | 6 | area-calculator | needs v2 rebuild | — |
 | 7 | surface-area-calculator | needs v2 rebuild | — |
