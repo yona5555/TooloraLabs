@@ -55,22 +55,32 @@ function pointBFromDims(shape: AreaShape, n: AreaNumericDims): Vector2 {
   }
 }
 
+// Upper bounds matter, not just the lower MIN_DIM one: the Mafs viewBox itself is re-derived
+// from these same live dimensions every render (see viewBoxFor), so an unbounded drag can set up
+// a runaway feedback loop — the viewBox keeps re-expanding mid-drag, which keeps re-scaling how
+// far a constant screen-pixel delta maps in Mafs coordinate space, compounding across the many
+// mousemove-driven renders of a single drag gesture into an absurd final value from a perfectly
+// ordinary mouse movement. Clamping every draggable dimension to a sane maximum (generous enough
+// for real exploration, far short of runaway) bounds the viewBox growth and keeps the gesture
+// feeling proportional. Found via a real drag during screenshot capture, not a hypothetical.
+const MAX_DIM = 20;
+
 function constrainA(shape: AreaShape) {
   return (p: Vector2): Vector2 => {
     switch (shape) {
       case "square": {
-        const v = Math.max(MIN_DIM, p[0]);
+        const v = Math.min(MAX_DIM, Math.max(MIN_DIM, p[0]));
         return [v, v];
       }
       case "rectangle":
-        return [Math.max(MIN_DIM, p[0]), Math.max(MIN_DIM, p[1])];
+        return [Math.min(MAX_DIM, Math.max(MIN_DIM, p[0])), Math.min(MAX_DIM, Math.max(MIN_DIM, p[1]))];
       case "triangle":
       case "parallelogram":
       case "circle":
       case "ellipse":
-        return [Math.max(MIN_DIM, p[0]), 0];
+        return [Math.min(MAX_DIM, Math.max(MIN_DIM, p[0])), 0];
       case "trapezoid":
-        return [Math.max(MIN_DIM / 2, p[0]), 0];
+        return [Math.min(MAX_DIM / 2, Math.max(MIN_DIM / 2, p[0])), 0];
       case "sector": {
         const r = Math.min(Math.max(Math.hypot(p[0], p[1]), MIN_DIM), 9);
         const ang = Math.atan2(p[1], p[0]);
@@ -86,12 +96,12 @@ function constrainB(shape: AreaShape, n: AreaNumericDims) {
       case "triangle":
       case "parallelogram": {
         const fixedX = (n.base ?? 6) * 0.4;
-        return [fixedX, Math.max(MIN_DIM, p[1])];
+        return [fixedX, Math.min(MAX_DIM, Math.max(MIN_DIM, p[1]))];
       }
       case "ellipse":
-        return [0, Math.max(MIN_DIM, p[1])];
+        return [0, Math.min(MAX_DIM, Math.max(MIN_DIM, p[1]))];
       case "trapezoid":
-        return [Math.max(0, p[0]), Math.max(MIN_DIM, p[1])];
+        return [Math.min(MAX_DIM / 2, Math.max(0, p[0])), Math.min(MAX_DIM, Math.max(MIN_DIM, p[1]))];
       default:
         return p;
     }
