@@ -21,17 +21,17 @@ export default function MagnitudeComparisonCards() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 grid grid-cols-2 gap-3">
-        <div className={`rounded-xl border p-4 text-center ${aIsBigger ? "border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"}`}>
-          <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">A</p>
-          <p className="mt-2 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${round3(a.coefficient)} × 10^${Math.round(a.exponent)}`}</p>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="shrink-0 grid grid-cols-2 gap-3">
+          <div className={`rounded-xl border p-4 text-center ${aIsBigger ? "border-blue-300 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"}`}>
+            <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">A</p>
+            <p className="mt-2 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${round3(a.coefficient)} × 10^${Math.round(a.exponent)}`}</p>
+          </div>
+          <div className={`rounded-xl border p-4 text-center ${!aIsBigger ? "border-rose-300 bg-rose-50 dark:border-rose-500/40 dark:bg-rose-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"}`}>
+            <p className="text-xs font-semibold uppercase tracking-wide text-rose-500 dark:text-rose-400">B</p>
+            <p className="mt-2 font-mono text-lg font-bold text-rose-700 dark:text-rose-300">{`${dims.coefficientB} × 10^${Math.round(dims.exponentB)}`}</p>
+          </div>
         </div>
-        <div className={`rounded-xl border p-4 text-center ${!aIsBigger ? "border-rose-300 bg-rose-50 dark:border-rose-500/40 dark:bg-rose-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40"}`}>
-          <p className="text-xs font-semibold uppercase tracking-wide text-rose-500 dark:text-rose-400">B</p>
-          <p className="mt-2 font-mono text-lg font-bold text-rose-700 dark:text-rose-300">{`${dims.coefficientB} × 10^${Math.round(dims.exponentB)}`}</p>
-        </div>
-      </div>
-      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

@@ -15,23 +15,23 @@ export default function CoefficientRangeZoneStrip() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-6 w-full">
-        <div className="relative h-3 w-full overflow-hidden rounded-full">
-          <div className="absolute inset-y-0" style={{ left: "0%", width: "10%" }}>
-            <div className="h-full bg-amber-300/70 dark:bg-amber-500/50" />
+      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="w-full lg:flex-1">
+          <div className="relative h-3 w-full overflow-hidden rounded-full">
+            <div className="absolute inset-y-0" style={{ left: "0%", width: "10%" }}>
+              <div className="h-full bg-amber-300/70 dark:bg-amber-500/50" />
+            </div>
+            <div className="absolute inset-y-0" style={{ left: "10%", width: "90%" }}>
+              <div className="h-full bg-emerald-300/70 dark:bg-emerald-500/50" />
+            </div>
+            <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-blue-700 transition-all duration-300 dark:bg-blue-300" style={{ left: `calc(${pct}% - 3px)` }} />
           </div>
-          <div className="absolute inset-y-0" style={{ left: "10%", width: "90%" }}>
-            <div className="h-full bg-emerald-300/70 dark:bg-emerald-500/50" />
+          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            <span>0</span>
+            <span>1</span>
+            <span>10</span>
           </div>
-          <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-blue-700 transition-all duration-300 dark:bg-blue-300" style={{ left: `calc(${pct}% - 3px)` }} />
         </div>
-        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
-          <span>0</span>
-          <span>1</span>
-          <span>10</span>
-        </div>
-      </div>
-      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

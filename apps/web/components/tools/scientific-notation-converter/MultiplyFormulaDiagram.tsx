@@ -24,14 +24,14 @@ export default function MultiplyFormulaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-2 text-center font-mono text-base">
-        <span className="text-blue-700 dark:text-blue-300">{`${round3(a.coefficient)} × 10^${a.exponent}`}</span>
-        <span className="text-zinc-400">×</span>
-        <span className="text-rose-700 dark:text-rose-300">{`${dims.coefficientB} × 10^${dims.exponentB}`}</span>
-        <span className="text-zinc-400">=</span>
-        <span className="font-bold text-emerald-700 dark:text-emerald-400">{`${coefficient} × 10^${exponent}`}</span>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="shrink-0 flex flex-wrap items-center justify-center gap-2 text-center font-mono text-base">
+          <span className="text-blue-700 dark:text-blue-300">{`${round3(a.coefficient)} × 10^${a.exponent}`}</span>
+          <span className="text-zinc-400">×</span>
+          <span className="text-rose-700 dark:text-rose-300">{`${dims.coefficientB} × 10^${dims.exponentB}`}</span>
+          <span className="text-zinc-400">=</span>
+          <span className="font-bold text-emerald-700 dark:text-emerald-400">{`${coefficient} × 10^${exponent}`}</span>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

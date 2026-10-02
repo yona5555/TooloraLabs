@@ -29,22 +29,22 @@ export default function UnitScaleFlowDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-1.5">
-        {PREFIXES.map((p) => (
-          <div
-            key={p.key}
-            className={`rounded-lg border px-2.5 py-1.5 text-center text-xs font-semibold transition ${
-              p.key === match.key
-                ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-500/40 dark:bg-blue-500/10 dark:text-blue-300"
-                : "border-zinc-200 bg-zinc-50 text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400"
-            }`}
-          >
-            <div>{t(`names.${p.key}`)}</div>
-            <div className="font-mono">{`10^${p.exponent}`}</div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="shrink-0 flex flex-wrap items-center justify-center gap-1.5">
+          {PREFIXES.map((p) => (
+            <div
+              key={p.key}
+              className={`rounded-lg border px-2.5 py-1.5 text-center text-xs font-semibold transition ${
+                p.key === match.key
+                  ? "border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-500/40 dark:bg-blue-500/10 dark:text-blue-300"
+                  : "border-zinc-200 bg-zinc-50 text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400"
+              }`}
+            >
+              <div>{t(`names.${p.key}`)}</div>
+              <div className="font-mono">{`10^${p.exponent}`}</div>
+            </div>
+          ))}
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

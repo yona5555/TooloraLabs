@@ -28,17 +28,17 @@ export default function SignificantFiguresAmbiguity() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 flex flex-wrap items-center justify-center gap-3 text-center">
-        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
-          <p className="font-mono text-base font-bold text-emerald-700 dark:text-emerald-400">{`${round3(a.coefficient)} × 10^${exponent}`}</p>
-          <p className="mt-1 text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("worked.unambiguous")}</p>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="shrink-0 flex flex-wrap items-center justify-center gap-3 text-center">
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 dark:border-emerald-500/30 dark:bg-emerald-500/10">
+            <p className="font-mono text-base font-bold text-emerald-700 dark:text-emerald-400">{`${round3(a.coefficient)} × 10^${exponent}`}</p>
+            <p className="mt-1 text-xs text-emerald-600/80 dark:text-emerald-400/80">{t("worked.unambiguous")}</p>
+          </div>
+          <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-500/30 dark:bg-amber-500/10">
+            <p className="font-mono text-base font-bold text-amber-700 dark:text-amber-400">{standardForm}</p>
+            <p className="mt-1 text-xs text-amber-600/80 dark:text-amber-400/80">{isAmbiguousCase ? t("worked.ambiguous") : t("worked.notAmbiguous")}</p>
+          </div>
         </div>
-        <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-500/30 dark:bg-amber-500/10">
-          <p className="font-mono text-base font-bold text-amber-700 dark:text-amber-400">{standardForm}</p>
-          <p className="mt-1 text-xs text-amber-600/80 dark:text-amber-400/80">{isAmbiguousCase ? t("worked.ambiguous") : t("worked.notAmbiguous")}</p>
-        </div>
-      </div>
-      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
