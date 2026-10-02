@@ -34,22 +34,22 @@ export default function InverseTrigRangeZone() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-6 w-full">
-        <div className="relative h-3 w-full overflow-hidden rounded-full">
-          {ZONES.map((z) => (
-            <div key={z.key} className={`absolute inset-y-0 ${z.className}`} style={{ left: `${(z.from / 360) * 100}%`, width: `${((z.to - z.from) / 360) * 100}%` }} />
-          ))}
-          <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-zinc-900 dark:bg-white" style={{ left: `calc(${pct}% - 3px)` }} />
+      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="w-full lg:flex-1">
+          <div className="relative h-3 w-full overflow-hidden rounded-full">
+            {ZONES.map((z) => (
+              <div key={z.key} className={`absolute inset-y-0 ${z.className}`} style={{ left: `${(z.from / 360) * 100}%`, width: `${((z.to - z.from) / 360) * 100}%` }} />
+            ))}
+            <div className="absolute top-1/2 h-4 w-1.5 -translate-y-1/2 rounded-full bg-zinc-900 dark:bg-white" style={{ left: `calc(${pct}% - 3px)` }} />
+          </div>
+          <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            <span>0°</span>
+            <span>90°</span>
+            <span>180°</span>
+            <span>270°</span>
+            <span>360°</span>
+          </div>
         </div>
-        <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
-          <span>0°</span>
-          <span>90°</span>
-          <span>180°</span>
-          <span>270°</span>
-          <span>360°</span>
-        </div>
-      </div>
-      <div className="mt-6">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

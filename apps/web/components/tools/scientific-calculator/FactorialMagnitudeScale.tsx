@@ -26,14 +26,16 @@ export default function FactorialMagnitudeScale() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mx-auto mt-4 max-w-sm">
-        <input type="range" min={0} max={MAX_N} step={1} value={n} onChange={(e) => setN(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
-        <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`n = ${n}`}</p>
-      </div>
-      <div dir="ltr" className="mt-4 h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-        <div className="h-full rounded-full bg-blue-600 transition-all duration-300 ease-out dark:bg-blue-400" style={{ width: `${pct}%` }} />
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="w-full lg:flex-1">
+          <div dir="ltr" className="mx-auto max-w-sm">
+            <input type="range" min={0} max={MAX_N} step={1} value={n} onChange={(e) => setN(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
+            <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`n = ${n}`}</p>
+          </div>
+          <div dir="ltr" className="mt-4 h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+            <div className="h-full rounded-full bg-blue-600 transition-all duration-300 ease-out dark:bg-blue-400" style={{ width: `${pct}%` }} />
+          </div>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

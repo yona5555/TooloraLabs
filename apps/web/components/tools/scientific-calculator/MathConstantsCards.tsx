@@ -26,19 +26,21 @@ export default function MathConstantsCards() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mx-auto mt-4 max-w-sm">
-        <input type="range" min={0} max={10} step={1} value={precision} onChange={(e) => setPrecision(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
-        <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`${t("precisionLabel")}: ${precision}`}</p>
-      </div>
-      <div dir="ltr" className="mt-4 grid grid-cols-2 gap-3">
-        {constants.map((c) => (
-          <div key={c.key} className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-center dark:border-zinc-700 dark:bg-zinc-800/40">
-            <p className="text-lg font-bold text-blue-700 dark:text-blue-300">{c.symbol}</p>
-            <p className="mt-1 break-all font-mono text-sm text-zinc-700 dark:text-zinc-200">{c.value.toFixed(precision)}</p>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="shrink-0">
+          <div dir="ltr" className="mx-auto max-w-sm">
+            <input type="range" min={0} max={10} step={1} value={precision} onChange={(e) => setPrecision(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
+            <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`${t("precisionLabel")}: ${precision}`}</p>
           </div>
-        ))}
-      </div>
-      <div className="mt-4">
+          <div dir="ltr" className="mt-4 grid grid-cols-2 gap-3">
+            {constants.map((c) => (
+              <div key={c.key} className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-center dark:border-zinc-700 dark:bg-zinc-800/40">
+                <p className="text-lg font-bold text-blue-700 dark:text-blue-300">{c.symbol}</p>
+                <p className="mt-1 break-all font-mono text-sm text-zinc-700 dark:text-zinc-200">{c.value.toFixed(precision)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         <WorkedExampleNote title={t("worked.title")} rows={constants.map((c) => ({ label: t(`names.${c.key}`), value: c.value.toFixed(precision) }))} />
       </div>
     </SectionCard>

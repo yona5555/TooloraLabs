@@ -33,22 +33,22 @@ export default function TrigWaveCurve() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mafs-canvas mt-4 w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
-          <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
-          <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
-          <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.emerald} />
-          <Point x={dims.angleDeg} y={sin} color={colors.rose} />
-          <Point x={dims.angleDeg} y={cos} color={colors.emerald} />
-          <Text x={20} y={1.15} size={11} color={colors.rose}>
-            sin(x)
-          </Text>
-          <Text x={20} y={-1.15} size={11} color={colors.emerald}>
-            cos(x)
-          </Text>
-        </Mafs>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
+          <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+            <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
+            <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
+            <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.emerald} />
+            <Point x={dims.angleDeg} y={sin} color={colors.rose} />
+            <Point x={dims.angleDeg} y={cos} color={colors.emerald} />
+            <Text x={20} y={1.15} size={11} color={colors.rose}>
+              sin(x)
+            </Text>
+            <Text x={20} y={-1.15} size={11} color={colors.emerald}>
+              cos(x)
+            </Text>
+          </Mafs>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

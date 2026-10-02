@@ -23,16 +23,18 @@ export default function SignPolarityBalance() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mx-auto mt-4 max-w-sm">
-        <input type="range" min={-20} max={20} step={1} value={x} onChange={(e) => setX(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
-        <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`x = ${x}`}</p>
-      </div>
-      <div dir="ltr" className="relative mt-5 h-2 rounded-full bg-zinc-200 dark:bg-zinc-700">
-        <div className="absolute left-1/2 top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 bg-zinc-400 dark:bg-zinc-500" />
-        <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-rose-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${xPct}%` }} />
-        <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-emerald-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${absPct}%` }} />
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div className="w-full lg:flex-1">
+          <div dir="ltr" className="mx-auto max-w-sm">
+            <input type="range" min={-20} max={20} step={1} value={x} onChange={(e) => setX(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
+            <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`x = ${x}`}</p>
+          </div>
+          <div dir="ltr" className="relative mt-5 h-2 rounded-full bg-zinc-200 dark:bg-zinc-700">
+            <div className="absolute left-1/2 top-1/2 h-4 w-0.5 -translate-x-1/2 -translate-y-1/2 bg-zinc-400 dark:bg-zinc-500" />
+            <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-rose-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${xPct}%` }} />
+            <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-emerald-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${absPct}%` }} />
+          </div>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

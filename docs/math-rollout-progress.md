@@ -35,6 +35,15 @@ without dynamism or depth).
 5. Component count, distribution pattern (explanation+indicator → AdSpace → explanation+indicator
    → …), and depth bar still literally match Triangle Calculator's scale — only the reactivity
    architecture is new.
+6. **(added after a compliance audit on tool 5, 2026-10-02) Every indicator's WORKED EXAMPLE
+   table sits DIRECTLY BESIDE its chart/visual, never stacked below it** — per the repo rulebook
+   §32 ("بجانبه لا أسفله"), already true of most of Triangle Calculator's own indicators
+   (`flex flex-col gap-6 lg:flex-row lg:items-center`, visual wrapped `shrink-0` or
+   `w-full lg:flex-1` for naturally wide visuals, `WorkedExampleNote` as the second flex child).
+   Tools 1–4 were all audited and found to have this same violation (worked-example boxes
+   stacked in a separate `mt-4` div below the visual instead of beside it) — see the dedicated
+   note below. **Every tool from 5 onward must get this right from the first draft**, not fixed
+   after the fact.
 
 **Shared infra added for v2** (reused by every tool below):
 - `apps/web/lib/create-live-tool-state.tsx` — `createLiveToolState<TDims>()`, a factory
@@ -70,7 +79,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 | 2 | fraction-calculator | done (v2) | d91a318 (CI green) |
 | 3 | scientific-notation-converter | done (v2) | a6bd5fe (CI green) |
 | 4 | significant-figures-calculator | done (v2) | f21f9b4 (CI green) |
-| 5 | statistics-calculator | needs v2 rebuild | — |
+| 5 | statistics-calculator | done (v2) | 7101000, layout fix 8497ae5 (CI green) |
 | 6 | area-calculator | needs v2 rebuild | — |
 | 7 | surface-area-calculator | needs v2 rebuild | — |
 | 8 | volume-calculator | not started (v2 from the start) | |

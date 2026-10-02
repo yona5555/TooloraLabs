@@ -21,17 +21,17 @@ export default function CombinatoricsTable() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mx-auto mt-4 max-w-sm space-y-3">
-        <div>
-          <input type="range" min={1} max={12} step={1} value={n} onChange={(e) => setN(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("nSliderLabel")} />
-          <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`n = ${n}`}</p>
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="mx-auto w-full max-w-sm shrink-0 space-y-3">
+          <div>
+            <input type="range" min={1} max={12} step={1} value={n} onChange={(e) => setN(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("nSliderLabel")} />
+            <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`n = ${n}`}</p>
+          </div>
+          <div>
+            <input type="range" min={0} max={n} step={1} value={clampedR} onChange={(e) => setR(Number(e.target.value))} className="w-full accent-emerald-600 dark:accent-emerald-400" aria-label={t("rSliderLabel")} />
+            <p className="mt-1 text-center text-xs font-semibold text-emerald-700 dark:text-emerald-300">{`r = ${clampedR}`}</p>
+          </div>
         </div>
-        <div>
-          <input type="range" min={0} max={n} step={1} value={clampedR} onChange={(e) => setR(Number(e.target.value))} className="w-full accent-emerald-600 dark:accent-emerald-400" aria-label={t("rSliderLabel")} />
-          <p className="mt-1 text-center text-xs font-semibold text-emerald-700 dark:text-emerald-300">{`r = ${clampedR}`}</p>
-        </div>
-      </div>
-      <div className="mt-4">
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

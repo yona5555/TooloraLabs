@@ -35,15 +35,15 @@ export default function DerivativeSlopeDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mafs-canvas mt-4 w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
-          <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
-          <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
-          <Line.Segment point1={[dims.angleDeg - 45, tangent(dims.angleDeg - 45)]} point2={[dims.angleDeg + 45, tangent(dims.angleDeg + 45)]} color={colors.blue} weight={2.5} />
-          <Point x={dims.angleDeg} y={y0} color={colors.blue} />
-        </Mafs>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
+          <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+            <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
+            <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
+            <Line.Segment point1={[dims.angleDeg - 45, tangent(dims.angleDeg - 45)]} point2={[dims.angleDeg + 45, tangent(dims.angleDeg + 45)]} color={colors.blue} weight={2.5} />
+            <Point x={dims.angleDeg} y={y0} color={colors.blue} />
+          </Mafs>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

@@ -32,18 +32,18 @@ export default function ExponentialTangentCurve() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mafs-canvas mt-4 w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [0, 360], y: [-8, 8] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
-          <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 2 }} />
-          <Line.Segment point1={[90, -8]} point2={[90, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
-          <Line.Segment point1={[270, -8]} point2={[270, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
-          <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[0, 89]} color={colors.amber} />
-          <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[91, 269]} color={colors.amber} />
-          <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[271, 360]} color={colors.amber} />
-          {isDefined && <Point x={dims.angleDeg} y={clampedTan} color={colors.amber} />}
-        </Mafs>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
+          <Mafs viewBox={{ x: [0, 360], y: [-8, 8] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+            <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 2 }} />
+            <Line.Segment point1={[90, -8]} point2={[90, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
+            <Line.Segment point1={[270, -8]} point2={[270, 8]} color={colors.zinc} weight={1} style="dashed" opacity={0.5} />
+            <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[0, 89]} color={colors.amber} />
+            <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[91, 269]} color={colors.amber} />
+            <Plot.OfX y={(x) => Math.max(-8, Math.min(8, Math.tan((x * Math.PI) / 180)))} domain={[271, 360]} color={colors.amber} />
+            {isDefined && <Point x={dims.angleDeg} y={clampedTan} color={colors.amber} />}
+          </Mafs>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[

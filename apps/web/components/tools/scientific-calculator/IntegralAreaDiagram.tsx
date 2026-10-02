@@ -37,14 +37,14 @@ export default function IntegralAreaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mafs-canvas mt-4 w-full overflow-hidden rounded-xl">
-        <Mafs viewBox={{ x: [0, 360], y: [-0.2, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
-          <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
-          <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
-          {dims.angleDeg > 0.5 && <Polygon points={points} color={colors.rose} fillOpacity={0.25} strokeOpacity={0} />}
-        </Mafs>
-      </div>
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+        <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
+          <Mafs viewBox={{ x: [0, 360], y: [-0.2, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+            <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
+            <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
+            {dims.angleDeg > 0.5 && <Polygon points={points} color={colors.rose} fillOpacity={0.25} strokeOpacity={0} />}
+          </Mafs>
+        </div>
         <WorkedExampleNote
           title={t("worked.title")}
           rows={[
