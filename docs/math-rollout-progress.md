@@ -80,7 +80,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 | 3 | scientific-notation-converter | done (v2) | a6bd5fe, layout fix 48dc7e8 (CI green) |
 | 4 | significant-figures-calculator | done (v2) | f21f9b4, layout fix 37dbf3f (CI green) |
 | 5 | statistics-calculator | done (v2) | 7101000, layout fix 8497ae5 (CI green) |
-| 6 | area-calculator | needs v2 rebuild | — |
+| 6 | area-calculator | done (v2) | 65511c2 (CI green) |
 | 7 | surface-area-calculator | needs v2 rebuild | — |
 | 8 | volume-calculator | not started (v2 from the start) | |
 | 9 | step-by-step-math-solver | not started | |
@@ -248,3 +248,90 @@ inputs and would incorrectly apply `min(sigFigsA, sigFigsB)`, treating "12" as a
 measurement and corrupting the real answer. Computed directly with the exported `roundToSigFigs`
 using `sigFigsA` alone instead, rather than calling `execute()` and reporting a plausible-looking
 but actually wrong number.
+
+**statistics-calculator (tool 5, rebuilt to v2):** the hero (`StatisticsDataPointsDrag.tsx`) holds
+up to 8 movable points on a number line, each bound to one real value in the live dataset
+(`dims.rawData`, a comma-separated string shared with the real above-fold field) via a new
+reusable `useSyncedPoint(initialValue, color, onDragCommit)` hook — called a FIXED 8 times every
+render regardless of the real dataset's length (React's rules-of-hooks requirement), with unused
+slots simply not rendered. All 15 indicators re-derive from the same `parseDataSet(dims.rawData)`
+and the existing `StatisticsCalculator` engine, so editing the field or dragging any point updates
+every one of them together.
+
+*Real finding from the dynamism test, not a coincidence at first glance*: the generic template's
+default (180,-110) drag on point[0] left "Share of Data Within One Standard Deviation" textually
+unchanged (75%→75%) even though the underlying mean/stddev genuinely shifted — confirmed by hand
+that this was a real numerical coincidence (the within-1σ *count* stayed 6/8 despite different
+members), not a stale/non-reactive component. A second default dataset landed on the same 75%
+again — for small, clustered datasets, 75% within one sigma is just a common outcome, not a fluke
+specific to one example. Fixed by writing a tool-specific test
+(`dynamism-test-statistics-calculator.js`) that edits the field to a dataset with a single sharp
+outlier (guarantees a decisively different within-σ share) for Phase 1, and drags an inner
+*duplicate* point (one of three repeated "4"s) by a large, decisive delta for Phase 2 — turning a
+repeated value into a new near-outlier reliably shifts mean, stddev, mode structure, and σ-band
+membership together, unlike a modest drag on an edge point.
+
+*Also found during Phase 2 of that same test build*: dragging the hero immediately after an
+Playwright `input.fill()` reset intermittently grabbed a stale, off-screen bounding box (the page
+had scrolled/reflowed between the reset and the drag) — fixed by re-calling
+`hero.scrollIntoViewIfNeeded()` right before measuring the point's box on every phase, not just
+once at the start of the script. Not a product bug — a test-script ordering issue.
+
+**Mid-rollout compliance audit, applied retroactively to tools 1–5 before continuing (2026-10-02):**
+re-reading the project rulebook's §32 in full (not just the parts remembered from earlier in the
+session) surfaced a real, systemic violation across every tool shipped so far: §32 requires every
+indicator's WORKED EXAMPLE table to sit **directly beside** its chart/visual
+(`flex flex-col gap-6 lg:flex-row lg:items-center`, visual `shrink-0` or `w-full lg:flex-1`), never
+stacked below in a separate `mt-4` block — a rule Triangle Calculator's own indicators already
+follow correctly in most files. Of 74 indicator files checked across the first 5 tools, only 6
+already used the side-by-side pattern (by incidental reuse of `EduBarChart`'s established
+wrapper); the other 68 had the worked-example box stacked underneath instead. Fixed all 5 tools
+(statistics-calculator directly; scientific-calculator, fraction-calculator,
+scientific-notation-converter, and significant-figures-calculator via four parallel subagents,
+each given the exact wrapping pattern and the already-fixed statistics-calculator files as
+reference) — pure layout restructuring, zero logic/translation/computed-value changes, re-verified
+with lint, typecheck, each tool's dynamism and gaps tests, and a fresh screenshot capture.
+Commits: statistics-calculator `8497ae5`, scientific-calculator `c60905e`, fraction-calculator
+`0e2de64`, scientific-notation-converter `48dc7e8`, significant-figures-calculator `37dbf3f` — all
+CI green. **Every tool from 6 onward is built with this layout correct from the first draft.**
+
+**area-calculator (tool 6, rebuilt to v2):** this tool's nature is fundamentally different from
+every prior tool in the rollout — it supports 8 distinct shapes (square, rectangle, triangle,
+circle, ellipse, trapezoid, parallelogram, sector) behind one shape selector, each with its own
+field set, rather than one fixed set of dimensions. The hero (`AreaShapeDrag.tsx`) redraws
+whichever shape is currently active via Mafs primitives (`Polygon`/`Circle`/`Ellipse`), with 1 or
+2 draggable handles whose real-world meaning is derived per shape rather than being generic: a
+single point constrained to the y=x diagonal for a square (controls `side`), an unconstrained
+corner point for a rectangle (controls `width`+`height` from one drag), a free polar point for a
+sector (`radius` = distance from origin, `angleDegrees` = angle from the positive x-axis, both
+from a single point), two points for triangle/parallelogram (one on the x-axis for `base`, one on
+a tracking vertical line for `height`), and so on — all synced bidirectionally into the same
+`AreaLiveContext` (`dims` = the real above-fold `AreaDraft`, written on every keystroke, not
+gated behind this tool's existing "Calculate" button) that drives all 15 indicators.
+
+*Two real, independent bugs found and fixed before/during this build, not cosmetic:* (1) switching
+the shape selector left every shape but the page's own default (square) with empty dimension
+fields — the exact "degenerate empty default" bug class from tools 3–4, except here triggered by
+a *shape switch* rather than an *operation-mode switch*. Fixed proactively by adding
+`SHAPE_DEFAULTS` (real, non-degenerate example dimensions per shape) and wiring the shape
+`<select>`'s `onChange` in `AreaInputPanel.tsx` to apply them. (2) the production build was
+already failing before this rebuild touched anything: `tools.area-calculator.aboveFold.quickReference`
+was entirely missing from all 6 locale files (the `aboveFold` namespace didn't exist at all for
+this tool), breaking `npm run build` with `MISSING_MESSAGE` errors in every locale — this was
+first noticed as a tangential finding while verifying statistics-calculator's build output, and
+fixed for real once area-calculator became the tool actually being worked on, by adding the
+missing namespace to all 6 locales.
+
+*15 indicators designed around universal, shape-agnostic concepts* (since no single live
+dimension generalizes across all 8 shapes the way `rawData` did for statistics-calculator):
+a live formula-substitution diagram and computation-steps timeline for whichever shape is active;
+a tagged reference table and bar chart ranking all 8 shapes' area at the same live "characteristic
+length" as the active shape; a balance comparison against a same-size square; a bounding-box fill
+ratio and an isoperimetric compactness ratio (zone strip, gracefully falls back to live
+explanatory text for the 4 of 8 shapes whose perimeter isn't determined by the given dimensions
+alone — triangle, ellipse, trapezoid, parallelogram); a ±20% measurement-error sensitivity trio; a
+continuous Mafs curve of area-vs-scale-factor; a stepped 1×/2×/4× doubling diagram; a composite-
+copies flow and a real cost-per-area estimator (each with its own embedded live control per §20);
+a unit-conversion equivalence; a real-world log-scale placement bar; and a two-dimension
+comparison card pair. Verified across all 8 shapes manually (not just the default square) — every
+shape produces the correct point count (1 or 2) and genuinely recomputes area/perimeter on drag.
