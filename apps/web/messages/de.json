@@ -13807,6 +13807,244 @@
           "note": "Die erste englische Übersetzung von al-Chwarizmis grundlegendem Algebra-Text, die seine ursprünglichen verbalen, schrittweisen Verfahren zum Lösen linearer und quadratischer Gleichungen zeigt — dieselbe Struktur, der die schrittweise Ausgabe dieses Lösers folgt.",
           "url": "https://archive.org/details/algebraofmohamme00khuwrich",
           "readOriginal": "Die Algebra von Mohammed Ben Musa lesen"
+        },
+        "hero": {
+          "ariaLabel": "{mode}-Graph, verschiebbar",
+          "hint": "Ziehen Sie eine Nullstelle, den Scheitelpunkt oder den y-Achsenabschnitt — oder bearbeiten Sie die Felder oben. Beide aktualisieren denselben Live-Graphen.",
+          "hintExplorerOnly": "Dieses Polynom hat einen zu hohen Grad für eine einfache geschlossene Form. Ziehen Sie den Erkundungspunkt, um Nullstellen numerisch zu finden (Newton-Verfahren).",
+          "stepBadge": "Schritt {step} von {total}"
+        },
+        "diagnosticsSection": {
+          "title": "Wie der Löser entscheidet",
+          "intro": "Die realen Formeln, alternative Lösungsmethoden und die Einsetzungsprobe hinter dem Live-Ergebnis."
+        },
+        "balanceDiagram": {
+          "title": "Waagendiagramm",
+          "intro": "Die zwei realen Seiten, die der Modus {mode} tatsächlich vergleicht, gegeneinander abgewogen bei einem live, verschiebbaren Test-x.",
+          "ariaLabel": "Gleichungswaage",
+          "dragHint": "Ziehen Sie den Punkt unter der Waage, um ein beliebiges x zu testen.",
+          "linear": {
+            "left": "Linke Seite (ax+b)",
+            "right": "Rechte Seite (cx+d)"
+          },
+          "quadratic": {
+            "left": "ax² + bx",
+            "right": "-c"
+          },
+          "fraction": {
+            "left": "Bruchergebnis",
+            "right": "x"
+          },
+          "derivative": {
+            "left": "f(x)",
+            "right": "0"
+          },
+          "worked": {
+            "title": "Beispielrechnung",
+            "difference": "Unterschied",
+            "balanced": "Im Gleichgewicht — das ist eine Nullstelle"
+          }
+        },
+        "solveFlow": {
+          "title": "Entscheidungspfad",
+          "intro": "Klicken Sie auf eine Station, um den Rechner und alle Indikatoren zu diesem Punkt der Lösung zu springen.",
+          "discriminantLabel": "Diskriminante",
+          "slopeLabel": "Steigung",
+          "noUniqueRoot": "keine eindeutige Lösung",
+          "stations": {
+            "entered": "Gleichung eingegeben",
+            "coefficients": "Koeffizienten identifiziert",
+            "keyQuantity": "Schlüsselgröße berechnet",
+            "result": "Endergebnis"
+          },
+          "worked": {
+            "title": "Beispielrechnung"
+          }
+        },
+        "progressGauges": {
+          "title": "Fortschrittsanzeigen",
+          "intro": "Der eigene Fortschritt der Live-Lösung, Termanzahl und Grad — plus ein Prüfring, der zeigt, wie nah ein x an einer echten Nullstelle liegt.",
+          "progressLabel": "Fortschritt",
+          "termsLabel": "Terme",
+          "degreeLabel": "Grad",
+          "remainderLabel": "Rest",
+          "probeLabel": "Test x = {x}",
+          "probeAria": "Test-x-Wert",
+          "worked": {
+            "title": "Beispielrechnung",
+            "probeX": "Test x",
+            "remainder": "Rest",
+            "nearRoot": "Im Rundungsbereich einer Nullstelle"
+          }
+        },
+        "newtonIterations": {
+          "title": "Newton-Verfahren-Iterationen",
+          "intro": "Aufeinanderfolgende Tangenten von einer live, verschiebbaren Anfangsschätzung, deren x-Achsenabschnitt jeweils zur nächsten Schätzung wird.",
+          "ariaLabel": "Konvergenz der Tangentenlinien im Newton-Verfahren",
+          "hint": "Ziehen Sie den grünen Punkt entlang der Kurve, um die Startschätzung zu ändern.",
+          "worked": {
+            "title": "Beispielrechnung",
+            "initialGuess": "Anfangsschätzung",
+            "afterIterations": "Nach {count} Iterationen"
+          }
+        },
+        "intersectionArea": {
+          "title": "Schnittpunkt & Fläche",
+          "intro": "Die linke und rechte Seite der Gleichung als zwei reale Kurven — wo sie sich schneiden, liegt die Lösung.",
+          "ariaLabel": "LHS- und RHS-Kurven mit schattierter Fläche dazwischen",
+          "worked": {
+            "title": "Beispielrechnung",
+            "lhs": "LHS beim Erkunder",
+            "rhs": "RHS beim Erkunder",
+            "gap": "Abstand"
+          }
+        },
+        "sixMethods": {
+          "title": "Sechs Lösungsmethoden",
+          "intro": "Dieselbe Live-Gleichung, auf sechs wirklich unterschiedliche Arten gelöst — alle konvergieren zur selben realen Antwort.",
+          "notFactorable": "über den rationalen Zahlen nicht sauber faktorisierbar",
+          "notApplicableLinear": "nicht anwendbar auf eine lineare Gleichung",
+          "noUniqueRoot": "keine eindeutige Lösung",
+          "crossesAt": "kreuzt die x-Achse bei x = {x}",
+          "noRealCrossing": "kreuzt die x-Achse nie (keine reelle Lösung)",
+          "substitutionOk": "das Einsetzen der Lösung bestätigt sie",
+          "substitutionComplex": "kein reeller Wert zum Einsetzen",
+          "noBracket": "kein Vorzeichenwechsel in diesem Intervall",
+          "methods": {
+            "factoring": "Faktorisierung",
+            "completing": "Quadratische Ergänzung",
+            "formula": "Mitternachtsformel",
+            "graphing": "Grafische Lösung",
+            "substitution": "Einsetzungsprobe",
+            "bisection": "Numerische Bisektion"
+          },
+          "bisectionIterLabel": "Bisektions-Iterationen: {count}",
+          "bisectionIterAria": "Anzahl der Bisektions-Iterationen",
+          "worked": {
+            "title": "Beispielrechnung",
+            "allAgree": "Alle sechs Methoden stimmen überein"
+          }
+        },
+        "rootsVsParameter": {
+          "title": "Nullstelle vs. Parameter",
+          "intro": "Die live Nullstelle, dargestellt während {param} einen Bereich durchläuft — der verschiebbare Punkt IST der reale aktuelle Koeffizient.",
+          "leadingTermLabel": "Leitkoeffizient",
+          "ariaLabel": "Nullstelle als Funktion eines Koeffizienten",
+          "worked": {
+            "title": "Beispielrechnung",
+            "current": "aktuell",
+            "result": "Resultierende Nullstelle"
+          }
+        },
+        "complexPlane": {
+          "title": "Komplexe Ebene",
+          "intro": "Die eigenen realen Nullstellen des aktiven Modus, oder ein komplex-konjugiertes Paar, auf der Gaußschen Zahlenebene mit einem Phasenkreis dargestellt.",
+          "ariaLabel": "Gaußsche Zahlenebene mit Nullstellen und einem Phasenkreis",
+          "realAxisLabel": "reelle Achse",
+          "worked": {
+            "title": "Beispielrechnung",
+            "roots": "Nullstellen",
+            "magnitude": "Betrag",
+            "exploredAngle": "Erkundeter Winkel"
+          }
+        },
+        "lawsCard": {
+          "title": "Verwendete Formeln",
+          "intro": "Die realen Formeln hinter der eigenen Lösung des aktiven Modus, mit den live eingesetzten Koeffizienten.",
+          "selectorAria": "Auswählen, welche Formel angezeigt wird",
+          "laws": {
+            "discriminant": "Diskriminantenformel",
+            "quadraticFormula": "Mitternachtsformel",
+            "vieta": "Vieta-Formeln",
+            "slope": "Steigungs-Achsenabschnitt-Lösung"
+          },
+          "worked": {
+            "title": "Beispielrechnung"
+          }
+        },
+        "notationMapping": {
+          "title": "Notationszuordnung",
+          "intro": "Dieselbe Lösungsmenge auf verschiedene reale Arten geschrieben — ein verschiebbarer Kandidat testet live die Zugehörigkeit.",
+          "setBuilderComplex": "{ x | keine reelle Lösung }",
+          "setBuilderEmpty": "∅ (keine Lösung)",
+          "setBuilderLabel": "Mengenschreibweise",
+          "decimalListLabel": "Dezimalliste",
+          "candidateLabel": "Kandidat x = {x}",
+          "candidateAria": "Zu testender Kandidatenwert",
+          "isMember": "x = {x} IST in der Lösungsmenge",
+          "notMember": "x = {x} ist NICHT in der Lösungsmenge",
+          "worked": {
+            "title": "Beispielrechnung",
+            "candidate": "Kandidat",
+            "probeValue": "f(Kandidat)",
+            "membership": "Mitglied?",
+            "yes": "Ja",
+            "no": "Nein"
+          }
+        },
+        "numberLineSolution": {
+          "title": "Lösungsmenge auf dem Zahlenstrahl",
+          "intro": "Die reale(n) Nullstelle(n), markiert als ausgefüllte Punkte auf einem Zahlenstrahl — ziehen Sie den Erkunder, um den Abstand zur nächsten zu finden.",
+          "ariaLabel": "Zahlenstrahl mit Nullstellen-Markierungen und einem verschiebbaren Erkunder",
+          "worked": {
+            "title": "Beispielrechnung",
+            "solutionSet": "Lösungsmenge",
+            "distance": "Abstand zur nächsten Nullstelle"
+          }
+        },
+        "verificationColumns": {
+          "title": "Einsetzungsprobe",
+          "intro": "Linke vs. rechte Seite bei einem live, verschiebbaren Test-x — die Balken stimmen bei einer echten Nullstelle exakt überein.",
+          "remainderLabel": "Rest",
+          "testXLabel": "Test x = {x}",
+          "testXAria": "Test-x-Wert",
+          "jumpToRoot": "Zur Nullstelle springen",
+          "worked": {
+            "title": "Beispielrechnung",
+            "testX": "Test x",
+            "remainder": "Rest",
+            "verified": "Bestätigt — stimmt mit der Nullstelle überein"
+          }
+        },
+        "sensitivityHeatmap": {
+          "title": "Empfindlichkeits-Heatmap",
+          "intro": "Jedes (b, c)-Paar mit seinem eigenen Nullstellentyp, als reales Raster dargestellt — das eigene (b, c) der Live-Gleichung ist der verschiebbare Punkt darauf.",
+          "ariaLabel": "Heatmap des Nullstellentyps nach b und c, mit einem verschiebbaren Live-Punkt",
+          "notApplicableNonQuadratic": "Diese 2-Parameter-Karte gilt nur für den Modus „Quadratische Gleichung“.",
+          "worked": {
+            "title": "Beispielrechnung",
+            "bc": "(b, c)",
+            "zone": "Zone"
+          },
+          "zones": {
+            "two-real": "Zwei reelle Nullstellen",
+            "one-real": "Eine doppelte Nullstelle",
+            "complex": "Zwei komplexe Nullstellen"
+          }
+        },
+        "vietaRectangle": {
+          "title": "Vieta-Rechteck",
+          "intro": "Ein reales Rechteck, dessen Seitenlängen die eigenen zwei reellen Nullstellen der Gleichung sind — Fläche und halber Umfang sind sichtbar gemachte Vieta-Formeln.",
+          "ariaLabel": "Rechteck mit Seiten gleich den zwei Nullstellen",
+          "notApplicable": "Nur für den Modus „Quadratische Gleichung“ sinnvoll.",
+          "worked": {
+            "title": "Beispielrechnung",
+            "area": "Fläche (= Produkt der Nullstellen)",
+            "halfPerimeter": "Halber Umfang (= Summe der Nullstellen)",
+            "exploredRect": "Erkundetes Rechteck"
+          }
+        },
+        "unitCircleWave": {
+          "title": "Einheitskreis & Welle",
+          "intro": "Dieser Löser hat keinen trigonometrischen Modus, daher erkundet ein verschiebbarer Winkel allgemein sin/cos, mit einem Referenzwinkel, der ehrlich vom eigenen Leitkoeffizienten ({coeff}) der Live-Gleichung abgeleitet wird.",
+          "circleAriaLabel": "Einheitskreis mit einem verschiebbaren Winkelpunkt",
+          "waveAriaLabel": "Sinus- und Kosinuswellen mit dem aktuellen markierten Winkel",
+          "worked": {
+            "title": "Beispielrechnung",
+            "angle": "Winkel",
+            "sin": "sin",
+            "cos": "cos"
+          }
         }
       },
       "relatedTools": {

@@ -13813,6 +13813,238 @@
           "hint": "Drag any root, vertex, or y-intercept point — or edit the fields above. Both update the same live graph.",
           "hintExplorerOnly": "This polynomial is too high-degree for a simple closed form, so drag the explorer point to scan for roots numerically (Newton's method).",
           "stepBadge": "Step {step} of {total}"
+        },
+        "diagnosticsSection": {
+          "title": "How the Solver Decides",
+          "intro": "The real formulas, alternative solving methods, and substitution check behind the live result."
+        },
+        "balanceDiagram": {
+          "title": "Balance Diagram",
+          "intro": "The two real sides the {mode} mode is actually comparing, weighed against each other at a live, draggable test x.",
+          "ariaLabel": "Equation balance scale",
+          "dragHint": "Drag the point below the scale to probe any x.",
+          "linear": {
+            "left": "Left side (ax+b)",
+            "right": "Right side (cx+d)"
+          },
+          "quadratic": {
+            "left": "ax² + bx",
+            "right": "-c"
+          },
+          "fraction": {
+            "left": "Fraction result",
+            "right": "x"
+          },
+          "derivative": {
+            "left": "f(x)",
+            "right": "0"
+          },
+          "worked": {
+            "title": "Worked Example",
+            "difference": "Difference",
+            "balanced": "Balanced — this is a root"
+          }
+        },
+        "solveFlow": {
+          "title": "Decision Path",
+          "intro": "Click any station to jump the hero and every indicator to that point in the solve.",
+          "discriminantLabel": "Discriminant",
+          "slopeLabel": "Slope",
+          "noUniqueRoot": "no unique root",
+          "stations": {
+            "entered": "Equation entered",
+            "coefficients": "Coefficients identified",
+            "keyQuantity": "Key quantity computed",
+            "result": "Final result"
+          },
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "progressGauges": {
+          "title": "Progress Gauges",
+          "intro": "The live solve's own progress, term count, and degree — plus a probe ring showing how close any x sits to being an actual root.",
+          "progressLabel": "Progress",
+          "termsLabel": "Terms",
+          "degreeLabel": "Degree",
+          "remainderLabel": "Remainder",
+          "probeLabel": "Probe x = {x}",
+          "probeAria": "Probe x value",
+          "worked": {
+            "title": "Worked Example",
+            "probeX": "Probe x",
+            "remainder": "Remainder",
+            "nearRoot": "Within rounding of a root"
+          }
+        },
+        "newtonIterations": {
+          "title": "Newton's-Method Iterations",
+          "intro": "Successive tangent lines from a live, draggable initial guess, each one's x-intercept becoming the next guess.",
+          "ariaLabel": "Newton's method tangent-line convergence",
+          "hint": "Drag the green point along the curve to change the starting guess.",
+          "worked": {
+            "title": "Worked Example",
+            "initialGuess": "Initial guess",
+            "afterIterations": "After {count} iterations"
+          }
+        },
+        "intersectionArea": {
+          "title": "Intersection & Area",
+          "intro": "The left and right sides of the equation as two real curves — wherever they cross is the solution.",
+          "ariaLabel": "LHS and RHS curves with shaded area between them",
+          "worked": {
+            "title": "Worked Example",
+            "lhs": "LHS at explorer",
+            "rhs": "RHS at explorer",
+            "gap": "Gap"
+          }
+        },
+        "sixMethods": {
+          "title": "Six Solving Methods",
+          "intro": "The same live equation, solved six genuinely different ways — all converging on the same real answer.",
+          "notFactorable": "not cleanly factorable over the rationals",
+          "notApplicableLinear": "not applicable to a linear equation",
+          "noUniqueRoot": "no unique root",
+          "crossesAt": "crosses the x-axis at x = {x}",
+          "noRealCrossing": "never crosses the x-axis (no real root)",
+          "substitutionOk": "substituting the root back in confirms it",
+          "substitutionComplex": "no real value to substitute",
+          "noBracket": "no sign change in this interval",
+          "methods": {
+            "factoring": "Factoring",
+            "completing": "Completing the square",
+            "formula": "Quadratic formula",
+            "graphing": "Graphing",
+            "substitution": "Substitution check",
+            "bisection": "Numerical bisection"
+          },
+          "bisectionIterLabel": "Bisection iterations: {count}",
+          "bisectionIterAria": "Number of bisection iterations",
+          "worked": {
+            "title": "Worked Example",
+            "allAgree": "All six methods agree"
+          }
+        },
+        "rootsVsParameter": {
+          "title": "Root vs. Parameter",
+          "intro": "The live root plotted as {param} sweeps through a range — the draggable point IS the real current coefficient.",
+          "leadingTermLabel": "leading coefficient",
+          "ariaLabel": "Root as a function of one coefficient",
+          "worked": {
+            "title": "Worked Example",
+            "current": "current",
+            "result": "Resulting root"
+          }
+        },
+        "complexPlane": {
+          "title": "Complex Plane",
+          "intro": "The active mode's own real roots, or complex-conjugate pair, plotted on the Argand plane with a phase circle.",
+          "ariaLabel": "Argand plane with roots and a phase circle",
+          "realAxisLabel": "real axis",
+          "worked": {
+            "title": "Worked Example",
+            "roots": "Roots",
+            "magnitude": "Magnitude",
+            "exploredAngle": "Explored angle"
+          }
+        },
+        "lawsCard": {
+          "title": "Formulas Used",
+          "intro": "The real formulas behind the active mode's own solve, with the live coefficients substituted in.",
+          "selectorAria": "Select which formula to display",
+          "laws": {
+            "discriminant": "Discriminant formula",
+            "quadraticFormula": "Quadratic formula",
+            "vieta": "Vieta's formulas",
+            "slope": "Slope-intercept solve"
+          },
+          "worked": {
+            "title": "Worked Example"
+          }
+        },
+        "notationMapping": {
+          "title": "Notation Mapping",
+          "intro": "The same solution set written different real ways — a draggable candidate tests membership live.",
+          "setBuilderComplex": "{ x | no real solution }",
+          "setBuilderEmpty": "∅ (no solution)",
+          "setBuilderLabel": "Set-builder",
+          "decimalListLabel": "Decimal list",
+          "candidateLabel": "Candidate x = {x}",
+          "candidateAria": "Candidate value to test",
+          "isMember": "x = {x} IS in the solution set",
+          "notMember": "x = {x} is NOT in the solution set",
+          "worked": {
+            "title": "Worked Example",
+            "candidate": "Candidate",
+            "probeValue": "f(candidate)",
+            "membership": "Member?",
+            "yes": "Yes",
+            "no": "No"
+          }
+        },
+        "numberLineSolution": {
+          "title": "Number-Line Solution Set",
+          "intro": "The real root(s), marked as solid points on a number line — drag the explorer to find the distance to the nearest one.",
+          "ariaLabel": "Number line with root markers and a draggable explorer",
+          "worked": {
+            "title": "Worked Example",
+            "solutionSet": "Solution set",
+            "distance": "Distance to nearest root"
+          }
+        },
+        "verificationColumns": {
+          "title": "Substitution Check",
+          "intro": "LHS vs RHS at a live, draggable test x — the bars match exactly at a real root.",
+          "remainderLabel": "Remainder",
+          "testXLabel": "Test x = {x}",
+          "testXAria": "Test x value",
+          "jumpToRoot": "Jump to root",
+          "worked": {
+            "title": "Worked Example",
+            "testX": "Test x",
+            "remainder": "Remainder",
+            "verified": "Verified — matches the root"
+          }
+        },
+        "sensitivityHeatmap": {
+          "title": "Sensitivity Heatmap",
+          "intro": "Every (b, c) pair's own root type, painted as a real grid — the live equation's own (b, c) is the draggable point on top.",
+          "ariaLabel": "Heatmap of root type by b and c, with a draggable live point",
+          "notApplicableNonQuadratic": "This 2-parameter map only applies to the quadratic-equation mode.",
+          "worked": {
+            "title": "Worked Example",
+            "bc": "(b, c)",
+            "zone": "Zone"
+          },
+          "zones": {
+            "two-real": "Two real roots",
+            "one-real": "One repeated root",
+            "complex": "Two complex roots"
+          }
+        },
+        "vietaRectangle": {
+          "title": "Vieta's Rectangle",
+          "intro": "A real rectangle whose side lengths are the equation's own two real roots — area and half-perimeter are Vieta's formulas made visible.",
+          "ariaLabel": "Rectangle with sides equal to the two roots",
+          "notApplicable": "Only meaningful for the quadratic-equation mode.",
+          "worked": {
+            "title": "Worked Example",
+            "area": "Area (= product of roots)",
+            "halfPerimeter": "Half-perimeter (= sum of roots)",
+            "exploredRect": "Explored rectangle"
+          }
+        },
+        "unitCircleWave": {
+          "title": "Unit Circle & Wave",
+          "intro": "This solver has no trigonometric mode, so a draggable angle explores sin/cos generally, with a reference angle derived honestly from the live leading coefficient ({coeff}).",
+          "circleAriaLabel": "Unit circle with a draggable angle point",
+          "waveAriaLabel": "Sine and cosine waves with the current angle marked",
+          "worked": {
+            "title": "Worked Example",
+            "angle": "Angle",
+            "sin": "sin",
+            "cos": "cos"
+          }
         }
       },
       "relatedTools": {

@@ -13,12 +13,14 @@ import {
   vietaFromQuadratic,
   newtonIterate,
   findRealRootsNumerically,
+  bisectionSteps,
   toMathValueFraction,
   type HeroEquation,
   type MathSolverNumericDraft,
   type PolyCoeffs,
   type QuadraticRootResult,
   type NewtonStep,
+  type BisectionStep,
   type MathValueFraction,
 } from "@tooloralabs/tools";
 import type { MathSolverDraft } from "./types";
@@ -37,9 +39,10 @@ export {
   vietaFromQuadratic,
   newtonIterate,
   findRealRootsNumerically,
+  bisectionSteps,
   toMathValueFraction,
 };
-export type { HeroEquation, MathSolverNumericDraft, PolyCoeffs, QuadraticRootResult, NewtonStep, MathValueFraction };
+export type { HeroEquation, MathSolverNumericDraft, PolyCoeffs, QuadraticRootResult, NewtonStep, BisectionStep, MathValueFraction };
 
 function toNum(s: string): number | undefined {
   if (!s.trim()) return undefined;

@@ -63,12 +63,18 @@ export function roundSignificant(value: number, sig = 4): number {
 export function formatMathValue(value: number | null | undefined, opts?: { maxDen?: number; sig?: number }): string {
   if (value === null || value === undefined || !Number.isFinite(value)) return "0";
   const v = Object.is(value, -0) ? 0 : value;
+  const sig = opts?.sig ?? 4;
   const frac = toMathValueFraction(v, opts?.maxDen ?? 99);
-  if (frac && frac.den > 1) return `${frac.num}/${frac.den}`;
-  const rounded = roundSignificant(v, opts?.sig ?? 4);
+  // A "simple" fraction needs a small NUMERATOR too, not just a small denominator: b²-4ac on a
+  // dragged-large b can be an exact fraction like 18353/4 (den=4 is well under maxDen=99), but a
+  // 5-digit numerator is not what "a simple fraction" means and blows past the sig-fig cap this
+  // formatter exists to enforce. Found via the 500-drag fuzz test, not a hypothetical.
+  const numeratorIsSimple = frac ? Math.abs(frac.num).toString().length <= sig : false;
+  if (frac && frac.den > 1 && numeratorIsSimple) return `${frac.num}/${frac.den}`;
+  const rounded = roundSignificant(v, sig);
   if (Number.isInteger(rounded)) return String(rounded);
   // trim trailing zeros from a fixed-ish decimal representation without reverting to raw long decimals
-  let s = rounded.toPrecision(opts?.sig ?? 4);
+  let s = rounded.toPrecision(sig);
   if (s.includes("e") || s.includes("E")) s = String(rounded);
   if (s.includes(".")) s = s.replace(/0+$/, "").replace(/\.$/, "");
   return s === "-0" ? "0" : s;
@@ -195,6 +201,30 @@ export function findRealRootsNumerically(coeffs: PolyCoeffs, scanRange: [number,
     prevY = y;
   }
   return roots.sort((a, b) => a - b);
+}
+
+export type BisectionStep = { lo: number; hi: number; mid: number; fMid: number };
+
+/** Classic interval-halving bisection — a real, distinct method from Newton's tangent-following,
+ * included for the solving-methods comparison indicator. Requires a genuine sign change across
+ * [lo, hi]; returns an empty list if the interval doesn't bracket a root. */
+export function bisectionSteps(coeffs: PolyCoeffs, lo: number, hi: number, maxIter = 6): BisectionStep[] {
+  let a = lo;
+  let b = hi;
+  const fa0 = evalPoly(coeffs, a);
+  const fb0 = evalPoly(coeffs, b);
+  if (!Number.isFinite(fa0) || !Number.isFinite(fb0) || fa0 * fb0 > 0) return [];
+  const steps: BisectionStep[] = [];
+  for (let i = 0; i < maxIter; i++) {
+    const mid = (a + b) / 2;
+    const fMid = evalPoly(coeffs, mid);
+    steps.push({ lo: a, hi: b, mid, fMid });
+    if (fMid === 0) break;
+    const fa = evalPoly(coeffs, a);
+    if (fa * fMid < 0) b = mid;
+    else a = mid;
+  }
+  return steps;
 }
 
 // ---------------------------------------------------------------------------

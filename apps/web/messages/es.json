@@ -13807,6 +13807,244 @@
           "note": "La primera traducción al inglés del texto fundacional de álgebra de al-Juarismi, que muestra sus procedimientos verbales originales, paso a paso, para resolver ecuaciones lineales y cuadráticas — la misma estructura que sigue la salida paso a paso de este resolutor.",
           "url": "https://archive.org/details/algebraofmohamme00khuwrich",
           "readOriginal": "Leer El álgebra de Mohammed Ben Musa"
+        },
+        "hero": {
+          "ariaLabel": "Gráfico de {mode}, arrastrable",
+          "hint": "Arrastra cualquier raíz, el vértice o el punto de corte con el eje y, o edita los campos de arriba. Ambos actualizan el mismo gráfico en vivo.",
+          "hintExplorerOnly": "Este polinomio tiene un grado demasiado alto para una forma cerrada simple, así que arrastra el punto explorador para buscar raíces numéricamente (método de Newton).",
+          "stepBadge": "Paso {step} de {total}"
+        },
+        "diagnosticsSection": {
+          "title": "Cómo decide el solucionador",
+          "intro": "Las fórmulas reales, los métodos de resolución alternativos y la comprobación por sustitución detrás del resultado en vivo."
+        },
+        "balanceDiagram": {
+          "title": "Diagrama de balanza",
+          "intro": "Los dos lados reales que el modo {mode} está comparando realmente, pesados uno contra el otro en una x de prueba en vivo y arrastrable.",
+          "ariaLabel": "Balanza de la ecuación",
+          "dragHint": "Arrastra el punto bajo la balanza para probar cualquier x.",
+          "linear": {
+            "left": "Lado izquierdo (ax+b)",
+            "right": "Lado derecho (cx+d)"
+          },
+          "quadratic": {
+            "left": "ax² + bx",
+            "right": "-c"
+          },
+          "fraction": {
+            "left": "Resultado de la fracción",
+            "right": "x"
+          },
+          "derivative": {
+            "left": "f(x)",
+            "right": "0"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "difference": "Diferencia",
+            "balanced": "Equilibrado: esta es una raíz"
+          }
+        },
+        "solveFlow": {
+          "title": "Ruta de decisión",
+          "intro": "Haz clic en cualquier estación para saltar el encabezado y todos los indicadores a ese punto de la resolución.",
+          "discriminantLabel": "Discriminante",
+          "slopeLabel": "Pendiente",
+          "noUniqueRoot": "sin raíz única",
+          "stations": {
+            "entered": "Ecuación introducida",
+            "coefficients": "Coeficientes identificados",
+            "keyQuantity": "Cantidad clave calculada",
+            "result": "Resultado final"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "progressGauges": {
+          "title": "Medidores de progreso",
+          "intro": "El propio progreso de la resolución en vivo, el número de términos y el grado, además de un anillo de sondeo que muestra cuán cerca está una x de ser una raíz real.",
+          "progressLabel": "Progreso",
+          "termsLabel": "Términos",
+          "degreeLabel": "Grado",
+          "remainderLabel": "Resto",
+          "probeLabel": "Sonda x = {x}",
+          "probeAria": "Valor de x de sondeo",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "probeX": "x de sondeo",
+            "remainder": "Resto",
+            "nearRoot": "Dentro del redondeo de una raíz"
+          }
+        },
+        "newtonIterations": {
+          "title": "Iteraciones del método de Newton",
+          "intro": "Líneas tangentes sucesivas desde una estimación inicial en vivo y arrastrable; la intersección con el eje x de cada una se convierte en la siguiente estimación.",
+          "ariaLabel": "Convergencia de líneas tangentes del método de Newton",
+          "hint": "Arrastra el punto verde a lo largo de la curva para cambiar la estimación inicial.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "initialGuess": "Estimación inicial",
+            "afterIterations": "Después de {count} iteraciones"
+          }
+        },
+        "intersectionArea": {
+          "title": "Intersección y área",
+          "intro": "El lado izquierdo y derecho de la ecuación como dos curvas reales: donde se cruzan está la solución.",
+          "ariaLabel": "Curvas LHS y RHS con el área sombreada entre ellas",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "lhs": "LHS en el explorador",
+            "rhs": "RHS en el explorador",
+            "gap": "Brecha"
+          }
+        },
+        "sixMethods": {
+          "title": "Seis métodos de resolución",
+          "intro": "La misma ecuación en vivo, resuelta de seis maneras realmente distintas, todas convergiendo en la misma respuesta real.",
+          "notFactorable": "no se factoriza limpiamente sobre los racionales",
+          "notApplicableLinear": "no aplicable a una ecuación lineal",
+          "noUniqueRoot": "sin raíz única",
+          "crossesAt": "cruza el eje x en x = {x}",
+          "noRealCrossing": "nunca cruza el eje x (sin raíz real)",
+          "substitutionOk": "sustituir la raíz la confirma",
+          "substitutionComplex": "no hay un valor real que sustituir",
+          "noBracket": "sin cambio de signo en este intervalo",
+          "methods": {
+            "factoring": "Factorización",
+            "completing": "Completar el cuadrado",
+            "formula": "Fórmula general",
+            "graphing": "Método gráfico",
+            "substitution": "Comprobación por sustitución",
+            "bisection": "Bisección numérica"
+          },
+          "bisectionIterLabel": "Iteraciones de bisección: {count}",
+          "bisectionIterAria": "Número de iteraciones de bisección",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "allAgree": "Los seis métodos coinciden"
+          }
+        },
+        "rootsVsParameter": {
+          "title": "Raíz vs. parámetro",
+          "intro": "La raíz en vivo graficada mientras {param} recorre un rango: el punto arrastrable ES el coeficiente actual real.",
+          "leadingTermLabel": "coeficiente principal",
+          "ariaLabel": "Raíz en función de un coeficiente",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "current": "actual",
+            "result": "Raíz resultante"
+          }
+        },
+        "complexPlane": {
+          "title": "Plano complejo",
+          "intro": "Las propias raíces reales del modo activo, o un par complejo conjugado, graficadas en el plano de Argand con un círculo de fase.",
+          "ariaLabel": "Plano de Argand con raíces y un círculo de fase",
+          "realAxisLabel": "eje real",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "roots": "Raíces",
+            "magnitude": "Magnitud",
+            "exploredAngle": "Ángulo explorado"
+          }
+        },
+        "lawsCard": {
+          "title": "Fórmulas usadas",
+          "intro": "Las fórmulas reales detrás de la propia resolución del modo activo, con los coeficientes en vivo sustituidos.",
+          "selectorAria": "Seleccionar qué fórmula mostrar",
+          "laws": {
+            "discriminant": "Fórmula del discriminante",
+            "quadraticFormula": "Fórmula general",
+            "vieta": "Fórmulas de Vieta",
+            "slope": "Resolución por pendiente-intersección"
+          },
+          "worked": {
+            "title": "Ejemplo resuelto"
+          }
+        },
+        "notationMapping": {
+          "title": "Mapeo de notación",
+          "intro": "El mismo conjunto solución escrito de distintas maneras reales: un candidato arrastrable prueba la pertenencia en vivo.",
+          "setBuilderComplex": "{ x | sin solución real }",
+          "setBuilderEmpty": "∅ (sin solución)",
+          "setBuilderLabel": "Notación de conjunto",
+          "decimalListLabel": "Lista decimal",
+          "candidateLabel": "Candidato x = {x}",
+          "candidateAria": "Valor candidato a probar",
+          "isMember": "x = {x} SÍ está en el conjunto solución",
+          "notMember": "x = {x} NO está en el conjunto solución",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "candidate": "Candidato",
+            "probeValue": "f(candidato)",
+            "membership": "¿Miembro?",
+            "yes": "Sí",
+            "no": "No"
+          }
+        },
+        "numberLineSolution": {
+          "title": "Conjunto solución en la recta numérica",
+          "intro": "La(s) raíz(ces) real(es), marcadas como puntos sólidos en una recta numérica: arrastra el explorador para hallar la distancia a la más cercana.",
+          "ariaLabel": "Recta numérica con marcadores de raíces y un explorador arrastrable",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "solutionSet": "Conjunto solución",
+            "distance": "Distancia a la raíz más cercana"
+          }
+        },
+        "verificationColumns": {
+          "title": "Comprobación por sustitución",
+          "intro": "LHS frente a RHS en una x de prueba en vivo y arrastrable: las barras coinciden exactamente en una raíz real.",
+          "remainderLabel": "Resto",
+          "testXLabel": "x de prueba = {x}",
+          "testXAria": "Valor de x de prueba",
+          "jumpToRoot": "Saltar a la raíz",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "testX": "x de prueba",
+            "remainder": "Resto",
+            "verified": "Verificado: coincide con la raíz"
+          }
+        },
+        "sensitivityHeatmap": {
+          "title": "Mapa de calor de sensibilidad",
+          "intro": "Cada par (b, c) con su propio tipo de raíz, pintado como una cuadrícula real: el propio (b, c) de la ecuación en vivo es el punto arrastrable sobre ella.",
+          "ariaLabel": "Mapa de calor del tipo de raíz según b y c, con un punto en vivo arrastrable",
+          "notApplicableNonQuadratic": "Este mapa de 2 parámetros solo aplica al modo de ecuación cuadrática.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "bc": "(b, c)",
+            "zone": "Zona"
+          },
+          "zones": {
+            "two-real": "Dos raíces reales",
+            "one-real": "Una raíz doble",
+            "complex": "Dos raíces complejas"
+          }
+        },
+        "vietaRectangle": {
+          "title": "Rectángulo de Vieta",
+          "intro": "Un rectángulo real cuyos lados son las propias dos raíces reales de la ecuación: el área y el semiperímetro son las fórmulas de Vieta hechas visibles.",
+          "ariaLabel": "Rectángulo con lados iguales a las dos raíces",
+          "notApplicable": "Solo tiene sentido para el modo de ecuación cuadrática.",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "area": "Área (= producto de las raíces)",
+            "halfPerimeter": "Semiperímetro (= suma de las raíces)",
+            "exploredRect": "Rectángulo explorado"
+          }
+        },
+        "unitCircleWave": {
+          "title": "Círculo unitario y onda",
+          "intro": "Este solucionador no tiene modo trigonométrico, así que un ángulo arrastrable explora seno/coseno en general, con un ángulo de referencia derivado honestamente del coeficiente principal en vivo ({coeff}).",
+          "circleAriaLabel": "Círculo unitario con un punto de ángulo arrastrable",
+          "waveAriaLabel": "Ondas de seno y coseno con el ángulo actual marcado",
+          "worked": {
+            "title": "Ejemplo resuelto",
+            "angle": "Ángulo",
+            "sin": "sen",
+            "cos": "cos"
+          }
         }
       },
       "relatedTools": {

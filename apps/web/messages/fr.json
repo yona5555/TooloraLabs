@@ -13807,6 +13807,244 @@
           "note": "La première traduction anglaise du texte fondateur d'al-Khwarizmi sur l'algèbre, montrant ses procédures verbales originales, pas à pas, pour résoudre les équations linéaires et du second degré — la même structure que suit la sortie pas à pas de ce solveur.",
           "url": "https://archive.org/details/algebraofmohamme00khuwrich",
           "readOriginal": "Lire The Algebra of Mohammed Ben Musa"
+        },
+        "hero": {
+          "ariaLabel": "Graphique {mode}, déplaçable",
+          "hint": "Faites glisser une racine, le sommet ou l'ordonnée à l'origine — ou modifiez les champs ci-dessus. Les deux mettent à jour le même graphique en direct.",
+          "hintExplorerOnly": "Ce polynôme est de degré trop élevé pour une forme close simple ; faites glisser le point d'exploration pour chercher les racines numériquement (méthode de Newton).",
+          "stepBadge": "Étape {step} sur {total}"
+        },
+        "diagnosticsSection": {
+          "title": "Comment le solveur décide",
+          "intro": "Les formules réelles, les méthodes de résolution alternatives et la vérification par substitution derrière le résultat en direct."
+        },
+        "balanceDiagram": {
+          "title": "Diagramme de balance",
+          "intro": "Les deux côtés réels que le mode {mode} compare réellement, pesés l'un contre l'autre à un x de test en direct et déplaçable.",
+          "ariaLabel": "Balance de l'équation",
+          "dragHint": "Faites glisser le point sous la balance pour tester n'importe quel x.",
+          "linear": {
+            "left": "Côté gauche (ax+b)",
+            "right": "Côté droit (cx+d)"
+          },
+          "quadratic": {
+            "left": "ax² + bx",
+            "right": "-c"
+          },
+          "fraction": {
+            "left": "Résultat de la fraction",
+            "right": "x"
+          },
+          "derivative": {
+            "left": "f(x)",
+            "right": "0"
+          },
+          "worked": {
+            "title": "Exemple résolu",
+            "difference": "Différence",
+            "balanced": "Équilibré — c'est une racine"
+          }
+        },
+        "solveFlow": {
+          "title": "Chemin de décision",
+          "intro": "Cliquez sur une étape pour faire sauter le solveur et tous les indicateurs à ce point de la résolution.",
+          "discriminantLabel": "Discriminant",
+          "slopeLabel": "Pente",
+          "noUniqueRoot": "aucune racine unique",
+          "stations": {
+            "entered": "Équation saisie",
+            "coefficients": "Coefficients identifiés",
+            "keyQuantity": "Quantité clé calculée",
+            "result": "Résultat final"
+          },
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "progressGauges": {
+          "title": "Jauges de progression",
+          "intro": "La progression propre de la résolution en direct, le nombre de termes et le degré — plus un anneau de sonde montrant à quel point un x est proche d'être une vraie racine.",
+          "progressLabel": "Progression",
+          "termsLabel": "Termes",
+          "degreeLabel": "Degré",
+          "remainderLabel": "Reste",
+          "probeLabel": "Sonde x = {x}",
+          "probeAria": "Valeur de x de sonde",
+          "worked": {
+            "title": "Exemple résolu",
+            "probeX": "x de sonde",
+            "remainder": "Reste",
+            "nearRoot": "Dans l'arrondi d'une racine"
+          }
+        },
+        "newtonIterations": {
+          "title": "Itérations de la méthode de Newton",
+          "intro": "Tangentes successives à partir d'une estimation initiale en direct et déplaçable, dont l'abscisse à l'origine devient à chaque fois l'estimation suivante.",
+          "ariaLabel": "Convergence des tangentes de la méthode de Newton",
+          "hint": "Faites glisser le point vert le long de la courbe pour changer l'estimation de départ.",
+          "worked": {
+            "title": "Exemple résolu",
+            "initialGuess": "Estimation initiale",
+            "afterIterations": "Après {count} itérations"
+          }
+        },
+        "intersectionArea": {
+          "title": "Intersection et aire",
+          "intro": "Le côté gauche et le côté droit de l'équation comme deux courbes réelles — leur point de croisement est la solution.",
+          "ariaLabel": "Courbes LHS et RHS avec l'aire ombrée entre elles",
+          "worked": {
+            "title": "Exemple résolu",
+            "lhs": "LHS à l'explorateur",
+            "rhs": "RHS à l'explorateur",
+            "gap": "Écart"
+          }
+        },
+        "sixMethods": {
+          "title": "Six méthodes de résolution",
+          "intro": "La même équation en direct, résolue de six façons vraiment différentes — toutes convergeant vers la même réponse réelle.",
+          "notFactorable": "non factorisable proprement sur les rationnels",
+          "notApplicableLinear": "non applicable à une équation linéaire",
+          "noUniqueRoot": "aucune racine unique",
+          "crossesAt": "coupe l'axe des x en x = {x}",
+          "noRealCrossing": "ne coupe jamais l'axe des x (aucune racine réelle)",
+          "substitutionOk": "substituer la racine la confirme",
+          "substitutionComplex": "aucune valeur réelle à substituer",
+          "noBracket": "aucun changement de signe dans cet intervalle",
+          "methods": {
+            "factoring": "Factorisation",
+            "completing": "Forme canonique",
+            "formula": "Formule générale",
+            "graphing": "Méthode graphique",
+            "substitution": "Vérification par substitution",
+            "bisection": "Bissection numérique"
+          },
+          "bisectionIterLabel": "Itérations de bissection : {count}",
+          "bisectionIterAria": "Nombre d'itérations de bissection",
+          "worked": {
+            "title": "Exemple résolu",
+            "allAgree": "Les six méthodes concordent"
+          }
+        },
+        "rootsVsParameter": {
+          "title": "Racine vs paramètre",
+          "intro": "La racine en direct tracée pendant que {param} parcourt une plage — le point déplaçable EST le coefficient actuel réel.",
+          "leadingTermLabel": "coefficient dominant",
+          "ariaLabel": "Racine en fonction d'un coefficient",
+          "worked": {
+            "title": "Exemple résolu",
+            "current": "actuel",
+            "result": "Racine résultante"
+          }
+        },
+        "complexPlane": {
+          "title": "Plan complexe",
+          "intro": "Les racines réelles propres du mode actif, ou une paire de conjugués complexes, tracées sur le plan d'Argand avec un cercle de phase.",
+          "ariaLabel": "Plan d'Argand avec les racines et un cercle de phase",
+          "realAxisLabel": "axe réel",
+          "worked": {
+            "title": "Exemple résolu",
+            "roots": "Racines",
+            "magnitude": "Module",
+            "exploredAngle": "Angle exploré"
+          }
+        },
+        "lawsCard": {
+          "title": "Formules utilisées",
+          "intro": "Les formules réelles derrière la résolution propre du mode actif, avec les coefficients en direct substitués.",
+          "selectorAria": "Sélectionner la formule à afficher",
+          "laws": {
+            "discriminant": "Formule du discriminant",
+            "quadraticFormula": "Formule générale",
+            "vieta": "Formules de Viète",
+            "slope": "Résolution par pente-ordonnée à l'origine"
+          },
+          "worked": {
+            "title": "Exemple résolu"
+          }
+        },
+        "notationMapping": {
+          "title": "Correspondance de notations",
+          "intro": "Le même ensemble solution écrit de différentes façons réelles — un candidat déplaçable teste l'appartenance en direct.",
+          "setBuilderComplex": "{ x | aucune solution réelle }",
+          "setBuilderEmpty": "∅ (aucune solution)",
+          "setBuilderLabel": "Notation ensembliste",
+          "decimalListLabel": "Liste décimale",
+          "candidateLabel": "Candidat x = {x}",
+          "candidateAria": "Valeur candidate à tester",
+          "isMember": "x = {x} EST dans l'ensemble solution",
+          "notMember": "x = {x} N'EST PAS dans l'ensemble solution",
+          "worked": {
+            "title": "Exemple résolu",
+            "candidate": "Candidat",
+            "probeValue": "f(candidat)",
+            "membership": "Membre ?",
+            "yes": "Oui",
+            "no": "Non"
+          }
+        },
+        "numberLineSolution": {
+          "title": "Ensemble solution sur la droite numérique",
+          "intro": "La ou les racine(s) réelle(s), marquée(s) par des points pleins sur une droite numérique — faites glisser l'explorateur pour trouver la distance à la plus proche.",
+          "ariaLabel": "Droite numérique avec marqueurs de racines et un explorateur déplaçable",
+          "worked": {
+            "title": "Exemple résolu",
+            "solutionSet": "Ensemble solution",
+            "distance": "Distance à la racine la plus proche"
+          }
+        },
+        "verificationColumns": {
+          "title": "Vérification par substitution",
+          "intro": "LHS contre RHS à un x de test en direct et déplaçable — les barres correspondent exactement à une vraie racine.",
+          "remainderLabel": "Reste",
+          "testXLabel": "x de test = {x}",
+          "testXAria": "Valeur de x de test",
+          "jumpToRoot": "Aller à la racine",
+          "worked": {
+            "title": "Exemple résolu",
+            "testX": "x de test",
+            "remainder": "Reste",
+            "verified": "Vérifié — correspond à la racine"
+          }
+        },
+        "sensitivityHeatmap": {
+          "title": "Carte de chaleur de sensibilité",
+          "intro": "Chaque paire (b, c) avec son propre type de racine, peinte comme une grille réelle — le (b, c) propre de l'équation en direct est le point déplaçable dessus.",
+          "ariaLabel": "Carte de chaleur du type de racine selon b et c, avec un point en direct déplaçable",
+          "notApplicableNonQuadratic": "Cette carte à 2 paramètres ne s'applique qu'au mode équation quadratique.",
+          "worked": {
+            "title": "Exemple résolu",
+            "bc": "(b, c)",
+            "zone": "Zone"
+          },
+          "zones": {
+            "two-real": "Deux racines réelles",
+            "one-real": "Une racine double",
+            "complex": "Deux racines complexes"
+          }
+        },
+        "vietaRectangle": {
+          "title": "Rectangle de Viète",
+          "intro": "Un rectangle réel dont les longueurs des côtés sont les deux racines réelles propres de l'équation — l'aire et le demi-périmètre sont les formules de Viète rendues visibles.",
+          "ariaLabel": "Rectangle avec des côtés égaux aux deux racines",
+          "notApplicable": "Pertinent uniquement pour le mode équation quadratique.",
+          "worked": {
+            "title": "Exemple résolu",
+            "area": "Aire (= produit des racines)",
+            "halfPerimeter": "Demi-périmètre (= somme des racines)",
+            "exploredRect": "Rectangle exploré"
+          }
+        },
+        "unitCircleWave": {
+          "title": "Cercle unité et onde",
+          "intro": "Ce solveur n'a pas de mode trigonométrique, donc un angle déplaçable explore sin/cos en général, avec un angle de référence dérivé honnêtement du coefficient dominant en direct ({coeff}).",
+          "circleAriaLabel": "Cercle unité avec un point d'angle déplaçable",
+          "waveAriaLabel": "Ondes sinus et cosinus avec l'angle actuel marqué",
+          "worked": {
+            "title": "Exemple résolu",
+            "angle": "Angle",
+            "sin": "sin",
+            "cos": "cos"
+          }
         }
       },
       "relatedTools": {

@@ -13,6 +13,7 @@ import {
   vietaFromQuadratic,
   newtonIterate,
   findRealRootsNumerically,
+  bisectionSteps,
   deriveHeroEquation,
   type MathSolverNumericDraft,
 } from "../StepByStepMathSolverGraph";
@@ -257,5 +258,40 @@ describe("deriveHeroEquation", () => {
       expect(eq.label.length).toBeGreaterThan(0);
       expect(eq.label).not.toMatch(/NaN|undefined|Infinity/);
     }
+  });
+});
+
+describe("bisectionSteps", () => {
+  it("converges toward a known root of the default quadratic (root at x=3, bracket [2,4])", () => {
+    const steps = bisectionSteps([-6, -4, 2], 2, 4, 10);
+    expect(steps.length).toBeGreaterThan(0);
+    const last = steps[steps.length - 1];
+    expect(last.mid).toBeCloseTo(3, 1);
+  });
+
+  it("returns an empty list when the interval does not bracket a root (no sign change)", () => {
+    const steps = bisectionSteps([-6, -4, 2], 10, 20, 6);
+    expect(steps).toEqual([]);
+  });
+
+  it("each step halves the bracket width", () => {
+    const steps = bisectionSteps([-6, -4, 2], 2, 4, 5);
+    for (let i = 1; i < steps.length; i++) {
+      const prevWidth = steps[i - 1].hi - steps[i - 1].lo;
+      const width = steps[i].hi - steps[i].lo;
+      expect(width).toBeCloseTo(prevWidth / 2, 9);
+    }
+  });
+});
+
+describe("formatMathValue — large-numerator fraction regression (found via 500-drag fuzz test)", () => {
+  it("does not show a fraction with more than 4 significant digits in the numerator", () => {
+    // 18353/4 = 4588.25 exactly -- den=4 is "simple" but the numerator is not.
+    expect(formatMathValue(18353 / 4)).not.toBe("18353/4");
+    expect(formatMathValue(18353 / 4)).toBe("4588");
+  });
+  it("still prefers a genuinely simple fraction when both parts are small", () => {
+    expect(formatMathValue(1 / 3)).toBe("1/3");
+    expect(formatMathValue(22 / 7)).toBe("22/7");
   });
 });

@@ -5,6 +5,21 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import MathSolverGraphDrag from "./MathSolverGraphDrag";
+import EquationBalanceDiagram from "./EquationBalanceDiagram";
+import SolveFlowDiagram from "./SolveFlowDiagram";
+import RadialProgressGauges from "./RadialProgressGauges";
+import NewtonIterationsDiagram from "./NewtonIterationsDiagram";
+import IntersectionAreaDiagram from "./IntersectionAreaDiagram";
+import SixMethodsMatrix from "./SixMethodsMatrix";
+import RootsVsParameterCurve from "./RootsVsParameterCurve";
+import ComplexPlaneDiagram from "./ComplexPlaneDiagram";
+import LawsCard from "./LawsCard";
+import NotationMappingDiagram from "./NotationMappingDiagram";
+import NumberLineSolutionSet from "./NumberLineSolutionSet";
+import VerificationColumnsDiagram from "./VerificationColumnsDiagram";
+import SensitivityHeatmap from "./SensitivityHeatmap";
+import VietaRectangleDiagram from "./VietaRectangleDiagram";
+import UnitCircleWave from "./UnitCircleWave";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -26,7 +41,22 @@ export default async function MathSolverEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <SolveFlowDiagram />
+          <EquationBalanceDiagram />
+        </div>
       </InfoSection>
+
+      <InfoSection title={t("diagnosticsSection.title")}>
+        <p>{t("diagnosticsSection.intro")}</p>
+        <div className="space-y-6">
+          <LawsCard />
+          <SixMethodsMatrix />
+          <VerificationColumnsDiagram />
+        </div>
+      </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("variables.title")}>
         <p>{t("variables.intro")}</p>
@@ -38,6 +68,11 @@ export default async function MathSolverEducation() {
             </div>
           ))}
         </dl>
+        <div className="space-y-6">
+          <RadialProgressGauges />
+          <NewtonIterationsDiagram />
+          <RootsVsParameterCurve />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -60,6 +95,11 @@ export default async function MathSolverEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <IntersectionAreaDiagram />
+          <NumberLineSolutionSet />
+          <NotationMappingDiagram />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -72,9 +112,13 @@ export default async function MathSolverEducation() {
             </div>
           ))}
         </div>
+        <div className="space-y-6">
+          <ComplexPlaneDiagram />
+          <SensitivityHeatmap />
+          <VietaRectangleDiagram />
+          <UnitCircleWave />
+        </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
