@@ -434,3 +434,133 @@ formulas a third time in this rollout.
 moments before pushing. Re-ran the same CI job (`gh run rerun --failed`) without any code change;
 it passed on the retry, confirming a transient Google Fonts network flake in the runner, not a
 real regression.
+
+---
+
+**step-by-step-math-solver (tool 9) — FULL DELETE-AND-REBUILD per an explicit, formal
+respecification.** The owner rejected the prior session's work on tools 1-8 outright (rigid
+shapes, distorted post-drag values, clipped tables, gaps, a hero that wasn't the first element)
+and issued a line-by-line spec for this tool specifically, binding on every subsequent tool too.
+Scope for this entry is step-by-step-math-solver only — tools 1-8 were not touched.
+
+**Step 0, deletion:** everything from this session's own prior (now-discarded) attempt at this
+tool — a different 4-mode-tabs hero design, 15 differently-conceived indicators, and their i18n
+keys — was reverted via `git checkout` back to the pre-session HEAD (nothing had been committed
+yet, so this was a clean revert, not a history rewrite) and the untracked new files were deleted
+outright. Rebuilt from that clean baseline, never patched on top of the discarded attempt.
+
+**Architecture decision (the single biggest judgment call in this build):** the real engine
+(`packages/tools/StepByStepMathSolver.ts`) has 4 disjoint modes — linear-equation, quadratic-
+equation, fraction-operation, derivative — with their own separate coefficient fields. The new
+spec describes ONE hero model: graph f(x) = LHS − RHS, drag its roots/vertex/y-intercept. Rather
+than replace the proven 4-mode input panel with a free-text equation parser (out of scope, and
+the spec says the engine logic "stays correct" — extend it, don't replace it), a new
+`deriveHeroEquation()` (packages/tools, `StepByStepMathSolverGraph.ts`) maps whichever mode is
+active onto one `coeffs: number[]` polynomial: linear → `(a−c)x+(b−d)=0`; quadratic → direct;
+fraction-operation → honestly reframed as "x − (the real computed result) = 0" (a genuine linear
+equation whose root IS the fraction's value, not a decorative stand-in); derivative → the entered
+polynomial itself, root-found. Degree ≤2 gets exact closed-form handles; degree ≥3 (derivative
+mode with 3+ terms) has no simple closed form, so it falls back to one free explorer point driving
+live Newton's-method root-finding — documented honestly as a degradation, not hidden.
+
+**Three real bugs found via actual Playwright interaction, not code review, all fixed before any
+screenshot was taken:**
+1. The hero's viewBox was a fixed window regardless of where the curve's own roots/vertex
+   actually sat — a parabola with vertex depth −8 looked almost flat against its own wings 8
+   units out. Fixed: framed dynamically around the equation's own points of interest.
+2. The equation label was reconstructed from the two live root-point positions on every render
+   for a livelier mid-drag preview. When the roots are complex, both root-point targets collapse
+   to the same real part, so the reconstruction silently discarded b/c and displayed a DIFFERENT
+   equation than what was actually committed to the input fields (showed "169/32" once when the
+   real committed value was a clean "5.5") — exactly the "distorted value after drag" complaint
+   that triggered this rebuild. Fixed: the label now always reads `eq.label`, computed once by
+   the same shared formatter every indicator uses, never reconstructed from point positions.
+3. Root1's drag silently did nothing — confirmed via a direct before/mid-drag/after bounding-box
+   check (identical at all three). Two compounding causes: (a) root1 and root2's commit formulas
+   read each other's LIVE Mafs point position, and the external-sync effect reprogrammatically
+   repositions both after every intermediate commit during a drag, creating a feedback fight
+   between the two that could net to zero change by the time the mouse was released — fixed by
+   reading a stable "last committed" ref instead of the live point; (b) separately, the
+   tracking-line labels painted at the SAME coordinates as root1 (by design — they track the
+   active point) and, being painted after it in SVG z-order, silently absorbed its pointer
+   events — fixed by painting all interactive point elements last.
+
+**15 indicators**, each its own visual type with ≥1 real draggable element (Mafs point or a
+range-slider, matching this project's established precedent for slider-as-drag) and a WORKED
+EXAMPLE table beside it, never below (§32): equation balance scale (LHS/RHS on a seesaw at a
+live test x), decision-path flow (the ONE control driving the shared `selectedStep` the hero and
+other indicators read), radial progress gauges, Newton's-method tangent convergence, LHS/RHS
+intersection-and-shaded-area, a six-solving-methods comparison (factoring, completing the
+square, the quadratic formula, graphing, substitution, and a real interval-halving
+`bisectionSteps()` — added to the engine with its own unit tests, not faked), a root-vs-
+parameter response curve whose draggable point writes back to the real coefficient field, an
+Argand complex-plane diagram with a phase circle, a formulas-used card with live substitution, a
+notation-mapping panel (set-builder / decimal list / membership test), a number-line solution
+set, a substitution-verification bar-chart, a (b,c) sensitivity heatmap with the live equation's
+own point draggable on top of it, a Vieta's-theorem rectangle (area = product of roots, half-
+perimeter = sum), and — since this tool has no trigonometric mode — a unit-circle-and-wave
+indicator whose fallback nature is stated in its own intro text and tied to the live leading
+coefficient rather than left as a free-floating decoration. Every indicator degrades per mode
+honestly (e.g. the complex-plane and Vieta panels show a clear "not applicable" message outside
+quadratic-equation mode, never a blank or fake card).
+
+**Central value formatting** (`formatMathValue` in `StepByStepMathSolverGraph.ts`): prefers a
+simple fraction when the value is cleanly rational with BOTH a small denominator AND a small
+numerator (≤4 digits each — see bug below), otherwise rounds to 4 significant figures; never
+emits "NaN", "Infinity", "-0", or "undefined". `snapDragValue` snaps near-integer drags to the
+integer, otherwise to the nearest 0.5.
+
+**A real bug the mandated 500-random-drag fuzz test caught, that no amount of manual testing
+found:** `formatMathValue`'s fraction path only checked the denominator's size against `maxDen`
+— a large discriminant from a dragged-far `b` produced an exact fraction like `18353/4` (den=4,
+well under the cap) with a 5-digit numerator, blowing past the 4-significant-figure rule this
+formatter exists to enforce. Fixed by requiring the numerator itself be ≤4 digits before
+preferring fraction notation; falls through to rounded-decimal ("4588") otherwise. Added a
+regression test, re-ran the full 500-drag fuzz: 0 violations (down from 16, all in this one bug
+class, all in quadratic-equation mode after a handful of large drags).
+
+**Testing performed, all re-run live against the actual rebuilt page, not inferred:**
+- 38 unit tests in `packages/tools` (`StepByStepMathSolverGraph.test.ts`) — formatting edge
+  cases (a=0, negative/zero/large discriminant, fractional coefficients), root-finding (linear,
+  quadratic all 3 branches, Newton's method, numeric bisection, a degree-3 real-root scan),
+  Vieta's formulas, equation derivation for all 4 modes, and the large-numerator fraction
+  regression above. 1191/1191 total package tests pass (1153 pre-existing + 38 new).
+- `scripts/check-mathsolver-i18n-integrity.mjs` (new, committed): statically verifies no orphan
+  translation keys, no dead references, no duplicate indicator namespaces, no dead files in the
+  tool's directory. Clean: 187 keys, 16 namespaces, 25 files.
+- A 500-drag fuzz test (`scripts/mathsolver-fuzz-test-hero.js`, committed) across all 4 modes:
+  0 violations after the fraction-numerator fix above.
+- A real-SVG-attribute-diff dynamism test (`scripts/mathsolver-dynamism-test-svg.js`,
+  committed): for each of the 15 indicators, drags/clicks its own control and diffs the actual
+  SVG `transform`/`cx`/`cy`/`d`/`points` attributes (not just text) before vs after, plus the
+  worked-example text. 15/15 PASS.
+- Hero bidirectional sync confirmed by role-tagged drag tests on all 4 closed-form handles
+  (root1, root2, vertex, y-intercept) independently, plus field-edit → hero sync across all 4
+  modes, plus mode-switching.
+- Gaps test: 0 outlier gaps (main flow and indicator-card internals). No clipped table
+  (`scrollWidth > clientWidth` with no scroll container) on desktop or mobile.
+- Hero confirmed as the literal first child of `<EncyclopediaPaper>` (before any InfoSection),
+  not nested inside an intro paragraph.
+- Dark mode, RTL (Arabic), and mobile viewports screenshotted with zero console/page errors;
+  RTL confirmed correct (Arabic text and layout mirror correctly, the Mafs graph and its LTR
+  math notation correctly do NOT mirror).
+- Screenshots before/after for all 15 indicators plus the hero at step 1 and step 4, saved to
+  `docs/screenshots/step-by-step-math-solver-v2/`.
+
+**i18n:** all 6 locales (en/ar/de/es/fr/hi), 187 keys under `education`, verified 0 missing/0
+extra per locale via the same keyset-diff method used throughout this rollout.
+
+**Not done / known gaps, stated plainly rather than hidden:** no PDF/print-specific stylesheet
+check was run (§21's "no drag handles visible in print") — the Mafs canvases are screen-only SVG
+and have not been explicitly verified to hide correctly under `@media print`. The "6 solving
+methods" indicator's factoring display falls back to a plain English note for non-factorable
+cases rather than a symbolic partial-factoring form. The derivative mode's degree-≥3 explorer
+point has not been fuzz-tested as thoroughly as the closed-form handles (the 500-drag fuzz test
+covered all 4 modes but with default/near-default term lists, not deliberately high-degree ones).
+
+**CI:** commit `e632c3c` (Phase 1, engine) green. Commit `9227902` (Phase 3, indicators + i18n)
+green. Commit `ae0d848` (Phase 2, hero) failed its first `Build web app` run on the SAME
+transient `next/font/google` Noto Sans Devanagari resolution error documented for
+volume-calculator — files this commit never touched (`locale-fonts.ts`, `app/embed/[slug]`),
+with Phase 3's identical font-loading code passing clean on the very next push. Re-ran via
+`gh run rerun --failed` with zero code changes.
