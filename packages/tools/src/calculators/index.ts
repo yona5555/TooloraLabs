@@ -51,6 +51,7 @@ export * from "./AreaCalculator";
 export * from "./SurfaceAreaCalculator";
 export * from "./VolumeCalculator";
 export * from "./StepByStepMathSolver";
+export * from "./StepByStepMathSolverGraph";
 export * from "./GraphingCalculator";
 export * from "./NotepadCalculator";
 export * from "./GcfLcmCalculator";
