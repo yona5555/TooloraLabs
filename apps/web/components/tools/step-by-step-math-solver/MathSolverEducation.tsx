@@ -4,7 +4,7 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MathSolverConceptDiagram from "./MathSolverConceptDiagram";
+import MathSolverGraphDrag from "./MathSolverGraphDrag";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -21,10 +21,11 @@ export default async function MathSolverEducation() {
 
   return (
     <EncyclopediaPaper>
+      <MathSolverGraphDrag />
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <MathSolverConceptDiagram />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>

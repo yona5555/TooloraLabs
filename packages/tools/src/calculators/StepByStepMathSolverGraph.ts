@@ -253,6 +253,14 @@ function polyCoeffsFromTerms(terms: { coefficient: number; power: number }[]): P
   return coeffs;
 }
 
+const SUPERSCRIPT_DIGITS: Record<string, string> = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+function superscript(n: number): string {
+  return String(n)
+    .split("")
+    .map((d) => SUPERSCRIPT_DIGITS[d] ?? d)
+    .join("");
+}
+
 function formatEquationLabel(coeffs: PolyCoeffs): string {
   const parts: string[] = [];
   for (let i = coeffs.length - 1; i >= 0; i--) {
@@ -261,7 +269,7 @@ function formatEquationLabel(coeffs: PolyCoeffs): string {
     const abs = formatMathValue(Math.abs(c));
     const sign = c < 0 ? "-" : parts.length === 0 ? "" : "+";
     const spacedSign = parts.length === 0 ? sign : ` ${sign} `;
-    const varPart = i === 0 ? "" : i === 1 ? "x" : `x^${i}`;
+    const varPart = i === 0 ? "" : i === 1 ? "x" : `x${superscript(i)}`;
     const coeffPart = i === 0 || abs !== "1" ? abs : "";
     parts.push(`${spacedSign}${coeffPart}${varPart}`);
   }

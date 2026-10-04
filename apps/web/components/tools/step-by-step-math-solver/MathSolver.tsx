@@ -12,6 +12,7 @@ import MathSolverInputPanel from "./MathSolverInputPanel";
 import MathSolverResult from "./MathSolverResult";
 import MathSolverQuickReference from "./MathSolverQuickReference";
 import { emptyMathSolverDraft, type MathSolverDraft } from "./types";
+import { MathSolverLiveProvider } from "./MathSolverLiveContext";
 
 const tool = new MathSolverTool();
 
@@ -77,7 +78,7 @@ export default function MathSolver({ education }: { education: ReactNode }) {
   ];
 
   return (
-    <>
+    <MathSolverLiveProvider value={{ dims: draft, setDim: (key, value) => setDraft((prev) => ({ ...prev, [key]: value })) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={<MathSolverInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} />}
@@ -105,6 +106,6 @@ export default function MathSolver({ education }: { education: ReactNode }) {
       </div>
 
       {education}
-    </>
+    </MathSolverLiveProvider>
   );
 }
