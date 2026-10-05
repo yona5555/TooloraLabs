@@ -528,9 +528,9 @@ class, all in quadratic-equation mode after a handful of large drags).
 - `scripts/check-mathsolver-i18n-integrity.mjs` (new, committed): statically verifies no orphan
   translation keys, no dead references, no duplicate indicator namespaces, no dead files in the
   tool's directory. Clean: 187 keys, 16 namespaces, 25 files.
-- A 500-drag fuzz test (`scripts/mathsolver-fuzz-test-hero.js`, committed) across all 4 modes:
+- A 500-drag fuzz test (`scripts/mathsolver-fuzz-test-hero.mjs`, committed) across all 4 modes:
   0 violations after the fraction-numerator fix above.
-- A real-SVG-attribute-diff dynamism test (`scripts/mathsolver-dynamism-test-svg.js`,
+- A real-SVG-attribute-diff dynamism test (`scripts/mathsolver-dynamism-test-svg.mjs`,
   committed): for each of the 15 indicators, drags/clicks its own control and diffs the actual
   SVG `transform`/`cx`/`cy`/`d`/`points` attributes (not just text) before vs after, plus the
   worked-example text. 15/15 PASS.

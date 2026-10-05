@@ -2,7 +2,7 @@
 // mandate: for every indicator, drag its own handle and confirm the underlying SVG attributes
 // (transform/cx/cy/d) actually changed, AND its worked-example text changed, AND the reverse
 // direction (editing a field) also moves things.
-const { chromium } = require("playwright");
+import { chromium } from "playwright";
 
 const BASE = "http://localhost:3000";
 

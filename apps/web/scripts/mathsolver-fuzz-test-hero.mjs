@@ -2,13 +2,12 @@
 // single drag that the displayed equation label and every WORKED EXAMPLE value on the page never
 // shows a raw long decimal, NaN, Infinity, -0, or "undefined" -- the exact bug class the rebuild
 // was commissioned to fix.
-const { chromium } = require("playwright");
+import { chromium } from "playwright";
 
 const BASE = "http://localhost:3000";
 const TOTAL_DRAGS = 500;
 // A value is "clean" if it's a short integer, a simple a/b fraction, or a decimal with <=4
 // significant digits after rounding -- anything wildly long (raw float noise) fails this.
-const CLEAN_NUMBER = /^-?\d{1,6}(\.\d{1,4})?(\/\d{1,4})?$/;
 const BAD_WORD = /\bNaN\b|\bInfinity\b|\bundefined\b/;
 
 function allNumberLikeTextNodes(page) {
