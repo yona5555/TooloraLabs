@@ -4,13 +4,13 @@ import { useTranslations } from "next-intl";
 import { Mafs, Coordinates, Line, Text, useMovablePoint } from "mafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
-import { useIsDarkMode } from "@/lib/use-dark-mode";
 import { GlassHeroCard } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionLive } from "./FractionLiveContext";
 import { formatMathValue, toMathValueFraction, gcd } from "@tooloralabs/tools";
 
-const LIGHT = { a: "#5B6EF5", b: "#F0507A", sum: "#1FC89C" };
-const DARK = { a: "#8B9BFF", b: "#F97BA0", sum: "#4FE0BB" };
+const COLOR_A = "var(--glass-accent-1-strong)";
+const COLOR_B = "var(--glass-accent-2-strong)";
+const COLOR_SUM = "var(--glass-accent-3-strong)";
 const OP_SYMBOL: Record<string, string> = { add: "+", subtract: "−", multiply: "×", divide: "÷" };
 
 function pieSlicePath(frac: number, r = 46, cx = 50, cy = 50): string {
@@ -25,11 +25,11 @@ function pieSlicePath(frac: number, r = 46, cx = 50, cy = 50): string {
 
 /** Hero: a draggable number line (two points, A and B, each snapping to a simple fraction with
  * denominator <=12) synced bidirectionally with the real input fields, plus a live pie/donut and
- * a sixths common-grid tape that both re-render from the exact same state — never a second copy. */
+ * a sixths common-grid tape that both re-render from the exact same state — never a second copy.
+ * Every color is a CSS variable from glass-tokens.css, so light/dark both resolve automatically
+ * without any isDark branching. */
 export default function FractionHero() {
   const t = useTranslations("tools.fraction-calculator.education.hero");
-  const isDark = useIsDarkMode();
-  const colors = isDark ? DARK : LIGHT;
   const { dims, setDim } = useFractionLive();
   const { operation, numeratorA, denominatorA, numeratorB, denominatorB } = dims;
   const valueA = denominatorA !== 0 ? numeratorA / denominatorA : 0;
@@ -40,8 +40,8 @@ export default function FractionHero() {
   else if (operation === "multiply") result = valueA * valueB;
   else result = valueB !== 0 ? valueA / valueB : 0;
 
-  const pointA = useMovablePoint([valueA, 0.15], { constrain: (p) => [Math.max(0, Math.min(1, p[0])), 0.15], color: colors.a });
-  const pointB = useMovablePoint([valueB, -0.15], { constrain: (p) => [Math.max(0, Math.min(1, p[0])), -0.15], color: colors.b });
+  const pointA = useMovablePoint([valueA, 0.15], { constrain: (p) => [Math.max(0, Math.min(1, p[0])), 0.15], color: COLOR_A });
+  const pointB = useMovablePoint([valueB, -0.15], { constrain: (p) => [Math.max(0, Math.min(1, p[0])), -0.15], color: COLOR_B });
 
   const lastA = useRef(valueA);
   const lastB = useRef(valueB);
@@ -104,17 +104,19 @@ export default function FractionHero() {
         {/* Pie */}
         <div dir="ltr" className="flex shrink-0 flex-col items-center">
           <svg viewBox="0 0 100 100" width="150" height="150">
-            <circle cx="50" cy="50" r="46" fill="none" stroke={isDark ? "#3f3f46" : "#E5E7F5"} strokeWidth="2" />
-            <path d={pieSlicePath(resultClamped)} fill={colors.sum} opacity={0.85} />
-            <circle cx="50" cy="50" r="27" fill={isDark ? "#18181b" : "white"} />
-            <text x="50" y="47" textAnchor="middle" fontSize="13" fontWeight="700" fill="currentColor">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="var(--glass-track)" strokeWidth="2" />
+            <path d={pieSlicePath(resultClamped)} fill={COLOR_SUM} opacity={0.85} />
+            <circle cx="50" cy="50" r="27" fill="var(--glass-surface)" />
+            <text x="50" y="47" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-title)">
               {formatMathValue(result)}
             </text>
-            <text x="50" y="60" textAnchor="middle" fontSize="6" fill="currentColor" opacity={0.6}>
+            <text x="50" y="60" textAnchor="middle" fontSize="6" fill="var(--glass-muted)">
               {`${formatMathValue(result * 100)}%`}
             </text>
           </svg>
-          <p className="text-xs font-semibold text-zinc-500">{t("resultLabel")}</p>
+          <p className="text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
+            {t("resultLabel")}
+          </p>
         </div>
 
         {/* Number line */}
@@ -122,12 +124,12 @@ export default function FractionHero() {
           <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[360px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-0.08, 1.08], y: [-0.5, 0.5] }} height={150} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 1 / 6, labels: (v) => (Math.abs(v - Math.round(v * 6) / 6) < 0.001 ? formatMathValue(v) : "") }} yAxis={{ lines: 100 }} />
-              <Line.Segment point1={[0, 0.15]} point2={[1, 0.15]} color={colors.a} weight={1.5} opacity={0.4} />
-              <Line.Segment point1={[0, -0.15]} point2={[1, -0.15]} color={colors.b} weight={1.5} opacity={0.4} />
-              <Text x={valueA} y={0.32} size={11} color={colors.a}>
+              <Line.Segment point1={[0, 0.15]} point2={[1, 0.15]} color={COLOR_A} weight={1.5} opacity={0.4} />
+              <Line.Segment point1={[0, -0.15]} point2={[1, -0.15]} color={COLOR_B} weight={1.5} opacity={0.4} />
+              <Text x={valueA} y={0.32} size={11} color={COLOR_A}>
                 {`A = ${formatMathValue(numeratorA)}/${formatMathValue(denominatorA)}`}
               </Text>
-              <Text x={valueB} y={-0.32} size={11} color={colors.b}>
+              <Text x={valueB} y={-0.32} size={11} color={COLOR_B}>
                 {`B = ${formatMathValue(numeratorB)}/${formatMathValue(denominatorB)}`}
               </Text>
               <g data-point-role="pointA">{pointA.element}</g>
@@ -138,24 +140,26 @@ export default function FractionHero() {
 
         {/* sixths tape */}
         <div dir="ltr" className="w-full shrink-0 lg:w-40">
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-zinc-400">{t("gridLabel")}</p>
+          <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
+            {t("gridLabel")}
+          </p>
           <div className="flex gap-0.5">
             {Array.from({ length: sixthsSteps }, (_, i) => (
-              <div key={i} className={`h-6 flex-1 rounded-sm ${i < Math.round(resultClamped * sixthsSteps) ? "" : "bg-zinc-100 dark:bg-zinc-800"}`} style={i < Math.round(resultClamped * sixthsSteps) ? { background: colors.sum } : undefined} />
+              <div key={i} className="h-6 flex-1 rounded-sm" style={{ background: i < Math.round(resultClamped * sixthsSteps) ? COLOR_SUM : "var(--glass-track)" }} />
             ))}
           </div>
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 rounded-xl bg-zinc-50/80 px-3 py-2 text-center font-mono text-sm dark:bg-zinc-800/40">
-        <span style={{ color: colors.a }}>{`${formatMathValue(numeratorA)}/${formatMathValue(denominatorA)}`}</span>
-        <span className="text-zinc-400">{OP_SYMBOL[operation]}</span>
-        <span style={{ color: colors.b }}>{`${formatMathValue(numeratorB)}/${formatMathValue(denominatorB)}`}</span>
-        <span className="text-zinc-400">=</span>
-        <span className="font-bold" style={{ color: colors.sum }}>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 rounded-xl px-3 py-2 text-center font-mono text-sm" style={{ background: "var(--glass-table-wrap-bg)" }}>
+        <span style={{ color: COLOR_A }}>{`${formatMathValue(numeratorA)}/${formatMathValue(denominatorA)}`}</span>
+        <span style={{ color: "var(--glass-muted)" }}>{OP_SYMBOL[operation]}</span>
+        <span style={{ color: COLOR_B }}>{`${formatMathValue(numeratorB)}/${formatMathValue(denominatorB)}`}</span>
+        <span style={{ color: "var(--glass-muted)" }}>=</span>
+        <span className="font-bold" style={{ color: COLOR_SUM }}>
           {formatMathValue(result)}
         </span>
-        <span className="text-zinc-400">{t("twoWaySynced")}</span>
+        <span style={{ color: "var(--glass-muted)" }}>{t("twoWaySynced")}</span>
       </div>
     </GlassHeroCard>
   );

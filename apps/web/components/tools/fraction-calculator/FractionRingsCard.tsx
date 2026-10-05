@@ -33,14 +33,16 @@ function Ring({ num, den, color, onDrag, label }: { num: number; den: number; co
           if (e.buttons === 1) handlePointer(e);
         }}
       >
-        <circle cx="50" cy="50" r={r} fill="none" stroke="#E5E7F5" strokeWidth="10" />
+        <circle cx="50" cy="50" r={r} fill="none" stroke="var(--glass-track)" strokeWidth="10" />
         <circle cx="50" cy="50" r={r} fill="none" stroke={color} strokeWidth="10" strokeDasharray={circ} strokeDashoffset={circ * (1 - frac)} strokeLinecap="round" transform="rotate(-90 50 50)" />
         <circle cx={50 + r * Math.sin(frac * Math.PI * 2)} cy={50 - r * Math.cos(frac * Math.PI * 2)} r="6" fill={color} stroke="white" strokeWidth="2" />
-        <text x="50" y="54" textAnchor="middle" fontSize="13" fontWeight="700" fill="currentColor">
+        <text x="50" y="54" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-title)">
           {formatMathValue(num)}/{formatMathValue(den)}
         </text>
       </svg>
-      <span className="text-[10px] font-semibold text-zinc-500">{label}</span>
+      <span className="text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+        {label}
+      </span>
     </div>
   );
 }
@@ -58,8 +60,8 @@ export default function FractionRingsCard() {
       subtitle={t("subtitle")}
       visual={
         <div className="flex gap-4">
-          <Ring num={dims.numeratorA} den={dims.denominatorA} color="#5B6EF5" onDrag={(n) => setDim("numeratorA", n)} label={t("labelA", { den: formatMathValue(dims.denominatorA) })} />
-          <Ring num={dims.numeratorB} den={dims.denominatorB} color="#F0507A" onDrag={(n) => setDim("numeratorB", n)} label={t("labelB", { den: formatMathValue(dims.denominatorB) })} />
+          <Ring num={dims.numeratorA} den={dims.denominatorA} color="var(--glass-accent-1-strong)" onDrag={(n) => setDim("numeratorA", n)} label={t("labelA", { den: formatMathValue(dims.denominatorA) })} />
+          <Ring num={dims.numeratorB} den={dims.denominatorB} color="var(--glass-accent-2-strong)" onDrag={(n) => setDim("numeratorB", n)} label={t("labelB", { den: formatMathValue(dims.denominatorB) })} />
         </div>
       }
       table={

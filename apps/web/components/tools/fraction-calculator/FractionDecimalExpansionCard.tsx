@@ -24,23 +24,27 @@ export default function FractionDecimalExpansionCard() {
       subtitle={t("subtitle", { kind: expansion.kind === "terminates" ? t("terminating") : t("repeating") })}
       visual={
         <div className="flex flex-col items-center gap-2">
-          <div className="rounded-lg bg-zinc-50 px-3 py-2 font-mono text-base dark:bg-zinc-900">
+          <div className="rounded-lg px-3 py-2 font-mono text-base" style={{ background: "var(--glass-table-wrap-bg)", color: "var(--glass-title)" }}>
             0.
             {expansion.kind === "terminates" ? (
-              <span className="text-violet-600">{expansion.digits}</span>
+              <span style={{ color: "var(--glass-accent-5-strong)" }}>{expansion.digits}</span>
             ) : (
               <>
                 {expansion.nonRepeating}
-                <span className="rounded bg-violet-100 text-violet-700 underline decoration-2 dark:bg-violet-900/40">{expansion.repeating}</span>
+                <span className="rounded underline decoration-2" style={{ background: "var(--glass-accent-5-soft)", color: "var(--glass-accent-5-strong)" }}>
+                  {expansion.repeating}
+                </span>
               </>
             )}
           </div>
-          <div className="flex gap-2">
-            <button type="button" onClick={() => adjustDen(-1)} className="h-6 w-6 rounded-full bg-zinc-100 text-xs font-bold dark:bg-zinc-800" aria-label={t("decrease")}>
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={() => adjustDen(-1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
               −
             </button>
-            <span className="text-[11px] text-zinc-500">{t("denominatorLabel", { den: formatMathValue(denominatorA) })}</span>
-            <button type="button" onClick={() => adjustDen(1)} className="h-6 w-6 rounded-full bg-zinc-100 text-xs font-bold dark:bg-zinc-800" aria-label={t("increase")}>
+            <span className="text-[11px]" style={{ color: "var(--glass-muted)" }}>
+              {t("denominatorLabel", { den: formatMathValue(denominatorA) })}
+            </span>
+            <button type="button" onClick={() => adjustDen(1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>
               +
             </button>
           </div>

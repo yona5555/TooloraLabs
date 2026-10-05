@@ -7,22 +7,25 @@ import { formatMathValue } from "@tooloralabs/tools";
 
 function Row({ label, segments, color, cutAt }: { label: string; segments: number; color: string; cutAt: number }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="w-7 shrink-0 text-[10px] font-bold text-zinc-400">{label}</span>
-      <div className="relative flex h-6 flex-1 gap-0.5">
+    <div className="flex flex-1 items-center gap-2">
+      <span className="w-7 shrink-0 text-[10px] font-bold" style={{ color: "var(--glass-muted)" }}>
+        {label}
+      </span>
+      <div className="relative flex h-full flex-1 gap-0.5">
         {Array.from({ length: segments }, (_, i) => (
-          <div key={i} className="flex-1 rounded-sm text-center text-[9px] leading-6" style={{ background: color, opacity: 0.25 + (0.6 * (i + 1)) / segments }}>
+          <div key={i} className="flex-1 rounded-sm text-center text-[9px] leading-[2.25rem]" style={{ background: color, color: "var(--color-white)", opacity: 0.9, borderInlineStart: i === 0 ? "none" : "1px solid color-mix(in oklab, var(--color-white) 30%, transparent)" }}>
             1/{segments}
           </div>
         ))}
-        <div className="absolute inset-y-0 w-0.5 bg-emerald-500" style={{ left: `${cutAt * 100}%` }} />
+        <div className="absolute inset-y-0 w-0.5" style={{ left: `${cutAt * 100}%`, background: "var(--glass-accent-3-strong)" }} />
       </div>
     </div>
   );
 }
 
-/** Every row cuts the same whole into a different number of equal pieces — the green line marks
- * the live result's own position; drag it to explore any value between 0 and 1. */
+/** Every row cuts the same whole into a different number of equal pieces — the accent line marks
+ * the live result's own position; drag it to explore any value between 0 and 1. The wall fills
+ * the card's full visual column instead of floating as a small fixed-width block. */
 export default function FractionWallCard() {
   const t = useTranslations("tools.fraction-calculator.education.wall");
   const { dims } = useFractionLive();
@@ -41,7 +44,7 @@ export default function FractionWallCard() {
       subtitle={t("subtitle")}
       visual={
         <div
-          className="flex w-56 flex-col gap-2"
+          className="flex h-44 w-full flex-col gap-3 lg:h-52"
           onPointerDown={(e) => e.currentTarget.setPointerCapture(e.pointerId)}
           onPointerMove={(e) => {
             if (e.buttons !== 1) return;
@@ -49,10 +52,10 @@ export default function FractionWallCard() {
             setCut(Math.max(0, Math.min(1, (e.clientX - rect.left - 28) / (rect.width - 28))));
           }}
         >
-          <Row label="1" segments={1} color="#94A3B8" cutAt={position} />
-          <Row label="A" segments={Math.max(1, Math.round(denominatorA))} color="#5B6EF5" cutAt={position} />
-          <Row label="B" segments={Math.max(1, Math.round(denominatorB))} color="#F0507A" cutAt={position} />
-          <Row label="R" segments={6} color="#1FC89C" cutAt={position} />
+          <Row label="1" segments={1} color="var(--glass-muted)" cutAt={position} />
+          <Row label="A" segments={Math.max(1, Math.round(denominatorA))} color="var(--glass-accent-1-strong)" cutAt={position} />
+          <Row label="B" segments={Math.max(1, Math.round(denominatorB))} color="var(--glass-accent-2-strong)" cutAt={position} />
+          <Row label="R" segments={6} color="var(--glass-accent-3-strong)" cutAt={position} />
         </div>
       }
       table={

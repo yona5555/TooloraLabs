@@ -30,14 +30,16 @@ export default function FractionGcdTilingCard() {
       visual={
         <div className="flex flex-col items-center gap-2">
           <svg width={120} height={120} viewBox="0 0 120 120">
-            <rect x="2" y="2" width={Math.max(a, b) * scale} height={Math.min(a, b) * scale} fill="none" stroke="#2FB6E0" strokeWidth="2" />
+            <rect x="2" y="2" width={Math.max(a, b) * scale} height={Math.min(a, b) * scale} fill="none" stroke="var(--glass-accent-4-strong)" strokeWidth="2" />
             {active &&
               Array.from({ length: active.q }, (_, i) => (
-                <rect key={i} x={2 + i * active.b * scale} y="2" width={active.b * scale - 1} height={active.b * scale - 1} fill="#2FB6E0" opacity={0.25 + (i / Math.max(1, active.q)) * 0.5} />
+                <rect key={i} x={2 + i * active.b * scale} y="2" width={active.b * scale - 1} height={active.b * scale - 1} fill="var(--glass-accent-4-strong)" opacity={0.25 + (i / Math.max(1, active.q)) * 0.5} />
               ))}
           </svg>
-          {steps.length > 1 && <input type="range" min={0} max={steps.length - 1} value={idx} onChange={(e) => setStepIdx(parseInt(e.target.value, 10))} className="w-32 accent-cyan-600" aria-label={t("stepSliderAria")} />}
-          <p className="text-sm font-bold text-cyan-700">{t("gcdEquals", { value: formatMathValue(gcdValue) })}</p>
+          {steps.length > 1 && <input type="range" min={0} max={steps.length - 1} value={idx} onChange={(e) => setStepIdx(parseInt(e.target.value, 10))} className="w-32" style={{ accentColor: "var(--glass-accent-4-strong)" }} aria-label={t("stepSliderAria")} />}
+          <p className="text-sm font-bold" style={{ color: "var(--glass-accent-4-strong)" }}>
+            {t("gcdEquals", { value: formatMathValue(gcdValue) })}
+          </p>
         </div>
       }
       table={

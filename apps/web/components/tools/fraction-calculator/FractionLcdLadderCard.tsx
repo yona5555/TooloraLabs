@@ -29,25 +29,25 @@ export default function FractionLcdLadderCard() {
       visual={
         <div className="flex w-56 flex-col gap-3">
           {[
-            { label: "A", rungs: laddersA, color: "#5B6EF5", which: "A" as const },
-            { label: "B", rungs: laddersB, color: "#2FB6E0", which: "B" as const },
-          ].map(({ label, rungs, color, which }) => (
+            { label: "A", rungs: laddersA, which: "A" as const },
+            { label: "B", rungs: laddersB, which: "B" as const },
+          ].map(({ label, rungs, which }) => (
             <div key={label} className="flex items-center gap-2">
-              <button type="button" onClick={() => adjust(which, -1)} className="h-5 w-5 shrink-0 rounded-full bg-zinc-100 text-xs font-bold dark:bg-zinc-800" aria-label={t("decrease", { label })}>
+              <button type="button" onClick={() => adjust(which, -1)} className="h-5 w-5 shrink-0 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease", { label })}>
                 −
               </button>
               <div className="flex flex-1 flex-wrap gap-1">
                 {rungs.map((m) => (
                   <span
                     key={m}
-                    className="rounded px-1.5 py-0.5 text-[10px] font-bold text-white"
-                    style={{ background: m === lcdValue ? "#1FC89C" : color, opacity: m === lcdValue ? 1 : 0.55 }}
+                    className="rounded px-1.5 py-0.5 text-[10px] font-bold"
+                    style={m === lcdValue ? { background: "var(--glass-accent-3-strong)", color: "var(--color-white)" } : { background: "var(--glass-track)", color: "var(--glass-title)" }}
                   >
                     {formatMathValue(m)}
                   </span>
                 ))}
               </div>
-              <button type="button" onClick={() => adjust(which, 1)} className="h-5 w-5 shrink-0 rounded-full bg-zinc-100 text-xs font-bold dark:bg-zinc-800" aria-label={t("increase", { label })}>
+              <button type="button" onClick={() => adjust(which, 1)} className="h-5 w-5 shrink-0 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase", { label })}>
                 +
               </button>
             </div>

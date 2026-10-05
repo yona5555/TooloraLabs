@@ -35,16 +35,22 @@ export default function FractionBenchmarkGaugeCard() {
       visual={
         <div className="flex w-56 flex-col gap-2">
           <div
-            className="relative h-8 touch-none rounded-full bg-zinc-100 dark:bg-zinc-800"
+            className="relative h-8 touch-none rounded-full"
+            style={{ background: "var(--glass-track)" }}
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
             {BENCHMARKS.map((b, i) => (
-              <div key={b} className="absolute top-0 h-full w-0.5 bg-zinc-300 dark:bg-zinc-600" style={{ left: `${b * 100}%` }}>
-                <span className="absolute -top-4 -translate-x-1/2 text-[9px] text-zinc-400">{BENCHMARK_LABELS[i]}</span>
+              <div key={b} className="absolute top-0 h-full w-0.5" style={{ left: `${b * 100}%`, background: "var(--glass-border)" }}>
+                <span className="absolute -top-4 -translate-x-1/2 text-[9px]" style={{ color: "var(--glass-muted)" }}>
+                  {BENCHMARK_LABELS[i]}
+                </span>
               </div>
             ))}
-            <div className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1FC89C] ring-2 ring-white dark:ring-zinc-900" style={{ left: `${Math.max(0, Math.min(1, position)) * 100}%` }} />
+            <div
+              className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ left: `${Math.max(0, Math.min(1, position)) * 100}%`, background: "var(--glass-accent-3-strong)", boxShadow: "0 0 0 2px var(--glass-handle-ring)" }}
+            />
           </div>
         </div>
       }

@@ -6,7 +6,8 @@ import { formatMathValue } from "@tooloralabs/tools";
 
 /** A×B shown as a grid of denominatorA × denominatorB cells; the overlap (numeratorA rows ×
  * numeratorB columns) is the product. Drag across the grid to move how many rows/columns are
- * shaded, writing the new numerators back live. */
+ * shaded, writing the new numerators back live. Scales to fill the card's visual column instead
+ * of floating as a small fixed-size block. */
 export default function FractionAreaModelCard() {
   const t = useTranslations("tools.fraction-calculator.education.areaModel");
   const { dims, setDim } = useFractionLive();
@@ -31,8 +32,8 @@ export default function FractionAreaModelCard() {
       subtitle={t("subtitle")}
       visual={
         <div
-          className="grid touch-none gap-0.5 rounded-md border border-zinc-200 p-1 dark:border-zinc-700"
-          style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, width: 140, height: 140 }}
+          className="grid aspect-square w-full max-w-[220px] touch-none gap-0.5 rounded-md p-1.5"
+          style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, border: "1px solid var(--glass-border)" }}
           onPointerDown={(e) => {
             e.currentTarget.setPointerCapture(e.pointerId);
             handlePointer(e);
@@ -43,7 +44,7 @@ export default function FractionAreaModelCard() {
             const r = Math.floor(i / cols);
             const c = i % cols;
             const shaded = r < numeratorA && c < numeratorB;
-            return <div key={i} className="rounded-[2px]" style={{ background: shaded ? "#1FC89C" : "#F1F2FA", opacity: shaded ? 0.85 : 1 }} />;
+            return <div key={i} className="rounded-[2px]" style={{ background: shaded ? "var(--glass-accent-3-strong)" : "var(--glass-track)", opacity: shaded ? 0.85 : 1 }} />;
           })}
         </div>
       }

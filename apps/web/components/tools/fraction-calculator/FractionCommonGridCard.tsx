@@ -8,7 +8,7 @@ function Stack({ filled, total, color }: { filled: number; total: number; color:
   return (
     <div className="flex flex-col-reverse gap-0.5">
       {Array.from({ length: total }, (_, i) => (
-        <div key={i} className="h-4 w-7 rounded-sm" style={{ background: i < filled ? color : "#E5E7F5" }} />
+        <div key={i} className="h-4 w-7 rounded-sm" style={{ background: i < filled ? color : "var(--glass-track)" }} />
       ))}
     </div>
   );
@@ -38,16 +38,18 @@ export default function FractionCommonGridCard() {
       visual={
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-end gap-3">
-            <Stack filled={scaledA} total={lcd} color="#5B6EF5" />
-            <Stack filled={scaledB} total={lcd} color="#F0507A" />
-            <Stack filled={Math.min(lcd, scaledA + scaledB)} total={lcd} color="#1FC89C" />
+            <Stack filled={scaledA} total={lcd} color="var(--glass-accent-1-strong)" />
+            <Stack filled={scaledB} total={lcd} color="var(--glass-accent-2-strong)" />
+            <Stack filled={Math.min(lcd, scaledA + scaledB)} total={lcd} color="var(--glass-accent-3-strong)" />
           </div>
-          <div className="flex gap-2">
-            <button type="button" onClick={() => nudgeDenominator(-1)} className="h-6 w-6 rounded-full bg-zinc-100 text-xs font-bold dark:bg-zinc-800">
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={() => nudgeDenominator(-1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }}>
               −
             </button>
-            <span className="text-[10px] font-semibold text-zinc-500">{t("denomAHint", { den: formatMathValue(denominatorA) })}</span>
-            <button type="button" onClick={() => nudgeDenominator(1)} className="h-6 w-6 rounded-full bg-zinc-100 text-xs font-bold dark:bg-zinc-800">
+            <span className="text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+              {t("denomAHint", { den: formatMathValue(denominatorA) })}
+            </span>
+            <button type="button" onClick={() => nudgeDenominator(1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }}>
               +
             </button>
           </div>

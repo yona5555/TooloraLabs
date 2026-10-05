@@ -1,0 +1,96 @@
+/*
+ * Shared color tokens for the fraction-calculator glass hero/indicator cards (and reused by any
+ * future batch1 tool that adopts the same visual language). Every value is derived from
+ * Tailwind's own generated --color-* variables (the site's existing theme tokens, auto-exposed by
+ * `@import "tailwindcss"` in app/globals.css) mixed with the math category's section color
+ * (TooloraLabs-Claude-Instructions.md §34; the literal hex below is copied verbatim from
+ * lib/category-palette.ts `categoryPalette.math.hex`, the single source of truth for that color
+ * site-wide) -- never a color invented here. Dark-mode overrides follow the exact selector the
+ * site's own theme toggle uses (`html.dark`, set by ThemeInitScript.tsx).
+ */
+:root {
+  --glass-font: var(--glass-font-inter, Inter), ui-sans-serif, system-ui, sans-serif;
+  --glass-math-accent: #8b9dc9; /* lib/category-palette.ts categoryPalette.math.hex (§34) */
+
+  --glass-surface: color-mix(in oklab, var(--color-white) 85%, var(--glass-math-accent) 15%);
+  --glass-surface-strong: color-mix(in oklab, var(--color-white) 70%, var(--glass-math-accent) 12%);
+  --glass-border: color-mix(in oklab, var(--color-zinc-900) 10%, transparent);
+  --glass-ring: color-mix(in oklab, var(--glass-math-accent) 35%, transparent);
+
+  --glass-title: var(--color-zinc-900);
+  --glass-subtitle: var(--color-zinc-600);
+  --glass-muted: var(--color-zinc-500);
+
+  --glass-table-header-bg: color-mix(in oklab, var(--color-zinc-900) 7%, transparent);
+  --glass-table-header-text: var(--color-zinc-700);
+  --glass-table-row-border: color-mix(in oklab, var(--color-zinc-900) 8%, transparent);
+  --glass-table-text: var(--color-zinc-800);
+  --glass-table-wrap-bg: color-mix(in oklab, var(--color-zinc-900) 3%, transparent);
+
+  --glass-track: color-mix(in oklab, var(--color-zinc-900) 9%, transparent);
+  --glass-handle-ring: var(--color-white);
+  --glass-footer-bg: color-mix(in oklab, var(--glass-accent-1) 12%, transparent);
+  --glass-footer-text: color-mix(in oklab, var(--glass-accent-1) 65%, var(--color-zinc-900) 35%);
+
+  --glass-accent-1: var(--glass-math-accent);
+  --glass-accent-1-strong: color-mix(in oklab, var(--glass-math-accent) 55%, var(--color-zinc-900) 45%);
+  --glass-accent-1-soft: color-mix(in oklab, var(--glass-math-accent) 16%, var(--color-white) 84%);
+  --glass-accent-1-oncolor: color-mix(in oklab, var(--glass-math-accent) 30%, var(--color-zinc-900) 70%);
+
+  --glass-accent-2: var(--color-rose-500);
+  --glass-accent-2-strong: color-mix(in oklab, var(--color-rose-500) 55%, var(--color-zinc-900) 45%);
+  --glass-accent-2-soft: color-mix(in oklab, var(--color-rose-500) 14%, var(--color-white) 86%);
+  --glass-accent-2-oncolor: color-mix(in oklab, var(--color-rose-500) 30%, var(--color-zinc-900) 70%);
+
+  --glass-accent-3: var(--color-emerald-500);
+  --glass-accent-3-strong: color-mix(in oklab, var(--color-emerald-500) 55%, var(--color-zinc-900) 45%);
+  --glass-accent-3-soft: color-mix(in oklab, var(--color-emerald-500) 14%, var(--color-white) 86%);
+  --glass-accent-3-oncolor: color-mix(in oklab, var(--color-emerald-500) 30%, var(--color-zinc-900) 70%);
+
+  --glass-accent-4: var(--color-cyan-500);
+  --glass-accent-4-strong: color-mix(in oklab, var(--color-cyan-500) 55%, var(--color-zinc-900) 45%);
+  --glass-accent-4-soft: color-mix(in oklab, var(--color-cyan-500) 14%, var(--color-white) 86%);
+  --glass-accent-4-oncolor: color-mix(in oklab, var(--color-cyan-500) 30%, var(--color-zinc-900) 70%);
+
+  --glass-accent-5: var(--color-violet-500);
+  --glass-accent-5-strong: color-mix(in oklab, var(--color-violet-500) 55%, var(--color-zinc-900) 45%);
+  --glass-accent-5-soft: color-mix(in oklab, var(--color-violet-500) 14%, var(--color-white) 86%);
+  --glass-accent-5-oncolor: color-mix(in oklab, var(--color-violet-500) 30%, var(--color-zinc-900) 70%);
+}
+
+:root.dark {
+  --glass-surface: color-mix(in oklab, var(--color-zinc-900) 80%, var(--glass-math-accent) 14%);
+  --glass-surface-strong: color-mix(in oklab, var(--color-zinc-900) 70%, var(--glass-math-accent) 18%);
+  --glass-border: color-mix(in oklab, var(--color-white) 14%, transparent);
+  --glass-ring: color-mix(in oklab, var(--glass-math-accent) 45%, transparent);
+
+  --glass-title: var(--color-zinc-50);
+  --glass-subtitle: var(--color-zinc-300);
+  --glass-muted: var(--color-zinc-400);
+
+  --glass-table-header-bg: color-mix(in oklab, var(--color-white) 10%, transparent);
+  --glass-table-header-text: var(--color-zinc-200);
+  --glass-table-row-border: color-mix(in oklab, var(--color-white) 12%, transparent);
+  --glass-table-text: var(--color-zinc-100);
+  --glass-table-wrap-bg: color-mix(in oklab, var(--color-white) 5%, transparent);
+
+  --glass-track: color-mix(in oklab, var(--color-white) 12%, transparent);
+  --glass-handle-ring: var(--color-zinc-900);
+  --glass-footer-bg: color-mix(in oklab, var(--glass-accent-1) 22%, transparent);
+  --glass-footer-text: color-mix(in oklab, var(--glass-accent-1) 55%, var(--color-white) 45%);
+
+  --glass-accent-1-strong: color-mix(in oklab, var(--glass-math-accent) 70%, var(--color-white) 30%);
+  --glass-accent-1-soft: color-mix(in oklab, var(--glass-math-accent) 22%, var(--color-zinc-900) 78%);
+
+  --glass-accent-2-strong: color-mix(in oklab, var(--color-rose-500) 65%, var(--color-white) 25%);
+  --glass-accent-2-soft: color-mix(in oklab, var(--color-rose-500) 20%, var(--color-zinc-900) 80%);
+
+  --glass-accent-3-strong: color-mix(in oklab, var(--color-emerald-500) 60%, var(--color-white) 30%);
+  --glass-accent-3-soft: color-mix(in oklab, var(--color-emerald-500) 20%, var(--color-zinc-900) 80%);
+
+  --glass-accent-4-strong: color-mix(in oklab, var(--color-cyan-500) 60%, var(--color-white) 30%);
+  --glass-accent-4-soft: color-mix(in oklab, var(--color-cyan-500) 20%, var(--color-zinc-900) 80%);
+
+  --glass-accent-5-strong: color-mix(in oklab, var(--color-violet-500) 65%, var(--color-white) 25%);
+  --glass-accent-5-soft: color-mix(in oklab, var(--color-violet-500) 20%, var(--color-zinc-900) 80%);
+}

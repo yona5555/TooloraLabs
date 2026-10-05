@@ -31,13 +31,13 @@ export default function FractionPercentWaffleCard() {
       title={t("title")}
       subtitle={t("subtitle", { pct: formatMathValue(pct) })}
       visual={
-        <div className="flex flex-col items-center gap-2">
-          <div className="grid touch-none grid-cols-10 gap-[1.5px]" style={{ width: 130, height: 130 }} onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }} onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}>
+        <div className="flex w-full flex-col items-center gap-2">
+          <div className="grid aspect-square w-full max-w-[180px] touch-none grid-cols-10 gap-[1.5px]" onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }} onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}>
             {Array.from({ length: 100 }, (_, i) => (
-              <div key={i} className="rounded-[1px]" style={{ background: i < filled ? "#1FC89C" : "#EDEEF8" }} />
+              <div key={i} className="rounded-[1px]" style={{ background: i < filled ? "var(--glass-accent-3-strong)" : "var(--glass-track)" }} />
             ))}
           </div>
-          <p className="text-lg font-bold text-emerald-600">{`${formatMathValue(pct)}%`}</p>
+          <p className="text-lg font-bold" style={{ color: "var(--glass-accent-3-strong)" }}>{`${formatMathValue(pct)}%`}</p>
         </div>
       }
       table={

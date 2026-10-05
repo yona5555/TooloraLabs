@@ -36,14 +36,16 @@ export default function FractionContributionCard() {
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
-            <div className="flex items-center justify-center text-[10px] font-bold text-white" style={{ width: `${pctA}%`, background: "#5B6EF5" }}>
+            <div className="flex items-center justify-center text-[10px] font-bold" style={{ width: `${pctA}%`, background: "var(--glass-accent-1-strong)", color: "var(--color-white)" }}>
               A
             </div>
-            <div className="flex flex-1 items-center justify-center text-[10px] font-bold text-white" style={{ background: "#F0507A" }}>
+            <div className="flex flex-1 items-center justify-center text-[10px] font-bold" style={{ background: "var(--glass-accent-2-strong)", color: "var(--color-white)" }}>
               B
             </div>
           </div>
-          <p className="text-center text-[11px] text-zinc-500">{t("gapToOne", { gap: formatMathValue(share.gapToOne) })}</p>
+          <p className="text-center text-[11px]" style={{ color: "var(--glass-muted)" }}>
+            {t("gapToOne", { gap: formatMathValue(share.gapToOne) })}
+          </p>
         </div>
       }
       table={

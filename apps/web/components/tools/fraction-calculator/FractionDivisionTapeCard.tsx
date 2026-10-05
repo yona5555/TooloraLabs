@@ -29,17 +29,18 @@ export default function FractionDivisionTapeCard() {
       title={t("title")}
       subtitle={t("subtitle", { den: formatMathValue(denominatorA) })}
       visual={
-        <div className="flex w-56 flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <div
-            className="relative h-7 touch-none rounded-md bg-zinc-100 dark:bg-zinc-800"
+            className="relative h-7 touch-none rounded-md"
+            style={{ background: "var(--glass-track)" }}
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
-            <div className="h-full rounded-md bg-[#5B6EF5]" style={{ width: `${Math.max(0, Math.min(1, valueA)) * 100}%` }} />
+            <div className="h-full rounded-md" style={{ width: `${Math.max(0, Math.min(1, valueA)) * 100}%`, background: "var(--glass-accent-1-strong)" }} />
           </div>
           <div className="flex gap-0.5">
             {Array.from({ length: Math.max(1, whole + (remainder > 0.01 ? 1 : 0)) }, (_, i) => (
-              <div key={i} className="h-5 flex-1 rounded-sm" style={{ background: "#F0507A", opacity: i < whole ? 0.8 : 0.3 }} />
+              <div key={i} className="h-5 flex-1 rounded-sm" style={{ background: "var(--glass-accent-2-strong)", opacity: i < whole ? 0.8 : 0.3 }} />
             ))}
           </div>
         </div>

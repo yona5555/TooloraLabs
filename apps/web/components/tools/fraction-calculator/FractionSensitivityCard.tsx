@@ -39,9 +39,9 @@ export default function FractionSensitivityCard() {
       subtitle={t("subtitle", { n: formatMathValue(n), value: formatMathValue(active.value) })}
       visual={
         <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="touch-none" onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }} onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}>
-          <path d={path} fill="none" stroke="#8B5CF6" strokeWidth={2} />
+          <path d={path} fill="none" stroke="var(--glass-accent-5-strong)" strokeWidth={2} />
           {points.map((p) => (
-            <circle key={p.n} cx={toX(p.n)} cy={toY(p.value)} r={p.n === n ? 4 : 2} fill={p.n === n ? "#6D28D9" : "#C4B5FD"} />
+            <circle key={p.n} cx={toX(p.n)} cy={toY(p.value)} r={p.n === n ? 4 : 2} fill={p.n === n ? "var(--glass-accent-5-strong)" : "var(--glass-accent-5-soft)"} />
           ))}
         </svg>
       }

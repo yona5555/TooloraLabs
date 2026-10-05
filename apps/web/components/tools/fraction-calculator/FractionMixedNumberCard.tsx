@@ -33,19 +33,19 @@ export default function FractionMixedNumberCard() {
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-end gap-2">
             {Array.from({ length: Math.min(6, Math.abs(whole)) }, (_, i) => (
-              <div key={i} className="h-10 w-10 rounded-md" style={{ background: "#F0507A", opacity: 0.8 }} />
+              <div key={i} className="h-10 w-10 rounded-md" style={{ background: "var(--glass-accent-2-strong)", opacity: 0.8 }} />
             ))}
             {remNum > 0 && (
-              <div className="relative h-10 w-10 overflow-hidden rounded-md border-2 border-[#F0507A]">
-                <div className="absolute inset-y-0 left-0 bg-[#F0507A]" style={{ width: `${(remNum / Math.max(1, denR)) * 100}%`, opacity: 0.5 }} />
+              <div className="relative h-10 w-10 overflow-hidden rounded-md" style={{ border: "2px solid var(--glass-accent-2-strong)" }}>
+                <div className="absolute inset-y-0 left-0" style={{ width: `${(remNum / Math.max(1, denR)) * 100}%`, background: "var(--glass-accent-2-strong)", opacity: 0.5 }} />
               </div>
             )}
           </div>
           <div className="flex gap-2">
-            <button type="button" onClick={() => adjustWhole(-1)} className="h-7 w-7 rounded-full bg-zinc-100 text-sm font-bold dark:bg-zinc-800" aria-label={t("decrease")}>
+            <button type="button" onClick={() => adjustWhole(-1)} className="h-7 w-7 rounded-full text-sm font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
               −
             </button>
-            <button type="button" onClick={() => adjustWhole(1)} className="h-7 w-7 rounded-full bg-zinc-100 text-sm font-bold dark:bg-zinc-800" aria-label={t("increase")}>
+            <button type="button" onClick={() => adjustWhole(1)} className="h-7 w-7 rounded-full text-sm font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>
               +
             </button>
           </div>

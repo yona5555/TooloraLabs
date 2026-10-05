@@ -32,15 +32,19 @@ export default function FractionEquivalentLineCard() {
       visual={
         <div className="flex w-56 flex-col gap-2">
           <div
-            className="relative h-8 touch-none rounded-full bg-zinc-100 dark:bg-zinc-800"
+            className="relative h-8 touch-none rounded-full"
+            style={{ background: "var(--glass-track)" }}
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
-            <div className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#5B6EF5] ring-2 ring-white dark:ring-zinc-900" style={{ left: `${Math.max(0, Math.min(1, value)) * 100}%` }} />
+            <div
+              className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ left: `${Math.max(0, Math.min(1, value)) * 100}%`, background: "var(--glass-accent-1-strong)", boxShadow: "0 0 0 2px var(--glass-handle-ring)" }}
+            />
           </div>
           <div className="flex flex-wrap gap-1.5">
             {scales.map((s) => (
-              <span key={s} className="rounded-md bg-indigo-50 px-1.5 py-0.5 text-[10px] font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">
+              <span key={s} className="rounded-md px-1.5 py-0.5 text-[10px] font-semibold" style={{ background: "var(--glass-accent-1-soft)", color: "var(--glass-accent-1-strong)" }}>
                 {formatMathValue(numeratorA * s)}/{formatMathValue(denominatorA * s)}
               </span>
             ))}

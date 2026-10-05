@@ -21,21 +21,21 @@ export default function FractionCrossMultiplyCard() {
       visual={
         <div className="flex flex-col items-center gap-3">
           <svg width={160} height={90} viewBox="0 0 160 90">
-            <text x="30" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#5B6EF5">{formatMathValue(numeratorA)}</text>
-            <text x="30" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="#5B6EF5">{formatMathValue(denominatorA)}</text>
-            <text x="130" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#F0507A">{formatMathValue(numeratorB)}</text>
-            <text x="130" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="#F0507A">{formatMathValue(denominatorB)}</text>
-            <line x1="38" y1="16" x2="122" y2="74" stroke={compare.larger === "A" ? "#1FC89C" : "#D4D6E8"} strokeWidth={compare.larger === "A" ? 3 : 1.5} />
-            <line x1="38" y1="74" x2="122" y2="16" stroke={compare.larger === "B" ? "#1FC89C" : "#D4D6E8"} strokeWidth={compare.larger === "B" ? 3 : 1.5} />
-            <text x="80" y="50" textAnchor="middle" fontSize="11" fill="currentColor" opacity={0.6}>
+            <text x="30" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(numeratorA)}</text>
+            <text x="30" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(denominatorA)}</text>
+            <text x="130" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(numeratorB)}</text>
+            <text x="130" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(denominatorB)}</text>
+            <line x1="38" y1="16" x2="122" y2="74" stroke={compare.larger === "A" ? "var(--glass-accent-3-strong)" : "var(--glass-track)"} strokeWidth={compare.larger === "A" ? 3 : 1.5} />
+            <line x1="38" y1="74" x2="122" y2="16" stroke={compare.larger === "B" ? "var(--glass-accent-3-strong)" : "var(--glass-track)"} strokeWidth={compare.larger === "B" ? 3 : 1.5} />
+            <text x="80" y="50" textAnchor="middle" fontSize="11" fill="var(--glass-muted)">
               {compare.larger === "equal" ? "=" : compare.larger === "A" ? ">" : "<"}
             </text>
           </svg>
           <div className="flex gap-3">
-            <button type="button" onClick={() => setDim("numeratorA", numeratorA + 1)} className="rounded-full bg-indigo-50 px-2 py-0.5 text-[11px] font-semibold text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">
+            <button type="button" onClick={() => setDim("numeratorA", numeratorA + 1)} className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: "var(--glass-accent-1-soft)", color: "var(--glass-accent-1-strong)" }}>
               {t("incrementA")}
             </button>
-            <button type="button" onClick={() => setDim("numeratorB", numeratorB + 1)} className="rounded-full bg-rose-50 px-2 py-0.5 text-[11px] font-semibold text-rose-700 dark:bg-rose-900/30 dark:text-rose-300">
+            <button type="button" onClick={() => setDim("numeratorB", numeratorB + 1)} className="rounded-full px-2 py-0.5 text-[11px] font-semibold" style={{ background: "var(--glass-accent-2-soft)", color: "var(--glass-accent-2-strong)" }}>
               {t("incrementB")}
             </button>
           </div>

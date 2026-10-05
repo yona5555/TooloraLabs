@@ -49,7 +49,26 @@ async function cardSignature(page, n) {
 }
 
 async function allVisibleText(page) {
-  return page.evaluate(() => document.body.innerText);
+  return page.evaluate(() => {
+    function isHidden(el) {
+      const cs = getComputedStyle(el);
+      return cs.display === "none" || cs.visibility === "hidden";
+    }
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        let el = node.parentElement;
+        while (el) {
+          if (isHidden(el)) return NodeFilter.FILTER_REJECT;
+          el = el.parentElement;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    });
+    let text = "";
+    let n;
+    while ((n = walker.nextNode())) text += n.textContent + " ";
+    return text;
+  });
 }
 
 async function checkNoHorizontalOverflow(page, label) {
