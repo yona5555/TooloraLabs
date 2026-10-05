@@ -4,22 +4,23 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import FractionNumberLineDrag from "./FractionNumberLineDrag";
-import FractionSegmentedBarDiagram from "./FractionSegmentedBarDiagram";
-import FractionAdditionMechanicsDiagram from "./FractionAdditionMechanicsDiagram";
-import FractionSubtractionMechanicsDiagram from "./FractionSubtractionMechanicsDiagram";
-import FractionMultiplicationAreaDiagram from "./FractionMultiplicationAreaDiagram";
-import FractionDivisionFlipDiagram from "./FractionDivisionFlipDiagram";
-import FractionOperationFlowDiagram from "./FractionOperationFlowDiagram";
-import FractionSimplificationSteps from "./FractionSimplificationSteps";
-import FractionLCDBarChart from "./FractionLCDBarChart";
-import FractionComparisonBarList from "./FractionComparisonBarList";
-import FractionBenchmarkZoneStrip from "./FractionBenchmarkZoneStrip";
-import FractionEquivalentChainDiagram from "./FractionEquivalentChainDiagram";
-import FractionDecimalPercentChain from "./FractionDecimalPercentChain";
-import FractionMixedNumberConversion from "./FractionMixedNumberConversion";
-import FractionUnitFractionsTable from "./FractionUnitFractionsTable";
-import FractionReciprocalBalance from "./FractionReciprocalBalance";
+import { GlassPage, GlassIndicatorGrid } from "@/components/tool-ui/glass/GlassPrimitives";
+import FractionHero from "./FractionHero";
+import FractionRingsCard from "./FractionRingsCard";
+import FractionCommonGridCard from "./FractionCommonGridCard";
+import FractionWallCard from "./FractionWallCard";
+import FractionAreaModelCard from "./FractionAreaModelCard";
+import FractionPercentWaffleCard from "./FractionPercentWaffleCard";
+import FractionGcdTilingCard from "./FractionGcdTilingCard";
+import FractionDivisionTapeCard from "./FractionDivisionTapeCard";
+import FractionMixedNumberCard from "./FractionMixedNumberCard";
+import FractionLcdLadderCard from "./FractionLcdLadderCard";
+import FractionDecimalExpansionCard from "./FractionDecimalExpansionCard";
+import FractionEquivalentLineCard from "./FractionEquivalentLineCard";
+import FractionContributionCard from "./FractionContributionCard";
+import FractionBenchmarkGaugeCard from "./FractionBenchmarkGaugeCard";
+import FractionCrossMultiplyCard from "./FractionCrossMultiplyCard";
+import FractionSensitivityCard from "./FractionSensitivityCard";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -31,103 +32,94 @@ export default async function FractionEducation() {
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
   return (
-    <EncyclopediaPaper>
-      <InfoSection title={t("intro.title")}>
-        <p>{t("intro.paragraph1")}</p>
-        <FractionNumberLineDrag />
-        <p>{t("intro.paragraph2")}</p>
-        <p>{t("intro.paragraph3")}</p>
-        <FractionSegmentedBarDiagram />
-      </InfoSection>
+    <>
+      <GlassPage>
+        <FractionHero />
+        <GlassIndicatorGrid>
+          <FractionRingsCard />
+          <FractionCommonGridCard />
+          <FractionWallCard />
+          <FractionAreaModelCard />
+          <FractionPercentWaffleCard />
+          <FractionGcdTilingCard />
+          <FractionDivisionTapeCard />
+          <FractionMixedNumberCard />
+          <FractionLcdLadderCard />
+          <FractionDecimalExpansionCard />
+          <FractionEquivalentLineCard />
+          <FractionContributionCard />
+          <FractionBenchmarkGaugeCard />
+          <FractionCrossMultiplyCard />
+          <FractionSensitivityCard />
+        </GlassIndicatorGrid>
+      </GlassPage>
 
-      <InfoSection title={t("operations.title")}>
-        <p>{t("operations.addIntro")}</p>
-        <FractionAdditionMechanicsDiagram />
-        <p>{t("operations.subtractIntro")}</p>
-        <FractionSubtractionMechanicsDiagram />
-        <p>{t("operations.multiplyIntro")}</p>
-        <FractionMultiplicationAreaDiagram />
-        <p>{t("operations.divideIntro")}</p>
-        <FractionDivisionFlipDiagram />
-        <p>{t("operations.scaleIntro")}</p>
-        <FractionOperationFlowDiagram />
-      </InfoSection>
+      <EncyclopediaPaper>
+        <InfoSection title={t("intro.title")}>
+          <p>{t("intro.paragraph1")}</p>
+          <p>{t("intro.paragraph2")}</p>
+          <p>{t("intro.paragraph3")}</p>
+        </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+        <AdSpace variant="leaderboard" />
 
-      <InfoSection title={t("simplifyCompare.title")}>
-        <p>{t("simplifyCompare.intro")}</p>
-        <div className="space-y-6">
-          <FractionSimplificationSteps />
-          <FractionLCDBarChart />
-          <FractionComparisonBarList />
-          <FractionBenchmarkZoneStrip />
-          <FractionEquivalentChainDiagram />
-        </div>
-      </InfoSection>
-
-      <InfoSection title={t("examples.title")}>
-        <p>{t("examples.intro")}</p>
-        <div dir="ltr" className="overflow-x-auto">
-          <table className="w-full min-w-[420px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-current/30 text-start">
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnCalculation")}</th>
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exampleRows.map((row) => (
-                <tr key={row.calculation} className="border-b border-current/10">
-                  <td className="px-3 py-2.5">{row.calculation}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+        <InfoSection title={t("examples.title")}>
+          <p>{t("examples.intro")}</p>
+          <div dir="ltr" className="overflow-x-auto">
+            <table className="w-full min-w-[420px] border-collapse text-sm">
+              <thead>
+                <tr className="border-b border-current/30 text-start">
+                  <th className="px-3 py-2 text-start font-semibold">{t("examples.columnCalculation")}</th>
+                  <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="space-y-6">
-          <FractionDecimalPercentChain />
-          <FractionMixedNumberConversion />
-          <FractionUnitFractionsTable />
-          <FractionReciprocalBalance />
-        </div>
-      </InfoSection>
+              </thead>
+              <tbody>
+                {exampleRows.map((row) => (
+                  <tr key={row.calculation} className="border-b border-current/10">
+                    <td className="px-3 py-2.5">{row.calculation}</td>
+                    <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </InfoSection>
 
-      <InfoSection id="faq" title={t("faq.title")}>
-        <FAQAccordion items={faqItems} />
-      </InfoSection>
+        <InfoSection id="faq" title={t("faq.title")}>
+          <FAQAccordion items={faqItems} />
+        </InfoSection>
 
-      <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
-        </div>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
-        </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
-      </InfoSection>
+        <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
+          <div>
+            <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
+            <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
+            <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+          </div>
+          <AcademicPathSection
+            title={t("behindTheTool.academicPath.title")}
+            intro={t("behindTheTool.academicPath.intro")}
+            universities={universities}
+          />
+        </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+        <AdSpace variant="leaderboard" />
 
-      <InfoSection title={t("references.title")}>
-        <p>{t("references.citation")}</p>
-        <p className="text-sm opacity-70">{t("references.note")}</p>
-        <a
-          href={t("references.url")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 inline-flex rounded-sm border border-current/40 px-5 py-2.5 text-sm font-semibold no-underline transition hover:bg-current/5"
-        >
-          {t("references.readOriginal")}
-        </a>
-      </InfoSection>
-    </EncyclopediaPaper>
+        <InfoSection title={t("references.title")}>
+          <p>{t("references.citation")}</p>
+          <p className="text-sm opacity-70">{t("references.note")}</p>
+          <a
+            href={t("references.url")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex rounded-sm border border-current/40 px-5 py-2.5 text-sm font-semibold no-underline transition hover:bg-current/5"
+          >
+            {t("references.readOriginal")}
+          </a>
+        </InfoSection>
+      </EncyclopediaPaper>
+    </>
   );
 }

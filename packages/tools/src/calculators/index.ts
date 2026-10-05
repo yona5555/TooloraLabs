@@ -25,6 +25,7 @@ export * from "./ColorPaletteGenerator";
 export * from "./PdfMergeSplit";
 export * from "./ZipCompressor";
 export * from "./FractionCalculator";
+export * from "./FractionCalculatorGraph";
 export * from "./ScientificNotationConverter";
 export * from "./SignificantFiguresCalculator";
 export * from "./GpaCalculator";
