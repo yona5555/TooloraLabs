@@ -41,7 +41,7 @@ export default function FractionLcdLadderCard() {
                   <span
                     key={m}
                     className="rounded-md px-3 py-2 text-sm font-bold"
-                    style={m === lcdValue ? { background: "var(--glass-accent-3-strong)", color: "var(--color-white)" } : { background: "var(--glass-track)", color: "var(--glass-title)" }}
+                    style={m === lcdValue ? { background: "var(--glass-accent-3-oncolor)", color: "var(--color-white)" } : { background: "var(--glass-track)", color: "var(--glass-title)" }}
                   >
                     {formatMathValue(m)}
                   </span>

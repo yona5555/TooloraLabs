@@ -91,6 +91,61 @@ window.__h = {
 };
 `;
 
+async function runContrastChecks(p, label) {
+  await p.evaluate(PAGE_HELPERS);
+
+  const headerBgs = await p.evaluate(() => {
+    const out = [];
+    for (let n = 1; n <= 16; n++) {
+      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
+      if (!card) continue;
+      const section = card.closest("[id^='card-']");
+      const header = section?.querySelector(":scope > div:first-child");
+      if (header) out.push({ n, bg: getComputedStyle(header).backgroundColor });
+    }
+    return out;
+  });
+  const uniqueHeaderBgs = new Set(headerBgs.map((h) => h.bg));
+  assert(headerBgs.length === 16, `[${label}] found all 16 card headers (got ${headerBgs.length})`);
+  assert(uniqueHeaderBgs.size === 1, `[${label}] all 16 card headers share the identical brand-blue background (found ${uniqueHeaderBgs.size} distinct colors: ${[...uniqueHeaderBgs].join(", ")})`);
+
+  const headerTextContrast = await p.evaluate(() => {
+    const out = [];
+    for (let n = 1; n <= 16; n++) {
+      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
+      const section = card?.closest("[id^='card-']");
+      const h2 = section?.querySelector("h2");
+      if (h2) out.push({ n, ...window.__h.measure(h2) });
+    }
+    return out;
+  });
+  for (const r of headerTextContrast) {
+    assert(r.ratio >= 4.5, `[${label}] card ${r.n} header-band title text contrast ${r.ratio.toFixed(2)}:1 >= 4.5:1`);
+  }
+
+  const bodyResults = await p.evaluate(() => {
+    const out = [];
+    for (let n = 1; n <= 16; n++) {
+      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
+      if (!card) continue;
+      card.querySelectorAll("table th").forEach((th) => out.push({ n, kind: "table-header", text: th.textContent.slice(0, 20), ...window.__h.measure(th) }));
+      card.querySelectorAll("table td").forEach((td) => {
+        if (td.textContent.trim()) out.push({ n, kind: "table-cell", text: td.textContent.slice(0, 20), ...window.__h.measure(td) });
+      });
+      card.querySelectorAll('[class*="rounded-full"], [class*="rounded-md"], [class*="rounded-lg"]').forEach((chip) => {
+        const txt = chip.textContent.trim();
+        if (!txt || txt.length > 60 || chip.querySelector("svg, input, table")) return;
+        out.push({ n, kind: "chip", text: txt.slice(0, 30), ...window.__h.measure(chip) });
+      });
+    }
+    return out;
+  });
+  for (const r of bodyResults) {
+    const threshold = r.isLarge ? 3.0 : 4.5;
+    assert(r.ratio >= threshold, `[${label}] card ${r.n} ${r.kind} "${r.text}" contrast ${r.ratio.toFixed(2)}:1 >= ${threshold}:1`);
+  }
+}
+
 async function scrollThroughPage(page) {
   const height = await page.evaluate(() => document.body.scrollHeight);
   for (let y = 0; y < height; y += 700) {
@@ -159,59 +214,7 @@ async function main() {
   await scrollThroughPage(page);
   await page.evaluate(PAGE_HELPERS);
 
-  // --- header band brand-blue equality across all 16 cards ---
-  const headerBgs = await page.evaluate(() => {
-    const out = [];
-    for (let n = 1; n <= 16; n++) {
-      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
-      if (!card) continue;
-      const section = card.closest("[id^='card-']");
-      const header = section?.querySelector(":scope > div:first-child");
-      if (header) out.push({ n, bg: getComputedStyle(header).backgroundColor });
-    }
-    return out;
-  });
-  const uniqueHeaderBgs = new Set(headerBgs.map((h) => h.bg));
-  assert(headerBgs.length === 16, `found all 16 card headers (got ${headerBgs.length})`);
-  assert(uniqueHeaderBgs.size === 1, `all 16 card headers share the identical brand-blue background (found ${uniqueHeaderBgs.size} distinct colors: ${[...uniqueHeaderBgs].join(", ")})`);
-
-  // --- header text contrast (real, against the blue band) ---
-  const headerTextContrast = await page.evaluate(() => {
-    const out = [];
-    for (let n = 1; n <= 16; n++) {
-      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
-      const section = card?.closest("[id^='card-']");
-      const h2 = section?.querySelector("h2");
-      if (h2) out.push({ n, ...window.__h.measure(h2) });
-    }
-    return out;
-  });
-  for (const r of headerTextContrast) {
-    assert(r.ratio >= 4.5, `card ${r.n} header-band title text contrast ${r.ratio.toFixed(2)}:1 >= 4.5:1`);
-  }
-
-  // --- title / table-header / table-cell / chip contrast (body content) ---
-  const bodyResults = await page.evaluate(() => {
-    const out = [];
-    for (let n = 1; n <= 16; n++) {
-      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
-      if (!card) continue;
-      card.querySelectorAll("table th").forEach((th) => out.push({ n, kind: "table-header", text: th.textContent.slice(0, 20), ...window.__h.measure(th) }));
-      card.querySelectorAll("table td").forEach((td) => {
-        if (td.textContent.trim()) out.push({ n, kind: "table-cell", text: td.textContent.slice(0, 20), ...window.__h.measure(td) });
-      });
-      card.querySelectorAll('[class*="rounded-full"], [class*="rounded-md"], [class*="rounded-lg"]').forEach((chip) => {
-        const txt = chip.textContent.trim();
-        if (!txt || txt.length > 60 || chip.querySelector("svg, input, table")) return;
-        out.push({ n, kind: "chip", text: txt.slice(0, 30), ...window.__h.measure(chip) });
-      });
-    }
-    return out;
-  });
-  for (const r of bodyResults) {
-    const threshold = r.isLarge ? 3.0 : 4.5;
-    assert(r.ratio >= threshold, `card ${r.n} ${r.kind} "${r.text}" contrast ${r.ratio.toFixed(2)}:1 >= ${threshold}:1`);
-  }
+  await runContrastChecks(page, "light");
 
   // --- font: every title/body text resolves to Inter, not a silent fallback ---
   const fontCheck = await page.evaluate(async () => {
@@ -570,6 +573,10 @@ async function main() {
     }
     await p.waitForSelector('[data-hero-card="1"]');
     await scrollThroughPage(p);
+
+    if (label === "dark-1440") {
+      await runContrastChecks(p, "dark");
+    }
 
     if (viewport.width === 390) {
       const stackedOk = await p.evaluate(() => {

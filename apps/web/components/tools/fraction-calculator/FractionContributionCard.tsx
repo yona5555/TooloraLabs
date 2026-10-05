@@ -36,10 +36,10 @@ export default function FractionContributionCard() {
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
-            <div className="flex items-center justify-center text-lg font-bold" style={{ width: `${pctA}%`, background: "var(--glass-accent-1-strong)", color: "var(--color-white)" }}>
+            <div className="flex items-center justify-center text-lg font-bold" style={{ width: `${pctA}%`, background: "var(--glass-accent-1-oncolor)", color: "var(--color-white)" }}>
               A
             </div>
-            <div className="flex flex-1 items-center justify-center text-lg font-bold" style={{ background: "var(--glass-accent-2-strong)", color: "var(--color-white)" }}>
+            <div className="flex flex-1 items-center justify-center text-lg font-bold" style={{ background: "var(--glass-accent-2-oncolor)", color: "var(--color-white)" }}>
               B
             </div>
           </div>
