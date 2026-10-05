@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, decimalExpansion } from "@tooloralabs/tools";
 
 /** A real long-division trace of A, classified as terminating or repeating (with the true repeat
  * cycle, not a heuristic). Drag the denominator stepper to see the classification flip live. */
 export default function FractionDecimalExpansionCard() {
   const t = useTranslations("tools.fraction-calculator.education.decimalExpansion");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA } = dims;
   const expansion = decimalExpansion(Math.round(numeratorA), Math.max(1, Math.round(denominatorA)), 12);
 
@@ -23,8 +23,8 @@ export default function FractionDecimalExpansionCard() {
       title={t("title")}
       subtitle={t("subtitle", { kind: expansion.kind === "terminates" ? t("terminating") : t("repeating") })}
       visual={
-        <div className="flex flex-col items-center gap-2">
-          <div className="rounded-lg px-3 py-2 font-mono text-base" style={{ background: "var(--glass-table-wrap-bg)", color: "var(--glass-title)" }}>
+        <div className="flex w-full flex-col items-center justify-center gap-4">
+          <div className="rounded-lg px-6 py-4 font-mono text-3xl" style={{ background: "var(--glass-table-wrap-bg)", color: "var(--glass-title)" }}>
             0.
             {expansion.kind === "terminates" ? (
               <span style={{ color: "var(--glass-accent-5-strong)" }}>{expansion.digits}</span>
@@ -38,13 +38,13 @@ export default function FractionDecimalExpansionCard() {
             )}
           </div>
           <div className="flex items-center gap-2">
-            <button type="button" onClick={() => adjustDen(-1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
+            <button type="button" onClick={() => adjustDen(-1)} className="h-9 w-9 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
               −
             </button>
             <span className="text-[11px]" style={{ color: "var(--glass-muted)" }}>
               {t("denominatorLabel", { den: formatMathValue(denominatorA) })}
             </span>
-            <button type="button" onClick={() => adjustDen(1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>
+            <button type="button" onClick={() => adjustDen(1)} className="h-9 w-9 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>
               +
             </button>
           </div>

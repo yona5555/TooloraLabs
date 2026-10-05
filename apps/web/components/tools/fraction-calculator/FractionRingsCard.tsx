@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue } from "@tooloralabs/tools";
 
 function Ring({ num, den, color, onDrag, label }: { num: number; den: number; color: string; onDrag: (newNum: number) => void; label: string }) {
@@ -22,9 +22,9 @@ function Ring({ num, den, color, onDrag, label }: { num: number; den: number; co
     <div className="flex flex-col items-center gap-1">
       <svg
         viewBox="0 0 100 100"
-        width="92"
-        height="92"
-        className="cursor-grab touch-none active:cursor-grabbing"
+        width="150"
+        height="150"
+        className="w-full max-w-[150px] cursor-grab touch-none active:cursor-grabbing"
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
           handlePointer(e);
@@ -51,7 +51,7 @@ function Ring({ num, den, color, onDrag, label }: { num: number; den: number; co
  * change how many parts are taken (the numerator) — writes straight back to the shared draft. */
 export default function FractionRingsCard() {
   const t = useTranslations("tools.fraction-calculator.education.rings");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   return (
     <GlassIndicatorCard
       n={2}
@@ -59,7 +59,7 @@ export default function FractionRingsCard() {
       title={t("title")}
       subtitle={t("subtitle")}
       visual={
-        <div className="flex gap-4">
+        <div className="flex w-full flex-wrap items-center justify-around gap-4">
           <Ring num={dims.numeratorA} den={dims.denominatorA} color="var(--glass-accent-1-strong)" onDrag={(n) => setDim("numeratorA", n)} label={t("labelA", { den: formatMathValue(dims.denominatorA) })} />
           <Ring num={dims.numeratorB} den={dims.denominatorB} color="var(--glass-accent-2-strong)" onDrag={(n) => setDim("numeratorB", n)} label={t("labelB", { den: formatMathValue(dims.denominatorB) })} />
         </div>

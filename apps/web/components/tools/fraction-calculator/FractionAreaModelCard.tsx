@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue } from "@tooloralabs/tools";
 
 /** A×B shown as a grid of denominatorA × denominatorB cells; the overlap (numeratorA rows ×
@@ -10,7 +10,7 @@ import { formatMathValue } from "@tooloralabs/tools";
  * of floating as a small fixed-size block. */
 export default function FractionAreaModelCard() {
   const t = useTranslations("tools.fraction-calculator.education.areaModel");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB } = dims;
   const rows = Math.max(1, Math.min(8, Math.round(denominatorA)));
   const cols = Math.max(1, Math.min(8, Math.round(denominatorB)));
@@ -32,7 +32,7 @@ export default function FractionAreaModelCard() {
       subtitle={t("subtitle")}
       visual={
         <div
-          className="grid aspect-square w-full max-w-[220px] touch-none gap-0.5 rounded-md p-1.5"
+          className="grid aspect-square w-full max-w-[420px] touch-none gap-0.5 rounded-md p-1.5"
           style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, border: "1px solid var(--glass-border)" }}
           onPointerDown={(e) => {
             e.currentTarget.setPointerCapture(e.pointerId);

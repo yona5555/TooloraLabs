@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, multiplesUntil, lcm } from "@tooloralabs/tools";
 
 /** Two real multiples ladders climbing side by side until they meet — the first shared rung is
  * the LCD. Drag either denominator's stepper to watch both ladders, and the meeting point, change. */
 export default function FractionLcdLadderCard() {
   const t = useTranslations("tools.fraction-calculator.education.lcdLadder");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { denominatorA, denominatorB } = dims;
   const lcdValue = lcm(Math.max(1, Math.round(denominatorA)), Math.max(1, Math.round(denominatorB)));
   const laddersA = multiplesUntil(Math.max(1, Math.round(denominatorA)), lcdValue, 6);
@@ -27,27 +27,27 @@ export default function FractionLcdLadderCard() {
       title={t("title")}
       subtitle={t("subtitle", { lcd: formatMathValue(lcdValue) })}
       visual={
-        <div className="flex w-56 flex-col gap-3">
+        <div className="flex w-full flex-col justify-center gap-5">
           {[
             { label: "A", rungs: laddersA, which: "A" as const },
             { label: "B", rungs: laddersB, which: "B" as const },
           ].map(({ label, rungs, which }) => (
-            <div key={label} className="flex items-center gap-2">
-              <button type="button" onClick={() => adjust(which, -1)} className="h-5 w-5 shrink-0 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease", { label })}>
+            <div key={label} className="flex items-center gap-3">
+              <button type="button" onClick={() => adjust(which, -1)} className="h-9 w-9 shrink-0 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease", { label })}>
                 −
               </button>
-              <div className="flex flex-1 flex-wrap gap-1">
+              <div className="flex flex-1 flex-wrap gap-2">
                 {rungs.map((m) => (
                   <span
                     key={m}
-                    className="rounded px-1.5 py-0.5 text-[10px] font-bold"
+                    className="rounded-md px-3 py-2 text-sm font-bold"
                     style={m === lcdValue ? { background: "var(--glass-accent-3-strong)", color: "var(--color-white)" } : { background: "var(--glass-track)", color: "var(--glass-title)" }}
                   >
                     {formatMathValue(m)}
                   </span>
                 ))}
               </div>
-              <button type="button" onClick={() => adjust(which, 1)} className="h-5 w-5 shrink-0 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase", { label })}>
+              <button type="button" onClick={() => adjust(which, 1)} className="h-9 w-9 shrink-0 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase", { label })}>
                 +
               </button>
             </div>

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue } from "@tooloralabs/tools";
 
 function Row({ label, segments, color, cutAt }: { label: string; segments: number; color: string; cutAt: number }) {
@@ -28,7 +28,7 @@ function Row({ label, segments, color, cutAt }: { label: string; segments: numbe
  * the card's full visual column instead of floating as a small fixed-width block. */
 export default function FractionWallCard() {
   const t = useTranslations("tools.fraction-calculator.education.wall");
-  const { dims } = useFractionLive();
+  const { dims } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB, operation } = dims;
   const valueA = numeratorA / (denominatorA || 1);
   const valueB = numeratorB / (denominatorB || 1);

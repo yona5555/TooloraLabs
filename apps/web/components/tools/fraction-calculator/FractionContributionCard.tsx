@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, contributionShare } from "@tooloralabs/tools";
 
 /** A stacked bar showing how much of the result each operand contributes — drag the divider to
  * rebalance A's own share of the result by changing A's numerator directly. */
 export default function FractionContributionCard() {
   const t = useTranslations("tools.fraction-calculator.education.contribution");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB, operation } = dims;
   const valueA = numeratorA / (denominatorA || 1);
   const valueB = numeratorB / (denominatorB || 1);
@@ -30,16 +30,16 @@ export default function FractionContributionCard() {
       title={t("title")}
       subtitle={t("subtitle")}
       visual={
-        <div className="flex w-56 flex-col gap-2">
+        <div className="flex w-full flex-col justify-center gap-2">
           <div
-            className="relative flex h-8 touch-none overflow-hidden rounded-md"
+            className="relative flex h-24 touch-none overflow-hidden rounded-xl"
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
-            <div className="flex items-center justify-center text-[10px] font-bold" style={{ width: `${pctA}%`, background: "var(--glass-accent-1-strong)", color: "var(--color-white)" }}>
+            <div className="flex items-center justify-center text-lg font-bold" style={{ width: `${pctA}%`, background: "var(--glass-accent-1-strong)", color: "var(--color-white)" }}>
               A
             </div>
-            <div className="flex flex-1 items-center justify-center text-[10px] font-bold" style={{ background: "var(--glass-accent-2-strong)", color: "var(--color-white)" }}>
+            <div className="flex flex-1 items-center justify-center text-lg font-bold" style={{ background: "var(--glass-accent-2-strong)", color: "var(--color-white)" }}>
               B
             </div>
           </div>

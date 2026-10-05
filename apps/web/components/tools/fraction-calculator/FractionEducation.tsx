@@ -24,6 +24,23 @@ import FractionSensitivityCard from "./FractionSensitivityCard";
 
 type ExampleRow = { calculation: string; result: string };
 
+/**
+ * Indicators are scattered through the article beside the text sections they illustrate (§37),
+ * never gathered into one contiguous block. Placement is STRUCTURAL (anchored to which
+ * paragraph/section each group sits after, not to any translated string), so the order is
+ * identical in all 6 locales including Arabic RTL. Never more than 2 indicator cards appear back
+ * to back: every group below is preceded by a real paragraph/section or an AdSpace (AdSpace
+ * doubles as a plain separator between groups where no further new paragraph exists to anchor to
+ * -- adding new article copy isn't in scope here).
+ *   02 rings, 04 wall        -> intro paragraph 1 (what a fraction is, proper/improper/mixed)
+ *   09 mixed, 03 common-grid -> intro paragraph 2 (add/subtract need a common denominator)
+ *   10 lcd, 05 area model    -> same paragraph (multiplication), via an AdSpace separator
+ *   08 tape, 07 gcd tiling   -> same paragraph (division, reduced to simplest form), via AdSpace
+ *   11 decimal, 12 equiv.    -> intro paragraph 3 (exact fractions avoid rounding errors)
+ *   06 waffle, 14 gauge      -> worked examples
+ *   13 contribution, 15 x-   -> worked examples (comparison), via an AdSpace separator
+ *   16 sensitivity           -> last third of the page, after behind-the-tool
+ */
 export default async function FractionEducation() {
   const t = await getTranslations("tools.fraction-calculator.education");
 
@@ -32,36 +49,43 @@ export default async function FractionEducation() {
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
   return (
-    <>
-      <GlassPage>
-        <FractionHero />
-        <GlassIndicatorGrid>
-          <FractionRingsCard />
-          <FractionCommonGridCard />
-          <FractionWallCard />
-          <FractionAreaModelCard />
-          <FractionPercentWaffleCard />
-          <FractionGcdTilingCard />
-          <FractionDivisionTapeCard />
-          <FractionMixedNumberCard />
-          <FractionLcdLadderCard />
-          <FractionDecimalExpansionCard />
-          <FractionEquivalentLineCard />
-          <FractionContributionCard />
-          <FractionBenchmarkGaugeCard />
-          <FractionCrossMultiplyCard />
-          <FractionSensitivityCard />
-        </GlassIndicatorGrid>
-      </GlassPage>
+    <GlassPage>
+      <FractionHero />
 
       <EncyclopediaPaper>
         <InfoSection title={t("intro.title")}>
           <p>{t("intro.paragraph1")}</p>
-          <p>{t("intro.paragraph2")}</p>
-          <p>{t("intro.paragraph3")}</p>
-        </InfoSection>
+          <GlassIndicatorGrid>
+            <FractionRingsCard />
+            <FractionWallCard />
+          </GlassIndicatorGrid>
 
-        <AdSpace variant="leaderboard" />
+          <p>{t("intro.paragraph2")}</p>
+          <GlassIndicatorGrid>
+            <FractionMixedNumberCard />
+            <FractionCommonGridCard />
+          </GlassIndicatorGrid>
+
+          <AdSpace variant="leaderboard" />
+
+          <GlassIndicatorGrid>
+            <FractionLcdLadderCard />
+            <FractionAreaModelCard />
+          </GlassIndicatorGrid>
+
+          <AdSpace variant="leaderboard" />
+
+          <GlassIndicatorGrid>
+            <FractionDivisionTapeCard />
+            <FractionGcdTilingCard />
+          </GlassIndicatorGrid>
+
+          <p>{t("intro.paragraph3")}</p>
+          <GlassIndicatorGrid>
+            <FractionDecimalExpansionCard />
+            <FractionEquivalentLineCard />
+          </GlassIndicatorGrid>
+        </InfoSection>
 
         <InfoSection title={t("examples.title")}>
           <p>{t("examples.intro")}</p>
@@ -83,6 +107,17 @@ export default async function FractionEducation() {
               </tbody>
             </table>
           </div>
+          <GlassIndicatorGrid>
+            <FractionPercentWaffleCard />
+            <FractionBenchmarkGaugeCard />
+          </GlassIndicatorGrid>
+
+          <AdSpace variant="leaderboard" />
+
+          <GlassIndicatorGrid>
+            <FractionContributionCard />
+            <FractionCrossMultiplyCard />
+          </GlassIndicatorGrid>
         </InfoSection>
 
         <InfoSection id="faq" title={t("faq.title")}>
@@ -107,6 +142,10 @@ export default async function FractionEducation() {
 
         <AdSpace variant="leaderboard" />
 
+        <GlassIndicatorGrid>
+          <FractionSensitivityCard />
+        </GlassIndicatorGrid>
+
         <InfoSection title={t("references.title")}>
           <p>{t("references.citation")}</p>
           <p className="text-sm opacity-70">{t("references.note")}</p>
@@ -120,6 +159,6 @@ export default async function FractionEducation() {
           </a>
         </InfoSection>
       </EncyclopediaPaper>
-    </>
+    </GlassPage>
   );
 }

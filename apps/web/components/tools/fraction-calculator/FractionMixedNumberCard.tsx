@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue } from "@tooloralabs/tools";
 
 /** The live result, split into whole + proper-fraction blocks — drag the whole-count stepper to
  * explore how changing the result's own numerator shifts the mixed-number split. */
 export default function FractionMixedNumberCard() {
   const t = useTranslations("tools.fraction-calculator.education.mixedNumber");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB, operation } = dims;
   const valueA = numeratorA / (denominatorA || 1);
   const valueB = numeratorB / (denominatorB || 1);
@@ -30,22 +30,26 @@ export default function FractionMixedNumberCard() {
       title={t("title")}
       subtitle={t("subtitle", { value: formatMathValue(result) })}
       visual={
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-end gap-2">
-            {Array.from({ length: Math.min(6, Math.abs(whole)) }, (_, i) => (
-              <div key={i} className="h-10 w-10 rounded-md" style={{ background: "var(--glass-accent-2-strong)", opacity: 0.8 }} />
+        <div className="flex w-full flex-col items-center justify-center gap-4">
+          <div className="flex w-full flex-wrap items-end justify-center gap-3">
+            {Array.from({ length: Math.min(6, Math.max(1, Math.abs(whole))) }, (_, i) => (
+              <div
+                key={i}
+                className="h-20 w-20 rounded-lg"
+                style={whole === 0 ? { border: "2px dashed var(--glass-track)" } : { background: "var(--glass-accent-2-strong)", opacity: 0.8 }}
+              />
             ))}
             {remNum > 0 && (
-              <div className="relative h-10 w-10 overflow-hidden rounded-md" style={{ border: "2px solid var(--glass-accent-2-strong)" }}>
+              <div className="relative h-20 w-20 overflow-hidden rounded-lg" style={{ border: "2px solid var(--glass-accent-2-strong)" }}>
                 <div className="absolute inset-y-0 left-0" style={{ width: `${(remNum / Math.max(1, denR)) * 100}%`, background: "var(--glass-accent-2-strong)", opacity: 0.5 }} />
               </div>
             )}
           </div>
-          <div className="flex gap-2">
-            <button type="button" onClick={() => adjustWhole(-1)} className="h-7 w-7 rounded-full text-sm font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
+          <div className="flex gap-3">
+            <button type="button" onClick={() => adjustWhole(-1)} className="h-9 w-9 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("decrease")}>
               −
             </button>
-            <button type="button" onClick={() => adjustWhole(1)} className="h-7 w-7 rounded-full text-sm font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>
+            <button type="button" onClick={() => adjustWhole(1)} className="h-9 w-9 rounded-full text-base font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }} aria-label={t("increase")}>
               +
             </button>
           </div>

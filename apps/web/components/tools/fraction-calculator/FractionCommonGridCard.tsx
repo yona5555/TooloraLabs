@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, lcm } from "@tooloralabs/tools";
 
 function Stack({ filled, total, color }: { filled: number; total: number; color: string }) {
   return (
-    <div className="flex flex-col-reverse gap-0.5">
+    <div className="flex h-full flex-1 flex-col-reverse gap-1">
       {Array.from({ length: total }, (_, i) => (
-        <div key={i} className="h-4 w-7 rounded-sm" style={{ background: i < filled ? color : "var(--glass-track)" }} />
+        <div key={i} className="w-full flex-1 rounded-sm" style={{ background: i < filled ? color : "var(--glass-track)" }} />
       ))}
     </div>
   );
@@ -18,7 +18,7 @@ function Stack({ filled, total, color }: { filled: number; total: number; color:
  * denominator stepper to see both stacks rebuild from the real scaled numerators. */
 export default function FractionCommonGridCard() {
   const t = useTranslations("tools.fraction-calculator.education.commonGrid");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB } = dims;
   const lcd = lcm(denominatorA, denominatorB);
   const scaledA = Math.round(numeratorA * (lcd / (denominatorA || 1)));
@@ -36,8 +36,8 @@ export default function FractionCommonGridCard() {
       title={t("title")}
       subtitle={t("subtitle")}
       visual={
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-end gap-3">
+        <div className="flex w-full flex-col items-center gap-2">
+          <div className="flex h-36 w-full items-stretch gap-3">
             <Stack filled={scaledA} total={lcd} color="var(--glass-accent-1-strong)" />
             <Stack filled={scaledB} total={lcd} color="var(--glass-accent-2-strong)" />
             <Stack filled={Math.min(lcd, scaledA + scaledB)} total={lcd} color="var(--glass-accent-3-strong)" />

@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, benchmarkPosition } from "@tooloralabs/tools";
 
 const BENCHMARKS = [0, 0.25, 0.5, 0.75, 1];
@@ -11,7 +11,7 @@ const BENCHMARK_LABELS = ["0", "1/4", "1/2", "3/4", "1"];
  * result's own numerator (holding the current denominator) so the nearest-benchmark call stays live. */
 export default function FractionBenchmarkGaugeCard() {
   const t = useTranslations("tools.fraction-calculator.education.benchmarkGauge");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB, operation } = dims;
   const valueA = numeratorA / (denominatorA || 1);
   const valueB = numeratorB / (denominatorB || 1);
@@ -33,23 +33,23 @@ export default function FractionBenchmarkGaugeCard() {
       title={t("title")}
       subtitle={t("subtitle", { nearest: nearestLabel })}
       visual={
-        <div className="flex w-56 flex-col gap-2">
+        <div className="flex w-full flex-col justify-center gap-2 pt-6">
           <div
-            className="relative h-8 touch-none rounded-full"
+            className="relative h-12 touch-none rounded-full"
             style={{ background: "var(--glass-track)" }}
             onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
             onPointerMove={(e) => e.buttons === 1 && handlePointer(e)}
           >
             {BENCHMARKS.map((b, i) => (
               <div key={b} className="absolute top-0 h-full w-0.5" style={{ left: `${b * 100}%`, background: "var(--glass-border)" }}>
-                <span className="absolute -top-4 -translate-x-1/2 text-[9px]" style={{ color: "var(--glass-muted)" }}>
+                <span className="absolute -top-6 -translate-x-1/2 text-xs font-semibold" style={{ color: "var(--glass-muted)" }}>
                   {BENCHMARK_LABELS[i]}
                 </span>
               </div>
             ))}
             <div
-              className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{ left: `${Math.max(0, Math.min(1, position)) * 100}%`, background: "var(--glass-accent-3-strong)", boxShadow: "0 0 0 2px var(--glass-handle-ring)" }}
+              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{ left: `${Math.max(0, Math.min(1, position)) * 100}%`, background: "var(--glass-accent-3-strong)", boxShadow: "0 0 0 3px var(--glass-handle-ring)" }}
             />
           </div>
         </div>

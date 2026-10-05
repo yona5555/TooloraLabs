@@ -1,9 +1,17 @@
 import type { FractionOperation } from "./FractionCalculator";
+import { formatMathValue } from "./StepByStepMathSolverGraph";
 
 /** Pure math helpers for the fraction-calculator's 15-indicator education layer (batch1 rebuild).
  * Re-uses formatMathValue/snapDragValue from StepByStepMathSolverGraph.ts rather than duplicating
  * a second number formatter — that formatter is fully generic, not solver-specific. */
 export { formatMathValue, snapDragValue, toMathValueFraction } from "./StepByStepMathSolverGraph";
+
+/** A percent must always read as a clean decimal ("166.7%"), never as a fraction --
+ * formatMathValue prefers a/b notation when one exists, which is wrong here (maxDen:1 disables
+ * that path, forcing the decimal path for any non-integer percent). */
+export function formatPercent(value: number): string {
+  return formatMathValue(value, { maxDen: 1 });
+}
 
 export function gcd(a: number, b: number): number {
   let x = Math.abs(Math.trunc(a));

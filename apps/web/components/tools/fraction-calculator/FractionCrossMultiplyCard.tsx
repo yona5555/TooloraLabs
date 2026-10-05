@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
-import { useFractionLive } from "./FractionLiveContext";
+import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, crossMultiplyCompare } from "@tooloralabs/tools";
 
 /** Cross-multiplication as two real diagonal arrows between A and B — drag either numerator
  * stepper and watch which cross-product wins change live, without ever computing a decimal. */
 export default function FractionCrossMultiplyCard() {
   const t = useTranslations("tools.fraction-calculator.education.crossMultiply");
-  const { dims, setDim } = useFractionLive();
+  const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB } = dims;
   const compare = crossMultiplyCompare(numeratorA, denominatorA, numeratorB, denominatorB);
 
@@ -19,8 +19,8 @@ export default function FractionCrossMultiplyCard() {
       title={t("title")}
       subtitle={t("subtitle", { winner: compare.larger === "equal" ? t("equal") : compare.larger })}
       visual={
-        <div className="flex flex-col items-center gap-3">
-          <svg width={160} height={90} viewBox="0 0 160 90">
+        <div className="flex w-full flex-col items-center justify-center gap-3">
+          <svg width={160} height={90} viewBox="0 0 160 90" className="h-auto w-full max-w-[320px]">
             <text x="30" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(numeratorA)}</text>
             <text x="30" y="80" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-1-strong)">{formatMathValue(denominatorA)}</text>
             <text x="130" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--glass-accent-2-strong)">{formatMathValue(numeratorB)}</text>
