@@ -36,7 +36,8 @@
     },
     "viewDocumentation": "दस्तावेज़ देखें",
     "backToHome": "होम पेज पर वापस जाएं",
-    "backToDocs": "दस्तावेज़ों पर वापस जाएं"
+    "backToDocs": "दस्तावेज़ों पर वापस जाएं",
+    "dragToChange": "बदलने के लिए खींचें"
   },
   "site": {
     "title": "TooloraLabs",
@@ -5707,7 +5708,8 @@
         "numeratorPlaceholder": "अंश",
         "denominatorPlaceholder": "हर",
         "clear": "साफ़ करें",
-        "scenarioLabel": "एक वास्तविक समस्या आज़माएं"
+        "scenarioLabel": "एक वास्तविक समस्या आज़माएं",
+        "liveVisualLabel": "लाइव पूर्वावलोकन"
       },
       "result": {
         "heading": "परिणाम",
@@ -5715,7 +5717,7 @@
         "divideByZeroFraction": "जिस भिन्न का अंश शून्य हो, उससे भाग नहीं किया जा सकता।",
         "mixedNumber": "मिश्रित संख्या: {whole} {numerator}/{denominator}",
         "decimalEquivalent": "दशमलव समतुल्य: {value}",
-        "diagramCaption": "{numerator}/{denominator} को बराबर छायांकित भागों के रूप में दिखाया गया है।",
+        "diagramCaption": "{numerator}/{denominator} को एक इकाई वृत्त पर सुइयों के रूप में दिखाया गया है।",
         "stepAddSubtract": "{commonDenominator} के उभयनिष्ठ हर में बदला गया: {scaledA}/{commonDenominator} और {scaledB}/{commonDenominator}, फिर सरलतम रूप में सरल किया गया।",
         "stepMultiply": "सीधे गुणा किया गया — अंश {numA}×{numB} और हर {denA}×{denB} — फिर सरलतम रूप में सरल किया गया।",
         "stepDivide": "दूसरी भिन्न के व्युत्क्रम से गुणा किया गया ({numB}/{denB}, {denB}/{numB} बन जाता है), फिर सरलतम रूप में सरल किया गया।",
@@ -5850,12 +5852,12 @@
           "subtitle": "उस भिन्न को बदलने के लिए किसी भी बिंदु को खींचें — नीचे हर संकेतक तुरंत अपडेट होगा।",
           "resultLabel": "परिणाम",
           "ariaLabel": "एक साझा संख्या रेखा पर दो खींचे जा सकने वाले भिन्न बिंदु, जिनके साथ एक पाई चार्ट और ग्रिड लाइव परिणाम दिखाते हैं",
-          "gridLabel": "साझा ग्रिड",
+          "gridLabel": "साझा पैमाना",
           "twoWaySynced": "(ऊपर दिए गए फ़ील्ड के साथ समन्वित)"
         },
         "mixedNumber": {
           "title": "अनुचित भिन्न → मिश्रित संख्या",
-          "subtitle": "लाइव परिणाम {value} है",
+          "subtitle": "इस कार्ड का अपना उदाहरण: {value}",
           "decrease": "पूर्णांक भाग घटाएं",
           "increase": "पूर्णांक भाग बढ़ाएं",
           "colQuantity": "मात्रा",
@@ -5877,12 +5879,13 @@
           "colAasPercent": "A प्रतिशत में"
         },
         "commonGrid": {
-          "title": "साझा-ग्रिड स्तंभ",
-          "subtitle": "A और B को समान हर में बदला गया ताकि हर खाना समान आकार का हो",
+          "title": "समान-हर रिबन",
+          "subtitle": "A और B को समान हर में बदला गया, निरंतर आनुपातिक रिबन के रूप में दिखाया गया",
           "denomAHint": "A का हर: {den}",
           "colStep": "चरण",
           "colForm": "रूप",
-          "colValue": "मान"
+          "colValue": "मान",
+          "combinedLabel": "A+B"
         },
         "wall": {
           "title": "भिन्न दीवार",
@@ -5895,16 +5898,20 @@
           "cursor": "कर्सर स्थिति"
         },
         "areaModel": {
-          "title": "गुणन का क्षेत्रफल मॉडल",
-          "subtitle": "A की पंक्तियों और B के स्तंभों को छायांकित करने के लिए ग्रिड पर खींचें",
+          "title": "गुणन: 'A का B भाग'",
+          "subtitle": "A का B का भाग लाइव रीस्केल होते देखने के लिए किसी भी बार को खींचें",
           "colQuantity": "मात्रा",
           "colValue": "मान",
           "cells": "छायांकित खाने",
-          "decimal": "दशमलव"
+          "decimal": "दशमलव",
+          "rowA": "A = {num}/{den}",
+          "rowB": "B = {num}/{den}",
+          "productCallout": "A का B = {value}",
+          "product": "गुणनफल"
         },
         "percentWaffle": {
-          "title": "प्रतिशत वेफल",
-          "subtitle": "100-खाने वाले ग्रिड का {pct}% भरा है",
+          "title": "रिंग गेज के रूप में प्रतिशत",
+          "subtitle": "पूरे का {pct}%, एक रिंग गेज पर दिखाया गया",
           "colQuantity": "मात्रा",
           "colValue": "मान",
           "result": "परिणाम",
@@ -5913,8 +5920,8 @@
           "rounded": "गोल किया गया"
         },
         "gcdTiling": {
-          "title": "म.स. वर्ग टाइलिंग (यूक्लिड)",
-          "subtitle": "{a}×{b} आयत को फिट होने वाले सबसे बड़े वर्गों से टाइल करना",
+          "title": "म.स. टेप सीढ़ी के रूप में (यूक्लिड)",
+          "subtitle": "{a}×{b} आयत के लिए घटते टेप की एक सीढ़ी",
           "stepSliderAria": "यूक्लिड एल्गोरिदम चरण",
           "gcdEquals": "म.स. = {value}",
           "colQuantity": "मात्रा",

@@ -36,7 +36,8 @@
     },
     "viewDocumentation": "عرض التوثيق",
     "backToHome": "العودة للصفحة الرئيسية",
-    "backToDocs": "العودة للتوثيق"
+    "backToDocs": "العودة للتوثيق",
+    "dragToChange": "اسحب للتغيير"
   },
   "site": {
     "title": "تولورا لابز",
@@ -5707,7 +5708,8 @@
         "numeratorPlaceholder": "البسط",
         "denominatorPlaceholder": "المقام",
         "clear": "مسح",
-        "scenarioLabel": "جرّب مسألة واقعية"
+        "scenarioLabel": "جرّب مسألة واقعية",
+        "liveVisualLabel": "معاينة مباشرة"
       },
       "result": {
         "heading": "النتيجة",
@@ -5715,7 +5717,7 @@
         "divideByZeroFraction": "لا يمكن القسمة على كسر بسطه صفر.",
         "mixedNumber": "الكسر المخلوط: {whole} {numerator}/{denominator}",
         "decimalEquivalent": "القيمة العشرية المكافئة: {value}",
-        "diagramCaption": "{numerator}/{denominator} ممثَّلة كأجزاء متساوية مظللة.",
+        "diagramCaption": "{numerator}/{denominator} مُمثَّلة كأذرع على دائرة الوحدة.",
         "stepAddSubtract": "بعد التحويل إلى مقام مشترك قدره {commonDenominator}: {scaledA}/{commonDenominator} و{scaledB}/{commonDenominator}، ثم التبسيط إلى أبسط صورة.",
         "stepMultiply": "الضرب المباشر — البسطان {numA}×{numB} والمقامان {denA}×{denB} — ثم التبسيط إلى أبسط صورة.",
         "stepDivide": "الضرب في مقلوب الكسر الثاني ({numB}/{denB} يصبح {denB}/{numB})، ثم التبسيط إلى أبسط صورة.",
@@ -5850,12 +5852,12 @@
           "subtitle": "اسحب أي نقطة لتغيير ذلك الكسر — كل مؤشر أدناه يتحدّث معه فورًا.",
           "resultLabel": "الناتج",
           "ariaLabel": "نقطتا كسر قابلتان للسحب على خط أعداد مشترك، مع دائرة وشبكة تعرضان الناتج الحي",
-          "gridLabel": "الشبكة المشتركة",
+          "gridLabel": "المقياس المشترك",
           "twoWaySynced": "(متزامن مع الحقول أعلاه)"
         },
         "mixedNumber": {
           "title": "من كسر غير حقيقي إلى عدد كسري",
-          "subtitle": "الناتج الحي هو {value}",
+          "subtitle": "مثال هذه البطاقة الخاص: {value}",
           "decrease": "إنقاص الجزء الصحيح",
           "increase": "زيادة الجزء الصحيح",
           "colQuantity": "الكمية",
@@ -5877,12 +5879,13 @@
           "colAasPercent": "A كنسبة مئوية"
         },
         "commonGrid": {
-          "title": "أكوام الشبكة المشتركة",
-          "subtitle": "تمت إعادة قياس A وB إلى نفس المقام بحيث تكون كل خانة بنفس الحجم",
+          "title": "شرائط المقام المشترك",
+          "subtitle": "تمت إعادة قياس A وB إلى نفس المقام، ممثَّلة كشرائط نسبية متصلة",
           "denomAHint": "مقام A: {den}",
           "colStep": "الخطوة",
           "colForm": "الصيغة",
-          "colValue": "القيمة"
+          "colValue": "القيمة",
+          "combinedLabel": "A+B"
         },
         "wall": {
           "title": "جدار الكسور",
@@ -5895,16 +5898,20 @@
           "cursor": "موضع المؤشر"
         },
         "areaModel": {
-          "title": "نموذج المساحة للضرب",
-          "subtitle": "اسحب عبر الشبكة لتظليل صفوف A وأعمدة B",
+          "title": "الضرب كأخذ «B من A»",
+          "subtitle": "اسحب أي شريط لرؤية حصة B من A تتجدد مباشرة",
           "colQuantity": "الكمية",
           "colValue": "القيمة",
           "cells": "الخلايا المظلّلة",
-          "decimal": "عشري"
+          "decimal": "عشري",
+          "rowA": "A = {num}/{den}",
+          "rowB": "B = {num}/{den}",
+          "productCallout": "B من A = {value}",
+          "product": "حاصل الضرب"
         },
         "percentWaffle": {
-          "title": "شبكة النسبة المئوية",
-          "subtitle": "{pct}% من شبكة الـ١٠٠ خانة مملوءة",
+          "title": "النسبة المئوية كمقياس حلقي",
+          "subtitle": "{pct}% من الكل، معروضة على مقياس حلقي",
           "colQuantity": "الكمية",
           "colValue": "القيمة",
           "result": "الناتج",
@@ -5913,8 +5920,8 @@
           "rounded": "مقرّب"
         },
         "gcdTiling": {
-          "title": "تبليط بالقاسم المشترك الأكبر (إقليدس)",
-          "subtitle": "تبليط مستطيل {a}×{b} بأكبر المربعات الملائمة",
+          "title": "القاسم المشترك الأكبر كسُلّم من الأشرطة (إقليدس)",
+          "subtitle": "سُلّم من أشرطة متقلّصة لمستطيل {a}×{b}",
           "stepSliderAria": "خطوة خوارزمية إقليدس",
           "gcdEquals": "القاسم المشترك الأكبر = {value}",
           "colQuantity": "الكمية",

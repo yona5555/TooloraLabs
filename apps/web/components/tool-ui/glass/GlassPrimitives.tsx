@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import "./glass-tokens.css";
 import { glassInter } from "./glass-font";
@@ -69,8 +69,24 @@ function subscribeReducedMotion(callback: () => void) {
  * read a browser media query: the server snapshot is always false, so SSR and first client
  * render always agree (no mismatch), and React itself (not an effect body) handles reconciling
  * the real value right after. */
-function usePrefersReducedMotion(): boolean {
+export function usePrefersReducedMotion(): boolean {
   return useSyncExternalStore(subscribeReducedMotion, () => window.matchMedia(REDUCED_MOTION_QUERY).matches, () => false);
+}
+
+/** §42.3: flashes `true` for ~600ms every time `trigger()` is called, then auto-clears -- the
+ * hook a card's own control uses to tint its changed table cells once per interaction. Reduced
+ * motion still flags the change (callers add the animated class only when motion is allowed) so
+ * the "did this change" signal never fully disappears, it just stops animating. */
+export function useValueFlash(durationMs = 600) {
+  const [flashing, setFlashing] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  function trigger() {
+    setFlashing(true);
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => setFlashing(false), durationMs);
+  }
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
+  return { flashing, trigger };
 }
 
 /** Always starts false so server and client render identically (no hydration mismatch); setState
@@ -227,32 +243,169 @@ export function GlassIndicatorGrid({ children }: { children: ReactNode }) {
   return <div className="flex flex-col gap-5">{children}</div>;
 }
 
-export type TableRow = Record<string, string>;
-export function GlassTable({ columns, rows }: { columns: { key: string; label: string }[]; rows: TableRow[] }) {
+// A plain `Record<string, string> & {isKeyResult?: boolean}` fails to typecheck: TS applies the
+// index signature to every property access by string key, including the named ones, so a
+// boolean-valued `isKeyResult` conflicts with it. Widening the index signature's value type is
+// the straightforward fix; `columns.map(...)` below still only ever reads the string-valued
+// column cells, `rowKey`/`isKeyResult` are read through their own named access.
+export type TableRow = Record<string, string | boolean | undefined> & { rowKey?: string; isKeyResult?: boolean };
+export function GlassTable({
+  columns,
+  rows,
+  flashing = false,
+  activeRowKey,
+  onRowHover,
+}: {
+  columns: { key: string; label: string }[];
+  rows: TableRow[];
+  /** §42.3: true for ~600ms right after a card's own control changes a value -- tints every
+   * data cell once per interaction (reduced-motion users still get the tint, just unanimated). */
+  flashing?: boolean;
+  /** §42.4: the row whose `rowKey` currently matches the hovered/focused part of this card's own
+   * visual (or vice-versa) -- highlights that row. Scoped to this one card, never cross-card. */
+  activeRowKey?: string | null;
+  onRowHover?: (rowKey: string | null) => void;
+}) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[220px] border-collapse text-xs">
         <thead>
           <tr style={{ borderBottom: "1px solid var(--glass-table-row-border)" }}>
             {columns.map((c) => (
-              <th key={c.key} className="px-2 py-1.5 text-start font-semibold" style={{ background: "var(--glass-table-header-bg)", color: "var(--glass-table-header-text)" }}>
+              <th key={c.key} className="px-2 py-1.5 text-start text-[13px] font-bold" style={{ background: "var(--glass-table-header-bg)", color: "var(--glass-table-header-text)" }}>
                 {c.label}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {rows.map((r, i) => (
-            <tr key={i} style={{ borderBottom: i === rows.length - 1 ? "none" : "1px solid var(--glass-table-row-border)" }}>
-              {columns.map((c) => (
-                <td key={c.key} dir="ltr" className="px-2 py-1.5 text-end font-mono first:text-start" style={{ color: "var(--glass-table-text)" }}>
-                  {r[c.key]}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {rows.map((r, i) => {
+            const isKeyRow = r.isKeyResult ?? false;
+            const isActive = !!r.rowKey && r.rowKey === activeRowKey;
+            return (
+              <tr
+                key={i}
+                data-key={r.rowKey}
+                onPointerEnter={r.rowKey && onRowHover ? () => onRowHover(r.rowKey!) : undefined}
+                onPointerLeave={r.rowKey && onRowHover ? () => onRowHover(null) : undefined}
+                onFocus={r.rowKey && onRowHover ? () => onRowHover(r.rowKey!) : undefined}
+                onBlur={r.rowKey && onRowHover ? () => onRowHover(null) : undefined}
+                className={flashing ? "glass-value-flash" : undefined}
+                style={{
+                  borderBottom: i === rows.length - 1 ? "none" : "1px solid var(--glass-table-row-border)",
+                  background: isKeyRow ? "var(--glass-key-row-bg)" : isActive ? "var(--glass-table-header-bg)" : undefined,
+                  fontWeight: isKeyRow ? 700 : 400,
+                }}
+              >
+                {columns.map((c) => (
+                  <td
+                    key={c.key}
+                    dir="ltr"
+                    className="px-2 py-1.5 text-end font-mono tabular-nums first:text-start"
+                    style={{ color: isKeyRow ? "var(--glass-key-row-text)" : "var(--glass-table-text)" }}
+                  >
+                    {r[c.key]}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+export type HandleDirection = "horizontal" | "vertical" | "circular" | "free";
+const HANDLE_ICON: Record<HandleDirection, string> = {
+  horizontal: "↔",
+  vertical: "↕",
+  circular: "↻",
+  free: "✥",
+};
+const HANDLE_CURSOR: Record<HandleDirection, string> = {
+  horizontal: "cursor-ew-resize",
+  vertical: "cursor-ns-resize",
+  circular: "cursor-grab",
+  free: "cursor-grab",
+};
+
+/**
+ * §40: the one shared drag-handle look every indicator (and the hero) renders its own control
+ * with -- a direction icon, a pulsing ring until the visitor's first real press, grab/grabbing
+ * cursor, a >=44x44 hit area, and arrow-key stepping at the same granularity as a drag. Purely
+ * the affordance + a11y layer: the caller still owns the actual pointer-drag math and positions
+ * this absolutely (via `style`) wherever its own puck belongs.
+ */
+export function GlassHandle({
+  direction,
+  ariaLabel,
+  onStep,
+  style,
+  size = 26,
+  className = "",
+  valueNow = 50,
+  valueMin = 0,
+  valueMax = 100,
+}: {
+  direction: HandleDirection;
+  ariaLabel: string;
+  /** Called on ArrowLeft/Down (-1) and ArrowRight/Up (+1) -- the same snapped step a drag uses. */
+  onStep?: (delta: 1 | -1) => void;
+  style?: CSSProperties;
+  size?: number;
+  className?: string;
+  /** role="slider" requires its own aria-valuenow (jsx-a11y/role-has-required-aria-props) -- a
+   * caller that tracks a real 0-100-ish position can pass its own; otherwise this stays a
+   * reasonable midpoint rather than an actually-wrong 0, since this handle's own drag math
+   * (not this value) is what every caller already uses for the real position. */
+  valueNow?: number;
+  valueMin?: number;
+  valueMax?: number;
+}) {
+  const [touched, setTouched] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
+  const showPulse = !touched && !reducedMotion;
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (!onStep) return;
+    if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+      onStep(1);
+      e.preventDefault();
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+      onStep(-1);
+      e.preventDefault();
+    }
+  }
+
+  return (
+    <div
+      role="slider"
+      aria-label={ariaLabel}
+      aria-valuenow={valueNow}
+      aria-valuemin={valueMin}
+      aria-valuemax={valueMax}
+      tabIndex={0}
+      data-role="handle"
+      onPointerDown={() => setTouched(true)}
+      onKeyDown={handleKeyDown}
+      className={`absolute flex touch-none items-center justify-center rounded-full select-none ${HANDLE_CURSOR[direction]} active:cursor-grabbing ${className}`}
+      style={{ width: 44, height: 44, ...style }}
+    >
+      {showPulse && (
+        <span
+          aria-hidden="true"
+          className="glass-handle-pulse-ring absolute rounded-full"
+          style={{ width: size, height: size, background: "var(--glass-handle-ring)" }}
+        />
+      )}
+      <span
+        aria-hidden="true"
+        className="relative flex items-center justify-center rounded-full text-xs font-bold leading-none shadow-sm"
+        style={{ width: size, height: size, background: "var(--glass-handle-bg)", color: "var(--glass-handle-icon)", border: "1.5px solid var(--glass-handle-border)" }}
+      >
+        {HANDLE_ICON[direction]}
+      </span>
     </div>
   );
 }

@@ -36,7 +36,8 @@
     },
     "viewDocumentation": "Ver documentación",
     "backToHome": "Volver al inicio",
-    "backToDocs": "Volver a la documentación"
+    "backToDocs": "Volver a la documentación",
+    "dragToChange": "Arrastra para cambiar"
   },
   "site": {
     "title": "TooloraLabs",
@@ -5707,7 +5708,8 @@
         "numeratorPlaceholder": "Numerador",
         "denominatorPlaceholder": "Denominador",
         "clear": "Borrar",
-        "scenarioLabel": "Prueba un problema real"
+        "scenarioLabel": "Prueba un problema real",
+        "liveVisualLabel": "Vista previa en vivo"
       },
       "result": {
         "heading": "Resultado",
@@ -5715,7 +5717,7 @@
         "divideByZeroFraction": "No se puede dividir entre una fracción cuyo numerador es cero.",
         "mixedNumber": "Número mixto: {whole} {numerator}/{denominator}",
         "decimalEquivalent": "Equivalente decimal: {value}",
-        "diagramCaption": "{numerator}/{denominator} representada como partes iguales sombreadas.",
+        "diagramCaption": "{numerator}/{denominator} representada como manecillas en un círculo unitario.",
         "stepAddSubtract": "Convertido a un denominador común de {commonDenominator}: {scaledA}/{commonDenominator} y {scaledB}/{commonDenominator}, y luego simplificado a su mínima expresión.",
         "stepMultiply": "Multiplicación directa — numeradores {numA}×{numB} y denominadores {denA}×{denB} — y luego simplificado a su mínima expresión.",
         "stepDivide": "Multiplicado por el recíproco de la segunda fracción ({numB}/{denB} se convierte en {denB}/{numB}), y luego simplificado a su mínima expresión.",
@@ -5850,12 +5852,12 @@
           "subtitle": "Arrastra cualquiera de los puntos para cambiar esa fracción — cada indicador de abajo se actualiza al instante.",
           "resultLabel": "Resultado",
           "ariaLabel": "Dos puntos de fracción arrastrables en una recta numérica compartida, con un gráfico circular y una cuadrícula que muestran el resultado en vivo",
-          "gridLabel": "Cuadrícula común",
+          "gridLabel": "Escala común",
           "twoWaySynced": "(sincronizado con los campos de arriba)"
         },
         "mixedNumber": {
           "title": "Fracción impropia → Número mixto",
-          "subtitle": "El resultado en vivo es {value}",
+          "subtitle": "El ejemplo propio de esta tarjeta: {value}",
           "decrease": "Disminuir la parte entera",
           "increase": "Aumentar la parte entera",
           "colQuantity": "Cantidad",
@@ -5877,12 +5879,13 @@
           "colAasPercent": "A en %"
         },
         "commonGrid": {
-          "title": "Pilas de cuadrícula común",
-          "subtitle": "A y B reescaladas al mismo denominador para que cada celda sea del mismo tamaño",
+          "title": "Cintas de denominador común",
+          "subtitle": "A y B reescaladas al mismo denominador, mostradas como cintas proporcionales continuas",
           "denomAHint": "Denominador de A: {den}",
           "colStep": "Paso",
           "colForm": "Forma",
-          "colValue": "Valor"
+          "colValue": "Valor",
+          "combinedLabel": "A+B"
         },
         "wall": {
           "title": "Muro de fracciones",
@@ -5895,16 +5898,20 @@
           "cursor": "Posición del cursor"
         },
         "areaModel": {
-          "title": "Modelo de área de la multiplicación",
-          "subtitle": "Arrastra por la cuadrícula para sombrear las filas de A y las columnas de B",
+          "title": "La multiplicación como «B de A»",
+          "subtitle": "Arrastra cualquier barra para ver la parte de B sobre A reescalarse en vivo",
           "colQuantity": "Cantidad",
           "colValue": "Valor",
           "cells": "Celdas sombreadas",
-          "decimal": "Decimal"
+          "decimal": "Decimal",
+          "rowA": "A = {num}/{den}",
+          "rowB": "B = {num}/{den}",
+          "productCallout": "B de A = {value}",
+          "product": "Producto"
         },
         "percentWaffle": {
-          "title": "Cuadrícula porcentual",
-          "subtitle": "El {pct}% de la cuadrícula de 100 celdas está lleno",
+          "title": "Porcentaje como medidor de anillo",
+          "subtitle": "{pct}% del total, mostrado en un medidor de anillo",
           "colQuantity": "Cantidad",
           "colValue": "Valor",
           "result": "Resultado",
@@ -5913,8 +5920,8 @@
           "rounded": "Redondeado"
         },
         "gcdTiling": {
-          "title": "Teselado por MCD (Euclides)",
-          "subtitle": "Teselando un rectángulo de {a}×{b} con los cuadrados más grandes que caben",
+          "title": "MCD como escalera de cintas (Euclides)",
+          "subtitle": "Una escalera de cintas decrecientes para un rectángulo de {a}×{b}",
           "stepSliderAria": "Paso del algoritmo de Euclides",
           "gcdEquals": "mcd = {value}",
           "colQuantity": "Cantidad",

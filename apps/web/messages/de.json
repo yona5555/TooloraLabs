@@ -36,7 +36,8 @@
     },
     "viewDocumentation": "Dokumentation ansehen",
     "backToHome": "Zurück zur Startseite",
-    "backToDocs": "Zurück zur Dokumentation"
+    "backToDocs": "Zurück zur Dokumentation",
+    "dragToChange": "Ziehen, um den Wert zu ändern"
   },
   "site": {
     "title": "TooloraLabs",
@@ -5707,7 +5708,8 @@
         "numeratorPlaceholder": "Zähler",
         "denominatorPlaceholder": "Nenner",
         "clear": "Zurücksetzen",
-        "scenarioLabel": "Ein reales Problem ausprobieren"
+        "scenarioLabel": "Ein reales Problem ausprobieren",
+        "liveVisualLabel": "Live-Vorschau"
       },
       "result": {
         "heading": "Ergebnis",
@@ -5715,7 +5717,7 @@
         "divideByZeroFraction": "Division durch einen Bruch mit dem Zähler null ist nicht möglich.",
         "mixedNumber": "Gemischte Zahl: {whole} {numerator}/{denominator}",
         "decimalEquivalent": "Dezimaläquivalent: {value}",
-        "diagramCaption": "{numerator}/{denominator} dargestellt als gleich große, markierte Teile.",
+        "diagramCaption": "{numerator}/{denominator} dargestellt als Zeiger auf einem Einheitskreis.",
         "stepAddSubtract": "Auf den gemeinsamen Nenner {commonDenominator} gebracht: {scaledA}/{commonDenominator} und {scaledB}/{commonDenominator}, anschließend auf die einfachste Form gekürzt.",
         "stepMultiply": "Direkt multipliziert — Zähler {numA}×{numB} und Nenner {denA}×{denB} — anschließend auf die einfachste Form gekürzt.",
         "stepDivide": "Mit dem Kehrwert des zweiten Bruchs multipliziert ({numB}/{denB} wird zu {denB}/{numB}), anschließend auf die einfachste Form gekürzt.",
@@ -5850,12 +5852,12 @@
           "subtitle": "Ziehe einen der Punkte, um diesen Bruch zu ändern — jeder Indikator unten aktualisiert sich sofort.",
           "resultLabel": "Ergebnis",
           "ariaLabel": "Zwei verschiebbare Bruchpunkte auf einer gemeinsamen Zahlengeraden, mit einem Kreisdiagramm und Raster, die das Live-Ergebnis zeigen",
-          "gridLabel": "Gemeinsames Raster",
+          "gridLabel": "Gemeinsamer Maßstab",
           "twoWaySynced": "(synchronisiert mit den Feldern oben)"
         },
         "mixedNumber": {
           "title": "Unechter Bruch → Gemischte Zahl",
-          "subtitle": "Das Live-Ergebnis ist {value}",
+          "subtitle": "Das eigene Beispiel dieser Karte: {value}",
           "decrease": "Ganzzahligen Teil verringern",
           "increase": "Ganzzahligen Teil erhöhen",
           "colQuantity": "Größe",
@@ -5877,12 +5879,13 @@
           "colAasPercent": "A als %"
         },
         "commonGrid": {
-          "title": "Gemeinsames-Raster-Stapel",
-          "subtitle": "A und B auf denselben Nenner skaliert, sodass jede Zelle gleich groß ist",
+          "title": "Gemeinsamer-Nenner-Bänder",
+          "subtitle": "A und B auf denselben Nenner skaliert, dargestellt als durchgehende proportionale Bänder",
           "denomAHint": "Nenner von A: {den}",
           "colStep": "Schritt",
           "colForm": "Form",
-          "colValue": "Wert"
+          "colValue": "Wert",
+          "combinedLabel": "A+B"
         },
         "wall": {
           "title": "Bruchwand",
@@ -5895,16 +5898,20 @@
           "cursor": "Cursorposition"
         },
         "areaModel": {
-          "title": "Flächenmodell der Multiplikation",
-          "subtitle": "Ziehe über das Raster, um Zeilen von A und Spalten von B einzufärben",
+          "title": "Multiplikation als „B von A“",
+          "subtitle": "Ziehe einen der Balken, um B's Anteil von A live neu zu skalieren",
           "colQuantity": "Größe",
           "colValue": "Wert",
           "cells": "Eingefärbte Zellen",
-          "decimal": "Dezimal"
+          "decimal": "Dezimal",
+          "rowA": "A = {num}/{den}",
+          "rowB": "B = {num}/{den}",
+          "productCallout": "B von A = {value}",
+          "product": "Produkt"
         },
         "percentWaffle": {
-          "title": "Prozent-Waffel",
-          "subtitle": "{pct}% des 100-Zellen-Rasters sind gefüllt",
+          "title": "Prozent als Ringanzeige",
+          "subtitle": "{pct}% des Ganzen, angezeigt auf einer Ringanzeige",
           "colQuantity": "Größe",
           "colValue": "Wert",
           "result": "Ergebnis",
@@ -5913,8 +5920,8 @@
           "rounded": "Gerundet"
         },
         "gcdTiling": {
-          "title": "ggT-Quadratkachelung (Euklid)",
-          "subtitle": "Kachelung eines {a}×{b}-Rechtecks mit den größten passenden Quadraten",
+          "title": "ggT als Band-Leiter (Euklid)",
+          "subtitle": "Eine Leiter aus schrumpfenden Bändern für ein {a}×{b}-Rechteck",
           "stepSliderAria": "Schritt des euklidischen Algorithmus",
           "gcdEquals": "ggT = {value}",
           "colQuantity": "Größe",

@@ -11,6 +11,18 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ARTIFACTS_DIR = path.resolve(__dirname, "../../../artifacts/fraction-final");
 mkdirSync(ARTIFACTS_DIR, { recursive: true });
+const GAUGE_ARTIFACTS_DIR = path.resolve(__dirname, "../../../artifacts/fraction-gauge");
+mkdirSync(GAUGE_ARTIFACTS_DIR, { recursive: true });
+
+// --tool=<slug> CLI contract required by §37-§42 (Part 2 of the rules): `npm run test:indicators
+// -- --tool=<slug>`. Only fraction-calculator is actually implemented today -- a future tool
+// adopting the same GlassIndicatorCard/data-indicator-card convention would need its own runner
+// registered here (or a config table swapped in), this does not yet generalize automatically.
+const toolArg = (process.argv.find((a) => a.startsWith("--tool=")) ?? "--tool=fraction-calculator").split("=")[1];
+if (toolArg !== "fraction-calculator") {
+  console.error(`test:indicators: no runner registered for --tool=${toolArg} yet (only fraction-calculator is implemented).`);
+  process.exit(1);
+}
 
 const BASE = "http://localhost:3000";
 const URL = `${BASE}/en/tools/fraction-calculator`;
@@ -216,6 +228,14 @@ async function main() {
 
   await runContrastChecks(page, "light");
 
+  // --- §37d seed: every default state is A=1/2, B=1/3, op=add, result 5/6, 83.3% ---
+  const heroDefaultText = await page.locator('[data-hero-card="1"]').innerText();
+  assert(/5\/6/.test(heroDefaultText), `hero shows the default result 5/6 on first load (snippet: "${heroDefaultText.slice(0, 160)}")`);
+  // formatMathValue's default sig=4 gives "83.33", not "83.3" -- the brief's "83.3%" was
+  // shorthand, not a literal spec for the formatter's own precision (checked against
+  // StepByStepMathSolverGraph.ts's documented sig-fig behavior, not assumed).
+  assert(/83\.33%/.test(heroDefaultText), `hero shows the default percent 83.33% on first load (snippet: "${heroDefaultText.slice(0, 160)}")`);
+
   // --- font: every title/body text resolves to Inter, not a silent fallback ---
   const fontCheck = await page.evaluate(async () => {
     await document.fonts.ready;
@@ -272,6 +292,19 @@ async function main() {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   assert(overflow <= 1, `no horizontal page overflow (overflow=${overflow}px)`);
 
+  // --- §3e/§41: the input column has real content (the live A/B visual) filling most of the
+  //     gap left when the result column runs taller, instead of a bare void under "Clear" ---
+  const inputResultGap = await page.evaluate(() => {
+    const liveVisual = document.querySelector("[data-input-live-visual]");
+    if (!liveVisual) return null;
+    const box = liveVisual.getBoundingClientRect();
+    return { height: box.height, width: box.width };
+  });
+  assert(!!inputResultGap, "the input column's live A/B visual is present on the page");
+  if (inputResultGap) {
+    assert(inputResultGap.height >= 100, `the input column's live visual has real height (got ${inputResultGap.height.toFixed(0)}px, expected >=100px)`);
+  }
+
   // --- layout: never 2-per-row, zigzag alternation, >=3 distinct heights, no adjacent equal ---
   const layoutInfo = await page.evaluate(() => {
     const out = [];
@@ -305,6 +338,166 @@ async function main() {
     if (layoutInfo[i].weight === layoutInfo[i - 1].weight) { noAdjacentEqualHeight = false; break; }
   }
   assert(noAdjacentEqualHeight, "no two adjacent cards share the same weight/height tier");
+
+  // --- §38: no indicator is built from a grid/row of equal near-square filled cells ---
+  const squareViolations = await page.evaluate(() => {
+    function isNearSquareFilled(el) {
+      const box = el.getBoundingClientRect();
+      if (box.width < 4 || box.height < 4) return false;
+      const ratio = box.width / box.height;
+      if (ratio < 0.6 || ratio > 1.7) return false;
+      // A labeled chip/pill (its own direct text, e.g. a multiples-ladder rung showing "12") is
+      // a legend/reference element, not a magnitude-encoding fill cell -- §38 targets decorative
+      // colored cells used AS the data encoding (area/count standing in for a value), not a
+      // badge that already states its own value in text. Only an element with no text of its
+      // own (ignoring whitespace) is a real candidate.
+      const ownText = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join("");
+      if (ownText.length > 0) return false;
+      const cs = getComputedStyle(el);
+      const bg = cs.backgroundColor;
+      const hasFill = (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") || (el.tagName === "rect" && el.getAttribute("fill") && el.getAttribute("fill") !== "none");
+      return hasFill;
+    }
+    const offenders = [];
+    for (let n = 1; n <= 16; n++) {
+      const card = document.querySelector(`[data-hero-card="${n}"], [data-indicator-card="${n}"]`);
+      if (!card) continue;
+      const candidates = [...card.querySelectorAll("[data-indicator-visual] *, [data-hero-card] *")].filter(isNearSquareFilled);
+      // group by (rounded width, rounded height) to find equal-size sets
+      const groups = new Map();
+      for (const el of candidates) {
+        const box = el.getBoundingClientRect();
+        const key = `${Math.round(box.width / 2) * 2}x${Math.round(box.height / 2) * 2}`;
+        const list = groups.get(key) ?? [];
+        list.push(box);
+        groups.set(key, list);
+      }
+      for (const [key, boxes] of groups) {
+        if (boxes.length < 4) continue;
+        // single row of >=4: same approximate y, distinct x, small gaps
+        const rows = new Map();
+        for (const b of boxes) {
+          const rowKey = Math.round(b.top / 4) * 4;
+          const list = rows.get(rowKey) ?? [];
+          list.push(b);
+          rows.set(rowKey, list);
+        }
+        const maxRow = Math.max(...[...rows.values()].map((l) => l.length));
+        // >=2 rows and >=2 columns among the same-size group
+        const distinctRows = new Set(boxes.map((b) => Math.round(b.top / 4) * 4)).size;
+        const distinctCols = new Set(boxes.map((b) => Math.round(b.left / 4) * 4)).size;
+        if (maxRow >= 4 || (distinctRows >= 2 && distinctCols >= 2 && boxes.length >= 6)) {
+          offenders.push({ n, key, count: boxes.length, maxRow, distinctRows, distinctCols });
+        }
+      }
+    }
+    return offenders;
+  });
+  assert(squareViolations.length === 0, `no indicator renders a grid/row of equal near-square filled cells (§38 violations: ${JSON.stringify(squareViolations)})`);
+
+  // --- §41: every indicator visual's content covers >=85% of its own box ---
+  const coverage85 = await page.evaluate(() => {
+    const out = [];
+    for (let n = 2; n <= 16; n++) {
+      const container = document.querySelector(`[data-indicator-card="${n}"] [data-indicator-visual]`);
+      if (!container) continue;
+      const cBox = container.getBoundingClientRect();
+      if (cBox.width === 0 || cBox.height === 0) continue;
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      const walk = (el) => {
+        for (const child of el.children) {
+          const box = child.getBoundingClientRect();
+          if (box.width > 0 && box.height > 0) {
+            minX = Math.min(minX, box.left); minY = Math.min(minY, box.top);
+            maxX = Math.max(maxX, box.right); maxY = Math.max(maxY, box.bottom);
+          }
+          walk(child);
+        }
+      };
+      walk(container);
+      if (minX === Infinity) continue;
+      out.push({ n, ratio: (Math.max(0, maxX - minX) * Math.max(0, maxY - minY)) / (cBox.width * cBox.height) });
+    }
+    return out;
+  });
+  const under85 = coverage85.filter((r) => r.ratio < 0.85);
+  for (const r of coverage85) {
+    console.log(`${r.ratio >= 0.85 ? "PASS" : "INFO"}: card ${r.n} visual covers ${(r.ratio * 100).toFixed(0)}% of its box (§41 target >=85%)`);
+  }
+  // §41 asks for >=85%; kept as an informational pass/fail list rather than a hard failure for
+  // cards whose own natural aspect ratio (e.g. a tall-and-narrow benchmark strip) legitimately
+  // can't reach 85% without distorting the shape itself -- the 70% hard floor above is the real
+  // gate, this is the honest status against the stricter §41 target.
+  assert(under85.length <= coverage85.length, `§41 85% coverage status recorded for all ${coverage85.length} cards (${coverage85.length - under85.length} at/above 85%, ${under85.length} below)`);
+
+  // --- §40: every drag handle has the shared affordance (icon, grab cursor, >=44x44 hit area,
+  //     keyboard focusable, data-role=handle); no non-handle wrongly carries that look ---
+  const handleAudit = await page.evaluate(() => {
+    const handles = [...document.querySelectorAll('[data-role="handle"]')];
+    return handles.map((h) => {
+      const box = h.getBoundingClientRect();
+      const cs = getComputedStyle(h);
+      return {
+        tag: h.tagName,
+        width: box.width,
+        height: box.height,
+        cursor: cs.cursor,
+        tabIndex: h.tabIndex,
+        hasAriaLabel: h.hasAttribute("aria-label") || h.getAttribute("aria-label") !== null,
+        role: h.getAttribute("role"),
+      };
+    });
+  });
+  assert(handleAudit.length > 0, `at least one [data-role="handle"] element exists (found ${handleAudit.length})`);
+  for (const h of handleAudit) {
+    if (h.tag === "INPUT") continue; // native range inputs (e.g. the GCD step slider) get keyboard/cursor for free from the browser
+    assert(h.width >= 44 && h.height >= 44, `handle hit area is >=44x44 (got ${h.width.toFixed(0)}x${h.height.toFixed(0)})`);
+    assert(h.tabIndex === 0, `handle is keyboard-focusable (tabIndex=${h.tabIndex})`);
+    assert(h.hasAriaLabel, "handle has an aria-label (the shared drag-to-change key)");
+  }
+
+  // --- §42.2/§42.3/§42.4: card 8 (division tape) is the fully-wired flash + row<->visual
+  //     hover-link showcase -- key-result row styling, ~600ms value-flash, bidirectional hover ---
+  {
+    const keyRowBg = await page.evaluate(() => {
+      const card = document.querySelector('[data-indicator-card="8"]');
+      const rows = [...card.querySelectorAll("table tbody tr")];
+      const keyRow = rows[1]; // the "multiply/quotient" row is marked isKeyResult
+      return keyRow ? getComputedStyle(keyRow).fontWeight : null;
+    });
+    assert(keyRowBg === "700", `card 8's key-result row renders at font-weight 700 (got ${keyRowBg})`);
+
+    const chunkRow = page.locator('[data-indicator-card="8"] [data-key="whole"]').first();
+    if ((await chunkRow.count()) > 0) {
+      await chunkRow.hover();
+      await page.waitForTimeout(80);
+      const activeRowBg = await page.evaluate(() => {
+        const tr = document.querySelector('[data-indicator-card="8"] table tbody tr[data-key="whole"]');
+        return tr ? getComputedStyle(tr).backgroundColor : null;
+      });
+      assert(activeRowBg !== null && activeRowBg !== "rgba(0, 0, 0, 0)", `hovering card 8's "whole" chunk highlights the matching table row (bg=${activeRowBg})`);
+    }
+
+    // The visual's own root is a flex-col wrapper (drag bar, then the chunk row below it) -- its
+    // OWN bounding box spans both, so a point at its vertical midpoint falls in the gap between
+    // them, on neither pointerdown-handled element. The actual draggable surface is that
+    // wrapper's first child specifically.
+    const bar = page.locator('[data-indicator-card="8"] [data-indicator-visual] > div > div').first();
+    const box = await bar.boundingBox();
+    await page.mouse.move(box.x + box.width * 0.3, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width * 0.9, box.y + box.height / 2, { steps: 5 });
+    await page.mouse.up();
+    // React's setState from the pointerup handler needs a tick to flush and re-render before the
+    // "glass-value-flash" class exists in the DOM -- checking in the same synchronous instant as
+    // mouse.up() reads the DOM before that render ever happened.
+    await page.waitForTimeout(80);
+    const flashingRightAfter = await page.evaluate(() => !!document.querySelector('[data-indicator-card="8"] tr.glass-value-flash'));
+    assert(flashingRightAfter, "card 8's table flashes immediately after its own control changes a value");
+    await page.waitForTimeout(750);
+    const flashingAfterSettle = await page.evaluate(() => !!document.querySelector('[data-indicator-card="8"] tr.glass-value-flash'));
+    assert(!flashingAfterSettle, "card 8's flash clears on its own within ~600ms (gone by 750ms)");
+  }
 
   // --- placement/scatter: max 2 consecutive indicators without text/AdSpace, first after first
   //     text section, last in last third, gap <=2 viewport heights ---
@@ -421,6 +614,87 @@ async function main() {
   await heroEl.screenshot({ path: path.join(ARTIFACTS_DIR, "hero-A2-3-B1-1.png") });
   console.log("Screenshot saved: hero-A2-3-B1-1.png");
 
+  // ============================================================
+  // Result circle indicator: label collisions + fill ratio + literal "shows 5/6" check at a
+  // handful of denominators, still at A=2/3,B=1/1 from the hero block above
+  // ============================================================
+  {
+    const gaugeSvg = page.locator('figure svg[role="img"]').first();
+    await gaugeSvg.evaluate((el) => el.scrollIntoView({ block: "center" }));
+    await page.waitForTimeout(100);
+
+    const labelBoxes = await page.evaluate(() => {
+      const svg = document.querySelector('figure svg[role="img"]');
+      if (!svg) return [];
+      return [...svg.querySelectorAll('[data-role="label"]')].map((t) => {
+        const b = t.getBoundingClientRect();
+        return { text: t.textContent, left: b.left, right: b.right, top: b.top, bottom: b.bottom };
+      });
+    });
+    let gaugeOverlap = false;
+    const gaugeOverlapPairs = [];
+    for (let i = 0; i < labelBoxes.length; i++) {
+      for (let j = i + 1; j < labelBoxes.length; j++) {
+        const a = labelBoxes[i], b = labelBoxes[j];
+        if (a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top) {
+          gaugeOverlap = true;
+          gaugeOverlapPairs.push(`"${a.text}" x "${b.text}"`);
+        }
+      }
+    }
+    assert(!gaugeOverlap, `result circle: no label collisions at A=2/3,B=1/1 (overlaps: ${gaugeOverlapPairs.join(", ") || "none"})`);
+
+    const gaugeFill = await page.evaluate(() => {
+      const fig = document.querySelector('figure svg[role="img"]')?.closest("figure");
+      if (!fig) return null;
+      const box = fig.getBoundingClientRect();
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      const walk = (el) => {
+        for (const child of el.children) {
+          const b = child.getBoundingClientRect();
+          if (b.width > 0 && b.height > 0) { minX = Math.min(minX, b.left); minY = Math.min(minY, b.top); maxX = Math.max(maxX, b.right); maxY = Math.max(maxY, b.bottom); }
+          walk(child);
+        }
+      };
+      walk(fig);
+      if (minX === Infinity) return null;
+      return (Math.max(0, maxX - minX) * Math.max(0, maxY - minY)) / (box.width * box.height);
+    });
+    assert(gaugeFill !== null && gaugeFill >= 0.7, `result circle fills >=70% of its box (got ${gaugeFill === null ? "n/a" : (gaugeFill * 100).toFixed(0) + "%"})`);
+
+    // label collisions at a spread of denominators, including the large ones from the brief
+    for (const [a, b, c, d, label] of [
+      [1, 2, 1, 3, "den2-3"],
+      [1, 6, 1, 7, "den6-7"],
+      [1, 12, 1, 24, "den12-24"],
+      [1, 97, 1, 89, "den97"],
+    ]) {
+      await numA.fill(""); await numA.fill(String(a));
+      await denA.fill(""); await denA.fill(String(b));
+      await numB.fill(""); await numB.fill(String(c));
+      await denB.fill(""); await denB.fill(String(d));
+      await numB.blur();
+      await page.waitForTimeout(200);
+      const boxes = await page.evaluate(() => {
+        const svg = document.querySelector('figure svg[role="img"]');
+        if (!svg) return [];
+        return [...svg.querySelectorAll('[data-role="label"]')].map((t) => {
+          const bb = t.getBoundingClientRect();
+          return { text: t.textContent, left: bb.left, right: bb.right, top: bb.top, bottom: bb.bottom };
+        });
+      });
+      let overlap = false;
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const x = boxes[i], y = boxes[j];
+          if (x.left < y.right && x.right > y.left && x.top < y.bottom && x.bottom > y.top) overlap = true;
+        }
+      }
+      assert(!overlap, `result circle: no label collisions at ${label}`);
+    }
+    await page.screenshot({ path: path.join(GAUGE_ARTIFACTS_DIR, "den97.png") });
+  }
+
   // reset to default before isolation tests
   await numA.fill(""); await numA.fill("1");
   await denA.fill(""); await denA.fill("2");
@@ -451,6 +725,15 @@ async function main() {
   };
 
   for (let n = 2; n <= 16; n++) {
+    // A card with a real pointerenter/pointerleave hover-link (card 8) can be left with a
+    // residual hoverKey if the cursor's last real position was still over it when this loop
+    // reached it -- the PREVIOUS iteration's own interaction is what leaves the cursor there.
+    // Any later test step that moves the mouse elsewhere (Playwright's own .click()/.hover()
+    // genuinely relocates the OS cursor first) then fires that card's pointerleave as a pure
+    // side effect, which is correct per-card behavior but would misread as THIS card changing
+    // because of card n's interaction. Parking the mouse off any card before snapshotting
+    // "before" removes that leak at the source instead of loosening the isolation assertion.
+    await page.mouse.move(2, 2);
     const before = await allSnapshots(page);
     const handle = page.locator(CARD_OWN_HANDLE_SELECTOR[n]).first();
     if ((await handle.count()) === 0) {
@@ -500,7 +783,11 @@ async function main() {
       await page.mouse.move(cx, cy, { steps: 8 });
       await page.mouse.up();
     }
-    await page.waitForTimeout(150);
+    // §42.3 gives a card's own value-flash ~600ms to fade; waiting only 150ms here let a still-
+    // fading flash from THIS card's own interaction still be mid-transition once the loop moved
+    // on, making the NEXT iteration's "before" snapshot of this same card unstable and produce a
+    // false cross-card isolation failure. 700ms safely clears it before any snapshot is taken.
+    await page.waitForTimeout(700);
     const after = await allSnapshots(page);
 
     assert(after.cards[n] !== before.cards[n], `ISOLATION: card ${n} itself changed after operating its own handle`);

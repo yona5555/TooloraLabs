@@ -36,7 +36,8 @@
     },
     "viewDocumentation": "Voir la documentation",
     "backToHome": "Retour à l'accueil",
-    "backToDocs": "Retour à la documentation"
+    "backToDocs": "Retour à la documentation",
+    "dragToChange": "Faites glisser pour modifier"
   },
   "site": {
     "title": "TooloraLabs",
@@ -5707,7 +5708,8 @@
         "numeratorPlaceholder": "Numérateur",
         "denominatorPlaceholder": "Dénominateur",
         "clear": "Effacer",
-        "scenarioLabel": "Essayer un problème réel"
+        "scenarioLabel": "Essayer un problème réel",
+        "liveVisualLabel": "Aperçu en direct"
       },
       "result": {
         "heading": "Résultat",
@@ -5715,7 +5717,7 @@
         "divideByZeroFraction": "Impossible de diviser par une fraction dont le numérateur est nul.",
         "mixedNumber": "Nombre fractionnaire : {whole} {numerator}/{denominator}",
         "decimalEquivalent": "Équivalent décimal : {value}",
-        "diagramCaption": "{numerator}/{denominator} représenté par des parts égales colorées.",
+        "diagramCaption": "{numerator}/{denominator} représenté par des aiguilles sur un cercle unité.",
         "stepAddSubtract": "Converti à un dénominateur commun de {commonDenominator} : {scaledA}/{commonDenominator} et {scaledB}/{commonDenominator}, puis simplifié à sa forme la plus simple.",
         "stepMultiply": "Multiplication directe — numérateurs {numA}×{numB} et dénominateurs {denA}×{denB} — puis simplifié à sa forme la plus simple.",
         "stepDivide": "Multiplié par l'inverse de la seconde fraction ({numB}/{denB} devient {denB}/{numB}), puis simplifié à sa forme la plus simple.",
@@ -5850,12 +5852,12 @@
           "subtitle": "Faites glisser l'un des points pour changer cette fraction — chaque indicateur ci-dessous se met à jour instantanément.",
           "resultLabel": "Résultat",
           "ariaLabel": "Deux points de fraction déplaçables sur une droite numérique commune, avec un camembert et une grille montrant le résultat en direct",
-          "gridLabel": "Grille commune",
+          "gridLabel": "Échelle commune",
           "twoWaySynced": "(synchronisé avec les champs ci-dessus)"
         },
         "mixedNumber": {
           "title": "Fraction impropre → Nombre mixte",
-          "subtitle": "Le résultat en direct est {value}",
+          "subtitle": "L'exemple propre à cette carte : {value}",
           "decrease": "Diminuer la partie entière",
           "increase": "Augmenter la partie entière",
           "colQuantity": "Quantité",
@@ -5877,12 +5879,13 @@
           "colAasPercent": "A en %"
         },
         "commonGrid": {
-          "title": "Piles sur grille commune",
-          "subtitle": "A et B remis à l'échelle au même dénominateur pour que chaque case ait la même taille",
+          "title": "Rubans à dénominateur commun",
+          "subtitle": "A et B remis à l'échelle au même dénominateur, représentés par des rubans proportionnels continus",
           "denomAHint": "Dénominateur de A : {den}",
           "colStep": "Étape",
           "colForm": "Forme",
-          "colValue": "Valeur"
+          "colValue": "Valeur",
+          "combinedLabel": "A+B"
         },
         "wall": {
           "title": "Mur de fractions",
@@ -5895,16 +5898,20 @@
           "cursor": "Position du curseur"
         },
         "areaModel": {
-          "title": "Modèle d'aire de la multiplication",
-          "subtitle": "Faites glisser sur la grille pour ombrer les lignes de A et les colonnes de B",
+          "title": "La multiplication comme « B de A »",
+          "subtitle": "Faites glisser une barre pour voir la part de B dans A se redimensionner en direct",
           "colQuantity": "Quantité",
           "colValue": "Valeur",
           "cells": "Cases ombrées",
-          "decimal": "Décimal"
+          "decimal": "Décimal",
+          "rowA": "A = {num}/{den}",
+          "rowB": "B = {num}/{den}",
+          "productCallout": "B de A = {value}",
+          "product": "Produit"
         },
         "percentWaffle": {
-          "title": "Grille de pourcentage",
-          "subtitle": "{pct}% de la grille de 100 cases est rempli",
+          "title": "Le pourcentage comme jauge circulaire",
+          "subtitle": "{pct}% du tout, affiché sur une jauge circulaire",
           "colQuantity": "Quantité",
           "colValue": "Valeur",
           "result": "Résultat",
@@ -5913,8 +5920,8 @@
           "rounded": "Arrondi"
         },
         "gcdTiling": {
-          "title": "Pavage par PGCD (Euclide)",
-          "subtitle": "Pavage d'un rectangle {a}×{b} avec les plus grands carrés possibles",
+          "title": "PGCD comme échelle de rubans (Euclide)",
+          "subtitle": "Une échelle de rubans qui se réduisent pour un rectangle {a}×{b}",
           "stepSliderAria": "Étape de l'algorithme d'Euclide",
           "gcdEquals": "pgcd = {value}",
           "colQuantity": "Quantité",

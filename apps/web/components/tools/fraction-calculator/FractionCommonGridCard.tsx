@@ -4,18 +4,33 @@ import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/Glass
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, lcm } from "@tooloralabs/tools";
 
-function Stack({ filled, total, color }: { filled: number; total: number; color: string }) {
+/** §38: a continuous proportional ribbon, never a stack of equal-size cells -- height is a plain
+ * percentage fill, with a faint tick line at every whole unit for texture only (not a filled
+ * cell). */
+function Ribbon({ filled, total, color, label }: { filled: number; total: number; color: string; label: string }) {
+  const pct = total > 0 ? Math.max(0, Math.min(100, (filled / total) * 100)) : 0;
+  const tickEvery = total > 0 ? 100 / total : 100;
   return (
-    <div className="flex h-full flex-1 flex-col-reverse gap-1">
-      {Array.from({ length: total }, (_, i) => (
-        <div key={i} className="w-full flex-1 rounded-sm" style={{ background: i < filled ? color : "var(--glass-track)" }} />
-      ))}
+    <div className="flex h-full flex-1 flex-col items-center gap-1.5">
+      <div
+        className="relative h-36 w-full overflow-hidden rounded-md"
+        style={{
+          background: `var(--glass-track)`,
+          backgroundImage: `repeating-linear-gradient(to top, color-mix(in oklab, var(--glass-border) 70%, transparent) 0, color-mix(in oklab, var(--glass-border) 70%, transparent) 1px, transparent 1px, transparent ${tickEvery}%)`,
+        }}
+      >
+        <div className="absolute inset-x-0 bottom-0 rounded-md transition-[height] duration-300 ease-out" style={{ height: `${pct}%`, background: color }} />
+      </div>
+      <span className="text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+        {label}
+      </span>
     </div>
   );
 }
 
-/** A and B rescaled to their LCD so every cell represents the same-size piece — drag the shared
- * denominator stepper to see both stacks rebuild from the real scaled numerators. */
+/** A and B rescaled to their LCD and shown as continuous proportional ribbons (never equal cells,
+ * §38) so every ribbon's fill height is the real scaled fraction -- drag the shared denominator
+ * stepper to see both ribbons rebuild from the real scaled numerators. */
 export default function FractionCommonGridCard() {
   const t = useTranslations("tools.fraction-calculator.education.commonGrid");
   const { dims, setDim } = useFractionCardState();
@@ -38,9 +53,9 @@ export default function FractionCommonGridCard() {
       visual={
         <div className="flex w-full flex-col items-center gap-2">
           <div className="flex h-36 w-full items-stretch gap-3">
-            <Stack filled={scaledA} total={lcd} color="var(--glass-accent-1-strong)" />
-            <Stack filled={scaledB} total={lcd} color="var(--glass-accent-2-strong)" />
-            <Stack filled={Math.min(lcd, scaledA + scaledB)} total={lcd} color="var(--glass-accent-3-strong)" />
+            <Ribbon filled={scaledA} total={lcd} color="var(--glass-accent-1-strong)" label="A" />
+            <Ribbon filled={scaledB} total={lcd} color="var(--glass-accent-2-strong)" label="B" />
+            <Ribbon filled={Math.min(lcd, scaledA + scaledB)} total={lcd} color="var(--glass-accent-3-strong)" label={t("combinedLabel")} />
           </div>
           <div className="flex items-center gap-2">
             <button type="button" onClick={() => nudgeDenominator(-1)} className="h-6 w-6 rounded-full text-xs font-bold" style={{ background: "var(--glass-track)", color: "var(--glass-title)" }}>
@@ -65,7 +80,7 @@ export default function FractionCommonGridCard() {
           rows={[
             { step: "LCD", form: `lcm(${formatMathValue(denominatorA)},${formatMathValue(denominatorB)})`, value: formatMathValue(lcd) },
             { step: "A", form: `${formatMathValue(numeratorA)}×${formatMathValue(lcd / (denominatorA || 1))}`, value: `${formatMathValue(scaledA)}/${formatMathValue(lcd)}` },
-            { step: "B", form: `${formatMathValue(numeratorB)}×${formatMathValue(lcd / (denominatorB || 1))}`, value: `${formatMathValue(scaledB)}/${formatMathValue(lcd)}` },
+            { step: "B", form: `${formatMathValue(numeratorB)}×${formatMathValue(lcd / (denominatorB || 1))}`, value: `${formatMathValue(scaledB)}/${formatMathValue(lcd)}`, isKeyResult: true },
           ]}
         />
       }

@@ -36,7 +36,8 @@
     },
     "viewDocumentation": "View Documentation",
     "backToHome": "Back to home",
-    "backToDocs": "Back to docs"
+    "backToDocs": "Back to docs",
+    "dragToChange": "Drag to change"
   },
   "site": {
     "title": "TooloraLabs",
@@ -5707,7 +5708,8 @@
         "numeratorPlaceholder": "Numerator",
         "denominatorPlaceholder": "Denominator",
         "clear": "Clear",
-        "scenarioLabel": "Try a real problem"
+        "scenarioLabel": "Try a real problem",
+        "liveVisualLabel": "Live preview"
       },
       "result": {
         "heading": "Result",
@@ -5715,7 +5717,7 @@
         "divideByZeroFraction": "Cannot divide by a fraction whose numerator is zero.",
         "mixedNumber": "Mixed number: {whole} {numerator}/{denominator}",
         "decimalEquivalent": "Decimal equivalent: {value}",
-        "diagramCaption": "{numerator}/{denominator} shown as equal shaded parts.",
+        "diagramCaption": "{numerator}/{denominator} shown as hands on a unit circle.",
         "stepAddSubtract": "Converted to a common denominator of {commonDenominator}: {scaledA}/{commonDenominator} and {scaledB}/{commonDenominator}, then simplified to lowest terms.",
         "stepMultiply": "Multiplied straight across — numerators {numA}×{numB} and denominators {denA}×{denB} — then simplified to lowest terms.",
         "stepDivide": "Multiplied by the reciprocal of the second fraction ({numB}/{denB} becomes {denB}/{numB}), then simplified to lowest terms.",
@@ -5850,12 +5852,12 @@
           "subtitle": "Drag either point to change that fraction — every indicator below updates with it.",
           "resultLabel": "Result",
           "ariaLabel": "Two draggable fraction points on a shared number line, with a live pie and grid showing the result",
-          "gridLabel": "Common Grid",
+          "gridLabel": "Common Scale",
           "twoWaySynced": "(synced with the fields above)"
         },
         "mixedNumber": {
           "title": "Improper → Mixed Number",
-          "subtitle": "The live result is {value}",
+          "subtitle": "This card's own example: {value}",
           "decrease": "Decrease whole part",
           "increase": "Increase whole part",
           "colQuantity": "Quantity",
@@ -5877,12 +5879,13 @@
           "colAasPercent": "A as %"
         },
         "commonGrid": {
-          "title": "Common-Grid Stacks",
-          "subtitle": "A and B rescaled to the same denominator so every cell is the same size",
+          "title": "Common-Denominator Ribbons",
+          "subtitle": "A and B rescaled to the same denominator, shown as continuous proportional ribbons",
           "denomAHint": "A's denominator: {den}",
           "colStep": "Step",
           "colForm": "Form",
-          "colValue": "Value"
+          "colValue": "Value",
+          "combinedLabel": "A+B"
         },
         "wall": {
           "title": "Fraction Wall",
@@ -5895,16 +5898,20 @@
           "cursor": "Cursor position"
         },
         "areaModel": {
-          "title": "Multiplication Area Model",
-          "subtitle": "Drag across the grid to shade A's rows and B's columns",
+          "title": "Multiplication as “B of A”",
+          "subtitle": "Drag either bar to see B's own share of A rescale live",
           "colQuantity": "Quantity",
           "colValue": "Value",
           "cells": "Shaded cells",
-          "decimal": "Decimal"
+          "decimal": "Decimal",
+          "rowA": "A = {num}/{den}",
+          "rowB": "B = {num}/{den}",
+          "productCallout": "B of A = {value}",
+          "product": "Product"
         },
         "percentWaffle": {
-          "title": "Percent Waffle",
-          "subtitle": "{pct}% of the 100-cell grid is filled",
+          "title": "Percent as a Ring Gauge",
+          "subtitle": "{pct}% of the whole, shown on a ring gauge",
           "colQuantity": "Quantity",
           "colValue": "Value",
           "result": "Result",
@@ -5913,8 +5920,8 @@
           "rounded": "Rounded"
         },
         "gcdTiling": {
-          "title": "GCD Square Tiling (Euclid)",
-          "subtitle": "Tiling a {a}×{b} rectangle with the largest squares that fit",
+          "title": "GCD as a Tape Ladder (Euclid)",
+          "subtitle": "A ladder of shrinking tape bars for a {a}×{b} rectangle",
           "stepSliderAria": "Euclid's algorithm step",
           "gcdEquals": "gcd = {value}",
           "colQuantity": "Quantity",

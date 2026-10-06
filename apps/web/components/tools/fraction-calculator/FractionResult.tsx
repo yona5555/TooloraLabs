@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import FractionBarDiagram from "./FractionBarDiagram";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import "@/components/tool-ui/glass/glass-tokens.css";
+import FractionResultGauge from "./FractionResultGauge";
 import FractionShareExportModal from "./FractionShareExportModal";
 import type { FractionOperation, FractionResult as Result } from "./types";
 
@@ -46,27 +48,21 @@ export default function FractionResult({ result, computed }: Props) {
 
   if (result.error === "zero-denominator") {
     return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t("zeroDenominator")}</p>
-        </div>
-      </div>
+      <SectionCard title={t("heading")}>
+        <p className="text-center text-sm leading-6" style={{ color: "var(--glass-subtitle)" }}>
+          {t("zeroDenominator")}
+        </p>
+      </SectionCard>
     );
   }
 
   if (result.error === "divide-by-zero") {
     return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t("divideByZeroFraction")}</p>
-        </div>
-      </div>
+      <SectionCard title={t("heading")}>
+        <p className="text-center text-sm leading-6" style={{ color: "var(--glass-subtitle)" }}>
+          {t("divideByZeroFraction")}
+        </p>
+      </SectionCard>
     );
   }
 
@@ -103,49 +99,42 @@ export default function FractionResult({ result, computed }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-          <FractionShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={heroValue} sentence={stepSentence} />
+      <SectionCard title={t("heading")} action={<FractionShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={heroValue} sentence={stepSentence} />}>
+        <div dir="ltr" className="flex items-center justify-center gap-3 font-mono text-4xl font-bold" style={{ color: "var(--glass-accent-1-strong)" }}>
+          <FractionGlyph numerator={numeratorA} denominator={denominatorA} />
+          <span className="text-2xl opacity-70">{OPERATION_SYMBOL[operation]}</span>
+          <FractionGlyph numerator={numeratorB} denominator={denominatorB} />
+          <span className="text-2xl opacity-70">=</span>
+          <FractionGlyph numerator={result.result.numerator} denominator={result.result.denominator} />
         </div>
 
-        <div className="p-4 lg:p-6">
-          <div dir="ltr" className="flex items-center justify-center gap-3 font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            <FractionGlyph numerator={numeratorA} denominator={denominatorA} />
-            <span className="text-2xl opacity-70">{OPERATION_SYMBOL[operation]}</span>
-            <FractionGlyph numerator={numeratorB} denominator={denominatorB} />
-            <span className="text-2xl opacity-70">=</span>
-            <FractionGlyph numerator={result.result.numerator} denominator={result.result.denominator} />
-          </div>
-
-          {result.mixed && (
-            <p className="mt-3 text-center text-sm text-zinc-500 dark:text-zinc-400">
-              {t("mixedNumber", {
-                whole: num(result.mixed.whole),
-                numerator: num(result.mixed.numerator),
-                denominator: num(result.mixed.denominator),
-              })}
-            </p>
-          )}
-
-          <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
-            {t("decimalEquivalent", { value: num(result.decimal) })}
-          </p>
-
-          <FractionBarDiagram
-            numerator={result.result.numerator}
-            denominator={result.result.denominator}
-            caption={t("diagramCaption", {
-              numerator: num(result.result.numerator),
-              denominator: num(result.result.denominator),
+        {result.mixed && (
+          <p className="mt-3 text-center text-sm" style={{ color: "var(--glass-muted)" }}>
+            {t("mixedNumber", {
+              whole: num(result.mixed.whole),
+              numerator: num(result.mixed.numerator),
+              denominator: num(result.mixed.denominator),
             })}
-          />
-
-          <p className="mt-4 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-600 dark:border-zinc-800 dark:text-zinc-300">
-            {stepSentence}
           </p>
-        </div>
-      </div>
+        )}
+
+        <p className="mt-1 text-center text-sm" style={{ color: "var(--glass-muted)" }}>
+          {t("decimalEquivalent", { value: num(result.decimal) })}
+        </p>
+
+        <FractionResultGauge
+          numerator={result.result.numerator}
+          denominator={result.result.denominator}
+          caption={t("diagramCaption", {
+            numerator: num(result.result.numerator),
+            denominator: num(result.result.denominator),
+          })}
+        />
+
+        <p className="mt-4 pt-4 text-sm leading-6" style={{ borderTop: "1px solid var(--glass-table-row-border)", color: "var(--glass-subtitle)" }}>
+          {stepSentence}
+        </p>
+      </SectionCard>
     </div>
   );
 }

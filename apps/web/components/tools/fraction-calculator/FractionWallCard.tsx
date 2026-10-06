@@ -11,9 +11,11 @@ function Row({ label, segments, color, cutAt }: { label: string; segments: numbe
       <span className="w-7 shrink-0 text-[10px] font-bold" style={{ color: "var(--glass-muted)" }}>
         {label}
       </span>
-      <div className="relative flex h-full flex-1 gap-0.5">
+      {/* §38: segments touch with a hairline border only -- no real flex gap -- so this reads
+          unambiguously as one continuous proportional bar, never gapped separate cells. */}
+      <div className="relative flex h-full flex-1 overflow-hidden rounded-sm">
         {Array.from({ length: segments }, (_, i) => (
-          <div key={i} className="flex-1 rounded-sm text-center text-[9px] leading-[2.25rem]" style={{ background: color, color: "var(--color-white)", opacity: 0.9, borderInlineStart: i === 0 ? "none" : "1px solid color-mix(in oklab, var(--color-white) 30%, transparent)" }}>
+          <div key={i} className="flex-1 text-center text-[9px] leading-[2.25rem]" style={{ background: color, color: "var(--color-white)", opacity: 0.9, borderInlineStart: i === 0 ? "none" : "1px solid color-mix(in oklab, var(--color-white) 30%, transparent)" }}>
             1/{segments}
           </div>
         ))}

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import FractionInputLiveVisual from "./FractionInputLiveVisual";
 import { FRACTION_SCENARIOS, type FractionOperation, type FractionScenario } from "./types";
 
 const OPERATIONS: FractionOperation[] = ["add", "subtract", "multiply", "divide"];
@@ -40,7 +41,7 @@ export default function FractionInputPanel({
   const tScenarios = useTranslations("tools.fraction-calculator.scenarios");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard title={t("inputTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">
@@ -124,6 +125,8 @@ export default function FractionInputPanel({
         <RotateCcw size={16} />
         {t("clear")}
       </button>
+
+      <FractionInputLiveVisual />
     </SectionCard>
   );
 }

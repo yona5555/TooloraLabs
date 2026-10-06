@@ -189,16 +189,28 @@ export default function FractionHero() {
           </div>
         </div>
 
-        {/* sixths tape */}
+        {/* §38: a continuous proportional ribbon with tick marks at every common-denominator
+            unit -- never a grid of separate filled cells. Fills the full height of its own
+            panel (§37.3c) instead of floating as a short strip. */}
         <div dir="ltr" className="flex w-full shrink-0 flex-col lg:w-48">
           <p className="mb-1 text-[10px] font-bold uppercase tracking-wide" style={{ color: "var(--glass-muted)" }}>
             {t("gridLabel")}
           </p>
-          <div className="grid flex-1 grid-cols-6 gap-1">
-            {Array.from({ length: sixthsSteps }, (_, i) => (
-              <div key={i} className="min-h-10 rounded-sm" style={{ background: i < sixthsFilled ? COLOR_SUM : "var(--glass-track)" }} />
-            ))}
+          <div
+            className="relative min-h-10 flex-1 overflow-hidden rounded-md"
+            style={{
+              background: "var(--glass-track)",
+              backgroundImage: `repeating-linear-gradient(to right, color-mix(in oklab, var(--glass-border) 70%, transparent) 0, color-mix(in oklab, var(--glass-border) 70%, transparent) 1px, transparent 1px, transparent ${100 / sixthsSteps}%)`,
+            }}
+          >
+            <div
+              className="absolute inset-y-0 start-0 rounded-md transition-[width] duration-300 ease-out"
+              style={{ width: `${(sixthsFilled / sixthsSteps) * 100}%`, background: COLOR_SUM }}
+            />
           </div>
+          <p className="mt-1 text-center text-[10px] font-semibold" style={{ color: "var(--glass-muted)" }}>
+            {`${formatMathValue(sixthsFilled)}/${formatMathValue(sixthsSteps)}`}
+          </p>
         </div>
       </div>
 

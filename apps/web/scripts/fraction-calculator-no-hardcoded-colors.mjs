@@ -29,6 +29,9 @@ const GLASS_CARD_FILES = [
   "FractionBenchmarkGaugeCard.tsx",
   "FractionCrossMultiplyCard.tsx",
   "FractionSensitivityCard.tsx",
+  "FractionResultGauge.tsx",
+  "FractionInputLiveVisual.tsx",
+  "FractionResult.tsx",
 ].map((f) => path.join(FRACTION_DIR, f));
 
 const GLASS_PRIMITIVE_FILES = readdirSync(GLASS_DIR)

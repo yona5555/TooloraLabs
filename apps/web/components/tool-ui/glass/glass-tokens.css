@@ -21,14 +21,38 @@
   --glass-subtitle: var(--color-zinc-600);
   --glass-muted: var(--color-zinc-500);
 
-  --glass-table-header-bg: color-mix(in oklab, var(--color-zinc-900) 7%, transparent);
+  /* §42.2: the worked-example table header is a brand-blue TINT (not a zinc tint) so it visibly
+   * reads as part of the same blue system as the card's own header band, just lighter. */
+  --glass-table-header-bg: color-mix(in oklab, var(--color-blue-600) 12%, transparent);
   --glass-table-header-text: var(--color-zinc-700);
   --glass-table-row-border: color-mix(in oklab, var(--color-zinc-900) 8%, transparent);
   --glass-table-text: var(--color-zinc-800);
   --glass-table-wrap-bg: color-mix(in oklab, var(--color-zinc-900) 3%, transparent);
+  /* §42.2: the bold, tinted key-result row -- one step stronger than the header tint so it still
+   * reads as "the" row even sitting directly under the header band. */
+  --glass-key-row-bg: color-mix(in oklab, var(--color-blue-600) 16%, transparent);
+  --glass-key-row-text: var(--color-zinc-900);
 
   --glass-track: color-mix(in oklab, var(--color-zinc-900) 9%, transparent);
   --glass-handle-ring: var(--color-white);
+  /* §42.3: the ~600ms tinted flash a card's own control triggers on its changed table cells /
+   * visual region -- a plain opacity fade, never a layout-shifting change. */
+  --glass-flash-bg: color-mix(in oklab, var(--glass-math-accent) 45%, transparent);
+  /* §40: the handle's own chrome -- a small solid puck plus its direction icon, token-driven so
+   * both pass >=3:1 non-text contrast in light AND dark without any per-card override. */
+  --glass-handle-bg: var(--color-white);
+  --glass-handle-icon: var(--color-zinc-700);
+  --glass-handle-border: color-mix(in oklab, var(--color-zinc-900) 25%, transparent);
+
+  /* The site has no pre-existing danger/success design tokens (checked: not in globals.css or
+   * any other CSS/TS file), so this layer defines them -- derived from Tailwind's own red-500/
+   * emerald-500, the same derivation pattern as every accent above, never an invented hex. Used
+   * by the fraction result's circle indicator (hand A = danger/red, hand B = success/green);
+   * --glass-accent-5 (violet, otherwise unused on that indicator) is its distinct result color. */
+  --glass-danger-strong: color-mix(in oklab, var(--color-red-500) 55%, var(--color-zinc-900) 45%);
+  --glass-danger-soft: color-mix(in oklab, var(--color-red-500) 16%, var(--color-white) 84%);
+  --glass-success-strong: color-mix(in oklab, var(--color-emerald-500) 55%, var(--color-zinc-900) 45%);
+  --glass-success-soft: color-mix(in oklab, var(--color-emerald-500) 16%, var(--color-white) 84%);
   --glass-footer-bg: color-mix(in oklab, var(--glass-accent-1) 12%, transparent);
   --glass-footer-text: color-mix(in oklab, var(--glass-accent-1) 65%, var(--color-zinc-900) 35%);
 
@@ -68,14 +92,24 @@
   --glass-subtitle: var(--color-zinc-300);
   --glass-muted: var(--color-zinc-400);
 
-  --glass-table-header-bg: color-mix(in oklab, var(--color-white) 10%, transparent);
-  --glass-table-header-text: var(--color-zinc-200);
+  --glass-table-header-bg: color-mix(in oklab, var(--color-blue-400) 20%, transparent);
+  --glass-table-header-text: var(--color-zinc-100);
   --glass-table-row-border: color-mix(in oklab, var(--color-white) 12%, transparent);
   --glass-table-text: var(--color-zinc-100);
   --glass-table-wrap-bg: color-mix(in oklab, var(--color-white) 5%, transparent);
+  --glass-key-row-bg: color-mix(in oklab, var(--color-blue-400) 28%, transparent);
+  --glass-key-row-text: var(--color-white);
 
   --glass-track: color-mix(in oklab, var(--color-white) 12%, transparent);
   --glass-handle-ring: var(--color-zinc-900);
+  --glass-flash-bg: color-mix(in oklab, var(--glass-math-accent) 55%, transparent);
+  --glass-handle-bg: var(--color-zinc-100);
+  --glass-handle-icon: var(--color-zinc-800);
+  --glass-handle-border: color-mix(in oklab, var(--color-white) 35%, transparent);
+  --glass-danger-strong: color-mix(in oklab, var(--color-red-500) 70%, var(--color-white) 30%);
+  --glass-danger-soft: color-mix(in oklab, var(--color-red-500) 22%, var(--color-zinc-900) 78%);
+  --glass-success-strong: color-mix(in oklab, var(--color-emerald-500) 70%, var(--color-white) 30%);
+  --glass-success-soft: color-mix(in oklab, var(--color-emerald-500) 22%, var(--color-zinc-900) 78%);
   --glass-footer-bg: color-mix(in oklab, var(--glass-accent-1) 22%, transparent);
   --glass-footer-text: color-mix(in oklab, var(--glass-accent-1) 55%, var(--color-white) 45%);
 
@@ -93,4 +127,25 @@
 
   --glass-accent-5-strong: color-mix(in oklab, var(--color-violet-500) 65%, var(--color-white) 25%);
   --glass-accent-5-soft: color-mix(in oklab, var(--color-violet-500) 20%, var(--color-zinc-900) 80%);
+}
+
+/* §40.2: a gentle pulsing ring on every drag handle until the visitor's first real pointer-down
+ * on it, scale+opacity only (no layout shift). GlassHandle removes this class itself after the
+ * first pointerdown; `prefers-reduced-motion` gets a static ring instead (handled in JS by never
+ * adding the animated class, not here, so there is nothing to override). */
+@keyframes glass-handle-pulse {
+  0% { transform: scale(1); opacity: 0.55; }
+  70% { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.glass-handle-pulse-ring {
+  animation: glass-handle-pulse 1.6s ease-out infinite;
+}
+/* §42.3: the ~600ms value-flash a card's own control applies to its changed table cells. */
+@keyframes glass-value-flash {
+  0% { background-color: var(--glass-flash-bg); }
+  100% { background-color: transparent; }
+}
+.glass-value-flash {
+  animation: glass-value-flash 0.6s ease-out;
 }

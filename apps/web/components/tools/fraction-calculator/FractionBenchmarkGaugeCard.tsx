@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
+import { GlassHandle, GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, benchmarkPosition } from "@tooloralabs/tools";
 
@@ -11,6 +11,7 @@ const BENCHMARK_LABELS = ["0", "1/4", "1/2", "3/4", "1"];
  * result's own numerator (holding the current denominator) so the nearest-benchmark call stays live. */
 export default function FractionBenchmarkGaugeCard() {
   const t = useTranslations("tools.fraction-calculator.education.benchmarkGauge");
+  const tCommon = useTranslations("common");
   const { dims, setDim } = useFractionCardState();
   const { numeratorA, denominatorA, numeratorB, denominatorB, operation } = dims;
   const valueA = numeratorA / (denominatorA || 1);
@@ -47,9 +48,11 @@ export default function FractionBenchmarkGaugeCard() {
                 </span>
               </div>
             ))}
-            <div
-              className="absolute top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{ left: `${Math.max(0, Math.min(1, position)) * 100}%`, background: "var(--glass-accent-3-strong)", boxShadow: "0 0 0 3px var(--glass-handle-ring)" }}
+            <GlassHandle
+              direction="horizontal"
+              ariaLabel={tCommon("dragToChange")}
+              onStep={(delta) => setDim("numeratorA", Math.max(0, numeratorA + delta))}
+              style={{ left: `${Math.max(0, Math.min(1, position)) * 100}%`, top: "50%", transform: "translate(-50%, -50%)" }}
             />
           </div>
         </div>
