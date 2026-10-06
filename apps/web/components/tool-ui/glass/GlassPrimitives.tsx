@@ -171,15 +171,33 @@ function CardTitle({ n, title }: { n: number; title: string }) {
   );
 }
 
-export function GlassHeroCard({ n = 1, title, subtitle, children }: { n?: number; accent?: AccentKey; title: string; subtitle: string; children: ReactNode }) {
+export function GlassHeroCard({
+  n = 1,
+  title,
+  subtitle,
+  children,
+  compact = false,
+}: {
+  n?: number;
+  accent?: AccentKey;
+  title: string;
+  subtitle: string;
+  children: ReactNode;
+  /** Tighter body padding for a card that has to fit a height budget it doesn't control (e.g. a
+   * sidebar column capped by a sibling it can't resize, §41) -- defaults to false, so every
+   * existing caller's padding is unchanged. */
+  compact?: boolean;
+}) {
   return (
     <Reveal data-testid={`reveal-${n}`}>
-      <SectionCard title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName="p-4 lg:p-6">
+      <SectionCard title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName={compact ? "p-3" : "p-4 lg:p-6"}>
         <div data-hero-card={n}>
-          <p className="text-xs sm:text-sm" style={{ color: "var(--glass-subtitle)" }}>
-            {subtitle}
-          </p>
-          <div className="mt-4">{children}</div>
+          {subtitle && (
+            <p className="text-xs sm:text-sm" style={{ color: "var(--glass-subtitle)" }}>
+              {subtitle}
+            </p>
+          )}
+          <div className={subtitle ? "mt-4" : ""}>{children}</div>
         </div>
       </SectionCard>
     </Reveal>

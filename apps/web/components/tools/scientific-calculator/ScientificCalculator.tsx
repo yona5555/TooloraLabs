@@ -11,6 +11,8 @@ import ScientificKeypad from "./ScientificKeypad";
 import ScientificHistoryPanel from "./ScientificHistoryPanel";
 import FunctionReferenceCard from "./FunctionReferenceCard";
 import { ScientificAngleProvider } from "./ScientificAngleContext";
+import { ScientificCalcReadonlyProvider } from "./ScientificCalcReadonlyContext";
+import ScientificSidebarPanels from "./ScientificSidebarPanels";
 
 const KEY_TO_DIGIT = new Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
 
@@ -81,13 +83,17 @@ export default function ScientificCalculator({ education }: { education: ReactNo
 
   return (
     <ScientificAngleProvider value={{ dims: { angleDeg }, setDim: (key, value) => key === "angleDeg" && setAngleDeg(value) }}>
+    <ScientificCalcReadonlyProvider value={{ angleMode: state.angleMode, display: state.display }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <ScientificHistoryPanel
-              history={state.history}
-              onSelect={(value) => dispatch({ type: "loadHistory", value })}
-            />
+            <div className="flex flex-col gap-4">
+              <ScientificHistoryPanel
+                history={state.history}
+                onSelect={(value) => dispatch({ type: "loadHistory", value })}
+              />
+              <ScientificSidebarPanels />
+            </div>
           }
           result={<ScientificKeypad state={state} dispatch={dispatch} />}
           sidebar={<RelatedToolsSidebar currentSlug="scientific-calculator" category="math" />}
@@ -102,6 +108,7 @@ export default function ScientificCalculator({ education }: { education: ReactNo
       </div>
 
       {education}
+    </ScientificCalcReadonlyProvider>
     </ScientificAngleProvider>
   );
 }
