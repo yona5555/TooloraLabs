@@ -12,7 +12,7 @@ On demand: docs/claude/full-project-handbook.md — architecture, roles, general
 Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
 
 ## Hard rules
-- Reply in Modern Standard Arabic only, no dialect. Code, commands and identifiers in English. Short replies, no preamble, no recap.
+- Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
 - Never claim "done" for a visual change without real screenshots (light, dark, Arabic RTL). One final screenshot pass only.
