@@ -210,7 +210,7 @@ import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
 import { tools } from "@/data/tools";
 import { SITE_URL } from "@/lib/site";
-import { getTopCoins, getGlobalStats, getUsdToSarRate, getFetchTimestamp } from "@/lib/crypto/coingecko";
+import { getTopCoins, getGlobalStats, getFiatRates, getFetchTimestamp } from "@/lib/crypto/coingecko";
 import { getForexSnapshot } from "@/lib/forex/exchangerate";
 import { getMetalSnapshot } from "@/lib/commodities/metalprice";
 import { getOilSnapshot } from "@/lib/commodities/oilprice";
@@ -337,17 +337,17 @@ export default async function ToolPage({
       component = <MortgageCalculator education={<MortgageEducation />} />;
       break;
     case "crypto-converter": {
-      const [initialCoins, globalStats, usdToSarRate] = await Promise.all([
+      const [initialCoins, globalStats, fiatRates] = await Promise.all([
         getTopCoins(100),
         getGlobalStats(),
-        getUsdToSarRate(),
+        getFiatRates(),
       ]);
       const fetchedAt = getFetchTimestamp();
       component = (
         <CryptoConverter
           initialCoins={initialCoins}
           globalStats={globalStats}
-          usdToSarRate={usdToSarRate}
+          fiatRates={fiatRates}
           fetchedAt={fetchedAt}
           education={<CryptoEducation coins={initialCoins} fetchedAt={fetchedAt} locale={locale} />}
         />

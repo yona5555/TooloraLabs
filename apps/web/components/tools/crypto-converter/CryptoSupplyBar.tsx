@@ -4,14 +4,14 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { supplyBreakdown, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters } from "./cryptoFormat";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type Props = { coin: CryptoCoin | undefined; digitStyle: DigitStyle };
 
 export default function CryptoSupplyBar({ coin, digitStyle }: Props) {
   const t = useTranslations("tools.crypto-converter.supply");
+  const f = useCryptoFormatters(digitStyle);
   if (!coin) return null;
-  const f = cryptoFormatters(digitStyle);
   const b = supplyBreakdown(coin.circulatingSupply, coin.totalSupply, coin.maxSupply);
   const sym = coin.symbol.toUpperCase();
   const segments = b
@@ -59,7 +59,7 @@ export default function CryptoSupplyBar({ coin, digitStyle }: Props) {
                 { label: t("totalLabel"), value: coin.totalSupply ? `${f.compact(coin.totalSupply)} ${sym}` : "—" },
                 { label: t("maxLabel"), value: coin.maxSupply ? `${f.compact(coin.maxSupply)} ${sym}` : t("uncapped") },
                 { label: t("rowShare"), value: `${f.num(b.circulatingPercent, 2)}%`, emphasize: true, note: t(b.basis === "max" ? "rowShareNoteMax" : "rowShareNoteTotal") },
-                { label: t("rowCapCheck"), value: f.compactUsd((coin.circulatingSupply ?? 0) * coin.currentPrice), note: t("rowCapCheckNote") },
+                { label: t("rowCapCheck"), value: f.compactMoney((coin.circulatingSupply ?? 0) * coin.currentPrice), note: t("rowCapCheckNote") },
               ]}
             />
           </div>

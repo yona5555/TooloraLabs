@@ -4,14 +4,14 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { logScalePosition, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters } from "./cryptoFormat";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type Props = { coins: CryptoCoin[]; coin: CryptoCoin | undefined; digitStyle: DigitStyle };
 
 export default function CryptoMarketCapLog({ coins, coin, digitStyle }: Props) {
   const t = useTranslations("tools.crypto-converter.capLog");
+  const f = useCryptoFormatters(digitStyle);
   if (!coin) return null;
-  const f = cryptoFormatters(digitStyle);
   const top10 = [...coins].filter((c) => c.marketCap > 0).sort((a, b) => b.marketCap - a.marketCap).slice(0, 10);
   const rows = top10.some((c) => c.id === coin.id) || !(coin.marketCap > 0) ? top10 : [...top10, coin];
   const caps = rows.map((r) => r.marketCap);
@@ -41,7 +41,7 @@ export default function CryptoMarketCapLog({ coins, coin, digitStyle }: Props) {
                     ))}
                     <div className={`h-full rounded ${mine ? "bg-pink-500" : "bg-blue-500"}`} style={{ width: `${Math.max(1, logScalePosition(r.marketCap, min, max) * 100)}%` }} />
                   </div>
-                  <span className={`text-end font-mono ${mine ? "font-bold text-pink-600 dark:text-pink-400" : "text-zinc-700 dark:text-zinc-300"}`}>{f.compactUsd(r.marketCap)}</span>
+                  <span className={`text-end font-mono ${mine ? "font-bold text-pink-600 dark:text-pink-400" : "text-zinc-700 dark:text-zinc-300"}`}>{f.compactMoney(r.marketCap)}</span>
                 </li>
               );
             })}
@@ -51,7 +51,7 @@ export default function CryptoMarketCapLog({ coins, coin, digitStyle }: Props) {
             <div className="relative h-4 font-mono text-[9px] text-zinc-400">
               {decades.map((d) => (
                 <span key={d} className="absolute -translate-x-1/2" style={{ left: `${logScalePosition(d, min, max) * 100}%` }}>
-                  {f.compactUsd(d)}
+                  {f.compactMoney(d)}
                 </span>
               ))}
             </div>
@@ -61,8 +61,8 @@ export default function CryptoMarketCapLog({ coins, coin, digitStyle }: Props) {
           <WorkedExampleNote
             title={t("workedTitle")}
             rows={[
-              { label: leader?.name ?? "—", value: leader ? f.compactUsd(leader.marketCap) : "—" },
-              { label: coin.name, value: f.compactUsd(coin.marketCap) },
+              { label: leader?.name ?? "—", value: leader ? f.compactMoney(leader.marketCap) : "—" },
+              { label: coin.name, value: f.compactMoney(coin.marketCap) },
               { label: t("rowRatio"), value: ratio ? `${f.num(ratio, ratio < 10 ? 2 : 0)}×` : "—" },
               { label: t("rowDecades"), value: ratio ? f.num(Math.log10(ratio), 2) : "—", emphasize: true, note: t("rowDecadesNote") },
               { label: t("rowRank"), value: coin.marketCapRank ? `#${coin.marketCapRank}` : "—" },

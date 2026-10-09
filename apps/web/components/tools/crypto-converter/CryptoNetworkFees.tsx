@@ -7,6 +7,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { FeeSnapshot } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
 import LiveFallback from "./LiveFallback";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type CryptoNetworkFeesProps = { btcPriceUsd: number | null; digitStyle: DigitStyle };
 
@@ -22,8 +23,9 @@ export default function CryptoNetworkFees({ btcPriceUsd, digitStyle }: CryptoNet
   const price = btcPriceUsd ?? 0;
 
   const num = (v: number, max = 1) => formatLocalizedNumber(v, digitStyle, { maximumFractionDigits: max });
-  const usd = (v: number) =>
-    formatLocalizedNumber(v, digitStyle, { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: v < 0.1 ? 3 : 2 });
+  const f = useCryptoFormatters(digitStyle);
+  // Fees are cents-sized in USD, so keep one extra digit below a dime's worth.
+  const usd = (v: number) => f.money(v, v < 0.1 ? 3 : 2);
 
   if (state.status !== "ready") {
     return (
@@ -91,7 +93,7 @@ export default function CryptoNetworkFees({ btcPriceUsd, digitStyle }: CryptoNet
               { label: t("rowSats"), value: `= ${num(levels[1].fee.sats, 0)} sat` },
               { label: t("rowBtc"), value: `${num(levels[1].fee.btc * 1e3, 5)} mBTC` },
               { label: t("rowPrice"), value: price ? usd(price) : "—" },
-              { label: t("rowUsd"), value: price ? usd(levels[1].fee.usd) : "—", emphasize: true, note: t("rowUsdNote") },
+              { label: t("rowUsd", { currency: f.currency }), value: price ? usd(levels[1].fee.usd) : "—", emphasize: true, note: t("rowUsdNote") },
             ]}
           />
         </div>

@@ -1,17 +1,14 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import type { DigitStyle } from "@tooloralabs/core";
 import { topMovers, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters, changeColor } from "./cryptoFormat";
-import type { FiatCurrency } from "./types";
+import { useCryptoFormatters, changeColor } from "./cryptoFormat";
 
 type CryptoTopListProps = {
   coins: CryptoCoin[];
-  fiatCurrency: FiatCurrency;
-  usdToSarRate: number | null;
   digitStyle: DigitStyle;
   fromCoinId: string;
   toCoinId: string;
@@ -31,18 +28,11 @@ const TAG_STYLE: Record<Tag, string> = {
 /** A dollar-pegged coin: trades within 2% of $1 and its name or ticker says USD. */
 const isStablecoin = (c: CryptoCoin) => Math.abs(c.currentPrice - 1) < 0.02 && /usd/i.test(`${c.symbol} ${c.name}`);
 
-export default function CryptoTopList({ coins, fiatCurrency, usdToSarRate, digitStyle, fromCoinId, toCoinId, onPick }: CryptoTopListProps) {
+export default function CryptoTopList({ coins, digitStyle, fromCoinId, toCoinId, onPick }: CryptoTopListProps) {
   const t = useTranslations("tools.crypto-converter.topList");
   const [focusId, setFocusId] = useState<string | null>(null);
-  const currency = fiatCurrency === "sar" && usdToSarRate ? "SAR" : "USD";
-  const rate = fiatCurrency === "sar" && usdToSarRate ? usdToSarRate : 1;
-  const f = cryptoFormatters(digitStyle);
-  const money = (value: number, compact = false) =>
-    formatLocalizedNumber(value * rate, digitStyle, {
-      style: "currency",
-      currency,
-      ...(compact ? { notation: "compact" as const, maximumFractionDigits: 2 } : { maximumFractionDigits: value < 1 ? 6 : 2 }),
-    });
+  const f = useCryptoFormatters(digitStyle);
+  const money = (value: number, compact = false) => (compact ? f.compactMoney(value) : f.money(value));
   const movers = topMovers(coins, 5);
   const gainers = new Set(movers.gainers.map((c) => c.id));
   const losers = new Set(movers.losers.map((c) => c.id));

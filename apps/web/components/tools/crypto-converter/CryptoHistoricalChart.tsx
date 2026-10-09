@@ -28,9 +28,16 @@ import {
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
+import { useLiveTicks } from "./useCryptoLive";
+import { changeColor, useCryptoFormatters, useFiat } from "./cryptoFormat";
+
+const LIST_COUNT = 24;
 
 type CryptoHistoricalChartProps = {
   coin: CryptoCoin | undefined;
+  /** The live price list beside the chart; clicking a row charts that coin. */
+  coins: CryptoCoin[];
+  onSelectCoin: (id: string) => void;
   digitStyle: DigitStyle;
   /** Reports the loaded candles so other indicators (e.g. volatility) reuse them instead of refetching. */
   onCandles?: (candles: Candle[], timeframe: CandleTimeframe) => void;
@@ -47,8 +54,13 @@ const MA20_COLOR = "#f59e0b";
 const MA50_COLOR = "#8b5cf6";
 const CHART_HEIGHT = 380;
 
-export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: CryptoHistoricalChartProps) {
+export default function CryptoHistoricalChart({ coin, coins, onSelectCoin, digitStyle, onCandles }: CryptoHistoricalChartProps) {
   const t = useTranslations("tools.crypto-converter.chart");
+  const tTicker = useTranslations("tools.crypto-converter.ticker");
+  const fiat = useFiat();
+  const f = useCryptoFormatters(digitStyle);
+  const listCoins = coins.slice(0, LIST_COUNT);
+  const ticks = useLiveTicks(listCoins.map((c) => c.symbol));
   const locale = useLocale();
   const isDark = useIsDarkMode();
   const symbol = coin?.symbol ?? "btc";
@@ -113,7 +125,8 @@ export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: C
       timeScale: { borderColor: grid, timeVisible: intraday, secondsVisible: false },
       localization: {
         locale,
-        priceFormatter: (p: number) => formatLocalizedNumber(p, digitStyle, { maximumFractionDigits: p < 1 ? 6 : 2 }),
+        // Candles are USD pairs; the axis reads in the display currency at today's rate.
+        priceFormatter: (p: number) => formatLocalizedNumber(p * fiat.perUsd, digitStyle, { maximumFractionDigits: p * fiat.perUsd < 1 ? 6 : 2 }),
       },
     });
     chartRef.current = chart;
@@ -165,7 +178,7 @@ export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: C
       ma20Ref.current = null;
       ma50Ref.current = null;
     };
-  }, [candles, isDark, locale, digitStyle, extremes, ma20, ma50, timeframe, t]);
+  }, [candles, isDark, locale, digitStyle, extremes, ma20, ma50, timeframe, t, fiat.perUsd]);
 
   useEffect(() => {
     ma20Ref.current?.applyOptions({ visible: showMa20 });
@@ -174,8 +187,7 @@ export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: C
 
   const shownIndex = hoverIndex !== null && hoverIndex < candles.length ? hoverIndex : candles.length - 1;
   const shown = candles[shownIndex];
-  const usd = (v: number) =>
-    formatLocalizedNumber(v, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: v < 1 ? 6 : 2 });
+  const usd = f.money;
   const num = (v: number, max = 2) => formatLocalizedNumber(v, digitStyle, { maximumFractionDigits: max });
   const intraday = ["10m", "15m", "30m", "1h", "4h", "6h"].includes(timeframe);
   const dateLabel = (time: number) =>
@@ -193,11 +205,61 @@ export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: C
   return (
     <SectionCard id="chart" title={t("title")}>
       <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
-        {t("heading", { coin: coin?.name ?? coinSymbol })}
+        {t("heading", { coin: coin?.name ?? coinSymbol, currency: fiat.code })}
       </h3>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-4 grid gap-4 lg:grid-cols-[15rem_minmax(0,1fr)]">
+      {/* Live price list: on desktop it fills the chart column's height and scrolls; on mobile it sits above the chart. */}
+      <div className="relative min-h-0">
+        <div className="flex max-h-72 flex-col overflow-hidden rounded-xl border border-zinc-200 lg:absolute lg:inset-0 lg:max-h-none dark:border-zinc-800">
+          <div className="flex items-center justify-between bg-zinc-50 px-3 py-2 dark:bg-zinc-800">
+            <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{tTicker("title")}</span>
+            <span className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+              {tTicker("live")}
+            </span>
+          </div>
+          <ul className="min-h-0 flex-1 divide-y divide-zinc-100 overflow-y-auto dark:divide-zinc-800" data-testid="sidebar-ticker">
+            {listCoins.map((c) => {
+              const tick = ticks[c.symbol.toUpperCase()];
+              const price = tick?.price ?? c.currentPrice;
+              const flash = tick?.direction === "up" ? "animate-flash-up" : tick?.direction === "down" ? "animate-flash-down" : "";
+              const active = c.id === coin?.id;
+              return (
+                <li key={c.id}>
+                  <button
+                    type="button"
+                    data-coin={c.id}
+                    aria-pressed={active}
+                    onClick={() => onSelectCoin(c.id)}
+                    className={`flex w-full items-center gap-2 border-s-2 px-3 py-2 text-start transition ${
+                      active ? "border-blue-600 bg-blue-50 dark:border-blue-400 dark:bg-blue-500/10" : "border-transparent hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.image} alt="" width={18} height={18} className="shrink-0 rounded-full" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-xs font-semibold text-zinc-900 dark:text-zinc-100">{c.name}</span>
+                      <span dir="ltr" className="block text-[10px] uppercase text-zinc-400">{c.symbol}</span>
+                    </span>
+                    <span className="flex flex-col items-end">
+                      <span key={tick?.at ?? 0} dir="ltr" className={`rounded px-1 font-mono text-xs text-zinc-900 dark:text-zinc-100 ${flash}`}>{f.money(price)}</span>
+                      <span dir="ltr" className={`font-mono text-[10px] ${changeColor(c.priceChangePercentage24h)}`}>
+                        {c.priceChangePercentage24h == null ? "—" : f.signedPct(c.priceChangePercentage24h, 1)}
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="border-t border-zinc-100 px-3 py-1.5 text-[10px] text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{tTicker("note")}</p>
+        </div>
+      </div>
+
+      <div className="min-w-0">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div role="group" aria-label={t("timeframeLabel")} className="flex flex-wrap gap-1.5">
           {CANDLE_TIMEFRAMES.map((tf) => (
             <button
@@ -238,7 +300,7 @@ export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: C
       </div>
 
       <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-stretch">
-        <div className="relative min-w-0 flex-1" dir="ltr" style={{ height: CHART_HEIGHT }}>
+        <div className="relative min-w-0 lg:flex-1" dir="ltr" style={{ height: CHART_HEIGHT }}>
           {state.status === "ready" && <div ref={containerRef} data-testid="candle-chart" className="absolute inset-0" />}
           {state.status === "ready" && shown && (
             <div
@@ -304,6 +366,8 @@ export default function CryptoHistoricalChart({ coin, digitStyle, onCandles }: C
             }
           />
         </div>
+      </div>
+      </div>
       </div>
 
       <p className="mt-3 text-xs text-zinc-400 dark:text-zinc-500">

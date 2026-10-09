@@ -122,15 +122,21 @@ export async function getGlobalStats(): Promise<CryptoGlobalStats | null> {
   };
 }
 
-/** SAR units per 1 USD, derived from BTC's value in each currency via CoinGecko's exchange-rates endpoint. */
-export async function getUsdToSarRate(): Promise<number | null> {
+export type FiatRate = { code: string; name: string; perUsd: number };
+
+/**
+ * Every fiat currency CoinGecko quotes, as units per 1 USD. The exchange-rates endpoint prices
+ * BTC in each currency, so dividing by BTC's USD value gives the USD cross rate.
+ */
+export async function getFiatRates(): Promise<FiatRate[]> {
   const res = await fetch(`${COINGECKO_BASE}/exchange_rates`, { next: { revalidate: PAGE_REVALIDATE_SECONDS } });
-  if (!res.ok) return null;
-  const json = (await res.json()) as { rates: Record<string, { value: number }> };
+  if (!res.ok) return [];
+  const json = (await res.json()) as { rates: Record<string, { name: string; value: number; type: string }> };
   const usd = json.rates.usd?.value;
-  const sar = json.rates.sar?.value;
-  if (!usd || !sar) return null;
-  return sar / usd;
+  if (!usd) return [];
+  return Object.entries(json.rates)
+    .filter(([, r]) => r.type === "fiat" && r.value > 0)
+    .map(([code, r]) => ({ code: code.toUpperCase(), name: r.name, perUsd: r.value / usd }));
 }
 
 export type PricePoint = { timestamp: number; price: number };

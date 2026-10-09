@@ -6,6 +6,7 @@ import { calculateInvestmentReturn, MAX_HISTORY_DAYS, type CryptoCoin } from "@t
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import CryptoCoinPicker from "./CryptoCoinPicker";
+import { useCryptoFormatters, useFiat } from "./cryptoFormat";
 
 type CryptoWhatIfCalculatorProps = {
   coins: CryptoCoin[];
@@ -52,14 +53,16 @@ export default function CryptoWhatIfCalculator({ coins, onCoinDiscovered, digitS
     }
   }
 
-  const amountValue = parseLocalizedNumber(amount);
+  // The amount is typed in the display currency; prices are USD, so convert in, compute, convert out.
+  const fiat = useFiat();
+  const f = useCryptoFormatters(digitStyle);
+  const amountValue = parseLocalizedNumber(amount) / fiat.perUsd;
   const result =
     status === "success" && priceThen !== null && selectedCoin
       ? calculateInvestmentReturn(amountValue, priceThen, selectedCoin.currentPrice)
       : null;
 
-  const currency = (value: number) =>
-    formatLocalizedNumber(value, digitStyle, { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+  const currency = (value: number) => f.money(value);
 
   return (
     <SectionCard title={t("title")}>
@@ -70,7 +73,7 @@ export default function CryptoWhatIfCalculator({ coins, onCoinDiscovered, digitS
           <CryptoCoinPicker label={t("coinLabel")} coins={coins} value={coinId} onChange={setCoinId} onCoinDiscovered={onCoinDiscovered} />
         </div>
         <ToolInput
-          label={t("amountLabel")}
+          label={t("amountLabel", { currency: fiat.code })}
           type="text"
           inputMode="decimal"
           value={amount}

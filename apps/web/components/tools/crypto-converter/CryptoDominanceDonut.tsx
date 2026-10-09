@@ -4,6 +4,7 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CryptoCoin, CryptoGlobalStats } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type CryptoDominanceDonutProps = {
   stats: CryptoGlobalStats;
@@ -33,8 +34,7 @@ export default function CryptoDominanceDonut({ stats, fromCoin, toCoin, digitSty
   ];
 
   const pctFmt = (v: number) => `${formatLocalizedNumber(v, digitStyle, { maximumFractionDigits: v < 1 ? 3 : 1 })}%`;
-  const usd = (v: number) =>
-    formatLocalizedNumber(v, digitStyle, { style: "currency", currency: "USD", notation: "compact", maximumFractionDigits: 2 });
+  const usd = useCryptoFormatters(digitStyle).compactMoney;
   const change = stats.marketCapChangePercentage24h;
 
   return (

@@ -4,13 +4,13 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { topMovers, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters } from "./cryptoFormat";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type Props = { coins: CryptoCoin[]; digitStyle: DigitStyle; onPick: (id: string) => void };
 
 export default function CryptoTopMovers({ coins, digitStyle, onPick }: Props) {
   const t = useTranslations("tools.crypto-converter.movers");
-  const f = cryptoFormatters(digitStyle);
+  const f = useCryptoFormatters(digitStyle);
   const { gainers, losers } = topMovers(coins, 5);
   const maxAbs = Math.max(...[...gainers, ...losers].map((c) => Math.abs(c.priceChangePercentage24h ?? 0)), 1);
   const best = gainers[0];
@@ -59,9 +59,9 @@ export default function CryptoTopMovers({ coins, digitStyle, onPick }: Props) {
             <WorkedExampleNote
               title={t("workedTitle", { coin: best.name })}
               rows={[
-                { label: t("rowNow"), value: f.usd(best.currentPrice) },
+                { label: t("rowNow"), value: f.money(best.currentPrice) },
                 { label: t("rowChange"), value: f.signedPct(best.priceChangePercentage24h ?? 0) },
-                { label: t("rowThen"), value: f.usd(prevPrice), emphasize: true, note: t("rowThenNote") },
+                { label: t("rowThen"), value: f.money(prevPrice), emphasize: true, note: t("rowThenNote") },
               ]}
             />
           </div>

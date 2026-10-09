@@ -4,19 +4,19 @@ import type { DigitStyle } from "@tooloralabs/core";
 import type { CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters, changeColor } from "./cryptoFormat";
+import { useCryptoFormatters, changeColor } from "./cryptoFormat";
 
 type Props = { fromCoin: CryptoCoin | undefined; toCoin: CryptoCoin | undefined; digitStyle: DigitStyle };
 
 export default function CryptoComparisonCards({ fromCoin, toCoin, digitStyle }: Props) {
   const t = useTranslations("tools.crypto-converter.compare");
+  const f = useCryptoFormatters(digitStyle);
   if (!fromCoin || !toCoin) return null;
-  const f = cryptoFormatters(digitStyle);
   const pct = (v: number | null | undefined) => (v == null ? "—" : f.signedPct(v));
   const metrics = (c: CryptoCoin) => [
-    { key: "price", value: f.usd(c.currentPrice), raw: c.currentPrice },
-    { key: "marketCap", value: f.compactUsd(c.marketCap), raw: c.marketCap },
-    { key: "volume", value: c.totalVolume ? f.compactUsd(c.totalVolume) : "—", raw: c.totalVolume ?? 0 },
+    { key: "price", value: f.money(c.currentPrice), raw: c.currentPrice },
+    { key: "marketCap", value: f.compactMoney(c.marketCap), raw: c.marketCap },
+    { key: "volume", value: c.totalVolume ? f.compactMoney(c.totalVolume) : "—", raw: c.totalVolume ?? 0 },
     { key: "change24h", value: pct(c.priceChangePercentage24h), raw: c.priceChangePercentage24h ?? -Infinity, color: changeColor(c.priceChangePercentage24h) },
     { key: "change7d", value: pct(c.priceChangePercentage7d), raw: c.priceChangePercentage7d ?? -Infinity, color: changeColor(c.priceChangePercentage7d) },
     { key: "rank", value: c.marketCapRank ? `#${c.marketCapRank}` : "—", raw: c.marketCapRank ? -c.marketCapRank : -Infinity },

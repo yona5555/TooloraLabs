@@ -6,7 +6,7 @@ import { VOLATILITY_ZONE_LIMITS, realizedVolatility, volatilityZone, type Candle
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import LiveFallback from "./LiveFallback";
-import { cryptoFormatters } from "./cryptoFormat";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type Props = { coin: CryptoCoin | undefined; digitStyle: DigitStyle };
 
@@ -43,7 +43,7 @@ export default function CryptoVolatilityGauge({ coin, digitStyle }: Props) {
     };
   }, [symbol]);
 
-  const f = cryptoFormatters(digitStyle);
+  const f = useCryptoFormatters(digitStyle);
   const current = data && data.symbol === symbol ? data : null;
   const vol = current?.candles ? realizedVolatility(current.candles, 30) : null;
   const zone = vol ? volatilityZone(vol.annualizedPercent) : null;

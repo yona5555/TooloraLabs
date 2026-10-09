@@ -5,7 +5,7 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { conversionSensitivity, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters } from "./cryptoFormat";
+import { useCryptoFormatters } from "./cryptoFormat";
 
 type Props = { fromCoin: CryptoCoin | undefined; toCoin: CryptoCoin | undefined; amount: number; digitStyle: DigitStyle };
 
@@ -14,8 +14,8 @@ const SHIFTS = [5, 10, 20];
 export default function CryptoSensitivityTrio({ fromCoin, toCoin, amount, digitStyle }: Props) {
   const t = useTranslations("tools.crypto-converter.sensitivity");
   const [pct, setPct] = useState(10);
+  const f = useCryptoFormatters(digitStyle);
   if (!fromCoin || !toCoin) return null;
-  const f = cryptoFormatters(digitStyle);
   const amt = Number.isFinite(amount) ? amount : 0;
   const points = conversionSensitivity(amt, fromCoin.currentPrice, toCoin.currentPrice, pct);
   const from = fromCoin.symbol.toUpperCase();
@@ -42,7 +42,7 @@ export default function CryptoSensitivityTrio({ fromCoin, toCoin, amount, digitS
             <div key={p.shiftPercent} className={`flex flex-col rounded-xl border p-3 ${tone[i]}`}>
               <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t(i === 0 ? "low" : i === 1 ? "now" : "high")}</span>
               <span dir="ltr" className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
-                {from} {f.usd(p.fromPrice)}
+                {from} {f.money(p.fromPrice)}
               </span>
               <div className="mt-2 flex h-24 items-end">
                 <div className={`w-full rounded-t-md ${bar[i]}`} style={{ height: `${(p.converted / max) * 100}%` }} />
@@ -60,10 +60,10 @@ export default function CryptoSensitivityTrio({ fromCoin, toCoin, amount, digitS
           <WorkedExampleNote
             title={t("workedTitle", { pct })}
             rows={[
-              { label: t("rowPriceNow", { symbol: from }), value: f.usd(fromCoin.currentPrice) },
-              { label: t("rowShifted"), value: `× ${f.num(1 + pct / 100, 2)} = ${f.usd(points[2].fromPrice)}` },
-              { label: t("rowValue"), value: `${f.amount(amt)} × ${f.usd(points[2].fromPrice)}` },
-              { label: t("rowToPrice", { symbol: to }), value: `÷ ${f.usd(toCoin.currentPrice)}` },
+              { label: t("rowPriceNow", { symbol: from }), value: f.money(fromCoin.currentPrice) },
+              { label: t("rowShifted"), value: `× ${f.num(1 + pct / 100, 2)} = ${f.money(points[2].fromPrice)}` },
+              { label: t("rowValue"), value: `${f.amount(amt)} × ${f.money(points[2].fromPrice)}` },
+              { label: t("rowToPrice", { symbol: to }), value: `÷ ${f.money(toCoin.currentPrice)}` },
               { label: t("rowResult"), value: `${f.amount(points[2].converted)} ${to}`, emphasize: true, note: t("rowNote", { pct }) },
             ]}
           />

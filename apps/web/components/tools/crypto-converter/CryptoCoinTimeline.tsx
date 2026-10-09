@@ -5,7 +5,7 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { percentFrom, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import { cryptoFormatters, changeColor } from "./cryptoFormat";
+import { useCryptoFormatters, changeColor } from "./cryptoFormat";
 import { ltrIsolate } from "@/lib/bidi";
 
 type Props = { coin: CryptoCoin | undefined; digitStyle: DigitStyle };
@@ -28,8 +28,8 @@ export default function CryptoCoinTimeline({ coin, digitStyle }: Props) {
     };
   }, [id]);
 
+  const f = useCryptoFormatters(digitStyle);
   if (!coin) return null;
-  const f = cryptoFormatters(digitStyle);
   const fmtDate = (iso: string) => new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(iso));
   const genesisDate = genesis?.id === coin.id ? genesis.date : undefined;
   const fromAth = coin.ath ? percentFrom(coin.ath, coin.currentPrice) : null;
@@ -60,7 +60,7 @@ export default function CryptoCoinTimeline({ coin, digitStyle }: Props) {
               </span>
               {s.price !== null && (
                 <span dir="ltr" className="mt-0.5 font-mono text-xs font-semibold text-zinc-900 dark:text-zinc-100">
-                  {f.usd(s.price)}
+                  {f.money(s.price)}
                 </span>
               )}
               {s.pct !== null && (
@@ -75,10 +75,10 @@ export default function CryptoCoinTimeline({ coin, digitStyle }: Props) {
           <WorkedExampleNote
             title={t("workedTitle")}
             rows={[
-              { label: t("rowNow"), value: f.usd(coin.currentPrice) },
-              { label: t("stations.ath"), value: coin.ath ? f.usd(coin.ath) : "—" },
+              { label: t("rowNow"), value: f.money(coin.currentPrice) },
+              { label: t("stations.ath"), value: coin.ath ? f.money(coin.ath) : "—" },
               { label: t("rowFromAth"), value: fromAth !== null ? f.signedPct(fromAth, 1) : "—", note: t("rowFormula") },
-              { label: t("stations.atl"), value: coin.atl ? f.usd(coin.atl) : "—" },
+              { label: t("stations.atl"), value: coin.atl ? f.money(coin.atl) : "—" },
               { label: t("rowFromAtl"), value: fromAtl !== null ? f.signedPct(fromAtl, 0) : "—", emphasize: true, note: t("rowFormula") },
             ]}
           />

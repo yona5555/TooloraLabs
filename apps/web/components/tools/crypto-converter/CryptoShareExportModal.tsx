@@ -107,7 +107,7 @@ export default function CryptoShareExportModal({ operationLabel, inputRows, resu
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 rounded-lg border border-white/40 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/10 dark:text-zinc-100"
+        className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
       >
         <Share2 size={14} />
         {t("shareExport.triggerLabel")}
