@@ -22,6 +22,7 @@ Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: g
 - packages/core|sdk|tools are pure logic: no window/document/DOM.
 - Any new UI text goes into all 6 locales (en, ar, es, fr, de, hi) with 1:1 keys.
 - Tool route: /{locale}/tools/{slug}.
+- Never print secrets in any output, report, command or log: API keys, tokens, passwords, webhook/IPN secrets, private keys, connection strings, or values from .env* files. Refer to them by variable NAME only and mask the value (e.g. METALPRICE_API_KEY=****). Never cat or echo .env* files. Never commit secrets.
 
 ## Adding rules
 When Yousef says "add this rule", add it to the right file in docs/claude/ (or here if it is a hard rule), then commit + push.
