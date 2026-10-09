@@ -2,11 +2,13 @@
 Keep this file short to save credits. Details live in docs/claude/; read only the file the task needs.
 
 ## Reference files
-- docs/claude/working-rules.md — general rules for working with Yousef, efficient testing, Git
-- docs/claude/what-yousef-dislikes.md — what Yousef rejects + lessons (wins on conflict)
-- docs/claude/full-project-handbook.md — architecture, roles, rules index §0–§43, pending tasks
-- docs/claude/fixed-errors-log.md — fixed errors; check before diagnosing any bug
-- docs/claude/approved-visuals-and-indicators.md — read before choosing or building any chart/indicator
+Auto-loaded from .claude/rules/:
+- working-with-yousef.md — always: style, "command" mode, credit economy, Git
+- visuals.md — apps/web/components/**, apps/web/app/**: page structure, chart library, indicators
+- i18n.md — apps/web/messages/**: locales, Arabic, key parity
+- packages.md — packages/**: pure-logic constraint, tsc/test commands
+- testing.md — test/check scripts: efficient testing, fixed technical errors
+On demand: docs/claude/full-project-handbook.md — architecture, roles, general rules index, pending tasks
 Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
 
 ## Hard rules
