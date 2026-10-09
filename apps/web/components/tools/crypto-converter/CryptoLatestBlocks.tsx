@@ -7,7 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { LiveBlock } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
-import LiveFallback from "./LiveFallback";
+import LiveFallback from "@/components/tools/markets/LiveFallback";
 
 const SHOWN = 6;
 const tail = (hash: string) => `…${hash.slice(-6)}`;

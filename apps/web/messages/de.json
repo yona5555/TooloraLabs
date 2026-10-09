@@ -2814,6 +2814,10 @@
       },
       "relatedTools": {
         "title": "Verwandte Markt-Tools"
+      },
+      "sidebarVolume": {
+        "title": "Heute am meisten gehandelt ({currency})",
+        "note": "24-Std.-Handelsvolumen; die Änderung ist die Preisbewegung über 24 Std."
       }
     },
     "forex-converter": {
@@ -2832,14 +2836,19 @@
         "pickerNoResults": "Keine passende Währung gefunden",
         "disclaimer": "Diese Seite dient ausschließlich der allgemeinen Information und Bildung, nicht der Finanz- oder Anlageberatung. Die Wechselkurse stammen von einem öffentlichen Marktdatenanbieter und werden einmal täglich aktualisiert, können also dem Live-Interbankenmarkt hinterherhinken. Wenden Sie sich vor jeder Finanzentscheidung an eine zugelassene Finanzfachkraft.",
         "clear": "Zurücksetzen",
-        "dataUnavailable": "Die aktuellen Wechselkurse sind vorübergehend nicht verfügbar. Bitte versuchen Sie es in ein paar Minuten erneut."
+        "dataUnavailable": "Die aktuellen Wechselkurse sind vorübergehend nicht verfügbar. Bitte versuchen Sie es in ein paar Minuten erneut.",
+        "fiatLabel": "Anzeigewährung",
+        "quickTitle": "Schnellumrechnungen"
       },
       "nav": {
         "tool": "Umrechner",
         "news": "Nachrichten",
         "education": "Lernen",
         "faq": "FAQ",
-        "notices": "Hinweise"
+        "notices": "Hinweise",
+        "chart": "Chart",
+        "pair": "Paar",
+        "market": "Markt"
       },
       "dataSource": {
         "exchangeRateApi": "Live-Umrechnungskurse und Währungsliste:",
@@ -2849,18 +2858,20 @@
         "title": "Wichtige & arabische Währungen",
         "intro": "Die weltweit meistgehandelten Währungen zusammen mit den wichtigsten Währungen der arabischen Region, jeweils notiert gegenüber 1 US-Dollar.",
         "columnCurrency": "Währung",
-        "columnRatePerUsd": "Einheiten pro 1 USD"
-      },
-      "chart": {
-        "title": "USD / EUR historischer Kurs",
-        "intro": "Wie viele Euro ein US-Dollar im Laufe der Zeit gekauft hat, basierend auf Referenzkursen der Europäischen Zentralbank.",
-        "periodWeek": "1W",
-        "periodMonth": "1M",
-        "periodYear": "1J",
-        "loading": "Diagramm wird geladen …",
-        "error": "Historische Daten konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
-        "lowLabel": "Tief",
-        "highLabel": "Hoch"
+        "columnRatePerUsd": "Einheiten pro 1 USD",
+        "heading": "{amount} {code} in Haupt- und arabischen Währungen",
+        "columnTag": "Regime",
+        "workedTitle": "Rechenbeispiel",
+        "rowAmount": "Betrag",
+        "rowUsd": "In USD",
+        "rowTarget": "× {code} je USD",
+        "rowResult": "Ergebnis",
+        "tags": {
+          "pegged": "USD-Bindung",
+          "arab": "Arabisch",
+          "base": "Basis",
+          "floating": "Frei schwankend"
+        }
       },
       "news": {
         "title": "Devisenmarktnachrichten",
@@ -2931,30 +2942,25 @@
           "title": "Eine kurze Geschichte des globalen Wechselkurssystems",
           "paragraph1": "Während des größten Teils des späten 19. und frühen 20. Jahrhunderts waren die wichtigsten Währungen unter dem klassischen Goldstandard an ein festes Goldgewicht gekoppelt, was den Wechselkursen lange Phasen der Stabilität verschaffte – auf Kosten der Bindung der heimischen Geldpolitik an Goldflüsse. Dieses System brach während der Weltwirtschaftskrise und des Zweiten Weltkriegs zusammen.",
           "paragraph2": "Im Juli 1944 einigten sich Vertreter von 44 alliierten Nationen bei einem Treffen in Bretton Woods, New Hampshire, auf ein neues System: Der US-Dollar wurde bei 35 Dollar pro Unze an Gold gekoppelt, und jede andere Mitgliedswährung wurde innerhalb einer engen Bandbreite an den Dollar gekoppelt, wobei der neu gegründete Internationale Währungsfonds Anpassungen überwachte. Das System hielt sich durch die 1950er- und 1960er-Jahre, doch anhaltende US-Zahlungsbilanzdefizite machten die Goldbindung schließlich nicht mehr tragbar. Am 15. August 1971 setzte Präsident Richard Nixon die Konvertibilität des Dollars in Gold aus – ein Ereignis, das heute als „Nixon-Schock\" bekannt ist. Bis März 1973 hatten die großen Volkswirtschaften feste Wechselkurse vollständig zugunsten des bis heute geltenden Systems flexibler Wechselkurse aufgegeben, bei dem die meisten Währungswerte durch Marktangebot und -nachfrage statt durch eine staatlich festgelegte Bindung bestimmt werden.",
-          "diagram": {
-            "eras": [
-              {
-                "year": "1944",
-                "title": "Bretton Woods",
-                "note": "Dollar an Gold gekoppelt"
-              },
-              {
-                "year": "1971",
-                "title": "Nixon-Schock",
-                "note": "Goldkonvertibilität endet"
-              },
-              {
-                "year": "1973",
-                "title": "Beginn der Freigabe",
-                "note": "Wichtige Währungen freigegeben"
-              },
-              {
-                "year": "Heute",
-                "title": "Gemischte Systeme",
-                "note": "Mehrere Systeme koexistieren"
-              }
-            ],
-            "caption": "Eine vereinfachte Zeitleiste des modernen internationalen Wechselkurssystems, von der Bretton-Woods-Bindung bis zum heute überwiegend flexiblen System."
+          "live": {
+            "title": "Die Ära freier Wechselkurse in echten Daten",
+            "heading": "{base}/{quote}, jedes EZB-Fixing seit 1999",
+            "intro": "Das Paar Ihres Rechners über die gesamte Euro-Ära, mit dem echten Kurs an jedem Schlüsseldatum.",
+            "introFallback": "Die EZB fixiert {from}/{to} nicht, daher wird das Referenzpaar des Euro gezeigt.",
+            "loading": "EZB-Historie wird geladen…",
+            "error": "Historische Kurse sind vorübergehend nicht verfügbar.",
+            "workedTitle": "Kurs an jedem Meilenstein",
+            "events": {
+              "euro": "Euro-Einführung",
+              "notes": "Euro-Banknoten und -Münzen",
+              "lehman": "Lehman-Pleite",
+              "snb": "Aufhebung des Franken-Mindestkurses",
+              "brexit": "Brexit-Votum",
+              "covid": "Pandemie-Schock",
+              "hikes": "EZB beginnt Zinserhöhungen"
+            },
+            "today": "Letztes Fixing",
+            "sinceFirst": "{pct} seit dem ersten Fixing"
           }
         },
         "regimes": {
@@ -3105,9 +3111,237 @@
         "howCalculatedTitle": "So Wurde Dies Berechnet",
         "inputSectionTitle": "Eingabe"
       },
-      "quickAmounts": {
-        "title": "Schnellreferenz: Gängige Beträge",
-        "intro": "Derselbe Kurs gilt in jeder Größenordnung — so viel ergeben einige gängige {from}-Beträge in {to}."
+      "relatedTools": {
+        "title": "Verwandte Markt-Tools"
+      },
+      "sidebarRates": {
+        "title": "1 Einheit in {currency}",
+        "note": "Tageskurse; die Änderung vergleicht das letzte EZB-Fixing mit dem vorherigen."
+      },
+      "liveFlow": {
+        "title": "Umrechnungsfluss",
+        "badge": "Tageskurs",
+        "heading": "{from} → {to}",
+        "intro": "Ihr Betrag läuft über den US-Dollar: geteilt durch den Ausgangskurs, multipliziert mit dem Zielkurs.",
+        "noTrend": "Keine EZB-Historie",
+        "spark30d": "30 T. vs {code}",
+        "workedTitle": "Rechenbeispiel",
+        "rowAmount": "Betrag",
+        "rowFromRate": "{code} je 1 USD",
+        "rowUsd": "Wert in USD",
+        "rowToRate": "{code} je 1 USD",
+        "rowRate": "Impliziter Kurs",
+        "rowResult": "Ergebnis",
+        "dailyNote": "Die Kurse des Anbieters werden einmal täglich aktualisiert."
+      },
+      "equivalence": {
+        "title": "Gleicher Betrag, viele Währungen",
+        "heading": "{amount} {code} entsprechen",
+        "intro": "Jede Kachel zeigt denselben Wert, ausgedrückt in einer anderen gängigen Währung zu heutigen Kursen.",
+        "workedTitle": "Rechenbeispiel",
+        "rowAmount": "Betrag",
+        "rowToUsd": "{code} → USD",
+        "rowToTarget": "USD → {code}",
+        "rowResult": "Gegenwert"
+      },
+      "chart": {
+        "title": "Kursterminal & Kerzenchart",
+        "heading": "{base}/{quote} seit 1999",
+        "intro": "Wählen Sie ein Paar aus der Liste, um es anzuzeigen. Wochen- und Monatskerzen werden ausschließlich aus den täglichen EZB-Fixings gebildet; die Tagesansicht ist eine Linie, weil ein einzelnes Fixing weder Eröffnung noch Hoch oder Tief hat.",
+        "loading": "Historie wird geladen…",
+        "error": "Die EZB-Historie für {pair} konnte nicht geladen werden.",
+        "lowLabel": "Periodentief",
+        "highLabel": "Periodenhoch",
+        "timeframeLabel": "Intervall",
+        "retry": "Erneut versuchen",
+        "fullscreen": "Vollbild",
+        "exitFullscreen": "Vollbild beenden",
+        "closeLabel": "Fixing",
+        "tf": {
+          "D": "Täglich (Linie)",
+          "W": "Wöchentlich",
+          "M": "Monatlich"
+        },
+        "listTitle": "Hauptwährungspaare",
+        "listBadge": "EZB täglich",
+        "listNote": "Letztes EZB-Fixing und Änderung zum vorherigen Geschäftstag. Klicken Sie auf ein Paar, um es anzuzeigen.",
+        "yourPair": "Ihr Paar",
+        "candleNote": "Jede Kerze: Eröffnung = erstes Fixing, Schluss = letztes, Hoch/Tief = höchstes/niedrigstes Fixing der Periode. Bewegungen zwischen den Fixings sind nicht in den Daten enthalten.",
+        "candleNoteDaily": "Tageslinie: ein EZB-Referenzkurs pro Geschäftstag, letzte zwei Jahre.",
+        "attribution": "Chart-Bibliothek: Lightweight Charts™ von"
+      },
+      "history": {
+        "loading": "EZB-Historie wird geladen…",
+        "unsupported": "Die Europäische Zentralbank veröffentlicht keinen Tageskurs für {from}/{to}; dieser Indikator braucht ein Paar aus EZB-Währungen (z. B. USD, EUR, GBP, JPY).",
+        "error": "Historische Kurse sind vorübergehend nicht verfügbar. Bitte später erneut versuchen."
+      },
+      "range": {
+        "title": "52-Wochen-Spanne",
+        "heading": "Wo {from}/{to} in seiner 52-Wochen-Spanne steht",
+        "intro": "Der Balken reicht vom niedrigsten bis zum höchsten EZB-Fixing von 1 {from} in {to} im vergangenen Jahr; die Markierung ist heute.",
+        "workedTitle": "Rechenbeispiel",
+        "rowLow": "52-Wochen-Tief",
+        "rowHigh": "52-Wochen-Hoch",
+        "rowNow": "Letztes Fixing",
+        "rowFormula": "(aktuell − Tief) ÷ Spanne",
+        "rowPosition": "Position",
+        "zones": {
+          "low": "Nahe am Tief",
+          "mid": "Mitte der Spanne",
+          "high": "Nahe am Hoch"
+        },
+        "bands": {
+          "year": "Letzte 52 Wochen",
+          "all": "Seit 1999"
+        }
+      },
+      "volatility": {
+        "title": "30-Tage-Volatilität",
+        "heading": "Realisierte Volatilität von {from}/{to}",
+        "intro": "Wie stark das Paar schwankt: die Streuung seiner letzten 30 Tagesbewegungen, hochgerechnet auf ein Jahr.",
+        "workedTitle": "Rechenbeispiel",
+        "rowReturns": "Tagesbewegungen",
+        "rowReturnsNote": "logarithmische Änderung zwischen Fixings",
+        "rowDaily": "Tägliche Standardabweichung",
+        "rowDailyNote": "typische Tagesbewegung",
+        "rowScale": "Annualisieren",
+        "rowAnnual": "Annualisierte Volatilität",
+        "zones": {
+          "low": "Ruhig",
+          "medium": "Normal",
+          "high": "Stürmisch"
+        }
+      },
+      "sensitivity": {
+        "title": "Kurssensitivität",
+        "heading": "Wenn sich {from} gegenüber {to} bewegt",
+        "intro": "Ihr Ergebnis, wenn 1 {from} etwas weniger oder etwas mehr {to} kauft als heute.",
+        "shiftLabel": "Kursbewegung",
+        "workedTitle": "Rechenbeispiel (+{pct} %)",
+        "rowRateNow": "Aktueller Kurs",
+        "rowShifted": "Kurs +{pct} %",
+        "rowAmount": "Betrag × neuer Kurs",
+        "rowResult": "Neues Ergebnis",
+        "rowNote": "{diff} gegenüber heute",
+        "low": "{from} −{pct} %",
+        "now": "Heute",
+        "high": "{from} +{pct} %"
+      },
+      "timeline": {
+        "title": "Zeitleiste des Paares",
+        "heading": "Meilensteine von {from}/{to} seit 1999",
+        "intro": "Das erste EZB-Fixing des Paares, seine Allzeit- und 52-Wochen-Extreme und heute, nach Datum geordnet.",
+        "workedTitle": "Rechenbeispiel",
+        "rowHigh": "Allzeithoch",
+        "rowLow": "Allzeittief",
+        "rowNow": "Heute",
+        "rowFromHigh": "Unter dem Hoch",
+        "rowFromLow": "Über dem Tief",
+        "stations": {
+          "first": "Erstes Fixing",
+          "low": "Allzeittief",
+          "high": "Allzeithoch",
+          "yearLow": "52-Wochen-Tief",
+          "yearHigh": "52-Wochen-Hoch",
+          "last": "Letztes Fixing"
+        },
+        "vsToday": "heute {pct}"
+      },
+      "returns": {
+        "title": "Rendite nach Zeitraum",
+        "heading": "Wie sich {from}/{to} bewegt hat",
+        "intro": "Änderung des Preises von 1 {from} in jedem Zeitraum, aus EZB-Fixings. Grün bedeutet, dass {from} mehr kauft.",
+        "workedTitle": "Rechenbeispiel (1 Jahr)",
+        "rowThen": "Kurs vor einem Jahr",
+        "rowNow": "Aktueller Kurs",
+        "rowFormula": "aktuell ÷ damals − 1",
+        "rowResult": "1-Jahres-Änderung",
+        "stronger": "{from} hat aufgewertet",
+        "weaker": "{from} hat abgewertet",
+        "periods": {
+          "1W": "1W",
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1J",
+          "5Y": "5J",
+          "10Y": "10J"
+        }
+      },
+      "yearly": {
+        "title": "Jahr für Jahr",
+        "heading": "{amount} {from} in {to} zu jedem Jahresende",
+        "intro": "Ihr Betrag, umgerechnet zum letzten EZB-Fixing jedes der vergangenen zehn Jahre (dieses Jahr: das jüngste).",
+        "workedTitle": "Rechenbeispiel",
+        "rowThen": "Ende {year}",
+        "rowNow": "Im Jahr {year}",
+        "rowDiff": "Differenz"
+      },
+      "comparison": {
+        "title": "Währungsvergleich",
+        "heading": "{from} gegenüber {to}",
+        "intro": "Der Wert jeder Währung in {currency}, ihre Bewegungen gegenüber dem US-Dollar und ihre Schwankungsbreite.",
+        "workedTitle": "Rechenbeispiel",
+        "rowA": "1 {code}",
+        "rowB": "1 {code}",
+        "rowRatio": "Verhältnis",
+        "rowResult": "Kreuzkurs",
+        "rowRangeNote": "seit 1999: {low} – {high}",
+        "rows": {
+          "d1": "1 Tag vs USD",
+          "d30": "30 Tage vs USD",
+          "y1": "1 Jahr vs USD",
+          "vol": "30-Tage-Volatilität"
+        },
+        "noHistory": "Keine EZB-Historie für diese Währung."
+      },
+      "strength": {
+        "title": "Währungsstärke-Messer",
+        "heading": "Hauptwährungen nach Stärke",
+        "intro": "Die Wertänderung jeder Währung gegenüber dem Durchschnitt des gesamten Korbs (inklusive US-Dollar); die Werte summieren sich zu null.",
+        "lookbackLabel": "Zeitraum",
+        "lookback": {
+          "5": "1 Woche",
+          "21": "1 Monat",
+          "63": "3 Monate"
+        },
+        "workedTitle": "Rechenbeispiel",
+        "rowOwn": "Änderung von {code} in USD",
+        "rowBasket": "Korbdurchschnitt",
+        "rowBasketNote": "Mittel von {n} Währungen",
+        "rowFormula": "eigene − Durchschnitt",
+        "rowResult": "Stärke von {code}"
+      },
+      "movers": {
+        "title": "Größte Bewegungen",
+        "heading": "Größte Bewegungen gegenüber dem US-Dollar am {date}",
+        "intro": "Alle EZB-Währungen nach ihrer Tagesänderung gegenüber dem Dollar sortiert. Klicken Sie eine an, um aus ihr umzurechnen.",
+        "workedTitle": "Rechenbeispiel",
+        "rowPrev": "{code} vorheriges Fixing",
+        "rowNow": "{code} letztes Fixing",
+        "rowFormula": "vorher ÷ zuletzt − 1",
+        "rowResult": "{code} vs USD",
+        "gainers": "Am stärksten",
+        "losers": "Am schwächsten"
+      },
+      "crossRates": {
+        "title": "Kreuzkurse",
+        "heading": "Wichtige Kreuzkurse",
+        "intro": "Zeilenweise lesen: 1 Einheit der Zeilenwährung entspricht der Zahl in jeder Spaltenwährung. Ihr Paar ist hervorgehoben.",
+        "workedTitle": "Rechenbeispiel",
+        "rowRow": "Zeile: {code}",
+        "rowCol": "Spalte: {code}",
+        "rowFormula": "Spaltenkurs ÷ Zeilenkurs",
+        "rowResult": "Zelle"
+      },
+      "workedExamples": {
+        "title": "Rechenbeispiele",
+        "intro": "Drei echte Umrechnungen, Schritt für Schritt mit den Kursen dieser Seite gelöst ({time}).",
+        "exampleTitle": "Beispiel {n}",
+        "step1": "Kurs von {from} nachschlagen:",
+        "step2": "In US-Dollar umrechnen:",
+        "step3": "In {to} umrechnen:",
+        "step4": "Impliziter Kurs:"
       }
     },
     "commodities-tracker": {

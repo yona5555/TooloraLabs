@@ -5,7 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { FearGreedPoint } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
-import LiveFallback from "./LiveFallback";
+import LiveFallback from "@/components/tools/markets/LiveFallback";
 
 const ZONE_BG: Record<FearGreedZone, string> = {
   extremeFear: "bg-red-600",

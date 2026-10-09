@@ -8,7 +8,9 @@ import ToolInput from "@/components/tool-ui/ToolInput";
 
 type Row = { label: string; value: string };
 
-type ForexShareExportModalProps = {
+type ShareExportModalProps = {
+  /** Tool message namespace holding the `shareExport` strings, e.g. "tools.forex-converter". */
+  namespace: "tools.crypto-converter" | "tools.forex-converter" | "tools.commodities-tracker";
   operationLabel: string;
   inputRows: Row[];
   resultRows: Row[];
@@ -17,8 +19,8 @@ type ForexShareExportModalProps = {
   sentence: string;
 };
 
-export default function ForexShareExportModal({ operationLabel, inputRows, resultRows, heroLabel, heroValue, sentence }: ForexShareExportModalProps) {
-  const t = useTranslations("tools.forex-converter");
+export default function ShareExportModal({ namespace, operationLabel, inputRows, resultRows, heroLabel, heroValue, sentence }: ShareExportModalProps) {
+  const t = useTranslations(namespace);
   const tActions = useTranslations("common.actions");
   const tShare = useTranslations("share");
   const locale = useLocale();
@@ -71,7 +73,7 @@ export default function ForexShareExportModal({ operationLabel, inputRows, resul
         preparedFor: preparedForRows,
         preparedForTitle: t("shareExport.preparedForTitle"),
         brandingEnhancements: true,
-        filename: "forex-converter.pdf",
+        filename: "crypto-converter.pdf",
       });
       setPdfState("done");
       setTimeout(() => setPdfState("idle"), 1500);
@@ -107,7 +109,7 @@ export default function ForexShareExportModal({ operationLabel, inputRows, resul
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 rounded-lg border border-white/40 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/10 dark:text-zinc-100"
+        className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
       >
         <Share2 size={14} />
         {t("shareExport.triggerLabel")}

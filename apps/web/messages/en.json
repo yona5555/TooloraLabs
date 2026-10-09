@@ -2814,6 +2814,10 @@
       },
       "relatedTools": {
         "title": "Related Market Tools"
+      },
+      "sidebarVolume": {
+        "title": "Most traded today ({currency})",
+        "note": "24h trading volume; change is the 24h price move."
       }
     },
     "forex-converter": {
@@ -2832,14 +2836,19 @@
         "pickerNoResults": "No matching currency found",
         "disclaimer": "This page is for general information and education only, not financial or investment advice. Exchange rates come from a public market-data provider and are refreshed once daily, so they may lag the live interbank market. Consult a licensed financial professional before making any financial decision.",
         "clear": "Clear",
-        "dataUnavailable": "Live exchange rates are temporarily unavailable. Please try again in a few minutes."
+        "dataUnavailable": "Live exchange rates are temporarily unavailable. Please try again in a few minutes.",
+        "fiatLabel": "Display currency",
+        "quickTitle": "Quick conversions"
       },
       "nav": {
         "tool": "Converter",
         "news": "News",
         "education": "Learning",
         "faq": "FAQ",
-        "notices": "Notices"
+        "notices": "Notices",
+        "chart": "Chart",
+        "pair": "Pair",
+        "market": "Market"
       },
       "dataSource": {
         "exchangeRateApi": "Live conversion rates and currency list:",
@@ -2849,18 +2858,20 @@
         "title": "Major & Arab Currencies",
         "intro": "The world's most widely traded currencies alongside the main currencies of the Arab region, all quoted against 1 US dollar.",
         "columnCurrency": "Currency",
-        "columnRatePerUsd": "Units per 1 USD"
-      },
-      "chart": {
-        "title": "USD / EUR Historical Rate",
-        "intro": "How many euros one US dollar has bought over time, based on European Central Bank reference rates.",
-        "periodWeek": "1W",
-        "periodMonth": "1M",
-        "periodYear": "1Y",
-        "loading": "Loading chart…",
-        "error": "Couldn't load historical data. Please try again.",
-        "lowLabel": "Low",
-        "highLabel": "High"
+        "columnRatePerUsd": "Units per 1 USD",
+        "heading": "{amount} {code} in major and Arab currencies",
+        "columnTag": "Regime",
+        "workedTitle": "Worked Example",
+        "rowAmount": "Amount",
+        "rowUsd": "To USD",
+        "rowTarget": "× {code} per USD",
+        "rowResult": "Result",
+        "tags": {
+          "pegged": "USD peg",
+          "arab": "Arab",
+          "base": "Base",
+          "floating": "Floating"
+        }
       },
       "news": {
         "title": "Currency Market News",
@@ -2931,30 +2942,25 @@
           "title": "A Brief History of the Global Exchange Rate System",
           "paragraph1": "For most of the late 19th and early 20th centuries, major currencies were pegged to a fixed weight of gold under the classical gold standard, which gave exchange rates long stretches of stability at the cost of tying domestic monetary policy to gold flows. That system broke down during the Great Depression and the Second World War.",
           "paragraph2": "In July 1944, representatives of 44 Allied nations meeting at Bretton Woods, New Hampshire, agreed on a new system: the US dollar was pegged to gold at $35 per ounce, and every other member currency was pegged to the dollar within a narrow band, with the newly created International Monetary Fund overseeing adjustments. The system held through the 1950s and 1960s, but persistent US balance-of-payments deficits eventually made the gold peg unsustainable. On August 15, 1971, President Richard Nixon suspended the dollar's convertibility into gold, an event now known as the 'Nixon Shock.' By March 1973, the major economies had abandoned fixed rates altogether in favor of the floating exchange rate system still in place today, in which most currency values are set by market supply and demand rather than a government-fixed peg.",
-          "diagram": {
-            "eras": [
-              {
-                "year": "1944",
-                "title": "Bretton Woods",
-                "note": "Dollar pegged to gold"
-              },
-              {
-                "year": "1971",
-                "title": "Nixon Shock",
-                "note": "Gold convertibility ends"
-              },
-              {
-                "year": "1973",
-                "title": "Floating Era Begins",
-                "note": "Major currencies float"
-              },
-              {
-                "year": "Today",
-                "title": "Mixed Regimes",
-                "note": "Multiple regimes coexist"
-              }
-            ],
-            "caption": "A simplified timeline of the modern international exchange rate system, from the Bretton Woods peg to today's mostly floating regime."
+          "live": {
+            "title": "The Floating Era on Real Data",
+            "heading": "{base}/{quote}, every ECB fixing since 1999",
+            "intro": "Your converter pair across the euro era, with the real rate on each landmark date.",
+            "introFallback": "The ECB doesn't fix {from}/{to}, so the euro's own benchmark pair is shown instead.",
+            "loading": "Loading ECB history…",
+            "error": "Historical rates are temporarily unavailable.",
+            "workedTitle": "Rate on each landmark",
+            "events": {
+              "euro": "Euro launches",
+              "notes": "Euro notes and coins",
+              "lehman": "Lehman collapse",
+              "snb": "Swiss franc unpegged",
+              "brexit": "Brexit vote",
+              "covid": "Pandemic shock",
+              "hikes": "ECB starts hiking"
+            },
+            "today": "Latest fixing",
+            "sinceFirst": "{pct} since the first fixing"
           }
         },
         "regimes": {
@@ -3105,9 +3111,237 @@
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input"
       },
-      "quickAmounts": {
-        "title": "Quick Reference: Common Amounts",
-        "intro": "The same rate applies at any scale — here's what a few common {from} amounts convert to in {to}."
+      "relatedTools": {
+        "title": "Related market tools"
+      },
+      "sidebarRates": {
+        "title": "1 unit in {currency}",
+        "note": "Daily rates; change is the last ECB fixing vs the one before."
+      },
+      "liveFlow": {
+        "title": "Conversion Flow",
+        "badge": "Daily rate",
+        "heading": "{from} → {to}",
+        "intro": "Your amount flows through the US dollar: divided by the source rate, multiplied by the target rate.",
+        "noTrend": "No ECB history",
+        "spark30d": "30d vs {code}",
+        "workedTitle": "Worked Example",
+        "rowAmount": "Amount",
+        "rowFromRate": "{code} per 1 USD",
+        "rowUsd": "Value in USD",
+        "rowToRate": "{code} per 1 USD",
+        "rowRate": "Implied rate",
+        "rowResult": "Result",
+        "dailyNote": "Provider rates refresh once a day."
+      },
+      "equivalence": {
+        "title": "Same Amount, Many Currencies",
+        "heading": "{amount} {code} is worth",
+        "intro": "Every tile is the same value, priced in another widely used currency at today's rates.",
+        "workedTitle": "Worked Example",
+        "rowAmount": "Amount",
+        "rowToUsd": "{code} → USD",
+        "rowToTarget": "USD → {code}",
+        "rowResult": "Equivalent"
+      },
+      "chart": {
+        "title": "Rates Terminal & Candlestick Chart",
+        "heading": "{base}/{quote} since 1999",
+        "intro": "Pick a pair from the list to chart it. Weekly and monthly candles are built only from ECB daily fixings; the daily view is a line because a single fixing has no open, high or low.",
+        "loading": "Loading history…",
+        "error": "The ECB history for {pair} couldn't be loaded.",
+        "lowLabel": "Period low",
+        "highLabel": "Period high",
+        "timeframeLabel": "Interval",
+        "retry": "Try again",
+        "fullscreen": "Fullscreen",
+        "exitFullscreen": "Exit fullscreen",
+        "closeLabel": "Fixing",
+        "tf": {
+          "D": "Daily (line)",
+          "W": "Weekly",
+          "M": "Monthly"
+        },
+        "listTitle": "Major pairs",
+        "listBadge": "ECB daily",
+        "listNote": "Latest ECB fixing and change vs the previous business day. Click a pair to chart it.",
+        "yourPair": "Your pair",
+        "candleNote": "Each candle: open = first fixing, close = last fixing, high/low = highest/lowest fixing in the period. Moves between fixings are not in the data.",
+        "candleNoteDaily": "Daily line: one ECB reference rate per business day, last two years.",
+        "attribution": "Chart library: Lightweight Charts™ by"
+      },
+      "history": {
+        "loading": "Loading ECB history…",
+        "unsupported": "The European Central Bank publishes no daily rate for {from}/{to}, so this indicator needs a pair of ECB currencies (e.g. USD, EUR, GBP, JPY).",
+        "error": "Historical rates are temporarily unavailable. Please try again later."
+      },
+      "range": {
+        "title": "52-Week Range",
+        "heading": "Where {from}/{to} sits in its 52-week range",
+        "intro": "The bar runs from the lowest to the highest ECB fixing of 1 {from} in {to} over the past year; the marker is today.",
+        "workedTitle": "Worked Example",
+        "rowLow": "52-week low",
+        "rowHigh": "52-week high",
+        "rowNow": "Latest fixing",
+        "rowFormula": "(now − low) ÷ range",
+        "rowPosition": "Position",
+        "zones": {
+          "low": "Near the low",
+          "mid": "Mid-range",
+          "high": "Near the high"
+        },
+        "bands": {
+          "year": "Past 52 weeks",
+          "all": "Since 1999"
+        }
+      },
+      "volatility": {
+        "title": "30-Day Volatility",
+        "heading": "{from}/{to} realized volatility",
+        "intro": "How much the pair has been swinging: the spread of its last 30 daily moves, scaled to a yearly figure.",
+        "workedTitle": "Worked Example",
+        "rowReturns": "Daily moves used",
+        "rowReturnsNote": "log change between fixings",
+        "rowDaily": "Daily standard deviation",
+        "rowDailyNote": "typical one-day move",
+        "rowScale": "Annualize",
+        "rowAnnual": "Annualized volatility",
+        "zones": {
+          "low": "Calm",
+          "medium": "Normal",
+          "high": "Stormy"
+        }
+      },
+      "sensitivity": {
+        "title": "Rate Sensitivity",
+        "heading": "If {from} moves against {to}",
+        "intro": "Your result if 1 {from} buys a little less or a little more {to} than today.",
+        "shiftLabel": "Rate move",
+        "workedTitle": "Worked Example (+{pct}%)",
+        "rowRateNow": "Rate now",
+        "rowShifted": "Rate +{pct}%",
+        "rowAmount": "Amount × new rate",
+        "rowResult": "New result",
+        "rowNote": "{diff} vs today",
+        "low": "{from} −{pct}%",
+        "now": "Today",
+        "high": "{from} +{pct}%"
+      },
+      "timeline": {
+        "title": "Pair Timeline",
+        "heading": "{from}/{to} milestones since 1999",
+        "intro": "The pair's first ECB fixing, its all-time and 52-week extremes, and today, in date order.",
+        "workedTitle": "Worked Example",
+        "rowHigh": "All-time high",
+        "rowLow": "All-time low",
+        "rowNow": "Today",
+        "rowFromHigh": "Below the high",
+        "rowFromLow": "Above the low",
+        "stations": {
+          "first": "First fixing",
+          "low": "All-time low",
+          "high": "All-time high",
+          "yearLow": "52-week low",
+          "yearHigh": "52-week high",
+          "last": "Latest fixing"
+        },
+        "vsToday": "today {pct}"
+      },
+      "returns": {
+        "title": "Returns by Period",
+        "heading": "How {from}/{to} has moved",
+        "intro": "Change in the price of 1 {from} over each period, from ECB fixings. Green means {from} bought more.",
+        "workedTitle": "Worked Example (1 year)",
+        "rowThen": "Rate a year ago",
+        "rowNow": "Rate now",
+        "rowFormula": "now ÷ then − 1",
+        "rowResult": "1-year change",
+        "stronger": "{from} strengthened",
+        "weaker": "{from} weakened",
+        "periods": {
+          "1W": "1W",
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1Y",
+          "5Y": "5Y",
+          "10Y": "10Y"
+        }
+      },
+      "yearly": {
+        "title": "Year by Year",
+        "heading": "{amount} {from} in {to}, at each year-end",
+        "intro": "Your amount converted at the last ECB fixing of each of the past ten years (this year: the latest fixing).",
+        "workedTitle": "Worked Example",
+        "rowThen": "At end of {year}",
+        "rowNow": "In {year}",
+        "rowDiff": "Difference"
+      },
+      "comparison": {
+        "title": "Currency Comparison",
+        "heading": "{from} vs {to}",
+        "intro": "Each currency's value in {currency}, its moves against the US dollar, and how much it swings.",
+        "workedTitle": "Worked Example",
+        "rowA": "1 {code}",
+        "rowB": "1 {code}",
+        "rowRatio": "Ratio",
+        "rowResult": "Cross rate",
+        "rowRangeNote": "since 1999: {low} – {high}",
+        "rows": {
+          "d1": "1 day vs USD",
+          "d30": "30 days vs USD",
+          "y1": "1 year vs USD",
+          "vol": "30-day volatility"
+        },
+        "noHistory": "No ECB history for this currency."
+      },
+      "strength": {
+        "title": "Currency Strength Meter",
+        "heading": "Major currencies ranked by strength",
+        "intro": "Each currency's change in value against the average of the whole basket (US dollar included); scores add up to zero.",
+        "lookbackLabel": "Period",
+        "lookback": {
+          "5": "1 week",
+          "21": "1 month",
+          "63": "3 months"
+        },
+        "workedTitle": "Worked Example",
+        "rowOwn": "{code} change in USD terms",
+        "rowBasket": "Basket average",
+        "rowBasketNote": "mean of {n} currencies",
+        "rowFormula": "own − average",
+        "rowResult": "{code} strength"
+      },
+      "movers": {
+        "title": "Top Movers",
+        "heading": "Biggest moves vs the US dollar on {date}",
+        "intro": "All ECB currencies ranked by their one-day change against the dollar. Click one to convert from it.",
+        "workedTitle": "Worked Example",
+        "rowPrev": "{code} previous fixing",
+        "rowNow": "{code} latest fixing",
+        "rowFormula": "previous ÷ latest − 1",
+        "rowResult": "{code} vs USD",
+        "gainers": "Strongest",
+        "losers": "Weakest"
+      },
+      "crossRates": {
+        "title": "Cross Rates",
+        "heading": "Major cross rates",
+        "intro": "Read across: 1 unit of the row currency equals the number shown in each column currency. Your pair is highlighted.",
+        "workedTitle": "Worked Example",
+        "rowRow": "Row: {code}",
+        "rowCol": "Column: {code}",
+        "rowFormula": "column rate ÷ row rate",
+        "rowResult": "Cell"
+      },
+      "workedExamples": {
+        "title": "Worked Examples",
+        "intro": "Three real conversions, worked step by step from the rates this page loaded ({time}).",
+        "exampleTitle": "Example {n}",
+        "step1": "Look up the {from} rate:",
+        "step2": "Convert to US dollars:",
+        "step3": "Convert to {to}:",
+        "step4": "Implied rate:"
       }
     },
     "commodities-tracker": {

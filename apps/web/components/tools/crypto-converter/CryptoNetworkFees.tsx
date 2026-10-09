@@ -6,7 +6,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { FeeSnapshot } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
-import LiveFallback from "./LiveFallback";
+import LiveFallback from "@/components/tools/markets/LiveFallback";
 import { useCryptoFormatters } from "./cryptoFormat";
 
 type CryptoNetworkFeesProps = { btcPriceUsd: number | null; digitStyle: DigitStyle };

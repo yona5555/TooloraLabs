@@ -7,7 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import type { ChainTip } from "@/lib/crypto/network";
 import { useNetworkData } from "./useCryptoLive";
-import LiveFallback from "./LiveFallback";
+import LiveFallback from "@/components/tools/markets/LiveFallback";
 
 /** Genesis plus the four halvings so far, with the UTC date each era's first block was mined. */
 const ERA_STARTS = [

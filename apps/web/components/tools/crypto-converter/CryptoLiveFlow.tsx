@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
+import Sparkline, { useRelativeUpdatedLabel } from "@/components/tools/markets/Sparkline";
 import { useLocale, useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { convertCryptoAmount, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import CopyButton from "@/components/tool-ui/CopyButton";
-import CryptoShareExportModal from "./CryptoShareExportModal";
+import ShareExportModal from "@/components/tools/markets/ShareExportModal";
 import { useCryptoFormatters } from "./cryptoFormat";
 import type { LiveTick } from "./useCryptoLive";
 
@@ -21,23 +22,7 @@ type CryptoLiveFlowProps = {
   digitStyle: DigitStyle;
 };
 
-function useRelativeUpdatedLabel(lastUpdated: number, locale: string): string {
-  const [now, setNow] = useState(() => Date.now());
-
-  useEffect(() => {
-    const interval = setInterval(() => setNow(Date.now()), 60_000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const minutesAgo = Math.max(0, Math.round((now - lastUpdated) / 60_000));
-  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
-  return minutesAgo === 0 ? rtf.format(0, "minute") : rtf.format(-minutesAgo, "minute");
-}
-
 type Point = { timestamp: number; price: number };
-
-const SPARK_W = 112;
-const SPARK_H = 34;
 
 /** 24h price path for one coin, from the page's own CoinGecko chart route (5-minute points). */
 function useSparkline(coinId: string | undefined) {
@@ -54,25 +39,6 @@ function useSparkline(coinId: string | undefined) {
     };
   }, [coinId]);
   return data && data.id === coinId ? data.points : null;
-}
-
-function Sparkline({ points, livePrice, up }: { points: Point[] | null; livePrice: number; up: boolean }) {
-  if (!points || points.length < 2) {
-    return <div style={{ width: SPARK_W, height: SPARK_H }} className="animate-pulse rounded bg-zinc-100 dark:bg-zinc-800" />;
-  }
-  const prices = [...points.map((p) => p.price), livePrice];
-  const min = Math.min(...prices);
-  const range = Math.max(...prices) - min || 1;
-  const coords = prices.map((p, i) => [(i / (prices.length - 1)) * SPARK_W, SPARK_H - 2 - ((p - min) / range) * (SPARK_H - 4)]);
-  const d = `M ${coords.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" L ")}`;
-  const [lx, ly] = coords[coords.length - 1];
-  const stroke = up ? "stroke-emerald-500" : "stroke-red-500";
-  return (
-    <svg width={SPARK_W} height={SPARK_H} viewBox={`0 0 ${SPARK_W} ${SPARK_H}`} aria-hidden>
-      <path d={d} fill="none" strokeWidth={1.5} className={stroke} />
-      <circle cx={lx} cy={ly} r={2.5} className={up ? "fill-emerald-500" : "fill-red-500"} />
-    </svg>
-  );
 }
 
 function CoinNode({
@@ -115,7 +81,7 @@ function CoinNode({
         </span>
       </div>
       <div dir="ltr" className="mt-1 flex items-end justify-between gap-1">
-        <Sparkline points={points} livePrice={price} up={change >= 0} />
+        <Sparkline values={points ? [...points.map((p) => p.price), price] : null} up={change >= 0} />
         <span className="text-[10px] text-zinc-400">{t("spark24h")}</span>
       </div>
       <p dir="ltr" className="mt-1 truncate text-end font-mono text-sm font-semibold text-blue-700 dark:text-blue-300">
@@ -183,7 +149,8 @@ export default function CryptoLiveFlow({ fromCoin, toCoin, amountText, amount, t
             <span className="text-xs text-zinc-500 dark:text-zinc-400">{updated}</span>
             <div className="flex items-center gap-2">
               <CopyButton text={summaryText} />
-              <CryptoShareExportModal
+              <ShareExportModal
+              namespace="tools.crypto-converter"
               operationLabel={`${sym(fromCoin)} → ${sym(toCoin)}`}
               inputRows={[{ label: sym(fromCoin), value: `${amountText} ${sym(fromCoin)}` }]}
               resultRows={[

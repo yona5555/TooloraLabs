@@ -2814,6 +2814,10 @@
       },
       "relatedTools": {
         "title": "Outils de marché associés"
+      },
+      "sidebarVolume": {
+        "title": "Les plus échangées aujourd'hui ({currency})",
+        "note": "Volume sur 24 h ; la variation est le mouvement du prix sur 24 h."
       }
     },
     "forex-converter": {
@@ -2832,14 +2836,19 @@
         "pickerNoResults": "Aucune devise correspondante trouvée",
         "disclaimer": "Cette page est fournie à titre purement informatif et pédagogique, et ne constitue pas un conseil financier ou en investissement. Les taux de change proviennent d'un fournisseur de données de marché public et sont actualisés une fois par jour ; ils peuvent donc accuser un décalage par rapport au marché interbancaire en temps réel. Consultez un professionnel financier agréé avant de prendre toute décision financière.",
         "clear": "Effacer",
-        "dataUnavailable": "Les taux de change en direct sont temporairement indisponibles. Veuillez réessayer dans quelques minutes."
+        "dataUnavailable": "Les taux de change en direct sont temporairement indisponibles. Veuillez réessayer dans quelques minutes.",
+        "fiatLabel": "Devise d'affichage",
+        "quickTitle": "Conversions rapides"
       },
       "nav": {
         "tool": "Convertisseur",
         "news": "Actualités",
         "education": "Apprentissage",
         "faq": "FAQ",
-        "notices": "Avis"
+        "notices": "Avis",
+        "chart": "Graphique",
+        "pair": "Paire",
+        "market": "Marché"
       },
       "dataSource": {
         "exchangeRateApi": "Taux de conversion en direct et liste des devises :",
@@ -2849,18 +2858,20 @@
         "title": "Devises majeures et arabes",
         "intro": "Les devises les plus échangées au monde, aux côtés des principales devises de la région arabe, toutes cotées face à 1 dollar américain.",
         "columnCurrency": "Devise",
-        "columnRatePerUsd": "Unités pour 1 USD"
-      },
-      "chart": {
-        "title": "Taux historique USD / EUR",
-        "intro": "Combien d'euros un dollar américain a permis d'acheter au fil du temps, sur la base des taux de référence de la Banque centrale européenne.",
-        "periodWeek": "1S",
-        "periodMonth": "1M",
-        "periodYear": "1A",
-        "loading": "Chargement du graphique…",
-        "error": "Impossible de charger les données historiques. Veuillez réessayer.",
-        "lowLabel": "Plus bas",
-        "highLabel": "Plus haut"
+        "columnRatePerUsd": "Unités pour 1 USD",
+        "heading": "{amount} {code} en devises majeures et arabes",
+        "columnTag": "Régime",
+        "workedTitle": "Exemple résolu",
+        "rowAmount": "Montant",
+        "rowUsd": "En USD",
+        "rowTarget": "× {code} par USD",
+        "rowResult": "Résultat",
+        "tags": {
+          "pegged": "Arrimée à l'USD",
+          "arab": "Arabe",
+          "base": "Base",
+          "floating": "Flottante"
+        }
       },
       "news": {
         "title": "Actualités du marché des changes",
@@ -2931,30 +2942,25 @@
           "title": "Bref historique du système de change mondial",
           "paragraph1": "Pendant la majeure partie de la fin du XIXe siècle et du début du XXe siècle, les principales devises étaient arrimées à un poids fixe d'or dans le cadre de l'étalon-or classique, ce qui a offert de longues périodes de stabilité des taux de change au prix d'une politique monétaire nationale liée aux flux d'or. Ce système s'est effondré pendant la Grande Dépression et la Seconde Guerre mondiale.",
           "paragraph2": "En juillet 1944, les représentants de 44 nations alliées réunis à Bretton Woods, dans le New Hampshire, se sont accordés sur un nouveau système : le dollar américain était arrimé à l'or à raison de 35 dollars l'once, et chaque autre devise membre était arrimée au dollar dans une bande étroite, le Fonds monétaire international, tout juste créé, supervisant les ajustements. Le système a tenu bon durant les années 1950 et 1960, mais les déficits persistants de la balance des paiements américaine ont fini par rendre l'arrimage à l'or intenable. Le 15 août 1971, le président Richard Nixon a suspendu la convertibilité du dollar en or, un événement aujourd'hui connu sous le nom de « choc Nixon ». Dès mars 1973, les grandes économies avaient abandonné les taux fixes au profit du système de changes flottants toujours en vigueur aujourd'hui, dans lequel la valeur de la plupart des devises est déterminée par l'offre et la demande du marché plutôt que par un arrimage fixé par un gouvernement.",
-          "diagram": {
-            "eras": [
-              {
-                "year": "1944",
-                "title": "Bretton Woods",
-                "note": "Dollar arrimé à l'or"
-              },
-              {
-                "year": "1971",
-                "title": "Choc Nixon",
-                "note": "Fin de la convertibilité en or"
-              },
-              {
-                "year": "1973",
-                "title": "Début de l'ère flottante",
-                "note": "Les grandes devises flottent"
-              },
-              {
-                "year": "Aujourd'hui",
-                "title": "Régimes mixtes",
-                "note": "Plusieurs régimes coexistent"
-              }
-            ],
-            "caption": "Une chronologie simplifiée du système de change international moderne, de l'arrimage de Bretton Woods au régime aujourd'hui majoritairement flottant."
+          "live": {
+            "title": "L'ère des changes flottants en données réelles",
+            "heading": "{base}/{quote}, chaque fixation BCE depuis 1999",
+            "intro": "La paire de votre convertisseur sur toute l'ère de l'euro, avec le cours réel à chaque date clé.",
+            "introFallback": "La BCE ne fixe pas {from}/{to} ; la paire de référence de l'euro est donc affichée.",
+            "loading": "Chargement de l'historique BCE…",
+            "error": "Les cours historiques sont momentanément indisponibles.",
+            "workedTitle": "Cours à chaque étape",
+            "events": {
+              "euro": "Lancement de l'euro",
+              "notes": "Billets et pièces en euros",
+              "lehman": "Faillite de Lehman",
+              "snb": "Fin du plancher du franc suisse",
+              "brexit": "Vote du Brexit",
+              "covid": "Choc de la pandémie",
+              "hikes": "La BCE commence à relever ses taux"
+            },
+            "today": "Dernière fixation",
+            "sinceFirst": "{pct} depuis la première fixation"
           }
         },
         "regimes": {
@@ -3105,9 +3111,237 @@
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé",
         "inputSectionTitle": "Entrée"
       },
-      "quickAmounts": {
-        "title": "Référence Rapide : Montants Courants",
-        "intro": "Le même taux s'applique à toute échelle — voici ce que donnent quelques montants courants de {from} convertis en {to}."
+      "relatedTools": {
+        "title": "Outils de marché associés"
+      },
+      "sidebarRates": {
+        "title": "1 unité en {currency}",
+        "note": "Cours quotidiens ; la variation compare la dernière fixation BCE à la précédente."
+      },
+      "liveFlow": {
+        "title": "Flux de conversion",
+        "badge": "Cours du jour",
+        "heading": "{from} → {to}",
+        "intro": "Votre montant transite par le dollar américain : divisé par le cours source, multiplié par le cours cible.",
+        "noTrend": "Pas d'historique BCE",
+        "spark30d": "30 j vs {code}",
+        "workedTitle": "Exemple résolu",
+        "rowAmount": "Montant",
+        "rowFromRate": "{code} pour 1 USD",
+        "rowUsd": "Valeur en USD",
+        "rowToRate": "{code} pour 1 USD",
+        "rowRate": "Cours implicite",
+        "rowResult": "Résultat",
+        "dailyNote": "Les cours du fournisseur sont mis à jour une fois par jour."
+      },
+      "equivalence": {
+        "title": "Même montant, plusieurs devises",
+        "heading": "{amount} {code} valent",
+        "intro": "Chaque case représente la même valeur, exprimée dans une autre devise courante aux cours du jour.",
+        "workedTitle": "Exemple résolu",
+        "rowAmount": "Montant",
+        "rowToUsd": "{code} → USD",
+        "rowToTarget": "USD → {code}",
+        "rowResult": "Équivalent"
+      },
+      "chart": {
+        "title": "Terminal des cours et chandeliers",
+        "heading": "{base}/{quote} depuis 1999",
+        "intro": "Choisissez une paire dans la liste pour l'afficher. Les chandeliers hebdomadaires et mensuels sont construits uniquement à partir des fixations quotidiennes de la BCE ; la vue quotidienne est une ligne car une fixation unique n'a ni ouverture, ni plus haut, ni plus bas.",
+        "loading": "Chargement de l'historique…",
+        "error": "Impossible de charger l'historique BCE de {pair}.",
+        "lowLabel": "Plus bas de la période",
+        "highLabel": "Plus haut de la période",
+        "timeframeLabel": "Intervalle",
+        "retry": "Réessayer",
+        "fullscreen": "Plein écran",
+        "exitFullscreen": "Quitter le plein écran",
+        "closeLabel": "Fixation",
+        "tf": {
+          "D": "Quotidien (ligne)",
+          "W": "Hebdomadaire",
+          "M": "Mensuel"
+        },
+        "listTitle": "Paires majeures",
+        "listBadge": "BCE quotidien",
+        "listNote": "Dernière fixation BCE et variation par rapport au jour ouvré précédent. Cliquez sur une paire pour l'afficher.",
+        "yourPair": "Votre paire",
+        "candleNote": "Chaque chandelier : ouverture = première fixation, clôture = dernière, plus haut/bas = fixation la plus haute/basse de la période. Les mouvements entre fixations ne figurent pas dans les données.",
+        "candleNoteDaily": "Ligne quotidienne : un cours de référence BCE par jour ouvré, sur les deux dernières années.",
+        "attribution": "Bibliothèque graphique : Lightweight Charts™ par"
+      },
+      "history": {
+        "loading": "Chargement de l'historique BCE…",
+        "unsupported": "La Banque centrale européenne ne publie pas de cours quotidien pour {from}/{to} ; cet indicateur nécessite une paire de devises BCE (p. ex. USD, EUR, GBP, JPY).",
+        "error": "Les cours historiques sont momentanément indisponibles. Réessayez plus tard."
+      },
+      "range": {
+        "title": "Fourchette sur 52 semaines",
+        "heading": "Position de {from}/{to} dans sa fourchette de 52 semaines",
+        "intro": "La barre va de la fixation la plus basse à la plus haute de 1 {from} en {to} sur l'année écoulée ; le repère indique aujourd'hui.",
+        "workedTitle": "Exemple résolu",
+        "rowLow": "Plus bas 52 semaines",
+        "rowHigh": "Plus haut 52 semaines",
+        "rowNow": "Dernière fixation",
+        "rowFormula": "(actuel − bas) ÷ fourchette",
+        "rowPosition": "Position",
+        "zones": {
+          "low": "Près du plus bas",
+          "mid": "Milieu de fourchette",
+          "high": "Près du plus haut"
+        },
+        "bands": {
+          "year": "52 dernières semaines",
+          "all": "Depuis 1999"
+        }
+      },
+      "volatility": {
+        "title": "Volatilité sur 30 jours",
+        "heading": "Volatilité réalisée de {from}/{to}",
+        "intro": "L'ampleur des oscillations de la paire : la dispersion de ses 30 derniers mouvements quotidiens, ramenée à l'année.",
+        "workedTitle": "Exemple résolu",
+        "rowReturns": "Mouvements quotidiens",
+        "rowReturnsNote": "variation logarithmique entre fixations",
+        "rowDaily": "Écart type quotidien",
+        "rowDailyNote": "mouvement quotidien typique",
+        "rowScale": "Annualiser",
+        "rowAnnual": "Volatilité annualisée",
+        "zones": {
+          "low": "Calme",
+          "medium": "Normale",
+          "high": "Agitée"
+        }
+      },
+      "sensitivity": {
+        "title": "Sensibilité au cours",
+        "heading": "Si {from} bouge face à {to}",
+        "intro": "Votre résultat si 1 {from} achète un peu moins ou un peu plus de {to} qu'aujourd'hui.",
+        "shiftLabel": "Variation",
+        "workedTitle": "Exemple résolu (+{pct} %)",
+        "rowRateNow": "Cours actuel",
+        "rowShifted": "Cours +{pct} %",
+        "rowAmount": "Montant × nouveau cours",
+        "rowResult": "Nouveau résultat",
+        "rowNote": "{diff} par rapport à aujourd'hui",
+        "low": "{from} −{pct} %",
+        "now": "Aujourd'hui",
+        "high": "{from} +{pct} %"
+      },
+      "timeline": {
+        "title": "Chronologie de la paire",
+        "heading": "Étapes de {from}/{to} depuis 1999",
+        "intro": "La première fixation BCE de la paire, ses extrêmes historiques et sur 52 semaines, et aujourd'hui, par ordre chronologique.",
+        "workedTitle": "Exemple résolu",
+        "rowHigh": "Plus haut historique",
+        "rowLow": "Plus bas historique",
+        "rowNow": "Aujourd'hui",
+        "rowFromHigh": "Sous le plus haut",
+        "rowFromLow": "Au-dessus du plus bas",
+        "stations": {
+          "first": "Première fixation",
+          "low": "Plus bas historique",
+          "high": "Plus haut historique",
+          "yearLow": "Plus bas 52 semaines",
+          "yearHigh": "Plus haut 52 semaines",
+          "last": "Dernière fixation"
+        },
+        "vsToday": "aujourd'hui {pct}"
+      },
+      "returns": {
+        "title": "Performance par période",
+        "heading": "Évolution de {from}/{to}",
+        "intro": "Variation du prix de 1 {from} sur chaque période, d'après les fixations BCE. Le vert signifie que {from} achète davantage.",
+        "workedTitle": "Exemple résolu (1 an)",
+        "rowThen": "Cours il y a un an",
+        "rowNow": "Cours actuel",
+        "rowFormula": "actuel ÷ ancien − 1",
+        "rowResult": "Variation sur 1 an",
+        "stronger": "{from} s'est apprécié",
+        "weaker": "{from} s'est déprécié",
+        "periods": {
+          "1W": "1S",
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1A",
+          "5Y": "5A",
+          "10Y": "10A"
+        }
+      },
+      "yearly": {
+        "title": "Année après année",
+        "heading": "{amount} {from} en {to} à chaque fin d'année",
+        "intro": "Votre montant converti à la dernière fixation BCE de chacune des dix dernières années (cette année : la plus récente).",
+        "workedTitle": "Exemple résolu",
+        "rowThen": "Fin {year}",
+        "rowNow": "En {year}",
+        "rowDiff": "Différence"
+      },
+      "comparison": {
+        "title": "Comparaison des devises",
+        "heading": "{from} face à {to}",
+        "intro": "La valeur de chaque devise en {currency}, ses variations face au dollar et son amplitude.",
+        "workedTitle": "Exemple résolu",
+        "rowA": "1 {code}",
+        "rowB": "1 {code}",
+        "rowRatio": "Rapport",
+        "rowResult": "Cours croisé",
+        "rowRangeNote": "depuis 1999 : {low} – {high}",
+        "rows": {
+          "d1": "1 jour vs USD",
+          "d30": "30 jours vs USD",
+          "y1": "1 an vs USD",
+          "vol": "Volatilité 30 jours"
+        },
+        "noHistory": "Pas d'historique BCE pour cette devise."
+      },
+      "strength": {
+        "title": "Indicateur de force des devises",
+        "heading": "Devises majeures classées par force",
+        "intro": "La variation de valeur de chaque devise par rapport à la moyenne du panier (dollar compris) ; les scores s'additionnent à zéro.",
+        "lookbackLabel": "Période",
+        "lookback": {
+          "5": "1 semaine",
+          "21": "1 mois",
+          "63": "3 mois"
+        },
+        "workedTitle": "Exemple résolu",
+        "rowOwn": "Variation de {code} en USD",
+        "rowBasket": "Moyenne du panier",
+        "rowBasketNote": "moyenne de {n} devises",
+        "rowFormula": "propre − moyenne",
+        "rowResult": "Force de {code}"
+      },
+      "movers": {
+        "title": "Plus fortes variations",
+        "heading": "Plus fortes variations face au dollar le {date}",
+        "intro": "Toutes les devises BCE classées selon leur variation sur un jour face au dollar. Cliquez sur l'une d'elles pour convertir à partir de celle-ci.",
+        "workedTitle": "Exemple résolu",
+        "rowPrev": "{code} fixation précédente",
+        "rowNow": "{code} dernière fixation",
+        "rowFormula": "précédente ÷ dernière − 1",
+        "rowResult": "{code} vs USD",
+        "gainers": "Les plus fortes",
+        "losers": "Les plus faibles"
+      },
+      "crossRates": {
+        "title": "Cours croisés",
+        "heading": "Principaux cours croisés",
+        "intro": "Lecture en ligne : 1 unité de la devise de la ligne vaut le nombre indiqué dans chaque colonne. Votre paire est mise en évidence.",
+        "workedTitle": "Exemple résolu",
+        "rowRow": "Ligne : {code}",
+        "rowCol": "Colonne : {code}",
+        "rowFormula": "cours colonne ÷ cours ligne",
+        "rowResult": "Cellule"
+      },
+      "workedExamples": {
+        "title": "Exemples résolus",
+        "intro": "Trois conversions réelles, résolues pas à pas avec les cours chargés par cette page ({time}).",
+        "exampleTitle": "Exemple {n}",
+        "step1": "Relevez le cours de {from} :",
+        "step2": "Convertissez en dollars :",
+        "step3": "Convertissez en {to} :",
+        "step4": "Cours implicite :"
       }
     },
     "commodities-tracker": {

@@ -360,7 +360,7 @@ export default async function ToolPage({
         <ForexConverter
           initialCurrencies={snapshot?.currencies ?? []}
           lastUpdatedUnix={snapshot?.lastUpdatedUnix ?? null}
-          education={<ForexEducation />}
+          education={<ForexEducation currencies={snapshot?.currencies ?? []} lastUpdatedUnix={snapshot?.lastUpdatedUnix ?? null} locale={locale} />}
         />
       );
       break;

@@ -17,6 +17,12 @@ type ToolAboveFoldProps = {
    * still what's measured, so the filler never feeds back into the layout height.
    */
   sidebarFill?: ReactNode;
+  /**
+   * Stretch the input card to the row height (instead of making it sticky when the result column is
+   * taller), so an input card whose last block can grow (`flex-1`, e.g. a quick conversion table)
+   * fills the column with real content rather than leaving a gap under it.
+   */
+  stretchInput?: boolean;
 };
 
 /**
@@ -80,7 +86,7 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -156,11 +162,12 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
         unconditional inline `style.height`) keeps the value inert below
         `lg` without needing a matchMedia/JS breakpoint check.
       */}
+      {/* stretchInput lets the grid row itself size the input card (self-stretch), with no measuring. */}
       <div
-        className="min-w-0 lg:col-start-1 lg:row-start-1 lg:[height:var(--input-stretch-h)]"
-        style={inputBoxHeight ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : undefined}
+        className={`min-w-0 lg:col-start-1 lg:row-start-1 ${stretchInput ? "lg:self-stretch" : "lg:[height:var(--input-stretch-h)]"}`}
+        style={inputBoxHeight && !stretchInput ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : undefined}
       >
-        <div ref={inputRef} className={inputBoxHeight ? "lg:sticky lg:top-20" : undefined}>
+        <div ref={inputRef} className={stretchInput ? "lg:h-full" : inputBoxHeight ? "lg:sticky lg:top-20" : undefined}>
           {input}
         </div>
       </div>

@@ -2814,6 +2814,10 @@
       },
       "relatedTools": {
         "title": "Herramientas de mercado relacionadas"
+      },
+      "sidebarVolume": {
+        "title": "Lo más negociado hoy ({currency})",
+        "note": "Volumen de 24 h; el cambio es la variación de precio en 24 h."
       }
     },
     "forex-converter": {
@@ -2832,14 +2836,19 @@
         "pickerNoResults": "No se encontró ninguna moneda coincidente",
         "disclaimer": "Esta página tiene fines exclusivamente informativos y educativos, no constituye asesoramiento financiero ni de inversión. Los tipos de cambio proceden de un proveedor público de datos de mercado y se actualizan una vez al día, por lo que pueden ir por detrás del mercado interbancario en tiempo real. Consulta a un profesional financiero autorizado antes de tomar cualquier decisión económica.",
         "clear": "Borrar",
-        "dataUnavailable": "Los tipos de cambio en vivo no están disponibles temporalmente. Inténtalo de nuevo en unos minutos."
+        "dataUnavailable": "Los tipos de cambio en vivo no están disponibles temporalmente. Inténtalo de nuevo en unos minutos.",
+        "fiatLabel": "Moneda de visualización",
+        "quickTitle": "Conversiones rápidas"
       },
       "nav": {
         "tool": "Conversor",
         "news": "Noticias",
         "education": "Aprender",
         "faq": "Preguntas frecuentes",
-        "notices": "Avisos"
+        "notices": "Avisos",
+        "chart": "Gráfico",
+        "pair": "Par",
+        "market": "Mercado"
       },
       "dataSource": {
         "exchangeRateApi": "Tipos de conversión en vivo y lista de monedas:",
@@ -2849,18 +2858,20 @@
         "title": "Principales monedas y monedas árabes",
         "intro": "Las monedas más negociadas del mundo junto con las principales monedas de la región árabe, todas cotizadas frente a 1 dólar estadounidense.",
         "columnCurrency": "Moneda",
-        "columnRatePerUsd": "Unidades por 1 USD"
-      },
-      "chart": {
-        "title": "Tipo histórico USD / EUR",
-        "intro": "Cuántos euros ha comprado un dólar estadounidense a lo largo del tiempo, según los tipos de referencia del Banco Central Europeo.",
-        "periodWeek": "1S",
-        "periodMonth": "1M",
-        "periodYear": "1A",
-        "loading": "Cargando gráfico…",
-        "error": "No se pudieron cargar los datos históricos. Inténtalo de nuevo.",
-        "lowLabel": "Mínimo",
-        "highLabel": "Máximo"
+        "columnRatePerUsd": "Unidades por 1 USD",
+        "heading": "{amount} {code} en monedas principales y árabes",
+        "columnTag": "Régimen",
+        "workedTitle": "Ejemplo resuelto",
+        "rowAmount": "Importe",
+        "rowUsd": "A USD",
+        "rowTarget": "× {code} por USD",
+        "rowResult": "Resultado",
+        "tags": {
+          "pegged": "Ligada al USD",
+          "arab": "Árabe",
+          "base": "Base",
+          "floating": "Flotante"
+        }
       },
       "news": {
         "title": "Noticias del mercado de divisas",
@@ -2931,30 +2942,25 @@
           "title": "Breve historia del sistema global de tipos de cambio",
           "paragraph1": "Durante la mayor parte de finales del siglo XIX y principios del XX, las principales monedas estuvieron ancladas a un peso fijo de oro bajo el patrón oro clásico, lo que dio a los tipos de cambio largos períodos de estabilidad a costa de vincular la política monetaria nacional a los flujos de oro. Ese sistema se derrumbó durante la Gran Depresión y la Segunda Guerra Mundial.",
           "paragraph2": "En julio de 1944, representantes de 44 naciones aliadas reunidos en Bretton Woods, Nuevo Hampshire, acordaron un nuevo sistema: el dólar estadounidense quedó anclado al oro a 35 dólares por onza, y el resto de las monedas miembro quedaron ancladas al dólar dentro de una banda estrecha, con el recién creado Fondo Monetario Internacional supervisando los ajustes. El sistema se mantuvo durante los años cincuenta y sesenta, pero los persistentes déficits de balanza de pagos de Estados Unidos acabaron haciendo insostenible el anclaje al oro. El 15 de agosto de 1971, el presidente Richard Nixon suspendió la convertibilidad del dólar en oro, un episodio hoy conocido como el «shock de Nixon». Para marzo de 1973, las principales economías habían abandonado por completo los tipos fijos en favor del sistema de tipo de cambio flotante que sigue vigente hoy, en el que el valor de la mayoría de las monedas lo determina la oferta y la demanda del mercado y no un anclaje fijado por el gobierno.",
-          "diagram": {
-            "eras": [
-              {
-                "year": "1944",
-                "title": "Bretton Woods",
-                "note": "Dólar anclado al oro"
-              },
-              {
-                "year": "1971",
-                "title": "Shock de Nixon",
-                "note": "Fin de la convertibilidad en oro"
-              },
-              {
-                "year": "1973",
-                "title": "Comienza la era flotante",
-                "note": "Las principales monedas flotan"
-              },
-              {
-                "year": "Hoy",
-                "title": "Regímenes mixtos",
-                "note": "Coexisten varios regímenes"
-              }
-            ],
-            "caption": "Una cronología simplificada del sistema internacional de tipos de cambio moderno, desde el anclaje de Bretton Woods hasta el régimen mayormente flotante de hoy."
+          "live": {
+            "title": "La era flotante con datos reales",
+            "heading": "{base}/{quote}, cada fijación del BCE desde 1999",
+            "intro": "Tu par del conversor a lo largo de la era del euro, con el tipo real en cada fecha clave.",
+            "introFallback": "El BCE no fija {from}/{to}, así que se muestra el par de referencia del euro.",
+            "loading": "Cargando historial del BCE…",
+            "error": "Los tipos históricos no están disponibles temporalmente.",
+            "workedTitle": "Tipo en cada hito",
+            "events": {
+              "euro": "Nace el euro",
+              "notes": "Billetes y monedas en euros",
+              "lehman": "Quiebra de Lehman",
+              "snb": "Fin del tope del franco suizo",
+              "brexit": "Referéndum del Brexit",
+              "covid": "Choque de la pandemia",
+              "hikes": "El BCE empieza a subir tipos"
+            },
+            "today": "Última fijación",
+            "sinceFirst": "{pct} desde la primera fijación"
           }
         },
         "regimes": {
@@ -3105,9 +3111,237 @@
         "howCalculatedTitle": "Cómo Se Calculó Esto",
         "inputSectionTitle": "Entrada"
       },
-      "quickAmounts": {
-        "title": "Referencia Rápida: Montos Comunes",
-        "intro": "La misma tasa se aplica a cualquier escala — esto es a lo que equivalen algunos montos comunes de {from} en {to}."
+      "relatedTools": {
+        "title": "Herramientas de mercado relacionadas"
+      },
+      "sidebarRates": {
+        "title": "1 unidad en {currency}",
+        "note": "Tipos diarios; el cambio es la última fijación del BCE frente a la anterior."
+      },
+      "liveFlow": {
+        "title": "Flujo de conversión",
+        "badge": "Tipo diario",
+        "heading": "{from} → {to}",
+        "intro": "Tu importe pasa por el dólar estadounidense: se divide por el tipo de origen y se multiplica por el de destino.",
+        "noTrend": "Sin historial del BCE",
+        "spark30d": "30 d vs {code}",
+        "workedTitle": "Ejemplo resuelto",
+        "rowAmount": "Importe",
+        "rowFromRate": "{code} por 1 USD",
+        "rowUsd": "Valor en USD",
+        "rowToRate": "{code} por 1 USD",
+        "rowRate": "Tipo implícito",
+        "rowResult": "Resultado",
+        "dailyNote": "Los tipos del proveedor se actualizan una vez al día."
+      },
+      "equivalence": {
+        "title": "El mismo importe en muchas monedas",
+        "heading": "{amount} {code} equivalen a",
+        "intro": "Cada casilla es el mismo valor, expresado en otra moneda de uso común a los tipos de hoy.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowAmount": "Importe",
+        "rowToUsd": "{code} → USD",
+        "rowToTarget": "USD → {code}",
+        "rowResult": "Equivalente"
+      },
+      "chart": {
+        "title": "Terminal de tipos y gráfico de velas",
+        "heading": "{base}/{quote} desde 1999",
+        "intro": "Elige un par de la lista para verlo. Las velas semanales y mensuales se construyen solo con las fijaciones diarias del BCE; la vista diaria es una línea porque una sola fijación no tiene apertura, máximo ni mínimo.",
+        "loading": "Cargando historial…",
+        "error": "No se pudo cargar el historial del BCE para {pair}.",
+        "lowLabel": "Mínimo del periodo",
+        "highLabel": "Máximo del periodo",
+        "timeframeLabel": "Intervalo",
+        "retry": "Reintentar",
+        "fullscreen": "Pantalla completa",
+        "exitFullscreen": "Salir de pantalla completa",
+        "closeLabel": "Fijación",
+        "tf": {
+          "D": "Diario (línea)",
+          "W": "Semanal",
+          "M": "Mensual"
+        },
+        "listTitle": "Pares principales",
+        "listBadge": "BCE diario",
+        "listNote": "Última fijación del BCE y cambio frente al día hábil anterior. Haz clic en un par para verlo.",
+        "yourPair": "Tu par",
+        "candleNote": "Cada vela: apertura = primera fijación, cierre = última, máximo/mínimo = fijación más alta/baja del periodo. Los movimientos entre fijaciones no están en los datos.",
+        "candleNoteDaily": "Línea diaria: un tipo de referencia del BCE por día hábil, últimos dos años.",
+        "attribution": "Biblioteca de gráficos: Lightweight Charts™ de"
+      },
+      "history": {
+        "loading": "Cargando historial del BCE…",
+        "unsupported": "El Banco Central Europeo no publica un tipo diario para {from}/{to}; este indicador necesita un par de monedas del BCE (p. ej. USD, EUR, GBP, JPY).",
+        "error": "Los tipos históricos no están disponibles temporalmente. Inténtalo más tarde."
+      },
+      "range": {
+        "title": "Rango de 52 semanas",
+        "heading": "Dónde está {from}/{to} en su rango de 52 semanas",
+        "intro": "La barra va de la fijación más baja a la más alta de 1 {from} en {to} durante el último año; el marcador es hoy.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowLow": "Mínimo 52 semanas",
+        "rowHigh": "Máximo 52 semanas",
+        "rowNow": "Última fijación",
+        "rowFormula": "(actual − mínimo) ÷ rango",
+        "rowPosition": "Posición",
+        "zones": {
+          "low": "Cerca del mínimo",
+          "mid": "Zona media",
+          "high": "Cerca del máximo"
+        },
+        "bands": {
+          "year": "Últimas 52 semanas",
+          "all": "Desde 1999"
+        }
+      },
+      "volatility": {
+        "title": "Volatilidad a 30 días",
+        "heading": "Volatilidad realizada de {from}/{to}",
+        "intro": "Cuánto oscila el par: la dispersión de sus últimos 30 movimientos diarios, llevada a cifra anual.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowReturns": "Movimientos diarios",
+        "rowReturnsNote": "cambio logarítmico entre fijaciones",
+        "rowDaily": "Desviación típica diaria",
+        "rowDailyNote": "movimiento diario típico",
+        "rowScale": "Anualizar",
+        "rowAnnual": "Volatilidad anualizada",
+        "zones": {
+          "low": "Tranquila",
+          "medium": "Normal",
+          "high": "Agitada"
+        }
+      },
+      "sensitivity": {
+        "title": "Sensibilidad al tipo",
+        "heading": "Si {from} se mueve frente a {to}",
+        "intro": "Tu resultado si 1 {from} compra un poco menos o un poco más de {to} que hoy.",
+        "shiftLabel": "Movimiento",
+        "workedTitle": "Ejemplo resuelto (+{pct}%)",
+        "rowRateNow": "Tipo actual",
+        "rowShifted": "Tipo +{pct}%",
+        "rowAmount": "Importe × nuevo tipo",
+        "rowResult": "Nuevo resultado",
+        "rowNote": "{diff} frente a hoy",
+        "low": "{from} −{pct}%",
+        "now": "Hoy",
+        "high": "{from} +{pct}%"
+      },
+      "timeline": {
+        "title": "Cronología del par",
+        "heading": "Hitos de {from}/{to} desde 1999",
+        "intro": "La primera fijación del BCE, los extremos históricos y de 52 semanas, y hoy, en orden de fecha.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowHigh": "Máximo histórico",
+        "rowLow": "Mínimo histórico",
+        "rowNow": "Hoy",
+        "rowFromHigh": "Por debajo del máximo",
+        "rowFromLow": "Por encima del mínimo",
+        "stations": {
+          "first": "Primera fijación",
+          "low": "Mínimo histórico",
+          "high": "Máximo histórico",
+          "yearLow": "Mínimo 52 semanas",
+          "yearHigh": "Máximo 52 semanas",
+          "last": "Última fijación"
+        },
+        "vsToday": "hoy {pct}"
+      },
+      "returns": {
+        "title": "Rentabilidad por periodo",
+        "heading": "Cómo se ha movido {from}/{to}",
+        "intro": "Cambio del precio de 1 {from} en cada periodo, según las fijaciones del BCE. Verde significa que {from} compra más.",
+        "workedTitle": "Ejemplo resuelto (1 año)",
+        "rowThen": "Tipo hace un año",
+        "rowNow": "Tipo actual",
+        "rowFormula": "actual ÷ anterior − 1",
+        "rowResult": "Cambio a 1 año",
+        "stronger": "{from} se fortaleció",
+        "weaker": "{from} se debilitó",
+        "periods": {
+          "1W": "1S",
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1A",
+          "5Y": "5A",
+          "10Y": "10A"
+        }
+      },
+      "yearly": {
+        "title": "Año a año",
+        "heading": "{amount} {from} en {to} al cierre de cada año",
+        "intro": "Tu importe convertido con la última fijación del BCE de cada uno de los últimos diez años (este año: la más reciente).",
+        "workedTitle": "Ejemplo resuelto",
+        "rowThen": "Al cierre de {year}",
+        "rowNow": "En {year}",
+        "rowDiff": "Diferencia"
+      },
+      "comparison": {
+        "title": "Comparación de monedas",
+        "heading": "{from} frente a {to}",
+        "intro": "El valor de cada moneda en {currency}, sus movimientos frente al dólar y cuánto oscila.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowA": "1 {code}",
+        "rowB": "1 {code}",
+        "rowRatio": "Cociente",
+        "rowResult": "Tipo cruzado",
+        "rowRangeNote": "desde 1999: {low} – {high}",
+        "rows": {
+          "d1": "1 día vs USD",
+          "d30": "30 días vs USD",
+          "y1": "1 año vs USD",
+          "vol": "Volatilidad 30 días"
+        },
+        "noHistory": "Sin historial del BCE para esta moneda."
+      },
+      "strength": {
+        "title": "Medidor de fuerza de divisas",
+        "heading": "Principales monedas por fuerza",
+        "intro": "El cambio de valor de cada moneda frente a la media de toda la cesta (dólar incluido); las puntuaciones suman cero.",
+        "lookbackLabel": "Periodo",
+        "lookback": {
+          "5": "1 semana",
+          "21": "1 mes",
+          "63": "3 meses"
+        },
+        "workedTitle": "Ejemplo resuelto",
+        "rowOwn": "Cambio de {code} en USD",
+        "rowBasket": "Media de la cesta",
+        "rowBasketNote": "media de {n} monedas",
+        "rowFormula": "propio − media",
+        "rowResult": "Fuerza de {code}"
+      },
+      "movers": {
+        "title": "Mayores movimientos",
+        "heading": "Mayores movimientos frente al dólar el {date}",
+        "intro": "Todas las monedas del BCE ordenadas por su cambio diario frente al dólar. Haz clic en una para convertir desde ella.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowPrev": "{code} fijación anterior",
+        "rowNow": "{code} última fijación",
+        "rowFormula": "anterior ÷ última − 1",
+        "rowResult": "{code} vs USD",
+        "gainers": "Más fuertes",
+        "losers": "Más débiles"
+      },
+      "crossRates": {
+        "title": "Tipos cruzados",
+        "heading": "Tipos cruzados principales",
+        "intro": "Lee en horizontal: 1 unidad de la moneda de la fila equivale al número de cada columna. Tu par está resaltado.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowRow": "Fila: {code}",
+        "rowCol": "Columna: {code}",
+        "rowFormula": "tipo columna ÷ tipo fila",
+        "rowResult": "Celda"
+      },
+      "workedExamples": {
+        "title": "Ejemplos resueltos",
+        "intro": "Tres conversiones reales, resueltas paso a paso con los tipos que cargó esta página ({time}).",
+        "exampleTitle": "Ejemplo {n}",
+        "step1": "Consulta el tipo de {from}:",
+        "step2": "Convierte a dólares:",
+        "step3": "Convierte a {to}:",
+        "step4": "Tipo implícito:"
       }
     },
     "commodities-tracker": {

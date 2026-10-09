@@ -6,7 +6,8 @@ import { convertCryptoAmount, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import CryptoCoinPicker from "./CryptoCoinPicker";
-import CryptoFiatPicker from "./CryptoFiatPicker";
+import FiatPicker from "@/components/tools/markets/FiatPicker";
+import QuickConversionTable, { quickAmounts } from "@/components/tools/markets/QuickConversionTable";
 import { useCryptoFormatters } from "./cryptoFormat";
 import type { FiatRate } from "./types";
 
@@ -32,7 +33,7 @@ type CryptoInputPanelProps = {
   digitStyle: DigitStyle;
 };
 
-const QUICK_AMOUNTS = [0.1, 1, 5, 10, 100, 1000];
+const QUICK_AMOUNTS = quickAmounts(-4, 6);
 
 export default function CryptoInputPanel({
   coins,
@@ -96,7 +97,16 @@ export default function CryptoInputPanel({
           onCoinDiscovered={onCoinDiscovered}
         />
 
-        {fiatRates.length > 0 && <CryptoFiatPicker rates={fiatRates} value={fiatCode} onChange={onFiatChange} />}
+        {fiatRates.length > 0 && (
+          <FiatPicker
+            rates={fiatRates}
+            value={fiatCode}
+            onChange={onFiatChange}
+            label={t("fiatLabel")}
+            searchPlaceholder={t("fiatSearchPlaceholder")}
+            noResults={t("fiatNoResults")}
+          />
+        )}
 
         <button
           type="button"
@@ -110,29 +120,11 @@ export default function CryptoInputPanel({
 
       {/* Quick conversions: common amounts of the source coin, in the target coin and the display currency. */}
       {quick && (
-        <div className="mt-5 flex flex-1 flex-col border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{t("quickTitle")}</h3>
-          <div className="mt-2 flex-1 overflow-hidden rounded-xl border border-zinc-100 dark:border-zinc-800">
-            <table className="h-full w-full text-xs" data-testid="quick-table">
-              <thead className="bg-zinc-50 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
-                <tr>
-                  <th dir="ltr" className="px-2 py-1.5 text-start font-medium uppercase">{fromCoin.symbol}</th>
-                  <th dir="ltr" className="px-2 py-1.5 text-end font-medium uppercase">{toCoin.symbol}</th>
-                  <th dir="ltr" className="px-2 py-1.5 text-end font-medium">{f.currency}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {QUICK_AMOUNTS.map((a) => (
-                  <tr key={a} className="border-t border-zinc-100 even:bg-zinc-50/60 dark:border-zinc-800 dark:even:bg-zinc-800/30">
-                    <td dir="ltr" className="px-2 py-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">{f.num(a, 2)}</td>
-                    <td dir="ltr" className="px-2 py-1 text-end font-mono text-blue-700 dark:text-blue-300">{f.amount(convertCryptoAmount(a, fromPrice, toPrice))}</td>
-                    <td dir="ltr" className="px-2 py-1 text-end font-mono text-zinc-700 dark:text-zinc-300">{f.compactMoney(a * fromPrice)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <QuickConversionTable
+          title={t("quickTitle")}
+          columns={[fromCoin.symbol, toCoin.symbol, f.currency]}
+          rows={QUICK_AMOUNTS.map((a) => [f.num(a, 3), f.amount(convertCryptoAmount(a, fromPrice, toPrice)), f.compactMoney(a * fromPrice)])}
+        />
       )}
     </SectionCard>
   );

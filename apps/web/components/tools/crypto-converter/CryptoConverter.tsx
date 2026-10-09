@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { findCoinById, type CryptoCoin, type CryptoGlobalStats } from "@tooloralabs/tools";
@@ -28,9 +28,10 @@ import CryptoMarketCapLog from "./CryptoMarketCapLog";
 import CryptoTopMovers from "./CryptoTopMovers";
 import CryptoNews from "./CryptoNews";
 import CryptoLearningResources from "./CryptoLearningResources";
-import { FiatContext } from "./cryptoFormat";
+import { FiatContext, marketFormatters, useFiatPreference } from "@/components/tools/markets/fiat";
+import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import { useLiveTicks } from "./useCryptoLive";
-import { USD_RATE, type FiatRate } from "./types";
+import type { FiatRate } from "./types";
 import type { ReactNode } from "react";
 
 type CryptoConverterProps = {
@@ -51,29 +52,7 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
   const [toCoinId, setToCoinId] = useState("ethereum");
   const [chartCoinId, setChartCoinId] = useState("bitcoin");
   const [amount, setAmount] = useState("1");
-  const [fiatCode, setFiatCode] = useState("USD");
-
-  // The saved display currency is read after mount so the server render (always USD) hydrates cleanly.
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(FIAT_STORAGE_KEY);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time restore of a client-only preference
-      if (saved && fiatRates.some((r) => r.code === saved)) setFiatCode(saved);
-    } catch {
-      /* storage blocked: keep USD */
-    }
-  }, [fiatRates]);
-
-  function handleFiatChange(code: string) {
-    setFiatCode(code);
-    try {
-      window.localStorage.setItem(FIAT_STORAGE_KEY, code);
-    } catch {
-      /* storage blocked: the choice lasts for this visit only */
-    }
-  }
-
-  const fiat = fiatRates.find((r) => r.code === fiatCode) ?? USD_RATE;
+  const [fiat, handleFiatChange] = useFiatPreference(FIAT_STORAGE_KEY, fiatRates);
   const digitStyle: DigitStyle = resolveDigitStyle(amount);
 
   function handleCoinDiscovered(coin: CryptoCoin) {
@@ -109,6 +88,21 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
   const fromPrice = livePrice(fromCoin);
   const toPrice = livePrice(toCoin);
 
+  // Most-traded coins fill the column under the related tools, so the top area has no empty space.
+  const f = marketFormatters(digitStyle, fiat);
+  const sidebarRows = [...initialCoins]
+    .filter((c) => c.totalVolume)
+    .sort((a, b) => (b.totalVolume ?? 0) - (a.totalVolume ?? 0))
+    .slice(0, 30)
+    .map((c) => ({
+      id: c.id,
+      label: c.name,
+      sub: c.symbol,
+      value: f.compactMoney(c.totalVolume ?? 0),
+      change: c.priceChangePercentage24h,
+      changeText: c.priceChangePercentage24h == null ? undefined : f.signedPct(c.priceChangePercentage24h, 1),
+    }));
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "chart", label: tNav("chart") },
@@ -126,6 +120,7 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
       {/* Agreed top-of-page layout: input | result | related tools + 300×600 ad (hidden on mobile). */}
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
           input={
             <CryptoInputPanel
               coins={coins}
@@ -170,6 +165,7 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
               relatedListTitle={t("relatedTools.title")}
             />
           }
+          sidebarFill={<SidebarFillList title={t("sidebarVolume.title", { currency: fiat.code })} note={t("sidebarVolume.note")} rows={sidebarRows} />}
         />
       </div>
 

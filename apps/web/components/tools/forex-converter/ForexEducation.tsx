@@ -4,16 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import ForexExchangeSystemDiagram from "./ForexExchangeSystemDiagram";
+import ForexFloatingEraTrend from "./ForexFloatingEraTrend";
+import ForexWorkedConversions from "./ForexWorkedConversions";
+import type { CurrencyRate } from "@tooloralabs/tools";
 
-type TimelineEra = { year: string; title: string; note: string };
 type RegimeRow = { regime: string; example: string; description: string };
 
-export default async function ForexEducation() {
+export default async function ForexEducation({ currencies, lastUpdatedUnix, locale }: { currencies: CurrencyRate[]; lastUpdatedUnix: number | null; locale: string }) {
   const t = await getTranslations("tools.forex-converter.education");
   const tAboveFold = await getTranslations("tools.forex-converter.aboveFold");
 
-  const eras = t.raw("history.diagram.eras") as TimelineEra[];
   const regimeRows = t.raw("regimes.rows") as RegimeRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
@@ -28,8 +28,10 @@ export default async function ForexEducation() {
       <InfoSection title={t("history.title")}>
         <p>{t("history.paragraph1")}</p>
         <p>{t("history.paragraph2")}</p>
-        <ForexExchangeSystemDiagram eras={eras} caption={t("history.diagram.caption")} />
+        <ForexFloatingEraTrend />
       </InfoSection>
+
+      <ForexWorkedConversions currencies={currencies} lastUpdatedUnix={lastUpdatedUnix} locale={locale} />
 
       <InfoSection title={t("regimes.title")}>
         <p>{t("regimes.intro")}</p>

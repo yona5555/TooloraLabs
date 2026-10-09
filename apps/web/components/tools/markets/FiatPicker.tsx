@@ -1,18 +1,20 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { ChevronDown, Search as SearchIcon } from "lucide-react";
-import type { FiatRate } from "./types";
+import type { FiatRate } from "./fiat";
 
-type CryptoFiatPickerProps = {
+type FiatPickerProps = {
   rates: FiatRate[];
   value: string;
   onChange: (code: string) => void;
+  label: string;
+  searchPlaceholder: string;
+  noResults: string;
 };
 
 /** Searchable list of every fiat currency the data source quotes, named in the page's language. */
-export default function CryptoFiatPicker({ rates, value, onChange }: CryptoFiatPickerProps) {
-  const t = useTranslations("tools.crypto-converter.aboveFold");
+export default function FiatPicker({ rates, value, onChange, label, searchPlaceholder, noResults }: FiatPickerProps) {
   const locale = useLocale();
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +49,7 @@ export default function CryptoFiatPicker({ rates, value, onChange }: CryptoFiatP
 
   return (
     <div ref={containerRef} className="relative">
-      <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("fiatLabel")}</span>
+      <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{label}</span>
       <button
         type="button"
         data-testid="fiat-picker"
@@ -72,7 +74,7 @@ export default function CryptoFiatPicker({ rates, value, onChange }: CryptoFiatP
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={t("fiatSearchPlaceholder")}
+              placeholder={searchPlaceholder}
               data-testid="fiat-search"
               className="min-w-0 flex-1 bg-transparent text-sm text-zinc-900 outline-none placeholder:text-zinc-400 dark:text-zinc-100 dark:placeholder:text-zinc-500"
             />
@@ -99,7 +101,7 @@ export default function CryptoFiatPicker({ rates, value, onChange }: CryptoFiatP
                 </button>
               </li>
             ))}
-            {matches.length === 0 && <li className="px-4 py-3 text-sm text-zinc-500 dark:text-zinc-400">{t("fiatNoResults")}</li>}
+            {matches.length === 0 && <li className="px-4 py-3 text-sm text-zinc-500 dark:text-zinc-400">{noResults}</li>}
           </ul>
         </div>
       )}

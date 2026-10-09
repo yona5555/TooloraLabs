@@ -5,7 +5,7 @@ import type { DigitStyle } from "@tooloralabs/core";
 import { VOLATILITY_ZONE_LIMITS, realizedVolatility, volatilityZone, type Candle, type CryptoCoin } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
-import LiveFallback from "./LiveFallback";
+import LiveFallback from "@/components/tools/markets/LiveFallback";
 import { useCryptoFormatters } from "./cryptoFormat";
 
 type Props = { coin: CryptoCoin | undefined; digitStyle: DigitStyle };
