@@ -4,7 +4,7 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CryptoBlockchainDiagram from "./CryptoBlockchainDiagram";
+import CryptoLatestBlocks from "./CryptoLatestBlocks";
 
 type ComparisonRow = { name: string; launched: string; consensus: string; mainUse: string };
 
@@ -26,13 +26,7 @@ export default async function CryptoEducation() {
       <InfoSection title={t("blockchain.title")}>
         <p>{t("blockchain.paragraph1")}</p>
         <p>{t("blockchain.paragraph2")}</p>
-        <CryptoBlockchainDiagram
-          blockLabel={t("blockchain.diagram.blockLabel")}
-          hashLabel={t("blockchain.diagram.hashLabel")}
-          prevHashLabel={t("blockchain.diagram.prevHashLabel")}
-          dataLabel={t("blockchain.diagram.dataLabel")}
-          caption={t("blockchain.diagram.caption")}
-        />
+        <CryptoLatestBlocks />
       </InfoSection>
 
       <InfoSection title={t("comparison.title")}>

@@ -2317,13 +2317,6 @@
         "coinsPurchasedLabel": "Coins purchased",
         "historyLimitNote": "Historical prices are available for the past {days} days only, a limit set by the public data provider."
       },
-      "indicators": {
-        "title": "Market Indicators",
-        "intro": "A snapshot of the broader cryptocurrency market.",
-        "totalMarketCapLabel": "Total Market Cap",
-        "btcDominanceLabel": "Bitcoin Dominance",
-        "activeCoinsLabel": "Active Cryptocurrencies"
-      },
       "news": {
         "title": "Market News",
         "intro": "Recent headlines from independent news sources, shown here for reference without any commentary or analysis from TooloraLabs.",
@@ -2392,14 +2385,7 @@
         "blockchain": {
           "title": "How a Blockchain Works",
           "paragraph1": "A blockchain groups transactions into blocks, and each block includes a cryptographic hash — a fixed-length fingerprint computed from its own contents — of the block immediately before it. That link is what gives the structure its name and its tamper-evidence: changing anything in an earlier block would change its hash, which would no longer match the copy stored in the next block, breaking the chain in a way every participant in the network can detect.",
-          "paragraph2": "New blocks are added only when the network reaches agreement through a consensus mechanism. Bitcoin uses Proof of Work, where computers compete to solve a computationally expensive puzzle before adding the next block; Ethereum and most newer networks use Proof of Stake, where participants lock up (\"stake\") some of the network's own currency as a financial commitment backing the blocks they propose.",
-          "diagram": {
-            "blockLabel": "Block",
-            "hashLabel": "Hash",
-            "prevHashLabel": "Prev. Hash",
-            "dataLabel": "Data: transactions",
-            "caption": "A simplified chain of four blocks. Each block stores its own hash and the previous block's hash, linking them in sequence."
-          }
+          "paragraph2": "New blocks are added only when the network reaches agreement through a consensus mechanism. Bitcoin uses Proof of Work, where computers compete to solve a computationally expensive puzzle before adding the next block; Ethereum and most newer networks use Proof of Stake, where participants lock up (\"stake\") some of the network's own currency as a financial commitment backing the blocks they propose."
         },
         "comparison": {
           "title": "Comparing Major Cryptocurrencies",
@@ -2553,6 +2539,129 @@
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input"
+      },
+      "liveFlow": {
+        "title": "Live Conversion Flow",
+        "live": "LIVE",
+        "snapshot": "Snapshot",
+        "heading": "{from} flowing into {to} at live prices",
+        "intro": "Prices stream from the exchange as trades happen and flash green or red on every tick; the sparklines trace each coin's last 24 hours.",
+        "spark24h": "24h",
+        "workedTitle": "Worked example: live conversion",
+        "rowAmount": "Amount",
+        "rowFromPrice": "{symbol} price",
+        "rowUsd": "Value in USD",
+        "rowToPrice": "{symbol} price",
+        "rowRate": "Rate",
+        "rowResult": "Result",
+        "liveNote": "Updates with every exchange tick",
+        "snapshotNote": "Last market snapshot; this coin has no live exchange feed"
+      },
+      "dominance": {
+        "title": "Market Dominance",
+        "heading": "Share of the total crypto market cap",
+        "intro": "Each ring is one slice of the whole market: Bitcoin's dominance on the outside, then Ethereum, the two largest stablecoins and the coin you picked.",
+        "stablecoins": "Stablecoins (USDT+USDC)",
+        "workedTitle": "Worked example: ring → dollars",
+        "rowTotal": "Total market cap",
+        "rowChange": "24h change",
+        "rowActive": "Active coins",
+        "btcNote": "Total × {pct}"
+      },
+      "liveBlocks": {
+        "title": "Latest Bitcoin Blocks (Live)",
+        "heading": "The chain growing, block by block",
+        "intro": "The newest blocks mined on the Bitcoin network; each one stores the hash of the block before it, which is what chains them together. Click a block for its details.",
+        "loading": "Loading the latest blocks…",
+        "error": "The block explorer is not responding right now. The list will refill automatically when it's back.",
+        "prev": "prev",
+        "linkNote": "Each block's “prev” hash equals the hash of the block to its right — change one old block and every later link breaks.",
+        "detailTitle": "Block #{height}",
+        "hash": "Hash",
+        "prevHash": "Previous hash",
+        "linked": "Matches the block before ✓",
+        "miner": "Mined by",
+        "fill": "Block fill",
+        "fillNote": "weight ÷ 4,000,000 WU",
+        "totalFees": "Total fees",
+        "avgFee": "Avg fee per tx",
+        "avgFeeNote": "fees ÷ (tx − 1 coinbase)",
+        "subsidy": "New-coin subsidy",
+        "reward": "Miner reward",
+        "rewardNote": "subsidy + fees",
+        "source": "Data: mempool.space, refreshed every 30 seconds."
+      },
+      "fearGreed": {
+        "title": "Crypto Fear & Greed Index",
+        "heading": "Market mood today, and over the last month",
+        "intro": "A daily 0–100 sentiment score built from volatility, momentum, social activity and Bitcoin dominance: low values signal fear, high values greed.",
+        "loading": "Loading the index…",
+        "error": "The Fear & Greed provider is not responding right now; the index will reappear automatically.",
+        "historyLabel": "Last {days} days",
+        "workedTitle": "Worked example: reading the index",
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "weekAgo": "7 days ago",
+        "low": "Lowest",
+        "high": "Highest",
+        "average": "{days}-day average",
+        "averageNote": "Sum of {days} daily values ÷ {days}",
+        "source": "Data: alternative.me Crypto Fear & Greed Index, updated daily.",
+        "zones": {
+          "extremeFear": "Extreme fear",
+          "fear": "Fear",
+          "neutral": "Neutral",
+          "greed": "Greed",
+          "extremeGreed": "Extreme greed"
+        }
+      },
+      "fees": {
+        "title": "Bitcoin Network Fees Now",
+        "heading": "What it costs to send bitcoin right now",
+        "intro": "Fee rates the network is asking for this minute, placed on the spread of fees in the next block, and priced for a typical {vbytes}-vbyte payment.",
+        "loading": "Loading live fees…",
+        "error": "The fee estimator is not responding right now; live fees will reappear automatically.",
+        "distributionLabel": "Fee spread in the next block (10th–90th percentile, darker = middle half)",
+        "median": "Median",
+        "medianShort": "median {rate}",
+        "levels": {
+          "low": "Low · within ~1 hour",
+          "medium": "Medium · within ~30 min",
+          "high": "High · next block"
+        },
+        "workedTitle": "Worked example: medium fee",
+        "rowRate": "Fee rate",
+        "rowSize": "Transaction size",
+        "rowSats": "Fee in sats",
+        "rowBtc": "Fee in BTC",
+        "rowPrice": "BTC price",
+        "rowUsd": "Fee in USD",
+        "rowUsdNote": "sats ÷ 100,000,000 × BTC price",
+        "source": "Data: mempool.space fee estimates, refreshed every 30 seconds."
+      },
+      "halving": {
+        "title": "Bitcoin Halving Countdown",
+        "heading": "Block reward per era, and the next halving",
+        "intro": "Every 210,000 blocks the reward for mining a block halves. The steps show each era's reward; the current one fills as blocks are mined.",
+        "loading": "Loading the chain height…",
+        "error": "The block explorer is not responding right now; the countdown will resume automatically.",
+        "legend": "Current era {progress}% mined. Dashed step = next era (estimated).",
+        "units": {
+          "days": "days",
+          "hours": "hours",
+          "minutes": "min",
+          "seconds": "sec"
+        },
+        "workedTitle": "Worked example: next halving date",
+        "rowTip": "Current height",
+        "rowNext": "Next halving at",
+        "rowBlocks": "Blocks remaining",
+        "rowAvg": "Avg block time",
+        "rowAvgNote": "Measured since last difficulty adjustment",
+        "rowReward": "Reward per block",
+        "rowDate": "Estimated date",
+        "rowDateNote": "Last block time + blocks × avg time",
+        "source": "Data: mempool.space chain tip and difficulty adjustment, refreshed every minute."
       }
     },
     "forex-converter": {

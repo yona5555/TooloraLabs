@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCoinMarketChart } from "@/lib/crypto/coingecko";
 
-const ALLOWED_DAYS = new Set([7, 30, 365]);
+const ALLOWED_DAYS = new Set([1, 7, 30, 365]);
 
 export async function GET(request: NextRequest) {
   const coinId = request.nextUrl.searchParams.get("coin") ?? "";

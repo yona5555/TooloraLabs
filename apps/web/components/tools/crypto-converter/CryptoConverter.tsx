@@ -14,7 +14,11 @@ import CryptoResult from "./CryptoResult";
 import CryptoTopList from "./CryptoTopList";
 import CryptoHistoricalChart from "./CryptoHistoricalChart";
 import CryptoWhatIfCalculator from "./CryptoWhatIfCalculator";
-import CryptoGlobalIndicators from "./CryptoGlobalIndicators";
+import CryptoLiveFlow from "./CryptoLiveFlow";
+import CryptoDominanceDonut from "./CryptoDominanceDonut";
+import CryptoFearGreed from "./CryptoFearGreed";
+import CryptoNetworkFees from "./CryptoNetworkFees";
+import CryptoHalvingSteps from "./CryptoHalvingSteps";
 import CryptoNews from "./CryptoNews";
 import CryptoLearningResources from "./CryptoLearningResources";
 import type { FiatCurrency } from "./types";
@@ -103,7 +107,8 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
                 lastUpdated={fetchedAt}
                 digitStyle={digitStyle}
               />
-              {globalStats && <CryptoGlobalIndicators stats={globalStats} digitStyle={digitStyle} />}
+              <CryptoLiveFlow fromCoin={fromCoin} toCoin={toCoin} amount={parseLocalizedNumber(amount)} digitStyle={digitStyle} />
+              {globalStats && <CryptoDominanceDonut stats={globalStats} fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} />}
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="crypto-converter" category="financial-markets" />}
@@ -113,6 +118,9 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
               <ViewDocsLink slug="crypto-converter" />
               <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
               <CryptoHistoricalChart coin={fromCoin} digitStyle={digitStyle} />
+              <CryptoFearGreed />
+              <CryptoNetworkFees btcPriceUsd={findCoinById(coins, "bitcoin")?.currentPrice ?? null} digitStyle={digitStyle} />
+              <CryptoHalvingSteps />
               <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
               <CryptoNews />
               <CryptoLearningResources />

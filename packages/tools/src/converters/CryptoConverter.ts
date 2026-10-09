@@ -13,6 +13,9 @@ export type CryptoGlobalStats = {
   totalMarketCapUsd: number;
   btcDominancePercentage: number;
   activeCryptocurrencies: number;
+  /** Share of total market cap per coin symbol (CoinGecko's top ~10), e.g. { btc: 59.2, eth: 10.8 }. */
+  marketCapPercentages: Record<string, number>;
+  marketCapChangePercentage24h: number;
 };
 
 export type FiatRates = {

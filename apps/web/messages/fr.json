@@ -2317,13 +2317,6 @@
         "coinsPurchasedLabel": "Unités achetées",
         "historyLimitNote": "Les cours historiques ne sont disponibles que pour les {days} derniers jours, une limite imposée par le fournisseur public de données."
       },
-      "indicators": {
-        "title": "Indicateurs de marché",
-        "intro": "Un aperçu du marché des cryptomonnaies dans son ensemble.",
-        "totalMarketCapLabel": "Capitalisation totale du marché",
-        "btcDominanceLabel": "Dominance du bitcoin",
-        "activeCoinsLabel": "Cryptomonnaies actives"
-      },
       "news": {
         "title": "Actualités du marché",
         "intro": "Titres récents provenant de sources d'actualité indépendantes, présentés ici à titre de référence, sans commentaire ni analyse de la part de TooloraLabs.",
@@ -2392,14 +2385,7 @@
         "blockchain": {
           "title": "Le fonctionnement d'une blockchain",
           "paragraph1": "Une blockchain regroupe les transactions en blocs, et chaque bloc inclut une empreinte cryptographique — un condensé de longueur fixe calculé à partir de son propre contenu — du bloc qui le précède immédiatement. Ce lien est à l'origine du nom de la structure et de sa résistance à la falsification : modifier quoi que ce soit dans un bloc antérieur changerait son empreinte, qui ne correspondrait alors plus à la copie stockée dans le bloc suivant, brisant la chaîne d'une manière détectable par tous les participants du réseau.",
-          "paragraph2": "De nouveaux blocs ne sont ajoutés que lorsque le réseau parvient à un accord grâce à un mécanisme de consensus. Le bitcoin utilise la preuve de travail (Proof of Work), où des ordinateurs se disputent la résolution d'un problème coûteux en calcul avant d'ajouter le prochain bloc ; Ethereum et la plupart des réseaux plus récents utilisent la preuve d'enjeu (Proof of Stake), où les participants immobilisent (« stakent ») une partie de la monnaie propre au réseau en garantie financière des blocs qu'ils proposent.",
-          "diagram": {
-            "blockLabel": "Bloc",
-            "hashLabel": "Empreinte",
-            "prevHashLabel": "Empreinte préc.",
-            "dataLabel": "Données : transactions",
-            "caption": "Une chaîne simplifiée de quatre blocs. Chaque bloc conserve sa propre empreinte ainsi que celle du bloc précédent, les reliant ainsi en séquence."
-          }
+          "paragraph2": "De nouveaux blocs ne sont ajoutés que lorsque le réseau parvient à un accord grâce à un mécanisme de consensus. Le bitcoin utilise la preuve de travail (Proof of Work), où des ordinateurs se disputent la résolution d'un problème coûteux en calcul avant d'ajouter le prochain bloc ; Ethereum et la plupart des réseaux plus récents utilisent la preuve d'enjeu (Proof of Stake), où les participants immobilisent (« stakent ») une partie de la monnaie propre au réseau en garantie financière des blocs qu'ils proposent."
         },
         "comparison": {
           "title": "Comparaison des principales cryptomonnaies",
@@ -2553,6 +2539,129 @@
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé",
         "inputSectionTitle": "Entrée"
+      },
+      "liveFlow": {
+        "title": "Flux de conversion en direct",
+        "live": "EN DIRECT",
+        "snapshot": "Instantané",
+        "heading": "{from} converti en {to} aux prix en direct",
+        "intro": "Les prix arrivent de la plateforme à chaque transaction et clignotent en vert ou en rouge à chaque tick ; les mini-courbes retracent les 24 dernières heures de chaque crypto.",
+        "spark24h": "24 h",
+        "workedTitle": "Exemple résolu : conversion en direct",
+        "rowAmount": "Montant",
+        "rowFromPrice": "Prix de {symbol}",
+        "rowUsd": "Valeur en USD",
+        "rowToPrice": "Prix de {symbol}",
+        "rowRate": "Taux",
+        "rowResult": "Résultat",
+        "liveNote": "Mis à jour à chaque tick de la plateforme",
+        "snapshotNote": "Dernier instantané du marché ; pas de flux en direct pour cette crypto"
+      },
+      "dominance": {
+        "title": "Dominance du marché",
+        "heading": "Part de la capitalisation totale du marché crypto",
+        "intro": "Chaque anneau est une part du marché : la dominance du Bitcoin à l'extérieur, puis Ethereum, les deux plus grands stablecoins et la crypto que vous avez choisie.",
+        "stablecoins": "Stablecoins (USDT+USDC)",
+        "workedTitle": "Exemple résolu : de l'anneau aux dollars",
+        "rowTotal": "Capitalisation totale",
+        "rowChange": "Variation 24 h",
+        "rowActive": "Cryptos actives",
+        "btcNote": "Total × {pct}"
+      },
+      "liveBlocks": {
+        "title": "Derniers blocs Bitcoin (en direct)",
+        "heading": "La chaîne qui grandit, bloc après bloc",
+        "intro": "Les blocs les plus récents minés sur le réseau Bitcoin ; chacun stocke le hash du bloc précédent, ce qui les enchaîne. Cliquez sur un bloc pour voir ses détails.",
+        "loading": "Chargement des derniers blocs…",
+        "error": "L'explorateur de blocs ne répond pas pour l'instant. La liste se remplira d'elle-même à son retour.",
+        "prev": "préc.",
+        "linkNote": "Le hash « préc. » de chaque bloc est égal au hash du bloc à sa droite : modifiez un ancien bloc et tous les liens suivants se rompent.",
+        "detailTitle": "Bloc n° {height}",
+        "hash": "Hash",
+        "prevHash": "Hash précédent",
+        "linked": "Correspond au bloc précédent ✓",
+        "miner": "Miné par",
+        "fill": "Remplissage du bloc",
+        "fillNote": "poids ÷ 4,000,000 WU",
+        "totalFees": "Frais totaux",
+        "avgFee": "Frais moyens par tx",
+        "avgFeeNote": "frais ÷ (tx − 1 coinbase)",
+        "subsidy": "Subvention de nouveaux bitcoins",
+        "reward": "Récompense du mineur",
+        "rewardNote": "subvention + frais",
+        "source": "Données : mempool.space, actualisées toutes les 30 secondes."
+      },
+      "fearGreed": {
+        "title": "Indice Peur et Avidité crypto",
+        "heading": "L'humeur du marché aujourd'hui et sur le dernier mois",
+        "intro": "Un score quotidien de 0 à 100 fondé sur la volatilité, l'élan, l'activité sociale et la dominance du Bitcoin : les valeurs basses signalent la peur, les hautes l'avidité.",
+        "loading": "Chargement de l'indice…",
+        "error": "Le fournisseur de l'indice ne répond pas pour l'instant ; l'indice réapparaîtra automatiquement.",
+        "historyLabel": "{days} derniers jours",
+        "workedTitle": "Exemple résolu : lire l'indice",
+        "today": "Aujourd'hui",
+        "yesterday": "Hier",
+        "weekAgo": "Il y a 7 jours",
+        "low": "Plus bas",
+        "high": "Plus haut",
+        "average": "Moyenne sur {days} jours",
+        "averageNote": "Somme de {days} valeurs quotidiennes ÷ {days}",
+        "source": "Données : Crypto Fear & Greed Index d'alternative.me, mis à jour chaque jour.",
+        "zones": {
+          "extremeFear": "Peur extrême",
+          "fear": "Peur",
+          "neutral": "Neutre",
+          "greed": "Avidité",
+          "extremeGreed": "Avidité extrême"
+        }
+      },
+      "fees": {
+        "title": "Frais du réseau Bitcoin maintenant",
+        "heading": "Ce que coûte un envoi de bitcoin en ce moment",
+        "intro": "Les taux de frais demandés par le réseau cette minute, placés sur la dispersion des frais du prochain bloc et chiffrés pour un paiement type de {vbytes} vbytes.",
+        "loading": "Chargement des frais en direct…",
+        "error": "L'estimateur de frais ne répond pas pour l'instant ; les frais en direct reviendront automatiquement.",
+        "distributionLabel": "Dispersion des frais dans le prochain bloc (10e–90e centile ; plus foncé = moitié centrale)",
+        "median": "Médiane",
+        "medianShort": "médiane {rate}",
+        "levels": {
+          "low": "Bas · sous ~1 heure",
+          "medium": "Moyen · sous ~30 min",
+          "high": "Élevé · prochain bloc"
+        },
+        "workedTitle": "Exemple résolu : frais moyens",
+        "rowRate": "Taux de frais",
+        "rowSize": "Taille de la transaction",
+        "rowSats": "Frais en sats",
+        "rowBtc": "Frais en BTC",
+        "rowPrice": "Prix du BTC",
+        "rowUsd": "Frais en USD",
+        "rowUsdNote": "sats ÷ 100,000,000 × prix du BTC",
+        "source": "Données : estimations de frais de mempool.space, actualisées toutes les 30 secondes."
+      },
+      "halving": {
+        "title": "Compte à rebours du halving Bitcoin",
+        "heading": "Récompense par bloc à chaque ère, et le prochain halving",
+        "intro": "Tous les 210,000 blocs, la récompense pour miner un bloc est divisée par deux. Les marches montrent la récompense de chaque ère ; l'actuelle se remplit au fil des blocs minés.",
+        "loading": "Chargement de la hauteur de la chaîne…",
+        "error": "L'explorateur de blocs ne répond pas pour l'instant ; le compte à rebours reprendra automatiquement.",
+        "legend": "Ère actuelle minée à {progress} %. Marche en pointillés = ère suivante (estimée).",
+        "units": {
+          "days": "jours",
+          "hours": "heures",
+          "minutes": "min",
+          "seconds": "s"
+        },
+        "workedTitle": "Exemple résolu : date du prochain halving",
+        "rowTip": "Hauteur actuelle",
+        "rowNext": "Prochain halving à",
+        "rowBlocks": "Blocs restants",
+        "rowAvg": "Temps moyen par bloc",
+        "rowAvgNote": "Mesuré depuis le dernier ajustement de difficulté",
+        "rowReward": "Récompense par bloc",
+        "rowDate": "Date estimée",
+        "rowDateNote": "Heure du dernier bloc + blocs × temps moyen",
+        "source": "Données : hauteur de chaîne et ajustement de difficulté de mempool.space, actualisés chaque minute."
       }
     },
     "forex-converter": {

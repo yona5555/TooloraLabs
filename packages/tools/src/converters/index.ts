@@ -8,3 +8,4 @@ export * from "./ForexConverter";
 export * from "./CommodityConverter";
 export * from "./WeatherConverter";
 export * from "./CryptoMarketMath";
+export * from "./CryptoNetworkMath";

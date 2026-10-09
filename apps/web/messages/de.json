@@ -2317,13 +2317,6 @@
         "coinsPurchasedLabel": "Gekaufte Coins",
         "historyLimitNote": "Historische Kurse sind nur für die vergangenen {days} Tage verfügbar — eine Beschränkung des öffentlichen Datenanbieters."
       },
-      "indicators": {
-        "title": "Marktindikatoren",
-        "intro": "Eine Momentaufnahme des breiteren Kryptomarkts.",
-        "totalMarketCapLabel": "Gesamte Marktkapitalisierung",
-        "btcDominanceLabel": "Bitcoin-Dominanz",
-        "activeCoinsLabel": "Aktive Kryptowährungen"
-      },
       "news": {
         "title": "Marktnachrichten",
         "intro": "Aktuelle Schlagzeilen aus unabhängigen Nachrichtenquellen, hier ohne Kommentar oder Analyse von TooloraLabs zur Orientierung wiedergegeben.",
@@ -2392,14 +2385,7 @@
         "blockchain": {
           "title": "Wie eine Blockchain funktioniert",
           "paragraph1": "Eine Blockchain fasst Transaktionen in Blöcken zusammen, und jeder Block enthält einen kryptografischen Hash — einen aus seinem eigenen Inhalt berechneten Fingerabdruck fester Länge — des unmittelbar vorangehenden Blocks. Diese Verkettung gibt der Struktur ihren Namen und ihre Manipulationssicherheit: Jede Änderung an einem früheren Block würde dessen Hash verändern, sodass er nicht mehr mit der im nächsten Block gespeicherten Kopie übereinstimmt — die Kette bricht auf eine Weise, die jeder Netzwerkteilnehmer erkennen kann.",
-          "paragraph2": "Neue Blöcke werden nur hinzugefügt, wenn das Netzwerk über einen Konsensmechanismus Einigkeit erzielt. Bitcoin nutzt Proof of Work, bei dem Computer im Wettbewerb ein rechenintensives Rätsel lösen, bevor der nächste Block hinzugefügt wird; Ethereum und die meisten neueren Netzwerke nutzen Proof of Stake, bei dem Teilnehmer einen Teil der Netzwerkwährung als finanzielle Sicherheit für die von ihnen vorgeschlagenen Blöcke hinterlegen („staken\").",
-          "diagram": {
-            "blockLabel": "Block",
-            "hashLabel": "Hash",
-            "prevHashLabel": "Vorheriger Hash",
-            "dataLabel": "Daten: Transaktionen",
-            "caption": "Eine vereinfachte Kette aus vier Blöcken. Jeder Block speichert seinen eigenen Hash und den Hash des vorherigen Blocks und verknüpft sie so der Reihe nach."
-          }
+          "paragraph2": "Neue Blöcke werden nur hinzugefügt, wenn das Netzwerk über einen Konsensmechanismus Einigkeit erzielt. Bitcoin nutzt Proof of Work, bei dem Computer im Wettbewerb ein rechenintensives Rätsel lösen, bevor der nächste Block hinzugefügt wird; Ethereum und die meisten neueren Netzwerke nutzen Proof of Stake, bei dem Teilnehmer einen Teil der Netzwerkwährung als finanzielle Sicherheit für die von ihnen vorgeschlagenen Blöcke hinterlegen („staken\")."
         },
         "comparison": {
           "title": "Vergleich wichtiger Kryptowährungen",
@@ -2553,6 +2539,129 @@
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet",
         "inputSectionTitle": "Eingabe"
+      },
+      "liveFlow": {
+        "title": "Live-Umrechnungsfluss",
+        "live": "LIVE",
+        "snapshot": "Momentaufnahme",
+        "heading": "{from} fließt zu Live-Kursen in {to}",
+        "intro": "Die Kurse kommen bei jedem Trade direkt von der Börse und blinken bei jedem Tick grün oder rot; die Mini-Charts zeigen die letzten 24 Stunden jeder Coin.",
+        "spark24h": "24 Std.",
+        "workedTitle": "Rechenbeispiel: Live-Umrechnung",
+        "rowAmount": "Betrag",
+        "rowFromPrice": "Kurs von {symbol}",
+        "rowUsd": "Wert in USD",
+        "rowToPrice": "Kurs von {symbol}",
+        "rowRate": "Kurs",
+        "rowResult": "Ergebnis",
+        "liveNote": "Aktualisiert sich mit jedem Börsentick",
+        "snapshotNote": "Letzte Marktaufnahme; für diese Coin gibt es keinen Live-Feed"
+      },
+      "dominance": {
+        "title": "Marktdominanz",
+        "heading": "Anteil an der gesamten Krypto-Marktkapitalisierung",
+        "intro": "Jeder Ring ist ein Stück des Gesamtmarkts: außen die Bitcoin-Dominanz, dann Ethereum, die zwei größten Stablecoins und die von Ihnen gewählte Coin.",
+        "stablecoins": "Stablecoins (USDT+USDC)",
+        "workedTitle": "Rechenbeispiel: vom Ring zu Dollar",
+        "rowTotal": "Gesamte Marktkapitalisierung",
+        "rowChange": "24-Std.-Veränderung",
+        "rowActive": "Aktive Coins",
+        "btcNote": "Gesamt × {pct}"
+      },
+      "liveBlocks": {
+        "title": "Neueste Bitcoin-Blöcke (live)",
+        "heading": "Die Kette wächst, Block für Block",
+        "intro": "Die neuesten im Bitcoin-Netzwerk geminten Blöcke; jeder speichert den Hash des vorherigen Blocks, und genau das verkettet sie. Klicken Sie auf einen Block für Details.",
+        "loading": "Neueste Blöcke werden geladen…",
+        "error": "Der Block-Explorer antwortet gerade nicht. Die Liste füllt sich automatisch, sobald er zurück ist.",
+        "prev": "vorh.",
+        "linkNote": "Der „vorh.“-Hash jedes Blocks entspricht dem Hash des Blocks rechts daneben – ändert man einen alten Block, brechen alle späteren Verknüpfungen.",
+        "detailTitle": "Block Nr. {height}",
+        "hash": "Hash",
+        "prevHash": "Vorheriger Hash",
+        "linked": "Passt zum vorherigen Block ✓",
+        "miner": "Gemint von",
+        "fill": "Blockfüllung",
+        "fillNote": "Gewicht ÷ 4,000,000 WU",
+        "totalFees": "Gebühren gesamt",
+        "avgFee": "Ø Gebühr pro Tx",
+        "avgFeeNote": "Gebühren ÷ (Tx − 1 Coinbase)",
+        "subsidy": "Neue-Coins-Subvention",
+        "reward": "Miner-Belohnung",
+        "rewardNote": "Subvention + Gebühren",
+        "source": "Daten: mempool.space, alle 30 Sekunden aktualisiert."
+      },
+      "fearGreed": {
+        "title": "Krypto-Angst-und-Gier-Index",
+        "heading": "Die Marktstimmung heute und im letzten Monat",
+        "intro": "Ein täglicher Wert von 0 bis 100 aus Volatilität, Momentum, Social-Media-Aktivität und Bitcoin-Dominanz: niedrige Werte zeigen Angst, hohe Gier.",
+        "loading": "Index wird geladen…",
+        "error": "Der Index-Anbieter antwortet gerade nicht; der Index erscheint automatisch wieder.",
+        "historyLabel": "Letzte {days} Tage",
+        "workedTitle": "Rechenbeispiel: den Index lesen",
+        "today": "Heute",
+        "yesterday": "Gestern",
+        "weekAgo": "Vor 7 Tagen",
+        "low": "Tiefstwert",
+        "high": "Höchstwert",
+        "average": "{days}-Tage-Durchschnitt",
+        "averageNote": "Summe von {days} Tageswerten ÷ {days}",
+        "source": "Daten: Crypto Fear & Greed Index von alternative.me, täglich aktualisiert.",
+        "zones": {
+          "extremeFear": "Extreme Angst",
+          "fear": "Angst",
+          "neutral": "Neutral",
+          "greed": "Gier",
+          "extremeGreed": "Extreme Gier"
+        }
+      },
+      "fees": {
+        "title": "Bitcoin-Netzwerkgebühren jetzt",
+        "heading": "Was das Senden von Bitcoin gerade kostet",
+        "intro": "Die Gebührensätze, die das Netzwerk in dieser Minute verlangt, eingeordnet in die Gebührenverteilung des nächsten Blocks und bepreist für eine typische Zahlung mit {vbytes} vBytes.",
+        "loading": "Live-Gebühren werden geladen…",
+        "error": "Der Gebührenschätzer antwortet gerade nicht; die Live-Gebühren erscheinen automatisch wieder.",
+        "distributionLabel": "Gebührenverteilung im nächsten Block (10.–90. Perzentil; dunkler = mittlere Hälfte)",
+        "median": "Median",
+        "medianShort": "Median {rate}",
+        "levels": {
+          "low": "Niedrig · in ~1 Stunde",
+          "medium": "Mittel · in ~30 Min.",
+          "high": "Hoch · nächster Block"
+        },
+        "workedTitle": "Rechenbeispiel: mittlere Gebühr",
+        "rowRate": "Gebührensatz",
+        "rowSize": "Transaktionsgröße",
+        "rowSats": "Gebühr in Sats",
+        "rowBtc": "Gebühr in BTC",
+        "rowPrice": "BTC-Kurs",
+        "rowUsd": "Gebühr in USD",
+        "rowUsdNote": "Sats ÷ 100,000,000 × BTC-Kurs",
+        "source": "Daten: Gebührenschätzungen von mempool.space, alle 30 Sekunden aktualisiert."
+      },
+      "halving": {
+        "title": "Bitcoin-Halving-Countdown",
+        "heading": "Blockbelohnung je Ära und das nächste Halving",
+        "intro": "Alle 210,000 Blöcke halbiert sich die Belohnung für das Minen eines Blocks. Die Stufen zeigen die Belohnung jeder Ära; die aktuelle füllt sich, während Blöcke gemint werden.",
+        "loading": "Kettenhöhe wird geladen…",
+        "error": "Der Block-Explorer antwortet gerade nicht; der Countdown läuft automatisch weiter.",
+        "legend": "Aktuelle Ära zu {progress} % gemint. Gestrichelte Stufe = nächste Ära (geschätzt).",
+        "units": {
+          "days": "Tage",
+          "hours": "Std.",
+          "minutes": "Min.",
+          "seconds": "Sek."
+        },
+        "workedTitle": "Rechenbeispiel: Datum des nächsten Halvings",
+        "rowTip": "Aktuelle Höhe",
+        "rowNext": "Nächstes Halving bei",
+        "rowBlocks": "Verbleibende Blöcke",
+        "rowAvg": "Ø Blockzeit",
+        "rowAvgNote": "Gemessen seit der letzten Schwierigkeitsanpassung",
+        "rowReward": "Belohnung pro Block",
+        "rowDate": "Geschätztes Datum",
+        "rowDateNote": "Zeit des letzten Blocks + Blöcke × Ø-Zeit",
+        "source": "Daten: Kettenspitze und Schwierigkeitsanpassung von mempool.space, jede Minute aktualisiert."
       }
     },
     "forex-converter": {

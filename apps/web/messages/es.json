@@ -2317,13 +2317,6 @@
         "coinsPurchasedLabel": "Monedas compradas",
         "historyLimitNote": "Los precios históricos solo están disponibles para los últimos {days} días, un límite fijado por el proveedor público de datos."
       },
-      "indicators": {
-        "title": "Indicadores de mercado",
-        "intro": "Una instantánea del mercado de criptomonedas en su conjunto.",
-        "totalMarketCapLabel": "Capitalización total del mercado",
-        "btcDominanceLabel": "Dominancia de Bitcoin",
-        "activeCoinsLabel": "Criptomonedas activas"
-      },
       "news": {
         "title": "Noticias del mercado",
         "intro": "Titulares recientes de fuentes de noticias independientes, mostrados aquí como referencia y sin ningún comentario o análisis por parte de TooloraLabs.",
@@ -2392,14 +2385,7 @@
         "blockchain": {
           "title": "Cómo funciona una blockchain",
           "paragraph1": "Una blockchain agrupa transacciones en bloques, y cada bloque incluye un hash criptográfico —una huella de longitud fija calculada a partir de su propio contenido— del bloque inmediatamente anterior. Ese enlace es lo que da nombre a la estructura y la hace resistente a manipulaciones: cambiar cualquier dato de un bloque anterior modificaría su hash, que dejaría de coincidir con la copia guardada en el siguiente bloque, rompiendo la cadena de una forma que cualquier participante de la red puede detectar.",
-          "paragraph2": "Solo se añaden nuevos bloques cuando la red alcanza un acuerdo mediante un mecanismo de consenso. Bitcoin usa Proof of Work (prueba de trabajo), en la que los ordenadores compiten por resolver un problema computacionalmente costoso antes de añadir el siguiente bloque; Ethereum y la mayoría de las redes más recientes usan Proof of Stake (prueba de participación), en la que los participantes bloquean («stakean») parte de la moneda propia de la red como respaldo financiero de los bloques que proponen.",
-          "diagram": {
-            "blockLabel": "Bloque",
-            "hashLabel": "Hash",
-            "prevHashLabel": "Hash anterior",
-            "dataLabel": "Datos: transacciones",
-            "caption": "Una cadena simplificada de cuatro bloques. Cada bloque guarda su propio hash y el hash del bloque anterior, enlazándolos en secuencia."
-          }
+          "paragraph2": "Solo se añaden nuevos bloques cuando la red alcanza un acuerdo mediante un mecanismo de consenso. Bitcoin usa Proof of Work (prueba de trabajo), en la que los ordenadores compiten por resolver un problema computacionalmente costoso antes de añadir el siguiente bloque; Ethereum y la mayoría de las redes más recientes usan Proof of Stake (prueba de participación), en la que los participantes bloquean («stakean») parte de la moneda propia de la red como respaldo financiero de los bloques que proponen."
         },
         "comparison": {
           "title": "Comparativa de las principales criptomonedas",
@@ -2553,6 +2539,129 @@
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto",
         "inputSectionTitle": "Entrada"
+      },
+      "liveFlow": {
+        "title": "Flujo de conversión en vivo",
+        "live": "EN VIVO",
+        "snapshot": "Instantánea",
+        "heading": "{from} fluyendo hacia {to} a precios en vivo",
+        "intro": "Los precios llegan del exchange con cada operación y destellan en verde o rojo en cada tick; las minigráficas trazan las últimas 24 horas de cada moneda.",
+        "spark24h": "24 h",
+        "workedTitle": "Ejemplo resuelto: conversión en vivo",
+        "rowAmount": "Cantidad",
+        "rowFromPrice": "Precio de {symbol}",
+        "rowUsd": "Valor en USD",
+        "rowToPrice": "Precio de {symbol}",
+        "rowRate": "Tasa",
+        "rowResult": "Resultado",
+        "liveNote": "Se actualiza con cada tick del exchange",
+        "snapshotNote": "Última instantánea del mercado; esta moneda no tiene feed en vivo"
+      },
+      "dominance": {
+        "title": "Dominancia del mercado",
+        "heading": "Cuota de la capitalización total del mercado cripto",
+        "intro": "Cada anillo es una porción del mercado: la dominancia de Bitcoin por fuera, luego Ethereum, las dos mayores stablecoins y la moneda que elegiste.",
+        "stablecoins": "Stablecoins (USDT+USDC)",
+        "workedTitle": "Ejemplo resuelto: del anillo a dólares",
+        "rowTotal": "Capitalización total",
+        "rowChange": "Variación 24 h",
+        "rowActive": "Monedas activas",
+        "btcNote": "Total × {pct}"
+      },
+      "liveBlocks": {
+        "title": "Últimos bloques de Bitcoin (en vivo)",
+        "heading": "La cadena creciendo, bloque a bloque",
+        "intro": "Los bloques más recientes minados en la red Bitcoin; cada uno guarda el hash del bloque anterior, y eso los encadena. Haz clic en un bloque para ver sus detalles.",
+        "loading": "Cargando los últimos bloques…",
+        "error": "El explorador de bloques no responde ahora. La lista se rellenará sola cuando vuelva.",
+        "prev": "ant.",
+        "linkNote": "El hash «ant.» de cada bloque es igual al hash del bloque de su derecha: cambia un bloque antiguo y se rompen todos los enlaces posteriores.",
+        "detailTitle": "Bloque n.º {height}",
+        "hash": "Hash",
+        "prevHash": "Hash anterior",
+        "linked": "Coincide con el bloque anterior ✓",
+        "miner": "Minado por",
+        "fill": "Llenado del bloque",
+        "fillNote": "peso ÷ 4,000,000 WU",
+        "totalFees": "Comisiones totales",
+        "avgFee": "Comisión media por tx",
+        "avgFeeNote": "comisiones ÷ (tx − 1 coinbase)",
+        "subsidy": "Subsidio de monedas nuevas",
+        "reward": "Recompensa del minero",
+        "rewardNote": "subsidio + comisiones",
+        "source": "Datos: mempool.space, actualizados cada 30 segundos."
+      },
+      "fearGreed": {
+        "title": "Índice de Miedo y Codicia cripto",
+        "heading": "El ánimo del mercado hoy y durante el último mes",
+        "intro": "Una puntuación diaria de 0 a 100 basada en volatilidad, impulso, actividad social y dominancia de Bitcoin: valores bajos indican miedo y altos, codicia.",
+        "loading": "Cargando el índice…",
+        "error": "El proveedor del índice no responde ahora; volverá a aparecer automáticamente.",
+        "historyLabel": "Últimos {days} días",
+        "workedTitle": "Ejemplo resuelto: leer el índice",
+        "today": "Hoy",
+        "yesterday": "Ayer",
+        "weekAgo": "Hace 7 días",
+        "low": "Mínimo",
+        "high": "Máximo",
+        "average": "Media de {days} días",
+        "averageNote": "Suma de {days} valores diarios ÷ {days}",
+        "source": "Datos: Crypto Fear & Greed Index de alternative.me, actualizado a diario.",
+        "zones": {
+          "extremeFear": "Miedo extremo",
+          "fear": "Miedo",
+          "neutral": "Neutral",
+          "greed": "Codicia",
+          "extremeGreed": "Codicia extrema"
+        }
+      },
+      "fees": {
+        "title": "Comisiones de la red Bitcoin ahora",
+        "heading": "Lo que cuesta enviar bitcoin ahora mismo",
+        "intro": "Las tasas de comisión que pide la red este minuto, situadas sobre la dispersión de comisiones del próximo bloque y valoradas para un pago típico de {vbytes} vbytes.",
+        "loading": "Cargando comisiones en vivo…",
+        "error": "El estimador de comisiones no responde ahora; las comisiones volverán automáticamente.",
+        "distributionLabel": "Dispersión de comisiones en el próximo bloque (percentil 10–90; más oscuro = mitad central)",
+        "median": "Mediana",
+        "medianShort": "mediana {rate}",
+        "levels": {
+          "low": "Baja · en ~1 hora",
+          "medium": "Media · en ~30 min",
+          "high": "Alta · próximo bloque"
+        },
+        "workedTitle": "Ejemplo resuelto: comisión media",
+        "rowRate": "Tasa de comisión",
+        "rowSize": "Tamaño de la transacción",
+        "rowSats": "Comisión en sats",
+        "rowBtc": "Comisión en BTC",
+        "rowPrice": "Precio de BTC",
+        "rowUsd": "Comisión en USD",
+        "rowUsdNote": "sats ÷ 100,000,000 × precio de BTC",
+        "source": "Datos: estimaciones de comisiones de mempool.space, actualizadas cada 30 segundos."
+      },
+      "halving": {
+        "title": "Cuenta atrás del halving de Bitcoin",
+        "heading": "Recompensa por bloque en cada era y el próximo halving",
+        "intro": "Cada 210,000 bloques la recompensa por minar un bloque se reduce a la mitad. Los escalones muestran la recompensa de cada era; la actual se llena a medida que se minan bloques.",
+        "loading": "Cargando la altura de la cadena…",
+        "error": "El explorador de bloques no responde ahora; la cuenta atrás se reanudará automáticamente.",
+        "legend": "Era actual minada al {progress}%. Escalón discontinuo = próxima era (estimada).",
+        "units": {
+          "days": "días",
+          "hours": "horas",
+          "minutes": "min",
+          "seconds": "s"
+        },
+        "workedTitle": "Ejemplo resuelto: fecha del próximo halving",
+        "rowTip": "Altura actual",
+        "rowNext": "Próximo halving en",
+        "rowBlocks": "Bloques restantes",
+        "rowAvg": "Tiempo medio por bloque",
+        "rowAvgNote": "Medido desde el último ajuste de dificultad",
+        "rowReward": "Recompensa por bloque",
+        "rowDate": "Fecha estimada",
+        "rowDateNote": "Hora del último bloque + bloques × tiempo medio",
+        "source": "Datos: altura de la cadena y ajuste de dificultad de mempool.space, actualizados cada minuto."
       }
     },
     "forex-converter": {

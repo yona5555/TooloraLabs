@@ -91,6 +91,7 @@ export async function getGlobalStats(): Promise<CryptoGlobalStats | null> {
       total_market_cap?: Record<string, number>;
       market_cap_percentage?: Record<string, number>;
       active_cryptocurrencies?: number;
+      market_cap_change_percentage_24h_usd?: number;
     };
   };
   const data = json.data;
@@ -98,6 +99,8 @@ export async function getGlobalStats(): Promise<CryptoGlobalStats | null> {
     totalMarketCapUsd: data.total_market_cap?.usd ?? 0,
     btcDominancePercentage: data.market_cap_percentage?.btc ?? 0,
     activeCryptocurrencies: data.active_cryptocurrencies ?? 0,
+    marketCapPercentages: data.market_cap_percentage ?? {},
+    marketCapChangePercentage24h: data.market_cap_change_percentage_24h_usd ?? 0,
   };
 }
 
@@ -116,7 +119,8 @@ export type PricePoint = { timestamp: number; price: number };
 
 export async function getCoinMarketChart(coinId: string, days: number): Promise<PricePoint[]> {
   const url = `${COINGECKO_BASE}/coins/${encodeURIComponent(coinId)}/market_chart?vs_currency=usd&days=${days}`;
-  const res = await fetch(url, { next: { revalidate: PAGE_REVALIDATE_SECONDS } });
+  // 24h sparklines go stale fast; longer ranges keep the hourly page cache.
+  const res = await fetch(url, { next: { revalidate: days <= 1 ? 300 : PAGE_REVALIDATE_SECONDS } });
   if (!res.ok) {
     throw new Error(`CoinGecko market_chart request failed: ${res.status}`);
   }
