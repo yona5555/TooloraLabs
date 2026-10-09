@@ -6,13 +6,8 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import NeumorphicIconBadge from "@/components/tool-ui/NeumorphicIconBadge";
-import InvoiceFormulaDiagram from "./InvoiceFormulaDiagram";
-import InvoiceLineItemBreakdownChart from "./InvoiceLineItemBreakdownChart";
-import InvoiceTaxRateComparisonChart from "./InvoiceTaxRateComparisonChart";
-import InvoiceBatchAccumulationChart from "./InvoiceBatchAccumulationChart";
 import InvoiceQuantityScalingChart from "./InvoiceQuantityScalingChart";
 import InvoiceRoundingImpactDiagram from "./InvoiceRoundingImpactDiagram";
-import InvoiceVendorSplitChart from "./InvoiceVendorSplitChart";
 import InvoiceAverageLineItemChart from "./InvoiceAverageLineItemChart";
 import InvoicePaymentTermsDiagram from "./InvoicePaymentTermsDiagram";
 import InvoiceDiscountEarlyPaymentChart from "./InvoiceDiscountEarlyPaymentChart";
@@ -32,8 +27,6 @@ export default async function BatchInvoiceEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <InvoiceFormulaDiagram />
-        <InvoiceLineItemBreakdownChart />
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
@@ -49,8 +42,6 @@ export default async function BatchInvoiceEducation() {
             </div>
           ))}
         </div>
-        <InvoiceBatchAccumulationChart />
-        <InvoiceVendorSplitChart />
         <InvoicePaymentTermsDiagram />
       </InfoSection>
 
@@ -74,7 +65,6 @@ export default async function BatchInvoiceEducation() {
           intro={t("behindTheTool.academicPath.intro")}
           universities={universities}
         />
-        <InvoiceTaxRateComparisonChart />
         <InvoiceQuantityScalingChart />
         <InvoiceRoundingImpactDiagram />
         <InvoiceAverageLineItemChart />

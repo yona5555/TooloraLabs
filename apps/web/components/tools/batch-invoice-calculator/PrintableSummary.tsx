@@ -1,67 +1,57 @@
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { BatchSummary } from "@tooloralabs/tools";
-import type { CurrencyCode } from "@/lib/currency";
-import type { SavedInvoice } from "./types";
+import type { BatchInvoice, BatchOverview } from "@tooloralabs/tools";
+import type { InvoiceFormatters } from "./format";
 
-type Props = {
-  invoices: SavedInvoice[];
-  totals: number[];
-  summary: BatchSummary;
-  digitStyle: DigitStyle;
-  currency: CurrencyCode;
-};
+type Props = { invoices: BatchInvoice[]; overview: BatchOverview; f: InvoiceFormatters };
 
-export default function PrintableSummary({ invoices, totals, summary, digitStyle, currency }: Props) {
+/** Print-only copy of the batch: every invoice with its items, then the totals (hidden on screen). */
+export default function PrintableSummary({ invoices, overview, f }: Props) {
   const t = useTranslations("tools.batch-invoice-calculator");
-  const tTable = useTranslations("tools.batch-invoice-calculator.table");
-  const tSummary = useTranslations("tools.batch-invoice-calculator.summary");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { style: "currency", currency, maximumFractionDigits: 2 });
+  const e = useTranslations("tools.batch-invoice-calculator.export");
+  const cell = "border border-zinc-300 px-2 py-1";
 
   return (
     <div data-print-area className="hidden bg-white p-8 text-black print:block">
       <h1 className="mb-4 text-xl font-bold">{t("title")}</h1>
-      <table className="w-full min-w-[560px] border-collapse text-sm">
-        <thead>
-          <tr>
-            <th className="border border-zinc-300 px-3 py-2 text-start">{tTable("columnNumber")}</th>
-            <th className="border border-zinc-300 px-3 py-2 text-start">{tTable("columnDate")}</th>
-            <th className="border border-zinc-300 px-3 py-2 text-start">{tTable("columnVendor")}</th>
-            <th className="border border-zinc-300 px-3 py-2 text-end">{tTable("columnTotal")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {invoices.map((invoice, i) => (
-            <tr key={invoice.id}>
-              <td className="border border-zinc-300 px-3 py-2">{invoice.invoiceNumber || tTable("noNumber")}</td>
-              <td className="border border-zinc-300 px-3 py-2">{invoice.date}</td>
-              <td className="border border-zinc-300 px-3 py-2">{invoice.vendor || tTable("noVendor")}</td>
-              <td className="border border-zinc-300 px-3 py-2 text-end font-mono">{fmt(totals[i] ?? 0)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <table className="mt-6 w-full max-w-sm border-collapse text-sm">
-        <tbody>
-          <tr>
-            <td className="border border-zinc-300 px-3 py-2">{tSummary("invoiceCountLabel")}</td>
-            <td className="border border-zinc-300 px-3 py-2 text-end font-mono">{summary.invoiceCount}</td>
-          </tr>
-          <tr>
-            <td className="border border-zinc-300 px-3 py-2">{tSummary("netBeforeTaxLabel")}</td>
-            <td className="border border-zinc-300 px-3 py-2 text-end font-mono">{fmt(summary.netBeforeTax)}</td>
-          </tr>
-          <tr>
-            <td className="border border-zinc-300 px-3 py-2">{tSummary("taxTotalLabel")}</td>
-            <td className="border border-zinc-300 px-3 py-2 text-end font-mono">{fmt(summary.taxTotal)}</td>
-          </tr>
-          <tr>
-            <td className="border border-zinc-300 px-3 py-2 font-bold">{tSummary("grandTotalLabel")}</td>
-            <td className="border border-zinc-300 px-3 py-2 text-end font-mono font-bold">{fmt(summary.grandTotal)}</td>
-          </tr>
-        </tbody>
-      </table>
+      {invoices.map((inv, i) => {
+        const row = overview.perInvoice[i];
+        return (
+          <table key={inv.id} className="mb-4 w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th colSpan={4} className={`${cell} text-start`}>
+                  {inv.number} · {inv.date} · {inv.client}
+                </th>
+              </tr>
+              <tr>
+                <th className={`${cell} text-start`}>{e("item")}</th>
+                <th className={`${cell} text-end`}>{e("quantity")}</th>
+                <th className={`${cell} text-end`}>{e("unitPrice")}</th>
+                <th className={`${cell} text-end`}>{e("lineTotal")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {inv.items.map((it, j) => (
+                <tr key={j}>
+                  <td className={cell}>{it.name}</td>
+                  <td className={`${cell} text-end`}>{f.num(it.quantity)}</td>
+                  <td className={`${cell} text-end`}>{f.money(it.unitPrice)}</td>
+                  <td className={`${cell} text-end`}>{f.money(row.lineTotals[j])}</td>
+                </tr>
+              ))}
+              <tr>
+                <td colSpan={3} className={`${cell} text-end`}>{e("net")} · {e("tax")} ({f.pct(inv.taxPercent, 3)}) · {e("total")}</td>
+                <td className={`${cell} text-end font-semibold`}>
+                  {f.money(row.subtotal)} · {f.money(row.tax)} · {f.money(row.total)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        );
+      })}
+      <p className="mt-4 text-base font-bold">
+        {e("grandTotal")}: {f.money(overview.grand)} ({e("net")} {f.money(overview.net)} · {e("tax")} {f.money(overview.tax)})
+      </p>
     </div>
   );
 }

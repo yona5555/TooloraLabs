@@ -25866,61 +25866,11 @@
       "nav": {
         "tool": "Calculator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
-      },
-      "form": {
-        "inputTitle": "Invoice Details",
-        "invoiceNumberLabel": "Invoice Number (Optional)",
-        "invoiceNumberPlaceholder": "e.g. INV-1001",
-        "dateLabel": "Date",
-        "vendorLabel": "Vendor / Client Name (Optional)",
-        "vendorPlaceholder": "e.g. Acme Supplies",
-        "itemsLabel": "Line Items",
-        "itemNamePlaceholder": "Item name",
-        "itemQuantityPlaceholder": "Qty",
-        "itemUnitPricePlaceholder": "Unit price",
-        "removeItem": "Remove item",
-        "addItem": "Add Line Item",
-        "taxPercentLabel": "Tax Rate (%)",
-        "saveAndAddNew": "Save This Invoice & Add a New One",
-        "updateInvoice": "Update This Invoice",
-        "loadSampleInvoice": "Load Sample Invoice",
-        "clearDraft": "Clear Draft"
-      },
-      "draftPreview": {
-        "heading": "This Invoice",
-        "noLineItems": "Add at least one line item to see a total.",
-        "invalidLineItem": "Each line item needs a quantity greater than zero and a non-negative unit price.",
-        "invalidTax": "Enter a tax rate of zero or more.",
-        "subtotalLabel": "Subtotal",
-        "taxLabel": "Tax",
-        "totalLabel": "Invoice Total"
-      },
-      "table": {
-        "empty": "No invoices saved yet. Build one on the left and save it to add it here.",
-        "columnNumber": "Number",
-        "columnDate": "Date",
-        "columnVendor": "Vendor",
-        "columnTotal": "Total",
-        "columnActions": "Actions",
-        "noNumber": "—",
-        "noVendor": "—",
-        "editInvoice": "Edit invoice",
-        "deleteInvoice": "Delete invoice"
-      },
-      "summary": {
-        "heading": "Running Summary",
-        "invoiceCountLabel": "Invoices Saved",
-        "netBeforeTaxLabel": "Net Before Tax",
-        "taxTotalLabel": "Tax Total",
-        "grandTotalLabel": "Grand Total",
-        "printExport": "Print / Export",
-        "clearAll": "Clear All",
-        "comparisonChartCaption": "Net vs. tax portion of each saved invoice (most recent shown)."
-      },
-      "quickReference": {
-        "title": "The Math",
-        "intro": "Every invoice is calculated the same way, then all saved invoices are added together for the running summary."
+        "behindTheTool": "Behind the Tool",
+        "composition": "Composition",
+        "clients": "Dates & Clients",
+        "tax": "Tax",
+        "examples": "Worked Examples"
       },
       "education": {
         "intro": {
@@ -26032,56 +25982,8 @@
           "readOriginal": "View Further Reading"
         }
       },
-      "shareExport": {
-        "triggerLabel": "Share / Export",
-        "modalTitle": "Share or Export This Result",
-        "contactSectionTitle": "Prepared For (optional)",
-        "contactName": "Name",
-        "contactNamePlaceholder": "e.g. Jordan Lee",
-        "contactEmail": "Email",
-        "contactEmailPlaceholder": "e.g. jordan@example.com",
-        "contactPhone": "Phone",
-        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
-        "contactOrganization": "Organization",
-        "contactOrganizationPlaceholder": "e.g. Lee Labs",
-        "contactAddress": "Address",
-        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
-        "shareToSocial": "Share to social media",
-        "generatedOn": "Generated on",
-        "preparedForTitle": "Prepared For",
-        "howCalculatedTitle": "How This Was Calculated",
-        "inputSectionTitle": "Input",
-        "resultSectionTitle": "Result",
-        "summarySentence": "{count, plural, one {# saved invoice} other {# saved invoices}} totaling {total}."
-      },
       "relatedTools": {
         "title": "Related Business Tools"
-      },
-      "formulaDiagram": {
-        "title": "How an Invoice Total Is Calculated",
-        "intro": "A worked example with two line items and 8.5% tax.",
-        "lineTotal": "{qty} × ${price} = line total",
-        "subtotal": "Subtotal (all line items)",
-        "tax": "Tax ({percent}%)",
-        "total": "Total"
-      },
-      "lineItemBreakdownChart": {
-        "title": "Line Item Breakdown",
-        "caption": "Each line item's own quantity × unit price.",
-        "items": {
-          "consulting": "Consulting Hours",
-          "supplies": "Office Supplies"
-        },
-        "invoiceTotalLabel": "Invoice total"
-      },
-      "taxRateComparisonChart": {
-        "title": "Total by Tax Rate",
-        "caption": "Same ${subtotal} subtotal at four real tax rates."
-      },
-      "batchAccumulationChart": {
-        "title": "Running Total Across a Batch",
-        "caption": "Cumulative total as invoices are added to a batch.",
-        "invoiceN": "After invoice {n}"
       },
       "quantityScalingChart": {
         "title": "Line Total by Quantity",
@@ -26095,15 +25997,6 @@
         "billedLabel": "Amount billed",
         "note": "Invoices round the computed tax to the nearest cent before billing.",
         "differenceLabel": "Rounding difference"
-      },
-      "vendorSplitChart": {
-        "title": "Totals by Vendor",
-        "caption": "Two vendors in the same batch, each invoice's own total.",
-        "vendors": {
-          "acme": "Acme Supplies",
-          "globex": "Globex Corp"
-        },
-        "batchTotalLabel": "Batch total"
       },
       "averageLineItemChart": {
         "title": "Average Line Item Value",
@@ -26128,7 +26021,302 @@
         "earlyPayment": "Paid early ({percent}% off)",
         "savingsLabel": "Savings"
       },
-      "workedExampleTitle": "Worked Example"
+      "workedExampleTitle": "Worked Example",
+      "sidebar": {
+        "title": "Invoices in this batch ({count})",
+        "note": "Each invoice's share of the grand total.",
+        "average": "Average invoice",
+        "items": "Line items"
+      },
+      "editor": {
+        "title": "Invoice Batch",
+        "loadSample": "Load Sample",
+        "clearAll": "Clear All",
+        "currency": "Batch currency",
+        "invoices": "Invoices ({count})",
+        "untitled": "Invoice {n}",
+        "addInvoice": "New",
+        "number": "Invoice #",
+        "date": "Date",
+        "client": "Client",
+        "clientPlaceholder": "Client name",
+        "tax": "Tax %",
+        "duplicateInvoice": "Duplicate",
+        "removeInvoice": "Delete",
+        "items": "Line items ({count})",
+        "itemName": "Item name",
+        "itemPlaceholder": "Item {n}",
+        "duplicateItem": "Duplicate item",
+        "removeItem": "Remove item",
+        "qty": "Qty",
+        "price": "Unit price",
+        "lineTotal": "Line total",
+        "addItem": "Add line item",
+        "empty": "The batch is empty. Add an invoice or load the sample.",
+        "savedNote": "Saved automatically, in this browser only.",
+        "quickRates": "Quick tax rates",
+        "quickRatesNote": "Tap a rate to apply it to the selected invoice; the right column is that invoice's total at the rate."
+      },
+      "flow": {
+        "title": "Invoice Flow",
+        "live": "Live",
+        "thisInvoice": "This invoice",
+        "intro": "Lines add up to the subtotal, tax is added at this invoice's rate, and the total joins the batch.",
+        "subtotal": "Subtotal",
+        "tax": "Tax",
+        "total": "Invoice total",
+        "empty": "No invoice selected. Add one to see its flow.",
+        "grandTotal": "Grand total · {count, plural, one {# invoice} other {# invoices}}",
+        "net": "Net",
+        "taxTotal": "Tax",
+        "blended": "Blended rate",
+        "print": "Print / PDF"
+      },
+      "sample": {
+        "inv1": {
+          "client": "Northwind Traders"
+        },
+        "inv2": {
+          "client": "Blue Harbor Café"
+        },
+        "inv3": {
+          "client": "Atlas Logistics"
+        },
+        "items": {
+          "redesign": "Website redesign",
+          "copy": "Copywriting (pages)",
+          "photos": "Stock photo licences",
+          "logo": "Logo package",
+          "menus": "Printed menus",
+          "social": "Social media setup",
+          "hosting": "Managed hosting (months)",
+          "seo": "SEO audit",
+          "support": "Support hours"
+        }
+      },
+      "export": {
+        "invoice": "Invoice",
+        "date": "Date",
+        "client": "Client",
+        "item": "Item",
+        "quantity": "Quantity",
+        "unitPrice": "Unit price",
+        "lineTotal": "Line total",
+        "taxRate": "Tax %",
+        "net": "Net",
+        "tax": "Tax",
+        "total": "Total",
+        "currency": "Currency",
+        "grandTotal": "Grand total",
+        "itemsSheet": "Line items",
+        "summarySheet": "Summary"
+      },
+      "ind": {
+        "worked": "Worked example",
+        "empty": "Add an invoice with at least one priced item to see this indicator.",
+        "net": "Net",
+        "tax": "Tax",
+        "noClient": "No client name",
+        "items": {
+          "title": "Line Items by Value",
+          "heading": "{count} line items, largest first",
+          "intro": "Every line in the batch ranked by quantity × unit price, coloured by its invoice.",
+          "rowTop": "Largest line",
+          "rowLine": "Quantity × price",
+          "rowNet": "Batch net",
+          "rowShare": "Share of net",
+          "rowResult": "Largest line's share",
+          "note": "Out of {count} lines",
+          "more": "+{count} smaller lines not shown"
+        },
+        "donut": {
+          "title": "Batch Composition",
+          "heading": "{count} invoices, net and tax",
+          "intro": "The outer ring splits the grand total by invoice; the inner ring splits it into net and tax.",
+          "center": "Grand total",
+          "rowBiggest": "Largest invoice",
+          "rowOuter": "Its outer-ring share",
+          "rowNet": "Inner ring: net",
+          "rowTax": "Inner ring: tax",
+          "rowResult": "Both rings add up to"
+        },
+        "stacked": {
+          "title": "Net vs Tax per Invoice",
+          "heading": "How much of each invoice is tax",
+          "intro": "Each bar is one invoice's total, split into what you earn (net) and what you collect as tax.",
+          "rowInvoice": "Invoice with the most tax",
+          "rowTax": "Tax",
+          "rowTotal": "Net + tax",
+          "rowResult": "Invoice total",
+          "note": "Bar lengths are scaled to the largest invoice."
+        },
+        "trend": {
+          "title": "Invoice Totals Over Time",
+          "heading": "Totals by date against the batch average",
+          "intro": "Invoices in date order; the dashed line is the average invoice and the filled dot is the largest.",
+          "avg": "avg",
+          "rowAverage": "Average invoice",
+          "rowPeak": "Peak ({n})",
+          "rowAbove": "Above average by",
+          "rowLow": "Lowest ({n})",
+          "rowResult": "Peak vs average"
+        },
+        "timeline": {
+          "title": "Invoice Timeline",
+          "heading": "{days, plural, one {# day} other {# days}} from first to last invoice",
+          "intro": "Each invoice is a station placed by its real date, so gaps in billing are visible.",
+          "rowFirst": "First invoice",
+          "rowLast": "Last invoice",
+          "rowSpan": "Span",
+          "days": "{days} days",
+          "rowGap": "Average gap",
+          "rowResult": "Billed per calendar day",
+          "note": "Grand total ÷ days covered, first and last day included."
+        },
+        "clients": {
+          "title": "Revenue by Client",
+          "heading": "{count, plural, one {# client} other {# clients}} ranked by total billed",
+          "intro": "Invoices to the same client are added together; names match regardless of case.",
+          "invoices": "{count, plural, one {# invoice} other {# invoices}}",
+          "rowTop": "Top client",
+          "rowInvoices": "Invoices",
+          "rowTotal": "Net + tax",
+          "rowShare": "Share of grand total",
+          "rowResult": "Top client's share"
+        },
+        "gauge": {
+          "title": "Client Concentration",
+          "heading": "How much the batch depends on one client",
+          "intro": "The needle shows the largest client's share of the grand total; above half, losing that client would halve your billing.",
+          "rowTop": "Largest client",
+          "rowShare": "Share",
+          "rowClients": "Clients in batch",
+          "rowHhi": "HHI (0–10,000)",
+          "rowResult": "Risk zone",
+          "note": "HHI sums the squared shares; 10,000 means a single client.",
+          "zone": {
+            "low": "Low risk",
+            "medium": "Medium risk",
+            "high": "High risk"
+          }
+        },
+        "balance": {
+          "title": "Net vs Tax Balance",
+          "heading": "What you keep against what you collect",
+          "intro": "The beam weighs your net revenue against the tax you collect for the authority; the figure on top is tax per 100 of net.",
+          "per100": "Tax per {amount} of net",
+          "rowRatio": "Tax ÷ net",
+          "rowPer100": "Tax per 100 of net",
+          "rowResult": "Net : tax split"
+        },
+        "trio": {
+          "title": "Tax-Rate Sensitivity",
+          "heading": "Grand total if every rate moved 5 points",
+          "intro": "Every invoice's own rate is shifted by −5 and +5 percentage points (never below 0%) and the batch is recomputed.",
+          "low": "−5 points",
+          "now": "Current",
+          "high": "+5 points",
+          "rowNet": "Net (unchanged)",
+          "rowNow": "Current tax → total",
+          "rowLow": "−5 pp tax → total",
+          "rowHigh": "+5 pp tax → total",
+          "rowResult": "Range from −5 to +5",
+          "note": "Net does not move; only tax does."
+        },
+        "formula": {
+          "title": "The Batch Formula",
+          "heading": "The same three steps, with your numbers",
+          "intro": "Lines add up to net, net times the blended rate gives the tax, and net plus tax is the grand total.",
+          "lines": "{count} lines",
+          "blended": "Blended rate",
+          "grand": "Grand total",
+          "blendNote": "The blended rate is total tax ÷ total net, so invoices at different rates combine exactly.",
+          "rowSum": "Sum of invoice totals",
+          "rowResult": "Grand total"
+        },
+        "fx": {
+          "title": "Grand Total in Other Currencies",
+          "heading": "{amount} at the latest reference rates",
+          "intro": "The same grand total converted with the European Central Bank's latest reference rates.",
+          "unavailable": "Reference rates are unavailable for this currency right now.",
+          "rowGrand": "Grand total",
+          "rowRate": "Rate {from} → {to}",
+          "rowResult": "In {to}",
+          "note": "ECB fixing of {date}",
+          "source": "Source: European Central Bank reference rates ({date}); SAR, AED, QAR, BHD and OMR use their official US-dollar pegs."
+        },
+        "vat": {
+          "title": "VAT & Sales Tax by Country",
+          "heading": "Standard rates and what your batch would total",
+          "intro": "Standard rates checked against each tax authority on {date}. Click a row to price your batch at that rate, or apply it to the selected invoice.",
+          "country": "Country",
+          "type": "Type",
+          "rate": "Standard rate",
+          "yourBatch": "Your batch",
+          "source": "Official source",
+          "since": "since {date}",
+          "use": "Use",
+          "rowCountry": "Country",
+          "rowRate": "Standard rate",
+          "rowTax": "Tax on your net",
+          "rowResult": "Your batch would total",
+          "vsNow": "{diff} vs your current total",
+          "footnote": "Reduced and zero rates apply to some goods and services. Qatar and Kuwait have not implemented VAT; the US has no federal sales tax, as each state sets its own. Checked {date}.",
+          "kind": {
+            "vat": "VAT",
+            "gst": "GST",
+            "sales": "Sales tax",
+            "none": "No VAT"
+          },
+          "region": {
+            "gulf": "Gulf",
+            "mena": "MENA",
+            "europe": "Europe",
+            "asia": "Asia",
+            "americas": "Americas",
+            "oceania": "Oceania",
+            "africa": "Africa"
+          }
+        }
+      },
+      "examples": {
+        "title": "Worked Examples",
+        "intro": "Three real batches solved step by step with the same math as the calculator.",
+        "stepTax": "Tax on {n} at {rate}",
+        "stepBlended": "Blended rate",
+        "stepTotal": "Net + tax",
+        "answer": "Grand total",
+        "freelance": {
+          "title": "A US web freelancer",
+          "scenario": "One invoice in a state with 8.5% combined sales tax.",
+          "items": {
+            "hosting": "Hosting (months)",
+            "domain": "Domains",
+            "setup": "Setup fee"
+          },
+          "takeaway": "Tax applies once to the subtotal, not to each line separately."
+        },
+        "riyadh": {
+          "title": "A Riyadh caterer",
+          "scenario": "One invoice at Saudi Arabia's 15% VAT (ZATCA).",
+          "items": {
+            "catering": "Catering (guests)",
+            "rental": "Equipment rental"
+          },
+          "takeaway": "15% of 3,000 is 450, so the client pays 3,450 SAR."
+        },
+        "dubai": {
+          "title": "A Dubai agency, local and export",
+          "scenario": "Two invoices: a local client at 5% UAE VAT and an exported service at 0%.",
+          "items": {
+            "local": "Local campaign",
+            "export": "Exported service"
+          },
+          "takeaway": "The blended rate (3.571%) is below 5% because the export is zero-rated."
+        },
+        "netShare": "Net {pct}",
+        "taxShare": "Tax {pct}"
+      }
     },
     "text-to-speech": {
       "title": "Text to Speech",
