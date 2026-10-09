@@ -47,7 +47,7 @@ type DecoratedCardProps = {
 
 export default function DecoratedCard({ href, colorHex, textVariant, Icon, seed, title, size, children, hoverOverlay, className = "", disabled = false }: DecoratedCardProps) {
   const chrome = `flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-md transition-all duration-300 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-lg dark:shadow-black/40 ${
-    disabled ? "opacity-60" : "hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl dark:hover:border-blue-500/40 dark:hover:shadow-black/60"
+    disabled ? "opacity-60" : "hover:border-blue-200 hover:shadow-xl dark:hover:border-blue-500/40 dark:hover:shadow-black/60"
   } ${className}`;
 
   const content = (
@@ -66,7 +66,7 @@ export default function DecoratedCard({ href, colorHex, textVariant, Icon, seed,
   }
 
   return (
-    <div className="card-hover-group group relative h-full">
+    <div className="card-hover-group group relative h-full min-w-0 transition-transform duration-300 hover:-translate-y-1">
       <div className={chrome}>{content}</div>
       <Link href={href} aria-label={title} className="absolute inset-0 z-30" />
       {hoverOverlay && (
