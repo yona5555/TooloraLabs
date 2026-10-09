@@ -5,6 +5,7 @@ import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
+import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { REFERENCE_TRIANGLES, classifyByAngle } from "./triangleEducationMath";
 
 const round = (n: number) => Math.round(n * 10) / 10;
@@ -55,6 +56,7 @@ export default function TriangleAngleReferenceDrag() {
           ]}
         />
       </div>
+      <TriangleSinCosLiveCurve angles={[{ label: "θ", deg: currentAngle }]} />
       <div className="mt-4 flex flex-wrap justify-center gap-2">
         {REFERENCE_TRIANGLES.map((ref) => (
           <span

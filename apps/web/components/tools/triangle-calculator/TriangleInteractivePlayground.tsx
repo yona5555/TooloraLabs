@@ -5,6 +5,7 @@ import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
+import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { EXAMPLE, classifyByAngle, classifyBySides } from "./triangleEducationMath";
 
 const dist = (p: [number, number], q: [number, number]) => Math.hypot(p[0] - q[0], p[1] - q[1]);
@@ -94,6 +95,9 @@ export default function TriangleInteractivePlayground() {
           }
         />
       </div>
+      {!degenerate && (
+        <TriangleSinCosLiveCurve angles={[{ label: "A", deg: angleA }, { label: "B", deg: angleB }, { label: "C", deg: angleC }]} />
+      )}
       <p className="mt-3 text-xs opacity-60">{t("hint")}</p>
     </SectionCard>
   );

@@ -5,6 +5,7 @@ import "mafs/core.css";
 import "./triangleMafsTheme.css";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
+import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { EXAMPLE, angleSensitivity } from "./triangleEducationMath";
 
 const round = (n: number) => Math.round(n * 100) / 100;
@@ -83,6 +84,7 @@ export default function TriangleAngleDragSensitivity() {
           ]}
         />
       </div>
+      <TriangleSinCosLiveCurve angles={[{ label: "C", deg: currentAngle }]} />
       <p className="mt-3 text-xs opacity-60">{t("hint")}</p>
     </SectionCard>
   );

@@ -119,3 +119,9 @@ export const SPECIAL_TYPES = [
     angleClass: classifyByAngle(largestAngle),
   };
 });
+
+/** Live sin/cos readout for one labeled angle (degrees), shared by every interactive indicator's sin/cos curve. */
+export type SinCosMarker = { label: string; deg: number; sin: number; cos: number };
+export function sinCosMarker(label: string, deg: number): SinCosMarker {
+  return { label, deg, sin: Math.sin(toRad(deg)), cos: Math.cos(toRad(deg)) };
+}

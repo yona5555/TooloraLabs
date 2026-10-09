@@ -5,6 +5,7 @@ import { solveSSS } from "@tooloralabs/tools";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
+import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { round } from "./triangleEducationMath";
 import { TRIANGLE_SCENARIOS } from "./types";
 
@@ -102,6 +103,10 @@ export default function TriangleAngleGauge() {
           />
         )}
       </div>
+
+      {selected && selected.valid && (
+        <TriangleSinCosLiveCurve angles={[{ label: "A", deg: selected.angleA }, { label: "B", deg: selected.angleB }, { label: "C", deg: selected.angleC }]} />
+      )}
 
       <p className="mt-4 text-center text-sm leading-6">{t("verdict", { example: tScenarios(selectedKey), classification })}</p>
       <p className="mt-1 text-center text-sm leading-6 opacity-80">{t("fact", { angle: Math.round(selectedAngle) })}</p>
