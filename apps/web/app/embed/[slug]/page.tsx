@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import { getLocaleDir } from "@/lib/locale-meta";
 import { getLocaleFontClassName } from "@/lib/locale-fonts";
+import HtmlDocument from "@/components/layout/HtmlDocument";
 import BMICalculatorEmbed from "@/components/tools/bmi-calculator/BMICalculatorEmbed";
 
 // Tools available for third-party embedding. Add a slug here + a case below
@@ -54,32 +55,29 @@ export default async function EmbedPage({ params, searchParams }: PageProps) {
   const messages = (await import(`@/messages/${locale}.json`)).default;
   const t = await getTranslations({ locale, namespace: "tools" });
   const tEmbed = await getTranslations({ locale, namespace: "embedTools" });
-  const dir = getLocaleDir(locale);
 
   const toolUrl = `${SITE_URL}/${locale}/tools/${slug}`;
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <div
-        lang={locale}
-        dir={dir}
-        className={`bg-white p-3 dark:bg-zinc-950 ${getLocaleFontClassName(locale) ?? ""}`}
-      >
-        <p className="mb-3 text-center text-sm font-bold text-zinc-900 dark:text-zinc-50">
-          {t(`${slug}.title`)}
-        </p>
+    <HtmlDocument lang={locale} dir={getLocaleDir(locale)}>
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <div className={`bg-white p-3 dark:bg-zinc-950 ${getLocaleFontClassName(locale) ?? ""}`}>
+          <p className="mb-3 text-center text-sm font-bold text-zinc-900 dark:text-zinc-50">
+            {t(`${slug}.title`)}
+          </p>
 
-        {slug === "bmi-calculator" && <BMICalculatorEmbed />}
+          {slug === "bmi-calculator" && <BMICalculatorEmbed />}
 
-        <a
-          href={toolUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 flex items-center justify-center gap-1 text-xs font-medium text-zinc-400 no-underline transition hover:text-blue-600 dark:text-zinc-500 dark:hover:text-blue-400"
-        >
-          {tEmbed("poweredBy")}
-        </a>
-      </div>
-    </NextIntlClientProvider>
+          <a
+            href={toolUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex items-center justify-center gap-1 text-xs font-medium text-zinc-400 no-underline transition hover:text-blue-600 dark:text-zinc-500 dark:hover:text-blue-400"
+          >
+            {tEmbed("poweredBy")}
+          </a>
+        </div>
+      </NextIntlClientProvider>
+    </HtmlDocument>
   );
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/site";
 import { buildVerificationMetadata } from "@/lib/analytics";
-import ThemeInitScript from "@/components/layout/ThemeInitScript";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,18 +18,12 @@ export const metadata: Metadata = {
   },
 };
 
+// <html>/<body> live in HtmlDocument, rendered by app/[locale]/layout.tsx, the embed page and
+// app/not-found.tsx, since only they know the request locale for <html lang dir>.
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className="bg-[#F4F4F4] text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
-        <ThemeInitScript />
-        <GoogleAnalytics />
-        {children}
-      </body>
-    </html>
-  );
+  return children;
 }
