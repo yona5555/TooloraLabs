@@ -1,13 +1,16 @@
 import { useTranslations } from "next-intl";
 
-type DataSourceKey = "metalpriceApi" | "oilpriceApi";
+type DataSourceKey = "metalpriceApi" | "oilpriceApi" | "paxg" | "insee" | "fred";
 
 const SOURCE_URLS: Record<DataSourceKey, string> = {
   metalpriceApi: "https://metalpriceapi.com/",
   oilpriceApi: "https://www.oilpriceapi.com/",
+  paxg: "https://exchange.coinbase.com/",
+  insee: "https://www.insee.fr/en/statistiques/serie/010002079",
+  fred: "https://fred.stlouisfed.org/series/DCOILWTICO",
 };
 
-/** Per-section attribution, same pattern as forex-converter's DataSourceNote — gold/silver come from MetalpriceAPI (also the sole source for the historical chart, see ROADMAP.md §10), oil from OilPriceAPI. */
+/** Per-section attribution: spot prices from MetalpriceAPI/OilPriceAPI; history from PAXG/USD (Coinbase), INSEE monthly London prices and EIA closes via FRED. */
 export default function DataSourceNote({ sourceKey, className = "" }: { sourceKey: DataSourceKey; className?: string }) {
   const t = useTranslations("tools.commodities-tracker.dataSource");
   const url = SOURCE_URLS[sourceKey];

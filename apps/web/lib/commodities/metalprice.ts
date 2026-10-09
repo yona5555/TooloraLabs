@@ -59,27 +59,3 @@ export async function getMetalSnapshot(): Promise<MetalSnapshot | null> {
     return null;
   }
 }
-
-export type GoldPricePoint = { date: string; priceUsdPerOunce: number };
-
-/**
- * The free plan's Timeframe (date-range) endpoint is paid-only, and even
- * this single-date fallback costs one request per call — so callers must
- * cache each date's result for a long time. A past date's closing price
- * never changes once published, which is exactly what makes that safe: this
- * is correctness-driven caching, not just quota conservation.
- */
-const HISTORY_REVALIDATE_SECONDS = 2592000; // 30 days
-
-export async function getGoldPriceOnDate(date: string): Promise<GoldPricePoint> {
-  const url = `${METALPRICE_API_BASE}/${date}?api_key=${requireApiKey()}&base=USD&currencies=XAU`;
-  const res = await fetch(url, { next: { revalidate: HISTORY_REVALIDATE_SECONDS } });
-  if (!res.ok) {
-    throw new Error(`MetalpriceAPI historical request failed for ${date}: ${res.status}`);
-  }
-  const json = (await res.json()) as LatestResponse;
-  if (!json.success) {
-    throw new Error(`MetalpriceAPI historical request for ${date} did not succeed`);
-  }
-  return { date, priceUsdPerOunce: json.rates.USDXAU };
-}

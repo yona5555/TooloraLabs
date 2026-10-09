@@ -3353,43 +3353,62 @@
         "commodity": {
           "gold": "Gold",
           "silver": "Silber",
-          "oil": "Öl"
+          "wti": "Öl (WTI)",
+          "brent": "Öl (Brent)"
         },
         "amountLabelWeight": "Gewicht",
-        "amountLabelBarrels": "Barrel",
-        "weightUnitLabel": "Einheit",
-        "weightUnit": {
-          "gram": "Gramm",
-          "troyOunce": "Feinunze"
-        },
         "resultTitle": "Wert",
         "lastUpdated": "Preise zuletzt aktualisiert {time}",
-        "goldPerGramLabel": "Gold / Gramm",
-        "silverPerGramLabel": "Silber / Gramm",
-        "goldPerOunceLabel": "Gold / Feinunze",
-        "oilPerBarrelLabel": "Öl (WTI) / Barrel",
         "disclaimer": "Diese Seite dient ausschließlich der allgemeinen Information und Bildung, nicht der Finanz- oder Anlageberatung. Die Preise stammen von öffentlichen Marktdatenanbietern und werden einmal täglich aktualisiert, können also dem Live-Markt hinterherhinken. Wenden Sie sich vor jeder Finanzentscheidung an eine zugelassene Finanzfachkraft.",
         "clear": "Zurücksetzen",
-        "dataUnavailable": "Die aktuellen Rohstoffpreise sind vorübergehend nicht verfügbar. Bitte versuchen Sie es in ein paar Minuten erneut."
+        "dataUnavailable": "Die aktuellen Rohstoffpreise sind vorübergehend nicht verfügbar. Bitte versuchen Sie es in ein paar Minuten erneut.",
+        "amountLabelVolume": "Menge",
+        "unitLabel": "Einheit",
+        "units": {
+          "gram": "Gramm",
+          "troyOunce": "Feinunze",
+          "kilogram": "Kilogramm",
+          "tola": "Tola",
+          "tael": "Tael",
+          "ounce": "Unze (avdp)",
+          "barrel": "Barrel",
+          "liter": "Liter",
+          "usGallon": "US-Gallone",
+          "cubicMeter": "Kubikmeter"
+        },
+        "unitsShort": {
+          "gram": "g",
+          "troyOunce": "oz t",
+          "kilogram": "kg",
+          "tola": "tola",
+          "tael": "tael",
+          "ounce": "oz",
+          "barrel": "bbl",
+          "liter": "L",
+          "usGallon": "gal",
+          "cubicMeter": "m³"
+        },
+        "fiatLabel": "Anzeigewährung",
+        "fiatSearchPlaceholder": "Nach Währungsname oder Code suchen",
+        "fiatNoResults": "Keine passende Währung gefunden",
+        "quickTitle": "Schnellwerte"
       },
       "nav": {
         "tool": "Tracker",
         "news": "Nachrichten",
         "education": "Lernen",
         "faq": "FAQ",
-        "notices": "Hinweise"
+        "notices": "Hinweise",
+        "chart": "Chart",
+        "metals": "Metalle",
+        "oil": "Öl"
       },
       "dataSource": {
-        "metalpriceApi": "Gold- und Silberpreise sowie das historische Diagramm:",
-        "oilpriceApi": "Ölpreise:"
-      },
-      "chart": {
-        "title": "Goldpreis — Letzte 7 Tage",
-        "intro": "Wie sich der Preis einer Feinunze Gold in US-Dollar in der vergangenen Woche entwickelt hat.",
-        "loading": "Diagramm wird geladen …",
-        "error": "Historische Daten konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
-        "lowLabel": "Tief",
-        "highLabel": "Hoch"
+        "metalpriceApi": "Gold- und Silber-Spotpreise:",
+        "oilpriceApi": "Ölpreise:",
+        "paxg": "Goldkerzen (PAXG/USD):",
+        "insee": "Monatliche Silber- und Goldpreise (INSEE, offene Lizenz Etalab):",
+        "fred": "Tägliche Ölschlusskurse (US-EIA über FRED):"
       },
       "news": {
         "title": "Rohstoffmarktnachrichten",
@@ -3460,13 +3479,23 @@
           "title": "Wie Rohstoffpreise bestimmt werden",
           "paragraph1": "Die globalen Referenzpreise für Gold und Silber werden über die LBMA-Gold- und Silberpreis-Auktionen der London Bullion Market Association festgelegt – elektronische, zweimal täglich (Gold) und einmal täglich (Silber) stattfindende Auktionen, bei denen Händler Kauf- und Verkaufsorders einreichen, bis der markträumende Preis gefunden ist. Öl hat keine einzige globale Auktion; stattdessen dienen Terminkontrakte für WTI (gehandelt an der New York Mercantile Exchange) und Brent (gehandelt an der Intercontinental Exchange) als Referenzmaßstäbe, an denen sich die meisten anderen Rohölsorten orientieren.",
           "paragraph2": "In jedem Fall gilt dieselbe Angebots- und Nachfragebeziehung, die in der Volkswirtschaftslehre-Einführung gelehrt wird: Zu jedem Zeitpunkt gibt es eine Menge, die Produzenten zu jedem Preis anzubieten bereit sind, und eine Menge, die Käufer zu jedem Preis nachfragen möchten, und der Marktpreis pendelt sich an dem Punkt ein, an dem beide Mengen gleich sind – dem Gleichgewicht.",
-          "diagram": {
-            "axisPrice": "Preis",
-            "axisQuantity": "Menge",
-            "supply": "Angebot",
-            "demand": "Nachfrage",
-            "equilibrium": "Gleichgewicht",
-            "caption": "Das klassische Angebots-Nachfrage-Modell: Der Marktpreis pendelt sich dort ein, wo die angebotene Menge der nachgefragten Menge entspricht."
+          "live": {
+            "title": "Angebot und Nachfrage in echten Daten",
+            "heading": "{name}-Rohöl, jeder EIA-Tagesschluss",
+            "intro": "Ihre gewählte Sorte seit den 1980er-Jahren, mit dem echten Schlusskurs bei jedem Angebots- oder Nachfrageschock.",
+            "introFallback": "Öl zeigt Angebot und Nachfrage am deutlichsten, daher folgt dieser Chart WTI, bis Sie eine Ölsorte wählen.",
+            "loading": "EIA-Historie wird geladen…",
+            "error": "Die Ölhistorie ist vorübergehend nicht verfügbar.",
+            "workedTitle": "Schlusskurs bei jedem Schock",
+            "events": {
+              "gulf": "Irak marschiert in Kuwait ein",
+              "asia": "Tief der Asienkrise",
+              "peak2008": "Rekordhoch 2008",
+              "opec2014": "OPEC hält Förderung",
+              "negative": "Lagerüberhang (negativer WTI)",
+              "ukraine": "Sprung durch den Ukrainekrieg"
+            },
+            "today": "Letzter Schlusskurs"
           }
         },
         "comparison": {
@@ -3621,7 +3650,262 @@
           "wide": "Historisch weit — Silber relativ günstig gegenüber Gold",
           "extreme": "Extrem weit — historisch selten"
         },
-        "fact": "Im letzten Jahrhundert lag der Durchschnitt bei etwa 60-70, wobei die Spanne bei extremen Marktereignissen von unter 20 bis über 120 reichte."
+        "fact": "Im letzten Jahrhundert lag der Durchschnitt bei etwa 60-70, wobei die Spanne bei extremen Marktereignissen von unter 20 bis über 120 reichte.",
+        "heading": "Unzen Silber für eine Unze Gold",
+        "workedTitle": "Rechenbeispiel",
+        "rowGold": "Gold je oz t",
+        "rowSilver": "Silber je oz t",
+        "rowFormula": "Gold ÷ Silber",
+        "rowRatio": "Verhältnis",
+        "rowYours": "Silber für {amount} {unit} Gold"
+      },
+      "relatedTools": {
+        "title": "Verwandte Markt-Tools"
+      },
+      "sidebarPrices": {
+        "title": "Preise in {currency}",
+        "note": "Spotpreise täglich aktualisiert; Karat-Zeilen gelten je Gramm."
+      },
+      "liveFlow": {
+        "title": "Wertfluss",
+        "badge": "Tagespreis",
+        "heading": "{amount} {unit} {name}",
+        "intro": "Ihre Menge wird in die Handelseinheit (Feinunze oder Barrel) umgerechnet und mit dem heutigen Spotpreis multipliziert.",
+        "spark30d": "letzte 30 Tage",
+        "spark24m": "letzte 24 Monate",
+        "perYourUnit": "Preis je {unit}",
+        "valueOf": "Wert von {amount} {unit}",
+        "workedTitle": "Rechenbeispiel",
+        "rowAmount": "Menge",
+        "rowToOunces": "In Feinunzen",
+        "rowToBarrels": "In Barrel",
+        "rowSpot": "Spot je {unit}",
+        "rowUsd": "Wert in USD",
+        "rowFx": "In {currency}",
+        "rowResult": "Wert",
+        "dailyNote": "Spotpreise werden einmal täglich aktualisiert."
+      },
+      "equivalence": {
+        "title": "Gleiche Menge, jede Einheit",
+        "heading": "{amount} {unit} {name} entsprechen",
+        "intro": "Ihre Menge in jeder Einheit, die Händler und Juweliere nutzen, mit dem Preis für jeweils eine Einheit.",
+        "workedTitle": "Rechenbeispiel",
+        "rowAmount": "Menge",
+        "rowGrams": "In Gramm",
+        "rowBarrels": "In Barrel",
+        "rowTo": "Geteilt durch 1 {unit}",
+        "rowResult": "Entspricht"
+      },
+      "spread": {
+        "title": "Brent-WTI-Spread",
+        "heading": "Die beiden Ölsorten auf der Waage",
+        "intro": "Brent (Nordsee, auf See verschifft) notiert meist über WTI (US-Binnenland). Der Balken neigt sich zum heute teureren Barrel.",
+        "workedTitle": "Rechenbeispiel",
+        "rowSpread": "Spread",
+        "vsWti": "vs WTI",
+        "rowOnYours": "Auf {bbl} Barrel",
+        "rowResult": "Preisdifferenz",
+        "brentPremium": "Brent mit Aufschlag",
+        "wtiPremium": "WTI mit Aufschlag",
+        "perBarrel": "Brent − WTI, je Barrel"
+      },
+      "purity": {
+        "title": "Wert nach Feingehalt",
+        "headingGold": "{amount} {unit} Gold nach Karat",
+        "headingSilver": "{amount} {unit} Silber nach Feingehalt",
+        "introGold": "Schmuck ist eine Legierung: sein Goldanteil ist Karat ÷ 24. Jede Zeile bewertet Ihr Gewicht zum heutigen Spotpreis.",
+        "introSilver": "Silber wird in Tausendsteln eingestuft. Jede Zeile bewertet Ihr Gewicht zum heutigen Spotpreis.",
+        "workedTitle": "Rechenbeispiel ({label})",
+        "rowSpot": "Spotpreis",
+        "rowPurity": "Feingehalt",
+        "rowGrams": "Gewicht in oz t",
+        "rowResult": "Metallwert",
+        "colKarat": "Karat",
+        "colFineness": "Feingehalt",
+        "colUse": "Typische Verwendung",
+        "colPurity": "Reinheit",
+        "colPerGram": "Je Gramm",
+        "tags": {
+          "investment": "Barren",
+          "gulf": "Schmuck Golf & Indien",
+          "fine": "Feinschmuck",
+          "everyday": "Alltagsschmuck",
+          "sterling": "Sterling",
+          "britannia": "Britannia",
+          "coin": "Münzen & Besteck"
+        }
+      },
+      "sensitivity": {
+        "title": "Preissensitivität",
+        "heading": "Wenn sich {name} bewegt",
+        "intro": "Was Ihre Menge {name} wert wäre, wenn der Spotpreis gegenüber heute fiele oder stiege.",
+        "shiftLabel": "Preisbewegung",
+        "workedTitle": "Rechenbeispiel (+{pct} %)",
+        "rowSpot": "Spot je {unit}",
+        "rowShifted": "Preis +{pct} %",
+        "rowQty": "Ihre Menge",
+        "rowResult": "Neuer Wert",
+        "rowNote": "{diff} gegenüber heute",
+        "low": "−{pct} %",
+        "now": "Heute",
+        "high": "+{pct} %"
+      },
+      "volatility": {
+        "title": "Volatilität",
+        "heading": "Realisierte Volatilität von {name}",
+        "intro": "Wie stark der Preis schwankt: die Streuung der letzten 30 Tagesbewegungen, hochgerechnet auf ein Jahr.",
+        "introMonthly": "Für Silber gibt es kostenlos nur Monatsdurchschnitte, daher ist dies die Streuung der letzten 12 Monatsbewegungen, hochgerechnet auf ein Jahr.",
+        "loading": "Historie wird geladen…",
+        "error": "Die Preishistorie ist vorübergehend nicht verfügbar.",
+        "workedTitle": "Rechenbeispiel",
+        "rowReturns": "Tagesbewegungen",
+        "rowReturnsMonthly": "Monatsbewegungen",
+        "rowDaily": "Tägliche Standardabweichung",
+        "rowMonthly": "Monatliche Standardabweichung",
+        "rowScale": "Annualisieren",
+        "rowAnnual": "Annualisierte Volatilität",
+        "zones": {
+          "low": "Ruhig",
+          "medium": "Normal",
+          "high": "Stürmisch"
+        }
+      },
+      "returns": {
+        "title": "Rendite nach Zeitraum",
+        "heading": "Wie sich {name} bewegt hat",
+        "intro": "Preisänderung in jedem Zeitraum, aus der längsten kostenlosen Historie: monatliche Londoner Preise für Metalle, tägliche EIA-Schlusskurse für Öl.",
+        "loading": "Historie wird geladen…",
+        "error": "Die Preishistorie ist vorübergehend nicht verfügbar.",
+        "workedTitle": "Rechenbeispiel (1 Jahr)",
+        "rowThen": "Preis vor einem Jahr",
+        "rowNow": "Letzter Preis",
+        "rowFormula": "aktuell ÷ damals − 1",
+        "rowResult": "1-Jahres-Änderung",
+        "periods": {
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1J",
+          "5Y": "5J",
+          "10Y": "10J",
+          "20Y": "20J"
+        }
+      },
+      "comparison": {
+        "title": "Rohstoffvergleich",
+        "heading": "Gold, Silber und Öl nebeneinander",
+        "intro": "Heutiger Spot in {currency}, die Jahresänderung und der Abstand zum Höchststand jeder kostenlosen Historie. Klicken Sie zum Bewerten.",
+        "workedTitle": "Rechenbeispiel ({name})",
+        "rowNow": "Spot heute",
+        "rowHigh": "Höchster Wert der Historie",
+        "rowFormula": "aktuell ÷ Hoch − 1",
+        "rowResult": "Abstand zum Hoch",
+        "perOunce": "je Feinunze",
+        "perBarrel": "je Barrel",
+        "y1": "1 Jahr",
+        "fromHigh": "Vom Hoch"
+      },
+      "silverHistory": {
+        "title": "Silber seit 1990",
+        "heading": "Silberpreis, Monatsdurchschnitt seit 1990",
+        "intro": "Monatsdurchschnitt des Londoner Silberpreises (INSEE), mit Ihrer Menge bewertet an jedem Meilenstein.",
+        "loading": "Historie wird geladen…",
+        "error": "Die Silberhistorie ist vorübergehend nicht verfügbar.",
+        "workedTitle": "{amount} an jedem Meilenstein",
+        "events": {
+          "start": "Beginn der Reihe",
+          "crisis": "Finanzkrise",
+          "peak2011": "Hoch 2011",
+          "covid": "Pandemie-Tief"
+        },
+        "rowHigh": "Höchster Monatsdurchschnitt",
+        "rowNow": "Letzter Monat"
+      },
+      "ratioHistory": {
+        "title": "Gold-Silber-Verhältnis seit 1990",
+        "heading": "Das Verhältnis Monat für Monat, mit seinen Zonen",
+        "intro": "Monatlicher Goldpreis ÷ monatlicher Silberpreis (London, über INSEE). Die Bänder sind die Zonen der Anzeige oben.",
+        "loading": "Historie wird geladen…",
+        "error": "Die Metallhistorie ist vorübergehend nicht verfügbar.",
+        "workedTitle": "Rechenbeispiel",
+        "events": {
+          "gulf1991": "Hoch im Golfkrieg",
+          "low2011": "Tief im Silberboom",
+          "covid2020": "Pandemie-Hoch"
+        },
+        "rowHigh": "Höchstwert",
+        "rowLow": "Tiefstwert",
+        "rowAvg": "Durchschnitt von {n} Monaten",
+        "rowNow": "Heute (Spot)",
+        "aboveAvg": "{pct} % über dem Durchschnitt",
+        "belowAvg": "{pct} % unter dem Durchschnitt"
+      },
+      "chart": {
+        "title": "Rohstoff-Terminal & Kerzenchart",
+        "heading": "{name}-Preis in {currency}",
+        "intro": {
+          "gold": "Echte OHLC-Kerzen von PAXG/USD, einem Token, der 1:1 durch eine Feinunze Londoner Gold gedeckt ist und dem Spotgold rund um die Uhr folgt.",
+          "silver": "Keine kostenlose, schlüssellose Quelle veröffentlicht Silberkerzen; dies sind die besten verfügbaren echten Daten: der Monatsdurchschnitt des Londoner Silberpreises seit 1990.",
+          "wti": "Tagesschlusskurse der US-EIA seit 1986. Täglich als Linie; Wochen- und Monatskerzen werden ausschließlich aus diesen Schlusskursen gebildet.",
+          "brent": "Tagesschlusskurse der US-EIA seit 1987. Täglich als Linie; Wochen- und Monatskerzen werden ausschließlich aus diesen Schlusskursen gebildet."
+        },
+        "loading": "Chart wird geladen…",
+        "error": "Die kostenlose Historie dieses Instruments konnte nicht geladen werden.",
+        "lowLabel": "Periodentief",
+        "highLabel": "Periodenhoch",
+        "timeframeLabel": "Intervall",
+        "retry": "Erneut versuchen",
+        "fullscreen": "Vollbild",
+        "exitFullscreen": "Vollbild beenden",
+        "closeLabel": "Schluss",
+        "tf": {
+          "1h": "1 Stunde",
+          "4h": "4 Stunden",
+          "1D": "1 Tag",
+          "1M": "1 Monat",
+          "M": "Monatlich",
+          "D": "Täglich (Linie)",
+          "W": "Wöchentlich"
+        },
+        "sub": {
+          "gold": "XAU · PAXG/USD",
+          "silver": "XAG · London monatlich",
+          "wti": "WTI · EIA täglich",
+          "brent": "Brent · EIA täglich"
+        },
+        "changeSpan": {
+          "gold": "1T",
+          "silver": "1M",
+          "wti": "1T",
+          "brent": "1T"
+        },
+        "listTitle": "Spotpreise",
+        "listBadge": "Täglich",
+        "listNote": "Spot von MetalpriceAPI/OilPriceAPI; die Änderung stammt aus der Historie jedes Instruments. Klicken zum Anzeigen.",
+        "limits": {
+          "gold": "PAXG-Kerzen: Coinbase Exchange (Kraken als Ersatz); 1 Stunde bis 1 Monat, etwa 300 Kerzen je Intervall.",
+          "silver": "Silber: nur Monatsdurchschnitte (INSEE, Londoner Preis), rund einen Monat verzögert.",
+          "wti": "WTI: EIA-Tagesschlusskurse über FRED, wenige Tage verzögert. Der einzige negative Schlusskurs (20. April 2020) lässt sich nicht als Kerze zeichnen.",
+          "brent": "Brent: EIA-Tagesschlusskurse über FRED, wenige Tage verzögert."
+        },
+        "attribution": "Chart-Bibliothek: Lightweight Charts™ von"
+      },
+      "workedExamples": {
+        "title": "Rechenbeispiele",
+        "intro": "Drei echte Bewertungen, Schritt für Schritt mit den Spotpreisen dieser Seite gelöst ({time}).",
+        "exampleTitle": "Beispiel {n}",
+        "ex1Title": "20 g 21-Karat-Gold",
+        "ex1Step1": "Gramm in Feinunzen umrechnen:",
+        "ex1Step2": "Feingold bewerten:",
+        "ex1Step3": "21-Karat-Feingehalt anwenden:",
+        "ex2Title": "1 kg Sterlingsilber",
+        "ex2Step1": "In Feinunzen umrechnen:",
+        "ex2Step2": "Feinsilber bewerten:",
+        "ex2Step3": "Feingehalt 925 anwenden:",
+        "ex3Title": "10.000 L Brent-Rohöl",
+        "ex3Step1": "Liter in Barrel umrechnen:",
+        "ex3Step2": "Barrel bewerten:",
+        "ex3Step3": "Preis je Liter:"
       }
     },
     "weather-forecast": {

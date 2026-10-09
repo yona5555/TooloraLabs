@@ -3353,43 +3353,62 @@
         "commodity": {
           "gold": "Gold",
           "silver": "Silver",
-          "oil": "Oil"
+          "wti": "Oil (WTI)",
+          "brent": "Oil (Brent)"
         },
         "amountLabelWeight": "Weight",
-        "amountLabelBarrels": "Barrels",
-        "weightUnitLabel": "Unit",
-        "weightUnit": {
-          "gram": "Gram",
-          "troyOunce": "Troy Ounce"
-        },
         "resultTitle": "Value",
         "lastUpdated": "Prices last updated {time}",
-        "goldPerGramLabel": "Gold / gram",
-        "silverPerGramLabel": "Silver / gram",
-        "goldPerOunceLabel": "Gold / troy oz",
-        "oilPerBarrelLabel": "Oil (WTI) / barrel",
         "disclaimer": "This page is for general information and education only, not financial or investment advice. Prices come from public market-data providers and are refreshed once daily, so they may lag the live market. Consult a licensed financial professional before making any financial decision.",
         "clear": "Clear",
-        "dataUnavailable": "Live commodity prices are temporarily unavailable. Please try again in a few minutes."
+        "dataUnavailable": "Live commodity prices are temporarily unavailable. Please try again in a few minutes.",
+        "amountLabelVolume": "Quantity",
+        "unitLabel": "Unit",
+        "units": {
+          "gram": "Gram",
+          "troyOunce": "Troy ounce",
+          "kilogram": "Kilogram",
+          "tola": "Tola",
+          "tael": "Tael",
+          "ounce": "Ounce (avdp)",
+          "barrel": "Barrel",
+          "liter": "Liter",
+          "usGallon": "US gallon",
+          "cubicMeter": "Cubic meter"
+        },
+        "unitsShort": {
+          "gram": "g",
+          "troyOunce": "oz t",
+          "kilogram": "kg",
+          "tola": "tola",
+          "tael": "tael",
+          "ounce": "oz",
+          "barrel": "bbl",
+          "liter": "L",
+          "usGallon": "gal",
+          "cubicMeter": "m³"
+        },
+        "fiatLabel": "Display currency",
+        "fiatSearchPlaceholder": "Search by currency name or code",
+        "fiatNoResults": "No matching currency found",
+        "quickTitle": "Quick values"
       },
       "nav": {
         "tool": "Tracker",
         "news": "News",
         "education": "Learning",
         "faq": "FAQ",
-        "notices": "Notices"
+        "notices": "Notices",
+        "chart": "Chart",
+        "metals": "Metals",
+        "oil": "Oil"
       },
       "dataSource": {
-        "metalpriceApi": "Gold & silver prices, and the historical chart:",
-        "oilpriceApi": "Oil prices:"
-      },
-      "chart": {
-        "title": "Gold Price — Last 7 Days",
-        "intro": "How the price of one troy ounce of gold in US dollars has moved over the past week.",
-        "loading": "Loading chart…",
-        "error": "Couldn't load historical data. Please try again.",
-        "lowLabel": "Low",
-        "highLabel": "High"
+        "metalpriceApi": "Gold and silver spot prices:",
+        "oilpriceApi": "Oil prices:",
+        "paxg": "Gold candles (PAXG/USD):",
+        "insee": "Monthly silver and gold prices (INSEE, Etalab open licence):",
+        "fred": "Oil daily closes (US EIA via FRED):"
       },
       "news": {
         "title": "Commodities Market News",
@@ -3460,13 +3479,23 @@
           "title": "How Commodity Prices Are Determined",
           "paragraph1": "Gold and silver's global reference prices are set through the London Bullion Market Association (LBMA) Gold and Silver Price auctions — electronic, twice-daily (gold) and once-daily (silver) auctions where dealers submit buy and sell orders until the price that clears the market is found. Oil has no single global auction; instead, futures contracts for WTI (traded on the New York Mercantile Exchange) and Brent (traded on the Intercontinental Exchange) serve as the reference benchmarks most other crude oil is priced against.",
           "paragraph2": "In every case, the underlying logic is the same supply-and-demand relationship taught in introductory economics: at any given moment, there is a quantity producers are willing to supply at each price and a quantity buyers are willing to demand at each price, and the market price settles at the point where those two quantities are equal — the equilibrium.",
-          "diagram": {
-            "axisPrice": "Price",
-            "axisQuantity": "Quantity",
-            "supply": "Supply",
-            "demand": "Demand",
-            "equilibrium": "Equilibrium",
-            "caption": "The classical supply-and-demand model: the market price settles where the quantity supplied equals the quantity demanded."
+          "live": {
+            "title": "Supply and Demand on Real Data",
+            "heading": "{name} crude, every EIA daily close",
+            "intro": "Your selected benchmark since the 1980s, with the real close on each supply or demand shock.",
+            "introFallback": "Oil shows supply and demand at work most clearly, so this chart follows WTI until you pick an oil benchmark.",
+            "loading": "Loading EIA history…",
+            "error": "Oil history is temporarily unavailable.",
+            "workedTitle": "Close on each shock",
+            "events": {
+              "gulf": "Iraq invades Kuwait",
+              "asia": "Asian crisis low",
+              "peak2008": "2008 record high",
+              "opec2014": "OPEC keeps output",
+              "negative": "Storage glut (negative WTI)",
+              "ukraine": "Russia-Ukraine war spike"
+            },
+            "today": "Latest close"
           }
         },
         "comparison": {
@@ -3621,7 +3650,262 @@
           "wide": "Historically wide — silver relatively cheap vs. gold",
           "extreme": "Extremely wide — rare, historically"
         },
-        "fact": "Over the past century, the ratio has averaged roughly 60-70, though it has ranged from under 20 to over 120 during extreme market events."
+        "fact": "Over the past century, the ratio has averaged roughly 60-70, though it has ranged from under 20 to over 120 during extreme market events.",
+        "heading": "Ounces of silver that buy one ounce of gold",
+        "workedTitle": "Worked Example",
+        "rowGold": "Gold per oz t",
+        "rowSilver": "Silver per oz t",
+        "rowFormula": "gold ÷ silver",
+        "rowRatio": "Ratio",
+        "rowYours": "Silver for {amount} {unit} of gold"
+      },
+      "relatedTools": {
+        "title": "Related market tools"
+      },
+      "sidebarPrices": {
+        "title": "Prices in {currency}",
+        "note": "Spot prices refreshed daily; karat rows are per gram."
+      },
+      "liveFlow": {
+        "title": "Value Flow",
+        "badge": "Daily price",
+        "heading": "{amount} {unit} of {name}",
+        "intro": "Your quantity is converted to the trading unit (troy ounce or barrel), then multiplied by today's spot price.",
+        "spark30d": "last 30 days",
+        "spark24m": "last 24 months",
+        "perYourUnit": "Price per {unit}",
+        "valueOf": "Value of {amount} {unit}",
+        "workedTitle": "Worked Example",
+        "rowAmount": "Quantity",
+        "rowToOunces": "In troy ounces",
+        "rowToBarrels": "In barrels",
+        "rowSpot": "Spot per {unit}",
+        "rowUsd": "Value in USD",
+        "rowFx": "In {currency}",
+        "rowResult": "Value",
+        "dailyNote": "Spot prices refresh once a day."
+      },
+      "equivalence": {
+        "title": "Same Quantity, Every Unit",
+        "heading": "{amount} {unit} of {name} equals",
+        "intro": "Your quantity expressed in every unit traders and jewelers use, with the price of one of each.",
+        "workedTitle": "Worked Example",
+        "rowAmount": "Quantity",
+        "rowGrams": "In grams",
+        "rowBarrels": "In barrels",
+        "rowTo": "Divide by 1 {unit}",
+        "rowResult": "Equivalent"
+      },
+      "spread": {
+        "title": "Brent vs WTI Spread",
+        "heading": "The two oil benchmarks on a balance",
+        "intro": "Brent (North Sea, seaborne) usually trades above WTI (US inland). The beam tips toward whichever barrel costs more today.",
+        "workedTitle": "Worked Example",
+        "rowSpread": "Spread",
+        "vsWti": "vs WTI",
+        "rowOnYours": "On {bbl} barrels",
+        "rowResult": "Price gap",
+        "brentPremium": "Brent at a premium",
+        "wtiPremium": "WTI at a premium",
+        "perBarrel": "Brent − WTI, per barrel"
+      },
+      "purity": {
+        "title": "Purity Value Table",
+        "headingGold": "{amount} {unit} of gold by karat",
+        "headingSilver": "{amount} {unit} of silver by fineness",
+        "introGold": "Jewelry is an alloy: its gold content is karat ÷ 24. Each row prices your weight at today's spot.",
+        "introSilver": "Silver items are graded in parts per thousand. Each row prices your weight at today's spot.",
+        "workedTitle": "Worked Example ({label})",
+        "rowSpot": "Spot price",
+        "rowPurity": "Fineness",
+        "rowGrams": "Weight in oz t",
+        "rowResult": "Metal value",
+        "colKarat": "Karat",
+        "colFineness": "Fineness",
+        "colUse": "Typical use",
+        "colPurity": "Purity",
+        "colPerGram": "Per gram",
+        "tags": {
+          "investment": "Bullion",
+          "gulf": "Gulf & India jewelry",
+          "fine": "Fine jewelry",
+          "everyday": "Everyday jewelry",
+          "sterling": "Sterling",
+          "britannia": "Britannia",
+          "coin": "Coin & silverware"
+        }
+      },
+      "sensitivity": {
+        "title": "Price Sensitivity",
+        "heading": "If {name} moves",
+        "intro": "What your quantity of {name} would be worth if the spot price fell or rose from today.",
+        "shiftLabel": "Price move",
+        "workedTitle": "Worked Example (+{pct}%)",
+        "rowSpot": "Spot per {unit}",
+        "rowShifted": "Price +{pct}%",
+        "rowQty": "Your quantity",
+        "rowResult": "New value",
+        "rowNote": "{diff} vs today",
+        "low": "−{pct}%",
+        "now": "Today",
+        "high": "+{pct}%"
+      },
+      "volatility": {
+        "title": "Volatility",
+        "heading": "{name} realized volatility",
+        "intro": "How much the price has been swinging: the spread of its last 30 daily moves, scaled to a yearly figure.",
+        "introMonthly": "Only monthly averages are freely available for silver, so this is the spread of the last 12 monthly moves, scaled to a year.",
+        "loading": "Loading history…",
+        "error": "Price history is temporarily unavailable.",
+        "workedTitle": "Worked Example",
+        "rowReturns": "Daily moves used",
+        "rowReturnsMonthly": "Monthly moves used",
+        "rowDaily": "Daily standard deviation",
+        "rowMonthly": "Monthly standard deviation",
+        "rowScale": "Annualize",
+        "rowAnnual": "Annualized volatility",
+        "zones": {
+          "low": "Calm",
+          "medium": "Normal",
+          "high": "Stormy"
+        }
+      },
+      "returns": {
+        "title": "Returns by Period",
+        "heading": "How {name} has moved",
+        "intro": "Price change over each period, from the longest free history: monthly London prices for metals, EIA daily closes for oil.",
+        "loading": "Loading history…",
+        "error": "Price history is temporarily unavailable.",
+        "workedTitle": "Worked Example (1 year)",
+        "rowThen": "Price a year ago",
+        "rowNow": "Latest price",
+        "rowFormula": "now ÷ then − 1",
+        "rowResult": "1-year change",
+        "periods": {
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1Y",
+          "5Y": "5Y",
+          "10Y": "10Y",
+          "20Y": "20Y"
+        }
+      },
+      "comparison": {
+        "title": "Commodity Comparison",
+        "heading": "Gold, silver and oil side by side",
+        "intro": "Today's spot in {currency}, the one-year change and the distance from the highest price in each free history. Click one to value it.",
+        "workedTitle": "Worked Example ({name})",
+        "rowNow": "Spot today",
+        "rowHigh": "Highest in history",
+        "rowFormula": "now ÷ high − 1",
+        "rowResult": "From the high",
+        "perOunce": "per troy ounce",
+        "perBarrel": "per barrel",
+        "y1": "1 year",
+        "fromHigh": "From high"
+      },
+      "silverHistory": {
+        "title": "Silver Since 1990",
+        "heading": "Silver price, monthly average since 1990",
+        "intro": "INSEE's monthly average of the London silver price, with your quantity valued at each landmark.",
+        "loading": "Loading history…",
+        "error": "Silver history is temporarily unavailable.",
+        "workedTitle": "{amount} at each landmark",
+        "events": {
+          "start": "Start of series",
+          "crisis": "Financial crisis",
+          "peak2011": "2011 peak",
+          "covid": "Pandemic low"
+        },
+        "rowHigh": "Highest monthly average",
+        "rowNow": "Latest month"
+      },
+      "ratioHistory": {
+        "title": "Gold/Silver Ratio Since 1990",
+        "heading": "The ratio month by month, with its zones",
+        "intro": "Monthly average gold price ÷ monthly average silver price (both London, via INSEE). Shaded bands are the zones of the gauge above.",
+        "loading": "Loading history…",
+        "error": "Metal history is temporarily unavailable.",
+        "workedTitle": "Worked Example",
+        "events": {
+          "gulf1991": "Gulf War high",
+          "low2011": "Silver boom low",
+          "covid2020": "Pandemic high"
+        },
+        "rowHigh": "Highest",
+        "rowLow": "Lowest",
+        "rowAvg": "Average of {n} months",
+        "rowNow": "Today (spot)",
+        "aboveAvg": "{pct}% above the average",
+        "belowAvg": "{pct}% below the average"
+      },
+      "chart": {
+        "title": "Commodities Terminal & Candlestick Chart",
+        "heading": "{name} price in {currency}",
+        "intro": {
+          "gold": "Real OHLC candles of PAXG/USD, a token backed 1:1 by a fine troy ounce of London gold, so it tracks spot gold around the clock.",
+          "silver": "No free, keyless source publishes silver candles, so this is the best real data available: the monthly average London silver price since 1990.",
+          "wti": "US EIA daily closing prices since 1986. Daily is a line; weekly and monthly candles are built only from those closes.",
+          "brent": "US EIA daily closing prices since 1987. Daily is a line; weekly and monthly candles are built only from those closes."
+        },
+        "loading": "Loading chart…",
+        "error": "The free history for this instrument couldn't be loaded.",
+        "lowLabel": "Period low",
+        "highLabel": "Period high",
+        "timeframeLabel": "Interval",
+        "retry": "Try again",
+        "fullscreen": "Fullscreen",
+        "exitFullscreen": "Exit fullscreen",
+        "closeLabel": "Close",
+        "tf": {
+          "1h": "1 hour",
+          "4h": "4 hours",
+          "1D": "1 day",
+          "1M": "1 month",
+          "M": "Monthly",
+          "D": "Daily (line)",
+          "W": "Weekly"
+        },
+        "sub": {
+          "gold": "XAU · PAXG/USD",
+          "silver": "XAG · London monthly",
+          "wti": "WTI · EIA daily",
+          "brent": "Brent · EIA daily"
+        },
+        "changeSpan": {
+          "gold": "1d",
+          "silver": "1m",
+          "wti": "1d",
+          "brent": "1d"
+        },
+        "listTitle": "Spot prices",
+        "listBadge": "Daily",
+        "listNote": "Spot from MetalpriceAPI/OilPriceAPI; change from each instrument's own history. Click one to chart it.",
+        "limits": {
+          "gold": "PAXG candles: Coinbase Exchange (Kraken fallback); 1-hour to 1-month intervals, about 300 candles each.",
+          "silver": "Silver: monthly averages only (INSEE, London price), updated about a month after the fact.",
+          "wti": "WTI: EIA daily closes via FRED, posted with a lag of a few days. The single negative close (20 April 2020) can't be drawn as a candle.",
+          "brent": "Brent: EIA daily closes via FRED, posted with a lag of a few days."
+        },
+        "attribution": "Chart library: Lightweight Charts™ by"
+      },
+      "workedExamples": {
+        "title": "Worked Examples",
+        "intro": "Three real valuations, worked step by step from the spot prices this page loaded ({time}).",
+        "exampleTitle": "Example {n}",
+        "ex1Title": "20 g of 21K gold",
+        "ex1Step1": "Convert grams to troy ounces:",
+        "ex1Step2": "Price pure gold:",
+        "ex1Step3": "Apply 21K purity:",
+        "ex2Title": "1 kg of sterling silver",
+        "ex2Step1": "Convert to troy ounces:",
+        "ex2Step2": "Price pure silver:",
+        "ex2Step3": "Apply 925 fineness:",
+        "ex3Title": "10,000 L of Brent crude",
+        "ex3Step1": "Convert liters to barrels:",
+        "ex3Step2": "Price the barrels:",
+        "ex3Step3": "Price per liter:"
       }
     },
     "weather-forecast": {

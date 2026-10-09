@@ -4,11 +4,12 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CommoditySupplyDemandDiagram from "./CommoditySupplyDemandDiagram";
+import CommodityOilEraTrend from "./CommodityOilEraTrend";
+import CommodityWorkedExamples from "./CommodityWorkedExamples";
 
 type ComparisonRow = { name: string; benchmark: string; mainDriver: string };
 
-export default async function CommodityEducation() {
+export default async function CommodityEducation({ examples }: { examples: { gold: number | null; silver: number | null; brent: number | null; lastUpdatedUnix: number | null; locale: string } }) {
   const t = await getTranslations("tools.commodities-tracker.education");
   const tAboveFold = await getTranslations("tools.commodities-tracker.aboveFold");
 
@@ -26,15 +27,10 @@ export default async function CommodityEducation() {
       <InfoSection title={t("pricing.title")}>
         <p>{t("pricing.paragraph1")}</p>
         <p>{t("pricing.paragraph2")}</p>
-        <CommoditySupplyDemandDiagram
-          axisPriceLabel={t("pricing.diagram.axisPrice")}
-          axisQuantityLabel={t("pricing.diagram.axisQuantity")}
-          supplyLabel={t("pricing.diagram.supply")}
-          demandLabel={t("pricing.diagram.demand")}
-          equilibriumLabel={t("pricing.diagram.equilibrium")}
-          caption={t("pricing.diagram.caption")}
-        />
+        <CommodityOilEraTrend />
       </InfoSection>
+
+      <CommodityWorkedExamples {...examples} />
 
       <InfoSection title={t("comparison.title")}>
         <p>{t("comparison.intro")}</p>

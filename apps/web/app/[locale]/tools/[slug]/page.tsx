@@ -214,7 +214,6 @@ import { getTopCoins, getGlobalStats, getFiatRates, getFetchTimestamp } from "@/
 import { getForexSnapshot } from "@/lib/forex/exchangerate";
 import { getMetalSnapshot } from "@/lib/commodities/metalprice";
 import { getOilSnapshot } from "@/lib/commodities/oilprice";
-import { findCurrencyByCode } from "@tooloralabs/tools";
 import { getWeatherSnapshot, PRIORITY_CITIES } from "@/lib/weather/open-meteo";
 
 type ToolPageProps = {
@@ -367,17 +366,22 @@ export default async function ToolPage({
     }
     case "commodities-tracker": {
       const [metals, oil, forex] = await Promise.all([getMetalSnapshot(), getOilSnapshot(), getForexSnapshot()]);
-      const usdToSarRate = forex ? (findCurrencyByCode(forex.currencies, "SAR")?.ratePerUsd ?? 3.75) : 3.75;
       const lastUpdatedUnix =
         metals && oil ? Math.min(metals.timestamp, oil.timestamp) : (metals?.timestamp ?? oil?.timestamp ?? null);
+      const spot = {
+        gold: metals?.goldUsdPerOunce ?? null,
+        silver: metals?.silverUsdPerOunce ?? null,
+        wti: oil?.wtiUsdPerBarrel ?? null,
+        brent: oil?.brentUsdPerBarrel ?? null,
+      };
+      // Every currency the rate provider quotes can be the display currency.
+      const fiatRates = (forex?.currencies ?? []).map((c) => ({ code: c.code, name: c.name, perUsd: c.ratePerUsd }));
       component = (
         <CommodityConverter
-          goldUsdPerOunce={metals?.goldUsdPerOunce ?? null}
-          silverUsdPerOunce={metals?.silverUsdPerOunce ?? null}
-          wtiUsdPerBarrel={oil?.wtiUsdPerBarrel ?? null}
-          usdToSarRate={usdToSarRate}
+          spot={spot}
+          fiatRates={fiatRates}
           lastUpdatedUnix={lastUpdatedUnix}
-          education={<CommodityEducation />}
+          education={<CommodityEducation examples={{ gold: spot.gold, silver: spot.silver, brent: spot.brent, lastUpdatedUnix, locale }} />}
         />
       );
       break;

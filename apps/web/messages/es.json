@@ -3353,43 +3353,62 @@
         "commodity": {
           "gold": "Oro",
           "silver": "Plata",
-          "oil": "Petróleo"
+          "wti": "Petróleo (WTI)",
+          "brent": "Petróleo (Brent)"
         },
         "amountLabelWeight": "Peso",
-        "amountLabelBarrels": "Barriles",
-        "weightUnitLabel": "Unidad",
-        "weightUnit": {
-          "gram": "Gramo",
-          "troyOunce": "Onza troy"
-        },
         "resultTitle": "Valor",
         "lastUpdated": "Precios actualizados por última vez {time}",
-        "goldPerGramLabel": "Oro / gramo",
-        "silverPerGramLabel": "Plata / gramo",
-        "goldPerOunceLabel": "Oro / onza troy",
-        "oilPerBarrelLabel": "Petróleo (WTI) / barril",
         "disclaimer": "Esta página tiene fines meramente informativos y educativos, y no constituye asesoramiento financiero ni de inversión. Los precios provienen de proveedores públicos de datos de mercado y se actualizan una vez al día, por lo que pueden ir por detrás del mercado en tiempo real. Consulta a un profesional financiero autorizado antes de tomar cualquier decisión financiera.",
         "clear": "Borrar",
-        "dataUnavailable": "Los precios de materias primas en vivo no están disponibles temporalmente. Inténtalo de nuevo en unos minutos."
+        "dataUnavailable": "Los precios de materias primas en vivo no están disponibles temporalmente. Inténtalo de nuevo en unos minutos.",
+        "amountLabelVolume": "Cantidad",
+        "unitLabel": "Unidad",
+        "units": {
+          "gram": "Gramo",
+          "troyOunce": "Onza troy",
+          "kilogram": "Kilogramo",
+          "tola": "Tola",
+          "tael": "Tael",
+          "ounce": "Onza (avdp)",
+          "barrel": "Barril",
+          "liter": "Litro",
+          "usGallon": "Galón EE. UU.",
+          "cubicMeter": "Metro cúbico"
+        },
+        "unitsShort": {
+          "gram": "g",
+          "troyOunce": "oz t",
+          "kilogram": "kg",
+          "tola": "tola",
+          "tael": "tael",
+          "ounce": "oz",
+          "barrel": "bbl",
+          "liter": "L",
+          "usGallon": "gal",
+          "cubicMeter": "m³"
+        },
+        "fiatLabel": "Moneda de visualización",
+        "fiatSearchPlaceholder": "Busca por nombre o código de moneda",
+        "fiatNoResults": "No hay ninguna moneda coincidente",
+        "quickTitle": "Valores rápidos"
       },
       "nav": {
         "tool": "Rastreador",
         "news": "Noticias",
         "education": "Aprender",
         "faq": "Preguntas frecuentes",
-        "notices": "Avisos"
+        "notices": "Avisos",
+        "chart": "Gráfico",
+        "metals": "Metales",
+        "oil": "Petróleo"
       },
       "dataSource": {
-        "metalpriceApi": "Precios del oro y la plata, y el gráfico histórico:",
-        "oilpriceApi": "Precios del petróleo:"
-      },
-      "chart": {
-        "title": "Precio del oro — Últimos 7 días",
-        "intro": "Cómo se ha movido el precio de una onza troy de oro en dólares estadounidenses durante la última semana.",
-        "loading": "Cargando gráfico…",
-        "error": "No se pudieron cargar los datos históricos. Inténtalo de nuevo.",
-        "lowLabel": "Mínimo",
-        "highLabel": "Máximo"
+        "metalpriceApi": "Precios spot de oro y plata:",
+        "oilpriceApi": "Precios del petróleo:",
+        "paxg": "Velas del oro (PAXG/USD):",
+        "insee": "Precios mensuales de plata y oro (INSEE, licencia abierta Etalab):",
+        "fred": "Cierres diarios del petróleo (EIA de EE. UU. vía FRED):"
       },
       "news": {
         "title": "Noticias del mercado de materias primas",
@@ -3460,13 +3479,23 @@
           "title": "Cómo se determinan los precios de las materias primas",
           "paragraph1": "Los precios de referencia mundiales del oro y la plata se fijan mediante las subastas LBMA Gold Price y LBMA Silver Price de la London Bullion Market Association (LBMA) — subastas electrónicas, dos veces al día para el oro y una vez al día para la plata, en las que los operadores presentan órdenes de compra y venta hasta encontrar el precio que equilibra el mercado. El petróleo no tiene una subasta global única; en su lugar, los contratos de futuros del WTI (negociado en la Bolsa Mercantil de Nueva York) y del Brent (negociado en la Intercontinental Exchange) sirven como referencias frente a las que se fija el precio de la mayoría del resto del crudo.",
           "paragraph2": "En todos los casos, la lógica subyacente es la misma relación de oferta y demanda que se enseña en un curso introductorio de economía: en cualquier momento dado existe una cantidad que los productores están dispuestos a ofrecer a cada precio y una cantidad que los compradores están dispuestos a demandar a cada precio, y el precio de mercado se estabiliza en el punto donde ambas cantidades coinciden — el equilibrio.",
-          "diagram": {
-            "axisPrice": "Precio",
-            "axisQuantity": "Cantidad",
-            "supply": "Oferta",
-            "demand": "Demanda",
-            "equilibrium": "Equilibrio",
-            "caption": "El modelo clásico de oferta y demanda: el precio de mercado se estabiliza donde la cantidad ofrecida iguala a la cantidad demandada."
+          "live": {
+            "title": "Oferta y demanda con datos reales",
+            "heading": "Crudo {name}, cada cierre diario de la EIA",
+            "intro": "Tu referencia elegida desde los años ochenta, con el cierre real en cada choque de oferta o demanda.",
+            "introFallback": "El petróleo muestra la oferta y la demanda con más claridad, así que este gráfico sigue al WTI hasta que elijas un crudo.",
+            "loading": "Cargando historial de la EIA…",
+            "error": "El historial del petróleo no está disponible temporalmente.",
+            "workedTitle": "Cierre en cada choque",
+            "events": {
+              "gulf": "Irak invade Kuwait",
+              "asia": "Mínimo de la crisis asiática",
+              "peak2008": "Récord de 2008",
+              "opec2014": "La OPEP mantiene la producción",
+              "negative": "Exceso de almacenamiento (WTI negativo)",
+              "ukraine": "Repunte por la guerra de Ucrania"
+            },
+            "today": "Último cierre"
           }
         },
         "comparison": {
@@ -3621,7 +3650,262 @@
           "wide": "Históricamente amplia — plata relativamente barata frente al oro",
           "extreme": "Extremadamente amplia — rara históricamente"
         },
-        "fact": "Durante el último siglo, la relación ha promediado entre 60 y 70, aunque ha oscilado entre menos de 20 y más de 120 durante eventos extremos del mercado."
+        "fact": "Durante el último siglo, la relación ha promediado entre 60 y 70, aunque ha oscilado entre menos de 20 y más de 120 durante eventos extremos del mercado.",
+        "heading": "Onzas de plata que compran una onza de oro",
+        "workedTitle": "Ejemplo resuelto",
+        "rowGold": "Oro por oz t",
+        "rowSilver": "Plata por oz t",
+        "rowFormula": "oro ÷ plata",
+        "rowRatio": "Ratio",
+        "rowYours": "Plata por {amount} {unit} de oro"
+      },
+      "relatedTools": {
+        "title": "Herramientas de mercado relacionadas"
+      },
+      "sidebarPrices": {
+        "title": "Precios en {currency}",
+        "note": "Precios spot actualizados a diario; las filas de quilates son por gramo."
+      },
+      "liveFlow": {
+        "title": "Flujo de valor",
+        "badge": "Precio diario",
+        "heading": "{amount} {unit} de {name}",
+        "intro": "Tu cantidad se convierte a la unidad de negociación (onza troy o barril) y se multiplica por el precio spot de hoy.",
+        "spark30d": "últimos 30 días",
+        "spark24m": "últimos 24 meses",
+        "perYourUnit": "Precio por {unit}",
+        "valueOf": "Valor de {amount} {unit}",
+        "workedTitle": "Ejemplo resuelto",
+        "rowAmount": "Cantidad",
+        "rowToOunces": "En onzas troy",
+        "rowToBarrels": "En barriles",
+        "rowSpot": "Spot por {unit}",
+        "rowUsd": "Valor en USD",
+        "rowFx": "En {currency}",
+        "rowResult": "Valor",
+        "dailyNote": "Los precios spot se actualizan una vez al día."
+      },
+      "equivalence": {
+        "title": "La misma cantidad en todas las unidades",
+        "heading": "{amount} {unit} de {name} equivalen a",
+        "intro": "Tu cantidad expresada en cada unidad que usan operadores y joyeros, con el precio de una de cada.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowAmount": "Cantidad",
+        "rowGrams": "En gramos",
+        "rowBarrels": "En barriles",
+        "rowTo": "Dividir entre 1 {unit}",
+        "rowResult": "Equivalente"
+      },
+      "spread": {
+        "title": "Diferencial Brent-WTI",
+        "heading": "Los dos crudos de referencia en una balanza",
+        "intro": "El Brent (mar del Norte, por vía marítima) suele cotizar por encima del WTI (interior de EE. UU.). La balanza se inclina hacia el barril más caro hoy.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowSpread": "Diferencial",
+        "vsWti": "vs WTI",
+        "rowOnYours": "Sobre {bbl} barriles",
+        "rowResult": "Diferencia de precio",
+        "brentPremium": "Brent con prima",
+        "wtiPremium": "WTI con prima",
+        "perBarrel": "Brent − WTI, por barril"
+      },
+      "purity": {
+        "title": "Tabla de valor por pureza",
+        "headingGold": "{amount} {unit} de oro por quilates",
+        "headingSilver": "{amount} {unit} de plata por ley",
+        "introGold": "Las joyas son aleaciones: su contenido de oro es quilates ÷ 24. Cada fila valora tu peso al precio spot de hoy.",
+        "introSilver": "La plata se gradúa en milésimas. Cada fila valora tu peso al precio spot de hoy.",
+        "workedTitle": "Ejemplo resuelto ({label})",
+        "rowSpot": "Precio spot",
+        "rowPurity": "Ley",
+        "rowGrams": "Peso en oz t",
+        "rowResult": "Valor del metal",
+        "colKarat": "Quilates",
+        "colFineness": "Ley",
+        "colUse": "Uso típico",
+        "colPurity": "Pureza",
+        "colPerGram": "Por gramo",
+        "tags": {
+          "investment": "Lingote",
+          "gulf": "Joyería del Golfo e India",
+          "fine": "Alta joyería",
+          "everyday": "Joyería diaria",
+          "sterling": "Sterling",
+          "britannia": "Britannia",
+          "coin": "Monedas y cubertería"
+        }
+      },
+      "sensitivity": {
+        "title": "Sensibilidad al precio",
+        "heading": "Si {name} se mueve",
+        "intro": "Lo que valdría tu cantidad de {name} si el precio spot bajara o subiera respecto a hoy.",
+        "shiftLabel": "Movimiento",
+        "workedTitle": "Ejemplo resuelto (+{pct}%)",
+        "rowSpot": "Spot por {unit}",
+        "rowShifted": "Precio +{pct}%",
+        "rowQty": "Tu cantidad",
+        "rowResult": "Nuevo valor",
+        "rowNote": "{diff} frente a hoy",
+        "low": "−{pct}%",
+        "now": "Hoy",
+        "high": "+{pct}%"
+      },
+      "volatility": {
+        "title": "Volatilidad",
+        "heading": "Volatilidad realizada de {name}",
+        "intro": "Cuánto oscila el precio: la dispersión de sus últimos 30 movimientos diarios, llevada a cifra anual.",
+        "introMonthly": "Para la plata solo hay medias mensuales gratuitas, así que es la dispersión de los últimos 12 movimientos mensuales, llevada a un año.",
+        "loading": "Cargando historial…",
+        "error": "El historial de precios no está disponible temporalmente.",
+        "workedTitle": "Ejemplo resuelto",
+        "rowReturns": "Movimientos diarios",
+        "rowReturnsMonthly": "Movimientos mensuales",
+        "rowDaily": "Desviación típica diaria",
+        "rowMonthly": "Desviación típica mensual",
+        "rowScale": "Anualizar",
+        "rowAnnual": "Volatilidad anualizada",
+        "zones": {
+          "low": "Tranquila",
+          "medium": "Normal",
+          "high": "Agitada"
+        }
+      },
+      "returns": {
+        "title": "Rentabilidad por periodo",
+        "heading": "Cómo se ha movido {name}",
+        "intro": "Cambio de precio en cada periodo, según el historial gratuito más largo: precios mensuales de Londres para los metales y cierres diarios de la EIA para el petróleo.",
+        "loading": "Cargando historial…",
+        "error": "El historial de precios no está disponible temporalmente.",
+        "workedTitle": "Ejemplo resuelto (1 año)",
+        "rowThen": "Precio hace un año",
+        "rowNow": "Último precio",
+        "rowFormula": "actual ÷ anterior − 1",
+        "rowResult": "Cambio a 1 año",
+        "periods": {
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1A",
+          "5Y": "5A",
+          "10Y": "10A",
+          "20Y": "20A"
+        }
+      },
+      "comparison": {
+        "title": "Comparación de materias primas",
+        "heading": "Oro, plata y petróleo lado a lado",
+        "intro": "Spot de hoy en {currency}, el cambio a un año y la distancia al máximo de cada historial gratuito. Haz clic en una para valorarla.",
+        "workedTitle": "Ejemplo resuelto ({name})",
+        "rowNow": "Spot hoy",
+        "rowHigh": "Máximo del historial",
+        "rowFormula": "actual ÷ máximo − 1",
+        "rowResult": "Desde el máximo",
+        "perOunce": "por onza troy",
+        "perBarrel": "por barril",
+        "y1": "1 año",
+        "fromHigh": "Desde máx."
+      },
+      "silverHistory": {
+        "title": "Plata desde 1990",
+        "heading": "Precio de la plata, media mensual desde 1990",
+        "intro": "Media mensual del precio de la plata en Londres (INSEE), con tu cantidad valorada en cada hito.",
+        "loading": "Cargando historial…",
+        "error": "El historial de la plata no está disponible temporalmente.",
+        "workedTitle": "{amount} en cada hito",
+        "events": {
+          "start": "Inicio de la serie",
+          "crisis": "Crisis financiera",
+          "peak2011": "Máximo de 2011",
+          "covid": "Mínimo de la pandemia"
+        },
+        "rowHigh": "Media mensual más alta",
+        "rowNow": "Último mes"
+      },
+      "ratioHistory": {
+        "title": "Ratio oro/plata desde 1990",
+        "heading": "El ratio mes a mes, con sus zonas",
+        "intro": "Media mensual del oro ÷ media mensual de la plata (Londres, vía INSEE). Las franjas son las zonas del indicador anterior.",
+        "loading": "Cargando historial…",
+        "error": "El historial de metales no está disponible temporalmente.",
+        "workedTitle": "Ejemplo resuelto",
+        "events": {
+          "gulf1991": "Máximo de la guerra del Golfo",
+          "low2011": "Mínimo del auge de la plata",
+          "covid2020": "Máximo de la pandemia"
+        },
+        "rowHigh": "Máximo",
+        "rowLow": "Mínimo",
+        "rowAvg": "Media de {n} meses",
+        "rowNow": "Hoy (spot)",
+        "aboveAvg": "{pct}% por encima de la media",
+        "belowAvg": "{pct}% por debajo de la media"
+      },
+      "chart": {
+        "title": "Terminal de materias primas y gráfico de velas",
+        "heading": "Precio de {name} en {currency}",
+        "intro": {
+          "gold": "Velas OHLC reales de PAXG/USD, un token respaldado 1:1 por una onza troy de oro de Londres, que sigue el oro spot a toda hora.",
+          "silver": "Ninguna fuente gratuita y sin clave publica velas de plata, así que este es el mejor dato real disponible: la media mensual del precio en Londres desde 1990.",
+          "wti": "Cierres diarios de la EIA de EE. UU. desde 1986. El diario es una línea; las velas semanales y mensuales se construyen solo con esos cierres.",
+          "brent": "Cierres diarios de la EIA de EE. UU. desde 1987. El diario es una línea; las velas semanales y mensuales se construyen solo con esos cierres."
+        },
+        "loading": "Cargando gráfico…",
+        "error": "No se pudo cargar el historial gratuito de este instrumento.",
+        "lowLabel": "Mínimo del periodo",
+        "highLabel": "Máximo del periodo",
+        "timeframeLabel": "Intervalo",
+        "retry": "Reintentar",
+        "fullscreen": "Pantalla completa",
+        "exitFullscreen": "Salir de pantalla completa",
+        "closeLabel": "Cierre",
+        "tf": {
+          "1h": "1 hora",
+          "4h": "4 horas",
+          "1D": "1 día",
+          "1M": "1 mes",
+          "M": "Mensual",
+          "D": "Diario (línea)",
+          "W": "Semanal"
+        },
+        "sub": {
+          "gold": "XAU · PAXG/USD",
+          "silver": "XAG · Londres mensual",
+          "wti": "WTI · EIA diario",
+          "brent": "Brent · EIA diario"
+        },
+        "changeSpan": {
+          "gold": "1d",
+          "silver": "1m",
+          "wti": "1d",
+          "brent": "1d"
+        },
+        "listTitle": "Precios spot",
+        "listBadge": "Diario",
+        "listNote": "Spot de MetalpriceAPI/OilPriceAPI; el cambio procede del historial de cada instrumento. Haz clic para verlo.",
+        "limits": {
+          "gold": "Velas PAXG: Coinbase Exchange (Kraken como respaldo); de 1 hora a 1 mes, unas 300 velas por intervalo.",
+          "silver": "Plata: solo medias mensuales (INSEE, precio de Londres), con un mes de retraso aproximado.",
+          "wti": "WTI: cierres diarios de la EIA vía FRED, con unos días de retraso. El único cierre negativo (20 de abril de 2020) no puede dibujarse como vela.",
+          "brent": "Brent: cierres diarios de la EIA vía FRED, con unos días de retraso."
+        },
+        "attribution": "Biblioteca de gráficos: Lightweight Charts™ de"
+      },
+      "workedExamples": {
+        "title": "Ejemplos resueltos",
+        "intro": "Tres valoraciones reales, resueltas paso a paso con los precios spot que cargó esta página ({time}).",
+        "exampleTitle": "Ejemplo {n}",
+        "ex1Title": "20 g de oro de 21 quilates",
+        "ex1Step1": "Convierte gramos a onzas troy:",
+        "ex1Step2": "Valora el oro puro:",
+        "ex1Step3": "Aplica la pureza de 21 quilates:",
+        "ex2Title": "1 kg de plata de ley",
+        "ex2Step1": "Convierte a onzas troy:",
+        "ex2Step2": "Valora la plata pura:",
+        "ex2Step3": "Aplica la ley 925:",
+        "ex3Title": "10.000 L de crudo Brent",
+        "ex3Step1": "Convierte litros a barriles:",
+        "ex3Step2": "Valora los barriles:",
+        "ex3Step3": "Precio por litro:"
       }
     },
     "weather-forecast": {

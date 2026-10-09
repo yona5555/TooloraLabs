@@ -3353,43 +3353,62 @@
         "commodity": {
           "gold": "Or",
           "silver": "Argent",
-          "oil": "Pétrole"
+          "wti": "Pétrole (WTI)",
+          "brent": "Pétrole (Brent)"
         },
         "amountLabelWeight": "Poids",
-        "amountLabelBarrels": "Barils",
-        "weightUnitLabel": "Unité",
-        "weightUnit": {
-          "gram": "Gramme",
-          "troyOunce": "Once troy"
-        },
         "resultTitle": "Valeur",
         "lastUpdated": "Prix mis à jour pour la dernière fois {time}",
-        "goldPerGramLabel": "Or / gramme",
-        "silverPerGramLabel": "Argent / gramme",
-        "goldPerOunceLabel": "Or / once troy",
-        "oilPerBarrelLabel": "Pétrole (WTI) / baril",
         "disclaimer": "Cette page est fournie à titre purement informatif et éducatif, et ne constitue pas un conseil financier ou d'investissement. Les prix proviennent de fournisseurs de données de marché publics et sont actualisés une fois par jour ; ils peuvent donc accuser un décalage par rapport au marché en temps réel. Consultez un professionnel de la finance agréé avant toute décision financière.",
         "clear": "Effacer",
-        "dataUnavailable": "Les prix des matières premières en direct sont temporairement indisponibles. Veuillez réessayer dans quelques minutes."
+        "dataUnavailable": "Les prix des matières premières en direct sont temporairement indisponibles. Veuillez réessayer dans quelques minutes.",
+        "amountLabelVolume": "Quantité",
+        "unitLabel": "Unité",
+        "units": {
+          "gram": "Gramme",
+          "troyOunce": "Once troy",
+          "kilogram": "Kilogramme",
+          "tola": "Tola",
+          "tael": "Tael",
+          "ounce": "Once (avdp)",
+          "barrel": "Baril",
+          "liter": "Litre",
+          "usGallon": "Gallon US",
+          "cubicMeter": "Mètre cube"
+        },
+        "unitsShort": {
+          "gram": "g",
+          "troyOunce": "oz t",
+          "kilogram": "kg",
+          "tola": "tola",
+          "tael": "tael",
+          "ounce": "oz",
+          "barrel": "bbl",
+          "liter": "L",
+          "usGallon": "gal",
+          "cubicMeter": "m³"
+        },
+        "fiatLabel": "Devise d'affichage",
+        "fiatSearchPlaceholder": "Rechercher par nom ou code de devise",
+        "fiatNoResults": "Aucune devise correspondante",
+        "quickTitle": "Valeurs rapides"
       },
       "nav": {
         "tool": "Suivi",
         "news": "Actualités",
         "education": "Apprendre",
         "faq": "FAQ",
-        "notices": "Avis"
+        "notices": "Avis",
+        "chart": "Graphique",
+        "metals": "Métaux",
+        "oil": "Pétrole"
       },
       "dataSource": {
-        "metalpriceApi": "Prix de l'or et de l'argent, et le graphique historique :",
-        "oilpriceApi": "Prix du pétrole :"
-      },
-      "chart": {
-        "title": "Prix de l'or — 7 derniers jours",
-        "intro": "L'évolution, au cours de la dernière semaine, du prix d'une once troy d'or en dollars américains.",
-        "loading": "Chargement du graphique…",
-        "error": "Impossible de charger les données historiques. Veuillez réessayer.",
-        "lowLabel": "Bas",
-        "highLabel": "Haut"
+        "metalpriceApi": "Prix spot de l'or et de l'argent :",
+        "oilpriceApi": "Prix du pétrole :",
+        "paxg": "Chandeliers de l'or (PAXG/USD) :",
+        "insee": "Prix mensuels de l'argent et de l'or (INSEE, licence ouverte Etalab) :",
+        "fred": "Clôtures quotidiennes du pétrole (EIA américaine via FRED) :"
       },
       "news": {
         "title": "Actualités des marchés de matières premières",
@@ -3460,13 +3479,23 @@
           "title": "Comment se forment les prix des matières premières",
           "paragraph1": "Les prix de référence mondiaux de l'or et de l'argent sont déterminés par les enchères LBMA Gold Price et LBMA Silver Price de la London Bullion Market Association (LBMA) — des enchères électroniques organisées deux fois par jour pour l'or et une fois par jour pour l'argent, où les négociants soumettent des ordres d'achat et de vente jusqu'à ce que le prix d'équilibre du marché soit trouvé. Le pétrole, lui, ne dispose d'aucune enchère mondiale unique : ce sont les contrats à terme sur le WTI (négocié au New York Mercantile Exchange) et le Brent (négocié à l'Intercontinental Exchange) qui servent de références par rapport auxquelles la plupart des autres bruts sont cotés.",
           "paragraph2": "Dans tous les cas, la logique sous-jacente reste la même relation offre-demande enseignée dès l'introduction à l'économie : à tout instant, il existe une quantité que les producteurs sont prêts à offrir à chaque niveau de prix et une quantité que les acheteurs sont prêts à demander à chaque niveau de prix, et le prix de marché se fixe au point où ces deux quantités s'égalisent — l'équilibre.",
-          "diagram": {
-            "axisPrice": "Prix",
-            "axisQuantity": "Quantité",
-            "supply": "Offre",
-            "demand": "Demande",
-            "equilibrium": "Équilibre",
-            "caption": "Le modèle classique de l'offre et de la demande : le prix de marché se fixe au point où la quantité offerte égale la quantité demandée."
+          "live": {
+            "title": "L'offre et la demande en données réelles",
+            "heading": "Brut {name}, chaque clôture quotidienne de l'EIA",
+            "intro": "Votre référence depuis les années 1980, avec la clôture réelle à chaque choc d'offre ou de demande.",
+            "introFallback": "Le pétrole illustre le mieux l'offre et la demande : ce graphique suit donc le WTI tant que vous n'avez pas choisi de brut.",
+            "loading": "Chargement de l'historique de l'EIA…",
+            "error": "L'historique du pétrole est momentanément indisponible.",
+            "workedTitle": "Clôture à chaque choc",
+            "events": {
+              "gulf": "L'Irak envahit le Koweït",
+              "asia": "Creux de la crise asiatique",
+              "peak2008": "Record de 2008",
+              "opec2014": "L'OPEP maintient sa production",
+              "negative": "Saturation des stocks (WTI négatif)",
+              "ukraine": "Flambée de la guerre en Ukraine"
+            },
+            "today": "Dernière clôture"
           }
         },
         "comparison": {
@@ -3621,7 +3650,262 @@
           "wide": "Historiquement large — argent relativement bon marché par rapport à l'or",
           "extreme": "Extrêmement large — rare historiquement"
         },
-        "fact": "Au cours du siècle dernier, le ratio a été en moyenne d'environ 60-70, bien qu'il ait varié de moins de 20 à plus de 120 lors d'événements de marché extrêmes."
+        "fact": "Au cours du siècle dernier, le ratio a été en moyenne d'environ 60-70, bien qu'il ait varié de moins de 20 à plus de 120 lors d'événements de marché extrêmes.",
+        "heading": "Onces d'argent pour acheter une once d'or",
+        "workedTitle": "Exemple résolu",
+        "rowGold": "Or par oz t",
+        "rowSilver": "Argent par oz t",
+        "rowFormula": "or ÷ argent",
+        "rowRatio": "Ratio",
+        "rowYours": "Argent pour {amount} {unit} d'or"
+      },
+      "relatedTools": {
+        "title": "Outils de marché associés"
+      },
+      "sidebarPrices": {
+        "title": "Prix en {currency}",
+        "note": "Prix spot mis à jour chaque jour ; les lignes en carats sont par gramme."
+      },
+      "liveFlow": {
+        "title": "Flux de valeur",
+        "badge": "Prix du jour",
+        "heading": "{amount} {unit} de {name}",
+        "intro": "Votre quantité est convertie en unité de cotation (once troy ou baril), puis multipliée par le prix spot du jour.",
+        "spark30d": "30 derniers jours",
+        "spark24m": "24 derniers mois",
+        "perYourUnit": "Prix par {unit}",
+        "valueOf": "Valeur de {amount} {unit}",
+        "workedTitle": "Exemple résolu",
+        "rowAmount": "Quantité",
+        "rowToOunces": "En onces troy",
+        "rowToBarrels": "En barils",
+        "rowSpot": "Spot par {unit}",
+        "rowUsd": "Valeur en USD",
+        "rowFx": "En {currency}",
+        "rowResult": "Valeur",
+        "dailyNote": "Les prix spot sont mis à jour une fois par jour."
+      },
+      "equivalence": {
+        "title": "Même quantité, toutes les unités",
+        "heading": "{amount} {unit} de {name} équivalent à",
+        "intro": "Votre quantité exprimée dans chaque unité utilisée par les négociants et les bijoutiers, avec le prix d'une unité de chacune.",
+        "workedTitle": "Exemple résolu",
+        "rowAmount": "Quantité",
+        "rowGrams": "En grammes",
+        "rowBarrels": "En barils",
+        "rowTo": "Diviser par 1 {unit}",
+        "rowResult": "Équivalent"
+      },
+      "spread": {
+        "title": "Écart Brent-WTI",
+        "heading": "Les deux pétroles de référence sur une balance",
+        "intro": "Le Brent (mer du Nord, transporté par mer) cote généralement au-dessus du WTI (intérieur des États-Unis). Le fléau penche vers le baril le plus cher aujourd'hui.",
+        "workedTitle": "Exemple résolu",
+        "rowSpread": "Écart",
+        "vsWti": "vs WTI",
+        "rowOnYours": "Sur {bbl} barils",
+        "rowResult": "Écart de prix",
+        "brentPremium": "Brent avec prime",
+        "wtiPremium": "WTI avec prime",
+        "perBarrel": "Brent − WTI, par baril"
+      },
+      "purity": {
+        "title": "Tableau de valeur par titre",
+        "headingGold": "{amount} {unit} d'or par carat",
+        "headingSilver": "{amount} {unit} d'argent par titre",
+        "introGold": "Un bijou est un alliage : sa teneur en or est carats ÷ 24. Chaque ligne valorise votre poids au prix spot du jour.",
+        "introSilver": "L'argent se classe en millièmes. Chaque ligne valorise votre poids au prix spot du jour.",
+        "workedTitle": "Exemple résolu ({label})",
+        "rowSpot": "Prix spot",
+        "rowPurity": "Titre",
+        "rowGrams": "Poids en oz t",
+        "rowResult": "Valeur du métal",
+        "colKarat": "Carats",
+        "colFineness": "Titre",
+        "colUse": "Usage courant",
+        "colPurity": "Pureté",
+        "colPerGram": "Par gramme",
+        "tags": {
+          "investment": "Lingot",
+          "gulf": "Bijoux du Golfe et d'Inde",
+          "fine": "Joaillerie",
+          "everyday": "Bijoux courants",
+          "sterling": "Sterling",
+          "britannia": "Britannia",
+          "coin": "Pièces et argenterie"
+        }
+      },
+      "sensitivity": {
+        "title": "Sensibilité au prix",
+        "heading": "Si {name} bouge",
+        "intro": "Ce que vaudrait votre quantité de {name} si le prix spot baissait ou montait par rapport à aujourd'hui.",
+        "shiftLabel": "Variation",
+        "workedTitle": "Exemple résolu (+{pct} %)",
+        "rowSpot": "Spot par {unit}",
+        "rowShifted": "Prix +{pct} %",
+        "rowQty": "Votre quantité",
+        "rowResult": "Nouvelle valeur",
+        "rowNote": "{diff} par rapport à aujourd'hui",
+        "low": "−{pct} %",
+        "now": "Aujourd'hui",
+        "high": "+{pct} %"
+      },
+      "volatility": {
+        "title": "Volatilité",
+        "heading": "Volatilité réalisée de {name}",
+        "intro": "L'ampleur des oscillations du prix : la dispersion de ses 30 derniers mouvements quotidiens, ramenée à l'année.",
+        "introMonthly": "Seules des moyennes mensuelles sont disponibles gratuitement pour l'argent : c'est donc la dispersion des 12 derniers mouvements mensuels, ramenée à l'année.",
+        "loading": "Chargement de l'historique…",
+        "error": "L'historique des prix est momentanément indisponible.",
+        "workedTitle": "Exemple résolu",
+        "rowReturns": "Mouvements quotidiens",
+        "rowReturnsMonthly": "Mouvements mensuels",
+        "rowDaily": "Écart type quotidien",
+        "rowMonthly": "Écart type mensuel",
+        "rowScale": "Annualiser",
+        "rowAnnual": "Volatilité annualisée",
+        "zones": {
+          "low": "Calme",
+          "medium": "Normale",
+          "high": "Agitée"
+        }
+      },
+      "returns": {
+        "title": "Performance par période",
+        "heading": "Évolution de {name}",
+        "intro": "Variation du prix sur chaque période, d'après l'historique gratuit le plus long : prix mensuels de Londres pour les métaux, clôtures quotidiennes de l'EIA pour le pétrole.",
+        "loading": "Chargement de l'historique…",
+        "error": "L'historique des prix est momentanément indisponible.",
+        "workedTitle": "Exemple résolu (1 an)",
+        "rowThen": "Prix il y a un an",
+        "rowNow": "Dernier prix",
+        "rowFormula": "actuel ÷ ancien − 1",
+        "rowResult": "Variation sur 1 an",
+        "periods": {
+          "1M": "1M",
+          "3M": "3M",
+          "6M": "6M",
+          "1Y": "1A",
+          "5Y": "5A",
+          "10Y": "10A",
+          "20Y": "20A"
+        }
+      },
+      "comparison": {
+        "title": "Comparaison des matières premières",
+        "heading": "Or, argent et pétrole côte à côte",
+        "intro": "Le spot du jour en {currency}, la variation sur un an et l'écart au plus haut de chaque historique gratuit. Cliquez pour valoriser.",
+        "workedTitle": "Exemple résolu ({name})",
+        "rowNow": "Spot du jour",
+        "rowHigh": "Plus haut de l'historique",
+        "rowFormula": "actuel ÷ plus haut − 1",
+        "rowResult": "Écart au plus haut",
+        "perOunce": "par once troy",
+        "perBarrel": "par baril",
+        "y1": "1 an",
+        "fromHigh": "Vs plus haut"
+      },
+      "silverHistory": {
+        "title": "L'argent depuis 1990",
+        "heading": "Prix de l'argent, moyenne mensuelle depuis 1990",
+        "intro": "Moyenne mensuelle du prix de l'argent à Londres (INSEE), avec votre quantité valorisée à chaque étape.",
+        "loading": "Chargement de l'historique…",
+        "error": "L'historique de l'argent est momentanément indisponible.",
+        "workedTitle": "{amount} à chaque étape",
+        "events": {
+          "start": "Début de la série",
+          "crisis": "Crise financière",
+          "peak2011": "Pic de 2011",
+          "covid": "Creux de la pandémie"
+        },
+        "rowHigh": "Moyenne mensuelle la plus haute",
+        "rowNow": "Dernier mois"
+      },
+      "ratioHistory": {
+        "title": "Ratio or/argent depuis 1990",
+        "heading": "Le ratio mois par mois, avec ses zones",
+        "intro": "Moyenne mensuelle de l'or ÷ moyenne mensuelle de l'argent (Londres, via l'INSEE). Les bandes sont les zones de la jauge ci-dessus.",
+        "loading": "Chargement de l'historique…",
+        "error": "L'historique des métaux est momentanément indisponible.",
+        "workedTitle": "Exemple résolu",
+        "events": {
+          "gulf1991": "Pic de la guerre du Golfe",
+          "low2011": "Creux du boom de l'argent",
+          "covid2020": "Pic de la pandémie"
+        },
+        "rowHigh": "Plus haut",
+        "rowLow": "Plus bas",
+        "rowAvg": "Moyenne sur {n} mois",
+        "rowNow": "Aujourd'hui (spot)",
+        "aboveAvg": "{pct} % au-dessus de la moyenne",
+        "belowAvg": "{pct} % sous la moyenne"
+      },
+      "chart": {
+        "title": "Terminal des matières premières et chandeliers",
+        "heading": "Prix de {name} en {currency}",
+        "intro": {
+          "gold": "Vrais chandeliers OHLC de PAXG/USD, un jeton adossé 1:1 à une once troy d'or de Londres, qui suit l'or spot en continu.",
+          "silver": "Aucune source gratuite et sans clé ne publie de chandeliers de l'argent : voici donc la meilleure donnée réelle disponible, la moyenne mensuelle du prix de Londres depuis 1990.",
+          "wti": "Clôtures quotidiennes de l'EIA américaine depuis 1986. Le quotidien est une ligne ; les chandeliers hebdomadaires et mensuels sont construits uniquement à partir de ces clôtures.",
+          "brent": "Clôtures quotidiennes de l'EIA américaine depuis 1987. Le quotidien est une ligne ; les chandeliers hebdomadaires et mensuels sont construits uniquement à partir de ces clôtures."
+        },
+        "loading": "Chargement du graphique…",
+        "error": "Impossible de charger l'historique gratuit de cet instrument.",
+        "lowLabel": "Plus bas de la période",
+        "highLabel": "Plus haut de la période",
+        "timeframeLabel": "Intervalle",
+        "retry": "Réessayer",
+        "fullscreen": "Plein écran",
+        "exitFullscreen": "Quitter le plein écran",
+        "closeLabel": "Clôture",
+        "tf": {
+          "1h": "1 heure",
+          "4h": "4 heures",
+          "1D": "1 jour",
+          "1M": "1 mois",
+          "M": "Mensuel",
+          "D": "Quotidien (ligne)",
+          "W": "Hebdomadaire"
+        },
+        "sub": {
+          "gold": "XAU · PAXG/USD",
+          "silver": "XAG · Londres mensuel",
+          "wti": "WTI · EIA quotidien",
+          "brent": "Brent · EIA quotidien"
+        },
+        "changeSpan": {
+          "gold": "1j",
+          "silver": "1m",
+          "wti": "1j",
+          "brent": "1j"
+        },
+        "listTitle": "Prix spot",
+        "listBadge": "Quotidien",
+        "listNote": "Spot de MetalpriceAPI/OilPriceAPI ; la variation vient de l'historique de chaque instrument. Cliquez pour l'afficher.",
+        "limits": {
+          "gold": "Chandeliers PAXG : Coinbase Exchange (Kraken en secours) ; de 1 heure à 1 mois, environ 300 chandeliers par intervalle.",
+          "silver": "Argent : moyennes mensuelles uniquement (INSEE, prix de Londres), publiées avec environ un mois de décalage.",
+          "wti": "WTI : clôtures quotidiennes de l'EIA via FRED, publiées avec quelques jours de décalage. L'unique clôture négative (20 avril 2020) ne peut pas être tracée en chandelier.",
+          "brent": "Brent : clôtures quotidiennes de l'EIA via FRED, publiées avec quelques jours de décalage."
+        },
+        "attribution": "Bibliothèque graphique : Lightweight Charts™ par"
+      },
+      "workedExamples": {
+        "title": "Exemples résolus",
+        "intro": "Trois valorisations réelles, résolues pas à pas avec les prix spot chargés par cette page ({time}).",
+        "exampleTitle": "Exemple {n}",
+        "ex1Title": "20 g d'or 21 carats",
+        "ex1Step1": "Convertir les grammes en onces troy :",
+        "ex1Step2": "Valoriser l'or pur :",
+        "ex1Step3": "Appliquer la pureté 21 carats :",
+        "ex2Title": "1 kg d'argent sterling",
+        "ex2Step1": "Convertir en onces troy :",
+        "ex2Step2": "Valoriser l'argent pur :",
+        "ex2Step3": "Appliquer le titre 925 :",
+        "ex3Title": "10 000 L de Brent",
+        "ex3Step1": "Convertir les litres en barils :",
+        "ex3Step2": "Valoriser les barils :",
+        "ex3Step3": "Prix par litre :"
       }
     },
     "weather-forecast": {

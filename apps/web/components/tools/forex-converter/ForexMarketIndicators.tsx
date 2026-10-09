@@ -13,6 +13,7 @@ import {
 } from "@tooloralabs/tools";
 import IndicatorCard, { PillGroup } from "@/components/tools/markets/IndicatorCard";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
+import DivergingBars from "@/components/tools/markets/DivergingBars";
 import { changeColor, useMarketFormatters } from "@/components/tools/markets/fiat";
 import { ECB_CURRENCIES } from "@/lib/forex/ecb";
 import { FEATURED_CURRENCY_CODES } from "@/lib/forex/currencyNames";
@@ -36,7 +37,6 @@ export function ForexStrengthMeter({ recent, highlight, digitStyle }: { recent: 
   const [lookback, setLookback] = useState<(typeof LOOKBACKS)[number]>(21);
   const codes = [...new Set([...STRENGTH_CODES, ...highlight.filter((c) => (ECB_CURRENCIES as readonly string[]).includes(c))])];
   const scores = recent.status === "ready" ? currencyStrength(recent.data, codes, lookback) : [];
-  const max = Math.max(...scores.map((s) => Math.abs(s.changePercent)), 0.01);
   const top = scores[0];
   const mean = top && recent.status === "ready" ? (() => {
     const n = recent.data.dates.length;
@@ -67,20 +67,11 @@ export function ForexStrengthMeter({ recent, highlight, digitStyle }: { recent: 
           : null
       }
     >
-      <ul className="space-y-1.5" dir="ltr" data-testid="strength-meter">
-        {scores.map((s) => (
-          <li key={s.code} className="grid grid-cols-[3rem_1fr_1fr_4.5rem] items-center gap-2">
-            <span className={`font-mono text-xs font-bold ${highlight.includes(s.code) ? "text-blue-700 dark:text-blue-300" : "text-zinc-700 dark:text-zinc-200"}`}>{s.code}</span>
-            <div className="flex h-4 justify-end">
-              {s.changePercent < 0 && <div className="h-full rounded-s bg-red-500" style={{ width: `${(Math.abs(s.changePercent) / max) * 100}%` }} />}
-            </div>
-            <div className="flex h-4 border-s border-zinc-300 dark:border-zinc-600">
-              {s.changePercent >= 0 && <div className="h-full rounded-e bg-emerald-500" style={{ width: `${(s.changePercent / max) * 100}%` }} />}
-            </div>
-            <span className={`text-end font-mono text-xs font-semibold ${changeColor(s.changePercent)}`}>{f.signedPct(s.changePercent)}</span>
-          </li>
-        ))}
-      </ul>
+      <DivergingBars
+        bars={scores.map((s) => ({ key: s.code, label: s.code, value: s.changePercent, highlight: highlight.includes(s.code) }))}
+        format={(v) => f.signedPct(v)}
+        testId="strength-meter"
+      />
     </IndicatorCard>
   );
 }

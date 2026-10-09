@@ -19,7 +19,8 @@ import {
 } from "@tooloralabs/tools";
 import IndicatorCard, { PillGroup } from "@/components/tools/markets/IndicatorCard";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
-import SemiGauge from "@/components/tools/markets/SemiGauge";
+import VolatilityDial from "@/components/tools/markets/VolatilityDial";
+import DivergingBars from "@/components/tools/markets/DivergingBars";
 import SensitivityBars from "@/components/tools/markets/SensitivityBars";
 import { changeColor, useMarketFormatters } from "@/components/tools/markets/fiat";
 import { useFixingDate, type Loaded } from "./useForexData";
@@ -157,29 +158,14 @@ export function ForexVolatilityGauge({ fromCurrency, toCurrency, recent, digitSt
       }
     >
       {vol && (
-        <div className="flex flex-col items-center">
-          <SemiGauge
-            value={vol.annualizedPercent}
-            max={VOL_MAX}
-            zones={[
-              { to: FX_VOLATILITY_ZONE_LIMITS.low, className: "stroke-emerald-500" },
-              { to: FX_VOLATILITY_ZONE_LIMITS.medium, className: "stroke-amber-400" },
-              { to: VOL_MAX, className: "stroke-red-500" },
-            ]}
-            ticks={[0, FX_VOLATILITY_ZONE_LIMITS.low, FX_VOLATILITY_ZONE_LIMITS.medium, VOL_MAX].map((v) => ({ value: v, label: `${v}%` }))}
-            ariaLabel={t("heading", { from: F, to: T })}
-            testId="volatility-gauge"
-          />
-          <p className="-mt-1 font-mono text-2xl font-bold text-zinc-900 dark:text-zinc-100" dir="ltr" data-testid="volatility-value">
-            {f.fixed(vol.annualizedPercent)}%
-          </p>
-          <p className={`text-sm font-semibold ${zone === "low" ? "text-emerald-600" : zone === "medium" ? "text-amber-600" : "text-red-600"}`}>{t(`zones.${zone}`)}</p>
-          <div className="mt-2 flex flex-wrap justify-center gap-3 text-[11px] text-zinc-500 dark:text-zinc-400">
-            <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-emerald-500" />{t("zones.low")} &lt;{FX_VOLATILITY_ZONE_LIMITS.low}%</span>
-            <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-amber-400" />{t("zones.medium")}</span>
-            <span><span className="me-1 inline-block h-2 w-2 rounded-full bg-red-500" />{t("zones.high")} &gt;{FX_VOLATILITY_ZONE_LIMITS.medium}%</span>
-          </div>
-        </div>
+        <VolatilityDial
+          value={vol.annualizedPercent}
+          limits={FX_VOLATILITY_ZONE_LIMITS}
+          max={VOL_MAX}
+          valueText={`${f.fixed(vol.annualizedPercent)}%`}
+          zoneLabels={{ low: t("zones.low"), medium: t("zones.medium"), high: t("zones.high") }}
+          ariaLabel={t("heading", { from: F, to: T })}
+        />
       )}
     </IndicatorCard>
   );
@@ -325,7 +311,6 @@ export function ForexPeriodReturns({ fromCurrency, toCurrency, history, digitSty
     const v = changeOverDays(points, p.days);
     return v === null ? [] : [{ ...p, value: v }];
   });
-  const max = Math.max(...bars.map((b) => Math.abs(b.value)), 0.01);
   const year = bars.find((b) => b.key === "1Y");
   const last = points[points.length - 1];
   const yearRef = year && last ? last.rate / (1 + year.value / 100) : null;
@@ -351,20 +336,7 @@ export function ForexPeriodReturns({ fromCurrency, toCurrency, history, digitSty
           : null
       }
     >
-      <div className="space-y-2" dir="ltr" data-testid="period-returns">
-        {bars.map((b) => (
-          <div key={b.key} className="grid grid-cols-[3rem_1fr_1fr_4.5rem] items-center gap-2">
-            <span className="font-mono text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t(`periods.${b.key}`)}</span>
-            <div className="flex h-5 justify-end">
-              {b.value < 0 && <div className="h-full rounded-s bg-red-500" style={{ width: `${(Math.abs(b.value) / max) * 100}%` }} />}
-            </div>
-            <div className="flex h-5 border-s border-zinc-300 dark:border-zinc-600">
-              {b.value >= 0 && <div className="h-full rounded-e bg-emerald-500" style={{ width: `${(b.value / max) * 100}%` }} />}
-            </div>
-            <span className={`text-end font-mono text-xs font-bold ${changeColor(b.value)}`}>{f.signedPct(b.value)}</span>
-          </div>
-        ))}
-      </div>
+      <DivergingBars bars={bars.map((b) => ({ key: b.key, label: t(`periods.${b.key}`), value: b.value }))} format={(v) => f.signedPct(v)} testId="period-returns" />
     </IndicatorCard>
   );
 }

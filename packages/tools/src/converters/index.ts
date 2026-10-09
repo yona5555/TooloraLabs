@@ -10,3 +10,4 @@ export * from "./WeatherConverter";
 export * from "./CryptoMarketMath";
 export * from "./CryptoNetworkMath";
 export * from "./ForexMarketMath";
+export * from "./CommodityMarketMath";
