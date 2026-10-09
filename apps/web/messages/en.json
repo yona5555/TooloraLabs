@@ -415,7 +415,9 @@
       },
       "history": {
         "title": "History",
-        "empty": "Your calculations will appear here as you complete them."
+        "empty": "Your calculations will appear here as you complete them.",
+        "deleteEntry": "Delete {expression}",
+        "total": "Total"
       },
       "nav": {
         "tool": "Calculator",
@@ -779,12 +781,6 @@
           "increase": "Increase angle",
           "reset": "Reset",
           "hint": "Drag the red point, or use the −/+ buttons. Hold Shift while dragging to snap to 15°."
-        },
-        "commonAngles": {
-          "title": "Common Angles",
-          "subtitle": "",
-          "colAngle": "Angle",
-          "colRad": "Radians"
         }
       }
     },
@@ -6269,68 +6265,41 @@
           "readOriginal": "Read the Original Text"
         },
         "hero": {
-          "ariaLabel": "A draggable point on a coefficient-by-exponent grid, representing the live value actually in play above the fold — a second point appears for B when multiplying or dividing",
-          "resultLabel": "Result",
-          "axisHint": "coefficient (y) × 10^exponent (x)",
-          "hint": "Drag either point — every indicator on this page updates with it, and the real result recalculates live."
+          "title": "Draggable Magnitude Plane",
+          "subtitle": "Drag the point — its x-position sets the exponent, its y-position sets the coefficient.",
+          "ariaLabel": "A draggable point on a coefficient-vs-exponent plane, whose axes double as the exponent ladder and the coefficient bar",
+          "axisHint": "x = exponent (the ladder), y = coefficient (the bar, valid range 1–10)",
+          "hint": "Drag the point — every indicator below updates with it."
         },
-        "largeNumberSteps": {
-          "title": "Converting a Large Standard Number",
-          "intro": "The live standard-form value, walked through the real conversion to scientific notation one decimal placement at a time.",
-          "worked": {
-            "title": "Worked Example",
-            "placesMoved": "Places moved",
-            "result": "Result"
-          }
+        "normalizationStaircase": {
+          "title": "Normalization Staircase",
+          "subtitle": "A real digit-shift trace from the raw value to its normalized form",
+          "stepSliderAria": "Normalization step",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "step": "Step",
+          "coefficient": "Coefficient",
+          "exponent": "Exponent",
+          "normalized": "Normalized?",
+          "yes": "Yes",
+          "no": "No"
         },
-        "smallNumberSteps": {
-          "title": "Converting a Small Standard Number",
-          "intro": "The reciprocal of the live standard-form value — a genuine small number — converted the same way, landing on a real negative exponent.",
-          "worked": {
-            "title": "Worked Example",
-            "placesMoved": "Places moved",
-            "result": "Result",
-            "negativeNote": "Negative exponent — the decimal moved right, not left"
-          }
+        "coefficientZone": {
+          "title": "Coefficient Zone",
+          "subtitle": "The valid [1,10) zone every scientific-notation coefficient must sit in",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "coefficient": "Coefficient",
+          "distanceFromOne": "Distance from 1",
+          "distanceFromTen": "Distance from 10"
         },
-        "multiplyFormula": {
-          "title": "Multiplying Two Numbers in Scientific Notation",
-          "intro": "The live A and B multiplied — coefficients multiply together, exponents add.",
-          "worked": {
-            "title": "Worked Example",
-            "coefficients": "Coefficients multiply",
-            "exponents": "Exponents add",
-            "result": "Result"
-          }
-        },
-        "divideFormula": {
-          "title": "Dividing Two Numbers in Scientific Notation",
-          "intro": "The live A divided by B — coefficients divide, exponents subtract.",
-          "worked": {
-            "title": "Worked Example",
-            "coefficients": "Coefficients divide",
-            "exponents": "Exponents subtract",
-            "result": "Result"
-          }
-        },
-        "engineeringEquivalence": {
-          "title": "Scientific Notation vs. Engineering Notation",
-          "intro": "The live A, in real scientific notation next to its real engineering-notation equivalent — the convention unit prefixes actually follow.",
-          "scientificLabel": "Scientific notation",
-          "engineeringLabel": "Engineering notation",
-          "worked": {
-            "title": "Worked Example",
-            "rule": "Rule",
-            "ruleValue": "Exponent is always a multiple of 3",
-            "result": "Result"
-          }
-        },
-        "namedMagnitudes": {
-          "title": "Named Magnitudes, Large and Small",
-          "intro": "Every named order of magnitude this tool actually recognizes — A's own exponent is currently 10^{exponent}, highlighting whichever one matches it exactly.",
-          "matchTag": "This is A",
-          "columnName": "Name",
-          "columnValue": "Power of ten",
+        "namedMagnitudesLadder": {
+          "title": "Named Magnitudes Ladder",
+          "subtitle": "Current exponent: {exponent}",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "currentExponent": "Current exponent",
+          "nearestName": "Nearest name",
           "names": {
             "thousand": "Thousand",
             "million": "Million",
@@ -6343,114 +6312,168 @@
             "trillionth": "Trillionth"
           }
         },
-        "realWorldScale": {
-          "title": "Real-World Scale, Atom to Light-Year",
-          "intro": "Real physical sizes on a logarithmic scale, with a live marker showing exactly where A's own exponent falls among them.",
-          "items": {
-            "atom": "Hydrogen atom",
-            "virus": "Virus",
-            "grain": "Grain of sand",
-            "human": "Human height",
-            "building": "Tall building",
-            "earthDiameter": "Earth's diameter",
-            "lightYear": "Light-year"
-          },
-          "worked": {
-            "title": "Worked Example",
-            "currentExponent": "A's own exponent"
-          }
+        "linearVsLog": {
+          "title": "Linear vs. Log Bars",
+          "subtitle": "The same value on a linear bar (where it vanishes) and a log bar (where it stays readable)",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "linearLabel": "Linear scale",
+          "logLabel": "Log scale",
+          "standardValue": "Standard value",
+          "linearPosition": "Linear position",
+          "offScale": "Off scale",
+          "logExponent": "Log-scale exponent"
         },
-        "coefficientRange": {
-          "title": "Is the Coefficient Actually in Range?",
-          "intro": "Proper scientific notation requires a coefficient between 1 and 10 — this strip shows live whether A's own coefficient is actually inside that range.",
-          "worked": {
-            "title": "Worked Example",
-            "coefficient": "A's coefficient",
-            "status": "Status",
-            "inRange": "In range",
-            "outOfRange": "Out of range",
-            "needsNormalizing": "This would need normalizing before it counts as proper scientific notation"
-          }
+        "multiplyTape": {
+          "title": "Multiply Tape",
+          "subtitle": "Coefficients multiply, exponents add, then renormalize if needed",
+          "adjustB": "Adjust B's coefficient",
+          "decreaseB": "Decrease B's coefficient",
+          "increaseB": "Increase B's coefficient",
+          "renormalizeNeeded": "Renormalize needed",
+          "alreadyNormalized": "Already normalized",
+          "colStep": "Step",
+          "colValue": "Value",
+          "rawProduct": "Raw product",
+          "normalized": "Normalized"
         },
-        "exponentSign": {
-          "title": "Positive and Negative Exponents, Balanced",
-          "intro": "The live A and B exponents on a shared balance — positive means a large number, negative means small.",
-          "worked": {
-            "title": "Worked Example",
-            "large": "Large number (positive exponent)",
-            "small": "Small number (negative exponent)"
-          }
+        "divideTape": {
+          "title": "Divide Tape",
+          "subtitle": "Coefficients divide, exponents subtract, then renormalize if needed",
+          "adjustExponentB": "Adjust B's exponent",
+          "decreaseExponentB": "Decrease B's exponent",
+          "increaseExponentB": "Increase B's exponent",
+          "renormalizeNeeded": "Renormalize needed",
+          "alreadyNormalized": "Already normalized",
+          "colStep": "Step",
+          "colValue": "Value",
+          "rawQuotient": "Raw quotient",
+          "normalized": "Normalized"
         },
-        "digitCount": {
-          "title": "How Many Digits, Without Writing Them Out",
-          "intro": "The live A and B's real digit counts in full standard form — the exponent alone tells you, no need to write the number out.",
-          "worked": {
-            "title": "Worked Example",
-            "digitsCount": "{count} digit(s)"
-          }
+        "precisionCutoff": {
+          "title": "Precision Cut-Off",
+          "subtitle": "Keeping {digits} decimal digits of the coefficient",
+          "digitsSliderAria": "Digits kept",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "fullCoefficient": "Full coefficient",
+          "roundedCoefficient": "Rounded coefficient",
+          "dropped": "Dropped amount"
         },
-        "exponentArithmetic": {
-          "title": "Exponents Add for Multiplication, Subtract for Division",
-          "intro": "The live A and B exponents, combined both real ways side by side.",
-          "multiplyLabel": "Multiplication",
-          "divideLabel": "Division",
-          "worked": {
-            "title": "Worked Example",
-            "exponentA": "Exponent of A",
-            "exponentB": "Exponent of B"
-          }
+        "scientificVsEngineering": {
+          "title": "Scientific vs. Engineering Ruler",
+          "subtitle": "Engineering notation only allows exponents that are multiples of three",
+          "jumpAria": "Jump to exponent {exponent}",
+          "colForm": "Form",
+          "colValue": "Value",
+          "scientific": "Scientific",
+          "engineering": "Engineering",
+          "exponentMod3": "Exponent mod 3"
         },
-        "unitScale": {
-          "title": "Scientific Notation in Real Unit Prefixes",
-          "intro": "The live A's exponent matched to its nearest real metric prefix — the same nano/micro/milli/kilo/mega/giga scale units actually use.",
-          "names": {
-            "nano": "nano",
-            "micro": "micro",
-            "milli": "milli",
-            "base": "base",
-            "kilo": "kilo",
+        "absoluteError": {
+          "title": "Absolute Error by Digits Kept",
+          "subtitle": "Rounding the coefficient to fewer digits costs real, measurable accuracy",
+          "colDigitsKept": "Digits kept",
+          "colError": "Absolute error"
+        },
+        "siPrefixWheel": {
+          "title": "SI Prefix Wheel",
+          "subtitle": "Nearest SI prefix: {symbol} ({name})",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "exponent": "Exponent",
+          "nearestPrefix": "Nearest prefix",
+          "prefixExponent": "Prefix exponent",
+          "prefixNames": {
+            "yotta": "yotta",
+            "zetta": "zetta",
+            "exa": "exa",
+            "peta": "peta",
+            "tera": "tera",
+            "giga": "giga",
             "mega": "mega",
-            "giga": "giga"
-          },
-          "worked": {
-            "title": "Worked Example",
-            "nearestPrefix": "Nearest prefix",
-            "remainder": "Remaining factor",
-            "exactMatch": "An exact match — no remaining factor"
+            "kilo": "kilo",
+            "base": "base unit",
+            "milli": "milli",
+            "micro": "micro",
+            "nano": "nano",
+            "pico": "pico",
+            "femto": "femto",
+            "atto": "atto",
+            "zepto": "zepto",
+            "yocto": "yocto"
           }
         },
-        "magnitudeComparison": {
-          "title": "A vs. B, by Real Order of Magnitude",
-          "intro": "The live A and B, compared directly by actual size — not just which coefficient looks bigger.",
-          "worked": {
-            "title": "Worked Example",
-            "bigger": "Bigger value",
-            "orderGap": "Order-of-magnitude gap",
-            "ordersOfMagnitude": "{count} order(s) of magnitude"
+        "reciprocalMirror": {
+          "title": "Reciprocal Mirror",
+          "subtitle": "The live value mirrored against its own real reciprocal",
+          "decrease": "Decrease coefficient",
+          "increase": "Increase coefficient",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "value": "Value",
+          "reciprocal": "Reciprocal",
+          "product": "Value × reciprocal"
+        },
+        "digitsToExponent": {
+          "title": "Digits → Exponent Graph",
+          "subtitle": "{digits} digits means exponent {exponent}",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "digitCount": "Digit count",
+          "exponent": "Exponent",
+          "formula": "Formula"
+        },
+        "speedsLogScale": {
+          "title": "Speeds on a Log Scale",
+          "subtitle": "Real speeds from a snail to the speed of light, on one log axis",
+          "colName": "Name",
+          "colSpeed": "Speed",
+          "speeds": {
+            "snail": "Garden snail",
+            "walkingHuman": "Walking human",
+            "usainBolt": "Usain Bolt (sprint)",
+            "car": "Car on a highway",
+            "soundInAir": "Sound in air",
+            "commercialJet": "Commercial jet",
+            "iss": "International Space Station",
+            "earthOrbitingSun": "Earth orbiting the Sun",
+            "lightSpeed": "Speed of light"
           }
         },
-        "normalizationSteps": {
-          "title": "Normalizing a Coefficient Back Into Range",
-          "intro": "The live A's own coefficient and exponent, walked through the real normalization steps a calculator runs internally whenever a coefficient strays outside [1, 10).",
-          "worked": {
-            "title": "Worked Example",
-            "stepsTaken": "Steps taken",
-            "alreadyNormalized": "Already in proper range — no steps needed",
-            "result": "Result"
-          }
+        "addingEqualExponents": {
+          "title": "Adding Needs Equal Exponents",
+          "subtitle": "Unlike multiply/divide, addition first requires a common exponent",
+          "adjustExponentB": "Adjust B's exponent",
+          "decreaseExponentB": "Decrease B's exponent",
+          "increaseExponentB": "Increase B's exponent",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "commonExponent": "Common exponent",
+          "shiftedA": "A shifted to common exponent",
+          "shiftedB": "B shifted to common exponent",
+          "sum": "Sum"
         },
-        "sigFigsAmbiguity": {
-          "title": "What Standard Form Hides About Precision",
-          "intro": "The live A's coefficient carries a real, unambiguous number of significant figures — exactly what gets lost the moment the same value is padded into plain standard form.",
-          "worked": {
-            "title": "Worked Example",
-            "unambiguous": "Unambiguous — every digit shown is significant",
-            "ambiguous": "Ambiguous — trailing zeros could be real digits or just placeholders",
-            "notAmbiguous": "Not ambiguous at this size",
-            "sigFigs": "Significant figures",
-            "note": "Note",
-            "trailingZerosNote": "The trailing zeros don't reveal how many digits were actually measured",
-            "noTrailingZerosNote": "No trailing zeros here to create ambiguity"
+        "ordersOfMagnitudeAxis": {
+          "title": "Orders of Magnitude Axis",
+          "subtitle": "Nearest real-world scale: {name}",
+          "colScale": "Scale",
+          "colExponent": "Order of magnitude",
+          "scales": {
+            "planckLength": "Planck length",
+            "proton": "Proton",
+            "hydrogenAtom": "Hydrogen atom",
+            "virus": "Virus",
+            "humanHairWidth": "Human hair width",
+            "grainOfSand": "Grain of sand",
+            "humanHeight": "Human height",
+            "footballField": "Football field",
+            "mountEverest": "Mount Everest",
+            "earthDiameter": "Earth's diameter",
+            "earthToSun": "Earth to Sun",
+            "lightYear": "Light-year",
+            "milkyWayDiameter": "Milky Way diameter",
+            "observableUniverse": "Observable universe"
           }
         }
       },

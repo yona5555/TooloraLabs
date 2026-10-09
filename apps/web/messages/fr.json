@@ -415,7 +415,9 @@
       },
       "history": {
         "title": "Historique",
-        "empty": "Vos calculs apparaîtront ici au fur et à mesure."
+        "empty": "Vos calculs apparaîtront ici au fur et à mesure.",
+        "deleteEntry": "Supprimer {expression}",
+        "total": "Total"
       },
       "nav": {
         "tool": "Calculatrice",
@@ -779,12 +781,6 @@
           "increase": "Augmenter l'angle",
           "reset": "Réinitialiser",
           "hint": "Faites glisser le point rouge, ou utilisez les boutons −/+. Maintenez Maj en glissant pour un pas de 15°."
-        },
-        "commonAngles": {
-          "title": "Angles courants",
-          "subtitle": "",
-          "colAngle": "Angle",
-          "colRad": "Radians"
         }
       }
     },
@@ -6269,68 +6265,41 @@
           "readOriginal": "Lire le texte original"
         },
         "hero": {
-          "ariaLabel": "Un point déplaçable sur une grille coefficient par exposant, représentant la valeur en direct réellement en jeu ci-dessus — un second point apparaît pour B lors d'une multiplication ou division",
-          "resultLabel": "Résultat",
-          "axisHint": "coefficient (y) × 10^exposant (x)",
-          "hint": "Faites glisser l'un des points — chaque indicateur de cette page se met à jour avec lui, et le résultat réel se recalcule en direct."
+          "title": "Plan de Magnitude Déplaçable",
+          "subtitle": "Faites glisser le point — sa position x fixe l'exposant, sa position y fixe le coefficient.",
+          "ariaLabel": "Un point déplaçable sur un plan coefficient-contre-exposant, dont les axes font à la fois office d'échelle des exposants et de barre de coefficient",
+          "axisHint": "x = exposant (l'échelle), y = coefficient (la barre, plage valide 1–10)",
+          "hint": "Faites glisser le point — chaque indicateur ci-dessous se met à jour avec lui."
         },
-        "largeNumberSteps": {
-          "title": "Convertir un grand nombre standard",
-          "intro": "La valeur en direct en forme standard, parcourue à travers la véritable conversion en notation scientifique, un déplacement décimal à la fois.",
-          "worked": {
-            "title": "Exemple résolu",
-            "placesMoved": "Positions déplacées",
-            "result": "Résultat"
-          }
+        "normalizationStaircase": {
+          "title": "Escalier de Normalisation",
+          "subtitle": "Une trace réelle du déplacement des chiffres, de la valeur brute à sa forme normalisée",
+          "stepSliderAria": "Étape de normalisation",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "step": "Étape",
+          "coefficient": "Coefficient",
+          "exponent": "Exposant",
+          "normalized": "Normalisé ?",
+          "yes": "Oui",
+          "no": "Non"
         },
-        "smallNumberSteps": {
-          "title": "Convertir un petit nombre standard",
-          "intro": "L'inverse de la valeur en direct en forme standard — un véritable petit nombre — converti de la même manière, aboutissant à un véritable exposant négatif.",
-          "worked": {
-            "title": "Exemple résolu",
-            "placesMoved": "Positions déplacées",
-            "result": "Résultat",
-            "negativeNote": "Exposant négatif — la virgule s'est déplacée vers la droite, pas vers la gauche"
-          }
+        "coefficientZone": {
+          "title": "Zone du Coefficient",
+          "subtitle": "La plage valide [1,10) dans laquelle tout coefficient en notation scientifique doit se trouver",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "coefficient": "Coefficient",
+          "distanceFromOne": "Distance à 1",
+          "distanceFromTen": "Distance à 10"
         },
-        "multiplyFormula": {
-          "title": "Multiplier deux nombres en notation scientifique",
-          "intro": "Les A et B en direct multipliés — les coefficients se multiplient, les exposants s'additionnent.",
-          "worked": {
-            "title": "Exemple résolu",
-            "coefficients": "Les coefficients se multiplient",
-            "exponents": "Les exposants s'additionnent",
-            "result": "Résultat"
-          }
-        },
-        "divideFormula": {
-          "title": "Diviser deux nombres en notation scientifique",
-          "intro": "Le A en direct divisé par B — les coefficients se divisent, les exposants se soustraient.",
-          "worked": {
-            "title": "Exemple résolu",
-            "coefficients": "Les coefficients se divisent",
-            "exponents": "Les exposants se soustraient",
-            "result": "Résultat"
-          }
-        },
-        "engineeringEquivalence": {
-          "title": "Notation scientifique contre notation d'ingénierie",
-          "intro": "Le A en direct, en véritable notation scientifique à côté de son véritable équivalent en notation d'ingénierie — la convention que les préfixes d'unités suivent réellement.",
-          "scientificLabel": "Notation scientifique",
-          "engineeringLabel": "Notation d'ingénierie",
-          "worked": {
-            "title": "Exemple résolu",
-            "rule": "Règle",
-            "ruleValue": "L'exposant est toujours un multiple de 3",
-            "result": "Résultat"
-          }
-        },
-        "namedMagnitudes": {
-          "title": "Grandeurs nommées, grandes et petites",
-          "intro": "Chaque ordre de grandeur nommé que cet outil reconnaît réellement — le propre exposant de A est actuellement 10^{exponent}, en surlignant celui qui lui correspond exactement.",
-          "matchTag": "C'est A",
-          "columnName": "Nom",
-          "columnValue": "Puissance de dix",
+        "namedMagnitudesLadder": {
+          "title": "Échelle des Grandeurs Nommées",
+          "subtitle": "Exposant actuel : {exponent}",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "currentExponent": "Exposant actuel",
+          "nearestName": "Nom le plus proche",
           "names": {
             "thousand": "Mille",
             "million": "Million",
@@ -6343,114 +6312,168 @@
             "trillionth": "Billionième"
           }
         },
-        "realWorldScale": {
-          "title": "Échelle du monde réel, de l'atome à l'année-lumière",
-          "intro": "Des tailles physiques réelles sur une échelle logarithmique, avec un marqueur en direct montrant exactement où se situe le propre exposant de A parmi elles.",
-          "items": {
-            "atom": "Atome d'hydrogène",
-            "virus": "Virus",
-            "grain": "Grain de sable",
-            "human": "Taille humaine",
-            "building": "Immeuble de grande hauteur",
-            "earthDiameter": "Diamètre de la Terre",
-            "lightYear": "Année-lumière"
-          },
-          "worked": {
-            "title": "Exemple résolu",
-            "currentExponent": "Le propre exposant de A"
-          }
+        "linearVsLog": {
+          "title": "Barres Linéaires vs. Logarithmiques",
+          "subtitle": "La même valeur sur une barre linéaire (où elle disparaît) et une barre logarithmique (où elle reste lisible)",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "linearLabel": "Échelle linéaire",
+          "logLabel": "Échelle logarithmique",
+          "standardValue": "Valeur standard",
+          "linearPosition": "Position linéaire",
+          "offScale": "Hors échelle",
+          "logExponent": "Exposant (échelle log)"
         },
-        "coefficientRange": {
-          "title": "Le coefficient est-il réellement dans la plage ?",
-          "intro": "Une véritable notation scientifique exige un coefficient entre 1 et 10 — cette bande montre en direct si le propre coefficient de A est réellement dans cette plage.",
-          "worked": {
-            "title": "Exemple résolu",
-            "coefficient": "Coefficient de A",
-            "status": "Statut",
-            "inRange": "Dans la plage",
-            "outOfRange": "Hors de la plage",
-            "needsNormalizing": "Cela devrait être normalisé avant de compter comme une véritable notation scientifique"
-          }
+        "multiplyTape": {
+          "title": "Ruban de Multiplication",
+          "subtitle": "Les coefficients se multiplient, les exposants s'additionnent, puis on renormalise si besoin",
+          "adjustB": "Ajuster le coefficient de B",
+          "decreaseB": "Diminuer le coefficient de B",
+          "increaseB": "Augmenter le coefficient de B",
+          "renormalizeNeeded": "Renormalisation nécessaire",
+          "alreadyNormalized": "Déjà normalisé",
+          "colStep": "Étape",
+          "colValue": "Valeur",
+          "rawProduct": "Produit brut",
+          "normalized": "Normalisé"
         },
-        "exponentSign": {
-          "title": "Exposants positifs et négatifs, équilibrés",
-          "intro": "Les exposants en direct de A et B sur une balance commune — positif signifie un grand nombre, négatif signifie petit.",
-          "worked": {
-            "title": "Exemple résolu",
-            "large": "Grand nombre (exposant positif)",
-            "small": "Petit nombre (exposant négatif)"
-          }
+        "divideTape": {
+          "title": "Ruban de Division",
+          "subtitle": "Les coefficients se divisent, les exposants se soustraient, puis on renormalise si besoin",
+          "adjustExponentB": "Ajuster l'exposant de B",
+          "decreaseExponentB": "Diminuer l'exposant de B",
+          "increaseExponentB": "Augmenter l'exposant de B",
+          "renormalizeNeeded": "Renormalisation nécessaire",
+          "alreadyNormalized": "Déjà normalisé",
+          "colStep": "Étape",
+          "colValue": "Valeur",
+          "rawQuotient": "Quotient brut",
+          "normalized": "Normalisé"
         },
-        "digitCount": {
-          "title": "Combien de chiffres, sans les écrire",
-          "intro": "Le véritable nombre de chiffres de A et B en forme standard complète — l'exposant seul vous le dit, sans avoir besoin d'écrire le nombre en entier.",
-          "worked": {
-            "title": "Exemple résolu",
-            "digitsCount": "{count} chiffre(s)"
-          }
+        "precisionCutoff": {
+          "title": "Coupure de Précision",
+          "subtitle": "Conservation de {digits} décimales du coefficient",
+          "digitsSliderAria": "Décimales conservées",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "fullCoefficient": "Coefficient complet",
+          "roundedCoefficient": "Coefficient arrondi",
+          "dropped": "Montant perdu"
         },
-        "exponentArithmetic": {
-          "title": "Les exposants s'additionnent pour la multiplication, se soustraient pour la division",
-          "intro": "Les exposants en direct de A et B, combinés des deux façons réelles côte à côte.",
-          "multiplyLabel": "Multiplication",
-          "divideLabel": "Division",
-          "worked": {
-            "title": "Exemple résolu",
-            "exponentA": "Exposant de A",
-            "exponentB": "Exposant de B"
-          }
+        "scientificVsEngineering": {
+          "title": "Règle Scientifique vs. Technique",
+          "subtitle": "La notation technique n'autorise que des exposants multiples de trois",
+          "jumpAria": "Aller à l'exposant {exponent}",
+          "colForm": "Forme",
+          "colValue": "Valeur",
+          "scientific": "Scientifique",
+          "engineering": "Technique",
+          "exponentMod3": "Exposant mod 3"
         },
-        "unitScale": {
-          "title": "Notation scientifique dans les vrais préfixes d'unités",
-          "intro": "L'exposant du A en direct, associé à son véritable préfixe métrique le plus proche — les mêmes unités d'échelle nano/micro/milli/kilo/méga/giga réellement utilisées.",
-          "names": {
-            "nano": "nano",
-            "micro": "micro",
-            "milli": "milli",
-            "base": "base",
-            "kilo": "kilo",
+        "absoluteError": {
+          "title": "Erreur Absolue selon les Décimales Conservées",
+          "subtitle": "Arrondir le coefficient à moins de décimales coûte une précision réelle et mesurable",
+          "colDigitsKept": "Décimales conservées",
+          "colError": "Erreur absolue"
+        },
+        "siPrefixWheel": {
+          "title": "Roue des Préfixes SI",
+          "subtitle": "Préfixe le plus proche : {symbol} ({name})",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "exponent": "Exposant",
+          "nearestPrefix": "Préfixe le plus proche",
+          "prefixExponent": "Exposant du préfixe",
+          "prefixNames": {
+            "yotta": "yotta",
+            "zetta": "zetta",
+            "exa": "exa",
+            "peta": "péta",
+            "tera": "téra",
+            "giga": "giga",
             "mega": "méga",
-            "giga": "giga"
-          },
-          "worked": {
-            "title": "Exemple résolu",
-            "nearestPrefix": "Préfixe le plus proche",
-            "remainder": "Facteur restant",
-            "exactMatch": "Une correspondance exacte — aucun facteur restant"
+            "kilo": "kilo",
+            "base": "unité de base",
+            "milli": "milli",
+            "micro": "micro",
+            "nano": "nano",
+            "pico": "pico",
+            "femto": "femto",
+            "atto": "atto",
+            "zepto": "zepto",
+            "yocto": "yocto"
           }
         },
-        "magnitudeComparison": {
-          "title": "A contre B, par véritable ordre de grandeur",
-          "intro": "Les A et B en direct, comparés directement par taille réelle — pas seulement par quel coefficient paraît plus grand.",
-          "worked": {
-            "title": "Exemple résolu",
-            "bigger": "Valeur la plus grande",
-            "orderGap": "Écart d'ordre de grandeur",
-            "ordersOfMagnitude": "{count} ordre(s) de grandeur"
+        "reciprocalMirror": {
+          "title": "Miroir de l'Inverse",
+          "subtitle": "La valeur en direct, reflétée face à son véritable inverse",
+          "decrease": "Diminuer le coefficient",
+          "increase": "Augmenter le coefficient",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "value": "Valeur",
+          "reciprocal": "Inverse",
+          "product": "Valeur × inverse"
+        },
+        "digitsToExponent": {
+          "title": "Graphique Chiffres → Exposant",
+          "subtitle": "{digits} chiffres signifie exposant {exponent}",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "digitCount": "Nombre de chiffres",
+          "exponent": "Exposant",
+          "formula": "Formule"
+        },
+        "speedsLogScale": {
+          "title": "Vitesses sur Échelle Logarithmique",
+          "subtitle": "Vitesses réelles, de l'escargot à la vitesse de la lumière, sur un seul axe logarithmique",
+          "colName": "Nom",
+          "colSpeed": "Vitesse",
+          "speeds": {
+            "snail": "Escargot de jardin",
+            "walkingHuman": "Humain qui marche",
+            "usainBolt": "Usain Bolt (sprint)",
+            "car": "Voiture sur autoroute",
+            "soundInAir": "Son dans l'air",
+            "commercialJet": "Avion de ligne",
+            "iss": "Station spatiale internationale",
+            "earthOrbitingSun": "La Terre autour du Soleil",
+            "lightSpeed": "Vitesse de la lumière"
           }
         },
-        "normalizationSteps": {
-          "title": "Normaliser un coefficient pour revenir dans la plage",
-          "intro": "Le propre coefficient et exposant du A en direct, parcourus à travers les véritables étapes de normalisation qu'une calculatrice exécute en interne dès qu'un coefficient sort de [1, 10).",
-          "worked": {
-            "title": "Exemple résolu",
-            "stepsTaken": "Étapes effectuées",
-            "alreadyNormalized": "Déjà dans la bonne plage — aucune étape nécessaire",
-            "result": "Résultat"
-          }
+        "addingEqualExponents": {
+          "title": "L'Addition Exige des Exposants Égaux",
+          "subtitle": "Contrairement à la multiplication/division, l'addition exige d'abord un exposant commun",
+          "adjustExponentB": "Ajuster l'exposant de B",
+          "decreaseExponentB": "Diminuer l'exposant de B",
+          "increaseExponentB": "Augmenter l'exposant de B",
+          "colQuantity": "Quantité",
+          "colValue": "Valeur",
+          "commonExponent": "Exposant commun",
+          "shiftedA": "A décalé vers l'exposant commun",
+          "shiftedB": "B décalé vers l'exposant commun",
+          "sum": "Somme"
         },
-        "sigFigsAmbiguity": {
-          "title": "Ce que la forme standard cache sur la précision",
-          "intro": "Le coefficient du A en direct porte un nombre réel et sans ambiguïté de chiffres significatifs — exactement ce qui se perd dès que cette même valeur est complétée en simple forme standard.",
-          "worked": {
-            "title": "Exemple résolu",
-            "unambiguous": "Sans ambiguïté — chaque chiffre affiché est significatif",
-            "ambiguous": "Ambigu — les zéros de fin pourraient être de vrais chiffres ou de simples espaces réservés",
-            "notAmbiguous": "Pas ambigu à cette taille",
-            "sigFigs": "Chiffres significatifs",
-            "note": "Remarque",
-            "trailingZerosNote": "Les zéros de fin ne révèlent pas combien de chiffres ont réellement été mesurés",
-            "noTrailingZerosNote": "Aucun zéro de fin ici pour créer une ambiguïté"
+        "ordersOfMagnitudeAxis": {
+          "title": "Axe des Ordres de Grandeur",
+          "subtitle": "Échelle réelle la plus proche : {name}",
+          "colScale": "Échelle",
+          "colExponent": "Ordre de grandeur",
+          "scales": {
+            "planckLength": "Longueur de Planck",
+            "proton": "Proton",
+            "hydrogenAtom": "Atome d'hydrogène",
+            "virus": "Virus",
+            "humanHairWidth": "Largeur d'un cheveu humain",
+            "grainOfSand": "Grain de sable",
+            "humanHeight": "Taille humaine",
+            "footballField": "Terrain de football",
+            "mountEverest": "Mont Everest",
+            "earthDiameter": "Diamètre de la Terre",
+            "earthToSun": "De la Terre au Soleil",
+            "lightYear": "Année-lumière",
+            "milkyWayDiameter": "Diamètre de la Voie lactée",
+            "observableUniverse": "Univers observable"
           }
         }
       },

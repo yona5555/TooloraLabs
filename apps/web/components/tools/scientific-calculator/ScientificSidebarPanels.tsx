@@ -1,14 +1,15 @@
 "use client";
 /**
- * Owns the shared state (theta, which common-angle row is hovered) for the two sidebar panels
- * that fill the void under the History card (Rule 41): the unit-circle card and the common-angles
- * table card. Seeded ONCE from the calculator's own angle mode + display value (read-only, via
- * ScientificCalcReadonlyContext) -- after that, fully independent of the calculator.
+ * Owns theta for the unit-circle card below the History card (Rule 41). Seeded ONCE from the
+ * calculator's own angle mode + display value (read-only, via ScientificCalcReadonlyContext) --
+ * after that, fully independent of the calculator. The common-angles table that used to live
+ * here was removed (the owner found it useless, cramped, and clipped); the circle now fills
+ * whatever height remains after the History card's own natural height (ScientificCalculator.tsx
+ * measures the calculator card and gives this column that same total height via a CSS var).
  */
 import { useState } from "react";
 import { useScientificCalcReadonly } from "./ScientificCalcReadonlyContext";
 import ScientificUnitCircleCard from "./ScientificUnitCircleCard";
-import ScientificCommonAnglesCard from "./ScientificCommonAnglesCard";
 
 function seedTheta(angleMode: "deg" | "rad", display: string): number {
   const parsed = Number.parseFloat(display);
@@ -22,12 +23,10 @@ export default function ScientificSidebarPanels() {
   const calc = useScientificCalcReadonly();
   const [seed] = useState(() => seedTheta(calc.angleMode, calc.display));
   const [theta, setTheta] = useState(seed);
-  const [hoverAngle, setHoverAngle] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col gap-4">
-      <ScientificUnitCircleCard theta={theta} setTheta={setTheta} seed={seed} hoverAngle={hoverAngle} setHoverAngle={setHoverAngle} />
-      <ScientificCommonAnglesCard theta={theta} hoverAngle={hoverAngle} setHoverAngle={setHoverAngle} />
+    <div className="h-full">
+      <ScientificUnitCircleCard theta={theta} setTheta={setTheta} seed={seed} />
     </div>
   );
 }

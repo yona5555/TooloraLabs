@@ -415,7 +415,9 @@
       },
       "history": {
         "title": "Verlauf",
-        "empty": "Ihre Berechnungen erscheinen hier, sobald Sie sie abgeschlossen haben."
+        "empty": "Ihre Berechnungen erscheinen hier, sobald Sie sie abgeschlossen haben.",
+        "deleteEntry": "{expression} löschen",
+        "total": "Summe"
       },
       "nav": {
         "tool": "Rechner",
@@ -779,12 +781,6 @@
           "increase": "Winkel erhöhen",
           "reset": "Zurücksetzen",
           "hint": "Ziehe den roten Punkt oder nutze die −/+-Schaltflächen. Umschalttaste beim Ziehen halten, um auf 15° zu rasten."
-        },
-        "commonAngles": {
-          "title": "Häufige Winkel",
-          "subtitle": "",
-          "colAngle": "Winkel",
-          "colRad": "Radiant"
         }
       }
     },
@@ -6269,68 +6265,41 @@
           "readOriginal": "Originaltext lesen"
         },
         "hero": {
-          "ariaLabel": "Ein ziehbarer Punkt auf einem Koeffizient-mal-Exponent-Raster, der den tatsächlich live oben verwendeten Wert darstellt — ein zweiter Punkt erscheint für B beim Multiplizieren oder Dividieren",
-          "resultLabel": "Ergebnis",
-          "axisHint": "Koeffizient (y) × 10^Exponent (x)",
-          "hint": "Ziehen Sie einen der Punkte — jede Anzeige auf dieser Seite aktualisiert sich mit, und das echte Ergebnis wird live neu berechnet."
+          "title": "Verschiebbare Größenordnungsebene",
+          "subtitle": "Ziehe den Punkt — seine x-Position legt den Exponenten fest, seine y-Position den Koeffizienten.",
+          "ariaLabel": "Ein verschiebbarer Punkt auf einer Koeffizient-gegen-Exponent-Ebene, deren Achsen zugleich die Exponentenleiter und den Koeffizientenbalken bilden",
+          "axisHint": "x = Exponent (die Leiter), y = Koeffizient (der Balken, gültiger Bereich 1–10)",
+          "hint": "Ziehe den Punkt — jeder Indikator unten aktualisiert sich damit."
         },
-        "largeNumberSteps": {
-          "title": "Eine große Standardzahl umwandeln",
-          "intro": "Der live Wert in Standardform, Schritt für Schritt durch die echte Umwandlung in wissenschaftliche Schreibweise geführt.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "placesMoved": "Verschobene Stellen",
-            "result": "Ergebnis"
-          }
+        "normalizationStaircase": {
+          "title": "Normalisierungstreppe",
+          "subtitle": "Eine reale Spur der Ziffernverschiebung vom Rohwert zur normalisierten Form",
+          "stepSliderAria": "Normalisierungsschritt",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "step": "Schritt",
+          "coefficient": "Koeffizient",
+          "exponent": "Exponent",
+          "normalized": "Normalisiert?",
+          "yes": "Ja",
+          "no": "Nein"
         },
-        "smallNumberSteps": {
-          "title": "Eine kleine Standardzahl umwandeln",
-          "intro": "Der Kehrwert des live Werts in Standardform — eine echte kleine Zahl — auf dieselbe Weise umgewandelt, mit einem echten negativen Exponenten als Ergebnis.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "placesMoved": "Verschobene Stellen",
-            "result": "Ergebnis",
-            "negativeNote": "Negativer Exponent — das Komma wandert nach rechts, nicht nach links"
-          }
+        "coefficientZone": {
+          "title": "Koeffizientenzone",
+          "subtitle": "Der gültige Bereich [1,10), in dem jeder Koeffizient der Wissenschaftsschreibweise liegen muss",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "coefficient": "Koeffizient",
+          "distanceFromOne": "Abstand von 1",
+          "distanceFromTen": "Abstand von 10"
         },
-        "multiplyFormula": {
-          "title": "Zwei Zahlen in wissenschaftlicher Schreibweise multiplizieren",
-          "intro": "Die live A und B multipliziert — Koeffizienten multiplizieren sich, Exponenten addieren sich.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "coefficients": "Koeffizienten multiplizieren sich",
-            "exponents": "Exponenten addieren sich",
-            "result": "Ergebnis"
-          }
-        },
-        "divideFormula": {
-          "title": "Zwei Zahlen in wissenschaftlicher Schreibweise dividieren",
-          "intro": "Die live A geteilt durch B — Koeffizienten dividieren sich, Exponenten subtrahieren sich.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "coefficients": "Koeffizienten dividieren sich",
-            "exponents": "Exponenten subtrahieren sich",
-            "result": "Ergebnis"
-          }
-        },
-        "engineeringEquivalence": {
-          "title": "Wissenschaftliche vs. technische Schreibweise",
-          "intro": "Die live A, in echter wissenschaftlicher Schreibweise neben ihrem echten Äquivalent in technischer Schreibweise — der Konvention, der Einheitenpräfixe tatsächlich folgen.",
-          "scientificLabel": "Wissenschaftliche Schreibweise",
-          "engineeringLabel": "Technische Schreibweise",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "rule": "Regel",
-            "ruleValue": "Der Exponent ist immer ein Vielfaches von 3",
-            "result": "Ergebnis"
-          }
-        },
-        "namedMagnitudes": {
-          "title": "Benannte Größenordnungen, groß und klein",
-          "intro": "Jede benannte Größenordnung, die dieses Tool tatsächlich erkennt — der Exponent von A selbst ist derzeit 10^{exponent}, hervorgehoben ist die, die genau dazu passt.",
-          "matchTag": "Das ist A",
-          "columnName": "Name",
-          "columnValue": "Zehnerpotenz",
+        "namedMagnitudesLadder": {
+          "title": "Leiter benannter Größenordnungen",
+          "subtitle": "Aktueller Exponent: {exponent}",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "currentExponent": "Aktueller Exponent",
+          "nearestName": "Nächstliegender Name",
           "names": {
             "thousand": "Tausend",
             "million": "Million",
@@ -6343,114 +6312,168 @@
             "trillionth": "Billionstel"
           }
         },
-        "realWorldScale": {
-          "title": "Reale Größenordnung, vom Atom bis zum Lichtjahr",
-          "intro": "Reale physikalische Größen auf einer logarithmischen Skala, mit einem live Marker, der genau zeigt, wo der Exponent von A selbst unter ihnen liegt.",
-          "items": {
-            "atom": "Wasserstoffatom",
-            "virus": "Virus",
-            "grain": "Sandkorn",
-            "human": "Menschliche Körpergröße",
-            "building": "Hochhaus",
-            "earthDiameter": "Erddurchmesser",
-            "lightYear": "Lichtjahr"
-          },
-          "worked": {
-            "title": "Rechenbeispiel",
-            "currentExponent": "Exponent von A selbst"
-          }
+        "linearVsLog": {
+          "title": "Lineare vs. logarithmische Balken",
+          "subtitle": "Derselbe Wert auf einem linearen Balken (wo er verschwindet) und einem logarithmischen Balken (wo er lesbar bleibt)",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "linearLabel": "Lineare Skala",
+          "logLabel": "Logarithmische Skala",
+          "standardValue": "Standardwert",
+          "linearPosition": "Lineare Position",
+          "offScale": "Außerhalb der Skala",
+          "logExponent": "Exponent (log-Skala)"
         },
-        "coefficientRange": {
-          "title": "Liegt der Koeffizient tatsächlich im Bereich?",
-          "intro": "Echte wissenschaftliche Schreibweise erfordert einen Koeffizienten zwischen 1 und 10 — dieser Streifen zeigt live, ob der Koeffizient von A tatsächlich in diesem Bereich liegt.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "coefficient": "Koeffizient von A",
-            "status": "Status",
-            "inRange": "Im Bereich",
-            "outOfRange": "Außerhalb des Bereichs",
-            "needsNormalizing": "Dies müsste normalisiert werden, bevor es als korrekte wissenschaftliche Schreibweise zählt"
-          }
+        "multiplyTape": {
+          "title": "Multiplikationsband",
+          "subtitle": "Koeffizienten werden multipliziert, Exponenten addiert, danach bei Bedarf renormalisiert",
+          "adjustB": "Koeffizient von B anpassen",
+          "decreaseB": "Koeffizient von B verringern",
+          "increaseB": "Koeffizient von B erhöhen",
+          "renormalizeNeeded": "Renormalisierung nötig",
+          "alreadyNormalized": "Bereits normalisiert",
+          "colStep": "Schritt",
+          "colValue": "Wert",
+          "rawProduct": "Rohes Produkt",
+          "normalized": "Normalisiert"
         },
-        "exponentSign": {
-          "title": "Positive und negative Exponenten, ausbalanciert",
-          "intro": "Die live Exponenten von A und B auf einer gemeinsamen Waage — positiv bedeutet eine große Zahl, negativ eine kleine.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "large": "Große Zahl (positiver Exponent)",
-            "small": "Kleine Zahl (negativer Exponent)"
-          }
+        "divideTape": {
+          "title": "Divisionsband",
+          "subtitle": "Koeffizienten werden dividiert, Exponenten subtrahiert, danach bei Bedarf renormalisiert",
+          "adjustExponentB": "Exponent von B anpassen",
+          "decreaseExponentB": "Exponent von B verringern",
+          "increaseExponentB": "Exponent von B erhöhen",
+          "renormalizeNeeded": "Renormalisierung nötig",
+          "alreadyNormalized": "Bereits normalisiert",
+          "colStep": "Schritt",
+          "colValue": "Wert",
+          "rawQuotient": "Roher Quotient",
+          "normalized": "Normalisiert"
         },
-        "digitCount": {
-          "title": "Wie viele Stellen, ohne sie auszuschreiben",
-          "intro": "Die echte Stellenanzahl von A und B in voller Standardform — der Exponent allein verrät es, ohne die Zahl ausschreiben zu müssen.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "digitsCount": "{count} Stelle(n)"
-          }
+        "precisionCutoff": {
+          "title": "Präzisions-Cutoff",
+          "subtitle": "{digits} Nachkommastellen des Koeffizienten werden behalten",
+          "digitsSliderAria": "Behaltene Stellen",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "fullCoefficient": "Vollständiger Koeffizient",
+          "roundedCoefficient": "Gerundeter Koeffizient",
+          "dropped": "Verworfener Betrag"
         },
-        "exponentArithmetic": {
-          "title": "Exponenten addieren sich bei Multiplikation, subtrahieren sich bei Division",
-          "intro": "Die live Exponenten von A und B, auf beide echten Arten nebeneinander kombiniert.",
-          "multiplyLabel": "Multiplikation",
-          "divideLabel": "Division",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "exponentA": "Exponent von A",
-            "exponentB": "Exponent von B"
-          }
+        "scientificVsEngineering": {
+          "title": "Wissenschaftliche vs. technische Skala",
+          "subtitle": "Die technische Schreibweise erlaubt nur Exponenten, die Vielfache von drei sind",
+          "jumpAria": "Zu Exponent {exponent} springen",
+          "colForm": "Form",
+          "colValue": "Wert",
+          "scientific": "Wissenschaftlich",
+          "engineering": "Technisch",
+          "exponentMod3": "Exponent mod 3"
         },
-        "unitScale": {
-          "title": "Wissenschaftliche Schreibweise in echten Einheitenpräfixen",
-          "intro": "Der Exponent der live A, abgeglichen mit dem nächstgelegenen echten metrischen Präfix — denselben Nano-/Mikro-/Milli-/Kilo-/Mega-/Giga-Skaleneinheiten, die tatsächlich verwendet werden.",
-          "names": {
-            "nano": "Nano",
-            "micro": "Mikro",
-            "milli": "Milli",
-            "base": "Basis",
-            "kilo": "Kilo",
+        "absoluteError": {
+          "title": "Absoluter Fehler nach behaltenen Stellen",
+          "subtitle": "Das Runden des Koeffizienten auf weniger Stellen kostet echte, messbare Genauigkeit",
+          "colDigitsKept": "Behaltene Stellen",
+          "colError": "Absoluter Fehler"
+        },
+        "siPrefixWheel": {
+          "title": "SI-Präfix-Rad",
+          "subtitle": "Nächstliegendes SI-Präfix: {symbol} ({name})",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "exponent": "Exponent",
+          "nearestPrefix": "Nächstliegendes Präfix",
+          "prefixExponent": "Präfix-Exponent",
+          "prefixNames": {
+            "yotta": "Yotta",
+            "zetta": "Zetta",
+            "exa": "Exa",
+            "peta": "Peta",
+            "tera": "Tera",
+            "giga": "Giga",
             "mega": "Mega",
-            "giga": "Giga"
-          },
-          "worked": {
-            "title": "Rechenbeispiel",
-            "nearestPrefix": "Nächstes Präfix",
-            "remainder": "Verbleibender Faktor",
-            "exactMatch": "Eine exakte Übereinstimmung — kein verbleibender Faktor"
+            "kilo": "Kilo",
+            "base": "Basiseinheit",
+            "milli": "Milli",
+            "micro": "Mikro",
+            "nano": "Nano",
+            "pico": "Piko",
+            "femto": "Femto",
+            "atto": "Atto",
+            "zepto": "Zepto",
+            "yocto": "Yokto"
           }
         },
-        "magnitudeComparison": {
-          "title": "A vs. B, nach echter Größenordnung",
-          "intro": "Die live A und B, direkt nach tatsächlicher Größe verglichen — nicht nur danach, welcher Koeffizient größer aussieht.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "bigger": "Größerer Wert",
-            "orderGap": "Größenordnungsunterschied",
-            "ordersOfMagnitude": "{count} Größenordnung(en)"
+        "reciprocalMirror": {
+          "title": "Kehrwert-Spiegel",
+          "subtitle": "Der Live-Wert, gespiegelt an seinem echten Kehrwert",
+          "decrease": "Koeffizient verringern",
+          "increase": "Koeffizient erhöhen",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "value": "Wert",
+          "reciprocal": "Kehrwert",
+          "product": "Wert × Kehrwert"
+        },
+        "digitsToExponent": {
+          "title": "Ziffern → Exponent-Diagramm",
+          "subtitle": "{digits} Ziffern bedeuten Exponent {exponent}",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "digitCount": "Ziffernanzahl",
+          "exponent": "Exponent",
+          "formula": "Formel"
+        },
+        "speedsLogScale": {
+          "title": "Geschwindigkeiten auf logarithmischer Skala",
+          "subtitle": "Reale Geschwindigkeiten von der Gartenschnecke bis zur Lichtgeschwindigkeit, auf einer logarithmischen Achse",
+          "colName": "Name",
+          "colSpeed": "Geschwindigkeit",
+          "speeds": {
+            "snail": "Gartenschnecke",
+            "walkingHuman": "Gehender Mensch",
+            "usainBolt": "Usain Bolt (Sprint)",
+            "car": "Auto auf der Autobahn",
+            "soundInAir": "Schall in Luft",
+            "commercialJet": "Verkehrsflugzeug",
+            "iss": "Internationale Raumstation",
+            "earthOrbitingSun": "Erde um die Sonne",
+            "lightSpeed": "Lichtgeschwindigkeit"
           }
         },
-        "normalizationSteps": {
-          "title": "Einen Koeffizienten zurück in den Bereich normalisieren",
-          "intro": "Der Koeffizient und Exponent der live A, Schritt für Schritt durch die echten Normalisierungsschritte geführt, die ein Rechner intern durchführt, sobald ein Koeffizient außerhalb von [1, 10) liegt.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "stepsTaken": "Durchgeführte Schritte",
-            "alreadyNormalized": "Bereits im richtigen Bereich — keine Schritte nötig",
-            "result": "Ergebnis"
-          }
+        "addingEqualExponents": {
+          "title": "Addition erfordert gleiche Exponenten",
+          "subtitle": "Anders als bei Multiplikation/Division braucht Addition zuerst einen gemeinsamen Exponenten",
+          "adjustExponentB": "Exponent von B anpassen",
+          "decreaseExponentB": "Exponent von B verringern",
+          "increaseExponentB": "Exponent von B erhöhen",
+          "colQuantity": "Größe",
+          "colValue": "Wert",
+          "commonExponent": "Gemeinsamer Exponent",
+          "shiftedA": "A auf gemeinsamen Exponenten verschoben",
+          "shiftedB": "B auf gemeinsamen Exponenten verschoben",
+          "sum": "Summe"
         },
-        "sigFigsAmbiguity": {
-          "title": "Was die Standardform über Präzision verbirgt",
-          "intro": "Der Koeffizient der live A trägt eine echte, eindeutige Anzahl signifikanter Stellen — genau das, was verloren geht, sobald derselbe Wert in einfache Standardform aufgefüllt wird.",
-          "worked": {
-            "title": "Rechenbeispiel",
-            "unambiguous": "Eindeutig — jede gezeigte Ziffer ist signifikant",
-            "ambiguous": "Mehrdeutig — nachgestellte Nullen könnten echte Ziffern oder nur Platzhalter sein",
-            "notAmbiguous": "Bei dieser Größe nicht mehrdeutig",
-            "sigFigs": "Signifikante Stellen",
-            "note": "Hinweis",
-            "trailingZerosNote": "Die nachgestellten Nullen verraten nicht, wie viele Stellen tatsächlich gemessen wurden",
-            "noTrailingZerosNote": "Keine nachgestellten Nullen hier, die Mehrdeutigkeit erzeugen könnten"
+        "ordersOfMagnitudeAxis": {
+          "title": "Größenordnungsachse",
+          "subtitle": "Nächstliegende reale Skala: {name}",
+          "colScale": "Skala",
+          "colExponent": "Größenordnung",
+          "scales": {
+            "planckLength": "Planck-Länge",
+            "proton": "Proton",
+            "hydrogenAtom": "Wasserstoffatom",
+            "virus": "Virus",
+            "humanHairWidth": "Breite eines menschlichen Haars",
+            "grainOfSand": "Sandkorn",
+            "humanHeight": "Menschliche Körpergröße",
+            "footballField": "Fußballfeld",
+            "mountEverest": "Mount Everest",
+            "earthDiameter": "Erddurchmesser",
+            "earthToSun": "Erde bis Sonne",
+            "lightYear": "Lichtjahr",
+            "milkyWayDiameter": "Durchmesser der Milchstraße",
+            "observableUniverse": "Beobachtbares Universum"
           }
         }
       },

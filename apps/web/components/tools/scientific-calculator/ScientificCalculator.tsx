@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useReducer, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
@@ -20,6 +20,20 @@ export default function ScientificCalculator({ education }: { education: ReactNo
   const tNav = useTranslations("tools.scientific-calculator.nav");
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
   const [angleDeg, setAngleDeg] = useState(40);
+
+  // Measures the calculator card's own rendered height so the sidebar column (History + Unit
+  // Circle) can match it exactly via a CSS var, the same technique ToolAboveFold itself already
+  // uses for its own input/result height-matching -- gated to `lg` only via the CSS var + an
+  // arbitrary-property class below, so it's inert on mobile/tablet where the columns stack.
+  const calcRef = useRef<HTMLDivElement>(null);
+  const [calcHeight, setCalcHeight] = useState<number | undefined>(undefined);
+  useLayoutEffect(() => {
+    const el = calcRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => setCalcHeight(entries[0].contentRect.height));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     function handleKeydown(event: KeyboardEvent) {
@@ -87,15 +101,23 @@ export default function ScientificCalculator({ education }: { education: ReactNo
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <div className="flex flex-col gap-4">
-              <ScientificHistoryPanel
-                history={state.history}
-                onSelect={(value) => dispatch({ type: "loadHistory", value })}
-              />
-              <ScientificSidebarPanels />
+            <div
+              className="flex flex-col gap-4 lg:[height:var(--sci-col-h)]"
+              style={calcHeight ? ({ "--sci-col-h": `${calcHeight}px` } as CSSProperties) : undefined}
+            >
+              <div className="shrink-0">
+                <ScientificHistoryPanel
+                  history={state.history}
+                  onSelect={(value) => dispatch({ type: "loadHistory", value })}
+                  onDelete={(id) => dispatch({ type: "deleteHistory", id })}
+                />
+              </div>
+              <div className="min-h-0 flex-1">
+                <ScientificSidebarPanels />
+              </div>
             </div>
           }
-          result={<ScientificKeypad state={state} dispatch={dispatch} />}
+          result={<div ref={calcRef}><ScientificKeypad state={state} dispatch={dispatch} /></div>}
           sidebar={<RelatedToolsSidebar currentSlug="scientific-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

@@ -66,7 +66,8 @@ export type CalculatorAction =
   | { type: "memorySubtract" }
   | { type: "memoryRecall" }
   | { type: "ans" }
-  | { type: "loadHistory"; value: number };
+  | { type: "loadHistory"; value: number }
+  | { type: "deleteHistory"; id: number };
 
 function pushHistory(state: CalculatorState, expression: string, result: number): Pick<CalculatorState, "history" | "historySeq"> {
   const entry: HistoryEntry = { id: state.historySeq, expression, result };
@@ -253,6 +254,11 @@ export function calculatorReducer(
 
     case "loadHistory":
       return { ...state, display: formatResult(action.value), ans: action.value, overwrite: true, errorCode: null };
+
+    // Touches ONLY the history list -- display, memory, ans, and everything else are untouched,
+    // same object references even, so this can never be mistaken for a calculator-state change.
+    case "deleteHistory":
+      return { ...state, history: state.history.filter((entry) => entry.id !== action.id) };
 
     default:
       return state;

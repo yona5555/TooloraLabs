@@ -4,22 +4,23 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import ScientificNotationMagnitudeDrag from "./ScientificNotationMagnitudeDrag";
-import LargeNumberConversionSteps from "./LargeNumberConversionSteps";
-import SmallNumberConversionSteps from "./SmallNumberConversionSteps";
-import MultiplyFormulaDiagram from "./MultiplyFormulaDiagram";
-import DivideFormulaDiagram from "./DivideFormulaDiagram";
-import ExponentArithmeticComparison from "./ExponentArithmeticComparison";
-import CoefficientRangeZoneStrip from "./CoefficientRangeZoneStrip";
-import NormalizationSteppedDiagram from "./NormalizationSteppedDiagram";
-import EngineeringNotationEquivalence from "./EngineeringNotationEquivalence";
-import SignificantFiguresAmbiguity from "./SignificantFiguresAmbiguity";
-import DigitCountComparisonBarChart from "./DigitCountComparisonBarChart";
-import NamedMagnitudesTable from "./NamedMagnitudesTable";
-import ExponentSignBalance from "./ExponentSignBalance";
-import RealWorldScaleBar from "./RealWorldScaleBar";
-import MagnitudeComparisonCards from "./MagnitudeComparisonCards";
-import UnitScaleFlowDiagram from "./UnitScaleFlowDiagram";
+import { GlassPage, GlassIndicatorGrid } from "@/components/tool-ui/glass/GlassPrimitives";
+import ScientificNotationHero from "./ScientificNotationHero";
+import NormalizationStaircaseCard from "./NormalizationStaircaseCard";
+import CoefficientZoneCard from "./CoefficientZoneCard";
+import NamedMagnitudesLadderCard from "./NamedMagnitudesLadderCard";
+import LinearVsLogCard from "./LinearVsLogCard";
+import MultiplyTapeCard from "./MultiplyTapeCard";
+import DivideTapeCard from "./DivideTapeCard";
+import PrecisionCutoffCard from "./PrecisionCutoffCard";
+import ScientificVsEngineeringCard from "./ScientificVsEngineeringCard";
+import AbsoluteErrorCard from "./AbsoluteErrorCard";
+import SiPrefixWheelCard from "./SiPrefixWheelCard";
+import ReciprocalMirrorCard from "./ReciprocalMirrorCard";
+import DigitsToExponentCard from "./DigitsToExponentCard";
+import SpeedsLogScaleCard from "./SpeedsLogScaleCard";
+import AddingEqualExponentsCard from "./AddingEqualExponentsCard";
+import OrdersOfMagnitudeAxisCard from "./OrdersOfMagnitudeAxisCard";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -31,109 +32,106 @@ export default async function ScientificNotationEducation() {
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
   return (
-    <EncyclopediaPaper>
-      <InfoSection title={t("intro.title")}>
-        <p>{t("intro.paragraph1")}</p>
-        <ScientificNotationMagnitudeDrag />
-        <p>{t("intro.paragraph2")}</p>
-        <p>{t("intro.paragraph3")}</p>
-        <div className="space-y-6">
-          <LargeNumberConversionSteps />
-          <SmallNumberConversionSteps />
-        </div>
-      </InfoSection>
+    <>
+      <GlassPage>
+        <ScientificNotationHero />
+        <GlassIndicatorGrid>
+          <NormalizationStaircaseCard />
+          <CoefficientZoneCard />
+          <NamedMagnitudesLadderCard />
+          <LinearVsLogCard />
+          <MultiplyTapeCard />
+          <DivideTapeCard />
+          <PrecisionCutoffCard />
+          <ScientificVsEngineeringCard />
+          <AbsoluteErrorCard />
+          <SiPrefixWheelCard />
+          <ReciprocalMirrorCard />
+          <DigitsToExponentCard />
+          <SpeedsLogScaleCard />
+          <AddingEqualExponentsCard />
+          <OrdersOfMagnitudeAxisCard />
+        </GlassIndicatorGrid>
+      </GlassPage>
 
-      <InfoSection title={t("arithmetic.title")}>
-        <p>{t("arithmetic.intro")}</p>
-        <div className="space-y-6">
-          <MultiplyFormulaDiagram />
-          <DivideFormulaDiagram />
-          <ExponentArithmeticComparison />
-        </div>
-      </InfoSection>
+      <EncyclopediaPaper>
+        <InfoSection title={t("intro.title")}>
+          <p>{t("intro.paragraph1")}</p>
+          <p>{t("intro.paragraph2")}</p>
+          <p>{t("intro.paragraph3")}</p>
+        </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+        <InfoSection title={t("arithmetic.title")}>
+          <p>{t("arithmetic.intro")}</p>
+        </InfoSection>
 
-      <InfoSection title={t("precision.title")}>
-        <p>{t("precision.intro")}</p>
-        <div className="space-y-6">
-          <CoefficientRangeZoneStrip />
-          <NormalizationSteppedDiagram />
-          <EngineeringNotationEquivalence />
-          <SignificantFiguresAmbiguity />
-          <DigitCountComparisonBarChart />
-        </div>
-      </InfoSection>
+        <AdSpace variant="leaderboard" />
 
-      <InfoSection title={t("examples.title")}>
-        <p>{t("examples.intro")}</p>
-        <div dir="ltr" className="overflow-x-auto">
-          <table className="w-full min-w-[420px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-current/30 text-start">
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnCalculation")}</th>
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exampleRows.map((row) => (
-                <tr key={row.calculation} className="border-b border-current/10">
-                  <td className="px-3 py-2.5">{row.calculation}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+        <InfoSection title={t("precision.title")}>
+          <p>{t("precision.intro")}</p>
+        </InfoSection>
+
+        <InfoSection title={t("examples.title")}>
+          <p>{t("examples.intro")}</p>
+          <div dir="ltr" className="overflow-x-auto">
+            <table className="w-full min-w-[420px] border-collapse text-sm">
+              <thead>
+                <tr className="border-b border-current/30 text-start">
+                  <th className="px-3 py-2 text-start font-semibold">{t("examples.columnCalculation")}</th>
+                  <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="space-y-6">
-          <NamedMagnitudesTable />
-          <ExponentSignBalance />
-        </div>
-      </InfoSection>
+              </thead>
+              <tbody>
+                {exampleRows.map((row) => (
+                  <tr key={row.calculation} className="border-b border-current/10">
+                    <td className="px-3 py-2.5">{row.calculation}</td>
+                    <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </InfoSection>
 
-      <InfoSection title={t("realWorld.title")}>
-        <p>{t("realWorld.intro")}</p>
-        <div className="space-y-6">
-          <RealWorldScaleBar />
-          <MagnitudeComparisonCards />
-          <UnitScaleFlowDiagram />
-        </div>
-      </InfoSection>
+        <InfoSection title={t("realWorld.title")}>
+          <p>{t("realWorld.intro")}</p>
+        </InfoSection>
 
-      <InfoSection id="faq" title={t("faq.title")}>
-        <FAQAccordion items={faqItems} />
-      </InfoSection>
+        <InfoSection id="faq" title={t("faq.title")}>
+          <FAQAccordion items={faqItems} />
+        </InfoSection>
 
-      <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
-        </div>
-        <div>
-          <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
-          <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
-        </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
-      </InfoSection>
+        <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
+          <div>
+            <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
+            <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
+            <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+          </div>
+          <AcademicPathSection
+            title={t("behindTheTool.academicPath.title")}
+            intro={t("behindTheTool.academicPath.intro")}
+            universities={universities}
+          />
+        </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+        <AdSpace variant="leaderboard" />
 
-      <InfoSection title={t("references.title")}>
-        <p>{t("references.citation")}</p>
-        <p className="text-sm opacity-70">{t("references.note")}</p>
-        <a
-          href={t("references.url")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 inline-flex rounded-sm border border-current/40 px-5 py-2.5 text-sm font-semibold no-underline transition hover:bg-current/5"
-        >
-          {t("references.readOriginal")}
-        </a>
-      </InfoSection>
-    </EncyclopediaPaper>
+        <InfoSection title={t("references.title")}>
+          <p>{t("references.citation")}</p>
+          <p className="text-sm opacity-70">{t("references.note")}</p>
+          <a
+            href={t("references.url")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex rounded-sm border border-current/40 px-5 py-2.5 text-sm font-semibold no-underline transition hover:bg-current/5"
+          >
+            {t("references.readOriginal")}
+          </a>
+        </InfoSection>
+      </EncyclopediaPaper>
+    </>
   );
 }

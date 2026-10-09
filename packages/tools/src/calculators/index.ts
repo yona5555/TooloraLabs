@@ -27,6 +27,7 @@ export * from "./ZipCompressor";
 export * from "./FractionCalculator";
 export * from "./FractionCalculatorGraph";
 export * from "./ScientificNotationConverter";
+export * from "./ScientificNotationConverterGraph";
 export * from "./SignificantFiguresCalculator";
 export * from "./GpaCalculator";
 export * from "./DensityCalculator";

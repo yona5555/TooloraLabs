@@ -121,7 +121,7 @@ function useRevealed<T extends HTMLElement>() {
  * IntersectionObserver both resolve to "already revealed" so content is never stuck hidden. The
  * print override is a belt-and-suspenders safety net -- browser print already shows a completely
  * separate [data-print-area] subtree (globals.css), these cards aren't in it either way. */
-function Reveal({ children, "data-testid": testId }: { children: ReactNode; "data-testid"?: string }) {
+function Reveal({ children, "data-testid": testId, className }: { children: ReactNode; "data-testid"?: string; className?: string }) {
   const { ref, revealed: observed } = useRevealed<HTMLDivElement>();
   const reducedMotion = usePrefersReducedMotion();
   const revealed = observed || reducedMotion;
@@ -130,7 +130,7 @@ function Reveal({ children, "data-testid": testId }: { children: ReactNode; "dat
       ref={ref}
       data-revealed={revealed}
       data-testid={testId}
-      className="print:opacity-100! print:translate-y-0!"
+      className={`print:opacity-100! print:translate-y-0!${className ? ` ${className}` : ""}`}
       style={{
         opacity: revealed ? 1 : 0,
         transform: revealed ? "translateY(0)" : "translateY(12px)",
@@ -177,6 +177,7 @@ export function GlassHeroCard({
   subtitle,
   children,
   compact = false,
+  fill = false,
 }: {
   n?: number;
   accent?: AccentKey;
@@ -187,11 +188,21 @@ export function GlassHeroCard({
    * sidebar column capped by a sibling it can't resize, §41) -- defaults to false, so every
    * existing caller's padding is unchanged. */
   compact?: boolean;
+  /** The card (and its content wrapper) stretches to 100% of whatever height its own flex parent
+   * gives it, instead of sizing to its content -- for a card that's meant to grow/shrink to fill
+   * a flex column (§41) rather than reserve a fixed height. Defaults to false; every existing
+   * caller's sizing is unchanged. Implies `compact`. */
+  fill?: boolean;
 }) {
   return (
-    <Reveal data-testid={`reveal-${n}`}>
-      <SectionCard title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName={compact ? "p-3" : "p-4 lg:p-6"}>
-        <div data-hero-card={n}>
+    <Reveal data-testid={`reveal-${n}`} className={fill ? "flex h-full flex-col" : undefined}>
+      <SectionCard
+        title={<CardTitle n={n} title={title} />}
+        id={`card-${n}`}
+        className={fill ? "flex h-full min-h-0 flex-col" : undefined}
+        bodyClassName={fill ? "flex flex-1 flex-col min-h-0 p-3" : compact ? "p-3" : "p-4 lg:p-6"}
+      >
+        <div data-hero-card={n} className={fill ? "flex h-full min-h-0 flex-1 flex-col" : undefined}>
           {subtitle && (
             <p className="text-xs sm:text-sm" style={{ color: "var(--glass-subtitle)" }}>
               {subtitle}
