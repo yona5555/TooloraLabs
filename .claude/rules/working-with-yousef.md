@@ -17,6 +17,7 @@
 - لا تضف خطوة «فحص قبل البدء» داخل الأمر؛ هو يوقف التنفيذ بنفسه عند الحاجة.
 - إن قال «اكتب» صراحة فاكتب الأوامر. وإن لم يقلها فلا تكتب أوامر Claude Code من تلقاء نفسك.
 - حين يقول «لا تفحص، أريد أمراً فقط» فالتزم حرفياً. قال: «لا تقم بفحص لأنك ضعيف في الفحص».
+- Give Yousef ready-to-paste English commands only. Never tell him to type or do something himself (no 'type /memory', no 'run /clear', no manual steps).
 
 ## 3. الصدق في الإنجاز
 - إن لم تجد شيئاً طلبه (ملف، مكوّن) فاطلب اسمه.
