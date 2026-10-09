@@ -18,7 +18,9 @@ export default function RandomQuoteGenerator({ education }: { education: ReactNo
   const tNav = useTranslations("tools.random-quote-generator.nav");
   const [category, setCategory] = useState<QuoteCategory | "all">("all");
   const [quote, setQuote] = useState<Quote>(
-    () => tool.execute({ category: "all" }, { locale: "en-US" }).data.quote,
+    // Fixed first quote so server and client render the same markup; a random
+    // one here broke hydration (and with it the dark-theme class on <html>).
+    () => tool.execute({ category: "all", randomFn: () => 0 }, { locale: "en-US" }).data.quote,
   );
 
   function handleNewQuote() {
