@@ -13,11 +13,9 @@ import type { LucideIcon } from "lucide-react";
  * hooks needed).
  *
  * Purely presentational — this header has no hover behavior of its own.
- * The whole-card hover reveal (both the tool-card and category-card
- * variants) lives one level up, in the card component wrapping this
+ * The whole-card hover reveal (category cards) lives one level up, in the card component wrapping this
  * header, which layers an opaque overlay on top of the entire card
- * (header included) on hover — see DecoratedToolCard.tsx and
- * HeroCategories.tsx.
+ * (header included) on hover — see HeroCategories.tsx.
  */
 
 const MATH_SYMBOLS = ["+", "−", "×", "÷", "=", "%"];

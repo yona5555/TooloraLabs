@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
-import DecoratedToolCard from "@/components/tool-ui/DecoratedToolCard";
+import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
 
 type CategoryPageProps = {
@@ -79,7 +79,7 @@ export default async function CategoryPage({
       {categoryTools.length > 0 ? (
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {categoryTools.map((tool) => (
-            <DecoratedToolCard
+            <ToolCard
               key={tool.slug}
               tool={tool}
               titleText={tTools(`${tool.slug}.title`)}

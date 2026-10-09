@@ -157,7 +157,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
           {input}
         </div>
       </div>
-      <div ref={resultRef} className="min-w-0 lg:col-start-2 lg:row-start-1">
+      <div ref={resultRef} data-tool-result className="min-w-0 lg:col-start-2 lg:row-start-1">
         {result}
       </div>
       {secondary && (

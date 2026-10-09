@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
-import DecoratedToolCard from "@/components/tool-ui/DecoratedToolCard";
+import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
 
 type ToolsPageProps = {
@@ -58,7 +58,7 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
 
               <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {categoryTools.map((tool) => (
-                  <DecoratedToolCard
+                  <ToolCard
                     key={tool.slug}
                     tool={tool}
                     titleText={tTools(`${tool.slug}.title`)}

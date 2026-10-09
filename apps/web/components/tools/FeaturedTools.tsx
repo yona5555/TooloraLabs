@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { tools } from "@/data/tools";
-import DecoratedToolCard from "@/components/tool-ui/DecoratedToolCard";
+import ToolCard from "@/components/tool-ui/ToolCard";
 
 // Every card in this section is already `tool.featured` by definition (filtered below), and the
 // section itself is titled/badged "Featured" — repeating a per-card "Featured" badge here would
@@ -29,9 +29,9 @@ export default function FeaturedTools() {
         </p>
       </div>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {featuredTools.map((tool) => (
-          <DecoratedToolCard
+          <ToolCard
             key={tool.slug}
             tool={tool}
             titleText={tTools(`${tool.slug}.title`)}

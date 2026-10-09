@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { tools } from "@/data/tools";
-import DecoratedToolCard from "@/components/tool-ui/DecoratedToolCard";
+import ToolCard from "@/components/tool-ui/ToolCard";
 import AdSpace from "@/components/tool-ui/AdSpace";
 
 type Props = {
@@ -32,16 +32,14 @@ export default async function RelatedTools({
             {t("relatedTools")}
           </h2>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-6 sm:grid-cols-2">
             {related.map((tool) => (
-              <DecoratedToolCard
+              <ToolCard
                 key={tool.slug}
                 tool={tool}
                 titleText={tTools(`${tool.slug}.title`)}
                 descriptionText={tTools(`${tool.slug}.description`)}
                 featuredLabel={tToolsPage("featuredBadge")}
-                size="small"
-                showTags={false}
               />
             ))}
           </div>
