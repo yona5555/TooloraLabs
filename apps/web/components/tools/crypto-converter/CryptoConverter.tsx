@@ -112,7 +112,7 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
               <SectionNav items={navItems} />
               <ViewDocsLink slug="crypto-converter" />
               <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
-              <CryptoHistoricalChart coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
+              <CryptoHistoricalChart coin={fromCoin} digitStyle={digitStyle} />
               <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
               <CryptoNews />
               <CryptoLearningResources />
