@@ -8,6 +8,7 @@ paths:
 > يعتمد على §8–§9 و§13 و§17–§18 و§20 و§22–§43 من `TooloraLabs-Claude-Instructions.md`. لا تخترع نوعاً عشوائياً؛ اختر من القائمة بما يخدم طبيعة البيانات.
 
 ## 1. هيكل صفحة الأداة (§8)
+- **General rule (every tool):** Top of every tool page = 3 columns: input (left), result with a live indicator (middle), RelatedToolsSidebar + 300×600 AdSpace (right). Below it, cards span the full width with leaderboard ads between sections only. Reference: `loan-calculator` via `ToolAboveFold`; the right column hides on mobile and the columns stack.
 - Above the Fold بلا تمرير: 3 أعمدة — إدخال (~320px) بقيم افتراضية تعطي نتيجة فوراً؛ نتيجة (~380–400px) مع مؤشر تفاعلي حقيقي (ممنوع رسم ثابت)؛ يمين (~300px) أدوات ذات صلة + AdSpace. على الموبايل تتكدس الأعمدة.
 - القسم الموسوعي (EncyclopediaPaper) يحاكي ورقة A4 علمية؛ مؤشرات §31–§43 ملوّنة داخل بطاقات.
 - أمثلة محلولة، أسئلة شائعة، «خلف الأداة» (تاريخ، معايير، مسار أكاديمي: 5 جامعات عالمية + جامعة/اثنتان عربيتان، يُتحقق منها ببحث حقيقي).
@@ -67,6 +68,7 @@ paths:
 ## 5. قالب التطبيق الإلزامي (§32)
 - كل مؤشر داخل `SectionCard` مستقلة: إطار كامل + رأس أزرق (`bg-blue-600`) + عنوان واضح.
 - جدول **WORKED EXAMPLE** ملاصق **بجانب** المؤشر لا أسفله، وبالعمق نفسه لبقية مؤشرات الصفحة.
+  - **Approved exception (candlestick charts only):** no WORKED EXAMPLE table beside a candlestick chart; the hover tooltip already shows the same OHLC data, and the chart spans the full card width with a fullscreen button (e.g. `CryptoHistoricalChart.tsx`).
 - حجم المؤشرات موحّد ومتوسط (الوزن البصري الفعلي لا `viewBox` فقط). أبعاد SVG ثابتة بخاصيتي `width`/`height` (مثل 168×168 للدونات) لا بصنف CSS متغيّر.
 - كل قسم له `h3` وجملة تمهيدية خاصة، بلا تكرار معلومات بين الأقسام.
 - ممنوع دمج نوعين من الرسوم في بطاقة واحدة (بند 6).

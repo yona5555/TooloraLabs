@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { Maximize2, Minimize2 } from "lucide-react";
 import {
   CandlestickSeries,
   ColorType,
@@ -26,7 +27,6 @@ import {
   type CryptoCoin,
 } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import { useLiveTicks } from "./useCryptoLive";
 import { changeColor, useCryptoFormatters, useFiat } from "./cryptoFormat";
@@ -52,7 +52,7 @@ const UP = "#10b981";
 const DOWN = "#ef4444";
 const MA20_COLOR = "#f59e0b";
 const MA50_COLOR = "#8b5cf6";
-const CHART_HEIGHT = 380;
+const CHART_HEIGHT = 460;
 
 export default function CryptoHistoricalChart({ coin, coins, onSelectCoin, digitStyle, onCandles }: CryptoHistoricalChartProps) {
   const t = useTranslations("tools.crypto-converter.chart");
@@ -70,6 +70,20 @@ export default function CryptoHistoricalChart({ coin, coins, onSelectCoin, digit
   const [showMa50, setShowMa50] = useState(true);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [retry, setRetry] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const fullscreenRef = useRef<HTMLDivElement>(null);
+
+  // The browser owns the state (Esc exits natively), so mirror it rather than track clicks.
+  useEffect(() => {
+    const sync = () => setIsFullscreen(document.fullscreenElement === fullscreenRef.current && fullscreenRef.current !== null);
+    document.addEventListener("fullscreenchange", sync);
+    return () => document.removeEventListener("fullscreenchange", sync);
+  }, []);
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void fullscreenRef.current?.requestFullscreen();
+  }
 
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
@@ -209,56 +223,12 @@ export default function CryptoHistoricalChart({ coin, coins, onSelectCoin, digit
       </h3>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-[15rem_minmax(0,1fr)]">
-      {/* Live price list: on desktop it fills the chart column's height and scrolls; on mobile it sits above the chart. */}
-      <div className="relative min-h-0">
-        <div className="flex max-h-72 flex-col overflow-hidden rounded-xl border border-zinc-200 lg:absolute lg:inset-0 lg:max-h-none dark:border-zinc-800">
-          <div className="flex items-center justify-between bg-zinc-50 px-3 py-2 dark:bg-zinc-800">
-            <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{tTicker("title")}</span>
-            <span className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
-              {tTicker("live")}
-            </span>
-          </div>
-          <ul className="min-h-0 flex-1 divide-y divide-zinc-100 overflow-y-auto dark:divide-zinc-800" data-testid="sidebar-ticker">
-            {listCoins.map((c) => {
-              const tick = ticks[c.symbol.toUpperCase()];
-              const price = tick?.price ?? c.currentPrice;
-              const flash = tick?.direction === "up" ? "animate-flash-up" : tick?.direction === "down" ? "animate-flash-down" : "";
-              const active = c.id === coin?.id;
-              return (
-                <li key={c.id}>
-                  <button
-                    type="button"
-                    data-coin={c.id}
-                    aria-pressed={active}
-                    onClick={() => onSelectCoin(c.id)}
-                    className={`flex w-full items-center gap-2 border-s-2 px-3 py-2 text-start transition ${
-                      active ? "border-blue-600 bg-blue-50 dark:border-blue-400 dark:bg-blue-500/10" : "border-transparent hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
-                    }`}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={c.image} alt="" width={18} height={18} className="shrink-0 rounded-full" />
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-xs font-semibold text-zinc-900 dark:text-zinc-100">{c.name}</span>
-                      <span dir="ltr" className="block text-[10px] uppercase text-zinc-400">{c.symbol}</span>
-                    </span>
-                    <span className="flex flex-col items-end">
-                      <span key={tick?.at ?? 0} dir="ltr" className={`rounded px-1 font-mono text-xs text-zinc-900 dark:text-zinc-100 ${flash}`}>{f.money(price)}</span>
-                      <span dir="ltr" className={`font-mono text-[10px] ${changeColor(c.priceChangePercentage24h)}`}>
-                        {c.priceChangePercentage24h == null ? "—" : f.signedPct(c.priceChangePercentage24h, 1)}
-                      </span>
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          <p className="border-t border-zinc-100 px-3 py-1.5 text-[10px] text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{tTicker("note")}</p>
-        </div>
-      </div>
-
-      <div className="min-w-0">
+      {/* Fullscreen wraps the controls and candles; the chart's autoSize follows the new box on enter/exit. */}
+      <div
+        ref={fullscreenRef}
+        data-testid="chart-fullscreen-box"
+        className={isFullscreen ? "flex h-full flex-col overflow-auto bg-white p-4 dark:bg-zinc-900" : "mt-4"}
+      >
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div role="group" aria-label={t("timeframeLabel")} className="flex flex-wrap gap-1.5">
           {CANDLE_TIMEFRAMES.map((tf) => (
@@ -296,78 +266,110 @@ export default function CryptoHistoricalChart({ coin, coins, onSelectCoin, digit
               <span dir="ltr">{m.label}</span>
             </button>
           ))}
+          <button
+            type="button"
+            data-testid="chart-fullscreen"
+            aria-pressed={isFullscreen}
+            onClick={toggleFullscreen}
+            className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-2.5 py-1.5 text-xs font-medium text-zinc-700 transition hover:border-zinc-400 dark:border-zinc-700 dark:text-zinc-200"
+          >
+            {isFullscreen ? <Minimize2 className="h-3.5 w-3.5" aria-hidden /> : <Maximize2 className="h-3.5 w-3.5" aria-hidden />}
+            {isFullscreen ? t("exitFullscreen") : t("fullscreen")}
+          </button>
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-stretch">
-        <div className="relative min-w-0 lg:flex-1" dir="ltr" style={{ height: CHART_HEIGHT }}>
-          {state.status === "ready" && <div ref={containerRef} data-testid="candle-chart" className="absolute inset-0" />}
-          {state.status === "ready" && shown && (
-            <div
-              data-testid="candle-tooltip"
-              className="pointer-events-none absolute start-2 top-2 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 font-mono text-[11px] leading-5 text-zinc-700 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900/90 dark:text-zinc-200 dark:ring-zinc-700"
+      <div className={`relative mt-4 min-w-0 ${isFullscreen ? "flex-1" : ""}`} dir="ltr" style={isFullscreen ? undefined : { height: CHART_HEIGHT }}>
+        {state.status === "ready" && <div ref={containerRef} data-testid="candle-chart" className="absolute inset-0" />}
+        {state.status === "ready" && shown && (
+          <div
+            data-testid="candle-tooltip"
+            className="pointer-events-none absolute start-2 top-2 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 font-mono text-[11px] leading-5 text-zinc-700 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900/90 dark:text-zinc-200 dark:ring-zinc-700"
+          >
+            <div className="font-sans font-semibold">{dateLabel(shown.time)}</div>
+            <div>
+              O {usd(shown.open)} H {usd(shown.high)}
+            </div>
+            <div>
+              L {usd(shown.low)} C {usd(shown.close)}
+            </div>
+            <div>
+              <span className={change >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}>
+                {change >= 0 ? "+" : ""}
+                {num(change)}%
+              </span>{" "}
+              · Vol {num(shown.volume, shown.volume < 10 ? 4 : 0)} {coinSymbol}
+            </div>
+          </div>
+        )}
+        {state.status === "loading" && (
+          <div className="flex h-full animate-pulse items-center justify-center rounded-xl bg-zinc-50 text-sm text-zinc-400 dark:bg-zinc-800/40">
+            {t("loading")}
+          </div>
+        )}
+        {state.status === "error" && (
+          <div className="flex h-full flex-col items-center justify-center gap-3 rounded-xl bg-zinc-50 px-6 text-center dark:bg-zinc-800/40">
+            <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("error", { symbol: coinSymbol })}</p>
+            <button
+              type="button"
+              onClick={() => setRetry((r) => r + 1)}
+              className="rounded-lg border border-blue-500 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-400"
             >
-              <div className="font-sans font-semibold">{dateLabel(shown.time)}</div>
-              <div>
-                O {usd(shown.open)} H {usd(shown.high)}
-              </div>
-              <div>
-                L {usd(shown.low)} C {usd(shown.close)}
-              </div>
-              <div>
-                <span className={change >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}>
-                  {change >= 0 ? "+" : ""}
-                  {num(change)}%
-                </span>{" "}
-                · Vol {num(shown.volume, shown.volume < 10 ? 4 : 0)} {coinSymbol}
-              </div>
-            </div>
-          )}
-          {state.status === "loading" && (
-            <div className="flex h-full animate-pulse items-center justify-center rounded-xl bg-zinc-50 text-sm text-zinc-400 dark:bg-zinc-800/40">
-              {t("loading")}
-            </div>
-          )}
-          {state.status === "error" && (
-            <div className="flex h-full flex-col items-center justify-center gap-3 rounded-xl bg-zinc-50 px-6 text-center dark:bg-zinc-800/40">
-              <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("error", { symbol: coinSymbol })}</p>
-              <button
-                type="button"
-                onClick={() => setRetry((r) => r + 1)}
-                className="rounded-lg border border-blue-500 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-400"
-              >
-                {t("retry")}
-              </button>
-            </div>
-          )}
-        </div>
+              {t("retry")}
+            </button>
+          </div>
+        )}
+      </div>
 
-        <div className="lg:w-60">
-          <WorkedExampleNote
-            title={t("workedTitle")}
-            rows={
-              shown
-                ? [
-                    { label: t("rowCandle"), value: dateLabel(shown.time) },
-                    { label: t("rowOpen"), value: usd(shown.open) },
-                    { label: t("rowClose"), value: usd(shown.close) },
-                    { label: t("rowChange"), value: `${change >= 0 ? "+" : ""}${num(change)}%`, note: t("rowChangeNote") },
-                    { label: t("rowRange"), value: usd(shown.high - shown.low) },
-                    { label: "MA 20", value: ma20[shownIndex] != null ? usd(ma20[shownIndex] as number) : "—" },
-                    { label: "MA 50", value: ma50[shownIndex] != null ? usd(ma50[shownIndex] as number) : "—" },
-                    ...(extremes
-                      ? [
-                          { label: t("highLabel"), value: usd(extremes.high) },
-                          { label: t("lowLabel"), value: usd(extremes.low), emphasize: true, note: t("periodNote", { count: candles.length }) },
-                        ]
-                      : []),
-                  ]
-                : [{ label: t("rowCandle"), value: "—" }]
-            }
-          />
+      </div>
+
+      {/* Live price list under the full-width chart: clicking a coin charts it. */}
+      <div className="mt-4 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+        <div className="flex items-center justify-between bg-zinc-50 px-3 py-2 dark:bg-zinc-800">
+          <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-200">{tTicker("title")}</span>
+          <span className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+            {tTicker("live")}
+          </span>
         </div>
-      </div>
-      </div>
+        <ul
+          className="grid max-h-80 grid-cols-1 gap-px overflow-y-auto bg-zinc-100 sm:grid-cols-2 sm:max-h-none lg:grid-cols-4 dark:bg-zinc-800"
+          data-testid="sidebar-ticker"
+        >
+            {listCoins.map((c) => {
+              const tick = ticks[c.symbol.toUpperCase()];
+              const price = tick?.price ?? c.currentPrice;
+              const flash = tick?.direction === "up" ? "animate-flash-up" : tick?.direction === "down" ? "animate-flash-down" : "";
+              const active = c.id === coin?.id;
+              return (
+                <li key={c.id} className="bg-white dark:bg-zinc-900">
+                  <button
+                    type="button"
+                    data-coin={c.id}
+                    aria-pressed={active}
+                    onClick={() => onSelectCoin(c.id)}
+                    className={`flex w-full items-center gap-2 border-s-2 px-3 py-2 h-full text-start transition ${
+                      active ? "border-blue-600 bg-blue-50 dark:border-blue-400 dark:bg-blue-500/10" : "border-transparent hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.image} alt="" width={18} height={18} className="shrink-0 rounded-full" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-xs font-semibold text-zinc-900 dark:text-zinc-100">{c.name}</span>
+                      <span dir="ltr" className="block text-[10px] uppercase text-zinc-400">{c.symbol}</span>
+                    </span>
+                    <span className="flex flex-col items-end">
+                      <span key={tick?.at ?? 0} dir="ltr" className={`rounded px-1 font-mono text-xs text-zinc-900 dark:text-zinc-100 ${flash}`}>{f.money(price)}</span>
+                      <span dir="ltr" className={`font-mono text-[10px] ${changeColor(c.priceChangePercentage24h)}`}>
+                        {c.priceChangePercentage24h == null ? "—" : f.signedPct(c.priceChangePercentage24h, 1)}
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+        </ul>
+        <p className="border-t border-zinc-100 px-3 py-1.5 text-[10px] text-zinc-400 dark:border-zinc-800 dark:text-zinc-500">{tTicker("note")}</p>
       </div>
 
       <p className="mt-3 text-xs text-zinc-400 dark:text-zinc-500">

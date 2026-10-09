@@ -8,6 +8,8 @@ import { resolveDigitStyle } from "@/lib/digit-style";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
+import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import CryptoInputPanel from "./CryptoInputPanel";
 import CryptoTopList from "./CryptoTopList";
 import CryptoHistoricalChart from "./CryptoHistoricalChart";
@@ -42,6 +44,7 @@ type CryptoConverterProps = {
 const FIAT_STORAGE_KEY = "crypto-converter:fiat";
 
 export default function CryptoConverter({ initialCoins, globalStats, fiatRates, fetchedAt, education }: CryptoConverterProps) {
+  const t = useTranslations("tools.crypto-converter");
   const tNav = useTranslations("tools.crypto-converter.nav");
   const [coins, setCoins] = useState<CryptoCoin[]>(initialCoins);
   const [fromCoinId, setFromCoinId] = useState("bitcoin");
@@ -120,49 +123,62 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
 
   return (
     <FiatContext.Provider value={fiat}>
-      {/* Two columns above the fold (input | result) at full content width; no ad sidebar. */}
-      <div id="tool" className="grid scroll-mt-32 grid-cols-1 items-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-stretch">
-        <div className="min-w-0">
-          <CryptoInputPanel
-            coins={coins}
-            amount={amount}
-            onAmountChange={setAmount}
-            fromCoinId={fromCoinId}
-            onFromCoinChange={setFromCoinId}
-            toCoinId={toCoinId}
-            onToCoinChange={setToCoinId}
-            onCoinDiscovered={handleCoinDiscovered}
-            onSwap={handleSwap}
-            onClear={handleClear}
-            fiatRates={fiatRates}
-            fiatCode={fiat.code}
-            onFiatChange={handleFiatChange}
-            fromPrice={fromPrice}
-            toPrice={toPrice}
-            fromCoin={fromCoin}
-            toCoin={toCoin}
-            digitStyle={digitStyle}
-          />
-        </div>
-        <div data-tool-result className="flex min-w-0 flex-col gap-6">
-          <CryptoLiveFlow
-            fromCoin={fromCoin}
-            toCoin={toCoin}
-            amountText={amount}
-            amount={amountValue}
-            ticks={ticks}
-            lastUpdated={fetchedAt}
-            digitStyle={digitStyle}
-          />
-          {globalStats && <CryptoDominanceDonut stats={globalStats} fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} />}
-        </div>
+      {/* Agreed top-of-page layout: input | result | related tools + 300×600 ad (hidden on mobile). */}
+      <div id="tool" className="scroll-mt-32">
+        <ToolAboveFold
+          input={
+            <CryptoInputPanel
+              coins={coins}
+              amount={amount}
+              onAmountChange={setAmount}
+              fromCoinId={fromCoinId}
+              onFromCoinChange={setFromCoinId}
+              toCoinId={toCoinId}
+              onToCoinChange={setToCoinId}
+              onCoinDiscovered={handleCoinDiscovered}
+              onSwap={handleSwap}
+              onClear={handleClear}
+              fiatRates={fiatRates}
+              fiatCode={fiat.code}
+              onFiatChange={handleFiatChange}
+              fromPrice={fromPrice}
+              toPrice={toPrice}
+              fromCoin={fromCoin}
+              toCoin={toCoin}
+              digitStyle={digitStyle}
+            />
+          }
+          result={
+            <div className="flex flex-col gap-6">
+              <CryptoLiveFlow
+                fromCoin={fromCoin}
+                toCoin={toCoin}
+                amountText={amount}
+                amount={amountValue}
+                ticks={ticks}
+                lastUpdated={fetchedAt}
+                digitStyle={digitStyle}
+              />
+              {globalStats && <CryptoDominanceDonut stats={globalStats} fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} />}
+            </div>
+          }
+          sidebar={
+            <RelatedToolsSidebar
+              currentSlug="crypto-converter"
+              category="financial-markets"
+              relatedList={["forex-converter", "commodities-tracker", "compound-interest-calculator", "retirement-calculator"]}
+              relatedListTitle={t("relatedTools.title")}
+            />
+          }
+        />
       </div>
 
+      {/* Below the fold every card spans the full content width; leaderboards sit between groups only. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="crypto-converter" />
 
-        {/* Group 1 — price action: live list + candles in one terminal card */}
+        {/* Group 1 — price action: full-width candles with the live coin list beneath */}
         <CryptoHistoricalChart coin={chartCoin} coins={initialCoins} onSelectCoin={setChartCoinId} digitStyle={digitStyle} />
         <CryptoVolatilityGauge coin={fromCoin} digitStyle={digitStyle} />
         <CryptoSensitivityTrio fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} />
