@@ -10,6 +10,13 @@ type ToolAboveFoldProps = {
    * payoff chart) placed under input+result.
    */
   secondary?: ReactNode;
+  /**
+   * Optional desktop-only filler placed under the sidebar. When given, the sidebar scrolls
+   * normally instead of sticking, and this node gets all the remaining column height (so a
+   * `sticky` element inside it, e.g. an ad, rides the rest of the page). The sidebar itself is
+   * still what's measured, so the filler never feeds back into the layout height.
+   */
+  sidebarFill?: ReactNode;
 };
 
 /**
@@ -73,7 +80,7 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -164,12 +171,13 @@ export default function ToolAboveFold({ input, result, sidebar, secondary }: Too
         <div className="min-w-0 lg:col-start-1 lg:col-span-2 lg:row-start-2">{secondary}</div>
       )}
       <div
-        className="hidden lg:absolute lg:top-0 lg:end-0 lg:block lg:w-[320px]"
+        className={`hidden lg:absolute lg:top-0 lg:end-0 lg:w-[320px] ${sidebarFill ? "lg:flex lg:flex-col" : "lg:block"}`}
         style={sidebarBoxHeight ? { height: sidebarBoxHeight } : undefined}
       >
-        <div ref={sidebarRef} className={sidebarBoxHeight ? "lg:sticky lg:top-20" : undefined}>
+        <div ref={sidebarRef} className={sidebarBoxHeight && !sidebarFill ? "lg:sticky lg:top-20" : undefined}>
           {sidebar}
         </div>
+        {sidebarFill && <div className="mt-6 min-h-0 flex-1">{sidebarFill}</div>}
       </div>
     </div>
   );

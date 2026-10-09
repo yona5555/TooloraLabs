@@ -2258,18 +2258,38 @@
       },
       "nav": {
         "tool": "Tool",
-        "indicators": "Indicators",
         "news": "News",
         "education": "Education",
         "faq": "FAQ",
-        "notices": "Notices"
+        "notices": "Notices",
+        "chart": "Chart",
+        "coin": "Coin",
+        "market": "Market",
+        "network": "Network"
       },
       "topList": {
-        "title": "Top 100 Cryptocurrencies by Market Cap",
+        "title": "Top 100 Cryptocurrencies",
         "columnName": "Name",
         "columnPrice": "Price",
         "columnChange24h": "24h Change",
-        "columnMarketCap": "Market Cap"
+        "columnMarketCap": "Market Cap",
+        "heading": "The market's largest coins, tagged",
+        "intro": "Ranked by market cap, each row tagged with what sets it apart. Hover a row for its market-cap math; click to convert from it.",
+        "columnTags": "Tags",
+        "columnChange7d": "7d",
+        "pick": "Convert from this coin",
+        "tags": {
+          "yours": "Your pair",
+          "stable": "Stablecoin",
+          "gainer": "Top gainer",
+          "loser": "Top loser",
+          "capped": "Capped supply"
+        },
+        "workedTitle": "Worked example: {coin}",
+        "rowSupply": "Circulating supply",
+        "rowCapNote": "price × circulating supply",
+        "rowVolume": "24h volume",
+        "hoverHint": "Hover any row to recompute."
       },
       "chart": {
         "title": "Candlestick Price Chart",
@@ -2662,6 +2682,136 @@
         "rowDate": "Estimated date",
         "rowDateNote": "Last block time + blocks × avg time",
         "source": "Data: mempool.space chain tip and difficulty adjustment, refreshed every minute."
+      },
+      "sensitivity": {
+        "title": "Price Sensitivity",
+        "heading": "Your {from} → {to} conversion if {from} moves",
+        "intro": "The same amount converted at a lower, the current and a higher {from} price, with the {to} price held fixed.",
+        "shiftLabel": "Price move",
+        "low": "Lower",
+        "now": "Now",
+        "high": "Higher",
+        "workedTitle": "Worked example: +{pct}%",
+        "rowPriceNow": "{symbol} price now",
+        "rowShifted": "Shifted price",
+        "rowValue": "Amount × price",
+        "rowToPrice": "{symbol} price",
+        "rowResult": "You'd receive",
+        "rowNote": "Every {pct}% move in the source price moves the result by the same {pct}%"
+      },
+      "volatility": {
+        "title": "30-Day Volatility",
+        "heading": "How wildly {coin} has been swinging",
+        "intro": "Realized volatility from the last 30 daily closes on the candle chart, scaled to a yearly figure so it compares with other assets.",
+        "loading": "Measuring volatility…",
+        "error": "No daily exchange candles for {symbol}, so its volatility can't be measured here.",
+        "zones": {
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        },
+        "workedTitle": "Worked example: from closes to %",
+        "rowReturns": "Daily returns",
+        "rowReturnsNote": "ln(close ÷ previous close)",
+        "rowDaily": "Std. deviation",
+        "rowDailyNote": "typical one-day move",
+        "rowScale": "Annualize",
+        "rowAnnual": "Annualized"
+      },
+      "supply": {
+        "title": "Supply Breakdown",
+        "heading": "How much {coin} exists, and how much ever will",
+        "intro": "Coins already circulating, coins issued but locked away, and coins not yet issued, against the hard cap where one exists.",
+        "circulating": "Circulating",
+        "locked": "Issued, not circulating",
+        "unissued": "Not yet issued",
+        "basisMax": "Bar = maximum supply (hard cap).",
+        "basisTotal": "No hard cap: bar = total supply issued so far.",
+        "missing": "The data provider doesn't report supply figures for {coin}.",
+        "workedTitle": "Worked example: supply share",
+        "totalLabel": "Total supply",
+        "maxLabel": "Max supply",
+        "uncapped": "No cap",
+        "rowShare": "Circulating share",
+        "rowShareNoteMax": "circulating ÷ max supply",
+        "rowShareNoteTotal": "circulating ÷ total supply",
+        "rowCapCheck": "Circulating × price",
+        "rowCapCheckNote": "≈ market cap"
+      },
+      "timeline": {
+        "title": "Coin Timeline",
+        "heading": "{coin}: from launch to today",
+        "intro": "Key dates in the coin's price history, and how far today's price sits from its all-time high and low.",
+        "stations": {
+          "genesis": "Genesis",
+          "atl": "All-time low",
+          "ath": "All-time high",
+          "now": "Today"
+        },
+        "today": "Now",
+        "notRecorded": "Not recorded",
+        "nowVs": "now {pct}",
+        "workedTitle": "Worked example: distance from extremes",
+        "rowNow": "Price now",
+        "rowFromAth": "From ATH",
+        "rowFromAtl": "From ATL",
+        "rowFormula": "(now − extreme) ÷ extreme × 100"
+      },
+      "capLog": {
+        "title": "Market Cap on a Log Scale",
+        "heading": "{coin} next to the ten largest coins",
+        "intro": "Each gridline is ten times the one before, so coins thousands of times apart still fit on one bar chart.",
+        "workedTitle": "Worked example: orders of magnitude",
+        "rowRatio": "Size gap",
+        "rowDecades": "Powers of ten apart",
+        "rowDecadesNote": "log₁₀(larger ÷ smaller)",
+        "rowRank": "Rank"
+      },
+      "compare": {
+        "title": "Coin vs Coin",
+        "heading": "{from} and {to} side by side",
+        "intro": "The two coins you are converting between, on the same six measures; ▲ marks the stronger of the pair on each line.",
+        "price": "Price",
+        "marketCap": "Market cap",
+        "volume": "24h volume",
+        "change24h": "24h change",
+        "change7d": "7d change",
+        "rank": "Rank",
+        "workedTitle": "Worked example: pair ratios",
+        "rowCapRatio": "Market-cap ratio",
+        "rowCapRatioNote": "source cap ÷ target cap",
+        "rowTurnover": "{symbol} turnover",
+        "rowTurnoverNote": "24h volume ÷ market cap",
+        "rowGap": "24h performance gap",
+        "rowGapNote": "source − target, in percentage points",
+        "legend": "Volume and 7-day change come from the same CoinGecko market snapshot as the prices."
+      },
+      "movers": {
+        "title": "Top Movers (24h)",
+        "heading": "Biggest gainers and losers today",
+        "intro": "Ranked by 24-hour price change among the top {count} coins by market cap. Click a coin to convert from it.",
+        "gainers": "Gainers",
+        "losers": "Losers",
+        "none": "None in this direction today.",
+        "pick": "Convert from this coin",
+        "workedTitle": "Worked example: {coin}",
+        "rowNow": "Price now",
+        "rowChange": "24h change",
+        "rowThen": "Price 24h ago",
+        "rowThenNote": "now ÷ (1 + change ÷ 100)"
+      },
+      "ticker": {
+        "title": "Live Prices",
+        "live": "LIVE",
+        "note": "Coinbase ticks where listed; others show the latest snapshot. Click a coin to convert from it."
+      },
+      "workedExamples": {
+        "title": "Worked Examples",
+        "intro": "Three real conversions, worked step by step from the market prices this page loaded ({time}). Every conversion runs through the US dollar as a common pivot.",
+        "exampleTitle": "Example {n}",
+        "step1": "Value the {from} in dollars:",
+        "step2": "Divide by the {to} price:",
+        "step3": "Implied rate:"
       }
     },
     "forex-converter": {

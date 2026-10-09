@@ -124,3 +124,92 @@ export function clampBadWicks(candles: Candle[], minFraction = 0.5): Candle[] {
     return low === c.low && high === c.high ? c : { ...c, low, high };
   });
 }
+
+export type Volatility = {
+  /** Standard deviation of daily log returns, in percent. */
+  dailyPercent: number;
+  /** Daily figure scaled by √365 (crypto trades every day of the year), in percent. */
+  annualizedPercent: number;
+  returns: number;
+};
+
+/** Realized volatility over the last `window` daily returns (needs `window + 1` daily closes). */
+export function realizedVolatility(dailyCandles: Candle[], window = 30): Volatility | null {
+  const closes = dailyCandles.slice(-(window + 1)).map((c) => c.close);
+  if (closes.length < 3 || closes.some((c) => !(c > 0))) return null;
+  const returns = closes.slice(1).map((c, i) => Math.log(c / closes[i]));
+  const avg = returns.reduce((s, r) => s + r, 0) / returns.length;
+  const variance = returns.reduce((s, r) => s + (r - avg) ** 2, 0) / (returns.length - 1);
+  const daily = Math.sqrt(variance) * 100;
+  return { dailyPercent: daily, annualizedPercent: daily * Math.sqrt(365), returns: returns.length };
+}
+
+export type VolatilityZone = "low" | "medium" | "high";
+
+/** Crypto-scale bands for annualized volatility: under 40% low, 40–80% medium, above 80% high. */
+export const VOLATILITY_ZONE_LIMITS = { low: 40, medium: 80 } as const;
+
+export function volatilityZone(annualizedPercent: number): VolatilityZone {
+  if (annualizedPercent < VOLATILITY_ZONE_LIMITS.low) return "low";
+  if (annualizedPercent < VOLATILITY_ZONE_LIMITS.medium) return "medium";
+  return "high";
+}
+
+export type SensitivityPoint = { shiftPercent: number; fromPrice: number; converted: number };
+
+/** Converted amount if the source coin's price moved by −pct / 0 / +pct, the target price held. */
+export function conversionSensitivity(amount: number, fromPriceUsd: number, toPriceUsd: number, pct = 10): SensitivityPoint[] {
+  return [-pct, 0, pct].map((shiftPercent) => {
+    const fromPrice = fromPriceUsd * (1 + shiftPercent / 100);
+    const ok = Number.isFinite(amount) && toPriceUsd > 0;
+    return { shiftPercent, fromPrice, converted: ok ? (amount * fromPrice) / toPriceUsd : 0 };
+  });
+}
+
+export type SupplyBreakdown = {
+  /** The bar's 100% reference: max supply when capped, otherwise total supply. */
+  basis: "max" | "total";
+  circulatingPercent: number;
+  /** Issued but not circulating (locked, treasury, vesting). */
+  lockedPercent: number;
+  /** Not yet issued (only when a max supply exists). */
+  unissuedPercent: number;
+};
+
+export function supplyBreakdown(circulating: number | null | undefined, total: number | null | undefined, max: number | null | undefined): SupplyBreakdown | null {
+  const circ = circulating ?? 0;
+  const tot = Math.max(total ?? 0, circ);
+  const cap = max && max > 0 ? Math.max(max, tot) : null;
+  const basisValue = cap ?? tot;
+  if (!(basisValue > 0) || !(circ > 0)) return null;
+  const circulatingPercent = (circ / basisValue) * 100;
+  const lockedPercent = ((tot - circ) / basisValue) * 100;
+  return {
+    basis: cap ? "max" : "total",
+    circulatingPercent,
+    lockedPercent,
+    unissuedPercent: cap ? Math.max(0, 100 - circulatingPercent - lockedPercent) : 0,
+  };
+}
+
+/** Percentage change from a reference price to the current one (e.g. "−24% from ATH"). */
+export function percentFrom(reference: number, current: number): number {
+  return reference > 0 ? ((current - reference) / reference) * 100 : 0;
+}
+
+/** Position of `value` between `min` and `max` on a log10 scale, 0–1 (clamped). */
+export function logScalePosition(value: number, min: number, max: number): number {
+  if (!(value > 0) || !(min > 0) || !(max > min)) return 0;
+  const p = (Math.log10(value) - Math.log10(min)) / (Math.log10(max) - Math.log10(min));
+  return Math.min(1, Math.max(0, p));
+}
+
+/** Biggest 24h gainers and losers among coins that report a change. */
+export function topMovers<T extends { priceChangePercentage24h: number | null }>(coins: T[], count = 5): { gainers: T[]; losers: T[] } {
+  const ranked = coins.filter((c) => c.priceChangePercentage24h !== null && Number.isFinite(c.priceChangePercentage24h));
+  const sorted = [...ranked].sort((a, b) => (b.priceChangePercentage24h as number) - (a.priceChangePercentage24h as number));
+  return {
+    gainers: sorted.slice(0, count).filter((c) => (c.priceChangePercentage24h as number) > 0),
+    losers: sorted.slice(-count).reverse().filter((c) => (c.priceChangePercentage24h as number) < 0),
+  };
+}

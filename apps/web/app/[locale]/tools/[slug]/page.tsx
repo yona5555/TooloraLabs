@@ -349,7 +349,7 @@ export default async function ToolPage({
           globalStats={globalStats}
           usdToSarRate={usdToSarRate}
           fetchedAt={fetchedAt}
-          education={<CryptoEducation />}
+          education={<CryptoEducation coins={initialCoins} fetchedAt={fetchedAt} locale={locale} />}
         />
       );
       break;

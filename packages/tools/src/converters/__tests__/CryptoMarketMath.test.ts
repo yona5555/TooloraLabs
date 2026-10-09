@@ -7,6 +7,13 @@ import {
   periodExtremes,
   isCandleTimeframe,
   clampBadWicks,
+  realizedVolatility,
+  volatilityZone,
+  conversionSensitivity,
+  supplyBreakdown,
+  percentFrom,
+  logScalePosition,
+  topMovers,
   type Candle,
 } from "../CryptoMarketMath";
 
@@ -85,5 +92,70 @@ describe("clampBadWicks", () => {
     const ok = c(1, 1000, 1100, 900, 1050);
     expect(clampBadWicks([bad, ok])).toEqual([c(0, 1000, 1100, 1000, 1050), ok]);
     expect(clampBadWicks([c(2, 10, 100, 9, 11)])[0].high).toBe(11);
+  });
+});
+
+describe("realizedVolatility / volatilityZone", () => {
+  it("is zero for a flat series and annualizes by √365", () => {
+    const flat = [1, 2, 3, 4].map((i) => c(i, 100, 100, 100, 100));
+    expect(realizedVolatility(flat)?.dailyPercent).toBe(0);
+    const zigzag = [100, 110, 100, 110, 100].map((v, i) => c(i, v, v, v, v));
+    const vol = realizedVolatility(zigzag, 30)!;
+    expect(vol.returns).toBe(4);
+    expect(vol.annualizedPercent).toBeCloseTo(vol.dailyPercent * Math.sqrt(365));
+    expect(vol.dailyPercent).toBeGreaterThan(9);
+  });
+
+  it("needs at least three closes", () => {
+    expect(realizedVolatility([c(0, 1, 1, 1, 1), c(1, 1, 1, 1, 1)])).toBeNull();
+  });
+
+  it("bands annualized volatility", () => {
+    expect(volatilityZone(25)).toBe("low");
+    expect(volatilityZone(40)).toBe("medium");
+    expect(volatilityZone(95)).toBe("high");
+  });
+});
+
+describe("conversionSensitivity", () => {
+  it("shifts the source price by ±pct", () => {
+    const [down, now, up] = conversionSensitivity(2, 100, 50, 10);
+    expect(down).toEqual({ shiftPercent: -10, fromPrice: 90, converted: 3.6 });
+    expect(now.converted).toBe(4);
+    expect(up.converted).toBeCloseTo(4.4);
+    expect(conversionSensitivity(1, 1, 0)[1].converted).toBe(0);
+  });
+});
+
+describe("supplyBreakdown", () => {
+  it("splits a capped supply into circulating / locked / unissued", () => {
+    expect(supplyBreakdown(19_000_000, 19_000_000, 21_000_000)).toMatchObject({ basis: "max", lockedPercent: 0 });
+    const b = supplyBreakdown(50, 80, 100)!;
+    expect([b.circulatingPercent, b.lockedPercent, b.unissuedPercent]).toEqual([50, 30, 20]);
+  });
+
+  it("falls back to total supply when uncapped", () => {
+    expect(supplyBreakdown(120, 120, null)).toEqual({ basis: "total", circulatingPercent: 100, lockedPercent: 0, unissuedPercent: 0 });
+    expect(supplyBreakdown(null, null, null)).toBeNull();
+  });
+});
+
+describe("percentFrom / logScalePosition / topMovers", () => {
+  it("computes percent change from a reference", () => {
+    expect(percentFrom(200, 150)).toBe(-25);
+    expect(percentFrom(0, 5)).toBe(0);
+  });
+
+  it("places values on a log scale", () => {
+    expect(logScalePosition(1_000, 10, 100_000)).toBeCloseTo(0.5);
+    expect(logScalePosition(1, 10, 100)).toBe(0);
+    expect(logScalePosition(0, 10, 100)).toBe(0);
+  });
+
+  it("ranks gainers and losers and drops coins without data", () => {
+    const coins = [5, -3, null, 12, -8, 0].map((v, i) => ({ id: i, priceChangePercentage24h: v }));
+    const { gainers, losers } = topMovers(coins, 2);
+    expect(gainers.map((g) => g.priceChangePercentage24h)).toEqual([12, 5]);
+    expect(losers.map((l) => l.priceChangePercentage24h)).toEqual([-8, -3]);
   });
 });

@@ -18,6 +18,15 @@ type CoinGeckoMarketCoin = {
   price_change_percentage_24h: number | null;
   market_cap: number;
   market_cap_rank: number | null;
+  price_change_percentage_7d_in_currency?: number | null;
+  total_volume?: number | null;
+  circulating_supply?: number | null;
+  total_supply?: number | null;
+  max_supply?: number | null;
+  ath?: number | null;
+  ath_date?: string | null;
+  atl?: number | null;
+  atl_date?: string | null;
 };
 
 function mapMarketCoin(raw: CoinGeckoMarketCoin): CryptoCoin {
@@ -30,12 +39,21 @@ function mapMarketCoin(raw: CoinGeckoMarketCoin): CryptoCoin {
     priceChangePercentage24h: raw.price_change_percentage_24h,
     marketCap: raw.market_cap,
     marketCapRank: raw.market_cap_rank,
+    priceChangePercentage7d: raw.price_change_percentage_7d_in_currency ?? null,
+    totalVolume: raw.total_volume ?? null,
+    circulatingSupply: raw.circulating_supply ?? null,
+    totalSupply: raw.total_supply ?? null,
+    maxSupply: raw.max_supply ?? null,
+    ath: raw.ath ?? null,
+    athDate: raw.ath_date ?? null,
+    atl: raw.atl ?? null,
+    atlDate: raw.atl_date ?? null,
   };
 }
 
 /** Top N coins by market cap — the page's main list, refreshed hourly via ISR. */
 export async function getTopCoins(limit = 100): Promise<CryptoCoin[]> {
-  const url = `${COINGECKO_BASE}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false&price_change_percentage=24h`;
+  const url = `${COINGECKO_BASE}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false&price_change_percentage=24h,7d`;
   const res = await fetch(url, { next: { revalidate: PAGE_REVALIDATE_SECONDS } });
   if (!res.ok) {
     throw new Error(`CoinGecko markets request failed: ${res.status}`);
@@ -47,7 +65,7 @@ export async function getTopCoins(limit = 100): Promise<CryptoCoin[]> {
 /** Full market data for specific coin ids — used once a visitor picks a coin outside the top list. */
 export async function getCoinsByIds(ids: string[]): Promise<CryptoCoin[]> {
   if (ids.length === 0) return [];
-  const url = `${COINGECKO_BASE}/coins/markets?vs_currency=usd&ids=${ids.join(",")}&price_change_percentage=24h`;
+  const url = `${COINGECKO_BASE}/coins/markets?vs_currency=usd&ids=${ids.join(",")}&price_change_percentage=24h,7d`;
   const res = await fetch(url, { next: { revalidate: ON_DEMAND_REVALIDATE_SECONDS } });
   if (!res.ok) {
     throw new Error(`CoinGecko markets-by-id request failed: ${res.status}`);
@@ -141,4 +159,15 @@ export async function getCoinPriceOnDate(coinId: string, date: Date): Promise<nu
   if (!res.ok) return null;
   const json = (await res.json()) as { market_data?: { current_price?: Record<string, number> } };
   return json.market_data?.current_price?.usd ?? null;
+}
+
+export type CoinDetails = { genesisDate: string | null };
+
+/** Static per-coin facts that markets data lacks (genesis date); cached for a day. */
+export async function getCoinDetails(coinId: string): Promise<CoinDetails | null> {
+  const url = `${COINGECKO_BASE}/coins/${encodeURIComponent(coinId)}?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`;
+  const res = await fetch(url, { next: { revalidate: 86400 } });
+  if (!res.ok) return null;
+  const json = (await res.json()) as { genesis_date?: string | null };
+  return { genesisDate: json.genesis_date ?? null };
 }

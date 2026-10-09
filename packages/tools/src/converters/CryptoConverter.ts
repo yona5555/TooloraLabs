@@ -7,6 +7,16 @@ export type CryptoCoin = {
   priceChangePercentage24h: number | null;
   marketCap: number;
   marketCapRank: number | null;
+  /** Optional market detail from the markets endpoint; absent on coins built from older snapshots. */
+  priceChangePercentage7d?: number | null;
+  totalVolume?: number | null;
+  circulatingSupply?: number | null;
+  totalSupply?: number | null;
+  maxSupply?: number | null;
+  ath?: number | null;
+  athDate?: string | null;
+  atl?: number | null;
+  atlDate?: string | null;
 };
 
 export type CryptoGlobalStats = {

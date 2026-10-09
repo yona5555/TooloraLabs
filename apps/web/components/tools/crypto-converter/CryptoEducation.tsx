@@ -4,11 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import type { CryptoCoin } from "@tooloralabs/tools";
 import CryptoLatestBlocks from "./CryptoLatestBlocks";
+import CryptoWorkedConversions from "./CryptoWorkedConversions";
 
 type ComparisonRow = { name: string; launched: string; consensus: string; mainUse: string };
 
-export default async function CryptoEducation() {
+type CryptoEducationProps = { coins: CryptoCoin[]; fetchedAt: number; locale: string };
+
+export default async function CryptoEducation({ coins, fetchedAt, locale }: CryptoEducationProps) {
   const t = await getTranslations("tools.crypto-converter.education");
   const tAboveFold = await getTranslations("tools.crypto-converter.aboveFold");
 
@@ -60,6 +64,8 @@ export default async function CryptoEducation() {
         <p>{t("risks.paragraph2")}</p>
         <p>{t("risks.paragraph3")}</p>
       </InfoSection>
+
+      <CryptoWorkedConversions coins={coins} fetchedAt={fetchedAt} locale={locale} />
 
       <AdSpace variant="leaderboard" />
 

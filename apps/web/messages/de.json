@@ -2258,18 +2258,38 @@
       },
       "nav": {
         "tool": "Werkzeug",
-        "indicators": "Indikatoren",
         "news": "Nachrichten",
         "education": "Hintergrundwissen",
         "faq": "FAQ",
-        "notices": "Hinweise"
+        "notices": "Hinweise",
+        "chart": "Chart",
+        "coin": "Coin",
+        "market": "Markt",
+        "network": "Netzwerk"
       },
       "topList": {
-        "title": "Die 100 größten Kryptowährungen nach Marktkapitalisierung",
+        "title": "Die 100 größten Kryptowährungen",
         "columnName": "Name",
         "columnPrice": "Kurs",
         "columnChange24h": "24-Std.-Änderung",
-        "columnMarketCap": "Marktkapitalisierung"
+        "columnMarketCap": "Marktkapitalisierung",
+        "heading": "Die größten Coins des Marktes, mit Tags",
+        "intro": "Nach Marktkapitalisierung sortiert, jede Zeile mit Tags zu ihren Besonderheiten. Fahren Sie über eine Zeile für die Berechnung, klicken Sie zum Umrechnen.",
+        "columnTags": "Tags",
+        "columnChange7d": "7 T.",
+        "pick": "Von dieser Coin umrechnen",
+        "tags": {
+          "yours": "Ihr Paar",
+          "stable": "Stablecoin",
+          "gainer": "Top-Gewinner",
+          "loser": "Top-Verlierer",
+          "capped": "Begrenztes Angebot"
+        },
+        "workedTitle": "Rechenbeispiel: {coin}",
+        "rowSupply": "Umlaufangebot",
+        "rowCapNote": "Kurs × Umlaufangebot",
+        "rowVolume": "24-Std.-Volumen",
+        "hoverHint": "Über eine Zeile fahren, um neu zu berechnen."
       },
       "chart": {
         "title": "Kerzenchart des Preises",
@@ -2662,6 +2682,136 @@
         "rowDate": "Geschätztes Datum",
         "rowDateNote": "Zeit des letzten Blocks + Blöcke × Ø-Zeit",
         "source": "Daten: Kettenspitze und Schwierigkeitsanpassung von mempool.space, jede Minute aktualisiert."
+      },
+      "sensitivity": {
+        "title": "Preissensitivität",
+        "heading": "Ihre Umrechnung {from} → {to}, wenn sich {from} bewegt",
+        "intro": "Derselbe Betrag, umgerechnet zu einem niedrigeren, dem aktuellen und einem höheren {from}-Kurs, bei festem {to}-Kurs.",
+        "shiftLabel": "Kursbewegung",
+        "low": "Niedriger",
+        "now": "Jetzt",
+        "high": "Höher",
+        "workedTitle": "Rechenbeispiel: +{pct} %",
+        "rowPriceNow": "{symbol}-Kurs jetzt",
+        "rowShifted": "Verschobener Kurs",
+        "rowValue": "Betrag × Kurs",
+        "rowToPrice": "{symbol}-Kurs",
+        "rowResult": "Sie erhielten",
+        "rowNote": "Jede Bewegung des Ausgangskurses um {pct} % verschiebt das Ergebnis um dieselben {pct} %"
+      },
+      "volatility": {
+        "title": "30-Tage-Volatilität",
+        "heading": "Wie stark {coin} zuletzt geschwankt hat",
+        "intro": "Realisierte Volatilität aus den letzten 30 Tagesschlusskursen des Kerzencharts, auf ein Jahr hochgerechnet, damit sie mit anderen Anlagen vergleichbar ist.",
+        "loading": "Volatilität wird gemessen…",
+        "error": "Keine täglichen Kerzen für {symbol}, daher lässt sich die Volatilität hier nicht messen.",
+        "zones": {
+          "low": "Niedrig",
+          "medium": "Mittel",
+          "high": "Hoch"
+        },
+        "workedTitle": "Rechenbeispiel: von Schlusskursen zu %",
+        "rowReturns": "Tagesrenditen",
+        "rowReturnsNote": "ln(Schluss ÷ Vortagesschluss)",
+        "rowDaily": "Standardabweichung",
+        "rowDailyNote": "typische Tagesbewegung",
+        "rowScale": "Annualisieren",
+        "rowAnnual": "Annualisiert"
+      },
+      "supply": {
+        "title": "Angebotsaufteilung",
+        "heading": "Wie viel {coin} es gibt – und je geben wird",
+        "intro": "Umlaufende Coins, ausgegebene, aber gesperrte Coins und noch nicht ausgegebene Coins, gemessen an der Obergrenze, sofern es eine gibt.",
+        "circulating": "Im Umlauf",
+        "locked": "Ausgegeben, nicht im Umlauf",
+        "unissued": "Noch nicht ausgegeben",
+        "basisMax": "Balken = maximales Angebot (feste Obergrenze).",
+        "basisTotal": "Keine Obergrenze: Balken = bisher ausgegebenes Gesamtangebot.",
+        "missing": "Der Datenanbieter meldet für {coin} keine Angebotszahlen.",
+        "workedTitle": "Rechenbeispiel: Angebotsanteil",
+        "totalLabel": "Gesamtangebot",
+        "maxLabel": "Maximalangebot",
+        "uncapped": "Keine Grenze",
+        "rowShare": "Anteil im Umlauf",
+        "rowShareNoteMax": "Umlauf ÷ Maximum",
+        "rowShareNoteTotal": "Umlauf ÷ Gesamt",
+        "rowCapCheck": "Umlauf × Kurs",
+        "rowCapCheckNote": "≈ Marktkapitalisierung"
+      },
+      "timeline": {
+        "title": "Coin-Zeitleiste",
+        "heading": "{coin}: vom Start bis heute",
+        "intro": "Wichtige Daten der Kursgeschichte und wie weit der heutige Kurs vom Allzeithoch und -tief entfernt ist.",
+        "stations": {
+          "genesis": "Genesis",
+          "atl": "Allzeittief",
+          "ath": "Allzeithoch",
+          "now": "Heute"
+        },
+        "today": "Jetzt",
+        "notRecorded": "Nicht erfasst",
+        "nowVs": "jetzt {pct}",
+        "workedTitle": "Rechenbeispiel: Abstand zu Extremen",
+        "rowNow": "Kurs jetzt",
+        "rowFromAth": "Ab Allzeithoch",
+        "rowFromAtl": "Ab Allzeittief",
+        "rowFormula": "(jetzt − Extrem) ÷ Extrem × 100"
+      },
+      "capLog": {
+        "title": "Marktkapitalisierung logarithmisch",
+        "heading": "{coin} neben den zehn größten Coins",
+        "intro": "Jede Gitterlinie ist zehnmal so groß wie die vorige, sodass Coins mit tausendfachem Abstand in ein Balkendiagramm passen.",
+        "workedTitle": "Rechenbeispiel: Größenordnungen",
+        "rowRatio": "Größenabstand",
+        "rowDecades": "Zehnerpotenzen Abstand",
+        "rowDecadesNote": "log₁₀(größer ÷ kleiner)",
+        "rowRank": "Rang"
+      },
+      "compare": {
+        "title": "Coin gegen Coin",
+        "heading": "{from} und {to} im direkten Vergleich",
+        "intro": "Die beiden Coins, zwischen denen Sie umrechnen, anhand derselben sechs Kennzahlen; ▲ markiert den jeweils stärkeren.",
+        "price": "Kurs",
+        "marketCap": "Marktkapitalisierung",
+        "volume": "24-Std.-Volumen",
+        "change24h": "24-Std.-Veränderung",
+        "change7d": "7-Tage-Veränderung",
+        "rank": "Rang",
+        "workedTitle": "Rechenbeispiel: Paarverhältnisse",
+        "rowCapRatio": "Marktkap.-Verhältnis",
+        "rowCapRatioNote": "Quell-Kap. ÷ Ziel-Kap.",
+        "rowTurnover": "{symbol}-Umschlag",
+        "rowTurnoverNote": "24-Std.-Volumen ÷ Marktkap.",
+        "rowGap": "24-Std.-Performance-Abstand",
+        "rowGapNote": "Quelle − Ziel, in Prozentpunkten",
+        "legend": "Volumen und 7-Tage-Veränderung stammen aus derselben CoinGecko-Momentaufnahme wie die Kurse."
+      },
+      "movers": {
+        "title": "Top-Bewegungen (24 Std.)",
+        "heading": "Die größten Gewinner und Verlierer heute",
+        "intro": "Sortiert nach 24-Stunden-Kursveränderung unter den {count} größten Coins. Klicken Sie auf eine Coin, um von ihr umzurechnen.",
+        "gainers": "Gewinner",
+        "losers": "Verlierer",
+        "none": "Heute keine in diese Richtung.",
+        "pick": "Von dieser Coin umrechnen",
+        "workedTitle": "Rechenbeispiel: {coin}",
+        "rowNow": "Kurs jetzt",
+        "rowChange": "24-Std.-Veränderung",
+        "rowThen": "Kurs vor 24 Std.",
+        "rowThenNote": "jetzt ÷ (1 + Veränderung ÷ 100)"
+      },
+      "ticker": {
+        "title": "Live-Kurse",
+        "live": "LIVE",
+        "note": "Coinbase-Ticks, wo gelistet; sonst die letzte Momentaufnahme. Klicken Sie auf eine Coin, um von ihr umzurechnen."
+      },
+      "workedExamples": {
+        "title": "Rechenbeispiele",
+        "intro": "Drei echte Umrechnungen, Schritt für Schritt mit den Marktpreisen, die diese Seite geladen hat ({time}). Jede Umrechnung läuft über den US-Dollar als gemeinsamen Bezugspunkt.",
+        "exampleTitle": "Beispiel {n}",
+        "step1": "{from} in Dollar bewerten:",
+        "step2": "Durch den {to}-Kurs teilen:",
+        "step3": "Impliziter Kurs:"
       }
     },
     "forex-converter": {

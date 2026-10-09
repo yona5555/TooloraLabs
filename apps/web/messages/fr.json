@@ -2258,18 +2258,38 @@
       },
       "nav": {
         "tool": "Outil",
-        "indicators": "Indicateurs",
         "news": "Actualités",
         "education": "Explications",
         "faq": "FAQ",
-        "notices": "Avis"
+        "notices": "Avis",
+        "chart": "Graphique",
+        "coin": "Crypto",
+        "market": "Marché",
+        "network": "Réseau"
       },
       "topList": {
-        "title": "Les 100 principales cryptomonnaies par capitalisation boursière",
+        "title": "Les 100 plus grandes cryptomonnaies",
         "columnName": "Nom",
         "columnPrice": "Prix",
         "columnChange24h": "Variation 24 h",
-        "columnMarketCap": "Capitalisation boursière"
+        "columnMarketCap": "Capitalisation boursière",
+        "heading": "Les plus grandes cryptos du marché, étiquetées",
+        "intro": "Classées par capitalisation, chaque ligne porte des étiquettes qui la distinguent. Survolez une ligne pour le calcul de sa capitalisation ; cliquez pour convertir depuis elle.",
+        "columnTags": "Étiquettes",
+        "columnChange7d": "7 j",
+        "pick": "Convertir depuis cette crypto",
+        "tags": {
+          "yours": "Votre paire",
+          "stable": "Stablecoin",
+          "gainer": "Plus forte hausse",
+          "loser": "Plus forte baisse",
+          "capped": "Offre plafonnée"
+        },
+        "workedTitle": "Exemple résolu : {coin}",
+        "rowSupply": "Offre en circulation",
+        "rowCapNote": "prix × offre en circulation",
+        "rowVolume": "Volume 24 h",
+        "hoverHint": "Survolez une ligne pour recalculer."
       },
       "chart": {
         "title": "Graphique en chandeliers du prix",
@@ -2662,6 +2682,136 @@
         "rowDate": "Date estimée",
         "rowDateNote": "Heure du dernier bloc + blocs × temps moyen",
         "source": "Données : hauteur de chaîne et ajustement de difficulté de mempool.space, actualisés chaque minute."
+      },
+      "sensitivity": {
+        "title": "Sensibilité au prix",
+        "heading": "Votre conversion {from} → {to} si {from} bouge",
+        "intro": "Le même montant converti à un prix de {from} plus bas, actuel et plus haut, le prix de {to} restant fixe.",
+        "shiftLabel": "Variation",
+        "low": "Plus bas",
+        "now": "Maintenant",
+        "high": "Plus haut",
+        "workedTitle": "Exemple résolu : +{pct} %",
+        "rowPriceNow": "Prix de {symbol} actuel",
+        "rowShifted": "Prix décalé",
+        "rowValue": "Montant × prix",
+        "rowToPrice": "Prix de {symbol}",
+        "rowResult": "Vous recevriez",
+        "rowNote": "Chaque variation de {pct} % du prix source déplace le résultat des mêmes {pct} %"
+      },
+      "volatility": {
+        "title": "Volatilité sur 30 jours",
+        "heading": "L'ampleur des oscillations de {coin}",
+        "intro": "Volatilité réalisée des 30 dernières clôtures quotidiennes du graphique en chandeliers, ramenée à l'année pour la comparer à d'autres actifs.",
+        "loading": "Mesure de la volatilité…",
+        "error": "Pas de chandeliers quotidiens pour {symbol} : sa volatilité ne peut pas être mesurée ici.",
+        "zones": {
+          "low": "Faible",
+          "medium": "Moyenne",
+          "high": "Élevée"
+        },
+        "workedTitle": "Exemple résolu : des clôtures au %",
+        "rowReturns": "Rendements quotidiens",
+        "rowReturnsNote": "ln(clôture ÷ clôture précédente)",
+        "rowDaily": "Écart-type",
+        "rowDailyNote": "mouvement quotidien typique",
+        "rowScale": "Annualiser",
+        "rowAnnual": "Annualisée"
+      },
+      "supply": {
+        "title": "Répartition de l'offre",
+        "heading": "Combien de {coin} existent, et combien existeront",
+        "intro": "Les unités en circulation, celles émises mais bloquées et celles pas encore émises, rapportées au plafond lorsqu'il existe.",
+        "circulating": "En circulation",
+        "locked": "Émises, hors circulation",
+        "unissued": "Pas encore émises",
+        "basisMax": "Barre = offre maximale (plafond).",
+        "basisTotal": "Pas de plafond : barre = offre totale émise à ce jour.",
+        "missing": "Le fournisseur de données n'indique pas l'offre de {coin}.",
+        "workedTitle": "Exemple résolu : part de l'offre",
+        "totalLabel": "Offre totale",
+        "maxLabel": "Offre maximale",
+        "uncapped": "Sans plafond",
+        "rowShare": "Part en circulation",
+        "rowShareNoteMax": "circulation ÷ maximum",
+        "rowShareNoteTotal": "circulation ÷ total",
+        "rowCapCheck": "Circulation × prix",
+        "rowCapCheckNote": "≈ capitalisation"
+      },
+      "timeline": {
+        "title": "Chronologie de la crypto",
+        "heading": "{coin} : du lancement à aujourd'hui",
+        "intro": "Les dates clés de l'historique de prix de la crypto, et l'écart du prix actuel à ses plus haut et plus bas historiques.",
+        "stations": {
+          "genesis": "Genèse",
+          "atl": "Plus bas historique",
+          "ath": "Plus haut historique",
+          "now": "Aujourd'hui"
+        },
+        "today": "Maintenant",
+        "notRecorded": "Non renseigné",
+        "nowVs": "actuel {pct}",
+        "workedTitle": "Exemple résolu : écart aux extrêmes",
+        "rowNow": "Prix actuel",
+        "rowFromAth": "Depuis le plus haut",
+        "rowFromAtl": "Depuis le plus bas",
+        "rowFormula": "(actuel − extrême) ÷ extrême × 100"
+      },
+      "capLog": {
+        "title": "Capitalisation en échelle logarithmique",
+        "heading": "{coin} face aux dix plus grandes cryptos",
+        "intro": "Chaque ligne de la grille vaut dix fois la précédente : des cryptos séparées d'un facteur mille tiennent sur un seul graphique en barres.",
+        "workedTitle": "Exemple résolu : ordres de grandeur",
+        "rowRatio": "Écart de taille",
+        "rowDecades": "Puissances de dix",
+        "rowDecadesNote": "log₁₀(plus grande ÷ plus petite)",
+        "rowRank": "Rang"
+      },
+      "compare": {
+        "title": "Crypto contre crypto",
+        "heading": "{from} et {to} côte à côte",
+        "intro": "Les deux cryptos entre lesquelles vous convertissez, sur les six mêmes mesures ; ▲ signale la plus forte de la paire à chaque ligne.",
+        "price": "Prix",
+        "marketCap": "Capitalisation",
+        "volume": "Volume 24 h",
+        "change24h": "Variation 24 h",
+        "change7d": "Variation 7 j",
+        "rank": "Rang",
+        "workedTitle": "Exemple résolu : ratios de la paire",
+        "rowCapRatio": "Ratio de capitalisation",
+        "rowCapRatioNote": "cap. source ÷ cap. cible",
+        "rowTurnover": "Rotation de {symbol}",
+        "rowTurnoverNote": "volume 24 h ÷ capitalisation",
+        "rowGap": "Écart de performance 24 h",
+        "rowGapNote": "source − cible, en points de pourcentage",
+        "legend": "Le volume et la variation sur 7 jours proviennent du même instantané CoinGecko que les prix."
+      },
+      "movers": {
+        "title": "Plus fortes variations (24 h)",
+        "heading": "Les plus fortes hausses et baisses du jour",
+        "intro": "Classées par variation de prix sur 24 heures parmi les {count} plus grandes cryptos. Cliquez sur une crypto pour convertir depuis elle.",
+        "gainers": "Hausses",
+        "losers": "Baisses",
+        "none": "Aucune dans ce sens aujourd'hui.",
+        "pick": "Convertir depuis cette crypto",
+        "workedTitle": "Exemple résolu : {coin}",
+        "rowNow": "Prix actuel",
+        "rowChange": "Variation 24 h",
+        "rowThen": "Prix il y a 24 h",
+        "rowThenNote": "actuel ÷ (1 + variation ÷ 100)"
+      },
+      "ticker": {
+        "title": "Prix en direct",
+        "live": "EN DIRECT",
+        "note": "Ticks Coinbase lorsque la crypto y est cotée ; sinon le dernier instantané. Cliquez pour convertir depuis une crypto."
+      },
+      "workedExamples": {
+        "title": "Exemples résolus",
+        "intro": "Trois conversions réelles, résolues pas à pas avec les prix de marché chargés par cette page ({time}). Chaque conversion passe par le dollar américain comme pivot commun.",
+        "exampleTitle": "Exemple {n}",
+        "step1": "Valoriser le {from} en dollars :",
+        "step2": "Diviser par le prix de {to} :",
+        "step3": "Taux implicite :"
       }
     },
     "forex-converter": {

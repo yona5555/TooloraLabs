@@ -9,6 +9,7 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import AdSpace from "@/components/tool-ui/AdSpace";
 import CryptoInputPanel from "./CryptoInputPanel";
 import CryptoResult from "./CryptoResult";
 import CryptoTopList from "./CryptoTopList";
@@ -19,6 +20,14 @@ import CryptoDominanceDonut from "./CryptoDominanceDonut";
 import CryptoFearGreed from "./CryptoFearGreed";
 import CryptoNetworkFees from "./CryptoNetworkFees";
 import CryptoHalvingSteps from "./CryptoHalvingSteps";
+import CryptoVolatilityGauge from "./CryptoVolatilityGauge";
+import CryptoSensitivityTrio from "./CryptoSensitivityTrio";
+import CryptoComparisonCards from "./CryptoComparisonCards";
+import CryptoSupplyBar from "./CryptoSupplyBar";
+import CryptoCoinTimeline from "./CryptoCoinTimeline";
+import CryptoMarketCapLog from "./CryptoMarketCapLog";
+import CryptoTopMovers from "./CryptoTopMovers";
+import CryptoSidebarTicker from "./CryptoSidebarTicker";
 import CryptoNews from "./CryptoNews";
 import CryptoLearningResources from "./CryptoLearningResources";
 import type { FiatCurrency } from "./types";
@@ -58,18 +67,28 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
     setFiatCurrency("usd");
   }
 
+  /** Picking a coin from a list makes it the source; if it was the target, the pair swaps. */
+  function handlePick(id: string) {
+    if (id === toCoinId) setToCoinId(fromCoinId);
+    setFromCoinId(id);
+    document.getElementById("tool")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   const fromCoin = findCoinById(coins, fromCoinId);
   const toCoin = findCoinById(coins, toCoinId);
+  const amountValue = parseLocalizedNumber(amount);
 
   const convertedAmount = useMemo(() => {
-    const amountValue = parseLocalizedNumber(amount);
     if (!fromCoin || !toCoin || Number.isNaN(amountValue)) return 0;
     return convertCryptoAmount(amountValue, fromCoin.currentPrice, toCoin.currentPrice);
-  }, [amount, fromCoin, toCoin]);
+  }, [amountValue, fromCoin, toCoin]);
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
-    { id: "indicators", label: tNav("indicators") },
+    { id: "chart", label: tNav("chart") },
+    { id: "compare", label: tNav("coin") },
+    { id: "movers", label: tNav("market") },
+    { id: "fear-greed", label: tNav("network") },
     { id: "news", label: tNav("news") },
     { id: "learning-resources", label: tNav("education") },
     { id: "faq", label: tNav("faq") },
@@ -107,20 +126,58 @@ export default function CryptoConverter({ initialCoins, globalStats, usdToSarRat
                 lastUpdated={fetchedAt}
                 digitStyle={digitStyle}
               />
-              <CryptoLiveFlow fromCoin={fromCoin} toCoin={toCoin} amount={parseLocalizedNumber(amount)} digitStyle={digitStyle} />
+              <CryptoLiveFlow fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} />
               {globalStats && <CryptoDominanceDonut stats={globalStats} fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} />}
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="crypto-converter" category="financial-markets" />}
+          sidebar={
+            <div className="flex flex-col gap-6">
+              <RelatedToolsSidebar currentSlug="crypto-converter" category="financial-markets" />
+              <CryptoSidebarTicker coins={initialCoins} digitStyle={digitStyle} onPick={handlePick} />
+            </div>
+          }
+          sidebarFill={
+            <div className="sticky top-20">
+              <AdSpace />
+            </div>
+          }
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="crypto-converter" />
-              <CryptoTopList coins={initialCoins} fiatCurrency={fiatCurrency} usdToSarRate={usdToSarRate} digitStyle={digitStyle} />
+
+              {/* Group 1 — the selected coin's price action */}
               <CryptoHistoricalChart coin={fromCoin} digitStyle={digitStyle} />
+              <CryptoVolatilityGauge coin={fromCoin} digitStyle={digitStyle} />
+              <CryptoSensitivityTrio fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} />
+              <AdSpace variant="leaderboard" />
+
+              {/* Group 2 — the coin itself */}
+              <CryptoComparisonCards fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} />
+              <CryptoSupplyBar coin={fromCoin} digitStyle={digitStyle} />
+              <CryptoCoinTimeline coin={fromCoin} digitStyle={digitStyle} />
+              <CryptoMarketCapLog coins={initialCoins} coin={fromCoin} digitStyle={digitStyle} />
+              <AdSpace variant="leaderboard" />
+
+              {/* Group 3 — the whole market */}
+              <CryptoTopMovers coins={initialCoins} digitStyle={digitStyle} onPick={handlePick} />
+              <CryptoTopList
+                coins={initialCoins}
+                fiatCurrency={fiatCurrency}
+                usdToSarRate={usdToSarRate}
+                digitStyle={digitStyle}
+                fromCoinId={fromCoinId}
+                toCoinId={toCoinId}
+                onPick={handlePick}
+              />
+              <AdSpace variant="leaderboard" />
+
+              {/* Group 4 — sentiment and the Bitcoin network */}
               <CryptoFearGreed />
               <CryptoNetworkFees btcPriceUsd={findCoinById(coins, "bitcoin")?.currentPrice ?? null} digitStyle={digitStyle} />
               <CryptoHalvingSteps />
+              <AdSpace variant="leaderboard" />
+
               <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
               <CryptoNews />
               <CryptoLearningResources />

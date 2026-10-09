@@ -142,12 +142,12 @@ export default function CryptoLiveFlow({ fromCoin, toCoin, amount, digitStyle }:
        <div className="flex flex-col gap-4 @2xl:flex-row @2xl:items-center">
         <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-1.5 @2xl:w-[26rem] @2xl:shrink-0">
           <CoinNode coin={fromCoin} tick={fromTick} amountLabel={`${n(amt)} ${sym(fromCoin)}`} digitStyle={digitStyle} />
-          {/* Flow arrow with the live rate embedded on its shaft; flips direction in RTL */}
+          {/* Flow arrow with the live rate embedded on its shaft; the logical border points it the reading way in RTL too */}
           <div className="flex flex-col items-center gap-1" aria-hidden>
             <div dir="ltr" className="rounded-full bg-blue-600 px-2 py-0.5 font-mono text-[10px] font-semibold text-white shadow-sm" data-testid="flow-rate">
               × {n(rate)}
             </div>
-            <div className="flex items-center rtl:rotate-180">
+            <div className="flex items-center">
               <div className="h-1 w-6 rounded bg-blue-500" />
               <div className="h-0 w-0 border-y-[7px] border-s-[9px] border-y-transparent border-s-blue-500" />
             </div>
