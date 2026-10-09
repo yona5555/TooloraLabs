@@ -19,6 +19,7 @@
 - حين يقول «لا تفحص، أريد أمراً فقط» فالتزم حرفياً. قال: «لا تقم بفحص لأنك ضعيف في الفحص».
 - Give Yousef ready-to-paste English commands only. Never tell him to type or do something himself (no 'type /memory', no 'run /clear', no manual steps).
 - Every English command written for Yousef must be followed by a short Arabic summary that explains exactly what the command does.
+- When a session has run long (several tasks done, or long outputs), remind Yousef to clear it and give him the /clear command.
 
 ## 3. الصدق في الإنجاز
 - إن لم تجد شيئاً طلبه (ملف، مكوّن) فاطلب اسمه.
