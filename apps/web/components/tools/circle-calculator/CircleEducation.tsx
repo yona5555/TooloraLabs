@@ -4,16 +4,29 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CircleRadiusGauge from "./CircleRadiusGauge";
-import CirclePiUnrollDiagram from "./CirclePiUnrollDiagram";
-import CircleAreaDiagram from "./CircleAreaDiagram";
-import CircleGrowthComparisonChart from "./CircleGrowthComparisonChart";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import { CircleLive3DLive } from "./CircleLive3D";
+import CircleRadiusLab from "./CircleRadiusLab";
+import CircleUnroll from "./CircleUnroll";
+import {
+  CircleAreaBars,
+  CircleEqualArea,
+  CircleGrowthCurves,
+  CircleIsoperimetric,
+  CirclePolygonGauge,
+  CircleRingDonut,
+  CircleSectorZones,
+  CircleSensitivityTrio,
+  CircleSolveSteps,
+  CircleSquareStack,
+} from "./CircleIndicators";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
 
 export default async function CircleEducation() {
   const t = await getTranslations("tools.circle-calculator.education");
+  const tLive = await getTranslations("tools.circle-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const applicationItems = t.raw("applications.items") as ApplicationItem[];
@@ -22,16 +35,30 @@ export default async function CircleEducation() {
 
   return (
     <EncyclopediaPaper>
-      <CircleRadiusGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={tLive("educationTitle")}>
+          <CircleLive3DLive />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <CirclePiUnrollDiagram />
+        <div className="space-y-6">
+          <CircleRadiusLab />
+          <CircleUnroll />
+        </div>
         <p>{t("intro.paragraph3")}</p>
-        <CircleAreaDiagram />
-        <CircleGrowthComparisonChart />
+        <div className="space-y-6">
+          <CircleSolveSteps />
+          <CircleGrowthCurves />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <div className="space-y-6">
+        <CircleSensitivityTrio />
+        <CircleAreaBars />
+        <CircleSquareStack />
+      </div>
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -53,7 +80,13 @@ export default async function CircleEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <CircleEqualArea />
+          <CircleRingDonut />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("applications.title")}>
         <p>{t("applications.intro")}</p>
@@ -64,6 +97,11 @@ export default async function CircleEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <CircleIsoperimetric />
+          <CirclePolygonGauge />
+          <CircleSectorZones />
         </div>
       </InfoSection>
 

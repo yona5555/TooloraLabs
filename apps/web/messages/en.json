@@ -23106,11 +23106,7 @@
           "circumference": "Circumference",
           "area": "Area"
         },
-        "scenarioLabel": "Quick-fill a worked example",
         "clear": "Clear"
-      },
-      "diagram": {
-        "ariaLabel": "A circle drawn to scale with its radius marked as a dashed line from the center"
       },
       "result": {
         "heading": "Result",
@@ -23132,24 +23128,6 @@
           "title": "Understanding Circle Measurements",
           "paragraph1": "A circle is fully defined by a single number: its radius, the distance from its center to any point on its edge. Every other common measurement — diameter, circumference, area — is a fixed multiple or function of that one radius, which is why knowing any one of the four measurements is always enough to recover the other three; there's no such thing as an \"underdetermined\" circle the way there can be for a general triangle or quadrilateral.",
           "paragraph2": "The constant that links a circle's circumference to its diameter is π (pi) — an irrational number, roughly 3.14159, that never terminates or repeats in decimal form. Diameter is simply twice the radius; circumference is π times the diameter (equivalently, 2π times the radius); and area is π times the radius squared. This tool accepts whichever one of the four you already know and derives the rest instantly.",
-          "radiusGauge": {
-            "title": "Where Does This Radius Fall?",
-            "intro": "Circle sizes span an enormous range, from a small coin to a giant Ferris wheel. Pick a real-world example below to see where its radius falls.",
-            "verdict": "{example} — Scale: {classification}.",
-            "fact": "This example has a radius of about {radius}.",
-            "examples": {
-              "coin": "A Coin",
-              "dinnerPlate": "A Dinner Plate",
-              "bicycleWheel": "A Bicycle Wheel",
-              "runningTrack": "A Running Track",
-              "ferrisWheel": "A Ferris Wheel"
-            },
-            "scales": {
-              "pocket": "Pocket-Sized",
-              "room": "Room-Sized",
-              "landmark": "Landmark-Sized"
-            }
-          },
           "paragraph3": "The area formula follows the same idea, just with the sectors instead of the rim: cut the circle into thin pie slices and lay them out edge to edge, and they approximate a rectangle whose height is the radius and whose base is half the circumference (πr) — giving an area of πr × r = πr²."
         },
         "examples": {
@@ -23276,7 +23254,10 @@
         "bicycleWheel": "Bicycle Wheel (Radius)",
         "pizzaDiameter": "Pizza (Diameter)",
         "trackLap": "Running Track (Circumference)",
-        "roomFloor": "Round Room (Area)"
+        "roomFloor": "Round Room (Area)",
+        "coin": "US Quarter Coin (Diameter)",
+        "compactDisc": "Audio CD (Diameter)",
+        "ferrisWheel": "London Eye (Diameter)"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -23296,23 +23277,176 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
       },
-      "piDiagram": {
-        "title": "Try It: Unrolling the Circumference",
-        "intro": "If you could cut a circle's rim and lay it flat, it would stretch to exactly π diameters long — three full diameters plus a small leftover piece.",
-        "ariaLabel": "A circle's circumference unrolled into a straight line of length pi times the diameter",
-        "caption": "This is exactly why π ≈ 3.14159 — it's the fixed ratio between any circle's circumference and its diameter."
+      "live3d": {
+        "educationTitle": "Your Circle, Measured Every Way",
+        "given": "given",
+        "units": {
+          "len": "u",
+          "area": "u²",
+          "vol": "u³"
+        },
+        "groups": {
+          "given": "Known value → radius",
+          "core": "Core measurements",
+          "sectors": "Arcs, sectors and chords",
+          "squares": "Inscribed and circumscribed squares",
+          "solids": "3D relatives (same radius)",
+          "conversions": "Unit conversions"
+        },
+        "rows": {
+          "piCheck": "Circumference ÷ diameter",
+          "areaPerRim": "Area per unit of rim",
+          "arc": "Arc length at {deg}°",
+          "sector": "Sector area at {deg}°",
+          "chord": "Chord at {deg}°",
+          "segment": "Segment area at {deg}°",
+          "inSquareSide": "Inscribed square side",
+          "inSquareArea": "Inscribed square area",
+          "outSquareArea": "Circumscribed square area",
+          "fill": "Circle fills its square",
+          "sphereVolume": "Sphere volume",
+          "sphereSurface": "Sphere surface area",
+          "cylinderVolume": "Cylinder volume (h = d)",
+          "rInches": "Radius, if in cm → inches",
+          "aInches": "Area, if in cm² → in²",
+          "cFeet": "Circumference, if in m → feet",
+          "aFeet": "Area, if in m² → ft²"
+        }
       },
-      "areaDiagram": {
-        "areaSectorsCaption": "The circle's sectors unrolled into a strip approximating a base-πr, height-r rectangle — its area, πr × r = πr², is the circle's area formula.",
-        "areaHeightLabel": "height = r",
-        "areaBaseLabel": "base = πr"
-      },
-      "growthChart": {
-        "chartAriaLabel": "Line chart comparing circumference (growing linearly) and area (growing quadratically) as radius increases from 0 to 10",
-        "radiusLabel": "r = {r}",
-        "legendCircumference": "Circumference (2πr)",
-        "legendArea": "Area (πr²)",
-        "caption": "As the radius grows, circumference grows in direct proportion, but area grows with the square of the radius — doubling the radius roughly doubles the circumference but quadruples the area."
+      "ind": {
+        "worked": "Worked example",
+        "lab": {
+          "title": "Radius Drag Lab",
+          "heading": "Drag the red handle to resize the circle",
+          "intro": "The handle sets the radius of the calculator above; every number on this page follows it live, including the squares drawn inside and around the circle.",
+          "aria": "Draggable circle with its radius, diameter, inscribed square and circumscribed square",
+          "rowScale": "Axis scale",
+          "rowInside": "Inscribed square area",
+          "rowOutside": "Circumscribed square area",
+          "legendRadius": "Radius (drag the handle)",
+          "legendInside": "Inscribed square",
+          "legendOutside": "Circumscribed square"
+        },
+        "unroll": {
+          "title": "Unrolling the Circumference",
+          "heading": "Roll the circle and lay its rim flat",
+          "intro": "As the circle rolls one full turn, its rim lays down a straight line exactly π diameters long: past 1d, 2d and 3d, then a little more.",
+          "aria": "A circle rolling along a line, laying down its circumference",
+          "play": "Play",
+          "pause": "Pause",
+          "progress": "Rolled",
+          "rowDiameter": "Diameter",
+          "rowRolled": "Angle rolled",
+          "rowLaid": "Rim laid down",
+          "rowLeft": "Rim still on the circle",
+          "rowInD": "Laid length in diameters",
+          "rowFull": "Full circumference"
+        },
+        "steps": {
+          "title": "Solving Path",
+          "heading": "From the known {field} to every other measurement",
+          "intro": "Each step uses only the result of the step before it, with your current numbers substituted.",
+          "given": "given"
+        },
+        "growth": {
+          "title": "How Circumference and Area Grow",
+          "heading": "Circumference grows in a straight line, area in a curve",
+          "intro": "Both curves run from zero to twice your radius; the dashed line marks your circle, and the violet dot is where the two values are equal.",
+          "rowSlopeC": "Circumference gained per unit of radius",
+          "rowSlopeA": "Area gained per unit of radius (now)",
+          "rowCross": "Where A = C",
+          "rowRatio": "Area to circumference",
+          "legendC": "Circumference 2πr",
+          "legendA": "Area πr²",
+          "legendNow": "Your radius"
+        },
+        "trio": {
+          "title": "Radius Sensitivity",
+          "heading": "What a ±{pct}% change in radius does",
+          "intro": "The rim changes by the same percentage as the radius, but the area changes by roughly twice as much because it depends on the radius squared.",
+          "change": "Change",
+          "low": "Lower",
+          "current": "Current",
+          "high": "Higher",
+          "rowFactor": "Radius factor",
+          "rowRule": "Area factor (higher)"
+        },
+        "bars": {
+          "title": "Areas Inside and Around the Circle",
+          "heading": "The circle between its inscribed and circumscribed polygons",
+          "intro": "Polygons drawn inside the circle hold less area and polygons drawn around it hold more; the circle sits between them.",
+          "inSquare": "Inscribed square",
+          "inHex": "Inscribed hexagon",
+          "circle": "Circle",
+          "outHex": "Circumscribed hexagon",
+          "outSquare": "Circumscribed square"
+        },
+        "stack": {
+          "title": "Splitting the Surrounding Square",
+          "heading": "The square around the circle, piece by piece",
+          "intro": "The square drawn around the circle splits into the inscribed square, four circular segments and four corners. The first two together make the circle.",
+          "inSquare": "Inscribed square",
+          "segments": "Four circular segments",
+          "corners": "Four outer corners",
+          "circle": "Circle",
+          "total": "Circumscribed square"
+        },
+        "equal": {
+          "title": "Same Area, Three Shapes",
+          "heading": "Three shapes that each enclose {area}",
+          "intro": "Unroll the circle's sectors and they form a rectangle πr long and r high; a square of side r√π holds the same area too.",
+          "circle": "Circle",
+          "square": "Square",
+          "rect": "Rectangle",
+          "squareCheck": "Square check",
+          "rectCheck": "Rectangle check"
+        },
+        "rings": {
+          "title": "Where the Area Lives",
+          "heading": "Four rings of equal width, unequal area",
+          "intro": "Cut the disk into four rings of equal width: the outer ring alone holds 7/16 of the area, while the central disk holds only 1/16.",
+          "ring": "Ring",
+          "total": "Total area"
+        },
+        "iso": {
+          "title": "Same Perimeter, Ranked by Area",
+          "heading": "Shapes with the same perimeter as your circle ({c})",
+          "intro": "For a fixed perimeter, no shape encloses more area than the circle; regular polygons with more sides come closer.",
+          "perimeter": "Shared perimeter",
+          "circle": "Circle",
+          "hexagon": "Regular hexagon",
+          "square": "Square",
+          "triangle": "Equilateral triangle",
+          "side": "side"
+        },
+        "gauge": {
+          "title": "Archimedes' Polygon Method",
+          "heading": "A regular {n}-gon inside the circle",
+          "intro": "Archimedes trapped π between polygons inside and around the circle. Move the slider to add sides and watch the inscribed perimeter approach the true circumference.",
+          "sides": "Sides",
+          "inside": "Inscribed perimeter",
+          "outside": "Circumscribed perimeter",
+          "bounds": "Bounds on π",
+          "share": "Inscribed perimeter ÷ circumference"
+        },
+        "zones": {
+          "title": "Sector Angle Zones",
+          "heading": "A {deg}° sector · {zone}",
+          "intro": "Slide the central angle to see the arc, sector, chord and segment of your circle, and which type of angle it is.",
+          "angle": "Central angle",
+          "zero": "Zero",
+          "acute": "Acute",
+          "right": "Right",
+          "obtuse": "Obtuse",
+          "straight": "Straight",
+          "reflex": "Reflex",
+          "full": "Full turn",
+          "radians": "Angle in radians",
+          "arc": "Arc length",
+          "sector": "Sector area",
+          "chord": "Chord",
+          "segment": "Segment area"
+        }
       }
     },
     "triangle-calculator": {

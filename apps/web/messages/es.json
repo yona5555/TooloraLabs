@@ -22852,11 +22852,7 @@
           "circumference": "Circunferencia",
           "area": "Área"
         },
-        "scenarioLabel": "Rellenar rápido un ejemplo resuelto",
         "clear": "Borrar"
-      },
-      "diagram": {
-        "ariaLabel": "Un círculo dibujado a escala con su radio marcado como una línea discontinua desde el centro"
       },
       "result": {
         "heading": "Resultado",
@@ -22878,24 +22874,6 @@
           "title": "Entender las Medidas del Círculo",
           "paragraph1": "Un círculo queda completamente definido por un único número: su radio, la distancia desde su centro hasta cualquier punto de su borde. Cualquier otra medida habitual — diámetro, circunferencia, área — es un múltiplo fijo o una función de ese único radio, por lo que conocer cualquiera de las cuatro medidas siempre basta para recuperar las otras tres; no existe un círculo \"subdeterminado\" como puede ocurrir con un triángulo o cuadrilátero general.",
           "paragraph2": "La constante que vincula la circunferencia de un círculo con su diámetro es π (pi) — un número irracional, aproximadamente 3,14159, que nunca termina ni se repite en forma decimal. El diámetro es simplemente el doble del radio; la circunferencia es π por el diámetro (equivalentemente, 2π por el radio); y el área es π por el radio al cuadrado. Esta herramienta acepta cualquiera de los cuatro valores que ya conozcas y deriva el resto al instante.",
-          "radiusGauge": {
-            "title": "¿Dónde se ubica este radio?",
-            "intro": "El tamaño de los círculos abarca un rango enorme, desde una pequeña moneda hasta una gigantesca noria. Elige un ejemplo real a continuación para ver dónde se ubica su radio.",
-            "verdict": "{example} — Escala: {classification}.",
-            "fact": "Este ejemplo tiene un radio de aproximadamente {radius}.",
-            "examples": {
-              "coin": "Una moneda",
-              "dinnerPlate": "Un plato",
-              "bicycleWheel": "Una rueda de bicicleta",
-              "runningTrack": "Una pista de atletismo",
-              "ferrisWheel": "Una noria"
-            },
-            "scales": {
-              "pocket": "Tamaño de bolsillo",
-              "room": "Tamaño de habitación",
-              "landmark": "Tamaño de monumento"
-            }
-          },
           "paragraph3": "La fórmula del área sigue la misma idea, solo que con los sectores en lugar del borde: corta el círculo en finas porciones tipo pastel y colócalas una junto a otra, y se aproximan a un rectángulo cuya altura es el radio y cuya base es la mitad de la circunferencia (πr), lo que da un área de πr × r = πr²."
         },
         "examples": {
@@ -23022,7 +23000,10 @@
         "bicycleWheel": "Rueda de bicicleta (radio)",
         "pizzaDiameter": "Pizza (diámetro)",
         "trackLap": "Pista de atletismo (circunferencia)",
-        "roomFloor": "Habitación redonda (área)"
+        "roomFloor": "Habitación redonda (área)",
+        "coin": "Moneda de 25 centavos de EE. UU. (diámetro)",
+        "compactDisc": "CD de audio (diámetro)",
+        "ferrisWheel": "London Eye (diámetro)"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -23042,23 +23023,176 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
       },
-      "piDiagram": {
-        "title": "Pruébalo: Desenrollando la Circunferencia",
-        "intro": "Si pudieras cortar el borde de un círculo y extenderlo en línea recta, mediría exactamente π diámetros de largo — tres diámetros completos más un pequeño trozo sobrante.",
-        "ariaLabel": "La circunferencia de un círculo desenrollada en una línea recta de longitud pi por el diámetro",
-        "caption": "Por eso π ≈ 3,14159 — es la relación fija entre la circunferencia de cualquier círculo y su diámetro."
+      "live3d": {
+        "educationTitle": "Tu círculo, medido de todas las formas",
+        "given": "dato",
+        "units": {
+          "len": "u",
+          "area": "u²",
+          "vol": "u³"
+        },
+        "groups": {
+          "given": "Valor conocido → radio",
+          "core": "Medidas principales",
+          "sectors": "Arcos, sectores y cuerdas",
+          "squares": "Cuadrados inscrito y circunscrito",
+          "solids": "Parientes 3D (mismo radio)",
+          "conversions": "Conversión de unidades"
+        },
+        "rows": {
+          "piCheck": "Circunferencia ÷ diámetro",
+          "areaPerRim": "Área por unidad de borde",
+          "arc": "Longitud de arco a {deg}°",
+          "sector": "Área del sector a {deg}°",
+          "chord": "Cuerda a {deg}°",
+          "segment": "Área del segmento a {deg}°",
+          "inSquareSide": "Lado del cuadrado inscrito",
+          "inSquareArea": "Área del cuadrado inscrito",
+          "outSquareArea": "Área del cuadrado circunscrito",
+          "fill": "El círculo llena su cuadrado",
+          "sphereVolume": "Volumen de la esfera",
+          "sphereSurface": "Superficie de la esfera",
+          "cylinderVolume": "Volumen del cilindro (h = d)",
+          "rInches": "Radio, si está en cm → pulgadas",
+          "aInches": "Área, si está en cm² → pulg²",
+          "cFeet": "Circunferencia, si está en m → pies",
+          "aFeet": "Área, si está en m² → pies²"
+        }
       },
-      "areaDiagram": {
-        "areaSectorsCaption": "Los sectores del círculo desplegados en una franja que se aproxima a un rectángulo de base πr y altura r; su área, πr × r = πr², es la fórmula del área del círculo.",
-        "areaHeightLabel": "altura = r",
-        "areaBaseLabel": "base = πr"
-      },
-      "growthChart": {
-        "chartAriaLabel": "Gráfico de líneas que compara la circunferencia (crecimiento lineal) y el área (crecimiento cuadrático) a medida que el radio aumenta de 0 a 10",
-        "radiusLabel": "r = {r}",
-        "legendCircumference": "Circunferencia (2πr)",
-        "legendArea": "Área (πr²)",
-        "caption": "A medida que crece el radio, la circunferencia crece en proporción directa, pero el área crece con el cuadrado del radio: duplicar el radio duplica aproximadamente la circunferencia, pero cuadruplica el área."
+      "ind": {
+        "worked": "Ejemplo resuelto",
+        "lab": {
+          "title": "Laboratorio de arrastre del radio",
+          "heading": "Arrastra el punto rojo para cambiar el tamaño del círculo",
+          "intro": "El punto fija el radio de la calculadora de arriba; todos los números de la página lo siguen en vivo, incluidos los cuadrados dibujados dentro y alrededor del círculo.",
+          "aria": "Círculo arrastrable con su radio, diámetro, cuadrado inscrito y cuadrado circunscrito",
+          "rowScale": "Escala del eje",
+          "rowInside": "Área del cuadrado inscrito",
+          "rowOutside": "Área del cuadrado circunscrito",
+          "legendRadius": "Radio (arrastra el punto)",
+          "legendInside": "Cuadrado inscrito",
+          "legendOutside": "Cuadrado circunscrito"
+        },
+        "unroll": {
+          "title": "Desenrollar la circunferencia",
+          "heading": "Haz rodar el círculo y extiende su borde",
+          "intro": "Cuando el círculo da una vuelta completa, su borde traza una línea recta de exactamente π diámetros: pasa 1d, 2d y 3d y un poco más.",
+          "aria": "Un círculo que rueda sobre una línea extendiendo su circunferencia",
+          "play": "Reproducir",
+          "pause": "Pausa",
+          "progress": "Recorrido",
+          "rowDiameter": "Diámetro",
+          "rowRolled": "Ángulo girado",
+          "rowLaid": "Borde extendido",
+          "rowLeft": "Borde aún en el círculo",
+          "rowInD": "Longitud extendida en diámetros",
+          "rowFull": "Circunferencia completa"
+        },
+        "steps": {
+          "title": "Ruta de resolución",
+          "heading": "Del {field} conocido a todas las demás medidas",
+          "intro": "Cada paso usa solo el resultado del paso anterior, con tus números actuales sustituidos.",
+          "given": "dato"
+        },
+        "growth": {
+          "title": "Cómo crecen la circunferencia y el área",
+          "heading": "La circunferencia crece en línea recta; el área, en curva",
+          "intro": "Ambas curvas van de cero al doble de tu radio; la línea discontinua marca tu círculo y el punto violeta, dónde los dos valores son iguales.",
+          "rowSlopeC": "Circunferencia ganada por unidad de radio",
+          "rowSlopeA": "Área ganada por unidad de radio (ahora)",
+          "rowCross": "Donde A = C",
+          "rowRatio": "Área entre circunferencia",
+          "legendC": "Circunferencia 2πr",
+          "legendA": "Área πr²",
+          "legendNow": "Tu radio"
+        },
+        "trio": {
+          "title": "Sensibilidad al radio",
+          "heading": "Qué produce un cambio de ±{pct}% en el radio",
+          "intro": "El borde cambia en el mismo porcentaje que el radio, pero el área cambia casi el doble porque depende del radio al cuadrado.",
+          "change": "Cambio",
+          "low": "Menor",
+          "current": "Actual",
+          "high": "Mayor",
+          "rowFactor": "Factor del radio",
+          "rowRule": "Factor del área (mayor)"
+        },
+        "bars": {
+          "title": "Áreas dentro y alrededor del círculo",
+          "heading": "El círculo entre sus polígonos inscritos y circunscritos",
+          "intro": "Los polígonos dibujados dentro del círculo tienen menos área y los dibujados alrededor, más; el círculo queda entre ellos.",
+          "inSquare": "Cuadrado inscrito",
+          "inHex": "Hexágono inscrito",
+          "circle": "Círculo",
+          "outHex": "Hexágono circunscrito",
+          "outSquare": "Cuadrado circunscrito"
+        },
+        "stack": {
+          "title": "Dividir el cuadrado circundante",
+          "heading": "El cuadrado alrededor del círculo, pieza a pieza",
+          "intro": "El cuadrado dibujado alrededor del círculo se divide en el cuadrado inscrito, cuatro segmentos circulares y cuatro esquinas. Los dos primeros juntos forman el círculo.",
+          "inSquare": "Cuadrado inscrito",
+          "segments": "Cuatro segmentos circulares",
+          "corners": "Cuatro esquinas exteriores",
+          "circle": "Círculo",
+          "total": "Cuadrado circunscrito"
+        },
+        "equal": {
+          "title": "Misma área, tres figuras",
+          "heading": "Tres figuras que encierran {area} cada una",
+          "intro": "Si se desenrollan los sectores del círculo forman un rectángulo de πr de largo y r de alto; un cuadrado de lado r√π también tiene la misma área.",
+          "circle": "Círculo",
+          "square": "Cuadrado",
+          "rect": "Rectángulo",
+          "squareCheck": "Comprobación del cuadrado",
+          "rectCheck": "Comprobación del rectángulo"
+        },
+        "rings": {
+          "title": "Dónde está el área",
+          "heading": "Cuatro anillos de igual ancho y distinta área",
+          "intro": "Corta el disco en cuatro anillos de igual ancho: el anillo exterior solo contiene 7/16 del área, y el disco central apenas 1/16.",
+          "ring": "Anillo",
+          "total": "Área total"
+        },
+        "iso": {
+          "title": "Mismo perímetro, ordenadas por área",
+          "heading": "Figuras con el mismo perímetro que tu círculo ({c})",
+          "intro": "Con un perímetro fijo ninguna figura encierra más área que el círculo; los polígonos regulares con más lados se acercan más.",
+          "perimeter": "Perímetro común",
+          "circle": "Círculo",
+          "hexagon": "Hexágono regular",
+          "square": "Cuadrado",
+          "triangle": "Triángulo equilátero",
+          "side": "lado"
+        },
+        "gauge": {
+          "title": "Método de los polígonos de Arquímedes",
+          "heading": "Un {n}-gono regular dentro del círculo",
+          "intro": "Arquímedes acotó π entre polígonos dentro y alrededor del círculo. Mueve el control para añadir lados y mira cómo el perímetro inscrito se acerca a la circunferencia real.",
+          "sides": "Lados",
+          "inside": "Perímetro inscrito",
+          "outside": "Perímetro circunscrito",
+          "bounds": "Cotas de π",
+          "share": "Perímetro inscrito ÷ circunferencia"
+        },
+        "zones": {
+          "title": "Zonas del ángulo del sector",
+          "heading": "Un sector de {deg}° · {zone}",
+          "intro": "Desliza el ángulo central para ver el arco, el sector, la cuerda y el segmento de tu círculo, y qué tipo de ángulo es.",
+          "angle": "Ángulo central",
+          "zero": "Nulo",
+          "acute": "Agudo",
+          "right": "Recto",
+          "obtuse": "Obtuso",
+          "straight": "Llano",
+          "reflex": "Cóncavo",
+          "full": "Vuelta completa",
+          "radians": "Ángulo en radianes",
+          "arc": "Longitud de arco",
+          "sector": "Área del sector",
+          "chord": "Cuerda",
+          "segment": "Área del segmento"
+        }
       }
     },
     "gcf-lcm-calculator": {

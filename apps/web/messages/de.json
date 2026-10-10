@@ -22852,11 +22852,7 @@
           "circumference": "Umfang",
           "area": "Fläche"
         },
-        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
         "clear": "Zurücksetzen"
-      },
-      "diagram": {
-        "ariaLabel": "Ein maßstabsgetreu gezeichneter Kreis mit seinem Radius als gestrichelte Linie vom Mittelpunkt markiert"
       },
       "result": {
         "heading": "Ergebnis",
@@ -22878,24 +22874,6 @@
           "title": "Kreismessungen verstehen",
           "paragraph1": "Ein Kreis wird vollständig durch eine einzige Zahl definiert: seinen Radius, den Abstand von seinem Mittelpunkt zu jedem Punkt auf seinem Rand. Jede andere gängige Messung — Durchmesser, Umfang, Fläche — ist ein fester Vielfacher oder eine Funktion dieses einen Radius, weshalb die Kenntnis einer der vier Messungen immer ausreicht, um die anderen drei zu ermitteln; es gibt keinen \"unterbestimmten\" Kreis, wie es ihn bei einem allgemeinen Dreieck oder Viereck geben kann.",
           "paragraph2": "Die Konstante, die den Umfang eines Kreises mit seinem Durchmesser verbindet, ist π (Pi) — eine irrationale Zahl, ungefähr 3,14159, die in Dezimalform nie endet oder sich wiederholt. Der Durchmesser ist einfach das Doppelte des Radius; der Umfang ist π mal der Durchmesser (gleichbedeutend 2π mal der Radius); und die Fläche ist π mal das Quadrat des Radius. Dieses Tool akzeptiert, welchen der vier Werte auch immer Sie bereits kennen, und leitet die restlichen sofort ab.",
-          "radiusGauge": {
-            "title": "Wo liegt dieser Radius?",
-            "intro": "Kreisgrößen erstrecken sich über einen enormen Bereich, von einer kleinen Münze bis zu einem riesigen Riesenrad. Wähle unten ein reales Beispiel, um zu sehen, wo sein Radius liegt.",
-            "verdict": "{example} — Größenordnung: {classification}.",
-            "fact": "Dieses Beispiel hat einen Radius von etwa {radius}.",
-            "examples": {
-              "coin": "Eine Münze",
-              "dinnerPlate": "Ein Teller",
-              "bicycleWheel": "Ein Fahrradrad",
-              "runningTrack": "Eine Laufbahn",
-              "ferrisWheel": "Ein Riesenrad"
-            },
-            "scales": {
-              "pocket": "Taschengröße",
-              "room": "Zimmergröße",
-              "landmark": "Landmarkengröße"
-            }
-          },
           "paragraph3": "Die Flächenformel folgt derselben Idee, nur mit den Sektoren statt dem Rand: Schneidet man den Kreis in dünne Tortenstücke und legt sie aneinander, ergeben sie näherungsweise ein Rechteck mit der Höhe des Radius und einer Grundfläche von der Hälfte des Umfangs (πr) — das ergibt eine Fläche von πr × r = πr²."
         },
         "examples": {
@@ -23022,7 +23000,10 @@
         "bicycleWheel": "Fahrradrad (Radius)",
         "pizzaDiameter": "Pizza (Durchmesser)",
         "trackLap": "Laufbahn (Umfang)",
-        "roomFloor": "Runder Raum (Fläche)"
+        "roomFloor": "Runder Raum (Fläche)",
+        "coin": "US-Vierteldollar-Münze (Durchmesser)",
+        "compactDisc": "Audio-CD (Durchmesser)",
+        "ferrisWheel": "London Eye (Durchmesser)"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -23042,23 +23023,176 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
       },
-      "piDiagram": {
-        "title": "Ausprobieren: Den Umfang Abrollen",
-        "intro": "Würde man den Rand eines Kreises abschneiden und flach auslegen, wäre er genau π Durchmesser lang — drei volle Durchmesser plus ein kleines übriges Stück.",
-        "ariaLabel": "Ein Kreisumfang, abgerollt zu einer geraden Linie mit der Länge Pi mal Durchmesser",
-        "caption": "Genau deshalb ist π ≈ 3,14159 — es ist das feste Verhältnis zwischen dem Umfang und dem Durchmesser jedes Kreises."
+      "live3d": {
+        "educationTitle": "Ihr Kreis, auf jede Weise vermessen",
+        "given": "gegeben",
+        "units": {
+          "len": "E",
+          "area": "E²",
+          "vol": "E³"
+        },
+        "groups": {
+          "given": "Bekannter Wert → Radius",
+          "core": "Grundmaße",
+          "sectors": "Bögen, Sektoren und Sehnen",
+          "squares": "Ein- und umbeschriebenes Quadrat",
+          "solids": "3D-Verwandte (gleicher Radius)",
+          "conversions": "Einheitenumrechnung"
+        },
+        "rows": {
+          "piCheck": "Umfang ÷ Durchmesser",
+          "areaPerRim": "Fläche je Randeinheit",
+          "arc": "Bogenlänge bei {deg}°",
+          "sector": "Sektorfläche bei {deg}°",
+          "chord": "Sehne bei {deg}°",
+          "segment": "Segmentfläche bei {deg}°",
+          "inSquareSide": "Seite des einbeschriebenen Quadrats",
+          "inSquareArea": "Fläche des einbeschriebenen Quadrats",
+          "outSquareArea": "Fläche des umbeschriebenen Quadrats",
+          "fill": "Kreis füllt sein Quadrat",
+          "sphereVolume": "Kugelvolumen",
+          "sphereSurface": "Kugeloberfläche",
+          "cylinderVolume": "Zylindervolumen (h = d)",
+          "rInches": "Radius, falls in cm → Zoll",
+          "aInches": "Fläche, falls in cm² → Zoll²",
+          "cFeet": "Umfang, falls in m → Fuß",
+          "aFeet": "Fläche, falls in m² → Fuß²"
+        }
       },
-      "areaDiagram": {
-        "areaSectorsCaption": "Die Kreissektoren, ausgerollt zu einem Streifen, der einem Rechteck mit Grundfläche πr und Höhe r nahekommt — seine Fläche, πr × r = πr², ist die Flächenformel des Kreises.",
-        "areaHeightLabel": "Höhe = r",
-        "areaBaseLabel": "Grundfläche = πr"
-      },
-      "growthChart": {
-        "chartAriaLabel": "Liniendiagramm, das Umfang (linear wachsend) und Fläche (quadratisch wachsend) vergleicht, während der Radius von 0 auf 10 steigt",
-        "radiusLabel": "r = {r}",
-        "legendCircumference": "Umfang (2πr)",
-        "legendArea": "Fläche (πr²)",
-        "caption": "Mit wachsendem Radius wächst der Umfang direkt proportional, doch die Fläche wächst mit dem Quadrat des Radius — eine Verdopplung des Radius verdoppelt etwa den Umfang, vervierfacht aber die Fläche."
+      "ind": {
+        "worked": "Rechenbeispiel",
+        "lab": {
+          "title": "Radius-Ziehlabor",
+          "heading": "Ziehen Sie den roten Griff, um den Kreis zu verändern",
+          "intro": "Der Griff setzt den Radius des Rechners oben; jede Zahl auf dieser Seite folgt ihm live, auch die Quadrate innerhalb und um den Kreis.",
+          "aria": "Ziehbarer Kreis mit Radius, Durchmesser, ein- und umbeschriebenem Quadrat",
+          "rowScale": "Achsenmaßstab",
+          "rowInside": "Fläche des einbeschriebenen Quadrats",
+          "rowOutside": "Fläche des umbeschriebenen Quadrats",
+          "legendRadius": "Radius (Griff ziehen)",
+          "legendInside": "Einbeschriebenes Quadrat",
+          "legendOutside": "Umbeschriebenes Quadrat"
+        },
+        "unroll": {
+          "title": "Den Umfang abrollen",
+          "heading": "Rollen Sie den Kreis und legen Sie seinen Rand flach",
+          "intro": "Rollt der Kreis eine volle Umdrehung, legt sein Rand eine gerade Linie von genau π Durchmessern ab: über 1d, 2d und 3d hinaus und noch ein Stück weiter.",
+          "aria": "Ein Kreis rollt auf einer Linie und legt seinen Umfang ab",
+          "play": "Abspielen",
+          "pause": "Pause",
+          "progress": "Abgerollt",
+          "rowDiameter": "Durchmesser",
+          "rowRolled": "Gerollter Winkel",
+          "rowLaid": "Abgelegter Rand",
+          "rowLeft": "Verbleibender Rand",
+          "rowInD": "Abgelegte Länge in Durchmessern",
+          "rowFull": "Voller Umfang"
+        },
+        "steps": {
+          "title": "Lösungsweg",
+          "heading": "Vom bekannten Wert ({field}) zu allen anderen Maßen",
+          "intro": "Jeder Schritt nutzt nur das Ergebnis des vorherigen, mit Ihren aktuellen Zahlen eingesetzt.",
+          "given": "gegeben"
+        },
+        "growth": {
+          "title": "Wie Umfang und Fläche wachsen",
+          "heading": "Der Umfang wächst linear, die Fläche als Kurve",
+          "intro": "Beide Kurven reichen von null bis zum doppelten Radius; die gestrichelte Linie markiert Ihren Kreis, der violette Punkt die Stelle, an der beide Werte gleich sind.",
+          "rowSlopeC": "Umfangszuwachs je Radiuseinheit",
+          "rowSlopeA": "Flächenzuwachs je Radiuseinheit (aktuell)",
+          "rowCross": "Wo A = U",
+          "rowRatio": "Fläche zu Umfang",
+          "legendC": "Umfang 2πr",
+          "legendA": "Fläche πr²",
+          "legendNow": "Ihr Radius"
+        },
+        "trio": {
+          "title": "Radius-Sensitivität",
+          "heading": "Was eine Radiusänderung um ±{pct} % bewirkt",
+          "intro": "Der Rand ändert sich um denselben Prozentsatz wie der Radius, die Fläche aber etwa doppelt so stark, weil sie vom Quadrat des Radius abhängt.",
+          "change": "Änderung",
+          "low": "Kleiner",
+          "current": "Aktuell",
+          "high": "Größer",
+          "rowFactor": "Radiusfaktor",
+          "rowRule": "Flächenfaktor (größer)"
+        },
+        "bars": {
+          "title": "Flächen in und um den Kreis",
+          "heading": "Der Kreis zwischen seinen ein- und umbeschriebenen Vielecken",
+          "intro": "Vielecke im Kreis haben weniger Fläche, Vielecke um ihn mehr; der Kreis liegt dazwischen.",
+          "inSquare": "Einbeschr. Quadrat",
+          "inHex": "Einbeschr. Sechseck",
+          "circle": "Kreis",
+          "outHex": "Umbeschr. Sechseck",
+          "outSquare": "Umbeschr. Quadrat"
+        },
+        "stack": {
+          "title": "Das umgebende Quadrat zerlegt",
+          "heading": "Das Quadrat um den Kreis, Stück für Stück",
+          "intro": "Das Quadrat um den Kreis zerfällt in das einbeschriebene Quadrat, vier Kreissegmente und vier Ecken. Die ersten beiden ergeben zusammen den Kreis.",
+          "inSquare": "Einbeschriebenes Quadrat",
+          "segments": "Vier Kreissegmente",
+          "corners": "Vier äußere Ecken",
+          "circle": "Kreis",
+          "total": "Umbeschriebenes Quadrat"
+        },
+        "equal": {
+          "title": "Gleiche Fläche, drei Formen",
+          "heading": "Drei Formen mit je {area} Fläche",
+          "intro": "Abgerollt bilden die Sektoren des Kreises ein Rechteck mit Länge πr und Höhe r; auch ein Quadrat mit Seite r√π hat dieselbe Fläche.",
+          "circle": "Kreis",
+          "square": "Quadrat",
+          "rect": "Rechteck",
+          "squareCheck": "Probe Quadrat",
+          "rectCheck": "Probe Rechteck"
+        },
+        "rings": {
+          "title": "Wo die Fläche liegt",
+          "heading": "Vier gleich breite Ringe mit ungleicher Fläche",
+          "intro": "Teilen Sie die Scheibe in vier gleich breite Ringe: Der äußere Ring allein enthält 7/16 der Fläche, die Mittelscheibe nur 1/16.",
+          "ring": "Ring",
+          "total": "Gesamtfläche"
+        },
+        "iso": {
+          "title": "Gleicher Umfang, nach Fläche geordnet",
+          "heading": "Formen mit demselben Umfang wie Ihr Kreis ({c})",
+          "intro": "Bei festem Umfang umschließt keine Form mehr Fläche als der Kreis; regelmäßige Vielecke mit mehr Seiten kommen ihm näher.",
+          "perimeter": "Gemeinsamer Umfang",
+          "circle": "Kreis",
+          "hexagon": "Regelmäßiges Sechseck",
+          "square": "Quadrat",
+          "triangle": "Gleichseitiges Dreieck",
+          "side": "Seite"
+        },
+        "gauge": {
+          "title": "Archimedes' Vieleckverfahren",
+          "heading": "Ein regelmäßiges {n}-Eck im Kreis",
+          "intro": "Archimedes schloss π zwischen Vielecken im und um den Kreis ein. Bewegen Sie den Regler für mehr Seiten und sehen Sie, wie sich der einbeschriebene Umfang dem wahren Umfang nähert.",
+          "sides": "Seiten",
+          "inside": "Einbeschriebener Umfang",
+          "outside": "Umbeschriebener Umfang",
+          "bounds": "Schranken für π",
+          "share": "Einbeschriebener Umfang ÷ Kreisumfang"
+        },
+        "zones": {
+          "title": "Zonen des Sektorwinkels",
+          "heading": "Ein {deg}°-Sektor · {zone}",
+          "intro": "Verschieben Sie den Mittelpunktswinkel, um Bogen, Sektor, Sehne und Segment Ihres Kreises sowie die Winkelart zu sehen.",
+          "angle": "Mittelpunktswinkel",
+          "zero": "Null",
+          "acute": "Spitz",
+          "right": "Recht",
+          "obtuse": "Stumpf",
+          "straight": "Gestreckt",
+          "reflex": "Überstumpf",
+          "full": "Vollwinkel",
+          "radians": "Winkel im Bogenmaß",
+          "arc": "Bogenlänge",
+          "sector": "Sektorfläche",
+          "chord": "Sehne",
+          "segment": "Segmentfläche"
+        }
       }
     },
     "gcf-lcm-calculator": {

@@ -68,6 +68,7 @@ export * from "./RandomNumberGenerator";
 export * from "./RandomNumberMath";
 export * from "./StandardDeviationCalculator";
 export * from "./CircleCalculator";
+export * from "./CircleMetrics";
 export * from "./TriangleCalculator";
 export * from "./TriangleActiveAngleGeometry";
 export * from "./UnitCircleGeometry";
