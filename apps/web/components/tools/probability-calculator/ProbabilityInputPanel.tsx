@@ -4,16 +4,10 @@ import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ProbabilityModeTabs from "./ProbabilityModeTabs";
+import type { ProbabilityFields } from "./ProbabilityLiveContext";
 import { PROBABILITY_SCENARIOS, type ProbabilityMode, type ProbabilityScenario } from "./types";
 
-export type ProbabilityFields = {
-  favorable: string;
-  total: string;
-  pA: string;
-  pB: string;
-  pBoth: string;
-  pAAndB: string;
-};
+export type { ProbabilityFields };
 
 type Props = {
   mode: ProbabilityMode;
@@ -79,6 +73,7 @@ export default function ProbabilityInputPanel({ mode, onModeChange, fields, onFi
           <>
             <ToolInput label={t("fields.pAAndB")} type="text" inputMode="decimal" value={fields.pAAndB} onChange={(e) => onFieldChange("pAAndB", e.target.value)} />
             <ToolInput label={t("fields.pB")} type="text" inputMode="decimal" value={fields.pB} onChange={(e) => onFieldChange("pB", e.target.value)} />
+            <ToolInput label={t("fields.pA")} type="text" inputMode="decimal" value={fields.pA} onChange={(e) => onFieldChange("pA", e.target.value)} />
           </>
         )}
       </div>

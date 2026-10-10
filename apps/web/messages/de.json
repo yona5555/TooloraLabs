@@ -23635,9 +23635,6 @@
         "clear": "Zurücksetzen",
         "scenarioLabel": "Ein klassisches Beispiel ausprobieren"
       },
-      "diagram": {
-        "ariaLabel": "Ein horizontaler Balken, gefüllt bis zur berechneten Wahrscheinlichkeit in Prozent"
-      },
       "result": {
         "heading": "Ergebnis",
         "probability": "Wahrscheinlichkeit",
@@ -23660,27 +23657,7 @@
         "intro": {
           "title": "Wahrscheinlichkeit verstehen",
           "paragraph1": "Wahrscheinlichkeit misst, wie wahrscheinlich ein Ereignis eintritt, ausgedrückt als Zahl zwischen 0 (unmöglich) und 1 (sicher) — oder gleichwertig zwischen 0 % und 100 %. Bei einem einzelnen Ereignis mit gleich wahrscheinlichen Ausgängen ist die Wahrscheinlichkeit einfach die Anzahl der günstigen Ausgänge geteilt durch die Gesamtzahl der möglichen Ausgänge: Eine 3 mit einem fairen sechsseitigen Würfel zu würfeln hat die Wahrscheinlichkeit 1/6, da genau eine der sechs gleich wahrscheinlichen Seiten eine 3 ist.",
-          "paragraph2": "Reale Situationen betreffen meist mehr als ein Ereignis — hier kommen die Regeln zur Kombination von Wahrscheinlichkeiten ins Spiel. Die UND-Regel multipliziert zwei unabhängige Wahrscheinlichkeiten, um die Chance zu finden, dass beide eintreten. Die ODER-Regel addiert zwei Wahrscheinlichkeiten und subtrahiert ihre Überschneidung, damit gemeinsame Ausgänge nicht doppelt gezählt werden. Die bedingte Wahrscheinlichkeit grenzt das Feld auf nur die Ausgänge ein, bei denen eine Bedingung bereits als wahr bekannt ist, und fragt dann, wie wahrscheinlich das Ereignis innerhalb dieser engeren Menge ist. Dieser Rechner setzt alle vier Beziehungen direkt nach ihren Standarddefinitionen um.",
-          "likelihoodGauge": {
-            "title": "Wie wahrscheinlich ist das?",
-            "intro": "Wahrscheinlichkeiten reichen von seltenen Ereignissen bis zu nahezu sicheren. Wähle unten ein vertrautes Beispiel, um zu sehen, wo es auf der Wahrscheinlichkeitsskala liegt.",
-            "verdict": "{example} — Wahrscheinlichkeit: {classification}.",
-            "fact": "Dieses Beispiel hat eine Wahrscheinlichkeit von etwa {percent}.",
-            "examples": {
-              "winningRaffle": "Eine Verlosung gewinnen",
-              "rollingSix": "Eine Sechs würfeln",
-              "coinFlip": "Ein Münzwurf",
-              "rainTomorrow": "Regen morgen",
-              "sunriseTomorrow": "Sonnenaufgang morgen"
-            },
-            "zones": {
-              "rare": "Selten",
-              "unlikely": "Unwahrscheinlich",
-              "even": "Ausgeglichene Chancen",
-              "likely": "Wahrscheinlich",
-              "certain": "Nahezu sicher"
-            }
-          }
+          "paragraph2": "Reale Situationen betreffen meist mehr als ein Ereignis — hier kommen die Regeln zur Kombination von Wahrscheinlichkeiten ins Spiel. Die UND-Regel multipliziert zwei unabhängige Wahrscheinlichkeiten, um die Chance zu finden, dass beide eintreten. Die ODER-Regel addiert zwei Wahrscheinlichkeiten und subtrahiert ihre Überschneidung, damit gemeinsame Ausgänge nicht doppelt gezählt werden. Die bedingte Wahrscheinlichkeit grenzt das Feld auf nur die Ausgänge ein, bei denen eine Bedingung bereits als wahr bekannt ist, und fragt dann, wie wahrscheinlich das Ereignis innerhalb dieser engeren Menge ist. Dieser Rechner setzt alle vier Beziehungen direkt nach ihren Standarddefinitionen um."
         },
         "modes": {
           "title": "Die vier Berechnungsmodi",
@@ -23808,6 +23785,127 @@
           "note": "Laplaces grundlegende Abhandlung, die die klassische Wahrscheinlichkeitstheorie formalisierte, einschließlich der Regeln zur Kombination der Wahrscheinlichkeiten unabhängiger und bedingter Ereignisse, die dieser Rechner umsetzt.",
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Laplaces Originalabhandlung lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "venn": {
+            "title": "Venn-Labor: Wahrscheinlichkeiten ziehen",
+            "intro": "Bewegen Sie die Schieberegler, und die Eingaben des Rechners ändern sich mit; Kreis- und Schnittflächen sind maßstabsgetreu.",
+            "singleNote": "Im Einzelereignis-Modus ist A der erste Versuch und B eine unabhängige Wiederholung.",
+            "areaCheck": "Vier Bereiche"
+          },
+          "monteCarlo": {
+            "title": "Monte Carlo: Die Häufigkeit konvergiert",
+            "intro": "2.000 simulierte Versuche der aktuellen Ereignisse; die laufende Häufigkeit pendelt sich innerhalb ihres ±2-Standardfehler-Trichters beim exakten Wert ein.",
+            "axis": "Anzahl der Versuche",
+            "replay": "Wiederholen",
+            "newRun": "Neuer Lauf",
+            "trials": "Gezogene Versuche",
+            "seed": "Zufallsstartwert",
+            "estimate": "Simulierte Häufigkeit",
+            "exact": "Exakte Wahrscheinlichkeit",
+            "error": "Absoluter Fehler",
+            "band": "Erwartete Streuung (±2 SF)"
+          },
+          "regions": {
+            "title": "Der Ergebnisraum in vier Bereichen",
+            "intro": "Jedes Ergebnis fällt in genau einen Bereich; die umrandeten Abschnitte bilden das berechnete Ereignis.",
+            "total": "Summe der Bereiche"
+          },
+          "gauge": {
+            "title": "Wie wahrscheinlich ist es?",
+            "intro": "Die berechnete Wahrscheinlichkeit auf der Skala von unmöglich (0 %) bis sicher (100 %).",
+            "zone": "Einstufung",
+            "complement": "Chance, dass es nicht eintritt",
+            "oddsAgainst": "Quote dagegen",
+            "surprise": "Überraschung (Bit)",
+            "entropy": "Unsicherheit (Bit)",
+            "zones": {
+              "rare": "Selten",
+              "unlikely": "Unwahrscheinlich",
+              "even": "Etwa gleich",
+              "likely": "Wahrscheinlich",
+              "certain": "Nahezu sicher"
+            }
+          },
+          "formula": {
+            "title": "Die Formel mit Ihren Zahlen",
+            "intro": "Die Regel des gewählten Modus, jedes Symbol ersetzt durch den Wert, den es gerade liest.",
+            "ruleLabel": "Regel",
+            "rule": {
+              "single": "P(A) = k / n",
+              "and": "P(A∩B) = P(A) × P(B)",
+              "or": "P(A∪B) = P(A) + P(B) − P(A∩B)",
+              "conditional": "P(A|B) = P(A∩B) / P(B)"
+            },
+            "substitute": "Einsetzen",
+            "divide": "Dividieren",
+            "multiply": "Multiplizieren",
+            "add": "Addieren",
+            "subtract": "Schnittmenge abziehen",
+            "toPercent": "In Prozent"
+          },
+          "tree": {
+            "title": "Wahrscheinlichkeitsbaum",
+            "intro": "Zuerst nach B verzweigen, dann nach A gegeben B; das Produkt entlang jedes Pfads ergibt die vier gemeinsamen Wahrscheinlichkeiten.",
+            "leafSum": "Summe der vier Blätter"
+          },
+          "binomial": {
+            "title": "Zehn Wiederholungen: wie viele Treffer?",
+            "intro": "Wiederholen Sie das berechnete Ereignis 10-mal unabhängig; jeder Balken ist die Chance auf genau so viele Erfolge.",
+            "axis": "Erfolge in 10 Versuchen",
+            "mean": "Erwartete Erfolge",
+            "sd": "Standardabweichung",
+            "mostLikely": "Wahrscheinlichste Anzahl"
+          },
+          "rarity": {
+            "title": "Seltenheit auf logarithmischer Skala",
+            "intro": "Die berechnete Wahrscheinlichkeit als „1 zu N“, verglichen mit den exakten Chancen klassischer Glücksspiele.",
+            "oneIn": "1 zu N",
+            "bits": "Überraschung (Bit)",
+            "nearest": "Nächste Referenz",
+            "refs": {
+              "coin": "Münze zeigt Kopf",
+              "die": "Würfel zeigt 6",
+              "card": "Eine bestimmte Karte",
+              "tripleSix": "Drei Sechsen",
+              "fourKind": "Vierling",
+              "royalFlush": "Royal Flush",
+              "lottery": "6-aus-49-Jackpot"
+            }
+          },
+          "trials": {
+            "title": "Wie viele Versuche, bis es eintritt?",
+            "intro": "Benötigte Versuche, damit das berechnete Ereignis mit wachsender Sicherheit mindestens einmal eintritt.",
+            "axis": "Sicherheit für mindestens einen Erfolg",
+            "rule": "Regel"
+          },
+          "equivalence": {
+            "title": "Sechs Schreibweisen derselben Chance",
+            "intro": "Eine Wahrscheinlichkeit, sechs gleichwertige Schreibweisen aus Mathematik, Wetten und Statistik.",
+            "fraction": "Bruch",
+            "decimal": "Dezimal",
+            "percent": "Prozent",
+            "perMille": "Promille",
+            "oddsFor": "Quote dafür",
+            "oddsAgainst": "Quote dagegen"
+          },
+          "balance": {
+            "title": "Unabhängigkeitswaage",
+            "intro": "Die beobachtete Schnittmenge gegen die, die Unabhängigkeit vorhersagt; ein waagerechter Balken bedeutet unabhängige Ereignisse.",
+            "difference": "Differenz",
+            "points": "Prozentpunkte",
+            "phi": "Korrelation (Phi)"
+          },
+          "ranked": {
+            "title": "Alle Ereignisse, geordnet",
+            "intro": "Alle Ereignisse, die die beiden Eingaben festlegen, vom wahrscheinlichsten zum unwahrscheinlichsten.",
+            "highest": "Am wahrscheinlichsten",
+            "lowest": "Am unwahrscheinlichsten",
+            "spread": "Spannweite",
+            "chain": "Ordnungskette",
+            "check": "Kette erfüllt"
+          }
         }
       },
       "scenarios": {
@@ -23834,11 +23932,48 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
       },
-      "treeDiagram": {
-        "title": "Ausprobieren: Ein Wahrscheinlichkeitsbaum",
-        "intro": "Eine faire Münze zweimal zu werfen hat vier gleich wahrscheinliche Ergebnisse — ein Wahrscheinlichkeitsbaum zeigt, wie man jedes davon durch Multiplizieren der Wahrscheinlichkeiten entlang der Äste findet.",
-        "ariaLabel": "Ein Wahrscheinlichkeitsbaum für zwei Münzwürfe mit vier Ergebnissen, jedes mit der Wahrscheinlichkeit ein Viertel",
-        "caption": "Die Wahrscheinlichkeit jedes Astes ist 1/2 × 1/2 = 1/4, und alle vier Ergebnisse ergeben zusammen 1."
+      "live3d": {
+        "cardTitle": "Live-3D-Ergebnisraster: 100 Versuche",
+        "groupInputs": "Eingaben",
+        "groupResult": "Ergebnis",
+        "groupEvents": "Gegenereignisse",
+        "groupCombos": "Kombinierte Ereignisse",
+        "groupCombosSingle": "Zwei wiederholte Versuche (A = 1., B = 2.)",
+        "groupConditional": "Bedingte Wahrscheinlichkeiten",
+        "groupOdds": "Quoten und Unabhängigkeit",
+        "groupLongRun": "Langfristige Häufigkeiten",
+        "unfavorable": "Ungünstige Ergebnisse",
+        "decimal": "Als Dezimalzahl",
+        "intersection": "Beide",
+        "union": "Mindestens eines",
+        "aOnly": "Nur A",
+        "bOnly": "Nur B",
+        "neither": "Keines",
+        "exactlyOne": "Genau eines",
+        "given": "gegeben",
+        "undefined": "nicht definiert",
+        "product": "Falls unabhängig",
+        "lift": "Lift",
+        "relation": "Beziehung",
+        "relations": {
+          "independent": "Unabhängig",
+          "exclusive": "Unvereinbar",
+          "positive": "Positiv abhängig",
+          "negative": "Negativ abhängig"
+        },
+        "per100": "Erwartet pro 100 Versuche",
+        "per1000": "Erwartet pro 1.000 Versuche",
+        "oneIn": "1 zu N",
+        "trials50": "Versuche für 50 %",
+        "examples": {
+          "sevenTwoDice": "Augensumme 7 mit zwei Würfeln",
+          "drawAce": "Ein Ass ziehen",
+          "twoCoinsHeads": "Zwei Münzen Kopf",
+          "doubleSix": "Sechser-Pasch",
+          "heartOrFace": "Herz oder Bildkarte",
+          "kingGivenFace": "König, gegeben Bildkarte",
+          "sumEightGivenFive": "Summe 8, gegeben 1. Würfel = 5"
+        }
       }
     },
     "mean-median-mode-range-calculator": {

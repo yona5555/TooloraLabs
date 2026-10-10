@@ -23635,9 +23635,6 @@
         "clear": "Borrar",
         "scenarioLabel": "Prueba un ejemplo clásico"
       },
-      "diagram": {
-        "ariaLabel": "Una barra horizontal rellena hasta el porcentaje de probabilidad calculado"
-      },
       "result": {
         "heading": "Resultado",
         "probability": "Probabilidad",
@@ -23660,27 +23657,7 @@
         "intro": {
           "title": "Entender la probabilidad",
           "paragraph1": "La probabilidad mide qué tan probable es que ocurra un evento, expresada como un número entre 0 (imposible) y 1 (seguro) — o, de forma equivalente, entre 0% y 100%. Para un solo evento con resultados igualmente probables, la probabilidad es simplemente el número de resultados favorables dividido entre el número total de resultados posibles: sacar un 3 con un dado justo de seis caras tiene una probabilidad de 1/6, porque exactamente una de las seis caras igualmente probables es un 3.",
-          "paragraph2": "Las situaciones reales suelen involucrar más de un evento, y ahí es donde entran las reglas para combinar probabilidades. La regla Y multiplica dos probabilidades independientes para hallar la posibilidad de que ambas ocurran. La regla O suma dos probabilidades y resta su superposición, para que los resultados compartidos no se cuenten dos veces. La probabilidad condicional reduce el campo solo a los resultados en los que ya se sabe que una condición es verdadera, y luego pregunta qué tan probable es el evento dentro de ese conjunto más reducido. Esta calculadora implementa las cuatro relaciones directamente a partir de sus definiciones estándar.",
-          "likelihoodGauge": {
-            "title": "¿Qué tan probable es eso?",
-            "intro": "Las probabilidades van desde eventos raros hasta casi certezas. Elige un ejemplo familiar a continuación para ver dónde se ubica en la escala de probabilidad.",
-            "verdict": "{example} — Probabilidad: {classification}.",
-            "fact": "Este ejemplo tiene una probabilidad de aproximadamente {percent}.",
-            "examples": {
-              "winningRaffle": "Ganar una rifa",
-              "rollingSix": "Sacar un seis",
-              "coinFlip": "Un lanzamiento de moneda",
-              "rainTomorrow": "Lluvia mañana",
-              "sunriseTomorrow": "Amanecer mañana"
-            },
-            "zones": {
-              "rare": "Rara",
-              "unlikely": "Poco probable",
-              "even": "Probabilidad pareja",
-              "likely": "Probable",
-              "certain": "Casi seguro"
-            }
-          }
+          "paragraph2": "Las situaciones reales suelen involucrar más de un evento, y ahí es donde entran las reglas para combinar probabilidades. La regla Y multiplica dos probabilidades independientes para hallar la posibilidad de que ambas ocurran. La regla O suma dos probabilidades y resta su superposición, para que los resultados compartidos no se cuenten dos veces. La probabilidad condicional reduce el campo solo a los resultados en los que ya se sabe que una condición es verdadera, y luego pregunta qué tan probable es el evento dentro de ese conjunto más reducido. Esta calculadora implementa las cuatro relaciones directamente a partir de sus definiciones estándar."
         },
         "modes": {
           "title": "Los cuatro modos de cálculo",
@@ -23808,6 +23785,127 @@
           "note": "El tratado fundacional de Laplace que formalizó la teoría clásica de la probabilidad, incluidas las reglas para combinar las probabilidades de eventos independientes y condicionales que implementa esta calculadora.",
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Leer el tratado original de Laplace"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "venn": {
+            "title": "Laboratorio de Venn: arrastra las probabilidades",
+            "intro": "Mueve los deslizadores y las propias entradas de la calculadora cambian con ellos; las áreas de círculos y solapamiento están a escala.",
+            "singleNote": "En modo de evento único, A es el primer ensayo y B una repetición independiente.",
+            "areaCheck": "Cuatro regiones"
+          },
+          "monteCarlo": {
+            "title": "Monte Carlo: la frecuencia converge",
+            "intro": "2.000 ensayos simulados de los eventos actuales; la frecuencia acumulada se asienta en la respuesta exacta dentro de su embudo de ±2 errores estándar.",
+            "axis": "Número de ensayos",
+            "replay": "Repetir",
+            "newRun": "Nueva tirada",
+            "trials": "Ensayos realizados",
+            "seed": "Semilla aleatoria",
+            "estimate": "Frecuencia simulada",
+            "exact": "Probabilidad exacta",
+            "error": "Error absoluto",
+            "band": "Dispersión esperada (±2 EE)"
+          },
+          "regions": {
+            "title": "El espacio muestral en cuatro regiones",
+            "intro": "Cada resultado cae en una sola región; los segmentos remarcados forman el evento calculado.",
+            "total": "Suma de regiones"
+          },
+          "gauge": {
+            "title": "¿Qué tan probable es?",
+            "intro": "La probabilidad calculada en la escala de imposible (0 %) a seguro (100 %).",
+            "zone": "Verosimilitud",
+            "complement": "Probabilidad de que no ocurra",
+            "oddsAgainst": "Momios en contra",
+            "surprise": "Sorpresa (bits)",
+            "entropy": "Incertidumbre (bits)",
+            "zones": {
+              "rare": "Raro",
+              "unlikely": "Poco probable",
+              "even": "Casi parejo",
+              "likely": "Probable",
+              "certain": "Casi seguro"
+            }
+          },
+          "formula": {
+            "title": "La fórmula con tus números",
+            "intro": "La regla del modo elegido, con cada símbolo sustituido por el valor que lee ahora.",
+            "ruleLabel": "Regla",
+            "rule": {
+              "single": "P(A) = k / n",
+              "and": "P(A∩B) = P(A) × P(B)",
+              "or": "P(A∪B) = P(A) + P(B) − P(A∩B)",
+              "conditional": "P(A|B) = P(A∩B) / P(B)"
+            },
+            "substitute": "Sustituir",
+            "divide": "Dividir",
+            "multiply": "Multiplicar",
+            "add": "Sumar",
+            "subtract": "Restar el solapamiento",
+            "toPercent": "En porcentaje"
+          },
+          "tree": {
+            "title": "Árbol de probabilidades",
+            "intro": "Primero se divide según B y luego según A dado B; multiplicar a lo largo de cada rama da las cuatro probabilidades conjuntas.",
+            "leafSum": "Suma de las cuatro hojas"
+          },
+          "binomial": {
+            "title": "Diez repeticiones: ¿cuántos aciertos?",
+            "intro": "Repite el evento calculado 10 veces independientes; cada barra es la probabilidad de exactamente ese número de éxitos.",
+            "axis": "Éxitos en 10 ensayos",
+            "mean": "Éxitos esperados",
+            "sd": "Desviación estándar",
+            "mostLikely": "Conteo más probable"
+          },
+          "rarity": {
+            "title": "Rareza en escala logarítmica",
+            "intro": "La probabilidad calculada como «1 entre N», frente a las probabilidades exactas de juegos de azar clásicos.",
+            "oneIn": "1 entre N",
+            "bits": "Sorpresa (bits)",
+            "nearest": "Referencia más cercana",
+            "refs": {
+              "coin": "Cara en moneda",
+              "die": "Dado muestra 6",
+              "card": "Una carta concreta",
+              "tripleSix": "Tres seises",
+              "fourKind": "Póquer",
+              "royalFlush": "Escalera real",
+              "lottery": "Premio 6/49"
+            }
+          },
+          "trials": {
+            "title": "¿Cuántos intentos hasta que ocurra?",
+            "intro": "Intentos necesarios para que el evento calculado ocurra al menos una vez con confianza creciente.",
+            "axis": "Confianza de al menos un éxito",
+            "rule": "Regla"
+          },
+          "equivalence": {
+            "title": "Seis formas de escribir la misma probabilidad",
+            "intro": "Una probabilidad, seis notaciones equivalentes usadas en matemáticas, apuestas y estadística.",
+            "fraction": "Fracción",
+            "decimal": "Decimal",
+            "percent": "Porcentaje",
+            "perMille": "Por mil",
+            "oddsFor": "Momios a favor",
+            "oddsAgainst": "Momios en contra"
+          },
+          "balance": {
+            "title": "Balanza de independencia",
+            "intro": "El solapamiento observado frente al que predice la independencia; una barra nivelada indica eventos independientes.",
+            "difference": "Diferencia",
+            "points": "puntos porcentuales",
+            "phi": "Correlación (phi)"
+          },
+          "ranked": {
+            "title": "Todos los eventos, ordenados",
+            "intro": "Todos los eventos que definen las dos entradas, del más al menos probable.",
+            "highest": "Más probable",
+            "lowest": "Menos probable",
+            "spread": "Rango",
+            "chain": "Cadena de orden",
+            "check": "La cadena se cumple"
+          }
         }
       },
       "scenarios": {
@@ -23834,11 +23932,48 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
       },
-      "treeDiagram": {
-        "title": "Pruébalo: Un Árbol de Probabilidad",
-        "intro": "Lanzar una moneda justa dos veces tiene cuatro resultados igualmente probables — un árbol de probabilidad muestra cómo hallar cada uno multiplicando las probabilidades a lo largo de sus ramas.",
-        "ariaLabel": "Un árbol de probabilidad para dos lanzamientos de moneda que muestra cuatro resultados, cada uno con probabilidad un cuarto",
-        "caption": "La probabilidad de cada rama es 1/2 × 1/2 = 1/4, y los cuatro resultados suman 1."
+      "live3d": {
+        "cardTitle": "Cuadrícula 3D de resultados en vivo: 100 ensayos",
+        "groupInputs": "Entradas",
+        "groupResult": "Resultado",
+        "groupEvents": "Complementos",
+        "groupCombos": "Eventos combinados",
+        "groupCombosSingle": "Dos ensayos repetidos (A = 1.º, B = 2.º)",
+        "groupConditional": "Probabilidades condicionales",
+        "groupOdds": "Momios e independencia",
+        "groupLongRun": "Conteos a largo plazo",
+        "unfavorable": "Resultados desfavorables",
+        "decimal": "En decimal",
+        "intersection": "Ambos",
+        "union": "Al menos uno",
+        "aOnly": "Solo A",
+        "bOnly": "Solo B",
+        "neither": "Ninguno",
+        "exactlyOne": "Exactamente uno",
+        "given": "dado",
+        "undefined": "indefinido",
+        "product": "Si fueran independientes",
+        "lift": "Lift",
+        "relation": "Relación",
+        "relations": {
+          "independent": "Independientes",
+          "exclusive": "Mutuamente excluyentes",
+          "positive": "Dependencia positiva",
+          "negative": "Dependencia negativa"
+        },
+        "per100": "Esperado cada 100 ensayos",
+        "per1000": "Esperado cada 1.000 ensayos",
+        "oneIn": "1 entre N",
+        "trials50": "Intentos para un 50 %",
+        "examples": {
+          "sevenTwoDice": "Suma 7 con dos dados",
+          "drawAce": "Sacar un as",
+          "twoCoinsHeads": "Dos monedas cara",
+          "doubleSix": "Doble seis",
+          "heartOrFace": "Corazón o figura",
+          "kingGivenFace": "Rey, dado que es figura",
+          "sumEightGivenFive": "Suma 8, si el primer dado es 5"
+        }
       }
     },
     "mean-median-mode-range-calculator": {
