@@ -2,15 +2,18 @@ import { useTranslations } from "next-intl";
 import DiceFace from "./DiceFace";
 import DiceShareExportModal from "./DiceShareExportModal";
 import type { DiceRollerOutput, RollHistoryEntry } from "./types";
+import HistoryTape from "@/components/tool-ui/HistoryTape";
 
 type Props = {
   result: DiceRollerOutput;
   isRolling: boolean;
   history: RollHistoryEntry[];
   onClearHistory: () => void;
+  onReuse: (entry: RollHistoryEntry) => void;
+  onDeleteHistory: (id: string) => void;
 };
 
-export default function DiceResult({ result, isRolling, history, onClearHistory }: Props) {
+export default function DiceResult({ result, isRolling, history, onClearHistory, onReuse, onDeleteHistory }: Props) {
   const t = useTranslations("tools.dice-roller.result");
   const tRoot = useTranslations("tools.dice-roller");
 
@@ -55,33 +58,21 @@ export default function DiceResult({ result, isRolling, history, onClearHistory 
           <span className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{result.total}</span>
         </div>
 
-        {history.length > 0 && (
-          <div className="mt-5 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-            <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("historyLabel")}</h3>
-              <button
-                type="button"
-                onClick={onClearHistory}
-                className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
-              >
-                {t("clearHistory")}
-              </button>
-            </div>
-            <ul dir="ltr" className="max-h-40 space-y-1.5 overflow-y-auto text-sm">
-              {history.map((entry) => (
-                <li
-                  key={entry.id}
-                  className="flex items-center justify-between gap-3 rounded-lg bg-zinc-50 px-3 py-1.5 dark:bg-zinc-800/60"
-                >
-                  <span className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
-                    d{entry.faces} × {entry.rolls.length}: {entry.rolls.join(", ")}
-                  </span>
-                  <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{entry.total}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="mt-5 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+          <h3 className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("historyLabel")}</h3>
+          <HistoryTape
+            entries={history.map((e) => ({ id: e.id, label: `d${e.faces} × ${e.rolls.length}: ${e.rolls.join(", ")}`, value: e.total, valueText: String(e.total) }))}
+            onSelect={(e) => {
+              const entry = history.find((h) => h.id === e.id);
+              if (entry) onReuse(entry);
+            }}
+            onDelete={onDeleteHistory}
+            onClear={onClearHistory}
+            formatTotal={(n) => String(n)}
+            emptyText={t("historyEmpty")}
+            maxHeightClass="max-h-48"
+          />
+        </div>
       </div>
     </div>
   );

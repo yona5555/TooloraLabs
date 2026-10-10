@@ -18,6 +18,12 @@ paths:
 - **General rule A (2026-10-10, every tool):** card headers contain the title only — no number badges or counters (e.g. the old "20"/"21" circles). `GlassHeroCard`/`GlassIndicatorCard` keep `n` as an id/layout key only; it is never rendered.
 - **General rule B (2026-10-10, every tool):** no plain number cards. Every card, including the main Result card, contains a live indicator deep in information (chart, interactive diagram, or detailed live table), not just numbers and text. Apply to every tool rebuilt from now on. Reference: scientific-notation-converter Result (decimal-point shift + draggable log ladder + live equivalent-forms table).
 - Column fill (§17/§27): when one above-the-fold column is shorter, stretch it with `ToolAboveFold` `stretchInput` / `stretchResult` and give its last card `lg:flex-1` with real content that grows (drawing, list), never an empty band.
+- **Instant result (every tool):** the page shows a real result on load (sample data when the tool needs input); never zeros, dashes or an empty state in the result or its indicators.
+- **Drawing + table (every tool):** no lone centered drawing with empty sides; drawing on the left, detailed live table on the right at the same height, stacked (table under drawing) on mobile.
+- **Indicator set (every tool):** about 12 indicators chosen from the §31 library, all computed from the tool's real calculations and following its inputs live, with at least one interactive "wow" piece (drag, sliders or animation).
+- **History panels (every tool that has one):** × delete per entry, live grand total of all results, entry count, Clear all, click an entry to reuse its result, persisted per visitor. Use `tool-ui/HistoryTape` + `lib/use-persisted-list`.
+- **Tool cards (listings):** one unified card, half image and half text; the preview shows the full result panel uncropped; separate light and dark previews, each shown with its matching theme.
+- **Market charts:** real OHLC candles only (no synthetic or line stand-ins) in a trading-terminal layout: instrument list next to the chart. Width, fullscreen and the WORKED EXAMPLE exception: see §5 below.
 
 ## 2. فهرس القواعد البصرية
 | § | الجوهر |

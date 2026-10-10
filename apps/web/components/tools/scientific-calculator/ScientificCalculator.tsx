@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, useState, type ReactNode } from "react";
+import { useEffect, useReducer, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
@@ -8,7 +8,8 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import { calculatorReducer, initialState } from "./reducer";
 import ScientificKeypad from "./ScientificKeypad";
-import ScientificHistoryPanel from "./ScientificHistoryPanel";
+import ScientificHistoryPanel, { type SciTapeItem } from "./ScientificHistoryPanel";
+import { usePersistedList, newEntryId } from "@/lib/use-persisted-list";
 import FunctionReferenceCard from "./FunctionReferenceCard";
 import { ScientificAngleProvider } from "./ScientificAngleContext";
 import { ScientificCalcReadonlyProvider } from "./ScientificCalcReadonlyContext";
@@ -20,6 +21,16 @@ export default function ScientificCalculator({ education }: { education: ReactNo
   const tNav = useTranslations("tools.scientific-calculator.nav");
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
   const [angleDeg, setAngleDeg] = useState(40);
+  // History tape persisted per visitor; each new reducer history entry is appended once.
+  const tape = usePersistedList<SciTapeItem>("tooloralabs:scientific-calculator-history", 50);
+  const lastSeq = useRef(0);
+  const { add: addToTape } = tape;
+  useEffect(() => {
+    if (state.historySeq === lastSeq.current) return;
+    lastSeq.current = state.historySeq;
+    const latest = state.history[0];
+    if (latest) addToTape({ id: newEntryId(), expression: latest.expression, result: latest.result });
+  }, [state.historySeq, state.history, addToTape]);
 
   useEffect(() => {
     function handleKeydown(event: KeyboardEvent) {
@@ -89,8 +100,10 @@ export default function ScientificCalculator({ education }: { education: ReactNo
           input={
             <div className="flex flex-col gap-4 lg:h-full">
               <ScientificHistoryPanel
-                history={state.history}
+                history={tape.items}
                 onSelect={(value) => dispatch({ type: "loadHistory", value })}
+                onDelete={tape.remove}
+                onClear={tape.clear}
               />
               <ScientificSidebarPanels />
             </div>

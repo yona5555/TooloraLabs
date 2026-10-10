@@ -11,6 +11,7 @@ import DiceInputPanel from "./DiceInputPanel";
 import DiceResult from "./DiceResult";
 import DiceQuickReference from "./DiceQuickReference";
 import type { DiceFaces, RollHistoryEntry } from "./types";
+import { usePersistedList, newEntryId } from "@/lib/use-persisted-list";
 
 const tool = new DiceRollerCalculator();
 const ROLL_ANIMATION_MS = 500;
@@ -30,7 +31,7 @@ export default function DiceRoller({ education }: { education: ReactNode }) {
   const [faces, setFaces] = useState<DiceFaces>(6);
   const [result, setResult] = useState<DiceRollerOutput>(INITIAL_RESULT);
   const [isRolling, setIsRolling] = useState(false);
-  const [history, setHistory] = useState<RollHistoryEntry[]>([]);
+  const tape = usePersistedList<RollHistoryEntry>("tooloralabs:dice-roller-history", MAX_HISTORY);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function handleRoll() {
@@ -42,23 +43,13 @@ export default function DiceRoller({ education }: { education: ReactNode }) {
       setResult(output.data);
       setIsRolling(false);
       if (!output.data.error) {
-        setHistory((prev) =>
-          [
-            {
-              id: `${Date.now()}-${Math.random()}`,
-              faces: output.data.faces,
-              rolls: output.data.rolls,
-              total: output.data.total,
-            },
-            ...prev,
-          ].slice(0, MAX_HISTORY),
-        );
+        tape.add({ id: newEntryId(), faces: output.data.faces, rolls: output.data.rolls, total: output.data.total });
       }
     }, ROLL_ANIMATION_MS);
   }
 
-  function handleClearHistory() {
-    setHistory([]);
+  function handleReuse(entry: RollHistoryEntry) {
+    setResult({ error: null, rolls: entry.rolls, total: entry.total, diceCount: entry.rolls.length, faces: entry.faces as DiceFaces });
   }
 
   const navItems = [
@@ -86,8 +77,10 @@ export default function DiceRoller({ education }: { education: ReactNode }) {
               <DiceResult
                 result={result}
                 isRolling={isRolling}
-                history={history}
-                onClearHistory={handleClearHistory}
+                history={tape.items}
+                onReuse={handleReuse}
+                onDeleteHistory={tape.remove}
+                onClearHistory={tape.clear}
               />
               <DiceQuickReference />
             </div>
