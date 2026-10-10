@@ -131,7 +131,7 @@ export default function SignificantFiguresInputPanel({
       {/* §17/§27: quick examples fill the column; one click loads a real case. */}
       <div className="mt-5 flex flex-1 flex-col border-t border-zinc-200 pt-4 dark:border-zinc-800">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{tCommon("quickExamples")}</span>
-        <ul className="mt-2 flex flex-1 flex-col justify-between gap-1.5">
+        <ul className="mt-2 grid flex-1 auto-rows-fr grid-cols-1 gap-1.5">
           {PRESETS.map((preset, i) => {
             const active =
               operation === preset.operation &&
@@ -143,7 +143,7 @@ export default function SignificantFiguresInputPanel({
                 <button
                   type="button"
                   onClick={() => onPreset(preset)}
-                  className={`flex w-full items-center justify-between gap-2 rounded-lg border px-3 py-2 text-start text-sm transition ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 hover:bg-blue-50/60 dark:border-zinc-700 dark:hover:bg-blue-500/5"}`}
+                  className={`flex h-full w-full items-center justify-between gap-2 rounded-lg border px-3 py-2 text-start text-sm transition ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 hover:bg-blue-50/60 dark:border-zinc-700 dark:hover:bg-blue-500/5"}`}
                 >
                   <span className="truncate font-medium text-zinc-800 dark:text-zinc-200">{t(`operation.${preset.operation}`)}</span>
                   <span dir="ltr" className="shrink-0 font-mono text-xs font-semibold text-blue-700 dark:text-blue-300">{presetExpression(preset)}</span>
