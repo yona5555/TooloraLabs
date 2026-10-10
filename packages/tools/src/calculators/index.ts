@@ -3,6 +3,7 @@ export * from "./AgeCalculator";
 export * from "./BMICalculator";
 export * from "./MortgageCalculator";
 export * from "./PercentageCalculator";
+export * from "./PercentageMetrics";
 export * from "./TipCalculator";
 export * from "./DiscountCalculator";
 export * from "./SalesTaxCalculator";

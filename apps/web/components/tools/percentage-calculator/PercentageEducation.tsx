@@ -4,13 +4,28 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import PercentGridDiagram from "./PercentGridDiagram";
-import PercentageRateGauge from "./PercentageRateGauge";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import { PercentageLive3DLive } from "./PercentageLive3D";
+import PercentageGridLab from "./PercentageGridLab";
+import {
+  PercentageBaseBars,
+  PercentageComparisonCards,
+  PercentageCompoundTrend,
+  PercentageEquivalentForms,
+  PercentageFormulaDiagram,
+  PercentageMentalSteps,
+  PercentageRangeGauge,
+  PercentageRankedList,
+  PercentageRingDonut,
+  PercentageSensitivityTrio,
+  PercentageUndoBalance,
+} from "./PercentageIndicators";
 
 type ExampleRow = { calculation: string; result: string };
 
 export default async function PercentageEducation() {
   const t = await getTranslations("tools.percentage-calculator.education");
+  const tLive = await getTranslations("tools.percentage-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -18,14 +33,30 @@ export default async function PercentageEducation() {
 
   return (
     <EncyclopediaPaper>
-      <PercentageRateGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={tLive("educationTitle")}>
+          <PercentageLive3DLive />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <PercentGridDiagram shaded={27} caption={t("intro.diagram.caption")} />
+        <div className="space-y-6">
+          <PercentageGridLab />
+          <PercentageFormulaDiagram />
+        </div>
         <p>{t("intro.paragraph3")}</p>
+        <div className="space-y-6">
+          <PercentageComparisonCards />
+          <PercentageMentalSteps />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <div className="space-y-6">
+        <PercentageEquivalentForms />
+        <PercentageRingDonut />
+        <PercentageBaseBars />
+      </div>
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -47,7 +78,19 @@ export default async function PercentageEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <PercentageCompoundTrend />
+          <PercentageUndoBalance />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
+
+      <div className="space-y-6">
+        <PercentageRangeGauge />
+        <PercentageSensitivityTrio />
+        <PercentageRankedList />
+      </div>
 
       <AdSpace variant="leaderboard" />
 

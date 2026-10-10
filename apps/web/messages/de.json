@@ -15543,8 +15543,7 @@
         },
         "firstPlaceholder": "z. B. 20",
         "secondPlaceholder": "z. B. 150",
-        "clear": "Zurücksetzen",
-        "scenarioLabel": "Ein reales Szenario ausprobieren"
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -15557,43 +15556,15 @@
         "originalZero": "Der Ursprungswert darf bei einer prozentualen Veränderung nicht null sein.",
         "percentZero": "Der Prozentsatz darf beim Umkehren eines Prozentsatzes nicht null sein.",
         "bothZero": "Beim Vergleich einer prozentualen Differenz dürfen nicht beide Werte null sein.",
-        "chart": {
-          "baseLabel": "Basiszahl",
-          "resultLabel": "Ergebnis",
-          "wholeLabel": "Ganzes",
-          "partLabel": "Teil",
-          "beforeLabel": "Vorher",
-          "afterLabel": "Nachher",
-          "valueALabel": "Wert A",
-          "valueBLabel": "Wert B"
-        }
+        "invalidValue": "Gib in beide Felder eine Zahl ein.",
+        "keptLast": "Die letzte gültige Berechnung wird angezeigt."
       },
       "education": {
         "intro": {
           "title": "Prozentsätze verstehen",
           "paragraph1": "Ein Prozentsatz drückt eine Zahl als Bruchteil von 100 aus – das Wort selbst stammt vom lateinischen per centum, „von hundert\". Einen Wert als Prozentsatz darzustellen macht es leicht, Mengen sehr unterschiedlicher Größe auf derselben Skala zu vergleichen: Egal ob eine Klasse 20 oder 200 Schüler hat, die Aussage „15% sind durch einen Test gefallen\" vermittelt in beiden Fällen dieselbe relative Information.",
           "paragraph2": "Dieses Tool deckt fünf unterschiedliche Prozentrechnungen ab, die häufig miteinander verwechselt werden: das Finden eines Prozentsatzes einer Zahl, das Finden, welcher Prozentsatz eine Zahl von einer anderen ist, die prozentuale Veränderung (ein gerichteter Vergleich, der den Ursprungswert als Basis verwendet), der umgekehrte Prozentsatz (das Rückwärtsrechnen von einem bekannten Ergebnis zur Ursprungszahl) und die prozentuale Differenz (ein symmetrischer Vergleich, der keinen der beiden Werte als „Ursprung\" behandelt).",
-          "diagram": {
-            "caption": "27 dieser 100 Quadrate sind eingefärbt – das ist wortwörtlich, was „27%\" bedeutet: 27 Teile von je 100."
-          },
-          "paragraph3": "Der Unterschied zwischen prozentualer Veränderung und prozentualer Differenz bringt selbst erfahrene Analysten ins Stolpern. Der Wechsel von 80 auf 100 ist eine prozentuale Veränderung von +25%, wobei 80 (der Ursprungswert) als Basis verwendet wird. Die prozentuale Differenz zwischen denselben zwei Zahlen jedoch, die stattdessen ihren Durchschnitt von 90 als Basis verwendet, beträgt etwa 22,2% – dieselben zwei Zahlen, zwei unterschiedliche Fragen, zwei unterschiedliche, gültige Antworten.",
-          "rateGauge": {
-            "title": "Wo liegt dieser Prozentsatz?",
-            "intro": "Prozentsätze begegnen uns überall im Alltag, von der Mehrwertsteuer bis zu Kreditkartenzinsen. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
-            "verdict": "{example} — Satz: {classification}.",
-            "fact": "Dieses Beispiel hat einen Satz von {percent}.",
-            "examples": {
-              "salesTax": "Mehrwertsteuer",
-              "restaurantTip": "Trinkgeld im Restaurant",
-              "storeDiscount": "Ladenrabatt",
-              "creditCardApr": "Kreditkarten-Zinssatz"
-            },
-            "zones": {
-              "low": "Niedrig",
-              "moderate": "Moderat",
-              "high": "Hoch"
-            }
-          }
+          "paragraph3": "Der Unterschied zwischen prozentualer Veränderung und prozentualer Differenz bringt selbst erfahrene Analysten ins Stolpern. Der Wechsel von 80 auf 100 ist eine prozentuale Veränderung von +25%, wobei 80 (der Ursprungswert) als Basis verwendet wird. Die prozentuale Differenz zwischen denselben zwei Zahlen jedoch, die stattdessen ihren Durchschnitt von 90 als Basis verwendet, beträgt etwa 22,2% – dieselben zwei Zahlen, zwei unterschiedliche Fragen, zwei unterschiedliche, gültige Antworten."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -15717,7 +15688,11 @@
         "restaurantTip": "Trinkgeld im Restaurant",
         "examScore": "Prüfungsergebnis",
         "salaryRaise": "Gehaltserhöhung",
-        "discountedPrice": "Rabattierter Preis"
+        "discountedPrice": "Rabattierter Preis",
+        "salesTax": "Umsatzsteuer",
+        "surveyShare": "Anteil in Umfrage",
+        "priceDrop": "Preissenkung",
+        "twoQuotes": "Zwei Angebote"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -15737,11 +15712,208 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
       },
-      "changeScale": {
-        "ariaLabel": "Skala mit einer Veränderung von {value} Prozent",
-        "noChange": "Keine Veränderung — der Wert blieb genau gleich.",
-        "increaseCaption": "Das ist ein Anstieg.",
-        "decreaseCaption": "Das ist ein Rückgang."
+      "live3d": {
+        "educationTitle": "Dein Prozentsatz, auf jede Art berechnet",
+        "given": "gegeben",
+        "groups": {
+          "given": "Deine Eingaben",
+          "steps": "Diese Rechnung Schritt für Schritt",
+          "frame": "Grundwert, Anteil und Rest",
+          "forms": "Andere Schreibweisen des Satzes",
+          "reverse": "Umkehrrechnung und Faktoren",
+          "compare": "Prozentuale Änderung vs. Prozentpunkte",
+          "twice": "Derselbe Prozentsatz zweimal angewendet"
+        },
+        "rows": {
+          "decimal": "Satz als Dezimalzahl",
+          "part": "Prozentwert",
+          "ratio": "Verhältnis",
+          "percent": "Prozentsatz",
+          "gap": "Differenz",
+          "change": "Prozentuale Änderung",
+          "base": "Grundwert (100 %)",
+          "mean": "Mittelwert der beiden",
+          "difference": "Prozentualer Unterschied",
+          "remainder": "Rest",
+          "fraction": "Bruch",
+          "perMille": "Promille",
+          "basisPoints": "Basispunkte",
+          "oneIn": "Verhältnis (1 von n)",
+          "benchmark": "Abstand zum nächsten einfachen Bruch",
+          "reverseBase": "Grundwert aus dem Prozentwert",
+          "increased": "Grundwert um den Satz erhöht",
+          "decreased": "Grundwert um den Satz verringert",
+          "undo": "Prozentsatz, der die Änderung aufhebt",
+          "changeAB": "Änderung % x → y",
+          "changeBA": "Änderung % y → x",
+          "pctDifference": "Unterschied in %",
+          "points": "Satz +1 Prozentpunkt",
+          "relative": "Satz +10 % (relativ)",
+          "compoundTwice": "Zweimal erhöht (Zinseszins)",
+          "simpleTwice": "Satz zweimal addiert (einfach)",
+          "upDown": "Erst rauf, dann runter um den Satz",
+          "net": "Nettoänderung nach rauf und runter"
+        }
+      },
+      "ind": {
+        "worked": "Rechenbeispiel",
+        "lab": {
+          "title": "Hunderterfeld-Malstudio",
+          "heading": "Ziehe über die Kästchen, um einen Prozentsatz zu malen",
+          "intro": {
+            "percent-of-number": "Jedes Kästchen ist 1 % der Zahl. Der gemalte Anteil wird zum Prozentfeld oben, und alle Ergebnisse auf der Seite folgen.",
+            "what-percent": "Jedes Kästchen ist 1 % des Ganzen. Beim Malen wird der Teil so neu geschrieben, dass er genau diesem Prozentsatz des Ganzen entspricht.",
+            "percentage-change": "Das erste Feld ist der Ausgangswert (100 %). Male über 100 % für eine Zunahme oder darunter für eine Abnahme; der neue Wert wird passend neu geschrieben.",
+            "reverse-percentage": "Jedes Kästchen ist 1 % des unbekannten Ganzen. Der gemalte Anteil wird zum Prozentsatz, und das Ganze wird aus deinem Ergebniswert neu berechnet.",
+            "percentage-difference": "Male die Größe des Abstands als Anteil am Mittelwert beider Werte; der zweite Wert wird so neu geschrieben, dass dieser Unterschied entsteht."
+          },
+          "slider": "Feineinstellung",
+          "rowShare": "Gemalter Anteil",
+          "rowCells": "Volle Kästchen + Teil",
+          "rowBase": "Ein volles Feld (100 %)",
+          "rowPart": "Gemalter Betrag",
+          "rowRest": "Ungemalt / zusätzlich",
+          "rowWritten": "{field} zurückgeschrieben",
+          "rowResult": "Ergebnis des Rechners",
+          "legendShare": "Gemalt (bis 100 %)",
+          "legendAbove": "Über 100 %",
+          "legendLost": "Bei Abnahme verloren"
+        },
+        "formula": {
+          "title": "Formelkarte",
+          "heading": {
+            "percent-of-number": "Prozentwert = Satz ÷ 100 × Zahl",
+            "what-percent": "Prozentsatz = Teil ÷ Ganzes × 100",
+            "percentage-change": "Änderung = (neu − alt) ÷ alt × 100",
+            "reverse-percentage": "Ganzes = Teil ÷ Satz × 100",
+            "percentage-difference": "Unterschied = Abstand ÷ Mittelwert × 100"
+          },
+          "intro": "Die Formel der gewählten Rechenart, jedes Symbol durch deine aktuellen Zahlen ersetzt.",
+          "part": "Teil",
+          "new": "neu",
+          "old": "alt",
+          "whole": "Ganzes",
+          "rowBase": "Grundwert (100 %)",
+          "rowRate": "Satz",
+          "rowDecimal": "Satz ÷ 100",
+          "rowPart": "Prozentwert",
+          "rowCheck": "Probe: Grundwert × Dezimalzahl",
+          "rowResult": "Ergebnis"
+        },
+        "steps": {
+          "title": "Kopfrechen-Treppe",
+          "heading": "{pct} % von {base} aus 10-%- und 1-%-Blöcken",
+          "intro": "Der schnellste Weg, einen Prozentsatz von Hand zu berechnen: 10 % und 1 % durch Verschieben des Kommas finden und dann die benötigten Blöcke addieren.",
+          "rowTen": "10 % (÷ 10)",
+          "rowOne": "1 % (÷ 100)",
+          "rowTens": "{k} × 10 %",
+          "rowOnes": "{k} × 1 %",
+          "rowRest": "Bruchteil-Rest",
+          "rowTotal": "Summe"
+        },
+        "forms": {
+          "title": "Gleichwertige Formen",
+          "heading": "{pct} % auf sechs Arten geschrieben",
+          "intro": "Prozent, Dezimalzahl, Bruch, Promille und Basispunkte sind dieselbe Größe auf verschiedenen Skalen. Die Linie zeigt den Satz zwischen 0 und 1 neben dem nächsten einfachen Bruch.",
+          "percent": "Prozent",
+          "decimal": "Dezimal",
+          "fraction": "Bruch",
+          "perMille": "Promille",
+          "basisPoints": "Basispunkte",
+          "oneIn": "1 von n",
+          "benchmark": "Nächster einfacher Bruch",
+          "gap": "Abstand zu diesem Bruch"
+        },
+        "rings": {
+          "title": "Satz eines Satzes",
+          "heading": "Derselbe Prozentsatz einmal, zweimal und dreimal genommen",
+          "intro": "Ein Prozentsatz von einem Prozentsatz multipliziert die Sätze, daher schrumpft jeder Ring schnell, wenn der Satz unter 100 % liegt.",
+          "once": "Einmal",
+          "twice": "Von sich selbst (zweimal)",
+          "thrice": "Dreimal",
+          "rowFactor": "Faktor pro Schritt"
+        },
+        "bars": {
+          "title": "Grundwert, Anteil und Ergebnisse",
+          "heading": "Was {pct} % mit dem Grundwert macht",
+          "intro": "Der Grundwert aufgeteilt in Anteil und Rest, neben dem um denselben Satz erhöhten und verringerten Grundwert.",
+          "part": "Anteil",
+          "remainder": "Rest",
+          "base": "Grundwert",
+          "increased": "Erhöht",
+          "decreased": "Verringert",
+          "rowSpread": "Spanne zwischen rauf und runter"
+        },
+        "trend": {
+          "title": "Den Prozentsatz wiederholen",
+          "heading": "{pct} % zehnmal hintereinander angewendet",
+          "intro": "Ein wiederholt angewendeter Prozentsatz multipliziert und entfernt sich so vom bloßen Addieren desselben Betrags. Die rote Linie markiert die zweifache Anwendung.",
+          "rowMultiplier": "Faktor",
+          "rowTwice": "Nach 2 Schritten (Zinseszins)",
+          "rowSimple": "Nach 2 Schritten (einfach)",
+          "rowGap": "Plus durch Zinseszins",
+          "rowTen": "Nach 10 Schritten (Zinseszins)",
+          "rowTenSimple": "Nach 10 Schritten (einfach)",
+          "legendCompound": "Zinseszins",
+          "legendSimple": "Einfach (addiert)",
+          "legendTwice": "Zweimal angewendet"
+        },
+        "balance": {
+          "title": "Rückgängig-Waage",
+          "heading": "Eine Änderung von {pct} rückgängig machen",
+          "intro": "Eine prozentuale Änderung und die Änderung, die sie aufhebt, sind nicht gleich groß, weil die zweite auf einen anderen Grundwert wirkt.",
+          "rowStart": "Start",
+          "rowAfter": "Nach {pct}",
+          "rowUndo": "Prozentsatz, der sie aufhebt",
+          "rowBack": "Zurück zum Start",
+          "rowSame": "Stattdessen {pct} angewendet",
+          "rowNet": "Nettoänderung dieser Runde",
+          "move": "Änderung",
+          "undo": "Aufheben"
+        },
+        "gauge": {
+          "title": "Größenanzeige des Satzes",
+          "heading": "Dieser Satz ist: {zone}",
+          "intro": "Wo der Satz auf einer Skala von null bis zum Doppelten des Ganzen liegt. Über 100 % ist der Anteil größer als der Grundwert selbst.",
+          "rowRate": "Satz",
+          "rowOfWhole": "Vielfaches des Ganzen",
+          "zones": {
+            "small": "Klein",
+            "moderate": "Mittel",
+            "large": "Groß",
+            "beyond": "Mehr als das Ganze"
+          }
+        },
+        "trio": {
+          "title": "Empfindlichkeit in Prozentpunkten",
+          "heading": "Der Satz ±{d} Prozentpunkte",
+          "intro": "Eine Verschiebung um Prozentpunkte ändert den Anteil jedes Mal um denselben Betrag, während die relative Änderung vom Ausgangssatz abhängt.",
+          "change": "Schritt",
+          "low": "Niedriger",
+          "current": "Deiner",
+          "high": "Höher",
+          "rowStep": "Jeder Schritt verschiebt den Anteil um",
+          "rowRelative": "Schritt als relative Änderung"
+        },
+        "compare": {
+          "title": "Vier Arten zu vergleichen",
+          "heading": "{x} und {y} vergleichen",
+          "intro": "Dieselben zwei Zahlen ergeben verschiedene Prozentsätze, je nachdem, welcher Wert als Grundwert dient. Jede Karte zeigt den verwendeten Grundwert.",
+          "changeAB": "Änderung % x → y",
+          "changeBA": "Änderung % y → x",
+          "difference": "Unterschied in %",
+          "ratio": "Verhältnis y ÷ x",
+          "points": "Einfache Differenz y − x",
+          "baseUsed": "Grundwert:"
+        },
+        "ranked": {
+          "title": "Gängige Prozentsätze geordnet",
+          "heading": "Alltägliche Prozentsätze von {base}",
+          "intro": "Dein Satz eingereiht unter den meistgenutzten Prozentsätzen, alle vom selben Grundwert.",
+          "rowBase": "Grundwert",
+          "rowYours": "Deiner ({pct} %)",
+          "rowRank": "Rang (größter zuerst)"
+        }
       }
     },
     "tip-calculator": {

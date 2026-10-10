@@ -15543,8 +15543,7 @@
         },
         "firstPlaceholder": "ex. 20",
         "secondPlaceholder": "ex. 150",
-        "clear": "Effacer",
-        "scenarioLabel": "Essayer un scénario réel"
+        "clear": "Effacer"
       },
       "result": {
         "heading": "Résultat",
@@ -15557,43 +15556,15 @@
         "originalZero": "La valeur initiale ne peut pas être zéro pour une variation en pourcentage.",
         "percentZero": "Le pourcentage ne peut pas être zéro pour inverser un calcul de pourcentage.",
         "bothZero": "Les deux valeurs ne peuvent pas être nulles pour comparer une différence en pourcentage.",
-        "chart": {
-          "baseLabel": "Nombre de base",
-          "resultLabel": "Résultat",
-          "wholeLabel": "Total",
-          "partLabel": "Partie",
-          "beforeLabel": "Avant",
-          "afterLabel": "Après",
-          "valueALabel": "Valeur A",
-          "valueBLabel": "Valeur B"
-        }
+        "invalidValue": "Saisissez un nombre dans les deux champs.",
+        "keptLast": "Le dernier calcul valide est affiché."
       },
       "education": {
         "intro": {
           "title": "Comprendre les pourcentages",
           "paragraph1": "Un pourcentage exprime un nombre comme une fraction de 100 — le mot lui-même vient du latin per centum, «par cent». Écrire une valeur sous forme de pourcentage permet de comparer facilement des quantités de tailles très différentes sur une même échelle : qu'une classe compte 20 ou 200 élèves, dire que 15 % ont échoué à un test transmet la même information relative dans les deux cas.",
           "paragraph2": "Cet outil couvre cinq calculs de pourcentage distincts, souvent confondus entre eux : trouver le pourcentage d'un nombre, trouver quel pourcentage un nombre représente d'un autre, la variation en pourcentage (une comparaison directionnelle qui utilise la valeur initiale comme base), le pourcentage inversé (remonter d'un résultat connu au nombre de départ), et la différence en pourcentage (une comparaison symétrique qui ne traite aucune des deux valeurs comme «initiale»).",
-          "diagram": {
-            "caption": "27 de ces 100 carrés sont colorés — c'est littéralement ce que signifie «27 %» : 27 parts pour 100."
-          },
-          "paragraph3": "La distinction entre variation en pourcentage et différence en pourcentage déroute même les analystes expérimentés. Passer de 80 à 100 représente une variation en pourcentage de +25 %, en utilisant 80 (la valeur initiale) comme base. Mais la différence en pourcentage entre ces deux mêmes nombres, qui utilise leur moyenne de 90 comme base, est d'environ 22,2 % — les deux mêmes nombres, deux questions différentes, deux réponses valides différentes.",
-          "rateGauge": {
-            "title": "Où se situe ce taux de pourcentage ?",
-            "intro": "Les taux de pourcentage apparaissent partout dans la vie quotidienne, de la taxe de vente aux intérêts de carte de crédit. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
-            "verdict": "{example} — Taux : {classification}.",
-            "fact": "Cet exemple a un taux de {percent}.",
-            "examples": {
-              "salesTax": "Taxe de vente",
-              "restaurantTip": "Pourboire au restaurant",
-              "storeDiscount": "Remise en magasin",
-              "creditCardApr": "TAEG de carte de crédit"
-            },
-            "zones": {
-              "low": "Faible",
-              "moderate": "Modéré",
-              "high": "Élevé"
-            }
-          }
+          "paragraph3": "La distinction entre variation en pourcentage et différence en pourcentage déroute même les analystes expérimentés. Passer de 80 à 100 représente une variation en pourcentage de +25 %, en utilisant 80 (la valeur initiale) comme base. Mais la différence en pourcentage entre ces deux mêmes nombres, qui utilise leur moyenne de 90 comme base, est d'environ 22,2 % — les deux mêmes nombres, deux questions différentes, deux réponses valides différentes."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -15717,7 +15688,11 @@
         "restaurantTip": "Pourboire au restaurant",
         "examScore": "Note d'examen",
         "salaryRaise": "Augmentation de salaire",
-        "discountedPrice": "Prix réduit"
+        "discountedPrice": "Prix réduit",
+        "salesTax": "Taxe de vente",
+        "surveyShare": "Part dans un sondage",
+        "priceDrop": "Baisse de prix",
+        "twoQuotes": "Deux devis"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -15737,11 +15712,208 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
       },
-      "changeScale": {
-        "ariaLabel": "Échelle montrant une variation de {value} pour cent",
-        "noChange": "Aucun changement — la valeur est restée exactement la même.",
-        "increaseCaption": "Il s'agit d'une augmentation.",
-        "decreaseCaption": "Il s'agit d'une diminution."
+      "live3d": {
+        "educationTitle": "Votre pourcentage, calculé de toutes les façons",
+        "given": "donnée",
+        "groups": {
+          "given": "Vos données",
+          "steps": "Ce calcul, étape par étape",
+          "frame": "Base, part et reste",
+          "forms": "Autres écritures du taux",
+          "reverse": "Calcul inverse et multiplicateurs",
+          "compare": "Variation en % contre points de pourcentage",
+          "twice": "Le même % appliqué deux fois"
+        },
+        "rows": {
+          "decimal": "Taux en décimal",
+          "part": "Part",
+          "ratio": "Rapport",
+          "percent": "Pourcentage",
+          "gap": "Écart",
+          "change": "Variation en pourcentage",
+          "base": "Base (100 %)",
+          "mean": "Moyenne des deux",
+          "difference": "Écart en pourcentage",
+          "remainder": "Reste",
+          "fraction": "Fraction",
+          "perMille": "Pour mille",
+          "basisPoints": "Points de base",
+          "oneIn": "Rapport (1 sur n)",
+          "benchmark": "Écart à la fraction simple la plus proche",
+          "reverseBase": "Base retrouvée à partir de la part",
+          "increased": "Base augmentée du taux",
+          "decreased": "Base diminuée du taux",
+          "undo": "Pourcentage qui annule le taux",
+          "changeAB": "Variation % x → y",
+          "changeBA": "Variation % y → x",
+          "pctDifference": "Écart en %",
+          "points": "Taux +1 point de pourcentage",
+          "relative": "Taux +10 % (relatif)",
+          "compoundTwice": "Augmenté deux fois (composé)",
+          "simpleTwice": "Taux ajouté deux fois (simple)",
+          "upDown": "Hausse puis baisse du taux",
+          "net": "Variation nette après hausse et baisse"
+        }
+      },
+      "ind": {
+        "worked": "Exemple résolu",
+        "lab": {
+          "title": "Atelier de la grille de 100",
+          "heading": "Glissez sur les cases pour peindre un pourcentage",
+          "intro": {
+            "percent-of-number": "Chaque case vaut 1 % du nombre. La part peinte devient le champ de pourcentage ci-dessus, et tous les résultats de la page suivent.",
+            "what-percent": "Chaque case vaut 1 % du total. Peindre une part réécrit la partie pour qu'elle soit exactement ce pourcentage du total.",
+            "percentage-change": "La première grille est la valeur initiale (100 %). Peignez au-delà de 100 % pour une hausse ou en deçà pour une baisse ; la nouvelle valeur est réécrite en conséquence.",
+            "reverse-percentage": "Chaque case vaut 1 % du total inconnu. La part peinte devient le pourcentage, et le total est recalculé à partir de votre valeur obtenue.",
+            "percentage-difference": "Peignez la taille de l'écart en part de la moyenne des deux valeurs ; la seconde valeur est réécrite pour créer cet écart."
+          },
+          "slider": "Réglage fin",
+          "rowShare": "Part peinte",
+          "rowCells": "Cases pleines + partielle",
+          "rowBase": "Une grille complète (100 %)",
+          "rowPart": "Quantité peinte",
+          "rowRest": "Non peint / en plus",
+          "rowWritten": "{field} réécrit",
+          "rowResult": "Résultat du calculateur",
+          "legendShare": "Peint (jusqu'à 100 %)",
+          "legendAbove": "Au-delà de 100 %",
+          "legendLost": "Perdu lors d'une baisse"
+        },
+        "formula": {
+          "title": "Carte de la formule",
+          "heading": {
+            "percent-of-number": "Part = taux ÷ 100 × nombre",
+            "what-percent": "Pourcentage = partie ÷ total × 100",
+            "percentage-change": "Variation = (nouveau − ancien) ÷ ancien × 100",
+            "reverse-percentage": "Total = partie ÷ taux × 100",
+            "percentage-difference": "Écart = différence ÷ moyenne × 100"
+          },
+          "intro": "La formule du type de calcul choisi, chaque symbole remplacé par vos nombres actuels.",
+          "part": "partie",
+          "new": "nouveau",
+          "old": "ancien",
+          "whole": "total",
+          "rowBase": "Base (100 %)",
+          "rowRate": "Taux",
+          "rowDecimal": "Taux ÷ 100",
+          "rowPart": "Part",
+          "rowCheck": "Vérification : base × décimal",
+          "rowResult": "Résultat"
+        },
+        "steps": {
+          "title": "Échelle de calcul mental",
+          "heading": "{pct} % de {base} avec des blocs de 10 % et 1 %",
+          "intro": "La façon la plus rapide de calculer un pourcentage à la main : trouvez 10 % et 1 % en déplaçant la virgule, puis additionnez les blocs nécessaires.",
+          "rowTen": "10 % (÷ 10)",
+          "rowOne": "1 % (÷ 100)",
+          "rowTens": "{k} × 10 %",
+          "rowOnes": "{k} × 1 %",
+          "rowRest": "Reste fractionnaire",
+          "rowTotal": "Total"
+        },
+        "forms": {
+          "title": "Formes équivalentes",
+          "heading": "{pct} % écrit de six façons",
+          "intro": "Un pourcentage, un décimal, une fraction, le pour mille et les points de base sont la même quantité sur des échelles différentes. La droite place le taux entre 0 et 1 à côté de la fraction simple la plus proche.",
+          "percent": "Pourcentage",
+          "decimal": "Décimal",
+          "fraction": "Fraction",
+          "perMille": "Pour mille",
+          "basisPoints": "Points de base",
+          "oneIn": "1 sur n",
+          "benchmark": "Fraction simple la plus proche",
+          "gap": "Écart à cette fraction"
+        },
+        "rings": {
+          "title": "Taux d'un taux",
+          "heading": "Le même pourcentage pris une, deux et trois fois",
+          "intro": "Prendre un pourcentage d'un pourcentage multiplie les taux : chaque anneau rétrécit vite lorsque le taux est inférieur à 100 %.",
+          "once": "Une fois",
+          "twice": "De lui-même (deux fois)",
+          "thrice": "Trois fois",
+          "rowFactor": "Facteur par étape"
+        },
+        "bars": {
+          "title": "Base, part et résultats",
+          "heading": "Ce que {pct} % fait à la base",
+          "intro": "La base partagée entre la part et le reste, à côté de la base augmentée et diminuée du même taux.",
+          "part": "Part",
+          "remainder": "Reste",
+          "base": "Base",
+          "increased": "Augmentée",
+          "decreased": "Diminuée",
+          "rowSpread": "Écart entre hausse et baisse"
+        },
+        "trend": {
+          "title": "Répéter le pourcentage",
+          "heading": "{pct} % appliqué 10 fois de suite",
+          "intro": "Appliquer un pourcentage plusieurs fois multiplie, si bien que l'on s'éloigne d'un simple ajout du même montant. La ligne rouge marque deux applications.",
+          "rowMultiplier": "Multiplicateur",
+          "rowTwice": "Après 2 étapes (composé)",
+          "rowSimple": "Après 2 étapes (simple)",
+          "rowGap": "Supplément dû à la composition",
+          "rowTen": "Après 10 étapes (composé)",
+          "rowTenSimple": "Après 10 étapes (simple)",
+          "legendCompound": "Composé",
+          "legendSimple": "Simple (ajouté)",
+          "legendTwice": "Appliqué deux fois"
+        },
+        "balance": {
+          "title": "Balance d'annulation",
+          "heading": "Annuler une variation de {pct}",
+          "intro": "Une variation en pourcentage et celle qui l'annule n'ont pas la même taille, car la seconde s'applique à une autre base.",
+          "rowStart": "Départ",
+          "rowAfter": "Après {pct}",
+          "rowUndo": "Pourcentage qui l'annule",
+          "rowBack": "Retour au départ",
+          "rowSame": "En appliquant plutôt {pct}",
+          "rowNet": "Variation nette de cet aller-retour",
+          "move": "Variation",
+          "undo": "Annulation"
+        },
+        "gauge": {
+          "title": "Jauge de taille du taux",
+          "heading": "Ce taux est : {zone}",
+          "intro": "La place du taux sur une échelle allant de zéro au double du total. Au-delà de 100 %, la part dépasse la base elle-même.",
+          "rowRate": "Taux",
+          "rowOfWhole": "Fois le total",
+          "zones": {
+            "small": "Faible",
+            "moderate": "Modéré",
+            "large": "Élevé",
+            "beyond": "Plus que le total"
+          }
+        },
+        "trio": {
+          "title": "Sensibilité en points de pourcentage",
+          "heading": "Le taux ±{d} points de pourcentage",
+          "intro": "Déplacer un taux en points de pourcentage change la part toujours du même montant, alors que la variation relative dépend du taux de départ.",
+          "change": "Pas",
+          "low": "Plus bas",
+          "current": "Le vôtre",
+          "high": "Plus haut",
+          "rowStep": "Chaque pas déplace la part de",
+          "rowRelative": "Pas en variation relative"
+        },
+        "compare": {
+          "title": "Quatre façons de comparer",
+          "heading": "Comparer {x} et {y}",
+          "intro": "Les deux mêmes nombres donnent des pourcentages différents selon la valeur prise comme base. Chaque carte indique la base utilisée.",
+          "changeAB": "Variation % x → y",
+          "changeBA": "Variation % y → x",
+          "difference": "Écart en %",
+          "ratio": "Rapport y ÷ x",
+          "points": "Différence simple y − x",
+          "baseUsed": "Base :"
+        },
+        "ranked": {
+          "title": "Pourcentages courants classés",
+          "heading": "Pourcentages courants de {base}",
+          "intro": "Votre taux classé parmi les pourcentages les plus utilisés, tous pris sur la même base.",
+          "rowBase": "Base",
+          "rowYours": "Le vôtre ({pct} %)",
+          "rowRank": "Rang (le plus grand d'abord)"
+        }
       }
     },
     "tip-calculator": {

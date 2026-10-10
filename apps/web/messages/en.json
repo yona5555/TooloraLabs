@@ -15543,8 +15543,7 @@
         },
         "firstPlaceholder": "e.g. 20",
         "secondPlaceholder": "e.g. 150",
-        "clear": "Clear",
-        "scenarioLabel": "Try a real scenario"
+        "clear": "Clear"
       },
       "result": {
         "heading": "Result",
@@ -15557,43 +15556,15 @@
         "originalZero": "The original value cannot be zero for a percentage change.",
         "percentZero": "The percentage cannot be zero when reversing a percentage.",
         "bothZero": "Both values cannot be zero when comparing a percentage difference.",
-        "chart": {
-          "baseLabel": "Base Number",
-          "resultLabel": "Result",
-          "wholeLabel": "Whole",
-          "partLabel": "Part",
-          "beforeLabel": "Before",
-          "afterLabel": "After",
-          "valueALabel": "Value A",
-          "valueBLabel": "Value B"
-        }
+        "invalidValue": "Enter a number in both fields.",
+        "keptLast": "Showing the last valid calculation."
       },
       "education": {
         "intro": {
           "title": "Understanding Percentages",
           "paragraph1": "A percentage expresses a number as a fraction of 100 — the word itself comes from the Latin per centum, \"by the hundred.\" Writing a value as a percentage makes it easy to compare quantities of very different sizes on the same scale: whether a class has 20 or 200 students, saying 15% failed a test conveys the same relative information either way.",
           "paragraph2": "This tool covers five distinct percentage calculations that are frequently confused with one another: finding a percentage of a number, finding what percentage one number is of another, percentage change (a directional comparison that uses the original value as its base), reverse percentage (working backward from a known result to the original number), and percentage difference (a symmetric comparison that does not treat either value as the \"original\").",
-          "diagram": {
-            "caption": "27 of these 100 squares are shaded — this is literally what \"27%\" means: 27 parts for every 100."
-          },
-          "paragraph3": "The distinction between percentage change and percentage difference trips up even experienced analysts. Going from 80 to 100 is a percentage change of +25%, using 80 (the original value) as the base. But the percentage difference between the same two numbers, which uses their average of 90 as the base instead, is about 22.2% — the same two numbers, two different questions, two different valid answers.",
-          "rateGauge": {
-            "title": "Where Does This Percentage Rate Fall?",
-            "intro": "Percentage rates show up everywhere in daily life, from sales tax to credit card interest. Pick a real-world example below to see where it falls.",
-            "verdict": "{example} — Rate: {classification}.",
-            "fact": "This example is a rate of {percent}.",
-            "examples": {
-              "salesTax": "Sales Tax",
-              "restaurantTip": "Restaurant Tip",
-              "storeDiscount": "Store Discount",
-              "creditCardApr": "Credit Card APR"
-            },
-            "zones": {
-              "low": "Low",
-              "moderate": "Moderate",
-              "high": "High"
-            }
-          }
+          "paragraph3": "The distinction between percentage change and percentage difference trips up even experienced analysts. Going from 80 to 100 is a percentage change of +25%, using 80 (the original value) as the base. But the percentage difference between the same two numbers, which uses their average of 90 as the base instead, is about 22.2% — the same two numbers, two different questions, two different valid answers."
         },
         "examples": {
           "title": "Worked Examples",
@@ -15717,7 +15688,11 @@
         "restaurantTip": "Restaurant Tip",
         "examScore": "Exam Score",
         "salaryRaise": "Salary Raise",
-        "discountedPrice": "Discounted Price"
+        "discountedPrice": "Discounted Price",
+        "salesTax": "Sales Tax",
+        "surveyShare": "Survey Share",
+        "priceDrop": "Price Drop",
+        "twoQuotes": "Two Quotes"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -15737,11 +15712,208 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
       },
-      "changeScale": {
-        "ariaLabel": "Scale showing a {value} percent change",
-        "noChange": "No change — the value stayed exactly the same.",
-        "increaseCaption": "This is an increase.",
-        "decreaseCaption": "This is a decrease."
+      "live3d": {
+        "educationTitle": "Your Percentage, Worked Every Way",
+        "given": "given",
+        "groups": {
+          "given": "Your inputs",
+          "steps": "This calculation, step by step",
+          "frame": "Base, part and remainder",
+          "forms": "Other ways to write the rate",
+          "reverse": "Reverse and multipliers",
+          "compare": "% change vs % points",
+          "twice": "The same % applied twice"
+        },
+        "rows": {
+          "decimal": "Rate as a decimal",
+          "part": "Part",
+          "ratio": "Ratio",
+          "percent": "Percentage",
+          "gap": "Difference",
+          "change": "Percentage change",
+          "base": "Base (100%)",
+          "mean": "Average of the two",
+          "difference": "Percentage difference",
+          "remainder": "Remainder",
+          "fraction": "Fraction",
+          "perMille": "Per mille",
+          "basisPoints": "Basis points",
+          "oneIn": "Ratio (1 in n)",
+          "benchmark": "Gap to nearest simple fraction",
+          "reverseBase": "Base recovered from the part",
+          "increased": "Base increased by the rate",
+          "decreased": "Base decreased by the rate",
+          "undo": "Percent that undoes the rate",
+          "changeAB": "% change x → y",
+          "changeBA": "% change y → x",
+          "pctDifference": "% difference",
+          "points": "Rate +1 percentage point",
+          "relative": "Rate +10% (relative)",
+          "compoundTwice": "Increased twice (compound)",
+          "simpleTwice": "Rate added twice (simple)",
+          "upDown": "Up then down by the rate",
+          "net": "Net change after up and down"
+        }
+      },
+      "ind": {
+        "worked": "Worked example",
+        "lab": {
+          "title": "100-Grid Paint Lab",
+          "heading": "Drag across the squares to paint a percentage",
+          "intro": {
+            "percent-of-number": "Each square is 1% of the number. The painted share becomes the percentage field above, and every result on the page follows.",
+            "what-percent": "Each square is 1% of the whole. Painting a share rewrites the part so it is exactly that percentage of the whole.",
+            "percentage-change": "The first grid is the original value (100%). Paint above 100% for an increase or below it for a decrease; the new value is rewritten to match.",
+            "reverse-percentage": "Each square is 1% of the unknown whole. The painted share becomes the percentage, and the whole is solved again from your resulting value.",
+            "percentage-difference": "Paint the size of the gap as a share of the two values' average; the second value is rewritten to create that difference."
+          },
+          "slider": "Fine control",
+          "rowShare": "Painted share",
+          "rowCells": "Full squares + partial",
+          "rowBase": "One full grid (100%)",
+          "rowPart": "Painted amount",
+          "rowRest": "Unpainted / extra",
+          "rowWritten": "{field} written back",
+          "rowResult": "Calculator result",
+          "legendShare": "Painted (up to 100%)",
+          "legendAbove": "Above 100%",
+          "legendLost": "Lost in a decrease"
+        },
+        "formula": {
+          "title": "Formula Map",
+          "heading": {
+            "percent-of-number": "Part = rate ÷ 100 × number",
+            "what-percent": "Percentage = part ÷ whole × 100",
+            "percentage-change": "Change = (new − old) ÷ old × 100",
+            "reverse-percentage": "Whole = part ÷ rate × 100",
+            "percentage-difference": "Difference = gap ÷ average × 100"
+          },
+          "intro": "The formula for the selected calculation type, with each symbol replaced by your current numbers.",
+          "part": "part",
+          "new": "new",
+          "old": "old",
+          "whole": "whole",
+          "rowBase": "Base (100%)",
+          "rowRate": "Rate",
+          "rowDecimal": "Rate ÷ 100",
+          "rowPart": "Part",
+          "rowCheck": "Check: base × decimal",
+          "rowResult": "Result"
+        },
+        "steps": {
+          "title": "Mental Math Ladder",
+          "heading": "{pct}% of {base} from 10% and 1% blocks",
+          "intro": "The quickest way to work out a percentage by hand: find 10% and 1% by moving the decimal point, then add the blocks you need.",
+          "rowTen": "10% (÷ 10)",
+          "rowOne": "1% (÷ 100)",
+          "rowTens": "{k} × 10%",
+          "rowOnes": "{k} × 1%",
+          "rowRest": "Fractional remainder",
+          "rowTotal": "Total"
+        },
+        "forms": {
+          "title": "Equivalent Forms",
+          "heading": "{pct}% written six ways",
+          "intro": "A percentage, a decimal, a fraction, per mille and basis points are the same quantity on different scales. The line places the rate between 0 and 1 next to the nearest simple fraction.",
+          "percent": "Percent",
+          "decimal": "Decimal",
+          "fraction": "Fraction",
+          "perMille": "Per mille",
+          "basisPoints": "Basis points",
+          "oneIn": "1 in n",
+          "benchmark": "Nearest simple fraction",
+          "gap": "Gap to that fraction"
+        },
+        "rings": {
+          "title": "Rate of a Rate",
+          "heading": "The same percentage taken once, twice and three times",
+          "intro": "Taking a percentage of a percentage multiplies the rates, so each ring shrinks fast when the rate is below 100%.",
+          "once": "Once",
+          "twice": "Of itself (twice)",
+          "thrice": "Three times",
+          "rowFactor": "Factor per step"
+        },
+        "bars": {
+          "title": "Base, Part and Results",
+          "heading": "What {pct}% does to the base",
+          "intro": "The base split into the part and the remainder, next to the base raised and lowered by the same rate.",
+          "part": "Part",
+          "remainder": "Remainder",
+          "base": "Base",
+          "increased": "Increased",
+          "decreased": "Decreased",
+          "rowSpread": "Spread between up and down"
+        },
+        "trend": {
+          "title": "Repeating the Percentage",
+          "heading": "{pct}% applied 10 times in a row",
+          "intro": "Applying a percentage repeatedly multiplies, so it pulls away from simply adding the same amount each time. The red line marks applying it twice.",
+          "rowMultiplier": "Multiplier",
+          "rowTwice": "After 2 steps (compound)",
+          "rowSimple": "After 2 steps (simple)",
+          "rowGap": "Extra from compounding",
+          "rowTen": "After 10 steps (compound)",
+          "rowTenSimple": "After 10 steps (simple)",
+          "legendCompound": "Compound",
+          "legendSimple": "Simple (added)",
+          "legendTwice": "Applied twice"
+        },
+        "balance": {
+          "title": "Undo Balance",
+          "heading": "Undoing a {pct} move",
+          "intro": "A percentage move and the move that reverses it are not the same size, because the second one works on a different base.",
+          "rowStart": "Start",
+          "rowAfter": "After {pct}",
+          "rowUndo": "Percent that undoes it",
+          "rowBack": "Back to the start",
+          "rowSame": "Instead applying {pct}",
+          "rowNet": "Net change of that round trip",
+          "move": "Move",
+          "undo": "Undo"
+        },
+        "gauge": {
+          "title": "Rate Size Gauge",
+          "heading": "This rate is {zone}",
+          "intro": "Where the rate sits on a scale from nothing to twice the whole. Above 100% the part is larger than the base itself.",
+          "rowRate": "Rate",
+          "rowOfWhole": "Times the whole",
+          "zones": {
+            "small": "Small",
+            "moderate": "Moderate",
+            "large": "Large",
+            "beyond": "More than the whole"
+          }
+        },
+        "trio": {
+          "title": "Percentage-Point Sensitivity",
+          "heading": "The rate ±{d} percentage points",
+          "intro": "Moving a rate by percentage points changes the part by the same amount every time, while the relative change depends on the rate you start from.",
+          "change": "Step",
+          "low": "Lower",
+          "current": "Yours",
+          "high": "Higher",
+          "rowStep": "Each step moves the part by",
+          "rowRelative": "Step as a relative change"
+        },
+        "compare": {
+          "title": "Four Ways to Compare",
+          "heading": "Comparing {x} and {y}",
+          "intro": "The same two numbers give different percentages depending on which value is used as the base. Each card shows the base it divides by.",
+          "changeAB": "% change x → y",
+          "changeBA": "% change y → x",
+          "difference": "% difference",
+          "ratio": "Ratio y ÷ x",
+          "points": "Plain difference y − x",
+          "baseUsed": "Base:"
+        },
+        "ranked": {
+          "title": "Common Percentages Ranked",
+          "heading": "Everyday percentages of {base}",
+          "intro": "Your rate ranked among the percentages people use most, all taken from the same base.",
+          "rowBase": "Base",
+          "rowYours": "Yours ({pct}%)",
+          "rowRank": "Rank (largest first)"
+        }
       }
     },
     "tip-calculator": {
