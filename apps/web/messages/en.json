@@ -20524,39 +20524,55 @@
       "nav": {
         "tool": "Notepad",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
-      },
-      "aboveFold": {
-        "quickReference": {
-          "title": "How Line-by-Line Evaluation Works",
-          "intro": "Any line matching \"name = expression\" defines a variable that later lines can use by name; every other line is evaluated as a calculation on its own.",
-          "variableHint": "Lines that are just notes or headings simply show no result — that's expected, not an error."
-        },
-        "conceptDiagram": {
-          "title": "Order of Operations",
-          "intro": "Every expression this tool evaluates — on a notepad line or in the Graphing Calculator — follows the same fixed order: parentheses first, then multiplication and division, then addition and subtraction.",
-          "step": {
-            "parens": "Parentheses first",
-            "multiply": "Then multiply",
-            "result": "Result"
-          }
-        }
+        "behindTheTool": "Behind the Tool",
+        "overview": "Overview",
+        "evaluation": "Evaluation",
+        "whatIf": "What-if",
+        "examples": "Examples",
+        "notices": "Notices"
       },
       "form": {
         "inputTitle": "Notes",
         "inputLabel": "Notepad text",
         "inputPlaceholder": "Rent\nrent = 1200\nutilities = 85\ntotal = rent + utilities\nsplit between 3 roommates:\ntotal / 3",
+        "clear": "Clear",
+        "samples": "Load a sample note",
         "snippet": {
-          "splitBill": "Split a Bill",
-          "tip": "Tip Calculation",
-          "unitPrice": "Unit Price"
+          "trip": "Trip budget",
+          "loan": "Loan payment",
+          "tip": "Tip & split",
+          "splitBill": "Split rent"
         },
-        "clear": "Clear"
+        "syntaxTitle": "What a line can contain",
+        "syntaxHint": "\"name = expression\" stores a value for later lines; any other line is calculated on its own; text lines are kept as notes.",
+        "insert": "Insert this line",
+        "fn": {
+          "root": "Square root",
+          "power": "Power",
+          "abs": "Absolute value",
+          "log10": "Log base 10",
+          "ln": "Natural log",
+          "exp": "e to the x",
+          "trig": "Sine (radians)",
+          "max": "Larger of two"
+        }
       },
       "result": {
         "heading": "Results",
         "noCalculations": "Nothing to calculate yet — type an expression on any line, like 2 + 2 or rent = 1200.",
-        "calculatedCount": "{count, plural, one {# line calculated} other {# lines calculated}}"
+        "calculatedCount": "{count, plural, one {# line calculated} other {# lines calculated}}",
+        "bottomLine": "Bottom Line",
+        "bottomOf": "{line} · {name}",
+        "expression": "calculation",
+        "coverage": "Share of lines that calculated",
+        "coverageLine": "{calc} of {total} lines calculated ({pct})",
+        "tweak": {
+          "title": "Nudge the Inputs",
+          "intro": "Each typed input with − / + buttons that rewrite its line by 10%; the note and every indicator follow at once.",
+          "none": "No inputs yet — add a line like price = 20 above the bottom line.",
+          "down": "Lower {name} by 10%",
+          "up": "Raise {name} by 10%"
+        }
       },
       "education": {
         "intro": {
@@ -20583,30 +20599,6 @@
             {
               "name": "Note",
               "description": "Any line that isn't a valid expression or assignment — plain prose, a heading, or a blank line — which the tool leaves alone and shows no result for."
-            }
-          ]
-        },
-        "examples": {
-          "title": "Worked Examples",
-          "intro": "A few lines and what they evaluate to.",
-          "columnCalculation": "Line",
-          "columnResult": "Result",
-          "rows": [
-            {
-              "calculation": "3 + 4 * 2",
-              "result": "11"
-            },
-            {
-              "calculation": "price = 19.99",
-              "result": "19.99"
-            },
-            {
-              "calculation": "price * 3",
-              "result": "59.97"
-            },
-            {
-              "calculation": "tip = 42 * 0.18",
-              "result": "7.56"
             }
           ]
         },
@@ -20712,6 +20704,15 @@
           "note": "The standard reference for recursive-descent expression parsing and operator-precedence evaluation — the general technique behind reading a line like \"rent = 1200 + utilities\" and evaluating it correctly.",
           "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
           "readOriginal": "About Compilers: Principles, Techniques, and Tools"
+        },
+        "notices": {
+          "title": "Notices",
+          "items": [
+            "Results are rounded to 8 decimal places for display; the full binary floating-point value is used in later lines.",
+            "sin, cos and tan take radians; log is base 10 and ln is the natural logarithm.",
+            "This notepad is an educational and everyday tool — double-check figures before using them for financial, legal or contractual decisions.",
+            "Your notes stay in this browser tab; nothing you type is sent to a server."
+          ]
         }
       },
       "relatedTools": {
@@ -20737,6 +20738,248 @@
         "linesTableTitle": "Notepad Lines",
         "lineColumn": "Line",
         "resultColumn": "Result"
+      },
+      "samples": {
+        "trip": {
+          "title": "Weekend trip for two:",
+          "split": "Split it between us:",
+          "save": "Saved up over a few months:"
+        },
+        "loan": {
+          "title": "Car loan, 6% a year, 3 years:",
+          "cost": "What it really costs:"
+        },
+        "tip": {
+          "title": "Dinner with friends:",
+          "split": "Each of the 4 pays:"
+        },
+        "splitBill": {
+          "title": "Monthly rent:",
+          "split": "Split between 3 roommates:"
+        }
+      },
+      "sidebar": {
+        "title": "Variables in scope ({count})",
+        "note": "Values as the last line of the note sees them.",
+        "input": "input",
+        "derived": "derived",
+        "lines": "Lines calculated",
+        "bottom": "Bottom line"
+      },
+      "ind": {
+        "worked": "Worked example",
+        "empty": "Type a calculation such as 2 + 2 or price = 20 to bring this indicator to life.",
+        "noVars": "Define a variable such as price = 20 to see this indicator.",
+        "noInputs": "This needs an input: a line like price = 20 above the bottom line, used by it.",
+        "pickLine": "Line",
+        "pickInput": "Input",
+        "kinds": {
+          "assign": "Assignment",
+          "expr": "Calculation",
+          "note": "Note",
+          "blank": "Blank"
+        },
+        "ops": {
+          "add": "+ −",
+          "mul": "× ÷",
+          "pow": "Power ^",
+          "fn": "Function",
+          "neg": "Negation"
+        },
+        "trend": {
+          "title": "Line Values Down the Page",
+          "heading": "{count} results in the order they appear",
+          "intro": "Every calculated line plotted top to bottom, with the bottom line marked in green against the average of all results.",
+          "mean": "mean {v}",
+          "rowCount": "Lines with a result",
+          "rowPeak": "Largest result",
+          "rowMean": "Mean of results",
+          "rowFinal": "Bottom line",
+          "rowVsMean": "Bottom line ÷ mean"
+        },
+        "donut": {
+          "title": "What the Note Is Made Of",
+          "heading": "{lines} lines, {ops} operations",
+          "intro": "The outer ring sorts every line into assignments, calculations, notes and blanks; the inner ring counts the operations the evaluator actually performs.",
+          "center": "calculated",
+          "outer": "Lines (outer ring)",
+          "inner": "Operations (inner ring)",
+          "noOps": "No operations yet — only plain numbers.",
+          "rowCalc": "Calculated ÷ non-blank lines",
+          "rowNotes": "Note lines (no result)",
+          "rowOps": "Operations evaluated",
+          "rowTop": "Most used operation",
+          "rowCoverage": "Coverage"
+        },
+        "vars": {
+          "title": "Variables Ranked by Size",
+          "heading": "{count} named values in scope",
+          "intro": "Each name defined with \"name = expression\", largest first, tagged as a typed input, a value derived from other names, or a name that was reassigned.",
+          "tag": {
+            "input": "input",
+            "derived": "derived",
+            "reassigned": "reassigned"
+          },
+          "used": "used {count}×",
+          "rowTop": "Largest variable",
+          "rowSum": "Sum of |values|",
+          "rowShare": "Its share",
+          "rowSplit": "Inputs / derived",
+          "rowResult": "Share of the total"
+        },
+        "flow": {
+          "title": "Where the Bottom Line Comes From",
+          "heading": "{nodes} definitions, {depth} levels deep",
+          "intro": "The bottom line at the top, then each name it reads, then the names those read — down to the typed inputs, each resolved to the exact line that defined it.",
+          "bottom": "bottom line",
+          "rowLine": "Bottom line",
+          "rowSub": "With values",
+          "rowLeaves": "Raw inputs reached",
+          "rowDepth": "Levels",
+          "rowResult": "Result"
+        },
+        "steps": {
+          "title": "Evaluation Steps, One Operation at a Time",
+          "heading": "{line} solved in {count} steps",
+          "intro": "The evaluator looks up each name, then runs powers, then × and ÷, then + and −, innermost parentheses first — each stair is one operation in the order it really happens.",
+          "literal": "A plain number — nothing to evaluate.",
+          "kind": {
+            "var": "look up",
+            "op": "operate",
+            "fn": "function",
+            "neg": "negate"
+          },
+          "rowLine": "Expression",
+          "rowSubs": "Name look-ups",
+          "rowOps": "Operations",
+          "rowDepth": "Tree depth",
+          "rowResult": "Result"
+        },
+        "formula": {
+          "title": "The Line as a Formula",
+          "heading": "{line} with its names replaced by values",
+          "intro": "The line as written, then the same line with every variable swapped for the value it held at that point of the note, then the answer.",
+          "rowNoVars": "Variables read",
+          "rowSub": "Substituted",
+          "rowResult": "Result"
+        },
+        "timeline": {
+          "title": "How the Scope Grows Down the Note",
+          "heading": "{count} assignments as stations",
+          "intro": "Each assignment is a station in the order it runs: blue for a typed input, violet for a value built from earlier names, amber where a name is overwritten.",
+          "input": "typed input",
+          "derived": "derived",
+          "reassigned": "overwrites",
+          "usedAt": "read on {lines}",
+          "unused": "not read later",
+          "rowStations": "Assignments",
+          "rowReassign": "Overwrites",
+          "rowScope": "Names in scope at the end",
+          "rowLast": "Last station",
+          "rowValue": "Its value"
+        },
+        "trio": {
+          "title": "Sensitivity: One Input Lower, As Typed, Higher",
+          "heading": "Bottom line with {name} ±{shift}%",
+          "intro": "The whole note is re-run with the chosen input moved down and up, so you see exactly how far the bottom line travels.",
+          "shift": "Shift",
+          "low": "−{shift}%",
+          "now": "As typed",
+          "high": "+{shift}%",
+          "asTyped": "your note",
+          "rowInput": "Input as typed",
+          "rowLow": "Lowered → bottom line",
+          "rowHigh": "Raised → bottom line",
+          "rowSpread": "Spread",
+          "rowResult": "Spread ÷ bottom line"
+        },
+        "impact": {
+          "title": "Which Input Moves the Bottom Line Most",
+          "heading": "Change in the bottom line when each of {count} inputs rises 10%",
+          "intro": "Each bar re-runs the note with one input raised by 10% and the others as typed; the small figure under it is the bottom line's change in percent.",
+          "rowTop": "Strongest input",
+          "rowRaised": "Raised 10%",
+          "rowNew": "Bottom line",
+          "rowElasticity": "Elasticity",
+          "rowResult": "Change",
+          "note": "Elasticity 1 = moves in step; −1 = moves the opposite way."
+        },
+        "mag": {
+          "title": "Results on a Powers-of-Ten Scale",
+          "heading": "Results spanning {orders} orders of magnitude",
+          "intro": "Each result sits at its log10 position, so a 5 and a 50,000 both stay readable on the same bar.",
+          "rowBig": "Largest |result|",
+          "rowSmall": "Smallest |result|",
+          "rowRatio": "Ratio",
+          "rowLog": "Orders apart",
+          "rowResult": "Range"
+        },
+        "round": {
+          "title": "One Result, Four Equivalent Forms",
+          "heading": "{line} from raw float to what the notepad prints",
+          "intro": "Computers store numbers in binary floating point; the notepad rounds to 8 decimals and drops trailing zeros, which hides tiny artefacts such as 0.1 + 0.2.",
+          "card": {
+            "raw": "Full float",
+            "shown": "Notepad shows",
+            "twoDp": "2 decimals",
+            "sci": "Scientific"
+          },
+          "cardNote": {
+            "raw": "every stored digit",
+            "shown": "8 dp, zeros dropped",
+            "twoDp": "money style",
+            "sci": "5 significant digits"
+          },
+          "rowRaw": "Stored value",
+          "rowRule": "Display rule",
+          "rowShown": "Printed",
+          "rowError": "Hidden difference",
+          "rowResult": "Verdict",
+          "hidden": "tiny error hidden",
+          "exact": "exact"
+        },
+        "lab": {
+          "title": "What-If Lab: Drag an Input",
+          "heading": "Bottom line ({line}) as {name} changes",
+          "intro": "The blue curve is the real notepad re-run at 81 values of the input. Drag the green point (or use the slider): every position re-evaluates the whole note.",
+          "aria": "Draggable what-if curve of the bottom line against one input",
+          "typed": "as typed",
+          "slider": "Input value",
+          "hint": "Drag along the curve, use the slider, or focus the point and press the arrow keys.",
+          "apply": "Write {name} = {value} into the note",
+          "rowTyped": "{name} as typed",
+          "rowDragged": "{name} dragged to",
+          "rowBottomTyped": "Bottom line as typed",
+          "rowBottomNow": "Bottom line now",
+          "rowDelta": "Change"
+        }
+      },
+      "examples": {
+        "title": "Worked Examples",
+        "intro": "Three short notes solved line by line with the same evaluator as the notepad above.",
+        "answer": "Bottom line",
+        "kind": {
+          "var": "Look up",
+          "op": "Operate",
+          "fn": "Function",
+          "neg": "Negate",
+          "literal": "Number"
+        },
+        "tip": {
+          "title": "A tip that reuses the bill",
+          "scenario": "A 64.50 dinner bill and an 18% tip, written once and reused.",
+          "takeaway": "Define the bill once; changing it updates the tip and the total together."
+        },
+        "precedence": {
+          "title": "Order of operations",
+          "scenario": "The same numbers bracketed two ways, then with no parentheses at all.",
+          "takeaway": "Brackets change the order: 28, then 67; with none, the power runs first, then ×, then +, giving 19."
+        },
+        "savings": {
+          "title": "Reassigning a name",
+          "scenario": "A 1,000 balance grows 5% twice by overwriting the same name.",
+          "takeaway": "Each line reads the value from the line above, so overwriting compounds the growth."
+        }
       }
     },
     "gcf-lcm-calculator": {

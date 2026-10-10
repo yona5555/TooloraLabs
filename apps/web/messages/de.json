@@ -20524,39 +20524,55 @@
       "nav": {
         "tool": "Notizblock",
         "faq": "FAQ",
-        "behindTheTool": "Hinter dem Tool"
-      },
-      "aboveFold": {
-        "quickReference": {
-          "title": "So funktioniert die zeilenweise Auswertung",
-          "intro": "Jede Zeile nach dem Muster \"name = Ausdruck\" definiert eine Variable, die spätere Zeilen unter diesem Namen verwenden können; jede andere Zeile wird eigenständig als Berechnung ausgewertet.",
-          "variableHint": "Zeilen, die nur Notizen oder Überschriften sind, zeigen einfach kein Ergebnis — das ist so vorgesehen, kein Fehler."
-        },
-        "conceptDiagram": {
-          "title": "Rechenreihenfolge",
-          "intro": "Jeder Ausdruck, den dieses Tool auswertet — in einer Notizblock-Zeile oder im Grafikrechner — folgt derselben festen Reihenfolge: zuerst Klammern, dann Multiplikation und Division, dann Addition und Subtraktion.",
-          "step": {
-            "parens": "Zuerst Klammern",
-            "multiply": "Dann multiplizieren",
-            "result": "Ergebnis"
-          }
-        }
+        "behindTheTool": "Hinter dem Tool",
+        "overview": "Überblick",
+        "evaluation": "Auswertung",
+        "whatIf": "Was-wäre-wenn",
+        "examples": "Beispiele",
+        "notices": "Hinweise"
       },
       "form": {
         "inputTitle": "Notizen",
         "inputLabel": "Notizblock-Text",
         "inputPlaceholder": "Miete\nrent = 1200\nutilities = 85\ntotal = rent + utilities\naufgeteilt auf 3 Mitbewohner:\ntotal / 3",
+        "clear": "Löschen",
+        "samples": "Beispielnotiz laden",
         "snippet": {
-          "splitBill": "Rechnung teilen",
-          "tip": "Trinkgeld berechnen",
-          "unitPrice": "Stückpreis"
+          "trip": "Reisebudget",
+          "loan": "Kreditrate",
+          "tip": "Trinkgeld & Teilen",
+          "splitBill": "Miete teilen"
         },
-        "clear": "Löschen"
+        "syntaxTitle": "Was eine Zeile enthalten kann",
+        "syntaxHint": "„name = expression“ speichert einen Wert für spätere Zeilen; jede andere Zeile wird für sich berechnet; Textzeilen bleiben Notizen.",
+        "insert": "Diese Zeile einfügen",
+        "fn": {
+          "root": "Quadratwurzel",
+          "power": "Potenz",
+          "abs": "Betrag",
+          "log10": "Log zur Basis 10",
+          "ln": "Natürlicher Log",
+          "exp": "e hoch x",
+          "trig": "Sinus (Bogenmaß)",
+          "max": "Größere von zwei"
+        }
       },
       "result": {
         "heading": "Ergebnisse",
         "noCalculations": "Noch nichts zu berechnen — geben Sie in einer beliebigen Zeile einen Ausdruck ein, etwa 2 + 2 oder rent = 1200.",
-        "calculatedCount": "{count, plural, one {# Zeile berechnet} other {# Zeilen berechnet}}"
+        "calculatedCount": "{count, plural, one {# Zeile berechnet} other {# Zeilen berechnet}}",
+        "bottomLine": "Endergebnis",
+        "bottomOf": "{line} · {name}",
+        "expression": "Berechnung",
+        "coverage": "Anteil berechneter Zeilen",
+        "coverageLine": "{calc} von {total} Zeilen berechnet ({pct})",
+        "tweak": {
+          "title": "Eingaben anpassen",
+          "intro": "Jede eingetippte Eingabe mit − / + Schaltflächen, die ihre Zeile um 10 % umschreiben; Notiz und alle Indikatoren folgen sofort.",
+          "none": "Noch keine Eingaben — fügen Sie über dem Endergebnis eine Zeile wie price = 20 hinzu.",
+          "down": "{name} um 10 % senken",
+          "up": "{name} um 10 % erhöhen"
+        }
       },
       "education": {
         "intro": {
@@ -20583,30 +20599,6 @@
             {
               "name": "Notiz",
               "description": "Jede Zeile, die kein gültiger Ausdruck oder keine Zuweisung ist — reiner Fließtext, eine Überschrift oder eine leere Zeile —, die das Tool unangetastet lässt und für die kein Ergebnis angezeigt wird."
-            }
-          ]
-        },
-        "examples": {
-          "title": "Berechnete Beispiele",
-          "intro": "Ein paar Zeilen und ihr jeweiliges Ergebnis.",
-          "columnCalculation": "Zeile",
-          "columnResult": "Ergebnis",
-          "rows": [
-            {
-              "calculation": "3 + 4 * 2",
-              "result": "11"
-            },
-            {
-              "calculation": "price = 19.99",
-              "result": "19.99"
-            },
-            {
-              "calculation": "price * 3",
-              "result": "59.97"
-            },
-            {
-              "calculation": "tip = 42 * 0.18",
-              "result": "7.56"
             }
           ]
         },
@@ -20712,6 +20704,15 @@
           "note": "Das Standardwerk zum rekursiven Abstiegs-Parsing von Ausdrücken und zur Operatorrangfolge-Auswertung — die allgemeine Technik hinter dem korrekten Lesen und Auswerten einer Zeile wie „rent = 1200 + utilities\".",
           "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
           "readOriginal": "Über Compilers: Principles, Techniques, and Tools"
+        },
+        "notices": {
+          "title": "Hinweise",
+          "items": [
+            "Ergebnisse werden zur Anzeige auf 8 Nachkommastellen gerundet; spätere Zeilen nutzen den vollen Gleitkommawert.",
+            "sin, cos und tan rechnen im Bogenmaß; log ist der Zehnerlogarithmus, ln der natürliche Logarithmus.",
+            "Dieser Notizblock ist ein Lern- und Alltagswerkzeug — prüfen Sie Zahlen, bevor Sie sie für finanzielle, rechtliche oder vertragliche Entscheidungen verwenden.",
+            "Ihre Notizen bleiben in diesem Browser-Tab; nichts, was Sie eingeben, wird an einen Server gesendet."
+          ]
         }
       },
       "relatedTools": {
@@ -20737,6 +20738,248 @@
         "linesTableTitle": "Notizzeilen",
         "lineColumn": "Zeile",
         "resultColumn": "Ergebnis"
+      },
+      "samples": {
+        "trip": {
+          "title": "Wochenendreise zu zweit:",
+          "split": "Wir teilen es auf:",
+          "save": "Über einige Monate angespart:"
+        },
+        "loan": {
+          "title": "Autokredit, 6 % pro Jahr, 3 Jahre:",
+          "cost": "Was er wirklich kostet:"
+        },
+        "tip": {
+          "title": "Abendessen mit Freunden:",
+          "split": "Jeder der 4 zahlt:"
+        },
+        "splitBill": {
+          "title": "Monatsmiete:",
+          "split": "Aufgeteilt auf 3 Mitbewohner:"
+        }
+      },
+      "sidebar": {
+        "title": "Definierte Variablen ({count})",
+        "note": "Werte, wie die letzte Zeile der Notiz sie sieht.",
+        "input": "Eingabe",
+        "derived": "abgeleitet",
+        "lines": "Berechnete Zeilen",
+        "bottom": "Endergebnis"
+      },
+      "ind": {
+        "worked": "Rechenbeispiel",
+        "empty": "Geben Sie eine Rechnung wie 2 + 2 oder price = 20 ein, um diesen Indikator zu aktivieren.",
+        "noVars": "Definieren Sie eine Variable wie price = 20, um diesen Indikator zu sehen.",
+        "noInputs": "Benötigt eine Eingabe: eine Zeile wie price = 20 oberhalb des Endergebnisses, die von ihm genutzt wird.",
+        "pickLine": "Zeile",
+        "pickInput": "Eingabe",
+        "kinds": {
+          "assign": "Zuweisung",
+          "expr": "Berechnung",
+          "note": "Notiz",
+          "blank": "Leer"
+        },
+        "ops": {
+          "add": "+ −",
+          "mul": "× ÷",
+          "pow": "Potenz ^",
+          "fn": "Funktion",
+          "neg": "Negation"
+        },
+        "trend": {
+          "title": "Zeilenwerte von oben nach unten",
+          "heading": "{count} Ergebnisse in ihrer Reihenfolge",
+          "intro": "Jede berechnete Zeile von oben nach unten aufgetragen, das Endergebnis grün markiert und mit dem Mittelwert aller Ergebnisse verglichen.",
+          "mean": "Mittel {v}",
+          "rowCount": "Zeilen mit Ergebnis",
+          "rowPeak": "Größtes Ergebnis",
+          "rowMean": "Mittelwert",
+          "rowFinal": "Endergebnis",
+          "rowVsMean": "Ende ÷ Mittelwert"
+        },
+        "donut": {
+          "title": "Woraus die Notiz besteht",
+          "heading": "{lines} Zeilen, {ops} Operationen",
+          "intro": "Der äußere Ring ordnet jede Zeile als Zuweisung, Berechnung, Notiz oder Leerzeile ein; der innere zählt die Operationen, die der Auswerter tatsächlich ausführt.",
+          "center": "berechnet",
+          "outer": "Zeilen (äußerer Ring)",
+          "inner": "Operationen (innerer Ring)",
+          "noOps": "Noch keine Operationen, nur Zahlen.",
+          "rowCalc": "Berechnet ÷ nicht leer",
+          "rowNotes": "Notizzeilen (ohne Ergebnis)",
+          "rowOps": "Ausgeführte Operationen",
+          "rowTop": "Häufigste Operation",
+          "rowCoverage": "Abdeckung"
+        },
+        "vars": {
+          "title": "Variablen nach Größe sortiert",
+          "heading": "{count} benannte Werte definiert",
+          "intro": "Jeder mit „name = expression“ definierte Name, der größte zuerst, markiert als eingetippte Eingabe, aus anderen Namen abgeleiteter Wert oder neu zugewiesener Name.",
+          "tag": {
+            "input": "Eingabe",
+            "derived": "abgeleitet",
+            "reassigned": "neu zugewiesen"
+          },
+          "used": "{count}× genutzt",
+          "rowTop": "Größte Variable",
+          "rowSum": "Summe der |Werte|",
+          "rowShare": "Ihr Anteil",
+          "rowSplit": "Eingaben / abgeleitet",
+          "rowResult": "Anteil an der Summe"
+        },
+        "flow": {
+          "title": "Woher das Endergebnis kommt",
+          "heading": "{nodes} Definitionen, {depth} Ebenen tief",
+          "intro": "Das Endergebnis oben, darunter jeder Name, den es liest, und die Namen, die diese lesen, bis zu den eingetippten Eingaben, jeweils mit der Zeile, die sie definiert hat.",
+          "bottom": "Endergebnis",
+          "rowLine": "Letzte Zeile",
+          "rowSub": "Mit Werten",
+          "rowLeaves": "Erreichte Eingaben",
+          "rowDepth": "Ebenen",
+          "rowResult": "Ergebnis"
+        },
+        "steps": {
+          "title": "Auswertung Schritt für Schritt",
+          "heading": "{line} in {count} Schritten gelöst",
+          "intro": "Der Auswerter liest jeden Namen, rechnet dann Potenzen, dann × und ÷, dann + und −, innerste Klammern zuerst; jede Stufe ist eine Operation in der tatsächlichen Reihenfolge.",
+          "literal": "Eine einfache Zahl, nichts auszuwerten.",
+          "kind": {
+            "var": "nachschlagen",
+            "op": "rechnen",
+            "fn": "Funktion",
+            "neg": "negieren"
+          },
+          "rowLine": "Ausdruck",
+          "rowSubs": "Namensabfragen",
+          "rowOps": "Operationen",
+          "rowDepth": "Baumtiefe",
+          "rowResult": "Ergebnis"
+        },
+        "formula": {
+          "title": "Die Zeile als Formel",
+          "heading": "{line} mit Werten statt Namen",
+          "intro": "Die Zeile wie geschrieben, dann dieselbe Zeile mit jeder Variablen durch ihren Wert an dieser Stelle der Notiz ersetzt, dann das Ergebnis.",
+          "rowNoVars": "Gelesene Variablen",
+          "rowSub": "Eingesetzt",
+          "rowResult": "Ergebnis"
+        },
+        "timeline": {
+          "title": "Wie die Variablen in der Notiz wachsen",
+          "heading": "{count} Zuweisungen als Stationen",
+          "intro": "Jede Zuweisung ist eine Station in Ausführungsreihenfolge: blau für eine eingetippte Eingabe, violett für einen aus früheren Namen gebildeten Wert, bernstein, wo ein Name überschrieben wird.",
+          "input": "Eingabe",
+          "derived": "abgeleitet",
+          "reassigned": "überschreibt",
+          "usedAt": "gelesen in {lines}",
+          "unused": "später nicht gelesen",
+          "rowStations": "Zuweisungen",
+          "rowReassign": "Überschreibungen",
+          "rowScope": "Namen am Ende",
+          "rowLast": "Letzte Station",
+          "rowValue": "Ihr Wert"
+        },
+        "trio": {
+          "title": "Sensitivität: eine Eingabe niedriger, wie getippt, höher",
+          "heading": "Endergebnis mit {name} ±{shift} %",
+          "intro": "Die ganze Notiz wird mit gesenkter und erhöhter Eingabe neu berechnet, damit Sie genau sehen, wie weit sich das Endergebnis bewegt.",
+          "shift": "Änderung",
+          "low": "−{shift} %",
+          "now": "Wie getippt",
+          "high": "+{shift} %",
+          "asTyped": "Ihre Notiz",
+          "rowInput": "Eingabe wie getippt",
+          "rowLow": "Gesenkt → Ergebnis",
+          "rowHigh": "Erhöht → Ergebnis",
+          "rowSpread": "Spanne",
+          "rowResult": "Spanne ÷ Ergebnis"
+        },
+        "impact": {
+          "title": "Welche Eingabe das Endergebnis am stärksten bewegt",
+          "heading": "Änderung des Endergebnisses, wenn jede der {count} Eingaben um 10 % steigt",
+          "intro": "Jeder Balken berechnet die Notiz mit einer um 10 % erhöhten Eingabe neu, die übrigen bleiben; die kleine Zahl darunter ist die prozentuale Änderung des Endergebnisses.",
+          "rowTop": "Stärkste Eingabe",
+          "rowRaised": "Um 10 % erhöht",
+          "rowNew": "Endergebnis",
+          "rowElasticity": "Elastizität",
+          "rowResult": "Änderung",
+          "note": "Elastizität 1 = bewegt sich im gleichen Maß; −1 = in Gegenrichtung."
+        },
+        "mag": {
+          "title": "Ergebnisse auf einer Zehnerpotenz-Skala",
+          "heading": "Ergebnisse über {orders} Größenordnungen",
+          "intro": "Jedes Ergebnis steht an seiner log10-Position, sodass eine 5 und eine 50.000 auf demselben Balken lesbar bleiben.",
+          "rowBig": "Größtes |Ergebnis|",
+          "rowSmall": "Kleinstes |Ergebnis|",
+          "rowRatio": "Verhältnis",
+          "rowLog": "Größenordnungen Abstand",
+          "rowResult": "Bereich"
+        },
+        "round": {
+          "title": "Ein Ergebnis, vier gleichwertige Formen",
+          "heading": "{line} vom rohen Gleitkommawert bis zur Anzeige",
+          "intro": "Computer speichern Zahlen als binäre Gleitkommazahlen; der Notizblock rundet auf 8 Nachkommastellen und streicht Endnullen, was winzige Artefakte wie 0.1 + 0.2 verbirgt.",
+          "card": {
+            "raw": "Voller Gleitkommawert",
+            "shown": "Notizblock zeigt",
+            "twoDp": "2 Nachkommastellen",
+            "sci": "Wissenschaftlich"
+          },
+          "cardNote": {
+            "raw": "alle gespeicherten Ziffern",
+            "shown": "8 Stellen, ohne Nullen",
+            "twoDp": "Geldformat",
+            "sci": "5 signifikante Stellen"
+          },
+          "rowRaw": "Gespeicherter Wert",
+          "rowRule": "Anzeigeregel",
+          "rowShown": "Angezeigt",
+          "rowError": "Verborgene Differenz",
+          "rowResult": "Urteil",
+          "hidden": "winziger Fehler verborgen",
+          "exact": "exakt"
+        },
+        "lab": {
+          "title": "Was-wäre-wenn-Labor: Eingabe ziehen",
+          "heading": "Endergebnis ({line}) bei veränderter {name}",
+          "intro": "Die blaue Kurve ist die echte Notiz, neu berechnet für 81 Werte der Eingabe. Ziehen Sie den grünen Punkt (oder den Schieberegler): Jede Position wertet die ganze Notiz neu aus.",
+          "aria": "Ziehbare Was-wäre-wenn-Kurve des Endergebnisses über einer Eingabe",
+          "typed": "wie getippt",
+          "slider": "Eingabewert",
+          "hint": "Entlang der Kurve ziehen, den Schieberegler nutzen oder den Punkt fokussieren und die Pfeiltasten drücken.",
+          "apply": "{name} = {value} in die Notiz schreiben",
+          "rowTyped": "{name} wie getippt",
+          "rowDragged": "{name} gezogen auf",
+          "rowBottomTyped": "Ergebnis wie getippt",
+          "rowBottomNow": "Ergebnis jetzt",
+          "rowDelta": "Änderung"
+        }
+      },
+      "examples": {
+        "title": "Rechenbeispiele",
+        "intro": "Drei kurze Notizen, Zeile für Zeile mit demselben Auswerter gelöst wie der Notizblock oben.",
+        "answer": "Endergebnis",
+        "kind": {
+          "var": "Nachschlagen",
+          "op": "Rechnen",
+          "fn": "Funktion",
+          "neg": "Negieren",
+          "literal": "Zahl"
+        },
+        "tip": {
+          "title": "Trinkgeld, das die Rechnung wiederverwendet",
+          "scenario": "Eine Rechnung über 64,50 und 18 % Trinkgeld, einmal geschrieben und wiederverwendet.",
+          "takeaway": "Definieren Sie die Rechnung einmal; eine Änderung aktualisiert Trinkgeld und Summe zugleich."
+        },
+        "precedence": {
+          "title": "Rangfolge der Operationen",
+          "scenario": "Dieselben Zahlen auf zwei Arten geklammert, dann ganz ohne Klammern.",
+          "takeaway": "Klammern ändern die Reihenfolge: 28, dann 67; ohne sie kommt zuerst die Potenz, dann ×, dann +, also 19."
+        },
+        "savings": {
+          "title": "Einen Namen neu zuweisen",
+          "scenario": "Ein Guthaben von 1.000 wächst zweimal um 5 %, indem derselbe Name überschrieben wird.",
+          "takeaway": "Jede Zeile liest den Wert der vorherigen, daher summiert sich das Wachstum beim Überschreiben."
+        }
       }
     },
     "pace-calculator": {

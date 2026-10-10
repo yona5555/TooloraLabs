@@ -4,7 +4,7 @@ import { BaseCalculator } from "./BaseCalculator";
 export class ExpressionParseError extends Error {}
 export class ExpressionEvalError extends Error {}
 
-type ExprNode =
+export type ExprNode =
   | { type: "num"; value: number }
   | { type: "var"; name: string }
   | { type: "call"; name: string; args: ExprNode[] }
