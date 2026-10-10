@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Edges, Html } from "@react-three/drei";
+import { Edges } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
 /**
@@ -76,22 +77,8 @@ export default function ProbabilityScene3D({ counts, target, labels, headline }:
   const bg = p.dark ? "rgba(24,24,27,0.88)" : "rgba(255,255,255,0.94)";
   const half = ((N - 1) * STEP) / 2;
 
-  const pill = (text: string, color: string, strong = false) => (
-    <span
-      style={{
-        color,
-        background: bg,
-        border: `1px solid ${color}88`,
-        borderRadius: 6,
-        padding: strong ? "2px 8px" : "1px 6px",
-        fontSize: strong ? 12 : 11,
-        fontWeight: 700,
-        whiteSpace: "nowrap",
-        fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-      }}
-    >
-      {text}
-    </span>
+  const pill = (pos: [number, number, number], text: string, color: string, strong = false, key?: number) => (
+    <Label3D key={key} position={pos} color={color} bg={bg} border={`${color}88`} text={text} fontSize={strong ? 12 : 11} weight={700} />
   );
 
   // Pill anchors: the centre cube of each non-empty region block, lifted above it.
@@ -126,14 +113,10 @@ export default function ProbabilityScene3D({ counts, target, labels, headline }:
       ))}
       {anchors.map((pos, r) =>
         pos ? (
-          <Html key={r} position={pos} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-            {pill(labels[r], r === 3 ? p.muted : colors[r])}
-          </Html>
+          pill(pos, labels[r], r === 3 ? p.muted : colors[r], false, r)
         ) : null,
       )}
-      <Html position={[0, HIGH + 1.1, -half]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-        {pill(headline, p.text, true)}
-      </Html>
+      {pill([0, HIGH + 1.1, -half], headline, p.text, true)}
     </group>
   );
 }

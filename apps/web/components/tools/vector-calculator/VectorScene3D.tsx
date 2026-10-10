@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import * as THREE from "three";
-import { Html, Line } from "@react-three/drei";
+import { Line } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import { angleArcPoints, vecMag, type Vec3 } from "@tooloralabs/tools";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
@@ -80,15 +81,8 @@ export default function VectorScene3D({ a, b, sum, cross, proj, labels }: Vector
   }, [faceKey]);
 
   const bg = p.dark ? "rgba(24,24,27,0.88)" : "rgba(255,255,255,0.92)";
-  const pill = (text: string, color: string) => (
-    <span style={{ color, background: bg, border: `1px solid ${color}66`, borderRadius: 6, padding: "1px 6px", fontSize: 11, fontWeight: 700, whiteSpace: "nowrap", fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>
-      {text}
-    </span>
-  );
   const label = (at: P3, text: string, color: string, lift = 0.22) => (
-    <Html position={[at[0], at[1] + lift, at[2]]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-      {pill(text, color)}
-    </Html>
+    <Label3D position={[at[0], at[1] + lift, at[2]]} color={color} bg={bg} text={text} weight={700} />
   );
   const axisLen = FIT * 1.15;
 

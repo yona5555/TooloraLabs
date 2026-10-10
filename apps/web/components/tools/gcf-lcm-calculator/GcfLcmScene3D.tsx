@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Edges, Html } from "@react-three/drei";
+import { Edges } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
 /**
@@ -73,10 +74,8 @@ export default function GcfLcmScene3D({ towers, primes, replay }: GcfLcmScene3DP
 
   const colorOf = (prime: number) => p.faces[Math.max(0, primes.indexOf(prime)) % p.faces.length];
   const bg = p.dark ? "rgba(24,24,27,0.88)" : "rgba(255,255,255,0.94)";
-  const pill = (text: string, color: string, size = 11) => (
-    <span style={{ color, background: bg, border: `1px solid ${color}66`, borderRadius: 6, padding: "1px 6px", fontSize: size, fontWeight: 700, whiteSpace: "nowrap", fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>
-      {text}
-    </span>
+  const pill = (pos: [number, number, number], text: string, color: string, size = 11) => (
+    <Label3D position={pos} color={color} bg={bg} text={text} fontSize={size} weight={700} />
   );
   const towerColor = (k: GcfLcmTower["kind"]) => (k === "gcf" ? p.positive : k === "lcm" ? p.accent : p.text);
   const sharedEdge = p.dark ? "#f4f4f5" : "#0f172a";
@@ -105,16 +104,12 @@ export default function GcfLcmScene3D({ towers, primes, replay }: GcfLcmScene3DP
                   <meshStandardMaterial color={c} transparent opacity={solid ? 0.95 : t.kind === "lcm" ? 0.7 : 0.38} depthWrite={solid} />
                   <Edges color={solid ? sharedEdge : c} threshold={15} />
                   {showCubeLabels && (
-                    <Html position={[0, 0, unit * 0.5]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-                      <span style={{ color: p.dark ? "#fafafa" : "#0f172a", fontSize: 10, fontWeight: 700, fontFamily: "ui-monospace, Menlo, monospace" }}>{b.primeLabel}</span>
-                    </Html>
+                    <Label3D position={[0, 0, unit * 0.5]} color={p.dark ? "#fafafa" : "#0f172a"} text={b.primeLabel} fontSize={10} weight={700} />
                   )}
                 </mesh>
               );
             })}
-            <Html position={[x, topY(Math.max(1, t.blocks.length)) + 0.28, 0]} center zIndexRange={[30, 0]} style={{ pointerEvents: "none" }}>
-              {pill(t.label, towerColor(t.kind), t.kind === "number" ? 11 : 12)}
-            </Html>
+            {pill([x, topY(Math.max(1, t.blocks.length)) + 0.28, 0], t.label, towerColor(t.kind), t.kind === "number" ? 11 : 12)}
           </group>
         );
       })}
