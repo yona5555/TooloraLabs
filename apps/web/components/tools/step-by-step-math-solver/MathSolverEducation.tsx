@@ -4,7 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MathSolverGraphDrag from "./MathSolverGraphDrag";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import MathSolverLive3D from "./MathSolverLive3D";
 import EquationBalanceDiagram from "./EquationBalanceDiagram";
 import SolveFlowDiagram from "./SolveFlowDiagram";
 import RadialProgressGauges from "./RadialProgressGauges";
@@ -27,6 +28,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function MathSolverEducation() {
   const t = await getTranslations("tools.step-by-step-math-solver.education");
+  const t3 = await getTranslations("tools.step-by-step-math-solver.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -36,7 +38,9 @@ export default async function MathSolverEducation() {
 
   return (
     <EncyclopediaPaper>
-      <MathSolverGraphDrag />
+      <SectionCard title={t3("cardTitle")}>
+        <MathSolverLive3D camera={[1.4, 2.8, 8.6]} />
+      </SectionCard>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>

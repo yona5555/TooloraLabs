@@ -4,7 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import StatisticsDataPointsDrag from "./StatisticsDataPointsDrag";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import StatisticsLive3D from "./StatisticsLive3D";
 import MeanMedianModeComparison from "./MeanMedianModeComparison";
 import OutlierEffectOnMeanDiagram from "./OutlierEffectOnMeanDiagram";
 import SumToMeanFlowDiagram from "./SumToMeanFlowDiagram";
@@ -25,6 +26,7 @@ type ExampleRow = { calculation: string; result: string };
 
 export default async function StatisticsEducation() {
   const t = await getTranslations("tools.statistics-calculator.education");
+  const t3 = await getTranslations("tools.statistics-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -34,7 +36,9 @@ export default async function StatisticsEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <StatisticsDataPointsDrag />
+        <SectionCard title={t3("cardTitle")}>
+          <StatisticsLive3D camera={[1.2, 3.8, 9]} />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
         <div className="space-y-6">

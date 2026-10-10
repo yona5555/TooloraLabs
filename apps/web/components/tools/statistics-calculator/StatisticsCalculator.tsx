@@ -57,7 +57,8 @@ export default function StatisticsCalculator({ education }: { education: ReactNo
               onClear={handleClear}
             />
           }
-          result={<StatisticsResult result={result} values={values} digitStyle={digitStyle} />}
+          stretchInput
+          result={<StatisticsResult result={result} digitStyle={digitStyle} />}
           sidebar={<RelatedToolsSidebar currentSlug="statistics-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

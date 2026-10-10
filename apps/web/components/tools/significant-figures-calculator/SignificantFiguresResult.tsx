@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import CopyButton from "@/components/tool-ui/CopyButton";
-import DigitSignificanceDisplay from "./DigitSignificanceDisplay";
+import SignificantFiguresLive3D from "./SignificantFiguresLive3D";
 import SignificantFiguresShareExportModal from "./SignificantFiguresShareExportModal";
 import type { SignificantFiguresOperation, SignificantFiguresResult as Result } from "./types";
 
@@ -47,8 +47,6 @@ export default function SignificantFiguresResult({ result, computed }: Props) {
     : rawPrecision;
   const exponentDisplay = isScientific ? String(result.resultScientific.exponent) : null;
   const copyText = isScientific ? `${mantissaDisplay} × 10^${exponentDisplay}` : rawPrecision;
-
-  const digitDisplayRaw = operation === "count" ? valueA : isAddSubtract ? null : mantissaDisplay;
 
   let stepSentence: string;
   if (operation === "count") {
@@ -104,9 +102,9 @@ export default function SignificantFiguresResult({ result, computed }: Props) {
               : t("sigFigsBadge", { count: result.resultSigFigs ?? 0 })}
           </p>
 
-          {digitDisplayRaw && (
-            <DigitSignificanceDisplay raw={digitDisplayRaw} caption={t("diagramCaption")} />
-          )}
+          <div className="mt-4">
+            <SignificantFiguresLive3D />
+          </div>
 
           <p className="mt-4 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-600 dark:border-zinc-800 dark:text-zinc-300">
             {stepSentence}

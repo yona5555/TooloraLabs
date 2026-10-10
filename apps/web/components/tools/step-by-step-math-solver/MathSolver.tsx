@@ -66,6 +66,14 @@ export default function MathSolver({ education }: { education: ReactNode }) {
     setHasCalculated(true);
   }
 
+  function handlePreset(patch: Partial<MathSolverDraft>) {
+    const next = { ...draft, ...patch };
+    setDraft(next);
+    setResult(computeResult(next));
+    setCommittedDraft(next);
+    setHasCalculated(true);
+  }
+
   function handleClear() {
     setDraft(DEFAULT_DRAFT);
     setHasCalculated(false);
@@ -81,7 +89,8 @@ export default function MathSolver({ education }: { education: ReactNode }) {
     <MathSolverLiveProvider value={{ dims: draft, setDim: (key, value) => setDraft((prev) => ({ ...prev, [key]: value })) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<MathSolverInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} />}
+          input={<MathSolverInputPanel draft={draft} onChange={setDraft} onCalculate={handleCalculate} onClear={handleClear} onPreset={handlePreset} />}
+          stretchInput
           result={
             <div className="flex flex-col gap-4">
               <MathSolverResult result={result} draft={committedDraft} hasCalculated={hasCalculated} />
