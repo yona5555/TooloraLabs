@@ -58,8 +58,9 @@ describe("RandomNumberGenerator", () => {
     let i = 0;
     const fakeRandom = () => sequence[i++ % sequence.length];
     const r = generateRandomNumbers({ min: 1, max: 10, count: 3, allowDuplicates: true, sortOrder: "none" }, fakeRandom);
-    // lo=1, rangeSize=10: floor(0*10)+1=1, floor(0.5*10)+1=6, floor(0.99*10)+1=10
-    expect(r.numbers).toEqual([1, 6, 10]);
+    // Each [0, 1) value becomes a 32-bit word, then (word mod 10) + 1 under rejection sampling:
+    // 0 -> 1, 2^31 mod 10 = 8 -> 9, floor(0.99 * 2^32) = 4252017623 mod 10 = 3 -> 4.
+    expect(r.numbers).toEqual([1, 9, 4]);
   });
 
   it("normalizes min/max given in reverse order", () => {

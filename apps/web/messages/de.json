@@ -21104,8 +21104,13 @@
       "description": "Erzeugen Sie zufällige ganze Zahlen innerhalb eines von Ihnen gewählten Bereichs, mit Kontrolle über die Anzahl der Ergebnisse, ob Duplikate erlaubt sind, und die Sortierreihenfolge der Ausgabe.",
       "nav": {
         "tool": "Generator",
+        "draw": "Diese Ziehung",
+        "expect": "Erwartungen",
+        "space": "Ergebnisraum",
+        "examples": "Rechenbeispiele",
         "faq": "FAQ",
-        "behindTheTool": "Hinter dem Tool"
+        "behindTheTool": "Hinter dem Tool",
+        "notices": "Hinweise"
       },
       "form": {
         "inputTitle": "Einstellungen",
@@ -21122,7 +21127,20 @@
           "descending": "Absteigend"
         },
         "generate": "Generieren",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "seedLabel": "Startwert",
+        "seedHint": "Gleicher Startwert + gleiche Einstellungen = gleiche Zahlen. Generieren wählt einen neuen.",
+        "presetsLabel": "Schnellziehungen",
+        "presets": {
+          "dice": "Würfelwurf",
+          "coin": "10 Münzwürfe",
+          "lottery": "Lotto 6/49",
+          "powerball": "Powerball weiße Kugeln",
+          "card": "5-Karten-Hand",
+          "percentile": "20 Ziehungen 1–100",
+          "raffle": "3 Tombola-Gewinner",
+          "birthday": "23 Geburtstage"
+        }
       },
       "result": {
         "heading": "Ergebnis",
@@ -21132,37 +21150,22 @@
         "countLabel": "Anzahl",
         "sumLabel": "Summe",
         "averageLabel": "Durchschnitt",
-        "rangeDiagramCaption": "Position jeder generierten Zahl zwischen dem festgelegten Minimum und Maximum."
-      },
-      "quickReference": {
-        "title": "Gängige Zufallsziehungen",
-        "intro": "Ein paar typische Bereiche und Einstellungen, für die dieser Generator gebaut ist."
+        "seedLabel": "Startwert",
+        "expectedLabel": "Erwarteter Ø",
+        "moreHidden": "+{count} weitere in der Kopie und in den Indikatoren unten",
+        "spreadTitle": "So verteilt sich diese Ziehung",
+        "spreadLegend": "Blau = gezogene Zahlen je Abschnitt des Bereichs; gestrichelt bernsteinfarben = was eine vollkommen gleichmäßige Ziehung dort hätte ({expected} im ersten Abschnitt).",
+        "verdict": {
+          "even": "Gleichmäßig",
+          "borderline": "Grenzwertig",
+          "uneven": "Ungleichmäßig"
+        }
       },
       "education": {
         "intro": {
           "title": "Zufallszahlen verstehen",
           "paragraph1": "Ein Computer kann keine wirklich unvorhersehbare Zahl erzeugen, wie es ein physischer Würfelwurf oder Münzwurf tut — jede Berechnung, die ein Prozessor ausführt, ist deterministisch, dieselbe Eingabe erzeugt immer dieselbe Ausgabe. Was dieses Tool (und praktisch jede allgemeine Zufallszahlenfunktion in Software) tatsächlich verwendet, ist ein Pseudozufallszahlengenerator: ein deterministischer Algorithmus, der von einem unvorhersehbaren Startwert (Seed) ausgeht und eine lange Folge von Zahlen erzeugt, die statistische Tests auf Zufälligkeit bestehen — obwohl die Folge technisch reproduzierbar wäre, wenn der Seed bekannt wäre.",
           "paragraph2": "Eine zufällige ganze Zahl innerhalb eines gewählten Bereichs zu erzeugen, ohne eine bestimmte Zahl zu bevorzugen, ist weniger trivial, als es klingt — einen zufälligen Wert naiv modulo der Bereichsgröße zu nehmen, verzerrt leicht zugunsten kleinerer Zahlen, sofern der Bereich den Ausgaberaum des Generators nicht exakt gleichmäßig teilt. Dieses Tool vermeidet diese Verzerrung, und wenn Duplikate ausgeschlossen sind, zieht es ohne Zurücklegen, indem es den gesamten Bereich mischt, statt wiederholt neu zu würfeln, bis ein neuer Wert erscheint — das bleibt schnell und gleichmäßig, selbst wenn die angeforderte Anzahl sich der Größe des Bereichs selbst annähert."
-        },
-        "examples": {
-          "title": "Häufige Anwendungen",
-          "intro": "Derselbe Generator, drei verschiedene alltägliche Einstellungen.",
-          "columnUseCase": "Anwendungsfall",
-          "columnSettings": "Einstellungen",
-          "rows": [
-            {
-              "calculation": "Einen sechsseitigen Würfel werfen",
-              "result": "1–6, 1 Ergebnis, Duplikate erlaubt"
-            },
-            {
-              "calculation": "6 Lottozahlen ziehen",
-              "result": "1–49, 6 Ergebnisse, keine Duplikate"
-            },
-            {
-              "calculation": "Einen zufälligen Gewinner aus 250 Teilnehmern auswählen",
-              "result": "1–250, 1 Ergebnis"
-            }
-          ]
         },
         "applications": {
           "title": "Wo Zufallszahlen eingesetzt werden",
@@ -21200,6 +21203,14 @@
             {
               "question": "Warum liefern zwei verschiedene Zufallszahlengeneratoren für denselben Bereich manchmal unterschiedlich wirkende Ergebnisse?",
               "answer": "Verschiedene Tools verwenden unterschiedliche zugrunde liegende Pseudozufallsalgorithmen und Seeding-Methoden, was die konkret erzeugte Folge beeinflusst (und wie lange es dauert, bis sich diese Folge wiederholt), auch wenn beide für den alltäglichen Gebrauch statistisch gültige Zufallsquellen sein können."
+            },
+            {
+              "question": "Wozu dient der Startwert?",
+              "answer": "Der Startwert legt die gesamte Folge fest. Mit demselben Startwert, demselben Bereich, derselben Anzahl und denselben Duplikat- und Sortiereinstellungen erhalten Sie exakt dieselben Zahlen – praktisch für Übungen im Unterricht, veröffentlichte Verlosungen, die andere prüfen wollen, oder zum Wiederholen einer Simulation. Drücken Sie Generieren für einen neuen Startwert."
+            },
+            {
+              "question": "Woher weiß ich, dass die Zahlen wirklich gleichmäßig verteilt sind?",
+              "answer": "Die Seite führt für jede Ziehung Pearsons Chi-Quadrat-Test durch: Er vergleicht, wie viele Zahlen in jeden Abschnitt des Bereichs fielen, mit einer gleichmäßigen Ziehung. Ein p-Wert über 0,05 bedeutet, dass die Verteilung mit fairem Zufall vereinbar ist. Bei wenigen Zahlen ist der Test schwach, und etwa jede zwanzigste Ziehung wirkt erwartungsgemäß ungleichmäßig."
             }
           ]
         },
@@ -21254,14 +21265,46 @@
                 "online": "Nein — die Programme der Abteilung finden vor Ort auf dem Campus der AUB in Beirut, Libanon, statt."
               }
             ]
+          },
+          "howItWorks": {
+            "title": "So zieht dieser Generator",
+            "paragraph": "Jede Ziehung beginnt mit einem 32-Bit-Startwert aus der kryptografischen Quelle Ihres Browsers (crypto.getRandomValues) oder von Ihnen eingegeben, der den Mulberry32-Generator speist. Jede Zahl wird dann per Verwerfungsmethode gewählt: Ein 32-Bit-Wert im unvollständigen oberen Block wird verworfen und neu gezogen, sodass jede ganze Zahl im Bereich exakt dieselbe Chance hat. Ziehungen ohne Wiederholung nutzen ein partielles Fisher–Yates-Mischen, das nur so viele Positionen berührt wie angefordert, sodass selbst ein Bereich von Billionen sofort bleibt. Alles läuft in Ihrem Browser; nichts wird irgendwohin gesendet."
           }
         },
         "references": {
-          "title": "Wissenschaftliche Referenzen",
-          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
-          "note": "Die Studie, die den Mersenne-Twister-Algorithmus einführte, einen der heute am weitesten verbreiteten Pseudozufallszahlengeneratoren in Software, geschätzt für seine extrem lange Periode und starke statistische Gleichverteilung.",
-          "url": "https://doi.org/10.1145/272991.272995",
-          "readOriginal": "Originalarbeit lesen"
+          "title": "Wissenschaftliche Quellen",
+          "readOriginal": "Originalquelle lesen",
+          "items": [
+            {
+              "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3–30.",
+              "note": "Der Artikel zu einem der verbreitetsten Pseudozufallsgeneratoren und Referenz für Periodenlänge und Gleichverteilung.",
+              "url": "https://doi.org/10.1145/272991.272995"
+            },
+            {
+              "citation": "Knuth, D. E. (1997). The Art of Computer Programming, Volume 2: Seminumerical Algorithms (3rd ed.). Addison-Wesley. ISBN 978-0-201-89684-8.",
+              "note": "Das Standardwerk zur Zufallszahlenerzeugung, zum Mischen bei Ziehungen ohne Wiederholung und zum Chi-Quadrat-Test für Generatoren.",
+              "url": "https://www-cs-faculty.stanford.edu/~knuth/taocp.html"
+            },
+            {
+              "citation": "Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. Philosophical Magazine, 50(302), 157–175.",
+              "note": "Der ursprüngliche Chi-Quadrat-Anpassungstest, hier genutzt, um jede Ziehung mit einer Gleichverteilung zu vergleichen.",
+              "url": "https://doi.org/10.1080/14786440009463897"
+            },
+            {
+              "citation": "Rukhin, A. et al. (2010). A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications. NIST Special Publication 800-22 Rev. 1a.",
+              "note": "Die NIST-Testbatterie für sicherheitsrelevante Generatoren – ein Niveau, das dieser Alltagsgenerator nicht beansprucht.",
+              "url": "https://doi.org/10.6028/NIST.SP.800-22r1a"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Hinweise",
+          "items": [
+            "Dieser Generator ist für Spiele, Unterricht, Stichproben und Simulationen gedacht. Er ist kein kryptografisch sicherer Generator: Verwenden Sie ihn nie für Passwörter, Schlüssel, Token oder irgendetwas, das jemand vorhersagen könnte.",
+            "Wer Startwert und Einstellungen kennt, kann exakt dieselbe Ziehung reproduzieren. Das macht Ergebnisse überprüfbar, bedeutet aber auch, dass ein veröffentlichter Startwert die Zahlen verrät.",
+            "Die Ergebnisse gelten nicht für offizielle Lotterien, regulierte Glücksspiele oder rechtsverbindliche Ziehungen, die zertifizierte Geräte oder geprüfte Verfahren verlangen.",
+            "Gleichverteilungstest, Chancen und Erwartungen sind statistische Orientierungen. Eine einzelne Ziehung kann rein zufällig ungleichmäßig wirken, und Ziehungen ohne Wiederholung schwanken etwas weniger, als der Test annimmt."
+          ]
         }
       },
       "shareExport": {
@@ -21285,6 +21328,241 @@
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis",
         "summarySentence": "{count, plural, one {# Zufallszahl} other {# Zufallszahlen}} generiert, Durchschnitt {average}."
+      },
+      "ind": {
+        "worked": "Rechenbeispiel",
+        "empty": "Korrigieren Sie die Eingaben oben, um diesen Indikator zu sehen.",
+        "hist": {
+          "title": "Häufigkeitshistogramm",
+          "heading": "Wie {count} Ziehungen auf {bins} Abschnitte des Bereichs fallen",
+          "intro": "Jeder Balken zählt die Zahlen in einem Abschnitt; die gestrichelte Linie ist die Anzahl einer vollkommen gleichmäßigen Ziehung.",
+          "rowRange": "Bereichsgröße N",
+          "rowBins": "Abschnitte",
+          "rowExpected": "Erwartet je Abschnitt",
+          "rowEmptiest": "Leerster Abschnitt",
+          "rowFullest": "Vollster Abschnitt",
+          "legendObserved": "Gezogene Zahlen",
+          "legendExpected": "Gleichverteilte Erwartung"
+        },
+        "dup": {
+          "title": "Wiederholungs-Explorer",
+          "heading": "Chance auf mindestens eine Wiederholung in {k} Ziehungen aus {n} Werten",
+          "intro": "Ziehen Sie den Punkt entlang der Kurve: Er setzt „Wie viele Zahlen“ oben, und Ziehung sowie alle Indikatoren folgen.",
+          "rowN": "Werte im Bereich N",
+          "rowK": "Ziehungen k",
+          "rowNoRepeat": "Keine Wiederholung",
+          "rowHalf": "Ziehungen für 50 %",
+          "rowDistinct": "Erwartete verschiedene Werte",
+          "rowRepeat": "Mindestens eine Wiederholung",
+          "noteNoDup": "Duplikate sind aus, diese Ziehung kann sich also nicht wiederholen; die Kurve zeigt die Chance, wenn sie erlaubt wären.",
+          "hint": "Ziehen Sie den blauen Punkt (oder fokussieren Sie ihn und nutzen Sie die Pfeiltasten), um die Anzahl zu ändern."
+        },
+        "mean": {
+          "title": "Laufender Mittelwert",
+          "heading": "Der Mittelwert nach jeder Ziehung nähert sich der wahren Mitte {mu}",
+          "intro": "Das Gesetz der großen Zahlen in Aktion: Die Linie schwankt anfangs und pendelt sich dann im schmaler werdenden ±2-Standardfehler-Trichter ein.",
+          "rowMu": "Wahre Mitte μ",
+          "rowFinal": "Mittelwert nach allen Ziehungen",
+          "rowDev": "Abweichung von μ",
+          "rowSe": "Standardfehler σ ÷ √k",
+          "rowZ": "Abweichung in Standardfehlern",
+          "axisDraws": "Ziehung Nr.",
+          "legendMean": "Laufender Mittelwert",
+          "legendMu": "Wahre Mitte μ",
+          "legendBand": "±2 Standardfehler"
+        },
+        "chi": {
+          "title": "Gleichverteilungstest",
+          "heading": "χ² = {stat} gegenüber einem kritischen 5-%-Wert von {crit}",
+          "intro": "Pearsons Chi-Quadrat-Test fragt, ob die Abschnittszählungen stärker von der Gleichverteilung abweichen, als Zufall allein erklärt.",
+          "rowFormula": "Teststatistik",
+          "rowDf": "Freiheitsgrade",
+          "rowStat": "χ² dieser Ziehung",
+          "rowCrit": "Kritischer 5-%-Wert",
+          "rowP": "p-Wert",
+          "rowVerdict": "Urteil",
+          "lowExpected": "Weniger als 5 erwartet je Abschnitt: Lesen Sie diesen Test als grobe Orientierung."
+        },
+        "spread": {
+          "title": "Streuung im Bereich",
+          "heading": "Median {median}, Standardabweichung {sd} (gleichmäßig: {sigma})",
+          "intro": "Jede gezogene Zahl liegt auf der Bereichslinie, darüber Median, Mittelwert, wahre Mitte und ein ±1-SD-Band.",
+          "labelMean": "Ø",
+          "labelMedian": "Median",
+          "rowMinMax": "Kleinste … größte",
+          "rowMedian": "Median",
+          "rowSd": "Stichproben-Standardabweichung",
+          "rowSigma": "σ bei Gleichverteilung",
+          "rowCoverage": "Abgedeckter Bereichsanteil"
+        },
+        "sum": {
+          "title": "Erwartete Summe",
+          "heading": "Summe {sum} gegenüber erwarteten {expected} ± {sd}",
+          "intro": "Die Summe der Ziehung hat einen eigenen Erwartungswert und eine eigene Streuung; der z-Wert zeigt, wie ungewöhnlich diese Summe ist.",
+          "rowExpected": "Erwartete Summe k × μ",
+          "rowSd": "Streuung σ × √k × Korrektur",
+          "rowObserved": "Summe dieser Ziehung",
+          "rowZ": "z-Wert",
+          "boxCount": "Ziehungen k",
+          "boxMu": "Mitte μ",
+          "boxExpected": "erwartete Summe",
+          "boxSigma": "σ je Ziehung",
+          "boxFpc": "Korrektur ohne Zurücklegen",
+          "boxSd": "Streuung der Summe",
+          "boxDiff": "Summe − Erwartung",
+          "boxZ": "z-Wert"
+        },
+        "distinct": {
+          "title": "Verschieden vs. wiederholt",
+          "heading": "{distinct} verschiedene Werte unter {k} Ziehungen",
+          "intro": "Wie viele Ziehungen einen neuen Wert brachten und wie viele einen wiederholten, verglichen mit der erwarteten Aufteilung und dem erreichten Bereichsanteil.",
+          "barDraw": "Diese Ziehung",
+          "barExpected": "Erwartet",
+          "barCoverage": "Abgedeckter Bereich",
+          "segDistinct": "verschieden",
+          "segRepeat": "wiederholt",
+          "segSeen": "gezogen",
+          "segUnseen": "nie gezogen",
+          "rowDistinct": "Verschieden in dieser Ziehung",
+          "rowRepeats": "Wiederholte Ziehungen",
+          "rowExpected": "Erwartet verschieden",
+          "rowCoverage": "Abgedeckter Bereich"
+        },
+        "appear": {
+          "title": "Chance, dass Ihre Zahl erscheint",
+          "heading": "Chance, dass eine von Ihnen gewählte Zahl erscheint: {p}",
+          "intro": "Wählen Sie vor der Ziehung einen Wert im Bereich; das sind seine Chancen bei halb so vielen, den aktuellen und doppelt so vielen Ziehungen.",
+          "rowSingle": "Ein Wert je Ziehung 1/N",
+          "rowFormula": "Formel",
+          "rowHalf": "Halbe Ziehungen",
+          "rowDouble": "Doppelte Ziehungen",
+          "rowNow": "Aktuelle Ziehungen",
+          "low": "Halb",
+          "now": "Aktuell",
+          "high": "Doppelt"
+        },
+        "space": {
+          "title": "Größe des Ergebnisraums",
+          "heading": "{count} mögliche Ergebnisse für diese Einstellungen",
+          "intro": "Wie viele verschiedene Ergebnisse jede Ziehungsart liefern kann, auf logarithmischer Skala; Ihre Einstellungen bestimmen, welche gilt.",
+          "orderedWith": "Geordnet, mit Wiederholung",
+          "unorderedWith": "Sortiert, mit Wiederholung",
+          "orderedWithout": "Geordnet, ohne Wiederholung",
+          "unorderedWithout": "Sortiert, ohne Wiederholung",
+          "orderedWithShort": "Geordnet + Wiederholung",
+          "unorderedWithShort": "Sortiert + Wiederholung",
+          "orderedWithoutShort": "Geordnet, ohne Wiederholung",
+          "unorderedWithoutShort": "Sortiert, ohne Wiederholung",
+          "current": "Ihre",
+          "impossible": "unmöglich",
+          "rowKind": "Ihre Einstellungen",
+          "rowFormula": "Formel",
+          "rowValue": "Mögliche Ergebnisse",
+          "rowDigits": "Stellen",
+          "rowOdds": "Chance, es genau zu erraten"
+        },
+        "bias": {
+          "title": "Modulo-Verzerrung, gemessen",
+          "heading": "Eine naive {bits}-Bit-Ziehung würde {heavy} Werte um {ratio}× bevorzugen",
+          "noBias": "N teilt {size} glatt, daher ist hier sogar die naive Methode fair",
+          "intro": "Ein zufälliges Byte oder Wort modulo N gewichtet die ersten Werte zu stark; dieses Tool zieht den unvollständigen oberen Block neu.",
+          "rowSource": "Quellwerte S",
+          "rowQ": "Volle Blöcke ⌊S ÷ N⌋",
+          "rowR": "Bevorzugte Werte S mod N",
+          "rowHeavy": "Chance eines bevorzugten Werts",
+          "rowLight": "Chance der übrigen",
+          "rowRedraw": "Neuziehungsrate des Tools",
+          "naiveTitle": "Naiv: Quelle mod N",
+          "naiveSub": "{bits}-Bit-Quelle, {size} Werte",
+          "toolTitle": "Dieses Tool: Verwerfungsmethode",
+          "toolSub": "32-Bit-Quelle, oberer Block neu gezogen",
+          "heavyP": "Bevorzugte Werte",
+          "lightP": "Übrige Werte",
+          "favoured": "Bevorzugte Werte",
+          "ratio": "Verzerrung",
+          "exact": "Jeder Wert",
+          "redraw": "Neu gezogen"
+        },
+        "entropy": {
+          "title": "Unvorhersagbarkeit in Bit",
+          "heading": "{bits} Bit für diese Einstellungen: {zone}",
+          "intro": "Bits messen, wie schwer das Ergebnis zu erraten ist; der 32-Bit-Startwert des Generators begrenzt, was eine Ziehung wirklich enthalten kann.",
+          "rowPer": "Bit je Zahl",
+          "rowLog": "log₁₀ der möglichen Ergebnisse",
+          "rowBits": "Bit",
+          "rowCap": "Startwert-Bits (Obergrenze)",
+          "rowEffective": "Effektive Bits",
+          "markerSettings": "Einstellungen",
+          "markerCap": "Startwert-Grenze",
+          "zones": {
+            "guessable": "Erratbar",
+            "weak": "Schwach",
+            "moderate": "Mittel",
+            "strong": "Stark",
+            "cryptographic": "Krypto-Niveau"
+          }
+        },
+        "table": {
+          "title": "Übliche Ziehungen und ihre Chancen",
+          "heading": "Echte Ziehungen, berechnet mit der Mathematik dieses Tools",
+          "intro": "Jede Zeile ist eine bekannte Ziehung mit der Chance, ihr genaues Ergebnis zu erraten; Verwenden lädt sie in den Generator.",
+          "rowDraw": "Ziehung",
+          "rowSettings": "Einstellungen",
+          "rowFormula": "Formel",
+          "rowRepeat": "Chance einer Wiederholung",
+          "rowOdds": "Chance des genauen Ergebnisses",
+          "colDraw": "Ziehung",
+          "colTag": "Art",
+          "colOdds": "Genaues Ergebnis",
+          "colRepeat": "Wiederholung",
+          "tagRepeats": "mit Wiederholung",
+          "tagNoRepeats": "ohne Wiederholung",
+          "apply": "Verwenden",
+          "yours": "Ihre aktuellen Einstellungen: {odds}."
+        }
+      },
+      "examples": {
+        "title": "Rechenbeispiele",
+        "intro": "Drei klassische Ziehungen Schritt für Schritt gelöst, mit denselben Funktionen wie der Generator.",
+        "answer": "Antwort",
+        "lottery": {
+          "title": "Jackpot-Chance bei Lotto 6/49",
+          "scenario": "Sechs verschiedene Zahlen von 1 bis 49; die Reihenfolge spielt keine Rolle.",
+          "s1": "Ungeordnete Mengen zählen",
+          "s2": "Ausrechnen",
+          "s3": "Chance, dass Ihre Lieblingszahl kommt",
+          "s4": "Erwartete Summe der sechs",
+          "s5": "Streuung der Summe (ohne Zurücklegen)",
+          "takeaway": "Erst das Sortieren der sechs Zahlen macht aus 10 Milliarden geordneten Folgen rund 14 Millionen Tipps."
+        },
+        "birthday": {
+          "title": "Das Geburtstagsproblem",
+          "scenario": "23 Personen, 365 gleich wahrscheinliche Geburtstage: 23 Zahlen aus 1–365 mit Wiederholung ziehen.",
+          "s1": "Chance auf einen gemeinsamen Geburtstag",
+          "s2": "Keine zwei gleich",
+          "s3": "Mindestens einer gemeinsam",
+          "s4": "Erwartete verschiedene Geburtstage",
+          "s5": "Kleinste Gruppe für 50 %",
+          "takeaway": "Wiederholungen kommen viel früher als gedacht: nach etwa √N Ziehungen, nicht N ÷ 2."
+        },
+        "dice": {
+          "title": "Ist dieser Würfel fair?",
+          "scenario": "60 Würfe von 1–6 ergaben die Zählungen unten; prüfen Sie sie gegen eine Gleichverteilung.",
+          "s1": "Beobachtete Augen 1–6",
+          "s2": "Erwartet je Augenzahl",
+          "s3": "Chi-Quadrat-Statistik",
+          "s4": "Kritischer 5-%-Wert",
+          "s5": "p-Wert",
+          "takeaway": "4,2 liegt deutlich unter 11,07 – solche Zählungen liefert ein fairer Würfel oft."
+        }
+      },
+      "order": {
+        "title": "Ziehungsreihenfolge",
+        "intro": "Die ersten {shown} von {k} Zahlen in der Reihenfolge der Ziehung, vor jeder Sortierung; die gestrichelte Linie ist die Bereichsmitte.",
+        "first": "Erste → letzte",
+        "upDown": "Anstiege · Abfälle",
+        "single": "Chance eines Werts",
+        "repeat": "Chance einer Wiederholung"
       }
     },
     "standard-deviation-calculator": {
