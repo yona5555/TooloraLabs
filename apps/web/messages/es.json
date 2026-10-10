@@ -22804,7 +22804,6 @@
         "inputLabel": "Valores",
         "inputPlaceholder": "p. ej. 2, 4, 4, 4, 5, 5, 7, 9",
         "inputHint": "Separa los valores con comas, espacios o saltos de línea.",
-        "scenarioLabel": "Rellenar rápido un ejemplo resuelto",
         "clear": "Borrar"
       },
       "result": {
@@ -22816,16 +22815,8 @@
         "meanLabel": "Media (μ)",
         "populationVariance": "Varianza Poblacional (σ²)",
         "sampleVariance": "Varianza Muestral (s²)",
-        "stepsTitle": "Desviaciones Paso a Paso",
-        "columnValue": "Valor",
-        "columnDeviation": "Desviación (x − μ)",
-        "columnSquared": "Al Cuadrado",
-        "sentence": "Con una media de {mean}, este conjunto de datos tiene una desviación estándar de {stdDev}."
-      },
-      "chart": {
-        "ariaLabel": "Recta numérica que muestra cada valor introducido como un punto, con una banda sombreada que abarca una desviación estándar poblacional a cada lado de la media",
-        "legendValues": "Valores",
-        "legendBand": "Media ± 1σ"
+        "sentence": "Con una media de {mean}, este conjunto de datos tiene una desviación estándar de {stdDev}.",
+        "heroCaption": "Muestral s = {s} · media μ = {mean} · n = {count}"
       },
       "quickReference": {
         "title": "Las Dos Fórmulas",
@@ -22835,18 +22826,7 @@
         "intro": {
           "title": "Entender la Desviación Estándar",
           "paragraph1": "La desviación estándar mide cuán dispersos están los valores de un conjunto respecto a su media — una desviación estándar pequeña significa que la mayoría de los valores están cerca del promedio, mientras que una grande significa que están muy dispersos. Es la raíz cuadrada de la varianza, que a su vez es el promedio de la distancia al cuadrado de cada valor respecto a la media; elevar al cuadrado primero (en lugar de simplemente promediar las distancias en bruto) garantiza que las desviaciones por encima y por debajo de la media no se cancelen entre sí, y sacar la raíz cuadrada al final devuelve el resultado a la unidad original de los datos en lugar de a una al cuadrado.",
-          "paragraph2": "Esta herramienta calcula tanto la desviación estándar poblacional (σ), usada cuando tu conjunto de datos es todo el grupo que te interesa, como la desviación estándar muestral (s), usada cuando tus datos son un subconjunto extraído de una población más grande sobre la que intentas sacar conclusiones. Las dos fórmulas solo difieren en el denominador — la población divide entre N, la muestra divide entre n − 1 —, un ajuste pequeño pero deliberado llamado corrección de Bessel, que corrige la tendencia de la media de una muestra a estar más cerca de sus propios datos de lo que estaría la verdadera media poblacional.",
-          "cvGauge": {
-            "title": "¿Qué tan dispersos están estos datos?",
-            "intro": "El coeficiente de variación (desviación estándar en relación con la media) muestra qué tan dispersos están los datos, independientemente de sus unidades. Elige un conjunto de datos real a continuación para ver dónde se ubica.",
-            "verdict": "{example} — Variabilidad: {classification}.",
-            "fact": "Su coeficiente de variación es de aproximadamente {cv}%.",
-            "zones": {
-              "low": "Baja variabilidad",
-              "moderate": "Variabilidad moderada",
-              "high": "Alta variabilidad"
-            }
-          }
+          "paragraph2": "Esta herramienta calcula tanto la desviación estándar poblacional (σ), usada cuando tu conjunto de datos es todo el grupo que te interesa, como la desviación estándar muestral (s), usada cuando tus datos son un subconjunto extraído de una población más grande sobre la que intentas sacar conclusiones. Las dos fórmulas solo difieren en el denominador — la población divide entre N, la muestra divide entre n − 1 —, un ajuste pequeño pero deliberado llamado corrección de Bessel, que corrige la tendencia de la media de una muestra a estar más cerca de sus propios datos de lo que estaría la verdadera media poblacional."
         },
         "formula": {
           "title": "Las Fórmulas",
@@ -22971,12 +22951,122 @@
           "note": "El artículo en el que Karl Pearson introdujo el término \"desviación estándar\", hoy la medida estándar de dispersión enseñada en todo curso introductorio de estadística.",
           "url": "https://doi.org/10.1098/rsta.1894.0003",
           "readOriginal": "Leer el Artículo Original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "drag": {
+            "title": "Arrastra los datos: cuadrados de desviación",
+            "intro": "Cada punto es un valor. El cuadrado de color sobre él tiene lado |x − μ|, así que su área es la desviación al cuadrado; el cuadrado violeta discontinuo tiene lado σ y su área es el promedio de todos los cuadrados.",
+            "hint": "Arrastra cualquier punto en horizontal: μ, cada cuadrado, σ y toda la página se actualizan al instante.",
+            "aria": "Puntos de datos arrastrables en una recta numérica con sus desviaciones al cuadrado dibujadas como cuadrados y el cuadrado de la desviación estándar",
+            "avgSquare": "Cuadrado medio (σ²)",
+            "side": "Lado del cuadrado medio",
+            "biggest": "Cuadrado mayor",
+            "share": "{share} de la suma de cuadrados"
+          },
+          "flow": {
+            "title": "De los datos a σ en cuatro pasos",
+            "intro": "La definición de la desviación estándar poblacional como una cadena, con tus números pasando por cada operación.",
+            "aria": "Flujo de la suma de los datos a la media, la suma de desviaciones al cuadrado, la varianza y la desviación estándar",
+            "opSquare": "restar μ, elevar, sumar",
+            "mean": "Media",
+            "variance": "Varianza"
+          },
+          "shortcut": {
+            "title": "Comprobación con la fórmula abreviada",
+            "intro": "Σx² − (Σx)²/n da la misma suma de cuadrados sin calcular antes cada desviación; ambos caminos llegan al mismo número.",
+            "aria": "Diagrama de fórmula que calcula la suma de cuadrados con la fórmula abreviada y la compara con la definición",
+            "shortcutLabel": "Σx² − (Σx)²/n",
+            "match": "Ambas fórmulas coinciden",
+            "rounding": "Difieren solo por redondeo de coma flotante"
+          },
+          "squares": {
+            "title": "Quién impulsa la dispersión",
+            "intro": "La suma de cuadrados repartida en la desviación al cuadrado de cada valor. Los valores lejos de la media se llevan una porción desproporcionada.",
+            "aria": "Barra apilada con la parte de cada valor en la suma de desviaciones al cuadrado",
+            "largest": "Porción mayor",
+            "topTwo": "Los dos mayores juntos",
+            "equalShare": "Parte igual por valor",
+            "values": "Valores"
+          },
+          "zRank": {
+            "title": "Valores ordenados por puntuación z",
+            "intro": "A cuántas desviaciones estándar está cada valor de la media, el más lejano primero, coloreado por banda σ.",
+            "aria": "Barras horizontales ordenadas del valor absoluto de la puntuación z de cada valor",
+            "top": "Valor más lejano"
+          },
+          "cv": {
+            "title": "Dispersión relativa (CV)",
+            "intro": "El coeficiente de variación expresa σ como porcentaje de la media, para comparar conjuntos de datos en escalas distintas.",
+            "aria": "Indicador del coeficiente de variación de 0 a 60 por ciento",
+            "formula": "σ / |μ| × 100",
+            "sampleCv": "Usando s en lugar de σ",
+            "zones": {
+              "low": "bajo",
+              "moderate": "moderado",
+              "high": "alto"
+            }
+          },
+          "empirical": {
+            "title": "Tus datos frente a la regla 68-95-99,7",
+            "intro": "La proporción de tus valores dentro de una, dos y tres desviaciones estándar, junto a la proporción normal y el mínimo garantizado por Chebyshev para cualquier dato.",
+            "aria": "Barras agrupadas que comparan la proporción real dentro de 1, 2 y 3 desviaciones estándar con la regla normal y la cota de Chebyshev",
+            "actual": "Tus datos",
+            "normal": "Normal",
+            "chebyshev": "Chebyshev",
+            "gap": "Diferencia en ±1σ"
+          },
+          "zones": {
+            "title": "Zonas σ en la recta numérica",
+            "intro": "La recta coloreada según la distancia a la media en desviaciones estándar, con cada valor en su zona.",
+            "aria": "Recta numérica coloreada por zonas de desviación estándar con cada valor marcado",
+            "inside1": "Dentro de 1σ",
+            "inside2": "De 1σ a 2σ",
+            "inside3": "De 2σ a 3σ",
+            "beyond": "Más allá de 3σ"
+          },
+          "bell": {
+            "title": "Fija un valor en la campana",
+            "intro": "Una curva normal con tu μ y σ. Elige un valor para ver su puntuación z y la proporción de una población normal que quedaría por debajo.",
+            "aria": "Curva normal con el valor elegido marcado y el área a su izquierda sombreada",
+            "pick": "Elige un valor",
+            "value": "Valor elegido",
+            "below": "Proporción normal por debajo",
+            "above": "Proporción normal por encima",
+            "actualBelow": "Tus valores por debajo"
+          },
+          "running": {
+            "title": "Cómo se estabiliza σ al llegar los valores",
+            "intro": "σ y s recalculadas tras cada valor en el orden en que los introdujiste, con el método de una pasada de Welford.",
+            "aria": "Gráfico de líneas de la desviación estándar acumulada poblacional y muestral frente al número de valores",
+            "first": "Primer valor",
+            "peak": "σ acumulada máxima",
+            "method": "Actualización de Welford"
+          },
+          "trio": {
+            "title": "Sensibilidad quitando un valor",
+            "intro": "Cuánto depende σ de valores sueltos: quita el valor más lejano a la media, o el más cercano, y compáralo con la σ actual.",
+            "aria": "Tres barras que comparan la desviación estándar sin el valor más lejano, la actual y sin el valor más cercano",
+            "dropFar": "Sin el más lejano",
+            "current": "Actual",
+            "dropNear": "Sin el más cercano",
+            "swing": "Oscilación entre ambos"
+          },
+          "equivalence": {
+            "title": "σ poblacional frente a s muestral",
+            "intro": "La misma suma de cuadrados dividida entre N o entre n − 1. La corrección de Bessel hace s mayor por el factor √(n / (n − 1)).",
+            "population": "Población (÷ N)",
+            "sample": "Muestra (÷ n − 1)",
+            "gap": "s supera a σ en"
+          }
         }
       },
       "scenarios": {
+        "classic": "Ejemplo de libro",
         "testScores": "Calificaciones de examen",
         "dailyTemperatures": "Temperaturas diarias",
-        "factoryMeasurements": "Mediciones de fábrica"
+        "factoryMeasurements": "Mediciones de fábrica",
+        "withOutlier": "Datos con un valor atípico"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -22996,15 +23086,32 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
       },
-      "normalDiagram": {
-        "title": "La Distribución Normal (Curva de Campana)",
-        "intro": "La desviación estándar es lo que define el ancho de esta curva — la regla 68-95-99.7 describe cómo se agrupan los datos alrededor de la media en una distribución normal.",
-        "ariaLabel": "Una curva de campana sombreada en bandas que muestra el 68% de los datos dentro de 1 desviación estándar, 95% dentro de 2, y 99.7% dentro de 3",
-        "caption": "El 68% de los valores caen dentro de 1σ de la media, 95% dentro de 2σ, y 99.7% dentro de 3σ — cierto para cualquier conjunto de datos con distribución normal, no solo este ejemplo."
-      },
-      "empiricalCompare": {
-        "ariaLabel": "Gráfico de barras que compara la dispersión real de tu conjunto de datos con la regla empírica teórica",
-        "caption": "Las barras grises muestran el porcentaje teórico de la distribución normal (regla 68-95-99.7); las barras azules muestran el porcentaje real de tus valores dentro de cada rango."
+      "live3d": {
+        "cardTitle": "Tabla de dispersión en vivo y campana 3D",
+        "groupData": "Datos",
+        "groupMean": "Media",
+        "groupDeviations": "Desviaciones",
+        "groupSpread": "Varianza y desviación estándar",
+        "groupPosition": "Posición (puntuaciones z)",
+        "groupBands": "Bandas σ (tus datos vs normal)",
+        "sum": "Suma",
+        "min": "Mínimo",
+        "max": "Máximo",
+        "range": "Rango",
+        "sumDev": "Suma de desviaciones",
+        "mad": "Desviación media absoluta",
+        "farthest": "Mayor desviación",
+        "ss": "Suma de cuadrados",
+        "shortcut": "Comprobación abreviada",
+        "needTwo": "requiere n ≥ 2",
+        "bessel": "Factor de Bessel",
+        "se": "Error estándar de la media",
+        "ci": "Intervalo del 95% para la media",
+        "cv": "Coeficiente de variación",
+        "cvUndefined": "indefinido (μ = 0)",
+        "zMin": "z del mínimo",
+        "zMax": "z del máximo",
+        "band": "Dentro de μ ± {k}σ"
       }
     },
     "circle-calculator": {

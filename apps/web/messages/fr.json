@@ -22804,7 +22804,6 @@
         "inputLabel": "Valeurs",
         "inputPlaceholder": "ex. 2, 4, 4, 4, 5, 5, 7, 9",
         "inputHint": "Séparez les valeurs par des virgules, des espaces ou des retours à la ligne.",
-        "scenarioLabel": "Remplir rapidement un exemple résolu",
         "clear": "Effacer"
       },
       "result": {
@@ -22816,16 +22815,8 @@
         "meanLabel": "Moyenne (μ)",
         "populationVariance": "Variance de Population (σ²)",
         "sampleVariance": "Variance d'Échantillon (s²)",
-        "stepsTitle": "Écarts Étape par Étape",
-        "columnValue": "Valeur",
-        "columnDeviation": "Écart (x − μ)",
-        "columnSquared": "Au Carré",
-        "sentence": "Avec une moyenne de {mean}, cet ensemble de données a un écart type de {stdDev}."
-      },
-      "chart": {
-        "ariaLabel": "Droite numérique montrant chaque valeur saisie sous forme de point, avec une bande ombrée couvrant un écart-type de population de chaque côté de la moyenne",
-        "legendValues": "Valeurs",
-        "legendBand": "Moyenne ± 1σ"
+        "sentence": "Avec une moyenne de {mean}, cet ensemble de données a un écart type de {stdDev}.",
+        "heroCaption": "Échantillon s = {s} · moyenne μ = {mean} · n = {count}"
       },
       "quickReference": {
         "title": "Les Deux Formules",
@@ -22835,18 +22826,7 @@
         "intro": {
           "title": "Comprendre l'Écart-Type",
           "paragraph1": "L'écart-type mesure la dispersion d'un ensemble de valeurs autour de sa moyenne — un petit écart-type signifie que la plupart des valeurs sont proches de la moyenne, tandis qu'un grand signifie qu'elles sont largement dispersées. C'est la racine carrée de la variance, qui est elle-même la moyenne des distances au carré de chaque valeur par rapport à la moyenne ; élever au carré d'abord (plutôt que de simplement faire la moyenne des distances brutes) garantit que les écarts au-dessus et en dessous de la moyenne ne s'annulent pas mutuellement, et prendre la racine carrée à la fin ramène le résultat à l'unité d'origine des données plutôt qu'à une unité au carré.",
-          "paragraph2": "Cet outil calcule à la fois l'écart-type de population (σ), utilisé lorsque votre jeu de données constitue l'ensemble du groupe qui vous intéresse, et l'écart-type d'échantillon (s), utilisé lorsque vos données sont un sous-ensemble tiré d'une population plus large sur laquelle vous essayez de tirer des conclusions. Les deux formules ne diffèrent que par le dénominateur — la population divise par N, l'échantillon divise par n − 1 —, un ajustement modeste mais délibéré appelé correction de Bessel, qui corrige la tendance de la moyenne d'un échantillon à être plus proche de ses propres points de données que ne le serait la véritable moyenne de la population.",
-          "cvGauge": {
-            "title": "Quelle est la dispersion de ces données ?",
-            "intro": "Le coefficient de variation (écart type par rapport à la moyenne) montre la dispersion d'un ensemble de données, indépendamment de ses unités. Choisissez un ensemble de données réel ci-dessous pour voir où il se situe.",
-            "verdict": "{example} — Variabilité : {classification}.",
-            "fact": "Son coefficient de variation est d'environ {cv}%.",
-            "zones": {
-              "low": "Faible variabilité",
-              "moderate": "Variabilité modérée",
-              "high": "Forte variabilité"
-            }
-          }
+          "paragraph2": "Cet outil calcule à la fois l'écart-type de population (σ), utilisé lorsque votre jeu de données constitue l'ensemble du groupe qui vous intéresse, et l'écart-type d'échantillon (s), utilisé lorsque vos données sont un sous-ensemble tiré d'une population plus large sur laquelle vous essayez de tirer des conclusions. Les deux formules ne diffèrent que par le dénominateur — la population divise par N, l'échantillon divise par n − 1 —, un ajustement modeste mais délibéré appelé correction de Bessel, qui corrige la tendance de la moyenne d'un échantillon à être plus proche de ses propres points de données que ne le serait la véritable moyenne de la population."
         },
         "formula": {
           "title": "Les Formules",
@@ -22971,12 +22951,122 @@
           "note": "L'article dans lequel Karl Pearson a introduit le terme \"écart-type\", aujourd'hui la mesure standard de dispersion enseignée dans tout cours d'introduction aux statistiques.",
           "url": "https://doi.org/10.1098/rsta.1894.0003",
           "readOriginal": "Lire l'Article Original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "drag": {
+            "title": "Faites glisser les données : carrés des écarts",
+            "intro": "Chaque point est une valeur. Le carré coloré au-dessus a pour côté |x − μ|, donc son aire est l'écart au carré ; le carré violet en pointillé a pour côté σ et son aire est la moyenne de tous les carrés.",
+            "hint": "Faites glisser un point horizontalement : μ, chaque carré, σ et toute la page se mettent à jour en direct.",
+            "aria": "Points de données déplaçables sur une droite numérique avec leurs écarts au carré dessinés en carrés et le carré de l'écart-type",
+            "avgSquare": "Carré moyen (σ²)",
+            "side": "Côté du carré moyen",
+            "biggest": "Plus grand carré",
+            "share": "{share} de la somme des carrés"
+          },
+          "flow": {
+            "title": "Des données à σ en quatre étapes",
+            "intro": "La définition de l'écart-type de population sous forme de chaîne, vos nombres traversant chaque opération.",
+            "aria": "Flux de la somme des données à la moyenne, à la somme des écarts au carré, à la variance et à l'écart-type",
+            "opSquare": "soustraire μ, élever, additionner",
+            "mean": "Moyenne",
+            "variance": "Variance"
+          },
+          "shortcut": {
+            "title": "Vérification par la formule abrégée",
+            "intro": "Σx² − (Σx)²/n donne la même somme des carrés sans calculer d'abord chaque écart ; les deux voies aboutissent au même nombre.",
+            "aria": "Diagramme de formule calculant la somme des carrés par la formule abrégée et la comparant à la définition",
+            "shortcutLabel": "Σx² − (Σx)²/n",
+            "match": "Les deux formules concordent",
+            "rounding": "Différence due uniquement à l'arrondi en virgule flottante"
+          },
+          "squares": {
+            "title": "Qui fait la dispersion",
+            "intro": "La somme des carrés répartie entre l'écart au carré de chaque valeur. Les valeurs éloignées de la moyenne prennent une part disproportionnée.",
+            "aria": "Barre empilée de la part de chaque valeur dans la somme des écarts au carré",
+            "largest": "Plus grande part",
+            "topTwo": "Les deux plus grandes ensemble",
+            "equalShare": "Part égale par valeur",
+            "values": "Valeurs"
+          },
+          "zRank": {
+            "title": "Valeurs classées par score z",
+            "intro": "À combien d'écarts-types chaque valeur se trouve de la moyenne, la plus éloignée d'abord, colorée par bande σ.",
+            "aria": "Barres horizontales classées de la valeur absolue du score z de chaque valeur",
+            "top": "Valeur la plus éloignée"
+          },
+          "cv": {
+            "title": "Dispersion relative (CV)",
+            "intro": "Le coefficient de variation exprime σ en pourcentage de la moyenne, pour comparer des données à des échelles différentes.",
+            "aria": "Jauge du coefficient de variation de 0 à 60 pour cent",
+            "formula": "σ / |μ| × 100",
+            "sampleCv": "Avec s au lieu de σ",
+            "zones": {
+              "low": "faible",
+              "moderate": "modéré",
+              "high": "élevé"
+            }
+          },
+          "empirical": {
+            "title": "Vos données face à la règle 68-95-99,7",
+            "intro": "La part de vos valeurs à un, deux et trois écarts-types, à côté de la part normale et du minimum garanti par Tchebychev pour toutes données.",
+            "aria": "Barres groupées comparant la part réelle à 1, 2 et 3 écarts-types avec la règle normale et la borne de Tchebychev",
+            "actual": "Vos données",
+            "normal": "Normale",
+            "chebyshev": "Tchebychev",
+            "gap": "Écart à ±1σ"
+          },
+          "zones": {
+            "title": "Zones σ sur la droite numérique",
+            "intro": "La droite colorée selon la distance à la moyenne en écarts-types, chaque valeur placée dans sa zone.",
+            "aria": "Droite numérique colorée par zones d'écart-type avec chaque valeur marquée",
+            "inside1": "Dans 1σ",
+            "inside2": "De 1σ à 2σ",
+            "inside3": "De 2σ à 3σ",
+            "beyond": "Au-delà de 3σ"
+          },
+          "bell": {
+            "title": "Épinglez une valeur sur la cloche",
+            "intro": "Une courbe normale avec vos μ et σ. Choisissez une valeur pour voir son score z et la part d'une population normale située en dessous.",
+            "aria": "Courbe normale avec la valeur choisie marquée et l'aire à sa gauche ombrée",
+            "pick": "Choisir une valeur",
+            "value": "Valeur choisie",
+            "below": "Part normale en dessous",
+            "above": "Part normale au-dessus",
+            "actualBelow": "Vos valeurs en dessous"
+          },
+          "running": {
+            "title": "Comment σ se stabilise au fil des valeurs",
+            "intro": "σ et s recalculés après chaque valeur dans l'ordre de saisie, avec la méthode en une passe de Welford.",
+            "aria": "Courbe de l'écart-type cumulé de population et d'échantillon en fonction du nombre de valeurs",
+            "first": "Première valeur",
+            "peak": "σ cumulé maximal",
+            "method": "Mise à jour de Welford"
+          },
+          "trio": {
+            "title": "Sensibilité en retirant une valeur",
+            "intro": "Combien σ dépend de valeurs isolées : retirez la valeur la plus éloignée de la moyenne, ou la plus proche, et comparez au σ actuel.",
+            "aria": "Trois barres comparant l'écart-type sans la valeur la plus éloignée, l'actuel et sans la valeur la plus proche",
+            "dropFar": "Sans la plus éloignée",
+            "current": "Actuel",
+            "dropNear": "Sans la plus proche",
+            "swing": "Écart entre les deux"
+          },
+          "equivalence": {
+            "title": "σ de population face à s d'échantillon",
+            "intro": "La même somme des carrés divisée par N ou par n − 1. La correction de Bessel rend s plus grand du facteur √(n / (n − 1)).",
+            "population": "Population (÷ N)",
+            "sample": "Échantillon (÷ n − 1)",
+            "gap": "s dépasse σ de"
+          }
         }
       },
       "scenarios": {
+        "classic": "Exemple de manuel",
         "testScores": "Notes d'examen",
         "dailyTemperatures": "Températures quotidiennes",
-        "factoryMeasurements": "Mesures d'usine"
+        "factoryMeasurements": "Mesures d'usine",
+        "withOutlier": "Données avec une valeur aberrante"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -22996,15 +23086,32 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
       },
-      "normalDiagram": {
-        "title": "La Distribution Normale (Courbe en Cloche)",
-        "intro": "L'écart type définit la largeur de cette courbe — la règle 68-95-99,7 décrit comment les données se regroupent autour de la moyenne dans une distribution normale.",
-        "ariaLabel": "Une courbe en cloche ombrée en bandes montrant 68 % des données à 1 écart type, 95 % à 2, et 99,7 % à 3",
-        "caption": "68 % des valeurs se situent à 1σ de la moyenne, 95 % à 2σ, et 99,7 % à 3σ — vrai pour tout ensemble de données à distribution normale, pas seulement cet exemple."
-      },
-      "empiricalCompare": {
-        "ariaLabel": "Graphique à barres comparant la dispersion réelle de vos données à la règle empirique théorique",
-        "caption": "Les barres grises montrent la part théorique de la distribution normale (règle 68-95-99,7) ; les barres bleues montrent la part réelle de vos valeurs saisies dans chaque plage."
+      "live3d": {
+        "cardTitle": "Tableau de dispersion en direct et cloche 3D",
+        "groupData": "Données",
+        "groupMean": "Moyenne",
+        "groupDeviations": "Écarts",
+        "groupSpread": "Variance et écart-type",
+        "groupPosition": "Position (scores z)",
+        "groupBands": "Bandes σ (vos données vs normale)",
+        "sum": "Somme",
+        "min": "Minimum",
+        "max": "Maximum",
+        "range": "Étendue",
+        "sumDev": "Somme des écarts",
+        "mad": "Écart absolu moyen",
+        "farthest": "Plus grand écart",
+        "ss": "Somme des carrés",
+        "shortcut": "Vérification abrégée",
+        "needTwo": "exige n ≥ 2",
+        "bessel": "Facteur de Bessel",
+        "se": "Erreur type de la moyenne",
+        "ci": "Intervalle à 95 % de la moyenne",
+        "cv": "Coefficient de variation",
+        "cvUndefined": "non défini (μ = 0)",
+        "zMin": "z du minimum",
+        "zMax": "z du maximum",
+        "band": "Dans μ ± {k}σ"
       }
     },
     "circle-calculator": {

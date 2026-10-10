@@ -13,7 +13,9 @@ export function parseDataSet(raw: string): number[] {
 export type StandardDeviationScenario = { key: string; rawData: string };
 
 export const STANDARD_DEVIATION_SCENARIOS: StandardDeviationScenario[] = [
+  { key: "classic", rawData: "2, 4, 4, 4, 5, 5, 7, 9" },
   { key: "testScores", rawData: "72, 85, 90, 85, 60, 95" },
   { key: "dailyTemperatures", rawData: "68, 70, 65, 72, 71, 69, 73" },
   { key: "factoryMeasurements", rawData: "10.02, 9.98, 10.01, 9.99, 10.00, 10.03, 9.97" },
+  { key: "withOutlier", rawData: "12, 14, 13, 15, 14, 13, 41" },
 ];
