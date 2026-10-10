@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { STATISTICS_SCENARIOS, type StatisticsScenario } from "./types";
+import { STATISTICS_EXAMPLES, STATISTICS_SCENARIOS, type StatisticsScenario } from "./types";
 
 type StatisticsInputPanelProps = {
   rawData: string;
@@ -14,9 +14,10 @@ type StatisticsInputPanelProps = {
 export default function StatisticsInputPanel({ rawData, onRawDataChange, onScenarioPreset, onClear }: StatisticsInputPanelProps) {
   const t = useTranslations("tools.statistics-calculator.form");
   const tScenarios = useTranslations("tools.statistics-calculator.scenarios");
+  const tLive = useTranslations("tools.statistics-calculator.live3d");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">
@@ -52,6 +53,28 @@ export default function StatisticsInputPanel({ rawData, onRawDataChange, onScena
         <RotateCcw size={16} />
         {t("clear")}
       </button>
+
+      {/* §17/§27: quick examples fill the column; one click loads a real data set. */}
+      <div className="mt-5 flex flex-1 flex-col border-t border-zinc-200 pt-4 dark:border-zinc-800">
+        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{tLive("quickExamples")}</span>
+        <ul className="mt-2 flex flex-1 flex-col justify-between gap-1.5">
+          {STATISTICS_EXAMPLES.map((example) => {
+            const active = rawData === example.rawData;
+            return (
+              <li key={example.key}>
+                <button
+                  type="button"
+                  onClick={() => onScenarioPreset(example)}
+                  className={`flex w-full flex-col gap-0.5 rounded-lg border px-3 py-2 text-start text-sm transition ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 hover:bg-blue-50/60 dark:border-zinc-700 dark:hover:bg-blue-500/5"}`}
+                >
+                  <span className="font-medium text-zinc-800 dark:text-zinc-200">{tLive(`examples.${example.key}`)}</span>
+                  <span dir="ltr" className="truncate text-start font-mono text-xs text-blue-700 dark:text-blue-300">{example.rawData}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </SectionCard>
   );
 }

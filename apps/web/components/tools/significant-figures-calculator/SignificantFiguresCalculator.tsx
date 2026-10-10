@@ -7,7 +7,7 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import SignificantFiguresInputPanel from "./SignificantFiguresInputPanel";
+import SignificantFiguresInputPanel, { type SignificantFiguresPreset } from "./SignificantFiguresInputPanel";
 import SignificantFiguresResult from "./SignificantFiguresResult";
 import SignificantFiguresQuickReference from "./SignificantFiguresQuickReference";
 import { SignificantFiguresLiveProvider } from "./SignificantFiguresLiveContext";
@@ -38,6 +38,13 @@ export default function SignificantFiguresCalculator({ education }: { education:
     setValueA(DEFAULTS[next].valueA);
     setValueB(DEFAULTS[next].valueB);
     setRoundToDigits(DEFAULTS[next].roundToDigits);
+  }
+
+  function handlePreset(preset: SignificantFiguresPreset) {
+    setOperation(preset.operation);
+    setValueA(preset.valueA);
+    setValueB(preset.valueB);
+    setRoundToDigits(preset.roundToDigits);
   }
 
   function handleClear() {
@@ -88,8 +95,10 @@ export default function SignificantFiguresCalculator({ education }: { education:
               roundToDigits={roundToDigits}
               onRoundToDigitsChange={setRoundToDigits}
               onClear={handleClear}
+              onPreset={handlePreset}
             />
           }
+          stretchInput
           result={<SignificantFiguresResult result={result} computed={computed} />}
           sidebar={<RelatedToolsSidebar currentSlug="significant-figures-calculator" category="math" />}
           secondary={

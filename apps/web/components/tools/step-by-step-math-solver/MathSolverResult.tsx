@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { parseLocalizedNumber } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import MathSolverShareExportModal from "./MathSolverShareExportModal";
+import MathSolverLive3D from "./MathSolverLive3D";
 import type { MathSolverDraft, MathSolverResult as Result } from "./types";
 
 type Props = {
@@ -89,6 +90,9 @@ export default function MathSolverResult({ result, draft, hasCalculated }: Props
       </ol>
       <div dir="ltr" className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-center text-lg font-bold text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400">
         {result.result}
+      </div>
+      <div className="mt-4">
+        <MathSolverLive3D />
       </div>
     </SectionCard>
   );

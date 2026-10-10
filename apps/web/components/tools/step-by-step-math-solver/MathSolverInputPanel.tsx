@@ -11,15 +11,32 @@ import { emptyMathSolverDraft, emptyTerm, type MathSolverDraft } from "./types";
 const MODES: MathSolverMode[] = ["linear-equation", "quadratic-equation", "fraction-operation", "derivative"];
 const FRACTION_OPS: FractionOperator[] = ["add", "subtract", "multiply", "divide"];
 
+/** Quick examples that fill the input column with real, solvable problems (§17/§27). */
+const PRESETS: { expr: string; patch: Partial<MathSolverDraft> }[] = [
+  { expr: "x² − 5x + 6 = 0", patch: { mode: "quadratic-equation", quadA: "1", quadB: "-5", quadC: "6" } },
+  { expr: "x² − 4x + 4 = 0", patch: { mode: "quadratic-equation", quadA: "1", quadB: "-4", quadC: "4" } },
+  { expr: "x² + 2x + 5 = 0", patch: { mode: "quadratic-equation", quadA: "1", quadB: "2", quadC: "5" } },
+  { expr: "4x − 7 = x + 8", patch: { mode: "linear-equation", linearA: "4", linearB: "-7", linearC: "1", linearD: "8" } },
+  { expr: "3/4 − 1/6", patch: { mode: "fraction-operation", fracA: "3", fracB: "4", fracOp: "subtract", fracC: "1", fracD: "6" } },
+  { expr: "d/dx (x³ − 3x)", patch: { mode: "derivative", polynomialTerms: [{ coefficient: "1", power: "3" }, { coefficient: "-3", power: "1" }] } },
+  { expr: "d/dx (x⁴ − 4x²)", patch: { mode: "derivative", polynomialTerms: [{ coefficient: "1", power: "4" }, { coefficient: "-4", power: "2" }] } },
+];
+
+function presetActive(draft: MathSolverDraft, patch: Partial<MathSolverDraft>): boolean {
+  return (Object.keys(patch) as (keyof MathSolverDraft)[]).every((k) => JSON.stringify(draft[k]) === JSON.stringify(patch[k]));
+}
+
 type Props = {
   draft: MathSolverDraft;
   onChange: (draft: MathSolverDraft) => void;
   onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
+  onPreset: (patch: Partial<MathSolverDraft>) => void;
 };
 
-export default function MathSolverInputPanel({ draft, onChange, onCalculate, onClear }: Props) {
+export default function MathSolverInputPanel({ draft, onChange, onCalculate, onClear, onPreset }: Props) {
   const t = useTranslations("tools.step-by-step-math-solver.form");
+  const tCommon = useTranslations("common.live3d");
 
   function patch(partial: Partial<MathSolverDraft>) {
     onChange({ ...draft, ...partial });
@@ -53,7 +70,7 @@ export default function MathSolverInputPanel({ draft, onChange, onCalculate, onC
   }
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <form onSubmit={onCalculate}>
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
@@ -195,6 +212,28 @@ export default function MathSolverInputPanel({ draft, onChange, onCalculate, onC
         </button>
       </div>
       </form>
+
+      {/* §17/§27: quick examples fill the column; one click loads and solves a real problem. */}
+      <div className="mt-5 flex flex-1 flex-col border-t border-zinc-200 pt-4 dark:border-zinc-800">
+        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{tCommon("quickExamples")}</span>
+        <ul className="mt-2 flex flex-1 flex-col justify-between gap-1.5">
+          {PRESETS.map((preset) => {
+            const active = presetActive(draft, preset.patch);
+            return (
+              <li key={preset.expr}>
+                <button
+                  type="button"
+                  onClick={() => onPreset(preset.patch)}
+                  className={`flex w-full items-center justify-between gap-2 rounded-lg border px-3 py-2 text-start text-sm transition ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 hover:bg-blue-50/60 dark:border-zinc-700 dark:hover:bg-blue-500/5"}`}
+                >
+                  <span className="truncate font-medium text-zinc-800 dark:text-zinc-200">{t(`mode.${preset.patch.mode ?? draft.mode}`)}</span>
+                  <span dir="ltr" className="shrink-0 font-mono text-xs font-semibold text-blue-700 dark:text-blue-300">{preset.expr}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </SectionCard>
   );
 }
