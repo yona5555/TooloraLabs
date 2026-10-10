@@ -23207,12 +23207,6 @@
         "quickReference": {
           "title": "PGCD et PPCM en un coup d'œil",
           "intro": "Un exemple résolu rapide et l'identité qui relie les deux."
-        },
-        "conceptDiagram": {
-          "title": "Facteurs premiers communs et combinés",
-          "intro": "Le PGCD est ce que les décompositions en facteurs premiers de deux nombres ont en commun ; le PPCM est tout ce dont l'un ou l'autre a besoin, les facteurs communs n'étant comptés qu'une seule fois.",
-          "ariaLabel": "Diagramme de Venn des facteurs premiers de 12 et 18, la zone de chevauchement étant étiquetée comme les facteurs communs formant le PGCD, avec une légende montrant le PPCM comme la combinaison des deux cercles",
-          "sharedLabel": "Commun (PGCD)"
         }
       },
       "form": {
@@ -23221,7 +23215,6 @@
         "numberLabel": "Nombre {position}",
         "addNumber": "Ajouter un autre nombre",
         "removeNumber": "Supprimer ce nombre",
-        "scenarioLabel": "Remplir rapidement un exemple résolu",
         "clear": "Effacer"
       },
       "result": {
@@ -23238,18 +23231,7 @@
         "intro": {
           "title": "Comprendre le PGCD et le PPCM",
           "paragraph1": "Le plus grand commun diviseur (PGCD) d'un ensemble de nombres est le plus grand entier qui les divise tous exactement — la plus grande part en laquelle ils peuvent tous être divisés également. Le plus petit commun multiple (PPCM) est le plus petit entier que chacun d'eux divise exactement — le premier point où leurs multiples coïncident. Ils répondent à des questions opposées : le PGCD cherche le plus grand diviseur commun, le PPCM cherche le plus petit multiple commun.",
-          "paragraph2": "Cette calculatrice trouve les deux par décomposition en facteurs premiers : chaque nombre est décomposé en nombres premiers dont le produit le compose, puis ces décompositions sont comparées. Le PGCD prend chaque facteur premier commun à la puissance la plus basse à laquelle il apparaît dans l'un d'eux ; le PPCM prend chaque facteur premier apparaissant dans l'un d'eux, à la puissance la plus élevée utilisée. Pour exactement deux nombres, PGCD × PPCM est toujours égal au produit des deux nombres — une vérification utile du résultat.",
-          "ratioGauge": {
-            "title": "Dans quelle mesure ces nombres sont-ils liés ?",
-            "intro": "Le rapport entre le PPCM et le PGCD montre à quel point un ensemble de nombres partage une structure commune — un petit rapport signifie qu'ils partagent de grands facteurs communs, un grand rapport signifie qu'ils sont presque premiers entre eux. Choisissez un exemple réel ci-dessous pour voir où il se situe.",
-            "verdict": "{example} — {classification}.",
-            "fact": "Ici, le PPCM est {ratio}× le PGCD.",
-            "zones": {
-              "closelyRelated": "Étroitement liés",
-              "moderatelyRelated": "Modérément liés",
-              "looselyRelated": "Presque premiers entre eux"
-            }
-          }
+          "paragraph2": "Cette calculatrice trouve les deux par décomposition en facteurs premiers : chaque nombre est décomposé en nombres premiers dont le produit le compose, puis ces décompositions sont comparées. Le PGCD prend chaque facteur premier commun à la puissance la plus basse à laquelle il apparaît dans l'un d'eux ; le PPCM prend chaque facteur premier apparaissant dans l'un d'eux, à la puissance la plus élevée utilisée. Pour exactement deux nombres, PGCD × PPCM est toujours égal au produit des deux nombres — une vérification utile du résultat."
         },
         "variables": {
           "title": "Variables concernées",
@@ -23399,13 +23381,123 @@
           "note": "La description originale d'Euclide de la procédure de division répétée pour trouver la plus grande mesure commune de deux longueurs — le même algorithme, appliqué aux nombres entiers, sur lequel repose la méthode de décomposition en facteurs premiers de cette calculatrice.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
           "readOriginal": "Lire les Éléments d'Euclide, Livre VII"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "tiling": {
+            "title": "Pavage d'Euclide par des carrés",
+            "intro": "Faites glisser les deux premiers nombres : le rectangle se remplit des plus grands carrés possibles, et le dernier, le plus petit, est le PGCD. Appuyez sur Lecture pour voir les étapes d'Euclide carré par carré.",
+            "sliderA": "Premier nombre (a)",
+            "sliderB": "Deuxième nombre (b)",
+            "play": "Lecture",
+            "rectangle": "Rectangle",
+            "squaresOf": "Carrés de côté {size}",
+            "totalSquares": "Nombre total de carrés",
+            "areaCheck": "Aire couverte",
+            "smallest": "Plus petit carré"
+          },
+          "ladder": {
+            "title": "La méthode de l'échelle, barreau par barreau",
+            "intro": "Chaque barreau divise tous les nombres par un premier qu'ils partagent ; le produit des premiers latéraux est le PGCD, et le PGCD fois le PPCM de la ligne du bas donne le PPCM.",
+            "more": "{n} barreaux de plus",
+            "sideProduct": "Premiers latéraux",
+            "lShape": "PGCD × PPCM du bas",
+            "rungs": "Barreaux",
+            "rung": "Barreau {n}",
+            "bottomRow": "Ligne du bas"
+          },
+          "exponents": {
+            "title": "Exposants premiers côte à côte",
+            "intro": "Une barre par nombre pour chaque premier, aussi haute que son exposant. Le PGCD prend la barre la plus basse de chaque groupe, le PPCM la plus haute.",
+            "minLine": "min → PGCD",
+            "maxLine": "max → PPCM",
+            "prime": "Premier {p}"
+          },
+          "stacked": {
+            "title": "Noyau commun et facteurs propres",
+            "intro": "Chaque nombre est le PGCD fois son propre cofacteur ; sur une échelle logarithmique les deux parties s'additionnent dans la longueur de la barre, et la barre du PPCM est le noyau fois tous les facteurs supplémentaires.",
+            "core": "Noyau PGCD",
+            "own": "Cofacteur propre",
+            "extra": "Facteurs en plus du PPCM",
+            "coreShare": "PGCD ≈ {pct} % des chiffres"
+          },
+          "donut": {
+            "title": "Puissances premières dans le PPCM et le PGCD",
+            "intro": "L'anneau extérieur découpe le PPCM en puissances premières aux plus grands exposants, l'anneau intérieur le PGCD aux plus petits ; chaque arc est proportionnel à sa part des chiffres.",
+            "outer": "Extérieur : PPCM",
+            "inner": "Intérieur : PGCD",
+            "outerTotal": "Total de l'anneau extérieur (PPCM)",
+            "innerTotal": "Total de l'anneau intérieur (PGCD)"
+          },
+          "formula": {
+            "title": "Pourquoi PGCD × PPCM = a × b",
+            "intro": "Pour deux nombres, le produit du PGCD et du PPCM est toujours égal au produit des nombres : pour chaque premier, min + max de deux exposants est simplement leur somme.",
+            "pair": "Paire utilisée",
+            "shortcut": "Raccourci du PPCM",
+            "exponents": "Puissances min · max"
+          },
+          "fraction": {
+            "title": "Simplifier une fraction avec le PGCD",
+            "intro": "Diviser le numérateur et le dénominateur par leur PGCD donne la forme irréductible ; les deux barres ombrent exactement la même longueur.",
+            "original": "Fraction",
+            "divideBy": "Diviser les deux par",
+            "simplest": "Forme irréductible",
+            "decimal": "Valeur décimale",
+            "commonDen": "Plus petit dénominateur commun"
+          },
+          "timeline": {
+            "title": "Des multiples jusqu'à leur rencontre",
+            "intro": "Chaque piste marque les multiples d'un nombre ; le PPCM est la première station commune à toutes les pistes.",
+            "stations": "Stations de {n}",
+            "firstShared": "Premier multiple commun",
+            "nextShared": "Multiples communs suivants"
+          },
+          "divisors": {
+            "title": "Tous les diviseurs communs, classés",
+            "intro": "Tous les diviseurs que les nombres partagent, du plus grand au plus petit. Le plus grand est le PGCD, et tous les autres le divisent.",
+            "more": "+{n} diviseurs communs plus petits",
+            "count": "Diviseurs communs",
+            "largest": "Le plus grand",
+            "smallest": "Le plus petit",
+            "sum": "Somme des diviseurs communs"
+          },
+          "zones": {
+            "title": "À quel point les nombres sont liés",
+            "intro": "Le PGCD divisé par le plus petit nombre place l'ensemble sur une bande allant de « premiers entre eux » à « le plus petit divise tous les autres ».",
+            "zone": {
+              "coprime": "Premiers",
+              "weak": "Faible",
+              "strong": "Fort",
+              "divides": "Divise"
+            },
+            "smallest": "Plus petit nombre",
+            "verdict": "Verdict"
+          },
+          "logScale": {
+            "title": "PGCD, nombres et PPCM sur une échelle log",
+            "intro": "Sur un même axe en puissances de dix, le PGCD est au niveau du plus petit nombre ou en dessous, le PPCM au niveau du plus grand ou au-dessus, sans jamais dépasser le produit de tous (Π).",
+            "product": "Produit Π",
+            "lcmVsProduct": "Π ÷ PPCM"
+          },
+          "trio": {
+            "title": "Un pas change tout",
+            "intro": "Décalez le premier nombre d'une unité dans chaque sens et recalculez : le PGCD et le PPCM sautent, car ils dépendent des premiers partagés et non de la taille.",
+            "low": "−1",
+            "current": "Actuel",
+            "high": "+1"
+          }
         }
       },
       "scenarios": {
         "twoNumbers": "Deux nombres",
         "threeNumbers": "Trois nombres",
         "coprimeExample": "Exemple de nombres premiers entre eux",
-        "recipeScaling": "Mise à l'échelle d'une recette"
+        "recipeScaling": "Mise à l'échelle d'une recette",
+        "euclidClassic": "Classique d'Euclide",
+        "oneDividesOther": "L'un divise l'autre",
+        "gearTeeth": "Dents d'engrenage",
+        "fibonacciPair": "Paire de Fibonacci",
+        "fiveNumbers": "Cinq nombres"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -23425,28 +23517,33 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
       },
-      "ladderDiagram": {
-        "title": "Essayez : La Méthode de l'Échelle",
-        "intro": "Divisez les deux nombres par un facteur premier commun, notez ce nombre premier sur le côté, et répétez jusqu'à ce qu'il n'y ait plus de diviseur commun — un moyen rapide de trouver le PGCD et le PPCM à la main.",
-        "ariaLabel": "Une échelle de division pour trouver le PGCD et le PPCM de 12 et 18",
-        "caption": "Multipliez les nombres premiers sur le côté pour obtenir le PGCD ; multipliez-les par les deux nombres restants en bas pour obtenir le PPCM."
-      },
-      "multiplesDiagram": {
-        "title": "Le PPCM comme premier multiple commun",
-        "intro": "Aligner les multiples de {a} et {b} sur une droite numérique montre exactement ce que signifie le PPCM : le premier point où les deux listes se rejoignent.",
-        "ariaLabel": "Droite numérique montrant les multiples de 12 sur une ligne et les multiples de 18 sur une autre, se rejoignant d'abord à 36",
-        "rowA": "Multiples de {a}",
-        "rowB": "Multiples de {b}",
-        "rowLcm": "Premier multiple commun (PPCM)",
-        "caption": "12 et 18 partagent d'abord un multiple à 36 — c'est le PPCM, atteint ici simplement en comptant, sans rien factoriser."
-      },
-      "factorTreeDiagram": {
-        "title": "Décomposer les nombres en facteurs premiers",
-        "intro": "Avant de pouvoir trouver le PGCD et le PPCM, chaque nombre est d'abord décomposé en facteurs premiers — les éléments qui ne peuvent plus être divisés. Voici comment 12 et 18 se ramifient jusqu'à leurs facteurs premiers.",
-        "labelA": "{a} = 2 × 2 × 3",
-        "labelB": "{b} = 2 × 3 × 3",
-        "legendPrime": "Facteur premier",
-        "caption": "12 = 2² × 3 et 18 = 2 × 3² — ce sont exactement les décompositions dont partent le diagramme de Venn et la méthode de l'échelle ci-dessus."
+      "live3d": {
+        "cardTitle": "Tours de facteurs premiers : tableau en direct et modèle 3D",
+        "replay": "Rejouer",
+        "legend": "Cubes pleins = noyau commun du PGCD",
+        "groupFactorizations": "Décompositions en facteurs premiers",
+        "groupDivisors": "Diviseurs",
+        "groupPrimes": "Premiers : le PGCD garde le min, le PPCM le max",
+        "groupEuclid": "Algorithme d'Euclide sur ({a}, {b})",
+        "groupResults": "Résultats et vérifications",
+        "euclidStep": "Étape {n}",
+        "moreSteps": "+{n} étapes de plus",
+        "divisorsOf": "Diviseurs de {n}",
+        "primeRow": "Premier {p}",
+        "gcf": "PGCD",
+        "lcm": "PPCM",
+        "productCheck": "PGCD × PPCM = a × b",
+        "ratio": "Rapport réduit",
+        "bezout": "Identité de Bézout",
+        "commonDivisors": "Diviseurs communs",
+        "lcmSteps": "Multiples jusqu'au PPCM",
+        "relation": "Relation",
+        "relations": {
+          "coprime": "Premiers entre eux",
+          "shared": "Partagent un facteur",
+          "divides": "Le plus petit divise tous",
+          "equal": "Tous égaux"
+        }
       }
     },
     "triangle-calculator": {

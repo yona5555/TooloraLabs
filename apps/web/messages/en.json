@@ -21805,12 +21805,6 @@
         "quickReference": {
           "title": "GCF & LCM at a Glance",
           "intro": "A quick worked example and the identity that ties the two together."
-        },
-        "conceptDiagram": {
-          "title": "Shared and Combined Prime Factors",
-          "intro": "The GCF is what two numbers' prime factorizations have in common; the LCM is everything either one needs, with shared factors counted only once.",
-          "ariaLabel": "Venn diagram of the prime factors of 12 and 18, with the overlapping region labeled as the shared factors that make up the GCF, and a caption showing the LCM as the combination of both circles",
-          "sharedLabel": "Shared (GCF)"
         }
       },
       "form": {
@@ -21819,7 +21813,6 @@
         "numberLabel": "Number {position}",
         "addNumber": "Add Another Number",
         "removeNumber": "Remove this number",
-        "scenarioLabel": "Quick-fill a worked example",
         "clear": "Clear"
       },
       "result": {
@@ -21836,18 +21829,7 @@
         "intro": {
           "title": "Understanding GCF and LCM",
           "paragraph1": "The greatest common factor (GCF) of a set of numbers is the largest whole number that divides all of them evenly — the biggest piece they can all be evenly split into. The least common multiple (LCM) is the smallest whole number that all of them divide into evenly — the first point where their multiples line up. They answer opposite questions: GCF looks for the largest shared divisor, LCM looks for the smallest shared multiple.",
-          "paragraph2": "This calculator finds both by prime factorization: breaking each number down into the primes that multiply together to make it, then comparing those factorizations. The GCF takes every prime factor the numbers share, at the lowest power any of them uses it; the LCM takes every prime factor that appears in any of them, at the highest power it's used. For exactly two numbers, GCF × LCM always equals the product of the two numbers — a useful check on the result.",
-          "ratioGauge": {
-            "title": "How Closely Related Are These Numbers?",
-            "intro": "The ratio of LCM to GCF shows how much shared structure a set of numbers has — a small ratio means they share large common factors, a large ratio means they're nearly coprime. Pick a real example below to see where it falls.",
-            "verdict": "{example} — {classification}.",
-            "fact": "Here, the LCM is {ratio}× the GCF.",
-            "zones": {
-              "closelyRelated": "Closely Related",
-              "moderatelyRelated": "Moderately Related",
-              "looselyRelated": "Nearly Coprime"
-            }
-          }
+          "paragraph2": "This calculator finds both by prime factorization: breaking each number down into the primes that multiply together to make it, then comparing those factorizations. The GCF takes every prime factor the numbers share, at the lowest power any of them uses it; the LCM takes every prime factor that appears in any of them, at the highest power it's used. For exactly two numbers, GCF × LCM always equals the product of the two numbers — a useful check on the result."
         },
         "variables": {
           "title": "Variables Involved",
@@ -21997,13 +21979,123 @@
           "note": "Euclid's original description of the repeated-division procedure for finding the greatest common measure of two lengths — the same algorithm, applied to whole numbers, that underlies this calculator's prime-factorization method.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
           "readOriginal": "Read Euclid's Elements, Book VII"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "tiling": {
+            "title": "Euclid's Square Tiling",
+            "intro": "Slide the first two numbers: the rectangle fills with the largest squares that fit, and the last, smallest square is the GCF. Press Play to watch Euclid's steps one square at a time.",
+            "sliderA": "First number (a)",
+            "sliderB": "Second number (b)",
+            "play": "Play",
+            "rectangle": "Rectangle",
+            "squaresOf": "Squares of side {size}",
+            "totalSquares": "Total squares",
+            "areaCheck": "Area covered",
+            "smallest": "Smallest square"
+          },
+          "ladder": {
+            "title": "The Ladder Method, Rung by Rung",
+            "intro": "Each rung divides every number by a prime they all share; the side primes multiply to the GCF, and the GCF times the bottom row's LCM gives the LCM.",
+            "more": "{n} more rungs",
+            "sideProduct": "Side primes",
+            "lShape": "GCF × bottom LCM",
+            "rungs": "Rungs",
+            "rung": "Rung {n}",
+            "bottomRow": "Bottom row"
+          },
+          "exponents": {
+            "title": "Prime Exponents Side by Side",
+            "intro": "One bar per number for each prime, as tall as its exponent. The GCF takes the lowest bar of each group, the LCM the highest.",
+            "minLine": "min → GCF",
+            "maxLine": "max → LCM",
+            "prime": "Prime {p}"
+          },
+          "stacked": {
+            "title": "Shared Core and Own Factors",
+            "intro": "Every number is the GCF times its own cofactor; on a log scale those two pieces add up to the bar's length, and the LCM bar is the core times all the extra factors.",
+            "core": "GCF core",
+            "own": "Own cofactor",
+            "extra": "LCM extra factors",
+            "coreShare": "GCF ≈ {pct}% of the digits"
+          },
+          "donut": {
+            "title": "Prime Powers Inside the LCM and GCF",
+            "intro": "The outer ring splits the LCM into prime powers with the highest exponents, the inner ring the GCF into the lowest; each arc is sized by its share of the digits.",
+            "outer": "Outer: LCM",
+            "inner": "Inner: GCF",
+            "outerTotal": "Outer ring total (LCM)",
+            "innerTotal": "Inner ring total (GCF)"
+          },
+          "formula": {
+            "title": "Why GCF × LCM = a × b",
+            "intro": "For two numbers the product of the GCF and the LCM always equals the product of the numbers: for every prime, min + max of two exponents is simply their sum.",
+            "pair": "Pair used",
+            "shortcut": "LCM shortcut",
+            "exponents": "min · max powers"
+          },
+          "fraction": {
+            "title": "Simplifying a Fraction with the GCF",
+            "intro": "Dividing the top and bottom of the fraction by their GCF gives the simplest form; both bars shade exactly the same length.",
+            "original": "Fraction",
+            "divideBy": "Divide both by",
+            "simplest": "Simplest form",
+            "decimal": "Decimal value",
+            "commonDen": "Least common denominator"
+          },
+          "timeline": {
+            "title": "Multiples Until They Meet",
+            "intro": "Each track marks the multiples of one number; the LCM is the first station every track shares.",
+            "stations": "Stations of {n}",
+            "firstShared": "First shared multiple",
+            "nextShared": "Next shared multiples"
+          },
+          "divisors": {
+            "title": "Every Common Divisor, Ranked",
+            "intro": "All the divisors the numbers share, largest first. The largest is the GCF and every other one divides it.",
+            "more": "+{n} smaller common divisors",
+            "count": "Common divisors",
+            "largest": "Largest",
+            "smallest": "Smallest",
+            "sum": "Sum of common divisors"
+          },
+          "zones": {
+            "title": "How Closely the Numbers Are Related",
+            "intro": "The GCF divided by the smallest number places the set on a strip from coprime to the smallest dividing all the others.",
+            "zone": {
+              "coprime": "Coprime",
+              "weak": "Weak",
+              "strong": "Strong",
+              "divides": "Divides"
+            },
+            "smallest": "Smallest number",
+            "verdict": "Verdict"
+          },
+          "logScale": {
+            "title": "GCF, Numbers and LCM on a Log Scale",
+            "intro": "On one powers-of-ten axis the GCF sits at or below the smallest number and the LCM at or above the largest, never past the product of all numbers (Π).",
+            "product": "Product Π",
+            "lcmVsProduct": "Π ÷ LCM"
+          },
+          "trio": {
+            "title": "One Step Changes Everything",
+            "intro": "Move the first number by one in each direction and recompute: the GCF and LCM jump, because they depend on shared primes rather than size.",
+            "low": "−1",
+            "current": "Current",
+            "high": "+1"
+          }
         }
       },
       "scenarios": {
         "twoNumbers": "Two Numbers",
         "threeNumbers": "Three Numbers",
         "coprimeExample": "Coprime Example",
-        "recipeScaling": "Recipe Scaling"
+        "recipeScaling": "Recipe Scaling",
+        "euclidClassic": "Euclid's Classic",
+        "oneDividesOther": "One Divides the Other",
+        "gearTeeth": "Gear Teeth",
+        "fibonacciPair": "Fibonacci Pair",
+        "fiveNumbers": "Five Numbers"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -22023,28 +22115,33 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
       },
-      "ladderDiagram": {
-        "title": "Try It: The Ladder Method",
-        "intro": "Divide both numbers by a shared prime factor, write that prime to the side, and repeat until nothing more divides evenly — a fast way to find both the GCF and LCM by hand.",
-        "ariaLabel": "A division ladder finding the GCF and LCM of 12 and 18",
-        "caption": "Multiply the primes on the side for the GCF; multiply them by the two numbers left at the bottom for the LCM."
-      },
-      "multiplesDiagram": {
-        "title": "LCM as the First Shared Multiple",
-        "intro": "Lining up the multiples of {a} and {b} on a number line shows exactly what the LCM means: the first point where both lists meet.",
-        "ariaLabel": "Number line showing multiples of 12 on one row and multiples of 18 on another, meeting first at 36",
-        "rowA": "Multiples of {a}",
-        "rowB": "Multiples of {b}",
-        "rowLcm": "First shared multiple (LCM)",
-        "caption": "12 and 18 first share a multiple at 36 — that's the LCM, reached here just by counting, without factoring anything."
-      },
-      "factorTreeDiagram": {
-        "title": "Breaking Numbers Down to Their Prime Factors",
-        "intro": "Before the GCF and LCM can be found, each number is first broken down into prime factors — the building blocks that can't be divided any further. Here's how 12 and 18 branch down to their primes.",
-        "labelA": "{a} = 2 × 2 × 3",
-        "labelB": "{b} = 2 × 3 × 3",
-        "legendPrime": "Prime factor",
-        "caption": "12 = 2² × 3 and 18 = 2 × 3² — these are exactly the factorizations the Venn diagram and the ladder method above start from."
+      "live3d": {
+        "cardTitle": "Prime-Factor Towers: Live Table and 3D Model",
+        "replay": "Replay",
+        "legend": "Solid cubes = shared GCF core",
+        "groupFactorizations": "Prime factorizations",
+        "groupDivisors": "Divisors",
+        "groupPrimes": "Primes: GCF keeps min, LCM keeps max",
+        "groupEuclid": "Euclid's algorithm on ({a}, {b})",
+        "groupResults": "Results and checks",
+        "euclidStep": "Step {n}",
+        "moreSteps": "+{n} more steps",
+        "divisorsOf": "Divisors of {n}",
+        "primeRow": "Prime {p}",
+        "gcf": "GCF",
+        "lcm": "LCM",
+        "productCheck": "GCF × LCM = a × b",
+        "ratio": "Reduced ratio",
+        "bezout": "Bézout identity",
+        "commonDivisors": "Common divisors",
+        "lcmSteps": "Multiples to reach LCM",
+        "relation": "Relationship",
+        "relations": {
+          "coprime": "Coprime",
+          "shared": "Share a factor",
+          "divides": "Smallest divides all",
+          "equal": "All equal"
+        }
       }
     },
     "pace-calculator": {

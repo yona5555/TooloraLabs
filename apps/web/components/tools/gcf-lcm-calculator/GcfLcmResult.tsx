@@ -1,78 +1,57 @@
+"use client";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import GcfLcmLive3D from "./GcfLcmLive3D";
 import GcfLcmShareExportModal from "./GcfLcmShareExportModal";
-import type { GcfLcmDraft, GcfLcmResult as Result } from "./types";
+import { useGcfLcmModel } from "./GcfLcmLiveContext";
+import type { GcfLcmError } from "./types";
 
-type Props = {
-  result: Result;
-  digitStyle: DigitStyle;
-  draft: GcfLcmDraft;
-};
-
-function factorizationToString(factors: { prime: number; exponent: number }[]): string {
-  if (factors.length === 0) return "";
-  return factors.map((f) => (f.exponent === 1 ? `${f.prime}` : `${f.prime}^${f.exponent}`)).join(" × ");
-}
-
-export default function GcfLcmResult({ result, digitStyle, draft }: Props) {
+/**
+ * Result card: GCF and LCM up top, then the deep live table + 3D prime-factor towers. While a field
+ * is empty or invalid the card says so and keeps showing the last valid set (never an empty state).
+ */
+export default function GcfLcmResult({ error, className = "" }: { error: GcfLcmError | null; className?: string }) {
   const t = useTranslations("tools.gcf-lcm-calculator.result");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
-
-  if (result.error) {
-    const messageKey = result.error === "too-few-numbers" ? "tooFewNumbers" : "invalidNumber";
-    return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(messageKey)}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const sentence = t("sentence", { numbers: draft.numbers.join(", "), gcf: fmt(result.gcf), lcm: fmt(result.lcm) });
+  const { nums, result, f } = useGcfLcmModel();
+  const list = nums.map((n) => f(n)).join(", ");
+  const sentence = t("sentence", { numbers: list, gcf: f(result.gcf), lcm: f(result.lcm) });
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{t("heading")}</h2>
+    <SectionCard
+      title={t("heading")}
+      className={className}
+      action={
         <GcfLcmShareExportModal
-          inputRows={[{ label: t("numbersLabel"), value: draft.numbers.join(", ") }]}
+          inputRows={[{ label: t("numbersLabel"), value: list }]}
           resultRows={[
-            { label: t("gcfLabel"), value: fmt(result.gcf) },
-            { label: t("lcmLabel"), value: fmt(result.lcm) },
+            { label: t("gcfLabel"), value: f(result.gcf) },
+            { label: t("lcmLabel"), value: f(result.lcm) },
           ]}
           heroLabel={t("gcfLabel")}
-          heroValue={fmt(result.gcf)}
+          heroValue={f(result.gcf)}
           sentence={sentence}
         />
-      </div>
-      <div className="p-4 lg:p-6">
-        <div className="grid grid-cols-2 gap-4 text-center">
-          <div className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">
-            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{fmt(result.gcf)}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("gcfLabel")}</p>
-          </div>
-          <div className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">
-            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{fmt(result.lcm)}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("lcmLabel")}</p>
-          </div>
+      }
+    >
+      {error && (
+        <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-center text-sm text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
+          {t(error === "too-few-numbers" ? "tooFewNumbers" : "invalidNumber")}
+        </p>
+      )}
+      <div className="grid grid-cols-2 gap-3 text-center">
+        <div className="rounded-xl bg-emerald-50 px-3 py-2 dark:bg-emerald-500/10">
+          <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">{t("gcfLabel")}</p>
+          <p dir="ltr" className="font-mono text-2xl font-bold break-all text-emerald-700 dark:text-emerald-300">{f(result.gcf)}</p>
         </div>
-
-        <div className="mt-5 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-          <p className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("factorizationsTitle")}</p>
-          <ul dir="ltr" className="space-y-1.5 text-sm">
-            {result.factorizations.map((factors, i) => (
-              <li key={i} className="flex items-center justify-between gap-3 font-mono text-zinc-700 dark:text-zinc-200">
-                <span>{draft.numbers[i]}</span>
-                <span className="text-zinc-500 dark:text-zinc-400">= {factorizationToString(factors)}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="rounded-xl bg-violet-50 px-3 py-2 dark:bg-violet-500/10">
+          <p className="text-xs font-semibold text-violet-700 dark:text-violet-300">{t("lcmLabel")}</p>
+          <p dir="ltr" className="font-mono text-2xl font-bold break-all text-violet-700 dark:text-violet-300">{f(result.lcm)}</p>
         </div>
       </div>
-    </div>
+      <p className="mt-3 text-center text-sm text-zinc-600 dark:text-zinc-300">{sentence}</p>
+      <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+        <GcfLcmLive3D />
+      </div>
+    </SectionCard>
   );
 }
