@@ -11927,13 +11927,7 @@
         "inverseA": "Inverse of A",
         "determinantA": "Determinant of A",
         "determinantB": "Determinant of B",
-        "emptyStateMessage": "Enter both matrices and press Calculate to see the full set of results.",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramTransformCaption": "The unit square (dashed) and the parallelogram matrix A maps it to — the columns of A are exactly where the square's two edges land.",
-        "diagramBTitle": "What Matrix B Does",
-        "diagramBIntro": "The same picture, for matrix B: the unit square mapped through B's columns.",
-        "diagramBCaption": "The unit square (dashed) and the parallelogram matrix B maps it to."
+        "emptyStateMessage": "Enter both matrices and press Calculate to see the full set of results."
       },
       "education": {
         "intro": {
@@ -12068,24 +12062,19 @@
           "intro": "Four more matrix relationships worth seeing on their own, each with its own picture instead of just a formula.",
           "determinant": {
             "title": "Determinant as Area",
-            "description": "The determinant isn't just a formula to memorize — it's literally the area of the parallelogram a matrix maps the unit square onto (with a sign: positive when orientation is preserved, negative when the matrix flips the plane over). A matrix that stretches space out has a determinant greater than 1 in absolute value; one that compresses space has a determinant between 0 and 1; and a singular matrix (determinant 0) squashes the entire plane down to a line, which is why it destroys information and can't be undone.",
-            "diagramCaption": "Matrix A's image of the unit square, with its area — equal to |det(A)| — shaded and labeled.",
-            "arithmeticCaption": "The two diagonal products: a11×a22 (main diagonal, added) minus a12×a21 (anti-diagonal, subtracted)."
+            "description": "The determinant isn't just a formula to memorize — it's literally the area of the parallelogram a matrix maps the unit square onto (with a sign: positive when orientation is preserved, negative when the matrix flips the plane over). A matrix that stretches space out has a determinant greater than 1 in absolute value; one that compresses space has a determinant between 0 and 1; and a singular matrix (determinant 0) squashes the entire plane down to a line, which is why it destroys information and can't be undone."
           },
           "composition": {
             "title": "Matrix Multiplication as Composing Transformations",
-            "description": "A×B means \"first apply B, then apply A to the result\" — multiplying two matrices is the same operation as chaining their transformations one after another. That's also the geometric reason A×B usually isn't the same as B×A: transforming a shape with B first and then A doesn't generally land in the same place as doing it in the opposite order, just as rotating a book and then flattening it gives a different result than flattening it and then rotating it.",
-            "diagramCaption": "The unit square mapped by B alone (orange), and the same square mapped by A×B — B's transformation followed by A's (purple)."
+            "description": "A×B means \"first apply B, then apply A to the result\" — multiplying two matrices is the same operation as chaining their transformations one after another. That's also the geometric reason A×B usually isn't the same as B×A: transforming a shape with B first and then A doesn't generally land in the same place as doing it in the opposite order, just as rotating a book and then flattening it gives a different result than flattening it and then rotating it."
           },
           "inverse": {
             "title": "The Inverse as an \"Undo\" Transformation",
-            "description": "If A stretches the unit square into a parallelogram, A⁻¹ is the specific transformation that takes that exact parallelogram and folds it back into the unit square — geometrically, applying A and then A⁻¹ (or the reverse) always lands you back where you started, which is what the equation A×A⁻¹ = I actually means. A singular matrix (determinant 0) has no inverse because it has already thrown away information by squashing the plane onto a line, and no transformation can recover a dimension that's already been collapsed.",
-            "diagramCaption": "Matrix A's image of the unit square (blue) alongside A⁻¹'s own image of the unit square (teal) — each one undoes the other."
+            "description": "If A stretches the unit square into a parallelogram, A⁻¹ is the specific transformation that takes that exact parallelogram and folds it back into the unit square — geometrically, applying A and then A⁻¹ (or the reverse) always lands you back where you started, which is what the equation A×A⁻¹ = I actually means. A singular matrix (determinant 0) has no inverse because it has already thrown away information by squashing the plane onto a line, and no transformation can recover a dimension that's already been collapsed."
           },
           "transpose": {
             "title": "Transpose as a Diagonal Flip",
-            "description": "Unlike the other three operations, the transpose isn't really about transforming space at all — it's a purely mechanical rearrangement of the matrix's entries. The two diagonal entries (a₁₁ and a₂₂) stay exactly where they are; the two off-diagonal entries (a₁₂ and a₂₁) simply swap places. That's the entire operation, which is why it's always defined, for any matrix, regardless of the determinant.",
-            "diagramCaption": "Matrix A's four entries: the diagonal pair stays fixed, while the off-diagonal pair swaps places to form Aᵀ."
+            "description": "Unlike the other three operations, the transpose isn't really about transforming space at all — it's a purely mechanical rearrangement of the matrix's entries. The two diagonal entries (a₁₁ and a₂₂) stay exactly where they are; the two off-diagonal entries (a₁₂ and a₂₁) simply swap places. That's the entire operation, which is why it's always defined, for any matrix, regardless of the determinant."
           }
         },
         "applications": {
@@ -12109,6 +12098,130 @@
               "description": "Many machine learning and statistics techniques — from linear regression to solving systems of simultaneous equations — reduce to matrix operations under the hood. Finding the best-fit coefficients in a linear regression, for instance, involves multiplying and inverting matrices built from the input data, generalizing the same determinant-and-inverse arithmetic this calculator performs on a 2x2 example."
             }
           ]
+        },
+        "lab": {
+          "worked": "Worked example",
+          "basisDrag": {
+            "title": "Drag the Basis Vectors",
+            "intro": "Drag the red and green points: they are where î and ĵ land, i.e. the two columns of A. The inputs, the result and every chart on this page follow.",
+            "hint": "Drag either point · snaps to 0.5",
+            "aria": "Draggable basis vectors of matrix A",
+            "col1": "Aî = column 1",
+            "col2": "Aĵ = column 2",
+            "lengths": "Column lengths",
+            "angle": "Angle between columns",
+            "det": "det A",
+            "area": "Parallelogram area",
+            "orientation": "Orientation",
+            "kind": "Transformation type"
+          },
+          "detFormula": {
+            "title": "The Determinant, Diagonal by Diagonal",
+            "intro": "The main-diagonal product minus the anti-diagonal product, with the current entries of A substituted.",
+            "mainDiagonal": "Main diagonal a₁₁ × a₂₂",
+            "antiDiagonal": "Anti-diagonal a₁₂ × a₂₁",
+            "difference": "Difference",
+            "detA": "det A",
+            "detB": "det B (same rule)"
+          },
+          "detZones": {
+            "title": "What the Determinant Says",
+            "intro": "Where det A, det B and det(A×B) fall on a signed log scale: flipped, collapsed, shrunk or expanded.",
+            "axis": "Signed log scale of the determinant",
+            "areaFactor": "Area scale factor of A",
+            "zones": {
+              "flip": "Flips",
+              "collapse": "Collapses",
+              "shrink": "Shrinks",
+              "preserve": "Keeps area",
+              "expand": "Expands"
+            }
+          },
+          "composition": {
+            "title": "B First, Then A",
+            "intro": "The point (1, 1) and the unit square's area pushed through B and then A land exactly where A×B sends them in one step.",
+            "start": "Start",
+            "afterB": "After B",
+            "afterA": "After A",
+            "stepB": "Apply B",
+            "stepA": "Then apply A",
+            "oneStep": "A×B in one step",
+            "detRule": "det A × det B = det(A×B)"
+          },
+          "commutativity": {
+            "title": "Does the Order Matter?",
+            "intro": "Every entry of A×B next to the same entry of B×A. Any unequal pair proves that A×B ≠ B×A for these matrices.",
+            "verdict": "Verdict",
+            "commute": "A×B = B×A (they commute)",
+            "noCommute": "A×B ≠ B×A"
+          },
+          "inverse": {
+            "title": "A and A⁻¹ Cancel Out",
+            "intro": "A × A⁻¹ and A⁻¹ × A multiplied out live: both give the identity matrix I whenever det A ≠ 0.",
+            "adjugate": "Swapped and negated [a₂₂, −a₁₂; −a₂₁, a₁₁]",
+            "scale": "Scale factor 1 / det A",
+            "check": "A × A⁻¹",
+            "checkOk": "= I (identity)",
+            "singular": "No inverse: det A = 0"
+          },
+          "transpose": {
+            "title": "A Next to Aᵀ",
+            "intro": "The off-diagonal pair swaps places; the diagonal, the determinant, the trace and the Frobenius norm stay the same.",
+            "swapped": "Swapped a₁₂ ⇄ a₂₁",
+            "kept": "Kept a₁₁, a₂₂",
+            "sameDet": "det A = det Aᵀ",
+            "symmetric": "Symmetric (A = Aᵀ)?",
+            "yes": "Yes",
+            "no": "No"
+          },
+          "sensitivity": {
+            "title": "How Sensitive Is det A to a₁₁?",
+            "intro": "det A recomputed with a₁₁ one unit lower, as entered and one unit higher. Each step moves it by exactly a₂₂.",
+            "low": "a₁₁ − 1",
+            "current": "Current",
+            "high": "a₁₁ + 1",
+            "step": "Change per unit of a₁₁"
+          },
+          "eigen": {
+            "title": "Eigenvalues on the Characteristic Curve",
+            "intro": "p(λ) = λ² − tr(A)·λ + det(A). Its roots are A's eigenvalues; if the curve never touches zero they are complex.",
+            "polynomial": "Characteristic polynomial",
+            "discriminant": "Discriminant tr² − 4·det",
+            "sumCheck": "Sum = trace",
+            "productCheck": "Product = det"
+          },
+          "stretch": {
+            "title": "How Much A Stretches Space",
+            "intro": "Six measures of stretch, ranked: the largest and smallest stretch (singular values), each column's length, the Frobenius norm and the area factor.",
+            "sigma1": "largest stretch",
+            "sigma2": "smallest stretch",
+            "col1": "column 1",
+            "col2": "column 2",
+            "frobenius": "Frobenius norm",
+            "area": "area factor"
+          },
+          "condition": {
+            "title": "Condition Number Gauge",
+            "intro": "κ = σ₁ / σ₂ on a log scale. Near 1 solving Ax = b is stable; large κ means small input errors grow, and roughly log₁₀ κ digits are lost.",
+            "digits": "Digits at risk (log₁₀ κ)",
+            "band": "Rating",
+            "bands": {
+              "well": "Well-conditioned",
+              "moderate": "Moderately conditioned",
+              "ill": "Ill-conditioned",
+              "singular": "Singular (κ = ∞)"
+            }
+          },
+          "powers": {
+            "title": "Area Factor of Repeated A",
+            "intro": "|det(Aᵏ)| = |det A|ᵏ for k = 1 to 6 on a log scale: above 1 it explodes, below 1 it fades toward 0, exactly 1 stays flat.",
+            "axis": "|det(Aᵏ)| on a log₁₀ scale",
+            "trend": "Trend",
+            "grows": "Grows without bound",
+            "fades": "Fades toward 0",
+            "steady": "Stays at 1",
+            "collapses": "Collapsed to 0"
+          }
         }
       },
       "relatedTools": {
@@ -12131,6 +12244,50 @@
         "contactPhonePlaceholder": "e.g. +1 555 123 4567",
         "contactOrganizationPlaceholder": "e.g. Acme Financial",
         "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "live3d": {
+        "cardTitle": "Live 3D Transformation of the Unit Cube",
+        "groupInputs": "Inputs",
+        "groupDeterminants": "Determinants and trace",
+        "groupOperations": "Operations",
+        "groupInverse": "Inverse",
+        "groupGeometry": "Geometry of A",
+        "matrixA": "Matrix A",
+        "matrixB": "Matrix B",
+        "detAB": "det(A × B)",
+        "traceA": "Trace of A",
+        "checkIdentity": "Check: A × A⁻¹",
+        "noInverse": "None (singular)",
+        "volume": "Volume of the transformed cube",
+        "orientation": "Orientation",
+        "orientationKept": "Preserved",
+        "orientationFlipped": "Flipped",
+        "orientationCollapsed": "Collapsed",
+        "col1Length": "Length of Aî (column 1)",
+        "col2Length": "Length of Aĵ (column 2)",
+        "columnAngle": "Angle between columns",
+        "eigenvalues": "Eigenvalues",
+        "condition": "Condition number",
+        "kind": "Transformation type",
+        "kinds": {
+          "singular": "Singular (collapses)",
+          "identity": "Identity",
+          "rotation": "Rotation",
+          "reflection": "Reflection",
+          "scaling": "Axis scaling",
+          "shear": "Shear",
+          "general": "General linear map"
+        },
+        "replay": "Replay",
+        "examples": {
+          "textbook": "Textbook pair",
+          "rotation": "90° rotation",
+          "shear": "Two shears",
+          "reflection": "Reflection and swap",
+          "scaling": "Axis scaling",
+          "inversePair": "B is A's inverse",
+          "singular": "Singular A"
+        }
       }
     },
     "molar-mass-calculator": {

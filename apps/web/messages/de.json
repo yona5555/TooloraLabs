@@ -11927,13 +11927,7 @@
         "inverseA": "Inverse von A",
         "determinantA": "Determinante von A",
         "determinantB": "Determinante von B",
-        "emptyStateMessage": "Geben Sie beide Matrizen ein und klicken Sie auf „Berechnen“, um alle Ergebnisse zu sehen.",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramTransformCaption": "Das Einheitsquadrat (gestrichelt) und das Parallelogramm, auf das Matrix A es abbildet — die Spalten von A sind genau die Punkte, an denen die beiden Kanten des Quadrats landen.",
-        "diagramBTitle": "Was Matrix B bewirkt",
-        "diagramBIntro": "Dasselbe Bild für Matrix B: das Einheitsquadrat, abgebildet durch die Spalten von B.",
-        "diagramBCaption": "Das Einheitsquadrat (gestrichelt) und das Parallelogramm, auf das Matrix B es abbildet."
+        "emptyStateMessage": "Geben Sie beide Matrizen ein und klicken Sie auf „Berechnen“, um alle Ergebnisse zu sehen."
       },
       "education": {
         "intro": {
@@ -12068,24 +12062,19 @@
           "intro": "Vier weitere Matrixbeziehungen, die eine eigene Betrachtung verdienen — jede mit ihrer eigenen Abbildung statt nur einer Formel.",
           "determinant": {
             "title": "Determinante als Fläche",
-            "description": "Die Determinante ist keine bloß auswendig zu lernende Formel — sie ist buchstäblich die Fläche des Parallelogramms, auf das eine Matrix das Einheitsquadrat abbildet (mit Vorzeichen: positiv, wenn die Orientierung erhalten bleibt, negativ, wenn die Matrix die Ebene umklappt). Eine Matrix, die den Raum streckt, hat eine Determinante mit Betrag größer als 1; eine, die den Raum staucht, hat eine Determinante zwischen 0 und 1; und eine singuläre Matrix (Determinante 0) drückt die gesamte Ebene auf eine Linie zusammen, weshalb sie Information zerstört, die sich nicht wiederherstellen lässt.",
-            "diagramCaption": "Das Bild des Einheitsquadrats unter Matrix A, mit seiner Fläche — gleich |det(A)| — schattiert und beschriftet.",
-            "arithmeticCaption": "Die beiden Diagonalprodukte: a11×a22 (Hauptdiagonale, addiert) minus a12×a21 (Nebendiagonale, subtrahiert)."
+            "description": "Die Determinante ist keine bloß auswendig zu lernende Formel — sie ist buchstäblich die Fläche des Parallelogramms, auf das eine Matrix das Einheitsquadrat abbildet (mit Vorzeichen: positiv, wenn die Orientierung erhalten bleibt, negativ, wenn die Matrix die Ebene umklappt). Eine Matrix, die den Raum streckt, hat eine Determinante mit Betrag größer als 1; eine, die den Raum staucht, hat eine Determinante zwischen 0 und 1; und eine singuläre Matrix (Determinante 0) drückt die gesamte Ebene auf eine Linie zusammen, weshalb sie Information zerstört, die sich nicht wiederherstellen lässt."
           },
           "composition": {
             "title": "Matrixmultiplikation als Verkettung von Transformationen",
-            "description": "A×B bedeutet „zuerst B anwenden, dann A auf das Ergebnis“ — zwei Matrizen zu multiplizieren ist dieselbe Operation wie ihre Transformationen nacheinander zu verketten. Das ist auch der geometrische Grund, warum A×B in der Regel nicht dasselbe ist wie B×A: eine Form zuerst mit B und dann mit A zu transformieren landet im Allgemeinen nicht an derselben Stelle wie in umgekehrter Reihenfolge — genauso wie ein Buch zu drehen und dann flach zu legen ein anderes Ergebnis liefert als es flach zu legen und dann zu drehen.",
-            "diagramCaption": "Das Einheitsquadrat, abgebildet allein durch B (orange), und dasselbe Quadrat, abgebildet durch A×B — Bs Transformation gefolgt von A (violett)."
+            "description": "A×B bedeutet „zuerst B anwenden, dann A auf das Ergebnis“ — zwei Matrizen zu multiplizieren ist dieselbe Operation wie ihre Transformationen nacheinander zu verketten. Das ist auch der geometrische Grund, warum A×B in der Regel nicht dasselbe ist wie B×A: eine Form zuerst mit B und dann mit A zu transformieren landet im Allgemeinen nicht an derselben Stelle wie in umgekehrter Reihenfolge — genauso wie ein Buch zu drehen und dann flach zu legen ein anderes Ergebnis liefert als es flach zu legen und dann zu drehen."
           },
           "inverse": {
             "title": "Die Inverse als „Rückgängig“-Transformation",
-            "description": "Wenn A das Einheitsquadrat zu einem Parallelogramm streckt, ist A⁻¹ genau die Transformation, die dieses Parallelogramm wieder zum Einheitsquadrat zusammenfaltet — geometrisch führt die Anwendung von A und dann A⁻¹ (oder umgekehrt) immer zum Ausgangspunkt zurück, was die Gleichung A×A⁻¹ = I eigentlich bedeutet. Eine singuläre Matrix (Determinante 0) hat keine Inverse, weil sie bereits Information verworfen hat, indem sie die Ebene auf eine Linie zusammengedrückt hat, und keine Transformation eine bereits kollabierte Dimension wiederherstellen kann.",
-            "diagramCaption": "Das Bild des Einheitsquadrats unter Matrix A (blau) neben dem Bild des Einheitsquadrats unter A⁻¹ (türkis) — jedes macht das andere rückgängig."
+            "description": "Wenn A das Einheitsquadrat zu einem Parallelogramm streckt, ist A⁻¹ genau die Transformation, die dieses Parallelogramm wieder zum Einheitsquadrat zusammenfaltet — geometrisch führt die Anwendung von A und dann A⁻¹ (oder umgekehrt) immer zum Ausgangspunkt zurück, was die Gleichung A×A⁻¹ = I eigentlich bedeutet. Eine singuläre Matrix (Determinante 0) hat keine Inverse, weil sie bereits Information verworfen hat, indem sie die Ebene auf eine Linie zusammengedrückt hat, und keine Transformation eine bereits kollabierte Dimension wiederherstellen kann."
           },
           "transpose": {
             "title": "Transponierte als Diagonalspiegelung",
-            "description": "Anders als die drei übrigen Operationen geht es bei der Transponierten eigentlich gar nicht um eine Raumtransformation — sie ist eine rein mechanische Neuanordnung der Matrixeinträge. Die beiden Diagonaleinträge (a₁₁ und a₂₂) bleiben genau dort, wo sie sind; die beiden Nebendiagonaleinträge (a₁₂ und a₂₁) tauschen einfach die Plätze. Das ist die gesamte Operation, weshalb sie für jede Matrix immer definiert ist, unabhängig von der Determinante.",
-            "diagramCaption": "Die vier Einträge von Matrix A: das Diagonalpaar bleibt fest, während das Nebendiagonalpaar die Plätze tauscht und Aᵀ bildet."
+            "description": "Anders als die drei übrigen Operationen geht es bei der Transponierten eigentlich gar nicht um eine Raumtransformation — sie ist eine rein mechanische Neuanordnung der Matrixeinträge. Die beiden Diagonaleinträge (a₁₁ und a₂₂) bleiben genau dort, wo sie sind; die beiden Nebendiagonaleinträge (a₁₂ und a₂₁) tauschen einfach die Plätze. Das ist die gesamte Operation, weshalb sie für jede Matrix immer definiert ist, unabhängig von der Determinante."
           }
         },
         "applications": {
@@ -12109,6 +12098,130 @@
               "description": "Viele Machine-Learning- und Statistikverfahren — von der linearen Regression bis zum Lösen simultaner Gleichungssysteme — reduzieren sich im Hintergrund auf Matrixoperationen. Die bestpassenden Koeffizienten einer linearen Regression zu finden, erfordert beispielsweise das Multiplizieren und Invertieren von Matrizen, die aus den Eingabedaten aufgebaut sind — eine Verallgemeinerung derselben Determinanten- und Inversenarithmetik, die dieser Rechner an einem 2x2-Beispiel ausführt."
             }
           ]
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "basisDrag": {
+            "title": "Basisvektoren ziehen",
+            "intro": "Ziehen Sie den roten und den grünen Punkt: Dort landen î und ĵ, also die beiden Spalten von A. Eingaben, Ergebnis und alle Diagramme der Seite folgen.",
+            "hint": "Einen der Punkte ziehen · rastet auf 0,5 ein",
+            "aria": "Ziehbare Basisvektoren der Matrix A",
+            "col1": "Aî = Spalte 1",
+            "col2": "Aĵ = Spalte 2",
+            "lengths": "Spaltenlängen",
+            "angle": "Winkel zwischen den Spalten",
+            "det": "det A",
+            "area": "Fläche des Parallelogramms",
+            "orientation": "Orientierung",
+            "kind": "Art der Abbildung"
+          },
+          "detFormula": {
+            "title": "Die Determinante, Diagonale für Diagonale",
+            "intro": "Das Produkt der Hauptdiagonale minus das Produkt der Nebendiagonale, mit den aktuellen Einträgen von A eingesetzt.",
+            "mainDiagonal": "Hauptdiagonale a₁₁ × a₂₂",
+            "antiDiagonal": "Nebendiagonale a₁₂ × a₂₁",
+            "difference": "Differenz",
+            "detA": "det A",
+            "detB": "det B (gleiche Regel)"
+          },
+          "detZones": {
+            "title": "Was die Determinante aussagt",
+            "intro": "Wo det A, det B und det(A×B) auf einer vorzeichenbehafteten Log-Skala liegen: umkehren, kollabieren, schrumpfen oder vergrößern.",
+            "axis": "Vorzeichenbehaftete Log-Skala der Determinante",
+            "areaFactor": "Flächenfaktor von A",
+            "zones": {
+              "flip": "Kehrt um",
+              "collapse": "Kollabiert",
+              "shrink": "Schrumpft",
+              "preserve": "Erhält Fläche",
+              "expand": "Vergrößert"
+            }
+          },
+          "composition": {
+            "title": "Erst B, dann A",
+            "intro": "Der Punkt (1, 1) und die Fläche des Einheitsquadrats landen nach B und dann A genau dort, wohin A×B sie in einem Schritt schickt.",
+            "start": "Start",
+            "afterB": "Nach B",
+            "afterA": "Nach A",
+            "stepB": "B anwenden",
+            "stepA": "Dann A anwenden",
+            "oneStep": "A×B in einem Schritt",
+            "detRule": "det A × det B = det(A×B)"
+          },
+          "commutativity": {
+            "title": "Spielt die Reihenfolge eine Rolle?",
+            "intro": "Jeder Eintrag von A×B neben demselben Eintrag von B×A. Schon ein ungleiches Paar beweist A×B ≠ B×A für diese Matrizen.",
+            "verdict": "Ergebnis",
+            "commute": "A×B = B×A (sie kommutieren)",
+            "noCommute": "A×B ≠ B×A"
+          },
+          "inverse": {
+            "title": "A und A⁻¹ heben sich auf",
+            "intro": "A × A⁻¹ und A⁻¹ × A live ausmultipliziert: Beide ergeben die Einheitsmatrix I, solange det A ≠ 0 ist.",
+            "adjugate": "Getauscht und negiert [a₂₂, −a₁₂; −a₂₁, a₁₁]",
+            "scale": "Faktor 1 / det A",
+            "check": "A × A⁻¹",
+            "checkOk": "= I (Einheitsmatrix)",
+            "singular": "Keine Inverse: det A = 0"
+          },
+          "transpose": {
+            "title": "A neben Aᵀ",
+            "intro": "Die beiden Nebendiagonaleinträge tauschen die Plätze; Diagonale, Determinante, Spur und Frobeniusnorm bleiben gleich.",
+            "swapped": "Getauscht a₁₂ ⇄ a₂₁",
+            "kept": "Unverändert a₁₁, a₂₂",
+            "sameDet": "det A = det Aᵀ",
+            "symmetric": "Symmetrisch (A = Aᵀ)?",
+            "yes": "Ja",
+            "no": "Nein"
+          },
+          "sensitivity": {
+            "title": "Wie empfindlich reagiert det A auf a₁₁?",
+            "intro": "det A neu berechnet mit a₁₁ um eins kleiner, wie eingegeben und um eins größer. Jeder Schritt ändert sie um genau a₂₂.",
+            "low": "a₁₁ − 1",
+            "current": "Aktuell",
+            "high": "a₁₁ + 1",
+            "step": "Änderung pro Einheit von a₁₁"
+          },
+          "eigen": {
+            "title": "Eigenwerte auf der charakteristischen Kurve",
+            "intro": "p(λ) = λ² − tr(A)·λ + det(A). Ihre Nullstellen sind die Eigenwerte von A; berührt die Kurve die Null nie, sind sie komplex.",
+            "polynomial": "Charakteristisches Polynom",
+            "discriminant": "Diskriminante tr² − 4·det",
+            "sumCheck": "Summe = Spur",
+            "productCheck": "Produkt = det"
+          },
+          "stretch": {
+            "title": "Wie stark A den Raum streckt",
+            "intro": "Sechs Streckungsmaße, sortiert: größte und kleinste Streckung (Singulärwerte), die Länge jeder Spalte, die Frobeniusnorm und der Flächenfaktor.",
+            "sigma1": "größte Streckung",
+            "sigma2": "kleinste Streckung",
+            "col1": "Spalte 1",
+            "col2": "Spalte 2",
+            "frobenius": "Frobeniusnorm",
+            "area": "Flächenfaktor"
+          },
+          "condition": {
+            "title": "Anzeige der Konditionszahl",
+            "intro": "κ = σ₁ / σ₂ auf einer Log-Skala. Nahe 1 ist das Lösen von Ax = b stabil; ein großes κ verstärkt Eingabefehler, etwa log₁₀ κ Stellen gehen verloren.",
+            "digits": "Gefährdete Stellen (log₁₀ κ)",
+            "band": "Bewertung",
+            "bands": {
+              "well": "Gut konditioniert",
+              "moderate": "Mäßig konditioniert",
+              "ill": "Schlecht konditioniert",
+              "singular": "Singulär (κ = ∞)"
+            }
+          },
+          "powers": {
+            "title": "Flächenfaktor von wiederholtem A",
+            "intro": "|det(Aᵏ)| = |det A|ᵏ für k = 1 bis 6 auf einer Log-Skala: über 1 explodiert er, unter 1 schwindet er gegen 0, bei genau 1 bleibt er konstant.",
+            "axis": "|det(Aᵏ)| auf einer log₁₀-Skala",
+            "trend": "Verlauf",
+            "grows": "Wächst unbegrenzt",
+            "fades": "Geht gegen 0",
+            "steady": "Bleibt bei 1",
+            "collapses": "Auf 0 kollabiert"
+          }
         }
       },
       "relatedTools": {
@@ -12131,6 +12244,50 @@
         "contactPhonePlaceholder": "z. B. +49 30 123456",
         "contactOrganizationPlaceholder": "z. B. Muster GmbH",
         "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
+      },
+      "live3d": {
+        "cardTitle": "Live-3D-Transformation des Einheitswürfels",
+        "groupInputs": "Eingaben",
+        "groupDeterminants": "Determinanten und Spur",
+        "groupOperations": "Operationen",
+        "groupInverse": "Inverse",
+        "groupGeometry": "Geometrie von A",
+        "matrixA": "Matrix A",
+        "matrixB": "Matrix B",
+        "detAB": "det(A × B)",
+        "traceA": "Spur von A",
+        "checkIdentity": "Probe: A × A⁻¹",
+        "noInverse": "Keine (singulär)",
+        "volume": "Volumen des transformierten Würfels",
+        "orientation": "Orientierung",
+        "orientationKept": "Erhalten",
+        "orientationFlipped": "Umgekehrt",
+        "orientationCollapsed": "Kollabiert",
+        "col1Length": "Länge von Aî (Spalte 1)",
+        "col2Length": "Länge von Aĵ (Spalte 2)",
+        "columnAngle": "Winkel zwischen den Spalten",
+        "eigenvalues": "Eigenwerte",
+        "condition": "Konditionszahl",
+        "kind": "Art der Abbildung",
+        "kinds": {
+          "singular": "Singulär (kollabiert)",
+          "identity": "Identität",
+          "rotation": "Drehung",
+          "reflection": "Spiegelung",
+          "scaling": "Achsenskalierung",
+          "shear": "Scherung",
+          "general": "Allgemeine lineare Abbildung"
+        },
+        "replay": "Erneut abspielen",
+        "examples": {
+          "textbook": "Lehrbuchpaar",
+          "rotation": "Drehung um 90°",
+          "shear": "Zwei Scherungen",
+          "reflection": "Spiegelung und Tausch",
+          "scaling": "Achsenskalierung",
+          "inversePair": "B ist die Inverse von A",
+          "singular": "Singuläres A"
+        }
       }
     },
     "molar-mass-calculator": {
