@@ -4,7 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import VolumeShapeDrag from "./VolumeShapeDrag";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import { VolumeLive3DLive } from "./VolumeLive3D";
 import ActiveShapeFormulaDiagram from "./ActiveShapeFormulaDiagram";
 import ShapeFamilyTable from "./ShapeFamilyTable";
 import ComputationStepsTimeline from "./ComputationStepsTimeline";
@@ -27,6 +28,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function VolumeEducation() {
   const t = await getTranslations("tools.volume-calculator.education");
+  const tLive = await getTranslations("tools.volume-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -38,7 +40,9 @@ export default async function VolumeEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <VolumeShapeDrag />
+        <SectionCard title={tLive("educationTitle")}>
+          <VolumeLive3DLive />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
         <div className="space-y-6">
           <ActiveShapeFormulaDiagram />

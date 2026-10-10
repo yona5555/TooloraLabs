@@ -3,7 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import AreaLiveShape from "./AreaLiveShape";
+import AreaLive3D from "./AreaLive3D";
 import AreaShareExportModal from "./AreaShareExportModal";
 import type { AreaDraft, AreaResult as Result } from "./types";
 
@@ -13,12 +13,6 @@ type Props = {
   draft: AreaDraft;
   hasCalculated: boolean;
 };
-
-function toNum(s: string): number | undefined {
-  if (!s.trim()) return undefined;
-  const n = Number(s.replace(",", "."));
-  return Number.isNaN(n) ? undefined : n;
-}
 
 export default function AreaResult({ result, digitStyle, draft, hasCalculated }: Props) {
   const t = useTranslations("tools.area-calculator.result");
@@ -49,22 +43,9 @@ export default function AreaResult({ result, digitStyle, draft, hasCalculated }:
       <div className="text-center">
         <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{fmt(result.area)}</p>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("squareUnits")}</p>
-        <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-          <AreaLiveShape
-            shape={draft.shape}
-            side={toNum(draft.side)}
-            width={toNum(draft.width)}
-            height={toNum(draft.height)}
-            base={toNum(draft.base)}
-            radius={toNum(draft.radius)}
-            semiMajorAxis={toNum(draft.semiMajorAxis)}
-            semiMinorAxis={toNum(draft.semiMinorAxis)}
-            base1={toNum(draft.base1)}
-            base2={toNum(draft.base2)}
-            angleDegrees={toNum(draft.angleDegrees)}
-          />
-          <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">{t("shapePreviewCaption")}</p>
-        </div>
+      </div>
+      <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+        <AreaLive3D draft={draft} />
       </div>
     </SectionCard>
   );
