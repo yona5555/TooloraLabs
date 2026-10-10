@@ -27644,7 +27644,11 @@
       "nav": {
         "tool": "Calculadora",
         "faq": "Preguntas frecuentes",
-        "behindTheTool": "Detrás de la herramienta"
+        "behindTheTool": "Detrás de la herramienta",
+        "models": "Modelos",
+        "totals": "Totales",
+        "patterns": "Patrones",
+        "examples": "Ejemplos resueltos"
       },
       "form": {
         "inputTitle": "Ajustes de la Tabla",
@@ -27654,7 +27658,16 @@
         "maxMultiplierLabel": "Hasta",
         "rangeStartLabel": "Desde",
         "rangeEndLabel": "Hasta",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "quickNumbers": "Tablas rápidas",
+        "quickRanges": "Cuadrículas rápidas",
+        "selectedFact": "Operación seleccionada",
+        "rowLabel": "Fila",
+        "columnLabel": "Columna",
+        "multiplierLabel": "Multiplicador",
+        "squaresTitle": "Diferencia de cuadrados",
+        "squaresExact": "Ambos factores tienen la misma paridad: el producto es el cuadrado central menos un cuadrado pequeño.",
+        "squaresOdd": "Los factores difieren en paridad: parte de la operación con un grupo menos."
       },
       "result": {
         "heading": "Tabla de Multiplicar",
@@ -27662,12 +27675,18 @@
         "invalidMultiplier": "Introduce un número entero entre 1 y 100.",
         "invalidRange": "Introduce un rango válido, con el número inicial no mayor que el número final.",
         "rangeTooLarge": "Elige un rango de 30 números o menos para una cuadrícula legible.",
-        "print": "Imprimir"
-      },
-      "quickReference": {
-        "title": "El cálculo",
-        "intro": "Cada celda es simplemente el número de fila multiplicado por el número de columna.",
-        "commutativeNote": "La multiplicación es conmutativa: intercambiar el orden de los dos números nunca cambia el producto."
+        "print": "Imprimir",
+        "selected": "Operación seleccionada",
+        "groups": "{b} saltos de {a} en la recta numérica",
+        "flowAria": "Contar de {a} en {a}, {b} veces",
+        "prev": "Multiplicador anterior",
+        "next": "Multiplicador siguiente",
+        "play": "Reproducir",
+        "pause": "Pausa",
+        "tapHint": "Toca cualquier producto para seleccionarlo; todos los gráficos de abajo lo siguen.",
+        "legendSelected": "Seleccionado",
+        "legendMirror": "Espejo (b × a)",
+        "legendSquares": "Cuadrados"
       },
       "education": {
         "intro": {
@@ -27711,6 +27730,14 @@
             {
               "question": "¿Por qué hay un límite en el tamaño del rango que puedo generar?",
               "answer": "Una cuadrícula para un rango muy grande de números se vuelve poco práctica para mostrar o imprimir legiblemente en una sola página, por lo que esta herramienta limita el rango a 30 números (una cuadrícula de 30×30), que cubre cómodamente los rangos típicamente usados para gráficos de referencia y materiales de clase."
+            },
+            {
+              "question": "¿Cuántos números distintos hay en una tabla de multiplicar de 10 × 10?",
+              "answer": "Solo 42 de las 100 celdas tienen valores distintos, y la tabla de 12 × 12 tiene 59 valores distintos en 144 celdas, porque productos como 12 o 24 aparecen varias veces. Paul Erdős demostró que esta proporción tiende a cero a medida que crece la tabla, y Kevin Ford halló su ritmo exacto de descenso en 2008."
+            },
+            {
+              "question": "¿Qué es la prueba del nueve?",
+              "answer": "Es una comprobación rápida de una multiplicación: sustituye cada factor por su raíz digital (suma sus cifras hasta que quede una), multiplica esas raíces y vuelve a tomar la raíz digital. Si no coincide con la raíz digital de tu respuesta, la respuesta es incorrecta. Que coincida no demuestra que sea correcta, pero detecta la mayoría de los errores."
             }
           ]
         },
@@ -27765,14 +27792,40 @@
                 "online": "No — los programas del departamento se imparten en el campus de AUB en Beirut, Líbano."
               }
             ]
+          },
+          "method": {
+            "title": "Cómo calcula la herramienta",
+            "paragraph": "Cada valor de esta página es un cálculo exacto con números enteros hecho en tu navegador: la propia tabla, los totales de fila y de cuadrícula (con las fórmulas cerradas a × n(n+1)/2 y (Σ)²), los ciclos de las unidades y de la raíz digital (a partir del máximo común divisor con 10 y 9), los pares de factores y los factores primos del producto seleccionado, y el número de productos distintos de la cuadrícula. Las mismas funciones están cubiertas por pruebas automáticas."
           }
         },
         "references": {
           "title": "Referencias Científicas",
-          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
-          "note": "Una historia académica de las matemáticas babilónicas, incluido el sistema numérico de base 60 y las antiguas tablas de multiplicar cuneiformes que produjo.",
-          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
-          "readOriginal": "Ver la Referencia"
+          "readOriginal": "Ver la Referencia",
+          "items": [
+            {
+              "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+              "note": "Historia académica de las matemáticas babilónicas, con el sistema sexagesimal y las tablas de multiplicar cuneiformes que produjo.",
+              "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq"
+            },
+            {
+              "citation": "Ford, K. (2008). The distribution of integers with a divisor in a given interval. Annals of Mathematics, 168(2), 367–433. DOI: 10.4007/annals.2008.168.367",
+              "note": "Determina el orden de crecimiento del número de productos distintos en una tabla de N × N, el problema planteado por Erdős.",
+              "url": "https://doi.org/10.4007/annals.2008.168.367"
+            },
+            {
+              "citation": "National Research Council (2001). Adding It Up: Helping Children Learn Mathematics. National Academy Press. DOI: 10.17226/9822",
+              "note": "El informe de referencia sobre cómo los niños adquieren fluidez con los hechos numéricos, incluidas las estrategias derivadas y la propiedad conmutativa.",
+              "url": "https://doi.org/10.17226/9822"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Avisos",
+          "items": [
+            "Todos los resultados son cálculos exactos con enteros hechos en tu navegador; nada de lo que introduces se envía a un servidor.",
+            "Las tablas individuales llegan hasta × 100 y las cuadrículas hasta 30 × 30 números, para que cada gráfico e impresión sea legible.",
+            "La escalera de memorización sigue atajos habituales en el aula; es una ayuda de estudio, no sustituye la guía del docente ni del currículo."
+          ]
         }
       },
       "shareExport": {
@@ -27796,6 +27849,213 @@
         "inputSectionTitle": "Entrada",
         "resultSectionTitle": "Resultado",
         "sentence": "Tabla de multiplicar generada."
+      },
+      "relatedTools": {
+        "title": "Herramientas de matemáticas relacionadas"
+      },
+      "sidebar": {
+        "title": "Datos de un vistazo",
+        "note": "En vivo a partir de la operación y la tabla seleccionadas.",
+        "fact": "Operación seleccionada",
+        "primes": "Factores primos",
+        "pairs": "Pares de factores",
+        "root": "Raíz digital",
+        "units": "Ciclo de las unidades",
+        "rowSum": "Suma de la fila de {a}",
+        "gridSum": "Suma de la cuadrícula {lo}–{hi}",
+        "distinct": "Productos distintos",
+        "hard": "Operaciones difíciles restantes"
+      },
+      "ind": {
+        "worked": "Ejemplo resuelto",
+        "empty": "Corrige el dato de arriba para ver los gráficos.",
+        "area": {
+          "title": "Laboratorio del modelo de área",
+          "heading": "{a} filas × {b} columnas",
+          "intro": "Arrastra el punto verde: el área del rectángulo es el producto, dividida en dos productos parciales sencillos.",
+          "rowFact": "Rectángulo",
+          "rowSplit": "Divide las filas",
+          "rowLow": "Primera franja",
+          "rowHigh": "Segunda franja",
+          "rowResult": "Área",
+          "outside": "Tu operación supera este tablero de {size} × {size}; el punto marca su esquina.",
+          "legendLow": "{n} filas",
+          "legendHigh": "{n} filas",
+          "dragHint": "Arrastra el punto"
+        },
+        "bars": {
+          "title": "Productos de la fila",
+          "heading": "La tabla del {a} en barras",
+          "intro": "Cada barra es un producto y crece siempre en el mismo paso. Toca una barra para seleccionarla.",
+          "rowSelected": "Seleccionado",
+          "rowStep": "Paso por barra",
+          "rowTallest": "Barra más alta",
+          "rowHeight": "Razón de altura",
+          "rowResult": "Altura seleccionada"
+        },
+        "array": {
+          "title": "Modelo de matriz",
+          "heading": "{a} × {b} en puntos, en ambos sentidos",
+          "intro": "Los mismos puntos ordenados en filas de un factor o del otro; girar la matriz nunca cambia el total.",
+          "rowLeft": "{b} grupos de {a}",
+          "rowRight": "{a} grupos de {b}",
+          "rowDots": "Puntos en cada matriz",
+          "rowResult": "Propiedad conmutativa",
+          "left": "{b} filas de {a}",
+          "right": "{a} filas de {b}",
+          "more": "+ {n} filas más"
+        },
+        "balance": {
+          "title": "Balanza distributiva",
+          "heading": "Descompón {b} y mantén {a} × {b} en equilibrio",
+          "intro": "Ajusta las dos partes con los deslizadores; la barra solo queda nivelada si las partes suman el multiplicador.",
+          "sliderC": "Primera parte c",
+          "sliderD": "Segunda parte d",
+          "rowLeft": "Platillo izquierdo",
+          "rowRight": "Platillo derecho",
+          "rowDiff": "Derecho − izquierdo",
+          "rowRule": "Partes",
+          "rowResult": "Barra",
+          "balanced": "En equilibrio",
+          "tipped": "Inclinada: c + d ≠ b",
+          "note": "División sencilla: {a}×{c} = {left}, más {right}"
+        },
+        "trio": {
+          "title": "Operaciones vecinas",
+          "heading": "Un grupo menos y un grupo más de {a}",
+          "intro": "Las operaciones vecinas difieren de la seleccionada en exactamente un grupo, así que una operación conocida desbloquea dos más.",
+          "rowNow": "Seleccionado",
+          "rowPrev": "Un grupo menos",
+          "rowNext": "Un grupo más",
+          "rowResult": "Paso",
+          "prev": "Abajo",
+          "now": "Seleccionado",
+          "next": "Arriba"
+        },
+        "stack": {
+          "title": "Total de la fila",
+          "heading": "Todos los productos de {a} suman {sum}",
+          "intro": "La fila completa apilada de extremo a extremo; equivale al número por la suma de los multiplicadores.",
+          "rowMultipliers": "Suma de multiplicadores",
+          "rowTimes": "Por el número",
+          "rowSelected": "Parte seleccionada",
+          "rowResult": "Total de la fila"
+        },
+        "formula": {
+          "title": "Fórmula del total de la cuadrícula",
+          "heading": "Todas las celdas de la cuadrícula {lo}–{hi} sumadas",
+          "intro": "Como cada celda es fila × columna, toda la cuadrícula suma el cuadrado de la suma de un lado.",
+          "rowCount": "Celdas",
+          "rowSide": "Suma de un lado",
+          "rowSquare": "Elévala al cuadrado",
+          "rowMean": "Celda media",
+          "rowResult": "Total de la cuadrícula",
+          "boxSide": "Un lado",
+          "boxSquare": "Al cuadrado",
+          "boxTotal": "Todas las celdas",
+          "cells": "{n} celdas"
+        },
+        "units": {
+          "title": "Ciclo de las unidades",
+          "heading": "Las unidades de {a} se repiten cada {period}",
+          "intro": "La última cifra de cada producto depende solo de la última cifra del número, por eso recorre un ciclo fijo.",
+          "rowUnits": "Última cifra del número",
+          "rowGcd": "Factor común con 10",
+          "rowPeriod": "Longitud del ciclo",
+          "rowSelected": "El seleccionado termina en",
+          "rowResult": "Cifras usadas",
+          "cycle": "se repite cada {n}"
+        },
+        "roots": {
+          "title": "Franja de raíces digitales",
+          "heading": "Las raíces digitales de {a} se repiten cada {period}",
+          "intro": "Suma las cifras hasta que quede una; los colores se repiten en un ciclo corto y comprueban cualquier producto.",
+          "rowProduct": "Raíz del producto",
+          "rowA": "Raíz del primer factor",
+          "rowB": "Raíz del segundo factor",
+          "rowCheck": "Multiplica las raíces",
+          "rowResult": "Prueba del nueve",
+          "pass": "La prueba se cumple",
+          "fail": "La prueba falla"
+        },
+        "pairs": {
+          "title": "Pares de factores equivalentes",
+          "heading": "{p} escrito de {n} formas",
+          "intro": "Cada par da el mismo producto; las etiquetas indican qué pares aparecen en tu tabla.",
+          "rowPrimes": "Factores primos",
+          "rowDivisors": "Número de divisores",
+          "rowPairs": "Pares de factores",
+          "rowCells": "Celdas en la cuadrícula {lo}–{hi}",
+          "rowResult": "Formas de escribirlo",
+          "inGrid": "En tu tabla",
+          "outGrid": "Fuera de la tabla",
+          "more": "+ {n} pares más"
+        },
+        "stairs": {
+          "title": "Escalera de memorización",
+          "heading": "De {all} operaciones a {left} por memorizar",
+          "intro": "Cada atajo elimina operaciones que ya no necesitas aprender de memoria en la tabla {lo}–{hi}.",
+          "commutative": "a × b = b × a",
+          "onesTens": "Reglas de × 1 y × 10",
+          "twosFives": "× 2 dobles, × 5 mitades",
+          "ninesElevens": "Patrones de × 9 y × 11",
+          "squares": "Cuadrados",
+          "rowResult": "Esfuerzo ahorrado",
+          "hardList": "Por memorizar:",
+          "short": {
+            "all": "Todas",
+            "commutative": "Cambio",
+            "onesTens": "×1 ×10",
+            "twosFives": "×2 ×5",
+            "ninesElevens": "×9 ×11",
+            "squares": "Cuadrados"
+          }
+        },
+        "trend": {
+          "title": "Tendencia de productos distintos",
+          "heading": "La tabla 1–{n} contiene {d} valores distintos en {cells} celdas",
+          "intro": "Al crecer la tabla dominan los valores repetidos y la proporción de productos distintos sigue bajando (problema de la tabla de multiplicar de Erdős).",
+          "slider": "Tamaño de la tabla",
+          "rowCells": "Celdas",
+          "rowDistinct": "Valores distintos",
+          "rowShare": "Proporción",
+          "rowYours": "Tu cuadrícula {lo}–{hi}",
+          "rowResult": "Proporción distinta"
+        }
+      },
+      "examples": {
+        "title": "Ejemplos resueltos",
+        "intro": "Tres problemas clásicos resueltos paso a paso con las mismas cuentas que usan los gráficos.",
+        "answer": "Respuesta",
+        "area": {
+          "title": "7 × 8 sin memorizar",
+          "scenario": "Un alumno olvida 7 × 8 y lo reconstruye con operaciones más fáciles.",
+          "s1": "Descompón el 7",
+          "s2": "Primer producto parcial",
+          "s3": "Segundo producto parcial",
+          "s4": "Suma las partes",
+          "s5": "Comprueba con raíces digitales",
+          "takeaway": "Cualquier operación se reconstruye con las del × 5 y × 2 y se comprueba en segundos."
+        },
+        "nines": {
+          "title": "La tabla del 9 completa",
+          "scenario": "Un docente quiere el total de 9 × 1 a 9 × 12 para un acertijo.",
+          "s1": "Suma los multiplicadores",
+          "s2": "Multiplica por 9",
+          "s3": "Las unidades bajan",
+          "s4": "Las cifras siempre suman 9",
+          "takeaway": "Una multiplicación sustituye doce sumas, y los patrones sirven de autocomprobación."
+        },
+        "grid": {
+          "title": "Sumar la tabla 10 × 10 completa",
+          "scenario": "Una clase suma todos los números de una tabla de multiplicar del 1 al 10.",
+          "s1": "Cuenta las celdas",
+          "s2": "Suma un lado",
+          "s3": "Elévalo al cuadrado",
+          "s4": "Celda media",
+          "s5": "Valores distintos",
+          "takeaway": "La tabla tiene 100 celdas pero solo 42 números distintos, porque muchos productos se repiten."
+        }
       }
     },
     "speech-word-count-calculator": {

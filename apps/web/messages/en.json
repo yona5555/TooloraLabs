@@ -27644,7 +27644,11 @@
       "nav": {
         "tool": "Calculator",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Behind the Tool",
+        "models": "Models",
+        "totals": "Totals",
+        "patterns": "Patterns",
+        "examples": "Worked Examples"
       },
       "form": {
         "inputTitle": "Table Settings",
@@ -27654,7 +27658,16 @@
         "maxMultiplierLabel": "Up To",
         "rangeStartLabel": "From",
         "rangeEndLabel": "To",
-        "clear": "Clear"
+        "clear": "Clear",
+        "quickNumbers": "Quick tables",
+        "quickRanges": "Quick grids",
+        "selectedFact": "Selected fact",
+        "rowLabel": "Row",
+        "columnLabel": "Column",
+        "multiplierLabel": "Multiplier",
+        "squaresTitle": "Difference of squares",
+        "squaresExact": "Both factors share parity, so the product is the middle square minus a small square.",
+        "squaresOdd": "The factors differ in parity, so step from the fact one group below instead."
       },
       "result": {
         "heading": "Multiplication Table",
@@ -27662,12 +27675,18 @@
         "invalidMultiplier": "Enter a whole number between 1 and 100.",
         "invalidRange": "Enter a valid range, with the starting number no greater than the ending number.",
         "rangeTooLarge": "Choose a range of 30 numbers or fewer for a readable grid.",
-        "print": "Print"
-      },
-      "quickReference": {
-        "title": "The Math",
-        "intro": "Each cell is simply the row number multiplied by the column number.",
-        "commutativeNote": "Multiplication is commutative: swapping the order of the two numbers never changes the product."
+        "print": "Print",
+        "selected": "Selected fact",
+        "groups": "{b} jumps of {a} on the number line",
+        "flowAria": "Skip counting by {a}, {b} times",
+        "prev": "Previous multiplier",
+        "next": "Next multiplier",
+        "play": "Play",
+        "pause": "Pause",
+        "tapHint": "Tap any product to make it the selected fact; every chart below follows it.",
+        "legendSelected": "Selected",
+        "legendMirror": "Mirror (b × a)",
+        "legendSquares": "Squares"
       },
       "education": {
         "intro": {
@@ -27711,6 +27730,14 @@
             {
               "question": "Why is there a limit on how large a range I can generate?",
               "answer": "A grid for a very large range of numbers becomes impractically large to display or print legibly on a single page, so this tool caps the range at 30 numbers (a 30×30 grid), which comfortably covers the ranges typically used for reference charts and classroom materials."
+            },
+            {
+              "question": "How many different numbers are in a 10 × 10 multiplication table?",
+              "answer": "Only 42 of the 100 cells hold different values, and the 12 × 12 table has 59 different values in 144 cells, because products such as 12 or 24 appear several times. Paul Erdős proved that this share keeps shrinking towards zero as the table grows, and Kevin Ford found its exact rate of decline in 2008."
+            },
+            {
+              "question": "What is casting out nines?",
+              "answer": "It is a quick check of a multiplication: replace each factor by its digital root (add its digits until one digit remains), multiply those roots and take the digital root again. If the result does not match the digital root of your answer, the answer is wrong. A match does not prove the answer right, but it catches most slips."
             }
           ]
         },
@@ -27765,14 +27792,40 @@
                 "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
               }
             ]
+          },
+          "method": {
+            "title": "How the Tool Calculates",
+            "paragraph": "Every value on this page is an exact whole-number calculation done in your browser: the table itself, the row and grid totals (using the closed formulas a × n(n+1)/2 and (Σ)²), the units-digit and digital-root cycles (from the greatest common divisor with 10 and 9), the factor pairs and prime factors of the selected product, and the count of distinct products in the grid. The same functions are covered by automated tests."
           }
         },
         "references": {
           "title": "Scientific References",
-          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
-          "note": "A scholarly history of Babylonian mathematics, including the base-60 numeral system and the ancient cuneiform multiplication tables it produced.",
-          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
-          "readOriginal": "View the Reference"
+          "readOriginal": "View the Reference",
+          "items": [
+            {
+              "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+              "note": "A scholarly history of Babylonian mathematics, including the base-60 numeral system and the cuneiform multiplication tables it produced.",
+              "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq"
+            },
+            {
+              "citation": "Ford, K. (2008). The distribution of integers with a divisor in a given interval. Annals of Mathematics, 168(2), 367–433. DOI: 10.4007/annals.2008.168.367",
+              "note": "Settles the order of growth of the number of distinct products in an N × N multiplication table, the problem posed by Erdős.",
+              "url": "https://doi.org/10.4007/annals.2008.168.367"
+            },
+            {
+              "citation": "National Research Council (2001). Adding It Up: Helping Children Learn Mathematics. National Academy Press. DOI: 10.17226/9822",
+              "note": "The reference report on how children build fluency with number facts, including strategies such as derived facts and the commutative property.",
+              "url": "https://doi.org/10.17226/9822"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Notices",
+          "items": [
+            "All results are exact whole-number calculations made in your browser; nothing you enter is sent to a server.",
+            "Single tables go up to × 100 and grids up to 30 × 30 numbers, so that every chart and printout stays readable.",
+            "The memorisation staircase follows common classroom shortcuts; it is a study aid, not a replacement for a teacher's or curriculum's guidance."
+          ]
         }
       },
       "shareExport": {
@@ -27796,6 +27849,213 @@
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result",
         "sentence": "Multiplication table generated."
+      },
+      "relatedTools": {
+        "title": "Related math tools"
+      },
+      "sidebar": {
+        "title": "Facts at a glance",
+        "note": "Live from the selected fact and table.",
+        "fact": "Selected fact",
+        "primes": "Prime factors",
+        "pairs": "Factor pairs",
+        "root": "Digital root",
+        "units": "Units-digit cycle",
+        "rowSum": "Row sum of {a}",
+        "gridSum": "Grid sum {lo}–{hi}",
+        "distinct": "Distinct products",
+        "hard": "Hard facts left"
+      },
+      "ind": {
+        "worked": "Worked example",
+        "empty": "Fix the input above to see the charts.",
+        "area": {
+          "title": "Area Model Lab",
+          "heading": "{a} rows × {b} columns",
+          "intro": "Drag the green handle: the rectangle's area is the product, cut into two friendly partial products.",
+          "rowFact": "Rectangle",
+          "rowSplit": "Split the rows",
+          "rowLow": "First band",
+          "rowHigh": "Second band",
+          "rowResult": "Area",
+          "outside": "Your fact is larger than this {size} × {size} board; the handle shows its corner.",
+          "legendLow": "{n} rows",
+          "legendHigh": "{n} rows",
+          "dragHint": "Drag the handle"
+        },
+        "bars": {
+          "title": "Products of the Row",
+          "heading": "The {a} times table as bars",
+          "intro": "Each bar is one product; it grows by the same step every time. Tap a bar to select it.",
+          "rowSelected": "Selected",
+          "rowStep": "Step per bar",
+          "rowTallest": "Tallest bar",
+          "rowHeight": "Height ratio",
+          "rowResult": "Selected height"
+        },
+        "array": {
+          "title": "Array Model",
+          "heading": "{a} × {b} as dots both ways",
+          "intro": "The same dots arranged in rows of one factor or the other; turning the array never changes the count.",
+          "rowLeft": "{b} groups of {a}",
+          "rowRight": "{a} groups of {b}",
+          "rowDots": "Dots in each array",
+          "rowResult": "Commutative law",
+          "left": "{b} rows of {a}",
+          "right": "{a} rows of {b}",
+          "more": "+ {n} more rows"
+        },
+        "balance": {
+          "title": "Distributive Balance",
+          "heading": "Break {b} apart and keep {a} × {b} balanced",
+          "intro": "Set the two parts with the sliders; the beam stays level only when the parts add back to the multiplier.",
+          "sliderC": "First part c",
+          "sliderD": "Second part d",
+          "rowLeft": "Left pan",
+          "rowRight": "Right pan",
+          "rowDiff": "Right − left",
+          "rowRule": "Parts",
+          "rowResult": "Beam",
+          "balanced": "Balanced",
+          "tipped": "Tipped: c + d ≠ b",
+          "note": "Friendly split: {a}×{c} = {left}, plus {right}"
+        },
+        "trio": {
+          "title": "Neighbouring Facts",
+          "heading": "One group less, one group more of {a}",
+          "intro": "The facts on either side differ from the selected one by exactly one group, so one known fact unlocks two more.",
+          "rowNow": "Selected",
+          "rowPrev": "One group less",
+          "rowNext": "One group more",
+          "rowResult": "Step",
+          "prev": "Below",
+          "now": "Selected",
+          "next": "Above"
+        },
+        "stack": {
+          "title": "Row Total",
+          "heading": "All products of {a} add up to {sum}",
+          "intro": "The whole row stacked end to end; it equals the number times the sum of the multipliers.",
+          "rowMultipliers": "Sum of multipliers",
+          "rowTimes": "Times the number",
+          "rowSelected": "Selected share",
+          "rowResult": "Row total"
+        },
+        "formula": {
+          "title": "Grid Total Formula",
+          "heading": "Every cell of the {lo}–{hi} grid added together",
+          "intro": "Because each cell is row × column, the whole square grid adds up to the square of one side's sum.",
+          "rowCount": "Cells",
+          "rowSide": "Sum of one side",
+          "rowSquare": "Square it",
+          "rowMean": "Average cell",
+          "rowResult": "Grid total",
+          "boxSide": "One side",
+          "boxSquare": "Squared",
+          "boxTotal": "All cells",
+          "cells": "{n} cells"
+        },
+        "units": {
+          "title": "Units-Digit Cycle",
+          "heading": "The units digits of {a} repeat every {period}",
+          "intro": "The last digit of each product depends only on the number's own last digit, so it runs in a fixed loop.",
+          "rowUnits": "Last digit of the number",
+          "rowGcd": "Shared factor with 10",
+          "rowPeriod": "Cycle length",
+          "rowSelected": "Selected ends in",
+          "rowResult": "Digits used",
+          "cycle": "repeats every {n}"
+        },
+        "roots": {
+          "title": "Digital-Root Strip",
+          "heading": "Digital roots of {a} repeat every {period}",
+          "intro": "Add the digits until one remains; the colours repeat in a short cycle and give a quick check of any product.",
+          "rowProduct": "Product's root",
+          "rowA": "First factor's root",
+          "rowB": "Second factor's root",
+          "rowCheck": "Multiply the roots",
+          "rowResult": "Casting out nines",
+          "pass": "Check passes",
+          "fail": "Check fails"
+        },
+        "pairs": {
+          "title": "Equivalent Factor Pairs",
+          "heading": "{p} written {n} ways",
+          "intro": "Every pair here gives the same product; the tags show which pairs appear in your table.",
+          "rowPrimes": "Prime factors",
+          "rowDivisors": "Number of divisors",
+          "rowPairs": "Factor pairs",
+          "rowCells": "Cells in {lo}–{hi} grid",
+          "rowResult": "Ways to write it",
+          "inGrid": "In your table",
+          "outGrid": "Outside table",
+          "more": "+ {n} more pairs"
+        },
+        "stairs": {
+          "title": "Memorisation Staircase",
+          "heading": "From {all} facts down to {left} to memorise",
+          "intro": "Each shortcut removes facts you no longer need to learn by heart in the {lo}–{hi} table.",
+          "commutative": "a × b = b × a",
+          "onesTens": "× 1 and × 10 rules",
+          "twosFives": "× 2 doubles, × 5 halves",
+          "ninesElevens": "× 9 and × 11 patterns",
+          "squares": "Squares",
+          "rowResult": "Workload saved",
+          "hardList": "Left to memorise:",
+          "short": {
+            "all": "All cells",
+            "commutative": "Swap",
+            "onesTens": "×1 ×10",
+            "twosFives": "×2 ×5",
+            "ninesElevens": "×9 ×11",
+            "squares": "Squares"
+          }
+        },
+        "trend": {
+          "title": "Distinct Products Trend",
+          "heading": "The 1–{n} table holds {d} different values in {cells} cells",
+          "intro": "As the table grows, repeated values take over and the share of different products keeps falling (Erdős's multiplication table problem).",
+          "slider": "Table size",
+          "rowCells": "Cells",
+          "rowDistinct": "Different values",
+          "rowShare": "Share",
+          "rowYours": "Your {lo}–{hi} grid",
+          "rowResult": "Distinct share"
+        }
+      },
+      "examples": {
+        "title": "Worked Examples",
+        "intro": "Three classic problems solved step by step with the same math the charts use.",
+        "answer": "Answer",
+        "area": {
+          "title": "7 × 8 without memorising",
+          "scenario": "A student forgets 7 × 8 and rebuilds it from easier facts.",
+          "s1": "Break 7 apart",
+          "s2": "First partial product",
+          "s3": "Second partial product",
+          "s4": "Add the parts",
+          "s5": "Check by digital roots",
+          "takeaway": "Any fact can be rebuilt from × 5 and × 2 facts, then checked in seconds."
+        },
+        "nines": {
+          "title": "The whole 9 times table",
+          "scenario": "A teacher wants the total of 9 × 1 through 9 × 12 for a puzzle.",
+          "s1": "Add the multipliers",
+          "s2": "Multiply by 9",
+          "s3": "Units digits count down",
+          "s4": "Digit sums are always 9",
+          "takeaway": "One multiplication replaces twelve additions, and the patterns double as a self-check."
+        },
+        "grid": {
+          "title": "Adding the full 10 × 10 chart",
+          "scenario": "A class adds every number on a 1–10 multiplication chart.",
+          "s1": "Count the cells",
+          "s2": "Sum one side",
+          "s3": "Square it",
+          "s4": "Average cell",
+          "s5": "Different values",
+          "takeaway": "The chart has 100 cells but only 42 different numbers, because many products repeat."
+        }
       }
     },
     "speech-word-count-calculator": {
