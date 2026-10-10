@@ -4,19 +4,17 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import NotepadConceptDiagram from "./NotepadConceptDiagram";
 
-type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
 type ApplicationItem = { title: string; description: string };
 
 export default async function NotepadEducation() {
   const t = await getTranslations("tools.notepad-calculator.education");
 
-  const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
   const applicationItems = t.raw("applications.items") as ApplicationItem[];
   const faqItems = t.raw("faq.items") as FAQItem[];
+  const notices = t.raw("notices.items") as string[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
   return (
@@ -24,7 +22,6 @@ export default async function NotepadEducation() {
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <NotepadConceptDiagram />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -37,28 +34,6 @@ export default async function NotepadEducation() {
             </div>
           ))}
         </dl>
-      </InfoSection>
-
-      <InfoSection title={t("examples.title")}>
-        <p>{t("examples.intro")}</p>
-        <div dir="ltr" className="overflow-x-auto">
-          <table className="w-full min-w-[420px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-current/30 text-start">
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnCalculation")}</th>
-                <th className="px-3 py-2 text-start font-semibold">{t("examples.columnResult")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exampleRows.map((row) => (
-                <tr key={row.calculation} className="border-b border-current/10">
-                  <td className="px-3 py-2.5">{row.calculation}</td>
-                  <td className="px-3 py-2.5 font-semibold">{row.result}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -108,6 +83,14 @@ export default async function NotepadEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={t("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          {notices.map((n) => (
+            <li key={n}>{n}</li>
+          ))}
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

@@ -20524,39 +20524,55 @@
       "nav": {
         "tool": "Notas",
         "faq": "Preguntas frecuentes",
-        "behindTheTool": "Detrás de la herramienta"
-      },
-      "aboveFold": {
-        "quickReference": {
-          "title": "Cómo funciona la evaluación línea por línea",
-          "intro": "Cualquier línea que coincida con \"nombre = expresión\" define una variable que las líneas siguientes pueden usar por su nombre; cualquier otra línea se evalúa como un cálculo independiente.",
-          "variableHint": "Las líneas que son solo notas o títulos simplemente no muestran resultado — eso es lo esperado, no un error."
-        },
-        "conceptDiagram": {
-          "title": "Orden de las operaciones",
-          "intro": "Toda expresión que evalúa esta herramienta — en una línea de notas o en la Calculadora Gráfica — sigue el mismo orden fijo: primero los paréntesis, luego la multiplicación y la división, y por último la suma y la resta.",
-          "step": {
-            "parens": "Primero los paréntesis",
-            "multiply": "Luego se multiplica",
-            "result": "Resultado"
-          }
-        }
+        "behindTheTool": "Detrás de la herramienta",
+        "overview": "Resumen",
+        "evaluation": "Evaluación",
+        "whatIf": "Qué pasaría si",
+        "examples": "Ejemplos",
+        "notices": "Avisos"
       },
       "form": {
         "inputTitle": "Notas",
         "inputLabel": "Texto de notas",
         "inputPlaceholder": "Alquiler\nrent = 1200\nutilities = 85\ntotal = rent + utilities\ndividido entre 3 compañeros de piso:\ntotal / 3",
+        "clear": "Borrar",
+        "samples": "Cargar una nota de ejemplo",
         "snippet": {
-          "splitBill": "Dividir una cuenta",
-          "tip": "Cálculo de propina",
-          "unitPrice": "Precio unitario"
+          "trip": "Presupuesto de viaje",
+          "loan": "Cuota de préstamo",
+          "tip": "Propina y reparto",
+          "splitBill": "Dividir el alquiler"
         },
-        "clear": "Borrar"
+        "syntaxTitle": "Qué puede contener una línea",
+        "syntaxHint": "\"name = expression\" guarda un valor para las líneas siguientes; cualquier otra línea se calcula por sí sola; las líneas de texto quedan como notas.",
+        "insert": "Insertar esta línea",
+        "fn": {
+          "root": "Raíz cuadrada",
+          "power": "Potencia",
+          "abs": "Valor absoluto",
+          "log10": "Log base 10",
+          "ln": "Log natural",
+          "exp": "e elevado a x",
+          "trig": "Seno (radianes)",
+          "max": "Mayor de dos"
+        }
       },
       "result": {
         "heading": "Resultados",
         "noCalculations": "Todavía no hay nada que calcular — escribe una expresión en cualquier línea, como 2 + 2 o rent = 1200.",
-        "calculatedCount": "{count, plural, one {# línea calculada} other {# líneas calculadas}}"
+        "calculatedCount": "{count, plural, one {# línea calculada} other {# líneas calculadas}}",
+        "bottomLine": "Resultado final",
+        "bottomOf": "{line} · {name}",
+        "expression": "cálculo",
+        "coverage": "Proporción de líneas calculadas",
+        "coverageLine": "{calc} de {total} líneas calculadas ({pct})",
+        "tweak": {
+          "title": "Ajusta las entradas",
+          "intro": "Cada entrada escrita con botones − / + que reescriben su línea un 10%; la nota y todos los indicadores se actualizan al instante.",
+          "none": "Aún no hay entradas: añade una línea como price = 20 encima del resultado final.",
+          "down": "Bajar {name} un 10%",
+          "up": "Subir {name} un 10%"
+        }
       },
       "education": {
         "intro": {
@@ -20583,30 +20599,6 @@
             {
               "name": "Nota",
               "description": "Cualquier línea que no sea una expresión o asignación válida — texto normal, un título o una línea en blanco — que la herramienta deja tal cual, sin mostrar resultado."
-            }
-          ]
-        },
-        "examples": {
-          "title": "Ejemplos resueltos",
-          "intro": "Algunas líneas y a qué se evalúan.",
-          "columnCalculation": "Línea",
-          "columnResult": "Resultado",
-          "rows": [
-            {
-              "calculation": "3 + 4 * 2",
-              "result": "11"
-            },
-            {
-              "calculation": "price = 19.99",
-              "result": "19.99"
-            },
-            {
-              "calculation": "price * 3",
-              "result": "59.97"
-            },
-            {
-              "calculation": "tip = 42 * 0.18",
-              "result": "7.56"
             }
           ]
         },
@@ -20712,6 +20704,15 @@
           "note": "La referencia estándar sobre el análisis sintáctico descendente recursivo y la evaluación por precedencia de operadores — la técnica general detrás de leer una línea como \"rent = 1200 + utilities\" y evaluarla correctamente.",
           "url": "https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000003472",
           "readOriginal": "Sobre Compilers: Principles, Techniques, and Tools"
+        },
+        "notices": {
+          "title": "Avisos",
+          "items": [
+            "Los resultados se redondean a 8 decimales al mostrarse; las líneas siguientes usan el valor completo en coma flotante.",
+            "sin, cos y tan usan radianes; log es en base 10 y ln es el logaritmo natural.",
+            "Esta nota es una herramienta educativa y cotidiana: revisa las cifras antes de usarlas en decisiones financieras, legales o contractuales.",
+            "Tus notas se quedan en esta pestaña del navegador; nada de lo que escribes se envía a un servidor."
+          ]
         }
       },
       "relatedTools": {
@@ -20737,6 +20738,248 @@
         "linesTableTitle": "Líneas del bloc de notas",
         "lineColumn": "Línea",
         "resultColumn": "Resultado"
+      },
+      "samples": {
+        "trip": {
+          "title": "Fin de semana para dos:",
+          "split": "Lo dividimos entre los dos:",
+          "save": "Ahorrado en unos meses:"
+        },
+        "loan": {
+          "title": "Préstamo de coche, 6% anual, 3 años:",
+          "cost": "Lo que cuesta de verdad:"
+        },
+        "tip": {
+          "title": "Cena con amigos:",
+          "split": "Cada uno de los 4 paga:"
+        },
+        "splitBill": {
+          "title": "Alquiler mensual:",
+          "split": "Dividido entre 3 compañeros de piso:"
+        }
+      },
+      "sidebar": {
+        "title": "Variables definidas ({count})",
+        "note": "Valores tal como los ve la última línea de la nota.",
+        "input": "entrada",
+        "derived": "derivada",
+        "lines": "Líneas calculadas",
+        "bottom": "Resultado final"
+      },
+      "ind": {
+        "worked": "Ejemplo resuelto",
+        "empty": "Escribe un cálculo como 2 + 2 o price = 20 para activar este indicador.",
+        "noVars": "Define una variable como price = 20 para ver este indicador.",
+        "noInputs": "Necesita una entrada: una línea como price = 20 por encima del resultado final y usada por él.",
+        "pickLine": "Línea",
+        "pickInput": "Entrada",
+        "kinds": {
+          "assign": "Asignación",
+          "expr": "Cálculo",
+          "note": "Nota",
+          "blank": "Vacía"
+        },
+        "ops": {
+          "add": "+ −",
+          "mul": "× ÷",
+          "pow": "Potencia ^",
+          "fn": "Función",
+          "neg": "Negación"
+        },
+        "trend": {
+          "title": "Valores de las líneas de arriba abajo",
+          "heading": "{count} resultados en el orden en que aparecen",
+          "intro": "Cada línea calculada trazada de arriba abajo, con el resultado final marcado en verde frente a la media de todos los resultados.",
+          "mean": "media {v}",
+          "rowCount": "Líneas con resultado",
+          "rowPeak": "Mayor resultado",
+          "rowMean": "Media de resultados",
+          "rowFinal": "Resultado final",
+          "rowVsMean": "Final ÷ media"
+        },
+        "donut": {
+          "title": "De qué está hecha la nota",
+          "heading": "{lines} líneas, {ops} operaciones",
+          "intro": "El anillo exterior clasifica cada línea en asignaciones, cálculos, notas y vacías; el interior cuenta las operaciones que realmente ejecuta el evaluador.",
+          "center": "calculadas",
+          "outer": "Líneas (anillo exterior)",
+          "inner": "Operaciones (anillo interior)",
+          "noOps": "Aún no hay operaciones, solo números.",
+          "rowCalc": "Calculadas ÷ no vacías",
+          "rowNotes": "Líneas de nota (sin resultado)",
+          "rowOps": "Operaciones evaluadas",
+          "rowTop": "Operación más usada",
+          "rowCoverage": "Cobertura"
+        },
+        "vars": {
+          "title": "Variables ordenadas por tamaño",
+          "heading": "{count} valores con nombre definidos",
+          "intro": "Cada nombre definido con \"name = expression\", de mayor a menor, marcado como entrada escrita, valor derivado de otros nombres o nombre reasignado.",
+          "tag": {
+            "input": "entrada",
+            "derived": "derivada",
+            "reassigned": "reasignada"
+          },
+          "used": "usada {count}×",
+          "rowTop": "Mayor variable",
+          "rowSum": "Suma de |valores|",
+          "rowShare": "Su parte",
+          "rowSplit": "Entradas / derivadas",
+          "rowResult": "Parte del total"
+        },
+        "flow": {
+          "title": "De dónde sale el resultado final",
+          "heading": "{nodes} definiciones, {depth} niveles de profundidad",
+          "intro": "El resultado final arriba, luego cada nombre que lee y los nombres que leen esos, hasta las entradas escritas, cada uno ligado a la línea exacta que lo definió.",
+          "bottom": "resultado final",
+          "rowLine": "Última línea",
+          "rowSub": "Con valores",
+          "rowLeaves": "Entradas alcanzadas",
+          "rowDepth": "Niveles",
+          "rowResult": "Resultado"
+        },
+        "steps": {
+          "title": "Pasos de evaluación, una operación cada vez",
+          "heading": "{line} resuelta en {count} pasos",
+          "intro": "El evaluador busca cada nombre, luego ejecuta potencias, luego × y ÷, luego + y −, empezando por los paréntesis interiores: cada escalón es una operación en el orden real.",
+          "literal": "Un número simple: nada que evaluar.",
+          "kind": {
+            "var": "buscar",
+            "op": "operar",
+            "fn": "función",
+            "neg": "negar"
+          },
+          "rowLine": "Expresión",
+          "rowSubs": "Búsquedas de nombres",
+          "rowOps": "Operaciones",
+          "rowDepth": "Profundidad del árbol",
+          "rowResult": "Resultado"
+        },
+        "formula": {
+          "title": "La línea como fórmula",
+          "heading": "{line} con los nombres sustituidos por valores",
+          "intro": "La línea tal como se escribió, después la misma línea con cada variable cambiada por el valor que tenía en ese punto de la nota, y por último el resultado.",
+          "rowNoVars": "Variables leídas",
+          "rowSub": "Sustituida",
+          "rowResult": "Resultado"
+        },
+        "timeline": {
+          "title": "Cómo crecen las variables a lo largo de la nota",
+          "heading": "{count} asignaciones como estaciones",
+          "intro": "Cada asignación es una estación en el orden en que se ejecuta: azul para una entrada escrita, violeta para un valor construido con nombres anteriores, ámbar donde se sobrescribe un nombre.",
+          "input": "entrada escrita",
+          "derived": "derivada",
+          "reassigned": "sobrescribe",
+          "usedAt": "leída en {lines}",
+          "unused": "no se lee después",
+          "rowStations": "Asignaciones",
+          "rowReassign": "Sobrescrituras",
+          "rowScope": "Nombres al final",
+          "rowLast": "Última estación",
+          "rowValue": "Su valor"
+        },
+        "trio": {
+          "title": "Sensibilidad: una entrada menor, tal cual, mayor",
+          "heading": "Resultado final con {name} ±{shift}%",
+          "intro": "Toda la nota se vuelve a calcular con la entrada elegida bajada y subida, para ver exactamente cuánto se mueve el resultado final.",
+          "shift": "Cambio",
+          "low": "−{shift}%",
+          "now": "Tal cual",
+          "high": "+{shift}%",
+          "asTyped": "tu nota",
+          "rowInput": "Entrada escrita",
+          "rowLow": "Bajada → resultado",
+          "rowHigh": "Subida → resultado",
+          "rowSpread": "Rango",
+          "rowResult": "Rango ÷ resultado"
+        },
+        "impact": {
+          "title": "Qué entrada mueve más el resultado final",
+          "heading": "Cambio del resultado final al subir un 10% cada una de las {count} entradas",
+          "intro": "Cada barra recalcula la nota con una entrada subida un 10% y las demás tal cual; la cifra pequeña debajo es el cambio del resultado final en porcentaje.",
+          "rowTop": "Entrada más fuerte",
+          "rowRaised": "Subida un 10%",
+          "rowNew": "Resultado final",
+          "rowElasticity": "Elasticidad",
+          "rowResult": "Cambio",
+          "note": "Elasticidad 1 = se mueve al mismo ritmo; −1 = en sentido contrario."
+        },
+        "mag": {
+          "title": "Resultados en escala de potencias de diez",
+          "heading": "Resultados que abarcan {orders} órdenes de magnitud",
+          "intro": "Cada resultado se sitúa en su posición log10, así un 5 y un 50.000 siguen legibles en la misma barra.",
+          "rowBig": "Mayor |resultado|",
+          "rowSmall": "Menor |resultado|",
+          "rowRatio": "Razón",
+          "rowLog": "Órdenes de distancia",
+          "rowResult": "Rango"
+        },
+        "round": {
+          "title": "Un resultado, cuatro formas equivalentes",
+          "heading": "{line} del valor flotante bruto a lo que imprime la nota",
+          "intro": "Los ordenadores guardan los números en coma flotante binaria; la nota redondea a 8 decimales y quita los ceros finales, lo que oculta pequeños artefactos como 0.1 + 0.2.",
+          "card": {
+            "raw": "Flotante completo",
+            "shown": "La nota muestra",
+            "twoDp": "2 decimales",
+            "sci": "Científica"
+          },
+          "cardNote": {
+            "raw": "todos los dígitos guardados",
+            "shown": "8 decimales, sin ceros",
+            "twoDp": "estilo moneda",
+            "sci": "5 cifras significativas"
+          },
+          "rowRaw": "Valor guardado",
+          "rowRule": "Regla de visualización",
+          "rowShown": "Impreso",
+          "rowError": "Diferencia oculta",
+          "rowResult": "Veredicto",
+          "hidden": "error mínimo oculto",
+          "exact": "exacto"
+        },
+        "lab": {
+          "title": "Laboratorio qué pasaría si: arrastra una entrada",
+          "heading": "Resultado final ({line}) según cambia {name}",
+          "intro": "La curva azul es la nota real recalculada en 81 valores de la entrada. Arrastra el punto verde (o usa el control deslizante): cada posición vuelve a evaluar toda la nota.",
+          "aria": "Curva arrastrable del resultado final frente a una entrada",
+          "typed": "tal cual",
+          "slider": "Valor de la entrada",
+          "hint": "Arrastra por la curva, usa el control deslizante o enfoca el punto y pulsa las flechas.",
+          "apply": "Escribir {name} = {value} en la nota",
+          "rowTyped": "{name} escrita",
+          "rowDragged": "{name} arrastrada a",
+          "rowBottomTyped": "Resultado escrito",
+          "rowBottomNow": "Resultado ahora",
+          "rowDelta": "Cambio"
+        }
+      },
+      "examples": {
+        "title": "Ejemplos resueltos",
+        "intro": "Tres notas cortas resueltas línea a línea con el mismo evaluador que la nota de arriba.",
+        "answer": "Resultado final",
+        "kind": {
+          "var": "Buscar",
+          "op": "Operar",
+          "fn": "Función",
+          "neg": "Negar",
+          "literal": "Número"
+        },
+        "tip": {
+          "title": "Una propina que reutiliza la cuenta",
+          "scenario": "Una cena de 64,50 y una propina del 18%, escrita una vez y reutilizada.",
+          "takeaway": "Define la cuenta una vez; al cambiarla se actualizan la propina y el total."
+        },
+        "precedence": {
+          "title": "Orden de las operaciones",
+          "scenario": "Los mismos números con paréntesis de dos formas y luego sin paréntesis.",
+          "takeaway": "Los paréntesis cambian el orden: 28 y luego 67; sin ellos, primero la potencia, luego × y luego +, y da 19."
+        },
+        "savings": {
+          "title": "Reasignar un nombre",
+          "scenario": "Un saldo de 1.000 crece un 5% dos veces sobrescribiendo el mismo nombre.",
+          "takeaway": "Cada línea lee el valor de la anterior, así que sobrescribir acumula el crecimiento."
+        }
       }
     },
     "pace-calculator": {

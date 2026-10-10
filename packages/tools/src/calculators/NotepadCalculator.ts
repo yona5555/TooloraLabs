@@ -18,7 +18,7 @@ export type NotepadCalculatorOutput = {
 const ASSIGNMENT_PATTERN = /^([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.+)$/;
 const RESERVED_NAMES = new Set(["pi", "e"]);
 
-function fmt(n: number): string {
+export function formatNotepadNumber(n: number): string {
   const rounded = Math.round(n * 1e8) / 1e8;
   return Object.is(rounded, -0) ? "0" : String(rounded);
 }
@@ -60,13 +60,13 @@ export class NotepadCalculator extends BaseCalculator<NotepadCalculatorInput, No
         const value = this.tryEvaluate(expr, scope);
         if (value !== null) {
           scope[name.toLowerCase()] = value;
-          lines.push({ text: rawLine, result: fmt(value) });
+          lines.push({ text: rawLine, result: formatNotepadNumber(value) });
           continue;
         }
       }
 
       const value = this.tryEvaluate(line, scope);
-      lines.push({ text: rawLine, result: value !== null ? fmt(value) : null });
+      lines.push({ text: rawLine, result: value !== null ? formatNotepadNumber(value) : null });
     }
 
     return { success: true, data: { lines }, metadata: {} };
