@@ -96,6 +96,8 @@ export default function VectorCalculator({ education }: { education: ReactNode }
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <VectorInputPanel
@@ -125,7 +127,7 @@ export default function VectorCalculator({ education }: { education: ReactNode }
           }
           result={<VectorResult result={result} ax={a[0]} ay={a[1]} az={a[2]} bx={b[0]} by={b[1]} bz={b[2]} digitStyle={digitStyle} />}
           sidebar={
-            <RelatedToolsSidebar
+            <RelatedToolsSidebar fill
               currentSlug="vector-calculator"
               category="math"
               relatedList={RELATED_TOOLS}

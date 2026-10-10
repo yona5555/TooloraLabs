@@ -71,6 +71,8 @@ export default function CircleCalculator({ education }: { education: ReactNode }
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <CircleInputPanel
@@ -90,7 +92,7 @@ export default function CircleCalculator({ education }: { education: ReactNode }
             </div>
           }
           result={<CircleResult invalid={radius === null} />}
-          sidebar={<RelatedToolsSidebar currentSlug="circle-calculator" category="math" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="circle-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

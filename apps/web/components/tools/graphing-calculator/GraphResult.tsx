@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { LiveTableFill } from "@/components/tool-ui/three/LiveTable3DLayout";
 import GraphLive3D from "./GraphLive3D";
 import GraphShareExportModal from "./GraphShareExportModal";
 import { useGraphLive } from "./GraphLiveContext";
@@ -41,8 +42,10 @@ export default function GraphResult() {
       <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
         {tl("caption", { roots: analysis.roots.length, xMin: fmtNum(xMin), xMax: fmtNum(xMax) })}
       </p>
-      <div className="mt-4 flex-1">
-        <GraphLive3D />
+      <div className="mt-4 flex flex-1 flex-col">
+        <LiveTableFill>
+          <GraphLive3D />
+        </LiveTableFill>
       </div>
     </SectionCard>
   );

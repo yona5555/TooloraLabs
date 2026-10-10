@@ -50,6 +50,8 @@ export default function GcfLcmCalculator({ education }: { education: ReactNode }
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <GcfLcmInputPanel draft={{ numbers: dims.numbers }} onChange={(d) => setNumbers(d.numbers)} />
@@ -63,7 +65,7 @@ export default function GcfLcmCalculator({ education }: { education: ReactNode }
             </div>
           }
           result={<GcfLcmResult error={error} />}
-          sidebar={<RelatedToolsSidebar currentSlug="gcf-lcm-calculator" category="math" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="gcf-lcm-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

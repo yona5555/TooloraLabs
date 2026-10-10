@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { LiveTableFill } from "@/components/tool-ui/three/LiveTable3DLayout";
 import MatrixLive3D from "./MatrixLive3D";
 import MatrixShareExportModal from "./MatrixShareExportModal";
 import type { MatrixResult as Result } from "./types";
@@ -22,7 +23,8 @@ export default function MatrixResult({ result, digitStyle, matrices, className =
   return (
     <SectionCard
       title={t("heading")}
-      className={className}
+      className={`lg:flex lg:h-full lg:flex-col ${className}`}
+      bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"
       action={<MatrixShareExportModal result={result} digitStyle={digitStyle} matrices={matrices} />}
     >
       <div className="grid grid-cols-2 gap-3 text-center">
@@ -36,8 +38,10 @@ export default function MatrixResult({ result, digitStyle, matrices, className =
         </div>
       </div>
       {result.error === "singular-matrix-a" && <p className="mt-3 text-center text-sm text-amber-600 dark:text-amber-400">{t("singularMatrixA")}</p>}
-      <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-        <MatrixLive3D />
+      <div className="mt-4 border-t border-zinc-100 pt-4 lg:flex lg:flex-1 lg:flex-col dark:border-zinc-800">
+        <LiveTableFill>
+          <MatrixLive3D />
+        </LiveTableFill>
       </div>
     </SectionCard>
   );

@@ -54,6 +54,8 @@ export default function MeanMedianModeRangeCalculator({ education }: { education
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <MeanMedianModeRangeInputPanel draft={draft} onChange={change} />
@@ -67,7 +69,7 @@ export default function MeanMedianModeRangeCalculator({ education }: { education
             </div>
           }
           result={<MeanMedianModeRangeResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="mean-median-mode-range-calculator" category="math" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="mean-median-mode-range-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

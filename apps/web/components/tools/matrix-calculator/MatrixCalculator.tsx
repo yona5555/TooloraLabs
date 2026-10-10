@@ -87,6 +87,8 @@ export default function MatrixCalculator({ education }: { education: ReactNode }
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <MatrixInputPanel
@@ -120,7 +122,7 @@ export default function MatrixCalculator({ education }: { education: ReactNode }
           }
           result={<MatrixResult result={result} digitStyle={digitStyle} matrices={matrices} />}
           sidebar={
-            <RelatedToolsSidebar
+            <RelatedToolsSidebar fill
               currentSlug="matrix-calculator"
               category="math"
               relatedList={RELATED_TOOLS}

@@ -79,6 +79,8 @@ export default function GraphingCalculator({ education }: { education: ReactNode
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex h-full flex-col gap-6">
               <GraphInputPanel draft={draft} error={draftError} onChange={applyDraft} onClear={() => applyDraft(DEFAULT_DRAFT)} />
@@ -96,7 +98,7 @@ export default function GraphingCalculator({ education }: { education: ReactNode
           }
           result={<GraphResult />}
           sidebar={
-            <RelatedToolsSidebar
+            <RelatedToolsSidebar fill
               currentSlug="graphing-calculator"
               category="math"
               relatedList={RELATED_TOOLS}

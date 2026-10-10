@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { LiveTableFill } from "@/components/tool-ui/three/LiveTable3DLayout";
 import GcfLcmLive3D from "./GcfLcmLive3D";
 import GcfLcmShareExportModal from "./GcfLcmShareExportModal";
 import { useGcfLcmModel } from "./GcfLcmLiveContext";
@@ -19,7 +20,8 @@ export default function GcfLcmResult({ error, className = "" }: { error: GcfLcmE
   return (
     <SectionCard
       title={t("heading")}
-      className={className}
+      className={`lg:flex lg:h-full lg:flex-col ${className}`}
+      bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"
       action={
         <GcfLcmShareExportModal
           inputRows={[{ label: t("numbersLabel"), value: list }]}
@@ -49,8 +51,10 @@ export default function GcfLcmResult({ error, className = "" }: { error: GcfLcmE
         </div>
       </div>
       <p className="mt-3 text-center text-sm text-zinc-600 dark:text-zinc-300">{sentence}</p>
-      <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-        <GcfLcmLive3D />
+      <div className="mt-4 border-t border-zinc-100 pt-4 lg:flex lg:flex-1 lg:flex-col dark:border-zinc-800">
+        <LiveTableFill>
+          <GcfLcmLive3D />
+        </LiveTableFill>
       </div>
     </SectionCard>
   );

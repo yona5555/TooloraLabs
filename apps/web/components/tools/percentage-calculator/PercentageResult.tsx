@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { PercentageCalculator as PercentageCalculatorTool } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { LiveTableFill } from "@/components/tool-ui/three/LiveTable3DLayout";
 import PercentageShareExportModal from "./PercentageShareExportModal";
 import PercentageLive3D from "./PercentageLive3D";
 import { usePercentage } from "./PercentageLiveContext";
@@ -41,6 +42,8 @@ export default function PercentageResult({ invalid }: { invalid: boolean }) {
   return (
     <SectionCard
       title={t("heading")}
+      className="lg:flex lg:h-full lg:flex-col"
+      bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"
       action={
         <PercentageShareExportModal
           inputRows={[
@@ -65,8 +68,10 @@ export default function PercentageResult({ invalid }: { invalid: boolean }) {
         </p>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{sentence}</p>
       </div>
-      <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-        <PercentageLive3D live={live} />
+      <div className="mt-4 border-t border-zinc-100 pt-4 lg:flex lg:flex-1 lg:flex-col dark:border-zinc-800">
+        <LiveTableFill>
+          <PercentageLive3D live={live} />
+        </LiveTableFill>
       </div>
     </SectionCard>
   );

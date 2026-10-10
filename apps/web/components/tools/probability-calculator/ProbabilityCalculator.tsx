@@ -78,6 +78,8 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <ProbabilityInputPanel
@@ -98,7 +100,7 @@ export default function ProbabilityCalculator({ education }: { education: ReactN
             </div>
           }
           result={<ProbabilityResult />}
-          sidebar={<RelatedToolsSidebar currentSlug="probability-calculator" category="math" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="probability-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

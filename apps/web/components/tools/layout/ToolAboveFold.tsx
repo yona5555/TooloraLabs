@@ -28,6 +28,13 @@ type ToolAboveFoldProps = {
    * result column whose last card can grow (`lg:flex-1`) ends flush with the input card (§27).
    */
   stretchResult?: boolean;
+  /**
+   * Give the sidebar at least the height of the input/result row (lg+ only), so the right column
+   * ends flush with them (§27). The sidebar must grow with real content to use that height (e.g.
+   * `RelatedToolsSidebar fill`, whose tool list extends into it). It still sticks across the
+   * secondary row like before; only its minimum height changes.
+   */
+  sidebarMatchRow?: boolean;
 };
 
 /**
@@ -91,11 +98,14 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const inputBoxRef = useRef<HTMLDivElement>(null);
+  const [rowHeight, setRowHeight] = useState(0);
+  const [sidebarNatural, setSidebarNatural] = useState(0);
   const [sidebarHeight, setSidebarHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
@@ -148,6 +158,37 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
     return () => observer.disconnect();
   }, []);
 
+  // Row 1's height = the taller of the two row-1 grid items' boxes. Read as border boxes so the
+  // value matches what the visitor sees; the sidebar is out of flow, so this can never loop.
+  useLayoutEffect(() => {
+    if (!sidebarMatchRow) return;
+    const a = inputBoxRef.current;
+    const b = resultRef.current;
+    if (!a || !b) return;
+    const update = () => setRowHeight(Math.max(a.getBoundingClientRect().height, b.getBoundingClientRect().height));
+    const observer = new ResizeObserver(update);
+    observer.observe(a);
+    observer.observe(b);
+    return () => observer.disconnect();
+  }, [sidebarMatchRow]);
+
+  // When the sidebar's own content is the tallest, row 1 must grow to it instead. Its natural
+  // height = its box minus the part that only grows to fill (`data-sidebar-grow`, natural height
+  // 0), so feeding it back as row 1's min-height can never ratchet the row taller.
+  useLayoutEffect(() => {
+    if (!sidebarMatchRow) return;
+    const el = sidebarRef.current;
+    if (!el) return;
+    const grow = el.querySelector<HTMLElement>("[data-sidebar-grow]");
+    const update = () => setSidebarNatural(el.getBoundingClientRect().height - (grow ? grow.getBoundingClientRect().height : 0));
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    if (grow) observer.observe(grow);
+    return () => observer.disconnect();
+  }, [sidebarMatchRow]);
+  const rowMinStyle = sidebarMatchRow && sidebarNatural ? ({ "--side-nat": `${sidebarNatural}px` } as CSSProperties) : undefined;
+  const rowMinClass = sidebarMatchRow ? "lg:[min-height:var(--side-nat)]" : "";
+
   const sidebarBoxHeight = contentHeight > sidebarHeight ? contentHeight : undefined;
   const inputBoxHeight = resultHeight > inputHeight ? resultHeight : undefined;
 
@@ -169,14 +210,20 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
       */}
       {/* stretchInput lets the grid row itself size the input card (self-stretch), with no measuring. */}
       <div
-        className={`min-w-0 lg:col-start-1 lg:row-start-1 ${stretchInput ? "lg:self-stretch" : "lg:[height:var(--input-stretch-h)]"}`}
-        style={inputBoxHeight && !stretchInput ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : undefined}
+        ref={inputBoxRef}
+        className={`min-w-0 lg:col-start-1 lg:row-start-1 ${rowMinClass} ${stretchInput ? "lg:self-stretch" : "lg:[height:var(--input-stretch-h)]"}`}
+        style={{ ...(inputBoxHeight && !stretchInput ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : {}), ...rowMinStyle }}
       >
         <div ref={inputRef} className={stretchInput ? "lg:h-full" : inputBoxHeight ? "lg:sticky lg:top-20" : undefined}>
           {input}
         </div>
       </div>
-      <div ref={resultRef} data-tool-result className={`min-w-0 lg:col-start-2 lg:row-start-1 ${stretchResult ? "lg:self-stretch" : ""}`}>
+      <div
+        ref={resultRef}
+        data-tool-result
+        className={`min-w-0 lg:col-start-2 lg:row-start-1 ${rowMinClass} ${stretchResult ? "lg:self-stretch" : ""}`}
+        style={rowMinStyle}
+      >
         {result}
       </div>
       {secondary && (
@@ -186,7 +233,11 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
         className={`hidden lg:absolute lg:top-0 lg:end-0 lg:w-[320px] ${sidebarFill ? "lg:flex lg:flex-col" : "lg:block"}`}
         style={sidebarBoxHeight ? { height: sidebarBoxHeight } : undefined}
       >
-        <div ref={sidebarRef} className={sidebarBoxHeight && !sidebarFill ? "lg:sticky lg:top-20" : undefined}>
+        <div
+          ref={sidebarRef}
+          className={`${sidebarBoxHeight && !sidebarFill ? "lg:sticky lg:top-20" : ""} ${sidebarMatchRow ? "lg:flex lg:flex-col lg:[min-height:var(--row-h)]" : ""}`}
+          style={sidebarMatchRow && rowHeight ? ({ "--row-h": `${rowHeight}px` } as CSSProperties) : undefined}
+        >
           {sidebar}
         </div>
         {sidebarFill && <div className="mt-6 min-h-0 flex-1">{sidebarFill}</div>}

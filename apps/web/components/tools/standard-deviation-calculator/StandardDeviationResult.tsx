@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { LiveTableFill } from "@/components/tool-ui/three/LiveTable3DLayout";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { StandardDeviationResult as Result } from "./types";
 import SdLive3D from "./SdLive3D";
@@ -29,7 +30,7 @@ export default function StandardDeviationResult({ result, digitStyle }: Props) {
   const sentence = t("sentence", { mean: fmt(result.mean), stdDev: fmt(result.populationStdDev) });
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div className="rounded-2xl lg:flex lg:h-full lg:flex-col border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
         <StandardDeviationShareExportModal
@@ -44,15 +45,17 @@ export default function StandardDeviationResult({ result, digitStyle }: Props) {
           sentence={sentence}
         />
       </div>
-      <div className="p-4 lg:p-6">
+      <div className="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
         <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
           {`σ = ${fmt(result.populationStdDev)}`}
         </p>
         <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">
           {t("heroCaption", { s: fmt(result.sampleStdDev), mean: fmt(result.mean), count: result.count })}
         </p>
-        <div className="mt-4">
-          <SdLive3D />
+        <div className="mt-4 lg:flex lg:flex-1 lg:flex-col">
+          <LiveTableFill>
+            <SdLive3D />
+          </LiveTableFill>
         </div>
       </div>
     </div>

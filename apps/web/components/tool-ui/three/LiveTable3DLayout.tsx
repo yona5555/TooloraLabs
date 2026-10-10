@@ -1,4 +1,18 @@
-import type { ReactNode } from "react";
+"use client";
+import { createContext, useContext, type ReactNode } from "react";
+
+const FillContext = createContext(false);
+
+/**
+ * Wrap a Live3D block in this inside a column that is stretched to the
+ * above-the-fold row height (ToolAboveFold `stretchResult`): at lg+ the table
+ * then takes all the height left under the drawing and shows more rows,
+ * instead of the card ending early (§27 column fill). The wrapping element
+ * must itself be an `lg:flex lg:flex-1 lg:flex-col` box.
+ */
+export function LiveTableFill({ children }: { children: ReactNode }) {
+  return <FillContext.Provider value>{children}</FillContext.Provider>;
+}
 
 export type LiveTableRow = {
   label: string;
@@ -35,10 +49,16 @@ export default function LiveTable3DLayout({
   hint,
   className = "",
 }: Props) {
+  // Fill mode only ever runs in the narrow Result column (the page is max-w-6xl,
+  // so that column never reaches @3xl); the table box is taken out of flow so
+  // its row count never pushes the row taller, it just fills what is left (never
+  // shorter than the usual 520px cap, so the card only ever gains rows).
+  const fill = useContext(FillContext);
   return (
-    <div className={`@container ${className}`}>
-      <div className="grid grid-cols-1 gap-4 @3xl:grid-cols-2 @3xl:items-stretch">
-        <div className="max-h-[520px] min-w-0 overflow-auto rounded-xl @3xl:max-h-none border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40">
+    <div className={`@container ${fill ? "lg:flex lg:flex-1 lg:flex-col" : ""} ${className}`}>
+      <div className={`grid grid-cols-1 gap-4 @3xl:grid-cols-2 @3xl:items-stretch ${fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}`}>
+        <div className={fill ? "min-w-0 lg:relative lg:min-h-[520px] lg:flex-1" : "min-w-0"}>
+        <div className={`max-h-[520px] min-w-0 overflow-auto rounded-xl @3xl:max-h-none border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40 ${fill ? "lg:absolute lg:inset-0 lg:max-h-none" : "h-full"}`}>
           <table className="w-full text-sm">
             <thead className="sticky top-0 z-10 bg-zinc-50 dark:bg-zinc-800">
               <tr className="border-b border-zinc-200 text-xs tracking-wide text-zinc-500 uppercase dark:border-zinc-700 dark:text-zinc-400">
@@ -92,6 +112,7 @@ export default function LiveTable3DLayout({
               </tbody>
             ))}
           </table>
+        </div>
         </div>
         <div className="order-first flex h-[320px] flex-col @3xl:order-none @3xl:h-auto @3xl:min-h-[320px]">
           <div className="min-h-0 flex-1">{drawing}</div>

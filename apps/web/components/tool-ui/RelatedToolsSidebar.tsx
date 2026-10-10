@@ -15,6 +15,11 @@ type RelatedToolsSidebarProps = {
   relatedList?: string[];
   /** Heading shown above `relatedList`. Ignored if `relatedList` is omitted. */
   relatedListTitle?: string;
+  /**
+   * Fill the column height ToolAboveFold `sidebarMatchRow` gives it: the tool list continues with
+   * more tools from the same category and grows (scrolling inside) instead of the card ending early.
+   */
+  fill?: boolean;
 };
 
 export default function RelatedToolsSidebar({
@@ -22,6 +27,7 @@ export default function RelatedToolsSidebar({
   category,
   relatedList,
   relatedListTitle,
+  fill = false,
 }: RelatedToolsSidebarProps) {
   const t = useTranslations("hero");
   const tTools = useTranslations("tools");
@@ -56,9 +62,33 @@ export default function RelatedToolsSidebar({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const curated = (relatedList ?? []).filter((slug) => slug !== currentSlug);
+  const moreInCategory = fill
+    ? tools.filter((tool) => tool.category === category && tool.slug !== currentSlug && !curated.includes(tool.slug)).map((tool) => tool.slug)
+    : [];
+
+  const toolLink = (slug: string) => {
+    const Icon = getToolIcon(slug);
+    return (
+      <li key={slug}>
+        <Link
+          href={`/tools/${slug}`}
+          className="flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-700 transition hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-200 dark:hover:bg-blue-500/10 dark:hover:text-blue-400"
+        >
+          <Icon size={14} className="shrink-0 text-zinc-400" />
+          <span>{tTools(`${slug}.title`)}</span>
+        </Link>
+      </li>
+    );
+  };
+
   return (
-    <SectionCard title={tCommon("relatedToolsTitle")} bodyClassName="flex flex-col gap-6 p-4 lg:p-6">
-      <div className="flex flex-col gap-4">
+    <SectionCard
+      title={tCommon("relatedToolsTitle")}
+      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
+      bodyClassName={`flex flex-col gap-6 p-4 lg:p-6 ${fill ? "lg:flex-1" : ""}`}
+    >
+      <div className={`flex flex-col gap-4 ${fill ? "lg:flex-1" : ""}`}>
         <div ref={containerRef} className="relative">
           <div className="flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-3 py-2 focus-within:border-blue-500 dark:border-zinc-700 dark:bg-zinc-800">
             <SearchIcon size={16} className="shrink-0 text-zinc-400" />
@@ -106,31 +136,29 @@ export default function RelatedToolsSidebar({
           )}
         </div>
 
-        {relatedList && relatedList.length > 0 && (
-          <div className="flex flex-col gap-2">
-            {relatedListTitle && (
+        {(curated.length > 0 || moreInCategory.length > 0) && (
+          <div className={`flex flex-col gap-2 ${fill ? "lg:flex-1" : ""}`}>
+            {(relatedListTitle || fill) && (
               <p className="px-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
-                {relatedListTitle}
+                {curated.length > 0 && relatedListTitle ? relatedListTitle : tCategories(`${category}.title`)}
               </p>
             )}
-            <ul className="flex flex-col divide-y divide-zinc-100 overflow-hidden rounded-xl border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
-              {relatedList
-                .filter((slug) => slug !== currentSlug)
-                .map((slug) => {
-                  const Icon = getToolIcon(slug);
-                  return (
-                    <li key={slug}>
-                      <Link
-                        href={`/tools/${slug}`}
-                        className="flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-700 transition hover:bg-blue-50 hover:text-blue-600 dark:text-zinc-200 dark:hover:bg-blue-500/10 dark:hover:text-blue-400"
-                      >
-                        <Icon size={14} className="shrink-0 text-zinc-400" />
-                        <span>{tTools(`${slug}.title`)}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-            </ul>
+            <div className={`flex flex-col overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 ${fill ? "lg:flex-1" : ""}`}>
+              {curated.length > 0 && (
+                <ul className="flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800">{curated.map(toolLink)}</ul>
+              )}
+              {moreInCategory.length > 0 && (
+                // Out of flow so the list never makes the card taller; it shows as many tools as the
+                // row leaves room for and scrolls for the rest. Hidden below lg with the sidebar.
+                <div data-sidebar-grow className="relative min-h-0 flex-1">
+                  <ul
+                    className={`absolute inset-0 flex flex-col divide-y divide-zinc-100 overflow-y-auto dark:divide-zinc-800 ${curated.length > 0 ? "border-t border-zinc-100 dark:border-zinc-800" : ""}`}
+                  >
+                    {moreInCategory.map(toolLink)}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         )}
 

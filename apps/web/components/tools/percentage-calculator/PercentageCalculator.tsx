@@ -93,6 +93,8 @@ export default function PercentageCalculator({ education }: { education: ReactNo
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <PercentageInputPanel
@@ -120,7 +122,7 @@ export default function PercentageCalculator({ education }: { education: ReactNo
             </div>
           }
           result={<PercentageResult invalid={pair === null} />}
-          sidebar={<RelatedToolsSidebar currentSlug="percentage-calculator" category="math" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="percentage-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />

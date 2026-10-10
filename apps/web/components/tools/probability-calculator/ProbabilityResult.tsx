@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { oddsFromProbability } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import { LiveTableFill } from "@/components/tool-ui/three/LiveTable3DLayout";
 import ProbabilityLive3D from "./ProbabilityLive3D";
 import ProbabilityShareExportModal from "./ProbabilityShareExportModal";
 import { MODE_FIELDS, useProbabilityModel } from "./ProbabilityLiveContext";
@@ -23,7 +24,7 @@ export default function ProbabilityResult({ className = "" }: { className?: stri
   return (
     <SectionCard
       title={t("heading")}
-      className={`flex flex-col ${className}`}
+      className={`flex flex-col lg:h-full ${className}`}
       bodyClassName="flex flex-1 flex-col p-4 lg:p-6"
       action={
         valid ? (
@@ -51,8 +52,10 @@ export default function ProbabilityResult({ className = "" }: { className?: stri
       ) : (
         <p className="rounded-xl bg-amber-50 px-3 py-2 text-center text-sm text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">{t(`invalid.${mode}`)}</p>
       )}
-      <div className="mt-4 flex-1 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-        <ProbabilityLive3D />
+      <div className="mt-4 flex flex-1 flex-col border-t border-zinc-100 pt-4 dark:border-zinc-800">
+        <LiveTableFill>
+          <ProbabilityLive3D />
+        </LiveTableFill>
       </div>
     </SectionCard>
   );

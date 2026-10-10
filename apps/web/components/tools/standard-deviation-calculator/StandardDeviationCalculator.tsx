@@ -61,6 +61,8 @@ export default function StandardDeviationCalculator({ education }: { education: 
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <StandardDeviationInputPanel rawData={rawData} onRawDataChange={change} onClear={handleClear} />
@@ -74,7 +76,7 @@ export default function StandardDeviationCalculator({ education }: { education: 
             </div>
           }
           result={<StandardDeviationResult result={result} digitStyle={digitStyle} />}
-          sidebar={<RelatedToolsSidebar currentSlug="standard-deviation-calculator" category="math" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="standard-deviation-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
