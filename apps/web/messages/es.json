@@ -22904,12 +22904,6 @@
         "quickReference": {
           "title": "MCD y MCM de un vistazo",
           "intro": "Un ejemplo resuelto rápido y la identidad que une a ambos."
-        },
-        "conceptDiagram": {
-          "title": "Factores primos compartidos y combinados",
-          "intro": "El MCD es lo que las factorizaciones primas de dos números tienen en común; el MCM es todo lo que cualquiera de los dos necesita, contando los factores compartidos una sola vez.",
-          "ariaLabel": "Diagrama de Venn de los factores primos de 12 y 18, con la región superpuesta marcada como los factores compartidos que forman el MCD, y una leyenda que muestra el MCM como la combinación de ambos círculos",
-          "sharedLabel": "Compartido (MCD)"
         }
       },
       "form": {
@@ -22918,7 +22912,6 @@
         "numberLabel": "Número {position}",
         "addNumber": "Añadir otro número",
         "removeNumber": "Eliminar este número",
-        "scenarioLabel": "Rellenar rápido un ejemplo resuelto",
         "clear": "Borrar"
       },
       "result": {
@@ -22935,18 +22928,7 @@
         "intro": {
           "title": "Entender el MCD y el MCM",
           "paragraph1": "El máximo común divisor (MCD) de un conjunto de números es el mayor número entero que divide a todos ellos exactamente — la mayor parte en la que todos pueden dividirse por igual. El mínimo común múltiplo (MCM) es el menor número entero que es divisible exactamente por todos ellos — el primer punto en el que sus múltiplos coinciden. Responden a preguntas opuestas: el MCD busca el mayor divisor compartido, el MCM busca el menor múltiplo compartido.",
-          "paragraph2": "Esta calculadora encuentra ambos mediante factorización prima: descompone cada número en los primos cuyo producto lo forma y luego compara esas factorizaciones. El MCD toma cada factor primo que los números comparten, a la menor potencia en que aparece en cualquiera de ellos; el MCM toma cada factor primo que aparece en cualquiera de ellos, a la mayor potencia en que se usa. Para exactamente dos números, MCD × MCM siempre es igual al producto de ambos números — una comprobación útil del resultado.",
-          "ratioGauge": {
-            "title": "¿Qué tan relacionados están estos números?",
-            "intro": "La proporción entre el MCM y el MCD muestra cuánta estructura común tiene un conjunto de números: una proporción pequeña significa que comparten factores comunes grandes, una proporción grande significa que son casi coprimos. Elige un ejemplo real a continuación para ver dónde se ubica.",
-            "verdict": "{example} — {classification}.",
-            "fact": "Aquí, el MCM es {ratio}× el MCD.",
-            "zones": {
-              "closelyRelated": "Estrechamente relacionados",
-              "moderatelyRelated": "Moderadamente relacionados",
-              "looselyRelated": "Casi coprimos"
-            }
-          }
+          "paragraph2": "Esta calculadora encuentra ambos mediante factorización prima: descompone cada número en los primos cuyo producto lo forma y luego compara esas factorizaciones. El MCD toma cada factor primo que los números comparten, a la menor potencia en que aparece en cualquiera de ellos; el MCM toma cada factor primo que aparece en cualquiera de ellos, a la mayor potencia en que se usa. Para exactamente dos números, MCD × MCM siempre es igual al producto de ambos números — una comprobación útil del resultado."
         },
         "variables": {
           "title": "Variables implicadas",
@@ -23096,13 +23078,123 @@
           "note": "La descripción original de Euclides del procedimiento de división repetida para hallar la mayor medida común de dos longitudes — el mismo algoritmo, aplicado a números enteros, en el que se basa el método de factorización prima de esta calculadora.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
           "readOriginal": "Leer los Elementos de Euclides, Libro VII"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "tiling": {
+            "title": "Embaldosado de Euclides con cuadrados",
+            "intro": "Desliza los dos primeros números: el rectángulo se llena con los cuadrados más grandes que caben, y el último y más pequeño es el MCD. Pulsa Reproducir para ver los pasos de Euclides cuadrado a cuadrado.",
+            "sliderA": "Primer número (a)",
+            "sliderB": "Segundo número (b)",
+            "play": "Reproducir",
+            "rectangle": "Rectángulo",
+            "squaresOf": "Cuadrados de lado {size}",
+            "totalSquares": "Total de cuadrados",
+            "areaCheck": "Área cubierta",
+            "smallest": "Cuadrado más pequeño"
+          },
+          "ladder": {
+            "title": "El método de la escalera, peldaño a peldaño",
+            "intro": "Cada peldaño divide todos los números por un primo que comparten; los primos laterales multiplicados dan el MCD, y el MCD por el mcm de la fila inferior da el mcm.",
+            "more": "{n} peldaños más",
+            "sideProduct": "Primos laterales",
+            "lShape": "MCD × mcm inferior",
+            "rungs": "Peldaños",
+            "rung": "Peldaño {n}",
+            "bottomRow": "Fila inferior"
+          },
+          "exponents": {
+            "title": "Exponentes primos lado a lado",
+            "intro": "Una barra por número para cada primo, tan alta como su exponente. El MCD toma la barra más baja de cada grupo y el mcm la más alta.",
+            "minLine": "mín → MCD",
+            "maxLine": "máx → mcm",
+            "prime": "Primo {p}"
+          },
+          "stacked": {
+            "title": "Núcleo común y factores propios",
+            "intro": "Cada número es el MCD por su propio cofactor; en escala logarítmica ambas partes suman la longitud de la barra, y la barra del mcm es el núcleo por todos los factores extra.",
+            "core": "Núcleo MCD",
+            "own": "Cofactor propio",
+            "extra": "Factores extra del mcm",
+            "coreShare": "MCD ≈ {pct}% de las cifras"
+          },
+          "donut": {
+            "title": "Potencias primas dentro del mcm y el MCD",
+            "intro": "El anillo exterior divide el mcm en potencias primas con los exponentes mayores y el interior el MCD con los menores; cada arco se mide por su parte de las cifras.",
+            "outer": "Exterior: mcm",
+            "inner": "Interior: MCD",
+            "outerTotal": "Total del anillo exterior (mcm)",
+            "innerTotal": "Total del anillo interior (MCD)"
+          },
+          "formula": {
+            "title": "Por qué MCD × mcm = a × b",
+            "intro": "Para dos números, el producto del MCD y el mcm siempre es igual al producto de los números: para cada primo, mín + máx de dos exponentes es simplemente su suma.",
+            "pair": "Par usado",
+            "shortcut": "Atajo del mcm",
+            "exponents": "Potencias mín · máx"
+          },
+          "fraction": {
+            "title": "Simplificar una fracción con el MCD",
+            "intro": "Dividir numerador y denominador por su MCD da la forma más simple; ambas barras sombrean exactamente la misma longitud.",
+            "original": "Fracción",
+            "divideBy": "Dividir ambos entre",
+            "simplest": "Forma más simple",
+            "decimal": "Valor decimal",
+            "commonDen": "Mínimo común denominador"
+          },
+          "timeline": {
+            "title": "Múltiplos hasta que se encuentran",
+            "intro": "Cada pista marca los múltiplos de un número; el mcm es la primera estación que comparten todas.",
+            "stations": "Estaciones de {n}",
+            "firstShared": "Primer múltiplo común",
+            "nextShared": "Siguientes múltiplos comunes"
+          },
+          "divisors": {
+            "title": "Todos los divisores comunes, ordenados",
+            "intro": "Todos los divisores que comparten los números, de mayor a menor. El mayor es el MCD y todos los demás lo dividen.",
+            "more": "+{n} divisores comunes menores",
+            "count": "Divisores comunes",
+            "largest": "Mayor",
+            "smallest": "Menor",
+            "sum": "Suma de divisores comunes"
+          },
+          "zones": {
+            "title": "Qué tan relacionados están los números",
+            "intro": "El MCD dividido por el número menor sitúa el conjunto en una franja que va de coprimos a que el menor divida a todos los demás.",
+            "zone": {
+              "coprime": "Coprimos",
+              "weak": "Débil",
+              "strong": "Fuerte",
+              "divides": "Divide"
+            },
+            "smallest": "Número menor",
+            "verdict": "Veredicto"
+          },
+          "logScale": {
+            "title": "MCD, números y mcm en escala logarítmica",
+            "intro": "En un eje de potencias de diez el MCD queda en el número menor o por debajo, y el mcm en el mayor o por encima, sin pasar nunca del producto de todos (Π).",
+            "product": "Producto Π",
+            "lcmVsProduct": "Π ÷ mcm"
+          },
+          "trio": {
+            "title": "Un paso lo cambia todo",
+            "intro": "Mueve el primer número una unidad en cada sentido y recalcula: el MCD y el mcm saltan, porque dependen de los primos compartidos, no del tamaño.",
+            "low": "−1",
+            "current": "Actual",
+            "high": "+1"
+          }
         }
       },
       "scenarios": {
         "twoNumbers": "Dos números",
         "threeNumbers": "Tres números",
         "coprimeExample": "Ejemplo coprimo",
-        "recipeScaling": "Ajustar una receta"
+        "recipeScaling": "Ajustar una receta",
+        "euclidClassic": "Clásico de Euclides",
+        "oneDividesOther": "Uno divide al otro",
+        "gearTeeth": "Dientes de engranaje",
+        "fibonacciPair": "Par de Fibonacci",
+        "fiveNumbers": "Cinco números"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -23122,28 +23214,33 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
       },
-      "ladderDiagram": {
-        "title": "Pruébalo: El Método de la Escalera",
-        "intro": "Divide ambos números entre un factor primo común, anota ese primo a un lado, y repite hasta que ya no haya divisor común — una forma rápida de hallar el MCD y el mcm a mano.",
-        "ariaLabel": "Una escalera de división para hallar el MCD y el mcm de 12 y 18",
-        "caption": "Multiplica los números primos del lado para obtener el MCD; multiplícalos por los dos números que quedan abajo para obtener el mcm."
-      },
-      "multiplesDiagram": {
-        "title": "El MCM como el primer múltiplo compartido",
-        "intro": "Alinear los múltiplos de {a} y {b} en una recta numérica muestra exactamente qué significa el MCM: el primer punto en el que ambas listas coinciden.",
-        "ariaLabel": "Recta numérica que muestra los múltiplos de 12 en una fila y los múltiplos de 18 en otra, coincidiendo primero en 36",
-        "rowA": "Múltiplos de {a}",
-        "rowB": "Múltiplos de {b}",
-        "rowLcm": "Primer múltiplo compartido (MCM)",
-        "caption": "12 y 18 comparten por primera vez un múltiplo en 36: ese es el MCM, alcanzado aquí simplemente contando, sin factorizar nada."
-      },
-      "factorTreeDiagram": {
-        "title": "Descomponer los números en sus factores primos",
-        "intro": "Antes de poder hallar el MCD y el MCM, cada número se descompone primero en factores primos: los bloques que ya no se pueden dividir más. Así se ramifican 12 y 18 hasta sus factores primos.",
-        "labelA": "{a} = 2 × 2 × 3",
-        "labelB": "{b} = 2 × 3 × 3",
-        "legendPrime": "Factor primo",
-        "caption": "12 = 2² × 3 y 18 = 2 × 3²: exactamente las factorizaciones de las que parten el diagrama de Venn y el método de la escalera anteriores."
+      "live3d": {
+        "cardTitle": "Torres de factores primos: tabla en vivo y modelo 3D",
+        "replay": "Repetir",
+        "legend": "Cubos sólidos = núcleo común del MCD",
+        "groupFactorizations": "Factorizaciones primas",
+        "groupDivisors": "Divisores",
+        "groupPrimes": "Primos: el MCD toma el mínimo, el mcm el máximo",
+        "groupEuclid": "Algoritmo de Euclides en ({a}, {b})",
+        "groupResults": "Resultados y comprobaciones",
+        "euclidStep": "Paso {n}",
+        "moreSteps": "+{n} pasos más",
+        "divisorsOf": "Divisores de {n}",
+        "primeRow": "Primo {p}",
+        "gcf": "MCD",
+        "lcm": "mcm",
+        "productCheck": "MCD × mcm = a × b",
+        "ratio": "Razón reducida",
+        "bezout": "Identidad de Bézout",
+        "commonDivisors": "Divisores comunes",
+        "lcmSteps": "Múltiplos hasta el mcm",
+        "relation": "Relación",
+        "relations": {
+          "coprime": "Coprimos",
+          "shared": "Comparten un factor",
+          "divides": "El menor divide a todos",
+          "equal": "Todos iguales"
+        }
       }
     },
     "triangle-calculator": {

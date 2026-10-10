@@ -22904,12 +22904,6 @@
         "quickReference": {
           "title": "GGT & KGV auf einen Blick",
           "intro": "Ein kurzes Rechenbeispiel und die Identität, die beide miteinander verbindet."
-        },
-        "conceptDiagram": {
-          "title": "Gemeinsame und kombinierte Primfaktoren",
-          "intro": "Der GGT ist das, was die Primfaktorzerlegungen zweier Zahlen gemeinsam haben; das KGV ist alles, was beide benötigen, wobei gemeinsame Faktoren nur einmal gezählt werden.",
-          "ariaLabel": "Venn-Diagramm der Primfaktoren von 12 und 18, wobei der Überschneidungsbereich als gemeinsame Faktoren gekennzeichnet ist, die den GGT bilden, mit einer Beschriftung, die das KGV als Kombination beider Kreise zeigt",
-          "sharedLabel": "Gemeinsam (GGT)"
         }
       },
       "form": {
@@ -22918,7 +22912,6 @@
         "numberLabel": "Zahl {position}",
         "addNumber": "Weitere Zahl hinzufügen",
         "removeNumber": "Diese Zahl entfernen",
-        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
         "clear": "Zurücksetzen"
       },
       "result": {
@@ -22935,18 +22928,7 @@
         "intro": {
           "title": "GGT und KGV verstehen",
           "paragraph1": "Der größte gemeinsame Teiler (GGT) einer Zahlenmenge ist die größte ganze Zahl, die alle diese Zahlen ohne Rest teilt — das größte Stück, in das sie sich alle gleichmäßig aufteilen lassen. Das kleinste gemeinsame Vielfache (KGV) ist die kleinste ganze Zahl, die durch alle diese Zahlen ohne Rest teilbar ist — der erste Punkt, an dem sich ihre Vielfachen treffen. Beide beantworten entgegengesetzte Fragen: Der GGT sucht den größten gemeinsamen Teiler, das KGV das kleinste gemeinsame Vielfache.",
-          "paragraph2": "Dieser Rechner findet beide durch Primfaktorzerlegung: Jede Zahl wird in die Primzahlen zerlegt, aus deren Produkt sie besteht, und diese Zerlegungen werden anschließend verglichen. Der GGT übernimmt jeden gemeinsamen Primfaktor mit der niedrigsten Potenz, in der er in irgendeiner der Zahlen vorkommt; das KGV übernimmt jeden Primfaktor, der in irgendeiner der Zahlen vorkommt, mit der höchsten verwendeten Potenz. Bei genau zwei Zahlen gilt immer: GGT × KGV entspricht dem Produkt der beiden Zahlen — eine nützliche Kontrolle des Ergebnisses.",
-          "ratioGauge": {
-            "title": "Wie eng sind diese Zahlen verwandt?",
-            "intro": "Das Verhältnis von kgV zu ggT zeigt, wie viel gemeinsame Struktur eine Zahlenmenge hat — ein kleines Verhältnis bedeutet, dass sie große gemeinsame Faktoren teilen, ein großes Verhältnis bedeutet, dass sie fast teilerfremd sind. Wähle unten ein reales Beispiel, um zu sehen, wo es liegt.",
-            "verdict": "{example} — {classification}.",
-            "fact": "Hier ist das kgV {ratio}-mal so groß wie der ggT.",
-            "zones": {
-              "closelyRelated": "Eng verwandt",
-              "moderatelyRelated": "Mäßig verwandt",
-              "looselyRelated": "Fast teilerfremd"
-            }
-          }
+          "paragraph2": "Dieser Rechner findet beide durch Primfaktorzerlegung: Jede Zahl wird in die Primzahlen zerlegt, aus deren Produkt sie besteht, und diese Zerlegungen werden anschließend verglichen. Der GGT übernimmt jeden gemeinsamen Primfaktor mit der niedrigsten Potenz, in der er in irgendeiner der Zahlen vorkommt; das KGV übernimmt jeden Primfaktor, der in irgendeiner der Zahlen vorkommt, mit der höchsten verwendeten Potenz. Bei genau zwei Zahlen gilt immer: GGT × KGV entspricht dem Produkt der beiden Zahlen — eine nützliche Kontrolle des Ergebnisses."
         },
         "variables": {
           "title": "Beteiligte Größen",
@@ -23096,13 +23078,123 @@
           "note": "Euklids ursprüngliche Beschreibung des Verfahrens der wiederholten Division zur Bestimmung des größten gemeinsamen Maßes zweier Längen — derselbe Algorithmus, angewandt auf ganze Zahlen, der der Primfaktorzerlegungsmethode dieses Rechners zugrunde liegt.",
           "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookVII/bookVII.html",
           "readOriginal": "Euklids Elemente, Buch VII lesen"
+        },
+        "lab": {
+          "worked": "Durchgerechnetes Beispiel",
+          "tiling": {
+            "title": "Euklids Quadratzerlegung",
+            "intro": "Verschieben Sie die ersten beiden Zahlen: Das Rechteck füllt sich mit den größten passenden Quadraten, und das letzte, kleinste Quadrat ist der ggT. Mit Abspielen sehen Sie Euklids Schritte Quadrat für Quadrat.",
+            "sliderA": "Erste Zahl (a)",
+            "sliderB": "Zweite Zahl (b)",
+            "play": "Abspielen",
+            "rectangle": "Rechteck",
+            "squaresOf": "Quadrate mit Seite {size}",
+            "totalSquares": "Quadrate insgesamt",
+            "areaCheck": "Bedeckte Fläche",
+            "smallest": "Kleinstes Quadrat"
+          },
+          "ladder": {
+            "title": "Die Leitermethode, Sprosse für Sprosse",
+            "intro": "Jede Sprosse teilt alle Zahlen durch eine gemeinsame Primzahl; das Produkt der seitlichen Primzahlen ist der ggT, und der ggT mal das kgV der untersten Zeile ergibt das kgV.",
+            "more": "{n} weitere Sprossen",
+            "sideProduct": "Seitliche Primzahlen",
+            "lShape": "ggT × kgV unten",
+            "rungs": "Sprossen",
+            "rung": "Sprosse {n}",
+            "bottomRow": "Unterste Zeile"
+          },
+          "exponents": {
+            "title": "Primexponenten nebeneinander",
+            "intro": "Für jede Primzahl ein Balken pro Zahl, so hoch wie ihr Exponent. Der ggT nimmt den niedrigsten Balken jeder Gruppe, das kgV den höchsten.",
+            "minLine": "Min → ggT",
+            "maxLine": "Max → kgV",
+            "prime": "Primzahl {p}"
+          },
+          "stacked": {
+            "title": "Gemeinsamer Kern und eigene Faktoren",
+            "intro": "Jede Zahl ist der ggT mal ihr eigener Kofaktor; auf einer logarithmischen Skala addieren sich beide Teile zur Balkenlänge, und der kgV-Balken ist der Kern mal alle zusätzlichen Faktoren.",
+            "core": "ggT-Kern",
+            "own": "Eigener Kofaktor",
+            "extra": "Zusätzliche kgV-Faktoren",
+            "coreShare": "ggT ≈ {pct} % der Stellen"
+          },
+          "donut": {
+            "title": "Primzahlpotenzen in kgV und ggT",
+            "intro": "Der äußere Ring zerlegt das kgV in Primzahlpotenzen mit den größten Exponenten, der innere den ggT mit den kleinsten; jeder Bogen entspricht seinem Anteil an den Stellen.",
+            "outer": "Außen: kgV",
+            "inner": "Innen: ggT",
+            "outerTotal": "Summe äußerer Ring (kgV)",
+            "innerTotal": "Summe innerer Ring (ggT)"
+          },
+          "formula": {
+            "title": "Warum ggT × kgV = a × b",
+            "intro": "Für zwei Zahlen ist das Produkt aus ggT und kgV immer gleich dem Produkt der Zahlen: Für jede Primzahl ist Min + Max zweier Exponenten einfach ihre Summe.",
+            "pair": "Verwendetes Paar",
+            "shortcut": "kgV-Abkürzung",
+            "exponents": "Min- · Max-Potenzen"
+          },
+          "fraction": {
+            "title": "Einen Bruch mit dem ggT kürzen",
+            "intro": "Teilt man Zähler und Nenner durch ihren ggT, erhält man die einfachste Form; beide Balken schattieren genau dieselbe Länge.",
+            "original": "Bruch",
+            "divideBy": "Beide teilen durch",
+            "simplest": "Einfachste Form",
+            "decimal": "Dezimalwert",
+            "commonDen": "Kleinster gemeinsamer Nenner"
+          },
+          "timeline": {
+            "title": "Vielfache, bis sie sich treffen",
+            "intro": "Jede Spur markiert die Vielfachen einer Zahl; das kgV ist die erste Station, die alle Spuren gemeinsam haben.",
+            "stations": "Stationen von {n}",
+            "firstShared": "Erstes gemeinsames Vielfaches",
+            "nextShared": "Nächste gemeinsame Vielfache"
+          },
+          "divisors": {
+            "title": "Alle gemeinsamen Teiler, geordnet",
+            "intro": "Alle Teiler, die die Zahlen gemeinsam haben, vom größten zum kleinsten. Der größte ist der ggT, und alle anderen teilen ihn.",
+            "more": "+{n} kleinere gemeinsame Teiler",
+            "count": "Gemeinsame Teiler",
+            "largest": "Größter",
+            "smallest": "Kleinster",
+            "sum": "Summe der gemeinsamen Teiler"
+          },
+          "zones": {
+            "title": "Wie eng die Zahlen verwandt sind",
+            "intro": "Der ggT geteilt durch die kleinste Zahl ordnet die Menge auf einem Streifen ein – von teilerfremd bis zur kleinsten Zahl, die alle anderen teilt.",
+            "zone": {
+              "coprime": "Teilerfremd",
+              "weak": "Schwach",
+              "strong": "Stark",
+              "divides": "Teilt"
+            },
+            "smallest": "Kleinste Zahl",
+            "verdict": "Urteil"
+          },
+          "logScale": {
+            "title": "ggT, Zahlen und kgV auf Log-Skala",
+            "intro": "Auf einer Zehnerpotenz-Achse liegt der ggT bei oder unter der kleinsten Zahl und das kgV bei oder über der größten, nie jenseits des Produkts aller Zahlen (Π).",
+            "product": "Produkt Π",
+            "lcmVsProduct": "Π ÷ kgV"
+          },
+          "trio": {
+            "title": "Ein Schritt ändert alles",
+            "intro": "Verschieben Sie die erste Zahl um eins in jede Richtung und rechnen Sie neu: ggT und kgV springen, weil sie von gemeinsamen Primzahlen abhängen, nicht von der Größe.",
+            "low": "−1",
+            "current": "Aktuell",
+            "high": "+1"
+          }
         }
       },
       "scenarios": {
         "twoNumbers": "Zwei Zahlen",
         "threeNumbers": "Drei Zahlen",
         "coprimeExample": "Teilerfremdes Beispiel",
-        "recipeScaling": "Rezept skalieren"
+        "recipeScaling": "Rezept skalieren",
+        "euclidClassic": "Euklids Klassiker",
+        "oneDividesOther": "Eine teilt die andere",
+        "gearTeeth": "Zahnradzähne",
+        "fibonacciPair": "Fibonacci-Paar",
+        "fiveNumbers": "Fünf Zahlen"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -23122,28 +23214,33 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
       },
-      "ladderDiagram": {
-        "title": "Ausprobieren: Die Leitermethode",
-        "intro": "Teilen Sie beide Zahlen durch einen gemeinsamen Primfaktor, notieren Sie diesen Primfaktor daneben, und wiederholen Sie dies, bis nichts mehr gemeinsam teilbar ist — eine schnelle Methode, um ggT und kgV von Hand zu finden.",
-        "ariaLabel": "Eine Divisionsleiter zur Bestimmung von ggT und kgV von 12 und 18",
-        "caption": "Multiplizieren Sie die Primzahlen an der Seite für den ggT; multiplizieren Sie sie mit den beiden übrig gebliebenen Zahlen unten für das kgV."
-      },
-      "multiplesDiagram": {
-        "title": "kgV als erstes gemeinsames Vielfaches",
-        "intro": "Die Vielfachen von {a} und {b} auf einem Zahlenstrahl aufzureihen zeigt genau, was das kgV bedeutet: der erste Punkt, an dem sich beide Listen treffen.",
-        "ariaLabel": "Zahlenstrahl mit den Vielfachen von 12 in einer Zeile und den Vielfachen von 18 in einer anderen, die sich zuerst bei 36 treffen",
-        "rowA": "Vielfache von {a}",
-        "rowB": "Vielfache von {b}",
-        "rowLcm": "Erstes gemeinsames Vielfaches (kgV)",
-        "caption": "12 und 18 teilen sich zuerst ein Vielfaches bei 36 — das ist das kgV, hier einfach durch Zählen erreicht, ohne irgendetwas zu faktorisieren."
-      },
-      "factorTreeDiagram": {
-        "title": "Zahlen in ihre Primfaktoren zerlegen",
-        "intro": "Bevor ggT und kgV gefunden werden können, wird jede Zahl zunächst in Primfaktoren zerlegt — die Bausteine, die sich nicht weiter teilen lassen. So verzweigen sich 12 und 18 zu ihren Primfaktoren.",
-        "labelA": "{a} = 2 × 2 × 3",
-        "labelB": "{b} = 2 × 3 × 3",
-        "legendPrime": "Primfaktor",
-        "caption": "12 = 2² × 3 und 18 = 2 × 3² — genau diese Zerlegungen sind der Ausgangspunkt für das Venn-Diagramm und die Leiter-Methode oben."
+      "live3d": {
+        "cardTitle": "Primfaktor-Türme: Live-Tabelle und 3D-Modell",
+        "replay": "Wiederholen",
+        "legend": "Volle Würfel = gemeinsamer ggT-Kern",
+        "groupFactorizations": "Primfaktorzerlegungen",
+        "groupDivisors": "Teiler",
+        "groupPrimes": "Primzahlen: ggT nimmt Minimum, kgV Maximum",
+        "groupEuclid": "Euklidischer Algorithmus für ({a}, {b})",
+        "groupResults": "Ergebnisse und Proben",
+        "euclidStep": "Schritt {n}",
+        "moreSteps": "+{n} weitere Schritte",
+        "divisorsOf": "Teiler von {n}",
+        "primeRow": "Primzahl {p}",
+        "gcf": "ggT",
+        "lcm": "kgV",
+        "productCheck": "ggT × kgV = a × b",
+        "ratio": "Gekürztes Verhältnis",
+        "bezout": "Lemma von Bézout",
+        "commonDivisors": "Gemeinsame Teiler",
+        "lcmSteps": "Vielfache bis zum kgV",
+        "relation": "Beziehung",
+        "relations": {
+          "coprime": "Teilerfremd",
+          "shared": "Gemeinsamer Faktor",
+          "divides": "Kleinste teilt alle",
+          "equal": "Alle gleich"
+        }
       }
     },
     "triangle-calculator": {

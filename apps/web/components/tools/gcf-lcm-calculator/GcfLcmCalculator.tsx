@@ -1,38 +1,43 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { GcfLcmCalculator as GcfLcmCalculatorTool } from "@tooloralabs/tools";
-import { parseLocalizedNumber } from "@tooloralabs/core";
 
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
 import GcfLcmInputPanel from "./GcfLcmInputPanel";
 import GcfLcmResult from "./GcfLcmResult";
 import GcfLcmQuickReference from "./GcfLcmQuickReference";
-import { emptyGcfLcmDraft, type GcfLcmDraft } from "./types";
+import { GcfLcmLiveProvider, computeGcfLcm, parseGcfLcmNumbers, type GcfLcmLiveDims } from "./GcfLcmLiveContext";
+import { emptyGcfLcmDraft, GCF_LCM_SCENARIOS } from "./types";
 
-const tool = new GcfLcmCalculatorTool();
-
-function toNum(s: string): number | undefined {
-  if (!s.trim()) return undefined;
-  const n = parseLocalizedNumber(s);
-  return Number.isNaN(n) ? undefined : n;
+function dimsFor(numbers: string[], prevValid: number[]): GcfLcmLiveDims {
+  const parsed = parseGcfLcmNumbers(numbers);
+  return { numbers, valid: computeGcfLcm(parsed).error ? prevValid : parsed };
 }
 
 export default function GcfLcmCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.gcf-lcm-calculator.nav");
-  const [draft, setDraft] = useState<GcfLcmDraft>(emptyGcfLcmDraft());
+  const tScenarios = useTranslations("tools.gcf-lcm-calculator.scenarios");
+  const tCommon = useTranslations("common.live3d");
+  // One live source: the typed strings plus the last valid parsed set, so the Result, the 3D towers
+  // and every indicator follow each keystroke (and each slider move) and never fall to an empty state.
+  const [dims, setDims] = useState<GcfLcmLiveDims>(() => dimsFor(emptyGcfLcmDraft().numbers, [12, 18]));
+  const [activeExample, setActiveExample] = useState<string | null>(null);
 
-  const digitStyle = resolveDigitStyle();
+  const error = computeGcfLcm(parseGcfLcmNumbers(dims.numbers)).error;
 
-  const result = useMemo(() => {
-    const numbers = draft.numbers.map((n) => toNum(n) ?? -1);
-    const output = tool.execute({ numbers }, { locale: "en-US" });
-    return output.data;
-  }, [draft]);
+  function setNumbers(numbers: string[], exampleId: string | null = null) {
+    setDims((prev) => dimsFor(numbers, prev.valid));
+    setActiveExample(exampleId);
+  }
+
+  function handlePick(id: string) {
+    const ex = GCF_LCM_SCENARIOS.find((e) => e.key === id);
+    if (ex) setNumbers([...ex.numbers], id);
+  }
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -41,27 +46,35 @@ export default function GcfLcmCalculator({ education }: { education: ReactNode }
   ];
 
   return (
-    <>
+    <GcfLcmLiveProvider value={{ dims, setDim: (key, value) => key === "numbers" && setNumbers(value as string[]) }}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<GcfLcmInputPanel draft={draft} onChange={setDraft} />}
-          result={
-            <div className="flex flex-col gap-4">
-              <GcfLcmResult result={result} digitStyle={digitStyle} draft={draft} />
-              <GcfLcmQuickReference />
+          stretchInput
+          input={
+            <div className="flex flex-col gap-6 lg:h-full">
+              <GcfLcmInputPanel draft={{ numbers: dims.numbers }} onChange={(d) => setNumbers(d.numbers)} />
+              <QuickExamplesCard
+                title={tCommon("quickExamples")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={handlePick}
+                examples={GCF_LCM_SCENARIOS.map((e) => ({ id: e.key, label: tScenarios(e.key), detail: e.numbers.join(", ") }))}
+              />
             </div>
           }
+          result={<GcfLcmResult error={error} />}
           sidebar={<RelatedToolsSidebar currentSlug="gcf-lcm-calculator" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="gcf-lcm-calculator" />
+              <GcfLcmQuickReference />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </GcfLcmLiveProvider>
   );
 }

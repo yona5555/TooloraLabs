@@ -62,6 +62,7 @@ export * from "./GraphingCalculator";
 export * from "./NotepadCalculator";
 export * from "./NotepadMath";
 export * from "./GcfLcmCalculator";
+export * from "./GcfLcmEducationMath";
 export * from "./PaceCalculator";
 export * from "./RandomNumberGenerator";
 export * from "./RandomNumberMath";

@@ -4,11 +4,20 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import GcfLcmConceptDiagram from "./GcfLcmConceptDiagram";
-import GcfLcmLadderDiagram from "./GcfLcmLadderDiagram";
-import GcfLcmRatioGauge from "./GcfLcmRatioGauge";
-import GcfLcmFactorTreeDiagram from "./GcfLcmFactorTreeDiagram";
-import GcfLcmMultiplesNumberLineDiagram from "./GcfLcmMultiplesNumberLineDiagram";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import GcfLcmLive3D from "./GcfLcmLive3D";
+import GcfLcmEuclidTilingLab from "./GcfLcmEuclidTilingLab";
+import GcfLcmLadderFlow from "./GcfLcmLadderFlow";
+import GcfLcmExponentBars from "./GcfLcmExponentBars";
+import GcfLcmStackedCore from "./GcfLcmStackedCore";
+import GcfLcmPrimeDonut from "./GcfLcmPrimeDonut";
+import GcfLcmCommonDivisors from "./GcfLcmCommonDivisors";
+import GcfLcmProductFormula from "./GcfLcmProductFormula";
+import GcfLcmFractionEquivalence from "./GcfLcmFractionEquivalence";
+import GcfLcmMultiplesTimeline from "./GcfLcmMultiplesTimeline";
+import GcfLcmRelationZoneStrip from "./GcfLcmRelationZoneStrip";
+import GcfLcmLogScale from "./GcfLcmLogScale";
+import GcfLcmSensitivityTrio from "./GcfLcmSensitivityTrio";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -16,6 +25,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function GcfLcmEducation() {
   const t = await getTranslations("tools.gcf-lcm-calculator.education");
+  const t3 = await getTranslations("tools.gcf-lcm-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -25,16 +35,17 @@ export default async function GcfLcmEducation() {
 
   return (
     <EncyclopediaPaper>
-      <GcfLcmRatioGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <GcfLcmFactorTreeDiagram />
+        <SectionCard title={t3("cardTitle")}>
+          <GcfLcmLive3D />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <GcfLcmConceptDiagram />
-        <GcfLcmLadderDiagram />
-        <GcfLcmMultiplesNumberLineDiagram />
+        <GcfLcmEuclidTilingLab />
+        <GcfLcmLadderFlow />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("variables.title")}>
         <p>{t("variables.intro")}</p>
@@ -46,7 +57,15 @@ export default async function GcfLcmEducation() {
             </div>
           ))}
         </dl>
+        <div className="space-y-6">
+          <GcfLcmExponentBars />
+          <GcfLcmStackedCore />
+          <GcfLcmPrimeDonut />
+          <GcfLcmCommonDivisors />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -68,6 +87,11 @@ export default async function GcfLcmEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <GcfLcmProductFormula />
+          <GcfLcmFractionEquivalence />
+          <GcfLcmMultiplesTimeline />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -79,6 +103,11 @@ export default async function GcfLcmEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <GcfLcmRelationZoneStrip />
+          <GcfLcmLogScale />
+          <GcfLcmSensitivityTrio />
         </div>
       </InfoSection>
 
