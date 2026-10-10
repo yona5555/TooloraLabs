@@ -68,6 +68,7 @@ export * from "./PaceCalculator";
 export * from "./RandomNumberGenerator";
 export * from "./RandomNumberMath";
 export * from "./StandardDeviationCalculator";
+export * from "./standardDeviationAnalysis";
 export * from "./CircleCalculator";
 export * from "./CircleMetrics";
 export * from "./TriangleCalculator";

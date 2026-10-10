@@ -22983,7 +22983,6 @@
         "inputLabel": "Values",
         "inputPlaceholder": "e.g. 2, 4, 4, 4, 5, 5, 7, 9",
         "inputHint": "Separate values with commas, spaces, or new lines.",
-        "scenarioLabel": "Quick-fill a worked example",
         "clear": "Clear"
       },
       "result": {
@@ -22995,16 +22994,8 @@
         "meanLabel": "Mean (μ)",
         "populationVariance": "Population Variance (σ²)",
         "sampleVariance": "Sample Variance (s²)",
-        "stepsTitle": "Step-by-Step Deviations",
-        "columnValue": "Value",
-        "columnDeviation": "Deviation (x − μ)",
-        "columnSquared": "Squared",
-        "sentence": "With a mean of {mean}, this dataset has a standard deviation of {stdDev}."
-      },
-      "chart": {
-        "ariaLabel": "Number line showing each entered value as a dot, with a shaded band spanning one population standard deviation on either side of the mean",
-        "legendValues": "Values",
-        "legendBand": "Mean ± 1σ"
+        "sentence": "With a mean of {mean}, this dataset has a standard deviation of {stdDev}.",
+        "heroCaption": "Sample s = {s} · mean μ = {mean} · n = {count}"
       },
       "quickReference": {
         "title": "The Two Formulas",
@@ -23014,18 +23005,7 @@
         "intro": {
           "title": "Understanding Standard Deviation",
           "paragraph1": "Standard deviation measures how spread out a set of values is around its mean — a small standard deviation means most values sit close to the average, while a large one means they're scattered widely. It's the square root of the variance, which itself is the average of each value's squared distance from the mean; squaring first (rather than just averaging the raw distances) ensures that deviations above and below the mean don't cancel each other out, and taking the square root at the end brings the result back to the data's original unit rather than a squared one.",
-          "paragraph2": "This tool computes both the population standard deviation (σ), used when your data set is the entire group you care about, and the sample standard deviation (s), used when your data is a subset drawn from a larger population you're trying to draw conclusions about. The two formulas differ only in the denominator — population divides by N, the sample divides by n − 1 — a small but deliberate adjustment called Bessel's correction, which corrects for the tendency of a sample's own mean to sit closer to its own data points than the true population mean would.",
-          "cvGauge": {
-            "title": "How Spread Out Is This Data?",
-            "intro": "The coefficient of variation (standard deviation relative to the mean) shows how spread out a dataset is regardless of its units. Pick a real dataset below to see where it falls.",
-            "verdict": "{example} — Variability: {classification}.",
-            "fact": "Its coefficient of variation is about {cv}%.",
-            "zones": {
-              "low": "Low Variability",
-              "moderate": "Moderate Variability",
-              "high": "High Variability"
-            }
-          }
+          "paragraph2": "This tool computes both the population standard deviation (σ), used when your data set is the entire group you care about, and the sample standard deviation (s), used when your data is a subset drawn from a larger population you're trying to draw conclusions about. The two formulas differ only in the denominator — population divides by N, the sample divides by n − 1 — a small but deliberate adjustment called Bessel's correction, which corrects for the tendency of a sample's own mean to sit closer to its own data points than the true population mean would."
         },
         "formula": {
           "title": "The Formulas",
@@ -23150,12 +23130,122 @@
           "note": "The paper in which Karl Pearson introduced the term \"standard deviation,\" now the standard measure of spread taught in every introductory statistics course.",
           "url": "https://doi.org/10.1098/rsta.1894.0003",
           "readOriginal": "Read the Original Paper"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "drag": {
+            "title": "Drag the Data: Squares of Deviation",
+            "intro": "Each point is one value. The coloured square above it has side |x − μ|, so its area is the squared deviation; the dashed violet square has side σ and its area is the average of all the squares.",
+            "hint": "Drag any point sideways: μ, every square, σ and the whole page update live.",
+            "aria": "Draggable data points on a number line with their squared deviations drawn as squares and the standard-deviation square",
+            "avgSquare": "Average square (σ²)",
+            "side": "Side of the average square",
+            "biggest": "Biggest square",
+            "share": "{share} of the sum of squares"
+          },
+          "flow": {
+            "title": "From Data to σ in Four Steps",
+            "intro": "The definition of the population standard deviation as a pipeline, with your numbers flowing through each operation.",
+            "aria": "Flow from the sum of the data to the mean, the sum of squared deviations, the variance and the standard deviation",
+            "opSquare": "subtract μ, square, add",
+            "mean": "Mean",
+            "variance": "Variance"
+          },
+          "shortcut": {
+            "title": "The Shortcut Formula Check",
+            "intro": "Σx² − (Σx)²/n gives the same sum of squares without computing each deviation first; both routes land on one number.",
+            "aria": "Formula diagram showing the sum of squares computed with the shortcut formula and matched against the definition",
+            "shortcutLabel": "Σx² − (Σx)²/n",
+            "match": "Both formulas agree",
+            "rounding": "Differs only by floating-point rounding"
+          },
+          "squares": {
+            "title": "Who Drives the Spread",
+            "intro": "The sum of squares split into each value's squared deviation. Values far from the mean take a disproportionate slice.",
+            "aria": "Stacked bar of each value's share of the sum of squared deviations",
+            "largest": "Largest slice",
+            "topTwo": "Top two values together",
+            "equalShare": "Equal share per value",
+            "values": "Values"
+          },
+          "zRank": {
+            "title": "Values Ranked by z-Score",
+            "intro": "How many standard deviations each value lies from the mean, farthest first, coloured by σ band.",
+            "aria": "Ranked horizontal bars of the absolute z-score of each value",
+            "top": "Farthest value"
+          },
+          "cv": {
+            "title": "Relative Spread (CV)",
+            "intro": "The coefficient of variation expresses σ as a percentage of the mean, so data sets on different scales can be compared.",
+            "aria": "Gauge of the coefficient of variation from 0 to 60 percent",
+            "formula": "σ / |μ| × 100",
+            "sampleCv": "Using s instead of σ",
+            "zones": {
+              "low": "low",
+              "moderate": "moderate",
+              "high": "high"
+            }
+          },
+          "empirical": {
+            "title": "Your Data vs the 68-95-99.7 Rule",
+            "intro": "The share of your values within one, two and three standard deviations, next to the normal-curve share and Chebyshev's guaranteed minimum for any data.",
+            "aria": "Grouped bars comparing the actual share within 1, 2 and 3 standard deviations to the normal rule and Chebyshev's bound",
+            "actual": "Your data",
+            "normal": "Normal",
+            "chebyshev": "Chebyshev",
+            "gap": "Gap at ±1σ"
+          },
+          "zones": {
+            "title": "σ Zones on the Number Line",
+            "intro": "The line coloured by distance from the mean in standard deviations, with every value placed in its zone.",
+            "aria": "Number line coloured by standard-deviation zones with each data value marked",
+            "inside1": "Within 1σ",
+            "inside2": "1σ to 2σ",
+            "inside3": "2σ to 3σ",
+            "beyond": "Beyond 3σ"
+          },
+          "bell": {
+            "title": "Pin a Value on the Bell Curve",
+            "intro": "A normal curve with your μ and σ. Pick a value to see its z-score and the share of a normal population that would fall below it.",
+            "aria": "Normal curve with the selected value marked and the area to its left shaded",
+            "pick": "Pick a value",
+            "value": "Selected value",
+            "below": "Normal share below",
+            "above": "Normal share above",
+            "actualBelow": "Your values below it"
+          },
+          "running": {
+            "title": "How σ Settles as Values Arrive",
+            "intro": "σ and s recomputed after each value in the order you entered them, using Welford's one-pass method.",
+            "aria": "Line chart of the running population and sample standard deviation against the number of values",
+            "first": "First value",
+            "peak": "Highest running σ",
+            "method": "Welford update"
+          },
+          "trio": {
+            "title": "Leave-One-Out Sensitivity",
+            "intro": "How much σ depends on single values: remove the value farthest from the mean, or the closest one, and compare with the current σ.",
+            "aria": "Three bars comparing the standard deviation without the farthest value, the current value and without the closest value",
+            "dropFar": "Without farthest",
+            "current": "Current",
+            "dropNear": "Without closest",
+            "swing": "Swing between them"
+          },
+          "equivalence": {
+            "title": "Population σ vs Sample s",
+            "intro": "The same sum of squares divided by N or by n − 1. Bessel's correction makes s larger by the factor √(n / (n − 1)).",
+            "population": "Population (÷ N)",
+            "sample": "Sample (÷ n − 1)",
+            "gap": "s above σ by"
+          }
         }
       },
       "scenarios": {
+        "classic": "Textbook Example",
         "testScores": "Test Scores",
         "dailyTemperatures": "Daily Temperatures",
-        "factoryMeasurements": "Factory Measurements"
+        "factoryMeasurements": "Factory Measurements",
+        "withOutlier": "Data With an Outlier"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -23175,15 +23265,32 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
       },
-      "normalDiagram": {
-        "title": "The Normal Distribution (Bell Curve)",
-        "intro": "Standard deviation is what defines the width of this curve — the 68-95-99.7 rule describes how data clusters around the mean in a normal distribution.",
-        "ariaLabel": "A bell curve shaded in bands showing 68% of data within 1 standard deviation, 95% within 2, and 99.7% within 3",
-        "caption": "68% of values fall within 1σ of the mean, 95% within 2σ, and 99.7% within 3σ — true for any normally distributed dataset, not just this example."
-      },
-      "empiricalCompare": {
-        "ariaLabel": "Bar chart comparing your dataset's actual spread to the theoretical empirical rule",
-        "caption": "Gray bars show the theoretical normal-distribution share (68-95-99.7 rule); blue bars show the actual share of your entered values within each range."
+      "live3d": {
+        "cardTitle": "Live Spread Table and 3D Bell",
+        "groupData": "Data",
+        "groupMean": "Mean",
+        "groupDeviations": "Deviations",
+        "groupSpread": "Variance and standard deviation",
+        "groupPosition": "Position (z-scores)",
+        "groupBands": "σ bands (yours vs normal)",
+        "sum": "Sum",
+        "min": "Minimum",
+        "max": "Maximum",
+        "range": "Range",
+        "sumDev": "Sum of deviations",
+        "mad": "Mean absolute deviation",
+        "farthest": "Largest deviation",
+        "ss": "Sum of squares",
+        "shortcut": "Shortcut check",
+        "needTwo": "needs n ≥ 2",
+        "bessel": "Bessel factor",
+        "se": "Standard error of the mean",
+        "ci": "95% interval for the mean",
+        "cv": "Coefficient of variation",
+        "cvUndefined": "undefined (μ = 0)",
+        "zMin": "z of the minimum",
+        "zMax": "z of the maximum",
+        "band": "Within μ ± {k}σ"
       }
     },
     "circle-calculator": {

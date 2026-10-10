@@ -4,14 +4,27 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CoefficientOfVariationGauge from "./CoefficientOfVariationGauge";
-import NormalDistributionDiagram from "./NormalDistributionDiagram";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import SdLive3D from "./SdLive3D";
+import SdDragLab from "./SdDragLab";
+import SdBellReference from "./SdBellReference";
+import SdFlowArrow from "./SdFlowArrow";
+import SdShortcutFormula from "./SdShortcutFormula";
+import SdPopSampleEquivalence from "./SdPopSampleEquivalence";
+import SdSquaresStacked from "./SdSquaresStacked";
+import SdEmpiricalBars from "./SdEmpiricalBars";
+import SdZoneStrip from "./SdZoneStrip";
+import SdZRanked from "./SdZRanked";
+import SdCvGauge from "./SdCvGauge";
+import SdRunningTrend from "./SdRunningTrend";
+import SdSensitivityTrio from "./SdSensitivityTrio";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
 
 export default async function StandardDeviationEducation() {
   const t = await getTranslations("tools.standard-deviation-calculator.education");
+  const t3 = await getTranslations("tools.standard-deviation-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const applicationItems = t.raw("applications.items") as ApplicationItem[];
@@ -20,21 +33,37 @@ export default async function StandardDeviationEducation() {
 
   return (
     <EncyclopediaPaper>
-      <CoefficientOfVariationGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={t3("cardTitle")}>
+          <SdLive3D camera={[0.6, 3.6, 9]} />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <NormalDistributionDiagram />
+        <div className="space-y-6">
+          <SdDragLab />
+          <SdBellReference />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("formula.title")}>
         <p>{t("formula.paragraph1")}</p>
         <p dir="ltr" className="rounded-sm border border-current/20 p-4 text-center font-mono text-base">
           σ = √(Σ(xᵢ − μ)² / N) &nbsp;&nbsp;·&nbsp;&nbsp; s = √(Σ(xᵢ − x̄)² / (n − 1))
         </p>
+        <div className="space-y-6">
+          <SdFlowArrow />
+          <SdShortcutFormula />
+        </div>
         <p>{t("formula.paragraph2")}</p>
+        <div className="space-y-6">
+          <SdPopSampleEquivalence />
+          <SdSquaresStacked />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -56,7 +85,14 @@ export default async function StandardDeviationEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <SdEmpiricalBars />
+          <SdZoneStrip />
+          <SdZRanked />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("applications.title")}>
         <p>{t("applications.intro")}</p>
@@ -67,6 +103,11 @@ export default async function StandardDeviationEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <SdCvGauge />
+          <SdRunningTrend />
+          <SdSensitivityTrio />
         </div>
       </InfoSection>
 

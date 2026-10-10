@@ -2,36 +2,18 @@
 import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { STANDARD_DEVIATION_SCENARIOS, type StandardDeviationScenario } from "./types";
 
 type Props = {
   rawData: string;
   onRawDataChange: (value: string) => void;
-  onScenarioPreset: (scenario: StandardDeviationScenario) => void;
   onClear: () => void;
 };
 
-export default function StandardDeviationInputPanel({ rawData, onRawDataChange, onScenarioPreset, onClear }: Props) {
+export default function StandardDeviationInputPanel({ rawData, onRawDataChange, onClear }: Props) {
   const t = useTranslations("tools.standard-deviation-calculator.form");
-  const tScenarios = useTranslations("tools.standard-deviation-calculator.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
-        <div className="flex flex-wrap gap-2">
-          {STANDARD_DEVIATION_SCENARIOS.map((scenario) => (
-            <button
-              key={scenario.key}
-              type="button"
-              onClick={() => onScenarioPreset(scenario)}
-              className="rounded-lg border border-current/20 bg-transparent px-3 py-1.5 text-xs font-medium text-current/70 transition hover:border-blue-300 hover:text-current sm:text-sm"
-            >
-              {tScenarios(scenario.key)}
-            </button>
-          ))}
-        </div>
-      </div>
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("inputLabel")}</span>
         <textarea

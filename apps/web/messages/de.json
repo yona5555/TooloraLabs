@@ -22632,7 +22632,6 @@
         "inputLabel": "Werte",
         "inputPlaceholder": "z. B. 2, 4, 4, 4, 5, 5, 7, 9",
         "inputHint": "Trennen Sie Werte durch Kommas, Leerzeichen oder Zeilenumbrüche.",
-        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
         "clear": "Zurücksetzen"
       },
       "result": {
@@ -22644,16 +22643,8 @@
         "meanLabel": "Mittelwert (μ)",
         "populationVariance": "Varianz der Grundgesamtheit (σ²)",
         "sampleVariance": "Varianz der Stichprobe (s²)",
-        "stepsTitle": "Abweichungen Schritt für Schritt",
-        "columnValue": "Wert",
-        "columnDeviation": "Abweichung (x − μ)",
-        "columnSquared": "Quadriert",
-        "sentence": "Bei einem Mittelwert von {mean} hat dieser Datensatz eine Standardabweichung von {stdDev}."
-      },
-      "chart": {
-        "ariaLabel": "Zahlenstrahl, der jeden eingegebenen Wert als Punkt zeigt, mit einem schattierten Band, das eine Standardabweichung der Grundgesamtheit auf jeder Seite des Mittelwerts umfasst",
-        "legendValues": "Werte",
-        "legendBand": "Mittelwert ± 1σ"
+        "sentence": "Bei einem Mittelwert von {mean} hat dieser Datensatz eine Standardabweichung von {stdDev}.",
+        "heroCaption": "Stichprobe s = {s} · Mittelwert μ = {mean} · n = {count}"
       },
       "quickReference": {
         "title": "Die Beiden Formeln",
@@ -22663,18 +22654,7 @@
         "intro": {
           "title": "Standardabweichung verstehen",
           "paragraph1": "Die Standardabweichung misst, wie stark eine Reihe von Werten um ihren Mittelwert gestreut ist — eine kleine Standardabweichung bedeutet, dass die meisten Werte nahe am Durchschnitt liegen, eine große bedeutet, dass sie weit gestreut sind. Sie ist die Quadratwurzel der Varianz, die selbst der Durchschnitt der quadrierten Abstände jedes Wertes vom Mittelwert ist; das vorherige Quadrieren (statt einfach die rohen Abstände zu mitteln) stellt sicher, dass sich Abweichungen über und unter dem Mittelwert nicht gegenseitig aufheben, und das abschließende Ziehen der Quadratwurzel bringt das Ergebnis zurück in die ursprüngliche Einheit der Daten statt in eine quadrierte.",
-          "paragraph2": "Dieses Tool berechnet sowohl die Standardabweichung der Grundgesamtheit (σ), verwendet, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert, als auch die Standardabweichung der Stichprobe (s), verwendet, wenn Ihre Daten eine Teilmenge sind, die aus einer größeren Population gezogen wurde, über die Sie Schlüsse ziehen möchten. Die beiden Formeln unterscheiden sich nur im Nenner — die Grundgesamtheit teilt durch N, die Stichprobe teilt durch n − 1 — eine kleine, aber bewusste Anpassung namens Bessel-Korrektur, die die Tendenz des Stichprobenmittelwerts korrigiert, näher an den eigenen Datenpunkten zu liegen, als es der wahre Populationsmittelwert tun würde.",
-          "cvGauge": {
-            "title": "Wie stark streut dieser Datensatz?",
-            "intro": "Der Variationskoeffizient (Standardabweichung relativ zum Mittelwert) zeigt, wie stark ein Datensatz streut, unabhängig von seinen Einheiten. Wähle unten einen realen Datensatz, um zu sehen, wo er liegt.",
-            "verdict": "{example} — Streuung: {classification}.",
-            "fact": "Sein Variationskoeffizient liegt bei etwa {cv}%.",
-            "zones": {
-              "low": "Geringe Streuung",
-              "moderate": "Mäßige Streuung",
-              "high": "Hohe Streuung"
-            }
-          }
+          "paragraph2": "Dieses Tool berechnet sowohl die Standardabweichung der Grundgesamtheit (σ), verwendet, wenn Ihr Datensatz die gesamte Gruppe ist, die Sie interessiert, als auch die Standardabweichung der Stichprobe (s), verwendet, wenn Ihre Daten eine Teilmenge sind, die aus einer größeren Population gezogen wurde, über die Sie Schlüsse ziehen möchten. Die beiden Formeln unterscheiden sich nur im Nenner — die Grundgesamtheit teilt durch N, die Stichprobe teilt durch n − 1 — eine kleine, aber bewusste Anpassung namens Bessel-Korrektur, die die Tendenz des Stichprobenmittelwerts korrigiert, näher an den eigenen Datenpunkten zu liegen, als es der wahre Populationsmittelwert tun würde."
         },
         "formula": {
           "title": "Die Formeln",
@@ -22799,12 +22779,122 @@
           "note": "Die Arbeit, in der Karl Pearson den Begriff \"Standardabweichung\" einführte, heute das Standardmaß für Streuung, das in jedem einführenden Statistikkurs gelehrt wird.",
           "url": "https://doi.org/10.1098/rsta.1894.0003",
           "readOriginal": "Originalarbeit lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "drag": {
+            "title": "Daten ziehen: Abweichungsquadrate",
+            "intro": "Jeder Punkt ist ein Wert. Das farbige Quadrat darüber hat die Seite |x − μ|, seine Fläche ist also die quadrierte Abweichung; das gestrichelte violette Quadrat hat die Seite σ, seine Fläche ist der Durchschnitt aller Quadrate.",
+            "hint": "Ziehen Sie einen Punkt seitwärts: μ, jedes Quadrat, σ und die ganze Seite aktualisieren sich live.",
+            "aria": "Verschiebbare Datenpunkte auf einem Zahlenstrahl mit ihren quadrierten Abweichungen als Quadrate und dem Quadrat der Standardabweichung",
+            "avgSquare": "Mittleres Quadrat (σ²)",
+            "side": "Seite des mittleren Quadrats",
+            "biggest": "Größtes Quadrat",
+            "share": "{share} der Quadratsumme"
+          },
+          "flow": {
+            "title": "Von den Daten zu σ in vier Schritten",
+            "intro": "Die Definition der Populations-Standardabweichung als Kette, durch deren Operationen Ihre Zahlen fließen.",
+            "aria": "Fluss von der Datensumme zum Mittelwert, zur Summe der Abweichungsquadrate, zur Varianz und zur Standardabweichung",
+            "opSquare": "μ abziehen, quadrieren, addieren",
+            "mean": "Mittelwert",
+            "variance": "Varianz"
+          },
+          "shortcut": {
+            "title": "Prüfung mit der Kurzformel",
+            "intro": "Σx² − (Σx)²/n liefert dieselbe Quadratsumme, ohne zuerst jede Abweichung zu berechnen; beide Wege enden bei derselben Zahl.",
+            "aria": "Formeldiagramm, das die Quadratsumme mit der Kurzformel berechnet und mit der Definition abgleicht",
+            "shortcutLabel": "Σx² − (Σx)²/n",
+            "match": "Beide Formeln stimmen überein",
+            "rounding": "Abweichung nur durch Gleitkomma-Rundung"
+          },
+          "squares": {
+            "title": "Wer die Streuung treibt",
+            "intro": "Die Quadratsumme aufgeteilt in die quadrierte Abweichung jedes Werts. Weit vom Mittelwert entfernte Werte nehmen einen unverhältnismäßigen Anteil ein.",
+            "aria": "Gestapelter Balken mit dem Anteil jedes Werts an der Summe der Abweichungsquadrate",
+            "largest": "Größter Anteil",
+            "topTwo": "Die zwei größten zusammen",
+            "equalShare": "Gleicher Anteil je Wert",
+            "values": "Werte"
+          },
+          "zRank": {
+            "title": "Werte nach z-Wert geordnet",
+            "intro": "Wie viele Standardabweichungen jeder Wert vom Mittelwert entfernt ist, der fernste zuerst, gefärbt nach σ-Band.",
+            "aria": "Geordnete horizontale Balken des Betrags des z-Werts jedes Werts",
+            "top": "Fernster Wert"
+          },
+          "cv": {
+            "title": "Relative Streuung (VK)",
+            "intro": "Der Variationskoeffizient drückt σ als Prozent des Mittelwerts aus, damit Daten auf verschiedenen Skalen vergleichbar sind.",
+            "aria": "Anzeige des Variationskoeffizienten von 0 bis 60 Prozent",
+            "formula": "σ / |μ| × 100",
+            "sampleCv": "Mit s statt σ",
+            "zones": {
+              "low": "niedrig",
+              "moderate": "mittel",
+              "high": "hoch"
+            }
+          },
+          "empirical": {
+            "title": "Ihre Daten vs. die 68-95-99,7-Regel",
+            "intro": "Der Anteil Ihrer Werte innerhalb von einer, zwei und drei Standardabweichungen, neben dem Normalverteilungsanteil und dem von Tschebyschow garantierten Minimum für beliebige Daten.",
+            "aria": "Gruppierte Balken, die den tatsächlichen Anteil innerhalb von 1, 2 und 3 Standardabweichungen mit der Normalregel und der Tschebyschow-Schranke vergleichen",
+            "actual": "Ihre Daten",
+            "normal": "Normal",
+            "chebyshev": "Tschebyschow",
+            "gap": "Differenz bei ±1σ"
+          },
+          "zones": {
+            "title": "σ-Zonen auf dem Zahlenstrahl",
+            "intro": "Der Zahlenstrahl nach Abstand zum Mittelwert in Standardabweichungen gefärbt, jeder Wert in seiner Zone.",
+            "aria": "Zahlenstrahl nach Standardabweichungszonen gefärbt, jeder Datenwert markiert",
+            "inside1": "Innerhalb 1σ",
+            "inside2": "1σ bis 2σ",
+            "inside3": "2σ bis 3σ",
+            "beyond": "Jenseits 3σ"
+          },
+          "bell": {
+            "title": "Einen Wert auf der Glockenkurve markieren",
+            "intro": "Eine Normalkurve mit Ihrem μ und σ. Wählen Sie einen Wert, um seinen z-Wert und den Anteil einer normalen Population darunter zu sehen.",
+            "aria": "Normalkurve mit markiertem gewähltem Wert und schattierter Fläche links davon",
+            "pick": "Wert wählen",
+            "value": "Gewählter Wert",
+            "below": "Normaler Anteil darunter",
+            "above": "Normaler Anteil darüber",
+            "actualBelow": "Ihre Werte darunter"
+          },
+          "running": {
+            "title": "Wie sich σ mit jedem Wert einpendelt",
+            "intro": "σ und s nach jedem Wert in Eingabereihenfolge neu berechnet, mit Welfords Ein-Durchlauf-Verfahren.",
+            "aria": "Liniendiagramm der laufenden Populations- und Stichproben-Standardabweichung über der Anzahl der Werte",
+            "first": "Erster Wert",
+            "peak": "Höchstes laufendes σ",
+            "method": "Welford-Update"
+          },
+          "trio": {
+            "title": "Sensitivität beim Weglassen eines Werts",
+            "intro": "Wie stark σ von einzelnen Werten abhängt: Entfernen Sie den vom Mittelwert fernsten oder den nächsten Wert und vergleichen Sie mit dem aktuellen σ.",
+            "aria": "Drei Balken, die die Standardabweichung ohne den fernsten Wert, die aktuelle und ohne den nächsten Wert vergleichen",
+            "dropFar": "Ohne fernsten",
+            "current": "Aktuell",
+            "dropNear": "Ohne nächsten",
+            "swing": "Spanne dazwischen"
+          },
+          "equivalence": {
+            "title": "Populations-σ vs. Stichproben-s",
+            "intro": "Dieselbe Quadratsumme geteilt durch N oder durch n − 1. Die Bessel-Korrektur macht s um den Faktor √(n / (n − 1)) größer.",
+            "population": "Population (÷ N)",
+            "sample": "Stichprobe (÷ n − 1)",
+            "gap": "s liegt über σ um"
+          }
         }
       },
       "scenarios": {
+        "classic": "Lehrbuchbeispiel",
         "testScores": "Testergebnisse",
         "dailyTemperatures": "Tagestemperaturen",
-        "factoryMeasurements": "Fabrikmessungen"
+        "factoryMeasurements": "Fabrikmessungen",
+        "withOutlier": "Daten mit Ausreißer"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -22824,15 +22914,32 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
       },
-      "normalDiagram": {
-        "title": "Die Normalverteilung (Glockenkurve)",
-        "intro": "Die Standardabweichung bestimmt die Breite dieser Kurve — die 68-95-99,7-Regel beschreibt, wie sich Daten in einer Normalverteilung um den Mittelwert gruppieren.",
-        "ariaLabel": "Eine Glockenkurve mit schattierten Bändern, die zeigen, dass 68% der Daten innerhalb einer Standardabweichung liegen, 95% innerhalb von zwei und 99,7% innerhalb von drei",
-        "caption": "68% der Werte liegen innerhalb von 1σ vom Mittelwert, 95% innerhalb von 2σ und 99,7% innerhalb von 3σ — gültig für jeden normalverteilten Datensatz, nicht nur für dieses Beispiel."
-      },
-      "empiricalCompare": {
-        "ariaLabel": "Balkendiagramm: tatsächliche Streuung deines Datensatzes im Vergleich zur theoretischen Faustregel",
-        "caption": "Graue Balken zeigen den theoretischen Anteil der Normalverteilung (68-95-99,7-Regel); blaue Balken zeigen den tatsächlichen Anteil deiner eingegebenen Werte in jedem Bereich."
+      "live3d": {
+        "cardTitle": "Live-Streuungstabelle und 3D-Glocke",
+        "groupData": "Daten",
+        "groupMean": "Mittelwert",
+        "groupDeviations": "Abweichungen",
+        "groupSpread": "Varianz und Standardabweichung",
+        "groupPosition": "Lage (z-Werte)",
+        "groupBands": "σ-Bänder (Ihre Daten vs. normal)",
+        "sum": "Summe",
+        "min": "Minimum",
+        "max": "Maximum",
+        "range": "Spannweite",
+        "sumDev": "Summe der Abweichungen",
+        "mad": "Mittlere absolute Abweichung",
+        "farthest": "Größte Abweichung",
+        "ss": "Quadratsumme",
+        "shortcut": "Kurzformel-Prüfung",
+        "needTwo": "erfordert n ≥ 2",
+        "bessel": "Bessel-Faktor",
+        "se": "Standardfehler des Mittelwerts",
+        "ci": "95-%-Intervall für den Mittelwert",
+        "cv": "Variationskoeffizient",
+        "cvUndefined": "nicht definiert (μ = 0)",
+        "zMin": "z des Minimums",
+        "zMax": "z des Maximums",
+        "band": "Innerhalb μ ± {k}σ"
       }
     },
     "circle-calculator": {
