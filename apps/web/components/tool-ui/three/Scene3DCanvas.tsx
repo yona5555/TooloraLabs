@@ -1,0 +1,27 @@
+"use client";
+
+import type { ReactNode } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { usePalette3D } from "./theme3d";
+
+export type Scene3DCanvasProps = {
+  children: ReactNode;
+  camera?: [number, number, number];
+  autoRotate?: boolean;
+};
+
+/** The heavy part (three + fiber + drei). Only ever imported through Scene3D's dynamic(). */
+export default function Scene3DCanvas({ children, camera = [6, 5, 7], autoRotate = false }: Scene3DCanvasProps) {
+  const p = usePalette3D();
+  return (
+    <Canvas dpr={[1, 2]} camera={{ position: camera, fov: 40 }} frameloop="demand" gl={{ antialias: true }}>
+      <color attach="background" args={[p.bg]} />
+      <ambientLight intensity={p.dark ? 0.55 : 0.7} />
+      <directionalLight position={[6, 10, 6]} intensity={p.dark ? 0.9 : 1.1} />
+      <directionalLight position={[-6, 4, -4]} intensity={0.35} />
+      {children}
+      <OrbitControls makeDefault enablePan={false} autoRotate={autoRotate} autoRotateSpeed={0.8} />
+    </Canvas>
+  );
+}
