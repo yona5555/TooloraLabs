@@ -4,7 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import GraphConceptDiagram from "./GraphConceptDiagram";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import GraphLive3D from "./GraphLive3D";
+import GraphTangentLab from "./GraphTangentLab";
+import GraphRiemannLab from "./GraphRiemannLab";
+import {
+  GraphAreaBalance,
+  GraphDifferenceQuotient,
+  GraphKeyPointsTimeline,
+  GraphMonotonicityBar,
+  GraphSampleBars,
+  GraphSensitivityTrio,
+  GraphShapeDonut,
+  GraphSignZoneStrip,
+  GraphSlopeGauge,
+  GraphSymmetryEquivalence,
+} from "./GraphIndicators";
 
 type ExampleRow = { calculation: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -12,6 +27,7 @@ type ApplicationItem = { title: string; description: string };
 
 export default async function GraphingEducation() {
   const t = await getTranslations("tools.graphing-calculator.education");
+  const t3 = await getTranslations("tools.graphing-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const variableItems = t.raw("variables.items") as VariableItem[];
@@ -23,8 +39,14 @@ export default async function GraphingEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={t3("cardTitle")}>
+          <GraphLive3D />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <GraphConceptDiagram />
+        <div className="space-y-6">
+          <GraphTangentLab />
+          <GraphShapeDonut />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -37,7 +59,14 @@ export default async function GraphingEducation() {
             </div>
           ))}
         </dl>
+        <div className="space-y-6">
+          <GraphSignZoneStrip />
+          <GraphKeyPointsTimeline />
+          <GraphMonotonicityBar />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -59,6 +88,11 @@ export default async function GraphingEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <GraphRiemannLab />
+          <GraphAreaBalance />
+          <GraphSampleBars />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -70,6 +104,12 @@ export default async function GraphingEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <GraphSensitivityTrio />
+          <GraphSlopeGauge />
+          <GraphDifferenceQuotient />
+          <GraphSymmetryEquivalence />
         </div>
       </InfoSection>
 

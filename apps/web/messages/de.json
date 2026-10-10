@@ -20646,14 +20646,6 @@
         "quickReference": {
           "title": "Unterstützte Ausdruckssyntax",
           "intro": "Geben Sie eine beliebige einvariable Funktion von x mit den üblichen Operatoren und Funktionen ein — einige Beispiele:"
-        },
-        "conceptDiagram": {
-          "title": "Was die Orientierungspunkte eines Graphen bedeuten",
-          "intro": "Drei Dinge, nach denen die meisten Menschen in einem Graphen tatsächlich suchen: wo er jede Achse kreuzt und wie schnell er zwischen zwei Punkten steigt.",
-          "ariaLabel": "Diagramm einer Linie auf x-y-Achsen mit Beschriftung ihres y-Achsenabschnitts, ihres x-Achsenabschnitts und eines Steigungsdreiecks, das den Anstieg über die Laufweite zwischen zwei Punkten zeigt",
-          "yInterceptLabel": "y-Achsenabschnitt — bei x = 0",
-          "xInterceptLabel": "x-Achsenabschnitt — bei y = 0",
-          "slopeLabel": "Steigung = Δy / Δx"
         }
       },
       "form": {
@@ -20859,6 +20851,183 @@
         "contactPhonePlaceholder": "z. B. +49 30 123456",
         "contactOrganizationPlaceholder": "z. B. Muster GmbH",
         "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
+      },
+      "quickExamples": {
+        "title": "Schnellbeispiele",
+        "items": {
+          "cubic": "Kubische Funktion mit 3 Nullstellen",
+          "parabola": "Verschobene Parabel",
+          "sine": "Sinuswelle",
+          "damped": "Gedämpfte Schwingung",
+          "sqrt": "Quadratwurzel",
+          "reciprocal": "Kehrwert (Asymptote)",
+          "gaussian": "Glockenkurve"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Live-Graph: Wertetabelle und Zeichnung",
+        "caption": "Nullstellen im Bereich: {roots} · x von {xMin} bis {xMax}",
+        "groupFunction": "Funktion",
+        "groupValues": "Stichprobenwerte",
+        "groupKeyPoints": "Markante Punkte",
+        "groupTrace": "Am verfolgten Punkt",
+        "groupWhole": "Gesamter Bereich",
+        "compiled": "gültig",
+        "window": "x-Fenster",
+        "wide": "breit",
+        "yRange": "y-Bereich",
+        "defined": "Definierte Stichproben",
+        "breaks": "Unterbrechungen",
+        "breaksFormula": "Lücken + Sprünge",
+        "traceY": "f am verfolgten x",
+        "slope": "Steigung f′(x)",
+        "curvature": "Krümmung f″(x)",
+        "tangent": "Tangente",
+        "area": "Orientierte Fläche",
+        "absArea": "Gesamtfläche",
+        "average": "Mittelwert",
+        "arcLength": "Bogenlänge",
+        "symmetry": "Symmetrie",
+        "modePlot": "2D-Graph",
+        "modeSurface": "3D-Fläche",
+        "play": "Verfolgung animieren",
+        "pause": "Pause",
+        "traceX": "x verfolgen",
+        "surfaceHint": "Fläche z = f(x)·cos(t) · zum Drehen ziehen"
+      },
+      "viz": {
+        "workedExample": "Rechenbeispiel",
+        "none": "keine im Bereich",
+        "undefined": "nicht definiert",
+        "positive": "Über der Achse (f > 0)",
+        "negative": "Unter der Achse (f < 0)",
+        "increasing": "Steigend",
+        "decreasing": "Fallend",
+        "concaveUp": "Linksgekrümmt",
+        "concaveDown": "Rechtsgekrümmt",
+        "even": "Gerade",
+        "odd": "Ungerade",
+        "neither": "Weder noch",
+        "kinds": {
+          "root": "Nullstellen",
+          "y-intercept": "y-Achsenabschnitt",
+          "maximum": "Lokales Maximum",
+          "minimum": "Lokales Minimum",
+          "inflection": "Wendepunkt"
+        },
+        "short": {
+          "root": "Nullst.",
+          "y-intercept": "y-Abschn.",
+          "maximum": "Max",
+          "minimum": "Min",
+          "inflection": "Wendep."
+        },
+        "tangentLab": {
+          "title": "Tangenten-Labor",
+          "intro": "Ziehe den roten Punkt entlang deiner Kurve: Tangente, Steigungsdreieck und Steigung aktualisieren sich bei jeder Bewegung.",
+          "hint": "Ziehe den roten Punkt entlang der Kurve",
+          "point": "Punkt (x, f(x))",
+          "slope": "Steigung f′(x)",
+          "angle": "Steigungswinkel",
+          "riseRun": "Anstieg / Schritt",
+          "tangent": "Tangentengleichung",
+          "rising": "hier steigend",
+          "falling": "hier fallend",
+          "flat": "hier waagerecht (kritischer Punkt)"
+        },
+        "riemann": {
+          "title": "Fläche durch Streifen",
+          "intro": "Zerlege die Fläche unter deiner Kurve in Streifen; mehr Streifen bringen die Summe näher an das exakte Integral.",
+          "left": "Links",
+          "midpoint": "Mitte",
+          "right": "Rechts",
+          "trapezoid": "Trapez",
+          "strips": "Streifen n",
+          "width": "Streifenbreite",
+          "approx": "Streifensumme",
+          "reference": "Simpson (n = 1000)",
+          "error": "Fehler"
+        },
+        "signZone": {
+          "title": "Vorzeichen von f im Bereich",
+          "intro": "Grün, wo der Graph über der x-Achse liegt, rot, wo er darunter liegt; jede Nullstelle ist eine Grenze."
+        },
+        "timeline": {
+          "title": "Markante Punkte von links nach rechts",
+          "intro": "Nullstellen, Achsenabschnitt, Hoch-, Tief- und Wendepunkte in der Reihenfolge entlang der x-Achse.",
+          "total": "Markante Punkte gesamt"
+        },
+        "mono": {
+          "title": "Steigende und fallende Abschnitte",
+          "intro": "Der x-Bereich, der Reihe nach in Abschnitte zerlegt, in denen der Graph steigt oder fällt.",
+          "count": "Abschnitte"
+        },
+        "balance": {
+          "title": "Fläche über gegen unter der Achse",
+          "intro": "Der Balken neigt sich zur größeren Fläche; das Nettointegral ist ihre Differenz.",
+          "above": "Oben",
+          "below": "Unten",
+          "net": "Nettofläche ∫f dx",
+          "average": "Mittelwert",
+          "level": "ausgeglichen",
+          "tiltsAbove": "mehr Fläche oben",
+          "tiltsBelow": "mehr Fläche unten"
+        },
+        "trio": {
+          "title": "Empfindlichkeit für einen kleinen Schritt",
+          "intro": "f etwas links vom verfolgten Punkt, an ihm und etwas rechts davon, und wie gut die Tangente den nächsten Wert vorhersagt.",
+          "low": "x − Δx",
+          "current": "x",
+          "high": "x + Δx",
+          "leftChange": "Änderung links",
+          "rightChange": "Änderung rechts",
+          "predicted": "Tangentenprognose",
+          "actual": "Tatsächlich f(x + Δx)",
+          "gap": "Abweichung"
+        },
+        "gauge": {
+          "title": "Steigungsanzeige",
+          "intro": "Der Tangentenwinkel am verfolgten Punkt, von senkrechtem Fall (−90°) bis senkrechtem Anstieg (+90°).",
+          "slope": "Steigung f′(x)",
+          "angle": "Winkel θ",
+          "perUnit": "Anstieg je x-Einheit",
+          "perUnitNote": "gleich der Steigung",
+          "steepDown": "steiler Fall",
+          "steepUp": "steiler Anstieg"
+        },
+        "donut": {
+          "title": "Kurvenform in drei Ringen",
+          "intro": "Äußerer Ring: steigend oder fallend. Mitte: links- oder rechtsgekrümmt. Innen: über oder unter der Achse.",
+          "ringTrend": "Richtung",
+          "ringConcavity": "Krümmung",
+          "ringSign": "Vorzeichen"
+        },
+        "bars": {
+          "title": "Werte an neun Stellen",
+          "intro": "f an neun gleichmäßig verteilten x-Werten; Balken zeigen bei positiven Werten nach oben, bei negativen nach unten.",
+          "largest": "Größter Wert",
+          "smallest": "Kleinster Wert",
+          "step": "Abstand der x-Werte",
+          "defined": "Definierte Punkte"
+        },
+        "formula": {
+          "title": "Von der Sekante zur Ableitung",
+          "intro": "Der Differenzenquotient am verfolgten Punkt mit deinen Zahlen; wird h kleiner, nähert er sich der Steigung.",
+          "secant": "Sekantensteigung",
+          "limit": "Grenzwert f′(x)"
+        },
+        "symmetry": {
+          "title": "Symmetrietest: f(x) gegen f(−x)",
+          "intro": "Spiegelpaare nebeneinander: gleiche Werte bedeuten eine gerade Funktion, entgegengesetzte eine ungerade.",
+          "tested": "Gezeigte Paare",
+          "rule": "Gültige Regel",
+          "verdict": "Ergebnis",
+          "meaning": {
+            "even": "Spiegelung an der y-Achse",
+            "odd": "Drehung um 180° um den Ursprung",
+            "neither": "weder Achsen- noch Punktsymmetrie"
+          }
+        }
       }
     },
     "notepad-calculator": {

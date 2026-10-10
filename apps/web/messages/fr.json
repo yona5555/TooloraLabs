@@ -20646,14 +20646,6 @@
         "quickReference": {
           "title": "Syntaxe d'expression prise en charge",
           "intro": "Saisissez n'importe quelle fonction à une variable x à l'aide des opérateurs et fonctions standards — quelques exemples :"
-        },
-        "conceptDiagram": {
-          "title": "Ce que signifient les repères d'un graphique",
-          "intro": "Trois éléments que l'on cherche généralement à lire sur un graphique : où il croise chaque axe, et à quelle vitesse il monte entre deux points.",
-          "ariaLabel": "Diagramme d'une droite sur des axes x-y, avec son ordonnée à l'origine, son abscisse à l'origine, et un triangle de pente montrant la variation verticale sur la variation horizontale entre deux points",
-          "yInterceptLabel": "ordonnée à l'origine — où x = 0",
-          "xInterceptLabel": "abscisse à l'origine — où y = 0",
-          "slopeLabel": "pente = Δy / Δx"
         }
       },
       "form": {
@@ -20859,6 +20851,183 @@
         "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
         "contactOrganizationPlaceholder": "ex. Société SARL",
         "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
+      },
+      "quickExamples": {
+        "title": "Exemples rapides",
+        "items": {
+          "cubic": "Cubique à 3 racines",
+          "parabola": "Parabole décalée",
+          "sine": "Onde sinusoïdale",
+          "damped": "Oscillation amortie",
+          "sqrt": "Racine carrée",
+          "reciprocal": "Inverse (asymptote)",
+          "gaussian": "Courbe en cloche"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Graphique en direct : tableau de valeurs et tracé",
+        "caption": "Racines dans l'intervalle : {roots} · x de {xMin} à {xMax}",
+        "groupFunction": "Fonction",
+        "groupValues": "Valeurs d'échantillon",
+        "groupKeyPoints": "Points clés",
+        "groupTrace": "Au point suivi",
+        "groupWhole": "Intervalle entier",
+        "compiled": "valide",
+        "window": "Fenêtre en x",
+        "wide": "de large",
+        "yRange": "Plage de y",
+        "defined": "Échantillons définis",
+        "breaks": "Ruptures",
+        "breaksFormula": "trous + sauts",
+        "traceY": "f au x suivi",
+        "slope": "Pente f′(x)",
+        "curvature": "Courbure f″(x)",
+        "tangent": "Tangente",
+        "area": "Aire algébrique",
+        "absArea": "Aire totale",
+        "average": "Valeur moyenne",
+        "arcLength": "Longueur d'arc",
+        "symmetry": "Symétrie",
+        "modePlot": "Tracé 2D",
+        "modeSurface": "Surface 3D",
+        "play": "Animer le suivi",
+        "pause": "Pause",
+        "traceX": "Suivre x",
+        "surfaceHint": "Surface z = f(x)·cos(t) · faites glisser pour tourner"
+      },
+      "viz": {
+        "workedExample": "Exemple résolu",
+        "none": "aucun dans l'intervalle",
+        "undefined": "non définie",
+        "positive": "Au-dessus de l'axe (f > 0)",
+        "negative": "Sous l'axe (f < 0)",
+        "increasing": "Croissante",
+        "decreasing": "Décroissante",
+        "concaveUp": "Convexe",
+        "concaveDown": "Concave",
+        "even": "Paire",
+        "odd": "Impaire",
+        "neither": "Ni paire ni impaire",
+        "kinds": {
+          "root": "Racines",
+          "y-intercept": "Ordonnée à l'origine",
+          "maximum": "Maximum local",
+          "minimum": "Minimum local",
+          "inflection": "Point d'inflexion"
+        },
+        "short": {
+          "root": "Racine",
+          "y-intercept": "Ord. orig.",
+          "maximum": "Max",
+          "minimum": "Min",
+          "inflection": "Inflex."
+        },
+        "tangentLab": {
+          "title": "Laboratoire de la tangente",
+          "intro": "Faites glisser le point rouge le long de votre courbe : la tangente, son triangle montée sur pas et la pente se mettent à jour.",
+          "hint": "Faites glisser le point rouge sur la courbe",
+          "point": "Point (x, f(x))",
+          "slope": "Pente f′(x)",
+          "angle": "Angle de la tangente",
+          "riseRun": "Montée / pas",
+          "tangent": "Équation de la tangente",
+          "rising": "croissante ici",
+          "falling": "décroissante ici",
+          "flat": "horizontale ici (point critique)"
+        },
+        "riemann": {
+          "title": "Aire par bandes",
+          "intro": "Découpez l'aire sous votre courbe en bandes ; plus il y a de bandes, plus la somme approche l'intégrale exacte.",
+          "left": "Gauche",
+          "midpoint": "Milieu",
+          "right": "Droite",
+          "trapezoid": "Trapèze",
+          "strips": "Bandes n",
+          "width": "Largeur de bande",
+          "approx": "Somme des bandes",
+          "reference": "Simpson (n = 1000)",
+          "error": "Erreur"
+        },
+        "signZone": {
+          "title": "Signe de f sur l'intervalle",
+          "intro": "Vert là où la courbe est au-dessus de l'axe des x, rouge là où elle est en dessous ; chaque racine est une frontière."
+        },
+        "timeline": {
+          "title": "Repères de gauche à droite",
+          "intro": "Racines, ordonnée à l'origine, sommets, creux et points d'inflexion dans l'ordre où on les rencontre le long de x.",
+          "total": "Nombre de repères"
+        },
+        "mono": {
+          "title": "Tronçons croissants et décroissants",
+          "intro": "L'intervalle en x découpé, dans l'ordre, en tronçons où la courbe monte ou descend.",
+          "count": "Tronçons"
+        },
+        "balance": {
+          "title": "Aire au-dessus contre aire en dessous",
+          "intro": "Le fléau penche vers l'aire la plus grande ; l'intégrale nette est leur différence.",
+          "above": "Dessus",
+          "below": "Dessous",
+          "net": "Aire nette ∫f dx",
+          "average": "Valeur moyenne",
+          "level": "équilibrée",
+          "tiltsAbove": "plus d'aire au-dessus",
+          "tiltsBelow": "plus d'aire en dessous"
+        },
+        "trio": {
+          "title": "Sensibilité à un petit pas",
+          "intro": "f un peu à gauche du point suivi, au point et un peu à droite, et la qualité de la prévision par la tangente.",
+          "low": "x − Δx",
+          "current": "x",
+          "high": "x + Δx",
+          "leftChange": "Variation à gauche",
+          "rightChange": "Variation à droite",
+          "predicted": "Prévision de la tangente",
+          "actual": "Valeur réelle f(x + Δx)",
+          "gap": "écart"
+        },
+        "gauge": {
+          "title": "Jauge de pente",
+          "intro": "L'angle de la tangente au point suivi, d'une chute verticale (−90°) à une montée verticale (+90°).",
+          "slope": "Pente f′(x)",
+          "angle": "Angle θ",
+          "perUnit": "Montée par unité de x",
+          "perUnitNote": "égale à la pente",
+          "steepDown": "forte descente",
+          "steepUp": "forte montée"
+        },
+        "donut": {
+          "title": "Forme de la courbe en trois anneaux",
+          "intro": "Anneau extérieur : montée ou descente. Milieu : convexe ou concave. Intérieur : au-dessus ou sous l'axe.",
+          "ringTrend": "Sens",
+          "ringConcavity": "Courbure",
+          "ringSign": "Signe"
+        },
+        "bars": {
+          "title": "Valeurs en neuf points",
+          "intro": "f évaluée en neuf valeurs de x régulièrement espacées ; les barres montent pour les valeurs positives et descendent pour les négatives.",
+          "largest": "Plus grande valeur",
+          "smallest": "Plus petite valeur",
+          "step": "Pas entre les x",
+          "defined": "Points définis"
+        },
+        "formula": {
+          "title": "De la sécante à la dérivée",
+          "intro": "Le taux d'accroissement au point suivi avec vos nombres ; quand h diminue, il se stabilise sur la pente.",
+          "secant": "pente de la sécante",
+          "limit": "Limite f′(x)"
+        },
+        "symmetry": {
+          "title": "Test de symétrie : f(x) contre f(−x)",
+          "intro": "Paires symétriques côte à côte : des valeurs égales indiquent une fonction paire, opposées une fonction impaire.",
+          "tested": "Paires affichées",
+          "rule": "Règle vérifiée",
+          "verdict": "Verdict",
+          "meaning": {
+            "even": "symétrie par rapport à l'axe des y",
+            "odd": "rotation de 180° autour de l'origine",
+            "neither": "ni symétrie axiale ni centrale"
+          }
+        }
       }
     },
     "notepad-calculator": {
