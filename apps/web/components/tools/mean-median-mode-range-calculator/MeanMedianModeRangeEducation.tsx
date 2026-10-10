@@ -4,12 +4,35 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import MmmLive3D from "./MmmLive3D";
+import MmmDragLab from "./MmmDragLab";
+import MmmBalanceBeam from "./MmmBalanceBeam";
+import MmmSumFlow from "./MmmSumFlow";
+import MmmDeviationRanked from "./MmmDeviationRanked";
+import MmmMedianSteps from "./MmmMedianSteps";
+import MmmQuartileStacked from "./MmmQuartileStacked";
+import MmmModeBars from "./MmmModeBars";
+import MmmCentreCards from "./MmmCentreCards";
+import MmmRangeZoneStrip from "./MmmRangeZoneStrip";
+import MmmOutlierTrio from "./MmmOutlierTrio";
+import MmmSkewGauge from "./MmmSkewGauge";
+import MmmCentreEquivalence from "./MmmCentreEquivalence";
 
 type ExampleRow = { calculation: string; result: string };
 type MeasureItem = { title: string; description: string };
 
+/** Indicators placed under each measure's own paragraph (mean, median, mode, range — in the order of `measures.items`). */
+const MEASURE_INDICATORS = [
+  [<MmmSumFlow key="sum" />, <MmmDeviationRanked key="dev" />],
+  [<MmmMedianSteps key="steps" />, <MmmQuartileStacked key="quart" />],
+  [<MmmModeBars key="mode" />, <MmmCentreCards key="cards" />],
+  [<MmmRangeZoneStrip key="zone" />, <MmmOutlierTrio key="trio" />],
+];
+
 export default async function MeanMedianModeRangeEducation() {
   const t = await getTranslations("tools.mean-median-mode-range-calculator.education");
+  const t3 = await getTranslations("tools.mean-median-mode-range-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const measureItems = t.raw("measures.items") as MeasureItem[];
@@ -20,20 +43,32 @@ export default async function MeanMedianModeRangeEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={t3("cardTitle")}>
+          <MmmLive3D camera={[0.6, 3.6, 9]} />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <MmmDragLab />
+          <MmmBalanceBeam />
+        </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("measures.title")}>
         <p>{t("measures.intro")}</p>
         <div className="space-y-4">
-          {measureItems.map((item) => (
+          {measureItems.map((item, i) => (
             <div key={item.title}>
               <h3 className="font-semibold">{item.title}</h3>
               <p className="mt-1">{item.description}</p>
+              {MEASURE_INDICATORS[i] && <div className="mt-4 space-y-6">{MEASURE_INDICATORS[i]}</div>}
             </div>
           ))}
         </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -54,6 +89,10 @@ export default async function MeanMedianModeRangeEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="space-y-6">
+          <MmmSkewGauge />
+          <MmmCentreEquivalence />
         </div>
       </InfoSection>
 

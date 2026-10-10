@@ -80,6 +80,7 @@ export * from "./UnitCircleMath";
 export * from "./ProbabilityCalculator";
 export * from "./ProbabilityEducationMath";
 export * from "./MeanMedianModeRangeCalculator";
+export * from "./MeanMedianModeRangeAnalysis";
 export * from "./TargetHeartRateCalculator";
 export * from "./SleepCalculator";
 export * from "./BodyFatCalculator";

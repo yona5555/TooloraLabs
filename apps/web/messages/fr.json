@@ -24390,13 +24390,7 @@
         "valueLabel": "Valeur {position}",
         "addValue": "Ajouter une autre valeur",
         "removeValue": "Supprimer cette valeur",
-        "scenarioLabel": "Remplir rapidement un exemple résolu",
         "clear": "Effacer"
-      },
-      "diagram": {
-        "ariaLabel": "Un diagramme en points de l'ensemble de données sur une droite numérique, avec la moyenne et la médiane marquées",
-        "mean": "Moyenne",
-        "median": "Médiane"
       },
       "result": {
         "heading": "Résultat",
@@ -24409,7 +24403,8 @@
         "count": "Effectif",
         "sum": "Somme",
         "min": "Minimum",
-        "max": "Maximum"
+        "max": "Maximum",
+        "meanCaption": "Moyenne de {count} valeurs"
       },
       "quickReference": {
         "title": "Les formules",
@@ -24547,12 +24542,135 @@
           "note": "L'article de Pearson, qui a formellement introduit le terme \"mode\" en statistique, dans le cadre de son travail plus large de formalisation des mesures statistiques descriptives.",
           "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
           "readOriginal": "Lire l'article original de Pearson"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "drag": {
+            "title": "Faites glisser les points",
+            "intro": "Chaque point est une valeur de votre série ; les valeurs répétées s’empilent. Faites glisser un point le long de la droite et voyez le pivot de la moyenne, la ligne de la médiane et l’étendue suivre ; les saisies ci-dessus se mettent aussi à jour.",
+            "aria": "Diagramme en points déplaçables de la série avec la moyenne, la médiane et l’étendue",
+            "hint": "Faites glisser un point à gauche ou à droite",
+            "data": "Données triées",
+            "gap": "Moyenne − médiane"
+          },
+          "balance": {
+            "title": "La moyenne, point d’équilibre",
+            "intro": "Placez les valeurs sur une balançoire comme des poids égaux. Choisissez un pivot : ce n’est qu’à la moyenne que les moments des deux côtés s’annulent et que la poutre reste horizontale.",
+            "aria": "Balançoire portant les valeurs comme poids avec un pivot mobile",
+            "level": "Équilibrée",
+            "tipsRight": "Penche à droite",
+            "tipsLeft": "Penche à gauche",
+            "pivot": "Pivot",
+            "leftMoment": "Moment gauche",
+            "rightMoment": "Moment droit",
+            "netMoment": "Moment net",
+            "tilt": "Inclinaison",
+            "verdict": "Poutre"
+          },
+          "sumFlow": {
+            "title": "Des valeurs à la moyenne",
+            "intro": "La moyenne en deux étapes : additionner toutes les valeurs en un total, puis partager ce total également entre les n valeurs.",
+            "values": "Valeurs",
+            "divide": "Partage égal",
+            "check": "Vérification n × moyenne"
+          },
+          "medianSteps": {
+            "title": "Trouver la marche du milieu",
+            "intro": "Les valeurs triées forment un escalier. La médiane est la marche du milieu, ou la moyenne des deux marches centrales quand l’effectif est pair.",
+            "aria": "Escalier des valeurs triées avec la marche de la médiane en évidence",
+            "halfBelow": "dessous :",
+            "halfAbove": "dessus :",
+            "parity": "L’effectif est",
+            "even": "Pair",
+            "odd": "Impair",
+            "position": "Position centrale",
+            "middle": "Valeur(s) centrale(s)"
+          },
+          "modeBars": {
+            "title": "Fréquence de chaque valeur",
+            "intro": "Une barre par valeur distincte, aussi haute que sa fréquence. La plus haute est le mode ; une égalité donne plusieurs modes, et si toutes valent 1 il n’y a pas de mode.",
+            "aria": "Diagramme en barres de la fréquence de chaque valeur distincte",
+            "distinct": "Valeurs distinctes",
+            "maxFreq": "Fréquence maximale",
+            "share": "Part des données",
+            "kind": "Type",
+            "kinds": {
+              "none": "Pas de mode",
+              "uni": "Unimodale",
+              "bi": "Bimodale",
+              "multi": "Multimodale"
+            }
+          },
+          "rangeZone": {
+            "title": "Étendue, moitié centrale et bornes",
+            "intro": "L’étendue va de la plus petite à la plus grande valeur. La zone verte est la moitié centrale (de Q1 à Q3) ; les points au-delà des bornes pointillées à 1,5 × IQR sont aberrants.",
+            "aria": "Bande de zones de l’étendue avec l’écart interquartile et les bornes",
+            "iqrShare": "Part de l’IQR dans l’étendue",
+            "fences": "Bornes"
+          },
+          "deviations": {
+            "title": "Écart de chaque valeur à la moyenne",
+            "intro": "Chaque valeur classée selon son écart à la moyenne. En bleu au-dessus de la moyenne, en rouge en dessous ; les deux côtés s’additionnent toujours à zéro.",
+            "largest": "Valeur la plus éloignée",
+            "aboveSum": "Total au-dessus",
+            "belowSum": "Total en dessous"
+          },
+          "centreCards": {
+            "title": "Moyenne, médiane et mode",
+            "intro": "Les trois centres des mêmes données côte à côte : la place de chacun entre le minimum et le maximum, ce sur quoi il repose et si une valeur extrême peut l’entraîner.",
+            "usesAll": "Utilise toutes les valeurs",
+            "usesMiddle": "Utilise la position centrale",
+            "usesFrequent": "Utilise la valeur la plus fréquente",
+            "robust": "Résiste aux aberrantes",
+            "sensitive": "Entraînée par les aberrantes",
+            "outlierCount": "Valeurs aberrantes",
+            "best": "Meilleur résumé ici",
+            "whySkewed": "Asymétrique ou avec aberrantes",
+            "whySymmetric": "Presque symétrique, sans aberrante"
+          },
+          "trio": {
+            "title": "Ce que change une seule valeur extrême",
+            "intro": "La moyenne et la médiane sans la plus petite valeur, pour toutes les données et sans la plus grande valeur.",
+            "dropMin": "Sans {value}",
+            "full": "Données complètes",
+            "dropMax": "Sans {value}",
+            "meanShiftMax": "Variation de la moyenne (sans max)",
+            "medianShiftMax": "Variation de la médiane (sans max)",
+            "meanShiftMin": "Variation de la moyenne (sans min)",
+            "medianShiftMin": "Variation de la médiane (sans min)",
+            "moreSensitive": "Bouge le plus"
+          },
+          "skew": {
+            "title": "De quel côté penchent les données",
+            "intro": "L’asymétrie de Pearson compare la moyenne à la médiane : positive quand une longue queue à droite tire la moyenne au-dessus de la médiane, négative avec une queue à gauche.",
+            "aria": "Jauge de l’asymétrie de Pearson de −3 à +3",
+            "formula": "3(x̄ − médiane) / s"
+          },
+          "quartiles": {
+            "title": "L’étendue en quatre quarts",
+            "intro": "Q1, la médiane et Q3 découpent l’étendue en quatre segments contenant chacun environ un quart des données. Un segment plus long signifie un quart plus dispersé.",
+            "quarter": "Quart",
+            "widest": "Le plus dispersé"
+          },
+          "equivalence": {
+            "title": "Mesuré depuis la moyenne ou la médiane",
+            "intro": "Les mêmes distances mesurées depuis deux centres. La médiane donne la plus petite somme des distances absolues ; la moyenne, la plus petite somme des carrés.",
+            "absMean": "Σ|x − moyenne|",
+            "absMedian": "Σ|x − médiane|",
+            "sqMean": "Σ(x − moyenne)²",
+            "sqMedian": "Σ(x − médiane)²",
+            "verdict": "Règle",
+            "verdictValue": "médiane ≤ abs · moyenne ≤ carrés"
+          }
         }
       },
       "scenarios": {
         "testScores": "Notes d'examen",
         "dailyTemperatures": "Températures quotidiennes",
-        "withOutlier": "Avec une valeur aberrante"
+        "withOutlier": "Avec une valeur aberrante",
+        "shoeSizes": "Pointures",
+        "bimodal": "Deux modes",
+        "allUnique": "Toutes différentes"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -24572,6 +24690,35 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé"
+      },
+      "live3d": {
+        "cardTitle": "Détail en direct et piles de points 3D",
+        "groupData": "Données",
+        "groupCentre": "Centre",
+        "groupSpread": "Dispersion",
+        "groupShape": "Forme et valeurs aberrantes",
+        "sorted": "Données triées",
+        "medianPosition": "Position de la médiane",
+        "distinct": "Valeurs distinctes",
+        "midrange": "Milieu de l’étendue",
+        "q1Formula": "médiane de la moitié basse",
+        "q3Formula": "médiane de la moitié haute",
+        "sumDev": "Somme des écarts",
+        "mad": "Écart absolu moyen",
+        "popSd": "Écart type population (σ)",
+        "sampleSd": "Écart type échantillon (s)",
+        "lowerFence": "Borne basse",
+        "upperFence": "Borne haute",
+        "outliers": "Valeurs aberrantes",
+        "none": "Aucune",
+        "skew": "Asymétrie de Pearson",
+        "shape": "Forme",
+        "shapes": {
+          "symmetric": "À peu près symétrique",
+          "right": "Asymétrique à droite",
+          "left": "Asymétrique à gauche"
+        },
+        "frequency": "fréquence"
       }
     },
     "target-heart-rate-calculator": {
