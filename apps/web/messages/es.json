@@ -20945,14 +20945,6 @@
         "quickReference": {
           "title": "Sintaxis de expresión admitida",
           "intro": "Escribe cualquier función de una variable x usando operadores y funciones estándar — algunos ejemplos:"
-        },
-        "conceptDiagram": {
-          "title": "Qué significan los puntos de referencia de una gráfica",
-          "intro": "Tres cosas que la mayoría busca en una gráfica: dónde cruza cada eje y con qué rapidez sube entre dos puntos.",
-          "ariaLabel": "Diagrama de una línea sobre los ejes x-y con su intersección con el eje y, su intersección con el eje x, y un triángulo de pendiente que muestra el cambio vertical sobre el horizontal entre dos puntos",
-          "yInterceptLabel": "Intersección con el eje y — donde x = 0",
-          "xInterceptLabel": "Intersección con el eje x — donde y = 0",
-          "slopeLabel": "pendiente = Δy / Δx"
         }
       },
       "form": {
@@ -21158,6 +21150,183 @@
         "contactPhonePlaceholder": "p. ej. +34 612 345 678",
         "contactOrganizationPlaceholder": "p. ej. Empresa S.L.",
         "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Madrid"
+      },
+      "quickExamples": {
+        "title": "Ejemplos rápidos",
+        "items": {
+          "cubic": "Cúbica con 3 raíces",
+          "parabola": "Parábola desplazada",
+          "sine": "Onda senoidal",
+          "damped": "Oscilación amortiguada",
+          "sqrt": "Raíz cuadrada",
+          "reciprocal": "Recíproca (asíntota)",
+          "gaussian": "Campana de Gauss"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Gráfica en vivo: tabla de valores y dibujo",
+        "caption": "Raíces en el rango: {roots} · x de {xMin} a {xMax}",
+        "groupFunction": "Función",
+        "groupValues": "Valores de muestra",
+        "groupKeyPoints": "Puntos clave",
+        "groupTrace": "En el punto trazado",
+        "groupWhole": "Todo el rango",
+        "compiled": "válida",
+        "window": "Ventana de x",
+        "wide": "de ancho",
+        "yRange": "Rango de y",
+        "defined": "Muestras definidas",
+        "breaks": "Cortes",
+        "breaksFormula": "huecos + saltos",
+        "traceY": "f en la x trazada",
+        "slope": "Pendiente f′(x)",
+        "curvature": "Curvatura f″(x)",
+        "tangent": "Recta tangente",
+        "area": "Área con signo",
+        "absArea": "Área total",
+        "average": "Valor medio",
+        "arcLength": "Longitud de arco",
+        "symmetry": "Simetría",
+        "modePlot": "Gráfica 2D",
+        "modeSurface": "Superficie 3D",
+        "play": "Animar trazado",
+        "pause": "Pausa",
+        "traceX": "Trazar x",
+        "surfaceHint": "Superficie z = f(x)·cos(t) · arrastra para girar"
+      },
+      "viz": {
+        "workedExample": "Ejemplo resuelto",
+        "none": "ninguno en el rango",
+        "undefined": "indefinida",
+        "positive": "Sobre el eje (f > 0)",
+        "negative": "Bajo el eje (f < 0)",
+        "increasing": "Creciente",
+        "decreasing": "Decreciente",
+        "concaveUp": "Cóncava hacia arriba",
+        "concaveDown": "Cóncava hacia abajo",
+        "even": "Par",
+        "odd": "Impar",
+        "neither": "Ni par ni impar",
+        "kinds": {
+          "root": "Raíces",
+          "y-intercept": "Intersección con y",
+          "maximum": "Máximo local",
+          "minimum": "Mínimo local",
+          "inflection": "Punto de inflexión"
+        },
+        "short": {
+          "root": "Raíz",
+          "y-intercept": "Int. y",
+          "maximum": "Máx",
+          "minimum": "Mín",
+          "inflection": "Inflex."
+        },
+        "tangentLab": {
+          "title": "Laboratorio de la recta tangente",
+          "intro": "Arrastra el punto rojo por tu curva: la tangente, su triángulo de subida sobre avance y la pendiente se actualizan al moverlo.",
+          "hint": "Arrastra el punto rojo por la curva",
+          "point": "Punto (x, f(x))",
+          "slope": "Pendiente f′(x)",
+          "angle": "Ángulo de la tangente",
+          "riseRun": "Subida / avance",
+          "tangent": "Ecuación de la tangente",
+          "rising": "sube aquí",
+          "falling": "baja aquí",
+          "flat": "plana aquí (punto crítico)"
+        },
+        "riemann": {
+          "title": "Área por franjas",
+          "intro": "Divide el área bajo tu curva en franjas; más franjas acercan la suma a la integral exacta.",
+          "left": "Izquierda",
+          "midpoint": "Punto medio",
+          "right": "Derecha",
+          "trapezoid": "Trapecio",
+          "strips": "Franjas n",
+          "width": "Ancho de franja",
+          "approx": "Suma de franjas",
+          "reference": "Simpson (n = 1000)",
+          "error": "Error"
+        },
+        "signZone": {
+          "title": "Signo de f en el rango",
+          "intro": "Verde donde la gráfica está sobre el eje x, rojo donde está debajo; cada raíz es una frontera."
+        },
+        "timeline": {
+          "title": "Puntos notables de izquierda a derecha",
+          "intro": "Raíces, intersección, picos, valles y puntos de inflexión en el orden en que aparecen a lo largo de x.",
+          "total": "Total de puntos notables"
+        },
+        "mono": {
+          "title": "Tramos de subida y bajada",
+          "intro": "El rango de x dividido, en orden, en los tramos donde la gráfica sube o baja.",
+          "count": "Tramos"
+        },
+        "balance": {
+          "title": "Área sobre el eje frente a bajo el eje",
+          "intro": "La barra se inclina hacia el área mayor; la integral neta es su diferencia.",
+          "above": "Encima",
+          "below": "Debajo",
+          "net": "Área neta ∫f dx",
+          "average": "Valor medio",
+          "level": "equilibrada",
+          "tiltsAbove": "más área encima",
+          "tiltsBelow": "más área debajo"
+        },
+        "trio": {
+          "title": "Sensibilidad a un paso pequeño",
+          "intro": "f un poco a la izquierda, en y un poco a la derecha del punto trazado, y qué tan bien predice la tangente el siguiente valor.",
+          "low": "x − Δx",
+          "current": "x",
+          "high": "x + Δx",
+          "leftChange": "Cambio a la izquierda",
+          "rightChange": "Cambio a la derecha",
+          "predicted": "Predicción de la tangente",
+          "actual": "Valor real f(x + Δx)",
+          "gap": "diferencia"
+        },
+        "gauge": {
+          "title": "Indicador de inclinación",
+          "intro": "El ángulo de la tangente en el punto trazado, desde una caída vertical (−90°) hasta una subida vertical (+90°).",
+          "slope": "Pendiente f′(x)",
+          "angle": "Ángulo θ",
+          "perUnit": "Subida por unidad de x",
+          "perUnitNote": "igual a la pendiente",
+          "steepDown": "caída fuerte",
+          "steepUp": "subida fuerte"
+        },
+        "donut": {
+          "title": "Forma de la curva en tres anillos",
+          "intro": "Anillo exterior: sube o baja. Medio: cóncava hacia arriba o abajo. Interior: sobre o bajo el eje.",
+          "ringTrend": "Dirección",
+          "ringConcavity": "Concavidad",
+          "ringSign": "Signo"
+        },
+        "bars": {
+          "title": "Valores en nueve puntos",
+          "intro": "f evaluada en nueve valores de x equiespaciados; las barras apuntan arriba si son positivas y abajo si son negativas.",
+          "largest": "Valor más grande",
+          "smallest": "Valor más pequeño",
+          "step": "Paso entre valores de x",
+          "defined": "Puntos definidos"
+        },
+        "formula": {
+          "title": "De la secante a la derivada",
+          "intro": "El cociente de diferencias en el punto trazado con tus números; al reducir h se estabiliza en la pendiente.",
+          "secant": "pendiente secante",
+          "limit": "Límite f′(x)"
+        },
+        "symmetry": {
+          "title": "Prueba de simetría: f(x) frente a f(−x)",
+          "intro": "Pares simétricos lado a lado: valores iguales indican función par, opuestos indican función impar.",
+          "tested": "Pares mostrados",
+          "rule": "Regla que se cumple",
+          "verdict": "Veredicto",
+          "meaning": {
+            "even": "reflejo respecto al eje y",
+            "odd": "giro de 180° alrededor del origen",
+            "neither": "sin simetría de reflejo ni de giro"
+          }
+        }
       }
     },
     "notepad-calculator": {

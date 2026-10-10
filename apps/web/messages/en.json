@@ -20945,14 +20945,6 @@
         "quickReference": {
           "title": "Supported Expression Syntax",
           "intro": "Type any single-variable function of x using standard operators and functions — a few examples:"
-        },
-        "conceptDiagram": {
-          "title": "What a Graph's Landmarks Mean",
-          "intro": "Three things most people actually look for on a graph: where it crosses each axis, and how fast it's rising between two points.",
-          "ariaLabel": "Diagram of a line on x-y axes labeled with its y-intercept, its x-intercept, and a slope triangle showing rise over run between two points",
-          "yInterceptLabel": "y-intercept — where x = 0",
-          "xInterceptLabel": "x-intercept — where y = 0",
-          "slopeLabel": "slope = Δy / Δx"
         }
       },
       "form": {
@@ -21158,6 +21150,183 @@
         "contactPhonePlaceholder": "e.g. +1 555 123 4567",
         "contactOrganizationPlaceholder": "e.g. Acme Financial",
         "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "quickExamples": {
+        "title": "Quick examples",
+        "items": {
+          "cubic": "Cubic with 3 roots",
+          "parabola": "Shifted parabola",
+          "sine": "Sine wave",
+          "damped": "Damped oscillation",
+          "sqrt": "Square root",
+          "reciprocal": "Reciprocal (asymptote)",
+          "gaussian": "Bell curve"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Live graph: values table and drawing",
+        "caption": "Roots in range: {roots} · x from {xMin} to {xMax}",
+        "groupFunction": "Function",
+        "groupValues": "Sample values",
+        "groupKeyPoints": "Key points",
+        "groupTrace": "At the traced point",
+        "groupWhole": "Whole range",
+        "compiled": "valid",
+        "window": "x-window",
+        "wide": "wide",
+        "yRange": "y-range",
+        "defined": "Defined samples",
+        "breaks": "Breaks",
+        "breaksFormula": "gaps + jumps",
+        "traceY": "f at traced x",
+        "slope": "Slope f′(x)",
+        "curvature": "Curvature f″(x)",
+        "tangent": "Tangent line",
+        "area": "Signed area",
+        "absArea": "Total area",
+        "average": "Average value",
+        "arcLength": "Arc length",
+        "symmetry": "Symmetry",
+        "modePlot": "2D plot",
+        "modeSurface": "3D surface",
+        "play": "Animate trace",
+        "pause": "Pause",
+        "traceX": "Trace x",
+        "surfaceHint": "Surface z = f(x)·cos(t) · drag to rotate"
+      },
+      "viz": {
+        "workedExample": "Worked example",
+        "none": "none in range",
+        "undefined": "undefined",
+        "positive": "Above the axis (f > 0)",
+        "negative": "Below the axis (f < 0)",
+        "increasing": "Increasing",
+        "decreasing": "Decreasing",
+        "concaveUp": "Concave up",
+        "concaveDown": "Concave down",
+        "even": "Even",
+        "odd": "Odd",
+        "neither": "Neither",
+        "kinds": {
+          "root": "Roots",
+          "y-intercept": "y-intercept",
+          "maximum": "Local maximum",
+          "minimum": "Local minimum",
+          "inflection": "Inflection point"
+        },
+        "short": {
+          "root": "Root",
+          "y-intercept": "y-int",
+          "maximum": "Max",
+          "minimum": "Min",
+          "inflection": "Inflect."
+        },
+        "tangentLab": {
+          "title": "Tangent line lab",
+          "intro": "Drag the red point along your curve: the tangent line, its rise-over-run triangle and the slope update as you move.",
+          "hint": "Drag the red point along the curve",
+          "point": "Point (x, f(x))",
+          "slope": "Slope f′(x)",
+          "angle": "Angle of tangent",
+          "riseRun": "Rise / run",
+          "tangent": "Tangent equation",
+          "rising": "rising here",
+          "falling": "falling here",
+          "flat": "flat here (critical point)"
+        },
+        "riemann": {
+          "title": "Area by strips",
+          "intro": "Slice the area under your curve into strips; more strips bring the sum closer to the exact integral.",
+          "left": "Left",
+          "midpoint": "Midpoint",
+          "right": "Right",
+          "trapezoid": "Trapezoid",
+          "strips": "Strips n",
+          "width": "Strip width",
+          "approx": "Strip sum",
+          "reference": "Simpson (n = 1000)",
+          "error": "Error"
+        },
+        "signZone": {
+          "title": "Sign of f across the range",
+          "intro": "Green where the graph is above the x-axis, red where it is below; every root is a boundary."
+        },
+        "timeline": {
+          "title": "Landmarks from left to right",
+          "intro": "Roots, intercept, peaks, valleys and inflection points in the order you meet them along x.",
+          "total": "Total landmarks"
+        },
+        "mono": {
+          "title": "Rising and falling stretches",
+          "intro": "The x-range split, in order, into the stretches where the graph goes up or down.",
+          "count": "Stretches"
+        },
+        "balance": {
+          "title": "Area above vs below the axis",
+          "intro": "The beam tips toward the larger area; the net integral is their difference.",
+          "above": "Above",
+          "below": "Below",
+          "net": "Net area ∫f dx",
+          "average": "Average value",
+          "level": "balanced",
+          "tiltsAbove": "more area above",
+          "tiltsBelow": "more area below"
+        },
+        "trio": {
+          "title": "Small step sensitivity",
+          "intro": "f a little to the left of, at, and a little to the right of the traced point, and how well the tangent predicts the next value.",
+          "low": "x − Δx",
+          "current": "x",
+          "high": "x + Δx",
+          "leftChange": "Change on the left",
+          "rightChange": "Change on the right",
+          "predicted": "Tangent prediction",
+          "actual": "Actual f(x + Δx)",
+          "gap": "gap"
+        },
+        "gauge": {
+          "title": "Steepness gauge",
+          "intro": "The tangent's angle at the traced point, from a vertical drop (−90°) to a vertical climb (+90°).",
+          "slope": "Slope f′(x)",
+          "angle": "Angle θ",
+          "perUnit": "Rise per 1 unit of x",
+          "perUnitNote": "equals the slope",
+          "steepDown": "steep fall",
+          "steepUp": "steep rise"
+        },
+        "donut": {
+          "title": "Shape of the curve in three rings",
+          "intro": "Outer ring: rising vs falling. Middle: concave up vs down. Inner: above vs below the axis.",
+          "ringTrend": "Direction",
+          "ringConcavity": "Concavity",
+          "ringSign": "Sign"
+        },
+        "bars": {
+          "title": "Values at nine points",
+          "intro": "f evaluated at nine evenly spaced x-values; bars point up for positive and down for negative values.",
+          "largest": "Largest value",
+          "smallest": "Smallest value",
+          "step": "Step between x-values",
+          "defined": "Defined points"
+        },
+        "formula": {
+          "title": "From secant to derivative",
+          "intro": "The difference quotient at the traced point, with your numbers substituted; as h shrinks it settles on the slope.",
+          "secant": "secant slope",
+          "limit": "Limit f′(x)"
+        },
+        "symmetry": {
+          "title": "Symmetry test: f(x) vs f(−x)",
+          "intro": "Mirror pairs side by side: equal values mean an even function, opposite values an odd one.",
+          "tested": "Mirror pairs shown",
+          "rule": "Rule that holds",
+          "verdict": "Verdict",
+          "meaning": {
+            "even": "mirror image across the y-axis",
+            "odd": "rotation by 180° about the origin",
+            "neither": "no mirror or rotation symmetry"
+          }
+        }
       }
     },
     "notepad-calculator": {
