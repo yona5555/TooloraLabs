@@ -78,6 +78,7 @@ export * from "./ScientificNotationDragGeometry";
 export * from "./ScientificNotationForms";
 export * from "./UnitCircleMath";
 export * from "./ProbabilityCalculator";
+export * from "./ProbabilityEducationMath";
 export * from "./MeanMedianModeRangeCalculator";
 export * from "./TargetHeartRateCalculator";
 export * from "./SleepCalculator";

@@ -24035,9 +24035,6 @@
         "clear": "Effacer",
         "scenarioLabel": "Essayer un exemple classique"
       },
-      "diagram": {
-        "ariaLabel": "Une barre horizontale remplie jusqu'au pourcentage de probabilité calculé"
-      },
       "result": {
         "heading": "Résultat",
         "probability": "Probabilité",
@@ -24060,27 +24057,7 @@
         "intro": {
           "title": "Comprendre la probabilité",
           "paragraph1": "La probabilité mesure à quel point un événement est susceptible de se produire, exprimée par un nombre compris entre 0 (impossible) et 1 (certain) — ou, de manière équivalente, entre 0 % et 100 %. Pour un événement unique aux résultats également probables, la probabilité est simplement le nombre de résultats favorables divisé par le nombre total de résultats possibles : obtenir un 3 en lançant un dé équilibré à six faces a une probabilité de 1/6, car exactement une des six faces également probables est un 3.",
-          "paragraph2": "Les situations réelles impliquent généralement plus d'un événement, d'où l'intérêt des règles de combinaison des probabilités. La règle ET multiplie deux probabilités indépendantes pour trouver la chance que les deux se produisent. La règle OU additionne deux probabilités et soustrait leur chevauchement, afin que les résultats partagés ne soient pas comptés deux fois. La probabilité conditionnelle restreint le champ aux seuls résultats où une condition est déjà connue comme vraie, puis demande quelle est la probabilité de l'événement au sein de cet ensemble plus restreint. Cette calculatrice met en œuvre ces quatre relations directement à partir de leurs définitions standards.",
-          "likelihoodGauge": {
-            "title": "Quelle est la probabilité ?",
-            "intro": "Les probabilités vont d'événements rares à des quasi-certitudes. Choisissez un exemple familier ci-dessous pour voir où il se situe sur l'échelle de probabilité.",
-            "verdict": "{example} — Probabilité : {classification}.",
-            "fact": "Cet exemple a une probabilité d'environ {percent}.",
-            "examples": {
-              "winningRaffle": "Gagner une tombola",
-              "rollingSix": "Obtenir un six",
-              "coinFlip": "Un lancer de pièce",
-              "rainTomorrow": "Pluie demain",
-              "sunriseTomorrow": "Lever du soleil demain"
-            },
-            "zones": {
-              "rare": "Rare",
-              "unlikely": "Improbable",
-              "even": "Chances égales",
-              "likely": "Probable",
-              "certain": "Quasi certain"
-            }
-          }
+          "paragraph2": "Les situations réelles impliquent généralement plus d'un événement, d'où l'intérêt des règles de combinaison des probabilités. La règle ET multiplie deux probabilités indépendantes pour trouver la chance que les deux se produisent. La règle OU additionne deux probabilités et soustrait leur chevauchement, afin que les résultats partagés ne soient pas comptés deux fois. La probabilité conditionnelle restreint le champ aux seuls résultats où une condition est déjà connue comme vraie, puis demande quelle est la probabilité de l'événement au sein de cet ensemble plus restreint. Cette calculatrice met en œuvre ces quatre relations directement à partir de leurs définitions standards."
         },
         "modes": {
           "title": "Les quatre modes de calcul",
@@ -24208,6 +24185,127 @@
           "note": "Le traité fondateur de Laplace formalisant la théorie classique des probabilités, y compris les règles de combinaison des probabilités d'événements indépendants et conditionnels que cette calculatrice met en œuvre.",
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Lire le traité original de Laplace"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "venn": {
+            "title": "Labo de Venn : faites glisser les probabilités",
+            "intro": "Déplacez les curseurs et les entrées de la calculatrice changent avec eux ; les aires des cercles et de l'intersection sont à l'échelle.",
+            "singleNote": "En mode événement simple, A est le premier essai et B une répétition indépendante.",
+            "areaCheck": "Quatre régions"
+          },
+          "monteCarlo": {
+            "title": "Monte-Carlo : la fréquence converge",
+            "intro": "2 000 essais simulés des événements actuels ; la fréquence cumulée se stabilise sur la valeur exacte dans son entonnoir de ±2 erreurs types.",
+            "axis": "Nombre d'essais",
+            "replay": "Rejouer",
+            "newRun": "Nouveau tirage",
+            "trials": "Essais tirés",
+            "seed": "Graine aléatoire",
+            "estimate": "Fréquence simulée",
+            "exact": "Probabilité exacte",
+            "error": "Erreur absolue",
+            "band": "Dispersion attendue (±2 ET)"
+          },
+          "regions": {
+            "title": "L'univers en quatre régions",
+            "intro": "Chaque issue tombe dans une seule région ; les segments encadrés forment l'événement calculé.",
+            "total": "Somme des régions"
+          },
+          "gauge": {
+            "title": "Quelle est la probabilité ?",
+            "intro": "La probabilité calculée sur l'échelle de l'impossible (0 %) au certain (100 %).",
+            "zone": "Vraisemblance",
+            "complement": "Chance que cela n'arrive pas",
+            "oddsAgainst": "Cote contre",
+            "surprise": "Surprise (bits)",
+            "entropy": "Incertitude (bits)",
+            "zones": {
+              "rare": "Rare",
+              "unlikely": "Peu probable",
+              "even": "Presque égal",
+              "likely": "Probable",
+              "certain": "Quasi certain"
+            }
+          },
+          "formula": {
+            "title": "La formule avec vos nombres",
+            "intro": "La règle du mode choisi, chaque symbole remplacé par la valeur qu'il lit en ce moment.",
+            "ruleLabel": "Règle",
+            "rule": {
+              "single": "P(A) = k / n",
+              "and": "P(A∩B) = P(A) × P(B)",
+              "or": "P(A∪B) = P(A) + P(B) − P(A∩B)",
+              "conditional": "P(A|B) = P(A∩B) / P(B)"
+            },
+            "substitute": "Substituer",
+            "divide": "Diviser",
+            "multiply": "Multiplier",
+            "add": "Additionner",
+            "subtract": "Soustraire l'intersection",
+            "toPercent": "En pourcentage"
+          },
+          "tree": {
+            "title": "Arbre de probabilités",
+            "intro": "On sépare d'abord selon B, puis selon A sachant B ; multiplier le long de chaque chemin donne les quatre probabilités conjointes.",
+            "leafSum": "Somme des quatre feuilles"
+          },
+          "binomial": {
+            "title": "Dix répétitions : combien de succès ?",
+            "intro": "Répétez l'événement calculé 10 fois de façon indépendante ; chaque barre est la chance d'obtenir exactement ce nombre de succès.",
+            "axis": "Succès sur 10 essais",
+            "mean": "Succès attendus",
+            "sd": "Écart type",
+            "mostLikely": "Nombre le plus probable"
+          },
+          "rarity": {
+            "title": "Rareté sur échelle logarithmique",
+            "intro": "La probabilité calculée sous la forme « 1 sur N », face aux probabilités exactes de jeux de hasard classiques.",
+            "oneIn": "1 sur N",
+            "bits": "Surprise (bits)",
+            "nearest": "Référence la plus proche",
+            "refs": {
+              "coin": "Face sur une pièce",
+              "die": "Le dé donne 6",
+              "card": "Une carte précise",
+              "tripleSix": "Trois six",
+              "fourKind": "Carré",
+              "royalFlush": "Quinte flush royale",
+              "lottery": "Jackpot 6/49"
+            }
+          },
+          "trials": {
+            "title": "Combien d'essais avant que cela arrive ?",
+            "intro": "Essais nécessaires pour que l'événement calculé se produise au moins une fois avec une confiance croissante.",
+            "axis": "Confiance d'au moins un succès",
+            "rule": "Règle"
+          },
+          "equivalence": {
+            "title": "Six façons d'écrire la même chance",
+            "intro": "Une probabilité, six notations équivalentes utilisées en mathématiques, paris et statistique.",
+            "fraction": "Fraction",
+            "decimal": "Décimal",
+            "percent": "Pourcentage",
+            "perMille": "Pour mille",
+            "oddsFor": "Cote pour",
+            "oddsAgainst": "Cote contre"
+          },
+          "balance": {
+            "title": "Balance d'indépendance",
+            "intro": "L'intersection observée face à celle que prédit l'indépendance ; un fléau horizontal signifie des événements indépendants.",
+            "difference": "Écart",
+            "points": "points de pourcentage",
+            "phi": "Corrélation (phi)"
+          },
+          "ranked": {
+            "title": "Tous les événements, classés",
+            "intro": "Tous les événements définis par les deux entrées, du plus au moins probable.",
+            "highest": "Le plus probable",
+            "lowest": "Le moins probable",
+            "spread": "Étendue",
+            "chain": "Chaîne d'ordre",
+            "check": "Chaîne respectée"
+          }
         }
       },
       "scenarios": {
@@ -24234,11 +24332,48 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
       },
-      "treeDiagram": {
-        "title": "Essayez : Un Arbre de Probabilité",
-        "intro": "Lancer une pièce équilibrée deux fois donne quatre résultats également probables — un arbre de probabilité montre comment trouver chacun d'eux en multipliant les probabilités le long de ses branches.",
-        "ariaLabel": "Un arbre de probabilité pour deux lancers de pièce montrant quatre résultats, chacun avec une probabilité d'un quart",
-        "caption": "La probabilité de chaque branche est 1/2 × 1/2 = 1/4, et les quatre résultats totalisent 1."
+      "live3d": {
+        "cardTitle": "Grille 3D des issues en direct : 100 essais",
+        "groupInputs": "Entrées",
+        "groupResult": "Résultat",
+        "groupEvents": "Compléments",
+        "groupCombos": "Événements combinés",
+        "groupCombosSingle": "Deux essais répétés (A = 1er, B = 2e)",
+        "groupConditional": "Probabilités conditionnelles",
+        "groupOdds": "Cotes et indépendance",
+        "groupLongRun": "Effectifs à long terme",
+        "unfavorable": "Issues défavorables",
+        "decimal": "En décimal",
+        "intersection": "Les deux",
+        "union": "Au moins un",
+        "aOnly": "A seul",
+        "bOnly": "B seul",
+        "neither": "Aucun",
+        "exactlyOne": "Exactement un",
+        "given": "donné",
+        "undefined": "non défini",
+        "product": "Si indépendants",
+        "lift": "Lift",
+        "relation": "Relation",
+        "relations": {
+          "independent": "Indépendants",
+          "exclusive": "Incompatibles",
+          "positive": "Dépendance positive",
+          "negative": "Dépendance négative"
+        },
+        "per100": "Attendu pour 100 essais",
+        "per1000": "Attendu pour 1 000 essais",
+        "oneIn": "1 sur N",
+        "trials50": "Essais pour 50 % de chances",
+        "examples": {
+          "sevenTwoDice": "Somme 7 avec deux dés",
+          "drawAce": "Tirer un as",
+          "twoCoinsHeads": "Deux pièces sur face",
+          "doubleSix": "Double six",
+          "heartOrFace": "Cœur ou figure",
+          "kingGivenFace": "Roi, sachant figure",
+          "sumEightGivenFive": "Somme 8, sachant 1er dé = 5"
+        }
       }
     },
     "mean-median-mode-range-calculator": {

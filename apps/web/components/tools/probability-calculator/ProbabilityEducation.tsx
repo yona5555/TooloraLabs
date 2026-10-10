@@ -4,14 +4,35 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import ProbabilityLikelihoodGauge from "./ProbabilityLikelihoodGauge";
-import ProbabilityTreeDiagram from "./ProbabilityTreeDiagram";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import ProbabilityLive3D from "./ProbabilityLive3D";
+import ProbabilityVennLab from "./ProbabilityVennLab";
+import ProbabilityChanceGauge from "./ProbabilityChanceGauge";
+import ProbabilityEquivalence from "./ProbabilityEquivalence";
+import ProbabilityRarityLogScale from "./ProbabilityRarityLogScale";
+import ProbabilityTreeFlow from "./ProbabilityTreeFlow";
+import ProbabilityIndependenceBalance from "./ProbabilityIndependenceBalance";
+import ProbabilityRegionStackedBar from "./ProbabilityRegionStackedBar";
+import ProbabilityRankedEvents from "./ProbabilityRankedEvents";
+import ProbabilityFormulaDiagram from "./ProbabilityFormulaDiagram";
+import ProbabilityMonteCarlo from "./ProbabilityMonteCarlo";
+import ProbabilityBinomialBars from "./ProbabilityBinomialBars";
+import ProbabilityTrialsStepped from "./ProbabilityTrialsStepped";
 
 type ExampleRow = { calculation: string; result: string };
 type ModeItem = { title: string; description: string };
 
+/** Indicators placed under each mode's explanation (single, and, or, conditional), in that order. */
+const MODE_INDICATORS = [
+  [<ProbabilityChanceGauge key="g" />, <ProbabilityEquivalence key="e" />, <ProbabilityRarityLogScale key="r" />],
+  [<ProbabilityTreeFlow key="t" />, <ProbabilityIndependenceBalance key="b" />],
+  [<ProbabilityRegionStackedBar key="s" />, <ProbabilityRankedEvents key="k" />],
+  [<ProbabilityFormulaDiagram key="f" />],
+];
+
 export default async function ProbabilityEducation() {
   const t = await getTranslations("tools.probability-calculator.education");
+  const t3 = await getTranslations("tools.probability-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const modeItems = t.raw("modes.items") as ModeItem[];
@@ -20,25 +41,29 @@ export default async function ProbabilityEducation() {
 
   return (
     <EncyclopediaPaper>
-      <ProbabilityLikelihoodGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={t3("cardTitle")}>
+          <ProbabilityLive3D />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <ProbabilityTreeDiagram />
+        <ProbabilityVennLab />
       </InfoSection>
 
       <InfoSection title={t("modes.title")}>
         <p>{t("modes.intro")}</p>
         <div className="space-y-4">
-          {modeItems.map((item) => (
+          {modeItems.map((item, i) => (
             <div key={item.title}>
               <h3 className="font-semibold">{item.title}</h3>
               <p className="mt-1">{item.description}</p>
+              {MODE_INDICATORS[i] && <div className="mt-4 space-y-6">{MODE_INDICATORS[i]}</div>}
             </div>
           ))}
         </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -59,6 +84,11 @@ export default async function ProbabilityEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="space-y-6">
+          <ProbabilityMonteCarlo />
+          <ProbabilityBinomialBars />
+          <ProbabilityTrialsStepped />
         </div>
       </InfoSection>
 

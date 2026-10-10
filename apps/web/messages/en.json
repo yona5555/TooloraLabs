@@ -24035,9 +24035,6 @@
         "clear": "Clear",
         "scenarioLabel": "Try a classic example"
       },
-      "diagram": {
-        "ariaLabel": "A horizontal meter filled to the calculated probability percentage"
-      },
       "result": {
         "heading": "Result",
         "probability": "Probability",
@@ -24060,27 +24057,7 @@
         "intro": {
           "title": "Understanding Probability",
           "paragraph1": "Probability measures how likely an event is to happen, expressed as a number between 0 (impossible) and 1 (certain) — or, equivalently, between 0% and 100%. For a single event with equally likely outcomes, probability is simply the count of favorable outcomes divided by the total count of possible outcomes: rolling a 3 on a fair six-sided die has probability 1/6, because exactly one of the six equally likely faces is a 3.",
-          "paragraph2": "Real situations usually involve more than one event, which is where the rules for combining probabilities come in. The AND rule multiplies two independent probabilities together to find the chance both happen. The OR rule adds two probabilities and subtracts their overlap, so shared outcomes aren't counted twice. Conditional probability narrows the field to only the outcomes where a condition is already known to be true, then asks how likely the event is within that narrower set. This calculator implements all four relationships directly from their standard definitions.",
-          "likelihoodGauge": {
-            "title": "How Likely Is That?",
-            "intro": "Probabilities range from rare events to near certainties. Pick a familiar example below to see where it falls on the likelihood scale.",
-            "verdict": "{example} — Likelihood: {classification}.",
-            "fact": "This example has about a {percent} chance.",
-            "examples": {
-              "winningRaffle": "Winning a Raffle",
-              "rollingSix": "Rolling a Six",
-              "coinFlip": "A Coin Flip",
-              "rainTomorrow": "Rain Tomorrow",
-              "sunriseTomorrow": "Sunrise Tomorrow"
-            },
-            "zones": {
-              "rare": "Rare",
-              "unlikely": "Unlikely",
-              "even": "Even Odds",
-              "likely": "Likely",
-              "certain": "Near Certain"
-            }
-          }
+          "paragraph2": "Real situations usually involve more than one event, which is where the rules for combining probabilities come in. The AND rule multiplies two independent probabilities together to find the chance both happen. The OR rule adds two probabilities and subtracts their overlap, so shared outcomes aren't counted twice. Conditional probability narrows the field to only the outcomes where a condition is already known to be true, then asks how likely the event is within that narrower set. This calculator implements all four relationships directly from their standard definitions."
         },
         "modes": {
           "title": "The Four Calculation Modes",
@@ -24208,6 +24185,127 @@
           "note": "Laplace's foundational treatise formalizing classical probability theory, including the rules for combining the probabilities of independent and conditional events that this calculator implements.",
           "url": "https://archive.org/details/thoriean00lapl",
           "readOriginal": "Read Laplace's Original Treatise"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "venn": {
+            "title": "Venn Lab: Drag the Probabilities",
+            "intro": "Move the sliders and the calculator's own inputs change with them; circle and overlap areas are drawn to scale.",
+            "singleNote": "In single-event mode, A is the first trial and B an independent repeat of it.",
+            "areaCheck": "Four regions"
+          },
+          "monteCarlo": {
+            "title": "Monte Carlo: Watching Frequency Converge",
+            "intro": "2,000 simulated trials of the current events; the running frequency settles onto the exact answer inside its ±2 standard-error funnel.",
+            "axis": "Number of trials",
+            "replay": "Replay",
+            "newRun": "New run",
+            "trials": "Trials drawn",
+            "seed": "Random seed",
+            "estimate": "Simulated frequency",
+            "exact": "Exact probability",
+            "error": "Absolute error",
+            "band": "Expected spread (±2 SE)"
+          },
+          "regions": {
+            "title": "The Sample Space in Four Regions",
+            "intro": "Every outcome lands in exactly one region; the outlined segments make up the calculated event.",
+            "total": "Sum of regions"
+          },
+          "gauge": {
+            "title": "How Likely Is It?",
+            "intro": "The calculated probability placed on the scale from impossible (0%) to certain (100%).",
+            "zone": "Likelihood",
+            "complement": "Chance it does not happen",
+            "oddsAgainst": "Odds against",
+            "surprise": "Surprise (bits)",
+            "entropy": "Uncertainty (bits)",
+            "zones": {
+              "rare": "Rare",
+              "unlikely": "Unlikely",
+              "even": "About even",
+              "likely": "Likely",
+              "certain": "Near certain"
+            }
+          },
+          "formula": {
+            "title": "The Formula With Your Numbers",
+            "intro": "The rule for the selected mode, with each symbol replaced by the value it reads right now.",
+            "ruleLabel": "Rule",
+            "rule": {
+              "single": "P(A) = k / n",
+              "and": "P(A∩B) = P(A) × P(B)",
+              "or": "P(A∪B) = P(A) + P(B) − P(A∩B)",
+              "conditional": "P(A|B) = P(A∩B) / P(B)"
+            },
+            "substitute": "Substitute",
+            "divide": "Divide",
+            "multiply": "Multiply",
+            "add": "Add",
+            "subtract": "Subtract the overlap",
+            "toPercent": "As a percentage"
+          },
+          "tree": {
+            "title": "Probability Tree",
+            "intro": "Split on B first, then on A given B; multiplying along each path gives the four joint probabilities.",
+            "leafSum": "Sum of the four leaves"
+          },
+          "binomial": {
+            "title": "Ten Repeats: How Many Hits?",
+            "intro": "Repeat the calculated event 10 independent times; each bar is the chance of exactly that many successes.",
+            "axis": "Number of successes in 10 trials",
+            "mean": "Expected successes",
+            "sd": "Standard deviation",
+            "mostLikely": "Most likely count"
+          },
+          "rarity": {
+            "title": "Rarity on a Log Scale",
+            "intro": "The calculated probability as \"1 in N\", set against the exact odds of classic games of chance.",
+            "oneIn": "1 in N",
+            "bits": "Surprise (bits)",
+            "nearest": "Closest reference",
+            "refs": {
+              "coin": "Coin heads",
+              "die": "Die shows 6",
+              "card": "One named card",
+              "tripleSix": "Three sixes",
+              "fourKind": "Four of a kind",
+              "royalFlush": "Royal flush",
+              "lottery": "6/49 jackpot"
+            }
+          },
+          "trials": {
+            "title": "How Many Tries Until It Happens?",
+            "intro": "Tries needed for the calculated event to happen at least once with growing confidence.",
+            "axis": "Confidence of at least one success",
+            "rule": "Rule"
+          },
+          "equivalence": {
+            "title": "Six Ways to Write the Same Chance",
+            "intro": "One probability, six equal notations used in maths, betting and statistics.",
+            "fraction": "Fraction",
+            "decimal": "Decimal",
+            "percent": "Percentage",
+            "perMille": "Per thousand",
+            "oddsFor": "Odds for",
+            "oddsAgainst": "Odds against"
+          },
+          "balance": {
+            "title": "Independence Balance",
+            "intro": "The observed overlap against the overlap independence predicts; a level beam means independent events.",
+            "difference": "Difference",
+            "points": "percentage points",
+            "phi": "Correlation (phi)"
+          },
+          "ranked": {
+            "title": "Every Event, Ranked",
+            "intro": "All the events the two inputs define, sorted from most to least likely.",
+            "highest": "Most likely",
+            "lowest": "Least likely",
+            "spread": "Range",
+            "chain": "Order chain",
+            "check": "Chain holds"
+          }
         }
       },
       "scenarios": {
@@ -24234,11 +24332,48 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
       },
-      "treeDiagram": {
-        "title": "Try It: A Probability Tree",
-        "intro": "Flipping a fair coin twice has four equally likely outcomes — a probability tree shows how to find each one by multiplying the probabilities along its branches.",
-        "ariaLabel": "A probability tree for two coin flips showing four outcomes each with probability one quarter",
-        "caption": "Each branch's probability is 1/2 × 1/2 = 1/4, and all four outcomes add up to 1."
+      "live3d": {
+        "cardTitle": "Live 3D Outcome Grid: 100 Trials",
+        "groupInputs": "Inputs",
+        "groupResult": "Result",
+        "groupEvents": "Complements",
+        "groupCombos": "Combined events",
+        "groupCombosSingle": "Two repeated trials (A = 1st, B = 2nd)",
+        "groupConditional": "Conditional probabilities",
+        "groupOdds": "Odds and independence",
+        "groupLongRun": "Long-run counts",
+        "unfavorable": "Unfavorable outcomes",
+        "decimal": "As a decimal",
+        "intersection": "Both",
+        "union": "At least one",
+        "aOnly": "A only",
+        "bOnly": "B only",
+        "neither": "Neither",
+        "exactlyOne": "Exactly one",
+        "given": "given",
+        "undefined": "undefined",
+        "product": "If independent",
+        "lift": "Lift",
+        "relation": "Relationship",
+        "relations": {
+          "independent": "Independent",
+          "exclusive": "Mutually exclusive",
+          "positive": "Positively dependent",
+          "negative": "Negatively dependent"
+        },
+        "per100": "Expected per 100 trials",
+        "per1000": "Expected per 1,000 trials",
+        "oneIn": "1 in N",
+        "trials50": "Tries for a 50% chance",
+        "examples": {
+          "sevenTwoDice": "Sum of 7 with two dice",
+          "drawAce": "Drawing an ace",
+          "twoCoinsHeads": "Two coins both heads",
+          "doubleSix": "Double six",
+          "heartOrFace": "Heart or face card",
+          "kingGivenFace": "King, given a face card",
+          "sumEightGivenFive": "Sum 8, given first die is 5"
+        }
       }
     },
     "mean-median-mode-range-calculator": {
