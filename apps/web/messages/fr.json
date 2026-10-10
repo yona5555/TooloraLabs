@@ -22384,11 +22384,7 @@
           "circumference": "Circonférence",
           "area": "Aire"
         },
-        "scenarioLabel": "Remplir rapidement un exemple résolu",
         "clear": "Effacer"
-      },
-      "diagram": {
-        "ariaLabel": "Un cercle dessiné à l'échelle avec son rayon marqué par une ligne pointillée depuis le centre"
       },
       "result": {
         "heading": "Résultat",
@@ -22410,24 +22406,6 @@
           "title": "Comprendre les Mesures du Cercle",
           "paragraph1": "Un cercle est entièrement défini par un seul nombre : son rayon, la distance de son centre à n'importe quel point de son bord. Toute autre mesure courante — diamètre, circonférence, aire — est un multiple fixe ou une fonction de ce seul rayon, c'est pourquoi connaître l'une des quatre mesures suffit toujours à retrouver les trois autres ; il n'existe pas de cercle \"sous-déterminé\" comme cela peut être le cas pour un triangle ou un quadrilatère général.",
           "paragraph2": "La constante qui relie la circonférence d'un cercle à son diamètre est π (pi) — un nombre irrationnel, environ 3,14159, qui ne se termine ni ne se répète jamais sous forme décimale. Le diamètre est simplement le double du rayon ; la circonférence est π fois le diamètre (soit, de manière équivalente, 2π fois le rayon) ; et l'aire est π fois le rayon au carré. Cet outil accepte celle des quatre valeurs que vous connaissez déjà et en déduit instantanément les autres.",
-          "radiusGauge": {
-            "title": "Où se situe ce rayon ?",
-            "intro": "La taille des cercles couvre une gamme énorme, d'une petite pièce de monnaie à une immense grande roue. Choisissez un exemple réel ci-dessous pour voir où se situe son rayon.",
-            "verdict": "{example} — Échelle : {classification}.",
-            "fact": "Cet exemple a un rayon d'environ {radius}.",
-            "examples": {
-              "coin": "Une pièce de monnaie",
-              "dinnerPlate": "Une assiette",
-              "bicycleWheel": "Une roue de vélo",
-              "runningTrack": "Une piste d'athlétisme",
-              "ferrisWheel": "Une grande roue"
-            },
-            "scales": {
-              "pocket": "Format de poche",
-              "room": "Taille d'une pièce",
-              "landmark": "Taille d'un monument"
-            }
-          },
           "paragraph3": "La formule de l'aire suit la même idée, mais avec les secteurs plutôt que le bord : découpez le cercle en fines parts de tarte et alignez-les bord à bord, elles se rapprochent d'un rectangle dont la hauteur est le rayon et la base la moitié de la circonférence (πr) — ce qui donne une aire de πr × r = πr²."
         },
         "examples": {
@@ -22554,7 +22532,10 @@
         "bicycleWheel": "Roue de vélo (rayon)",
         "pizzaDiameter": "Pizza (diamètre)",
         "trackLap": "Piste d'athlétisme (circonférence)",
-        "roomFloor": "Pièce ronde (aire)"
+        "roomFloor": "Pièce ronde (aire)",
+        "coin": "Pièce de 25 cents US (diamètre)",
+        "compactDisc": "CD audio (diamètre)",
+        "ferrisWheel": "London Eye (diamètre)"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -22574,23 +22555,176 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
       },
-      "piDiagram": {
-        "title": "Essayez : Dérouler la Circonférence",
-        "intro": "Si vous pouviez découper le bord d'un cercle et l'étaler à plat, il mesurerait exactement π diamètres de long — trois diamètres complets plus un petit morceau restant.",
-        "ariaLabel": "La circonférence d'un cercle déroulée en une ligne droite de longueur pi fois le diamètre",
-        "caption": "C'est exactement pourquoi π ≈ 3,14159 — c'est le rapport fixe entre la circonférence de tout cercle et son diamètre."
+      "live3d": {
+        "educationTitle": "Votre cercle, mesuré sous tous les angles",
+        "given": "donné",
+        "units": {
+          "len": "u",
+          "area": "u²",
+          "vol": "u³"
+        },
+        "groups": {
+          "given": "Valeur connue → rayon",
+          "core": "Mesures principales",
+          "sectors": "Arcs, secteurs et cordes",
+          "squares": "Carrés inscrit et circonscrit",
+          "solids": "Solides associés (même rayon)",
+          "conversions": "Conversions d'unités"
+        },
+        "rows": {
+          "piCheck": "Circonférence ÷ diamètre",
+          "areaPerRim": "Aire par unité de bord",
+          "arc": "Longueur d'arc à {deg}°",
+          "sector": "Aire du secteur à {deg}°",
+          "chord": "Corde à {deg}°",
+          "segment": "Aire du segment à {deg}°",
+          "inSquareSide": "Côté du carré inscrit",
+          "inSquareArea": "Aire du carré inscrit",
+          "outSquareArea": "Aire du carré circonscrit",
+          "fill": "Remplissage du carré par le cercle",
+          "sphereVolume": "Volume de la sphère",
+          "sphereSurface": "Aire de la sphère",
+          "cylinderVolume": "Volume du cylindre (h = d)",
+          "rInches": "Rayon, si en cm → pouces",
+          "aInches": "Aire, si en cm² → po²",
+          "cFeet": "Circonférence, si en m → pieds",
+          "aFeet": "Aire, si en m² → pi²"
+        }
       },
-      "areaDiagram": {
-        "areaSectorsCaption": "Les secteurs du cercle déroulés en une bande approximant un rectangle de base πr et de hauteur r — son aire, πr × r = πr², est la formule de l'aire du cercle.",
-        "areaHeightLabel": "hauteur = r",
-        "areaBaseLabel": "base = πr"
-      },
-      "growthChart": {
-        "chartAriaLabel": "Graphique linéaire comparant la circonférence (croissance linéaire) et l'aire (croissance quadratique) lorsque le rayon augmente de 0 à 10",
-        "radiusLabel": "r = {r}",
-        "legendCircumference": "Circonférence (2πr)",
-        "legendArea": "Aire (πr²)",
-        "caption": "À mesure que le rayon augmente, la circonférence croît proportionnellement, mais l'aire croît avec le carré du rayon — doubler le rayon double environ la circonférence mais quadruple l'aire."
+      "ind": {
+        "worked": "Exemple résolu",
+        "lab": {
+          "title": "Labo de glissement du rayon",
+          "heading": "Faites glisser la poignée rouge pour redimensionner le cercle",
+          "intro": "La poignée fixe le rayon de la calculatrice ci-dessus ; tous les nombres de la page la suivent en direct, y compris les carrés tracés dans et autour du cercle.",
+          "aria": "Cercle déplaçable avec son rayon, son diamètre, son carré inscrit et son carré circonscrit",
+          "rowScale": "Échelle de l'axe",
+          "rowInside": "Aire du carré inscrit",
+          "rowOutside": "Aire du carré circonscrit",
+          "legendRadius": "Rayon (glissez la poignée)",
+          "legendInside": "Carré inscrit",
+          "legendOutside": "Carré circonscrit"
+        },
+        "unroll": {
+          "title": "Dérouler la circonférence",
+          "heading": "Faites rouler le cercle et déposez son bord à plat",
+          "intro": "Quand le cercle fait un tour complet, son bord trace une ligne droite d'exactement π diamètres : au-delà de 1d, 2d et 3d, puis un peu plus.",
+          "aria": "Un cercle qui roule sur une ligne en déroulant sa circonférence",
+          "play": "Lecture",
+          "pause": "Pause",
+          "progress": "Parcouru",
+          "rowDiameter": "Diamètre",
+          "rowRolled": "Angle parcouru",
+          "rowLaid": "Bord déposé",
+          "rowLeft": "Bord restant sur le cercle",
+          "rowInD": "Longueur déposée en diamètres",
+          "rowFull": "Circonférence complète"
+        },
+        "steps": {
+          "title": "Chemin de résolution",
+          "heading": "Du {field} connu à toutes les autres mesures",
+          "intro": "Chaque étape n'utilise que le résultat de l'étape précédente, avec vos nombres actuels substitués.",
+          "given": "donné"
+        },
+        "growth": {
+          "title": "Croissance de la circonférence et de l'aire",
+          "heading": "La circonférence croît en ligne droite, l'aire en courbe",
+          "intro": "Les deux courbes vont de zéro au double de votre rayon ; la ligne pointillée marque votre cercle et le point violet l'endroit où les deux valeurs sont égales.",
+          "rowSlopeC": "Circonférence gagnée par unité de rayon",
+          "rowSlopeA": "Aire gagnée par unité de rayon (maintenant)",
+          "rowCross": "Où A = C",
+          "rowRatio": "Aire sur circonférence",
+          "legendC": "Circonférence 2πr",
+          "legendA": "Aire πr²",
+          "legendNow": "Votre rayon"
+        },
+        "trio": {
+          "title": "Sensibilité au rayon",
+          "heading": "Effet d'une variation de ±{pct} % du rayon",
+          "intro": "Le bord varie du même pourcentage que le rayon, mais l'aire varie environ deux fois plus car elle dépend du carré du rayon.",
+          "change": "Variation",
+          "low": "Plus petit",
+          "current": "Actuel",
+          "high": "Plus grand",
+          "rowFactor": "Facteur du rayon",
+          "rowRule": "Facteur de l'aire (plus grand)"
+        },
+        "bars": {
+          "title": "Aires dans et autour du cercle",
+          "heading": "Le cercle entre ses polygones inscrits et circonscrits",
+          "intro": "Les polygones tracés dans le cercle ont moins d'aire et ceux tracés autour en ont plus ; le cercle se situe entre les deux.",
+          "inSquare": "Carré inscrit",
+          "inHex": "Hexagone inscrit",
+          "circle": "Cercle",
+          "outHex": "Hexagone circonscrit",
+          "outSquare": "Carré circonscrit"
+        },
+        "stack": {
+          "title": "Découper le carré environnant",
+          "heading": "Le carré autour du cercle, pièce par pièce",
+          "intro": "Le carré tracé autour du cercle se divise en carré inscrit, quatre segments circulaires et quatre coins. Les deux premiers forment ensemble le cercle.",
+          "inSquare": "Carré inscrit",
+          "segments": "Quatre segments circulaires",
+          "corners": "Quatre coins extérieurs",
+          "circle": "Cercle",
+          "total": "Carré circonscrit"
+        },
+        "equal": {
+          "title": "Même aire, trois formes",
+          "heading": "Trois formes qui enferment chacune {area}",
+          "intro": "Déroulés, les secteurs du cercle forment un rectangle de πr de long et r de haut ; un carré de côté r√π a aussi la même aire.",
+          "circle": "Cercle",
+          "square": "Carré",
+          "rect": "Rectangle",
+          "squareCheck": "Vérification du carré",
+          "rectCheck": "Vérification du rectangle"
+        },
+        "rings": {
+          "title": "Où se trouve l'aire",
+          "heading": "Quatre anneaux de même largeur, d'aires différentes",
+          "intro": "Découpez le disque en quatre anneaux de même largeur : l'anneau extérieur contient à lui seul 7/16 de l'aire, le disque central seulement 1/16.",
+          "ring": "Anneau",
+          "total": "Aire totale"
+        },
+        "iso": {
+          "title": "Même périmètre, classées par aire",
+          "heading": "Formes de même périmètre que votre cercle ({c})",
+          "intro": "À périmètre fixé, aucune forme n'enferme plus d'aire que le cercle ; les polygones réguliers à plus de côtés s'en rapprochent.",
+          "perimeter": "Périmètre commun",
+          "circle": "Cercle",
+          "hexagon": "Hexagone régulier",
+          "square": "Carré",
+          "triangle": "Triangle équilatéral",
+          "side": "côté"
+        },
+        "gauge": {
+          "title": "Méthode des polygones d'Archimède",
+          "heading": "Un polygone régulier à {n} côtés dans le cercle",
+          "intro": "Archimède a encadré π entre des polygones inscrits et circonscrits. Déplacez le curseur pour ajouter des côtés et voyez le périmètre inscrit s'approcher de la vraie circonférence.",
+          "sides": "Côtés",
+          "inside": "Périmètre inscrit",
+          "outside": "Périmètre circonscrit",
+          "bounds": "Encadrement de π",
+          "share": "Périmètre inscrit ÷ circonférence"
+        },
+        "zones": {
+          "title": "Zones de l'angle du secteur",
+          "heading": "Un secteur de {deg}° · {zone}",
+          "intro": "Faites glisser l'angle au centre pour voir l'arc, le secteur, la corde et le segment de votre cercle, et le type d'angle.",
+          "angle": "Angle au centre",
+          "zero": "Nul",
+          "acute": "Aigu",
+          "right": "Droit",
+          "obtuse": "Obtus",
+          "straight": "Plat",
+          "reflex": "Rentrant",
+          "full": "Tour complet",
+          "radians": "Angle en radians",
+          "arc": "Longueur d'arc",
+          "sector": "Aire du secteur",
+          "chord": "Corde",
+          "segment": "Aire du segment"
+        }
       }
     },
     "gcf-lcm-calculator": {
