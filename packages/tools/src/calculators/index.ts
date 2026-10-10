@@ -58,6 +58,7 @@ export * from "./NotepadCalculator";
 export * from "./GcfLcmCalculator";
 export * from "./PaceCalculator";
 export * from "./RandomNumberGenerator";
+export * from "./RandomNumberMath";
 export * from "./StandardDeviationCalculator";
 export * from "./CircleCalculator";
 export * from "./TriangleCalculator";
