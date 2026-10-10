@@ -27644,7 +27644,11 @@
       "nav": {
         "tool": "Calculatrice",
         "faq": "FAQ",
-        "behindTheTool": "Dans les coulisses"
+        "behindTheTool": "Dans les coulisses",
+        "models": "Modèles",
+        "totals": "Totaux",
+        "patterns": "Motifs",
+        "examples": "Exemples résolus"
       },
       "form": {
         "inputTitle": "Paramètres de la Table",
@@ -27654,7 +27658,16 @@
         "maxMultiplierLabel": "Jusqu'à",
         "rangeStartLabel": "De",
         "rangeEndLabel": "À",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "quickNumbers": "Tables rapides",
+        "quickRanges": "Grilles rapides",
+        "selectedFact": "Opération choisie",
+        "rowLabel": "Ligne",
+        "columnLabel": "Colonne",
+        "multiplierLabel": "Multiplicateur",
+        "squaresTitle": "Différence de carrés",
+        "squaresExact": "Les deux facteurs ont la même parité : le produit est le carré du milieu moins un petit carré.",
+        "squaresOdd": "Les facteurs n'ont pas la même parité : partez plutôt de l'opération avec un groupe de moins."
       },
       "result": {
         "heading": "Table de Multiplication",
@@ -27662,12 +27675,18 @@
         "invalidMultiplier": "Saisissez un nombre entier entre 1 et 100.",
         "invalidRange": "Saisissez une plage valide, le nombre de départ ne devant pas être supérieur au nombre de fin.",
         "rangeTooLarge": "Choisissez une plage de 30 nombres ou moins pour une grille lisible.",
-        "print": "Imprimer"
-      },
-      "quickReference": {
-        "title": "Le calcul",
-        "intro": "Chaque cellule est simplement le numéro de ligne multiplié par le numéro de colonne.",
-        "commutativeNote": "La multiplication est commutative : inverser l'ordre des deux nombres ne change jamais le produit."
+        "print": "Imprimer",
+        "selected": "Opération choisie",
+        "groups": "{b} sauts de {a} sur la droite numérique",
+        "flowAria": "Compter de {a} en {a}, {b} fois",
+        "prev": "Multiplicateur précédent",
+        "next": "Multiplicateur suivant",
+        "play": "Lecture",
+        "pause": "Pause",
+        "tapHint": "Touchez un produit pour le choisir ; tous les graphiques ci-dessous le suivent.",
+        "legendSelected": "Choisi",
+        "legendMirror": "Miroir (b × a)",
+        "legendSquares": "Carrés"
       },
       "education": {
         "intro": {
@@ -27711,6 +27730,14 @@
             {
               "question": "Pourquoi y a-t-il une limite à la taille de la plage que je peux générer ?",
               "answer": "Une grille pour une très grande plage de nombres devient impraticablement grande à afficher ou imprimer lisiblement sur une seule page, donc cet outil limite la plage à 30 nombres (une grille 30×30), ce qui couvre confortablement les plages généralement utilisées pour les tableaux de référence et le matériel de classe."
+            },
+            {
+              "question": "Combien de nombres distincts compte une table de multiplication de 10 × 10 ?",
+              "answer": "Seules 42 des 100 cases contiennent des valeurs distinctes, et la table de 12 × 12 en a 59 sur 144 cases, car des produits comme 12 ou 24 apparaissent plusieurs fois. Paul Erdős a montré que cette part tend vers zéro quand la table grandit, et Kevin Ford a établi son rythme exact de décroissance en 2008."
+            },
+            {
+              "question": "Qu'est-ce que la preuve par neuf ?",
+              "answer": "C'est une vérification rapide d'une multiplication : remplacez chaque facteur par sa racine numérique (additionnez ses chiffres jusqu'à n'en garder qu'un), multipliez ces racines et reprenez la racine numérique. Si elle ne correspond pas à celle de votre réponse, la réponse est fausse. Une correspondance ne prouve pas que la réponse est juste, mais elle détecte la plupart des erreurs."
             }
           ]
         },
@@ -27765,14 +27792,40 @@
                 "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
               }
             ]
+          },
+          "method": {
+            "title": "Comment l'outil calcule",
+            "paragraph": "Chaque valeur de cette page est un calcul exact en nombres entiers effectué dans votre navigateur : la table elle-même, les totaux de ligne et de grille (avec les formules fermées a × n(n+1)/2 et (Σ)²), les cycles des unités et de la racine numérique (à partir du plus grand commun diviseur avec 10 et 9), les paires de facteurs et les facteurs premiers du produit choisi, et le nombre de produits distincts de la grille. Les mêmes fonctions sont couvertes par des tests automatisés."
           }
         },
         "references": {
           "title": "Références Scientifiques",
-          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
-          "note": "Une histoire savante des mathématiques babyloniennes, y compris le système numérique en base 60 et les anciennes tables de multiplication cunéiformes qu'il a produites.",
-          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
-          "readOriginal": "Consulter la Référence"
+          "readOriginal": "Consulter la Référence",
+          "items": [
+            {
+              "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+              "note": "Histoire savante des mathématiques babyloniennes, dont la numération sexagésimale et les tables de multiplication cunéiformes qu'elle a produites.",
+              "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq"
+            },
+            {
+              "citation": "Ford, K. (2008). The distribution of integers with a divisor in a given interval. Annals of Mathematics, 168(2), 367–433. DOI: 10.4007/annals.2008.168.367",
+              "note": "Établit l'ordre de croissance du nombre de produits distincts dans une table N × N, le problème posé par Erdős.",
+              "url": "https://doi.org/10.4007/annals.2008.168.367"
+            },
+            {
+              "citation": "National Research Council (2001). Adding It Up: Helping Children Learn Mathematics. National Academy Press. DOI: 10.17226/9822",
+              "note": "Le rapport de référence sur l'acquisition par les enfants de l'aisance avec les faits numériques, dont les stratégies dérivées et la commutativité.",
+              "url": "https://doi.org/10.17226/9822"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Avis",
+          "items": [
+            "Tous les résultats sont des calculs exacts en nombres entiers effectués dans votre navigateur ; rien de ce que vous saisissez n'est envoyé à un serveur.",
+            "Les tables simples vont jusqu'à × 100 et les grilles jusqu'à 30 × 30 nombres, pour que chaque graphique et impression reste lisible.",
+            "L'escalier de mémorisation suit des raccourcis courants en classe ; c'est une aide à l'étude, pas un substitut aux conseils de l'enseignant ou du programme."
+          ]
         }
       },
       "shareExport": {
@@ -27796,6 +27849,213 @@
         "inputSectionTitle": "Entrée",
         "resultSectionTitle": "Résultat",
         "sentence": "Table de multiplication générée."
+      },
+      "relatedTools": {
+        "title": "Outils de maths associés"
+      },
+      "sidebar": {
+        "title": "L'essentiel en un coup d'œil",
+        "note": "En direct d'après l'opération et la table choisies.",
+        "fact": "Opération choisie",
+        "primes": "Facteurs premiers",
+        "pairs": "Paires de facteurs",
+        "root": "Racine numérique",
+        "units": "Cycle des unités",
+        "rowSum": "Somme de la ligne de {a}",
+        "gridSum": "Somme de la grille {lo}–{hi}",
+        "distinct": "Produits distincts",
+        "hard": "Opérations difficiles restantes"
+      },
+      "ind": {
+        "worked": "Exemple résolu",
+        "empty": "Corrigez la saisie ci-dessus pour voir les graphiques.",
+        "area": {
+          "title": "Labo du modèle d'aire",
+          "heading": "{a} lignes × {b} colonnes",
+          "intro": "Faites glisser la poignée verte : l'aire du rectangle est le produit, découpé en deux produits partiels faciles.",
+          "rowFact": "Rectangle",
+          "rowSplit": "Découper les lignes",
+          "rowLow": "Première bande",
+          "rowHigh": "Deuxième bande",
+          "rowResult": "Aire",
+          "outside": "Votre opération dépasse ce plateau de {size} × {size} ; la poignée marque son coin.",
+          "legendLow": "{n} lignes",
+          "legendHigh": "{n} lignes",
+          "dragHint": "Faites glisser la poignée"
+        },
+        "bars": {
+          "title": "Produits de la ligne",
+          "heading": "La table de {a} en barres",
+          "intro": "Chaque barre est un produit et grandit toujours du même pas. Touchez une barre pour la choisir.",
+          "rowSelected": "Choisi",
+          "rowStep": "Pas par barre",
+          "rowTallest": "Barre la plus haute",
+          "rowHeight": "Rapport de hauteur",
+          "rowResult": "Hauteur choisie"
+        },
+        "array": {
+          "title": "Modèle en tableau",
+          "heading": "{a} × {b} en points, dans les deux sens",
+          "intro": "Les mêmes points rangés en lignes de l'un ou l'autre facteur ; tourner le tableau ne change jamais le total.",
+          "rowLeft": "{b} groupes de {a}",
+          "rowRight": "{a} groupes de {b}",
+          "rowDots": "Points dans chaque tableau",
+          "rowResult": "Commutativité",
+          "left": "{b} lignes de {a}",
+          "right": "{a} lignes de {b}",
+          "more": "+ {n} lignes de plus"
+        },
+        "balance": {
+          "title": "Balance distributive",
+          "heading": "Décomposez {b} et gardez {a} × {b} en équilibre",
+          "intro": "Réglez les deux parties avec les curseurs ; le fléau ne reste horizontal que si les parties redonnent le multiplicateur.",
+          "sliderC": "Première partie c",
+          "sliderD": "Deuxième partie d",
+          "rowLeft": "Plateau gauche",
+          "rowRight": "Plateau droit",
+          "rowDiff": "Droit − gauche",
+          "rowRule": "Parties",
+          "rowResult": "Fléau",
+          "balanced": "Équilibré",
+          "tipped": "Penché : c + d ≠ b",
+          "note": "Découpage facile : {a}×{c} = {left}, plus {right}"
+        },
+        "trio": {
+          "title": "Opérations voisines",
+          "heading": "Un groupe de moins, un groupe de plus de {a}",
+          "intro": "Les opérations voisines diffèrent de la choisie d'exactement un groupe : une opération connue en débloque deux autres.",
+          "rowNow": "Choisi",
+          "rowPrev": "Un groupe de moins",
+          "rowNext": "Un groupe de plus",
+          "rowResult": "Pas",
+          "prev": "En dessous",
+          "now": "Choisi",
+          "next": "Au-dessus"
+        },
+        "stack": {
+          "title": "Total de la ligne",
+          "heading": "Tous les produits de {a} totalisent {sum}",
+          "intro": "Toute la ligne empilée bout à bout ; elle vaut le nombre fois la somme des multiplicateurs.",
+          "rowMultipliers": "Somme des multiplicateurs",
+          "rowTimes": "Fois le nombre",
+          "rowSelected": "Part du choisi",
+          "rowResult": "Total de la ligne"
+        },
+        "formula": {
+          "title": "Formule du total de la grille",
+          "heading": "Toutes les cases de la grille {lo}–{hi} additionnées",
+          "intro": "Chaque case valant ligne × colonne, toute la grille carrée totalise le carré de la somme d'un côté.",
+          "rowCount": "Cases",
+          "rowSide": "Somme d'un côté",
+          "rowSquare": "Au carré",
+          "rowMean": "Case moyenne",
+          "rowResult": "Total de la grille",
+          "boxSide": "Un côté",
+          "boxSquare": "Au carré",
+          "boxTotal": "Toutes les cases",
+          "cells": "{n} cases"
+        },
+        "units": {
+          "title": "Cycle des unités",
+          "heading": "Les unités de {a} se répètent tous les {period}",
+          "intro": "Le dernier chiffre de chaque produit ne dépend que du dernier chiffre du nombre ; il suit donc une boucle fixe.",
+          "rowUnits": "Dernier chiffre du nombre",
+          "rowGcd": "Facteur commun avec 10",
+          "rowPeriod": "Longueur du cycle",
+          "rowSelected": "Le choisi finit par",
+          "rowResult": "Chiffres utilisés",
+          "cycle": "se répète tous les {n}"
+        },
+        "roots": {
+          "title": "Bande des racines numériques",
+          "heading": "Les racines numériques de {a} se répètent tous les {period}",
+          "intro": "Additionnez les chiffres jusqu'à n'en garder qu'un ; les couleurs se répètent en un cycle court et vérifient vite un produit.",
+          "rowProduct": "Racine du produit",
+          "rowA": "Racine du premier facteur",
+          "rowB": "Racine du second facteur",
+          "rowCheck": "Multipliez les racines",
+          "rowResult": "Preuve par neuf",
+          "pass": "La preuve réussit",
+          "fail": "La preuve échoue"
+        },
+        "pairs": {
+          "title": "Paires de facteurs équivalentes",
+          "heading": "{p} écrit de {n} façons",
+          "intro": "Chaque paire donne le même produit ; les étiquettes montrent les paires présentes dans votre table.",
+          "rowPrimes": "Facteurs premiers",
+          "rowDivisors": "Nombre de diviseurs",
+          "rowPairs": "Paires de facteurs",
+          "rowCells": "Cases dans la grille {lo}–{hi}",
+          "rowResult": "Façons de l'écrire",
+          "inGrid": "Dans votre table",
+          "outGrid": "Hors de la table",
+          "more": "+ {n} paires de plus"
+        },
+        "stairs": {
+          "title": "Escalier de mémorisation",
+          "heading": "De {all} opérations à {left} à mémoriser",
+          "intro": "Chaque raccourci retire des opérations qu'il n'est plus nécessaire d'apprendre par cœur dans la table {lo}–{hi}.",
+          "commutative": "a × b = b × a",
+          "onesTens": "Règles de × 1 et × 10",
+          "twosFives": "× 2 doubles, × 5 moitiés",
+          "ninesElevens": "Motifs de × 9 et × 11",
+          "squares": "Carrés",
+          "rowResult": "Effort économisé",
+          "hardList": "Reste à mémoriser :",
+          "short": {
+            "all": "Toutes",
+            "commutative": "Échange",
+            "onesTens": "×1 ×10",
+            "twosFives": "×2 ×5",
+            "ninesElevens": "×9 ×11",
+            "squares": "Carrés"
+          }
+        },
+        "trend": {
+          "title": "Tendance des produits distincts",
+          "heading": "La table 1–{n} contient {d} valeurs distinctes dans {cells} cases",
+          "intro": "Quand la table grandit, les valeurs répétées dominent et la part des produits distincts ne cesse de baisser (problème de la table de multiplication d'Erdős).",
+          "slider": "Taille de la table",
+          "rowCells": "Cases",
+          "rowDistinct": "Valeurs distinctes",
+          "rowShare": "Part",
+          "rowYours": "Votre grille {lo}–{hi}",
+          "rowResult": "Part distincte"
+        }
+      },
+      "examples": {
+        "title": "Exemples résolus",
+        "intro": "Trois problèmes classiques résolus pas à pas avec les mêmes calculs que les graphiques.",
+        "answer": "Réponse",
+        "area": {
+          "title": "7 × 8 sans mémoriser",
+          "scenario": "Un élève oublie 7 × 8 et le reconstruit à partir d'opérations plus faciles.",
+          "s1": "Décomposer 7",
+          "s2": "Premier produit partiel",
+          "s3": "Second produit partiel",
+          "s4": "Additionner les parties",
+          "s5": "Vérifier par les racines numériques",
+          "takeaway": "Toute opération se reconstruit avec les tables de 5 et de 2, puis se vérifie en quelques secondes."
+        },
+        "nines": {
+          "title": "Toute la table de 9",
+          "scenario": "Un enseignant veut le total de 9 × 1 à 9 × 12 pour une énigme.",
+          "s1": "Additionner les multiplicateurs",
+          "s2": "Multiplier par 9",
+          "s3": "Les unités décroissent",
+          "s4": "La somme des chiffres vaut toujours 9",
+          "takeaway": "Une multiplication remplace douze additions, et les motifs servent d'autocontrôle."
+        },
+        "grid": {
+          "title": "Additionner toute la table 10 × 10",
+          "scenario": "Une classe additionne tous les nombres d'une table de multiplication de 1 à 10.",
+          "s1": "Compter les cases",
+          "s2": "Sommer un côté",
+          "s3": "Mettre au carré",
+          "s4": "Case moyenne",
+          "s5": "Valeurs distinctes",
+          "takeaway": "La table a 100 cases mais seulement 42 nombres distincts, car beaucoup de produits se répètent."
+        }
       }
     },
     "speech-word-count-calculator": {

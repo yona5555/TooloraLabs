@@ -27644,7 +27644,11 @@
       "nav": {
         "tool": "Rechner",
         "faq": "FAQ",
-        "behindTheTool": "Hintergrund"
+        "behindTheTool": "Hintergrund",
+        "models": "Modelle",
+        "totals": "Summen",
+        "patterns": "Muster",
+        "examples": "Rechenbeispiele"
       },
       "form": {
         "inputTitle": "Tabelleneinstellungen",
@@ -27654,7 +27658,16 @@
         "maxMultiplierLabel": "Bis zu",
         "rangeStartLabel": "Von",
         "rangeEndLabel": "Bis",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "quickNumbers": "Schnelle Reihen",
+        "quickRanges": "Schnelle Raster",
+        "selectedFact": "Gewählte Aufgabe",
+        "rowLabel": "Zeile",
+        "columnLabel": "Spalte",
+        "multiplierLabel": "Multiplikator",
+        "squaresTitle": "Differenz zweier Quadrate",
+        "squaresExact": "Beide Faktoren haben dieselbe Parität: Das Produkt ist das mittlere Quadrat minus ein kleines Quadrat.",
+        "squaresOdd": "Die Faktoren unterscheiden sich in der Parität: Starte stattdessen bei der Aufgabe mit einer Gruppe weniger."
       },
       "result": {
         "heading": "Einmaleins-Tabelle",
@@ -27662,12 +27675,18 @@
         "invalidMultiplier": "Gib eine ganze Zahl zwischen 1 und 100 ein.",
         "invalidRange": "Gib einen gültigen Bereich ein, wobei die Startzahl nicht größer als die Endzahl sein darf.",
         "rangeTooLarge": "Wähle einen Bereich von 30 Zahlen oder weniger für ein lesbares Raster.",
-        "print": "Drucken"
-      },
-      "quickReference": {
-        "title": "Die Rechnung",
-        "intro": "Jede Zelle ist einfach die Zeilennummer multipliziert mit der Spaltennummer.",
-        "commutativeNote": "Die Multiplikation ist kommutativ: Das Vertauschen der Reihenfolge der beiden Zahlen ändert das Produkt nie."
+        "print": "Drucken",
+        "selected": "Gewählte Aufgabe",
+        "groups": "{b} Sprünge von {a} auf dem Zahlenstrahl",
+        "flowAria": "In {a}er-Schritten zählen, {b}-mal",
+        "prev": "Vorheriger Multiplikator",
+        "next": "Nächster Multiplikator",
+        "play": "Abspielen",
+        "pause": "Pause",
+        "tapHint": "Tippe auf ein Produkt, um es auszuwählen; alle Diagramme unten folgen ihm.",
+        "legendSelected": "Gewählt",
+        "legendMirror": "Spiegel (b × a)",
+        "legendSquares": "Quadrate"
       },
       "education": {
         "intro": {
@@ -27711,6 +27730,14 @@
             {
               "question": "Warum gibt es eine Grenze für die Größe des Bereichs, den ich erzeugen kann?",
               "answer": "Ein Raster für einen sehr großen Zahlenbereich wird unpraktisch groß, um auf einer einzigen Seite lesbar angezeigt oder gedruckt zu werden, daher begrenzt dieses Tool den Bereich auf 30 Zahlen (ein 30×30-Raster), was die typischerweise für Referenztabellen und Unterrichtsmaterialien verwendeten Bereiche bequem abdeckt."
+            },
+            {
+              "question": "Wie viele verschiedene Zahlen stehen in einer 10 × 10-Einmaleins-Tafel?",
+              "answer": "Nur 42 der 100 Felder enthalten verschiedene Werte, und die 12 × 12-Tafel hat 59 verschiedene Werte in 144 Feldern, weil Produkte wie 12 oder 24 mehrfach vorkommen. Paul Erdős bewies, dass dieser Anteil mit wachsender Tafel gegen null geht, und Kevin Ford bestimmte 2008 die genaue Rate dieses Rückgangs."
+            },
+            {
+              "question": "Was ist die Neunerprobe?",
+              "answer": "Eine schnelle Kontrolle einer Multiplikation: Ersetze jeden Faktor durch seine Ziffernwurzel (Ziffern addieren, bis eine übrig bleibt), multipliziere diese Wurzeln und bilde erneut die Ziffernwurzel. Stimmt sie nicht mit der Ziffernwurzel deines Ergebnisses überein, ist das Ergebnis falsch. Eine Übereinstimmung beweist nicht die Richtigkeit, deckt aber die meisten Fehler auf."
             }
           ]
         },
@@ -27765,14 +27792,40 @@
                 "online": "Nein — die Programme der Fakultät finden auf dem Campus der AUB in Beirut, Libanon, statt."
               }
             ]
+          },
+          "method": {
+            "title": "Wie das Tool rechnet",
+            "paragraph": "Jeder Wert auf dieser Seite ist eine exakte Ganzzahlrechnung in deinem Browser: die Tabelle selbst, die Zeilen- und Rastersummen (mit den geschlossenen Formeln a × n(n+1)/2 und (Σ)²), die Zyklen der Einerziffer und der Ziffernwurzel (über den größten gemeinsamen Teiler mit 10 und 9), die Faktorpaare und Primfaktoren des gewählten Produkts sowie die Anzahl verschiedener Produkte im Raster. Dieselben Funktionen sind durch automatisierte Tests abgedeckt."
           }
         },
         "references": {
           "title": "Wissenschaftliche Referenzen",
-          "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
-          "note": "Eine wissenschaftliche Geschichte der babylonischen Mathematik, einschließlich des Zahlensystems zur Basis 60 und der antiken Keilschrift-Multiplikationstabellen, die es hervorbrachte.",
-          "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq",
-          "readOriginal": "Referenz ansehen"
+          "readOriginal": "Referenz ansehen",
+          "items": [
+            {
+              "citation": "Robson, E. (2008). Mathematics in Ancient Iraq: A Social History. Princeton University Press.",
+              "note": "Eine wissenschaftliche Geschichte der babylonischen Mathematik, einschließlich des Sexagesimalsystems und der daraus entstandenen Keilschrift-Einmaleinstafeln.",
+              "url": "https://press.princeton.edu/books/hardcover/9780691091822/mathematics-in-ancient-iraq"
+            },
+            {
+              "citation": "Ford, K. (2008). The distribution of integers with a divisor in a given interval. Annals of Mathematics, 168(2), 367–433. DOI: 10.4007/annals.2008.168.367",
+              "note": "Klärt die Wachstumsordnung der Anzahl verschiedener Produkte in einer N × N-Tafel, das von Erdős gestellte Problem.",
+              "url": "https://doi.org/10.4007/annals.2008.168.367"
+            },
+            {
+              "citation": "National Research Council (2001). Adding It Up: Helping Children Learn Mathematics. National Academy Press. DOI: 10.17226/9822",
+              "note": "Der Referenzbericht darüber, wie Kinder Sicherheit mit Zahlenfakten aufbauen, einschließlich abgeleiteter Strategien und des Kommutativgesetzes.",
+              "url": "https://doi.org/10.17226/9822"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Hinweise",
+          "items": [
+            "Alle Ergebnisse sind exakte Ganzzahlrechnungen in deinem Browser; nichts, was du eingibst, wird an einen Server gesendet.",
+            "Einzelne Reihen reichen bis × 100 und Raster bis 30 × 30 Zahlen, damit jedes Diagramm und jeder Ausdruck lesbar bleibt.",
+            "Die Lerntreppe folgt gängigen Abkürzungen aus dem Unterricht; sie ist eine Lernhilfe und ersetzt nicht die Anleitung durch Lehrkraft oder Lehrplan."
+          ]
         }
       },
       "shareExport": {
@@ -27796,6 +27849,213 @@
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis",
         "sentence": "Einmaleins-Tabelle erstellt."
+      },
+      "relatedTools": {
+        "title": "Verwandte Mathe-Tools"
+      },
+      "sidebar": {
+        "title": "Fakten auf einen Blick",
+        "note": "Live aus der gewählten Aufgabe und Tabelle.",
+        "fact": "Gewählte Aufgabe",
+        "primes": "Primfaktoren",
+        "pairs": "Faktorpaare",
+        "root": "Ziffernwurzel",
+        "units": "Einerziffern-Zyklus",
+        "rowSum": "Zeilensumme von {a}",
+        "gridSum": "Rastersumme {lo}–{hi}",
+        "distinct": "Verschiedene Produkte",
+        "hard": "Verbleibende schwere Aufgaben"
+      },
+      "ind": {
+        "worked": "Rechenbeispiel",
+        "empty": "Korrigiere die Eingabe oben, um die Diagramme zu sehen.",
+        "area": {
+          "title": "Flächenmodell-Labor",
+          "heading": "{a} Zeilen × {b} Spalten",
+          "intro": "Ziehe den grünen Griff: Die Fläche des Rechtecks ist das Produkt, zerlegt in zwei einfache Teilprodukte.",
+          "rowFact": "Rechteck",
+          "rowSplit": "Zeilen zerlegen",
+          "rowLow": "Erster Streifen",
+          "rowHigh": "Zweiter Streifen",
+          "rowResult": "Fläche",
+          "outside": "Deine Aufgabe ist größer als dieses {size} × {size}-Brett; der Griff zeigt ihre Ecke.",
+          "legendLow": "{n} Zeilen",
+          "legendHigh": "{n} Zeilen",
+          "dragHint": "Griff ziehen"
+        },
+        "bars": {
+          "title": "Produkte der Reihe",
+          "heading": "Die {a}er-Reihe als Balken",
+          "intro": "Jeder Balken ist ein Produkt und wächst immer um denselben Schritt. Tippe auf einen Balken, um ihn auszuwählen.",
+          "rowSelected": "Gewählt",
+          "rowStep": "Schritt pro Balken",
+          "rowTallest": "Höchster Balken",
+          "rowHeight": "Höhenverhältnis",
+          "rowResult": "Gewählte Höhe"
+        },
+        "array": {
+          "title": "Punktfeld-Modell",
+          "heading": "{a} × {b} als Punkte in beide Richtungen",
+          "intro": "Dieselben Punkte in Zeilen des einen oder anderen Faktors; das Drehen des Feldes ändert die Anzahl nie.",
+          "rowLeft": "{b} Gruppen zu {a}",
+          "rowRight": "{a} Gruppen zu {b}",
+          "rowDots": "Punkte in jedem Feld",
+          "rowResult": "Kommutativgesetz",
+          "left": "{b} Zeilen zu {a}",
+          "right": "{a} Zeilen zu {b}",
+          "more": "+ {n} weitere Zeilen"
+        },
+        "balance": {
+          "title": "Distributiv-Waage",
+          "heading": "Zerlege {b} und halte {a} × {b} im Gleichgewicht",
+          "intro": "Stelle die beiden Teile mit den Schiebereglern ein; der Balken bleibt nur waagerecht, wenn die Teile zusammen den Multiplikator ergeben.",
+          "sliderC": "Erster Teil c",
+          "sliderD": "Zweiter Teil d",
+          "rowLeft": "Linke Schale",
+          "rowRight": "Rechte Schale",
+          "rowDiff": "Rechts − links",
+          "rowRule": "Teile",
+          "rowResult": "Balken",
+          "balanced": "Im Gleichgewicht",
+          "tipped": "Gekippt: c + d ≠ b",
+          "note": "Einfache Zerlegung: {a}×{c} = {left}, plus {right}"
+        },
+        "trio": {
+          "title": "Nachbaraufgaben",
+          "heading": "Eine Gruppe weniger, eine Gruppe mehr von {a}",
+          "intro": "Die Nachbaraufgaben unterscheiden sich von der gewählten um genau eine Gruppe, so erschließt eine bekannte Aufgabe zwei weitere.",
+          "rowNow": "Gewählt",
+          "rowPrev": "Eine Gruppe weniger",
+          "rowNext": "Eine Gruppe mehr",
+          "rowResult": "Schritt",
+          "prev": "Darunter",
+          "now": "Gewählt",
+          "next": "Darüber"
+        },
+        "stack": {
+          "title": "Zeilensumme",
+          "heading": "Alle Produkte von {a} ergeben zusammen {sum}",
+          "intro": "Die ganze Reihe aneinandergereiht; sie ist die Zahl mal die Summe der Multiplikatoren.",
+          "rowMultipliers": "Summe der Multiplikatoren",
+          "rowTimes": "Mal die Zahl",
+          "rowSelected": "Anteil der Auswahl",
+          "rowResult": "Zeilensumme"
+        },
+        "formula": {
+          "title": "Formel der Rastersumme",
+          "heading": "Alle Felder des Rasters {lo}–{hi} addiert",
+          "intro": "Da jedes Feld Zeile × Spalte ist, ergibt das ganze quadratische Raster das Quadrat der Summe einer Seite.",
+          "rowCount": "Felder",
+          "rowSide": "Summe einer Seite",
+          "rowSquare": "Quadrieren",
+          "rowMean": "Durchschnittsfeld",
+          "rowResult": "Rastersumme",
+          "boxSide": "Eine Seite",
+          "boxSquare": "Quadriert",
+          "boxTotal": "Alle Felder",
+          "cells": "{n} Felder"
+        },
+        "units": {
+          "title": "Einerziffern-Zyklus",
+          "heading": "Die Einerziffern von {a} wiederholen sich alle {period}",
+          "intro": "Die letzte Ziffer jedes Produkts hängt nur von der letzten Ziffer der Zahl ab und läuft daher in einer festen Schleife.",
+          "rowUnits": "Letzte Ziffer der Zahl",
+          "rowGcd": "Gemeinsamer Teiler mit 10",
+          "rowPeriod": "Zykluslänge",
+          "rowSelected": "Auswahl endet auf",
+          "rowResult": "Verwendete Ziffern",
+          "cycle": "wiederholt sich alle {n}"
+        },
+        "roots": {
+          "title": "Ziffernwurzel-Streifen",
+          "heading": "Die Ziffernwurzeln von {a} wiederholen sich alle {period}",
+          "intro": "Addiere die Ziffern, bis eine übrig bleibt; die Farben wiederholen sich in einem kurzen Zyklus und prüfen jedes Produkt schnell.",
+          "rowProduct": "Wurzel des Produkts",
+          "rowA": "Wurzel des ersten Faktors",
+          "rowB": "Wurzel des zweiten Faktors",
+          "rowCheck": "Wurzeln multiplizieren",
+          "rowResult": "Neunerprobe",
+          "pass": "Probe bestanden",
+          "fail": "Probe nicht bestanden"
+        },
+        "pairs": {
+          "title": "Gleichwertige Faktorpaare",
+          "heading": "{p} auf {n} Arten geschrieben",
+          "intro": "Jedes Paar ergibt dasselbe Produkt; die Markierungen zeigen, welche Paare in deiner Tabelle vorkommen.",
+          "rowPrimes": "Primfaktoren",
+          "rowDivisors": "Anzahl der Teiler",
+          "rowPairs": "Faktorpaare",
+          "rowCells": "Felder im Raster {lo}–{hi}",
+          "rowResult": "Schreibweisen",
+          "inGrid": "In deiner Tabelle",
+          "outGrid": "Außerhalb der Tabelle",
+          "more": "+ {n} weitere Paare"
+        },
+        "stairs": {
+          "title": "Lerntreppe",
+          "heading": "Von {all} Aufgaben auf {left} zum Auswendiglernen",
+          "intro": "Jede Abkürzung entfernt Aufgaben, die du in der Tabelle {lo}–{hi} nicht mehr auswendig lernen musst.",
+          "commutative": "a × b = b × a",
+          "onesTens": "Regeln für × 1 und × 10",
+          "twosFives": "× 2 verdoppeln, × 5 halbieren",
+          "ninesElevens": "Muster für × 9 und × 11",
+          "squares": "Quadrate",
+          "rowResult": "Ersparter Aufwand",
+          "hardList": "Noch zu lernen:",
+          "short": {
+            "all": "Alle",
+            "commutative": "Tausch",
+            "onesTens": "×1 ×10",
+            "twosFives": "×2 ×5",
+            "ninesElevens": "×9 ×11",
+            "squares": "Quadrate"
+          }
+        },
+        "trend": {
+          "title": "Trend verschiedener Produkte",
+          "heading": "Die Tabelle 1–{n} enthält {d} verschiedene Werte in {cells} Feldern",
+          "intro": "Je größer die Tabelle, desto mehr dominieren wiederholte Werte, und der Anteil verschiedener Produkte sinkt weiter (Erdős' Einmaleins-Problem).",
+          "slider": "Tabellengröße",
+          "rowCells": "Felder",
+          "rowDistinct": "Verschiedene Werte",
+          "rowShare": "Anteil",
+          "rowYours": "Dein Raster {lo}–{hi}",
+          "rowResult": "Anteil verschieden"
+        }
+      },
+      "examples": {
+        "title": "Rechenbeispiele",
+        "intro": "Drei klassische Aufgaben Schritt für Schritt gelöst, mit denselben Rechnungen wie die Diagramme.",
+        "answer": "Ergebnis",
+        "area": {
+          "title": "7 × 8 ohne Auswendiglernen",
+          "scenario": "Ein Schüler vergisst 7 × 8 und baut es aus leichteren Aufgaben neu auf.",
+          "s1": "7 zerlegen",
+          "s2": "Erstes Teilprodukt",
+          "s3": "Zweites Teilprodukt",
+          "s4": "Teile addieren",
+          "s5": "Mit Ziffernwurzeln prüfen",
+          "takeaway": "Jede Aufgabe lässt sich aus der 5er- und 2er-Reihe aufbauen und in Sekunden prüfen."
+        },
+        "nines": {
+          "title": "Die ganze 9er-Reihe",
+          "scenario": "Eine Lehrkraft möchte die Summe von 9 × 1 bis 9 × 12 für ein Rätsel.",
+          "s1": "Multiplikatoren addieren",
+          "s2": "Mit 9 multiplizieren",
+          "s3": "Einerziffern zählen rückwärts",
+          "s4": "Quersumme ist immer 9",
+          "takeaway": "Eine Multiplikation ersetzt zwölf Additionen, und die Muster dienen zugleich als Selbstkontrolle."
+        },
+        "grid": {
+          "title": "Die ganze 10 × 10-Tafel addieren",
+          "scenario": "Eine Klasse addiert alle Zahlen einer Einmaleins-Tafel von 1 bis 10.",
+          "s1": "Felder zählen",
+          "s2": "Eine Seite summieren",
+          "s3": "Quadrieren",
+          "s4": "Durchschnittsfeld",
+          "s5": "Verschiedene Werte",
+          "takeaway": "Die Tafel hat 100 Felder, aber nur 42 verschiedene Zahlen, weil sich viele Produkte wiederholen."
+        }
       }
     },
     "speech-word-count-calculator": {

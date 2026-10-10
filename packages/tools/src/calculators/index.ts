@@ -91,5 +91,6 @@ export * from "./LoremIpsumCalculator";
 export * from "./TextLogoCalculator";
 export * from "./RandomQuoteCalculator";
 export * from "./MultiplicationTableCalculator";
+export * from "./MultiplicationTableMath";
 export * from "./SpeechWordCountCalculator";
 export * from "./CountdownCalculator";
