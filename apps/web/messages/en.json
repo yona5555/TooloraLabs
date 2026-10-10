@@ -21358,8 +21358,13 @@
       "description": "Generate random integers within a range you choose, with control over how many results, whether duplicates are allowed, and the sort order of the output.",
       "nav": {
         "tool": "Generator",
+        "draw": "This Draw",
+        "expect": "Expectations",
+        "space": "Outcome Space",
+        "examples": "Worked Examples",
         "faq": "FAQ",
-        "behindTheTool": "Behind the Tool"
+        "behindTheTool": "Behind the Tool",
+        "notices": "Notices"
       },
       "form": {
         "inputTitle": "Settings",
@@ -21376,7 +21381,20 @@
           "descending": "Descending"
         },
         "generate": "Generate",
-        "clear": "Clear"
+        "clear": "Clear",
+        "seedLabel": "Seed",
+        "seedHint": "Same seed + same settings = the same numbers. Generate picks a new one.",
+        "presetsLabel": "Quick Draws",
+        "presets": {
+          "dice": "Die roll",
+          "coin": "10 coin flips",
+          "lottery": "Lotto 6/49",
+          "powerball": "Powerball whites",
+          "card": "5-card hand",
+          "percentile": "20 picks 1–100",
+          "raffle": "3 raffle winners",
+          "birthday": "23 birthdays"
+        }
       },
       "result": {
         "heading": "Result",
@@ -21386,37 +21404,22 @@
         "countLabel": "Count",
         "sumLabel": "Sum",
         "averageLabel": "Average",
-        "rangeDiagramCaption": "Where each generated number falls between the set minimum and maximum."
-      },
-      "quickReference": {
-        "title": "Common Random Draws",
-        "intro": "A few typical ranges and settings this generator is built to handle."
+        "seedLabel": "Seed",
+        "expectedLabel": "Expected avg",
+        "moreHidden": "+{count} more in the copy and the indicators below",
+        "spreadTitle": "How this draw spreads",
+        "spreadLegend": "Blue = numbers drawn per slice of the range; dashed amber = what a perfectly even draw would put there ({expected} in the first slice).",
+        "verdict": {
+          "even": "Even spread",
+          "borderline": "Borderline",
+          "uneven": "Uneven spread"
+        }
       },
       "education": {
         "intro": {
           "title": "Understanding Random Number Generation",
           "paragraph1": "A computer can't produce a truly unpredictable number the way a physical dice roll or a coin flip does — every calculation a processor performs is deterministic, the same input always producing the same output. What this tool (and virtually every general-purpose random number feature in software) actually uses is a pseudorandom number generator: a deterministic algorithm that starts from an unpredictable seed value and produces a long sequence of numbers that pass statistical tests for randomness, even though the sequence is technically reproducible if the seed were known.",
           "paragraph2": "Generating a random integer within a chosen range, without introducing bias toward any particular value, is less trivial than it sounds — naively taking a random value modulo the range size skews slightly toward smaller numbers unless the range divides evenly into the generator's output space. This tool avoids that bias, and when duplicates are disallowed, it draws without replacement by shuffling the full range rather than repeatedly re-rolling until a new value appears, which stays fast and uniform even as the requested count approaches the size of the range itself."
-        },
-        "examples": {
-          "title": "Common Uses",
-          "intro": "The same generator, three different everyday settings.",
-          "columnUseCase": "Use Case",
-          "columnSettings": "Settings",
-          "rows": [
-            {
-              "calculation": "Rolling a six-sided die",
-              "result": "1–6, 1 result, duplicates allowed"
-            },
-            {
-              "calculation": "Drawing 6 lottery numbers",
-              "result": "1–49, 6 results, no duplicates"
-            },
-            {
-              "calculation": "Picking a random winner from 250 entries",
-              "result": "1–250, 1 result"
-            }
-          ]
         },
         "applications": {
           "title": "Where Random Numbers Are Used",
@@ -21454,6 +21457,14 @@
             {
               "question": "Why do two different random number generators sometimes give different-feeling results for the same range?",
               "answer": "Different tools use different underlying pseudorandom algorithms and seeding methods, which affect the specific sequence produced (and how long it takes before that sequence repeats) even though both can be statistically valid sources of randomness for everyday use."
+            },
+            {
+              "question": "What is the seed for?",
+              "answer": "The seed fixes the whole sequence. Entering the same seed with the same range, count, duplicate and sort settings reproduces exactly the same numbers, which is handy for classroom exercises, published raffles that others want to verify, or repeating a simulation. Press Generate for a fresh seed."
+            },
+            {
+              "question": "How do I know the numbers are really evenly spread?",
+              "answer": "The page runs Pearson's chi-square test on every draw: it compares how many numbers fell in each slice of the range with what an even draw would give. A p-value above 0.05 means the spread is consistent with fair randomness. With few numbers the test is weak, and a single uneven-looking draw is expected about one time in twenty."
             }
           ]
         },
@@ -21508,14 +21519,46 @@
                 "online": "No — the department's programs are delivered on AUB's campus in Beirut, Lebanon."
               }
             ]
+          },
+          "howItWorks": {
+            "title": "How This Generator Draws",
+            "paragraph": "Each draw starts from a 32-bit seed, taken from your browser's cryptographic source (crypto.getRandomValues) or typed by you, which feeds the Mulberry32 generator. Every number is then picked by rejection sampling: a 32-bit value that falls in the incomplete top block is thrown away and drawn again, so each integer in the range has exactly the same chance. Draws without repeats use a partial Fisher–Yates shuffle that only touches as many positions as you ask for, so even a range of trillions stays instant. All of it runs in your browser; nothing is sent anywhere."
           }
         },
         "references": {
           "title": "Scientific References",
-          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
-          "note": "The paper introducing the Mersenne Twister algorithm, one of the most widely deployed pseudorandom number generators in software today, prized for its extremely long period and strong statistical uniformity.",
-          "url": "https://doi.org/10.1145/272991.272995",
-          "readOriginal": "Read the Original Paper"
+          "readOriginal": "Read the Original Source",
+          "items": [
+            {
+              "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3–30.",
+              "note": "The paper behind one of the most widely deployed pseudorandom generators, and a reference point for period length and equidistribution.",
+              "url": "https://doi.org/10.1145/272991.272995"
+            },
+            {
+              "citation": "Knuth, D. E. (1997). The Art of Computer Programming, Volume 2: Seminumerical Algorithms (3rd ed.). Addison-Wesley. ISBN 978-0-201-89684-8.",
+              "note": "The standard treatment of random number generation, the shuffle used for no-repeat draws, and the chi-square test applied to generators.",
+              "url": "https://www-cs-faculty.stanford.edu/~knuth/taocp.html"
+            },
+            {
+              "citation": "Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. Philosophical Magazine, 50(302), 157–175.",
+              "note": "The original chi-square goodness-of-fit test, used here to check each draw against an even spread.",
+              "url": "https://doi.org/10.1080/14786440009463897"
+            },
+            {
+              "citation": "Rukhin, A. et al. (2010). A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications. NIST Special Publication 800-22 Rev. 1a.",
+              "note": "NIST's test battery for generators meant for security work, the bar this everyday generator does not claim to meet.",
+              "url": "https://doi.org/10.6028/NIST.SP.800-22r1a"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Notices",
+          "items": [
+            "This generator is built for games, classroom work, sampling and simulations. It is not a cryptographically secure generator: never use it for passwords, keys, tokens or anything someone might try to predict.",
+            "Anyone who knows the seed and the settings can reproduce the exact same draw. That makes results verifiable, but it also means a published seed reveals the numbers.",
+            "Results are not valid for official lotteries, regulated gambling or legally binding draws, which require certified equipment or audited procedures.",
+            "The uniformity test, odds and expectations are statistical guides. A single draw can look uneven by pure chance, and draws without repeats vary slightly less than the test assumes."
+          ]
         }
       },
       "shareExport": {
@@ -21539,6 +21582,241 @@
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result",
         "summarySentence": "{count, plural, one {# random number} other {# random numbers}} generated, averaging {average}."
+      },
+      "ind": {
+        "worked": "Worked example",
+        "empty": "Fix the inputs above to see this indicator.",
+        "hist": {
+          "title": "Frequency Histogram",
+          "heading": "How {count} draws fall into {bins} slices of the range",
+          "intro": "Each bar counts the numbers that landed in one slice; the dashed line is the count a perfectly even draw would give.",
+          "rowRange": "Range size N",
+          "rowBins": "Slices",
+          "rowExpected": "Expected per slice",
+          "rowEmptiest": "Emptiest slice",
+          "rowFullest": "Fullest slice",
+          "legendObserved": "Numbers drawn",
+          "legendExpected": "Even-draw expectation"
+        },
+        "dup": {
+          "title": "Repeat Odds Explorer",
+          "heading": "Chance of at least one repeat in {k} draws from {n} values",
+          "intro": "Drag the point along the curve: it sets How Many Numbers above, and the draw and every indicator follow it.",
+          "rowN": "Values in range N",
+          "rowK": "Draws k",
+          "rowNoRepeat": "No repeat at all",
+          "rowHalf": "Draws for a 50% chance",
+          "rowDistinct": "Expected distinct values",
+          "rowRepeat": "At least one repeat",
+          "noteNoDup": "Duplicates are off, so this draw cannot repeat; the curve shows the odds if they were allowed.",
+          "hint": "Drag the blue point (or focus it and use the arrow keys) to change the count."
+        },
+        "mean": {
+          "title": "Running Average",
+          "heading": "The average after each draw, closing in on the true centre {mu}",
+          "intro": "The law of large numbers in action: the line wanders early, then settles inside the shrinking ±2 standard-error funnel.",
+          "rowMu": "True centre μ",
+          "rowFinal": "Average after all draws",
+          "rowDev": "Difference from μ",
+          "rowSe": "Standard error σ ÷ √k",
+          "rowZ": "Difference in standard errors",
+          "axisDraws": "draw number",
+          "legendMean": "Running average",
+          "legendMu": "True centre μ",
+          "legendBand": "±2 standard errors"
+        },
+        "chi": {
+          "title": "Uniformity Test",
+          "heading": "χ² = {stat} against a 5% critical value of {crit}",
+          "intro": "Pearson's chi-square test asks whether the slice counts stray further from even than chance alone would explain.",
+          "rowFormula": "Statistic",
+          "rowDf": "Degrees of freedom",
+          "rowStat": "χ² of this draw",
+          "rowCrit": "5% critical value",
+          "rowP": "p-value",
+          "rowVerdict": "Verdict",
+          "lowExpected": "Fewer than 5 expected per slice: read this test as a rough guide."
+        },
+        "spread": {
+          "title": "Spread Within the Range",
+          "heading": "Median {median}, standard deviation {sd} (an even draw: {sigma})",
+          "intro": "Every number drawn sits on the range line, with the median, the average, the true centre and a ±1 SD band pinned above it.",
+          "labelMean": "avg",
+          "labelMedian": "median",
+          "rowMinMax": "Smallest … largest",
+          "rowMedian": "Median",
+          "rowSd": "Sample standard deviation",
+          "rowSigma": "Even-draw σ",
+          "rowCoverage": "Share of the range spanned"
+        },
+        "sum": {
+          "title": "Expected Sum",
+          "heading": "Sum {sum} against an expected {expected} ± {sd}",
+          "intro": "The sum of the draw has its own expected value and spread; the z-score says how unusual this sum is.",
+          "rowExpected": "Expected sum k × μ",
+          "rowSd": "Spread σ × √k × correction",
+          "rowObserved": "Sum of this draw",
+          "rowZ": "z-score",
+          "boxCount": "draws k",
+          "boxMu": "centre μ",
+          "boxExpected": "expected sum",
+          "boxSigma": "σ per draw",
+          "boxFpc": "no-repeat correction",
+          "boxSd": "spread of the sum",
+          "boxDiff": "sum − expected",
+          "boxZ": "z-score"
+        },
+        "distinct": {
+          "title": "Distinct vs. Repeated",
+          "heading": "{distinct} distinct values among {k} draws",
+          "intro": "How many draws were new values and how many repeated one, set against the expected split and the share of the range touched.",
+          "barDraw": "This draw",
+          "barExpected": "Expected",
+          "barCoverage": "Range covered",
+          "segDistinct": "distinct",
+          "segRepeat": "repeats",
+          "segSeen": "drawn",
+          "segUnseen": "never drawn",
+          "rowDistinct": "Distinct in this draw",
+          "rowRepeats": "Repeated draws",
+          "rowExpected": "Expected distinct",
+          "rowCoverage": "Range covered"
+        },
+        "appear": {
+          "title": "Odds a Chosen Number Appears",
+          "heading": "Chance that a number you pick shows up: {p}",
+          "intro": "Pick any value in the range before drawing; these are its odds of appearing with half, the current and double the draws.",
+          "rowSingle": "One value per draw 1/N",
+          "rowFormula": "Formula",
+          "rowHalf": "Half the draws",
+          "rowDouble": "Double the draws",
+          "rowNow": "Current draws",
+          "low": "Half",
+          "now": "Current",
+          "high": "Double"
+        },
+        "space": {
+          "title": "Size of the Outcome Space",
+          "heading": "{count} possible results for these settings",
+          "intro": "How many different results each kind of draw can produce, on a log scale; your settings decide which one applies.",
+          "orderedWith": "Ordered, repeats allowed",
+          "unorderedWith": "Sorted, repeats allowed",
+          "orderedWithout": "Ordered, no repeats",
+          "unorderedWithout": "Sorted, no repeats",
+          "orderedWithShort": "Ordered + repeats",
+          "unorderedWithShort": "Sorted + repeats",
+          "orderedWithoutShort": "Ordered, no repeats",
+          "unorderedWithoutShort": "Sorted, no repeats",
+          "current": "yours",
+          "impossible": "impossible",
+          "rowKind": "Your settings",
+          "rowFormula": "Formula",
+          "rowValue": "Possible results",
+          "rowDigits": "Digits",
+          "rowOdds": "Odds of guessing it exactly"
+        },
+        "bias": {
+          "title": "Modulo Bias, Measured",
+          "heading": "A naive {bits}-bit draw would favour {heavy} values by {ratio}×",
+          "noBias": "N divides {size} evenly, so even the naive method is fair for this range",
+          "intro": "Taking a random byte or word modulo N over-weights the first values; this tool redraws the incomplete top block instead.",
+          "rowSource": "Source values S",
+          "rowQ": "Full blocks ⌊S ÷ N⌋",
+          "rowR": "Favoured values S mod N",
+          "rowHeavy": "Favoured value odds",
+          "rowLight": "Other value odds",
+          "rowRedraw": "This tool's redraw rate",
+          "naiveTitle": "Naive: source mod N",
+          "naiveSub": "{bits}-bit source, {size} values",
+          "toolTitle": "This tool: rejection sampling",
+          "toolSub": "32-bit source, top block redrawn",
+          "heavyP": "Favoured values",
+          "lightP": "Other values",
+          "favoured": "Values favoured",
+          "ratio": "Bias",
+          "exact": "Every value",
+          "redraw": "Draws redrawn"
+        },
+        "entropy": {
+          "title": "Unpredictability in Bits",
+          "heading": "{bits} bits for these settings: {zone}",
+          "intro": "Bits measure how hard the result is to guess; the generator's 32-bit seed caps what any draw can really carry.",
+          "rowPer": "Bits per number",
+          "rowLog": "log₁₀ of possible results",
+          "rowBits": "Bits",
+          "rowCap": "Seed bits (cap)",
+          "rowEffective": "Effective bits",
+          "markerSettings": "settings",
+          "markerCap": "seed cap",
+          "zones": {
+            "guessable": "Guessable",
+            "weak": "Weak",
+            "moderate": "Moderate",
+            "strong": "Strong",
+            "cryptographic": "Crypto-grade"
+          }
+        },
+        "table": {
+          "title": "Common Draws and Their Odds",
+          "heading": "Real-world draws, computed with this tool's maths",
+          "intro": "Each row is a familiar draw with the odds of guessing its exact result; Use loads it into the generator.",
+          "rowDraw": "Draw",
+          "rowSettings": "Settings",
+          "rowFormula": "Formula",
+          "rowRepeat": "Chance of a repeat",
+          "rowOdds": "Odds of the exact result",
+          "colDraw": "Draw",
+          "colTag": "Type",
+          "colOdds": "Exact result",
+          "colRepeat": "Repeat",
+          "tagRepeats": "repeats",
+          "tagNoRepeats": "no repeats",
+          "apply": "Use",
+          "yours": "Your current settings: {odds}."
+        }
+      },
+      "examples": {
+        "title": "Worked Examples",
+        "intro": "Three classic draws solved step by step with the same functions the generator uses.",
+        "answer": "Answer",
+        "lottery": {
+          "title": "Lotto 6/49 jackpot odds",
+          "scenario": "Six different numbers from 1 to 49; order does not matter.",
+          "s1": "Count unordered sets",
+          "s2": "Evaluate",
+          "s3": "Chance your favourite number is drawn",
+          "s4": "Expected sum of the six",
+          "s5": "Spread of the sum (no-repeat correction)",
+          "takeaway": "Sorting the six numbers is what turns 10 billion ordered sequences into about 14 million tickets."
+        },
+        "birthday": {
+          "title": "The birthday problem",
+          "scenario": "23 people, 365 equally likely birthdays: draw 23 numbers from 1–365 with repeats.",
+          "s1": "Chance of a shared birthday",
+          "s2": "No two alike",
+          "s3": "At least one shared",
+          "s4": "Expected distinct birthdays",
+          "s5": "Smallest group for 50%",
+          "takeaway": "Repeats arrive far sooner than intuition says: about √N draws, not N ÷ 2."
+        },
+        "dice": {
+          "title": "Is this die fair?",
+          "scenario": "60 rolls of 1–6 gave the counts below; test them against an even spread.",
+          "s1": "Observed faces 1–6",
+          "s2": "Expected per face",
+          "s3": "Chi-square statistic",
+          "s4": "5% critical value",
+          "s5": "p-value",
+          "takeaway": "4.2 is well under 11.07, so these counts are what a fair die often produces."
+        }
+      },
+      "order": {
+        "title": "Draw Order",
+        "intro": "The first {shown} of {k} numbers in the order they were drawn, before any sorting; the dashed line is the range's centre.",
+        "first": "First → last drawn",
+        "upDown": "Rises · falls",
+        "single": "Chance of any one value",
+        "repeat": "Chance of a repeat"
       }
     },
     "standard-deviation-calculator": {

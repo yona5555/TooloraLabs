@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { drawIntegers, generateRandomNumbers, mulberry32, uniformIndex } from "../RandomNumberGenerator";
 import {
   appearanceProbability,
+  chiSquareCritical,
   chiSquareUniform,
   drawsForDuplicateChance,
   duplicateProbability,
@@ -16,7 +17,9 @@ import {
   runningMeans,
   sampleStats,
   sciParts,
+  sumDistribution,
   uniformMoments,
+  upDownCounts,
 } from "../RandomNumberMath";
 
 const base = { min: 1, max: 100, count: 5, allowDuplicates: true, sortOrder: "none" as const };
@@ -82,6 +85,15 @@ describe("RandomNumberMath", () => {
     expect(r.stat).toBe(10);
     expect(r.df).toBe(1);
     expect(r.pValue).toBeCloseTo(0.001565, 5);
+    expect(chiSquareCritical(1, 0.05)).toBeCloseTo(3.841459, 4);
+    expect(chiSquareCritical(9, 0.05)).toBeCloseTo(16.918978, 4);
+  });
+
+  it("gives the spread of the sum with and without replacement", () => {
+    const w = sumDistribution(1, 6, 10, true);
+    expect(w.expected).toBe(35);
+    expect(w.sd).toBeCloseTo(Math.sqrt((35 / 12) * 10), 10);
+    expect(sumDistribution(1, 6, 6, false).sd).toBeCloseTo(0, 10);
   });
 
   it("describes a sample and the uniform distribution", () => {
@@ -94,6 +106,7 @@ describe("RandomNumberMath", () => {
       { index: 2, mean: 3 },
       { index: 3, mean: 4 },
     ]);
+    expect(upDownCounts([3, 5, 5, 1, 2])).toEqual({ ups: 2, downs: 1, ties: 1 });
     expect(runningMeans(Array.from({ length: 1000 }, () => 1), 100)).toHaveLength(100);
   });
 

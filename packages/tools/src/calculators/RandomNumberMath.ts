@@ -273,3 +273,40 @@ export function moduloBias(n: number): ModuloBias {
     rejectionRate: n <= two32 ? (two32 % n) / two32 : (2 ** 53 % n) / 2 ** 53,
   };
 }
+
+/** The χ² value whose upper tail equals `alpha` for `df` degrees of freedom (bisection on gammaQ). */
+export function chiSquareCritical(df: number, alpha: number): number {
+  let lo = 0;
+  let hi = Math.max(10, df * 10);
+  while (gammaQ(df / 2, hi / 2) > alpha) hi *= 2;
+  for (let i = 0; i < 100; i++) {
+    const mid = (lo + hi) / 2;
+    if (gammaQ(df / 2, mid / 2) > alpha) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+/**
+ * Spread of the sum of k draws: E[S] = k·μ and SD[S] = σ·√k, times the finite-population
+ * correction √((N − k) ÷ (N − 1)) when drawing without replacement.
+ */
+export function sumDistribution(lo: number, hi: number, k: number, withReplacement: boolean): { expected: number; sd: number; fpc: number } {
+  const n = rangeSize(lo, hi);
+  const { mean, sd } = uniformMoments(lo, hi);
+  const fpc = withReplacement || n <= 1 ? 1 : Math.sqrt(Math.max(0, n - k) / (n - 1));
+  return { expected: k * mean, sd: sd * Math.sqrt(k) * fpc, fpc };
+}
+
+/** Rises, falls and ties between consecutive draws, in the order they were drawn. */
+export function upDownCounts(drawn: number[]): { ups: number; downs: number; ties: number } {
+  let ups = 0;
+  let downs = 0;
+  let ties = 0;
+  for (let i = 1; i < drawn.length; i++) {
+    if (drawn[i] > drawn[i - 1]) ups++;
+    else if (drawn[i] < drawn[i - 1]) downs++;
+    else ties++;
+  }
+  return { ups, downs, ties };
+}

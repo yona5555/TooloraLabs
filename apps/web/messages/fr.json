@@ -21104,8 +21104,13 @@
       "description": "Générez des nombres entiers aléatoires dans une plage que vous choisissez, avec un contrôle sur le nombre de résultats, l'autorisation des doublons et l'ordre de tri de la sortie.",
       "nav": {
         "tool": "Générateur",
+        "draw": "Ce tirage",
+        "expect": "Attentes",
+        "space": "Espace des résultats",
+        "examples": "Exemples résolus",
         "faq": "FAQ",
-        "behindTheTool": "Derrière l'Outil"
+        "behindTheTool": "Derrière l'Outil",
+        "notices": "Avis"
       },
       "form": {
         "inputTitle": "Paramètres",
@@ -21122,7 +21127,20 @@
           "descending": "Décroissant"
         },
         "generate": "Générer",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "seedLabel": "Graine",
+        "seedHint": "Même graine + mêmes réglages = mêmes nombres. Générer en choisit une nouvelle.",
+        "presetsLabel": "Tirages rapides",
+        "presets": {
+          "dice": "Lancer de dé",
+          "coin": "10 pile ou face",
+          "lottery": "Loto 6/49",
+          "powerball": "Boules blanches Powerball",
+          "card": "Main de 5 cartes",
+          "percentile": "20 choix de 1 à 100",
+          "raffle": "3 gagnants de tombola",
+          "birthday": "23 anniversaires"
+        }
       },
       "result": {
         "heading": "Résultat",
@@ -21132,37 +21150,22 @@
         "countLabel": "Nombre",
         "sumLabel": "Somme",
         "averageLabel": "Moyenne",
-        "rangeDiagramCaption": "Position de chaque nombre généré entre le minimum et le maximum définis."
-      },
-      "quickReference": {
-        "title": "Tirages Aléatoires Courants",
-        "intro": "Quelques plages et paramètres typiques pour lesquels ce générateur est conçu."
+        "seedLabel": "Graine",
+        "expectedLabel": "Moyenne attendue",
+        "moreHidden": "+{count} de plus dans la copie et les indicateurs ci-dessous",
+        "spreadTitle": "Répartition de ce tirage",
+        "spreadLegend": "Bleu = nombres tirés par tranche de la plage ; ambre pointillé = ce qu'y mettrait un tirage parfaitement uniforme ({expected} dans la première tranche).",
+        "verdict": {
+          "even": "Répartition uniforme",
+          "borderline": "Limite",
+          "uneven": "Répartition inégale"
+        }
       },
       "education": {
         "intro": {
           "title": "Comprendre la Génération de Nombres Aléatoires",
           "paragraph1": "Un ordinateur ne peut pas produire un nombre véritablement imprévisible comme le fait un lancer de dé physique ou un tirage à pile ou face — chaque calcul effectué par un processeur est déterministe, la même entrée produit toujours la même sortie. Ce que cet outil (et pratiquement toute fonction de nombres aléatoires à usage général dans les logiciels) utilise en réalité, c'est un générateur de nombres pseudo-aléatoires : un algorithme déterministe qui part d'une valeur de départ (graine) imprévisible et produit une longue séquence de nombres qui réussissent les tests statistiques d'aléatoire, même si la séquence est techniquement reproductible si la graine était connue.",
           "paragraph2": "Générer un entier aléatoire dans une plage choisie, sans introduire de biais envers une valeur particulière, est moins trivial qu'il n'y paraît — prendre naïvement une valeur aléatoire modulo la taille de la plage biaise légèrement vers les nombres plus petits, sauf si la plage divise exactement l'espace de sortie du générateur. Cet outil évite ce biais, et lorsque les doublons sont interdits, il tire sans remise en mélangeant la plage entière plutôt qu'en relançant à répétition jusqu'à ce qu'une nouvelle valeur apparaisse, ce qui reste rapide et uniforme même lorsque le nombre demandé s'approche de la taille de la plage elle-même."
-        },
-        "examples": {
-          "title": "Usages Courants",
-          "intro": "Le même générateur, trois réglages quotidiens différents.",
-          "columnUseCase": "Cas d'Usage",
-          "columnSettings": "Paramètres",
-          "rows": [
-            {
-              "calculation": "Lancer un dé à six faces",
-              "result": "1–6, 1 résultat, doublons autorisés"
-            },
-            {
-              "calculation": "Tirer 6 numéros de loterie",
-              "result": "1–49, 6 résultats, sans doublons"
-            },
-            {
-              "calculation": "Choisir un gagnant au hasard parmi 250 participants",
-              "result": "1–250, 1 résultat"
-            }
-          ]
         },
         "applications": {
           "title": "Où les Nombres Aléatoires Sont Utilisés",
@@ -21200,6 +21203,14 @@
             {
               "question": "Pourquoi deux générateurs de nombres aléatoires différents donnent-ils parfois des résultats d'apparence différente pour la même plage ?",
               "answer": "Différents outils utilisent des algorithmes pseudo-aléatoires et des méthodes d'amorçage (seeding) sous-jacents différents, ce qui affecte la séquence précise produite (et le temps avant que cette séquence ne se répète), même si les deux peuvent constituer des sources d'aléatoire statistiquement valides pour un usage quotidien."
+            },
+            {
+              "question": "À quoi sert la graine ?",
+              "answer": "La graine fixe toute la séquence. Avec la même graine, la même plage, la même quantité et les mêmes réglages de doublons et de tri, on obtient exactement les mêmes nombres, ce qui est utile pour des exercices en classe, des tombolas publiées que d'autres veulent vérifier ou pour rejouer une simulation. Appuyez sur Générer pour une nouvelle graine."
+            },
+            {
+              "question": "Comment savoir si les nombres sont vraiment bien répartis ?",
+              "answer": "La page applique le test du khi-deux de Pearson à chaque tirage : il compare le nombre de valeurs tombées dans chaque tranche de la plage à ce que donnerait un tirage uniforme. Une valeur p supérieure à 0,05 indique une répartition compatible avec un hasard équitable. Avec peu de nombres le test est faible, et environ un tirage sur vingt paraîtra inégal."
             }
           ]
         },
@@ -21254,14 +21265,46 @@
                 "online": "Non — les programmes du département sont dispensés sur le campus de l'AUB à Beyrouth, au Liban."
               }
             ]
+          },
+          "howItWorks": {
+            "title": "Comment ce générateur tire",
+            "paragraph": "Chaque tirage part d'une graine de 32 bits, prise dans la source cryptographique de votre navigateur (crypto.getRandomValues) ou saisie par vous, qui alimente le générateur Mulberry32. Chaque nombre est ensuite choisi par échantillonnage par rejet : une valeur de 32 bits tombant dans le bloc supérieur incomplet est écartée et retirée, si bien que chaque entier de la plage a exactement la même probabilité. Les tirages sans répétition utilisent un mélange de Fisher–Yates partiel qui ne touche que le nombre de positions demandé, de sorte que même une plage de plusieurs billions reste instantanée. Tout se passe dans votre navigateur ; rien n'est envoyé nulle part."
           }
         },
         "references": {
-          "title": "Références Scientifiques",
-          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
-          "note": "L'article ayant introduit l'algorithme Mersenne Twister, l'un des générateurs de nombres pseudo-aléatoires les plus largement déployés dans les logiciels aujourd'hui, apprécié pour sa période extrêmement longue et sa forte uniformité statistique.",
-          "url": "https://doi.org/10.1145/272991.272995",
-          "readOriginal": "Lire l'Article Original"
+          "title": "Références scientifiques",
+          "readOriginal": "Lire la source originale",
+          "items": [
+            {
+              "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3–30.",
+              "note": "L'article de l'un des générateurs pseudo-aléatoires les plus répandus, référence pour la longueur de période et l'équidistribution.",
+              "url": "https://doi.org/10.1145/272991.272995"
+            },
+            {
+              "citation": "Knuth, D. E. (1997). The Art of Computer Programming, Volume 2: Seminumerical Algorithms (3rd ed.). Addison-Wesley. ISBN 978-0-201-89684-8.",
+              "note": "Le traitement de référence de la génération de nombres aléatoires, du mélange utilisé pour les tirages sans répétition et du test du khi-deux appliqué aux générateurs.",
+              "url": "https://www-cs-faculty.stanford.edu/~knuth/taocp.html"
+            },
+            {
+              "citation": "Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. Philosophical Magazine, 50(302), 157–175.",
+              "note": "Le test original d'adéquation du khi-deux, utilisé ici pour comparer chaque tirage à une répartition uniforme.",
+              "url": "https://doi.org/10.1080/14786440009463897"
+            },
+            {
+              "citation": "Rukhin, A. et al. (2010). A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications. NIST Special Publication 800-22 Rev. 1a.",
+              "note": "La batterie de tests du NIST pour les générateurs destinés à la sécurité, un niveau que ce générateur du quotidien ne prétend pas atteindre.",
+              "url": "https://doi.org/10.6028/NIST.SP.800-22r1a"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Avis",
+          "items": [
+            "Ce générateur est conçu pour les jeux, le travail en classe, l'échantillonnage et les simulations. Ce n'est pas un générateur cryptographiquement sûr : ne l'utilisez jamais pour des mots de passe, clés, jetons ou tout ce que quelqu'un pourrait tenter de prédire.",
+            "Quiconque connaît la graine et les réglages peut reproduire exactement le même tirage. Les résultats sont donc vérifiables, mais publier la graine révèle aussi les nombres.",
+            "Les résultats ne sont pas valables pour les loteries officielles, les jeux d'argent réglementés ni les tirages ayant une valeur juridique, qui exigent du matériel certifié ou des procédures auditées.",
+            "Le test d'uniformité, les probabilités et les attentes sont des repères statistiques. Un seul tirage peut paraître inégal par pur hasard, et les tirages sans répétition varient un peu moins que ce que suppose le test."
+          ]
         }
       },
       "shareExport": {
@@ -21285,6 +21328,241 @@
         "inputSectionTitle": "Entrée",
         "resultSectionTitle": "Résultat",
         "summarySentence": "{count, plural, one {# nombre aléatoire généré} other {# nombres aléatoires générés}}, moyenne {average}."
+      },
+      "ind": {
+        "worked": "Exemple résolu",
+        "empty": "Corrigez les saisies ci-dessus pour afficher cet indicateur.",
+        "hist": {
+          "title": "Histogramme des fréquences",
+          "heading": "Comment {count} tirages tombent dans {bins} tranches de la plage",
+          "intro": "Chaque barre compte les nombres tombés dans une tranche ; la ligne pointillée est le compte d'un tirage parfaitement uniforme.",
+          "rowRange": "Taille de la plage N",
+          "rowBins": "Tranches",
+          "rowExpected": "Attendu par tranche",
+          "rowEmptiest": "Tranche la plus vide",
+          "rowFullest": "Tranche la plus pleine",
+          "legendObserved": "Nombres tirés",
+          "legendExpected": "Attente uniforme"
+        },
+        "dup": {
+          "title": "Explorateur de répétitions",
+          "heading": "Probabilité d'au moins une répétition en {k} tirages parmi {n} valeurs",
+          "intro": "Faites glisser le point sur la courbe : il règle « Combien de nombres » plus haut, et le tirage comme tous les indicateurs suivent.",
+          "rowN": "Valeurs de la plage N",
+          "rowK": "Tirages k",
+          "rowNoRepeat": "Aucune répétition",
+          "rowHalf": "Tirages pour 50 %",
+          "rowDistinct": "Valeurs distinctes attendues",
+          "rowRepeat": "Au moins une répétition",
+          "noteNoDup": "Les doublons sont désactivés, ce tirage ne peut donc pas se répéter ; la courbe montre la probabilité s'ils étaient permis.",
+          "hint": "Faites glisser le point bleu (ou sélectionnez-le et utilisez les flèches) pour changer le nombre."
+        },
+        "mean": {
+          "title": "Moyenne cumulée",
+          "heading": "La moyenne après chaque tirage se rapproche du vrai centre {mu}",
+          "intro": "La loi des grands nombres en action : la courbe oscille au début puis se stabilise dans l'entonnoir de ±2 erreurs types.",
+          "rowMu": "Vrai centre μ",
+          "rowFinal": "Moyenne après tous les tirages",
+          "rowDev": "Écart à μ",
+          "rowSe": "Erreur type σ ÷ √k",
+          "rowZ": "Écart en erreurs types",
+          "axisDraws": "numéro du tirage",
+          "legendMean": "Moyenne cumulée",
+          "legendMu": "Vrai centre μ",
+          "legendBand": "±2 erreurs types"
+        },
+        "chi": {
+          "title": "Test d'uniformité",
+          "heading": "χ² = {stat} face à une valeur critique à 5 % de {crit}",
+          "intro": "Le test du khi-deux de Pearson demande si les comptes par tranche s'écartent de l'uniforme plus que le hasard ne l'explique.",
+          "rowFormula": "Statistique",
+          "rowDf": "Degrés de liberté",
+          "rowStat": "χ² de ce tirage",
+          "rowCrit": "Valeur critique à 5 %",
+          "rowP": "Valeur p",
+          "rowVerdict": "Verdict",
+          "lowExpected": "Moins de 5 attendus par tranche : lisez ce test comme un repère approximatif."
+        },
+        "spread": {
+          "title": "Dispersion dans la plage",
+          "heading": "Médiane {median}, écart type {sd} (tirage uniforme : {sigma})",
+          "intro": "Chaque nombre tiré est placé sur la ligne de la plage, avec la médiane, la moyenne, le vrai centre et une bande de ±1 écart type au-dessus.",
+          "labelMean": "moy.",
+          "labelMedian": "médiane",
+          "rowMinMax": "Plus petit … plus grand",
+          "rowMedian": "Médiane",
+          "rowSd": "Écart type de l'échantillon",
+          "rowSigma": "σ d'un tirage uniforme",
+          "rowCoverage": "Part de la plage couverte"
+        },
+        "sum": {
+          "title": "Somme attendue",
+          "heading": "Somme {sum} face à une attente de {expected} ± {sd}",
+          "intro": "La somme du tirage a sa propre valeur attendue et sa dispersion ; le score z indique à quel point cette somme est inhabituelle.",
+          "rowExpected": "Somme attendue k × μ",
+          "rowSd": "Dispersion σ × √k × correction",
+          "rowObserved": "Somme de ce tirage",
+          "rowZ": "Score z",
+          "boxCount": "tirages k",
+          "boxMu": "centre μ",
+          "boxExpected": "somme attendue",
+          "boxSigma": "σ par tirage",
+          "boxFpc": "correction sans remise",
+          "boxSd": "dispersion de la somme",
+          "boxDiff": "somme − attendue",
+          "boxZ": "score z"
+        },
+        "distinct": {
+          "title": "Distincts ou répétés",
+          "heading": "{distinct} valeurs distinctes parmi {k} tirages",
+          "intro": "Combien de tirages ont donné une nouvelle valeur et combien en ont répété une, face à la répartition attendue et à la part de la plage atteinte.",
+          "barDraw": "Ce tirage",
+          "barExpected": "Attendu",
+          "barCoverage": "Plage couverte",
+          "segDistinct": "distincts",
+          "segRepeat": "répétés",
+          "segSeen": "tirés",
+          "segUnseen": "jamais tirés",
+          "rowDistinct": "Distincts dans ce tirage",
+          "rowRepeats": "Tirages répétés",
+          "rowExpected": "Distincts attendus",
+          "rowCoverage": "Plage couverte"
+        },
+        "appear": {
+          "title": "Chances qu'un nombre choisi sorte",
+          "heading": "Probabilité qu'un nombre que vous choisissez sorte : {p}",
+          "intro": "Choisissez une valeur de la plage avant le tirage ; voici ses chances de sortir avec moitié moins, autant et deux fois plus de tirages.",
+          "rowSingle": "Une valeur par tirage 1/N",
+          "rowFormula": "Formule",
+          "rowHalf": "Moitié des tirages",
+          "rowDouble": "Double des tirages",
+          "rowNow": "Tirages actuels",
+          "low": "Moitié",
+          "now": "Actuel",
+          "high": "Double"
+        },
+        "space": {
+          "title": "Taille de l'espace des résultats",
+          "heading": "{count} résultats possibles avec ces réglages",
+          "intro": "Combien de résultats différents chaque type de tirage peut produire, sur une échelle logarithmique ; vos réglages déterminent lequel s'applique.",
+          "orderedWith": "Ordonné, avec répétition",
+          "unorderedWith": "Trié, avec répétition",
+          "orderedWithout": "Ordonné, sans répétition",
+          "unorderedWithout": "Trié, sans répétition",
+          "orderedWithShort": "Ordonné + répétition",
+          "unorderedWithShort": "Trié + répétition",
+          "orderedWithoutShort": "Ordonné, sans répétition",
+          "unorderedWithoutShort": "Trié, sans répétition",
+          "current": "le vôtre",
+          "impossible": "impossible",
+          "rowKind": "Vos réglages",
+          "rowFormula": "Formule",
+          "rowValue": "Résultats possibles",
+          "rowDigits": "Chiffres",
+          "rowOdds": "Chances de le deviner exactement"
+        },
+        "bias": {
+          "title": "Biais du modulo, mesuré",
+          "heading": "Un tirage naïf sur {bits} bits favoriserait {heavy} valeurs d'un facteur {ratio}×",
+          "noBias": "N divise {size} exactement, donc même la méthode naïve est équitable pour cette plage",
+          "intro": "Prendre un octet ou un mot aléatoire modulo N surpondère les premières valeurs ; cet outil retire le bloc supérieur incomplet.",
+          "rowSource": "Valeurs de la source S",
+          "rowQ": "Blocs complets ⌊S ÷ N⌋",
+          "rowR": "Valeurs favorisées S mod N",
+          "rowHeavy": "Probabilité d'une valeur favorisée",
+          "rowLight": "Probabilité des autres",
+          "rowRedraw": "Taux de nouveau tirage de l'outil",
+          "naiveTitle": "Naïf : source mod N",
+          "naiveSub": "Source {bits} bits, {size} valeurs",
+          "toolTitle": "Cet outil : échantillonnage par rejet",
+          "toolSub": "Source 32 bits, bloc supérieur retiré",
+          "heavyP": "Valeurs favorisées",
+          "lightP": "Autres valeurs",
+          "favoured": "Valeurs favorisées",
+          "ratio": "Biais",
+          "exact": "Chaque valeur",
+          "redraw": "Tirages refaits"
+        },
+        "entropy": {
+          "title": "Imprévisibilité en bits",
+          "heading": "{bits} bits avec ces réglages : {zone}",
+          "intro": "Les bits mesurent la difficulté de deviner le résultat ; la graine de 32 bits du générateur plafonne ce qu'un tirage peut réellement contenir.",
+          "rowPer": "Bits par nombre",
+          "rowLog": "log₁₀ des résultats possibles",
+          "rowBits": "Bits",
+          "rowCap": "Bits de la graine (plafond)",
+          "rowEffective": "Bits effectifs",
+          "markerSettings": "réglages",
+          "markerCap": "plafond graine",
+          "zones": {
+            "guessable": "Devinable",
+            "weak": "Faible",
+            "moderate": "Moyen",
+            "strong": "Fort",
+            "cryptographic": "Niveau crypto"
+          }
+        },
+        "table": {
+          "title": "Tirages courants et leurs probabilités",
+          "heading": "Des tirages réels, calculés avec les mathématiques de cet outil",
+          "intro": "Chaque ligne est un tirage connu avec la probabilité de deviner son résultat exact ; Utiliser le charge dans le générateur.",
+          "rowDraw": "Tirage",
+          "rowSettings": "Réglages",
+          "rowFormula": "Formule",
+          "rowRepeat": "Probabilité de répétition",
+          "rowOdds": "Chances du résultat exact",
+          "colDraw": "Tirage",
+          "colTag": "Type",
+          "colOdds": "Résultat exact",
+          "colRepeat": "Répétition",
+          "tagRepeats": "avec répétition",
+          "tagNoRepeats": "sans répétition",
+          "apply": "Utiliser",
+          "yours": "Vos réglages actuels : {odds}."
+        }
+      },
+      "examples": {
+        "title": "Exemples résolus",
+        "intro": "Trois tirages classiques résolus pas à pas avec les mêmes fonctions que le générateur.",
+        "answer": "Réponse",
+        "lottery": {
+          "title": "Chances du jackpot au Loto 6/49",
+          "scenario": "Six nombres différents de 1 à 49 ; l'ordre ne compte pas.",
+          "s1": "Compter les ensembles non ordonnés",
+          "s2": "Calculer",
+          "s3": "Chance que votre nombre préféré sorte",
+          "s4": "Somme attendue des six",
+          "s5": "Dispersion de la somme (correction sans remise)",
+          "takeaway": "Trier les six nombres transforme 10 milliards de suites ordonnées en environ 14 millions de grilles."
+        },
+        "birthday": {
+          "title": "Le paradoxe des anniversaires",
+          "scenario": "23 personnes, 365 anniversaires équiprobables : tirez 23 nombres de 1 à 365 avec répétition.",
+          "s1": "Probabilité d'un anniversaire commun",
+          "s2": "Aucun identique",
+          "s3": "Au moins un commun",
+          "s4": "Anniversaires distincts attendus",
+          "s5": "Plus petit groupe pour 50 %",
+          "takeaway": "Les répétitions arrivent bien plus tôt que l'intuition ne le dit : vers √N tirages, pas N ÷ 2."
+        },
+        "dice": {
+          "title": "Ce dé est-il équitable ?",
+          "scenario": "60 lancers de 1 à 6 ont donné les comptes ci-dessous ; testez-les face à une répartition uniforme.",
+          "s1": "Faces observées 1–6",
+          "s2": "Attendu par face",
+          "s3": "Statistique du khi-deux",
+          "s4": "Valeur critique à 5 %",
+          "s5": "Valeur p",
+          "takeaway": "4,2 est bien en dessous de 11,07 : ces comptes sont ce qu'un dé équitable donne souvent."
+        }
+      },
+      "order": {
+        "title": "Ordre du tirage",
+        "intro": "Les {shown} premiers des {k} nombres dans l'ordre de tirage, avant tout tri ; la ligne pointillée est le centre de la plage.",
+        "first": "Premier → dernier",
+        "upDown": "Hausses · baisses",
+        "single": "Probabilité d'une valeur",
+        "repeat": "Probabilité de répétition"
       }
     },
     "standard-deviation-calculator": {

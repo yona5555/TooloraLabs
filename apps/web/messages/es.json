@@ -21104,8 +21104,13 @@
       "description": "Genera enteros aleatorios dentro de un rango que elijas, con control sobre cuántos resultados quieres, si se permiten duplicados y el orden de clasificación de la salida.",
       "nav": {
         "tool": "Generador",
+        "draw": "Este sorteo",
+        "expect": "Expectativas",
+        "space": "Espacio de resultados",
+        "examples": "Ejemplos resueltos",
         "faq": "Preguntas Frecuentes",
-        "behindTheTool": "Detrás de la Herramienta"
+        "behindTheTool": "Detrás de la Herramienta",
+        "notices": "Avisos"
       },
       "form": {
         "inputTitle": "Ajustes",
@@ -21122,7 +21127,20 @@
           "descending": "Descendente"
         },
         "generate": "Generar",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "seedLabel": "Semilla",
+        "seedHint": "Misma semilla + mismos ajustes = los mismos números. Generar elige una nueva.",
+        "presetsLabel": "Sorteos rápidos",
+        "presets": {
+          "dice": "Tirada de dado",
+          "coin": "10 lanzamientos de moneda",
+          "lottery": "Lotería 6/49",
+          "powerball": "Bolas blancas Powerball",
+          "card": "Mano de 5 cartas",
+          "percentile": "20 elecciones 1–100",
+          "raffle": "3 ganadores de rifa",
+          "birthday": "23 cumpleaños"
+        }
       },
       "result": {
         "heading": "Resultado",
@@ -21132,37 +21150,22 @@
         "countLabel": "Cantidad",
         "sumLabel": "Suma",
         "averageLabel": "Promedio",
-        "rangeDiagramCaption": "Dónde cae cada número generado entre el mínimo y el máximo establecidos."
-      },
-      "quickReference": {
-        "title": "Sorteos Aleatorios Comunes",
-        "intro": "Algunos rangos y ajustes típicos para los que está diseñado este generador."
+        "seedLabel": "Semilla",
+        "expectedLabel": "Media esperada",
+        "moreHidden": "+{count} más en la copia y en los indicadores de abajo",
+        "spreadTitle": "Cómo se reparte este sorteo",
+        "spreadLegend": "Azul = números sorteados en cada tramo del rango; ámbar discontinuo = lo que pondría ahí un sorteo perfectamente uniforme ({expected} en el primer tramo).",
+        "verdict": {
+          "even": "Reparto uniforme",
+          "borderline": "En el límite",
+          "uneven": "Reparto desigual"
+        }
       },
       "education": {
         "intro": {
           "title": "Entender la Generación de Números Aleatorios",
           "paragraph1": "Un ordenador no puede producir un número verdaderamente impredecible de la forma en que lo hace una tirada de dados física o el lanzamiento de una moneda — cada cálculo que realiza un procesador es determinista, la misma entrada siempre produce la misma salida. Lo que esta herramienta (y prácticamente toda función de números aleatorios de propósito general en software) usa en realidad es un generador de números pseudoaleatorios: un algoritmo determinista que parte de un valor semilla impredecible y produce una larga secuencia de números que superan las pruebas estadísticas de aleatoriedad, aunque la secuencia sea técnicamente reproducible si se conociera la semilla.",
           "paragraph2": "Generar un entero aleatorio dentro de un rango elegido, sin introducir sesgo hacia ningún valor en particular, es menos trivial de lo que parece — tomar ingenuamente un valor aleatorio módulo el tamaño del rango sesga ligeramente hacia números más pequeños a menos que el rango divida de forma exacta el espacio de salida del generador. Esta herramienta evita ese sesgo, y cuando se prohíben los duplicados, extrae sin reemplazo mezclando el rango completo en lugar de volver a tirar repetidamente hasta que aparezca un valor nuevo, lo que se mantiene rápido y uniforme incluso cuando la cantidad solicitada se acerca al tamaño del propio rango."
-        },
-        "examples": {
-          "title": "Usos Comunes",
-          "intro": "El mismo generador, tres ajustes cotidianos distintos.",
-          "columnUseCase": "Caso de Uso",
-          "columnSettings": "Ajustes",
-          "rows": [
-            {
-              "calculation": "Tirar un dado de seis caras",
-              "result": "1–6, 1 resultado, duplicados permitidos"
-            },
-            {
-              "calculation": "Sortear 6 números de lotería",
-              "result": "1–49, 6 resultados, sin duplicados"
-            },
-            {
-              "calculation": "Elegir un ganador aleatorio entre 250 participantes",
-              "result": "1–250, 1 resultado"
-            }
-          ]
         },
         "applications": {
           "title": "Dónde se Usan los Números Aleatorios",
@@ -21200,6 +21203,14 @@
             {
               "question": "¿Por qué dos generadores de números aleatorios distintos a veces dan resultados que parecen diferentes para el mismo rango?",
               "answer": "Distintas herramientas usan algoritmos pseudoaleatorios y métodos de siembra (seeding) subyacentes diferentes, lo que afecta a la secuencia concreta producida (y a cuánto tarda esa secuencia en repetirse), aunque ambos puedan ser fuentes de aleatoriedad estadísticamente válidas para el uso cotidiano."
+            },
+            {
+              "question": "¿Para qué sirve la semilla?",
+              "answer": "La semilla fija toda la secuencia. Con la misma semilla, el mismo rango, la misma cantidad y los mismos ajustes de duplicados y orden se obtienen exactamente los mismos números, algo útil para ejercicios en clase, rifas publicadas que otros quieren verificar o para repetir una simulación. Pulsa Generar para obtener una semilla nueva."
+            },
+            {
+              "question": "¿Cómo sé que los números están realmente bien repartidos?",
+              "answer": "La página aplica la prueba chi-cuadrado de Pearson a cada sorteo: compara cuántos números cayeron en cada tramo del rango con lo que daría un sorteo uniforme. Un valor p superior a 0,05 indica que el reparto es coherente con un azar justo. Con pocos números la prueba es débil, y se espera que aproximadamente uno de cada veinte sorteos parezca desigual."
             }
           ]
         },
@@ -21254,14 +21265,46 @@
                 "online": "No — los programas del departamento se imparten en el campus de la AUB en Beirut, Líbano."
               }
             ]
+          },
+          "howItWorks": {
+            "title": "Cómo sortea este generador",
+            "paragraph": "Cada sorteo parte de una semilla de 32 bits, tomada de la fuente criptográfica de tu navegador (crypto.getRandomValues) o escrita por ti, que alimenta el generador Mulberry32. Después cada número se elige por muestreo por rechazo: un valor de 32 bits que cae en el bloque superior incompleto se descarta y se vuelve a sortear, así cada entero del rango tiene exactamente la misma probabilidad. Los sorteos sin repetición usan una mezcla parcial de Fisher–Yates que solo toca tantas posiciones como pidas, de modo que incluso un rango de billones sigue siendo instantáneo. Todo ocurre en tu navegador; no se envía nada a ningún sitio."
           }
         },
         "references": {
-          "title": "Referencias Científicas",
-          "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3-30.",
-          "note": "El artículo que introdujo el algoritmo Mersenne Twister, uno de los generadores de números pseudoaleatorios más utilizados hoy en software, valorado por su período extremadamente largo y su fuerte uniformidad estadística.",
-          "url": "https://doi.org/10.1145/272991.272995",
-          "readOriginal": "Leer el Artículo Original"
+          "title": "Referencias científicas",
+          "readOriginal": "Leer la fuente original",
+          "items": [
+            {
+              "citation": "Matsumoto, M., & Nishimura, T. (1998). Mersenne Twister: A 623-Dimensionally Equidistributed Uniform Pseudo-Random Number Generator. ACM Transactions on Modeling and Computer Simulation, 8(1), 3–30.",
+              "note": "El artículo de uno de los generadores pseudoaleatorios más usados y referencia para la longitud del periodo y la equidistribución.",
+              "url": "https://doi.org/10.1145/272991.272995"
+            },
+            {
+              "citation": "Knuth, D. E. (1997). The Art of Computer Programming, Volume 2: Seminumerical Algorithms (3rd ed.). Addison-Wesley. ISBN 978-0-201-89684-8.",
+              "note": "El tratamiento de referencia de la generación de números aleatorios, de la mezcla usada en los sorteos sin repetición y de la prueba chi-cuadrado aplicada a generadores.",
+              "url": "https://www-cs-faculty.stanford.edu/~knuth/taocp.html"
+            },
+            {
+              "citation": "Pearson, K. (1900). On the criterion that a given system of deviations from the probable in the case of a correlated system of variables is such that it can be reasonably supposed to have arisen from random sampling. Philosophical Magazine, 50(302), 157–175.",
+              "note": "La prueba original de bondad de ajuste chi-cuadrado, usada aquí para comparar cada sorteo con un reparto uniforme.",
+              "url": "https://doi.org/10.1080/14786440009463897"
+            },
+            {
+              "citation": "Rukhin, A. et al. (2010). A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications. NIST Special Publication 800-22 Rev. 1a.",
+              "note": "La batería de pruebas del NIST para generadores de uso en seguridad, el nivel que este generador cotidiano no pretende alcanzar.",
+              "url": "https://doi.org/10.6028/NIST.SP.800-22r1a"
+            }
+          ]
+        },
+        "notices": {
+          "title": "Avisos",
+          "items": [
+            "Este generador está pensado para juegos, trabajo en clase, muestreo y simulaciones. No es un generador criptográficamente seguro: no lo uses nunca para contraseñas, claves, tokens ni nada que alguien pueda intentar predecir.",
+            "Quien conozca la semilla y los ajustes puede reproducir exactamente el mismo sorteo. Eso hace los resultados verificables, pero también significa que publicar la semilla revela los números.",
+            "Los resultados no son válidos para loterías oficiales, juegos de azar regulados ni sorteos con validez legal, que exigen equipos certificados o procedimientos auditados.",
+            "La prueba de uniformidad, las probabilidades y las expectativas son guías estadísticas. Un solo sorteo puede parecer desigual por puro azar, y los sorteos sin repetición varían algo menos de lo que supone la prueba."
+          ]
         }
       },
       "shareExport": {
@@ -21285,6 +21328,241 @@
         "inputSectionTitle": "Entrada",
         "resultSectionTitle": "Resultado",
         "summarySentence": "Se generaron {count, plural, one {# número aleatorio} other {# números aleatorios}}, con un promedio de {average}."
+      },
+      "ind": {
+        "worked": "Ejemplo resuelto",
+        "empty": "Corrige los datos de arriba para ver este indicador.",
+        "hist": {
+          "title": "Histograma de frecuencias",
+          "heading": "Cómo caen {count} extracciones en {bins} tramos del rango",
+          "intro": "Cada barra cuenta los números que cayeron en un tramo; la línea discontinua es la cuenta que daría un sorteo perfectamente uniforme.",
+          "rowRange": "Tamaño del rango N",
+          "rowBins": "Tramos",
+          "rowExpected": "Esperado por tramo",
+          "rowEmptiest": "Tramo más vacío",
+          "rowFullest": "Tramo más lleno",
+          "legendObserved": "Números sorteados",
+          "legendExpected": "Expectativa uniforme"
+        },
+        "dup": {
+          "title": "Explorador de repeticiones",
+          "heading": "Probabilidad de al menos una repetición en {k} extracciones de {n} valores",
+          "intro": "Arrastra el punto por la curva: fija «Cuántos números» arriba, y el sorteo y todos los indicadores lo siguen.",
+          "rowN": "Valores en el rango N",
+          "rowK": "Extracciones k",
+          "rowNoRepeat": "Ninguna repetición",
+          "rowHalf": "Extracciones para un 50%",
+          "rowDistinct": "Valores distintos esperados",
+          "rowRepeat": "Al menos una repetición",
+          "noteNoDup": "Los duplicados están desactivados, así que este sorteo no puede repetir; la curva muestra la probabilidad si se permitieran.",
+          "hint": "Arrastra el punto azul (o enfócalo y usa las flechas) para cambiar la cantidad."
+        },
+        "mean": {
+          "title": "Media acumulada",
+          "heading": "La media tras cada extracción, acercándose al centro real {mu}",
+          "intro": "La ley de los grandes números en acción: la línea oscila al principio y luego se asienta dentro del embudo de ±2 errores estándar.",
+          "rowMu": "Centro real μ",
+          "rowFinal": "Media tras todas las extracciones",
+          "rowDev": "Diferencia con μ",
+          "rowSe": "Error estándar σ ÷ √k",
+          "rowZ": "Diferencia en errores estándar",
+          "axisDraws": "número de extracción",
+          "legendMean": "Media acumulada",
+          "legendMu": "Centro real μ",
+          "legendBand": "±2 errores estándar"
+        },
+        "chi": {
+          "title": "Prueba de uniformidad",
+          "heading": "χ² = {stat} frente a un valor crítico al 5% de {crit}",
+          "intro": "La prueba chi-cuadrado de Pearson pregunta si las cuentas por tramo se alejan de lo uniforme más de lo que explica el azar.",
+          "rowFormula": "Estadístico",
+          "rowDf": "Grados de libertad",
+          "rowStat": "χ² de este sorteo",
+          "rowCrit": "Valor crítico al 5%",
+          "rowP": "Valor p",
+          "rowVerdict": "Veredicto",
+          "lowExpected": "Menos de 5 esperados por tramo: toma esta prueba como guía aproximada."
+        },
+        "spread": {
+          "title": "Dispersión dentro del rango",
+          "heading": "Mediana {median}, desviación estándar {sd} (sorteo uniforme: {sigma})",
+          "intro": "Cada número sorteado se sitúa en la línea del rango, con la mediana, la media, el centro real y una banda de ±1 DE marcados encima.",
+          "labelMean": "media",
+          "labelMedian": "mediana",
+          "rowMinMax": "Menor … mayor",
+          "rowMedian": "Mediana",
+          "rowSd": "Desviación estándar muestral",
+          "rowSigma": "σ de un sorteo uniforme",
+          "rowCoverage": "Parte del rango abarcada"
+        },
+        "sum": {
+          "title": "Suma esperada",
+          "heading": "Suma {sum} frente a una esperada de {expected} ± {sd}",
+          "intro": "La suma del sorteo tiene su propio valor esperado y dispersión; la puntuación z indica lo inusual que es esta suma.",
+          "rowExpected": "Suma esperada k × μ",
+          "rowSd": "Dispersión σ × √k × corrección",
+          "rowObserved": "Suma de este sorteo",
+          "rowZ": "Puntuación z",
+          "boxCount": "extracciones k",
+          "boxMu": "centro μ",
+          "boxExpected": "suma esperada",
+          "boxSigma": "σ por extracción",
+          "boxFpc": "corrección sin repetición",
+          "boxSd": "dispersión de la suma",
+          "boxDiff": "suma − esperada",
+          "boxZ": "puntuación z"
+        },
+        "distinct": {
+          "title": "Distintos frente a repetidos",
+          "heading": "{distinct} valores distintos entre {k} extracciones",
+          "intro": "Cuántas extracciones dieron un valor nuevo y cuántas repitieron uno, frente al reparto esperado y la parte del rango alcanzada.",
+          "barDraw": "Este sorteo",
+          "barExpected": "Esperado",
+          "barCoverage": "Rango cubierto",
+          "segDistinct": "distintos",
+          "segRepeat": "repetidos",
+          "segSeen": "sorteados",
+          "segUnseen": "nunca sorteados",
+          "rowDistinct": "Distintos en este sorteo",
+          "rowRepeats": "Extracciones repetidas",
+          "rowExpected": "Distintos esperados",
+          "rowCoverage": "Rango cubierto"
+        },
+        "appear": {
+          "title": "Probabilidad de que salga tu número",
+          "heading": "Probabilidad de que aparezca un número que elijas: {p}",
+          "intro": "Elige cualquier valor del rango antes de sortear; estas son sus probabilidades de salir con la mitad, las actuales y el doble de extracciones.",
+          "rowSingle": "Un valor por extracción 1/N",
+          "rowFormula": "Fórmula",
+          "rowHalf": "Mitad de extracciones",
+          "rowDouble": "Doble de extracciones",
+          "rowNow": "Extracciones actuales",
+          "low": "Mitad",
+          "now": "Actual",
+          "high": "Doble"
+        },
+        "space": {
+          "title": "Tamaño del espacio de resultados",
+          "heading": "{count} resultados posibles con estos ajustes",
+          "intro": "Cuántos resultados distintos puede dar cada tipo de sorteo, en escala logarítmica; tus ajustes deciden cuál se aplica.",
+          "orderedWith": "Con orden, con repetición",
+          "unorderedWith": "Ordenado, con repetición",
+          "orderedWithout": "Con orden, sin repetición",
+          "unorderedWithout": "Ordenado, sin repetición",
+          "orderedWithShort": "Con orden + repetición",
+          "unorderedWithShort": "Ordenado + repetición",
+          "orderedWithoutShort": "Con orden, sin repetición",
+          "unorderedWithoutShort": "Ordenado, sin repetición",
+          "current": "tuyo",
+          "impossible": "imposible",
+          "rowKind": "Tus ajustes",
+          "rowFormula": "Fórmula",
+          "rowValue": "Resultados posibles",
+          "rowDigits": "Cifras",
+          "rowOdds": "Probabilidad de acertarlo exacto"
+        },
+        "bias": {
+          "title": "Sesgo del módulo, medido",
+          "heading": "Un sorteo ingenuo de {bits} bits favorecería {heavy} valores por {ratio}×",
+          "noBias": "N divide {size} exactamente, así que incluso el método ingenuo es justo en este rango",
+          "intro": "Tomar un byte o palabra aleatoria módulo N sobrepondera los primeros valores; esta herramienta vuelve a sortear el bloque superior incompleto.",
+          "rowSource": "Valores de la fuente S",
+          "rowQ": "Bloques completos ⌊S ÷ N⌋",
+          "rowR": "Valores favorecidos S mod N",
+          "rowHeavy": "Prob. de un valor favorecido",
+          "rowLight": "Prob. de los demás",
+          "rowRedraw": "Tasa de nuevo sorteo de la herramienta",
+          "naiveTitle": "Ingenuo: fuente mod N",
+          "naiveSub": "Fuente de {bits} bits, {size} valores",
+          "toolTitle": "Esta herramienta: muestreo por rechazo",
+          "toolSub": "Fuente de 32 bits, bloque superior repetido",
+          "heavyP": "Valores favorecidos",
+          "lightP": "Otros valores",
+          "favoured": "Valores favorecidos",
+          "ratio": "Sesgo",
+          "exact": "Cada valor",
+          "redraw": "Extracciones repetidas"
+        },
+        "entropy": {
+          "title": "Imprevisibilidad en bits",
+          "heading": "{bits} bits con estos ajustes: {zone}",
+          "intro": "Los bits miden lo difícil que es adivinar el resultado; la semilla de 32 bits del generador limita lo que cualquier sorteo puede contener.",
+          "rowPer": "Bits por número",
+          "rowLog": "log₁₀ de resultados posibles",
+          "rowBits": "Bits",
+          "rowCap": "Bits de la semilla (límite)",
+          "rowEffective": "Bits efectivos",
+          "markerSettings": "ajustes",
+          "markerCap": "límite semilla",
+          "zones": {
+            "guessable": "Adivinable",
+            "weak": "Débil",
+            "moderate": "Moderado",
+            "strong": "Fuerte",
+            "cryptographic": "Nivel cripto"
+          }
+        },
+        "table": {
+          "title": "Sorteos comunes y sus probabilidades",
+          "heading": "Sorteos reales, calculados con las matemáticas de esta herramienta",
+          "intro": "Cada fila es un sorteo conocido con la probabilidad de acertar su resultado exacto; Usar lo carga en el generador.",
+          "rowDraw": "Sorteo",
+          "rowSettings": "Ajustes",
+          "rowFormula": "Fórmula",
+          "rowRepeat": "Probabilidad de repetición",
+          "rowOdds": "Probabilidad del resultado exacto",
+          "colDraw": "Sorteo",
+          "colTag": "Tipo",
+          "colOdds": "Resultado exacto",
+          "colRepeat": "Repetición",
+          "tagRepeats": "con repetición",
+          "tagNoRepeats": "sin repetición",
+          "apply": "Usar",
+          "yours": "Tus ajustes actuales: {odds}."
+        }
+      },
+      "examples": {
+        "title": "Ejemplos resueltos",
+        "intro": "Tres sorteos clásicos resueltos paso a paso con las mismas funciones que usa el generador.",
+        "answer": "Respuesta",
+        "lottery": {
+          "title": "Probabilidad del bote en la lotería 6/49",
+          "scenario": "Seis números distintos del 1 al 49; el orden no importa.",
+          "s1": "Contar conjuntos sin orden",
+          "s2": "Calcular",
+          "s3": "Probabilidad de que salga tu número favorito",
+          "s4": "Suma esperada de los seis",
+          "s5": "Dispersión de la suma (corrección sin repetición)",
+          "takeaway": "Ordenar los seis números convierte 10 000 millones de secuencias en unos 14 millones de boletos."
+        },
+        "birthday": {
+          "title": "La paradoja del cumpleaños",
+          "scenario": "23 personas y 365 cumpleaños igual de probables: sortea 23 números de 1–365 con repetición.",
+          "s1": "Probabilidad de un cumpleaños compartido",
+          "s2": "Ninguno igual",
+          "s3": "Al menos uno compartido",
+          "s4": "Cumpleaños distintos esperados",
+          "s5": "Grupo mínimo para un 50%",
+          "takeaway": "Las repeticiones llegan mucho antes de lo que dice la intuición: hacia √N extracciones, no N ÷ 2."
+        },
+        "dice": {
+          "title": "¿Es justo este dado?",
+          "scenario": "60 tiradas de 1–6 dieron las cuentas de abajo; compáralas con un reparto uniforme.",
+          "s1": "Caras observadas 1–6",
+          "s2": "Esperado por cara",
+          "s3": "Estadístico chi-cuadrado",
+          "s4": "Valor crítico al 5%",
+          "s5": "Valor p",
+          "takeaway": "4,2 está muy por debajo de 11,07, así que estas cuentas son las que un dado justo da a menudo."
+        }
+      },
+      "order": {
+        "title": "Orden del sorteo",
+        "intro": "Los primeros {shown} de {k} números en el orden en que salieron, antes de ordenar; la línea discontinua es el centro del rango.",
+        "first": "Primero → último",
+        "upDown": "Subidas · bajadas",
+        "single": "Probabilidad de un valor",
+        "repeat": "Probabilidad de repetición"
       }
     },
     "standard-deviation-calculator": {
