@@ -11785,13 +11785,7 @@
         "inverseA": "Inverse de A",
         "determinantA": "Déterminant de A",
         "determinantB": "Déterminant de B",
-        "emptyStateMessage": "Saisissez les deux matrices et cliquez sur « Calculer » pour voir l'ensemble complet des résultats.",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramTransformCaption": "Le carré unité (en pointillés) et le parallélogramme sur lequel la matrice A l'envoie — les colonnes de A sont exactement l'endroit où atterrissent les deux côtés du carré.",
-        "diagramBTitle": "Ce que fait la matrice B",
-        "diagramBIntro": "La même image, pour la matrice B : le carré unité transformé par les colonnes de B.",
-        "diagramBCaption": "Le carré unité (en pointillés) et le parallélogramme sur lequel la matrice B l'envoie."
+        "emptyStateMessage": "Saisissez les deux matrices et cliquez sur « Calculer » pour voir l'ensemble complet des résultats."
       },
       "education": {
         "intro": {
@@ -11926,24 +11920,19 @@
           "intro": "Quatre autres relations matricielles qui méritent d'être vues séparément, chacune avec sa propre illustration plutôt qu'une simple formule.",
           "determinant": {
             "title": "Le déterminant comme aire",
-            "description": "Le déterminant n'est pas qu'une formule à mémoriser — c'est littéralement l'aire du parallélogramme sur lequel une matrice envoie le carré unité (avec un signe : positif quand l'orientation est préservée, négatif quand la matrice retourne le plan). Une matrice qui étire l'espace a un déterminant de valeur absolue supérieure à 1 ; une qui le comprime a un déterminant entre 0 et 1 ; et une matrice singulière (déterminant 0) écrase tout le plan sur une droite, ce qui détruit l'information de façon irréversible.",
-            "diagramCaption": "L'image du carré unité par la matrice A, avec son aire — égale à |det(A)| — ombrée et étiquetée.",
-            "arithmeticCaption": "Les deux produits diagonaux : a11×a22 (diagonale principale, additionné) moins a12×a21 (diagonale secondaire, soustrait)."
+            "description": "Le déterminant n'est pas qu'une formule à mémoriser — c'est littéralement l'aire du parallélogramme sur lequel une matrice envoie le carré unité (avec un signe : positif quand l'orientation est préservée, négatif quand la matrice retourne le plan). Une matrice qui étire l'espace a un déterminant de valeur absolue supérieure à 1 ; une qui le comprime a un déterminant entre 0 et 1 ; et une matrice singulière (déterminant 0) écrase tout le plan sur une droite, ce qui détruit l'information de façon irréversible."
           },
           "composition": {
             "title": "La multiplication matricielle comme composition de transformations",
-            "description": "A×B signifie « appliquer d'abord B, puis appliquer A au résultat » — multiplier deux matrices revient à enchaîner leurs transformations l'une après l'autre. C'est aussi la raison géométrique pour laquelle A×B n'est généralement pas égal à B×A : transformer une forme d'abord avec B puis avec A n'aboutit généralement pas au même endroit que dans l'ordre inverse, tout comme faire pivoter un livre puis l'aplatir donne un résultat différent de l'aplatir puis le faire pivoter.",
-            "diagramCaption": "Le carré unité transformé par B seul (orange), et le même carré transformé par A×B — la transformation de B suivie de celle de A (violet)."
+            "description": "A×B signifie « appliquer d'abord B, puis appliquer A au résultat » — multiplier deux matrices revient à enchaîner leurs transformations l'une après l'autre. C'est aussi la raison géométrique pour laquelle A×B n'est généralement pas égal à B×A : transformer une forme d'abord avec B puis avec A n'aboutit généralement pas au même endroit que dans l'ordre inverse, tout comme faire pivoter un livre puis l'aplatir donne un résultat différent de l'aplatir puis le faire pivoter."
           },
           "inverse": {
             "title": "L'inverse comme transformation « annuler »",
-            "description": "Si A étire le carré unité en un parallélogramme, A⁻¹ est exactement la transformation qui reprend ce parallélogramme et le replie pour retrouver le carré unité — géométriquement, appliquer A puis A⁻¹ (ou l'inverse) vous ramène toujours au point de départ, ce qui est précisément ce que signifie l'équation A×A⁻¹ = I. Une matrice singulière (déterminant 0) n'a pas d'inverse car elle a déjà perdu de l'information en écrasant le plan sur une droite, et aucune transformation ne peut récupérer une dimension déjà effondrée.",
-            "diagramCaption": "L'image du carré unité par la matrice A (bleu) à côté de l'image du carré unité par A⁻¹ (turquoise) — chacune annule l'autre."
+            "description": "Si A étire le carré unité en un parallélogramme, A⁻¹ est exactement la transformation qui reprend ce parallélogramme et le replie pour retrouver le carré unité — géométriquement, appliquer A puis A⁻¹ (ou l'inverse) vous ramène toujours au point de départ, ce qui est précisément ce que signifie l'équation A×A⁻¹ = I. Une matrice singulière (déterminant 0) n'a pas d'inverse car elle a déjà perdu de l'information en écrasant le plan sur une droite, et aucune transformation ne peut récupérer une dimension déjà effondrée."
           },
           "transpose": {
             "title": "La transposée comme un retournement diagonal",
-            "description": "Contrairement aux trois autres opérations, la transposée ne concerne pas vraiment une transformation de l'espace — c'est un réarrangement purement mécanique des entrées de la matrice. Les deux entrées diagonales (a₁₁ et a₂₂) restent exactement à leur place ; les deux entrées hors diagonale (a₁₂ et a₂₁) échangent simplement leurs places. C'est toute l'opération, ce qui explique qu'elle soit toujours définie, pour toute matrice, quel que soit le déterminant.",
-            "diagramCaption": "Les quatre entrées de la matrice A : la paire diagonale reste fixe, tandis que la paire hors diagonale échange ses places pour former Aᵀ."
+            "description": "Contrairement aux trois autres opérations, la transposée ne concerne pas vraiment une transformation de l'espace — c'est un réarrangement purement mécanique des entrées de la matrice. Les deux entrées diagonales (a₁₁ et a₂₂) restent exactement à leur place ; les deux entrées hors diagonale (a₁₂ et a₂₁) échangent simplement leurs places. C'est toute l'opération, ce qui explique qu'elle soit toujours définie, pour toute matrice, quel que soit le déterminant."
           }
         },
         "applications": {
@@ -11967,6 +11956,130 @@
               "description": "De nombreuses techniques d'apprentissage automatique et de statistique — de la régression linéaire à la résolution de systèmes d'équations simultanées — se réduisent en coulisses à des opérations matricielles. Trouver les coefficients d'ajustement optimal dans une régression linéaire, par exemple, implique de multiplier et d'inverser des matrices construites à partir des données d'entrée, généralisant la même arithmétique de déterminant et d'inverse que cette calculatrice effectue sur un exemple 2x2."
             }
           ]
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "basisDrag": {
+            "title": "Faites glisser les vecteurs de base",
+            "intro": "Faites glisser les points rouge et vert : ce sont les images de î et ĵ, donc les deux colonnes de A. Les entrées, le résultat et tous les graphiques de la page suivent.",
+            "hint": "Faites glisser un point · pas de 0,5",
+            "aria": "Vecteurs de base déplaçables de la matrice A",
+            "col1": "Aî = colonne 1",
+            "col2": "Aĵ = colonne 2",
+            "lengths": "Longueurs des colonnes",
+            "angle": "Angle entre les colonnes",
+            "det": "det A",
+            "area": "Aire du parallélogramme",
+            "orientation": "Orientation",
+            "kind": "Type de transformation"
+          },
+          "detFormula": {
+            "title": "Le déterminant, diagonale par diagonale",
+            "intro": "Le produit de la diagonale principale moins celui de l'antidiagonale, avec les valeurs actuelles de A.",
+            "mainDiagonal": "Diagonale principale a₁₁ × a₂₂",
+            "antiDiagonal": "Antidiagonale a₁₂ × a₂₁",
+            "difference": "Différence",
+            "detA": "det A",
+            "detB": "det B (même règle)"
+          },
+          "detZones": {
+            "title": "Ce que dit le déterminant",
+            "intro": "La position de det A, det B et det(A×B) sur une échelle logarithmique signée : inversion, écrasement, réduction ou agrandissement.",
+            "axis": "Échelle logarithmique signée du déterminant",
+            "areaFactor": "Facteur d'échelle des aires de A",
+            "zones": {
+              "flip": "Inverse",
+              "collapse": "Écrase",
+              "shrink": "Réduit",
+              "preserve": "Conserve l'aire",
+              "expand": "Agrandit"
+            }
+          },
+          "composition": {
+            "title": "D'abord B, puis A",
+            "intro": "Le point (1, 1) et l'aire du carré unité passés par B puis par A arrivent exactement là où A×B les envoie en une seule étape.",
+            "start": "Départ",
+            "afterB": "Après B",
+            "afterA": "Après A",
+            "stepB": "Appliquer B",
+            "stepA": "Puis appliquer A",
+            "oneStep": "A×B en une étape",
+            "detRule": "det A × det B = det(A×B)"
+          },
+          "commutativity": {
+            "title": "L'ordre compte-t-il ?",
+            "intro": "Chaque coefficient de A×B à côté du même coefficient de B×A. Une seule paire différente prouve que A×B ≠ B×A pour ces matrices.",
+            "verdict": "Verdict",
+            "commute": "A×B = B×A (elles commutent)",
+            "noCommute": "A×B ≠ B×A"
+          },
+          "inverse": {
+            "title": "A et A⁻¹ s'annulent",
+            "intro": "A × A⁻¹ et A⁻¹ × A calculés en direct : tous deux donnent la matrice identité I dès que det A ≠ 0.",
+            "adjugate": "Échangée et changée de signe [a₂₂, −a₁₂; −a₂₁, a₁₁]",
+            "scale": "Facteur 1 / det A",
+            "check": "A × A⁻¹",
+            "checkOk": "= I (identité)",
+            "singular": "Pas d'inverse : det A = 0"
+          },
+          "transpose": {
+            "title": "A à côté de Aᵀ",
+            "intro": "Les deux coefficients hors diagonale échangent leur place ; la diagonale, le déterminant, la trace et la norme de Frobenius ne changent pas.",
+            "swapped": "Échangés a₁₂ ⇄ a₂₁",
+            "kept": "Conservés a₁₁, a₂₂",
+            "sameDet": "det A = det Aᵀ",
+            "symmetric": "Symétrique (A = Aᵀ) ?",
+            "yes": "Oui",
+            "no": "Non"
+          },
+          "sensitivity": {
+            "title": "Sensibilité de det A à a₁₁",
+            "intro": "det A recalculé avec a₁₁ diminué d'une unité, tel que saisi et augmenté d'une unité. Chaque pas le déplace d'exactement a₂₂.",
+            "low": "a₁₁ − 1",
+            "current": "Actuel",
+            "high": "a₁₁ + 1",
+            "step": "Variation par unité de a₁₁"
+          },
+          "eigen": {
+            "title": "Valeurs propres sur la courbe caractéristique",
+            "intro": "p(λ) = λ² − tr(A)·λ + det(A). Ses racines sont les valeurs propres de A ; si la courbe ne touche jamais zéro, elles sont complexes.",
+            "polynomial": "Polynôme caractéristique",
+            "discriminant": "Discriminant tr² − 4·det",
+            "sumCheck": "Somme = trace",
+            "productCheck": "Produit = det"
+          },
+          "stretch": {
+            "title": "Combien A étire l'espace",
+            "intro": "Six mesures d'étirement, classées : le plus grand et le plus petit étirement (valeurs singulières), la longueur de chaque colonne, la norme de Frobenius et le facteur d'aire.",
+            "sigma1": "plus grand étirement",
+            "sigma2": "plus petit étirement",
+            "col1": "colonne 1",
+            "col2": "colonne 2",
+            "frobenius": "norme de Frobenius",
+            "area": "facteur d'aire"
+          },
+          "condition": {
+            "title": "Jauge du conditionnement",
+            "intro": "κ = σ₁ / σ₂ sur une échelle logarithmique. Près de 1, résoudre Ax = b est stable ; un grand κ amplifie les erreurs et fait perdre environ log₁₀ κ chiffres.",
+            "digits": "Chiffres menacés (log₁₀ κ)",
+            "band": "Évaluation",
+            "bands": {
+              "well": "Bien conditionnée",
+              "moderate": "Moyennement conditionnée",
+              "ill": "Mal conditionnée",
+              "singular": "Singulière (κ = ∞)"
+            }
+          },
+          "powers": {
+            "title": "Facteur d'aire de A répétée",
+            "intro": "|det(Aᵏ)| = |det A|ᵏ pour k = 1 à 6 sur une échelle logarithmique : au-dessus de 1 il explose, en dessous il tend vers 0, à exactement 1 il reste constant.",
+            "axis": "|det(Aᵏ)| sur une échelle log₁₀",
+            "trend": "Tendance",
+            "grows": "Croît sans limite",
+            "fades": "Tend vers 0",
+            "steady": "Reste à 1",
+            "collapses": "Écrasé à 0"
+          }
         }
       },
       "relatedTools": {
@@ -11989,6 +12102,50 @@
         "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
         "contactOrganizationPlaceholder": "ex. Société SARL",
         "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
+      },
+      "live3d": {
+        "cardTitle": "Transformation 3D en direct du cube unité",
+        "groupInputs": "Entrées",
+        "groupDeterminants": "Déterminants et trace",
+        "groupOperations": "Opérations",
+        "groupInverse": "Inverse",
+        "groupGeometry": "Géométrie de A",
+        "matrixA": "Matrice A",
+        "matrixB": "Matrice B",
+        "detAB": "det(A × B)",
+        "traceA": "Trace de A",
+        "checkIdentity": "Vérification : A × A⁻¹",
+        "noInverse": "Aucune (singulière)",
+        "volume": "Volume du cube transformé",
+        "orientation": "Orientation",
+        "orientationKept": "Conservée",
+        "orientationFlipped": "Inversée",
+        "orientationCollapsed": "Écrasée",
+        "col1Length": "Longueur de Aî (colonne 1)",
+        "col2Length": "Longueur de Aĵ (colonne 2)",
+        "columnAngle": "Angle entre les colonnes",
+        "eigenvalues": "Valeurs propres",
+        "condition": "Conditionnement",
+        "kind": "Type de transformation",
+        "kinds": {
+          "singular": "Singulière (écrase)",
+          "identity": "Identité",
+          "rotation": "Rotation",
+          "reflection": "Réflexion",
+          "scaling": "Dilatation selon les axes",
+          "shear": "Cisaillement",
+          "general": "Application linéaire générale"
+        },
+        "replay": "Rejouer",
+        "examples": {
+          "textbook": "Paire de manuel",
+          "rotation": "Rotation de 90°",
+          "shear": "Deux cisaillements",
+          "reflection": "Réflexion et échange",
+          "scaling": "Dilatation selon les axes",
+          "inversePair": "B est l'inverse de A",
+          "singular": "A singulière"
+        }
       }
     },
     "molar-mass-calculator": {

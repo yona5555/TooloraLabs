@@ -45,6 +45,7 @@ export * from "./ReadabilityScoreCalculator";
 export * from "./StudyTimeCalculator";
 export * from "./VectorCalculator";
 export * from "./MatrixCalculator";
+export * from "./MatrixEducationMath";
 export * from "./MolarMassCalculator";
 export * from "./StoichiometryCalculator";
 export * from "./ChemicalEquationBalancer";

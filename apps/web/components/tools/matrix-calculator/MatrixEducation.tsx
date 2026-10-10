@@ -4,19 +4,27 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MatrixTransformDiagram from "./MatrixTransformDiagram";
-import MatrixCompositionDiagram from "./MatrixCompositionDiagram";
-import MatrixInverseDiagram from "./MatrixInverseDiagram";
-import MatrixTransposeDiagram from "./MatrixTransposeDiagram";
-import MatrixDeterminantArithmeticDiagram from "./MatrixDeterminantArithmeticDiagram";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import MatrixLive3D from "./MatrixLive3D";
+import MatrixBasisDragLab from "./MatrixBasisDragLab";
+import MatrixDeterminantFormula from "./MatrixDeterminantFormula";
+import MatrixDeterminantZoneStrip from "./MatrixDeterminantZoneStrip";
+import MatrixDetSensitivityTrio from "./MatrixDetSensitivityTrio";
+import MatrixCompositionFlow from "./MatrixCompositionFlow";
+import MatrixCommutativityBars from "./MatrixCommutativityBars";
+import MatrixInverseEquivalence from "./MatrixInverseEquivalence";
+import MatrixConditionGauge from "./MatrixConditionGauge";
+import MatrixTransposeCards from "./MatrixTransposeCards";
+import MatrixEigenCurve from "./MatrixEigenCurve";
+import MatrixStretchRankedBars from "./MatrixStretchRankedBars";
+import MatrixPowerLogScale from "./MatrixPowerLogScale";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
 
-const fmt = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(2));
-
 export default async function MatrixEducation() {
   const t = await getTranslations("tools.matrix-calculator.education");
+  const t3 = await getTranslations("tools.matrix-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const applicationItems = t.raw("applications.items") as ApplicationItem[];
@@ -27,8 +35,12 @@ export default async function MatrixEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <SectionCard title={t3("cardTitle")}>
+          <MatrixLive3D />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <MatrixBasisDragLab />
       </InfoSection>
 
       <InfoSection title={t("variables.title")}>
@@ -37,68 +49,41 @@ export default async function MatrixEducation() {
         <div>
           <h3 className="font-semibold">{t("variables.determinant.title")}</h3>
           <p className="mt-1">{t("variables.determinant.description")}</p>
-          <MatrixTransformDiagram
-            a11={2}
-            a12={1}
-            a21={0}
-            a22={2}
-            color="text-emerald-500 dark:text-emerald-400"
-            label="A"
-            areaLabel="det(A) = 4"
-            caption={t("variables.determinant.diagramCaption")}
-          />
-          <MatrixDeterminantArithmeticDiagram
-            a11={2}
-            a12={1}
-            a21={0}
-            a22={2}
-            fmt={fmt}
-            caption={t("variables.determinant.arithmeticCaption")}
-          />
+          <div className="mt-4 space-y-6">
+            <MatrixDeterminantFormula />
+            <MatrixDeterminantZoneStrip />
+            <MatrixDetSensitivityTrio />
+          </div>
         </div>
 
         <div>
           <h3 className="font-semibold">{t("variables.composition.title")}</h3>
           <p className="mt-1">{t("variables.composition.description")}</p>
-          <MatrixCompositionDiagram
-            b11={1}
-            b12={0}
-            b21={0}
-            b22={1.5}
-            product11={2}
-            product12={1.5}
-            product21={0}
-            product22={3}
-            labelB="B"
-            labelProduct="A×B"
-            caption={t("variables.composition.diagramCaption")}
-          />
+          <div className="mt-4 space-y-6">
+            <MatrixCompositionFlow />
+            <MatrixCommutativityBars />
+          </div>
         </div>
 
         <div>
           <h3 className="font-semibold">{t("variables.inverse.title")}</h3>
           <p className="mt-1">{t("variables.inverse.description")}</p>
-          <MatrixInverseDiagram
-            a11={2}
-            a12={1}
-            a21={0}
-            a22={2}
-            inverseA11={0.5}
-            inverseA12={-0.25}
-            inverseA21={0}
-            inverseA22={0.5}
-            labelA="A"
-            labelInverse="A⁻¹"
-            caption={t("variables.inverse.diagramCaption")}
-          />
+          <div className="mt-4 space-y-6">
+            <MatrixInverseEquivalence />
+            <MatrixConditionGauge />
+          </div>
         </div>
 
         <div>
           <h3 className="font-semibold">{t("variables.transpose.title")}</h3>
           <p className="mt-1">{t("variables.transpose.description")}</p>
-          <MatrixTransposeDiagram a11={1} a12={2} a21={3} a22={4} fmt={fmt} caption={t("variables.transpose.diagramCaption")} />
+          <div className="mt-4">
+            <MatrixTransposeCards />
+          </div>
         </div>
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -120,6 +105,10 @@ export default async function MatrixEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <MatrixEigenCurve />
+          <MatrixStretchRankedBars />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("applications.title")}>
@@ -132,6 +121,7 @@ export default async function MatrixEducation() {
             </div>
           ))}
         </div>
+        <MatrixPowerLogScale />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
