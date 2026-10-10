@@ -24158,13 +24158,7 @@
         "valueLabel": "Value {position}",
         "addValue": "Add Another Value",
         "removeValue": "Remove this value",
-        "scenarioLabel": "Quick-fill a worked example",
         "clear": "Clear"
-      },
-      "diagram": {
-        "ariaLabel": "A dot plot of the data set on a number line, with the mean and median marked",
-        "mean": "Mean",
-        "median": "Median"
       },
       "result": {
         "heading": "Result",
@@ -24177,7 +24171,8 @@
         "count": "Count",
         "sum": "Sum",
         "min": "Minimum",
-        "max": "Maximum"
+        "max": "Maximum",
+        "meanCaption": "Mean of {count} values"
       },
       "quickReference": {
         "title": "The Formulas",
@@ -24315,12 +24310,135 @@
           "note": "Pearson's paper, which formally introduced the term \"mode\" into statistics alongside his broader work formalizing descriptive statistical measures.",
           "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
           "readOriginal": "Read Pearson's Original Paper"
+        },
+        "lab": {
+          "worked": "Worked Example",
+          "drag": {
+            "title": "Drag the Data Points",
+            "intro": "Each dot is one value from your data set; repeated values stack. Drag any dot along the line and watch the mean fulcrum, the median line and the range follow — the inputs above update too.",
+            "aria": "Draggable dot plot of the data set with the mean, median and range marked",
+            "hint": "Drag a dot left or right",
+            "data": "Sorted data",
+            "gap": "Mean − median"
+          },
+          "balance": {
+            "title": "The Mean as a Balance Point",
+            "intro": "Put the values on a seesaw as equal weights. Choose a pivot: only on the mean do the moments on both sides cancel and the beam rest level.",
+            "aria": "Seesaw with the data values as weights and a movable pivot",
+            "level": "Balanced",
+            "tipsRight": "Tips right",
+            "tipsLeft": "Tips left",
+            "pivot": "Pivot",
+            "leftMoment": "Left moment",
+            "rightMoment": "Right moment",
+            "netMoment": "Net moment",
+            "tilt": "Tilt",
+            "verdict": "Beam"
+          },
+          "sumFlow": {
+            "title": "From Values to the Mean",
+            "intro": "The mean in two moves: add every value into one total, then share that total equally among the n values.",
+            "values": "Values",
+            "divide": "Share equally",
+            "check": "Check n × mean"
+          },
+          "medianSteps": {
+            "title": "Finding the Middle Step",
+            "intro": "The sorted values form a staircase. The median is the middle step — or the average of the two middle steps when the count is even.",
+            "aria": "Staircase of the sorted values with the median step highlighted",
+            "halfBelow": "below:",
+            "halfAbove": "above:",
+            "parity": "Count is",
+            "even": "Even",
+            "odd": "Odd",
+            "position": "Middle position",
+            "middle": "Middle value(s)"
+          },
+          "modeBars": {
+            "title": "How Often Each Value Appears",
+            "intro": "One bar per distinct value, as tall as its frequency. The tallest bar is the mode; a tie gives several modes, and all bars at 1 means no mode.",
+            "aria": "Bar chart of how often each distinct value appears",
+            "distinct": "Distinct values",
+            "maxFreq": "Highest frequency",
+            "share": "Share of data",
+            "kind": "Type",
+            "kinds": {
+              "none": "No mode",
+              "uni": "Unimodal",
+              "bi": "Bimodal",
+              "multi": "Multimodal"
+            }
+          },
+          "rangeZone": {
+            "title": "Range, Middle Half and Fences",
+            "intro": "The range runs from the smallest to the largest value. The green zone is the middle 50% (Q1 to Q3); points beyond the dashed 1.5 × IQR fences are outliers.",
+            "aria": "Zone strip of the range with the interquartile range and outlier fences",
+            "iqrShare": "IQR as share of range",
+            "fences": "Fences"
+          },
+          "deviations": {
+            "title": "Distance of Each Value from the Mean",
+            "intro": "Every value ranked by how far it sits from the mean. Blue values lie above the mean, red below; the two sides always add up to zero.",
+            "largest": "Farthest value",
+            "aboveSum": "Total above",
+            "belowSum": "Total below"
+          },
+          "centreCards": {
+            "title": "Mean vs Median vs Mode",
+            "intro": "The three centres of the same data side by side: where each sits between the minimum and maximum, what it is built from, and whether one extreme value can drag it.",
+            "usesAll": "Uses every value",
+            "usesMiddle": "Uses the middle position",
+            "usesFrequent": "Uses the most frequent value",
+            "robust": "Resists outliers",
+            "sensitive": "Pulled by outliers",
+            "outlierCount": "Outliers",
+            "best": "Best summary here",
+            "whySkewed": "Skewed or has outliers",
+            "whySymmetric": "Roughly symmetric, no outliers"
+          },
+          "trio": {
+            "title": "What One Extreme Value Changes",
+            "intro": "The mean and median with the smallest value removed, for the full data, and with the largest value removed.",
+            "dropMin": "Without {value}",
+            "full": "Full data",
+            "dropMax": "Without {value}",
+            "meanShiftMax": "Mean shift (drop max)",
+            "medianShiftMax": "Median shift (drop max)",
+            "meanShiftMin": "Mean shift (drop min)",
+            "medianShiftMin": "Median shift (drop min)",
+            "moreSensitive": "Moves more"
+          },
+          "skew": {
+            "title": "Which Way the Data Leans",
+            "intro": "Pearson's skewness compares the mean with the median: positive when a long right tail pulls the mean above the median, negative for a left tail.",
+            "aria": "Gauge of the Pearson skewness from −3 to +3",
+            "formula": "3(x̄ − median) / s"
+          },
+          "quartiles": {
+            "title": "The Range in Four Quarters",
+            "intro": "Q1, the median and Q3 cut the range into four pieces that each hold about a quarter of the data. A longer piece means that quarter is more spread out.",
+            "quarter": "Quarter",
+            "widest": "Most spread out"
+          },
+          "equivalence": {
+            "title": "Measured from the Mean or the Median",
+            "intro": "The same distances measured from two centres. The median gives the smallest total absolute distance; the mean gives the smallest total squared distance.",
+            "absMean": "Σ|x − mean|",
+            "absMedian": "Σ|x − median|",
+            "sqMean": "Σ(x − mean)²",
+            "sqMedian": "Σ(x − median)²",
+            "verdict": "Rule",
+            "verdictValue": "median ≤ abs · mean ≤ squared"
+          }
         }
       },
       "scenarios": {
         "testScores": "Test Scores",
         "dailyTemperatures": "Daily Temperatures",
-        "withOutlier": "With an Outlier"
+        "withOutlier": "With an Outlier",
+        "shoeSizes": "Shoe Sizes",
+        "bimodal": "Two Modes",
+        "allUnique": "All Different"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -24340,6 +24458,35 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated"
+      },
+      "live3d": {
+        "cardTitle": "Live Breakdown and 3D Dot Stacks",
+        "groupData": "Data",
+        "groupCentre": "Centre",
+        "groupSpread": "Spread",
+        "groupShape": "Shape and outliers",
+        "sorted": "Sorted data",
+        "medianPosition": "Median position",
+        "distinct": "Distinct values",
+        "midrange": "Midrange",
+        "q1Formula": "median of lower half",
+        "q3Formula": "median of upper half",
+        "sumDev": "Sum of deviations",
+        "mad": "Mean absolute deviation",
+        "popSd": "Population SD (σ)",
+        "sampleSd": "Sample SD (s)",
+        "lowerFence": "Lower fence",
+        "upperFence": "Upper fence",
+        "outliers": "Outliers",
+        "none": "None",
+        "skew": "Pearson skewness",
+        "shape": "Shape",
+        "shapes": {
+          "symmetric": "Roughly symmetric",
+          "right": "Right-skewed",
+          "left": "Left-skewed"
+        },
+        "frequency": "frequency"
       }
     },
     "target-heart-rate-calculator": {

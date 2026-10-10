@@ -19,4 +19,7 @@ export const MEAN_MEDIAN_MODE_RANGE_SCENARIOS: MeanMedianModeRangeScenario[] = [
   { key: "testScores", values: ["72", "85", "90", "85", "60", "95"] },
   { key: "dailyTemperatures", values: ["68", "70", "65", "72", "71", "69", "73"] },
   { key: "withOutlier", values: ["10", "12", "11", "13", "12", "50"] },
+  { key: "shoeSizes", values: ["7", "8", "8", "9", "9", "9", "10", "11"] },
+  { key: "bimodal", values: ["3", "3", "5", "7", "7", "9"] },
+  { key: "allUnique", values: ["2", "5", "9", "11", "14"] },
 ];

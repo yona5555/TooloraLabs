@@ -24158,13 +24158,7 @@
         "valueLabel": "Valor {position}",
         "addValue": "Añadir otro valor",
         "removeValue": "Eliminar este valor",
-        "scenarioLabel": "Rellenar rápido un ejemplo resuelto",
         "clear": "Borrar"
-      },
-      "diagram": {
-        "ariaLabel": "Un diagrama de puntos del conjunto de datos en una recta numérica, con la media y la mediana marcadas",
-        "mean": "Media",
-        "median": "Mediana"
       },
       "result": {
         "heading": "Resultado",
@@ -24177,7 +24171,8 @@
         "count": "Cantidad",
         "sum": "Suma",
         "min": "Mínimo",
-        "max": "Máximo"
+        "max": "Máximo",
+        "meanCaption": "Media de {count} valores"
       },
       "quickReference": {
         "title": "Las fórmulas",
@@ -24315,12 +24310,135 @@
           "note": "El artículo de Pearson, que introdujo formalmente el término \"moda\" en la estadística, junto con su trabajo más amplio de formalización de las medidas estadísticas descriptivas.",
           "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
           "readOriginal": "Leer el artículo original de Pearson"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "drag": {
+            "title": "Arrastra los puntos de datos",
+            "intro": "Cada punto es un valor de tu conjunto de datos; los valores repetidos se apilan. Arrastra cualquier punto por la recta y observa cómo lo siguen el fulcro de la media, la línea de la mediana y el rango; las entradas de arriba también se actualizan.",
+            "aria": "Diagrama de puntos arrastrable del conjunto de datos con la media, la mediana y el rango marcados",
+            "hint": "Arrastra un punto a izquierda o derecha",
+            "data": "Datos ordenados",
+            "gap": "Media − mediana"
+          },
+          "balance": {
+            "title": "La media como punto de equilibrio",
+            "intro": "Coloca los valores en un balancín como pesos iguales. Elige un pivote: solo en la media se anulan los momentos de ambos lados y la barra queda horizontal.",
+            "aria": "Balancín con los valores como pesos y un pivote móvil",
+            "level": "Equilibrado",
+            "tipsRight": "Se inclina a la derecha",
+            "tipsLeft": "Se inclina a la izquierda",
+            "pivot": "Pivote",
+            "leftMoment": "Momento izquierdo",
+            "rightMoment": "Momento derecho",
+            "netMoment": "Momento neto",
+            "tilt": "Inclinación",
+            "verdict": "Barra"
+          },
+          "sumFlow": {
+            "title": "De los valores a la media",
+            "intro": "La media en dos pasos: suma todos los valores en un total y reparte ese total por igual entre los n valores.",
+            "values": "Valores",
+            "divide": "Reparto igual",
+            "check": "Comprobación n × media"
+          },
+          "medianSteps": {
+            "title": "Encontrar el escalón central",
+            "intro": "Los valores ordenados forman una escalera. La mediana es el escalón central, o la media de los dos centrales cuando la cantidad es par.",
+            "aria": "Escalera de los valores ordenados con el escalón de la mediana resaltado",
+            "halfBelow": "debajo:",
+            "halfAbove": "encima:",
+            "parity": "La cantidad es",
+            "even": "Par",
+            "odd": "Impar",
+            "position": "Posición central",
+            "middle": "Valor(es) central(es)"
+          },
+          "modeBars": {
+            "title": "Cuántas veces aparece cada valor",
+            "intro": "Una barra por valor distinto, tan alta como su frecuencia. La barra más alta es la moda; un empate da varias modas, y si todas valen 1 no hay moda.",
+            "aria": "Gráfico de barras de la frecuencia de cada valor distinto",
+            "distinct": "Valores distintos",
+            "maxFreq": "Frecuencia máxima",
+            "share": "Proporción de los datos",
+            "kind": "Tipo",
+            "kinds": {
+              "none": "Sin moda",
+              "uni": "Unimodal",
+              "bi": "Bimodal",
+              "multi": "Multimodal"
+            }
+          },
+          "rangeZone": {
+            "title": "Rango, mitad central y límites",
+            "intro": "El rango va del valor menor al mayor. La zona verde es el 50 % central (de Q1 a Q3); los puntos fuera de los límites discontinuos de 1,5 × IQR son atípicos.",
+            "aria": "Franja de zonas del rango con el rango intercuartílico y los límites de atípicos",
+            "iqrShare": "IQR como parte del rango",
+            "fences": "Límites"
+          },
+          "deviations": {
+            "title": "Distancia de cada valor a la media",
+            "intro": "Cada valor ordenado según su distancia a la media. Los azules están por encima de la media y los rojos por debajo; ambos lados siempre suman cero.",
+            "largest": "Valor más lejano",
+            "aboveSum": "Total por encima",
+            "belowSum": "Total por debajo"
+          },
+          "centreCards": {
+            "title": "Media, mediana y moda",
+            "intro": "Los tres centros de los mismos datos lado a lado: dónde se sitúa cada uno entre el mínimo y el máximo, en qué se basa y si un valor extremo puede arrastrarlo.",
+            "usesAll": "Usa todos los valores",
+            "usesMiddle": "Usa la posición central",
+            "usesFrequent": "Usa el valor más frecuente",
+            "robust": "Resiste los atípicos",
+            "sensitive": "Lo arrastran los atípicos",
+            "outlierCount": "Atípicos",
+            "best": "Mejor resumen aquí",
+            "whySkewed": "Asimétrico o con atípicos",
+            "whySymmetric": "Casi simétrico, sin atípicos"
+          },
+          "trio": {
+            "title": "Lo que cambia un solo valor extremo",
+            "intro": "La media y la mediana sin el valor menor, con todos los datos y sin el valor mayor.",
+            "dropMin": "Sin {value}",
+            "full": "Datos completos",
+            "dropMax": "Sin {value}",
+            "meanShiftMax": "Cambio de la media (sin máx.)",
+            "medianShiftMax": "Cambio de la mediana (sin máx.)",
+            "meanShiftMin": "Cambio de la media (sin mín.)",
+            "medianShiftMin": "Cambio de la mediana (sin mín.)",
+            "moreSensitive": "Se mueve más"
+          },
+          "skew": {
+            "title": "Hacia dónde se inclinan los datos",
+            "intro": "La asimetría de Pearson compara la media con la mediana: es positiva cuando una cola derecha larga lleva la media por encima de la mediana, y negativa con una cola izquierda.",
+            "aria": "Indicador de la asimetría de Pearson de −3 a +3",
+            "formula": "3(x̄ − mediana) / s"
+          },
+          "quartiles": {
+            "title": "El rango en cuatro cuartos",
+            "intro": "Q1, la mediana y Q3 dividen el rango en cuatro tramos que contienen cada uno cerca de un cuarto de los datos. Un tramo más largo indica un cuarto más disperso.",
+            "quarter": "Cuarto",
+            "widest": "Más disperso"
+          },
+          "equivalence": {
+            "title": "Medido desde la media o la mediana",
+            "intro": "Las mismas distancias medidas desde dos centros. La mediana da la menor suma de distancias absolutas; la media da la menor suma de distancias al cuadrado.",
+            "absMean": "Σ|x − media|",
+            "absMedian": "Σ|x − mediana|",
+            "sqMean": "Σ(x − media)²",
+            "sqMedian": "Σ(x − mediana)²",
+            "verdict": "Regla",
+            "verdictValue": "mediana ≤ abs · media ≤ cuadrados"
+          }
         }
       },
       "scenarios": {
         "testScores": "Calificaciones de examen",
         "dailyTemperatures": "Temperaturas diarias",
-        "withOutlier": "Con un valor atípico"
+        "withOutlier": "Con un valor atípico",
+        "shoeSizes": "Tallas de calzado",
+        "bimodal": "Dos modas",
+        "allUnique": "Todos distintos"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -24340,6 +24458,35 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto"
+      },
+      "live3d": {
+        "cardTitle": "Desglose en vivo y pilas de puntos 3D",
+        "groupData": "Datos",
+        "groupCentre": "Centro",
+        "groupSpread": "Dispersión",
+        "groupShape": "Forma y valores atípicos",
+        "sorted": "Datos ordenados",
+        "medianPosition": "Posición de la mediana",
+        "distinct": "Valores distintos",
+        "midrange": "Rango medio",
+        "q1Formula": "mediana de la mitad inferior",
+        "q3Formula": "mediana de la mitad superior",
+        "sumDev": "Suma de desviaciones",
+        "mad": "Desviación absoluta media",
+        "popSd": "DE poblacional (σ)",
+        "sampleSd": "DE muestral (s)",
+        "lowerFence": "Límite inferior",
+        "upperFence": "Límite superior",
+        "outliers": "Valores atípicos",
+        "none": "Ninguno",
+        "skew": "Asimetría de Pearson",
+        "shape": "Forma",
+        "shapes": {
+          "symmetric": "Aproximadamente simétrica",
+          "right": "Asimétrica a la derecha",
+          "left": "Asimétrica a la izquierda"
+        },
+        "frequency": "frecuencia"
       }
     },
     "target-heart-rate-calculator": {

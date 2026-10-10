@@ -24158,13 +24158,7 @@
         "valueLabel": "Wert {position}",
         "addValue": "Weiteren Wert hinzufügen",
         "removeValue": "Diesen Wert entfernen",
-        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
         "clear": "Zurücksetzen"
-      },
-      "diagram": {
-        "ariaLabel": "Ein Punktdiagramm des Datensatzes auf einer Zahlengeraden, mit markiertem Mittelwert und Median",
-        "mean": "Mittelwert",
-        "median": "Median"
       },
       "result": {
         "heading": "Ergebnis",
@@ -24177,7 +24171,8 @@
         "count": "Anzahl",
         "sum": "Summe",
         "min": "Minimum",
-        "max": "Maximum"
+        "max": "Maximum",
+        "meanCaption": "Mittelwert von {count} Werten"
       },
       "quickReference": {
         "title": "Die Formeln",
@@ -24315,12 +24310,135 @@
           "note": "Pearsons Aufsatz, der den Begriff \"Modus\" formal in die Statistik einführte, im Rahmen seiner umfassenderen Arbeit zur Formalisierung deskriptiver statistischer Maße.",
           "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1895.0010",
           "readOriginal": "Pearsons Originalarbeit lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "drag": {
+            "title": "Datenpunkte ziehen",
+            "intro": "Jeder Punkt ist ein Wert Ihres Datensatzes; gleiche Werte stapeln sich. Ziehen Sie einen Punkt entlang der Geraden und sehen Sie, wie Mittelwert-Drehpunkt, Medianlinie und Spannweite folgen – auch die Eingaben oben werden aktualisiert.",
+            "aria": "Ziehbares Punktdiagramm des Datensatzes mit Mittelwert, Median und Spannweite",
+            "hint": "Punkt nach links oder rechts ziehen",
+            "data": "Sortierte Daten",
+            "gap": "Mittelwert − Median"
+          },
+          "balance": {
+            "title": "Der Mittelwert als Gleichgewichtspunkt",
+            "intro": "Legen Sie die Werte als gleiche Gewichte auf eine Wippe und wählen Sie einen Drehpunkt: Nur am Mittelwert heben sich die Momente beider Seiten auf und der Balken bleibt waagerecht.",
+            "aria": "Wippe mit den Werten als Gewichten und verschiebbarem Drehpunkt",
+            "level": "Im Gleichgewicht",
+            "tipsRight": "Kippt nach rechts",
+            "tipsLeft": "Kippt nach links",
+            "pivot": "Drehpunkt",
+            "leftMoment": "Linkes Moment",
+            "rightMoment": "Rechtes Moment",
+            "netMoment": "Nettomoment",
+            "tilt": "Neigung",
+            "verdict": "Balken"
+          },
+          "sumFlow": {
+            "title": "Von den Werten zum Mittelwert",
+            "intro": "Der Mittelwert in zwei Schritten: alle Werte zu einer Summe addieren und diese Summe gleichmäßig auf die n Werte verteilen.",
+            "values": "Werte",
+            "divide": "Gleich verteilen",
+            "check": "Probe n × Mittelwert"
+          },
+          "medianSteps": {
+            "title": "Die mittlere Stufe finden",
+            "intro": "Die sortierten Werte bilden eine Treppe. Der Median ist die mittlere Stufe – bei gerader Anzahl der Durchschnitt der beiden mittleren Stufen.",
+            "aria": "Treppe der sortierten Werte mit hervorgehobener Medianstufe",
+            "halfBelow": "darunter:",
+            "halfAbove": "darüber:",
+            "parity": "Anzahl ist",
+            "even": "Gerade",
+            "odd": "Ungerade",
+            "position": "Mittlere Position",
+            "middle": "Mittlere(r) Wert(e)"
+          },
+          "modeBars": {
+            "title": "Wie oft jeder Wert vorkommt",
+            "intro": "Ein Balken je verschiedenem Wert, so hoch wie seine Häufigkeit. Der höchste Balken ist der Modus; ein Gleichstand ergibt mehrere Modi, und sind alle Balken 1, gibt es keinen Modus.",
+            "aria": "Balkendiagramm der Häufigkeit jedes verschiedenen Werts",
+            "distinct": "Verschiedene Werte",
+            "maxFreq": "Höchste Häufigkeit",
+            "share": "Anteil der Daten",
+            "kind": "Typ",
+            "kinds": {
+              "none": "Kein Modus",
+              "uni": "Unimodal",
+              "bi": "Bimodal",
+              "multi": "Multimodal"
+            }
+          },
+          "rangeZone": {
+            "title": "Spannweite, mittlere Hälfte und Grenzen",
+            "intro": "Die Spannweite reicht vom kleinsten bis zum größten Wert. Die grüne Zone ist die mittlere Hälfte (Q1 bis Q3); Punkte jenseits der gestrichelten 1,5 × IQR-Grenzen sind Ausreißer.",
+            "aria": "Zonenstreifen der Spannweite mit Interquartilsabstand und Ausreißergrenzen",
+            "iqrShare": "IQR-Anteil an der Spannweite",
+            "fences": "Grenzen"
+          },
+          "deviations": {
+            "title": "Abstand jedes Werts vom Mittelwert",
+            "intro": "Alle Werte nach ihrem Abstand vom Mittelwert geordnet. Blau liegt über dem Mittelwert, Rot darunter; beide Seiten ergeben zusammen immer null.",
+            "largest": "Entferntester Wert",
+            "aboveSum": "Summe darüber",
+            "belowSum": "Summe darunter"
+          },
+          "centreCards": {
+            "title": "Mittelwert, Median und Modus",
+            "intro": "Die drei Lagemaße derselben Daten nebeneinander: wo jedes zwischen Minimum und Maximum liegt, worauf es beruht und ob ein Extremwert es verschieben kann.",
+            "usesAll": "Nutzt alle Werte",
+            "usesMiddle": "Nutzt die mittlere Position",
+            "usesFrequent": "Nutzt den häufigsten Wert",
+            "robust": "Robust gegen Ausreißer",
+            "sensitive": "Von Ausreißern verschoben",
+            "outlierCount": "Ausreißer",
+            "best": "Beste Zusammenfassung hier",
+            "whySkewed": "Schief oder mit Ausreißern",
+            "whySymmetric": "Fast symmetrisch, ohne Ausreißer"
+          },
+          "trio": {
+            "title": "Was ein einzelner Extremwert ändert",
+            "intro": "Mittelwert und Median ohne den kleinsten Wert, für alle Daten und ohne den größten Wert.",
+            "dropMin": "Ohne {value}",
+            "full": "Alle Daten",
+            "dropMax": "Ohne {value}",
+            "meanShiftMax": "Mittelwert-Änderung (ohne Max.)",
+            "medianShiftMax": "Median-Änderung (ohne Max.)",
+            "meanShiftMin": "Mittelwert-Änderung (ohne Min.)",
+            "medianShiftMin": "Median-Änderung (ohne Min.)",
+            "moreSensitive": "Bewegt sich stärker"
+          },
+          "skew": {
+            "title": "Wohin die Daten neigen",
+            "intro": "Die Pearson-Schiefe vergleicht Mittelwert und Median: positiv, wenn ein langer rechter Ausläufer den Mittelwert über den Median zieht, negativ bei einem linken Ausläufer.",
+            "aria": "Anzeige der Pearson-Schiefe von −3 bis +3",
+            "formula": "3(x̄ − Median) / s"
+          },
+          "quartiles": {
+            "title": "Die Spannweite in vier Vierteln",
+            "intro": "Q1, Median und Q3 teilen die Spannweite in vier Abschnitte mit je etwa einem Viertel der Daten. Ein längerer Abschnitt bedeutet ein stärker gestreutes Viertel.",
+            "quarter": "Viertel",
+            "widest": "Am stärksten gestreut"
+          },
+          "equivalence": {
+            "title": "Gemessen vom Mittelwert oder vom Median",
+            "intro": "Dieselben Abstände von zwei Zentren aus gemessen. Der Median liefert die kleinste Summe der absoluten Abstände, der Mittelwert die kleinste Summe der quadrierten Abstände.",
+            "absMean": "Σ|x − Mittelwert|",
+            "absMedian": "Σ|x − Median|",
+            "sqMean": "Σ(x − Mittelwert)²",
+            "sqMedian": "Σ(x − Median)²",
+            "verdict": "Regel",
+            "verdictValue": "Median ≤ abs · Mittelwert ≤ Quadrate"
+          }
         }
       },
       "scenarios": {
         "testScores": "Testergebnisse",
         "dailyTemperatures": "Tagestemperaturen",
-        "withOutlier": "Mit Ausreißer"
+        "withOutlier": "Mit Ausreißer",
+        "shoeSizes": "Schuhgrößen",
+        "bimodal": "Zwei Modi",
+        "allUnique": "Alle verschieden"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -24340,6 +24458,35 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet"
+      },
+      "live3d": {
+        "cardTitle": "Live-Aufschlüsselung und 3D-Punktstapel",
+        "groupData": "Daten",
+        "groupCentre": "Lage",
+        "groupSpread": "Streuung",
+        "groupShape": "Form und Ausreißer",
+        "sorted": "Sortierte Daten",
+        "medianPosition": "Position des Medians",
+        "distinct": "Verschiedene Werte",
+        "midrange": "Spannweitenmitte",
+        "q1Formula": "Median der unteren Hälfte",
+        "q3Formula": "Median der oberen Hälfte",
+        "sumDev": "Summe der Abweichungen",
+        "mad": "Mittlere absolute Abweichung",
+        "popSd": "Standardabw. Grundgesamtheit (σ)",
+        "sampleSd": "Standardabw. Stichprobe (s)",
+        "lowerFence": "Untere Grenze",
+        "upperFence": "Obere Grenze",
+        "outliers": "Ausreißer",
+        "none": "Keine",
+        "skew": "Pearson-Schiefe",
+        "shape": "Form",
+        "shapes": {
+          "symmetric": "Annähernd symmetrisch",
+          "right": "Rechtsschief",
+          "left": "Linksschief"
+        },
+        "frequency": "Häufigkeit"
       }
     },
     "target-heart-rate-calculator": {
