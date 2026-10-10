@@ -87,7 +87,7 @@ export default function ScientificCalculator({ education }: { education: ReactNo
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           input={
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 lg:h-full">
               <ScientificHistoryPanel
                 history={state.history}
                 onSelect={(value) => dispatch({ type: "loadHistory", value })}
@@ -95,6 +95,7 @@ export default function ScientificCalculator({ education }: { education: ReactNo
               <ScientificSidebarPanels />
             </div>
           }
+          stretchInput
           result={<ScientificKeypad state={state} dispatch={dispatch} />}
           sidebar={<RelatedToolsSidebar currentSlug="scientific-calculator" category="math" />}
           secondary={

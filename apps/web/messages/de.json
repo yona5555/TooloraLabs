@@ -562,7 +562,23 @@
           "ariaLabel": "Interaktives Einheitskreis-Diagramm — ziehen Sie den Punkt um den Kreis, um den Winkel zu ändern",
           "cosTooltip": "cos θ = {value}",
           "sinTooltip": "sin θ = {value}",
-          "hint": "Ziehen Sie den Punkt um den Kreis — jede trigonometrische Anzeige auf dieser Seite aktualisiert sich mit."
+          "hint": "Ziehen Sie den Punkt um den Kreis — jede trigonometrische Anzeige auf dieser Seite aktualisiert sich mit.",
+          "title": "Einheitskreis-Explorer",
+          "tableTitle": "Live-Werte",
+          "quadrantAxis": "Auf einer Achse",
+          "quadrantN": "Quadrant {n}",
+          "undefined": "nicht definiert",
+          "rows": {
+            "degrees": "Winkel (Grad)",
+            "radians": "Winkel (Bogenmaß)",
+            "quadrant": "Quadrant",
+            "sin": "sin θ",
+            "cos": "cos θ",
+            "tan": "tan θ",
+            "reference": "Bezugswinkel",
+            "coords": "Punkt (cos θ, sin θ)",
+            "signs": "Vorzeichen in diesem Quadranten"
+          }
         },
         "trigWave": {
           "title": "Sinus und Kosinus, eine volle Umdrehung",
@@ -779,12 +795,6 @@
           "increase": "Winkel erhöhen",
           "reset": "Zurücksetzen",
           "hint": "Ziehe den roten Punkt oder nutze die −/+-Schaltflächen. Umschalttaste beim Ziehen halten, um auf 15° zu rasten."
-        },
-        "commonAngles": {
-          "title": "Häufige Winkel",
-          "subtitle": "",
-          "colAngle": "Winkel",
-          "colRad": "Radiant"
         }
       }
     },
@@ -6910,7 +6920,20 @@
         "exponentLabel": "Exponent",
         "coefficientPlaceholder": "Koeffizient",
         "exponentPlaceholder": "Exponent",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "examplesTitle": "Schnellbeispiele – bekannte Konstanten",
+        "examples": {
+          "lightSpeed": "Lichtgeschwindigkeit",
+          "avogadro": "Avogadro-Konstante",
+          "planck": "Planck-Konstante",
+          "elementaryCharge": "Elementarladung",
+          "electronMass": "Elektronenmasse",
+          "gravitation": "Gravitationskonstante",
+          "boltzmann": "Boltzmann-Konstante",
+          "astronomicalUnit": "Astronomische Einheit",
+          "earthMass": "Erdmasse",
+          "bohrRadius": "Bohrscher Radius"
+        }
       },
       "result": {
         "heading": "Ergebnis",
@@ -6918,7 +6941,6 @@
         "standardForm": "Standardform: {value}",
         "engineeringForm": "Technische Notation: {coefficient} × 10^{exponent}",
         "numberName": "Das entspricht etwa {coefficient} {name}.",
-        "diagramCaption": "Position von 10^{exponent} auf einer logarithmischen Größenordnungsskala.",
         "stepToScientific": "Das Dezimalkomma von {standard} wurde verschoben, bis genau eine Ziffer ungleich null davor stand — {exponent} Stellen —, wodurch ein Koeffizient zwischen 1 und 10 entstand.",
         "stepToStandard": "Das Dezimalkomma von {coefficient} wurde um {exponent} Stellen verschoben, um es in die Standardform zu bringen.",
         "stepMultiply": "Die Koeffizienten wurden multipliziert ({coeffA} × {coeffB} = {rawCoeff}) und die Exponenten addiert ({expA} + {expB} = {rawExp}), anschließend wurde auf einen Koeffizienten zwischen 1 und 10 renormiert.",
@@ -6933,6 +6955,50 @@
           "millionth": "Millionstel",
           "billionth": "Milliardstel",
           "trillionth": "Billionstel"
+        },
+        "shift": {
+          "title": "Verschiebung des Dezimalkommas",
+          "aria": "Das Dezimalkomma wandert {places} Stellen bis zum Koeffizienten",
+          "none": "Bereits zwischen 1 und 10 – das Komma bleibt stehen (× 10⁰).",
+          "left": "Komma {places} von {total} Stellen nach links verschoben → × {power}",
+          "right": "Komma {places} von {total} Stellen nach rechts verschoben → × {power}"
+        },
+        "ladder": {
+          "title": "Größenordnungsleiter (Marker ziehen)",
+          "aria": "Logarithmische Leiter von 10^-15 bis 10^15 mit realen Referenzlängen; Marker ziehen, um den Exponenten zu ändern",
+          "down": "Exponent um eins verringern",
+          "up": "Exponent um eins erhöhen",
+          "readout": "Nächste Referenz: {ref}. In Metern gelesen ist deine Zahl ≈ {ratio} × diese Referenz.",
+          "refs": {
+            "proton": "Proton",
+            "compton": "Compton-λ",
+            "dna": "DNA-Breite",
+            "bacterium": "E. coli",
+            "sand": "Sandkorn",
+            "human": "Mensch",
+            "burj": "Burj Khalifa",
+            "moon": "Mond",
+            "sun": "Sonne",
+            "saturnOrbit": "Saturnbahn",
+            "lightYear": "Lichtjahr"
+          }
+        },
+        "forms": {
+          "title": "Gleichwertige Formen (live)",
+          "standard": "Standard",
+          "scientific": "Wissenschaftlich",
+          "engineering": "Technisch",
+          "engineeringNote": "Exponent ein Vielfaches von 3",
+          "eNotation": "E-Notation",
+          "eNote": "Taschenrechner-/Tabellenform",
+          "si": "SI-Präfix",
+          "siBase": "kein Präfix nötig",
+          "siOut": "außerhalb der SI-Präfixe",
+          "words": "In Worten",
+          "sigFigs": "Signifikante Stellen",
+          "sigNote": "aus deinen eingegebenen Ziffern gezählt",
+          "sigRule": "× und ÷ behalten die kleinere der beiden Angaben",
+          "sigAmbiguous": "Minimum – Endnullen ohne Komma sind mehrdeutig"
         }
       },
       "education": {
@@ -28402,7 +28468,11 @@
           "outside": "Deine Aufgabe ist größer als dieses {size} × {size}-Brett; der Griff zeigt ihre Ecke.",
           "legendLow": "{n} Zeilen",
           "legendHigh": "{n} Zeilen",
-          "dragHint": "Griff ziehen"
+          "dragHint": "Griff ziehen",
+          "rowCommute": "Faktoren tauschen",
+          "rowPerimeter": "Umfang",
+          "rowBoard": "Anteil am Brett",
+          "rowSquare": "Nächstes Quadrat"
         },
         "bars": {
           "title": "Produkte der Reihe",
@@ -28474,7 +28544,8 @@
           "boxSide": "Eine Seite",
           "boxSquare": "Quadriert",
           "boxTotal": "Alle Felder",
-          "cells": "{n} Felder"
+          "cells": "{n} Felder",
+          "gridCaption": "Jede der {n} Zellen, nach ihrem Produkt eingefärbt – zusammen ergeben sie die Summe."
         },
         "units": {
           "title": "Einerziffern-Zyklus",

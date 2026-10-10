@@ -15,6 +15,9 @@ paths:
 - المراجع: مصدر حقيقي (اسم، جهة، سنة، DOI/رابط) مع زر «اقرأ المصدر الأصلي».
 - الإعلانات (§8.7): الصفحة الرئيسية بلا إعلان أبداً. صفحات الأدوات فقط، عبر AdSpace وحده: sidebar (300×600) أو leaderboard (ارتفاع ثابت 90/50px).
 - SectionCard: حدود مستديرة ورأس أزرق `bg-blue-600`. التكبير عند `lg:` فقط. الشبكة `items-start`.
+- **General rule A (2026-10-10, every tool):** card headers contain the title only — no number badges or counters (e.g. the old "20"/"21" circles). `GlassHeroCard`/`GlassIndicatorCard` keep `n` as an id/layout key only; it is never rendered.
+- **General rule B (2026-10-10, every tool):** no plain number cards. Every card, including the main Result card, contains a live indicator deep in information (chart, interactive diagram, or detailed live table), not just numbers and text. Apply to every tool rebuilt from now on. Reference: scientific-notation-converter Result (decimal-point shift + draggable log ladder + live equivalent-forms table).
+- Column fill (§17/§27): when one above-the-fold column is shorter, stretch it with `ToolAboveFold` `stretchInput` / `stretchResult` and give its last card `lg:flex-1` with real content that grows (drawing, list), never an empty band.
 
 ## 2. فهرس القواعد البصرية
 | § | الجوهر |

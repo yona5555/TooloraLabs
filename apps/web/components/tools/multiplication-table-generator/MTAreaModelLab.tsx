@@ -73,12 +73,16 @@ export default function MTAreaModelLab({ view, onPick }: { view: MtView; onPick:
           { label: t("area.rowSplit"), value: r2 ? `${f(rows)} = ${f(r1)} + ${f(r2)}` : `${f(rows)} = ${f(r1)}` },
           { label: t("area.rowLow"), value: `${f(r1)} × ${f(cols)} = ${f(r1 * cols)}` },
           { label: t("area.rowHigh"), value: `${f(r2)} × ${f(cols)} = ${f(r2 * cols)}` },
+          { label: t("area.rowCommute"), value: `${f(cols)} × ${f(rows)} = ${f(rows * cols)}` },
+          { label: t("area.rowPerimeter"), value: `2 × (${f(rows)} + ${f(cols)}) = ${f(2 * (rows + cols))}` },
+          { label: t("area.rowBoard"), value: `${f(rows * cols)} ÷ ${f(board * board)} = ${f(Math.round(((rows * cols) / (board * board)) * 1000) / 10)}%` },
+          { label: t("area.rowSquare"), value: `${f(Math.round(Math.sqrt(rows * cols)))}² = ${f(Math.round(Math.sqrt(rows * cols)) ** 2)}` },
           { label: t("area.rowResult"), value: `${f(r1 * cols)} + ${f(r2 * cols)} = ${f(rows * cols)}`, emphasize: true, note: outside ? t("area.outside", { size: board }) : undefined },
         ],
       }}
     >
       <div dir="ltr" className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700" data-testid="mt-area" data-rows={rows} data-cols={cols}>
-        <Mafs height={360} viewBox={{ x: [-0.6, board + 0.6], y: [-0.6, board + 0.6] }} preserveAspectRatio={false} pan={false} zoom={false}>
+        <Mafs height={300} viewBox={{ x: [-0.6, board + 0.6], y: [-0.6, board + 0.6] }} preserveAspectRatio={false} pan={false} zoom={false}>
           <Coordinates.Cartesian xAxis={{ lines: 1, labels: (n) => (n % 2 === 0 && n > 0 ? String(n) : "") }} yAxis={{ lines: 1, labels: (n) => (n % 2 === 0 && n > 0 ? String(n) : "") }} />
           <Polygon points={[[0, 0], [cols, 0], [cols, r1], [0, r1]]} color={c.low} fillOpacity={0.35} weight={2} />
           {r2 > 0 && <Polygon points={[[0, r1], [cols, r1], [cols, rows], [0, rows]]} color={c.high} fillOpacity={0.35} weight={2} />}

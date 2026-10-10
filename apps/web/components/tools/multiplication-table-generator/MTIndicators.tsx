@@ -204,7 +204,7 @@ export function DistributiveBalance({ view }: P) {
       }}
     >
       <div dir="ltr" className="flex justify-center" data-testid="mt-balance" data-diff={diff}>
-        <svg width="100%" height={190} viewBox="0 0 360 190" role="img" aria-label={t("balance.title")} style={{ maxWidth: 360 }}>
+        <svg width="100%" height={218} viewBox="0 0 360 190" role="img" aria-label={t("balance.title")} style={{ maxWidth: 360 }}>
           <polygon points="180,120 160,176 200,176" className="fill-zinc-400 dark:fill-zinc-600" />
           <g style={{ transform: `rotate(${-tilt}deg)`, transformOrigin: "180px 120px", transition: "transform 500ms ease" }}>
             <line x1={40} y1={120} x2={320} y2={120} strokeWidth={5} strokeLinecap="round" className="stroke-zinc-700 dark:stroke-zinc-300" />
@@ -300,7 +300,7 @@ export function RowSumStacked({ view, onPick }: P) {
       }}
     >
       <div dir="ltr" data-testid="mt-stack" data-sum={row.sum}>
-        <div className="flex h-12 overflow-hidden rounded-xl">
+        <div className="flex h-28 overflow-hidden rounded-xl">
           {row.products.map((p, i) => {
             const m = view.multipliers[i];
             const on = m === view.b;
@@ -311,7 +311,7 @@ export function RowSumStacked({ view, onPick }: P) {
                 type="button"
                 onClick={() => onPick(view.a, m)}
                 title={`${view.a} × ${m} = ${p}`}
-                className={`flex h-full items-center justify-center border-e border-white/60 font-mono text-[10px] font-semibold text-white transition-all duration-500 dark:border-zinc-900/60 ${on ? "bg-emerald-500" : SEG[i % SEG.length]}`}
+                className={`flex h-full items-center justify-center border-e border-white/60 font-mono text-xs font-semibold text-white transition-all duration-500 dark:border-zinc-900/60 ${on ? "bg-emerald-500" : SEG[i % SEG.length]}`}
                 style={{ width: `${w}%` }}
               >
                 {w >= 5 ? f(p) : ""}
@@ -356,6 +356,17 @@ export function GridSumFormula({ view }: P) {
         ],
       }}
     >
+      <div dir="ltr" className="mb-3 flex items-center justify-center gap-3">
+        <div className="grid h-[120px] w-[120px] gap-px overflow-hidden rounded-lg bg-white dark:bg-zinc-900" style={{ gridTemplateColumns: `repeat(${Math.min(s, 30)}, 1fr)` }} aria-hidden="true">
+          {Array.from({ length: Math.min(s, 30) ** 2 }, (_, k) => {
+            const n = Math.min(s, 30);
+            const i = view.lo + Math.floor(k / n);
+            const j = view.lo + (k % n);
+            return <span key={k} className="bg-violet-500" style={{ opacity: 0.15 + 0.85 * ((i * j) / (view.hi * view.hi)) }} />;
+          })}
+        </div>
+        <p className="max-w-[12rem] text-xs text-zinc-500 dark:text-zinc-400">{t("formula.gridCaption", { n: f(s * s) })}</p>
+      </div>
       <div dir="ltr" className="flex flex-wrap items-center justify-center gap-2 font-mono" data-testid="mt-formula" data-sum={sum}>
         <div className={`${box} border-blue-400 bg-blue-50 dark:bg-blue-500/10`}>
           <p className="text-[10px] uppercase text-blue-600 dark:text-blue-300">{t("formula.boxSide")}</p>
@@ -408,17 +419,17 @@ export function UnitsDigitTimeline({ view }: P) {
     >
       <div dir="ltr" className="relative px-2 pb-2" data-testid="mt-units" data-period={cyc.period}>
         {[0, 10].map((offset) => (
-          <ol key={offset} className={`relative grid grid-cols-10 gap-1 ${offset ? "mt-4" : ""}`}>
-            <span className="absolute inset-x-4 top-[1.6rem] h-1 rounded-full bg-zinc-200 dark:bg-zinc-700" />
+          <ol key={offset} className={`relative grid grid-cols-10 gap-1 ${offset ? "mt-6" : ""}`}>
+            <span className="absolute inset-x-4 top-[2rem] h-1 rounded-full bg-zinc-200 dark:bg-zinc-700" />
             {cyc.digits.map((d, i) => {
               const k = offset + i + 1;
               const inCycle = i < cyc.period && offset === 0;
               const on = view.b === k;
               return (
                 <li key={k} className="flex flex-col items-center">
-                  <span className="mb-1 font-mono text-[10px] text-zinc-400">×{k}</span>
+                  <span className="mb-1 font-mono text-xs text-zinc-400">×{k}</span>
                   <span
-                    className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 font-mono text-sm font-bold ${
+                    className={`relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-2 font-mono text-base font-bold ${
                       on
                         ? "border-emerald-500 bg-emerald-500 text-white"
                         : inCycle
@@ -428,7 +439,7 @@ export function UnitsDigitTimeline({ view }: P) {
                   >
                     {d}
                   </span>
-                  <span className="mt-1 max-w-full truncate font-mono text-[9px] text-zinc-500 dark:text-zinc-400">{f(view.a * k)}</span>
+                  <span className="mt-1 max-w-full truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400">{f(view.a * k)}</span>
                 </li>
               );
             })}
@@ -483,11 +494,12 @@ export function DigitalRootStrip({ view, onPick }: P) {
                 key={m}
                 type="button"
                 onClick={() => onPick(view.a, m)}
-                className={`flex min-w-0 flex-1 flex-col items-center rounded-md py-3 text-white ${ROOT_COLORS[roots[i]]} ${on ? "ring-2 ring-zinc-900 ring-offset-2 dark:ring-white dark:ring-offset-zinc-900" : ""}`}
+                className={`relative flex h-40 min-w-0 flex-1 flex-col items-center justify-between overflow-hidden rounded-md bg-zinc-100 py-1.5 dark:bg-zinc-800 ${on ? "ring-2 ring-zinc-900 ring-offset-2 dark:ring-white dark:ring-offset-zinc-900" : ""}`}
                 aria-label={`${view.a} × ${m}`}
               >
-                <span className="font-mono text-base font-black">{roots[i]}</span>
-                <span className="font-mono text-[8px] opacity-90">×{m}</span>
+                <span className={`absolute inset-x-0 bottom-0 transition-all duration-500 ${ROOT_COLORS[roots[i]]}`} style={{ height: `${(roots[i] / 9) * 100}%` }} />
+                <span className="relative font-mono text-base font-black text-zinc-800 dark:text-zinc-100">{roots[i]}</span>
+                <span className="relative font-mono text-[9px] font-semibold text-white">×{m}</span>
               </button>
             );
           })}
@@ -547,6 +559,16 @@ export function FactorPairsEquivalence({ view, onPick }: P) {
               <span dir="ltr" className="block font-mono text-[11px] text-zinc-500">
                 = {f(view.product)}
               </span>
+              <svg viewBox="0 0 100 64" width="100%" height={92} className="mx-auto my-1 block" aria-hidden="true">
+                {(() => {
+                  // Same area, different shape: the longer side spans the box, the shorter scales with it.
+                  const w = 92;
+                  const h = Math.max(2, (i / j) * w);
+                  const hh = Math.min(h, 58);
+                  const ww = h > 58 ? (58 * j) / i : w;
+                  return <rect x={(100 - ww) / 2} y={(64 - hh) / 2} width={ww} height={hh} rx="2" className={on ? "fill-emerald-400/70 stroke-emerald-600" : fits ? "fill-blue-300/60 stroke-blue-500" : "fill-zinc-300/60 stroke-zinc-400"} strokeWidth="1.2" />;
+                })()}
+              </svg>
               <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${fits ? "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300" : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"}`}>
                 {fits ? t("pairs.inGrid") : t("pairs.outGrid")}
               </span>
@@ -581,7 +603,7 @@ export function MemoryStairs({ view }: P) {
         ],
       }}
     >
-      <div dir="ltr" className="flex h-52 items-end gap-2" data-testid="mt-stairs" data-left={last.remaining}>
+      <div dir="ltr" className="flex h-44 items-end gap-2" data-testid="mt-stairs" data-left={last.remaining}>
         {steps.map((s, i) => (
           <div key={s.key} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end">
             {i > 0 && <span className="font-mono text-[10px] text-red-500">−{f(s.removed)}</span>}

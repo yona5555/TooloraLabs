@@ -2,7 +2,7 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { ScientificNotationConverter as ScientificNotationConverterTool } from "@tooloralabs/tools";
+import { ScientificNotationConverter as ScientificNotationConverterTool, toPlainDecimal } from "@tooloralabs/tools";
 
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
@@ -55,6 +55,15 @@ export default function ScientificNotationConverter({ education }: { education: 
     setExponentB(DEFAULTS[operation].exponentB);
   }
 
+  function loadConstant(c: number, e: number) {
+    setOperation("toStandard");
+    setStandardValue(DEFAULTS.toStandard.standardValue);
+    setCoefficientA(String(c));
+    setExponentA(String(e));
+    setCoefficientB(DEFAULTS.toStandard.coefficientB);
+    setExponentB(DEFAULTS.toStandard.exponentB);
+  }
+
   const digitStyle: DigitStyle = resolveDigitStyle(standardValue, coefficientA, exponentA, coefficientB, exponentB);
 
   const { result, computed } = useMemo(() => {
@@ -72,6 +81,15 @@ export default function ScientificNotationConverter({ education }: { education: 
       computed: { operation, standardValue: sv, coefficientA: cA, exponentA: eA, coefficientB: cB, exponentB: eB, digitStyle },
     };
   }, [operation, standardValue, coefficientA, exponentA, coefficientB, exponentB, digitStyle]);
+
+  // Magnitude-ladder drag: move the result's exponent to `k` by editing the input that drives it.
+  function setResultExponent(k: number) {
+    const delta = k - result.scientific.exponent;
+    if (delta === 0 || result.scientific.coefficient === 0) return;
+    if (operation === "toScientific") setStandardValue(toPlainDecimal(result.scientific.coefficient, k));
+    else setExponentA(String((parseLocalizedNumber(exponentA) || 0) + delta));
+  }
+  const sigSources = operation === "toScientific" ? [standardValue] : operation === "toStandard" ? [coefficientA] : [coefficientA, coefficientB];
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -116,9 +134,11 @@ export default function ScientificNotationConverter({ education }: { education: 
               exponentB={exponentB}
               onExponentBChange={setExponentB}
               onClear={handleClear}
+              onLoadConstant={loadConstant}
             />
           }
-          result={<ScientificNotationResult result={result} computed={computed} />}
+          stretchInput
+          result={<ScientificNotationResult result={result} computed={computed} sigSources={sigSources} onSetExponent={setResultExponent} />}
           sidebar={<RelatedToolsSidebar currentSlug="scientific-notation-converter" category="math" />}
           secondary={
             <div className="flex flex-col gap-6">

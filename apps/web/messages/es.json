@@ -562,7 +562,23 @@
           "ariaLabel": "Diagrama interactivo del círculo unitario — arrastra el punto alrededor del círculo para cambiar el ángulo",
           "cosTooltip": "cos θ = {value}",
           "sinTooltip": "sen θ = {value}",
-          "hint": "Arrastra el punto alrededor del círculo — todos los indicadores trigonométricos de esta página se actualizan con él."
+          "hint": "Arrastra el punto alrededor del círculo — todos los indicadores trigonométricos de esta página se actualizan con él.",
+          "title": "Explorador del círculo unitario",
+          "tableTitle": "Valores en vivo",
+          "quadrantAxis": "Sobre un eje",
+          "quadrantN": "Cuadrante {n}",
+          "undefined": "indefinida",
+          "rows": {
+            "degrees": "Ángulo (grados)",
+            "radians": "Ángulo (radianes)",
+            "quadrant": "Cuadrante",
+            "sin": "sen θ",
+            "cos": "cos θ",
+            "tan": "tan θ",
+            "reference": "Ángulo de referencia",
+            "coords": "Punto (cos θ, sen θ)",
+            "signs": "Signos en este cuadrante"
+          }
         },
         "trigWave": {
           "title": "Seno y coseno, un giro completo",
@@ -779,12 +795,6 @@
           "increase": "Aumentar ángulo",
           "reset": "Restablecer",
           "hint": "Arrastra el punto rojo o usa los botones −/+. Mantén Shift mientras arrastras para ajustar a 15°."
-        },
-        "commonAngles": {
-          "title": "Ángulos comunes",
-          "subtitle": "",
-          "colAngle": "Ángulo",
-          "colRad": "Radianes"
         }
       }
     },
@@ -6910,7 +6920,20 @@
         "exponentLabel": "Exponente",
         "coefficientPlaceholder": "Coeficiente",
         "exponentPlaceholder": "Exponente",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "examplesTitle": "Ejemplos rápidos: constantes famosas",
+        "examples": {
+          "lightSpeed": "Velocidad de la luz",
+          "avogadro": "Constante de Avogadro",
+          "planck": "Constante de Planck",
+          "elementaryCharge": "Carga elemental",
+          "electronMass": "Masa del electrón",
+          "gravitation": "Constante gravitacional",
+          "boltzmann": "Constante de Boltzmann",
+          "astronomicalUnit": "Unidad astronómica",
+          "earthMass": "Masa de la Tierra",
+          "bohrRadius": "Radio de Bohr"
+        }
       },
       "result": {
         "heading": "Resultado",
@@ -6918,7 +6941,6 @@
         "standardForm": "Forma estándar: {value}",
         "engineeringForm": "Notación de ingeniería: {coefficient} × 10^{exponent}",
         "numberName": "Es decir, aproximadamente {coefficient} {name}.",
-        "diagramCaption": "Posición de 10^{exponent} en una escala logarítmica de magnitud.",
         "stepToScientific": "Se desplazó el punto decimal de {standard} hasta dejar exactamente un dígito distinto de cero antes de él — {exponent} posiciones —, obteniendo un coeficiente entre 1 y 10.",
         "stepToStandard": "Se desplazó el punto decimal de {coefficient} en {exponent} posiciones para expandirlo a su forma estándar.",
         "stepMultiply": "Se multiplicaron los coeficientes ({coeffA} × {coeffB} = {rawCoeff}) y se sumaron los exponentes ({expA} + {expB} = {rawExp}), y luego se renormalizó para mantener el coeficiente entre 1 y 10.",
@@ -6933,6 +6955,50 @@
           "millionth": "millonésima",
           "billionth": "milmillonésima",
           "trillionth": "billonésima"
+        },
+        "shift": {
+          "title": "Desplazamiento de la coma decimal",
+          "aria": "La coma decimal se mueve {places} posiciones hasta el coeficiente",
+          "none": "Ya está entre 1 y 10: la coma no se mueve (× 10⁰).",
+          "left": "Coma movida {places} de {total} posiciones a la izquierda → × {power}",
+          "right": "Coma movida {places} de {total} posiciones a la derecha → × {power}"
+        },
+        "ladder": {
+          "title": "Escalera de magnitudes (arrastra el marcador)",
+          "aria": "Escala logarítmica de 10^-15 a 10^15 con longitudes de referencia reales; arrastra el marcador para cambiar el exponente",
+          "down": "Bajar el exponente en uno",
+          "up": "Subir el exponente en uno",
+          "readout": "Referencia más cercana: {ref}. Leído en metros, tu número ≈ {ratio} × esa referencia.",
+          "refs": {
+            "proton": "Protón",
+            "compton": "λ de Compton",
+            "dna": "Ancho ADN",
+            "bacterium": "E. coli",
+            "sand": "Grano de arena",
+            "human": "Persona",
+            "burj": "Burj Khalifa",
+            "moon": "Luna",
+            "sun": "Sol",
+            "saturnOrbit": "Órbita Saturno",
+            "lightYear": "Año luz"
+          }
+        },
+        "forms": {
+          "title": "Formas equivalentes (en vivo)",
+          "standard": "Estándar",
+          "scientific": "Científica",
+          "engineering": "Ingeniería",
+          "engineeringNote": "exponente múltiplo de 3",
+          "eNotation": "Notación E",
+          "eNote": "forma de calculadora / hoja de cálculo",
+          "si": "Prefijo SI",
+          "siBase": "no necesita prefijo",
+          "siOut": "fuera del rango de prefijos SI",
+          "words": "En palabras",
+          "sigFigs": "Cifras significativas",
+          "sigNote": "contadas a partir de lo que escribiste",
+          "sigRule": "× y ÷ conservan la menor de las dos entradas",
+          "sigAmbiguous": "mínimo: los ceros finales sin coma son ambiguos"
         }
       },
       "education": {
@@ -28402,7 +28468,11 @@
           "outside": "Tu operación supera este tablero de {size} × {size}; el punto marca su esquina.",
           "legendLow": "{n} filas",
           "legendHigh": "{n} filas",
-          "dragHint": "Arrastra el punto"
+          "dragHint": "Arrastra el punto",
+          "rowCommute": "Intercambiar factores",
+          "rowPerimeter": "Perímetro",
+          "rowBoard": "Parte del tablero",
+          "rowSquare": "Cuadrado más cercano"
         },
         "bars": {
           "title": "Productos de la fila",
@@ -28474,7 +28544,8 @@
           "boxSide": "Un lado",
           "boxSquare": "Al cuadrado",
           "boxTotal": "Todas las celdas",
-          "cells": "{n} celdas"
+          "cells": "{n} celdas",
+          "gridCaption": "Cada una de las {n} celdas, sombreada según su producto; todas suman el total."
         },
         "units": {
           "title": "Ciclo de las unidades",

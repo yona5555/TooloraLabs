@@ -67,6 +67,8 @@ export * from "./TriangleActiveAngleGeometry";
 export * from "./UnitCircleGeometry";
 export * from "./FractionNumberLineGeometry";
 export * from "./ScientificNotationDragGeometry";
+export * from "./ScientificNotationForms";
+export * from "./UnitCircleMath";
 export * from "./ProbabilityCalculator";
 export * from "./MeanMedianModeRangeCalculator";
 export * from "./TargetHeartRateCalculator";

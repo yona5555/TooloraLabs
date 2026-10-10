@@ -562,7 +562,23 @@
           "ariaLabel": "Diagramme interactif du cercle unité — faites glisser le point autour du cercle pour changer l'angle",
           "cosTooltip": "cos θ = {value}",
           "sinTooltip": "sin θ = {value}",
-          "hint": "Faites glisser le point autour du cercle — chaque indicateur trigonométrique de cette page se met à jour avec lui."
+          "hint": "Faites glisser le point autour du cercle — chaque indicateur trigonométrique de cette page se met à jour avec lui.",
+          "title": "Explorateur du cercle unité",
+          "tableTitle": "Valeurs en direct",
+          "quadrantAxis": "Sur un axe",
+          "quadrantN": "Quadrant {n}",
+          "undefined": "non définie",
+          "rows": {
+            "degrees": "Angle (degrés)",
+            "radians": "Angle (radians)",
+            "quadrant": "Quadrant",
+            "sin": "sin θ",
+            "cos": "cos θ",
+            "tan": "tan θ",
+            "reference": "Angle de référence",
+            "coords": "Point (cos θ, sin θ)",
+            "signs": "Signes dans ce quadrant"
+          }
         },
         "trigWave": {
           "title": "Sinus et cosinus, un tour complet",
@@ -779,12 +795,6 @@
           "increase": "Augmenter l'angle",
           "reset": "Réinitialiser",
           "hint": "Faites glisser le point rouge, ou utilisez les boutons −/+. Maintenez Maj en glissant pour un pas de 15°."
-        },
-        "commonAngles": {
-          "title": "Angles courants",
-          "subtitle": "",
-          "colAngle": "Angle",
-          "colRad": "Radians"
         }
       }
     },
@@ -6910,7 +6920,20 @@
         "exponentLabel": "Exposant",
         "coefficientPlaceholder": "Coefficient",
         "exponentPlaceholder": "Exposant",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "examplesTitle": "Exemples rapides : constantes célèbres",
+        "examples": {
+          "lightSpeed": "Vitesse de la lumière",
+          "avogadro": "Constante d'Avogadro",
+          "planck": "Constante de Planck",
+          "elementaryCharge": "Charge élémentaire",
+          "electronMass": "Masse de l'électron",
+          "gravitation": "Constante gravitationnelle",
+          "boltzmann": "Constante de Boltzmann",
+          "astronomicalUnit": "Unité astronomique",
+          "earthMass": "Masse de la Terre",
+          "bohrRadius": "Rayon de Bohr"
+        }
       },
       "result": {
         "heading": "Résultat",
@@ -6918,7 +6941,6 @@
         "standardForm": "Forme standard : {value}",
         "engineeringForm": "Notation ingénieur : {coefficient} × 10^{exponent}",
         "numberName": "Soit environ {coefficient} {name}.",
-        "diagramCaption": "Position de 10^{exponent} sur une échelle logarithmique de grandeur.",
         "stepToScientific": "La virgule décimale de {standard} a été déplacée jusqu'à ce qu'il ne reste qu'un seul chiffre non nul avant elle — {exponent} positions —, donnant un coefficient compris entre 1 et 10.",
         "stepToStandard": "La virgule décimale de {coefficient} a été déplacée de {exponent} positions pour l'exprimer sous forme standard.",
         "stepMultiply": "Les coefficients ont été multipliés ({coeffA} × {coeffB} = {rawCoeff}) et les exposants additionnés ({expA} + {expB} = {rawExp}), puis le résultat a été renormalisé pour garder un coefficient compris entre 1 et 10.",
@@ -6933,6 +6955,50 @@
           "millionth": "millionième",
           "billionth": "milliardième",
           "trillionth": "billionième"
+        },
+        "shift": {
+          "title": "Déplacement de la virgule",
+          "aria": "La virgule se déplace de {places} positions jusqu'au coefficient",
+          "none": "Déjà entre 1 et 10 : la virgule ne bouge pas (× 10⁰).",
+          "left": "Virgule déplacée de {places} sur {total} positions vers la gauche → × {power}",
+          "right": "Virgule déplacée de {places} sur {total} positions vers la droite → × {power}"
+        },
+        "ladder": {
+          "title": "Échelle des grandeurs (faites glisser le repère)",
+          "aria": "Échelle logarithmique de 10^-15 à 10^15 avec des longueurs de référence réelles ; faites glisser le repère pour changer l'exposant",
+          "down": "Diminuer l'exposant de un",
+          "up": "Augmenter l'exposant de un",
+          "readout": "Référence la plus proche : {ref}. Lu en mètres, votre nombre ≈ {ratio} × cette référence.",
+          "refs": {
+            "proton": "Proton",
+            "compton": "λ de Compton",
+            "dna": "Largeur ADN",
+            "bacterium": "E. coli",
+            "sand": "Grain de sable",
+            "human": "Humain",
+            "burj": "Burj Khalifa",
+            "moon": "Lune",
+            "sun": "Soleil",
+            "saturnOrbit": "Orbite Saturne",
+            "lightYear": "Année-lumière"
+          }
+        },
+        "forms": {
+          "title": "Formes équivalentes (en direct)",
+          "standard": "Standard",
+          "scientific": "Scientifique",
+          "engineering": "Ingénieur",
+          "engineeringNote": "exposant multiple de 3",
+          "eNotation": "Notation E",
+          "eNote": "forme calculatrice / tableur",
+          "si": "Préfixe SI",
+          "siBase": "aucun préfixe nécessaire",
+          "siOut": "hors de la plage des préfixes SI",
+          "words": "En toutes lettres",
+          "sigFigs": "Chiffres significatifs",
+          "sigNote": "comptés à partir de votre saisie",
+          "sigRule": "× et ÷ gardent le plus petit des deux",
+          "sigAmbiguous": "minimum : les zéros finaux sans virgule sont ambigus"
         }
       },
       "education": {
@@ -28402,7 +28468,11 @@
           "outside": "Votre opération dépasse ce plateau de {size} × {size} ; la poignée marque son coin.",
           "legendLow": "{n} lignes",
           "legendHigh": "{n} lignes",
-          "dragHint": "Faites glisser la poignée"
+          "dragHint": "Faites glisser la poignée",
+          "rowCommute": "Échanger les facteurs",
+          "rowPerimeter": "Périmètre",
+          "rowBoard": "Part du plateau",
+          "rowSquare": "Carré le plus proche"
         },
         "bars": {
           "title": "Produits de la ligne",
@@ -28474,7 +28544,8 @@
           "boxSide": "Un côté",
           "boxSquare": "Au carré",
           "boxTotal": "Toutes les cases",
-          "cells": "{n} cases"
+          "cells": "{n} cases",
+          "gridCaption": "Chacune des {n} cases, teintée selon son produit — toutes s'additionnent pour donner le total."
         },
         "units": {
           "title": "Cycle des unités",

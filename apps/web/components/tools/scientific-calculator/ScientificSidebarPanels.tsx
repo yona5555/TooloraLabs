@@ -1,14 +1,12 @@
 "use client";
 /**
- * Owns the shared state (theta, which common-angle row is hovered) for the two sidebar panels
- * that fill the void under the History card (Rule 41): the unit-circle card and the common-angles
- * table card. Seeded ONCE from the calculator's own angle mode + display value (read-only, via
+ * Owns theta for the sidebar unit-circle card that fills the column under the History card
+ * (Rule 41). Seeded ONCE from the calculator's own angle mode + display value (read-only, via
  * ScientificCalcReadonlyContext) -- after that, fully independent of the calculator.
  */
 import { useState } from "react";
 import { useScientificCalcReadonly } from "./ScientificCalcReadonlyContext";
 import ScientificUnitCircleCard from "./ScientificUnitCircleCard";
-import ScientificCommonAnglesCard from "./ScientificCommonAnglesCard";
 
 function seedTheta(angleMode: "deg" | "rad", display: string): number {
   const parsed = Number.parseFloat(display);
@@ -20,14 +18,7 @@ function seedTheta(angleMode: "deg" | "rad", display: string): number {
 
 export default function ScientificSidebarPanels() {
   const calc = useScientificCalcReadonly();
-  const [seed] = useState(() => seedTheta(calc.angleMode, calc.display));
+  const [seed] = useState(() => seedTheta(calc.angleMode, calc.display) || 30);
   const [theta, setTheta] = useState(seed);
-  const [hoverAngle, setHoverAngle] = useState<number | null>(null);
-
-  return (
-    <div className="flex flex-col gap-4">
-      <ScientificUnitCircleCard theta={theta} setTheta={setTheta} seed={seed} hoverAngle={hoverAngle} setHoverAngle={setHoverAngle} />
-      <ScientificCommonAnglesCard theta={theta} hoverAngle={hoverAngle} setHoverAngle={setHoverAngle} />
-    </div>
-  );
+  return <ScientificUnitCircleCard theta={theta} setTheta={setTheta} seed={seed} />;
 }

@@ -562,7 +562,23 @@
           "ariaLabel": "Interactive unit-circle diagram — drag the point around the circle to change the angle",
           "cosTooltip": "cos θ = {value}",
           "sinTooltip": "sin θ = {value}",
-          "hint": "Drag the point around the circle — every trig-based indicator on this page updates with it."
+          "hint": "Drag the point around the circle — every trig-based indicator on this page updates with it.",
+          "title": "Unit Circle Explorer",
+          "tableTitle": "Live values",
+          "quadrantAxis": "On an axis",
+          "quadrantN": "Quadrant {n}",
+          "undefined": "undefined",
+          "rows": {
+            "degrees": "Angle (degrees)",
+            "radians": "Angle (radians)",
+            "quadrant": "Quadrant",
+            "sin": "sin θ",
+            "cos": "cos θ",
+            "tan": "tan θ",
+            "reference": "Reference angle",
+            "coords": "Point (cos θ, sin θ)",
+            "signs": "Signs in this quadrant"
+          }
         },
         "trigWave": {
           "title": "Sine and Cosine, One Full Turn",
@@ -779,12 +795,6 @@
           "increase": "Increase angle",
           "reset": "Reset",
           "hint": "Drag the red point, or use the −/+ buttons. Hold Shift while dragging to snap to 15°."
-        },
-        "commonAngles": {
-          "title": "Common Angles",
-          "subtitle": "",
-          "colAngle": "Angle",
-          "colRad": "Radians"
         }
       }
     },
@@ -6910,7 +6920,20 @@
         "exponentLabel": "Exponent",
         "coefficientPlaceholder": "Coefficient",
         "exponentPlaceholder": "Exponent",
-        "clear": "Clear"
+        "clear": "Clear",
+        "examplesTitle": "Quick examples — famous constants",
+        "examples": {
+          "lightSpeed": "Speed of light",
+          "avogadro": "Avogadro constant",
+          "planck": "Planck constant",
+          "elementaryCharge": "Elementary charge",
+          "electronMass": "Electron mass",
+          "gravitation": "Gravitational constant",
+          "boltzmann": "Boltzmann constant",
+          "astronomicalUnit": "Astronomical unit",
+          "earthMass": "Mass of Earth",
+          "bohrRadius": "Bohr radius"
+        }
       },
       "result": {
         "heading": "Result",
@@ -6918,7 +6941,6 @@
         "standardForm": "Standard form: {value}",
         "engineeringForm": "Engineering notation: {coefficient} × 10^{exponent}",
         "numberName": "That's about {coefficient} {name}.",
-        "diagramCaption": "Position of 10^{exponent} on a logarithmic magnitude scale.",
         "stepToScientific": "Moved the decimal point of {standard} until exactly one nonzero digit remained before it — {exponent} places — giving a coefficient between 1 and 10.",
         "stepToStandard": "Moved the decimal point of {coefficient} by {exponent} places to expand it to standard form.",
         "stepMultiply": "Multiplied the coefficients ({coeffA} × {coeffB} = {rawCoeff}) and added the exponents ({expA} + {expB} = {rawExp}), then renormalized to keep the coefficient between 1 and 10.",
@@ -6933,6 +6955,50 @@
           "millionth": "millionth",
           "billionth": "billionth",
           "trillionth": "trillionth"
+        },
+        "shift": {
+          "title": "Decimal-point shift",
+          "aria": "The decimal point moves {places} places to reach the coefficient",
+          "none": "Already between 1 and 10 — the point stays put (× 10⁰).",
+          "left": "Point moved {places} of {total} places left → × {power}",
+          "right": "Point moved {places} of {total} places right → × {power}"
+        },
+        "ladder": {
+          "title": "Magnitude ladder (drag the marker)",
+          "aria": "Logarithmic ladder from 10^-15 to 10^15 with real reference lengths; drag the marker to change the exponent",
+          "down": "Lower the exponent by one",
+          "up": "Raise the exponent by one",
+          "readout": "Nearest reference: {ref}. Read in metres, your number ≈ {ratio} × that.",
+          "refs": {
+            "proton": "Proton",
+            "compton": "Compton λ",
+            "dna": "DNA width",
+            "bacterium": "E. coli",
+            "sand": "Sand grain",
+            "human": "Human",
+            "burj": "Burj Khalifa",
+            "moon": "Moon",
+            "sun": "Sun",
+            "saturnOrbit": "Saturn orbit",
+            "lightYear": "Light-year"
+          }
+        },
+        "forms": {
+          "title": "Equivalent forms (live)",
+          "standard": "Standard",
+          "scientific": "Scientific",
+          "engineering": "Engineering",
+          "engineeringNote": "exponent a multiple of 3",
+          "eNotation": "E-notation",
+          "eNote": "calculator / spreadsheet form",
+          "si": "SI prefix",
+          "siBase": "no prefix needed",
+          "siOut": "outside the SI prefix range",
+          "words": "In words",
+          "sigFigs": "Significant figures",
+          "sigNote": "counted from the digits you typed",
+          "sigRule": "× and ÷ keep the fewer of the two inputs",
+          "sigAmbiguous": "minimum — trailing zeros without a point are ambiguous"
         }
       },
       "education": {
@@ -28402,7 +28468,11 @@
           "outside": "Your fact is larger than this {size} × {size} board; the handle shows its corner.",
           "legendLow": "{n} rows",
           "legendHigh": "{n} rows",
-          "dragHint": "Drag the handle"
+          "dragHint": "Drag the handle",
+          "rowCommute": "Swap the factors",
+          "rowPerimeter": "Perimeter",
+          "rowBoard": "Share of the board",
+          "rowSquare": "Nearest square"
         },
         "bars": {
           "title": "Products of the Row",
@@ -28474,7 +28544,8 @@
           "boxSide": "One side",
           "boxSquare": "Squared",
           "boxTotal": "All cells",
-          "cells": "{n} cells"
+          "cells": "{n} cells",
+          "gridCaption": "Every one of the {n} cells, shaded by its product — all of them add up to the total."
         },
         "units": {
           "title": "Units-Digit Cycle",

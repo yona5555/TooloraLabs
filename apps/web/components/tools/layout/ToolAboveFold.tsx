@@ -23,6 +23,11 @@ type ToolAboveFoldProps = {
    * fills the column with real content rather than leaving a gap under it.
    */
   stretchInput?: boolean;
+  /**
+   * Stretch the result column to the row height (when the input card is the taller one), so a
+   * result column whose last card can grow (`lg:flex-1`) ends flush with the input card (§27).
+   */
+  stretchResult?: boolean;
 };
 
 /**
@@ -86,7 +91,7 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -171,7 +176,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
           {input}
         </div>
       </div>
-      <div ref={resultRef} data-tool-result className="min-w-0 lg:col-start-2 lg:row-start-1">
+      <div ref={resultRef} data-tool-result className={`min-w-0 lg:col-start-2 lg:row-start-1 ${stretchResult ? "lg:self-stretch" : ""}`}>
         {result}
       </div>
       {secondary && (

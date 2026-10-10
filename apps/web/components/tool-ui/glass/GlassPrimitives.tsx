@@ -151,24 +151,10 @@ export function GlassPage({ children }: { children: ReactNode }) {
   return <div className={glassInter.variable}>{children}</div>;
 }
 
-function NumberBadge({ n }: { n: number }) {
-  return (
-    <span
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold"
-      style={{ background: "color-mix(in oklab, var(--color-white) 20%, transparent)", border: "1px solid color-mix(in oklab, var(--color-white) 38%, transparent)", color: "var(--color-white)" }}
-    >
-      {String(n).padStart(2, "0")}
-    </span>
-  );
-}
-
-function CardTitle({ n, title }: { n: number; title: string }) {
-  return (
-    <span className="flex items-center gap-2.5">
-      <NumberBadge n={n} />
-      {title}
-    </span>
-  );
+// Rule A (2026-10-10): card headers carry the title only — no number badge.
+// `n` stays as the card id / layout key, never rendered.
+function CardTitle({ title }: { n: number; title: string }) {
+  return <span>{title}</span>;
 }
 
 export function GlassHeroCard({

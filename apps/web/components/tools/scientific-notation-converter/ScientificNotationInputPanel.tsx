@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import { FAMOUS_CONSTANTS } from "@tooloralabs/tools";
+import { coef, sup } from "./sciFormat";
 import type { ScientificNotationOperation } from "./types";
 
 const OPERATIONS: ScientificNotationOperation[] = ["toScientific", "toStandard", "multiply", "divide"];
@@ -21,6 +23,7 @@ type ScientificNotationInputPanelProps = {
   exponentB: string;
   onExponentBChange: (value: string) => void;
   onClear: () => void;
+  onLoadConstant: (coefficient: number, exponent: number) => void;
 };
 
 export default function ScientificNotationInputPanel({
@@ -37,6 +40,7 @@ export default function ScientificNotationInputPanel({
   exponentB,
   onExponentBChange,
   onClear,
+  onLoadConstant,
 }: ScientificNotationInputPanelProps) {
   const t = useTranslations("tools.scientific-notation-converter.form");
 
@@ -44,7 +48,7 @@ export default function ScientificNotationInputPanel({
   const needsPairInput = operation === "toStandard" || needsSecondValue;
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
         <select
@@ -133,6 +137,29 @@ export default function ScientificNotationInputPanel({
         <RotateCcw size={16} />
         {t("clear")}
       </button>
+
+      {/* §17/§27: quick examples fill the column; one click loads a real constant. */}
+      <div className="mt-5 flex flex-1 flex-col border-t border-zinc-200 pt-4 dark:border-zinc-800">
+        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("examplesTitle")}</span>
+        <ul className="mt-2 flex flex-1 flex-col justify-between gap-1.5" data-testid="constants">
+          {FAMOUS_CONSTANTS.map((c) => {
+            const active = (operation === "toStandard") && Number(coefficientA) === c.coefficient && Number(exponentA) === c.exponent;
+            return (
+              <li key={c.key}>
+                <button
+                  type="button"
+                  onClick={() => onLoadConstant(c.coefficient, c.exponent)}
+                  data-constant={c.key}
+                  className={`flex w-full items-center justify-between gap-2 rounded-lg border px-3 py-2 text-start text-sm transition ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-500/10" : "border-zinc-200 hover:border-blue-300 hover:bg-blue-50/60 dark:border-zinc-700 dark:hover:bg-blue-500/5"}`}
+                >
+                  <span className="font-medium text-zinc-800 dark:text-zinc-200">{t(`examples.${c.key}`)}</span>
+                  <span dir="ltr" className="shrink-0 font-mono text-xs font-semibold text-blue-700 dark:text-blue-300">{`${coef(c.coefficient, 6)}×10${sup(c.exponent)} ${c.unit}`}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </SectionCard>
   );
 }

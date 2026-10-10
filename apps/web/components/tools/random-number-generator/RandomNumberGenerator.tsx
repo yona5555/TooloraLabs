@@ -167,8 +167,9 @@ export default function RandomNumberGenerator({ education }: { education: ReactN
               onClear={handleClear}
             />
           }
+          stretchResult
           result={
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 lg:h-full">
               <RandomNumberResult result={result} seed={seedValue} f={f} />
               {d && <RandomNumberDrawOrder d={d} f={f} />}
             </div>

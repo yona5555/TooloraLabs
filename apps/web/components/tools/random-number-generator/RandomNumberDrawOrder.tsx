@@ -17,9 +17,9 @@ export default function RandomNumberDrawOrder({ d, f }: { d: Draw; f: RngFormatt
   const muPos = ((d.mu - d.lo) / span) * 100;
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard title={t("title")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("intro", { shown: f.int(bars.length), k: f.int(d.k) })}</p>
-      <div dir="ltr" className="relative mt-2 flex h-16 items-end gap-px rounded-lg bg-zinc-50 p-1 dark:bg-zinc-800/40" data-testid="rng-order">
+      <div dir="ltr" className="relative mt-2 flex min-h-16 flex-1 items-end gap-px rounded-lg bg-zinc-50 p-1 dark:bg-zinc-800/40" data-testid="rng-order">
         {bars.map((v, i) => (
           <div key={i} className="min-w-0 flex-1 rounded-t-sm bg-blue-500 transition-all duration-500 dark:bg-blue-400" style={{ height: pc(Math.max(4, ((v - d.lo) / span) * 100)) }} title={String(v)} />
         ))}
