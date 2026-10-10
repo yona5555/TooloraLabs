@@ -15543,8 +15543,7 @@
         },
         "firstPlaceholder": "p. ej. 20",
         "secondPlaceholder": "p. ej. 150",
-        "clear": "Borrar",
-        "scenarioLabel": "Prueba un escenario real"
+        "clear": "Borrar"
       },
       "result": {
         "heading": "Resultado",
@@ -15557,43 +15556,15 @@
         "originalZero": "El valor original no puede ser cero para un cambio porcentual.",
         "percentZero": "El porcentaje no puede ser cero al invertir un porcentaje.",
         "bothZero": "Ambos valores no pueden ser cero al comparar una diferencia porcentual.",
-        "chart": {
-          "baseLabel": "Número base",
-          "resultLabel": "Resultado",
-          "wholeLabel": "Total",
-          "partLabel": "Parte",
-          "beforeLabel": "Antes",
-          "afterLabel": "Después",
-          "valueALabel": "Valor A",
-          "valueBLabel": "Valor B"
-        }
+        "invalidValue": "Introduce un número en ambos campos.",
+        "keptLast": "Se muestra el último cálculo válido."
       },
       "education": {
         "intro": {
           "title": "Entender los porcentajes",
           "paragraph1": "Un porcentaje expresa un número como una fracción de 100 — la palabra proviene del latín per centum, «por cada cien». Escribir un valor como porcentaje facilita comparar cantidades de tamaños muy distintos en una misma escala: da igual si una clase tiene 20 o 200 alumnos, decir que el 15% suspendió un examen transmite la misma información relativa en ambos casos.",
           "paragraph2": "Esta herramienta cubre cinco cálculos de porcentaje distintos que suelen confundirse entre sí: hallar el porcentaje de un número, hallar qué porcentaje representa un número respecto a otro, el cambio porcentual (una comparación direccional que usa el valor original como base), el porcentaje inverso (partir de un resultado conocido para llegar al número original) y la diferencia porcentual (una comparación simétrica que no trata a ninguno de los dos valores como el «original»).",
-          "diagram": {
-            "caption": "27 de estos 100 cuadros están sombreados — esto es literalmente lo que significa «27 %»: 27 partes por cada 100."
-          },
-          "paragraph3": "La diferencia entre cambio porcentual y diferencia porcentual confunde incluso a analistas experimentados. Pasar de 80 a 100 es un cambio porcentual del +25 %, usando 80 (el valor original) como base. Pero la diferencia porcentual entre esos mismos dos números, que usa su promedio de 90 como base, es de aproximadamente el 22,2 % — los mismos dos números, dos preguntas distintas, dos respuestas igualmente válidas.",
-          "rateGauge": {
-            "title": "¿Dónde se ubica esta tasa porcentual?",
-            "intro": "Las tasas porcentuales aparecen en todas partes de la vida diaria, desde el impuesto sobre ventas hasta los intereses de tarjetas de crédito. Elige un ejemplo real a continuación para ver dónde se ubica.",
-            "verdict": "{example} — Tasa: {classification}.",
-            "fact": "Este ejemplo tiene una tasa del {percent}.",
-            "examples": {
-              "salesTax": "Impuesto sobre ventas",
-              "restaurantTip": "Propina en restaurante",
-              "storeDiscount": "Descuento de tienda",
-              "creditCardApr": "TAE de tarjeta de crédito"
-            },
-            "zones": {
-              "low": "Baja",
-              "moderate": "Moderada",
-              "high": "Alta"
-            }
-          }
+          "paragraph3": "La diferencia entre cambio porcentual y diferencia porcentual confunde incluso a analistas experimentados. Pasar de 80 a 100 es un cambio porcentual del +25 %, usando 80 (el valor original) como base. Pero la diferencia porcentual entre esos mismos dos números, que usa su promedio de 90 como base, es de aproximadamente el 22,2 % — los mismos dos números, dos preguntas distintas, dos respuestas igualmente válidas."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -15717,7 +15688,11 @@
         "restaurantTip": "Propina en restaurante",
         "examScore": "Puntuación de examen",
         "salaryRaise": "Aumento de salario",
-        "discountedPrice": "Precio con descuento"
+        "discountedPrice": "Precio con descuento",
+        "salesTax": "Impuesto sobre ventas",
+        "surveyShare": "Cuota en encuesta",
+        "priceDrop": "Bajada de precio",
+        "twoQuotes": "Dos presupuestos"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -15737,11 +15712,208 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
       },
-      "changeScale": {
-        "ariaLabel": "Escala que muestra un cambio del {value} por ciento",
-        "noChange": "Sin cambios: el valor se mantuvo exactamente igual.",
-        "increaseCaption": "Esto es un aumento.",
-        "decreaseCaption": "Esto es una disminución."
+      "live3d": {
+        "educationTitle": "Tu porcentaje, calculado de todas las formas",
+        "given": "dato",
+        "groups": {
+          "given": "Tus datos",
+          "steps": "Este cálculo, paso a paso",
+          "frame": "Base, parte y resto",
+          "forms": "Otras formas de escribir la tasa",
+          "reverse": "Cálculo inverso y multiplicadores",
+          "compare": "% de cambio frente a puntos porcentuales",
+          "twice": "El mismo % aplicado dos veces"
+        },
+        "rows": {
+          "decimal": "Tasa en decimal",
+          "part": "Parte",
+          "ratio": "Cociente",
+          "percent": "Porcentaje",
+          "gap": "Diferencia",
+          "change": "Cambio porcentual",
+          "base": "Base (100%)",
+          "mean": "Media de los dos",
+          "difference": "Diferencia porcentual",
+          "remainder": "Resto",
+          "fraction": "Fracción",
+          "perMille": "Por mil",
+          "basisPoints": "Puntos básicos",
+          "oneIn": "Razón (1 de n)",
+          "benchmark": "Distancia a la fracción simple más cercana",
+          "reverseBase": "Base recuperada desde la parte",
+          "increased": "Base aumentada en la tasa",
+          "decreased": "Base reducida en la tasa",
+          "undo": "Porcentaje que deshace la tasa",
+          "changeAB": "% de cambio x → y",
+          "changeBA": "% de cambio y → x",
+          "pctDifference": "% de diferencia",
+          "points": "Tasa +1 punto porcentual",
+          "relative": "Tasa +10% (relativo)",
+          "compoundTwice": "Aumentado dos veces (compuesto)",
+          "simpleTwice": "Tasa sumada dos veces (simple)",
+          "upDown": "Subir y luego bajar la tasa",
+          "net": "Cambio neto tras subir y bajar"
+        }
+      },
+      "ind": {
+        "worked": "Ejemplo resuelto",
+        "lab": {
+          "title": "Laboratorio de la cuadrícula de 100",
+          "heading": "Arrastra sobre los cuadros para pintar un porcentaje",
+          "intro": {
+            "percent-of-number": "Cada cuadro es el 1% del número. La parte pintada pasa al campo de porcentaje de arriba y todos los resultados de la página la siguen.",
+            "what-percent": "Cada cuadro es el 1% del total. Al pintar una parte se reescribe la parte para que sea exactamente ese porcentaje del total.",
+            "percentage-change": "La primera cuadrícula es el valor original (100%). Pinta por encima del 100% para un aumento o por debajo para una disminución; el nuevo valor se reescribe para coincidir.",
+            "reverse-percentage": "Cada cuadro es el 1% del total desconocido. La parte pintada se convierte en el porcentaje y el total se resuelve de nuevo a partir de tu valor resultante.",
+            "percentage-difference": "Pinta el tamaño de la brecha como parte de la media de los dos valores; el segundo valor se reescribe para crear esa diferencia."
+          },
+          "slider": "Ajuste fino",
+          "rowShare": "Parte pintada",
+          "rowCells": "Cuadros completos + parcial",
+          "rowBase": "Una cuadrícula completa (100%)",
+          "rowPart": "Cantidad pintada",
+          "rowRest": "Sin pintar / exceso",
+          "rowWritten": "{field} reescrito",
+          "rowResult": "Resultado de la calculadora",
+          "legendShare": "Pintado (hasta 100%)",
+          "legendAbove": "Por encima del 100%",
+          "legendLost": "Perdido en una disminución"
+        },
+        "formula": {
+          "title": "Mapa de la fórmula",
+          "heading": {
+            "percent-of-number": "Parte = tasa ÷ 100 × número",
+            "what-percent": "Porcentaje = parte ÷ total × 100",
+            "percentage-change": "Cambio = (nuevo − anterior) ÷ anterior × 100",
+            "reverse-percentage": "Total = parte ÷ tasa × 100",
+            "percentage-difference": "Diferencia = brecha ÷ media × 100"
+          },
+          "intro": "La fórmula del tipo de cálculo elegido, con cada símbolo sustituido por tus números actuales.",
+          "part": "parte",
+          "new": "nuevo",
+          "old": "anterior",
+          "whole": "total",
+          "rowBase": "Base (100%)",
+          "rowRate": "Tasa",
+          "rowDecimal": "Tasa ÷ 100",
+          "rowPart": "Parte",
+          "rowCheck": "Comprobación: base × decimal",
+          "rowResult": "Resultado"
+        },
+        "steps": {
+          "title": "Escalera de cálculo mental",
+          "heading": "{pct}% de {base} con bloques de 10% y 1%",
+          "intro": "La forma más rápida de calcular un porcentaje a mano: halla el 10% y el 1% moviendo la coma decimal y suma los bloques que necesites.",
+          "rowTen": "10% (÷ 10)",
+          "rowOne": "1% (÷ 100)",
+          "rowTens": "{k} × 10%",
+          "rowOnes": "{k} × 1%",
+          "rowRest": "Resto fraccionario",
+          "rowTotal": "Total"
+        },
+        "forms": {
+          "title": "Formas equivalentes",
+          "heading": "{pct}% escrito de seis maneras",
+          "intro": "Un porcentaje, un decimal, una fracción, el tanto por mil y los puntos básicos son la misma cantidad en escalas distintas. La recta sitúa la tasa entre 0 y 1 junto a la fracción simple más cercana.",
+          "percent": "Porcentaje",
+          "decimal": "Decimal",
+          "fraction": "Fracción",
+          "perMille": "Por mil",
+          "basisPoints": "Puntos básicos",
+          "oneIn": "1 de n",
+          "benchmark": "Fracción simple más cercana",
+          "gap": "Distancia a esa fracción"
+        },
+        "rings": {
+          "title": "Tasa de una tasa",
+          "heading": "El mismo porcentaje tomado una, dos y tres veces",
+          "intro": "Tomar un porcentaje de un porcentaje multiplica las tasas, por lo que cada anillo se reduce rápido cuando la tasa es menor que el 100%.",
+          "once": "Una vez",
+          "twice": "De sí mismo (dos veces)",
+          "thrice": "Tres veces",
+          "rowFactor": "Factor por paso"
+        },
+        "bars": {
+          "title": "Base, parte y resultados",
+          "heading": "Lo que el {pct}% hace con la base",
+          "intro": "La base dividida en la parte y el resto, junto a la base aumentada y reducida con la misma tasa.",
+          "part": "Parte",
+          "remainder": "Resto",
+          "base": "Base",
+          "increased": "Aumentada",
+          "decreased": "Reducida",
+          "rowSpread": "Distancia entre subir y bajar"
+        },
+        "trend": {
+          "title": "Repetir el porcentaje",
+          "heading": "{pct}% aplicado 10 veces seguidas",
+          "intro": "Aplicar un porcentaje repetidamente multiplica, así que se aleja de sumar la misma cantidad cada vez. La línea roja marca aplicarlo dos veces.",
+          "rowMultiplier": "Multiplicador",
+          "rowTwice": "Tras 2 pasos (compuesto)",
+          "rowSimple": "Tras 2 pasos (simple)",
+          "rowGap": "Extra por la composición",
+          "rowTen": "Tras 10 pasos (compuesto)",
+          "rowTenSimple": "Tras 10 pasos (simple)",
+          "legendCompound": "Compuesto",
+          "legendSimple": "Simple (sumado)",
+          "legendTwice": "Aplicado dos veces"
+        },
+        "balance": {
+          "title": "Balanza de deshacer",
+          "heading": "Deshacer un movimiento de {pct}",
+          "intro": "Un movimiento porcentual y el que lo revierte no tienen el mismo tamaño, porque el segundo actúa sobre una base distinta.",
+          "rowStart": "Inicio",
+          "rowAfter": "Tras {pct}",
+          "rowUndo": "Porcentaje que lo deshace",
+          "rowBack": "De vuelta al inicio",
+          "rowSame": "Aplicando en cambio {pct}",
+          "rowNet": "Cambio neto de ese recorrido",
+          "move": "Movimiento",
+          "undo": "Deshacer"
+        },
+        "gauge": {
+          "title": "Indicador del tamaño de la tasa",
+          "heading": "Esta tasa es: {zone}",
+          "intro": "Dónde se sitúa la tasa en una escala de cero al doble del total. Por encima del 100% la parte es mayor que la propia base.",
+          "rowRate": "Tasa",
+          "rowOfWhole": "Veces el total",
+          "zones": {
+            "small": "Pequeña",
+            "moderate": "Moderada",
+            "large": "Grande",
+            "beyond": "Mayor que el total"
+          }
+        },
+        "trio": {
+          "title": "Sensibilidad en puntos porcentuales",
+          "heading": "La tasa ±{d} puntos porcentuales",
+          "intro": "Mover una tasa en puntos porcentuales cambia la parte siempre en la misma cantidad, mientras que el cambio relativo depende de la tasa de partida.",
+          "change": "Paso",
+          "low": "Menor",
+          "current": "La tuya",
+          "high": "Mayor",
+          "rowStep": "Cada paso mueve la parte en",
+          "rowRelative": "Paso como cambio relativo"
+        },
+        "compare": {
+          "title": "Cuatro formas de comparar",
+          "heading": "Comparar {x} y {y}",
+          "intro": "Los mismos dos números dan porcentajes distintos según qué valor se use como base. Cada tarjeta muestra la base por la que divide.",
+          "changeAB": "% de cambio x → y",
+          "changeBA": "% de cambio y → x",
+          "difference": "% de diferencia",
+          "ratio": "Razón y ÷ x",
+          "points": "Diferencia simple y − x",
+          "baseUsed": "Base:"
+        },
+        "ranked": {
+          "title": "Porcentajes comunes ordenados",
+          "heading": "Porcentajes cotidianos de {base}",
+          "intro": "Tu tasa ordenada entre los porcentajes más usados, todos tomados de la misma base.",
+          "rowBase": "Base",
+          "rowYours": "La tuya ({pct}%)",
+          "rowRank": "Puesto (mayor primero)"
+        }
       }
     },
     "tip-calculator": {

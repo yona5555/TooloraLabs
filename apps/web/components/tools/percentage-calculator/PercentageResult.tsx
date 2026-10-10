@@ -1,149 +1,73 @@
+"use client";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import PercentageComparisonChart from "./PercentageComparisonChart";
-import PercentageChangeScale from "./PercentageChangeScale";
+import { PercentageCalculator as PercentageCalculatorTool } from "@tooloralabs/tools";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import PercentageShareExportModal from "./PercentageShareExportModal";
-import type { PercentageMode, PercentageResult as Result } from "./types";
+import PercentageLive3D from "./PercentageLive3D";
+import { usePercentage } from "./PercentageLiveContext";
 
-type Computed = {
-  mode: PercentageMode;
-  first: number;
-  second: number;
-  digitStyle: DigitStyle;
-};
+const tool = new PercentageCalculatorTool();
 
-type Props = {
-  result: Result;
-  computed: Computed;
-};
-
-export default function PercentageResult({ result, computed }: Props) {
+/**
+ * Result card: the tool's answer as the hero value and sentence, then the deep live table +
+ * 3D board of 100 cubes. While a field holds an invalid value (empty, division by zero) the
+ * card keeps the last valid calculation and says why.
+ */
+export default function PercentageResult({ invalid }: { invalid: boolean }) {
   const t = useTranslations("tools.percentage-calculator.result");
-  const { mode, first, second, digitStyle } = computed;
+  const live = usePercentage();
+  const { mode, a, b, fmt, labelA, labelB } = live;
+  const { f } = fmt;
 
-  const num = (value: number) => formatLocalizedNumber(value, digitStyle);
-  const formattedValue = num(result.value);
-  const formattedFirst = num(first);
-  const formattedSecond = num(second);
-
-  const isError =
-    (mode === "what-percent" && second === 0) ||
-    (mode === "percentage-change" && first === 0) ||
-    (mode === "reverse-percentage" && first === 0) ||
-    (mode === "percentage-difference" && first + second === 0);
-
-  let sentence: string;
-  if (mode === "what-percent" && second === 0) {
-    sentence = t("divisionByZero");
-  } else if (mode === "percentage-change" && first === 0) {
-    sentence = t("originalZero");
-  } else if (mode === "reverse-percentage" && first === 0) {
-    sentence = t("percentZero");
-  } else if (mode === "percentage-difference" && first + second === 0) {
-    sentence = t("bothZero");
-  } else if (mode === "percent-of-number") {
-    sentence = t("percentOf", { first: formattedFirst, second: formattedSecond, value: formattedValue });
-  } else if (mode === "what-percent") {
-    sentence = t("whatPercent", { first: formattedFirst, second: formattedSecond, value: formattedValue });
-  } else if (mode === "percentage-change") {
-    sentence = t("percentageChange", { first: formattedFirst, second: formattedSecond, value: formattedValue });
-  } else if (mode === "reverse-percentage") {
-    sentence = t("reversePercentage", { first: formattedFirst, second: formattedSecond, value: formattedValue });
-  } else {
-    sentence = t("percentageDifference", { first: formattedFirst, second: formattedSecond, value: formattedValue });
-  }
-
-  const chart = (() => {
-    if (isError) return null;
-    if (mode === "percent-of-number") {
-      return {
-        leftLabel: t("chart.baseLabel"),
-        leftValue: second,
-        rightLabel: t("chart.resultLabel"),
-        rightValue: result.value,
-      };
-    }
-    if (mode === "what-percent") {
-      return {
-        leftLabel: t("chart.wholeLabel"),
-        leftValue: second,
-        rightLabel: t("chart.partLabel"),
-        rightValue: first,
-      };
-    }
-    if (mode === "percentage-change") {
-      return {
-        leftLabel: t("chart.beforeLabel"),
-        leftValue: first,
-        rightLabel: t("chart.afterLabel"),
-        rightValue: second,
-      };
-    }
-    if (mode === "reverse-percentage") {
-      return {
-        leftLabel: t("chart.baseLabel"),
-        leftValue: result.value,
-        rightLabel: t("chart.partLabel"),
-        rightValue: second,
-      };
-    }
-    return {
-      leftLabel: t("chart.valueALabel"),
-      leftValue: first,
-      rightLabel: t("chart.valueBLabel"),
-      rightValue: second,
-    };
-  })();
-
+  const value = tool.execute({ mode, first: a, second: b }, { locale: "en-US" }).data.value;
   const isPercentageOutput = mode === "what-percent" || mode === "percentage-change" || mode === "percentage-difference";
+  const hero = isPercentageOutput ? `${f(value)}%` : f(value);
+  const args = { first: f(a), second: f(b), value: f(value) };
+  const sentence = {
+    "percent-of-number": t("percentOf", args),
+    "what-percent": t("whatPercent", args),
+    "percentage-change": t("percentageChange", args),
+    "reverse-percentage": t("reversePercentage", args),
+    "percentage-difference": t("percentageDifference", args),
+  }[mode];
+  const invalidReason = {
+    "percent-of-number": t("invalidValue"),
+    "what-percent": t("divisionByZero"),
+    "percentage-change": t("originalZero"),
+    "reverse-percentage": t("percentZero"),
+    "percentage-difference": t("bothZero"),
+  }[mode];
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-          <PercentageShareExportModal
-            inputRows={[
-              { label: t("chart.valueALabel"), value: formattedFirst },
-              { label: t("chart.valueBLabel"), value: formattedSecond },
-            ]}
-            resultRows={[]}
-            heroLabel={t("heading")}
-            heroValue={isError ? "—" : isPercentageOutput ? `${formattedValue}%` : formattedValue}
-            sentence={sentence}
-          />
-        </div>
-
-        <div className="p-4 lg:p-6">
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {isError ? "—" : isPercentageOutput ? `${formattedValue}%` : formattedValue}
-          </p>
-
-          {chart && (
-            <div className="mt-5">
-              <PercentageComparisonChart
-                leftLabel={chart.leftLabel}
-                leftValue={chart.leftValue}
-                leftFormatted={num(chart.leftValue)}
-                rightLabel={chart.rightLabel}
-                rightValue={chart.rightValue}
-                rightFormatted={num(chart.rightValue)}
-                percentageLabel={sentence}
-              />
-            </div>
-          )}
-
-          {!isError && (mode === "percentage-change" || mode === "percentage-difference") && (
-            <div className="mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800">
-              <PercentageChangeScale value={result.value} />
-            </div>
-          )}
-
-          <p className="mt-4 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-600 dark:border-zinc-800 dark:text-zinc-300">
-            {sentence}
-          </p>
-        </div>
+    <SectionCard
+      title={t("heading")}
+      action={
+        <PercentageShareExportModal
+          inputRows={[
+            { label: labelA, value: f(a) },
+            { label: labelB, value: f(b) },
+          ]}
+          resultRows={[]}
+          heroLabel={t("heading")}
+          heroValue={hero}
+          sentence={sentence}
+        />
+      }
+    >
+      {invalid && (
+        <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-center text-xs text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
+          {invalidReason} {t("keptLast")}
+        </p>
+      )}
+      <div className="text-center">
+        <p dir="ltr" className="font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
+          {hero}
+        </p>
+        <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{sentence}</p>
       </div>
-    </div>
+      <div className="mt-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+        <PercentageLive3D live={live} />
+      </div>
+    </SectionCard>
   );
 }
