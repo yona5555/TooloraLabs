@@ -11524,15 +11524,7 @@
         "crossProduct": "Kreuzprodukt (A×B)",
         "angleBetween": "Winkel dazwischen",
         "unitVectorA": "Einheitsvektor von A",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramSum": "A+B",
-        "diagramCaption": "2D-Projektion (nur x, y) der Vektoren A und B sowie ihrer Summe, maßstabsgetreu aus den eingegebenen Komponenten gezeichnet.",
-        "projectionAOntoB": "Projektion von A auf B",
-        "emptyStateMessage": "Geben Sie beide Vektoren ein und klicken Sie auf „Berechnen“, um alle Ergebnisse zu sehen.",
-        "angleDiagramTitle": "Winkel zwischen den Vektoren",
-        "angleDiagramIntro": "Derselbe Winkel, den die Skalarprodukt-Formel berechnet, als Bogen zwischen A und B dargestellt.",
-        "angleDiagramCaption": "2D-Projektion (nur x, y) der Vektoren A und B mit dem Winkel zwischen ihnen als Bogen."
+        "projectionAOntoB": "Projektion von A auf B"
       },
       "education": {
         "intro": {
@@ -11667,24 +11659,19 @@
           "intro": "Vier weitere Vektorbeziehungen, die eine eigene Betrachtung verdienen — jede mit ihrer eigenen Abbildung statt nur einer Formel.",
           "difference": {
             "title": "Vektordifferenz (A − B)",
-            "description": "B von A zu subtrahieren ist dasselbe wie A zum umgekehrten B (−B) zu addieren, und geometrisch ergibt sich der Vektor von der Spitze von B zur Spitze von A, wenn beide vom selben Ursprung ausgehen — die Verschiebung, um von B nach A zu gelangen. Wie die Summe wird sie komponentenweise berechnet: (ax − bx, ay − by, az − bz).",
-            "diagramCaption": "A, B und ihre Differenz A − B, maßstabsgetreu dargestellt."
+            "description": "B von A zu subtrahieren ist dasselbe wie A zum umgekehrten B (−B) zu addieren, und geometrisch ergibt sich der Vektor von der Spitze von B zur Spitze von A, wenn beide vom selben Ursprung ausgehen — die Verschiebung, um von B nach A zu gelangen. Wie die Summe wird sie komponentenweise berechnet: (ax − bx, ay − by, az − bz)."
           },
           "crossProduct": {
             "title": "Kreuzprodukt (A × B) im dreidimensionalen Raum",
-            "description": "Anders als jede andere Operation auf dieser Seite ergibt das Kreuzprodukt nur im dreidimensionalen Raum vollen Sinn: Es erzeugt einen neuen Vektor senkrecht zur Ebene, die A und B aufspannen (seine Richtung folgt der Rechte-Hand-Regel), mit einer Länge gleich der Fläche des von A und B aufgespannten Parallelogramms. Vertauscht man die Reihenfolge — B×A statt A×B — zeigt das Ergebnis in die entgegengesetzte Richtung.",
-            "diagramCaption": "Eine isometrische (3D-)Ansicht von A, B, dem von ihnen aufgespannten Parallelogramm und ihrem Kreuzprodukt A×B senkrecht zu dieser Ebene."
+            "description": "Anders als jede andere Operation auf dieser Seite ergibt das Kreuzprodukt nur im dreidimensionalen Raum vollen Sinn: Es erzeugt einen neuen Vektor senkrecht zur Ebene, die A und B aufspannen (seine Richtung folgt der Rechte-Hand-Regel), mit einer Länge gleich der Fläche des von A und B aufgespannten Parallelogramms. Vertauscht man die Reihenfolge — B×A statt A×B — zeigt das Ergebnis in die entgegengesetzte Richtung."
           },
           "unitVector": {
             "title": "Einheitsvektor (Â)",
-            "description": "Teilt man einen Vektor durch seinen eigenen Betrag, erhält man einen Einheitsvektor — gleiche Richtung, aber auf eine Länge von genau 1 skaliert. So isoliert man standardmäßig „welche Richtung“ von „wie weit“, und die Spitze jedes Einheitsvektors liegt per Definition genau auf dem Einheitskreis (bzw. der Einheitskugel in 3D).",
-            "diagramCaption": "Vektor A neben seinem Einheitsvektor Â, der genau auf dem gestrichelten Einheitskreis liegt."
+            "description": "Teilt man einen Vektor durch seinen eigenen Betrag, erhält man einen Einheitsvektor — gleiche Richtung, aber auf eine Länge von genau 1 skaliert. So isoliert man standardmäßig „welche Richtung“ von „wie weit“, und die Spitze jedes Einheitsvektors liegt per Definition genau auf dem Einheitskreis (bzw. der Einheitskugel in 3D)."
           },
           "projection": {
             "title": "Projektion von A auf B",
-            "description": "Die Projektion von A auf B ist der „Schatten“, den A auf die Linie von B werfen würde, wenn das Licht senkrecht auf B fiele — der Teil von A, der tatsächlich entlang der Richtung von B zeigt. Ihre Länge (die Skalarprojektion) ist A·B / |B|, und die vollständige Vektorprojektion skaliert B selbst um denselben Faktor: projᴮA = (A·B / |B|²) B. Sie ist der geometrische Kern des Skalarprodukts und ist immer dann undefiniert, wenn B ein Nullvektor ist, da ein Nullvektor keine Linie definiert, auf die projiziert werden könnte.",
-            "diagramLabel": "projᴮA",
-            "diagramCaption": "Der Schatten von A auf die Linie von B — die Vektorprojektion von A auf B, mit einer gestrichelten Senkrechten von der Spitze von A zum Projektionspunkt."
+            "description": "Die Projektion von A auf B ist der „Schatten“, den A auf die Linie von B werfen würde, wenn das Licht senkrecht auf B fiele — der Teil von A, der tatsächlich entlang der Richtung von B zeigt. Ihre Länge (die Skalarprojektion) ist A·B / |B|, und die vollständige Vektorprojektion skaliert B selbst um denselben Faktor: projᴮA = (A·B / |B|²) B. Sie ist der geometrische Kern des Skalarprodukts und ist immer dann undefiniert, wenn B ein Nullvektor ist, da ein Nullvektor keine Linie definiert, auf die projiziert werden könnte."
           }
         },
         "applications": {
@@ -11710,11 +11697,7 @@
           ],
           "forceExample": {
             "title": "Beispielrechnung: Zwei Kräfte an einem Objekt",
-            "description": "Eine Kraft von 30 N zieht ost-nordöstlich mit (30, 40) N, eine zweite Kraft von 20 N zieht ost-südöstlich mit (20, −10) N am selben Objekt. Komponentenweise Addition ergibt eine resultierende Kraft von (50, 30) N — einen einzigen gleichwertigen Stoß, dessen Betrag (≈58,3 N) und Richtung die tatsächliche Beschleunigung des Objekts bestimmen, genau wie es die Summenoperation oben für beliebige zwei Vektoren berechnet.",
-            "labelF1": "F₁",
-            "labelF2": "F₂",
-            "labelResultant": "Resultierende",
-            "diagramCaption": "Zwei Kräfte, F₁ und F₂, durch Vektoraddition zu einer einzigen resultierenden Kraft zusammengesetzt."
+            "description": "Eine Kraft von 30 N zieht ost-nordöstlich mit (30, 40) N, eine zweite Kraft von 20 N zieht ost-südöstlich mit (20, −10) N am selben Objekt. Komponentenweise Addition ergibt eine resultierende Kraft von (50, 30) N — einen einzigen gleichwertigen Stoß, dessen Betrag (≈58,3 N) und Richtung die tatsächliche Beschleunigung des Objekts bestimmen, genau wie es die Summenoperation oben für beliebige zwei Vektoren berechnet."
           }
         }
       },
@@ -11738,6 +11721,165 @@
         "contactPhonePlaceholder": "z. B. +49 30 123456",
         "contactOrganizationPlaceholder": "z. B. Muster GmbH",
         "contactAddressPlaceholder": "z. B. Musterstraße 1, Berlin"
+      },
+      "live3d": {
+        "educationTitle": "Live-3D-Vektorlabor",
+        "notApplicable": "k. A.",
+        "groups": {
+          "inputs": "Eingaben",
+          "magnitudes": "Beträge",
+          "sumDiff": "Summe und Differenz",
+          "dotAngle": "Skalarprodukt und Winkel",
+          "cross": "Kreuzprodukt und Fläche",
+          "projection": "Projektion von A auf B",
+          "direction": "Einheitsvektoren und Richtung"
+        },
+        "rows": {
+          "vectorA": "Vektor A",
+          "vectorB": "Vektor B",
+          "magA": "Betrag von A",
+          "magB": "Betrag von B",
+          "sum": "Summe A + B",
+          "magSum": "Länge von A + B",
+          "diff": "Differenz A − B",
+          "magDiff": "Länge von A − B",
+          "dot": "Skalarprodukt A·B",
+          "cos": "cos θ",
+          "angleDeg": "Winkel θ",
+          "angleRad": "Winkel θ (Bogenmaß)",
+          "relation": "Beziehung",
+          "cross": "Kreuzprodukt A×B",
+          "crossMag": "Parallelogrammfläche |A×B|",
+          "triangleArea": "Dreiecksfläche",
+          "lagrange": "|A|²|B|² (Lagrange)",
+          "compAonB": "Skalare Projektion",
+          "projAonB": "Vektorielle Projektion",
+          "rejAfromB": "Senkrechter Anteil",
+          "rejMag": "Parallelogrammhöhe",
+          "unitA": "Einheitsvektor Â",
+          "unitB": "Einheitsvektor B̂",
+          "dirAnglesA": "Richtungswinkel von A"
+        },
+        "relation": {
+          "zero": "Nullvektor",
+          "parallel": "Parallel",
+          "antiparallel": "Entgegengesetzt",
+          "orthogonal": "Senkrecht",
+          "acute": "Spitzer Winkel",
+          "obtuse": "Stumpfer Winkel"
+        },
+        "examples": {
+          "forces": "Zwei Kräfte auf einen Körper",
+          "work": "Arbeit: Kraft · Weg",
+          "torque": "Drehmoment r × F",
+          "unitAxes": "Einheitsachsen x̂ und ŷ",
+          "perpendicular": "Senkrechtes Paar",
+          "parallel": "Parallele Vektoren",
+          "opposite": "Entgegengesetzte Vektoren",
+          "cubeDiagonal": "Würfeldiagonale vs. Kante"
+        }
+      },
+      "indicators": {
+        "workedExample": "Rechenbeispiel",
+        "dragLab": {
+          "title": "Vektorspitzen ziehen",
+          "intro": "Ziehen Sie die Spitzen von A und B an eine beliebige Stelle der xy-Ebene. Eingaben, Ergebnistabelle, 3D-Ansicht und jedes Diagramm auf dieser Seite folgen Ihrer Hand.",
+          "hint": "Ansicht der xy-Ebene · z bleibt bei A: {az}, B: {bz}"
+        },
+        "angleGauge": {
+          "title": "Winkel zwischen A und B",
+          "intro": "Der Winkel, den die Skalarproduktformel liefert, auf einer Skala von 0° (gleiche Richtung) über 90° (senkrecht) bis 180° (entgegengesetzt).",
+          "sin": "sin θ"
+        },
+        "dotFormula": {
+          "title": "Skalarprodukt, Term für Term",
+          "intro": "A·B multipliziert die zugehörigen Komponenten und addiert die drei Produkte. Jedes Feld ist eine Achse, mit Ihren eingesetzten Zahlen.",
+          "termX": "x-Term (ax·bx)",
+          "termY": "y-Term (ay·by)",
+          "termZ": "z-Term (az·bz)"
+        },
+        "crossSteps": {
+          "title": "Kreuzprodukt, Schritt für Schritt",
+          "intro": "Jede Komponente von A×B ist eine 2×2-Determinante der beiden anderen Achsen; der letzte Schritt macht aus den drei Komponenten die Parallelogrammfläche.",
+          "stepX": "x-Komponente",
+          "stepY": "y-Komponente",
+          "stepZ": "z-Komponente",
+          "stepMag": "Länge = Fläche"
+        },
+        "projectionFlow": {
+          "title": "Vom Skalarprodukt zur Projektion",
+          "intro": "Wie das Skalarprodukt zum Schatten von A auf B wird: durch |B| teilen ergibt die vorzeichenbehaftete Länge, dann entlang des Einheitsvektors von B ausrichten.",
+          "divide": "÷ |B|",
+          "alongB": "× B̂",
+          "shadowLength": "Schattenlänge",
+          "leftover": "Senkrechter Rest"
+        },
+        "directionDonut": {
+          "title": "Richtungskosinus von A und B",
+          "intro": "Wie sich die Richtung jedes Vektors auf die x-, y- und z-Achse verteilt: Die quadrierten Richtungskosinus ergeben immer genau 1.",
+          "outer": "Außenring: A",
+          "inner": "Innenring: B",
+          "alphaA": "α (A mit x)",
+          "betaA": "β (A mit y)",
+          "gammaA": "γ (A mit z)",
+          "alphaB": "α (B mit x)",
+          "betaB": "β (B mit y)",
+          "gammaB": "γ (B mit z)",
+          "axisX": "x-Anteil",
+          "axisY": "y-Anteil",
+          "axisZ": "z-Anteil"
+        },
+        "lagrange": {
+          "title": "Lagrange-Identität: Skalar vs. Kreuz",
+          "intro": "|A|²|B|² teilt sich immer exakt in (A·B)² plus |A×B|²: der ausgerichtete Anteil des Paares gegenüber dem drehenden Anteil.",
+          "dotPart": "(A·B)²",
+          "crossPart": "|A×B|²",
+          "total": "|A|²|B|²",
+          "check": "cos²θ + sin²θ"
+        },
+        "dotCurve": {
+          "title": "Wie sich A·B mit dem Winkel ändert",
+          "intro": "Beide Längen bleiben, der Winkel dreht sich: A·B = |A||B|cos θ fällt von +|A||B| bei 0° auf null bei 90° und auf −|A||B| bei 180°. Der Punkt markiert Ihre Vektoren.",
+          "axisAngle": "θ (Grad)",
+          "peak": "|A||B| (θ = 0°)",
+          "atRight": "A·B bei θ = 90°",
+          "current": "Ihre Vektoren"
+        },
+        "cosineZone": {
+          "title": "Kosinus-Ähnlichkeitszone",
+          "intro": "cos θ skaliert das Skalarprodukt auf den Bereich −1 bis 1, sodass sich Vektoren jeder Größe allein nach ihrer Richtung vergleichen lassen.",
+          "zone": "Zone",
+          "zones": {
+            "opposed": "Gegenläufig",
+            "diverging": "Auseinander",
+            "converging": "Zueinander",
+            "aligned": "Gleichgerichtet"
+          }
+        },
+        "balance": {
+          "title": "Waage der Dreiecksungleichung",
+          "intro": "Der Weg über A und dann B ist nie kürzer als direkt entlang A+B: |A+B| ≤ |A|+|B|, im Gleichgewicht nur, wenn A und B in dieselbe Richtung zeigen.",
+          "direct": "Direkt |A+B|",
+          "path": "Weg |A|+|B|",
+          "slack": "Gesparte Abkürzung",
+          "balanced": "Im Gleichgewicht"
+        },
+        "magnitudeBars": {
+          "title": "Alle Beträge, geordnet",
+          "intro": "Alle Längen, die dieser Rechner für Ihr Paar liefert, vom größten zum kleinsten sortiert.",
+          "lawLeft": "|A+B|² + |A−B|²",
+          "lawRight": "2(|A|² + |B|²)",
+          "largest": "Größter"
+        },
+        "scaleTrio": {
+          "title": "Was passiert, wenn B skaliert wird",
+          "intro": "Halbieren oder verdoppeln Sie B bei festem A: Skalar- und Kreuzprodukt ändern sich im gleichen Verhältnis, der Winkel zwischen den Vektoren bleibt immer gleich.",
+          "half": "B × 0,5",
+          "current": "B × 1 (Ihr Wert)",
+          "double": "B × 2",
+          "dotAt": "A·B bei {factor}× B",
+          "angleSame": "θ (alle drei)"
+        }
       }
     },
     "matrix-calculator": {

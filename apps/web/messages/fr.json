@@ -11524,15 +11524,7 @@
         "crossProduct": "Produit Vectoriel (A×B)",
         "angleBetween": "Angle Entre les Deux",
         "unitVectorA": "Vecteur Unitaire de A",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramSum": "A+B",
-        "diagramCaption": "Projection 2D (x, y uniquement) des vecteurs A et B et de leur somme, tracée à l'échelle à partir des composantes saisies.",
-        "projectionAOntoB": "Projection de A sur B",
-        "emptyStateMessage": "Saisissez les deux vecteurs et cliquez sur « Calculer » pour voir l'ensemble complet des résultats.",
-        "angleDiagramTitle": "Angle entre les vecteurs",
-        "angleDiagramIntro": "Le même angle que calcule la formule du produit scalaire, tracé comme un arc entre A et B.",
-        "angleDiagramCaption": "Projection 2D (x, y uniquement) des vecteurs A et B avec l'angle entre eux tracé comme un arc."
+        "projectionAOntoB": "Projection de A sur B"
       },
       "education": {
         "intro": {
@@ -11667,24 +11659,19 @@
           "intro": "Quatre autres relations vectorielles qui méritent d'être vues séparément, chacune avec sa propre illustration plutôt qu'une simple formule.",
           "difference": {
             "title": "Différence de vecteurs (A − B)",
-            "description": "Soustraire B de A revient à ajouter A à l'inverse de B (−B), et géométriquement cela trace le vecteur allant de la pointe de B à la pointe de A lorsque les deux partent de la même origine — c'est le déplacement nécessaire pour aller de B à A. Comme la somme, elle se calcule composante par composante : (ax − bx, ay − by, az − bz).",
-            "diagramCaption": "A, B et leur différence A − B, dessinés à l'échelle."
+            "description": "Soustraire B de A revient à ajouter A à l'inverse de B (−B), et géométriquement cela trace le vecteur allant de la pointe de B à la pointe de A lorsque les deux partent de la même origine — c'est le déplacement nécessaire pour aller de B à A. Comme la somme, elle se calcule composante par composante : (ax − bx, ay − by, az − bz)."
           },
           "crossProduct": {
             "title": "Produit vectoriel (A × B) en trois dimensions",
-            "description": "Contrairement à toute autre opération de cette page, le produit vectoriel n'a pleinement de sens qu'en trois dimensions : il produit un nouveau vecteur perpendiculaire au plan contenant A et B (sa direction étant fixée par la règle de la main droite), d'une longueur égale à l'aire du parallélogramme formé par A et B. Inverser l'ordre — B×A au lieu de A×B — fait pointer le résultat dans la direction opposée.",
-            "diagramCaption": "Une vue isométrique (3D) de A, B, du parallélogramme qu'ils forment, et de leur produit vectoriel A×B, perpendiculaire à ce plan."
+            "description": "Contrairement à toute autre opération de cette page, le produit vectoriel n'a pleinement de sens qu'en trois dimensions : il produit un nouveau vecteur perpendiculaire au plan contenant A et B (sa direction étant fixée par la règle de la main droite), d'une longueur égale à l'aire du parallélogramme formé par A et B. Inverser l'ordre — B×A au lieu de A×B — fait pointer le résultat dans la direction opposée."
           },
           "unitVector": {
             "title": "Vecteur unitaire (Â)",
-            "description": "Diviser un vecteur par sa propre norme produit un vecteur unitaire — même direction, mais redimensionné pour avoir une longueur exactement égale à 1. C'est la façon standard d'isoler « dans quelle direction » de « à quelle distance », et la pointe de tout vecteur unitaire tombe exactement sur le cercle unité (ou la sphère unité, en 3D) par définition.",
-            "diagramCaption": "Le vecteur A à côté de son vecteur unitaire Â, qui tombe exactement sur le cercle unité en pointillés."
+            "description": "Diviser un vecteur par sa propre norme produit un vecteur unitaire — même direction, mais redimensionné pour avoir une longueur exactement égale à 1. C'est la façon standard d'isoler « dans quelle direction » de « à quelle distance », et la pointe de tout vecteur unitaire tombe exactement sur le cercle unité (ou la sphère unité, en 3D) par définition."
           },
           "projection": {
             "title": "Projection de A sur B",
-            "description": "La projection de A sur B est « l'ombre » que A projetterait sur la droite de B si la lumière tombait perpendiculairement à B — la partie de A qui pointe réellement dans la direction de B. Sa longueur (la projection scalaire) vaut A·B / |B|, et la projection vectorielle complète met B lui-même à l'échelle de cette même fraction : projᴮA = (A·B / |B|²) B. C'est le cœur géométrique du produit scalaire, et elle reste indéfinie dès que B est un vecteur nul, puisqu'un vecteur nul ne définit aucune droite sur laquelle projeter.",
-            "diagramLabel": "projᴮA",
-            "diagramCaption": "L'ombre de A projetée sur la droite de B — la projection vectorielle de A sur B, avec une perpendiculaire en pointillés reliant la pointe de A au point de projection."
+            "description": "La projection de A sur B est « l'ombre » que A projetterait sur la droite de B si la lumière tombait perpendiculairement à B — la partie de A qui pointe réellement dans la direction de B. Sa longueur (la projection scalaire) vaut A·B / |B|, et la projection vectorielle complète met B lui-même à l'échelle de cette même fraction : projᴮA = (A·B / |B|²) B. C'est le cœur géométrique du produit scalaire, et elle reste indéfinie dès que B est un vecteur nul, puisqu'un vecteur nul ne définit aucune droite sur laquelle projeter."
           }
         },
         "applications": {
@@ -11710,11 +11697,7 @@
           ],
           "forceExample": {
             "title": "Exemple résolu : deux forces sur un même objet",
-            "description": "Une force de 30 N tire vers l'est-nord-est à (30, 40) N et une seconde force de 20 N tire vers l'est-sud-est à (20, −10) N sur le même objet. Les additionner composante par composante donne une force résultante de (50, 30) N — une poussée équivalente unique dont la norme (≈58,3 N) et la direction déterminent l'accélération réelle de l'objet, exactement comme le calcule l'opération Somme ci-dessus pour deux vecteurs quelconques.",
-            "labelF1": "F₁",
-            "labelF2": "F₂",
-            "labelResultant": "Résultante",
-            "diagramCaption": "Deux forces, F₁ et F₂, combinées en une seule force résultante par addition vectorielle."
+            "description": "Une force de 30 N tire vers l'est-nord-est à (30, 40) N et une seconde force de 20 N tire vers l'est-sud-est à (20, −10) N sur le même objet. Les additionner composante par composante donne une force résultante de (50, 30) N — une poussée équivalente unique dont la norme (≈58,3 N) et la direction déterminent l'accélération réelle de l'objet, exactement comme le calcule l'opération Somme ci-dessus pour deux vecteurs quelconques."
           }
         }
       },
@@ -11738,6 +11721,165 @@
         "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
         "contactOrganizationPlaceholder": "ex. Société SARL",
         "contactAddressPlaceholder": "ex. 1 rue de la Paix, Paris"
+      },
+      "live3d": {
+        "educationTitle": "Laboratoire vectoriel 3D en direct",
+        "notApplicable": "N/D",
+        "groups": {
+          "inputs": "Entrées",
+          "magnitudes": "Normes",
+          "sumDiff": "Somme et différence",
+          "dotAngle": "Produit scalaire et angle",
+          "cross": "Produit vectoriel et aire",
+          "projection": "Projection de A sur B",
+          "direction": "Vecteurs unitaires et direction"
+        },
+        "rows": {
+          "vectorA": "Vecteur A",
+          "vectorB": "Vecteur B",
+          "magA": "Norme de A",
+          "magB": "Norme de B",
+          "sum": "Somme A + B",
+          "magSum": "Longueur de A + B",
+          "diff": "Différence A − B",
+          "magDiff": "Longueur de A − B",
+          "dot": "Produit scalaire A·B",
+          "cos": "cos θ",
+          "angleDeg": "Angle θ",
+          "angleRad": "Angle θ (radians)",
+          "relation": "Relation",
+          "cross": "Produit vectoriel A×B",
+          "crossMag": "Aire du parallélogramme |A×B|",
+          "triangleArea": "Aire du triangle",
+          "lagrange": "|A|²|B|² (Lagrange)",
+          "compAonB": "Projection scalaire",
+          "projAonB": "Projection vectorielle",
+          "rejAfromB": "Partie perpendiculaire",
+          "rejMag": "Hauteur du parallélogramme",
+          "unitA": "Vecteur unitaire Â",
+          "unitB": "Vecteur unitaire B̂",
+          "dirAnglesA": "Angles directeurs de A"
+        },
+        "relation": {
+          "zero": "Vecteur nul",
+          "parallel": "Parallèles",
+          "antiparallel": "Opposés",
+          "orthogonal": "Perpendiculaires",
+          "acute": "Angle aigu",
+          "obtuse": "Angle obtus"
+        },
+        "examples": {
+          "forces": "Deux forces sur un objet",
+          "work": "Travail : force · déplacement",
+          "torque": "Moment r × F",
+          "unitAxes": "Axes unitaires x̂ et ŷ",
+          "perpendicular": "Paire perpendiculaire",
+          "parallel": "Vecteurs parallèles",
+          "opposite": "Vecteurs opposés",
+          "cubeDiagonal": "Diagonale du cube vs arête"
+        }
+      },
+      "indicators": {
+        "workedExample": "Exemple résolu",
+        "dragLab": {
+          "title": "Faites glisser les pointes des vecteurs",
+          "intro": "Faites glisser les pointes de A et B n'importe où dans le plan xy. Les entrées, le tableau de résultats, la vue 3D et tous les graphiques de cette page suivent votre main.",
+          "hint": "Vue du plan xy · z reste à A : {az}, B : {bz}"
+        },
+        "angleGauge": {
+          "title": "Angle entre A et B",
+          "intro": "L'angle que la formule du produit scalaire calcule, sur une jauge de 0° (même direction) à 90° (perpendiculaires) puis 180° (opposés).",
+          "sin": "sin θ"
+        },
+        "dotFormula": {
+          "title": "Produit scalaire, terme par terme",
+          "intro": "A·B multiplie les composantes correspondantes et additionne les trois produits. Chaque case est un axe, avec vos nombres substitués.",
+          "termX": "Terme x (ax·bx)",
+          "termY": "Terme y (ay·by)",
+          "termZ": "Terme z (az·bz)"
+        },
+        "crossSteps": {
+          "title": "Produit vectoriel, étape par étape",
+          "intro": "Chaque composante de A×B est un déterminant 2×2 des deux autres axes ; la dernière étape transforme les trois composantes en aire du parallélogramme.",
+          "stepX": "Composante x",
+          "stepY": "Composante y",
+          "stepZ": "Composante z",
+          "stepMag": "Longueur = aire"
+        },
+        "projectionFlow": {
+          "title": "Du produit scalaire à la projection",
+          "intro": "Comment le produit scalaire devient l'ombre de A sur B : divisez par |B| pour la longueur signée, puis orientez-la selon le vecteur unitaire de B.",
+          "divide": "÷ |B|",
+          "alongB": "× B̂",
+          "shadowLength": "Longueur de l'ombre",
+          "leftover": "Reste perpendiculaire"
+        },
+        "directionDonut": {
+          "title": "Cosinus directeurs de A et B",
+          "intro": "Comment la direction de chaque vecteur se répartit entre les axes x, y et z : les cosinus directeurs au carré totalisent toujours exactement 1.",
+          "outer": "Anneau extérieur : A",
+          "inner": "Anneau intérieur : B",
+          "alphaA": "α (A avec x)",
+          "betaA": "β (A avec y)",
+          "gammaA": "γ (A avec z)",
+          "alphaB": "α (B avec x)",
+          "betaB": "β (B avec y)",
+          "gammaB": "γ (B avec z)",
+          "axisX": "part x",
+          "axisY": "part y",
+          "axisZ": "part z"
+        },
+        "lagrange": {
+          "title": "Identité de Lagrange : scalaire vs vectoriel",
+          "intro": "|A|²|B|² se partage toujours exactement en (A·B)² plus |A×B|² : la part alignée du couple face à la part qui tourne.",
+          "dotPart": "(A·B)²",
+          "crossPart": "|A×B|²",
+          "total": "|A|²|B|²",
+          "check": "cos²θ + sin²θ"
+        },
+        "dotCurve": {
+          "title": "Comment A·B varie avec l'angle",
+          "intro": "Gardez les deux longueurs et faites tourner l'angle : A·B = |A||B|cos θ passe de +|A||B| à 0° à zéro à 90°, puis à −|A||B| à 180°. Le point marque vos vecteurs.",
+          "axisAngle": "θ (degrés)",
+          "peak": "|A||B| (θ = 0°)",
+          "atRight": "A·B à θ = 90°",
+          "current": "Vos vecteurs"
+        },
+        "cosineZone": {
+          "title": "Zone de similarité cosinus",
+          "intro": "cos θ ramène le produit scalaire à l'intervalle de −1 à 1, pour comparer des vecteurs de toute taille par leur seule direction.",
+          "zone": "Zone",
+          "zones": {
+            "opposed": "Opposés",
+            "diverging": "Divergents",
+            "converging": "Convergents",
+            "aligned": "Alignés"
+          }
+        },
+        "balance": {
+          "title": "Balance de l'inégalité triangulaire",
+          "intro": "Suivre A puis B n'est jamais plus court qu'aller tout droit selon A+B : |A+B| ≤ |A|+|B|, à l'équilibre seulement quand A et B pointent dans la même direction.",
+          "direct": "Direct |A+B|",
+          "path": "Chemin |A|+|B|",
+          "slack": "Raccourci gagné",
+          "balanced": "Équilibrée"
+        },
+        "magnitudeBars": {
+          "title": "Toutes les normes, classées",
+          "intro": "Toutes les longueurs que ce calculateur produit pour votre couple, triées de la plus grande à la plus petite.",
+          "lawLeft": "|A+B|² + |A−B|²",
+          "lawRight": "2(|A|² + |B|²)",
+          "largest": "La plus grande"
+        },
+        "scaleTrio": {
+          "title": "Que se passe-t-il si l'on met B à l'échelle",
+          "intro": "Divisez B par deux ou doublez-le avec A fixe : les produits scalaire et vectoriel varient dans la même proportion, tandis que l'angle entre les vecteurs ne change jamais.",
+          "half": "B × 0,5",
+          "current": "B × 1 (le vôtre)",
+          "double": "B × 2",
+          "dotAt": "A·B à {factor}× B",
+          "angleSame": "θ (les trois)"
+        }
       }
     },
     "matrix-calculator": {

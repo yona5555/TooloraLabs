@@ -11524,15 +11524,7 @@
         "crossProduct": "Producto Cruz (A×B)",
         "angleBetween": "Ángulo Entre Ellos",
         "unitVectorA": "Vector Unitario de A",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramSum": "A+B",
-        "diagramCaption": "Proyección 2D (solo x, y) de los vectores A y B y su suma, dibujada a escala a partir de las componentes introducidas.",
-        "projectionAOntoB": "Proyección de A sobre B",
-        "emptyStateMessage": "Introduce ambos vectores y pulsa \"Calcular\" para ver el conjunto completo de resultados.",
-        "angleDiagramTitle": "Ángulo entre los vectores",
-        "angleDiagramIntro": "El mismo ángulo que calcula la fórmula del producto escalar, trazado como un arco entre A y B.",
-        "angleDiagramCaption": "Proyección 2D (solo x, y) de los vectores A y B con el ángulo entre ellos trazado como un arco."
+        "projectionAOntoB": "Proyección de A sobre B"
       },
       "education": {
         "intro": {
@@ -11667,24 +11659,19 @@
           "intro": "Cuatro relaciones vectoriales más que merecen verse por separado, cada una con su propia imagen en vez de solo una fórmula.",
           "difference": {
             "title": "Diferencia de vectores (A − B)",
-            "description": "Restar B de A es lo mismo que sumar A al inverso de B (−B), y geométricamente traza el vector que va desde la punta de B hasta la punta de A cuando ambos parten del mismo origen — es el desplazamiento necesario para ir de B a A. Igual que la suma, se calcula componente a componente: (ax − bx, ay − by, az − bz).",
-            "diagramCaption": "A, B y su diferencia A − B, dibujados a escala."
+            "description": "Restar B de A es lo mismo que sumar A al inverso de B (−B), y geométricamente traza el vector que va desde la punta de B hasta la punta de A cuando ambos parten del mismo origen — es el desplazamiento necesario para ir de B a A. Igual que la suma, se calcula componente a componente: (ax − bx, ay − by, az − bz)."
           },
           "crossProduct": {
             "title": "Producto vectorial (A × B) en tres dimensiones",
-            "description": "A diferencia de cualquier otra operación de esta página, el producto vectorial solo tiene pleno sentido en tres dimensiones: produce un nuevo vector perpendicular al plano que contiene tanto a A como a B (su dirección la fija la regla de la mano derecha), con una longitud igual al área del paralelogramo que forman A y B. Si se invierte el orden — B×A en vez de A×B —, el resultado apunta en la dirección opuesta.",
-            "diagramCaption": "Una vista isométrica (3D) de A, B, el paralelogramo que forman y su producto vectorial A×B, perpendicular a ese plano."
+            "description": "A diferencia de cualquier otra operación de esta página, el producto vectorial solo tiene pleno sentido en tres dimensiones: produce un nuevo vector perpendicular al plano que contiene tanto a A como a B (su dirección la fija la regla de la mano derecha), con una longitud igual al área del paralelogramo que forman A y B. Si se invierte el orden — B×A en vez de A×B —, el resultado apunta en la dirección opuesta."
           },
           "unitVector": {
             "title": "Vector unitario (Â)",
-            "description": "Dividir un vector entre su propia magnitud produce un vector unitario — misma dirección, pero reescalado a una longitud exactamente igual a 1. Es la forma estándar de aislar \"hacia dónde\" de \"qué tan lejos\", y la punta de todo vector unitario cae exactamente sobre la circunferencia unitaria (o la esfera unitaria, en 3D) por definición.",
-            "diagramCaption": "El vector A junto a su vector unitario Â, que cae exactamente sobre la circunferencia unitaria punteada."
+            "description": "Dividir un vector entre su propia magnitud produce un vector unitario — misma dirección, pero reescalado a una longitud exactamente igual a 1. Es la forma estándar de aislar \"hacia dónde\" de \"qué tan lejos\", y la punta de todo vector unitario cae exactamente sobre la circunferencia unitaria (o la esfera unitaria, en 3D) por definición."
           },
           "projection": {
             "title": "Proyección de A sobre B",
-            "description": "La proyección de A sobre B es la \"sombra\" que A proyectaría sobre la línea de B si la luz incidiera perpendicular a B — la parte de A que realmente apunta en la dirección de B. Su longitud (la proyección escalar) es A·B / |B|, y la proyección vectorial completa escala el propio B por esa misma fracción: projᴮA = (A·B / |B|²) B. Es el corazón geométrico del producto escalar, y queda indefinida siempre que B sea un vector nulo, ya que un vector nulo no define ninguna línea sobre la que proyectar.",
-            "diagramLabel": "projᴮA",
-            "diagramCaption": "La sombra de A proyectada sobre la línea de B — la proyección vectorial de A sobre B, con una perpendicular punteada que conecta la punta de A con el punto de proyección."
+            "description": "La proyección de A sobre B es la \"sombra\" que A proyectaría sobre la línea de B si la luz incidiera perpendicular a B — la parte de A que realmente apunta en la dirección de B. Su longitud (la proyección escalar) es A·B / |B|, y la proyección vectorial completa escala el propio B por esa misma fracción: projᴮA = (A·B / |B|²) B. Es el corazón geométrico del producto escalar, y queda indefinida siempre que B sea un vector nulo, ya que un vector nulo no define ninguna línea sobre la que proyectar."
           }
         },
         "applications": {
@@ -11710,11 +11697,7 @@
           ],
           "forceExample": {
             "title": "Ejemplo resuelto: dos fuerzas sobre un mismo objeto",
-            "description": "Una fuerza de 30 N tira hacia el este-noreste con (30, 40) N y una segunda fuerza de 20 N tira hacia el este-sureste con (20, −10) N sobre el mismo objeto. Sumarlas componente a componente da una fuerza resultante de (50, 30) N — un único empuje equivalente cuya magnitud (≈58.3 N) y dirección determinan la aceleración real del objeto, tal como calcula la operación de Suma anterior para cualquier par de vectores.",
-            "labelF1": "F₁",
-            "labelF2": "F₂",
-            "labelResultant": "Resultante",
-            "diagramCaption": "Dos fuerzas, F₁ y F₂, combinadas en una única fuerza resultante mediante suma vectorial."
+            "description": "Una fuerza de 30 N tira hacia el este-noreste con (30, 40) N y una segunda fuerza de 20 N tira hacia el este-sureste con (20, −10) N sobre el mismo objeto. Sumarlas componente a componente da una fuerza resultante de (50, 30) N — un único empuje equivalente cuya magnitud (≈58.3 N) y dirección determinan la aceleración real del objeto, tal como calcula la operación de Suma anterior para cualquier par de vectores."
           }
         }
       },
@@ -11738,6 +11721,165 @@
         "contactPhonePlaceholder": "p. ej. +34 612 345 678",
         "contactOrganizationPlaceholder": "p. ej. Empresa S.L.",
         "contactAddressPlaceholder": "p. ej. Calle Mayor 1, Madrid"
+      },
+      "live3d": {
+        "educationTitle": "Laboratorio vectorial 3D en vivo",
+        "notApplicable": "N/D",
+        "groups": {
+          "inputs": "Entradas",
+          "magnitudes": "Módulos",
+          "sumDiff": "Suma y diferencia",
+          "dotAngle": "Producto escalar y ángulo",
+          "cross": "Producto vectorial y área",
+          "projection": "Proyección de A sobre B",
+          "direction": "Vectores unitarios y dirección"
+        },
+        "rows": {
+          "vectorA": "Vector A",
+          "vectorB": "Vector B",
+          "magA": "Módulo de A",
+          "magB": "Módulo de B",
+          "sum": "Suma A + B",
+          "magSum": "Longitud de A + B",
+          "diff": "Diferencia A − B",
+          "magDiff": "Longitud de A − B",
+          "dot": "Producto escalar A·B",
+          "cos": "cos θ",
+          "angleDeg": "Ángulo θ",
+          "angleRad": "Ángulo θ (radianes)",
+          "relation": "Relación",
+          "cross": "Producto vectorial A×B",
+          "crossMag": "Área del paralelogramo |A×B|",
+          "triangleArea": "Área del triángulo",
+          "lagrange": "|A|²|B|² (Lagrange)",
+          "compAonB": "Proyección escalar",
+          "projAonB": "Proyección vectorial",
+          "rejAfromB": "Parte perpendicular",
+          "rejMag": "Altura del paralelogramo",
+          "unitA": "Vector unitario Â",
+          "unitB": "Vector unitario B̂",
+          "dirAnglesA": "Ángulos directores de A"
+        },
+        "relation": {
+          "zero": "Vector nulo",
+          "parallel": "Paralelos",
+          "antiparallel": "Opuestos",
+          "orthogonal": "Perpendiculares",
+          "acute": "Ángulo agudo",
+          "obtuse": "Ángulo obtuso"
+        },
+        "examples": {
+          "forces": "Dos fuerzas sobre un objeto",
+          "work": "Trabajo: fuerza · desplazamiento",
+          "torque": "Momento r × F",
+          "unitAxes": "Ejes unitarios x̂ e ŷ",
+          "perpendicular": "Par perpendicular",
+          "parallel": "Vectores paralelos",
+          "opposite": "Vectores opuestos",
+          "cubeDiagonal": "Diagonal del cubo vs arista"
+        }
+      },
+      "indicators": {
+        "workedExample": "Ejemplo resuelto",
+        "dragLab": {
+          "title": "Arrastra las puntas de los vectores",
+          "intro": "Arrastra las puntas de A y B a cualquier punto del plano xy. Las entradas, la tabla de resultados, la vista 3D y todos los gráficos de esta página siguen tu mano.",
+          "hint": "Vista del plano xy · z se mantiene en A: {az}, B: {bz}"
+        },
+        "angleGauge": {
+          "title": "Ángulo entre A y B",
+          "intro": "El ángulo que resuelve la fórmula del producto escalar, en un indicador de 0° (misma dirección) a 90° (perpendiculares) y 180° (opuestos).",
+          "sin": "sen θ"
+        },
+        "dotFormula": {
+          "title": "Producto escalar, término a término",
+          "intro": "A·B multiplica las componentes correspondientes y suma los tres productos. Cada caja es un eje, con tus números sustituidos.",
+          "termX": "Término x (ax·bx)",
+          "termY": "Término y (ay·by)",
+          "termZ": "Término z (az·bz)"
+        },
+        "crossSteps": {
+          "title": "Producto vectorial, paso a paso",
+          "intro": "Cada componente de A×B es un determinante 2×2 de los otros dos ejes; el último paso convierte las tres componentes en el área del paralelogramo.",
+          "stepX": "Componente x",
+          "stepY": "Componente y",
+          "stepZ": "Componente z",
+          "stepMag": "Longitud = área"
+        },
+        "projectionFlow": {
+          "title": "Del producto escalar a la proyección",
+          "intro": "Cómo el producto escalar se convierte en la sombra de A sobre B: divide entre |B| para la longitud con signo y orienta el resultado según el vector unitario de B.",
+          "divide": "÷ |B|",
+          "alongB": "× B̂",
+          "shadowLength": "Longitud de la sombra",
+          "leftover": "Resto perpendicular"
+        },
+        "directionDonut": {
+          "title": "Cosenos directores de A y B",
+          "intro": "Cómo se reparte la dirección de cada vector entre los ejes x, y y z: los cosenos directores al cuadrado siempre suman exactamente 1.",
+          "outer": "Anillo exterior: A",
+          "inner": "Anillo interior: B",
+          "alphaA": "α (A con x)",
+          "betaA": "β (A con y)",
+          "gammaA": "γ (A con z)",
+          "alphaB": "α (B con x)",
+          "betaB": "β (B con y)",
+          "gammaB": "γ (B con z)",
+          "axisX": "parte x",
+          "axisY": "parte y",
+          "axisZ": "parte z"
+        },
+        "lagrange": {
+          "title": "Identidad de Lagrange: escalar vs vectorial",
+          "intro": "|A|²|B|² siempre se divide exactamente en (A·B)² más |A×B|²: la parte alineada del par frente a la parte que gira.",
+          "dotPart": "(A·B)²",
+          "crossPart": "|A×B|²",
+          "total": "|A|²|B|²",
+          "check": "cos²θ + sen²θ"
+        },
+        "dotCurve": {
+          "title": "Cómo cambia A·B con el ángulo",
+          "intro": "Mantén ambas longitudes y gira el ángulo: A·B = |A||B|cos θ baja de +|A||B| a 0° a cero a 90° y a −|A||B| a 180°. El punto marca tus vectores.",
+          "axisAngle": "θ (grados)",
+          "peak": "|A||B| (θ = 0°)",
+          "atRight": "A·B con θ = 90°",
+          "current": "Tus vectores"
+        },
+        "cosineZone": {
+          "title": "Zona de similitud coseno",
+          "intro": "cos θ reescala el producto escalar al rango de −1 a 1, de modo que vectores de cualquier tamaño se comparan solo por su dirección.",
+          "zone": "Zona",
+          "zones": {
+            "opposed": "Opuestos",
+            "diverging": "Divergentes",
+            "converging": "Convergentes",
+            "aligned": "Alineados"
+          }
+        },
+        "balance": {
+          "title": "Balanza de la desigualdad triangular",
+          "intro": "Ir por A y luego por B nunca es más corto que ir directo por A+B: |A+B| ≤ |A|+|B|, en equilibrio solo cuando A y B apuntan en la misma dirección.",
+          "direct": "Directo |A+B|",
+          "path": "Camino |A|+|B|",
+          "slack": "Atajo ahorrado",
+          "balanced": "Equilibrada"
+        },
+        "magnitudeBars": {
+          "title": "Todos los módulos, ordenados",
+          "intro": "Todas las longitudes que esta calculadora produce para tu par, ordenadas de mayor a menor.",
+          "lawLeft": "|A+B|² + |A−B|²",
+          "lawRight": "2(|A|² + |B|²)",
+          "largest": "Mayor"
+        },
+        "scaleTrio": {
+          "title": "Qué pasa al escalar B",
+          "intro": "Reduce B a la mitad o duplícalo con A fijo: los productos escalar y vectorial cambian en la misma proporción, mientras el ángulo entre los vectores no cambia nunca.",
+          "half": "B × 0,5",
+          "current": "B × 1 (el tuyo)",
+          "double": "B × 2",
+          "dotAt": "A·B con {factor}× B",
+          "angleSame": "θ (los tres)"
+        }
       }
     },
     "matrix-calculator": {

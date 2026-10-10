@@ -44,6 +44,7 @@ export * from "./ProjectileMotionCalculator";
 export * from "./ReadabilityScoreCalculator";
 export * from "./StudyTimeCalculator";
 export * from "./VectorCalculator";
+export * from "./VectorGeometry";
 export * from "./MatrixCalculator";
 export * from "./MolarMassCalculator";
 export * from "./StoichiometryCalculator";

@@ -11524,15 +11524,7 @@
         "crossProduct": "Cross Product (A×B)",
         "angleBetween": "Angle Between",
         "unitVectorA": "Unit Vector of A",
-        "diagramA": "A",
-        "diagramB": "B",
-        "diagramSum": "A+B",
-        "diagramCaption": "2D projection (x, y only) of vectors A and B and their sum, drawn to scale from the entered components.",
-        "projectionAOntoB": "Projection of A onto B",
-        "emptyStateMessage": "Enter both vectors and press Calculate to see the full set of results.",
-        "angleDiagramTitle": "Angle Between the Vectors",
-        "angleDiagramIntro": "The same angle the dot-product formula solves for, traced as an arc between A and B.",
-        "angleDiagramCaption": "2D projection (x, y only) of vectors A and B with the angle between them traced as an arc."
+        "projectionAOntoB": "Projection of A onto B"
       },
       "education": {
         "intro": {
@@ -11667,24 +11659,19 @@
           "intro": "Four more vector relationships worth seeing on their own, each with its own picture rather than just a formula.",
           "difference": {
             "title": "Vector Difference (A − B)",
-            "description": "Subtracting B from A is the same as adding A to the reverse of B (−B), and geometrically it draws the vector that goes from B's tip to A's tip when both start at the same origin — it's the displacement needed to get from B to A. Like the sum, it's computed component by component: (ax − bx, ay − by, az − bz).",
-            "diagramCaption": "A, B, and their difference A − B, drawn to scale."
+            "description": "Subtracting B from A is the same as adding A to the reverse of B (−B), and geometrically it draws the vector that goes from B's tip to A's tip when both start at the same origin — it's the displacement needed to get from B to A. Like the sum, it's computed component by component: (ax − bx, ay − by, az − bz)."
           },
           "crossProduct": {
             "title": "Cross Product (A × B) in Three Dimensions",
-            "description": "Unlike every other operation on this page, the cross product only makes full sense in three dimensions: it produces a new vector that's perpendicular to the plane containing both A and B (its direction set by the right-hand rule), with a length equal to the area of the parallelogram A and B span. Flip the order — B×A instead of A×B — and the result points the opposite way.",
-            "diagramCaption": "An isometric (3D) view of A, B, the parallelogram they span, and their cross product A×B, perpendicular to that plane."
+            "description": "Unlike every other operation on this page, the cross product only makes full sense in three dimensions: it produces a new vector that's perpendicular to the plane containing both A and B (its direction set by the right-hand rule), with a length equal to the area of the parallelogram A and B span. Flip the order — B×A instead of A×B — and the result points the opposite way."
           },
           "unitVector": {
             "title": "Unit Vector (Â)",
-            "description": "Dividing a vector by its own magnitude produces a unit vector — same direction, but rescaled so its length is exactly 1. It's the standard way to isolate \"which way\" from \"how far,\" and every unit vector's tip lands exactly on the unit circle (or unit sphere, in 3D) by definition.",
-            "diagramCaption": "Vector A alongside its unit vector Â, which lands exactly on the dashed unit circle."
+            "description": "Dividing a vector by its own magnitude produces a unit vector — same direction, but rescaled so its length is exactly 1. It's the standard way to isolate \"which way\" from \"how far,\" and every unit vector's tip lands exactly on the unit circle (or unit sphere, in 3D) by definition."
           },
           "projection": {
             "title": "Projection of A onto B",
-            "description": "The projection of A onto B is the \"shadow\" A would cast on B's line if light fell perpendicular to B — the part of A that actually points along B's direction. Its length (the scalar projection) is A·B / |B|, and the full vector projection scales B itself by that same fraction: projᴮA = (A·B / |B|²) B. It's the geometric heart of the dot product, and it's undefined whenever B is a zero vector, since a zero vector has no line to project onto.",
-            "diagramLabel": "projᴮA",
-            "diagramCaption": "A's shadow cast onto B's line — the vector projection of A onto B, with a dashed perpendicular connecting A's tip to the projection point."
+            "description": "The projection of A onto B is the \"shadow\" A would cast on B's line if light fell perpendicular to B — the part of A that actually points along B's direction. Its length (the scalar projection) is A·B / |B|, and the full vector projection scales B itself by that same fraction: projᴮA = (A·B / |B|²) B. It's the geometric heart of the dot product, and it's undefined whenever B is a zero vector, since a zero vector has no line to project onto."
           }
         },
         "applications": {
@@ -11710,11 +11697,7 @@
           ],
           "forceExample": {
             "title": "Worked Example: Two Forces on One Object",
-            "description": "A 30 N force pulls east-northeast at (30, 40) N and a second 20 N force pulls east-southeast at (20, −10) N on the same object. Adding them component by component gives a resultant force of (50, 30) N — a single equivalent push whose magnitude (≈58.3 N) and direction determine the object's actual acceleration, exactly as the Sum operation above computes for any two vectors.",
-            "labelF1": "F₁",
-            "labelF2": "F₂",
-            "labelResultant": "Resultant",
-            "diagramCaption": "Two forces, F₁ and F₂, combined into a single resultant force by vector addition."
+            "description": "A 30 N force pulls east-northeast at (30, 40) N and a second 20 N force pulls east-southeast at (20, −10) N on the same object. Adding them component by component gives a resultant force of (50, 30) N — a single equivalent push whose magnitude (≈58.3 N) and direction determine the object's actual acceleration, exactly as the Sum operation above computes for any two vectors."
           }
         }
       },
@@ -11738,6 +11721,165 @@
         "contactPhonePlaceholder": "e.g. +1 555 123 4567",
         "contactOrganizationPlaceholder": "e.g. Acme Financial",
         "contactAddressPlaceholder": "e.g. 123 Main St, City"
+      },
+      "live3d": {
+        "educationTitle": "Live 3D Vector Lab",
+        "notApplicable": "N/A",
+        "groups": {
+          "inputs": "Inputs",
+          "magnitudes": "Magnitudes",
+          "sumDiff": "Sum and difference",
+          "dotAngle": "Dot product and angle",
+          "cross": "Cross product and area",
+          "projection": "Projection of A onto B",
+          "direction": "Unit vectors and direction"
+        },
+        "rows": {
+          "vectorA": "Vector A",
+          "vectorB": "Vector B",
+          "magA": "Magnitude of A",
+          "magB": "Magnitude of B",
+          "sum": "Sum A + B",
+          "magSum": "Length of A + B",
+          "diff": "Difference A − B",
+          "magDiff": "Length of A − B",
+          "dot": "Dot product A·B",
+          "cos": "cos θ",
+          "angleDeg": "Angle θ",
+          "angleRad": "Angle θ (radians)",
+          "relation": "Relationship",
+          "cross": "Cross product A×B",
+          "crossMag": "Parallelogram area |A×B|",
+          "triangleArea": "Triangle area",
+          "lagrange": "|A|²|B|² (Lagrange)",
+          "compAonB": "Scalar projection",
+          "projAonB": "Vector projection",
+          "rejAfromB": "Perpendicular part",
+          "rejMag": "Parallelogram height",
+          "unitA": "Unit vector Â",
+          "unitB": "Unit vector B̂",
+          "dirAnglesA": "Direction angles of A"
+        },
+        "relation": {
+          "zero": "Zero vector",
+          "parallel": "Parallel",
+          "antiparallel": "Opposite",
+          "orthogonal": "Perpendicular",
+          "acute": "Acute angle",
+          "obtuse": "Obtuse angle"
+        },
+        "examples": {
+          "forces": "Two forces on one object",
+          "work": "Work: force · displacement",
+          "torque": "Torque r × F",
+          "unitAxes": "Unit axes x̂ and ŷ",
+          "perpendicular": "Perpendicular pair",
+          "parallel": "Parallel vectors",
+          "opposite": "Opposite vectors",
+          "cubeDiagonal": "Cube diagonal vs edge"
+        }
+      },
+      "indicators": {
+        "workedExample": "Worked Example",
+        "dragLab": {
+          "title": "Drag the Vector Tips",
+          "intro": "Drag the tips of A and B anywhere in the xy-plane. The tool's inputs, the result table, the 3D view and every chart on this page follow your hand.",
+          "hint": "xy-plane view · z stays at A: {az}, B: {bz}"
+        },
+        "angleGauge": {
+          "title": "Angle Between A and B",
+          "intro": "The angle the dot-product formula solves for, on a gauge from 0° (same direction) through 90° (perpendicular) to 180° (opposite).",
+          "sin": "sin θ"
+        },
+        "dotFormula": {
+          "title": "Dot Product, Term by Term",
+          "intro": "A·B multiplies matching components and adds the three products. Each box is one axis, with your numbers substituted.",
+          "termX": "x term (ax·bx)",
+          "termY": "y term (ay·by)",
+          "termZ": "z term (az·bz)"
+        },
+        "crossSteps": {
+          "title": "Cross Product, Step by Step",
+          "intro": "Each component of A×B is a 2×2 determinant of the other two axes; the last step turns the three components into the parallelogram area.",
+          "stepX": "x component",
+          "stepY": "y component",
+          "stepZ": "z component",
+          "stepMag": "Length = area"
+        },
+        "projectionFlow": {
+          "title": "From Dot Product to Projection",
+          "intro": "How the dot product becomes A's shadow on B: divide by |B| for the signed length, then point it along B's unit vector.",
+          "divide": "÷ |B|",
+          "alongB": "× B̂",
+          "shadowLength": "Shadow length",
+          "leftover": "Perpendicular remainder"
+        },
+        "directionDonut": {
+          "title": "Direction Cosines of A and B",
+          "intro": "How each vector's direction is shared between the x, y and z axes: the squared direction cosines always add up to exactly 1.",
+          "outer": "Outer ring: A",
+          "inner": "Inner ring: B",
+          "alphaA": "α (A with x)",
+          "betaA": "β (A with y)",
+          "gammaA": "γ (A with z)",
+          "alphaB": "α (B with x)",
+          "betaB": "β (B with y)",
+          "gammaB": "γ (B with z)",
+          "axisX": "x share",
+          "axisY": "y share",
+          "axisZ": "z share"
+        },
+        "lagrange": {
+          "title": "Lagrange's Identity: Dot vs Cross",
+          "intro": "|A|²|B|² always splits exactly into (A·B)² plus |A×B|²: the aligned part of the pair versus the turning part.",
+          "dotPart": "(A·B)²",
+          "crossPart": "|A×B|²",
+          "total": "|A|²|B|²",
+          "check": "cos²θ + sin²θ"
+        },
+        "dotCurve": {
+          "title": "How A·B Changes with the Angle",
+          "intro": "Keep both lengths and turn the angle: A·B = |A||B|cos θ falls from +|A||B| at 0° to zero at 90° and −|A||B| at 180°. The dot marks your vectors.",
+          "axisAngle": "θ (degrees)",
+          "peak": "|A||B| (θ = 0°)",
+          "atRight": "A·B at θ = 90°",
+          "current": "Your vectors"
+        },
+        "cosineZone": {
+          "title": "Cosine Similarity Zone",
+          "intro": "cos θ rescales the dot product to the range −1 to 1, so vectors of any size can be compared by direction alone.",
+          "zone": "Zone",
+          "zones": {
+            "opposed": "Opposed",
+            "diverging": "Diverging",
+            "converging": "Converging",
+            "aligned": "Aligned"
+          }
+        },
+        "balance": {
+          "title": "Triangle Inequality Balance",
+          "intro": "Going along A and then B is never shorter than going straight along A+B: |A+B| ≤ |A|+|B|, level only when A and B point the same way.",
+          "direct": "Direct |A+B|",
+          "path": "Path |A|+|B|",
+          "slack": "Shortcut saved",
+          "balanced": "Balanced"
+        },
+        "magnitudeBars": {
+          "title": "Every Magnitude, Ranked",
+          "intro": "All the lengths this calculator produces for your pair, sorted from largest to smallest.",
+          "lawLeft": "|A+B|² + |A−B|²",
+          "lawRight": "2(|A|² + |B|²)",
+          "largest": "Largest"
+        },
+        "scaleTrio": {
+          "title": "What Happens When B Is Scaled",
+          "intro": "Halve or double B with A fixed: the dot and cross products scale with it, while the angle between the vectors never changes.",
+          "half": "B × 0.5",
+          "current": "B × 1 (yours)",
+          "double": "B × 2",
+          "dotAt": "A·B at {factor}× B",
+          "angleSame": "θ (all three)"
+        }
       }
     },
     "matrix-calculator": {
