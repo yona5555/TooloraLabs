@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import * as THREE from "three";
-import { Edges, Html, Line } from "@react-three/drei";
+import { Edges, Line } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import type { Pt } from "@tooloralabs/tools";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
@@ -39,10 +40,8 @@ export default function AreaScene3D({ outline, grid, dims, marks = [], areaLabel
 
   const edgeColor = p.dark ? "#e4e4e7" : "#1e3a8a";
   const bg = p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.9)";
-  const pill = (text: string, color = p.text) => (
-    <span style={{ color, background: bg, border: `1px solid ${color}55`, borderRadius: 6, padding: "1px 6px", fontSize: 11, fontWeight: 600, whiteSpace: "nowrap", fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>
-      {text}
-    </span>
+  const pill = (pos: [number, number, number], text: string, color = p.text, key?: number) => (
+    <Label3D key={key} position={pos} color={color} bg={bg} border={`${color}55`} text={text} />
   );
 
   return (
@@ -62,20 +61,14 @@ export default function AreaScene3D({ outline, grid, dims, marks = [], areaLabel
         return (
           <group key={i}>
             <Line points={[from, to]} color={p.warning} lineWidth={2.5} />
-            <Html position={mid} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-              {pill(dm.text)}
-            </Html>
+            {pill(mid, dm.text)}
           </group>
         );
       })}
       {marks.map((mk, i) => (
-        <Html key={i} position={to3(mk.at, top + 0.06)} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-          {pill(mk.text, p.accent)}
-        </Html>
+        pill(to3(mk.at, top + 0.06), mk.text, p.accent, i)
       ))}
-      <Html position={[0, DEPTH + 0.9, 0]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-        {pill(areaLabel, p.primary)}
-      </Html>
+      {pill([0, DEPTH + 0.9, 0], areaLabel, p.primary)}
       <gridHelper args={[8, 16, p.grid, p.grid]} position={[0, -0.005, 0]} />
     </group>
   );

@@ -9,6 +9,8 @@ export type Scene3DCanvasProps = {
   children: ReactNode;
   camera?: [number, number, number];
   autoRotate?: boolean;
+  /** Set false when the scene fits its own camera to the canvas (FitWidth would fight it). */
+  fitWidth?: boolean;
 };
 
 /** Tall, narrow canvases (the table sets the height) would crop the sides; widen the view instead. */
@@ -30,6 +32,7 @@ export default function Scene3DCanvas({
   children,
   camera = [6, 5, 7],
   autoRotate = false,
+  fitWidth = true,
 }: Scene3DCanvasProps) {
   const p = usePalette3D();
   return (
@@ -43,7 +46,7 @@ export default function Scene3DCanvas({
       <ambientLight intensity={p.dark ? 0.55 : 0.7} />
       <directionalLight position={[6, 10, 6]} intensity={p.dark ? 0.9 : 1.1} />
       <directionalLight position={[-6, 4, -4]} intensity={0.35} />
-      <FitWidth />
+      {fitWidth ? <FitWidth /> : null}
       {children}
       <OrbitControls
         makeDefault

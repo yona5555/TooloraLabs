@@ -12,7 +12,8 @@ const R = 100;
 const LIMIT = 3;
 
 function polar(angle: number, r: number): [number, number] {
-  return [CX + r * Math.cos(angle), CY - r * Math.sin(angle)];
+  // Rounded: server (Node) and browser trig can differ in the last digit, which breaks hydration.
+  return [Math.round((CX + r * Math.cos(angle)) * 1000) / 1000, Math.round((CY - r * Math.sin(angle)) * 1000) / 1000];
 }
 
 /** Type #8 (Gradient Gauge): Pearson's second skewness 3(x̄ − median)/s on a −3…+3 dial — left-skewed, symmetric, right-skewed. */

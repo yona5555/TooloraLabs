@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import type { Mesh, MeshStandardMaterial } from "three";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 import type { DigitTower } from "@tooloralabs/tools";
@@ -21,9 +21,9 @@ const height = (digit: string) => 0.35 + Number(digit) * 0.16;
 
 function Label({ position, color, children, size = 12, opacity = 1 }: { position: [number, number, number]; color: string; children: ReactNode; size?: number; opacity?: number }) {
   return (
-    <Html position={position} center zIndexRange={[10, 0]} style={{ pointerEvents: "none" }}>
-      <span style={{ color, opacity, fontSize: size, fontWeight: 700, whiteSpace: "nowrap", fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>{children}</span>
-    </Html>
+    <Label3D position={position} color={color} opacity={opacity} fontSize={size} weight={700}>
+        {children}
+      </Label3D>
   );
 }
 

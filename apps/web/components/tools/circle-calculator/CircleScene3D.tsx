@@ -1,6 +1,7 @@
 "use client";
 
-import { Edges, Html, Line } from "@react-three/drei";
+import { Edges, Line } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
 /**
@@ -21,27 +22,8 @@ const S = R / Math.SQRT2;
 export default function CircleScene3D({ labels }: CircleScene3DProps) {
   const p = usePalette3D();
   const bg = p.dark ? "rgba(24,24,27,0.85)" : "rgba(255,255,255,0.92)";
-  const pill = (text: string, color: string) => (
-    <span
-      style={{
-        color,
-        background: bg,
-        border: `1px solid ${color}66`,
-        borderRadius: 6,
-        padding: "1px 6px",
-        fontSize: 11,
-        fontWeight: 600,
-        whiteSpace: "nowrap",
-        fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-      }}
-    >
-      {text}
-    </span>
-  );
   const at = (pos: [number, number, number], text: string, color: string) => (
-    <Html position={pos} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-      {pill(text, color)}
-    </Html>
+    <Label3D position={pos} color={color} bg={bg} text={text} />
   );
 
   return (

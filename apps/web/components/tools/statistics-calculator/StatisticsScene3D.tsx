@@ -1,7 +1,7 @@
 "use client";
 
 import { DoubleSide } from "three";
-import { Html } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import type { ReactNode } from "react";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 import type { StatsHistogramBin } from "@tooloralabs/tools";
@@ -24,9 +24,9 @@ const Y0 = -1.3;
 
 function Label({ position, color, children, bold = false }: { position: [number, number, number]; color: string; children: ReactNode; bold?: boolean }) {
   return (
-    <Html position={position} center zIndexRange={[10, 0]} style={{ pointerEvents: "none" }}>
-      <span style={{ color, fontSize: 11, fontWeight: bold ? 700 : 500, whiteSpace: "nowrap", fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>{children}</span>
-    </Html>
+    <Label3D position={position} color={color} weight={bold ? 700 : 500}>
+        {children}
+      </Label3D>
   );
 }
 

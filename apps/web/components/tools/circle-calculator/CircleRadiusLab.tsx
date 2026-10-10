@@ -94,7 +94,12 @@ export default function CircleRadiusLab() {
     >
       <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl" aria-label={t("lab.aria")}>
         <Mafs viewBox={{ x: [-2.3, 2.3], y: [-2.3, 2.3] }} height={320} pan={false} zoom={false}>
-          <Coordinates.Cartesian xAxis={{ lines: 0.5, labels: (x) => n(x * scale) }} yAxis={{ lines: 0.5, labels: false }} />
+          {/* A radius is never negative: label only the positive whole grid steps (1, 2), so the
+              tick labels stay far apart at any scale and in every locale. */}
+          <Coordinates.Cartesian
+            xAxis={{ lines: 0.5, labels: (x) => (x > 0 && Math.abs(x - Math.round(x)) < 1e-9 ? n(x * scale) : "") }}
+            yAxis={{ lines: 0.5, labels: false }}
+          />
           <Polygon points={[[hu, hu], [-hu, hu], [-hu, -hu], [hu, -hu]]} color={c.muted} fillOpacity={0} strokeStyle="dashed" weight={1.5} />
           <Circle center={[0, 0]} radius={hu} color={c.blue} fillOpacity={0.14} weight={2.5} />
           <Polygon points={[[s, s], [-s, s], [-s, -s], [s, -s]]} color={c.amber} fillOpacity={0.12} weight={1.5} />

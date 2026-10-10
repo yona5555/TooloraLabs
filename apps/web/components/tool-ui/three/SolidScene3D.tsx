@@ -3,7 +3,8 @@
 import { useMemo, useRef, useState, type ReactNode } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { Edges, Html, Line } from "@react-three/drei";
+import { Edges, Line } from "@react-three/drei";
+import Label3D from "./Label3D";
 import type { Solid3DShape, SolidFaceKey } from "@tooloralabs/tools";
 import { usePalette3D, type Palette3D } from "./theme3d";
 
@@ -52,32 +53,7 @@ function Label({
     if (facing !== shown) setShown(facing);
   });
   return (
-    <Html
-      position={position}
-      center
-      zIndexRange={[20, 0]}
-      style={{
-        pointerEvents: "none",
-        opacity: shown ? 1 : 0,
-        transition: "opacity 120ms",
-      }}
-    >
-      <span
-        style={{
-          color,
-          background: bg,
-          border: `1px solid ${color}55`,
-          borderRadius: 6,
-          padding: "1px 6px",
-          fontSize: 11,
-          fontWeight: 600,
-          whiteSpace: "nowrap",
-          fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-        }}
-      >
-        {text}
-      </span>
-    </Html>
+    <Label3D position={position} color={color} bg={bg} border={`${color}55`} text={text} visible={shown} />
   );
 }
 

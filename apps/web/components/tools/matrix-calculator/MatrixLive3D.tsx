@@ -109,7 +109,7 @@ export default function MatrixLive3D({ camera = [4.2, 3.4, 6.4] }: { camera?: [n
       hint={tc("hint")}
       drawing={
         <div className="relative h-full">
-          <Scene3D camera={camera}>
+          <Scene3D camera={camera} fitWidth={false}>
             <MatrixScene3D
               m={A}
               replay={replay}
@@ -117,10 +117,16 @@ export default function MatrixLive3D({ camera = [4.2, 3.4, 6.4] }: { camera?: [n
                 i: `Aî = (${f(A[0])}, ${f(A[2])})`,
                 j: `Aĵ = (${f(A[1])}, ${f(A[3])})`,
                 k: "k̂",
-                volume: `V = |det A| = ${f(Math.abs(dA))}`,
               }}
             />
           </Scene3D>
+          {/* Volume read-out as a fixed corner badge, so it never collides with the arrow-tip labels. */}
+          <span
+            dir="ltr"
+            className={`pointer-events-none absolute start-2 bottom-2 rounded-md border bg-white/90 px-2 py-0.5 font-mono text-xs font-semibold shadow-sm dark:bg-zinc-900/90 ${dA < 0 ? "border-amber-300 text-amber-700 dark:border-amber-500/50 dark:text-amber-300" : "border-blue-200 text-blue-700 dark:border-blue-500/40 dark:text-blue-300"}`}
+          >
+            {`V = |det A| = ${f(Math.abs(dA))}`}
+          </span>
           <button
             type="button"
             onClick={() => setReplay((n) => n + 1)}

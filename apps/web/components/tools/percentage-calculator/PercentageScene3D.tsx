@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
+import Label3D from "@/components/tool-ui/three/Label3D";
 import type { Mesh } from "three";
 import { usePalette3D } from "@/components/tool-ui/three/theme3d";
 
@@ -81,22 +81,8 @@ export default function PercentageScene3D({ share, loss, labels }: PercentageSce
   };
 
   const bg = p.dark ? "rgba(24,24,27,0.88)" : "rgba(255,255,255,0.94)";
-  const pill = (text: string, c: string) => (
-    <span
-      style={{
-        color: c,
-        background: bg,
-        border: `1px solid ${c}66`,
-        borderRadius: 6,
-        padding: "1px 6px",
-        fontSize: 11,
-        fontWeight: 600,
-        whiteSpace: "nowrap",
-        fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-      }}
-    >
-      {text}
-    </span>
+  const pill = (pos: [number, number, number], text: string, c: string) => (
+    <Label3D position={pos} color={c} bg={bg} text={text} />
   );
 
   return (
@@ -117,12 +103,8 @@ export default function PercentageScene3D({ share, loss, labels }: PercentageSce
           </mesh>
         );
       })}
-      <Html position={[0, RISE * (s > 100 ? 2 : 1) + 0.45, 0]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-        {pill(labels.share, s > 100 ? p.positive : p.primary)}
-      </Html>
-      <Html position={[0, -0.05, (N / 2) * GAP + 0.35]} center zIndexRange={[20, 0]} style={{ pointerEvents: "none" }}>
-        {pill(labels.base, p.muted)}
-      </Html>
+      {pill([0, RISE * (s > 100 ? 2 : 1) + 0.45, 0], labels.share, s > 100 ? p.positive : p.primary)}
+      {pill([0, -0.05, (N / 2) * GAP + 0.35], labels.base, p.muted)}
       <gridHelper args={[6, 12, p.grid, p.grid]} position={[0, -0.01, 0]} />
     </group>
   );

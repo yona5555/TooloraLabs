@@ -11,7 +11,8 @@ const R = 100;
 const LIMIT = 60;
 
 function polar(angle: number, r: number): [number, number] {
-  return [CX + r * Math.cos(angle), CY - r * Math.sin(angle)];
+  // Rounded: server (Node) and browser trig can differ in the last digit, which breaks hydration.
+  return [Math.round((CX + r * Math.cos(angle)) * 1000) / 1000, Math.round((CY - r * Math.sin(angle)) * 1000) / 1000];
 }
 
 export function cvZone(cv: number): "low" | "moderate" | "high" {
