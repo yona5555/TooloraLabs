@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   atLeastOnce,
+  independenceCheck,
   binomialCoefficient,
   binomialDistribution,
   circleDistanceForOverlap,
@@ -89,5 +90,14 @@ describe("ProbabilityEducationMath", () => {
       expect(v).toBeGreaterThanOrEqual(0);
       expect(v).toBeLessThan(1);
     }
+  });
+
+  it("checks independence by comparing P(A∩B) with P(A)·P(B)", () => {
+    const ind = independenceCheck({ pA: 0.5, pB: 0.4, pAB: 0.2 });
+    expect(ind.independent).toBe(true);
+    expect(ind.product).toBeCloseTo(0.2, 12);
+    const dep = independenceCheck({ pA: 0.5, pB: 0.5, pAB: 0.2 });
+    expect(dep.independent).toBe(false);
+    expect(dep.difference).toBeCloseTo(-0.05, 12);
   });
 });

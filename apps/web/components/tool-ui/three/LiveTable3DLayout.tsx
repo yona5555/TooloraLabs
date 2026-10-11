@@ -1,6 +1,8 @@
 "use client";
 import { createContext, useContext, type ReactNode } from "react";
 
+const isWords = (v: unknown) => typeof v === "string" && /[\u0600-\u06FF\u0900-\u097F]/.test(v);
+
 const FillContext = createContext(false);
 
 /**
@@ -97,8 +99,9 @@ export default function LiveTable3DLayout({
                       {r.formula ?? ""}
                     </td>
                     <td
-                      dir="ltr"
-                      className={`px-3 py-1.5 text-end font-mono font-semibold [overflow-wrap:break-word] ${r.emphasize ? "text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
+                      // Words (e.g. an Arabic verdict) keep a proportional font: monospace breaks Arabic letter joining.
+                      dir={isWords(r.value) ? "auto" : "ltr"}
+                      className={`px-3 py-1.5 text-end ${isWords(r.value) ? "" : "font-mono"} font-semibold [overflow-wrap:break-word] ${r.emphasize ? "text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
                     >
                       {r.value}
                       {r.unit ? (

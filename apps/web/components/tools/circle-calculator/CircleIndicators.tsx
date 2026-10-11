@@ -120,7 +120,11 @@ export function CircleGrowthCurves() {
           {showCross && (
             <g>
               <circle cx={X(cross)} cy={Y(4 * Math.PI)} r={4} className="fill-violet-600 dark:fill-violet-400" />
-              <text x={X(cross) + 6} y={Y(4 * Math.PI) - 6} className="fill-violet-600 font-mono text-[10px] dark:fill-violet-400">A = C</text>
+              {/* Above-left of the crossing: both curves lie below it there, and it is dropped when the
+                  current-radius labels come close, so no label ever sits on a line or another label. */}
+              {Math.abs(X(r) - X(cross)) > 80 && (
+                <text x={X(cross) - 6} y={Y(4 * Math.PI) - 8} textAnchor="end" className="fill-violet-600 font-mono text-[10px] dark:fill-violet-400">A = C</text>
+              )}
             </g>
           )}
           <line x1={X(r)} x2={X(r)} y1={T} y2={H - B} className="stroke-red-500" strokeDasharray="4 3" />
@@ -437,7 +441,7 @@ export function CirclePolygonGauge() {
   const MIN = 80;
   const frac = Math.min(1, Math.max(0, (p.perimeterShare * 100 - MIN) / (100 - MIN)));
   const W = 260;
-  const H = 150;
+  const H = 176;
   const cx = W / 2;
   const cy = 130;
   const R = 105;
@@ -486,7 +490,8 @@ export function CirclePolygonGauge() {
           })}
           <line x1={cx} y1={cy} x2={nx} y2={ny} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={3} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
-          <text x={cx} y={cy - 30} textAnchor="middle" className="fill-zinc-900 font-mono text-[16px] font-bold dark:fill-zinc-100">{`${f(p.perimeterShare * 100, 3)}%`}</text>
+          {/* Readout below the pivot, so the needle never crosses it at any value. */}
+          <text x={cx} y={cy + 32} textAnchor="middle" className="fill-zinc-900 font-mono text-[16px] font-bold dark:fill-zinc-100">{`${f(p.perimeterShare * 100, 3)}%`}</text>
         </svg>
       </div>
     </IndicatorCard>

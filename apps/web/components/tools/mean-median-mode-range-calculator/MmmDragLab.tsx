@@ -69,6 +69,9 @@ export default function MmmDragLab() {
   const d = vSpan * 0.022;
   const lim = (x: number) => Math.max(vx0 + vSpan * 0.03, Math.min(vx1 - vSpan * 0.03, Math.round(x / snapTo) * snapTo));
   const near = Math.abs(a.mean - a.median) < vSpan * 0.12;
+  // Range label: the spot on the range bar farthest from the mean's fulcrum, so the triangle never covers it.
+  const mid = (a.min + a.max) / 2;
+  const rangeX = [mid, mid - a.range * 0.3, mid + a.range * 0.3].reduce((b, x) => (Math.abs(x - a.mean) > Math.abs(b - a.mean) ? x : b));
 
   const plane = (
     <div className="w-full lg:w-[380px]">
@@ -76,7 +79,7 @@ export default function MmmDragLab() {
         <Mafs viewBox={{ x: [vx0, vx1], y: [-1.9, top] }} height={280} pan={false} zoom={false} preserveAspectRatio={false}>
           <Coordinates.Cartesian xAxis={{ lines: step, labels: (x) => f(x) }} yAxis={false} />
           <Line.Segment point1={[a.min, -0.45]} point2={[a.max, -0.45]} color={c.range} weight={3} />
-          <Text x={(a.min + a.max) / 2} y={-0.8} size={12} color={c.range}>
+          <Text x={rangeX} y={-0.8} size={12} color={c.range}>
             {`${tr("range")} = ${f(a.range)}`}
           </Text>
           <Line.Segment point1={[a.median, 0]} point2={[a.median, top - 0.9]} color={c.median} style="dashed" weight={2} />

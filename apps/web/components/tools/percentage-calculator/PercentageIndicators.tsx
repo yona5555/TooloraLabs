@@ -442,7 +442,7 @@ export function PercentageRangeGauge() {
       }}
     >
       <div dir="ltr">
-        <svg width={300} height={170} viewBox="0 0 300 170" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("gauge.title")}>
+        <svg width={300} height={182} viewBox="0 0 300 182" className="mx-auto block h-auto max-w-full" role="img" aria-label={t("gauge.title")}>
           {zones.map((z) => (
             <path key={z.k} d={arc(z.from, z.to)} fill="none" className={z.cls} strokeWidth={16} />
           ))}
@@ -452,7 +452,8 @@ export function PercentageRangeGauge() {
           })}
           <line x1={cx} y1={cy} x2={nx} y2={ny} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={3} strokeLinecap="round" />
           <circle cx={cx} cy={cy} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-          <text x={cx} y={cy - 30} textAnchor="middle" className="fill-zinc-900 font-mono text-[18px] font-bold dark:fill-zinc-50">{`${f(Math.abs(p), 2)}%`}</text>
+          {/* Readout below the pivot, so the needle never crosses it at any value. */}
+          <text x={cx} y={cy + 34} textAnchor="middle" className="fill-zinc-900 font-mono text-[18px] font-bold dark:fill-zinc-50">{`${f(Math.abs(p), 2)}%`}</text>
         </svg>
       </div>
     </IndicatorCard>

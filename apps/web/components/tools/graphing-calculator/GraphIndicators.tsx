@@ -308,7 +308,7 @@ export function GraphSlopeGauge() {
       ns="gauge"
       indicator={
         <div dir="ltr">
-          <svg width={280} height={172} viewBox="0 0 280 172" style={svgStyle} role="img" aria-label={t("title")}>
+          <svg width={280} height={180} viewBox="0 0 280 180" style={svgStyle} role="img" aria-label={t("title")}>
             <defs>
               <linearGradient id="graph-slope-gauge" x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" stopColor="#e11d48" />
@@ -325,7 +325,8 @@ export function GraphSlopeGauge() {
             })}
             <line x1={cx} y1={cy} x2={nx} y2={ny} className="stroke-zinc-800 dark:stroke-zinc-100" strokeWidth={3} strokeLinecap="round" />
             <circle cx={cx} cy={cy} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
-            <text x={cx} y={cy - 34} fontSize={18} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">{`${fmtNum(angle, 1)}°`}</text>
+            {/* Readout below the pivot, so the needle never crosses it at any value. */}
+            <text x={cx} y={cy + 32} fontSize={18} fontWeight={700} textAnchor="middle" className="fill-blue-700 dark:fill-blue-300">{`${fmtNum(angle, 1)}°`}</text>
             <text x={cx - r} y={cy + 26} fontSize={10.5} textAnchor="middle" className="fill-rose-600 dark:fill-rose-400">{t("steepDown")}</text>
             <text x={cx + r} y={cy + 26} fontSize={10.5} textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400">{t("steepUp")}</text>
           </svg>

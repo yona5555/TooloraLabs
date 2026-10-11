@@ -97,7 +97,11 @@ export default function CircleRadiusLab() {
           {/* A radius is never negative: label only the positive whole grid steps (1, 2), so the
               tick labels stay far apart at any scale and in every locale. */}
           <Coordinates.Cartesian
-            xAxis={{ lines: 0.5, labels: (x) => (x > 0 && Math.abs(x - Math.round(x)) < 1e-9 ? n(x * scale) : "") }}
+            xAxis={{
+              lines: 0.5,
+              // Hide the tick under the handle and the r label so they never collide.
+              labels: (x) => (x > 0 && Math.abs(x - Math.round(x)) < 1e-9 && Math.abs(x - hu) > 0.45 ? n(x * scale) : ""),
+            }}
             yAxis={{ lines: 0.5, labels: false }}
           />
           <Polygon points={[[hu, hu], [-hu, hu], [-hu, -hu], [hu, -hu]]} color={c.muted} fillOpacity={0} strokeStyle="dashed" weight={1.5} />
@@ -105,9 +109,10 @@ export default function CircleRadiusLab() {
           <Polygon points={[[s, s], [-s, s], [-s, -s], [s, -s]]} color={c.amber} fillOpacity={0.12} weight={1.5} />
           <Line.Segment point1={[0, -hu]} point2={[0, hu]} color={c.green} weight={2.5} />
           <Line.Segment point1={[0, 0]} point2={[hu, 0]} color={c.red} weight={3} />
-          <Text x={hu / 2} y={0.05} attach="n" size={13} color={c.red}>{`r = ${n(r)}`}</Text>
-          <Text x={0.06} y={hu * 0.55} attach="e" size={13} color={c.green}>{`d = ${n(2 * r)}`}</Text>
-          <Text x={0} y={-hu - 0.05} attach="s" size={12} color={c.blue}>{`A = ${n(A)}`}</Text>
+          {/* Labels sit outside the circle and its squares, so no line ever crosses them. */}
+          <Text x={hu + 0.14} y={0.06} attach="ne" size={13} color={c.red}>{`r = ${n(r)}`}</Text>
+          <Text x={0} y={hu + 0.06} attach="n" size={13} color={c.green}>{`d = ${n(2 * r)}`}</Text>
+          <Text x={0} y={-hu - 0.06} attach="s" size={12} color={c.blue}>{`A = ${n(A)}`}</Text>
           {handle.element}
         </Mafs>
       </div>

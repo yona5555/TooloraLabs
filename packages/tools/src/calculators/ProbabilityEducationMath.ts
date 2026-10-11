@@ -74,6 +74,22 @@ export function deriveJoint(input: JointProbability): JointBreakdown {
   };
 }
 
+export type IndependenceCheck = {
+  /** P(A)·P(B), what the intersection would be if A and B were independent. */
+  product: number;
+  /** P(A∩B) − P(A)·P(B); 0 means independent. */
+  difference: number;
+  independent: boolean;
+};
+
+/** Independence test: A and B are independent exactly when P(A∩B) = P(A)·P(B) (within a tolerance). */
+export function independenceCheck(input: JointProbability, tolerance = 1e-6): IndependenceCheck {
+  const { pA, pB, pAB } = clampJoint(input);
+  const product = pA * pB;
+  const difference = pAB - product;
+  return { product, difference, independent: Math.abs(difference) <= tolerance };
+}
+
 /** Odds for/against an event as ratios ("x : 1"); Infinity at the certain/impossible ends. */
 export function oddsFromProbability(p: number): { oddsFor: number; oddsAgainst: number } {
   const q = clamp01(p);

@@ -5,7 +5,7 @@ import VectorIndicatorCard from "./VectorIndicatorCard";
 import { useVectorAnalysis } from "./VectorLiveContext";
 
 const W = 260;
-const H = 160;
+const H = 186;
 const CX = W / 2;
 const CY = 130;
 const R = 100;
@@ -59,8 +59,9 @@ export default function VectorAngleGauge() {
                 <circle cx={CX} cy={CY} r={6} className="fill-zinc-800 dark:fill-zinc-100" />
               </>
             )}
-            <text x={CX} y={CY - 34} textAnchor="middle" className="fill-zinc-900 text-[18px] font-bold dark:fill-zinc-50">{r.angleDeg === null ? tr("notApplicable") : `θ = ${n(theta, 1)}°`}</text>
-            <text x={CX} y={CY + 22} textAnchor="middle" className="fill-blue-700 text-[11px] font-semibold dark:fill-blue-300">{tr(`relation.${r.relation}`)}</text>
+            {/* Readout below the pivot, so the needle never crosses it at any angle. */}
+            <text x={CX} y={CY + 28} textAnchor="middle" className="fill-zinc-900 text-[18px] font-bold dark:fill-zinc-50">{r.angleDeg === null ? tr("notApplicable") : `θ = ${n(theta, 1)}°`}</text>
+            <text x={CX} y={CY + 48} textAnchor="middle" className="fill-blue-700 text-[11px] font-semibold dark:fill-blue-300">{tr(`relation.${r.relation}`)}</text>
           </svg>
         </div>
       }

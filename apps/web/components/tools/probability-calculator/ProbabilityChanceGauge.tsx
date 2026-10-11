@@ -6,7 +6,7 @@ import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
 
 const W = 300;
-const H = 190;
+const H = 222;
 const CX = W / 2;
 const CY = 160;
 const R = 118;
@@ -54,8 +54,9 @@ export default function ProbabilityChanceGauge() {
       })}
       <line x1={CX} y1={CY} x2={nx} y2={ny} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
-      <text x={CX} y={CY - 38} textAnchor="middle" className="fill-zinc-800 font-mono text-[17px] font-bold dark:fill-zinc-100">{`${symbol} = ${pct(r)}`}</text>
-      <text x={CX} y={CY - 18} textAnchor="middle" className="fill-zinc-500 text-[11px] font-semibold dark:fill-zinc-400">{t(`zones.${zone}`)}</text>
+      {/* Readout below the pivot, so the needle never crosses it. */}
+      <text x={CX} y={CY + 32} textAnchor="middle" className="fill-zinc-800 font-mono text-[17px] font-bold dark:fill-zinc-100">{`${symbol} = ${pct(r)}`}</text>
+      <text x={CX} y={CY + 52} textAnchor="middle" className="fill-zinc-500 text-[11px] font-semibold dark:fill-zinc-400">{t(`zones.${zone}`)}</text>
     </svg>
   );
 

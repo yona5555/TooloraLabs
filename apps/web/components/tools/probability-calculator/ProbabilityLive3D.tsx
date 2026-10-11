@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { oddsFromProbability, regionCounts, trialsForConfidence } from "@tooloralabs/tools";
+import { independenceCheck, oddsFromProbability, regionCounts, trialsForConfidence } from "@tooloralabs/tools";
 import LiveTable3DLayout, { type LiveTableGroup, type LiveTableRow } from "@/components/tool-ui/three/LiveTable3DLayout";
 import Scene3D from "@/components/tool-ui/three/Scene3D";
 import { REGION_SYMBOLS, useProbabilityModel } from "./ProbabilityLiveContext";
@@ -55,6 +55,7 @@ export default function ProbabilityLive3D({ camera = [4.6, 5.2, 6.2] }: { camera
         : `${P(b.pAB)} / ${P(b.pB)}`;
 
   const odds = oddsFromProbability(r);
+  const ind = independenceCheck(b);
   const trials50 = trialsForConfidence(r, 0.5);
 
   const groups: LiveTableGroup[] = [
@@ -64,6 +65,17 @@ export default function ProbabilityLive3D({ camera = [4.6, 5.2, 6.2] }: { camera
       rows: [
         { label: symbol, formula: resultFormula, value: P(r), emphasize: true },
         { label: t("decimal"), formula: `${f(r * 100, 2)} / 100`, value: f(r, 4) },
+        ...(mode === "conditional"
+          ? [
+              { label: "P(B|A)", formula: `${P(b.pAB)} / ${P(b.pA)}`, value: Number.isFinite(b.bGivenA) ? P(b.bGivenA) : t("undefined"), emphasize: true },
+              {
+                label: tr("independence"),
+                formula: `${P(b.pAB)} ${ind.independent ? "=" : "≠"} ${P(ind.product)}`,
+                value: tr(ind.independent ? "verdict.independent" : "verdict.dependent"),
+                emphasize: true,
+              },
+            ]
+          : []),
       ],
     },
     {

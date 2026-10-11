@@ -29,9 +29,11 @@ export default function GraphRiemannLab() {
   const yLo = Math.min(a.viewYMin, 0);
   const yHi = Math.max(a.viewYMax, 0);
   const w = (xMax - xMin) / n;
-  const approx = riemannSum(f, xMin, xMax, n, method);
-  const exact = riemannSum(f, xMin, xMax, 1000, "simpson");
-  const err = Math.abs(approx - exact);
+  // Float noise (e.g. 1e-16 for an odd function on a symmetric range) reads as 0.
+  const tidy = (v: number) => (Math.abs(v) < 1e-9 * Math.max(1, Math.abs(a.viewYMax), Math.abs(a.viewYMin)) ? 0 : v);
+  const approx = tidy(riemannSum(f, xMin, xMax, n, method));
+  const exact = tidy(riemannSum(f, xMin, xMax, 1000, "simpson"));
+  const err = tidy(Math.abs(approx - exact));
   const clampY = (y: number) => Math.min(yHi, Math.max(yLo, y));
 
   const strips = Array.from({ length: n }, (_, i) => {

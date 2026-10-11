@@ -40,7 +40,12 @@ export default function VectorDragLab() {
         <div className="w-[300px] sm:w-[380px]">
           <div dir="ltr" className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
             <Mafs viewBox={{ x: [-L, L], y: [-L, L] }} preserveAspectRatio="contain" height={320} pan={false} zoom={false}>
-              <Coordinates.Cartesian xAxis={{ lines: step }} yAxis={{ lines: step }} subdivisions={false} />
+              {/* No tick label on the frame edge (it would be clipped) or at the origin. */}
+              <Coordinates.Cartesian
+                xAxis={{ lines: step, labels: (x) => (Math.abs(x) < L - 1e-9 && x !== 0 ? String(x) : "") }}
+                yAxis={{ lines: step, labels: (y) => (Math.abs(y) < L - 1e-9 && y !== 0 ? String(y) : "") }}
+                subdivisions={false}
+              />
               <Polygon points={[[0, 0], [ax, ay], [r.sum[0], r.sum[1]], [bx, by]]} color={Theme.violet} fillOpacity={0.14} weight={1} />
               <Vector tip={[r.sum[0], r.sum[1]]} color={Theme.violet} weight={2.5} />
               {proj && <Vector tip={[proj[0], proj[1]]} color={Theme.orange} weight={4} />}
