@@ -1,34 +1,27 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { ForceCalculator as ForceCalculatorTool, type ForceCalculatorOutput } from "@tooloralabs/tools";
 
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
 import ForceInputPanel from "./ForceInputPanel";
 import ForceResult from "./ForceResult";
 import ForceQuickReference from "./ForceQuickReference";
-import ForceModeTabs from "./ForceModeTabs";
-import ForceWeightCard from "./ForceWeightCard";
 import ForceReferenceTable from "./ForceReferenceTable";
-import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types";
-
-const tool = new ForceCalculatorTool();
+import { FORCE_DEFAULTS, ForceLiveProvider, type ForceDraft } from "./ForceLiveContext";
+import type { ForceMode } from "./types";
 
 const RELATED_TOOLS = ["kinematics-calculator", "energy-work-power-calculator", "projectile-motion-calculator", "ohms-law-calculator"];
 
-const DEFAULTS = { force: "10", mass: "2", acceleration: "5", mass1: "5.972e24", mass2: "1", distance: "6.371e6" };
-
-type Inputs = typeof DEFAULTS;
+type NumericInputs = Pick<ForceDraft, "force" | "mass" | "acceleration" | "mass1" | "mass2" | "distance">;
 
 // Real, mode-specific everyday and astronomical scenarios, each internally
 // consistent with F = ma (secondLaw) or realistic mass/distance pairs
 // (gravitation).
-const SCENARIOS_BY_MODE: Record<ForceMode, Record<string, Partial<Inputs>>> = {
+const SCENARIOS_BY_MODE: Record<ForceMode, Record<string, Partial<NumericInputs>>> = {
   secondLaw: {
     shoppingCart: { mass: "15", acceleration: "1", force: "15" },
     carAccelerating: { mass: "1200", acceleration: "3", force: "3600" },
@@ -41,43 +34,22 @@ const SCENARIOS_BY_MODE: Record<ForceMode, Record<string, Partial<Inputs>>> = {
   },
 };
 
-const EMPTY_RESULT: ForceCalculatorOutput = { error: null, force: 0, mass: 0, acceleration: 0, mass1: 0, mass2: 0, distance: 0 };
+const EXAMPLES = (Object.keys(SCENARIOS_BY_MODE) as ForceMode[]).flatMap((mode) =>
+  Object.entries(SCENARIOS_BY_MODE[mode]).map(([key, values]) => ({ id: `${mode}:${key}`, mode, key, values })),
+);
 
-function computeResult(mode: ForceMode, secondLawSolveFor: SecondLawSolveFor, gravitationSolveFor: GravitationSolveFor, i: Inputs): ForceCalculatorOutput {
-  const output = tool.execute(
-    {
-      mode,
-      secondLawSolveFor,
-      gravitationSolveFor,
-      force: parseLocalizedNumber(i.force) || 0,
-      mass: parseLocalizedNumber(i.mass) || 0,
-      acceleration: parseLocalizedNumber(i.acceleration) || 0,
-      mass1: parseLocalizedNumber(i.mass1) || 0,
-      mass2: parseLocalizedNumber(i.mass2) || 0,
-      distance: parseLocalizedNumber(i.distance) || 0,
-    },
-    { locale: "en-US" }
-  );
-  return output.data;
+function exampleDetail(mode: ForceMode, v: Partial<NumericInputs>): string {
+  return mode === "secondLaw" ? `m = ${v.mass} kg · a = ${v.acceleration} m/s² · F = ${v.force} N` : `m₁ = ${v.mass1} kg · m₂ = ${v.mass2} kg · r = ${v.distance} m`;
 }
 
 export default function ForceCalculator({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.force-calculator");
   const tNav = useTranslations("tools.force-calculator.nav");
+  const tScenarios = useTranslations("tools.force-calculator.form.scenarios");
+  const tCommon = useTranslations("common.live3d");
 
-  const [mode, setMode] = useState<ForceMode>("secondLaw");
-  const [secondLawSolveFor, setSecondLawSolveFor] = useState<SecondLawSolveFor>("force");
-  const [gravitationSolveFor, setGravitationSolveFor] = useState<GravitationSolveFor>("force");
-  const [force, setForce] = useState(DEFAULTS.force);
-  const [mass, setMass] = useState(DEFAULTS.mass);
-  const [acceleration, setAcceleration] = useState(DEFAULTS.acceleration);
-  const [mass1, setMass1] = useState(DEFAULTS.mass1);
-  const [mass2, setMass2] = useState(DEFAULTS.mass2);
-  const [distance, setDistance] = useState(DEFAULTS.distance);
-
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const [result, setResult] = useState<ForceCalculatorOutput>(() => computeResult("secondLaw", "force", "force", DEFAULTS));
-  const [hasCalculated, setHasCalculated] = useState(true);
+  const [draft, setDraft] = useState<ForceDraft>(FORCE_DEFAULTS);
+  const [activeExample, setActiveExample] = useState<string | null>(null);
 
   const [navBarVisible, setNavBarVisible] = useState(false);
   const headerSentinelRef = useRef<HTMLDivElement>(null);
@@ -115,60 +87,21 @@ export default function ForceCalculator({ education }: { education: ReactNode })
     };
   }, []);
 
-  function currentInputs(): Inputs {
-    return { force, mass, acceleration, mass1, mass2, distance };
+  function setDim<K extends keyof ForceDraft>(key: K, value: ForceDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    if (key !== "mode") setActiveExample(null);
   }
 
-  function handleCalculate(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setResult(computeResult(mode, secondLawSolveFor, gravitationSolveFor, currentInputs()));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(force, mass, acceleration, mass1, mass2, distance));
-  }
-
-  function handleModeChange(next: ForceMode) {
-    setMode(next);
-    setResult(computeResult(next, secondLawSolveFor, gravitationSolveFor, currentInputs()));
-    setHasCalculated(true);
-  }
-
-  function handleSecondLawSolveForChange(next: SecondLawSolveFor) {
-    setSecondLawSolveFor(next);
-    setResult(computeResult(mode, next, gravitationSolveFor, currentInputs()));
-    setHasCalculated(true);
-  }
-
-  function handleGravitationSolveForChange(next: GravitationSolveFor) {
-    setGravitationSolveFor(next);
-    setResult(computeResult(mode, secondLawSolveFor, next, currentInputs()));
-    setHasCalculated(true);
-  }
-
-  function handleScenarioPreset(key: string) {
-    const preset = SCENARIOS_BY_MODE[mode][key];
-    if (!preset) return;
-    const next = { ...currentInputs(), ...preset };
-    if (preset.force !== undefined) setForce(preset.force);
-    if (preset.mass !== undefined) setMass(preset.mass);
-    if (preset.acceleration !== undefined) setAcceleration(preset.acceleration);
-    if (preset.mass1 !== undefined) setMass1(preset.mass1);
-    if (preset.mass2 !== undefined) setMass2(preset.mass2);
-    if (preset.distance !== undefined) setDistance(preset.distance);
-    setResult(computeResult(mode, secondLawSolveFor, gravitationSolveFor, next));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(...Object.values(next)));
+  function handlePick(id: string) {
+    const ex = EXAMPLES.find((e) => e.id === id);
+    if (!ex) return;
+    setDraft((d) => ({ ...d, ...ex.values, mode: ex.mode }));
+    setActiveExample(id);
   }
 
   function handleClear() {
-    setForce(DEFAULTS.force);
-    setMass(DEFAULTS.mass);
-    setAcceleration(DEFAULTS.acceleration);
-    setMass1(DEFAULTS.mass1);
-    setMass2(DEFAULTS.mass2);
-    setDistance(DEFAULTS.distance);
-    setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    setDraft(FORCE_DEFAULTS);
+    setActiveExample(null);
   }
 
   const navItems = [
@@ -178,66 +111,41 @@ export default function ForceCalculator({ education }: { education: ReactNode })
   ];
 
   return (
-    <>
+    <ForceLiveProvider value={{ dims: draft, setDim }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
-            <div className="flex flex-col gap-3">
-              <ForceInputPanel
-                mode={mode}
-                secondLawSolveFor={secondLawSolveFor}
-                onSecondLawSolveForChange={handleSecondLawSolveForChange}
-                gravitationSolveFor={gravitationSolveFor}
-                onGravitationSolveForChange={handleGravitationSolveForChange}
-                force={force}
-                onForceChange={setForce}
-                mass={mass}
-                onMassChange={setMass}
-                acceleration={acceleration}
-                onAccelerationChange={setAcceleration}
-                mass1={mass1}
-                onMass1Change={setMass1}
-                mass2={mass2}
-                onMass2Change={setMass2}
-                distance={distance}
-                onDistanceChange={setDistance}
-                scenarioKeys={Object.keys(SCENARIOS_BY_MODE[mode])}
-                onScenarioPreset={handleScenarioPreset}
-                onCalculate={handleCalculate}
-                onClear={handleClear}
+            <div className="flex flex-col gap-6 lg:h-full">
+              <ForceInputPanel draft={draft} onChange={setDim} onClear={handleClear} />
+              <QuickExamplesCard
+                title={tCommon("quickExamples")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={handlePick}
+                examples={EXAMPLES.map((e) => ({ id: e.id, label: tScenarios(e.key), detail: exampleDetail(e.mode, e.values) }))}
               />
             </div>
           }
-          result={
-            <div className="flex flex-col gap-3">
-              <ForceResult
-                hasCalculated={hasCalculated}
-                result={result}
-                mode={mode}
-                secondLawSolveFor={secondLawSolveFor}
-                gravitationSolveFor={gravitationSolveFor}
-                digitStyle={digitStyle}
-              />
-              <ForceModeTabs mode={mode} onModeChange={handleModeChange} />
-              <ForceWeightCard force={result.force} digitStyle={digitStyle} />
-              <ForceReferenceTable />
-            </div>
-          }
+          result={<ForceResult />}
           sidebar={
-            <RelatedToolsSidebar currentSlug="force-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="force-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="force-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <ForceQuickReference />
+              <ForceReferenceTable />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </ForceLiveProvider>
   );
 }

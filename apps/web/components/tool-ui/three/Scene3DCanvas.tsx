@@ -11,6 +11,8 @@ export type Scene3DCanvasProps = {
   autoRotate?: boolean;
   /** Set false when the scene fits its own camera to the canvas (FitWidth would fight it). */
   fitWidth?: boolean;
+  /** Optional rotation limits (radians) for scenes whose labels must never line up behind each other. */
+  orbit?: { minAzimuth?: number; maxAzimuth?: number; minPolar?: number; maxPolar?: number };
 };
 
 /** Tall, narrow canvases (the table sets the height) would crop the sides; widen the view instead. */
@@ -33,6 +35,7 @@ export default function Scene3DCanvas({
   camera = [6, 5, 7],
   autoRotate = false,
   fitWidth = true,
+  orbit,
 }: Scene3DCanvasProps) {
   const p = usePalette3D();
   return (
@@ -53,6 +56,10 @@ export default function Scene3DCanvas({
         enablePan={false}
         autoRotate={autoRotate}
         autoRotateSpeed={0.8}
+        minAzimuthAngle={orbit?.minAzimuth ?? -Infinity}
+        maxAzimuthAngle={orbit?.maxAzimuth ?? Infinity}
+        minPolarAngle={orbit?.minPolar ?? 0}
+        maxPolarAngle={orbit?.maxPolar ?? Math.PI}
       />
     </Canvas>
   );

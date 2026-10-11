@@ -10497,10 +10497,7 @@
         "mass2Placeholder": "e.g. 1",
         "distanceLabel": "Distance Between Centers (m)",
         "distancePlaceholder": "e.g. 6.371e6",
-        "calculate": "Calculate",
         "clear": "Clear",
-        "variablesCaption": "The quantity you're solving for is highlighted.",
-        "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "shoppingCart": "Pushing a Shopping Cart",
           "carAccelerating": "Car Accelerating",
@@ -10524,13 +10521,6 @@
         "mass1": "Mass 1",
         "mass2": "Mass 2",
         "distance": "Distance",
-        "diagramForce": "F={value} N",
-        "diagramAcceleration": "a={value} m/s²",
-        "diagramCaptionSecondLaw": "Force and acceleration arrows scaled to their computed magnitudes, in the same direction.",
-        "diagramMass1": "m₁={value} kg",
-        "diagramMass2": "m₂={value} kg",
-        "diagramCaptionGravitation": "Circle sizes scaled to relative mass; arrows show mutual gravitational attraction.",
-        "emptyStateMessage": "Enter values and press Calculate to see your force result.",
         "sentence": "The resulting force is {value} N.",
         "inverseSquareXLabel": "Distance (r)",
         "inverseSquareYLabel": "Force (F)",
@@ -10540,33 +10530,8 @@
         "intro": {
           "title": "Understanding Force and Newton's Laws",
           "paragraph1": "Newton's second law, F = ma, states that the net force on an object equals its mass times its acceleration. Force is measured in newtons (N), where one newton is the force needed to accelerate a 1 kg mass at 1 m/s². Rearranged, this same equation gives mass (m = F/a) or acceleration (a = F/m) whenever the other two quantities are known.",
-          "diagram": {
-            "caption": "A 2 kg mass accelerating at 3 m/s² under a 6 N net force — force and acceleration arrows point the same direction and scale with magnitude."
-          },
           "paragraph2": "The law of universal gravitation, F = Gm₁m₂/r², describes a different kind of force: the mutual attraction between any two masses, proportional to the product of their masses and inversely proportional to the square of the distance between their centers. The gravitational constant G (about 6.674 × 10⁻¹¹ N·m²/kg²) is extremely small, which is why gravitational attraction between everyday objects is imperceptible — it only becomes significant when at least one mass is astronomically large, like a planet or star.",
-          "paragraph3": "Both equations describe force, but they answer different questions: F = ma relates a single object's mass and acceleration under any net force, while F = Gm₁m₂/r² specifically calculates the gravitational force between two masses based on their separation. A falling object on Earth's surface experiences both — gravity (from F = Gm₁m₂/r², simplified to F = mg near Earth's surface) is the specific force, and F = ma describes how that force translates into its acceleration.",
-          "freeBody": {
-            "applied": "Applied force (F)",
-            "net": "Net force = ma",
-            "caption": "A free-body diagram: one applied force produces one net force, per F = ma."
-          },
-          "forceGauge": {
-            "title": "Try It: How Much Force Is That?",
-            "intro": "Pick a real-world force to see its magnitude on the gauge and compare it with others.",
-            "light": "Light",
-            "moderate": "Moderate",
-            "heavy": "Heavy",
-            "verdict": "{source} applies a {classification} force.",
-            "accelerationFact": "That force would accelerate a 1 kg object at about {acceleration} m/s².",
-            "sources": {
-              "ant": "An Ant's Weight",
-              "appleWeight": "An Apple's Weight",
-              "humanPush": "A Firm Human Push",
-              "carEngineThrust": "A Car Engine's Thrust",
-              "rocketEngineThrust": "A Rocket Engine's Thrust",
-              "saturnVThrust": "The Saturn V's Total Thrust"
-            }
-          }
+          "paragraph3": "Both equations describe force, but they answer different questions: F = ma relates a single object's mass and acceleration under any net force, while F = Gm₁m₂/r² specifically calculates the gravitational force between two masses based on their separation. A falling object on Earth's surface experiences both — gravity (from F = Gm₁m₂/r², simplified to F = mg near Earth's surface) is the specific force, and F = ma describes how that force translates into its acceleration."
         },
         "examples": {
           "title": "Worked Examples",
@@ -10693,6 +10658,104 @@
           "note": "Historians McKie and de Beer trace the documentary evidence behind the Newton's apple anecdote, distinguishing what Newton himself is recorded as having said from the embellishments the story acquired afterward.",
           "url": "https://doi.org/10.1098/rsnr.1951.0003",
           "readOriginal": "Read the Original Text"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter valid values above to see this indicator.",
+          "push": {
+            "title": "Push Lab: Two Blocks, One Force",
+            "intro": "The same force pushes your mass m and a block twice as heavy for 4 real seconds from rest. Move the sliders to change the known values.",
+            "aria": "Animation of two blocks accelerating under the same force",
+            "play": "Play",
+            "pause": "Pause",
+            "slider": {
+              "force": "Force in newtons",
+              "mass": "Mass in kilograms",
+              "acceleration": "Acceleration in m/s²"
+            },
+            "accel": "a = F / m",
+            "distance4": "Distance in 4 s",
+            "speed4": "Speed at 4 s",
+            "double": "Block with 2m",
+            "halfNote": "Half the acceleration, half the distance"
+          },
+          "formula": {
+            "title": "F = m × a With Your Numbers",
+            "intro": "Each box holds a live value and its SI unit; the outlined box is the one being solved, and the two rearrangements check it.",
+            "aria": "Formula diagram of Newton's second law with the current values",
+            "solved": "solved",
+            "check": "Check"
+          },
+          "trio": {
+            "title": "Half, Current and Double Mass",
+            "intro": "With the force fixed, acceleration is inversely proportional to mass: halving m doubles a.",
+            "aria": "Bar chart of acceleration for half, current and double mass",
+            "half": "m / 2",
+            "current": "Current m",
+            "double": "2 × m",
+            "ratio": "a(m/2) : a(2m)",
+            "ratioNote": "Four times the mass, a quarter of the acceleration"
+          },
+          "scale": {
+            "title": "Where Your Forces Sit on the Scale of Nature",
+            "intro": "Both computed forces on a powers-of-ten axis next to six real reference forces, from two people standing 1 m apart to the Earth pulling on the Moon.",
+            "aria": "Logarithmic scale of forces in newtons",
+            "refs": {
+              "twoPeople": "2 people",
+              "apple": "Apple",
+              "adultWeight": "Adult",
+              "smallCarWeight": "Car",
+              "saturnVThrust": "Saturn V",
+              "earthMoon": "Earth–Moon"
+            },
+            "nearest": "Closest reference: {ref}",
+            "ratio": "F = ma ÷ gravity",
+            "span": "Axis span",
+            "decades": "{n} powers of ten"
+          },
+          "inverse": {
+            "title": "The Inverse Square Law in Action",
+            "intro": "Gravitational force against distance for your two masses: double r and F drops to a quarter, triple it and F drops to a ninth.",
+            "aria": "Trend line of gravitational force against distance"
+          },
+          "balance": {
+            "title": "Newton's Third Law: Equal Pulls",
+            "intro": "m₁ pulls m₂ exactly as hard as m₂ pulls m₁, so the beam always stays level; the lighter mass simply accelerates more.",
+            "aria": "Balance showing equal and opposite gravitational forces",
+            "level": "Always level",
+            "ratioLine": "m₂ accelerates {ratio} × as much as m₁",
+            "pullOn2": "Pull of m₁ on m₂",
+            "pullOn1": "Pull of m₂ on m₁"
+          },
+          "bary": {
+            "title": "Where the Two Masses Really Orbit",
+            "intro": "The distance r split at the barycentre, the common centre of mass both bodies circle; the heavier body sits closer to it.",
+            "aria": "Stacked bar of the distance split at the barycentre",
+            "from1": "From m₁ to barycentre",
+            "from2": "From barycentre to m₂",
+            "check": "Sum"
+          },
+          "planets": {
+            "title": "The Weight of m₂ Across the Solar System",
+            "intro": "Weight is the gravitational force F = GMm/R² at a body's surface; here it is for your m₂ on the eight planets and the Moon, heaviest first.",
+            "source": "Masses and mean radii: NASA Planetary Fact Sheet; giant planets have no solid surface, so R is the 1-bar level.",
+            "onEarth": "Weight on Earth",
+            "onMoon": "Weight on the Moon",
+            "moonShare": "{pct} of Earth weight",
+            "heaviest": "Heaviest: {body}",
+            "bodies": {
+              "sun": "Sun",
+              "mercury": "Mercury",
+              "venus": "Venus",
+              "earth": "Earth",
+              "moon": "Moon",
+              "mars": "Mars",
+              "jupiter": "Jupiter",
+              "saturn": "Saturn",
+              "uranus": "Uranus",
+              "neptune": "Neptune"
+            }
+          }
         }
       },
       "gauge": {
@@ -10721,11 +10784,6 @@
       "relatedTools": {
         "title": "Related Physics Tools"
       },
-      "weightCard": {
-        "title": "In Everyday Terms",
-        "intro": "Comparing a force to the weight of an object on Earth gives an intuitive sense of how strong it is.",
-        "result": "This force is about the same as the weight of a {mass} kg object on Earth."
-      },
       "referenceTable": {
         "title": "Everyday Forces",
         "caption": "Real-world forces spanning a huge range, to put your result in perspective.",
@@ -10739,6 +10797,48 @@
           "smallCarWeight": "Weight of a Small Car",
           "saturnVThrust": "Saturn V Rocket Thrust (liftoff)"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live Force Table and 3D Drawing",
+        "given": "given",
+        "constant": "universal constant",
+        "groupLaw": "The law",
+        "groupUnits": "Same force in other units",
+        "kilonewtons": "Kilonewtons",
+        "poundsForce": "Pounds-force",
+        "kilogramForce": "Kilogram-force",
+        "dynes": "Dynes",
+        "groupWeight": "Compared with weight on Earth",
+        "ownWeight": "Weight of the mass",
+        "thrustToWeight": "Force-to-weight ratio",
+        "gForce": "Acceleration in g",
+        "weightEquivalent": "Mass with this weight",
+        "groupMotion": "Motion from rest",
+        "speedAt": "Speed after {t} s",
+        "distanceAt": "Distance after {t} s",
+        "impulse": "Momentum after 4 s",
+        "kineticEnergy": "Kinetic energy after 4 s",
+        "work": "Work done in 4 s",
+        "power": "Power at 4 s",
+        "timeTo100": "Time to 100 km/h",
+        "distanceTo100": "Distance to 100 km/h",
+        "groupSensitivity": "Same force, other masses",
+        "aWithMass": "a with {k} × m",
+        "groupFields": "Fields and accelerations",
+        "field1": "Field of m₁ at r",
+        "field2": "Field of m₂ at r",
+        "accel1": "Acceleration of m₁",
+        "accel2": "Acceleration of m₂",
+        "groupOrbit": "Energy and orbit",
+        "potentialEnergy": "Potential energy",
+        "escapeSpeed": "Escape speed from m₁",
+        "orbitalSpeed": "Circular orbit speed",
+        "orbitalPeriod": "Orbital period",
+        "groupBarycenter": "Barycentre",
+        "baryFrom1": "Distance from m₁",
+        "baryFrom2": "Distance from m₂",
+        "groupInverseSquare": "Inverse square",
+        "forceAt": "F at {k} × r"
       }
     },
     "projectile-motion-calculator": {
