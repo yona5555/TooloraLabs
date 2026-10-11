@@ -8048,10 +8048,7 @@
         "massShort": "M",
         "densityShort": "D",
         "volumeShort": "V",
-        "triangleCaption": "Cubre el valor que quieres calcular.",
-        "calculate": "Calcular",
-        "clear": "Limpiar",
-        "materialPresetsLabel": "Prueba un material real:"
+        "clear": "Limpiar"
       },
       "result": {
         "heading": "Resultado",
@@ -8060,59 +8057,19 @@
         "unitGrams": "g",
         "unitCm3": "cm³",
         "unitGPerCm3": "g/cm³",
-        "siSummary": "Equivale a {si} kg/m³ en unidades del SI; gravedad específica {sg} respecto al agua.",
-        "diagramCaption": "{value} g/cm³ en una escala de densidad logarítmica, junto a materiales comunes.",
         "stepDensity": "{mass} g divididos entre {volume} cm³.",
         "stepMass": "{density} g/cm³ multiplicados por {volume} cm³.",
         "stepVolume": "{mass} g divididos entre {density} g/cm³.",
-        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de densidad.",
         "siLabel": "Equivalente en SI",
         "specificGravityLabel": "Gravedad Específica",
-        "massShortLabel": "Masa",
-        "volumeShortLabel": "Volumen",
-        "densityShortLabel": "Densidad",
-        "blockCaption": "Un modelo de bloque en vivo: el ancho sigue el volumen, la altura sigue la densidad, y el área sombreada representa la masa.",
-        "siStepLabel": "× 1000",
-        "sgStepLabel": "÷ agua (1.0)",
-        "unitConversionCaption": "Cómo se convierte la densidad principal en su valor SI y gravedad específica."
+        "positiveOnly": "Introduce valores positivos para ver el resultado, la tabla en vivo y el tanque de agua."
       },
       "education": {
         "intro": {
           "title": "Entendiendo la Densidad",
           "paragraph1": "La densidad es la cantidad de masa concentrada en un volumen dado, expresada como densidad = masa ÷ volumen. Dos objetos hechos de materiales muy distintos pueden pesar lo mismo si el más denso ocupa proporcionalmente menos volumen: un trozo de oro del tamaño de una pelota de golf y un bloque de espuma del tamaño de una pelota de baloncesto pueden tener masas idénticas, pese a que el oro es aproximadamente 19.3 veces más denso que el agua y la espuma es mucho menos densa que el agua. Como la densidad es una razón, no depende de la cantidad de sustancia que se tenga: un gramo de hierro puro y una tonelada de hierro puro comparten la misma densidad, 7.87 g/cm³.",
-          "diagram": {
-            "caption": "La densidad del hierro, 7.87 g/cm³, ubicada en una escala logarítmica junto al aire, el agua y otros materiales comunes."
-          },
           "paragraph2": "La gravedad específica expresa la densidad como una razón respecto al agua (1.0 g/cm³ a 4 °C, el punto de máxima densidad del agua), de modo que una gravedad específica de 2.7, como la del aluminio, significa que el material es 2.7 veces más denso que el agua; por eso una gravedad específica menor que 1 predice que un objeto flotará en el agua, y mayor que 1 predice que se hundirá, manteniendo iguales los demás factores, como la tensión superficial y el aire atrapado.",
-          "paragraph3": "La unidad de densidad del SI es el kilogramo por metro cúbico (kg/m³), que equivale exactamente a 1000 veces el valor, más comúnmente citado, en gramos por centímetro cúbico (g/cm³), ya que un metro cúbico contiene un millón de centímetros cúbicos, pero solo mil gramos forman un kilogramo; el factor de conversión de 1000 surge directamente de esos dos hechos.",
-          "buoyancy": {
-            "floats": "Flota (GE < 1)",
-            "sinks": "Se hunde (GE > 1)",
-            "water": "Agua",
-            "caption": "Un objeto de menor densidad se posa sobre la línea de flotación; uno de mayor densidad se asienta en el fondo."
-          },
-          "sgGauge": {
-            "title": "Pruébalo: ¿Flota o se hunde?",
-            "intro": "Elige un material para ver su densidad relativa en el medidor y descubrir si flota o se hunde en el agua.",
-            "floatsVerdict": "{material} flota en el agua — el agua es unas {ratio} veces más densa.",
-            "sinksVerdict": "{material} se hunde en el agua — es unas {ratio} veces más denso que el agua.",
-            "neutralCaption": "Neutro (SG = 1)",
-            "neutralVerdict": "{material} es el agua misma, por lo que no flota ni se hunde — flotabilidad neutra.",
-            "literMass": "Un litro de {material} pesaría unos {mass} kg.",
-            "materials": {
-              "air": "Aire",
-              "oak": "Madera de Roble",
-              "ice": "Hielo",
-              "water": "Agua",
-              "concrete": "Concreto",
-              "aluminum": "Aluminio",
-              "iron": "Hierro",
-              "lead": "Plomo",
-              "mercury": "Mercurio",
-              "gold": "Oro",
-              "osmium": "Osmio"
-            }
-          }
+          "paragraph3": "La unidad de densidad del SI es el kilogramo por metro cúbico (kg/m³), que equivale exactamente a 1000 veces el valor, más comúnmente citado, en gramos por centímetro cúbico (g/cm³), ya que un metro cúbico contiene un millón de centímetros cúbicos, pero solo mil gramos forman un kilogramo; el factor de conversión de 1000 surge directamente de esos dos hechos."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -8161,16 +8118,7 @@
               "question": "¿Por qué la densidad de algunos materiales se da en g/cm³ y la de otros en kg/m³?",
               "answer": "Ambas son unidades coherentes con el SI, pero g/cm³ produce números más cómodos y a escala humana para sólidos y líquidos cotidianos (la del agua es un limpio 1.0), mientras que kg/m³ es la unidad estricta del SI típicamente usada en ingeniería y fórmulas de física. Esta calculadora muestra ambas, ya que la conversión es simplemente un factor de 1000."
             }
-          ],
-          "temperatureSlider": {
-            "title": "Pruébalo: Densidad del Agua vs. Temperatura",
-            "intro": "Arrastra el control deslizante para ver cómo cambia la densidad real del agua con la temperatura — alcanza su máximo a 4°C, el punto de densidad máxima del agua.",
-            "sliderLabel": "Temperatura",
-            "result": "A {temp}°C, la densidad del agua es de aproximadamente {density} g/cm³.",
-            "percentBelowPeak": "Eso es un {percent}% menos denso que el máximo del agua a 4°C.",
-            "atPeak": "Esta es la densidad máxima del agua — la más alta que el agua líquida alcanza jamás.",
-            "iceComparison": "El hielo sólido es incluso menos denso — unos {iceDensity} g/cm³ — por eso el hielo flota en el agua líquida."
-          }
+          ]
         },
         "behindTheTool": {
           "title": "Detrás de esta Herramienta",
@@ -8226,28 +8174,15 @@
           },
           "formulaSection": {
             "title": "La Relación de la Fórmula",
-            "paragraph": "Densidad, masa y volumen están vinculados por densidad = masa ÷ volumen: conocer dos siempre determina el tercero. Este triángulo mnemotécnico muestra cuál de los tres calcula este ejemplo.",
-            "caption": "Cubrir la celda desconocida revela la disposición correcta de las otras dos."
+            "paragraph": "Densidad, masa y volumen están vinculados por densidad = masa ÷ volumen: conocer dos siempre determina el tercero. Este triángulo mnemotécnico muestra cuál de los tres calcula este ejemplo."
           },
           "blockSection": {
             "title": "La Densidad como Modelo de Bloque",
-            "paragraph": "Imaginar la masa como el área de un rectángulo cuyo ancho es el volumen y cuya altura es la densidad hace visible la relación: un bloque más alto y denso empaqueta la misma masa en una huella más estrecha.",
-            "caption": "El ancho sigue el volumen, la altura sigue la densidad, y el área sombreada representa la masa."
+            "paragraph": "Imaginar la masa como el área de un rectángulo cuyo ancho es el volumen y cuya altura es la densidad hace visible la relación: un bloque más alto y denso empaqueta la misma masa en una huella más estrecha."
           },
           "unitsSection": {
             "title": "Conversión Entre Unidades",
-            "paragraph": "La cifra comúnmente citada en g/cm³ y la cifra estricta del SI en kg/m³ difieren exactamente por un factor de 1000, y la gravedad específica expresa la misma densidad como una razón respecto al agua.",
-            "caption": "Cómo se convierte la densidad del hierro en su valor SI y su gravedad específica.",
-            "liveConverter": {
-              "title": "Pruébalo: Convierte Cualquier Densidad",
-              "intro": "Escribe cualquier densidad en g/cm³ para verla convertida en tiempo real a kg/m³ y densidad relativa.",
-              "inputLabel": "Densidad (g/cm³)",
-              "waterMarker": "Agua",
-              "scaleLow": "0.001",
-              "scaleHigh": "32",
-              "literMass": "Un litro de esta sustancia pesaría unos {mass} kg.",
-              "nearestMaterial": "Esto es más cercano a {material}, con {materialDensity} g/cm³."
-            }
+            "paragraph": "La cifra comúnmente citada en g/cm³ y la cifra estricta del SI en kg/m³ difieren exactamente por un factor de 1000, y la gravedad específica expresa la misma densidad como una razón respecto al agua."
           }
         },
         "references": {
@@ -8256,6 +8191,114 @@
           "note": "El estudio de Rorres reconstruye y analiza el argumento matemático del tratado original de Arquímedes sobre cuerpos flotantes, la fuente antigua genuina del principio de flotabilidad y densidad que aplica esta calculadora, distinta de la anécdota posterior y no verificada de la bañera.",
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Leer el Texto Original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce valores positivos arriba para ver este indicador.",
+          "float": {
+            "title": "Laboratorio de flotación: suelta tu cubo en un tanque",
+            "intro": "Tu material como un cubo a escala real, soltado en el líquido que elijas. Mueve los controles para cambiar los valores conocidos; toda la página los sigue.",
+            "aria": "Animación de un cubo que cae en un tanque de líquido y flota o se hunde",
+            "play": "Reproducir",
+            "pause": "Pausa",
+            "slider": {
+              "mass": "Masa en gramos",
+              "volume": "Volumen en centímetros cúbicos",
+              "density": "Densidad en g/cm³"
+            },
+            "underNow": "Bajo la superficie ahora: {p}",
+            "floats": "Flota",
+            "sinks": "Se hunde",
+            "submerged": "Parte sumergida en reposo",
+            "weight": "Peso W",
+            "buoyancy": "Empuje en reposo",
+            "balancedNote": "Igual al peso: el cubo está en equilibrio",
+            "sunkNote": "Menor que el peso; el fondo soporta {n} N"
+          },
+          "formula": {
+            "title": "ρ = m ÷ V con tus números",
+            "intro": "Cada casilla muestra un valor en vivo y su unidad; la casilla resaltada es la que se calcula, y los dos despejes la comprueban.",
+            "aria": "Diagrama de la fórmula de densidad, masa y volumen con los valores actuales",
+            "solved": "calculado",
+            "check": "Comprobación"
+          },
+          "trio": {
+            "title": "Misma masa en la mitad, el actual y el doble de volumen",
+            "intro": "Con la masa fija, la densidad es inversamente proporcional al volumen: comprimirla a la mitad del espacio duplica ρ.",
+            "aria": "Gráfico de barras de la densidad con la mitad, el actual y el doble de volumen",
+            "half": "V / 2",
+            "current": "V actual",
+            "double": "2 × V",
+            "water": "Agua 1 g/cm³",
+            "ratio": "ρ(V/2) : ρ(2V)",
+            "ratioNote": "Cuatro veces el volumen, un cuarto de la densidad"
+          },
+          "ranking": {
+            "title": "Tu densidad entre materiales reales",
+            "intro": "Tu valor situado entre doce materiales reales, del más denso al menos denso, en un eje de potencias de diez; la línea discontinua es el agua.",
+            "aria": "Lista de barras ordenada de densidades de materiales con el valor actual",
+            "axis": "ρ (g/cm³), escala logarítmica",
+            "yours": "El tuyo",
+            "rank": "Puesto, del más denso",
+            "vsWater": "Comparado con el agua",
+            "vsOsmium": "Comparado con el osmio",
+            "materials": {
+              "air": "Aire",
+              "cork": "Corcho",
+              "oak": "Madera de roble",
+              "ice": "Hielo",
+              "water": "Agua",
+              "concrete": "Hormigón",
+              "aluminum": "Aluminio",
+              "iron": "Hierro",
+              "copper": "Cobre",
+              "lead": "Plomo",
+              "gold": "Oro",
+              "osmium": "Osmio"
+            }
+          },
+          "units": {
+            "title": "Una densidad, seis formas de escribirla",
+            "intro": "La misma densidad en vivo en g/cm³, la unidad del SI kg/m³, g/mL, kg/L, lb/ft³ y como densidad relativa.",
+            "aria": "Seis casillas iguales que muestran la densidad en distintas unidades",
+            "litre": "Masa de un litro",
+            "litreNote": "kg/L y g/cm³ tienen el mismo número"
+          },
+          "balance": {
+            "title": "El peso frente al máximo empuje que da el agua",
+            "intro": "La barra se inclina hacia la fuerza mayor: el peso del cuerpo m g₀ o el empuje del agua con el cuerpo totalmente sumergido, ρ_w V g₀.",
+            "aria": "Balanza que compara el peso con el empuje máximo en agua",
+            "floats": "Gana el empuje: flota",
+            "sinks": "Gana el peso: se hunde",
+            "weight": "Peso",
+            "buoyancy": "Empuje máx.",
+            "apparent": "Peso aparente bajo el agua",
+            "apparentNote": "Lo que marcaría una báscula bajo el agua",
+            "underWater": "Parte bajo la superficie",
+            "underNote": "Igual a W / F_max"
+          },
+          "fluids": {
+            "title": "Cuánto se hunde en seis líquidos reales",
+            "intro": "Para cada líquido, la altura del cubo dividida en la parte bajo la superficie (ρ / ρ_f) y la parte por encima; una barra roja indica que se hunde.",
+            "aria": "Barras apiladas de la parte sumergida del cubo en seis líquidos",
+            "under": "Debajo",
+            "above": "Encima",
+            "sinks": "Se hunde",
+            "count": "Líquidos en los que flota"
+          },
+          "temperature": {
+            "title": "Densidad del agua según la temperatura",
+            "intro": "Densidad real del agua líquida de 0 a 100 °C, máxima a 4 °C. Mueve el control para volver a comparar tu material con el agua a esa temperatura.",
+            "aria": "Línea de tendencia de la densidad del agua frente a la temperatura con el punto elegido resaltado",
+            "slider": "Temperatura del agua en °C",
+            "max": "máx. a 4 °C",
+            "waterAt": "Agua a {t} °C",
+            "belowPeak": "Por debajo del máximo a 4 °C",
+            "sgAt": "Densidad relativa a esta temperatura",
+            "floats": "Flota",
+            "sinks": "Se hunde",
+            "underNote": "Parte bajo la superficie"
+          }
         }
       },
       "tabs": {
@@ -8290,12 +8333,6 @@
       "relatedTools": {
         "title": "Herramientas de Física y Química Relacionadas"
       },
-      "buoyancyCard": {
-        "title": "¿Flota o se hunde?",
-        "intro": "Comparar la gravedad específica de este material con el agua (1.0) predice si flotará o se hundirá.",
-        "floatsResult": "Con una gravedad específica de {sg}, este material flotaría en el agua.",
-        "sinksResult": "Con una gravedad específica de {sg}, este material se hundiría en el agua."
-      },
       "referenceTable": {
         "title": "Densidades de Materiales Comunes",
         "caption": "Densidades típicas a temperatura ambiente y presión atmosférica estándar.",
@@ -8308,6 +8345,49 @@
           "aluminum": "Aluminio",
           "iron": "Hierro",
           "gold": "Oro"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Tabla de densidad en vivo y tanque de agua 3D",
+        "given": "dato",
+        "floats": "Flota",
+        "sinks": "Se hunde",
+        "groupRelation": "La relación",
+        "density": "Densidad",
+        "mass": "Masa",
+        "volume": "Volumen",
+        "groupSI": "En el SI y otras unidades",
+        "litres": "Volumen en litros",
+        "poundsPerFoot": "Densidad en libras por pie cúbico",
+        "specificGravity": "Densidad relativa",
+        "groupShape": "Un cubo de este volumen",
+        "cubeEdge": "Arista del cubo",
+        "cubeFace": "Área de una cara",
+        "sphereDiameter": "Diámetro de una esfera del mismo volumen",
+        "massPerLitre": "Masa de un litro",
+        "groupWater": "Colocado en agua (1 g/cm³)",
+        "weight": "Peso",
+        "displacedWater": "Agua desplazada al sumergirlo por completo",
+        "buoyancyFull": "Empuje sumergido por completo",
+        "verdict": "Flota o se hunde",
+        "submerged": "Parte bajo la superficie",
+        "waterline": "Profundidad de la línea de flotación",
+        "buoyancyRest": "Empuje en reposo",
+        "apparentWeight": "Peso aparente sobre el fondo",
+        "groupFluids": "En seis líquidos reales",
+        "groupSensitivity": "Misma masa, otros volúmenes",
+        "densityAtVolume": "Densidad con {k} × V",
+        "tankWidth": "Ancho del tanque {w} cm (escala real)",
+        "underWater": "{p} bajo el agua",
+        "onFloor": "Reposa en el fondo",
+        "waterLabel": "Agua",
+        "fluids": {
+          "gasoline": "Gasolina",
+          "ethanol": "Etanol",
+          "water": "Agua",
+          "seawater": "Agua de mar",
+          "glycerin": "Glicerina",
+          "mercury": "Mercurio"
         }
       }
     },

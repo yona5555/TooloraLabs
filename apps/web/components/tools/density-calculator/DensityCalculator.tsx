@@ -1,56 +1,36 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { DensityCalculator as DensityCalculatorTool, type DensityCalculatorOutput } from "@tooloralabs/tools";
 
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
 import DensityInputPanel from "./DensityInputPanel";
 import DensityResult from "./DensityResult";
 import DensityQuickReference from "./DensityQuickReference";
-import DensityModeTabs from "./DensityModeTabs";
-import DensityBuoyancyCard from "./DensityBuoyancyCard";
 import DensityReferenceTable from "./DensityReferenceTable";
-import { MATERIAL_DENSITIES, type DensityOperation, type MaterialKey } from "./types";
-
-const tool = new DensityCalculatorTool();
+import { DENSITY_DEFAULTS, DensityLiveProvider, toInput, type DensityDraft } from "./DensityLiveContext";
+import { MATERIAL_DENSITIES, MATERIAL_KEYS } from "./types";
 
 const RELATED_TOOLS = ["molarity-calculator", "ideal-gas-law-calculator", "ohms-law-calculator", "volume-calculator"];
 
-const DEFAULTS = { mass: "100", volume: "50", density: "2.7" };
+/** Every material preset is a real 100 cm³ sample: m = ρ × 100, so all three fields agree. */
 const PRESET_VOLUME = 100;
-
-const EMPTY_RESULT: DensityCalculatorOutput = { error: null, mass: 0, volume: 0, density: 0, densitySI: 0, specificGravity: 0 };
-
-function computeResult(operation: DensityOperation, mass: string, volume: string, density: string): DensityCalculatorOutput {
-  const output = tool.execute(
-    {
-      operation,
-      mass: parseLocalizedNumber(mass) || 0,
-      volume: parseLocalizedNumber(volume) || 0,
-      density: parseLocalizedNumber(density) || 0,
-    },
-    { locale: "en-US" }
-  );
-  return output.data;
-}
+const EXAMPLES = MATERIAL_KEYS.map((key) => {
+  const density = MATERIAL_DENSITIES[key];
+  return { id: key, values: { mass: toInput(density * PRESET_VOLUME), volume: String(PRESET_VOLUME), density: String(density) } };
+});
 
 export default function DensityCalculator({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.density-calculator");
   const tNav = useTranslations("tools.density-calculator.nav");
+  const tMaterials = useTranslations("tools.density-calculator.materials");
+  const tCommon = useTranslations("common.live3d");
 
-  const [operation, setOperation] = useState<DensityOperation>("solveDensity");
-  const [mass, setMass] = useState(DEFAULTS.mass);
-  const [volume, setVolume] = useState(DEFAULTS.volume);
-  const [density, setDensity] = useState(DEFAULTS.density);
-
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const [result, setResult] = useState<DensityCalculatorOutput>(() => computeResult("solveDensity", DEFAULTS.mass, DEFAULTS.volume, DEFAULTS.density));
-  const [hasCalculated, setHasCalculated] = useState(true);
+  const [draft, setDraft] = useState<DensityDraft>(DENSITY_DEFAULTS);
+  const [activeExample, setActiveExample] = useState<string | null>(null);
 
   const [navBarVisible, setNavBarVisible] = useState(false);
   const headerSentinelRef = useRef<HTMLDivElement>(null);
@@ -88,44 +68,21 @@ export default function DensityCalculator({ education }: { education: ReactNode 
     };
   }, []);
 
-  function handleCalculate(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setResult(computeResult(operation, mass, volume, density));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(mass, volume, density));
+  function setDim<K extends keyof DensityDraft>(key: K, value: DensityDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    if (key !== "operation") setActiveExample(null);
   }
 
-  function handleOperationChange(next: DensityOperation) {
-    setOperation(next);
-    setResult(computeResult(next, mass, volume, density));
-    setHasCalculated(true);
-  }
-
-  function handleMaterialPreset(key: MaterialKey) {
-    const materialDensity = MATERIAL_DENSITIES[key];
-    const presetMass = String(Math.round(materialDensity * PRESET_VOLUME * 100) / 100);
-    const presetVolume = String(PRESET_VOLUME);
-    const presetDensity = String(materialDensity);
-
-    const nextMass = operation === "solveVolume" ? presetMass : operation === "solveDensity" ? presetMass : mass;
-    const nextVolume = operation === "solveMass" || operation === "solveDensity" ? presetVolume : volume;
-    const nextDensity = operation === "solveMass" || operation === "solveVolume" ? presetDensity : density;
-
-    setMass(nextMass);
-    setVolume(nextVolume);
-    setDensity(nextDensity);
-    setResult(computeResult(operation, nextMass, nextVolume, nextDensity));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(nextMass, nextVolume, nextDensity));
+  function handlePick(id: string) {
+    const ex = EXAMPLES.find((e) => e.id === id);
+    if (!ex) return;
+    setDraft((d) => ({ ...d, ...ex.values }));
+    setActiveExample(id);
   }
 
   function handleClear() {
-    setMass(DEFAULTS.mass);
-    setVolume(DEFAULTS.volume);
-    setDensity(DEFAULTS.density);
-    setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    setDraft(DENSITY_DEFAULTS);
+    setActiveExample(null);
   }
 
   const navItems = [
@@ -135,48 +92,45 @@ export default function DensityCalculator({ education }: { education: ReactNode 
   ];
 
   return (
-    <>
+    <DensityLiveProvider value={{ dims: draft, setDim }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
-            <div className="flex flex-col gap-3">
-              <DensityInputPanel
-                operation={operation}
-                mass={mass}
-                onMassChange={setMass}
-                volume={volume}
-                onVolumeChange={setVolume}
-                density={density}
-                onDensityChange={setDensity}
-                onMaterialPreset={handleMaterialPreset}
-                onCalculate={handleCalculate}
-                onClear={handleClear}
+            <div className="flex flex-col gap-6 lg:h-full">
+              <DensityInputPanel draft={draft} onChange={setDim} onClear={handleClear} />
+              <QuickExamplesCard
+                title={tCommon("quickExamples")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={handlePick}
+                examples={EXAMPLES.map((e) => ({
+                  id: e.id,
+                  label: tMaterials(e.id),
+                  detail: `ρ = ${e.values.density} g/cm³ · V = ${e.values.volume} cm³ · m = ${e.values.mass} g`,
+                }))}
               />
-              <DensityReferenceTable />
             </div>
           }
-          result={
-            <div className="flex flex-col gap-3">
-              <DensityResult hasCalculated={hasCalculated} result={result} operation={operation} digitStyle={digitStyle} />
-              <DensityModeTabs operation={operation} onOperationChange={handleOperationChange} />
-              <DensityBuoyancyCard specificGravity={result.specificGravity} digitStyle={digitStyle} />
-            </div>
-          }
+          result={<DensityResult />}
           sidebar={
-            <RelatedToolsSidebar currentSlug="density-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="density-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="density-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <DensityQuickReference />
+              <DensityReferenceTable />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </DensityLiveProvider>
   );
 }

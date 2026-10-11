@@ -32,6 +32,7 @@ export * from "./SignificantFiguresCalculator";
 export * from "./SignificantFiguresDigits";
 export * from "./GpaCalculator";
 export * from "./DensityCalculator";
+export * from "./densityAnalysis";
 export * from "./OhmsLawCalculator";
 export * from "./PhCalculator";
 export * from "./StatisticsCalculator";
