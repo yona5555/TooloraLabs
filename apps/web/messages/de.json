@@ -10497,10 +10497,7 @@
         "mass2Placeholder": "z. B. 1",
         "distanceLabel": "Entfernung zwischen den Mittelpunkten (m)",
         "distancePlaceholder": "z. B. 6.371e6",
-        "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "variablesCaption": "Die gesuchte Größe ist hervorgehoben.",
-        "scenarioPresetsLabel": "Ein reales Szenario ausprobieren:",
         "scenarios": {
           "shoppingCart": "Einkaufswagen schieben",
           "carAccelerating": "Auto beschleunigt",
@@ -10524,13 +10521,6 @@
         "mass1": "Masse 1",
         "mass2": "Masse 2",
         "distance": "Entfernung",
-        "diagramForce": "F={value} N",
-        "diagramAcceleration": "a={value} m/s²",
-        "diagramCaptionSecondLaw": "Kraft- und Beschleunigungspfeile skaliert auf ihre berechneten Beträge, in derselben Richtung.",
-        "diagramMass1": "m₁={value} kg",
-        "diagramMass2": "m₂={value} kg",
-        "diagramCaptionGravitation": "Kreisgrößen skaliert auf die relative Masse; Pfeile zeigen die gegenseitige Gravitationsanziehung.",
-        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Kraftergebnis zu sehen.",
         "sentence": "Die resultierende Kraft beträgt {value} N.",
         "inverseSquareXLabel": "Entfernung (r)",
         "inverseSquareYLabel": "Kraft (F)",
@@ -10540,33 +10530,8 @@
         "intro": {
           "title": "Kraft und Newtons Gesetze verstehen",
           "paragraph1": "Newtons zweites Gesetz, F = ma, besagt, dass die Nettokraft auf ein Objekt gleich seiner Masse mal seiner Beschleunigung ist. Kraft wird in Newton (N) gemessen, wobei ein Newton die Kraft ist, die nötig ist, um eine Masse von 1 kg mit 1 m/s² zu beschleunigen. Umgestellt liefert dieselbe Gleichung die Masse (m = F/a) oder die Beschleunigung (a = F/m), sobald die anderen beiden Größen bekannt sind.",
-          "diagram": {
-            "caption": "Eine Masse von 2 kg beschleunigt mit 3 m/s² unter einer Nettokraft von 6 N — Kraft- und Beschleunigungspfeile zeigen in dieselbe Richtung und skalieren mit dem Betrag."
-          },
           "paragraph2": "Das Gravitationsgesetz, F = Gm₁m₂/r², beschreibt eine andere Art von Kraft: die gegenseitige Anziehung zwischen zwei beliebigen Massen, proportional zum Produkt ihrer Massen und umgekehrt proportional zum Quadrat des Abstands zwischen ihren Mittelpunkten. Die Gravitationskonstante G (etwa 6,674 × 10⁻¹¹ N·m²/kg²) ist extrem klein, weshalb die Gravitationsanziehung zwischen Alltagsobjekten nicht wahrnehmbar ist — sie wird erst bedeutsam, wenn mindestens eine Masse astronomisch groß ist, wie ein Planet oder ein Stern.",
-          "paragraph3": "Beide Gleichungen beschreiben Kraft, beantworten aber unterschiedliche Fragen: F = ma verknüpft die Masse und Beschleunigung eines einzelnen Objekts unter einer beliebigen Nettokraft, während F = Gm₁m₂/r² speziell die Gravitationskraft zwischen zwei Massen anhand ihres Abstands berechnet. Ein fallendes Objekt an der Erdoberfläche erfährt beides — die Schwerkraft (aus F = Gm₁m₂/r², nahe der Erdoberfläche vereinfacht zu F = mg) ist die spezifische Kraft, und F = ma beschreibt, wie sich diese Kraft in seine Beschleunigung übersetzt.",
-          "freeBody": {
-            "applied": "Angewandte Kraft (F)",
-            "net": "Nettokraft = ma",
-            "caption": "Ein Freikörperdiagramm: eine angewandte Kraft erzeugt eine Nettokraft, gemäß F = ma."
-          },
-          "forceGauge": {
-            "title": "Ausprobieren: Wie groß ist diese Kraft?",
-            "intro": "Wähle eine reale Kraft, um ihre Größe auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "light": "Gering",
-            "moderate": "Mittel",
-            "heavy": "Stark",
-            "verdict": "{source} übt eine {classification} Kraft aus.",
-            "accelerationFact": "Diese Kraft würde ein 1-kg-Objekt mit etwa {acceleration} m/s² beschleunigen.",
-            "sources": {
-              "ant": "Das Gewicht einer Ameise",
-              "appleWeight": "Das Gewicht eines Apfels",
-              "humanPush": "Ein kräftiger menschlicher Schub",
-              "carEngineThrust": "Der Schub eines Automotors",
-              "rocketEngineThrust": "Der Schub eines Raketentriebwerks",
-              "saturnVThrust": "Der Gesamtschub der Saturn V"
-            }
-          }
+          "paragraph3": "Beide Gleichungen beschreiben Kraft, beantworten aber unterschiedliche Fragen: F = ma verknüpft die Masse und Beschleunigung eines einzelnen Objekts unter einer beliebigen Nettokraft, während F = Gm₁m₂/r² speziell die Gravitationskraft zwischen zwei Massen anhand ihres Abstands berechnet. Ein fallendes Objekt an der Erdoberfläche erfährt beides — die Schwerkraft (aus F = Gm₁m₂/r², nahe der Erdoberfläche vereinfacht zu F = mg) ist die spezifische Kraft, und F = ma beschreibt, wie sich diese Kraft in seine Beschleunigung übersetzt."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -10693,6 +10658,104 @@
           "note": "Die Historiker McKie und de Beer verfolgen die dokumentarischen Belege hinter der Anekdote von Newtons Apfel und unterscheiden, was Newton selbst nachweislich gesagt hat, von den Ausschmückungen, die die Geschichte später erhielt.",
           "url": "https://doi.org/10.1098/rsnr.1951.0003",
           "readOriginal": "Originaltext lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben gültige Werte ein, um diese Anzeige zu sehen.",
+          "push": {
+            "title": "Schiebe-Labor: zwei Blöcke, eine Kraft",
+            "intro": "Dieselbe Kraft schiebt deine Masse m und einen doppelt so schweren Block 4 echte Sekunden lang aus der Ruhe. Verschiebe die Regler, um die bekannten Werte zu ändern.",
+            "aria": "Animation zweier Blöcke, die durch dieselbe Kraft beschleunigt werden",
+            "play": "Abspielen",
+            "pause": "Pause",
+            "slider": {
+              "force": "Kraft in Newton",
+              "mass": "Masse in Kilogramm",
+              "acceleration": "Beschleunigung in m/s²"
+            },
+            "accel": "a = F / m",
+            "distance4": "Strecke in 4 s",
+            "speed4": "Geschwindigkeit bei 4 s",
+            "double": "Block mit 2m",
+            "halfNote": "Halbe Beschleunigung, halbe Strecke"
+          },
+          "formula": {
+            "title": "F = m × a mit deinen Zahlen",
+            "intro": "Jedes Feld zeigt einen Live-Wert mit SI-Einheit; das hervorgehobene Feld ist die gesuchte Größe, die beiden Umformungen prüfen sie.",
+            "aria": "Formeldiagramm des zweiten Newtonschen Gesetzes mit den aktuellen Werten",
+            "solved": "gesucht",
+            "check": "Probe"
+          },
+          "trio": {
+            "title": "Halbe, aktuelle und doppelte Masse",
+            "intro": "Bei fester Kraft ist die Beschleunigung umgekehrt proportional zur Masse: halbes m verdoppelt a.",
+            "aria": "Balkendiagramm der Beschleunigung bei halber, aktueller und doppelter Masse",
+            "half": "m / 2",
+            "current": "Aktuelles m",
+            "double": "2 × m",
+            "ratio": "a(m/2) : a(2m)",
+            "ratioNote": "Vierfache Masse, ein Viertel der Beschleunigung"
+          },
+          "scale": {
+            "title": "Wo deine Kräfte auf der Skala der Natur liegen",
+            "intro": "Beide berechneten Kräfte auf einer Zehnerpotenz-Achse neben sechs echten Referenzkräften, von zwei Menschen in 1 m Abstand bis zur Anziehung des Mondes durch die Erde.",
+            "aria": "Logarithmische Skala der Kräfte in Newton",
+            "refs": {
+              "twoPeople": "2 Menschen",
+              "apple": "Apfel",
+              "adultWeight": "Erwachsener",
+              "smallCarWeight": "Auto",
+              "saturnVThrust": "Saturn V",
+              "earthMoon": "Erde–Mond"
+            },
+            "nearest": "Nächste Referenz: {ref}",
+            "ratio": "F = ma ÷ Gravitation",
+            "span": "Achsenumfang",
+            "decades": "{n} Zehnerpotenzen"
+          },
+          "inverse": {
+            "title": "Das Abstandsquadratgesetz in Aktion",
+            "intro": "Gravitationskraft über dem Abstand für deine beiden Massen: doppeltes r ergibt ein Viertel von F, dreifaches r ein Neuntel.",
+            "aria": "Verlauf der Gravitationskraft über dem Abstand"
+          },
+          "balance": {
+            "title": "Drittes Newtonsches Gesetz: gleiche Anziehung",
+            "intro": "m₁ zieht m₂ genau so stark wie m₂ an m₁ zieht, daher bleibt der Balken immer waagerecht; die leichtere Masse beschleunigt einfach stärker.",
+            "aria": "Waage mit gleich großen, entgegengesetzten Gravitationskräften",
+            "level": "Immer waagerecht",
+            "ratioLine": "m₂ beschleunigt {ratio}-mal so stark wie m₁",
+            "pullOn2": "Zug von m₁ an m₂",
+            "pullOn1": "Zug von m₂ an m₁"
+          },
+          "bary": {
+            "title": "Wo die beiden Massen wirklich kreisen",
+            "intro": "Der Abstand r, geteilt am Baryzentrum, dem gemeinsamen Schwerpunkt, um den beide Körper kreisen; der schwerere liegt näher daran.",
+            "aria": "Gestapelter Balken des am Baryzentrum geteilten Abstands",
+            "from1": "Von m₁ zum Baryzentrum",
+            "from2": "Vom Baryzentrum zu m₂",
+            "check": "Summe"
+          },
+          "planets": {
+            "title": "Das Gewicht von m₂ im Sonnensystem",
+            "intro": "Gewicht ist die Gravitationskraft F = GMm/R² an der Oberfläche eines Himmelskörpers; hier für dein m₂ auf den acht Planeten und dem Mond, absteigend.",
+            "source": "Massen und mittlere Radien: NASA Planetary Fact Sheet; Riesenplaneten haben keine feste Oberfläche, R ist daher das 1-bar-Niveau.",
+            "onEarth": "Gewicht auf der Erde",
+            "onMoon": "Gewicht auf dem Mond",
+            "moonShare": "{pct} des Erdgewichts",
+            "heaviest": "Am schwersten: {body}",
+            "bodies": {
+              "sun": "Sonne",
+              "mercury": "Merkur",
+              "venus": "Venus",
+              "earth": "Erde",
+              "moon": "Mond",
+              "mars": "Mars",
+              "jupiter": "Jupiter",
+              "saturn": "Saturn",
+              "uranus": "Uranus",
+              "neptune": "Neptun"
+            }
+          }
         }
       },
       "gauge": {
@@ -10721,11 +10784,6 @@
       "relatedTools": {
         "title": "Verwandte Physik-Tools"
       },
-      "weightCard": {
-        "title": "Alltagsvergleich",
-        "intro": "Der Vergleich einer Kraft mit dem Gewicht eines Objekts auf der Erde vermittelt ein intuitives Gefühl für ihre Stärke.",
-        "result": "Diese Kraft entspricht etwa dem Gewicht eines {mass} kg schweren Objekts auf der Erde."
-      },
       "referenceTable": {
         "title": "Alltägliche Kräfte",
         "caption": "Reale Kräfte über einen enormen Bereich, um Ihr Ergebnis einzuordnen.",
@@ -10739,6 +10797,48 @@
           "smallCarWeight": "Gewicht eines Kleinwagens",
           "saturnVThrust": "Saturn-V-Raketenschub (Start)"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live-Krafttabelle und 3D-Zeichnung",
+        "given": "gegeben",
+        "constant": "universelle Konstante",
+        "groupLaw": "Das Gesetz",
+        "groupUnits": "Dieselbe Kraft in anderen Einheiten",
+        "kilonewtons": "Kilonewton",
+        "poundsForce": "Pfund-Kraft",
+        "kilogramForce": "Kilopond",
+        "dynes": "Dyn",
+        "groupWeight": "Verglichen mit dem Gewicht auf der Erde",
+        "ownWeight": "Gewichtskraft der Masse",
+        "thrustToWeight": "Kraft-Gewichts-Verhältnis",
+        "gForce": "Beschleunigung in g",
+        "weightEquivalent": "Masse mit diesem Gewicht",
+        "groupMotion": "Bewegung aus der Ruhe",
+        "speedAt": "Geschwindigkeit nach {t} s",
+        "distanceAt": "Strecke nach {t} s",
+        "impulse": "Impuls nach 4 s",
+        "kineticEnergy": "Kinetische Energie nach 4 s",
+        "work": "Verrichtete Arbeit in 4 s",
+        "power": "Leistung bei 4 s",
+        "timeTo100": "Zeit bis 100 km/h",
+        "distanceTo100": "Strecke bis 100 km/h",
+        "groupSensitivity": "Gleiche Kraft, andere Massen",
+        "aWithMass": "a bei {k} × m",
+        "groupFields": "Felder und Beschleunigungen",
+        "field1": "Feld von m₁ bei r",
+        "field2": "Feld von m₂ bei r",
+        "accel1": "Beschleunigung von m₁",
+        "accel2": "Beschleunigung von m₂",
+        "groupOrbit": "Energie und Umlaufbahn",
+        "potentialEnergy": "Potenzielle Energie",
+        "escapeSpeed": "Fluchtgeschwindigkeit von m₁",
+        "orbitalSpeed": "Kreisbahngeschwindigkeit",
+        "orbitalPeriod": "Umlaufzeit",
+        "groupBarycenter": "Baryzentrum",
+        "baryFrom1": "Abstand von m₁",
+        "baryFrom2": "Abstand von m₂",
+        "groupInverseSquare": "Abstandsquadrat",
+        "forceAt": "F bei {k} × r"
       }
     },
     "projectile-motion-calculator": {

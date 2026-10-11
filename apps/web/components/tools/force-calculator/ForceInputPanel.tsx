@@ -1,150 +1,75 @@
 "use client";
-import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
 import ForceSolveForTabs from "./ForceSolveForTabs";
-import ForceVariablesDiagram from "./ForceVariablesDiagram";
+import ForceModeTabs from "./ForceModeTabs";
 import { SECOND_LAW_SOLVE_FOR, GRAVITATION_SOLVE_FOR } from "./types";
-import type { ForceMode, GravitationSolveFor, SecondLawSolveFor } from "./types";
+import type { ForceDraft } from "./ForceLiveContext";
+
+type NumericKey = "force" | "mass" | "acceleration" | "mass1" | "mass2" | "distance";
 
 type ForceInputPanelProps = {
-  mode: ForceMode;
-  secondLawSolveFor: SecondLawSolveFor;
-  onSecondLawSolveForChange: (value: SecondLawSolveFor) => void;
-  gravitationSolveFor: GravitationSolveFor;
-  onGravitationSolveForChange: (value: GravitationSolveFor) => void;
-  force: string;
-  onForceChange: (value: string) => void;
-  mass: string;
-  onMassChange: (value: string) => void;
-  acceleration: string;
-  onAccelerationChange: (value: string) => void;
-  mass1: string;
-  onMass1Change: (value: string) => void;
-  mass2: string;
-  onMass2Change: (value: string) => void;
-  distance: string;
-  onDistanceChange: (value: string) => void;
-  scenarioKeys: string[];
-  onScenarioPreset: (key: string) => void;
-  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  draft: ForceDraft;
+  onChange: <K extends keyof ForceDraft>(key: K, value: ForceDraft[K]) => void;
   onClear: () => void;
 };
 
-export default function ForceInputPanel({
-  mode,
-  secondLawSolveFor,
-  onSecondLawSolveForChange,
-  gravitationSolveFor,
-  onGravitationSolveForChange,
-  force,
-  onForceChange,
-  mass,
-  onMassChange,
-  acceleration,
-  onAccelerationChange,
-  mass1,
-  onMass1Change,
-  mass2,
-  onMass2Change,
-  distance,
-  onDistanceChange,
-  scenarioKeys,
-  onScenarioPreset,
-  onCalculate,
-  onClear,
-}: ForceInputPanelProps) {
+/** Law, solve-for and the known values; every keystroke updates the whole page live. */
+export default function ForceInputPanel({ draft, onChange, onClear }: ForceInputPanelProps) {
   const t = useTranslations("tools.force-calculator.form");
-  const tScenarios = useTranslations("tools.force-calculator.form.scenarios");
+  const { mode, slSolve, gSolve } = draft;
 
-  const solved = mode === "secondLaw" ? secondLawSolveFor : gravitationSolveFor;
-  const variableOrder = mode === "secondLaw" ? ["force", "mass", "acceleration"] : ["force", "mass1", "mass2", "distance"];
-  const variableLabels: Record<string, string> = { force: "F", mass: "m", acceleration: "a", mass1: "m₁", mass2: "m₂", distance: "d" };
+  const fields: { key: NumericKey; label: string; placeholder: string }[] =
+    mode === "secondLaw"
+      ? [
+          { key: "force" as const, label: t("forceLabel"), placeholder: t("forcePlaceholder") },
+          { key: "mass" as const, label: t("massLabel"), placeholder: t("massPlaceholder") },
+          { key: "acceleration" as const, label: t("accelerationLabel"), placeholder: t("accelerationPlaceholder") },
+        ].filter((x) => x.key !== slSolve)
+      : [
+          { key: "force" as const, label: t("forceLabel"), placeholder: t("forcePlaceholder") },
+          { key: "mass1" as const, label: t("mass1Label"), placeholder: t("mass1Placeholder") },
+          { key: "mass2" as const, label: t("mass2Label"), placeholder: t("mass2Placeholder") },
+          { key: "distance" as const, label: t("distanceLabel"), placeholder: t("distancePlaceholder") },
+        ].filter((x) => x.key !== gSolve);
 
   return (
     <SectionCard title={t("inputTitle")}>
       <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
-        <div className="flex flex-wrap gap-2">
-          {scenarioKeys.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onScenarioPreset(key)}
-              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
-            >
-              {tScenarios(key)}
-            </button>
-          ))}
-        </div>
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
+        <ForceModeTabs mode={mode} onModeChange={(m) => onChange("mode", m)} />
       </div>
 
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
         {mode === "secondLaw" ? (
-          <ForceSolveForTabs values={SECOND_LAW_SOLVE_FOR} active={secondLawSolveFor} onChange={onSecondLawSolveForChange} translationKey="secondLawSolveFor" />
+          <ForceSolveForTabs values={SECOND_LAW_SOLVE_FOR} active={slSolve} onChange={(v) => onChange("slSolve", v)} translationKey="secondLawSolveFor" />
         ) : (
-          <ForceSolveForTabs values={GRAVITATION_SOLVE_FOR} active={gravitationSolveFor} onChange={onGravitationSolveForChange} translationKey="gravitationSolveFor" />
+          <ForceSolveForTabs values={GRAVITATION_SOLVE_FOR} active={gSolve} onChange={(v) => onChange("gSolve", v)} translationKey="gravitationSolveFor" />
         )}
       </div>
 
-      <ForceVariablesDiagram
-        solved={solved}
-        order={variableOrder}
-        labels={variableLabels}
-        values={{
-          force: solved === "force" ? "?" : force || "–",
-          mass: solved === "mass" ? "?" : mass || "–",
-          acceleration: solved === "acceleration" ? "?" : acceleration || "–",
-          mass1: solved === "mass1" ? "?" : mass1 || "–",
-          mass2: solved === "mass2" ? "?" : mass2 || "–",
-          distance: solved === "distance" ? "?" : distance || "–",
-        }}
-        caption={t("variablesCaption")}
-      />
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+        {fields.map((field) => (
+          <ToolInput
+            key={field.key}
+            label={field.label}
+            type="text"
+            inputMode="decimal"
+            placeholder={field.placeholder}
+            value={draft[field.key]}
+            onChange={(e) => onChange(field.key, e.target.value)}
+          />
+        ))}
 
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
-        {mode === "secondLaw" ? (
-          <>
-            {secondLawSolveFor !== "force" && (
-              <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
-            )}
-            {secondLawSolveFor !== "mass" && (
-              <ToolInput label={t("massLabel")} type="text" inputMode="decimal" placeholder={t("massPlaceholder")} value={mass} onChange={(e) => onMassChange(e.target.value)} />
-            )}
-            {secondLawSolveFor !== "acceleration" && (
-              <ToolInput label={t("accelerationLabel")} type="text" inputMode="decimal" placeholder={t("accelerationPlaceholder")} value={acceleration} onChange={(e) => onAccelerationChange(e.target.value)} />
-            )}
-          </>
-        ) : (
-          <>
-            {gravitationSolveFor !== "force" && (
-              <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
-            )}
-            {gravitationSolveFor !== "mass1" && (
-              <ToolInput label={t("mass1Label")} type="text" inputMode="decimal" placeholder={t("mass1Placeholder")} value={mass1} onChange={(e) => onMass1Change(e.target.value)} />
-            )}
-            {gravitationSolveFor !== "mass2" && (
-              <ToolInput label={t("mass2Label")} type="text" inputMode="decimal" placeholder={t("mass2Placeholder")} value={mass2} onChange={(e) => onMass2Change(e.target.value)} />
-            )}
-            {gravitationSolveFor !== "distance" && (
-              <ToolInput label={t("distanceLabel")} type="text" inputMode="decimal" placeholder={t("distancePlaceholder")} value={distance} onChange={(e) => onDistanceChange(e.target.value)} />
-            )}
-          </>
-        )}
-
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t("calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={onClear}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t("clear")}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
       </form>
     </SectionCard>
   );

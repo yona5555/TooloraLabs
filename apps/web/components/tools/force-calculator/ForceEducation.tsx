@@ -4,17 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import ForceBlockDiagram from "./ForceBlockDiagram";
-import ForceFreeBodyDiagram from "./ForceFreeBodyDiagram";
-import GravitationDiagram from "./GravitationDiagram";
-import ForceInverseSquareDiagram from "./ForceInverseSquareDiagram";
-import ForceVariablesDiagram from "./ForceVariablesDiagram";
-import ForceMagnitudeGauge from "./ForceMagnitudeGauge";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import ForceLive3D from "./ForceLive3D";
+import ForcePushLab from "./ForcePushLab";
+import ForceFormulaDiagram from "./ForceFormulaDiagram";
+import ForceMassTrio from "./ForceMassTrio";
+import ForceLogScale from "./ForceLogScale";
+import ForceInverseSquareTrend from "./ForceInverseSquareTrend";
+import ForceThirdLawBalance from "./ForceThirdLawBalance";
+import ForceBarycenterBar from "./ForceBarycenterBar";
+import ForcePlanetWeights from "./ForcePlanetWeights";
 
 type ExampleRow = { calculation: string; result: string };
 
 export default async function ForceEducation() {
   const t = await getTranslations("tools.force-calculator.education");
+  const t3 = await getTranslations("tools.force-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -22,21 +27,21 @@ export default async function ForceEducation() {
 
   return (
     <EncyclopediaPaper>
-      <ForceMagnitudeGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <ForceBlockDiagram
-          force={6}
-          acceleration={3}
-          forceLabel="F=6 N"
-          accelerationLabel="a=3 m/s²"
-          caption={t("intro.diagram.caption")}
-        />
+        <SectionCard title={t3("cardTitle")}>
+          <ForceLive3D camera={[0, 2.4, 8.6]} capHeight />
+        </SectionCard>
+        <div className="space-y-6">
+          <ForcePushLab />
+          <ForceMassTrio />
+        </div>
         <p>{t("intro.paragraph2")}</p>
-        <ForceFreeBodyDiagram appliedLabel={t("intro.freeBody.applied")} netLabel={t("intro.freeBody.net")} caption={t("intro.freeBody.caption")} />
         <p>{t("intro.paragraph3")}</p>
+        <ForcePlanetWeights />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -58,6 +63,7 @@ export default async function ForceEducation() {
             </tbody>
           </table>
         </div>
+        <ForceLogScale />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -78,27 +84,24 @@ export default async function ForceEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.gravitationSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.gravitationSection.paragraph")}</p>
-          <GravitationDiagram mass1={5.972e24} mass2={1} label1="m₁" label2="m₂" caption={t("behindTheTool.gravitationSection.caption")} />
+          <div className="mt-4 space-y-6">
+            <ForceThirdLawBalance />
+            <ForceBarycenterBar />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.inverseSquareSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.inverseSquareSection.paragraph")}</p>
-          <ForceInverseSquareDiagram
-            xLabel={t("behindTheTool.inverseSquareSection.xLabel")}
-            yLabel={t("behindTheTool.inverseSquareSection.yLabel")}
-            caption={t("behindTheTool.inverseSquareSection.caption")}
-          />
+          <div className="mt-4">
+            <ForceInverseSquareTrend />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.variablesSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.variablesSection.paragraph")}</p>
-          <ForceVariablesDiagram
-            solved="acceleration"
-            order={["force", "mass", "acceleration"]}
-            labels={{ force: "F", mass: "m", acceleration: "a" }}
-            values={{ force: "10", mass: "2", acceleration: "?" }}
-            caption={t("behindTheTool.variablesSection.caption")}
-          />
+          <div className="mt-4">
+            <ForceFormulaDiagram />
+          </div>
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

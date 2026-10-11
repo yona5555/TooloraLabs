@@ -10497,10 +10497,7 @@
         "mass2Placeholder": "p. ex. 1",
         "distanceLabel": "Distance Entre les Centres (m)",
         "distancePlaceholder": "p. ex. 6.371e6",
-        "calculate": "Calculer",
         "clear": "Effacer",
-        "variablesCaption": "La grandeur que vous calculez est mise en évidence.",
-        "scenarioPresetsLabel": "Essayer un scénario réel :",
         "scenarios": {
           "shoppingCart": "Pousser un caddie",
           "carAccelerating": "Voiture qui accélère",
@@ -10524,13 +10521,6 @@
         "mass1": "Masse 1",
         "mass2": "Masse 2",
         "distance": "Distance",
-        "diagramForce": "F={value} N",
-        "diagramAcceleration": "a={value} m/s²",
-        "diagramCaptionSecondLaw": "Flèches de force et d'accélération à l'échelle de leurs magnitudes calculées, dans la même direction.",
-        "diagramMass1": "m₁={value} kg",
-        "diagramMass2": "m₂={value} kg",
-        "diagramCaptionGravitation": "Tailles de cercle à l'échelle de la masse relative ; les flèches montrent l'attraction gravitationnelle mutuelle.",
-        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de force.",
         "sentence": "La force résultante est de {value} N.",
         "inverseSquareXLabel": "Distance (r)",
         "inverseSquareYLabel": "Force (F)",
@@ -10540,33 +10530,8 @@
         "intro": {
           "title": "Comprendre la Force et les Lois de Newton",
           "paragraph1": "La deuxième loi de Newton, F = ma, énonce que la force nette sur un objet est égale à sa masse multipliée par son accélération. La force se mesure en newtons (N), un newton étant la force nécessaire pour accélérer une masse de 1 kg à 1 m/s². Réarrangée, cette même équation donne la masse (m = F/a) ou l'accélération (a = F/m) dès lors que les deux autres grandeurs sont connues.",
-          "diagram": {
-            "caption": "Une masse de 2 kg accélérant à 3 m/s² sous une force nette de 6 N — les flèches de force et d'accélération pointent dans la même direction et sont à l'échelle de la magnitude."
-          },
           "paragraph2": "La loi de la gravitation universelle, F = Gm₁m₂/r², décrit un type de force différent : l'attraction mutuelle entre deux masses quelconques, proportionnelle au produit de leurs masses et inversement proportionnelle au carré de la distance entre leurs centres. La constante gravitationnelle G (environ 6,674 × 10⁻¹¹ N·m²/kg²) est extrêmement faible, ce qui explique pourquoi l'attraction gravitationnelle entre objets du quotidien est imperceptible — elle ne devient significative que lorsqu'au moins une masse est astronomiquement grande, comme une planète ou une étoile.",
-          "paragraph3": "Les deux équations décrivent une force, mais répondent à des questions différentes : F = ma relie la masse et l'accélération d'un seul objet sous n'importe quelle force nette, tandis que F = Gm₁m₂/r² calcule spécifiquement la force gravitationnelle entre deux masses en fonction de leur séparation. Un objet en chute à la surface de la Terre subit les deux à la fois — la gravité (issue de F = Gm₁m₂/r², simplifiée en F = mg près de la surface terrestre) est la force spécifique, et F = ma décrit comment cette force se traduit en accélération.",
-          "freeBody": {
-            "applied": "Force appliquée (F)",
-            "net": "Force nette = ma",
-            "caption": "Un diagramme de corps libre : une force appliquée produit une force nette, selon F = ma."
-          },
-          "forceGauge": {
-            "title": "À essayer : quelle est l'intensité de cette force ?",
-            "intro": "Choisissez une force réelle pour voir son intensité sur la jauge et la comparer à d'autres.",
-            "light": "Faible",
-            "moderate": "Modérée",
-            "heavy": "Intense",
-            "verdict": "{source} exerce une force {classification}.",
-            "accelerationFact": "Cette force accélérerait un objet de 1 kg d'environ {acceleration} m/s².",
-            "sources": {
-              "ant": "Le poids d'une fourmi",
-              "appleWeight": "Le poids d'une pomme",
-              "humanPush": "Une forte poussée humaine",
-              "carEngineThrust": "La poussée d'un moteur de voiture",
-              "rocketEngineThrust": "La poussée d'un moteur de fusée",
-              "saturnVThrust": "La poussée totale de la Saturn V"
-            }
-          }
+          "paragraph3": "Les deux équations décrivent une force, mais répondent à des questions différentes : F = ma relie la masse et l'accélération d'un seul objet sous n'importe quelle force nette, tandis que F = Gm₁m₂/r² calcule spécifiquement la force gravitationnelle entre deux masses en fonction de leur séparation. Un objet en chute à la surface de la Terre subit les deux à la fois — la gravité (issue de F = Gm₁m₂/r², simplifiée en F = mg près de la surface terrestre) est la force spécifique, et F = ma décrit comment cette force se traduit en accélération."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -10693,6 +10658,104 @@
           "note": "Les historiens McKie et de Beer retracent les preuves documentaires derrière l'anecdote de la pomme de Newton, distinguant ce que Newton lui-même est enregistré comme ayant dit des embellissements que l'histoire a acquis par la suite.",
           "url": "https://doi.org/10.1098/rsnr.1951.0003",
           "readOriginal": "Lire le Texte Original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez des valeurs valides ci-dessus pour voir cet indicateur.",
+          "push": {
+            "title": "Labo de poussée : deux blocs, une force",
+            "intro": "La même force pousse ta masse m et un bloc deux fois plus lourd pendant 4 secondes réelles depuis le repos. Déplace les curseurs pour changer les valeurs connues.",
+            "aria": "Animation de deux blocs accélérés par la même force",
+            "play": "Lecture",
+            "pause": "Pause",
+            "slider": {
+              "force": "Force en newtons",
+              "mass": "Masse en kilogrammes",
+              "acceleration": "Accélération en m/s²"
+            },
+            "accel": "a = F / m",
+            "distance4": "Distance en 4 s",
+            "speed4": "Vitesse à 4 s",
+            "double": "Bloc de 2m",
+            "halfNote": "Moitié de l'accélération, moitié de la distance"
+          },
+          "formula": {
+            "title": "F = m × a avec tes valeurs",
+            "intro": "Chaque case contient une valeur en direct et son unité SI ; la case encadrée est l'inconnue, vérifiée par les deux réarrangements.",
+            "aria": "Diagramme de la deuxième loi de Newton avec les valeurs actuelles",
+            "solved": "inconnue",
+            "check": "Vérification"
+          },
+          "trio": {
+            "title": "Moitié, actuelle et double masse",
+            "intro": "À force constante, l'accélération est inversement proportionnelle à la masse : diviser m par deux double a.",
+            "aria": "Diagramme en barres de l'accélération pour la moitié, l'actuelle et le double de la masse",
+            "half": "m / 2",
+            "current": "m actuelle",
+            "double": "2 × m",
+            "ratio": "a(m/2) : a(2m)",
+            "ratioNote": "Quatre fois la masse, un quart de l'accélération"
+          },
+          "scale": {
+            "title": "Où se situent tes forces à l'échelle de la nature",
+            "intro": "Les deux forces calculées sur un axe en puissances de dix à côté de six forces de référence réelles, de deux personnes à 1 m l'une de l'autre jusqu'à la Terre attirant la Lune.",
+            "aria": "Échelle logarithmique des forces en newtons",
+            "refs": {
+              "twoPeople": "2 personnes",
+              "apple": "Pomme",
+              "adultWeight": "Adulte",
+              "smallCarWeight": "Voiture",
+              "saturnVThrust": "Saturn V",
+              "earthMoon": "Terre–Lune"
+            },
+            "nearest": "Référence la plus proche : {ref}",
+            "ratio": "F = ma ÷ gravitation",
+            "span": "Étendue de l'axe",
+            "decades": "{n} puissances de dix"
+          },
+          "inverse": {
+            "title": "La loi en carré inverse en action",
+            "intro": "Force gravitationnelle en fonction de la distance pour tes deux masses : doubler r divise F par quatre, le tripler la divise par neuf.",
+            "aria": "Courbe de la force gravitationnelle en fonction de la distance"
+          },
+          "balance": {
+            "title": "Troisième loi de Newton : attractions égales",
+            "intro": "m₁ attire m₂ exactement autant que m₂ attire m₁ : le fléau reste toujours horizontal ; la masse la plus légère accélère simplement davantage.",
+            "aria": "Balance montrant des forces gravitationnelles égales et opposées",
+            "level": "Toujours à l'équilibre",
+            "ratioLine": "m₂ accélère {ratio} fois plus que m₁",
+            "pullOn2": "Attraction de m₁ sur m₂",
+            "pullOn1": "Attraction de m₂ sur m₁"
+          },
+          "bary": {
+            "title": "Où les deux masses orbitent vraiment",
+            "intro": "La distance r partagée au barycentre, le centre de masse commun autour duquel tournent les deux corps ; le plus lourd en est le plus proche.",
+            "aria": "Barre empilée de la distance partagée au barycentre",
+            "from1": "De m₁ au barycentre",
+            "from2": "Du barycentre à m₂",
+            "check": "Somme"
+          },
+          "planets": {
+            "title": "Le poids de m₂ dans le système solaire",
+            "intro": "Le poids est la force gravitationnelle F = GMm/R² à la surface d'un astre ; voici celui de ta m₂ sur les huit planètes et la Lune, du plus lourd au plus léger.",
+            "source": "Masses et rayons moyens : NASA Planetary Fact Sheet ; les planètes géantes n'ont pas de surface solide, R est donc le niveau de 1 bar.",
+            "onEarth": "Poids sur Terre",
+            "onMoon": "Poids sur la Lune",
+            "moonShare": "{pct} du poids sur Terre",
+            "heaviest": "Le plus lourd : {body}",
+            "bodies": {
+              "sun": "Soleil",
+              "mercury": "Mercure",
+              "venus": "Vénus",
+              "earth": "Terre",
+              "moon": "Lune",
+              "mars": "Mars",
+              "jupiter": "Jupiter",
+              "saturn": "Saturne",
+              "uranus": "Uranus",
+              "neptune": "Neptune"
+            }
+          }
         }
       },
       "gauge": {
@@ -10721,11 +10784,6 @@
       "relatedTools": {
         "title": "Outils de Physique Connexes"
       },
-      "weightCard": {
-        "title": "En Termes Quotidiens",
-        "intro": "Comparer une force au poids d'un objet sur Terre donne une idée intuitive de son intensité.",
-        "result": "Cette force équivaut environ au poids d'un objet de {mass} kg sur Terre."
-      },
       "referenceTable": {
         "title": "Forces du Quotidien",
         "caption": "Forces réelles couvrant une très large échelle, pour situer votre résultat.",
@@ -10739,6 +10797,48 @@
           "smallCarWeight": "Poids d'une Petite Voiture",
           "saturnVThrust": "Poussée de la Fusée Saturn V (décollage)"
         }
+      },
+      "live3d": {
+        "cardTitle": "Tableau de force en direct et dessin 3D",
+        "given": "donnée",
+        "constant": "constante universelle",
+        "groupLaw": "La loi",
+        "groupUnits": "La même force dans d'autres unités",
+        "kilonewtons": "Kilonewtons",
+        "poundsForce": "Livres-force",
+        "kilogramForce": "Kilogramme-force",
+        "dynes": "Dynes",
+        "groupWeight": "Comparée au poids sur Terre",
+        "ownWeight": "Poids de la masse",
+        "thrustToWeight": "Rapport force/poids",
+        "gForce": "Accélération en g",
+        "weightEquivalent": "Masse ayant ce poids",
+        "groupMotion": "Mouvement depuis le repos",
+        "speedAt": "Vitesse après {t} s",
+        "distanceAt": "Distance après {t} s",
+        "impulse": "Quantité de mouvement après 4 s",
+        "kineticEnergy": "Énergie cinétique après 4 s",
+        "work": "Travail fourni en 4 s",
+        "power": "Puissance à 4 s",
+        "timeTo100": "Temps pour atteindre 100 km/h",
+        "distanceTo100": "Distance pour atteindre 100 km/h",
+        "groupSensitivity": "Même force, autres masses",
+        "aWithMass": "a avec {k} × m",
+        "groupFields": "Champs et accélérations",
+        "field1": "Champ de m₁ à r",
+        "field2": "Champ de m₂ à r",
+        "accel1": "Accélération de m₁",
+        "accel2": "Accélération de m₂",
+        "groupOrbit": "Énergie et orbite",
+        "potentialEnergy": "Énergie potentielle",
+        "escapeSpeed": "Vitesse de libération de m₁",
+        "orbitalSpeed": "Vitesse d'orbite circulaire",
+        "orbitalPeriod": "Période orbitale",
+        "groupBarycenter": "Barycentre",
+        "baryFrom1": "Distance depuis m₁",
+        "baryFrom2": "Distance depuis m₂",
+        "groupInverseSquare": "Carré inverse",
+        "forceAt": "F à {k} × r"
       }
     },
     "projectile-motion-calculator": {

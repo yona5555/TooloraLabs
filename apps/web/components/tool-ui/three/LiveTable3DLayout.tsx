@@ -34,6 +34,11 @@ type Props = {
   /** Short hint under the drawing, e.g. "Drag to rotate". */
   hint?: string;
   className?: string;
+  /**
+   * Side-by-side (@3xl) only: cap the table at 600px and scroll it inside, so a very deep table
+   * does not stretch the drawing into a tall, mostly empty strip. The drawing matches that height.
+   */
+  capHeight?: boolean;
 };
 
 /**
@@ -48,6 +53,7 @@ export default function LiveTable3DLayout({
   drawing,
   hint,
   className = "",
+  capHeight = false,
 }: Props) {
   // Fill mode only ever runs in the narrow Result column (the page is max-w-6xl,
   // so that column never reaches @3xl); the table box is taken out of flow so
@@ -58,7 +64,7 @@ export default function LiveTable3DLayout({
     <div className={`@container ${fill ? "lg:flex lg:flex-1 lg:flex-col" : ""} ${className}`}>
       <div className={`grid grid-cols-1 gap-4 @3xl:grid-cols-2 @3xl:items-stretch ${fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}`}>
         <div className={fill ? "min-w-0 lg:relative lg:min-h-[520px] lg:flex-1" : "min-w-0"}>
-        <div className={`max-h-[520px] min-w-0 overflow-auto rounded-xl @3xl:max-h-none border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40 ${fill ? "lg:absolute lg:inset-0 lg:max-h-none" : "h-full"}`}>
+        <div className={`max-h-[520px] min-w-0 overflow-auto rounded-xl ${capHeight ? "@3xl:max-h-[600px]" : "@3xl:max-h-none"} border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/40 ${fill ? "lg:absolute lg:inset-0 lg:max-h-none" : "h-full"}`}>
           <table className="w-full text-sm">
             <thead className="sticky top-0 z-10 bg-zinc-50 dark:bg-zinc-800">
               <tr className="border-b border-zinc-200 text-xs tracking-wide text-zinc-500 uppercase dark:border-zinc-700 dark:text-zinc-400">

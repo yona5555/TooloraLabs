@@ -41,6 +41,7 @@ export * from "./IdealGasLawCalculator";
 export * from "./EnergyWorkPowerCalculator";
 export * from "./KinematicsCalculator";
 export * from "./ForceCalculator";
+export * from "./forceAnalysis";
 export * from "./ProjectileMotionCalculator";
 export * from "./ReadabilityScoreCalculator";
 export * from "./StudyTimeCalculator";
