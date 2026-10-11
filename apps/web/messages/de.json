@@ -8048,10 +8048,7 @@
         "massShort": "M",
         "densityShort": "D",
         "volumeShort": "V",
-        "triangleCaption": "Verdecke den Wert, den du berechnen möchtest.",
-        "calculate": "Berechnen",
-        "clear": "Zurücksetzen",
-        "materialPresetsLabel": "Echtes Material ausprobieren:"
+        "clear": "Zurücksetzen"
       },
       "result": {
         "heading": "Ergebnis",
@@ -8060,59 +8057,19 @@
         "unitGrams": "g",
         "unitCm3": "cm³",
         "unitGPerCm3": "g/cm³",
-        "siSummary": "Entspricht {si} kg/m³ in SI-Einheiten; relative Dichte {sg} bezogen auf Wasser.",
-        "diagramCaption": "{value} g/cm³ auf einer logarithmischen Dichteskala, neben gängigen Materialien.",
         "stepDensity": "{mass} g geteilt durch {volume} cm³.",
         "stepMass": "{density} g/cm³ multipliziert mit {volume} cm³.",
         "stepVolume": "{mass} g geteilt durch {density} g/cm³.",
-        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Dichteergebnis zu sehen.",
         "siLabel": "SI-Äquivalent",
         "specificGravityLabel": "Spezifisches Gewicht",
-        "massShortLabel": "Masse",
-        "volumeShortLabel": "Volumen",
-        "densityShortLabel": "Dichte",
-        "blockCaption": "Ein Live-Blockmodell: Breite folgt dem Volumen, Höhe folgt der Dichte, die schattierte Fläche steht für die Masse.",
-        "siStepLabel": "× 1.000",
-        "sgStepLabel": "÷ Wasser (1,0)",
-        "unitConversionCaption": "Wie sich der Hauptdichtewert in seinen SI-Wert und sein spezifisches Gewicht umrechnet."
+        "positiveOnly": "Gib positive Werte ein, um das Ergebnis, die Live-Tabelle und das Wasserbecken zu sehen."
       },
       "education": {
         "intro": {
           "title": "Dichte verstehen",
           "paragraph1": "Dichte ist die Menge an Masse, die in einem bestimmten Volumen konzentriert ist, ausgedrückt als Dichte = Masse ÷ Volumen. Zwei Objekte aus sehr unterschiedlichen Materialien können dasselbe Gewicht haben, wenn das dichtere Objekt anteilig weniger Volumen einnimmt: ein golfballgroßes Stück Gold und ein basketballgroßer Schaumstoffblock können identische Massen haben, obwohl Gold etwa 19,3-mal dichter ist als Wasser und Schaumstoff weit weniger dicht ist als Wasser. Da Dichte ein Verhältnis ist, hängt sie nicht davon ab, wie viel Substanz vorhanden ist: ein Gramm reines Eisen und eine Tonne reines Eisen teilen dieselbe Dichte, 7,87 g/cm³.",
-          "diagram": {
-            "caption": "Die Dichte von Eisen, 7,87 g/cm³, dargestellt auf einer logarithmischen Skala neben Luft, Wasser und anderen gängigen Materialien."
-          },
           "paragraph2": "Die relative Dichte formuliert die Dichte als Verhältnis zu Wasser (1,0 g/cm³ bei 4 °C, dem Punkt maximaler Dichte von Wasser); eine relative Dichte von 2,7, wie bei Aluminium, bedeutet also, dass das Material 2,7-mal dichter ist als Wasser — deshalb sagt eine relative Dichte unter 1 voraus, dass ein Objekt in Wasser schwimmt, und über 1, dass es sinkt, sofern andere Faktoren wie Oberflächenspannung und eingeschlossene Luft gleich bleiben.",
-          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen.",
-          "buoyancy": {
-            "floats": "Schwimmt (SG < 1)",
-            "sinks": "Sinkt (SG > 1)",
-            "water": "Wasser",
-            "caption": "Ein Objekt geringerer Dichte ruht über der Wasserlinie; ein Objekt höherer Dichte sinkt auf den Boden."
-          },
-          "sgGauge": {
-            "title": "Ausprobieren: Schwimmt es oder sinkt es?",
-            "intro": "Wählen Sie ein Material, um seine Dichte auf der Anzeige zu sehen und herauszufinden, ob es im Wasser schwimmt oder sinkt.",
-            "floatsVerdict": "{material} schwimmt im Wasser — Wasser ist etwa {ratio}-mal dichter.",
-            "sinksVerdict": "{material} sinkt im Wasser — es ist etwa {ratio}-mal dichter als Wasser.",
-            "neutralCaption": "Neutral (SG = 1)",
-            "neutralVerdict": "{material} ist Wasser selbst, daher schwimmt es weder noch sinkt es — neutraler Auftrieb.",
-            "literMass": "Ein Liter {material} würde etwa {mass} kg wiegen.",
-            "materials": {
-              "air": "Luft",
-              "oak": "Eichenholz",
-              "ice": "Eis",
-              "water": "Wasser",
-              "concrete": "Beton",
-              "aluminum": "Aluminium",
-              "iron": "Eisen",
-              "lead": "Blei",
-              "mercury": "Quecksilber",
-              "gold": "Gold",
-              "osmium": "Osmium"
-            }
-          }
+          "paragraph3": "Die SI-Einheit der Dichte ist Kilogramm pro Kubikmeter (kg/m³), was genau dem 1000-fachen des häufiger genannten Werts in Gramm pro Kubikzentimeter (g/cm³) entspricht, da ein Kubikmeter eine Million Kubikzentimeter enthält, während ein Kilogramm nur tausend Gramm ausmacht — der Umrechnungsfaktor 1000 ergibt sich direkt aus diesen beiden Tatsachen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8161,16 +8118,7 @@
               "question": "Warum wird die Dichte mancher Materialien in g/cm³ und die anderer in kg/m³ angegeben?",
               "answer": "Beide sind SI-konforme Einheiten, aber g/cm³ liefert für alltägliche Feststoffe und Flüssigkeiten handlichere, menschengerechte Zahlen (Wasser ergibt einen klaren Wert von 1,0), während kg/m³ die strenge SI-Einheit ist, die typischerweise in Technik und physikalischen Formeln verwendet wird. Dieser Rechner zeigt beide, da die Umrechnung lediglich ein Faktor von 1000 ist."
             }
-          ],
-          "temperatureSlider": {
-            "title": "Ausprobieren: Wasserdichte vs. Temperatur",
-            "intro": "Ziehen Sie den Schieberegler, um zu sehen, wie sich die tatsächliche Dichte von Wasser mit der Temperatur ändert — sie erreicht ihren Höhepunkt bei 4°C, dem Punkt maximaler Dichte von Wasser.",
-            "sliderLabel": "Temperatur",
-            "result": "Bei {temp}°C beträgt die Dichte von Wasser etwa {density} g/cm³.",
-            "percentBelowPeak": "Das ist etwa {percent}% weniger dicht als der Höchstwert des Wassers bei 4°C.",
-            "atPeak": "Dies ist die maximale Dichte von Wasser — die höchste Dichte, die flüssiges Wasser je erreicht.",
-            "iceComparison": "Festes Eis ist noch weniger dicht — etwa {iceDensity} g/cm³ — weshalb Eis auf flüssigem Wasser schwimmt."
-          }
+          ]
         },
         "behindTheTool": {
           "title": "Hintergrund des Tools",
@@ -8226,28 +8174,15 @@
           },
           "formulaSection": {
             "title": "Der Formelzusammenhang",
-            "paragraph": "Dichte, Masse und Volumen sind durch Dichte = Masse ÷ Volumen miteinander verbunden — die Kenntnis zweier Größen bestimmt immer die dritte. Dieses Mnemonik-Dreieck zeigt, welche der drei dieses Beispiel berechnet.",
-            "caption": "Das Abdecken der unbekannten Zelle zeigt die richtige Anordnung der anderen beiden."
+            "paragraph": "Dichte, Masse und Volumen sind durch Dichte = Masse ÷ Volumen miteinander verbunden — die Kenntnis zweier Größen bestimmt immer die dritte. Dieses Mnemonik-Dreieck zeigt, welche der drei dieses Beispiel berechnet."
           },
           "blockSection": {
             "title": "Dichte als Blockmodell",
-            "paragraph": "Sich die Masse als Fläche eines Rechtecks vorzustellen, dessen Breite das Volumen und dessen Höhe die Dichte ist, macht die Beziehung anschaulich: ein höherer, dichterer Block packt dieselbe Masse in eine schmalere Grundfläche.",
-            "caption": "Breite folgt dem Volumen, Höhe folgt der Dichte, die schattierte Fläche steht für die Masse."
+            "paragraph": "Sich die Masse als Fläche eines Rechtecks vorzustellen, dessen Breite das Volumen und dessen Höhe die Dichte ist, macht die Beziehung anschaulich: ein höherer, dichterer Block packt dieselbe Masse in eine schmalere Grundfläche."
           },
           "unitsSection": {
             "title": "Umrechnung zwischen Einheiten",
-            "paragraph": "Der häufig zitierte g/cm³-Wert und der strenge SI-Wert kg/m³ unterscheiden sich um genau den Faktor 1.000, und das spezifische Gewicht drückt dieselbe Dichte als Verhältnis zu Wasser aus.",
-            "caption": "Wie sich die Dichte von Eisen in ihren SI-Wert und ihr spezifisches Gewicht umrechnet.",
-            "liveConverter": {
-              "title": "Ausprobieren: Beliebige Dichte umrechnen",
-              "intro": "Geben Sie eine beliebige Dichte in g/cm³ ein, um sie live in kg/m³ und relative Dichte umgerechnet zu sehen.",
-              "inputLabel": "Dichte (g/cm³)",
-              "waterMarker": "Wasser",
-              "scaleLow": "0.001",
-              "scaleHigh": "32",
-              "literMass": "Ein Liter dieser Substanz würde etwa {mass} kg wiegen.",
-              "nearestMaterial": "Das liegt am nächsten bei {material}, mit {materialDensity} g/cm³."
-            }
+            "paragraph": "Der häufig zitierte g/cm³-Wert und der strenge SI-Wert kg/m³ unterscheiden sich um genau den Faktor 1.000, und das spezifische Gewicht drückt dieselbe Dichte als Verhältnis zu Wasser aus."
           }
         },
         "references": {
@@ -8256,6 +8191,114 @@
           "note": "Rorres' Studie rekonstruiert und analysiert das mathematische Argument von Archimedes' Originalabhandlung über schwimmende Körper, die echte antike Quelle des Auftriebs- und Dichteprinzips, das dieser Rechner anwendet — im Unterschied zur späteren, unbestätigten Badewannen-Anekdote.",
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Originaltext lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben positive Werte ein, um diesen Indikator zu sehen.",
+          "float": {
+            "title": "Schwimm-Labor: Lass deinen Würfel ins Becken fallen",
+            "intro": "Dein Material als maßstabsgetreuer Würfel, fallen gelassen in die gewählte Flüssigkeit. Bewege die Regler, um die bekannten Werte zu ändern; die ganze Seite folgt.",
+            "aria": "Animation eines Würfels, der in ein Flüssigkeitsbecken fällt und schwimmt oder sinkt",
+            "play": "Abspielen",
+            "pause": "Pause",
+            "slider": {
+              "mass": "Masse in Gramm",
+              "volume": "Volumen in Kubikzentimetern",
+              "density": "Dichte in g/cm³"
+            },
+            "underNow": "Jetzt unter der Oberfläche: {p}",
+            "floats": "Schwimmt",
+            "sinks": "Sinkt",
+            "submerged": "Eingetauchter Anteil in Ruhe",
+            "weight": "Gewichtskraft W",
+            "buoyancy": "Auftrieb in Ruhe",
+            "balancedNote": "Gleich der Gewichtskraft: der Würfel ist im Gleichgewicht",
+            "sunkNote": "Kleiner als die Gewichtskraft; der Boden trägt {n} N"
+          },
+          "formula": {
+            "title": "ρ = m ÷ V mit deinen Zahlen",
+            "intro": "Jedes Feld enthält einen Live-Wert mit Einheit; das hervorgehobene Feld wird berechnet, und die zwei Umstellungen prüfen es.",
+            "aria": "Formeldiagramm von Dichte, Masse und Volumen mit den aktuellen Werten",
+            "solved": "berechnet",
+            "check": "Probe"
+          },
+          "trio": {
+            "title": "Gleiche Masse im halben, aktuellen und doppelten Volumen",
+            "intro": "Bei fester Masse ist die Dichte umgekehrt proportional zum Volumen: auf den halben Raum zusammengedrückt verdoppelt sich ρ.",
+            "aria": "Balkendiagramm der Dichte für halbes, aktuelles und doppeltes Volumen",
+            "half": "V / 2",
+            "current": "Aktuelles V",
+            "double": "2 × V",
+            "water": "Wasser 1 g/cm³",
+            "ratio": "ρ(V/2) : ρ(2V)",
+            "ratioNote": "Vierfaches Volumen, ein Viertel der Dichte"
+          },
+          "ranking": {
+            "title": "Deine Dichte unter echten Materialien",
+            "intro": "Dein Wert eingeordnet unter zwölf echte Materialien, das dichteste zuerst, auf einer Zehnerpotenz-Achse; die gestrichelte Linie ist Wasser.",
+            "aria": "Rangliste der Materialdichten als Balken mit dem aktuellen Wert",
+            "axis": "ρ (g/cm³), logarithmisch",
+            "yours": "Deins",
+            "rank": "Rang, dichtestes zuerst",
+            "vsWater": "Verglichen mit Wasser",
+            "vsOsmium": "Verglichen mit Osmium",
+            "materials": {
+              "air": "Luft",
+              "cork": "Kork",
+              "oak": "Eichenholz",
+              "ice": "Eis",
+              "water": "Wasser",
+              "concrete": "Beton",
+              "aluminum": "Aluminium",
+              "iron": "Eisen",
+              "copper": "Kupfer",
+              "lead": "Blei",
+              "gold": "Gold",
+              "osmium": "Osmium"
+            }
+          },
+          "units": {
+            "title": "Eine Dichte, sechs Schreibweisen",
+            "intro": "Dieselbe Live-Dichte in g/cm³, in der SI-Einheit kg/m³, in g/mL, kg/L, lb/ft³ und als relative Dichte.",
+            "aria": "Sechs gleiche Felder, die die Dichte in verschiedenen Einheiten zeigen",
+            "litre": "Masse eines Liters",
+            "litreNote": "kg/L und g/cm³ ergeben dieselbe Zahl"
+          },
+          "balance": {
+            "title": "Gewichtskraft gegen den größten Auftrieb des Wassers",
+            "intro": "Der Balken neigt sich zur größeren Kraft: der Gewichtskraft m g₀ oder dem Auftrieb des Wassers bei vollem Eintauchen, ρ_w V g₀.",
+            "aria": "Waage, die die Gewichtskraft mit dem größten Auftrieb in Wasser vergleicht",
+            "floats": "Auftrieb gewinnt: es schwimmt",
+            "sinks": "Gewicht gewinnt: es sinkt",
+            "weight": "Gewicht",
+            "buoyancy": "Max. Auftrieb",
+            "apparent": "Scheinbares Gewicht unter Wasser",
+            "apparentNote": "Was eine Waage unter Wasser anzeigen würde",
+            "underWater": "Anteil unter der Oberfläche",
+            "underNote": "Gleich W / F_max"
+          },
+          "fluids": {
+            "title": "Wie tief er in sechs echten Flüssigkeiten liegt",
+            "intro": "Für jede Flüssigkeit wird die Würfelhöhe in den Teil unter der Oberfläche (ρ / ρ_f) und den Teil darüber geteilt; ein roter Balken bedeutet, dass er sinkt.",
+            "aria": "Gestapelte Balken des eingetauchten Würfelanteils in sechs Flüssigkeiten",
+            "under": "Unten",
+            "above": "Oben",
+            "sinks": "Sinkt",
+            "count": "Flüssigkeiten, in denen er schwimmt"
+          },
+          "temperature": {
+            "title": "Dichte von Wasser in Abhängigkeit von der Temperatur",
+            "intro": "Echte Dichte von flüssigem Wasser von 0 bis 100 °C, am größten bei 4 °C. Bewege den Regler, um dein Material erneut mit Wasser dieser Temperatur zu vergleichen.",
+            "aria": "Trendlinie der Wasserdichte über der Temperatur mit hervorgehobenem Punkt",
+            "slider": "Wassertemperatur in °C",
+            "max": "Max. bei 4 °C",
+            "waterAt": "Wasser bei {t} °C",
+            "belowPeak": "Unter dem Maximum bei 4 °C",
+            "sgAt": "Relative Dichte bei dieser Temperatur",
+            "floats": "Schwimmt",
+            "sinks": "Sinkt",
+            "underNote": "Anteil unter der Oberfläche"
+          }
         }
       },
       "tabs": {
@@ -8290,12 +8333,6 @@
       "relatedTools": {
         "title": "Verwandte Physik- und Chemie-Tools"
       },
-      "buoyancyCard": {
-        "title": "Schwimmt oder sinkt?",
-        "intro": "Der Vergleich des spezifischen Gewichts dieses Materials mit Wasser (1,0) sagt voraus, ob es schwimmt oder sinkt.",
-        "floatsResult": "Mit einem spezifischen Gewicht von {sg} würde dieses Material im Wasser schwimmen.",
-        "sinksResult": "Mit einem spezifischen Gewicht von {sg} würde dieses Material im Wasser sinken."
-      },
       "referenceTable": {
         "title": "Dichten Gängiger Materialien",
         "caption": "Typische Dichten bei Raumtemperatur und Standardluftdruck.",
@@ -8308,6 +8345,49 @@
           "aluminum": "Aluminium",
           "iron": "Eisen",
           "gold": "Gold"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Live-Dichtetabelle und 3D-Wasserbecken",
+        "given": "gegeben",
+        "floats": "Schwimmt",
+        "sinks": "Sinkt",
+        "groupRelation": "Der Zusammenhang",
+        "density": "Dichte",
+        "mass": "Masse",
+        "volume": "Volumen",
+        "groupSI": "In SI- und anderen Einheiten",
+        "litres": "Volumen in Litern",
+        "poundsPerFoot": "Dichte in Pfund pro Kubikfuß",
+        "specificGravity": "Relative Dichte",
+        "groupShape": "Ein Würfel mit diesem Volumen",
+        "cubeEdge": "Kantenlänge des Würfels",
+        "cubeFace": "Fläche einer Seite",
+        "sphereDiameter": "Durchmesser einer Kugel gleichen Volumens",
+        "massPerLitre": "Masse eines Liters",
+        "groupWater": "In Wasser gelegt (1 g/cm³)",
+        "weight": "Gewichtskraft",
+        "displacedWater": "Verdrängtes Wasser bei vollem Eintauchen",
+        "buoyancyFull": "Auftrieb bei vollem Eintauchen",
+        "verdict": "Schwimmt oder sinkt",
+        "submerged": "Anteil unter der Oberfläche",
+        "waterline": "Tiefe der Wasserlinie am Würfel",
+        "buoyancyRest": "Auftrieb in Ruhe",
+        "apparentWeight": "Scheinbares Gewicht auf dem Boden",
+        "groupFluids": "In sechs echten Flüssigkeiten",
+        "groupSensitivity": "Gleiche Masse, andere Volumen",
+        "densityAtVolume": "Dichte bei {k} × V",
+        "tankWidth": "Beckenbreite {w} cm (maßstabsgetreu)",
+        "underWater": "{p} unter Wasser",
+        "onFloor": "Liegt auf dem Boden",
+        "waterLabel": "Wasser",
+        "fluids": {
+          "gasoline": "Benzin",
+          "ethanol": "Ethanol",
+          "water": "Wasser",
+          "seawater": "Meerwasser",
+          "glycerin": "Glycerin",
+          "mercury": "Quecksilber"
         }
       }
     },

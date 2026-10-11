@@ -8048,10 +8048,7 @@
         "massShort": "M",
         "densityShort": "D",
         "volumeShort": "V",
-        "triangleCaption": "Cover the value you're solving for.",
-        "calculate": "Calculate",
-        "clear": "Clear",
-        "materialPresetsLabel": "Try a real material:"
+        "clear": "Clear"
       },
       "result": {
         "heading": "Result",
@@ -8060,59 +8057,19 @@
         "unitGrams": "g",
         "unitCm3": "cm³",
         "unitGPerCm3": "g/cm³",
-        "siSummary": "Equal to {si} kg/m³ in SI units; specific gravity {sg} relative to water.",
-        "diagramCaption": "{value} g/cm³ on a logarithmic density scale, alongside common materials.",
         "stepDensity": "{mass} g divided by {volume} cm³.",
         "stepMass": "{density} g/cm³ multiplied by {volume} cm³.",
         "stepVolume": "{mass} g divided by {density} g/cm³.",
-        "emptyStateMessage": "Enter values and press Calculate to see your density result.",
         "siLabel": "SI Equivalent",
         "specificGravityLabel": "Specific Gravity",
-        "massShortLabel": "Mass",
-        "volumeShortLabel": "Volume",
-        "densityShortLabel": "Density",
-        "blockCaption": "A live block model: width tracks volume, height tracks density, and the shaded area stands for mass.",
-        "siStepLabel": "× 1,000",
-        "sgStepLabel": "÷ water (1.0)",
-        "unitConversionCaption": "How the headline density converts into its SI value and specific gravity."
+        "positiveOnly": "Enter positive values to see the result, the live table and the water tank."
       },
       "education": {
         "intro": {
           "title": "Understanding Density",
           "paragraph1": "Density is the amount of mass packed into a given volume, expressed as density = mass ÷ volume. Two objects can be made of very different materials yet weigh the same if the denser one occupies proportionally less volume — a golf-ball-sized lump of gold and a basketball-sized block of foam can have identical masses despite gold being roughly 19.3 times denser than water and foam being far less dense than water. Because density is a ratio, it does not depend on how much of a substance you have: a gram of pure iron and a ton of pure iron share the same density, 7.87 g/cm³.",
-          "diagram": {
-            "caption": "Iron's density, 7.87 g/cm³, plotted on a logarithmic scale against air, water, and other common materials."
-          },
           "paragraph2": "Specific gravity restates density as a ratio to water (1.0 g/cm³ at 4°C, water's point of maximum density), so a specific gravity of 2.7, as with aluminum, means the material is 2.7 times as dense as water — this is why a specific gravity below 1 predicts that an object will float in water, and above 1 predicts that it will sink, all else (like surface tension and trapped air) being equal.",
-          "paragraph3": "The SI unit of density is kilograms per cubic meter (kg/m³), which is exactly 1,000 times the more commonly quoted grams per cubic centimeter (g/cm³) value, since one cubic meter contains one million cubic centimeters but only a thousand grams make a kilogram — the conversion factor of 1,000 falls directly out of those two facts.",
-          "buoyancy": {
-            "floats": "Floats (SG < 1)",
-            "sinks": "Sinks (SG > 1)",
-            "water": "Water",
-            "caption": "A lower-density object rests above the waterline; a higher-density object settles to the bottom."
-          },
-          "sgGauge": {
-            "title": "Try It: Floats or Sinks?",
-            "intro": "Pick a material to see its specific gravity on the gauge and find out whether it floats or sinks in water.",
-            "floatsVerdict": "{material} floats in water — water is about {ratio}x denser.",
-            "sinksVerdict": "{material} sinks in water — it is about {ratio}x denser than water.",
-            "neutralCaption": "Neutral (SG = 1)",
-            "neutralVerdict": "{material} is water itself, so it neither floats nor sinks — it is neutrally buoyant.",
-            "literMass": "One liter of {material} would weigh about {mass} kg.",
-            "materials": {
-              "air": "Air",
-              "oak": "Oak Wood",
-              "ice": "Ice",
-              "water": "Water",
-              "concrete": "Concrete",
-              "aluminum": "Aluminum",
-              "iron": "Iron",
-              "lead": "Lead",
-              "mercury": "Mercury",
-              "gold": "Gold",
-              "osmium": "Osmium"
-            }
-          }
+          "paragraph3": "The SI unit of density is kilograms per cubic meter (kg/m³), which is exactly 1,000 times the more commonly quoted grams per cubic centimeter (g/cm³) value, since one cubic meter contains one million cubic centimeters but only a thousand grams make a kilogram — the conversion factor of 1,000 falls directly out of those two facts."
         },
         "examples": {
           "title": "Worked Examples",
@@ -8161,16 +8118,7 @@
               "question": "Why is density given in g/cm³ for some materials and kg/m³ for others?",
               "answer": "Both are SI-consistent units, but g/cm³ produces more convenient, human-scale numbers for everyday solids and liquids (water is a clean 1.0), while kg/m³ is the strict SI unit typically used in engineering and physics formulas. This calculator reports both, since the conversion is a simple factor of 1,000."
             }
-          ],
-          "temperatureSlider": {
-            "title": "Try It: Water's Density vs. Temperature",
-            "intro": "Drag the slider to see how water's real density changes with temperature — it peaks at 4°C, water's point of maximum density.",
-            "sliderLabel": "Temperature",
-            "result": "At {temp}°C, water’s density is about {density} g/cm³.",
-            "percentBelowPeak": "That’s about {percent}% less dense than water’s peak at 4°C.",
-            "atPeak": "This is water’s maximum density — the densest liquid water ever gets.",
-            "iceComparison": "Solid ice is even less dense — about {iceDensity} g/cm³ — which is why ice floats on liquid water."
-          }
+          ]
         },
         "behindTheTool": {
           "title": "Behind This Tool",
@@ -8226,28 +8174,15 @@
           },
           "formulaSection": {
             "title": "The Formula Relationship",
-            "paragraph": "Density, mass, and volume are locked together by density = mass ÷ volume — knowing any two always determines the third. This mnemonic triangle shows which of the three this example solves for.",
-            "caption": "Covering the unknown cell reveals the correct arrangement of the other two."
+            "paragraph": "Density, mass, and volume are locked together by density = mass ÷ volume — knowing any two always determines the third. This mnemonic triangle shows which of the three this example solves for."
           },
           "blockSection": {
             "title": "Density as a Block Model",
-            "paragraph": "Picturing mass as the area of a rectangle whose width is volume and whose height is density makes the relationship visual: a taller, denser block packs the same mass into a narrower footprint.",
-            "caption": "Width tracks volume, height tracks density, and the shaded area stands for mass."
+            "paragraph": "Picturing mass as the area of a rectangle whose width is volume and whose height is density makes the relationship visual: a taller, denser block packs the same mass into a narrower footprint."
           },
           "unitsSection": {
             "title": "Converting Between Units",
-            "paragraph": "The commonly quoted g/cm³ figure and the strict SI kg/m³ figure differ by exactly a factor of 1,000, and specific gravity restates the same density as a ratio to water.",
-            "caption": "How iron's density converts into its SI value and specific gravity.",
-            "liveConverter": {
-              "title": "Try It: Convert Any Density",
-              "intro": "Type any density in g/cm³ to see it converted live to kg/m³ and specific gravity.",
-              "inputLabel": "Density (g/cm³)",
-              "waterMarker": "Water",
-              "scaleLow": "0.001",
-              "scaleHigh": "32",
-              "literMass": "One liter of this substance would weigh about {mass} kg.",
-              "nearestMaterial": "This is closest to {material}, at {materialDensity} g/cm³."
-            }
+            "paragraph": "The commonly quoted g/cm³ figure and the strict SI kg/m³ figure differ by exactly a factor of 1,000, and specific gravity restates the same density as a ratio to water."
           }
         },
         "references": {
@@ -8256,6 +8191,114 @@
           "note": "Rorres's study reconstructs and analyzes the mathematical argument of Archimedes' original treatise on floating bodies, the genuine ancient source for the buoyancy and density principle this calculator applies — distinct from the later, unverified bathtub anecdote.",
           "url": "https://doi.org/10.1007/BF02986750",
           "readOriginal": "Read the Original Text"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter positive values above to see this indicator.",
+          "float": {
+            "title": "Float Lab: Drop Your Cube in a Tank",
+            "intro": "Your material as a true-scale cube, dropped into the liquid you pick. Move the sliders to change the known values; the whole page follows.",
+            "aria": "Animation of a cube dropped into a tank of liquid, floating or sinking",
+            "play": "Play",
+            "pause": "Pause",
+            "slider": {
+              "mass": "Mass in grams",
+              "volume": "Volume in cubic centimetres",
+              "density": "Density in g/cm³"
+            },
+            "underNow": "Under the surface now: {p}",
+            "floats": "Floats",
+            "sinks": "Sinks",
+            "submerged": "Share under at rest",
+            "weight": "Weight W",
+            "buoyancy": "Buoyant force at rest",
+            "balancedNote": "Equal to the weight: the cube is balanced",
+            "sunkNote": "Less than the weight; the floor carries {n} N"
+          },
+          "formula": {
+            "title": "ρ = m ÷ V With Your Numbers",
+            "intro": "Each box holds a live value and its unit; the outlined box is the one being solved, and the two rearrangements check it.",
+            "aria": "Formula diagram of density, mass and volume with the current values",
+            "solved": "solved",
+            "check": "Check"
+          },
+          "trio": {
+            "title": "Same Mass in Half, Current and Double Volume",
+            "intro": "With the mass fixed, density is inversely proportional to volume: squeezing it into half the space doubles ρ.",
+            "aria": "Bar chart of density for half, current and double volume",
+            "half": "V / 2",
+            "current": "Current V",
+            "double": "2 × V",
+            "water": "Water 1 g/cm³",
+            "ratio": "ρ(V/2) : ρ(2V)",
+            "ratioNote": "Four times the volume, a quarter of the density"
+          },
+          "ranking": {
+            "title": "Your Density Among Real Materials",
+            "intro": "Your value slotted among twelve real materials, densest first, on a powers-of-ten axis; the dashed line is water.",
+            "aria": "Ranked bar list of material densities including the current value",
+            "axis": "ρ (g/cm³), log scale",
+            "yours": "Yours",
+            "rank": "Rank, densest first",
+            "vsWater": "Compared with water",
+            "vsOsmium": "Compared with osmium",
+            "materials": {
+              "air": "Air",
+              "cork": "Cork",
+              "oak": "Oak wood",
+              "ice": "Ice",
+              "water": "Water",
+              "concrete": "Concrete",
+              "aluminum": "Aluminium",
+              "iron": "Iron",
+              "copper": "Copper",
+              "lead": "Lead",
+              "gold": "Gold",
+              "osmium": "Osmium"
+            }
+          },
+          "units": {
+            "title": "One Density, Six Ways to Write It",
+            "intro": "The same live density in g/cm³, the SI unit kg/m³, g/mL, kg/L, lb/ft³ and as a specific gravity.",
+            "aria": "Six equal boxes showing the density in different units",
+            "litre": "Mass of one litre",
+            "litreNote": "kg/L and g/cm³ are the same number"
+          },
+          "balance": {
+            "title": "Weight Against the Most Buoyancy Water Can Give",
+            "intro": "The beam tips toward the larger force: the body's weight m g₀, or the buoyant force of water when it is fully under, ρ_w V g₀.",
+            "aria": "Balance comparing the weight with the maximum buoyant force in water",
+            "floats": "Buoyancy wins: it floats",
+            "sinks": "Weight wins: it sinks",
+            "weight": "Weight",
+            "buoyancy": "Max buoyancy",
+            "apparent": "Apparent weight under water",
+            "apparentNote": "What a scale under water would read",
+            "underWater": "Share under the surface",
+            "underNote": "Equals W / F_max"
+          },
+          "fluids": {
+            "title": "How Deep It Rides in Six Real Liquids",
+            "intro": "For each liquid, the cube's height split into the part under the surface (ρ / ρ_f) and the part above it; a red bar means it sinks.",
+            "aria": "Stacked bars of the submerged share of the cube in six liquids",
+            "under": "Under",
+            "above": "Above",
+            "sinks": "Sinks",
+            "count": "Liquids it floats in"
+          },
+          "temperature": {
+            "title": "Water Density Against Temperature",
+            "intro": "Real density of liquid water from 0 to 100 °C, densest at 4 °C. Move the slider to re-check your material against water at that temperature.",
+            "aria": "Trend line of water density against temperature with the chosen point highlighted",
+            "slider": "Water temperature in °C",
+            "max": "max at 4 °C",
+            "waterAt": "Water at {t} °C",
+            "belowPeak": "Below the 4 °C maximum",
+            "sgAt": "Specific gravity at this temperature",
+            "floats": "Floats",
+            "sinks": "Sinks",
+            "underNote": "Share under the surface"
+          }
         }
       },
       "tabs": {
@@ -8290,12 +8333,6 @@
       "relatedTools": {
         "title": "Related Physics & Chemistry Tools"
       },
-      "buoyancyCard": {
-        "title": "Floats or Sinks?",
-        "intro": "Comparing this material's specific gravity to water (1.0) predicts whether it floats or sinks.",
-        "floatsResult": "With a specific gravity of {sg}, this material would float in water.",
-        "sinksResult": "With a specific gravity of {sg}, this material would sink in water."
-      },
       "referenceTable": {
         "title": "Common Material Densities",
         "caption": "Typical densities at room temperature and standard atmospheric pressure.",
@@ -8308,6 +8345,49 @@
           "aluminum": "Aluminum",
           "iron": "Iron",
           "gold": "Gold"
+        }
+      },
+      "live3d": {
+        "cardTitle": "Live Density Table and 3D Water Tank",
+        "given": "given",
+        "floats": "Floats",
+        "sinks": "Sinks",
+        "groupRelation": "The relation",
+        "density": "Density",
+        "mass": "Mass",
+        "volume": "Volume",
+        "groupSI": "In SI and other units",
+        "litres": "Volume in litres",
+        "poundsPerFoot": "Density in pounds per cubic foot",
+        "specificGravity": "Specific gravity",
+        "groupShape": "A cube of this volume",
+        "cubeEdge": "Cube edge",
+        "cubeFace": "Face area",
+        "sphereDiameter": "Sphere of the same volume, diameter",
+        "massPerLitre": "Mass of one litre",
+        "groupWater": "Placed in water (1 g/cm³)",
+        "weight": "Weight",
+        "displacedWater": "Water displaced when fully under",
+        "buoyancyFull": "Buoyant force when fully under",
+        "verdict": "Floats or sinks",
+        "submerged": "Share under the surface",
+        "waterline": "Waterline depth on the cube",
+        "buoyancyRest": "Buoyant force at rest",
+        "apparentWeight": "Apparent weight on the floor",
+        "groupFluids": "In six real liquids",
+        "groupSensitivity": "Same mass, other volumes",
+        "densityAtVolume": "Density at {k} × V",
+        "tankWidth": "Tank width {w} cm (true scale)",
+        "underWater": "{p} under water",
+        "onFloor": "Rests on the floor",
+        "waterLabel": "Water",
+        "fluids": {
+          "gasoline": "Gasoline",
+          "ethanol": "Ethanol",
+          "water": "Water",
+          "seawater": "Seawater",
+          "glycerin": "Glycerin",
+          "mercury": "Mercury"
         }
       }
     },

@@ -15,10 +15,3 @@ export const MATERIAL_DENSITIES: Record<MaterialKey, number> = {
 };
 
 export const MATERIAL_KEYS: MaterialKey[] = ["air", "ice", "water", "aluminum", "iron", "gold"];
-
-/**
- * Materials shown on the diagram's scale. "ice" is intentionally excluded here:
- * its density (0.92) sits log10-adjacent to water (1.0), so their tick labels
- * would overlap illegibly at this scale. "ice" still appears in the reference table.
- */
-export const DIAGRAM_MATERIAL_KEYS: MaterialKey[] = ["air", "water", "aluminum", "iron", "gold"];
