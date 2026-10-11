@@ -9885,9 +9885,7 @@
         "workValuePlaceholder": "e.g. 100",
         "timeLabel": "Time (s)",
         "timePlaceholder": "e.g. 10",
-        "calculate": "Calculate",
         "clear": "Clear",
-        "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "shoppingCart": "Push a Shopping Cart",
           "liftBox": "Lift a Box",
@@ -9911,40 +9909,14 @@
           "kineticEnergy": "Energy of motion at the given mass and velocity.",
           "potentialEnergy": "Gravitational potential energy at the given height (g = 9.8 m/s²).",
           "power": "Rate at which work is done over time."
-        },
-        "diagramCaptionWork": "Force vector at {angle}° from the direction of displacement.",
-        "diagramCaptionMagnitude": "{value} {unit} on a logarithmic magnitude scale.",
-        "emptyStateMessage": "Enter values and press Calculate to see your result.",
-        "diagramCaptionKinetic": "A mass in motion — kinetic energy depends on both mass and the square of velocity.",
-        "diagramCaptionPotential": "Height above a ground reference — gravitational potential energy scales linearly with height.",
-        "diagramCaptionPower": "Work delivered over a span of time — power is that rate."
+        }
       },
       "education": {
         "intro": {
           "title": "Understanding Work, Energy, and Power",
           "paragraph1": "In physics, work is done when a force causes displacement: W = F·d·cos(θ), where θ is the angle between the force and the direction of motion. Only the component of force acting along the direction of displacement contributes to work — a force applied entirely perpendicular to motion (θ = 90°) does zero work, no matter how large the force is, since cos(90°) = 0.",
-          "diagram": {
-            "caption": "A force applied at 30° to the direction of displacement — only its horizontal component contributes to the work done."
-          },
           "paragraph2": "Kinetic energy, KE = ½mv², is the energy an object possesses because it is moving, and it grows with the square of velocity — doubling speed quadruples kinetic energy, not merely doubles it. Gravitational potential energy, PE = mgh, is the energy stored in an object's position within a gravitational field, proportional to its height above a reference level; the work-energy theorem connects both to work, since work done against gravity or applied to accelerate an object converts directly into these energy forms.",
-          "paragraph3": "Power, P = W/t, measures how quickly work is done or energy is transferred, not how much total work is done. Two machines can perform the identical amount of work, but the one that does it faster has greater power — this is why an engine's power rating (kilowatts or horsepower) matters separately from the total energy content of its fuel.",
-          "powerLevelGauge": {
-            "title": "Try It: How Much Power Is That?",
-            "intro": "Pick an everyday device to see its power draw on the gauge and compare it to others.",
-            "low": "Low Power",
-            "everyday": "Everyday",
-            "high": "High Power",
-            "verdict": "A {device} is a {classification} device.",
-            "energyFact": "Running it for 1 hour would use about {energy} kWh of energy.",
-            "devices": {
-              "ledBulb": "LED Bulb",
-              "humanResting": "Human Body (resting)",
-              "laptop": "Laptop",
-              "microwave": "Microwave Oven",
-              "hairDryer": "Hair Dryer",
-              "carEngine": "Car Engine"
-            }
-          }
+          "paragraph3": "Power, P = W/t, measures how quickly work is done or energy is transferred, not how much total work is done. Two machines can perform the identical amount of work, but the one that does it faster has greater power — this is why an engine's power rating (kilowatts or horsepower) matters separately from the total energy content of its fuel."
         },
         "examples": {
           "title": "Worked Examples",
@@ -10053,23 +10025,19 @@
           },
           "magnitudeSection": {
             "title": "Sense of Scale",
-            "paragraph": "Energy values in joules span an enormous range, from a heartbeat's worth of work to a lightning bolt — placing a result on a logarithmic scale makes its order of magnitude easy to judge at a glance.",
-            "caption": "1,000 J placed on a logarithmic magnitude scale."
+            "paragraph": "Energy values in joules span an enormous range, from a heartbeat's worth of work to a lightning bolt — placing a result on a logarithmic scale makes its order of magnitude easy to judge at a glance."
           },
           "kineticSection": {
             "title": "Energy of Motion",
-            "paragraph": "Kinetic energy depends on mass linearly but on velocity squared, so doubling speed quadruples the energy of motion — far more consequential than doubling mass.",
-            "caption": "A mass moving at a given velocity carries kinetic energy proportional to v²."
+            "paragraph": "Kinetic energy depends on mass linearly but on velocity squared, so doubling speed quadruples the energy of motion — far more consequential than doubling mass."
           },
           "potentialSection": {
             "title": "Energy of Position",
-            "paragraph": "Gravitational potential energy grows in direct proportion to height above a reference level, storing the energy that would be released if the object fell back down.",
-            "caption": "Height above a ground reference — potential energy scales linearly with height."
+            "paragraph": "Gravitational potential energy grows in direct proportion to height above a reference level, storing the energy that would be released if the object fell back down."
           },
           "powerRateSection": {
             "title": "Power as a Rate",
-            "paragraph": "Power is not a separate kind of energy — it's simply how quickly work is being delivered, so the same total work performed faster means a higher power figure.",
-            "caption": "The same work delivered faster or slower changes power, not the work itself."
+            "paragraph": "Power is not a separate kind of energy — it's simply how quickly work is being delivered, so the same total work performed faster means a higher power figure."
           }
         },
         "references": {
@@ -10078,12 +10046,101 @@
           "note": "Mendelson traces the physics definition of work back to Coriolis's 1829 precise formulation, contrasting it with the term's everyday, non-technical meaning to clarify a common source of student confusion.",
           "url": "https://doi.org/10.1119/1.1522707",
           "readOriginal": "Read the Original Text"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter valid values above to see this indicator.",
+          "drop": {
+            "title": "Drop Lab: Height Becomes Speed",
+            "intro": "A ball of your mass m falls from rest at your height h. Watch potential energy turn into kinetic energy while the total stays the same. Move the sliders to change m and h.",
+            "aria": "Animation of a falling ball whose potential energy turns into kinetic energy",
+            "play": "Play",
+            "pause": "Pause",
+            "slider": {
+              "mass": "Mass in kilograms",
+              "height": "Height in metres"
+            },
+            "total": "Total",
+            "joules": "energy in joules",
+            "halfway": "Halfway down",
+            "fallTime": "Fall time",
+            "impact": "Speed at the ground",
+            "conserved": "PE + KE stays constant (air resistance ignored)"
+          },
+          "formula": {
+            "title": "Four Formulas, Live",
+            "intro": "All four formulas with your current inputs substituted. The one you are solving is outlined; the mass m feeds both kinetic and potential energy.",
+            "aria": "Diagram of the work, kinetic energy, potential energy and power formulas with live values",
+            "active": "Solving for",
+            "gNote": "Value used by this calculator",
+            "shared": "Shared input",
+            "sharedNote": "Used by both KE and PE"
+          },
+          "angle": {
+            "title": "Work vs Angle",
+            "intro": "How the work done by your force over your distance changes with the angle between them: full at 0°, zero at 90°, negative at 180°.",
+            "aria": "Line chart of work against the angle between force and displacement",
+            "xLabel": "angle θ",
+            "yLabel": "W (J)",
+            "positive": "Positive work: the force helps the motion",
+            "zero": "No work: the force is perpendicular to the motion",
+            "negative": "Negative work: the force opposes the motion",
+            "zeroAt": "cos 90° = 0"
+          },
+          "trio": {
+            "title": "Speed Squared: Half, Current, Double",
+            "intro": "The same mass at half your speed, your speed and double it. Kinetic energy follows v², so the bars go ¼ : 1 : 4.",
+            "aria": "Bar chart of kinetic energy at half, current and double speed",
+            "half": "Half speed",
+            "current": "Your speed",
+            "double": "Double speed",
+            "ratio": "Double vs current",
+            "ratioNote": "Twice the speed carries four times the energy"
+          },
+          "scale": {
+            "title": "Energy on a Powers-of-Ten Scale",
+            "intro": "Your work, kinetic energy and potential energy placed among six real energies, from lifting an apple to a lightning flash.",
+            "aria": "Logarithmic energy scale with your results and reference energies",
+            "refs": {
+              "appleLift": "Apple lifted 1 m",
+              "foodCalorie": "1 food Calorie",
+              "aaBattery": "AA battery",
+              "carAt100": "Car at 100 km/h",
+              "petrolLitre": "1 L of petrol",
+              "lightning": "Lightning flash"
+            },
+            "nearest": "Closest reference: {ref}",
+            "span": "Axis span",
+            "decades": "{n} powers of ten"
+          },
+          "equiv": {
+            "title": "Your Energy in Everyday Terms",
+            "intro": "The energy of the formula you are solving, shown as everyday amounts that hold exactly the same number of joules.",
+            "bulb": "60 W bulb running",
+            "lift": "Lifting 1 kg",
+            "apples": "100 g apples lifted 1 m",
+            "food": "Food Calories",
+            "wh": "Watt-hours"
+          },
+          "power": {
+            "title": "Your Power Among Real Devices",
+            "intro": "Your power P = W / t ranked among typical power ratings, highest first. Bar length uses a logarithmic scale.",
+            "yours": "Your result",
+            "carEngine": "Car engine",
+            "source": "Typical ratings; real devices vary by model.",
+            "rank": "Rank",
+            "above": "Next above",
+            "below": "Next below",
+            "bulbs": "60 W bulbs"
+          },
+          "steps": {
+            "title": "Same Work, Faster or Slower",
+            "intro": "Your work delivered in a quarter, half, the same, double and four times your time. Each step halves the power; the work never changes.",
+            "aria": "Stepped bar chart of power for the same work over different times",
+            "ratio": "t/4 vs 4t",
+            "ratioNote": "Delivering it sixteen times faster takes sixteen times the power"
+          }
         }
-      },
-      "gauge": {
-        "small": "Small",
-        "moderate": "Moderate",
-        "large": "Large"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -10106,12 +10163,6 @@
       "relatedTools": {
         "title": "Related Physics Tools"
       },
-      "lightbulbCard": {
-        "title": "In Everyday Terms",
-        "intro": "Comparing against a standard 60 W lightbulb gives an intuitive sense of scale for this result.",
-        "secondsResult": "This much energy could run a 60 W lightbulb for about {seconds} seconds.",
-        "ratioResult": "This power is about {ratio}× a standard 60 W lightbulb."
-      },
       "referenceTable": {
         "title": "Common Power Ratings",
         "caption": "Typical power draw of everyday devices and the human body at rest.",
@@ -10125,6 +10176,56 @@
           "microwave": "Microwave Oven",
           "hairDryer": "Hair Dryer"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live Energy Table and 3D Drawing",
+        "given": "given",
+        "constant": "constant",
+        "groupInputs": "Inputs",
+        "groupWork": "Work done",
+        "parallel": "Force along the path",
+        "perpendicular": "Force across the path",
+        "alignedWork": "Work if fully aligned",
+        "share": "Share of the force doing work",
+        "work": "Work",
+        "groupUnits": "Same energy in other units",
+        "kilojoules": "Kilojoules",
+        "kilocalories": "Food Calories (kcal)",
+        "wattHours": "Watt-hours",
+        "kilowattHours": "Kilowatt-hours",
+        "electronvolts": "Electronvolts",
+        "footPounds": "Foot-pounds",
+        "groupEveryday": "In everyday terms",
+        "bulbSeconds": "Runs a 60 W bulb for",
+        "liftOneKg": "Lifts 1 kg by",
+        "appleLifts": "100 g apples lifted 1 m",
+        "groupAngles": "Same force at other angles",
+        "workAt": "W at {angle}°",
+        "groupMotion": "Motion",
+        "kineticEnergy": "Kinetic energy",
+        "momentum": "Momentum",
+        "speedKmh": "Speed in km/h",
+        "dropHeight": "Free-fall height for this speed",
+        "stopForce": "Average force to stop in 10 m",
+        "groupSensitivity": "Sensitivity",
+        "keAtSpeed": "KE at {k} × v",
+        "keDoubleMass": "KE with 2 × m",
+        "groupFall": "Falling from this height",
+        "gravity": "Gravity g",
+        "weight": "Weight",
+        "potentialEnergy": "Potential energy",
+        "impactSpeed": "Speed at the ground",
+        "fallTime": "Fall time",
+        "midFall": "KE halfway down",
+        "peAtHeight": "PE at {k} × h",
+        "groupPower": "Power",
+        "power": "Power",
+        "kilowatts": "Kilowatts",
+        "horsepower": "Horsepower",
+        "hourEnergy": "Energy used in 1 hour",
+        "bulbs": "60 W bulbs it could run",
+        "groupTime": "Same work, other times",
+        "powerAtTime": "P with {k} × t"
       }
     },
     "kinematics-calculator": {

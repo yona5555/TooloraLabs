@@ -4,17 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import WorkVectorDiagram from "./WorkVectorDiagram";
-import EnergyMagnitudeDiagram from "./EnergyMagnitudeDiagram";
-import EnergyKineticDiagram from "./EnergyKineticDiagram";
-import EnergyPotentialDiagram from "./EnergyPotentialDiagram";
-import EnergyPowerRateDiagram from "./EnergyPowerRateDiagram";
-import EnergyPowerLevelGauge from "./EnergyPowerLevelGauge";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import EnergyLive3D from "./EnergyLive3D";
+import EnergyDropLab from "./EnergyDropLab";
+import EnergyWorkAngleTrend from "./EnergyWorkAngleTrend";
+import EnergyFormulaDiagram from "./EnergyFormulaDiagram";
+import EnergyLogScale from "./EnergyLogScale";
+import EnergyEquivalents from "./EnergyEquivalents";
+import EnergySpeedTrio from "./EnergySpeedTrio";
+import EnergyPowerRanking from "./EnergyPowerRanking";
+import EnergyPowerSteps from "./EnergyPowerSteps";
 
 type ExampleRow = { calculation: string; result: string };
 
 export default async function EnergyEducation() {
   const t = await getTranslations("tools.energy-work-power-calculator.education");
+  const t3 = await getTranslations("tools.energy-work-power-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -22,14 +27,21 @@ export default async function EnergyEducation() {
 
   return (
     <EncyclopediaPaper>
-      <EnergyPowerLevelGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <WorkVectorDiagram angleDegrees={30} caption={t("intro.diagram.caption")} />
+        <SectionCard title={t3("cardTitle")}>
+          <EnergyLive3D camera={[0, 2.2, 8.6]} capHeight />
+        </SectionCard>
+        <div className="space-y-6">
+          <EnergyDropLab />
+          <EnergyWorkAngleTrend />
+        </div>
         <p>{t("intro.paragraph2")}</p>
         <p>{t("intro.paragraph3")}</p>
+        <EnergyFormulaDiagram />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -51,6 +63,7 @@ export default async function EnergyEducation() {
             </tbody>
           </table>
         </div>
+        <EnergyLogScale />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -71,22 +84,28 @@ export default async function EnergyEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.magnitudeSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.magnitudeSection.paragraph")}</p>
-          <EnergyMagnitudeDiagram value={1000} unit="J" caption={t("behindTheTool.magnitudeSection.caption")} />
+          <div className="mt-4">
+            <EnergyEquivalents />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.kineticSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.kineticSection.paragraph")}</p>
-          <EnergyKineticDiagram massLabel="m = 10 kg" velocityLabel="v = 4 m/s" caption={t("behindTheTool.kineticSection.caption")} />
+          <div className="mt-4">
+            <EnergySpeedTrio />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.potentialSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.potentialSection.paragraph")}</p>
-          <EnergyPotentialDiagram heightFraction={0.6} massLabel="m = 10 kg" heightLabel="h = 3 m" caption={t("behindTheTool.potentialSection.caption")} />
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.powerRateSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.powerRateSection.paragraph")}</p>
-          <EnergyPowerRateDiagram workLabel="W = 100 J" timeLabel="t = 5 s" caption={t("behindTheTool.powerRateSection.caption")} />
+          <div className="mt-4 space-y-6">
+            <EnergyPowerSteps />
+            <EnergyPowerRanking />
+          </div>
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

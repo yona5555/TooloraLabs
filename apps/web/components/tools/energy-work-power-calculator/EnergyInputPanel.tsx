@@ -1,116 +1,70 @@
 "use client";
-import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
+import EnergyModeTabs from "./EnergyModeTabs";
+import type { EnergyDraft } from "./EnergyLiveContext";
 import type { EnergyWorkPowerMode } from "./types";
 
+type NumericKey = Exclude<keyof EnergyDraft, "mode">;
+
 type EnergyInputPanelProps = {
-  mode: EnergyWorkPowerMode;
-  force: string;
-  onForceChange: (value: string) => void;
-  distance: string;
-  onDistanceChange: (value: string) => void;
-  angleDegrees: string;
-  onAngleDegreesChange: (value: string) => void;
-  mass: string;
-  onMassChange: (value: string) => void;
-  velocity: string;
-  onVelocityChange: (value: string) => void;
-  height: string;
-  onHeightChange: (value: string) => void;
-  workValue: string;
-  onWorkValueChange: (value: string) => void;
-  time: string;
-  onTimeChange: (value: string) => void;
-  scenarioKeys: string[];
-  onScenarioPreset: (key: string) => void;
-  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  draft: EnergyDraft;
+  onChange: <K extends keyof EnergyDraft>(key: K, value: EnergyDraft[K]) => void;
   onClear: () => void;
 };
 
-export default function EnergyInputPanel({
-  mode,
-  force,
-  onForceChange,
-  distance,
-  onDistanceChange,
-  angleDegrees,
-  onAngleDegreesChange,
-  mass,
-  onMassChange,
-  velocity,
-  onVelocityChange,
-  height,
-  onHeightChange,
-  workValue,
-  onWorkValueChange,
-  time,
-  onTimeChange,
-  scenarioKeys,
-  onScenarioPreset,
-  onCalculate,
-  onClear,
-}: EnergyInputPanelProps) {
+const FIELDS: Record<EnergyWorkPowerMode, { key: NumericKey; label: string; placeholder: string }[]> = {
+  work: [
+    { key: "force", label: "forceLabel", placeholder: "forcePlaceholder" },
+    { key: "distance", label: "distanceLabel", placeholder: "distancePlaceholder" },
+    { key: "angleDegrees", label: "angleLabel", placeholder: "anglePlaceholder" },
+  ],
+  kineticEnergy: [
+    { key: "mass", label: "massLabel", placeholder: "massPlaceholder" },
+    { key: "velocity", label: "velocityLabel", placeholder: "velocityPlaceholder" },
+  ],
+  potentialEnergy: [
+    { key: "mass", label: "massLabel", placeholder: "massPlaceholder" },
+    { key: "height", label: "heightLabel", placeholder: "heightPlaceholder" },
+  ],
+  power: [
+    { key: "workValue", label: "workValueLabel", placeholder: "workValuePlaceholder" },
+    { key: "time", label: "timeLabel", placeholder: "timePlaceholder" },
+  ],
+};
+
+/** Formula and its known values; every keystroke updates the whole page live. */
+export default function EnergyInputPanel({ draft, onChange, onClear }: EnergyInputPanelProps) {
   const t = useTranslations("tools.energy-work-power-calculator.form");
-  const tScenarios = useTranslations("tools.energy-work-power-calculator.form.scenarios");
 
   return (
     <SectionCard title={t("inputTitle")}>
       <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
-        <div className="flex flex-wrap gap-2">
-          {scenarioKeys.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onScenarioPreset(key)}
-              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
-            >
-              {tScenarios(key)}
-            </button>
-          ))}
-        </div>
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
+        <EnergyModeTabs mode={draft.mode} onModeChange={(m) => onChange("mode", m)} />
       </div>
 
-      <form onSubmit={onCalculate} className="space-y-5">
-        {mode === "work" && (
-          <>
-            <ToolInput label={t("forceLabel")} type="text" inputMode="decimal" placeholder={t("forcePlaceholder")} value={force} onChange={(e) => onForceChange(e.target.value)} />
-            <ToolInput label={t("distanceLabel")} type="text" inputMode="decimal" placeholder={t("distancePlaceholder")} value={distance} onChange={(e) => onDistanceChange(e.target.value)} />
-            <ToolInput label={t("angleLabel")} type="text" inputMode="decimal" placeholder={t("anglePlaceholder")} value={angleDegrees} onChange={(e) => onAngleDegreesChange(e.target.value)} />
-          </>
-        )}
-        {mode === "kineticEnergy" && (
-          <>
-            <ToolInput label={t("massLabel")} type="text" inputMode="decimal" placeholder={t("massPlaceholder")} value={mass} onChange={(e) => onMassChange(e.target.value)} />
-            <ToolInput label={t("velocityLabel")} type="text" inputMode="decimal" placeholder={t("velocityPlaceholder")} value={velocity} onChange={(e) => onVelocityChange(e.target.value)} />
-          </>
-        )}
-        {mode === "potentialEnergy" && (
-          <>
-            <ToolInput label={t("massLabel")} type="text" inputMode="decimal" placeholder={t("massPlaceholder")} value={mass} onChange={(e) => onMassChange(e.target.value)} />
-            <ToolInput label={t("heightLabel")} type="text" inputMode="decimal" placeholder={t("heightPlaceholder")} value={height} onChange={(e) => onHeightChange(e.target.value)} />
-          </>
-        )}
-        {mode === "power" && (
-          <>
-            <ToolInput label={t("workValueLabel")} type="text" inputMode="decimal" placeholder={t("workValuePlaceholder")} value={workValue} onChange={(e) => onWorkValueChange(e.target.value)} />
-            <ToolInput label={t("timeLabel")} type="text" inputMode="decimal" placeholder={t("timePlaceholder")} value={time} onChange={(e) => onTimeChange(e.target.value)} />
-          </>
-        )}
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+        {FIELDS[draft.mode].map((field) => (
+          <ToolInput
+            key={field.key}
+            label={t(field.label)}
+            type="text"
+            inputMode="decimal"
+            placeholder={t(field.placeholder)}
+            value={draft[field.key]}
+            onChange={(e) => onChange(field.key, e.target.value)}
+          />
+        ))}
 
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t("calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={onClear}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t("clear")}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
       </form>
     </SectionCard>
   );
