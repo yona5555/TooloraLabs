@@ -39,6 +39,7 @@ export * from "./StatisticsHistogram";
 export * from "./MolarityCalculator";
 export * from "./IdealGasLawCalculator";
 export * from "./EnergyWorkPowerCalculator";
+export * from "./energyAnalysis";
 export * from "./KinematicsCalculator";
 export * from "./ForceCalculator";
 export * from "./forceAnalysis";

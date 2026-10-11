@@ -9885,9 +9885,7 @@
         "workValuePlaceholder": "p. ej. 100",
         "timeLabel": "Tiempo (s)",
         "timePlaceholder": "p. ej. 10",
-        "calculate": "Calcular",
         "clear": "Limpiar",
-        "scenarioPresetsLabel": "Prueba un escenario real:",
         "scenarios": {
           "shoppingCart": "Empujar un Carrito de Compras",
           "liftBox": "Levantar una Caja",
@@ -9911,40 +9909,14 @@
           "kineticEnergy": "Energía de movimiento con la masa y velocidad dadas.",
           "potentialEnergy": "Energía potencial gravitatoria a la altura dada (g = 9.8 m/s²).",
           "power": "Tasa a la que se realiza el trabajo con el tiempo."
-        },
-        "diagramCaptionWork": "Vector de fuerza a {angle}° de la dirección del desplazamiento.",
-        "diagramCaptionMagnitude": "{value} {unit} en una escala de magnitud logarítmica.",
-        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado.",
-        "diagramCaptionKinetic": "Una masa en movimiento: la energía cinética depende de la masa y el cuadrado de la velocidad.",
-        "diagramCaptionPotential": "Altura sobre una referencia del suelo: la energía potencial gravitatoria escala linealmente con la altura.",
-        "diagramCaptionPower": "Trabajo realizado durante un intervalo de tiempo: la potencia es esa tasa."
+        }
       },
       "education": {
         "intro": {
           "title": "Entendiendo el Trabajo, la Energía y la Potencia",
           "paragraph1": "En física, se realiza trabajo cuando una fuerza causa un desplazamiento: W = F·d·cos(θ), donde θ es el ángulo entre la fuerza y la dirección del movimiento. Solo la componente de la fuerza que actúa a lo largo de la dirección del desplazamiento contribuye al trabajo; una fuerza aplicada completamente perpendicular al movimiento (θ = 90°) no realiza ningún trabajo, sin importar cuán grande sea la fuerza, ya que cos(90°) = 0.",
-          "diagram": {
-            "caption": "Una fuerza aplicada a 30° de la dirección del desplazamiento: solo su componente horizontal contribuye al trabajo realizado."
-          },
           "paragraph2": "La energía cinética, EC = ½mv², es la energía que posee un objeto debido a su movimiento, y crece con el cuadrado de la velocidad: duplicar la velocidad cuadruplica la energía cinética, no solo la duplica. La energía potencial gravitatoria, EP = mgh, es la energía almacenada en la posición de un objeto dentro de un campo gravitatorio, proporcional a su altura sobre un nivel de referencia; el teorema del trabajo y la energía conecta ambas con el trabajo, ya que el trabajo realizado contra la gravedad o aplicado para acelerar un objeto se convierte directamente en estas formas de energía.",
-          "paragraph3": "La potencia, P = W/t, mide qué tan rápido se realiza el trabajo o se transfiere la energía, no cuánto trabajo total se realiza. Dos máquinas pueden realizar exactamente la misma cantidad de trabajo, pero la que lo hace más rápido tiene mayor potencia; por eso la potencia nominal de un motor (kilovatios o caballos de fuerza) importa por separado del contenido energético total de su combustible.",
-          "powerLevelGauge": {
-            "title": "Pruébalo: ¿Cuánta Potencia Es Esa?",
-            "intro": "Elige un dispositivo cotidiano para ver su consumo de energía en el medidor y compararlo con otros.",
-            "low": "Baja Potencia",
-            "everyday": "Cotidiano",
-            "high": "Alta Potencia",
-            "verdict": "Un(a) {device} es un dispositivo de {classification}.",
-            "energyFact": "Usarlo durante 1 hora consumiría unos {energy} kWh de energía.",
-            "devices": {
-              "ledBulb": "Bombilla LED",
-              "humanResting": "Cuerpo Humano (reposo)",
-              "laptop": "Portátil",
-              "microwave": "Horno Microondas",
-              "hairDryer": "Secador de Pelo",
-              "carEngine": "Motor de Coche"
-            }
-          }
+          "paragraph3": "La potencia, P = W/t, mide qué tan rápido se realiza el trabajo o se transfiere la energía, no cuánto trabajo total se realiza. Dos máquinas pueden realizar exactamente la misma cantidad de trabajo, pero la que lo hace más rápido tiene mayor potencia; por eso la potencia nominal de un motor (kilovatios o caballos de fuerza) importa por separado del contenido energético total de su combustible."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -10053,23 +10025,19 @@
           },
           "magnitudeSection": {
             "title": "Sentido de la Escala",
-            "paragraph": "Los valores de energía en julios abarcan un rango enorme, desde un latido del corazón hasta un rayo — ubicar un resultado en una escala logarítmica facilita juzgar su orden de magnitud de un vistazo.",
-            "caption": "1000 J ubicados en una escala logarítmica de magnitud."
+            "paragraph": "Los valores de energía en julios abarcan un rango enorme, desde un latido del corazón hasta un rayo — ubicar un resultado en una escala logarítmica facilita juzgar su orden de magnitud de un vistazo."
           },
           "kineticSection": {
             "title": "Energía del Movimiento",
-            "paragraph": "La energía cinética depende linealmente de la masa pero del cuadrado de la velocidad, por lo que duplicar la velocidad cuadruplica la energía de movimiento, mucho más significativo que duplicar la masa.",
-            "caption": "Una masa moviéndose a una velocidad dada porta energía cinética proporcional a v²."
+            "paragraph": "La energía cinética depende linealmente de la masa pero del cuadrado de la velocidad, por lo que duplicar la velocidad cuadruplica la energía de movimiento, mucho más significativo que duplicar la masa."
           },
           "potentialSection": {
             "title": "Energía de la Posición",
-            "paragraph": "La energía potencial gravitatoria crece en proporción directa a la altura sobre un nivel de referencia, almacenando la energía que se liberaría si el objeto cayera de nuevo.",
-            "caption": "Altura sobre una referencia del suelo: la energía potencial escala linealmente con la altura."
+            "paragraph": "La energía potencial gravitatoria crece en proporción directa a la altura sobre un nivel de referencia, almacenando la energía que se liberaría si el objeto cayera de nuevo."
           },
           "powerRateSection": {
             "title": "La Potencia como Tasa",
-            "paragraph": "La potencia no es un tipo separado de energía: es simplemente la rapidez con la que se realiza el trabajo, por lo que el mismo trabajo total realizado más rápido significa una cifra de potencia más alta.",
-            "caption": "El mismo trabajo realizado más rápido o más lento cambia la potencia, no el trabajo en sí."
+            "paragraph": "La potencia no es un tipo separado de energía: es simplemente la rapidez con la que se realiza el trabajo, por lo que el mismo trabajo total realizado más rápido significa una cifra de potencia más alta."
           }
         },
         "references": {
@@ -10078,12 +10046,101 @@
           "note": "Mendelson traza la definición física del trabajo hasta la formulación precisa de Coriolis de 1829, contrastándola con el significado cotidiano y no técnico del término para aclarar una fuente común de confusión entre los estudiantes.",
           "url": "https://doi.org/10.1119/1.1522707",
           "readOriginal": "Leer el Texto Original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce valores válidos arriba para ver este indicador.",
+          "drop": {
+            "title": "Laboratorio de caída: la altura se vuelve velocidad",
+            "intro": "Una bola de tu masa m cae desde el reposo a tu altura h. Observa cómo la energía potencial se convierte en cinética mientras el total no cambia. Mueve los controles para cambiar m y h.",
+            "aria": "Animación de una bola que cae y cuya energía potencial se convierte en cinética",
+            "play": "Reproducir",
+            "pause": "Pausa",
+            "slider": {
+              "mass": "Masa en kilogramos",
+              "height": "Altura en metros"
+            },
+            "total": "Total",
+            "joules": "energía en julios",
+            "halfway": "A mitad de la caída",
+            "fallTime": "Tiempo de caída",
+            "impact": "Velocidad al llegar al suelo",
+            "conserved": "EP + EC se mantiene constante (sin resistencia del aire)"
+          },
+          "formula": {
+            "title": "Las cuatro fórmulas en vivo",
+            "intro": "Las cuatro fórmulas con tus datos actuales sustituidos. La que estás resolviendo aparece remarcada; la masa m interviene en la energía cinética y en la potencial.",
+            "aria": "Diagrama de las fórmulas de trabajo, energía cinética, energía potencial y potencia con valores en vivo",
+            "active": "Se calcula",
+            "gNote": "Valor que usa esta calculadora",
+            "shared": "Dato compartido",
+            "sharedNote": "Lo usan EC y EP"
+          },
+          "angle": {
+            "title": "Trabajo frente al ángulo",
+            "intro": "Cómo cambia el trabajo de tu fuerza sobre tu distancia según el ángulo entre ambas: máximo a 0°, nulo a 90° y negativo a 180°.",
+            "aria": "Gráfica del trabajo frente al ángulo entre fuerza y desplazamiento",
+            "xLabel": "ángulo θ",
+            "yLabel": "W (J)",
+            "positive": "Trabajo positivo: la fuerza ayuda al movimiento",
+            "zero": "Sin trabajo: la fuerza es perpendicular al movimiento",
+            "negative": "Trabajo negativo: la fuerza se opone al movimiento",
+            "zeroAt": "cos 90° = 0"
+          },
+          "trio": {
+            "title": "Velocidad al cuadrado: mitad, actual, doble",
+            "intro": "La misma masa a la mitad de tu velocidad, a tu velocidad y al doble. La energía cinética sigue a v², así que las barras van ¼ : 1 : 4.",
+            "aria": "Gráfico de barras de la energía cinética a velocidad mitad, actual y doble",
+            "half": "Mitad de velocidad",
+            "current": "Tu velocidad",
+            "double": "Doble de velocidad",
+            "ratio": "Doble frente a actual",
+            "ratioNote": "El doble de velocidad lleva cuatro veces la energía"
+          },
+          "scale": {
+            "title": "La energía en una escala de potencias de diez",
+            "intro": "Tu trabajo, tu energía cinética y tu energía potencial entre seis energías reales, desde levantar una manzana hasta un rayo.",
+            "aria": "Escala logarítmica de energía con tus resultados y energías de referencia",
+            "refs": {
+              "appleLift": "Manzana elevada 1 m",
+              "foodCalorie": "1 caloría alimentaria",
+              "aaBattery": "Pila AA",
+              "carAt100": "Coche a 100 km/h",
+              "petrolLitre": "1 L de gasolina",
+              "lightning": "Rayo"
+            },
+            "nearest": "Referencia más cercana: {ref}",
+            "span": "Amplitud del eje",
+            "decades": "{n} potencias de diez"
+          },
+          "equiv": {
+            "title": "Tu energía en términos cotidianos",
+            "intro": "La energía de la fórmula que estás resolviendo, expresada en cantidades cotidianas con exactamente los mismos julios.",
+            "bulb": "Bombilla de 60 W encendida",
+            "lift": "Elevar 1 kg",
+            "apples": "Manzanas de 100 g elevadas 1 m",
+            "food": "Calorías alimentarias",
+            "wh": "Vatios-hora"
+          },
+          "power": {
+            "title": "Tu potencia entre aparatos reales",
+            "intro": "Tu potencia P = W / t ordenada entre potencias típicas, de mayor a menor. La longitud de las barras usa escala logarítmica.",
+            "yours": "Tu resultado",
+            "carEngine": "Motor de coche",
+            "source": "Valores típicos; los aparatos reales varían según el modelo.",
+            "rank": "Posición",
+            "above": "Siguiente por encima",
+            "below": "Siguiente por debajo",
+            "bulbs": "Bombillas de 60 W"
+          },
+          "steps": {
+            "title": "El mismo trabajo, más rápido o más lento",
+            "intro": "Tu trabajo realizado en un cuarto, la mitad, el mismo, el doble y el cuádruple de tu tiempo. Cada paso reduce la potencia a la mitad; el trabajo no cambia.",
+            "aria": "Gráfico escalonado de la potencia para el mismo trabajo en distintos tiempos",
+            "ratio": "t/4 frente a 4t",
+            "ratioNote": "Hacerlo dieciséis veces más rápido exige dieciséis veces la potencia"
+          }
         }
-      },
-      "gauge": {
-        "small": "Pequeño",
-        "moderate": "Moderado",
-        "large": "Grande"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -10106,12 +10163,6 @@
       "relatedTools": {
         "title": "Herramientas de Física Relacionadas"
       },
-      "lightbulbCard": {
-        "title": "En Términos Cotidianos",
-        "intro": "Comparar con una bombilla estándar de 60 W da una idea intuitiva de la escala de este resultado.",
-        "secondsResult": "Esta cantidad de energía podría hacer funcionar una bombilla de 60 W durante unos {seconds} segundos.",
-        "ratioResult": "Esta potencia es aproximadamente {ratio}× una bombilla estándar de 60 W."
-      },
       "referenceTable": {
         "title": "Potencias Comunes",
         "caption": "Consumo típico de energía de dispositivos cotidianos y del cuerpo humano en reposo.",
@@ -10125,6 +10176,56 @@
           "microwave": "Horno Microondas",
           "hairDryer": "Secador de Pelo"
         }
+      },
+      "live3d": {
+        "cardTitle": "Tabla de energía en vivo y dibujo 3D",
+        "given": "dado",
+        "constant": "constante",
+        "groupInputs": "Datos",
+        "groupWork": "Trabajo realizado",
+        "parallel": "Fuerza a lo largo de la trayectoria",
+        "perpendicular": "Fuerza perpendicular a la trayectoria",
+        "alignedWork": "Trabajo si estuviera totalmente alineada",
+        "share": "Parte de la fuerza que realiza trabajo",
+        "work": "Trabajo",
+        "groupUnits": "La misma energía en otras unidades",
+        "kilojoules": "Kilojulios",
+        "kilocalories": "Calorías alimentarias (kcal)",
+        "wattHours": "Vatios-hora",
+        "kilowattHours": "Kilovatios-hora",
+        "electronvolts": "Electronvoltios",
+        "footPounds": "Pies-libra",
+        "groupEveryday": "En términos cotidianos",
+        "bulbSeconds": "Mantiene encendida una bombilla de 60 W durante",
+        "liftOneKg": "Eleva 1 kg una altura de",
+        "appleLifts": "Manzanas de 100 g elevadas 1 m",
+        "groupAngles": "La misma fuerza con otros ángulos",
+        "workAt": "W a {angle}°",
+        "groupMotion": "Movimiento",
+        "kineticEnergy": "Energía cinética",
+        "momentum": "Cantidad de movimiento",
+        "speedKmh": "Velocidad en km/h",
+        "dropHeight": "Altura de caída libre para esta velocidad",
+        "stopForce": "Fuerza media para frenar en 10 m",
+        "groupSensitivity": "Sensibilidad",
+        "keAtSpeed": "EC con {k} × v",
+        "keDoubleMass": "EC con 2 × m",
+        "groupFall": "Caída desde esta altura",
+        "gravity": "Gravedad g",
+        "weight": "Peso",
+        "potentialEnergy": "Energía potencial",
+        "impactSpeed": "Velocidad al llegar al suelo",
+        "fallTime": "Tiempo de caída",
+        "midFall": "EC a mitad de la caída",
+        "peAtHeight": "EP con {k} × h",
+        "groupPower": "Potencia",
+        "power": "Potencia",
+        "kilowatts": "Kilovatios",
+        "horsepower": "Caballos de potencia",
+        "hourEnergy": "Energía consumida en 1 hora",
+        "bulbs": "Bombillas de 60 W que podría alimentar",
+        "groupTime": "El mismo trabajo en otros tiempos",
+        "powerAtTime": "P con {k} × t"
       }
     },
     "kinematics-calculator": {

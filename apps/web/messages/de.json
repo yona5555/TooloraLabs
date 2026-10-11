@@ -9885,9 +9885,7 @@
         "workValuePlaceholder": "z. B. 100",
         "timeLabel": "Zeit (s)",
         "timePlaceholder": "z. B. 10",
-        "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "scenarioPresetsLabel": "Echtes Szenario ausprobieren:",
         "scenarios": {
           "shoppingCart": "Einkaufswagen Schieben",
           "liftBox": "Kiste Heben",
@@ -9911,40 +9909,14 @@
           "kineticEnergy": "Bewegungsenergie bei der angegebenen Masse und Geschwindigkeit.",
           "potentialEnergy": "Potenzielle Energie bei der angegebenen Höhe (g = 9,8 m/s²).",
           "power": "Rate, mit der über die Zeit Arbeit verrichtet wird."
-        },
-        "diagramCaptionWork": "Kraftvektor bei {angle}° zur Verschiebungsrichtung.",
-        "diagramCaptionMagnitude": "{value} {unit} auf einer logarithmischen Größenordnungsskala.",
-        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
-        "diagramCaptionKinetic": "Eine Masse in Bewegung — kinetische Energie hängt von der Masse und dem Quadrat der Geschwindigkeit ab.",
-        "diagramCaptionPotential": "Höhe über einer Bodenreferenz — die gravitative potenzielle Energie skaliert linear mit der Höhe.",
-        "diagramCaptionPower": "Verrichtete Arbeit über einen Zeitraum — Leistung ist diese Rate."
+        }
       },
       "education": {
         "intro": {
           "title": "Arbeit, Energie und Leistung verstehen",
           "paragraph1": "In der Physik wird Arbeit verrichtet, wenn eine Kraft eine Verschiebung bewirkt: W = F·s·cos(θ), wobei θ der Winkel zwischen Kraft und Bewegungsrichtung ist. Nur die entlang der Verschiebungsrichtung wirkende Komponente der Kraft trägt zur Arbeit bei — eine Kraft, die vollständig senkrecht zur Bewegung wirkt (θ = 90°), verrichtet keinerlei Arbeit, unabhängig von ihrer Größe, da cos(90°) = 0 ist.",
-          "diagram": {
-            "caption": "Eine Kraft, die im Winkel von 30° zur Verschiebungsrichtung wirkt — nur ihre horizontale Komponente trägt zur verrichteten Arbeit bei."
-          },
           "paragraph2": "Kinetische Energie, E_kin = ½mv², ist die Energie, die ein Objekt aufgrund seiner Bewegung besitzt, und wächst mit dem Quadrat der Geschwindigkeit — eine Verdopplung der Geschwindigkeit vervierfacht die kinetische Energie, verdoppelt sie nicht bloß. Potenzielle Energie im Schwerefeld, E_pot = mgh, ist die in der Position eines Objekts innerhalb eines Gravitationsfelds gespeicherte Energie, proportional zu seiner Höhe über einem Bezugsniveau; der Arbeits-Energie-Satz verbindet beide mit der Arbeit, da gegen die Schwerkraft verrichtete oder zur Beschleunigung eines Objekts aufgewendete Arbeit sich direkt in diese Energieformen umwandelt.",
-          "paragraph3": "Leistung, P = W/t, misst, wie schnell Arbeit verrichtet oder Energie übertragen wird, nicht wie viel Arbeit insgesamt verrichtet wird. Zwei Maschinen können exakt dieselbe Arbeitsmenge verrichten, aber diejenige, die es schneller tut, hat eine höhere Leistung — deshalb ist die Leistungsangabe eines Motors (Kilowatt oder PS) unabhängig vom gesamten Energiegehalt seines Kraftstoffs von Bedeutung.",
-          "powerLevelGauge": {
-            "title": "Ausprobieren: Wie Viel Leistung Ist Das?",
-            "intro": "Wählen Sie ein Alltagsgerät, um seine Leistungsaufnahme auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "low": "Niedrige Leistung",
-            "everyday": "Alltäglich",
-            "high": "Hohe Leistung",
-            "verdict": "Ein {device} ist ein Gerät mit {classification}.",
-            "energyFact": "Ein Betrieb von 1 Stunde würde etwa {energy} kWh Energie verbrauchen.",
-            "devices": {
-              "ledBulb": "LED-Lampe",
-              "humanResting": "Menschlicher Körper (Ruhe)",
-              "laptop": "Laptop",
-              "microwave": "Mikrowellenherd",
-              "hairDryer": "Haartrockner",
-              "carEngine": "Automotor"
-            }
-          }
+          "paragraph3": "Leistung, P = W/t, misst, wie schnell Arbeit verrichtet oder Energie übertragen wird, nicht wie viel Arbeit insgesamt verrichtet wird. Zwei Maschinen können exakt dieselbe Arbeitsmenge verrichten, aber diejenige, die es schneller tut, hat eine höhere Leistung — deshalb ist die Leistungsangabe eines Motors (Kilowatt oder PS) unabhängig vom gesamten Energiegehalt seines Kraftstoffs von Bedeutung."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -10053,23 +10025,19 @@
           },
           "magnitudeSection": {
             "title": "Gefühl für die Größenordnung",
-            "paragraph": "Energiewerte in Joule umfassen einen enormen Bereich, von einem Herzschlag bis zu einem Blitzschlag — ein Ergebnis auf einer logarithmischen Skala einzuordnen macht seine Größenordnung auf einen Blick erkennbar.",
-            "caption": "1.000 J auf einer logarithmischen Größenordnungsskala."
+            "paragraph": "Energiewerte in Joule umfassen einen enormen Bereich, von einem Herzschlag bis zu einem Blitzschlag — ein Ergebnis auf einer logarithmischen Skala einzuordnen macht seine Größenordnung auf einen Blick erkennbar."
           },
           "kineticSection": {
             "title": "Energie der Bewegung",
-            "paragraph": "Kinetische Energie hängt linear von der Masse, aber quadratisch von der Geschwindigkeit ab, sodass eine Verdopplung der Geschwindigkeit die Bewegungsenergie vervierfacht — weitaus folgenreicher als eine Verdopplung der Masse.",
-            "caption": "Eine sich mit gegebener Geschwindigkeit bewegende Masse trägt kinetische Energie proportional zu v²."
+            "paragraph": "Kinetische Energie hängt linear von der Masse, aber quadratisch von der Geschwindigkeit ab, sodass eine Verdopplung der Geschwindigkeit die Bewegungsenergie vervierfacht — weitaus folgenreicher als eine Verdopplung der Masse."
           },
           "potentialSection": {
             "title": "Energie der Position",
-            "paragraph": "Die gravitative potenzielle Energie wächst direkt proportional zur Höhe über einem Referenzniveau und speichert die Energie, die beim Herabfallen freigesetzt würde.",
-            "caption": "Höhe über einer Bodenreferenz — potenzielle Energie skaliert linear mit der Höhe."
+            "paragraph": "Die gravitative potenzielle Energie wächst direkt proportional zur Höhe über einem Referenzniveau und speichert die Energie, die beim Herabfallen freigesetzt würde."
           },
           "powerRateSection": {
             "title": "Leistung als Rate",
-            "paragraph": "Leistung ist keine eigene Energieart — sie beschreibt lediglich, wie schnell Arbeit verrichtet wird, sodass dieselbe Gesamtarbeit schneller verrichtet eine höhere Leistung bedeutet.",
-            "caption": "Dieselbe Arbeit schneller oder langsamer verrichtet ändert die Leistung, nicht die Arbeit selbst."
+            "paragraph": "Leistung ist keine eigene Energieart — sie beschreibt lediglich, wie schnell Arbeit verrichtet wird, sodass dieselbe Gesamtarbeit schneller verrichtet eine höhere Leistung bedeutet."
           }
         },
         "references": {
@@ -10078,12 +10046,101 @@
           "note": "Mendelson zeichnet die physikalische Definition von Arbeit bis zu Coriolis' präziser Formulierung von 1829 nach und stellt sie der alltäglichen, nichttechnischen Bedeutung des Begriffs gegenüber, um eine häufige Quelle studentischer Verwirrung zu klären.",
           "url": "https://doi.org/10.1119/1.1522707",
           "readOriginal": "Originaltext lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben gültige Werte ein, um diesen Indikator zu sehen.",
+          "drop": {
+            "title": "Fall-Labor: Höhe wird zu Geschwindigkeit",
+            "intro": "Eine Kugel mit deiner Masse m fällt aus der Ruhe aus deiner Höhe h. Die potenzielle Energie wird zu kinetischer Energie, während die Summe gleich bleibt. Bewege die Regler, um m und h zu ändern.",
+            "aria": "Animation einer fallenden Kugel, deren potenzielle Energie zu kinetischer wird",
+            "play": "Abspielen",
+            "pause": "Pause",
+            "slider": {
+              "mass": "Masse in Kilogramm",
+              "height": "Höhe in Metern"
+            },
+            "total": "Summe",
+            "joules": "Energie in Joule",
+            "halfway": "Auf halber Höhe",
+            "fallTime": "Fallzeit",
+            "impact": "Geschwindigkeit am Boden",
+            "conserved": "Epot + Ekin bleibt konstant (ohne Luftwiderstand)"
+          },
+          "formula": {
+            "title": "Vier Formeln live",
+            "intro": "Alle vier Formeln mit deinen aktuellen Eingaben eingesetzt. Die gesuchte ist umrandet; die Masse m geht in kinetische und potenzielle Energie ein.",
+            "aria": "Diagramm der Formeln für Arbeit, kinetische Energie, potenzielle Energie und Leistung mit Live-Werten",
+            "active": "Gesucht",
+            "gNote": "Von diesem Rechner verwendeter Wert",
+            "shared": "Gemeinsame Eingabe",
+            "sharedNote": "Von Ekin und Epot genutzt"
+          },
+          "angle": {
+            "title": "Arbeit und Winkel",
+            "intro": "Wie sich die Arbeit deiner Kraft über deine Strecke mit dem Winkel zwischen beiden ändert: voll bei 0°, null bei 90°, negativ bei 180°.",
+            "aria": "Kurve der Arbeit über dem Winkel zwischen Kraft und Verschiebung",
+            "xLabel": "Winkel θ",
+            "yLabel": "W (J)",
+            "positive": "Positive Arbeit: Die Kraft unterstützt die Bewegung",
+            "zero": "Keine Arbeit: Die Kraft steht senkrecht zur Bewegung",
+            "negative": "Negative Arbeit: Die Kraft wirkt gegen die Bewegung",
+            "zeroAt": "cos 90° = 0"
+          },
+          "trio": {
+            "title": "Geschwindigkeit im Quadrat: halb, aktuell, doppelt",
+            "intro": "Dieselbe Masse bei halber, deiner und doppelter Geschwindigkeit. Die kinetische Energie folgt v², daher stehen die Balken im Verhältnis ¼ : 1 : 4.",
+            "aria": "Balkendiagramm der kinetischen Energie bei halber, aktueller und doppelter Geschwindigkeit",
+            "half": "Halbe Geschwindigkeit",
+            "current": "Deine Geschwindigkeit",
+            "double": "Doppelte Geschwindigkeit",
+            "ratio": "Doppelt gegenüber aktuell",
+            "ratioNote": "Doppelte Geschwindigkeit bedeutet vierfache Energie"
+          },
+          "scale": {
+            "title": "Energie auf einer Zehnerpotenz-Skala",
+            "intro": "Deine Arbeit, kinetische und potenzielle Energie zwischen sechs realen Energien, vom angehobenen Apfel bis zum Blitz.",
+            "aria": "Logarithmische Energieskala mit deinen Ergebnissen und Referenzenergien",
+            "refs": {
+              "appleLift": "Apfel 1 m angehoben",
+              "foodCalorie": "1 Nahrungskalorie",
+              "aaBattery": "AA-Batterie",
+              "carAt100": "Auto bei 100 km/h",
+              "petrolLitre": "1 L Benzin",
+              "lightning": "Blitz"
+            },
+            "nearest": "Nächste Referenz: {ref}",
+            "span": "Achsenbereich",
+            "decades": "{n} Zehnerpotenzen"
+          },
+          "equiv": {
+            "title": "Deine Energie im Alltag",
+            "intro": "Die Energie der gesuchten Formel, ausgedrückt in Alltagsmengen mit genau gleich vielen Joule.",
+            "bulb": "60-W-Glühbirne leuchtet",
+            "lift": "1 kg anheben",
+            "apples": "100-g-Äpfel, 1 m angehoben",
+            "food": "Nahrungskalorien",
+            "wh": "Wattstunden"
+          },
+          "power": {
+            "title": "Deine Leistung unter echten Geräten",
+            "intro": "Deine Leistung P = W / t eingeordnet unter typischen Leistungen, höchste zuerst. Die Balkenlänge folgt einer logarithmischen Skala.",
+            "yours": "Dein Ergebnis",
+            "carEngine": "Automotor",
+            "source": "Typische Werte; echte Geräte variieren je nach Modell.",
+            "rank": "Rang",
+            "above": "Nächsthöher",
+            "below": "Nächstniedriger",
+            "bulbs": "60-W-Glühbirnen"
+          },
+          "steps": {
+            "title": "Dieselbe Arbeit, schneller oder langsamer",
+            "intro": "Deine Arbeit in einem Viertel, der Hälfte, der gleichen, der doppelten und der vierfachen Zeit. Jede Stufe halbiert die Leistung; die Arbeit bleibt gleich.",
+            "aria": "Stufendiagramm der Leistung für dieselbe Arbeit in verschiedenen Zeiten",
+            "ratio": "t/4 gegenüber 4t",
+            "ratioNote": "Sechzehnmal schneller erfordert sechzehnfache Leistung"
+          }
         }
-      },
-      "gauge": {
-        "small": "Klein",
-        "moderate": "Mittel",
-        "large": "Groß"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -10106,12 +10163,6 @@
       "relatedTools": {
         "title": "Verwandte Physik-Tools"
       },
-      "lightbulbCard": {
-        "title": "Alltagsvergleich",
-        "intro": "Der Vergleich mit einer Standard-60-W-Glühbirne vermittelt ein intuitives Gefühl für die Größenordnung dieses Ergebnisses.",
-        "secondsResult": "Diese Energiemenge könnte eine 60-W-Glühbirne etwa {seconds} Sekunden lang betreiben.",
-        "ratioResult": "Diese Leistung entspricht etwa dem {ratio}-fachen einer Standard-60-W-Glühbirne."
-      },
       "referenceTable": {
         "title": "Gängige Leistungswerte",
         "caption": "Typischer Leistungsverbrauch alltäglicher Geräte und des menschlichen Körpers in Ruhe.",
@@ -10125,6 +10176,56 @@
           "microwave": "Mikrowellenherd",
           "hairDryer": "Haartrockner"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live-Energietabelle und 3D-Zeichnung",
+        "given": "gegeben",
+        "constant": "Konstante",
+        "groupInputs": "Eingaben",
+        "groupWork": "Verrichtete Arbeit",
+        "parallel": "Kraft entlang des Weges",
+        "perpendicular": "Kraft quer zum Weg",
+        "alignedWork": "Arbeit bei voller Ausrichtung",
+        "share": "Anteil der Kraft, der Arbeit verrichtet",
+        "work": "Arbeit",
+        "groupUnits": "Dieselbe Energie in anderen Einheiten",
+        "kilojoules": "Kilojoule",
+        "kilocalories": "Nahrungskalorien (kcal)",
+        "wattHours": "Wattstunden",
+        "kilowattHours": "Kilowattstunden",
+        "electronvolts": "Elektronenvolt",
+        "footPounds": "Foot-Pound",
+        "groupEveryday": "Im Alltag ausgedrückt",
+        "bulbSeconds": "Betreibt eine 60-W-Glühbirne für",
+        "liftOneKg": "Hebt 1 kg um",
+        "appleLifts": "100-g-Äpfel, 1 m angehoben",
+        "groupAngles": "Dieselbe Kraft unter anderen Winkeln",
+        "workAt": "W bei {angle}°",
+        "groupMotion": "Bewegung",
+        "kineticEnergy": "Kinetische Energie",
+        "momentum": "Impuls",
+        "speedKmh": "Geschwindigkeit in km/h",
+        "dropHeight": "Fallhöhe für diese Geschwindigkeit",
+        "stopForce": "Mittlere Kraft zum Anhalten auf 10 m",
+        "groupSensitivity": "Empfindlichkeit",
+        "keAtSpeed": "Ekin bei {k} × v",
+        "keDoubleMass": "Ekin bei 2 × m",
+        "groupFall": "Fall aus dieser Höhe",
+        "gravity": "Fallbeschleunigung g",
+        "weight": "Gewichtskraft",
+        "potentialEnergy": "Potenzielle Energie",
+        "impactSpeed": "Geschwindigkeit am Boden",
+        "fallTime": "Fallzeit",
+        "midFall": "Ekin auf halber Höhe",
+        "peAtHeight": "Epot bei {k} × h",
+        "groupPower": "Leistung",
+        "power": "Leistung",
+        "kilowatts": "Kilowatt",
+        "horsepower": "Pferdestärken",
+        "hourEnergy": "Energie in 1 Stunde",
+        "bulbs": "Betreibbare 60-W-Glühbirnen",
+        "groupTime": "Dieselbe Arbeit, andere Zeiten",
+        "powerAtTime": "P bei {k} × t"
       }
     },
     "kinematics-calculator": {
