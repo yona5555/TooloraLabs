@@ -1,30 +1,24 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { OhmsLawCalculator as OhmsLawCalculatorTool, type OhmsLawCalculatorOutput } from "@tooloralabs/tools";
 
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
 import OhmsLawInputPanel from "./OhmsLawInputPanel";
 import OhmsLawResult from "./OhmsLawResult";
 import OhmsLawQuickReference from "./OhmsLawQuickReference";
-import OhmsLawModeTabs from "./OhmsLawModeTabs";
-import OhmsLawFuseCard from "./OhmsLawFuseCard";
 import OhmsLawReferenceTable from "./OhmsLawReferenceTable";
-import type { OhmsLawKnownPair } from "./types";
-
-const tool = new OhmsLawCalculatorTool();
+import { OHMS_DEFAULTS, OhmsLiveProvider, type OhmsDraft } from "./OhmsLiveContext";
 
 const RELATED_TOOLS = ["energy-work-power-calculator", "force-calculator", "density-calculator", "ideal-gas-law-calculator"];
 
-const DEFAULTS = { voltage: "12", current: "2", resistance: "6", power: "24" };
+type Values = Pick<OhmsDraft, "voltage" | "current" | "resistance" | "power">;
 
 // Real, self-consistent (V = IR, P = VI) everyday circuit scenarios.
-const SCENARIOS: Record<string, { voltage: string; current: string; resistance: string; power: string }> = {
+const SCENARIOS: Record<string, Values> = {
   aaMotor: { voltage: "1.5", current: "0.5", resistance: "3", power: "0.75" },
   usbCharger: { voltage: "5", current: "1", resistance: "5", power: "5" },
   carHeadlight: { voltage: "12", current: "5", resistance: "2.4", power: "60" },
@@ -32,37 +26,14 @@ const SCENARIOS: Record<string, { voltage: string; current: string; resistance: 
   euKettle: { voltage: "230", current: "8.7", resistance: "26.45", power: "2000" },
 };
 
-const EMPTY_RESULT: OhmsLawCalculatorOutput = { error: null, voltage: 0, current: 0, resistance: 0, power: 0 };
-
-function computeResult(knownPair: OhmsLawKnownPair, voltage: string, current: string, resistance: string, power: string): OhmsLawCalculatorOutput {
-  const output = tool.execute(
-    {
-      knownPair,
-      voltage: parseLocalizedNumber(voltage) || 0,
-      current: parseLocalizedNumber(current) || 0,
-      resistance: parseLocalizedNumber(resistance) || 0,
-      power: parseLocalizedNumber(power) || 0,
-    },
-    { locale: "en-US" }
-  );
-  return output.data;
-}
-
 export default function OhmsLawCalculator({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.ohms-law-calculator");
   const tNav = useTranslations("tools.ohms-law-calculator.nav");
+  const tScenarios = useTranslations("tools.ohms-law-calculator.form.scenarios");
+  const tCommon = useTranslations("common.live3d");
 
-  const [knownPair, setKnownPair] = useState<OhmsLawKnownPair>("VI");
-  const [voltage, setVoltage] = useState(DEFAULTS.voltage);
-  const [current, setCurrent] = useState(DEFAULTS.current);
-  const [resistance, setResistance] = useState(DEFAULTS.resistance);
-  const [power, setPower] = useState(DEFAULTS.power);
-
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const [result, setResult] = useState<OhmsLawCalculatorOutput>(() =>
-    computeResult("VI", DEFAULTS.voltage, DEFAULTS.current, DEFAULTS.resistance, DEFAULTS.power)
-  );
-  const [hasCalculated, setHasCalculated] = useState(true);
+  const [draft, setDraft] = useState<OhmsDraft>(OHMS_DEFAULTS);
+  const [activeExample, setActiveExample] = useState<string | null>(null);
 
   const [navBarVisible, setNavBarVisible] = useState(false);
   const headerSentinelRef = useRef<HTMLDivElement>(null);
@@ -100,38 +71,21 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
     };
   }, []);
 
-  function handleCalculate(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setResult(computeResult(knownPair, voltage, current, resistance, power));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(voltage, current, resistance, power));
+  function setDim<K extends keyof OhmsDraft>(key: K, value: OhmsDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    if (key !== "pair") setActiveExample(null);
   }
 
-  function handleKnownPairChange(next: OhmsLawKnownPair) {
-    setKnownPair(next);
-    setResult(computeResult(next, voltage, current, resistance, power));
-    setHasCalculated(true);
-  }
-
-  function handleScenarioPreset(key: string) {
-    const scenario = SCENARIOS[key];
-    setVoltage(scenario.voltage);
-    setCurrent(scenario.current);
-    setResistance(scenario.resistance);
-    setPower(scenario.power);
-    setResult(computeResult(knownPair, scenario.voltage, scenario.current, scenario.resistance, scenario.power));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(scenario.voltage, scenario.current, scenario.resistance, scenario.power));
+  function handlePick(key: string) {
+    const values = SCENARIOS[key];
+    if (!values) return;
+    setDraft((d) => ({ ...d, ...values }));
+    setActiveExample(key);
   }
 
   function handleClear() {
-    setVoltage(DEFAULTS.voltage);
-    setCurrent(DEFAULTS.current);
-    setResistance(DEFAULTS.resistance);
-    setPower(DEFAULTS.power);
-    setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    setDraft(OHMS_DEFAULTS);
+    setActiveExample(null);
   }
 
   const navItems = [
@@ -141,50 +95,45 @@ export default function OhmsLawCalculator({ education }: { education: ReactNode 
   ];
 
   return (
-    <>
+    <OhmsLiveProvider value={{ dims: draft, setDim }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
-            <div className="flex flex-col gap-3">
-              <OhmsLawInputPanel
-                knownPair={knownPair}
-                voltage={voltage}
-                onVoltageChange={setVoltage}
-                current={current}
-                onCurrentChange={setCurrent}
-                resistance={resistance}
-                onResistanceChange={setResistance}
-                power={power}
-                onPowerChange={setPower}
-                onScenarioPreset={handleScenarioPreset}
-                onCalculate={handleCalculate}
-                onClear={handleClear}
+            <div className="flex flex-col gap-6 lg:h-full">
+              <OhmsLawInputPanel draft={draft} onChange={setDim} onClear={handleClear} />
+              <QuickExamplesCard
+                title={tCommon("quickExamples")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={handlePick}
+                examples={Object.entries(SCENARIOS).map(([key, v]) => ({
+                  id: key,
+                  label: tScenarios(key),
+                  detail: `${v.voltage} V · ${v.current} A · ${v.resistance} Ω · ${v.power} W`,
+                }))}
               />
-              <OhmsLawReferenceTable />
             </div>
           }
-          result={
-            <div className="flex flex-col gap-3">
-              <OhmsLawResult hasCalculated={hasCalculated} result={result} knownPair={knownPair} digitStyle={digitStyle} />
-              <OhmsLawModeTabs knownPair={knownPair} onKnownPairChange={handleKnownPairChange} />
-              <OhmsLawFuseCard current={result.current} digitStyle={digitStyle} />
-            </div>
-          }
+          result={<OhmsLawResult />}
           sidebar={
-            <RelatedToolsSidebar currentSlug="ohms-law-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="ohms-law-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="ohms-law-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <OhmsLawQuickReference />
+              <OhmsLawReferenceTable />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </OhmsLiveProvider>
   );
 }

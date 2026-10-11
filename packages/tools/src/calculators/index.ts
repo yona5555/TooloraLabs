@@ -43,6 +43,7 @@ export * from "./energyAnalysis";
 export * from "./KinematicsCalculator";
 export * from "./ForceCalculator";
 export * from "./forceAnalysis";
+export * from "./ohmsAnalysis";
 export * from "./kinematicsAnalysis";
 export * from "./ProjectileMotionCalculator";
 export * from "./projectileAnalysis";

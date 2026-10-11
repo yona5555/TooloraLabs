@@ -8370,10 +8370,7 @@
         "resistancePlaceholder": "p. ej. 6",
         "powerLabel": "Potencia (W)",
         "powerPlaceholder": "p. ej. 24",
-        "calculate": "Calcular",
         "clear": "Limpiar",
-        "triangleCaption": "El valor que calcula la pestaña actual está resaltado.",
-        "scenarioPresetsLabel": "Prueba un escenario real:",
         "scenarios": {
           "aaMotor": "Pila AA + Motor",
           "usbCharger": "Cargador USB",
@@ -8392,52 +8389,14 @@
         "current": "Corriente",
         "resistance": "Resistencia",
         "power": "Potencia",
-        "diagramCaption": "El triángulo de la Ley de Ohm — los valores resaltados fueron calculados, no introducidos directamente.",
-        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de la Ley de Ohm.",
-        "sentence": "A {voltage} V y {current} A, la resistencia del circuito es {resistance} Ω.",
-        "circuitCaption": "Un circuito de un solo bucle etiquetado con el voltaje, la corriente y la resistencia de este resultado.",
-        "powerFormulasCaption": "El mismo valor de potencia, alcanzado de tres formas algebraicamente equivalentes."
+        "sentence": "A {voltage} V y {current} A, la resistencia del circuito es {resistance} Ω."
       },
       "education": {
         "intro": {
           "title": "Entendiendo la Ley de Ohm",
           "paragraph1": "La Ley de Ohm establece que la corriente que fluye a través de un conductor es directamente proporcional al voltaje aplicado sobre él e inversamente proporcional a su resistencia, expresada como V = I × R, donde V es el voltaje en voltios, I es la corriente en amperios y R es la resistencia en ohmios (Ω). Reordenando esa misma ecuación se obtiene I = V ÷ R y R = V ÷ I, de modo que conocer dos cualesquiera de las tres cantidades siempre determina la tercera.",
-          "diagram": {
-            "caption": "El triángulo de la Ley de Ohm para 12 V sobre una resistencia de 6 Ω, que da una corriente de 2 A — con la resistencia resaltada como el valor calculado."
-          },
           "paragraph2": "La potencia eléctrica, medida en vatios (W), se combina con la Ley de Ohm mediante P = V × I. Sustituyendo V = I × R o I = V ÷ R en esa fórmula se obtienen dos expresiones de potencia equivalentes, P = I² × R y P = V² ÷ R, razón por la cual dos cualesquiera de voltaje, corriente, resistencia y potencia bastan para determinar las otras dos.",
-          "paragraph3": "Esta calculadora admite las seis combinaciones posibles de cantidades conocidas: voltaje y corriente, voltaje y resistencia, corriente y resistencia, y las tres combinaciones que incluyen la potencia, calculando el conjunto completo de V, I, R y P para cada una.",
-          "viRelation": {
-            "xLabel": "Corriente (I)",
-            "yLabel": "Voltaje (V)",
-            "slopeLabel": "pendiente = R",
-            "caption": "El voltaje graficado contra la corriente a una resistencia fija es una línea recta que pasa por el origen: la Ley de Ohm es lineal."
-          },
-          "powerRating": {
-            "caption": "Dónde cae un resultado típico frente a las potencias nominales comunes de resistencias fijas.",
-            "r1": "1/8W",
-            "r2": "1/4W",
-            "r3": "1/2W",
-            "r4": "1W",
-            "r5": "2W"
-          },
-          "conductivityGauge": {
-            "title": "Pruébalo: ¿Conductor o Aislante?",
-            "intro": "Elige un material cotidiano para ver su resistencia en el medidor y descubrir qué tan bien conduce electricidad.",
-            "conductor": "Conductor",
-            "moderate": "Moderado",
-            "insulator": "Aislante",
-            "verdict": "{material} es un {classification} de electricidad.",
-            "currentFact": "A {voltage} V, fluiría una corriente de unos {current} A a través de él.",
-            "materials": {
-              "copperWire": "Cable de Cobre",
-              "led": "LED",
-              "incandescentBulb": "Bombilla Incandescente",
-              "humanBody": "Cuerpo Humano (piel seca)",
-              "wood": "Madera Seca",
-              "glass": "Vidrio"
-            }
-          }
+          "paragraph3": "Esta calculadora admite las seis combinaciones posibles de cantidades conocidas: voltaje y corriente, voltaje y resistencia, corriente y resistencia, y las tres combinaciones que incluyen la potencia, calculando el conjunto completo de V, I, R y P para cada una."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -8542,13 +8501,11 @@
           },
           "circuitSection": {
             "title": "El Circuito Físico",
-            "paragraph": "El triángulo mnemotécnico es una abstracción de un circuito real: una batería suministra voltaje, una resistencia se opone al flujo, y la corriente es la tasa de carga que se mueve alrededor del único bucle.",
-            "caption": "Un circuito de un solo bucle etiquetado con el voltaje, la corriente y la resistencia de este ejemplo."
+            "paragraph": "El triángulo mnemotécnico es una abstracción de un circuito real: una batería suministra voltaje, una resistencia se opone al flujo, y la corriente es la tasa de carga que se mueve alrededor del único bucle."
           },
           "powerFormulasSection": {
             "title": "Tres Caminos a la Misma Potencia",
-            "paragraph": "Debido a que la Ley de Ohm vincula V, I y R, la potencia disipada puede calcularse de tres formas diferentes a partir de las dos cantidades que se conozcan — siempre coinciden exactamente.",
-            "caption": "El mismo valor de potencia, alcanzado de tres formas algebraicamente equivalentes."
+            "paragraph": "Debido a que la Ley de Ohm vincula V, I y R, la potencia disipada puede calcularse de tres formas diferentes a partir de las dos cantidades que se conozcan — siempre coinciden exactamente."
           }
         },
         "references": {
@@ -8557,12 +8514,107 @@
           "note": "El estudio histórico de Schagrin documenta la sorprendentemente fría acogida que recibió entre sus contemporáneos alemanes la ley de Ohm, hoy fundamental, y traza el cambio conceptual que finalmente llevó a su aceptación.",
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Leer el Texto Original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce valores válidos arriba para ver este indicador.",
+          "dimmer": {
+            "title": "Laboratorio del atenuador: bombilla, batería y reóstato",
+            "intro": "Tu fuente y tu resistencia encienden una bombilla a través de un atenuador. Mueve Rd para atenuarla; las cargas se frenan cuando baja la corriente. Los otros deslizadores cambian los valores conocidos.",
+            "aria": "Circuito animado con una batería, una bombilla y un atenuador",
+            "play": "Reproducir",
+            "pause": "Pausa",
+            "brightness": "Brillo",
+            "dimmerSlider": "Resistencia del atenuador como múltiplo de R",
+            "slider": {
+              "voltage": "Voltaje en voltios",
+              "current": "Corriente en amperios",
+              "resistance": "Resistencia en ohmios",
+              "power": "Potencia en vatios"
+            },
+            "total": "R + Rd",
+            "current": "I = V / (R + Rd)",
+            "bulbVoltage": "Voltaje de la bombilla",
+            "bulbPower": "Potencia de la bombilla",
+            "dimmerPower": "Potencia del atenuador",
+            "dimmerNote": "Calor perdido en el propio atenuador"
+          },
+          "formula": {
+            "title": "V = I × R con tus números",
+            "intro": "Cada casilla contiene un valor en vivo y su unidad SI; las casillas resaltadas son las que se calculan y la identidad de potencia cierra el ciclo.",
+            "aria": "Diagrama de la fórmula de la ley de Ohm con los valores actuales",
+            "solved": "calculado",
+            "check": "Comprobación"
+          },
+          "vi": {
+            "title": "La recta V–I de tu resistor",
+            "intro": "El voltaje frente a la corriente es una recta que pasa por el origen y cuya pendiente es la resistencia; las rectas R/2 y 2R muestran cómo cambia la pendiente.",
+            "aria": "Rectas de voltaje frente a corriente",
+            "xLabel": "Corriente I (A)",
+            "yLabel": "Voltaje V (V)",
+            "slope": "Pendiente",
+            "atDouble": "Con el doble de corriente",
+            "conductance": "Conductancia G"
+          },
+          "routes": {
+            "title": "Una potencia, tres caminos",
+            "intro": "V × I, I² × R y V² / R son la misma magnitud escrita de tres formas, así que las tres barras terminan siempre en la misma línea.",
+            "aria": "Tres barras iguales para las tres fórmulas de potencia",
+            "footer": "Longitudes iguales: las tres fórmulas coinciden",
+            "perHour": "Energía en 1 hora"
+          },
+          "trio": {
+            "title": "Mitad, actual y doble de resistencia",
+            "intro": "Con el voltaje fijo, la corriente y la potencia son inversamente proporcionales a la resistencia: reducir R a la mitad duplica ambas.",
+            "aria": "Gráfico de barras de corriente y potencia para la mitad, la actual y el doble de resistencia",
+            "half": "R / 2",
+            "current": "R actual",
+            "double": "2 × R",
+            "legend": "sólido: I · contorno: P",
+            "ratio": "I(R/2) : I(2R)",
+            "ratioNote": "Cuatro veces la resistencia, un cuarto de la corriente"
+          },
+          "scale": {
+            "title": "Dónde se sitúa tu resistencia",
+            "intro": "Tu resistencia en un eje de potencias de diez junto a seis resistencias cotidianas; la cifra verde bajo cada una es la corriente que {voltage} V haría circular.",
+            "aria": "Escala logarítmica de resistencias en ohmios",
+            "conductors": "Conductores",
+            "insulators": "Aislantes",
+            "refs": {
+              "copperWire": "Cable cobre",
+              "led": "LED",
+              "incandescentBulb": "Bombilla",
+              "humanBody": "Cuerpo",
+              "wood": "Madera",
+              "glass": "Vidrio"
+            },
+            "nearest": "Referencia más cercana: {ref}",
+            "ratio": "R ÷ {ref}",
+            "currentHere": "Corriente a tu voltaje",
+            "span": "Amplitud del eje",
+            "decades": "{n} potencias de diez"
+          },
+          "fuse": {
+            "title": "Qué fusible sirve para esta corriente",
+            "intro": "Los valores estándar de fusibles como escalera, con tu corriente como línea roja: los escalones grises se fundirían y el verde es el menor que la soporta.",
+            "aria": "Diagrama escalonado de fusibles estándar frente a la corriente",
+            "axis": "Valores estándar de fusibles (A)",
+            "fuse": "Fusible adecuado",
+            "exceeded": "Por encima del mayor valor estándar mostrado",
+            "headroom": "Margen",
+            "blows": "Fusible de {rating} A"
+          },
+          "rating": {
+            "title": "Potencia nominal del resistor",
+            "intro": "El calor que debe disipar tu resistor, en una franja dividida en las potencias habituales. Los diseñadores duplican la potencia por seguridad y eligen la zona que contiene 2P.",
+            "aria": "Franja de zonas de potencias de resistores con la potencia disipada",
+            "powerResistor": "Resistor de potencia",
+            "derated": "Con margen 2×",
+            "choose": "Potencia a elegir",
+            "above2W": "Más de 2 W: usa un resistor de potencia",
+            "load": "Carga sobre esa potencia"
+          }
         }
-      },
-      "gauge": {
-        "low": "Potencia baja",
-        "moderate": "Potencia moderada",
-        "high": "Potencia alta"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -8585,11 +8637,6 @@
       "relatedTools": {
         "title": "Herramientas de Física Relacionadas"
       },
-      "fuseCard": {
-        "title": "Fusible Estándar Más Cercano",
-        "intro": "Los fusibles vienen en amperajes estándar, no en valores arbitrarios — aquí está el amperaje estándar más pequeño que soportaría esta corriente de forma segura.",
-        "result": "A {current} A, el amperaje de fusible estándar más cercano por encima es {rating} A."
-      },
       "referenceTable": {
         "title": "Fuentes de Voltaje Comunes",
         "caption": "Voltajes típicos de fuentes de energía cotidianas.",
@@ -8603,6 +8650,34 @@
           "usOutlet": "Toma de EE. UU.",
           "euOutlet": "Toma de UE/RU"
         }
+      },
+      "live3d": {
+        "cardTitle": "Tabla del circuito en vivo y dibujo 3D",
+        "given": "dato",
+        "groupLaw": "La ley",
+        "groupPower": "Potencia de tres formas",
+        "groupUnits": "Mismos valores en otras unidades",
+        "milliamps": "Corriente en miliamperios",
+        "kilohms": "Resistencia en kiloohmios",
+        "milliwatts": "Potencia en milivatios",
+        "conductance": "Conductancia",
+        "groupCharge": "Flujo de carga",
+        "chargePerSecond": "Carga por segundo",
+        "chargePerMinute": "Carga por minuto",
+        "electrons": "Electrones por segundo",
+        "groupEnergy": "Energía convertida en calor",
+        "joulesPerMinute": "Energía en 1 minuto",
+        "wattHours": "Energía en 1 hora",
+        "kWhPerDay": "Energía en 1 día",
+        "kcalPerMinute": "Calor en 1 minuto",
+        "groupSensitivity": "Mismo voltaje, otras resistencias",
+        "currentWithR": "I con {k} × R",
+        "powerWithR": "P con {k} × R",
+        "groupParts": "Componentes adecuados",
+        "fuse": "Fusible estándar más cercano",
+        "resistorRating": "Potencia del resistor (margen 2×)",
+        "e12": "Resistor E12 más cercano",
+        "copperLength": "Cable de cobre de 1 mm² con esta R"
       }
     },
     "ph-calculator": {

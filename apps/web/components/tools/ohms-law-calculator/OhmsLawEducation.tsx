@@ -4,17 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import OhmsLawTriangleDiagram from "./OhmsLawTriangleDiagram";
-import OhmsLawVIRelationDiagram from "./OhmsLawVIRelationDiagram";
-import OhmsLawPowerRatingDiagram from "./OhmsLawPowerRatingDiagram";
-import OhmsLawCircuitDiagram from "./OhmsLawCircuitDiagram";
-import OhmsLawPowerFormulasDiagram from "./OhmsLawPowerFormulasDiagram";
-import OhmsLawConductivityGauge from "./OhmsLawConductivityGauge";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import OhmsLive3D from "./OhmsLive3D";
+import OhmsDimmerLab from "./OhmsDimmerLab";
+import OhmsFormulaDiagram from "./OhmsFormulaDiagram";
+import OhmsPowerRoutes from "./OhmsPowerRoutes";
+import OhmsResistanceScale from "./OhmsResistanceScale";
+import OhmsViTrend from "./OhmsViTrend";
+import OhmsResistanceTrio from "./OhmsResistanceTrio";
+import OhmsResistorRating from "./OhmsResistorRating";
+import OhmsFuseSteps from "./OhmsFuseSteps";
 
 type ExampleRow = { calculation: string; result: string };
 
 export default async function OhmsLawEducation() {
   const t = await getTranslations("tools.ohms-law-calculator.education");
+  const t3 = await getTranslations("tools.ohms-law-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -22,31 +27,21 @@ export default async function OhmsLawEducation() {
 
   return (
     <EncyclopediaPaper>
-      <OhmsLawConductivityGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <OhmsLawTriangleDiagram
-          voltageText="V=12"
-          currentText="I=2"
-          resistanceText="R=6"
-          highlighted={["resistance"]}
-          caption={t("intro.diagram.caption")}
-        />
+        <SectionCard title={t3("cardTitle")}>
+          <OhmsLive3D camera={[0, 0.4, 8]} capHeight />
+        </SectionCard>
+        <div className="space-y-6">
+          <OhmsDimmerLab />
+          <OhmsFormulaDiagram />
+        </div>
         <p>{t("intro.paragraph2")}</p>
-        <OhmsLawVIRelationDiagram
-          xLabel={t("intro.viRelation.xLabel")}
-          yLabel={t("intro.viRelation.yLabel")}
-          slopeLabel={t("intro.viRelation.slopeLabel")}
-          caption={t("intro.viRelation.caption")}
-        />
         <p>{t("intro.paragraph3")}</p>
-        <OhmsLawPowerRatingDiagram
-          powerWatts={0.5}
-          caption={t("intro.powerRating.caption")}
-          ratingLabels={[t("intro.powerRating.r1"), t("intro.powerRating.r2"), t("intro.powerRating.r3"), t("intro.powerRating.r4"), t("intro.powerRating.r5")]}
-        />
+        <OhmsPowerRoutes />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -68,6 +63,7 @@ export default async function OhmsLawEducation() {
             </tbody>
           </table>
         </div>
+        <OhmsResistanceScale />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -88,12 +84,18 @@ export default async function OhmsLawEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.circuitSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.circuitSection.paragraph")}</p>
-          <OhmsLawCircuitDiagram voltageText="V=12" currentText="I=2" resistanceText="R=6" caption={t("behindTheTool.circuitSection.caption")} />
+          <div className="mt-4 space-y-6">
+            <OhmsViTrend />
+            <OhmsResistanceTrio />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.powerFormulasSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.powerFormulasSection.paragraph")}</p>
-          <OhmsLawPowerFormulasDiagram viText="V×I = 12×2" i2rText="I²R = 2²×6" v2rText="V²/R = 12²/6" powerText="P = 24 W" caption={t("behindTheTool.powerFormulasSection.caption")} />
+          <div className="mt-4 space-y-6">
+            <OhmsResistorRating />
+            <OhmsFuseSteps />
+          </div>
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

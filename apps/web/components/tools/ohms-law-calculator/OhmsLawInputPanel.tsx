@@ -1,143 +1,48 @@
 "use client";
-import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
-import OhmsLawTriangleDiagram from "./OhmsLawTriangleDiagram";
-import type { OhmsLawKnownPair } from "./types";
+import OhmsLawModeTabs from "./OhmsLawModeTabs";
+import { FIELDS_BY_PAIR, type OhmsDraft, type OhmsQuantity } from "./OhmsLiveContext";
 
 type OhmsLawInputPanelProps = {
-  knownPair: OhmsLawKnownPair;
-  voltage: string;
-  onVoltageChange: (value: string) => void;
-  current: string;
-  onCurrentChange: (value: string) => void;
-  resistance: string;
-  onResistanceChange: (value: string) => void;
-  power: string;
-  onPowerChange: (value: string) => void;
-  onScenarioPreset: (key: string) => void;
-  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  draft: OhmsDraft;
+  onChange: <K extends keyof OhmsDraft>(key: K, value: OhmsDraft[K]) => void;
   onClear: () => void;
 };
 
-const SCENARIO_KEYS = ["aaMotor", "usbCharger", "carHeadlight", "usToaster", "euKettle"];
-
-const FIELDS_BY_PAIR: Record<OhmsLawKnownPair, ("voltage" | "current" | "resistance" | "power")[]> = {
-  VI: ["voltage", "current"],
-  VR: ["voltage", "resistance"],
-  IR: ["current", "resistance"],
-  VP: ["voltage", "power"],
-  IP: ["current", "power"],
-  RP: ["resistance", "power"],
-};
-
-const UNKNOWN_BY_PAIR: Record<OhmsLawKnownPair, ("voltage" | "current" | "resistance")[]> = {
-  VI: ["resistance"],
-  VR: ["current"],
-  IR: ["voltage"],
-  VP: ["current", "resistance"],
-  IP: ["voltage", "resistance"],
-  RP: ["voltage", "current"],
-};
-
-export default function OhmsLawInputPanel({
-  knownPair,
-  voltage,
-  onVoltageChange,
-  current,
-  onCurrentChange,
-  resistance,
-  onResistanceChange,
-  power,
-  onPowerChange,
-  onScenarioPreset,
-  onCalculate,
-  onClear,
-}: OhmsLawInputPanelProps) {
+/** Known pair and its two values; every keystroke updates the whole page live. */
+export default function OhmsLawInputPanel({ draft, onChange, onClear }: OhmsLawInputPanelProps) {
   const t = useTranslations("tools.ohms-law-calculator.form");
-  const tScenarios = useTranslations("tools.ohms-law-calculator.form.scenarios");
-  const activeFields = FIELDS_BY_PAIR[knownPair];
+  const fields = FIELDS_BY_PAIR[draft.pair];
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <OhmsLawTriangleDiagram
-        voltageText={activeFields.includes("voltage") ? `V=${voltage || "?"}` : "V=?"}
-        currentText={activeFields.includes("current") ? `I=${current || "?"}` : "I=?"}
-        resistanceText={activeFields.includes("resistance") ? `R=${resistance || "?"}` : "R=?"}
-        highlighted={UNKNOWN_BY_PAIR[knownPair]}
-        caption={t("triangleCaption")}
-      />
-
-      <div className="mt-4">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
-        <div className="flex flex-wrap gap-2">
-          {SCENARIO_KEYS.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onScenarioPreset(key)}
-              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
-            >
-              {tScenarios(key)}
-            </button>
-          ))}
-        </div>
+      <div className="mb-5">
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownPairLabel")}</span>
+        <OhmsLawModeTabs knownPair={draft.pair} onKnownPairChange={(p) => onChange("pair", p)} />
       </div>
 
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
-        {activeFields.includes("voltage") && (
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+        {fields.map((key: OhmsQuantity) => (
           <ToolInput
-            label={t("voltageLabel")}
+            key={key}
+            label={t(`${key}Label`)}
             type="text"
             inputMode="decimal"
-            placeholder={t("voltagePlaceholder")}
-            value={voltage}
-            onChange={(e) => onVoltageChange(e.target.value)}
+            placeholder={t(`${key}Placeholder`)}
+            value={draft[key]}
+            onChange={(e) => onChange(key, e.target.value)}
           />
-        )}
-        {activeFields.includes("current") && (
-          <ToolInput
-            label={t("currentLabel")}
-            type="text"
-            inputMode="decimal"
-            placeholder={t("currentPlaceholder")}
-            value={current}
-            onChange={(e) => onCurrentChange(e.target.value)}
-          />
-        )}
-        {activeFields.includes("resistance") && (
-          <ToolInput
-            label={t("resistanceLabel")}
-            type="text"
-            inputMode="decimal"
-            placeholder={t("resistancePlaceholder")}
-            value={resistance}
-            onChange={(e) => onResistanceChange(e.target.value)}
-          />
-        )}
-        {activeFields.includes("power") && (
-          <ToolInput
-            label={t("powerLabel")}
-            type="text"
-            inputMode="decimal"
-            placeholder={t("powerPlaceholder")}
-            value={power}
-            onChange={(e) => onPowerChange(e.target.value)}
-          />
-        )}
+        ))}
 
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t("calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={onClear}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t("clear")}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
       </form>
     </SectionCard>
   );

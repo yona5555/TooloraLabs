@@ -8370,10 +8370,7 @@
         "resistancePlaceholder": "z. B. 6",
         "powerLabel": "Leistung (W)",
         "powerPlaceholder": "z. B. 24",
-        "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "triangleCaption": "Der vom aktuellen Tab berechnete Wert ist hervorgehoben.",
-        "scenarioPresetsLabel": "Echtes Szenario ausprobieren:",
         "scenarios": {
           "aaMotor": "AA-Batterie + Motor",
           "usbCharger": "USB-Ladegerät",
@@ -8392,52 +8389,14 @@
         "current": "Stromstärke",
         "resistance": "Widerstand",
         "power": "Leistung",
-        "diagramCaption": "Das Ohmsche Dreieck — die hervorgehobenen Werte wurden berechnet, nicht direkt eingegeben.",
-        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ohmsches-Gesetz-Ergebnis zu sehen.",
-        "sentence": "Bei {voltage} V und {current} A beträgt der Widerstand des Stromkreises {resistance} Ω.",
-        "circuitCaption": "Ein einschleifiger Stromkreis, beschriftet mit Spannung, Strom und Widerstand dieses Ergebnisses.",
-        "powerFormulasCaption": "Derselbe Leistungswert, auf drei algebraisch äquivalente Arten erreicht."
+        "sentence": "Bei {voltage} V und {current} A beträgt der Widerstand des Stromkreises {resistance} Ω."
       },
       "education": {
         "intro": {
           "title": "Das Ohmsche Gesetz verstehen",
           "paragraph1": "Das Ohmsche Gesetz besagt, dass der durch einen Leiter fließende Strom direkt proportional zur an ihm anliegenden Spannung und umgekehrt proportional zu seinem Widerstand ist, geschrieben als V = I × R, wobei V die Spannung in Volt, I die Stromstärke in Ampere und R der Widerstand in Ohm (Ω) ist. Durch Umstellen derselben Gleichung ergeben sich I = V ÷ R und R = V ÷ I, sodass die Kenntnis zweier beliebiger der drei Größen stets die dritte bestimmt.",
-          "diagram": {
-            "caption": "Das Ohmsche Dreieck für 12 V an einem Widerstand von 6 Ω, was eine Stromstärke von 2 A ergibt — der Widerstand ist als berechneter Wert hervorgehoben."
-          },
           "paragraph2": "Elektrische Leistung, gemessen in Watt (W), verbindet sich über P = V × I mit dem Ohmschen Gesetz. Setzt man V = I × R oder I = V ÷ R in diese Formel ein, ergeben sich zwei gleichwertige Leistungsausdrücke, P = I² × R und P = V² ÷ R, weshalb zwei beliebige der Größen Spannung, Stromstärke, Widerstand und Leistung genügen, um die anderen beiden zu bestimmen.",
-          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P.",
-          "viRelation": {
-            "xLabel": "Strom (I)",
-            "yLabel": "Spannung (V)",
-            "slopeLabel": "Steigung = R",
-            "caption": "Spannung gegen Strom bei festem Widerstand aufgetragen ergibt eine Gerade durch den Ursprung — das Ohmsche Gesetz ist linear."
-          },
-          "powerRating": {
-            "caption": "Wo ein typisches Ergebnis im Vergleich zu gängigen Festwiderstand-Leistungsklassen liegt.",
-            "r1": "1/8W",
-            "r2": "1/4W",
-            "r3": "1/2W",
-            "r4": "1W",
-            "r5": "2W"
-          },
-          "conductivityGauge": {
-            "title": "Ausprobieren: Leiter oder Isolator?",
-            "intro": "Wählen Sie ein Alltagsmaterial, um seinen Widerstand auf der Anzeige zu sehen und herauszufinden, wie gut es Strom leitet.",
-            "conductor": "Leiter",
-            "moderate": "Mittelmäßig",
-            "insulator": "Isolator",
-            "verdict": "{material} ist ein {classification} für Elektrizität.",
-            "currentFact": "Bei {voltage} V würde ein Strom von etwa {current} A hindurchfließen.",
-            "materials": {
-              "copperWire": "Kupferdraht",
-              "led": "LED",
-              "incandescentBulb": "Glühlampe",
-              "humanBody": "Menschlicher Körper (trockene Haut)",
-              "wood": "Trockenes Holz",
-              "glass": "Glas"
-            }
-          }
+          "paragraph3": "Dieser Rechner unterstützt alle sechs möglichen Paare bekannter Größen — Spannung & Stromstärke, Spannung & Widerstand, Stromstärke & Widerstand sowie die drei Paarungen mit Leistung — und berechnet für jedes davon den vollständigen Satz aus V, I, R und P."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -8542,13 +8501,11 @@
           },
           "circuitSection": {
             "title": "Der physische Stromkreis",
-            "paragraph": "Das Mnemonik-Dreieck ist eine Abstraktion eines echten Stromkreises: eine Batterie liefert Spannung, ein Widerstand setzt dem Fluss Widerstand entgegen, und Strom ist die Rate, mit der sich Ladung durch die einzelne Schleife bewegt.",
-            "caption": "Ein einschleifiger Stromkreis, beschriftet mit Spannung, Strom und Widerstand dieses Beispiels."
+            "paragraph": "Das Mnemonik-Dreieck ist eine Abstraktion eines echten Stromkreises: eine Batterie liefert Spannung, ein Widerstand setzt dem Fluss Widerstand entgegen, und Strom ist die Rate, mit der sich Ladung durch die einzelne Schleife bewegt."
           },
           "powerFormulasSection": {
             "title": "Drei Wege zur gleichen Leistung",
-            "paragraph": "Da das Ohmsche Gesetz V, I und R verbindet, kann die abgegebene Leistung auf drei verschiedene Arten aus den jeweils bekannten zwei Größen berechnet werden — sie stimmen immer exakt überein.",
-            "caption": "Derselbe Leistungswert, auf drei algebraisch äquivalente Arten erreicht."
+            "paragraph": "Da das Ohmsche Gesetz V, I und R verbindet, kann die abgegebene Leistung auf drei verschiedene Arten aus den jeweils bekannten zwei Größen berechnet werden — sie stimmen immer exakt überein."
           }
         },
         "references": {
@@ -8557,12 +8514,107 @@
           "note": "Schagrins historische Studie dokumentiert die überraschend kühle Aufnahme, die das heute grundlegende Ohmsche Gesetz bei seinen deutschen Zeitgenossen erfuhr, und zeichnet den konzeptuellen Wandel nach, der schließlich zu seiner Anerkennung führte.",
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Originaltext lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben gültige Werte ein, um diesen Indikator zu sehen.",
+          "dimmer": {
+            "title": "Dimmer-Labor: Lampe, Batterie und Regelwiderstand",
+            "intro": "Deine Quelle und dein Widerstand bringen eine Lampe über einen Dimmer zum Leuchten. Schiebe Rd zum Dimmen; die Ladungen werden langsamer, wenn der Strom sinkt. Die anderen Regler ändern die bekannten Werte.",
+            "aria": "Animierte Schaltung mit Batterie, Lampe und Dimmer",
+            "play": "Abspielen",
+            "pause": "Pause",
+            "brightness": "Helligkeit",
+            "dimmerSlider": "Dimmerwiderstand als Vielfaches von R",
+            "slider": {
+              "voltage": "Spannung in Volt",
+              "current": "Strom in Ampere",
+              "resistance": "Widerstand in Ohm",
+              "power": "Leistung in Watt"
+            },
+            "total": "R + Rd",
+            "current": "I = V / (R + Rd)",
+            "bulbVoltage": "Lampenspannung",
+            "bulbPower": "Lampenleistung",
+            "dimmerPower": "Dimmerleistung",
+            "dimmerNote": "Im Dimmer selbst verlorene Wärme"
+          },
+          "formula": {
+            "title": "V = I × R mit deinen Zahlen",
+            "intro": "Jedes Feld enthält einen Live-Wert mit SI-Einheit; umrandete Felder werden berechnet, und die Leistungsgleichung schließt den Kreis.",
+            "aria": "Formeldiagramm des ohmschen Gesetzes mit den aktuellen Werten",
+            "solved": "berechnet",
+            "check": "Probe"
+          },
+          "vi": {
+            "title": "Die U-I-Gerade deines Widerstands",
+            "intro": "Spannung über Strom ist eine Gerade durch den Ursprung mit dem Widerstand als Steigung; die Geraden für R/2 und 2R zeigen, wie sich die Steigung ändert.",
+            "aria": "Trendlinien der Spannung über dem Strom",
+            "xLabel": "Strom I (A)",
+            "yLabel": "Spannung V (V)",
+            "slope": "Steigung",
+            "atDouble": "Bei doppeltem Strom",
+            "conductance": "Leitwert G"
+          },
+          "routes": {
+            "title": "Eine Leistung, drei Wege",
+            "intro": "V × I, I² × R und V² / R sind dieselbe Größe in drei Schreibweisen, daher enden die drei Balken immer auf derselben Linie.",
+            "aria": "Drei gleiche Balken für die drei Leistungsformeln",
+            "footer": "Gleiche Längen: die drei Formeln stimmen überein",
+            "perHour": "Energie in 1 Stunde"
+          },
+          "trio": {
+            "title": "Halber, aktueller und doppelter Widerstand",
+            "intro": "Bei fester Spannung sind Strom und Leistung umgekehrt proportional zum Widerstand: halbes R verdoppelt beide.",
+            "aria": "Balkendiagramm von Strom und Leistung bei halbem, aktuellem und doppeltem Widerstand",
+            "half": "R / 2",
+            "current": "Aktuelles R",
+            "double": "2 × R",
+            "legend": "voll: I · umrandet: P",
+            "ratio": "I(R/2) : I(2R)",
+            "ratioNote": "Vierfacher Widerstand, ein Viertel des Stroms"
+          },
+          "scale": {
+            "title": "Wo dein Widerstand liegt",
+            "intro": "Dein Widerstand auf einer Zehnerpotenz-Achse neben sechs alltäglichen Widerständen; die grüne Zahl darunter ist der Strom, den {voltage} V hindurchtreiben würden.",
+            "aria": "Logarithmische Skala von Widerständen in Ohm",
+            "conductors": "Leiter",
+            "insulators": "Isolatoren",
+            "refs": {
+              "copperWire": "Kupferdraht",
+              "led": "LED",
+              "incandescentBulb": "Glühlampe",
+              "humanBody": "Körper",
+              "wood": "Holz",
+              "glass": "Glas"
+            },
+            "nearest": "Nächste Referenz: {ref}",
+            "ratio": "R ÷ {ref}",
+            "currentHere": "Strom bei deiner Spannung",
+            "span": "Achsenumfang",
+            "decades": "{n} Zehnerpotenzen"
+          },
+          "fuse": {
+            "title": "Welche Sicherung zu diesem Strom passt",
+            "intro": "Normwerte von Sicherungen als Treppe, dein Strom als rote Linie: graue Stufen würden auslösen, die grüne ist die kleinste, die ihn trägt.",
+            "aria": "Stufendiagramm der Normsicherungen gegenüber dem Strom",
+            "axis": "Normwerte von Sicherungen (A)",
+            "fuse": "Passende Sicherung",
+            "exceeded": "Über dem größten gezeigten Normwert",
+            "headroom": "Reserve",
+            "blows": "{rating}-A-Sicherung"
+          },
+          "rating": {
+            "title": "Belastbarkeit des Widerstands",
+            "intro": "Die Wärme, die dein Widerstand abgeben muss, auf einem Streifen mit den üblichen Belastbarkeiten. Man verdoppelt die Leistung zur Sicherheit und wählt die Zone, die 2P enthält.",
+            "aria": "Zonenstreifen der Widerstandsbelastbarkeit mit der umgesetzten Leistung",
+            "powerResistor": "Leistungswiderstand",
+            "derated": "Mit 2× Reserve",
+            "choose": "Zu wählende Belastbarkeit",
+            "above2W": "Über 2 W: Leistungswiderstand verwenden",
+            "load": "Auslastung"
+          }
         }
-      },
-      "gauge": {
-        "low": "Geringe Leistung",
-        "moderate": "Mittlere Leistung",
-        "high": "Hohe Leistung"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -8585,11 +8637,6 @@
       "relatedTools": {
         "title": "Verwandte Physik-Tools"
       },
-      "fuseCard": {
-        "title": "Nächstgelegene Standardsicherung",
-        "intro": "Sicherungen gibt es in Standard-Stromstärken, nicht in beliebigen Werten — hier ist die kleinste Standardstärke, die diesen Strom sicher tragen würde.",
-        "result": "Bei {current} A ist die nächste Standardsicherung darüber {rating} A."
-      },
       "referenceTable": {
         "title": "Gängige Spannungsquellen",
         "caption": "Typische Spannungen alltäglicher Stromquellen.",
@@ -8603,6 +8650,34 @@
           "usOutlet": "US-Steckdose",
           "euOutlet": "EU/UK-Steckdose"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live-Schaltungstabelle und 3D-Zeichnung",
+        "given": "gegeben",
+        "groupLaw": "Das Gesetz",
+        "groupPower": "Leistung auf drei Wegen",
+        "groupUnits": "Gleiche Werte in anderen Einheiten",
+        "milliamps": "Strom in Milliampere",
+        "kilohms": "Widerstand in Kiloohm",
+        "milliwatts": "Leistung in Milliwatt",
+        "conductance": "Leitwert",
+        "groupCharge": "Ladungsfluss",
+        "chargePerSecond": "Ladung pro Sekunde",
+        "chargePerMinute": "Ladung pro Minute",
+        "electrons": "Elektronen pro Sekunde",
+        "groupEnergy": "In Wärme umgesetzte Energie",
+        "joulesPerMinute": "Energie in 1 Minute",
+        "wattHours": "Energie in 1 Stunde",
+        "kWhPerDay": "Energie an 1 Tag",
+        "kcalPerMinute": "Wärme in 1 Minute",
+        "groupSensitivity": "Gleiche Spannung, andere Widerstände",
+        "currentWithR": "I bei {k} × R",
+        "powerWithR": "P bei {k} × R",
+        "groupParts": "Passende Bauteile",
+        "fuse": "Nächste Normsicherung",
+        "resistorRating": "Widerstandsleistung (2× Reserve)",
+        "e12": "Nächster E12-Widerstand",
+        "copperLength": "Kupferdraht 1 mm² mit diesem R"
       }
     },
     "ph-calculator": {

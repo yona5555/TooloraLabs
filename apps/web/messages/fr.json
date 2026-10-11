@@ -8370,10 +8370,7 @@
         "resistancePlaceholder": "p. ex. 6",
         "powerLabel": "Puissance (W)",
         "powerPlaceholder": "p. ex. 24",
-        "calculate": "Calculer",
         "clear": "Effacer",
-        "triangleCaption": "La valeur calculée par l'onglet actif est mise en évidence.",
-        "scenarioPresetsLabel": "Essayez un scénario réel :",
         "scenarios": {
           "aaMotor": "Pile AA + Moteur",
           "usbCharger": "Chargeur USB",
@@ -8392,52 +8389,14 @@
         "current": "Courant",
         "resistance": "Résistance",
         "power": "Puissance",
-        "diagramCaption": "Le triangle de la Loi d'Ohm — les valeurs mises en évidence ont été calculées, et non saisies directement.",
-        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de la loi d'Ohm.",
-        "sentence": "À {voltage} V et {current} A, la résistance du circuit est de {resistance} Ω.",
-        "circuitCaption": "Un circuit à boucle unique étiqueté avec la tension, le courant et la résistance de ce résultat.",
-        "powerFormulasCaption": "La même valeur de puissance, obtenue de trois façons algébriquement équivalentes."
+        "sentence": "À {voltage} V et {current} A, la résistance du circuit est de {resistance} Ω."
       },
       "education": {
         "intro": {
           "title": "Comprendre la Loi d'Ohm",
           "paragraph1": "La Loi d'Ohm énonce que le courant traversant un conducteur est directement proportionnel à la tension appliquée à ses bornes et inversement proportionnel à sa résistance, ce qui s'écrit V = I × R, où V est la tension en volts, I le courant en ampères et R la résistance en ohms (Ω). En réarrangeant cette même équation, on obtient I = V ÷ R et R = V ÷ I : connaître deux quelconques des trois grandeurs détermine donc toujours la troisième.",
-          "diagram": {
-            "caption": "Le triangle de la Loi d'Ohm pour 12 V aux bornes d'une résistance de 6 Ω, donnant un courant de 2 A — la résistance étant mise en évidence comme la valeur calculée."
-          },
           "paragraph2": "La puissance électrique, mesurée en watts (W), se combine à la Loi d'Ohm par P = V × I. En substituant V = I × R ou I = V ÷ R dans cette formule, on obtient deux expressions de puissance équivalentes, P = I² × R et P = V² ÷ R, ce qui explique pourquoi deux grandeurs quelconques parmi la tension, le courant, la résistance et la puissance suffisent à déterminer les deux autres.",
-          "paragraph3": "Ce calculateur prend en charge les six combinaisons possibles de grandeurs connues — tension et courant, tension et résistance, courant et résistance, ainsi que les trois combinaisons incluant la puissance — en calculant l'ensemble complet V, I, R, P pour chacune.",
-          "viRelation": {
-            "xLabel": "Courant (I)",
-            "yLabel": "Tension (V)",
-            "slopeLabel": "pente = R",
-            "caption": "La tension tracée en fonction du courant à résistance fixe est une droite passant par l'origine — la loi d'Ohm est linéaire."
-          },
-          "powerRating": {
-            "caption": "Où se situe un résultat typique par rapport aux puissances nominales courantes des résistances fixes.",
-            "r1": "1/8W",
-            "r2": "1/4W",
-            "r3": "1/2W",
-            "r4": "1W",
-            "r5": "2W"
-          },
-          "conductivityGauge": {
-            "title": "Essayez : Conducteur ou Isolant ?",
-            "intro": "Choisissez un matériau courant pour voir sa résistance sur le cadran et découvrir sa capacité à conduire l'électricité.",
-            "conductor": "Conducteur",
-            "moderate": "Modéré",
-            "insulator": "Isolant",
-            "verdict": "{material} est un {classification} d'électricité.",
-            "currentFact": "À {voltage} V, un courant d'environ {current} A le traverserait.",
-            "materials": {
-              "copperWire": "Fil de Cuivre",
-              "led": "LED",
-              "incandescentBulb": "Ampoule à Incandescence",
-              "humanBody": "Corps Humain (peau sèche)",
-              "wood": "Bois Sec",
-              "glass": "Verre"
-            }
-          }
+          "paragraph3": "Ce calculateur prend en charge les six combinaisons possibles de grandeurs connues — tension et courant, tension et résistance, courant et résistance, ainsi que les trois combinaisons incluant la puissance — en calculant l'ensemble complet V, I, R, P pour chacune."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -8542,13 +8501,11 @@
           },
           "circuitSection": {
             "title": "Le Circuit Physique",
-            "paragraph": "Le triangle mnémotechnique est une abstraction d'un vrai circuit : une pile fournit la tension, une résistance s'oppose au flux, et le courant est le taux de charge se déplaçant autour de la boucle unique.",
-            "caption": "Un circuit à boucle unique étiqueté avec la tension, le courant et la résistance de cet exemple."
+            "paragraph": "Le triangle mnémotechnique est une abstraction d'un vrai circuit : une pile fournit la tension, une résistance s'oppose au flux, et le courant est le taux de charge se déplaçant autour de la boucle unique."
           },
           "powerFormulasSection": {
             "title": "Trois Voies Vers la Même Puissance",
-            "paragraph": "Parce que la loi d'Ohm relie V, I et R, la puissance dissipée peut être calculée de trois façons différentes à partir des deux grandeurs connues — elles concordent toujours exactement.",
-            "caption": "La même valeur de puissance, obtenue de trois façons algébriquement équivalentes."
+            "paragraph": "Parce que la loi d'Ohm relie V, I et R, la puissance dissipée peut être calculée de trois façons différentes à partir des deux grandeurs connues — elles concordent toujours exactement."
           }
         },
         "references": {
@@ -8557,12 +8514,107 @@
           "note": "L'étude historique de Schagrin documente l'accueil étonnamment froid réservé par ses contemporains allemands à la loi d'Ohm, aujourd'hui fondamentale, et retrace le changement conceptuel qui a fini par mener à son acceptation.",
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Lire le Texte Original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez des valeurs valides ci-dessus pour voir cet indicateur.",
+          "dimmer": {
+            "title": "Labo du variateur : ampoule, pile et rhéostat",
+            "intro": "Votre source et votre résistance allument une ampoule à travers un variateur. Déplacez Rd pour la tamiser ; les charges ralentissent quand le courant baisse. Les autres curseurs changent les valeurs connues.",
+            "aria": "Circuit animé avec une pile, une ampoule et un variateur",
+            "play": "Lecture",
+            "pause": "Pause",
+            "brightness": "Luminosité",
+            "dimmerSlider": "Résistance du variateur en multiple de R",
+            "slider": {
+              "voltage": "Tension en volts",
+              "current": "Courant en ampères",
+              "resistance": "Résistance en ohms",
+              "power": "Puissance en watts"
+            },
+            "total": "R + Rd",
+            "current": "I = V / (R + Rd)",
+            "bulbVoltage": "Tension de l'ampoule",
+            "bulbPower": "Puissance de l'ampoule",
+            "dimmerPower": "Puissance du variateur",
+            "dimmerNote": "Chaleur perdue dans le variateur lui-même"
+          },
+          "formula": {
+            "title": "V = I × R avec vos nombres",
+            "intro": "Chaque case contient une valeur en direct et son unité SI ; les cases encadrées sont celles qui sont calculées, et l'identité de puissance boucle le tout.",
+            "aria": "Diagramme de la formule de la loi d'Ohm avec les valeurs actuelles",
+            "solved": "calculé",
+            "check": "Vérification"
+          },
+          "vi": {
+            "title": "La droite V–I de votre résistance",
+            "intro": "La tension en fonction du courant est une droite passant par l'origine dont la pente est la résistance ; les droites R/2 et 2R montrent comment la pente change.",
+            "aria": "Droites de la tension en fonction du courant",
+            "xLabel": "Courant I (A)",
+            "yLabel": "Tension V (V)",
+            "slope": "Pente",
+            "atDouble": "Au double du courant",
+            "conductance": "Conductance G"
+          },
+          "routes": {
+            "title": "Une puissance, trois chemins",
+            "intro": "V × I, I² × R et V² / R sont la même grandeur écrite de trois façons : les trois barres s'arrêtent toujours sur la même ligne.",
+            "aria": "Trois barres égales pour les trois formules de puissance",
+            "footer": "Longueurs égales : les trois formules concordent",
+            "perHour": "Énergie en 1 heure"
+          },
+          "trio": {
+            "title": "Moitié, actuelle et double résistance",
+            "intro": "À tension fixe, le courant et la puissance sont inversement proportionnels à la résistance : diviser R par deux double les deux.",
+            "aria": "Diagramme en barres du courant et de la puissance pour la moitié, l'actuelle et le double de la résistance",
+            "half": "R / 2",
+            "current": "R actuelle",
+            "double": "2 × R",
+            "legend": "plein : I · contour : P",
+            "ratio": "I(R/2) : I(2R)",
+            "ratioNote": "Quatre fois la résistance, un quart du courant"
+          },
+          "scale": {
+            "title": "Où se situe votre résistance",
+            "intro": "Votre résistance sur un axe en puissances de dix à côté de six résistances courantes ; le chiffre vert sous chacune est le courant que {voltage} V y ferait passer.",
+            "aria": "Échelle logarithmique des résistances en ohms",
+            "conductors": "Conducteurs",
+            "insulators": "Isolants",
+            "refs": {
+              "copperWire": "Fil cuivre",
+              "led": "LED",
+              "incandescentBulb": "Ampoule",
+              "humanBody": "Corps",
+              "wood": "Bois sec",
+              "glass": "Verre"
+            },
+            "nearest": "Référence la plus proche : {ref}",
+            "ratio": "R ÷ {ref}",
+            "currentHere": "Courant à votre tension",
+            "span": "Étendue de l'axe",
+            "decades": "{n} puissances de dix"
+          },
+          "fuse": {
+            "title": "Quel fusible pour ce courant",
+            "intro": "Les calibres standard de fusibles en escalier, votre courant étant la ligne rouge : les marches grises fondraient, la verte est la plus petite qui le supporte.",
+            "aria": "Diagramme en escalier des calibres de fusibles face au courant",
+            "axis": "Calibres standard de fusibles (A)",
+            "fuse": "Fusible à monter",
+            "exceeded": "Au-dessus du plus grand calibre affiché",
+            "headroom": "Marge",
+            "blows": "Fusible de {rating} A"
+          },
+          "rating": {
+            "title": "Puissance nominale de la résistance",
+            "intro": "La chaleur que votre résistance doit dissiper, sur une bande découpée selon les puissances courantes. On double la puissance par sécurité et on choisit la zone qui contient 2P.",
+            "aria": "Bande de zones des puissances de résistances avec la puissance dissipée",
+            "powerResistor": "Résistance de puissance",
+            "derated": "Avec marge 2×",
+            "choose": "Puissance à choisir",
+            "above2W": "Au-delà de 2 W : résistance de puissance",
+            "load": "Charge sur ce calibre"
+          }
         }
-      },
-      "gauge": {
-        "low": "Faible puissance",
-        "moderate": "Puissance modérée",
-        "high": "Puissance élevée"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -8585,11 +8637,6 @@
       "relatedTools": {
         "title": "Outils de Physique Connexes"
       },
-      "fuseCard": {
-        "title": "Fusible Standard le Plus Proche",
-        "intro": "Les fusibles existent en calibres standards, pas en valeurs arbitraires — voici le plus petit calibre standard qui supporterait ce courant en toute sécurité.",
-        "result": "À {current} A, le calibre de fusible standard le plus proche au-dessus est {rating} A."
-      },
       "referenceTable": {
         "title": "Sources de Tension Courantes",
         "caption": "Tensions typiques des sources d'alimentation courantes.",
@@ -8603,6 +8650,34 @@
           "usOutlet": "Prise US",
           "euOutlet": "Prise UE/UK"
         }
+      },
+      "live3d": {
+        "cardTitle": "Tableau du circuit en direct et dessin 3D",
+        "given": "donnée",
+        "groupLaw": "La loi",
+        "groupPower": "La puissance de trois façons",
+        "groupUnits": "Mêmes valeurs dans d'autres unités",
+        "milliamps": "Courant en milliampères",
+        "kilohms": "Résistance en kiloohms",
+        "milliwatts": "Puissance en milliwatts",
+        "conductance": "Conductance",
+        "groupCharge": "Débit de charge",
+        "chargePerSecond": "Charge par seconde",
+        "chargePerMinute": "Charge par minute",
+        "electrons": "Électrons par seconde",
+        "groupEnergy": "Énergie changée en chaleur",
+        "joulesPerMinute": "Énergie en 1 minute",
+        "wattHours": "Énergie en 1 heure",
+        "kWhPerDay": "Énergie en 1 jour",
+        "kcalPerMinute": "Chaleur en 1 minute",
+        "groupSensitivity": "Même tension, autres résistances",
+        "currentWithR": "I avec {k} × R",
+        "powerWithR": "P avec {k} × R",
+        "groupParts": "Composants adaptés",
+        "fuse": "Fusible standard le plus proche",
+        "resistorRating": "Puissance de la résistance (marge 2×)",
+        "e12": "Résistance E12 la plus proche",
+        "copperLength": "Fil de cuivre de 1 mm² de cette R"
       }
     },
     "ph-calculator": {

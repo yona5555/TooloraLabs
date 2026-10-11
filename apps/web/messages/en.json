@@ -8370,10 +8370,7 @@
         "resistancePlaceholder": "e.g. 6",
         "powerLabel": "Power (W)",
         "powerPlaceholder": "e.g. 24",
-        "calculate": "Calculate",
         "clear": "Clear",
-        "triangleCaption": "The value the current tab solves for is highlighted.",
-        "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "aaMotor": "AA Battery + Motor",
           "usbCharger": "USB Charger",
@@ -8392,52 +8389,14 @@
         "current": "Current",
         "resistance": "Resistance",
         "power": "Power",
-        "diagramCaption": "The Ohm's Law triangle — the highlighted values were solved for, not entered directly.",
-        "emptyStateMessage": "Enter values and press Calculate to see your Ohm's Law result.",
-        "sentence": "At {voltage} V and {current} A, the circuit's resistance is {resistance} Ω.",
-        "circuitCaption": "A single-loop circuit labeled with this result's voltage, current, and resistance.",
-        "powerFormulasCaption": "The same power value, reached three algebraically equivalent ways."
+        "sentence": "At {voltage} V and {current} A, the circuit's resistance is {resistance} Ω."
       },
       "education": {
         "intro": {
           "title": "Understanding Ohm's Law",
           "paragraph1": "Ohm's Law states that the current flowing through a conductor is directly proportional to the voltage across it and inversely proportional to its resistance, written as V = I × R, where V is voltage in volts, I is current in amperes, and R is resistance in ohms (Ω). Rearranging the same equation gives I = V ÷ R and R = V ÷ I, so knowing any two of the three quantities always determines the third.",
-          "diagram": {
-            "caption": "The Ohm's Law triangle for 12 V across a 6 Ω resistance, giving 2 A of current — resistance highlighted as the solved value."
-          },
           "paragraph2": "Electrical power, measured in watts (W), combines with Ohm's Law through P = V × I. Substituting V = I × R or I = V ÷ R into that formula produces two equivalent power expressions, P = I² × R and P = V² ÷ R, which is why any two of voltage, current, resistance, and power are enough to determine the other two.",
-          "paragraph3": "This calculator supports all six possible pairs of known quantities — voltage & current, voltage & resistance, current & resistance, and the three pairings that include power — computing the full V, I, R, P set for each one.",
-          "viRelation": {
-            "xLabel": "Current (I)",
-            "yLabel": "Voltage (V)",
-            "slopeLabel": "slope = R",
-            "caption": "Voltage plotted against current at a fixed resistance is a straight line through the origin — Ohm's Law is linear."
-          },
-          "powerRating": {
-            "caption": "Where a typical result falls against common fixed-resistor wattage ratings.",
-            "r1": "1/8W",
-            "r2": "1/4W",
-            "r3": "1/2W",
-            "r4": "1W",
-            "r5": "2W"
-          },
-          "conductivityGauge": {
-            "title": "Try It: Conductor or Insulator?",
-            "intro": "Pick an everyday material to see its resistance on the gauge and find out how well it conducts electricity.",
-            "conductor": "Conductor",
-            "moderate": "Moderate",
-            "insulator": "Insulator",
-            "verdict": "{material} is a {classification} of electricity.",
-            "currentFact": "At {voltage} V, a current of about {current} A would flow through it.",
-            "materials": {
-              "copperWire": "Copper Wire",
-              "led": "LED",
-              "incandescentBulb": "Incandescent Bulb",
-              "humanBody": "Human Body (dry skin)",
-              "wood": "Dry Wood",
-              "glass": "Glass"
-            }
-          }
+          "paragraph3": "This calculator supports all six possible pairs of known quantities — voltage & current, voltage & resistance, current & resistance, and the three pairings that include power — computing the full V, I, R, P set for each one."
         },
         "examples": {
           "title": "Worked Examples",
@@ -8542,13 +8501,11 @@
           },
           "circuitSection": {
             "title": "The Physical Circuit",
-            "paragraph": "The mnemonic triangle is an abstraction of an actual circuit: a battery supplies voltage, a resistor opposes the flow, and current is the rate of charge moving around the single loop.",
-            "caption": "A single-loop circuit labeled with this example's voltage, current, and resistance."
+            "paragraph": "The mnemonic triangle is an abstraction of an actual circuit: a battery supplies voltage, a resistor opposes the flow, and current is the rate of charge moving around the single loop."
           },
           "powerFormulasSection": {
             "title": "Three Routes to the Same Power",
-            "paragraph": "Because Ohm's Law links V, I, and R, the power dissipated can be computed three different ways from whichever two quantities happen to be known — they always agree exactly.",
-            "caption": "The same power value, reached three algebraically equivalent ways."
+            "paragraph": "Because Ohm's Law links V, I, and R, the power dissipated can be computed three different ways from whichever two quantities happen to be known — they always agree exactly."
           }
         },
         "references": {
@@ -8557,12 +8514,107 @@
           "note": "Schagrin's historical study documents the surprisingly cool reception Ohm's now-fundamental law received among his German contemporaries, and traces the conceptual shift that eventually led to its acceptance.",
           "url": "https://doi.org/10.1119/1.1969620",
           "readOriginal": "Read the Original Text"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter valid values above to see this indicator.",
+          "dimmer": {
+            "title": "Dimmer Lab: Bulb, Battery and Rheostat",
+            "intro": "Your source and resistance light a bulb through a dimmer. Slide Rd to dim it; the charges slow down as the current falls. The other sliders change the known values.",
+            "aria": "Animated circuit with a battery, a bulb and a dimmer",
+            "play": "Play",
+            "pause": "Pause",
+            "brightness": "Brightness",
+            "dimmerSlider": "Dimmer resistance as a multiple of R",
+            "slider": {
+              "voltage": "Voltage in volts",
+              "current": "Current in amperes",
+              "resistance": "Resistance in ohms",
+              "power": "Power in watts"
+            },
+            "total": "R + Rd",
+            "current": "I = V / (R + Rd)",
+            "bulbVoltage": "Bulb voltage",
+            "bulbPower": "Bulb power",
+            "dimmerPower": "Dimmer power",
+            "dimmerNote": "Heat lost in the dimmer itself"
+          },
+          "formula": {
+            "title": "V = I × R With Your Numbers",
+            "intro": "Each box holds a live value and its SI unit; the outlined boxes are the ones being solved, and the power identity closes the loop.",
+            "aria": "Formula diagram of Ohm's law with the current values",
+            "solved": "solved",
+            "check": "Check"
+          },
+          "vi": {
+            "title": "The V–I Line of Your Resistor",
+            "intro": "Voltage against current is a straight line through the origin whose slope is the resistance; the R/2 and 2R lines show how the slope changes.",
+            "aria": "Trend lines of voltage against current",
+            "xLabel": "Current I (A)",
+            "yLabel": "Voltage V (V)",
+            "slope": "Slope",
+            "atDouble": "At double the current",
+            "conductance": "Conductance G"
+          },
+          "routes": {
+            "title": "One Power, Three Routes",
+            "intro": "V × I, I² × R and V² / R are the same quantity written three ways, so the three bars always end on the same line.",
+            "aria": "Three equal bars for the three power formulas",
+            "footer": "Equal lengths: the three formulas agree",
+            "perHour": "Energy in 1 hour"
+          },
+          "trio": {
+            "title": "Half, Current and Double Resistance",
+            "intro": "With the voltage fixed, current and power are inversely proportional to resistance: halving R doubles both.",
+            "aria": "Bar chart of current and power for half, current and double resistance",
+            "half": "R / 2",
+            "current": "Current R",
+            "double": "2 × R",
+            "legend": "solid: I · outlined: P",
+            "ratio": "I(R/2) : I(2R)",
+            "ratioNote": "Four times the resistance, a quarter of the current"
+          },
+          "scale": {
+            "title": "Where Your Resistance Sits",
+            "intro": "Your resistance on a powers-of-ten axis next to six everyday resistances; the green figure under each is the current {voltage} V would drive through it.",
+            "aria": "Logarithmic scale of resistances in ohms",
+            "conductors": "Conductors",
+            "insulators": "Insulators",
+            "refs": {
+              "copperWire": "Copper wire",
+              "led": "LED",
+              "incandescentBulb": "Bulb",
+              "humanBody": "Human body",
+              "wood": "Dry wood",
+              "glass": "Glass"
+            },
+            "nearest": "Closest reference: {ref}",
+            "ratio": "R ÷ {ref}",
+            "currentHere": "Current at your voltage",
+            "span": "Axis span",
+            "decades": "{n} powers of ten"
+          },
+          "fuse": {
+            "title": "Which Fuse Fits This Current",
+            "intro": "Standard fuse ratings as a staircase with your current as the red line: grey steps would blow, the green step is the smallest that carries it.",
+            "aria": "Stepped diagram of standard fuse ratings against the current",
+            "axis": "Standard fuse ratings (A)",
+            "fuse": "Fuse to fit",
+            "exceeded": "Above the largest standard rating shown",
+            "headroom": "Headroom",
+            "blows": "{rating} A fuse"
+          },
+          "rating": {
+            "title": "Resistor Power Rating",
+            "intro": "The heat your resistor must shed, on a strip split into the common resistor ratings. Designers double the power for safety and pick the zone that holds 2P.",
+            "aria": "Zone strip of resistor power ratings with the dissipated power",
+            "powerResistor": "Power resistor",
+            "derated": "With 2× margin",
+            "choose": "Rating to choose",
+            "above2W": "Above 2 W: use a power resistor",
+            "load": "Load on that rating"
+          }
         }
-      },
-      "gauge": {
-        "low": "Low power",
-        "moderate": "Moderate power",
-        "high": "High power"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -8585,11 +8637,6 @@
       "relatedTools": {
         "title": "Related Physics Tools"
       },
-      "fuseCard": {
-        "title": "Nearest Standard Fuse",
-        "intro": "Fuses come in standard current ratings, not arbitrary values — here's the smallest standard rating that would safely carry this current.",
-        "result": "At {current} A, the nearest standard fuse rating above it is {rating} A."
-      },
       "referenceTable": {
         "title": "Common Voltage Sources",
         "caption": "Typical voltages of everyday power sources.",
@@ -8603,6 +8650,34 @@
           "usOutlet": "US Wall Outlet",
           "euOutlet": "EU/UK Wall Outlet"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live Circuit Table and 3D Drawing",
+        "given": "given",
+        "groupLaw": "The law",
+        "groupPower": "Power three ways",
+        "groupUnits": "Same values in other units",
+        "milliamps": "Current in milliamps",
+        "kilohms": "Resistance in kilohms",
+        "milliwatts": "Power in milliwatts",
+        "conductance": "Conductance",
+        "groupCharge": "Charge flow",
+        "chargePerSecond": "Charge per second",
+        "chargePerMinute": "Charge per minute",
+        "electrons": "Electrons per second",
+        "groupEnergy": "Energy turned to heat",
+        "joulesPerMinute": "Energy in 1 minute",
+        "wattHours": "Energy in 1 hour",
+        "kWhPerDay": "Energy in 1 day",
+        "kcalPerMinute": "Heat in 1 minute",
+        "groupSensitivity": "Same voltage, other resistances",
+        "currentWithR": "I with {k} × R",
+        "powerWithR": "P with {k} × R",
+        "groupParts": "Matching parts",
+        "fuse": "Nearest standard fuse",
+        "resistorRating": "Resistor wattage (2× margin)",
+        "e12": "Nearest E12 resistor",
+        "copperLength": "Copper wire 1 mm² with this R"
       }
     },
     "ph-calculator": {
