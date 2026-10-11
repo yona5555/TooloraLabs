@@ -4,17 +4,22 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import TrajectoryDiagram from "./TrajectoryDiagram";
-import ProjectileRangeVsAngleDiagram from "./ProjectileRangeVsAngleDiagram";
-import ProjectileVelocityComponentsDiagram from "./ProjectileVelocityComponentsDiagram";
-import ProjectileImpactVelocityDiagram from "./ProjectileImpactVelocityDiagram";
-import ProjectileGravityComparisonDiagram from "./ProjectileGravityComparisonDiagram";
-import ProjectileRangeGauge from "./ProjectileRangeGauge";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import PmLive3D from "./PmLive3D";
+import PmLaunchLab from "./PmLaunchLab";
+import PmRangeAngleCurve from "./PmRangeAngleCurve";
+import PmFlightSplit from "./PmFlightSplit";
+import PmHeightBars from "./PmHeightBars";
+import PmSpeedSensitivity from "./PmSpeedSensitivity";
+import PmFlowArrow from "./PmFlowArrow";
+import PmEnergyBalance from "./PmEnergyBalance";
+import PmWorldsRanked from "./PmWorldsRanked";
 
 type ExampleRow = { calculation: string; result: string };
 
 export default async function ProjectileMotionEducation() {
   const t = await getTranslations("tools.projectile-motion-calculator.education");
+  const t3 = await getTranslations("tools.projectile-motion-calculator.live3d");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
@@ -22,32 +27,21 @@ export default async function ProjectileMotionEducation() {
 
   return (
     <EncyclopediaPaper>
-      <ProjectileRangeGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <TrajectoryDiagram
-          speed={20}
-          angle={45}
-          height={0}
-          gravity={9.81}
-          timeOfFlight={2.884}
-          maxHeight={10.19}
-          range={40.77}
-          launchLabel={t("intro.diagram.launchLabel")}
-          peakLabel={t("intro.diagram.peakLabel")}
-          landingLabel={t("intro.diagram.landingLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <SectionCard title={t3("cardTitle")}>
+          <PmLive3D camera={[0.6, 4.2, 7.6]} />
+        </SectionCard>
         <p>{t("intro.paragraph2")}</p>
-        <ProjectileRangeVsAngleDiagram
-          xLabel={t("intro.rangeVsAngle.xLabel")}
-          yLabel={t("intro.rangeVsAngle.yLabel")}
-          peakLabel={t("intro.rangeVsAngle.peakLabel")}
-          caption={t("intro.rangeVsAngle.caption")}
-        />
+        <div className="space-y-6">
+          <PmLaunchLab />
+          <PmRangeAngleCurve />
+        </div>
         <p>{t("intro.paragraph3")}</p>
+        <PmFlightSplit />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -69,6 +63,10 @@ export default async function ProjectileMotionEducation() {
             </tbody>
           </table>
         </div>
+        <div className="space-y-6">
+          <PmHeightBars />
+          <PmSpeedSensitivity />
+        </div>
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -89,26 +87,23 @@ export default async function ProjectileMotionEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.componentsSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.componentsSection.paragraph")}</p>
-          <ProjectileVelocityComponentsDiagram
-            angleDegrees={45}
-            vxLabel="vₓ = 14.1"
-            vyLabel="vy = 14.1"
-            vLabel="v₀ = 20"
-            caption={t("behindTheTool.componentsSection.caption")}
-          />
+          <div className="mt-4">
+            <PmFlowArrow />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.impactSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.impactSection.paragraph")}</p>
-          <ProjectileImpactVelocityDiagram impactAngleDegrees={45} speedLabel="v = 20 m/s" angleLabel="45°" caption={t("behindTheTool.impactSection.caption")} />
+          <div className="mt-4">
+            <PmEnergyBalance />
+          </div>
         </div>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.gravityComparisonSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.gravityComparisonSection.paragraph")}</p>
-          <ProjectileGravityComparisonDiagram
-            labels={[t("behindTheTool.gravityComparisonSection.earth"), t("behindTheTool.gravityComparisonSection.moon"), t("behindTheTool.gravityComparisonSection.mars")]}
-            caption={t("behindTheTool.gravityComparisonSection.caption")}
-          />
+          <div className="mt-4">
+            <PmWorldsRanked />
+          </div>
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

@@ -10784,7 +10784,6 @@
         "gravityLabel": "Aceleración Gravitacional (g) (m/s²)",
         "gravityHint": "Por defecto usa la gravedad superficial de la Tierra (9.81 m/s²) — cámbiala para modelar la Luna, Marte u otro mundo.",
         "gravityPlaceholder": "p. ej. 9.81",
-        "calculate": "Calcular",
         "clear": "Limpiar",
         "gravityPresetLabel": "Mundo",
         "gravityPreset": {
@@ -10793,11 +10792,6 @@
           "mars": "Marte (3.71 m/s²)",
           "custom": "Personalizado"
         },
-        "vxLabel": "vₓ",
-        "vyLabel": "vy",
-        "vLabel": "v₀",
-        "componentsCaption": "Velocidad de lanzamiento descompuesta en componentes horizontal (vₓ) y vertical (vy).",
-        "scenarioPresetsLabel": "Prueba un escenario real:",
         "scenarios": {
           "basketballShot": "Tiro libre de baloncesto",
           "soccerKick": "Patada de fútbol",
@@ -10818,52 +10812,18 @@
         "impactSpeed": "Velocidad de Impacto",
         "impactAngle": "Ángulo de Impacto",
         "rangeCaption": "Alcance horizontal",
-        "diagramLaunch": "Lanzamiento",
-        "diagramPeak": "Punto máximo ({value} m)",
-        "diagramLanding": "Aterrizaje",
-        "diagramCaption": "La trayectoria parabólica calculada a partir de tu velocidad de lanzamiento, ángulo, altura y gravedad — el punto máximo y el punto de aterrizaje están escalados a sus valores calculados reales.",
-        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver la trayectoria.",
         "angleField": "Ángulo de Lanzamiento",
         "heightField": "Altura de Lanzamiento",
         "gravityField": "Gravedad",
-        "impactDiagramCaption": "El vector de velocidad de impacto, en ángulo bajo la horizontal según el ángulo de impacto calculado.",
-        "speedField": "Velocidad de Lanzamiento"
+        "speedField": "Velocidad de Lanzamiento",
+        "heroCaption": "Vuelo {t} s · altura máx. {h} m · impacto {v} m/s"
       },
       "education": {
         "intro": {
           "title": "Entendiendo el Movimiento de Proyectiles",
           "paragraph1": "El movimiento de proyectiles describe la trayectoria curva que traza un objeto lanzado al aire y sometido únicamente a la gravedad, sin propulsión y, en este modelo idealizado, sin resistencia del aire. La idea clave, demostrada rigurosamente por Galileo Galilei, es que las componentes horizontal y vertical del movimiento son totalmente independientes: la velocidad horizontal (v₀cosθ) permanece constante durante todo el vuelo, mientras que la velocidad vertical (v₀sinθ) se desacelera, se detiene momentáneamente en el punto más alto y luego acelera hacia abajo bajo la gravedad, exactamente como si el objeto se hubiera lanzado hacia arriba y hubiera caído de nuevo en línea recta. Combinar una velocidad horizontal constante con una velocidad vertical uniformemente acelerada produce una trayectoria que es matemáticamente una parábola.",
-          "diagram": {
-            "launchLabel": "Lanzamiento (v₀ = 20 m/s, θ = 45°)",
-            "peakLabel": "Punto máximo ≈ 10.19 m",
-            "landingLabel": "Aterrizaje (R ≈ 40.77 m)",
-            "caption": "La trayectoria de un lanzamiento a 20 m/s con un ángulo de 45° desde el suelo — una parábola formada por una velocidad horizontal constante y una velocidad vertical uniformemente acelerada."
-          },
           "paragraph2": "Cuatro magnitudes describen por completo este vuelo idealizado: el tiempo de vuelo (cuánto tiempo permanece el objeto en el aire), la altura máxima (el punto más alto de la parábola), el alcance (la distancia horizontal recorrida) y la velocidad de impacto (la rapidez y el ángulo al aterrizar). Cuando se lanza desde el nivel del suelo (h₀ = 0), la trayectoria es simétrica: el objeto vuelve a la altura desde la que partió, su velocidad de impacto es igual a su velocidad de lanzamiento, y su ángulo de impacto es igual a su ángulo de lanzamiento. Lanzar desde una elevación (h₀ > 0) rompe esa simetría: el objeto cae más de lo que subió, así que aterriza más rápido y con un ángulo más pronunciado que el de lanzamiento.",
-          "paragraph3": "Como lanzar desde una altura rompe la simetría simple del nivel del suelo, el tiempo de vuelo ya no puede obtenerse con una sola división: requiere resolver la ecuación cuadrática h₀ + v₀sinθ·t − ½gt² = 0 para su raíz positiva. Esta calculadora siempre aplica esa solución cuadrática general, que se reduce automáticamente a la conocida t = 2v₀sinθ/g cuando h₀ = 0.",
-          "rangeVsAngle": {
-            "xLabel": "Ángulo de lanzamiento (0°-90°)",
-            "yLabel": "Alcance",
-            "peakLabel": "45° — alcance máximo",
-            "caption": "Para un lanzamiento a nivel, el alcance es proporcional a sin(2×ángulo), que alcanza su máximo en un ángulo de lanzamiento de 45°."
-          },
-          "rangeGauge": {
-            "title": "Pruébalo: ¿hasta dónde llega eso?",
-            "intro": "Elige un proyectil real para ver su alcance típico en el medidor y compararlo con otros.",
-            "short": "Corto",
-            "medium": "Medio",
-            "long": "Largo",
-            "verdict": "{projectile} recorre normalmente una distancia {classification}.",
-            "fieldsFact": "Eso equivale a unos {ratio} campos de fútbol (100 m cada uno) uno tras otro.",
-            "projectiles": {
-              "paperAirplane": "Un avión de papel",
-              "baseballThrow": "Un lanzamiento de béisbol",
-              "golfDrive": "Un golpe de golf largo",
-              "cannonball": "Una bala de cañón",
-              "artilleryShell": "Un proyectil de artillería",
-              "icbm": "Un misil balístico intercontinental"
-            }
-          }
+          "paragraph3": "Como lanzar desde una altura rompe la simetría simple del nivel del suelo, el tiempo de vuelo ya no puede obtenerse con una sola división: requiere resolver la ecuación cuadrática h₀ + v₀sinθ·t − ½gt² = 0 para su raíz positiva. Esta calculadora siempre aplica esa solución cuadrática general, que se reduce automáticamente a la conocida t = 2v₀sinθ/g cuando h₀ = 0."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -10968,21 +10928,15 @@
           },
           "componentsSection": {
             "title": "Dividiendo la Velocidad en Dos Partes",
-            "paragraph": "La velocidad de lanzamiento se descompone en una parte horizontal que permanece constante durante todo el vuelo y una parte vertical que la gravedad reduce constantemente: tratar ambas de forma independiente es lo que hace posible todo el cálculo.",
-            "caption": "Velocidad de lanzamiento descompuesta en componentes horizontal y vertical."
+            "paragraph": "La velocidad de lanzamiento se descompone en una parte horizontal que permanece constante durante todo el vuelo y una parte vertical que la gravedad reduce constantemente: tratar ambas de forma independiente es lo que hace posible todo el cálculo."
           },
           "impactSection": {
             "title": "La Velocidad al Aterrizar",
-            "paragraph": "El proyectil regresa al suelo moviéndose en un ángulo bajo la horizontal que depende de cuánto cambió la componente vertical durante el vuelo: para un lanzamiento y aterrizaje a nivel, coincide exactamente con el ángulo de lanzamiento.",
-            "caption": "El vector de velocidad de impacto, en ángulo bajo la horizontal."
+            "paragraph": "El proyectil regresa al suelo moviéndose en un ángulo bajo la horizontal que depende de cuánto cambió la componente vertical durante el vuelo: para un lanzamiento y aterrizaje a nivel, coincide exactamente con el ángulo de lanzamiento."
           },
           "gravityComparisonSection": {
             "title": "El Mismo Disparo, Mundos Diferentes",
-            "paragraph": "Dado que el alcance escala inversamente con la gravedad, lanzar el mismo disparo en la Luna o Marte en lugar de la Tierra lo envía dramáticamente más lejos, sin cambiar en absoluto la velocidad o el ángulo de lanzamiento.",
-            "caption": "Alcance para un lanzamiento idéntico en la Tierra, la Luna y Marte.",
-            "earth": "Tierra",
-            "moon": "Luna",
-            "mars": "Marte"
+            "paragraph": "Dado que el alcance escala inversamente con la gravedad, lanzar el mismo disparo en la Luna o Marte en lugar de la Tierra lo envía dramáticamente más lejos, sin cambiar en absoluto la velocidad o el ángulo de lanzamiento."
           }
         },
         "references": {
@@ -10991,12 +10945,113 @@
           "note": "El historiador de la ciencia R. H. Naylor rastrea las notas manuscritas de Galileo sobre el movimiento de proyectiles, reconstruyendo los pasos experimentales y teóricos que llevaron a la demostración terminada en 1638 de que la trayectoria de un proyectil es una parábola.",
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Leer el Texto Original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "launch": {
+            "title": "Laboratorio de lanzamiento: mira el vuelo",
+            "intro": "La bola recorre tu trayectoria real con su vector velocidad y sus componentes vₓ / vy; mueve los deslizadores y toda la página los sigue.",
+            "aria": "Proyectil animado en su trayectoria con vectores de velocidad",
+            "play": "Reproducir",
+            "pause": "Pausa",
+            "hint": "Vuelo en tiempo real (1,5–5 s por ciclo)",
+            "speed": "Velocidad de lanzamiento v₀",
+            "angle": "Ángulo de lanzamiento θ",
+            "time": "Tiempo actual",
+            "x": "Posición horizontal x = vₓ·t",
+            "y": "Altura y(t)",
+            "vy": "Velocidad vertical vy − g·t",
+            "speedNow": "Rapidez actual |v|",
+            "apex": "Vértice",
+            "apexNote": "allí solo queda vₓ = {vx} m/s"
+          },
+          "curve": {
+            "title": "Alcance para cada ángulo de lanzamiento",
+            "intro": "El alcance para cada ángulo de 0° a 90° con tu velocidad, altura y gravedad, marcando tu ángulo, el óptimo y el complementario.",
+            "aria": "Curva de alcance frente al ángulo",
+            "current": "Tu ángulo",
+            "optimal": "Ángulo óptimo",
+            "max": "Alcance máximo",
+            "complementary": "Ángulo complementario",
+            "efficiency": "Fracción del máximo",
+            "efficiencyNote": "θ* = 45° solo desde el suelo; la altura de lanzamiento lo reduce"
+          },
+          "flow": {
+            "title": "De la velocidad de lanzamiento al alcance",
+            "intro": "La cadena de la calculadora paso a paso: descomponer la velocidad, medir la subida, sumar la caída y multiplicar por la velocidad horizontal constante.",
+            "aria": "Flujo de la velocidad al alcance",
+            "vertical": "Componente vertical",
+            "horizontal": "Componente horizontal",
+            "up": "Tiempo de subida",
+            "down": "Tiempo de caída",
+            "range": "Alcance"
+          },
+          "split": {
+            "title": "El vuelo dividido en el vértice",
+            "intro": "Tiempo, distancia y altura divididos antes y después del vértice; desde el suelo cada par es 50/50 y una altura de lanzamiento inclina el lado de la caída.",
+            "time": "Tiempo de vuelo",
+            "rise": "Subida",
+            "fall": "Caída",
+            "distance": "Distancia horizontal",
+            "before": "Antes del vértice",
+            "after": "Después del vértice",
+            "height": "Altura máxima",
+            "launch": "Altura de lanzamiento",
+            "riseH": "Subida",
+            "ratio": "Razón caída / subida"
+          },
+          "energy": {
+            "title": "Balance de energía: lanzamiento frente a impacto",
+            "intro": "Energía por kilogramo en una balanza: cinética + potencial al lanzar en un platillo, cinética al impactar en el otro. Sin resistencia del aire la balanza queda nivelada.",
+            "aria": "Balanza de energía de lanzamiento e impacto",
+            "launchPan": "Lanzamiento",
+            "impactPan": "Impacto",
+            "kinetic": "Cinética al lanzar ½v₀²",
+            "potential": "Potencial al lanzar g·h₀",
+            "apex": "Total en el vértice",
+            "impact": "Cinética al impactar ½v²",
+            "verdict": "Balance",
+            "verdictNote": "multiplica por la masa en kg para obtener julios"
+          },
+          "worlds": {
+            "title": "El mismo lanzamiento en ocho mundos",
+            "intro": "Tu velocidad, ángulo y altura con la gravedad superficial de cada mundo, del mayor alcance al menor; tu mundo actual está resaltado.",
+            "rule": "Regla",
+            "yours": "Tu g",
+            "source": "g de la ficha planetaria de la NASA",
+            "names": {
+              "pluto": "Plutón",
+              "moon": "Luna",
+              "mercury": "Mercurio",
+              "mars": "Marte",
+              "venus": "Venus",
+              "earth": "Tierra",
+              "saturn": "Saturno",
+              "jupiter": "Júpiter",
+              "custom": "Tu g personalizada"
+            }
+          },
+          "sensitivity": {
+            "title": "Cómo cambia el alcance con la velocidad",
+            "intro": "El alcance con un 10 % menos de velocidad, tu velocidad y un 10 % más, con el mismo ángulo, altura y gravedad. El alcance crece con el cuadrado de la velocidad.",
+            "low": "−10 % velocidad",
+            "current": "Tu velocidad",
+            "high": "+10 % velocidad",
+            "squared": "Factores de velocidad²",
+            "swing": "Variación total",
+            "swingNote": "exactamente v² en suelo llano; cercano desde una altura"
+          },
+          "bars": {
+            "title": "Altura en pasos de tiempo iguales",
+            "intro": "La altura en nueve instantes iguales del lanzamiento al impacto. Cada paso cubre la misma distancia horizontal, mientras las ganancias de altura se reducen hacia el vértice.",
+            "aria": "Gráfico de barras de la altura en pasos iguales",
+            "step": "Paso de tiempo",
+            "dx": "Paso horizontal",
+            "first": "Primer paso",
+            "highest": "Muestra más alta",
+            "peak": "Altura máxima real"
+          }
         }
-      },
-      "gauge": {
-        "low": "Trayectoria más plana",
-        "optimal": "Cerca del alcance máximo",
-        "steep": "Arco alto"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -11019,11 +11074,6 @@
       "relatedTools": {
         "title": "Herramientas de Física Relacionadas"
       },
-      "heightCard": {
-        "title": "En Pisos de un Edificio",
-        "intro": "Comparar la altura máxima con un piso típico de un edificio (unos 3 m) da una idea intuitiva de cuán alto llega el proyectil.",
-        "result": "Esta trayectoria alcanza un máximo de unos {floors} pisos de un edificio típico."
-      },
       "referenceTable": {
         "title": "Velocidades de Lanzamiento Típicas",
         "caption": "Velocidades de lanzamiento del mundo real para comparar con tus propios datos.",
@@ -11037,6 +11087,36 @@
           "tennisServe": "Saque de Tenis (profesional)",
           "handgunBullet": "Bala de Pistola"
         }
+      },
+      "live3d": {
+        "cardTitle": "Trayectoria en vivo: tabla y vuelo en 3D",
+        "invalid": "Introduce una velocidad ≥ 0, una altura ≥ 0 y una gravedad > 0 para dibujar el vuelo.",
+        "groupInputs": "Datos de lanzamiento",
+        "groupComponents": "Componentes de la velocidad",
+        "groupRise": "Subida hasta el vértice",
+        "groupFall": "Caída y alcance",
+        "groupImpact": "Impacto",
+        "groupEnergy": "Energía por kilogramo (se conserva)",
+        "groupOptimum": "Ángulo óptimo",
+        "groupPath": "Trayectoria",
+        "vx": "Velocidad horizontal vₓ",
+        "vy": "Velocidad vertical vy",
+        "timeUp": "Tiempo de subida t↑",
+        "rise": "Subida sobre el lanzamiento",
+        "apexX": "Distancia del vértice",
+        "timeDown": "Tiempo de caída t↓",
+        "impactVy": "Velocidad vertical al impactar",
+        "keLaunch": "Cinética al lanzar",
+        "peLaunch": "Potencial al lanzar",
+        "energyApex": "Total en el vértice",
+        "keImpact": "Cinética al impactar",
+        "optimalAngle": "Ángulo óptimo θ*",
+        "maxRange": "Alcance máximo",
+        "efficiency": "Fracción del alcance máximo",
+        "complementary": "Alcance a 90° − θ",
+        "arcLength": "Longitud de la trayectoria",
+        "averageSpeed": "Rapidez media en la trayectoria",
+        "minSpeed": "Rapidez mínima (en el vértice)"
       }
     },
     "readability-score-calculator": {
