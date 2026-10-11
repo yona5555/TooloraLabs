@@ -28,6 +28,7 @@ export default function SectionCard({
   return (
     <div
       id={id}
+      data-bp-panel
       className={`rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none ${id ? "scroll-mt-32" : ""} ${className}`}
     >
       {onToggle ? (

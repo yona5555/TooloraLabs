@@ -5,7 +5,7 @@ type Props = {
 
 export default function FormulaBox({ expression, note }: Props) {
   return (
-    <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-5 dark:border-blue-500/30 dark:bg-blue-500/5">
+    <div data-bp-inner className="rounded-xl border border-blue-200 bg-blue-50/50 p-5 dark:border-blue-500/30 dark:bg-blue-500/5">
       <p dir="ltr" className="overflow-x-auto text-center font-mono text-lg font-semibold text-blue-700 dark:text-blue-400">
         {expression}
       </p>

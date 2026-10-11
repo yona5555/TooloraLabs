@@ -46,7 +46,7 @@ export default async function ComingSoonPhasePage({ params }: ComingSoonPhasePag
   const phaseTools = comingSoonPhases[phase];
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-24">
+    <main data-coming-soon-page className="mx-auto max-w-7xl px-6 py-24">
       <span className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         <Clock size={16} />
         {t(`phase.${phase}.estimatedDate`)}

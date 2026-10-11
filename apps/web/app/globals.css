@@ -29,6 +29,229 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ===== Blueprint theme: page variants, header nav pills, Browse dropdown, light surfaces =====
+ * Single source of truth for page backgrounds and light-mode surfaces (rules: .claude/rules/visuals.md).
+ * Variant tokens live on <body>, chosen by the page marker its <main> carries:
+ *   default -> navy | [data-categories-page] -> teal | [data-coming-soon-page] -> violet
+ *   [data-home-page], [data-docs-page] -> black in dark mode (light navy in light mode).
+ * Header nav pills ([data-bp-nav]) carry the variant of the page they open, so they read the same tokens.
+ *   --bp-base/minor/major  page fill + 30px minor / 150px major grid lines (light mode: minor only)
+ *   --bp-heading/link/strong/accent  Browse dropdown + pill text
+ *   --bp-edge/glow  pill border + current-page highlight
+ *   --bp-panel/inner/key  light-mode surfaces: large panels, inner boxes, light keys & inputs
+ *   --bp-frame/divider/shadow  light-mode panel borders, inner dividers, soft panel shadow */
+
+/* ---- light variants ---- */
+body,
+[data-bp-nav="navy"],
+[data-bp-nav="black"] {
+  --bp-base: #eef3fb;
+  --bp-minor: rgba(40, 80, 160, 0.04);
+  --bp-major: transparent;
+  --bp-edge: rgba(40, 80, 160, 0.18);
+  --bp-glow: rgba(40, 80, 160, 0.5);
+  --bp-heading: #a36a12;
+  --bp-link: #27272a;
+  --bp-strong: #09090b;
+  --bp-accent: #1d4ed8;
+  --bp-panel: #e7eefa;
+  --bp-inner: #dde7f7;
+  --bp-key: #f5f8fd;
+  --bp-frame: rgba(40, 80, 160, 0.35);
+  --bp-divider: rgba(40, 80, 160, 0.22);
+  --bp-shadow: 0 1px 3px rgba(20, 40, 90, 0.08);
+}
+body:has([data-categories-page]),
+[data-bp-nav="teal"] {
+  --bp-base: #e8f5f3;
+  --bp-minor: rgba(20, 120, 110, 0.04);
+  --bp-edge: rgba(20, 120, 110, 0.18);
+  --bp-glow: rgba(20, 120, 110, 0.5);
+  --bp-panel: #ddf0ec;
+  --bp-inner: #cfe8e3;
+  --bp-key: #f4fbfa;
+  --bp-frame: rgba(20, 120, 110, 0.35);
+  --bp-divider: rgba(20, 120, 110, 0.22);
+}
+body:has([data-coming-soon-page]),
+[data-bp-nav="violet"] {
+  --bp-base: #f2eefb;
+  --bp-minor: rgba(100, 70, 170, 0.04);
+  --bp-edge: rgba(100, 70, 170, 0.18);
+  --bp-glow: rgba(100, 70, 170, 0.5);
+  --bp-panel: #e9e3f8;
+  --bp-inner: #ddd4f3;
+  --bp-key: #f9f7fe;
+  --bp-frame: rgba(100, 70, 170, 0.35);
+  --bp-divider: rgba(100, 70, 170, 0.22);
+}
+
+/* ---- dark variants (later + equal or higher specificity, so they win in dark mode) ---- */
+.dark body,
+.dark [data-bp-nav="navy"],
+.dark [data-bp-nav="black"] {
+  --bp-base: #0e1a36;
+  --bp-minor: rgba(96, 130, 200, 0.1);
+  --bp-major: rgba(96, 130, 200, 0.22);
+  --bp-edge: rgba(96, 130, 200, 0.22);
+  --bp-glow: rgba(96, 130, 200, 0.65);
+  --bp-heading: #f2c46d;
+  --bp-link: #e4e4e7;
+  --bp-strong: #ffffff;
+  --bp-accent: #60a5fa;
+}
+.dark body:has([data-categories-page]),
+.dark [data-bp-nav="teal"] {
+  --bp-base: #0a2a2c;
+  --bp-minor: rgba(90, 200, 190, 0.1);
+  --bp-major: rgba(90, 200, 190, 0.22);
+  --bp-edge: rgba(90, 200, 190, 0.22);
+  --bp-glow: rgba(90, 200, 190, 0.65);
+}
+.dark body:has([data-coming-soon-page]),
+.dark [data-bp-nav="violet"] {
+  --bp-base: #1b1233;
+  --bp-minor: rgba(170, 135, 240, 0.1);
+  --bp-major: rgba(170, 135, 240, 0.22);
+  --bp-edge: rgba(170, 135, 240, 0.22);
+  --bp-glow: rgba(170, 135, 240, 0.65);
+}
+.dark body:has([data-home-page]),
+.dark body:has([data-docs-page]),
+.dark [data-bp-nav="black"] {
+  --bp-base: var(--color-zinc-950);
+  --bp-minor: transparent;
+  --bp-major: transparent;
+  --bp-edge: rgba(255, 255, 255, 0.16);
+  --bp-glow: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- page background (fixed) and Browse dropdown (same palette, grid scrolls with the panel) ---- */
+body,
+[data-browse-scroll] {
+  background-color: var(--bp-base);
+  background-image:
+    linear-gradient(var(--bp-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-major) 1px, transparent 1px),
+    linear-gradient(var(--bp-minor) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-minor) 1px, transparent 1px);
+  background-size: 150px 150px, 150px 150px, 30px 30px, 30px 30px;
+}
+body {
+  background-attachment: fixed;
+}
+[data-browse-scroll] {
+  background-attachment: local;
+}
+[data-browse-panel] {
+  background-color: var(--bp-base);
+}
+[data-browse-scroll] h3 {
+  color: var(--bp-heading);
+  font-weight: 800;
+}
+[data-browse-scroll] a {
+  color: var(--bp-link);
+}
+[data-browse-scroll] a:hover {
+  color: var(--bp-heading);
+}
+[data-browse-panel] > a {
+  color: var(--bp-accent);
+}
+
+/* ---- header nav pills ---- */
+[data-bp-nav] {
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--bp-edge);
+  border-radius: 9999px;
+  background-color: var(--bp-base);
+  color: var(--bp-link);
+  transition: border-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
+}
+[data-bp-nav]:hover {
+  border-color: var(--bp-glow);
+  color: var(--bp-strong);
+}
+body:has([data-home-page]) [data-bp-link="home"],
+body:has([data-tools-page]) [data-bp-link="tools"],
+body:has([data-categories-page]) [data-bp-link="categories"],
+body:has([data-docs-page]) [data-bp-link="docs"],
+body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
+  border-color: var(--bp-glow);
+  box-shadow: 0 0 0 1px var(--bp-glow), 0 0 12px var(--bp-glow);
+  color: var(--bp-strong);
+}
+
+/* ---- light-mode surfaces, site-wide ----
+ * Shared white / zinc-gray utilities and neutral borders map to the variant tokens, so every tool
+ * gets the "one color family" look without per-page edits. Rules sit in the utilities layer with
+ * zero-specificity scoping (:where), so hover:/focus: variants still win. Skipped inside the home
+ * calculator's own dark toggle (.calc-dark), print areas and on screen media only.
+ * Dark mode is untouched. */
+@media screen {
+  @layer utilities {
+    :where(html:not(.dark)) .bg-white:not(:where(.calc-dark, .calc-dark *, [data-print-area], [data-print-area] *)) {
+      background-color: var(--bp-panel);
+    }
+    /* translucent white bars and overlays (sticky section nav, chart labels) keep their translucency */
+    :where(html:not(.dark)) :is(.bg-white\/80, .bg-white\/90):not(:where(.calc-dark *)) {
+      background-color: color-mix(in srgb, var(--bp-panel) 92%, transparent);
+    }
+    :where(html:not(.dark)) :where(button, [role="button"], input, select, textarea).bg-white:not(:where(.calc-dark *)) {
+      background-color: var(--bp-key);
+    }
+    :where(html:not(.dark)) :is(.bg-zinc-50, .bg-zinc-100, .bg-gray-50, .bg-gray-100, .bg-slate-50, .bg-slate-100):not(:where(.calc-dark, .calc-dark *, [data-print-area] *)) {
+      background-color: var(--bp-inner);
+    }
+
+    /* neutral borders: dividers by default ... */
+    :where(html:not(.dark)) :is(.border-zinc-100, .border-zinc-200, .border-zinc-300, .border-gray-100, .border-gray-200, .border-gray-300, .border-slate-100, .border-slate-200, .border-slate-300):not(:where(.calc-dark, .calc-dark *, [data-print-area] *)) {
+      border-color: var(--bp-divider);
+    }
+    :where(html:not(.dark)) :is(.divide-zinc-100, .divide-zinc-200, .divide-gray-100, .divide-gray-200, .divide-slate-100, .divide-slate-200):not(:where(.calc-dark, .calc-dark *)) > * {
+      border-color: var(--bp-divider);
+    }
+    /* ... and 1.5px frames on rounded, fully bordered panels, cards, tables and inputs (not buttons/pills) */
+    :where(html:not(.dark)) .border:where([class*="rounded-"]):where(.border-zinc-100, .border-zinc-200, .border-zinc-300, .border-gray-200, .border-gray-300, .border-slate-200, .border-slate-300):not(:where(.rounded-full, button, [role="button"], .calc-dark, .calc-dark *, [data-print-area] *)) {
+      border-width: 1.5px;
+      border-color: var(--bp-frame);
+    }
+    :where(html:not(.dark)) .border:where(.rounded-2xl, .rounded-3xl):where(.bg-white):not(:where([class*="shadow"], .calc-dark, .calc-dark *)) {
+      box-shadow: var(--bp-shadow);
+    }
+    :where(html:not(.dark)) :where(table) :where(th, td) + :where(th, td) {
+      border-inline-start: 1px solid var(--bp-divider);
+    }
+
+    /* colored buttons/keys keep their fill and get a slightly darker edge of the same hue */
+    :where(html:not(.dark)) :where(button, [role="button"]):where(.bg-blue-500, .bg-blue-600, .bg-blue-700, .bg-amber-500, .bg-amber-600, .bg-orange-500, .bg-orange-600, .bg-red-500, .bg-red-600, .bg-rose-500, .bg-rose-600, .bg-emerald-500, .bg-emerald-600, .bg-green-500, .bg-green-600, .bg-teal-500, .bg-teal-600, .bg-violet-500, .bg-violet-600, .bg-indigo-500, .bg-indigo-600, .bg-sky-500, .bg-sky-600):not(:focus-visible) {
+      outline: 1px solid rgba(0, 0, 0, 0.18);
+      outline-offset: -1px;
+    }
+
+    /* shared components that opt in explicitly */
+    :where(html:not(.dark)) [data-bp-panel] {
+      border: 1.5px solid var(--bp-frame);
+      background-color: var(--bp-panel);
+      box-shadow: var(--bp-shadow);
+    }
+    :where(html:not(.dark)) [data-bp-inner]:not(:where(.bg-blue-50)) {
+      background-color: var(--bp-inner);
+    }
+    :where(html:not(.dark)) body {
+      --glass-border: var(--bp-frame);
+      --glass-table-row-border: var(--bp-divider);
+    }
+  }
+}
+/* the "On this page" list is a light panel; give its text room inside the frame */
+:where(html:not(.dark)) [data-toc-list] {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+}
+/* ===== end blueprint theme ===== */
+
 @media print {
   /*
    * `visibility: hidden` alone (the previous approach) hides content

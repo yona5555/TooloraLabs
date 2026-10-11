@@ -17,7 +17,7 @@ export default function HtmlDocument({
 }) {
   return (
     <html lang={lang} dir={dir} suppressHydrationWarning>
-      <body className="bg-[#F4F4F4] text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
+      <body className="text-zinc-900 antialiased dark:text-zinc-100">
         <ThemeInitScript />
         <GoogleAnalytics />
         {children}

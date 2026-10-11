@@ -180,7 +180,7 @@ export default function CategorySidebar() {
             if (categoryTools.length === 0) {
               return (
                 <li key={category.slug}>
-                  <div aria-disabled="true" className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-zinc-400 opacity-60 dark:text-zinc-500">
+                  <div aria-disabled="true" data-bp-inner className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-zinc-400 opacity-60 dark:text-zinc-500">
                     <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
                       <Icon size={15} strokeWidth={2} />
                     </span>
@@ -199,6 +199,7 @@ export default function CategorySidebar() {
                   type="button"
                   onClick={() => toggle(category.slug)}
                   aria-expanded={isOpen}
+                  data-bp-inner
                   className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition ${
                     isActiveCategory
                       ? "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"

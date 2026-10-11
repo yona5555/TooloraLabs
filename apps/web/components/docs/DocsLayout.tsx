@@ -12,7 +12,7 @@ export default async function DocsLayout({ children, toc }: DocsLayoutProps) {
   const t = await getTranslations("docsNav");
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
+    <main data-docs-page className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
       <details className="group mb-6 rounded-xl border border-zinc-200 bg-white lg:hidden dark:border-zinc-800 dark:bg-zinc-900">
         <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-semibold text-zinc-700 marker:content-none dark:text-zinc-200">
           <Menu size={16} />

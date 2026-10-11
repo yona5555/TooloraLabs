@@ -56,7 +56,7 @@ export default async function CategoryPage({
   const categoryTools = tools.filter((tool) => tool.category === slug);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-24">
+    <main data-categories-page className="mx-auto max-w-7xl px-6 py-24">
       <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {t("badge")}
       </span>

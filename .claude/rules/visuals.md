@@ -112,3 +112,19 @@ paths:
 ## 7. معلَّق على المؤشرات (لم يُنفَّذ)
 - sin/cos curves under all interactive indicators (confirmed by Yousef): المكوّن المشترك `TriangleSinCosLiveCurve` تحت (1) و(2) و(10) و(12)؛ استثناء معتمد من §32 بند 6.
 - توزيع المؤشرات الـ12 المتبقية بين `AdSpace` على طول الصفحة، من أعلاها إلى أسفلها.
+
+## 8. Blueprint theme: page backgrounds and surfaces (2026-10-11, every page)
+Single source of truth: the "Blueprint theme" block in `apps/web/app/globals.css` (tokens `--bp-*`). Never set a page background on `<body>`/`<main>` with utilities; never add per-page color hacks.
+- **Page variants** (tokens set on `<body>` by the marker on the page's `<main>`):
+  | Variant | Marker | Dark | Light |
+  |---|---|---|---|
+  | navy (default, all tools) | none (`data-tools-page` on /tools only highlights the pill) | #0e1a36, minor 30px rgba(96,130,200,.10), major 150px .22 | #eef3fb, minor rgba(40,80,160,.04), no major |
+  | teal (categories) | `data-categories-page` | #0a2a2c, rgba(90,200,190,.10/.22) | #e8f5f3, rgba(20,120,110,.04) |
+  | violet (coming soon) | `data-coming-soon-page` | #1b1233, rgba(170,135,240,.10/.22) | #f2eefb, rgba(100,70,170,.04) |
+  | black (home, docs) | `data-home-page`, `data-docs-page` | zinc-950, no grid | light navy |
+  Grid is CSS-only (layered linear-gradients), `background-attachment: fixed`. A new section with its own variant = new marker + one token rule, nothing else.
+- **Browse dropdown:** always the current page's variant (same tokens), fully opaque, grid scrolls with the panel (`local`). Category headings `--bp-heading`: dark #f2c46d, light #a36a12, weight 800; tool links neutral (`--bp-link`).
+- **Header nav pills:** `data-bp-nav="navy|teal|violet|black"` = the variant of the page each link opens (Home/Docs black, Tools/Browse navy, Categories teal, Coming soon violet); pill = base fill + 1px `--bp-edge` border; current page = `--bp-glow` border + soft glow.
+- **Light mode surfaces (site-wide, automatic):** `bg-white` → panel #e7eefa; `bg-zinc/gray/slate-50|100` → inner #dde7f7; white buttons/inputs → key #f5f8fd (teal/violet pages use their own tints). Never pure white panels.
+- **Light mode borders:** neutral borders → dividers rgba(40,80,160,.22); rounded fully bordered panels/cards/tables/FAQ/inputs → 1.5px rgba(40,80,160,.35); large rounded white panels get `0 1px 3px rgba(20,40,90,.08)`; table column dividers 1px; colored buttons keep their fill with a darker same-hue edge.
+- Shared components opt in with `data-bp-panel` (SectionCard, TOC list, feedback box) and `data-bp-inner` (stat boxes, formula box, sidebar rows). Dark mode cards/panels are unchanged. The home calculator's own dark toggle (`.calc-dark`) and print areas are excluded.

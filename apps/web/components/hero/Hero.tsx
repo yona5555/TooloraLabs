@@ -25,7 +25,7 @@ export default function Hero() {
           margin at the row's own left/right edges (the sidebar still touches those). */}
       <div className="relative z-10 flex min-h-[640px] w-full flex-col border-y border-zinc-200 lg:flex-row dark:border-zinc-800">
         <CategorySidebar />
-        <div className="flex min-w-0 flex-1 flex-col gap-4 bg-zinc-100 p-3 dark:bg-zinc-950 sm:p-4">
+        <div className="flex min-w-0 flex-1 flex-col gap-4 bg-transparent p-3 dark:bg-zinc-950 sm:p-4">
           <HomeCalculator />
           {/* No overflow-hidden here either — this card holds the docs section's own sticky "On
               This Page" TOC, and everything inside is already padded well clear of the rounded

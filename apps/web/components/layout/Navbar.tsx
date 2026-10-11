@@ -29,32 +29,42 @@ export default function Navbar() {
         <nav className="hidden items-center gap-8 lg:flex">
           <Link
             href="/"
-            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            data-bp-nav="black"
+            data-bp-link="home"
+            className="text-sm font-medium"
           >
             {t("home")}
           </Link>
           <Link
             href="/tools"
-            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            data-bp-nav="navy"
+            data-bp-link="tools"
+            className="text-sm font-medium"
           >
             {t("tools")}
           </Link>
           <Link
             href="/categories"
-            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            data-bp-nav="teal"
+            data-bp-link="categories"
+            className="text-sm font-medium"
           >
             {t("categories")}
           </Link>
           <ToolsDropdown />
           <Link
             href="/docs"
-            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            data-bp-nav="black"
+            data-bp-link="docs"
+            className="text-sm font-medium"
           >
             {t("docs")}
           </Link>
           <Link
             href="/coming-soon"
-            className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+            data-bp-nav="violet"
+            data-bp-link="coming-soon"
+            className="text-sm font-medium"
           >
             {t("comingSoon")}
           </Link>

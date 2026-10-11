@@ -35,7 +35,7 @@ export default function TableOfContents({ items }: Props) {
 
   return (
     <div className="flex flex-col gap-6 text-sm">
-      <div>
+      <div data-bp-panel data-toc-list>
         <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{t("onThisPage")}</p>
         <ul className="flex flex-col gap-0.5 border-s border-zinc-200 dark:border-zinc-800">
           {items.map((item) => (
@@ -56,7 +56,7 @@ export default function TableOfContents({ items }: Props) {
         </ul>
       </div>
 
-      <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
+      <div data-bp-panel className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-800">
         {feedback === "idle" ? (
           <>
             <p className="mb-2.5 text-sm font-medium text-zinc-700 dark:text-zinc-200">{t("wasThisHelpful")}</p>

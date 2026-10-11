@@ -30,7 +30,7 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
   const tCommon = await getTranslations({ locale, namespace: "common" });
 
   return (
-    <main className="mx-auto max-w-7xl px-6 py-24">
+    <main data-tools-page className="mx-auto max-w-7xl px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
         <div className="flex items-center justify-center gap-3">
           <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
