@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { ltr } from "@/components/tool-ui/MixedText";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
 import { useOhmsModel } from "./OhmsLiveContext";
 
@@ -16,6 +17,7 @@ const CLS = ["fill-emerald-500 dark:fill-emerald-400", "fill-blue-600 dark:fill-
  */
 export default function OhmsResistanceTrio() {
   const t = useTranslations("tools.ohms-law-calculator.education.lab.trio");
+  const rtl = useLocale() === "ar";
   const { a, f } = useOhmsModel();
   if (!a || a.resistance === 0) return <OhmsIndicatorUnavailable title={t("title")} />;
 
@@ -50,8 +52,8 @@ export default function OhmsResistanceTrio() {
           </g>
         );
       })}
-      <text x={4} y={14} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
-        {`V = ${f(a.voltage)} V · ${t("legend")}`}
+      <text x={rtl ? W - 4 : 4} y={14} direction={rtl ? "rtl" : "ltr"} fontSize={10} className="fill-zinc-500 dark:fill-zinc-400">
+        {`${ltr(`V = ${f(a.voltage)} V`)} · ${t("legend")}`}
       </text>
     </svg>
   );

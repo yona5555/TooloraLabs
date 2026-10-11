@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { ltr } from "@/components/tool-ui/MixedText";
 import { Pause, Play } from "lucide-react";
 import { dimmerCircuit } from "@tooloralabs/tools";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
@@ -39,6 +40,7 @@ function along(s: number): [number, number] {
  */
 export default function OhmsDimmerLab() {
   const t = useTranslations("tools.ohms-law-calculator.education.lab.dimmer");
+  const rtl = useLocale() === "ar";
   const { setDim } = useOhmsLive();
   const { draft, a, f } = useOhmsModel();
   const [k, setK] = useState(1);
@@ -87,8 +89,11 @@ export default function OhmsDimmerLab() {
             <stop offset="100%" stopColor="#facc15" stopOpacity={0} />
           </radialGradient>
         </defs>
-        <text x={W / 2} y={18} textAnchor="middle" fontSize={13} fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-zinc-800 dark:fill-zinc-100">
-          {`I = ${f(d.current)} A · ${t("brightness")} ${f(glow * 100, 1)}%`}
+        {/* Formula/number runs isolated as LTR and set in mono; the word keeps the sans font (mono breaks Arabic joining). */}
+        <text x={W / 2} y={18} textAnchor="middle" direction={rtl ? "rtl" : "ltr"} fontSize={13} fontWeight={700} className="fill-zinc-800 dark:fill-zinc-100">
+          <tspan fontFamily="ui-monospace, monospace">{ltr(`I = ${f(d.current)} A`)}</tspan>
+          <tspan>{` · ${t("brightness")} `}</tspan>
+          <tspan fontFamily="ui-monospace, monospace">{ltr(`${f(glow * 100, 1)}%`)}</tspan>
         </text>
         {/* wire loop */}
         <rect x={L} y={T} width={R - L} height={B - T} fill="none" strokeWidth={3} className="stroke-amber-700 dark:stroke-amber-500" />

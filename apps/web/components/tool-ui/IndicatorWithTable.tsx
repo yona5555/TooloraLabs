@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { hasWords, MixedText, Subs } from "./MixedText";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
@@ -44,12 +45,18 @@ export default function IndicatorWithTable({ indicator, workedExampleTitle, rows
           {rows.map((row, i) => (
             <div key={i}>
               <div className={`flex items-baseline justify-between gap-3 ${row.emphasize ? "border-t border-zinc-200 pt-2 dark:border-zinc-700" : ""}`}>
-                <dt className="text-zinc-500 dark:text-zinc-400">{row.label}</dt>
-                <dd dir="ltr" className={`font-mono font-semibold ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}>
-                  {row.value}
+                <dt className="text-zinc-500 dark:text-zinc-400">
+                  <Subs text={row.label} />
+                </dt>
+                {/* Words (e.g. Arabic "not reached") keep the sans font: monospace breaks Arabic letter joining. */}
+                <dd
+                  dir={hasWords(row.value) ? "auto" : "ltr"}
+                  className={`text-end font-semibold ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
+                >
+                  <MixedText text={row.value} />
                 </dd>
               </div>
-              {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500">{row.note}</p>}
+              {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500"><Subs text={row.note} /></p>}
             </div>
           ))}
         </dl>

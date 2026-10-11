@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { DENSITY_WATER, LB_FT3_PER_G_CM3, niceCeil, STANDARD_GRAVITY } from "@tooloralabs/tools";
 import LiveTable3DLayout, { type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
 import Scene3D from "@/components/tool-ui/three/Scene3D";
+import { ltr } from "@/components/tool-ui/MixedText";
 import { useDensityModel } from "./DensityLiveContext";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
@@ -98,19 +99,24 @@ export default function DensityLive3D({ camera = [0, 1.6, 8.4], capHeight = fals
       edge: `a = ${f(a.cubeEdge, 3)} cm`,
       density: `ρ = ${f(a.density)} g/cm³`,
       mass: `m = ${f(a.mass)} g`,
-      tank: t("tankWidth", { w: f(tankWidth) }),
-      waterline: a.water.floats ? t("underWater", { p: pct(a.water.submergedFraction) }) : t("onFloor"),
+      tank: `${f(tankWidth)} cm`,
       weight: `W = ${f(a.weight, 3)} N`,
       buoyancy: `F_b = ${f(a.water.buoyantForce, 3)} N`,
-      water: t("waterLabel"),
     },
   };
+  // Words describing the drawing live in an HTML caption (translated, page direction), not in the 3D canvas.
+  const caption = [
+    t("waterLabel"),
+    a.water.floats ? t("underWater", { p: ltr(pct(a.water.submergedFraction)) }) : t("onFloor"),
+    t("tankWidth", { w: ltr(f(tankWidth)) }),
+  ].join(" · ");
 
   return (
     <LiveTable3DLayout
       groups={groups}
       headings={[tc("colQuantity"), tc("colFormula"), tc("colValue")]}
       hint={tc("hint")}
+      caption={caption}
       capHeight={capHeight}
       drawing={
         <Scene3D camera={camera} orbit={ORBIT}>

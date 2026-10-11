@@ -1,5 +1,6 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { ltr } from "@/components/tool-ui/MixedText";
 import KinIndicatorCard, { KinIndicatorUnavailable } from "./KinIndicatorCard";
 import { r2, useKinModel } from "./KinLiveContext";
 
@@ -17,6 +18,7 @@ const BAR = 24;
  */
 export default function KinDisplacementSplit() {
   const t = useTranslations("tools.kinematics-calculator.education.lab.split");
+  const rtl = useLocale() === "ar";
   const { k, f } = useKinModel();
   if (!k || k.span <= 0) return <KinIndicatorUnavailable title={t("title")} />;
 
@@ -32,8 +34,8 @@ export default function KinDisplacementSplit() {
   const sn = seg(0, net);
   const sp = seg(0, k.pathLength);
 
-  const label = (x: number, w: number, y: number, text: string, cls: string) => (
-    <text x={r2(Math.min(R - 4, Math.max(L + 4, x + w / 2)))} y={y - 6} textAnchor="middle" fontSize={10.5} fontWeight={700} className={cls}>{text}</text>
+  const label = (x: number, w: number, y: number, text: string, cls: string, words = false) => (
+    <text x={r2(Math.min(R - 4, Math.max(L + 4, x + w / 2)))} y={y - 6} textAnchor="middle" direction={words && rtl ? "rtl" : "ltr"} fontSize={10.5} fontWeight={700} className={cls}>{text}</text>
   );
 
   const svg = (
@@ -49,7 +51,7 @@ export default function KinDisplacementSplit() {
       {label(sn.x, sn.w, ROWS[1] + 8, `Δx = ${f(net, 1)} m`, "fill-blue-700 dark:fill-blue-300")}
       {/* row 3: total path length */}
       <rect x={sp.x} y={ROWS[2] + 12} width={sp.w} height={BAR / 2} rx={3} className="fill-zinc-400 dark:fill-zinc-500" />
-      {label(sp.x, sp.w, ROWS[2] + 12, `${t("path")} = ${f(k.pathLength, 1)} m`, "fill-zinc-600 dark:fill-zinc-300")}
+      {label(sp.x, sp.w, ROWS[2] + 12, `${t("path")} = ${ltr(`${f(k.pathLength, 1)} m`)}`, "fill-zinc-600 dark:fill-zinc-300", true)}
     </svg>
   );
 

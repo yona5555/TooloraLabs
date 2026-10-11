@@ -19,7 +19,8 @@ export type DensityScene3DProps = {
     /** Weight and buoyant force at rest (N), drawn as arrows in proportion. */
     weight: number;
     buoyancy: number;
-    labels: { edge: string; density: string; mass: string; tank: string; waterline: string; weight: string; buoyancy: string; water: string };
+    /** Symbols, numbers and units only: the words (water, floats/rests, true scale) are an HTML caption under the canvas. */
+    labels: { edge: string; density: string; mass: string; tank: string; weight: string; buoyancy: string };
   };
 };
 
@@ -87,6 +88,7 @@ export default function DensityScene3D({ data: d }: DensityScene3DProps) {
   ];
   const cx = -0.35;
   const yRuler = floor - 0.32;
+  const yTop = Math.max(top, bottom + s, cy + bLen);
 
   return (
     <group position={[0, 0.15, 0]}>
@@ -104,9 +106,6 @@ export default function DensityScene3D({ data: d }: DensityScene3DProps) {
         <meshStandardMaterial color={water} transparent opacity={0.22} depthWrite={false} />
       </mesh>
       <Line points={[[xL, surface, zF], [xR, surface, zF], [xR, surface, zB], [xL, surface, zB], [xL, surface, zF]]} color={water} lineWidth={2} />
-      <Label3D position={[xR - 0.05, surface + 0.16, zF]} align="right" color={water} weight={700}>
-        {d.labels.water}
-      </Label3D>
       {/* the cube (true scale) */}
       <mesh position={[cx, cy, 0]}>
         <boxGeometry args={[s, s, s]} />
@@ -125,28 +124,37 @@ export default function DensityScene3D({ data: d }: DensityScene3DProps) {
       {/* forces: W from the centre down, F_b from the centre of buoyancy up */}
       <Arrow from={[cx + s / 2 + 0.3, cy, 0]} to={[cx + s / 2 + 0.3, cy - wLen, 0]} color={p.danger} width={4} />
       <Arrow from={[cx - s / 2 - 0.3, cy, 0]} to={[cx - s / 2 - 0.3, cy + bLen, 0]} color={p.positive} width={4} />
-      <Label3D position={[cx + s / 2 + 0.42, cy - wLen, 0]} align="left" color={p.danger} weight={700}>
+      {/*
+        W sits beside its arrow. Floating: halfway down the arrow, in open water. Resting on the floor: just above
+        the front floor edge, in the band between the back and front floor edges, so it never touches a tank edge.
+      */}
+      <Label3D
+        position={d.floats ? [cx + s / 2 + 0.42, cy - wLen / 2, 0] : [cx + s / 2 + 0.42, floor, zF]}
+        offset={d.floats ? [0, 0] : [0, 14]}
+        align="left"
+        color={p.danger}
+        weight={700}
+      >
         {d.labels.weight}
       </Label3D>
-      <Label3D position={[cx - s / 2 - 0.42, cy + bLen, 0]} align="right" color={p.positive} weight={700}>
+      {/* F_b sits just above its arrow tip, clear of the tank's back edges */}
+      <Label3D position={[cx - s / 2 - 0.3, cy + bLen, 0]} offset={[0, 13]} color={p.positive} weight={700}>
         {d.labels.buoyancy}
       </Label3D>
-      {/* cube readouts stacked above the tank */}
-      <Label3D position={[cx, top + 0.75, 0]} color={cube} weight={700}>
+      {/* cube readouts stacked above the highest point (tank rim, cube or buoyancy arrow), clear of every edge */}
+      <Label3D position={[cx, yTop, zB]} offset={[0, 42]} color={cube} weight={700}>
         {d.labels.density}
       </Label3D>
-      <Label3D position={[cx, top + 0.4, 0]} color={p.text}>
+      <Label3D position={[cx, yTop, zB]} offset={[0, 20]} color={p.text}>
         {`${d.labels.mass} · ${d.labels.edge}`}
-      </Label3D>
-      <Label3D position={[xR + 0.12, d.floats ? surface - (d.submerged * s) / 2 : floor + s / 2, 0]} align="left" color={p.accent} weight={700}>
-        {d.labels.waterline}
       </Label3D>
       {/* true-scale ruler: tank inner width */}
       <Line points={[[xL, yRuler, zF], [xR, yRuler, zF]]} color={p.muted} lineWidth={1.5} />
       {Array.from({ length: 11 }, (_, i) => xL + (TW * i) / 10).map((x, i) => (
         <Line key={i} points={[[x, yRuler, zF], [x, yRuler + (i % 5 === 0 ? 0.16 : 0.08), zF]]} color={p.muted} lineWidth={1.2} />
       ))}
-      <Label3D position={[0, yRuler - 0.24, zF]} color={p.text}>
+      {/* ruler length under the left end of the ruler, away from the force arrows near the cube */}
+      <Label3D position={[xL, yRuler, zF]} offset={[0, -14]} align="left" color={p.text}>
         {d.labels.tank}
       </Label3D>
     </group>

@@ -146,8 +146,8 @@ export default function OhmsScene3D({ data }: OhmsScene3DProps) {
       <Label3D position={[0, Y - 0.55, 0]} color={p.danger} weight={700}>
         {data.labels.power}
       </Label3D>
-      {/* current label on the right side, beside the downward flow */}
-      <Label3D position={[X + 0.15, 0, 0]} align="left" color={p.positive} weight={700}>
+      {/* current label inside the loop, beside the downward flow on the right side (never past the canvas edge) */}
+      <Label3D position={[X - 0.2, 0, 0]} align="right" color={p.positive} weight={700}>
         {data.labels.current}
       </Label3D>
       <Charges current={data.current} color={p.positive} />

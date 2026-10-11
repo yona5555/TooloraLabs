@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import { Subs } from "@/components/tool-ui/MixedText";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
@@ -11,7 +12,9 @@ export default function DensityIndicatorCard({ title, intro, indicator, rows }: 
   const t = useTranslations("tools.density-calculator.education.lab");
   return (
     <SectionCard title={title}>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">{intro}</p>
+      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <Subs text={intro} />
+      </p>
       <IndicatorWithTable className="mt-4" indicator={indicator} workedExampleTitle={t("worked")} rows={rows} />
     </SectionCard>
   );

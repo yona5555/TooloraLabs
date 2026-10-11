@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, type ReactNode } from "react";
 
-const isWords = (v: unknown) => typeof v === "string" && /[\u0600-\u06FF\u0900-\u097F]/.test(v);
+import { hasWords as isWords, MixedText, Subs } from "../MixedText";
 
 const FillContext = createContext(false);
 
@@ -35,6 +35,11 @@ type Props = {
   drawing: ReactNode;
   /** Short hint under the drawing, e.g. "Drag to rotate". */
   hint?: string;
+  /**
+   * Words that describe the drawing (translated, page direction). 3D labels hold only symbols,
+   * numbers and units — canvas text cannot shape Arabic reliably — so any words go here.
+   */
+  caption?: ReactNode;
   className?: string;
   /**
    * Side-by-side (@3xl) only: cap the table at 600px and scroll it inside, so a very deep table
@@ -54,6 +59,7 @@ export default function LiveTable3DLayout({
   headings,
   drawing,
   hint,
+  caption,
   className = "",
   capHeight = false,
 }: Props) {
@@ -96,20 +102,21 @@ export default function LiveTable3DLayout({
                     className="border-t border-zinc-100 dark:border-zinc-700/60"
                   >
                     <td className="px-3 py-1.5 text-zinc-600 dark:text-zinc-300">
-                      {r.label}
+                      <Subs text={r.label} />
                     </td>
                     <td
-                      dir="ltr"
-                      className="px-3 py-1.5 text-start font-mono text-xs text-zinc-500 [overflow-wrap:anywhere] dark:text-zinc-400"
+                      // A word (e.g. Arabic "given") keeps the sans font; only formulas use mono.
+                      dir={isWords(r.formula) ? "auto" : "ltr"}
+                      className={`px-3 py-1.5 text-start ${isWords(r.formula) ? "" : "font-mono"} text-xs text-zinc-500 [overflow-wrap:anywhere] dark:text-zinc-400`}
                     >
-                      {r.formula ?? ""}
+                      {isWords(r.formula) ? <MixedText text={r.formula ?? ""} /> : <Subs text={r.formula ?? ""} />}
                     </td>
                     <td
                       // Words (e.g. an Arabic verdict) keep a proportional font: monospace breaks Arabic letter joining.
                       dir={isWords(r.value) ? "auto" : "ltr"}
                       className={`px-3 py-1.5 text-end ${isWords(r.value) ? "" : "font-mono"} font-semibold [overflow-wrap:break-word] ${r.emphasize ? "text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
                     >
-                      {r.value}
+                      <Subs text={r.value} />
                       {r.unit ? (
                         <span className="ms-1 text-xs font-normal whitespace-nowrap text-zinc-500 dark:text-zinc-400">
                           {r.unit}
@@ -125,6 +132,9 @@ export default function LiveTable3DLayout({
         </div>
         <div className="order-first flex h-[320px] flex-col @3xl:order-none @3xl:h-auto @3xl:min-h-[320px]">
           <div className="min-h-0 flex-1">{drawing}</div>
+          {caption ? (
+            <p className="mt-1.5 text-center text-xs leading-5 text-zinc-600 dark:text-zinc-300">{caption}</p>
+          ) : null}
           {hint ? (
             <p className="mt-1 text-center text-xs text-zinc-400 dark:text-zinc-500">
               {hint}

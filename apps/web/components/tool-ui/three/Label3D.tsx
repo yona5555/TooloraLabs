@@ -3,6 +3,7 @@
 import { Children, isValidElement, useEffect, useMemo, useRef, type ReactNode } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
+import { subParts } from "../MixedText";
 
 /**
  * Screen-space text label for the 3D scenes, drawn on a canvas sprite.
@@ -13,6 +14,7 @@ import { useFrame, useThree } from "@react-three/fiber";
  * A sprite stays inside the single fiber tree, so mounting/unmounting is clean.
  * The sprite keeps a constant pixel size (like Html), always draws on top and
  * the browser shapes Arabic/RTL text in fillText.
+ * Labels are kept fully inside the canvas, and `X_y` renders as a real subscript.
  * Labels of one scene never overlap: each frame a shared resolver projects every label,
  * then drops any label that would touch a higher one just below it (opt out with avoid={false}).
  */
@@ -144,10 +146,18 @@ export default function Label3D({
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d")!;
     const font = `${weight} ${fontSize * RES}px ${FONT}`;
+    const subFont = `${weight} ${fontSize * 0.75 * RES}px ${FONT}`;
+    // `F_b` draws as F with a real subscript b (never a literal underscore).
+    const parts = subParts(label);
+    const hasSub = parts.some((q) => q.sub);
+    const widths = parts.map((q) => {
+      ctx.font = q.sub ? subFont : font;
+      return ctx.measureText(q.text).width;
+    });
     ctx.font = font;
-    const tw = Math.ceil(ctx.measureText(label).width / RES);
+    const tw = Math.ceil((hasSub ? widths.reduce((a, b) => a + b, 0) : ctx.measureText(label).width) / RES);
     const cw = Math.max(2, tw + padX * 2 + 2);
-    const ch = Math.ceil(fontSize * 1.35) + padY * 2 + 2;
+    const ch = Math.ceil(fontSize * (hasSub ? 1.6 : 1.35)) + padY * 2 + 2;
     canvas.width = cw * RES;
     canvas.height = ch * RES;
     ctx.scale(RES, RES);
@@ -165,9 +175,19 @@ export default function Label3D({
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.font = font;
     ctx.fillStyle = color;
-    ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(label, canvas.width / 2, canvas.height / 2 + RES * 0.5);
+    if (hasSub) {
+      ctx.textAlign = "left";
+      let x = (canvas.width - widths.reduce((a, b) => a + b, 0)) / 2;
+      parts.forEach((q, i) => {
+        ctx.font = q.sub ? subFont : font;
+        ctx.fillText(q.text, x, canvas.height / 2 + RES * 0.5 + (q.sub ? fontSize * 0.3 * RES : 0));
+        x += widths[i];
+      });
+    } else {
+      ctx.textAlign = "center";
+      ctx.fillText(label, canvas.width / 2, canvas.height / 2 + RES * 0.5);
+    }
     const tex = new THREE.CanvasTexture(canvas);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.minFilter = THREE.LinearFilter;
@@ -220,6 +240,10 @@ export default function Label3D({
       box.y = ((tmp.a.y + 1) / 2) * height + oy;
       box.w = w;
       box.h = h;
+      // Keep every label fully inside the canvas (a label near the edge is never clipped).
+      const m = 3;
+      if (width > w + 2 * m) box.x = Math.min(width - w / 2 - m, Math.max(w / 2 + m, box.x));
+      if (height > h + 2 * m) box.y = Math.min(height - h / 2 - m, Math.max(h / 2 + m, box.y));
     };
   });
 

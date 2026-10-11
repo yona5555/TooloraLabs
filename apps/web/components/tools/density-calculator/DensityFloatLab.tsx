@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { niceCeil, STANDARD_GRAVITY } from "@tooloralabs/tools";
 import DensityIndicatorCard, { DensityIndicatorUnavailable } from "./DensityIndicatorCard";
+import { ltr, SvgSubs } from "@/components/tool-ui/MixedText";
 import { toInput, useDensityLive, useDensityModel } from "./DensityLiveContext";
 
 const W = 360;
-const H = 290;
+const H = 304;
 const TX = 40;
 const TANK = 280;
 const RIM = 112;
@@ -33,6 +34,7 @@ const SOLVED: Record<string, Knob> = { solveDensity: "density", solveMass: "mass
  */
 export default function DensityFloatLab() {
   const t = useTranslations("tools.density-calculator.education.lab.float");
+  const rtl = useLocale() === "ar";
   const tFluids = useTranslations("tools.density-calculator.live3d.fluids");
   const { setDim } = useDensityLive();
   const { draft, a, f } = useDensityModel();
@@ -114,22 +116,22 @@ export default function DensityFloatLab() {
           {`t = ${time.toFixed(2)} s`}
         </text>
         <text x={W - 4} y={16} textAnchor="end" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
-          {`ρ = ${f(a.density)} · ρ_f = ${f(fluid.fluidDensity)} g/cm³`}
+          <SvgSubs text={`ρ = ${f(a.density)} · ρ_f = ${f(fluid.fluidDensity)} g/cm³`} />
         </text>
         <text x={4} y={36} fontSize={11} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-400">
-          {`F_b = ${f(buoyNow, 3)} N`}
+          <SvgSubs text={`F_b = ${f(buoyNow, 3)} N`} />
         </text>
         <text x={W - 4} y={36} textAnchor="end" fontSize={11} fontFamily="ui-monospace, monospace" className="fill-red-600 dark:fill-red-400">
           {`W = ${f(a.weight, 3)} N`}
         </text>
-        <text x={4} y={54} fontSize={11} fontWeight={600} className="fill-violet-700 dark:fill-violet-300">
-          {t("underNow", { p: `${f(under * 100, 1)} %` })}
+        <text x={rtl ? W - 4 : 4} y={54} direction={rtl ? "rtl" : "ltr"} fontSize={11} fontWeight={600} className="fill-violet-700 dark:fill-violet-300">
+          {t("underNow", { p: ltr(`${f(under * 100, 1)} %`) })}
         </text>
         {/* liquid and tank */}
         <rect x={TX} y={SURFACE} width={TANK} height={FLOOR - SURFACE} className="fill-sky-300/40 dark:fill-sky-500/25" />
         <line x1={TX} y1={SURFACE} x2={TX + TANK} y2={SURFACE} strokeWidth={2} className="stroke-sky-500 dark:stroke-sky-400" />
         <path d={`M${TX},${RIM} V${FLOOR} H${TX + TANK} V${RIM}`} fill="none" strokeWidth={2.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
-        <text x={TX + TANK - 4} y={SURFACE + 14} textAnchor="end" fontSize={10} fontWeight={600} className="fill-sky-700 dark:fill-sky-300">
+        <text x={TX + TANK - 8} y={SURFACE + 16} textAnchor="end" fontSize={10} fontWeight={600} className="fill-sky-700 dark:fill-sky-300">
           {tFluids(fluid.key)}
         </text>
         {/* resting waterline target */}
@@ -147,10 +149,11 @@ export default function DensityFloatLab() {
         {Array.from({ length: 11 }, (_, i) => (
           <line key={i} x1={TX + (TANK * i) / 10} y1={FLOOR + 8} x2={TX + (TANK * i) / 10} y2={FLOOR + (i % 5 === 0 ? 14 : 11)} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" />
         ))}
-        <text x={TX} y={H - 2} fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">
+        {/* axis labels sit a clear 8 px under the ruler ticks, never on the tank's bottom line */}
+        <text x={TX} y={H - 3} fontSize={9.5} className="fill-zinc-500 dark:fill-zinc-400">
           0
         </text>
-        <text x={TX + TANK} y={H - 2} textAnchor="end" fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text x={TX + TANK} y={H - 3} textAnchor="end" fontSize={9.5} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {`${f(tankCm)} cm · a = ${f(a.cubeEdge, 3)} cm`}
         </text>
         <defs>
