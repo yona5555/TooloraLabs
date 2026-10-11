@@ -10784,7 +10784,6 @@
         "gravityLabel": "Erdbeschleunigung (g) (m/s²)",
         "gravityHint": "Standardmäßig die Erdbeschleunigung an der Erdoberfläche (9,81 m/s²) — ändern Sie den Wert, um den Mond, den Mars oder eine andere Welt zu modellieren.",
         "gravityPlaceholder": "z. B. 9,81",
-        "calculate": "Berechnen",
         "clear": "Zurücksetzen",
         "gravityPresetLabel": "Welt",
         "gravityPreset": {
@@ -10793,11 +10792,6 @@
           "mars": "Mars (3,71 m/s²)",
           "custom": "Benutzerdefiniert"
         },
-        "vxLabel": "vₓ",
-        "vyLabel": "vy",
-        "vLabel": "v₀",
-        "componentsCaption": "Startgeschwindigkeit zerlegt in horizontale (vₓ) und vertikale (vy) Komponenten.",
-        "scenarioPresetsLabel": "Ein reales Szenario ausprobieren:",
         "scenarios": {
           "basketballShot": "Basketball-Freiwurf",
           "soccerKick": "Fußballschuss",
@@ -10818,52 +10812,18 @@
         "impactSpeed": "Aufprallgeschwindigkeit",
         "impactAngle": "Aufprallwinkel",
         "rangeCaption": "Horizontale Reichweite",
-        "diagramLaunch": "Abwurf",
-        "diagramPeak": "Scheitelpunkt ({value} m)",
-        "diagramLanding": "Landung",
-        "diagramCaption": "Die aus Ihrer Abwurfgeschwindigkeit, Ihrem Winkel, Ihrer Höhe und der Erdbeschleunigung berechnete parabolische Flugbahn — Scheitelpunkt und Landepunkt sind auf ihre tatsächlich berechneten Werte skaliert.",
-        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um die Flugbahn zu sehen.",
         "angleField": "Abschusswinkel",
         "heightField": "Abschusshöhe",
         "gravityField": "Schwerkraft",
-        "impactDiagramCaption": "Der Aufprallgeschwindigkeitsvektor, im berechneten Aufprallwinkel unter der Horizontalen.",
-        "speedField": "Abschussgeschwindigkeit"
+        "speedField": "Abschussgeschwindigkeit",
+        "heroCaption": "Flug {t} s · Scheitel {h} m · Aufprall {v} m/s"
       },
       "education": {
         "intro": {
           "title": "Wurfbewegung verstehen",
           "paragraph1": "Die Wurfbewegung beschreibt die gekrümmte Bahn eines in die Luft geworfenen Körpers, auf den nur die Schwerkraft wirkt, ohne Antrieb und, in diesem idealisierten Modell, ohne Luftwiderstand. Die entscheidende Erkenntnis, die Galileo Galilei streng bewiesen hat, ist, dass die horizontale und die vertikale Bewegungskomponente völlig unabhängig voneinander sind: Die horizontale Geschwindigkeit (v₀cosθ) bleibt während des gesamten Flugs konstant, während die vertikale Geschwindigkeit (v₀sinθ) abnimmt, am Scheitelpunkt kurzzeitig null wird und dann unter der Schwerkraft nach unten beschleunigt — genau so, als würde der Körper senkrecht nach oben geworfen und fiele anschließend senkrecht wieder herab. Die Kombination einer konstanten horizontalen Geschwindigkeit mit einer gleichmäßig beschleunigten vertikalen Geschwindigkeit ergibt eine Bahn, die mathematisch eine Parabel ist.",
-          "diagram": {
-            "launchLabel": "Abwurf (v₀ = 20 m/s, θ = 45°)",
-            "peakLabel": "Scheitelpunkt ≈ 10,19 m",
-            "landingLabel": "Landung (R ≈ 40,77 m)",
-            "caption": "Die Flugbahn eines Abwurfs mit 20 m/s bei 45° von ebenem Boden aus — eine Parabel, gebildet durch konstante horizontale Geschwindigkeit und gleichmäßig beschleunigte vertikale Geschwindigkeit."
-          },
           "paragraph2": "Vier Größen beschreiben diesen idealisierten Flug vollständig: die Flugzeit (wie lange der Körper in der Luft bleibt), die maximale Höhe (der Scheitelpunkt der Parabel), die Reichweite (die zurückgelegte horizontale Strecke) und die Aufprallgeschwindigkeit (Geschwindigkeit und Winkel bei der Landung). Bei einem Abwurf vom Boden aus (h₀ = 0) ist die Flugbahn symmetrisch — der Körper kehrt zu der Höhe zurück, von der er gestartet ist, seine Aufprallgeschwindigkeit entspricht seiner Abwurfgeschwindigkeit, und sein Aufprallwinkel entspricht seinem Abwurfwinkel. Ein Abwurf aus einer Höhe (h₀ > 0) durchbricht diese Symmetrie: Der Körper fällt weiter, als er gestiegen ist, und landet deshalb schneller und in einem steileren Winkel, als er abgeworfen wurde.",
-          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist.",
-          "rangeVsAngle": {
-            "xLabel": "Abschusswinkel (0°-90°)",
-            "yLabel": "Reichweite",
-            "peakLabel": "45° — max. Reichweite",
-            "caption": "Bei einem ebenen Abschuss ist die Reichweite proportional zu sin(2×Winkel), was bei einem Abschusswinkel von 45° sein Maximum erreicht."
-          },
-          "rangeGauge": {
-            "title": "Ausprobieren: Wie weit fliegt das?",
-            "intro": "Wähle ein reales Geschoss, um seine typische Reichweite auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "short": "Kurz",
-            "medium": "Mittel",
-            "long": "Weit",
-            "verdict": "{projectile} legt typischerweise eine {classification} Strecke zurück.",
-            "fieldsFact": "Das entspricht etwa {ratio} Fußballfeldern (je 100 m) hintereinander.",
-            "projectiles": {
-              "paperAirplane": "Ein Papierflieger",
-              "baseballThrow": "Ein Baseballwurf",
-              "golfDrive": "Ein Golf-Drive",
-              "cannonball": "Eine Kanonenkugel",
-              "artilleryShell": "Eine Artilleriegranate",
-              "icbm": "Eine Interkontinentalrakete"
-            }
-          }
+          "paragraph3": "Weil ein Abwurf aus einer Höhe die einfache Symmetrie des Abwurfs vom Boden aus durchbricht, lässt sich die Flugzeit nicht mehr durch eine einzelne Division bestimmen — dafür muss die quadratische Gleichung h₀ + v₀sinθ·t − ½gt² = 0 nach ihrer positiven Nullstelle gelöst werden. Dieser Rechner wendet stets diese allgemeine quadratische Lösung an, die sich automatisch auf die bekannte Formel t = 2v₀sinθ/g reduziert, sobald h₀ = 0 ist."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -10968,21 +10928,15 @@
           },
           "componentsSection": {
             "title": "Geschwindigkeit in zwei Teile zerlegt",
-            "paragraph": "Die Startgeschwindigkeit wird in einen horizontalen Teil, der während des gesamten Flugs konstant bleibt, und einen vertikalen Teil zerlegt, den die Schwerkraft stetig verringert — beide unabhängig zu behandeln macht die gesamte Berechnung erst möglich.",
-            "caption": "Startgeschwindigkeit zerlegt in horizontale und vertikale Komponenten."
+            "paragraph": "Die Startgeschwindigkeit wird in einen horizontalen Teil, der während des gesamten Flugs konstant bleibt, und einen vertikalen Teil zerlegt, den die Schwerkraft stetig verringert — beide unabhängig zu behandeln macht die gesamte Berechnung erst möglich."
           },
           "impactSection": {
             "title": "Die Geschwindigkeit bei der Landung",
-            "paragraph": "Das Projektil kehrt mit einem Winkel unter der Horizontalen zum Boden zurück, der davon abhängt, wie stark sich die vertikale Komponente während des Flugs geändert hat — bei gleichem Start- und Landeniveau entspricht er genau dem Startwinkel.",
-            "caption": "Der Aufprallgeschwindigkeitsvektor, unter der Horizontalen geneigt."
+            "paragraph": "Das Projektil kehrt mit einem Winkel unter der Horizontalen zum Boden zurück, der davon abhängt, wie stark sich die vertikale Komponente während des Flugs geändert hat — bei gleichem Start- und Landeniveau entspricht er genau dem Startwinkel."
           },
           "gravityComparisonSection": {
             "title": "Derselbe Schuss, andere Welten",
-            "paragraph": "Da die Reichweite umgekehrt proportional zur Schwerkraft ist, fliegt derselbe Schuss auf dem Mond oder Mars statt auf der Erde deutlich weiter, ohne dass sich Startgeschwindigkeit oder -winkel überhaupt ändern.",
-            "caption": "Reichweite für denselben Start auf Erde, Mond und Mars.",
-            "earth": "Erde",
-            "moon": "Mond",
-            "mars": "Mars"
+            "paragraph": "Da die Reichweite umgekehrt proportional zur Schwerkraft ist, fliegt derselbe Schuss auf dem Mond oder Mars statt auf der Erde deutlich weiter, ohne dass sich Startgeschwindigkeit oder -winkel überhaupt ändern."
           }
         },
         "references": {
@@ -10991,12 +10945,113 @@
           "note": "Der Wissenschaftshistoriker R. H. Naylor verfolgt Galileis Manuskriptnotizen zur Wurfbewegung und rekonstruiert die experimentellen und theoretischen Schritte, die 1638 zum fertigen Beweis führten, dass die Bahn eines Geschosses eine Parabel ist.",
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Originaltext lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "launch": {
+            "title": "Abwurflabor: Den Flug beobachten",
+            "intro": "Der Ball fliegt deine echte Bahn mit Geschwindigkeitsvektor und den Komponenten vₓ / vy; bewege die Regler und die ganze Seite folgt.",
+            "aria": "Animiertes Geschoss auf seiner Bahn mit Geschwindigkeitsvektoren",
+            "play": "Abspielen",
+            "pause": "Pause",
+            "hint": "Flug in Echtzeit (1,5–5 s pro Durchlauf)",
+            "speed": "Abwurfgeschwindigkeit v₀",
+            "angle": "Abwurfwinkel θ",
+            "time": "Aktuelle Zeit",
+            "x": "Horizontale Position x = vₓ·t",
+            "y": "Höhe y(t)",
+            "vy": "Vertikalgeschwindigkeit vy − g·t",
+            "speedNow": "Aktuelle Geschwindigkeit |v|",
+            "apex": "Scheitel",
+            "apexNote": "dort bleibt nur vₓ = {vx} m/s"
+          },
+          "curve": {
+            "title": "Reichweite für jeden Abwurfwinkel",
+            "intro": "Die Reichweite für jeden Winkel von 0° bis 90° bei deiner Geschwindigkeit, Höhe und Schwerkraft, mit deinem, dem optimalen und dem Komplementärwinkel markiert.",
+            "aria": "Kurve Reichweite gegen Abwurfwinkel",
+            "current": "Dein Winkel",
+            "optimal": "Optimaler Winkel",
+            "max": "Maximale Reichweite",
+            "complementary": "Komplementärwinkel",
+            "efficiency": "Anteil am Maximum",
+            "efficiencyNote": "θ* = 45° nur vom Boden aus; eine Abwurfhöhe senkt ihn"
+          },
+          "flow": {
+            "title": "Von der Abwurfgeschwindigkeit zur Reichweite",
+            "intro": "Die Rechenkette Schritt für Schritt: Geschwindigkeit zerlegen, Steigzeit bestimmen, Fallzeit addieren, dann mit der konstanten Horizontalgeschwindigkeit multiplizieren.",
+            "aria": "Fluss von der Geschwindigkeit zur Reichweite",
+            "vertical": "Vertikalkomponente",
+            "horizontal": "Horizontalkomponente",
+            "up": "Steigzeit",
+            "down": "Fallzeit",
+            "range": "Reichweite"
+          },
+          "split": {
+            "title": "Der Flug am Scheitel geteilt",
+            "intro": "Zeit, Strecke und Höhe vor und nach dem Scheitel; vom Boden aus ist jedes Paar 50/50, eine Abwurfhöhe verschiebt es zur Fallseite.",
+            "time": "Flugzeit",
+            "rise": "Aufstieg",
+            "fall": "Fall",
+            "distance": "Horizontale Strecke",
+            "before": "Vor dem Scheitel",
+            "after": "Nach dem Scheitel",
+            "height": "Scheitelhöhe",
+            "launch": "Abwurfhöhe",
+            "riseH": "Anstieg",
+            "ratio": "Verhältnis Fall / Aufstieg"
+          },
+          "energy": {
+            "title": "Energiebilanz: Abwurf gegen Aufprall",
+            "intro": "Energie pro Kilogramm auf einer Balkenwaage: kinetisch + potenziell beim Abwurf auf einer Schale, kinetisch beim Aufprall auf der anderen. Ohne Luftwiderstand bleibt der Balken waagerecht.",
+            "aria": "Balkenwaage der Abwurf- und Aufprallenergie",
+            "launchPan": "Abwurf",
+            "impactPan": "Aufprall",
+            "kinetic": "Kinetisch beim Abwurf ½v₀²",
+            "potential": "Potenziell beim Abwurf g·h₀",
+            "apex": "Gesamt am Scheitel",
+            "impact": "Kinetisch beim Aufprall ½v²",
+            "verdict": "Gleichgewicht",
+            "verdictNote": "mit der Masse in kg multiplizieren ergibt Joule"
+          },
+          "worlds": {
+            "title": "Derselbe Abwurf auf acht Welten",
+            "intro": "Deine Geschwindigkeit, dein Winkel und deine Höhe unter der Oberflächenschwerkraft jeder Welt, größte Reichweite zuerst; deine aktuelle Welt ist hervorgehoben.",
+            "rule": "Regel",
+            "yours": "Dein g",
+            "source": "g aus dem NASA Planetary Fact Sheet",
+            "names": {
+              "pluto": "Pluto",
+              "moon": "Mond",
+              "mercury": "Merkur",
+              "mars": "Mars",
+              "venus": "Venus",
+              "earth": "Erde",
+              "saturn": "Saturn",
+              "jupiter": "Jupiter",
+              "custom": "Dein eigenes g"
+            }
+          },
+          "sensitivity": {
+            "title": "Wie die Geschwindigkeit die Reichweite ändert",
+            "intro": "Die Reichweite bei 10 % weniger Geschwindigkeit, deiner Geschwindigkeit und 10 % mehr, bei gleichem Winkel, Höhe und Schwerkraft. Die Reichweite wächst mit dem Quadrat der Geschwindigkeit.",
+            "low": "−10 % Geschwindigkeit",
+            "current": "Deine Geschwindigkeit",
+            "high": "+10 % Geschwindigkeit",
+            "squared": "Faktoren der Geschwindigkeit²",
+            "swing": "Gesamtspanne",
+            "swingNote": "genau v² auf ebenem Boden; nahe daran aus der Höhe"
+          },
+          "bars": {
+            "title": "Höhe in gleichen Zeitschritten",
+            "intro": "Die Höhe zu neun gleich verteilten Zeitpunkten vom Abwurf bis zum Aufprall. Jeder Schritt deckt dieselbe horizontale Strecke ab, die Höhengewinne schrumpfen zum Scheitel hin.",
+            "aria": "Balkendiagramm der Höhe in gleichen Zeitschritten",
+            "step": "Zeitschritt",
+            "dx": "Horizontaler Schritt",
+            "first": "Erster Schritt",
+            "highest": "Höchster Messpunkt",
+            "peak": "Echter Scheitel"
+          }
         }
-      },
-      "gauge": {
-        "low": "Flachere Flugbahn",
-        "optimal": "Nahe maximaler Reichweite",
-        "steep": "Hoher Bogen"
       },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
@@ -11019,11 +11074,6 @@
       "relatedTools": {
         "title": "Verwandte Physik-Tools"
       },
-      "heightCard": {
-        "title": "In Gebäudeetagen",
-        "intro": "Der Vergleich der maximalen Höhe mit einem typischen Gebäudestockwerk (etwa 3 m) vermittelt ein intuitives Gefühl dafür, wie hoch das Geschoss steigt.",
-        "result": "Diese Flugbahn erreicht einen Höhepunkt von etwa {floors} Stockwerken eines typischen Gebäudes."
-      },
       "referenceTable": {
         "title": "Typische Abschussgeschwindigkeiten",
         "caption": "Reale Abschussgeschwindigkeiten zum Vergleich mit Ihren eigenen Eingaben.",
@@ -11037,6 +11087,36 @@
           "tennisServe": "Tennisaufschlag (Profi)",
           "handgunBullet": "Pistolenkugel"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live-Flugbahn: Tabelle und 3D-Flug",
+        "invalid": "Gib eine Geschwindigkeit ≥ 0, eine Höhe ≥ 0 und eine Schwerkraft > 0 ein, um den Flug zu zeichnen.",
+        "groupInputs": "Abwurfwerte",
+        "groupComponents": "Geschwindigkeitskomponenten",
+        "groupRise": "Aufstieg zum Scheitel",
+        "groupFall": "Fall und Reichweite",
+        "groupImpact": "Aufprall",
+        "groupEnergy": "Energie pro Kilogramm (erhalten)",
+        "groupOptimum": "Optimaler Winkel",
+        "groupPath": "Bahn",
+        "vx": "Horizontalgeschwindigkeit vₓ",
+        "vy": "Vertikalgeschwindigkeit vy",
+        "timeUp": "Steigzeit t↑",
+        "rise": "Anstieg über Abwurfhöhe",
+        "apexX": "Scheitelabstand",
+        "timeDown": "Fallzeit t↓",
+        "impactVy": "Vertikalgeschwindigkeit beim Aufprall",
+        "keLaunch": "Kinetisch beim Abwurf",
+        "peLaunch": "Potenziell beim Abwurf",
+        "energyApex": "Gesamt am Scheitel",
+        "keImpact": "Kinetisch beim Aufprall",
+        "optimalAngle": "Optimaler Winkel θ*",
+        "maxRange": "Maximale Reichweite",
+        "efficiency": "Anteil an der Maximalreichweite",
+        "complementary": "Reichweite bei 90° − θ",
+        "arcLength": "Bahnlänge",
+        "averageSpeed": "Durchschnittsgeschwindigkeit entlang der Bahn",
+        "minSpeed": "Geringste Geschwindigkeit (am Scheitel)"
       }
     },
     "readability-score-calculator": {

@@ -10784,7 +10784,6 @@
         "gravityLabel": "Accélération Gravitationnelle (g) (m/s²)",
         "gravityHint": "Par défaut, la gravité à la surface de la Terre (9,81 m/s²) — modifiez-la pour la Lune, Mars ou un autre monde.",
         "gravityPlaceholder": "p. ex. 9.81",
-        "calculate": "Calculer",
         "clear": "Effacer",
         "gravityPresetLabel": "Monde",
         "gravityPreset": {
@@ -10793,11 +10792,6 @@
           "mars": "Mars (3,71 m/s²)",
           "custom": "Personnalisé"
         },
-        "vxLabel": "vₓ",
-        "vyLabel": "vy",
-        "vLabel": "v₀",
-        "componentsCaption": "Vitesse de lancement décomposée en composantes horizontale (vₓ) et verticale (vy).",
-        "scenarioPresetsLabel": "Essayer un scénario réel :",
         "scenarios": {
           "basketballShot": "Lancer franc au basket",
           "soccerKick": "Tir au football",
@@ -10818,52 +10812,18 @@
         "impactSpeed": "Vitesse d'Impact",
         "impactAngle": "Angle d'Impact",
         "rangeCaption": "Portée horizontale",
-        "diagramLaunch": "Lancement",
-        "diagramPeak": "Sommet ({value} m)",
-        "diagramLanding": "Atterrissage",
-        "diagramCaption": "La trajectoire parabolique calculée à partir de votre vitesse de lancement, de l'angle, de la hauteur et de la gravité — le sommet et le point d'atterrissage sont à l'échelle de leurs valeurs réellement calculées.",
-        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir la trajectoire.",
         "angleField": "Angle de Lancement",
         "heightField": "Hauteur de Lancement",
         "gravityField": "Gravité",
-        "impactDiagramCaption": "Le vecteur de vitesse d'impact, incliné sous l'horizontale selon l'angle d'impact calculé.",
-        "speedField": "Vitesse de Lancement"
+        "speedField": "Vitesse de Lancement",
+        "heroCaption": "Vol {t} s · sommet {h} m · impact {v} m/s"
       },
       "education": {
         "intro": {
           "title": "Comprendre le Mouvement de Projectile",
           "paragraph1": "Le mouvement de projectile décrit la trajectoire courbe tracée par un objet lancé dans les airs et soumis uniquement à la gravité, sans propulsion et, dans ce modèle idéalisé, sans résistance de l'air. L'idée clé, démontrée rigoureusement par Galilée, est que les composantes horizontale et verticale du mouvement sont entièrement indépendantes : la vitesse horizontale (v₀cosθ) reste constante pendant tout le vol, tandis que la vitesse verticale (v₀sinθ) décélère, s'arrête momentanément au sommet, puis accélère vers le bas sous l'effet de la gravité — exactement comme si l'objet était lancé verticalement puis retombait tout droit. La combinaison d'une vitesse horizontale constante et d'une vitesse verticale uniformément accélérée produit une trajectoire qui est mathématiquement une parabole.",
-          "diagram": {
-            "launchLabel": "Lancement (v₀ = 20 m/s, θ = 45°)",
-            "peakLabel": "Sommet ≈ 10,19 m",
-            "landingLabel": "Atterrissage (R ≈ 40,77 m)",
-            "caption": "La trajectoire d'un lancement à 20 m/s et 45° depuis un sol plat — une parabole formée par une vitesse horizontale constante et une vitesse verticale uniformément accélérée."
-          },
           "paragraph2": "Quatre grandeurs décrivent entièrement ce vol idéalisé : le temps de vol (la durée pendant laquelle l'objet reste en l'air), la hauteur maximale (le sommet de la parabole), la portée (la distance horizontale parcourue) et la vitesse d'impact (la vitesse et l'angle à l'atterrissage). Lorsque le lancement se fait au niveau du sol (h₀ = 0), la trajectoire est symétrique — l'objet retombe à la hauteur d'où il est parti, sa vitesse d'impact égale sa vitesse de lancement, et son angle d'impact égale son angle de lancement. Lancer depuis une élévation (h₀ > 0) rompt cette symétrie : l'objet chute plus qu'il ne s'est élevé, il atterrit donc plus vite et selon un angle plus prononcé qu'au lancement.",
-          "paragraph3": "Comme le lancement depuis une hauteur rompt la simple symétrie au niveau du sol, le temps de vol ne peut plus être trouvé par une simple division — il faut résoudre l'équation quadratique h₀ + v₀sinθ·t − ½gt² = 0 pour sa racine positive. Ce calculateur applique toujours cette solution quadratique générale, qui se réduit automatiquement à la formule familière t = 2v₀sinθ/g dès que h₀ = 0.",
-          "rangeVsAngle": {
-            "xLabel": "Angle de lancement (0°-90°)",
-            "yLabel": "Portée",
-            "peakLabel": "45° — portée max",
-            "caption": "Pour un lancement à niveau, la portée est proportionnelle à sin(2×angle), qui culmine à un angle de lancement de 45°."
-          },
-          "rangeGauge": {
-            "title": "À essayer : jusqu'où ça va ?",
-            "intro": "Choisissez un projectile réel pour voir sa portée typique sur la jauge et la comparer à d'autres.",
-            "short": "Courte",
-            "medium": "Moyenne",
-            "long": "Longue",
-            "verdict": "{projectile} parcourt généralement une distance {classification}.",
-            "fieldsFact": "Cela équivaut à environ {ratio} terrains de football (100 m chacun) mis bout à bout.",
-            "projectiles": {
-              "paperAirplane": "Un avion en papier",
-              "baseballThrow": "Un lancer de baseball",
-              "golfDrive": "Un long coup de golf",
-              "cannonball": "Un boulet de canon",
-              "artilleryShell": "Un obus d'artillerie",
-              "icbm": "Un missile balistique intercontinental"
-            }
-          }
+          "paragraph3": "Comme le lancement depuis une hauteur rompt la simple symétrie au niveau du sol, le temps de vol ne peut plus être trouvé par une simple division — il faut résoudre l'équation quadratique h₀ + v₀sinθ·t − ½gt² = 0 pour sa racine positive. Ce calculateur applique toujours cette solution quadratique générale, qui se réduit automatiquement à la formule familière t = 2v₀sinθ/g dès que h₀ = 0."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -10968,21 +10928,15 @@
           },
           "componentsSection": {
             "title": "Diviser la Vitesse en Deux Parties",
-            "paragraph": "La vitesse de lancement est décomposée en une partie horizontale qui reste constante tout au long du vol et une partie verticale que la gravité réduit régulièrement — traiter les deux indépendamment est ce qui rend tout le calcul possible.",
-            "caption": "Vitesse de lancement décomposée en composantes horizontale et verticale."
+            "paragraph": "La vitesse de lancement est décomposée en une partie horizontale qui reste constante tout au long du vol et une partie verticale que la gravité réduit régulièrement — traiter les deux indépendamment est ce qui rend tout le calcul possible."
           },
           "impactSection": {
             "title": "La Vitesse à l'Atterrissage",
-            "paragraph": "Le projectile revient au sol en se déplaçant selon un angle sous l'horizontale qui dépend de l'ampleur du changement de la composante verticale pendant le vol — pour un lancement et un atterrissage à niveau, il correspond exactement à l'angle de lancement.",
-            "caption": "Le vecteur de vitesse d'impact, incliné sous l'horizontale."
+            "paragraph": "Le projectile revient au sol en se déplaçant selon un angle sous l'horizontale qui dépend de l'ampleur du changement de la composante verticale pendant le vol — pour un lancement et un atterrissage à niveau, il correspond exactement à l'angle de lancement."
           },
           "gravityComparisonSection": {
             "title": "Le Même Tir, des Mondes Différents",
-            "paragraph": "Puisque la portée varie inversement avec la gravité, lancer le même tir sur la Lune ou Mars plutôt que sur Terre l'envoie considérablement plus loin, sans changer du tout la vitesse ou l'angle de lancement.",
-            "caption": "Portée pour un lancement identique sur Terre, la Lune et Mars.",
-            "earth": "Terre",
-            "moon": "Lune",
-            "mars": "Mars"
+            "paragraph": "Puisque la portée varie inversement avec la gravité, lancer le même tir sur la Lune ou Mars plutôt que sur Terre l'envoie considérablement plus loin, sans changer du tout la vitesse ou l'angle de lancement."
           }
         },
         "references": {
@@ -10991,12 +10945,113 @@
           "note": "L'historien des sciences R. H. Naylor retrace les notes manuscrites de Galilée sur le mouvement de projectile, reconstituant les étapes expérimentales et théoriques qui menèrent à la démonstration achevée en 1638 selon laquelle la trajectoire d'un projectile est une parabole.",
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Lire le Texte Original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "launch": {
+            "title": "Labo de lancer : regardez le vol",
+            "intro": "La balle suit votre vraie trajectoire avec son vecteur vitesse et ses composantes vₓ / vy ; déplacez les curseurs et toute la page suit.",
+            "aria": "Projectile animé sur sa trajectoire avec vecteurs vitesse",
+            "play": "Lecture",
+            "pause": "Pause",
+            "hint": "Vol en temps réel (1,5–5 s par boucle)",
+            "speed": "Vitesse de lancer v₀",
+            "angle": "Angle de lancer θ",
+            "time": "Instant actuel",
+            "x": "Position horizontale x = vₓ·t",
+            "y": "Hauteur y(t)",
+            "vy": "Vitesse verticale vy − g·t",
+            "speedNow": "Vitesse actuelle |v|",
+            "apex": "Sommet",
+            "apexNote": "il ne reste là que vₓ = {vx} m/s"
+          },
+          "curve": {
+            "title": "Portée pour chaque angle de lancer",
+            "intro": "La portée pour chaque angle de 0° à 90° avec votre vitesse, hauteur et gravité, en marquant votre angle, l'angle optimal et l'angle complémentaire.",
+            "aria": "Courbe de la portée selon l'angle",
+            "current": "Votre angle",
+            "optimal": "Angle optimal",
+            "max": "Portée maximale",
+            "complementary": "Angle complémentaire",
+            "efficiency": "Part du maximum",
+            "efficiencyNote": "θ* = 45° seulement depuis le sol ; une hauteur de lancer le réduit"
+          },
+          "flow": {
+            "title": "De la vitesse de lancer à la portée",
+            "intro": "La chaîne du calcul pas à pas : décomposer la vitesse, chronométrer la montée, ajouter la descente, puis multiplier par la vitesse horizontale constante.",
+            "aria": "Flux de la vitesse à la portée",
+            "vertical": "Composante verticale",
+            "horizontal": "Composante horizontale",
+            "up": "Temps de montée",
+            "down": "Temps de descente",
+            "range": "Portée"
+          },
+          "split": {
+            "title": "Le vol partagé au sommet",
+            "intro": "Temps, distance et hauteur partagés avant et après le sommet ; depuis le sol chaque paire fait 50/50, et une hauteur de lancer fait pencher le côté descente.",
+            "time": "Temps de vol",
+            "rise": "Montée",
+            "fall": "Descente",
+            "distance": "Distance horizontale",
+            "before": "Avant le sommet",
+            "after": "Après le sommet",
+            "height": "Hauteur du sommet",
+            "launch": "Hauteur de lancer",
+            "riseH": "Montée",
+            "ratio": "Rapport descente / montée"
+          },
+          "energy": {
+            "title": "Bilan d'énergie : lancer contre impact",
+            "intro": "Énergie par kilogramme sur une balance : cinétique + potentielle au lancer sur un plateau, cinétique à l'impact sur l'autre. Sans résistance de l'air le fléau reste horizontal.",
+            "aria": "Balance de l'énergie au lancer et à l'impact",
+            "launchPan": "Lancer",
+            "impactPan": "Impact",
+            "kinetic": "Cinétique au lancer ½v₀²",
+            "potential": "Potentielle au lancer g·h₀",
+            "apex": "Totale au sommet",
+            "impact": "Cinétique à l'impact ½v²",
+            "verdict": "Équilibre",
+            "verdictNote": "multipliez par la masse en kg pour obtenir des joules"
+          },
+          "worlds": {
+            "title": "Le même lancer sur huit mondes",
+            "intro": "Votre vitesse, angle et hauteur sous la gravité de surface de chaque monde, de la plus longue portée à la plus courte ; votre monde actuel est mis en évidence.",
+            "rule": "Règle",
+            "yours": "Votre g",
+            "source": "g d'après la fiche planétaire de la NASA",
+            "names": {
+              "pluto": "Pluton",
+              "moon": "Lune",
+              "mercury": "Mercure",
+              "mars": "Mars",
+              "venus": "Vénus",
+              "earth": "Terre",
+              "saturn": "Saturne",
+              "jupiter": "Jupiter",
+              "custom": "Votre g personnalisée"
+            }
+          },
+          "sensitivity": {
+            "title": "Comment la vitesse change la portée",
+            "intro": "La portée avec 10 % de vitesse en moins, votre vitesse et 10 % de plus, au même angle, hauteur et gravité. La portée croît avec le carré de la vitesse.",
+            "low": "−10 % de vitesse",
+            "current": "Votre vitesse",
+            "high": "+10 % de vitesse",
+            "squared": "Facteurs de vitesse²",
+            "swing": "Écart total",
+            "swingNote": "exactement v² au sol ; proche depuis une hauteur"
+          },
+          "bars": {
+            "title": "Hauteur à pas de temps égaux",
+            "intro": "La hauteur à neuf instants égaux du lancer à l'impact. Chaque pas couvre la même distance horizontale, tandis que les gains de hauteur diminuent vers le sommet.",
+            "aria": "Diagramme en barres de la hauteur à pas égaux",
+            "step": "Pas de temps",
+            "dx": "Pas horizontal",
+            "first": "Premier pas",
+            "highest": "Échantillon le plus haut",
+            "peak": "Sommet réel"
+          }
         }
-      },
-      "gauge": {
-        "low": "Trajectoire plus plate",
-        "optimal": "Proche de la portée maximale",
-        "steep": "Arc élevé"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -11019,11 +11074,6 @@
       "relatedTools": {
         "title": "Outils de Physique Connexes"
       },
-      "heightCard": {
-        "title": "En Étages de Bâtiment",
-        "intro": "Comparer la hauteur maximale à un étage typique d'un bâtiment (environ 3 m) donne une idée intuitive de la hauteur atteinte par le projectile.",
-        "result": "Cette trajectoire culmine à environ {floors} étages d'un bâtiment typique."
-      },
       "referenceTable": {
         "title": "Vitesses de Lancement Typiques",
         "caption": "Vitesses de lancement réelles à comparer à vos propres données.",
@@ -11037,6 +11087,36 @@
           "tennisServe": "Service au Tennis (pro)",
           "handgunBullet": "Balle de Pistolet"
         }
+      },
+      "live3d": {
+        "cardTitle": "Trajectoire en direct : tableau et vol en 3D",
+        "invalid": "Saisissez une vitesse ≥ 0, une hauteur ≥ 0 et une gravité > 0 pour tracer le vol.",
+        "groupInputs": "Données du lancer",
+        "groupComponents": "Composantes de la vitesse",
+        "groupRise": "Montée jusqu'au sommet",
+        "groupFall": "Descente et portée",
+        "groupImpact": "Impact",
+        "groupEnergy": "Énergie par kilogramme (conservée)",
+        "groupOptimum": "Angle optimal",
+        "groupPath": "Trajet",
+        "vx": "Vitesse horizontale vₓ",
+        "vy": "Vitesse verticale vy",
+        "timeUp": "Temps de montée t↑",
+        "rise": "Montée au-dessus du lancer",
+        "apexX": "Distance du sommet",
+        "timeDown": "Temps de descente t↓",
+        "impactVy": "Vitesse verticale à l'impact",
+        "keLaunch": "Cinétique au lancer",
+        "peLaunch": "Potentielle au lancer",
+        "energyApex": "Totale au sommet",
+        "keImpact": "Cinétique à l'impact",
+        "optimalAngle": "Angle optimal θ*",
+        "maxRange": "Portée maximale",
+        "efficiency": "Part de la portée maximale",
+        "complementary": "Portée à 90° − θ",
+        "arcLength": "Longueur du trajet",
+        "averageSpeed": "Vitesse moyenne sur le trajet",
+        "minSpeed": "Vitesse minimale (au sommet)"
       }
     },
     "readability-score-calculator": {

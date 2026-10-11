@@ -10784,7 +10784,6 @@
         "gravityLabel": "Gravitational Acceleration (g) (m/s²)",
         "gravityHint": "Defaults to Earth's surface gravity (9.81 m/s²) — change it to model the Moon, Mars, or another world.",
         "gravityPlaceholder": "e.g. 9.81",
-        "calculate": "Calculate",
         "clear": "Clear",
         "gravityPresetLabel": "World",
         "gravityPreset": {
@@ -10793,11 +10792,6 @@
           "mars": "Mars (3.71 m/s²)",
           "custom": "Custom"
         },
-        "vxLabel": "vₓ",
-        "vyLabel": "vy",
-        "vLabel": "v₀",
-        "componentsCaption": "Launch velocity decomposed into horizontal (vₓ) and vertical (vy) components.",
-        "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "basketballShot": "Basketball Free Throw",
           "soccerKick": "Soccer Ball Kick",
@@ -10818,52 +10812,18 @@
         "impactSpeed": "Impact Speed",
         "impactAngle": "Impact Angle",
         "rangeCaption": "Horizontal range",
-        "diagramLaunch": "Launch",
-        "diagramPeak": "Peak ({value} m)",
-        "diagramLanding": "Landing",
-        "diagramCaption": "The parabolic trajectory computed from your launch speed, angle, height, and gravity — the peak and landing points are scaled to their actual computed values.",
-        "emptyStateMessage": "Enter values and press Calculate to see your projectile's trajectory.",
         "angleField": "Launch Angle",
         "heightField": "Launch Height",
         "gravityField": "Gravity",
-        "impactDiagramCaption": "The impact velocity vector, angled below horizontal at the computed impact angle.",
-        "speedField": "Launch Speed"
+        "speedField": "Launch Speed",
+        "heroCaption": "Flight {t} s · peak {h} m · impact {v} m/s"
       },
       "education": {
         "intro": {
           "title": "Understanding Projectile Motion",
           "paragraph1": "Projectile motion describes the curved path traced by an object launched into the air and acted on only by gravity, with no propulsion and, in this idealized model, no air resistance. The key insight, proven rigorously by Galileo Galilei, is that the horizontal and vertical components of motion are entirely independent: horizontal velocity (v₀cosθ) stays constant for the whole flight, while vertical velocity (v₀sinθ) decelerates, momentarily stops at the peak, and then accelerates downward under gravity — exactly as if the object were thrown straight up and fell straight back down. Combining a constant horizontal velocity with a uniformly accelerating vertical velocity produces a path that is mathematically a parabola.",
-          "diagram": {
-            "launchLabel": "Launch (v₀ = 20 m/s, θ = 45°)",
-            "peakLabel": "Peak ≈ 10.19 m",
-            "landingLabel": "Landing (R ≈ 40.77 m)",
-            "caption": "The trajectory of a 20 m/s launch at 45° from level ground — a parabola formed by constant horizontal velocity and uniformly accelerated vertical velocity."
-          },
           "paragraph2": "Four quantities fully describe this idealized flight: time of flight (how long the object stays airborne), maximum height (the peak of the parabola), range (the horizontal distance traveled), and impact velocity (the speed and angle at landing). When launched from ground level (h₀ = 0), the trajectory is symmetric — the object returns to the height it started from, its impact speed equals its launch speed, and its impact angle equals its launch angle. Launching from an elevation (h₀ > 0) breaks that symmetry: the object falls farther than it rose, so it lands faster and at a steeper angle than it was launched.",
-          "paragraph3": "Because launching from a height breaks the simple ground-level symmetry, time of flight can no longer be found from a single division — it requires solving the quadratic equation h₀ + v₀sinθ·t − ½gt² = 0 for its positive root. This calculator always applies that general quadratic solution, which reduces automatically to the familiar t = 2v₀sinθ/g whenever h₀ = 0.",
-          "rangeVsAngle": {
-            "xLabel": "Launch angle (0°-90°)",
-            "yLabel": "Range",
-            "peakLabel": "45° — max range",
-            "caption": "For a level launch, range is proportional to sin(2×angle), which peaks at a 45° launch angle."
-          },
-          "rangeGauge": {
-            "title": "Try It: How Far Does That Go?",
-            "intro": "Pick a real-world projectile to see its typical range on the gauge and compare it with others.",
-            "short": "Short",
-            "medium": "Medium",
-            "long": "Long",
-            "verdict": "{projectile} typically travels a {classification} distance.",
-            "fieldsFact": "That's about {ratio} football fields (100 m each), end to end.",
-            "projectiles": {
-              "paperAirplane": "A Paper Airplane",
-              "baseballThrow": "A Baseball Throw",
-              "golfDrive": "A Golf Drive",
-              "cannonball": "A Cannonball",
-              "artilleryShell": "An Artillery Shell",
-              "icbm": "An ICBM"
-            }
-          }
+          "paragraph3": "Because launching from a height breaks the simple ground-level symmetry, time of flight can no longer be found from a single division — it requires solving the quadratic equation h₀ + v₀sinθ·t − ½gt² = 0 for its positive root. This calculator always applies that general quadratic solution, which reduces automatically to the familiar t = 2v₀sinθ/g whenever h₀ = 0."
         },
         "examples": {
           "title": "Worked Examples",
@@ -10968,21 +10928,15 @@
           },
           "componentsSection": {
             "title": "Splitting Velocity Into Two Parts",
-            "paragraph": "Launch velocity is decomposed into a horizontal part that stays constant throughout the flight and a vertical part that gravity steadily reduces — treating the two independently is what makes the whole calculation possible.",
-            "caption": "Launch velocity decomposed into horizontal and vertical components."
+            "paragraph": "Launch velocity is decomposed into a horizontal part that stays constant throughout the flight and a vertical part that gravity steadily reduces — treating the two independently is what makes the whole calculation possible."
           },
           "impactSection": {
             "title": "The Velocity at Landing",
-            "paragraph": "The projectile returns to the ground moving at an angle below horizontal that depends on how much the vertical component changed during flight — for a level launch and landing, it mirrors the launch angle exactly.",
-            "caption": "The impact velocity vector, angled below horizontal."
+            "paragraph": "The projectile returns to the ground moving at an angle below horizontal that depends on how much the vertical component changed during flight — for a level launch and landing, it mirrors the launch angle exactly."
           },
           "gravityComparisonSection": {
             "title": "The Same Shot, Different Worlds",
-            "paragraph": "Since range scales inversely with gravity, launching the identical shot on the Moon or Mars instead of Earth sends it dramatically farther, without changing the launch speed or angle at all.",
-            "caption": "Range for an identical launch on Earth, the Moon, and Mars.",
-            "earth": "Earth",
-            "moon": "Moon",
-            "mars": "Mars"
+            "paragraph": "Since range scales inversely with gravity, launching the identical shot on the Moon or Mars instead of Earth sends it dramatically farther, without changing the launch speed or angle at all."
           }
         },
         "references": {
@@ -10991,12 +10945,113 @@
           "note": "Historian of science R. H. Naylor traces Galileo's manuscript notes on projectile motion, reconstructing the experimental and theoretical steps that led to the finished 1638 proof that a projectile's path is a parabola.",
           "url": "https://doi.org/10.1080/00033797600200201",
           "readOriginal": "Read the Original Text"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "launch": {
+            "title": "Launch Lab: Watch the Flight",
+            "intro": "The ball flies your real trajectory with its velocity vector and its vₓ / vy components; move the sliders and the whole page follows.",
+            "aria": "Animated projectile on its trajectory with velocity vectors",
+            "play": "Play",
+            "pause": "Pause",
+            "hint": "Real-time flight (1.5–5 s per loop)",
+            "speed": "Launch speed v₀",
+            "angle": "Launch angle θ",
+            "time": "Time now",
+            "x": "Horizontal position x = vₓ·t",
+            "y": "Height y(t)",
+            "vy": "Vertical velocity vy − g·t",
+            "speedNow": "Speed now |v|",
+            "apex": "Apex",
+            "apexNote": "only vₓ = {vx} m/s is left there"
+          },
+          "curve": {
+            "title": "Range Across Every Launch Angle",
+            "intro": "The range for every angle from 0° to 90° at your speed, height and gravity, with your angle, the best angle and the complementary angle marked.",
+            "aria": "Range versus launch angle curve",
+            "current": "Your angle",
+            "optimal": "Best angle",
+            "max": "Maximum range",
+            "complementary": "Complementary angle",
+            "efficiency": "Share of the maximum",
+            "efficiencyNote": "θ* = 45° only from ground level; a launch height lowers it"
+          },
+          "flow": {
+            "title": "From Launch Speed to Range",
+            "intro": "The calculator's chain step by step: split the speed, time the climb, add the fall, then multiply by the constant horizontal velocity.",
+            "aria": "Flow from launch speed to range",
+            "vertical": "Vertical component",
+            "horizontal": "Horizontal component",
+            "up": "Climb time",
+            "down": "Fall time",
+            "range": "Range"
+          },
+          "split": {
+            "title": "The Flight Split at the Apex",
+            "intro": "Time, distance and height split into the part before and after the apex; from level ground each pair is 50/50, and a launch height tips the fall side.",
+            "time": "Time of flight",
+            "rise": "Rise",
+            "fall": "Fall",
+            "distance": "Horizontal distance",
+            "before": "Before the apex",
+            "after": "After the apex",
+            "height": "Peak height",
+            "launch": "Launch height",
+            "riseH": "Rise",
+            "ratio": "Fall / rise ratio"
+          },
+          "energy": {
+            "title": "Energy Balance: Launch vs Impact",
+            "intro": "Energy per kilogram on a beam balance: launch kinetic + potential on one pan, impact kinetic on the other. With no air resistance the beam stays level.",
+            "aria": "Beam balance of launch and impact energy",
+            "launchPan": "Launch",
+            "impactPan": "Impact",
+            "kinetic": "Kinetic at launch ½v₀²",
+            "potential": "Potential at launch g·h₀",
+            "apex": "Total at the apex",
+            "impact": "Kinetic at impact ½v²",
+            "verdict": "Balance",
+            "verdictNote": "multiply by the mass in kg for joules"
+          },
+          "worlds": {
+            "title": "The Same Launch on Eight Worlds",
+            "intro": "Your speed, angle and height under each world's surface gravity, longest range first; your current world is highlighted.",
+            "rule": "Rule",
+            "yours": "Your g",
+            "source": "g from the NASA Planetary Fact Sheet",
+            "names": {
+              "pluto": "Pluto",
+              "moon": "Moon",
+              "mercury": "Mercury",
+              "mars": "Mars",
+              "venus": "Venus",
+              "earth": "Earth",
+              "saturn": "Saturn",
+              "jupiter": "Jupiter",
+              "custom": "Your custom g"
+            }
+          },
+          "sensitivity": {
+            "title": "How Speed Changes the Range",
+            "intro": "The range at 10% less speed, your speed and 10% more, at the same angle, height and gravity. Range grows with the square of speed.",
+            "low": "−10% speed",
+            "current": "Your speed",
+            "high": "+10% speed",
+            "squared": "Speed² factors",
+            "swing": "Total swing",
+            "swingNote": "exactly v² on level ground; close to it from a height"
+          },
+          "bars": {
+            "title": "Height at Equal Time Steps",
+            "intro": "The height at nine equal instants from launch to impact. Each step covers the same horizontal distance, while the height gains shrink toward the apex.",
+            "aria": "Bar chart of height at equal time steps",
+            "step": "Time step",
+            "dx": "Horizontal step",
+            "first": "First step",
+            "highest": "Highest sample",
+            "peak": "True peak"
+          }
         }
-      },
-      "gauge": {
-        "low": "Flatter trajectory",
-        "optimal": "Near maximum range",
-        "steep": "High arc"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -11019,11 +11074,6 @@
       "relatedTools": {
         "title": "Related Physics Tools"
       },
-      "heightCard": {
-        "title": "In Building Floors",
-        "intro": "Comparing the maximum height to a typical building floor (about 3 m) gives an intuitive sense of how high the projectile climbs.",
-        "result": "This trajectory peaks at about {floors} floors of a typical building."
-      },
       "referenceTable": {
         "title": "Typical Launch Speeds",
         "caption": "Real-world launch speeds to compare against your own inputs.",
@@ -11037,6 +11087,36 @@
           "tennisServe": "Tennis Serve (pro)",
           "handgunBullet": "Handgun Bullet"
         }
+      },
+      "live3d": {
+        "cardTitle": "Live Trajectory: Table and 3D Flight",
+        "invalid": "Enter a speed ≥ 0, a height ≥ 0 and a gravity > 0 to draw the flight.",
+        "groupInputs": "Launch inputs",
+        "groupComponents": "Velocity components",
+        "groupRise": "Rise to the apex",
+        "groupFall": "Fall and range",
+        "groupImpact": "Impact",
+        "groupEnergy": "Energy per kilogram (conserved)",
+        "groupOptimum": "Best angle",
+        "groupPath": "Path",
+        "vx": "Horizontal velocity vₓ",
+        "vy": "Vertical velocity vy",
+        "timeUp": "Time to apex t↑",
+        "rise": "Rise above launch",
+        "apexX": "Apex distance",
+        "timeDown": "Fall time t↓",
+        "impactVy": "Vertical velocity at impact",
+        "keLaunch": "Kinetic at launch",
+        "peLaunch": "Potential at launch",
+        "energyApex": "Total at the apex",
+        "keImpact": "Kinetic at impact",
+        "optimalAngle": "Optimal angle θ*",
+        "maxRange": "Maximum range",
+        "efficiency": "Share of maximum range",
+        "complementary": "Range at 90° − θ",
+        "arcLength": "Path length",
+        "averageSpeed": "Average speed along the path",
+        "minSpeed": "Slowest speed (at apex)"
       }
     },
     "readability-score-calculator": {

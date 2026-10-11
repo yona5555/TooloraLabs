@@ -1,105 +1,48 @@
 "use client";
-import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
 import ProjectileGravityTabs from "./ProjectileGravityTabs";
-import ProjectileVelocityComponentsDiagram from "./ProjectileVelocityComponentsDiagram";
-import { parseLocalizedNumber } from "@tooloralabs/core";
-import type { GravityPreset } from "./types";
+import type { GravityPreset, ProjectileInputs } from "./types";
 
 type ProjectileMotionInputPanelProps = {
-  speed: string;
-  onSpeedChange: (value: string) => void;
-  angle: string;
-  onAngleChange: (value: string) => void;
-  height: string;
-  onHeightChange: (value: string) => void;
-  gravity: string;
-  onGravityChange: (value: string) => void;
+  inputs: ProjectileInputs;
+  onFieldChange: (key: keyof ProjectileInputs, value: string) => void;
   gravityPreset: GravityPreset;
   onGravityPresetChange: (preset: GravityPreset) => void;
-  scenarioKeys: string[];
-  onScenarioPreset: (key: string) => void;
-  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
   onClear: () => void;
 };
 
-export default function ProjectileMotionInputPanel({
-  speed,
-  onSpeedChange,
-  angle,
-  onAngleChange,
-  height,
-  onHeightChange,
-  gravity,
-  onGravityChange,
-  gravityPreset,
-  onGravityPresetChange,
-  scenarioKeys,
-  onScenarioPreset,
-  onCalculate,
-  onClear,
-}: ProjectileMotionInputPanelProps) {
+/** Live inputs: every keystroke updates the Result card, the 3D drawing and every indicator. */
+export default function ProjectileMotionInputPanel({ inputs, onFieldChange, gravityPreset, onGravityPresetChange, onClear }: ProjectileMotionInputPanelProps) {
   const t = useTranslations("tools.projectile-motion-calculator.form");
-  const tScenarios = useTranslations("tools.projectile-motion-calculator.form.scenarios");
-  const angleValue = parseLocalizedNumber(angle) || 0;
-  const speedValue = parseLocalizedNumber(speed) || 0;
-  const angleRad = (angleValue * Math.PI) / 180;
-  const vx = speedValue * Math.cos(angleRad);
-  const vy = speedValue * Math.sin(angleRad);
 
   return (
     <SectionCard title={t("inputTitle")}>
-      <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
-        <div className="flex flex-wrap gap-2">
-          {scenarioKeys.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onScenarioPreset(key)}
-              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
-            >
-              {tScenarios(key)}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <ProjectileVelocityComponentsDiagram
-        angleDegrees={angleValue}
-        vxLabel={`${t("vxLabel")} = ${vx.toFixed(1)}`}
-        vyLabel={`${t("vyLabel")} = ${vy.toFixed(1)}`}
-        vLabel={`${t("vLabel")} = ${speedValue.toFixed(1)}`}
-        caption={t("componentsCaption")}
-      />
-
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+      <div className="space-y-5">
         <ToolInput
           label={t("speedLabel")}
           type="text"
           inputMode="decimal"
           placeholder={t("speedPlaceholder")}
-          value={speed}
-          onChange={(e) => onSpeedChange(e.target.value)}
+          value={inputs.speed}
+          onChange={(e) => onFieldChange("speed", e.target.value)}
         />
         <ToolInput
           label={t("angleLabel")}
           type="text"
           inputMode="decimal"
           placeholder={t("anglePlaceholder")}
-          value={angle}
-          onChange={(e) => onAngleChange(e.target.value)}
+          value={inputs.angle}
+          onChange={(e) => onFieldChange("angle", e.target.value)}
         />
         <ToolInput
           label={t("heightLabel")}
           type="text"
           inputMode="decimal"
           placeholder={t("heightPlaceholder")}
-          value={height}
-          onChange={(e) => onHeightChange(e.target.value)}
+          value={inputs.height}
+          onChange={(e) => onFieldChange("height", e.target.value)}
         />
 
         <div>
@@ -114,22 +57,19 @@ export default function ProjectileMotionInputPanel({
             type="text"
             inputMode="decimal"
             placeholder={t("gravityPlaceholder")}
-            value={gravity}
-            onChange={(e) => onGravityChange(e.target.value)}
+            value={inputs.gravity}
+            onChange={(e) => onFieldChange("gravity", e.target.value)}
           />
         )}
 
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t("calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={onClear}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t("clear")}
-          </button>
-        </div>
-      </form>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
+      </div>
     </SectionCard>
   );
 }
