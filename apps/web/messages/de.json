@@ -10191,10 +10191,7 @@
         "tPlaceholder": "z. B. 5",
         "dxLabel": "Verschiebung Δx (m)",
         "dxPlaceholder": "z. B. 25",
-        "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "variablesCaption": "Die gesuchte Größe ist hervorgehoben.",
-        "scenarioPresetsLabel": "Ein reales Szenario ausprobieren:",
         "scenarios": {
           "carAccelerating": "Auto beschleunigt aus dem Stand",
           "planeTakeoff": "Flugzeug beim Start",
@@ -10216,49 +10213,14 @@
         "t": "t",
         "dx": "Δx",
         "undefined": "undefiniert",
-        "diagramStart": "Start",
-        "diagramEnd": "Ende",
-        "diagramCaption": "Geschwindigkeitspfeile skaliert auf v₀ (Start) und v (Ende); die Richtung kehrt sich bei negativen Werten um.",
-        "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Kinematik-Ergebnis zu sehen.",
-        "sentence": "Die Geschwindigkeit ändert sich bei dieser Bewegung von {v0} m/s auf {v} m/s.",
-        "vtXLabel": "Zeit (t)",
-        "vtYLabel": "Geschwindigkeit (v)",
-        "vtAreaLabel": "Δx = {dx} m",
-        "vtCaption": "Geschwindigkeit vs. Zeit — die schattierte Fläche unter der Linie entspricht der Verschiebung."
+        "sentence": "Die Geschwindigkeit ändert sich bei dieser Bewegung von {v0} m/s auf {v} m/s."
       },
       "education": {
         "intro": {
           "title": "Kinematik verstehen",
           "paragraph1": "Die Kinematik beschreibt Bewegung — Position, Geschwindigkeit und Beschleunigung — ohne Bezug auf die sie verursachenden Kräfte. Für den häufigen Fall konstanter Beschleunigung sind fünf Größen miteinander verknüpft: Anfangsgeschwindigkeit (v₀), Endgeschwindigkeit (v), Beschleunigung (a), Zeit (t) und Verschiebung (Δx). Die Kenntnis dreier beliebiger dieser fünf Größen bestimmt die anderen beiden, wobei je nach bekannten Größen eine von vier Standardgleichungen verwendet wird.",
-          "diagram": {
-            "startLabel": "Start",
-            "endLabel": "Ende",
-            "caption": "Ein Objekt, das aus dem Stillstand (v₀ = 0) auf 10 m/s beschleunigt — der Endpfeil ist länger, da die Endgeschwindigkeit größer ist."
-          },
           "paragraph2": "Dieser Rechner deckt zwei häufige Aufgabentypen ab. Wenn Geschwindigkeit, Beschleunigung und Zeit bekannt sind (aber nicht die Verschiebung), verwendet er v = v₀ + at und dessen Umstellungen — reine lineare Algebra ohne Mehrdeutigkeit. Wenn Geschwindigkeit, Beschleunigung und Verschiebung bekannt sind (aber nicht die Zeit) — die klassische Aufgabe „Bremsweg“ oder „wie schnell nach dieser Strecke“ —, verwendet er v² = v₀² + 2aΔx, was beim Berechnen einer Geschwindigkeit eine Quadratwurzel erfordert.",
-          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis.",
-          "positionTime": {
-            "xLabel": "Zeit (t)",
-            "yLabel": "Position (x)",
-            "caption": "Position vs. Zeit bei konstanter Beschleunigung ist eine Parabel, da die Position das Integral einer linearen Geschwindigkeitsfunktion ist."
-          },
-          "speedGauge": {
-            "title": "Ausprobieren: Wie schnell ist das?",
-            "intro": "Wähle ein reales bewegtes Objekt, um seine Geschwindigkeit auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "slow": "Langsam",
-            "moderate": "Mittel",
-            "fast": "Schnell",
-            "verdict": "Ein {mover} bewegt sich mit {classification} Geschwindigkeit.",
-            "distanceFact": "Bei dieser Geschwindigkeit würde es in 10 Sekunden etwa {distance} m zurücklegen.",
-            "movers": {
-              "snail": "Gartenschnecke",
-              "walkingHuman": "Gehender Mensch",
-              "runningHuman": "Laufender Mensch",
-              "carHighway": "Auto auf der Autobahn",
-              "commercialJet": "Verkehrsflugzeug",
-              "speedOfSound": "Schallgeschwindigkeit"
-            }
-          }
+          "paragraph3": "Die Verschiebung (Δx) unterscheidet sich von der zurückgelegten Strecke: Die Verschiebung ist die Nettoänderung der Position und kann negativ sein, wenn ein Objekt hinter seinem Ausgangspunkt endet, während die Strecke immer positiv ist und die gesamte Weglänge einschließlich jeder Rückwärtsbewegung berücksichtigt. Diese Gleichungen für konstante Beschleunigung verwenden die Verschiebung und liefern bei geradliniger Bewegung in eine Richtung, wo beide übereinstimmen, dasselbe Ergebnis."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -10363,25 +10325,15 @@
           },
           "velocityTimeSection": {
             "title": "Geschwindigkeit über die Zeit",
-            "xLabel": "Zeit (t)",
-            "yLabel": "Geschwindigkeit (v)",
-            "paragraph": "Geschwindigkeit gegen Zeit bei konstanter Beschleunigung aufgetragen ergibt immer eine Gerade, und die Fläche zwischen dieser Linie und der Zeitachse entspricht genau der zurückgelegten Verschiebung.",
-            "caption": "Geschwindigkeit vs. Zeit — die schattierte Fläche unter der Linie entspricht der Verschiebung."
+            "paragraph": "Geschwindigkeit gegen Zeit bei konstanter Beschleunigung aufgetragen ergibt immer eine Gerade, und die Fläche zwischen dieser Linie und der Zeitachse entspricht genau der zurückgelegten Verschiebung."
           },
           "variablesSection": {
             "title": "Fünf Größen, zwei Gleichungen",
-            "paragraph": "Bewegung mit konstanter Beschleunigung umfasst immer fünf zusammenhängende Größen — Anfangsgeschwindigkeit, Endgeschwindigkeit, Beschleunigung, Zeit und Verschiebung —, und die Kenntnis von drei davon ermöglicht die Berechnung der anderen beiden.",
-            "caption": "Die gesuchte Größe ist hervorgehoben; die übrigen sind bekannt."
+            "paragraph": "Bewegung mit konstanter Beschleunigung umfasst immer fünf zusammenhängende Größen — Anfangsgeschwindigkeit, Endgeschwindigkeit, Beschleunigung, Zeit und Verschiebung —, und die Kenntnis von drei davon ermöglicht die Berechnung der anderen beiden."
           },
           "referenceSection": {
             "title": "Beschleunigung im Alltag",
-            "paragraph": "Eine bloße Zahl in m/s² bedeutet ohne Kontext wenig — diese Skala ordnet gängige Beschleunigungen, von sanftem Bremsen bis zum Raketenstart, neben Erdanziehungskraft selbst ein.",
-            "caption": "Gängige Beschleunigungen im Vergleich, mit markierter Erdanziehungskraft (9,8 m/s²).",
-            "r1": "Autobremsung",
-            "r2": "Vollbremsung",
-            "r3": "Achterbahnabfahrt",
-            "r4": "Schwerkraft (g)",
-            "r5": "Raketenstart"
+            "paragraph": "Eine bloße Zahl in m/s² bedeutet ohne Kontext wenig — diese Skala ordnet gängige Beschleunigungen, von sanftem Bremsen bis zum Raketenstart, neben Erdanziehungskraft selbst ein."
           }
         },
         "references": {
@@ -10390,6 +10342,103 @@
           "note": "Der Wissenschaftshistoriker Stillman Drake untersucht Galileis Entwicklung der Kinematik beschleunigter Bewegung und zeichnet die Argumentation hinter den Gleichungen nach, die dieser Rechner fast vier Jahrhunderte später noch anwendet.",
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Originaltext lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Diese Ansicht braucht eine lösbare Bewegung, die in der Zeit vorwärts läuft – passen Sie die Werte oben an.",
+          "motion": {
+            "title": "Bewegungslabor: Auto auf einer Strecke",
+            "intro": "Die Bewegung läuft in Echtzeit: Sehen Sie zu, wie das Auto beschleunigt oder bremst, während seine Geschwindigkeitsgerade und Ortskurve gezeichnet werden. Die Schieberegler ändern die bekannten Werte im Rechner.",
+            "aria": "Animiertes Auto auf einer Strecke mit Live-Diagrammen von Geschwindigkeit und Ort über der Zeit",
+            "slider": {
+              "v0": "Anfangsgeschwindigkeit",
+              "v": "Endgeschwindigkeit",
+              "a": "Beschleunigung",
+              "t": "Zeit",
+              "dx": "Verschiebung"
+            },
+            "play": "Abspielen",
+            "pause": "Pause",
+            "instant": "Aktueller Zeitpunkt",
+            "velocity": "Geschwindigkeit v = v₀ + at",
+            "position": "Ort x = v₀t + ½at²",
+            "end": "Am Ende der Bewegung",
+            "endNote": "Gleich v und Δx des Rechners."
+          },
+          "oddRule": {
+            "title": "Strecke in jedem gleichen Zeitschritt",
+            "intro": "Die Bewegung in acht gleiche Zeitschritte zerlegt: Jeder Balken ist die in diesem Schritt zurückgelegte Strecke. Bei konstanter Beschleunigung wachsen (oder schrumpfen) die Balken in jedem Schritt um denselben Betrag.",
+            "aria": "Balkendiagramm der Verschiebung in jedem von acht gleichen Zeitintervallen",
+            "axis": "Verhältnis zum ersten Schritt",
+            "step": "Zeitschritt",
+            "first": "Erster Schritt",
+            "last": "Letzter Schritt",
+            "difference": "Änderung von Schritt zu Schritt",
+            "differenceNote": "Aus der Ruhe folgen die Schritte Galileis Regel der ungeraden Zahlen 1 : 3 : 5 : 7."
+          },
+          "equations": {
+            "title": "Vier Gleichungen, eine Bewegung",
+            "intro": "Jede Standardgleichung mit den Live-Werten eingesetzt und beiden Seiten ausgewertet: Eine richtige Lösung erfüllt alle zugleich.",
+            "known": "Geschwindigkeit und Beschleunigung",
+            "time": "Zeit",
+            "noTime": "nicht definiert (a = 0)",
+            "displacement": "Verschiebung",
+            "agree": "Erfüllte Gleichungen",
+            "agreeNote": "Ohne Zeit gilt nur v² = v₀² + 2aΔx."
+          },
+          "trio": {
+            "title": "Halbe, gleiche oder doppelte Zeit",
+            "intro": "Derselbe Start und dieselbe Beschleunigung für die halbe, gleiche und doppelte Zeit. Die Geschwindigkeit ändert sich proportional zur Zeit, die Verschiebung nicht.",
+            "half": "Halbe Zeit",
+            "current": "Ihre Zeit",
+            "double": "Doppelte Zeit",
+            "halfRow": "Die halbe Zeit",
+            "currentRow": "Ihre Zeit",
+            "doubleRow": "Die doppelte Zeit",
+            "ratio": "Verhältnis der Verschiebungen",
+            "ratioNote": "Genau 4 beim Start aus der Ruhe: x wächst mit t²."
+          },
+          "zones": {
+            "title": "Wie stark ist diese Beschleunigung?",
+            "intro": "Der Betrag der Beschleunigung auf der Skala des Rechners, verglichen mit der Erdbeschleunigung (gestrichelte Marke).",
+            "aria": "Farbiger Zonenstreifen, der die Beschleunigung als sanft, stark oder extrem einordnet",
+            "magnitude": "Betrag der Beschleunigung",
+            "inG": "In Vielfachen von g",
+            "to100": "Zeit für 0–100 km/h",
+            "zone": "Zone",
+            "zoneNote": "Sanft unter 9,8 m/s², stark bis 20 m/s²."
+          },
+          "ranked": {
+            "title": "Ihr Höchsttempo unter echten Geschwindigkeiten",
+            "intro": "Das höchste in der Bewegung erreichte Tempo, eingeordnet unter echte Referenzgeschwindigkeiten auf logarithmischer Skala.",
+            "you": "Ihre Bewegung (Höchsttempo)",
+            "peak": "Höchsttempo",
+            "kmh": "In km/h",
+            "vsSlower": "Verglichen mit {name}",
+            "vsFaster": "Langsamer als {name}",
+            "rank": "Rang (schnellste zuerst)"
+          },
+          "split": {
+            "title": "Woher die Verschiebung kommt",
+            "intro": "Die Verschiebung teilt sich in das, was das Anfangstempo allein schaffen würde, v₀t, und das, was die Beschleunigung hinzufügt oder abzieht, ½at²; der graue Balken ist die gesamte zurückgelegte Strecke.",
+            "aria": "Segmentierte Balken, die die Verschiebung in v₀t und ½at² aufteilen, mit der Weglänge",
+            "path": "Weg",
+            "fromV0": "Durch das Anfangstempo",
+            "fromA": "Durch die Beschleunigung",
+            "net": "Netto-Verschiebung",
+            "share": "Anteil der Beschleunigung",
+            "turnNote": "Die Bewegung kehrt um, daher ist der Weg länger als |Δx|."
+          },
+          "timeline": {
+            "title": "Die Bewegung als Zeitleiste",
+            "intro": "Die wichtigsten Momente der Bewegung der Reihe nach, jeweils mit Zeit, Geschwindigkeit und Ort.",
+            "start": "Start",
+            "half": "Halbe Zeit",
+            "turning": "Hält an und kehrt um",
+            "kmh100": "Überschreitet 100 km/h",
+            "end": "Ende",
+            "never": "nicht erreicht"
+          }
         }
       },
       "gauge": {
@@ -10418,11 +10467,6 @@
       "relatedTools": {
         "title": "Verwandte Physik-Tools"
       },
-      "gForceCard": {
-        "title": "In G-Kräften",
-        "intro": "Die Beschleunigung als Vielfaches der Erdanziehungskraft (g) auszudrücken vermittelt ein intuitives Gefühl für ihre Stärke.",
-        "result": "Diese Beschleunigung entspricht etwa dem {g}-fachen der Erdanziehungskraft (1 g)."
-      },
       "referenceTable": {
         "title": "Gängige Geschwindigkeiten",
         "caption": "Reale Geschwindigkeiten zur Einordnung Ihres Ergebnisses.",
@@ -10436,6 +10480,28 @@
           "speedOfSound": "Schallgeschwindigkeit",
           "speedOfLight": "Lichtgeschwindigkeit"
         }
+      },
+      "live3d": {
+        "cardTitle": "Bewegung in 3D — Zeitschritte live",
+        "given": "gegeben",
+        "groupKnown": "Gegeben und berechnet",
+        "initialVelocity": "Anfangsgeschwindigkeit v₀",
+        "finalVelocity": "Endgeschwindigkeit v",
+        "acceleration": "Beschleunigung a",
+        "time": "Zeit t",
+        "displacement": "Verschiebung Δx",
+        "groupSteps": "Zeitschritte (a = {a} m/s², konstant)",
+        "groupDerived": "Abgeleitete Bewegung",
+        "deltaV": "Geschwindigkeitsänderung Δv",
+        "averageVelocity": "Durchschnittsgeschwindigkeit",
+        "gForce": "Beschleunigung in g",
+        "v0Kmh": "Anfangstempo",
+        "vKmh": "Endtempo",
+        "pathLength": "Zurückgelegte Strecke (Weg)",
+        "turningPoint": "Umkehrpunkt (v = 0)",
+        "timeTo100": "0–100 km/h bei diesem |a|",
+        "stoppingDistance": "Bremsweg bei diesem |a|",
+        "groupEquations": "Die vier Gleichungen, geprüft"
       }
     },
     "force-calculator": {

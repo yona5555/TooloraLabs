@@ -10191,10 +10191,7 @@
         "tPlaceholder": "e.g. 5",
         "dxLabel": "Displacement Δx (m)",
         "dxPlaceholder": "e.g. 25",
-        "calculate": "Calculate",
         "clear": "Clear",
-        "variablesCaption": "The quantity you're solving for is highlighted.",
-        "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "carAccelerating": "Car Accelerating from a Stop",
           "planeTakeoff": "Plane Taking Off",
@@ -10216,49 +10213,14 @@
         "t": "t",
         "dx": "Δx",
         "undefined": "undefined",
-        "diagramStart": "Start",
-        "diagramEnd": "End",
-        "diagramCaption": "Velocity arrows scaled to v₀ (start) and v (end); direction flips for negative values.",
-        "emptyStateMessage": "Enter values and press Calculate to see your kinematics result.",
-        "sentence": "Velocity changes from {v0} m/s to {v} m/s over this motion.",
-        "vtXLabel": "Time (t)",
-        "vtYLabel": "Velocity (v)",
-        "vtAreaLabel": "Δx = {dx} m",
-        "vtCaption": "Velocity vs. time — the shaded area under the line equals the displacement."
+        "sentence": "Velocity changes from {v0} m/s to {v} m/s over this motion."
       },
       "education": {
         "intro": {
           "title": "Understanding Kinematics",
           "paragraph1": "Kinematics describes motion — position, velocity, and acceleration — without reference to the forces that cause it. For the common case of constant acceleration, five quantities are related: initial velocity (v₀), final velocity (v), acceleration (a), time (t), and displacement (Δx). Knowing any three of these five determines the other two, using one of four standard equations depending on which quantities are known.",
-          "diagram": {
-            "startLabel": "Start",
-            "endLabel": "End",
-            "caption": "An object accelerating from rest (v₀ = 0) to 10 m/s — the end arrow is longer because the final velocity is greater."
-          },
           "paragraph2": "This calculator covers two common problem types. When velocity, acceleration, and time are known (but not displacement), it uses v = v₀ + at and its rearrangements — pure linear algebra with no ambiguity. When velocity, acceleration, and displacement are known (but not time) — the classic \"stopping distance\" or \"how fast after this distance\" problem — it uses v² = v₀² + 2aΔx, which involves a square root when solving for a velocity.",
-          "paragraph3": "Displacement (Δx) is different from distance traveled: displacement is the net change in position and can be negative if an object ends up behind where it started, while distance is always positive and accounts for the full path length, including any backtracking. These constant-acceleration equations use displacement, and give the same answer for straight-line motion in one direction, where the two coincide.",
-          "positionTime": {
-            "xLabel": "Time (t)",
-            "yLabel": "Position (x)",
-            "caption": "Position vs. time under constant acceleration is a parabola, since position is the integral of a linear velocity function."
-          },
-          "speedGauge": {
-            "title": "Try It: How Fast Is That?",
-            "intro": "Pick a real-world mover to see its speed on the gauge and compare it with others.",
-            "slow": "Slow",
-            "moderate": "Moderate",
-            "fast": "Fast",
-            "verdict": "A {mover} moves at a {classification} speed.",
-            "distanceFact": "At this speed, it would cover about {distance} m in 10 seconds.",
-            "movers": {
-              "snail": "Garden Snail",
-              "walkingHuman": "Walking Human",
-              "runningHuman": "Running Human",
-              "carHighway": "Car on the Highway",
-              "commercialJet": "Commercial Jet",
-              "speedOfSound": "Speed of Sound"
-            }
-          }
+          "paragraph3": "Displacement (Δx) is different from distance traveled: displacement is the net change in position and can be negative if an object ends up behind where it started, while distance is always positive and accounts for the full path length, including any backtracking. These constant-acceleration equations use displacement, and give the same answer for straight-line motion in one direction, where the two coincide."
         },
         "examples": {
           "title": "Worked Examples",
@@ -10363,25 +10325,15 @@
           },
           "velocityTimeSection": {
             "title": "Velocity Over Time",
-            "xLabel": "Time (t)",
-            "yLabel": "Velocity (v)",
-            "paragraph": "Plotting velocity against time for constant acceleration always gives a straight line, and the area trapped between that line and the time axis is exactly the displacement covered.",
-            "caption": "Velocity vs. time — the shaded area under the line equals the displacement."
+            "paragraph": "Plotting velocity against time for constant acceleration always gives a straight line, and the area trapped between that line and the time axis is exactly the displacement covered."
           },
           "variablesSection": {
             "title": "Five Quantities, Two Equations",
-            "paragraph": "Constant-acceleration motion always involves five related quantities — initial velocity, final velocity, acceleration, time, and displacement — and knowing any three lets you solve for the other two.",
-            "caption": "The quantity being solved for is highlighted; the rest are known."
+            "paragraph": "Constant-acceleration motion always involves five related quantities — initial velocity, final velocity, acceleration, time, and displacement — and knowing any three lets you solve for the other two."
           },
           "referenceSection": {
             "title": "Acceleration in Everyday Terms",
-            "paragraph": "A bare number in m/s² means little without context — this scale places common accelerations, from gentle braking to a rocket launch, alongside Earth's own gravitational acceleration.",
-            "caption": "Common accelerations compared, with Earth's gravity (9.8 m/s²) marked.",
-            "r1": "car braking",
-            "r2": "hard braking",
-            "r3": "coaster drop",
-            "r4": "gravity (g)",
-            "r5": "rocket launch"
+            "paragraph": "A bare number in m/s² means little without context — this scale places common accelerations, from gentle braking to a rocket launch, alongside Earth's own gravitational acceleration."
           }
         },
         "references": {
@@ -10390,6 +10342,103 @@
           "note": "Historian of science Stillman Drake examines Galileo's development of the kinematics of accelerated motion, tracing the reasoning behind the equations this calculator still applies nearly four centuries later.",
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Read the Original Text"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "This view needs a solvable motion that moves forward in time — adjust the values above.",
+          "motion": {
+            "title": "Motion Lab: Car on a Track",
+            "intro": "The live motion plays in real time: watch the car speed up or brake while its velocity line and position curve are traced. The sliders change the known values in the calculator.",
+            "aria": "Animated car moving along a track with live velocity–time and position–time graphs",
+            "slider": {
+              "v0": "Initial velocity",
+              "v": "Final velocity",
+              "a": "Acceleration",
+              "t": "Time",
+              "dx": "Displacement"
+            },
+            "play": "Play",
+            "pause": "Pause",
+            "instant": "Current instant",
+            "velocity": "Velocity v = v₀ + at",
+            "position": "Position x = v₀t + ½at²",
+            "end": "At the end of the motion",
+            "endNote": "Equal to the calculator's v and Δx."
+          },
+          "oddRule": {
+            "title": "Distance in Each Equal Time Step",
+            "intro": "The motion cut into eight equal time steps: each bar is the distance covered in that step. With constant acceleration the bars grow (or shrink) by the same amount every step.",
+            "aria": "Bar chart of the displacement in each of eight equal time intervals",
+            "axis": "ratio to the first step",
+            "step": "Time step",
+            "first": "First step",
+            "last": "Last step",
+            "difference": "Change from step to step",
+            "differenceNote": "From rest the steps follow Galileo's odd-number rule 1 : 3 : 5 : 7."
+          },
+          "equations": {
+            "title": "Four Equations, One Motion",
+            "intro": "Each standard equation with the live numbers substituted and both sides evaluated: a correct solution satisfies every equation at once.",
+            "known": "Velocity and acceleration",
+            "time": "Time",
+            "noTime": "undefined (a = 0)",
+            "displacement": "Displacement",
+            "agree": "Equations satisfied",
+            "agreeNote": "Without time only v² = v₀² + 2aΔx applies."
+          },
+          "trio": {
+            "title": "Half, Same or Double the Time",
+            "intro": "The same start and acceleration run for half, the same and double the time. Velocity changes in proportion to time; displacement does not.",
+            "half": "Half time",
+            "current": "Your time",
+            "double": "Double time",
+            "halfRow": "Half the time",
+            "currentRow": "Your time",
+            "doubleRow": "Double the time",
+            "ratio": "Displacement ratio",
+            "ratioNote": "Exactly 4 when starting from rest: x grows with t²."
+          },
+          "zones": {
+            "title": "How Strong Is This Acceleration?",
+            "intro": "The size of the acceleration on the calculator's scale, compared with Earth's gravity (dashed mark).",
+            "aria": "Colored zone strip placing the acceleration among gentle, strong and extreme",
+            "magnitude": "Size of the acceleration",
+            "inG": "In multiples of g",
+            "to100": "Time for 0–100 km/h",
+            "zone": "Zone",
+            "zoneNote": "Gentle below 9.8 m/s², strong up to 20 m/s²."
+          },
+          "ranked": {
+            "title": "Your Top Speed Among Real Speeds",
+            "intro": "The highest speed reached in the motion, ranked among real reference speeds on a logarithmic scale.",
+            "you": "Your motion (top speed)",
+            "peak": "Top speed",
+            "kmh": "In km/h",
+            "vsSlower": "Compared with {name}",
+            "vsFaster": "Slower than {name}",
+            "rank": "Rank (fastest first)"
+          },
+          "split": {
+            "title": "Where the Displacement Comes From",
+            "intro": "The displacement splits into what the starting speed alone would cover, v₀t, plus what the acceleration adds or removes, ½at²; the grey bar is the full distance travelled.",
+            "aria": "Segmented bars splitting the displacement into v₀t and ½at², with the path length",
+            "path": "path",
+            "fromV0": "From the starting speed",
+            "fromA": "From the acceleration",
+            "net": "Net displacement",
+            "share": "Share due to acceleration",
+            "turnNote": "The motion reverses, so the path is longer than |Δx|."
+          },
+          "timeline": {
+            "title": "The Motion as a Timeline",
+            "intro": "Key moments of the motion in order, each with its time, velocity and position.",
+            "start": "Start",
+            "half": "Halfway in time",
+            "turning": "Stops and turns back",
+            "kmh100": "Passes 100 km/h",
+            "end": "End",
+            "never": "not reached"
+          }
         }
       },
       "gauge": {
@@ -10418,11 +10467,6 @@
       "relatedTools": {
         "title": "Related Physics Tools"
       },
-      "gForceCard": {
-        "title": "In G-Forces",
-        "intro": "Expressing acceleration as a multiple of Earth's gravity (g) gives an intuitive sense of how strong it is.",
-        "result": "This acceleration is about {g} times Earth's gravity (1 g)."
-      },
       "referenceTable": {
         "title": "Common Speeds",
         "caption": "Real-world speeds to put your result in context.",
@@ -10436,6 +10480,28 @@
           "speedOfSound": "Speed of Sound",
           "speedOfLight": "Speed of Light"
         }
+      },
+      "live3d": {
+        "cardTitle": "Motion in 3D — live time steps",
+        "given": "given",
+        "groupKnown": "Known and solved",
+        "initialVelocity": "Initial velocity v₀",
+        "finalVelocity": "Final velocity v",
+        "acceleration": "Acceleration a",
+        "time": "Time t",
+        "displacement": "Displacement Δx",
+        "groupSteps": "Time steps (a = {a} m/s², constant)",
+        "groupDerived": "Derived motion",
+        "deltaV": "Change in velocity Δv",
+        "averageVelocity": "Average velocity",
+        "gForce": "Acceleration in g",
+        "v0Kmh": "Initial speed",
+        "vKmh": "Final speed",
+        "pathLength": "Distance travelled (path)",
+        "turningPoint": "Turning point (v = 0)",
+        "timeTo100": "0–100 km/h at this |a|",
+        "stoppingDistance": "Stopping distance at this |a|",
+        "groupEquations": "The four equations, checked"
       }
     },
     "force-calculator": {

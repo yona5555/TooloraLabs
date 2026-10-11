@@ -1,147 +1,64 @@
 "use client";
-import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
-import ToolButton from "@/components/tool-ui/ToolButton";
 import KinematicsSolveForTabs from "./KinematicsSolveForTabs";
-import KinematicsVariablesDiagram from "./KinematicsVariablesDiagram";
+import KinematicsModeTabs from "./KinematicsModeTabs";
 import { KINEMATICS_SOLVE_FOR_TIME, KINEMATICS_SOLVE_FOR_DISTANCE } from "./types";
-import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime } from "./types";
+import type { KinDraft } from "./KinLiveContext";
+
+type NumericKey = "v0" | "v" | "a" | "t" | "dx";
 
 type KinematicsInputPanelProps = {
-  mode: KinematicsMode;
-  solveForTime: KinematicsSolveForTime;
-  onSolveForTimeChange: (value: KinematicsSolveForTime) => void;
-  solveForDistance: KinematicsSolveForDistance;
-  onSolveForDistanceChange: (value: KinematicsSolveForDistance) => void;
-  v0: string;
-  onV0Change: (value: string) => void;
-  v: string;
-  onVChange: (value: string) => void;
-  a: string;
-  onAChange: (value: string) => void;
-  t: string;
-  onTChange: (value: string) => void;
-  dx: string;
-  onDxChange: (value: string) => void;
-  scenarioKeys: string[];
-  onScenarioPreset: (key: string) => void;
-  onCalculate: (e: FormEvent<HTMLFormElement>) => void;
+  draft: KinDraft;
+  onChange: <K extends keyof KinDraft>(key: K, value: KinDraft[K]) => void;
   onClear: () => void;
 };
 
-export default function KinematicsInputPanel({
-  mode,
-  solveForTime,
-  onSolveForTimeChange,
-  solveForDistance,
-  onSolveForDistanceChange,
-  v0,
-  onV0Change,
-  v,
-  onVChange,
-  a,
-  onAChange,
-  t,
-  onTChange,
-  dx,
-  onDxChange,
-  scenarioKeys,
-  onScenarioPreset,
-  onCalculate,
-  onClear,
-}: KinematicsInputPanelProps) {
-  const t_ = useTranslations("tools.kinematics-calculator.form");
-  const tScenarios = useTranslations("tools.kinematics-calculator.form.scenarios");
-
-  const v0Field = (
-    <ToolInput label={t_("v0Label")} type="text" inputMode="decimal" placeholder={t_("v0Placeholder")} value={v0} onChange={(e) => onV0Change(e.target.value)} />
-  );
-  const vField = (
-    <ToolInput label={t_("vLabel")} type="text" inputMode="decimal" placeholder={t_("vPlaceholder")} value={v} onChange={(e) => onVChange(e.target.value)} />
-  );
-  const aField = (
-    <ToolInput label={t_("aLabel")} type="text" inputMode="decimal" placeholder={t_("aPlaceholder")} value={a} onChange={(e) => onAChange(e.target.value)} />
-  );
-  const tField = (
-    <ToolInput label={t_("tLabel")} type="text" inputMode="decimal" placeholder={t_("tPlaceholder")} value={t} onChange={(e) => onTChange(e.target.value)} />
-  );
-  const dxField = (
-    <ToolInput label={t_("dxLabel")} type="text" inputMode="decimal" placeholder={t_("dxPlaceholder")} value={dx} onChange={(e) => onDxChange(e.target.value)} />
-  );
-
-  const solved = mode === "timeBased" ? solveForTime : solveForDistance;
-  const variableOrder = mode === "timeBased" ? ["v0", "v", "a", "t"] : ["v0", "v", "a", "dx"];
+/** Known quantities, solve-for and the known values; every keystroke updates the whole page live. */
+export default function KinematicsInputPanel({ draft, onChange, onClear }: KinematicsInputPanelProps) {
+  const t = useTranslations("tools.kinematics-calculator.form");
+  const { mode, tSolve, dSolve } = draft;
+  const solved = mode === "timeBased" ? tSolve : dSolve;
+  const order: NumericKey[] = mode === "timeBased" ? ["v0", "v", "a", "t"] : ["v0", "v", "a", "dx"];
+  const fields = order.filter((k) => k !== solved);
 
   return (
-    <SectionCard title={t_("inputTitle")}>
+    <SectionCard title={t("inputTitle")}>
       <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("scenarioPresetsLabel")}</span>
-        <div className="flex flex-wrap gap-2">
-          {scenarioKeys.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => onScenarioPreset(key)}
-              className="rounded-lg border border-zinc-300 bg-transparent px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-blue-400 hover:text-blue-600 sm:text-sm dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
-            >
-              {tScenarios(key)}
-            </button>
-          ))}
-        </div>
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
+        <KinematicsModeTabs mode={mode} onModeChange={(m) => onChange("mode", m)} />
       </div>
 
       <div className="mb-5">
-        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t_("solveForLabel")}</span>
+        <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("solveForLabel")}</span>
         {mode === "timeBased" ? (
-          <KinematicsSolveForTabs values={KINEMATICS_SOLVE_FOR_TIME} active={solveForTime} onChange={onSolveForTimeChange} translationKey="solveForTime" />
+          <KinematicsSolveForTabs values={KINEMATICS_SOLVE_FOR_TIME} active={tSolve} onChange={(v) => onChange("tSolve", v)} translationKey="solveForTime" />
         ) : (
-          <KinematicsSolveForTabs values={KINEMATICS_SOLVE_FOR_DISTANCE} active={solveForDistance} onChange={onSolveForDistanceChange} translationKey="solveForDistance" />
+          <KinematicsSolveForTabs values={KINEMATICS_SOLVE_FOR_DISTANCE} active={dSolve} onChange={(v) => onChange("dSolve", v)} translationKey="solveForDistance" />
         )}
       </div>
 
-      <KinematicsVariablesDiagram
-        solved={solved}
-        order={variableOrder}
-        labels={{ v0: "v₀", v: "v", a: "a", t: "t", dx: "Δx" }}
-        values={{
-          v0: solved === "v0" ? "?" : v0 || "–",
-          v: solved === "v" ? "?" : v || "–",
-          a: solved === "a" ? "?" : a || "–",
-          t: solved === "t" ? "?" : t || "–",
-          dx: solved === "dx" ? "?" : dx || "–",
-        }}
-        caption={t_("variablesCaption")}
-      />
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+        {fields.map((key) => (
+          <ToolInput
+            key={key}
+            label={t(`${key}Label`)}
+            type="text"
+            inputMode="decimal"
+            placeholder={t(`${key}Placeholder`)}
+            value={draft[key]}
+            onChange={(e) => onChange(key, e.target.value)}
+          />
+        ))}
 
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
-        {mode === "timeBased" ? (
-          <>
-            {solveForTime !== "v0" && v0Field}
-            {solveForTime !== "v" && vField}
-            {solveForTime !== "a" && aField}
-            {solveForTime !== "t" && tField}
-          </>
-        ) : (
-          <>
-            {solveForDistance !== "v0" && v0Field}
-            {solveForDistance !== "v" && vField}
-            {solveForDistance !== "a" && aField}
-            {solveForDistance !== "dx" && dxField}
-          </>
-        )}
-
-        <div className="flex flex-wrap gap-4">
-          <ToolButton type="submit">{t_("calculate")}</ToolButton>
-          <button
-            type="button"
-            onClick={onClear}
-            className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
-          >
-            {t_("clear")}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={onClear}
+          className="rounded-xl border border-zinc-300 px-6 py-3 font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+        >
+          {t("clear")}
+        </button>
       </form>
     </SectionCard>
   );

@@ -1,29 +1,22 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { KinematicsCalculator as KinematicsCalculatorTool, type KinematicsCalculatorOutput } from "@tooloralabs/tools";
 
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
 import KinematicsInputPanel from "./KinematicsInputPanel";
 import KinematicsResult from "./KinematicsResult";
 import KinematicsQuickReference from "./KinematicsQuickReference";
-import KinematicsModeTabs from "./KinematicsModeTabs";
-import KinematicsGForceCard from "./KinematicsGForceCard";
 import KinematicsReferenceTable from "./KinematicsReferenceTable";
-import type { KinematicsMode, KinematicsSolveForDistance, KinematicsSolveForTime } from "./types";
-
-const tool = new KinematicsCalculatorTool();
+import { KIN_DEFAULTS, KinLiveProvider, type KinDraft } from "./KinLiveContext";
+import type { KinematicsMode } from "./types";
 
 const RELATED_TOOLS = ["force-calculator", "projectile-motion-calculator", "energy-work-power-calculator", "pace-calculator"];
 
-const DEFAULTS = { v0: "0", v: "10", a: "2", t: "5", dx: "25" };
-
-type Inputs = typeof DEFAULTS;
+type Inputs = Pick<KinDraft, "v0" | "v" | "a" | "t" | "dx">;
 
 // Real, mode-specific everyday scenarios, each internally consistent with
 // v = v0 + at (timeBased) or v² = v0² + 2a·dx (distanceBased).
@@ -40,41 +33,22 @@ const SCENARIOS_BY_MODE: Record<KinematicsMode, Record<string, Partial<Inputs>>>
   },
 };
 
-const EMPTY_RESULT: KinematicsCalculatorOutput = { error: null, v0: 0, v: 0, a: 0, t: 0, dx: 0, dxAvailable: false, tAvailable: false };
+const EXAMPLES = (Object.keys(SCENARIOS_BY_MODE) as KinematicsMode[]).flatMap((mode) =>
+  Object.entries(SCENARIOS_BY_MODE[mode]).map(([key, values]) => ({ id: `${mode}:${key}`, mode, key, values })),
+);
 
-function computeResult(mode: KinematicsMode, solveForTime: KinematicsSolveForTime, solveForDistance: KinematicsSolveForDistance, i: Inputs): KinematicsCalculatorOutput {
-  const output = tool.execute(
-    {
-      mode,
-      solveForTime,
-      solveForDistance,
-      v0: parseLocalizedNumber(i.v0) || 0,
-      v: parseLocalizedNumber(i.v) || 0,
-      a: parseLocalizedNumber(i.a) || 0,
-      t: parseLocalizedNumber(i.t) || 0,
-      dx: parseLocalizedNumber(i.dx) || 0,
-    },
-    { locale: "en-US" }
-  );
-  return output.data;
+function exampleDetail(mode: KinematicsMode, v: Partial<Inputs>): string {
+  return mode === "timeBased" ? `v₀ = ${v.v0} m/s · a = ${v.a} m/s² · t = ${v.t} s` : `v₀ = ${v.v0} m/s · a = ${v.a} m/s² · Δx = ${v.dx} m`;
 }
 
 export default function KinematicsCalculator({ education }: { education: ReactNode }) {
   const tRoot = useTranslations("tools.kinematics-calculator");
   const tNav = useTranslations("tools.kinematics-calculator.nav");
+  const tScenarios = useTranslations("tools.kinematics-calculator.form.scenarios");
+  const tCommon = useTranslations("common.live3d");
 
-  const [mode, setMode] = useState<KinematicsMode>("timeBased");
-  const [solveForTime, setSolveForTime] = useState<KinematicsSolveForTime>("v");
-  const [solveForDistance, setSolveForDistance] = useState<KinematicsSolveForDistance>("v");
-  const [v0, setV0] = useState(DEFAULTS.v0);
-  const [v, setV] = useState(DEFAULTS.v);
-  const [a, setA] = useState(DEFAULTS.a);
-  const [t, setT] = useState(DEFAULTS.t);
-  const [dx, setDx] = useState(DEFAULTS.dx);
-
-  const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
-  const [result, setResult] = useState<KinematicsCalculatorOutput>(() => computeResult("timeBased", "v", "v", DEFAULTS));
-  const [hasCalculated, setHasCalculated] = useState(true);
+  const [draft, setDraft] = useState<KinDraft>(KIN_DEFAULTS);
+  const [activeExample, setActiveExample] = useState<string | null>(null);
 
   const [navBarVisible, setNavBarVisible] = useState(false);
   const headerSentinelRef = useRef<HTMLDivElement>(null);
@@ -112,58 +86,21 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
     };
   }, []);
 
-  function currentInputs(): Inputs {
-    return { v0, v, a, t, dx };
+  function setDim<K extends keyof KinDraft>(key: K, value: KinDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    if (key !== "mode") setActiveExample(null);
   }
 
-  function handleCalculate(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setResult(computeResult(mode, solveForTime, solveForDistance, currentInputs()));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(v0, v, a, t, dx));
-  }
-
-  function handleModeChange(next: KinematicsMode) {
-    setMode(next);
-    setResult(computeResult(next, solveForTime, solveForDistance, currentInputs()));
-    setHasCalculated(true);
-  }
-
-  function handleSolveForTimeChange(next: KinematicsSolveForTime) {
-    setSolveForTime(next);
-    setResult(computeResult(mode, next, solveForDistance, currentInputs()));
-    setHasCalculated(true);
-  }
-
-  function handleSolveForDistanceChange(next: KinematicsSolveForDistance) {
-    setSolveForDistance(next);
-    setResult(computeResult(mode, solveForTime, next, currentInputs()));
-    setHasCalculated(true);
-  }
-
-  function handleScenarioPreset(key: string) {
-    const preset = SCENARIOS_BY_MODE[mode][key];
-    if (!preset) return;
-    const next = { ...currentInputs(), ...preset };
-    if (preset.v0 !== undefined) setV0(preset.v0);
-    if (preset.v !== undefined) setV(preset.v);
-    if (preset.a !== undefined) setA(preset.a);
-    if (preset.t !== undefined) setT(preset.t);
-    if (preset.dx !== undefined) setDx(preset.dx);
-    setResult(computeResult(mode, solveForTime, solveForDistance, next));
-    setHasCalculated(true);
-    setDigitStyle(resolveDigitStyle(...Object.values(next)));
+  function handlePick(id: string) {
+    const ex = EXAMPLES.find((e) => e.id === id);
+    if (!ex) return;
+    setDraft((d) => ({ ...d, ...ex.values, mode: ex.mode }));
+    setActiveExample(id);
   }
 
   function handleClear() {
-    setV0(DEFAULTS.v0);
-    setV(DEFAULTS.v);
-    setA(DEFAULTS.a);
-    setT(DEFAULTS.t);
-    setDx(DEFAULTS.dx);
-    setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    setDraft(KIN_DEFAULTS);
+    setActiveExample(null);
   }
 
   const navItems = [
@@ -173,57 +110,41 @@ export default function KinematicsCalculator({ education }: { education: ReactNo
   ];
 
   return (
-    <>
+    <KinLiveProvider value={{ dims: draft, setDim }}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
-            <div className="flex flex-col gap-3">
-              <KinematicsInputPanel
-                mode={mode}
-                solveForTime={solveForTime}
-                onSolveForTimeChange={handleSolveForTimeChange}
-                solveForDistance={solveForDistance}
-                onSolveForDistanceChange={handleSolveForDistanceChange}
-                v0={v0}
-                onV0Change={setV0}
-                v={v}
-                onVChange={setV}
-                a={a}
-                onAChange={setA}
-                t={t}
-                onTChange={setT}
-                dx={dx}
-                onDxChange={setDx}
-                scenarioKeys={Object.keys(SCENARIOS_BY_MODE[mode])}
-                onScenarioPreset={handleScenarioPreset}
-                onCalculate={handleCalculate}
-                onClear={handleClear}
+            <div className="flex flex-col gap-6 lg:h-full">
+              <KinematicsInputPanel draft={draft} onChange={setDim} onClear={handleClear} />
+              <QuickExamplesCard
+                title={tCommon("quickExamples")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={handlePick}
+                examples={EXAMPLES.map((e) => ({ id: e.id, label: tScenarios(e.key), detail: exampleDetail(e.mode, e.values) }))}
               />
             </div>
           }
-          result={
-            <div className="flex flex-col gap-3">
-              <KinematicsResult hasCalculated={hasCalculated} result={result} mode={mode} solveForTime={solveForTime} solveForDistance={solveForDistance} digitStyle={digitStyle} />
-              <KinematicsModeTabs mode={mode} onModeChange={handleModeChange} />
-              <KinematicsGForceCard acceleration={result.a} digitStyle={digitStyle} />
-              <KinematicsReferenceTable />
-            </div>
-          }
+          result={<KinematicsResult />}
           sidebar={
-            <RelatedToolsSidebar currentSlug="kinematics-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={tRoot("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="kinematics-calculator" category="physics" relatedList={RELATED_TOOLS} relatedListTitle={tRoot("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="kinematics-calculator" />
               <SectionNav items={navItems} visible={navBarVisible} />
               <KinematicsQuickReference />
+              <KinematicsReferenceTable />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </KinLiveProvider>
   );
 }

@@ -10191,10 +10191,7 @@
         "tPlaceholder": "p. ex. 5",
         "dxLabel": "Déplacement Δx (m)",
         "dxPlaceholder": "p. ex. 25",
-        "calculate": "Calculer",
         "clear": "Effacer",
-        "variablesCaption": "La grandeur que vous calculez est mise en évidence.",
-        "scenarioPresetsLabel": "Essayer un scénario réel :",
         "scenarios": {
           "carAccelerating": "Voiture accélérant depuis l'arrêt",
           "planeTakeoff": "Avion au décollage",
@@ -10216,49 +10213,14 @@
         "t": "t",
         "dx": "Δx",
         "undefined": "indéfini",
-        "diagramStart": "Départ",
-        "diagramEnd": "Arrivée",
-        "diagramCaption": "Flèches de vitesse à l'échelle de v₀ (départ) et v (arrivée) ; la direction s'inverse pour les valeurs négatives.",
-        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de cinématique.",
-        "sentence": "La vitesse passe de {v0} m/s à {v} m/s au cours de ce mouvement.",
-        "vtXLabel": "Temps (t)",
-        "vtYLabel": "Vitesse (v)",
-        "vtAreaLabel": "Δx = {dx} m",
-        "vtCaption": "Vitesse en fonction du temps — l'aire ombrée sous la ligne équivaut au déplacement."
+        "sentence": "La vitesse passe de {v0} m/s à {v} m/s au cours de ce mouvement."
       },
       "education": {
         "intro": {
           "title": "Comprendre la Cinématique",
           "paragraph1": "La cinématique décrit le mouvement — position, vitesse et accélération — sans référence aux forces qui le provoquent. Pour le cas courant d'une accélération constante, cinq grandeurs sont liées : vitesse initiale (v₀), vitesse finale (v), accélération (a), temps (t) et déplacement (Δx). Connaître trois quelconques de ces cinq grandeurs détermine les deux autres, à l'aide de l'une des quatre équations standard selon les grandeurs connues.",
-          "diagram": {
-            "startLabel": "Départ",
-            "endLabel": "Arrivée",
-            "caption": "Un objet accélérant depuis le repos (v₀ = 0) jusqu'à 10 m/s — la flèche finale est plus longue car la vitesse finale est plus grande."
-          },
           "paragraph2": "Ce calculateur couvre deux types de problèmes courants. Lorsque la vitesse, l'accélération et le temps sont connus (mais pas le déplacement), il utilise v = v₀ + at et ses réarrangements — une algèbre linéaire pure, sans ambiguïté. Lorsque la vitesse, l'accélération et le déplacement sont connus (mais pas le temps) — le classique problème de « distance de freinage » ou « à quelle vitesse après cette distance » — il utilise v² = v₀² + 2aΔx, qui implique une racine carrée lors du calcul d'une vitesse.",
-          "paragraph3": "Le déplacement (Δx) diffère de la distance parcourue : le déplacement est le changement net de position et peut être négatif si un objet se retrouve en arrière de son point de départ, tandis que la distance est toujours positive et tient compte de la longueur totale du trajet, y compris tout retour en arrière. Ces équations à accélération constante utilisent le déplacement, et donnent la même réponse pour un mouvement rectiligne dans une seule direction, où les deux coïncident.",
-          "positionTime": {
-            "xLabel": "Temps (t)",
-            "yLabel": "Position (x)",
-            "caption": "La position en fonction du temps sous accélération constante est une parabole, car la position est l'intégrale d'une fonction de vitesse linéaire."
-          },
-          "speedGauge": {
-            "title": "À essayer : quelle est cette vitesse ?",
-            "intro": "Choisissez un objet en mouvement réel pour voir sa vitesse sur la jauge et la comparer à d'autres.",
-            "slow": "Lente",
-            "moderate": "Modérée",
-            "fast": "Rapide",
-            "verdict": "Un(e) {mover} se déplace à une vitesse {classification}.",
-            "distanceFact": "À cette vitesse, il parcourrait environ {distance} m en 10 secondes.",
-            "movers": {
-              "snail": "Escargot de jardin",
-              "walkingHuman": "Personne qui marche",
-              "runningHuman": "Personne qui court",
-              "carHighway": "Voiture sur autoroute",
-              "commercialJet": "Avion de ligne",
-              "speedOfSound": "Vitesse du son"
-            }
-          }
+          "paragraph3": "Le déplacement (Δx) diffère de la distance parcourue : le déplacement est le changement net de position et peut être négatif si un objet se retrouve en arrière de son point de départ, tandis que la distance est toujours positive et tient compte de la longueur totale du trajet, y compris tout retour en arrière. Ces équations à accélération constante utilisent le déplacement, et donnent la même réponse pour un mouvement rectiligne dans une seule direction, où les deux coïncident."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -10363,25 +10325,15 @@
           },
           "velocityTimeSection": {
             "title": "La Vitesse au Fil du Temps",
-            "xLabel": "Temps (t)",
-            "yLabel": "Vitesse (v)",
-            "paragraph": "Tracer la vitesse en fonction du temps à accélération constante donne toujours une ligne droite, et l'aire piégée entre cette ligne et l'axe du temps est exactement le déplacement parcouru.",
-            "caption": "Vitesse en fonction du temps — l'aire ombrée sous la ligne équivaut au déplacement."
+            "paragraph": "Tracer la vitesse en fonction du temps à accélération constante donne toujours une ligne droite, et l'aire piégée entre cette ligne et l'axe du temps est exactement le déplacement parcouru."
           },
           "variablesSection": {
             "title": "Cinq Grandeurs, Deux Équations",
-            "paragraph": "Le mouvement à accélération constante implique toujours cinq grandeurs liées — vitesse initiale, vitesse finale, accélération, temps et déplacement — et en connaître trois permet de calculer les deux autres.",
-            "caption": "La grandeur calculée est mise en évidence ; les autres sont connues."
+            "paragraph": "Le mouvement à accélération constante implique toujours cinq grandeurs liées — vitesse initiale, vitesse finale, accélération, temps et déplacement — et en connaître trois permet de calculer les deux autres."
           },
           "referenceSection": {
             "title": "L'Accélération en Termes Quotidiens",
-            "paragraph": "Un simple nombre en m/s² ne signifie pas grand-chose sans contexte — cette échelle place des accélérations courantes, du freinage doux au lancement d'une fusée, à côté de la gravité terrestre elle-même.",
-            "caption": "Comparaison des accélérations courantes, avec la gravité terrestre marquée (9,8 m/s²).",
-            "r1": "freinage de voiture",
-            "r2": "freinage brusque",
-            "r3": "chute de montagnes russes",
-            "r4": "gravité (g)",
-            "r5": "lancement de fusée"
+            "paragraph": "Un simple nombre en m/s² ne signifie pas grand-chose sans contexte — cette échelle place des accélérations courantes, du freinage doux au lancement d'une fusée, à côté de la gravité terrestre elle-même."
           }
         },
         "references": {
@@ -10390,6 +10342,103 @@
           "note": "L'historien des sciences Stillman Drake examine le développement par Galilée de la cinématique du mouvement accéléré, retraçant le raisonnement derrière les équations que ce calculateur applique encore près de quatre siècles plus tard.",
           "url": "https://doi.org/10.1119/1.1970872",
           "readOriginal": "Lire le Texte Original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Cette vue nécessite un mouvement résoluble qui avance dans le temps ; ajustez les valeurs ci-dessus.",
+          "motion": {
+            "title": "Labo du mouvement : voiture sur une piste",
+            "intro": "Le mouvement se joue en temps réel : regardez la voiture accélérer ou freiner pendant que sa droite de vitesse et sa courbe de position se tracent. Les curseurs modifient les données de la calculatrice.",
+            "aria": "Voiture animée sur une piste avec graphiques en direct de la vitesse et de la position en fonction du temps",
+            "slider": {
+              "v0": "Vitesse initiale",
+              "v": "Vitesse finale",
+              "a": "Accélération",
+              "t": "Temps",
+              "dx": "Déplacement"
+            },
+            "play": "Lecture",
+            "pause": "Pause",
+            "instant": "Instant actuel",
+            "velocity": "Vitesse v = v₀ + at",
+            "position": "Position x = v₀t + ½at²",
+            "end": "À la fin du mouvement",
+            "endNote": "Égal à v et Δx de la calculatrice."
+          },
+          "oddRule": {
+            "title": "Distance à chaque pas de temps égal",
+            "intro": "Le mouvement découpé en huit pas de temps égaux : chaque barre est la distance parcourue pendant ce pas. À accélération constante, les barres augmentent (ou diminuent) de la même quantité à chaque pas.",
+            "aria": "Diagramme en barres du déplacement pendant chacun de huit intervalles de temps égaux",
+            "axis": "rapport au premier pas",
+            "step": "Pas de temps",
+            "first": "Premier pas",
+            "last": "Dernier pas",
+            "difference": "Écart d'un pas au suivant",
+            "differenceNote": "Depuis le repos, les pas suivent la règle des nombres impairs de Galilée 1 : 3 : 5 : 7."
+          },
+          "equations": {
+            "title": "Quatre équations, un mouvement",
+            "intro": "Chaque équation standard avec les valeurs en direct substituées et les deux membres évalués : une solution correcte les vérifie toutes à la fois.",
+            "known": "Vitesse et accélération",
+            "time": "Temps",
+            "noTime": "indéfini (a = 0)",
+            "displacement": "Déplacement",
+            "agree": "Équations vérifiées",
+            "agreeNote": "Sans le temps, seule v² = v₀² + 2aΔx s'applique."
+          },
+          "trio": {
+            "title": "Moitié, même ou double du temps",
+            "intro": "Le même départ et la même accélération pendant la moitié, le même et le double du temps. La vitesse varie proportionnellement au temps ; le déplacement, non.",
+            "half": "Moitié du temps",
+            "current": "Votre temps",
+            "double": "Double du temps",
+            "halfRow": "La moitié du temps",
+            "currentRow": "Votre temps",
+            "doubleRow": "Le double du temps",
+            "ratio": "Rapport des déplacements",
+            "ratioNote": "Exactement 4 en partant du repos : x croît comme t²."
+          },
+          "zones": {
+            "title": "Quelle est la force de cette accélération ?",
+            "intro": "La valeur de l'accélération sur l'échelle de la calculatrice, comparée à la pesanteur terrestre (repère en pointillés).",
+            "aria": "Bande de zones colorées situant l'accélération entre douce, forte et extrême",
+            "magnitude": "Valeur de l'accélération",
+            "inG": "En multiples de g",
+            "to100": "Temps pour 0–100 km/h",
+            "zone": "Zone",
+            "zoneNote": "Douce sous 9,8 m/s², forte jusqu'à 20 m/s²."
+          },
+          "ranked": {
+            "title": "Votre vitesse maximale parmi des vitesses réelles",
+            "intro": "La plus grande vitesse atteinte pendant le mouvement, classée parmi des vitesses de référence réelles sur une échelle logarithmique.",
+            "you": "Votre mouvement (vitesse max.)",
+            "peak": "Vitesse maximale",
+            "kmh": "En km/h",
+            "vsSlower": "Comparée à {name}",
+            "vsFaster": "Plus lente que {name}",
+            "rank": "Rang (la plus rapide d'abord)"
+          },
+          "split": {
+            "title": "D'où vient le déplacement",
+            "intro": "Le déplacement se partage entre ce que couvrirait la seule vitesse initiale, v₀t, et ce que l'accélération ajoute ou retire, ½at² ; la barre grise est la distance totale parcourue.",
+            "aria": "Barres segmentées séparant le déplacement en v₀t et ½at², avec la longueur du trajet",
+            "path": "trajet",
+            "fromV0": "Dû à la vitesse initiale",
+            "fromA": "Dû à l'accélération",
+            "net": "Déplacement net",
+            "share": "Part due à l'accélération",
+            "turnNote": "Le mouvement s'inverse, donc le trajet dépasse |Δx|."
+          },
+          "timeline": {
+            "title": "Le mouvement en frise chronologique",
+            "intro": "Les moments clés du mouvement dans l'ordre, chacun avec son temps, sa vitesse et sa position.",
+            "start": "Départ",
+            "half": "Mi-temps",
+            "turning": "S'arrête et repart en arrière",
+            "kmh100": "Dépasse 100 km/h",
+            "end": "Fin",
+            "never": "non atteint"
+          }
         }
       },
       "gauge": {
@@ -10418,11 +10467,6 @@
       "relatedTools": {
         "title": "Outils de Physique Connexes"
       },
-      "gForceCard": {
-        "title": "En Force G",
-        "intro": "Exprimer l'accélération comme un multiple de la gravité terrestre (g) donne une idée intuitive de son intensité.",
-        "result": "Cette accélération équivaut à environ {g} fois la gravité terrestre (1 g)."
-      },
       "referenceTable": {
         "title": "Vitesses Courantes",
         "caption": "Vitesses réelles pour situer votre résultat.",
@@ -10436,6 +10480,28 @@
           "speedOfSound": "Vitesse du Son",
           "speedOfLight": "Vitesse de la Lumière"
         }
+      },
+      "live3d": {
+        "cardTitle": "Mouvement en 3D — pas de temps en direct",
+        "given": "donnée",
+        "groupKnown": "Données et résultat",
+        "initialVelocity": "Vitesse initiale v₀",
+        "finalVelocity": "Vitesse finale v",
+        "acceleration": "Accélération a",
+        "time": "Temps t",
+        "displacement": "Déplacement Δx",
+        "groupSteps": "Pas de temps (a = {a} m/s², constante)",
+        "groupDerived": "Mouvement dérivé",
+        "deltaV": "Variation de vitesse Δv",
+        "averageVelocity": "Vitesse moyenne",
+        "gForce": "Accélération en g",
+        "v0Kmh": "Vitesse initiale",
+        "vKmh": "Vitesse finale",
+        "pathLength": "Distance parcourue (trajet)",
+        "turningPoint": "Point de rebroussement (v = 0)",
+        "timeTo100": "0–100 km/h avec cette |a|",
+        "stoppingDistance": "Distance d'arrêt avec cette |a|",
+        "groupEquations": "Les quatre équations, vérifiées"
       }
     },
     "force-calculator": {
