@@ -16,12 +16,12 @@
 
 - **الحالة:** `apps/web/components/layout/ThemeToggle.tsx` موجود ومربوط بالـ Navbar، مع دعم `dark:` كامل عبر مكوّنات الموقع وحفظ تفضيل المستخدم.
 
-### 3. توسيع الفئات من 6 إلى 12 فئة
+### 3. توسيع الفئات من 6 إلى 12 فئة — ✅ تجاوَز الهدف الأصلي
 
-- **الوضع الحالي (محدَّث 2026-08-17):** 6 فئات معرّفة في `apps/web/data/categories.ts`: Calculators (16 أداة)، Developer Tools (5)، File Tools (4)، Financial Markets (3)، Converters (2)، Text Tools (1).
-- **ملاحظة:** فئة "AI Tools" كانت موجودة سابقًا لكن أُزيلت (2026-08-17) — كانت تحتوي أداة واحدة فقط (مولّد رمز QR) مصنَّفة فيها خطأً بلا أي علاقة فعلية بالذكاء الاصطناعي؛ نُقلت إلى Developer Tools مع بقية أدوات المطورين المشابهة (json-formatter، barcode-generator، password-generator، base64-tool). فئة "Financial Markets" أُضيفت لاحقًا (crypto-converter، forex-converter، commodities-tracker) ولم تكن موجودة وقت كتابة هذا القسم أول مرة.
-- **المطلوب:** 12 فئة إجمالًا — الإبقاء على الفئات الست الحالية، وإضافة: Image Tools, SEO Tools, Health Tools, Generators (وإعادة النظر إن كانت Unit Converters تستحق فئة مستقلة عن Converters العامة، بما أن كلاهما يخدم غرضًا متقاربًا).
-- **ملاحظة مهمة:** لا تُضاف فئة جديدة فارغة بدون أدوات فعلية فيها — الدرس المستفاد من تجربة "AI Tools" أعلاه.
+- **الوضع الحالي (محدَّث 2026-10-12):** **21 فئة** معرّفة في `apps/web/data/categories.ts` فعليًا، 16 منها فيها أدوات شغّالة: Health & Fitness (12)، Math (22)، Business (8)، Financial Calculators (7)، Chemistry (6)، Date & Time (5)، Dev Tools (6)، File Tools (6)، Physics (6)، Text Tools (6)، Markets (3)، Converters (3)، Fun & Entertainment (3)، AI Tools (3)، Student Tools (4)، Weather (1).
+- **5 فئات مُعرَّفة بلا أي أداة شغّالة بعد** (بذور لتوسّع رياضي/فيزيائي قادم، مرتبطة مباشرة بقائمة `comingSoon.ts` phase-1b): Algebra & Number Theory، Calculus & Analysis، Probability & Statistics، Geometry & Coordinate Math، Website Tools.
+- **ملاحظة تاريخية:** فئة "AI Tools" القديمة (مولّد رمز QR فقط) أُزيلت 2026-08-17 لعدم علاقتها الفعلية بالذكاء الاصطناعي، ثم **أُعيد إنشاء فئة AI Tools من جديد بمحتوى فعلي** (Text to Speech، Speech to Text، Spelling & Grammar Checker) — هذه مرة فئة حقيقية لا فئة فارغة.
+- **الدرس المستفاد (لا يزال سارياً):** لا تُضاف فئة جديدة فارغة بدون أدوات فعلية فيها إلا إذا كانت مربوطة بخطة توسّع موثّقة بـ`comingSoon.ts` كما هو حال الخمس الفئات أعلاه.
 
 ### 4. نظام "الأدوات الشائعة" (Popular Tools) بتقييمات نجوم وعدد استخدام
 
@@ -51,11 +51,11 @@
 
 ### 9. توسيع عدد الأدوات الفعلية
 
-- **الوضع الحالي (محدَّث 2026-08-17):**
-  - **31 أداة فعلية وشغّالة بالكامل، وكل واحدة منها بمستوى العمق الموسوعي الكامل** (above-the-fold + قسم تعليمي (education) + أمثلة محلولة + أسئلة شائعة + "خلف الأداة" (تاريخ وتطورات حديثة) + مسار أكاديمي بروابط جامعات حقيقية + مراجع) — لا توجد أي أداة "Coming Soon" أو أداة بمستوى مبسّط متبقية.
-  - موزَّعة على الفئات الست الحالية: Calculators (16 أداة)، Developer Tools (5)، File Tools (4)، Financial Markets (3)، Converters (2)، Text Tools (1).
-  - **مترجمة بالكامل إلى 6 لغات**: الإنجليزية، العربية، الألمانية، الإسبانية، الفرنسية، والهندية — كل أداة بمحتواها الموسوعي الكامل بكل لغة، بالإضافة لهيكل الموقع بالكامل (Navbar، Footer، الصفحة الرئيسية، الصفحات القانونية، صفحات الفئات، صفحة مقارنة الحاسبات المالية، صفحة الإمبيد) بنفس الست لغات، مع تحقق آلي من تطابق مفاتيح الترجمة 1:1 بين كل لغة وen.json.
-- **المطلوب:** توسيع الفئات الـ6 المتبقية من أصل 12 (Image Tools، SEO Tools، Finance Tools، Health Tools، Unit Converters كفئة مستقلة، Generators) بأدوات فعلية فيها — بنفس مستوى العمق الموسوعي المطبَّق على الـ31 الحالية من أول يوم، لا مجرد إضافة أسماء أدوات جديدة إلى `data/tools.ts`.
+- **الوضع الحالي (محدَّث 2026-10-12، تحقّق فعلي من `data/tools.ts` و`components/tools/`):**
+  - **101 أداة فعلية وشغّالة بالكامل**، كل واحدة بمستوى العمق الموسوعي الكامل (above-the-fold + قسم تعليمي + أمثلة محلولة + أسئلة شائعة + "خلف الأداة" + مسار أكاديمي + مراجع) — لا توجد أي أداة "Coming Soon" أو أداة بمستوى مبسّط متبقية ضمن الـ101.
+  - موزَّعة على 16 فئة شغّالة (أهمها Math بـ22 أداة وHealth & Fitness بـ12 وBusiness بـ8)؛ التفاصيل الكاملة بقسم 3 أعلاه.
+  - **مترجمة بالكامل إلى 6 لغات**: en/ar/de/es/fr/hi، مع تحقق آلي مؤكَّد (2026-10-12) أن مفاتيح الترجمة الست متطابقة 1:1 مع `en.json` بلا أي نقص أو زيادة.
+- **قائمة الأدوات القادمة الرسمية الآن هي `apps/web/data/comingSoon.ts`** (152 أداة مخطَّطة عبر 4 مراحل: phase-1، phase-1b، phase-2، phase-3)، لا القوائم القديمة أسفل هذا الملف — انظر قسم "خارطة طريق الأدوات القادمة" لتفاصيل كل مرحلة.
 
 ### 10. قيد مؤقت: نافذة الرسم البياني التاريخي بقسم السلع (Commodities)
 
@@ -73,9 +73,9 @@
 
 > **تاريخ التوثيق:** 2026-08-23. هذا القسم يوثّق الأدوات غير المكتملة أو المؤجَّلة عمدًا، بعد اكتمال دفعة الإطلاق النهائية (3 أدوات موسوعية جديدة: مولّد ألوان متناسقة، دمج/تقسيم PDF، ضاغط/فاكّ ضغط ZIP — الثلاثة بلا أي اعتماد على API خارجي). الهدف: مرجع ثابت لما تبقّى، بدل الاعتماد على الذاكرة.
 
-### من الدفعة الحالية غير المكتملة (دفعة الـ13 أداة الأصلية)
+### من الدفعة الحالية غير المكتملة (دفعة الـ13 أداة الأصلية) — ✅ الدفعة كاملة الآن (تحقّق 2026-10-12)
 
-تحقّقتُ من الحالة الفعلية عبر `git log` بتاريخ 2026-08-23: **5 من أصل 13 أداة اكتملت ودُفعت فعليًا لـ origin/main بنفس منهجية BMI الموسوعية الكاملة** (commits: `9224747`، `a34dbd9`، `53fd946`، `453d522`، `ab21a30`):
+تحقّقتُ من الحالة الفعلية عبر `data/tools.ts` بتاريخ 2026-10-12: **13 من 13 أداة اكتملت ودُفعت فعليًا لـ origin/main**. الخمسة الأولى اكتملت 2026-08-23 (commits: `9224747`، `a34dbd9`، `53fd946`، `453d522`، `ab21a30`):
 
 1. ✅ Affordable Loan Calculator (حاسبة القرض العكسية) — منجَزة
 2. ✅ Retirement Calculator (حاسبة التقاعد) — منجَزة
@@ -83,30 +83,28 @@
 4. ✅ Debt-to-Income Ratio Calculator (حاسبة نسبة الدين إلى الدخل) — منجَزة
 5. ✅ Ideal Weight Calculator (حاسبة الوزن المثالي) — منجَزة
 
-**8 أدوات متبقية من الدفعة الأصلية، لم يُبدأ العمل عليها إطلاقًا بعد** (لا يوجد أي كود جزئي أو صفحة نصف-منجَزة لأيٍّ منها — إما أداة كاملة بنفس عمق BMI أو لا شيء):
+**الـ8 أدوات المتبقية — كلها منجَزة الآن أيضًا** (موجودة فعليًا بـ`data/tools.ts`، مؤكَّد 2026-10-12):
 
-- **الصحة (Health & Fitness) — أداتان:**
-  - Target Heart Rate Calculator (حاسبة معدل ضربات القلب المستهدف)
-  - Sleep Calculator (حاسبة النوم)
-- **الرياضيات (Math & Science) — 3 أدوات:**
-  - Fraction Calculator (حاسبة الكسور)
-  - Probability Calculator (حاسبة الاحتمالات)
-  - Statistics Calculator (حاسبة الإحصاء: المتوسط والوسيط والمنوال والمدى)
-- **عامة (تُصنَّف لاحقًا ضمن الفئة الأنسب عند التنفيذ) — 3 أدوات:**
-  - GPA Calculator (حاسبة المعدل التراكمي)
-  - Random Number Generator (مولّد أرقام عشوائية)
-  - Fuel Cost Calculator (حاسبة تكلفة الوقود)
+- **الصحة (Health & Fitness):**
+  - ✅ Target Heart Rate Calculator (حاسبة معدل ضربات القلب المستهدف)
+  - ✅ Sleep Calculator (حاسبة النوم)
+- **الرياضيات (Math & Science):**
+  - ✅ Fraction Calculator (حاسبة الكسور)
+  - ✅ Probability Calculator (حاسبة الاحتمالات)
+  - ✅ Statistics Calculator (حاسبة الإحصاء: المتوسط والوسيط والمنوال والمدى)
+- **عامة:**
+  - ✅ GPA Calculator (حاسبة المعدل التراكمي) — بالاسم `GPA / Grade Calculator`
+  - ✅ Random Number Generator (مولّد أرقام عشوائية)
+  - ✅ Fuel Cost Calculator (حاسبة تكلفة الوقود)
 
 **ملاحظة مهمة:** بندان من القائمة الأصلية للـ15 أداة لم يُدرَجا هنا لأنهما حُسما بقرار صريح من المستخدم قبل البدء بالتنفيذ (عبر AskUserQuestion)، وليسا "أدوات مؤجَّلة": General Loan Calculator تحوّل إلى توسيع الأداة الموجودة `loan-calculator` (منجَز، commit `9d05745`)، وSavings Calculator أُلغي بالكامل لأن Compound Interest Calculator الحالية تغطي نفس الحاجة فعليًا.
 
 ### أدوات مجانية إضافية بلا تكلفة API (يمكن تنفيذها في أي وقت لاحق)
 
-هذه أدوات جديدة (خارج قائمة الـ13 الأصلية) صالحة للتنفيذ بنفس منهجية BMI الموسوعية الكاملة متى ما ناسب الجدول، لأنها لا تحتاج أي مفتاح API أو اتصال خارجي — معالجة محلية بالكامل داخل متصفح الزائر، تمامًا مثل الأدوات الثلاث الأخيرة المُطلَقة:
-
-- **حاسبة تقويم الحمل الأسبوعي** (Pregnancy Week-by-Week Calculator) — حساب خالص من تاريخ آخر دورة أو تاريخ الإخصاب، بلا أي API.
-- **مولّد أسماء عشوائي** (Random Name Generator) — لأسماء المشاريع والنطاقات (domains)، توليد محلي من قوائم/أنماط مضمَّنة بالكود، بلا أي API.
-- **حاسبة نسبة الذهب** (Golden Ratio Calculator) — حساب رياضي خالص (φ ≈ 1.618)، بلا أي API.
-- **حاسبة وقت القراءة** (Reading Time Calculator) — حساب من عدد الكلمات ومعدل قراءة قياسي، بلا أي API.
+- ✅ **حاسبة تقويم الحمل الأسبوعي** (Pregnancy Week-by-Week Calculator) — منجَزة، شغّالة بالاسم `Pregnancy Calculator` (slug: `pregnancy-calculator`).
+- ✅ **حاسبة وقت القراءة** (Reading Time Calculator) — منجَزة، شغّالة.
+- ⏳ **مولّد أسماء عشوائي** (Random Name Generator) — لا يزال مؤجَّلاً، موجود بـ`comingSoon.ts` phase-1 (`random-name-generator`).
+- ⏳ **حاسبة نسبة الذهب** (Golden Ratio Calculator) — لا يزال مؤجَّلاً، موجود بـ`comingSoon.ts` phase-1 (`golden-ratio-calculator`).
 
 ### أدوات تحتاج تكلفة API مستمرة (تُنفَّذ فقط بعد تحقيق دخل حقيقي من الموقع)
 
@@ -148,23 +146,27 @@
 - كل منطق التحقق (validation) اللي أضفناه اليوم بحدود الحاسبات السبع موجود بالكامل داخل `apps/web/components/tools/*` — مو داخل `packages/tools`. الحزمة المشتركة نفسها ما فيها أي حدود تحقق مكتوبة، فقط التنفيذ الحسابي الخالص.
 - **ملاحظة إضافية مهمة:** ملف `tsconfig.base.json` (اللي ترثه الحزم الثلاث) يحدد `"lib": ["ES2022"]` فقط — بدون `"DOM"`. يعني حتى لو حاول أحد بالمستقبل يستخدم `window`/`document` بالخطأ داخل هذي الحزم، TypeScript نفسه بيرفض يبني الكود لأن أنواع DOM غير معرّفة أصلًا بهذا الإعداد. هذا قيد مفروض تلقائيًا على مستوى الأدوات، مو بس اتفاق شفهي.
 
-## خارطة طريق الأدوات القادمة (تحديث 2026-09-04)
+## خارطة طريق الأدوات القادمة (تحديث 2026-09-04، أُعيد التحقق منها 2026-10-12)
 
 > يوثّق هذا القسم تحديدًا الأدوات الرياضية المخطَّطة القادمة، بعد فحص فعلي للأدوات الحالية لتفادي أي تكرار، بالإضافة لحالة الدفعة الأخيرة من الأدوات المنجزة على جهاز اللينكس.
 
-### أدوات رياضية مخطَّطة (25 أداة، مرتّبة من الأسهل للأصعب)
+### قسما Math وPhysics — ✅ منجَزان كقسمين قائمين بذاتهما (تحديث 2026-10-12)
 
-**المستوى 1 — الأسهل:** GCF & LCM Calculator, Prime Factorization Calculator, Ratio & Proportion Calculator, Exponents & Powers Calculator, Number Base Converter (Binary/Octal/Decimal/Hex)
+منذ كتابة هذا القسم أول مرة (2026-09-04) لم يكن لدى الموقع فئتا "Math" أو "Physics" مستقلتين أصلًا. الآن كلاهما فئة حقيقية قائمة في `data/categories.ts` بأدوات فعلية شغّالة بعمق موسوعي كامل ومؤشرات 3D تفاعلية حية (`tool-ui/three/*`): **Math بـ22 أداة** (GCF & LCM، Triangle Calculator، Probability، Statistics، Matrix، Vector، Graphing، Circle، Standard Deviation، Mean/Median/Mode/Range، Percentage، Multiplication Table، Notepad، Random Number Generator، وغيرها) و**Physics بـ6 أدوات** (Density، Ohm's Law، Energy/Work/Power، Kinematics، Force & Newton's Law، Projectile Motion). القائمة التفصيلية أدناه (25 أداة مخطَّطة) كانت الخطة الأصلية الضيّقة لهذين القسمين؛ **القائمة الرسمية الحالية والأوسع بكثير** للتوسّع الرياضي/الفيزيائي/الكيميائي القادم هي `comingSoon.ts` phase-1b (82 أداة: Algebra & Number Theory، Calculus & Analysis، Probability & Statistics، Geometry & Coordinate Math، Physics، Chemistry) — راجعها هي، لا القائمة التالية.
 
-**المستوى 2 — سهل-متوسط:** Pythagorean Theorem Calculator, Triangle Angle Calculator, Trigonometry Calculator (SOH-CAH-TOA), Slope & Distance Formula Calculator, Arithmetic & Geometric Sequence Calculator, Permutations & Combinations Calculator, Basic Probability Calculator
+### أدوات رياضية مخطَّطة (25 أداة، مرتّبة من الأسهل للأصعب) — جزئيًا منجَزة، القائمة الأشمل الآن بـ`comingSoon.ts` phase-1b
 
-**المستوى 3 — متوسط:** Simple Pendulum Period Calculator, Torque Calculator, Wave Speed/Frequency/Wavelength Calculator, Half-Life & Radioactive Decay Calculator, Percent Composition & Empirical Formula Calculator, Boyle's & Charles's Law Calculator, System of Linear Equations Solver, Complex Numbers Calculator
+**المستوى 1 — الأسهل:** ✅ GCF & LCM Calculator (منجَزة)، Prime Factorization Calculator, Ratio & Proportion Calculator, Exponents & Powers Calculator, Number Base Converter (Binary/Octal/Decimal/Hex)
 
-**المستوى 4 — الأصعب:** Limits Calculator, Advanced Derivative Calculator (امتداد حقيقي لوضع derivative المحدود في Step-by-Step Math Solver — دوال مثلثية/أسية/سلسلة، وليس تكرارًا)، Integral Calculator, Logarithm & Exponential Equation Solver, Binomial Theorem/Series Expansion Calculator
+**المستوى 2 — سهل-متوسط:** Pythagorean Theorem Calculator, ✅ Triangle Angle Calculator (منجَزة تحت اسم `Triangle Calculator`، تغطي حل المثلث بالزوايا والأضلاع معًا)، Trigonometry Calculator (SOH-CAH-TOA) (لا تزال مؤجَّلة، `comingSoon.ts` phase-1)، Slope & Distance Formula Calculator, Arithmetic & Geometric Sequence Calculator, Permutations & Combinations Calculator, ✅ Basic Probability Calculator (منجَزة تحت اسم `Probability Calculator`)
+
+**المستوى 3 — متوسط:** Simple Pendulum Period Calculator, Torque Calculator, Wave Speed/Frequency/Wavelength Calculator, Half-Life & Radioactive Decay Calculator, Percent Composition & Empirical Formula Calculator, Boyle's & Charles's Law Calculator, System of Linear Equations Solver, Complex Numbers Calculator (كل بنود هذا المستوى لا تزال غير منجَزة؛ لم تُشاهَد في `tools.ts` ولا `comingSoon.ts` الحاليين بهذه الأسماء تحديدًا)
+
+**المستوى 4 — الأصعب:** Limits Calculator, Advanced Derivative Calculator (امتداد حقيقي لوضع derivative المحدود في Step-by-Step Math Solver — دوال مثلثية/أسية/سلسلة، وليس تكرارًا)، Integral Calculator, Logarithm & Exponential Equation Solver, Binomial Theorem/Series Expansion Calculator (كل بنود هذا المستوى لا تزال غير منجَزة)
 
 ### أدوات إضافية معتمدة
 
-- **Pace Calculator** (Health & Fitness) — قيد البناء من اللينكس: 4 أوضاع (Pace/Time/Distance, Multipoint, Converter, Finish Time).
+- ✅ **Pace Calculator** (Health & Fitness) — منجَزة (4 أوضاع: Pace/Time/Distance, Multipoint, Converter, Finish Time).
 
 ### أدوات منافسة تطبيقات مدفوعة (منجزة من اللينكس، رُفعت لاحقًا لمعايير الجودة الكاملة من الماك)
 
@@ -173,3 +175,11 @@ Step-by-Step Math Solver ✅، Graphing Calculator ✅، Notepad Calculator ✅
 ### أدوات هندسية (منجزة من اللينكس، رُفعت لاحقًا لمعايير الجودة الكاملة من الماك)
 
 Area Calculator ✅، Surface Area Calculator ✅، Volume Calculator ✅
+
+### فرع أرشيفي غير مكتمل: `wip/scientific-notation-rebuild`
+
+فرع `origin/wip/scientific-notation-rebuild` هو **أرشيف لعمل غير مكتمل** على إعادة بناء Scientific Notation Converter، ولم يُدمَج بـ`main`. الأداة الحالية الشغّالة فعليًا على `main` (`scientific-notation-converter`) مستقلة عنه وكاملة بذاتها. لا يُعتمَد على هذا الفرع ولا يُدمَج دون مراجعة صريحة لأنه قد يحتوي كودًا جزئيًا أو تجريبيًا فقط.
+
+---
+
+**تحديث 2026-10-12 — ما استُجدّ منذ 2026-10-09:** دفعة كبيرة من العمل دُفعت لـ`main` خلال هذه الفترة: (1) **إعادة بناء أدوات الأسواق المالية** (financial-markets) — Crypto Converter بتصميم جديد كامل (رسم شموع OHLC بـ9 نطاقات زمنية، حلقات هيمنة، مؤشر الخوف والطمع، سيناريو الـhalving)، Forex Converter وCommodities Tracker بتصميم سوق معتمد ومؤشرات بيانات حية إضافية؛ (2) **Batch Invoice Calculator** أداة جديدة كاملة (فوترة دفعية مع تصدير CSV/Excel و12 مؤشر بيانات حية)؛ (3) **اكتمال قسم Math** عمليًا — موجة إعادة بناء شملت Multiplication Table Generator وNotepad Calculator وRandom Number Generator وMatrix وVector وGraphing وCircle وGCF & LCM وProbability وStatistics/Significant Figures/Step-by-Step Solver وArea/Surface Area/Volume وTriangle Calculator، كلها بجداول حية ومؤشرات 3D تفاعلية (`tool-ui/three/*`)؛ (4) **اكتمال قسم Physics** عمليًا — Projectile Motion وForce وEnergy/Work/Power وKinematics وOhm's Law وDensity، بنفس منهجية الجداول الحية والمشاهد 3D. راجع قسمي "Math وPhysics" و"توسيع عدد الأدوات الفعلية" أعلاه للتفاصيل الكاملة والأرقام المحدَّثة.

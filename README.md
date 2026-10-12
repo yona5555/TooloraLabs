@@ -1,7 +1,7 @@
 # TooloraLabs
 
 A monorepo platform for free online calculators, converters, and generators —
-built for quality and long-term scale rather than raw quantity. 31 tools,
+built for quality and long-term scale rather than raw quantity. 101 tools,
 each with full encyclopedic-depth content, live in 6 languages.
 
 ## Structure
@@ -10,6 +10,10 @@ each with full encyclopedic-depth content, live in 6 languages.
 - `packages/core` — Tool execution engine, registry, pipeline, contracts
 - `packages/sdk` — Tool-building SDK: builders, validators, plugins
 - `packages/tools` — Actual tool implementations (calculators, converters, generators)
+
+The working rules Claude Code follows on this repo live in `CLAUDE.md`
+(always loaded) and `.claude/rules/` (path-scoped detail files for i18n,
+visuals, live data, packages, and testing).
 
 ## Tech Stack
 
@@ -45,15 +49,24 @@ See [SECURITY-NOTES.md](./SECURITY-NOTES.md) for accepted npm audit risks
 
 ## Status
 
-- **31 tools** live, each connected to `packages/core`/`packages/sdk` where
+- **101 tools** live, each connected to `packages/core`/`packages/sdk` where
   applicable, with full encyclopedic-depth content (above-the-fold UI +
   education section, worked examples, FAQ, "behind the tool" history, and
-  academic references) — no "Coming Soon" placeholders remain.
+  academic references).
 - **6 languages** fully translated end to end: English, Arabic, German,
   Spanish, French, and Hindi — both the site chrome (navbar, footer,
-  homepage, legal pages, category pages) and every individual tool page.
-- Organized into 6 categories: Calculators, Converters, Developer Tools,
-  Text Tools, File Tools, Financial Markets.
+  homepage, legal pages, category pages) and every individual tool page,
+  with an automated check that all 6 locale files share the same keys as
+  `en.json`.
+- Organized into 21 categories in `apps/web/data/categories.ts`: Finance,
+  Business, Markets, Math, Physics, Chemistry, Converters, AI Tools, Dev
+  Tools, File Tools, Text Tools, Student Tools, Health & Fitness, Date &
+  Time, Fun & Entertainment, Weather, Website Tools, Algebra & Number
+  Theory, Calculus & Analysis, Probability & Statistics, and Geometry &
+  Coordinate Math. The last 5 are seeded for an upcoming math/physics/
+  chemistry expansion and have no shipped tools yet.
+- A separate "Coming Soon" roadmap (`apps/web/data/comingSoon.ts`, 4
+  phases) lists 152 planned-but-unbuilt tools shown on `/coming-soon`.
 - Embeddable widget (`/embed/[slug]` + the embed-tools docs page) and the
   financial-calculators comparison page are both live.
 - CI (lint, typecheck, test, build) runs on every push to `main` and is
