@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ChemicalEquationBalancer as ChemicalEquationBalancerTool, type ChemicalEquationBalancerOutput } from "@tooloralabs/tools";
 
@@ -8,11 +8,13 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { GlassPage } from "@/components/tool-ui/glass/GlassPrimitives";
 import BalancerInputPanel from "./BalancerInputPanel";
 import BalancerResult from "./BalancerResult";
 import BalancerQuickReference from "./BalancerQuickReference";
 import BalancerCoefficientSumCard from "./BalancerCoefficientSumCard";
 import BalancerReferenceTable from "./BalancerReferenceTable";
+import { REACTIONS, reactionIndex } from "./chemMath";
 
 const tool = new ChemicalEquationBalancerTool();
 
@@ -96,6 +98,16 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
     setHasCalculated(true);
   }
 
+  // The Result card's reaction rail writes its reaction into the equation field and balances it.
+  function handleSetReaction(i: number) {
+    const next = REACTIONS[i]?.equation;
+    if (!next) return;
+    setEquation(next);
+    setDigitStyle(resolveDigitStyle(next));
+    setResult(computeResult(next));
+    setHasCalculated(true);
+  }
+
   function handleClear() {
     setEquation(DEFAULT_EQUATION);
     setDigitStyle(resolveDigitStyle(DEFAULT_EQUATION));
@@ -109,11 +121,23 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
-  return (
+  const sideCards = (
     <>
+      <BalancerCoefficientSumCard terms={result.terms} />
+      <BalancerReferenceTable />
+    </>
+  );
+
+  return (
+    <GlassPage>
+      {/* Inter everywhere on this page; drag-handle rims use the shared line token so they keep ≥3:1 in light mode. */}
+      <div data-chem-page style={{ fontFamily: "var(--glass-font)", ["--glass-handle-border" as string]: "var(--ph-line)" } as CSSProperties}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-3">
               <BalancerInputPanel
@@ -124,17 +148,18 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
+              {/* Desktop: under the input card (keeps the columns flush). Phone: after the Result card. */}
+              <div className="hidden flex-col gap-3 lg:flex">{sideCards}</div>
             </div>
           }
           result={
-            <div className="flex flex-col gap-3">
-              <BalancerResult hasCalculated={hasCalculated} result={result} digitStyle={digitStyle} />
-              <BalancerCoefficientSumCard terms={result.terms} />
-              <BalancerReferenceTable />
+            <div className="flex flex-col gap-3 lg:h-full">
+              <BalancerResult hasCalculated={hasCalculated} result={result} digitStyle={digitStyle} reactionIndex={reactionIndex(equation)} onSetReaction={handleSetReaction} />
+              <div className="flex flex-col gap-3 lg:hidden">{sideCards}</div>
             </div>
           }
           sidebar={
-            <RelatedToolsSidebar currentSlug="chemical-equation-balancer" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="chemical-equation-balancer" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
@@ -147,6 +172,7 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
       </div>
 
       {education}
-    </>
+      </div>
+    </GlassPage>
   );
 }

@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import BalancerEquationStructureDiagram from "./BalancerEquationStructureDiagram";
 
 type BalancerInputPanelProps = {
   equation: string;
@@ -15,19 +14,10 @@ type BalancerInputPanelProps = {
   onClear: () => void;
 };
 
-function countTerms(equation: string): { reactants: number; products: number } {
-  const arrowMatch = equation.match(/->|-->|=|→/);
-  if (!arrowMatch) return { reactants: 0, products: 0 };
-  const left = equation.slice(0, arrowMatch.index);
-  const right = equation.slice((arrowMatch.index ?? 0) + arrowMatch[0].length);
-  const count = (side: string) => side.split("+").map((s) => s.trim()).filter((s) => s.length > 0).length;
-  return { reactants: count(left), products: count(right) };
-}
 
 export default function BalancerInputPanel({ equation, onEquationChange, scenarioKeys, onScenarioPreset, onCalculate, onClear }: BalancerInputPanelProps) {
   const t = useTranslations("tools.chemical-equation-balancer.form");
   const tScenarios = useTranslations("tools.chemical-equation-balancer.form.scenarios");
-  const { reactants, products } = countTerms(equation);
 
   return (
     <SectionCard title={t("inputTitle")}>
@@ -47,15 +37,7 @@ export default function BalancerInputPanel({ equation, onEquationChange, scenari
         </div>
       </div>
 
-      <BalancerEquationStructureDiagram
-        reactantCount={reactants}
-        productCount={products}
-        reactantsLabel={t("structureReactants", { count: reactants })}
-        productsLabel={t("structureProducts", { count: products })}
-        caption={t("structureCaption")}
-      />
-
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
         <ToolInput
           label={t("equationLabel")}
           hint={t("equationHint")}

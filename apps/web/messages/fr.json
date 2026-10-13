@@ -13617,9 +13617,6 @@
         "equationPlaceholder": "ex. Fe + O2 -> Fe2O3",
         "calculate": "Calculer",
         "clear": "Effacer",
-        "structureReactants": "{count, plural, one {# réactif} other {# réactifs}}",
-        "structureProducts": "{count, plural, one {# produit} other {# produits}}",
-        "structureCaption": "Comptage des termes en direct pendant la saisie — se met à jour même avant que l'équation ne soit équilibrée.",
         "scenarioPresetsLabel": "Essayer une réaction réelle :",
         "scenarios": {
           "methaneCombustion": "Combustion du Méthane",
@@ -13639,52 +13636,14 @@
         "reactants": "Réactifs",
         "products": "Produits",
         "emptyStateMessage": "Saisissez une équation et appuyez sur Calculer pour l'équilibrer.",
-        "atomBalanceCaption": "Nombre d'atomes par élément — des barres égales des deux côtés, c'est ce que signifie \"équilibrée\"."
+        "atomsTitle": "Atomes de chaque élément (réactifs = produits)"
       },
       "education": {
         "intro": {
           "title": "Comprendre l'Équilibrage des Équations",
           "paragraph1": "Équilibrer une équation chimique signifie trouver des coefficients — des nombres entiers placés devant chaque formule — de sorte que le même nombre d'atomes de chaque élément apparaisse des deux côtés. Cela reflète la loi de conservation de la masse : les atomes sont réarrangés lors d'une réaction chimique, mais aucun n'est créé ni détruit, donc tout ce qui entre en tant que réactifs, en éléments et en quantités, doit ressortir, au total, en tant que produits.",
           "paragraph2": "Ce calculateur utilise la « méthode matricielle » : il traite le nombre d'atomes de chaque élément à travers toutes les formules comme une équation linéaire, construit une matrice à partir de toutes ces équations réunies, et résout les coefficients par élimination de Gauss avec des fractions exactes (évitant les erreurs d'arrondi que l'arithmétique à virgule flottante introduirait). Le résultat est un vecteur de proportions, que le calculateur met ensuite à l'échelle jusqu'au plus petit ensemble de nombres entiers positifs — la même réponse qu'un chimiste finirait par trouver par essais et erreurs, mais obtenue ici de façon systématique.",
-          "paragraph3": "Une équation correctement équilibrée devrait également conserver la charge électrique totale, pas seulement le nombre d'atomes, ce qui importe pour les réactions entre ions plutôt qu'entre molécules neutres. Ce calculateur équilibre les équations à formules neutres uniquement par le nombre d'atomes ; pour les réactions écrites avec des charges ioniques explicites, une méthode complète d'équilibrage redox (suivant les degrés d'oxydation et les électrons transférés) est nécessaire en plus de ce que cet outil calcule.",
-          "structure": {
-            "reactants": "Réactifs",
-            "products": "Produits",
-            "caption": "Chaque équation a un côté réactifs et un côté produits, reliés par une flèche de réaction."
-          },
-          "conservation": {
-            "reactants": "Réactifs",
-            "products": "Produits",
-            "caption": "Une équation équilibrée maintient la balance à niveau — les mêmes atomes existent des deux côtés, simplement réarrangés."
-          },
-          "coefficient": {
-            "caption": "« 2 H₂O » signifie deux molécules d'eau identiques et séparées, pas une molécule doublée en taille."
-          },
-          "complexityGauge": {
-            "title": "À essayer : quelle est la complexité de cette réaction ?",
-            "intro": "Choisissez une réaction réelle pour voir la somme de ses coefficients équilibrés et la comparer à d'autres.",
-            "simple": "Simple",
-            "moderate": "Modérée",
-            "complex": "Complexe",
-            "verdict": "{reaction} est {classification} à équilibrer.",
-            "sumFact": "Ses coefficients équilibrés totalisent {sum}.",
-            "reactions": {
-              "hydrogenWater": "Synthèse de l'Eau à partir d'Hydrogène",
-              "ammoniaSynthesis": "Synthèse de l'Ammoniac (Procédé Haber)",
-              "ironRusting": "Rouille du Fer",
-              "glucoseCombustion": "Combustion du Glucose",
-              "sucroseCombustion": "Combustion du Sucre de Table",
-              "octaneCombustion": "Combustion de l'Octane"
-            },
-            "equations": {
-              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
-              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
-              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
-              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
-              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
-              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
-            }
-          }
+          "paragraph3": "Une équation correctement équilibrée devrait également conserver la charge électrique totale, pas seulement le nombre d'atomes, ce qui importe pour les réactions entre ions plutôt qu'entre molécules neutres. Ce calculateur équilibre les équations à formules neutres uniquement par le nombre d'atomes ; pour les réactions écrites avec des charges ioniques explicites, une méthode complète d'équilibrage redox (suivant les degrés d'oxydation et les électrons transférés) est nécessaire en plus de ce que cet outil calcule."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -13789,14 +13748,11 @@
           },
           "atomBalanceSection": {
             "title": "Vérifier l'Équilibre",
-            "paragraph": "Pour chaque élément de l'équation, le nombre total d'atomes du côté des réactifs doit exactement égaler le total du côté des produits — c'est le véritable test qu'un équilibre valide doit réussir.",
-            "caption": "Les nombres d'atomes de fer et d'oxygène correspondent exactement des deux côtés d'une équation équilibrée."
+            "paragraph": "Pour chaque élément de l'équation, le nombre total d'atomes du côté des réactifs doit exactement égaler le total du côté des produits — c'est le véritable test qu'un équilibre valide doit réussir."
           },
           "matrixSection": {
             "title": "La Méthode Matricielle",
-            "cornerLabel": "Élément",
-            "paragraph": "Au-delà des équations simples résolubles par inspection, cet outil construit une matrice du nombre d'atomes de chaque élément apparaissant dans chaque terme, puis résout les coefficients qui font que chaque ligne somme à zéro — la même technique d'algèbre linéaire utilisée pour des réactions bien plus complexes.",
-            "caption": "Les colonnes des réactifs sont positives, celles des produits négatives — un équilibre valide est exactement une solution où chaque ligne somme à zéro."
+            "paragraph": "Au-delà des équations simples résolubles par inspection, cet outil construit une matrice du nombre d'atomes de chaque élément apparaissant dans chaque terme, puis résout les coefficients qui font que chaque ligne somme à zéro — la même technique d'algèbre linéaire utilisée pour des réactions bien plus complexes."
           }
         },
         "references": {
@@ -13844,6 +13800,106 @@
           "decomposition": "Décomposition",
           "singleDisplacement": "Déplacement Simple",
           "doubleDisplacement": "Double Déplacement"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Réaction",
+          "custom": "Votre propre équation",
+          "ironRusting": "Rouille du fer"
+        },
+        "copies": {
+          "title": "Ce que compte un coefficient",
+          "subtitle": "Un coefficient compte des molécules entières : 2 H₂O, ce sont deux molécules d'eau distinctes, chacune avec 2 H et 1 O. Changez le coefficient et regardez les atomes s'additionner.",
+          "handle": "Coefficient de H₂O",
+          "caption": "{n} H₂O signifie {n} molécules d'eau distinctes : {h} atomes de H et {o} atomes de O.",
+          "rowN": "Molécules d'eau (coefficient)",
+          "rowH": "Atomes d'hydrogène (2 par molécule)",
+          "rowO": "Atomes d'oxygène (1 par molécule)",
+          "rowAtoms": "Atomes au total",
+          "rowMass": "Masse de ces molécules",
+          "rowMoles": "Le même nombre de moles pèse"
+        },
+        "matrix": {
+          "title": "La matrice derrière l'équilibrage",
+          "subtitle": "Chaque ligne est un élément, chaque colonne une formule : les réactifs comptent en positif, les produits en négatif. La ligne des coefficients (en bas) annule la somme de chaque ligne. Parcourez six réactions réelles.",
+          "handle": "Réaction",
+          "caption": "{eq} : chaque ligne, multipliée par les coefficients, a une somme nulle.",
+          "rowVector": "Vecteur des coefficients"
+        },
+        "charge": {
+          "title": "Les atomes s'équilibrent, la charge aussi doit",
+          "subtitle": "Dans k Fe³⁺ + Cu → k Fe²⁺ + Cu²⁺, les atomes s'équilibrent pour tout k, mais la charge électrique pour une seule valeur. Chaque ligne relie la valeur des réactifs (point) à celle des produits (anneau).",
+          "handle": "Coefficient de Fe³⁺",
+          "caption": "{eq} : les atomes sont équilibrés ; la charge vaut +{l} à gauche et +{r} à droite.",
+          "rowChargeShort": "Charge",
+          "rowFe": "Atomes de fer (gauche = droite)",
+          "rowCu": "Atomes de cuivre (gauche = droite)",
+          "rowChargeL": "Charge des réactifs",
+          "rowChargeR": "Charge des produits",
+          "rowDiff": "Écart de charge",
+          "rowStatus": "État",
+          "balanced": "Équilibrée",
+          "unbalanced": "Non équilibrée"
+        },
+        "trial": {
+          "title": "Équilibrer par essais : 4Fe + x O₂ → 2Fe₂O₃",
+          "subtitle": "Le fer vaut déjà 4 des deux côtés ; essayez des coefficients pour O₂ jusqu'à ce que les barres d'oxygène coïncident. Faites glisser l'extrémité de la barre d'oxygène des réactifs.",
+          "handle": "Coefficient de O₂",
+          "caption": "Avec x = {x}, les réactifs apportent {l} atomes d'oxygène ; les produits en demandent 6.",
+          "rowX": "Coefficient de O₂ (x)",
+          "rowFe": "Atomes de fer (gauche = droite)",
+          "rowOL": "Atomes d'oxygène à gauche (2x)",
+          "rowOR": "Atomes d'oxygène à droite (2 × 3)",
+          "rowDiff": "Écart d'oxygène",
+          "rowStatus": "État",
+          "balanced": "Équilibrée",
+          "unbalanced": "Non équilibrée"
+        },
+        "scale": {
+          "title": "La balance de Lavoisier : 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Brûlez une masse d'hydrogène avec juste assez d'oxygène : l'eau formée pèse autant que les deux gaz réunis, la balance reste donc à l'horizontale.",
+          "handle": "Masse d'hydrogène",
+          "caption": "{h} g d'hydrogène brûlent avec {o} g d'oxygène et donnent {w} g d'eau : rien ne se perd.",
+          "rowH2": "Hydrogène brûlé",
+          "rowMolH2": "Moles de H₂",
+          "rowO2": "Oxygène consommé (½ mol par mol de H₂)",
+          "rowIn": "Masse entrante",
+          "rowWater": "Eau formée (masse sortante)",
+          "rowDiff": "Écart de masse"
+        },
+        "growth": {
+          "title": "Les essais explosent vite",
+          "subtitle": "Essayer chaque coefficient de 1 à 10 pour T termes donne jusqu'à 10ᵀ combinaisons ; résoudre la matrice par élimination demande environ T³ étapes de calcul. Échelle logarithmique.",
+          "handle": "Nombre de termes",
+          "caption": "Avec {t} termes : jusqu'à {trials} combinaisons par tâtonnement, environ {steps} étapes par élimination.",
+          "terms": "termes",
+          "rowTerms": "Termes de l'équation (T)",
+          "rowTrials": "Combinaisons à essayer (1 à 10 chacune)",
+          "rowSteps": "Étapes d'élimination (≈ T³)",
+          "rowRatio": "Le tâtonnement est plus lent de",
+          "legendTrials": "Tâtonnement (10ᵀ)",
+          "legendSteps": "Méthode matricielle (≈ T³)"
+        },
+        "rings": {
+          "title": "Les mêmes atomes des deux côtés",
+          "subtitle": "Anneau intérieur : atomes de chaque élément dans les réactifs ; anneau extérieur : dans les produits. Dans une équation équilibrée, les deux anneaux sont identiques. Parcourez six réactions réelles.",
+          "handle": "Réaction",
+          "caption": "{eq} : {n} atomes entrent et {n} atomes sortent.",
+          "rowTotal": "Atomes au total (gauche | droite)",
+          "legend": "Élément : gauche = droite"
+        },
+        "columns": {
+          "title": "Les plus petits nombres entiers",
+          "subtitle": "Tout multiple d'un jeu équilibré est aussi équilibré ; le calculateur donne le plus petit. La partie pleine de chaque colonne est ce plus petit jeu, la partie translucide le multiple.",
+          "handle": "Multiplicateur k",
+          "caption": "×{k} : {a}H₂ + {b}O₂ → {c}H₂O est aussi équilibrée ; en divisant par {k}, on obtient le plus petit jeu 2 : 1 : 2.",
+          "rowK": "Multiplicateur (k)",
+          "rowSet": "Équation multipliée",
+          "rowH": "Atomes d'hydrogène (gauche = droite)",
+          "rowO": "Atomes d'oxygène (gauche = droite)",
+          "rowGcd": "Plus grand commun diviseur",
+          "rowSmallest": "Plus petit jeu d'entiers"
         }
       }
     },

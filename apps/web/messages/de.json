@@ -13617,9 +13617,6 @@
         "equationPlaceholder": "z. B. Fe + O2 -> Fe2O3",
         "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "structureReactants": "{count, plural, one {# Edukt} other {# Edukte}}",
-        "structureProducts": "{count, plural, one {# Produkt} other {# Produkte}}",
-        "structureCaption": "Live-Anzahl der Terme während der Eingabe — aktualisiert sich schon vor dem Ausgleich der Gleichung.",
         "scenarioPresetsLabel": "Eine reale Reaktion ausprobieren:",
         "scenarios": {
           "methaneCombustion": "Methanverbrennung",
@@ -13639,52 +13636,14 @@
         "reactants": "Edukte",
         "products": "Produkte",
         "emptyStateMessage": "Gleichung eingeben und auf Berechnen klicken, um sie auszugleichen.",
-        "atomBalanceCaption": "Atomanzahl pro Element — gleich lange Balken auf beiden Seiten bedeutet \"ausgeglichen\"."
+        "atomsTitle": "Atome jedes Elements (Edukte = Produkte)"
       },
       "education": {
         "intro": {
           "title": "Gleichungsausgleich verstehen",
           "paragraph1": "Eine chemische Gleichung auszugleichen bedeutet, Koeffizienten zu finden — ganze Zahlen, die vor jede Formel gesetzt werden —, sodass auf beiden Seiten die gleiche Anzahl von Atomen jedes Elements erscheint. Dies spiegelt das Gesetz der Erhaltung der Masse wider: Atome werden in einer chemischen Reaktion umgeordnet, aber keine werden erzeugt oder vernichtet, daher muss alles, was als Edukte an Elementen und Mengen hineingeht, insgesamt als Produkte wieder herauskommen.",
           "paragraph2": "Dieser Rechner verwendet die „Matrixmethode“: Er behandelt die Atomanzahl jedes Elements über alle Formeln hinweg als eine lineare Gleichung, baut eine Matrix aus all diesen Gleichungen zusammen und löst nach den Koeffizienten mittels Gauß-Elimination mit exakten Brüchen (wodurch die Rundungsfehler vermieden werden, die Gleitkommaarithmetik einführen würde). Das Ergebnis ist ein Vektor von Verhältnissen, den der Rechner dann auf die kleinste Menge positiver ganzer Zahlen skaliert — dieselbe Antwort, zu der ein Chemiker letztlich durch Ausprobieren gelangen würde, hier jedoch systematisch gefunden.",
-          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich.",
-          "structure": {
-            "reactants": "Edukte",
-            "products": "Produkte",
-            "caption": "Jede Gleichung hat eine Edukt- und eine Produktseite, verbunden durch einen Reaktionspfeil."
-          },
-          "conservation": {
-            "reactants": "Edukte",
-            "products": "Produkte",
-            "caption": "Eine ausgeglichene Gleichung hält die Waage im Gleichgewicht — dieselben Atome existieren auf beiden Seiten, nur umgeordnet."
-          },
-          "coefficient": {
-            "caption": "„2 H₂O“ bedeutet zwei separate, identische Wassermoleküle, nicht ein doppelt so großes Molekül."
-          },
-          "complexityGauge": {
-            "title": "Ausprobieren: Wie komplex ist diese Reaktion?",
-            "intro": "Wähle eine reale Reaktion, um zu sehen, wie sich ihre ausgeglichenen Koeffizienten summieren, und vergleiche sie mit anderen.",
-            "simple": "Einfach",
-            "moderate": "Mittel",
-            "complex": "Komplex",
-            "verdict": "{reaction} ist {classification} auszugleichen.",
-            "sumFact": "Ihre ausgeglichenen Koeffizienten summieren sich auf {sum}.",
-            "reactions": {
-              "hydrogenWater": "Wasserstoff-Wasser-Synthese",
-              "ammoniaSynthesis": "Ammoniaksynthese (Haber-Verfahren)",
-              "ironRusting": "Eisenrost",
-              "glucoseCombustion": "Glukoseverbrennung",
-              "sucroseCombustion": "Haushaltszuckerverbrennung",
-              "octaneCombustion": "Oktanverbrennung"
-            },
-            "equations": {
-              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
-              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
-              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
-              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
-              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
-              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
-            }
-          }
+          "paragraph3": "Eine korrekt ausgeglichene Gleichung sollte auch die gesamte elektrische Ladung erhalten, nicht nur die Atomanzahlen, was bei Reaktionen zwischen Ionen statt neutralen Molekülen wichtig ist. Dieser Rechner gleicht Gleichungen mit neutralen Formeln allein nach Atomanzahl aus; für Reaktionen mit expliziten Ionenladungen ist zusätzlich zu dem, was dieses Tool berechnet, eine vollständige Redox-Ausgleichsmethode (die Oxidationsstufen und übertragene Elektronen verfolgt) erforderlich."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -13789,14 +13748,11 @@
           },
           "atomBalanceSection": {
             "title": "Den Ausgleich prüfen",
-            "paragraph": "Für jedes Element in der Gleichung muss die Gesamtatomanzahl auf der Eduktseite genau der Gesamtanzahl auf der Produktseite entsprechen — das ist der eigentliche Test, den ein gültiger Ausgleich bestehen muss.",
-            "caption": "Eisen- und Sauerstoffatomanzahlen stimmen auf beiden Seiten einer ausgeglichenen Gleichung genau überein."
+            "paragraph": "Für jedes Element in der Gleichung muss die Gesamtatomanzahl auf der Eduktseite genau der Gesamtanzahl auf der Produktseite entsprechen — das ist der eigentliche Test, den ein gültiger Ausgleich bestehen muss."
           },
           "matrixSection": {
             "title": "Die Matrixmethode",
-            "cornerLabel": "Element",
-            "paragraph": "Über einfache, durch bloße Betrachtung lösbare Gleichungen hinaus baut dieses Tool eine Matrix auf, wie viele Atome jedes Elements in jedem Term vorkommen, und löst dann nach den Koeffizienten, die jede Zeile auf null summieren lassen — dieselbe lineare Algebra-Technik, die für weit komplexere Reaktionen verwendet wird.",
-            "caption": "Eduktspalten sind positiv, Produktspalten negativ — ein gültiger Ausgleich ist genau eine Lösung, bei der jede Zeile auf null summiert."
+            "paragraph": "Über einfache, durch bloße Betrachtung lösbare Gleichungen hinaus baut dieses Tool eine Matrix auf, wie viele Atome jedes Elements in jedem Term vorkommen, und löst dann nach den Koeffizienten, die jede Zeile auf null summieren lassen — dieselbe lineare Algebra-Technik, die für weit komplexere Reaktionen verwendet wird."
           }
         },
         "references": {
@@ -13844,6 +13800,106 @@
           "decomposition": "Zersetzung",
           "singleDisplacement": "Einfache Verdrängung",
           "doubleDisplacement": "Doppelte Verdrängung"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Reaktion",
+          "custom": "Eigene Gleichung",
+          "ironRusting": "Rosten von Eisen"
+        },
+        "copies": {
+          "title": "Was ein Koeffizient zählt",
+          "subtitle": "Ein Koeffizient zählt ganze Moleküle: 2 H₂O sind zwei einzelne Wassermoleküle mit je 2 H und 1 O. Ändern Sie den Koeffizienten und sehen Sie, wie sich die Atome summieren.",
+          "handle": "Koeffizient von H₂O",
+          "caption": "{n} H₂O bedeutet {n} einzelne Wassermoleküle: {h} H-Atome und {o} O-Atome.",
+          "rowN": "Wassermoleküle (Koeffizient)",
+          "rowH": "Wasserstoffatome (2 je Molekül)",
+          "rowO": "Sauerstoffatome (1 je Molekül)",
+          "rowAtoms": "Atome insgesamt",
+          "rowMass": "Masse dieser Moleküle",
+          "rowMoles": "Dieselbe Zahl an Mol wiegt"
+        },
+        "matrix": {
+          "title": "Die Matrix hinter dem Ausgleich",
+          "subtitle": "Jede Zeile ist ein Element, jede Spalte eine Formel: Edukte zählen positiv, Produkte negativ. Die Koeffizientenzeile (unten) macht jede Zeilensumme zu null. Blättern Sie durch sechs echte Reaktionen.",
+          "handle": "Reaktion",
+          "caption": "{eq}: Jede Zeile, mit den Koeffizienten multipliziert, ergibt null.",
+          "rowVector": "Koeffizientenvektor"
+        },
+        "charge": {
+          "title": "Atome gleichen sich aus, die Ladung muss es auch",
+          "subtitle": "In k Fe³⁺ + Cu → k Fe²⁺ + Cu²⁺ stimmen die Atome für jedes k, die elektrische Ladung aber nur bei einem Wert. Jede Zeile verbindet den Eduktwert (Punkt) mit dem Produktwert (Ring).",
+          "handle": "Koeffizient von Fe³⁺",
+          "caption": "{eq}: Die Atome stimmen; die Ladung ist links +{l} und rechts +{r}.",
+          "rowChargeShort": "Ladung",
+          "rowFe": "Eisenatome (links = rechts)",
+          "rowCu": "Kupferatome (links = rechts)",
+          "rowChargeL": "Ladung der Edukte",
+          "rowChargeR": "Ladung der Produkte",
+          "rowDiff": "Ladungsdifferenz",
+          "rowStatus": "Status",
+          "balanced": "Ausgeglichen",
+          "unbalanced": "Nicht ausgeglichen"
+        },
+        "trial": {
+          "title": "Ausgleichen durch Probieren: 4Fe + x O₂ → 2Fe₂O₃",
+          "subtitle": "Eisen ist auf beiden Seiten schon 4; probieren Sie Koeffizienten für O₂, bis die Sauerstoffbalken gleich sind. Ziehen Sie das Ende des Sauerstoffbalkens der Edukte.",
+          "handle": "Koeffizient von O₂",
+          "caption": "Bei x = {x} liefern die Edukte {l} Sauerstoffatome; die Produkte brauchen 6.",
+          "rowX": "Koeffizient von O₂ (x)",
+          "rowFe": "Eisenatome (links = rechts)",
+          "rowOL": "Sauerstoffatome links (2x)",
+          "rowOR": "Sauerstoffatome rechts (2 × 3)",
+          "rowDiff": "Sauerstoffdifferenz",
+          "rowStatus": "Status",
+          "balanced": "Ausgeglichen",
+          "unbalanced": "Nicht ausgeglichen"
+        },
+        "scale": {
+          "title": "Lavoisiers Waage: 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Verbrennen Sie eine Masse Wasserstoff mit genau genug Sauerstoff: Das entstehende Wasser wiegt so viel wie beide Gase zusammen, die Waage bleibt waagerecht.",
+          "handle": "Masse des Wasserstoffs",
+          "caption": "{h} g Wasserstoff verbrennen mit {o} g Sauerstoff zu {w} g Wasser: Nichts geht verloren.",
+          "rowH2": "Verbrannter Wasserstoff",
+          "rowMolH2": "Mol H₂",
+          "rowO2": "Verbrauchter Sauerstoff (½ mol je mol H₂)",
+          "rowIn": "Eingehende Masse",
+          "rowWater": "Gebildetes Wasser (ausgehende Masse)",
+          "rowDiff": "Massendifferenz"
+        },
+        "growth": {
+          "title": "Probieren wächst schnell",
+          "subtitle": "Jeden Koeffizienten von 1 bis 10 für T Terme zu probieren, ergibt bis zu 10ᵀ Kombinationen; die Matrix per Elimination zu lösen, braucht etwa T³ Rechenschritte. Logarithmische Skala.",
+          "handle": "Anzahl der Terme",
+          "caption": "Mit {t} Termen: bis zu {trials} Kombinationen durch Probieren, etwa {steps} Schritte per Elimination.",
+          "terms": "Terme",
+          "rowTerms": "Terme der Gleichung (T)",
+          "rowTrials": "Zu probierende Kombinationen (je 1 bis 10)",
+          "rowSteps": "Eliminationsschritte (≈ T³)",
+          "rowRatio": "Probieren ist langsamer um",
+          "legendTrials": "Probieren (10ᵀ)",
+          "legendSteps": "Matrixmethode (≈ T³)"
+        },
+        "rings": {
+          "title": "Dieselben Atome auf beiden Seiten",
+          "subtitle": "Innerer Ring: Atome jedes Elements in den Edukten; äußerer Ring: in den Produkten. In einer ausgeglichenen Gleichung sind beide Ringe gleich. Blättern Sie durch sechs echte Reaktionen.",
+          "handle": "Reaktion",
+          "caption": "{eq}: {n} Atome gehen hinein und {n} Atome kommen heraus.",
+          "rowTotal": "Atome insgesamt (links | rechts)",
+          "legend": "Element: links = rechts"
+        },
+        "columns": {
+          "title": "Die kleinsten ganzen Zahlen",
+          "subtitle": "Jedes Vielfache eines ausgeglichenen Satzes ist ebenfalls ausgeglichen; der Rechner gibt den kleinsten an. Der feste Teil jeder Säule ist dieser kleinste Satz, der durchscheinende das Vielfache.",
+          "handle": "Faktor k",
+          "caption": "×{k}: {a}H₂ + {b}O₂ → {c}H₂O ist ebenfalls ausgeglichen; geteilt durch {k} ergibt sich der kleinste Satz 2 : 1 : 2.",
+          "rowK": "Faktor (k)",
+          "rowSet": "Multiplizierte Gleichung",
+          "rowH": "Wasserstoffatome (links = rechts)",
+          "rowO": "Sauerstoffatome (links = rechts)",
+          "rowGcd": "Größter gemeinsamer Teiler",
+          "rowSmallest": "Kleinster ganzzahliger Satz"
         }
       }
     },

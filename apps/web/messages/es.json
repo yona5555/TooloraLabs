@@ -13617,9 +13617,6 @@
         "equationPlaceholder": "p. ej. Fe + O2 -> Fe2O3",
         "calculate": "Calcular",
         "clear": "Limpiar",
-        "structureReactants": "{count, plural, one {# reactivo} other {# reactivos}}",
-        "structureProducts": "{count, plural, one {# producto} other {# productos}}",
-        "structureCaption": "Recuento de términos en vivo mientras escribes — se actualiza incluso antes de que la ecuación esté balanceada.",
         "scenarioPresetsLabel": "Prueba una reacción real:",
         "scenarios": {
           "methaneCombustion": "Combustión del Metano",
@@ -13639,52 +13636,14 @@
         "reactants": "Reactivos",
         "products": "Productos",
         "emptyStateMessage": "Introduce una ecuación y pulsa Calcular para balancearla.",
-        "atomBalanceCaption": "Recuento de átomos por elemento: barras iguales en ambos lados es lo que significa \"balanceada\"."
+        "atomsTitle": "Átomos de cada elemento (reactivos = productos)"
       },
       "education": {
         "intro": {
           "title": "Entender el Balanceo de Ecuaciones",
           "paragraph1": "Balancear una ecuación química significa encontrar coeficientes — números enteros colocados delante de cada fórmula — de modo que aparezca el mismo número de átomos de cada elemento en ambos lados. Esto refleja la ley de conservación de la masa: los átomos se reorganizan en una reacción química, pero ninguno se crea ni se destruye, así que cualquier elemento y cantidad que entre como reactivo debe salir, en total, como producto.",
           "paragraph2": "Esta calculadora utiliza el «método matricial»: trata el recuento de átomos de cada elemento en todas las fórmulas como una ecuación lineal, construye una matriz con todas esas ecuaciones juntas, y resuelve los coeficientes mediante eliminación gaussiana con fracciones exactas (evitando los errores de redondeo que introduciría la aritmética de punto flotante). El resultado es un vector de proporciones, que la calculadora luego escala hasta el conjunto más pequeño de números enteros positivos — la misma respuesta a la que un químico llegaría eventualmente por prueba y error, pero encontrada de forma sistemática.",
-          "paragraph3": "Una ecuación correctamente balanceada también debería conservar la carga eléctrica total, no solo el recuento de átomos, lo cual importa en reacciones entre iones en lugar de moléculas neutras. Esta calculadora balancea ecuaciones de fórmulas neutras solo por recuento de átomos; para reacciones escritas con cargas iónicas explícitas, se necesita además un método completo de balanceo redox (que siga los estados de oxidación y los electrones transferidos) además de lo que calcula esta herramienta.",
-          "structure": {
-            "reactants": "Reactivos",
-            "products": "Productos",
-            "caption": "Cada ecuación tiene un lado de reactivos y un lado de productos, unidos por una flecha de reacción."
-          },
-          "conservation": {
-            "reactants": "Reactivos",
-            "products": "Productos",
-            "caption": "Una ecuación balanceada mantiene la balanza nivelada: los mismos átomos existen en ambos lados, solo reorganizados."
-          },
-          "coefficient": {
-            "caption": "\"2 H₂O\" significa dos moléculas de agua idénticas y separadas, no una molécula duplicada en tamaño."
-          },
-          "complexityGauge": {
-            "title": "Pruébalo: ¿qué tan compleja es esa reacción?",
-            "intro": "Elige una reacción real para ver cómo suman sus coeficientes balanceados y compararla con otras.",
-            "simple": "Simple",
-            "moderate": "Moderada",
-            "complex": "Compleja",
-            "verdict": "{reaction} es {classification} de balancear.",
-            "sumFact": "Sus coeficientes balanceados suman {sum}.",
-            "reactions": {
-              "hydrogenWater": "Síntesis de Agua a partir de Hidrógeno",
-              "ammoniaSynthesis": "Síntesis de Amoníaco (Proceso Haber)",
-              "ironRusting": "Oxidación del Hierro",
-              "glucoseCombustion": "Combustión de la Glucosa",
-              "sucroseCombustion": "Combustión del Azúcar de Mesa",
-              "octaneCombustion": "Combustión del Octano"
-            },
-            "equations": {
-              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
-              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
-              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
-              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
-              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
-              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
-            }
-          }
+          "paragraph3": "Una ecuación correctamente balanceada también debería conservar la carga eléctrica total, no solo el recuento de átomos, lo cual importa en reacciones entre iones en lugar de moléculas neutras. Esta calculadora balancea ecuaciones de fórmulas neutras solo por recuento de átomos; para reacciones escritas con cargas iónicas explícitas, se necesita además un método completo de balanceo redox (que siga los estados de oxidación y los electrones transferidos) además de lo que calcula esta herramienta."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -13789,14 +13748,11 @@
           },
           "atomBalanceSection": {
             "title": "Comprobando el Balance",
-            "paragraph": "Para cada elemento en la ecuación, el recuento total de átomos en el lado de los reactivos debe ser exactamente igual al total del lado de los productos: esta es la prueba real que debe superar un balance válido.",
-            "caption": "Los recuentos de átomos de hierro y oxígeno coinciden exactamente en ambos lados de una ecuación balanceada."
+            "paragraph": "Para cada elemento en la ecuación, el recuento total de átomos en el lado de los reactivos debe ser exactamente igual al total del lado de los productos: esta es la prueba real que debe superar un balance válido."
           },
           "matrixSection": {
             "title": "El Método de la Matriz",
-            "cornerLabel": "Elemento",
-            "paragraph": "Más allá de ecuaciones simples resolubles por inspección, esta herramienta construye una matriz de cuántos átomos de cada elemento aparecen en cada término, y luego resuelve los coeficientes que hacen que cada fila sume cero: la misma técnica de álgebra lineal utilizada para reacciones mucho más complejas.",
-            "caption": "Las columnas de reactivos son positivas, las de productos negativas: un balance válido es exactamente una solución donde cada fila suma cero."
+            "paragraph": "Más allá de ecuaciones simples resolubles por inspección, esta herramienta construye una matriz de cuántos átomos de cada elemento aparecen en cada término, y luego resuelve los coeficientes que hacen que cada fila sume cero: la misma técnica de álgebra lineal utilizada para reacciones mucho más complejas."
           }
         },
         "references": {
@@ -13844,6 +13800,106 @@
           "decomposition": "Descomposición",
           "singleDisplacement": "Desplazamiento Simple",
           "doubleDisplacement": "Desplazamiento Doble"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Reacción",
+          "custom": "Tu propia ecuación",
+          "ironRusting": "Oxidación del hierro"
+        },
+        "copies": {
+          "title": "Lo que cuenta un coeficiente",
+          "subtitle": "Un coeficiente cuenta moléculas enteras: 2 H₂O son dos moléculas de agua separadas, cada una con 2 H y 1 O. Cambia el coeficiente y mira cómo se suman los átomos.",
+          "handle": "Coeficiente de H₂O",
+          "caption": "{n} H₂O significa {n} moléculas de agua separadas: {h} átomos de H y {o} átomos de O.",
+          "rowN": "Moléculas de agua (coeficiente)",
+          "rowH": "Átomos de hidrógeno (2 por molécula)",
+          "rowO": "Átomos de oxígeno (1 por molécula)",
+          "rowAtoms": "Átomos en total",
+          "rowMass": "Masa de estas moléculas",
+          "rowMoles": "El mismo número de moles pesa"
+        },
+        "matrix": {
+          "title": "La matriz detrás del balance",
+          "subtitle": "Cada fila es un elemento y cada columna una fórmula: los reactivos cuentan en positivo y los productos en negativo. La fila de coeficientes (abajo) hace que cada fila sume cero. Recorre seis reacciones reales.",
+          "handle": "Reacción",
+          "caption": "{eq}: cada fila, multiplicada por los coeficientes, suma cero.",
+          "rowVector": "Vector de coeficientes"
+        },
+        "charge": {
+          "title": "Los átomos se igualan; la carga también debe",
+          "subtitle": "En k Fe³⁺ + Cu → k Fe²⁺ + Cu²⁺ los átomos se igualan para cualquier k, pero la carga eléctrica solo para un valor. Cada fila une el valor de los reactivos (punto) con el de los productos (anillo).",
+          "handle": "Coeficiente de Fe³⁺",
+          "caption": "{eq}: los átomos están igualados; la carga es +{l} a la izquierda y +{r} a la derecha.",
+          "rowChargeShort": "Carga",
+          "rowFe": "Átomos de hierro (izq. = der.)",
+          "rowCu": "Átomos de cobre (izq. = der.)",
+          "rowChargeL": "Carga de los reactivos",
+          "rowChargeR": "Carga de los productos",
+          "rowDiff": "Diferencia de carga",
+          "rowStatus": "Estado",
+          "balanced": "Balanceada",
+          "unbalanced": "Sin balancear"
+        },
+        "trial": {
+          "title": "Balancear por tanteo: 4Fe + x O₂ → 2Fe₂O₃",
+          "subtitle": "El hierro ya es 4 en ambos lados; prueba coeficientes de O₂ hasta que las barras de oxígeno coincidan. Arrastra el extremo de la barra de oxígeno de los reactivos.",
+          "handle": "Coeficiente de O₂",
+          "caption": "Con x = {x} los reactivos aportan {l} átomos de oxígeno; los productos necesitan 6.",
+          "rowX": "Coeficiente de O₂ (x)",
+          "rowFe": "Átomos de hierro (izq. = der.)",
+          "rowOL": "Átomos de oxígeno a la izquierda (2x)",
+          "rowOR": "Átomos de oxígeno a la derecha (2 × 3)",
+          "rowDiff": "Diferencia de oxígeno",
+          "rowStatus": "Estado",
+          "balanced": "Balanceada",
+          "unbalanced": "Sin balancear"
+        },
+        "scale": {
+          "title": "La balanza de Lavoisier: 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Quema una masa de hidrógeno con el oxígeno justo: el agua formada pesa lo mismo que ambos gases juntos, así que la balanza queda nivelada.",
+          "handle": "Masa de hidrógeno",
+          "caption": "{h} g de hidrógeno arden con {o} g de oxígeno y forman {w} g de agua: no se pierde nada.",
+          "rowH2": "Hidrógeno quemado",
+          "rowMolH2": "Moles de H₂",
+          "rowO2": "Oxígeno usado (½ mol por mol de H₂)",
+          "rowIn": "Masa que entra",
+          "rowWater": "Agua formada (masa que sale)",
+          "rowDiff": "Diferencia de masa"
+        },
+        "growth": {
+          "title": "El tanteo crece muy rápido",
+          "subtitle": "Probar cada coeficiente del 1 al 10 para T términos supone hasta 10ᵀ combinaciones; resolver la matriz por eliminación lleva unos T³ pasos aritméticos. Escala logarítmica.",
+          "handle": "Número de términos",
+          "caption": "Con {t} términos: hasta {trials} combinaciones por inspección, unos {steps} pasos por eliminación.",
+          "terms": "términos",
+          "rowTerms": "Términos de la ecuación (T)",
+          "rowTrials": "Combinaciones a probar (1 a 10 cada una)",
+          "rowSteps": "Pasos de eliminación (≈ T³)",
+          "rowRatio": "El tanteo es más lento en",
+          "legendTrials": "Tanteo (10ᵀ)",
+          "legendSteps": "Método matricial (≈ T³)"
+        },
+        "rings": {
+          "title": "Los mismos átomos en ambos lados",
+          "subtitle": "Anillo interior: átomos de cada elemento en los reactivos; anillo exterior: en los productos. En una ecuación balanceada ambos anillos son idénticos. Recorre seis reacciones reales.",
+          "handle": "Reacción",
+          "caption": "{eq}: entran {n} átomos y salen {n} átomos.",
+          "rowTotal": "Átomos en total (izq. | der.)",
+          "legend": "Elemento: izq. = der."
+        },
+        "columns": {
+          "title": "Los menores números enteros",
+          "subtitle": "Cualquier múltiplo de un conjunto balanceado también está balanceado; la calculadora da el menor. La parte sólida de cada columna es ese conjunto mínimo y la translúcida, el múltiplo.",
+          "handle": "Multiplicador k",
+          "caption": "×{k}: {a}H₂ + {b}O₂ → {c}H₂O también está balanceada; al dividir entre {k} queda el conjunto mínimo 2 : 1 : 2.",
+          "rowK": "Multiplicador (k)",
+          "rowSet": "Ecuación multiplicada",
+          "rowH": "Átomos de hidrógeno (izq. = der.)",
+          "rowO": "Átomos de oxígeno (izq. = der.)",
+          "rowGcd": "Máximo común divisor",
+          "rowSmallest": "Menor conjunto de enteros"
         }
       }
     },

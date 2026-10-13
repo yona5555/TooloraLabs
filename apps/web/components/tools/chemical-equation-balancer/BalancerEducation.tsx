@@ -4,12 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import BalancerEquationStructureDiagram from "./BalancerEquationStructureDiagram";
-import BalancerAtomBalanceDiagram from "./BalancerAtomBalanceDiagram";
-import BalancerConservationScaleDiagram from "./BalancerConservationScaleDiagram";
-import BalancerCoefficientMoleculeDiagram from "./BalancerCoefficientMoleculeDiagram";
-import BalancerMatrixDiagram from "./BalancerMatrixDiagram";
-import BalancerComplexityGauge from "./BalancerComplexityGauge";
+import { BalChargeCard, BalGrowthCard, BalMatrixCard, BalRingsCard, BalTrialCard } from "./BalancerCards2D";
+import { BalColumnsCard, BalCopiesCard, BalScaleCard } from "./BalancerCards3D";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -22,29 +18,24 @@ export default async function BalancerEducation() {
 
   return (
     <EncyclopediaPaper>
-      <BalancerComplexityGauge />
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <BalancerEquationStructureDiagram
-          reactantCount={1}
-          productCount={1}
-          reactantsLabel={t("intro.structure.reactants")}
-          productsLabel={t("intro.structure.products")}
-          caption={t("intro.structure.caption")}
-        />
+        <BalCopiesCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
-        <BalancerConservationScaleDiagram
-          reactantsLabel={t("intro.conservation.reactants")}
-          productsLabel={t("intro.conservation.products")}
-          caption={t("intro.conservation.caption")}
-        />
+        <BalMatrixCard side="table-left" />
         <p>{t("intro.paragraph3")}</p>
-        <BalancerCoefficientMoleculeDiagram formula="H₂O" count={2} caption={t("intro.coefficient.caption")} />
+        <BalChargeCard side="visual-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <BalTrialCard side="table-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -76,26 +67,22 @@ export default async function BalancerEducation() {
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <BalScaleCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <BalGrowthCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.atomBalanceSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.atomBalanceSection.paragraph")}</p>
-          <BalancerAtomBalanceDiagram
-            rows={[
-              { element: "Fe", reactantCount: 4, productCount: 4 },
-              { element: "O", reactantCount: 6, productCount: 6 },
-            ]}
-            caption={t("behindTheTool.atomBalanceSection.caption")}
-          />
         </div>
+        <BalRingsCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.matrixSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.matrixSection.paragraph")}</p>
-          <BalancerMatrixDiagram cornerLabel={t("behindTheTool.matrixSection.cornerLabel")} caption={t("behindTheTool.matrixSection.caption")} />
         </div>
+        <BalColumnsCard side="table-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -117,6 +104,7 @@ export default async function BalancerEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

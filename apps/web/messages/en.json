@@ -13617,9 +13617,6 @@
         "equationPlaceholder": "e.g. Fe + O2 -> Fe2O3",
         "calculate": "Calculate",
         "clear": "Clear",
-        "structureReactants": "{count, plural, one {# reactant} other {# reactants}}",
-        "structureProducts": "{count, plural, one {# product} other {# products}}",
-        "structureCaption": "Live term count as you type — updates before the equation is even balanced.",
         "scenarioPresetsLabel": "Try a real reaction:",
         "scenarios": {
           "methaneCombustion": "Methane Combustion",
@@ -13639,52 +13636,14 @@
         "reactants": "Reactants",
         "products": "Products",
         "emptyStateMessage": "Enter an equation and press Calculate to balance it.",
-        "atomBalanceCaption": "Atom count per element — equal bars on both sides is what \"balanced\" means."
+        "atomsTitle": "Atoms of each element (reactants = products)"
       },
       "education": {
         "intro": {
           "title": "Understanding Equation Balancing",
           "paragraph1": "Balancing a chemical equation means finding coefficients — whole numbers placed in front of each formula — so that the same number of atoms of every element appears on both sides. This reflects the law of conservation of mass: atoms are rearranged in a chemical reaction, but none are created or destroyed, so whatever elements and quantities go in as reactants must come out, in total, as products.",
           "paragraph2": "This calculator uses the \"matrix method\": it treats each element's atom count across every formula as one linear equation, builds a matrix of all those equations together, and solves for the coefficients using Gaussian elimination with exact fractions (avoiding the rounding errors floating-point arithmetic would introduce). The result is a vector of ratios, which the calculator then scales up to the smallest set of positive whole numbers — the same answer a chemist would eventually reach by trial and error, found systematically instead.",
-          "paragraph3": "A properly balanced equation should also conserve overall electric charge, not just atom counts, which matters for reactions between ions rather than neutral molecules. This calculator balances neutral-formula equations by atom count alone; for reactions written with explicit ionic charges, a full redox-balancing method (tracking oxidation states and electrons transferred) is needed in addition to what this tool computes.",
-          "structure": {
-            "reactants": "Reactants",
-            "products": "Products",
-            "caption": "Every equation has a reactant side and a product side, joined by a reaction arrow."
-          },
-          "conservation": {
-            "reactants": "Reactants",
-            "products": "Products",
-            "caption": "A balanced equation keeps the scale level — the same atoms exist on both sides, just rearranged."
-          },
-          "coefficient": {
-            "caption": "\"2 H₂O\" means two separate, identical water molecules, not one molecule doubled in size."
-          },
-          "complexityGauge": {
-            "title": "Try It: How Complex Is That Reaction?",
-            "intro": "Pick a real reaction to see how its balanced coefficients add up, and compare it with others.",
-            "simple": "Simple",
-            "moderate": "Moderate",
-            "complex": "Complex",
-            "verdict": "{reaction} is {classification} to balance.",
-            "sumFact": "Its balanced coefficients add up to {sum}.",
-            "reactions": {
-              "hydrogenWater": "Hydrogen-Water Synthesis",
-              "ammoniaSynthesis": "Ammonia Synthesis (Haber Process)",
-              "ironRusting": "Iron Rusting",
-              "glucoseCombustion": "Glucose Combustion",
-              "sucroseCombustion": "Table Sugar Combustion",
-              "octaneCombustion": "Octane Combustion"
-            },
-            "equations": {
-              "hydrogenWater": "2H₂ + O₂ → 2H₂O",
-              "ammoniaSynthesis": "N₂ + 3H₂ → 2NH₃",
-              "ironRusting": "4Fe + 3O₂ → 2Fe₂O₃",
-              "glucoseCombustion": "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
-              "sucroseCombustion": "C₁₂H₂₂O₁₁ + 12O₂ → 12CO₂ + 11H₂O",
-              "octaneCombustion": "2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O"
-            }
-          }
+          "paragraph3": "A properly balanced equation should also conserve overall electric charge, not just atom counts, which matters for reactions between ions rather than neutral molecules. This calculator balances neutral-formula equations by atom count alone; for reactions written with explicit ionic charges, a full redox-balancing method (tracking oxidation states and electrons transferred) is needed in addition to what this tool computes."
         },
         "examples": {
           "title": "Worked Examples",
@@ -13789,14 +13748,11 @@
           },
           "atomBalanceSection": {
             "title": "Checking the Balance",
-            "paragraph": "For every element in the equation, the total atom count on the reactant side must exactly equal the total on the product side — this is the actual test a valid balance must pass.",
-            "caption": "Iron and oxygen atom counts matching exactly on both sides of a balanced equation."
+            "paragraph": "For every element in the equation, the total atom count on the reactant side must exactly equal the total on the product side — this is the actual test a valid balance must pass."
           },
           "matrixSection": {
             "title": "The Matrix Method",
-            "cornerLabel": "Element",
-            "paragraph": "Beyond simple equations solvable by inspection, this tool builds a matrix of how many atoms of each element appear in each term, then solves for the coefficients that make every row sum to zero — the same linear algebra technique used for far more complex reactions.",
-            "caption": "Reactant columns are positive, product columns negative — a valid balance is exactly a solution where every row sums to zero."
+            "paragraph": "Beyond simple equations solvable by inspection, this tool builds a matrix of how many atoms of each element appear in each term, then solves for the coefficients that make every row sum to zero — the same linear algebra technique used for far more complex reactions."
           }
         },
         "references": {
@@ -13844,6 +13800,106 @@
           "decomposition": "Decomposition",
           "singleDisplacement": "Single Displacement",
           "doubleDisplacement": "Double Displacement"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Reaction",
+          "custom": "Your own equation",
+          "ironRusting": "Iron Rusting"
+        },
+        "copies": {
+          "title": "What a Coefficient Counts",
+          "subtitle": "A coefficient is a count of whole molecules: 2 H₂O is two separate water molecules, each with 2 H and 1 O. Change the coefficient and watch the atoms add up.",
+          "handle": "Coefficient of H₂O",
+          "caption": "{n} H₂O means {n} separate water molecules: {h} H atoms and {o} O atoms.",
+          "rowN": "Water molecules (coefficient)",
+          "rowH": "Hydrogen atoms (2 per molecule)",
+          "rowO": "Oxygen atoms (1 per molecule)",
+          "rowAtoms": "Atoms in total",
+          "rowMass": "Mass of these molecules",
+          "rowMoles": "The same number of moles weighs"
+        },
+        "matrix": {
+          "title": "The Matrix Behind the Balance",
+          "subtitle": "Each row is one element, each column one formula: reactant counts positive, product counts negative. The coefficient row (bottom) makes every element row sum to zero. Step through six real reactions.",
+          "handle": "Reaction",
+          "caption": "{eq}: every row, multiplied by the coefficients, sums to zero.",
+          "rowVector": "Coefficient vector"
+        },
+        "charge": {
+          "title": "Atoms Balance, Charge Must Too",
+          "subtitle": "In k Fe³⁺ + Cu → k Fe²⁺ + Cu²⁺ the atoms balance for every k, but the electric charge balances only at one value. Each row joins the reactant value (left dot) to the product value (ring).",
+          "handle": "Coefficient of Fe³⁺",
+          "caption": "{eq}: atoms balance; the charge is +{l} on the left and +{r} on the right.",
+          "rowChargeShort": "Charge",
+          "rowFe": "Iron atoms (left = right)",
+          "rowCu": "Copper atoms (left = right)",
+          "rowChargeL": "Charge of the reactants",
+          "rowChargeR": "Charge of the products",
+          "rowDiff": "Charge difference",
+          "rowStatus": "Status",
+          "balanced": "Balanced",
+          "unbalanced": "Not balanced"
+        },
+        "trial": {
+          "title": "Balancing by Trial: 4Fe + x O₂ → 2Fe₂O₃",
+          "subtitle": "Iron is already 4 on both sides; try coefficients for O₂ until the oxygen bars match. Drag the end of the reactant oxygen bar.",
+          "handle": "Coefficient of O₂",
+          "caption": "With x = {x} the reactants carry {l} oxygen atoms; the products need 6.",
+          "rowX": "Coefficient of O₂ (x)",
+          "rowFe": "Iron atoms (left = right)",
+          "rowOL": "Oxygen atoms on the left (2x)",
+          "rowOR": "Oxygen atoms on the right (2 × 3)",
+          "rowDiff": "Oxygen difference",
+          "rowStatus": "Status",
+          "balanced": "Balanced",
+          "unbalanced": "Not balanced"
+        },
+        "scale": {
+          "title": "Lavoisier's Balance: 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Burn a mass of hydrogen with exactly enough oxygen: the water formed weighs as much as both gases together, so the balance stays level.",
+          "handle": "Mass of hydrogen",
+          "caption": "{h} g of hydrogen burns with {o} g of oxygen into {w} g of water: nothing is lost.",
+          "rowH2": "Hydrogen burned",
+          "rowMolH2": "Moles of H₂",
+          "rowO2": "Oxygen used (½ mol per mol H₂)",
+          "rowIn": "Mass going in",
+          "rowWater": "Water formed (mass coming out)",
+          "rowDiff": "Mass difference"
+        },
+        "growth": {
+          "title": "Trial and Error Grows Fast",
+          "subtitle": "Trying every coefficient from 1 to 10 for T terms means up to 10ᵀ combinations; solving the matrix by elimination takes about T³ arithmetic steps. Log scale.",
+          "handle": "Number of terms",
+          "caption": "With {t} terms: up to {trials} combinations by inspection, about {steps} steps by elimination.",
+          "terms": "terms",
+          "rowTerms": "Terms in the equation (T)",
+          "rowTrials": "Combinations to try (1 to 10 each)",
+          "rowSteps": "Elimination steps (≈ T³)",
+          "rowRatio": "Trial and error is slower by",
+          "legendTrials": "Trial and error (10ᵀ)",
+          "legendSteps": "Matrix method (≈ T³)"
+        },
+        "rings": {
+          "title": "Same Atoms on Both Sides",
+          "subtitle": "Inner ring: atoms of each element among the reactants; outer ring: among the products. In a balanced equation the two rings are identical. Step through six real reactions.",
+          "handle": "Reaction",
+          "caption": "{eq}: {n} atoms go in and {n} atoms come out.",
+          "rowTotal": "Atoms in total (left | right)",
+          "legend": "Element: left = right"
+        },
+        "columns": {
+          "title": "The Smallest Whole Numbers",
+          "subtitle": "Any multiple of a balanced set also balances; the calculator reports the smallest one. The solid part of each column is that smallest set, the translucent part the multiple.",
+          "handle": "Multiplier k",
+          "caption": "×{k}: {a}H₂ + {b}O₂ → {c}H₂O also balances; dividing by {k} gives the smallest set 2 : 1 : 2.",
+          "rowK": "Multiplier (k)",
+          "rowSet": "Multiplied equation",
+          "rowH": "Hydrogen atoms (left = right)",
+          "rowO": "Oxygen atoms (left = right)",
+          "rowGcd": "Greatest common divisor",
+          "rowSmallest": "Smallest whole-number set"
         }
       }
     },
