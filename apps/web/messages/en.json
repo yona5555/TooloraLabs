@@ -18846,7 +18846,6 @@
         "swap": "Swap units",
         "valueLabel": "Value",
         "valuePlaceholder": "Enter value",
-        "convert": "Convert",
         "clear": "Clear"
       },
       "units": {
@@ -18889,19 +18888,11 @@
         "knot": "Knots (kn)",
         "fts": "Feet/Second (ft/s)"
       },
-      "errors": {
-        "required": "Please enter a valid number.",
-        "outOfRange": "Value must be a reasonable number (within ±1,000,000,000).",
-        "invalidUnit": "This unit is not supported."
-      },
       "education": {
         "intro": {
           "title": "How Unit Conversion Actually Works",
           "paragraph1": "The metric system converts easily between units for one deliberate reason: every unit in a category is a power of ten away from its neighbors. A kilometer is exactly 1,000 meters, a centimeter is exactly 1/100 of a meter — converting between them is just shifting a decimal point. Imperial and US customary units carry no such pattern, because they weren't designed as a system at all: they accumulated from separate historical trades and crafts, which is why a foot is 12 inches, a yard is 3 feet, and a mile is 5,280 feet — each ratio is a specific number this tool has to store, not a rule you can derive.",
-          "paragraph2": "Temperature is the one category where even multiplying by a fixed factor doesn't work, because Celsius and Fahrenheit don't share a common zero point — 0°C is the freezing point of water, not \"no temperature,\" so converting requires shifting the scale before rescaling it, not just multiplying. Kelvin is the exception: it's an absolute scale that starts at true zero (no negative temperatures are physically possible), which is exactly why scientific work is done in Kelvin rather than Celsius or Fahrenheit. Rather than making you pick one target unit at a time, this tool shows the value converted into every unit in the category at once, since \"which unit do I actually want\" is often the real question.",
-          "diagram": {
-            "caption": "Metric prefixes are exact powers of ten apart — converting from kilo to milli is a shift of six decimal places, not a lookup table."
-          }
+          "paragraph2": "Temperature is the one category where even multiplying by a fixed factor doesn't work, because Celsius and Fahrenheit don't share a common zero point — 0°C is the freezing point of water, not \"no temperature,\" so converting requires shifting the scale before rescaling it, not just multiplying. Kelvin is the exception: it's an absolute scale that starts at true zero (no negative temperatures are physically possible), which is exactly why scientific work is done in Kelvin rather than Celsius or Fahrenheit. Rather than making you pick one target unit at a time, this tool shows the value converted into every unit in the category at once, since \"which unit do I actually want\" is often the real question."
         },
         "examples": {
           "title": "Worked Examples",
@@ -19042,6 +19033,94 @@
         "inputSectionTitle": "Input",
         "fromValueLabel": "Converting From",
         "resultSectionTitle": "Result"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Drag to change the value"
+        },
+        "prefix": {
+          "title": "Metric Prefixes: One Hop per Power of Ten",
+          "subtitle": "Every metric prefix is a whole number of ×10 hops from the base unit. Pick a prefix and count the hops: that count is how far the decimal point moves.",
+          "caption": "{eq}: the decimal point moves {n} places.",
+          "handle": "Drag to pick a prefix",
+          "names": [
+            "milli",
+            "centi",
+            "deci",
+            "base unit",
+            "deca",
+            "hecto",
+            "kilo"
+          ],
+          "rowPrefix": "Prefix",
+          "rowSymbol": "Unit symbol",
+          "rowFactor": "Factor to the meter",
+          "rowShift": "Decimal places moved"
+        },
+        "imperial": {
+          "title": "Inches, Feet and Yards on One Length",
+          "subtitle": "The same length notched three ways: every 12 inches make a foot and every 36 make a yard. These stored ratios are what the converter multiplies by.",
+          "caption": "{eq}.",
+          "handle": "Drag to change the length",
+          "rowInches": "Length in inches"
+        },
+        "tempLine": {
+          "title": "Celsius to Fahrenheit: Scale, Then Shift",
+          "subtitle": "°F = °C × 1.8 + 32. The solid line is the real conversion; the dashed line multiplies only and misses by exactly 32 °F at every point.",
+          "caption": "{c} on the solid line reads {f}.",
+          "handle": "Drag to change the Celsius value",
+          "rowNaive": "Multiplying only (wrong)"
+        },
+        "scales": {
+          "title": "Kelvin, Celsius and Fahrenheit Side by Side",
+          "subtitle": "Three scales for one temperature. Only Kelvin starts at absolute zero, so it never goes negative; Celsius and Fahrenheit put their zero elsewhere.",
+          "caption": "{k} is {c} and {f}.",
+          "handle": "Drag to change the temperature",
+          "rowRankine": "Rankine (K × 1.8)",
+          "rowAboveZero": "Above absolute zero",
+          "mark": {
+            "zero": "Absolute zero",
+            "freeze": "Water freezes",
+            "boil": "Water boils"
+          }
+        },
+        "areaCircles": {
+          "title": "Hectares and Acres as Circles of True Area",
+          "subtitle": "Each circle's area is drawn to scale: one acre, one football pitch, and your number of hectares.",
+          "caption": "{eq}, about {p} football pitches.",
+          "handle": "Drag to change the area",
+          "pitch": "1 pitch",
+          "rowPitches": "Football pitches (105 m × 68 m)"
+        },
+        "road": {
+          "title": "One Hour on the Road in km and Miles",
+          "subtitle": "At a steady speed, one hour covers the speed's own number of kilometers. The mile ticks under the road show the same distance in miles.",
+          "caption": "At {kmh} you cover {km}, which is {mi}, in one hour.",
+          "handle": "Drag to change the speed",
+          "afterHour": "after 1 hour",
+          "rowTime100": "Time for 100 km"
+        },
+        "gallons": {
+          "title": "US and UK Gallons for the Same Liters",
+          "subtitle": "The same liters poured into gallon jugs drawn to scale: a US gallon jug holds 3.785 L and a UK gallon jug 4.546 L, so the US row needs more jugs.",
+          "caption": "{l} is {us} US gallons but only {uk} UK gallons.",
+          "handle": "Drag to change the volume",
+          "rowDiff": "US minus UK gallons",
+          "rowRatio": "UK gallon ÷ US gallon"
+        },
+        "meridian": {
+          "title": "The 1791 Meter: A Quarter of the Meridian",
+          "subtitle": "The meter was defined as one ten-millionth of the distance from the equator to the North Pole, so that quarter meridian is 10,000 km by definition.",
+          "caption": "Latitude {lat} is {km} from the equator along the meridian.",
+          "handle": "Drag to change the latitude",
+          "equator": "Equator",
+          "pole": "North Pole",
+          "rowLatitude": "Latitude",
+          "rowModern": "Modern measured distance"
+        }
+      },
+      "sideCards": {
+        "instrumentTitle": "On the Measuring Instrument"
       }
     },
     "qr-code-generator": {

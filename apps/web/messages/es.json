@@ -18846,7 +18846,6 @@
         "swap": "Intercambiar unidades",
         "valueLabel": "Valor",
         "valuePlaceholder": "Introduce un valor",
-        "convert": "Convertir",
         "clear": "Borrar"
       },
       "units": {
@@ -18889,19 +18888,11 @@
         "knot": "Nudos (kn)",
         "fts": "Pies/segundo (ft/s)"
       },
-      "errors": {
-        "required": "Introduce un número válido.",
-        "outOfRange": "El valor debe ser un número razonable (dentro de ±1.000.000.000).",
-        "invalidUnit": "Esta unidad no es compatible."
-      },
       "education": {
         "intro": {
           "title": "Cómo funciona realmente la conversión de unidades",
           "paragraph1": "El sistema métrico se convierte con facilidad entre unidades por una razón deliberada: cada unidad de una categoría está a una potencia de diez de sus vecinas. Un kilómetro son exactamente 1.000 metros, un centímetro es exactamente 1/100 de metro — convertir entre ellos es solo desplazar la coma decimal. Las unidades imperiales y las estadounidenses habituales no siguen ningún patrón así, porque nunca se diseñaron como un sistema: se fueron acumulando a partir de oficios y gremios históricos independientes, por eso un pie tiene 12 pulgadas, una yarda tiene 3 pies y una milla tiene 5.280 pies — cada proporción es un número concreto que esta herramienta tiene que almacenar, no una regla que se pueda deducir.",
-          "paragraph2": "La temperatura es la única categoría en la que ni siquiera multiplicar por un factor fijo funciona, porque Celsius y Fahrenheit no comparten un punto cero común — 0 °C es el punto de congelación del agua, no «ausencia de temperatura», así que convertir exige desplazar la escala antes de reescalarla, no solo multiplicar. El Kelvin es la excepción: es una escala absoluta que empieza en el cero verdadero (no existen temperaturas negativas posibles físicamente), y por eso el trabajo científico se hace en Kelvin y no en Celsius o Fahrenheit. En lugar de obligarte a elegir una sola unidad de destino cada vez, esta herramienta muestra el valor convertido a todas las unidades de la categoría a la vez, porque «cuál es la unidad que realmente quiero» suele ser la pregunta real.",
-          "diagram": {
-            "caption": "Los prefijos métricos están separados por potencias exactas de diez — pasar de kilo a mili es un desplazamiento de seis posiciones decimales, no una tabla de consulta."
-          }
+          "paragraph2": "La temperatura es la única categoría en la que ni siquiera multiplicar por un factor fijo funciona, porque Celsius y Fahrenheit no comparten un punto cero común — 0 °C es el punto de congelación del agua, no «ausencia de temperatura», así que convertir exige desplazar la escala antes de reescalarla, no solo multiplicar. El Kelvin es la excepción: es una escala absoluta que empieza en el cero verdadero (no existen temperaturas negativas posibles físicamente), y por eso el trabajo científico se hace en Kelvin y no en Celsius o Fahrenheit. En lugar de obligarte a elegir una sola unidad de destino cada vez, esta herramienta muestra el valor convertido a todas las unidades de la categoría a la vez, porque «cuál es la unidad que realmente quiero» suele ser la pregunta real."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -19042,6 +19033,94 @@
         "inputSectionTitle": "Entrada",
         "fromValueLabel": "Convirtiendo desde",
         "resultSectionTitle": "Resultado"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Arrastra para cambiar el valor"
+        },
+        "prefix": {
+          "title": "Prefijos métricos: un salto por cada potencia de diez",
+          "subtitle": "Cada prefijo métrico está a un número entero de saltos de ×10 de la unidad base. Elige un prefijo y cuenta los saltos: ese número es cuánto se mueve la coma decimal.",
+          "caption": "{eq}: la coma decimal se mueve {n} posiciones.",
+          "handle": "Arrastra para elegir un prefijo",
+          "names": [
+            "mili",
+            "centi",
+            "deci",
+            "unidad base",
+            "deca",
+            "hecto",
+            "kilo"
+          ],
+          "rowPrefix": "Prefijo",
+          "rowSymbol": "Símbolo de la unidad",
+          "rowFactor": "Factor respecto al metro",
+          "rowShift": "Posiciones decimales movidas"
+        },
+        "imperial": {
+          "title": "Pulgadas, pies y yardas en una misma longitud",
+          "subtitle": "La misma longitud marcada de tres formas: cada 12 pulgadas forman un pie y cada 36 una yarda. Estas razones guardadas son las que multiplica el conversor.",
+          "caption": "{eq}.",
+          "handle": "Arrastra para cambiar la longitud",
+          "rowInches": "Longitud en pulgadas"
+        },
+        "tempLine": {
+          "title": "De Celsius a Fahrenheit: escalar y luego desplazar",
+          "subtitle": "°F = °C × 1.8 + 32. La línea continua es la conversión real; la discontinua solo multiplica y falla exactamente por 32 °F en todos los puntos.",
+          "caption": "{c} en la línea continua equivale a {f}.",
+          "handle": "Arrastra para cambiar el valor en Celsius",
+          "rowNaive": "Solo multiplicar (incorrecto)"
+        },
+        "scales": {
+          "title": "Kelvin, Celsius y Fahrenheit lado a lado",
+          "subtitle": "Tres escalas para una misma temperatura. Solo Kelvin empieza en el cero absoluto, así que nunca es negativo; Celsius y Fahrenheit sitúan su cero en otro lugar.",
+          "caption": "{k} son {c} y {f}.",
+          "handle": "Arrastra para cambiar la temperatura",
+          "rowRankine": "Rankine (K × 1.8)",
+          "rowAboveZero": "Por encima del cero absoluto",
+          "mark": {
+            "zero": "Cero absoluto",
+            "freeze": "El agua se congela",
+            "boil": "El agua hierve"
+          }
+        },
+        "areaCircles": {
+          "title": "Hectáreas y acres como círculos de área real",
+          "subtitle": "El área de cada círculo está a escala: un acre, un campo de fútbol y tu número de hectáreas.",
+          "caption": "{eq}, unos {p} campos de fútbol.",
+          "handle": "Arrastra para cambiar el área",
+          "pitch": "1 campo",
+          "rowPitches": "Campos de fútbol (105 m × 68 m)"
+        },
+        "road": {
+          "title": "Una hora en carretera en km y millas",
+          "subtitle": "A velocidad constante, en una hora recorres tantos kilómetros como indica la velocidad. Las marcas de millas bajo la carretera muestran la misma distancia en millas.",
+          "caption": "A {kmh} recorres {km}, es decir {mi}, en una hora.",
+          "handle": "Arrastra para cambiar la velocidad",
+          "afterHour": "tras 1 hora",
+          "rowTime100": "Tiempo para 100 km"
+        },
+        "gallons": {
+          "title": "Galones de EE. UU. y del Reino Unido para los mismos litros",
+          "subtitle": "Los mismos litros vertidos en garrafas de un galón dibujadas a escala: la de EE. UU. contiene 3.785 L y la del Reino Unido 4.546 L, así que la fila estadounidense necesita más garrafas.",
+          "caption": "{l} son {us} galones de EE. UU. pero solo {uk} galones británicos.",
+          "handle": "Arrastra para cambiar el volumen",
+          "rowDiff": "Galones de EE. UU. menos británicos",
+          "rowRatio": "Galón británico ÷ galón de EE. UU."
+        },
+        "meridian": {
+          "title": "El metro de 1791: un cuarto del meridiano",
+          "subtitle": "El metro se definió como la diezmillonésima parte de la distancia del ecuador al Polo Norte, así que ese cuarto de meridiano mide 10,000 km por definición.",
+          "caption": "La latitud {lat} está a {km} del ecuador a lo largo del meridiano.",
+          "handle": "Arrastra para cambiar la latitud",
+          "equator": "Ecuador",
+          "pole": "Polo Norte",
+          "rowLatitude": "Latitud",
+          "rowModern": "Distancia medida actual"
+        }
+      },
+      "sideCards": {
+        "instrumentTitle": "En el instrumento de medida"
       }
     },
     "qr-code-generator": {

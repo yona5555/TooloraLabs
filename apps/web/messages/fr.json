@@ -18846,7 +18846,6 @@
         "swap": "Inverser les unités",
         "valueLabel": "Valeur",
         "valuePlaceholder": "Entrez une valeur",
-        "convert": "Convertir",
         "clear": "Effacer"
       },
       "units": {
@@ -18889,19 +18888,11 @@
         "knot": "Nœuds (kn)",
         "fts": "Pieds/seconde (ft/s)"
       },
-      "errors": {
-        "required": "Veuillez entrer un nombre valide.",
-        "outOfRange": "La valeur doit être un nombre raisonnable (dans la plage ±1 000 000 000).",
-        "invalidUnit": "Cette unité n'est pas prise en charge."
-      },
       "education": {
         "intro": {
           "title": "Comment fonctionne réellement la conversion d'unités",
           "paragraph1": "Le système métrique se convertit facilement d'une unité à l'autre pour une raison bien précise : chaque unité d'une catégorie est séparée de ses voisines par une puissance de dix exacte. Un kilomètre vaut exactement 1 000 mètres, un centimètre vaut exactement 1/100 de mètre — passer de l'un à l'autre revient simplement à déplacer une virgule. Les unités impériales et le système américain usuel n'obéissent à aucune logique de ce genre, car ils n'ont jamais été conçus comme un système : ils se sont accumulés au fil de métiers et de traditions commerciales distincts, ce qui explique qu'un pied fasse 12 pouces, qu'une yard fasse 3 pieds et qu'un mile fasse 5 280 pieds — chaque rapport est un nombre précis que cet outil doit stocker, pas une règle qu'on peut déduire.",
-          "paragraph2": "La température est la seule catégorie où même multiplier par un facteur fixe ne fonctionne pas, car le Celsius et le Fahrenheit ne partagent pas le même point zéro — 0 °C correspond au point de congélation de l'eau, pas à « une absence de température » —, donc la conversion exige de décaler l'échelle avant de la remettre à l'échelle, et non simplement de multiplier. Le kelvin fait exception : c'est une échelle absolue qui part du zéro véritable (aucune température négative n'y est physiquement possible), ce qui explique précisément pourquoi les travaux scientifiques se font en kelvins plutôt qu'en Celsius ou en Fahrenheit. Plutôt que de vous demander de choisir une unité cible à la fois, cet outil affiche la valeur convertie dans toutes les unités de la catégorie en même temps, car la vraie question est souvent « quelle unité est-ce que je veux, au juste ? ».",
-          "diagram": {
-            "caption": "Les préfixes métriques sont séparés par des puissances de dix exactes — passer de kilo à milli, c'est décaler la virgule de six rangs, pas consulter une table de correspondance."
-          }
+          "paragraph2": "La température est la seule catégorie où même multiplier par un facteur fixe ne fonctionne pas, car le Celsius et le Fahrenheit ne partagent pas le même point zéro — 0 °C correspond au point de congélation de l'eau, pas à « une absence de température » —, donc la conversion exige de décaler l'échelle avant de la remettre à l'échelle, et non simplement de multiplier. Le kelvin fait exception : c'est une échelle absolue qui part du zéro véritable (aucune température négative n'y est physiquement possible), ce qui explique précisément pourquoi les travaux scientifiques se font en kelvins plutôt qu'en Celsius ou en Fahrenheit. Plutôt que de vous demander de choisir une unité cible à la fois, cet outil affiche la valeur convertie dans toutes les unités de la catégorie en même temps, car la vraie question est souvent « quelle unité est-ce que je veux, au juste ? »."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -19042,6 +19033,94 @@
         "inputSectionTitle": "Entrée",
         "fromValueLabel": "Conversion depuis",
         "resultSectionTitle": "Résultat"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Faites glisser pour changer la valeur"
+        },
+        "prefix": {
+          "title": "Préfixes métriques : un saut par puissance de dix",
+          "subtitle": "Chaque préfixe métrique se trouve à un nombre entier de sauts de ×10 de l'unité de base. Choisissez un préfixe et comptez les sauts : ce nombre indique de combien la virgule se déplace.",
+          "caption": "{eq} : la virgule se déplace de {n} rangs.",
+          "handle": "Faites glisser pour choisir un préfixe",
+          "names": [
+            "milli",
+            "centi",
+            "déci",
+            "unité de base",
+            "déca",
+            "hecto",
+            "kilo"
+          ],
+          "rowPrefix": "Préfixe",
+          "rowSymbol": "Symbole de l'unité",
+          "rowFactor": "Facteur par rapport au mètre",
+          "rowShift": "Rangs décimaux déplacés"
+        },
+        "imperial": {
+          "title": "Pouces, pieds et yards sur une même longueur",
+          "subtitle": "La même longueur graduée de trois façons : 12 pouces font un pied et 36 font un yard. Ce sont ces rapports enregistrés que le convertisseur multiplie.",
+          "caption": "{eq}.",
+          "handle": "Faites glisser pour changer la longueur",
+          "rowInches": "Longueur en pouces"
+        },
+        "tempLine": {
+          "title": "De Celsius à Fahrenheit : multiplier, puis décaler",
+          "subtitle": "°F = °C × 1.8 + 32. La ligne continue est la vraie conversion ; la ligne pointillée ne fait que multiplier et se trompe d'exactement 32 °F en chaque point.",
+          "caption": "{c} sur la ligne continue donne {f}.",
+          "handle": "Faites glisser pour changer la valeur en Celsius",
+          "rowNaive": "Multiplier seulement (faux)"
+        },
+        "scales": {
+          "title": "Kelvin, Celsius et Fahrenheit côte à côte",
+          "subtitle": "Trois échelles pour une même température. Seul le kelvin part du zéro absolu et n'est donc jamais négatif ; Celsius et Fahrenheit placent leur zéro ailleurs.",
+          "caption": "{k} correspond à {c} et {f}.",
+          "handle": "Faites glisser pour changer la température",
+          "rowRankine": "Rankine (K × 1.8)",
+          "rowAboveZero": "Au-dessus du zéro absolu",
+          "mark": {
+            "zero": "Zéro absolu",
+            "freeze": "L'eau gèle",
+            "boil": "L'eau bout"
+          }
+        },
+        "areaCircles": {
+          "title": "Hectares et acres en cercles de surface réelle",
+          "subtitle": "La surface de chaque cercle est à l'échelle : un acre, un terrain de football et votre nombre d'hectares.",
+          "caption": "{eq}, soit environ {p} terrains de football.",
+          "handle": "Faites glisser pour changer la surface",
+          "pitch": "1 terrain",
+          "rowPitches": "Terrains de football (105 m × 68 m)"
+        },
+        "road": {
+          "title": "Une heure de route en km et en miles",
+          "subtitle": "À vitesse constante, une heure couvre autant de kilomètres que le nombre affiché par la vitesse. Les graduations en miles sous la route montrent la même distance en miles.",
+          "caption": "À {kmh}, vous parcourez {km}, soit {mi}, en une heure.",
+          "handle": "Faites glisser pour changer la vitesse",
+          "afterHour": "après 1 heure",
+          "rowTime100": "Temps pour 100 km"
+        },
+        "gallons": {
+          "title": "Gallons US et UK pour les mêmes litres",
+          "subtitle": "Les mêmes litres versés dans des bidons d'un gallon dessinés à l'échelle : le bidon US contient 3.785 L et le bidon UK 4.546 L, donc la rangée US demande plus de bidons.",
+          "caption": "{l} font {us} gallons américains mais seulement {uk} gallons britanniques.",
+          "handle": "Faites glisser pour changer le volume",
+          "rowDiff": "Gallons américains moins britanniques",
+          "rowRatio": "Gallon britannique ÷ gallon américain"
+        },
+        "meridian": {
+          "title": "Le mètre de 1791 : un quart de méridien",
+          "subtitle": "Le mètre a été défini comme la dix-millionième partie de la distance de l'équateur au pôle Nord ; ce quart de méridien mesure donc 10,000 km par définition.",
+          "caption": "La latitude {lat} se trouve à {km} de l'équateur le long du méridien.",
+          "handle": "Faites glisser pour changer la latitude",
+          "equator": "Équateur",
+          "pole": "Pôle Nord",
+          "rowLatitude": "Latitude",
+          "rowModern": "Distance mesurée aujourd'hui"
+        }
+      },
+      "sideCards": {
+        "instrumentTitle": "Sur l'instrument de mesure"
       }
     },
     "qr-code-generator": {

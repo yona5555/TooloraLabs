@@ -4,7 +4,7 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MetricLadderDiagram from "./MetricLadderDiagram";
+import { UnitAreaCirclesCard, UnitGallonJugsCard, UnitImperialCard, UnitMeridianCard, UnitPrefixCard, UnitRoadCard, UnitScalesCard, UnitTempLineCard } from "./UnitCards";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -17,14 +17,23 @@ export default async function UnitEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <UnitPrefixCard side="visual-left" />
+        <UnitImperialCard side="table-left" />
         <p>{t("intro.paragraph2")}</p>
-        <MetricLadderDiagram caption={t("intro.diagram.caption")} />
+        <UnitTempLineCard side="visual-left" />
+        <UnitScalesCard side="table-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <UnitAreaCirclesCard side="visual-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -37,12 +46,13 @@ export default async function UnitEducation() {
               {exampleRows.map((row) => (
                 <tr key={row.scenario} className="border-b border-current/10">
                   <td className="px-3 py-2.5">{row.scenario}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  <td className="px-3 py-2.5 font-semibold tabular-nums">{row.result}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <UnitRoadCard side="table-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -51,11 +61,14 @@ export default async function UnitEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <UnitGallonJugsCard side="visual-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <UnitMeridianCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
@@ -81,6 +94,7 @@ export default async function UnitEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

@@ -18846,7 +18846,6 @@
         "swap": "Einheiten tauschen",
         "valueLabel": "Wert",
         "valuePlaceholder": "Wert eingeben",
-        "convert": "Umrechnen",
         "clear": "Zurücksetzen"
       },
       "units": {
@@ -18889,19 +18888,11 @@
         "knot": "Knoten (kn)",
         "fts": "Fuß/Sekunde (ft/s)"
       },
-      "errors": {
-        "required": "Bitte geben Sie eine gültige Zahl ein.",
-        "outOfRange": "Der Wert muss eine sinnvolle Zahl sein (innerhalb ±1.000.000.000).",
-        "invalidUnit": "Diese Einheit wird nicht unterstützt."
-      },
       "education": {
         "intro": {
           "title": "Wie die Einheitenumrechnung tatsächlich funktioniert",
           "paragraph1": "Das metrische System lässt sich aus einem bewussten Grund leicht zwischen Einheiten umrechnen: Jede Einheit einer Kategorie ist eine Zehnerpotenz von ihren Nachbarn entfernt. Ein Kilometer sind genau 1.000 Meter, ein Zentimeter genau 1/100 Meter – die Umrechnung dazwischen ist nur ein Verschieben des Kommas. Britische und US-amerikanische Maßeinheiten folgen keinem solchen Muster, weil sie überhaupt nicht als System entworfen wurden: Sie entstanden aus getrennten historischen Handwerken und Gewerben, weshalb ein Fuß 12 Zoll sind, ein Yard 3 Fuß und eine Meile 5.280 Fuß – jedes Verhältnis ist eine spezifische Zahl, die dieses Tool speichern muss, keine ableitbare Regel.",
-          "paragraph2": "Temperatur ist die einzige Kategorie, bei der selbst die Multiplikation mit einem festen Faktor nicht funktioniert, weil Celsius und Fahrenheit keinen gemeinsamen Nullpunkt teilen – 0°C ist der Gefrierpunkt von Wasser, nicht „keine Temperatur\", weshalb die Umrechnung eine Verschiebung der Skala erfordert, bevor sie neu skaliert wird, nicht nur eine Multiplikation. Kelvin ist die Ausnahme: Es ist eine absolute Skala, die beim tatsächlichen Nullpunkt beginnt (negative Temperaturen sind physikalisch nicht möglich) – genau deshalb wird wissenschaftliche Arbeit in Kelvin statt in Celsius oder Fahrenheit durchgeführt. Statt Sie zu zwingen, jeweils eine Zieleinheit auszuwählen, zeigt dieses Tool den Wert gleichzeitig in jede Einheit der Kategorie umgerechnet, da „welche Einheit will ich eigentlich\" oft die eigentliche Frage ist.",
-          "diagram": {
-            "caption": "Metrische Vorsilben sind exakte Zehnerpotenzen auseinander – die Umrechnung von Kilo zu Milli ist eine Verschiebung um sechs Dezimalstellen, keine Nachschlagetabelle."
-          }
+          "paragraph2": "Temperatur ist die einzige Kategorie, bei der selbst die Multiplikation mit einem festen Faktor nicht funktioniert, weil Celsius und Fahrenheit keinen gemeinsamen Nullpunkt teilen – 0°C ist der Gefrierpunkt von Wasser, nicht „keine Temperatur\", weshalb die Umrechnung eine Verschiebung der Skala erfordert, bevor sie neu skaliert wird, nicht nur eine Multiplikation. Kelvin ist die Ausnahme: Es ist eine absolute Skala, die beim tatsächlichen Nullpunkt beginnt (negative Temperaturen sind physikalisch nicht möglich) – genau deshalb wird wissenschaftliche Arbeit in Kelvin statt in Celsius oder Fahrenheit durchgeführt. Statt Sie zu zwingen, jeweils eine Zieleinheit auszuwählen, zeigt dieses Tool den Wert gleichzeitig in jede Einheit der Kategorie umgerechnet, da „welche Einheit will ich eigentlich\" oft die eigentliche Frage ist."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -19042,6 +19033,94 @@
         "inputSectionTitle": "Eingabe",
         "fromValueLabel": "Umrechnung von",
         "resultSectionTitle": "Ergebnis"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Ziehen, um den Wert zu ändern"
+        },
+        "prefix": {
+          "title": "Metrische Präfixe: ein Sprung pro Zehnerpotenz",
+          "subtitle": "Jedes metrische Präfix liegt eine ganze Zahl von ×10-Sprüngen von der Grundeinheit entfernt. Wähle ein Präfix und zähle die Sprünge: So weit wandert das Dezimalkomma.",
+          "caption": "{eq}: Das Dezimalkomma wandert um {n} Stellen.",
+          "handle": "Ziehen, um ein Präfix zu wählen",
+          "names": [
+            "Milli",
+            "Zenti",
+            "Dezi",
+            "Grundeinheit",
+            "Deka",
+            "Hekto",
+            "Kilo"
+          ],
+          "rowPrefix": "Präfix",
+          "rowSymbol": "Einheitenzeichen",
+          "rowFactor": "Faktor zum Meter",
+          "rowShift": "Verschobene Dezimalstellen"
+        },
+        "imperial": {
+          "title": "Zoll, Fuß und Yard auf einer Länge",
+          "subtitle": "Dieselbe Länge auf drei Arten eingeteilt: 12 Zoll ergeben einen Fuß, 36 Zoll ein Yard. Mit diesen gespeicherten Verhältnissen rechnet der Umrechner.",
+          "caption": "{eq}.",
+          "handle": "Ziehen, um die Länge zu ändern",
+          "rowInches": "Länge in Zoll"
+        },
+        "tempLine": {
+          "title": "Celsius in Fahrenheit: erst skalieren, dann verschieben",
+          "subtitle": "°F = °C × 1.8 + 32. Die durchgezogene Linie ist die echte Umrechnung; die gestrichelte multipliziert nur und liegt überall um genau 32 °F daneben.",
+          "caption": "{c} ergibt auf der durchgezogenen Linie {f}.",
+          "handle": "Ziehen, um den Celsius-Wert zu ändern",
+          "rowNaive": "Nur multiplizieren (falsch)"
+        },
+        "scales": {
+          "title": "Kelvin, Celsius und Fahrenheit nebeneinander",
+          "subtitle": "Drei Skalen für eine Temperatur. Nur Kelvin beginnt am absoluten Nullpunkt und wird daher nie negativ; Celsius und Fahrenheit legen ihren Nullpunkt anders fest.",
+          "caption": "{k} sind {c} und {f}.",
+          "handle": "Ziehen, um die Temperatur zu ändern",
+          "rowRankine": "Rankine (K × 1.8)",
+          "rowAboveZero": "Über dem absoluten Nullpunkt",
+          "mark": {
+            "zero": "Absoluter Nullpunkt",
+            "freeze": "Wasser gefriert",
+            "boil": "Wasser siedet"
+          }
+        },
+        "areaCircles": {
+          "title": "Hektar und Acre als flächentreue Kreise",
+          "subtitle": "Die Fläche jedes Kreises ist maßstabsgetreu: ein Acre, ein Fußballfeld und deine Anzahl Hektar.",
+          "caption": "{eq}, etwa {p} Fußballfelder.",
+          "handle": "Ziehen, um die Fläche zu ändern",
+          "pitch": "1 Feld",
+          "rowPitches": "Fußballfelder (105 m × 68 m)"
+        },
+        "road": {
+          "title": "Eine Stunde auf der Straße in km und Meilen",
+          "subtitle": "Bei konstanter Geschwindigkeit legst du in einer Stunde so viele Kilometer zurück, wie die Geschwindigkeit angibt. Die Meilenmarken unter der Straße zeigen dieselbe Strecke in Meilen.",
+          "caption": "Mit {kmh} legst du in einer Stunde {km} zurück, also {mi}.",
+          "handle": "Ziehen, um die Geschwindigkeit zu ändern",
+          "afterHour": "nach 1 Stunde",
+          "rowTime100": "Zeit für 100 km"
+        },
+        "gallons": {
+          "title": "US- und UK-Gallonen für dieselben Liter",
+          "subtitle": "Dieselben Liter in maßstabsgetreue Gallonenkanister gefüllt: Der US-Kanister fasst 3.785 L, der UK-Kanister 4.546 L, daher braucht die US-Reihe mehr Kanister.",
+          "caption": "{l} sind {us} US-Gallonen, aber nur {uk} UK-Gallonen.",
+          "handle": "Ziehen, um das Volumen zu ändern",
+          "rowDiff": "US- minus UK-Gallonen",
+          "rowRatio": "UK-Gallone ÷ US-Gallone"
+        },
+        "meridian": {
+          "title": "Der Meter von 1791: ein Viertel des Meridians",
+          "subtitle": "Der Meter wurde als zehnmillionster Teil der Strecke vom Äquator zum Nordpol definiert; dieser Meridianquadrant misst daher per Definition 10,000 km.",
+          "caption": "Die Breite {lat} liegt entlang des Meridians {km} vom Äquator entfernt.",
+          "handle": "Ziehen, um die Breite zu ändern",
+          "equator": "Äquator",
+          "pole": "Nordpol",
+          "rowLatitude": "Geografische Breite",
+          "rowModern": "Heute gemessene Strecke"
+        }
+      },
+      "sideCards": {
+        "instrumentTitle": "Am Messinstrument"
       }
     },
     "qr-code-generator": {
