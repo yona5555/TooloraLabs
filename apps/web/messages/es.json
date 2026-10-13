@@ -9990,7 +9990,6 @@
         "temperaturePlaceholder": "p. ej. 273.15",
         "calculate": "Calcular",
         "clear": "Limpiar",
-        "variablesCaption": "La cantidad que estás calculando está resaltada.",
         "scenarioPresetsLabel": "Prueba un escenario real:",
         "scenarios": {
           "carTireInflated": "Neumático de Coche Inflado",
@@ -10009,45 +10008,14 @@
         "volume": "Volumen",
         "moles": "Moles",
         "temperature": "Temperatura",
-        "diagramCaption": "La altura del pistón refleja el volumen, el número de partículas refleja los moles, y el color refleja la temperatura.",
-        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de la ley de los gases.",
-        "pressureGaugeCaption": "Presión mostrada en un dial referenciado a 1 atm (marcada), presión atmosférica estándar."
+        "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado de la ley de los gases."
       },
       "education": {
         "intro": {
           "title": "Entendiendo la Ley de los Gases Ideales",
           "paragraph1": "La ley de los gases ideales, PV = nRT, relaciona las cuatro propiedades medibles de un gas ideal: presión (P), volumen (V), cantidad de sustancia en moles (n) y temperatura absoluta (T) en kelvin, conectadas por la constante universal de los gases R (0.0820574 L·atm por mol·K cuando la presión está en atmósferas y el volumen en litros). Conocidas tres cualesquiera de las cuatro cantidades, la ecuación resuelve directamente la cuarta.",
-          "diagram": {
-            "caption": "Un mol de un gas ideal en condiciones estándar de temperatura y presión (0 °C, 1 atm) ocupa 22.414 litros."
-          },
           "paragraph2": "La ecuación combina tres relaciones más simples descubiertas de forma independiente: la ley de Boyle (presión y volumen son inversamente proporcionales a temperatura constante), la ley de Charles (volumen y temperatura son directamente proporcionales a presión constante) y la ley de Avogadro (volumen y moles son directamente proporcionales a presión y temperatura constantes). Combinadas, estas tres proporcionalidades producen la única ecuación unificada PV = nRT.",
-          "paragraph3": "Lo «ideal» en la ley de los gases ideales describe un modelo simplificador: supone que las partículas de gas no tienen volumen propio ni fuerzas de atracción o repulsión entre ellas. Los gases reales solo se aproximan a este comportamiento, desviándose más bajo alta presión o baja temperatura, donde el tamaño molecular y las fuerzas intermoleculares se vuelven significativos; pero a presiones y temperaturas ordinarias, la mayoría de los gases siguen la ley de los gases ideales con suficiente precisión para cálculos prácticos.",
-          "pvCurve": {
-            "xLabel": "Volumen (V)",
-            "yLabel": "Presión (P)",
-            "caption": "A temperatura y moles constantes, la presión y el volumen trazan una curva inversa (Ley de Boyle), no una línea recta."
-          },
-          "stpReference": {
-            "label": "22.4 L",
-            "caption": "Un mol de gas ideal en condiciones estándar ocupa 22.4 litros, más de 22 veces el volumen de una caja de 1 litro."
-          },
-          "pressureGauge": {
-            "title": "Pruébalo: ¿cuánta presión es esa?",
-            "intro": "Elige una presión real para verla en el medidor y compararla con otras.",
-            "vacuum": "Vacío",
-            "normal": "Normal",
-            "highPressure": "Alta",
-            "verdict": "{source} — nivel de presión: {classification}.",
-            "psiFact": "Eso equivale a unos {psi} psi.",
-            "sources": {
-              "outerSpace": "El Espacio Exterior",
-              "vacuumCleaner": "Una Aspiradora",
-              "atmosphere": "Atmósfera a Nivel del Mar",
-              "carTire": "Un Neumático de Coche Inflado",
-              "scubaTank": "Un Tanque de Buceo",
-              "hydraulicPress": "Una Prensa Hidráulica Industrial"
-            }
-          }
+          "paragraph3": "Lo «ideal» en la ley de los gases ideales describe un modelo simplificador: supone que las partículas de gas no tienen volumen propio ni fuerzas de atracción o repulsión entre ellas. Los gases reales solo se aproximan a este comportamiento, desviándose más bajo alta presión o baja temperatura, donde el tamaño molecular y las fuerzas intermoleculares se vuelven significativos; pero a presiones y temperaturas ordinarias, la mayoría de los gases siguen la ley de los gases ideales con suficiente precisión para cálculos prácticos."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -10152,13 +10120,11 @@
           },
           "pressureGaugeSection": {
             "title": "Presión en un Dial",
-            "paragraph": "Un dial hace tangible un número de presión abstracto al colocarlo frente a la referencia cotidiana de 1 atmósfera, la presión del aire a nuestro alrededor al nivel del mar.",
-            "caption": "1 atm mostrada en un dial referenciado a la presión atmosférica estándar."
+            "paragraph": "Un dial hace tangible un número de presión abstracto al colocarlo frente a la referencia cotidiana de 1 atmósfera, la presión del aire a nuestro alrededor al nivel del mar."
           },
           "variablesSection": {
             "title": "Cuatro Cantidades, Una Ecuación",
-            "paragraph": "La ley de los gases ideales vincula presión, volumen, moles y temperatura en una sola ecuación: conocer tres siempre determina la cuarta.",
-            "caption": "La cantidad que se está calculando está resaltada; el resto son conocidas."
+            "paragraph": "La ley de los gases ideales vincula presión, volumen, moles y temperatura en una sola ecuación: conocer tres siempre determina la cuarta."
           }
         },
         "references": {
@@ -10168,11 +10134,6 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Leer el Texto Original"
         }
-      },
-      "gauge": {
-        "low": "Por debajo de la atmosférica",
-        "atmospheric": "Cerca de la atmosférica",
-        "high": "Por encima de la atmosférica"
       },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
@@ -10211,6 +10172,116 @@
           "kilopascals": "Litros · Kilopascales",
           "torr": "Litros · Torr",
           "calories": "Calorías"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Temperatura del gas"
+        },
+        "spheres": {
+          "title": "Volumen molar: un mol ocupa 22.4 L",
+          "subtitle": "El volumen de cada esfera está a escala: una cantidad de gas ideal a 1 atm, a 0 °C y a 25 °C, junto a una esfera de 1 L como referencia.",
+          "handle": "Cantidad de gas",
+          "caption": "{n} mol ocupan {v0} L a 0 °C y {v25} L a 25 °C.",
+          "rowN": "Cantidad (n)",
+          "rowV0": "Volumen a 0 °C y 1 atm",
+          "rowV25": "Volumen a 25 °C y 1 atm",
+          "rowRatio": "Frente a 1 L",
+          "rowMolecules": "Moléculas (n × 6.022 × 10²³)",
+          "rowGain": "Volumen extra de 0 °C a 25 °C"
+        },
+        "speed": {
+          "title": "Velocidades moleculares en el nitrógeno",
+          "subtitle": "Cada estela es la velocidad de una molécula, a escala. Un gas más caliente tiene moléculas más rápidas, y ese movimiento es lo que empuja las paredes como presión.",
+          "handle": "Temperatura del gas",
+          "caption": "A {t} °C las moléculas de nitrógeno se mueven a {rms} m/s (velocidad cuadrática media).",
+          "rowT": "Temperatura",
+          "rowMp": "Velocidad más probable",
+          "rowAvg": "Velocidad media",
+          "rowRms": "Velocidad cuadrática media",
+          "rowKmh": "Velocidad rms en km/h",
+          "rowKe": "Energía cinética media por molécula"
+        },
+        "altitude": {
+          "title": "Un globo que asciende por la atmósfera",
+          "subtitle": "Un mol de aire en un globo libre que sube por la atmósfera estándar de la OACI: la presión baja más rápido que la temperatura, así que el globo se hincha.",
+          "handle": "Altitud",
+          "caption": "A {h} km el mol de aire ocupa {v} L, {ratio} veces su volumen en tierra.",
+          "captionGround": "Al nivel del mar (0 km) el mol de aire ocupa {v} L, igual a su volumen en tierra.",
+          "rowH": "Altitud",
+          "rowT": "Temperatura del aire",
+          "rowP": "Presión del aire",
+          "rowV": "Volumen de 1 mol de aire",
+          "rowRatio": "Frente al nivel del mar",
+          "rowRho": "Densidad del aire"
+        },
+        "boyle": {
+          "title": "Ley de Boyle: P × V se mantiene constante",
+          "subtitle": "Un mol a 0 °C que se comprime o se libera. El área sombreada P × V es la misma en cada punto de la curva.",
+          "handle": "Presión",
+          "caption": "A {p} atm el gas ocupa {v} L.",
+          "axisV": "Volumen (L)",
+          "rowP": "Presión (P)",
+          "rowKpa": "Presión en kPa",
+          "rowDouble": "V al doble de presión"
+        },
+        "charles": {
+          "title": "Ley de Charles: el volumen sigue a la temperatura",
+          "subtitle": "Un mol a 1 atm. Cada barra es el volumen a esa temperatura; la línea discontinua llega a volumen cero en el cero absoluto, −273.15 °C.",
+          "handle": "Temperatura",
+          "caption": "A {t} °C el mol de gas ocupa {v} L.",
+          "rowT": "Temperatura (°C)",
+          "rowK": "Temperatura absoluta",
+          "rowStp": "Frente a 0 °C",
+          "rowZero": "Volumen cero (extrapolado)"
+        },
+        "density": {
+          "title": "Mismo volumen, distinta masa: densidades de gases",
+          "subtitle": "Cada gas ocupa 22.4 L por mol a 0 °C y 1 atm, así que su densidad depende solo de su masa molar. La línea discontinua es el aire.",
+          "handle": "Gas seleccionado",
+          "caption": "{name} ({formula}) a 0 °C y 1 atm: {rho} g/L.",
+          "rowName": "Gas",
+          "rowM": "Masa molar",
+          "rowMass": "Masa de 22.4 L",
+          "rowAir": "Frente al aire",
+          "rowVerdict": "En el aire",
+          "rises": "sube",
+          "sinks": "baja",
+          "items": {
+            "hydrogen": "Hidrógeno",
+            "helium": "Helio",
+            "methane": "Metano",
+            "nitrogen": "Nitrógeno",
+            "oxygen": "Oxígeno",
+            "argon": "Argón",
+            "carbonDioxide": "Dióxido de carbono"
+          }
+        },
+        "dial": {
+          "title": "Presiones reales en un dial",
+          "subtitle": "Un dial logarítmico de 0.1 a 1000 atm con presiones reales, desde el casi vacío del espacio hasta una prensa industrial.",
+          "handle": "Presión seleccionada",
+          "caption": "{name}: unas {p} atm.",
+          "rowName": "Fuente",
+          "rowAtm": "Presión",
+          "rowKpa": "En kilopascales",
+          "rowPsi": "En psi",
+          "rowVmol": "Volumen de 1 mol a 20 °C",
+          "items": {
+            "outerSpace": "Espacio exterior",
+            "everest": "Cima del Everest",
+            "vacuumCleaner": "Aspiradora",
+            "atmosphere": "Atmósfera a nivel del mar",
+            "carTire": "Neumático inflado",
+            "scubaTank": "Botella de buceo",
+            "hydraulicPress": "Prensa hidráulica industrial"
+          }
+        },
+        "balance": {
+          "title": "PV = nRT como una balanza",
+          "subtitle": "El platillo izquierdo lleva P × V y el derecho n × R × T. Cambia la cantidad de gas a 1 atm y 0 °C: el volumen se ajusta y la balanza sigue nivelada.",
+          "handle": "Cantidad de gas",
+          "caption": "Con {n} mol la balanza se equilibra cuando V = {v} L."
         }
       }
     },

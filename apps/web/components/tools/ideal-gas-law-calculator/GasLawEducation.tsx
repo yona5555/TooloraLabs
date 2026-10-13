@@ -4,12 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import GasCylinderDiagram from "./GasCylinderDiagram";
-import GasPVCurveDiagram from "./GasPVCurveDiagram";
-import GasStpReferenceDiagram from "./GasStpReferenceDiagram";
-import GasPressureGaugeDiagram from "./GasPressureGaugeDiagram";
-import GasVariablesDiagram from "./GasVariablesDiagram";
-import GasPressureLevelGauge from "./GasPressureLevelGauge";
+import { GasBalanceCard, GasBoyleCard, GasCharlesCard, GasDensityCard, GasDialCard } from "./GasCards2D";
+import { GasAltitudeCard, GasSpeedCard, GasSpheresCard } from "./GasCards3D";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -22,21 +18,24 @@ export default async function GasLawEducation() {
 
   return (
     <EncyclopediaPaper>
-      <GasPressureLevelGauge />
-
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <div className="flex justify-center">
-          <GasCylinderDiagram volumeLiters={22.414} moles={1} temperatureKelvin={273.15} caption={t("intro.diagram.caption")} />
-        </div>
+        <GasSpheresCard n={1} side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
-        <GasPVCurveDiagram xLabel={t("intro.pvCurve.xLabel")} yLabel={t("intro.pvCurve.yLabel")} caption={t("intro.pvCurve.caption")} />
+        <GasBoyleCard n={2} side="table-left" />
+        <GasCharlesCard n={3} side="visual-left" />
         <p>{t("intro.paragraph3")}</p>
-        <GasStpReferenceDiagram label={t("intro.stpReference.label")} caption={t("intro.stpReference.caption")} />
+        <GasSpeedCard n={4} side="table-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <GasDensityCard n={5} side="visual-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -49,7 +48,7 @@ export default async function GasLawEducation() {
               {exampleRows.map((row) => (
                 <tr key={row.calculation} className="border-b border-current/10">
                   <td className="px-3 py-2.5">{row.calculation}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  <td className="px-3 py-2.5 font-semibold tabular-nums">{row.result}</td>
                 </tr>
               ))}
             </tbody>
@@ -63,6 +62,8 @@ export default async function GasLawEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <GasAltitudeCard n={6} side="table-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
@@ -75,18 +76,13 @@ export default async function GasLawEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.pressureGaugeSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.pressureGaugeSection.paragraph")}</p>
-          <GasPressureGaugeDiagram pressureAtm={1} label="1 atm" caption={t("behindTheTool.pressureGaugeSection.caption")} />
         </div>
+        <GasDialCard n={7} side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.variablesSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.variablesSection.paragraph")}</p>
-          <GasVariablesDiagram
-            solved="volume"
-            labels={{ pressure: "P", volume: "V", moles: "n", temperature: "T" }}
-            values={{ pressure: "1", volume: "?", moles: "1", temperature: "273.15" }}
-            caption={t("behindTheTool.variablesSection.caption")}
-          />
         </div>
+        <GasBalanceCard n={8} side="table-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -108,6 +104,7 @@ export default async function GasLawEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

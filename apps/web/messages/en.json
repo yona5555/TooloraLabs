@@ -9990,7 +9990,6 @@
         "temperaturePlaceholder": "e.g. 273.15",
         "calculate": "Calculate",
         "clear": "Clear",
-        "variablesCaption": "The quantity you're solving for is highlighted.",
         "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "carTireInflated": "Inflated Car Tire",
@@ -10009,45 +10008,14 @@
         "volume": "Volume",
         "moles": "Moles",
         "temperature": "Temperature",
-        "diagramCaption": "Piston height reflects volume, particle count reflects moles, and color reflects temperature.",
-        "emptyStateMessage": "Enter values and press Calculate to see your gas law result.",
-        "pressureGaugeCaption": "Pressure shown against a dial referenced to 1 atm (marked), standard atmospheric pressure."
+        "emptyStateMessage": "Enter values and press Calculate to see your gas law result."
       },
       "education": {
         "intro": {
           "title": "Understanding the Ideal Gas Law",
           "paragraph1": "The ideal gas law, PV = nRT, relates the four measurable properties of an ideal gas: pressure (P), volume (V), amount of substance in moles (n), and absolute temperature (T) in kelvins, connected by the universal gas constant R (0.0820574 L·atm per mol·K when pressure is in atmospheres and volume in liters). Given any three of the four quantities, the equation solves directly for the fourth.",
-          "diagram": {
-            "caption": "One mole of an ideal gas at standard temperature and pressure (0°C, 1 atm) occupies 22.414 liters."
-          },
           "paragraph2": "The equation is a combination of three simpler, independently discovered relationships: Boyle's law (pressure and volume are inversely proportional at constant temperature), Charles's law (volume and temperature are directly proportional at constant pressure), and Avogadro's law (volume and moles are directly proportional at constant pressure and temperature). Combined, these three proportionalities produce the single unified equation PV = nRT.",
-          "paragraph3": "The \"ideal\" in ideal gas law describes a simplifying model: it assumes gas particles have no volume of their own and no attractive or repulsive forces between them. Real gases only approximate this behavior, deviating most under high pressure or low temperature, where molecular size and intermolecular forces become significant — but at ordinary pressures and temperatures, most gases follow the ideal gas law closely enough for practical calculations.",
-          "pvCurve": {
-            "xLabel": "Volume (V)",
-            "yLabel": "Pressure (P)",
-            "caption": "At constant temperature and moles, pressure and volume trace an inverse (Boyle's Law) curve, not a straight line."
-          },
-          "stpReference": {
-            "label": "22.4 L",
-            "caption": "One mole of ideal gas at STP occupies 22.4 liters — over 22 times the volume of a 1-liter box."
-          },
-          "pressureGauge": {
-            "title": "Try It: How Much Pressure Is That?",
-            "intro": "Pick a real-world pressure to see it on the gauge and compare it with others.",
-            "vacuum": "Vacuum",
-            "normal": "Normal",
-            "highPressure": "High",
-            "verdict": "{source} sits at {classification} pressure.",
-            "psiFact": "That's about {psi} psi.",
-            "sources": {
-              "outerSpace": "Outer Space",
-              "vacuumCleaner": "A Vacuum Cleaner",
-              "atmosphere": "Sea-Level Atmosphere",
-              "carTire": "An Inflated Car Tire",
-              "scubaTank": "A Scuba Tank",
-              "hydraulicPress": "An Industrial Hydraulic Press"
-            }
-          }
+          "paragraph3": "The \"ideal\" in ideal gas law describes a simplifying model: it assumes gas particles have no volume of their own and no attractive or repulsive forces between them. Real gases only approximate this behavior, deviating most under high pressure or low temperature, where molecular size and intermolecular forces become significant — but at ordinary pressures and temperatures, most gases follow the ideal gas law closely enough for practical calculations."
         },
         "examples": {
           "title": "Worked Examples",
@@ -10152,13 +10120,11 @@
           },
           "pressureGaugeSection": {
             "title": "Pressure on a Dial",
-            "paragraph": "A dial gauge makes an abstract pressure number tangible by placing it against the everyday reference of 1 atmosphere, the pressure of the air around us at sea level.",
-            "caption": "1 atm shown on a dial referenced against standard atmospheric pressure."
+            "paragraph": "A dial gauge makes an abstract pressure number tangible by placing it against the everyday reference of 1 atmosphere, the pressure of the air around us at sea level."
           },
           "variablesSection": {
             "title": "Four Quantities, One Equation",
-            "paragraph": "The ideal gas law ties pressure, volume, moles, and temperature together in a single equation — knowing any three always determines the fourth.",
-            "caption": "The quantity being solved for is highlighted; the rest are known."
+            "paragraph": "The ideal gas law ties pressure, volume, moles, and temperature together in a single equation — knowing any three always determines the fourth."
           }
         },
         "references": {
@@ -10168,11 +10134,6 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Read the Original Text"
         }
-      },
-      "gauge": {
-        "low": "Below atmospheric",
-        "atmospheric": "Near atmospheric",
-        "high": "Above atmospheric"
       },
       "shareExport": {
         "triggerLabel": "Share / Export",
@@ -10211,6 +10172,116 @@
           "kilopascals": "Liters · Kilopascals",
           "torr": "Liters · Torr",
           "calories": "Calories"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Gas temperature"
+        },
+        "spheres": {
+          "title": "Molar Volume: One Mole Takes 22.4 L",
+          "subtitle": "Every sphere's volume is to scale: an amount of ideal gas at 1 atm, at 0 °C and at 25 °C, next to a 1 L sphere for reference.",
+          "handle": "Amount of gas",
+          "caption": "{n} mol fills {v0} L at 0 °C and {v25} L at 25 °C.",
+          "rowN": "Amount (n)",
+          "rowV0": "Volume at 0 °C, 1 atm",
+          "rowV25": "Volume at 25 °C, 1 atm",
+          "rowRatio": "Compared with 1 L",
+          "rowMolecules": "Molecules (n × 6.022 × 10²³)",
+          "rowGain": "Extra volume from 0 °C to 25 °C"
+        },
+        "speed": {
+          "title": "Molecular Speeds in Nitrogen",
+          "subtitle": "Each trail is a molecule's velocity, to scale. Hotter gas means faster molecules, and that faster motion is what pushes on the walls as pressure.",
+          "handle": "Gas temperature",
+          "caption": "At {t} °C nitrogen molecules move at {rms} m/s (root-mean-square).",
+          "rowT": "Temperature",
+          "rowMp": "Most probable speed",
+          "rowAvg": "Mean speed",
+          "rowRms": "Root-mean-square speed",
+          "rowKmh": "rms speed in km/h",
+          "rowKe": "Mean kinetic energy per molecule"
+        },
+        "altitude": {
+          "title": "A Balloon Rising Through the Atmosphere",
+          "subtitle": "One mole of air in a free balloon, carried up through the ICAO standard atmosphere: pressure falls faster than temperature, so the balloon swells.",
+          "handle": "Altitude",
+          "caption": "At {h} km the mole of air fills {v} L, {ratio} times its ground volume.",
+          "captionGround": "At sea level (0 km) the mole of air fills {v} L, equal to its ground volume.",
+          "rowH": "Altitude",
+          "rowT": "Air temperature",
+          "rowP": "Air pressure",
+          "rowV": "Volume of 1 mol of air",
+          "rowRatio": "Compared with sea level",
+          "rowRho": "Air density"
+        },
+        "boyle": {
+          "title": "Boyle's Law: P × V Stays Constant",
+          "subtitle": "One mole at 0 °C squeezed or released. The shaded area P × V is the same at every point of the curve.",
+          "handle": "Pressure",
+          "caption": "At {p} atm the gas takes {v} L.",
+          "axisV": "Volume (L)",
+          "rowP": "Pressure (P)",
+          "rowKpa": "Pressure in kPa",
+          "rowDouble": "V at double the pressure"
+        },
+        "charles": {
+          "title": "Charles's Law: Volume Follows Temperature",
+          "subtitle": "One mole at 1 atm. Each bar is the volume at that temperature; the dashed line reaches zero volume at absolute zero, −273.15 °C.",
+          "handle": "Temperature",
+          "caption": "At {t} °C the mole of gas takes {v} L.",
+          "rowT": "Temperature (°C)",
+          "rowK": "Absolute temperature",
+          "rowStp": "Compared with 0 °C",
+          "rowZero": "Zero volume (extrapolated)"
+        },
+        "density": {
+          "title": "Same Volume, Different Mass: Gas Densities",
+          "subtitle": "Every gas below fills 22.4 L per mole at 0 °C and 1 atm, so its density is set only by its molar mass. The dashed line is air.",
+          "handle": "Selected gas",
+          "caption": "{name} ({formula}) at 0 °C and 1 atm: {rho} g/L.",
+          "rowName": "Gas",
+          "rowM": "Molar mass",
+          "rowMass": "Mass of 22.4 L",
+          "rowAir": "Compared with air",
+          "rowVerdict": "In air it",
+          "rises": "rises",
+          "sinks": "sinks",
+          "items": {
+            "hydrogen": "Hydrogen",
+            "helium": "Helium",
+            "methane": "Methane",
+            "nitrogen": "Nitrogen",
+            "oxygen": "Oxygen",
+            "argon": "Argon",
+            "carbonDioxide": "Carbon dioxide"
+          }
+        },
+        "dial": {
+          "title": "Real Pressures on a Dial",
+          "subtitle": "A logarithmic dial from 0.1 to 1000 atm with real pressures, from the near-vacuum of space to an industrial press.",
+          "handle": "Selected pressure",
+          "caption": "{name}: about {p} atm.",
+          "rowName": "Source",
+          "rowAtm": "Pressure",
+          "rowKpa": "In kilopascals",
+          "rowPsi": "In psi",
+          "rowVmol": "Volume of 1 mol at 20 °C",
+          "items": {
+            "outerSpace": "Outer space",
+            "everest": "Summit of Everest",
+            "vacuumCleaner": "Vacuum cleaner",
+            "atmosphere": "Sea-level atmosphere",
+            "carTire": "Inflated car tire",
+            "scubaTank": "Scuba tank",
+            "hydraulicPress": "Industrial hydraulic press"
+          }
+        },
+        "balance": {
+          "title": "PV = nRT as a Balance",
+          "subtitle": "The left pan holds P × V, the right pan n × R × T. Change the amount of gas at 1 atm and 0 °C: the volume adjusts and the beam stays level.",
+          "handle": "Amount of gas",
+          "caption": "With {n} mol the balance holds when V = {v} L."
         }
       }
     },

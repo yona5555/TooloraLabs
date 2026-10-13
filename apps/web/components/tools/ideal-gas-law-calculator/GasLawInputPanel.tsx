@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import GasVariablesDiagram from "./GasVariablesDiagram";
 import type { GasLawSolveFor } from "./types";
 
 type GasLawInputPanelProps = {
@@ -59,19 +58,8 @@ export default function GasLawInputPanel({
         </div>
       </div>
 
-      <GasVariablesDiagram
-        solved={solveFor}
-        labels={{ pressure: "P", volume: "V", moles: "n", temperature: "T" }}
-        values={{
-          pressure: solveFor === "pressure" ? "?" : pressureAtm || "–",
-          volume: solveFor === "volume" ? "?" : volumeLiters || "–",
-          moles: solveFor === "moles" ? "?" : moles || "–",
-          temperature: solveFor === "temperature" ? "?" : temperatureKelvin || "–",
-        }}
-        caption={t("variablesCaption")}
-      />
 
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
         {solveFor !== "pressure" && (
           <ToolInput label={t("pressureLabel")} type="text" inputMode="decimal" placeholder={t("pressurePlaceholder")} value={pressureAtm} onChange={(e) => onPressureAtmChange(e.target.value)} />
         )}

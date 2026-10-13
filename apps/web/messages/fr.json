@@ -9990,7 +9990,6 @@
         "temperaturePlaceholder": "p. ex. 273.15",
         "calculate": "Calculer",
         "clear": "Effacer",
-        "variablesCaption": "La grandeur que vous calculez est mise en évidence.",
         "scenarioPresetsLabel": "Essayer un scénario réel :",
         "scenarios": {
           "carTireInflated": "Pneu de Voiture Gonflé",
@@ -10009,45 +10008,14 @@
         "volume": "Volume",
         "moles": "Moles",
         "temperature": "Température",
-        "diagramCaption": "La hauteur du piston reflète le volume, le nombre de particules reflète les moles, et la couleur reflète la température.",
-        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de la loi des gaz.",
-        "pressureGaugeCaption": "Pression affichée sur un cadran référencé à 1 atm (marqué), pression atmosphérique standard."
+        "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat de la loi des gaz."
       },
       "education": {
         "intro": {
           "title": "Comprendre la Loi des Gaz Parfaits",
           "paragraph1": "La loi des gaz parfaits, PV = nRT, relie les quatre propriétés mesurables d'un gaz parfait : la pression (P), le volume (V), la quantité de matière en moles (n) et la température absolue (T) en kelvins, reliées par la constante universelle des gaz R (0,0820574 L·atm par mol·K lorsque la pression est en atmosphères et le volume en litres). Trois quelconques des quatre grandeurs étant connues, l'équation résout directement la quatrième.",
-          "diagram": {
-            "caption": "Une mole d'un gaz parfait dans les conditions normales de température et de pression (0 °C, 1 atm) occupe 22,414 litres."
-          },
           "paragraph2": "L'équation combine trois relations plus simples, découvertes indépendamment : la loi de Boyle (pression et volume sont inversement proportionnels à température constante), la loi de Charles (volume et température sont directement proportionnels à pression constante) et la loi d'Avogadro (volume et moles sont directement proportionnels à pression et température constantes). Combinées, ces trois proportionnalités produisent l'équation unifiée unique PV = nRT.",
-          "paragraph3": "Le terme « parfait » dans loi des gaz parfaits décrit un modèle simplificateur : il suppose que les particules de gaz n'ont pas de volume propre et qu'il n'existe entre elles aucune force d'attraction ou de répulsion. Les gaz réels ne font qu'approcher ce comportement, s'en écartant le plus sous forte pression ou basse température, où la taille moléculaire et les forces intermoléculaires deviennent significatives — mais à pressions et températures ordinaires, la plupart des gaz suivent la loi des gaz parfaits avec une précision suffisante pour des calculs pratiques.",
-          "pvCurve": {
-            "xLabel": "Volume (V)",
-            "yLabel": "Pression (P)",
-            "caption": "À température et nombre de moles constants, la pression et le volume tracent une courbe inverse (loi de Boyle), pas une ligne droite."
-          },
-          "stpReference": {
-            "label": "22,4 L",
-            "caption": "Une mole de gaz parfait dans les conditions normales occupe 22,4 litres, soit plus de 22 fois le volume d'une boîte d'1 litre."
-          },
-          "pressureGauge": {
-            "title": "À essayer : quelle est cette pression ?",
-            "intro": "Choisissez une pression réelle pour la voir sur la jauge et la comparer à d'autres.",
-            "vacuum": "Vide",
-            "normal": "Normale",
-            "highPressure": "Élevée",
-            "verdict": "{source} — niveau de pression : {classification}.",
-            "psiFact": "Cela équivaut à environ {psi} psi.",
-            "sources": {
-              "outerSpace": "L'Espace",
-              "vacuumCleaner": "Un Aspirateur",
-              "atmosphere": "Atmosphère au Niveau de la Mer",
-              "carTire": "Un Pneu de Voiture Gonflé",
-              "scubaTank": "Une Bouteille de Plongée",
-              "hydraulicPress": "Une Presse Hydraulique Industrielle"
-            }
-          }
+          "paragraph3": "Le terme « parfait » dans loi des gaz parfaits décrit un modèle simplificateur : il suppose que les particules de gaz n'ont pas de volume propre et qu'il n'existe entre elles aucune force d'attraction ou de répulsion. Les gaz réels ne font qu'approcher ce comportement, s'en écartant le plus sous forte pression ou basse température, où la taille moléculaire et les forces intermoléculaires deviennent significatives — mais à pressions et températures ordinaires, la plupart des gaz suivent la loi des gaz parfaits avec une précision suffisante pour des calculs pratiques."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -10152,13 +10120,11 @@
           },
           "pressureGaugeSection": {
             "title": "La Pression sur un Cadran",
-            "paragraph": "Un cadran rend un nombre de pression abstrait tangible en le plaçant par rapport à la référence quotidienne d'1 atmosphère, la pression de l'air autour de nous au niveau de la mer.",
-            "caption": "1 atm affiché sur un cadran référencé à la pression atmosphérique standard."
+            "paragraph": "Un cadran rend un nombre de pression abstrait tangible en le plaçant par rapport à la référence quotidienne d'1 atmosphère, la pression de l'air autour de nous au niveau de la mer."
           },
           "variablesSection": {
             "title": "Quatre Grandeurs, Une Équation",
-            "paragraph": "La loi des gaz parfaits relie pression, volume, nombre de moles et température en une seule équation — en connaître trois détermine toujours la quatrième.",
-            "caption": "La grandeur calculée est mise en évidence ; les autres sont connues."
+            "paragraph": "La loi des gaz parfaits relie pression, volume, nombre de moles et température en une seule équation — en connaître trois détermine toujours la quatrième."
           }
         },
         "references": {
@@ -10168,11 +10134,6 @@
           "url": "https://doi.org/10.1021/ed080p731",
           "readOriginal": "Lire le Texte Original"
         }
-      },
-      "gauge": {
-        "low": "Sous l'atmosphérique",
-        "atmospheric": "Proche de l'atmosphérique",
-        "high": "Au-dessus de l'atmosphérique"
       },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
@@ -10211,6 +10172,116 @@
           "kilopascals": "Litres · Kilopascals",
           "torr": "Litres · Torr",
           "calories": "Calories"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Température du gaz"
+        },
+        "spheres": {
+          "title": "Volume molaire : une mole occupe 22.4 L",
+          "subtitle": "Le volume de chaque sphère est à l'échelle : une quantité de gaz parfait à 1 atm, à 0 °C et à 25 °C, à côté d'une sphère de 1 L pour référence.",
+          "handle": "Quantité de gaz",
+          "caption": "{n} mol occupent {v0} L à 0 °C et {v25} L à 25 °C.",
+          "rowN": "Quantité (n)",
+          "rowV0": "Volume à 0 °C et 1 atm",
+          "rowV25": "Volume à 25 °C et 1 atm",
+          "rowRatio": "Par rapport à 1 L",
+          "rowMolecules": "Molécules (n × 6.022 × 10²³)",
+          "rowGain": "Volume gagné de 0 °C à 25 °C"
+        },
+        "speed": {
+          "title": "Vitesses moléculaires dans le diazote",
+          "subtitle": "Chaque trace est la vitesse d'une molécule, à l'échelle. Un gaz plus chaud a des molécules plus rapides, et ce mouvement pousse les parois : c'est la pression.",
+          "handle": "Température du gaz",
+          "caption": "À {t} °C les molécules de diazote se déplacent à {rms} m/s (vitesse quadratique moyenne).",
+          "rowT": "Température",
+          "rowMp": "Vitesse la plus probable",
+          "rowAvg": "Vitesse moyenne",
+          "rowRms": "Vitesse quadratique moyenne",
+          "rowKmh": "Vitesse quadratique en km/h",
+          "rowKe": "Énergie cinétique moyenne par molécule"
+        },
+        "altitude": {
+          "title": "Un ballon qui monte dans l'atmosphère",
+          "subtitle": "Une mole d'air dans un ballon libre qui traverse l'atmosphère type de l'OACI : la pression baisse plus vite que la température, donc le ballon gonfle.",
+          "handle": "Altitude",
+          "caption": "À {h} km la mole d'air occupe {v} L, soit {ratio} fois son volume au sol.",
+          "captionGround": "Au niveau de la mer (0 km) la mole d'air occupe {v} L, soit exactement son volume au sol.",
+          "rowH": "Altitude",
+          "rowT": "Température de l'air",
+          "rowP": "Pression de l'air",
+          "rowV": "Volume de 1 mol d'air",
+          "rowRatio": "Par rapport au niveau de la mer",
+          "rowRho": "Masse volumique de l'air"
+        },
+        "boyle": {
+          "title": "Loi de Boyle : P × V reste constant",
+          "subtitle": "Une mole à 0 °C comprimée ou détendue. L'aire grisée P × V est la même en tout point de la courbe.",
+          "handle": "Pression",
+          "caption": "À {p} atm le gaz occupe {v} L.",
+          "axisV": "Volume (L)",
+          "rowP": "Pression (P)",
+          "rowKpa": "Pression en kPa",
+          "rowDouble": "V à pression double"
+        },
+        "charles": {
+          "title": "Loi de Charles : le volume suit la température",
+          "subtitle": "Une mole à 1 atm. Chaque barre est le volume à cette température ; la ligne pointillée atteint un volume nul au zéro absolu, −273.15 °C.",
+          "handle": "Température",
+          "caption": "À {t} °C la mole de gaz occupe {v} L.",
+          "rowT": "Température (°C)",
+          "rowK": "Température absolue",
+          "rowStp": "Par rapport à 0 °C",
+          "rowZero": "Volume nul (extrapolé)"
+        },
+        "density": {
+          "title": "Même volume, masse différente : masses volumiques des gaz",
+          "subtitle": "Chaque gaz occupe 22.4 L par mole à 0 °C et 1 atm, donc sa masse volumique ne dépend que de sa masse molaire. La ligne pointillée est l'air.",
+          "handle": "Gaz choisi",
+          "caption": "{name} ({formula}) à 0 °C et 1 atm : {rho} g/L.",
+          "rowName": "Gaz",
+          "rowM": "Masse molaire",
+          "rowMass": "Masse de 22.4 L",
+          "rowAir": "Par rapport à l'air",
+          "rowVerdict": "Dans l'air, il",
+          "rises": "monte",
+          "sinks": "descend",
+          "items": {
+            "hydrogen": "Dihydrogène",
+            "helium": "Hélium",
+            "methane": "Méthane",
+            "nitrogen": "Diazote",
+            "oxygen": "Dioxygène",
+            "argon": "Argon",
+            "carbonDioxide": "Dioxyde de carbone"
+          }
+        },
+        "dial": {
+          "title": "Pressions réelles sur un cadran",
+          "subtitle": "Un cadran logarithmique de 0.1 à 1000 atm avec des pressions réelles, du quasi-vide spatial à une presse industrielle.",
+          "handle": "Pression choisie",
+          "caption": "{name} : environ {p} atm.",
+          "rowName": "Source",
+          "rowAtm": "Pression",
+          "rowKpa": "En kilopascals",
+          "rowPsi": "En psi",
+          "rowVmol": "Volume de 1 mol à 20 °C",
+          "items": {
+            "outerSpace": "Espace",
+            "everest": "Sommet de l'Everest",
+            "vacuumCleaner": "Aspirateur",
+            "atmosphere": "Atmosphère au niveau de la mer",
+            "carTire": "Pneu gonflé",
+            "scubaTank": "Bouteille de plongée",
+            "hydraulicPress": "Presse hydraulique industrielle"
+          }
+        },
+        "balance": {
+          "title": "PV = nRT comme une balance",
+          "subtitle": "Le plateau de gauche porte P × V, celui de droite n × R × T. Changez la quantité de gaz à 1 atm et 0 °C : le volume s'ajuste et le fléau reste horizontal.",
+          "handle": "Quantité de gaz",
+          "caption": "Avec {n} mol, la balance est équilibrée quand V = {v} L."
         }
       }
     },

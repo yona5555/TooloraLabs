@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { IdealGasLawCalculator as IdealGasLawCalculatorTool, type IdealGasLawCalculatorOutput } from "@tooloralabs/tools";
@@ -9,10 +9,10 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { GlassPage } from "@/components/tool-ui/glass/GlassPrimitives";
 import GasLawInputPanel from "./GasLawInputPanel";
 import GasLawResult from "./GasLawResult";
 import GasLawQuickReference from "./GasLawQuickReference";
-import GasLawModeTabs from "./GasLawModeTabs";
 import GasLawStpCard from "./GasLawStpCard";
 import GasLawReferenceTable from "./GasLawReferenceTable";
 import type { GasLawSolveFor } from "./types";
@@ -129,6 +129,17 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
     setDigitStyle(resolveDigitStyle(preset.pressureAtm, preset.volumeLiters, preset.moles, preset.temperatureKelvin));
   }
 
+  // The 3D thermometer marker writes back into the calculator: the T field (solving for V if T was the unknown).
+  function handleHeroTemperature(value: number) {
+    const next = String(value);
+    const nextSolveFor = solveFor === "temperature" ? "volume" : solveFor;
+    setTemperatureKelvin(next);
+    setSolveFor(nextSolveFor);
+    setResult(computeResult(nextSolveFor, { ...currentInputs(), temperatureKelvin: next }));
+    setHasCalculated(true);
+    setDigitStyle("western");
+  }
+
   function handleClear() {
     setPressureAtm(DEFAULTS.pressureAtm);
     setVolumeLiters(DEFAULTS.volumeLiters);
@@ -145,11 +156,23 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
-  return (
+  const sideCards = (
     <>
+      <GasLawReferenceTable />
+      <GasLawStpCard volumeLiters={result.volumeLiters} moles={result.moles} digitStyle={digitStyle} />
+    </>
+  );
+
+  return (
+    <GlassPage>
+      {/* Inter everywhere on this page; drag-handle rims use the shared line token so they keep ≥3:1 in light mode. */}
+      <div data-chem-page style={{ fontFamily: "var(--glass-font)", ["--glass-handle-border" as string]: "var(--ph-line)" } as CSSProperties}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-3">
               <GasLawInputPanel
@@ -167,18 +190,25 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
-              <GasLawReferenceTable />
+              {/* Desktop: under the input card (keeps the columns flush). Phone: after the Result card. */}
+              <div className="hidden flex-col gap-3 lg:flex">{sideCards}</div>
             </div>
           }
           result={
-            <div className="flex flex-col gap-3">
-              <GasLawResult hasCalculated={hasCalculated} result={result} solveFor={solveFor} digitStyle={digitStyle} />
-              <GasLawModeTabs solveFor={solveFor} onSolveForChange={handleSolveForChange} />
-              <GasLawStpCard volumeLiters={result.volumeLiters} moles={result.moles} digitStyle={digitStyle} />
+            <div className="flex flex-col gap-3 lg:h-full">
+              <GasLawResult
+                hasCalculated={hasCalculated}
+                result={result}
+                solveFor={solveFor}
+                digitStyle={digitStyle}
+                onSetTemperature={handleHeroTemperature}
+                onSolveForChange={handleSolveForChange}
+              />
+              <div className="flex flex-col gap-3 lg:hidden">{sideCards}</div>
             </div>
           }
           sidebar={
-            <RelatedToolsSidebar currentSlug="ideal-gas-law-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="ideal-gas-law-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
@@ -191,6 +221,7 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
       </div>
 
       {education}
-    </>
+      </div>
+    </GlassPage>
   );
 }
