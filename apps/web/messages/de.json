@@ -30008,7 +30008,10 @@
         "heading": "Ergebnis",
         "emptyInput": "Gib einen Wert zum Umwandeln ein.",
         "outOfRange": "Gib eine ganze Zahl zwischen 1 und 3999 ein.",
-        "invalidRoman": "Das ist keine gültige Standard-Römerzahl."
+        "invalidRoman": "Das ist keine gültige Standard-Römerzahl.",
+        "standardForm": "Standardform",
+        "additiveForm": "Additive Form (ohne Subtraktion)",
+        "symbols": "{n} Symbole"
       },
       "quickReference": {
         "title": "Römische Symbole",
@@ -30162,6 +30165,115 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Ziehen, um die Zahl zu ändern",
+          "place": {
+            "thousands": "Tausender",
+            "hundreds": "Hunderter",
+            "tens": "Zehner",
+            "units": "Einer"
+          }
+        },
+        "waterfall": {
+          "title": "Eine römische Zahl lesen: eine laufende Summe",
+          "subtitle": "Von links nach rechts gelesen, addiert jedes Zeichen seinen Wert zur laufenden Summe, außer ein größeres Zeichen folgt; dann wird es abgezogen.",
+          "caption": "{numeral} baut sich Zeichen für Zeichen bis {n} auf.",
+          "handle": "Ziehen, um die Zahl zu ändern",
+          "rowNumber": "Zahl",
+          "rowNumeral": "Römische Schreibweise",
+          "rowAdded": "Addierte Zeichen",
+          "rowSubtracted": "Abgezogene Zeichen",
+          "rowSymbols": "Verwendete Zeichen"
+        },
+        "subtractive": {
+          "title": "Die sechs Subtraktionspaare",
+          "subtitle": "Nur sechs Paare dürfen subtrahieren: ein kleineres Zeichen vor dem nächsten, das ein oder zwei Stufen höher liegt. Jedes spart Buchstaben gegenüber der vollen Schreibweise.",
+          "caption": "{eq}, sonst geschrieben als {long}.",
+          "handle": "Ziehen, um ein Paar zu wählen",
+          "rowPair": "Paar",
+          "rowLarger": "Größeres Zeichen",
+          "rowSmaller": "Kleineres Zeichen",
+          "rowAdditive": "Voll ausgeschrieben",
+          "rowSaved": "Gesparte Buchstaben"
+        },
+        "clock": {
+          "title": "Römische Stunden auf dem Zifferblatt",
+          "subtitle": "Zifferblätter sind heute der häufigste Ort für römische Zahlen, und viele malen die Vier noch als IIII statt IV.",
+          "caption": "Stunde {h} ist {numeral}.",
+          "captionFour": "Stunde {h} ist in Standardform {numeral}, doch dieses Zifferblatt malt IIII, die Uhrmacher-Vier.",
+          "handle": "Den Stundenzeiger ziehen",
+          "rowHour": "Stunde",
+          "rowStandard": "Standardform",
+          "rowDial": "Wie auf vielen Zifferblättern gemalt",
+          "rowAfternoon": "Dieselbe Stunde im 24-Stunden-Format",
+          "rowLetters": "Buchstaben auf dem Zifferblatt"
+        },
+        "length": {
+          "title": "Wie lang ist jede römische Zahl?",
+          "subtitle": "Das Band zeigt die Länge der römischen Schreibweise jeder Zahl von 1 bis 3,999. Die Länge springt mit den Ziffern: Achten sind am längsten, runde Zahlen am kürzesten.",
+          "caption": "{n} braucht römisch {len} Buchstaben, gegenüber {digits} Ziffern.",
+          "handle": "Ziehen, um die Zahl zu ändern",
+          "rowNumber": "Zahl",
+          "rowNumeral": "Römische Schreibweise",
+          "rowLength": "Buchstaben",
+          "rowDigits": "Indisch-arabische Ziffern",
+          "rowRatio": "Buchstaben pro Ziffer",
+          "rowLongest": "Längste Schreibweise"
+        },
+        "years": {
+          "title": "Jahreszahlen in römischen Ziffern",
+          "subtitle": "Filmabspänne und Grundsteine schreiben Jahre so: zuerst die Tausender, dann der Rest des Jahres, Stelle für Stelle.",
+          "caption": "Das Jahr {y} schreibt man {numeral}.",
+          "handle": "Ziehen, um das Jahr zu ändern",
+          "rowYear": "Jahr",
+          "rowNumeral": "Römische Schreibweise",
+          "rowThousands": "Tausenderteil",
+          "rowRest": "Rest des Jahres",
+          "rowLetters": "Buchstaben"
+        },
+        "vinculum": {
+          "title": "Über 3,999 hinaus: der Strich, der mit 1,000 multipliziert",
+          "subtitle": "Römische Standardzahlen enden bei 3,999. Mittelalterliche Schreiber gingen weiter, indem sie einen Strich (vinculum) über eine Zahl zogen, um sie mit 1,000 zu multiplizieren; der Umrechner bleibt im Standardbereich.",
+          "caption": "{N} würde als {bar} mit Überstrich geschrieben.",
+          "handle": "Ziehen, um die Zahl zu ändern",
+          "rowNumber": "Zahl",
+          "rowBarred": "Form mit Überstrich",
+          "rowStandard": "Standardform",
+          "rowMagnitude": "Größenordnung",
+          "beyond": "Über 3,999",
+          "standardBand": "Standard 1–3,999",
+          "barBand": "Mit Strich (×1,000)"
+        },
+        "tally": {
+          "title": "Von Strichlisten zu Buchstaben",
+          "subtitle": "Römische Zahlen entstanden aus Strichlisten: ein Strich pro Gegenstand, jeder fünfte quer durchgestrichen. Buchstaben ersetzen die langen Strichreihen.",
+          "caption": "{n} Striche werden zu {numeral}, nur {len} Buchstaben.",
+          "handle": "Ziehen, um die Anzahl zu ändern",
+          "tallyRow": "Striche",
+          "letterRow": "Römische Schreibweise",
+          "rowNumber": "Anzahl",
+          "rowMarks": "Striche",
+          "rowNumeral": "Römische Schreibweise",
+          "rowLetters": "Buchstaben",
+          "rowSaved": "Gesparte Striche"
+        },
+        "addition": {
+          "title": "Römisch addieren: sammeln, dann bündeln",
+          "subtitle": "Ohne Stellenwert heißt römisches Addieren: beide Zahlen voll ausschreiben, die Buchstaben sammeln und dann bündeln: fünf I ergeben ein V, zwei V ein X und so weiter.",
+          "caption": "{ab}: Buchstaben sammeln, bündeln, und es ergibt sich {sum}.",
+          "handle": "Ziehen, um b zu ändern",
+          "pooled": "Gesammelt",
+          "rowPooled": "Gesammelte Buchstaben",
+          "rowLetters": "Buchstaben der Summe"
+        }
+      },
+      "sideCards": {
+        "breakdownTitle": "Symbolgruppen deiner Zahl",
+        "examplesTitle": "Schnelle Beispiele",
+        "examplesIntro": "Tippe auf eine Zahl, um sie in den Umrechner zu laden.",
+        "symbolsTitle": "Verwendete Symbole in {numeral}"
       }
     },
     "reading-time-calculator": {

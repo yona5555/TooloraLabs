@@ -30008,7 +30008,10 @@
         "heading": "Résultat",
         "emptyInput": "Saisissez une valeur à convertir.",
         "outOfRange": "Saisissez un nombre entier entre 1 et 3999.",
-        "invalidRoman": "Ce n'est pas un chiffre romain standard valide."
+        "invalidRoman": "Ce n'est pas un chiffre romain standard valide.",
+        "standardForm": "Forme standard",
+        "additiveForm": "Forme additive (sans soustraction)",
+        "symbols": "{n} symboles"
       },
       "quickReference": {
         "title": "Symboles Romains",
@@ -30162,6 +30165,115 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Faites glisser pour changer le nombre",
+          "place": {
+            "thousands": "Milliers",
+            "hundreds": "Centaines",
+            "tens": "Dizaines",
+            "units": "Unités"
+          }
+        },
+        "waterfall": {
+          "title": "Lire un nombre romain : un total cumulé",
+          "subtitle": "Lu de gauche à droite, chaque symbole ajoute sa valeur au total cumulé, sauf si un symbole plus grand le suit ; il se soustrait alors.",
+          "caption": "{numeral} se construit, symbole par symbole, jusqu'à {n}.",
+          "handle": "Faites glisser pour changer le nombre",
+          "rowNumber": "Nombre",
+          "rowNumeral": "Écriture romaine",
+          "rowAdded": "Symboles ajoutés",
+          "rowSubtracted": "Symboles soustraits",
+          "rowSymbols": "Symboles utilisés"
+        },
+        "subtractive": {
+          "title": "Les six paires soustractives",
+          "subtitle": "Seules six paires peuvent soustraire : un symbole plus petit placé devant le suivant, un ou deux crans au-dessus. Chacune économise des lettres par rapport à l'écriture complète.",
+          "caption": "{eq}, qui s'écrirait sinon {long}.",
+          "handle": "Faites glisser pour choisir une paire",
+          "rowPair": "Paire",
+          "rowLarger": "Symbole le plus grand",
+          "rowSmaller": "Symbole le plus petit",
+          "rowAdditive": "Écrit en entier",
+          "rowSaved": "Lettres économisées"
+        },
+        "clock": {
+          "title": "Les heures romaines sur un cadran",
+          "subtitle": "Les cadrans d'horloge sont l'endroit où l'on lit le plus souvent des chiffres romains aujourd'hui, et beaucoup peignent encore le quatre IIII plutôt que IV.",
+          "caption": "L'heure {h} s'écrit {numeral}.",
+          "captionFour": "L'heure {h} s'écrit {numeral} en forme standard, mais ce cadran la peint IIII, le quatre des horlogers.",
+          "handle": "Faites glisser l'aiguille des heures",
+          "rowHour": "Heure",
+          "rowStandard": "Forme standard",
+          "rowDial": "Telle que peinte sur de nombreux cadrans",
+          "rowAfternoon": "Même heure au format 24 heures",
+          "rowLetters": "Lettres sur le cadran"
+        },
+        "length": {
+          "title": "Quelle est la longueur de chaque nombre romain ?",
+          "subtitle": "La bande montre la longueur de l'écriture romaine de chaque nombre de 1 à 3,999. La longueur varie avec les chiffres : les 8 sont les plus longs, les nombres ronds les plus courts.",
+          "caption": "{n} prend {len} lettres en chiffres romains, contre {digits} chiffres.",
+          "handle": "Faites glisser pour changer le nombre",
+          "rowNumber": "Nombre",
+          "rowNumeral": "Écriture romaine",
+          "rowLength": "Lettres",
+          "rowDigits": "Chiffres indo-arabes",
+          "rowRatio": "Lettres par chiffre",
+          "rowLongest": "Écriture la plus longue"
+        },
+        "years": {
+          "title": "Les années en chiffres romains",
+          "subtitle": "Les génériques de films et les premières pierres écrivent ainsi les années : d'abord les milliers, puis le reste de l'année, rang par rang.",
+          "caption": "L'année {y} s'écrit {numeral}.",
+          "handle": "Faites glisser pour changer l'année",
+          "rowYear": "Année",
+          "rowNumeral": "Écriture romaine",
+          "rowThousands": "Partie des milliers",
+          "rowRest": "Reste de l'année",
+          "rowLetters": "Lettres"
+        },
+        "vinculum": {
+          "title": "Au-delà de 3,999 : la barre qui multiplie par 1,000",
+          "subtitle": "Les nombres romains standard s'arrêtent à 3,999. Les scribes médiévaux allaient plus loin en traçant une barre (vinculum) au-dessus d'un nombre pour le multiplier par 1,000 ; le convertisseur reste dans la plage standard.",
+          "caption": "{N} s'écrirait {bar} surmonté d'une barre.",
+          "handle": "Faites glisser pour changer le nombre",
+          "rowNumber": "Nombre",
+          "rowBarred": "Forme avec barre",
+          "rowStandard": "Forme standard",
+          "rowMagnitude": "Ordre de grandeur",
+          "beyond": "Au-delà de 3,999",
+          "standardBand": "Standard 1–3,999",
+          "barBand": "Avec la barre (×1,000)"
+        },
+        "tally": {
+          "title": "Des bâtonnets aux lettres",
+          "subtitle": "Les chiffres romains sont nés des marques de comptage : un trait par objet, le cinquième barrant les quatre autres. Les lettres remplacent les longues séries de traits.",
+          "caption": "{n} bâtonnets deviennent {numeral}, soit {len} lettres seulement.",
+          "handle": "Faites glisser pour changer le compte",
+          "tallyRow": "Bâtonnets",
+          "letterRow": "Écriture romaine",
+          "rowNumber": "Compte",
+          "rowMarks": "Bâtonnets",
+          "rowNumeral": "Écriture romaine",
+          "rowLetters": "Lettres",
+          "rowSaved": "Traits économisés"
+        },
+        "addition": {
+          "title": "Additionner en romain : regrouper les lettres",
+          "subtitle": "Sans valeur de position, additionner en romain consiste à écrire les deux nombres en entier, réunir les lettres, puis les regrouper : cinq I font un V, deux V font un X, et ainsi de suite.",
+          "caption": "{ab} : on réunit les lettres, on les regroupe et l'on obtient {sum}.",
+          "handle": "Faites glisser pour changer b",
+          "pooled": "Réunies",
+          "rowPooled": "Lettres réunies",
+          "rowLetters": "Lettres de la somme"
+        }
+      },
+      "sideCards": {
+        "breakdownTitle": "Groupes de symboles de votre nombre",
+        "examplesTitle": "Exemples rapides",
+        "examplesIntro": "Touchez un nombre pour le charger dans le convertisseur.",
+        "symbolsTitle": "Symboles utilisés dans {numeral}"
       }
     },
     "reading-time-calculator": {

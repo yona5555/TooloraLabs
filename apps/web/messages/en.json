@@ -30008,7 +30008,10 @@
         "heading": "Result",
         "emptyInput": "Enter a value to convert.",
         "outOfRange": "Enter a whole number between 1 and 3999.",
-        "invalidRoman": "That's not a valid standard Roman numeral."
+        "invalidRoman": "That's not a valid standard Roman numeral.",
+        "standardForm": "Standard form",
+        "additiveForm": "Additive form (no subtraction)",
+        "symbols": "{n} symbols"
       },
       "quickReference": {
         "title": "Roman Symbols",
@@ -30162,6 +30165,115 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Drag to change the number",
+          "place": {
+            "thousands": "Thousands",
+            "hundreds": "Hundreds",
+            "tens": "Tens",
+            "units": "Units"
+          }
+        },
+        "waterfall": {
+          "title": "Reading a Numeral: a Running Total",
+          "subtitle": "Read left to right, each symbol adds its value to the running total, unless a larger symbol follows it; then it subtracts.",
+          "caption": "{numeral} builds up, symbol by symbol, to {n}.",
+          "handle": "Drag to change the number",
+          "rowNumber": "Number",
+          "rowNumeral": "Numeral",
+          "rowAdded": "Added symbols",
+          "rowSubtracted": "Subtracted symbols",
+          "rowSymbols": "Symbols used"
+        },
+        "subtractive": {
+          "title": "The Six Subtractive Pairs",
+          "subtitle": "Only six pairs may subtract: a smaller symbol placed before the next one or two steps up. Each saves letters over writing the value out in full.",
+          "caption": "{eq}, which would otherwise be written {long}.",
+          "handle": "Drag to choose a pair",
+          "rowPair": "Pair",
+          "rowLarger": "Larger symbol",
+          "rowSmaller": "Smaller symbol",
+          "rowAdditive": "Written out in full",
+          "rowSaved": "Letters saved"
+        },
+        "clock": {
+          "title": "Roman Hours on a Clock Face",
+          "subtitle": "Clock dials are the most common place to read Roman numerals today, and many still paint the four as IIII rather than IV.",
+          "caption": "Hour {h} is {numeral}.",
+          "captionFour": "Hour {h} is {numeral} in standard form, but this dial paints it IIII, the watchmaker's four.",
+          "handle": "Drag the hour hand",
+          "rowHour": "Hour",
+          "rowStandard": "Standard numeral",
+          "rowDial": "As painted on many dials",
+          "rowAfternoon": "Same hour on a 24-hour clock",
+          "rowLetters": "Letters on the dial"
+        },
+        "length": {
+          "title": "How Long Is Each Numeral?",
+          "subtitle": "The band shows the numeral length of every number from 1 to 3,999. Length jumps around with the digits: 8s are the longest, round numbers the shortest.",
+          "caption": "{n} takes {len} letters as a numeral, against {digits} digits.",
+          "handle": "Drag to change the number",
+          "rowNumber": "Number",
+          "rowNumeral": "Numeral",
+          "rowLength": "Letters",
+          "rowDigits": "Hindu-Arabic digits",
+          "rowRatio": "Letters per digit",
+          "rowLongest": "Longest numeral"
+        },
+        "years": {
+          "title": "Years in Roman Numerals",
+          "subtitle": "Film credits and cornerstones write years this way: the thousands first, then the rest of the year, place by place.",
+          "caption": "The year {y} is written {numeral}.",
+          "handle": "Drag to change the year",
+          "rowYear": "Year",
+          "rowNumeral": "Numeral",
+          "rowThousands": "Thousands part",
+          "rowRest": "Rest of the year",
+          "rowLetters": "Letters"
+        },
+        "vinculum": {
+          "title": "Beyond 3,999: The Bar That Multiplies by 1,000",
+          "subtitle": "Standard numerals stop at 3,999. Medieval scribes went further by drawing a bar (vinculum) over a numeral to multiply it by 1,000; the converter keeps to the standard range.",
+          "caption": "{N} would be written {bar} with a bar over it.",
+          "handle": "Drag to change the number",
+          "rowNumber": "Number",
+          "rowBarred": "Barred form",
+          "rowStandard": "Standard form",
+          "rowMagnitude": "Size",
+          "beyond": "Beyond 3,999",
+          "standardBand": "Standard 1–3,999",
+          "barBand": "With the bar (×1,000)"
+        },
+        "tally": {
+          "title": "From Tally Marks to Letters",
+          "subtitle": "Roman numerals grew out of tally marks: one stroke per item, with every fifth struck through. Letters replace the long runs of strokes.",
+          "caption": "{n} tally marks become {numeral}, just {len} letters.",
+          "handle": "Drag to change the count",
+          "tallyRow": "Tally marks",
+          "letterRow": "Roman numeral",
+          "rowNumber": "Count",
+          "rowMarks": "Tally marks",
+          "rowNumeral": "Numeral",
+          "rowLetters": "Letters",
+          "rowSaved": "Marks saved"
+        },
+        "addition": {
+          "title": "Adding in Roman: Pool, Then Regroup",
+          "subtitle": "Without place value, Roman addition means writing both numbers out in full, pooling the letters, then regrouping: five I make a V, two V make an X, and so on.",
+          "caption": "{ab}: pool the letters, regroup, and get {sum}.",
+          "handle": "Drag to change b",
+          "pooled": "Pooled",
+          "rowPooled": "Pooled letters",
+          "rowLetters": "Letters in the sum"
+        }
+      },
+      "sideCards": {
+        "breakdownTitle": "Symbol Groups of Your Number",
+        "examplesTitle": "Quick Examples",
+        "examplesIntro": "Tap a number to load it into the converter.",
+        "symbolsTitle": "Symbols used in {numeral}"
       }
     },
     "reading-time-calculator": {

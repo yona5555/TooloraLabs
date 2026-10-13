@@ -30008,7 +30008,10 @@
         "heading": "Resultado",
         "emptyInput": "Introduce un valor para convertir.",
         "outOfRange": "Introduce un número entero entre 1 y 3999.",
-        "invalidRoman": "Eso no es un número romano estándar válido."
+        "invalidRoman": "Eso no es un número romano estándar válido.",
+        "standardForm": "Forma estándar",
+        "additiveForm": "Forma aditiva (sin resta)",
+        "symbols": "{n} símbolos"
       },
       "quickReference": {
         "title": "Símbolos Romanos",
@@ -30162,6 +30165,115 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto"
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Arrastra para cambiar el número",
+          "place": {
+            "thousands": "Millares",
+            "hundreds": "Centenas",
+            "tens": "Decenas",
+            "units": "Unidades"
+          }
+        },
+        "waterfall": {
+          "title": "Leer un numeral: un total acumulado",
+          "subtitle": "Leído de izquierda a derecha, cada símbolo suma su valor al total acumulado, salvo que le siga un símbolo mayor; entonces resta.",
+          "caption": "{numeral} se construye, símbolo a símbolo, hasta {n}.",
+          "handle": "Arrastra para cambiar el número",
+          "rowNumber": "Número",
+          "rowNumeral": "Numeral",
+          "rowAdded": "Símbolos sumados",
+          "rowSubtracted": "Símbolos restados",
+          "rowSymbols": "Símbolos usados"
+        },
+        "subtractive": {
+          "title": "Los seis pares sustractivos",
+          "subtitle": "Solo seis pares pueden restar: un símbolo menor delante del siguiente uno o dos escalones por encima. Cada uno ahorra letras frente a escribir el valor completo.",
+          "caption": "{eq}, que de otro modo se escribiría {long}.",
+          "handle": "Arrastra para elegir un par",
+          "rowPair": "Par",
+          "rowLarger": "Símbolo mayor",
+          "rowSmaller": "Símbolo menor",
+          "rowAdditive": "Escrito completo",
+          "rowSaved": "Letras ahorradas"
+        },
+        "clock": {
+          "title": "Horas romanas en la esfera de un reloj",
+          "subtitle": "Las esferas de reloj son el lugar más común donde se leen hoy números romanos, y muchas siguen pintando el cuatro como IIII en lugar de IV.",
+          "caption": "La hora {h} es {numeral}.",
+          "captionFour": "La hora {h} es {numeral} en forma estándar, pero esta esfera la pinta IIII, el cuatro de los relojeros.",
+          "handle": "Arrastra la aguja de las horas",
+          "rowHour": "Hora",
+          "rowStandard": "Numeral estándar",
+          "rowDial": "Como se pinta en muchas esferas",
+          "rowAfternoon": "La misma hora en formato de 24 horas",
+          "rowLetters": "Letras en la esfera"
+        },
+        "length": {
+          "title": "¿Cuánto mide cada numeral?",
+          "subtitle": "La banda muestra la longitud del numeral de cada número del 1 al 3,999. La longitud salta con las cifras: los 8 son los más largos y los números redondos los más cortos.",
+          "caption": "{n} ocupa {len} letras como numeral, frente a {digits} cifras.",
+          "handle": "Arrastra para cambiar el número",
+          "rowNumber": "Número",
+          "rowNumeral": "Numeral",
+          "rowLength": "Letras",
+          "rowDigits": "Cifras indoarábigas",
+          "rowRatio": "Letras por cifra",
+          "rowLongest": "Numeral más largo"
+        },
+        "years": {
+          "title": "Años en números romanos",
+          "subtitle": "Los créditos de las películas y las primeras piedras escriben así los años: primero los millares y luego el resto del año, posición a posición.",
+          "caption": "El año {y} se escribe {numeral}.",
+          "handle": "Arrastra para cambiar el año",
+          "rowYear": "Año",
+          "rowNumeral": "Numeral",
+          "rowThousands": "Parte de los millares",
+          "rowRest": "Resto del año",
+          "rowLetters": "Letras"
+        },
+        "vinculum": {
+          "title": "Más allá de 3,999: la barra que multiplica por 1,000",
+          "subtitle": "Los numerales estándar terminan en 3,999. Los escribas medievales iban más allá trazando una barra (vinculum) sobre un numeral para multiplicarlo por 1,000; el conversor se mantiene en el rango estándar.",
+          "caption": "{N} se escribiría {bar} con una barra encima.",
+          "handle": "Arrastra para cambiar el número",
+          "rowNumber": "Número",
+          "rowBarred": "Forma con barra",
+          "rowStandard": "Forma estándar",
+          "rowMagnitude": "Magnitud",
+          "beyond": "Más allá de 3,999",
+          "standardBand": "Estándar 1–3,999",
+          "barBand": "Con barra (×1,000)"
+        },
+        "tally": {
+          "title": "De las marcas de conteo a las letras",
+          "subtitle": "Los números romanos nacieron de las marcas de conteo: un trazo por objeto, tachando cada quinto. Las letras sustituyen las largas series de trazos.",
+          "caption": "{n} marcas de conteo se convierten en {numeral}, solo {len} letras.",
+          "handle": "Arrastra para cambiar la cuenta",
+          "tallyRow": "Marcas de conteo",
+          "letterRow": "Numeral romano",
+          "rowNumber": "Cuenta",
+          "rowMarks": "Marcas de conteo",
+          "rowNumeral": "Numeral",
+          "rowLetters": "Letras",
+          "rowSaved": "Marcas ahorradas"
+        },
+        "addition": {
+          "title": "Sumar en romano: juntar y reagrupar",
+          "subtitle": "Sin valor posicional, sumar en romano significa escribir ambos números completos, juntar las letras y reagrupar: cinco I forman una V, dos V una X, y así sucesivamente.",
+          "caption": "{ab}: se juntan las letras, se reagrupan y resulta {sum}.",
+          "handle": "Arrastra para cambiar b",
+          "pooled": "Juntas",
+          "rowPooled": "Letras juntas",
+          "rowLetters": "Letras de la suma"
+        }
+      },
+      "sideCards": {
+        "breakdownTitle": "Grupos de símbolos de tu número",
+        "examplesTitle": "Ejemplos rápidos",
+        "examplesIntro": "Toca un número para cargarlo en el conversor.",
+        "symbolsTitle": "Símbolos usados en {numeral}"
       }
     },
     "reading-time-calculator": {

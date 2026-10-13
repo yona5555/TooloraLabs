@@ -18,11 +18,11 @@ export default function RomanQuickReference() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div dir="ltr" className="mt-4 grid grid-cols-4 gap-2 text-center text-xs">
+      <div dir="ltr" className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
         {SYMBOLS.map(([symbol, value]) => (
-          <div key={symbol} className="rounded-lg bg-zinc-50 py-2 dark:bg-zinc-800/60">
-            <div className="font-mono text-base font-bold text-blue-600 dark:text-blue-400">{symbol}</div>
-            <div className="text-zinc-500 dark:text-zinc-400">{value}</div>
+          <div key={symbol} className="flex items-center gap-2 rounded-full bg-zinc-50 py-1.5 ps-3 pe-3.5 dark:bg-zinc-800/60">
+            <span className="text-base font-bold text-blue-600 dark:text-blue-400">{symbol}</span>
+            <span className="tabular-nums text-zinc-600 dark:text-zinc-300">{value}</span>
           </div>
         ))}
       </div>
