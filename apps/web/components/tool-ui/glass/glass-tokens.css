@@ -149,3 +149,154 @@
 .glass-value-flash {
   animation: glass-value-flash 0.6s ease-out;
 }
+
+/*
+ * pH calculator (chemistry section, §34). The chemistry accent is copied verbatim from
+ * lib/category-palette.ts `categoryPalette.chemistry.hex`. The universal-indicator spectrum
+ * (pH 0..14) and the four indicator dyes are DATA colours: defined once here (light + dark),
+ * read by the SVG indicators as var(--ph-*) and by the 3D scenes via getComputedStyle.
+ * Spectrum = the conventional universal-indicator chart; dyes = their textbook acid/base forms.
+ */
+:root {
+  --glass-chem-accent: #8fbcb5; /* lib/category-palette.ts categoryPalette.chemistry.hex (§34) */
+  --ph-accent: var(--glass-chem-accent);
+  --ph-accent-strong: color-mix(in oklab, var(--glass-chem-accent) 40%, var(--color-zinc-900) 60%);
+  --ph-accent-soft: color-mix(in oklab, var(--glass-chem-accent) 22%, var(--color-white) 78%);
+  --ph-ink: var(--color-zinc-900);
+  --ph-ink-muted: var(--color-zinc-600);
+  --ph-line: color-mix(in oklab, var(--color-zinc-900) 55%, transparent);
+  --ph-grid: color-mix(in oklab, var(--color-zinc-900) 14%, transparent);
+  --ph-surface: color-mix(in oklab, var(--color-white) 88%, var(--glass-chem-accent) 12%);
+  --ph-glass: color-mix(in oklab, var(--color-sky-200) 60%, var(--color-white) 40%);
+  --ph-water: var(--color-sky-300);
+  --ph-knob: var(--color-white);
+  --ph-focus: var(--color-blue-600);
+  --ph-ion-h: var(--color-rose-600);
+  --ph-ion-oh: var(--color-blue-600);
+  --ph-acid: var(--color-rose-700);
+  --ph-base: var(--color-blue-700);
+  --ph-neutral: var(--color-emerald-700);
+
+  --ph-ui-0: #e3262b;
+  --ph-ui-1: #ec5a24;
+  --ph-ui-2: #f39a1d;
+  --ph-ui-3: #f2c514;
+  --ph-ui-4: #d6d22a;
+  --ph-ui-5: #a3c83a;
+  --ph-ui-6: #6dba45;
+  --ph-ui-7: #3eaa4c;
+  --ph-ui-8: #23a873;
+  --ph-ui-9: #12a7a3;
+  --ph-ui-10: #2f8fca;
+  --ph-ui-11: #3462b2;
+  --ph-ui-12: #4b4ea4;
+  --ph-ui-13: #5e3f9c;
+  --ph-ui-14: #4a2b85;
+
+  --ph-dye-phth-acid: #f1e9ee;
+  --ph-dye-phth-base: #d6247f;
+  --ph-dye-mo-acid: #d8282f;
+  --ph-dye-mo-base: #f2c514;
+  --ph-dye-btb-acid: #e8c51c;
+  --ph-dye-btb-mid: #3c9a4a;
+  --ph-dye-btb-base: #2357b0;
+  --ph-dye-litmus-acid: #c7283a;
+  --ph-dye-litmus-base: #3b4fa8;
+}
+
+:root.dark {
+  --ph-accent-strong: color-mix(in oklab, var(--glass-chem-accent) 70%, var(--color-white) 30%);
+  --ph-accent-soft: color-mix(in oklab, var(--glass-chem-accent) 22%, var(--color-zinc-900) 78%);
+  --ph-ink: var(--color-zinc-50);
+  --ph-ink-muted: var(--color-zinc-300);
+  --ph-line: color-mix(in oklab, var(--color-white) 60%, transparent);
+  --ph-grid: color-mix(in oklab, var(--color-white) 16%, transparent);
+  --ph-surface: color-mix(in oklab, var(--color-zinc-900) 86%, var(--glass-chem-accent) 14%);
+  --ph-glass: color-mix(in oklab, var(--color-sky-300) 45%, var(--color-zinc-200) 55%);
+  --ph-water: var(--color-sky-400);
+  --ph-knob: var(--color-zinc-100);
+  --ph-focus: var(--color-blue-400);
+  --ph-ion-h: var(--color-rose-400);
+  --ph-ion-oh: var(--color-sky-400);
+  --ph-acid: var(--color-rose-300);
+  --ph-base: var(--color-sky-300);
+  --ph-neutral: var(--color-emerald-300);
+
+  --ph-ui-0: #f0484c;
+  --ph-ui-11: #4f7fd0;
+  --ph-ui-12: #6e6fcb;
+  --ph-ui-13: #8a6ad0;
+  --ph-ui-14: #8460c4;
+
+  --ph-dye-phth-acid: #5a5257;
+  --ph-dye-phth-base: #ee4b9b;
+  --ph-dye-mo-acid: #ee4a50;
+  --ph-dye-btb-base: #4f80d6;
+  --ph-dye-litmus-acid: #e2525f;
+  --ph-dye-litmus-base: #6f7fd6;
+}
+
+/*
+ * Molarity + ideal gas (chemistry rollout of the pH design). Data colours, defined once:
+ * solute particles, solvent and the concentrated tint of a solution, and the gas particles /
+ * hot-cold temperature ramp of the gas law scenes. Read by SVG as var(--chem-*) and by 3D via
+ * usePhColors.
+ */
+:root {
+  --chem-solute: var(--color-violet-600);
+  --chem-solvent: var(--color-sky-200);
+  --chem-tint: var(--color-violet-500);
+  --chem-stock: var(--color-amber-600);
+  --chem-gas: var(--color-teal-600);
+  --chem-cold: var(--color-sky-500);
+  --chem-hot: var(--color-orange-600);
+  --chem-piston: var(--color-zinc-500);
+}
+:root.dark {
+  --chem-solute: var(--color-violet-300);
+  --chem-solvent: color-mix(in oklab, var(--color-sky-300) 30%, var(--color-zinc-700));
+  --chem-tint: var(--color-violet-400);
+  --chem-stock: var(--color-amber-300);
+  --chem-gas: var(--color-teal-300);
+  --chem-cold: var(--color-sky-300);
+  --chem-hot: var(--color-orange-300);
+  --chem-piston: var(--color-zinc-400);
+}
+/*
+ * Equation balancer + stoichiometry: element colours of the ball-and-stick molecules, defined once
+ * (CPK convention: H white, C black, O red, N blue, S yellow, Cl green, Fe orange, Na violet).
+ * Read by SVG as var(--chem-el-*) and by 3D via usePhColors.
+ */
+:root {
+  --chem-el-h: var(--color-zinc-300);
+  --chem-el-c: var(--color-zinc-700);
+  --chem-el-o: var(--color-red-600);
+  --chem-el-n: var(--color-blue-600);
+  --chem-el-s: var(--color-yellow-500);
+  --chem-el-cl: var(--color-green-600);
+  --chem-el-fe: var(--color-orange-700);
+  --chem-el-na: var(--color-violet-500);
+  --chem-el-mg: var(--color-lime-600);
+  --chem-el-other: var(--color-pink-500);
+  --chem-reactant: var(--color-amber-600);
+  --chem-product: var(--color-teal-600);
+}
+:root.dark {
+  --chem-el-h: var(--color-zinc-100);
+  --chem-el-c: var(--color-zinc-400);
+  --chem-el-o: var(--color-red-400);
+  --chem-el-n: var(--color-blue-400);
+  --chem-el-s: var(--color-yellow-300);
+  --chem-el-cl: var(--color-green-400);
+  --chem-el-fe: var(--color-orange-400);
+  --chem-el-na: var(--color-violet-300);
+  --chem-el-mg: var(--color-lime-400);
+  --chem-el-other: var(--color-pink-300);
+  --chem-reactant: var(--color-amber-300);
+  --chem-product: var(--color-teal-300);
+}
+/* Chemistry pages (pH design): Inter everywhere, so shared cards' font-mono numbers use Inter with tabular figures. */
+[data-chem-page] .font-mono {
+  font-family: var(--glass-font);
+  font-variant-numeric: tabular-nums;
+}

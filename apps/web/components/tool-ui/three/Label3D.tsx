@@ -44,6 +44,8 @@ export type Label3DProps = {
   gap?: number;
   /** Take part in the scene's overlap resolver (default true). */
   avoid?: boolean;
+  /** CSS font-family for the label (defaults to the monospace stack). */
+  font?: string;
 };
 
 /** One label's screen box for the current frame, before and after de-overlapping (CSS px, y up). */
@@ -135,6 +137,7 @@ export default function Label3D({
   away,
   gap = 8,
   avoid = true,
+  font: family = FONT,
 }: Label3DProps) {
   const label = text ?? flatten(children);
   const sprite = useRef<THREE.Sprite>(null);
@@ -145,8 +148,8 @@ export default function Label3D({
     const padY = bg ? 2 : 1;
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d")!;
-    const font = `${weight} ${fontSize * RES}px ${FONT}`;
-    const subFont = `${weight} ${fontSize * 0.75 * RES}px ${FONT}`;
+    const font = `${weight} ${fontSize * RES}px ${family}`;
+    const subFont = `${weight} ${fontSize * 0.75 * RES}px ${family}`;
     // `F_b` draws as F with a real subscript b (never a literal underscore).
     const parts = subParts(label);
     const hasSub = parts.some((q) => q.sub);
@@ -193,7 +196,7 @@ export default function Label3D({
     tex.minFilter = THREE.LinearFilter;
     tex.generateMipmaps = false;
     return { texture: tex, w: cw, h: ch };
-  }, [label, color, bg, border, fontSize, weight]);
+  }, [label, color, bg, border, fontSize, weight, family]);
 
   useEffect(() => () => texture.dispose(), [texture]);
 
