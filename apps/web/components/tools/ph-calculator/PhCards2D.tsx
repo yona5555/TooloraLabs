@@ -2,27 +2,9 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, SvgChem, PhTable, PhTrack, SvgHandle, useMeasuredSize, usePhStepper, useSvgDrag, type PhRow } from "./PhCardKit";
-import {
-  classify,
-  clamp,
-  DYES,
-  dyeCss,
-  dyeForm,
-  EQUIVALENCE_ML,
-  f1,
-  f2,
-  ions,
-  KW_SEED_INDEX,
-  KW_TABLE,
-  PH_SEED,
-  ratio,
-  sci,
-  sup,
-  TITRATION,
-  titrationPh,
-  titrationSeed,
-} from "./phMath";
+import { IndicatorCard, KitControls, SvgChem, KitTable, KitTrack, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { clamp, f1, f2, ratio, sci, sup } from "@/components/tool-ui/indicator-kit/format";
+import { classify, DYES, dyeCss, dyeForm, EQUIVALENCE_ML, ions, KW_SEED_INDEX, KW_TABLE, PH_SEED, TITRATION, titrationPh, titrationSeed } from "./phMath";
 
 /**
  * The five 2D indicator cards. Each drawing is laid out in real pixels at the measured width of
@@ -36,7 +18,7 @@ const W0 = 520;
 export function PhLogLadderCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.ladder");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
+  const s = useStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 300;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -52,7 +34,7 @@ export function PhLogLadderCard({ side }: { side: Side }) {
   const x = ions(s.value);
   const valueText = `pH ${f2(s.value)}`;
   const water = x.h / 1e-7;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "cur", label: t("rowPh"), value: f2(s.value) },
     { key: "cur-h", label: t("rowH"), value: `${sci(x.h)} M`, isKey: true },
     { key: "up", label: t("rowUp"), value: s.value >= 1 ? `${sci(x.h * 10)} M` : "—" },
@@ -64,15 +46,15 @@ export function PhLogLadderCard({ side }: { side: Side }) {
   ];
   const near = (p: number, v: number) => Math.abs(p - v) < 0.26;
   return (
-    <PhCard
+    <IndicatorCard
       n={1}
       side={side}
       kind="2d"
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { pH: ltr(f2(s.value)), h: ltr(sci(x.h)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="ph-c1" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="ph-c1" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -116,7 +98,7 @@ export function PhLogLadderCard({ side }: { side: Side }) {
 export function PhTitrationCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.titration");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(titrationSeed(), { min: 0, max: TITRATION.maxMl, step: TITRATION.step });
+  const s = useStepper(titrationSeed(), { min: 0, max: TITRATION.maxMl, step: TITRATION.step });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 262;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -138,7 +120,7 @@ export function PhTitrationCard({ side }: { side: Side }) {
   const region = Math.abs(s.value - EQUIVALENCE_ML) < 1e-9 ? "at" : s.value < EQUIVALENCE_ML ? "before" : "after";
   const excess = region === "at" ? t("none") : region === "before" ? `H⁺ ${sci((acidMol - baseMol) / total)} M` : `OH⁻ ${sci((baseMol - acidMol) / total)} M`;
   const valueText = `${f1(s.value)} mL`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "point", label: t("rowAdded"), value: `${f2(s.value)} mL` },
     { key: "acid", label: t("rowAcid"), value: `${sci(acidMol)} mol` },
     { key: "base", label: t("rowBase"), value: s.value === 0 ? "0 mol" : `${sci(baseMol)} mol` },
@@ -151,15 +133,15 @@ export function PhTitrationCard({ side }: { side: Side }) {
   const ptOn = hover === "point" || hover === "ph";
   const readout = `${f2(s.value)} mL → pH ${f2(pH)}`;
   return (
-    <PhCard
+    <IndicatorCard
       n={2}
       side={side}
       kind="2d"
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { v: ltr(f2(s.value)), pH: ltr(f2(pH)), ep: ltr(f2(EQUIVALENCE_ML)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="ph-c2" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="ph-c2" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, pH ${f2(pH)}`}>
@@ -205,7 +187,7 @@ export function PhTitrationCard({ side }: { side: Side }) {
 export function PhKwBalanceCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.kw");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(KW_SEED_INDEX, { min: 0, max: KW_TABLE.length - 1, step: 1 });
+  const s = useStepper(KW_SEED_INDEX, { min: 0, max: KW_TABLE.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 214;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -222,7 +204,7 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
   const L = [cx - arm * Math.cos(rad), cy - arm * Math.sin(rad)];
   const R = [cx + arm * Math.cos(rad), cy + arm * Math.sin(rad)];
   const valueText = `${row.t} °C`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "t", label: t("rowT"), value: `${row.t} °C` },
     { key: "pkw", label: "pKw", value: row.pKw.toFixed(3), isKey: true },
     { key: "kw", label: "Kw", value: sci(10 ** -row.pKw) },
@@ -242,7 +224,7 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
     </g>
   );
   return (
-    <PhCard
+    <IndicatorCard
       n={4}
       side={side}
       kind="2d"
@@ -251,11 +233,11 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
       caption={t("caption", { t: ltr(String(row.t)), pkw: ltr(row.pKw.toFixed(3)), pH: ltr(f2(pH)), pOH: ltr(f2(pOH)), n: ltr(f2(neutral)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c4-handle" ticks={KW_TABLE.map((k, i) => ({ at: i, text: `${k.t} °C` }))} />
-          <PhControls s={s} valueText={valueText} testId="ph-c4" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c4-handle" ticks={KW_TABLE.map((k, i) => ({ at: i, text: `${k.t} °C` }))} />
+          <KitControls s={s} valueText={valueText} testId="ph-c4" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`pH ${f2(pH)} + pOH ${f2(pOH)} = pKw ${row.pKw.toFixed(3)}`}>
@@ -278,7 +260,7 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
 export function PhIndicatorRangesCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.dyes");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
+  const s = useStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 256;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -292,22 +274,22 @@ export function PhIndicatorRangesCard({ side }: { side: Side }) {
   const drag = useSvgDrag(ref, W, H, (px) => s.set(((px - X0) / (X1 - X0)) * 14));
   const changing = DYES.filter((d) => dyeForm(d, s.value) === "transition").length;
   const valueText = `pH ${f2(s.value)}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "ph", label: "pH", value: f2(s.value), isKey: true },
     ...DYES.map((d) => ({ key: d.key, label: `${t(`names.${d.key}`)} (${f1(d.lo)}–${f1(d.hi)})`, value: t(`forms.${dyeForm(d, s.value)}`) })),
     { key: "n", label: t("rowChanging"), value: `${changing} / ${DYES.length}` },
     { key: "class", label: t("rowClass"), value: tc(classify(s.value)) },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       n={6}
       side={side}
       kind="2d"
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { pH: ltr(f2(s.value)), n: ltr(String(changing)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="ph-c6" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="ph-c6" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -359,7 +341,7 @@ export function PhIndicatorRangesCard({ side }: { side: Side }) {
 export function PhDialCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.dial");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
+  const s = useStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: 270 });
   const wide = W >= 470;
@@ -387,7 +369,7 @@ export function PhDialCard({ side }: { side: Side }) {
     const [x1, y1] = pt(b, r);
     return `M ${x0} ${y0} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
   };
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "ph", label: "pH", value: f2(x.pH), isKey: true },
     { key: "poh", label: t("rowPoh"), value: f2(x.pOH) },
     { key: "h", label: t("rowH"), value: `${sci(x.h)} M` },
@@ -405,15 +387,15 @@ export function PhDialCard({ side }: { side: Side }) {
   const anchor = wide ? "start" : "middle";
   const ry = twoCol ? [C.y - 40, C.y - 40, C.y + 16, C.y + 16, C.y + 66] : wide ? [C.y - 54, C.y - 22, C.y + 20, C.y + 46, C.y + 84] : [C.y + 40, C.y + 62, C.y + 94, C.y + 112, -1];
   return (
-    <PhCard
+    <IndicatorCard
       n={7}
       side={side}
       kind="2d"
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { pH: ltr(f2(x.pH)), pOH: ltr(f2(x.pOH)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="ph-c7" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="ph-c7" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>

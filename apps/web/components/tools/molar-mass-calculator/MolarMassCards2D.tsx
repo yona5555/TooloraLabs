@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, SvgChem, SvgHandle, useMeasuredSize, usePhStepper, useSvgDrag, type PhRow } from "../ph-calculator/PhCardKit";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { g3, sciText } from "../molarity-calculator/molMath";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import {
@@ -35,7 +35,7 @@ const f3 = (v: number) => String(Number(v.toFixed(3)));
 export function MmIsotopesCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.isotopes");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(CL35_NATURAL, { min: 0, max: 100, step: 1 });
+  const s = useStepper(CL35_NATURAL, { min: 0, max: 100, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 250;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -59,7 +59,7 @@ export function MmIsotopesCard({ side }: { side: Side }) {
   const r35 = Math.max(4, rMax * Math.sqrt(p35 / 100));
   const r37 = Math.max(4, rMax * Math.sqrt((100 - p35) / 100));
   const valueText = `${p35} % ³⁵Cl`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "p35", label: t("rowP35"), value: `${p35} %` },
     { key: "p37", label: t("rowP37"), value: `${100 - p35} %` },
     { key: "m35", label: t("rowM35"), value: `${f3(CL35)} u` },
@@ -68,7 +68,7 @@ export function MmIsotopesCard({ side }: { side: Side }) {
     { key: "iupac", label: t("rowIupac"), value: "35.45 g/mol" },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={2}
       side={side}
@@ -76,8 +76,8 @@ export function MmIsotopesCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { p: ltr(String(p35)), w: ltr(f3(w)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mm-c2" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mm-c2" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -121,7 +121,7 @@ export function MmCompositionCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.composition");
   const tn = useTranslations("tools.molar-mass-calculator.visuals.compounds");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(0, { min: 0, max: COMPOUNDS.length - 1, step: 1 });
+  const s = useStepper(0, { min: 0, max: COMPOUNDS.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 210;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -136,12 +136,12 @@ export function MmCompositionCard({ side }: { side: Side }) {
   const before = (i: number) => parts.slice(0, i).reduce((a, q) => a + q.pct, 0);
   const segs = parts.map((pt, i) => ({ pt, x: X0 + ((X1 - X0) * before(i)) / 100, w: ((X1 - X0) * pt.pct) / 100 }));
   const valueText = `${tn(cp.key)} · ${uniFormula(cp.formula)}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     ...parts.map((pt) => ({ key: pt.symbol, label: `${pt.symbol} (${pt.pct.toFixed(1)} %): ${pt.count} × ${f3(pt.atomicMass)}`, value: f3(pt.subtotal) })),
     { key: "total", label: t("rowTotal"), value: `${f3(pr?.total ?? 0)} g/mol`, isKey: true },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={4}
       side={side}
@@ -151,11 +151,11 @@ export function MmCompositionCard({ side }: { side: Side }) {
       caption={t("caption", { name: tn(cp.key), f: ltr(uniFormula(cp.formula)), m: ltr(f3(pr?.total ?? 0)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c4-handle" ticks={[0, COMPOUNDS.length - 1].map((i) => ({ at: i, text: `${i + 1}` }))} />
-          <PhControls s={s} valueText={`${s.value + 1} / ${COMPOUNDS.length} · ${uniFormula(cp.formula)}`} testId="mm-c4" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c4-handle" ticks={[0, COMPOUNDS.length - 1].map((i) => ({ at: i, text: `${i + 1}` }))} />
+          <KitControls s={s} valueText={`${s.value + 1} / ${COMPOUNDS.length} · ${uniFormula(cp.formula)}`} testId="mm-c4" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -190,7 +190,7 @@ export function MmCompositionCard({ side }: { side: Side }) {
 export function MmRankedCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.ranked");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(10, { min: 1, max: 100, step: 1 });
+  const s = useStepper(10, { min: 1, max: 100, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 300;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -203,12 +203,12 @@ export function MmRankedCard({ side }: { side: Side }) {
   const X1 = W - 70;
   const rowH = (H - 20) / list.length;
   const valueText = `${s.value} g`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "m", label: t("rowMass"), value: `${s.value} g` },
     ...list.map((c, i) => ({ key: c.formula, label: `n(${uniFormula(c.formula)}) = m / ${f3(c.mm)}`, value: `${g3(c.n)} mol`, isKey: i === 0 })),
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={5}
       side={side}
@@ -218,11 +218,11 @@ export function MmRankedCard({ side }: { side: Side }) {
       caption={t("caption", { m: ltr(String(s.value)), n: ltr(g3(list[0].n)), f: ltr(uniFormula(list[0].formula)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c5-handle" ticks={[1, 50, 100].map((x) => ({ at: x, text: `${x} g` }))} />
-          <PhControls s={s} valueText={valueText} testId="mm-c5" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c5-handle" ticks={[1, 50, 100].map((x) => ({ at: x, text: `${x} g` }))} />
+          <KitControls s={s} valueText={valueText} testId="mm-c5" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -253,7 +253,7 @@ export function MmRankedCard({ side }: { side: Side }) {
 export function MmAvogadroCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.avogadro");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(LOG_N_SEED, { min: LOG_N_MIN, max: LOG_N_MAX, step: 0.05 });
+  const s = useStepper(LOG_N_SEED, { min: LOG_N_MIN, max: LOG_N_MAX, step: 0.05 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 200;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -271,7 +271,7 @@ export function MmAvogadroCard({ side }: { side: Side }) {
     { key: "n", e: LOG_N_SEED, text: t("markMole") },
   ];
   const valueText = `N = ${sciText(N)}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "N", label: t("rowN"), value: sciText(N) },
     { key: "na", label: t("rowNa"), value: "6.02214076 × 10²³ mol⁻¹" },
     { key: "n", label: "n = N / Nₐ", value: `${g3(n)} mol`, isKey: true },
@@ -279,7 +279,7 @@ export function MmAvogadroCard({ side }: { side: Side }) {
     { key: "log", label: "log₁₀ N", value: s.value.toFixed(2) },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={6}
       side={side}
@@ -287,8 +287,8 @@ export function MmAvogadroCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { N: ltr(sciText(N)), n: ltr(g3(n)), g: ltr(g3(n * WATER_M)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mm-c6" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mm-c6" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -331,7 +331,7 @@ const STEPS = parseSteps();
 export function MmParserCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.parser");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(STEPS.length - 1, { min: 0, max: STEPS.length - 1, step: 1 });
+  const s = useStepper(STEPS.length - 1, { min: 0, max: STEPS.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 280;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -356,7 +356,7 @@ export function MmParserCard({ side }: { side: Side }) {
     .join(" · ");
   const action = st.note === "element" ? t("actElement") : st.note === "open" ? t("actOpen") : t("actClose", { k: st.token.slice(1) || "1" });
   const valueText = `${s.value + 1} / ${STEPS.length} · ${st.token}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "tok", label: t("rowToken"), value: st.token },
     { key: "act", label: t("rowAction"), value: action },
     { key: "cnt", label: t("rowCounts"), value: countsText },
@@ -364,7 +364,7 @@ export function MmParserCard({ side }: { side: Side }) {
     { key: "f", label: t("rowFinal"), value: `${uniFormula(PARSE_FORMULA)} = ${f3(mMax)} g/mol` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={8}
       side={side}
@@ -372,8 +372,8 @@ export function MmParserCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { tok: ltr(st.token), c: ltr(countsText), m: ltr(f3(masses[s.value])) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mm-c8" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mm-c8" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>

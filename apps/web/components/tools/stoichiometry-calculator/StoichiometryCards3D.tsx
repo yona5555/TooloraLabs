@@ -3,8 +3,8 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, SvgChem, useMeasuredSize, usePhStepper, type PhRow } from "../ph-calculator/PhCardKit";
-import { PhScene } from "../ph-calculator/PhScene";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { g3, sciText } from "../molarity-calculator/molMath";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
@@ -54,11 +54,11 @@ function Ratio2D({ k }: { k: number }) {
 export function StoRatioCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.ratio");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 1, max: 6, step: 1 });
+  const s = useStepper(1, { min: 1, max: 6, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const k = s.value;
   const valueText = `× ${k}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "k", label: t("rowK"), value: String(k) },
     { key: "h2", label: t("rowH2"), value: String(2 * k) },
     { key: "o2", label: t("rowO2"), value: String(k) },
@@ -67,7 +67,7 @@ export function StoRatioCard({ side }: { side: Side }) {
     { key: "atoms", label: t("rowAtoms"), value: `${6 * k} = ${6 * k}` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={1}
       side={side}
@@ -77,12 +77,12 @@ export function StoRatioCard({ side }: { side: Side }) {
       caption={t("caption", { a: ltr(String(2 * k)), b: ltr(String(k)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c1-handle" ticks={[1, 3, 6].map((x) => ({ at: x, text: `× ${x}` }))} />
-          <PhControls s={s} valueText={valueText} testId="sto-c1" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c1-handle" ticks={[1, 3, 6].map((x) => ({ at: x, text: `× ${x}` }))} />
+          <KitControls s={s} valueText={valueText} testId="sto-c1" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="sto-c1" className="min-h-[270px] flex-1" fallback={<Ratio2D k={k} />} render3d={() => <RatioScene3D k={k} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="sto-c1" className="min-h-[270px] flex-1" fallback={<Ratio2D k={k} />} render3d={() => <RatioScene3D k={k} hover={hover} />} />}
     />
   );
 }
@@ -128,14 +128,14 @@ function Tanks2D({ tonnes, masses }: { tonnes: number; masses: [number, number, 
 export function StoTanksCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.tanks");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 1, max: T_MAX, step: 1 });
+  const s = useStepper(1, { min: 1, max: T_MAX, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const molN2 = (s.value * 1e6) / M.N2;
   const h2 = (molN2 * 3 * M.H2) / 1e6;
   const nh3 = (molN2 * 2 * M.NH3) / 1e6;
   const masses: [number, number, number] = [s.value, h2, nh3];
   const valueText = `${s.value} t N₂`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "n2", label: t("rowN2"), value: `${g3(s.value)} t` },
     { key: "mol", label: t("rowMol"), value: `${sciText(molN2)} mol` },
     { key: "h2", label: t("rowH2"), value: `${g3(h2)} t` },
@@ -144,7 +144,7 @@ export function StoTanksCard({ side }: { side: Side }) {
     { key: "mass", label: t("rowMass"), value: `${g3(s.value + h2)} t = ${g3(nh3)} t` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={6}
       side={side}
@@ -154,12 +154,12 @@ export function StoTanksCard({ side }: { side: Side }) {
       caption={t("caption", { n: ltr(g3(s.value)), h: ltr(g3(h2)), a: ltr(g3(nh3)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c6-handle" ticks={[1, 5, 10].map((x) => ({ at: x, text: `${x} t` }))} />
-          <PhControls s={s} valueText={valueText} testId="sto-c6" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c6-handle" ticks={[1, 5, 10].map((x) => ({ at: x, text: `${x} t` }))} />
+          <KitControls s={s} valueText={valueText} testId="sto-c6" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="sto-c6" className="min-h-[270px] flex-1" fallback={<Tanks2D tonnes={s.value} masses={masses} />} render3d={() => <TanksScene3D tonnes={s.value} max={T_MAX} masses={masses} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="sto-c6" className="min-h-[270px] flex-1" fallback={<Tanks2D tonnes={s.value} masses={masses} />} render3d={() => <TanksScene3D tonnes={s.value} max={T_MAX} masses={masses} hover={hover} />} />}
     />
   );
 }
@@ -199,11 +199,11 @@ function Mole2D({ index }: { index: number }) {
 export function StoMoleCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.mole");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SUBSTANCE_SEED, { min: 0, max: SUBSTANCES.length - 1, step: 1 });
+  const s = useStepper(SUBSTANCE_SEED, { min: 0, max: SUBSTANCES.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const sb = SUBSTANCES[s.value];
   const f = uniFormula(sb.formula);
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "f", label: t("rowFormula"), value: f },
     { key: "mm", label: t("rowMolarMass"), value: `${g3(sb.mm)} g/mol`, isKey: true },
     { key: "one", label: t("rowOneMole"), value: `${g3(sb.mm)} g` },
@@ -213,7 +213,7 @@ export function StoMoleCard({ side }: { side: Side }) {
   ];
   const valueText = `${f} · ${g3(sb.mm)} g/mol`;
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={8}
       side={side}
@@ -223,12 +223,12 @@ export function StoMoleCard({ side }: { side: Side }) {
       caption={t("caption", { f: ltr(f), m: ltr(g3(sb.mm)), n: ltr(g3(100 / sb.mm)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c8-handle" />
-          <PhControls s={s} valueText={`${s.value + 1} / ${SUBSTANCES.length}`} testId="sto-c8" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c8-handle" />
+          <KitControls s={s} valueText={`${s.value + 1} / ${SUBSTANCES.length}`} testId="sto-c8" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="sto-c8" className="min-h-[240px] flex-1" fallback={<Mole2D index={s.value} />} render3d={() => <MoleScene3D index={s.value} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="sto-c8" className="min-h-[240px] flex-1" fallback={<Mole2D index={s.value} />} render3d={() => <MoleScene3D index={s.value} hover={hover} />} />}
     />
   );
 }

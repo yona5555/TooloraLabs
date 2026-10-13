@@ -1,9 +1,9 @@
 "use client";
 import { useLayoutEffect, useMemo } from "react";
 import * as THREE from "three";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { ballPoints } from "../ph-calculator/phMath";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { ballPoints } from "@/components/tool-ui/indicator-kit/format";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { GasDots, tempHex } from "./GasResultScene3D";
 import { ALT_MAX_KM, g4 } from "./gasMath";
 
@@ -12,7 +12,7 @@ import { ALT_MAX_KM, g4 } from "./gasMath";
  * Loaded only through next/dynamic (ssr:false), and only while the card holds a WebGL slot.
  */
 const TOKENS = ["--chem-cold", "--chem-hot", "--chem-gas", "--chem-piston", "--ph-glass", "--ph-knob", "--ph-ink", "--ph-ink-muted", "--ph-focus", "--ph-water"];
-const useColors = (): PhColors | null => usePhColors(TOKENS);
+const useColors = (): TokenColors | null => useTokenColors(TOKENS);
 
 // ── Molar volume spheres ──────────────────────────────────────────────────────────────
 /** Sphere radius whose volume is proportional to V (litres). */
@@ -35,14 +35,14 @@ export function SpheresScene3D({ v0, v25, hover }: { v0: number; v25: number; ho
   const gap = 0.35;
   const xRef = -(r0 + r25 + gap) - 0.2;
   return (
-    <PhCanvas3D camera={[0, 1.2, 7.4]} testId="gas-c-spheres-canvas" minDistance={5} maxDistance={14} azimuth={0.8} fitAspect={2}>
+    <DemandCanvas3D camera={[0, 1.2, 7.4]} testId="gas-c-spheres-canvas" minDistance={5} maxDistance={14} azimuth={0.8} fitAspect={2}>
       <group position={[0.4, 0, 0]}>
         {ball(xRef, radiusFor(1), c["--ph-water"], hover === "ref", "1 L")}
         {ball(-r0 - gap / 2, r0, c["--chem-cold"], hover === "v0", `${g4(v0)} L`)}
         {ball(r25 + gap / 2, r25, c["--chem-hot"], hover === "v25", `${g4(v25)} L`)}
       </group>
       <Invalidate deps={[v0, v25, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -78,7 +78,7 @@ export function SpeedScene3D({ tK, rms, hover }: { tK: number; rms: number; hove
   if (!c) return null;
   const col = tempHex(c, tK);
   return (
-    <PhCanvas3D camera={[0, 0.7, 5.6]} testId="gas-c-speed-canvas" minDistance={4.5} maxDistance={10} fitAspect={0.9}>
+    <DemandCanvas3D camera={[0, 0.7, 5.6]} testId="gas-c-speed-canvas" minDistance={4.5} maxDistance={10} fitAspect={0.9}>
       <mesh geometry={shell} renderOrder={1}>
         <meshPhysicalMaterial color={c["--ph-glass"]} transparent opacity={hover ? 0.2 : 0.14} roughness={0.1} depthWrite={false} side={THREE.DoubleSide} />
       </mesh>
@@ -90,7 +90,7 @@ export function SpeedScene3D({ tK, rms, hover }: { tK: number; rms: number; hove
       ))}
       <Trails scale={rms / 1400} color={col} />
       <Invalidate deps={[tK, rms, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -106,7 +106,7 @@ export function AltitudeScene3D({ hKm, volume, groundVolume, tK, hover }: { hKm:
   const r = 0.45 * Math.cbrt(volume / groundVolume);
   const y = yAlt(hKm);
   return (
-    <PhCanvas3D camera={[0, 0.4, 6.4]} testId="gas-c-alt-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.1}>
+    <DemandCanvas3D camera={[0, 0.4, 6.4]} testId="gas-c-alt-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.1}>
       <mesh position={[0, COL_Y0 - 0.05, 0]}>
         <cylinderGeometry args={[2.2, 2.2, 0.08, 48]} />
         <meshStandardMaterial color={c["--chem-piston"]} transparent opacity={0.6} />
@@ -134,6 +134,6 @@ export function AltitudeScene3D({ hKm, volume, groundVolume, tK, hover }: { hKm:
       </mesh>
       <GasDots count={24} x={-0.3} r={r} y0={y - r * 0.8} h={r * 1.6} color={tempHex(c, tK)} size={0.05} seedPts={BALLOON_PTS} />
       <Invalidate deps={[hKm, volume, tK, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

@@ -3,10 +3,10 @@ import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { GlassHandle } from "@/components/tool-ui/glass/GlassPrimitives";
-import { PhControls, SvgHandle, useMeasuredSize, type PhStepper } from "../ph-calculator/PhCardKit";
-import { useAnchoredDrag } from "../ph-calculator/PhHero";
-import { PhScene } from "../ph-calculator/PhScene";
-import { ballPoints, snap } from "../ph-calculator/phMath";
+import { KitControls, SvgHandle, useMeasuredSize, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useAnchoredDrag } from "@/components/tool-ui/indicator-kit/useAnchoredDrag";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { ballPoints, snap } from "@/components/tool-ui/indicator-kit/format";
 import { g3, liquidCss, V_MAX, V_MIN, V_STEP } from "./molMath";
 import type { MolProjection } from "./MolarityResultScene3D";
 
@@ -16,7 +16,7 @@ const PTS = ballPoints(64, 17);
 type SceneProps = { mode: "concentration" | "dilution"; volume: number; molarity: number; particles: number; stockVolume: number; stockMolarity: number };
 
 /** 2D twin of the 3D beakers (no WebGL or no free slot): same liquids, particles and 0–5 L scale. */
-function Scene2D({ s, valueText, label, p }: { s: PhStepper; valueText: string; label: string; p: SceneProps }) {
+function Scene2D({ s, valueText, label, p }: { s: Stepper; valueText: string; label: string; p: SceneProps }) {
   const [box, { w: W, h: H }] = useMeasuredSize<HTMLDivElement>({ w: 380, h: 320 });
   const BAR_X = W - 56;
   const TOP = 22;
@@ -64,7 +64,7 @@ export default function MolarityResultScene({ p, seed, onSetVolume }: { p: Scene
   const t = useTranslations("tools.molarity-calculator.visuals.hero");
   const value = snap(p.volume, 0.001, V_MIN, V_MAX);
   const set = useCallback((v: number) => onSetVolume(snap(v, V_STEP, V_MIN, V_MAX)), [onSetVolume]);
-  const s: PhStepper = {
+  const s: Stepper = {
     value,
     set,
     inc: () => set(value + V_STEP),
@@ -86,7 +86,7 @@ export default function MolarityResultScene({ p, seed, onSetVolume }: { p: Scene
 
   return (
     <div data-ph-scene-block className="flex min-h-[340px] flex-1 flex-col gap-3 lg:min-h-[320px]">
-      <PhScene
+      <ViewportScene
         testId="mol-hero"
         className="min-h-[280px] flex-1"
         fallback={<Scene2D s={s} valueText={valueText} label={label} p={p} />}
@@ -103,7 +103,7 @@ export default function MolarityResultScene({ p, seed, onSetVolume }: { p: Scene
           </div>
         )}
       />
-      <PhControls s={s} valueText={valueText} testId="mol-hero" />
+      <KitControls s={s} valueText={valueText} testId="mol-hero" />
     </div>
   );
 }

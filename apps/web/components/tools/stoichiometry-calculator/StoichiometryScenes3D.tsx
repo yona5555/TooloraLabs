@@ -1,6 +1,6 @@
 "use client";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { EL_TOKENS, labelFormula } from "../chemical-equation-balancer/chemMath";
 import { Molecules } from "../chemical-equation-balancer/Molecules3D";
 import { placeTerms } from "../chemical-equation-balancer/BalancerResultScene3D";
@@ -12,7 +12,7 @@ import { SUBSTANCES } from "./stoichMath";
  * mole of each). Loaded only through next/dynamic (ssr:false), and only while the card holds a WebGL slot.
  */
 const TOKENS = [...EL_TOKENS, "--ph-glass", "--ph-knob", "--ph-ink", "--ph-ink-muted", "--ph-focus", "--chem-reactant", "--chem-product", "--chem-gas", "--chem-solvent", "--chem-stock"];
-const useColors = (): PhColors | null => usePhColors(TOKENS);
+const useColors = (): TokenColors | null => useTokenColors(TOKENS);
 
 // ── 1. Molecules by the ratio: 2k H₂ + k O₂ → 2k H₂O ─────────────────────────────────
 export function RatioScene3D({ k, hover }: { k: number; hover: string | null }) {
@@ -27,14 +27,14 @@ export function RatioScene3D({ k, hover }: { k: number; hover: string | null }) 
   const R = placeTerms(terms, "product", 0.45, 3.4, -1.3, 2.6);
   const el = hover === "h2" ? "H" : hover === "o2" ? "O" : undefined;
   return (
-    <PhCanvas3D camera={[0, 0.5, 8]} testId="sto-c1-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.6}>
+    <DemandCanvas3D camera={[0, 0.5, 8]} testId="sto-c1-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.6}>
       <Molecules items={[...L.out, ...R.out]} c={c} highlight={el} />
       {[...L.labels, ...R.labels].map((l, i) => (
         <Label3D key={i} position={[l.x, l.y, 0]} color={c["--ph-ink"]} fontSize={11} weight={700} text={l.text} />
       ))}
       <Label3D position={[0, -0.3, 0]} color={c["--ph-ink"]} fontSize={14} weight={800} text="→" />
       <Invalidate deps={[k, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -49,7 +49,7 @@ export function TanksScene3D({ tonnes, max, masses, hover }: { tonnes: number; m
   ];
   const unitH = 0.95 * (0.35 + (0.65 * tonnes) / max); // never an empty tank
   return (
-    <PhCanvas3D camera={[0, 1.1, 7.4]} testId="sto-c6-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.5}>
+    <DemandCanvas3D camera={[0, 1.1, 7.4]} testId="sto-c6-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.5}>
       <mesh position={[0, -1.62, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[3.4, 64]} />
         <meshStandardMaterial color={c["--chem-solvent"]} transparent opacity={0.4} />
@@ -74,7 +74,7 @@ export function TanksScene3D({ tonnes, max, masses, hover }: { tonnes: number; m
       })}
       <Label3D position={[0.55, -0.9, 0]} color={c["--ph-ink"]} fontSize={14} weight={800} text="→" />
       <Invalidate deps={[tonnes, max, masses, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -85,7 +85,7 @@ export function MoleScene3D({ index, hover }: { index: number; hover: string | n
   if (!c) return null;
   const n = SUBSTANCES.length;
   return (
-    <PhCanvas3D camera={[0, 1.4, 7.6]} testId="sto-c8-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.7}>
+    <DemandCanvas3D camera={[0, 1.4, 7.6]} testId="sto-c8-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.7}>
       {SUBSTANCES.map((sb, i) => {
         const x = -3.6 + (i / (n - 1)) * 7.2;
         const r = moleRadius(sb.mm);
@@ -102,6 +102,6 @@ export function MoleScene3D({ index, hover }: { index: number; hover: string | n
         );
       })}
       <Invalidate deps={[index, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

@@ -4,7 +4,7 @@
  * abundances are NIST values. No DOM, no colours.
  */
 import { computeMolarMass } from "@tooloralabs/tools";
-import { clamp } from "../ph-calculator/phMath";
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 
 export const AVOGADRO = 6.02214076e23;
 

@@ -3,9 +3,9 @@
  * atom counts, ball-and-stick layouts and element colours (token names only, no DOM, no hex).
  */
 import { ChemicalEquationBalancer, computeMolarMass, parseFormula, type BalancedTerm } from "@tooloralabs/tools";
-import { clamp } from "../ph-calculator/phMath";
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 
-/** "Fe2O3" → "Fe₂O₃" (digits after a symbol or ")" become subscripts; PhText renders them as <sub>). */
+/** "Fe2O3" → "Fe₂O₃" (digits after a symbol or ")" become subscripts; RichText renders them as <sub>). */
 const SUBS = "₀₁₂₃₄₅₆₇₈₉";
 export const uniFormula = (f: string) => f.replace(/([A-Za-z)\]])(\d+)/g, (_, a: string, d: string) => a + d.replace(/\d/g, (c) => SUBS[Number(c)]));
 

@@ -2,9 +2,9 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { ballPoints } from "../ph-calculator/phMath";
-import { mixHex, usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { ballPoints } from "@/components/tool-ui/indicator-kit/format";
+import { mixHex, useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { tintOf, V_MAX } from "./molMath";
 
 export type MolProjection = { marker: [number, number]; bottom: [number, number]; top: [number, number] };
@@ -13,7 +13,7 @@ const SCALE_X = 1.75;
 const PTS = ballPoints(64, 17);
 const TOKENS = ["--chem-solute", "--chem-solvent", "--chem-tint", "--chem-stock", "--ph-glass", "--ph-knob", "--ph-ink", "--ph-ink-muted", "--ph-focus"];
 
-export const liquidHex = (c: PhColors, molarity: number) => mixHex(c["--chem-solvent"], c["--chem-tint"], 0.12 + tintOf(molarity) * 0.78);
+export const liquidHex = (c: TokenColors, molarity: number) => mixHex(c["--chem-solvent"], c["--chem-tint"], 0.12 + tintOf(molarity) * 0.78);
 
 /** Solute particles spread through a liquid column; drawn after the liquid so it never tints them. */
 export function Solute({ count, x, r, y0, h, color, size = 0.07 }: { count: number; x: number; r: number; y0: number; h: number; color: string; size?: number }) {
@@ -40,7 +40,7 @@ export function Solute({ count, x, r, y0, h, color, size = 0.07 }: { count: numb
 }
 
 /** Open glass beaker standing on y = y0, with an optional liquid column of height `fill`. */
-export function Beaker({ x, r, h, y0, fill, liquid, c }: { x: number; r: number; h: number; y0: number; fill: number; liquid: string; c: PhColors }) {
+export function Beaker({ x, r, h, y0, fill, liquid, c }: { x: number; r: number; h: number; y0: number; fill: number; liquid: string; c: TokenColors }) {
   return (
     <group>
       <mesh position={[x, y0 + h / 2, 0]}>
@@ -78,7 +78,7 @@ type Props = {
   onProject: (p: MolProjection) => void;
 };
 
-function Scene({ mode, volume, molarity, particles, stockVolume, stockMolarity, dragging, onProject, c }: Props & { c: PhColors }) {
+function Scene({ mode, volume, molarity, particles, stockVolume, stockMolarity, dragging, onProject, c }: Props & { c: TokenColors }) {
   const get = useThree((s) => s.get);
   useEffect(() => {
     const controls = get().controls as unknown as { enabled: boolean } | null;
@@ -153,11 +153,11 @@ function Scene({ mode, volume, molarity, particles, stockVolume, stockMolarity, 
 }
 
 export default function MolarityResultScene3D(props: Props) {
-  const c = usePhColors(TOKENS);
+  const c = useTokenColors(TOKENS);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 0.7, 7.4]} testId="mol-hero-canvas" minDistance={5} maxDistance={11} fitAspect={1.05}>
+    <DemandCanvas3D camera={[0, 0.7, 7.4]} testId="mol-hero-canvas" minDistance={5} maxDistance={11} fitAspect={1.05}>
       <Scene {...props} c={c} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

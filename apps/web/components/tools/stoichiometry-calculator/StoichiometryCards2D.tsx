@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, SvgChem, SvgHandle, useMeasuredSize, usePhStepper, useSvgDrag, type PhRow } from "../ph-calculator/PhCardKit";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { g3, sciText } from "../molarity-calculator/molMath";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { ACIDS, AVOGADRO, M, rd } from "./stoichMath";
@@ -20,7 +20,7 @@ const G_MAX = 20;
 export function StoLinesCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.lines");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(4, { min: 0.5, max: G_MAX, step: 0.5 });
+  const s = useStepper(4, { min: 0.5, max: G_MAX, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 280;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -40,7 +40,7 @@ export function StoLinesCard({ side }: { side: Side }) {
   const ref = useRef<SVGSVGElement>(null);
   const drag = useSvgDrag(ref, W, H, (px) => s.set(((px - X0) / (X1 - X0)) * G_MAX));
   const valueText = `${g3(s.value)} g H₂`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "g", label: t("rowGH2"), value: `${g3(s.value)} g` },
     { key: "n", label: "n = m / M (H₂)", value: `${g3(nH2)} mol` },
     { key: "n2", label: t("rowRatio"), value: `${g3(nH2)} mol` },
@@ -48,7 +48,7 @@ export function StoLinesCard({ side }: { side: Side }) {
     { key: "mm", label: t("rowMolarMasses"), value: `${M.H2} · ${M.H2O} g/mol` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={2}
       side={side}
@@ -56,8 +56,8 @@ export function StoLinesCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { g: ltr(g3(s.value)), n: ltr(g3(nH2)), w: ltr(g3(gH2O)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="sto-c2" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="sto-c2" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -100,7 +100,7 @@ export function StoLinesCard({ side }: { side: Side }) {
 export function StoProgressCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.progress");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(50, { min: 0, max: 100, step: 5 });
+  const s = useStepper(50, { min: 0, max: 100, step: 5 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 260;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -121,7 +121,7 @@ export function StoProgressCard({ side }: { side: Side }) {
   const drag = useSvgDrag(ref, W, H, (px) => s.set(((px - X0) / (X1 - X0)) * 100));
   const mass = 4 * M.H2 + 2 * M.O2;
   const valueText = `${s.value} %`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "p", label: t("rowProgress"), value: `${s.value} %` },
     { key: "h2", label: t("rowH2"), value: `${g3(4 * (1 - p))} mol` },
     { key: "o2", label: t("rowO2"), value: `${g3(2 * (1 - p))} mol` },
@@ -129,7 +129,7 @@ export function StoProgressCard({ side }: { side: Side }) {
     { key: "mass", label: t("rowMass"), value: `${g3(mass)} g` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={3}
       side={side}
@@ -137,8 +137,8 @@ export function StoProgressCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { p: ltr(String(s.value)), w: ltr(g3(4 * p)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="sto-c3" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="sto-c3" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -177,7 +177,7 @@ export function StoProgressCard({ side }: { side: Side }) {
 export function StoSlopesCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.slopes");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(2, { min: 0, max: 5, step: 0.25 });
+  const s = useStepper(2, { min: 0, max: 5, step: 0.25 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 270;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -197,14 +197,14 @@ export function StoSlopesCard({ side }: { side: Side }) {
   const drag = useSvgDrag(ref, W, H, (px) => s.set(((px - X0) / (X1 - X0)) * 5));
   const x = s.value;
   const valueText = `${g3(x)} mol`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "x", label: t("rowKnown"), value: `${g3(x)} mol` },
     { key: "h2o", label: "H₂O (× 2/2)", value: `${g3(x)} mol` },
     { key: "nh3", label: "NH₃ (× 2/1)", value: `${g3(2 * x)} mol`, isKey: true },
     { key: "h2", label: "H₂ (× 3/1)", value: `${g3(3 * x)} mol` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={4}
       side={side}
@@ -212,8 +212,8 @@ export function StoSlopesCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { x: ltr(g3(x)), a: ltr(g3(2 * x)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="sto-c4" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="sto-c4" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -252,7 +252,7 @@ export function StoSlopesCard({ side }: { side: Side }) {
 export function StoNeutralCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.neutral");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(10, { min: 1, max: 20, step: 1 });
+  const s = useStepper(10, { min: 1, max: 20, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 240;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -265,13 +265,13 @@ export function StoNeutralCard({ side }: { side: Side }) {
   const xg = (g: number) => LX + (g / gMax) * (X1 - LX);
   const rowY = (i: number) => 24 + i * ((H - 48) / (items.length - 1));
   const valueText = `${s.value} g NaOH`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "naoh", label: t("rowNaOH"), value: `${g3(s.value)} g` },
     { key: "n", label: t("rowMol"), value: `${g3(n)} mol` },
     ...ACIDS.map((a) => ({ key: a.formula, label: uniFormula(a.formula), value: `${g3(n * a.perBase * a.mm)} g`, isKey: a.formula === "HCl" })),
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={5}
       side={side}
@@ -281,11 +281,11 @@ export function StoNeutralCard({ side }: { side: Side }) {
       caption={t("caption", { g: ltr(g3(s.value)), hcl: ltr(g3(n * M_HCL())), h2so4: ltr(g3(n * 0.5 * M_H2SO4())) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c5-handle" ticks={[1, 10, 20].map((x) => ({ at: x, text: `${x} g` }))} />
-          <PhControls s={s} valueText={valueText} testId="sto-c5" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="sto-c5-handle" ticks={[1, 10, 20].map((x) => ({ at: x, text: `${x} g` }))} />
+          <KitControls s={s} valueText={valueText} testId="sto-c5" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -321,7 +321,7 @@ export function StoDialCard({ side }: { side: Side }) {
   const t = useTranslations("tools.stoichiometry-calculator.visuals.dial");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const step = 0.1 * M.H2O;
-  const s = usePhStepper(2 * M.H2O, { min: step, max: DIAL_MAX * M.H2O, step });
+  const s = useStepper(2 * M.H2O, { min: step, max: DIAL_MAX * M.H2O, step });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 250;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -345,7 +345,7 @@ export function StoDialCard({ side }: { side: Side }) {
     return `M ${x0} ${y0} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
   };
   const valueText = `${g3(s.value)} g H₂O`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "g", label: t("rowGrams"), value: `${g3(s.value)} g` },
     { key: "mm", label: t("rowMolarMass"), value: `${g3(M.H2O)} g/mol` },
     { key: "n", label: "n = m / M", value: `${g3(n)} mol`, isKey: true },
@@ -353,7 +353,7 @@ export function StoDialCard({ side }: { side: Side }) {
     { key: "ml", label: t("rowMl"), value: `≈ ${g3(s.value)} mL` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="sto"
       n={7}
       side={side}
@@ -361,8 +361,8 @@ export function StoDialCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { g: ltr(g3(s.value)), n: ltr(g3(n)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="sto-c7" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="sto-c7" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>

@@ -3,7 +3,7 @@
  * calculator's own R, CODATA constants, the ICAO standard atmosphere and IUPAC molar masses.
  * No DOM, no colours.
  */
-import { clamp } from "../ph-calculator/phMath";
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 
 /** L·atm/(mol·K): the value the calculator uses. */
 export const R_LATM = 0.0820574;

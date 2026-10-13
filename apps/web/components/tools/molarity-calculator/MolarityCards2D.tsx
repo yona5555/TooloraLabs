@@ -2,8 +2,8 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, SvgChem, SvgHandle, useMeasuredSize, usePhStepper, useSvgDrag, type PhRow } from "../ph-calculator/PhCardKit";
-import { clamp } from "../ph-calculator/phMath";
+import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { AVOGADRO, g3, liquidCss, REFERENCE, referenceSeedIndex, sciText, SEED, SERIAL_MAX } from "./molMath";
 
 /**
@@ -21,7 +21,7 @@ const MASS_MAX = SEED.molarMassNaCl * 4;
 export function MolFlowCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.flow");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SEED.molarMassNaCl, { min: MASS_STEP, max: MASS_MAX, step: MASS_STEP });
+  const s = useStepper(SEED.molarMassNaCl, { min: MASS_STEP, max: MASS_MAX, step: MASS_STEP });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 236;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -43,7 +43,7 @@ export function MolFlowCard({ side }: { side: Side }) {
   ];
   const ops = [`÷ ${SEED.molarMassNaCl} g/mol`, `÷ ${SEED.volume} L`];
   const valueText = `${g3(s.value)} g NaCl`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "mass", label: t("rowMass"), value: `${g3(s.value)} g` },
     { key: "mm", label: t("rowMolarMass"), value: `${SEED.molarMassNaCl} g/mol` },
     { key: "n", label: "n = m / M", value: `${g3(n)} mol` },
@@ -52,7 +52,7 @@ export function MolFlowCard({ side }: { side: Side }) {
     { key: "units", label: t("rowUnits"), value: sciText(n * AVOGADRO) },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={1}
       side={side}
@@ -60,8 +60,8 @@ export function MolFlowCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { g: ltr(g3(s.value)), n: ltr(g3(n)), m: ltr(g3(m)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mol-c1" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mol-c1" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -104,7 +104,7 @@ export function MolFlowCard({ side }: { side: Side }) {
 export function MolCurveCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.curve");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SEED.volume, { min: 0.2, max: 5, step: 0.1 });
+  const s = useStepper(SEED.volume, { min: 0.2, max: 5, step: 0.1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 272;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -123,7 +123,7 @@ export function MolCurveCard({ side }: { side: Side }) {
   for (let v = n / YMAX; v <= 5.0001; v += 0.02) pts.push(`${xv(v).toFixed(1)},${yc(n / v).toFixed(1)}`);
   const c = n / s.value;
   const valueText = `V = ${g3(s.value)} L`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "n", label: t("rowN"), value: `${g3(n)} mol` },
     { key: "v", label: t("rowV"), value: `${g3(s.value)} L` },
     { key: "c", label: "c = n / V", value: `${g3(c)} mol/L`, isKey: true },
@@ -134,7 +134,7 @@ export function MolCurveCard({ side }: { side: Side }) {
   ];
   const on = hover === "c" || hover === "v";
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={3}
       side={side}
@@ -142,8 +142,8 @@ export function MolCurveCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { v: ltr(g3(s.value)), c: ltr(g3(c)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mol-c3" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mol-c3" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g3(c)} mol/L`}>
@@ -180,7 +180,7 @@ export function MolCurveCard({ side }: { side: Side }) {
 export function MolSerialCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.serial");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 0, max: SERIAL_MAX, step: 1 });
+  const s = useStepper(1, { min: 0, max: SERIAL_MAX, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 226;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -197,7 +197,7 @@ export function MolSerialCard({ side }: { side: Side }) {
   const ref = useRef<SVGSVGElement>(null);
   const drag = useSvgDrag(ref, W, H, (px) => s.set((px - X0) / gap));
   const valueText = `${t("step")} ${s.value}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "k", label: t("rowK"), value: String(s.value) },
     { key: "factor", label: t("rowFactor"), value: s.value === 0 ? "1" : `1 : ${(10 ** s.value).toLocaleString("en-US")}` },
     { key: "c", label: t("rowC"), value: `${sciText(c)} mol/L`, isKey: true },
@@ -206,7 +206,7 @@ export function MolSerialCard({ side }: { side: Side }) {
     { key: "water", label: t("rowWater"), value: `${s.value * 9} mL` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={5}
       side={side}
@@ -214,8 +214,8 @@ export function MolSerialCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle", { c: ltr(g3(c0)) })}
       caption={t("caption", { k: ltr(String(s.value)), c: ltr(sciText(c)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mol-c5" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mol-c5" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${sciText(c)} mol/L`}>
@@ -251,7 +251,7 @@ const LOG_MAX = 1.5;
 export function MolRulerCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.ruler");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(referenceSeedIndex(), { min: 0, max: REFERENCE.length - 1, step: 1 });
+  const s = useStepper(referenceSeedIndex(), { min: 0, max: REFERENCE.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 204;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -272,7 +272,7 @@ export function MolRulerCard({ side }: { side: Side }) {
   const sel = REFERENCE[s.value];
   const name = t(`items.${sel.key}`);
   const valueText = `${name} · ${g3(sel.molarity)} M`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "name", label: t("rowName"), value: name },
     { key: "formula", label: t("rowFormula"), value: sel.formula },
     { key: "m", label: t("rowM"), value: `${g3(sel.molarity)} mol/L`, isKey: true },
@@ -283,7 +283,7 @@ export function MolRulerCard({ side }: { side: Side }) {
   const decades = [-3, -2, -1, 0, 1];
   const decadeText = (d: number) => (d === -3 ? "1 mM" : d === -2 ? "10 mM" : d === -1 ? "0.1 M" : d === 0 ? "1 M" : "10 M");
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={6}
       side={side}
@@ -291,8 +291,8 @@ export function MolRulerCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { name, m: ltr(g3(sel.molarity)) })}
-      controls={<PhControls s={s} valueText={`${s.value + 1} / ${REFERENCE.length}`} testId="mol-c6" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={`${s.value + 1} / ${REFERENCE.length}`} testId="mol-c6" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -344,7 +344,7 @@ export function MolDonutCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const C1 = SEED.c1;
   const V2 = SEED.v2;
-  const s = usePhStepper(SEED.c2, { min: 0.1, max: C1, step: 0.1 });
+  const s = useStepper(SEED.c2, { min: 0.1, max: C1, step: 0.1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 250;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -369,7 +369,7 @@ export function MolDonutCard({ side }: { side: Side }) {
   });
   const lx = cx + r + 34;
   const valueText = `C₂ = ${g3(s.value)} mol/L`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "c1", label: t("rowC1"), value: `${g3(C1)} mol/L` },
     { key: "v2", label: t("rowV2"), value: `${g3(V2)} L` },
     { key: "c2", label: t("rowC2"), value: `${g3(s.value)} mol/L` },
@@ -380,7 +380,7 @@ export function MolDonutCard({ side }: { side: Side }) {
   ];
   const showLegend = W - lx > 110;
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={8}
       side={side}
@@ -388,8 +388,8 @@ export function MolDonutCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { c2: ltr(g3(s.value)), v1: ltr(g3(v1 * 1000)), water: ltr(g3((V2 - v1) * 1000)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="mol-c8" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="mol-c8" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>

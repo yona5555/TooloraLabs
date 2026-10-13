@@ -5,9 +5,9 @@ import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import PhShareExportModal from "./PhShareExportModal";
 import PhModeTabs from "./PhModeTabs";
-import { Chem } from "./PhCardKit";
+import { Chem } from "@/components/tool-ui/indicator-kit/CardKit";
 import PhResultScene from "./PhHero";
-import { usePhColors } from "./phColors";
+import { useTokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import type { PhOperation, PhResult as Result } from "./types";
 
 type Props = {
@@ -49,7 +49,7 @@ export default function PhResult({ hasCalculated, result, operation, digitStyle,
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 3 });
   // Export gauge zones use the universal-indicator data tokens (acid red / neutral green / base blue).
-  const zone = usePhColors(["--ph-ui-1", "--ph-ui-7", "--ph-ui-11"]);
+  const zone = useTokenColors(["--ph-ui-1", "--ph-ui-7", "--ph-ui-11"]);
   const valid = hasCalculated && result.error !== "non-positive-concentration";
 
   const operationLabel = tForm(`operation.${operation}`);

@@ -1,6 +1,6 @@
 "use client";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { g3 } from "../molarity-calculator/molMath";
 import { COLUMN_TERMS, EL_TOKENS, labelFormula } from "./chemMath";
 import { gridOf, Molecules } from "./Molecules3D";
@@ -10,7 +10,7 @@ import { gridOf, Molecules } from "./Molecules3D";
  * columns). Loaded only through next/dynamic (ssr:false), and only while the card holds a WebGL slot.
  */
 const TOKENS = [...EL_TOKENS, "--ph-glass", "--ph-knob", "--ph-ink", "--ph-ink-muted", "--ph-focus", "--chem-reactant", "--chem-product", "--chem-gas", "--chem-solvent"];
-const useColors = (): PhColors | null => usePhColors(TOKENS);
+const useColors = (): TokenColors | null => useTokenColors(TOKENS);
 
 // ── 1. What a coefficient counts: n separate water molecules ──────────────────────────
 export function CopiesScene3D({ n, hover }: { n: number; hover: string | null }) {
@@ -21,11 +21,11 @@ export function CopiesScene3D({ n, hover }: { n: number; hover: string | null })
   const items = gridOf("H2O", n, [0, 0.55 * (rows - 1) + 0.1, 0], (cols - 1) * 1.15, 1.15, 1.25);
   const el = hover === "h" ? "H" : hover === "o" ? "O" : undefined;
   return (
-    <PhCanvas3D camera={[0, 0.8, 6.4]} testId="bal-c1-canvas" minDistance={4.5} maxDistance={11} fitAspect={1.5}>
+    <DemandCanvas3D camera={[0, 0.8, 6.4]} testId="bal-c1-canvas" minDistance={4.5} maxDistance={11} fitAspect={1.5}>
       <Molecules items={items} c={c} highlight={el} />
       <Label3D position={[0, -0.75 - 0.58 * (rows - 1), 0]} color={c["--ph-ink"]} fontSize={12} weight={700} text={`${n} H_{2}O`} />
       <Invalidate deps={[n, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -50,7 +50,7 @@ export function ScaleScene3D({ h2, o2, water, max, hover }: { h2: number; o2: nu
     </mesh>
   );
   return (
-    <PhCanvas3D camera={[0, 0.9, 7]} testId="bal-c5-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.5}>
+    <DemandCanvas3D camera={[0, 0.9, 7]} testId="bal-c5-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.5}>
       {pan(-1.7)}
       {pan(1.7)}
       {weight(-1.7, Y, h2, c["--chem-el-h"], hover === "h2")}
@@ -69,7 +69,7 @@ export function ScaleScene3D({ h2, o2, water, max, hover }: { h2: number; o2: nu
       <Label3D position={[-1.7, Y - 0.45, 0.9]} color={c["--ph-ink-muted"]} fontSize={10} text="H_{2} + O_{2}" />
       <Label3D position={[1.7, Y - 0.45, 0.9]} color={c["--ph-ink-muted"]} fontSize={10} text="H_{2}O" />
       <Invalidate deps={[h2, o2, water, max, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -81,7 +81,7 @@ export function ColumnsScene3D({ k, hover }: { k: number; hover: string | null }
   const unit = 2.6 / (2 * k); // the tallest column keeps one height; the solid k = 1 core shrinks as k grows
   const xs = [-1.9, -0.6, 1.6];
   return (
-    <PhCanvas3D camera={[0, 1.2, 7]} testId="bal-c8-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.4}>
+    <DemandCanvas3D camera={[0, 1.2, 7]} testId="bal-c8-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.4}>
       <mesh position={[0, -1.52, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[3.2, 64]} />
         <meshStandardMaterial color={c["--chem-solvent"]} transparent opacity={0.45} />
@@ -111,6 +111,6 @@ export function ColumnsScene3D({ k, hover }: { k: number; hover: string | null }
       })}
       <Label3D position={[0.5, -0.9, 0]} color={c["--ph-ink"]} fontSize={14} weight={800} text="→" />
       <Invalidate deps={[k, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

@@ -3,7 +3,7 @@ import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { PhText } from "../ph-calculator/PhCardKit";
+import { RichText } from "@/components/tool-ui/indicator-kit/CardKit";
 import BalancerShareExportModal from "./BalancerShareExportModal";
 import BalancerResultScene from "./BalancerResultScene";
 import { atomLedger, balancedText, uniFormula } from "./chemMath";
@@ -59,7 +59,7 @@ export default function BalancerResult({ hasCalculated, result, digitStyle, reac
     <ul className="space-y-1 text-sm tabular-nums text-zinc-800 dark:text-zinc-100">
       {items.map((term) => (
         <li key={term.formula}>
-          <PhText text={`${fmtInt(term.coefficient)} × ${uniFormula(term.formula)}`} />
+          <RichText text={`${fmtInt(term.coefficient)} × ${uniFormula(term.formula)}`} />
         </li>
       ))}
     </ul>
@@ -95,7 +95,7 @@ export default function BalancerResult({ hasCalculated, result, digitStyle, reac
           ) : (
             <>
               <p dir="ltr" data-testid="bal-result-main" className="overflow-x-auto text-center text-2xl font-bold tabular-nums text-blue-700 sm:text-3xl dark:text-blue-400">
-                <PhText text={balancedText(terms)} />
+                <RichText text={balancedText(terms)} />
               </p>
               <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t("balancedCaption")}</p>
               <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />

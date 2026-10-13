@@ -1,11 +1,13 @@
 "use client";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { GlassHandle } from "@/components/tool-ui/glass/GlassPrimitives";
-import { PhControls, SvgHandle, useMeasuredSize, type PhStepper } from "./PhCardKit";
-import { PhScene } from "./PhScene";
-import { ballPoints, f2, particleCounts, PH_MAX, PH_MIN, PH_SEED, snap, uiCss } from "./phMath";
+import { useAnchoredDrag } from "@/components/tool-ui/indicator-kit/useAnchoredDrag";
+import { KitControls, SvgHandle, useMeasuredSize, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { ballPoints, f2, snap } from "@/components/tool-ui/indicator-kit/format";
+import { particleCounts, PH_MAX, PH_MIN, PH_SEED, uiCss } from "./phMath";
 import type { HeroProjection } from "./PhHeroScene3D";
 
 const HeroScene3D = dynamic(() => import("./PhHeroScene3D"), { ssr: false, loading: () => null });
@@ -15,44 +17,10 @@ const PTS_H = ballPoints(44, 11);
 const PTS_OH = ballPoints(44, 29);
 
 /**
- * Drag measured from where it started (pointer delta projected on the 0→14 axis), so a layout
- * shift above the hero while the calculator re-renders can never make the marker jump.
- */
-export function useAnchoredDrag(value: number, axis: () => [number, number] | null, set: (v: number) => void, onActive?: (on: boolean) => void, span = 14) {
-  const start = useRef<{ x: number; y: number; v: number; ax: [number, number] } | null>(null);
-  return {
-    onPointerDown: (e: React.PointerEvent) => {
-      const ax = axis();
-      if (e.button !== 0 || !ax) return;
-      e.currentTarget.setPointerCapture(e.pointerId);
-      start.current = { x: e.clientX, y: e.clientY, v: value, ax };
-      onActive?.(true);
-      e.stopPropagation();
-      e.preventDefault();
-    },
-    onPointerMove: (e: React.PointerEvent) => {
-      const st = start.current;
-      if (!st) return;
-      const [dx, dy] = st.ax;
-      const t = ((e.clientX - st.x) * dx + (e.clientY - st.y) * dy) / (dx * dx + dy * dy || 1);
-      set(st.v + t * span);
-    },
-    onPointerUp: () => {
-      start.current = null;
-      onActive?.(false);
-    },
-    onPointerCancel: () => {
-      start.current = null;
-      onActive?.(false);
-    },
-  };
-}
-
-/**
  * 2D twin of the 3D beaker (no WebGL, or no free WebGL slot): same liquid colour, particles and
  * scale, laid out in real pixels so it fills the whole scene box at any width.
  */
-function Hero2D({ s, valueText, label }: { s: PhStepper; valueText: string; label: string }) {
+function Hero2D({ s, valueText, label }: { s: Stepper; valueText: string; label: string }) {
   const [box, { w: W, h: H }] = useMeasuredSize<HTMLDivElement>({ w: 380, h: 320 });
   const BAR_X = W - 56;
   const BAR_TOP = 22;
@@ -107,7 +75,7 @@ export default function PhResultScene({ pH, onSetPh }: { pH: number; onSetPh: (p
   const t = useTranslations("tools.ph-calculator.visuals.hero");
   const value = snap(pH, 0.01, PH_MIN, PH_MAX);
   const set = useCallback((v: number) => onSetPh(snap(v, STEP, PH_MIN, PH_MAX)), [onSetPh]);
-  const s: PhStepper = {
+  const s: Stepper = {
     value,
     set,
     inc: () => set(value + STEP),
@@ -128,7 +96,7 @@ export default function PhResultScene({ pH, onSetPh }: { pH: number; onSetPh: (p
 
   return (
     <div data-ph-scene-block className="flex min-h-[340px] flex-1 flex-col gap-3 lg:min-h-[320px]">
-      <PhScene
+      <ViewportScene
         testId="hero"
         className="min-h-[280px] flex-1"
         fallback={<Hero2D s={s} valueText={valueText} label={t("handle")} />}
@@ -163,7 +131,7 @@ export default function PhResultScene({ pH, onSetPh }: { pH: number; onSetPh: (p
           </div>
         )}
       />
-      <PhControls s={s} valueText={valueText} testId="ph-hero" />
+      <KitControls s={s} valueText={valueText} testId="ph-hero" />
     </div>
   );
 }

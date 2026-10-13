@@ -1,7 +1,7 @@
 "use client";
 import * as THREE from "three";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { atomsOf, EL_TOKENS, elToken, uniFormula } from "../chemical-equation-balancer/chemMath";
 import { Molecules, type Placed } from "../chemical-equation-balancer/Molecules3D";
 import { g3 } from "../molarity-calculator/molMath";
@@ -13,7 +13,7 @@ import { BEAKER_ML, GROUPS, partsOf } from "./mmMath";
  * holds a WebGL slot.
  */
 const TOKENS = [...EL_TOKENS, "--ph-glass", "--ph-ink", "--ph-ink-muted", "--ph-focus", "--ph-line", "--ph-surface", "--chem-solvent", "--chem-cold"];
-const useColors = (): PhColors | null => usePhColors(TOKENS);
+const useColors = (): TokenColors | null => useTokenColors(TOKENS);
 
 // ── 1. Water in a beaker: liquid height ∝ volume ──────────────────────────────────────
 export function BeakerScene3D({ volume, label, hover }: { volume: number; label: string; hover: string | null }) {
@@ -25,7 +25,7 @@ export function BeakerScene3D({ volume, label, hover }: { volume: number; label:
   const h = Math.max(0.02, (H * volume) / BEAKER_ML);
   const lit = hover === "v" || hover === "m";
   return (
-    <PhCanvas3D camera={[0, 1.3, 7.6]} testId="mm-c1-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.2}>
+    <DemandCanvas3D camera={[0, 1.3, 7.6]} testId="mm-c1-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.2}>
       <mesh position={[0, y0 + H / 2, 0]}>
         <cylinderGeometry args={[R, R, H, 48, 1, true]} />
         <meshStandardMaterial color={c["--ph-glass"]} transparent opacity={0.22} side={THREE.DoubleSide} depthWrite={false} />
@@ -49,7 +49,7 @@ export function BeakerScene3D({ volume, label, hover }: { volume: number; label:
       ))}
       <Label3D position={[0, y0 + h, 0]} offset={[0, 16]} color={c["--ph-ink"]} bg={c["--ph-surface"]} border={c["--ph-line"]} fontSize={13} weight={800} text={label} avoid={false} />
       <Invalidate deps={[volume, label, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -63,11 +63,11 @@ export function HydrateScene3D({ n, label, hover }: { n: number; label: string; 
     items.push({ formula: "H2O", at: [Math.round(Math.cos(a) * 2.1 * 1e4) / 1e4, 0.2 + Math.round(Math.sin(a) * 1.25 * 1e4) / 1e4, Math.round(Math.sin(a) * 0.6 * 1e4) / 1e4], scale: 1.3 });
   }
   return (
-    <PhCanvas3D camera={[0, 0.8, 8]} testId="mm-c3-canvas" minDistance={5} maxDistance={12} azimuth={0.9} fitAspect={1.4}>
+    <DemandCanvas3D camera={[0, 0.8, 8]} testId="mm-c3-canvas" minDistance={5} maxDistance={12} azimuth={0.9} fitAspect={1.4}>
       <Molecules items={items} c={c} highlight={hover === "water" || hover === "pct" ? "H" : hover === "salt" ? "Cu" : undefined} />
       <Label3D position={[0, -1.75, 0]} color={c["--ph-ink"]} fontSize={14} weight={800} text={label} avoid={false} />
       <Invalidate deps={[n, label, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -85,7 +85,7 @@ export function GroupsScene3D({ index, hover }: { index: number; hover: string |
   const R = STEP * 0.47;
   const y0 = -(maxCount * STEP) / 2 - 0.2;
   return (
-    <PhCanvas3D camera={[0, 1.2, 8.2]} testId="mm-c7-canvas" minDistance={5} maxDistance={13} azimuth={0.8} fitAspect={1.4}>
+    <DemandCanvas3D camera={[0, 1.2, 8.2]} testId="mm-c7-canvas" minDistance={5} maxDistance={13} azimuth={0.8} fitAspect={1.4}>
       {parts.map((pt, i) => {
         const x = (i - (n - 1) / 2) * 1.5;
         const grp = inGroup.has(pt.symbol);
@@ -111,6 +111,6 @@ export function GroupsScene3D({ index, hover }: { index: number; hover: string |
       })}
       <Label3D position={[0, y0, 0]} offset={[0, -44]} color={c["--ph-ink-muted"]} fontSize={13} weight={700} text={`${uniFormula(g.formula)} · ${g3(partsOf(g.formula)?.total ?? 0)} g/mol`} avoid={false} />
       <Invalidate deps={[index, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

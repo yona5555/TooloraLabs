@@ -1,9 +1,11 @@
 "use client";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "./PhCanvas3D";
-import { ballPoints, DILUTION_MAX_STEPS, f2, particleCounts, SHELF } from "./phMath";
-import { UI_TOKENS, uiHex, usePhColors, type PhColors } from "./phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { ballPoints, f2 } from "@/components/tool-ui/indicator-kit/format";
+import { DILUTION_MAX_STEPS, particleCounts, SHELF } from "./phMath";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
+import { UI_TOKENS, uiHex } from "./phColors";
 
 /**
  * The three 3D indicator scenes (shelf, dilution beaker, particle droplet). One module, loaded
@@ -12,11 +14,11 @@ import { UI_TOKENS, uiHex, usePhColors, type PhColors } from "./phColors";
  */
 const TOKENS = [...UI_TOKENS, "--ph-glass", "--ph-ion-h", "--ph-ion-oh", "--ph-knob", "--ph-ink", "--ph-focus", "--ph-water"];
 
-function useColors(): PhColors | null {
-  return usePhColors(TOKENS);
+function useColors(): TokenColors | null {
+  return useTokenColors(TOKENS);
 }
 
-function Spectrum({ from, to, y = 0, r = 0.11, c }: { from: number; to: number; y?: number; r?: number; c: PhColors }) {
+function Spectrum({ from, to, y = 0, r = 0.11, c }: { from: number; to: number; y?: number; r?: number; c: TokenColors }) {
   const len = (to - from) / 14;
   return (
     <group>
@@ -47,7 +49,7 @@ export function ShelfScene3D({ index, hover }: { index: number; hover: string | 
   const c = useColors();
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 1.3, 6.3]} testId="ph-c3-canvas" minDistance={5} maxDistance={12} azimuth={0.7} fitAspect={2.3}>
+    <DemandCanvas3D camera={[0, 1.3, 6.3]} testId="ph-c3-canvas" minDistance={5} maxDistance={12} azimuth={0.7} fitAspect={2.3}>
       <group position={[0, -0.35, 0]}>
       <Spectrum from={SX0} to={SX1} y={-0.9} c={c} />
       {SHELF.map((sub, i) => {
@@ -84,7 +86,7 @@ export function ShelfScene3D({ index, hover }: { index: number; hover: string | 
       ))}
       </group>
       <Invalidate deps={[index, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -96,7 +98,7 @@ export function DilutionScene3D({ steps, pH, hover }: { steps: number; pH: numbe
   const fill = (k: number) => 0.35 + (k / DILUTION_MAX_STEPS) * (H - 0.6);
   const level = fill(steps);
   return (
-    <PhCanvas3D camera={[0, 1.2, 6.1]} testId="ph-c5-canvas" minDistance={5} maxDistance={11} fitAspect={1.05}>
+    <DemandCanvas3D camera={[0, 1.2, 6.1]} testId="ph-c5-canvas" minDistance={5} maxDistance={11} fitAspect={1.05}>
       <group position={[0, -1.5, 0]}>
         <mesh position={[0, H / 2, 0]}>
           <cylinderGeometry args={[1.25, 1.1, H, 48, 1, true]} />
@@ -121,7 +123,7 @@ export function DilutionScene3D({ steps, pH, hover }: { steps: number; pH: numbe
         <Label3D position={[-1.45, level, 0]} align="right" color={c["--ph-ink"]} fontSize={11} text={`×10${"⁰¹²³⁴⁵⁶"[steps]}`} />
       </group>
       <Invalidate deps={[steps, pH, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -159,13 +161,13 @@ export function ParticleScene3D({ pH, hover }: { pH: number; hover: string | nul
   useLayoutEffect(() => () => shell.dispose(), [shell]);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 0.7, 5.3]} testId="ph-c8-canvas" minDistance={4.5} maxDistance={10} fitAspect={0.85}>
+    <DemandCanvas3D camera={[0, 0.7, 5.3]} testId="ph-c8-canvas" minDistance={4.5} maxDistance={10} fitAspect={0.85}>
       <mesh geometry={shell}>
         <meshPhysicalMaterial color={c["--ph-water"]} transparent opacity={hover === "shown" ? 0.22 : 0.14} roughness={0.1} depthWrite={false} side={THREE.DoubleSide} />
       </mesh>
       <Ions from={0} count={counts.h} color={c["--ph-ion-h"]} />
       <Ions from={counts.h} count={counts.oh} color={c["--ph-ion-oh"]} />
       <Invalidate deps={[pH, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

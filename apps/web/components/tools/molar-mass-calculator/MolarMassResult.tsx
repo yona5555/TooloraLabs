@@ -3,7 +3,7 @@ import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { PhText } from "../ph-calculator/PhCardKit";
+import { RichText } from "@/components/tool-ui/indicator-kit/CardKit";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import MolarMassShareExportModal from "./MolarMassShareExportModal";
 import MolarMassResultScene from "./MolarMassResultScene";
@@ -106,7 +106,7 @@ export default function MolarMassResult({ hasCalculated, result, formula, digitS
                 {fmt(result.totalMass)} <span className="text-xl font-semibold text-blue-600 dark:text-blue-300">g/mol</span>
               </p>
               <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">
-                {t("totalMass")} · <PhText text={uniFormula(formula)} />
+                {t("totalMass")} · <RichText text={uniFormula(formula)} />
               </p>
               <div dir="ltr" className="mt-3 overflow-x-auto">
                 <table className="w-full border-collapse text-sm tabular-nums" data-ph-table>

@@ -1,7 +1,7 @@
 "use client";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import type { PhColors } from "../ph-calculator/phColors";
+import type { TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { elRadius, elToken, moleculeLayout } from "./chemMath";
 
 /**
@@ -31,7 +31,7 @@ function Instanced({ items, geo, color, emissive = 0.18 }: { items: THREE.Matrix
   );
 }
 
-export function Molecules({ items, c, highlight }: { items: Placed[]; c: PhColors; highlight?: string }) {
+export function Molecules({ items, c, highlight }: { items: Placed[]; c: TokenColors; highlight?: string }) {
   const ball = useMemo(() => new THREE.SphereGeometry(1, 18, 12), []);
   const stick = useMemo(() => new THREE.CylinderGeometry(1, 1, 1, 8), []);
   useLayoutEffect(

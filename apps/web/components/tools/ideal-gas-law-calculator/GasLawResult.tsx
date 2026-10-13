@@ -3,7 +3,7 @@ import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { usePhColors } from "../ph-calculator/phColors";
+import { useTokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import GasLawShareExportModal from "./GasLawShareExportModal";
 import GasLawModeTabs from "./GasLawModeTabs";
 import GasResultScene from "./GasResultScene";
@@ -37,7 +37,7 @@ export default function GasLawResult({ hasCalculated, result, solveFor, digitSty
   const tForm = useTranslations("tools.ideal-gas-law-calculator.form");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 4 });
-  const zone = usePhColors(["--chem-cold", "--ph-neutral", "--chem-hot"]);
+  const zone = useTokenColors(["--chem-cold", "--ph-neutral", "--chem-hot"]);
   const z = (k: string) => zone?.[k] ?? "currentColor";
   const errorKey =
     result.error === "zero-volume" ? "zeroVolume" : result.error === "zero-pressure" ? "zeroPressure" : result.error === "zero-temperature" ? "zeroTemperature" : result.error === "zero-moles" ? "zeroMoles" : null;

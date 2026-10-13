@@ -3,9 +3,9 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, SvgChem, useMeasuredSize, usePhStepper, type PhRow } from "../ph-calculator/PhCardKit";
-import { PhScene } from "../ph-calculator/PhScene";
-import { ballPoints, clamp } from "../ph-calculator/phMath";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { ballPoints, clamp } from "@/components/tool-ui/indicator-kit/format";
 import { AVOGADRO, g3, liquidCss, sciText, SEED, SOLUTE_SEED_INDEX, SOLUTES } from "./molMath";
 
 const CylindersScene3D = dynamic(() => import("./MolarityScenes3D").then((m) => m.CylindersScene3D), { ssr: false, loading: () => null });
@@ -49,12 +49,12 @@ function Cylinders2D({ c1, v1, c2, v2 }: { c1: number; v1: number; c2: number; v
 export function MolCylindersCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.cylinders");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SEED.v2, { min: 0.5, max: 5, step: 0.25 });
+  const s = useStepper(SEED.v2, { min: 0.5, max: 5, step: 0.25 });
   const [hover, setHover] = useState<string | null>(null);
   const n = SEED.c1 * SEED.v1;
   const c2 = n / s.value;
   const valueText = `V₂ = ${g3(s.value)} L`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "c1", label: "C₁", value: `${g3(SEED.c1)} mol/L` },
     { key: "v1", label: "V₁", value: `${g3(SEED.v1)} L` },
     { key: "n", label: t("rowN"), value: `${g3(n)} mol`, isKey: true },
@@ -64,7 +64,7 @@ export function MolCylindersCard({ side }: { side: Side }) {
     { key: "water", label: t("rowWater"), value: `${g3(s.value - SEED.v1)} L` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={2}
       side={side}
@@ -74,13 +74,13 @@ export function MolCylindersCard({ side }: { side: Side }) {
       caption={t("caption", { v2: ltr(g3(s.value)), c2: ltr(g3(c2)), n: ltr(g3(n)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mol-c2-handle" ticks={[0.5, 2.5, 5].map((v) => ({ at: v, text: `${v} L` }))} />
-          <PhControls s={s} valueText={valueText} testId="mol-c2" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mol-c2-handle" ticks={[0.5, 2.5, 5].map((v) => ({ at: v, text: `${v} L` }))} />
+          <KitControls s={s} valueText={valueText} testId="mol-c2" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
-        <PhScene
+        <ViewportScene
           testId="mol-c2"
           className="min-h-[250px] flex-1"
           fallback={<Cylinders2D c1={SEED.c1} v1={SEED.v1} c2={c2} v2={s.value} />}
@@ -123,13 +123,13 @@ function Droplet2D({ count, molarity }: { count: number; molarity: number }) {
 export function MolDropletCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.droplet");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(Math.log10(SEED.molarity), { min: -3, max: 1, step: 0.1 });
+  const s = useStepper(Math.log10(SEED.molarity), { min: -3, max: 1, step: 0.1 });
   const [hover, setHover] = useState<string | null>(null);
   const m = 10 ** s.value;
   const count = dropCount(s.value);
   const perMl = m * 1e-3 * AVOGADRO;
   const valueText = `${g3(m)} mol/L`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "m", label: t("rowM"), value: `${g3(m)} mol/L`, isKey: true },
     { key: "log", label: "log₁₀ M", value: s.value.toFixed(1) },
     { key: "mmol", label: t("rowMmol"), value: `${g3(m * 1000)} mmol/L` },
@@ -139,7 +139,7 @@ export function MolDropletCard({ side }: { side: Side }) {
     { key: "shown", label: t("rowShown"), value: String(count) },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={4}
       side={side}
@@ -149,12 +149,12 @@ export function MolDropletCard({ side }: { side: Side }) {
       caption={t("caption", { m: ltr(g3(m)), units: ltr(sciText(perMl)), shown: ltr(String(count)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mol-c4-handle" ticks={[-3, -1, 1].map((x) => ({ at: x, text: `${g3(10 ** x)} M` }))} />
-          <PhControls s={s} valueText={valueText} testId="mol-c4" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mol-c4-handle" ticks={[-3, -1, 1].map((x) => ({ at: x, text: `${g3(10 ** x)} M` }))} />
+          <KitControls s={s} valueText={valueText} testId="mol-c4" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="mol-c4" className="min-h-[240px] flex-1" fallback={<Droplet2D count={count} molarity={m} />} render3d={() => <DropletScene3D count={count} molarity={m} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="mol-c4" className="min-h-[240px] flex-1" fallback={<Droplet2D count={count} molarity={m} />} render3d={() => <DropletScene3D count={count} molarity={m} hover={hover} />} />}
     />
   );
 }
@@ -194,12 +194,12 @@ function Heaps2D({ index }: { index: number }) {
 export function MolHeapsCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molarity-calculator.visuals.solutes");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SOLUTE_SEED_INDEX, { min: 0, max: SOLUTES.length - 1, step: 1 });
+  const s = useStepper(SOLUTE_SEED_INDEX, { min: 0, max: SOLUTES.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const sol = SOLUTES[s.value];
   const name = t(`items.${sol.key}`);
   const forDefault = sol.molarMass * SEED.molarity * SEED.volume;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "name", label: t("rowName"), value: name },
     { key: "formula", label: t("rowFormula"), value: sol.formula },
     { key: "mm", label: t("rowMolarMass"), value: `${sol.molarMass.toFixed(2)} g/mol` },
@@ -209,7 +209,7 @@ export function MolHeapsCard({ side }: { side: Side }) {
   ];
   const valueText = `${name} · ${sol.molarMass.toFixed(2)} g/mol`;
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mol"
       n={7}
       side={side}
@@ -219,12 +219,12 @@ export function MolHeapsCard({ side }: { side: Side }) {
       caption={t("caption", { name, formula: sol.formula, g: ltr(g3(forDefault)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mol-c7-handle" />
-          <PhControls s={s} valueText={`${s.value + 1} / ${SOLUTES.length}`} testId="mol-c7" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mol-c7-handle" />
+          <KitControls s={s} valueText={`${s.value + 1} / ${SOLUTES.length}`} testId="mol-c7" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="mol-c7" className="min-h-[230px] flex-1" fallback={<Heaps2D index={s.value} />} render3d={() => <HeapsScene3D index={s.value} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="mol-c7" className="min-h-[230px] flex-1" fallback={<Heaps2D index={s.value} />} render3d={() => <HeapsScene3D index={s.value} hover={hover} />} />}
     />
   );
 }

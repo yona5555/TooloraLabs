@@ -3,8 +3,8 @@ import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { PhText } from "../ph-calculator/PhCardKit";
-import { usePhColors } from "../ph-calculator/phColors";
+import { RichText } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useTokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import MolarityShareExportModal from "./MolarityShareExportModal";
 import MolarityModeTabs from "./MolarityModeTabs";
 import MolarityResultScene from "./MolarityResultScene";
@@ -37,7 +37,7 @@ export default function MolarityResult({ hasCalculated, result, mode, digitStyle
   const tForm = useTranslations("tools.molarity-calculator.form");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 4 });
-  const zone = usePhColors(["--chem-solvent", "--chem-tint", "--chem-solute", "--ph-neutral", "--chem-stock", "--chem-hot"]);
+  const zone = useTokenColors(["--chem-solvent", "--chem-tint", "--chem-solute", "--ph-neutral", "--chem-stock", "--chem-hot"]);
   const z = (k: string) => zone?.[k] ?? "currentColor";
   const valid = hasCalculated && !result.error;
   const errorKey = result.error === "zero-volume" ? "zeroVolume" : result.error === "zero-molar-mass" ? "zeroMolarMass" : result.error === "zero-denominator" ? "zeroDenominator" : null;
@@ -149,7 +149,7 @@ export default function MolarityResult({ hasCalculated, result, mode, digitStyle
                 {(["c1", "v1", "c2", "v2"] as const).map((k) => (
                   <div key={k}>
                     <dt className={dtClass}>
-                      <PhText text={t(k)} />
+                      <RichText text={t(k)} />
                     </dt>
                     <dd className={ddClass}>{`${fmt(result[k])} ${k.startsWith("c") ? "M" : "L"}`}</dd>
                   </div>

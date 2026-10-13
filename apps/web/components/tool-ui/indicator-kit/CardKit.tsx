@@ -5,10 +5,10 @@ import { Hand, Minus, Plus, RotateCcw } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { GlassHandle, usePrefersReducedMotion, type HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives";
 import { hasWords, subParts } from "@/components/tool-ui/MixedText";
-import { snap } from "./phMath";
+import { snap } from "./format";
 
 /**
- * Shared kit for the pH hero + 8 indicator cards: one independent state hook per card, the
+ * Shared kit for a tool's result visual + 8 indicator cards: one independent state hook per card, the
  * hold-to-repeat − / + / reset buttons (§43), the worked-example table (§42), the framed card
  * shell (§37, the site's SectionCard) and the drag-handle helpers (§40). Colours are tokens only.
  */
@@ -68,7 +68,7 @@ export function SvgChem({ text }: { text: string }): ReactNode {
  * full stop after "pOH" lands at the sentence end (left), not glued to the right of the run.
  */
 const LTR_RUN = /[A-Za-z0-9\u00B2\u00B3\u00B9\u2070-\u209F\u1D2C-\u1D6A[\]()×·=+\-−–/%°→↔^.,:\s\u2066\u2069]+/g;
-export function PhText({ text }: { text: string }) {
+export function RichText({ text }: { text: string }) {
   if (!hasWords(text)) return <Chem text={text} />;
   const out: ReactNode[] = [];
   let last = 0;
@@ -96,7 +96,7 @@ export function PhText({ text }: { text: string }) {
 export type StepperSpec = { min: number; max: number; step: number };
 
 /** One card's own value: seeded once, snapped to its step, flash counter for §42.3. */
-export function usePhStepper(seed: number, { min, max, step }: StepperSpec) {
+export function useStepper(seed: number, { min, max, step }: StepperSpec) {
   const [value, setValue] = useState(() => snap(seed, step, min, max));
   const [flash, setFlash] = useState(0);
   const set = useCallback((v: number) => setValue(snap(v, step, min, max)), [step, min, max]);
@@ -113,7 +113,7 @@ export function usePhStepper(seed: number, { min, max, step }: StepperSpec) {
   }, [value]);
   return { value, set, inc, dec, reset, flash, atMin: value <= min, atMax: value >= max, isSeed: value === initial, min, max, step };
 }
-export type PhStepper = ReturnType<typeof usePhStepper>;
+export type Stepper = ReturnType<typeof useStepper>;
 
 /**
  * Real pixel size of a drawing box: the SVGs are laid out in true pixels (viewBox = box size),
@@ -182,8 +182,8 @@ function StepButton({ label, onStep, disabled, children, testId }: { label: stri
   );
 }
 
-export function PhControls({ s, valueText, testId }: { s: PhStepper; valueText: string; testId: string }) {
-  const t = useTranslations("tools.ph-calculator.visuals.common");
+export function KitControls({ s, valueText, testId }: { s: Stepper; valueText: string; testId: string }) {
+  const t = useTranslations("toolPage.indicatorKit");
   return (
     <div className="flex items-center justify-center gap-2" data-ph-controls={testId}>
       <StepButton label={t("minus")} onStep={s.dec} disabled={s.atMin} testId={`${testId}-minus`}>
@@ -217,10 +217,10 @@ export function PhControls({ s, valueText, testId }: { s: PhStepper; valueText: 
 }
 
 // ── Worked-example table ──────────────────────────────────────────────────────────────
-export type PhRow = { key: string; label: string; value: string; isKey?: boolean };
+export type KitRow = { key: string; label: string; value: string; isKey?: boolean };
 
-export function PhTable({ rows, flash, activeKey, onHover, caption }: { rows: PhRow[]; flash: number; activeKey: string | null; onHover: (k: string | null) => void; caption: string }) {
-  const t = useTranslations("tools.ph-calculator.visuals.common");
+export function KitTable({ rows, flash, activeKey, onHover, caption }: { rows: KitRow[]; flash: number; activeKey: string | null; onHover: (k: string | null) => void; caption: string }) {
+  const t = useTranslations("toolPage.indicatorKit");
   const reduced = usePrefersReducedMotion();
   return (
     <table className="h-full w-full border-collapse text-sm" data-ph-table>
@@ -259,10 +259,10 @@ export function PhTable({ rows, flash, activeKey, onHover, caption }: { rows: Ph
               }}
             >
               <th scope="row" dir="auto" className="px-2.5 py-2.5 text-start font-medium" style={{ color: "var(--ph-ink)", fontWeight: r.isKey ? 700 : 500 }}>
-                <PhText text={r.label} />
+                <RichText text={r.label} />
               </th>
               <td dir="ltr" className="px-2.5 py-2.5 text-end tabular-nums" style={{ color: "var(--ph-ink)", fontWeight: r.isKey ? 800 : 600 }}>
-                <PhText text={r.value} />
+                <RichText text={r.value} />
               </td>
             </tr>
           );
@@ -273,7 +273,7 @@ export function PhTable({ rows, flash, activeKey, onHover, caption }: { rows: Ph
 }
 
 // ── Card shell ────────────────────────────────────────────────────────────────────────
-export function PhCard({
+export function IndicatorCard({
   n,
   title,
   subtitle,
@@ -296,12 +296,12 @@ export function PhCard({
   side: "visual-left" | "table-left";
   kind: "2d" | "3d";
 }) {
-  const t = useTranslations("tools.ph-calculator.visuals.common");
+  const t = useTranslations("toolPage.indicatorKit");
   return (
     <div data-ph-visual data-ph-card={n} data-ph-kind={kind} data-card-side={side} className="leading-normal" style={{ fontFamily: "var(--glass-font)" }}>
       <SectionCard
         id={`${idPrefix}-card-${n}`}
-        title={<PhText text={title} />}
+        title={<RichText text={title} />}
         action={
           <span role="img" aria-label={t("interactive")} title={t("interactive")} data-ph-interactive className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
             <Hand size={15} aria-hidden />
@@ -309,7 +309,7 @@ export function PhCard({
         }
       >
         <p dir="auto" className="text-sm leading-6" style={{ color: "var(--ph-ink-muted)" }}>
-          <PhText text={subtitle} />
+          <RichText text={subtitle} />
         </p>
         <div className={`mt-4 flex flex-col gap-4 lg:items-stretch ${side === "visual-left" ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
           <figure className="m-0 flex min-w-0 flex-col gap-3 lg:basis-[57%]" data-ph-figure>
@@ -318,7 +318,7 @@ export function PhCard({
             </div>
             {controls}
             <figcaption dir="auto" className="text-center text-xs leading-5" style={{ color: "var(--ph-ink-muted)" }}>
-              <PhText text={caption} />
+              <RichText text={caption} />
             </figcaption>
           </figure>
           <div className="flex min-w-0 flex-col lg:basis-[43%]" data-ph-table-col>
@@ -385,7 +385,7 @@ export function SvgHandle({
   direction: HandleDirection;
   label: string;
   valueText: string;
-  s: PhStepper;
+  s: Stepper;
   drag: Pick<ReturnType<typeof useSvgDrag>, "onPointerDown" | "onPointerMove" | "onPointerUp" | "onPointerCancel">;
   testId: string;
 }) {
@@ -406,7 +406,7 @@ export function SvgHandle({
 }
 
 /** Horizontal custom track (no native range input): rounded bar, filled part, GlassHandle. */
-export function PhTrack({ s, label, valueText, testId, ticks }: { s: PhStepper; label: string; valueText: string; testId: string; ticks?: { at: number; text: string }[] }) {
+export function KitTrack({ s, label, valueText, testId, ticks }: { s: Stepper; label: string; valueText: string; testId: string; ticks?: { at: number; text: string }[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const pct = ((s.value - s.min) / (s.max - s.min)) * 100;

@@ -35,6 +35,12 @@ type ToolAboveFoldProps = {
    * secondary row like before; only its minimum height changes.
    */
   sidebarMatchRow?: boolean;
+  /**
+   * §41: 16px between the grid's rows and columns (the spacing token) instead of 24px, and the
+   * secondary row spans all three columns under a sidebar that ends with row 1 (use with
+   * `sidebarMatchRow`), so every column ends at the same bottom edge.
+   */
+  tight?: boolean;
 };
 
 /**
@@ -98,7 +104,7 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false, tight = false }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -189,13 +195,13 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
   const rowMinStyle = sidebarMatchRow && sidebarNatural ? ({ "--side-nat": `${sidebarNatural}px` } as CSSProperties) : undefined;
   const rowMinClass = sidebarMatchRow ? "lg:[min-height:var(--side-nat)]" : "";
 
-  const sidebarBoxHeight = contentHeight > sidebarHeight ? contentHeight : undefined;
+  const sidebarBoxHeight = !tight && contentHeight > sidebarHeight ? contentHeight : undefined;
   const inputBoxHeight = resultHeight > inputHeight ? resultHeight : undefined;
 
   return (
     <div
       ref={gridRef}
-      className="relative grid grid-cols-1 content-start items-start gap-6 lg:grid-cols-[320px_minmax(360px,1fr)_320px]"
+      className={`relative grid grid-cols-1 content-start items-start lg:grid-cols-[320px_minmax(360px,1fr)_320px] ${tight ? "gap-4" : "gap-6"}`}
       style={{ minHeight: sidebarHeight || undefined }}
     >
       {/*
@@ -227,7 +233,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
         {result}
       </div>
       {secondary && (
-        <div className="min-w-0 lg:col-start-1 lg:col-span-2 lg:row-start-2">{secondary}</div>
+        <div className={`min-w-0 lg:col-start-1 lg:row-start-2 ${tight ? "lg:col-span-3" : "lg:col-span-2"}`}>{secondary}</div>
       )}
       <div
         className={`hidden lg:absolute lg:top-0 lg:end-0 lg:w-[320px] ${sidebarFill ? "lg:flex lg:flex-col" : "lg:block"}`}
@@ -240,7 +246,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
         >
           {sidebar}
         </div>
-        {sidebarFill && <div className="mt-6 min-h-0 flex-1">{sidebarFill}</div>}
+        {sidebarFill && <div className={`${tight ? "mt-4" : "mt-6"} min-h-0 flex-1`}>{sidebarFill}</div>}
       </div>
     </div>
   );

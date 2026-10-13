@@ -3,7 +3,7 @@ import { useContext, useEffect, useState, type ComponentProps, type ReactNode } 
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
-import { SceneReadyContext } from "./PhScene";
+import { SceneReadyContext } from "./ViewportScene";
 
 /** The page font (Inter via --glass-font) resolved to a real family list the canvas can draw with. */
 let pageFont: string | null = null;
@@ -19,7 +19,7 @@ function resolvePageFont(): string {
 }
 
 /** Label3D in the site font (Inter), not the shared default monospace. */
-export function ChemLabel3D(props: ComponentProps<typeof Label3D>) {
+export function SiteLabel3D(props: ComponentProps<typeof Label3D>) {
   const [font] = useState(resolvePageFont);
   return <Label3D font={font} {...props} />;
 }
@@ -60,8 +60,8 @@ export function Invalidate({ deps }: { deps: unknown[] }) {
   return null;
 }
 
-/** The pH scenes' canvas: transparent (card surface shows through), demand frameloop, orbit + zoom. */
-export default function PhCanvas3D({
+/** Shared demand-frameloop canvas: transparent (card surface shows through), demand frameloop, orbit + zoom. */
+export default function DemandCanvas3D({
   children,
   camera,
   minDistance = 4,

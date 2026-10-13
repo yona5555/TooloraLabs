@@ -3,9 +3,9 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, useMeasuredSize, usePhStepper, type PhRow } from "../ph-calculator/PhCardKit";
-import { PhScene } from "../ph-calculator/PhScene";
-import { ballPoints } from "../ph-calculator/phMath";
+import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { ballPoints } from "@/components/tool-ui/indicator-kit/format";
 import { ALT_MAX_KM, AVOGADRO, g4, isa, K_B, R_LATM, sciText, speeds, tempCss, ZERO_C } from "./gasMath";
 
 const SpheresScene3D = dynamic(() => import("./GasScenes3D").then((m) => m.SpheresScene3D), { ssr: false, loading: () => null });
@@ -54,12 +54,12 @@ function Spheres2D({ v0, v25 }: { v0: number; v25: number }) {
 export function GasSpheresCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.spheres");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 0.25, max: 4, step: 0.25 });
+  const s = useStepper(1, { min: 0.25, max: 4, step: 0.25 });
   const [hover, setHover] = useState<string | null>(null);
   const v0 = s.value * R_LATM * ZERO_C;
   const v25 = s.value * R_LATM * (ZERO_C + 25);
   const valueText = `n = ${g4(s.value)} mol`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "n", label: t("rowN"), value: `${g4(s.value)} mol` },
     { key: "v0", label: t("rowV0"), value: `${g4(v0)} L`, isKey: true },
     { key: "v25", label: t("rowV25"), value: `${g4(v25)} L` },
@@ -68,7 +68,7 @@ export function GasSpheresCard({ side, n: cardN }: { side: Side; n: number }) {
     { key: "gain", label: t("rowGain"), value: `${g4(v25 - v0)} L` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -78,12 +78,12 @@ export function GasSpheresCard({ side, n: cardN }: { side: Side; n: number }) {
       caption={t("caption", { n: ltr(g4(s.value)), v0: ltr(g4(v0)), v25: ltr(g4(v25)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="gas-spheres-handle" ticks={[0.25, 2, 4].map((v) => ({ at: v, text: `${v} mol` }))} />
-          <PhControls s={s} valueText={valueText} testId="gas-spheres" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="gas-spheres-handle" ticks={[0.25, 2, 4].map((v) => ({ at: v, text: `${v} mol` }))} />
+          <KitControls s={s} valueText={valueText} testId="gas-spheres" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="gas-spheres" className="min-h-[250px] flex-1" fallback={<Spheres2D v0={v0} v25={v25} />} render3d={() => <SpheresScene3D v0={v0} v25={v25} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="gas-spheres" className="min-h-[250px] flex-1" fallback={<Spheres2D v0={v0} v25={v25} />} render3d={() => <SpheresScene3D v0={v0} v25={v25} hover={hover} />} />}
     />
   );
 }
@@ -126,12 +126,12 @@ function Speed2D({ tK, rms }: { tK: number; rms: number }) {
 export function GasSpeedCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.speed");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(0, { min: -150, max: 700, step: 25 });
+  const s = useStepper(0, { min: -150, max: 700, step: 25 });
   const [hover, setHover] = useState<string | null>(null);
   const tK = s.value + ZERO_C;
   const v = speeds(tK, N2);
   const valueText = `${s.value} °C`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "t", label: t("rowT"), value: `${s.value} °C · ${g4(tK)} K` },
     { key: "mp", label: t("rowMp"), value: `${g4(v.mp)} m/s` },
     { key: "avg", label: t("rowAvg"), value: `${g4(v.avg)} m/s` },
@@ -140,7 +140,7 @@ export function GasSpeedCard({ side, n: cardN }: { side: Side; n: number }) {
     { key: "ke", label: t("rowKe"), value: `${sciText(1.5 * K_B * tK)} J` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -150,12 +150,12 @@ export function GasSpeedCard({ side, n: cardN }: { side: Side; n: number }) {
       caption={t("caption", { t: ltr(String(s.value)), rms: ltr(g4(v.rms)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="gas-speed-handle" ticks={[-150, 300, 700].map((x) => ({ at: x, text: `${x} °C` }))} />
-          <PhControls s={s} valueText={valueText} testId="gas-speed" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="gas-speed-handle" ticks={[-150, 300, 700].map((x) => ({ at: x, text: `${x} °C` }))} />
+          <KitControls s={s} valueText={valueText} testId="gas-speed" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="gas-speed" className="min-h-[250px] flex-1" fallback={<Speed2D tK={tK} rms={v.rms} />} render3d={() => <SpeedScene3D tK={tK} rms={v.rms} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="gas-speed" className="min-h-[250px] flex-1" fallback={<Speed2D tK={tK} rms={v.rms} />} render3d={() => <SpeedScene3D tK={tK} rms={v.rms} hover={hover} />} />}
     />
   );
 }
@@ -190,7 +190,7 @@ function Altitude2D({ hKm, ratio }: { hKm: number; ratio: number }) {
 export function GasAltitudeCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.altitude");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(0, { min: 0, max: ALT_MAX_KM, step: 0.5 });
+  const s = useStepper(0, { min: 0, max: ALT_MAX_KM, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const a = isa(s.value);
   const ground = isa(0);
@@ -198,7 +198,7 @@ export function GasAltitudeCard({ side, n: cardN }: { side: Side; n: number }) {
   const vGround = (R_LATM * ground.T) / ground.P;
   const rho = (a.P * 28.96) / (R_LATM * a.T);
   const valueText = `${g4(s.value)} km`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "h", label: t("rowH"), value: `${g4(s.value)} km` },
     { key: "t", label: t("rowT"), value: `${g4(a.T)} K · ${g4(a.T - ZERO_C)} °C` },
     { key: "p", label: t("rowP"), value: `${g4(a.P)} atm` },
@@ -207,7 +207,7 @@ export function GasAltitudeCard({ side, n: cardN }: { side: Side; n: number }) {
     { key: "rho", label: t("rowRho"), value: `${g4(rho)} g/L` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -221,13 +221,13 @@ export function GasAltitudeCard({ side, n: cardN }: { side: Side; n: number }) {
       }
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="gas-alt-handle" ticks={[0, 5, 11].map((x) => ({ at: x, text: `${x} km` }))} />
-          <PhControls s={s} valueText={valueText} testId="gas-alt" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="gas-alt-handle" ticks={[0, 5, 11].map((x) => ({ at: x, text: `${x} km` }))} />
+          <KitControls s={s} valueText={valueText} testId="gas-alt" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
-        <PhScene
+        <ViewportScene
           testId="gas-alt"
           className="min-h-[270px] flex-1"
           fallback={<Altitude2D hKm={s.value} ratio={vol / vGround} />}

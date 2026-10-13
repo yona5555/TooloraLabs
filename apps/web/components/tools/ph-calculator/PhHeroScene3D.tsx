@@ -2,9 +2,11 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "./PhCanvas3D";
-import { ballPoints, particleCounts } from "./phMath";
-import { UI_TOKENS, uiHex, usePhColors, type PhColors } from "./phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { ballPoints } from "@/components/tool-ui/indicator-kit/format";
+import { particleCounts } from "./phMath";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
+import { UI_TOKENS, uiHex } from "./phColors";
 
 export type HeroProjection = { marker: [number, number]; bottom: [number, number]; top: [number, number] };
 
@@ -48,7 +50,7 @@ function Particles({ count, color, seed, radius, liquidY, liquidH }: { count: nu
   );
 }
 
-function Scene({ pH, c, dragging, onProject }: { pH: number; c: PhColors; dragging: boolean; onProject: (p: HeroProjection) => void }) {
+function Scene({ pH, c, dragging, onProject }: { pH: number; c: TokenColors; dragging: boolean; onProject: (p: HeroProjection) => void }) {
   // Orbit rotation is off while the pH marker is being dragged.
   const get = useThree((s) => s.get);
   useEffect(() => {
@@ -142,11 +144,11 @@ function Scene({ pH, c, dragging, onProject }: { pH: number; c: PhColors; draggi
 const TOKENS = [...UI_TOKENS, "--ph-glass", "--ph-ion-h", "--ph-ion-oh", "--ph-knob", "--ph-ink"];
 
 export default function PhHeroScene3D(props: { pH: number; dragging: boolean; onProject: (p: HeroProjection) => void }) {
-  const c = usePhColors(TOKENS);
+  const c = useTokenColors(TOKENS);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 0.7, 7.2]} testId="ph-hero-canvas" minDistance={5} maxDistance={11} fitAspect={0.95}>
+    <DemandCanvas3D camera={[0, 0.7, 7.2]} testId="ph-hero-canvas" minDistance={5} maxDistance={11} fitAspect={0.95}>
       <Scene {...props} c={c} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

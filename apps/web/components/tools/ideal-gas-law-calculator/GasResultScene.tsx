@@ -3,10 +3,10 @@ import { useCallback, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { GlassHandle } from "@/components/tool-ui/glass/GlassPrimitives";
-import { PhControls, SvgHandle, useMeasuredSize, type PhStepper } from "../ph-calculator/PhCardKit";
-import { useAnchoredDrag } from "../ph-calculator/PhHero";
-import { PhScene } from "../ph-calculator/PhScene";
-import { ballPoints, snap } from "../ph-calculator/phMath";
+import { KitControls, SvgHandle, useMeasuredSize, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useAnchoredDrag } from "@/components/tool-ui/indicator-kit/useAnchoredDrag";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { ballPoints, snap } from "@/components/tool-ui/indicator-kit/format";
 import { g4, pistonFrac, T_MAX, T_MIN, T_STEP, tempCss } from "./gasMath";
 import type { GasProjection } from "./GasResultScene3D";
 
@@ -16,7 +16,7 @@ const PTS = ballPoints(64, 23);
 type SceneProps = { volume: number; temperature: number; particles: number };
 
 /** 2D twin of the 3D piston (no WebGL or no free slot): same piston height, particles and 0–600 K scale. */
-function Scene2D({ s, valueText, label, p }: { s: PhStepper; valueText: string; label: string; p: SceneProps }) {
+function Scene2D({ s, valueText, label, p }: { s: Stepper; valueText: string; label: string; p: SceneProps }) {
   const [box, { w: W, h: H }] = useMeasuredSize<HTMLDivElement>({ w: 380, h: 320 });
   const BAR_X = W - 64;
   const TOP = 22;
@@ -56,7 +56,7 @@ export default function GasResultScene({ p, seed, onSetTemperature }: { p: Scene
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.hero");
   const value = snap(p.temperature, 0.01, T_MIN, T_MAX);
   const set = useCallback((v: number) => onSetTemperature(snap(v, T_STEP, T_MIN, T_MAX)), [onSetTemperature]);
-  const s: PhStepper = {
+  const s: Stepper = {
     value,
     set,
     inc: () => set(value + T_STEP),
@@ -77,7 +77,7 @@ export default function GasResultScene({ p, seed, onSetTemperature }: { p: Scene
 
   return (
     <div data-ph-scene-block className="flex min-h-[340px] flex-1 flex-col gap-3 lg:min-h-[320px]">
-      <PhScene
+      <ViewportScene
         testId="gas-hero"
         className="min-h-[280px] flex-1"
         fallback={<Scene2D s={s} valueText={valueText} label={t("handle")} p={p} />}
@@ -94,7 +94,7 @@ export default function GasResultScene({ p, seed, onSetTemperature }: { p: Scene
           </div>
         )}
       />
-      <PhControls s={s} valueText={valueText} testId="gas-hero" />
+      <KitControls s={s} valueText={valueText} testId="gas-hero" />
     </div>
   );
 }

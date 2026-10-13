@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { EL_TOKENS, elToken } from "../chemical-equation-balancer/chemMath";
 import { Molecules } from "../chemical-equation-balancer/Molecules3D";
 import type { Part } from "./mmMath";
@@ -27,7 +27,7 @@ export function spreadLabels(centres: number[], gap: number, lo: number, hi: num
   return out;
 }
 
-function Scene({ p, c }: { p: MmSceneProps; c: PhColors }) {
+function Scene({ p, c }: { p: MmSceneProps; c: TokenColors }) {
   const size = useThree((s) => s.size);
   const get = useThree((s) => s.get);
   const aspect = size.width / Math.max(1, size.height);
@@ -93,11 +93,11 @@ function Scene({ p, c }: { p: MmSceneProps; c: PhColors }) {
 
 /** §44: the 3D scene at the top of the molar mass Result card (molecule + mass column). */
 export default function MolarMassResultScene3D(p: MmSceneProps) {
-  const c = usePhColors(TOKENS);
+  const c = useTokenColors(TOKENS);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0.9, 0.7, 9.9]} testId="mm-hero-canvas" minDistance={6} maxDistance={200} azimuth={0.7} fitAspect={0.01}>
+    <DemandCanvas3D camera={[0.9, 0.7, 9.9]} testId="mm-hero-canvas" minDistance={6} maxDistance={200} azimuth={0.7} fitAspect={0.01}>
       <Scene p={p} c={c} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

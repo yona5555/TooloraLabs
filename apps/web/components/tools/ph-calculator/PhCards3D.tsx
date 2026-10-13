@@ -3,9 +3,10 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, SvgChem, PhTable, PhTrack, useMeasuredSize, usePhStepper, type PhRow } from "./PhCardKit";
-import { PhScene } from "./PhScene";
-import { ballPoints, classify, DILUTION_MAX_STEPS, dilutionPh, f2, ions, particleCounts, PH_SEED, ratio, sci, SHELF, shelfSeedIndex, sup, uiCss } from "./phMath";
+import { IndicatorCard, KitControls, SvgChem, KitTable, KitTrack, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { ballPoints, f2, ratio, sci, sup } from "@/components/tool-ui/indicator-kit/format";
+import { classify, DILUTION_MAX_STEPS, dilutionPh, ions, particleCounts, PH_SEED, SHELF, shelfSeedIndex, uiCss } from "./phMath";
 
 const ShelfScene3D = dynamic(() => import("./PhScenes3D").then((m) => m.ShelfScene3D), { ssr: false, loading: () => null });
 const DilutionScene3D = dynamic(() => import("./PhScenes3D").then((m) => m.DilutionScene3D), { ssr: false, loading: () => null });
@@ -58,7 +59,7 @@ function Shelf2D({ index }: { index: number }) {
 export function PhShelfCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.shelf");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(shelfSeedIndex(), { min: 0, max: SHELF.length - 1, step: 1 });
+  const s = useStepper(shelfSeedIndex(), { min: 0, max: SHELF.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const sub = SHELF[s.value];
   const x = ions(sub.pH);
@@ -66,7 +67,7 @@ export function PhShelfCard({ side }: { side: Side }) {
   const water = x.h / 1e-7;
   const cls = tc(classify(sub.pH));
   const valueText = `${name} · pH ${sub.pH}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "name", label: t("rowName"), value: name, isKey: true },
     { key: "ph", label: t("rowPh"), value: f2(sub.pH) },
     { key: "h", label: "[H⁺]", value: `${sci(x.h)} M` },
@@ -76,7 +77,7 @@ export function PhShelfCard({ side }: { side: Side }) {
     { key: "class", label: t("rowClass"), value: cls },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       n={3}
       side={side}
       kind="3d"
@@ -85,12 +86,12 @@ export function PhShelfCard({ side }: { side: Side }) {
       caption={t("caption", { name, pH: ltr(f2(sub.pH)), cls })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c3-handle" />
-          <PhControls s={s} valueText={`${s.value + 1} / ${SHELF.length}`} testId="ph-c3" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c3-handle" />
+          <KitControls s={s} valueText={`${s.value + 1} / ${SHELF.length}`} testId="ph-c3" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="c3" className="min-h-[220px] flex-1" fallback={<Shelf2D index={s.value} />} render3d={() => <ShelfScene3D index={s.value} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="c3" className="min-h-[220px] flex-1" fallback={<Shelf2D index={s.value} />} render3d={() => <ShelfScene3D index={s.value} hover={hover} />} />}
     />
   );
 }
@@ -129,12 +130,12 @@ function Dilution2D({ steps, pH }: { steps: number; pH: number }) {
 export function PhDilutionCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.dilution");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(0, { min: 0, max: DILUTION_MAX_STEPS, step: 1 });
+  const s = useStepper(0, { min: 0, max: DILUTION_MAX_STEPS, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const pH = dilutionPh(PH_SEED, s.value);
   const naive = PH_SEED + s.value;
   const valueText = `V × 10${sup(s.value)}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "k", label: t("rowK"), value: String(s.value) },
     { key: "factor", label: t("rowFactor"), value: `× 10${sup(s.value)}` },
     { key: "h", label: "[H⁺]", value: `${sci(10 ** -pH)} M` },
@@ -145,7 +146,7 @@ export function PhDilutionCard({ side }: { side: Side }) {
     { key: "oh", label: "[OH⁻]", value: `${sci(10 ** (pH - 14))} M` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       n={5}
       side={side}
       kind="3d"
@@ -154,12 +155,12 @@ export function PhDilutionCard({ side }: { side: Side }) {
       caption={t("caption", { k: ltr(String(s.value)), pH: ltr(f2(pH)), naive: ltr(f2(naive)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c5-handle" ticks={Array.from({ length: DILUTION_MAX_STEPS + 1 }, (_, k) => ({ at: k, text: `10${sup(k)}` }))} />
-          <PhControls s={s} valueText={valueText} testId="ph-c5" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c5-handle" ticks={Array.from({ length: DILUTION_MAX_STEPS + 1 }, (_, k) => ({ at: k, text: `10${sup(k)}` }))} />
+          <KitControls s={s} valueText={valueText} testId="ph-c5" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="c5" className="min-h-[240px] flex-1" fallback={<Dilution2D steps={s.value} pH={pH} />} render3d={() => <DilutionScene3D steps={s.value} pH={pH} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="c5" className="min-h-[240px] flex-1" fallback={<Dilution2D steps={s.value} pH={pH} />} render3d={() => <DilutionScene3D steps={s.value} pH={pH} hover={hover} />} />}
     />
   );
 }
@@ -201,13 +202,13 @@ function Particles2D({ pH }: { pH: number }) {
 export function PhParticleCard({ side }: { side: Side }) {
   const t = useTranslations("tools.ph-calculator.visuals.particles");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
+  const s = useStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const x = ions(s.value);
   const n = particleCounts(s.value, DROPLET_TOTAL);
   const r = x.h / x.oh;
   const valueText = `pH ${f2(s.value)}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "ph", label: "pH", value: f2(s.value) },
     { key: "h", label: "[H₃O⁺]", value: `${sci(x.h)} M` },
     { key: "oh", label: "[OH⁻]", value: `${sci(x.oh)} M` },
@@ -218,7 +219,7 @@ export function PhParticleCard({ side }: { side: Side }) {
     { key: "class", label: t("rowClass"), value: tc(classify(s.value)) },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       n={8}
       side={side}
       kind="3d"
@@ -227,12 +228,12 @@ export function PhParticleCard({ side }: { side: Side }) {
       caption={t("caption", { pH: ltr(f2(s.value)), nh: ltr(String(n.h)), noh: ltr(String(n.oh)), r: ltr(ratio(r)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c8-handle" ticks={[0, 7, 14].map((p) => ({ at: p, text: `pH ${p}` }))} />
-          <PhControls s={s} valueText={valueText} testId="ph-c8" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="ph-c8-handle" ticks={[0, 7, 14].map((p) => ({ at: p, text: `pH ${p}` }))} />
+          <KitControls s={s} valueText={valueText} testId="ph-c8" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="c8" className="min-h-[240px] flex-1" fallback={<Particles2D pH={s.value} />} render3d={() => <ParticleScene3D pH={s.value} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="c8" className="min-h-[240px] flex-1" fallback={<Particles2D pH={s.value} />} render3d={() => <ParticleScene3D pH={s.value} hover={hover} />} />}
     />
   );
 }

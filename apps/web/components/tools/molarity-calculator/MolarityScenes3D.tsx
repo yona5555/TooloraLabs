@@ -1,9 +1,9 @@
 "use client";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { ballPoints } from "../ph-calculator/phMath";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { ballPoints } from "@/components/tool-ui/indicator-kit/format";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { liquidHex } from "./MolarityResultScene3D";
 import { g3, SOLUTES } from "./molMath";
 
@@ -12,7 +12,7 @@ import { g3, SOLUTES } from "./molMath";
  * Loaded only through next/dynamic (ssr:false), and only while the card holds a WebGL slot.
  */
 const TOKENS = ["--chem-solute", "--chem-solvent", "--chem-tint", "--chem-stock", "--ph-glass", "--ph-knob", "--ph-ink", "--ph-ink-muted", "--ph-focus", "--ph-water"];
-const useColors = (): PhColors | null => usePhColors(TOKENS);
+const useColors = (): TokenColors | null => useTokenColors(TOKENS);
 
 // ── 2. Same moles, two shapes: C × V cylinders ────────────────────────────────────────
 /** Cross-section ∝ concentration and height ∝ volume, so both solids hold the same n = C × V. */
@@ -36,12 +36,12 @@ export function CylindersScene3D({ c1, v1, c2, v2, hover }: { c1: number; v1: nu
     </group>
   );
   return (
-    <PhCanvas3D camera={[0, 1.4, 6.6]} testId="mol-c2-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.6}>
+    <DemandCanvas3D camera={[0, 1.4, 6.6]} testId="mol-c2-canvas" minDistance={5} maxDistance={12} azimuth={0.8} fitAspect={1.6}>
       {cyl(-1.5, c1, v1, hover === "c1" || hover === "v1", `${g3(c1)} M · ${g3(v1)} L`)}
       {cyl(1.3, c2, v2, hover === "c2" || hover === "v2", `${g3(c2)} M · ${g3(v2)} L`)}
       <Label3D position={[0, -1.85, 0]} color={c["--ph-ink-muted"]} fontSize={10} text={`n = ${g3(c1 * v1)} mol`} />
       <Invalidate deps={[c1, v1, c2, v2, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -76,13 +76,13 @@ export function DropletScene3D({ count, molarity, hover }: { count: number; mola
   useLayoutEffect(() => () => shell.dispose(), [shell]);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 0.7, 5.3]} testId="mol-c4-canvas" minDistance={4.5} maxDistance={10} fitAspect={0.85}>
+    <DemandCanvas3D camera={[0, 0.7, 5.3]} testId="mol-c4-canvas" minDistance={4.5} maxDistance={10} fitAspect={0.85}>
       <mesh geometry={shell} renderOrder={1}>
         <meshPhysicalMaterial color={liquidHex(c, molarity)} transparent opacity={hover === "shown" ? 0.3 : 0.2} roughness={0.1} depthWrite={false} side={THREE.DoubleSide} />
       </mesh>
       <Dots count={count} color={c["--chem-solute"]} />
       <Invalidate deps={[count, molarity, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
 
@@ -96,7 +96,7 @@ export function HeapsScene3D({ index, hover }: { index: number; hover: string | 
   if (!c) return null;
   const step = (HX1 - HX0) / (SOLUTES.length - 1);
   return (
-    <PhCanvas3D camera={[0, 1.6, 6.6]} testId="mol-c7-canvas" minDistance={5} maxDistance={12} azimuth={0.7} fitAspect={2.1}>
+    <DemandCanvas3D camera={[0, 1.6, 6.6]} testId="mol-c7-canvas" minDistance={5} maxDistance={12} azimuth={0.7} fitAspect={2.1}>
       <group position={[0, -1.2, 0]}>
         <mesh position={[0, -0.06, 0]}>
           <cylinderGeometry args={[4.1, 4.1, 0.08, 64]} />
@@ -125,6 +125,6 @@ export function HeapsScene3D({ index, hover }: { index: number; hover: string | 
         })}
       </group>
       <Invalidate deps={[index, hover, c]} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

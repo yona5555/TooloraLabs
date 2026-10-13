@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { PhText } from "../ph-calculator/PhCardKit";
+import { RichText } from "@/components/tool-ui/indicator-kit/CardKit";
 import { MOLARITY_MODES, type MolarityMode } from "./types";
 
 type MolarityModeTabsProps = {
@@ -28,7 +28,7 @@ export default function MolarityModeTabs({ mode, onModeChange }: MolarityModeTab
           }`}
           style={mode === value ? undefined : { borderColor: "var(--ph-line)" }}
         >
-          <PhText text={t(`mode.${value}`)} />
+          <RichText text={t(`mode.${value}`)} />
         </button>
       ))}
     </div>

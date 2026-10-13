@@ -3,10 +3,10 @@ import { useCallback, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { GlassHandle } from "@/components/tool-ui/glass/GlassPrimitives";
-import { PhControls, SvgChem, SvgHandle, useMeasuredSize, useSvgDrag, type PhStepper } from "../ph-calculator/PhCardKit";
-import { useAnchoredDrag } from "../ph-calculator/PhHero";
-import { PhScene } from "../ph-calculator/PhScene";
-import { snap } from "../ph-calculator/phMath";
+import { KitControls, SvgChem, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useAnchoredDrag } from "@/components/tool-ui/indicator-kit/useAnchoredDrag";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
+import { snap } from "@/components/tool-ui/indicator-kit/format";
 import { REACTIONS, uniFormula } from "./chemMath";
 import { SvgMolecule } from "./Molecules2D";
 import type { BalProjection, SceneTerm } from "./BalancerResultScene3D";
@@ -15,7 +15,7 @@ const Scene3D = dynamic(() => import("./BalancerResultScene3D"), { ssr: false, l
 const LAST = REACTIONS.length - 1;
 
 /** 2D twin of the 3D balance (no WebGL or no free slot): same molecules per side, same reaction rail. */
-function Scene2D({ s, terms, valueText, label }: { s: PhStepper; terms: SceneTerm[]; valueText: string; label: string }) {
+function Scene2D({ s, terms, valueText, label }: { s: Stepper; terms: SceneTerm[]; valueText: string; label: string }) {
   const [box, { w: W, h: H }] = useMeasuredSize<HTMLDivElement>({ w: 380, h: 320 });
   const ref = useRef<SVGSVGElement>(null);
   const RX0 = 34;
@@ -83,7 +83,7 @@ export default function BalancerResultScene({ terms, index, onSetReaction }: { t
   const tScen = useTranslations("tools.chemical-equation-balancer.form.scenarios");
   const value = index < 0 ? 0 : index;
   const set = useCallback((v: number) => onSetReaction(snap(v, 1, 0, LAST)), [onSetReaction]);
-  const s: PhStepper = {
+  const s: Stepper = {
     value,
     set,
     inc: () => set(value + 1),
@@ -107,7 +107,7 @@ export default function BalancerResultScene({ terms, index, onSetReaction }: { t
 
   return (
     <div data-ph-scene-block className="flex min-h-[340px] flex-1 flex-col gap-3 lg:min-h-[320px]">
-      <PhScene
+      <ViewportScene
         testId="bal-hero"
         className="min-h-[280px] flex-1"
         fallback={<Scene2D s={s} terms={terms} valueText={valueText} label={label} />}
@@ -124,7 +124,7 @@ export default function BalancerResultScene({ terms, index, onSetReaction }: { t
           </div>
         )}
       />
-      <PhControls s={s} valueText={valueText} testId="bal-hero" />
+      <KitControls s={s} valueText={valueText} testId="bal-hero" />
     </div>
   );
 }

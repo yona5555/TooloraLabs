@@ -2,8 +2,8 @@
 import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { EL_TOKENS, labelFormula, moleculeLayout, REACTIONS } from "./chemMath";
 import { Molecules, type Placed } from "./Molecules3D";
 
@@ -53,7 +53,7 @@ export function placeTerms(terms: SceneTerm[], side: "reactant" | "product", x0:
 
 type Props = { terms: SceneTerm[]; index: number; dragging: boolean; onProject: (p: BalProjection) => void };
 
-function Scene({ terms, index, dragging, onProject, c }: Props & { c: PhColors }) {
+function Scene({ terms, index, dragging, onProject, c }: Props & { c: TokenColors }) {
   const get = useThree((s) => s.get);
   useEffect(() => {
     const controls = get().controls as unknown as { enabled: boolean } | null;
@@ -148,11 +148,11 @@ function Scene({ terms, index, dragging, onProject, c }: Props & { c: PhColors }
 
 /** §44: the 3D scene at the top of the balancer's Result card (molecules on a level two-pan balance). */
 export default function BalancerResultScene3D(props: Props) {
-  const c = usePhColors(TOKENS);
+  const c = useTokenColors(TOKENS);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 0.6, 9.2]} testId="bal-hero-canvas" minDistance={6} maxDistance={13} azimuth={0.7} fitAspect={1.45}>
+    <DemandCanvas3D camera={[0, 0.6, 9.2]} testId="bal-hero-canvas" minDistance={6} maxDistance={13} azimuth={0.7} fitAspect={1.45}>
       <Scene {...props} c={c} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

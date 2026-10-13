@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { PH_OPERATIONS, type PhOperation } from "./types";
-import { PhText } from "./PhCardKit";
+import { RichText } from "@/components/tool-ui/indicator-kit/CardKit";
 
 type PhModeTabsProps = {
   operation: PhOperation;
@@ -28,7 +28,7 @@ export default function PhModeTabs({ operation, onOperationChange }: PhModeTabsP
           }`}
           style={operation === value ? undefined : { borderColor: "var(--ph-line)" }}
         >
-          <PhText text={t(`operation.${value}`)} />
+          <RichText text={t(`operation.${value}`)} />
         </button>
       ))}
     </div>

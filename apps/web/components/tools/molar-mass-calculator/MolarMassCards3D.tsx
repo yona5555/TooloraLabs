@@ -3,8 +3,8 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, SvgChem, useMeasuredSize, usePhStepper, type PhRow } from "../ph-calculator/PhCardKit";
-import { PhScene } from "../ph-calculator/PhScene";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { g3, sciText } from "../molarity-calculator/molMath";
 import { atomsOf, uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
@@ -51,13 +51,13 @@ function Beaker2D({ volume, label }: { volume: number; label: string }) {
 export function MmBeakerCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.beaker");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 0.5, max: 10, step: 0.5 });
+  const s = useStepper(1, { min: 0.5, max: 10, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
   const m = s.value * WATER_M;
   const v = m / WATER_DENSITY;
   const label = `${g3(m)} g · ${g3(v)} mL`;
   const valueText = `${s.value} mol H₂O`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "n", label: t("rowMoles"), value: `${s.value} mol` },
     { key: "M", label: "M (H₂O)", value: `${f3(WATER_M)} g/mol` },
     { key: "m", label: "m = n × M", value: `${g3(m)} g`, isKey: true },
@@ -65,7 +65,7 @@ export function MmBeakerCard({ side }: { side: Side }) {
     { key: "N", label: "N = n × Nₐ", value: sciText(s.value * AVOGADRO) },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={1}
       side={side}
@@ -75,12 +75,12 @@ export function MmBeakerCard({ side }: { side: Side }) {
       caption={t("caption", { n: ltr(String(s.value)), m: ltr(g3(m)), v: ltr(g3(v)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c1-handle" ticks={[0.5, 5, 10].map((x) => ({ at: x, text: `${x} mol` }))} />
-          <PhControls s={s} valueText={valueText} testId="mm-c1" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c1-handle" ticks={[0.5, 5, 10].map((x) => ({ at: x, text: `${x} mol` }))} />
+          <KitControls s={s} valueText={valueText} testId="mm-c1" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="mm-c1" className="min-h-[300px] flex-1" fallback={<Beaker2D volume={v} label={label} />} render3d={() => <BeakerScene3D volume={v} label={label} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="mm-c1" className="min-h-[300px] flex-1" fallback={<Beaker2D volume={v} label={label} />} render3d={() => <BeakerScene3D volume={v} label={label} hover={hover} />} />}
     />
   );
 }
@@ -110,14 +110,14 @@ function Hydrate2D({ n, label }: { n: number; label: string }) {
 export function MmHydrateCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.hydrate");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(HYDRATE_MAX, { min: 0, max: HYDRATE_MAX, step: 1 });
+  const s = useStepper(HYDRATE_MAX, { min: 0, max: HYDRATE_MAX, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const n = s.value;
   const water = n * WATER_M;
   const M = CUSO4_M + water;
   const label = `${fx(hydrateFormula(n))} · ${f3(M)} g/mol`;
   const valueText = `n = ${n}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "n", label: t("rowN"), value: String(n) },
     { key: "salt", label: "M (CuSO₄)", value: `${f3(CUSO4_M)} g/mol` },
     { key: "water", label: `${n} × M (H₂O)`, value: `${f3(water)} g/mol` },
@@ -125,7 +125,7 @@ export function MmHydrateCard({ side }: { side: Side }) {
     { key: "pct", label: t("rowWaterPct"), value: `${((100 * water) / M).toFixed(1)} %` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={3}
       side={side}
@@ -135,12 +135,12 @@ export function MmHydrateCard({ side }: { side: Side }) {
       caption={t("caption", { f: ltr(fx(hydrateFormula(n))), m: ltr(f3(M)), p: ltr(((100 * water) / M).toFixed(1)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c3-handle" ticks={[0, HYDRATE_MAX].map((x) => ({ at: x, text: `${x} H₂O` }))} />
-          <PhControls s={s} valueText={valueText} testId="mm-c3" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c3-handle" ticks={[0, HYDRATE_MAX].map((x) => ({ at: x, text: `${x} H₂O` }))} />
+          <KitControls s={s} valueText={valueText} testId="mm-c3" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="mm-c3" className="min-h-[340px] flex-1" fallback={<Hydrate2D n={n} label={label} />} render3d={() => <HydrateScene3D n={n} label={label.replace(/[₀-₉]+/g, (d) => `_{${[...d].map((c) => c.charCodeAt(0) - 0x2080).join("")}}`)} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="mm-c3" className="min-h-[340px] flex-1" fallback={<Hydrate2D n={n} label={label} />} render3d={() => <HydrateScene3D n={n} label={label.replace(/[₀-₉]+/g, (d) => `_{${[...d].map((c) => c.charCodeAt(0) - 0x2080).join("")}}`)} hover={hover} />} />}
     />
   );
 }
@@ -188,21 +188,21 @@ function Groups2D({ index }: { index: number }) {
 export function MmGroupsCard({ side }: { side: Side }) {
   const t = useTranslations("tools.molar-mass-calculator.visuals.groups");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(0, { min: 0, max: GROUPS.length - 1, step: 1 });
+  const s = useStepper(0, { min: 0, max: GROUPS.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const g = GROUPS[s.value];
   const pr = partsOf(g.formula);
   const inner = atomsOf(g.group) ?? {};
   const atoms = (pr?.parts ?? []).reduce((a, p) => a + p.count, 0);
   const valueText = `${s.value + 1} / ${GROUPS.length} · ${fx(g.formula)}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "mult", label: t("rowGroup"), value: `(${fx(g.group)}) × ${g.mult}` },
     ...Object.entries(inner).map(([el, k]) => ({ key: el, label: t("rowInside", { el }), value: `${k} × ${g.mult} = ${k * g.mult}` })),
     { key: "atoms", label: t("rowAtoms"), value: String(atoms) },
     { key: "M", label: `M (${fx(g.formula)})`, value: `${f3(pr?.total ?? 0)} g/mol`, isKey: true },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="mm"
       n={7}
       side={side}
@@ -212,12 +212,12 @@ export function MmGroupsCard({ side }: { side: Side }) {
       caption={t("caption", { f: ltr(fx(g.formula)), g: ltr(fx(g.group)), k: ltr(String(g.mult)), m: ltr(f3(pr?.total ?? 0)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c7-handle" ticks={[0, GROUPS.length - 1].map((i) => ({ at: i, text: `${i + 1}` }))} />
-          <PhControls s={s} valueText={valueText} testId="mm-c7" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="mm-c7-handle" ticks={[0, GROUPS.length - 1].map((i) => ({ at: i, text: `${i + 1}` }))} />
+          <KitControls s={s} valueText={valueText} testId="mm-c7" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={<PhScene testId="mm-c7" className="min-h-[320px] flex-1" fallback={<Groups2D index={s.value} />} render3d={() => <GroupsScene3D index={s.value} hover={hover} />} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={<ViewportScene testId="mm-c7" className="min-h-[320px] flex-1" fallback={<Groups2D index={s.value} />} render3d={() => <GroupsScene3D index={s.value} hover={hover} />} />}
     />
   );
 }

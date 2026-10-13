@@ -2,7 +2,7 @@
 import { createContext, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 
 /**
- * Viewport-gated WebGL slots for the pH page (hero + 3 cards = 4 scenes): a scene mounts its
+ * Viewport-gated WebGL slots for a tool page: a scene mounts its
  * canvas only while it is on screen AND holds one of at most two slots; otherwise (off screen,
  * no free slot, or no WebGL at all) it shows the 2D version of the same indicator — never a
  * blank box. A released slot is handed on only after a cool-down, so the leaving canvas has
@@ -47,10 +47,10 @@ function hasWebGL(): boolean {
 }
 const noop = () => () => {};
 
-/** Set by PhCanvas3D once its first frame exists; until then the 2D twin stays visible. */
+/** Set by DemandCanvas3D once its first frame exists; until then the 2D twin stays visible. */
 export const SceneReadyContext = createContext<(() => void) | null>(null);
 
-export function PhScene({ render3d, fallback, className = "", testId }: { render3d: () => ReactNode; fallback: ReactNode; className?: string; testId: string }) {
+export function ViewportScene({ render3d, fallback, className = "", testId }: { render3d: () => ReactNode; fallback: ReactNode; className?: string; testId: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [live, setLive] = useState(false);

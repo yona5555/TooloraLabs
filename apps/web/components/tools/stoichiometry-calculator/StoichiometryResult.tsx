@@ -4,7 +4,7 @@ import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { PhText } from "../ph-calculator/PhCardKit";
+import { RichText } from "@/components/tool-ui/indicator-kit/CardKit";
 import { balancedText, molarMassOf, uniFormula } from "../chemical-equation-balancer/chemMath";
 import StoichiometryShareExportModal from "./StoichiometryShareExportModal";
 import StoichiometryResultScene from "./StoichiometryResultScene";
@@ -141,14 +141,14 @@ export default function StoichiometryResult({ hasCalculated, result, knownFormul
                 {show(result.targetAmount)} <span className="text-xl font-semibold text-blue-600 dark:text-blue-300">{unitLabel}</span>
               </p>
               <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">
-                <PhText text={t("targetAmountCaption", { formula: uniFormula(targetFormula) })} />
+                <RichText text={t("targetAmountCaption", { formula: uniFormula(targetFormula) })} />
               </p>
               <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />
               <dl dir="ltr" data-ph-subvalues className="grid grid-cols-2 gap-x-2 gap-y-3 text-center text-sm sm:grid-cols-4">
                 {steps.map((st, i) => (
                   <div key={i} className="min-w-0">
                     <dt className={dtClass}>
-                      <PhText text={st.label} />
+                      <RichText text={st.label} />
                     </dt>
                     <dd className={ddClass}>{st.value}</dd>
                   </div>

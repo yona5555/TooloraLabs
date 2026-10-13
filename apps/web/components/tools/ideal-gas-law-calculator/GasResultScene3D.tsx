@@ -2,9 +2,9 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { ballPoints, clamp } from "../ph-calculator/phMath";
-import { mixHex, usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { ballPoints, clamp } from "@/components/tool-ui/indicator-kit/format";
+import { mixHex, useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { pistonFrac, T_MAX } from "./gasMath";
 
 export type GasProjection = { marker: [number, number]; bottom: [number, number]; top: [number, number] };
@@ -15,7 +15,7 @@ const CYL_R = 1.0;
 const PTS = ballPoints(64, 23);
 const TOKENS = ["--chem-cold", "--chem-hot", "--chem-piston", "--ph-glass", "--ph-knob", "--ph-ink", "--ph-ink-muted"];
 
-export const tempHex = (c: PhColors, tK: number) => mixHex(c["--chem-cold"], c["--chem-hot"], clamp(tK / T_MAX, 0, 1));
+export const tempHex = (c: TokenColors, tK: number) => mixHex(c["--chem-cold"], c["--chem-hot"], clamp(tK / T_MAX, 0, 1));
 
 /** Gas particles spread through the space under the piston; emissive, so the glass never tints them. */
 export function GasDots({ count, x, r, y0, h, color, size = 0.075, seedPts = PTS }: { count: number; x: number; r: number; y0: number; h: number; color: string; size?: number; seedPts?: [number, number, number][] }) {
@@ -43,7 +43,7 @@ export function GasDots({ count, x, r, y0, h, color, size = 0.075, seedPts = PTS
 
 type Props = { volume: number; temperature: number; particles: number; dragging: boolean; onProject: (p: GasProjection) => void };
 
-function Scene({ volume, temperature, particles, dragging, onProject, c }: Props & { c: PhColors }) {
+function Scene({ volume, temperature, particles, dragging, onProject, c }: Props & { c: TokenColors }) {
   const get = useThree((s) => s.get);
   useEffect(() => {
     const controls = get().controls as unknown as { enabled: boolean } | null;
@@ -128,11 +128,11 @@ function Scene({ volume, temperature, particles, dragging, onProject, c }: Props
 }
 
 export default function GasResultScene3D(props: Props) {
-  const c = usePhColors(TOKENS);
+  const c = useTokenColors(TOKENS);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[0, 0.7, 7.4]} testId="gas-hero-canvas" minDistance={5} maxDistance={11} fitAspect={1.05}>
+    <DemandCanvas3D camera={[0, 0.7, 7.4]} testId="gas-hero-canvas" minDistance={5} maxDistance={11} fitAspect={1.05}>
       <Scene {...props} c={c} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }

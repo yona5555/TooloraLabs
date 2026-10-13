@@ -2,8 +2,8 @@
 import { useCallback } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { PhControls, PhTrack, SvgChem, useMeasuredSize, type PhStepper } from "../ph-calculator/PhCardKit";
-import { PhScene } from "../ph-calculator/PhScene";
+import { KitControls, KitTrack, SvgChem, useMeasuredSize, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { clampIndex, RAIL, RAIL_SEED, railPos } from "./mmMath";
@@ -66,7 +66,7 @@ export default function MolarMassResultScene({ p, mm, onSetFormula }: { p: MmSce
   const t = useTranslations("tools.molar-mass-calculator.visuals.hero");
   const pos = Math.round(railPos(mm, p.formula) * 100) / 100;
   const set = useCallback((v: number) => onSetFormula(RAIL[clampIndex(v, RAIL.length)].formula), [onSetFormula]);
-  const s: PhStepper = {
+  const s: Stepper = {
     value: pos,
     set,
     inc: () => set(Math.floor(pos + 1e-9) + 1),
@@ -83,7 +83,7 @@ export default function MolarMassResultScene({ p, mm, onSetFormula }: { p: MmSce
   const valueText = `${uniFormula(p.formula)} · ${p.totalText}`;
   return (
     <div data-ph-scene-block className="flex min-h-[420px] flex-1 flex-col gap-2">
-      <PhScene
+      <ViewportScene
         testId="mm-hero"
         className="min-h-[300px] flex-1"
         fallback={<Scene2D p={p} />}
@@ -93,14 +93,14 @@ export default function MolarMassResultScene({ p, mm, onSetFormula }: { p: MmSce
           </div>
         )}
       />
-      <PhTrack
+      <KitTrack
         s={s}
         label={t("handle")}
         valueText={valueText}
         testId="mm-hero-handle"
         ticks={[0, RAIL.length - 1].map((i) => ({ at: i, text: `${Math.round(RAIL[i].mm)} g/mol` }))}
       />
-      <PhControls s={s} valueText={valueText} testId="mm-hero" />
+      <KitControls s={s} valueText={valueText} testId="mm-hero" />
     </div>
   );
 }

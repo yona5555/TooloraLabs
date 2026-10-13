@@ -2,8 +2,8 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, SvgChem, SvgHandle, useMeasuredSize, usePhStepper, useSvgDrag, type PhRow } from "../ph-calculator/PhCardKit";
-import { clamp } from "../ph-calculator/phMath";
+import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { g4, GAS_SEED_INDEX, GASES, PRESSURE_SEED_INDEX, PRESSURES, R_LATM, SEED, tempCss, ZERO_C } from "./gasMath";
 
 /**
@@ -21,7 +21,7 @@ const NRT = SEED.moles * R_LATM * SEED.temperature; // 22.414 L·atm
 export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.boyle");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SEED.pressure, { min: 0.5, max: 4, step: 0.25 });
+  const s = useStepper(SEED.pressure, { min: 0.5, max: 4, step: 0.25 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 270;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -39,7 +39,7 @@ export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
   for (let v = NRT / 4; v <= VMAX; v += 0.25) pts.push(`${xv(v).toFixed(1)},${yp(NRT / v).toFixed(1)}`);
   const v = NRT / s.value;
   const valueText = `P = ${g4(s.value)} atm`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "nrt", label: "nRT", value: `${g4(NRT)} L·atm` },
     { key: "p", label: t("rowP"), value: `${g4(s.value)} atm` },
     { key: "v", label: "V = nRT / P", value: `${g4(v)} L`, isKey: true },
@@ -49,7 +49,7 @@ export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
   ];
   const on = hover === "v" || hover === "p";
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -57,8 +57,8 @@ export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { p: ltr(g4(s.value)), v: ltr(g4(v)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="gas-boyle" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="gas-boyle" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g4(v)} L`}>
@@ -97,7 +97,7 @@ const CHARLES_T = [-200, -100, 0, 100, 200, 300];
 export function GasCharlesCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.charles");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(0, { min: -250, max: 300, step: 25 });
+  const s = useStepper(0, { min: -250, max: 300, step: 25 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 250;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -115,7 +115,7 @@ export function GasCharlesCard({ side, n: cardN }: { side: Side; n: number }) {
   const v = vAt(s.value);
   const bw = Math.min(26, (X1 - X0) / 14);
   const valueText = `${s.value} °C`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "t", label: t("rowT"), value: `${s.value} °C` },
     { key: "k", label: t("rowK"), value: `${g4(s.value + ZERO_C)} K` },
     { key: "v", label: "V = nRT / P", value: `${g4(v)} L`, isKey: true },
@@ -124,7 +124,7 @@ export function GasCharlesCard({ side, n: cardN }: { side: Side; n: number }) {
     { key: "zero", label: t("rowZero"), value: "−273.15 °C" },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -132,8 +132,8 @@ export function GasCharlesCard({ side, n: cardN }: { side: Side; n: number }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { t: ltr(String(s.value)), v: ltr(g4(v)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="gas-charles" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="gas-charles" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g4(v)} L`}>
@@ -168,7 +168,7 @@ export function GasCharlesCard({ side, n: cardN }: { side: Side; n: number }) {
 export function GasDensityCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.density");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(GAS_SEED_INDEX, { min: 0, max: GASES.length - 1, step: 1 });
+  const s = useStepper(GAS_SEED_INDEX, { min: 0, max: GASES.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 290;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -185,7 +185,7 @@ export function GasDensityCard({ side, n: cardN }: { side: Side; n: number }) {
   const name = t(`items.${g.key}`);
   const r = rho(g.M);
   const air = rho(28.96);
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "name", label: t("rowName"), value: name },
     { key: "m", label: t("rowM"), value: `${g.M} g/mol` },
     { key: "rho", label: "ρ = PM / RT", value: `${g4(r)} g/L`, isKey: true },
@@ -195,7 +195,7 @@ export function GasDensityCard({ side, n: cardN }: { side: Side; n: number }) {
   ];
   const yRow = (i: number) => 8 + i * rowH + rowH / 2;
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -203,8 +203,8 @@ export function GasDensityCard({ side, n: cardN }: { side: Side; n: number }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { name, formula: g.formula, rho: ltr(g4(r)) })}
-      controls={<PhControls s={s} valueText={`${s.value + 1} / ${GASES.length}`} testId="gas-density" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={`${s.value + 1} / ${GASES.length}`} testId="gas-density" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${g.formula} ${g4(r)} g/L`}>
@@ -238,7 +238,7 @@ const LOG_HI = 3;
 export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.dial");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(PRESSURE_SEED_INDEX, { min: 0, max: PRESSURES.length - 1, step: 1 });
+  const s = useStepper(PRESSURE_SEED_INDEX, { min: 0, max: PRESSURES.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 240;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -263,7 +263,7 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
     s.set(best);
   });
   const vMol = (R_LATM * 293.15) / src.p;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "name", label: t("rowName"), value: name },
     { key: "atm", label: t("rowAtm"), value: `${g4(src.p)} atm`, isKey: true },
     { key: "kpa", label: t("rowKpa"), value: `${g4(src.p * 101.325)} kPa` },
@@ -276,7 +276,7 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
     return `M ${a[0]} ${a[1]} A ${R} ${R} 0 0 1 ${b[0]} ${b[1]}`;
   };
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -284,8 +284,8 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { name, p: ltr(g4(src.p)) })}
-      controls={<PhControls s={s} valueText={`${s.value + 1} / ${PRESSURES.length}`} testId="gas-dial" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={`${s.value + 1} / ${PRESSURES.length}`} testId="gas-dial" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${name} ${g4(src.p)} atm`}>
@@ -321,7 +321,7 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
 export function GasBalanceCard({ side, n: cardN }: { side: Side; n: number }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.balance");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(SEED.moles, { min: 0.25, max: 4, step: 0.25 });
+  const s = useStepper(SEED.moles, { min: 0.25, max: 4, step: 0.25 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 230;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -340,7 +340,7 @@ export function GasBalanceCard({ side, n: cardN }: { side: Side; n: number }) {
   const ref = useRef<SVGSVGElement>(null);
   const drag = useSvgDrag(ref, W, H, (px) => s.set(0.25 + ((px - X0) / (X1 - X0)) * 3.75));
   const valueText = `n = ${g4(s.value)} mol`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "p", label: "P", value: `${g4(P)} atm` },
     { key: "n", label: "n", value: `${g4(s.value)} mol` },
     { key: "t", label: "T", value: `${g4(T)} K` },
@@ -362,7 +362,7 @@ export function GasBalanceCard({ side, n: cardN }: { side: Side; n: number }) {
     </g>
   );
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="gas"
       n={cardN}
       side={side}
@@ -370,8 +370,8 @@ export function GasBalanceCard({ side, n: cardN }: { side: Side; n: number }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { n: ltr(g4(s.value)), v: ltr(g4(v)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="gas-balance" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="gas-balance" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`PV = nRT = ${g4(nrt)} L·atm`}>

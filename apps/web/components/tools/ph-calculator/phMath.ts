@@ -1,9 +1,11 @@
 /**
- * Pure chemistry + formatting helpers shared by the pH hero and its indicator cards. Every value
+ * Pure chemistry helpers shared by the pH hero and its indicator cards. Every value
  * here is real: the same 25 °C relation the calculator uses (pH + pOH = 14), exact charge-balance
  * pH for titration and dilution (so dilution approaches 7 but never crosses it), and published
  * Kw data. No DOM, no colours.
  */
+
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 
 export const PH_MIN = 0;
 export const PH_MAX = 14;
@@ -15,14 +17,6 @@ export const PH_SEED = 5.5;
 
 export type PhClass = "acidic" | "neutral" | "basic";
 
-export const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
-
-/** Snap to the step grid without float dust (0.1 + 0.2 → 0.3). */
-export function snap(v: number, step: number, lo: number, hi: number): number {
-  const n = Math.round(clamp(v, lo, hi) / step) * step;
-  return Number(clamp(n, lo, hi).toFixed(6));
-}
-
 export function classify(pH: number, neutral = 7): PhClass {
   if (Math.abs(pH - neutral) < 1e-9) return "neutral";
   return pH < neutral ? "acidic" : "basic";
@@ -31,41 +25,6 @@ export function classify(pH: number, neutral = 7): PhClass {
 export function ions(pH: number, pKw = PKW_25) {
   const pOH = pKw - pH;
   return { pH, pOH, h: 10 ** -pH, oh: 10 ** -pOH };
-}
-
-/** pH to two decimals; never "-0.00". */
-export function f2(v: number): string {
-  // The epsilon rounds float dust like 13.995 − 5.5 = 8.494999… half-up, as written on paper.
-  const r = Math.round(v * 100 + 1e-7) / 100;
-  return (Object.is(r, -0) ? 0 : r).toFixed(2);
-}
-
-export function f1(v: number): string {
-  const r = Math.round(v * 10 + 1e-7) / 10;
-  return (Object.is(r, -0) ? 0 : r).toFixed(1);
-}
-
-const SUP: Record<string, string> = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
-export const sup = (n: number) => String(n).split("").map((c) => SUP[c] ?? c).join("");
-
-/** Scientific notation with a real superscript exponent: 3.16 × 10⁻⁶. Safe at 0 and ±∞. */
-export function sci(v: number, digits = 2): string {
-  if (!Number.isFinite(v)) return "—";
-  if (v === 0) return "0";
-  let e = Math.floor(Math.log10(Math.abs(v)));
-  let m = v / 10 ** e;
-  if (Number(m.toFixed(digits)) >= 10) {
-    m /= 10;
-    e += 1;
-  }
-  return `${m.toFixed(digits)} × 10${sup(e)}`;
-}
-
-/** Ratio as "×10ⁿ"-style plain text for big ratios, else a short number. */
-export function ratio(v: number): string {
-  if (!Number.isFinite(v) || v <= 0) return "—";
-  if (v >= 1000 || v < 0.01) return sci(v, 1);
-  return v >= 10 ? v.toFixed(0) : v.toFixed(2);
 }
 
 /**
@@ -174,19 +133,4 @@ export function particleCounts(pH: number, total: number): { h: number; oh: numb
   const share = clamp(0.5 + (7 - pH) / 14, 0, 1);
   const h = clamp(Math.round(total * share), 1, total - 1);
   return { h, oh: total - h };
-}
-
-/** Deterministic pseudo-random points inside a unit ball (stable between renders). */
-export function ballPoints(n: number, seed = 7): [number, number, number][] {
-  let s = seed;
-  const rnd = () => {
-    s = (s * 16807) % 2147483647;
-    return (s - 1) / 2147483646;
-  };
-  const out: [number, number, number][] = [];
-  while (out.length < n) {
-    const p: [number, number, number] = [rnd() * 2 - 1, rnd() * 2 - 1, rnd() * 2 - 1];
-    if (p[0] ** 2 + p[1] ** 2 + p[2] ** 2 <= 1) out.push(p);
-  }
-  return out;
 }

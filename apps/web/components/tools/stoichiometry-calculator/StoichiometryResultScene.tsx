@@ -2,8 +2,8 @@
 import { useCallback, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { Chem, PhControls, PhTrack, SvgChem, useMeasuredSize, type PhStepper } from "../ph-calculator/PhCardKit";
-import { PhScene } from "../ph-calculator/PhScene";
+import { Chem, KitControls, KitTrack, SvgChem, useMeasuredSize, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { g3 } from "../molarity-calculator/molMath";
@@ -91,7 +91,7 @@ export default function StoichiometryResultScene({
   const t = useTranslations("tools.stoichiometry-calculator.visuals.hero");
   const value = Math.round(toLog(amount) * 100) / 100;
   const set = useCallback((x: number) => onSetAmount(fromLog(x)), [onSetAmount]);
-  const s: PhStepper = {
+  const s: Stepper = {
     value,
     set,
     inc: () => set(value + LOG_STEP * 2),
@@ -117,7 +117,7 @@ export default function StoichiometryResultScene({
       <p dir="ltr" data-testid="sto-hero-equation" className="text-center text-2xl font-bold leading-tight" style={{ color: "var(--ph-ink)" }}>
         <Chem text={equation} />
       </p>
-      <PhScene
+      <ViewportScene
         testId="sto-hero"
         className="aspect-video max-h-[240px] w-full sm:max-h-[300px]"
         fallback={<Scene2D p={p} label={equation} />}
@@ -153,10 +153,10 @@ export default function StoichiometryResultScene({
       </div>
       <div dir="ltr" className="w-full">
         <div style={{ width: handleWidth, minWidth: "min(100%, 240px)" }}>
-          <PhTrack s={s} label={label} valueText={valueText} testId="sto-hero-handle" ticks={TICKS.map((e) => ({ at: e, text: tickText(e) }))} />
+          <KitTrack s={s} label={label} valueText={valueText} testId="sto-hero-handle" ticks={TICKS.map((e) => ({ at: e, text: tickText(e) }))} />
         </div>
       </div>
-      <PhControls s={s} valueText={valueText} testId="sto-hero" />
+      <KitControls s={s} valueText={valueText} testId="sto-hero" />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { PhCard, PhControls, PhTable, PhTrack, SvgChem, SvgHandle, useMeasuredSize, usePhStepper, useSvgDrag, type PhRow } from "../ph-calculator/PhCardKit";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { atomLedger, atomsOf, balance, balancedText, elToken, REACTIONS, uniFormula } from "./chemMath";
 
 /**
@@ -26,7 +26,7 @@ export function BalMatrixCard({ side }: { side: Side }) {
   const t = useTranslations("tools.chemical-equation-balancer.visuals.matrix");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const name = useReactionName();
-  const s = usePhStepper(0, { min: 0, max: LAST, step: 1 });
+  const s = useStepper(0, { min: 0, max: LAST, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const terms = BALANCED[s.value];
   const els = atomLedger(terms).map((r) => r.el);
@@ -42,7 +42,7 @@ export function BalMatrixCard({ side }: { side: Side }) {
   const maxN = Math.max(1, ...cnt.flatMap((c) => Object.values(c)));
   const R = Math.min(colW, rowH) * 0.42;
   const valueText = name(s.value);
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     ...els.map((el) => ({
       key: el,
       label: `${el}: ${terms.map((term, j) => `${j === 0 ? "" : term.side === "reactant" ? " + " : " − "}${cnt[j][el] ?? 0}×${term.coefficient}`).join("")}`,
@@ -51,7 +51,7 @@ export function BalMatrixCard({ side }: { side: Side }) {
     { key: "coef", label: t("rowVector"), value: `(${terms.map((x) => x.coefficient).join(", ")})`, isKey: true },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="bal"
       n={2}
       side={side}
@@ -61,11 +61,11 @@ export function BalMatrixCard({ side }: { side: Side }) {
       caption={t("caption", { eq: ltr(balancedText(terms)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="bal-c2-handle" ticks={[0, LAST].map((x) => ({ at: x, text: String(x + 1) }))} />
-          <PhControls s={s} valueText={`${s.value + 1} / ${REACTIONS.length}`} testId="bal-c2" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="bal-c2-handle" ticks={[0, LAST].map((x) => ({ at: x, text: String(x + 1) }))} />
+          <KitControls s={s} valueText={`${s.value + 1} / ${REACTIONS.length}`} testId="bal-c2" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: Math.max(250, HMIN) }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -114,7 +114,7 @@ export function BalMatrixCard({ side }: { side: Side }) {
 export function BalChargeCard({ side }: { side: Side }) {
   const t = useTranslations("tools.chemical-equation-balancer.visuals.charge");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 1, max: 4, step: 1 });
+  const s = useStepper(1, { min: 1, max: 4, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const k = s.value;
   const qL = 3 * k;
@@ -134,7 +134,7 @@ export function BalChargeCard({ side }: { side: Side }) {
   ];
   const rowY = (i: number) => 40 + i * ((H - 80) / 2);
   const eq = `${k > 1 ? k : ""}Fe³⁺ + Cu → ${k > 1 ? k : ""}Fe²⁺ + Cu²⁺`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "fe", label: t("rowFe"), value: `${k} = ${k}` },
     { key: "cu", label: t("rowCu"), value: "1 = 1" },
     { key: "q", label: t("rowChargeL"), value: `+${qL}` },
@@ -143,7 +143,7 @@ export function BalChargeCard({ side }: { side: Side }) {
     { key: "st", label: t("rowStatus"), value: ok ? t("balanced") : t("unbalanced") },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="bal"
       n={3}
       side={side}
@@ -153,11 +153,11 @@ export function BalChargeCard({ side }: { side: Side }) {
       caption={t("caption", { eq: ltr(eq), l: ltr(String(qL)), r: ltr(String(qR)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={eq} testId="bal-c3-handle" ticks={[1, 2, 3, 4].map((x) => ({ at: x, text: String(x) }))} />
-          <PhControls s={s} valueText={`${k} Fe³⁺`} testId="bal-c3" />
+          <KitTrack s={s} label={t("handle")} valueText={eq} testId="bal-c3-handle" ticks={[1, 2, 3, 4].map((x) => ({ at: x, text: String(x) }))} />
+          <KitControls s={s} valueText={`${k} Fe³⁺`} testId="bal-c3" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={eq}>
@@ -198,7 +198,7 @@ export function BalChargeCard({ side }: { side: Side }) {
 export function BalTrialCard({ side }: { side: Side }) {
   const t = useTranslations("tools.chemical-equation-balancer.visuals.trial");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(1, { min: 1, max: 6, step: 1 });
+  const s = useStepper(1, { min: 1, max: 6, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const x = s.value;
   const oL = 2 * x;
@@ -217,7 +217,7 @@ export function BalTrialCard({ side }: { side: Side }) {
   ];
   const ok = oL === 6;
   const valueText = `x = ${x}`;
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "x", label: t("rowX"), value: String(x) },
     { key: "fe", label: t("rowFe"), value: "4 = 4" },
     { key: "o", label: t("rowOL"), value: String(oL) },
@@ -226,7 +226,7 @@ export function BalTrialCard({ side }: { side: Side }) {
     { key: "st", label: t("rowStatus"), value: ok ? t("balanced") : t("unbalanced") },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="bal"
       n={4}
       side={side}
@@ -234,8 +234,8 @@ export function BalTrialCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { x: ltr(String(x)), l: ltr(String(oL)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="bal-c4" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="bal-c4" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -275,7 +275,7 @@ export function BalTrialCard({ side }: { side: Side }) {
 export function BalGrowthCard({ side }: { side: Side }) {
   const t = useTranslations("tools.chemical-equation-balancer.visuals.growth");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = usePhStepper(4, { min: 2, max: 8, step: 1 });
+  const s = useStepper(4, { min: 2, max: 8, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const HMIN = 260;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
@@ -294,14 +294,14 @@ export function BalGrowthCard({ side }: { side: Side }) {
   const line = (f: (n: number) => number) => [2, 3, 4, 5, 6, 7, 8].map((n) => `${xT(n).toFixed(1)},${yL(f(n)).toFixed(1)}`).join(" ");
   const valueText = `${T} ${t("terms")}`;
   const fmt = (v: number) => v.toLocaleString("en-US");
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     { key: "t", label: t("rowTerms"), value: String(T) },
     { key: "trials", label: t("rowTrials"), value: `10^${T} = ${fmt(trials)}`.replace(/\^(\d)/, (_, d: string) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[Number(d)]), isKey: true },
     { key: "steps", label: t("rowSteps"), value: fmt(steps) },
     { key: "ratio", label: t("rowRatio"), value: `× ${fmt(Math.round(trials / steps))}` },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="bal"
       n={6}
       side={side}
@@ -309,8 +309,8 @@ export function BalGrowthCard({ side }: { side: Side }) {
       title={t("title")}
       subtitle={t("subtitle")}
       caption={t("caption", { t: ltr(String(T)), trials: ltr(fmt(trials)), steps: ltr(fmt(steps)) })}
-      controls={<PhControls s={s} valueText={valueText} testId="bal-c6" />}
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      controls={<KitControls s={s} valueText={valueText} testId="bal-c6" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
@@ -351,7 +351,7 @@ export function BalRingsCard({ side }: { side: Side }) {
   const t = useTranslations("tools.chemical-equation-balancer.visuals.rings");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const name = useReactionName();
-  const s = usePhStepper(3, { min: 0, max: LAST, step: 1 });
+  const s = useStepper(3, { min: 0, max: LAST, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
   const terms = BALANCED[s.value];
   const ledger = atomLedger(terms);
@@ -378,12 +378,12 @@ export function BalRingsCard({ side }: { side: Side }) {
   };
   const lx = cx + R + 26;
   const valueText = name(s.value);
-  const rows: PhRow[] = [
+  const rows: KitRow[] = [
     ...ledger.map((r) => ({ key: r.el, label: r.el, value: `${r.l} | ${r.r}` })),
     { key: "total", label: t("rowTotal"), value: `${total} | ${total}`, isKey: true },
   ];
   return (
-    <PhCard
+    <IndicatorCard
       idPrefix="bal"
       n={7}
       side={side}
@@ -393,11 +393,11 @@ export function BalRingsCard({ side }: { side: Side }) {
       caption={t("caption", { eq: ltr(balancedText(terms)), n: ltr(String(total)) })}
       controls={
         <>
-          <PhTrack s={s} label={t("handle")} valueText={valueText} testId="bal-c7-handle" ticks={[0, LAST].map((x) => ({ at: x, text: String(x + 1) }))} />
-          <PhControls s={s} valueText={`${s.value + 1} / ${REACTIONS.length}`} testId="bal-c7" />
+          <KitTrack s={s} label={t("handle")} valueText={valueText} testId="bal-c7-handle" ticks={[0, LAST].map((x) => ({ at: x, text: String(x + 1) }))} />
+          <KitControls s={s} valueText={`${s.value + 1} / ${REACTIONS.length}`} testId="bal-c7" />
         </>
       }
-      table={<PhTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>

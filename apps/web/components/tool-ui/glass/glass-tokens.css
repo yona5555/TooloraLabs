@@ -295,8 +295,35 @@
   --chem-reactant: var(--color-amber-300);
   --chem-product: var(--color-teal-300);
 }
-/* Chemistry pages (pH design): Inter everywhere, so shared cards' font-mono numbers use Inter with tabular figures. */
-[data-chem-page] .font-mono {
+/* Chemistry and converter pages (pH design): Inter everywhere, so shared cards' font-mono numbers use Inter with tabular figures. */
+[data-chem-page] .font-mono,
+[data-kit-page] .font-mono {
   font-family: var(--glass-font);
   font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Converter pages (all-2D indicator design, §44). Data colours defined once (light + dark):
+ * --cv-from = the quantity in the unit you start from, --cv-to = the unit you convert to,
+ * --cv-warm / --cv-cool = the ends of a temperature column, --cv-third = a third series.
+ */
+:root {
+  --cv-from: var(--color-blue-600);
+  --cv-from-soft: color-mix(in oklab, var(--color-blue-500) 22%, transparent);
+  --cv-to: var(--color-amber-600);
+  --cv-to-soft: color-mix(in oklab, var(--color-amber-500) 24%, transparent);
+  --cv-third: var(--color-emerald-600);
+  --cv-warm: var(--color-rose-600);
+  --cv-cool: var(--color-sky-500);
+  --cv-metal: var(--color-zinc-400);
+}
+:root.dark {
+  --cv-from: var(--color-blue-400);
+  --cv-from-soft: color-mix(in oklab, var(--color-blue-400) 26%, transparent);
+  --cv-to: var(--color-amber-400);
+  --cv-to-soft: color-mix(in oklab, var(--color-amber-400) 26%, transparent);
+  --cv-third: var(--color-emerald-400);
+  --cv-warm: var(--color-rose-400);
+  --cv-cool: var(--color-sky-300);
+  --cv-metal: var(--color-zinc-500);
 }

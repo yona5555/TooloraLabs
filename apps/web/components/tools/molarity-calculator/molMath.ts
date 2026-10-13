@@ -2,7 +2,7 @@
  * Pure helpers for the molarity Result scene and its 8 indicator cards. Every value is the
  * calculator's own relation (M = n / V, C₁V₁ = C₂V₂) or a published constant. No DOM, no colours.
  */
-import { clamp } from "../ph-calculator/phMath";
+import { clamp } from "@/components/tool-ui/indicator-kit/format";
 
 export const AVOGADRO = 6.02214076e23;
 

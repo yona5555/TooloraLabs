@@ -2,7 +2,7 @@
  * Pure helpers for the stoichiometry Result scene and its 8 indicator cards. Every value is the
  * calculator's own relation (n = m / M, n₂ = n₁ × b / a) with IUPAC molar masses. No DOM, no colours.
  */
-import { clamp, snap } from "../ph-calculator/phMath";
+import { clamp, snap } from "@/components/tool-ui/indicator-kit/format";
 import { atomsOf, balance, molarMassOf } from "../chemical-equation-balancer/chemMath";
 
 export const AVOGADRO = 6.02214076e23;

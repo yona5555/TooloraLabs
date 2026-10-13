@@ -2,8 +2,8 @@
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import type { Group } from "three";
-import PhCanvas3D, { ChemLabel3D as Label3D, Invalidate } from "../ph-calculator/PhCanvas3D";
-import { usePhColors, type PhColors } from "../ph-calculator/phColors";
+import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components/tool-ui/three/DemandCanvas3D";
+import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { EL_TOKENS, labelFormula } from "../chemical-equation-balancer/chemMath";
 import { Molecules } from "../chemical-equation-balancer/Molecules3D";
 
@@ -49,7 +49,7 @@ export function cluster(count: number, x: number, sw: number, availH: number) {
   return { at, k, top: (rows / 2) * gap };
 }
 
-function Spinning({ formula, at, k, phase, c }: { formula: string; at: [number, number, number]; k: number; phase: number; c: PhColors }) {
+function Spinning({ formula, at, k, phase, c }: { formula: string; at: [number, number, number]; k: number; phase: number; c: TokenColors }) {
   const items = useMemo(() => [{ formula, at: [0, 0, 0] as [number, number, number], scale: k }], [formula, k]);
   return (
     <group position={at} rotation={[0.25, phase, 0]} userData={{ spin: true }}>
@@ -71,7 +71,7 @@ function Spin({ root }: { root: RefObject<Group | null> }) {
   return null;
 }
 
-function Scene({ p, c }: { p: StoSceneProps; c: PhColors }) {
+function Scene({ p, c }: { p: StoSceneProps; c: TokenColors }) {
   const size = useThree((s) => s.size);
   const get = useThree((s) => s.get);
   const root = useRef<Group>(null);
@@ -136,11 +136,11 @@ function Scene({ p, c }: { p: StoSceneProps; c: PhColors }) {
 
 /** §44: the 3D reaction at the top of the stoichiometry Result card (ball-and-stick molecules). */
 export default function StoichiometryResultScene3D(p: StoSceneProps) {
-  const c = usePhColors(TOKENS);
+  const c = useTokenColors(TOKENS);
   if (!c) return null;
   return (
-    <PhCanvas3D camera={[1.1, 0.8, 9.9]} testId="sto-hero-canvas" minDistance={7} maxDistance={15} azimuth={0.6} fitAspect={0.01}>
+    <DemandCanvas3D camera={[1.1, 0.8, 9.9]} testId="sto-hero-canvas" minDistance={7} maxDistance={15} azimuth={0.6} fitAspect={0.01}>
       <Scene p={p} c={c} />
-    </PhCanvas3D>
+    </DemandCanvas3D>
   );
 }
