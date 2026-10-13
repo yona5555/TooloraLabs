@@ -13371,7 +13371,6 @@
         "coefficientHint": "Die Koeffizienten stammen aus der ausgeglichenen Gleichung selbst, z. B. sind bei 2H2 + O2 → 2H2O die Koeffizienten 2 (H2), 1 (O2) und 2 (H2O).",
         "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "equationDiagramCaption": "Die Molverhältnis-Brücke zwischen den beiden Substanzen, live während der Eingabe.",
         "scenarioPresetsLabel": "Ein reales Szenario ausprobieren:",
         "scenarios": {
           "classroomMagnesium": "Magnesiumverbrennung im Unterricht",
@@ -13400,37 +13399,7 @@
           "title": "Stöchiometrie verstehen",
           "paragraph1": "Stöchiometrie ist die Berechnung, wie viel von jedem Stoff an einer chemischen Reaktion beteiligt ist, basierend auf den Koeffizienten der ausgeglichenen Gleichung. Diese Koeffizienten — die Zahlen vor jeder Formel, wie die 2 in 2H₂ + O₂ → 2H₂O — beschreiben ein festes Stoffmengenverhältnis: genau 2 Mol H₂ reagieren mit genau 1 Mol O₂ zu genau 2 Mol H₂O, unabhängig davon, wie groß oder klein die tatsächliche Reaktion ist. Dieser Rechner nutzt dieses Verhältnis direkt: Mol des Zielstoffs entsprechen Mol des bekannten Stoffs multipliziert mit (Zielkoeffizient ÷ bekanntem Koeffizient).",
           "paragraph2": "Da Chemikalien im Labor nach Masse gemessen werden, nicht durch Zählen einzelner Moleküle, erfordert die Umrechnung von und zu Mol die Molmasse — dieselbe Berechnung, die der Molmassenrechner dieser Seite durchführt. Bei einer bekannten Menge in Gramm teilt dieser Rechner zunächst durch die Molmasse des bekannten Stoffes, um Mol zu erhalten; nach Anwendung des Stoffmengenverhältnisses multipliziert er, falls die Zielmenge in Gramm gewünscht wird, die Zielmol mit der Molmasse des Zielstoffs. Wird auf beiden Seiten Mol angefordert, entfällt die entsprechende Umrechnung.",
-          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt).",
-          "equation": {
-            "caption": "Zwei beliebige Substanzen in einer ausgeglichenen Gleichung sind durch ihre Koeffizienten verbunden."
-          },
-          "roadmap": {
-            "knownGrams": "bekannt (g)",
-            "knownMoles": "bekannt (mol)",
-            "targetMoles": "Ziel (mol)",
-            "targetGrams": "Ziel (g)",
-            "caption": "Jedes Stöchiometrie-Problem folgt demselben vierstufigen Weg."
-          },
-          "moleRatio": {
-            "caption": "Dasselbe 1:2-Molverhältnis skaliert jede Startmenge der bekannten Substanz."
-          },
-          "scaleGauge": {
-            "title": "Ausprobieren: Wie groß ist diese Reaktion?",
-            "intro": "Wähle einen realen Reaktionsmaßstab, um seine Masse auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "lab": "Labormaßstab",
-            "pilot": "Pilotmaßstab",
-            "industrial": "Industriemaßstab",
-            "verdict": "{scenario} läuft im {classification}.",
-            "kgFact": "Das entspricht etwa {kg} Kilogramm Material.",
-            "scenarios": {
-              "classroomExperiment": "Ein Chemie-Schulversuch",
-              "labSynthesis": "Eine Universitäts-Laborsynthese",
-              "pilotPlantBatch": "Eine Pilotanlagen-Charge",
-              "industrialBatch": "Eine Industriereaktor-Charge",
-              "haberPlantDaily": "Die Tagesproduktion einer Ammoniakanlage",
-              "globalAmmoniaProduction": "Die weltweite jährliche Ammoniakproduktion"
-            }
-          }
+          "paragraph3": "Dieser Rechner geht davon aus, dass die Gleichung, mit der Sie arbeiten, bereits ausgeglichen ist und die Reaktion vollständig abläuft, ohne übrig bleibendes limitierendes Reagens, das berücksichtigt werden müsste — er führt die Verhältnis- und Massenrechnung durch, sobald die Koeffizienten bekannt sind, statt selbst eine unausgeglichene Gleichung auszugleichen (eine separate, aufwendigere Aufgabe, die der Chemische-Gleichungen-Ausgleicher dieser Seite übernimmt)."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -13531,20 +13500,11 @@
           },
           "bridgeSection": {
             "title": "Molare Masse: Die Einheitenbrücke",
-            "grams": "Gramm",
-            "moles": "Mol",
-            "bridgeLabel": "molare Masse",
-            "paragraph": "Gramm ist, was eine Waage misst; Mol ist, was eine chemische Gleichung tatsächlich zählt. Die molare Masse ist der Umrechnungsfaktor, der es einer Messung erlaubt, zwischen beiden zu wechseln.",
-            "caption": "Die molare Masse rechnet frei zwischen einer gemessenen Masse und einer Molzahl um."
+            "paragraph": "Gramm ist, was eine Waage misst; Mol ist, was eine chemische Gleichung tatsächlich zählt. Die molare Masse ist der Umrechnungsfaktor, der es einer Messung erlaubt, zwischen beiden zu wechseln."
           },
           "unitsCompareSection": {
             "title": "Warum molare Masse keine Konstante ist",
-            "h2": "H₂",
-            "h2o": "H₂O",
-            "nacl": "NaCl",
-            "glucose": "C₆H₁₂O₆",
-            "paragraph": "Ein Mol ist immer dieselbe Anzahl an Teilchen, aber die Masse dieses Mols variiert je nach Substanz enorm — von 2 Gramm für Wasserstoffgas bis 180 Gramm für Glukose — weshalb jede Substanz ihre eigene molare Masse braucht.",
-            "caption": "Die Masse eines Mols von vier gängigen Substanzen, auf einer logarithmischen Skala."
+            "paragraph": "Ein Mol ist immer dieselbe Anzahl an Teilchen, aber die Masse dieses Mols variiert je nach Substanz enorm — von 2 Gramm für Wasserstoffgas bis 180 Gramm für Glukose — weshalb jede Substanz ihre eigene molare Masse braucht."
           }
         },
         "references": {
@@ -13592,6 +13552,94 @@
           "standardPressure": "Standardatmosphärendruck",
           "gasConstant": "Universelle Gaskonstante",
           "waterMolarMass": "Molare Masse von Wasser"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Bekannte Menge",
+          "required": "Benötigt"
+        },
+        "ratio": {
+          "title": "Moleküle nach dem Verhältnis: 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Die Koeffizienten sind ein festes Molekülverhältnis. Wiederholen Sie die Reaktion k-mal: Die Zahlen wachsen, das Verhältnis 2 : 1 : 2 bleibt.",
+          "handle": "Anzahl der Reaktionen (k)",
+          "caption": "{a} H₂-Moleküle und {b} O₂-Moleküle ergeben {a} H₂O-Moleküle.",
+          "rowK": "Wiederholte Reaktionen (k)",
+          "rowH2": "H₂-Moleküle (2k)",
+          "rowO2": "O₂-Moleküle (k)",
+          "rowH2O": "Gebildete H₂O-Moleküle (2k)",
+          "rowRatio": "Stoffmengenverhältnis H₂ : O₂ : H₂O",
+          "rowAtoms": "Atome (links = rechts)"
+        },
+        "lines": {
+          "title": "Vier Zahlenstrahlen: von Gramm zu Mol und zurück",
+          "subtitle": "Gramm Wasserstoff geteilt durch seine molare Masse ergeben Mol; das Verhältnis 2 : 2 ergibt Mol Wasser; mal der molaren Masse von Wasser ergibt Gramm. Ziehen Sie auf dem oberen Strahl.",
+          "handle": "Masse des Wasserstoffs",
+          "caption": "{g} g H₂ sind {n} mol und ergeben {n} mol bzw. {w} g H₂O.",
+          "rowGH2": "Masse des Wasserstoffs (m)",
+          "rowRatio": "Mol Wasser (× 2/2)",
+          "rowGH2O": "Masse des gebildeten Wassers",
+          "rowMolarMasses": "Molare Massen H₂ · H₂O"
+        },
+        "progress": {
+          "title": "Vollständige Reaktion: 4H₂ + 2O₂ → 4H₂O",
+          "subtitle": "Ausgehend genau von den Verhältnismengen nehmen Wasserstoff und Sauerstoff ab, Wasser nimmt zu; bei 100 % sind beide Edukte verbraucht, die Gesamtmasse bleibt stets gleich.",
+          "handle": "Reaktionsfortschritt",
+          "caption": "Bei {p} % Fortschritt sind {w} mol Wasser entstanden.",
+          "rowProgress": "Fortschritt",
+          "rowH2": "Verbleibendes H₂",
+          "rowO2": "Verbleibendes O₂",
+          "rowH2O": "Gebildetes H₂O",
+          "rowMass": "Gesamtmasse (konstant)"
+        },
+        "slopes": {
+          "title": "Ein Verhältnis, jeder Maßstab",
+          "subtitle": "Gesuchte Mol sind bekannte Mol mal Koeffizientenverhältnis, daher ist jedes Stoffpaar eine Gerade durch null. Die drei Geraden sind die Verhältnisse der Rechenbeispiele.",
+          "handle": "Mol des bekannten Stoffs",
+          "caption": "{x} mol N₂ ergeben {a} mol NH₃: doppelter Start, doppeltes Ergebnis.",
+          "rowKnown": "Mol des bekannten Stoffs"
+        },
+        "neutral": {
+          "title": "Richters Äquivalente: Säure zum Neutralisieren einer Base",
+          "subtitle": "Die Masse jeder Säure, die eine Masse Natriumhydroxid genau neutralisiert. Schwefelsäure liefert zwei H⁺ pro Molekül und braucht daher halb so viele Mol.",
+          "handle": "Masse von NaOH",
+          "caption": "{g} g NaOH werden von {hcl} g HCl oder {h2so4} g H₂SO₄ neutralisiert.",
+          "rowNaOH": "Masse von NaOH",
+          "rowMol": "Mol NaOH"
+        },
+        "tanks": {
+          "title": "Haber-Bosch: N₂ + 3H₂ → 2NH₃",
+          "subtitle": "Das Volumen jedes Tanks ist proportional zu seinen Mol (Gase unter gleichen Bedingungen), immer 1 : 3 : 2; die Beschriftungen nennen die Massen in Tonnen.",
+          "handle": "Masse des Stickstoffs",
+          "caption": "{n} t N₂ reagieren mit {h} t H₂ zu {a} t NH₃.",
+          "rowN2": "Stickstoff (N₂)",
+          "rowMol": "Mol N₂",
+          "rowH2": "Benötigter Wasserstoff (H₂)",
+          "rowNH3": "Erzeugtes Ammoniak (NH₃)",
+          "rowRatio": "Stoffmengen- (Volumen-)Verhältnis",
+          "rowMass": "Masse hinein = Masse heraus"
+        },
+        "dial": {
+          "title": "Die Brücke der molaren Masse",
+          "subtitle": "Innen stehen Mol Wasser, außen die Gramm, die so viel wiegen: 18,015 g je Mol. Ziehen Sie den Griff um die Skala.",
+          "handle": "Masse des Wassers",
+          "caption": "{g} g Wasser sind {n} mol.",
+          "rowGrams": "Masse des Wassers (m)",
+          "rowMolarMass": "Molare Masse von H₂O (M)",
+          "rowMolecules": "Wassermoleküle",
+          "rowMl": "Volumen des flüssigen Wassers"
+        },
+        "mole": {
+          "title": "Je ein Mol",
+          "subtitle": "Jede Kugel ist ein Mol, also gleich viele Teilchen; ihr Volumen ist proportional zur Masse dieses Mols in Gramm. Blättern Sie durch neun Stoffe.",
+          "handle": "Stoff",
+          "caption": "Ein Mol {f} wiegt {m} g, also enthalten 100 g {n} mol.",
+          "rowFormula": "Formel",
+          "rowMolarMass": "Molare Masse",
+          "rowOneMole": "Masse eines Mols",
+          "rowPer100": "Mol in 100 g",
+          "rowPerGram": "Teilchen in 1 g",
+          "rowVsH2": "Schwerer als ein Mol H₂"
         }
       }
     },

@@ -13371,7 +13371,6 @@
         "coefficientHint": "Coefficients come from the balanced equation itself, e.g. for 2H2 + O2 → 2H2O, the coefficients are 2 (H2), 1 (O2), and 2 (H2O).",
         "calculate": "Calculate",
         "clear": "Clear",
-        "equationDiagramCaption": "The mole-ratio bridge between the two substances, live as you type.",
         "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "classroomMagnesium": "Classroom Magnesium Burning",
@@ -13400,37 +13399,7 @@
           "title": "Understanding Stoichiometry",
           "paragraph1": "Stoichiometry is the calculation of how much of each substance participates in a chemical reaction, based on the balanced equation's coefficients. Those coefficients — the numbers in front of each formula, like the 2 in 2H₂ + O₂ → 2H₂O — describe a fixed mole ratio: exactly 2 moles of H₂ react with exactly 1 mole of O₂ to produce exactly 2 moles of H₂O, no matter how large or small the actual reaction is. This calculator uses that ratio directly: moles of the target substance equal moles of the known substance multiplied by (target coefficient ÷ known coefficient).",
           "paragraph2": "Because chemicals are measured by mass in a lab, not by counting individual molecules, converting to and from moles requires molar mass — the same calculation this site's Molar Mass Calculator performs. Given a known amount in grams, this calculator first divides by the known substance's molar mass to get moles; after applying the mole ratio, if the target amount is wanted in grams, it multiplies the target moles by the target substance's molar mass. Requesting moles on either side skips the corresponding conversion.",
-          "paragraph3": "This calculator assumes the equation you're working from is already balanced and that the reaction goes to completion with no leftover limiting reagent to account for — it performs the ratio-and-mass arithmetic once the coefficients are known, rather than balancing an unbalanced equation itself (a separate, more involved task that this site's Chemical Equation Balancer handles).",
-          "equation": {
-            "caption": "Any two substances in a balanced equation are linked by their coefficients."
-          },
-          "roadmap": {
-            "knownGrams": "known (g)",
-            "knownMoles": "known (mol)",
-            "targetMoles": "target (mol)",
-            "targetGrams": "target (g)",
-            "caption": "Every stoichiometry problem follows this same four-step path."
-          },
-          "moleRatio": {
-            "caption": "The same 1:2 mole ratio scales any starting amount of the known substance."
-          },
-          "scaleGauge": {
-            "title": "Try It: How Big Is That Reaction?",
-            "intro": "Pick a real reaction scale to see its mass on the gauge and compare it with others.",
-            "lab": "Lab Scale",
-            "pilot": "Pilot Scale",
-            "industrial": "Industrial Scale",
-            "verdict": "{scenario} runs at {classification}.",
-            "kgFact": "That's about {kg} kilograms of material.",
-            "scenarios": {
-              "classroomExperiment": "A Classroom Chemistry Experiment",
-              "labSynthesis": "A University Lab Synthesis",
-              "pilotPlantBatch": "A Pilot Plant Batch",
-              "industrialBatch": "An Industrial Reactor Batch",
-              "haberPlantDaily": "An Ammonia Plant's Daily Output",
-              "globalAmmoniaProduction": "Global Annual Ammonia Production"
-            }
-          }
+          "paragraph3": "This calculator assumes the equation you're working from is already balanced and that the reaction goes to completion with no leftover limiting reagent to account for — it performs the ratio-and-mass arithmetic once the coefficients are known, rather than balancing an unbalanced equation itself (a separate, more involved task that this site's Chemical Equation Balancer handles)."
         },
         "examples": {
           "title": "Worked Examples",
@@ -13531,20 +13500,11 @@
           },
           "bridgeSection": {
             "title": "Molar Mass: The Unit Bridge",
-            "grams": "Grams",
-            "moles": "Moles",
-            "bridgeLabel": "molar mass",
-            "paragraph": "Grams are what a scale measures; moles are what a chemical equation actually counts. Molar mass is the conversion factor that lets a measurement move between the two.",
-            "caption": "Molar mass converts freely between a measured mass and a mole count."
+            "paragraph": "Grams are what a scale measures; moles are what a chemical equation actually counts. Molar mass is the conversion factor that lets a measurement move between the two."
           },
           "unitsCompareSection": {
             "title": "Why Molar Mass Isn't a Constant",
-            "h2": "H₂",
-            "h2o": "H₂O",
-            "nacl": "NaCl",
-            "glucose": "C₆H₁₂O₆",
-            "paragraph": "A mole is always the same number of particles, but the mass of that mole varies enormously by substance — from 2 grams for hydrogen gas to 180 grams for glucose — which is exactly why each substance needs its own molar mass.",
-            "caption": "The mass of one mole of four common substances, on a log scale."
+            "paragraph": "A mole is always the same number of particles, but the mass of that mole varies enormously by substance — from 2 grams for hydrogen gas to 180 grams for glucose — which is exactly why each substance needs its own molar mass."
           }
         },
         "references": {
@@ -13592,6 +13552,94 @@
           "standardPressure": "Standard Atmospheric Pressure",
           "gasConstant": "Universal Gas Constant",
           "waterMolarMass": "Molar Mass of Water"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Known amount",
+          "required": "Required"
+        },
+        "ratio": {
+          "title": "Molecules by the Ratio: 2H₂ + O₂ → 2H₂O",
+          "subtitle": "The coefficients are a fixed ratio of molecules. Repeat the reaction k times: the counts grow, the 2 : 1 : 2 ratio never changes.",
+          "handle": "Number of reactions (k)",
+          "caption": "{a} H₂ molecules and {b} O₂ molecules give {a} H₂O molecules.",
+          "rowK": "Reactions repeated (k)",
+          "rowH2": "H₂ molecules (2k)",
+          "rowO2": "O₂ molecules (k)",
+          "rowH2O": "H₂O molecules formed (2k)",
+          "rowRatio": "Mole ratio H₂ : O₂ : H₂O",
+          "rowAtoms": "Atoms (left = right)"
+        },
+        "lines": {
+          "title": "Four Number Lines: Grams to Moles and Back",
+          "subtitle": "Grams of hydrogen, divided by its molar mass, give moles; the 2 : 2 ratio gives moles of water; multiplying by water's molar mass gives grams. Drag along the top line.",
+          "handle": "Mass of hydrogen",
+          "caption": "{g} g of H₂ is {n} mol, which makes {n} mol or {w} g of H₂O.",
+          "rowGH2": "Mass of hydrogen (m)",
+          "rowRatio": "Moles of water (× 2/2)",
+          "rowGH2O": "Mass of water formed",
+          "rowMolarMasses": "Molar masses H₂ · H₂O"
+        },
+        "progress": {
+          "title": "Reacting to Completion: 4H₂ + 2O₂ → 4H₂O",
+          "subtitle": "Starting from exactly the ratio amounts, hydrogen and oxygen fall while water rises; at 100 % both reactants are used up and the total mass never changes.",
+          "handle": "Reaction progress",
+          "caption": "At {p} % progress, {w} mol of water has formed.",
+          "rowProgress": "Progress",
+          "rowH2": "H₂ remaining",
+          "rowO2": "O₂ remaining",
+          "rowH2O": "H₂O formed",
+          "rowMass": "Total mass (constant)"
+        },
+        "slopes": {
+          "title": "One Ratio, Any Scale",
+          "subtitle": "Target moles are known moles times the coefficient ratio, so each pair of substances is a straight line through zero. The three lines are the ratios of the worked examples.",
+          "handle": "Moles of the known substance",
+          "caption": "{x} mol of N₂ gives {a} mol of NH₃: doubling the start doubles the result.",
+          "rowKnown": "Moles of the known substance"
+        },
+        "neutral": {
+          "title": "Richter's Equivalents: Acid to Neutralise a Base",
+          "subtitle": "The mass of each acid that exactly neutralises a mass of sodium hydroxide. Sulfuric acid supplies two H⁺ per molecule, so it needs half as many moles.",
+          "handle": "Mass of NaOH",
+          "caption": "{g} g of NaOH is neutralised by {hcl} g of HCl or {h2so4} g of H₂SO₄.",
+          "rowNaOH": "Mass of NaOH",
+          "rowMol": "Moles of NaOH"
+        },
+        "tanks": {
+          "title": "Haber-Bosch: N₂ + 3H₂ → 2NH₃",
+          "subtitle": "Each tank's volume is proportional to its moles (gases at the same conditions), always 1 : 3 : 2; the labels give the masses in tonnes.",
+          "handle": "Mass of nitrogen",
+          "caption": "{n} t of N₂ reacts with {h} t of H₂ to give {a} t of NH₃.",
+          "rowN2": "Nitrogen (N₂)",
+          "rowMol": "Moles of N₂",
+          "rowH2": "Hydrogen needed (H₂)",
+          "rowNH3": "Ammonia made (NH₃)",
+          "rowRatio": "Mole (volume) ratio",
+          "rowMass": "Mass in = mass out"
+        },
+        "dial": {
+          "title": "The Molar-Mass Bridge",
+          "subtitle": "The inner numbers are moles of water, the outer ones the grams that weigh that much: 18.015 g for every mole. Drag the handle around the dial.",
+          "handle": "Mass of water",
+          "caption": "{g} g of water is {n} mol.",
+          "rowGrams": "Mass of water (m)",
+          "rowMolarMass": "Molar mass of H₂O (M)",
+          "rowMolecules": "Water molecules",
+          "rowMl": "Volume of liquid water"
+        },
+        "mole": {
+          "title": "One Mole of Each",
+          "subtitle": "Every sphere is one mole, the same number of particles; its volume is proportional to that mole's mass in grams. Step through nine substances.",
+          "handle": "Substance",
+          "caption": "One mole of {f} weighs {m} g, so 100 g holds {n} mol.",
+          "rowFormula": "Formula",
+          "rowMolarMass": "Molar mass",
+          "rowOneMole": "Mass of one mole",
+          "rowPer100": "Moles in 100 g",
+          "rowPerGram": "Particles in 1 g",
+          "rowVsH2": "Heavier than a mole of H₂"
         }
       }
     },

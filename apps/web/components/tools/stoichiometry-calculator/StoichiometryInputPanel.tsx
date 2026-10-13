@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import StoichiometryEquationDiagram from "./StoichiometryEquationDiagram";
 import type { AmountUnit } from "./types";
 
 const selectClassName =
@@ -72,15 +71,7 @@ export default function StoichiometryInputPanel({
         </div>
       </div>
 
-      <StoichiometryEquationDiagram
-        knownCoefficient={knownCoefficient}
-        knownFormula={knownFormula}
-        targetCoefficient={targetCoefficient}
-        targetFormula={targetFormula}
-        caption={t("equationDiagramCaption")}
-      />
-
-      <form onSubmit={onCalculate} className="mt-4 space-y-6">
+      <form onSubmit={onCalculate} className="space-y-6">
         <div>
           <p className="mb-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownLabel")}</p>
           <div className="space-y-3">

@@ -13371,7 +13371,6 @@
         "coefficientHint": "Les coefficients proviennent de l'équation équilibrée elle-même, par ex. pour 2H2 + O2 → 2H2O, les coefficients sont 2 (H2), 1 (O2) et 2 (H2O).",
         "calculate": "Calculer",
         "clear": "Effacer",
-        "equationDiagramCaption": "Le pont de rapport molaire entre les deux substances, en direct pendant la saisie.",
         "scenarioPresetsLabel": "Essayer un scénario réel :",
         "scenarios": {
           "classroomMagnesium": "Combustion du Magnésium en Classe",
@@ -13400,37 +13399,7 @@
           "title": "Comprendre la Stœchiométrie",
           "paragraph1": "La stœchiométrie est le calcul de la quantité de chaque substance participant à une réaction chimique, à partir des coefficients de l'équation équilibrée. Ces coefficients — les nombres devant chaque formule, comme le 2 dans 2H₂ + O₂ → 2H₂O — décrivent un rapport molaire fixe : exactement 2 moles de H₂ réagissent avec exactement 1 mole de O₂ pour produire exactement 2 moles de H₂O, quelle que soit l'ampleur réelle de la réaction. Ce calculateur utilise directement ce rapport : les moles de la substance cible équivalent aux moles de la substance connue multipliées par (coefficient cible ÷ coefficient connu).",
           "paragraph2": "Comme les produits chimiques sont mesurés en masse en laboratoire, et non en comptant les molécules individuelles, la conversion vers et depuis les moles nécessite la masse molaire — le même calcul qu'effectue le Calculateur de Masse Molaire de ce site. Pour une quantité connue en grammes, ce calculateur divise d'abord par la masse molaire de la substance connue pour obtenir des moles ; après application du rapport molaire, si la quantité cible est souhaitée en grammes, il multiplie les moles cibles par la masse molaire de la substance cible. Demander des moles d'un côté ou de l'autre saute la conversion correspondante.",
-          "paragraph3": "Ce calculateur suppose que l'équation avec laquelle vous travaillez est déjà équilibrée et que la réaction va jusqu'à son terme sans réactif limitant restant à prendre en compte — il effectue le calcul de rapport et de masse une fois les coefficients connus, plutôt que d'équilibrer lui-même une équation non équilibrée (une tâche distincte et plus complexe que prend en charge l'Équilibreur d'Équations Chimiques de ce site).",
-          "equation": {
-            "caption": "Deux substances quelconques dans une équation équilibrée sont liées par leurs coefficients."
-          },
-          "roadmap": {
-            "knownGrams": "connu (g)",
-            "knownMoles": "connu (mol)",
-            "targetMoles": "cible (mol)",
-            "targetGrams": "cible (g)",
-            "caption": "Chaque problème de stœchiométrie suit ce même chemin en quatre étapes."
-          },
-          "moleRatio": {
-            "caption": "Le même rapport molaire 1:2 met à l'échelle n'importe quelle quantité de départ de la substance connue."
-          },
-          "scaleGauge": {
-            "title": "À essayer : quelle est l'ampleur de cette réaction ?",
-            "intro": "Choisissez une échelle de réaction réelle pour voir sa masse sur la jauge et la comparer à d'autres.",
-            "lab": "Échelle de Laboratoire",
-            "pilot": "Échelle Pilote",
-            "industrial": "Échelle Industrielle",
-            "verdict": "{scenario} fonctionne à l'{classification}.",
-            "kgFact": "Cela équivaut à environ {kg} kilogrammes de matière.",
-            "scenarios": {
-              "classroomExperiment": "Une Expérience de Chimie en Classe",
-              "labSynthesis": "Une Synthèse en Laboratoire Universitaire",
-              "pilotPlantBatch": "Un Lot d'Usine Pilote",
-              "industrialBatch": "Un Lot de Réacteur Industriel",
-              "haberPlantDaily": "La Production Quotidienne d'une Usine d'Ammoniac",
-              "globalAmmoniaProduction": "La Production Mondiale Annuelle d'Ammoniac"
-            }
-          }
+          "paragraph3": "Ce calculateur suppose que l'équation avec laquelle vous travaillez est déjà équilibrée et que la réaction va jusqu'à son terme sans réactif limitant restant à prendre en compte — il effectue le calcul de rapport et de masse une fois les coefficients connus, plutôt que d'équilibrer lui-même une équation non équilibrée (une tâche distincte et plus complexe que prend en charge l'Équilibreur d'Équations Chimiques de ce site)."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -13531,20 +13500,11 @@
           },
           "bridgeSection": {
             "title": "Masse Molaire : Le Pont des Unités",
-            "grams": "Grammes",
-            "moles": "Moles",
-            "bridgeLabel": "masse molaire",
-            "paragraph": "Les grammes sont ce qu'une balance mesure ; les moles sont ce qu'une équation chimique compte réellement. La masse molaire est le facteur de conversion qui permet à une mesure de passer de l'un à l'autre.",
-            "caption": "La masse molaire convertit librement entre une masse mesurée et un nombre de moles."
+            "paragraph": "Les grammes sont ce qu'une balance mesure ; les moles sont ce qu'une équation chimique compte réellement. La masse molaire est le facteur de conversion qui permet à une mesure de passer de l'un à l'autre."
           },
           "unitsCompareSection": {
             "title": "Pourquoi la Masse Molaire N'est Pas une Constante",
-            "h2": "H₂",
-            "h2o": "H₂O",
-            "nacl": "NaCl",
-            "glucose": "C₆H₁₂O₆",
-            "paragraph": "Une mole représente toujours le même nombre de particules, mais la masse de cette mole varie énormément selon la substance — de 2 grammes pour l'hydrogène gazeux à 180 grammes pour le glucose — ce qui explique pourquoi chaque substance a besoin de sa propre masse molaire.",
-            "caption": "La masse d'une mole de quatre substances courantes, sur une échelle logarithmique."
+            "paragraph": "Une mole représente toujours le même nombre de particules, mais la masse de cette mole varie énormément selon la substance — de 2 grammes pour l'hydrogène gazeux à 180 grammes pour le glucose — ce qui explique pourquoi chaque substance a besoin de sa propre masse molaire."
           }
         },
         "references": {
@@ -13592,6 +13552,94 @@
           "standardPressure": "Pression Atmosphérique Standard",
           "gasConstant": "Constante Universelle des Gaz",
           "waterMolarMass": "Masse Molaire de l'Eau"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Quantité connue",
+          "required": "Nécessaire"
+        },
+        "ratio": {
+          "title": "Les molécules selon le rapport : 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Les coefficients forment un rapport fixe de molécules. Répétez la réaction k fois : les nombres augmentent, le rapport 2 : 1 : 2 ne change jamais.",
+          "handle": "Nombre de réactions (k)",
+          "caption": "{a} molécules de H₂ et {b} de O₂ donnent {a} molécules de H₂O.",
+          "rowK": "Réactions répétées (k)",
+          "rowH2": "Molécules de H₂ (2k)",
+          "rowO2": "Molécules de O₂ (k)",
+          "rowH2O": "Molécules de H₂O formées (2k)",
+          "rowRatio": "Rapport molaire H₂ : O₂ : H₂O",
+          "rowAtoms": "Atomes (gauche = droite)"
+        },
+        "lines": {
+          "title": "Quatre droites graduées : des grammes aux moles et retour",
+          "subtitle": "Les grammes d'hydrogène divisés par sa masse molaire donnent des moles ; le rapport 2 : 2 donne les moles d'eau ; multiplier par la masse molaire de l'eau donne des grammes. Faites glisser sur la droite du haut.",
+          "handle": "Masse d'hydrogène",
+          "caption": "{g} g de H₂ font {n} mol, qui donnent {n} mol soit {w} g de H₂O.",
+          "rowGH2": "Masse d'hydrogène (m)",
+          "rowRatio": "Moles d'eau (× 2/2)",
+          "rowGH2O": "Masse d'eau formée",
+          "rowMolarMasses": "Masses molaires H₂ · H₂O"
+        },
+        "progress": {
+          "title": "Réaction totale : 4H₂ + 2O₂ → 4H₂O",
+          "subtitle": "En partant exactement des quantités du rapport, l'hydrogène et l'oxygène diminuent tandis que l'eau augmente ; à 100 % les deux réactifs sont épuisés et la masse totale ne change jamais.",
+          "handle": "Avancement de la réaction",
+          "caption": "À {p} % d'avancement, {w} mol d'eau se sont formées.",
+          "rowProgress": "Avancement",
+          "rowH2": "H₂ restant",
+          "rowO2": "O₂ restant",
+          "rowH2O": "H₂O formée",
+          "rowMass": "Masse totale (constante)"
+        },
+        "slopes": {
+          "title": "Un rapport, toutes les échelles",
+          "subtitle": "Les moles cherchées valent les moles connues fois le rapport des coefficients : chaque paire de substances est une droite passant par zéro. Les trois droites sont les rapports des exemples résolus.",
+          "handle": "Moles de la substance connue",
+          "caption": "{x} mol de N₂ donnent {a} mol de NH₃ : doubler le départ double le résultat.",
+          "rowKnown": "Moles de la substance connue"
+        },
+        "neutral": {
+          "title": "Les équivalents de Richter : l'acide qui neutralise une base",
+          "subtitle": "La masse de chaque acide qui neutralise exactement une masse d'hydroxyde de sodium. L'acide sulfurique apporte deux H⁺ par molécule, il en faut donc deux fois moins de moles.",
+          "handle": "Masse de NaOH",
+          "caption": "{g} g de NaOH sont neutralisés par {hcl} g de HCl ou {h2so4} g de H₂SO₄.",
+          "rowNaOH": "Masse de NaOH",
+          "rowMol": "Moles de NaOH"
+        },
+        "tanks": {
+          "title": "Haber-Bosch : N₂ + 3H₂ → 2NH₃",
+          "subtitle": "Le volume de chaque réservoir est proportionnel à ses moles (gaz dans les mêmes conditions), toujours 1 : 3 : 2 ; les étiquettes donnent les masses en tonnes.",
+          "handle": "Masse d'azote",
+          "caption": "{n} t de N₂ réagissent avec {h} t de H₂ pour donner {a} t de NH₃.",
+          "rowN2": "Azote (N₂)",
+          "rowMol": "Moles de N₂",
+          "rowH2": "Hydrogène nécessaire (H₂)",
+          "rowNH3": "Ammoniac produit (NH₃)",
+          "rowRatio": "Rapport molaire (volumique)",
+          "rowMass": "Masse entrante = masse sortante"
+        },
+        "dial": {
+          "title": "Le pont de la masse molaire",
+          "subtitle": "Les nombres intérieurs sont des moles d'eau, les extérieurs les grammes correspondants : 18,015 g par mole. Faites tourner la poignée autour du cadran.",
+          "handle": "Masse d'eau",
+          "caption": "{g} g d'eau font {n} mol.",
+          "rowGrams": "Masse d'eau (m)",
+          "rowMolarMass": "Masse molaire de H₂O (M)",
+          "rowMolecules": "Molécules d'eau",
+          "rowMl": "Volume d'eau liquide"
+        },
+        "mole": {
+          "title": "Une mole de chacune",
+          "subtitle": "Chaque sphère est une mole, le même nombre de particules ; son volume est proportionnel à la masse de cette mole en grammes. Parcourez neuf substances.",
+          "handle": "Substance",
+          "caption": "Une mole de {f} pèse {m} g, donc 100 g en contiennent {n} mol.",
+          "rowFormula": "Formule",
+          "rowMolarMass": "Masse molaire",
+          "rowOneMole": "Masse d'une mole",
+          "rowPer100": "Moles dans 100 g",
+          "rowPerGram": "Particules dans 1 g",
+          "rowVsH2": "Plus lourde qu'une mole de H₂"
         }
       }
     },

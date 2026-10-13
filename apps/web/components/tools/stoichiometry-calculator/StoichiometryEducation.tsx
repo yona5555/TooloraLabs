@@ -4,12 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import StoichiometryEquationDiagram from "./StoichiometryEquationDiagram";
-import StoichiometryConversionPathDiagram from "./StoichiometryConversionPathDiagram";
-import StoichiometryMoleRatioDiagram from "./StoichiometryMoleRatioDiagram";
-import StoichiometryMolarMassBridgeDiagram from "./StoichiometryMolarMassBridgeDiagram";
-import StoichiometryUnitsCompareDiagram from "./StoichiometryUnitsCompareDiagram";
-import StoichiometryScaleGauge from "./StoichiometryScaleGauge";
+import { StoDialCard, StoLinesCard, StoNeutralCard, StoProgressCard, StoSlopesCard } from "./StoichiometryCards2D";
+import { StoMoleCard, StoRatioCard, StoTanksCard } from "./StoichiometryCards3D";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -22,27 +18,24 @@ export default async function StoichiometryEducation() {
 
   return (
     <EncyclopediaPaper>
-      <StoichiometryScaleGauge />
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <StoichiometryEquationDiagram knownCoefficient="2" knownFormula="H₂" targetCoefficient="2" targetFormula="H₂O" caption={t("intro.equation.caption")} />
+        <StoRatioCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
-        <StoichiometryConversionPathDiagram
-          steps={[
-            { label: t("intro.roadmap.knownGrams"), value: "4 g" },
-            { label: t("intro.roadmap.knownMoles"), value: "2 mol" },
-            { label: t("intro.roadmap.targetMoles"), value: "2 mol" },
-            { label: t("intro.roadmap.targetGrams"), value: "36 g" },
-          ]}
-          caption={t("intro.roadmap.caption")}
-        />
+        <StoLinesCard side="table-left" />
         <p>{t("intro.paragraph3")}</p>
-        <StoichiometryMoleRatioDiagram caption={t("intro.moleRatio.caption")} />
+        <StoProgressCard side="visual-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <StoSlopesCard side="table-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -74,33 +67,22 @@ export default async function StoichiometryEducation() {
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <StoNeutralCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <StoTanksCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.bridgeSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.bridgeSection.paragraph")}</p>
-          <StoichiometryMolarMassBridgeDiagram
-            gramsLabel={t("behindTheTool.bridgeSection.grams")}
-            molesLabel={t("behindTheTool.bridgeSection.moles")}
-            bridgeLabel={t("behindTheTool.bridgeSection.bridgeLabel")}
-            caption={t("behindTheTool.bridgeSection.caption")}
-          />
         </div>
+        <StoDialCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.unitsCompareSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.unitsCompareSection.paragraph")}</p>
-          <StoichiometryUnitsCompareDiagram
-            labels={[
-              t("behindTheTool.unitsCompareSection.h2"),
-              t("behindTheTool.unitsCompareSection.h2o"),
-              t("behindTheTool.unitsCompareSection.nacl"),
-              t("behindTheTool.unitsCompareSection.glucose"),
-            ]}
-            caption={t("behindTheTool.unitsCompareSection.caption")}
-          />
         </div>
+        <StoMoleCard side="table-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -122,6 +104,7 @@ export default async function StoichiometryEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

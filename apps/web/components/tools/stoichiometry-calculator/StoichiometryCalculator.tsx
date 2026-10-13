@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { StoichiometryCalculator as StoichiometryCalculatorTool, type StoichiometryCalculatorOutput } from "@tooloralabs/tools";
@@ -9,6 +9,7 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { GlassPage } from "@/components/tool-ui/glass/GlassPrimitives";
 import StoichiometryInputPanel from "./StoichiometryInputPanel";
 import StoichiometryResult from "./StoichiometryResult";
 import StoichiometryQuickReference from "./StoichiometryQuickReference";
@@ -141,6 +142,15 @@ export default function StoichiometryCalculator({ education }: { education: Reac
     setDigitStyle(resolveDigitStyle(preset.knownCoefficient, preset.knownAmount, preset.targetCoefficient));
   }
 
+  // The Result card's log-scale marker writes the known amount back into the calculator.
+  function handleSetKnownAmount(value: number) {
+    const next = String(value);
+    setKnownAmount(next);
+    setResult(computeResult(knownFormula, knownCoefficient, next, knownUnit, targetFormula, targetCoefficient, targetUnit));
+    setHasCalculated(true);
+    setDigitStyle("western");
+  }
+
   function handleClear() {
     setKnownFormula(DEFAULTS.knownFormula);
     setKnownCoefficient(DEFAULTS.knownCoefficient);
@@ -160,11 +170,19 @@ export default function StoichiometryCalculator({ education }: { education: Reac
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
+  const millimolesCard = <StoichiometryMillimolesCard targetMoles={result.targetMoles} digitStyle={digitStyle} />;
+  const constantsCard = <StoichiometryReferenceTable />;
+
   return (
-    <>
+    <GlassPage>
+      {/* Inter everywhere on this page; drag-handle rims use the shared line token so they keep ≥3:1 in light mode. */}
+      <div data-chem-page style={{ fontFamily: "var(--glass-font)", ["--glass-handle-border" as string]: "var(--ph-line)" } as CSSProperties}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-3">
               <StoichiometryInputPanel
@@ -187,25 +205,36 @@ export default function StoichiometryCalculator({ education }: { education: Reac
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
+              {/* Desktop: millimoles under the input card, constants under the Result card (columns end level). Phone: both after the Result card. */}
+              <div className="hidden flex-col gap-3 lg:flex">{millimolesCard}</div>
             </div>
           }
           result={
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 lg:h-full">
               <StoichiometryResult
                 hasCalculated={hasCalculated}
                 result={result}
                 knownFormula={knownFormula}
+                knownCoefficient={parseLocalizedNumber(knownCoefficient) || 0}
+                targetCoefficient={parseLocalizedNumber(targetCoefficient) || 0}
                 knownUnit={knownUnit}
                 targetFormula={targetFormula}
                 targetUnit={targetUnit}
                 digitStyle={digitStyle}
+                knownAmount={parseLocalizedNumber(knownAmount) || 0}
+                seedAmount={Number(DEFAULTS.knownAmount)}
+                onSetKnownAmount={handleSetKnownAmount}
               />
-              <StoichiometryMillimolesCard targetMoles={result.targetMoles} digitStyle={digitStyle} />
-              <StoichiometryReferenceTable />
+              {/* The constants card is the column's last card: it grows (taller table rows) so the Result card keeps its own height. */}
+              <div className="hidden flex-col gap-3 lg:flex lg:flex-1 lg:[&>div]:flex lg:[&>div]:flex-1 lg:[&>div]:flex-col lg:[&>div>div:last-child]:flex lg:[&>div>div:last-child]:flex-1 lg:[&>div>div:last-child]:flex-col lg:[&>div>div:last-child>div:last-child]:flex-1 lg:[&_table]:h-full">{constantsCard}</div>
+              <div className="flex flex-col gap-3 lg:hidden">
+                {millimolesCard}
+                {constantsCard}
+              </div>
             </div>
           }
           sidebar={
-            <RelatedToolsSidebar currentSlug="stoichiometry-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
+            <RelatedToolsSidebar fill currentSlug="stoichiometry-calculator" category="chemistry" relatedList={RELATED_TOOLS} relatedListTitle={t("relatedTools.title")} />
           }
           secondary={
             <div className="flex flex-col gap-6">
@@ -218,6 +247,7 @@ export default function StoichiometryCalculator({ education }: { education: Reac
       </div>
 
       {education}
-    </>
+      </div>
+    </GlassPage>
   );
 }

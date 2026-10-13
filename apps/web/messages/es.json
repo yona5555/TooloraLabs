@@ -13371,7 +13371,6 @@
         "coefficientHint": "Los coeficientes provienen de la propia ecuación balanceada, p. ej., en 2H2 + O2 → 2H2O, los coeficientes son 2 (H2), 1 (O2) y 2 (H2O).",
         "calculate": "Calcular",
         "clear": "Limpiar",
-        "equationDiagramCaption": "El puente de razón molar entre las dos sustancias, en vivo mientras escribes.",
         "scenarioPresetsLabel": "Prueba un escenario real:",
         "scenarios": {
           "classroomMagnesium": "Combustión de Magnesio en Clase",
@@ -13400,37 +13399,7 @@
           "title": "Entender la Estequiometría",
           "paragraph1": "La estequiometría es el cálculo de cuánta cantidad de cada sustancia participa en una reacción química, según los coeficientes de la ecuación balanceada. Esos coeficientes — los números delante de cada fórmula, como el 2 en 2H₂ + O₂ → 2H₂O — describen una proporción molar fija: exactamente 2 moles de H₂ reaccionan con exactamente 1 mol de O₂ para producir exactamente 2 moles de H₂O, sin importar cuán grande o pequeña sea la reacción real. Esta calculadora usa esa proporción directamente: los moles de la sustancia objetivo equivalen a los moles de la sustancia conocida multiplicados por (coeficiente objetivo ÷ coeficiente conocido).",
           "paragraph2": "Como los productos químicos se miden por masa en un laboratorio, no contando moléculas individuales, convertir hacia y desde moles requiere la masa molar — el mismo cálculo que realiza la Calculadora de Masa Molar de este sitio. Dada una cantidad conocida en gramos, esta calculadora primero divide entre la masa molar de la sustancia conocida para obtener moles; tras aplicar la proporción molar, si se desea la cantidad objetivo en gramos, multiplica los moles objetivo por la masa molar de la sustancia objetivo. Pedir moles en cualquiera de los dos lados omite la conversión correspondiente.",
-          "paragraph3": "Esta calculadora asume que la ecuación con la que trabajas ya está balanceada y que la reacción se completa sin reactivo limitante sobrante que contabilizar — realiza la aritmética de proporción y masa una vez conocidos los coeficientes, en lugar de balancear ella misma una ecuación no balanceada (una tarea separada y más compleja que maneja el Balanceador de Ecuaciones Químicas de este sitio).",
-          "equation": {
-            "caption": "Dos sustancias cualesquiera en una ecuación balanceada están vinculadas por sus coeficientes."
-          },
-          "roadmap": {
-            "knownGrams": "conocido (g)",
-            "knownMoles": "conocido (mol)",
-            "targetMoles": "objetivo (mol)",
-            "targetGrams": "objetivo (g)",
-            "caption": "Todo problema de estequiometría sigue esta misma ruta de cuatro pasos."
-          },
-          "moleRatio": {
-            "caption": "La misma razón molar 1:2 escala cualquier cantidad inicial de la sustancia conocida."
-          },
-          "scaleGauge": {
-            "title": "Pruébalo: ¿qué tan grande es esa reacción?",
-            "intro": "Elige una escala de reacción real para ver su masa en el medidor y compararla con otras.",
-            "lab": "Escala de Laboratorio",
-            "pilot": "Escala Piloto",
-            "industrial": "Escala Industrial",
-            "verdict": "{scenario} opera a {classification}.",
-            "kgFact": "Eso equivale a unos {kg} kilogramos de material.",
-            "scenarios": {
-              "classroomExperiment": "Un Experimento de Química Escolar",
-              "labSynthesis": "Una Síntesis de Laboratorio Universitario",
-              "pilotPlantBatch": "Un Lote de Planta Piloto",
-              "industrialBatch": "Un Lote de Reactor Industrial",
-              "haberPlantDaily": "La Producción Diaria de una Planta de Amoníaco",
-              "globalAmmoniaProduction": "La Producción Mundial Anual de Amoníaco"
-            }
-          }
+          "paragraph3": "Esta calculadora asume que la ecuación con la que trabajas ya está balanceada y que la reacción se completa sin reactivo limitante sobrante que contabilizar — realiza la aritmética de proporción y masa una vez conocidos los coeficientes, en lugar de balancear ella misma una ecuación no balanceada (una tarea separada y más compleja que maneja el Balanceador de Ecuaciones Químicas de este sitio)."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -13531,20 +13500,11 @@
           },
           "bridgeSection": {
             "title": "Masa Molar: El Puente de Unidades",
-            "grams": "Gramos",
-            "moles": "Moles",
-            "bridgeLabel": "masa molar",
-            "paragraph": "Los gramos son lo que mide una balanza; los moles son lo que realmente cuenta una ecuación química. La masa molar es el factor de conversión que permite que una medición se mueva entre ambos.",
-            "caption": "La masa molar convierte libremente entre una masa medida y un recuento de moles."
+            "paragraph": "Los gramos son lo que mide una balanza; los moles son lo que realmente cuenta una ecuación química. La masa molar es el factor de conversión que permite que una medición se mueva entre ambos."
           },
           "unitsCompareSection": {
             "title": "Por Qué la Masa Molar No Es una Constante",
-            "h2": "H₂",
-            "h2o": "H₂O",
-            "nacl": "NaCl",
-            "glucose": "C₆H₁₂O₆",
-            "paragraph": "Un mol siempre es el mismo número de partículas, pero la masa de ese mol varía enormemente según la sustancia, desde 2 gramos para el hidrógeno gaseoso hasta 180 gramos para la glucosa, que es exactamente por qué cada sustancia necesita su propia masa molar.",
-            "caption": "La masa de un mol de cuatro sustancias comunes, en una escala logarítmica."
+            "paragraph": "Un mol siempre es el mismo número de partículas, pero la masa de ese mol varía enormemente según la sustancia, desde 2 gramos para el hidrógeno gaseoso hasta 180 gramos para la glucosa, que es exactamente por qué cada sustancia necesita su propia masa molar."
           }
         },
         "references": {
@@ -13592,6 +13552,94 @@
           "standardPressure": "Presión Atmosférica Estándar",
           "gasConstant": "Constante Universal de los Gases",
           "waterMolarMass": "Masa Molar del Agua"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Cantidad conocida",
+          "required": "Necesario"
+        },
+        "ratio": {
+          "title": "Moléculas según la proporción: 2H₂ + O₂ → 2H₂O",
+          "subtitle": "Los coeficientes son una proporción fija de moléculas. Repite la reacción k veces: los números crecen, la proporción 2 : 1 : 2 nunca cambia.",
+          "handle": "Número de reacciones (k)",
+          "caption": "{a} moléculas de H₂ y {b} de O₂ dan {a} moléculas de H₂O.",
+          "rowK": "Reacciones repetidas (k)",
+          "rowH2": "Moléculas de H₂ (2k)",
+          "rowO2": "Moléculas de O₂ (k)",
+          "rowH2O": "Moléculas de H₂O formadas (2k)",
+          "rowRatio": "Proporción molar H₂ : O₂ : H₂O",
+          "rowAtoms": "Átomos (izq. = der.)"
+        },
+        "lines": {
+          "title": "Cuatro rectas numéricas: de gramos a moles y vuelta",
+          "subtitle": "Los gramos de hidrógeno divididos entre su masa molar dan moles; la proporción 2 : 2 da moles de agua; multiplicar por la masa molar del agua da gramos. Arrastra sobre la recta superior.",
+          "handle": "Masa de hidrógeno",
+          "caption": "{g} g de H₂ son {n} mol, que forman {n} mol o {w} g de H₂O.",
+          "rowGH2": "Masa de hidrógeno (m)",
+          "rowRatio": "Moles de agua (× 2/2)",
+          "rowGH2O": "Masa de agua formada",
+          "rowMolarMasses": "Masas molares H₂ · H₂O"
+        },
+        "progress": {
+          "title": "Reacción completa: 4H₂ + 2O₂ → 4H₂O",
+          "subtitle": "Partiendo justo de las cantidades de la proporción, el hidrógeno y el oxígeno bajan mientras el agua sube; al 100 % ambos reactivos se agotan y la masa total nunca cambia.",
+          "handle": "Avance de la reacción",
+          "caption": "Con un avance del {p} % se han formado {w} mol de agua.",
+          "rowProgress": "Avance",
+          "rowH2": "H₂ restante",
+          "rowO2": "O₂ restante",
+          "rowH2O": "H₂O formada",
+          "rowMass": "Masa total (constante)"
+        },
+        "slopes": {
+          "title": "Una proporción, cualquier escala",
+          "subtitle": "Los moles buscados son los moles conocidos por la razón de coeficientes, así que cada par de sustancias es una recta que pasa por cero. Las tres rectas son las proporciones de los ejemplos resueltos.",
+          "handle": "Moles de la sustancia conocida",
+          "caption": "{x} mol de N₂ dan {a} mol de NH₃: duplicar el inicio duplica el resultado.",
+          "rowKnown": "Moles de la sustancia conocida"
+        },
+        "neutral": {
+          "title": "Los equivalentes de Richter: ácido para neutralizar una base",
+          "subtitle": "La masa de cada ácido que neutraliza exactamente una masa de hidróxido de sodio. El ácido sulfúrico aporta dos H⁺ por molécula, así que necesita la mitad de moles.",
+          "handle": "Masa de NaOH",
+          "caption": "{g} g de NaOH se neutralizan con {hcl} g de HCl o {h2so4} g de H₂SO₄.",
+          "rowNaOH": "Masa de NaOH",
+          "rowMol": "Moles de NaOH"
+        },
+        "tanks": {
+          "title": "Haber-Bosch: N₂ + 3H₂ → 2NH₃",
+          "subtitle": "El volumen de cada tanque es proporcional a sus moles (gases en las mismas condiciones), siempre 1 : 3 : 2; las etiquetas dan las masas en toneladas.",
+          "handle": "Masa de nitrógeno",
+          "caption": "{n} t de N₂ reaccionan con {h} t de H₂ y dan {a} t de NH₃.",
+          "rowN2": "Nitrógeno (N₂)",
+          "rowMol": "Moles de N₂",
+          "rowH2": "Hidrógeno necesario (H₂)",
+          "rowNH3": "Amoníaco producido (NH₃)",
+          "rowRatio": "Proporción molar (de volumen)",
+          "rowMass": "Masa que entra = masa que sale"
+        },
+        "dial": {
+          "title": "El puente de la masa molar",
+          "subtitle": "Los números interiores son moles de agua; los exteriores, los gramos que pesan: 18,015 g por cada mol. Arrastra el control alrededor del dial.",
+          "handle": "Masa de agua",
+          "caption": "{g} g de agua son {n} mol.",
+          "rowGrams": "Masa de agua (m)",
+          "rowMolarMass": "Masa molar del H₂O (M)",
+          "rowMolecules": "Moléculas de agua",
+          "rowMl": "Volumen de agua líquida"
+        },
+        "mole": {
+          "title": "Un mol de cada una",
+          "subtitle": "Cada esfera es un mol, el mismo número de partículas; su volumen es proporcional a la masa de ese mol en gramos. Recorre nueve sustancias.",
+          "handle": "Sustancia",
+          "caption": "Un mol de {f} pesa {m} g, así que 100 g contienen {n} mol.",
+          "rowFormula": "Fórmula",
+          "rowMolarMass": "Masa molar",
+          "rowOneMole": "Masa de un mol",
+          "rowPer100": "Moles en 100 g",
+          "rowPerGram": "Partículas en 1 g",
+          "rowVsH2": "Más pesado que un mol de H₂"
         }
       }
     },
