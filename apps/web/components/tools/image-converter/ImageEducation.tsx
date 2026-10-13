@@ -5,6 +5,7 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
 import LossyLosslessDiagram from "./LossyLosslessDiagram";
+import { ImageBitDepthCard, ImageChromaCard, ImageDctCard, ImageQualityCurveCard, ImageRawMemoryCard, ImageResizeCard, ImageTimelineCard, ImageTransferCard } from "./ImageCards";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -17,8 +18,13 @@ export default async function ImageEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <ImageRawMemoryCard side="visual-left" />
+        <ImageBitDepthCard side="table-left" />
         <p>{t("intro.paragraph2")}</p>
         <LossyLosslessDiagram
           losslessLabel={t("intro.diagram.losslessLabel")}
@@ -30,6 +36,8 @@ export default async function ImageEducation() {
           approximateLabel={t("intro.diagram.approximateLabel")}
           caption={t("intro.diagram.caption")}
         />
+        <ImageDctCard side="visual-left" />
+        <ImageChromaCard side="table-left" />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -46,12 +54,14 @@ export default async function ImageEducation() {
               {exampleRows.map((row) => (
                 <tr key={row.scenario} className="border-b border-current/10">
                   <td className="px-3 py-2.5">{row.scenario}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  <td className="px-3 py-2.5 font-semibold">{row.result}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <ImageResizeCard side="visual-left" />
+        <ImageTransferCard side="table-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -60,11 +70,14 @@ export default async function ImageEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <ImageQualityCurveCard side="visual-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <ImageTimelineCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
@@ -90,6 +103,7 @@ export default async function ImageEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

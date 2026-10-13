@@ -17947,7 +17947,6 @@
       },
       "aboveFold": {
         "resultTitle": "Résultat",
-        "placeholder": "Chargez une image à gauche pour voir ici le résultat converti.",
         "originalSize": "Taille d'origine",
         "newSize": "Nouvelle taille",
         "smallerBy": "{percent} % plus petit que l'original",
@@ -17969,14 +17968,14 @@
               "format": "WebP",
               "bestFor": "L'usage web en général — généralement plus léger que le JPEG ou le PNG à qualité équivalente, avec un support quasi universel des navigateurs aujourd'hui."
             }
-          ]
+          ],
+          "sizesTitle": "Cette image dans chaque format, qualité {q} %",
+          "sizesNote": "PNG ignore le réglage de qualité (sans perte). Touchez une barre pour choisir ce format."
         }
       },
       "form": {
         "inputTitle": "Votre image",
         "chooseFile": "Cliquez ou déposez une image ici",
-        "previewAlt": "Aperçu de l'image sélectionnée",
-        "resultAlt": "Aperçu de l'image convertie",
         "formatLabel": "Format de sortie",
         "qualityLabel": "Qualité",
         "resizeLabel": "Redimensionner (largeur max.)",
@@ -17984,7 +17983,6 @@
         "convert": "Convertir l'image",
         "converting": "Conversion en cours…",
         "download": "Télécharger",
-        "resultSize": "Nouvelle taille de fichier : {size}",
         "clear": "Effacer"
       },
       "errors": {
@@ -18144,6 +18142,107 @@
         "dimensionsLabel": "Dimensions de Sortie",
         "summarySentence": "Converti en {format}, taille de fichier résultante {size}.",
         "resultSectionTitle": "Résultat"
+      },
+      "visuals": {
+        "result": {
+          "sample": "Image d'exemple",
+          "original": "Originale",
+          "converted": "Convertie · {format}",
+          "compareHandle": "Faites glisser pour comparer l'image originale et l'image convertie",
+          "lens": "Loupe ×{zoom} des pixels réels sous la poignée : l'original à gauche, l'image convertie à droite",
+          "curveTitle": "Taille du fichier {format} à chaque qualité",
+          "curveHandle": "Faites glisser le long de la courbe pour régler la qualité",
+          "curvePng": "PNG est sans perte : sa taille ne dépend pas du réglage de qualité.",
+          "gaugeHandle": "Faites glisser pour changer la qualité",
+          "outerRing": "Anneau extérieur : qualité",
+          "innerRing": "Anneau intérieur : nouvelle taille ÷ taille d'origine",
+          "lossless": "PNG · sans perte",
+          "dimsOriginal": "Dimensions d'origine",
+          "dimsConverted": "Dimensions converties"
+        },
+        "raw": {
+          "title": "Mémoire brute des pixels avant toute compression",
+          "subtitle": "Toute image décodée occupe en mémoire largeur × hauteur × octets par pixel, quel que soit son format. Cette taille brute est le point de départ de la compression (cadre 4:3).",
+          "caption": "Un cadre de {dims} contient {size} de pixels RGBA bruts.",
+          "handle": "Faites glisser pour changer la largeur",
+          "gray": "Gris × 1",
+          "rowDims": "Largeur × hauteur (px)",
+          "rowPixels": "Pixels"
+        },
+        "bitDepth": {
+          "title": "Profondeur de bits : combien de couleurs par pixel",
+          "subtitle": "Chaque bit supplémentaire par pixel double le nombre de couleurs distinctes : l'échelle est donc logarithmique. Une palette PNG-8 compte 256 couleurs ; la couleur vraie 24-bit, 16,777,216.",
+          "caption": "{bits} donne {colors} couleurs possibles.",
+          "handle": "Faites glisser pour changer la profondeur de bits",
+          "rowBits": "Bits par pixel",
+          "rowBytesPerPixel": "Octets par pixel",
+          "rowFrame": "Image brute 1920 × 1080",
+          "colorsUnit": "couleurs"
+        },
+        "dct": {
+          "title": "La base DCT : une onde par fréquence",
+          "subtitle": "JPEG écrit chaque ligne de 8 pixels d'un bloc comme une somme de huit ondes cosinus, c(x) = cos((2x + 1)kπ/16). Un k faible donne un dégradé doux ; un k élevé, le détail fin, premier sacrifié par une qualité basse.",
+          "caption": "À {k}, l'onde fait {count, plural, one {{cycles} cycle complet} other {{cycles} cycles complets}} sur les 8 pixels.",
+          "handle": "Faites glisser pour changer la fréquence",
+          "rowFrequency": "Fréquence",
+          "rowCycles": "Cycles sur 8 pixels"
+        },
+        "quality": {
+          "title": "Le réglage de qualité et le pas de quantification",
+          "subtitle": "Dans l'encodeur libjpeg (IJG), la qualité q multiplie chaque pas de quantification par 5000/q sous 50 et par 200 − 2q à partir de 50. Un pas plus grand arrondit plus grossièrement les coefficients : plus de détail est perdu.",
+          "caption": "À la qualité {q}, le pas DC de luminance vaut {dc} et le pas le plus grossier {hi}.",
+          "handle": "Faites glisser pour changer la qualité",
+          "rowQuality": "Qualité q",
+          "rowScale": "Facteur d'échelle",
+          "rowDc": "Pas DC (base 16)",
+          "rowHigh": "Pas le plus grossier (base 121)"
+        },
+        "chroma": {
+          "title": "Sous-échantillonnage de la chrominance : moins d'échantillons de couleur",
+          "subtitle": "L'œil distingue la luminosité plus finement que la couleur : JPEG peut garder tous les échantillons de luminance (Y) et moins de chrominance (Cb, Cr). Comptes par bloc 4 × 2 de 8 pixels.",
+          "caption": "{mode} garde {pct} des échantillons du 4:4:4.",
+          "handle": "Faites glisser pour choisir un mode",
+          "rowMode": "Mode",
+          "rowTotal": "Échantillons pour 8 pixels",
+          "rowFrame": "Échantillons dans une image 1920 × 1080"
+        },
+        "resize": {
+          "title": "Redimensionner : le nouveau cadre dans l'original",
+          "subtitle": "Une photo de 4000 × 3000 ajustée à une largeur maximale garde ses proportions. Le nombre de pixels baisse avec le carré de l'échelle, d'où l'économie importante.",
+          "caption": "Le cadre redimensionné de {dims} garde {pct} des pixels.",
+          "handle": "Faites glisser pour changer la largeur maximale",
+          "rowOriginal": "Original (px)",
+          "rowNew": "Redimensionné (px)",
+          "rowScale": "Échelle",
+          "rowPixels": "Pixels conservés",
+          "rowFewer": "Pixels divisés par",
+          "ofPixels": "des pixels"
+        },
+        "transfer": {
+          "title": "Temps de téléchargement d'un même fichier",
+          "subtitle": "Temps = taille du fichier en bits ÷ débit de la liaison. Les barres comparent quatre débits pour une même taille (échelle en racine carrée ; latence et surcoût des protocoles non inclus).",
+          "caption": "{size} prend {time} à 10 Mbit/s.",
+          "handle": "Faites glisser pour changer la taille du fichier",
+          "rowSize": "Taille du fichier"
+        },
+        "timeline": {
+          "title": "De la DCT à WebP : les dates derrière les formats",
+          "subtitle": "Les jalons de « Les coulisses de l'outil » sur une seule ligne. Parcourez les années pour voir lesquels avaient déjà eu lieu.",
+          "caption": "En {year}, {n} des 6 jalons avaient eu lieu.",
+          "handle": "Faites glisser pour changer l'année",
+          "rowYear": "Année",
+          "rowLast": "Dernier jalon",
+          "rowNext": "Jalon suivant",
+          "rowCount": "Jalons atteints",
+          "events": {
+            "dct": "La DCT est proposée pour les images",
+            "group": "Création du comité JPEG",
+            "jpeg": "Publication de la norme JPEG",
+            "lzw": "Unisys annonce des redevances LZW pour GIF",
+            "png": "Première spécification PNG",
+            "webp": "Google lance WebP"
+          }
+        }
       }
     },
     "json-formatter": {

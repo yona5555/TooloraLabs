@@ -17947,7 +17947,6 @@
       },
       "aboveFold": {
         "resultTitle": "Result",
-        "placeholder": "Upload an image on the left to see the converted result here.",
         "originalSize": "Original Size",
         "newSize": "New Size",
         "smallerBy": "{percent}% smaller than the original",
@@ -17969,14 +17968,14 @@
               "format": "WebP",
               "bestFor": "Web use generally — usually smaller than JPEG or PNG at similar quality, with near-universal browser support today."
             }
-          ]
+          ],
+          "sizesTitle": "This image in each format, quality {q} %",
+          "sizesNote": "PNG ignores the quality setting (lossless). Tap a bar to pick that format."
         }
       },
       "form": {
         "inputTitle": "Your Image",
         "chooseFile": "Click or drop an image here",
-        "previewAlt": "Selected image preview",
-        "resultAlt": "Converted image preview",
         "formatLabel": "Output Format",
         "qualityLabel": "Quality",
         "resizeLabel": "Resize (max width)",
@@ -17984,7 +17983,6 @@
         "convert": "Convert Image",
         "converting": "Converting...",
         "download": "Download",
-        "resultSize": "New file size: {size}",
         "clear": "Clear"
       },
       "errors": {
@@ -18144,6 +18142,107 @@
         "dimensionsLabel": "Output Dimensions",
         "summarySentence": "Converted to {format}, resulting in a file size of {size}.",
         "resultSectionTitle": "Result"
+      },
+      "visuals": {
+        "result": {
+          "sample": "Sample image",
+          "original": "Original",
+          "converted": "Converted · {format}",
+          "compareHandle": "Drag to compare the original and the converted image",
+          "lens": "Lens ×{zoom} of the real pixels under the handle: original on its left half, converted on its right half",
+          "curveTitle": "{format} file size at each quality",
+          "curveHandle": "Drag along the curve to set the quality",
+          "curvePng": "PNG is lossless: its file size does not depend on the quality setting.",
+          "gaugeHandle": "Drag to change the quality",
+          "outerRing": "Outer ring: quality",
+          "innerRing": "Inner ring: new size ÷ original size",
+          "lossless": "PNG · lossless",
+          "dimsOriginal": "Original dimensions",
+          "dimsConverted": "Converted dimensions"
+        },
+        "raw": {
+          "title": "Raw Pixel Memory Before Any Compression",
+          "subtitle": "Every decoded image takes width × height × bytes per pixel in memory, whatever its file format. That raw size is what compression starts from (4:3 frame).",
+          "caption": "A {dims} frame holds {size} of raw RGBA pixels.",
+          "handle": "Drag to change the width",
+          "gray": "Gray × 1",
+          "rowDims": "Width × height (px)",
+          "rowPixels": "Pixels"
+        },
+        "bitDepth": {
+          "title": "Bit Depth: How Many Colors a Pixel Can Hold",
+          "subtitle": "Each extra bit per pixel doubles the number of distinct colors, so the scale is logarithmic. A PNG-8 palette has 256 colors; 24-bit true color has 16,777,216.",
+          "caption": "{bits} gives {colors} possible colors.",
+          "handle": "Drag to change the bit depth",
+          "rowBits": "Bits per pixel",
+          "rowBytesPerPixel": "Bytes per pixel",
+          "rowFrame": "Raw 1920 × 1080 frame",
+          "colorsUnit": "colors"
+        },
+        "dct": {
+          "title": "The DCT Basis: One Wave per Frequency",
+          "subtitle": "JPEG writes each 8-pixel row of a block as a sum of eight cosine waves, c(x) = cos((2x + 1)kπ/16). Low k is smooth shading; high k is fine detail, the first thing a low quality setting discards.",
+          "caption": "At {k} the wave makes {count, plural, =1 {{cycles} full cycle} other {{cycles} full cycles}} across the 8 pixels.",
+          "handle": "Drag to change the frequency",
+          "rowFrequency": "Frequency",
+          "rowCycles": "Cycles across 8 pixels"
+        },
+        "quality": {
+          "title": "The Quality Setting and the Quantization Step",
+          "subtitle": "In the libjpeg (IJG) encoder, quality q scales every quantization step by 5000/q below 50 and by 200 − 2q from 50 up. A larger step rounds coefficients more coarsely, so more detail is lost.",
+          "caption": "At quality {q} the brightness DC step is {dc} and the coarsest step is {hi}.",
+          "handle": "Drag to change the quality",
+          "rowQuality": "Quality q",
+          "rowScale": "Scale factor",
+          "rowDc": "DC step (base 16)",
+          "rowHigh": "Coarsest step (base 121)"
+        },
+        "chroma": {
+          "title": "Chroma Subsampling: Fewer Color Samples",
+          "subtitle": "Eyes resolve brightness more finely than color, so JPEG may keep every brightness (Y) sample but fewer color (Cb, Cr) samples. Counts are per 4 × 2 block of 8 pixels.",
+          "caption": "{mode} keeps {pct} of the samples of 4:4:4.",
+          "handle": "Drag to pick a subsampling mode",
+          "rowMode": "Mode",
+          "rowTotal": "Samples per 8 pixels",
+          "rowFrame": "Samples in a 1920 × 1080 frame"
+        },
+        "resize": {
+          "title": "Resizing: The New Frame Inside the Original",
+          "subtitle": "A 4000 × 3000 photo fitted to a maximum width keeps its aspect ratio. The pixel count falls with the square of the scale, which is why resizing saves so much.",
+          "caption": "The resized {dims} frame keeps {pct} of the pixels.",
+          "handle": "Drag to change the maximum width",
+          "rowOriginal": "Original (px)",
+          "rowNew": "Resized (px)",
+          "rowScale": "Scale",
+          "rowPixels": "Pixels kept",
+          "rowFewer": "Fewer pixels by",
+          "ofPixels": "of the pixels"
+        },
+        "transfer": {
+          "title": "Download Time of the Same File",
+          "subtitle": "Time = file size in bits ÷ link speed. The bars compare four link speeds for one file size (square-root scale; latency and protocol overhead not included).",
+          "caption": "{size} takes {time} at 10 Mbit/s.",
+          "handle": "Drag to change the file size",
+          "rowSize": "File size"
+        },
+        "timeline": {
+          "title": "From DCT to WebP: The Dates Behind the Formats",
+          "subtitle": "The milestones from Behind the Tool on one line. Drag through the years to see which of them had already happened.",
+          "caption": "By {year}, {n} of the 6 milestones had happened.",
+          "handle": "Drag to change the year",
+          "rowYear": "Year",
+          "rowLast": "Latest milestone",
+          "rowNext": "Next milestone",
+          "rowCount": "Milestones reached",
+          "events": {
+            "dct": "DCT proposed for image compression",
+            "group": "JPEG committee formed",
+            "jpeg": "JPEG standard published",
+            "lzw": "Unisys announces GIF LZW fees",
+            "png": "First PNG specification",
+            "webp": "WebP released by Google"
+          }
+        }
       }
     },
     "json-formatter": {
