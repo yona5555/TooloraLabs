@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import PhVariablesDiagram from "./PhVariablesDiagram";
 import type { PhOperation } from "./types";
 
 type PhInputPanelProps = {
@@ -59,13 +58,8 @@ export default function PhInputPanel({
         </div>
       </div>
 
-      <PhVariablesDiagram
-        solved={operation}
-        labels={{ fromPH: "pH", fromH: "[H⁺]", fromPOH: "pOH", fromOH: "[OH⁻]" }}
-        caption={t("variablesCaption")}
-      />
 
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
         {operation === "fromPH" && (
           <ToolInput label={t("pHLabel")} type="text" inputMode="decimal" placeholder={t("pHPlaceholder")} value={pH} onChange={(e) => onPHChange(e.target.value)} />
         )}

@@ -8850,7 +8850,6 @@
         "ohPlaceholder": "e.g. 0.0000001",
         "calculate": "Calculate",
         "clear": "Clear",
-        "variablesCaption": "The quantity supplied by the active tab is highlighted.",
         "scenarioPresetsLabel": "Try a real scenario:"
       },
       "result": {
@@ -8864,31 +8863,15 @@
         "pOH": "pOH",
         "hConcentration": "[H⁺]",
         "ohConcentration": "[OH⁻]",
-        "diagramCaption": "pH {value} on the 0-to-14 scale, acidic (red) to basic (blue).",
         "emptyStateMessage": "Enter a value and press Calculate to see your pH result.",
-        "operationUsed": "Converted From",
-        "barCaption": "[H⁺] and [OH⁻] on a log scale — they always move in opposite directions since their product is fixed at 25°C.",
-        "seesawCaption": "pH + pOH always equals 14 at 25°C — the beam levels out only at pH 7."
+        "operationUsed": "Converted From"
       },
       "education": {
         "intro": {
           "title": "Understanding pH",
           "paragraph1": "pH measures how acidic or basic an aqueous solution is, defined as pH = -log₁₀[H⁺], the negative base-10 logarithm of the hydrogen ion concentration in moles per liter. Because it is a logarithmic scale, each whole-number drop in pH represents a tenfold increase in hydrogen ion concentration — a solution of pH 4 is ten times more acidic than pH 5, and one hundred times more acidic than pH 6.",
-          "diagram": {
-            "caption": "A pH of 5.5 (mildly acidic, like black coffee) plotted on the 0-to-14 scale."
-          },
           "paragraph2": "pOH is the parallel measure for hydroxide ion concentration, pOH = -log₁₀[OH⁻]. In water at 25°C, the ion product Kw = [H⁺][OH⁻] = 10⁻¹⁴ always holds, which is exactly why pH + pOH = 14 at that temperature: knowing any one of pH, pOH, [H⁺], or [OH⁻] is therefore enough to compute the other three.",
-          "paragraph3": "A solution is classified acidic when pH is below 7, basic (or alkaline) when it is above 7, and neutral only at exactly pH 7 — the pH of pure water at 25°C, where [H⁺] and [OH⁻] are equal. This 0-to-14 range is the conventional scale for aqueous solutions at that temperature, though pH values outside it are mathematically possible for very concentrated acids or bases.",
-          "indicatorCaption": "The approximate color a universal indicator solution turns at each pH band.",
-          "phScaleGauge": {
-            "title": "Try It: How Acidic or Basic Is That?",
-            "intro": "Pick a real-world substance to see its pH on the scale and compare it with others.",
-            "acidic": "Acidic",
-            "neutral": "Neutral",
-            "basic": "Basic",
-            "verdict": "{substance} is {classification}.",
-            "ionFact": "Its {ion} concentration is about {ratio}× that of pure water."
-          }
+          "paragraph3": "A solution is classified acidic when pH is below 7, basic (or alkaline) when it is above 7, and neutral only at exactly pH 7 — the pH of pure water at 25°C, where [H⁺] and [OH⁻] are equal. This 0-to-14 range is the conventional scale for aqueous solutions at that temperature, though pH values outside it are mathematically possible for very concentrated acids or bases."
         },
         "examples": {
           "title": "Worked Examples",
@@ -9040,6 +9023,137 @@
           "acidic": "Acidic",
           "neutral": "Neutral",
           "basic": "Basic"
+        }
+      },
+      "visuals": {
+        "common": {
+          "interactive": "Interactive: drag the handle or use the buttons",
+          "minus": "Decrease by one step",
+          "plus": "Increase by one step",
+          "reset": "Reset this indicator",
+          "colQuantity": "Quantity",
+          "colValue": "Value",
+          "worked": "Worked example",
+          "acidic": "Acidic",
+          "neutral": "Neutral",
+          "basic": "Basic"
+        },
+        "hero": {
+          "handle": "pH marker"
+        },
+        "ladder": {
+          "title": "Log Ladder: Each pH Step Is 10×",
+          "subtitle": "Every rung down the ladder holds ten times more H⁺ than the rung above it.",
+          "handle": "pH on the ladder",
+          "caption": "At pH {pH}, [H⁺] is {h} M: ten times the rung below it and one tenth of the rung above it.",
+          "rowPh": "pH",
+          "rowH": "[H⁺]",
+          "rowUp": "[H⁺] at pH − 1",
+          "rowDown": "[H⁺] at pH + 1",
+          "rowWater": "Compared with pure water",
+          "rowClass": "Classification"
+        },
+        "titration": {
+          "title": "Titration Curve: HCl with NaOH",
+          "subtitle": "25.00 mL of 0.100 M HCl titrated with 0.100 M NaOH. Drag the point along the curve.",
+          "handle": "Added NaOH volume",
+          "caption": "{v} mL of NaOH added gives pH {pH}. The equivalence point is at {ep} mL, pH 7.00.",
+          "none": "None",
+          "rowAdded": "NaOH added",
+          "rowAcid": "HCl present",
+          "rowBase": "NaOH added",
+          "rowExcess": "Excess ion",
+          "rowEp": "Equivalence point",
+          "rowRegion": "Region",
+          "region": {
+            "before": "Before equivalence",
+            "at": "At equivalence",
+            "after": "After equivalence"
+          },
+          "axis": "V NaOH (mL)",
+          "epShort": "EP"
+        },
+        "kw": {
+          "title": "pH + pOH = pKw, and Temperature",
+          "subtitle": "The 14 in pH + pOH = 14 holds only at 25 °C. Drag the temperature to see pKw change, with pH fixed at {pH} (data: Bandura & Lvov, 2006).",
+          "handle": "Water temperature",
+          "caption": "At {t} °C, pKw = {pkw}: pH {pH} + pOH {pOH}. Neutral water here has pH {n}.",
+          "rowT": "Temperature",
+          "rowPh": "pH (fixed)",
+          "rowPoh": "pOH = pKw − pH",
+          "rowNeutral": "Neutral pH = pKw / 2",
+          "rowClass": "Classification at this temperature"
+        },
+        "dyes": {
+          "title": "Indicator Colour Ranges",
+          "subtitle": "Four classic indicators and the pH range in which each one changes colour. Drag the pH line across them.",
+          "handle": "pH line",
+          "caption": "At pH {pH}, {n} of the 4 indicators are inside their colour-change range.",
+          "names": {
+            "methylOrange": "Methyl orange",
+            "litmus": "Litmus",
+            "bromothymolBlue": "Bromothymol blue",
+            "phenolphthalein": "Phenolphthalein"
+          },
+          "forms": {
+            "acid": "Acid colour",
+            "transition": "Changing",
+            "base": "Base colour"
+          },
+          "rowChanging": "Indicators changing colour",
+          "rowClass": "Classification"
+        },
+        "dial": {
+          "title": "Four-Way Conversion Dial",
+          "subtitle": "The calculator converts between pH, pOH, [H⁺] and [OH⁻]. Turn the dial: the outer ring is pH, the inner ring is pOH.",
+          "handle": "Dial pH",
+          "caption": "pH {pH} and pOH {pOH} always add up to 14 at 25 °C.",
+          "rowPoh": "pOH = 14 − pH",
+          "rowH": "[H⁺] = 10⁻ᵖᴴ",
+          "rowOh": "[OH⁻] = 10⁻ᵖᴼᴴ",
+          "rowKw": "[H⁺] × [OH⁻]",
+          "rowRatio": "[H⁺] / [OH⁻]",
+          "rowClass": "Classification"
+        },
+        "shelf": {
+          "title": "Everyday Substances on the 0–14 Shelf",
+          "subtitle": "Eight real substances placed at their typical pH. Step through them or drag the selector.",
+          "handle": "Selected substance",
+          "caption": "{name} sits at pH {pH}: {cls}.",
+          "rowName": "Substance",
+          "rowPh": "Typical pH",
+          "rowWater": "Compared with pure water",
+          "rowClass": "Classification",
+          "items": {
+            "lemon": "Lemon juice",
+            "vinegar": "Vinegar",
+            "coffee": "Black coffee",
+            "milk": "Milk",
+            "blood": "Human blood",
+            "seawater": "Seawater",
+            "soap": "Hand soap",
+            "bleach": "Bleach"
+          }
+        },
+        "dilution": {
+          "title": "Dilution Toward Neutral",
+          "subtitle": "Start at pH {pH}. Each step adds water up to ten times the volume: pH moves toward 7 but never crosses it.",
+          "handle": "Number of 10× dilutions",
+          "caption": "After {k} dilutions the pH is {pH}; the naive “one unit per step” rule would say {naive}.",
+          "rowK": "10× dilutions",
+          "rowFactor": "Volume factor",
+          "rowNaive": "Naive rule (start + steps)",
+          "rowGap": "Distance from 7"
+        },
+        "particles": {
+          "title": "Particle Counter: H₃O⁺ vs OH⁻",
+          "subtitle": "A droplet of the solution. Particle counts are log-scaled so both ions stay visible; the true ratio is in the table.",
+          "handle": "Droplet pH",
+          "caption": "At pH {pH} the droplet shows {nh} H₃O⁺ and {noh} OH⁻; the true ratio is {r} : 1.",
+          "rowRatio": "True ratio [H₃O⁺] : [OH⁻]",
+          "rowShown": "Shown particles H₃O⁺ : OH⁻",
+          "rowLog": "log₁₀ of the true ratio",
+          "rowClass": "Classification"
         }
       }
     },

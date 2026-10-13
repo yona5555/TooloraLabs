@@ -109,7 +109,7 @@ export default function PhShareExportModal({ operationLabel, inputRows, resultRo
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 rounded-lg border border-white/40 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/10 dark:text-zinc-100"
+        className="flex items-center gap-1.5 rounded-lg border border-white px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/10 dark:text-zinc-100"
       >
         <Share2 size={14} />
         {t("shareExport.triggerLabel")}

@@ -8850,7 +8850,6 @@
         "ohPlaceholder": "p. ex. 0.0000001",
         "calculate": "Calculer",
         "clear": "Effacer",
-        "variablesCaption": "La quantité fournie par l'onglet actif est mise en évidence.",
         "scenarioPresetsLabel": "Essayer un scénario réel :"
       },
       "result": {
@@ -8864,31 +8863,15 @@
         "pOH": "pOH",
         "hConcentration": "[H⁺]",
         "ohConcentration": "[OH⁻]",
-        "diagramCaption": "pH {value} sur l'échelle de 0 à 14, de l'acide (rouge) au basique (bleu).",
         "emptyStateMessage": "Saisissez une valeur et appuyez sur Calculer pour voir votre résultat de pH.",
-        "operationUsed": "Converti Depuis",
-        "barCaption": "[H⁺] et [OH⁻] sur une échelle logarithmique — elles évoluent toujours en sens opposés car leur produit est fixe à 25°C.",
-        "seesawCaption": "pH + pOH est toujours égal à 14 à 25°C — la balance ne s'équilibre qu'à pH 7."
+        "operationUsed": "Converti Depuis"
       },
       "education": {
         "intro": {
           "title": "Comprendre le pH",
           "paragraph1": "Le pH mesure le degré d'acidité ou de basicité d'une solution aqueuse, défini par pH = -log₁₀[H⁺], le logarithme négatif en base 10 de la concentration en ions hydrogène en moles par litre. Étant une échelle logarithmique, chaque baisse d'une unité entière de pH représente une multiplication par dix de la concentration en ions hydrogène — une solution de pH 4 est dix fois plus acide qu'une solution de pH 5, et cent fois plus acide qu'une solution de pH 6.",
-          "diagram": {
-            "caption": "Un pH de 5,5 (légèrement acide, comme le café noir) placé sur l'échelle de 0 à 14."
-          },
           "paragraph2": "Le pOH est la mesure parallèle pour la concentration en ions hydroxyde, pOH = -log₁₀[OH⁻]. Dans l'eau à 25 °C, le produit ionique Kw = [H⁺][OH⁻] = 10⁻¹⁴ est toujours vérifié, ce qui explique exactement pourquoi pH + pOH = 14 à cette température : connaître l'une quelconque des valeurs pH, pOH, [H⁺] ou [OH⁻] suffit donc à calculer les trois autres.",
-          "paragraph3": "Une solution est classée acide lorsque le pH est inférieur à 7, basique (ou alcaline) lorsqu'il est supérieur à 7, et neutre uniquement à pH exactement égal à 7 — le pH de l'eau pure à 25 °C, où [H⁺] et [OH⁻] sont égaux. Cette plage de 0 à 14 est l'échelle conventionnelle pour les solutions aqueuses à cette température, bien que des valeurs de pH en dehors de cette plage soient mathématiquement possibles pour des acides ou des bases très concentrés.",
-          "indicatorCaption": "La couleur approximative que prend une solution indicatrice universelle à chaque bande de pH.",
-          "phScaleGauge": {
-            "title": "À essayer : est-ce acide ou basique ?",
-            "intro": "Choisissez une substance réelle pour voir son pH sur l'échelle et le comparer à d'autres.",
-            "acidic": "Acide",
-            "neutral": "Neutre",
-            "basic": "Basique",
-            "verdict": "{substance} est {classification}.",
-            "ionFact": "Sa concentration en {ion} est environ {ratio} fois celle de l'eau pure."
-          }
+          "paragraph3": "Une solution est classée acide lorsque le pH est inférieur à 7, basique (ou alcaline) lorsqu'il est supérieur à 7, et neutre uniquement à pH exactement égal à 7 — le pH de l'eau pure à 25 °C, où [H⁺] et [OH⁻] sont égaux. Cette plage de 0 à 14 est l'échelle conventionnelle pour les solutions aqueuses à cette température, bien que des valeurs de pH en dehors de cette plage soient mathématiquement possibles pour des acides ou des bases très concentrés."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -9040,6 +9023,137 @@
           "acidic": "Acide",
           "neutral": "Neutre",
           "basic": "Basique"
+        }
+      },
+      "visuals": {
+        "common": {
+          "interactive": "Interactif : faites glisser la poignée ou utilisez les boutons",
+          "minus": "Diminuer d’un pas",
+          "plus": "Augmenter d’un pas",
+          "reset": "Réinitialiser cet indicateur",
+          "colQuantity": "Grandeur",
+          "colValue": "Valeur",
+          "worked": "Exemple résolu",
+          "acidic": "Acide",
+          "neutral": "Neutre",
+          "basic": "Basique"
+        },
+        "hero": {
+          "handle": "Repère de pH"
+        },
+        "ladder": {
+          "title": "Échelle logarithmique : chaque unité de pH vaut 10×",
+          "subtitle": "Chaque barreau vers le bas contient dix fois plus de H⁺ que le barreau au-dessus.",
+          "handle": "pH sur l’échelle",
+          "caption": "À pH {pH}, [H⁺] vaut {h} M : dix fois le barreau du dessous et un dixième de celui du dessus.",
+          "rowPh": "pH",
+          "rowH": "[H⁺]",
+          "rowUp": "[H⁺] à pH − 1",
+          "rowDown": "[H⁺] à pH + 1",
+          "rowWater": "Par rapport à l’eau pure",
+          "rowClass": "Classement"
+        },
+        "titration": {
+          "title": "Courbe de titrage : HCl par NaOH",
+          "subtitle": "25,00 mL de HCl à 0,100 M titrés par NaOH à 0,100 M. Faites glisser le point le long de la courbe.",
+          "handle": "Volume de NaOH ajouté",
+          "caption": "Avec {v} mL de NaOH ajoutés, le pH vaut {pH}. Le point d’équivalence est à {ep} mL, pH 7.00.",
+          "none": "Aucun",
+          "rowAdded": "NaOH ajouté",
+          "rowAcid": "HCl présent",
+          "rowBase": "NaOH ajouté",
+          "rowExcess": "Ion en excès",
+          "rowEp": "Point d’équivalence",
+          "rowRegion": "Zone",
+          "region": {
+            "before": "Avant l’équivalence",
+            "at": "À l’équivalence",
+            "after": "Après l’équivalence"
+          },
+          "axis": "V NaOH (mL)",
+          "epShort": "PE"
+        },
+        "kw": {
+          "title": "pH + pOH = pKw et la température",
+          "subtitle": "Le 14 de pH + pOH = 14 n’est valable qu’à 25 °C. Faites glisser la température pour voir pKw changer, le pH restant fixé à {pH} (données : Bandura et Lvov, 2006).",
+          "handle": "Température de l’eau",
+          "caption": "À {t} °C, pKw = {pkw} : pH {pH} + pOH {pOH}. L’eau neutre a ici un pH de {n}.",
+          "rowT": "Température",
+          "rowPh": "pH (fixe)",
+          "rowPoh": "pOH = pKw − pH",
+          "rowNeutral": "pH neutre = pKw / 2",
+          "rowClass": "Classement à cette température"
+        },
+        "dyes": {
+          "title": "Zones de virage des indicateurs",
+          "subtitle": "Quatre indicateurs classiques et la zone de pH où chacun change de couleur. Faites glisser la ligne de pH sur eux.",
+          "handle": "Ligne de pH",
+          "caption": "À pH {pH}, {n} des 4 indicateurs sont dans leur zone de virage.",
+          "names": {
+            "methylOrange": "Hélianthine",
+            "litmus": "Tournesol",
+            "bromothymolBlue": "Bleu de bromothymol",
+            "phenolphthalein": "Phénolphtaléine"
+          },
+          "forms": {
+            "acid": "Couleur acide",
+            "transition": "En virage",
+            "base": "Couleur basique"
+          },
+          "rowChanging": "Indicateurs en virage",
+          "rowClass": "Classement"
+        },
+        "dial": {
+          "title": "Cadran de conversion à quatre voies",
+          "subtitle": "Le calculateur convertit entre pH, pOH, [H⁺] et [OH⁻]. Tournez le cadran : l’anneau extérieur est le pH, l’anneau intérieur le pOH.",
+          "handle": "pH du cadran",
+          "caption": "pH {pH} et pOH {pOH} ont toujours pour somme 14 à 25 °C.",
+          "rowPoh": "pOH = 14 − pH",
+          "rowH": "[H⁺] = 10⁻ᵖᴴ",
+          "rowOh": "[OH⁻] = 10⁻ᵖᴼᴴ",
+          "rowKw": "[H⁺] × [OH⁻]",
+          "rowRatio": "[H⁺] / [OH⁻]",
+          "rowClass": "Classement"
+        },
+        "shelf": {
+          "title": "Substances courantes sur l’étagère de 0 à 14",
+          "subtitle": "Huit substances réelles placées à leur pH habituel. Parcourez-les ou faites glisser le sélecteur.",
+          "handle": "Substance choisie",
+          "caption": "{name} se situe à pH {pH} : {cls}.",
+          "rowName": "Substance",
+          "rowPh": "pH habituel",
+          "rowWater": "Par rapport à l’eau pure",
+          "rowClass": "Classement",
+          "items": {
+            "lemon": "Jus de citron",
+            "vinegar": "Vinaigre",
+            "coffee": "Café noir",
+            "milk": "Lait",
+            "blood": "Sang humain",
+            "seawater": "Eau de mer",
+            "soap": "Savon pour les mains",
+            "bleach": "Eau de Javel"
+          }
+        },
+        "dilution": {
+          "title": "Dilution vers la neutralité",
+          "subtitle": "Départ à pH {pH}. Chaque étape ajoute de l’eau jusqu’à dix fois le volume : le pH se rapproche de 7 sans jamais le franchir.",
+          "handle": "Nombre de dilutions 10×",
+          "caption": "Après {k} dilutions, le pH vaut {pH} ; la règle naïve « une unité par étape » donnerait {naive}.",
+          "rowK": "Dilutions 10×",
+          "rowFactor": "Facteur de volume",
+          "rowNaive": "Règle naïve (départ + étapes)",
+          "rowGap": "Écart à 7"
+        },
+        "particles": {
+          "title": "Compteur de particules : H₃O⁺ contre OH⁻",
+          "subtitle": "Une goutte de la solution. Les nombres de particules suivent une échelle logarithmique pour que les deux ions restent visibles ; le rapport réel figure dans le tableau.",
+          "handle": "pH de la goutte",
+          "caption": "À pH {pH}, la goutte montre {nh} H₃O⁺ et {noh} OH⁻ ; le rapport réel est {r} : 1.",
+          "rowRatio": "Rapport réel [H₃O⁺] : [OH⁻]",
+          "rowShown": "Particules affichées H₃O⁺ : OH⁻",
+          "rowLog": "log₁₀ du rapport réel",
+          "rowClass": "Classement"
         }
       }
     },

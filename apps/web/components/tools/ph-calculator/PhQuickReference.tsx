@@ -22,7 +22,7 @@ export default function PhQuickReference() {
             {COMMON_SUBSTANCES.map((substance) => (
               <tr key={substance.key} className="border-t border-zinc-100 dark:border-zinc-800/60">
                 <td className="px-3 py-2 font-semibold text-zinc-900 dark:text-zinc-100">{tSubstances(substance.key)}</td>
-                <td className="px-3 py-2 text-end font-mono text-zinc-700 dark:text-zinc-300">{substance.pH}</td>
+                <td className="px-3 py-2 text-end tabular-nums text-zinc-700 dark:text-zinc-300">{substance.pH}</td>
               </tr>
             ))}
           </tbody>
