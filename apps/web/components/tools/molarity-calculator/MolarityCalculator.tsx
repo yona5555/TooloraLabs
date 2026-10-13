@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { MolarityCalculator as MolarityCalculatorTool, type MolarityCalculatorOutput } from "@tooloralabs/tools";
@@ -9,10 +9,10 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { GlassPage } from "@/components/tool-ui/glass/GlassPrimitives";
 import MolarityInputPanel from "./MolarityInputPanel";
 import MolarityResult from "./MolarityResult";
 import MolarityQuickReference from "./MolarityQuickReference";
-import MolarityModeTabs from "./MolarityModeTabs";
 import MolarityConcentrationCard from "./MolarityConcentrationCard";
 import MolarityReferenceTable from "./MolarityReferenceTable";
 import type { ConcentrationBasis, DilutionSolveFor, MolarityMode } from "./types";
@@ -170,6 +170,21 @@ export default function MolarityCalculator({ education }: { education: ReactNode
     setDigitStyle(resolveDigitStyle(...Object.values(next)));
   }
 
+  // The 3D beaker's volume marker writes back into the calculator: V (concentration) or V₂ (dilution, solving for C₂).
+  function handleHeroVolume(value: number) {
+    const next = String(value);
+    if (mode === "concentration") {
+      setVolumeLiters(next);
+      setResult(computeResult(mode, concentrationBasis, dilutionSolveFor, { ...currentInputs(), volumeLiters: next }));
+    } else {
+      setV2(next);
+      setDilutionSolveFor("c2");
+      setResult(computeResult(mode, concentrationBasis, "c2", { ...currentInputs(), v2: next }));
+    }
+    setHasCalculated(true);
+    setDigitStyle("western");
+  }
+
   function handleClear() {
     setMoles(DEFAULTS.moles);
     setMassGrams(DEFAULTS.massGrams);
@@ -190,11 +205,23 @@ export default function MolarityCalculator({ education }: { education: ReactNode
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
 
-  return (
+  const sideCards = (
     <>
+      <MolarityReferenceTable />
+      <MolarityConcentrationCard mode={mode} molarity={result.molarity} c1={result.c1} c2={result.c2} digitStyle={digitStyle} />
+    </>
+  );
+
+  return (
+    <GlassPage>
+      {/* Inter everywhere on this page; drag-handle rims use the shared line token so they keep ≥3:1 in light mode. */}
+      <div data-chem-page style={{ fontFamily: "var(--glass-font)", ["--glass-handle-border" as string]: "var(--ph-line)" } as CSSProperties}>
       <div ref={headerSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
             <div className="flex flex-col gap-3">
               <MolarityInputPanel
@@ -224,17 +251,26 @@ export default function MolarityCalculator({ education }: { education: ReactNode
                 onCalculate={handleCalculate}
                 onClear={handleClear}
               />
+              {/* Desktop: under the input card (keeps the columns flush). Phone: after the Result card. */}
+              <div className="hidden flex-col gap-3 lg:flex">{sideCards}</div>
             </div>
           }
           result={
-            <div className="flex flex-col gap-3">
-              <MolarityResult hasCalculated={hasCalculated} result={result} mode={mode} digitStyle={digitStyle} />
-              <MolarityModeTabs mode={mode} onModeChange={handleModeChange} />
-              <MolarityConcentrationCard mode={mode} molarity={result.molarity} c1={result.c1} c2={result.c2} digitStyle={digitStyle} />
-              <MolarityReferenceTable />
+            <div className="flex flex-col gap-3 lg:h-full">
+              <MolarityResult
+                hasCalculated={hasCalculated}
+                result={result}
+                mode={mode}
+                digitStyle={digitStyle}
+                volume={parseLocalizedNumber(volumeLiters) || 0}
+                seedVolume={mode === "concentration" ? Number(DEFAULTS.volumeLiters) : Number(DEFAULTS.v2)}
+                onSetVolume={handleHeroVolume}
+                onModeChange={handleModeChange}
+              />
+              <div className="flex flex-col gap-3 lg:hidden">{sideCards}</div>
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="molarity-calculator" category="chemistry" />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="molarity-calculator" category="chemistry" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="molarity-calculator" />
@@ -246,6 +282,7 @@ export default function MolarityCalculator({ education }: { education: ReactNode
       </div>
 
       {education}
-    </>
+      </div>
+    </GlassPage>
   );
 }

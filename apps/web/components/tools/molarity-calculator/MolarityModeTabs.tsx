@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { PhText } from "../ph-calculator/PhCardKit";
 import { MOLARITY_MODES, type MolarityMode } from "./types";
 
 type MolarityModeTabsProps = {
@@ -19,13 +20,15 @@ export default function MolarityModeTabs({ mode, onModeChange }: MolarityModeTab
           role="tab"
           aria-selected={mode === value}
           onClick={() => onModeChange(value)}
+          // Rims use the shared line token so every tab keeps ≥3:1 against the card in light and dark.
           className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition sm:text-sm ${
             mode === value
-              ? "border-blue-400 bg-blue-600 text-white"
-              : "border-zinc-300 text-zinc-600 hover:bg-zinc-100 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-blue-600"
+              ? "border-blue-700 bg-blue-600 text-white dark:border-blue-300"
+              : "text-zinc-600 hover:bg-zinc-100 hover:text-blue-600 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-blue-400"
           }`}
+          style={mode === value ? undefined : { borderColor: "var(--ph-line)" }}
         >
-          {t(`mode.${value}`)}
+          <PhText text={t(`mode.${value}`)} />
         </button>
       ))}
     </div>

@@ -9646,7 +9646,6 @@
         "v2Placeholder": "p. ej. 1",
         "calculate": "Calcular",
         "clear": "Limpiar",
-        "variablesCaption": "La cantidad que estás calculando está resaltada.",
         "scenarioPresetsLabel": "Prueba un escenario real:",
         "scenarios": {
           "salineIV": "Suero Salino Intravenoso",
@@ -9667,49 +9666,16 @@
         "v1": "V₁",
         "c2": "C₂",
         "v2": "V₂",
-        "diagramStock": "Inicial",
-        "diagramDiluted": "Diluida",
-        "diagramCaption": "La altura del líquido refleja el volumen; la intensidad del color refleja la concentración.",
         "emptyStateMessage": "Introduce los valores y pulsa Calcular para ver tu resultado.",
         "molarity": "Molaridad",
-        "beakerCaption": "El número de puntos escala con la molaridad: más puntos significa una solución más concentrada.",
-        "scaleTrace": "traza",
-        "scaleDilute": "diluido",
-        "scaleTypical": "típico",
-        "scaleStock": "madre",
-        "scaleConcentrated": "conc.",
-        "scaleCaption": "{value} mol/L en una escala logarítmica frente a concentraciones de referencia de laboratorio comunes.",
         "dilutionFactor": "Factor de Dilución"
       },
       "education": {
         "intro": {
           "title": "Entendiendo la Molaridad y la Dilución",
           "paragraph1": "La molaridad (M) mide la concentración de una solución como moles de soluto por litro de solución: M = mol / L. Cuando se conoce la masa del soluto en lugar de sus moles directamente, primero se calculan los moles dividiendo la masa en gramos entre la masa molar de la sustancia en gramos por mol; la masa molar del cloruro de sodio, 58.44 g/mol, significa que disolver 58.44 g de NaCl para formar un litro de solución da una solución 1 M.",
-          "diagram": {
-            "stockLabel": "Inicial",
-            "dilutedLabel": "Diluida",
-            "caption": "Diluir 0.5 L de una solución inicial de 2 mol/L a 1 L produce una solución diluida de 1 mol/L: los mismos moles totales, repartidos en más líquido."
-          },
           "paragraph2": "La dilución sigue un principio simple de conservación: agregar disolvente a una solución cambia su volumen y concentración, pero no los moles totales de soluto presentes. Esto da la ecuación de dilución C₁V₁ = C₂V₂, donde C₁ y V₁ son la concentración y el volumen antes de diluir (la solución «inicial»), y C₂ y V₂ son la concentración y el volumen después de agregar disolvente. Como los moles se conservan, esta ecuación puede reordenarse para calcular cualquiera de las cuatro cantidades conociendo las otras tres.",
-          "paragraph3": "Diluir una solución siempre reduce su concentración en proporción exacta a cuánto aumenta su volumen: duplicar el volumen reduce la concentración exactamente a la mitad, triplicarlo la reduce a un tercio, y así sucesivamente. Esta relación proporcional es la razón por la que los cálculos de dilución nunca requieren saber qué es realmente el soluto: la misma ecuación C₁V₁ = C₂V₂ se aplica sin importar la sustancia química específica involucrada.",
-          "dilutionRatioCaption": "Cada paso adicional de dilución 1:2 reduce la concentración a la mitad, desvaneciendo el color proporcionalmente.",
-          "concentrationGauge": {
-            "title": "Pruébalo: ¿qué tan concentrado es eso?",
-            "intro": "Elige una solución real para ver su molaridad en el medidor y compararla con otras.",
-            "dilute": "Diluida",
-            "moderate": "Moderada",
-            "concentrated": "Concentrada",
-            "verdict": "{substance} es una solución {classification}.",
-            "particlesFact": "En 1 litro, eso equivale a unas {particles} × 10²³ partículas disueltas.",
-            "substances": {
-              "bloodGlucose": "Glucosa en Sangre",
-              "stomachAcid": "Ácido Estomacal",
-              "seawater": "Agua de Mar",
-              "vinegar": "Vinagre",
-              "labNaOH": "Hidróxido de Sodio de Grado de Laboratorio",
-              "concentratedH2SO4": "Ácido Sulfúrico Concentrado"
-            }
-          }
+          "paragraph3": "Diluir una solución siempre reduce su concentración en proporción exacta a cuánto aumenta su volumen: duplicar el volumen reduce la concentración exactamente a la mitad, triplicarlo la reduce a un tercio, y así sucesivamente. Esta relación proporcional es la razón por la que los cálculos de dilución nunca requieren saber qué es realmente el soluto: la misma ecuación C₁V₁ = C₂V₂ se aplica sin importar la sustancia química específica involucrada."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -9821,14 +9787,6 @@
           "readOriginal": "Leer el Texto Original"
         }
       },
-      "gauge": {
-        "dilute": "Diluido",
-        "typical": "Concentración típica de laboratorio",
-        "concentrated": "Concentrado",
-        "mild": "Dilución leve",
-        "moderate": "Dilución moderada",
-        "high": "Dilución alta"
-      },
       "shareExport": {
         "triggerLabel": "Compartir / Exportar",
         "modalTitle": "Compartir o Exportar Este Resultado",
@@ -9866,6 +9824,122 @@
           "concentratedHCl": "Ácido Clorhídrico Concentrado",
           "concentratedAmmonia": "Solución de Amoníaco Concentrada",
           "concentratedH2SO4": "Ácido Sulfúrico Concentrado"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Volumen de la disolución",
+          "handleDiluted": "Volumen diluido V₂"
+        },
+        "flow": {
+          "title": "De gramos a molaridad",
+          "subtitle": "Pesa cloruro de sodio, divide entre su masa molar para obtener los moles y luego entre el volumen de 2 L para obtener la molaridad. Arrastra por el riel para cambiar la masa.",
+          "handle": "Masa de NaCl",
+          "caption": "{g} g de NaCl son {n} mol; en 2 L dan {m} mol/L.",
+          "rowMass": "Masa pesada (m)",
+          "rowMolarMass": "Masa molar del NaCl (M)",
+          "rowVolume": "Volumen de la disolución (V)",
+          "rowUnits": "Unidades fórmula (n × 6.022 × 10²³)"
+        },
+        "cylinders": {
+          "title": "Mismos moles, dos formas: C₁V₁ = C₂V₂",
+          "subtitle": "La base de cada sólido es proporcional a la concentración y su altura al volumen, así que ambos contienen el mismo 1 mol de soluto. Estira el diluido.",
+          "handle": "Volumen diluido V₂",
+          "caption": "Diluir hasta {v2} L da {c2} mol/L; el soluto sigue siendo {n} mol.",
+          "rowN": "Moles n = C₁V₁",
+          "rowFactor": "Factor de dilución V₂ / V₁",
+          "rowWater": "Agua añadida"
+        },
+        "curve": {
+          "title": "Concentración frente a volumen: c = n / V",
+          "subtitle": "0.5 mol de soluto llevados a distintos volúmenes finales. Duplicar el volumen reduce la concentración a la mitad.",
+          "handle": "Volumen final",
+          "caption": "En {v} L, 0.5 mol de soluto dan {c} mol/L.",
+          "axisV": "Volumen (L)",
+          "rowN": "Moles de soluto (n)",
+          "rowV": "Volumen final (V)",
+          "rowMmol": "Milimoles por litro",
+          "rowDouble": "c con el doble de volumen",
+          "rowHalf": "c con la mitad de volumen"
+        },
+        "droplet": {
+          "title": "Partículas en una gota",
+          "subtitle": "Una gota de disolución. El número de puntos está en escala logarítmica para que las disoluciones diluidas sigan visibles; las cifras reales por mililitro están en la tabla.",
+          "handle": "Molaridad de la gota",
+          "caption": "A {m} mol/L un mililitro contiene {units} unidades fórmula; la gota muestra {shown} puntos.",
+          "rowM": "Molaridad (c)",
+          "rowMmol": "Milimoles por litro",
+          "rowPerMlMol": "Moles en 1 mL",
+          "rowPerMl": "Unidades fórmula en 1 mL",
+          "rowPerUl": "Unidades fórmula en 1 µL",
+          "rowShown": "Puntos mostrados"
+        },
+        "serial": {
+          "title": "Dilución en serie, 1 : 10 por tubo",
+          "subtitle": "Empieza en {c} mol/L y pasa cada vez 1 mL a 9 mL de agua; cada tubo es diez veces más diluido que el anterior.",
+          "handle": "Tubo",
+          "step": "Tubo",
+          "caption": "Tras {k} transferencias el tubo contiene {c} mol/L.",
+          "rowK": "Transferencias (k)",
+          "rowFactor": "Dilución total",
+          "rowC": "Concentración en el tubo",
+          "rowMmol": "Milimoles por litro",
+          "rowTube": "Moles en 10 mL",
+          "rowWater": "Agua usada hasta ahora"
+        },
+        "ruler": {
+          "title": "Disoluciones reales en una regla logarítmica",
+          "subtitle": "Concentraciones típicas de disoluciones cotidianas y de laboratorio, desde la glucosa en sangre hasta el ácido sulfúrico concentrado, en escala logarítmica.",
+          "handle": "Disolución seleccionada",
+          "caption": "{name}: unos {m} mol/L.",
+          "rowName": "Disolución",
+          "rowFormula": "Soluto",
+          "rowM": "Molaridad típica",
+          "rowMmol": "Milimoles por litro",
+          "rowSaline": "Frente al suero salino 0.154 M",
+          "items": {
+            "bloodGlucose": "Glucosa en sangre",
+            "stomachAcid": "Ácido estomacal",
+            "saline": "Suero salino isotónico",
+            "seawater": "Agua de mar (sal)",
+            "vinegar": "Vinagre",
+            "labNaOH": "Hidróxido de sodio de laboratorio",
+            "sulfuric": "Ácido sulfúrico concentrado"
+          }
+        },
+        "solutes": {
+          "title": "Un mol de solutos comunes",
+          "subtitle": "La masa de un mol es igual a la masa molar en gramos, así que los mismos 0.5 mol (0.25 M × 2 L) pesan cantidades muy distintas.",
+          "handle": "Soluto seleccionado",
+          "caption": "Para preparar 2 L de {name} ({formula}) 0.25 M, pesa {g} g.",
+          "rowName": "Soluto",
+          "rowFormula": "Fórmula",
+          "rowMolarMass": "Masa molar",
+          "rowOneMolar": "Masa para 1 L de 1 M",
+          "rowDefault": "Masa para 2 L de 0.25 M",
+          "rowPer100": "Moles en 100 g",
+          "items": {
+            "naoh": "Hidróxido de sodio",
+            "nacl": "Cloruro de sodio",
+            "kmno4": "Permanganato de potasio",
+            "glucose": "Glucosa",
+            "cuso4": "Sulfato de cobre(II) pentahidratado",
+            "sucrose": "Sacarosa"
+          }
+        },
+        "donut": {
+          "title": "Disolución madre y agua en un litro",
+          "subtitle": "Para preparar 1 L de una concentración objetivo a partir de una disolución madre de 2 mol/L, mide V₁ = C₂V₂ / C₁ de disolución madre y completa con agua.",
+          "handle": "Concentración objetivo C₂",
+          "stock": "Madre",
+          "water": "Agua",
+          "caption": "Para {c2} mol/L toma {v1} mL de disolución madre y añade {water} mL de agua.",
+          "rowC1": "Concentración de la madre C₁",
+          "rowV2": "Volumen final V₂",
+          "rowC2": "Concentración objetivo C₂",
+          "rowWater": "Agua que añadir",
+          "rowPct": "Parte de madre en el volumen",
+          "rowRatio": "Proporción de dilución"
         }
       }
     },

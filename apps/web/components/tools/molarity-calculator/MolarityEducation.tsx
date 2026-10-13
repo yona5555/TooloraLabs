@@ -4,9 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import DilutionFlasksDiagram from "./DilutionFlasksDiagram";
-import MolarityDilutionRatioDiagram from "./MolarityDilutionRatioDiagram";
-import MolarityConcentrationGauge from "./MolarityConcentrationGauge";
+import { MolCurveCard, MolDonutCard, MolFlowCard, MolRulerCard, MolSerialCard } from "./MolarityCards2D";
+import { MolCylindersCard, MolDropletCard, MolHeapsCard } from "./MolarityCards3D";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -19,26 +18,23 @@ export default async function MolarityEducation() {
 
   return (
     <EncyclopediaPaper>
-      <MolarityConcentrationGauge />
-
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <DilutionFlasksDiagram
-          concentration1={2}
-          volume1={0.5}
-          concentration2={1}
-          volume2={1}
-          label1={t("intro.diagram.stockLabel")}
-          label2={t("intro.diagram.dilutedLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <MolFlowCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
-        <MolarityDilutionRatioDiagram caption={t("intro.dilutionRatioCaption")} />
+        <MolCylindersCard side="table-left" />
         <p>{t("intro.paragraph3")}</p>
+        <MolCurveCard side="visual-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <MolDropletCard side="table-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -51,12 +47,13 @@ export default async function MolarityEducation() {
               {exampleRows.map((row) => (
                 <tr key={row.calculation} className="border-b border-current/10">
                   <td className="px-3 py-2.5">{row.calculation}</td>
-                  <td className="px-3 py-2.5 font-mono font-semibold">{row.result}</td>
+                  <td className="px-3 py-2.5 font-semibold tabular-nums">{row.result}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <MolSerialCard side="visual-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -65,15 +62,19 @@ export default async function MolarityEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <MolRulerCard side="table-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <MolHeapsCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <MolDonutCard side="table-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -95,6 +96,7 @@ export default async function MolarityEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

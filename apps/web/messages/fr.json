@@ -9646,7 +9646,6 @@
         "v2Placeholder": "p. ex. 1",
         "calculate": "Calculer",
         "clear": "Effacer",
-        "variablesCaption": "La grandeur que vous calculez est mise en évidence.",
         "scenarioPresetsLabel": "Essayer un scénario réel :",
         "scenarios": {
           "salineIV": "Perfusion Saline Médicale",
@@ -9667,49 +9666,16 @@
         "v1": "V₁",
         "c2": "C₂",
         "v2": "V₂",
-        "diagramStock": "Initiale",
-        "diagramDiluted": "Diluée",
-        "diagramCaption": "La hauteur du liquide reflète le volume ; l'intensité de la couleur reflète la concentration.",
         "emptyStateMessage": "Saisissez les valeurs et appuyez sur Calculer pour voir votre résultat.",
         "molarity": "Molarité",
-        "beakerCaption": "Le nombre de points évolue avec la molarité — plus de points signifie une solution plus concentrée.",
-        "scaleTrace": "trace",
-        "scaleDilute": "diluée",
-        "scaleTypical": "typique",
-        "scaleStock": "mère",
-        "scaleConcentrated": "conc.",
-        "scaleCaption": "{value} mol/L sur une échelle logarithmique par rapport aux concentrations de référence courantes en laboratoire.",
         "dilutionFactor": "Facteur de Dilution"
       },
       "education": {
         "intro": {
           "title": "Comprendre la Molarité et la Dilution",
           "paragraph1": "La molarité (M) mesure la concentration d'une solution en moles de soluté par litre de solution : M = mol / L. Lorsque la masse du soluté est connue plutôt que ses moles directement, on calcule d'abord les moles en divisant la masse en grammes par la masse molaire de la substance en grammes par mole — la masse molaire du chlorure de sodium, 58,44 g/mol, signifie que dissoudre 58,44 g de NaCl pour obtenir un litre de solution donne une solution à 1 M.",
-          "diagram": {
-            "stockLabel": "Initiale",
-            "dilutedLabel": "Diluée",
-            "caption": "Diluer 0,5 L d'une solution initiale à 2 mol/L jusqu'à 1 L donne une solution diluée à 1 mol/L — le même nombre total de moles, réparti dans davantage de liquide."
-          },
           "paragraph2": "La dilution suit un principe simple de conservation : ajouter du solvant à une solution modifie son volume et sa concentration, mais pas le nombre total de moles de soluté présentes. Cela donne l'équation de dilution C₁V₁ = C₂V₂, où C₁ et V₁ sont la concentration et le volume avant dilution (la solution « initiale ») et C₂ et V₂ la concentration et le volume après ajout de solvant. Les moles étant conservées, cette équation peut être réarrangée pour calculer n'importe laquelle des quatre grandeurs à partir des trois autres.",
-          "paragraph3": "Diluer une solution abaisse toujours sa concentration exactement en proportion de l'augmentation de son volume — doubler le volume divise exactement par deux la concentration, le tripler la réduit au tiers, et ainsi de suite. Cette relation proportionnelle explique pourquoi les calculs de dilution ne nécessitent jamais de connaître la nature exacte du soluté : la même équation C₁V₁ = C₂V₂ s'applique quelle que soit la substance chimique concernée.",
-          "dilutionRatioCaption": "Chaque étape supplémentaire de dilution 1:2 divise la concentration par deux, atténuant la couleur proportionnellement.",
-          "concentrationGauge": {
-            "title": "À essayer : quelle est cette concentration ?",
-            "intro": "Choisissez une solution réelle pour voir sa molarité sur la jauge et la comparer à d'autres.",
-            "dilute": "Diluée",
-            "moderate": "Modérée",
-            "concentrated": "Concentrée",
-            "verdict": "{substance} est une solution {classification}.",
-            "particlesFact": "Dans 1 litre, cela représente environ {particles} × 10²³ particules dissoutes.",
-            "substances": {
-              "bloodGlucose": "Glycémie",
-              "stomachAcid": "Acide Gastrique",
-              "seawater": "Eau de Mer",
-              "vinegar": "Vinaigre",
-              "labNaOH": "Hydroxyde de Sodium de Qualité Laboratoire",
-              "concentratedH2SO4": "Acide Sulfurique Concentré"
-            }
-          }
+          "paragraph3": "Diluer une solution abaisse toujours sa concentration exactement en proportion de l'augmentation de son volume — doubler le volume divise exactement par deux la concentration, le tripler la réduit au tiers, et ainsi de suite. Cette relation proportionnelle explique pourquoi les calculs de dilution ne nécessitent jamais de connaître la nature exacte du soluté : la même équation C₁V₁ = C₂V₂ s'applique quelle que soit la substance chimique concernée."
         },
         "examples": {
           "title": "Exemples Résolus",
@@ -9821,14 +9787,6 @@
           "readOriginal": "Lire le Texte Original"
         }
       },
-      "gauge": {
-        "dilute": "Diluée",
-        "typical": "Concentration de laboratoire typique",
-        "concentrated": "Concentrée",
-        "mild": "Dilution légère",
-        "moderate": "Dilution modérée",
-        "high": "Dilution élevée"
-      },
       "shareExport": {
         "triggerLabel": "Partager / Exporter",
         "modalTitle": "Partager ou Exporter Ce Résultat",
@@ -9866,6 +9824,122 @@
           "concentratedHCl": "Acide Chlorhydrique Concentré",
           "concentratedAmmonia": "Solution d'Ammoniaque Concentrée",
           "concentratedH2SO4": "Acide Sulfurique Concentré"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Volume de la solution",
+          "handleDiluted": "Volume dilué V₂"
+        },
+        "flow": {
+          "title": "Des grammes à la molarité",
+          "subtitle": "Pesez du chlorure de sodium, divisez par sa masse molaire pour obtenir les moles, puis par le volume de 2 L pour obtenir la molarité. Faites glisser sur le rail pour changer la masse.",
+          "handle": "Masse de NaCl",
+          "caption": "{g} g de NaCl font {n} mol ; dans 2 L cela donne {m} mol/L.",
+          "rowMass": "Masse pesée (m)",
+          "rowMolarMass": "Masse molaire de NaCl (M)",
+          "rowVolume": "Volume de la solution (V)",
+          "rowUnits": "Entités formulaires (n × 6.022 × 10²³)"
+        },
+        "cylinders": {
+          "title": "Mêmes moles, deux formes : C₁V₁ = C₂V₂",
+          "subtitle": "La base de chaque solide est proportionnelle à la concentration et sa hauteur au volume : les deux contiennent la même 1 mol de soluté. Étirez la solution diluée.",
+          "handle": "Volume dilué V₂",
+          "caption": "Diluer jusqu'à {v2} L donne {c2} mol/L ; le soluté reste {n} mol.",
+          "rowN": "Moles n = C₁V₁",
+          "rowFactor": "Facteur de dilution V₂ / V₁",
+          "rowWater": "Eau ajoutée"
+        },
+        "curve": {
+          "title": "Concentration selon le volume : c = n / V",
+          "subtitle": "0.5 mol de soluté ajustée à différents volumes finaux. Doubler le volume divise la concentration par deux.",
+          "handle": "Volume final",
+          "caption": "Dans {v} L, 0.5 mol de soluté donne {c} mol/L.",
+          "axisV": "Volume (L)",
+          "rowN": "Moles de soluté (n)",
+          "rowV": "Volume final (V)",
+          "rowMmol": "Millimoles par litre",
+          "rowDouble": "c pour le double du volume",
+          "rowHalf": "c pour la moitié du volume"
+        },
+        "droplet": {
+          "title": "Particules dans une goutte",
+          "subtitle": "Une goutte de solution. Le nombre de points suit une échelle logarithmique pour que les solutions diluées restent visibles ; les vrais nombres par millilitre sont dans le tableau.",
+          "handle": "Molarité de la goutte",
+          "caption": "À {m} mol/L, un millilitre contient {units} entités formulaires ; la goutte montre {shown} points.",
+          "rowM": "Molarité (c)",
+          "rowMmol": "Millimoles par litre",
+          "rowPerMlMol": "Moles dans 1 mL",
+          "rowPerMl": "Entités formulaires dans 1 mL",
+          "rowPerUl": "Entités formulaires dans 1 µL",
+          "rowShown": "Points affichés"
+        },
+        "serial": {
+          "title": "Dilution en série, 1 : 10 par tube",
+          "subtitle": "Partez de {c} mol/L et transférez à chaque fois 1 mL dans 9 mL d'eau ; chaque tube est dix fois plus dilué que le précédent.",
+          "handle": "Tube",
+          "step": "Tube",
+          "caption": "Après {k} transferts, le tube contient {c} mol/L.",
+          "rowK": "Transferts (k)",
+          "rowFactor": "Dilution totale",
+          "rowC": "Concentration dans le tube",
+          "rowMmol": "Millimoles par litre",
+          "rowTube": "Moles dans 10 mL",
+          "rowWater": "Eau utilisée jusqu'ici"
+        },
+        "ruler": {
+          "title": "Solutions réelles sur une règle logarithmique",
+          "subtitle": "Concentrations typiques de solutions courantes et de laboratoire, du glucose sanguin à l'acide sulfurique concentré, sur une échelle logarithmique.",
+          "handle": "Solution choisie",
+          "caption": "{name} : environ {m} mol/L.",
+          "rowName": "Solution",
+          "rowFormula": "Soluté",
+          "rowM": "Molarité typique",
+          "rowMmol": "Millimoles par litre",
+          "rowSaline": "Par rapport au sérum physiologique 0.154 M",
+          "items": {
+            "bloodGlucose": "Glucose sanguin",
+            "stomachAcid": "Acide gastrique",
+            "saline": "Sérum physiologique",
+            "seawater": "Eau de mer (sel)",
+            "vinegar": "Vinaigre",
+            "labNaOH": "Soude de laboratoire",
+            "sulfuric": "Acide sulfurique concentré"
+          }
+        },
+        "solutes": {
+          "title": "Une mole de solutés courants",
+          "subtitle": "La masse d'une mole est égale à la masse molaire en grammes : les mêmes 0.5 mol (0.25 M × 2 L) pèsent des quantités très différentes.",
+          "handle": "Soluté choisi",
+          "caption": "Pour préparer 2 L de {name} ({formula}) à 0.25 M, pesez {g} g.",
+          "rowName": "Soluté",
+          "rowFormula": "Formule",
+          "rowMolarMass": "Masse molaire",
+          "rowOneMolar": "Masse pour 1 L à 1 M",
+          "rowDefault": "Masse pour 2 L à 0.25 M",
+          "rowPer100": "Moles dans 100 g",
+          "items": {
+            "naoh": "Hydroxyde de sodium",
+            "nacl": "Chlorure de sodium",
+            "kmno4": "Permanganate de potassium",
+            "glucose": "Glucose",
+            "cuso4": "Sulfate de cuivre(II) pentahydraté",
+            "sucrose": "Saccharose"
+          }
+        },
+        "donut": {
+          "title": "Solution mère et eau dans un litre",
+          "subtitle": "Pour préparer 1 L à une concentration cible à partir d'une solution mère à 2 mol/L, mesurez V₁ = C₂V₂ / C₁ de solution mère et complétez avec de l'eau.",
+          "handle": "Concentration cible C₂",
+          "stock": "Mère",
+          "water": "Eau",
+          "caption": "Pour {c2} mol/L, prélevez {v1} mL de solution mère et ajoutez {water} mL d'eau.",
+          "rowC1": "Concentration de la mère C₁",
+          "rowV2": "Volume final V₂",
+          "rowC2": "Concentration cible C₂",
+          "rowWater": "Eau à ajouter",
+          "rowPct": "Part de la mère dans le volume",
+          "rowRatio": "Rapport de dilution"
         }
       }
     },

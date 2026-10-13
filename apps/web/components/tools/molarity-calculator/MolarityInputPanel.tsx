@@ -6,7 +6,6 @@ import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
 import MolarityBasisTabs from "./MolarityBasisTabs";
 import MolarityDilutionSolveForTabs from "./MolarityDilutionSolveForTabs";
-import MolarityVariablesDiagram from "./MolarityVariablesDiagram";
 import type { ConcentrationBasis, DilutionSolveFor, MolarityMode } from "./types";
 
 type MolarityInputPanelProps = {
@@ -95,14 +94,8 @@ export default function MolarityInputPanel({
             <MolarityBasisTabs basis={concentrationBasis} onBasisChange={onConcentrationBasisChange} />
           </div>
 
-          <MolarityVariablesDiagram
-            solved="molarity"
-            order={["moles", "molarity", "volume"]}
-            labels={{ moles: "n", molarity: "M", volume: "V" }}
-            caption={t("variablesCaption")}
-          />
 
-          <form onSubmit={onCalculate} className="mt-4 space-y-5">
+          <form onSubmit={onCalculate} className="space-y-5">
             {concentrationBasis === "moles" ? (
               <ToolInput label={t("molesLabel")} type="text" inputMode="decimal" placeholder={t("molesPlaceholder")} value={moles} onChange={(e) => onMolesChange(e.target.value)} />
             ) : (
@@ -129,14 +122,8 @@ export default function MolarityInputPanel({
             <MolarityDilutionSolveForTabs active={dilutionSolveFor} onChange={onDilutionSolveForChange} />
           </div>
 
-          <MolarityVariablesDiagram
-            solved={dilutionSolveFor}
-            order={["c1", "v1", "c2", "v2"]}
-            labels={{ c1: "C₁", v1: "V₁", c2: "C₂", v2: "V₂" }}
-            caption={t("variablesCaption")}
-          />
 
-          <form onSubmit={onCalculate} className="mt-4 space-y-5">
+          <form onSubmit={onCalculate} className="space-y-5">
             {dilutionSolveFor !== "c1" && (
               <ToolInput label={t("c1Label")} type="text" inputMode="decimal" placeholder={t("c1Placeholder")} value={c1} onChange={(e) => onC1Change(e.target.value)} />
             )}

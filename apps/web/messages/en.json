@@ -9646,7 +9646,6 @@
         "v2Placeholder": "e.g. 1",
         "calculate": "Calculate",
         "clear": "Clear",
-        "variablesCaption": "The quantity you're solving for is highlighted.",
         "scenarioPresetsLabel": "Try a real scenario:",
         "scenarios": {
           "salineIV": "Medical Saline IV",
@@ -9667,49 +9666,16 @@
         "v1": "V₁",
         "c2": "C₂",
         "v2": "V₂",
-        "diagramStock": "Stock",
-        "diagramDiluted": "Diluted",
-        "diagramCaption": "Liquid height reflects volume; color intensity reflects concentration.",
         "emptyStateMessage": "Enter values and press Calculate to see your result.",
         "molarity": "Molarity",
-        "beakerCaption": "Dots scale with molarity — more dots means a more concentrated solution.",
-        "scaleTrace": "trace",
-        "scaleDilute": "dilute",
-        "scaleTypical": "typical",
-        "scaleStock": "stock",
-        "scaleConcentrated": "conc.",
-        "scaleCaption": "{value} mol/L on a log scale against common lab reference concentrations.",
         "dilutionFactor": "Dilution Factor"
       },
       "education": {
         "intro": {
           "title": "Understanding Molarity and Dilution",
           "paragraph1": "Molarity (M) measures the concentration of a solution as moles of solute per liter of solution: M = mol / L. When the solute's mass is known instead of its moles directly, moles are found first by dividing mass in grams by the substance's molar mass in grams per mole — sodium chloride's molar mass of 58.44 g/mol means 58.44 g of NaCl dissolved to make one liter of solution gives a 1 M solution.",
-          "diagram": {
-            "stockLabel": "Stock",
-            "dilutedLabel": "Diluted",
-            "caption": "Diluting 0.5 L of a 2 mol/L stock solution to 1 L yields a 1 mol/L diluted solution — the same total moles, spread through more liquid."
-          },
           "paragraph2": "Dilution follows a simple conservation principle: adding solvent to a solution changes its volume and concentration, but not the total moles of solute present. That gives the dilution equation C₁V₁ = C₂V₂, where C₁ and V₁ are the concentration and volume before dilution (the \"stock\" solution) and C₂ and V₂ are the concentration and volume after adding solvent. Because moles are conserved, this equation can be rearranged to solve for any one of the four quantities given the other three.",
-          "paragraph3": "Diluting a solution always lowers its concentration in exact proportion to how much its volume increases — doubling the volume exactly halves the concentration, tripling it cuts concentration to a third, and so on. This proportional relationship is why dilution calculations never require knowing what the solute actually is: the same C₁V₁ = C₂V₂ equation applies regardless of the specific chemical involved.",
-          "dilutionRatioCaption": "Each further 1:2 dilution step halves the concentration, fading the color proportionally.",
-          "concentrationGauge": {
-            "title": "Try It: How Concentrated Is That?",
-            "intro": "Pick a real-world solution to see its molarity on the gauge and compare it with others.",
-            "dilute": "Dilute",
-            "moderate": "Moderate",
-            "concentrated": "Concentrated",
-            "verdict": "{substance} is a {classification} solution.",
-            "particlesFact": "In 1 liter, that's about {particles} × 10²³ dissolved particles.",
-            "substances": {
-              "bloodGlucose": "Blood Glucose",
-              "stomachAcid": "Stomach Acid",
-              "seawater": "Seawater",
-              "vinegar": "Vinegar",
-              "labNaOH": "Lab-Grade Sodium Hydroxide",
-              "concentratedH2SO4": "Concentrated Sulfuric Acid"
-            }
-          }
+          "paragraph3": "Diluting a solution always lowers its concentration in exact proportion to how much its volume increases — doubling the volume exactly halves the concentration, tripling it cuts concentration to a third, and so on. This proportional relationship is why dilution calculations never require knowing what the solute actually is: the same C₁V₁ = C₂V₂ equation applies regardless of the specific chemical involved."
         },
         "examples": {
           "title": "Worked Examples",
@@ -9821,14 +9787,6 @@
           "readOriginal": "Read the Original Text"
         }
       },
-      "gauge": {
-        "dilute": "Dilute",
-        "typical": "Typical lab concentration",
-        "concentrated": "Concentrated",
-        "mild": "Mild dilution",
-        "moderate": "Moderate dilution",
-        "high": "High dilution"
-      },
       "shareExport": {
         "triggerLabel": "Share / Export",
         "modalTitle": "Share or Export This Result",
@@ -9866,6 +9824,122 @@
           "concentratedHCl": "Concentrated Hydrochloric Acid",
           "concentratedAmmonia": "Concentrated Ammonia Solution",
           "concentratedH2SO4": "Concentrated Sulfuric Acid"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Solution volume",
+          "handleDiluted": "Diluted volume V₂"
+        },
+        "flow": {
+          "title": "From Grams to Molarity",
+          "subtitle": "Weigh sodium chloride, divide by its molar mass to get moles, then by the 2 L volume to get molarity. Drag along the rail to change the mass.",
+          "handle": "Mass of NaCl",
+          "caption": "{g} g of NaCl is {n} mol; in 2 L that makes {m} mol/L.",
+          "rowMass": "Mass weighed (m)",
+          "rowMolarMass": "Molar mass of NaCl (M)",
+          "rowVolume": "Solution volume (V)",
+          "rowUnits": "Formula units (n × 6.022 × 10²³)"
+        },
+        "cylinders": {
+          "title": "Same Moles, Two Shapes: C₁V₁ = C₂V₂",
+          "subtitle": "Each solid's footprint is proportional to concentration and its height to volume, so both hold the same 1 mol of solute. Stretch the diluted one.",
+          "handle": "Diluted volume V₂",
+          "caption": "Diluting to {v2} L gives {c2} mol/L; the solute stays {n} mol.",
+          "rowN": "Moles n = C₁V₁",
+          "rowFactor": "Dilution factor V₂ / V₁",
+          "rowWater": "Water added"
+        },
+        "curve": {
+          "title": "Concentration vs Volume: c = n / V",
+          "subtitle": "0.5 mol of solute made up to different final volumes. Doubling the volume halves the concentration.",
+          "handle": "Final volume",
+          "caption": "In {v} L, 0.5 mol of solute gives {c} mol/L.",
+          "axisV": "Volume (L)",
+          "rowN": "Moles of solute (n)",
+          "rowV": "Final volume (V)",
+          "rowMmol": "Millimoles per litre",
+          "rowDouble": "c at twice the volume",
+          "rowHalf": "c at half the volume"
+        },
+        "droplet": {
+          "title": "Particles in a Droplet",
+          "subtitle": "A droplet of solution. The dot count is log-scaled so dilute solutions stay visible; the real numbers per millilitre are in the table.",
+          "handle": "Droplet molarity",
+          "caption": "At {m} mol/L one millilitre holds {units} formula units; the droplet shows {shown} dots.",
+          "rowM": "Molarity (c)",
+          "rowMmol": "Millimoles per litre",
+          "rowPerMlMol": "Moles in 1 mL",
+          "rowPerMl": "Formula units in 1 mL",
+          "rowPerUl": "Formula units in 1 µL",
+          "rowShown": "Dots shown"
+        },
+        "serial": {
+          "title": "Serial Dilution, 1 : 10 per Tube",
+          "subtitle": "Start from {c} mol/L and move 1 mL into 9 mL of water each time; every tube is ten times more dilute than the one before.",
+          "handle": "Tube",
+          "step": "Tube",
+          "caption": "After {k} transfers the tube holds {c} mol/L.",
+          "rowK": "Transfers (k)",
+          "rowFactor": "Total dilution",
+          "rowC": "Concentration in the tube",
+          "rowMmol": "Millimoles per litre",
+          "rowTube": "Moles in 10 mL",
+          "rowWater": "Water used so far"
+        },
+        "ruler": {
+          "title": "Real Solutions on a Log Ruler",
+          "subtitle": "Typical concentrations of everyday and laboratory solutions, from blood glucose to concentrated sulfuric acid, on a logarithmic scale.",
+          "handle": "Selected solution",
+          "caption": "{name}: about {m} mol/L.",
+          "rowName": "Solution",
+          "rowFormula": "Solute",
+          "rowM": "Typical molarity",
+          "rowMmol": "Millimoles per litre",
+          "rowSaline": "Compared with 0.154 M saline",
+          "items": {
+            "bloodGlucose": "Blood glucose",
+            "stomachAcid": "Stomach acid",
+            "saline": "Isotonic saline",
+            "seawater": "Seawater (salt)",
+            "vinegar": "Vinegar",
+            "labNaOH": "Lab sodium hydroxide",
+            "sulfuric": "Concentrated sulfuric acid"
+          }
+        },
+        "solutes": {
+          "title": "One Mole of Common Solutes",
+          "subtitle": "The mass of one mole equals the molar mass in grams, so the same 0.5 mol (0.25 M × 2 L) weighs very different amounts.",
+          "handle": "Selected solute",
+          "caption": "To make 2 L of 0.25 M {name} ({formula}), weigh {g} g.",
+          "rowName": "Solute",
+          "rowFormula": "Formula",
+          "rowMolarMass": "Molar mass",
+          "rowOneMolar": "Mass for 1 L of 1 M",
+          "rowDefault": "Mass for 2 L of 0.25 M",
+          "rowPer100": "Moles in 100 g",
+          "items": {
+            "naoh": "Sodium hydroxide",
+            "nacl": "Sodium chloride",
+            "kmno4": "Potassium permanganate",
+            "glucose": "Glucose",
+            "cuso4": "Copper(II) sulfate pentahydrate",
+            "sucrose": "Sucrose"
+          }
+        },
+        "donut": {
+          "title": "Stock and Water in One Litre",
+          "subtitle": "To make 1 L at a target concentration from 2 mol/L stock, measure V₁ = C₂V₂ / C₁ of stock and top up with water.",
+          "handle": "Target concentration C₂",
+          "stock": "Stock",
+          "water": "Water",
+          "caption": "For {c2} mol/L take {v1} mL of stock and add {water} mL of water.",
+          "rowC1": "Stock concentration C₁",
+          "rowV2": "Final volume V₂",
+          "rowC2": "Target concentration C₂",
+          "rowWater": "Water to add",
+          "rowPct": "Stock share of the volume",
+          "rowRatio": "Dilution ratio"
         }
       }
     },

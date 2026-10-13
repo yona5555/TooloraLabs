@@ -1,13 +1,14 @@
 "use client";
-import { Calculator } from "lucide-react";
+import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import RatioGauge from "@/components/tool-ui/RatioGauge";
-import DilutionFlasksDiagram from "./DilutionFlasksDiagram";
-import MolarityBeakerDiagram from "./MolarityBeakerDiagram";
-import MolarityConcentrationScaleDiagram from "./MolarityConcentrationScaleDiagram";
+import { PhText } from "../ph-calculator/PhCardKit";
+import { usePhColors } from "../ph-calculator/phColors";
 import MolarityShareExportModal from "./MolarityShareExportModal";
+import MolarityModeTabs from "./MolarityModeTabs";
+import MolarityResultScene from "./MolarityResultScene";
+import { shownParticles } from "./molMath";
 import type { MolarityMode, MolarityResult as Result } from "./types";
 
 type Props = {
@@ -15,205 +16,176 @@ type Props = {
   result: Result;
   mode: MolarityMode;
   digitStyle: DigitStyle;
+  /** Volume (L) in the concentration scene: the V field. */
+  volume: number;
+  /** Seed volume the scene's reset returns to (the calculator default for this mode). */
+  seedVolume: number;
+  onSetVolume: (v: number) => void;
+  onModeChange: (mode: MolarityMode) => void;
 };
 
 const CONCENTRATION_GAUGE_MIN = -3.5;
 const CONCENTRATION_GAUGE_MAX = 1.5;
 const DILUTION_GAUGE_MAX = 50;
 
-export default function MolarityResult({ hasCalculated, result, mode, digitStyle }: Props) {
+/**
+ * §44: the Result card is the 3D card — the beaker scene first, directly under the header band,
+ * then the molarity (or C₁ V₁ C₂ V₂) values, then the mode tabs, all inside this one card.
+ */
+export default function MolarityResult({ hasCalculated, result, mode, digitStyle, volume, seedVolume, onSetVolume, onModeChange }: Props) {
   const t = useTranslations("tools.molarity-calculator.result");
   const tForm = useTranslations("tools.molarity-calculator.form");
-  const tGauge = useTranslations("tools.molarity-calculator.gauge");
+  const tc = useTranslations("tools.ph-calculator.visuals.common");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 4 });
-
-  if (!hasCalculated) {
-    return (
-      <SectionCard title={t("heading")}>
-        <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
-          <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
-          <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("emptyStateMessage")}</p>
-        </div>
-      </SectionCard>
-    );
-  }
-
-  if (result.error === "zero-volume") return <ErrorCard heading={t("heading")} message={t("zeroVolume")} />;
-  if (result.error === "zero-molar-mass") return <ErrorCard heading={t("heading")} message={t("zeroMolarMass")} />;
-  if (result.error === "zero-denominator") return <ErrorCard heading={t("heading")} message={t("zeroDenominator")} />;
-
+  const zone = usePhColors(["--chem-solvent", "--chem-tint", "--chem-solute", "--ph-neutral", "--chem-stock", "--chem-hot"]);
+  const z = (k: string) => zone?.[k] ?? "currentColor";
+  const valid = hasCalculated && !result.error;
+  const errorKey = result.error === "zero-volume" ? "zeroVolume" : result.error === "zero-molar-mass" ? "zeroMolarMass" : result.error === "zero-denominator" ? "zeroDenominator" : null;
   const operationLabel = tForm(`mode.${mode}`);
+  const dil = mode === "dilution";
 
-  if (mode === "concentration") {
-    const heroValue = `${fmt(result.molarity)} mol/L`;
-    const gaugeValue = Math.log10(Math.max(result.molarity, 1e-4));
-    const gaugeCaption = gaugeValue < -1.5 ? tGauge("dilute") : gaugeValue < 0.5 ? tGauge("typical") : tGauge("concentrated");
-
-    return (
-      <div className="flex flex-col gap-4">
-        <SectionCard
-          title={t("heading")}
-          action={
-            <MolarityShareExportModal
-              operationLabel={operationLabel}
-              inputRows={[{ label: tForm("molesLabel"), value: `${fmt(result.moles)} mol` }]}
-              resultRows={[{ label: t("molarity"), value: heroValue }]}
-              heroLabel={t("molarity")}
-              heroValue={heroValue}
-              sentence={t("molesSummary", { moles: fmt(result.moles) })}
-              gauge={{
-                zones: [
-                  { from: CONCENTRATION_GAUGE_MIN, to: -1.5, color: "#3b82f6" },
-                  { from: -1.5, to: 0.5, color: "#22c55e" },
-                  { from: 0.5, to: CONCENTRATION_GAUGE_MAX, color: "#ef4444" },
-                ],
-                domainMin: CONCENTRATION_GAUGE_MIN,
-                domainMax: CONCENTRATION_GAUGE_MAX,
-                value: gaugeValue,
-                ticks: [CONCENTRATION_GAUGE_MIN, -1.5, 0.5, CONCENTRATION_GAUGE_MAX],
-              }}
-            />
-          }
-        >
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {fmt(result.molarity)} <span className="text-xl font-semibold text-blue-500 dark:text-blue-300">mol/L</span>
-          </p>
-          <p className="mt-3 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("molesSummary", { moles: fmt(result.moles) })}</p>
-
-          <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-            <MolarityBeakerDiagram
-              dotCount={Math.max(1, Math.min(24, result.molarity * 8))}
-              molesLabel={`n = ${fmt(result.moles)} mol`}
-              volumeLabel={tForm("volumeLabel")}
-              caption={t("beakerCaption")}
-            />
-          </div>
-
-          <div className="mt-4 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
-            <RatioGauge
-              value={gaugeValue}
-              domainMin={CONCENTRATION_GAUGE_MIN}
-              domainMax={CONCENTRATION_GAUGE_MAX}
-              zones={[
-                { key: "dilute", from: CONCENTRATION_GAUGE_MIN, to: -1.5, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
-                { key: "typical", from: -1.5, to: 0.5, colorClass: "stroke-green-500 dark:stroke-green-400" },
-                { key: "concentrated", from: 0.5, to: CONCENTRATION_GAUGE_MAX, colorClass: "stroke-red-500 dark:stroke-red-400" },
-              ]}
-              valueLabel={heroValue}
-              caption={gaugeCaption}
-              ticks={[CONCENTRATION_GAUGE_MIN, -1.5, 0.5, CONCENTRATION_GAUGE_MAX]}
-            />
-          </div>
-
-          <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-            <MolarityConcentrationScaleDiagram
-              molarity={result.molarity}
-              labels={[t("scaleTrace"), t("scaleDilute"), t("scaleTypical"), t("scaleStock"), t("scaleConcentrated")]}
-              caption={t("scaleCaption", { value: fmt(result.molarity) })}
-            />
-          </div>
-        </SectionCard>
-      </div>
-    );
-  }
+  // Scene state: what the beakers show (falls back to the seed before the first calculation).
+  const sceneVolume = dil ? (valid ? result.v2 : 1) : volume;
+  const sceneMoles = dil ? (valid ? result.c1 * result.v1 : 1) : valid ? result.moles : 0.5;
+  const scene = {
+    mode,
+    volume: sceneVolume > 0 ? sceneVolume : seedVolume,
+    molarity: dil ? (valid ? result.c2 : 1) : valid ? result.molarity : 0.25,
+    particles: shownParticles(sceneMoles),
+    stockVolume: valid ? result.v1 : 0.5,
+    stockMolarity: valid ? result.c1 : 2,
+  };
 
   const dilutionFactor = result.v1 > 0 ? result.v2 / result.v1 : 1;
-  const gaugeValue = Math.max(1, Math.min(DILUTION_GAUGE_MAX, dilutionFactor));
-  const gaugeCaption = dilutionFactor < 5 ? tGauge("mild") : dilutionFactor < 20 ? tGauge("moderate") : tGauge("high");
-  const heroValue = `${fmt(dilutionFactor)}×`;
+  const concValue = `${fmt(result.molarity)} mol/L`;
+  const share = !valid ? null : dil ? (
+    <MolarityShareExportModal
+      operationLabel={operationLabel}
+      inputRows={[
+        { label: t("c1"), value: fmt(result.c1) },
+        { label: t("v1"), value: fmt(result.v1) },
+      ]}
+      resultRows={[
+        { label: t("c2"), value: fmt(result.c2) },
+        { label: t("v2"), value: fmt(result.v2) },
+      ]}
+      heroLabel={t("dilutionFactor")}
+      heroValue={`${fmt(dilutionFactor)}×`}
+      sentence={`C1V1=C2V2 — C1 ${fmt(result.c1)}, V1 ${fmt(result.v1)}, C2 ${fmt(result.c2)}, V2 ${fmt(result.v2)}`}
+      gauge={{
+        zones: [
+          { from: 1, to: 5, color: z("--ph-neutral") },
+          { from: 5, to: 20, color: z("--chem-stock") },
+          { from: 20, to: DILUTION_GAUGE_MAX, color: z("--chem-hot") },
+        ],
+        domainMin: 1,
+        domainMax: DILUTION_GAUGE_MAX,
+        value: Math.max(1, Math.min(DILUTION_GAUGE_MAX, dilutionFactor)),
+        ticks: [1, 5, 20, DILUTION_GAUGE_MAX],
+      }}
+    />
+  ) : (
+    <MolarityShareExportModal
+      operationLabel={operationLabel}
+      inputRows={[{ label: tForm("molesLabel"), value: `${fmt(result.moles)} mol` }]}
+      resultRows={[{ label: t("molarity"), value: concValue }]}
+      heroLabel={t("molarity")}
+      heroValue={concValue}
+      sentence={t("molesSummary", { moles: fmt(result.moles) })}
+      gauge={{
+        zones: [
+          { from: CONCENTRATION_GAUGE_MIN, to: -1.5, color: z("--chem-solvent") },
+          { from: -1.5, to: 0.5, color: z("--chem-tint") },
+          { from: 0.5, to: CONCENTRATION_GAUGE_MAX, color: z("--chem-solute") },
+        ],
+        domainMin: CONCENTRATION_GAUGE_MIN,
+        domainMax: CONCENTRATION_GAUGE_MAX,
+        value: Math.log10(Math.max(result.molarity, 1e-4)),
+        ticks: [CONCENTRATION_GAUGE_MIN, -1.5, 0.5, CONCENTRATION_GAUGE_MAX],
+      }}
+    />
+  );
+
+  const dtClass = "text-xs font-semibold tracking-wide text-zinc-600 normal-case dark:text-zinc-300";
+  const ddClass = "text-xs font-semibold whitespace-nowrap tabular-nums text-zinc-800 sm:text-sm dark:text-zinc-100";
 
   return (
-    <div className="flex flex-col gap-4">
+    <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal lg:flex-1" style={{ fontFamily: "var(--glass-font)" }}>
       <SectionCard
+        id="mol-result"
         title={t("heading")}
+        className="flex flex-col lg:flex-1"
+        bodyClassName="flex flex-1 flex-col p-4 lg:p-6"
         action={
-          <MolarityShareExportModal
-            operationLabel={operationLabel}
-            inputRows={[
-              { label: t("c1"), value: fmt(result.c1) },
-              { label: t("v1"), value: fmt(result.v1) },
-            ]}
-            resultRows={[
-              { label: t("c2"), value: fmt(result.c2) },
-              { label: t("v2"), value: fmt(result.v2) },
-            ]}
-            heroLabel={t("dilutionFactor")}
-            heroValue={heroValue}
-            sentence={`C1V1=C2V2 — C1 ${fmt(result.c1)}, V1 ${fmt(result.v1)}, C2 ${fmt(result.c2)}, V2 ${fmt(result.v2)}`}
-            gauge={{
-              zones: [
-                { from: 1, to: 5, color: "#22c55e" },
-                { from: 5, to: 20, color: "#f59e0b" },
-                { from: 20, to: DILUTION_GAUGE_MAX, color: "#ef4444" },
-              ],
-              domainMin: 1,
-              domainMax: DILUTION_GAUGE_MAX,
-              value: gaugeValue,
-              ticks: [1, 5, 20, DILUTION_GAUGE_MAX],
-            }}
-          />
+          <span className="flex items-center gap-2">
+            <span role="img" aria-label={tc("interactive")} title={tc("interactive")} data-ph-interactive className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
+              <Hand size={15} aria-hidden />
+            </span>
+            {share}
+          </span>
         }
       >
-        <dl dir="ltr" className="grid grid-cols-2 gap-4 text-center">
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("c1")}</dt>
-            <dd className="font-mono text-xl font-bold text-blue-700 dark:text-blue-400">{fmt(result.c1)}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("v1")}</dt>
-            <dd className="font-mono text-xl font-bold text-blue-700 dark:text-blue-400">{fmt(result.v1)}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("c2")}</dt>
-            <dd className="font-mono text-xl font-bold text-blue-700 dark:text-blue-400">{fmt(result.c2)}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("v2")}</dt>
-            <dd className="font-mono text-xl font-bold text-blue-700 dark:text-blue-400">{fmt(result.v2)}</dd>
-          </div>
-        </dl>
+        <MolarityResultScene p={scene} seed={seedVolume} onSetVolume={onSetVolume} />
 
-        <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          <DilutionFlasksDiagram
-            concentration1={result.c1}
-            volume1={result.v1}
-            concentration2={result.c2}
-            volume2={result.v2}
-            label1={t("diagramStock")}
-            label2={t("diagramDiluted")}
-            caption={t("diagramCaption")}
-          />
+        <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />
+        <div data-ph-result-values>
+          {!hasCalculated ? (
+            <div className="flex flex-col items-center gap-2 text-center">
+              <Calculator size={28} className="text-zinc-400 dark:text-zinc-500" />
+              <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("emptyStateMessage")}</p>
+            </div>
+          ) : errorKey ? (
+            <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(errorKey)}</p>
+          ) : dil ? (
+            <>
+              <p dir="ltr" data-testid="mol-result-main" className="text-center text-4xl font-bold tabular-nums text-blue-700 dark:text-blue-400">
+                {fmt(result.c2)} <span className="text-xl font-semibold text-blue-600 dark:text-blue-300">mol/L</span>
+              </p>
+              <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+                {t("dilutionFactor")}: <bdi dir="ltr">{fmt(dilutionFactor)}×</bdi>
+              </p>
+              <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />
+              <dl dir="ltr" data-ph-subvalues className="grid grid-cols-4 gap-3 text-center text-sm">
+                {(["c1", "v1", "c2", "v2"] as const).map((k) => (
+                  <div key={k}>
+                    <dt className={dtClass}>
+                      <PhText text={t(k)} />
+                    </dt>
+                    <dd className={ddClass}>{`${fmt(result[k])} ${k.startsWith("c") ? "M" : "L"}`}</dd>
+                  </div>
+                ))}
+              </dl>
+            </>
+          ) : (
+            <>
+              <p dir="ltr" data-testid="mol-result-main" className="text-center text-4xl font-bold tabular-nums text-blue-700 dark:text-blue-400">
+                {fmt(result.molarity)} <span className="text-xl font-semibold text-blue-600 dark:text-blue-300">mol/L</span>
+              </p>
+              <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t("molesSummary", { moles: fmt(result.moles) })}</p>
+              <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />
+              <dl dir="ltr" data-ph-subvalues className="grid grid-cols-3 gap-3 text-center text-sm">
+                <div>
+                  <dt className={dtClass}>{tForm("molesLabel")}</dt>
+                  <dd className={ddClass}>{fmt(result.moles)}</dd>
+                </div>
+                <div>
+                  <dt className={dtClass}>{tForm("volumeLabel")}</dt>
+                  <dd className={ddClass}>{fmt(volume)}</dd>
+                </div>
+                <div>
+                  <dt className={dtClass}>{t("molarity")}</dt>
+                  <dd className={ddClass}>{fmt(result.molarity)}</dd>
+                </div>
+              </dl>
+            </>
+          )}
         </div>
 
-        <div className="mt-4 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
-          <RatioGauge
-            value={gaugeValue}
-            domainMin={1}
-            domainMax={DILUTION_GAUGE_MAX}
-            zones={[
-              { key: "mild", from: 1, to: 5, colorClass: "stroke-green-500 dark:stroke-green-400" },
-              { key: "moderate", from: 5, to: 20, colorClass: "stroke-amber-500 dark:stroke-amber-400" },
-              { key: "high", from: 20, to: DILUTION_GAUGE_MAX, colorClass: "stroke-red-500 dark:stroke-red-400" },
-            ]}
-            valueLabel={heroValue}
-            caption={gaugeCaption}
-            ticks={[1, 5, 20, DILUTION_GAUGE_MAX]}
-          />
+        <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />
+        <div data-ph-mode-tabs>
+          <MolarityModeTabs mode={mode} onModeChange={onModeChange} />
         </div>
       </SectionCard>
-    </div>
-  );
-}
-
-function ErrorCard({ heading, message }: { heading: string; message: string }) {
-  return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{heading}</h2>
-      </div>
-      <div className="p-4 lg:p-6">
-        <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{message}</p>
-      </div>
     </div>
   );
 }

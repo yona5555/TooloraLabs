@@ -9646,7 +9646,6 @@
         "v2Placeholder": "z. B. 1",
         "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "variablesCaption": "Die gesuchte Größe ist hervorgehoben.",
         "scenarioPresetsLabel": "Ein reales Szenario ausprobieren:",
         "scenarios": {
           "salineIV": "Medizinische Kochsalzinfusion",
@@ -9667,49 +9666,16 @@
         "v1": "V₁",
         "c2": "C₂",
         "v2": "V₂",
-        "diagramStock": "Stammlösung",
-        "diagramDiluted": "Verdünnt",
-        "diagramCaption": "Die Flüssigkeitshöhe spiegelt das Volumen wider; die Farbintensität spiegelt die Konzentration wider.",
         "emptyStateMessage": "Werte eingeben und auf Berechnen klicken, um dein Ergebnis zu sehen.",
         "molarity": "Molarität",
-        "beakerCaption": "Die Punktanzahl skaliert mit der Molarität — mehr Punkte bedeuten eine konzentriertere Lösung.",
-        "scaleTrace": "Spur",
-        "scaleDilute": "verdünnt",
-        "scaleTypical": "typisch",
-        "scaleStock": "Stammlösung",
-        "scaleConcentrated": "konz.",
-        "scaleCaption": "{value} mol/L auf einer logarithmischen Skala gegenüber gängigen Laborreferenzkonzentrationen.",
         "dilutionFactor": "Verdünnungsfaktor"
       },
       "education": {
         "intro": {
           "title": "Molarität und Verdünnung verstehen",
           "paragraph1": "Die Molarität (M) misst die Konzentration einer Lösung als Stoffmenge des gelösten Stoffs pro Liter Lösung: M = mol / l. Ist statt der Stoffmenge direkt die Masse des gelösten Stoffs bekannt, wird die Stoffmenge zunächst ermittelt, indem die Masse in Gramm durch die molare Masse des Stoffs in Gramm pro Mol geteilt wird — die molare Masse von Natriumchlorid, 58,44 g/mol, bedeutet, dass 58,44 g NaCl, gelöst zu einem Liter Lösung, eine 1-M-Lösung ergeben.",
-          "diagram": {
-            "stockLabel": "Stammlösung",
-            "dilutedLabel": "Verdünnt",
-            "caption": "Das Verdünnen von 0,5 l einer 2-mol/l-Stammlösung auf 1 l ergibt eine verdünnte Lösung mit 1 mol/l — dieselbe Gesamtstoffmenge, verteilt auf mehr Flüssigkeit."
-          },
           "paragraph2": "Verdünnung folgt einem einfachen Erhaltungsprinzip: Das Hinzufügen von Lösungsmittel zu einer Lösung ändert deren Volumen und Konzentration, nicht aber die gesamte Stoffmenge des vorhandenen gelösten Stoffs. Daraus ergibt sich die Verdünnungsgleichung C₁V₁ = C₂V₂, wobei C₁ und V₁ Konzentration und Volumen vor der Verdünnung (die „Stammlösung“) sind und C₂ und V₂ Konzentration und Volumen nach Zugabe des Lösungsmittels. Da die Stoffmenge erhalten bleibt, lässt sich diese Gleichung nach jeder der vier Größen umstellen, sofern die anderen drei bekannt sind.",
-          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie.",
-          "dilutionRatioCaption": "Jeder weitere 1:2-Verdünnungsschritt halbiert die Konzentration und lässt die Farbe entsprechend verblassen.",
-          "concentrationGauge": {
-            "title": "Ausprobieren: Wie konzentriert ist das?",
-            "intro": "Wähle eine reale Lösung, um ihre Molarität auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "dilute": "Verdünnt",
-            "moderate": "Mittel",
-            "concentrated": "Konzentriert",
-            "verdict": "{substance} ist eine {classification} Lösung.",
-            "particlesFact": "In 1 Liter sind das etwa {particles} × 10²³ gelöste Teilchen.",
-            "substances": {
-              "bloodGlucose": "Blutzucker",
-              "stomachAcid": "Magensäure",
-              "seawater": "Meerwasser",
-              "vinegar": "Essig",
-              "labNaOH": "Laborgradiges Natriumhydroxid",
-              "concentratedH2SO4": "Konzentrierte Schwefelsäure"
-            }
-          }
+          "paragraph3": "Das Verdünnen einer Lösung senkt ihre Konzentration stets genau proportional zur Zunahme ihres Volumens — eine Verdopplung des Volumens halbiert die Konzentration exakt, eine Verdreifachung senkt sie auf ein Drittel, und so weiter. Diese proportionale Beziehung ist der Grund, warum Verdünnungsberechnungen nie wissen müssen, um welchen gelösten Stoff es sich tatsächlich handelt: Dieselbe Gleichung C₁V₁ = C₂V₂ gilt unabhängig von der konkreten beteiligten Chemikalie."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -9821,14 +9787,6 @@
           "readOriginal": "Originaltext lesen"
         }
       },
-      "gauge": {
-        "dilute": "Verdünnt",
-        "typical": "Typische Laborkonzentration",
-        "concentrated": "Konzentriert",
-        "mild": "Geringe Verdünnung",
-        "moderate": "Mittlere Verdünnung",
-        "high": "Hohe Verdünnung"
-      },
       "shareExport": {
         "triggerLabel": "Teilen / Exportieren",
         "modalTitle": "Dieses Ergebnis teilen oder exportieren",
@@ -9866,6 +9824,122 @@
           "concentratedHCl": "Konzentrierte Salzsäure",
           "concentratedAmmonia": "Konzentrierte Ammoniaklösung",
           "concentratedH2SO4": "Konzentrierte Schwefelsäure"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Lösungsvolumen",
+          "handleDiluted": "Verdünntes Volumen V₂"
+        },
+        "flow": {
+          "title": "Von Gramm zur Molarität",
+          "subtitle": "Natriumchlorid abwiegen, durch die molare Masse teilen, um die Stoffmenge zu erhalten, dann durch das Volumen von 2 L, um die Molarität zu erhalten. Auf der Schiene ziehen, um die Masse zu ändern.",
+          "handle": "Masse NaCl",
+          "caption": "{g} g NaCl sind {n} mol; in 2 L ergibt das {m} mol/L.",
+          "rowMass": "Eingewogene Masse (m)",
+          "rowMolarMass": "Molare Masse von NaCl (M)",
+          "rowVolume": "Lösungsvolumen (V)",
+          "rowUnits": "Formeleinheiten (n × 6.022 × 10²³)"
+        },
+        "cylinders": {
+          "title": "Gleiche Stoffmenge, zwei Formen: C₁V₁ = C₂V₂",
+          "subtitle": "Die Grundfläche jedes Körpers ist proportional zur Konzentration, seine Höhe zum Volumen, daher enthalten beide dasselbe 1 mol gelösten Stoff. Strecken Sie die verdünnte Lösung.",
+          "handle": "Verdünntes Volumen V₂",
+          "caption": "Verdünnen auf {v2} L ergibt {c2} mol/L; der gelöste Stoff bleibt {n} mol.",
+          "rowN": "Stoffmenge n = C₁V₁",
+          "rowFactor": "Verdünnungsfaktor V₂ / V₁",
+          "rowWater": "Zugegebenes Wasser"
+        },
+        "curve": {
+          "title": "Konzentration gegen Volumen: c = n / V",
+          "subtitle": "0.5 mol gelöster Stoff, auf verschiedene Endvolumina aufgefüllt. Doppeltes Volumen halbiert die Konzentration.",
+          "handle": "Endvolumen",
+          "caption": "In {v} L ergeben 0.5 mol gelöster Stoff {c} mol/L.",
+          "axisV": "Volumen (L)",
+          "rowN": "Stoffmenge des gelösten Stoffs (n)",
+          "rowV": "Endvolumen (V)",
+          "rowMmol": "Millimol pro Liter",
+          "rowDouble": "c beim doppelten Volumen",
+          "rowHalf": "c beim halben Volumen"
+        },
+        "droplet": {
+          "title": "Teilchen in einem Tropfen",
+          "subtitle": "Ein Tropfen Lösung. Die Punktzahl ist logarithmisch skaliert, damit verdünnte Lösungen sichtbar bleiben; die echten Zahlen pro Milliliter stehen in der Tabelle.",
+          "handle": "Molarität des Tropfens",
+          "caption": "Bei {m} mol/L enthält ein Milliliter {units} Formeleinheiten; der Tropfen zeigt {shown} Punkte.",
+          "rowM": "Molarität (c)",
+          "rowMmol": "Millimol pro Liter",
+          "rowPerMlMol": "Stoffmenge in 1 mL",
+          "rowPerMl": "Formeleinheiten in 1 mL",
+          "rowPerUl": "Formeleinheiten in 1 µL",
+          "rowShown": "Angezeigte Punkte"
+        },
+        "serial": {
+          "title": "Verdünnungsreihe, 1 : 10 pro Röhrchen",
+          "subtitle": "Beginnen Sie bei {c} mol/L und überführen Sie jedes Mal 1 mL in 9 mL Wasser; jedes Röhrchen ist zehnmal verdünnter als das vorherige.",
+          "handle": "Röhrchen",
+          "step": "Röhrchen",
+          "caption": "Nach {k} Überführungen enthält das Röhrchen {c} mol/L.",
+          "rowK": "Überführungen (k)",
+          "rowFactor": "Gesamtverdünnung",
+          "rowC": "Konzentration im Röhrchen",
+          "rowMmol": "Millimol pro Liter",
+          "rowTube": "Stoffmenge in 10 mL",
+          "rowWater": "Bisher verbrauchtes Wasser"
+        },
+        "ruler": {
+          "title": "Echte Lösungen auf einem logarithmischen Lineal",
+          "subtitle": "Typische Konzentrationen alltäglicher und Laborlösungen, vom Blutzucker bis zur konzentrierten Schwefelsäure, auf logarithmischer Skala.",
+          "handle": "Gewählte Lösung",
+          "caption": "{name}: etwa {m} mol/L.",
+          "rowName": "Lösung",
+          "rowFormula": "Gelöster Stoff",
+          "rowM": "Typische Molarität",
+          "rowMmol": "Millimol pro Liter",
+          "rowSaline": "Im Vergleich zu 0.154 M Kochsalzlösung",
+          "items": {
+            "bloodGlucose": "Blutzucker",
+            "stomachAcid": "Magensäure",
+            "saline": "Isotonische Kochsalzlösung",
+            "seawater": "Meerwasser (Salz)",
+            "vinegar": "Essig",
+            "labNaOH": "Labor-Natronlauge",
+            "sulfuric": "Konzentrierte Schwefelsäure"
+          }
+        },
+        "solutes": {
+          "title": "Ein Mol gängiger gelöster Stoffe",
+          "subtitle": "Die Masse eines Mols entspricht der molaren Masse in Gramm, daher wiegen dieselben 0.5 mol (0.25 M × 2 L) sehr unterschiedlich viel.",
+          "handle": "Gewählter Stoff",
+          "caption": "Für 2 L {name} ({formula}) mit 0.25 M wiegen Sie {g} g ab.",
+          "rowName": "Gelöster Stoff",
+          "rowFormula": "Formel",
+          "rowMolarMass": "Molare Masse",
+          "rowOneMolar": "Masse für 1 L mit 1 M",
+          "rowDefault": "Masse für 2 L mit 0.25 M",
+          "rowPer100": "Stoffmenge in 100 g",
+          "items": {
+            "naoh": "Natriumhydroxid",
+            "nacl": "Natriumchlorid",
+            "kmno4": "Kaliumpermanganat",
+            "glucose": "Glucose",
+            "cuso4": "Kupfer(II)-sulfat-Pentahydrat",
+            "sucrose": "Saccharose"
+          }
+        },
+        "donut": {
+          "title": "Stammlösung und Wasser in einem Liter",
+          "subtitle": "Um 1 L mit einer Zielkonzentration aus einer 2 mol/L Stammlösung herzustellen, messen Sie V₁ = C₂V₂ / C₁ Stammlösung ab und füllen mit Wasser auf.",
+          "handle": "Zielkonzentration C₂",
+          "stock": "Stamm",
+          "water": "Wasser",
+          "caption": "Für {c2} mol/L nehmen Sie {v1} mL Stammlösung und geben {water} mL Wasser hinzu.",
+          "rowC1": "Konzentration der Stammlösung C₁",
+          "rowV2": "Endvolumen V₂",
+          "rowC2": "Zielkonzentration C₂",
+          "rowWater": "Zuzugebendes Wasser",
+          "rowPct": "Anteil der Stammlösung am Volumen",
+          "rowRatio": "Verdünnungsverhältnis"
         }
       }
     },
