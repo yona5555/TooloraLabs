@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Search as SearchIcon } from "lucide-react";
+import { ArrowRight, ChevronDown, Search as SearchIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { tools } from "@/data/tools";
 import { getToolIcon } from "@/lib/tool-icons";
@@ -16,8 +16,8 @@ type RelatedToolsSidebarProps = {
   /** Heading shown above `relatedList`. Ignored if `relatedList` is omitted. */
   relatedListTitle?: string;
   /**
-   * Fill the column height ToolAboveFold `sidebarMatchRow` gives it: the tool list continues with
-   * more tools from the same category and grows (scrolling inside) instead of the card ending early.
+   * Continue the tool list with more tools from the same category (behind "Show more"). The card keeps
+   * its natural height; the ToolAboveFold `sidebarMatchRow` column space it doesn't use stays below it.
    */
   fill?: boolean;
 };
@@ -36,6 +36,7 @@ export default function RelatedToolsSidebar({
 
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const searchResults = useMemo(() => {
@@ -66,6 +67,10 @@ export default function RelatedToolsSidebar({
   const moreInCategory = fill
     ? tools.filter((tool) => tool.category === category && tool.slug !== currentSlug && !curated.includes(tool.slug)).map((tool) => tool.slug)
     : [];
+  const allRelated = [...curated, ...moreInCategory];
+  const VISIBLE_COUNT = 3;
+  const hiddenCount = allRelated.length - VISIBLE_COUNT;
+  const listId = `related-tools-${currentSlug}`;
 
   const toolLink = (slug: string) => {
     const Icon = getToolIcon(slug);
@@ -83,12 +88,9 @@ export default function RelatedToolsSidebar({
   };
 
   return (
-    <SectionCard
-      title={tCommon("relatedToolsTitle")}
-      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
-      bodyClassName={`flex flex-col gap-6 p-4 lg:p-6 ${fill ? "lg:flex-1" : ""}`}
-    >
-      <div className={`flex flex-col gap-4 ${fill ? "lg:flex-1" : ""}`}>
+    <>
+    <SectionCard title={tCommon("relatedToolsTitle")} bodyClassName="flex flex-col gap-6 p-4 lg:p-6">
+      <div className="flex flex-col gap-4">
         <div ref={containerRef} className="relative">
           <div className="flex items-center gap-2 rounded-xl border border-zinc-300 bg-white px-3 py-2 focus-within:border-blue-500 dark:border-zinc-700 dark:bg-zinc-800">
             <SearchIcon size={16} className="shrink-0 text-zinc-400" />
@@ -136,27 +138,29 @@ export default function RelatedToolsSidebar({
           )}
         </div>
 
-        {(curated.length > 0 || moreInCategory.length > 0) && (
-          <div className={`flex flex-col gap-2 ${fill ? "lg:flex-1" : ""}`}>
+        {allRelated.length > 0 && (
+          <div className="flex flex-col gap-2">
             {(relatedListTitle || fill) && (
               <p className="px-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
                 {curated.length > 0 && relatedListTitle ? relatedListTitle : tCategories(`${category}.title`)}
               </p>
             )}
-            <div className={`flex flex-col overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 ${fill ? "lg:flex-1" : ""}`}>
-              {curated.length > 0 && (
-                <ul className="flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800">{curated.map(toolLink)}</ul>
-              )}
-              {moreInCategory.length > 0 && (
-                // Out of flow so the list never makes the card taller; it shows as many tools as the
-                // row leaves room for and scrolls for the rest. Hidden below lg with the sidebar.
-                <div data-sidebar-grow className="relative min-h-0 flex-1">
-                  <ul
-                    className={`absolute inset-0 flex flex-col divide-y divide-zinc-100 overflow-y-auto dark:divide-zinc-800 ${curated.length > 0 ? "border-t border-zinc-100 dark:border-zinc-800" : ""}`}
-                  >
-                    {moreInCategory.map(toolLink)}
-                  </ul>
-                </div>
+            <div className="flex flex-col overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800">
+              <ul id={listId} className="flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800">
+                {allRelated.slice(0, VISIBLE_COUNT).map(toolLink)}
+                {expanded && allRelated.slice(VISIBLE_COUNT).map(toolLink)}
+              </ul>
+              {hiddenCount > 0 && (
+                <button
+                  type="button"
+                  aria-expanded={expanded}
+                  aria-controls={listId}
+                  onClick={() => setExpanded((v) => !v)}
+                  className="flex min-h-11 items-center justify-center gap-1.5 border-t border-zinc-100 px-3 text-sm font-medium text-blue-600 transition hover:bg-blue-50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-500 motion-reduce:transition-none dark:border-zinc-800 dark:text-blue-400 dark:hover:bg-blue-500/10"
+                >
+                  {expanded ? tCommon("relatedShowLess") : tCommon("relatedShowMore", { count: hiddenCount })}
+                  <ChevronDown size={14} className={`transition-transform motion-reduce:transition-none ${expanded ? "rotate-180" : ""}`} />
+                </button>
               )}
             </div>
           </div>
@@ -175,5 +179,8 @@ export default function RelatedToolsSidebar({
         <AdSpace className="mx-auto" />
       </div>
     </SectionCard>
+    {/* Unused sidebarMatchRow column height lands here, outside the card; ToolAboveFold subtracts it when measuring. */}
+    {fill && <div data-sidebar-grow aria-hidden="true" className="hidden lg:block lg:flex-1" />}
+    </>
   );
 }

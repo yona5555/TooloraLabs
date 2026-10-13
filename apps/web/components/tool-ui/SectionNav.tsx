@@ -28,6 +28,12 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
   const itemsRef = useRef(items);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  // A caller that starts the bar hidden (`visible={false}`) wants it only as the stuck top bar. Such a
+  // bar never takes in-flow space: an invisible in-flow bar left an empty band (sentinel + two flex gaps
+  // + the bar + its margin, ~147px) under the card above it. Only the zero-height sentinel stays in flow,
+  // pulled up by the parent's own gap so it adds no gap either; it still marks the exact same stuck line.
+  const [gated] = useState(!visible);
+  const [parentGap, setParentGap] = useState(0);
 
   useEffect(() => {
     itemsRef.current = items;
@@ -161,6 +167,13 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
   }, []);
 
   useLayoutEffect(() => {
+    const parent = sentinelRef.current?.parentElement;
+    if (!gated || !parent) return;
+    const style = getComputedStyle(parent);
+    if (style.display.includes("flex") || style.display.includes("grid")) setParentGap(parseFloat(style.rowGap) || 0);
+  }, [gated]);
+
+  useLayoutEffect(() => {
     const el = navRef.current;
     if (!el) return;
 
@@ -187,14 +200,15 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
 
   return (
     <>
-      <div ref={sentinelRef} aria-hidden="true" />
-      {isStuck && <div aria-hidden="true" className="mb-6" style={{ height: navHeight }} />}
+      <div ref={sentinelRef} aria-hidden="true" style={gated && parentGap ? { marginBlockStart: -parentGap } : undefined} />
+      {isStuck && !gated && <div aria-hidden="true" className="mb-6" style={{ height: navHeight }} />}
       <nav
         ref={navRef}
         aria-label={t("sectionNavLabel")}
         className={`z-40 border-b border-zinc-200 bg-white/90 backdrop-blur-xl transition-opacity duration-300 dark:border-zinc-800 dark:bg-zinc-950/90 ${
-          isStuck ? "fixed inset-x-0 top-18" : "relative mb-6"
-        } ${visible ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          isStuck ? "fixed inset-x-0 top-18" : gated ? "absolute inset-x-0" : "relative mb-6"
+        } ${visible && (isStuck || !gated) ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        inert={gated && !(isStuck && visible) ? true : undefined}
       >
         <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6">
           {items.map((item) => (
