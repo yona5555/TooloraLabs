@@ -67,6 +67,7 @@ export * from "./StepByStepMathSolverGraph";
 export * from "./StepByStepMathSolverCurve";
 export * from "./GraphingCalculator";
 export * from "./GraphAnalysis";
+export * from "./FunctionGrapher";
 export * from "./NotepadCalculator";
 export * from "./NotepadMath";
 export * from "./GcfLcmCalculator";

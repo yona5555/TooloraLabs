@@ -68,7 +68,7 @@ export default function HomeCalculator() {
         </>
       )}
 
-      {mode === "graph" && <GraphCalculator />}
+      {mode === "graph" && <GraphCalculator calcDark={calcDark} />}
       {mode === "programmer" && <ProgrammerCalculator />}
       {mode === "converter" && <UnitConverter />}
     </div>
