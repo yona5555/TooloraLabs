@@ -4,12 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MolarMassCompositionBarDiagram from "./MolarMassCompositionBarDiagram";
-import MolarMassAtomicMassDiagram from "./MolarMassAtomicMassDiagram";
-import MolarMassAvogadroDiagram from "./MolarMassAvogadroDiagram";
-import MolarMassGroupNotationDiagram from "./MolarMassGroupNotationDiagram";
-import MolarMassFormulaBreakdownDiagram from "./MolarMassFormulaBreakdownDiagram";
-import MolarMassGauge from "./MolarMassGauge";
+import { MmAvogadroCard, MmCompositionCard, MmIsotopesCard, MmParserCard, MmRankedCard } from "./MolarMassCards2D";
+import { MmBeakerCard, MmGroupsCard, MmHydrateCard } from "./MolarMassCards3D";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -22,29 +18,24 @@ export default async function MolarMassEducation() {
 
   return (
     <EncyclopediaPaper>
-      <MolarMassGauge />
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <MolarMassCompositionBarDiagram
-          segments={[
-            { symbol: "C", percent: 40 },
-            { symbol: "H", percent: 6.7 },
-            { symbol: "O", percent: 53.3 },
-          ]}
-          caption={t("intro.composition.caption")}
-        />
+        <MmBeakerCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
-        <MolarMassAtomicMassDiagram
-          caption={t("intro.atomicMass.caption")}
-          isotopeLabels={[t("intro.atomicMass.isotope1"), t("intro.atomicMass.isotope2"), t("intro.atomicMass.isotope3")]}
-        />
+        <MmIsotopesCard side="table-left" />
         <p>{t("intro.paragraph3")}</p>
-        <MolarMassAvogadroDiagram caption={t("intro.avogadro.caption")} moleLabel={t("intro.avogadro.mole")} particleLabel={t("intro.avogadro.particles")} />
+        <MmHydrateCard side="visual-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <MmCompositionCard side="table-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -76,27 +67,22 @@ export default async function MolarMassEducation() {
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <MmRankedCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <MmAvogadroCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.groupSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.groupSection.paragraph")}</p>
-          <MolarMassGroupNotationDiagram caption={t("behindTheTool.groupSection.caption")} />
         </div>
+        <MmGroupsCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.parsingSection.title")}</h3>
           <p className="mt-2">{t("behindTheTool.parsingSection.paragraph")}</p>
-          <MolarMassFormulaBreakdownDiagram
-            elements={[
-              { symbol: "C", count: 6 },
-              { symbol: "H", count: 12 },
-              { symbol: "O", count: 6 },
-            ]}
-            caption={t("behindTheTool.parsingSection.caption")}
-          />
         </div>
+        <MmParserCard side="table-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -118,6 +104,7 @@ export default async function MolarMassEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

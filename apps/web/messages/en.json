@@ -13116,7 +13116,6 @@
         "formulaPlaceholder": "e.g. C6H12O6",
         "calculate": "Calculate",
         "clear": "Clear",
-        "breakdownDiagramCaption": "Live element count as you type — updates before the formula is even valid.",
         "scenarioPresetsLabel": "Try a real molecule:",
         "scenarios": {
           "water": "Water",
@@ -13137,46 +13136,14 @@
         "columnCount": "Count",
         "columnAtomicMass": "Atomic Mass",
         "columnSubtotal": "Subtotal",
-        "emptyStateMessage": "Enter a formula and press Calculate to see its molar mass.",
-        "compositionCaption": "Percent of the total mass contributed by each element."
+        "emptyStateMessage": "Enter a formula and press Calculate to see its molar mass."
       },
       "education": {
         "intro": {
           "title": "Understanding Molar Mass",
           "paragraph1": "Molar mass is the mass of one mole (6.022 × 10²³ particles) of a substance, expressed in grams per mole (g/mol). For a compound, it's found by adding up the atomic mass of every atom in its formula — water, H₂O, has a molar mass of 2×(1.008) + 15.999 = 18.015 g/mol, because a water molecule contains two hydrogen atoms and one oxygen atom. This calculator parses the formula you enter, counts every element (including inside parentheses or brackets, like the two hydroxide groups in Ca(OH)₂), and looks up each element's standard atomic weight to compute the total.",
           "paragraph2": "The atomic weights this calculator uses are the IUPAC conventional standard atomic weights — essentially a weighted average of an element's naturally occurring isotopes, which is why they aren't whole numbers (chlorine's 35.45 reflects a natural mix of mostly chlorine-35 and some chlorine-37). A handful of the heaviest elements (technetium, promethium, and everything from polonium onward) have no stable isotopes and thus no natural mixture to average — for these, the value in brackets is the mass number of their most stable known isotope instead.",
-          "paragraph3": "Formulas with a middle dot, bullet, or period followed by a number represent hydrates — compounds that incorporate water molecules into their crystal structure, like CuSO₄·5H₂O (copper(II) sulfate pentahydrate). The number before the water tells you how many water molecules are bound per formula unit of the compound, and this calculator adds that water's mass on top of the anhydrous compound's mass to get the hydrate's total molar mass.",
-          "composition": {
-            "caption": "Glucose (C₆H₁₂O₆): oxygen contributes over half the total mass despite having the fewest atoms."
-          },
-          "atomicMass": {
-            "caption": "Chlorine's atomic mass, 35.45, is a weighted average of its two stable isotopes' masses and natural abundances.",
-            "isotope1": "Cl-35 (76%)",
-            "isotope2": "Cl-37 (24%)",
-            "isotope3": "avg"
-          },
-          "avogadro": {
-            "caption": "A mole is a fixed count of particles, however small or large the particles themselves are.",
-            "mole": "1 mole",
-            "particles": "particles"
-          },
-          "massGauge": {
-            "title": "Try It: How Heavy Is That Molecule?",
-            "intro": "Pick a real molecule to see its molar mass on the gauge and compare it with others.",
-            "light": "Light",
-            "moderate": "Moderate",
-            "heavy": "Heavy",
-            "verdict": "{substance} is a {classification} molecule.",
-            "waterRatioFact": "That's about {ratio}× the mass of a water molecule (18 g/mol).",
-            "substances": {
-              "hydrogen": "Hydrogen Gas (H₂)",
-              "water": "Water (H₂O)",
-              "tableSalt": "Table Salt (NaCl)",
-              "glucose": "Glucose (C₆H₁₂O₆)",
-              "insulin": "Insulin",
-              "hemoglobin": "Hemoglobin"
-            }
-          }
+          "paragraph3": "Formulas with a middle dot, bullet, or period followed by a number represent hydrates — compounds that incorporate water molecules into their crystal structure, like CuSO₄·5H₂O (copper(II) sulfate pentahydrate). The number before the water tells you how many water molecules are bound per formula unit of the compound, and this calculator adds that water's mass on top of the anhydrous compound's mass to get the hydrate's total molar mass."
         },
         "examples": {
           "title": "Worked Examples",
@@ -13281,13 +13248,11 @@
           },
           "groupSection": {
             "title": "Parenthesized Groups",
-            "paragraph": "A subscript after a closing parenthesis multiplies every atom inside that group, not just a single unit of it — this is why Ca(OH)2 contains two oxygen and two hydrogen atoms, not one of each.",
-            "caption": "The group multiplier distributes across every atom inside the parentheses."
+            "paragraph": "A subscript after a closing parenthesis multiplies every atom inside that group, not just a single unit of it — this is why Ca(OH)2 contains two oxygen and two hydrogen atoms, not one of each."
           },
           "parsingSection": {
             "title": "Reading a Formula Left to Right",
-            "paragraph": "The parser reads a formula character by character, recognizing element symbols and their optional counts, and recursively handling any nested groups — the same technique reused by the equation balancer and stoichiometry calculator elsewhere on this site.",
-            "caption": "Glucose, C₆H₁₂O₆, parses into three elements with their respective atom counts."
+            "paragraph": "The parser reads a formula character by character, recognizing element symbols and their optional counts, and recursively handling any nested groups — the same technique reused by the equation balancer and stoichiometry calculator elsewhere on this site."
           }
         },
         "references": {
@@ -13336,6 +13301,97 @@
           "oxygen": "Oxygen",
           "sodium": "Sodium",
           "chlorine": "Chlorine"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Compound on the molar-mass rail",
+          "atoms": "{n} atoms per formula unit"
+        },
+        "compounds": {
+          "glucose": "Glucose",
+          "water": "Water",
+          "tableSalt": "Table salt",
+          "aspirin": "Aspirin",
+          "caffeine": "Caffeine",
+          "sulfuricAcid": "Sulfuric acid"
+        },
+        "beaker": {
+          "title": "Moles of Water, Weighed and Poured",
+          "subtitle": "Mass = moles × molar mass: each mole of H₂O adds 18.015 g, about 18 mL of liquid at 25 °C.",
+          "caption": "{n} mol of water weighs {m} g and fills {v} mL.",
+          "handle": "Moles of water",
+          "rowMoles": "Amount n",
+          "rowVolume": "V = m / ρ (ρ = 0.997 g/mL)"
+        },
+        "isotopes": {
+          "title": "Chlorine Isotopes on a Balance",
+          "subtitle": "The atomic weight is the abundance-weighted mean of the isotope masses: the beam balances exactly there.",
+          "caption": "With {p} % chlorine-35 the balance point, the atomic weight, is {w} u.",
+          "handle": "Balance point (chlorine-35 abundance)",
+          "rowP35": "Chlorine-35 abundance",
+          "rowP37": "Chlorine-37 abundance",
+          "rowM35": "Mass of chlorine-35",
+          "rowM37": "Mass of chlorine-37",
+          "rowWeight": "Weighted mean (atomic weight)",
+          "rowIupac": "IUPAC standard value"
+        },
+        "hydrate": {
+          "title": "Water of Hydration in CuSO₄·nH₂O",
+          "subtitle": "Each bound water molecule adds 18.015 g/mol on top of the anhydrous CuSO₄.",
+          "caption": "{f} has a molar mass of {m} g/mol, {p} % of it water.",
+          "handle": "Bound water molecules",
+          "rowN": "Waters per formula unit n",
+          "rowTotal": "Hydrate molar mass",
+          "rowWaterPct": "Water share of the mass"
+        },
+        "composition": {
+          "title": "Mass Composition by Element",
+          "subtitle": "One bar is the whole molar mass; each segment is one element's count × atomic weight.",
+          "caption": "{name}, {f}: {m} g/mol in total.",
+          "handle": "Compound",
+          "rowTotal": "Total molar mass"
+        },
+        "ranked": {
+          "title": "Moles in the Same Sample Mass",
+          "subtitle": "The same mass holds more moles of a light compound than of a heavy one (n = m / M).",
+          "caption": "In {m} g, {f} gives the most: {n} mol.",
+          "handle": "Sample mass",
+          "rowMass": "Sample mass m"
+        },
+        "avogadro": {
+          "title": "Particles Counted on a Log Scale",
+          "subtitle": "Since 2019 the mole is defined by Avogadro's number, fixed at exactly 6.02214076 × 10²³.",
+          "caption": "{N} particles are {n} mol, which for water weighs {g} g.",
+          "handle": "Number of particles",
+          "markGram": "1 g of water",
+          "markMole": "1 mol",
+          "rowN": "Particles N",
+          "rowNa": "Avogadro constant Nₐ",
+          "rowWater": "Mass if the particles are H₂O"
+        },
+        "groups": {
+          "title": "Groups Multiply Every Atom Inside",
+          "subtitle": "A subscript after a closing parenthesis multiplies each atom in the group; one sphere per atom.",
+          "caption": "In {f} the group {g} counts {k} times: {m} g/mol.",
+          "handle": "Compound with a group",
+          "rowGroup": "Group and multiplier",
+          "rowInside": "{el} atoms in the group",
+          "rowAtoms": "Atoms per formula unit"
+        },
+        "parser": {
+          "title": "The Parser Reading Al₂(SO₄)₃",
+          "subtitle": "Token by token, as the calculator reads it: element counts first, then the group multiplier.",
+          "caption": "After reading {tok}: {c}, running mass {m} g/mol.",
+          "handle": "Parser position",
+          "actElement": "Element and its count",
+          "actOpen": "Open a group",
+          "actClose": "Close the group, multiply by {k}",
+          "rowToken": "Token read",
+          "rowAction": "Action",
+          "rowCounts": "Atoms so far",
+          "rowMass": "Running molar mass",
+          "rowFinal": "Final result"
         }
       }
     },

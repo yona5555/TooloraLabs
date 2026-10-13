@@ -1,10 +1,13 @@
 "use client";
-import { Calculator } from "lucide-react";
+import { Calculator, Hand } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import MolarMassCompositionDonut from "./MolarMassCompositionDonut";
+import { PhText } from "../ph-calculator/PhCardKit";
+import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import MolarMassShareExportModal from "./MolarMassShareExportModal";
+import MolarMassResultScene from "./MolarMassResultScene";
+import { partsOf, RAIL, RAIL_SEED } from "./mmMath";
 import type { MolarMassResult as Result } from "./types";
 
 type Props = {
@@ -12,98 +15,129 @@ type Props = {
   result: Result;
   formula: string;
   digitStyle: DigitStyle;
+  onSetFormula: (formula: string) => void;
 };
 
-export default function MolarMassResult({ hasCalculated, result, formula, digitStyle }: Props) {
+/**
+ * §44: the Result card is the 3D card — the molecule + mass-share scene first, directly under the
+ * header band, then the molar mass and the element breakdown table, all in this one card.
+ */
+export default function MolarMassResult({ hasCalculated, result, formula, digitStyle, onSetFormula }: Props) {
   const t = useTranslations("tools.molar-mass-calculator.result");
   const tForm = useTranslations("tools.molar-mass-calculator.form");
+  const th = useTranslations("tools.molar-mass-calculator.visuals.hero");
+  const tc = useTranslations("tools.ph-calculator.visuals.common");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 3 });
   const fmtInt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
-
-  if (!hasCalculated) {
-    return (
-      <SectionCard title={t("heading")}>
-        <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
-          <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
-          <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("emptyStateMessage")}</p>
-        </div>
-      </SectionCard>
-    );
-  }
-
-  if (result.error) {
-    const messageKey =
-      result.error === "empty-formula"
-        ? "emptyFormula"
-        : result.error === "unknown-element"
-          ? "unknownElement"
-          : result.error === "unbalanced-parentheses"
-            ? "unbalancedParentheses"
-            : "invalidFormula";
-    return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(messageKey)}</p>
-          {result.errorDetail && <p dir="ltr" className="mt-2 text-center font-mono text-xs text-zinc-400">{result.errorDetail}</p>}
-        </div>
-      </div>
-    );
-  }
+  const valid = hasCalculated && !result.error && result.totalMass > 0;
+  const messageKey =
+    result.error === "empty-formula"
+      ? "emptyFormula"
+      : result.error === "unknown-element"
+        ? "unknownElement"
+        : result.error === "unbalanced-parentheses"
+          ? "unbalancedParentheses"
+          : "invalidFormula";
 
   const heroValue = `${fmt(result.totalMass)} g/mol`;
-  const segments = result.breakdown.map((row) => ({ symbol: row.symbol, value: row.subtotal }));
-
   const resultRows = result.breakdown.map((row) => ({ label: row.symbol, value: `${fmtInt(row.count)} × ${fmt(row.atomicMass)} = ${fmt(row.subtotal)}` }));
+  // Without a valid result the scene keeps the default compound, so the card never shows an empty box.
+  const sceneFormula = valid ? formula : RAIL[RAIL_SEED].formula;
+  const sp = partsOf(sceneFormula);
+  const parts = sp?.parts ?? [];
+  const scene = {
+    formula: sceneFormula,
+    parts,
+    totalText: `${Number((sp?.total ?? 0).toFixed(3))} g/mol`,
+    formulaLabel: uniFormula(sceneFormula),
+    atomsText: th("atoms", { n: parts.reduce((a, b) => a + b.count, 0) }),
+    drawMolecule: true,
+  };
 
+  const share = valid ? (
+    <MolarMassShareExportModal
+      operationLabel={formula}
+      inputRows={[{ label: tForm("formulaLabel"), value: formula }]}
+      resultRows={resultRows}
+      heroLabel={t("totalMass")}
+      heroValue={heroValue}
+      sentence={`${t("totalMass")}: ${heroValue}`}
+    />
+  ) : null;
+
+  const th3 = "px-2 py-2 text-start font-bold";
   return (
-    <div className="flex flex-col gap-4">
+    <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal lg:flex-1" style={{ fontFamily: "var(--glass-font)" }}>
       <SectionCard
+        id="mm-result"
         title={t("heading")}
+        className="flex flex-col lg:flex-1"
+        bodyClassName="flex flex-1 flex-col p-4 lg:p-6"
         action={
-          <MolarMassShareExportModal
-            operationLabel={formula}
-            inputRows={[{ label: tForm("formulaLabel"), value: formula }]}
-            resultRows={resultRows}
-            heroLabel={t("totalMass")}
-            heroValue={heroValue}
-            sentence={`${t("totalMass")}: ${heroValue}`}
-          />
+          <span className="flex items-center gap-2">
+            <span role="img" aria-label={tc("interactive")} title={tc("interactive")} data-ph-interactive className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
+              <Hand size={15} aria-hidden />
+            </span>
+            {share}
+          </span>
         }
       >
-        <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-          {fmt(result.totalMass)} <span className="text-xl font-semibold text-blue-500 dark:text-blue-300">g/mol</span>
-        </p>
-        <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("totalMass")}</p>
+        <MolarMassResultScene p={scene} mm={sp?.total ?? 0} onSetFormula={onSetFormula} />
 
-        <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          <MolarMassCompositionDonut segments={segments} centerValue={heroValue} centerLabel={t("totalMass")} />
-          <p className="mt-2 text-center text-sm opacity-70">{t("compositionCaption")}</p>
-        </div>
-
-        <div dir="ltr" className="mt-4 overflow-x-auto border-t border-zinc-200 pt-4 dark:border-zinc-800">
-          <table className="w-full min-w-[320px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-zinc-200 text-start dark:border-zinc-700">
-                <th className="px-2 py-1.5 text-start font-semibold">{t("columnElement")}</th>
-                <th className="px-2 py-1.5 text-start font-semibold">{t("columnCount")}</th>
-                <th className="px-2 py-1.5 text-start font-semibold">{t("columnAtomicMass")}</th>
-                <th className="px-2 py-1.5 text-start font-semibold">{t("columnSubtotal")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {result.breakdown.map((row) => (
-                <tr key={row.symbol} className="border-b border-zinc-100 dark:border-zinc-800/60">
-                  <td className="px-2 py-1.5 font-mono font-semibold">{row.symbol}</td>
-                  <td className="px-2 py-1.5 font-mono">{fmtInt(row.count)}</td>
-                  <td className="px-2 py-1.5 font-mono">{fmt(row.atomicMass)}</td>
-                  <td className="px-2 py-1.5 font-mono">{fmt(row.subtotal)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <hr data-ph-divider className="my-3 border-zinc-200 dark:border-zinc-800" />
+        <div data-ph-result-values>
+          {!hasCalculated ? (
+            <div className="flex flex-col items-center gap-2 text-center">
+              <Calculator size={28} className="text-zinc-400 dark:text-zinc-500" />
+              <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("emptyStateMessage")}</p>
+            </div>
+          ) : !valid ? (
+            <>
+              <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(messageKey)}</p>
+              {result.errorDetail && (
+                <p dir="ltr" className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">
+                  {result.errorDetail}
+                </p>
+              )}
+            </>
+          ) : (
+            <>
+              <p dir="ltr" data-testid="mm-result-main" className="text-center text-4xl font-bold tabular-nums text-blue-700 dark:text-blue-400">
+                {fmt(result.totalMass)} <span className="text-xl font-semibold text-blue-600 dark:text-blue-300">g/mol</span>
+              </p>
+              <p className="mt-1 text-center text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+                {t("totalMass")} · <PhText text={uniFormula(formula)} />
+              </p>
+              <div dir="ltr" className="mt-3 overflow-x-auto">
+                <table className="w-full border-collapse text-sm tabular-nums" data-ph-table>
+                  <thead>
+                    <tr style={{ background: "var(--glass-table-header-bg)", color: "var(--ph-ink)" }}>
+                      <th className={`${th3} rounded-s-lg`}>{t("columnElement")}</th>
+                      <th className={th3}>{t("columnCount")}</th>
+                      <th className={th3}>{t("columnAtomicMass")}</th>
+                      <th className={`${th3} rounded-e-lg`}>{t("columnSubtotal")}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {result.breakdown.map((row) => (
+                      <tr key={row.symbol} style={{ borderBottom: "1px solid var(--glass-table-row-border)", color: "var(--ph-ink)" }}>
+                        <td className="px-2 py-1.5 font-bold">{row.symbol}</td>
+                        <td className="px-2 py-1.5">{fmtInt(row.count)}</td>
+                        <td className="px-2 py-1.5">{fmt(row.atomicMass)}</td>
+                        <td className="px-2 py-1.5 font-semibold">{fmt(row.subtotal)}</td>
+                      </tr>
+                    ))}
+                    <tr data-key-row style={{ background: "var(--glass-key-row-bg)", color: "var(--ph-ink)" }}>
+                      <td className="px-2 py-1.5 font-bold" colSpan={3}>
+                        {t("totalMass")}
+                      </td>
+                      <td className="px-2 py-1.5 font-extrabold">{`${fmt(result.totalMass)} g/mol`}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
         </div>
       </SectionCard>
     </div>

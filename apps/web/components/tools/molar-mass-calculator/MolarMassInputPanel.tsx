@@ -1,11 +1,9 @@
 "use client";
 import type { FormEvent } from "react";
 import { useTranslations } from "next-intl";
-import { parseFormula } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
 import ToolButton from "@/components/tool-ui/ToolButton";
-import MolarMassFormulaBreakdownDiagram from "./MolarMassFormulaBreakdownDiagram";
 
 type MolarMassInputPanelProps = {
   formula: string;
@@ -16,19 +14,9 @@ type MolarMassInputPanelProps = {
   onClear: () => void;
 };
 
-function safeParse(formula: string): { symbol: string; count: number }[] {
-  try {
-    const counts = parseFormula(formula);
-    return Object.entries(counts).map(([symbol, count]) => ({ symbol, count }));
-  } catch {
-    return [];
-  }
-}
-
 export default function MolarMassInputPanel({ formula, onFormulaChange, scenarioKeys, onScenarioPreset, onCalculate, onClear }: MolarMassInputPanelProps) {
   const t = useTranslations("tools.molar-mass-calculator.form");
   const tScenarios = useTranslations("tools.molar-mass-calculator.form.scenarios");
-  const elements = safeParse(formula);
 
   return (
     <SectionCard title={t("inputTitle")}>
@@ -48,9 +36,7 @@ export default function MolarMassInputPanel({ formula, onFormulaChange, scenario
         </div>
       </div>
 
-      <MolarMassFormulaBreakdownDiagram elements={elements} caption={t("breakdownDiagramCaption")} />
-
-      <form onSubmit={onCalculate} className="mt-4 space-y-5">
+      <form onSubmit={onCalculate} className="space-y-5">
         <ToolInput
           label={t("formulaLabel")}
           hint={t("formulaHint")}

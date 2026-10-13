@@ -13116,7 +13116,6 @@
         "formulaPlaceholder": "p. ej. C6H12O6",
         "calculate": "Calcular",
         "clear": "Limpiar",
-        "breakdownDiagramCaption": "Recuento de elementos en vivo mientras escribes — se actualiza incluso antes de que la fórmula sea válida.",
         "scenarioPresetsLabel": "Prueba una molécula real:",
         "scenarios": {
           "water": "Agua",
@@ -13137,46 +13136,14 @@
         "columnCount": "Cantidad",
         "columnAtomicMass": "Masa Atómica",
         "columnSubtotal": "Subtotal",
-        "emptyStateMessage": "Introduce una fórmula y pulsa Calcular para ver su masa molar.",
-        "compositionCaption": "Porcentaje de la masa total que aporta cada elemento."
+        "emptyStateMessage": "Introduce una fórmula y pulsa Calcular para ver su masa molar."
       },
       "education": {
         "intro": {
           "title": "Entender la Masa Molar",
           "paragraph1": "La masa molar es la masa de un mol (6,022 × 10²³ partículas) de una sustancia, expresada en gramos por mol (g/mol). Para un compuesto, se calcula sumando la masa atómica de cada átomo de su fórmula — el agua, H₂O, tiene una masa molar de 2×(1,008) + 15,999 = 18,015 g/mol, porque una molécula de agua contiene dos átomos de hidrógeno y uno de oxígeno. Esta calculadora analiza la fórmula que introduces, cuenta cada elemento (incluso dentro de paréntesis o corchetes, como los dos grupos hidróxido en Ca(OH)₂), y busca el peso atómico estándar de cada elemento para calcular el total.",
           "paragraph2": "Los pesos atómicos que usa esta calculadora son los pesos atómicos estándar convencionales de la IUPAC — esencialmente un promedio ponderado de los isótopos naturales de un elemento, por lo que no son números enteros (el 35,45 del cloro refleja una mezcla natural mayoritariamente de cloro-35 con algo de cloro-37). Un puñado de los elementos más pesados (tecnecio, prometio y todo a partir del polonio) no tiene isótopos estables y, por tanto, no hay mezcla natural que promediar — para estos, el valor entre corchetes es en su lugar el número másico de su isótopo más estable conocido.",
-          "paragraph3": "Las fórmulas con un punto medio, viñeta o punto seguido de un número representan hidratos — compuestos que incorporan moléculas de agua en su estructura cristalina, como CuSO₄·5H₂O (sulfato de cobre(II) pentahidratado). El número antes del agua indica cuántas moléculas de agua están unidas por unidad fórmula del compuesto, y esta calculadora añade la masa de esa agua a la masa del compuesto anhidro para obtener la masa molar total del hidrato.",
-          "composition": {
-            "caption": "Glucosa (C₆H₁₂O₆): el oxígeno aporta más de la mitad de la masa total a pesar de tener el menor número de átomos."
-          },
-          "atomicMass": {
-            "caption": "La masa atómica del cloro, 35.45, es un promedio ponderado de las masas y abundancias naturales de sus dos isótopos estables.",
-            "isotope1": "Cl-35 (76%)",
-            "isotope2": "Cl-37 (24%)",
-            "isotope3": "prom."
-          },
-          "avogadro": {
-            "caption": "Un mol es un número fijo de partículas, sin importar cuán pequeñas o grandes sean las partículas mismas.",
-            "mole": "1 mol",
-            "particles": "partículas"
-          },
-          "massGauge": {
-            "title": "Pruébalo: ¿qué tan pesada es esa molécula?",
-            "intro": "Elige una molécula real para ver su masa molar en el medidor y compararla con otras.",
-            "light": "Ligera",
-            "moderate": "Moderada",
-            "heavy": "Pesada",
-            "verdict": "{substance} es una molécula {classification}.",
-            "waterRatioFact": "Eso equivale a unas {ratio} veces la masa de una molécula de agua (18 g/mol).",
-            "substances": {
-              "hydrogen": "Gas Hidrógeno (H₂)",
-              "water": "Agua (H₂O)",
-              "tableSalt": "Sal de Mesa (NaCl)",
-              "glucose": "Glucosa (C₆H₁₂O₆)",
-              "insulin": "Insulina",
-              "hemoglobin": "Hemoglobina"
-            }
-          }
+          "paragraph3": "Las fórmulas con un punto medio, viñeta o punto seguido de un número representan hidratos — compuestos que incorporan moléculas de agua en su estructura cristalina, como CuSO₄·5H₂O (sulfato de cobre(II) pentahidratado). El número antes del agua indica cuántas moléculas de agua están unidas por unidad fórmula del compuesto, y esta calculadora añade la masa de esa agua a la masa del compuesto anhidro para obtener la masa molar total del hidrato."
         },
         "examples": {
           "title": "Ejemplos Resueltos",
@@ -13281,13 +13248,11 @@
           },
           "groupSection": {
             "title": "Grupos entre Paréntesis",
-            "paragraph": "Un subíndice después de un paréntesis de cierre multiplica cada átomo dentro de ese grupo, no solo una unidad de él: por eso Ca(OH)2 contiene dos átomos de oxígeno y dos de hidrógeno, no uno de cada uno.",
-            "caption": "El multiplicador del grupo se distribuye entre cada átomo dentro de los paréntesis."
+            "paragraph": "Un subíndice después de un paréntesis de cierre multiplica cada átomo dentro de ese grupo, no solo una unidad de él: por eso Ca(OH)2 contiene dos átomos de oxígeno y dos de hidrógeno, no uno de cada uno."
           },
           "parsingSection": {
             "title": "Leer una Fórmula de Izquierda a Derecha",
-            "paragraph": "El analizador lee una fórmula carácter por carácter, reconociendo símbolos de elementos y sus recuentos opcionales, y maneja recursivamente cualquier grupo anidado: la misma técnica reutilizada por el balanceador de ecuaciones y la calculadora de estequiometría en otras partes de este sitio.",
-            "caption": "La glucosa, C₆H₁₂O₆, se analiza en tres elementos con sus respectivos recuentos de átomos."
+            "paragraph": "El analizador lee una fórmula carácter por carácter, reconociendo símbolos de elementos y sus recuentos opcionales, y maneja recursivamente cualquier grupo anidado: la misma técnica reutilizada por el balanceador de ecuaciones y la calculadora de estequiometría en otras partes de este sitio."
           }
         },
         "references": {
@@ -13336,6 +13301,97 @@
           "oxygen": "Oxígeno",
           "sodium": "Sodio",
           "chlorine": "Cloro"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Compuesto en el riel de masa molar",
+          "atoms": "{n} átomos por unidad fórmula"
+        },
+        "compounds": {
+          "glucose": "Glucosa",
+          "water": "Agua",
+          "tableSalt": "Sal de mesa",
+          "aspirin": "Aspirina",
+          "caffeine": "Cafeína",
+          "sulfuricAcid": "Ácido sulfúrico"
+        },
+        "beaker": {
+          "title": "Moles de agua, pesados y vertidos",
+          "subtitle": "Masa = moles × masa molar: cada mol de H₂O suma 18.015 g, unos 18 mL de líquido a 25 °C.",
+          "caption": "{n} mol de agua pesan {m} g y llenan {v} mL.",
+          "handle": "Moles de agua",
+          "rowMoles": "Cantidad n",
+          "rowVolume": "V = m / ρ (ρ = 0.997 g/mL)"
+        },
+        "isotopes": {
+          "title": "Isótopos del cloro en una balanza",
+          "subtitle": "El peso atómico es la media de las masas isotópicas ponderada por su abundancia: ahí se equilibra la barra.",
+          "caption": "Con {p} % de cloro-35, el punto de equilibrio, el peso atómico, es {w} u.",
+          "handle": "Punto de equilibrio (abundancia de cloro-35)",
+          "rowP35": "Abundancia de cloro-35",
+          "rowP37": "Abundancia de cloro-37",
+          "rowM35": "Masa del cloro-35",
+          "rowM37": "Masa del cloro-37",
+          "rowWeight": "Media ponderada (peso atómico)",
+          "rowIupac": "Valor estándar IUPAC"
+        },
+        "hydrate": {
+          "title": "Agua de hidratación en CuSO₄·nH₂O",
+          "subtitle": "Cada molécula de agua unida suma 18.015 g/mol al CuSO₄ anhidro.",
+          "caption": "{f} tiene una masa molar de {m} g/mol, un {p} % de agua.",
+          "handle": "Moléculas de agua unidas",
+          "rowN": "Aguas por unidad fórmula n",
+          "rowTotal": "Masa molar del hidrato",
+          "rowWaterPct": "Fracción de agua en la masa"
+        },
+        "composition": {
+          "title": "Composición en masa por elemento",
+          "subtitle": "La barra es toda la masa molar; cada segmento es el número de átomos de un elemento × su peso atómico.",
+          "caption": "{name}, {f}: {m} g/mol en total.",
+          "handle": "Compuesto",
+          "rowTotal": "Masa molar total"
+        },
+        "ranked": {
+          "title": "Moles en la misma masa de muestra",
+          "subtitle": "La misma masa contiene más moles de un compuesto ligero que de uno pesado (n = m / M).",
+          "caption": "En {m} g, {f} da más: {n} mol.",
+          "handle": "Masa de la muestra",
+          "rowMass": "Masa de la muestra m"
+        },
+        "avogadro": {
+          "title": "Partículas contadas en escala logarítmica",
+          "subtitle": "Desde 2019 el mol se define por el número de Avogadro, fijado exactamente en 6.02214076 × 10²³.",
+          "caption": "{N} partículas son {n} mol; de agua pesan {g} g.",
+          "handle": "Número de partículas",
+          "markGram": "1 g de agua",
+          "markMole": "1 mol",
+          "rowN": "Partículas N",
+          "rowNa": "Constante de Avogadro Nₐ",
+          "rowWater": "Masa si las partículas son H₂O"
+        },
+        "groups": {
+          "title": "Los grupos multiplican cada átomo interior",
+          "subtitle": "Un subíndice tras un paréntesis de cierre multiplica cada átomo del grupo; una esfera por átomo.",
+          "caption": "En {f} el grupo {g} cuenta {k} veces: {m} g/mol.",
+          "handle": "Compuesto con grupo",
+          "rowGroup": "Grupo y multiplicador",
+          "rowInside": "Átomos de {el} en el grupo",
+          "rowAtoms": "Átomos por unidad fórmula"
+        },
+        "parser": {
+          "title": "El analizador leyendo Al₂(SO₄)₃",
+          "subtitle": "Símbolo a símbolo, como lo lee la calculadora: primero los recuentos, luego el multiplicador del grupo.",
+          "caption": "Tras leer {tok}: {c}, masa acumulada {m} g/mol.",
+          "handle": "Posición del analizador",
+          "actElement": "Elemento y su recuento",
+          "actOpen": "Abrir un grupo",
+          "actClose": "Cerrar el grupo y multiplicar por {k}",
+          "rowToken": "Símbolo leído",
+          "rowAction": "Acción",
+          "rowCounts": "Átomos hasta ahora",
+          "rowMass": "Masa molar acumulada",
+          "rowFinal": "Resultado final"
         }
       }
     },

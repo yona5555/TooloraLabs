@@ -13116,7 +13116,6 @@
         "formulaPlaceholder": "z. B. C6H12O6",
         "calculate": "Berechnen",
         "clear": "Zurücksetzen",
-        "breakdownDiagramCaption": "Live-Elementanzahl während der Eingabe — aktualisiert sich schon vor der Gültigkeit der Formel.",
         "scenarioPresetsLabel": "Ein reales Molekül ausprobieren:",
         "scenarios": {
           "water": "Wasser",
@@ -13137,46 +13136,14 @@
         "columnCount": "Anzahl",
         "columnAtomicMass": "Atommasse",
         "columnSubtotal": "Zwischensumme",
-        "emptyStateMessage": "Formel eingeben und auf Berechnen klicken, um ihre molare Masse zu sehen.",
-        "compositionCaption": "Prozentanteil der Gesamtmasse, den jedes Element beiträgt."
+        "emptyStateMessage": "Formel eingeben und auf Berechnen klicken, um ihre molare Masse zu sehen."
       },
       "education": {
         "intro": {
           "title": "Molmasse verstehen",
           "paragraph1": "Die Molmasse ist die Masse eines Mols (6,022 × 10²³ Teilchen) eines Stoffes, ausgedrückt in Gramm pro Mol (g/mol). Bei einer Verbindung ermittelt man sie, indem man die Atommasse jedes Atoms in ihrer Formel addiert — Wasser, H₂O, hat eine Molmasse von 2×(1,008) + 15,999 = 18,015 g/mol, weil ein Wassermolekül zwei Wasserstoffatome und ein Sauerstoffatom enthält. Dieser Rechner analysiert die eingegebene Formel, zählt jedes Element (auch innerhalb von runden oder eckigen Klammern, wie die beiden Hydroxidgruppen in Ca(OH)₂), und schlägt für jedes Element sein Standardatomgewicht nach, um die Summe zu berechnen.",
           "paragraph2": "Die von diesem Rechner verwendeten Atomgewichte sind die IUPAC-konventionellen Standardatomgewichte — im Wesentlichen ein gewichteter Durchschnitt der natürlich vorkommenden Isotope eines Elements, weshalb sie keine ganzen Zahlen sind (Chlors 35,45 spiegelt eine natürliche Mischung wider, überwiegend aus Chlor-35 mit etwas Chlor-37). Eine Handvoll der schwersten Elemente (Technetium, Promethium und alles ab Polonium) hat keine stabilen Isotope und somit keine natürliche Mischung zum Mitteln — für diese steht in eckigen Klammern stattdessen die Massenzahl ihres stabilsten bekannten Isotops.",
-          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten.",
-          "composition": {
-            "caption": "Glukose (C₆H₁₂O₆): Sauerstoff trägt über die Hälfte der Gesamtmasse bei, obwohl er die wenigsten Atome hat."
-          },
-          "atomicMass": {
-            "caption": "Die Atommasse von Chlor, 35,45, ist ein gewichteter Durchschnitt der Massen und natürlichen Häufigkeiten seiner beiden stabilen Isotope.",
-            "isotope1": "Cl-35 (76%)",
-            "isotope2": "Cl-37 (24%)",
-            "isotope3": "Durchschn."
-          },
-          "avogadro": {
-            "caption": "Ein Mol ist eine feste Anzahl von Teilchen, egal wie klein oder groß die Teilchen selbst sind.",
-            "mole": "1 Mol",
-            "particles": "Teilchen"
-          },
-          "massGauge": {
-            "title": "Ausprobieren: Wie schwer ist dieses Molekül?",
-            "intro": "Wähle ein reales Molekül, um seine molare Masse auf der Anzeige zu sehen und mit anderen zu vergleichen.",
-            "light": "Leicht",
-            "moderate": "Mittel",
-            "heavy": "Schwer",
-            "verdict": "{substance} — Molekülklasse: {classification}.",
-            "waterRatioFact": "Das entspricht etwa dem {ratio}-fachen der Masse eines Wassermoleküls (18 g/mol).",
-            "substances": {
-              "hydrogen": "Wasserstoffgas (H₂)",
-              "water": "Wasser (H₂O)",
-              "tableSalt": "Speisesalz (NaCl)",
-              "glucose": "Glukose (C₆H₁₂O₆)",
-              "insulin": "Insulin",
-              "hemoglobin": "Hämoglobin"
-            }
-          }
+          "paragraph3": "Formeln mit einem Mittelpunkt, Bullet-Punkt oder Punkt, gefolgt von einer Zahl, stellen Hydrate dar — Verbindungen, die Wassermoleküle in ihre Kristallstruktur einbinden, wie CuSO₄·5H₂O (Kupfer(II)-sulfat-Pentahydrat). Die Zahl vor dem Wasser gibt an, wie viele Wassermoleküle pro Formeleinheit der Verbindung gebunden sind, und dieser Rechner addiert die Masse dieses Wassers zur Masse der wasserfreien Verbindung, um die gesamte Molmasse des Hydrats zu erhalten."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -13281,13 +13248,11 @@
           },
           "groupSection": {
             "title": "Geklammerte Gruppen",
-            "paragraph": "Ein Index nach einer schließenden Klammer multipliziert jedes Atom innerhalb dieser Gruppe, nicht nur eine einzelne Einheit davon — deshalb enthält Ca(OH)2 zwei Sauerstoff- und zwei Wasserstoffatome, nicht je eines.",
-            "caption": "Der Gruppenmultiplikator verteilt sich auf jedes Atom innerhalb der Klammern."
+            "paragraph": "Ein Index nach einer schließenden Klammer multipliziert jedes Atom innerhalb dieser Gruppe, nicht nur eine einzelne Einheit davon — deshalb enthält Ca(OH)2 zwei Sauerstoff- und zwei Wasserstoffatome, nicht je eines."
           },
           "parsingSection": {
             "title": "Eine Formel von links nach rechts lesen",
-            "paragraph": "Der Parser liest eine Formel Zeichen für Zeichen, erkennt Elementsymbole und ihre optionalen Anzahlen und behandelt verschachtelte Gruppen rekursiv — dieselbe Technik, die auch vom Gleichungsausgleicher und dem Stöchiometrie-Rechner an anderer Stelle auf dieser Website verwendet wird.",
-            "caption": "Glukose, C₆H₁₂O₆, wird in drei Elemente mit ihren jeweiligen Atomanzahlen zerlegt."
+            "paragraph": "Der Parser liest eine Formel Zeichen für Zeichen, erkennt Elementsymbole und ihre optionalen Anzahlen und behandelt verschachtelte Gruppen rekursiv — dieselbe Technik, die auch vom Gleichungsausgleicher und dem Stöchiometrie-Rechner an anderer Stelle auf dieser Website verwendet wird."
           }
         },
         "references": {
@@ -13336,6 +13301,97 @@
           "oxygen": "Sauerstoff",
           "sodium": "Natrium",
           "chlorine": "Chlor"
+        }
+      },
+      "visuals": {
+        "hero": {
+          "handle": "Verbindung auf der Molmassen-Schiene",
+          "atoms": "{n} Atome pro Formeleinheit"
+        },
+        "compounds": {
+          "glucose": "Glucose",
+          "water": "Wasser",
+          "tableSalt": "Kochsalz",
+          "aspirin": "Aspirin",
+          "caffeine": "Koffein",
+          "sulfuricAcid": "Schwefelsäure"
+        },
+        "beaker": {
+          "title": "Mol Wasser, gewogen und eingefüllt",
+          "subtitle": "Masse = Stoffmenge × molare Masse: Jedes Mol H₂O bringt 18.015 g, etwa 18 mL Flüssigkeit bei 25 °C.",
+          "caption": "{n} mol Wasser wiegen {m} g und füllen {v} mL.",
+          "handle": "Mol Wasser",
+          "rowMoles": "Stoffmenge n",
+          "rowVolume": "V = m / ρ (ρ = 0.997 g/mL)"
+        },
+        "isotopes": {
+          "title": "Chlorisotope auf einer Waage",
+          "subtitle": "Das Atomgewicht ist das nach Häufigkeit gewichtete Mittel der Isotopenmassen: Genau dort ist der Balken im Gleichgewicht.",
+          "caption": "Bei {p} % Chlor-35 liegt der Gleichgewichtspunkt, das Atomgewicht, bei {w} u.",
+          "handle": "Gleichgewichtspunkt (Häufigkeit von Chlor-35)",
+          "rowP35": "Häufigkeit von Chlor-35",
+          "rowP37": "Häufigkeit von Chlor-37",
+          "rowM35": "Masse von Chlor-35",
+          "rowM37": "Masse von Chlor-37",
+          "rowWeight": "Gewichtetes Mittel (Atomgewicht)",
+          "rowIupac": "IUPAC-Standardwert"
+        },
+        "hydrate": {
+          "title": "Kristallwasser in CuSO₄·nH₂O",
+          "subtitle": "Jedes gebundene Wassermolekül fügt dem wasserfreien CuSO₄ 18.015 g/mol hinzu.",
+          "caption": "{f} hat eine molare Masse von {m} g/mol, davon {p} % Wasser.",
+          "handle": "Gebundene Wassermoleküle",
+          "rowN": "Wasser pro Formeleinheit n",
+          "rowTotal": "Molare Masse des Hydrats",
+          "rowWaterPct": "Wasseranteil an der Masse"
+        },
+        "composition": {
+          "title": "Massenzusammensetzung nach Element",
+          "subtitle": "Der Balken ist die ganze molare Masse; jedes Segment ist Atomanzahl eines Elements × Atomgewicht.",
+          "caption": "{name}, {f}: insgesamt {m} g/mol.",
+          "handle": "Verbindung",
+          "rowTotal": "Gesamte molare Masse"
+        },
+        "ranked": {
+          "title": "Stoffmenge in derselben Probenmasse",
+          "subtitle": "Dieselbe Masse enthält mehr Mol einer leichten als einer schweren Verbindung (n = m / M).",
+          "caption": "In {m} g liefert {f} am meisten: {n} mol.",
+          "handle": "Probenmasse",
+          "rowMass": "Probenmasse m"
+        },
+        "avogadro": {
+          "title": "Teilchen auf einer logarithmischen Skala",
+          "subtitle": "Seit 2019 ist das Mol über die Avogadro-Zahl definiert, exakt festgelegt auf 6.02214076 × 10²³.",
+          "caption": "{N} Teilchen sind {n} mol; als Wasser wiegen sie {g} g.",
+          "handle": "Teilchenzahl",
+          "markGram": "1 g Wasser",
+          "markMole": "1 mol",
+          "rowN": "Teilchenzahl N",
+          "rowNa": "Avogadro-Konstante Nₐ",
+          "rowWater": "Masse, wenn die Teilchen H₂O sind"
+        },
+        "groups": {
+          "title": "Gruppen vervielfachen jedes Atom darin",
+          "subtitle": "Ein Index nach einer schließenden Klammer vervielfacht jedes Atom der Gruppe; eine Kugel pro Atom.",
+          "caption": "In {f} zählt die Gruppe {g} {k}-mal: {m} g/mol.",
+          "handle": "Verbindung mit Gruppe",
+          "rowGroup": "Gruppe und Faktor",
+          "rowInside": "{el}-Atome in der Gruppe",
+          "rowAtoms": "Atome pro Formeleinheit"
+        },
+        "parser": {
+          "title": "Der Parser liest Al₂(SO₄)₃",
+          "subtitle": "Zeichen für Zeichen, wie der Rechner es liest: zuerst die Atomanzahlen, dann der Gruppenfaktor.",
+          "caption": "Nach {tok}: {c}, laufende Masse {m} g/mol.",
+          "handle": "Parser-Position",
+          "actElement": "Element und Anzahl",
+          "actOpen": "Gruppe öffnen",
+          "actClose": "Gruppe schließen, mal {k}",
+          "rowToken": "Gelesenes Zeichen",
+          "rowAction": "Aktion",
+          "rowCounts": "Atome bisher",
+          "rowMass": "Laufende molare Masse",
+          "rowFinal": "Endergebnis"
         }
       }
     },
