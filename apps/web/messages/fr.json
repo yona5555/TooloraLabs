@@ -28073,6 +28073,187 @@
           "second": "Deuxième Trimestre",
           "third": "Troisième Trimestre"
         }
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avis",
+          "estimate": "Le terme prévu est une estimation, pas une échéance : la plupart des bébés naissent dans les semaines qui l'entourent et seule une petite part naît le jour même. Cet outil est informatif et ne constitue pas un avis médical ; votre sage-femme ou votre médecin confirmera les dates, généralement par une échographie précoce.",
+          "assumptions": "Hypothèses des visuels (signalées là où elles apparaissent) : règle de Naegele, 280 jours depuis la DDR, ajustée de (durée du cycle − 28) jours ; les catégories de terme suivent l'avis de comité ACOG n° 579 (2013) ; le calendrier des visites est un calendrier prénatal type de l'ACOG et votre suivi peut différer ; les seuils de re-datation par échographie suivent l'avis de comité ACOG n° 700 (2017) ; les probabilités de naissance par semaine reposent sur un modèle simple en cloche centré sur le terme avec une dispersion de 10 jours (approximatif ; il ignore les déclenchements et les césariennes programmées) ; en datant par la conception ou la FIV, les cartes du cycle et de la DDR utilisent une DDR équivalente 14 jours avant la conception."
+        },
+        "keyDates": {
+          "title": "Dates clés en un coup d'œil",
+          "intro": "Les étapes de votre grossesse sur le calendrier, comptées depuis le premier jour (équivalent) de vos dernières règles.",
+          "today": "Aujourd'hui",
+          "done": "Passé",
+          "inDays": "dans {n} j",
+          "note": "Les semaines s'écrivent semaines+jours : 13+0 signifie 13 semaines et 0 jour depuis les dernières règles.",
+          "rows": {
+            "lmp": "Dernières règles (semaine 0)",
+            "conception": "Conception (environ)",
+            "t2": "Début du 2e trimestre",
+            "t3": "Début du 3e trimestre",
+            "early": "Début du terme précoce",
+            "full": "Début du terme complet",
+            "due": "Terme prévu",
+            "post": "Début du dépassement de terme"
+          }
+        },
+        "result": {
+          "given": "saisi",
+          "groupInputs": "Vos données",
+          "today": "Aujourd'hui",
+          "groupDates": "Dates",
+          "lmpEquivalent": "DDR équivalente",
+          "naegeleClassic": "Naegele (cycle de 28 jours)",
+          "naegeleMnemonic": "Moyen mnémotechnique de Naegele",
+          "mnemonicFormula": "+1 an −3 mois +7 jours",
+          "cycleShift": "Ajustement du cycle (jours)",
+          "groupProgress": "Avancement aujourd'hui",
+          "percent": "Part des 40 semaines",
+          "weeksLeft": "Temps restant",
+          "groupTerm": "Fenêtre du terme (ACOG)",
+          "groupTrimesters": "Trimestres",
+          "t2Starts": "Début du 2e trimestre",
+          "t3Starts": "Début du 3e trimestre",
+          "groupMilestones": "Calendrier type des visites (approximatif)",
+          "colQuantity": "Grandeur",
+          "colFormula": "Formule",
+          "colValue": "Valeur",
+          "hint": "Faites glisser pour tourner le chemin des semaines",
+          "caption": "Le chemin de 42 semaines depuis vos dernières règles : une pierre par semaine, six rangées de sept. Les pierres surélevées sont les semaines déjà vécues (bleu = 1er, violet = 2e, ambre = 3e trimestre), l'épingle marque aujourd'hui à {ga}, les plaques vertes sont la fenêtre du terme (37–41) et le drapeau est le terme prévu, {due}."
+        },
+        "common": {
+          "abbr": {
+            "lmp": "DDR",
+            "conception": "Conception",
+            "today": "Auj.",
+            "due": "Terme",
+            "transfer": "Transfert",
+            "d": "j"
+          },
+          "wdUnit": "s+j",
+          "none": "Aucun",
+          "zones": {
+            "preterm": "Prématuré",
+            "early": "Terme précoce",
+            "full": "Terme complet",
+            "late": "Terme tardif",
+            "post": "Terme dépassé"
+          },
+          "zoneStart": {
+            "early": "Début du terme précoce",
+            "full": "Début du terme complet",
+            "due": "Terme prévu",
+            "late": "Début du terme tardif",
+            "post": "Début du dépassement"
+          },
+          "milestones": {
+            "test": "Test de grossesse",
+            "dating": "Écho de datation",
+            "nt": "Dépistage clarté nucale",
+            "anatomy": "Écho morphologique",
+            "glucose": "Test de glycémie",
+            "tdap": "Vaccin dTca",
+            "gbs": "Prélèvement SGB"
+          }
+        },
+        "timeline": {
+          "title": "Chronologie de la grossesse : choisissez une semaine",
+          "subtitle": "Chaque semaine depuis les dernières règles jusqu'à 42 semaines, avec les trimestres et un calendrier type d'examens et d'échographies. Faites glisser la poignée sur une semaine pour voir ses dates et ce qui s'y passe habituellement ; la ligne pointillée est aujourd'hui.",
+          "handle": "Semaine",
+          "caption": "La semaine {week} commence le {date}.",
+          "rowFromToday": "Jours depuis aujourd'hui",
+          "rowZone": "Catégorie de terme",
+          "notYetTerm": "Avant le terme",
+          "rowMilestones": "Habituellement cette semaine",
+          "rowNext": "Prochaine étape"
+        },
+        "window": {
+          "title": "La fenêtre du terme sur votre calendrier",
+          "subtitle": "L'ACOG divise le moment de la naissance en prématuré, terme précoce, complet, tardif et dépassé. La bande montre ces zones en dates réelles autour de votre terme ; faites glisser la poignée pour choisir un jour de naissance et voir où il tombe.",
+          "handle": "Jour de naissance",
+          "caption": "Une naissance le {date} aurait lieu à {ga} : {zone}.",
+          "before": "avant le {date}",
+          "from": "à partir du {date}",
+          "rowGa": "Âge gestationnel à la naissance",
+          "rowZone": "Catégorie",
+          "rowFromToday": "Jours depuis aujourd'hui",
+          "rowWindow": "Fenêtre du terme (37+0 – 41+6)",
+          "rowLength": "Durée de la fenêtre"
+        },
+        "odds": {
+          "title": "Probabilité de naissance par semaine",
+          "subtitle": "Comment les naissances se répartissent autour du terme, par semaine de grossesse (modèle simple en cloche, approximatif). Faites glisser la poignée sur une semaine pour voir sa probabilité, ses dates et le cumul.",
+          "handle": "Semaine",
+          "caption": "Modèle : environ {p} des naissances ont lieu en semaine {week}, et {by} à sa fin.",
+          "axis": "% des naissances par semaine (modèle)",
+          "rowInWeek": "Naissance en {week}",
+          "rowDates": "Vos dates pour cette semaine",
+          "rowByEnd": "Naissance avant sa fin",
+          "rowStill": "Encore enceinte à son début",
+          "rowOnDue": "Naissance le jour du terme",
+          "rowWithin7": "Naissance à ±7 jours du terme",
+          "rowModel": "Modèle (hypothèse)"
+        },
+        "cycle": {
+          "title": "La règle de Naegele et la durée de votre cycle",
+          "subtitle": "La règle de Naegele suppose un cycle de 28 jours avec ovulation au 14e jour. Un cycle plus long ovule plus tard : le terme recule d'un jour par jour supplémentaire, et avance pour un cycle plus court. Faites glisser la poignée pour changer la durée du cycle.",
+          "handle": "Durée du cycle",
+          "caption": "Un cycle de {c} décale le terme de {shift}, au {date}. Faire glisser ici modifie aussi le champ de durée du cycle.",
+          "captionOther": "Affiché pour une DDR équivalente : avec un cycle de {c}, un terme calculé depuis la DDR serait décalé de {shift}, au {date}.",
+          "axisY": "Décalage du terme (jours)",
+          "typical": "habituel",
+          "classic": "Naegele",
+          "rowLmpEq": "DDR équivalente",
+          "rowMnemonic": "Mnémotechnique : +1 an −3 mois +7 j",
+          "rowOvulation": "Jour d'ovulation d'un cycle de {c} jours"
+        },
+        "methods": {
+          "title": "Toutes les méthodes mènent à la même date",
+          "subtitle": "Chaque méthode compte un nombre fixe de jours jusqu'au même terme : 280 depuis les dernières règles (cycle de 28 jours), 266 depuis la conception et 266 moins l'âge de l'embryon depuis un transfert de FIV. Faites glisser la poignée pour changer l'âge de l'embryon au transfert.",
+          "handle": "Âge de l'embryon au transfert",
+          "caption": "Toutes les flèches se rejoignent au {due} ; un embryon de J{n} transféré le {date} donne la même date.",
+          "ivfDay": "FIV, embryon de J{n}",
+          "dayN": "Jour {n}",
+          "dayShort": "J{n}",
+          "rowEmbryo": "Du transfert au terme"
+        },
+        "countdown": {
+          "title": "Compte à rebours à n'importe quelle date",
+          "subtitle": "Trois anneaux montrent l'avancement à la date choisie : l'anneau extérieur couvre les 280 jours, le central le trimestre en cours et l'intérieur les jours de la semaine en cours. Faites glisser la poignée jusqu'à 12 semaines en arrière ou en avant.",
+          "handle": "Date",
+          "caption": "Le {date}, vous serez à {ga} et il restera {left}.",
+          "rowWeeksLeft": "Semaines+jours restants",
+          "rowTrimester": "Avancée dans le {n} trimestre",
+          "rowMonths": "Mois restants (environ)",
+          "ring280": "280 jours",
+          "ringTrimester": "{n} trimestre",
+          "ringWeek": "Cette semaine"
+        },
+        "calendar": {
+          "title": "Votre calendrier de grossesse, mois par mois",
+          "subtitle": "Chaque jour est coloré selon le trimestre, puis selon la zone de terme à partir de 37 semaines ; le jour encadré est aujourd'hui, le jour vert est le terme et les points indiquent l'ouverture de la fenêtre d'un examen ou d'une échographie type. Faites glisser la poignée pour parcourir les mois.",
+          "handle": "Mois",
+          "caption": "{month} : à partir de {ga}.",
+          "rowMonth": "Mois {n} sur {total}",
+          "rowStarts": "Fenêtres qui s'ouvrent",
+          "rowDays": "Jours de grossesse ce mois-ci"
+        },
+        "error": {
+          "title": "Si la date est décalée de quelques jours",
+          "subtitle": "Une DDR de mémoire peut être fausse de quelques jours. Le trio montre le terme avancé et reculé de cette erreur ; la bande verte indique l'écart toléré avec l'échographie avant re-datation (ACOG, selon votre semaine actuelle). Faites glisser la poignée pour changer l'erreur.",
+          "handle": "Erreur de datation",
+          "captionKeep": "Une erreur de {e} reste dans la limite de ±{t} à {ga} : la date par DDR est généralement conservée.",
+          "captionRedate": "Une erreur de {e} dépasse la limite de ±{t} à {ga} : le terme est généralement ramené à la date de l'échographie.",
+          "earlier": "Plus tôt",
+          "current": "Actuel",
+          "later": "Plus tard",
+          "rowGaRange": "Âge gestationnel aujourd'hui",
+          "rowThreshold": "Seuil de re-datation à {ga}",
+          "rowVerdict": "Pratique habituelle",
+          "redate": "Re-dater par échographie",
+          "keep": "Garder la date par DDR"
+        }
       }
     },
     "ovulation-calculator": {
@@ -28525,6 +28706,219 @@
         "shareToSocial": "Partager sur les réseaux sociaux",
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avis",
+          "disclaimer": "Cet outil donne des informations générales à partir de la date de vos dernières règles et ne constitue pas un avis médical. La datation par échographie précoce est plus précise ; suivez les dates de votre médecin ou de votre sage-femme et consultez-les en cas de doute.",
+          "conventions": "Conventions utilisées : l'âge gestationnel est compté à partir du premier jour des dernières règles et la date prévue d'accouchement est ce jour + 280 jours (règle de Naegele, qui suppose un cycle de 28 jours avec ovulation au jour 14). Les visuels utilisent les trimestres de l'ACOG (1er : 0 s 0 j–13 s 6 j, 2e : 14 s 0 j–27 s 6 j, 3e : à partir de 28 s 0 j) et ses définitions du terme (2013) ; l'étiquette de trimestre de la calculatrice elle-même change une semaine plus tôt, aux semaines 13 et 27, et les deux figurent dans le tableau de résultats.",
+          "assumptions": "Hypothèses des visuels (signalées là où elles apparaissent) : la taille de l'utérus suit la croissance typique par semaine (environ 7,5 cm avant la grossesse, hauteur utérine ≈ semaines entre les semaines 20 et 36) ; la longueur et le poids du bébé viennent du tableau hebdomadaire de la calculatrice (longueur cranio-caudale jusqu'à la semaine 19, vertex-talon à partir de la semaine 20, moyennes approximatives) ; la courbe du moment de la naissance est une courbe normale illustrative avec un écart-type de 10 jours autour de la date prévue (environ 4 % des naissances ont lieu ce jour-là) ; les fourchettes de prise de poids sont les recommandations de l'IOM (2009) avec un IMC avant grossesse de 22 supposé tant que vous ne le modifiez pas ; le calendrier des consultations est le calendrier courant à faible risque (toutes les 4 semaines jusqu'à 28, toutes les 2 semaines jusqu'à 36, puis chaque semaine)."
+        },
+        "ladder": {
+          "title": "Semaine après semaine",
+          "intro": "Une semaine sur quatre selon la date de vos dernières règles, avec la date du calendrier et la comparaison de taille. Cliquez sur une ligne pour placer aujourd'hui à cette semaine.",
+          "colWeek": "Semaine",
+          "colDate": "Date",
+          "colSize": "Taille",
+          "note": "Les couleurs indiquent les trimestres (ACOG) : rose le 1er, violet le 2e, indigo le 3e. La semaine 40 est la date prévue d'accouchement."
+        },
+        "common": {
+          "edd": "DPA",
+          "tri": {
+            "t1": "1er trimestre",
+            "t2": "2e trimestre",
+            "t3": "3e trimestre"
+          },
+          "stations": {
+            "conception": "Conception",
+            "heartbeat": "Battements",
+            "endT1": "Fin du T1",
+            "anatomy": "Écho morphologique",
+            "viability": "Viabilité",
+            "startT3": "Début du T3",
+            "earlyTerm": "Terme précoce",
+            "fullTerm": "Terme complet",
+            "lateTerm": "Terme tardif",
+            "due": "Date prévue",
+            "postTerm": "Post-terme"
+          },
+          "terms": {
+            "preterm": "Prématuré",
+            "earlyTerm": "Terme précoce",
+            "fullTerm": "Terme complet",
+            "lateTerm": "Terme tardif",
+            "postTerm": "Post-terme"
+          },
+          "gain": {
+            "under": "Insuffisance pondérale",
+            "normal": "Normal",
+            "over": "Surpoids",
+            "obese": "Obésité"
+          }
+        },
+        "result": {
+          "groupInputs": "Vos données",
+          "given": "saisi",
+          "assumed": "supposé",
+          "standard": "standard",
+          "today": "Aujourd'hui",
+          "cycle": "Durée du cycle",
+          "fullTerm": "Grossesse complète",
+          "groupAge": "Âge gestationnel",
+          "totalDays": "Jours depuis les dernières règles",
+          "todayMinusLmp": "aujourd'hui − dernières règles",
+          "decimalWeeks": "En semaines (décimal)",
+          "months": "En mois (env.)",
+          "fetalAge": "Âge depuis la conception",
+          "beforeConception": "avant la conception",
+          "percent": "Grossesse accomplie",
+          "groupDue": "Date prévue d'accouchement",
+          "lmpPlus280": "dernières règles + 280 jours",
+          "naegele": "Règle calendaire de Naegele",
+          "naegeleFormula": "+1 an −3 mois +7 jours",
+          "difference": "Écart avec 280 jours",
+          "naegeleMinus280": "Naegele − date à 280 jours",
+          "weeksLeft": "Temps restant",
+          "groupTrimester": "Trimestre",
+          "trimesterCalc": "Étiquette de la calculatrice",
+          "calcRule": "cette calculatrice : < 13 s, < 27 s",
+          "trimesterAcog": "Trimestre ACOG",
+          "acogRule": "ACOG : 0–13s 6j, 14–27s 6j, 28s+",
+          "trimesterLeft": "Jours restants dans ce trimestre",
+          "nextTrimester": "Début du trimestre {n}",
+          "groupKeyDates": "Dates clés (fenêtres standard)",
+          "groupWeek": "Cette semaine (semaine {week})",
+          "weekTable": "tableau hebdomadaire de la calculatrice",
+          "length": "Longueur",
+          "crl": "cranio-caudale (jusqu'à la semaine 19)",
+          "chl": "vertex-talon (dès la semaine 20)",
+          "weight": "Poids",
+          "uterus": "Taille de l'utérus",
+          "fundusRule": "hauteur utérine ≈ semaines (typique)",
+          "typical": "typique, approximatif",
+          "tooEarly": "mesuré dès la semaine 4",
+          "colQuantity": "Grandeur",
+          "colFormula": "Formule",
+          "colValue": "Valeur",
+          "hint": "Faites glisser pour tourner l'utérus",
+          "caption": "L'utérus à {week} : il atteint sa taille typique pour la semaine, avec la règle en vrais centimètres, et le bébé replié à l'intérieur mesure {length}. L'anneau à la base représente les 40 semaines divisées en trois trimestres, rempli jusqu'à aujourd'hui."
+        },
+        "timeline": {
+          "title": "La chronologie de votre grossesse",
+          "subtitle": "Faites glisser aujourd'hui le long des 42 semaines : la date des dernières règles, la date prévue, le tableau de résultats et l'utérus en 3D bougent avec.",
+          "caption": "À {ga}, la date prévue d'accouchement est le {due}. Les points pleins sont les étapes déjà passées ; les bandes sont les trois trimestres de l'ACOG.",
+          "handle": "Âge gestationnel",
+          "rowGa": "Âge gestationnel",
+          "rowLmp": "Dernières règles le",
+          "rowDue": "Date prévue",
+          "rowTrimester": "Trimestre (ACOG)",
+          "rowPassed": "Étapes passées",
+          "rowNext": "Suivante",
+          "allPassed": "toutes passées",
+          "you": "Vous"
+        },
+        "rings": {
+          "title": "Anneaux de progression",
+          "subtitle": "Trois anneaux à une même date : toute la grossesse (280 jours), le trimestre en cours et la semaine en cours. Regardez en avant pour voir où vous en serez.",
+          "caption": "Le {date}, la grossesse sera accomplie à {pct}, au {tri}.",
+          "handle": "Semaines en avant",
+          "rowDate": "Date",
+          "rowGa": "Âge gestationnel",
+          "rowWeekDay": "Jour de cette semaine",
+          "rowLeft": "Jours jusqu'à la date prévue",
+          "ringTotal": "Grossesse",
+          "ringWeek": "Jour de semaine",
+          "now": "aujourd'hui"
+        },
+        "growth": {
+          "title": "Courbe de croissance du bébé",
+          "subtitle": "Le poids de la calculatrice pour chaque semaine de 4 à 40, avec cette semaine entourée. Choisissez une semaine pour voir sa comparaison de taille.",
+          "caption": "À {week}, le bébé a à peu près la taille de : {size} ; il pèse {weight} et mesure {length}.",
+          "handle": "Semaine",
+          "rowWeek": "Semaine (date)",
+          "rowSize": "Comparaison de taille",
+          "rowCrl": "Longueur cranio-caudale",
+          "rowChl": "Longueur vertex-talon",
+          "rowWeight": "Poids",
+          "rowGain": "Gain depuis la semaine dernière",
+          "rowPct": "Part du poids à 40 semaines",
+          "you": "Vous",
+          "lengthNote": "Moyennes approximatives ; la longueur fait un saut à la semaine 20 (vertex-talon)"
+        },
+        "term": {
+          "title": "Comment s'appelle une naissance à cette semaine",
+          "subtitle": "Les définitions du terme de l'ACOG en zones colorées. Déplacez la semaine de naissance pour voir son nom, sa date selon vos dernières règles et son écart avec la date prévue.",
+          "caption": "Une naissance à {ga} ({date}) est dite : {zone}.",
+          "handle": "Semaine de naissance",
+          "rowDate": "Date",
+          "rowZone": "Catégorie",
+          "rowFromDue": "Par rapport à la date prévue",
+          "rowFromToday": "À partir d'aujourd'hui",
+          "past": "déjà passée",
+          "rowRange": "Plage de la catégorie",
+          "you": "Vous aujourd'hui :"
+        },
+        "naegele": {
+          "title": "La règle de Naegele pas à pas",
+          "subtitle": "Deux chemins vers la même date prévue, puis un ajustement pour les cycles plus longs ou plus courts que 28 jours (un affinement clinique courant ; la calculatrice suppose 28 jours).",
+          "caption": "Avec un cycle de {cycle}, l'ovulation se décale et la date prévue ajustée devient le {adj}.",
+          "handle": "Durée du cycle",
+          "rowNaegele": "+1 an −3 mois +7 j",
+          "row280": "+280 jours (calculatrice)",
+          "rowDiff": "Écart",
+          "rowOvulation": "Ovulation (cycle − 14)",
+          "day": "jour",
+          "rowAdjusted": "Date prévue ajustée",
+          "laneNaegele": "Règle calendaire de Naegele",
+          "lane280": "Règle des 280 jours",
+          "laneAdjusted": "Cycle de {cycle} jours"
+        },
+        "birthWindow": {
+          "title": "Quand les bébés arrivent en général",
+          "subtitle": "Les naissances spontanées se répartissent autour de la date prévue. Choisissez une date pour voir la part des naissances attendues d'ici là (modèle illustratif, écart-type de 10 jours).",
+          "caption": "D'ici le {date}, environ {pct} des bébés seraient nés selon ce modèle.",
+          "handle": "Jours par rapport à la date prévue",
+          "rowDate": "Date",
+          "rowGa": "Âge gestationnel",
+          "rowBy": "Nés à cette date",
+          "rowDay": "Nés ce jour-là",
+          "rowWeek": "À ±7 jours de la date prévue",
+          "rowModel": "Modèle (approximatif)",
+          "axis": "jours par rapport à la date prévue"
+        },
+        "weightGain": {
+          "title": "Prise de poids recommandée à ce jour",
+          "subtitle": "Fourchettes de l'IOM (2009) selon l'IMC avant grossesse, rapportées à votre semaine : 0,5–2 kg au premier trimestre, puis un rythme hebdomadaire. Les barres pâles sont le total au terme.",
+          "caption": "À {week}, la prise recommandée est de {range} pour la catégorie d'IMC : {cat}.",
+          "handle": "IMC avant grossesse",
+          "rowBmi": "IMC avant grossesse",
+          "rowBmiAssumed": "IMC avant grossesse (supposé)",
+          "rowCategory": "Catégorie d'IMC",
+          "rowNow": "Prise à {week}",
+          "rowTotal": "Total au terme",
+          "rowRate": "Par semaine, 2e et 3e trimestres",
+          "soFar": "Fourchette recommandée à"
+        },
+        "visits": {
+          "title": "Calendrier des consultations prénatales",
+          "subtitle": "Le calendrier courant à faible risque en marches : toutes les 4 semaines jusqu'à 28, toutes les 2 semaines jusqu'à 36, puis chaque semaine. Choisissez une semaine pour voir les consultations faites et la suivante.",
+          "caption": "À {week}, {done} des {total} consultations courantes sont faites ; les consultations ont lieu désormais {every}.",
+          "handle": "Semaine",
+          "rowDone": "Consultations à la semaine {week}",
+          "rowLeft": "Consultations restantes",
+          "rowInterval": "Intervalle actuel",
+          "every": "{n, plural, one {chaque semaine} other {toutes les # semaines}}",
+          "rowNext": "Prochaine consultation",
+          "afterDue": "après la date prévue",
+          "rowTest": "Examen habituel maintenant",
+          "tests": {
+            "nt": "Clarté nucale (11–14 s)",
+            "anatomy": "Écho morphologique (18–22 s)",
+            "glucose": "Test du glucose (24–28 s)",
+            "gbs": "Prélèvement SGB (36–37 s)",
+            "none": "Suivi courant"
+          }
+        }
       }
     },
     "macro-calculator": {

@@ -20,10 +20,11 @@
 - ideal-weight-calculator (round 3)
 - sleep-calculator (round 4)
 - pace-calculator (round 4)
+- pregnancy-calculator (round 5)
+- due-date-calculator (round 5)
 
 ## Remaining
-- pregnancy-calculator, due-date-calculator
-- ovulation-calculator
+- ovulation-calculator (final round: also do the cross-tool decisions listed in notes)
 
 ## Problems / notes
 - Indicator cards use Western digits (same as BMICards); only result tables use the digit-style helper. Decide in final round whether to unify.
@@ -44,3 +45,8 @@
 - Round 4 (sleep, pace): Sleep cards copy small SvgTrack/Card/useSharedStepper helpers from MacroCards (not exported there); final round could export them from macro-calculator and import instead. Sleep ladder "Yours" badge dropped (wrapped at 320px); selected row still highlighted. Sleep assumes adult 26-64 until an age group is picked; stage minutes per cycle are an approximate textbook model; wind-down offsets: caffeine 6 h, meal 3 h, lights 2 h, screens 1 h.
 - Pace: WorldRecordsTable kept (education data table, not a drawing). Converter mode has no distance: result/cards use a 10 km effort (labelled). Timeline starts 08:00; goal card starts 5% faster. Multipoint with miles now shows segment distance/pace in miles (old table showed km values labelled as miles; display-only fix). PaceShareExportModal warns about duplicate React keys (rows "Pace"/"Speed" twice), pre-existing, left as is.
 - Unused old keys left: sleep diagram.*, quickReference.*, byAgeDiagram.*, clockDiagram.*, result.cycles; pace quickReference.*, gauge.ariaLabel/ariaLabelEmpty, multipointSplitsChart.*, aboveFold.conceptDiagram.*.
+- Round 5 (pregnancy, due date): pregnancy has a 3D uterus+fetus scene that grows by week; due date has a 3D 42-week board-game path (distinct). Both copy SvgTrack/Card/useSharedStepper again (now in Sleep, Pregnancy, DueDate cards): unify in the final round.
+- Pregnancy: tool's trimester cut-offs (<13/<27 w) are 1 week earlier than ACOG (14+0/28+0); logic untouched, both shown and labelled. Decide later whether to fix in packages/tools. Assumes BMI 22 for IOM weight-gain card, birth model SD 10 days, 28-day cycle, low-risk visit schedule. Some formula cells keep "LMP"/"w/d" in Latin in Arabic.
+- Due date: DEFAULT CHANGED from LMP = today (0w0d) to LMP 70 days ago (10+0) so the page loads with a real result; Clear resets to that default. Needs Yousef's OK. No ultrasound input mode exists (only via redating card, ACOG CO 700). Share modal dates now use the visitor locale (Western digits) instead of always en-US.
+- Both: "today" computed on server and client (as before), so a hydration mismatch is possible around midnight.
+- Unused old keys left: pregnancy diagram.*, quickReference.*, education.intro.weekGauge.*; due-date diagram.*, quickReference.*, trimesterDiagram.*, education.intro.weekGauge.*.

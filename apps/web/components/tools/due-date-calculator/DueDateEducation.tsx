@@ -4,14 +4,23 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import DueDateWeekGauge from "./DueDateWeekGauge";
-import TrimesterDiagram from "./TrimesterDiagram";
+import {
+  DueBirthOddsCard,
+  DueCalendarCard,
+  DueCountdownCard,
+  DueCycleCard,
+  DueErrorTrioCard,
+  DueMethodsCard,
+  DueTermWindowCard,
+  DueTimelineCard,
+} from "./DueDateCards";
 
 type ExampleRow = { calculation: string; result: string };
 type MethodItem = { title: string; description: string };
 
 export default async function DueDateEducation() {
   const t = await getTranslations("tools.due-date-calculator.education");
+  const tv = await getTranslations("tools.due-date-calculator.visuals.notices");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const methodItems = t.raw("methods.items") as MethodItem[];
@@ -20,12 +29,21 @@ export default async function DueDateEducation() {
 
   return (
     <EncyclopediaPaper>
-      <DueDateWeekGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <DueTimelineCard side="visual-left" />
+        <DueCountdownCard side="table-left" />
+      </div>
+
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <TrimesterDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <DueTermWindowCard side="visual-left" />
+          <DueBirthOddsCard side="table-left" />
+          <DueCalendarCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("methods.title")}>
@@ -37,6 +55,11 @@ export default async function DueDateEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <DueCycleCard side="table-left" />
+          <DueMethodsCard side="visual-left" />
+          <DueErrorTrioCard side="table-left" />
         </div>
       </InfoSection>
 
@@ -97,6 +120,13 @@ export default async function DueDateEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={tv("title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tv("estimate")}</li>
+          <li>{tv("assumptions")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

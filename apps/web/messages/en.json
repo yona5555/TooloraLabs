@@ -28073,6 +28073,187 @@
           "second": "Second Trimester",
           "third": "Third Trimester"
         }
+      },
+      "visuals": {
+        "notices": {
+          "title": "Notices",
+          "estimate": "A due date is an estimate, not a deadline: most babies arrive in the weeks around it, and only a small share are born on the day itself. This tool is for general information and is not medical advice; your midwife or doctor will confirm the dates, usually with an early ultrasound.",
+          "assumptions": "Assumptions used by the visuals (labelled where they appear): Naegele's rule, 280 days from the LMP, adjusted by (cycle length − 28) days; term categories follow ACOG Committee Opinion 579 (2013); the visit schedule is a typical ACOG prenatal schedule and your clinic may differ; ultrasound redating limits follow ACOG Committee Opinion 700 (2017); the birth-by-week chances use a simple bell-curve model centred on the due date with a 10-day spread (approximate, it ignores inductions and planned caesareans); when you date by conception or IVF, the cycle and LMP cards use an equivalent LMP 14 days before conception."
+        },
+        "keyDates": {
+          "title": "Key Dates at a Glance",
+          "intro": "Your pregnancy's milestones on the calendar, counted from the (equivalent) first day of your last period.",
+          "today": "Today",
+          "done": "Done",
+          "inDays": "in {n} d",
+          "note": "Weeks are written as weeks+days: 13+0 means 13 weeks and 0 days since the last period.",
+          "rows": {
+            "lmp": "Last period (week 0)",
+            "conception": "Conception (about)",
+            "t2": "Second trimester begins",
+            "t3": "Third trimester begins",
+            "early": "Early term begins",
+            "full": "Full term begins",
+            "due": "Estimated due date",
+            "post": "Post-term begins"
+          }
+        },
+        "result": {
+          "given": "given",
+          "groupInputs": "Your inputs",
+          "today": "Today",
+          "groupDates": "Dates",
+          "lmpEquivalent": "Equivalent LMP",
+          "naegeleClassic": "Naegele (28-day cycle)",
+          "naegeleMnemonic": "Naegele mnemonic",
+          "mnemonicFormula": "+1 year −3 months +7 days",
+          "cycleShift": "Cycle adjustment (days)",
+          "groupProgress": "Progress today",
+          "percent": "Share of 40 weeks",
+          "weeksLeft": "Time left",
+          "groupTerm": "Term window (ACOG)",
+          "groupTrimesters": "Trimesters",
+          "t2Starts": "Second trimester begins",
+          "t3Starts": "Third trimester begins",
+          "groupMilestones": "Typical visit schedule (approximate)",
+          "colQuantity": "Quantity",
+          "colFormula": "Formula",
+          "colValue": "Value",
+          "hint": "Drag to rotate the week path",
+          "caption": "The 42-week path from your last period: one stone per week, six rows of seven. Raised stones are weeks already lived (blue = 1st, violet = 2nd, amber = 3rd trimester), the pin marks today at {ga}, the green plates are the term window (37–41) and the flag is the due date, {due}."
+        },
+        "common": {
+          "abbr": {
+            "lmp": "LMP",
+            "conception": "Conception",
+            "today": "Today",
+            "due": "Due",
+            "transfer": "Transfer",
+            "d": "d"
+          },
+          "wdUnit": "w+d",
+          "none": "None",
+          "zones": {
+            "preterm": "Preterm",
+            "early": "Early term",
+            "full": "Full term",
+            "late": "Late term",
+            "post": "Post-term"
+          },
+          "zoneStart": {
+            "early": "Early term begins",
+            "full": "Full term begins",
+            "due": "Due date",
+            "late": "Late term begins",
+            "post": "Post-term begins"
+          },
+          "milestones": {
+            "test": "Pregnancy test",
+            "dating": "Dating scan",
+            "nt": "NT screening",
+            "anatomy": "Anatomy scan",
+            "glucose": "Glucose test",
+            "tdap": "Tdap vaccine",
+            "gbs": "GBS swab"
+          }
+        },
+        "timeline": {
+          "title": "Pregnancy Timeline: Pick Any Week",
+          "subtitle": "Every week from the last period to 42 weeks, with the trimesters and a typical schedule of tests and scans. Drag the handle to any week to see its calendar dates and what usually happens then; the dashed line is today.",
+          "handle": "Week",
+          "caption": "Week {week} starts on {date}.",
+          "rowFromToday": "Days from today",
+          "rowZone": "Term category",
+          "notYetTerm": "Before term",
+          "rowMilestones": "Usually this week",
+          "rowNext": "Next milestone"
+        },
+        "window": {
+          "title": "The Term Window on Your Calendar",
+          "subtitle": "ACOG divides birth timing into preterm, early, full, late and post-term. The strip shows those zones as real dates around your due date; drag the handle to pick a birth day and see where it falls.",
+          "handle": "Birth day",
+          "caption": "A birth on {date} would be at {ga}: {zone}.",
+          "before": "before {date}",
+          "from": "from {date}",
+          "rowGa": "Gestational age at birth",
+          "rowZone": "Category",
+          "rowFromToday": "Days from today",
+          "rowWindow": "Term window (37+0 – 41+6)",
+          "rowLength": "Length of the window"
+        },
+        "odds": {
+          "title": "Chance of Birth by Week",
+          "subtitle": "How births spread around the due date, by week of pregnancy (simple bell-curve model, approximate). Drag the handle to a week to see its chance, its dates and the running total.",
+          "handle": "Week",
+          "caption": "Model: about {p} of births fall in week {week}, and {by} by its end.",
+          "axis": "% of births per week (model)",
+          "rowInWeek": "Born in {week}",
+          "rowDates": "Your dates for that week",
+          "rowByEnd": "Born by the end of it",
+          "rowStill": "Still pregnant at its start",
+          "rowOnDue": "Born on the due date itself",
+          "rowWithin7": "Born within ±7 days of it",
+          "rowModel": "Model (assumed)"
+        },
+        "cycle": {
+          "title": "Naegele's Rule and Your Cycle Length",
+          "subtitle": "Naegele's rule assumes a 28-day cycle with ovulation on day 14. A longer cycle ovulates later, so the due date moves one day later per extra day, and earlier for a shorter cycle. Drag the handle to change the cycle length.",
+          "handle": "Cycle length",
+          "caption": "A {c} cycle shifts the due date by {shift}, to {date}. Dragging here also changes the cycle-length input.",
+          "captionOther": "Shown for an equivalent LMP: if your cycle were {c}, an LMP-based due date would shift by {shift}, to {date}.",
+          "axisY": "Due-date shift (days)",
+          "typical": "typical",
+          "classic": "Naegele",
+          "rowLmpEq": "Equivalent LMP",
+          "rowMnemonic": "Mnemonic: +1 y −3 m +7 d",
+          "rowOvulation": "Ovulation day of a {c}-day cycle"
+        },
+        "methods": {
+          "title": "Every Dating Method Lands on One Date",
+          "subtitle": "Each method counts a fixed number of days to the same due date: 280 from the last period (28-day cycle), 266 from conception, and 266 minus the embryo's age from an IVF transfer. Drag the handle to change the embryo's age at transfer.",
+          "handle": "Embryo age at transfer",
+          "caption": "All arrows meet at {due}; a day-{n} embryo transferred on {date} gives the same date.",
+          "ivfDay": "IVF, day-{n} embryo",
+          "dayN": "Day {n}",
+          "dayShort": "D{n}",
+          "rowEmbryo": "Transfer to due date"
+        },
+        "countdown": {
+          "title": "Countdown on Any Date",
+          "subtitle": "Three rings show how far along you are on a chosen date: the outer ring is the 280 days, the middle ring the current trimester and the inner ring the days of the current week. Drag the handle up to 12 weeks back or ahead.",
+          "handle": "Date",
+          "caption": "On {date} you are at {ga} with {left} to go.",
+          "rowWeeksLeft": "Weeks+days left",
+          "rowTrimester": "Into the {n} trimester",
+          "rowMonths": "Months left (about)",
+          "ring280": "280 days",
+          "ringTrimester": "{n} trimester",
+          "ringWeek": "This week"
+        },
+        "calendar": {
+          "title": "Your Pregnancy Calendar, Month by Month",
+          "subtitle": "Each day coloured by trimester, then by term zone from 37 weeks; the outlined day is today, the green day is the due date and the dots mark when a typical test or scan window opens. Drag the handle to move through the months.",
+          "handle": "Month",
+          "caption": "{month}: from {ga}.",
+          "rowMonth": "Month {n} of {total}",
+          "rowStarts": "Windows opening",
+          "rowDays": "Days of pregnancy this month"
+        },
+        "error": {
+          "title": "If the Date Is a Few Days Off",
+          "subtitle": "A remembered LMP can be off by days. The trio shows the due date moved earlier and later by that error; the green band is how far an ultrasound may differ before doctors redate (ACOG, by your current week). Drag the handle to change the error.",
+          "handle": "Dating error",
+          "captionKeep": "An error of {e} is within the ±{t} limit at {ga}: the LMP date would usually be kept.",
+          "captionRedate": "An error of {e} exceeds the ±{t} limit at {ga}: the due date would usually be changed to the ultrasound date.",
+          "earlier": "Earlier",
+          "current": "Current",
+          "later": "Later",
+          "rowGaRange": "Gestational age today",
+          "rowThreshold": "Redating limit at {ga}",
+          "rowVerdict": "Usual practice",
+          "redate": "Redate by ultrasound",
+          "keep": "Keep the LMP date"
+        }
       }
     },
     "ovulation-calculator": {
@@ -28525,6 +28706,219 @@
         "shareToSocial": "Share to social media",
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Notices",
+          "disclaimer": "This tracker gives general information from the date of your last period and is not medical advice. Dating by early ultrasound is more accurate; follow your doctor or midwife's dates and see them about any concern.",
+          "conventions": "Conventions used: gestational age is counted from the first day of the last menstrual period and the due date is that day + 280 days (Naegele's rule, which assumes a 28-day cycle with ovulation on day 14). The visuals use the ACOG trimesters (1st: 0w 0d–13w 6d, 2nd: 14w 0d–27w 6d, 3rd: 28w 0d onward) and the ACOG term definitions (2013); the calculator's own trimester label switches one week earlier, at weeks 13 and 27, and both are shown in the Result table.",
+          "assumptions": "Assumptions used by the visuals (labelled where they appear): uterus size follows the typical growth by week (about 7.5 cm before pregnancy, fundal height ≈ weeks from 20 to 36 weeks); baby length and weight come from the calculator's week table (crown–rump length to week 19, crown–heel from week 20, approximate averages); the birth-timing curve is an illustrative normal curve with a standard deviation of 10 days around the due date (about 4% of births fall on the due date itself); weight-gain ranges are the IOM (2009) guidelines with a pre-pregnancy BMI of 22 assumed until you change it; the visit schedule is the routine low-risk schedule (every 4 weeks to week 28, every 2 weeks to 36, then weekly)."
+        },
+        "ladder": {
+          "title": "Week by Week at a Glance",
+          "intro": "Every fourth week for your last-period date, with the calendar date and the size comparison. Click a row to set today to that week.",
+          "colWeek": "Week",
+          "colDate": "Date",
+          "colSize": "Size",
+          "note": "Colours mark the trimesters (ACOG): pink 1st, purple 2nd, indigo 3rd. Week 40 is the estimated due date."
+        },
+        "common": {
+          "edd": "Due",
+          "tri": {
+            "t1": "1st trimester",
+            "t2": "2nd trimester",
+            "t3": "3rd trimester"
+          },
+          "stations": {
+            "conception": "Conception",
+            "heartbeat": "Heartbeat",
+            "endT1": "End of T1",
+            "anatomy": "Anatomy scan",
+            "viability": "Viability",
+            "startT3": "T3 begins",
+            "earlyTerm": "Early term",
+            "fullTerm": "Full term",
+            "lateTerm": "Late term",
+            "due": "Due date",
+            "postTerm": "Post-term"
+          },
+          "terms": {
+            "preterm": "Preterm",
+            "earlyTerm": "Early term",
+            "fullTerm": "Full term",
+            "lateTerm": "Late term",
+            "postTerm": "Post-term"
+          },
+          "gain": {
+            "under": "Underweight",
+            "normal": "Normal",
+            "over": "Overweight",
+            "obese": "Obese"
+          }
+        },
+        "result": {
+          "groupInputs": "Your inputs",
+          "given": "given",
+          "assumed": "assumed",
+          "standard": "standard",
+          "today": "Today",
+          "cycle": "Cycle length",
+          "fullTerm": "Full pregnancy",
+          "groupAge": "Gestational age",
+          "totalDays": "Days since last period",
+          "todayMinusLmp": "today − last period",
+          "decimalWeeks": "In weeks (decimal)",
+          "months": "In months (approx.)",
+          "fetalAge": "Age since conception",
+          "beforeConception": "before conception",
+          "percent": "Pregnancy completed",
+          "groupDue": "Due date",
+          "lmpPlus280": "last period + 280 days",
+          "naegele": "Naegele's calendar rule",
+          "naegeleFormula": "+1 year −3 months +7 days",
+          "difference": "Difference from 280 days",
+          "naegeleMinus280": "Naegele − 280-day date",
+          "weeksLeft": "Time left",
+          "groupTrimester": "Trimester",
+          "trimesterCalc": "Calculator label",
+          "calcRule": "this calculator: < 13 w, < 27 w",
+          "trimesterAcog": "ACOG trimester",
+          "acogRule": "ACOG: 0–13w 6d, 14–27w 6d, 28w+",
+          "trimesterLeft": "Days left in this trimester",
+          "nextTrimester": "Trimester {n} begins",
+          "groupKeyDates": "Key dates (standard windows)",
+          "groupWeek": "This week (week {week})",
+          "weekTable": "calculator's week table",
+          "length": "Length",
+          "crl": "crown–rump (to week 19)",
+          "chl": "crown–heel (from week 20)",
+          "weight": "Weight",
+          "uterus": "Uterus size",
+          "fundusRule": "fundal height ≈ weeks (typical)",
+          "typical": "typical, approximate",
+          "tooEarly": "measured from week 4",
+          "colQuantity": "Quantity",
+          "colFormula": "Formula",
+          "colValue": "Value",
+          "hint": "Drag to rotate the womb",
+          "caption": "The womb at {week}: the uterus grows to its typical size for the week, with the ruler in real centimetres, and the curled baby inside is {length} long. The ring at the base is the 40 weeks split into the three trimesters, filled up to today."
+        },
+        "timeline": {
+          "title": "Your Pregnancy Timeline",
+          "subtitle": "Drag today along the 42 weeks: the last-period date, the due date, the Result table and the 3D womb all move with it.",
+          "caption": "At {ga} the due date is {due}. Filled dots are the stations already passed; the bands are the three ACOG trimesters.",
+          "handle": "Gestational age",
+          "rowGa": "Gestational age",
+          "rowLmp": "Last period would be",
+          "rowDue": "Due date",
+          "rowTrimester": "Trimester (ACOG)",
+          "rowPassed": "Stations passed",
+          "rowNext": "Next",
+          "allPassed": "all passed",
+          "you": "You"
+        },
+        "rings": {
+          "title": "Progress Rings",
+          "subtitle": "Three rings on one date: the whole pregnancy (280 days), the current trimester and the current week. Look ahead to see where you will be.",
+          "caption": "On {date} the pregnancy is {pct} complete, in the {tri}.",
+          "handle": "Weeks ahead",
+          "rowDate": "Date",
+          "rowGa": "Gestational age",
+          "rowWeekDay": "Day of this week",
+          "rowLeft": "Days to the due date",
+          "ringTotal": "Pregnancy",
+          "ringWeek": "Week day",
+          "now": "today"
+        },
+        "growth": {
+          "title": "Baby's Growth Curve",
+          "subtitle": "The calculator's weight for every week from 4 to 40, with this week circled. Pick any week to see its size comparison.",
+          "caption": "At {week} the baby is about the size of a {size}: {weight} and {length} long.",
+          "handle": "Week",
+          "rowWeek": "Week (date)",
+          "rowSize": "Size comparison",
+          "rowCrl": "Length, crown–rump",
+          "rowChl": "Length, crown–heel",
+          "rowWeight": "Weight",
+          "rowGain": "Gain since last week",
+          "rowPct": "Share of week-40 weight",
+          "you": "You",
+          "lengthNote": "Approximate averages; length jumps at week 20 (crown–heel)"
+        },
+        "term": {
+          "title": "What a Birth on That Week Is Called",
+          "subtitle": "The ACOG term definitions as coloured zones. Move the birth week to see its name, its date for your last period and how far it is from the due date.",
+          "caption": "A birth at {ga} ({date}) is called {zone}.",
+          "handle": "Birth week",
+          "rowDate": "Date",
+          "rowZone": "Category",
+          "rowFromDue": "From the due date",
+          "rowFromToday": "From today",
+          "past": "already passed",
+          "rowRange": "Category range",
+          "you": "You today:"
+        },
+        "naegele": {
+          "title": "Naegele's Rule Step by Step",
+          "subtitle": "Two ways to the same due date, then an adjustment for cycles longer or shorter than 28 days (a common clinical refinement; the calculator itself assumes 28 days).",
+          "caption": "With a {cycle} cycle, ovulation shifts and the adjusted due date becomes {adj}.",
+          "handle": "Cycle length",
+          "rowNaegele": "+1 y −3 mo +7 d",
+          "row280": "+280 days (calculator)",
+          "rowDiff": "Difference",
+          "rowOvulation": "Ovulation (cycle − 14)",
+          "day": "day",
+          "rowAdjusted": "Adjusted due date",
+          "laneNaegele": "Naegele's calendar rule",
+          "lane280": "280-day rule",
+          "laneAdjusted": "Cycle of {cycle} days"
+        },
+        "birthWindow": {
+          "title": "When Babies Usually Arrive",
+          "subtitle": "Spontaneous births spread around the due date. Pick a date to see the share of births expected by then (illustrative model, standard deviation 10 days).",
+          "caption": "By {date}, about {pct} of babies would have arrived in this model.",
+          "handle": "Days from the due date",
+          "rowDate": "Date",
+          "rowGa": "Gestational age",
+          "rowBy": "Born by this date",
+          "rowDay": "Born on this day",
+          "rowWeek": "Within ±7 days of due",
+          "rowModel": "Model (approximate)",
+          "axis": "days from the due date"
+        },
+        "weightGain": {
+          "title": "Recommended Weight Gain So Far",
+          "subtitle": "IOM (2009) ranges by pre-pregnancy BMI, scaled to your week: 0.5–2 kg in the first trimester, then a weekly rate. Faded bars are the total by term.",
+          "caption": "By {week}, the recommended gain is {range} for the {cat} BMI category.",
+          "handle": "Pre-pregnancy BMI",
+          "rowBmi": "Pre-pregnancy BMI",
+          "rowBmiAssumed": "Pre-pregnancy BMI (assumed)",
+          "rowCategory": "BMI category",
+          "rowNow": "Gain by {week}",
+          "rowTotal": "Total by term",
+          "rowRate": "Weekly, 2nd and 3rd trimesters",
+          "soFar": "Recommended range by"
+        },
+        "visits": {
+          "title": "Prenatal Visit Schedule",
+          "subtitle": "The routine low-risk schedule as steps: every 4 weeks to week 28, every 2 weeks to 36, then weekly. Pick a week to see the visits done and the next one.",
+          "caption": "By {week}, {done} of {total} routine visits are done; visits are now {every}.",
+          "handle": "Week",
+          "rowDone": "Visits by week {week}",
+          "rowLeft": "Visits left",
+          "rowInterval": "Interval now",
+          "every": "{n, plural, one {every week} other {every # weeks}}",
+          "rowNext": "Next visit",
+          "afterDue": "after the due date",
+          "rowTest": "Typical test now",
+          "tests": {
+            "nt": "Nuchal scan (11–14 w)",
+            "anatomy": "Anatomy scan (18–22 w)",
+            "glucose": "Glucose test (24–28 w)",
+            "gbs": "GBS swab (36–37 w)",
+            "none": "Routine check"
+          }
+        }
       }
     },
     "macro-calculator": {

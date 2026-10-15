@@ -10,26 +10,29 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PregnancyInputPanel from "./PregnancyInputPanel";
 import PregnancyResult from "./PregnancyResult";
-import PregnancyQuickReference from "./PregnancyQuickReference";
+import PregnancyWeekLadder from "./PregnancyWeekLadder";
+import { PregnancyLiveContext, type PregnancyLive } from "./PregnancyLiveContext";
+import { addDaysISO, clampGa, snapshotOf, todayISO, type PregSnapshot } from "./preg";
 import type { PregnancyScenario } from "./types";
 
 const tool = new PregnancyTool();
 
-function todayISO(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
-
 function lastPeriodDateForWeeksAlong(weeksAlong: number): string {
-  const now = new Date();
-  now.setDate(now.getDate() - 7 * weeksAlong);
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  return addDaysISO(todayISO(), -7 * weeksAlong);
 }
 
 const DEFAULT_WEEKS_ALONG = 10;
 
+function compute(lastPeriodDate: string) {
+  const today = todayISO();
+  const data = tool.execute({ lastPeriodDate, referenceDate: today }, { locale: "en-US" }).data;
+  const snap: PregSnapshot | null = data && !data.error ? snapshotOf(lastPeriodDate, today, data) : null;
+  return { data, snap };
+}
+
 export default function PregnancyCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.pregnancy-calculator.nav");
+  const tv = useTranslations("tools.pregnancy-calculator.visuals");
   const [lastPeriodDate, setLastPeriodDate] = useState(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG));
 
   function handleScenarioPreset(scenario: PregnancyScenario) {
@@ -42,42 +45,61 @@ export default function PregnancyCalculator({ education }: { education: ReactNod
 
   const digitStyle = resolveDigitStyle();
 
-  const result = useMemo(() => {
-    const output = tool.execute({ lastPeriodDate, referenceDate: todayISO() }, { locale: "en-US" });
-    return output.data;
-  }, [lastPeriodDate]);
+  // Live: every valid date updates the result at once; an invalid, future or half-typed date keeps
+  // the last good result on screen, with the calculator's own error note in the Result card.
+  const live = useMemo(() => compute(lastPeriodDate), [lastPeriodDate]);
+  const [good, setGood] = useState<PregSnapshot>(() => compute(lastPeriodDateForWeeksAlong(DEFAULT_WEEKS_ALONG)).snap!);
+  if (live.snap && good !== live.snap) setGood(live.snap);
+  const shown = live.snap ?? good;
+
+  const liveCtx = useMemo<PregnancyLive>(
+    () => ({
+      snap: shown,
+      setGa: (days: number) => setLastPeriodDate(addDaysISO(shown.today, -clampGa(Math.round(days)))),
+    }),
+    [shown],
+  );
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    { id: "notices", label: tv("notices.title") },
   ];
 
   return (
-    <>
+    <PregnancyLiveContext.Provider value={liveCtx}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
           input={
-            <PregnancyInputPanel
-              lastPeriodDate={lastPeriodDate}
-              onLastPeriodDateChange={setLastPeriodDate}
-              onScenarioPreset={handleScenarioPreset}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-4 lg:h-full">
+              <PregnancyInputPanel
+                lastPeriodDate={lastPeriodDate}
+                onLastPeriodDateChange={setLastPeriodDate}
+                onScenarioPreset={handleScenarioPreset}
+                onClear={handleClear}
+              />
+              <PregnancyWeekLadder />
+            </div>
           }
-          result={<PregnancyResult result={result} digitStyle={digitStyle} />}
+          result={
+            <div className="flex flex-col gap-4 lg:h-full">
+              <PregnancyResult fill snap={shown} error={live.data?.error ?? null} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="pregnancy-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
               <SectionNav items={navItems} />
               <ViewDocsLink slug="pregnancy-calculator" />
-              <PregnancyQuickReference />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </PregnancyLiveContext.Provider>
   );
 }

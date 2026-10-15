@@ -4,13 +4,23 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import PregnancyWeekGauge from "./PregnancyWeekGauge";
+import {
+  PregnancyBirthWindowCard,
+  PregnancyGrowthCard,
+  PregnancyNaegeleCard,
+  PregnancyRingsCard,
+  PregnancyTermCard,
+  PregnancyTimelineCard,
+  PregnancyVisitsCard,
+  PregnancyWeightGainCard,
+} from "./PregnancyCards";
 
 type ExampleRow = { calculation: string; result: string };
 type TrimesterItem = { title: string; description: string };
 
 export default async function PregnancyEducation() {
   const t = await getTranslations("tools.pregnancy-calculator.education");
+  const tv = await getTranslations("tools.pregnancy-calculator.visuals.notices");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const trimesterItems = t.raw("trimesters.items") as TrimesterItem[];
@@ -19,11 +29,20 @@ export default async function PregnancyEducation() {
 
   return (
     <EncyclopediaPaper>
-      <PregnancyWeekGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <PregnancyTimelineCard side="visual-left" />
+        <PregnancyRingsCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <PregnancyGrowthCard side="visual-left" />
+          <PregnancyNaegeleCard side="table-left" />
+          <PregnancyBirthWindowCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("trimesters.title")}>
@@ -35,6 +54,11 @@ export default async function PregnancyEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <PregnancyTermCard side="table-left" />
+          <PregnancyWeightGainCard side="visual-left" />
+          <PregnancyVisitsCard side="table-left" />
         </div>
       </InfoSection>
 
@@ -95,6 +119,14 @@ export default async function PregnancyEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={tv("title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tv("disclaimer")}</li>
+          <li>{tv("conventions")}</li>
+          <li>{tv("assumptions")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );
