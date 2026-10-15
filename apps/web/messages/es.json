@@ -18257,9 +18257,44 @@
         "resultTitle": "Resultado",
         "placeholder": "Pega o escribe JSON a la izquierda para verlo formateado aquí.",
         "errorAt": "Error de sintaxis en la línea {line}, columna {column}",
+        "errorPanel": {
+          "title": "Qué salió mal",
+          "technicalLabel": "Mensaje del analizador",
+          "suggestionLabel": "Corrección sugerida",
+          "autoFixButton": "Corregir automáticamente",
+          "autoFixUnavailable": "No hay una corrección automática para esto — aplica la corrección sugerida arriba manualmente.",
+          "kind": {
+            "trailingComma": {
+              "explanation": "Hay una coma de más justo antes de una llave o corchete de cierre. JSON no permite una coma después del último elemento de un objeto o arreglo.",
+              "suggestion": "Elimina la coma justo antes del símbolo de cierre."
+            },
+            "singleQuotes": {
+              "explanation": "Esto usa comillas simples ('...'). Las cadenas y claves de JSON deben ir entre comillas dobles (\"...\").",
+              "suggestion": "Reemplaza las comillas simples por comillas dobles."
+            },
+            "unquotedKey": {
+              "explanation": "Esta clave del objeto no está entre comillas. Toda clave de JSON debe ser una cadena entre comillas dobles, incluso una palabra simple.",
+              "suggestion": "Pon la clave entre comillas dobles."
+            },
+            "comment": {
+              "explanation": "JSON no admite comentarios. El texto // o /* */ aquí no forma parte de la gramática de JSON.",
+              "suggestion": "Elimina el comentario."
+            },
+            "generic": {
+              "explanation": "Esto no coincide con una sintaxis JSON válida en esta posición.",
+              "suggestion": "Revisa el mensaje del analizador abajo para ver exactamente qué se espera aquí."
+            }
+          }
+        },
         "statKeys": "Claves",
         "statDepth": "Profundidad máx.",
-        "statSize": "Tamaño",
+        "statFormattedSize": "Tamaño formateado",
+        "statMinifiedSize": "Tamaño minificado",
+        "codeImage": {
+          "downloadPng": "Descargar como PNG",
+          "generating": "Generando…",
+          "done": "¡Descargado!"
+        },
         "commonErrors": {
           "title": "Errores comunes de JSON",
           "intro": "Los errores de sintaxis que más suelen confundir: todos son JSON inválido, aunque algunos parezcan razonables.",
@@ -18289,6 +18324,10 @@
               "fix": "JSON no tiene ninguna sintaxis de comentarios — ni // ni /* */."
             }
           ]
+        },
+        "outline": {
+          "title": "Esquema del documento",
+          "empty": "No hay valores anidados para mostrar."
         }
       },
       "form": {
@@ -18300,12 +18339,142 @@
         "indentLabel": "Sangría",
         "indentTab": "Tabulador",
         "sortKeysLabel": "Ordenar claves alfabéticamente",
+        "depthLabel": "Profundidad del árbol",
+        "depthMinus": "Mostrar un nivel menos",
+        "depthPlus": "Mostrar un nivel más",
         "format": "Formatear",
         "minify": "Minificar",
         "outputLabel": "Resultado",
         "copy": "Copiar",
         "copied": "¡Copiado!",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "extras": {
+          "quickSamplesTitle": "Muestras rápidas",
+          "quickSamples": {
+            "apiResponse": "Respuesta de API",
+            "packageJson": "package.json",
+            "geoJson": "Feature de GeoJSON",
+            "nestedSettings": "Ajustes anidados"
+          },
+          "statusValid": "JSON válido",
+          "statusInvalid": "JSON inválido",
+          "statusLines": "{n} líneas",
+          "statusDepth": "profundidad {n}",
+          "statusSize": "{n}",
+          "schemaTitle": "Esquema JSON inferido",
+          "schemaUnavailable": "Corrige el error de sintaxis de arriba para ver el esquema inferido."
+        }
+      },
+      "visuals": {
+        "bulb": {
+          "sceneAria": "Una bombilla colgante que puedes encender y apagar",
+          "pullHandle": "Tira del cordón para encender o apagar la bombilla",
+          "caption": "Tira del cordón o acciona el interruptor para encender y apagar la bombilla. Usa el regulador para ajustar su brillo.",
+          "switchLabel": "Interruptor de luz",
+          "switchOn": "Encendido",
+          "switchOff": "Apagado",
+          "brightnessReadout": "Brillo: {value} · {state}",
+          "validBadge": "JSON válido",
+          "invalidBadge": "JSON no válido · línea {line}, columna {column}"
+        },
+        "sunburst": {
+          "title": "Diagrama solar de la estructura",
+          "subtitle": "Cada anillo es un nivel de anidamiento del documento de ejemplo; cada segmento tiene un tamaño proporcional a los bytes de esa rama del árbol — arrastra por los anillos para inspeccionar un nivel.",
+          "caption": "El nivel {level} tiene {n} ramas, listadas abajo por proporción de bytes.",
+          "handle": "Nivel del anillo"
+        },
+        "typeDistribution": {
+          "title": "Distribución de tipos de valor",
+          "subtitle": "Todo valor JSON del documento de ejemplo es uno de seis tipos: dos estructurales y cuatro primitivos. Recorre los tipos para ver cuántos de cada uno contiene realmente el documento.",
+          "caption": "{count} de los valores del documento son de tipo «{type}».",
+          "handle": "Tipo JSON",
+          "row": {
+            "string": "Cadenas",
+            "number": "Números",
+            "boolean": "Booleanos",
+            "null": "Valores nulos",
+            "object": "Objetos",
+            "array": "Arreglos"
+          }
+        },
+        "prettyMinified": {
+          "title": "Formateado frente a minificado",
+          "subtitle": "Formatear añade espacios en blanco para que los humanos lean; minificar los elimina de nuevo. Arrastra por anchos de sangría de 0 a 8 espacios y observa cambiar el tamaño real en bytes.",
+          "caption": "Con {n} espacios de sangría, el documento de ejemplo pesa {size}.",
+          "handle": "Ancho de sangría (espacios)",
+          "rowMinified": "Minificado",
+          "row2sp": "Sangría de 2 espacios",
+          "row4sp": "Sangría de 4 espacios",
+          "rowTab": "Sangría con tabulador",
+          "rowCustom": "Actual ({n} esp.)"
+        },
+        "errorLocator": {
+          "title": "Localizador de errores",
+          "subtitle": "Cinco errores que parecen JSON válido pero no lo son — cada uno se pasa por el analizador real de la herramienta, que señala la línea y columna exactas donde se detuvo.",
+          "caption": "«{kind}» falla en la línea {line}, columna {col}.",
+          "handle": "Error",
+          "rowKind": "Tipo de error",
+          "rowLine": "Línea",
+          "rowColumn": "Columna",
+          "rowMessage": "Mensaje del analizador",
+          "kind": {
+            "trailingComma": "Coma final",
+            "singleQuotes": "Comillas simples",
+            "missingQuote": "Comilla de cierre faltante",
+            "unescapedNewline": "Salto de línea sin escapar",
+            "comment": "Comentario en JSON"
+          }
+        },
+        "tree": {
+          "title": "Árbol JSON",
+          "subtitle": "El documento de ejemplo como un árbol ordenado interactivo: haz clic en un nodo para plegar o desplegar su rama, pasa el cursor para ver su ruta completa, y arrastra el control para fijar cuántos niveles se muestran.",
+          "caption": "{shown} nodos mostrados · profundidad {depth} de {max}",
+          "handle": "Profundidad visible",
+          "hoverHint": "Pasa el cursor o enfoca un nodo para ver su ruta completa.",
+          "rowDepth": "Profundidad mostrada",
+          "rowNodes": "Nodos mostrados",
+          "rowObjects": "Objetos",
+          "rowArrays": "Arreglos",
+          "rowValues": "Valores primitivos"
+        },
+        "formatComparison": {
+          "title": "Comparación de formatos",
+          "subtitle": "Los mismos tres registros de usuario, serializados de cinco formas distintas. Recorre los formatos para comparar su tamaño real en bytes y ver un breve fragmento de cada uno.",
+          "caption": "{format} es el formato que se muestra actualmente abajo.",
+          "handle": "Formato",
+          "notApplicable": "No aplicable",
+          "format": {
+            "json": "JSON (2 espacios)",
+            "minified": "JSON minificado",
+            "yaml": "YAML",
+            "xml": "XML",
+            "csv": "CSV"
+          }
+        },
+        "liveState": {
+          "title": "JSON como estado vivo",
+          "subtitle": "Un semáforo literalmente gobernado por un pequeño documento JSON: la luz recorre verde, amarillo y rojo por sí sola, y la línea «state» del documento se actualiza en vivo — edita los tiempos para cambiar el ciclo tú mismo.",
+          "caption": "Actualmente {state}, quedan {left} s en este estado.",
+          "captionInvalid": "El semáforo está en pausa: el documento tiene un error de sintaxis.",
+          "handle": "Velocidad del ciclo",
+          "rowState": "Estado actual",
+          "rowTimeLeft": "Tiempo restante en el estado",
+          "rowCycleLength": "Duración del ciclo completo",
+          "rowInvalid": "En pausa (JSON inválido)",
+          "signal": {
+            "green": "Verde",
+            "yellow": "Amarillo",
+            "red": "Rojo"
+          },
+          "editDocLabel": "Editar el documento JSON de estado vivo",
+          "errorAt": "Error de sintaxis en la línea {line}, columna {column}"
+        },
+        "heaviestKeys": {
+          "title": "Claves y valores más pesados",
+          "subtitle": "Las claves y valores que más contribuyen al tamaño del documento de ejemplo, clasificados por bytes — elige cuántos mostrar.",
+          "caption": "Los {n} elementos más pesados están encabezados por «{key}».",
+          "handle": "Cuántos mostrar"
+        }
       },
       "errors": {
         "required": "Introduce algo de JSON para formatear.",
@@ -18316,11 +18485,7 @@
         "intro": {
           "title": "Cómo funciona realmente JSON",
           "paragraph1": "JSON solo tiene dos tipos estructurales — objetos (pares clave-valor entre '{ }') y arreglos (listas ordenadas entre [ ]) — y cuatro tipos primitivos dentro de ellos: cadenas, números, booleanos y null. Esa es toda la gramática. No existe un tipo de fecha, ni comentarios, ni comas finales, ni claves sin comillas, y cada una de esas características «ausentes» es una decisión deliberada de simplicidad, no un descuido: es precisamente lo que hace que JSON sea trivial de analizar correctamente en cualquier lenguaje, a diferencia de formatos con gramáticas más flexibles y ambiguas.",
-          "paragraph2": "Esa misma gramática estricta también explica por qué falta una sola coma o comilla hace que todo un documento JSON deje de analizarse, sin ninguna recuperación parcial — que es exactamente el problema que resuelve el sistema de errores de esta herramienta. En lugar de mostrar el mensaje críptico que le toque generar al motor de JavaScript de tu navegador (que varía según el motor y no siempre es fiable), esta herramienta ejecuta su propia verificación de la gramática JSON para señalar la línea y columna exactas de la primera desviación de sintaxis.",
-          "diagram": {
-            "valueLabel": "valor",
-            "caption": "Todo valor JSON es exactamente uno de seis tipos — dos estructurales (objeto, arreglo) y cuatro primitivos (cadena, número, booleano, null). No hay nada más en la gramática."
-          }
+          "paragraph2": "Esa misma gramática estricta también explica por qué falta una sola coma o comilla hace que todo un documento JSON deje de analizarse, sin ninguna recuperación parcial — que es exactamente el problema que resuelve el sistema de errores de esta herramienta. En lugar de mostrar el mensaje críptico que le toque generar al motor de JavaScript de tu navegador (que varía según el motor y no siempre es fiable), esta herramienta ejecuta su propia verificación de la gramática JSON para señalar la línea y columna exactas de la primera desviación de sintaxis."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -18379,7 +18544,7 @@
           "title": "Detrás de esta herramienta",
           "history": {
             "title": "Cómo un juego de cartas coleccionables simplificó la web",
-            "paragraph": "JSON no se diseñó en un comité de estándares: se descubrió, en palabras del propio Douglas Crockford, no se inventó. Mientras construía un juego de cartas coleccionables virtual para navegador llamado Cartoon Orbit en State Software en 2001, Crockford se frustró con lo pesado que resultaba XML para sincronizar constantemente pequeños fragmentos de estado entre un cliente de bajo rendimiento y el servidor. Se dio cuenta de que la propia sintaxis de objetos literales de JavaScript — la notación «{clave: valor}» ya integrada en el lenguaje — era ya una forma ligera y legible de representar datos estructurados, así que le puso nombre, escribió una gramática formal para ella y registró json.org en 2002. Diseñó la especificación deliberadamente para que pudiera usarse desde cualquier lenguaje de programación, no solo JavaScript, que es precisamente la razón por la que se extendió tan lejos de sus orígenes en el navegador."
+            "paragraph": "JSON no se diseñó en un comité de estándares: se descubrió, en palabras del propio Douglas Crockford, no se inventó. Mientras construía un juego de cartas coleccionables virtual para navegador llamado Cartoon Orbit en State Software en 2001, Crockford se frustró con lo pesado que resultaba XML para sincronizar constantemente pequeños fragmentos de estado entre un cliente de bajo rendimiento y el servidor. Se dio cuenta de que la propia sintaxis de objetos literales de JavaScript — la notación «'{clave: valor}'» ya integrada en el lenguaje — era ya una forma ligera y legible de representar datos estructurados, así que le puso nombre, escribió una gramática formal para ella y registró json.org en 2002. Diseñó la especificación deliberadamente para que pudiera usarse desde cualquier lenguaje de programación, no solo JavaScript, que es precisamente la razón por la que se extendió tan lejos de sus orígenes en el navegador."
           },
           "modernDevelopments": {
             "title": "De las respuestas de API a un tipo de dato nativo de base de datos",
@@ -18457,6 +18622,64 @@
         "inputSectionTitle": "Entrada",
         "summarySentence": "JSON formateado con {keys} claves, profundidad {depth}, tamaño {size}.",
         "resultSectionTitle": "Resultado"
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Referencia rápida de sintaxis JSON",
+          "note": "Basado en la gramática JSON definida en RFC 8259.",
+          "rows": [
+            {
+              "id": "object",
+              "label": "Objeto",
+              "value": "{ \"key\": value }"
+            },
+            {
+              "id": "array",
+              "label": "Arreglo",
+              "value": "[ value, value ]"
+            },
+            {
+              "id": "string",
+              "label": "Cadena",
+              "value": "\"text\""
+            },
+            {
+              "id": "number",
+              "label": "Número",
+              "value": "42, 3.14, -1.5e3"
+            },
+            {
+              "id": "boolean",
+              "label": "Booleano",
+              "value": "true / false"
+            },
+            {
+              "id": "null",
+              "label": "Nulo",
+              "value": "null"
+            },
+            {
+              "id": "root",
+              "label": "Valor raíz",
+              "value": "object · array · string · number · boolean · null"
+            },
+            {
+              "id": "encoding",
+              "label": "Codificación de texto",
+              "value": "UTF-8"
+            },
+            {
+              "id": "escapes",
+              "label": "Secuencias de escape",
+              "value": "\\\" \\\\ \\/ \\b \\f \\n \\r \\t \\u0041"
+            },
+            {
+              "id": "trailingComma",
+              "label": "Comas finales",
+              "value": "No permitidas"
+            }
+          ]
+        }
       }
     },
     "password-generator": {

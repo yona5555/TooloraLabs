@@ -4,7 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import JSONGrammarDiagram from "./JSONGrammarDiagram";
+import {
+  JSONErrorLocatorCard,
+  JSONFormatComparisonCard,
+  JSONHeaviestKeysCard,
+  JSONLiveStateCard,
+  JSONPrettyMinifiedCard,
+  JSONStructureSunburstCard,
+  JSONTreeCard,
+  JSONTypeDistributionCard,
+} from "./JSONCards";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -17,14 +26,21 @@ export default async function JSONEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* This page is Inter throughout (same spacing as the paper's own stack). Every indicator sits
+          right after the paragraph it illustrates; sides zigzag down the page. */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <JSONStructureSunburstCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
-        <JSONGrammarDiagram valueLabel={t("intro.diagram.valueLabel")} caption={t("intro.diagram.caption")} />
+        <JSONTreeCard side="table-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
+        <JSONLiveStateCard side="visual-left" />
         <div dir="ltr" className="overflow-x-auto">
           <table className="w-full min-w-[420px] border-collapse text-sm">
             <thead>
@@ -43,6 +59,7 @@ export default async function JSONEducation() {
             </tbody>
           </table>
         </div>
+        <JSONPrettyMinifiedCard side="table-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -51,15 +68,19 @@ export default async function JSONEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <JSONTypeDistributionCard side="visual-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <JSONErrorLocatorCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <JSONFormatComparisonCard side="visual-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -68,6 +89,8 @@ export default async function JSONEducation() {
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
+
+      <JSONHeaviestKeysCard side="table-left" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>
@@ -81,6 +104,7 @@ export default async function JSONEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

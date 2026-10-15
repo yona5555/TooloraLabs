@@ -18257,9 +18257,44 @@
         "resultTitle": "Result",
         "placeholder": "Paste or type JSON on the left to see it formatted here.",
         "errorAt": "Syntax error at line {line}, column {column}",
+        "errorPanel": {
+          "title": "What went wrong",
+          "technicalLabel": "Parser message",
+          "suggestionLabel": "Suggested fix",
+          "autoFixButton": "Auto-fix",
+          "autoFixUnavailable": "No automatic fix for this one — apply the suggested fix above by hand.",
+          "kind": {
+            "trailingComma": {
+              "explanation": "There's an extra comma right before a closing curly brace or square bracket. JSON doesn't allow a comma after the last item in an object or array.",
+              "suggestion": "Remove the comma just before the closing bracket."
+            },
+            "singleQuotes": {
+              "explanation": "This uses single quotes ('...'). JSON strings and keys must be wrapped in double quotes (\"...\").",
+              "suggestion": "Replace the single quotes with double quotes."
+            },
+            "unquotedKey": {
+              "explanation": "This object key isn't wrapped in quotes. Every JSON key must be a double-quoted string, even a simple word.",
+              "suggestion": "Wrap the key in double quotes."
+            },
+            "comment": {
+              "explanation": "JSON has no comments. The // or /* */ text here isn't part of the JSON grammar at all.",
+              "suggestion": "Delete the comment."
+            },
+            "generic": {
+              "explanation": "This doesn't match valid JSON syntax at this position.",
+              "suggestion": "Check the parser message below for exactly what's expected here."
+            }
+          }
+        },
         "statKeys": "Keys",
         "statDepth": "Max Depth",
-        "statSize": "Size",
+        "statFormattedSize": "Formatted size",
+        "statMinifiedSize": "Minified size",
+        "codeImage": {
+          "downloadPng": "Download as PNG",
+          "generating": "Generating…",
+          "done": "Downloaded!"
+        },
         "commonErrors": {
           "title": "Common JSON Mistakes",
           "intro": "The syntax errors that trip people up most often — all of them invalid JSON, even though some look reasonable.",
@@ -18289,6 +18324,10 @@
               "fix": "JSON has no comment syntax at all — not // or /* */."
             }
           ]
+        },
+        "outline": {
+          "title": "Document outline",
+          "empty": "No nested values to list."
         }
       },
       "form": {
@@ -18300,12 +18339,142 @@
         "indentLabel": "Indent",
         "indentTab": "Tab",
         "sortKeysLabel": "Sort keys alphabetically",
+        "depthLabel": "Tree depth",
+        "depthMinus": "Show one fewer level",
+        "depthPlus": "Show one more level",
         "format": "Format",
         "minify": "Minify",
         "outputLabel": "Result",
         "copy": "Copy",
         "copied": "Copied!",
-        "clear": "Clear"
+        "clear": "Clear",
+        "extras": {
+          "quickSamplesTitle": "Quick samples",
+          "quickSamples": {
+            "apiResponse": "API response",
+            "packageJson": "package.json",
+            "geoJson": "GeoJSON feature",
+            "nestedSettings": "Nested settings"
+          },
+          "statusValid": "Valid JSON",
+          "statusInvalid": "Invalid JSON",
+          "statusLines": "{n} lines",
+          "statusDepth": "depth {n}",
+          "statusSize": "{n}",
+          "schemaTitle": "Inferred JSON Schema",
+          "schemaUnavailable": "Fix the syntax error above to see the inferred schema."
+        }
+      },
+      "visuals": {
+        "bulb": {
+          "sceneAria": "A hanging light bulb you can switch on and off",
+          "pullHandle": "Pull the cord to turn the bulb on or off",
+          "caption": "Pull the cord or flip the switch to turn the bulb on and off. Use the dimmer to adjust its brightness.",
+          "switchLabel": "Light switch",
+          "switchOn": "On",
+          "switchOff": "Off",
+          "brightnessReadout": "Brightness: {value} · {state}",
+          "validBadge": "Valid JSON",
+          "invalidBadge": "Invalid JSON · line {line}, column {column}"
+        },
+        "sunburst": {
+          "title": "Structure Sunburst",
+          "subtitle": "Each ring is one level of nesting in the sample document; each segment is sized by how many bytes that branch of the tree takes up — drag across the rings to inspect a level.",
+          "caption": "Level {level} has {n} branches, ranked below by byte share.",
+          "handle": "Ring level"
+        },
+        "typeDistribution": {
+          "title": "Value-Type Distribution",
+          "subtitle": "Every JSON value in the sample document is one of six types — two structural, four primitive. Step through the types to see how many of each the document really contains.",
+          "caption": "{count} of the document's values are of type \"{type}\".",
+          "handle": "JSON type",
+          "row": {
+            "string": "Strings",
+            "number": "Numbers",
+            "boolean": "Booleans",
+            "null": "Null values",
+            "object": "Objects",
+            "array": "Arrays"
+          }
+        },
+        "prettyMinified": {
+          "title": "Pretty vs. Minified",
+          "subtitle": "Formatting adds whitespace for humans to read; minifying strips it back out. Drag through indent widths from 0 to 8 spaces and watch the real byte count change.",
+          "caption": "At {n} spaces of indent, the sample document is {size}.",
+          "handle": "Indent width (spaces)",
+          "rowMinified": "Minified",
+          "row2sp": "2-space indent",
+          "row4sp": "4-space indent",
+          "rowTab": "Tab indent",
+          "rowCustom": "Current ({n} sp)"
+        },
+        "errorLocator": {
+          "title": "Error Locator",
+          "subtitle": "Five mistakes that look like valid JSON but aren't — each run through the tool's own parser, which points at the exact line and column where it gave up.",
+          "caption": "\"{kind}\" fails at line {line}, column {col}.",
+          "handle": "Mistake",
+          "rowKind": "Mistake",
+          "rowLine": "Line",
+          "rowColumn": "Column",
+          "rowMessage": "Parser message",
+          "kind": {
+            "trailingComma": "Trailing comma",
+            "singleQuotes": "Single quotes",
+            "missingQuote": "Missing closing quote",
+            "unescapedNewline": "Unescaped newline",
+            "comment": "Comment in JSON"
+          }
+        },
+        "tree": {
+          "title": "JSON Tree",
+          "subtitle": "The sample document as an interactive tidy-tree: click a node to collapse or expand its branch, hover to see its full path, and drag the handle to set how many levels are shown.",
+          "caption": "{shown} nodes shown · depth {depth} of {max}",
+          "handle": "Visible depth",
+          "hoverHint": "Hover or focus a node to see its full path.",
+          "rowDepth": "Depth shown",
+          "rowNodes": "Nodes shown",
+          "rowObjects": "Objects",
+          "rowArrays": "Arrays",
+          "rowValues": "Primitive values"
+        },
+        "formatComparison": {
+          "title": "Format Comparison",
+          "subtitle": "The same three user records, serialized five different ways. Step through the formats to compare their real byte size and see a short excerpt of each.",
+          "caption": "{format} is the format currently shown below.",
+          "handle": "Format",
+          "notApplicable": "Not applicable",
+          "format": {
+            "json": "JSON (2-space)",
+            "minified": "Minified JSON",
+            "yaml": "YAML",
+            "xml": "XML",
+            "csv": "CSV"
+          }
+        },
+        "liveState": {
+          "title": "JSON as Live State",
+          "subtitle": "A traffic light literally driven by a small JSON document: the light cycles through green, yellow and red on its own, and the document's \"state\" line updates live — edit the timings to change the cycle yourself.",
+          "caption": "Currently {state}, {left} s left in this state.",
+          "captionInvalid": "The light is paused: the document has a syntax error.",
+          "handle": "Cycle speed",
+          "rowState": "Current state",
+          "rowTimeLeft": "Time left in state",
+          "rowCycleLength": "Full cycle length",
+          "rowInvalid": "Paused (invalid JSON)",
+          "signal": {
+            "green": "Green",
+            "yellow": "Yellow",
+            "red": "Red"
+          },
+          "editDocLabel": "Edit the live-state JSON document",
+          "errorAt": "Syntax error at line {line}, column {column}"
+        },
+        "heaviestKeys": {
+          "title": "Heaviest Keys and Values",
+          "subtitle": "The keys and values that make up the largest share of the sample document's size, ranked by byte count — choose how many to show.",
+          "caption": "The {n} heaviest entries are led by \"{key}\".",
+          "handle": "How many to show"
+        }
       },
       "errors": {
         "required": "Please enter some JSON to format.",
@@ -18316,11 +18485,7 @@
         "intro": {
           "title": "How JSON Actually Works",
           "paragraph1": "JSON only has two structural types — objects (key-value pairs in '{ }') and arrays (ordered lists in [ ]) — and four primitive types inside them: strings, numbers, booleans, and null. That's the entire grammar. There's no date type, no comments, no trailing commas, and no unquoted keys, and every one of those \"missing\" features is a deliberate simplicity choice, not an oversight — it's exactly what makes JSON trivial to parse correctly in any language, unlike formats with more flexible, ambiguous grammars.",
-          "paragraph2": "That same strict grammar is also why a single missing comma or quote makes an entire JSON document fail to parse, with no partial recovery — which is exactly the problem this tool's error reporting solves. Rather than surfacing whatever cryptic message your browser's JavaScript engine happens to produce (these vary by engine and aren't always reliable), this tool runs its own dedicated JSON grammar check to point at the exact line and column of the first syntax deviation.",
-          "diagram": {
-            "valueLabel": "value",
-            "caption": "Every JSON value is exactly one of six types — two structural (object, array) and four primitive (string, number, boolean, null). There is nothing else in the grammar."
-          }
+          "paragraph2": "That same strict grammar is also why a single missing comma or quote makes an entire JSON document fail to parse, with no partial recovery — which is exactly the problem this tool's error reporting solves. Rather than surfacing whatever cryptic message your browser's JavaScript engine happens to produce (these vary by engine and aren't always reliable), this tool runs its own dedicated JSON grammar check to point at the exact line and column of the first syntax deviation."
         },
         "examples": {
           "title": "Worked Examples",
@@ -18457,6 +18622,64 @@
         "inputSectionTitle": "Input",
         "summarySentence": "Formatted JSON with {keys} keys, depth {depth}, size {size}.",
         "resultSectionTitle": "Result"
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "JSON syntax cheat sheet",
+          "note": "Based on the JSON grammar defined in RFC 8259.",
+          "rows": [
+            {
+              "id": "object",
+              "label": "Object",
+              "value": "{ \"key\": value }"
+            },
+            {
+              "id": "array",
+              "label": "Array",
+              "value": "[ value, value ]"
+            },
+            {
+              "id": "string",
+              "label": "String",
+              "value": "\"text\""
+            },
+            {
+              "id": "number",
+              "label": "Number",
+              "value": "42, 3.14, -1.5e3"
+            },
+            {
+              "id": "boolean",
+              "label": "Boolean",
+              "value": "true / false"
+            },
+            {
+              "id": "null",
+              "label": "Null",
+              "value": "null"
+            },
+            {
+              "id": "root",
+              "label": "Root value",
+              "value": "object · array · string · number · boolean · null"
+            },
+            {
+              "id": "encoding",
+              "label": "Text encoding",
+              "value": "UTF-8"
+            },
+            {
+              "id": "escapes",
+              "label": "Escape sequences",
+              "value": "\\\" \\\\ \\/ \\b \\f \\n \\r \\t \\u0041"
+            },
+            {
+              "id": "trailingComma",
+              "label": "Trailing commas",
+              "value": "Not allowed"
+            }
+          ]
+        }
       }
     },
     "password-generator": {

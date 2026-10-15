@@ -1,8 +1,9 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { RotateCcw } from "lucide-react";
-import type { JSONFormatterMode, JSONIndent } from "@tooloralabs/tools";
+import type { JSONFormatterMode, JSONIndent, JSONStats } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import JSONInputExtras from "./JSONInputExtras";
 
 const INDENTS: JSONIndent[] = [2, 4, "tab"];
 
@@ -15,6 +16,9 @@ type JSONInputPanelProps = {
   onIndentChange: (indent: JSONIndent) => void;
   sortKeys: boolean;
   onSortKeysChange: (value: boolean) => void;
+  parsed: unknown;
+  isValid: boolean;
+  stats: JSONStats | null;
   onClear: () => void;
 };
 
@@ -27,12 +31,15 @@ export default function JSONInputPanel({
   onIndentChange,
   sortKeys,
   onSortKeysChange,
+  parsed,
+  isValid,
+  stats,
   onClear,
 }: JSONInputPanelProps) {
   const t = useTranslations("tools.json-formatter.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard id="json-input" title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex min-h-0 flex-1 flex-col p-4 lg:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
           {(["format", "minify"] as const).map((m) => (
@@ -91,7 +98,7 @@ export default function JSONInputPanel({
         rows={12}
         spellCheck={false}
         dir="ltr"
-        className="mt-4 w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 font-mono text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
+        className="json-scroll mt-4 w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 font-mono text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
       />
 
       <button
@@ -102,6 +109,8 @@ export default function JSONInputPanel({
         <RotateCcw size={16} />
         {t("clear")}
       </button>
+
+      <JSONInputExtras json={json} parsed={parsed} isValid={isValid} stats={stats} onJsonChange={onJsonChange} />
     </SectionCard>
   );
 }

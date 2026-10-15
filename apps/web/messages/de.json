@@ -18257,9 +18257,44 @@
         "resultTitle": "Ergebnis",
         "placeholder": "Fügen Sie links JSON ein oder tippen Sie es, um es hier formatiert zu sehen.",
         "errorAt": "Syntaxfehler bei Zeile {line}, Spalte {column}",
+        "errorPanel": {
+          "title": "Was schiefgelaufen ist",
+          "technicalLabel": "Parser-Meldung",
+          "suggestionLabel": "Vorgeschlagene Korrektur",
+          "autoFixButton": "Automatisch korrigieren",
+          "autoFixUnavailable": "Für diesen Fehler gibt es keine automatische Korrektur — wenden Sie den obigen Korrekturvorschlag manuell an.",
+          "kind": {
+            "trailingComma": {
+              "explanation": "Direkt vor einer schließenden geschweiften oder eckigen Klammer steht ein überflüssiges Komma. JSON erlaubt kein Komma nach dem letzten Element eines Objekts oder Arrays.",
+              "suggestion": "Entfernen Sie das Komma direkt vor der schließenden Klammer."
+            },
+            "singleQuotes": {
+              "explanation": "Hier werden einfache Anführungszeichen ('...') verwendet. JSON-Strings und -Schlüssel müssen in doppelten Anführungszeichen (\"...\") stehen.",
+              "suggestion": "Ersetzen Sie die einfachen durch doppelte Anführungszeichen."
+            },
+            "unquotedKey": {
+              "explanation": "Dieser Objektschlüssel steht nicht in Anführungszeichen. Jeder JSON-Schlüssel muss ein String in doppelten Anführungszeichen sein, auch ein einfaches Wort.",
+              "suggestion": "Setzen Sie den Schlüssel in doppelte Anführungszeichen."
+            },
+            "comment": {
+              "explanation": "JSON kennt keine Kommentare. Der Text mit // oder /* */ ist hier kein Teil der JSON-Grammatik.",
+              "suggestion": "Löschen Sie den Kommentar."
+            },
+            "generic": {
+              "explanation": "Das entspricht an dieser Stelle keiner gültigen JSON-Syntax.",
+              "suggestion": "Sehen Sie sich die Parser-Meldung unten an, um genau zu erfahren, was hier erwartet wird."
+            }
+          }
+        },
         "statKeys": "Schlüssel",
         "statDepth": "Max. Tiefe",
-        "statSize": "Größe",
+        "statFormattedSize": "Formatierte Größe",
+        "statMinifiedSize": "Minimierte Größe",
+        "codeImage": {
+          "downloadPng": "Als PNG herunterladen",
+          "generating": "Wird erstellt…",
+          "done": "Heruntergeladen!"
+        },
         "commonErrors": {
           "title": "Häufige JSON-Fehler",
           "intro": "Die Syntaxfehler, die am häufigsten stolpern lassen – alle davon ungültiges JSON, auch wenn manche vernünftig aussehen.",
@@ -18289,6 +18324,10 @@
               "fix": "JSON hat überhaupt keine Kommentarsyntax – weder // noch /* */."
             }
           ]
+        },
+        "outline": {
+          "title": "Dokumentgliederung",
+          "empty": "Keine verschachtelten Werte zum Anzeigen."
         }
       },
       "form": {
@@ -18300,12 +18339,142 @@
         "indentLabel": "Einrückung",
         "indentTab": "Tab",
         "sortKeysLabel": "Schlüssel alphabetisch sortieren",
+        "depthLabel": "Baumtiefe",
+        "depthMinus": "Eine Ebene weniger anzeigen",
+        "depthPlus": "Eine Ebene mehr anzeigen",
         "format": "Formatieren",
         "minify": "Minifizieren",
         "outputLabel": "Ergebnis",
         "copy": "Kopieren",
         "copied": "Kopiert!",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "extras": {
+          "quickSamplesTitle": "Schnelle Beispiele",
+          "quickSamples": {
+            "apiResponse": "API-Antwort",
+            "packageJson": "package.json",
+            "geoJson": "GeoJSON-Feature",
+            "nestedSettings": "Verschachtelte Einstellungen"
+          },
+          "statusValid": "Gültiges JSON",
+          "statusInvalid": "Ungültiges JSON",
+          "statusLines": "{n} Zeilen",
+          "statusDepth": "Tiefe {n}",
+          "statusSize": "{n}",
+          "schemaTitle": "Abgeleitetes JSON Schema",
+          "schemaUnavailable": "Beheben Sie den obigen Syntaxfehler, um das abgeleitete Schema zu sehen."
+        }
+      },
+      "visuals": {
+        "bulb": {
+          "sceneAria": "Eine hängende Glühbirne, die Sie ein- und ausschalten können",
+          "pullHandle": "Ziehen Sie an der Schnur, um die Glühbirne ein- oder auszuschalten",
+          "caption": "Ziehen Sie an der Schnur oder betätigen Sie den Schalter, um die Glühbirne ein- und auszuschalten. Mit dem Dimmer stellen Sie die Helligkeit ein.",
+          "switchLabel": "Lichtschalter",
+          "switchOn": "Ein",
+          "switchOff": "Aus",
+          "brightnessReadout": "Helligkeit: {value} · {state}",
+          "validBadge": "Gültiges JSON",
+          "invalidBadge": "Ungültiges JSON · Zeile {line}, Spalte {column}"
+        },
+        "sunburst": {
+          "title": "Struktur-Sunburst",
+          "subtitle": "Jeder Ring steht für eine Verschachtelungsebene im Beispieldokument; jedes Segment ist proportional zur Byte-Größe des jeweiligen Zweigs — ziehen Sie über die Ringe, um eine Ebene zu untersuchen.",
+          "caption": "Ebene {level} hat {n} Zweige, unten nach Byte-Anteil sortiert.",
+          "handle": "Ringebene"
+        },
+        "typeDistribution": {
+          "title": "Verteilung der Werttypen",
+          "subtitle": "Jeder JSON-Wert im Beispieldokument ist einer von sechs Typen — zwei strukturelle, vier primitive. Gehen Sie die Typen durch, um zu sehen, wie viele von jedem das Dokument tatsächlich enthält.",
+          "caption": "{count} der Dokumentwerte sind vom Typ „{type}\".",
+          "handle": "JSON-Typ",
+          "row": {
+            "string": "Zeichenketten",
+            "number": "Zahlen",
+            "boolean": "Boolesche Werte",
+            "null": "Null-Werte",
+            "object": "Objekte",
+            "array": "Arrays"
+          }
+        },
+        "prettyMinified": {
+          "title": "Formatiert vs. minimiert",
+          "subtitle": "Formatieren fügt Leerraum zum Lesen für Menschen hinzu; Minimieren entfernt ihn wieder. Ziehen Sie durch Einzugsbreiten von 0 bis 8 Leerzeichen und beobachten Sie die tatsächliche Byte-Zahl.",
+          "caption": "Bei {n} Leerzeichen Einzug wiegt das Beispieldokument {size}.",
+          "handle": "Einzugsbreite (Leerzeichen)",
+          "rowMinified": "Minimiert",
+          "row2sp": "Einzug mit 2 Leerzeichen",
+          "row4sp": "Einzug mit 4 Leerzeichen",
+          "rowTab": "Einzug mit Tab",
+          "rowCustom": "Aktuell ({n} Lz.)"
+        },
+        "errorLocator": {
+          "title": "Fehlerlokalisierung",
+          "subtitle": "Fünf Fehler, die wie gültiges JSON aussehen, es aber nicht sind — jeder läuft durch den echten Parser des Tools, der genau Zeile und Spalte nennt, an der er aufgegeben hat.",
+          "caption": "„{kind}\" schlägt bei Zeile {line}, Spalte {col} fehl.",
+          "handle": "Fehlerart",
+          "rowKind": "Fehlerart",
+          "rowLine": "Zeile",
+          "rowColumn": "Spalte",
+          "rowMessage": "Parser-Meldung",
+          "kind": {
+            "trailingComma": "Nachgestelltes Komma",
+            "singleQuotes": "Einfache Anführungszeichen",
+            "missingQuote": "Fehlendes schließendes Anführungszeichen",
+            "unescapedNewline": "Nicht maskierter Zeilenumbruch",
+            "comment": "Kommentar in JSON"
+          }
+        },
+        "tree": {
+          "title": "JSON-Baum",
+          "subtitle": "Das Beispieldokument als interaktiver Tidy-Tree: Klicken Sie einen Knoten an, um seinen Zweig ein- oder auszuklappen, zeigen Sie darauf, um seinen vollständigen Pfad zu sehen, und ziehen Sie den Griff, um die angezeigten Ebenen festzulegen.",
+          "caption": "{shown} Knoten angezeigt · Tiefe {depth} von {max}",
+          "handle": "Angezeigte Tiefe",
+          "hoverHint": "Zeigen oder fokussieren Sie einen Knoten, um seinen vollständigen Pfad zu sehen.",
+          "rowDepth": "Angezeigte Tiefe",
+          "rowNodes": "Angezeigte Knoten",
+          "rowObjects": "Objekte",
+          "rowArrays": "Arrays",
+          "rowValues": "Primitive Werte"
+        },
+        "formatComparison": {
+          "title": "Formatvergleich",
+          "subtitle": "Dieselben drei Benutzerdatensätze, auf fünf verschiedene Arten serialisiert. Gehen Sie die Formate durch, um ihre tatsächliche Byte-Größe zu vergleichen und einen kurzen Ausschnitt jedes Formats zu sehen.",
+          "caption": "{format} ist das unten aktuell angezeigte Format.",
+          "handle": "Format",
+          "notApplicable": "Nicht anwendbar",
+          "format": {
+            "json": "JSON (2 Leerzeichen)",
+            "minified": "Minimiertes JSON",
+            "yaml": "YAML",
+            "xml": "XML",
+            "csv": "CSV"
+          }
+        },
+        "liveState": {
+          "title": "JSON als lebender Zustand",
+          "subtitle": "Eine Ampel, die buchstäblich von einem kleinen JSON-Dokument gesteuert wird: Das Licht durchläuft von selbst Grün, Gelb und Rot, und die Zeile „state\" des Dokuments aktualisiert sich live — ändern Sie die Zeiten, um den Zyklus selbst zu beeinflussen.",
+          "caption": "Aktuell {state}, noch {left} s in diesem Zustand.",
+          "captionInvalid": "Die Ampel ist pausiert: Das Dokument hat einen Syntaxfehler.",
+          "handle": "Zyklusgeschwindigkeit",
+          "rowState": "Aktueller Zustand",
+          "rowTimeLeft": "Verbleibende Zeit im Zustand",
+          "rowCycleLength": "Volle Zykluslänge",
+          "rowInvalid": "Pausiert (ungültiges JSON)",
+          "signal": {
+            "green": "Grün",
+            "yellow": "Gelb",
+            "red": "Rot"
+          },
+          "editDocLabel": "Das Live-Zustands-JSON-Dokument bearbeiten",
+          "errorAt": "Syntaxfehler bei Zeile {line}, Spalte {column}"
+        },
+        "heaviestKeys": {
+          "title": "Schwerste Schlüssel und Werte",
+          "subtitle": "Die Schlüssel und Werte mit dem größten Anteil an der Größe des Beispieldokuments, nach Byte-Zahl sortiert — wählen Sie, wie viele angezeigt werden.",
+          "caption": "Die {n} schwersten Einträge werden von „{key}\" angeführt.",
+          "handle": "Anzahl der Anzeigen"
+        }
       },
       "errors": {
         "required": "Bitte geben Sie JSON zum Formatieren ein.",
@@ -18315,12 +18484,8 @@
       "education": {
         "intro": {
           "title": "Wie JSON tatsächlich funktioniert",
-          "paragraph1": "JSON kennt nur zwei strukturelle Typen – Objekte (Schlüssel-Wert-Paare in „{ }\") und Arrays (geordnete Listen in [ ]) – sowie vier primitive Typen darin: Zeichenketten, Zahlen, Wahrheitswerte und null. Das ist die gesamte Grammatik. Es gibt keinen Datumstyp, keine Kommentare, keine nachgestellten Kommas und keine unquotierten Schlüssel, und jedes dieser „fehlenden\" Merkmale ist eine bewusste Entscheidung für Einfachheit, kein Versehen – genau das macht JSON so einfach, in jeder Sprache korrekt zu parsen, anders als Formate mit flexibleren, mehrdeutigen Grammatiken.",
-          "paragraph2": "Dieselbe strikte Grammatik ist auch der Grund, warum ein einziges fehlendes Komma oder Anführungszeichen ein ganzes JSON-Dokument beim Parsen scheitern lässt, ohne teilweise Wiederherstellung – genau das Problem, das die Fehlermeldung dieses Tools löst. Statt die kryptische Meldung anzuzeigen, die die JavaScript-Engine Ihres Browsers zufällig produziert (diese variieren je nach Engine und sind nicht immer zuverlässig), führt dieses Tool eine eigene, dedizierte JSON-Grammatikprüfung durch, um genau auf Zeile und Spalte der ersten Syntaxabweichung zu zeigen.",
-          "diagram": {
-            "valueLabel": "Wert",
-            "caption": "Jeder JSON-Wert ist genau einer von sechs Typen – zwei strukturelle (Objekt, Array) und vier primitive (Zeichenkette, Zahl, Wahrheitswert, null). Mehr gibt es in der Grammatik nicht."
-          }
+          "paragraph1": "JSON kennt nur zwei strukturelle Typen – Objekte (Schlüssel-Wert-Paare in „'{ }'\") und Arrays (geordnete Listen in [ ]) – sowie vier primitive Typen darin: Zeichenketten, Zahlen, Wahrheitswerte und null. Das ist die gesamte Grammatik. Es gibt keinen Datumstyp, keine Kommentare, keine nachgestellten Kommas und keine unquotierten Schlüssel, und jedes dieser „fehlenden\" Merkmale ist eine bewusste Entscheidung für Einfachheit, kein Versehen – genau das macht JSON so einfach, in jeder Sprache korrekt zu parsen, anders als Formate mit flexibleren, mehrdeutigen Grammatiken.",
+          "paragraph2": "Dieselbe strikte Grammatik ist auch der Grund, warum ein einziges fehlendes Komma oder Anführungszeichen ein ganzes JSON-Dokument beim Parsen scheitern lässt, ohne teilweise Wiederherstellung – genau das Problem, das die Fehlermeldung dieses Tools löst. Statt die kryptische Meldung anzuzeigen, die die JavaScript-Engine Ihres Browsers zufällig produziert (diese variieren je nach Engine und sind nicht immer zuverlässig), führt dieses Tool eine eigene, dedizierte JSON-Grammatikprüfung durch, um genau auf Zeile und Spalte der ersten Syntaxabweichung zu zeigen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -18379,7 +18544,7 @@
           "title": "Hinter diesem Tool",
           "history": {
             "title": "Wie ein Sammelkartenspiel das Web vereinfachte",
-            "paragraph": "JSON wurde nicht in einem Normungsausschuss entworfen – es wurde, in Douglas Crockfords eigenen Worten, entdeckt, nicht erfunden. Beim Bau eines browserbasierten virtuellen Sammelkartenspiels namens Cartoon Orbit bei State Software im Jahr 2001 frustrierte Crockford, wie schwerfällig XML für das ständige Synchronisieren kleiner Zustandsteile zwischen einem leistungsschwachen Client und dem Server war. Er bemerkte, dass die eigene Objektliteral-Syntax von JavaScript – die bereits in die Sprache eingebaute „{key: value}\"-Notation – bereits eine leichtgewichtige, menschenlesbare Möglichkeit war, strukturierte Daten darzustellen, benannte sie also, schrieb eine formale Grammatik dafür und registrierte 2002 json.org. Er entwarf die Spezifikation bewusst so, dass sie aus jeder Programmiersprache nutzbar ist, nicht nur aus JavaScript – genau deshalb verbreitete sie sich so weit über ihre Browser-Ursprünge hinaus."
+            "paragraph": "JSON wurde nicht in einem Normungsausschuss entworfen – es wurde, in Douglas Crockfords eigenen Worten, entdeckt, nicht erfunden. Beim Bau eines browserbasierten virtuellen Sammelkartenspiels namens Cartoon Orbit bei State Software im Jahr 2001 frustrierte Crockford, wie schwerfällig XML für das ständige Synchronisieren kleiner Zustandsteile zwischen einem leistungsschwachen Client und dem Server war. Er bemerkte, dass die eigene Objektliteral-Syntax von JavaScript – die bereits in die Sprache eingebaute „'{key: value}'\"-Notation – bereits eine leichtgewichtige, menschenlesbare Möglichkeit war, strukturierte Daten darzustellen, benannte sie also, schrieb eine formale Grammatik dafür und registrierte 2002 json.org. Er entwarf die Spezifikation bewusst so, dass sie aus jeder Programmiersprache nutzbar ist, nicht nur aus JavaScript – genau deshalb verbreitete sie sich so weit über ihre Browser-Ursprünge hinaus."
           },
           "modernDevelopments": {
             "title": "Von API-Antworten zu einem nativen Datenbanktyp",
@@ -18457,6 +18622,64 @@
         "inputSectionTitle": "Eingabe",
         "summarySentence": "JSON formatiert mit {keys} Schlüsseln, Tiefe {depth}, Größe {size}.",
         "resultSectionTitle": "Ergebnis"
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "JSON-Syntax-Kurzreferenz",
+          "note": "Basierend auf der in RFC 8259 definierten JSON-Grammatik.",
+          "rows": [
+            {
+              "id": "object",
+              "label": "Objekt",
+              "value": "{ \"key\": value }"
+            },
+            {
+              "id": "array",
+              "label": "Array",
+              "value": "[ value, value ]"
+            },
+            {
+              "id": "string",
+              "label": "Zeichenkette",
+              "value": "\"text\""
+            },
+            {
+              "id": "number",
+              "label": "Zahl",
+              "value": "42, 3.14, -1.5e3"
+            },
+            {
+              "id": "boolean",
+              "label": "Boolescher Wert",
+              "value": "true / false"
+            },
+            {
+              "id": "null",
+              "label": "Null",
+              "value": "null"
+            },
+            {
+              "id": "root",
+              "label": "Wurzelwert",
+              "value": "object · array · string · number · boolean · null"
+            },
+            {
+              "id": "encoding",
+              "label": "Textkodierung",
+              "value": "UTF-8"
+            },
+            {
+              "id": "escapes",
+              "label": "Escape-Sequenzen",
+              "value": "\\\" \\\\ \\/ \\b \\f \\n \\r \\t \\u0041"
+            },
+            {
+              "id": "trailingComma",
+              "label": "Nachgestellte Kommas",
+              "value": "Nicht erlaubt"
+            }
+          ]
+        }
       }
     },
     "password-generator": {
