@@ -1,16 +1,12 @@
 # TooloraLabs — Claude Code Instructions (auto-loaded every session)
-Keep this file short to save credits. Details live in docs/claude/; read only the file the task needs.
+Keep this file short to save credits.
 
 ## Reference files
-Auto-loaded from .claude/rules/:
-- working-with-yousef.md — always: style, "command" mode, credit economy, Git
-- visuals.md — apps/web/components/**, apps/web/app/**: page structure, chart library, indicators
-- i18n.md — apps/web/messages/**: locales, Arabic, key parity
-- packages.md — packages/**: pure-logic constraint, tsc/test commands
-- testing.md — test/check scripts: efficient testing, fixed technical errors
-- live-data.md — apps/web/components/tools/**, apps/web/lib/**: real free keyless data, data limits, display currency
-On demand: docs/claude/full-project-handbook.md — architecture, roles, general rules index, pending tasks
-Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
+Read `docs/RULES-SUMMARY.md` (compact, always applies) for the project basics, visual rules §37–44,
+and standing lessons. Read a specific section of TooloraLabs-Claude-Instructions.md only when a task
+needs it; never load the whole file. Same for ROADMAP.md and docs/claude/full-project-handbook.md.
+Auto-loaded from .claude/rules/ on top of this: working-with-yousef.md (always), and visuals.md /
+i18n.md / packages.md / testing.md / live-data.md (path-triggered — see each file's own header).
 
 ## Hard rules
 - Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
