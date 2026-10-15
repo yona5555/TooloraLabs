@@ -14,9 +14,10 @@
 - bmi-calculator (pilot)
 - body-fat-calculator (round 1)
 - target-heart-rate-calculator (round 1)
+- bmr-calculator (round 2)
+- tdee-calculator (round 2)
 
 ## Remaining
-- bmr-calculator, tdee-calculator
 - macro-calculator, ideal-weight-calculator
 - sleep-calculator, pace-calculator
 - pregnancy-calculator, due-date-calculator
@@ -27,3 +28,8 @@
 - Unused old keys left in messages: body-fat quickReference/measurementDiagram; target-heart-rate diagram/maxHrByAgeDiagram.
 - Body fat (Navy) has no weight input: fat/lean mass card uses an assumed weight (BMI 22 for height), adjustable by slider.
 - Target HR: Karvonen cards assume resting HR 60 bpm when none entered (labelled "typical, assumed").
+- Round 2 main-session pass: drag handles covered value labels in several cards (BMR range strip/activity; TDEE steps/simulator/equations/formula). Fixed by moving labels clear of handles. Check this first in every new card.
+- Unused old keys left: bmr diagram.ariaLabel, quickReference.*, result.difference; tdee componentBreakdownDiagram.*, education.intro.diagram.*.
+- BMR has no body-fat input: the four-equations card seeds Katch-McArdle/Cunningham from the Deurenberg estimate (labelled). TDEE splits activity into NEAT (sedentary share) and exercise (the rest), a chosen convention, labelled in the table.
+- 3D figure captions (BMI, BMR) show only their last line under the canvas: existing LiveTable3DLayout behaviour, same as the approved BMI. Decide in the final round.
+- Build note: next build is safe while the dev server runs on 3001 (Next 16 keeps dev output separate).

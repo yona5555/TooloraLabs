@@ -4,8 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import BMRRangeGauge from "./BMRRangeGauge";
-import BMRAgeCurveDiagram from "./BMRAgeCurveDiagram";
+import {
+  BMRActivityCard,
+  BMRAgeCurveCard,
+  BMREquationsCard,
+  BMRFormulaCard,
+  BMRGaugeCard,
+  BMROrganCard,
+  BMRSensitivityCard,
+  BMRZoneStripCard,
+} from "./BMRCards";
 
 type ExampleRow = { calculation: string; result: string };
 type FormulaItem = { title: string; description: string };
@@ -20,11 +28,20 @@ export default async function BMREducation() {
 
   return (
     <EncyclopediaPaper>
-      <BMRRangeGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <BMRZoneStripCard side="visual-left" />
+        <BMRGaugeCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <BMROrganCard side="visual-left" />
+          <BMRAgeCurveCard side="table-left" />
+          <BMRSensitivityCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("formulas.title")}>
@@ -37,9 +54,12 @@ export default async function BMREducation() {
             </div>
           ))}
         </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <BMRFormulaCard side="table-left" />
+          <BMREquationsCard side="visual-left" />
+          <BMRActivityCard side="table-left" />
+        </div>
       </InfoSection>
-
-      <BMRAgeCurveDiagram />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
