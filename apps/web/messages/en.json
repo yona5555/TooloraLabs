@@ -31251,6 +31251,127 @@
         "rateLabel": "Speech Rate",
         "pitchLabel": "Pitch",
         "sentence": "Converted {characters} characters to speech at {rate}x rate, pitch {pitch}."
+      },
+      "visuals": {
+        "example": "Example",
+        "hero": {
+          "queue": "Chunks in the queue: {n}",
+          "rateAxis": "Speed (rate)",
+          "handle": "Drag to change the speed",
+          "words": "Words",
+          "time": "Listening time",
+          "assumption": "Times assume 150 words per minute at 1×."
+        },
+        "chunkStack": {
+          "title": "Chunks Under the Character Limit",
+          "subtitle": "The tool's own chunker run on a stored eight-sentence paragraph: every slab is one real chunk, as long as its character count, stacked in speaking order. Move the limit and watch the sentences repack.",
+          "caption": "With a limit of {l} characters the paragraph becomes {n} chunks.",
+          "handle": "Drag to change the chunk limit",
+          "valueText": "Limit {l}: {n} chunks",
+          "valueShort": "Limit {l}",
+          "rowLimit": "Chunk limit (characters)",
+          "rowChars": "Paragraph characters",
+          "rowChunks": "Chunks",
+          "rowLongest": "Longest chunk",
+          "rowShortest": "Shortest chunk"
+        },
+        "packing": {
+          "title": "Packing Sentences Into Chunks",
+          "subtitle": "Sentences are added one by one; each joins the current chunk with one space until the next would pass 200 characters, then a new chunk starts from zero.",
+          "caption": "{k} sentences are packed into {n} chunks.",
+          "handle": "Drag to add or remove sentences",
+          "valueText": "{k} sentences: {n} chunks",
+          "valueShort": "Sentences: {k}",
+          "rowSentences": "Sentences included",
+          "rowChars": "Characters",
+          "rowChunks": "Chunks",
+          "rowLast": "Last chunk length",
+          "rowRoom": "Room left in last chunk"
+        },
+        "rateCurve": {
+          "title": "Speed and Listening Time",
+          "subtitle": "Rate multiplies the voice's normal pace, so listening time is the word count divided by 150 words per minute times the rate (150 wpm is the usual pace at 1×).",
+          "caption": "At {rate}× the stored paragraph takes about {time}.",
+          "handle": "Drag along the curve to change the speed",
+          "rowWords": "Words in the paragraph",
+          "rowRate": "Rate",
+          "rowWpm": "Pace (150 × rate)",
+          "rowTime": "Listening time",
+          "rowDiff": "Change against 1×"
+        },
+        "wpmGauge": {
+          "title": "Rate in Words per Minute",
+          "subtitle": "The outer ring is the rate multiplier and the inner ring the pace it gives, both filled to the same share of the slider's 2× maximum.",
+          "caption": "A rate of {rate}× reads about {wpm} words per minute.",
+          "handle": "Drag around the ring to change the rate",
+          "outerUnit": "rate",
+          "rowRate": "Rate",
+          "rowBase": "Pace at 1×",
+          "rowWps": "Words per second",
+          "rowPer100": "Time for 100 words"
+        },
+        "charMix": {
+          "title": "What the Character Count Counts",
+          "subtitle": "The tool reports the length of the trimmed text, so letters, spaces and punctuation all count. The first words of the stored paragraph are split into those three groups.",
+          "caption": "{c} characters, of which spaces are {s}.",
+          "handle": "Drag to change the number of words",
+          "valueText": "{w} words: {c} characters",
+          "valueShort": "Words: {w}",
+          "ticks": "{n}",
+          "centre": "characters",
+          "legend": {
+            "letters": "Letters",
+            "spaces": "Spaces",
+            "punct": "Punctuation"
+          },
+          "rowWords": "Words taken",
+          "rowLetters": "Letters",
+          "rowSpaces": "Spaces",
+          "rowPunct": "Punctuation",
+          "rowTotal": "Character count"
+        },
+        "wordSplit": {
+          "title": "Cutting a Sentence Between Words",
+          "subtitle": "A sentence with no full stop cannot be split at a sentence boundary, so the tool cuts it between words whenever the next word would pass 200 characters. The line shows the length of the current piece after each word.",
+          "caption": "{w} words become {p} pieces.",
+          "handle": "Drag to change the number of words",
+          "valueText": "{w} words: {p} pieces",
+          "valueShort": "Words: {w}",
+          "rowWords": "Words",
+          "rowChars": "Characters",
+          "rowPieces": "Pieces",
+          "rowCuts": "New piece starts after word",
+          "rowLongest": "Longest piece"
+        },
+        "playhead": {
+          "title": "The Utterance Queue in Time",
+          "subtitle": "Each chunk of the stored paragraph is one utterance; the browser speaks them one after another. Move the playhead to see which chunk is speaking at 1× (150 words per minute).",
+          "caption": "At {t} the voice is reading chunk {c}.",
+          "handle": "Drag the playhead",
+          "valueText": "{t}: chunk {c}",
+          "rowElapsed": "Elapsed time",
+          "rowChunk": "Chunk speaking",
+          "rowInto": "Time into that chunk",
+          "rowSpoken": "Words spoken",
+          "rowLeft": "Time left"
+        },
+        "rateCheck": {
+          "title": "Which Speeds the Tool Accepts",
+          "subtitle": "The tool checks the rate against the Web Speech range of 0.1× to 10× before speaking; the slider offers the comfortable 0.5× to 2× part of it. The scale is logarithmic.",
+          "caption": {
+            "invalid": "{rate}× is outside 0.1× to 10×, so the tool rejects it.",
+            "spec": "{rate}× is valid for the browser but outside the slider's 0.5× to 2×.",
+            "slider": "{rate}× is inside the slider's range and is accepted."
+          },
+          "handle": "Drag to try a speed",
+          "rowRate": "Rate tried",
+          "rowSpec": "Web Speech range",
+          "rowSlider": "Slider range",
+          "rowVerdict": "Tool's verdict",
+          "rowFactor": "Time factor (1 / rate)",
+          "accepted": "Accepted",
+          "rejected": "Rejected (invalid rate)"
+        }
       }
     },
     "speech-to-text": {
@@ -31278,7 +31399,6 @@
           "listening": "Listening...",
           "denied": "Microphone access denied."
         },
-        "emptyTranscript": "Your transcribed text will appear here.",
         "wordCountLabel": "Words"
       },
       "quickReference": {
@@ -31415,6 +31535,137 @@
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result"
+      },
+      "visuals": {
+        "example": "Example",
+        "received": "Final segments received",
+        "hero": {
+          "segment": "Final segment {k}",
+          "handle": "Drag to choose how many segments are joined",
+          "valueText": "{k} of {n} segments: {w} words",
+          "valueShort": "Segments {k} / {n}",
+          "segmentsUsed": "Segments joined"
+        },
+        "cleanup": {
+          "title": "Cleaning Up the Spaces",
+          "subtitle": "A recognizer often returns a segment with stray spaces. The tool trims both ends and collapses every run of spaces to one; the dots below mark each space.",
+          "caption": "The raw segment has {r} characters; after clean-up it has {c}.",
+          "handle": "Drag to add or remove extra spaces",
+          "valueText": "{e} extra spaces: {r} → {c} characters",
+          "valueShort": "Extra spaces: {e}",
+          "rawLabel": "Raw segment",
+          "cleanLabel": "After the tool's clean-up",
+          "rowExtra": "Extra spaces",
+          "rowRaw": "Raw length",
+          "rowClean": "Cleaned length",
+          "rowRemoved": "Characters removed",
+          "rowWords": "Words (unchanged)"
+        },
+        "capitals": {
+          "title": "Sentence Starts Become Capitals",
+          "subtitle": "Recognized speech usually arrives in lower case. The tool capitalises the first letter of the transcript and every letter that follows a full stop, question mark or exclamation mark. Stem height is each sentence's length.",
+          "caption": "{k} sentences joined: {c} letters capitalised.",
+          "handle": "Drag to change the number of sentences",
+          "valueText": "{k} sentences: {c} capitals",
+          "valueShort": "Sentences: {k}",
+          "axis": "Sentence length (characters)",
+          "rowSentences": "Sentences",
+          "rowChars": "Transcript characters",
+          "rowCaps": "Letters capitalised",
+          "rowLetters": "First letters",
+          "rowWords": "Words"
+        },
+        "interim": {
+          "title": "Interim Guesses and Final Segments",
+          "subtitle": "While you speak, the recognizer sends interim guesses that keep growing; when it is sure, it sends a final segment. Only finals reach the tool's transcript, the interim guess is shown faintly. Dot size follows the guess's word count.",
+          "caption": "After event {i} the transcript holds {w} final words.",
+          "handle": "Drag through the recognition events",
+          "valueText": "Event {i}: {w} final words",
+          "valueShort": "Event {i}",
+          "laneInterim": "Interim",
+          "laneFinal": "Final",
+          "shown": "Shown in the Transcript card",
+          "rowEvent": "Event",
+          "rowFinals": "Final segments",
+          "rowWords": "Transcript words",
+          "rowInterim": "Interim words",
+          "rowShown": "Characters shown"
+        },
+        "join": {
+          "title": "Joining Segments With One Space",
+          "subtitle": "Each cleaned segment is placed after the previous one with exactly one space, so the transcript length is the sum of the segment lengths plus one space per join (the dots).",
+          "caption": "{k} segments make a transcript of {c} characters.",
+          "handle": "Drag to join more or fewer segments",
+          "valueText": "{k} segments: {c} characters",
+          "valueShort": "Segments: {k}",
+          "total": "Transcript: {c} characters",
+          "rowSegments": "Segments joined",
+          "rowSum": "Sum of segment lengths",
+          "rowSpaces": "Joining spaces",
+          "rowLen": "Transcript length",
+          "rowWords": "Words"
+        },
+        "wordLengths": {
+          "title": "How Long the Words Are",
+          "subtitle": "The word count splits the transcript on spaces. Here the first words of the stored transcript are grouped by letter count: short (1 to 3), medium (4 to 6) and long (7 or more).",
+          "caption": "{w} words with an average of {a} letters.",
+          "handle": "Drag to change the number of words",
+          "valueText": "{w} words, average {a} letters",
+          "valueShort": "Words: {w}",
+          "centre": "letters per word",
+          "legend": {
+            "short": "Short (1–3)",
+            "medium": "Medium (4–6)",
+            "long": "Long (7+)"
+          },
+          "rowWords": "Words",
+          "rowAvg": "Average letters"
+        },
+        "helix": {
+          "title": "The Transcript as a Word Helix",
+          "subtitle": "Every word of the stored transcript in spoken order, wound twelve words per turn; each pillar is as tall as its word is long. Drag the view to turn it.",
+          "caption": "{n} words fill {turns} turns of the helix.",
+          "handle": "Drag to add or remove words",
+          "valueText": "{n} words, last: {w}",
+          "valueShort": "Words: {n}",
+          "rowWords": "Words placed",
+          "rowChars": "Transcript characters",
+          "rowTurns": "Turns (words ÷ 12)",
+          "rowLongest": "Longest word",
+          "rowLast": "Last word"
+        },
+        "languages": {
+          "title": "Which Languages Get Capitals",
+          "subtitle": "The capitalisation rule only knows the letters a to z after a full stop, question mark or exclamation mark. A stored two-sentence sample per recognition language shows where it applies; each spoke is the share of sentence starts capitalised.",
+          "caption": {
+            "all": "{l}: all {s} sentence starts are capitalised.",
+            "some": "{l}: {c} of {s} sentence starts are capitalised; a starting letter outside a to z stays as it is.",
+            "none": "{l}: this script has no capital letters, so the transcript keeps its text unchanged."
+          },
+          "handle": "Drag around the circle to pick a language",
+          "valueText": "{l}: {c} of {s}",
+          "before": "Recognized",
+          "after": "Transcript",
+          "rowLang": "Language",
+          "rowStarts": "Sentence starts",
+          "rowCaps": "Capitalised by the tool",
+          "rowWords": "Words",
+          "rowShare": "Share capitalised"
+        },
+        "gauge": {
+          "title": "Characters Against Words",
+          "subtitle": "As the transcript grows, the outer ring counts its characters and the inner ring its words, each against the full stored transcript. Words grow in steps: only a space starts a new one.",
+          "caption": "The first {c} characters hold {w} words.",
+          "handle": "Drag around the ring to grow the transcript",
+          "valueText": "{c} characters: {w} words",
+          "valueShort": "Characters: {c}",
+          "outerUnit": "characters",
+          "innerUnit": "{w} words",
+          "rowChars": "Characters",
+          "rowWords": "Words",
+          "rowSpaces": "Spaces",
+          "rowAvg": "Letters per word"
+        }
       }
     },
     "spelling-grammar-checker": {
@@ -31434,7 +31685,6 @@
       },
       "result": {
         "heading": "Results",
-        "emptyText": "Start typing to see spelling and grammar suggestions.",
         "wordCountLabel": "Words",
         "issueCountLabel": "Issues Found",
         "suggestion": "Suggested:"
@@ -31576,6 +31826,157 @@
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result",
         "sentence": "Checked {words} words and found {issues} issue(s)."
+      },
+      "visuals": {
+        "example": "Example",
+        "hero": {
+          "axis": "Checked {c} of {t} characters",
+          "lane": {
+            "spelling": "Spelling",
+            "grammar": "Grammar",
+            "capitalization": "Capitals",
+            "punctuation": "Spacing"
+          },
+          "words": "Words",
+          "handle": "Drag to check more or fewer words",
+          "valueText": "{w} words checked: {n} issues",
+          "valueShort": "Words {w} / {t}"
+        },
+        "letters": {
+          "title": "A Misspelling, Letter by Letter",
+          "subtitle": "A word from the tool's misspelling list against the suggestion the tool returns, aligned with the fewest edits: a swapped pair, a missing letter, an extra letter or a wrong letter.",
+          "caption": "{w} becomes {s} in {d} edit(s).",
+          "handle": "Drag to pick a misspelling",
+          "typed": "Typed",
+          "suggested": "Tool's suggestion",
+          "op": {
+            "sub": "wrong letter",
+            "ins": "missing letter",
+            "del": "extra letter",
+            "swap": "swapped pair"
+          },
+          "rowTyped": "Typed word",
+          "rowSuggest": "Suggestion",
+          "rowDist": "Edits needed",
+          "rowKinds": "Kind of slip",
+          "rowLen": "Letters"
+        },
+        "slips": {
+          "title": "Which Slips the List Covers",
+          "subtitle": "Every misspelling in the sample from the tool's list, aligned with its suggestion and its edits counted by kind. The list is ranked; move the handle to read one kind.",
+          "caption": "{k}: {n} of the {t} edits.",
+          "handle": "Drag up or down to pick a kind of slip",
+          "op": {
+            "sub": "Wrong letter",
+            "ins": "Missing letter",
+            "del": "Extra letter",
+            "swap": "Swapped pair"
+          },
+          "rowKind": "Kind of slip",
+          "rowCount": "Edits of this kind",
+          "rowShare": "Share of all edits",
+          "rowWords": "Words",
+          "rowList": "Misspellings in the sample"
+        },
+        "article": {
+          "title": "How the a / an Check Decides",
+          "subtitle": "The tool looks at \"a\" followed by a word starting with a vowel letter, and \"an\" followed by a consonant letter, then skips a short exception list. It tests spelling letters, not sounds, so some pairs are never examined.",
+          "caption": {
+            "flag": "{p}: the tool flags the article.",
+            "exception": "{p}: the word is on the exception list, so nothing is flagged.",
+            "untested": "{p}: this pairing is not one the tool tests, so nothing is flagged."
+          },
+          "handle": "Drag to pick a phrase",
+          "nodePhrase": "phrase",
+          "nodeLetter": "first letter: {l}",
+          "nodeException": "exception?",
+          "nodeVerdict": "tool's verdict",
+          "vowel": "vowel",
+          "consonant": "consonant",
+          "yes": "yes",
+          "no": "no",
+          "flag": "flag → {s}",
+          "ok": "no issue",
+          "notTested": "not tested",
+          "rowPhrase": "Phrase",
+          "rowLetter": "First letter of the word",
+          "rowException": "On the exception list",
+          "rowVerdict": "Tool's verdict"
+        },
+        "density": {
+          "title": "Issues per 100 Words",
+          "subtitle": "Misspellings from the tool's list are put one by one into a clean stored paragraph. The outer ring counts the issues the tool finds (out of 8); the inner ring is the rate per 100 words (full ring = 25).",
+          "caption": "{n} issues in {w} words: {p} per 100 words.",
+          "handle": "Drag around the ring to add misspellings",
+          "valueText": "{n} issues, {p} per 100 words",
+          "valueShort": "Misspellings: {n}",
+          "outerUnit": "issues",
+          "innerUnit": "{p} / 100 words",
+          "rowInjected": "Misspellings added",
+          "rowWords": "Words",
+          "rowIssues": "Issues found",
+          "rowPer100": "Issues per 100 words",
+          "rowClean": "Words without an issue"
+        },
+        "types": {
+          "title": "Issues by Type",
+          "subtitle": "The four kinds of issue the tool reports, counted on the first sentences of a stored messy paragraph.",
+          "caption": "{n} issues; the largest group is {top}.",
+          "handle": "Drag to check more sentences",
+          "valueText": "{k} sentences: {n} issues",
+          "valueShort": "Sentences: {k}",
+          "centre": "issues",
+          "rowSentences": "Sentences checked",
+          "rowTotal": "All issues"
+        },
+        "ribbon": {
+          "title": "Flagged Words in Reading Order",
+          "subtitle": "The stored paragraph's words in reading order, eleven per row. A word the tool flags stands tall in its issue type's colour; a clean word stays low. Drag the view to turn it.",
+          "caption": "{n} words read, {f} of them flagged.",
+          "handle": "Drag to read more words",
+          "valueText": "{n} words: {f} flagged",
+          "valueShort": "Words: {n}",
+          "rowWords": "Words read",
+          "rowFlagged": "Words flagged",
+          "rowClean": "Clean words",
+          "rowShare": "Share flagged",
+          "rowLast": "Last word"
+        },
+        "rules": {
+          "title": "Matches per Check",
+          "subtitle": "The tool runs eight separate pattern checks. Each lollipop counts the matches one check finds in the first sentences of a second stored paragraph, coloured by the issue type it reports.",
+          "caption": "{k} sentences: {f} checks fire, {n} issues in all.",
+          "handle": "Drag to check more sentences",
+          "valueText": "{k} sentences: {n} issues",
+          "valueShort": "Sentences: {k}",
+          "rule": {
+            "misspelling": "Misspelling",
+            "pronounI": "Pronoun I",
+            "sentenceStart": "Sentence start",
+            "spaces": "Double space",
+            "repeated": "Repeated word",
+            "spaceAfter": "Space after",
+            "article": "a / an",
+            "youre": "your / you're"
+          },
+          "rowSentences": "Sentences checked",
+          "rowFired": "Checks with a match",
+          "rowBusiest": "Busiest check",
+          "rowTotal": "All issues"
+        },
+        "scan": {
+          "title": "Issues Found While Scanning",
+          "subtitle": "All checks report where each issue starts in the text. The steps count the issues that start before the scan position in a stored messy paragraph; the dots below show each one in its type's colour.",
+          "caption": "By character {p}, {n} of {t} issues have been found.",
+          "handle": "Drag the scan position",
+          "valueText": "Position {p}: {n} issues",
+          "valueShort": "Position {p}",
+          "rowPos": "Scan position",
+          "rowShare": "Text scanned",
+          "rowFound": "Issues found",
+          "rowLast": "Last issue type",
+          "rowNext": "Next issue starts at"
+        }
       }
     },
     "roman-numeral-converter": {

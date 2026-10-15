@@ -31251,6 +31251,127 @@
         "rateLabel": "Velocidad del habla",
         "pitchLabel": "Tono",
         "sentence": "Se convirtieron {characters} caracteres a voz a una velocidad de {rate}x, tono {pitch}."
+      },
+      "visuals": {
+        "example": "Ejemplo",
+        "hero": {
+          "queue": "Fragmentos en la cola: {n}",
+          "rateAxis": "Velocidad (tasa)",
+          "handle": "Arrastra para cambiar la velocidad",
+          "words": "Palabras",
+          "time": "Tiempo de escucha",
+          "assumption": "Los tiempos suponen 150 palabras por minuto a 1×."
+        },
+        "chunkStack": {
+          "title": "Fragmentos bajo el límite de caracteres",
+          "subtitle": "El fragmentador de la herramienta aplicado a un párrafo guardado de ocho frases: cada losa es un fragmento real, tan larga como sus caracteres, apiladas en orden de lectura. Mueve el límite y verás cómo se reagrupan las frases.",
+          "caption": "Con un límite de {l} caracteres el párrafo queda en {n} fragmentos.",
+          "handle": "Arrastra para cambiar el límite",
+          "valueText": "Límite {l}: {n} fragmentos",
+          "valueShort": "Límite {l}",
+          "rowLimit": "Límite (caracteres)",
+          "rowChars": "Caracteres del párrafo",
+          "rowChunks": "Fragmentos",
+          "rowLongest": "Fragmento más largo",
+          "rowShortest": "Fragmento más corto"
+        },
+        "packing": {
+          "title": "Empaquetar frases en fragmentos",
+          "subtitle": "Las frases se añaden una a una; cada una se une al fragmento actual con un espacio hasta que la siguiente supere 200 caracteres, y entonces empieza un fragmento nuevo desde cero.",
+          "caption": "{k} frases quedan en {n} fragmentos.",
+          "handle": "Arrastra para añadir o quitar frases",
+          "valueText": "{k} frases: {n} fragmentos",
+          "valueShort": "Frases: {k}",
+          "rowSentences": "Frases incluidas",
+          "rowChars": "Caracteres",
+          "rowChunks": "Fragmentos",
+          "rowLast": "Longitud del último",
+          "rowRoom": "Espacio libre en el último"
+        },
+        "rateCurve": {
+          "title": "Velocidad y tiempo de escucha",
+          "subtitle": "La tasa multiplica el ritmo normal de la voz, así que el tiempo es el número de palabras dividido entre 150 palabras por minuto por la tasa (150 ppm es el ritmo habitual a 1×).",
+          "caption": "A {rate}× el párrafo guardado dura unos {time}.",
+          "handle": "Arrastra sobre la curva para cambiar la velocidad",
+          "rowWords": "Palabras del párrafo",
+          "rowRate": "Tasa",
+          "rowWpm": "Ritmo (150 × tasa)",
+          "rowTime": "Tiempo de escucha",
+          "rowDiff": "Cambio frente a 1×"
+        },
+        "wpmGauge": {
+          "title": "La tasa en palabras por minuto",
+          "subtitle": "El anillo exterior es el multiplicador de la tasa y el interior el ritmo que produce, ambos llenos en la misma proporción del máximo de 2× del control.",
+          "caption": "Una tasa de {rate}× lee unas {wpm} palabras por minuto.",
+          "handle": "Arrastra alrededor del anillo para cambiar la tasa",
+          "outerUnit": "tasa",
+          "rowRate": "Tasa",
+          "rowBase": "Ritmo a 1×",
+          "rowWps": "Palabras por segundo",
+          "rowPer100": "Tiempo para 100 palabras"
+        },
+        "charMix": {
+          "title": "Qué cuenta el contador de caracteres",
+          "subtitle": "La herramienta informa la longitud del texto recortado, así que cuentan letras, espacios y signos de puntuación. Las primeras palabras del párrafo guardado se dividen en esos tres grupos.",
+          "caption": "{c} caracteres, de los que los espacios son el {s}.",
+          "handle": "Arrastra para cambiar el número de palabras",
+          "valueText": "{w} palabras: {c} caracteres",
+          "valueShort": "Palabras: {w}",
+          "ticks": "{n}",
+          "centre": "caracteres",
+          "legend": {
+            "letters": "Letras",
+            "spaces": "Espacios",
+            "punct": "Puntuación"
+          },
+          "rowWords": "Palabras tomadas",
+          "rowLetters": "Letras",
+          "rowSpaces": "Espacios",
+          "rowPunct": "Puntuación",
+          "rowTotal": "Recuento de caracteres"
+        },
+        "wordSplit": {
+          "title": "Cortar una frase entre palabras",
+          "subtitle": "Una frase sin punto no puede dividirse en un límite de frase, así que la herramienta la corta entre palabras cuando la siguiente superaría 200 caracteres. La línea muestra la longitud del trozo actual tras cada palabra.",
+          "caption": "{w} palabras forman {p} trozos.",
+          "handle": "Arrastra para cambiar el número de palabras",
+          "valueText": "{w} palabras: {p} trozos",
+          "valueShort": "Palabras: {w}",
+          "rowWords": "Palabras",
+          "rowChars": "Caracteres",
+          "rowPieces": "Trozos",
+          "rowCuts": "Nuevo trozo tras la palabra",
+          "rowLongest": "Trozo más largo"
+        },
+        "playhead": {
+          "title": "La cola de enunciados en el tiempo",
+          "subtitle": "Cada fragmento del párrafo guardado es un enunciado; el navegador los pronuncia uno tras otro. Mueve el cabezal para ver qué fragmento suena a 1× (150 palabras por minuto).",
+          "caption": "En {t} la voz lee el fragmento {c}.",
+          "handle": "Arrastra el cabezal",
+          "valueText": "{t}: fragmento {c}",
+          "rowElapsed": "Tiempo transcurrido",
+          "rowChunk": "Fragmento en curso",
+          "rowInto": "Tiempo dentro del fragmento",
+          "rowSpoken": "Palabras dichas",
+          "rowLeft": "Tiempo restante"
+        },
+        "rateCheck": {
+          "title": "Qué velocidades acepta la herramienta",
+          "subtitle": "La herramienta comprueba la tasa frente al rango de Web Speech de 0.1× a 10× antes de hablar; el control ofrece la parte cómoda de 0.5× a 2×. La escala es logarítmica.",
+          "caption": {
+            "invalid": "{rate}× está fuera de 0.1× a 10×, así que la herramienta la rechaza.",
+            "spec": "{rate}× es válida para el navegador pero queda fuera del control de 0.5× a 2×.",
+            "slider": "{rate}× está dentro del rango del control y se acepta."
+          },
+          "handle": "Arrastra para probar una velocidad",
+          "rowRate": "Tasa probada",
+          "rowSpec": "Rango de Web Speech",
+          "rowSlider": "Rango del control",
+          "rowVerdict": "Veredicto de la herramienta",
+          "rowFactor": "Factor de tiempo (1 / tasa)",
+          "accepted": "Aceptada",
+          "rejected": "Rechazada (tasa no válida)"
+        }
       }
     },
     "speech-to-text": {
@@ -31278,7 +31399,6 @@
           "listening": "Escuchando...",
           "denied": "Acceso al micrófono denegado."
         },
-        "emptyTranscript": "Tu texto transcrito aparecerá aquí.",
         "wordCountLabel": "Palabras"
       },
       "quickReference": {
@@ -31415,6 +31535,137 @@
         "howCalculatedTitle": "Cómo se calculó este resultado",
         "inputSectionTitle": "Entrada",
         "resultSectionTitle": "Resultado"
+      },
+      "visuals": {
+        "example": "Ejemplo",
+        "received": "Segmentos finales recibidos",
+        "hero": {
+          "segment": "Segmento final {k}",
+          "handle": "Arrastra para elegir cuántos segmentos se unen",
+          "valueText": "{k} de {n} segmentos: {w} palabras",
+          "valueShort": "Segmentos {k} / {n}",
+          "segmentsUsed": "Segmentos unidos"
+        },
+        "cleanup": {
+          "title": "Limpieza de espacios",
+          "subtitle": "Un reconocedor suele devolver segmentos con espacios sobrantes. La herramienta recorta ambos extremos y reduce cada serie de espacios a uno; los puntos marcan cada espacio.",
+          "caption": "El segmento en bruto tiene {r} caracteres; tras la limpieza, {c}.",
+          "handle": "Arrastra para añadir o quitar espacios",
+          "valueText": "{e} espacios extra: {r} → {c} caracteres",
+          "valueShort": "Espacios extra: {e}",
+          "rawLabel": "Segmento en bruto",
+          "cleanLabel": "Tras la limpieza de la herramienta",
+          "rowExtra": "Espacios extra",
+          "rowRaw": "Longitud en bruto",
+          "rowClean": "Longitud limpia",
+          "rowRemoved": "Caracteres eliminados",
+          "rowWords": "Palabras (sin cambio)"
+        },
+        "capitals": {
+          "title": "Los inicios de frase pasan a mayúscula",
+          "subtitle": "La voz reconocida suele llegar en minúsculas. La herramienta pone en mayúscula la primera letra del texto y toda letra que sigue a un punto, signo de interrogación o exclamación. La altura de cada tallo es la longitud de su frase.",
+          "caption": "{k} frases unidas: {c} letras en mayúscula.",
+          "handle": "Arrastra para cambiar el número de frases",
+          "valueText": "{k} frases: {c} mayúsculas",
+          "valueShort": "Frases: {k}",
+          "axis": "Longitud de la frase (caracteres)",
+          "rowSentences": "Frases",
+          "rowChars": "Caracteres de la transcripción",
+          "rowCaps": "Letras en mayúscula",
+          "rowLetters": "Primeras letras",
+          "rowWords": "Palabras"
+        },
+        "interim": {
+          "title": "Resultados provisionales y segmentos finales",
+          "subtitle": "Mientras hablas, el reconocedor envía conjeturas provisionales que crecen; cuando está seguro, envía un segmento final. Solo los finales llegan a la transcripción; la conjetura se ve atenuada. El tamaño del punto sigue sus palabras.",
+          "caption": "Tras el evento {i} la transcripción tiene {w} palabras finales.",
+          "handle": "Arrastra por los eventos de reconocimiento",
+          "valueText": "Evento {i}: {w} palabras finales",
+          "valueShort": "Evento {i}",
+          "laneInterim": "Provisional",
+          "laneFinal": "Final",
+          "shown": "Lo que muestra la tarjeta",
+          "rowEvent": "Evento",
+          "rowFinals": "Segmentos finales",
+          "rowWords": "Palabras de la transcripción",
+          "rowInterim": "Palabras provisionales",
+          "rowShown": "Caracteres mostrados"
+        },
+        "join": {
+          "title": "Unir segmentos con un espacio",
+          "subtitle": "Cada segmento limpio se coloca tras el anterior con un solo espacio, así que la longitud de la transcripción es la suma de los segmentos más un espacio por unión (los puntos).",
+          "caption": "{k} segmentos forman una transcripción de {c} caracteres.",
+          "handle": "Arrastra para unir más o menos segmentos",
+          "valueText": "{k} segmentos: {c} caracteres",
+          "valueShort": "Segmentos: {k}",
+          "total": "Transcripción: {c} caracteres",
+          "rowSegments": "Segmentos unidos",
+          "rowSum": "Suma de longitudes",
+          "rowSpaces": "Espacios de unión",
+          "rowLen": "Longitud de la transcripción",
+          "rowWords": "Palabras"
+        },
+        "wordLengths": {
+          "title": "Cuánto miden las palabras",
+          "subtitle": "El recuento de palabras divide la transcripción en los espacios. Aquí las primeras palabras de la transcripción guardada se agrupan por letras: cortas (1 a 3), medias (4 a 6) y largas (7 o más).",
+          "caption": "{w} palabras con una media de {a} letras.",
+          "handle": "Arrastra para cambiar el número de palabras",
+          "valueText": "{w} palabras, media {a} letras",
+          "valueShort": "Palabras: {w}",
+          "centre": "letras por palabra",
+          "legend": {
+            "short": "Cortas (1–3)",
+            "medium": "Medias (4–6)",
+            "long": "Largas (7+)"
+          },
+          "rowWords": "Palabras",
+          "rowAvg": "Letras de media"
+        },
+        "helix": {
+          "title": "La transcripción como hélice de palabras",
+          "subtitle": "Cada palabra de la transcripción guardada en orden, enrollada a doce palabras por vuelta; cada columna es tan alta como larga es su palabra. Arrastra la vista para girarla.",
+          "caption": "{n} palabras llenan {turns} vueltas de la hélice.",
+          "handle": "Arrastra para añadir o quitar palabras",
+          "valueText": "{n} palabras, última: {w}",
+          "valueShort": "Palabras: {n}",
+          "rowWords": "Palabras colocadas",
+          "rowChars": "Caracteres de la transcripción",
+          "rowTurns": "Vueltas (palabras ÷ 12)",
+          "rowLongest": "Palabra más larga",
+          "rowLast": "Última palabra"
+        },
+        "languages": {
+          "title": "Qué idiomas reciben mayúsculas",
+          "subtitle": "La regla de mayúsculas solo conoce las letras de la a a la z tras un punto, signo de interrogación o exclamación. Una muestra guardada de dos frases por idioma muestra dónde se aplica; cada radio es la proporción de inicios en mayúscula.",
+          "caption": {
+            "all": "{l}: los {s} inicios de frase pasan a mayúscula.",
+            "some": "{l}: {c} de {s} inicios pasan a mayúscula; una letra inicial fuera de a–z queda igual.",
+            "none": "{l}: esta escritura no tiene mayúsculas, así que el texto queda igual."
+          },
+          "handle": "Arrastra alrededor del círculo para elegir idioma",
+          "valueText": "{l}: {c} de {s}",
+          "before": "Reconocido",
+          "after": "Transcripción",
+          "rowLang": "Idioma",
+          "rowStarts": "Inicios de frase",
+          "rowCaps": "En mayúscula por la herramienta",
+          "rowWords": "Palabras",
+          "rowShare": "Proporción en mayúscula"
+        },
+        "gauge": {
+          "title": "Caracteres frente a palabras",
+          "subtitle": "Al crecer la transcripción, el anillo exterior cuenta sus caracteres y el interior sus palabras, ambos frente a la transcripción guardada completa. Las palabras crecen a saltos: solo un espacio inicia otra.",
+          "caption": "Los primeros {c} caracteres contienen {w} palabras.",
+          "handle": "Arrastra alrededor del anillo para alargar el texto",
+          "valueText": "{c} caracteres: {w} palabras",
+          "valueShort": "Caracteres: {c}",
+          "outerUnit": "caracteres",
+          "innerUnit": "{w} palabras",
+          "rowChars": "Caracteres",
+          "rowWords": "Palabras",
+          "rowSpaces": "Espacios",
+          "rowAvg": "Letras por palabra"
+        }
       }
     },
     "spelling-grammar-checker": {
@@ -31434,7 +31685,6 @@
       },
       "result": {
         "heading": "Resultados",
-        "emptyText": "Empieza a escribir para ver sugerencias ortográficas y gramaticales.",
         "wordCountLabel": "Palabras",
         "issueCountLabel": "Problemas Encontrados",
         "suggestion": "Sugerido:"
@@ -31576,6 +31826,157 @@
         "inputSectionTitle": "Entrada",
         "resultSectionTitle": "Resultado",
         "sentence": "Se revisaron {words} palabras y se encontraron {issues} problema(s)."
+      },
+      "visuals": {
+        "example": "Ejemplo",
+        "hero": {
+          "axis": "Revisados {c} de {t} caracteres",
+          "lane": {
+            "spelling": "Ortografía",
+            "grammar": "Gramática",
+            "capitalization": "Mayúsculas",
+            "punctuation": "Espacios"
+          },
+          "words": "Palabras",
+          "handle": "Arrastra para revisar más o menos palabras",
+          "valueText": "{w} palabras revisadas: {n} problemas",
+          "valueShort": "Palabras {w} / {t}"
+        },
+        "letters": {
+          "title": "Una errata, letra a letra",
+          "subtitle": "Una palabra de la lista de erratas de la herramienta frente a la sugerencia que devuelve, alineadas con el mínimo de ediciones: un par intercambiado, una letra que falta, una que sobra o una equivocada.",
+          "caption": "{w} pasa a {s} con {d} edición(es).",
+          "handle": "Arrastra para elegir una errata",
+          "typed": "Escrito",
+          "suggested": "Sugerencia de la herramienta",
+          "op": {
+            "sub": "letra equivocada",
+            "ins": "letra que falta",
+            "del": "letra que sobra",
+            "swap": "par intercambiado"
+          },
+          "rowTyped": "Palabra escrita",
+          "rowSuggest": "Sugerencia",
+          "rowDist": "Ediciones necesarias",
+          "rowKinds": "Tipo de error",
+          "rowLen": "Letras"
+        },
+        "slips": {
+          "title": "Qué errores cubre la lista",
+          "subtitle": "Cada errata de la muestra de la lista de la herramienta, alineada con su sugerencia y con sus ediciones contadas por tipo. La lista está ordenada; mueve el control para leer un tipo.",
+          "caption": "{k}: {n} de las {t} ediciones.",
+          "handle": "Arrastra arriba o abajo para elegir un tipo",
+          "op": {
+            "sub": "Letra equivocada",
+            "ins": "Letra que falta",
+            "del": "Letra que sobra",
+            "swap": "Par intercambiado"
+          },
+          "rowKind": "Tipo de error",
+          "rowCount": "Ediciones de este tipo",
+          "rowShare": "Parte de todas las ediciones",
+          "rowWords": "Palabras",
+          "rowList": "Erratas en la muestra"
+        },
+        "article": {
+          "title": "Cómo decide la regla a / an",
+          "subtitle": "La herramienta mira \"a\" seguida de una palabra que empieza por vocal y \"an\" seguida de consonante, y luego omite una breve lista de excepciones. Comprueba letras escritas, no sonidos, así que algunos pares nunca se examinan.",
+          "caption": {
+            "flag": "{p}: la herramienta marca el artículo.",
+            "exception": "{p}: la palabra está en la lista de excepciones, no se marca nada.",
+            "untested": "{p}: la herramienta no comprueba esta combinación, no se marca nada."
+          },
+          "handle": "Arrastra para elegir una frase",
+          "nodePhrase": "frase",
+          "nodeLetter": "primera letra: {l}",
+          "nodeException": "¿excepción?",
+          "nodeVerdict": "veredicto",
+          "vowel": "vocal",
+          "consonant": "consonante",
+          "yes": "sí",
+          "no": "no",
+          "flag": "marca → {s}",
+          "ok": "sin problema",
+          "notTested": "no comprobado",
+          "rowPhrase": "Frase",
+          "rowLetter": "Primera letra de la palabra",
+          "rowException": "En la lista de excepciones",
+          "rowVerdict": "Veredicto de la herramienta"
+        },
+        "density": {
+          "title": "Problemas por cada 100 palabras",
+          "subtitle": "Se introducen erratas de la lista de la herramienta una a una en un párrafo guardado sin errores. El anillo exterior cuenta los problemas que encuentra (de 8); el interior es la tasa por 100 palabras (anillo completo = 25).",
+          "caption": "{n} problemas en {w} palabras: {p} por cada 100.",
+          "handle": "Arrastra alrededor del anillo para añadir erratas",
+          "valueText": "{n} problemas, {p} por 100 palabras",
+          "valueShort": "Erratas: {n}",
+          "outerUnit": "problemas",
+          "innerUnit": "{p} / 100 palabras",
+          "rowInjected": "Erratas añadidas",
+          "rowWords": "Palabras",
+          "rowIssues": "Problemas encontrados",
+          "rowPer100": "Problemas por 100 palabras",
+          "rowClean": "Palabras sin problema"
+        },
+        "types": {
+          "title": "Problemas por tipo",
+          "subtitle": "Los cuatro tipos de problema que informa la herramienta, contados en las primeras frases de un párrafo guardado lleno de errores.",
+          "caption": "{n} problemas; el grupo mayor es {top}.",
+          "handle": "Arrastra para revisar más frases",
+          "valueText": "{k} frases: {n} problemas",
+          "valueShort": "Frases: {k}",
+          "centre": "problemas",
+          "rowSentences": "Frases revisadas",
+          "rowTotal": "Todos los problemas"
+        },
+        "ribbon": {
+          "title": "Palabras marcadas en orden de lectura",
+          "subtitle": "Las palabras del párrafo guardado en orden de lectura, once por fila. Una palabra marcada por la herramienta se alza con el color de su tipo; una correcta queda baja. Arrastra la vista para girarla.",
+          "caption": "{n} palabras leídas, {f} marcadas.",
+          "handle": "Arrastra para leer más palabras",
+          "valueText": "{n} palabras: {f} marcadas",
+          "valueShort": "Palabras: {n}",
+          "rowWords": "Palabras leídas",
+          "rowFlagged": "Palabras marcadas",
+          "rowClean": "Palabras correctas",
+          "rowShare": "Proporción marcada",
+          "rowLast": "Última palabra"
+        },
+        "rules": {
+          "title": "Coincidencias por comprobación",
+          "subtitle": "La herramienta ejecuta ocho comprobaciones de patrones. Cada piruleta cuenta las coincidencias de una comprobación en las primeras frases de un segundo párrafo guardado, con el color del tipo que informa.",
+          "caption": "{k} frases: {f} comprobaciones activas, {n} problemas en total.",
+          "handle": "Arrastra para revisar más frases",
+          "valueText": "{k} frases: {n} problemas",
+          "valueShort": "Frases: {k}",
+          "rule": {
+            "misspelling": "Errata",
+            "pronounI": "Pronombre I",
+            "sentenceStart": "Inicio de frase",
+            "spaces": "Doble espacio",
+            "repeated": "Palabra repetida",
+            "spaceAfter": "Espacio tras signo",
+            "article": "a / an",
+            "youre": "your / you're"
+          },
+          "rowSentences": "Frases revisadas",
+          "rowFired": "Comprobaciones con coincidencia",
+          "rowBusiest": "Comprobación más activa",
+          "rowTotal": "Todos los problemas"
+        },
+        "scan": {
+          "title": "Problemas hallados al recorrer el texto",
+          "subtitle": "Todas las comprobaciones indican dónde empieza cada problema. Los escalones cuentan los problemas que empiezan antes de la posición en un párrafo guardado lleno de errores; los puntos muestran cada uno con el color de su tipo.",
+          "caption": "Hasta el carácter {p} se han hallado {n} de {t} problemas.",
+          "handle": "Arrastra la posición de lectura",
+          "valueText": "Posición {p}: {n} problemas",
+          "valueShort": "Posición {p}",
+          "rowPos": "Posición",
+          "rowShare": "Texto recorrido",
+          "rowFound": "Problemas hallados",
+          "rowLast": "Tipo del último",
+          "rowNext": "El siguiente empieza en"
+        }
       }
     },
     "roman-numeral-converter": {

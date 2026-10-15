@@ -31251,6 +31251,127 @@
         "rateLabel": "Débit vocal",
         "pitchLabel": "Hauteur de voix",
         "sentence": "{characters} caractères convertis en parole à une vitesse de {rate}x, hauteur {pitch}."
+      },
+      "visuals": {
+        "example": "Exemple",
+        "hero": {
+          "queue": "Segments dans la file : {n}",
+          "rateAxis": "Vitesse (débit)",
+          "handle": "Faites glisser pour changer la vitesse",
+          "words": "Mots",
+          "time": "Durée d'écoute",
+          "assumption": "Les durées supposent 150 mots par minute à 1×."
+        },
+        "chunkStack": {
+          "title": "Segments sous la limite de caractères",
+          "subtitle": "Le découpeur de l'outil appliqué à un paragraphe enregistré de huit phrases : chaque dalle est un segment réel, aussi long que son nombre de caractères, empilée dans l'ordre de lecture. Déplacez la limite et regardez les phrases se regrouper.",
+          "caption": "Avec une limite de {l} caractères, le paragraphe donne {n} segments.",
+          "handle": "Faites glisser pour changer la limite",
+          "valueText": "Limite {l} : {n} segments",
+          "valueShort": "Limite {l}",
+          "rowLimit": "Limite (caractères)",
+          "rowChars": "Caractères du paragraphe",
+          "rowChunks": "Segments",
+          "rowLongest": "Segment le plus long",
+          "rowShortest": "Segment le plus court"
+        },
+        "packing": {
+          "title": "Ranger les phrases en segments",
+          "subtitle": "Les phrases sont ajoutées une à une ; chacune rejoint le segment courant avec une espace jusqu'à ce que la suivante dépasse 200 caractères, puis un nouveau segment repart de zéro.",
+          "caption": "{k} phrases sont rangées en {n} segments.",
+          "handle": "Faites glisser pour ajouter ou retirer des phrases",
+          "valueText": "{k} phrases : {n} segments",
+          "valueShort": "Phrases : {k}",
+          "rowSentences": "Phrases incluses",
+          "rowChars": "Caractères",
+          "rowChunks": "Segments",
+          "rowLast": "Longueur du dernier",
+          "rowRoom": "Place restante dans le dernier"
+        },
+        "rateCurve": {
+          "title": "Vitesse et durée d'écoute",
+          "subtitle": "Le débit multiplie le rythme normal de la voix : la durée est le nombre de mots divisé par 150 mots par minute fois le débit (150 mots/min est le rythme courant à 1×).",
+          "caption": "À {rate}× le paragraphe enregistré dure environ {time}.",
+          "handle": "Faites glisser sur la courbe pour changer la vitesse",
+          "rowWords": "Mots du paragraphe",
+          "rowRate": "Débit",
+          "rowWpm": "Rythme (150 × débit)",
+          "rowTime": "Durée d'écoute",
+          "rowDiff": "Écart par rapport à 1×"
+        },
+        "wpmGauge": {
+          "title": "Le débit en mots par minute",
+          "subtitle": "L'anneau extérieur est le multiplicateur de débit et l'anneau intérieur le rythme obtenu, tous deux remplis à la même part du maximum de 2× du curseur.",
+          "caption": "Un débit de {rate}× lit environ {wpm} mots par minute.",
+          "handle": "Faites glisser autour de l'anneau pour changer le débit",
+          "outerUnit": "débit",
+          "rowRate": "Débit",
+          "rowBase": "Rythme à 1×",
+          "rowWps": "Mots par seconde",
+          "rowPer100": "Durée pour 100 mots"
+        },
+        "charMix": {
+          "title": "Ce que compte le compteur de caractères",
+          "subtitle": "L'outil indique la longueur du texte rogné : lettres, espaces et ponctuation comptent tous. Les premiers mots du paragraphe enregistré sont répartis dans ces trois groupes.",
+          "caption": "{c} caractères, dont {s} d'espaces.",
+          "handle": "Faites glisser pour changer le nombre de mots",
+          "valueText": "{w} mots : {c} caractères",
+          "valueShort": "Mots : {w}",
+          "ticks": "{n}",
+          "centre": "caractères",
+          "legend": {
+            "letters": "Lettres",
+            "spaces": "Espaces",
+            "punct": "Ponctuation"
+          },
+          "rowWords": "Mots pris",
+          "rowLetters": "Lettres",
+          "rowSpaces": "Espaces",
+          "rowPunct": "Ponctuation",
+          "rowTotal": "Nombre de caractères"
+        },
+        "wordSplit": {
+          "title": "Couper une phrase entre les mots",
+          "subtitle": "Une phrase sans point ne peut pas être coupée à une limite de phrase : l'outil la coupe entre les mots dès que le mot suivant dépasserait 200 caractères. La ligne montre la longueur du morceau courant après chaque mot.",
+          "caption": "{w} mots donnent {p} morceaux.",
+          "handle": "Faites glisser pour changer le nombre de mots",
+          "valueText": "{w} mots : {p} morceaux",
+          "valueShort": "Mots : {w}",
+          "rowWords": "Mots",
+          "rowChars": "Caractères",
+          "rowPieces": "Morceaux",
+          "rowCuts": "Nouveau morceau après le mot",
+          "rowLongest": "Morceau le plus long"
+        },
+        "playhead": {
+          "title": "La file d'énoncés dans le temps",
+          "subtitle": "Chaque segment du paragraphe enregistré est un énoncé ; le navigateur les prononce l'un après l'autre. Déplacez la tête de lecture pour voir quel segment est lu à 1× (150 mots par minute).",
+          "caption": "À {t}, la voix lit le segment {c}.",
+          "handle": "Faites glisser la tête de lecture",
+          "valueText": "{t} : segment {c}",
+          "rowElapsed": "Temps écoulé",
+          "rowChunk": "Segment en cours",
+          "rowInto": "Temps dans ce segment",
+          "rowSpoken": "Mots prononcés",
+          "rowLeft": "Temps restant"
+        },
+        "rateCheck": {
+          "title": "Les vitesses acceptées par l'outil",
+          "subtitle": "L'outil vérifie le débit par rapport à la plage Web Speech de 0.1× à 10× avant de parler ; le curseur en propose la partie confortable de 0.5× à 2×. L'échelle est logarithmique.",
+          "caption": {
+            "invalid": "{rate}× est hors de 0.1× à 10× : l'outil le refuse.",
+            "spec": "{rate}× est valide pour le navigateur mais hors du curseur de 0.5× à 2×.",
+            "slider": "{rate}× est dans la plage du curseur et il est accepté."
+          },
+          "handle": "Faites glisser pour essayer une vitesse",
+          "rowRate": "Débit essayé",
+          "rowSpec": "Plage Web Speech",
+          "rowSlider": "Plage du curseur",
+          "rowVerdict": "Verdict de l'outil",
+          "rowFactor": "Facteur de durée (1 / débit)",
+          "accepted": "Accepté",
+          "rejected": "Refusé (débit invalide)"
+        }
       }
     },
     "speech-to-text": {
@@ -31278,7 +31399,6 @@
           "listening": "Écoute en cours...",
           "denied": "Accès au microphone refusé."
         },
-        "emptyTranscript": "Votre texte transcrit apparaîtra ici.",
         "wordCountLabel": "Mots"
       },
       "quickReference": {
@@ -31415,6 +31535,137 @@
         "howCalculatedTitle": "Comment ce résultat a été calculé",
         "inputSectionTitle": "Entrée",
         "resultSectionTitle": "Résultat"
+      },
+      "visuals": {
+        "example": "Exemple",
+        "received": "Segments finaux reçus",
+        "hero": {
+          "segment": "Segment final {k}",
+          "handle": "Faites glisser pour choisir combien de segments sont joints",
+          "valueText": "{k} segments sur {n} : {w} mots",
+          "valueShort": "Segments {k} / {n}",
+          "segmentsUsed": "Segments joints"
+        },
+        "cleanup": {
+          "title": "Nettoyer les espaces",
+          "subtitle": "Un moteur de reconnaissance renvoie souvent un segment avec des espaces parasites. L'outil rogne les deux bouts et réduit chaque suite d'espaces à une seule ; les points marquent chaque espace.",
+          "caption": "Le segment brut compte {r} caractères ; après nettoyage, {c}.",
+          "handle": "Faites glisser pour ajouter ou retirer des espaces",
+          "valueText": "{e} espaces en trop : {r} → {c} caractères",
+          "valueShort": "Espaces en trop : {e}",
+          "rawLabel": "Segment brut",
+          "cleanLabel": "Après le nettoyage de l'outil",
+          "rowExtra": "Espaces en trop",
+          "rowRaw": "Longueur brute",
+          "rowClean": "Longueur nettoyée",
+          "rowRemoved": "Caractères retirés",
+          "rowWords": "Mots (inchangés)"
+        },
+        "capitals": {
+          "title": "Les débuts de phrase passent en majuscule",
+          "subtitle": "La parole reconnue arrive souvent en minuscules. L'outil met en majuscule la première lettre du texte et toute lettre qui suit un point, un point d'interrogation ou d'exclamation. La hauteur de chaque tige est la longueur de sa phrase.",
+          "caption": "{k} phrases jointes : {c} lettres en majuscule.",
+          "handle": "Faites glisser pour changer le nombre de phrases",
+          "valueText": "{k} phrases : {c} majuscules",
+          "valueShort": "Phrases : {k}",
+          "axis": "Longueur de phrase (caractères)",
+          "rowSentences": "Phrases",
+          "rowChars": "Caractères de la transcription",
+          "rowCaps": "Lettres mises en majuscule",
+          "rowLetters": "Premières lettres",
+          "rowWords": "Mots"
+        },
+        "interim": {
+          "title": "Résultats provisoires et segments finaux",
+          "subtitle": "Pendant que vous parlez, le moteur envoie des hypothèses provisoires qui s'allongent ; quand il est sûr, il envoie un segment final. Seuls les finaux entrent dans la transcription ; l'hypothèse s'affiche en clair. La taille du point suit ses mots.",
+          "caption": "Après l'événement {i}, la transcription compte {w} mots finaux.",
+          "handle": "Faites glisser à travers les événements",
+          "valueText": "Événement {i} : {w} mots finaux",
+          "valueShort": "Événement {i}",
+          "laneInterim": "Provisoire",
+          "laneFinal": "Final",
+          "shown": "Affiché dans la carte Transcription",
+          "rowEvent": "Événement",
+          "rowFinals": "Segments finaux",
+          "rowWords": "Mots de la transcription",
+          "rowInterim": "Mots provisoires",
+          "rowShown": "Caractères affichés"
+        },
+        "join": {
+          "title": "Joindre les segments par une espace",
+          "subtitle": "Chaque segment nettoyé est placé après le précédent avec exactement une espace : la longueur de la transcription est la somme des segments plus une espace par jonction (les points).",
+          "caption": "{k} segments donnent une transcription de {c} caractères.",
+          "handle": "Faites glisser pour joindre plus ou moins de segments",
+          "valueText": "{k} segments : {c} caractères",
+          "valueShort": "Segments : {k}",
+          "total": "Transcription : {c} caractères",
+          "rowSegments": "Segments joints",
+          "rowSum": "Somme des longueurs",
+          "rowSpaces": "Espaces de jonction",
+          "rowLen": "Longueur de la transcription",
+          "rowWords": "Mots"
+        },
+        "wordLengths": {
+          "title": "La longueur des mots",
+          "subtitle": "Le nombre de mots découpe la transcription aux espaces. Ici, les premiers mots de la transcription enregistrée sont groupés par nombre de lettres : courts (1 à 3), moyens (4 à 6) et longs (7 ou plus).",
+          "caption": "{w} mots, en moyenne {a} lettres.",
+          "handle": "Faites glisser pour changer le nombre de mots",
+          "valueText": "{w} mots, moyenne {a} lettres",
+          "valueShort": "Mots : {w}",
+          "centre": "lettres par mot",
+          "legend": {
+            "short": "Courts (1–3)",
+            "medium": "Moyens (4–6)",
+            "long": "Longs (7+)"
+          },
+          "rowWords": "Mots",
+          "rowAvg": "Lettres en moyenne"
+        },
+        "helix": {
+          "title": "La transcription en hélice de mots",
+          "subtitle": "Chaque mot de la transcription enregistrée dans l'ordre parlé, enroulé à douze mots par tour ; chaque colonne est aussi haute que son mot est long. Faites glisser la vue pour la tourner.",
+          "caption": "{n} mots remplissent {turns} tours de l'hélice.",
+          "handle": "Faites glisser pour ajouter ou retirer des mots",
+          "valueText": "{n} mots, dernier : {w}",
+          "valueShort": "Mots : {n}",
+          "rowWords": "Mots placés",
+          "rowChars": "Caractères de la transcription",
+          "rowTurns": "Tours (mots ÷ 12)",
+          "rowLongest": "Mot le plus long",
+          "rowLast": "Dernier mot"
+        },
+        "languages": {
+          "title": "Quelles langues reçoivent des majuscules",
+          "subtitle": "La règle de majuscule ne connaît que les lettres de a à z après un point, un point d'interrogation ou d'exclamation. Un échantillon enregistré de deux phrases par langue montre où elle s'applique ; chaque rayon est la part de débuts mis en majuscule.",
+          "caption": {
+            "all": "{l} : les {s} débuts de phrase passent en majuscule.",
+            "some": "{l} : {c} débuts sur {s} passent en majuscule ; une initiale hors de a–z reste telle quelle.",
+            "none": "{l} : cette écriture n'a pas de majuscules, le texte reste inchangé."
+          },
+          "handle": "Faites glisser autour du cercle pour choisir une langue",
+          "valueText": "{l} : {c} sur {s}",
+          "before": "Reconnu",
+          "after": "Transcription",
+          "rowLang": "Langue",
+          "rowStarts": "Débuts de phrase",
+          "rowCaps": "Mis en majuscule par l'outil",
+          "rowWords": "Mots",
+          "rowShare": "Part en majuscule"
+        },
+        "gauge": {
+          "title": "Caractères face aux mots",
+          "subtitle": "À mesure que la transcription grandit, l'anneau extérieur compte ses caractères et l'anneau intérieur ses mots, chacun rapporté à la transcription enregistrée complète. Les mots avancent par sauts : seule une espace en commence un nouveau.",
+          "caption": "Les {c} premiers caractères contiennent {w} mots.",
+          "handle": "Faites glisser autour de l'anneau pour allonger le texte",
+          "valueText": "{c} caractères : {w} mots",
+          "valueShort": "Caractères : {c}",
+          "outerUnit": "caractères",
+          "innerUnit": "{w} mots",
+          "rowChars": "Caractères",
+          "rowWords": "Mots",
+          "rowSpaces": "Espaces",
+          "rowAvg": "Lettres par mot"
+        }
       }
     },
     "spelling-grammar-checker": {
@@ -31434,7 +31685,6 @@
       },
       "result": {
         "heading": "Résultats",
-        "emptyText": "Commencez à taper pour voir les suggestions d'orthographe et de grammaire.",
         "wordCountLabel": "Mots",
         "issueCountLabel": "Problèmes Trouvés",
         "suggestion": "Suggéré :"
@@ -31576,6 +31826,157 @@
         "inputSectionTitle": "Entrée",
         "resultSectionTitle": "Résultat",
         "sentence": "{words} mots vérifiés, {issues} problème(s) trouvé(s)."
+      },
+      "visuals": {
+        "example": "Exemple",
+        "hero": {
+          "axis": "{c} caractères vérifiés sur {t}",
+          "lane": {
+            "spelling": "Orthographe",
+            "grammar": "Grammaire",
+            "capitalization": "Majuscules",
+            "punctuation": "Espaces"
+          },
+          "words": "Mots",
+          "handle": "Faites glisser pour vérifier plus ou moins de mots",
+          "valueText": "{w} mots vérifiés : {n} problèmes",
+          "valueShort": "Mots {w} / {t}"
+        },
+        "letters": {
+          "title": "Une faute, lettre par lettre",
+          "subtitle": "Un mot de la liste de fautes de l'outil face à la suggestion qu'il renvoie, alignés avec le moins de modifications : une paire inversée, une lettre manquante, une lettre en trop ou une mauvaise lettre.",
+          "caption": "{w} devient {s} en {d} modification(s).",
+          "handle": "Faites glisser pour choisir une faute",
+          "typed": "Saisi",
+          "suggested": "Suggestion de l'outil",
+          "op": {
+            "sub": "mauvaise lettre",
+            "ins": "lettre manquante",
+            "del": "lettre en trop",
+            "swap": "paire inversée"
+          },
+          "rowTyped": "Mot saisi",
+          "rowSuggest": "Suggestion",
+          "rowDist": "Modifications nécessaires",
+          "rowKinds": "Type de faute",
+          "rowLen": "Lettres"
+        },
+        "slips": {
+          "title": "Les fautes que couvre la liste",
+          "subtitle": "Chaque faute de l'échantillon tiré de la liste de l'outil, alignée avec sa suggestion et ses modifications comptées par type. La liste est classée ; déplacez la poignée pour lire un type.",
+          "caption": "{k} : {n} des {t} modifications.",
+          "handle": "Faites glisser vers le haut ou le bas pour choisir un type",
+          "op": {
+            "sub": "Mauvaise lettre",
+            "ins": "Lettre manquante",
+            "del": "Lettre en trop",
+            "swap": "Paire inversée"
+          },
+          "rowKind": "Type de faute",
+          "rowCount": "Modifications de ce type",
+          "rowShare": "Part de toutes les modifications",
+          "rowWords": "Mots",
+          "rowList": "Fautes dans l'échantillon"
+        },
+        "article": {
+          "title": "Comment décide la règle a / an",
+          "subtitle": "L'outil regarde « a » suivi d'un mot commençant par une voyelle et « an » suivi d'une consonne, puis ignore une courte liste d'exceptions. Il teste des lettres écrites, pas des sons : certaines paires ne sont jamais examinées.",
+          "caption": {
+            "flag": "{p} : l'outil signale l'article.",
+            "exception": "{p} : le mot figure dans les exceptions, rien n'est signalé.",
+            "untested": "{p} : l'outil ne teste pas cette association, rien n'est signalé."
+          },
+          "handle": "Faites glisser pour choisir une expression",
+          "nodePhrase": "expression",
+          "nodeLetter": "1re lettre : {l}",
+          "nodeException": "exception ?",
+          "nodeVerdict": "verdict",
+          "vowel": "voyelle",
+          "consonant": "consonne",
+          "yes": "oui",
+          "no": "non",
+          "flag": "signal → {s}",
+          "ok": "aucun problème",
+          "notTested": "non testé",
+          "rowPhrase": "Expression",
+          "rowLetter": "Première lettre du mot",
+          "rowException": "Dans la liste d'exceptions",
+          "rowVerdict": "Verdict de l'outil"
+        },
+        "density": {
+          "title": "Problèmes pour 100 mots",
+          "subtitle": "Des fautes de la liste de l'outil sont introduites une à une dans un paragraphe enregistré sans faute. L'anneau extérieur compte les problèmes trouvés (sur 8) ; l'anneau intérieur est le taux pour 100 mots (anneau complet = 25).",
+          "caption": "{n} problèmes pour {w} mots : {p} pour 100 mots.",
+          "handle": "Faites glisser autour de l'anneau pour ajouter des fautes",
+          "valueText": "{n} problèmes, {p} pour 100 mots",
+          "valueShort": "Fautes : {n}",
+          "outerUnit": "problèmes",
+          "innerUnit": "{p} / 100 mots",
+          "rowInjected": "Fautes ajoutées",
+          "rowWords": "Mots",
+          "rowIssues": "Problèmes trouvés",
+          "rowPer100": "Problèmes pour 100 mots",
+          "rowClean": "Mots sans problème"
+        },
+        "types": {
+          "title": "Problèmes par type",
+          "subtitle": "Les quatre types de problème que signale l'outil, comptés sur les premières phrases d'un paragraphe enregistré plein de fautes.",
+          "caption": "{n} problèmes ; le groupe le plus grand est {top}.",
+          "handle": "Faites glisser pour vérifier plus de phrases",
+          "valueText": "{k} phrases : {n} problèmes",
+          "valueShort": "Phrases : {k}",
+          "centre": "problèmes",
+          "rowSentences": "Phrases vérifiées",
+          "rowTotal": "Tous les problèmes"
+        },
+        "ribbon": {
+          "title": "Mots signalés dans l'ordre de lecture",
+          "subtitle": "Les mots du paragraphe enregistré dans l'ordre de lecture, onze par rangée. Un mot signalé se dresse dans la couleur de son type ; un mot correct reste bas. Faites glisser la vue pour la tourner.",
+          "caption": "{n} mots lus, dont {f} signalés.",
+          "handle": "Faites glisser pour lire plus de mots",
+          "valueText": "{n} mots : {f} signalés",
+          "valueShort": "Mots : {n}",
+          "rowWords": "Mots lus",
+          "rowFlagged": "Mots signalés",
+          "rowClean": "Mots corrects",
+          "rowShare": "Part signalée",
+          "rowLast": "Dernier mot"
+        },
+        "rules": {
+          "title": "Correspondances par vérification",
+          "subtitle": "L'outil exécute huit vérifications de motifs distinctes. Chaque sucette compte les correspondances d'une vérification dans les premières phrases d'un second paragraphe enregistré, dans la couleur du type signalé.",
+          "caption": "{k} phrases : {f} vérifications déclenchées, {n} problèmes au total.",
+          "handle": "Faites glisser pour vérifier plus de phrases",
+          "valueText": "{k} phrases : {n} problèmes",
+          "valueShort": "Phrases : {k}",
+          "rule": {
+            "misspelling": "Faute",
+            "pronounI": "Pronom I",
+            "sentenceStart": "Début de phrase",
+            "spaces": "Double espace",
+            "repeated": "Mot répété",
+            "spaceAfter": "Espace après signe",
+            "article": "a / an",
+            "youre": "your / you're"
+          },
+          "rowSentences": "Phrases vérifiées",
+          "rowFired": "Vérifications déclenchées",
+          "rowBusiest": "Vérification la plus active",
+          "rowTotal": "Tous les problèmes"
+        },
+        "scan": {
+          "title": "Problèmes trouvés pendant la lecture",
+          "subtitle": "Toutes les vérifications indiquent où commence chaque problème. Les marches comptent les problèmes qui commencent avant la position de lecture dans un paragraphe enregistré plein de fautes ; les points montrent chacun dans la couleur de son type.",
+          "caption": "Jusqu'au caractère {p}, {n} problèmes sur {t} ont été trouvés.",
+          "handle": "Faites glisser la position de lecture",
+          "valueText": "Position {p} : {n} problèmes",
+          "valueShort": "Position {p}",
+          "rowPos": "Position de lecture",
+          "rowShare": "Texte parcouru",
+          "rowFound": "Problèmes trouvés",
+          "rowLast": "Type du dernier",
+          "rowNext": "Le suivant commence à"
+        }
       }
     },
     "roman-numeral-converter": {

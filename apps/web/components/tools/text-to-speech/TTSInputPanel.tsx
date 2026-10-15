@@ -44,14 +44,15 @@ export default function TTSInputPanel({
   const t = useTranslations("tools.text-to-speech.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard title={t("inputTitle")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       {!isSupported && (
         <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
           {t("unsupported")}
         </p>
       )}
 
-      <label className="block space-y-2">
+      {/* The text area takes the column's spare height, so the input card ends flush with the Result card (§41). */}
+      <label className="flex flex-1 flex-col">
         <span className="sr-only">{t("textLabel")}</span>
         <textarea
           dir="auto"
@@ -59,7 +60,7 @@ export default function TTSInputPanel({
           onChange={(e) => onTextChange(e.target.value)}
           placeholder={t("textPlaceholder")}
           rows={8}
-          className="w-full resize-y rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
+          className="min-h-[12rem] w-full flex-1 resize-y rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
         />
       </label>
 

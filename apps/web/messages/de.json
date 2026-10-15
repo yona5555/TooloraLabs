@@ -31251,6 +31251,127 @@
         "rateLabel": "Sprechgeschwindigkeit",
         "pitchLabel": "Tonhöhe",
         "sentence": "{characters} Zeichen mit {rate}x Geschwindigkeit und Tonhöhe {pitch} in Sprache umgewandelt."
+      },
+      "visuals": {
+        "example": "Beispiel",
+        "hero": {
+          "queue": "Abschnitte in der Warteschlange: {n}",
+          "rateAxis": "Tempo (Rate)",
+          "handle": "Ziehen, um das Tempo zu ändern",
+          "words": "Wörter",
+          "time": "Hördauer",
+          "assumption": "Die Zeiten gehen von 150 Wörtern pro Minute bei 1× aus."
+        },
+        "chunkStack": {
+          "title": "Abschnitte unter der Zeichengrenze",
+          "subtitle": "Der Zerleger des Tools auf einen gespeicherten Absatz mit acht Sätzen angewandt: Jede Platte ist ein echter Abschnitt, so lang wie seine Zeichenzahl, in Sprechreihenfolge gestapelt. Verschieben Sie die Grenze und sehen Sie, wie sich die Sätze neu verteilen.",
+          "caption": "Bei einer Grenze von {l} Zeichen ergibt der Absatz {n} Abschnitte.",
+          "handle": "Ziehen, um die Grenze zu ändern",
+          "valueText": "Grenze {l}: {n} Abschnitte",
+          "valueShort": "Grenze {l}",
+          "rowLimit": "Grenze (Zeichen)",
+          "rowChars": "Zeichen im Absatz",
+          "rowChunks": "Abschnitte",
+          "rowLongest": "Längster Abschnitt",
+          "rowShortest": "Kürzester Abschnitt"
+        },
+        "packing": {
+          "title": "Sätze in Abschnitte packen",
+          "subtitle": "Sätze kommen einzeln hinzu; jeder wird mit einem Leerzeichen an den aktuellen Abschnitt gehängt, bis der nächste 200 Zeichen überschreiten würde – dann beginnt ein neuer Abschnitt bei null.",
+          "caption": "{k} Sätze werden in {n} Abschnitte gepackt.",
+          "handle": "Ziehen, um Sätze hinzuzufügen oder zu entfernen",
+          "valueText": "{k} Sätze: {n} Abschnitte",
+          "valueShort": "Sätze: {k}",
+          "rowSentences": "Enthaltene Sätze",
+          "rowChars": "Zeichen",
+          "rowChunks": "Abschnitte",
+          "rowLast": "Länge des letzten",
+          "rowRoom": "Platz im letzten"
+        },
+        "rateCurve": {
+          "title": "Tempo und Hördauer",
+          "subtitle": "Die Rate multipliziert das normale Sprechtempo, daher ist die Hördauer die Wortzahl geteilt durch 150 Wörter pro Minute mal Rate (150 Wörter/Min. ist das übliche Tempo bei 1×).",
+          "caption": "Bei {rate}× dauert der gespeicherte Absatz etwa {time}.",
+          "handle": "Auf der Kurve ziehen, um das Tempo zu ändern",
+          "rowWords": "Wörter im Absatz",
+          "rowRate": "Rate",
+          "rowWpm": "Tempo (150 × Rate)",
+          "rowTime": "Hördauer",
+          "rowDiff": "Änderung gegenüber 1×"
+        },
+        "wpmGauge": {
+          "title": "Die Rate in Wörtern pro Minute",
+          "subtitle": "Der äußere Ring ist der Ratenfaktor, der innere das daraus folgende Tempo; beide sind zum gleichen Anteil des Reglermaximums von 2× gefüllt.",
+          "caption": "Eine Rate von {rate}× liest etwa {wpm} Wörter pro Minute.",
+          "handle": "Um den Ring ziehen, um die Rate zu ändern",
+          "outerUnit": "Rate",
+          "rowRate": "Rate",
+          "rowBase": "Tempo bei 1×",
+          "rowWps": "Wörter pro Sekunde",
+          "rowPer100": "Zeit für 100 Wörter"
+        },
+        "charMix": {
+          "title": "Was die Zeichenzahl zählt",
+          "subtitle": "Das Tool meldet die Länge des getrimmten Textes, also zählen Buchstaben, Leerzeichen und Satzzeichen. Die ersten Wörter des gespeicherten Absatzes werden in diese drei Gruppen aufgeteilt.",
+          "caption": "{c} Zeichen, davon {s} Leerzeichen.",
+          "handle": "Ziehen, um die Wortzahl zu ändern",
+          "valueText": "{w} Wörter: {c} Zeichen",
+          "valueShort": "Wörter: {w}",
+          "ticks": "{n}",
+          "centre": "Zeichen",
+          "legend": {
+            "letters": "Buchstaben",
+            "spaces": "Leerzeichen",
+            "punct": "Satzzeichen"
+          },
+          "rowWords": "Genommene Wörter",
+          "rowLetters": "Buchstaben",
+          "rowSpaces": "Leerzeichen",
+          "rowPunct": "Satzzeichen",
+          "rowTotal": "Zeichenzahl"
+        },
+        "wordSplit": {
+          "title": "Einen Satz zwischen Wörtern teilen",
+          "subtitle": "Ein Satz ohne Punkt lässt sich nicht an einer Satzgrenze teilen, daher schneidet das Tool zwischen Wörtern, sobald das nächste Wort 200 Zeichen überschreiten würde. Die Linie zeigt die Länge des aktuellen Stücks nach jedem Wort.",
+          "caption": "{w} Wörter ergeben {p} Stücke.",
+          "handle": "Ziehen, um die Wortzahl zu ändern",
+          "valueText": "{w} Wörter: {p} Stücke",
+          "valueShort": "Wörter: {w}",
+          "rowWords": "Wörter",
+          "rowChars": "Zeichen",
+          "rowPieces": "Stücke",
+          "rowCuts": "Neues Stück nach Wort",
+          "rowLongest": "Längstes Stück"
+        },
+        "playhead": {
+          "title": "Die Äußerungswarteschlange in der Zeit",
+          "subtitle": "Jeder Abschnitt des gespeicherten Absatzes ist eine Äußerung; der Browser spricht sie nacheinander. Verschieben Sie den Abspielkopf, um zu sehen, welcher Abschnitt bei 1× (150 Wörter pro Minute) gesprochen wird.",
+          "caption": "Bei {t} liest die Stimme Abschnitt {c}.",
+          "handle": "Abspielkopf ziehen",
+          "valueText": "{t}: Abschnitt {c}",
+          "rowElapsed": "Verstrichene Zeit",
+          "rowChunk": "Aktueller Abschnitt",
+          "rowInto": "Zeit im Abschnitt",
+          "rowSpoken": "Gesprochene Wörter",
+          "rowLeft": "Restzeit"
+        },
+        "rateCheck": {
+          "title": "Welche Tempi das Tool annimmt",
+          "subtitle": "Das Tool prüft die Rate vor dem Sprechen gegen den Web-Speech-Bereich von 0.1× bis 10×; der Regler bietet den angenehmen Teil von 0.5× bis 2×. Die Skala ist logarithmisch.",
+          "caption": {
+            "invalid": "{rate}× liegt außerhalb von 0.1× bis 10×, daher lehnt das Tool sie ab.",
+            "spec": "{rate}× ist für den Browser gültig, liegt aber außerhalb des Reglers von 0.5× bis 2×.",
+            "slider": "{rate}× liegt im Reglerbereich und wird angenommen."
+          },
+          "handle": "Ziehen, um ein Tempo zu testen",
+          "rowRate": "Getestete Rate",
+          "rowSpec": "Web-Speech-Bereich",
+          "rowSlider": "Reglerbereich",
+          "rowVerdict": "Urteil des Tools",
+          "rowFactor": "Zeitfaktor (1 / Rate)",
+          "accepted": "Angenommen",
+          "rejected": "Abgelehnt (ungültige Rate)"
+        }
       }
     },
     "speech-to-text": {
@@ -31278,7 +31399,6 @@
           "listening": "Hört zu...",
           "denied": "Mikrofonzugriff verweigert."
         },
-        "emptyTranscript": "Dein transkribierter Text erscheint hier.",
         "wordCountLabel": "Wörter"
       },
       "quickReference": {
@@ -31415,6 +31535,137 @@
         "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis"
+      },
+      "visuals": {
+        "example": "Beispiel",
+        "received": "Empfangene endgültige Segmente",
+        "hero": {
+          "segment": "Endgültiges Segment {k}",
+          "handle": "Ziehen, um die Zahl der verbundenen Segmente zu wählen",
+          "valueText": "{k} von {n} Segmenten: {w} Wörter",
+          "valueShort": "Segmente {k} / {n}",
+          "segmentsUsed": "Verbundene Segmente"
+        },
+        "cleanup": {
+          "title": "Leerzeichen bereinigen",
+          "subtitle": "Eine Erkennung liefert oft Segmente mit überzähligen Leerzeichen. Das Tool kürzt beide Enden und fasst jede Folge von Leerzeichen zu einem zusammen; die Punkte markieren jedes Leerzeichen.",
+          "caption": "Das Rohsegment hat {r} Zeichen, nach der Bereinigung {c}.",
+          "handle": "Ziehen, um Leerzeichen hinzuzufügen oder zu entfernen",
+          "valueText": "{e} zusätzliche Leerzeichen: {r} → {c} Zeichen",
+          "valueShort": "Zusätzliche Leerzeichen: {e}",
+          "rawLabel": "Rohsegment",
+          "cleanLabel": "Nach der Bereinigung durch das Tool",
+          "rowExtra": "Zusätzliche Leerzeichen",
+          "rowRaw": "Rohlänge",
+          "rowClean": "Bereinigte Länge",
+          "rowRemoved": "Entfernte Zeichen",
+          "rowWords": "Wörter (unverändert)"
+        },
+        "capitals": {
+          "title": "Satzanfänge werden großgeschrieben",
+          "subtitle": "Erkannte Sprache kommt meist kleingeschrieben an. Das Tool schreibt den ersten Buchstaben des Textes und jeden Buchstaben nach Punkt, Frage- oder Ausrufezeichen groß. Die Stielhöhe ist die Länge des jeweiligen Satzes.",
+          "caption": "{k} Sätze verbunden: {c} Buchstaben großgeschrieben.",
+          "handle": "Ziehen, um die Zahl der Sätze zu ändern",
+          "valueText": "{k} Sätze: {c} Großbuchstaben",
+          "valueShort": "Sätze: {k}",
+          "axis": "Satzlänge (Zeichen)",
+          "rowSentences": "Sätze",
+          "rowChars": "Zeichen im Transkript",
+          "rowCaps": "Großgeschriebene Buchstaben",
+          "rowLetters": "Anfangsbuchstaben",
+          "rowWords": "Wörter"
+        },
+        "interim": {
+          "title": "Zwischenergebnisse und endgültige Segmente",
+          "subtitle": "Während Sie sprechen, sendet die Erkennung wachsende Zwischenvermutungen; ist sie sicher, sendet sie ein endgültiges Segment. Nur endgültige Segmente gelangen ins Transkript, die Vermutung erscheint blass. Die Punktgröße folgt ihrer Wortzahl.",
+          "caption": "Nach Ereignis {i} enthält das Transkript {w} endgültige Wörter.",
+          "handle": "Durch die Erkennungsereignisse ziehen",
+          "valueText": "Ereignis {i}: {w} endgültige Wörter",
+          "valueShort": "Ereignis {i}",
+          "laneInterim": "Zwischen",
+          "laneFinal": "Endgültig",
+          "shown": "In der Transkript-Karte angezeigt",
+          "rowEvent": "Ereignis",
+          "rowFinals": "Endgültige Segmente",
+          "rowWords": "Wörter im Transkript",
+          "rowInterim": "Zwischenwörter",
+          "rowShown": "Angezeigte Zeichen"
+        },
+        "join": {
+          "title": "Segmente mit einem Leerzeichen verbinden",
+          "subtitle": "Jedes bereinigte Segment folgt dem vorigen mit genau einem Leerzeichen, daher ist die Transkriptlänge die Summe der Segmentlängen plus ein Leerzeichen je Verbindung (die Punkte).",
+          "caption": "{k} Segmente ergeben ein Transkript mit {c} Zeichen.",
+          "handle": "Ziehen, um mehr oder weniger Segmente zu verbinden",
+          "valueText": "{k} Segmente: {c} Zeichen",
+          "valueShort": "Segmente: {k}",
+          "total": "Transkript: {c} Zeichen",
+          "rowSegments": "Verbundene Segmente",
+          "rowSum": "Summe der Segmentlängen",
+          "rowSpaces": "Verbindende Leerzeichen",
+          "rowLen": "Transkriptlänge",
+          "rowWords": "Wörter"
+        },
+        "wordLengths": {
+          "title": "Wie lang die Wörter sind",
+          "subtitle": "Die Wortzahl teilt das Transkript an Leerzeichen. Hier werden die ersten Wörter des gespeicherten Transkripts nach Buchstaben gruppiert: kurz (1 bis 3), mittel (4 bis 6) und lang (7 oder mehr).",
+          "caption": "{w} Wörter mit durchschnittlich {a} Buchstaben.",
+          "handle": "Ziehen, um die Wortzahl zu ändern",
+          "valueText": "{w} Wörter, Schnitt {a} Buchstaben",
+          "valueShort": "Wörter: {w}",
+          "centre": "Buchstaben je Wort",
+          "legend": {
+            "short": "Kurz (1–3)",
+            "medium": "Mittel (4–6)",
+            "long": "Lang (7+)"
+          },
+          "rowWords": "Wörter",
+          "rowAvg": "Buchstaben im Schnitt"
+        },
+        "helix": {
+          "title": "Das Transkript als Wort-Helix",
+          "subtitle": "Jedes Wort des gespeicherten Transkripts in Sprechreihenfolge, zwölf Wörter pro Windung; jede Säule ist so hoch, wie ihr Wort lang ist. Ziehen Sie die Ansicht, um sie zu drehen.",
+          "caption": "{n} Wörter füllen {turns} Windungen der Helix.",
+          "handle": "Ziehen, um Wörter hinzuzufügen oder zu entfernen",
+          "valueText": "{n} Wörter, letztes: {w}",
+          "valueShort": "Wörter: {n}",
+          "rowWords": "Platzierte Wörter",
+          "rowChars": "Zeichen im Transkript",
+          "rowTurns": "Windungen (Wörter ÷ 12)",
+          "rowLongest": "Längstes Wort",
+          "rowLast": "Letztes Wort"
+        },
+        "languages": {
+          "title": "Welche Sprachen Großbuchstaben erhalten",
+          "subtitle": "Die Großschreibregel kennt nur die Buchstaben a bis z nach Punkt, Frage- oder Ausrufezeichen. Eine gespeicherte Probe aus zwei Sätzen je Erkennungssprache zeigt, wo sie greift; jede Speiche ist der Anteil großgeschriebener Satzanfänge.",
+          "caption": {
+            "all": "{l}: alle {s} Satzanfänge werden großgeschrieben.",
+            "some": "{l}: {c} von {s} Satzanfängen werden großgeschrieben; ein Anfangsbuchstabe außerhalb von a–z bleibt unverändert.",
+            "none": "{l}: Diese Schrift kennt keine Großbuchstaben, der Text bleibt unverändert."
+          },
+          "handle": "Um den Kreis ziehen, um eine Sprache zu wählen",
+          "valueText": "{l}: {c} von {s}",
+          "before": "Erkannt",
+          "after": "Transkript",
+          "rowLang": "Sprache",
+          "rowStarts": "Satzanfänge",
+          "rowCaps": "Vom Tool großgeschrieben",
+          "rowWords": "Wörter",
+          "rowShare": "Anteil großgeschrieben"
+        },
+        "gauge": {
+          "title": "Zeichen gegen Wörter",
+          "subtitle": "Während das Transkript wächst, zählt der äußere Ring seine Zeichen und der innere seine Wörter, jeweils gegen das vollständige gespeicherte Transkript. Wörter wachsen in Sprüngen: Nur ein Leerzeichen beginnt ein neues.",
+          "caption": "Die ersten {c} Zeichen enthalten {w} Wörter.",
+          "handle": "Um den Ring ziehen, um den Text zu verlängern",
+          "valueText": "{c} Zeichen: {w} Wörter",
+          "valueShort": "Zeichen: {c}",
+          "outerUnit": "Zeichen",
+          "innerUnit": "{w} Wörter",
+          "rowChars": "Zeichen",
+          "rowWords": "Wörter",
+          "rowSpaces": "Leerzeichen",
+          "rowAvg": "Buchstaben je Wort"
+        }
       }
     },
     "spelling-grammar-checker": {
@@ -31434,7 +31685,6 @@
       },
       "result": {
         "heading": "Ergebnisse",
-        "emptyText": "Beginne zu tippen, um Rechtschreib- und Grammatikvorschläge zu sehen.",
         "wordCountLabel": "Wörter",
         "issueCountLabel": "Gefundene Probleme",
         "suggestion": "Vorschlag:"
@@ -31576,6 +31826,157 @@
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis",
         "sentence": "{words} Wörter geprüft und {issues} Problem(e) gefunden."
+      },
+      "visuals": {
+        "example": "Beispiel",
+        "hero": {
+          "axis": "{c} von {t} Zeichen geprüft",
+          "lane": {
+            "spelling": "Rechtschreibung",
+            "grammar": "Grammatik",
+            "capitalization": "Großschreibung",
+            "punctuation": "Abstände"
+          },
+          "words": "Wörter",
+          "handle": "Ziehen, um mehr oder weniger Wörter zu prüfen",
+          "valueText": "{w} Wörter geprüft: {n} Probleme",
+          "valueShort": "Wörter {w} / {t}"
+        },
+        "letters": {
+          "title": "Ein Tippfehler, Buchstabe für Buchstabe",
+          "subtitle": "Ein Wort aus der Fehlerliste des Tools gegen den Vorschlag, den das Tool liefert, mit möglichst wenigen Änderungen ausgerichtet: vertauschtes Paar, fehlender, überzähliger oder falscher Buchstabe.",
+          "caption": "{w} wird mit {d} Änderung(en) zu {s}.",
+          "handle": "Ziehen, um einen Fehler zu wählen",
+          "typed": "Getippt",
+          "suggested": "Vorschlag des Tools",
+          "op": {
+            "sub": "falscher Buchstabe",
+            "ins": "fehlender Buchstabe",
+            "del": "überzähliger Buchstabe",
+            "swap": "vertauschtes Paar"
+          },
+          "rowTyped": "Getipptes Wort",
+          "rowSuggest": "Vorschlag",
+          "rowDist": "Nötige Änderungen",
+          "rowKinds": "Art des Fehlers",
+          "rowLen": "Buchstaben"
+        },
+        "slips": {
+          "title": "Welche Fehler die Liste abdeckt",
+          "subtitle": "Jeder Fehler der Stichprobe aus der Liste des Tools, mit seinem Vorschlag ausgerichtet und seine Änderungen nach Art gezählt. Die Liste ist sortiert; bewegen Sie den Griff, um eine Art zu lesen.",
+          "caption": "{k}: {n} der {t} Änderungen.",
+          "handle": "Nach oben oder unten ziehen, um eine Art zu wählen",
+          "op": {
+            "sub": "Falscher Buchstabe",
+            "ins": "Fehlender Buchstabe",
+            "del": "Überzähliger Buchstabe",
+            "swap": "Vertauschtes Paar"
+          },
+          "rowKind": "Art des Fehlers",
+          "rowCount": "Änderungen dieser Art",
+          "rowShare": "Anteil an allen Änderungen",
+          "rowWords": "Wörter",
+          "rowList": "Fehler in der Stichprobe"
+        },
+        "article": {
+          "title": "Wie die a / an-Prüfung entscheidet",
+          "subtitle": "Das Tool betrachtet „a“ vor einem Wort mit Vokalbuchstaben und „an“ vor einem Konsonantenbuchstaben und überspringt dann eine kurze Ausnahmeliste. Es prüft Buchstaben, nicht Laute, daher werden manche Paare nie untersucht.",
+          "caption": {
+            "flag": "{p}: Das Tool markiert den Artikel.",
+            "exception": "{p}: Das Wort steht auf der Ausnahmeliste, nichts wird markiert.",
+            "untested": "{p}: Diese Kombination prüft das Tool nicht, nichts wird markiert."
+          },
+          "handle": "Ziehen, um eine Wendung zu wählen",
+          "nodePhrase": "Wendung",
+          "nodeLetter": "1. Buchstabe: {l}",
+          "nodeException": "Ausnahme?",
+          "nodeVerdict": "Urteil",
+          "vowel": "Vokal",
+          "consonant": "Konsonant",
+          "yes": "ja",
+          "no": "nein",
+          "flag": "markiert → {s}",
+          "ok": "kein Problem",
+          "notTested": "nicht geprüft",
+          "rowPhrase": "Wendung",
+          "rowLetter": "Erster Buchstabe des Wortes",
+          "rowException": "Auf der Ausnahmeliste",
+          "rowVerdict": "Urteil des Tools"
+        },
+        "density": {
+          "title": "Probleme pro 100 Wörter",
+          "subtitle": "Fehler aus der Liste des Tools werden einzeln in einen fehlerfreien gespeicherten Absatz eingefügt. Der äußere Ring zählt die gefundenen Probleme (von 8); der innere Ring ist die Rate pro 100 Wörter (voller Ring = 25).",
+          "caption": "{n} Probleme in {w} Wörtern: {p} pro 100 Wörter.",
+          "handle": "Um den Ring ziehen, um Fehler hinzuzufügen",
+          "valueText": "{n} Probleme, {p} pro 100 Wörter",
+          "valueShort": "Fehler: {n}",
+          "outerUnit": "Probleme",
+          "innerUnit": "{p} / 100 Wörter",
+          "rowInjected": "Eingefügte Fehler",
+          "rowWords": "Wörter",
+          "rowIssues": "Gefundene Probleme",
+          "rowPer100": "Probleme pro 100 Wörter",
+          "rowClean": "Wörter ohne Problem"
+        },
+        "types": {
+          "title": "Probleme nach Art",
+          "subtitle": "Die vier Problemarten, die das Tool meldet, gezählt in den ersten Sätzen eines gespeicherten fehlerreichen Absatzes.",
+          "caption": "{n} Probleme; die größte Gruppe ist {top}.",
+          "handle": "Ziehen, um mehr Sätze zu prüfen",
+          "valueText": "{k} Sätze: {n} Probleme",
+          "valueShort": "Sätze: {k}",
+          "centre": "Probleme",
+          "rowSentences": "Geprüfte Sätze",
+          "rowTotal": "Alle Probleme"
+        },
+        "ribbon": {
+          "title": "Markierte Wörter in Lesereihenfolge",
+          "subtitle": "Die Wörter des gespeicherten Absatzes in Lesereihenfolge, elf pro Reihe. Ein markiertes Wort ragt in der Farbe seiner Art auf; ein korrektes bleibt niedrig. Ziehen Sie die Ansicht, um sie zu drehen.",
+          "caption": "{n} Wörter gelesen, davon {f} markiert.",
+          "handle": "Ziehen, um mehr Wörter zu lesen",
+          "valueText": "{n} Wörter: {f} markiert",
+          "valueShort": "Wörter: {n}",
+          "rowWords": "Gelesene Wörter",
+          "rowFlagged": "Markierte Wörter",
+          "rowClean": "Korrekte Wörter",
+          "rowShare": "Anteil markiert",
+          "rowLast": "Letztes Wort"
+        },
+        "rules": {
+          "title": "Treffer pro Prüfung",
+          "subtitle": "Das Tool führt acht getrennte Musterprüfungen aus. Jeder Lolli zählt die Treffer einer Prüfung in den ersten Sätzen eines zweiten gespeicherten Absatzes, in der Farbe der gemeldeten Problemart.",
+          "caption": "{k} Sätze: {f} Prüfungen schlagen an, {n} Probleme insgesamt.",
+          "handle": "Ziehen, um mehr Sätze zu prüfen",
+          "valueText": "{k} Sätze: {n} Probleme",
+          "valueShort": "Sätze: {k}",
+          "rule": {
+            "misspelling": "Tippfehler",
+            "pronounI": "Pronomen I",
+            "sentenceStart": "Satzanfang",
+            "spaces": "Doppeltes Leerzeichen",
+            "repeated": "Wiederholtes Wort",
+            "spaceAfter": "Abstand nach Zeichen",
+            "article": "a / an",
+            "youre": "your / you're"
+          },
+          "rowSentences": "Geprüfte Sätze",
+          "rowFired": "Prüfungen mit Treffer",
+          "rowBusiest": "Aktivste Prüfung",
+          "rowTotal": "Alle Probleme"
+        },
+        "scan": {
+          "title": "Gefundene Probleme beim Durchlaufen",
+          "subtitle": "Alle Prüfungen melden, wo jedes Problem im Text beginnt. Die Stufen zählen die Probleme, die vor der Leseposition in einem gespeicherten fehlerreichen Absatz beginnen; die Punkte zeigen jedes in der Farbe seiner Art.",
+          "caption": "Bis Zeichen {p} wurden {n} von {t} Problemen gefunden.",
+          "handle": "Leseposition ziehen",
+          "valueText": "Position {p}: {n} Probleme",
+          "valueShort": "Position {p}",
+          "rowPos": "Leseposition",
+          "rowShare": "Durchlaufener Text",
+          "rowFound": "Gefundene Probleme",
+          "rowLast": "Art des letzten",
+          "rowNext": "Nächstes beginnt bei"
+        }
       }
     },
     "roman-numeral-converter": {

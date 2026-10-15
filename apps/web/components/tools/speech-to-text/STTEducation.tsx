@@ -4,6 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import { STTCapitalsCard, STTCleanupCard, STTGaugeCard, STTInterimCard, STTJoinCard, STTLanguagesCard, STTWordLengthsCard } from "./STTCards";
+import { STTHelixCard } from "./STTCard3D";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -16,13 +18,23 @@ export default async function STTEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <STTGaugeCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
+        <STTInterimCard side="table-left" />
+        <STTJoinCard side="visual-left" />
+        <STTCapitalsCard side="table-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
+        <STTWordLengthsCard side="visual-left" />
         <div className="space-y-4">
           {useCaseItems.map((item) => (
             <div key={item.title}>
@@ -31,6 +43,7 @@ export default async function STTEducation() {
             </div>
           ))}
         </div>
+        <STTHelixCard side="table-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -39,11 +52,14 @@ export default async function STTEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <STTCleanupCard side="visual-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <STTLanguagesCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.privacy.title")}</h3>
           <p className="mt-2">{t("behindTheTool.privacy.paragraph")}</p>
@@ -69,6 +85,7 @@ export default async function STTEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

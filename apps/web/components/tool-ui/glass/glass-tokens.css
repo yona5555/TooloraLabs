@@ -327,3 +327,24 @@
   --cv-cool: var(--color-sky-300);
   --cv-metal: var(--color-zinc-500);
 }
+
+/*
+ * AI tools pages (§44). Data colours defined once (light + dark): --ai-a..--ai-e are the five
+ * series of the AI-tool visuals (chunks, words, issue types…), --ai-soft a translucent band.
+ */
+:root {
+  --ai-a: var(--color-blue-600);
+  --ai-b: var(--color-amber-600);
+  --ai-c: var(--color-emerald-600);
+  --ai-d: var(--color-rose-600);
+  --ai-e: var(--color-violet-600);
+  --ai-soft: color-mix(in oklab, var(--color-blue-500) 16%, transparent);
+}
+:root.dark {
+  --ai-a: var(--color-blue-400);
+  --ai-b: var(--color-amber-400);
+  --ai-c: var(--color-emerald-400);
+  --ai-d: var(--color-rose-400);
+  --ai-e: var(--color-violet-400);
+  --ai-soft: color-mix(in oklab, var(--color-blue-400) 20%, transparent);
+}

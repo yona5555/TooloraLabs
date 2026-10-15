@@ -1,12 +1,14 @@
 "use client";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { SpeechToTextCalculator as STTTool, type SpeechToTextOutput } from "@tooloralabs/tools";
+import { SpeechToTextCalculator as STTTool } from "@tooloralabs/tools";
 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { GlassPage } from "@/components/tool-ui/glass/GlassPrimitives";
+import { useNavBarVisible } from "@/components/tool-ui/useNavBarVisible";
 import STTControlPanel from "./STTControlPanel";
 import STTResult from "./STTResult";
 import STTQuickReference from "./STTQuickReference";
@@ -17,10 +19,9 @@ import {
   getServerSpeechRecognitionSupport,
 } from "./speechRecognitionSupport";
 import type { ListeningState } from "./types";
+import { EXAMPLE_SEGMENTS } from "./sttMath";
 
 const tool = new STTTool();
-
-const EMPTY_RESULT: SpeechToTextOutput = { transcript: "", wordCount: 0 };
 
 export default function SpeechToText({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.speech-to-text.nav");
@@ -37,11 +38,17 @@ export default function SpeechToText({ education }: { education: ReactNode }) {
   const [language, setLanguage] = useState("en-US");
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
+  // How many final segments the tool joins (the Transcript visual's handle); null = all of them.
+  const [included, setIncluded] = useState<number | null>(null);
+  // While nothing has been recognised yet, the card shows the labelled stored example.
+  const isExample = segments.length === 0;
+  const source = isExample ? EXAMPLE_SEGMENTS : segments;
+  const k = Math.min(included ?? source.length, source.length);
+
   const result = useMemo(() => {
-    if (segments.length === 0) return EMPTY_RESULT;
-    const output = tool.execute({ segments }, { locale: "en-US" });
+    const output = tool.execute({ segments: source.slice(0, k) }, { locale: "en-US" });
     return output.data;
-  }, [segments]);
+  }, [source, k]);
 
   useEffect(() => {
     return () => {
@@ -65,6 +72,7 @@ export default function SpeechToText({ education }: { education: ReactNode }) {
         const text = res[0]?.transcript ?? "";
         if (res.isFinal) {
           setSegments((prev) => [...prev, text]);
+          setIncluded(null);
         } else {
           interim += text;
         }
@@ -98,9 +106,11 @@ export default function SpeechToText({ education }: { education: ReactNode }) {
 
   function handleClear() {
     setSegments([]);
+    setIncluded(null);
     setInterimText("");
   }
 
+  const [navSentinelRef, navBarVisible] = useNavBarVisible();
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -108,10 +118,18 @@ export default function SpeechToText({ education }: { education: ReactNode }) {
   ];
 
   return (
-    <>
+    <GlassPage>
+      {/* Inter everywhere on this page; drag-handle rims use the shared line token so they keep ≥3:1 in light mode. */}
+      <div data-kit-page style={{ fontFamily: "var(--glass-font)", ["--glass-handle-border" as string]: "var(--ph-line)" } as CSSProperties}>
+      <div ref={navSentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          tight
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
+            <div className="flex flex-col gap-4 lg:h-full">
             <STTControlPanel
               listeningState={listeningState}
               onStart={handleStart}
@@ -120,21 +138,35 @@ export default function SpeechToText({ education }: { education: ReactNode }) {
               isSupported={isSupported}
               language={language}
               onLanguageChange={setLanguage}
+              segments={source}
+              isExample={isExample}
             />
+              {/* Desktop: under the input card (keeps the columns flush). Phone: after the Transcript card. */}
+              <div className="hidden lg:block">
+                <STTQuickReference />
+              </div>
+            </div>
           }
-          result={<STTResult result={result} interimText={interimText} listeningState={listeningState} />}
-          sidebar={<RelatedToolsSidebar currentSlug="speech-to-text" category="ai-tools" />}
+          result={
+            <div className="flex flex-col gap-4 lg:h-full">
+              <STTResult result={result} interimText={interimText} listeningState={listeningState} segments={source} k={k} onK={setIncluded} isExample={isExample} />
+              <div className="lg:hidden">
+                <STTQuickReference />
+              </div>
+            </div>
+          }
+          sidebar={<RelatedToolsSidebar fill currentSlug="speech-to-text" category="ai-tools" />}
           secondary={
-            <div className="flex flex-col gap-6">
-              <SectionNav items={navItems} />
+            <div className="flex flex-col gap-4">
               <ViewDocsLink slug="speech-to-text" />
-              <STTQuickReference />
+              <SectionNav items={navItems} visible={navBarVisible} />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+      </div>
+    </GlassPage>
   );
 }
