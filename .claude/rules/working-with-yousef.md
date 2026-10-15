@@ -25,7 +25,7 @@
 - إن لم تجد شيئاً طلبه (ملف، مكوّن) فاطلب اسمه.
 - مثال القاعدة العامة: في §32 بند 4 أُحيط قسمان بالبطاقة واستُثني الباقي فرُفض.
 
-- Before reporting any visual change: open and review every screenshot yourself (gaps, overlaps, header numbers, RTL, dark), not only capture it.
+- No screenshots: see the hard rule in `CLAUDE.md`. Finish every visual task with the list of page URLs for Yousef to review (light, dark, Arabic RTL).
 
 ## 4. اقتصاد الباقة (الأهم لإطالة الجلسة)
 حصته الأسبوعية شبه مستنفدة.
@@ -36,7 +36,7 @@
 5. **لا تُطلق وكلاء فرعيين (agents) ولا بحثاً واسعاً** لسؤال يُجاب بقراءة ملف واحد. Parallel work: at most 2 subagents at a time, each in its own git worktree.
 6. **اطلب الأعمال الثقيلة في جلسات سحابية** (لها رصيد منفصل) حين يكون ذلك ممكناً.
 7. **مهمة صغيرة محددة في كل طلب** (أداة واحدة، مكوّن واحد).
-8. **لا تكرّر ما لا أثر له:** لا تُعد فحصاً نجح للتو، ولا تُعد قراءة نتيجة معروفة، ولا تصوّر صفحة لم يتغير فيها شيء، ولا تضف تحققات «احتياطية» لا يطلبها.
+8. **لا تكرّر ما لا أثر له:** لا تُعد فحصاً نجح للتو، ولا تُعد قراءة نتيجة معروفة، ولا تضف تحققات «احتياطية» لا يطلبها.
 9. لا تسرد الخطوات في الردود الوسيطة؛ رد واحد نهائي بالنتيجة.
 
 ## 5. Git

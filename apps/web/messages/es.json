@@ -1998,6 +1998,152 @@
         "intro": "Elige un sexo para ver cómo aumenta la estimación promedio de peso ideal a lo largo de un rango de altura adulta típico.",
         "ariaLabel": "Gráfico de líneas del peso ideal promedio por altura",
         "verdict": "Para {example} ({height} cm), la estimación promedio es de unos {kg} kg — las estaturas más altas obtienen estimaciones más altas en todas las fórmulas que usa esta herramienta."
+      },
+      "visuals": {
+        "input": {
+          "currentWeight": "Peso actual (kg, opcional)",
+          "currentWeightPlaceholder": "p. ej. 80"
+        },
+        "result": {
+          "groupInputs": "Tus medidas",
+          "given": "dato",
+          "height": "Estatura",
+          "over60": "Pulgadas por encima de 5 pies",
+          "current": "Peso actual",
+          "groupFormulas": "Las cuatro fórmulas (kg = base + incremento × pulgadas sobre 60)",
+          "groupSummary": "Resumen",
+          "inPounds": "Promedio en libras",
+          "bmiAtAverage": "IMC en el promedio",
+          "groupWho": "Rango saludable de la OMS (IMC 18,5–24,9)",
+          "whoLow": "Límite inferior (IMC 18,5)",
+          "whoMid": "Punto medio (IMC 22)",
+          "whoHigh": "Límite superior (IMC 24,9)",
+          "whoWidth": "Amplitud del rango",
+          "groupCurrent": "Tu peso actual",
+          "currentBmi": "IMC actual",
+          "whoGroup": "Grupo de la OMS",
+          "whoBands": "Bandas de IMC de la OMS para adultos",
+          "vsAverage": "Diferencia con el promedio",
+          "vsRange": "Diferencia con el rango saludable",
+          "inside": "dentro del rango",
+          "vsFormula": "Diferencia con {name}",
+          "captionIdeal": "La figura se dibuja con tu estatura real y con la estimación promedio ({kg}, IMC {bmi}), en el color del rango saludable de la OMS.",
+          "captionAbove": "Cuerpo sólido: la estimación promedio ({ideal}). Capa translúcida: tu peso actual ({current}), {diff} por encima, en el color de su grupo de la OMS.",
+          "captionBelow": "Cuerpo sólido: tu peso actual ({current}), en el color de su grupo de la OMS. Capa translúcida: la estimación promedio ({ideal}), {diff} por encima.",
+          "colQuantity": "Magnitud",
+          "colFormula": "Fórmula",
+          "colValue": "Valor",
+          "hint": "Arrastra para girar la figura",
+          "invalid": "Introduce una estatura entre 120 y 230 cm y, si lo añades, un peso entre 20 y 300 kg. El último resultado válido sigue en pantalla."
+        },
+        "groups": {
+          "under": "Bajo peso",
+          "normal": "Peso normal",
+          "over": "Preobesidad",
+          "obese": "Obesidad"
+        },
+        "ladder": {
+          "title": "Peso ideal según la estatura",
+          "intro": "La estimación promedio y el rango saludable de la OMS para estaturas cercanas a la tuya. Toca una fila para usar esa estatura.",
+          "colHeight": "Estatura",
+          "colAverage": "Promedio (kg)",
+          "colWho": "Rango OMS (kg)",
+          "you": "Tú",
+          "note": "Cada centímetro adicional suma unos {kg} kg a la estimación promedio a esta estatura."
+        },
+        "common": {
+          "current": "Peso actual",
+          "assumed": "Peso actual (supuesto: IMC 25)",
+          "whoRange": "Rango saludable de la OMS",
+          "inside": "ya dentro",
+          "whoLow": "Límite inferior del rango saludable (IMC 18,5)",
+          "whoHigh": "Límite superior del rango saludable (IMC 24,9)",
+          "whoEdge": "Borde del rango saludable de la OMS",
+          "week": "semana",
+          "weeks": "semanas"
+        },
+        "sweep": {
+          "title": "Peso ideal a lo largo de las estaturas",
+          "subtitle": "Las cuatro fórmulas y la banda saludable de la OMS (IMC 18,5–24,9) en estaturas adultas. Arrastra el control por el promedio discontinuo: el campo de estatura, la tabla de resultados y la figura 3D lo siguen.",
+          "caption": "Con {h} las cuatro fórmulas promedian {kg}; cada centímetro adicional suma unos {slope}.",
+          "handle": "Arrastra la estatura a lo largo de las curvas",
+          "rowHeight": "Estatura",
+          "rowSlope": "Cambio por centímetro adicional",
+          "axisHeight": "Estatura (cm)"
+        },
+        "rank": {
+          "title": "Las cuatro fórmulas ordenadas",
+          "subtitle": "Las cuatro estimaciones para tu estatura, de la más pesada a la más ligera, sobre la banda saludable de la OMS (verde). Elige una fórmula en el riel junto a las barras para leer su ecuación; la línea continua es tu peso actual.",
+          "caption": "{name} da {kg}, {d} respecto al promedio de las cuatro.",
+          "handle": "Elige una fórmula en el riel",
+          "rowFormula": "Fórmula",
+          "rowRank": "Puesto (la más pesada primero)",
+          "rowVsAverage": "Diferencia con el promedio",
+          "rowVsCurrent": "Peso actual menos esta estimación"
+        },
+        "zone": {
+          "title": "Grupos de peso de la OMS para tu estatura",
+          "subtitle": "Los grupos de IMC de la OMS para adultos convertidos a kilogramos para tu estatura. Arrastra tu peso actual: el campo de peso, la tabla de resultados y la figura 3D lo siguen. Los triángulos marcan las cuatro fórmulas; la línea discontinua es su promedio.",
+          "caption": "Con {w} tu IMC es {bmi}: {group}.",
+          "handle": "Arrastra tu peso actual por los grupos de la OMS",
+          "rowGroup": "Grupo de la OMS",
+          "rowToRange": "Cambio para llegar al rango saludable",
+          "rowToAverage": "Cambio para llegar a la estimación promedio"
+        },
+        "formula": {
+          "title": "La fórmula de Devine paso a paso",
+          "subtitle": "La fórmula de Devine (1974), la más usada de las cuatro en la práctica clínica, construida a partir de tu estatura en cuatro pasos. Mueve el control para añadir un paso cada vez.",
+          "caption": "{stage}: la estimación de Devine es {kg}.",
+          "handle": "Recorre la fórmula paso a paso",
+          "stage1": "Paso 1: de centímetros a pulgadas",
+          "stage2": "Paso 2: pulgadas sobre 5 pies",
+          "stage3": "Paso 3: por el incremento",
+          "stage4": "Paso 4: más el peso base",
+          "rowInches": "Estatura en pulgadas (cm ÷ 2,54)",
+          "rowOver": "Pulgadas sobre 60",
+          "rowIncrement": "Incremento ({inc} kg por pulgada)",
+          "rowBaseMale": "Peso base para hombres",
+          "rowBaseFemale": "Peso base para mujeres"
+        },
+        "gauge": {
+          "title": "IMC tras un cambio de peso",
+          "subtitle": "Tu IMC tras un cambio hipotético de peso, sobre los grupos de la OMS. Empieza en el cambio que te llevaría a la estimación promedio; la marca oscura del arco es ese promedio.",
+          "caption": "Un cambio de {d} da {w}, IMC {bmi}: {group}.",
+          "handle": "Arrastra la aguja para cambiar el peso",
+          "rowBmiNow": "IMC actual",
+          "rowChange": "Cambio hipotético",
+          "rowNewWeight": "Nuevo peso",
+          "rowGroup": "Grupo de la OMS"
+        },
+        "timeline": {
+          "title": "Semanas hasta cada estimación",
+          "subtitle": "Semanas para alcanzar cada estimación con un cambio semanal constante. Las guías de salud pública sugieren unos 0,5–1 kg por semana para una pérdida gradual (NHS, CDC); es una ilustración, no un plan.",
+          "caption": "A {rate} alcanzas la estimación promedio ({kg}) en unas {weeks} semanas.",
+          "handle": "Arrastra el ritmo semanal",
+          "rowRate": "Cambio semanal (supuesto constante)",
+          "rowFirst": "Primera fórmula alcanzada",
+          "rowLast": "Última fórmula alcanzada",
+          "rowMonths": "Meses hasta el promedio",
+          "gain": "Sentido: ganando hacia las estimaciones",
+          "loss": "Sentido: perdiendo hacia las estimaciones"
+        },
+        "sensitivity": {
+          "title": "Error al medir la estatura",
+          "subtitle": "Cuánto se mueve la estimación promedio cuando tu estatura se mide un poco corta o un poco larga.",
+          "caption": "Un error de estatura de {e} mueve la estimación promedio a lo largo de {d}.",
+          "handle": "Arrastra el tamaño del error de estatura",
+          "rowError": "Error de estatura",
+          "rowAt": "Promedio con {h}",
+          "rowPerCm": "Cambio por centímetro"
+        },
+        "target": {
+          "title": "IMC que implica cada fórmula",
+          "subtitle": "El IMC que implica cada fórmula para tu estatura, frente a un IMC objetivo que eliges dentro de la banda saludable de la OMS (18,5–24,9). Arrastra el objetivo en el riel junto al gráfico para leer su peso.",
+          "caption": "Un IMC objetivo de {bmi} equivale a {kg} con tu estatura; {name} es la más cercana.",
+          "handle": "Arrastra el IMC objetivo",
+          "rowTarget": "IMC objetivo",
+          "rowNearest": "Fórmula más cercana"
+        }
       }
     },
     "mortgage-calculator": {
@@ -28294,6 +28440,127 @@
         "shareToSocial": "Compartir en redes sociales",
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avisos",
+          "assumptions": "Las cifras de proteína por kg usan un peso de referencia de 70 kg (supuesto, porque esta calculadora no pide el peso); cámbialo en el indicador de proteína. Los valores de proteína de los alimentos son cifras aproximadas de USDA FoodData Central para alimentos cocinados o listos para comer."
+        },
+        "goalSplits": {
+          "title": "Reparto por objetivo",
+          "intro": "Los cuatro repartos por objetivo con {kcal} al día. Elige uno para usarlo."
+        },
+        "result": {
+          "groupInputs": "Tus datos",
+          "groupGrams": "Gramos al día",
+          "groupCalories": "Calorías por macro",
+          "groupMeal": "Por comida ({n} comidas)",
+          "groupAmdr": "Frente al AMDR (IOM)",
+          "groupGoals": "Todos los objetivos con estas calorías (P / C / F)",
+          "given": "dato",
+          "split": "Reparto de calorías",
+          "totalGrams": "Gramos de macros en total",
+          "check": "Total (comprobación)",
+          "density": "Densidad energética media",
+          "amdrAll": "Los tres dentro del AMDR",
+          "yes": "Sí",
+          "no": "No",
+          "perKg": "Proteína por kg (referencia de 70 kg, supuesta)",
+          "colQuantity": "Magnitud",
+          "colFormula": "Fórmula",
+          "colValue": "Valor",
+          "hint": "Arrastra para girar el plato de macros",
+          "caption": "El plato de macros para {kcal}: el ángulo de cada porción es su parte de las calorías (proteína azul, carbohidratos verde, grasa ámbar) y su altura son los gramos. La grasa es una porción ancha pero baja porque aporta 9 kcal por gramo."
+        },
+        "common": {
+          "refWeight": "Peso corporal (referencia de 70 kg, supuesto)"
+        },
+        "mixer": {
+          "title": "Triángulo mezclador de macros",
+          "subtitle": "Cada punto del triángulo es un reparto de proteína, carbohidratos y grasa que suma 100%. La zona verde es el AMDR; los puntos de color son los cuatro objetivos. Arrastra el punto para probar tu propio reparto: los gramos siguen tus calorías en vivo.",
+          "caption": "Tu reparto hipotético {split} está {state}.",
+          "handle": "Arrastra para cambiar las partes de proteína y grasa",
+          "rowAmdr": "AMDR (IOM 2005)",
+          "rowNearest": "Reparto de objetivo más cercano",
+          "rowVsYours": "Proteína frente a tu resultado",
+          "inside": "dentro del AMDR",
+          "outside": "fuera del AMDR"
+        },
+        "stack": {
+          "title": "Tus calorías, repartidas",
+          "subtitle": "Una barra con tus calorías diarias dividida en proteína, carbohidratos y grasa. Arrastra por la pista: la calculadora, la tabla de resultados y el plato 3D pasan a ese total.",
+          "caption": "{kcal} al día dan {p} de proteína, {c} de carbohidratos y {f} de grasa.",
+          "handle": "Arrastra para cambiar las calorías diarias",
+          "rowPer100": "Gramos por 100 kcal (P / C / F)"
+        },
+        "amdr": {
+          "title": "Partes sobre las bandas AMDR",
+          "subtitle": "Cada franja muestra la parte de calorías de un macro frente a su rango aceptable de distribución de macronutrientes (verde). Arrastra entre los objetivos: la calculadora cambia a ese objetivo.",
+          "caption": "{goal}: proteína {p}, carbohidratos {c}, grasa {f} de las calorías.",
+          "handle": "Arrastra entre los objetivos",
+          "rowGoal": "Objetivo",
+          "rowRoom": "Margen de proteína hasta el tope del AMDR (35%)"
+        },
+        "protein": {
+          "title": "Proteína por kilogramo",
+          "subtitle": "Tus gramos de proteína divididos por el peso corporal, sobre las bandas de la nutrición deportiva: la RDA (0,8 g/kg), el rango de la ISSN para adultos que entrenan (1,4–2,0 g/kg) y consumos más altos. El peso parte de una referencia de 70 kg (supuesta); arrástralo al tuyo.",
+          "caption": "{g} con {w} son {gkg}: {zone}.",
+          "handle": "Arrastra para fijar tu peso corporal",
+          "rowWeight": "Peso corporal (el tuyo)",
+          "rowZone": "Banda",
+          "rowMeal": "Por comida (ISSN)",
+          "zones": {
+            "belowRda": "Por debajo de la RDA",
+            "general": "Salud general",
+            "active": "Rango de ejercicio (ISSN)",
+            "high": "Alto (atletas en definición)",
+            "veryHigh": "Muy alto"
+          }
+        },
+        "meals": {
+          "title": "Gramos por comida",
+          "subtitle": "Tus gramos diarios repartidos entre tus comidas. La banda verde de la barra de proteína son los 20–40 g por comida que la ISSN asocia con la síntesis de proteína muscular. Arrastra para cambiar el número de comidas.",
+          "caption": "En {n} comidas, cada una tiene {p} de proteína.",
+          "handle": "Arrastra para cambiar el número de comidas",
+          "axis": "gramos por comida",
+          "rowBand": "Proteína por comida frente a 20–40 g",
+          "below": "Por debajo",
+          "above": "Por encima",
+          "within": "Dentro"
+        },
+        "trio": {
+          "title": "Menos o más calorías",
+          "subtitle": "El mismo reparto con menos calorías, con las tuyas y con más. Cada columna apila los gramos de proteína, carbohidratos y grasa. Arrastra para ampliar o reducir la diferencia.",
+          "caption": "Un cambio del {pct} en las calorías mueve la proteína {dp}.",
+          "handle": "Arrastra para cambiar la diferencia de calorías",
+          "axis": "gramos al día (P / C / F)",
+          "rowNow": "Tus calorías",
+          "now": "Las tuyas",
+          "rowDeltaProtein": "Cambio de proteína",
+          "rowPer100": "Gramos por 100 kcal (P / C / F)"
+        },
+        "flow": {
+          "title": "De calorías a gramos",
+          "subtitle": "Cómo se obtiene cada objetivo en gramos: las calorías del día por la parte del macro dan sus calorías; divididas entre 4 (proteína, carbohidratos) o 9 (grasa) kcal por gramo dan sus gramos. Arrastra para probar otro total de calorías.",
+          "caption": "Con {kcal}, la proteína llega a {p}.",
+          "handle": "Arrastra para cambiar las calorías",
+          "rowFactors": "Factores de Atwater (P / C / F)",
+          "rowVsYours": "Diferencia con tus calorías"
+        },
+        "foods": {
+          "title": "Proteína de alimentos reales",
+          "subtitle": "Cuánto de cada alimento aporta una parte de tu proteína diaria, según valores aproximados de proteína por 100 g del USDA. Arrastra para cambiar la parte.",
+          "caption": "El {share} de tu proteína son {g}: las barras muestran cuánto hace falta de cada alimento por sí solo.",
+          "handle": "Arrastra para cambiar la parte de proteína",
+          "items": {
+            "chicken": "Pechuga de pollo",
+            "tuna": "Atún",
+            "tofu": "Tofu firme",
+            "eggs": "Huevos",
+            "yogurt": "Yogur griego",
+            "lentils": "Lentejas"
+          }
+        }
       }
     },
     "bmr-calculator": {

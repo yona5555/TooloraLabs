@@ -40,7 +40,7 @@ function pulse(phase: number): number {
 export default function HeartScene3D({ bpm, color, labels }: HeartScene3DProps) {
   const p = usePalette3D();
   const invalidate = useThree((s) => s.invalidate);
-  const geo = useMemo(heartGeometry, []);
+  const geo = useMemo(() => heartGeometry(), []);
   useEffect(() => () => geo.dispose(), [geo]);
   const heart = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Mesh>(null);

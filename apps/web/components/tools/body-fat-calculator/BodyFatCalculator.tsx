@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { BodyFatCalculator as BodyFatTool } from "@tooloralabs/tools";
 import { parseLocalizedNumber } from "@tooloralabs/core";
@@ -72,9 +72,8 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
     const m: Measures = { gender: DEFAULTS.gender, heightCm: 180, neckCm: 38, waistCm: 85, hipCm: 95 };
     return { m, data: run(m) };
   });
-  useEffect(() => {
-    if (valid) setGood({ m: measures, data: result });
-  }, [valid, result]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Adjust state while rendering (no effect): keep the latest valid measurements.
+  if (valid && good.data !== result) setGood({ m: measures, data: result });
   const shown = valid ? { m: measures, data: result } : good;
 
   // The Navy method needs no weight; the fat/lean split is read at an assumed weight, seeded at

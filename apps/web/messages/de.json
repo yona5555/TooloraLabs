@@ -1998,6 +1998,152 @@
         "intro": "Wählen Sie ein Geschlecht, um zu sehen, wie die durchschnittliche Idealgewicht-Schätzung über eine typische Körpergrößen-Spanne ansteigt.",
         "ariaLabel": "Liniendiagramm des durchschnittlichen Idealgewichts nach Körpergröße",
         "verdict": "Bei {example} ({height} cm) liegt die durchschnittliche Schätzung bei etwa {kg} kg — größere Personen erhalten in jeder von diesem Tool verwendeten Formel höhere Schätzungen."
+      },
+      "visuals": {
+        "input": {
+          "currentWeight": "Aktuelles Gewicht (kg, optional)",
+          "currentWeightPlaceholder": "z. B. 80"
+        },
+        "result": {
+          "groupInputs": "Ihre Maße",
+          "given": "gegeben",
+          "height": "Körpergröße",
+          "over60": "Zoll über 5 Fuß",
+          "current": "Aktuelles Gewicht",
+          "groupFormulas": "Die vier Formeln (kg = Basis + Zuwachs × Zoll über 60)",
+          "groupSummary": "Zusammenfassung",
+          "inPounds": "Durchschnitt in Pfund",
+          "bmiAtAverage": "BMI beim Durchschnitt",
+          "groupWho": "Gesunder WHO-Bereich (BMI 18,5–24,9)",
+          "whoLow": "Untergrenze (BMI 18,5)",
+          "whoMid": "Mitte (BMI 22)",
+          "whoHigh": "Obergrenze (BMI 24,9)",
+          "whoWidth": "Breite des Bereichs",
+          "groupCurrent": "Ihr aktuelles Gewicht",
+          "currentBmi": "Aktueller BMI",
+          "whoGroup": "WHO-Gruppe",
+          "whoBands": "WHO-BMI-Klassen für Erwachsene",
+          "vsAverage": "Abstand zum Durchschnitt",
+          "vsRange": "Abstand zum gesunden Bereich",
+          "inside": "im Bereich",
+          "vsFormula": "Abstand zu {name}",
+          "captionIdeal": "Die Figur ist in Ihrer echten Größe und beim durchschnittlichen Schätzwert ({kg}, BMI {bmi}) gezeichnet, in der Farbe des gesunden WHO-Bereichs.",
+          "captionAbove": "Fester Körper: der durchschnittliche Schätzwert ({ideal}). Durchscheinende Hülle: Ihr aktuelles Gewicht ({current}), {diff} darüber, in der Farbe seiner WHO-Gruppe.",
+          "captionBelow": "Fester Körper: Ihr aktuelles Gewicht ({current}), in der Farbe seiner WHO-Gruppe. Durchscheinende Hülle: der durchschnittliche Schätzwert ({ideal}), {diff} darüber.",
+          "colQuantity": "Größe",
+          "colFormula": "Formel",
+          "colValue": "Wert",
+          "hint": "Ziehen, um die Figur zu drehen",
+          "invalid": "Geben Sie eine Körpergröße zwischen 120 und 230 cm ein und, falls angegeben, ein Gewicht zwischen 20 und 300 kg. Das letzte gültige Ergebnis bleibt sichtbar."
+        },
+        "groups": {
+          "under": "Untergewicht",
+          "normal": "Normalgewicht",
+          "over": "Präadipositas",
+          "obese": "Adipositas"
+        },
+        "ladder": {
+          "title": "Idealgewicht nach Körpergröße",
+          "intro": "Der durchschnittliche Schätzwert und der gesunde WHO-Bereich für Größen nahe Ihrer eigenen. Tippen Sie auf eine Zeile, um diese Größe zu übernehmen.",
+          "colHeight": "Größe",
+          "colAverage": "Durchschnitt (kg)",
+          "colWho": "WHO-Bereich (kg)",
+          "you": "Sie",
+          "note": "Jeder zusätzliche Zentimeter erhöht den durchschnittlichen Schätzwert bei dieser Größe um etwa {kg} kg."
+        },
+        "common": {
+          "current": "Aktuelles Gewicht",
+          "assumed": "Aktuelles Gewicht (angenommen: BMI 25)",
+          "whoRange": "Gesunder WHO-Bereich",
+          "inside": "bereits darin",
+          "whoLow": "Untergrenze des gesunden Bereichs (BMI 18,5)",
+          "whoHigh": "Obergrenze des gesunden Bereichs (BMI 24,9)",
+          "whoEdge": "Rand des gesunden WHO-Bereichs",
+          "week": "Woche",
+          "weeks": "Wochen"
+        },
+        "sweep": {
+          "title": "Idealgewicht über alle Körpergrößen",
+          "subtitle": "Alle vier Formeln und das gesunde WHO-Band (BMI 18,5–24,9) über Erwachsenengrößen. Ziehen Sie den Griff entlang des gestrichelten Durchschnitts: Größenfeld, Ergebnistabelle und 3D-Figur folgen.",
+          "caption": "Bei {h} ergeben die vier Formeln im Schnitt {kg}; jeder zusätzliche Zentimeter bringt etwa {slope}.",
+          "handle": "Ziehen Sie die Größe entlang der Kurven",
+          "rowHeight": "Körpergröße",
+          "rowSlope": "Änderung pro zusätzlichem Zentimeter",
+          "axisHeight": "Größe (cm)"
+        },
+        "rank": {
+          "title": "Die vier Formeln im Vergleich",
+          "subtitle": "Die vier Schätzwerte für Ihre Größe, vom schwersten zum leichtesten, über dem gesunden WHO-Band (grün). Wählen Sie eine Formel auf der Schiene neben den Balken, um ihre Gleichung zu lesen; die durchgezogene Linie ist Ihr aktuelles Gewicht.",
+          "caption": "{name} ergibt {kg}, {d} gegenüber dem Durchschnitt aller vier.",
+          "handle": "Wählen Sie eine Formel auf der Schiene",
+          "rowFormula": "Formel",
+          "rowRank": "Rang (schwerste zuerst)",
+          "rowVsAverage": "Abstand zum Durchschnitt",
+          "rowVsCurrent": "Aktuelles Gewicht minus dieser Schätzwert"
+        },
+        "zone": {
+          "title": "WHO-Gewichtsgruppen für Ihre Größe",
+          "subtitle": "Die WHO-BMI-Gruppen für Erwachsene, für Ihre Größe in Kilogramm umgerechnet. Ziehen Sie Ihr aktuelles Gewicht: Gewichtsfeld, Ergebnistabelle und 3D-Figur folgen. Dreiecke markieren die vier Formeln; die gestrichelte Linie ist ihr Durchschnitt.",
+          "caption": "Bei {w} beträgt Ihr BMI {bmi}: {group}.",
+          "handle": "Ziehen Sie Ihr aktuelles Gewicht durch die WHO-Gruppen",
+          "rowGroup": "WHO-Gruppe",
+          "rowToRange": "Änderung bis zum gesunden Bereich",
+          "rowToAverage": "Änderung bis zum durchschnittlichen Schätzwert"
+        },
+        "formula": {
+          "title": "Die Devine-Formel Schritt für Schritt",
+          "subtitle": "Die Devine-Formel (1974), die in der klinischen Praxis meistgenutzte der vier, in vier Schritten aus Ihrer Größe aufgebaut. Bewegen Sie den Regler, um jeweils einen Schritt hinzuzufügen.",
+          "caption": "{stage}: Der Devine-Schätzwert beträgt {kg}.",
+          "handle": "Gehen Sie die Formel Schritt für Schritt durch",
+          "stage1": "Schritt 1: Zentimeter in Zoll",
+          "stage2": "Schritt 2: Zoll über 5 Fuß",
+          "stage3": "Schritt 3: mal Zuwachs",
+          "stage4": "Schritt 4: plus Basisgewicht",
+          "rowInches": "Größe in Zoll (cm ÷ 2,54)",
+          "rowOver": "Zoll über 60",
+          "rowIncrement": "Zuwachs ({inc} kg pro Zoll)",
+          "rowBaseMale": "Basisgewicht für Männer",
+          "rowBaseFemale": "Basisgewicht für Frauen"
+        },
+        "gauge": {
+          "title": "BMI nach einer Gewichtsänderung",
+          "subtitle": "Ihr BMI nach einer angenommenen Gewichtsänderung, auf den WHO-Gruppen. Er startet bei der Änderung, die Sie zum durchschnittlichen Schätzwert brächte; die dunkle Marke auf dem Bogen ist dieser Durchschnitt.",
+          "caption": "Eine Änderung um {d} ergibt {w}, BMI {bmi}: {group}.",
+          "handle": "Ziehen Sie die Nadel, um das Gewicht zu ändern",
+          "rowBmiNow": "BMI jetzt",
+          "rowChange": "Angenommene Änderung",
+          "rowNewWeight": "Neues Gewicht",
+          "rowGroup": "WHO-Gruppe"
+        },
+        "timeline": {
+          "title": "Wochen bis zu jedem Schätzwert",
+          "subtitle": "Wochen bis zu jedem Schätzwert bei gleichmäßiger wöchentlicher Änderung. Gesundheitsbehörden empfehlen für allmähliches Abnehmen etwa 0,5–1 kg pro Woche (NHS, CDC); dies ist eine Veranschaulichung, kein Plan.",
+          "caption": "Bei {rate} erreichen Sie den durchschnittlichen Schätzwert ({kg}) in etwa {weeks} Wochen.",
+          "handle": "Ziehen Sie das wöchentliche Tempo",
+          "rowRate": "Wöchentliche Änderung (als gleichmäßig angenommen)",
+          "rowFirst": "Erste erreichte Formel",
+          "rowLast": "Letzte erreichte Formel",
+          "rowMonths": "Monate bis zum Durchschnitt",
+          "gain": "Richtung: Zunehmen zu den Schätzwerten",
+          "loss": "Richtung: Abnehmen zu den Schätzwerten"
+        },
+        "sensitivity": {
+          "title": "Messfehler bei der Körpergröße",
+          "subtitle": "Wie stark sich der durchschnittliche Schätzwert verschiebt, wenn Ihre Größe etwas zu klein oder zu groß gemessen wird.",
+          "caption": "Ein Größenfehler von {e} verschiebt den durchschnittlichen Schätzwert über {d}.",
+          "handle": "Ziehen Sie die Größe des Messfehlers",
+          "rowError": "Größenfehler",
+          "rowAt": "Durchschnitt bei {h}",
+          "rowPerCm": "Änderung pro Zentimeter"
+        },
+        "target": {
+          "title": "BMI hinter jeder Formel",
+          "subtitle": "Der BMI, den jede Formel für Ihre Größe ergibt, gegenüber einem Ziel-BMI, den Sie im gesunden WHO-Band (18,5–24,9) wählen. Ziehen Sie das Ziel auf der Schiene neben dem Diagramm, um sein Gewicht zu lesen.",
+          "caption": "Ein Ziel-BMI von {bmi} entspricht bei Ihrer Größe {kg}; {name} liegt am nächsten.",
+          "handle": "Ziehen Sie den Ziel-BMI",
+          "rowTarget": "Ziel-BMI",
+          "rowNearest": "Nächstliegende Formel"
+        }
       }
     },
     "mortgage-calculator": {
@@ -28294,6 +28440,127 @@
         "shareToSocial": "In sozialen Medien teilen",
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Hinweise",
+          "assumptions": "Die Angaben zu Protein pro kg verwenden ein Referenzgewicht von 70 kg (angenommen, da dieser Rechner kein Gewicht abfragt); ändern Sie es an der Protein-Anzeige. Die Proteinwerte der Lebensmittel sind Näherungswerte aus USDA FoodData Central für gegarte oder verzehrfertige Lebensmittel."
+        },
+        "goalSplits": {
+          "title": "Aufteilung nach Ziel",
+          "intro": "Die vier Zielaufteilungen bei {kcal} pro Tag. Wählen Sie eine aus, um sie zu verwenden."
+        },
+        "result": {
+          "groupInputs": "Ihre Eingaben",
+          "groupGrams": "Gramm pro Tag",
+          "groupCalories": "Kalorien pro Makro",
+          "groupMeal": "Pro Mahlzeit ({n} Mahlzeiten)",
+          "groupAmdr": "Im Vergleich zur AMDR (IOM)",
+          "groupGoals": "Alle Ziele bei diesen Kalorien (P / C / F)",
+          "given": "Eingabe",
+          "split": "Kalorienaufteilung",
+          "totalGrams": "Makro-Gramm gesamt",
+          "check": "Summe (Kontrolle)",
+          "density": "Mittlere Energiedichte",
+          "amdrAll": "Alle drei innerhalb der AMDR",
+          "yes": "Ja",
+          "no": "Nein",
+          "perKg": "Protein pro kg (Referenz 70 kg, angenommen)",
+          "colQuantity": "Größe",
+          "colFormula": "Formel",
+          "colValue": "Wert",
+          "hint": "Ziehen, um den Makro-Teller zu drehen",
+          "caption": "Der Makro-Teller für {kcal}: Der Winkel jedes Stücks ist sein Anteil an den Kalorien (Protein blau, Kohlenhydrate grün, Fett bernsteinfarben), seine Höhe sind die Gramm. Fett ist ein breites, aber flaches Stück, weil es 9 kcal pro Gramm liefert."
+        },
+        "common": {
+          "refWeight": "Körpergewicht (Referenz 70 kg, angenommen)"
+        },
+        "mixer": {
+          "title": "Makro-Mischdreieck",
+          "subtitle": "Jeder Punkt im Dreieck ist eine Aufteilung aus Protein, Kohlenhydraten und Fett, die 100 % ergibt. Die grüne Fläche ist die AMDR; die farbigen Punkte sind die vier Ziele. Ziehen Sie den Punkt, um Ihre eigene Aufteilung zu testen: Die Gramm folgen Ihren Kalorien live.",
+          "caption": "Ihre Was-wäre-wenn-Aufteilung {split} liegt {state}.",
+          "handle": "Ziehen, um die Anteile von Protein und Fett zu ändern",
+          "rowAmdr": "AMDR (IOM 2005)",
+          "rowNearest": "Nächstgelegene Zielaufteilung",
+          "rowVsYours": "Protein im Vergleich zu Ihrem Ergebnis",
+          "inside": "innerhalb der AMDR",
+          "outside": "außerhalb der AMDR"
+        },
+        "stack": {
+          "title": "Ihre Kalorien, aufgeteilt",
+          "subtitle": "Ein Balken Ihrer Tageskalorien, aufgeteilt in Protein, Kohlenhydrate und Fett. Ziehen Sie entlang der Spur: Rechner, Ergebnistabelle und 3D-Teller wechseln zu dieser Summe.",
+          "caption": "{kcal} pro Tag ergeben {p} Protein, {c} Kohlenhydrate und {f} Fett.",
+          "handle": "Ziehen, um die Tageskalorien zu ändern",
+          "rowPer100": "Gramm pro 100 kcal (P / C / F)"
+        },
+        "amdr": {
+          "title": "Anteile auf den AMDR-Bändern",
+          "subtitle": "Jeder Streifen zeigt den Kalorienanteil eines Makros gegenüber seinem akzeptablen Verteilungsbereich für Makronährstoffe (grün). Ziehen Sie über die Ziele: Der Rechner wechselt zu diesem Ziel.",
+          "caption": "{goal}: Protein {p}, Kohlenhydrate {c}, Fett {f} der Kalorien.",
+          "handle": "Über die Ziele ziehen",
+          "rowGoal": "Ziel",
+          "rowRoom": "Protein-Spielraum bis zur AMDR-Obergrenze (35 %)"
+        },
+        "protein": {
+          "title": "Protein pro Kilogramm",
+          "subtitle": "Ihre Protein-Gramm geteilt durch das Körpergewicht, auf den Bändern der Sporternährung: die RDA (0,8 g/kg), der ISSN-Bereich für trainierende Erwachsene (1,4–2,0 g/kg) und höhere Zufuhren. Das Gewicht startet bei einer Referenz von 70 kg (angenommen); ziehen Sie es auf Ihres.",
+          "caption": "{g} bei {w} sind {gkg}: {zone}.",
+          "handle": "Ziehen, um Ihr Körpergewicht einzustellen",
+          "rowWeight": "Körpergewicht (Ihres)",
+          "rowZone": "Band",
+          "rowMeal": "Pro Mahlzeit (ISSN)",
+          "zones": {
+            "belowRda": "Unter der RDA",
+            "general": "Allgemeine Gesundheit",
+            "active": "Trainingsbereich (ISSN)",
+            "high": "Hoch (Athleten in der Diät)",
+            "veryHigh": "Sehr hoch"
+          }
+        },
+        "meals": {
+          "title": "Gramm pro Mahlzeit",
+          "subtitle": "Ihre Tagesgramm auf Ihre Mahlzeiten verteilt. Das grüne Band am Proteinbalken sind die 20–40 g pro Mahlzeit, die die ISSN mit der Muskelproteinsynthese verbindet. Ziehen Sie, um die Zahl der Mahlzeiten zu ändern.",
+          "caption": "Bei {n} Mahlzeiten enthält jede {p} Protein.",
+          "handle": "Ziehen, um die Zahl der Mahlzeiten zu ändern",
+          "axis": "Gramm pro Mahlzeit",
+          "rowBand": "Protein pro Mahlzeit vs. 20–40 g",
+          "below": "Darunter",
+          "above": "Darüber",
+          "within": "Im Band"
+        },
+        "trio": {
+          "title": "Weniger oder mehr Kalorien",
+          "subtitle": "Dieselbe Aufteilung bei weniger Kalorien, bei Ihren und bei mehr. Jede Säule stapelt die Gramm Protein, Kohlenhydrate und Fett. Ziehen Sie, um den Abstand zu vergrößern oder zu verkleinern.",
+          "caption": "Eine Kalorienänderung von {pct} verschiebt das Protein um {dp}.",
+          "handle": "Ziehen, um den Kalorienabstand zu ändern",
+          "axis": "Gramm pro Tag (P / C / F)",
+          "rowNow": "Ihre Kalorien",
+          "now": "Ihre",
+          "rowDeltaProtein": "Proteinänderung",
+          "rowPer100": "Gramm pro 100 kcal (P / C / F)"
+        },
+        "flow": {
+          "title": "Von Kalorien zu Gramm",
+          "subtitle": "So entsteht jedes Grammziel: Tageskalorien mal Anteil des Makros ergibt seine Kalorien; geteilt durch 4 (Protein, Kohlenhydrate) oder 9 (Fett) kcal pro Gramm ergibt seine Gramm. Ziehen Sie, um eine andere Kaloriensumme zu testen.",
+          "caption": "Bei {kcal} kommt Protein auf {p}.",
+          "handle": "Ziehen, um die Kalorien zu ändern",
+          "rowFactors": "Atwater-Faktoren (P / C / F)",
+          "rowVsYours": "Abweichung von Ihren Kalorien"
+        },
+        "foods": {
+          "title": "Protein aus echten Lebensmitteln",
+          "subtitle": "Wie viel von jedem Lebensmittel einen Anteil Ihres Tagesproteins liefert, nach ungefähren USDA-Proteinwerten pro 100 g. Ziehen Sie, um den Anteil zu ändern.",
+          "caption": "{share} Ihres Proteins sind {g}: Die Balken zeigen, wie viel von jedem Lebensmittel allein dafür nötig ist.",
+          "handle": "Ziehen, um den Proteinanteil zu ändern",
+          "items": {
+            "chicken": "Hähnchenbrust",
+            "tuna": "Thunfisch",
+            "tofu": "Fester Tofu",
+            "eggs": "Eier",
+            "yogurt": "Griech. Joghurt",
+            "lentils": "Linsen"
+          }
+        }
       }
     },
     "bmr-calculator": {

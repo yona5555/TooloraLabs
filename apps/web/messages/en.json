@@ -1998,6 +1998,152 @@
         "intro": "Pick a sex to see how the average ideal-weight estimate rises across a typical adult height range.",
         "ariaLabel": "Line chart of average ideal weight by height",
         "verdict": "For {example} ({height} cm), the average estimate is about {kg} kg — taller frames get higher estimates across every formula this tool uses."
+      },
+      "visuals": {
+        "input": {
+          "currentWeight": "Current weight (kg, optional)",
+          "currentWeightPlaceholder": "e.g. 80"
+        },
+        "result": {
+          "groupInputs": "Your measurements",
+          "given": "given",
+          "height": "Height",
+          "over60": "Inches over 5 feet",
+          "current": "Current weight",
+          "groupFormulas": "The four formulas (kg = base + increment × inches over 60)",
+          "groupSummary": "Summary",
+          "inPounds": "Average in pounds",
+          "bmiAtAverage": "BMI at the average",
+          "groupWho": "WHO healthy range (BMI 18.5–24.9)",
+          "whoLow": "Lower limit (BMI 18.5)",
+          "whoMid": "Midpoint (BMI 22)",
+          "whoHigh": "Upper limit (BMI 24.9)",
+          "whoWidth": "Width of the range",
+          "groupCurrent": "Your current weight",
+          "currentBmi": "Current BMI",
+          "whoGroup": "WHO group",
+          "whoBands": "WHO adult BMI bands",
+          "vsAverage": "Difference from the average",
+          "vsRange": "Difference from the healthy range",
+          "inside": "inside the range",
+          "vsFormula": "Difference from {name}",
+          "captionIdeal": "The figure is drawn at your real height and at the average estimate ({kg}, BMI {bmi}), in the colour of the WHO healthy range.",
+          "captionAbove": "Solid body: the average estimate ({ideal}). Translucent shell: your current weight ({current}), {diff} above it, in the colour of its WHO group.",
+          "captionBelow": "Solid body: your current weight ({current}), in the colour of its WHO group. Translucent shell: the average estimate ({ideal}), {diff} above it.",
+          "colQuantity": "Quantity",
+          "colFormula": "Formula",
+          "colValue": "Value",
+          "hint": "Drag to rotate the figure",
+          "invalid": "Enter a height between 120 and 230 cm and, if you add it, a weight between 20 and 300 kg. The last valid result stays on screen."
+        },
+        "groups": {
+          "under": "Underweight",
+          "normal": "Normal weight",
+          "over": "Pre-obesity",
+          "obese": "Obesity"
+        },
+        "ladder": {
+          "title": "Ideal Weight by Height",
+          "intro": "The average estimate and the WHO healthy range for heights around yours. Tap a row to use that height.",
+          "colHeight": "Height",
+          "colAverage": "Average (kg)",
+          "colWho": "WHO range (kg)",
+          "you": "You",
+          "note": "Each extra centimetre adds about {kg} kg to the average estimate at this height."
+        },
+        "common": {
+          "current": "Current weight",
+          "assumed": "Current weight (assumed: BMI 25)",
+          "whoRange": "WHO healthy range",
+          "inside": "already inside",
+          "whoLow": "Healthy range lower limit (BMI 18.5)",
+          "whoHigh": "Healthy range upper limit (BMI 24.9)",
+          "whoEdge": "Edge of the WHO healthy range",
+          "week": "week",
+          "weeks": "weeks"
+        },
+        "sweep": {
+          "title": "Ideal Weight Across Heights",
+          "subtitle": "All four formulas and the WHO healthy band (BMI 18.5–24.9) across adult heights. Drag the handle along the dashed average: the height field, the Result table and the 3D figure all follow.",
+          "caption": "At {h} the four formulas average {kg}; each extra centimetre adds about {slope}.",
+          "handle": "Drag the height along the curves",
+          "rowHeight": "Height",
+          "rowSlope": "Change per extra centimetre",
+          "axisHeight": "Height (cm)"
+        },
+        "rank": {
+          "title": "The Four Formulas Ranked",
+          "subtitle": "The four estimates for your height ranked from heaviest to lightest, over the WHO healthy band (green). Pick a formula on the rail beside the bars to read its equation; the solid line is your current weight.",
+          "caption": "{name} gives {kg}, {d} from the average of all four.",
+          "handle": "Pick a formula on the rail",
+          "rowFormula": "Formula",
+          "rowRank": "Rank (heaviest first)",
+          "rowVsAverage": "Difference from the average",
+          "rowVsCurrent": "Current weight minus this estimate"
+        },
+        "zone": {
+          "title": "WHO Weight Groups for Your Height",
+          "subtitle": "The WHO adult BMI groups converted to kilograms for your height. Drag your current weight: the weight field, the Result table and the 3D figure follow. Triangles mark the four formulas; the dashed line is their average.",
+          "caption": "At {w} your BMI is {bmi}: {group}.",
+          "handle": "Drag your current weight across the WHO groups",
+          "rowGroup": "WHO group",
+          "rowToRange": "Change to reach the healthy range",
+          "rowToAverage": "Change to reach the average estimate"
+        },
+        "formula": {
+          "title": "The Devine Formula Step by Step",
+          "subtitle": "The Devine formula (1974), the most widely used of the four in clinical practice, built from your height in four steps. Move the slider to add one step at a time.",
+          "caption": "{stage}: the Devine estimate is {kg}.",
+          "handle": "Step through the formula",
+          "stage1": "Step 1: centimetres to inches",
+          "stage2": "Step 2: inches over 5 feet",
+          "stage3": "Step 3: times the increment",
+          "stage4": "Step 4: plus the base weight",
+          "rowInches": "Height in inches (cm ÷ 2.54)",
+          "rowOver": "Inches over 60",
+          "rowIncrement": "Increment ({inc} kg per inch)",
+          "rowBaseMale": "Base weight for men",
+          "rowBaseFemale": "Base weight for women"
+        },
+        "gauge": {
+          "title": "BMI After a Weight Change",
+          "subtitle": "Your BMI after a what-if change in weight, on the WHO groups. It starts at the change that would bring you to the average estimate; the dark tick on the arc is that average.",
+          "caption": "A change of {d} gives {w}, BMI {bmi}: {group}.",
+          "handle": "Drag the needle to change the weight",
+          "rowBmiNow": "BMI now",
+          "rowChange": "What-if change",
+          "rowNewWeight": "New weight",
+          "rowGroup": "WHO group"
+        },
+        "timeline": {
+          "title": "Weeks to Each Estimate",
+          "subtitle": "Weeks to reach each estimate at a steady weekly change. Public-health guidance suggests about 0.5–1 kg a week for gradual weight loss (NHS, CDC); this is an illustration, not a plan.",
+          "caption": "At {rate} you reach the average estimate ({kg}) in about {weeks} weeks.",
+          "handle": "Drag the weekly rate",
+          "rowRate": "Weekly change (assumed steady)",
+          "rowFirst": "First formula reached",
+          "rowLast": "Last formula reached",
+          "rowMonths": "Months to the average",
+          "gain": "Direction: gaining toward the estimates",
+          "loss": "Direction: losing toward the estimates"
+        },
+        "sensitivity": {
+          "title": "Height Measuring Error",
+          "subtitle": "How far the average estimate moves when your height is measured a little short or a little tall.",
+          "caption": "A height error of {e} moves the average estimate across {d}.",
+          "handle": "Drag the size of the height error",
+          "rowError": "Height error",
+          "rowAt": "Average at {h}",
+          "rowPerCm": "Change per centimetre"
+        },
+        "target": {
+          "title": "BMI Each Formula Implies",
+          "subtitle": "The BMI each formula implies for your height, against a target BMI you choose inside the WHO healthy band (18.5–24.9). Drag the target on the rail beside the chart to read its weight.",
+          "caption": "A target BMI of {bmi} means {kg} at your height; {name} comes closest.",
+          "handle": "Drag the target BMI",
+          "rowTarget": "Target BMI",
+          "rowNearest": "Closest formula"
+        }
       }
     },
     "mortgage-calculator": {
@@ -28294,6 +28440,127 @@
         "shareToSocial": "Share to social media",
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Notices",
+          "assumptions": "Protein-per-kg figures use a 70 kg reference body weight (assumed, because this calculator has no weight input); change it on the protein gauge. Food protein values are approximate USDA FoodData Central figures for cooked or ready-to-eat foods."
+        },
+        "goalSplits": {
+          "title": "Split by Goal",
+          "intro": "The four goal splits at {kcal} a day. Choose one to use it."
+        },
+        "result": {
+          "groupInputs": "Your inputs",
+          "groupGrams": "Grams per day",
+          "groupCalories": "Calories per macro",
+          "groupMeal": "Per meal ({n} meals)",
+          "groupAmdr": "Against the AMDR (IOM)",
+          "groupGoals": "All goals at these calories (P / C / F)",
+          "given": "given",
+          "split": "Calorie split",
+          "totalGrams": "Total macro grams",
+          "check": "Total (check)",
+          "density": "Average energy density",
+          "amdrAll": "All three inside the AMDR",
+          "yes": "Yes",
+          "no": "No",
+          "perKg": "Protein per kg (70 kg reference, assumed)",
+          "colQuantity": "Quantity",
+          "colFormula": "Formula",
+          "colValue": "Value",
+          "hint": "Drag to rotate the macro plate",
+          "caption": "The macro plate for {kcal}: each slice angle is the share of calories (protein blue, carbohydrate green, fat amber) and its height is the grams. Fat is a wide but low slice because it holds 9 kcal per gram."
+        },
+        "common": {
+          "refWeight": "Body weight (70 kg reference, assumed)"
+        },
+        "mixer": {
+          "title": "Macro Mixer Triangle",
+          "subtitle": "Every point in the triangle is a protein / carbohydrate / fat split that adds up to 100%. The green area is the AMDR; the coloured dots are the four goals. Drag the point to try your own split: the grams follow your calories live.",
+          "caption": "Your what-if split {split} is {state}.",
+          "handle": "Drag to change the protein and fat shares",
+          "rowAmdr": "AMDR (IOM 2005)",
+          "rowNearest": "Closest goal split",
+          "rowVsYours": "Protein vs. your result",
+          "inside": "inside the AMDR",
+          "outside": "outside the AMDR"
+        },
+        "stack": {
+          "title": "Your Calories, Split",
+          "subtitle": "One bar of your daily calories cut into protein, carbohydrate and fat. Drag along the track: the calculator, the Result table and the 3D plate move to that total.",
+          "caption": "{kcal} a day gives {p} of protein, {c} of carbohydrate and {f} of fat.",
+          "handle": "Drag to change the daily calories",
+          "rowPer100": "Grams per 100 kcal (P / C / F)"
+        },
+        "amdr": {
+          "title": "Shares on the AMDR Bands",
+          "subtitle": "Each strip shows a macro's share of calories against its Acceptable Macronutrient Distribution Range (green). Drag across the goals: the calculator switches to that goal.",
+          "caption": "{goal}: protein {p}, carbohydrate {c}, fat {f} of calories.",
+          "handle": "Drag across the goals",
+          "rowGoal": "Goal",
+          "rowRoom": "Protein room to the AMDR top (35%)"
+        },
+        "protein": {
+          "title": "Protein per Kilogram",
+          "subtitle": "Your protein grams divided by body weight, on the bands used in sports nutrition: the RDA (0.8 g/kg), the ISSN range for exercising adults (1.4–2.0 g/kg) and higher intakes. The weight starts at a 70 kg reference (assumed); drag it to yours.",
+          "caption": "{g} at {w} is {gkg}: {zone}.",
+          "handle": "Drag to set your body weight",
+          "rowWeight": "Body weight (yours)",
+          "rowZone": "Band",
+          "rowMeal": "Per meal (ISSN)",
+          "zones": {
+            "belowRda": "Below the RDA",
+            "general": "General health",
+            "active": "Exercise range (ISSN)",
+            "high": "High (cutting athletes)",
+            "veryHigh": "Very high"
+          }
+        },
+        "meals": {
+          "title": "Grams per Meal",
+          "subtitle": "Your daily grams shared across your meals. The green band on the protein bar is the 20–40 g per meal that the ISSN links with muscle protein synthesis. Drag to change the number of meals.",
+          "caption": "Over {n} meals, each meal has {p} of protein.",
+          "handle": "Drag to change the number of meals",
+          "axis": "grams per meal",
+          "rowBand": "Protein per meal vs. 20–40 g",
+          "below": "Below",
+          "above": "Above",
+          "within": "Within"
+        },
+        "trio": {
+          "title": "Fewer or More Calories",
+          "subtitle": "The same split at fewer calories, at yours and at more. Each column stacks the grams of protein, carbohydrate and fat. Drag to widen or narrow the gap.",
+          "caption": "A {pct} change in calories moves protein by {dp}.",
+          "handle": "Drag to change the calorie difference",
+          "axis": "grams per day (P / C / F)",
+          "rowNow": "Your calories",
+          "now": "Yours",
+          "rowDeltaProtein": "Protein change",
+          "rowPer100": "Grams per 100 kcal (P / C / F)"
+        },
+        "flow": {
+          "title": "From Calories to Grams",
+          "subtitle": "How each gram target is made: the day's calories times the macro's share gives its calories, divided by 4 (protein, carbohydrate) or 9 (fat) kcal per gram gives its grams. Drag to try another calorie total.",
+          "caption": "At {kcal}, protein comes to {p}.",
+          "handle": "Drag to change the calories",
+          "rowFactors": "Atwater factors (P / C / F)",
+          "rowVsYours": "Difference from your calories"
+        },
+        "foods": {
+          "title": "Protein from Real Foods",
+          "subtitle": "How much of each food supplies a share of your daily protein, from approximate USDA protein values per 100 g. Drag to change the share.",
+          "caption": "{share} of your protein is {g}: the bars show how much of each food that takes on its own.",
+          "handle": "Drag to change the share of protein",
+          "items": {
+            "chicken": "Chicken breast",
+            "tuna": "Tuna",
+            "tofu": "Firm tofu",
+            "eggs": "Eggs",
+            "yogurt": "Greek yogurt",
+            "lentils": "Lentils"
+          }
+        }
       }
     },
     "bmr-calculator": {

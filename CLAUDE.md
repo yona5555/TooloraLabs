@@ -16,7 +16,7 @@ Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: g
 - Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
-- Never claim "done" for a visual change without real screenshots (light, dark, Arabic RTL). One final screenshot pass only.
+- Never take or review screenshots (no Playwright screenshots, no image review), to save quota. Yousef reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
 - If you cannot find what was asked for, say so plainly; never invent a fix. Apply a general rule to every element, no exceptions.
 - git pull before work; commit + push after each finished part; verify CI silently. No force push, no reset --hard.
 - Before each commit, once: lint, tsc, tests, build.

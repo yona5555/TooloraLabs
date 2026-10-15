@@ -7,6 +7,8 @@ paths:
 
 > يعتمد على §8–§9 و§13 و§17–§18 و§20 و§22–§43 من `TooloraLabs-Claude-Instructions.md`. لا تخترع نوعاً عشوائياً؛ اختر من القائمة بما يخدم طبيعة البيانات.
 
+- **No screenshots:** never take or review screenshots for visual work (hard rule in `CLAUDE.md`). Verify with lint/tsc/build and DOM values; end with the page URLs for Yousef to review.
+
 ## 1. هيكل صفحة الأداة (§8)
 - **General rule (every tool):** Top of every tool page = 3 columns: input (left), result with a live indicator (middle), RelatedToolsSidebar + 300×600 AdSpace (right). Below it, cards span the full width with leaderboard ads between sections only. Reference: `loan-calculator` via `ToolAboveFold`; the right column hides on mobile and the columns stack.
 - Above the Fold بلا تمرير: 3 أعمدة — إدخال (~320px) بقيم افتراضية تعطي نتيجة فوراً؛ نتيجة (~380–400px) مع مؤشر تفاعلي حقيقي (ممنوع رسم ثابت)؛ يمين (~300px) أدوات ذات صلة + AdSpace. على الموبايل تتكدس الأعمدة.

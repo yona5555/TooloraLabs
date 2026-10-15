@@ -1998,6 +1998,152 @@
         "intro": "Choisissez un sexe pour voir comment l'estimation moyenne du poids idéal augmente sur une plage de taille adulte typique.",
         "ariaLabel": "Graphique linéaire du poids idéal moyen selon la taille",
         "verdict": "Pour {example} ({height} cm), l'estimation moyenne est d'environ {kg} kg — les tailles plus grandes obtiennent des estimations plus élevées dans toutes les formules utilisées par cet outil."
+      },
+      "visuals": {
+        "input": {
+          "currentWeight": "Poids actuel (kg, facultatif)",
+          "currentWeightPlaceholder": "ex. 80"
+        },
+        "result": {
+          "groupInputs": "Vos mesures",
+          "given": "donné",
+          "height": "Taille",
+          "over60": "Pouces au-delà de 5 pieds",
+          "current": "Poids actuel",
+          "groupFormulas": "Les quatre formules (kg = base + incrément × pouces au-delà de 60)",
+          "groupSummary": "Synthèse",
+          "inPounds": "Moyenne en livres",
+          "bmiAtAverage": "IMC à la moyenne",
+          "groupWho": "Plage saine de l'OMS (IMC 18,5–24,9)",
+          "whoLow": "Limite basse (IMC 18,5)",
+          "whoMid": "Point médian (IMC 22)",
+          "whoHigh": "Limite haute (IMC 24,9)",
+          "whoWidth": "Largeur de la plage",
+          "groupCurrent": "Votre poids actuel",
+          "currentBmi": "IMC actuel",
+          "whoGroup": "Groupe de l'OMS",
+          "whoBands": "Classes d'IMC de l'OMS pour adultes",
+          "vsAverage": "Écart avec la moyenne",
+          "vsRange": "Écart avec la plage saine",
+          "inside": "dans la plage",
+          "vsFormula": "Écart avec {name}",
+          "captionIdeal": "La silhouette est dessinée à votre taille réelle et à l'estimation moyenne ({kg}, IMC {bmi}), dans la couleur de la plage saine de l'OMS.",
+          "captionAbove": "Corps plein : l'estimation moyenne ({ideal}). Enveloppe translucide : votre poids actuel ({current}), {diff} au-dessus, dans la couleur de son groupe OMS.",
+          "captionBelow": "Corps plein : votre poids actuel ({current}), dans la couleur de son groupe OMS. Enveloppe translucide : l'estimation moyenne ({ideal}), {diff} au-dessus.",
+          "colQuantity": "Grandeur",
+          "colFormula": "Formule",
+          "colValue": "Valeur",
+          "hint": "Faites glisser pour faire pivoter la silhouette",
+          "invalid": "Saisissez une taille entre 120 et 230 cm et, si vous l'ajoutez, un poids entre 20 et 300 kg. Le dernier résultat valide reste affiché."
+        },
+        "groups": {
+          "under": "Insuffisance pondérale",
+          "normal": "Poids normal",
+          "over": "Pré-obésité",
+          "obese": "Obésité"
+        },
+        "ladder": {
+          "title": "Poids idéal selon la taille",
+          "intro": "L'estimation moyenne et la plage saine de l'OMS pour des tailles proches de la vôtre. Touchez une ligne pour utiliser cette taille.",
+          "colHeight": "Taille",
+          "colAverage": "Moyenne (kg)",
+          "colWho": "Plage OMS (kg)",
+          "you": "Vous",
+          "note": "Chaque centimètre de plus ajoute environ {kg} kg à l'estimation moyenne à cette taille."
+        },
+        "common": {
+          "current": "Poids actuel",
+          "assumed": "Poids actuel (supposé : IMC 25)",
+          "whoRange": "Plage saine de l'OMS",
+          "inside": "déjà dedans",
+          "whoLow": "Limite basse de la plage saine (IMC 18,5)",
+          "whoHigh": "Limite haute de la plage saine (IMC 24,9)",
+          "whoEdge": "Bord de la plage saine de l'OMS",
+          "week": "semaine",
+          "weeks": "semaines"
+        },
+        "sweep": {
+          "title": "Poids idéal selon les tailles",
+          "subtitle": "Les quatre formules et la bande saine de l'OMS (IMC 18,5–24,9) sur les tailles adultes. Faites glisser la poignée le long de la moyenne en pointillé : le champ de taille, le tableau de résultats et la silhouette 3D suivent.",
+          "caption": "À {h}, les quatre formules donnent en moyenne {kg} ; chaque centimètre de plus ajoute environ {slope}.",
+          "handle": "Faites glisser la taille le long des courbes",
+          "rowHeight": "Taille",
+          "rowSlope": "Variation par centimètre de plus",
+          "axisHeight": "Taille (cm)"
+        },
+        "rank": {
+          "title": "Les quatre formules classées",
+          "subtitle": "Les quatre estimations pour votre taille, de la plus lourde à la plus légère, sur la bande saine de l'OMS (vert). Choisissez une formule sur le rail à côté des barres pour lire son équation ; la ligne pleine est votre poids actuel.",
+          "caption": "{name} donne {kg}, soit {d} par rapport à la moyenne des quatre.",
+          "handle": "Choisissez une formule sur le rail",
+          "rowFormula": "Formule",
+          "rowRank": "Rang (la plus lourde d'abord)",
+          "rowVsAverage": "Écart avec la moyenne",
+          "rowVsCurrent": "Poids actuel moins cette estimation"
+        },
+        "zone": {
+          "title": "Groupes de poids de l'OMS pour votre taille",
+          "subtitle": "Les groupes d'IMC de l'OMS pour adultes convertis en kilogrammes pour votre taille. Faites glisser votre poids actuel : le champ de poids, le tableau de résultats et la silhouette 3D suivent. Les triangles marquent les quatre formules ; la ligne en pointillé est leur moyenne.",
+          "caption": "À {w}, votre IMC est de {bmi} : {group}.",
+          "handle": "Faites glisser votre poids actuel à travers les groupes de l'OMS",
+          "rowGroup": "Groupe de l'OMS",
+          "rowToRange": "Variation pour atteindre la plage saine",
+          "rowToAverage": "Variation pour atteindre l'estimation moyenne"
+        },
+        "formula": {
+          "title": "La formule de Devine pas à pas",
+          "subtitle": "La formule de Devine (1974), la plus utilisée des quatre en pratique clinique, construite à partir de votre taille en quatre étapes. Déplacez le curseur pour ajouter une étape à la fois.",
+          "caption": "{stage} : l'estimation de Devine est de {kg}.",
+          "handle": "Parcourez la formule",
+          "stage1": "Étape 1 : des centimètres aux pouces",
+          "stage2": "Étape 2 : pouces au-delà de 5 pieds",
+          "stage3": "Étape 3 : fois l'incrément",
+          "stage4": "Étape 4 : plus le poids de base",
+          "rowInches": "Taille en pouces (cm ÷ 2,54)",
+          "rowOver": "Pouces au-delà de 60",
+          "rowIncrement": "Incrément ({inc} kg par pouce)",
+          "rowBaseMale": "Poids de base pour les hommes",
+          "rowBaseFemale": "Poids de base pour les femmes"
+        },
+        "gauge": {
+          "title": "IMC après un changement de poids",
+          "subtitle": "Votre IMC après un changement de poids hypothétique, sur les groupes de l'OMS. Il part du changement qui vous mènerait à l'estimation moyenne ; le trait sombre sur l'arc est cette moyenne.",
+          "caption": "Un changement de {d} donne {w}, IMC {bmi} : {group}.",
+          "handle": "Faites glisser l'aiguille pour changer le poids",
+          "rowBmiNow": "IMC actuel",
+          "rowChange": "Changement hypothétique",
+          "rowNewWeight": "Nouveau poids",
+          "rowGroup": "Groupe de l'OMS"
+        },
+        "timeline": {
+          "title": "Semaines jusqu'à chaque estimation",
+          "subtitle": "Semaines pour atteindre chaque estimation à un rythme hebdomadaire constant. Les recommandations de santé publique suggèrent environ 0,5–1 kg par semaine pour une perte progressive (NHS, CDC) ; c'est une illustration, pas un programme.",
+          "caption": "À {rate}, vous atteignez l'estimation moyenne ({kg}) en environ {weeks} semaines.",
+          "handle": "Faites glisser le rythme hebdomadaire",
+          "rowRate": "Variation hebdomadaire (supposée constante)",
+          "rowFirst": "Première formule atteinte",
+          "rowLast": "Dernière formule atteinte",
+          "rowMonths": "Mois jusqu'à la moyenne",
+          "gain": "Sens : prise de poids vers les estimations",
+          "loss": "Sens : perte de poids vers les estimations"
+        },
+        "sensitivity": {
+          "title": "Erreur de mesure de la taille",
+          "subtitle": "De combien l'estimation moyenne bouge quand votre taille est mesurée un peu trop courte ou un peu trop grande.",
+          "caption": "Une erreur de taille de {e} déplace l'estimation moyenne sur {d}.",
+          "handle": "Faites glisser l'ampleur de l'erreur de taille",
+          "rowError": "Erreur de taille",
+          "rowAt": "Moyenne à {h}",
+          "rowPerCm": "Variation par centimètre"
+        },
+        "target": {
+          "title": "IMC impliqué par chaque formule",
+          "subtitle": "L'IMC qu'implique chaque formule pour votre taille, face à un IMC cible que vous choisissez dans la bande saine de l'OMS (18,5–24,9). Faites glisser la cible sur le rail à côté du graphique pour lire son poids.",
+          "caption": "Un IMC cible de {bmi} correspond à {kg} pour votre taille ; {name} en est la plus proche.",
+          "handle": "Faites glisser l'IMC cible",
+          "rowTarget": "IMC cible",
+          "rowNearest": "Formule la plus proche"
+        }
       }
     },
     "mortgage-calculator": {
@@ -28294,6 +28440,127 @@
         "shareToSocial": "Partager sur les réseaux sociaux",
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avis",
+          "assumptions": "Les valeurs de protéines par kg utilisent un poids de référence de 70 kg (supposé, car ce calculateur ne demande pas le poids) ; modifiez-le sur la jauge des protéines. Les teneurs en protéines des aliments sont des valeurs approximatives de USDA FoodData Central pour des aliments cuits ou prêts à consommer."
+        },
+        "goalSplits": {
+          "title": "Répartition par objectif",
+          "intro": "Les quatre répartitions par objectif à {kcal} par jour. Choisissez-en une pour l’utiliser."
+        },
+        "result": {
+          "groupInputs": "Vos données",
+          "groupGrams": "Grammes par jour",
+          "groupCalories": "Calories par macro",
+          "groupMeal": "Par repas ({n} repas)",
+          "groupAmdr": "Par rapport à l’AMDR (IOM)",
+          "groupGoals": "Tous les objectifs à ces calories (P / C / F)",
+          "given": "donnée",
+          "split": "Répartition des calories",
+          "totalGrams": "Total des grammes de macros",
+          "check": "Total (vérification)",
+          "density": "Densité énergétique moyenne",
+          "amdrAll": "Les trois dans l’AMDR",
+          "yes": "Oui",
+          "no": "Non",
+          "perKg": "Protéines par kg (référence 70 kg, supposée)",
+          "colQuantity": "Grandeur",
+          "colFormula": "Formule",
+          "colValue": "Valeur",
+          "hint": "Faites glisser pour tourner l’assiette des macros",
+          "caption": "L’assiette des macros pour {kcal} : l’angle de chaque part est sa part des calories (protéines en bleu, glucides en vert, lipides en ambre) et sa hauteur correspond aux grammes. Les lipides forment une part large mais basse, car ils apportent 9 kcal par gramme."
+        },
+        "common": {
+          "refWeight": "Poids corporel (référence 70 kg, supposé)"
+        },
+        "mixer": {
+          "title": "Triangle de mélange des macros",
+          "subtitle": "Chaque point du triangle est une répartition protéines / glucides / lipides dont la somme fait 100 %. La zone verte est l’AMDR ; les points colorés sont les quatre objectifs. Faites glisser le point pour tester votre propre répartition : les grammes suivent vos calories en direct.",
+          "caption": "Votre répartition hypothétique {split} est {state}.",
+          "handle": "Faites glisser pour changer les parts de protéines et de lipides",
+          "rowAmdr": "AMDR (IOM 2005)",
+          "rowNearest": "Répartition d’objectif la plus proche",
+          "rowVsYours": "Protéines par rapport à votre résultat",
+          "inside": "dans l’AMDR",
+          "outside": "hors de l’AMDR"
+        },
+        "stack": {
+          "title": "Vos calories, réparties",
+          "subtitle": "Une barre de vos calories quotidiennes découpée en protéines, glucides et lipides. Faites glisser le long de la piste : le calculateur, le tableau de résultats et l’assiette 3D passent à ce total.",
+          "caption": "{kcal} par jour donnent {p} de protéines, {c} de glucides et {f} de lipides.",
+          "handle": "Faites glisser pour changer les calories quotidiennes",
+          "rowPer100": "Grammes pour 100 kcal (P / C / F)"
+        },
+        "amdr": {
+          "title": "Parts sur les bandes AMDR",
+          "subtitle": "Chaque bande montre la part des calories d’un macro face à son intervalle acceptable de répartition des macronutriments (vert). Faites glisser entre les objectifs : le calculateur passe à cet objectif.",
+          "caption": "{goal} : protéines {p}, glucides {c}, lipides {f} des calories.",
+          "handle": "Faites glisser entre les objectifs",
+          "rowGoal": "Objectif",
+          "rowRoom": "Marge de protéines jusqu’au haut de l’AMDR (35 %)"
+        },
+        "protein": {
+          "title": "Protéines par kilogramme",
+          "subtitle": "Vos grammes de protéines divisés par le poids corporel, sur les bandes de la nutrition sportive : l’ANR (0,8 g/kg), l’intervalle de l’ISSN pour les adultes sportifs (1,4–2,0 g/kg) et des apports plus élevés. Le poids part d’une référence de 70 kg (supposée) ; faites-le glisser vers le vôtre.",
+          "caption": "{g} pour {w} font {gkg} : {zone}.",
+          "handle": "Faites glisser pour régler votre poids",
+          "rowWeight": "Poids corporel (le vôtre)",
+          "rowZone": "Bande",
+          "rowMeal": "Par repas (ISSN)",
+          "zones": {
+            "belowRda": "Sous l’ANR",
+            "general": "Santé générale",
+            "active": "Zone d’exercice (ISSN)",
+            "high": "Élevé (athlètes en sèche)",
+            "veryHigh": "Très élevé"
+          }
+        },
+        "meals": {
+          "title": "Grammes par repas",
+          "subtitle": "Vos grammes quotidiens répartis entre vos repas. La bande verte sur la barre des protéines correspond aux 20–40 g par repas que l’ISSN associe à la synthèse des protéines musculaires. Faites glisser pour changer le nombre de repas.",
+          "caption": "Sur {n} repas, chaque repas contient {p} de protéines.",
+          "handle": "Faites glisser pour changer le nombre de repas",
+          "axis": "grammes par repas",
+          "rowBand": "Protéines par repas face à 20–40 g",
+          "below": "En dessous",
+          "above": "Au-dessus",
+          "within": "Dans la bande"
+        },
+        "trio": {
+          "title": "Moins ou plus de calories",
+          "subtitle": "La même répartition avec moins de calories, avec les vôtres et avec plus. Chaque colonne empile les grammes de protéines, glucides et lipides. Faites glisser pour élargir ou réduire l’écart.",
+          "caption": "Un écart de {pct} sur les calories déplace les protéines de {dp}.",
+          "handle": "Faites glisser pour changer l’écart de calories",
+          "axis": "grammes par jour (P / C / F)",
+          "rowNow": "Vos calories",
+          "now": "Les vôtres",
+          "rowDeltaProtein": "Variation des protéines",
+          "rowPer100": "Grammes pour 100 kcal (P / C / F)"
+        },
+        "flow": {
+          "title": "Des calories aux grammes",
+          "subtitle": "Comment chaque objectif en grammes est obtenu : les calories du jour multipliées par la part du macro donnent ses calories ; divisées par 4 (protéines, glucides) ou 9 (lipides) kcal par gramme, elles donnent ses grammes. Faites glisser pour tester un autre total.",
+          "caption": "À {kcal}, les protéines atteignent {p}.",
+          "handle": "Faites glisser pour changer les calories",
+          "rowFactors": "Coefficients d’Atwater (P / C / F)",
+          "rowVsYours": "Écart avec vos calories"
+        },
+        "foods": {
+          "title": "Protéines d’aliments réels",
+          "subtitle": "La quantité de chaque aliment qui fournit une part de vos protéines quotidiennes, d’après des teneurs approximatives de l’USDA pour 100 g. Faites glisser pour changer la part.",
+          "caption": "{share} de vos protéines font {g} : les barres montrent la quantité nécessaire de chaque aliment seul.",
+          "handle": "Faites glisser pour changer la part de protéines",
+          "items": {
+            "chicken": "Blanc de poulet",
+            "tuna": "Thon",
+            "tofu": "Tofu ferme",
+            "eggs": "Œufs",
+            "yogurt": "Yaourt grec",
+            "lentils": "Lentilles"
+          }
+        }
       }
     },
     "bmr-calculator": {

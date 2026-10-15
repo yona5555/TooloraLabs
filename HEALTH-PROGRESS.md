@@ -16,9 +16,10 @@
 - target-heart-rate-calculator (round 1)
 - bmr-calculator (round 2)
 - tdee-calculator (round 2)
+- macro-calculator (round 3)
+- ideal-weight-calculator (round 3)
 
 ## Remaining
-- macro-calculator, ideal-weight-calculator
 - sleep-calculator, pace-calculator
 - pregnancy-calculator, due-date-calculator
 - ovulation-calculator
@@ -32,4 +33,10 @@
 - Unused old keys left: bmr diagram.ariaLabel, quickReference.*, result.difference; tdee componentBreakdownDiagram.*, education.intro.diagram.*.
 - BMR has no body-fat input: the four-equations card seeds Katch-McArdle/Cunningham from the Deurenberg estimate (labelled). TDEE splits activity into NEAT (sedentary share) and exercise (the rest), a chosen convention, labelled in the table.
 - 3D figure captions (BMI, BMR) show only their last line under the canvas: existing LiveTable3DLayout behaviour, same as the approved BMI. Decide in the final round.
+- Round 3 (macro, ideal weight): no screenshots any more (new hard rule); subagents check layout by geometry/DOM values, Yousef reviews in the browser.
+- Ideal weight: NEW optional "Current weight" input (default 80 kg, keys visuals.input.*) added for the difference-from-current rows. Needs Yousef's OK; if refused, switch to an assumed weight (BMI 25, already the fallback when empty).
+- Ideal weight result table bottom snaps to the last whole row (IdealWeightResult only). BMI/BMR tables still slice a row at the bottom: decide in the final round whether to apply the same snap.
+- Macro has no weight input: protein-per-kg uses a 70 kg reference (labelled, adjustable on the gauge card). Food protein values are approximate USDA figures. Disclaimer moved to a new "notices" section (§24).
+- Unused old keys left: macro diagram.ariaLabel, quickReference.*, education.intro.carbGauge.*, education.goals.comparisonChart.*; ideal-weight formulaDiagram.*, heightCurve.*, education.intro.rangeGauge.*, aboveFold.placeholder, aboveFold.disclaimer.
+- Fixed two round-1 lint errors (BodyFatCalculator setState in effect; HeartScene3D useMemo arg).
 - Build note: next build is safe while the dev server runs on 3001 (Next 16 keeps dev output separate).
