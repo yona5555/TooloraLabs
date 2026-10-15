@@ -27842,7 +27842,7 @@
           "today": "Hoy",
           "done": "Pasado",
           "inDays": "en {n} d",
-          "note": "Las semanas se escriben como semanas+días: 13+0 significa 13 semanas y 0 días desde la última regla.",
+          "note": "Las semanas se escriben como semanas+días: 14+0 significa 14 semanas y 0 días desde la última regla.",
           "rows": {
             "lmp": "Última regla (semana 0)",
             "conception": "Concepción (aprox.)",
@@ -28445,15 +28445,15 @@
           "intro": "Cada trimestre abarca una fase distinta del desarrollo fetal.",
           "items": [
             {
-              "title": "Primer Trimestre (Semanas 1-12)",
+              "title": "Primer Trimestre (Semanas 1-13)",
               "description": "Todos los órganos principales y sistemas corporales comienzan a formarse durante este período, lo que lo convierte en la ventana de desarrollo más crítica de todo el embarazo. Muchos de los síntomas de embarazo temprano más conocidos (náuseas, fatiga, sensibilidad en los senos) son más pronunciados aquí, y el riesgo de aborto espontáneo, aunque presente durante todo el embarazo, es estadísticamente más alto en este trimestre."
             },
             {
-              "title": "Segundo Trimestre (Semanas 13-26)",
+              "title": "Segundo Trimestre (Semanas 14-27)",
               "description": "A menudo llamado el trimestre más cómodo para muchas personas, ya que los síntomas tempranos típicamente disminuyen mientras el tamaño físico y la incomodidad del embarazo tardío aún no se han instalado. El movimiento fetal generalmente se vuelve perceptible durante este período, y una ecografía anatómica detallada se realiza típicamente alrededor del punto medio para verificar el desarrollo de los órganos."
             },
             {
-              "title": "Tercer Trimestre (Semanas 27-40)",
+              "title": "Tercer Trimestre (Semanas 28-40)",
               "description": "El feto gana la mayor parte de su peso al nacer durante este tramo final, mientras que la incomodidad física para la persona embarazada (dolor de espalda, movilidad reducida, micción frecuente) tiende a aumentar. Las visitas prenatales típicamente se vuelven más frecuentes, y este es el momento en que el estado a término y la preparación para el parto se convierten en el enfoque clínico principal."
             }
           ]
@@ -28591,7 +28591,7 @@
         "notices": {
           "title": "Avisos",
           "disclaimer": "Esta herramienta ofrece información general a partir de la fecha de tu última regla y no es consejo médico. La datación por ecografía temprana es más precisa; sigue las fechas de tu médico o matrona y consúltales ante cualquier duda.",
-          "conventions": "Convenciones usadas: la edad gestacional se cuenta desde el primer día de la última menstruación y la fecha probable de parto es ese día + 280 días (regla de Naegele, que supone un ciclo de 28 días con ovulación el día 14). Los gráficos usan los trimestres del ACOG (1.º: 0s 0d–13s 6d, 2.º: 14s 0d–27s 6d, 3.º: desde 28s 0d) y sus definiciones de término (2013); la etiqueta de trimestre de la propia calculadora cambia una semana antes, en las semanas 13 y 27, y ambas aparecen en la tabla de resultados.",
+          "conventions": "Convenciones usadas: la edad gestacional se cuenta desde el primer día de la última menstruación y la fecha de parto es ese día + 280 días (regla de Naegele, que supone un ciclo de 28 días con ovulación el día 14). La calculadora y los gráficos usan los trimestres de la ACOG (1.º: 0s 0d–13s 6d, 2.º: 14s 0d–27s 6d, 3.º: desde 28s 0d) y las definiciones de término de la ACOG (2013).",
           "assumptions": "Supuestos de los gráficos (indicados donde aparecen): el tamaño del útero sigue el crecimiento típico por semana (unos 7,5 cm antes del embarazo, altura uterina ≈ semanas entre las semanas 20 y 36); la longitud y el peso del bebé proceden de la tabla semanal de la calculadora (longitud cráneo-rabadilla hasta la semana 19, cráneo-talón desde la 20, promedios aproximados); la curva de momento del parto es una curva normal ilustrativa con desviación estándar de 10 días alrededor de la fecha probable (alrededor del 4 % de los partos ocurren ese mismo día); los rangos de aumento de peso son las guías del IOM (2009) con un IMC previo al embarazo de 22 supuesto hasta que lo cambies; el calendario de visitas es el rutinario de bajo riesgo (cada 4 semanas hasta la 28, cada 2 hasta la 36 y luego semanal)."
         },
         "ladder": {
@@ -28660,8 +28660,6 @@
           "naegeleMinus280": "Naegele − fecha de 280 días",
           "weeksLeft": "Tiempo restante",
           "groupTrimester": "Trimestre",
-          "trimesterCalc": "Etiqueta de la calculadora",
-          "calcRule": "esta calculadora: < 13 s, < 27 s",
           "trimesterAcog": "Trimestre ACOG",
           "acogRule": "ACOG: 0–13s 6d, 14–27s 6d, 28s+",
           "trimesterLeft": "Días que quedan en este trimestre",
@@ -38547,7 +38545,7 @@
           "readTimeValue": "4 min"
         },
         "formula": {
-          "expression": "Fecha de parto = fecha de última menstruación + 280 días  |  Edad gestacional (días) = hoy − fecha de última menstruación  |  Trimestre: semanas < 13 → 1.º, semanas < 27 → 2.º, si no 3.º",
+          "expression": "Fecha de parto = fecha de la última regla + 280 días  |  Edad gestacional (días) = hoy − fecha de la última regla  |  Trimestre (ACOG): semanas < 14 → 1.º, semanas < 28 → 2.º, si no 3.º",
           "note": "Cada cifra que reporta esta herramienta (edad gestacional, trimestre, fecha de parto y porcentaje de progreso) se deriva de un único conteo de días transcurridos desde la última menstruación, usando el supuesto estándar de la regla de Naegele de un embarazo de 280 días (40 semanas)."
         },
         "flowchart": {
@@ -38555,7 +38553,7 @@
           "steps": [
             "Calcular el número de días transcurridos entre la última menstruación y hoy (o una fecha de referencia especificada)",
             "Convertir ese conteo de días en semanas completadas y días restantes para la cifra de edad gestacional",
-            "Asignar el trimestre según las semanas completadas: menos de 13 semanas es el 1.º trimestre, de 13 a 26 es el 2.º, 27 y más es el 3.º",
+            "Asignar el trimestre según las semanas completas (ACOG): de 0 a 13 semanas y 6 días es el 1.er trimestre, de 14 semanas y 0 días a 27 semanas y 6 días es el 2.º, y desde 28 semanas y 0 días es el 3.º",
             "Sumar 280 días a la fecha de última menstruación para obtener la fecha de parto, luego calcular cuántos días faltan para ella",
             "Calcular el porcentaje completado como los días transcurridos divididos entre 280, limitado al 100%, y buscar el hito de comparación de tamaño de esta semana en una tabla semanal fija"
           ],
@@ -38567,7 +38565,7 @@
           "labelTrimester2": "2.º Trimestre",
           "labelTrimester3": "3.º Trimestre",
           "totalLabel": "40 Semanas en Total",
-          "caption": "Los tres trimestres abarcan las semanas 0-13, 13-27 y 27-40; no tercios perfectamente iguales, pero cercanos, con el 2.º trimestre durando una semana más que los otros dos."
+          "caption": "Los tres trimestres (ACOG) abarcan las semanas 0-13, 14-27 y 28-40 — no son tercios exactamente iguales: el 1.º y el 2.º duran 14 semanas cada uno y el 3.º unas 12 semanas hasta la fecha de parto."
         },
         "variablesColumns": {
           "symbol": "Símbolo",
@@ -38615,7 +38613,7 @@
           },
           {
             "question": "¿Por qué los tres trimestres no son exactamente iguales en duración?",
-            "answer": "Los límites de trimestre (13 semanas y 27 semanas) son una convención clínica estándar basada en etapas de desarrollo, no una división matemática de 40 semanas en tercios; esto hace que el 2.º trimestre (semanas 13 a 27) abarque 14 semanas, una semana más que el 1.º y 3.º trimestres, que abarcan cada uno 13 semanas."
+            "answer": "Los límites de la ACOG (14 semanas y 0 días, y 28 semanas y 0 días) son una convención clínica basada en etapas del desarrollo, no una división matemática de 40 semanas en tercios — el 1.er trimestre (semanas 0 a 13 6/7) y el 2.º (semanas 14 a 27 6/7) abarcan 14 semanas cada uno, mientras que el 3.º (desde la semana 28) abarca unas 12 semanas hasta la fecha de parto en la semana 40."
           },
           {
             "question": "¿Qué ocurre si ingreso una fecha de última menstruación de hace más de 10 meses?",

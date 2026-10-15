@@ -78,13 +78,13 @@ export function snapOf(method: DueDateMethod, anchorISO: string, cycle: number, 
 }
 
 // ── Conventions ─────────────────────────────────────────────────────────────────────────
-/** Trimesters as the calculator counts them: weeks 0–12, 13–26, 27 onwards (days from the LMP). */
+/** ACOG trimesters (days from the LMP): 0w0d–13w6d, 14w0d–27w6d, 28w0d onwards. */
 export const TRIMESTERS = [
-  { n: 1 as const, from: 0, to: 91, color: "#0ea5e9" },
-  { n: 2 as const, from: 91, to: 189, color: "#8b5cf6" },
-  { n: 3 as const, from: 189, to: TERM_DAYS, color: "#f59e0b" },
+  { n: 1 as const, from: 0, to: 98, color: "#0ea5e9" },
+  { n: 2 as const, from: 98, to: 196, color: "#8b5cf6" },
+  { n: 3 as const, from: 196, to: TERM_DAYS, color: "#f59e0b" },
 ];
-export const trimesterOf = (ga: number) => (ga < 91 ? 1 : ga < 189 ? 2 : 3);
+export const trimesterOf = (ga: number) => (ga < 98 ? 1 : ga < 196 ? 2 : 3);
 
 /** ACOG Committee Opinion 579 (2013) term definitions, in days from the LMP. */
 export type ZoneKey = "preterm" | "early" | "full" | "late" | "post";

@@ -27842,7 +27842,7 @@
           "today": "Aujourd'hui",
           "done": "Passé",
           "inDays": "dans {n} j",
-          "note": "Les semaines s'écrivent semaines+jours : 13+0 signifie 13 semaines et 0 jour depuis les dernières règles.",
+          "note": "Les semaines s'écrivent semaines+jours : 14+0 signifie 14 semaines et 0 jour depuis les dernières règles.",
           "rows": {
             "lmp": "Dernières règles (semaine 0)",
             "conception": "Conception (environ)",
@@ -28445,15 +28445,15 @@
           "intro": "Chaque trimestre couvre une phase distincte du développement fœtal.",
           "items": [
             {
-              "title": "Premier Trimestre (Semaines 1-12)",
+              "title": "Premier Trimestre (Semaines 1-13)",
               "description": "Tous les organes et systèmes corporels majeurs commencent à se former durant cette période, en faisant la fenêtre la plus critique sur le plan développemental de toute la grossesse. Beaucoup des symptômes de grossesse précoce les plus connus (nausées, fatigue, sensibilité mammaire) sont les plus prononcés ici, et le risque de fausse couche, bien que présent tout au long de la grossesse, est statistiquement le plus élevé dans ce trimestre."
             },
             {
-              "title": "Deuxième Trimestre (Semaines 13-26)",
+              "title": "Deuxième Trimestre (Semaines 14-27)",
               "description": "Souvent considéré comme le trimestre le plus confortable pour beaucoup, car les symptômes précoces s'atténuent généralement tandis que la taille physique et l'inconfort de la fin de grossesse ne se sont pas encore installés. Les mouvements fœtaux deviennent généralement perceptibles durant cette période, et une échographie morphologique détaillée est généralement réalisée vers le milieu pour vérifier le développement des organes."
             },
             {
-              "title": "Troisième Trimestre (Semaines 27-40)",
+              "title": "Troisième Trimestre (Semaines 28-40)",
               "description": "Le fœtus prend la majorité de son poids de naissance durant cette dernière ligne droite, tandis que l'inconfort physique pour la personne enceinte (douleurs dorsales, mobilité réduite, mictions fréquentes) tend à augmenter. Les visites prénatales deviennent généralement plus fréquentes, et c'est à ce moment que le statut de terme et la préparation à l'accouchement deviennent le principal focus clinique."
             }
           ]
@@ -28591,7 +28591,7 @@
         "notices": {
           "title": "Avis",
           "disclaimer": "Cet outil donne des informations générales à partir de la date de vos dernières règles et ne constitue pas un avis médical. La datation par échographie précoce est plus précise ; suivez les dates de votre médecin ou de votre sage-femme et consultez-les en cas de doute.",
-          "conventions": "Conventions utilisées : l'âge gestationnel est compté à partir du premier jour des dernières règles et la date prévue d'accouchement est ce jour + 280 jours (règle de Naegele, qui suppose un cycle de 28 jours avec ovulation au jour 14). Les visuels utilisent les trimestres de l'ACOG (1er : 0 s 0 j–13 s 6 j, 2e : 14 s 0 j–27 s 6 j, 3e : à partir de 28 s 0 j) et ses définitions du terme (2013) ; l'étiquette de trimestre de la calculatrice elle-même change une semaine plus tôt, aux semaines 13 et 27, et les deux figurent dans le tableau de résultats.",
+          "conventions": "Conventions utilisées : l'âge gestationnel est compté à partir du premier jour des dernières règles et la date d'accouchement correspond à ce jour + 280 jours (règle de Naegele, qui suppose un cycle de 28 jours avec ovulation au 14e jour). La calculatrice et les visuels utilisent les trimestres de l'ACOG (1er : 0s 0j–13s 6j, 2e : 14s 0j–27s 6j, 3e : à partir de 28s 0j) et les définitions du terme de l'ACOG (2013).",
           "assumptions": "Hypothèses des visuels (signalées là où elles apparaissent) : la taille de l'utérus suit la croissance typique par semaine (environ 7,5 cm avant la grossesse, hauteur utérine ≈ semaines entre les semaines 20 et 36) ; la longueur et le poids du bébé viennent du tableau hebdomadaire de la calculatrice (longueur cranio-caudale jusqu'à la semaine 19, vertex-talon à partir de la semaine 20, moyennes approximatives) ; la courbe du moment de la naissance est une courbe normale illustrative avec un écart-type de 10 jours autour de la date prévue (environ 4 % des naissances ont lieu ce jour-là) ; les fourchettes de prise de poids sont les recommandations de l'IOM (2009) avec un IMC avant grossesse de 22 supposé tant que vous ne le modifiez pas ; le calendrier des consultations est le calendrier courant à faible risque (toutes les 4 semaines jusqu'à 28, toutes les 2 semaines jusqu'à 36, puis chaque semaine)."
         },
         "ladder": {
@@ -28660,8 +28660,6 @@
           "naegeleMinus280": "Naegele − date à 280 jours",
           "weeksLeft": "Temps restant",
           "groupTrimester": "Trimestre",
-          "trimesterCalc": "Étiquette de la calculatrice",
-          "calcRule": "cette calculatrice : < 13 s, < 27 s",
           "trimesterAcog": "Trimestre ACOG",
           "acogRule": "ACOG : 0–13s 6j, 14–27s 6j, 28s+",
           "trimesterLeft": "Jours restants dans ce trimestre",
@@ -38547,7 +38545,7 @@
           "readTimeValue": "4 min"
         },
         "formula": {
-          "expression": "Date d'accouchement = date des dernières règles + 280 jours  |  Âge gestationnel (jours) = aujourd'hui − date des dernières règles  |  Trimestre : semaines < 13 → 1er, semaines < 27 → 2e, sinon 3e",
+          "expression": "Date d'accouchement = date des dernières règles + 280 jours  |  Âge gestationnel (jours) = aujourd'hui − date des dernières règles  |  Trimestre (ACOG) : semaines < 14 → 1er, semaines < 28 → 2e, sinon 3e",
           "note": "Chaque chiffre que cet outil rapporte — âge gestationnel, trimestre, date d'accouchement et pourcentage d'avancement — est dérivé d'un seul comptage de jours écoulés depuis les dernières règles, en utilisant l'hypothèse standard de la règle de Naegele d'une grossesse de 280 jours (40 semaines)."
         },
         "flowchart": {
@@ -38555,7 +38553,7 @@
           "steps": [
             "Calculer le nombre de jours écoulés entre les dernières règles et aujourd'hui (ou une date de référence spécifiée)",
             "Convertir ce nombre de jours en semaines complètes et jours restants pour le chiffre d'âge gestationnel",
-            "Attribuer le trimestre selon les semaines complètes : moins de 13 semaines est le 1er trimestre, 13 à 26 est le 2e, 27 et plus est le 3e",
+            "Attribuer le trimestre selon les semaines révolues (ACOG) : de 0 à 13 semaines et 6 jours c'est le 1er trimestre, de 14 semaines et 0 jour à 27 semaines et 6 jours le 2e, et à partir de 28 semaines et 0 jour le 3e",
             "Ajouter 280 jours à la date des dernières règles pour obtenir la date d'accouchement, puis calculer combien de jours restent jusque-là",
             "Calculer le pourcentage d'avancement comme les jours écoulés divisés par 280, plafonné à 100 %, et rechercher le jalon de comparaison de taille de cette semaine dans un tableau semaine par semaine fixe"
           ],
@@ -38567,7 +38565,7 @@
           "labelTrimester2": "2e trimestre",
           "labelTrimester3": "3e trimestre",
           "totalLabel": "40 semaines au total",
-          "caption": "Les trois trimestres couvrent les semaines 0-13, 13-27 et 27-40 — pas des tiers parfaitement égaux, mais proches, le 2e trimestre durant une semaine de plus que les deux autres."
+          "caption": "Les trois trimestres (ACOG) couvrent les semaines 0-13, 14-27 et 28-40 — pas des tiers parfaitement égaux : le 1er et le 2e durent 14 semaines chacun, le 3e environ 12 semaines jusqu'au terme."
         },
         "variablesColumns": {
           "symbol": "Symbole",
@@ -38615,7 +38613,7 @@
           },
           {
             "question": "Pourquoi les trois trimestres ne sont-ils pas exactement égaux en longueur ?",
-            "answer": "Les limites des trimestres (13 semaines et 27 semaines) sont une convention clinique standard basée sur les étapes de développement, pas une division mathématique de 40 semaines en tiers — cela fait que le 2e trimestre (semaines 13 à 27) dure 14 semaines, une semaine de plus que les 1er et 3e trimestres, qui durent chacun 13 semaines."
+            "answer": "Les limites de l'ACOG (14 semaines et 0 jour, puis 28 semaines et 0 jour) sont une convention clinique fondée sur les stades du développement, et non une division mathématique de 40 semaines en tiers — le 1er trimestre (semaines 0 à 13 6/7) et le 2e (semaines 14 à 27 6/7) durent chacun 14 semaines, tandis que le 3e (dès la semaine 28) dure environ 12 semaines jusqu'au terme à 40 semaines."
           },
           {
             "question": "Que se passe-t-il si je saisis une date de dernières règles remontant à plus de 10 mois ?",

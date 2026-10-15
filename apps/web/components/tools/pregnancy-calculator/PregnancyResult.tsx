@@ -89,8 +89,7 @@ export default function PregnancyResult({ snap, error, digitStyle, fill = false 
     {
       title: tv("groupTrimester"),
       rows: [
-        { label: tv("trimesterCalc"), formula: tv("calcRule"), value: t("trimesterValue", { n: trimester }), emphasize: true },
-        { label: tv("trimesterAcog"), formula: tv("acogRule"), value: tc(`tri.t${acog}`) },
+        { label: tv("trimesterAcog"), formula: tv("acogRule"), value: t("trimesterValue", { n: trimester }), emphasize: true },
         ...(acog < 3
           ? [
               { label: tv("trimesterLeft"), formula: `${triEnd} − ${ga}`, value: n0(triEnd - ga), unit: "d" },

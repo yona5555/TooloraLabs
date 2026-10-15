@@ -65,9 +65,9 @@ export default async function PregnancyCalculatorDocsPage() {
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("anatomy.intro")}</p>
         <BreakdownBarDiagram
           segments={[
-            { label: t("anatomy.labelTrimester1"), value: 13, colorClass: "fill-blue-600 dark:fill-blue-400" },
+            { label: t("anatomy.labelTrimester1"), value: 14, colorClass: "fill-blue-600 dark:fill-blue-400" },
             { label: t("anatomy.labelTrimester2"), value: 14, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
-            { label: t("anatomy.labelTrimester3"), value: 13, colorClass: "fill-purple-500 dark:fill-purple-400" },
+            { label: t("anatomy.labelTrimester3"), value: 12, colorClass: "fill-purple-500 dark:fill-purple-400" },
           ]}
           totalLabel={t("anatomy.totalLabel")}
           caption={t("anatomy.caption")}

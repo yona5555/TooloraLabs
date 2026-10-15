@@ -1,7 +1,7 @@
 import { addDays, differenceInCalendarDays } from "date-fns";
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
-import type { Trimester } from "./DueDateCalculator";
+import { trimesterFromWeeks, type Trimester } from "./DueDateCalculator";
 
 export type PregnancyCalculatorInput = {
   /** ISO date (YYYY-MM-DD) for the first day of the last menstrual period. */
@@ -140,7 +140,7 @@ export class PregnancyCalculator extends BaseCalculator<PregnancyCalculatorInput
 
     const gestationalAgeWeeks = Math.floor(gestationalAgeTotalDays / 7);
     const gestationalAgeDays = gestationalAgeTotalDays % 7;
-    const trimester: Trimester = gestationalAgeWeeks < 13 ? 1 : gestationalAgeWeeks < 27 ? 2 : 3;
+    const trimester = trimesterFromWeeks(gestationalAgeWeeks);
 
     const dueDate = addDays(lmpDate, FULL_TERM_DAYS);
     const daysUntilDue = differenceInCalendarDays(dueDate, referenceDate);

@@ -27842,7 +27842,7 @@
           "today": "Today",
           "done": "Done",
           "inDays": "in {n} d",
-          "note": "Weeks are written as weeks+days: 13+0 means 13 weeks and 0 days since the last period.",
+          "note": "Weeks are written as weeks+days: 14+0 means 14 weeks and 0 days since the last period.",
           "rows": {
             "lmp": "Last period (week 0)",
             "conception": "Conception (about)",
@@ -28445,15 +28445,15 @@
           "intro": "Each trimester spans a distinct phase of fetal development.",
           "items": [
             {
-              "title": "First Trimester (Weeks 1-12)",
+              "title": "First Trimester (Weeks 1-13)",
               "description": "All major organs and body systems begin forming during this period, making it the most developmentally critical window of the entire pregnancy. Many of the more commonly known early pregnancy symptoms (nausea, fatigue, breast tenderness) are most pronounced here, and the risk of miscarriage, while present throughout pregnancy, is statistically highest in this trimester."
             },
             {
-              "title": "Second Trimester (Weeks 13-26)",
+              "title": "Second Trimester (Weeks 14-27)",
               "description": "Often called the most comfortable trimester for many people, as early symptoms typically ease while the physical size and discomfort of late pregnancy haven't yet set in. Fetal movement usually becomes noticeable during this period, and a detailed anatomy ultrasound is typically performed around the midpoint to check organ development."
             },
             {
-              "title": "Third Trimester (Weeks 27-40)",
+              "title": "Third Trimester (Weeks 28-40)",
               "description": "The fetus gains the majority of its birth weight during this final stretch, while physical discomfort for the pregnant person (back pain, reduced mobility, frequent urination) tends to increase. Prenatal visits typically become more frequent, and this is when full-term status and labor readiness become the primary clinical focus."
             }
           ]
@@ -28591,7 +28591,7 @@
         "notices": {
           "title": "Notices",
           "disclaimer": "This tracker gives general information from the date of your last period and is not medical advice. Dating by early ultrasound is more accurate; follow your doctor or midwife's dates and see them about any concern.",
-          "conventions": "Conventions used: gestational age is counted from the first day of the last menstrual period and the due date is that day + 280 days (Naegele's rule, which assumes a 28-day cycle with ovulation on day 14). The visuals use the ACOG trimesters (1st: 0w 0d–13w 6d, 2nd: 14w 0d–27w 6d, 3rd: 28w 0d onward) and the ACOG term definitions (2013); the calculator's own trimester label switches one week earlier, at weeks 13 and 27, and both are shown in the Result table.",
+          "conventions": "Conventions used: gestational age is counted from the first day of the last menstrual period and the due date is that day + 280 days (Naegele's rule, which assumes a 28-day cycle with ovulation on day 14). The calculator and the visuals use the ACOG trimesters (1st: 0w 0d–13w 6d, 2nd: 14w 0d–27w 6d, 3rd: 28w 0d onward) and the ACOG term definitions (2013).",
           "assumptions": "Assumptions used by the visuals (labelled where they appear): uterus size follows the typical growth by week (about 7.5 cm before pregnancy, fundal height ≈ weeks from 20 to 36 weeks); baby length and weight come from the calculator's week table (crown–rump length to week 19, crown–heel from week 20, approximate averages); the birth-timing curve is an illustrative normal curve with a standard deviation of 10 days around the due date (about 4% of births fall on the due date itself); weight-gain ranges are the IOM (2009) guidelines with a pre-pregnancy BMI of 22 assumed until you change it; the visit schedule is the routine low-risk schedule (every 4 weeks to week 28, every 2 weeks to 36, then weekly)."
         },
         "ladder": {
@@ -28660,8 +28660,6 @@
           "naegeleMinus280": "Naegele − 280-day date",
           "weeksLeft": "Time left",
           "groupTrimester": "Trimester",
-          "trimesterCalc": "Calculator label",
-          "calcRule": "this calculator: < 13 w, < 27 w",
           "trimesterAcog": "ACOG trimester",
           "acogRule": "ACOG: 0–13w 6d, 14–27w 6d, 28w+",
           "trimesterLeft": "Days left in this trimester",
@@ -38547,7 +38545,7 @@
           "readTimeValue": "4 min"
         },
         "formula": {
-          "expression": "Due date = last period date + 280 days  |  Gestational age (days) = today − last period date  |  Trimester: weeks < 13 → 1st, weeks < 27 → 2nd, else 3rd",
+          "expression": "Due date = last period date + 280 days  |  Gestational age (days) = today − last period date  |  Trimester (ACOG): weeks < 14 → 1st, weeks < 28 → 2nd, else 3rd",
           "note": "Every figure this tool reports — gestational age, trimester, due date, and progress percentage — is derived from a single count of days elapsed since the last menstrual period, using the standard Naegele's-rule assumption of a 280-day (40-week) pregnancy."
         },
         "flowchart": {
@@ -38555,7 +38553,7 @@
           "steps": [
             "Compute the number of days elapsed between the last menstrual period and today (or a specified reference date)",
             "Convert that day count into completed weeks and remaining days for the gestational age figure",
-            "Assign the trimester based on completed weeks: under 13 weeks is the 1st trimester, 13 to 26 is the 2nd, 27 and beyond is the 3rd",
+            "Assign the trimester by completed weeks (ACOG): 0 to 13 weeks 6 days is the 1st trimester, 14 weeks 0 days to 27 weeks 6 days is the 2nd, 28 weeks 0 days onward is the 3rd",
             "Add 280 days to the last period date to get the due date, then compute how many days remain until it",
             "Compute percent complete as elapsed days divided by 280, capped at 100%, and look up this week's size-comparison milestone from a fixed week-by-week table"
           ],
@@ -38567,7 +38565,7 @@
           "labelTrimester2": "2nd Trimester",
           "labelTrimester3": "3rd Trimester",
           "totalLabel": "40 Weeks Total",
-          "caption": "The three trimesters span weeks 0-13, 13-27, and 27-40 — not perfectly equal thirds, but close, with the 2nd trimester running one week longer than the other two."
+          "caption": "The three trimesters (ACOG) span weeks 0-13, 14-27, and 28-40 — not perfectly equal thirds: the 1st and 2nd last 14 weeks each, the 3rd about 12 weeks up to the due date."
         },
         "variablesColumns": {
           "symbol": "Symbol",
@@ -38615,7 +38613,7 @@
           },
           {
             "question": "Why are the three trimesters not exactly equal in length?",
-            "answer": "The trimester boundaries (13 weeks and 27 weeks) are standard clinical convention based on developmental stages, not a mathematical division of 40 weeks into thirds — this makes the 2nd trimester (weeks 13 to 27) span 14 weeks, one week longer than the 1st and 3rd trimesters, which each span 13 weeks."
+            "answer": "The ACOG boundaries (14 weeks 0 days and 28 weeks 0 days) are a clinical convention based on developmental stages, not a mathematical division of 40 weeks into thirds — the 1st trimester (weeks 0 to 13 6/7) and the 2nd (weeks 14 to 27 6/7) each span 14 weeks, while the 3rd (from week 28) spans about 12 weeks up to the due date at 40 weeks."
           },
           {
             "question": "What happens if I enter a last period date from more than 10 months ago?",

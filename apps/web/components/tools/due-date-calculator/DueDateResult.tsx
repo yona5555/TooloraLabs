@@ -74,7 +74,7 @@ export default function DueDateResult({ snap, error, fill = false }: Props) {
       title: tv("groupProgress"),
       rows: [
         { label: t("gestationalAge"), formula: `${TD} − ${A} = ${ga} ${d}`, value: wd(ga), unit: wdUnit, emphasize: true },
-        { label: t("trimester"), formula: ga < 91 ? "< 13+0" : ga < 189 ? "13+0 – 26+6" : "≥ 27+0", value: trimesterText },
+        { label: t("trimester"), formula: ga < 98 ? "< 14+0" : ga < 196 ? "14+0 – 27+6" : "≥ 28+0", value: trimesterText },
         { label: tv("percent"), formula: `${ga} ÷ 280`, value: percent.toFixed(1), unit: "%" },
         { label: t("daysUntilDue"), formula: `${tc("abbr.due")} − ${TD}`, value: String(daysLeft), unit: d, emphasize: true },
         { label: tv("weeksLeft"), formula: `${daysLeft} ÷ 7`, value: daysLeft >= 0 ? wd(daysLeft) : `−${wd(-daysLeft)}`, unit: wdUnit },
@@ -95,8 +95,8 @@ export default function DueDateResult({ snap, error, fill = false }: Props) {
     {
       title: tv("groupTrimesters"),
       rows: [
-        { label: tv("t2Starts"), formula: `${A} + 91 ${d} (13+0)`, value: f.long(lmp + 91) },
-        { label: tv("t3Starts"), formula: `${A} + 189 ${d} (27+0)`, value: f.long(lmp + 189) },
+        { label: tv("t2Starts"), formula: `${A} + 98 ${d} (14+0)`, value: f.long(lmp + 98) },
+        { label: tv("t3Starts"), formula: `${A} + 196 ${d} (28+0)`, value: f.long(lmp + 196) },
       ],
     },
     {

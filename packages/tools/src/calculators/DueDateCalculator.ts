@@ -18,6 +18,9 @@ export type DueDateError = "invalid-date" | "invalid-cycle-length" | "date-in-fu
 
 export type Trimester = 1 | 2 | 3;
 
+/** ACOG trimesters by completed weeks: 1st 0w0d–13w6d, 2nd 14w0d–27w6d, 3rd 28w0d onwards. */
+export const trimesterFromWeeks = (completedWeeks: number): Trimester => (completedWeeks < 14 ? 1 : completedWeeks < 28 ? 2 : 3);
+
 export type DueDateOutput = {
   error: DueDateError | null;
   dueDateISO: string;
@@ -95,7 +98,7 @@ export class DueDateCalculator extends BaseCalculator<DueDateInput, DueDateOutpu
     const gestationalAgeWeeks = Math.floor(gestationalAgeTotalDays / 7);
     const gestationalAgeDays = gestationalAgeTotalDays % 7;
 
-    const trimester: Trimester = gestationalAgeWeeks < 13 ? 1 : gestationalAgeWeeks < 27 ? 2 : 3;
+    const trimester = trimesterFromWeeks(gestationalAgeWeeks);
     const daysUntilDue = differenceInCalendarDays(dueDate, referenceDate);
     const percentComplete = Math.min(100, Math.round((gestationalAgeTotalDays / FULL_TERM_DAYS) * 1000) / 10);
 

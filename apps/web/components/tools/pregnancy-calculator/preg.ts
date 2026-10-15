@@ -20,7 +20,7 @@ export type PregSnapshot = {
   ga: number;
   weeks: number;
   days: number;
-  /** The calculator's trimester (its own boundaries: < 13 w, < 27 w, else 3). */
+  /** ACOG trimester (< 14 w, < 28 w, else 3). */
   trimester: Trimester;
   due: string;
   daysUntilDue: number;

@@ -12,8 +12,8 @@ import { TRIMESTERS, ZONES, wd } from "./dueDate";
 const STATIONS: { key: string; ga: number; color: string }[] = [
   { key: "lmp", ga: 0, color: "#64748b" },
   { key: "conception", ga: 14, color: "#06b6d4" },
-  { key: "t2", ga: 91, color: TRIMESTERS[1].color },
-  { key: "t3", ga: 189, color: TRIMESTERS[2].color },
+  { key: "t2", ga: 98, color: TRIMESTERS[1].color },
+  { key: "t3", ga: 196, color: TRIMESTERS[2].color },
   { key: "early", ga: 259, color: ZONES[1].color },
   { key: "full", ga: 273, color: ZONES[2].color },
   { key: "due", ga: 280, color: "#2563eb" },

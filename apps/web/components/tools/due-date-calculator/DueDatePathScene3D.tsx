@@ -119,7 +119,7 @@ export default function DueDatePathScene3D({ ga, gaLabel, dueLabel, todayLabel }
       })}
 
       {/* Week numbers at the trimester starts and the term window */}
-      {[0, 13, 27, 37].map((w) => {
+      {[0, 14, 28, 37].map((w) => {
         const [x, z] = stone(w);
         return <Label3D key={`n${w}`} position={[x, 0.2, z]} color={p.muted} text={String(w)} fontSize={10} weight={700} />;
       })}

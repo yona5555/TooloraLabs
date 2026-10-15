@@ -27842,7 +27842,7 @@
           "today": "Heute",
           "done": "Vorbei",
           "inDays": "in {n} T",
-          "note": "Wochen werden als Wochen+Tage geschrieben: 13+0 bedeutet 13 Wochen und 0 Tage seit der letzten Periode.",
+          "note": "Wochen werden als Wochen+Tage geschrieben: 14+0 bedeutet 14 Wochen und 0 Tage seit der letzten Periode.",
           "rows": {
             "lmp": "Letzte Periode (Woche 0)",
             "conception": "Empfängnis (etwa)",
@@ -28445,15 +28445,15 @@
           "intro": "Jedes Trimester umfasst eine unterschiedliche Phase der fetalen Entwicklung.",
           "items": [
             {
-              "title": "Erstes Trimester (Wochen 1-12)",
+              "title": "Erstes Trimester (Wochen 1-13)",
               "description": "Alle wichtigen Organe und Körpersysteme beginnen sich in diesem Zeitraum zu bilden, was ihn zum entwicklungskritischsten Fenster der gesamten Schwangerschaft macht. Viele der bekannteren frühen Schwangerschaftssymptome (Übelkeit, Müdigkeit, Brustspannen) sind hier am ausgeprägtesten, und das Fehlgeburtsrisiko, obwohl während der gesamten Schwangerschaft vorhanden, ist statistisch in diesem Trimester am höchsten."
             },
             {
-              "title": "Zweites Trimester (Wochen 13-26)",
+              "title": "Zweites Trimester (Wochen 14-27)",
               "description": "Oft als das angenehmste Trimester für viele Menschen bezeichnet, da frühe Symptome typischerweise nachlassen, während die körperliche Größe und Unbequemlichkeit der späten Schwangerschaft noch nicht eingesetzt haben. Fetale Bewegungen werden in dieser Zeit üblicherweise spürbar, und ein detaillierter Anatomie-Ultraschall wird typischerweise um die Mitte herum durchgeführt, um die Organentwicklung zu überprüfen."
             },
             {
-              "title": "Drittes Trimester (Wochen 27-40)",
+              "title": "Drittes Trimester (Wochen 28-40)",
               "description": "Der Fötus nimmt in dieser letzten Phase den Großteil seines Geburtsgewichts zu, während das körperliche Unbehagen für die schwangere Person (Rückenschmerzen, eingeschränkte Beweglichkeit, häufiges Wasserlassen) tendenziell zunimmt. Vorsorgeuntersuchungen werden typischerweise häufiger, und dies ist der Zeitpunkt, an dem der termingerechte Status und die Geburtsbereitschaft zum primären klinischen Fokus werden."
             }
           ]
@@ -28591,7 +28591,7 @@
         "notices": {
           "title": "Hinweise",
           "disclaimer": "Dieses Werkzeug liefert allgemeine Informationen auf Grundlage des Datums Ihrer letzten Periode und ist keine medizinische Beratung. Eine Datierung per frühem Ultraschall ist genauer; richten Sie sich nach den Daten Ihrer Ärztin, Ihres Arztes oder Ihrer Hebamme und wenden Sie sich bei Bedenken an sie.",
-          "conventions": "Verwendete Konventionen: Das Schwangerschaftsalter wird ab dem ersten Tag der letzten Menstruation gezählt, der Geburtstermin ist dieser Tag + 280 Tage (Naegele-Regel, die einen 28-Tage-Zyklus mit Eisprung an Tag 14 annimmt). Die Grafiken verwenden die ACOG-Trimester (1.: 0 SSW 0 T–13 SSW 6 T, 2.: 14 SSW 0 T–27 SSW 6 T, 3.: ab 28 SSW 0 T) und die ACOG-Definitionen der Termingeburt (2013); die Trimesterangabe des Rechners selbst wechselt eine Woche früher, in den Wochen 13 und 27, und beide stehen in der Ergebnistabelle.",
+          "conventions": "Verwendete Konventionen: Das Gestationsalter wird ab dem ersten Tag der letzten Menstruation gezählt, und der Geburtstermin ist dieser Tag + 280 Tage (Naegele-Regel, die einen 28-Tage-Zyklus mit Eisprung am 14. Tag annimmt). Rechner und Grafiken verwenden die ACOG-Trimester (1.: 0 W 0 T–13 W 6 T, 2.: 14 W 0 T–27 W 6 T, 3.: ab 28 W 0 T) und die ACOG-Termdefinitionen (2013).",
           "assumptions": "Annahmen der Grafiken (dort gekennzeichnet, wo sie erscheinen): Die Gebärmuttergröße folgt dem typischen Wachstum je Woche (etwa 7,5 cm vor der Schwangerschaft, Fundushöhe ≈ Wochen zwischen Woche 20 und 36); Länge und Gewicht des Babys stammen aus der Wochentabelle des Rechners (Scheitel-Steiß-Länge bis Woche 19, Scheitel-Fersen-Länge ab Woche 20, ungefähre Mittelwerte); die Geburtszeitkurve ist eine veranschaulichende Normalverteilung mit 10 Tagen Standardabweichung um den Termin (etwa 4 % der Geburten fallen auf den Termin selbst); die Gewichtszunahme-Spannen sind die IOM-Empfehlungen (2009), wobei ein BMI vor der Schwangerschaft von 22 angenommen wird, bis Sie ihn ändern; der Vorsorgeplan ist der übliche Plan bei niedrigem Risiko (alle 4 Wochen bis Woche 28, alle 2 Wochen bis 36, danach wöchentlich)."
         },
         "ladder": {
@@ -28660,8 +28660,6 @@
           "naegeleMinus280": "Naegele − 280-Tage-Datum",
           "weeksLeft": "Verbleibende Zeit",
           "groupTrimester": "Trimester",
-          "trimesterCalc": "Angabe des Rechners",
-          "calcRule": "dieser Rechner: < 13 W, < 27 W",
           "trimesterAcog": "ACOG-Trimester",
           "acogRule": "ACOG: 0–13w 6d, 14–27w 6d, 28w+",
           "trimesterLeft": "Verbleibende Tage im Trimester",
@@ -38547,7 +38545,7 @@
           "readTimeValue": "4 Min."
         },
         "formula": {
-          "expression": "Entbindungstermin = Datum letzte Periode + 280 Tage  |  Schwangerschaftsalter (Tage) = heute − Datum letzte Periode  |  Trimester: Wochen < 13 → 1., Wochen < 27 → 2., sonst 3.",
+          "expression": "Geburtstermin = Datum der letzten Periode + 280 Tage  |  Gestationsalter (Tage) = heute − Datum der letzten Periode  |  Trimester (ACOG): Wochen < 14 → 1., Wochen < 28 → 2., sonst 3.",
           "note": "Jede von diesem Tool gemeldete Zahl — Schwangerschaftsalter, Trimester, Entbindungstermin und Fortschrittsprozentsatz — wird aus einer einzigen Zählung der seit der letzten Periode verstrichenen Tage abgeleitet, unter Verwendung der Standard-Naegele-Regel-Annahme einer 280-Tage-Schwangerschaft (40 Wochen)."
         },
         "flowchart": {
@@ -38555,7 +38553,7 @@
           "steps": [
             "Die Anzahl der zwischen der letzten Periode und heute (oder einem angegebenen Referenzdatum) verstrichenen Tage berechnen",
             "Diese Tageszahl in vollendete Wochen und verbleibende Tage für die Schwangerschaftsalterzahl umrechnen",
-            "Das Trimester basierend auf vollendeten Wochen zuweisen: unter 13 Wochen ist das 1. Trimester, 13 bis 26 ist das 2., 27 und darüber ist das 3.",
+            "Trimester nach vollendeten Wochen zuordnen (ACOG): 0 bis 13 Wochen und 6 Tage ist das 1. Trimester, 14 Wochen und 0 Tage bis 27 Wochen und 6 Tage das 2., ab 28 Wochen und 0 Tagen das 3.",
             "280 Tage zum Datum der letzten Periode addieren, um den Entbindungstermin zu erhalten, dann berechnen, wie viele Tage bis dahin verbleiben",
             "Den Fortschrittsprozentsatz als verstrichene Tage geteilt durch 280 berechnen, auf 100 % begrenzt, und den Größenvergleichs-Meilenstein dieser Woche aus einer festen Wochentabelle nachschlagen"
           ],
@@ -38567,7 +38565,7 @@
           "labelTrimester2": "2. Trimester",
           "labelTrimester3": "3. Trimester",
           "totalLabel": "Insgesamt 40 Wochen",
-          "caption": "Die drei Trimester erstrecken sich über die Wochen 0-13, 13-27 und 27-40 — nicht perfekt gleiche Drittel, aber nahe dran, wobei das 2. Trimester eine Woche länger läuft als die anderen beiden."
+          "caption": "Die drei Trimester (ACOG) umfassen die Wochen 0-13, 14-27 und 28-40 — keine exakt gleichen Drittel: Das 1. und 2. dauern je 14 Wochen, das 3. etwa 12 Wochen bis zum Geburtstermin."
         },
         "variablesColumns": {
           "symbol": "Symbol",
@@ -38615,7 +38613,7 @@
           },
           {
             "question": "Warum sind die drei Trimester nicht genau gleich lang?",
-            "answer": "Die Trimestergrenzen (13 Wochen und 27 Wochen) sind eine klinische Standardkonvention basierend auf Entwicklungsstadien, keine mathematische Teilung von 40 Wochen in Drittel — dies macht das 2. Trimester (Wochen 13 bis 27) 14 Wochen lang, eine Woche länger als das 1. und 3. Trimester, die jeweils 13 Wochen umfassen."
+            "answer": "Die ACOG-Grenzen (14 Wochen 0 Tage und 28 Wochen 0 Tage) sind eine klinische Konvention, die auf Entwicklungsstadien beruht, keine mathematische Drittelung von 40 Wochen — das 1. Trimester (Wochen 0 bis 13 6/7) und das 2. (Wochen 14 bis 27 6/7) umfassen je 14 Wochen, das 3. (ab Woche 28) etwa 12 Wochen bis zum Geburtstermin in Woche 40."
           },
           {
             "question": "Was passiert, wenn ich ein Datum der letzten Periode von vor mehr als 10 Monaten eingebe?",
