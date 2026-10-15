@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { BodyFatCalculator as BodyFatTool } from "@tooloralabs/tools";
 import { parseLocalizedNumber } from "@tooloralabs/core";
@@ -11,10 +11,21 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import BodyFatInputPanel from "./BodyFatInputPanel";
 import BodyFatResult from "./BodyFatResult";
-import BodyFatQuickReference from "./BodyFatQuickReference";
+import BodyFatAceLadder from "./BodyFatAceLadder";
+import { BodyFatLiveContext, type BodyFatLive } from "./BodyFatLiveContext";
+import type { Measures } from "./ace";
 import { type BodyFatScenario, type Gender } from "./types";
 
 const tool = new BodyFatTool();
+
+const r1 = (v: number) => Math.round(v * 10) / 10;
+
+function run(m: Measures) {
+  return tool.execute(
+    { gender: m.gender, heightCm: m.heightCm, neckCm: m.neckCm, waistCm: m.waistCm, hipCm: m.gender === "female" ? m.hipCm : undefined },
+    { locale: "en-US" },
+  ).data;
+}
 
 const DEFAULTS = { gender: "male" as Gender, heightCm: "180", neckCm: "38", waistCm: "85", hipCm: "95" };
 
@@ -37,6 +48,7 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
     setNeckCm(scenario.neckCm);
     setWaistCm(scenario.waistCm);
     setHipCm(scenario.hipCm);
+    setWeightSet(null);
   }
 
   function handleClear() {
@@ -45,23 +57,45 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
     setNeckCm(DEFAULTS.neckCm);
     setWaistCm(DEFAULTS.waistCm);
     setHipCm(DEFAULTS.hipCm);
+    setWeightSet(null);
   }
 
   const digitStyle = resolveDigitStyle(heightCm, neckCm, waistCm, hipCm);
 
-  const result = useMemo(() => {
-    const output = tool.execute(
-      {
-        gender,
-        heightCm: toNum(heightCm),
-        neckCm: toNum(neckCm),
-        waistCm: toNum(waistCm),
-        hipCm: gender === "female" ? toNum(hipCm) : undefined,
-      },
-      { locale: "en-US" },
-    );
-    return output.data;
-  }, [gender, heightCm, neckCm, waistCm, hipCm]);
+  const measures: Measures = { gender, heightCm: toNum(heightCm), neckCm: toNum(neckCm), waistCm: toNum(waistCm), hipCm: toNum(hipCm) };
+  const result = useMemo(() => run(measures), [gender, heightCm, neckCm, waistCm, hipCm]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Live: every valid edit updates the result at once; an invalid or half-typed field keeps the
+  // last good result (and its measurements) on screen, with the invalid-measurements note.
+  const valid = result.error === null && result.category !== null && measures.heightCm >= 50 && measures.heightCm <= 250;
+  const [good, setGood] = useState(() => {
+    const m: Measures = { gender: DEFAULTS.gender, heightCm: 180, neckCm: 38, waistCm: 85, hipCm: 95 };
+    return { m, data: run(m) };
+  });
+  useEffect(() => {
+    if (valid) setGood({ m: measures, data: result });
+  }, [valid, result]); // eslint-disable-line react-hooks/exhaustive-deps
+  const shown = valid ? { m: measures, data: result } : good;
+
+  // The Navy method needs no weight; the fat/lean split is read at an assumed weight, seeded at
+  // BMI 22 for the height until the composition card sets it.
+  const [weightSet, setWeightSet] = useState<number | null>(null);
+  const weightSeed = r1(22 * (shown.m.heightCm / 100) ** 2);
+  const weightKg = weightSet ?? weightSeed;
+
+  const liveCtx = useMemo<BodyFatLive>(
+    () => ({
+      m: shown.m,
+      bf: shown.data.bodyFatPercent,
+      category: shown.data.category ?? "average",
+      weightKg,
+      weightSeed,
+      setWeightKg: (kg: number) => setWeightSet(r1(kg)),
+      setWaistCm: (cm: number) => setWaistCm(String(r1(cm))),
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [shown.data, shown.m.gender, shown.m.heightCm, shown.m.neckCm, shown.m.waistCm, shown.m.hipCm, weightKg, weightSeed],
+  );
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -70,10 +104,13 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
   ];
 
   return (
-    <>
+    <BodyFatLiveContext.Provider value={liveCtx}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
           input={
+            <div className="flex flex-col gap-4 lg:h-full">
             <BodyFatInputPanel
               gender={gender}
               onGenderChange={setGender}
@@ -88,11 +125,23 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
               onScenarioPreset={handleScenarioPreset}
               onClear={handleClear}
             />
+            <BodyFatAceLadder />
+            </div>
           }
           result={
-            <div className="flex flex-col gap-4">
-              <BodyFatResult result={result} gender={gender} heightCm={heightCm} neckCm={neckCm} waistCm={waistCm} hipCm={hipCm} digitStyle={digitStyle} />
-              <BodyFatQuickReference />
+            <div className="flex flex-col gap-4 lg:h-full">
+              <BodyFatResult
+                fill
+                result={shown.data}
+                measures={shown.m}
+                invalid={!valid}
+                gender={gender}
+                heightCm={heightCm}
+                neckCm={neckCm}
+                waistCm={waistCm}
+                hipCm={hipCm}
+                digitStyle={digitStyle}
+              />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="body-fat-calculator" category="health-fitness" />}
@@ -106,6 +155,6 @@ export default function BodyFatCalculator({ education }: { education: ReactNode 
       </div>
 
       {education}
-    </>
+    </BodyFatLiveContext.Provider>
   );
 }

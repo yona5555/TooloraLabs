@@ -4,8 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import BodyFatRangeGauge from "./BodyFatRangeGauge";
-import BodyFatMeasurementDiagram from "./BodyFatMeasurementDiagram";
+import {
+  BodyFatBalanceCard,
+  BodyFatCompositionCard,
+  BodyFatCutoffBarsCard,
+  BodyFatFormulaCard,
+  BodyFatGaugeCard,
+  BodyFatSensitivityCard,
+  BodyFatWaistCurveCard,
+  BodyFatZoneStripCard,
+} from "./BodyFatCards";
 
 type ExampleRow = { calculation: string; result: string };
 type CategoryItem = { title: string; description: string };
@@ -20,12 +28,20 @@ export default async function BodyFatEducation() {
 
   return (
     <EncyclopediaPaper>
-      <BodyFatRangeGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <BodyFatZoneStripCard side="visual-left" />
+        <BodyFatGaugeCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
-        <BodyFatMeasurementDiagram />
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <BodyFatCompositionCard side="visual-left" />
+          <BodyFatCutoffBarsCard side="table-left" />
+          <BodyFatWaistCurveCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("categoriesSection.title")}>
@@ -37,6 +53,11 @@ export default async function BodyFatEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <BodyFatSensitivityCard side="table-left" />
+          <BodyFatFormulaCard side="visual-left" />
+          <BodyFatBalanceCard side="table-left" />
         </div>
       </InfoSection>
 
