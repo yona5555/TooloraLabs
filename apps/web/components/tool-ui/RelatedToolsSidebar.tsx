@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, ChevronDown, Search as SearchIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -17,9 +17,12 @@ type RelatedToolsSidebarProps = {
   relatedListTitle?: string;
   /**
    * Continue the tool list with more tools from the same category (behind "Show more"). The card keeps
-   * its natural height; the ToolAboveFold `sidebarMatchRow` column space it doesn't use stays below it.
+   * its natural height; the ToolAboveFold `sidebarMatchRow` column space it doesn't use stays below it,
+   * filled with `fillContent` when given, or left as an invisible spacer otherwise.
    */
   fill?: boolean;
+  /** Real content for the unused `sidebarMatchRow` space below the card (§41) — ignored unless `fill` is set. */
+  fillContent?: ReactNode;
 };
 
 export default function RelatedToolsSidebar({
@@ -28,6 +31,7 @@ export default function RelatedToolsSidebar({
   relatedList,
   relatedListTitle,
   fill = false,
+  fillContent,
 }: RelatedToolsSidebarProps) {
   const t = useTranslations("hero");
   const tTools = useTranslations("tools");
@@ -179,8 +183,16 @@ export default function RelatedToolsSidebar({
         <AdSpace className="mx-auto" />
       </div>
     </SectionCard>
-    {/* Unused sidebarMatchRow column height lands here, outside the card; ToolAboveFold subtracts it when measuring. */}
-    {fill && <div data-sidebar-grow aria-hidden="true" className="hidden lg:block lg:flex-1" />}
+    {/* Unused sidebarMatchRow column height lands here, outside the card; ToolAboveFold subtracts it when
+        measuring regardless of whether it's empty or filled with `fillContent`. */}
+    {fill &&
+      (fillContent ? (
+        <div data-sidebar-grow className="hidden lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
+          {fillContent}
+        </div>
+      ) : (
+        <div data-sidebar-grow aria-hidden="true" className="hidden lg:block lg:flex-1" />
+      ))}
     </>
   );
 }
