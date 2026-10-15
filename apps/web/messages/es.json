@@ -23864,6 +23864,148 @@
         "caption": "El ritmo de cada tramo, para ver si el esfuerzo fue uniforme o si aceleraste/desaceleraste en el camino.",
         "ariaLabel": "Gráfico de barras que compara el ritmo en cada tramo cronometrado",
         "legend": "Tramo más rápido: {fastest} · Tramo más lento: {slowest}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avisos",
+          "assumptions": "El conversor de ritmo no tiene distancia, así que su tabla de resultados, la pista 3D y las tarjetas de indicadores usan un esfuerzo de 10 km al ritmo introducido (supuesto). La cronología del día de carrera empieza a las 08:00 y la tarjeta de objetivo parte de un tiempo un 5 % más rápido que el tuyo; ambos son valores iniciales ajustables, no consejos. Las zonas de esfuerzo son la escala de ritmo propia de esta herramienta, no un estándar médico ni de entrenamiento.",
+          "riegel": "Las predicciones de Riegel (T2 = T1 × (D2 / D1)^1.06) suponen que entrenas adecuadamente para la distancia objetivo; son menos fiables más allá de unas cuatro veces la distancia conocida y para esfuerzos de menos de 3–4 minutos."
+        },
+        "ladder": {
+          "title": "Tiempos de carrera con este esfuerzo",
+          "intro": "Cada carrera estándar a {pace}: a ritmo constante (azul) y con la predicción de Riegel (ámbar).",
+          "even": "Ritmo constante",
+          "riegel": "Predicción de Riegel"
+        },
+        "common": {
+          "paceAxis": "Ritmo",
+          "distanceAxis": "Distancia",
+          "races": {
+            "mile": "Milla",
+            "5k": "5K",
+            "10k": "10K",
+            "15k": "15K",
+            "half": "Media maratón",
+            "30k": "30K",
+            "marathon": "Maratón"
+          }
+        },
+        "result": {
+          "groupInputs": "Tu esfuerzo",
+          "groupSegments": "Ritmos por tramo",
+          "groupPace": "Ritmo",
+          "groupSpeed": "Velocidad",
+          "groupCheckpoints": "Tiempo transcurrido en el recorrido",
+          "groupEven": "Tiempos de carrera a este ritmo",
+          "groupRiegel": "Predicciones de Riegel a partir de este esfuerzo",
+          "given": "dato",
+          "assumed": "supuesto",
+          "refDistance": "Distancia de referencia",
+          "predictedPace": "Ritmo previsto",
+          "overallPace": "Ritmo global",
+          "per400": "Por vuelta de 400 m",
+          "per100": "Por 100 m",
+          "mps": "Velocidad (metros por segundo)",
+          "checkpoint": "Al {pct} % de la distancia",
+          "colQuantity": "Magnitud",
+          "colFormula": "Fórmula",
+          "colValue": "Valor",
+          "hint": "Arrastra para girar la pista",
+          "caption": "Una pista estándar de 400 m con un corredor que da vueltas a {pace} (mostrado 25 veces más rápido). Los postes marcan cada 100 m con su tiempo de paso; una vuelta dura {lap}."
+        },
+        "riegel": {
+          "title": "Curva de predicción de carreras",
+          "subtitle": "La curva ámbar es la predicción de Riegel de tu ritmo en cada distancia de 1 a 50 km (T2 = T1 × (D2 / D1)^1.06); la línea azul discontinua es tu ritmo actual mantenido de forma constante. Arrastra por la pista para elegir una carrera objetivo y leer su tiempo previsto.",
+          "caption": "Previsto para {d}: {t} a {p}.",
+          "handle": "Arrastra para elegir la distancia objetivo",
+          "rowKnown": "Esfuerzo conocido (D₁ · T₁)",
+          "rowPace": "Ritmo previsto",
+          "rowEven": "Misma distancia a tu ritmo constante",
+          "rowFatigue": "Coste de la fatiga (predicción − ritmo constante)",
+          "you": "Tú"
+        },
+        "gauge": {
+          "title": "Velocidad en la escala de esfuerzo",
+          "subtitle": "La velocidad de carrera sobre las zonas de esfuerzo de esta herramienta, con las velocidades de los récords mundiales de maratón masculino y femenino de la tabla inferior. La marca azul es tu velocidad; arrastra la aguja para probar otra y ver el tiempo final para tu distancia.",
+          "caption": "{v} equivale a {p}: {zone}.",
+          "handle": "Arrastra para cambiar la velocidad",
+          "rowSpeed": "Velocidad",
+          "rowZone": "Zona de esfuerzo",
+          "rowFinish": "Tiempo final",
+          "rowVsYours": "Comparado con tu tiempo",
+          "rowWr": "Porcentaje de la velocidad del récord mundial masculino de maratón",
+          "yours": "la tuya"
+        },
+        "splits": {
+          "title": "Plan de ritmo por tramos",
+          "subtitle": "Tu distancia dividida en tramos iguales; cada barra es el tiempo de ese tramo con su ritmo encima. Arrastra hacia un split negativo (terminar más rápido) o positivo (ir frenando): el tiempo total no cambia.",
+          "caption": "{kind}: primer tramo {first}, último tramo {last}, mismo total {total}.",
+          "handle": "Arrastra para cambiar el reparto",
+          "axis": "Tiempo por tramo",
+          "rowFirst": "Ritmo del primer tramo",
+          "rowLast": "Ritmo del último tramo",
+          "rowHalf1": "Primera mitad",
+          "rowHalf2": "Segunda mitad",
+          "rowTotal": "Tiempo total",
+          "rowKind": "Estrategia",
+          "negative": "Split negativo",
+          "positive": "Split positivo",
+          "even": "Split constante"
+        },
+        "rulers": {
+          "title": "Kilómetros y millas lado a lado",
+          "subtitle": "Una misma distancia dibujada dos veces a la misma escala: los kilómetros arriba y las millas abajo, cada marca con tu tiempo transcurrido al pasarla. Arrastra para cambiar la distancia.",
+          "caption": "{km} son {mi}; a tu ritmo se tarda {t}.",
+          "handle": "Arrastra para cambiar la distancia",
+          "rowPaceKm": "Ritmo por kilómetro",
+          "rowAt": "Transcurrido en",
+          "kmRuler": "Kilómetros",
+          "miRuler": "Millas"
+        },
+        "trio": {
+          "title": "Unos segundos más rápido o más lento",
+          "subtitle": "Tu tiempo final a tu ritmo, un poco más rápido y un poco más lento. Arrastra para cambiar cuántos segundos por unidad añades o quitas.",
+          "caption": "{dx} en {d} cambia el tiempo final en {delta}.",
+          "handle": "Arrastra para cambiar la diferencia de ritmo",
+          "axis": "Tiempo final",
+          "rowNow": "Tu ritmo",
+          "rowSpeedSpan": "Rango de velocidad"
+        },
+        "fatigue": {
+          "title": "Tiempos de carrera según el exponente de fatiga",
+          "subtitle": "Tiempos previstos para cada carrera estándar a partir de tu esfuerzo. El exponente fija cuánto te ralentizas al crecer la distancia: 1,00 es sin ralentización (marca azul) y 1,06 es el estándar de Riegel (marca discontinua). Arrastra para probar otro exponente.",
+          "caption": "Con el exponente {e}, tu maratón previsto es {t}.",
+          "handle": "Arrastra para cambiar el exponente de fatiga",
+          "rowExponent": "Exponente de fatiga",
+          "rowStandard": "Maratón con el exponente estándar",
+          "rowDiff": "Diferencia con el estándar",
+          "rowEven": "Maratón a ritmo constante",
+          "evenShort": "constante"
+        },
+        "timeline": {
+          "title": "Cronología del día de carrera",
+          "subtitle": "La hora en la salida, en cada cuarto de la distancia y en la meta. La salida empieza a las 08:00 (supuesto); arrástrala a tu hora de salida.",
+          "caption": "Si sales a las {start}, llegas a meta a las {finish}.",
+          "handle": "Arrastra para cambiar la hora de salida",
+          "rowStart": "Salida",
+          "rowDuration": "Duración",
+          "gun": "Salida"
+        },
+        "goal": {
+          "title": "Tu tiempo frente a un objetivo",
+          "subtitle": "Una balanza entre tu tiempo (azul) y un tiempo objetivo (ámbar): el tiempo más largo pesa más. El objetivo empieza un 5 % más rápido que tu tiempo; arrástralo para ver el ritmo que necesitas y el cambio por unidad.",
+          "caption": "Un objetivo de {goal} exige {pace}: {status}.",
+          "handle": "Arrastra para cambiar el tiempo objetivo",
+          "rowYours": "Tu tiempo",
+          "rowGoal": "Tiempo objetivo",
+          "rowPaceChange": "Cambio de ritmo necesario",
+          "rowSpeedChange": "Cambio de velocidad necesario",
+          "faster": "más rápido que ahora",
+          "slower": "más lento que ahora",
+          "equal": "igual que ahora",
+          "panYours": "Tu tiempo",
+          "panGoal": "Objetivo"
+        }
       }
     },
     "random-number-generator": {
@@ -27141,6 +27283,178 @@
       "clockDiagram": {
         "ariaLabel": "Reloj de 24 horas con cada hora recomendada",
         "caption": "Hora recomendada: {time}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avisos",
+          "heuristic": "La regla del ciclo de 90 minutos es una aproximación popular, no una medición personal de las fases del sueño: los ciclos reales duran entre 70 y 120 minutos y cambian de una noche a otra. Esta herramienta es informativa y no constituye consejo médico; consulta a un médico o especialista del sueño si los problemas persisten.",
+          "assumptions": "Supuestos de los gráficos (indicados donde aparecen): los minutos por fase en cada ciclo siguen una noche típica de un adulto sano (modelo aproximado de manual); las comparaciones por edad suponen un adulto de 26 a 64 años hasta que elijas otro grupo (National Sleep Foundation, 2015); los umbrales de calidad del sueño siguen el consenso de la NSF (Ohayon et al., 2017); los horarios de preparación son recomendaciones habituales de higiene del sueño (última cafeína 6 horas antes de acostarse, Drake et al., 2013)."
+        },
+        "ladder": {
+          "title": "Horarios habituales de un vistazo",
+          "introWake": "Horas de acostarse para horas de despertar habituales, con {latency} para dormirse. Haz clic en una fila para usarla.",
+          "introBed": "Horas de despertar para horas de acostarse habituales, con {latency} para dormirse. Haz clic en una fila para usarla.",
+          "colWake": "Despertar",
+          "colBed": "Acostarse",
+          "col6": "6 ciclos",
+          "col5": "5 ciclos",
+          "note": "6 ciclos dan 9 h y 5 ciclos dan 7,5 h de sueño: ambos están dentro del rango recomendado para adultos de 7–9 h."
+        },
+        "result": {
+          "groupInputs": "Tus datos",
+          "given": "dato",
+          "standard": "estándar",
+          "cycleLength": "Duración del ciclo de sueño",
+          "groupAsleep": "Tiempo dormido por opción",
+          "groupNight": "Tu noche con la mejor opción ({count} ciclos)",
+          "inBed": "A la cama",
+          "asleepAt": "Dormido a las",
+          "wakeAt": "Despertar",
+          "timeInBed": "Tiempo en la cama",
+          "efficiency": "Eficiencia del sueño",
+          "awakeWindow": "Despierto hasta la próxima hora de acostarse",
+          "groupStages": "Fases del sueño, mejor opción (modelo típico, aproximado)",
+          "groupAge": "Frente al rango adulto (NSF 7–9 h, se supone adulto)",
+          "groupWindDown": "Preparación nocturna, mejor opción (recomendaciones habituales)",
+          "colQuantity": "Magnitud",
+          "colFormula": "Fórmula",
+          "colValue": "Valor",
+          "hint": "Arrastra para girar el reloj nocturno",
+          "caption": "El reloj nocturno para {time}: la medianoche está arriba y el tiempo avanza en sentido horario. Cada anillo es una opción (exterior = 6 ciclos, interior = 3); el ámbar es el tiempo para dormirse y cada bloque es un ciclo de 90 minutos, así que cada despertar cae entre ciclos."
+        },
+        "common": {
+          "stages": {
+            "wake": "Despierto",
+            "n1": "N1",
+            "n2": "N2",
+            "n3": "N3",
+            "rem": "REM"
+          },
+          "stageLong": {
+            "n1": "N1 (sueño ligero)",
+            "n2": "N2 (sueño ligero)",
+            "n3": "N3 (sueño profundo)",
+            "rem": "REM (sueño de los sueños)"
+          },
+          "verdict": {
+            "rec": "Recomendado",
+            "may": "Puede ser adecuado",
+            "no": "No recomendado"
+          },
+          "stations": {
+            "caffeine": "Última cafeína",
+            "meal": "Última comida copiosa",
+            "dim": "Bajar las luces",
+            "screens": "Apagar pantallas",
+            "bed": "A la cama",
+            "asleep": "Dormido",
+            "wake": "Despertar"
+          }
+        },
+        "hypno": {
+          "title": "Hipnograma nocturno: ¿cuándo despiertas?",
+          "subtitle": "Una noche típica desde que te duermes: cada ciclo de 90 minutos baja del sueño ligero N1/N2 al profundo N3 y vuelve a subir hasta REM; el sueño profundo disminuye y el REM crece hacia la mañana. Arrastra el marcador de despertar: caer en el final de ciclo verde resulta más fácil, y despertar desde N3 profundo produce más aturdimiento.",
+          "caption": "Despertar a las {time} te sorprende en {stage}: el aturdimiento esperado es {feel}.",
+          "handle": "Arrastra para cambiar cuánto duermes",
+          "rowCycles": "Ciclos completos + minutos del siguiente",
+          "rowStage": "Fase al despertar",
+          "rowNearest": "Final de ciclo más cercano",
+          "rowFeel": "Aturdimiento esperado (inercia del sueño)",
+          "boundary": "entre ciclos",
+          "feel": {
+            "low": "bajo",
+            "moderate": "moderado",
+            "high": "alto"
+          }
+        },
+        "dial": {
+          "title": "Esfera nocturna de 24 horas",
+          "subtitle": "Tus opciones en un reloj de 24 horas con la medianoche arriba. Cada anillo es una opción, de 6 ciclos (exterior) a 3 (interior); el ámbar es el tiempo para dormirse. Arrastra la aguja alrededor de la esfera para cambiar tu hora: la calculadora, la tabla de resultados y el reloj 3D la siguen.",
+          "captionWake": "Si despiertas a las {time}, la mejor hora de acostarte es {best}.",
+          "captionBed": "Si te acuestas a las {time}, la mejor hora de despertar es {best}.",
+          "handle": "Arrastra alrededor de la esfera para cambiar la hora",
+          "rowSpan": "Mejor noche (6 ciclos)"
+        },
+        "stages": {
+          "title": "Fases del sueño ciclo a ciclo",
+          "subtitle": "Cada columna es un ciclo de 90 minutos dividido en minutos de sueño N1, N2, N3 (profundo) y REM en una noche típica de un adulto sano (modelo aproximado). Arrastra el número de ciclos para ver cómo cambia la mezcla de la noche.",
+          "caption": "{n} ciclos contienen unos {deep} de sueño profundo y {rem} de sueño REM.",
+          "handle": "Arrastra para cambiar el número de ciclos",
+          "rowDeepEarly": "Sueño profundo en los 3 primeros ciclos",
+          "rowLastRem": "REM en el último ciclo"
+        },
+        "age": {
+          "title": "Tus opciones por grupo de edad",
+          "subtitle": "Las horas recomendadas por la National Sleep Foundation (verde) y las que «pueden ser adecuadas» (ámbar) para cada grupo de edad, con tus cuatro opciones como marcas. Arrastra por los grupos de edad; al principio se supone un adulto de 26 a 64 años.",
+          "caption": "{group}: se recomiendan {rec}, y {count} de tus opciones quedan dentro.",
+          "handle": "Arrastra para cambiar el grupo de edad",
+          "rowGroup": "Grupo de edad",
+          "rowGroupAssumed": "Grupo de edad (se supone adulto)",
+          "rowRec": "Recomendado (NSF 2015)",
+          "rowMay": "Puede ser adecuado",
+          "groups": {
+            "newborn": "Recién nacido 0–3 m",
+            "infant": "Lactante 4–11 m",
+            "toddler": "Niño pequeño 1–2 a",
+            "preschool": "Preescolar 3–5 a",
+            "school": "Edad escolar 6–13 a",
+            "teen": "Adolescente 14–17 a",
+            "youngAdult": "Adulto joven 18–25 a",
+            "adult": "Adulto 26–64 a",
+            "older": "Mayor 65+ a"
+          }
+        },
+        "efficiency": {
+          "title": "Indicador de eficiencia del sueño",
+          "subtitle": "La eficiencia del sueño es la parte del tiempo en la cama que realmente pasas dormido. Para la mejor opción solo depende de cuánto tardas en dormirte. Arrastra los minutos para dormirte y verás la eficiencia y el veredicto de calidad del sueño de la NSF.",
+          "caption": "Tardar {lat} en dormirte da una eficiencia del sueño de {eff} ({zone}).",
+          "handle": "Arrastra para cambiar los minutos para dormirte",
+          "rowZone": "Banda de eficiencia (NSF: 85% o más es buena)",
+          "rowLatency": "Tiempo para dormirse (NSF)",
+          "rowMax90": "Tiempo máximo para mantener un 90% de eficiencia",
+          "rowBedtime": "Hora de acostarse de la mejor opción",
+          "rowWake": "Hora de despertar de la mejor opción",
+          "zones": {
+            "low": "baja",
+            "good": "buena",
+            "excellent": "excelente"
+          },
+          "latency": {
+            "veryFast": "muy rápido (posible deuda de sueño)",
+            "good": "bueno (30 min o menos)",
+            "uncertain": "incierto (31–45 min)",
+            "poor": "malo (más de 45 min)"
+          }
+        },
+        "windDown": {
+          "title": "Cronología de preparación nocturna",
+          "subtitle": "Etapas alrededor de tu hora de acostarte: última cafeína 6 horas antes, última comida copiosa 3 horas antes, luces bajas 2 horas antes, pantallas apagadas 1 hora antes, y luego cama, inicio del sueño y despertar. Arrastra el número de ciclos para mover la noche (o la mañana).",
+          "caption": "Última cafeína antes de las {caffeine}, a la cama a las {bed}, despertar a las {wake}.",
+          "handle": "Arrastra para cambiar el número de ciclos"
+        },
+        "trio": {
+          "title": "¿Y si tus ciclos son más cortos o más largos?",
+          "subtitle": "El ciclo de 90 minutos es un promedio; los ciclos reales duran unos 70–120 minutos. Compara la mejor opción con ciclos más cortos, estándar y más largos, y arrastra la diferencia.",
+          "caption": "Ciclos {dx} más cortos o más largos desplazan la {what} en {shift}.",
+          "handle": "Arrastra para cambiar la diferencia de duración del ciclo",
+          "rowShift": "Desplazamiento de la {what}",
+          "rowRange": "Duración típica del ciclo en adultos",
+          "bedtime": "hora de acostarse",
+          "wake": "hora de despertar"
+        },
+        "formula": {
+          "title": "La fórmula, opción por opción",
+          "subtitle": "Cada sugerencia es tu hora, menos (o más) los minutos para dormirte, menos (o más) ciclos completos de 90 minutos. Arrastra los minutos para dormirte: cambia el dato de la calculadora y todos los resultados de la página.",
+          "captionWake": "Hora de acostarse = hora de despertar − {lat} − ciclos × 90 min; la mejor hora de acostarse es {best}.",
+          "captionBed": "Hora de despertar = hora de acostarse + {lat} + ciclos × 90 min; la mejor hora de despertar es {best}.",
+          "handle": "Arrastra para cambiar los minutos para dormirte",
+          "rowLatency": "Minutos para dormirte (tu dato)",
+          "time": "tu hora",
+          "fallAsleep": "dormirse",
+          "cycles": "ciclos × 90",
+          "bedtime": "acostarse",
+          "wake": "despertar"
+        }
       }
     },
     "body-fat-calculator": {

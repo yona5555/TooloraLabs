@@ -23864,6 +23864,148 @@
         "caption": "Das Tempo jedes Abschnitts, damit du siehst, ob die Anstrengung gleichmäßig war oder du schneller/langsamer wurdest.",
         "ariaLabel": "Balkendiagramm zum Vergleich des Tempos je Zeitabschnitt",
         "legend": "Schnellster Abschnitt: {fastest} · Langsamster Abschnitt: {slowest}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Hinweise",
+          "assumptions": "Der Pace-Umrechner hat keine Strecke, daher verwenden seine Ergebnistabelle, die 3D-Bahn und die Indikatorkarten eine 10-km-Belastung im eingegebenen Tempo (angenommen). Die Zeitleiste für den Wettkampftag beginnt um 08:00, und die Zielkarte startet mit einer um 5 % schnelleren Zeit als Ihre; beides sind veränderbare Startwerte, keine Empfehlungen. Die Belastungszonen sind die eigene Tempo-Skala dieses Tools, kein medizinischer oder trainingswissenschaftlicher Standard.",
+          "riegel": "Riegel-Prognosen (T2 = T1 × (D2 / D1)^1.06) setzen ein passendes Training für die Zielstrecke voraus; sie sind jenseits etwa der vierfachen bekannten Strecke und bei Belastungen unter 3–4 Minuten am wenigsten verlässlich."
+        },
+        "ladder": {
+          "title": "Wettkampfzeiten bei dieser Leistung",
+          "intro": "Jede Standardstrecke bei {pace}: mit gleichmäßigem Tempo (blau) und nach der Riegel-Prognose (bernstein).",
+          "even": "Gleichmäßiges Tempo",
+          "riegel": "Riegel-Prognose"
+        },
+        "common": {
+          "paceAxis": "Pace",
+          "distanceAxis": "Strecke",
+          "races": {
+            "mile": "Meile",
+            "5k": "5 km",
+            "10k": "10 km",
+            "15k": "15 km",
+            "half": "Halbmarathon",
+            "30k": "30 km",
+            "marathon": "Marathon"
+          }
+        },
+        "result": {
+          "groupInputs": "Ihre Leistung",
+          "groupSegments": "Pace je Abschnitt",
+          "groupPace": "Pace",
+          "groupSpeed": "Geschwindigkeit",
+          "groupCheckpoints": "Verstrichene Zeit unterwegs",
+          "groupEven": "Wettkampfzeiten bei dieser Pace",
+          "groupRiegel": "Riegel-Prognosen aus dieser Leistung",
+          "given": "gegeben",
+          "assumed": "angenommen",
+          "refDistance": "Referenzstrecke",
+          "predictedPace": "Prognostizierte Pace",
+          "overallPace": "Gesamt-Pace",
+          "per400": "Pro 400-m-Runde",
+          "per100": "Pro 100 m",
+          "mps": "Geschwindigkeit (Meter pro Sekunde)",
+          "checkpoint": "Bei {pct} % der Strecke",
+          "colQuantity": "Größe",
+          "colFormula": "Formel",
+          "colValue": "Wert",
+          "hint": "Ziehen, um die Bahn zu drehen",
+          "caption": "Eine 400-m-Standardbahn mit einem Läufer, der sie mit {pace} umrundet (25-fach beschleunigt dargestellt). Die Pfosten markieren alle 100 m mit der Durchgangszeit; eine Runde dauert {lap}."
+        },
+        "riegel": {
+          "title": "Prognosekurve für Wettkämpfe",
+          "subtitle": "Die bernsteinfarbene Kurve ist Riegels Prognose Ihrer Pace für jede Strecke von 1 bis 50 km (T2 = T1 × (D2 / D1)^1.06); die gestrichelte blaue Linie ist Ihre aktuelle Pace, gleichmäßig gehalten. Ziehen Sie entlang der Leiste, um einen Zielwettkampf zu wählen und seine prognostizierte Zeit abzulesen.",
+          "caption": "Prognose für {d}: {t} bei {p}.",
+          "handle": "Ziehen, um die Zielstrecke zu wählen",
+          "rowKnown": "Bekannte Leistung (D₁ · T₁)",
+          "rowPace": "Prognostizierte Pace",
+          "rowEven": "Gleiche Strecke bei gleichmäßiger Pace",
+          "rowFatigue": "Ermüdungskosten (Prognose − gleichmäßige Pace)",
+          "you": "Sie"
+        },
+        "gauge": {
+          "title": "Geschwindigkeit auf der Belastungsskala",
+          "subtitle": "Die Laufgeschwindigkeit auf den Belastungszonen dieses Tools, mit den Geschwindigkeiten der Marathon-Weltrekorde der Männer und Frauen aus der Tabelle unten. Die blaue Markierung ist Ihre Geschwindigkeit; ziehen Sie die Nadel, um eine andere zu testen und die Zielzeit für Ihre Strecke zu sehen.",
+          "caption": "{v} entspricht {p}: {zone}.",
+          "handle": "Ziehen, um die Geschwindigkeit zu ändern",
+          "rowSpeed": "Geschwindigkeit",
+          "rowZone": "Belastungszone",
+          "rowFinish": "Zielzeit",
+          "rowVsYours": "Im Vergleich zu Ihrer Zeit",
+          "rowWr": "Anteil an der Geschwindigkeit des Marathon-Weltrekords der Männer",
+          "yours": "Ihre"
+        },
+        "splits": {
+          "title": "Tempoplan nach Abschnitten",
+          "subtitle": "Ihre Strecke in gleiche Abschnitte geteilt; jeder Balken ist die Zeit des Abschnitts, darüber seine Pace. Ziehen Sie in Richtung Negativ-Split (schneller ins Ziel) oder Positiv-Split (langsamer werden): Die Gesamtzeit bleibt gleich.",
+          "caption": "{kind}: erster Abschnitt {first}, letzter Abschnitt {last}, gleiche Gesamtzeit {total}.",
+          "handle": "Ziehen, um die Aufteilung zu ändern",
+          "axis": "Zeit pro Abschnitt",
+          "rowFirst": "Pace im ersten Abschnitt",
+          "rowLast": "Pace im letzten Abschnitt",
+          "rowHalf1": "Erste Hälfte",
+          "rowHalf2": "Zweite Hälfte",
+          "rowTotal": "Gesamtzeit",
+          "rowKind": "Strategie",
+          "negative": "Negativ-Split",
+          "positive": "Positiv-Split",
+          "even": "Gleichmäßig"
+        },
+        "rulers": {
+          "title": "Kilometer und Meilen nebeneinander",
+          "subtitle": "Eine Strecke zweimal im gleichen Maßstab gezeichnet: oben die Kilometer, unten die Meilen, jede Markierung mit Ihrer verstrichenen Zeit beim Passieren. Ziehen Sie, um die Strecke zu ändern.",
+          "caption": "{km} sind {mi}; in Ihrer Pace dauert das {t}.",
+          "handle": "Ziehen, um die Strecke zu ändern",
+          "rowPaceKm": "Pace pro Kilometer",
+          "rowAt": "Verstrichen bei",
+          "kmRuler": "Kilometer",
+          "miRuler": "Meilen"
+        },
+        "trio": {
+          "title": "Ein paar Sekunden schneller oder langsamer",
+          "subtitle": "Ihre Zielzeit bei Ihrer Pace, etwas schneller und etwas langsamer. Ziehen Sie, um festzulegen, wie viele Sekunden pro Einheit Sie hinzufügen oder abziehen.",
+          "caption": "{dx} auf {d} verändert die Zielzeit um {delta}.",
+          "handle": "Ziehen, um den Pace-Unterschied zu ändern",
+          "axis": "Zielzeit",
+          "rowNow": "Ihre Pace",
+          "rowSpeedSpan": "Geschwindigkeitsbereich"
+        },
+        "fatigue": {
+          "title": "Wettkampfzeiten nach Ermüdungsexponent",
+          "subtitle": "Prognostizierte Zeiten für jede Standardstrecke aus Ihrer Leistung. Der Exponent bestimmt, wie stark Sie mit wachsender Strecke langsamer werden: 1,00 heißt kein Tempoverlust (blaue Markierung), 1,06 ist Riegels Standard (gestrichelte Markierung). Ziehen Sie, um einen anderen Exponenten zu testen.",
+          "caption": "Mit dem Exponenten {e} liegt Ihre Marathonprognose bei {t}.",
+          "handle": "Ziehen, um den Ermüdungsexponenten zu ändern",
+          "rowExponent": "Ermüdungsexponent",
+          "rowStandard": "Marathon mit Standardexponent",
+          "rowDiff": "Abweichung vom Standard",
+          "rowEven": "Marathon bei gleichmäßiger Pace",
+          "evenShort": "gleichmäßig"
+        },
+        "timeline": {
+          "title": "Zeitleiste für den Wettkampftag",
+          "subtitle": "Die Uhrzeit beim Start, nach jedem Viertel der Strecke und im Ziel. Der Start ist auf 08:00 gesetzt (angenommen); ziehen Sie ihn auf Ihre Startzeit.",
+          "caption": "Mit Start um {start} sind Sie um {finish} im Ziel.",
+          "handle": "Ziehen, um die Startzeit zu ändern",
+          "rowStart": "Start",
+          "rowDuration": "Dauer",
+          "gun": "Start"
+        },
+        "goal": {
+          "title": "Ihre Zeit im Vergleich zum Ziel",
+          "subtitle": "Eine Waage zwischen Ihrer Zeit (blau) und einer Zielzeit (bernstein): Die längere Zeit sinkt. Das Ziel startet 5 % schneller als Ihre Zeit; ziehen Sie es, um die nötige Pace und die Änderung pro Einheit zu sehen.",
+          "caption": "Ein Ziel von {goal} erfordert {pace}: {status}.",
+          "handle": "Ziehen, um die Zielzeit zu ändern",
+          "rowYours": "Ihre Zeit",
+          "rowGoal": "Zielzeit",
+          "rowPaceChange": "Nötige Pace-Änderung",
+          "rowSpeedChange": "Nötige Geschwindigkeitsänderung",
+          "faster": "schneller als jetzt",
+          "slower": "langsamer als jetzt",
+          "equal": "gleich wie jetzt",
+          "panYours": "Ihre Zeit",
+          "panGoal": "Ziel"
+        }
       }
     },
     "random-number-generator": {
@@ -27141,6 +27283,178 @@
       "clockDiagram": {
         "ariaLabel": "24-Stunden-Uhr mit jeder empfohlenen Uhrzeit",
         "caption": "Empfohlene Uhrzeit: {time}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Hinweise",
+          "heuristic": "Die 90-Minuten-Zyklusregel ist eine verbreitete Faustregel, keine persönliche Messung der Schlafphasen: Echte Zyklen dauern etwa 70–120 Minuten und ändern sich von Nacht zu Nacht. Dieses Tool dient der allgemeinen Information und ist keine medizinische Beratung; wenden Sie sich bei anhaltenden Schlafproblemen an einen Arzt oder Schlafmediziner.",
+          "assumptions": "Annahmen der Grafiken (jeweils dort gekennzeichnet): Die Phasenminuten pro Zyklus folgen einer typischen Nacht eines gesunden Erwachsenen (ungefähres Lehrbuchmodell); Altersvergleiche gehen von einem Erwachsenen zwischen 26 und 64 Jahren aus, bis Sie eine andere Gruppe wählen (National Sleep Foundation, 2015); die Grenzwerte der Schlafqualität folgen dem NSF-Konsens (Ohayon et al., 2017); die Zeiten zum Abschalten sind gängige Empfehlungen der Schlafhygiene (letztes Koffein 6 Stunden vor dem Schlafengehen, Drake et al., 2013)."
+        },
+        "ladder": {
+          "title": "Übliche Zeiten auf einen Blick",
+          "introWake": "Schlafenszeiten für übliche Aufwachzeiten, mit {latency} zum Einschlafen. Klicken Sie auf eine Zeile, um sie zu übernehmen.",
+          "introBed": "Aufwachzeiten für übliche Schlafenszeiten, mit {latency} zum Einschlafen. Klicken Sie auf eine Zeile, um sie zu übernehmen.",
+          "colWake": "Aufwachen",
+          "colBed": "Schlafenszeit",
+          "col6": "6 Zyklen",
+          "col5": "5 Zyklen",
+          "note": "6 Zyklen ergeben 9 h und 5 Zyklen 7,5 h Schlaf: Beide liegen im empfohlenen Bereich für Erwachsene von 7–9 h."
+        },
+        "result": {
+          "groupInputs": "Ihre Eingaben",
+          "given": "gegeben",
+          "standard": "Standard",
+          "cycleLength": "Länge eines Schlafzyklus",
+          "groupAsleep": "Schlafdauer je Option",
+          "groupNight": "Ihre Nacht mit der besten Option ({count} Zyklen)",
+          "inBed": "Ins Bett",
+          "asleepAt": "Eingeschlafen um",
+          "wakeAt": "Aufwachen",
+          "timeInBed": "Zeit im Bett",
+          "efficiency": "Schlafeffizienz",
+          "awakeWindow": "Wach bis zur nächsten Schlafenszeit",
+          "groupStages": "Schlafphasen, beste Option (typisches Modell, ungefähr)",
+          "groupAge": "Im Vergleich zum Erwachsenenbereich (NSF 7–9 h, Erwachsener angenommen)",
+          "groupWindDown": "Abendliches Abschalten, beste Option (gängige Empfehlungen)",
+          "colQuantity": "Größe",
+          "colFormula": "Formel",
+          "colValue": "Wert",
+          "hint": "Ziehen, um die Nachtuhr zu drehen",
+          "caption": "Die Nachtuhr für {time}: Mitternacht liegt oben, die Zeit läuft im Uhrzeigersinn. Jeder Ring ist eine Option (außen = 6 Zyklen, innen = 3); Bernstein ist die Einschlafzeit und jeder Block ein 90-Minuten-Zyklus, sodass jedes Aufwachen zwischen zwei Zyklen liegt."
+        },
+        "common": {
+          "stages": {
+            "wake": "Wach",
+            "n1": "N1",
+            "n2": "N2",
+            "n3": "N3",
+            "rem": "REM"
+          },
+          "stageLong": {
+            "n1": "N1 (Leichtschlaf)",
+            "n2": "N2 (Leichtschlaf)",
+            "n3": "N3 (Tiefschlaf)",
+            "rem": "REM (Traumschlaf)"
+          },
+          "verdict": {
+            "rec": "Empfohlen",
+            "may": "Möglicherweise angemessen",
+            "no": "Nicht empfohlen"
+          },
+          "stations": {
+            "caffeine": "Letztes Koffein",
+            "meal": "Letzte große Mahlzeit",
+            "dim": "Licht dimmen",
+            "screens": "Bildschirme aus",
+            "bed": "Ins Bett",
+            "asleep": "Eingeschlafen",
+            "wake": "Aufwachen"
+          }
+        },
+        "hypno": {
+          "title": "Hypnogramm der Nacht: Wann wachen Sie auf?",
+          "subtitle": "Eine typische Nacht ab dem Einschlafen: Jeder 90-Minuten-Zyklus sinkt vom Leichtschlaf N1/N2 in den Tiefschlaf N3 und steigt wieder bis zum REM-Schlaf; der Tiefschlaf nimmt ab, der REM-Schlaf zum Morgen hin zu. Ziehen Sie die Aufwachmarke: Ein Treffer auf das grüne Zyklusende fühlt sich am leichtesten an, Aufwachen aus dem Tiefschlaf N3 bringt die stärkste Benommenheit.",
+          "caption": "Aufwachen um {time} erwischt Sie in {stage}: Die erwartete Benommenheit ist {feel}.",
+          "handle": "Ziehen, um die Schlafdauer zu ändern",
+          "rowCycles": "Vollendete Zyklen + Minuten im nächsten",
+          "rowStage": "Phase beim Aufwachen",
+          "rowNearest": "Nächstes Zyklusende",
+          "rowFeel": "Erwartete Benommenheit (Schlafträgheit)",
+          "boundary": "zwischen zwei Zyklen",
+          "feel": {
+            "low": "gering",
+            "moderate": "mäßig",
+            "high": "hoch"
+          }
+        },
+        "dial": {
+          "title": "24-Stunden-Nachtzifferblatt",
+          "subtitle": "Ihre Optionen auf einer 24-Stunden-Uhr mit Mitternacht oben. Jeder Ring ist eine Option, von 6 Zyklen (außen) bis 3 (innen); Bernstein ist die Einschlafzeit. Ziehen Sie den Zeiger um das Zifferblatt, um Ihre Zeit zu ändern: Rechner, Ergebnistabelle und 3D-Uhr folgen.",
+          "captionWake": "Beim Aufwachen um {time} ist die beste Schlafenszeit {best}.",
+          "captionBed": "Beim Schlafengehen um {time} ist die beste Aufwachzeit {best}.",
+          "handle": "Um das Zifferblatt ziehen, um die Zeit zu ändern",
+          "rowSpan": "Beste Nacht (6 Zyklen)"
+        },
+        "stages": {
+          "title": "Schlafphasen Zyklus für Zyklus",
+          "subtitle": "Jede Säule ist ein 90-Minuten-Zyklus, aufgeteilt in Minuten N1-, N2-, N3- (Tief-) und REM-Schlaf einer typischen Nacht eines gesunden Erwachsenen (ungefähres Modell). Ziehen Sie die Zahl der Zyklen, um zu sehen, wie sich die Zusammensetzung der Nacht ändert.",
+          "caption": "{n} Zyklen enthalten etwa {deep} Tiefschlaf und {rem} REM-Schlaf.",
+          "handle": "Ziehen, um die Zahl der Zyklen zu ändern",
+          "rowDeepEarly": "Tiefschlaf in den ersten 3 Zyklen",
+          "rowLastRem": "REM im letzten Zyklus"
+        },
+        "age": {
+          "title": "Ihre Optionen nach Altersgruppe",
+          "subtitle": "Die von der National Sleep Foundation empfohlenen Stunden (grün) und die „möglicherweise angemessenen“ Stunden (bernstein) je Altersgruppe, mit Ihren vier Optionen als Markierungen. Ziehen Sie über die Altersgruppen; zunächst wird ein Erwachsener zwischen 26 und 64 Jahren angenommen.",
+          "caption": "{group}: {rec} empfohlen, und {count} Ihrer Optionen liegen darin.",
+          "handle": "Ziehen, um die Altersgruppe zu ändern",
+          "rowGroup": "Altersgruppe",
+          "rowGroupAssumed": "Altersgruppe (Erwachsener angenommen)",
+          "rowRec": "Empfohlen (NSF 2015)",
+          "rowMay": "Möglicherweise angemessen",
+          "groups": {
+            "newborn": "Neugeborenes 0–3 Mon.",
+            "infant": "Säugling 4–11 Mon.",
+            "toddler": "Kleinkind 1–2 J.",
+            "preschool": "Vorschulkind 3–5 J.",
+            "school": "Schulkind 6–13 J.",
+            "teen": "Jugendlicher 14–17 J.",
+            "youngAdult": "Junger Erwachsener 18–25 J.",
+            "adult": "Erwachsener 26–64 J.",
+            "older": "Ältere 65+ J."
+          }
+        },
+        "efficiency": {
+          "title": "Anzeige der Schlafeffizienz",
+          "subtitle": "Die Schlafeffizienz ist der Anteil der Bettzeit, den Sie tatsächlich schlafen. Bei der besten Option hängt sie nur davon ab, wie lange Sie zum Einschlafen brauchen. Ziehen Sie die Einschlafminuten, um die Effizienz und das NSF-Urteil zur Schlafqualität zu sehen.",
+          "caption": "Wer {lat} zum Einschlafen braucht, erreicht {eff} Schlafeffizienz ({zone}).",
+          "handle": "Ziehen, um die Einschlafminuten zu ändern",
+          "rowZone": "Effizienzbereich (NSF: ab 85 % gut)",
+          "rowLatency": "Einschlafdauer (NSF)",
+          "rowMax90": "Längste Dauer für 90 % Effizienz",
+          "rowBedtime": "Schlafenszeit der besten Option",
+          "rowWake": "Aufwachzeit der besten Option",
+          "zones": {
+            "low": "niedrig",
+            "good": "gut",
+            "excellent": "ausgezeichnet"
+          },
+          "latency": {
+            "veryFast": "sehr schnell (mögliches Schlafdefizit)",
+            "good": "gut (30 min oder weniger)",
+            "uncertain": "unklar (31–45 min)",
+            "poor": "schlecht (über 45 min)"
+          }
+        },
+        "windDown": {
+          "title": "Zeitleiste zum abendlichen Abschalten",
+          "subtitle": "Stationen rund um Ihre Schlafenszeit: letztes Koffein 6 Stunden vorher, letzte große Mahlzeit 3 Stunden vorher, Licht dimmen 2 Stunden vorher, Bildschirme aus 1 Stunde vorher, dann Bett, Einschlafen und Aufwachen. Ziehen Sie die Zahl der Zyklen, um den Abend (oder den Morgen) zu verschieben.",
+          "caption": "Letztes Koffein bis {caffeine}, ins Bett um {bed}, aufwachen um {wake}.",
+          "handle": "Ziehen, um die Zahl der Zyklen zu ändern"
+        },
+        "trio": {
+          "title": "Was, wenn Ihre Zyklen kürzer oder länger sind?",
+          "subtitle": "Der 90-Minuten-Zyklus ist ein Durchschnitt; echte Zyklen dauern etwa 70–120 Minuten. Vergleichen Sie die beste Option mit kürzeren, Standard- und längeren Zyklen und ziehen Sie den Unterschied.",
+          "caption": "Um {dx} kürzere oder längere Zyklen verschieben die {what} um {shift}.",
+          "handle": "Ziehen, um den Unterschied der Zykluslänge zu ändern",
+          "rowShift": "Verschiebung der {what}",
+          "rowRange": "Typische Zykluslänge bei Erwachsenen",
+          "bedtime": "Schlafenszeit",
+          "wake": "Aufwachzeit"
+        },
+        "formula": {
+          "title": "Die Formel, Option für Option",
+          "subtitle": "Jeder Vorschlag ist Ihre Zeit minus (oder plus) die Einschlafminuten minus (oder plus) ganze 90-Minuten-Zyklen. Ziehen Sie die Einschlafminuten: Das ändert die Eingabe des Rechners und jedes Ergebnis auf der Seite.",
+          "captionWake": "Schlafenszeit = Aufwachzeit − {lat} − Zyklen × 90 min; die beste Schlafenszeit ist {best}.",
+          "captionBed": "Aufwachzeit = Schlafenszeit + {lat} + Zyklen × 90 min; die beste Aufwachzeit ist {best}.",
+          "handle": "Ziehen, um die Einschlafminuten zu ändern",
+          "rowLatency": "Einschlafminuten (Ihre Eingabe)",
+          "time": "Ihre Zeit",
+          "fallAsleep": "Einschlafen",
+          "cycles": "Zyklen × 90",
+          "bedtime": "Schlafenszeit",
+          "wake": "Aufwachen"
+        }
       }
     },
     "body-fat-calculator": {

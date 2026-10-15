@@ -18,9 +18,10 @@
 - tdee-calculator (round 2)
 - macro-calculator (round 3)
 - ideal-weight-calculator (round 3)
+- sleep-calculator (round 4)
+- pace-calculator (round 4)
 
 ## Remaining
-- sleep-calculator, pace-calculator
 - pregnancy-calculator, due-date-calculator
 - ovulation-calculator
 
@@ -40,3 +41,6 @@
 - Unused old keys left: macro diagram.ariaLabel, quickReference.*, education.intro.carbGauge.*, education.goals.comparisonChart.*; ideal-weight formulaDiagram.*, heightCurve.*, education.intro.rangeGauge.*, aboveFold.placeholder, aboveFold.disclaimer.
 - Fixed two round-1 lint errors (BodyFatCalculator setState in effect; HeartScene3D useMemo arg).
 - Build note: next build is safe while the dev server runs on 3001 (Next 16 keeps dev output separate).
+- Round 4 (sleep, pace): Sleep cards copy small SvgTrack/Card/useSharedStepper helpers from MacroCards (not exported there); final round could export them from macro-calculator and import instead. Sleep ladder "Yours" badge dropped (wrapped at 320px); selected row still highlighted. Sleep assumes adult 26-64 until an age group is picked; stage minutes per cycle are an approximate textbook model; wind-down offsets: caffeine 6 h, meal 3 h, lights 2 h, screens 1 h.
+- Pace: WorldRecordsTable kept (education data table, not a drawing). Converter mode has no distance: result/cards use a 10 km effort (labelled). Timeline starts 08:00; goal card starts 5% faster. Multipoint with miles now shows segment distance/pace in miles (old table showed km values labelled as miles; display-only fix). PaceShareExportModal warns about duplicate React keys (rows "Pace"/"Speed" twice), pre-existing, left as is.
+- Unused old keys left: sleep diagram.*, quickReference.*, byAgeDiagram.*, clockDiagram.*, result.cycles; pace quickReference.*, gauge.ariaLabel/ariaLabelEmpty, multipointSplitsChart.*, aboveFold.conceptDiagram.*.

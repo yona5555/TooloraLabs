@@ -4,9 +4,17 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import PaceConceptDiagram from "./PaceConceptDiagram";
 import WorldRecordsTable from "./WorldRecordsTable";
-import PaceRangeGauge from "./PaceRangeGauge";
+import {
+  PaceFatigueCard,
+  PaceGoalCard,
+  PaceRiegelCard,
+  PaceRulersCard,
+  PaceSensitivityCard,
+  PaceSpeedGaugeCard,
+  PaceSplitsCard,
+  PaceTimelineCard,
+} from "./PaceCards";
 
 type ExampleRow = { calculation: string; result: string };
 type ApplicationItem = { title: string; description: string };
@@ -14,6 +22,7 @@ type RecordRow = { event: string; menTime: string; menHolder: string; menYear: s
 
 export default async function PaceEducation() {
   const t = await getTranslations("tools.pace-calculator.education");
+  const tv = await getTranslations("tools.pace-calculator.visuals");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const applicationItems = t.raw("applications.items") as ApplicationItem[];
@@ -23,12 +32,20 @@ export default async function PaceEducation() {
 
   return (
     <EncyclopediaPaper>
-      <PaceRangeGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <PaceRiegelCard side="visual-left" />
+        <PaceSpeedGaugeCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <PaceConceptDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <PaceSplitsCard side="visual-left" />
+          <PaceRulersCard side="table-left" />
+          <PaceSensitivityCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -59,6 +76,11 @@ export default async function PaceEducation() {
           T₂ = T₁ × (D₂ / D₁)^1.06
         </p>
         <p>{t("finishTimeFormula.paragraph2")}</p>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <PaceFatigueCard side="table-left" />
+          <PaceTimelineCard side="visual-left" />
+          <PaceGoalCard side="table-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("worldRecords.title")}>
@@ -110,6 +132,13 @@ export default async function PaceEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={tv("notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tv("notices.assumptions")}</li>
+          <li>{tv("notices.riegel")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

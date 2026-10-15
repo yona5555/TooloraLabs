@@ -24215,6 +24215,148 @@
         "caption": "Pace for each segment, so you can see whether the effort was even, negative-split, or slowed down along the way.",
         "ariaLabel": "Bar chart comparing pace across each timed segment",
         "legend": "Fastest segment: {fastest} · Slowest segment: {slowest}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Notices",
+          "assumptions": "The Pace Converter has no distance, so its Result table, 3D track and indicator cards use a 10 km effort at the entered pace (assumed). The race-day timeline starts at 08:00 and the goal card starts 5% faster than your time; both are adjustable starting values, not advice. The effort zones are this tool's own pace scale, not a medical or coaching standard.",
+          "riegel": "Riegel predictions (T2 = T1 × (D2 / D1)^1.06) assume you train properly for the target distance; they are least reliable beyond about four times the known distance and for efforts under 3–4 minutes."
+        },
+        "ladder": {
+          "title": "Race Times at This Effort",
+          "intro": "Every standard race at {pace}: even pace (blue) and the Riegel prediction (amber).",
+          "even": "Even pace",
+          "riegel": "Riegel prediction"
+        },
+        "common": {
+          "paceAxis": "Pace",
+          "distanceAxis": "Distance",
+          "races": {
+            "mile": "Mile",
+            "5k": "5K",
+            "10k": "10K",
+            "15k": "15K",
+            "half": "Half marathon",
+            "30k": "30K",
+            "marathon": "Marathon"
+          }
+        },
+        "result": {
+          "groupInputs": "Your effort",
+          "groupSegments": "Split paces",
+          "groupPace": "Pace",
+          "groupSpeed": "Speed",
+          "groupCheckpoints": "Elapsed time on the way",
+          "groupEven": "Race times at this pace",
+          "groupRiegel": "Riegel predictions from this effort",
+          "given": "given",
+          "assumed": "assumed",
+          "refDistance": "Reference distance",
+          "predictedPace": "Predicted pace",
+          "overallPace": "Overall pace",
+          "per400": "Per 400 m lap",
+          "per100": "Per 100 m",
+          "mps": "Speed (metres per second)",
+          "checkpoint": "At {pct}% of the distance",
+          "colQuantity": "Quantity",
+          "colFormula": "Formula",
+          "colValue": "Value",
+          "hint": "Drag to rotate the track",
+          "caption": "A standard 400 m track with a runner lapping it at {pace} (shown 25× faster). The posts mark every 100 m with its split time; one lap takes {lap}."
+        },
+        "riegel": {
+          "title": "Race Predictor Curve",
+          "subtitle": "The amber curve is Riegel's prediction of your pace at every distance from 1 to 50 km (T2 = T1 × (D2 / D1)^1.06); the dashed blue line is your current pace held evenly. Drag along the track to pick a target race and read its predicted time.",
+          "caption": "Predicted {d}: {t} at {p}.",
+          "handle": "Drag to choose the target distance",
+          "rowKnown": "Known effort (D₁ · T₁)",
+          "rowPace": "Predicted pace",
+          "rowEven": "Same distance at your even pace",
+          "rowFatigue": "Fatigue cost (prediction − even pace)",
+          "you": "You"
+        },
+        "gauge": {
+          "title": "Speed on the Effort Scale",
+          "subtitle": "Running speed on this tool's effort zones, with the men's and women's marathon world-record speeds from the table below. The blue tick is your speed; drag the needle to try another speed and see the finish time for your distance.",
+          "caption": "{v} is {p}: {zone}.",
+          "handle": "Drag to change the speed",
+          "rowSpeed": "Speed",
+          "rowZone": "Effort zone",
+          "rowFinish": "Finish time",
+          "rowVsYours": "Compared with your time",
+          "rowWr": "Share of men's marathon world-record speed",
+          "yours": "yours"
+        },
+        "splits": {
+          "title": "Pacing Plan by Segment",
+          "subtitle": "Your distance cut into equal segments, each bar the time for that segment with its pace on top. Drag towards a negative split (finishing faster) or a positive split (slowing down): the total time stays the same.",
+          "caption": "{kind}: first segment {first}, last segment {last}, same total {total}.",
+          "handle": "Drag to change the split",
+          "axis": "Time per segment",
+          "rowFirst": "First segment pace",
+          "rowLast": "Last segment pace",
+          "rowHalf1": "First half",
+          "rowHalf2": "Second half",
+          "rowTotal": "Total time",
+          "rowKind": "Strategy",
+          "negative": "Negative split",
+          "positive": "Positive split",
+          "even": "Even split"
+        },
+        "rulers": {
+          "title": "Kilometres and Miles Side by Side",
+          "subtitle": "One distance drawn twice to the same scale: kilometre markers on top and mile markers below, each with your elapsed time when you pass it. Drag to change the distance.",
+          "caption": "{km} is {mi}; at your pace it takes {t}.",
+          "handle": "Drag to change the distance",
+          "rowPaceKm": "Pace per kilometre",
+          "rowAt": "Elapsed at",
+          "kmRuler": "Kilometres",
+          "miRuler": "Miles"
+        },
+        "trio": {
+          "title": "A Few Seconds Faster or Slower",
+          "subtitle": "Your finish time at your pace, a little faster and a little slower. Drag to change how many seconds per unit you add or remove.",
+          "caption": "{dx} over {d} changes the finish time by {delta}.",
+          "handle": "Drag to change the pace difference",
+          "axis": "Finish time",
+          "rowNow": "Your pace",
+          "rowSpeedSpan": "Speed range"
+        },
+        "fatigue": {
+          "title": "Race Times by Fatigue Exponent",
+          "subtitle": "Predicted times for every standard race from your effort. The exponent sets how much you slow down as the distance grows: 1.00 is no slowing (blue mark), 1.06 is Riegel's standard (dashed mark). Drag to try another exponent.",
+          "caption": "With exponent {e} your marathon prediction is {t}.",
+          "handle": "Drag to change the fatigue exponent",
+          "rowExponent": "Fatigue exponent",
+          "rowStandard": "Marathon at the standard exponent",
+          "rowDiff": "Difference from the standard",
+          "rowEven": "Marathon at even pace",
+          "evenShort": "even"
+        },
+        "timeline": {
+          "title": "Race-Day Timeline",
+          "subtitle": "Clock time at the start, at each quarter of the distance and at the finish. The start begins at 08:00 (assumed); drag it to your start time.",
+          "caption": "Starting at {start}, you finish at {finish}.",
+          "handle": "Drag to change the start time",
+          "rowStart": "Start",
+          "rowDuration": "Duration",
+          "gun": "Start"
+        },
+        "goal": {
+          "title": "Your Time against a Goal",
+          "subtitle": "A balance between your time (blue) and a goal time (amber): the longer time sinks. The goal starts 5% faster than your time; drag it to see the pace you need and the change per unit.",
+          "caption": "A {goal} goal needs {pace}: {status}.",
+          "handle": "Drag to change the goal time",
+          "rowYours": "Your time",
+          "rowGoal": "Goal time",
+          "rowPaceChange": "Pace change needed",
+          "rowSpeedChange": "Speed change needed",
+          "faster": "faster than now",
+          "slower": "slower than now",
+          "equal": "same as now",
+          "panYours": "Your time",
+          "panGoal": "Goal"
+        }
       }
     },
     "random-number-generator": {
@@ -27141,6 +27283,178 @@
       "clockDiagram": {
         "ariaLabel": "24-hour clock showing each recommended time",
         "caption": "Recommended time: {time}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Notices",
+          "heuristic": "The 90-minute cycle rule is a popular heuristic, not a personal sleep-stage measurement: real cycles run about 70–120 minutes and change from night to night. This tool is for general information and is not medical advice; see a doctor or sleep specialist about persistent sleep problems.",
+          "assumptions": "Assumptions used by the visuals (labelled where they appear): stage minutes per cycle follow a typical healthy-adult night (approximate textbook model); age comparisons assume an adult aged 26–64 until you pick another group (National Sleep Foundation, 2015); sleep-quality cut-offs follow the NSF consensus (Ohayon et al., 2017); wind-down times are common sleep-hygiene guidance (last caffeine 6 hours before bed, Drake et al., 2013)."
+        },
+        "ladder": {
+          "title": "Common Times at a Glance",
+          "introWake": "Bedtimes for common wake-up times, allowing {latency} to fall asleep. Click a row to use it.",
+          "introBed": "Wake-up times for common bedtimes, allowing {latency} to fall asleep. Click a row to use it.",
+          "colWake": "Wake up",
+          "colBed": "Bedtime",
+          "col6": "6 cycles",
+          "col5": "5 cycles",
+          "note": "6 cycles give 9 h and 5 cycles give 7.5 h of sleep: both are inside the recommended adult range of 7–9 h."
+        },
+        "result": {
+          "groupInputs": "Your inputs",
+          "given": "given",
+          "standard": "standard",
+          "cycleLength": "Sleep cycle length",
+          "groupAsleep": "Time asleep per option",
+          "groupNight": "Your night with the best option ({count} cycles)",
+          "inBed": "Into bed",
+          "asleepAt": "Asleep at",
+          "wakeAt": "Wake up",
+          "timeInBed": "Time in bed",
+          "efficiency": "Sleep efficiency",
+          "awakeWindow": "Awake until the next bedtime",
+          "groupStages": "Sleep stages, best option (typical model, approximate)",
+          "groupAge": "Against the adult range (NSF 7–9 h, adult assumed)",
+          "groupWindDown": "Evening wind-down, best option (common guidance)",
+          "colQuantity": "Quantity",
+          "colFormula": "Formula",
+          "colValue": "Value",
+          "hint": "Drag to rotate the night clock",
+          "caption": "The night clock for {time}: midnight is at the top and time runs clockwise. Each ring is one option (outer = 6 cycles, inner = 3); amber is the time to fall asleep and each block is one 90-minute cycle, so every wake-up lands between cycles."
+        },
+        "common": {
+          "stages": {
+            "wake": "Awake",
+            "n1": "N1",
+            "n2": "N2",
+            "n3": "N3",
+            "rem": "REM"
+          },
+          "stageLong": {
+            "n1": "N1 (light sleep)",
+            "n2": "N2 (light sleep)",
+            "n3": "N3 (deep sleep)",
+            "rem": "REM (dream sleep)"
+          },
+          "verdict": {
+            "rec": "Recommended",
+            "may": "May be appropriate",
+            "no": "Not recommended"
+          },
+          "stations": {
+            "caffeine": "Last caffeine",
+            "meal": "Last big meal",
+            "dim": "Dim the lights",
+            "screens": "Screens off",
+            "bed": "Into bed",
+            "asleep": "Asleep",
+            "wake": "Wake up"
+          }
+        },
+        "hypno": {
+          "title": "Night Hypnogram: When Do You Wake?",
+          "subtitle": "A typical night from the moment you fall asleep: each 90-minute cycle dips from light N1/N2 sleep into deep N3 and climbs back to REM; deep sleep fades and REM grows towards morning. Drag the wake-up marker: landing on the green cycle end feels easiest, while waking from deep N3 brings the most grogginess.",
+          "caption": "Waking at {time} catches you in {stage}: expected grogginess is {feel}.",
+          "handle": "Drag to change how long you sleep",
+          "rowCycles": "Cycles completed + minutes into the next",
+          "rowStage": "Stage at wake-up",
+          "rowNearest": "Nearest cycle end",
+          "rowFeel": "Expected grogginess (sleep inertia)",
+          "boundary": "between cycles",
+          "feel": {
+            "low": "low",
+            "moderate": "moderate",
+            "high": "high"
+          }
+        },
+        "dial": {
+          "title": "24-Hour Night Dial",
+          "subtitle": "Your options on a 24-hour clock with midnight at the top. Each ring is one option, from 6 cycles (outer) to 3 (inner); amber is the time to fall asleep. Drag the hand around the dial to change your time: the calculator, the Result table and the 3D clock follow.",
+          "captionWake": "Waking at {time}, the best bedtime is {best}.",
+          "captionBed": "Going to bed at {time}, the best wake-up time is {best}.",
+          "handle": "Drag around the dial to change the time",
+          "rowSpan": "Best night (6 cycles)"
+        },
+        "stages": {
+          "title": "Sleep Stages Cycle by Cycle",
+          "subtitle": "Each column is one 90-minute cycle split into minutes of N1, N2, N3 (deep) and REM sleep for a typical healthy-adult night (approximate model). Drag the number of cycles to see how the night's mix changes.",
+          "caption": "{n} cycles hold about {deep} of deep sleep and {rem} of REM sleep.",
+          "handle": "Drag to change the number of cycles",
+          "rowDeepEarly": "Deep sleep in the first 3 cycles",
+          "rowLastRem": "REM in the last cycle"
+        },
+        "age": {
+          "title": "Your Options by Age Group",
+          "subtitle": "The National Sleep Foundation's recommended hours (green) and 'may be appropriate' hours (amber) for each age group, with your four options as markers. Drag across the age groups; an adult aged 26–64 is assumed at first.",
+          "caption": "{group}: {rec} is recommended, and {count} of your options fall inside it.",
+          "handle": "Drag to change the age group",
+          "rowGroup": "Age group",
+          "rowGroupAssumed": "Age group (adult assumed)",
+          "rowRec": "Recommended (NSF 2015)",
+          "rowMay": "May be appropriate",
+          "groups": {
+            "newborn": "Newborn 0–3 mo",
+            "infant": "Infant 4–11 mo",
+            "toddler": "Toddler 1–2 y",
+            "preschool": "Preschool 3–5 y",
+            "school": "School age 6–13 y",
+            "teen": "Teen 14–17 y",
+            "youngAdult": "Young adult 18–25 y",
+            "adult": "Adult 26–64 y",
+            "older": "Older adult 65+ y"
+          }
+        },
+        "efficiency": {
+          "title": "Sleep Efficiency Gauge",
+          "subtitle": "Sleep efficiency is the share of your time in bed actually spent asleep. For the best option it depends only on how long you take to fall asleep. Drag the minutes to fall asleep to see the efficiency and the NSF sleep-quality verdict.",
+          "caption": "Taking {lat} to fall asleep gives {eff} sleep efficiency ({zone}).",
+          "handle": "Drag to change the minutes to fall asleep",
+          "rowZone": "Efficiency band (NSF: 85% or more is good)",
+          "rowLatency": "Time to fall asleep (NSF)",
+          "rowMax90": "Longest time that keeps 90% efficiency",
+          "rowBedtime": "Bedtime for the best option",
+          "rowWake": "Wake-up time for the best option",
+          "zones": {
+            "low": "low",
+            "good": "good",
+            "excellent": "excellent"
+          },
+          "latency": {
+            "veryFast": "very fast (possible sleep debt)",
+            "good": "good (30 min or less)",
+            "uncertain": "uncertain (31–45 min)",
+            "poor": "poor (over 45 min)"
+          }
+        },
+        "windDown": {
+          "title": "Evening Wind-Down Timeline",
+          "subtitle": "Stations around your bedtime: last caffeine 6 hours before bed, last big meal 3 hours before, dim lights 2 hours before, screens off 1 hour before, then bed, sleep onset and wake-up. Drag the number of cycles to move the evening (or the morning).",
+          "caption": "Last caffeine by {caffeine}, into bed at {bed}, wake up at {wake}.",
+          "handle": "Drag to change the number of cycles"
+        },
+        "trio": {
+          "title": "What If Your Cycles Are Shorter or Longer?",
+          "subtitle": "The 90-minute cycle is an average; real cycles run about 70–120 minutes. Compare the best option with shorter, standard and longer cycles, and drag the difference.",
+          "caption": "Cycles {dx} shorter or longer move the {what} by {shift}.",
+          "handle": "Drag to change the cycle-length difference",
+          "rowShift": "Shift in {what}",
+          "rowRange": "Typical adult cycle length",
+          "bedtime": "bedtime",
+          "wake": "wake-up time"
+        },
+        "formula": {
+          "title": "The Formula, Option by Option",
+          "subtitle": "Every suggestion is your time, minus (or plus) the minutes to fall asleep, minus (or plus) whole 90-minute cycles. Drag the minutes to fall asleep: it changes the calculator's input and every result on the page.",
+          "captionWake": "Bedtime = wake-up time − {lat} − cycles × 90 min; the best bedtime is {best}.",
+          "captionBed": "Wake-up time = bedtime + {lat} + cycles × 90 min; the best wake-up time is {best}.",
+          "handle": "Drag to change the minutes to fall asleep",
+          "rowLatency": "Minutes to fall asleep (your input)",
+          "time": "your time",
+          "fallAsleep": "fall asleep",
+          "cycles": "cycles × 90",
+          "bedtime": "bedtime",
+          "wake": "wake-up"
+        }
       }
     },
     "body-fat-calculator": {

@@ -23864,6 +23864,148 @@
         "caption": "L'allure de chaque segment, pour voir si l'effort était régulier ou si vous avez accéléré/ralenti en cours de route.",
         "ariaLabel": "Graphique à barres comparant l'allure sur chaque segment chronométré",
         "legend": "Segment le plus rapide : {fastest} · Segment le plus lent : {slowest}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avis",
+          "assumptions": "Le convertisseur d'allure n'a pas de distance : son tableau de résultats, la piste 3D et les cartes d'indicateurs utilisent donc un effort de 10 km à l'allure saisie (hypothèse). La chronologie du jour de course commence à 08:00 et la carte d'objectif part d'un temps 5 % plus rapide que le vôtre ; ce sont des valeurs de départ modifiables, pas des conseils. Les zones d'effort sont l'échelle d'allure propre à cet outil, pas une norme médicale ni d'entraînement.",
+          "riegel": "Les prédictions de Riegel (T2 = T1 × (D2 / D1)^1.06) supposent un entraînement adapté à la distance visée ; elles sont moins fiables au-delà d'environ quatre fois la distance connue et pour des efforts de moins de 3 à 4 minutes."
+        },
+        "ladder": {
+          "title": "Temps de course à cet effort",
+          "intro": "Chaque course de référence à {pace} : à allure constante (bleu) et selon la prédiction de Riegel (ambre).",
+          "even": "Allure constante",
+          "riegel": "Prédiction de Riegel"
+        },
+        "common": {
+          "paceAxis": "Allure",
+          "distanceAxis": "Distance",
+          "races": {
+            "mile": "Mile",
+            "5k": "5 km",
+            "10k": "10 km",
+            "15k": "15 km",
+            "half": "Semi-marathon",
+            "30k": "30 km",
+            "marathon": "Marathon"
+          }
+        },
+        "result": {
+          "groupInputs": "Votre effort",
+          "groupSegments": "Allures par segment",
+          "groupPace": "Allure",
+          "groupSpeed": "Vitesse",
+          "groupCheckpoints": "Temps écoulé en chemin",
+          "groupEven": "Temps de course à cette allure",
+          "groupRiegel": "Prédictions de Riegel à partir de cet effort",
+          "given": "donnée",
+          "assumed": "hypothèse",
+          "refDistance": "Distance de référence",
+          "predictedPace": "Allure prévue",
+          "overallPace": "Allure globale",
+          "per400": "Par tour de 400 m",
+          "per100": "Aux 100 m",
+          "mps": "Vitesse (mètres par seconde)",
+          "checkpoint": "À {pct} % de la distance",
+          "colQuantity": "Grandeur",
+          "colFormula": "Formule",
+          "colValue": "Valeur",
+          "hint": "Faites glisser pour faire pivoter la piste",
+          "caption": "Une piste standard de 400 m avec un coureur qui en fait le tour à {pace} (affiché 25 fois plus vite). Les poteaux marquent chaque 100 m avec le temps de passage ; un tour dure {lap}."
+        },
+        "riegel": {
+          "title": "Courbe de prédiction des courses",
+          "subtitle": "La courbe ambre est la prédiction de Riegel de votre allure pour chaque distance de 1 à 50 km (T2 = T1 × (D2 / D1)^1.06) ; la ligne bleue en pointillés est votre allure actuelle tenue de façon constante. Faites glisser le long de la piste pour choisir une course visée et lire son temps prévu.",
+          "caption": "Prévu sur {d} : {t} à {p}.",
+          "handle": "Faites glisser pour choisir la distance visée",
+          "rowKnown": "Effort connu (D₁ · T₁)",
+          "rowPace": "Allure prévue",
+          "rowEven": "Même distance à votre allure constante",
+          "rowFatigue": "Coût de la fatigue (prédiction − allure constante)",
+          "you": "Vous"
+        },
+        "gauge": {
+          "title": "La vitesse sur l'échelle d'effort",
+          "subtitle": "La vitesse de course sur les zones d'effort de cet outil, avec les vitesses des records du monde du marathon masculin et féminin tirées du tableau ci-dessous. Le repère bleu est votre vitesse ; faites glisser l'aiguille pour essayer une autre vitesse et voir le temps final sur votre distance.",
+          "caption": "{v} correspond à {p} : {zone}.",
+          "handle": "Faites glisser pour changer la vitesse",
+          "rowSpeed": "Vitesse",
+          "rowZone": "Zone d'effort",
+          "rowFinish": "Temps final",
+          "rowVsYours": "Par rapport à votre temps",
+          "rowWr": "Part de la vitesse du record du monde masculin du marathon",
+          "yours": "la vôtre"
+        },
+        "splits": {
+          "title": "Plan d'allure par segment",
+          "subtitle": "Votre distance découpée en segments égaux ; chaque barre est le temps du segment, avec son allure au-dessus. Faites glisser vers un negative split (finir plus vite) ou un positive split (ralentir) : le temps total reste le même.",
+          "caption": "{kind} : premier segment {first}, dernier segment {last}, même total {total}.",
+          "handle": "Faites glisser pour changer la répartition",
+          "axis": "Temps par segment",
+          "rowFirst": "Allure du premier segment",
+          "rowLast": "Allure du dernier segment",
+          "rowHalf1": "Première moitié",
+          "rowHalf2": "Seconde moitié",
+          "rowTotal": "Temps total",
+          "rowKind": "Stratégie",
+          "negative": "Negative split",
+          "positive": "Positive split",
+          "even": "Allure régulière"
+        },
+        "rulers": {
+          "title": "Kilomètres et miles côte à côte",
+          "subtitle": "Une même distance dessinée deux fois à la même échelle : les kilomètres en haut, les miles en bas, chaque repère avec votre temps écoulé à son passage. Faites glisser pour changer la distance.",
+          "caption": "{km} font {mi} ; à votre allure, il faut {t}.",
+          "handle": "Faites glisser pour changer la distance",
+          "rowPaceKm": "Allure au kilomètre",
+          "rowAt": "Temps écoulé à",
+          "kmRuler": "Kilomètres",
+          "miRuler": "Miles"
+        },
+        "trio": {
+          "title": "Quelques secondes plus vite ou plus lentement",
+          "subtitle": "Votre temps final à votre allure, un peu plus vite et un peu plus lentement. Faites glisser pour changer le nombre de secondes par unité ajoutées ou retirées.",
+          "caption": "{dx} sur {d} change le temps final de {delta}.",
+          "handle": "Faites glisser pour changer l'écart d'allure",
+          "axis": "Temps final",
+          "rowNow": "Votre allure",
+          "rowSpeedSpan": "Plage de vitesse"
+        },
+        "fatigue": {
+          "title": "Temps de course selon l'exposant de fatigue",
+          "subtitle": "Temps prévus pour chaque course de référence à partir de votre effort. L'exposant fixe votre ralentissement quand la distance augmente : 1,00 signifie aucun ralentissement (repère bleu), 1,06 est la norme de Riegel (repère en pointillés). Faites glisser pour essayer un autre exposant.",
+          "caption": "Avec l'exposant {e}, votre marathon prévu est de {t}.",
+          "handle": "Faites glisser pour changer l'exposant de fatigue",
+          "rowExponent": "Exposant de fatigue",
+          "rowStandard": "Marathon à l'exposant standard",
+          "rowDiff": "Écart avec le standard",
+          "rowEven": "Marathon à allure constante",
+          "evenShort": "constante"
+        },
+        "timeline": {
+          "title": "Chronologie du jour de course",
+          "subtitle": "L'heure au départ, à chaque quart de la distance et à l'arrivée. Le départ est fixé à 08:00 (hypothèse) ; faites-le glisser à votre heure de départ.",
+          "caption": "En partant à {start}, vous arrivez à {finish}.",
+          "handle": "Faites glisser pour changer l'heure de départ",
+          "rowStart": "Départ",
+          "rowDuration": "Durée",
+          "gun": "Départ"
+        },
+        "goal": {
+          "title": "Votre temps face à un objectif",
+          "subtitle": "Une balance entre votre temps (bleu) et un temps visé (ambre) : le temps le plus long l'emporte. L'objectif part 5 % plus vite que votre temps ; faites-le glisser pour voir l'allure nécessaire et l'écart par unité.",
+          "caption": "Un objectif de {goal} demande {pace} : {status}.",
+          "handle": "Faites glisser pour changer le temps visé",
+          "rowYours": "Votre temps",
+          "rowGoal": "Temps visé",
+          "rowPaceChange": "Changement d'allure nécessaire",
+          "rowSpeedChange": "Changement de vitesse nécessaire",
+          "faster": "plus rapide qu'aujourd'hui",
+          "slower": "plus lent qu'aujourd'hui",
+          "equal": "identique à aujourd'hui",
+          "panYours": "Votre temps",
+          "panGoal": "Objectif"
+        }
       }
     },
     "random-number-generator": {
@@ -27141,6 +27283,178 @@
       "clockDiagram": {
         "ariaLabel": "Horloge de 24 heures affichant chaque heure recommandée",
         "caption": "Heure recommandée : {time}"
+      },
+      "visuals": {
+        "notices": {
+          "title": "Avertissements",
+          "heuristic": "La règle du cycle de 90 minutes est une approximation répandue, pas une mesure personnelle des stades du sommeil : les cycles réels durent environ 70 à 120 minutes et varient d'une nuit à l'autre. Cet outil est informatif et ne constitue pas un avis médical ; consultez un médecin ou un spécialiste du sommeil en cas de troubles persistants.",
+          "assumptions": "Hypothèses des graphiques (signalées là où elles apparaissent) : les minutes par stade dans chaque cycle suivent une nuit type d'adulte en bonne santé (modèle approximatif de manuel) ; les comparaisons par âge supposent un adulte de 26 à 64 ans tant que vous ne choisissez pas un autre groupe (National Sleep Foundation, 2015) ; les seuils de qualité du sommeil suivent le consensus de la NSF (Ohayon et al., 2017) ; les horaires de préparation sont des conseils courants d'hygiène du sommeil (dernière caféine 6 heures avant le coucher, Drake et al., 2013)."
+        },
+        "ladder": {
+          "title": "Horaires courants en un coup d'œil",
+          "introWake": "Heures de coucher pour des heures de réveil courantes, avec {latency} pour s'endormir. Cliquez sur une ligne pour l'utiliser.",
+          "introBed": "Heures de réveil pour des heures de coucher courantes, avec {latency} pour s'endormir. Cliquez sur une ligne pour l'utiliser.",
+          "colWake": "Réveil",
+          "colBed": "Coucher",
+          "col6": "6 cycles",
+          "col5": "5 cycles",
+          "note": "6 cycles donnent 9 h et 5 cycles 7,5 h de sommeil : tous deux sont dans la plage recommandée pour les adultes, de 7 à 9 h."
+        },
+        "result": {
+          "groupInputs": "Vos données",
+          "given": "donnée",
+          "standard": "standard",
+          "cycleLength": "Durée d'un cycle de sommeil",
+          "groupAsleep": "Temps de sommeil par option",
+          "groupNight": "Votre nuit avec la meilleure option ({count} cycles)",
+          "inBed": "Au lit",
+          "asleepAt": "Endormi à",
+          "wakeAt": "Réveil",
+          "timeInBed": "Temps au lit",
+          "efficiency": "Efficacité du sommeil",
+          "awakeWindow": "Éveil jusqu'au prochain coucher",
+          "groupStages": "Stades du sommeil, meilleure option (modèle type, approximatif)",
+          "groupAge": "Par rapport à la plage adulte (NSF 7–9 h, adulte supposé)",
+          "groupWindDown": "Préparation du soir, meilleure option (conseils courants)",
+          "colQuantity": "Grandeur",
+          "colFormula": "Formule",
+          "colValue": "Valeur",
+          "hint": "Faites glisser pour tourner l'horloge de nuit",
+          "caption": "L'horloge de nuit pour {time} : minuit est en haut et le temps tourne dans le sens horaire. Chaque anneau est une option (extérieur = 6 cycles, intérieur = 3) ; l'ambre est le temps d'endormissement et chaque bloc un cycle de 90 minutes, si bien que chaque réveil tombe entre deux cycles."
+        },
+        "common": {
+          "stages": {
+            "wake": "Éveil",
+            "n1": "N1",
+            "n2": "N2",
+            "n3": "N3",
+            "rem": "REM"
+          },
+          "stageLong": {
+            "n1": "N1 (sommeil léger)",
+            "n2": "N2 (sommeil léger)",
+            "n3": "N3 (sommeil profond)",
+            "rem": "REM (sommeil paradoxal)"
+          },
+          "verdict": {
+            "rec": "Recommandé",
+            "may": "Peut convenir",
+            "no": "Non recommandé"
+          },
+          "stations": {
+            "caffeine": "Dernière caféine",
+            "meal": "Dernier gros repas",
+            "dim": "Baisser la lumière",
+            "screens": "Écrans éteints",
+            "bed": "Au lit",
+            "asleep": "Endormi",
+            "wake": "Réveil"
+          }
+        },
+        "hypno": {
+          "title": "Hypnogramme de la nuit : quand vous réveillez-vous ?",
+          "subtitle": "Une nuit type dès l'endormissement : chaque cycle de 90 minutes descend du sommeil léger N1/N2 au sommeil profond N3 puis remonte vers le REM ; le sommeil profond diminue et le REM s'allonge vers le matin. Faites glisser le repère de réveil : tomber sur la fin de cycle verte est le plus facile, se réveiller en N3 profond donne le plus d'engourdissement.",
+          "caption": "Un réveil à {time} vous surprend en {stage} : l'engourdissement attendu est {feel}.",
+          "handle": "Faites glisser pour changer la durée de sommeil",
+          "rowCycles": "Cycles complets + minutes du suivant",
+          "rowStage": "Stade au réveil",
+          "rowNearest": "Fin de cycle la plus proche",
+          "rowFeel": "Engourdissement attendu (inertie du sommeil)",
+          "boundary": "entre deux cycles",
+          "feel": {
+            "low": "faible",
+            "moderate": "modéré",
+            "high": "élevé"
+          }
+        },
+        "dial": {
+          "title": "Cadran de nuit sur 24 heures",
+          "subtitle": "Vos options sur une horloge de 24 heures, minuit en haut. Chaque anneau est une option, de 6 cycles (extérieur) à 3 (intérieur) ; l'ambre est le temps d'endormissement. Faites tourner l'aiguille autour du cadran pour changer votre heure : la calculatrice, le tableau du résultat et l'horloge 3D suivent.",
+          "captionWake": "Réveil à {time} : le meilleur coucher est à {best}.",
+          "captionBed": "Coucher à {time} : le meilleur réveil est à {best}.",
+          "handle": "Faites glisser autour du cadran pour changer l'heure",
+          "rowSpan": "Meilleure nuit (6 cycles)"
+        },
+        "stages": {
+          "title": "Les stades du sommeil, cycle par cycle",
+          "subtitle": "Chaque colonne est un cycle de 90 minutes réparti en minutes de sommeil N1, N2, N3 (profond) et REM pour une nuit type d'adulte en bonne santé (modèle approximatif). Faites glisser le nombre de cycles pour voir évoluer la composition de la nuit.",
+          "caption": "{n} cycles contiennent environ {deep} de sommeil profond et {rem} de sommeil REM.",
+          "handle": "Faites glisser pour changer le nombre de cycles",
+          "rowDeepEarly": "Sommeil profond dans les 3 premiers cycles",
+          "rowLastRem": "REM dans le dernier cycle"
+        },
+        "age": {
+          "title": "Vos options selon le groupe d'âge",
+          "subtitle": "Les heures recommandées par la National Sleep Foundation (vert) et celles qui « peuvent convenir » (ambre) pour chaque groupe d'âge, avec vos quatre options en repères. Faites glisser d'un groupe à l'autre ; un adulte de 26 à 64 ans est supposé au départ.",
+          "caption": "{group} : {rec} recommandées, et {count} de vos options s'y trouvent.",
+          "handle": "Faites glisser pour changer le groupe d'âge",
+          "rowGroup": "Groupe d'âge",
+          "rowGroupAssumed": "Groupe d'âge (adulte supposé)",
+          "rowRec": "Recommandé (NSF 2015)",
+          "rowMay": "Peut convenir",
+          "groups": {
+            "newborn": "Nouveau-né 0–3 mois",
+            "infant": "Nourrisson 4–11 mois",
+            "toddler": "Bambin 1–2 ans",
+            "preschool": "Préscolaire 3–5 ans",
+            "school": "Âge scolaire 6–13 ans",
+            "teen": "Adolescent 14–17 ans",
+            "youngAdult": "Jeune adulte 18–25 ans",
+            "adult": "Adulte 26–64 ans",
+            "older": "Senior 65+ ans"
+          }
+        },
+        "efficiency": {
+          "title": "Jauge d'efficacité du sommeil",
+          "subtitle": "L'efficacité du sommeil est la part du temps passé au lit réellement endormi. Pour la meilleure option, elle ne dépend que du temps mis à s'endormir. Faites glisser les minutes d'endormissement pour voir l'efficacité et le verdict de qualité du sommeil de la NSF.",
+          "caption": "Mettre {lat} à s'endormir donne une efficacité du sommeil de {eff} ({zone}).",
+          "handle": "Faites glisser pour changer les minutes d'endormissement",
+          "rowZone": "Zone d'efficacité (NSF : 85 % ou plus = bonne)",
+          "rowLatency": "Temps d'endormissement (NSF)",
+          "rowMax90": "Temps maximal pour garder 90 % d'efficacité",
+          "rowBedtime": "Coucher de la meilleure option",
+          "rowWake": "Réveil de la meilleure option",
+          "zones": {
+            "low": "faible",
+            "good": "bonne",
+            "excellent": "excellente"
+          },
+          "latency": {
+            "veryFast": "très rapide (dette de sommeil possible)",
+            "good": "bon (30 min ou moins)",
+            "uncertain": "incertain (31–45 min)",
+            "poor": "mauvais (plus de 45 min)"
+          }
+        },
+        "windDown": {
+          "title": "Chronologie de la préparation du soir",
+          "subtitle": "Étapes autour de votre coucher : dernière caféine 6 heures avant, dernier gros repas 3 heures avant, lumière tamisée 2 heures avant, écrans éteints 1 heure avant, puis coucher, endormissement et réveil. Faites glisser le nombre de cycles pour déplacer la soirée (ou le matin).",
+          "caption": "Dernière caféine avant {caffeine}, au lit à {bed}, réveil à {wake}.",
+          "handle": "Faites glisser pour changer le nombre de cycles"
+        },
+        "trio": {
+          "title": "Et si vos cycles étaient plus courts ou plus longs ?",
+          "subtitle": "Le cycle de 90 minutes est une moyenne ; les cycles réels durent environ 70 à 120 minutes. Comparez la meilleure option avec des cycles plus courts, standard et plus longs, et faites glisser l'écart.",
+          "caption": "Des cycles plus courts ou plus longs de {dx} déplacent l'{what} de {shift}.",
+          "handle": "Faites glisser pour changer l'écart de durée du cycle",
+          "rowShift": "Décalage de l'{what}",
+          "rowRange": "Durée typique d'un cycle chez l'adulte",
+          "bedtime": "heure du coucher",
+          "wake": "heure du réveil"
+        },
+        "formula": {
+          "title": "La formule, option par option",
+          "subtitle": "Chaque suggestion est votre heure, moins (ou plus) les minutes d'endormissement, moins (ou plus) des cycles entiers de 90 minutes. Faites glisser les minutes d'endormissement : cela modifie la donnée de la calculatrice et tous les résultats de la page.",
+          "captionWake": "Coucher = réveil − {lat} − cycles × 90 min ; le meilleur coucher est à {best}.",
+          "captionBed": "Réveil = coucher + {lat} + cycles × 90 min ; le meilleur réveil est à {best}.",
+          "handle": "Faites glisser pour changer les minutes d'endormissement",
+          "rowLatency": "Minutes d'endormissement (votre donnée)",
+          "time": "votre heure",
+          "fallAsleep": "endormissement",
+          "cycles": "cycles × 90",
+          "bedtime": "coucher",
+          "wake": "réveil"
+        }
       }
     },
     "body-fat-calculator": {
