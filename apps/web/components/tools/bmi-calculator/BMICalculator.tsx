@@ -1,7 +1,7 @@
 "use client";
 import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import {
   BMICalculator as BMICalculatorTool,
@@ -16,13 +16,13 @@ import {
 import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import BMIInputPanel from "./BMIInputPanel";
-import BMIQuickInsight from "./BMIQuickInsight";
 import BMIResult from "./BMIResult";
 import BMIMiniConverter from "./BMIMiniConverter";
 import BMIRecommendations from "./BMIRecommendations";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { BMILiveContext, type BMILive } from "./BMILiveContext";
 import type { BMIExtendedResult, BMIScenario, UnitSystem } from "./types";
 
 const tool = new BMICalculatorTool();
@@ -62,6 +62,30 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
   const [digitStyle, setDigitStyle] = useState<DigitStyle>("western");
   const [result, setResult] = useState<BMIExtendedResult>(() =>
     buildExtendedResult(DEFAULT_HEIGHT_CM, DEFAULT_WEIGHT_KG, DEFAULT_AGE, "male"),
+  );
+
+  // Live: every valid edit (typed or dragged on the zone-strip card) updates the result at once;
+  // an invalid or half-typed field keeps the last good result, and Calculate shows the error.
+  const live = useMemo(() => {
+    const h = unitSystem === "metric" ? parseLocalizedNumber(heightCm) : feetInchesToCm({ feet: parseLocalizedNumber(heightFt), inches: parseLocalizedNumber(heightIn) || 0 });
+    const w = unitSystem === "metric" ? parseLocalizedNumber(weightKg) : lbToKg(parseLocalizedNumber(weightLb));
+    const a = parseLocalizedNumber(age);
+    if (![h, w, a].every(Number.isFinite) || h < 50 || h > 250 || w < 1 || w > 500 || a < 2 || a > 120) return null;
+    return buildExtendedResult(h, w, a, gender);
+  }, [unitSystem, heightCm, heightFt, heightIn, weightKg, weightLb, age, gender]);
+  const shown = live ?? result;
+
+  const liveCtx = useMemo<BMILive>(
+    () => ({
+      result: shown,
+      setWeightKg: (kg: number) => {
+        const v = round1(kg);
+        setWeightKg(String(v));
+        setWeightLb(String(round1(kgToLb(v))));
+        setError("");
+      },
+    }),
+    [shown],
   );
 
   function handleUnitSystemChange(next: UnitSystem) {
@@ -189,9 +213,10 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
   ];
 
   return (
-    <>
+    <BMILiveContext.Provider value={liveCtx}>
       <div id="tool" className="scroll-mt-32">
       <ToolAboveFold
+        stretchResult
         input={
           <div className="flex flex-col gap-4">
             <BMIInputPanel
@@ -216,12 +241,15 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
               onReset={handleReset}
               onScenarioPreset={handleScenarioPreset}
             />
+            <BMIMiniConverter />
+            <BMIRecommendations category={shown.category} />
           </div>
         }
         result={
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 lg:h-full">
             <BMIResult
-              result={result}
+              fill
+              result={shown}
               digitStyle={digitStyle}
               unitSystem={unitSystem}
               heightCm={heightCm}
@@ -232,8 +260,6 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
               age={age}
               gender={gender}
             />
-            <BMIQuickInsight result={result} />
-            <BMIMiniConverter />
           </div>
         }
         sidebar={<RelatedToolsSidebar currentSlug="bmi-calculator" category="health-fitness" />}
@@ -241,13 +267,12 @@ export default function BMICalculator({ education }: { education: ReactNode }) {
           <div className="flex flex-col gap-6">
             <SectionNav items={navItems} />
             <ViewDocsLink slug="bmi-calculator" />
-            <BMIRecommendations category={result.category} />
           </div>
         }
       />
       </div>
 
       {education}
-    </>
+    </BMILiveContext.Provider>
   );
 }

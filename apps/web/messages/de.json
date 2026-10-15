@@ -1678,6 +1678,127 @@
         "shareToSocial": "In sozialen Medien teilen",
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
+      },
+      "visuals": {
+        "who": {
+          "severeThin": "Starkes Untergewicht",
+          "moderateThin": "Mäßiges Untergewicht",
+          "mildThin": "Leichtes Untergewicht",
+          "normal": "Normal",
+          "preObese": "Präadipositas",
+          "obese1": "Adipositas I",
+          "obese2": "Adipositas II",
+          "obese3": "Adipositas III"
+        },
+        "result": {
+          "groupInputs": "Ihre Eingaben",
+          "groupResult": "Ergebnis",
+          "groupRange": "Gesunder Bereich für diese Größe",
+          "groupCuts": "Gewicht an jedem WHO-Grenzwert",
+          "height": "Größe",
+          "weight": "Gewicht",
+          "given": "gegeben",
+          "whoClass": "WHO-Klasse",
+          "minWeight": "Niedrigstes gesundes Gewicht",
+          "maxWeight": "Höchstes gesundes Gewicht",
+          "toRange": "Bis zum Bereich",
+          "midWeight": "Gewicht bei BMI 22",
+          "colQuantity": "Größe",
+          "colFormula": "Formel",
+          "colValue": "Wert",
+          "hint": "Ziehen, um die Figur zu drehen",
+          "caption": "Die Figur hat Ihre echte Größe; ihr Körperbau folgt Ihrem BMI, ihre Farbe zeigt die WHO-Klasse: {category}."
+        },
+        "zone": {
+          "title": "WHO-Zonenstreifen",
+          "subtitle": "Die acht WHO-Klassen für Erwachsene auf einem Streifen, darüber die Kilogramm für Ihre Größe. Ziehen Sie den Griff: Gewichtsfeld, Ergebnistabelle und 3D-Figur folgen.",
+          "caption": "{w} ergibt BMI {bmi}: {cls}.",
+          "handle": "Ihr Gewicht durch die WHO-Klassen ziehen",
+          "rowWeight": "Gewicht",
+          "rowClass": "WHO-Klasse",
+          "rowUp": "Bis zum nächsten Grenzwert ({cut})",
+          "rowDown": "Zurück zum unteren Grenzwert ({cut})",
+          "rowNormal": "Bis zum Normalbereich",
+          "inside": "Innerhalb"
+        },
+        "prime": {
+          "title": "BMI-Prime-Anzeige",
+          "subtitle": "BMI Prime teilt den BMI durch 25, die obere Normalgrenze: 1,00 ist der Beginn des Übergewichts. Probieren Sie eine Gewichtsänderung und sehen Sie, wie die Nadel Ihren aktuellen Wert (gestrichelt) verlässt.",
+          "caption": "Mit {d} wird BMI Prime zu {p}.",
+          "handle": "Nadel drehen, um das Gewicht zu ändern",
+          "rowNow": "Ihr BMI Prime jetzt",
+          "rowDelta": "Angenommene Gewichtsänderung",
+          "rowWeight": "Neues Gewicht",
+          "rowClass": "WHO-Klasse"
+        },
+        "cutoffs": {
+          "title": "Gewicht an jedem Grenzwert",
+          "subtitle": "Jeder Balken ist das Gewicht, bei dem Ihre Größe einen WHO-Grenzwert erreicht, Ihr eigenes Gewicht steht dazwischen. Wählen Sie einen Grenzwert, um den Abstand zu sehen.",
+          "caption": "Bei Ihrer Größe wird BMI {cut} bei {kg} erreicht.",
+          "handle": "Grenzwert-Balken wählen",
+          "you": "Sie",
+          "rowCut": "Gewählter Grenzwert",
+          "rowYou": "Ihr Gewicht",
+          "rowDiff": "Differenz",
+          "rowPct": "Änderung des Körpergewichts"
+        },
+        "curve": {
+          "title": "BMI gegen Körpergröße",
+          "subtitle": "Dasselbe Gewicht ergibt bei einem größeren Körper einen niedrigeren BMI, weil die Größe quadriert wird. Der Punkt sind Sie; ziehen Sie entlang der Kurve, um andere Größen zu testen; die gestrichelte Linie zeigt die Größe, ab der dieses Gewicht normal ist.",
+          "caption": "{w} bei {h} ergibt BMI {b}.",
+          "handle": "Entlang der Größenachse ziehen",
+          "rowWeight": "Gewicht (fest)",
+          "rowHeight": "Getestete Größe",
+          "rowYou": "Ihr BMI bei {h} cm",
+          "rowClass": "WHO-Klasse"
+        },
+        "sensitivity": {
+          "title": "Empfindlichkeit gegen Größenfehler",
+          "subtitle": "Ein kleiner Fehler bei der Größenmessung verschiebt den BMI deutlich. Stellen Sie den Fehler ein und vergleichen Sie eine kleinere Messung, Ihre Messung und eine größere.",
+          "caption": "Ein Größenfehler von {e} verschiebt den BMI um {d} Punkte.",
+          "handle": "Größenfehler einstellen",
+          "rowError": "Messfehler",
+          "rowSpread": "BMI-Spanne (hoch − niedrig)",
+          "rowClasses": "WHO-Klasse",
+          "same": "Unverändert"
+        },
+        "formula": {
+          "title": "Die Formel Schritt für Schritt",
+          "subtitle": "Der BMI quadriert die Größe in Metern und teilt das Gewicht dadurch; BMI Prime und Ponderal-Index verwenden dieselben Zahlen. Gehen Sie die vier Stufen durch.",
+          "caption": "Stufe: {stage}.",
+          "handle": "Durch die Formel gehen",
+          "stage1": "Größe quadrieren",
+          "stage2": "Gewicht teilen",
+          "stage3": "BMI Prime",
+          "stage4": "Ponderal-Index",
+          "rowInputs": "Gewicht · Größe"
+        },
+        "balance": {
+          "title": "Waage zum Zielgewicht",
+          "subtitle": "Ihr Gewicht in einer Schale, das Gewicht eines gewählten gesunden BMI in der anderen. Der Balken neigt sich um die Differenz.",
+          "captionLose": "Für BMI {b} {kg} abnehmen.",
+          "captionGain": "Für BMI {b} {kg} zunehmen.",
+          "handle": "Ziel-BMI wählen",
+          "you": "Sie",
+          "rowTarget": "Ziel-BMI",
+          "rowYou": "Ihr Gewicht",
+          "rowLose": "Abzunehmen",
+          "rowGain": "Zuzunehmen",
+          "rowPct": "Anteil am Körpergewicht"
+        },
+        "timeline": {
+          "title": "Zeitachse zum gesunden Bereich",
+          "subtitle": "Bei gleichmäßiger wöchentlicher Änderung ist jede Station eine WHO-Klasse, die Sie auf dem Weg in den gesunden Bereich passieren (oder zu BMI 22, wenn Sie schon darin sind).",
+          "caption": "Bei {r} ist das Ziel etwa {n} Wochen entfernt.",
+          "handle": "Wöchentliche Rate einstellen",
+          "start": "Jetzt",
+          "goal": "Ziel",
+          "weeks": "{n, plural, one {# Woche} other {# Wochen}}",
+          "wk": "Wo. {n}",
+          "rowRate": "Wöchentliche Änderung",
+          "rowGoal": "Ziel",
+          "rowMonths": "Monate (Wochen ÷ 4,345)"
+        }
       }
     },
     "ideal-weight-calculator": {

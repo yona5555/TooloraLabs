@@ -6,9 +6,16 @@ import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/EquipmentSection";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import BMICategoryTable from "./BMICategoryTable";
-import BMIBodyLevelsChart from "./BMIBodyLevelsChart";
-import BMICompositionChart from "./BMICompositionChart";
-import BMIRangeGauge from "./BMIRangeGauge";
+import {
+  BMIBalanceCard,
+  BMICutoffBarsCard,
+  BMIFormulaCard,
+  BMIHeightCurveCard,
+  BMIPrimeGaugeCard,
+  BMISensitivityCard,
+  BMITimelineCard,
+  BMIZoneStripCard,
+} from "./BMICards";
 
 type CategoryRow = { category: string; range: string };
 type ExampleStep = { label: string; value: string };
@@ -26,17 +33,13 @@ export default async function BMIEducation() {
   const equipmentItems = t.raw("behindTheTool.equipment.items") as EquipmentItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
-  const bodyLevels = [
-    { bmi: 16, label: categoryRows[0].category },
-    { bmi: 20, label: categoryRows[3].category },
-    { bmi: 27, label: categoryRows[4].category },
-    { bmi: 33, label: categoryRows[5].category },
-    { bmi: 42, label: categoryRows[7].category },
-  ];
-
   return (
     <EncyclopediaPaper>
-      <BMIRangeGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <BMIZoneStripCard side="visual-left" />
+        <BMIPrimeGaugeCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
@@ -55,7 +58,11 @@ export default async function BMIEducation() {
 
       <InfoSection title={t("bodyLevels.title")}>
         <p>{t("bodyLevels.intro")}</p>
-        <BMIBodyLevelsChart levels={bodyLevels} />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <BMICutoffBarsCard side="visual-left" />
+          <BMIHeightCurveCard side="table-left" />
+          <BMISensitivityCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection id="health-risks" title={t("risksOverweight.title")}>
@@ -78,11 +85,11 @@ export default async function BMIEducation() {
 
       <InfoSection title={t("composition.title")}>
         <p>{t("composition.intro")}</p>
-        <BMICompositionChart
-          bmiLabel={t("composition.bmiLabel")}
-          muscularLabel={t("composition.muscularLabel")}
-          fatLabel={t("composition.fatLabel")}
-        />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <BMIFormulaCard side="table-left" />
+          <BMIBalanceCard side="visual-left" />
+          <BMITimelineCard side="table-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("formula.title")}>

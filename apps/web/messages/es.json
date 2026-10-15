@@ -1678,6 +1678,127 @@
         "shareToSocial": "Compartir en redes sociales",
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
+      },
+      "visuals": {
+        "who": {
+          "severeThin": "Delgadez severa",
+          "moderateThin": "Delgadez moderada",
+          "mildThin": "Delgadez leve",
+          "normal": "Normal",
+          "preObese": "Preobesidad",
+          "obese1": "Obesidad I",
+          "obese2": "Obesidad II",
+          "obese3": "Obesidad III"
+        },
+        "result": {
+          "groupInputs": "Tus datos",
+          "groupResult": "Resultado",
+          "groupRange": "Rango saludable para esta estatura",
+          "groupCuts": "Peso en cada punto de corte de la OMS",
+          "height": "Estatura",
+          "weight": "Peso",
+          "given": "dado",
+          "whoClass": "Clase OMS",
+          "minWeight": "Peso saludable mínimo",
+          "maxWeight": "Peso saludable máximo",
+          "toRange": "Para llegar al rango",
+          "midWeight": "Peso con IMC 22",
+          "colQuantity": "Magnitud",
+          "colFormula": "Fórmula",
+          "colValue": "Valor",
+          "hint": "Arrastra para girar la figura",
+          "caption": "La figura tiene tu estatura real; su complexión sigue tu IMC y su color indica la clase de la OMS: {category}."
+        },
+        "zone": {
+          "title": "Franja de zonas de la OMS",
+          "subtitle": "Las ocho clases de adultos de la OMS en una franja, con los kilos de tu estatura arriba. Arrastra el control: el campo de peso, la tabla de resultado y la figura 3D lo siguen.",
+          "caption": "{w} da un IMC de {bmi}: {cls}.",
+          "handle": "Arrastra tu peso por las clases de la OMS",
+          "rowWeight": "Peso",
+          "rowClass": "Clase OMS",
+          "rowUp": "Hasta el siguiente corte ({cut})",
+          "rowDown": "Hasta el corte inferior ({cut})",
+          "rowNormal": "Hasta el rango normal",
+          "inside": "Dentro"
+        },
+        "prime": {
+          "title": "Indicador de IMC Prime",
+          "subtitle": "El IMC Prime divide el IMC entre 25, el límite normal superior: 1,00 es el inicio del sobrepeso. Prueba un cambio de peso y mira cómo la aguja se aleja de tu valor actual (discontinua).",
+          "caption": "Con {d}, el IMC Prime pasa a {p}.",
+          "handle": "Gira la aguja para cambiar el peso",
+          "rowNow": "Tu IMC Prime actual",
+          "rowDelta": "Cambio de peso supuesto",
+          "rowWeight": "Nuevo peso",
+          "rowClass": "Clase OMS"
+        },
+        "cutoffs": {
+          "title": "Peso en cada punto de corte",
+          "subtitle": "Cada barra es el peso que alcanza un punto de corte de la OMS con tu estatura, con tu peso situado entre ellas. Elige un corte para ver a qué distancia está.",
+          "caption": "Con tu estatura, el IMC {cut} se alcanza con {kg}.",
+          "handle": "Elige una barra de corte",
+          "you": "Tú",
+          "rowCut": "Corte elegido",
+          "rowYou": "Tu peso",
+          "rowDiff": "Diferencia",
+          "rowPct": "Cambio del peso corporal"
+        },
+        "curve": {
+          "title": "IMC frente a estatura",
+          "subtitle": "El mismo peso da un IMC menor en un cuerpo más alto, porque la estatura se eleva al cuadrado. El punto eres tú; arrastra por la curva para probar otras estaturas; la línea discontinua marca la estatura en la que este peso pasa a normal.",
+          "caption": "{w} con {h} da un IMC de {b}.",
+          "handle": "Arrastra por el eje de estatura",
+          "rowWeight": "Peso (fijo)",
+          "rowHeight": "Estatura probada",
+          "rowYou": "Tu IMC con {h} cm",
+          "rowClass": "Clase OMS"
+        },
+        "sensitivity": {
+          "title": "Sensibilidad al error de estatura",
+          "subtitle": "Un pequeño error al medir la estatura mueve el IMC de forma visible. Fija el error y compara una lectura más baja, la tuya y una más alta.",
+          "caption": "Un error de estatura de {e} mueve el IMC {d} puntos.",
+          "handle": "Fija el error de estatura",
+          "rowError": "Error de medida",
+          "rowSpread": "Amplitud del IMC (alto − bajo)",
+          "rowClasses": "Clase OMS",
+          "same": "Sin cambio"
+        },
+        "formula": {
+          "title": "La fórmula paso a paso",
+          "subtitle": "El IMC eleva al cuadrado la estatura en metros y divide el peso entre ella; el IMC Prime y el índice ponderal reutilizan los mismos números. Recorre las cuatro etapas.",
+          "caption": "Etapa: {stage}.",
+          "handle": "Recorre la fórmula",
+          "stage1": "Estatura al cuadrado",
+          "stage2": "Dividir el peso",
+          "stage3": "IMC Prime",
+          "stage4": "Índice ponderal",
+          "rowInputs": "Peso · estatura"
+        },
+        "balance": {
+          "title": "Balanza del peso objetivo",
+          "subtitle": "Tu peso en un platillo y el peso de un IMC saludable elegido en el otro. La barra se inclina según la diferencia.",
+          "captionLose": "Para llegar a un IMC de {b}, pierde {kg}.",
+          "captionGain": "Para llegar a un IMC de {b}, gana {kg}.",
+          "handle": "Elige el IMC objetivo",
+          "you": "Tú",
+          "rowTarget": "IMC objetivo",
+          "rowYou": "Tu peso",
+          "rowLose": "A perder",
+          "rowGain": "A ganar",
+          "rowPct": "Parte del peso corporal"
+        },
+        "timeline": {
+          "title": "Cronología hasta el rango saludable",
+          "subtitle": "Con un cambio semanal constante, cada estación es una clase de la OMS que cruzas camino del rango saludable (o del IMC 22 si ya estás dentro).",
+          "caption": "A {r}, la meta está a unas {n} semanas.",
+          "handle": "Fija el ritmo semanal",
+          "start": "Ahora",
+          "goal": "Meta",
+          "weeks": "{n, plural, one {# semana} other {# semanas}}",
+          "wk": "sem {n}",
+          "rowRate": "Cambio semanal",
+          "rowGoal": "Meta",
+          "rowMonths": "Meses (semanas ÷ 4,345)"
+        }
       }
     },
     "ideal-weight-calculator": {
