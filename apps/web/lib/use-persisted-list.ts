@@ -5,7 +5,7 @@ import { useCallback, useSyncExternalStore } from "react";
  * A per-visitor list persisted in localStorage (every access in try/catch), read through
  * useSyncExternalStore like components/home/calculator/useArchive.ts so there is no
  * setState-in-effect and no hydration flash: the server snapshot is always an empty list.
- * Used by the history/tape panels (scientific-calculator, dice-roller).
+ * Used by the history/tape panels (scientific-calculator).
  */
 const listeners = new Map<string, Set<() => void>>();
 const cache = new Map<string, { raw: string | null; items: unknown[] }>();

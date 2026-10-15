@@ -98,9 +98,6 @@ import ForexConverterDocsPage, { getForexConverterTocItems } from "@/components/
 import CryptoConverterDocsPage, { getCryptoConverterTocItems } from "@/components/docs/crypto-converter/CryptoConverterDocsPage";
 import CommoditiesTrackerDocsPage, { getCommoditiesTrackerTocItems } from "@/components/docs/commodities-tracker/CommoditiesTrackerDocsPage";
 import WeatherForecastDocsPage, { getWeatherForecastTocItems } from "@/components/docs/weather-forecast/WeatherForecastDocsPage";
-import DiceRollerDocsPage, { getDiceRollerTocItems } from "@/components/docs/dice-roller/DiceRollerDocsPage";
-import LoveCalculatorDocsPage, { getLoveCalculatorTocItems } from "@/components/docs/love-calculator/LoveCalculatorDocsPage";
-import RandomQuoteGeneratorDocsPage, { getRandomQuoteGeneratorTocItems } from "@/components/docs/random-quote-generator/RandomQuoteGeneratorDocsPage";
 import ImageConverterDocsPage, { getImageConverterTocItems } from "@/components/docs/image-converter/ImageConverterDocsPage";
 import UnitConverterDocsPage, { getUnitConverterTocItems } from "@/components/docs/unit-converter/UnitConverterDocsPage";
 import RomanNumeralConverterDocsPage, { getRomanNumeralConverterTocItems } from "@/components/docs/roman-numeral-converter/RomanNumeralConverterDocsPage";
@@ -524,18 +521,6 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
     case "weather-forecast":
       content = <WeatherForecastDocsPage />;
       tocItems = await getWeatherForecastTocItems();
-      break;
-    case "dice-roller":
-      content = <DiceRollerDocsPage />;
-      tocItems = await getDiceRollerTocItems();
-      break;
-    case "love-calculator":
-      content = <LoveCalculatorDocsPage />;
-      tocItems = await getLoveCalculatorTocItems();
-      break;
-    case "random-quote-generator":
-      content = <RandomQuoteGeneratorDocsPage />;
-      tocItems = await getRandomQuoteGeneratorTocItems();
       break;
     case "image-converter":
       content = <ImageConverterDocsPage />;

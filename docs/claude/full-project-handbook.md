@@ -8,7 +8,7 @@
 - الفلسفة (§0): الاكتمال المطلق لكل أداة؛ كل أداة تُبنى لتكون أفضل أداة من نوعها على الإنترنت.
 - 101 أداة (`apps/web/data/tools.ts`)، 21 فئة (`categories.ts`).
 - `README.md` قديم (يقول 31 أداة)؛ لا تعتمد عليه.
-- الفئات: financial-calculators, business-finance, financial-markets, math, physics, chemistry, converters, ai-tools, developer-tools, file-tools, text-tools, student-productivity, health-fitness, date-time, fun-entertainment, weather, website-tools, algebra-number-theory, calculus-analysis, probability-statistics, geometry-coordinate-math.
+- الفئات: financial-calculators, business-finance, financial-markets, math, physics, chemistry, converters, ai-tools, developer-tools, file-tools, text-tools, student-productivity, health-fitness, date-time, weather, website-tools, algebra-number-theory, calculus-analysis, probability-statistics, geometry-coordinate-math.
 
 ## 2. البنية التقنية
 - Monorepo (npm workspaces): `apps/web` — Next.js 16 (App Router + Turbopack)، React 19، TypeScript 5، Tailwind 4، next-intl. أهم المجلدات: `app/[locale]/`، `components/tools/<slug>/`، `components/tool-ui/` (SectionCard, AdSpace, ToolPageLayout, ToolAboveFold, RelatedToolsSidebar, EncyclopediaPaper)، `data/`، `messages/<locale>.json`، `lib/`.

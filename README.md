@@ -58,10 +58,10 @@ See [SECURITY-NOTES.md](./SECURITY-NOTES.md) for accepted npm audit risks
   homepage, legal pages, category pages) and every individual tool page,
   with an automated check that all 6 locale files share the same keys as
   `en.json`.
-- Organized into 21 categories in `apps/web/data/categories.ts`: Finance,
+- Organized into 20 categories in `apps/web/data/categories.ts`: Finance,
   Business, Markets, Math, Physics, Chemistry, Converters, AI Tools, Dev
   Tools, File Tools, Text Tools, Student Tools, Health & Fitness, Date &
-  Time, Fun & Entertainment, Weather, Website Tools, Algebra & Number
+  Time, Weather, Website Tools, Algebra & Number
   Theory, Calculus & Analysis, Probability & Statistics, and Geometry &
   Coordinate Math. The last 5 are seeded for an upcoming math/physics/
   chemistry expansion and have no shipped tools yet.

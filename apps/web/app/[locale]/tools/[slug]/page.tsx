@@ -128,10 +128,6 @@ import DateCalculator from "@/components/tools/date-calculator/DateCalculator";
 import DateEducation from "@/components/tools/date-calculator/DateEducation";
 import TimeCalculator from "@/components/tools/time-calculator/TimeCalculator";
 import TimeEducation from "@/components/tools/time-calculator/TimeEducation";
-import DiceRoller from "@/components/tools/dice-roller/DiceRoller";
-import DiceEducation from "@/components/tools/dice-roller/DiceEducation";
-import LoveCalculator from "@/components/tools/love-calculator/LoveCalculator";
-import LoveEducation from "@/components/tools/love-calculator/LoveEducation";
 import FuelCostCalculator from "@/components/tools/fuel-cost-calculator/FuelCostCalculator";
 import FuelEducation from "@/components/tools/fuel-cost-calculator/FuelEducation";
 import BatchInvoiceCalculator from "@/components/tools/batch-invoice-calculator/BatchInvoiceCalculator";
@@ -159,8 +155,6 @@ import LoremIpsumGenerator from "@/components/tools/lorem-ipsum-generator/LoremI
 import LoremEducation from "@/components/tools/lorem-ipsum-generator/LoremEducation";
 import TextLogoGenerator from "@/components/tools/text-logo-generator/TextLogoGenerator";
 import LogoEducation from "@/components/tools/text-logo-generator/LogoEducation";
-import RandomQuoteGenerator from "@/components/tools/random-quote-generator/RandomQuoteGenerator";
-import QuoteEducation from "@/components/tools/random-quote-generator/QuoteEducation";
 import MultiplicationTableGenerator from "@/components/tools/multiplication-table-generator/MultiplicationTableGenerator";
 import MTEducation from "@/components/tools/multiplication-table-generator/MTEducation";
 import SpeechWordCountCalculator from "@/components/tools/speech-word-count-calculator/SpeechWordCountCalculator";
@@ -570,12 +564,6 @@ export default async function ToolPage({
     case "time-calculator":
       component = <TimeCalculator education={<TimeEducation />} />;
       break;
-    case "dice-roller":
-      component = <DiceRoller education={<DiceEducation />} />;
-      break;
-    case "love-calculator":
-      component = <LoveCalculator education={<LoveEducation />} />;
-      break;
     case "fuel-cost-calculator":
       component = <FuelCostCalculator education={<FuelEducation />} />;
       break;
@@ -624,9 +612,6 @@ export default async function ToolPage({
       break;
     case "text-logo-generator":
       component = <TextLogoGenerator education={<LogoEducation />} />;
-      break;
-    case "random-quote-generator":
-      component = <RandomQuoteGenerator education={<QuoteEducation />} />;
       break;
     case "multiplication-table-generator":
       component = <MultiplicationTableGenerator education={<MTEducation />} />;
@@ -763,8 +748,6 @@ export default async function ToolPage({
     slug === "bmr-calculator" ||
     slug === "date-calculator" ||
     slug === "time-calculator" ||
-    slug === "dice-roller" ||
-    slug === "love-calculator" ||
     slug === "fuel-cost-calculator" ||
     slug === "batch-invoice-calculator" ||
     slug === "pace-calculator" ||
@@ -778,7 +761,6 @@ export default async function ToolPage({
     slug === "reading-time-calculator" ||
     slug === "lorem-ipsum-generator" ||
     slug === "text-logo-generator" ||
-    slug === "random-quote-generator" ||
     slug === "multiplication-table-generator" ||
     slug === "speech-word-count-calculator" ||
     slug === "countdown-to-event-calculator" ||
