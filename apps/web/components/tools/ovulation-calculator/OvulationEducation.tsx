@@ -4,14 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import OvulationCycleLengthGauge from "./OvulationCycleLengthGauge";
-import OvulationProbabilityDiagram from "./OvulationProbabilityDiagram";
+import { OvCalendarCard, OvChanceCard, OvCycleDayCard, OvCycleLengthCard, OvDonutCard, OvFlowCard, OvPhaseSplitCard, OvTrioCard } from "./OvulationCards";
 
 type ExampleRow = { calculation: string; result: string };
 type PhaseItem = { title: string; description: string };
 
 export default async function OvulationEducation() {
   const t = await getTranslations("tools.ovulation-calculator.education");
+  const tv = await getTranslations("tools.ovulation-calculator.visuals.notices");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const phaseItems = t.raw("phases.items") as PhaseItem[];
@@ -20,12 +20,20 @@ export default async function OvulationEducation() {
 
   return (
     <EncyclopediaPaper>
-      <OvulationCycleLengthGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <OvCycleDayCard side="visual-left" />
+        <OvDonutCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <OvulationProbabilityDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <OvChanceCard side="visual-left" />
+          <OvCalendarCard side="table-left" />
+          <OvTrioCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("phases.title")}>
@@ -37,6 +45,11 @@ export default async function OvulationEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <OvPhaseSplitCard side="table-left" />
+          <OvCycleLengthCard side="visual-left" />
+          <OvFlowCard side="table-left" />
         </div>
       </InfoSection>
 
@@ -97,6 +110,13 @@ export default async function OvulationEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={tv("title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tv("estimate")}</li>
+          <li>{tv("assumptions")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

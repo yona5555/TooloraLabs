@@ -36,7 +36,7 @@ import type { MacroGoal } from "./types";
  * result (re-seeded when it changes). Numbers here use Western digits, like the BMI cards.
  * Drag handles sit on their own tracks or points; no value label is ever drawn under a handle.
  */
-type Side = "visual-left" | "table-left";
+export type Side = "visual-left" | "table-left";
 const X0 = 30;
 /** Clear distance under a track for its end labels: the 44px handle never covers them. */
 const TRACK_LABEL_DY = 38;
@@ -55,8 +55,13 @@ function useBase() {
   return useMacroLive().snap;
 }
 
-/** A what-if track along the bottom of a card's SVG; its labels sit below the handle's reach. */
-function SvgTrack({ W, y, frac, lo, hi, stops }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text: string; on?: boolean }[] }) {
+/**
+ * A what-if track along the bottom of a card's SVG; its labels sit below the handle's reach.
+ * Shared by the health tools' cards. `stopAnchor` sets how stop labels anchor: "ends" (first
+ * start, last end, others middle; default), "middle" (all middle) or "frac" (by position 0/1).
+ * A stop without text draws only its dot.
+ */
+export function SvgTrack({ W, y, frac, lo, hi, stops, stopAnchor = "ends" }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text?: string; on?: boolean }[]; stopAnchor?: "ends" | "middle" | "frac" }) {
   const x = X0 + clamp(frac, 0, 1) * (W - 2 * X0);
   return (
     <g>
@@ -66,10 +71,16 @@ function SvgTrack({ W, y, frac, lo, hi, stops }: { W: number; y: number; frac: n
       {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={10.5} />}
       {stops?.map((st, i) => {
         const sx = X0 + st.frac * (W - 2 * X0);
+        const anchor =
+          stopAnchor === "middle"
+            ? "middle"
+            : stopAnchor === "frac"
+              ? st.frac <= 0 ? "start" : st.frac >= 1 ? "end" : "middle"
+              : i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle";
         return (
           <g key={i}>
             <circle cx={sx} cy={y} r={3.5} style={{ fill: "var(--ph-ink-muted)" }} />
-            <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor={i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle"} size={9.5} bold={st.on} style={st.on ? INK : MUTED} />
+            {st.text && <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor={anchor} size={9.5} bold={st.on} style={st.on ? INK : MUTED} />}
           </g>
         );
       })}
@@ -77,18 +88,23 @@ function SvgTrack({ W, y, frac, lo, hi, stops }: { W: number; y: number; frac: n
   );
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tc } = useCardText(k);
+/**
+ * One 2D indicator card. Shared by the health tools: `tool` is the tool slug whose
+ * `tools.<tool>.visuals.<k>` holds title/subtitle, `idPrefix` names its ids and test ids.
+ */
+export function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual, tool = "macro-calculator", idPrefix = "macro" }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode; tool?: string; idPrefix?: string }) {
+  const t = useTranslations(`tools.${tool}.visuals.${k}`);
+  const tc = useTranslations("toolPage.indicatorKit");
   return (
     <IndicatorCard
-      idPrefix="macro"
+      idPrefix={idPrefix}
       n={n}
       side={side}
       kind="2d"
       title={t("title")}
       subtitle={t("subtitle")}
       caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`macro-c${n}`} />}
+      controls={<KitControls s={s} valueText={valueText} testId={`${idPrefix}-c${n}`} />}
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={visual}
     />
@@ -96,7 +112,7 @@ function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual
 }
 
 /** A stepper whose value lives in the calculator (writes go straight back to it). */
-function useSharedStepper(value: number, write: (v: number) => void, { min, max, step }: { min: number; max: number; step: number }): Stepper {
+export function useSharedStepper(value: number, write: (v: number) => void, { min, max, step }: { min: number; max: number; step: number }): Stepper {
   const [seed] = useState(value);
   const [flash, setFlash] = useState(0);
   const set = (v: number) => {

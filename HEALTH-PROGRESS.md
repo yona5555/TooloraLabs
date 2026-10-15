@@ -22,9 +22,10 @@
 - pace-calculator (round 4)
 - pregnancy-calculator (round 5)
 - due-date-calculator (round 5)
+- ovulation-calculator (final round)
 
 ## Remaining
-- ovulation-calculator (final round: also do the cross-tool decisions listed in notes)
+- None. Awaiting Yousef's browser review + approvals below, then merge to main and delete this file.
 
 ## Problems / notes
 - Indicator cards use Western digits (same as BMICards); only result tables use the digit-style helper. Decide in final round whether to unify.
@@ -50,3 +51,11 @@
 - Due date: DEFAULT CHANGED from LMP = today (0w0d) to LMP 70 days ago (10+0) so the page loads with a real result; Clear resets to that default. Needs Yousef's OK. No ultrasound input mode exists (only via redating card, ACOG CO 700). Share modal dates now use the visitor locale (Western digits) instead of always en-US.
 - Both: "today" computed on server and client (as before), so a hydration mismatch is possible around midnight.
 - Unused old keys left: pregnancy diagram.*, quickReference.*, education.intro.weekGauge.*; due-date diagram.*, quickReference.*, trimesterDiagram.*, education.intro.weekGauge.*.
+- FINAL ROUND (ovulation + cross-tool decisions):
+  - Ovulation: 3D cycle wheel (phase tiles, Wilcox 1995 bars, egg, today hand), 8 cards (draggable cycle-day timeline = wow). DEFAULT CHANGED: LMP = 5 days ago (was today); Clear resets to it. Needs Yousef's OK. Assumptions (5-day period, FIGO 24-38 normal, independent-day combined chance) labelled in a Notices section.
+  - Helpers unified: SvgTrack/Card/useSharedStepper exported from macro-calculator/MacroCards; Sleep/Pregnancy/DueDate/Pace/Ovulation import them; Card used by all health cards. BMI-family SvgTrack/stepper differ (y+22 labels, other signature) and stay separate.
+  - Table snap: new ideal-weight-calculator/useSnapTableRows.ts used by all 12 result tables; also snaps below lg (520px cap).
+  - 3D captions: all lines now visible via className="min-h-0!" on Scene3D in each health Result (tool-ui layout untouched); canvas 194-254px.
+  - Digits: decided to keep Western digits in indicator cards (as approved BMI); only result tables use the digit helper.
+  - Removed 204 + ovulation old unused keys from all 6 locales (verified unreferenced); key parity 0 diff.
+  - Still open for Yousef: ideal-weight "Current weight" input, due-date and ovulation default dates, pregnancy trimester cut-offs (needs packages/tools change).

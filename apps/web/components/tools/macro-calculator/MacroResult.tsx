@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
@@ -8,6 +9,7 @@ import Scene3D from "@/components/tool-ui/three/Scene3D";
 import MacroShareExportModal from "./MacroShareExportModal";
 import type { MacroSnapshot } from "./MacroLiveContext";
 import { AMDR, COLORS, GOALS, KCAL_G, MACROS, REF_WEIGHT_KG, SYMBOL, inAmdr, splitFor } from "./macros";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const MacroPlateScene3D = dynamic(() => import("./MacroPlateScene3D"), { ssr: false });
@@ -25,6 +27,8 @@ type Props = {
 };
 
 export default function MacroResult({ snap, invalid, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.macro-calculator.result");
   const tForm = useTranslations("tools.macro-calculator.form");
   const tGoals = useTranslations("tools.macro-calculator.goals.labels");
@@ -126,7 +130,7 @@ export default function MacroResult({ snap, invalid, digitStyle, fill = false }:
       hint={tv("hint")}
       caption={tv("caption", { kcal: `${n0(kcal)} kcal` })}
       drawing={
-        <Scene3D camera={[0, 2.6, 3.9]}>
+        <Scene3D className="min-h-0!" camera={[0, 2.6, 3.9]}>
           <MacroPlateScene3D parts={parts} total={`${n0(kcal)} kcal`} />
         </Scene3D>
       }
@@ -145,7 +149,9 @@ export default function MacroResult({ snap, invalid, digitStyle, fill = false }:
           {t("invalidCalories")}
         </p>
       )}
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

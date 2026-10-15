@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2 } from "@/components/tool-ui/indicator-kit/format";
+import { Card } from "../macro-calculator/MacroCards";
 import { useTDEELive } from "./TDEELiveContext";
 import {
   BMR_FORMULAS,
@@ -68,24 +69,6 @@ function SvgTrack({ W, y, frac, lo, hi }: { W: number; y: number; frac: number; 
   );
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tc } = useCardText(k);
-  return (
-    <IndicatorCard
-      idPrefix="tdee"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`tdee-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
 /** The live activity level as a stepper (index 0–4): −/+ and the drag write the calculator. */
 function useSharedLevel(): Stepper {
   const { snap, setActivityLevel } = useTDEELive();
@@ -143,7 +126,7 @@ export function TDEEActivityStepsCard({ side }: { side: Side }) {
     { key: "hour", label: `${k0(tdee)} ÷ 24`, value: `${k0(tdee / 24)} kcal/h` },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={1}
       side={side}
       k="steps"
@@ -222,7 +205,7 @@ export function TDEEComponentsStackCard({ side }: { side: Side }) {
     { key: "sum", label: "BMR + TEF + NEAT + EAT", value: kcalT(tdee) },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={2}
       side={side}
       k="stack"
@@ -305,7 +288,7 @@ function Balance({ side }: { side: Side }) {
     { key: "zone", label: t("rowZone"), value: `${tg(`gauge.${zone.key}`)} (${sgn(pctAdj, `${Math.round(Math.abs(pctAdj))}%`)})` },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={3}
       side={side}
       k="balance"
@@ -403,7 +386,7 @@ function Projection({ side }: { side: Side }) {
     { key: "gap", label: t("rowGap"), value: `${f2(Math.abs(simple[WEEKS] - adaptive[WEEKS]))} kg` },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={4}
       side={side}
       k="projection"
@@ -487,7 +470,7 @@ function AdjustmentGauge({ side }: { side: Side }) {
     { key: "aggr", label: t("rowAggressive"), value: Math.abs(pct) > 35 ? t("yes") : t("no") },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={5}
       side={side}
       k="gauge"
@@ -552,7 +535,7 @@ export function TDEEAgeSensitivityCard({ side }: { side: Side }) {
     { key: "decade", label: t("rowDecade"), value: `−${k0(perYear * m * 10)} kcal` },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={6}
       side={side}
       k="age"
@@ -620,7 +603,7 @@ export function TDEEFormulaBarsCard({ side }: { side: Side }) {
     { key: "spread", label: t("rowSpread"), value: kcalT(bars[0].v - bars[bars.length - 1].v) },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={7}
       side={side}
       k="formulas"
@@ -700,7 +683,7 @@ function FormulaDiagram({ side }: { side: Side }) {
     { key: "perkg", label: t("rowPerKg"), value: `+${f1(10 * m)} kcal` },
   ];
   return (
-    <Card
+    <Card tool="tdee-calculator" idPrefix="tdee"
       n={8}
       side={side}
       k="formula"

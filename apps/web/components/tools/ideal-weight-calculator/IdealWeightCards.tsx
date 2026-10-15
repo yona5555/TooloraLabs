@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
+import { Card } from "../macro-calculator/MacroCards";
 import { useIdealWeightLive } from "./IdealWeightLiveContext";
 import { FORMULAS, GROUPS, IDEAL_COLOR, W_MAX, W_MIN, WHO_HI, WHO_LO, bmiOf, cmText, coefOf, groupOf, ideal, inchesOver60, kg1, signedKg, weightAt } from "./iw";
 
@@ -63,25 +64,6 @@ function useSharedStepper(value: number, write: (v: number) => void, min: number
   };
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t } = useCardText(k);
-  const tk = useTranslations("toolPage.indicatorKit");
-  return (
-    <IndicatorCard
-      idPrefix="iw"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`iw-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tk("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
 /** The current-weight row: labelled as assumed (BMI 25 for this height) when the field is empty. */
 function useCurrentRow() {
   const { tc } = useCardText("common");
@@ -134,7 +116,7 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
   ];
   const colW = (W - 2 * X0) / 3;
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={1}
       side={side}
       k="sweep"
@@ -222,7 +204,7 @@ export function IdealWeightRankCard({ side }: { side: Side }) {
     { key: "who", label: tc("whoRange"), value: `${f1(whoLo)}–${kg1(whoHi)}` },
   ];
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={2}
       side={side}
       k="rank"
@@ -315,7 +297,7 @@ export function IdealWeightZoneCard({ side }: { side: Side }) {
     zoneLabels.push({ key: c.key, name, x: x0, anchor: "start", on: c.key === grp.key });
   });
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={3}
       side={side}
       k="zone"
@@ -394,7 +376,7 @@ export function IdealWeightFormulaCard({ side }: { side: Side }) {
     { key: "avg", label: tf("averageLabel"), value: kg1(r.average) },
   ];
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={4}
       side={side}
       k="formula"
@@ -481,7 +463,7 @@ function Gauge({ side }: { side: Side }) {
     { key: "avg", label: `${tf("averageLabel")} (BMI)`, value: f1(bmiAvg) },
   ];
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={5}
       side={side}
       k="gauge"
@@ -550,7 +532,7 @@ export function IdealWeightTimelineCard({ side }: { side: Side }) {
   ];
   const colW = (W - 2 * X0) / 2;
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={6}
       side={side}
       k="timeline"
@@ -626,7 +608,7 @@ export function IdealWeightSensitivityCard({ side }: { side: Side }) {
     { key: "per", label: t("rowPerCm"), value: kg1(spread / (2 * e)) },
   ];
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={7}
       side={side}
       k="sensitivity"
@@ -694,7 +676,7 @@ export function IdealWeightTargetBmiCard({ side }: { side: Side }) {
     { key: "near", label: t("rowNearest"), value: tf(nearest.label) },
   ];
   return (
-    <Card
+    <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={8}
       side={side}
       k="target"

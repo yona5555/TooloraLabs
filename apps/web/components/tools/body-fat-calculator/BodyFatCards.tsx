@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
+import { Card } from "../macro-calculator/MacroCards";
 import { useBodyFatLive } from "./BodyFatLiveContext";
 import { ACSM, DOMAIN, ESSENTIAL, IN, aceClasses, aceCuts, aceOf, circIn, navyBf, waistFor, weightAtBf, type Measures } from "./ace";
 
@@ -60,25 +61,6 @@ function useSharedStepper(value: number, write: (v: number) => void, min: number
   };
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t } = useCardText(k);
-  const tk = useTranslations("toolPage.indicatorKit");
-  return (
-    <IndicatorCard
-      idPrefix="bodyfat"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`bodyfat-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tk("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
 // ── 1. ACE zone strip: drag the waist across the five classes (writes the calculator) ──────
 export function BodyFatZoneStripCard({ side }: { side: Side }) {
   const { t, tc } = useCardText("zone");
@@ -112,7 +94,7 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
     { key: "acsm", label: t("rowAcsm", { lo: aLo, hi: aHi }), value: bf > aHi ? `−${f1(m.waistCm - waistFor(m, aHi))} cm` : bf < aLo ? `+${f1(waistFor(m, aLo) - m.waistCm)} cm` : t("inside") },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={1}
       side={side}
       k="zone"
@@ -212,7 +194,7 @@ export function BodyFatGaugeCard({ side }: { side: Side }) {
     { key: "acsm", label: t("rowAcsm", { lo: aLo, hi: aHi }), value: bf2 >= aLo && bf2 <= aHi ? t("inside") : t("outside") },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={2}
       side={side}
       k="gauge"
@@ -289,7 +271,7 @@ export function BodyFatCompositionCard({ side }: { side: Side }) {
   ];
   const ticks = axisTicks(0, KG1, W - 2 * X0, 50);
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={3}
       side={side}
       k="composition"
@@ -380,7 +362,7 @@ export function BodyFatCutoffBarsCard({ side }: { side: Side }) {
     { key: "in", label: t("rowInches"), value: `${f1(cutCm / IN)} in` },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={4}
       side={side}
       k="cutoffs"
@@ -456,7 +438,7 @@ function WaistCurve({ side }: { side: Side }) {
     { key: "acsm", label: t("rowAcsm", { hi: aHi }), value: `${f1(wAcsm)} cm` },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={5}
       side={side}
       k="curve"
@@ -527,7 +509,7 @@ export function BodyFatSensitivityCard({ side }: { side: Side }) {
     { key: "cls", label: t("rowClasses"), value: sameCls ? t("same") : `${tc(aceOf(g, trio[0].b).key)} → ${tc(aceOf(g, trio[2].b).key)}` },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={6}
       side={side}
       k="sensitivity"
@@ -596,7 +578,7 @@ export function BodyFatFormulaCard({ side }: { side: Side }) {
     { key: "bf", label: `${A}×${lc.toFixed(4)} − ${B}×${lh.toFixed(4)} ${K >= 0 ? "+" : "−"} ${Math.abs(K)}`, value: `${f1(bf)}%`, isKey: st === 4 },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={7}
       side={side}
       k="formula"
@@ -677,7 +659,7 @@ export function BodyFatBalanceCard({ side }: { side: Side }) {
     { key: "acsm", label: t("rowAcsm", { lo: aLo, hi: aHi }), value: tb >= aLo && tb <= aHi ? t("inside") : t("outside") },
   ];
   return (
-    <Card
+    <Card tool="body-fat-calculator" idPrefix="bodyfat"
       n={8}
       side={side}
       k="balance"

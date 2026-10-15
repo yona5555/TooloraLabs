@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import type { ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
@@ -11,6 +12,7 @@ import Scene3D from "@/components/tool-ui/three/Scene3D";
 import PaceShareExportModal from "./PaceShareExportModal";
 import { paceOf, type PaceSnapshot } from "./PaceLiveContext";
 import { MAIN_RACES, REF_KM, RIEGEL, clock, pacePer, riegel, toUnit } from "./pace";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const PaceTrackScene3D = dynamic(() => import("./PaceTrackScene3D"), { ssr: false });
@@ -27,6 +29,8 @@ type Props = {
 
 /** One Result card for all four modes: deep live table on the left, the 3D track on the right. */
 export default function PaceResult({ snap, invalid, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.pace-calculator.result");
   const tForm = useTranslations("tools.pace-calculator.form");
   const tFinish = useTranslations("tools.pace-calculator.finishTime");
@@ -185,7 +189,7 @@ export default function PaceResult({ snap, invalid, digitStyle, fill = false }: 
       hint={tv("hint")}
       caption={tv("caption", { pace: `${clock(pk)} ${t("perKm")}`, lap: clock(pk * 0.4) })}
       drawing={
-        <Scene3D camera={[0, 3.4, 4.2]}>
+        <Scene3D className="min-h-0!" camera={[0, 3.4, 4.2]}>
           <PaceTrackScene3D
             secPerKm={pk}
             title={`${clock(pu)} /${unit} · ${n2(unit === "km" ? kmh : kmh / KM_PER_MILE)} ${unit === "km" ? "km/h" : "mph"}`}
@@ -209,7 +213,9 @@ export default function PaceResult({ snap, invalid, digitStyle, fill = false }: 
           {mode === "multipoint" ? tMulti("noSegments") : t("invalidInput")}
         </p>
       )}
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

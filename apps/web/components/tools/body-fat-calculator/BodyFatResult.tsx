@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -8,6 +9,7 @@ import type { BodyFatResult as Result, Gender } from "./types";
 import BodyFatShareExportModal from "./BodyFatShareExportModal";
 import { useBodyFatLive } from "./BodyFatLiveContext";
 import { ACSM, ESSENTIAL, IN, aceClasses, aceCuts, aceOf, circIn, waistFor, type Measures } from "./ace";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk (the BMI figure, reused with a fat layer).
 const FigureScene3D = dynamic(() => import("../bmi-calculator/BMIFigureScene3D"), { ssr: false });
@@ -31,6 +33,8 @@ type Props = {
 const LEAN_COLOR = "#c98b74";
 
 export default function BodyFatResult({ result, measures: m, invalid, gender, heightCm, neckCm, waistCm, hipCm, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.body-fat-calculator.result");
   const tForm = useTranslations("tools.body-fat-calculator.form");
   const tCategories = useTranslations("tools.body-fat-calculator.categories");
@@ -134,7 +138,7 @@ export default function BodyFatResult({ result, measures: m, invalid, gender, he
       hint={tv("hint")}
       caption={tv("caption", { bf: heroValue, category: catName })}
       drawing={
-        <Scene3D camera={[1.6, 0.6, 3.8]}>
+        <Scene3D className="min-h-0!" camera={[1.6, 0.6, 3.8]}>
           <FigureScene3D
             heightCm={m.heightCm}
             bmi={Math.min(24, Math.max(15, ffmi))}
@@ -172,7 +176,9 @@ export default function BodyFatResult({ result, measures: m, invalid, gender, he
       }
     >
       {invalid && <p className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">{t("invalidMeasurements")}</p>}
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { KM_PER_MILE } from "@tooloralabs/tools";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2 } from "@/components/tool-ui/indicator-kit/format";
+import { Card, SvgTrack } from "../macro-calculator/MacroCards";
 import { paceOf, usePaceLive, type PaceSnapshot } from "./PaceLiveContext";
 import { PACE_ZONES, RACES, RIEGEL, clock, pacePer, parseRecord, riegel, sClock, toUnit, zoneOf } from "./pace";
 
@@ -18,7 +19,6 @@ import { PACE_ZONES, RACES, RIEGEL, clock, pacePer, parseRecord, riegel, sClock,
  */
 type Side = "visual-left" | "table-left";
 const X0 = 30;
-const TRACK_LABEL_DY = 38;
 const ACCENT = "#2563eb";
 const AMBER = "#f59e0b";
 
@@ -48,46 +48,6 @@ function useBase() {
     /** Distance text in the chosen unit, e.g. "21.10 km". */
     dT: (km: number) => `${f2(toUnit(km, u))} ${u}`,
   };
-}
-
-/** A what-if track along the bottom of a card's SVG; its labels sit below the handle's reach. */
-function SvgTrack({ W, y, frac, lo, hi, stops }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text: string; on?: boolean }[] }) {
-  const x = X0 + clamp(frac, 0, 1) * (W - 2 * X0);
-  return (
-    <g>
-      <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
-      <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      {lo && <T x={X0} y={y + TRACK_LABEL_DY} text={lo} anchor="start" size={10.5} />}
-      {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={10.5} />}
-      {stops?.map((st, i) => {
-        const sx = X0 + st.frac * (W - 2 * X0);
-        return (
-          <g key={i}>
-            <circle cx={sx} cy={y} r={3.5} style={{ fill: "var(--ph-ink-muted)" }} />
-            <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor={st.frac <= 0 ? "start" : st.frac >= 1 ? "end" : "middle"} size={9.5} bold={st.on} style={st.on ? INK : MUTED} />
-          </g>
-        );
-      })}
-    </g>
-  );
-}
-
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tc } = useCardText(k);
-  return (
-    <IndicatorCard
-      idPrefix="pace"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`pace-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={visual}
-    />
-  );
 }
 
 // ── 1. Trend line: the Riegel pace curve, drag the target race along it (wow) ────────────────
@@ -142,7 +102,7 @@ function Riegel({ side }: { side: Side }) {
     { key: "cost", label: t("rowFatigue"), value: sClock(T2 - even) },
   ];
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={1}
       side={side}
       k="riegel"
@@ -176,7 +136,7 @@ function Riegel({ side }: { side: Side }) {
           <circle cx={tx} cy={ty} r={9} fill="none" style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <circle cx={tx} cy={ty} r={3} fill={AMBER} />
           <T x={tx} y={Math.max(top - 8, ty - 16)} text={label} anchor={anchor} size={12} bold style={INK} />
-          <SvgTrack
+          <SvgTrack stopAnchor="frac"
             W={W}
             y={trackY}
             frac={fracOf(D2)}
@@ -239,7 +199,7 @@ function SpeedGauge({ side }: { side: Side }) {
     { key: "wr", label: t("rowWr"), value: wrMen ? `${Math.round((v / wrMen) * 100)}%` : "–" },
   ];
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={2}
       side={side}
       k="gauge"
@@ -277,7 +237,7 @@ function SpeedGauge({ side }: { side: Side }) {
           <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
           <T x={cx} y={cy + 26} text={`${f1(v)} km/h · ${pT(vPk)}`} size={15} bold style={INK} />
           <T x={cx} y={cy + 44} text={`${tZone(zone.key)} · ${t("yours")} ${f1(yours)}`} size={11.5} bold style={{ fill: zone.color }} />
-          <SvgTrack W={W} y={trackY} frac={(v - SMIN) / (SMAX - SMIN)} lo={`${SMIN} km/h`} hi={`${SMAX} km/h`} />
+          <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(v - SMIN) / (SMAX - SMIN)} lo={`${SMIN} km/h`} hi={`${SMAX} km/h`} />
         </Drawing>
       }
     />
@@ -326,7 +286,7 @@ function Splits({ side }: { side: Side }) {
     { key: "kind", label: t("rowKind"), value: t(kind) },
   ];
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={3}
       side={side}
       k="splits"
@@ -359,7 +319,7 @@ function Splits({ side }: { side: Side }) {
             );
           })}
           <line x1={PL} y1={yv(snap.sec / N)} x2={W - 12} y2={yv(snap.sec / N)} style={{ stroke: "var(--ph-ink)" }} strokeDasharray="5 4" strokeWidth={1.2} />
-          <SvgTrack W={W} y={trackY} frac={(s.value + 10) / 20} lo="−10%" hi="+10%" stops={[{ frac: 0.5, text: t("even"), on: s.value === 0 }]} />
+          <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(s.value + 10) / 20} lo="−10%" hi="+10%" stops={[{ frac: 0.5, text: t("even"), on: s.value === 0 }]} />
         </Drawing>
       }
     />
@@ -420,7 +380,7 @@ function Rulers({ side }: { side: Side }) {
     </g>
   );
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={4}
       side={side}
       k="rulers"
@@ -437,7 +397,7 @@ function Rulers({ side }: { side: Side }) {
           <T x={X0} y={miY - 48} text={`${t("miRuler")} · ${clock(pk * KM_PER_MILE)} /mi`} anchor="start" size={11} bold style={{ fill: AMBER }} />
           {ruler(miY, miTicks, (v) => v * KM_PER_MILE, "mi", AMBER, hover === "pmi" || hover === "tmi")}
           <line x1={W - X0} y1={kmY + 26} x2={W - X0} y2={miY - 30} style={{ stroke: "var(--ph-ink)" }} strokeDasharray="3 3" />
-          <SvgTrack W={W} y={trackY} frac={(D - 1) / 41.2} lo="1 km" hi="42.2 km" />
+          <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(D - 1) / 41.2} lo="1 km" hi="42.2 km" />
         </Drawing>
       }
     />
@@ -477,7 +437,7 @@ export function PaceSensitivityCard({ side }: { side: Side }) {
     { key: "speed", label: t("rowSpeedSpan"), value: `${f1(3600 / (pu + dx))}–${f1(3600 / Math.max(1, pu - dx))} ${u === "km" ? "km/h" : "mph"}` },
   ];
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={5}
       side={side}
       k="trio"
@@ -502,7 +462,7 @@ export function PaceSensitivityCard({ side }: { side: Side }) {
               </g>
             );
           })}
-          <SvgTrack W={W} y={trackY} frac={(dx - 5) / 55} lo={`5 s`} hi={`60 s`} />
+          <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(dx - 5) / 55} lo={`5 s`} hi={`60 s`} />
         </Drawing>
       }
     />
@@ -536,7 +496,7 @@ export function PaceFatigueCard({ side }: { side: Side }) {
     { key: "even", label: t("rowEven"), value: clock(mar.even) },
   ];
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={6}
       side={side}
       k="fatigue"
@@ -564,7 +524,7 @@ export function PaceFatigueCard({ side }: { side: Side }) {
               </g>
             );
           })}
-          <SvgTrack
+          <SvgTrack stopAnchor="frac"
             W={W}
             y={trackY}
             frac={(e - 1) / 0.15}
@@ -605,7 +565,7 @@ export function PaceTimelineCard({ side }: { side: Side }) {
     { key: "dur", label: t("rowDuration"), value: clock(snap.sec) },
   ];
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={7}
       side={side}
       k="timeline"
@@ -634,7 +594,7 @@ export function PaceTimelineCard({ side }: { side: Side }) {
               </g>
             );
           })}
-          <SvgTrack W={W} y={trackY} frac={(start - 300) / 420} lo="05:00" hi="12:00" />
+          <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(start - 300) / 420} lo="05:00" hi="12:00" />
         </Drawing>
       }
     />
@@ -692,7 +652,7 @@ function Goal({ side }: { side: Side }) {
     </g>
   );
   return (
-    <Card
+    <Card tool="pace-calculator" idPrefix="pace"
       n={8}
       side={side}
       k="goal"
@@ -711,7 +671,7 @@ function Goal({ side }: { side: Side }) {
           <circle cx={cx} cy={pivotY} r={6} style={{ fill: "var(--ph-ink)" }} />
           {pan(lx, ly, t("panYours"), clock(snap.sec), ACCENT, hover === "yours")}
           {pan(rx, ry, t("panGoal"), clock(goal), AMBER, hover === "goal")}
-          <SvgTrack W={W} y={trackY} frac={(goal - lo) / (hi - lo)} lo={`−30% · ${clock(lo)}`} hi={`+30% · ${clock(hi)}`} />
+          <SvgTrack stopAnchor="frac" W={W} y={trackY} frac={(goal - lo) / (hi - lo)} lo={`−30% · ${clock(lo)}`} hi={`+30% · ${clock(hi)}`} />
         </Drawing>
       }
     />

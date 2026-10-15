@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -8,6 +9,7 @@ import TargetHeartRateShareExportModal from "./TargetHeartRateShareExportModal";
 import type { HRSnapshot } from "./HRLiveContext";
 import { BELOW_COLOR, ZONES, tanaka, targetAt, zoneColor, zoneIndex } from "./hr";
 import type { TargetHeartRateError } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const HeartScene3D = dynamic(() => import("./HeartScene3D"), { ssr: false });
@@ -26,6 +28,8 @@ type Props = {
 };
 
 export default function TargetHeartRateResult({ snap, error, intensity, digitStyle, age, useRestingHeartRate, restingHeartRate, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.target-heart-rate-calculator.result");
   const tForm = useTranslations("tools.target-heart-rate-calculator.form");
   const tZones = useTranslations("tools.target-heart-rate-calculator.zones");
@@ -103,7 +107,7 @@ export default function TargetHeartRateResult({ snap, error, intensity, digitSty
       hint={tv("hint")}
       caption={tv("caption", { bpm: fmt(target), pct: fmt(intensity), zone: zoneName })}
       drawing={
-        <Scene3D camera={[0.9, 0.5, 4.2]}>
+        <Scene3D className="min-h-0!" camera={[0.9, 0.5, 4.2]}>
           <HeartScene3D
             bpm={target}
             color={zi < 0 ? BELOW_COLOR : color}
@@ -126,7 +130,9 @@ export default function TargetHeartRateResult({ snap, error, intensity, digitSty
           {t(`errors.${error}`)} {tv("keptLast")}
         </p>
       )}
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

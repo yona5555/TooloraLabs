@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { Drawing, INK, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1 } from "@/components/tool-ui/indicator-kit/format";
+import { Card, SvgTrack, useSharedStepper } from "../macro-calculator/MacroCards";
 import { useSleepLive } from "./SleepLiveContext";
 import {
   ADULT_INDEX,
@@ -43,8 +44,6 @@ import {
  */
 type Side = "visual-left" | "table-left";
 const X0 = 30;
-/** Clear distance under a track for its labels: the 44px handle never covers them. */
-const TRACK_LABEL_DY = 38;
 
 function useCardText(key: string) {
   return {
@@ -52,73 +51,6 @@ function useCardText(key: string) {
     tc: useTranslations("tools.sleep-calculator.visuals.common"),
     tr: useTranslations("tools.sleep-calculator.result"),
     tk: useTranslations("toolPage.indicatorKit"),
-  };
-}
-
-/** A what-if track along the bottom of a card's SVG; its labels sit below the handle's reach. */
-function SvgTrack({ W, y, frac, lo, hi, stops }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text?: string; on?: boolean }[] }) {
-  const x = X0 + clamp(frac, 0, 1) * (W - 2 * X0);
-  return (
-    <g>
-      <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
-      <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      {lo && <T x={X0} y={y + TRACK_LABEL_DY} text={lo} anchor="start" size={10.5} />}
-      {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={10.5} />}
-      {stops?.map((st, i) => {
-        const sx = X0 + st.frac * (W - 2 * X0);
-        return (
-          <g key={i}>
-            <circle cx={sx} cy={y} r={3.5} style={{ fill: "var(--ph-ink-muted)" }} />
-            {st.text && <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor={i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle"} size={9.5} bold={st.on} style={st.on ? INK : MUTED} />}
-          </g>
-        );
-      })}
-    </g>
-  );
-}
-
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tk } = useCardText(k);
-  return (
-    <IndicatorCard
-      idPrefix="sleep"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`sleep-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tk("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
-/** A stepper whose value lives in the calculator (writes go straight back to it). */
-function useSharedStepper(value: number, write: (v: number) => void, { min, max, step }: { min: number; max: number; step: number }): Stepper {
-  const [seed] = useState(value);
-  const [flash, setFlash] = useState(0);
-  const set = (v: number) => {
-    const next = clamp(Math.round(v / step) * step, min, max);
-    if (next !== value) {
-      setFlash((f) => f + 1);
-      write(next);
-    }
-  };
-  return {
-    value,
-    set,
-    inc: () => set(value + step),
-    dec: () => set(value - step),
-    reset: () => set(seed),
-    flash,
-    atMin: value <= min,
-    atMax: value >= max,
-    isSeed: value === seed,
-    min,
-    max,
-    step,
   };
 }
 
@@ -166,7 +98,7 @@ export function SleepHypnogramCard({ side }: { side: Side }) {
   const mx = xt(tm);
   const tagRight = mx < W * 0.6;
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={1}
       side={side}
       k="hypno"
@@ -264,7 +196,7 @@ export function SleepDialCard({ side }: { side: Side }) {
   const [ex, ey] = pt(anchor, Rh - 24);
   const colW = (W - 2 * X0) / 2;
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={2}
       side={side}
       k="dial"
@@ -351,7 +283,7 @@ export function SleepStagesCard({ side }: { side: Side }) {
   const order: (typeof STAGES)[number][] = ["n1", "n2", "n3", "rem"];
   const legW = (W - 2 * X0) / 2;
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={3}
       side={side}
       k="stages"
@@ -437,7 +369,7 @@ export function SleepAgeCard({ side }: { side: Side }) {
   ];
   const bounds = Array.from(new Set([g.may[0], g.rec[0], g.rec[1], g.may[1]]));
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={4}
       side={side}
       k="age"
@@ -540,7 +472,7 @@ function Efficiency({ side }: { side: Side }) {
       : { key: "shift", label: t("rowWake"), value: clock(optionClock("bedtime", snap.anchor, L, best.cycles)) },
   ];
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={5}
       side={side}
       k="efficiency"
@@ -607,7 +539,7 @@ export function SleepWindDownCard({ side }: { side: Side }) {
     isKey: st.key === "bed",
   }));
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={6}
       side={side}
       k="windDown"
@@ -689,7 +621,7 @@ export function SleepCycleTrioCard({ side }: { side: Side }) {
     { key: "range", label: t("rowRange"), value: "70–120 min" },
   ];
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={7}
       side={side}
       k="trio"
@@ -758,7 +690,7 @@ export function SleepFormulaCard({ side }: { side: Side }) {
     </g>
   );
   return (
-    <Card
+    <Card tool="sleep-calculator" idPrefix="sleep"
       n={8}
       side={side}
       k="formula"

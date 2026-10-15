@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
+import { Card } from "../macro-calculator/MacroCards";
 import { useBMRLive } from "./BMRLiveContext";
 import { BANDS, CUTS, DOMAIN, ORGANS, PAL, ageForBmr, bandOf, bmrAt, coefOf, cunningham, deurenberg, k0, katchMcArdle, weightForBmr, type Which } from "./bmr";
 
@@ -62,25 +63,6 @@ function useSharedStepper(value: number, write: (v: number) => void, min: number
   };
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t } = useCardText(k);
-  const tk = useTranslations("toolPage.indicatorKit");
-  return (
-    <IndicatorCard
-      idPrefix="bmr"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`bmr-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tk("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
 /** Bar-chart floor: a round kcal value under the lowest bar, so small differences stay visible. */
 const floorOf = (vals: number[]) => Math.max(0, Math.floor((Math.min(...vals) * 0.8) / 100) * 100);
 
@@ -114,7 +96,7 @@ export function BMRZoneStripCard({ side }: { side: Side }) {
     { key: "other", label: tl(nameKey(other(which))), value: `${k0(otherVal)} kcal` },
   ];
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={1}
       side={side}
       k="zone"
@@ -218,7 +200,7 @@ export function BMRGaugeCard({ side }: { side: Side }) {
     { key: "decade", label: t("rowDecade"), value: `−${f1(k.a * 10)} kcal` },
   ];
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={2}
       side={side}
       k="gauge"
@@ -289,7 +271,7 @@ export function BMROrganCard({ side }: { side: Side }) {
   const perRow = 4;
   const colW = (W - 2 * X0) / perRow;
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={3}
       side={side}
       k="organs"
@@ -379,7 +361,7 @@ export function BMRAgeCurveCard({ side }: { side: Side }) {
     { key: "range", label: t("rowRange"), value: tr(bandOf(bmr).key) },
   ];
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={4}
       side={side}
       k="ageCurve"
@@ -460,7 +442,7 @@ export function BMRSensitivityCard({ side }: { side: Side }) {
     { key: "range", label: t("rowRanges"), value: same ? t("same") : `${tr(bandOf(trio[0].v).key)} → ${tr(bandOf(trio[2].v).key)}` },
   ];
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={5}
       side={side}
       k="sensitivity"
@@ -530,7 +512,7 @@ export function BMRFormulaCard({ side }: { side: Side }) {
     { key: "bmr", label: tl(nameKey(which)), value: `${k0(bmr)} kcal`, isKey: st === 4 },
   ];
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={6}
       side={side}
       k="formula"
@@ -610,7 +592,7 @@ function Equations({ side }: { side: Side }) {
     { key: "spread", label: t("rowSpread"), value: `${k0(spread)} kcal`, isKey: true },
   ];
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={7}
       side={side}
       k="equations"
@@ -670,7 +652,7 @@ export function BMRActivityCard({ side }: { side: Side }) {
   ];
   const bh = Math.min(26, rowH * 0.46);
   return (
-    <Card
+    <Card tool="bmr-calculator" idPrefix="bmr"
       n={8}
       side={side}
       k="activity"

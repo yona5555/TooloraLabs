@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
@@ -10,6 +11,7 @@ import TDEEShareExportModal from "./TDEEShareExportModal";
 import type { TDEESnapshot } from "./TDEELiveContext";
 import { COLORS, LEVELS, TEF_SHARE, dailyFromWeekly, mult, splitOf } from "./energy";
 import type { GoalDirection } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const TDEEEnergyScene3D = dynamic(() => import("./TDEEEnergyScene3D"), { ssr: false });
@@ -46,6 +48,8 @@ export default function TDEEResult({
   digitStyle,
   fill = false,
 }: TDEEResultProps) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.tdee-calculator");
   const tv = useTranslations("tools.tdee-calculator.visuals.result");
 
@@ -145,7 +149,7 @@ export default function TDEEResult({
       hint={tv("hint")}
       caption={tv("caption", { tdee: kcal(tdee), target: kcal(dailyCalorieTarget) })}
       drawing={
-        <Scene3D camera={[1.2, 1.1, 4.6]}>
+        <Scene3D className="min-h-0!" camera={[1.2, 1.1, 4.6]}>
           <TDEEEnergyScene3D
             parts={parts}
             tdee={tdee}
@@ -207,7 +211,9 @@ export default function TDEEResult({
         )}
       </div>
 
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

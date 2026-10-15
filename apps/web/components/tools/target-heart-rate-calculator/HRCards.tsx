@@ -1,10 +1,11 @@
 "use client";
-import { useId, useState, type CSSProperties, type ReactNode } from "react";
+import { useId, useState, type CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f2 } from "@/components/tool-ui/indicator-kit/format";
+import { Card } from "../macro-calculator/MacroCards";
 import { useHRLive } from "./HRLiveContext";
 import { ACSM, BELOW_COLOR, MAX_FORMULAS, REST_DEFAULT, ZONES, ahaOf, fox, maxBy, pctAt, r0, tanaka, targetAt, zoneColor, zoneIndex } from "./hr";
 
@@ -74,24 +75,6 @@ function useSharedIntensity(): Stepper {
   };
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tc } = useCardText(k);
-  return (
-    <IndicatorCard
-      idPrefix="thr"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`thr-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
 /** One ECG complex (P, QRS, T) as relative points, 36 px wide. */
 const ECG: [number, number][] = [[0, 0], [4, -3], [8, 0], [11, 0], [13, 4], [16, -26], [19, 8], [22, 0], [27, 0], [31, -6], [35, 0]];
 const HEART_PATH = "M 0 -4 C -2 -9 -10 -9 -10 -2 C -10 4 -3 8 0 11 C 3 8 10 4 10 -2 C 10 -9 2 -9 0 -4 Z";
@@ -136,7 +119,7 @@ export function HRZoneStripCard({ side }: { side: Side }) {
     { key: "prev", label: t("rowPrev"), value: prev ? `−${n0(bpm - targetAt(prev.lo, max, rest))} bpm` : "—" },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={1}
       side={side}
       k="strip"
@@ -252,7 +235,7 @@ function ReadingGauge({ side }: { side: Side }) {
     { key: "aha", label: t("rowAha"), value: tv(ahaOf(pMax)) },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={2}
       side={side}
       k="gauge"
@@ -313,7 +296,7 @@ export function HRFormulaBarsCard({ side }: { side: Side }) {
     { key: "spread", label: t("rowSpread"), value: `${f2(bars[0].v - bars[bars.length - 1].v)} bpm` },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={3}
       side={side}
       k="formulas"
@@ -381,7 +364,7 @@ function AgeCurve({ side }: { side: Side }) {
     { key: "you", label: t("rowYou", { a: age }), value: bpmT(max) },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={4}
       side={side}
       k="ageCurve"
@@ -447,7 +430,7 @@ export function HRRestSensitivityCard({ side }: { side: Side }) {
     { key: "spread", label: t("rowSpread"), value: `${f2(trio[2].v - trio[0].v)} bpm`, isKey: true },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={5}
       side={side}
       k="sensitivity"
@@ -513,7 +496,7 @@ export function HRKarvonenFormulaCard({ side }: { side: Side }) {
     { key: "tgt", label: `${f2(work)} + ${rest0}`, value: bpmT(tgt), isKey: st === 4 },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={6}
       side={side}
       k="karvonen"
@@ -588,7 +571,7 @@ export function HRMethodBalanceCard({ side }: { side: Side }) {
     { key: "rest", label: rest === null ? tv("restAssumed") : tv("restGiven"), value: bpmT(rest0) },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={7}
       side={side}
       k="balance"
@@ -641,7 +624,7 @@ export function HRAcsmStepsCard({ side }: { side: Side }) {
     { key: "rest", label: rest === null ? tv("restAssumed") : tv("restGiven"), value: bpmT(rest0) },
   ];
   return (
-    <Card
+    <Card tool="target-heart-rate-calculator" idPrefix="thr"
       n={8}
       side={side}
       k="acsm"

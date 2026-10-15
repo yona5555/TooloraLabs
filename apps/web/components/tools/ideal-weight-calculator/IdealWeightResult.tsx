@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
@@ -9,6 +9,7 @@ import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/compone
 import Scene3D from "@/components/tool-ui/three/Scene3D";
 import IdealWeightShareExportModal from "./IdealWeightShareExportModal";
 import { useIdealWeightLive } from "./IdealWeightLiveContext";
+import { useSnapTableRows } from "./useSnapTableRows";
 import { FORMULAS, GROUPS, IDEAL_COLOR, WHO_HI, WHO_LO, bmiOf, coefOf, groupOf, inchesOver60, weightAt } from "./iw";
 
 // three/drei live only in this dynamically imported chunk (the BMI figure, reused).
@@ -31,30 +32,7 @@ export default function IdealWeightResult({ invalid, gender, heightCm, digitStyl
   const { gender: g, heightCm: h, current, currentGiven, r } = useIdealWeightLive();
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // Fill mode: the table box fills whatever height the column leaves, so its bottom edge would
-  // usually slice a row in half. Pull the bottom up to the last row that fits whole (the rest
-  // stays reachable by scrolling). Runs after every render and on every resize of the column.
-  useLayoutEffect(() => {
-    const root = wrapRef.current;
-    const box = root?.querySelector("table")?.closest<HTMLElement>(".overflow-auto");
-    if (!root || !box) return;
-    const snap = () => {
-      box.style.bottom = "";
-      if (getComputedStyle(box).position !== "absolute" || box.scrollHeight <= box.clientHeight + 1) return;
-      const top = box.getBoundingClientRect().top + box.clientTop - box.scrollTop;
-      const limit = box.clientHeight;
-      let fit = 0;
-      box.querySelectorAll("tr").forEach((tr) => {
-        const bottom = tr.getBoundingClientRect().bottom - top;
-        if (bottom <= limit + 0.5 && bottom > fit) fit = bottom;
-      });
-      if (fit > 0 && limit - fit > 0.5) box.style.bottom = `${Math.floor(limit - fit)}px`;
-    };
-    snap();
-    const ro = new ResizeObserver(snap);
-    ro.observe(root);
-    return () => ro.disconnect();
-  });
+  useSnapTableRows(wrapRef);
 
   const fmt = (value: number, d = 1) => formatLocalizedNumber(value, digitStyle, { minimumFractionDigits: d, maximumFractionDigits: d });
   const kg = (value: number) => `${fmt(value)} kg`;
@@ -142,7 +120,7 @@ export default function IdealWeightResult({ invalid, gender, heightCm, digitStyl
       hint={tv("hint")}
       caption={caption}
       drawing={
-        <Scene3D camera={[1.6, 0.6, 3.8]}>
+        <Scene3D className="min-h-0!" camera={[1.6, 0.6, 3.8]}>
           <FigureScene3D
             heightCm={h}
             bmi={Math.min(45, Math.max(13, solidBmi))}

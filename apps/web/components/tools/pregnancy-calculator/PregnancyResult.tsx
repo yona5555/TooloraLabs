@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
@@ -9,6 +10,7 @@ import Scene3D from "@/components/tool-ui/three/Scene3D";
 import PregnancyShareExportModal from "./PregnancyShareExportModal";
 import { ACOG_TRI, FULL_TERM, acogTrimester, addDaysISO, diffDays, fmtDate, naegeleISO, sgn, uterusCm, wd, type PregSnapshot } from "./preg";
 import type { PregnancyCalculatorError } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const PregnancyWombScene3D = dynamic(() => import("./PregnancyWombScene3D"), { ssr: false });
@@ -24,6 +26,8 @@ type Props = {
 };
 
 export default function PregnancyResult({ snap, error, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.pregnancy-calculator.result");
   const tForm = useTranslations("tools.pregnancy-calculator.form");
   const tSize = useTranslations("tools.pregnancy-calculator.sizeComparisons");
@@ -128,7 +132,7 @@ export default function PregnancyResult({ snap, error, digitStyle, fill = false 
       hint={tv("hint")}
       caption={tv("caption", { week: ltr(wd(ga)), length: ltr(milestone ? `${milestone.lengthCm} cm` : "< 0.2 cm") })}
       drawing={
-        <Scene3D camera={[0, 1.1, 4.2]}>
+        <Scene3D className="min-h-0!" camera={[0, 1.1, 4.2]}>
           <PregnancyWombScene3D ga={ga} lengthCm={milestone?.lengthCm ?? 0.15} weightG={milestone?.weightG ?? 0} />
         </Scene3D>
       }
@@ -161,7 +165,9 @@ export default function PregnancyResult({ snap, error, digitStyle, fill = false 
           {t("trimesterValue", { n: trimester })} · {t("dueDate")}: <bdi className="text-zinc-800 dark:text-zinc-100">{date(due)}</bdi>
         </p>
       </div>
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

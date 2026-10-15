@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
@@ -9,6 +10,7 @@ import Scene3D from "@/components/tool-ui/three/Scene3D";
 import BMIShareExportModal from "./BMIShareExportModal";
 import { BMI_MID, WHO_CUTS, weightAt, whoOf } from "./who";
 import type { BMIExtendedResult, UnitSystem } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const BMIFigureScene3D = dynamic(() => import("./BMIFigureScene3D"), { ssr: false });
@@ -50,6 +52,8 @@ export default function BMIResult({
   gender,
   fill = false,
 }: BMIResultProps) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.bmi-calculator");
   const tv = useTranslations("tools.bmi-calculator.visuals");
 
@@ -157,7 +161,7 @@ export default function BMIResult({
       hint={tv("result.hint")}
       caption={tv("result.caption", { category: whoName })}
       drawing={
-        <Scene3D camera={[1.6, 0.6, 3.8]}>
+        <Scene3D className="min-h-0!" camera={[1.6, 0.6, 3.8]}>
           <BMIFigureScene3D
             heightCm={result.heightCm}
             bmi={result.bmi}
@@ -185,7 +189,9 @@ export default function BMIResult({
         />
       }
     >
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

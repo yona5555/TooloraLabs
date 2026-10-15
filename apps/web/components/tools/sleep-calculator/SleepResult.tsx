@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
@@ -9,6 +10,7 @@ import Scene3D from "@/components/tool-ui/three/Scene3D";
 import SleepShareExportModal from "./SleepShareExportModal";
 import { ADULT_INDEX, AGE_GROUPS, CYCLE_MIN, DAY, OPTION_COLORS, STAGES, WIND_DOWN, ageVerdict, clock, stageTotals, wrap, type SleepSnapshot } from "./sleep";
 import type { SleepCalculatorError } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const SleepNightScene3D = dynamic(() => import("./SleepNightScene3D"), { ssr: false });
@@ -24,6 +26,8 @@ type Props = {
 };
 
 export default function SleepResult({ snap, error, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.sleep-calculator.result");
   const tForm = useTranslations("tools.sleep-calculator.form");
   const tModes = useTranslations("tools.sleep-calculator.modes");
@@ -139,7 +143,7 @@ export default function SleepResult({ snap, error, digitStyle, fill = false }: P
       hint={tv("hint")}
       caption={tv("caption", { time: ltr(clock(anchor)) })}
       drawing={
-        <Scene3D camera={[0, 3.4, 3.3]}>
+        <Scene3D className="min-h-0!" camera={[0, 3.4, 3.3]}>
           <SleepNightScene3D rings={rings} anchor={anchor} anchorLabel={clock(anchor)} />
         </Scene3D>
       }
@@ -158,7 +162,9 @@ export default function SleepResult({ snap, error, digitStyle, fill = false }: P
           {t(`errors.${error}`)}
         </p>
       )}
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -9,6 +10,7 @@ import DueDateShareExportModal from "./DueDateShareExportModal";
 import { useDateFmt } from "./DueDateLiveContext";
 import { MILESTONES, TERM_DAYS, naegeleMnemonic, wd, type DueSnap } from "./dueDate";
 import type { DueDateError } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk, never in the page chunk.
 const DueDatePathScene3D = dynamic(() => import("./DueDatePathScene3D"), { ssr: false });
@@ -24,6 +26,8 @@ type Props = {
 
 /** Result card: due date up top, then the deep live table on the left and the 3D week path on the right. */
 export default function DueDateResult({ snap, error, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.due-date-calculator.result");
   const tForm = useTranslations("tools.due-date-calculator.form");
   const tModes = useTranslations("tools.due-date-calculator.modes");
@@ -114,7 +118,7 @@ export default function DueDateResult({ snap, error, fill = false }: Props) {
       hint={tv("hint")}
       caption={tv("caption", { ga: ltr(wd(ga)), due: ltr(dueText) })}
       drawing={
-        <Scene3D camera={[0, 3.5, 3.1]}>
+        <Scene3D className="min-h-0!" camera={[0, 3.5, 3.1]}>
           <DueDatePathScene3D ga={ga} gaLabel={wd(ga)} dueLabel={f.num(due)} todayLabel={f.num(today)} />
         </Scene3D>
       }
@@ -165,7 +169,9 @@ export default function DueDateResult({ snap, error, fill = false }: Props) {
           </div>
         </div>
       </div>
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

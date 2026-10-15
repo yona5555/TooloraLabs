@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
+import { Card } from "../macro-calculator/MacroCards";
 import { useBMILive } from "./BMILiveContext";
 import { BMI_MID, WHO_CLASSES, WHO_CUTS, bmiOf, weightAt, whoIndex, whoOf } from "./who";
 
@@ -66,24 +67,6 @@ function useSharedWeight(): Stepper {
   };
 }
 
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tc } = useCardText(k);
-  return (
-    <IndicatorCard
-      idPrefix="bmi"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`bmi-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
 // ── 1. WHO zone strip: drag the weight across the eight bands (writes the calculator) ──────
 export function BMIZoneStripCard({ side }: { side: Side }) {
   const { t, tw } = useCardText("zone");
@@ -115,7 +98,7 @@ export function BMIZoneStripCard({ side }: { side: Side }) {
     { key: "normal", label: t("rowNormal"), value: toNormal === 0 ? t("inside") : `${f1(toNormal)} kg` },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={1}
       side={side}
       k="zone"
@@ -215,7 +198,7 @@ export function BMIPrimeGaugeCard({ side }: { side: Side }) {
     { key: "cls", label: t("rowClass"), value: tw(whoOf(bmi2).key) },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={2}
       side={side}
       k="prime"
@@ -283,7 +266,7 @@ export function BMICutoffBarsCard({ side }: { side: Side }) {
     { key: "pct", label: t("rowPct"), value: `${diff >= 0 ? "+" : "−"}${f1((Math.abs(diff) / w) * 100)}%` },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={3}
       side={side}
       k="cutoffs"
@@ -356,7 +339,7 @@ function HeightCurve({ side }: { side: Side }) {
     { key: "hn", label: `√(${f1(w)} ÷ 24.9)`, value: `${f1(hNorm)} cm` },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={4}
       side={side}
       k="curve"
@@ -428,7 +411,7 @@ export function BMISensitivityCard({ side }: { side: Side }) {
     { key: "cls", label: t("rowClasses"), value: whoOf(trio[0].b).key === whoOf(trio[2].b).key ? t("same") : `${tw(whoOf(trio[2].b).key)} → ${tw(whoOf(trio[0].b).key)}` },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={5}
       side={side}
       k="sensitivity"
@@ -493,7 +476,7 @@ export function BMIFormulaCard({ side }: { side: Side }) {
     { key: "pi", label: `PI = ${f1(w)} ÷ ${f2(hm)}³`, value: `${f1(w / hm ** 3)} kg/m³`, isKey: st === 4 },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={6}
       side={side}
       k="formula"
@@ -569,7 +552,7 @@ export function BMIBalanceCard({ side }: { side: Side }) {
     { key: "pct", label: t("rowPct"), value: `${f1((Math.abs(diff) / w) * 100)}%` },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={7}
       side={side}
       k="balance"
@@ -631,7 +614,7 @@ export function BMITimelineCard({ side }: { side: Side }) {
     { key: "months", label: t("rowMonths"), value: f1(weeks / 4.345) },
   ];
   return (
-    <Card
+    <Card tool="bmi-calculator" idPrefix="bmi"
       n={8}
       side={side}
       k="timeline"

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
@@ -8,6 +9,7 @@ import Scene3D from "@/components/tool-ui/three/Scene3D";
 import BMRShareExportModal from "./BMRShareExportModal";
 import { useBMRLive } from "./BMRLiveContext";
 import { BANDS, CUTS, DOMAIN, bandOf, bmiOf, coefOf, weightForBmr, type Coef } from "./bmr";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
 // three/drei live only in this dynamically imported chunk (the BMI figure, reused).
 const FigureScene3D = dynamic(() => import("../bmi-calculator/BMIFigureScene3D"), { ssr: false });
@@ -25,6 +27,8 @@ type Props = {
 };
 
 export default function BMRResult({ invalid, digitStyle, gender, weightKg, heightCm, age, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.bmr-calculator.result");
   const tForm = useTranslations("tools.bmr-calculator.form");
   const tLabels = useTranslations("tools.bmr-calculator.formulas.labels");
@@ -116,7 +120,7 @@ export default function BMRResult({ invalid, digitStyle, gender, weightKg, heigh
       hint={tv("hint")}
       caption={tv("caption", { bmi: fmt(bmi, 1), range: bandName, kcal: `${fmt(bmr)} kcal` })}
       drawing={
-        <Scene3D camera={[1.6, 0.6, 3.8]}>
+        <Scene3D className="min-h-0!" camera={[1.6, 0.6, 3.8]}>
           <FigureScene3D
             heightCm={b.heightCm}
             bmi={Math.min(45, Math.max(13, bmi))}
@@ -153,7 +157,9 @@ export default function BMRResult({ invalid, digitStyle, gender, weightKg, heigh
       }
     >
       {invalid && <p className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">{t("invalidMeasurements")}</p>}
-      {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
+      </div>
     </SectionCard>
   );
 }

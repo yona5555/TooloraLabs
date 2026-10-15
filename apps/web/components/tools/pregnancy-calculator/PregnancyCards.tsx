@@ -1,10 +1,11 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
+import { useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1 } from "@/components/tool-ui/indicator-kit/format";
+import { Card, SvgTrack, useSharedStepper } from "../macro-calculator/MacroCards";
 import { usePregnancyLive } from "./PregnancyLiveContext";
 import {
   ACOG_TRI,
@@ -42,8 +43,6 @@ import {
  */
 type Side = "visual-left" | "table-left";
 const X0 = 30;
-/** Clear distance under a track for its labels: the 44px handle never covers them. */
-const TRACK_LABEL_DY = 38;
 const MAX_DAY = 294;
 
 function useCardText(key: string) {
@@ -53,73 +52,6 @@ function useCardText(key: string) {
     tSize: useTranslations("tools.pregnancy-calculator.sizeComparisons"),
     tk: useTranslations("toolPage.indicatorKit"),
     locale: useLocale(),
-  };
-}
-
-/** A what-if track along the bottom of a card's SVG; its labels sit below the handle's reach. */
-function SvgTrack({ W, y, frac, lo, hi, stops }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text?: string; on?: boolean }[] }) {
-  const x = X0 + clamp(frac, 0, 1) * (W - 2 * X0);
-  return (
-    <g>
-      <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
-      <line x1={X0} y1={y} x2={x} y2={y} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={4} strokeLinecap="round" />
-      {lo && <T x={X0} y={y + TRACK_LABEL_DY} text={lo} anchor="start" size={10.5} />}
-      {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={10.5} />}
-      {stops?.map((st, i) => {
-        const sx = X0 + st.frac * (W - 2 * X0);
-        return (
-          <g key={i}>
-            <circle cx={sx} cy={y} r={3.5} style={{ fill: "var(--ph-ink-muted)" }} />
-            {st.text && <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor="middle" size={9.5} bold={st.on} style={st.on ? INK : MUTED} />}
-          </g>
-        );
-      })}
-    </g>
-  );
-}
-
-function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode }) {
-  const { t, tk } = useCardText(k);
-  return (
-    <IndicatorCard
-      idPrefix="pregnancy"
-      n={n}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={caption}
-      controls={<KitControls s={s} valueText={valueText} testId={`pregnancy-c${n}`} />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tk("worked")} />}
-      visual={visual}
-    />
-  );
-}
-
-/** A stepper whose value lives in the calculator (writes go straight back to it). */
-function useSharedStepper(value: number, write: (v: number) => void, { min, max, step }: { min: number; max: number; step: number }): Stepper {
-  const [seed] = useState(value);
-  const [flash, setFlash] = useState(0);
-  const set = (v: number) => {
-    const next = clamp(Math.round(v / step) * step, min, max);
-    if (next !== value) {
-      setFlash((f) => f + 1);
-      write(next);
-    }
-  };
-  return {
-    value,
-    set,
-    inc: () => set(value + step),
-    dec: () => set(value - step),
-    reset: () => set(seed),
-    flash,
-    atMin: value <= min,
-    atMax: value >= max,
-    isSeed: value === seed,
-    min,
-    max,
-    step,
   };
 }
 
@@ -158,7 +90,7 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
       : { key: "next", label: t("rowNext"), value: t("allPassed") },
   ];
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={1}
       side={side}
       k="timeline"
@@ -202,7 +134,7 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
           <line x1={xd(ga)} y1={lineY - 6} x2={xd(ga)} y2={bandY + 30} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2.5} />
           <T x={clamp(xd(ga), X0 + 60, W - X0 - 60)} y={bandY + 48} text={`${t("you")}: ${wd(ga)} · ${f1((ga / FULL_TERM) * 100)}%`} size={12.5} bold style={INK} />
           {next && <T x={clamp(xd(ga), X0 + 70, W - X0 - 70)} y={bandY + 66} text={`→ ${tc(`stations.${next.key}`)} +${next.at - ga} d`} size={10.5} bold />}
-          <SvgTrack W={W} y={trackY} frac={ga / MAX_DAY} lo="0w" hi="42w" stops={[98, 196, FULL_TERM].map((v) => ({ frac: v / MAX_DAY, text: `${v / 7}w` }))} />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={ga / MAX_DAY} lo="0w" hi="42w" stops={[98, 196, FULL_TERM].map((v) => ({ frac: v / MAX_DAY, text: `${v / 7}w` }))} />
         </Drawing>
       }
     />
@@ -262,7 +194,7 @@ export function PregnancyRingsCard({ side }: { side: Side }) {
     { key: "week", text: `${t("ringWeek")} ${(ga % 7) + 1}/7`, color: "#f59e0b" },
   ];
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={2}
       side={side}
       k="rings"
@@ -286,7 +218,7 @@ export function PregnancyRingsCard({ side }: { side: Side }) {
             </g>
           ))}
           <T x={W - X0} y={legendY} text={fmtDate(date, locale)} anchor="end" size={11} bold style={INK} />
-          <SvgTrack W={W} y={trackY} frac={N / 30} lo={t("now")} hi="+30 w" />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={N / 30} lo={t("now")} hi="+30 w" />
         </Drawing>
       }
     />
@@ -331,7 +263,7 @@ function Growth({ side }: { side: Side }) {
   ];
   const tagRight = xw(w) < W * 0.55;
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={3}
       side={side}
       k="growth"
@@ -368,7 +300,7 @@ function Growth({ side }: { side: Side }) {
             <T key={wk} x={xw(wk)} y={base + 26} text={`${wk}w`} size={10} />
           ))}
           <T x={xw(20)} y={base + 44} text={t("lengthNote")} size={9.5} />
-          <SvgTrack W={W} y={trackY} frac={(w - 4) / 36} lo="4w" hi="40w" />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(w - 4) / 36} lo="4w" hi="40w" />
         </Drawing>
       }
     />
@@ -405,7 +337,7 @@ export function PregnancyTermCard({ side }: { side: Side }) {
     { key: "range", label: t("rowRange"), value: termRange(zone) },
   ];
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={4}
       side={side}
       k="term"
@@ -451,7 +383,7 @@ export function PregnancyTermCard({ side }: { side: Side }) {
               <T x={X0 + 16} y={sy + sh + 44 + extra + 5 * 18} text={`${t("you")} ${wd(snap.ga)}`} anchor="start" size={10.5} bold style={{ fill: "#ec4899" }} />
             </g>
           )}
-          <SvgTrack W={W} y={trackY} frac={frac(b, Z0, Z1)} lo="24w" hi="43w" />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={frac(b, Z0, Z1)} lo="24w" hi="43w" />
         </Drawing>
       }
     />
@@ -504,7 +436,7 @@ export function PregnancyNaegeleCard({ side }: { side: Side }) {
     { key: "adj", label: `${t("rowAdjusted")} (${sgn(c - 28)} d)`, value: fmtDate(adj, locale) },
   ];
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={5}
       side={side}
       k="naegele"
@@ -519,7 +451,7 @@ export function PregnancyNaegeleCard({ side }: { side: Side }) {
           {row(0, [{ text: dt(snap.lmp), ...start }, { text: "+1 y", ...step }, { text: "−3 mo", ...step }, { text: "+7 d", ...step }, { text: `= ${dt(nae)}`, fill: "#a855f7", ink: { fill: "#fff" } }], hover === "nae" || hover === "diff", t("laneNaegele"))}
           {row(1, [{ text: dt(snap.lmp), ...start }, { text: "+280 d", ...step }, { text: `= ${dt(snap.due)}`, fill: "#ec4899", ink: { fill: "#fff" } }], hover === "d280" || hover === "diff", t("lane280"))}
           {row(2, [{ text: dt(snap.due), ...start }, { text: `${sgn(c - 28)} d`, fill: "#f59e0b", ink: { fill: "#fff" } }, { text: `= ${dt(adj)}`, fill: "#6366f1", ink: { fill: "#fff" } }], hover === "adj" || hover === "ov", t("laneAdjusted", { cycle: c }))}
-          <SvgTrack W={W} y={trackY} frac={(c - 21) / 14} lo="21 d" hi="35 d" stops={[{ frac: 0.5, text: "28", on: c === 28 }]} />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(c - 21) / 14} lo="21 d" hi="35 d" stops={[{ frac: 0.5, text: "28", on: c === 28 }]} />
         </Drawing>
       }
     />
@@ -564,7 +496,7 @@ export function PregnancyBirthWindowCard({ side }: { side: Side }) {
   ];
   const tagRight = xo(off) < W * 0.6;
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={6}
       side={side}
       k="birthWindow"
@@ -592,7 +524,7 @@ export function PregnancyBirthWindowCard({ side }: { side: Side }) {
             <T key={o} x={xo(o)} y={base + 18} text={o === 0 ? tc("edd") : `${sgn(o)}`} size={10} bold={o === 0} style={o === 0 ? { fill: "#ec4899" } : MUTED} />
           ))}
           <T x={xo((B0 + B1) / 2)} y={base + 38} text={t("axis")} size={9.5} />
-          <SvgTrack W={W} y={trackY} frac={(off + 21) / 35} lo="−21 d" hi="+14 d" stops={[{ frac: 21 / 35, text: "0", on: off === 0 }]} />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(off + 21) / 35} lo="−21 d" hi="+14 d" stops={[{ frac: 21 / 35, text: "0", on: off === 0 }]} />
         </Drawing>
       }
     />
@@ -629,7 +561,7 @@ export function PregnancyWeightGainCard({ side }: { side: Side }) {
     { key: "rate", label: t("rowRate"), value: `${g.weekly[0]}–${g.weekly[1]} kg/w` },
   ];
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={7}
       side={side}
       k="weightGain"
@@ -664,7 +596,7 @@ export function PregnancyWeightGainCard({ side }: { side: Side }) {
               </g>
             );
           })}
-          <SvgTrack W={W} y={trackY} frac={(bmi - 16) / 24} lo="BMI 16" hi="BMI 40" stops={[18.5, 25, 30].map((v) => ({ frac: (v - 16) / 24, text: `${v}` }))} />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(bmi - 16) / 24} lo="BMI 16" hi="BMI 40" stops={[18.5, 25, 30].map((v) => ({ frac: (v - 16) / 24, text: `${v}` }))} />
         </Drawing>
       }
     />
@@ -719,7 +651,7 @@ function Visits({ side }: { side: Side }) {
     { from: 36, to: 41, n: 1, color: "#6366f1" },
   ];
   return (
-    <Card
+    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
       n={8}
       side={side}
       k="visits"
@@ -757,7 +689,7 @@ function Visits({ side }: { side: Side }) {
           {/* Selected week */}
           <line x1={xw(w)} y1={top - 6} x2={xw(w)} y2={base} style={{ stroke: "var(--ph-ink)" }} strokeWidth={2} strokeDasharray="4 3" />
           <T x={xw(w) < W * 0.55 ? xw(w) + 8 : xw(w) - 8} y={top + 4} text={`${w}w · ${done}/${VISIT_WEEKS.length}`} anchor={xw(w) < W * 0.55 ? "start" : "end"} size={12} bold style={INK} />
-          <SvgTrack W={W} y={trackY} frac={(w - 4) / 37} lo="4w" hi="41w" />
+          <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(w - 4) / 37} lo="4w" hi="41w" />
         </Drawing>
       }
     />
