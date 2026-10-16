@@ -15025,6 +15025,189 @@
         "inputSectionTitle": "Entrée",
         "resultSectionTitle": "Résultat",
         "summarySentence": "Exhaustivité de la citation : {percent} %."
+      },
+      "studio": {
+        "nav": {
+          "bibliography": "Bibliographie",
+          "indicators": "Indicateurs"
+        },
+        "styles": {
+          "apa": "APA 7",
+          "mla": "MLA 9",
+          "chicago": "Chicago 17",
+          "harvard": "Harvard",
+          "ieee": "IEEE"
+        },
+        "types": {
+          "journal": "Article de revue",
+          "book": "Livre",
+          "website": "Page web"
+        },
+        "parts": {
+          "author": "Auteur",
+          "date": "Date",
+          "title": "Titre",
+          "container": "Revue / site",
+          "edition": "Édition",
+          "publisher": "Éditeur",
+          "locator": "Volume, numéro, pages",
+          "identifier": "DOI / URL",
+          "access": "Date de consultation",
+          "number": "Numéro de référence"
+        },
+        "fields": {
+          "authors": "Auteurs",
+          "title": "Titre",
+          "container": "Nom de la revue",
+          "site": "Nom du site web",
+          "publisher": "Éditeur",
+          "place": "Lieu de publication",
+          "year": "Année",
+          "month": "Mois (1–12)",
+          "day": "Jour",
+          "volume": "Volume",
+          "issue": "Numéro",
+          "pages": "Pages",
+          "edition": "Édition",
+          "doi": "DOI",
+          "isbn": "ISBN",
+          "url": "URL",
+          "accessed": "Date de consultation"
+        },
+        "input": {
+          "title": "Source",
+          "lookup": "Remplissage automatique par DOI ou ISBN",
+          "lookupPlaceholder": "10.1038/nature14539 ou 978-0-374-27563-1",
+          "fetch": "Rechercher",
+          "lookupNote": "Métadonnées en direct de Crossref (DOI) et d'Open Library (ISBN). Les notices peuvent être incomplètes : vérifiez-les avec la source.",
+          "status": {
+            "loading": "Recherche de la notice…",
+            "invalid": "Ce n'est pas un DOI ni un ISBN valide (le chiffre de contrôle de l'ISBN doit correspondre).",
+            "notFound": "Aucune notice trouvée pour cet identifiant. Saisissez les informations à la main.",
+            "network": "Le service de recherche est injoignable. Réessayez ou saisissez les informations à la main.",
+            "added": "Ajouté : {title}"
+          },
+          "editing": "Modification de la source {n} sur {total}",
+          "newSource": "Nouvelle source",
+          "type": "Type de source",
+          "given": "Prénom(s)",
+          "family": "Nom de famille",
+          "addAuthor": "Ajouter un auteur",
+          "removeAuthor": "Retirer l'auteur",
+          "orgHint": "Pour une organisation auteur, laissez le prénom vide. Les noms arabes gardent le prénom complet.",
+          "reset": "Rétablir la bibliographie d'exemple",
+          "savedNote": "Votre bibliographie est enregistrée uniquement dans ce navigateur."
+        },
+        "result": {
+          "title": "Citation",
+          "style": "Style de citation",
+          "reference": "Entrée de la liste de références",
+          "copy": "Copier",
+          "copied": "Copié",
+          "parenthetical": "Dans le texte",
+          "narrative": "Narrative",
+          "page": "Page",
+          "missingCount": "{n, plural, one {# champ manquant} other {# champs manquants}}",
+          "colElement": "Élément",
+          "colEntered": "Votre saisie",
+          "colOutput": "Résultat",
+          "groupElements": "Éléments en {style}",
+          "groupInText": "Citation dans le texte",
+          "groupStyles": "La même source dans les cinq styles",
+          "groupChecks": "Vérification des champs",
+          "narrativeHint": "nom dans la phrase",
+          "ieeeNumber": "numéro dans l'ordre de citation",
+          "chars": "{n} caractères",
+          "level": {
+            "required": "obligatoire",
+            "recommended": "recommandé"
+          },
+          "ok": "✓ rempli",
+          "missing": "manquant",
+          "matrixCaption": "Ordre des éléments dans chaque style (cliquez sur une ligne pour changer de style) :"
+        },
+        "bib": {
+          "title": "Bibliographie",
+          "intro": "Chaque source ajoutée, mise en forme dans le style choisi. Modifiez-en une pour la charger dans le formulaire, triez de A à Z, copiez toute la liste avec l'italique ou exportez-la vers un gestionnaire de références.",
+          "count": "{n, plural, one {# source} other {# sources}}",
+          "sort": "Trier A–Z",
+          "copyAll": "Tout copier",
+          "bibtex": "BibTeX (.bib)",
+          "ris": "RIS (.ris)",
+          "edit": "Modifier",
+          "delete": "Supprimer",
+          "editing": "En cours",
+          "arabic": "Arabe · RTL",
+          "untitled": "Source sans titre : ajoutez un titre pour l'inclure",
+          "ieeeNote": "IEEE numérote les sources dans l'ordre de leur première citation : l'ordre de la liste est donc la numérotation ; les listes APA, MLA, Chicago et Harvard sont alphabétiques (utilisez Trier A–Z)."
+        },
+        "ind": {
+          "worked": "Exemple résolu",
+          "anatomy": {
+            "title": "Anatomie de la citation",
+            "intro": "Choisissez un style, puis survolez ou touchez un bloc : le même élément s'allume dans l'entrée. La largeur de chaque bloc est sa part des caractères de l'entrée.",
+            "punct": "Ponctuation et espaces",
+            "total": "Longueur de l'entrée ({style})"
+          },
+          "authors": {
+            "title": "Listes d'auteurs et « et al. »",
+            "intro": "Faites glisser le nombre d'auteurs : les carrés pleins sont les noms que chaque style écrit dans la liste de références ; la petite étiquette est la forme dans le texte. APA liste jusqu'à 20 auteurs, puis 19 + « . . . » + le dernier.",
+            "slider": "Nombre d'auteurs",
+            "all": "la référence liste les {n}",
+            "etAl": "la référence liste {n} + et al.",
+            "ellipsis": "la référence liste 19 + . . . + le dernier",
+            "count": "Auteurs"
+          },
+          "complete": {
+            "title": "Complétude de la source",
+            "intro": "Le degré de complétude de la source choisie pour son type. Les champs obligatoires comptent double ; un score maximal signifie que chaque style peut imprimer une entrée complète.",
+            "weight2": "poids 2",
+            "weight1": "poids 1",
+            "score": "Complétude"
+          },
+          "length": {
+            "title": "Longueur de l'entrée par style",
+            "intro": "Caractères de l'entrée de cette source dans chaque style (barre large) et de sa citation dans le texte (barre fine). Le style choisi est plein.",
+            "inText": "dans le texte : {n}",
+            "shortest": "Entrée la plus courte"
+          },
+          "order": {
+            "title": "Ordre de citation et ordre alphabétique",
+            "intro": "À gauche : l'ordre de votre liste, qui est la numérotation IEEE. À droite : la position alphabétique exigée par APA, MLA, Chicago et Harvard. Les lignes orange sont les sources qui changeraient de place.",
+            "moved": "Sources hors de l'ordre A–Z"
+          },
+          "mix": {
+            "title": "Composition de la bibliographie",
+            "intro": "Anneau extérieur : types de sources. Anneau intérieur : sources en écriture arabe ou latine, ce qui détermine la ponctuation et l'ordre des noms.",
+            "latin": "Écriture latine",
+            "arabic": "Écriture arabe",
+            "sources": "sources",
+            "total": "Total des sources"
+          },
+          "recency": {
+            "title": "Actualité des sources",
+            "intro": "Chaque point numéroté est une source sur l'axe de l'année de publication. Beaucoup de cours demandent des sources des 5 ou 10 dernières années ; les zones ombrées les montrent.",
+            "newest": "La plus récente",
+            "oldest": "La plus ancienne",
+            "median": "Année médiane",
+            "medianShort": "médiane",
+            "age": "il y a {n} ans",
+            "last5": "5 dernières années",
+            "last10": "10 dernières années",
+            "undated": "Sans date (s.d.)",
+            "share5": "Part des 5 dernières années"
+          },
+          "ids": {
+            "title": "Identifiants pérennes",
+            "intro": "Une source avec DOI ou ISBN se retrouve toujours ; une simple URL peut se rompre. Chaque bloc est une source numérotée.",
+            "axis": "Un bloc par source, groupé selon son meilleur identifiant",
+            "doi": "Avec DOI",
+            "isbn": "Avec ISBN",
+            "url": "URL seule",
+            "none": "Sans identifiant",
+            "persistent": "DOI ou ISBN"
+          }
+        }
       }
     },
     "area-calculator": {

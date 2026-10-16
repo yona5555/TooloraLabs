@@ -189,6 +189,7 @@ export function usePlannerState(initial: () => PlannerState) {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed: unknown = JSON.parse(raw);
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time restore of the visitor's saved state
         if (isValidState(parsed)) setState(parsed);
       }
     } catch {

@@ -15025,6 +15025,189 @@
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result",
         "summarySentence": "Citation completeness: {percent}%."
+      },
+      "studio": {
+        "nav": {
+          "bibliography": "Bibliography",
+          "indicators": "Indicators"
+        },
+        "styles": {
+          "apa": "APA 7",
+          "mla": "MLA 9",
+          "chicago": "Chicago 17",
+          "harvard": "Harvard",
+          "ieee": "IEEE"
+        },
+        "types": {
+          "journal": "Journal article",
+          "book": "Book",
+          "website": "Web page"
+        },
+        "parts": {
+          "author": "Author",
+          "date": "Date",
+          "title": "Title",
+          "container": "Journal / site",
+          "edition": "Edition",
+          "publisher": "Publisher",
+          "locator": "Volume, issue, pages",
+          "identifier": "DOI / URL",
+          "access": "Access date",
+          "number": "Reference number"
+        },
+        "fields": {
+          "authors": "Authors",
+          "title": "Title",
+          "container": "Journal name",
+          "site": "Website name",
+          "publisher": "Publisher",
+          "place": "Place of publication",
+          "year": "Year",
+          "month": "Month (1–12)",
+          "day": "Day",
+          "volume": "Volume",
+          "issue": "Issue",
+          "pages": "Pages",
+          "edition": "Edition",
+          "doi": "DOI",
+          "isbn": "ISBN",
+          "url": "URL",
+          "accessed": "Date accessed"
+        },
+        "input": {
+          "title": "Source",
+          "lookup": "Auto-fill from a DOI or ISBN",
+          "lookupPlaceholder": "10.1038/nature14539 or 978-0-374-27563-1",
+          "fetch": "Fetch",
+          "lookupNote": "Live metadata from Crossref (DOI) and Open Library (ISBN). Records can be incomplete: check them against the source.",
+          "status": {
+            "loading": "Looking up the record…",
+            "invalid": "That is not a valid DOI or ISBN (the ISBN check digit must match).",
+            "notFound": "No record was found for this identifier. Enter the details manually.",
+            "network": "The lookup service could not be reached. Try again or enter the details manually.",
+            "added": "Added: {title}"
+          },
+          "editing": "Editing source {n} of {total}",
+          "newSource": "New source",
+          "type": "Source type",
+          "given": "Given name(s)",
+          "family": "Family name",
+          "addAuthor": "Add author",
+          "removeAuthor": "Remove author",
+          "orgHint": "For an organization as author, leave the given name empty. Arabic names keep the full given name.",
+          "reset": "Reset to the sample bibliography",
+          "savedNote": "Your bibliography is saved in this browser only."
+        },
+        "result": {
+          "title": "Citation",
+          "style": "Citation style",
+          "reference": "Reference-list entry",
+          "copy": "Copy",
+          "copied": "Copied",
+          "parenthetical": "In-text",
+          "narrative": "Narrative",
+          "page": "Page",
+          "missingCount": "{n, plural, one {# field missing} other {# fields missing}}",
+          "colElement": "Element",
+          "colEntered": "You entered",
+          "colOutput": "Output",
+          "groupElements": "Elements in {style}",
+          "groupInText": "In-text citation",
+          "groupStyles": "Same source in all five styles",
+          "groupChecks": "Field check",
+          "narrativeHint": "name in the sentence",
+          "ieeeNumber": "number in order of citation",
+          "chars": "{n} characters",
+          "level": {
+            "required": "required",
+            "recommended": "recommended"
+          },
+          "ok": "✓ filled",
+          "missing": "missing",
+          "matrixCaption": "Order of elements in each style (click a row to switch style):"
+        },
+        "bib": {
+          "title": "Bibliography",
+          "intro": "Every source you add, formatted in the selected style. Edit one to load it into the form, sort A–Z, copy the whole list with italics, or export it to a reference manager.",
+          "count": "{n, plural, one {# source} other {# sources}}",
+          "sort": "Sort A–Z",
+          "copyAll": "Copy all",
+          "bibtex": "BibTeX (.bib)",
+          "ris": "RIS (.ris)",
+          "edit": "Edit",
+          "delete": "Delete",
+          "editing": "Editing",
+          "arabic": "Arabic · RTL",
+          "untitled": "Untitled source: add a title to include it",
+          "ieeeNote": "IEEE numbers sources in the order they are first cited, so the list order is the numbering; APA, MLA, Chicago and Harvard lists are alphabetical (use Sort A–Z)."
+        },
+        "ind": {
+          "worked": "Worked example",
+          "anatomy": {
+            "title": "Citation Anatomy",
+            "intro": "Pick a style, then hover or tap a block: the same element lights up in the entry. Block widths are each element's share of the entry's characters.",
+            "punct": "Punctuation and spaces",
+            "total": "Entry length ({style})"
+          },
+          "authors": {
+            "title": "Author Lists and “et al.”",
+            "intro": "Drag the number of authors: filled squares are the names each style writes in the reference list; the small label is the in-text form. APA lists up to 20, then 19 + “. . .” + the last author.",
+            "slider": "Number of authors",
+            "all": "reference lists all {n}",
+            "etAl": "reference lists {n} + et al.",
+            "ellipsis": "reference lists 19 + . . . + last",
+            "count": "Authors"
+          },
+          "complete": {
+            "title": "Source Completeness",
+            "intro": "How complete the selected source is for its type. Required fields count double; a full score means every style can print a complete entry.",
+            "weight2": "weight 2",
+            "weight1": "weight 1",
+            "score": "Completeness"
+          },
+          "length": {
+            "title": "Entry Length by Style",
+            "intro": "Characters in this source's reference entry in each style (wide bar) and in its in-text citation (thin bar). The selected style is solid.",
+            "inText": "in-text: {n}",
+            "shortest": "Shortest entry"
+          },
+          "order": {
+            "title": "Citation Order vs Alphabetical Order",
+            "intro": "Left: your list order, which is the IEEE numbering. Right: the alphabetical position APA, MLA, Chicago and Harvard require. Orange lines are sources that would move.",
+            "moved": "Sources out of A–Z order"
+          },
+          "mix": {
+            "title": "Bibliography Mix",
+            "intro": "Outer ring: source types. Inner ring: Arabic-script versus Latin-script sources, which decides the punctuation and name order used.",
+            "latin": "Latin script",
+            "arabic": "Arabic script",
+            "sources": "sources",
+            "total": "Total sources"
+          },
+          "recency": {
+            "title": "Source Recency",
+            "intro": "Each numbered dot is a source on the publication-year axis. Many courses ask for sources from the last 5 or 10 years; the shaded zones show them.",
+            "newest": "Newest",
+            "oldest": "Oldest",
+            "median": "Median year",
+            "medianShort": "median",
+            "age": "{n} years ago",
+            "last5": "Last 5 years",
+            "last10": "Last 10 years",
+            "undated": "Undated (n.d.)",
+            "share5": "Share from the last 5 years"
+          },
+          "ids": {
+            "title": "Persistent Identifiers",
+            "intro": "Sources with a DOI or ISBN can always be found again; a bare URL can break. Each block is one numbered source.",
+            "axis": "One block per source, grouped by its best identifier",
+            "doi": "With a DOI",
+            "isbn": "With an ISBN",
+            "url": "URL only",
+            "none": "No identifier",
+            "persistent": "DOI or ISBN"
+          }
+        }
       }
     },
     "area-calculator": {

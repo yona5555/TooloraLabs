@@ -15025,6 +15025,189 @@
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis",
         "summarySentence": "Vollständigkeit der Zitation: {percent}%."
+      },
+      "studio": {
+        "nav": {
+          "bibliography": "Literaturverzeichnis",
+          "indicators": "Indikatoren"
+        },
+        "styles": {
+          "apa": "APA 7",
+          "mla": "MLA 9",
+          "chicago": "Chicago 17",
+          "harvard": "Harvard",
+          "ieee": "IEEE"
+        },
+        "types": {
+          "journal": "Zeitschriftenartikel",
+          "book": "Buch",
+          "website": "Webseite"
+        },
+        "parts": {
+          "author": "Autor",
+          "date": "Datum",
+          "title": "Titel",
+          "container": "Zeitschrift / Website",
+          "edition": "Auflage",
+          "publisher": "Verlag",
+          "locator": "Band, Heft, Seiten",
+          "identifier": "DOI / URL",
+          "access": "Abrufdatum",
+          "number": "Referenznummer"
+        },
+        "fields": {
+          "authors": "Autoren",
+          "title": "Titel",
+          "container": "Name der Zeitschrift",
+          "site": "Name der Website",
+          "publisher": "Verlag",
+          "place": "Verlagsort",
+          "year": "Jahr",
+          "month": "Monat (1–12)",
+          "day": "Tag",
+          "volume": "Band",
+          "issue": "Heft",
+          "pages": "Seiten",
+          "edition": "Auflage",
+          "doi": "DOI",
+          "isbn": "ISBN",
+          "url": "URL",
+          "accessed": "Abrufdatum"
+        },
+        "input": {
+          "title": "Quelle",
+          "lookup": "Automatisch ausfüllen per DOI oder ISBN",
+          "lookupPlaceholder": "10.1038/nature14539 oder 978-0-374-27563-1",
+          "fetch": "Abrufen",
+          "lookupNote": "Live-Metadaten von Crossref (DOI) und Open Library (ISBN). Einträge können unvollständig sein: Gleichen Sie sie mit der Quelle ab.",
+          "status": {
+            "loading": "Eintrag wird gesucht…",
+            "invalid": "Das ist keine gültige DOI oder ISBN (die ISBN-Prüfziffer muss stimmen).",
+            "notFound": "Für diese Kennung wurde kein Eintrag gefunden. Geben Sie die Angaben manuell ein.",
+            "network": "Der Suchdienst ist nicht erreichbar. Versuchen Sie es erneut oder geben Sie die Angaben manuell ein.",
+            "added": "Hinzugefügt: {title}"
+          },
+          "editing": "Quelle {n} von {total} bearbeiten",
+          "newSource": "Neue Quelle",
+          "type": "Quellentyp",
+          "given": "Vorname(n)",
+          "family": "Nachname",
+          "addAuthor": "Autor hinzufügen",
+          "removeAuthor": "Autor entfernen",
+          "orgHint": "Bei einer Organisation als Autor den Vornamen leer lassen. Arabische Namen behalten den vollen Vornamen.",
+          "reset": "Beispiel-Literaturverzeichnis wiederherstellen",
+          "savedNote": "Ihr Literaturverzeichnis wird nur in diesem Browser gespeichert."
+        },
+        "result": {
+          "title": "Zitat",
+          "style": "Zitierstil",
+          "reference": "Eintrag im Literaturverzeichnis",
+          "copy": "Kopieren",
+          "copied": "Kopiert",
+          "parenthetical": "Im Text",
+          "narrative": "Narrativ",
+          "page": "Seite",
+          "missingCount": "{n, plural, one {# Feld fehlt} other {# Felder fehlen}}",
+          "colElement": "Element",
+          "colEntered": "Ihre Eingabe",
+          "colOutput": "Ausgabe",
+          "groupElements": "Elemente in {style}",
+          "groupInText": "Zitat im Text",
+          "groupStyles": "Dieselbe Quelle in allen fünf Stilen",
+          "groupChecks": "Feldprüfung",
+          "narrativeHint": "Name im Satz",
+          "ieeeNumber": "Nummer nach Zitierreihenfolge",
+          "chars": "{n} Zeichen",
+          "level": {
+            "required": "Pflicht",
+            "recommended": "empfohlen"
+          },
+          "ok": "✓ ausgefüllt",
+          "missing": "fehlt",
+          "matrixCaption": "Reihenfolge der Elemente in jedem Stil (Zeile anklicken, um den Stil zu wechseln):"
+        },
+        "bib": {
+          "title": "Literaturverzeichnis",
+          "intro": "Jede hinzugefügte Quelle im gewählten Stil. Bearbeiten lädt sie ins Formular; außerdem alphabetisch sortieren, die ganze Liste mit Kursivschrift kopieren oder in eine Literaturverwaltung exportieren.",
+          "count": "{n, plural, one {# Quelle} other {# Quellen}}",
+          "sort": "A–Z sortieren",
+          "copyAll": "Alles kopieren",
+          "bibtex": "BibTeX (.bib)",
+          "ris": "RIS (.ris)",
+          "edit": "Bearbeiten",
+          "delete": "Löschen",
+          "editing": "In Bearbeitung",
+          "arabic": "Arabisch · RTL",
+          "untitled": "Quelle ohne Titel: Titel hinzufügen, um sie aufzunehmen",
+          "ieeeNote": "IEEE nummeriert Quellen in der Reihenfolge ihrer ersten Zitierung, die Listenreihenfolge ist also die Nummerierung; APA-, MLA-, Chicago- und Harvard-Listen sind alphabetisch (A–Z sortieren)."
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "anatomy": {
+            "title": "Anatomie des Zitats",
+            "intro": "Wählen Sie einen Stil und fahren Sie über einen Block oder tippen Sie ihn an: Dasselbe Element leuchtet im Eintrag auf. Die Blockbreite ist der Anteil des Elements an den Zeichen des Eintrags.",
+            "punct": "Satzzeichen und Leerzeichen",
+            "total": "Länge des Eintrags ({style})"
+          },
+          "authors": {
+            "title": "Autorenlisten und „et al.“",
+            "intro": "Ziehen Sie die Zahl der Autoren: Gefüllte Kästchen sind die Namen, die jeder Stil im Literaturverzeichnis nennt; das kleine Label ist die Form im Text. APA nennt bis zu 20 Autoren, danach 19 + „. . .“ + den letzten.",
+            "slider": "Anzahl der Autoren",
+            "all": "Verzeichnis nennt alle {n}",
+            "etAl": "Verzeichnis nennt {n} + et al.",
+            "ellipsis": "Verzeichnis nennt 19 + . . . + letzten",
+            "count": "Autoren"
+          },
+          "complete": {
+            "title": "Vollständigkeit der Quelle",
+            "intro": "Wie vollständig die gewählte Quelle für ihren Typ ist. Pflichtfelder zählen doppelt; volle Punktzahl heißt, jeder Stil kann einen vollständigen Eintrag drucken.",
+            "weight2": "Gewicht 2",
+            "weight1": "Gewicht 1",
+            "score": "Vollständigkeit"
+          },
+          "length": {
+            "title": "Eintragslänge nach Stil",
+            "intro": "Zeichen im Literatureintrag dieser Quelle in jedem Stil (breiter Balken) und im Zitat im Text (schmaler Balken). Der gewählte Stil ist voll gefärbt.",
+            "inText": "im Text: {n}",
+            "shortest": "Kürzester Eintrag"
+          },
+          "order": {
+            "title": "Zitierreihenfolge vs. alphabetische Reihenfolge",
+            "intro": "Links: Ihre Listenreihenfolge, also die IEEE-Nummerierung. Rechts: die alphabetische Position, die APA, MLA, Chicago und Harvard verlangen. Orange Linien sind Quellen, die sich verschieben würden.",
+            "moved": "Quellen außerhalb der A–Z-Reihenfolge"
+          },
+          "mix": {
+            "title": "Zusammensetzung des Verzeichnisses",
+            "intro": "Äußerer Ring: Quellentypen. Innerer Ring: Quellen in arabischer gegenüber lateinischer Schrift, was Zeichensetzung und Namensreihenfolge bestimmt.",
+            "latin": "Lateinische Schrift",
+            "arabic": "Arabische Schrift",
+            "sources": "Quellen",
+            "total": "Quellen gesamt"
+          },
+          "recency": {
+            "title": "Aktualität der Quellen",
+            "intro": "Jeder nummerierte Punkt ist eine Quelle auf der Achse des Erscheinungsjahrs. Viele Kurse verlangen Quellen aus den letzten 5 oder 10 Jahren; die schattierten Zonen zeigen sie.",
+            "newest": "Neueste",
+            "oldest": "Älteste",
+            "median": "Medianjahr",
+            "medianShort": "Median",
+            "age": "vor {n} Jahren",
+            "last5": "Letzte 5 Jahre",
+            "last10": "Letzte 10 Jahre",
+            "undated": "Ohne Datum (o. J.)",
+            "share5": "Anteil der letzten 5 Jahre"
+          },
+          "ids": {
+            "title": "Persistente Kennungen",
+            "intro": "Quellen mit DOI oder ISBN lassen sich immer wiederfinden; eine bloße URL kann ins Leere führen. Jeder Block ist eine nummerierte Quelle.",
+            "axis": "Ein Block pro Quelle, gruppiert nach ihrer besten Kennung",
+            "doi": "Mit DOI",
+            "isbn": "Mit ISBN",
+            "url": "Nur URL",
+            "none": "Ohne Kennung",
+            "persistent": "DOI oder ISBN"
+          }
+        }
       }
     },
     "area-calculator": {
