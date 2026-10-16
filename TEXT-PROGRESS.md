@@ -21,9 +21,12 @@
 - Round 2: readability-score-calculator (Rs* indicators, ScoreDial, package helpers `readabilityBreakdown`,
   `fleschReadingEaseOf`, `fleschKincaidGradeOf`, `readabilityBandFor` + tests), reading-time-calculator
   (Rt* indicators, ReadingDial, reader-playback wow piece).
+- Round 3: speech-word-count-calculator (Sw* indicators, PaceRings, teleprompter wow piece with pace slider),
+  lorem-ipsum-generator (Li* indicators, LiPageMockup, layout-playground wow piece; package constants
+  `LOREM_COUNT_RANGE`/`LOREM_WORDS_PER_SENTENCE`/`LOREM_SENTENCES_PER_PARAGRAPH`, `loremWordBankSize`,
+  `seededLoremRandom`, `loremWordRange` + tests; generation output unchanged).
 
 ## Remaining (text-tools category)
-- Round 3: speech-word-count-calculator, lorem-ipsum-generator
 - Round 4: text-logo-generator
 - Final round: lint, tsc, tests, build; delete this file; pull --rebase; push; CI; URL list.
 
@@ -32,3 +35,7 @@
 - `sgMath.sentencesOf` (spelling-grammar, English-only fixed samples) intentionally left as is.
 - Readability sample text is English in all locales on purpose (formulas are English-only); it is `SAMPLE_TEXT`
   in `passageExamples.ts`. Its Clear button now empties the textarea; a "Load Sample Text" button restores it.
+- Lorem: settings now regenerate live with the current seed; Generate = new seed, Clear = defaults + new seed.
+  SSR/hydration uses seed 42, then a random seed after mount (text swaps once, never empty).
+- Speech: pause-budget card is what-if only; the estimate stays pause-free. Docs pages of both tools untouched
+  except lorem docs word-bank bars now read `loremWordBankSize`.

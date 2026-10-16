@@ -4,6 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import LiLayoutPlayground from "./LiLayoutPlayground";
+import LiStructureFormula from "./LiStructureFormula";
+import LiParagraphBars from "./LiParagraphBars";
+import LiSentenceRhythm from "./LiSentenceRhythm";
+import LiWordLengths from "./LiWordLengths";
+import LiLetterFrequency from "./LiLetterFrequency";
+import LiVocabulary from "./LiVocabulary";
+import LiFitTargets from "./LiFitTargets";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -18,7 +26,18 @@ export default async function LoremEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <div className="space-y-6">
+          <LiLayoutPlayground />
+          <LiStructureFormula />
+          <LiParagraphBars />
+          <LiSentenceRhythm />
+        </div>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <LiWordLengths />
+          <LiLetterFrequency />
+          <LiVocabulary />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
@@ -31,6 +50,7 @@ export default async function LoremEducation() {
             </div>
           ))}
         </div>
+        <LiFitTargets />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

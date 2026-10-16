@@ -4,6 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import SwTeleprompter from "./SwTeleprompter";
+import SwFormula from "./SwFormula";
+import SwPaceCompare from "./SwPaceCompare";
+import SwTimeSlot from "./SwTimeSlot";
+import SwSentenceBreaths from "./SwSentenceBreaths";
+import SwMinuteMarks from "./SwMinuteMarks";
+import SwPauseBudget from "./SwPauseBudget";
+import SwSpeakVsRead from "./SwSpeakVsRead";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -18,7 +26,17 @@ export default async function SWEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <div className="space-y-6">
+          <SwTeleprompter />
+          <SwFormula />
+          <SwPaceCompare />
+          <SwTimeSlot />
+        </div>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <SwSpeakVsRead />
+          <SwSentenceBreaths />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
@@ -30,6 +48,10 @@ export default async function SWEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <SwMinuteMarks />
+          <SwPauseBudget />
         </div>
       </InfoSection>
 

@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Clock, Hash, Layers, Link2 } from "lucide-react";
+import { loremWordBankSize } from "@tooloralabs/tools";
 import DocsBreadcrumb from "@/components/docs/DocsBreadcrumb";
 import DocsHero from "@/components/docs/DocsHero";
 import QuickFacts from "@/components/docs/QuickFacts";
@@ -65,8 +66,8 @@ export default async function LoremIpsumGeneratorDocsPage() {
         <p className="mb-4 text-zinc-600 dark:text-zinc-300">{t("anatomy.intro")}</p>
         <ValueComparisonBarDiagram
           bars={[
-            { label: t("anatomy.labelClassic"), value: 62, colorClass: "fill-blue-600 dark:fill-blue-400" },
-            { label: t("anatomy.labelModern"), value: 51, colorClass: "fill-emerald-500 dark:fill-emerald-400" },
+            { label: t("anatomy.labelClassic"), value: loremWordBankSize("classic"), colorClass: "fill-blue-600 dark:fill-blue-400" },
+            { label: t("anatomy.labelModern"), value: loremWordBankSize("modern"), colorClass: "fill-emerald-500 dark:fill-emerald-400" },
           ]}
           caption={t("anatomy.caption")}
         />
