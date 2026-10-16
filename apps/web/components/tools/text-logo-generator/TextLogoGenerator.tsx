@@ -1,34 +1,16 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { TextLogoCalculator as LogoTool } from "@tooloralabs/tools";
-
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import LogoInputPanel from "./LogoInputPanel";
 import LogoResult from "./LogoResult";
-import LogoQuickReference from "./LogoQuickReference";
-import { TEXT_LOGO_STYLES } from "./types";
-
-const tool = new LogoTool();
+import { TlLiveProvider } from "./TlLiveContext";
 
 export default function TextLogoGenerator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.text-logo-generator.nav");
-  const [text, setText] = useState("Toolora");
-
-  function handleClear() {
-    setText("Toolora");
-  }
-
-  const entries = useMemo(() => {
-    if (!text.trim()) return [];
-    return TEXT_LOGO_STYLES.map((style) => {
-      const output = tool.execute({ text, style }, { locale: "en-US" });
-      return { style, text: output.data.styledText };
-    });
-  }, [text]);
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -37,23 +19,25 @@ export default function TextLogoGenerator({ education }: { education: ReactNode 
   ];
 
   return (
-    <>
+    <TlLiveProvider>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<LogoInputPanel text={text} onTextChange={setText} onClear={handleClear} />}
-          result={<LogoResult entries={entries} isEmpty={!text.trim()} />}
-          sidebar={<RelatedToolsSidebar currentSlug="text-logo-generator" category="text-tools" />}
+          stretchInput
+          stretchResult
+          sidebarMatchRow
+          input={<LogoInputPanel />}
+          result={<LogoResult />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="text-logo-generator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="text-logo-generator" />
               <SectionNav items={navItems} />
-              <LogoQuickReference />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </TlLiveProvider>
   );
 }

@@ -32895,6 +32895,139 @@
         "howCalculatedTitle": "So wurde dieses Ergebnis berechnet",
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis"
+      },
+      "live": {
+        "worked": "Rechenbeispiel",
+        "empty": "Geben Sie oben einen Text ein, um diesen Indikator zu sehen.",
+        "sample": "Toolora Labs 2026",
+        "inputFooter": "Live: {chars} Zeichen · {style} gestaltet {mapped} davon um. Alle Stile aktualisieren sich beim Tippen.",
+        "inputHint": "Geben Sie einen Text ein – alle Stile aktualisieren sich sofort.",
+        "keys": {
+          "title": "Stil-Tastatur",
+          "style": "Auf der Tastatur gezeigter Stil",
+          "legend": "Taste anklicken zum Hinzufügen · Bernstein = in Ihrem Text · gestrichelt = keine Variante in diesem Stil"
+        },
+        "table": {
+          "style": "Gewählter Stil",
+          "characters": "Zeichen",
+          "mapped": "Umgestaltete Zeichen",
+          "exceptions": "Historische Ausnahmen",
+          "exceptionsNote": "Ältere Unicode-Symbole, die der Stil wiederverwendet",
+          "kept": "Unverändert",
+          "keptNote": "{latin} lateinische ohne Variante · {other} Leerzeichen, Satzzeichen, andere Schriften",
+          "utf16": "UTF-16-Codeeinheiten",
+          "utf8": "UTF-8-Bytes",
+          "plainNote": "Klartext: {n}",
+          "ratio": "Größe gegenüber Klartext",
+          "selectHint": "Klicken Sie auf einen Stil, um ihn zu wählen – Tabelle, Ringe und Indikatoren folgen Ihrer Auswahl."
+        },
+        "rings": {
+          "aria": "Anteil der Zeichen, die jeder Stil umgestaltet hat",
+          "center": "umgestaltet",
+          "caption": "Ein Ring pro Stil · {style} hervorgehoben"
+        },
+        "blocks": {
+          "basicLatin": "Basis-Lateinisch",
+          "latinSupplement": "Lateinische Ergänzungen",
+          "letterlike": "Buchstabenähnliche Symbole",
+          "enclosed": "Umschlossene alphanumerische Zeichen",
+          "fullwidth": "Halbbreite und vollbreite Formen",
+          "mathAlphanumeric": "Mathematische alphanumerische Symbole",
+          "other": "Andere Blöcke"
+        },
+        "inspector": {
+          "title": "Glyphen-Inspektor",
+          "intro": "Klicken Sie auf ein beliebiges Zeichen des {style}-Texts, um zu sehen, welcher Codepunkt es ersetzt und wie er berechnet wird.",
+          "hint": "Zeichen anklicken · gestrichelte Felder bleiben unverändert",
+          "kept": "Keine Variante – unverändert",
+          "exception": "Historisches Symbol {cp} (nicht Basis + Versatz)",
+          "source": "Getipptes Zeichen",
+          "styled": "Gestaltetes Zeichen",
+          "formula": "Codepunkt-Formel",
+          "block": "Unicode-Block",
+          "utf16": "UTF-16-Codeeinheiten",
+          "utf8": "UTF-8-Bytes"
+        },
+        "blockMap": {
+          "title": "Wo die Zeichen in Unicode liegen",
+          "intro": "Jeder Punkt ist ein Zeichen Ihres Texts auf einer logarithmischen Codepunkt-Achse; die schattierten Bänder sind die Unicode-Blöcke, aus denen die Stile stammen.",
+          "aria": "Codepunkte jedes Stils auf einer logarithmischen Achse mit schattierten Unicode-Blöcken",
+          "span": "Codepunkt-Spanne"
+        },
+        "bytes": {
+          "title": "Speicherbedarf in Bytes",
+          "intro": "Wie viele UTF-8-Bytes der Text in jedem Stil im Vergleich zum Klartext belegt – Zeichen oberhalb von U+FFFF brauchen je 4 Bytes.",
+          "aria": "UTF-8-Bytes des Klartexts und jedes Stils",
+          "plain": "Klartext",
+          "axis": "UTF-8-Bytes",
+          "four": "4-Byte-Zeichen",
+          "three": "3-Byte-Zeichen",
+          "twoOne": "1–2-Byte-Zeichen (Bytes)",
+          "total": "{style} gesamt",
+          "ratio": "×{r} größer im gewählten Stil"
+        },
+        "utf16": {
+          "title": "Länge aus Sicht der Zähler",
+          "intro": "Viele Zeichenzähler und Textfelder zählen UTF-16-Codeeinheiten, sodass ein gestalteter Buchstabe doppelt zählen kann. Die gestrichelte Linie markiert die sichtbaren Zeichen.",
+          "aria": "UTF-16-Einheiten pro Stil, sortiert, gegenüber sichtbaren Zeichen",
+          "visible": "{n} sichtbar",
+          "characters": "Sichtbare Zeichen",
+          "pairs": "Surrogatpaare",
+          "pairsNote": "Zeichen oberhalb von U+FFFF belegen 2 Einheiten",
+          "units": "{style}-Einheiten",
+          "extra": "Zusätzliche Einheiten"
+        },
+        "coverage": {
+          "title": "Stil-Abdeckung",
+          "intro": "Wie jeder Stil jedes Zeichen behandelt hat: per Blockversatz ersetzt, durch ein historisches Symbol ersetzt, mangels Variante unverändert oder kein lateinischer Buchstabe bzw. keine Ziffer.",
+          "aria": "Gestapelte Balken zur Zeichenbehandlung pro Stil",
+          "offset": "Blockversatz",
+          "exception": "Historisches Symbol",
+          "unchanged": "Keine Variante",
+          "other": "Leerzeichen & Sonstiges",
+          "unchangedNote": "z. B. Ziffern in Kursiv und Fett kursiv",
+          "share": "Abdeckung {style}"
+        },
+        "exceptions": {
+          "title": "Unicode-Ausnahmen",
+          "intro": "Wo Unicode ein älteres Symbol statt des nächsten Codepunkts im Block verwendet. Der durchgestrichene Codepunkt ist die reservierte Lücke; der blaue ist der vom Tool genutzte.",
+          "style": "Stil",
+          "char": "Zeichen",
+          "hole": "Lücke",
+          "used": "Genutzt",
+          "tag": "Markierung",
+          "inText": "In Ihrem Text",
+          "total": "Ausnahmen in allen Stilen",
+          "forStyle": "Ausnahmen von {style}",
+          "hits": "Ausnahmezeichen in Ihrem Text",
+          "none": "Keine in diesem Text",
+          "activeHits": "Vom gewählten Stil genutzt"
+        },
+        "budget": {
+          "title": "Zeichenbudget",
+          "intro": "Ziehen Sie das Limit eines Namens- oder Bio-Felds. Farbige Balken zählen UTF-16-Einheiten, graue die sichtbaren Zeichen – Felder, die Einheiten zählen, sind schneller voll.",
+          "limit": "Feldlimit",
+          "aria": "Länge jedes Stils gegenüber einem einstellbaren Zeichenlimit",
+          "legend": "Farbig = UTF-16-Einheiten · grau = sichtbare Zeichen · rote Zone = über dem Limit",
+          "byChars": "{style} nach sichtbaren Zeichen",
+          "byUnits": "{style} nach Einheiten",
+          "fits": "Passt ({n} frei)",
+          "over": "{n} zu viel",
+          "perChar": "Einheiten pro Zeichen",
+          "maxChars": "Passende Zeichen (Einheiten)"
+        },
+        "recovery": {
+          "title": "Klartext-Rückgewinnung (NFKC)",
+          "intro": "Die Kompatibilitätsnormalisierung NFKC, die viele Such- und Vergleichssysteme nutzen, faltet gestaltete Zeichen zurück in normale Buchstaben. Hier jeder Stil live normalisiert.",
+          "styled": "{style}-Text",
+          "changed": "Vom Stil geänderte Zeichen",
+          "changedNote": "Von {n}",
+          "recovered": "Nach NFKC",
+          "match": "Entspricht Ihrem Text",
+          "yes": "Ja",
+          "no": "Nein",
+          "all": "Stile, die exakt zurückfalten"
+        }
       }
     },
     "multiplication-table-generator": {

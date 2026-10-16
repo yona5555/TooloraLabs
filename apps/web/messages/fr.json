@@ -32895,6 +32895,139 @@
         "howCalculatedTitle": "Comment ce résultat a été calculé",
         "inputSectionTitle": "Entrée",
         "resultSectionTitle": "Résultat"
+      },
+      "live": {
+        "worked": "Exemple résolu",
+        "empty": "Saisissez un texte ci-dessus pour voir cet indicateur.",
+        "sample": "Toolora Labs 2026",
+        "inputFooter": "En direct : {chars} caractères · {style} en restyle {mapped}. Tous les styles se mettent à jour pendant la saisie.",
+        "inputHint": "Saisissez un texte : tous les styles se mettent à jour instantanément.",
+        "keys": {
+          "title": "Clavier du style",
+          "style": "Style affiché sur le clavier",
+          "legend": "Cliquez sur une touche pour l'ajouter · ambre = dans votre texte · pointillé = pas de variante dans ce style"
+        },
+        "table": {
+          "style": "Style sélectionné",
+          "characters": "Caractères",
+          "mapped": "Caractères restylés",
+          "exceptions": "Exceptions historiques",
+          "exceptionsNote": "Anciens symboles Unicode réutilisés par le style",
+          "kept": "Laissés tels quels",
+          "keptNote": "{latin} latins sans variante · {other} espaces, ponctuation, autres écritures",
+          "utf16": "Unités de code UTF-16",
+          "utf8": "Octets UTF-8",
+          "plainNote": "Texte brut : {n}",
+          "ratio": "Taille par rapport au texte brut",
+          "selectHint": "Cliquez sur un style pour le sélectionner : le tableau, les anneaux et les indicateurs suivent votre choix."
+        },
+        "rings": {
+          "aria": "Part des caractères restylés par chaque style",
+          "center": "restylé",
+          "caption": "Un anneau par style · {style} mis en avant"
+        },
+        "blocks": {
+          "basicLatin": "Latin de base",
+          "latinSupplement": "Suppléments latins",
+          "letterlike": "Symboles de type lettre",
+          "enclosed": "Alphanumériques cerclés",
+          "fullwidth": "Formes de demi et pleine chasse",
+          "mathAlphanumeric": "Symboles alphanumériques mathématiques",
+          "other": "Autres blocs"
+        },
+        "inspector": {
+          "title": "Inspecteur de glyphes",
+          "intro": "Cliquez sur n'importe quel caractère du texte {style} pour voir quel point de code le remplace et comment il est calculé.",
+          "hint": "Cliquez sur un caractère · les cases en pointillé restent inchangées",
+          "kept": "Pas de variante : inchangé",
+          "exception": "Symbole historique {cp} (pas base + décalage)",
+          "source": "Caractère saisi",
+          "styled": "Caractère stylé",
+          "formula": "Formule du point de code",
+          "block": "Bloc Unicode",
+          "utf16": "Unités de code UTF-16",
+          "utf8": "Octets UTF-8"
+        },
+        "blockMap": {
+          "title": "Où vivent les caractères dans Unicode",
+          "intro": "Chaque point est un caractère de votre texte sur un axe logarithmique des points de code ; les bandes ombrées sont les blocs Unicode utilisés par les styles.",
+          "aria": "Points de code de chaque style sur un axe logarithmique avec les blocs Unicode ombrés",
+          "span": "Étendue des points de code"
+        },
+        "bytes": {
+          "title": "Coût de stockage en octets",
+          "intro": "Combien d'octets UTF-8 le texte occupe dans chaque style par rapport au texte brut : les caractères au-delà de U+FFFF demandent 4 octets chacun.",
+          "aria": "Octets UTF-8 du texte brut et de chaque style",
+          "plain": "Texte brut",
+          "axis": "Octets UTF-8",
+          "four": "Caractères de 4 octets",
+          "three": "Caractères de 3 octets",
+          "twoOne": "Caractères de 1–2 octets (octets)",
+          "total": "Total {style}",
+          "ratio": "×{r} plus grand dans le style sélectionné"
+        },
+        "utf16": {
+          "title": "La longueur vue par les compteurs",
+          "intro": "Beaucoup de compteurs et de champs de texte comptent les unités de code UTF-16 : une lettre stylée peut compter double. La ligne pointillée marque les caractères visibles.",
+          "aria": "Unités UTF-16 par style, classées, face aux caractères visibles",
+          "visible": "{n} visibles",
+          "characters": "Caractères visibles",
+          "pairs": "Paires de substitution",
+          "pairsNote": "Les caractères au-delà de U+FFFF utilisent 2 unités",
+          "units": "Unités de {style}",
+          "extra": "Unités en plus des visibles"
+        },
+        "coverage": {
+          "title": "Couverture du style",
+          "intro": "Comment chaque style a traité chaque caractère : remplacé par décalage de bloc, par un symbole historique, laissé tel quel faute de variante, ou n'est pas une lettre ou un chiffre latin.",
+          "aria": "Barres empilées du traitement des caractères par style",
+          "offset": "Décalage de bloc",
+          "exception": "Symbole historique",
+          "unchanged": "Sans variante",
+          "other": "Espaces et autres",
+          "unchangedNote": "ex. chiffres en Italique et Gras italique",
+          "share": "Couverture {style}"
+        },
+        "exceptions": {
+          "title": "Exceptions Unicode",
+          "intro": "Là où Unicode réutilise un ancien symbole au lieu du point de code suivant du bloc. Le point barré est le trou réservé ; le bleu est celui qu'utilise l'outil.",
+          "style": "Style",
+          "char": "Caractère",
+          "hole": "Trou",
+          "used": "Utilisé",
+          "tag": "Étiquette",
+          "inText": "Dans votre texte",
+          "total": "Exceptions dans tous les styles",
+          "forStyle": "Exceptions de {style}",
+          "hits": "Caractères d'exception dans votre texte",
+          "none": "Aucun dans ce texte",
+          "activeHits": "Utilisées par le style sélectionné"
+        },
+        "budget": {
+          "title": "Budget de caractères",
+          "intro": "Faites glisser la limite d'un champ de nom ou de bio. Les barres colorées comptent les unités UTF-16, les grises les caractères visibles : les champs qui comptent les unités se remplissent plus vite.",
+          "limit": "Limite du champ",
+          "aria": "Longueur de chaque style face à une limite réglable",
+          "legend": "Couleur = unités UTF-16 · gris = caractères visibles · zone rouge = au-delà de la limite",
+          "byChars": "{style} en caractères visibles",
+          "byUnits": "{style} en unités",
+          "fits": "Tient ({n} restants)",
+          "over": "Dépasse de {n}",
+          "perChar": "Unités par caractère",
+          "maxChars": "Caractères qui tiennent (unités)"
+        },
+        "recovery": {
+          "title": "Récupération du texte brut (NFKC)",
+          "intro": "La normalisation de compatibilité NFKC, utilisée par de nombreux systèmes de recherche et de comparaison, ramène les caractères stylés à des lettres normales. Voici chaque style normalisé en direct.",
+          "styled": "Texte {style}",
+          "changed": "Caractères modifiés par le style",
+          "changedNote": "Sur {n}",
+          "recovered": "Après NFKC",
+          "match": "Correspond à votre texte",
+          "yes": "Oui",
+          "no": "Non",
+          "all": "Styles qui reviennent exactement"
+        }
       }
     },
     "multiplication-table-generator": {

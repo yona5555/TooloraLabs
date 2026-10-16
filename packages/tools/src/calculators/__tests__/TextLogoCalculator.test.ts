@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { TextLogoCalculator } from "../TextLogoCalculator";
+import { TEXT_LOGO_STYLES, TextLogoCalculator, textLogoBlockOf, textLogoExceptions, textLogoGlyphs, textLogoRecover, utf8ByteLength } from "../TextLogoCalculator";
 
 const ctx = { locale: "en-US" };
 
@@ -66,5 +66,43 @@ describe("TextLogoCalculator", () => {
   it("falls back to bold for an unrecognized style", () => {
     const result = tool.execute({ text: "A", style: "nonexistent" as never }, ctx);
     expect(result.data.styledText).toBe("𝐀");
+  });
+
+  it("glyph breakdown matches execute output for every style", () => {
+    for (const style of TEXT_LOGO_STYLES) {
+      const text = "  Toolora Labs 2026! مرحبا ";
+      const glyphs = textLogoGlyphs(text, style);
+      expect(glyphs.map((g) => g.styled).join("")).toBe(tool.execute({ text, style }, ctx).data.styledText);
+    }
+  });
+
+  it("glyph breakdown flags exceptions, offsets and pass-through characters", () => {
+    const [h, i, five, space] = textLogoGlyphs("hi5 x", "italic");
+    expect(h).toMatchObject({ styled: "ℎ", mapped: true, exception: true, offset: 7, kind: "lower", styledCodePoint: 0x210e, utf16Units: 1, utf8Bytes: 3 });
+    expect(i).toMatchObject({ mapped: true, exception: false, styledCodePoint: 0x1d456, utf16Units: 2, utf8Bytes: 4 });
+    expect(five).toMatchObject({ styled: "5", mapped: false, kind: "digit", offset: 5 });
+    expect(space).toMatchObject({ kind: "other", mapped: false, offset: null, utf8Bytes: 1 });
+  });
+
+  it("lists legacy exceptions per style", () => {
+    expect(textLogoExceptions("doubleStruck").map(([s]) => s).join("")).toBe("CHNPQRZ");
+    expect(textLogoExceptions("bold")).toEqual([]);
+  });
+
+  it("measures UTF-8 bytes and Unicode blocks", () => {
+    expect(utf8ByteLength("aé€𝐀")).toBe(1 + 2 + 3 + 4);
+    expect(textLogoBlockOf(0x41)).toBe("basicLatin");
+    expect(textLogoBlockOf(0x210e)).toBe("letterlike");
+    expect(textLogoBlockOf(0x24b6)).toBe("enclosed");
+    expect(textLogoBlockOf(0xff21)).toBe("fullwidth");
+    expect(textLogoBlockOf(0x1d400)).toBe("mathAlphanumeric");
+    expect(textLogoBlockOf(0x0645)).toBe("other");
+  });
+
+  it("NFKC folds every style back to the plain text", () => {
+    const text = "Toolora Labs 2026";
+    for (const style of TEXT_LOGO_STYLES) {
+      expect(textLogoRecover(tool.execute({ text, style }, ctx).data.styledText)).toBe(text);
+    }
   });
 });

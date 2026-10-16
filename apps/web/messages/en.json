@@ -32895,6 +32895,139 @@
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result"
+      },
+      "live": {
+        "worked": "Worked Example",
+        "empty": "Type some text above to see this indicator.",
+        "sample": "Toolora Labs 2026",
+        "inputFooter": "Live: {chars} characters · {style} restyles {mapped} of them. Every style updates as you type.",
+        "inputHint": "Type some text — every style updates instantly.",
+        "keys": {
+          "title": "Style keyboard",
+          "style": "Style shown on the keyboard",
+          "legend": "Click a key to add it · amber = in your text · dashed = no variant in this style"
+        },
+        "table": {
+          "style": "Selected style",
+          "characters": "Characters",
+          "mapped": "Restyled characters",
+          "exceptions": "Legacy exceptions",
+          "exceptionsNote": "Older Unicode symbols reused by the style",
+          "kept": "Kept as typed",
+          "keptNote": "{latin} Latin without a variant · {other} spaces, punctuation, other scripts",
+          "utf16": "UTF-16 code units",
+          "utf8": "UTF-8 bytes",
+          "plainNote": "Plain text: {n}",
+          "ratio": "Size vs plain text",
+          "selectHint": "Click a style to select it — the table, rings and indicators below follow your selection."
+        },
+        "rings": {
+          "aria": "Share of characters each style restyled",
+          "center": "restyled",
+          "caption": "One ring per style · {style} highlighted"
+        },
+        "blocks": {
+          "basicLatin": "Basic Latin",
+          "latinSupplement": "Latin supplements",
+          "letterlike": "Letterlike Symbols",
+          "enclosed": "Enclosed Alphanumerics",
+          "fullwidth": "Halfwidth & Fullwidth Forms",
+          "mathAlphanumeric": "Mathematical Alphanumeric Symbols",
+          "other": "Other blocks"
+        },
+        "inspector": {
+          "title": "Glyph Inspector",
+          "intro": "Click any character of the {style} text to see which code point replaces it and how that code point is computed.",
+          "hint": "Click a character · dashed tiles are kept as typed",
+          "kept": "No variant — kept as typed",
+          "exception": "Legacy symbol {cp} (not base + offset)",
+          "source": "Typed character",
+          "styled": "Styled character",
+          "formula": "Code point formula",
+          "block": "Unicode block",
+          "utf16": "UTF-16 code units",
+          "utf8": "UTF-8 bytes"
+        },
+        "blockMap": {
+          "title": "Where the Characters Live in Unicode",
+          "intro": "Each dot is one character of your text, placed on a logarithmic code-point axis; the shaded bands are the Unicode blocks the styles draw from.",
+          "aria": "Code points of every style on a logarithmic axis with Unicode blocks shaded",
+          "span": "Code-point span"
+        },
+        "bytes": {
+          "title": "Storage Cost in Bytes",
+          "intro": "How many UTF-8 bytes the text takes in each style compared with the plain text — characters beyond U+FFFF need 4 bytes each.",
+          "aria": "UTF-8 bytes of the plain text and of each style",
+          "plain": "Plain text",
+          "axis": "UTF-8 bytes",
+          "four": "4-byte characters",
+          "three": "3-byte characters",
+          "twoOne": "1–2-byte characters (bytes)",
+          "total": "{style} total",
+          "ratio": "×{r} larger in the selected style"
+        },
+        "utf16": {
+          "title": "Length as Counters See It",
+          "intro": "Many character counters and text fields count UTF-16 code units, so one styled letter can count as two. The dashed line marks the visible characters.",
+          "aria": "UTF-16 code units per style, ranked, against the visible character count",
+          "visible": "{n} visible",
+          "characters": "Visible characters",
+          "pairs": "Surrogate pairs",
+          "pairsNote": "Characters above U+FFFF use 2 code units",
+          "units": "{style} code units",
+          "extra": "Extra units vs visible"
+        },
+        "coverage": {
+          "title": "Style Coverage",
+          "intro": "How each style handled every character: replaced by block offset, replaced by a legacy symbol, left as typed because the style has no variant, or not a Latin letter or digit.",
+          "aria": "Stacked bars of how each style handled the characters",
+          "offset": "Block offset",
+          "exception": "Legacy symbol",
+          "unchanged": "No variant",
+          "other": "Spaces & other",
+          "unchangedNote": "e.g. digits in Italic and Bold Italic",
+          "share": "{style} coverage"
+        },
+        "exceptions": {
+          "title": "Unicode Exceptions",
+          "intro": "Where Unicode reuses an older symbol instead of the next code point in the block. The struck-out code point is the reserved hole; the blue one is what the tool uses.",
+          "style": "Style",
+          "char": "Character",
+          "hole": "Hole",
+          "used": "Used",
+          "tag": "Tag",
+          "inText": "In your text",
+          "total": "Exceptions in all styles",
+          "forStyle": "{style} exceptions",
+          "hits": "Exception characters in your text",
+          "none": "None in this text",
+          "activeHits": "Used by the selected style"
+        },
+        "budget": {
+          "title": "Character Budget",
+          "intro": "Drag the limit of a name or bio field. Coloured bars count UTF-16 code units, grey bars count visible characters — fields that count code units fill up faster.",
+          "limit": "Field limit",
+          "aria": "Each style's length against an adjustable character limit",
+          "legend": "Coloured = UTF-16 code units · grey = visible characters · red zone = over the limit",
+          "byChars": "{style} by visible characters",
+          "byUnits": "{style} by code units",
+          "fits": "Fits ({n} left)",
+          "over": "Over by {n}",
+          "perChar": "Code units per character",
+          "maxChars": "Characters that fit (code units)"
+        },
+        "recovery": {
+          "title": "Plain-Text Recovery (NFKC)",
+          "intro": "Compatibility normalization (NFKC), used by many search and comparison pipelines, folds styled characters back to plain letters. This shows each style folded live.",
+          "styled": "{style} text",
+          "changed": "Characters changed by the style",
+          "changedNote": "Out of {n}",
+          "recovered": "After NFKC",
+          "match": "Matches your text",
+          "yes": "Yes",
+          "no": "No",
+          "all": "Styles that fold back exactly"
+        }
       }
     },
     "multiplication-table-generator": {

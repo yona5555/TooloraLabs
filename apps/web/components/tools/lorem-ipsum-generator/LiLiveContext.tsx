@@ -8,7 +8,6 @@ import {
   useMemo,
   useRef,
   useState,
-  useSyncExternalStore,
   type ReactNode,
   type RefObject,
 } from "react";
@@ -32,21 +31,14 @@ import type { LoremIpsumOutput, LoremStyle, LoremUnit } from "./types";
 
 const tool = new LoremTool();
 const DEFAULTS = { unit: "paragraphs" as LoremUnit, count: "3", style: "classic" as LoremStyle, startWithLorem: true };
-/** Seed for the server render and hydration pass, so both produce byte-identical text. */
-const SERVER_SEED = 42;
+/**
+ * Fixed seed for the server render and the first client render, so the text never changes after the
+ * page appears (no layout shift). A random seed takes over only after Generate or a settings change.
+ */
+const INITIAL_SEED = 42;
 const WORD_LENGTH_BUCKETS = 15;
 
 const newSeed = () => Math.floor(Math.random() * 0x7ffffffe) + 1;
-
-/**
- * The first real (random) seed is created once per page load. useSyncExternalStore renders the
- * server seed during hydration and switches to this one right after it, so the SSR HTML and the
- * hydrating client render always match and the page is never empty.
- */
-let clientSeed: number | null = null;
-const subscribeSeed = () => () => {};
-const getClientSeed = () => (clientSeed ??= newSeed());
-const getServerSeed = () => SERVER_SEED;
 
 export type LiSentence = { index: number; start: number; end: number; words: number; paragraph: number };
 export type LiParagraph = { index: number; start: number; end: number; words: number; sentences: number; characters: number; letters: number };
@@ -170,11 +162,10 @@ export function LiLiveProvider({ children }: { children: ReactNode }) {
   const [count, setCountState] = useState(DEFAULTS.count);
   const [style, setStyleState] = useState<LoremStyle>(DEFAULTS.style);
   const [startWithLorem, setStartWithLoremState] = useState(DEFAULTS.startWithLorem);
-  const initialSeed = useSyncExternalStore(subscribeSeed, getClientSeed, getServerSeed);
   const [manualSeed, setManualSeed] = useState<number | null>(null);
   const [activeParagraph, setActiveParagraph] = useState<number | null>(null);
   const textBoxRef = useRef<HTMLDivElement | null>(null);
-  const seed = manualSeed ?? initialSeed;
+  const seed = manualSeed ?? INITIAL_SEED;
 
   const countValue = parseLocalizedNumber(count) || 0;
   const args = useMemo(() => ({ unit, count: countValue, style, startWithLorem }), [unit, countValue, style, startWithLorem]);
@@ -187,22 +178,28 @@ export function LiLiveProvider({ children }: { children: ReactNode }) {
   const digitStyle = resolveDigitStyle(count);
 
   // Any settings change regenerates the text, so a paragraph selection would point at different text.
+  // The first change also leaves the fixed initial seed for a random one; later changes keep that seed.
+  const leaveInitialSeed = useCallback(() => {
+    const fresh = newSeed();
+    setManualSeed((current) => current ?? fresh);
+    setActiveParagraph(null);
+  }, []);
   const setUnit = useCallback((next: LoremUnit) => {
     setUnitState(next);
-    setActiveParagraph(null);
-  }, []);
+    leaveInitialSeed();
+  }, [leaveInitialSeed]);
   const setCount = useCallback((next: string) => {
     setCountState(next);
-    setActiveParagraph(null);
-  }, []);
+    leaveInitialSeed();
+  }, [leaveInitialSeed]);
   const setStyle = useCallback((next: LoremStyle) => {
     setStyleState(next);
-    setActiveParagraph(null);
-  }, []);
+    leaveInitialSeed();
+  }, [leaveInitialSeed]);
   const setStartWithLorem = useCallback((next: boolean) => {
     setStartWithLoremState(next);
-    setActiveParagraph(null);
-  }, []);
+    leaveInitialSeed();
+  }, [leaveInitialSeed]);
 
   const regenerate = useCallback(() => {
     setManualSeed(newSeed());
