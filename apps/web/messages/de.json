@@ -12869,6 +12869,171 @@
         "ariaLabel": "Liniendiagramm der Ebbinghaus-Vergessenskurve, die über 30 Tage abnimmt, mit markierten Wiederholungspunkten für verteiltes Lernen",
         "caption": "Basierend auf Hermann Ebbinghaus' klassischer Vergessenskurven-Forschung; die individuelle Behaltensleistung variiert je nach Material und Person.",
         "reviewLabel": "Wiederholungspunkt"
+      },
+      "studio": {
+        "nav": {
+          "indicators": "Lernindikatoren"
+        },
+        "units": {
+          "h": "Std.",
+          "min": "Min."
+        },
+        "sample": {
+          "exams": [
+            "Biologie",
+            "Organische Chemie",
+            "Analysis II",
+            "Weltgeschichte"
+          ]
+        },
+        "input": {
+          "title": "Prüfungsplaner",
+          "start": "Startdatum (heute)",
+          "weekly": "Konzentrierte Lernstunden pro Wochentag",
+          "weeklyHint": "Echte Lernzeit, die du pro Tag aufbringen kannst; Pomodoro-Pausen kommen noch hinzu.",
+          "exams": "Prüfungen ({n})",
+          "name": "Fach",
+          "date": "Prüfungsdatum",
+          "difficulty": "Schwierigkeit (1 leicht – 5 schwer)",
+          "credits": "Leistungspunkte / Gewicht",
+          "topics": "Themen",
+          "hours": "Geplante Lernstunden (Ziel)",
+          "add": "Prüfung hinzufügen",
+          "remove": "Prüfung entfernen",
+          "newExam": "Prüfung {n}",
+          "pomodoro": "Pomodoro-Rhythmus",
+          "work": "Fokus (Min.)",
+          "short": "Kurze Pause (Min.)",
+          "long": "Lange Pause (Min.)",
+          "every": "Lange Pause alle",
+          "reset": "Beispielplan laden",
+          "savedNote": "Dein Plan wird nur in diesem Browser gespeichert."
+        },
+        "result": {
+          "title": "Dein Lernplan Tag für Tag",
+          "ok": "Im Plan: Jede Prüfung erhält ihre Zielstunden, {free} Puffer bleiben übrig.",
+          "short": "Überlastet: {short} passen nicht mehr vor die Prüfungen. Mehr Stunden einplanen, Ziele senken oder früher beginnen.",
+          "empty": "Füge eine Prüfung mit einem künftigen Datum hinzu, um den Plan zu erstellen.",
+          "planned": "Geplant",
+          "required": "Benötigt",
+          "buffer": "Puffer",
+          "shortfall": "Fehlbetrag",
+          "pomodoros": "Pomodoros",
+          "colDay": "Tag",
+          "colPlan": "Einheiten",
+          "colHours": "Genutzt / frei",
+          "groupDays": "Plan Tag für Tag",
+          "groupExams": "Pro Prüfung: Schwierigkeit × Leistungspunkte × Dringlichkeit",
+          "groupTotals": "Summen",
+          "review": "Wiederholung",
+          "examDay": "Prüfung: {names}",
+          "noStudy": "Keine Lernzeit",
+          "pomodoroCount": "Pomodoros: {n}",
+          "capacity": "Nutzbare Kapazität",
+          "daysCount": "Tage: {n}",
+          "studyDays": "Lerntage: {n}",
+          "load": "Auslastung (benötigt ÷ Kapazität)",
+          "wall": "Zeit am Schreibtisch mit Pausen",
+          "caption": "Zeilen sind Prüfungen, Spalten Tage; dunkler bedeutet mehr Zeit. ◆ Wiederholung, ★ Prüfungstag; der obere Streifen zeigt Kapazität und Nutzung jedes Tages."
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "pomodoro": {
+            "title": "Zeitleiste des Pomodoro-Zyklus",
+            "intro": "Dein vollster Tag, aufgeteilt in Fokusblöcke und Pausen. Bewege die Regler, um den Rhythmus des ganzen Plans zu ändern.",
+            "work": "Fokus",
+            "short": "Kurze Pause",
+            "long": "Lange Pause",
+            "pomodoros": "Pomodoros",
+            "shortBreaks": "Kurze Pausen",
+            "longBreaks": "Lange Pausen",
+            "focus": "Fokuszeit",
+            "breaks": "Pausenzeit",
+            "wall": "Von Anfang bis Ende",
+            "ratio": "Fokusanteil",
+            "last": "letzter mit {n} Min.",
+            "hint": "Jeder Regler aktualisiert Plan, Tabelle und alle Indikatoren."
+          },
+          "reviews": {
+            "title": "Plan der verteilten Wiederholungen",
+            "intro": "Jede Prüfung bekommt kurze Wiederholungen 7, 3 und 1 Tag vorher, sofern nach den ersten Lerntagen Platz ist.",
+            "learn": "Lerntag",
+            "review": "Wiederholung",
+            "exam": "Prüfung",
+            "none": "Kein Platz für Wiederholungen",
+            "total": "Alle Wiederholungen"
+          },
+          "curve": {
+            "title": "Vergessenskurve vor der Prüfung",
+            "intro": "Geschätzte Erinnerung vom ersten Lerntag bis zur Prüfung: Jede Wiederholung frischt das Gedächtnis auf und bremst das nächste Vergessen. Wähle eine Prüfung.",
+            "with": "Mit den geplanten Wiederholungen",
+            "without": "Ohne Wiederholungen",
+            "axis": "Tage seit Start",
+            "firstStudy": "Erster Lerntag",
+            "reviews": "Geplante Wiederholungen",
+            "stability": "Gedächtnisstabilität am Prüfungstag",
+            "days": "{n} Tage",
+            "recallWithout": "Erinnerung zur Prüfung, ohne Wiederholungen",
+            "recallWith": "Erinnerung zur Prüfung, mit Wiederholungen",
+            "gain": "Gewinn durch Wiederholungen",
+            "points": "Prozentpunkte"
+          },
+          "priority": {
+            "title": "Prioritätsformel der Prüfungen",
+            "intro": "Freie Zeit wird nach Priorität verteilt: Schwierigkeit × Leistungspunkte × Dringlichkeit, mit Dringlichkeit = 1 + 7 ÷ verbleibende Tage.",
+            "difficulty": "Schwierigkeit",
+            "credits": "Punkte",
+            "urgency": "Dringlichkeit",
+            "priority": "Priorität",
+            "daysLeft": "noch {n} Tage",
+            "formula": "Summe der Prioritäten"
+          },
+          "hours": {
+            "title": "Stunden pro Prüfung",
+            "intro": "Geplante Lern- und Wiederholungszeit gegenüber dem Ziel jeder Prüfung; der schraffierte Teil passte nicht mehr hinein.",
+            "learn": "Lernen",
+            "review": "Wiederholungen",
+            "missing": "Fehlbetrag",
+            "topics": "{n}/{total} Themen",
+            "total": "Alle Prüfungen"
+          },
+          "load": {
+            "title": "Tageslast und Kapazität",
+            "intro": "Gebuchte Lernzeit pro Tag, nach Prüfung gestapelt, unter der roten Linie deiner Verfügbarkeit an diesem Tag.",
+            "capacity": "Tageskapazität",
+            "peak": "Vollster Tag",
+            "average": "Durchschnitt pro Lerntag",
+            "full": "Tage mit voller Auslastung",
+            "spare": "Tage mit freier Zeit",
+            "utilization": "Genutzte Kapazität"
+          },
+          "slack": {
+            "title": "Waage aus Puffer und Fehlbetrag",
+            "intro": "Benötigte Stunden gegenüber verfügbaren Stunden vor den Prüfungen. Probiere den Regler: Was ändert eine Stunde mehr (oder weniger) pro Tag?",
+            "extra": "Zusätzliche Stunden pro Tag (Was-wäre-wenn)",
+            "needed": "Benötigt",
+            "capacity": "Verfügbar",
+            "capacityNow": "Aktuelle Kapazität",
+            "capacityWhatIf": "Kapazität in diesem Szenario",
+            "buffer": "Verbleibender Puffer",
+            "shortfall": "Fehlbetrag",
+            "load": "Auslastung",
+            "heavy": "Über der Kapazität",
+            "light": "Freie Kapazität",
+            "balanced": "Knapp, aber passt"
+          },
+          "ratio": {
+            "title": "Verhältnis Fokus zu Pause",
+            "intro": "Die gesamte Schreibtischzeit des Plans, aufgeteilt in Fokus, kurze und lange Pausen nach deinem Pomodoro-Rhythmus.",
+            "focus": "Fokus",
+            "short": "Kurze Pausen",
+            "long": "Lange Pausen",
+            "wall": "Gesamte Schreibtischzeit",
+            "perHour": "Fokusminuten pro Schreibtischstunde",
+            "ratio": "Fokusanteil",
+            "pomodoros": "Pomodoros: {n}"
+          }
+        }
       }
     },
     "vector-calculator": {
@@ -14812,6 +14977,235 @@
         "howCalculatedTitle": "So wurde dies berechnet",
         "inputSectionTitle": "Eingabe",
         "resultSectionTitle": "Ergebnis"
+      },
+      "studio": {
+        "nav": {
+          "indicators": "Stundenplan-Indikatoren"
+        },
+        "units": {
+          "hours": "{n} Std.",
+          "minutes": "{n} Min.",
+          "perCredit": "{n} Std./Credit"
+        },
+        "days": {
+          "mon": "Mo",
+          "tue": "Di",
+          "wed": "Mi",
+          "thu": "Do",
+          "fri": "Fr",
+          "sat": "Sa",
+          "sun": "So"
+        },
+        "daysLong": {
+          "mon": "Montag",
+          "tue": "Dienstag",
+          "wed": "Mittwoch",
+          "thu": "Donnerstag",
+          "fri": "Freitag",
+          "sat": "Samstag",
+          "sun": "Sonntag"
+        },
+        "kinds": {
+          "lecture": "Vorlesung",
+          "lab": "Praktikum",
+          "seminar": "Seminar",
+          "tutorial": "Übung"
+        },
+        "ics": {
+          "calendarName": "Stundenplan"
+        },
+        "sample": {
+          "classes": [
+            {
+              "name": "Datenstrukturen",
+              "room": "Ingenieurgebäude 120"
+            },
+            {
+              "name": "Praktikum Datenstrukturen",
+              "room": "Ingenieurgebäude 310"
+            },
+            {
+              "name": "Lineare Algebra",
+              "room": "Naturwissenschaftliches Zentrum 204"
+            },
+            {
+              "name": "Physik I: Mechanik",
+              "room": "Physikgebäude 101"
+            },
+            {
+              "name": "Einführung in die Statistik",
+              "room": "Hamilton-Saal 2B"
+            },
+            {
+              "name": "Physik-I-Praktikum",
+              "room": "Physiklabor B"
+            },
+            {
+              "name": "Technisches Schreiben",
+              "room": "Seminarraum 3 (Bibliothek)"
+            },
+            {
+              "name": "Einführung in den Film (Wahlfach)",
+              "room": "Kino im Kunstzentrum"
+            }
+          ]
+        },
+        "input": {
+          "title": "Deine Woche",
+          "classes": "{n, plural, one {# Kurs} other {# Kurse}}",
+          "add": "Kurs hinzufügen",
+          "untitled": "Ohne Titel",
+          "editing": "Ausgewählter Kurs",
+          "code": "Kursnummer",
+          "name": "Kursname",
+          "kind": "Veranstaltungsart",
+          "days": "Wochentage",
+          "start": "Beginn",
+          "end": "Ende",
+          "errorTime": "Das Ende muss nach dem Beginn liegen.",
+          "errorDays": "Wähle mindestens einen Tag.",
+          "room": "Raum",
+          "instructor": "Dozent/in",
+          "credits": "Credits",
+          "less": "Verringern",
+          "more": "Erhöhen",
+          "color": "Farbe",
+          "duplicate": "Duplizieren",
+          "delete": "Löschen",
+          "term": "Semester und Kalenderexport",
+          "termStart": "Erster Vorlesungstag",
+          "termEnd": "Letzter Vorlesungstag",
+          "breakStart": "Ferienbeginn",
+          "breakEnd": "Ferienende",
+          "errorTerm": "Das Semester muss nach seinem Beginn enden.",
+          "useTz": "Zeiten an meine Zeitzone binden",
+          "tzNote": "Termine behalten ihre Ortszeit, auch wenn du reist (DTSTART mit TZID).",
+          "floatingNote": "Gleitende Zeiten: Jeder Kalender zeigt sie in jeder Zeitzone zur selben Uhrzeit.",
+          "reset": "Beispielwoche laden",
+          "savedNote": "Dein Stundenplan wird nur in diesem Browser gespeichert; nichts wird an einen Server gesendet."
+        },
+        "result": {
+          "title": "Wochenstundenplan",
+          "statusClear": "Keine Zeitkonflikte",
+          "statusOverlap": "{n, plural, one {# Überschneidung: zwei Kurse zur selben Zeit} other {# Überschneidungen: Kurse zur selben Zeit}}",
+          "statusTight": "{n, plural, one {# Pause kürzer als {buffer} Min.} other {# Pausen kürzer als {buffer} Min.}}",
+          "alsoTight": "{n, plural, one {Dazu # knapper Raumwechsel.} other {Dazu # knappe Raumwechsel.}}",
+          "contact": "Unterrichtsstunden/Woche",
+          "credits": "Credits",
+          "campusDays": "Campustage",
+          "downloadIcs": ".ics-Kalender herunterladen",
+          "icsNote": "Wöchentlich wiederkehrende Termine für Google Kalender, Apple Kalender und Outlook.",
+          "colItem": "Größe",
+          "colHow": "Rechnung",
+          "colValue": "Wert",
+          "groupWeek": "Diese Woche",
+          "classes": "Kurse",
+          "meetingsFormula": "{n} Termine/Woche",
+          "busy": "Zeit im Unterricht (ohne Doppelzählung)",
+          "busyFormula": "Vereinigung der Kurszeiten",
+          "earliest": "Frühester Beginn",
+          "latest": "Spätestes Ende",
+          "avgDay": "Durchschnittlicher Campustag",
+          "avgDayFormula": "erster Beginn → letztes Ende",
+          "groupConflicts": "Konflikte (Puffer {buffer} Min.)",
+          "overlapBy": "{n} Min. Überschneidung",
+          "gapOnly": "Pause {n} < {buffer} Min.",
+          "noConflicts": "Keine Konflikte",
+          "pairsChecked": "{n} Paare geprüft",
+          "groupDays": "Tag für Tag",
+          "dayOff": "Keine Kurse",
+          "groupClasses": "Kurse",
+          "groupTerm": "Semester (.ics-Export)",
+          "term": "Semester",
+          "weeks": "{n} Wochen",
+          "breakDays": "Ferientage",
+          "sessions": "Termine im Semester",
+          "termHours": "Unterrichtsstunden im Semester",
+          "icsMode": "Kalenderzeiten",
+          "floating": "gleitende Ortszeit",
+          "gridAria": "Wochenraster des Stundenplans",
+          "gridCaption": "Klicke auf einen Block, um den Kurs zu bearbeiten.",
+          "legendOverlap": "Überschneidung",
+          "legendTight": "Pause unter Puffer"
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "conflict": {
+            "title": "Konflikt- und Pufferkarte",
+            "intro": "Jeder Kurs auf einer Zeitleiste pro Tag. Rote Schraffur ist eine echte Überschneidung, ein bernsteinfarbener Balken ein Wechsel, der kürzer als dein Puffer ist. Zieh den Regler auf die Minuten, die du zum Raumwechsel brauchst.",
+            "buffer": "Puffer zwischen Kursen",
+            "overlaps": "Echte Überschneidungen",
+            "tight": "Pausen unter {buffer} Min.",
+            "rule": "markiert, wenn Pause < Puffer (direkt anschließend = 0 Min.)",
+            "atBuffer": "Knappe Pausen bei {n} Min.",
+            "tightest": "Knappster Wechsel"
+          },
+          "load": {
+            "title": "Tägliche Kurslast",
+            "intro": "Unterrichtsstunden pro Tag mit dem Durchschnitt deiner Campustage. Sehr ungleiche Tage sind schwerer durchzuhalten.",
+            "avgShort": "Ø",
+            "classesN": "{n, plural, one {# Kurs} other {# Kurse}}",
+            "avg": "Durchschnitt pro Campustag",
+            "busiest": "Vollster Tag"
+          },
+          "gaps": {
+            "title": "Freizeit zwischen den Kursen",
+            "intro": "Jeder Campustag vom ersten bis zum letzten Kurs: Blau ist Unterricht, Bernstein eine kurze Pause, Grün eine Pause von einer Stunde oder mehr, in der echtes Lernen Platz hat.",
+            "inClass": "im Kurs",
+            "short": "Pause < 1 Std.",
+            "study": "Lernfenster ≥ 1 Std.",
+            "none": "keine Pausen",
+            "longest": "Längste Pause",
+            "studyWindows": "Lernfenster (≥ 1 Std.)",
+            "total": "Pausen pro Woche gesamt"
+          },
+          "credits": {
+            "title": "Credits und Präsenzstunden",
+            "intro": "Ein Credit entspricht ungefähr einer Vorlesungsstunde pro Woche; Praktika und Studios dauern für denselben Credit länger. Vergleiche, was jeder Kurs bringt, mit der Zeit, die er kostet.",
+            "credits": "Credits",
+            "contact": "Präsenzstunden/Woche",
+            "overall": "Gesamter Stundenplan"
+          },
+          "window": {
+            "title": "Tägliches Zeitfenster",
+            "intro": "Vom ersten bis zum letzten Kurs an jedem Tag. Grün markiert den frühesten Beginn der Woche, Rot das späteste Ende."
+          },
+          "campus": {
+            "title": "Campustage und Pendeln",
+            "intro": "An welchen Tagen du auf den Campus musst. Stell deinen Hin- und Rückweg mit − / + ein und sieh die Fahrzeit pro Woche und pro Semester.",
+            "commute": "Hin und zurück",
+            "campusDays": "Campustage",
+            "offDays": "Tage ohne Kurse",
+            "perWeek": "Pendelzeit pro Woche",
+            "trips": "Hin- und Rückfahrten im Semester",
+            "tripsNote": "Campustage im Semester ohne Ferien",
+            "perTerm": "Pendelzeit pro Semester"
+          },
+          "streak": {
+            "title": "Kurse am Stück",
+            "intro": "Die längste Kette von Kursen fast ohne Pause dazwischen. Wähle, wie kurz eine Pause sein darf, damit Kurse noch als direkt hintereinander gelten.",
+            "gapLabel": "Am Stück, wenn die Pause",
+            "classesN": "{n, plural, one {# Kurs} other {# Kurse am Stück}}",
+            "longest": "Längste Serie der Woche"
+          },
+          "workload": {
+            "title": "Wöchentliche Arbeitslast",
+            "intro": "Unterrichtsstunden plus Selbststudium (eine gängige Regel sind etwa 2 Stunden pro Credit) plus Pendeln, verglichen mit einer vollen Arbeitswoche. Wähle deine Lernstunden pro Credit.",
+            "ratio": "Lernstunden pro Credit",
+            "contact": "Unterrichtsstunden",
+            "study": "Selbststudium",
+            "commute": "Pendeln",
+            "total": "Gesamt pro Woche",
+            "perDay": "Durchschnitt pro Tag (7 Tage)",
+            "vsWork": "{n} % einer 40-Stunden-Woche",
+            "zone": {
+              "light": "Leicht",
+              "balanced": "Ausgewogen",
+              "heavy": "Hoch",
+              "overload": "Überlastet"
+            }
+          }
+        }
       }
     },
     "citation-generator": {

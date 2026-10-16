@@ -12869,6 +12869,171 @@
         "ariaLabel": "Gráfico de líneas de la curva del olvido de Ebbinghaus disminuyendo durante 30 días, con puntos de repaso de repetición espaciada marcados",
         "caption": "Basado en la investigación clásica de la curva del olvido de Hermann Ebbinghaus; la retención individual varía según el material y la persona.",
         "reviewLabel": "Punto de repaso"
+      },
+      "studio": {
+        "nav": {
+          "indicators": "Indicadores de estudio"
+        },
+        "units": {
+          "h": "h",
+          "min": "min"
+        },
+        "sample": {
+          "exams": [
+            "Biología",
+            "Química orgánica",
+            "Cálculo II",
+            "Historia universal"
+          ]
+        },
+        "input": {
+          "title": "Planificador de exámenes",
+          "start": "Fecha de inicio (hoy)",
+          "weekly": "Horas de concentración por día de la semana",
+          "weeklyHint": "Tiempo real de estudio que puedes dar cada día; las pausas Pomodoro se suman aparte.",
+          "exams": "Exámenes ({n})",
+          "name": "Asignatura",
+          "date": "Fecha del examen",
+          "difficulty": "Dificultad (1 fácil – 5 difícil)",
+          "credits": "Créditos / peso",
+          "topics": "Temas",
+          "hours": "Horas de estudio objetivo",
+          "add": "Añadir examen",
+          "remove": "Eliminar examen",
+          "newExam": "Examen {n}",
+          "pomodoro": "Ritmo Pomodoro",
+          "work": "Concentración (min)",
+          "short": "Pausa corta (min)",
+          "long": "Pausa larga (min)",
+          "every": "Pausa larga cada",
+          "reset": "Cargar el plan de ejemplo",
+          "savedNote": "Tu plan se guarda solo en este navegador."
+        },
+        "result": {
+          "title": "Tu plan de estudio día a día",
+          "ok": "Vas bien: cada examen recibe sus horas objetivo y quedan {free} de margen.",
+          "short": "Sobrecarga: {short} no caben antes de los exámenes. Añade horas, baja objetivos o empieza antes.",
+          "empty": "Añade un examen con fecha futura para crear el plan.",
+          "planned": "Planificado",
+          "required": "Necesario",
+          "buffer": "Margen",
+          "shortfall": "Déficit",
+          "pomodoros": "Pomodoros",
+          "colDay": "Día",
+          "colPlan": "Sesiones",
+          "colHours": "Usado / libre",
+          "groupDays": "Plan día a día",
+          "groupExams": "Por examen: dificultad × créditos × urgencia",
+          "groupTotals": "Totales",
+          "review": "repaso",
+          "examDay": "examen: {names}",
+          "noStudy": "Sin tiempo de estudio",
+          "pomodoroCount": "Pomodoros: {n}",
+          "capacity": "Capacidad útil",
+          "daysCount": "Días: {n}",
+          "studyDays": "Días de estudio: {n}",
+          "load": "Carga (necesario ÷ capacidad)",
+          "wall": "Tiempo en el escritorio con pausas",
+          "caption": "Las filas son exámenes y las columnas días; más oscuro significa más tiempo. ◆ repaso, ★ día del examen; la franja superior es la capacidad y el uso de cada día."
+        },
+        "ind": {
+          "worked": "Ejemplo resuelto",
+          "pomodoro": {
+            "title": "Línea de tiempo del ciclo Pomodoro",
+            "intro": "Tu día más cargado dividido en bloques de concentración y pausas. Mueve los controles para cambiar el ritmo de todo el plan.",
+            "work": "Concentración",
+            "short": "Pausa corta",
+            "long": "Pausa larga",
+            "pomodoros": "Pomodoros",
+            "shortBreaks": "Pausas cortas",
+            "longBreaks": "Pausas largas",
+            "focus": "Tiempo de concentración",
+            "breaks": "Tiempo de pausas",
+            "wall": "De principio a fin",
+            "ratio": "Proporción de concentración",
+            "last": "el último de {n} min",
+            "hint": "Cada control actualiza el plan, la tabla y todos los indicadores."
+          },
+          "reviews": {
+            "title": "Calendario de repasos espaciados",
+            "intro": "Cada examen recibe repasos breves 7, 3 y 1 día antes, cuando hay hueco tras los primeros días de estudio.",
+            "learn": "Día de aprendizaje",
+            "review": "Repaso",
+            "exam": "Examen",
+            "none": "No hay hueco para repasos",
+            "total": "Todos los repasos"
+          },
+          "curve": {
+            "title": "Curva del olvido antes del examen",
+            "intro": "Recuerdo estimado desde el primer día de estudio hasta el examen: cada repaso restaura la memoria y frena el siguiente olvido. Elige un examen.",
+            "with": "Con los repasos reservados",
+            "without": "Sin repasos",
+            "axis": "días desde el inicio",
+            "firstStudy": "Primer día de estudio",
+            "reviews": "Repasos reservados",
+            "stability": "Estabilidad de la memoria el día del examen",
+            "days": "{n} días",
+            "recallWithout": "Recuerdo en el examen, sin repasos",
+            "recallWith": "Recuerdo en el examen, con repasos",
+            "gain": "Ganancia por repasos",
+            "points": "puntos porcentuales"
+          },
+          "priority": {
+            "title": "Fórmula de prioridad del examen",
+            "intro": "El tiempo libre se reparte por prioridad: dificultad × créditos × urgencia, donde urgencia = 1 + 7 ÷ días restantes.",
+            "difficulty": "Dificultad",
+            "credits": "Créditos",
+            "urgency": "Urgencia",
+            "priority": "Prioridad",
+            "daysLeft": "quedan {n} días",
+            "formula": "Suma de prioridades"
+          },
+          "hours": {
+            "title": "Horas por examen",
+            "intro": "Tiempo de aprendizaje y repaso planificado frente al objetivo de cada examen; la parte rayada no cupo.",
+            "learn": "Aprendizaje",
+            "review": "Repasos",
+            "missing": "Déficit",
+            "topics": "{n}/{total} temas",
+            "total": "Todos los exámenes"
+          },
+          "load": {
+            "title": "Carga diaria frente a capacidad",
+            "intro": "Tiempo de estudio reservado cada día, apilado por examen, bajo la línea roja de tu disponibilidad de ese día.",
+            "capacity": "Capacidad diaria",
+            "peak": "Día más cargado",
+            "average": "Media por día de estudio",
+            "full": "Días a plena capacidad",
+            "spare": "Días con tiempo libre",
+            "utilization": "Capacidad usada"
+          },
+          "slack": {
+            "title": "Balanza de margen y déficit",
+            "intro": "Horas necesarias frente a horas disponibles antes de los exámenes. Prueba el control para ver qué cambia una hora más (o menos) al día.",
+            "extra": "Horas extra por día (y si…)",
+            "needed": "Necesario",
+            "capacity": "Disponible",
+            "capacityNow": "Capacidad actual",
+            "capacityWhatIf": "Capacidad en este escenario",
+            "buffer": "Margen restante",
+            "shortfall": "Déficit",
+            "load": "Carga",
+            "heavy": "Por encima de la capacidad",
+            "light": "Capacidad de sobra",
+            "balanced": "Justo, pero cabe"
+          },
+          "ratio": {
+            "title": "Proporción concentración / pausa",
+            "intro": "Todo el tiempo de escritorio del plan dividido en concentración, pausas cortas y pausas largas según tu ritmo Pomodoro.",
+            "focus": "Concentración",
+            "short": "Pausas cortas",
+            "long": "Pausas largas",
+            "wall": "Tiempo total de escritorio",
+            "perHour": "Minutos de concentración por hora de escritorio",
+            "ratio": "Proporción de concentración",
+            "pomodoros": "Pomodoros: {n}"
+          }
+        }
       }
     },
     "vector-calculator": {
@@ -14812,6 +14977,235 @@
         "howCalculatedTitle": "Cómo se calculó esto",
         "inputSectionTitle": "Entrada",
         "resultSectionTitle": "Resultado"
+      },
+      "studio": {
+        "nav": {
+          "indicators": "Indicadores del horario"
+        },
+        "units": {
+          "hours": "{n} h",
+          "minutes": "{n} min",
+          "perCredit": "{n} h/crédito"
+        },
+        "days": {
+          "mon": "Lun",
+          "tue": "Mar",
+          "wed": "Mié",
+          "thu": "Jue",
+          "fri": "Vie",
+          "sat": "Sáb",
+          "sun": "Dom"
+        },
+        "daysLong": {
+          "mon": "Lunes",
+          "tue": "Martes",
+          "wed": "Miércoles",
+          "thu": "Jueves",
+          "fri": "Viernes",
+          "sat": "Sábado",
+          "sun": "Domingo"
+        },
+        "kinds": {
+          "lecture": "Clase teórica",
+          "lab": "Laboratorio",
+          "seminar": "Seminario",
+          "tutorial": "Tutoría"
+        },
+        "ics": {
+          "calendarName": "Horario de clases"
+        },
+        "sample": {
+          "classes": [
+            {
+              "name": "Estructuras de datos",
+              "room": "Edificio de Ingeniería 120"
+            },
+            {
+              "name": "Laboratorio de estructuras de datos",
+              "room": "Edificio de Ingeniería 310"
+            },
+            {
+              "name": "Álgebra lineal",
+              "room": "Centro de Ciencias 204"
+            },
+            {
+              "name": "Física I: Mecánica",
+              "room": "Edificio de Física 101"
+            },
+            {
+              "name": "Introducción a la estadística",
+              "room": "Aula Hamilton 2B"
+            },
+            {
+              "name": "Laboratorio de Física I",
+              "room": "Laboratorio de Física B"
+            },
+            {
+              "name": "Redacción técnica",
+              "room": "Sala de seminarios 3 (Biblioteca)"
+            },
+            {
+              "name": "Introducción al cine (optativa)",
+              "room": "Cine del Centro de Artes"
+            }
+          ]
+        },
+        "input": {
+          "title": "Tu semana",
+          "classes": "{n, plural, one {# asignatura} other {# asignaturas}}",
+          "add": "Añadir clase",
+          "untitled": "Sin título",
+          "editing": "Clase seleccionada",
+          "code": "Código",
+          "name": "Nombre de la asignatura",
+          "kind": "Tipo de clase",
+          "days": "Días de clase",
+          "start": "Empieza",
+          "end": "Termina",
+          "errorTime": "La hora de fin debe ser posterior a la de inicio.",
+          "errorDays": "Elige al menos un día.",
+          "room": "Aula",
+          "instructor": "Docente",
+          "credits": "Créditos",
+          "less": "Reducir",
+          "more": "Aumentar",
+          "color": "Color",
+          "duplicate": "Duplicar",
+          "delete": "Eliminar",
+          "term": "Periodo y exportación al calendario",
+          "termStart": "Primer día del periodo",
+          "termEnd": "Último día del periodo",
+          "breakStart": "Inicio de vacaciones",
+          "breakEnd": "Fin de vacaciones",
+          "errorTerm": "El periodo debe terminar después de empezar.",
+          "useTz": "Fijar las horas a mi zona horaria",
+          "tzNote": "Los eventos conservan su hora local aunque viajes (DTSTART con TZID).",
+          "floatingNote": "Horas flotantes: cada calendario las muestra a la misma hora de reloj en cualquier zona.",
+          "reset": "Cargar la semana de ejemplo",
+          "savedNote": "Tu horario se guarda solo en este navegador; no se envía nada a ningún servidor."
+        },
+        "result": {
+          "title": "Horario semanal",
+          "statusClear": "Sin choques de horario",
+          "statusOverlap": "{n, plural, one {# choque: dos clases a la misma hora} other {# choques: clases a la misma hora}}",
+          "statusTight": "{n, plural, one {# pausa de menos de {buffer} min} other {# pausas de menos de {buffer} min}}",
+          "alsoTight": "{n, plural, one {Y # cambio de aula muy justo.} other {Y # cambios de aula muy justos.}}",
+          "contact": "Horas de clase/semana",
+          "credits": "Créditos",
+          "campusDays": "Días en el campus",
+          "downloadIcs": "Descargar calendario .ics",
+          "icsNote": "Eventos semanales recurrentes para Google Calendar, Apple Calendar y Outlook.",
+          "colItem": "Elemento",
+          "colHow": "Cálculo",
+          "colValue": "Valor",
+          "groupWeek": "Esta semana",
+          "classes": "Asignaturas",
+          "meetingsFormula": "{n} sesiones/semana",
+          "busy": "Tiempo en clase (sin duplicar)",
+          "busyFormula": "unión de los horarios",
+          "earliest": "Inicio más temprano",
+          "latest": "Fin más tardío",
+          "avgDay": "Jornada media en el campus",
+          "avgDayFormula": "primer inicio → último fin",
+          "groupConflicts": "Choques (margen {buffer} min)",
+          "overlapBy": "{n} min de solape",
+          "gapOnly": "pausa {n} < {buffer} min",
+          "noConflicts": "Sin choques",
+          "pairsChecked": "{n} pares revisados",
+          "groupDays": "Día a día",
+          "dayOff": "Sin clases",
+          "groupClasses": "Asignaturas",
+          "groupTerm": "Periodo (exportación .ics)",
+          "term": "Periodo",
+          "weeks": "{n} semanas",
+          "breakDays": "Días de vacaciones",
+          "sessions": "Sesiones en el periodo",
+          "termHours": "Horas de clase en el periodo",
+          "icsMode": "Horas del calendario",
+          "floating": "hora local flotante",
+          "gridAria": "Cuadrícula del horario semanal",
+          "gridCaption": "Haz clic en un bloque para editar esa clase.",
+          "legendOverlap": "solape",
+          "legendTight": "pausa menor al margen"
+        },
+        "ind": {
+          "worked": "Ejemplo resuelto",
+          "conflict": {
+            "title": "Mapa de choques y márgenes",
+            "intro": "Cada clase en una línea de tiempo por día. El rayado rojo es un solape real; una barra ámbar es un cambio más corto que tu margen. Mueve el control para fijar los minutos que necesitas para ir de un aula a otra.",
+            "buffer": "Margen entre clases",
+            "overlaps": "Solapes reales",
+            "tight": "Pausas de menos de {buffer} min",
+            "rule": "se marca si pausa < margen (contiguas = 0 min)",
+            "atBuffer": "Pausas justas con {n} min",
+            "tightest": "Cambio más justo"
+          },
+          "load": {
+            "title": "Carga diaria de clases",
+            "intro": "Horas de clase cada día, con la media de los días que vas al campus. Los días muy desiguales cuestan más de llevar al día.",
+            "avgShort": "media",
+            "classesN": "{n, plural, one {# clase} other {# clases}}",
+            "avg": "Media por día de campus",
+            "busiest": "Día más cargado"
+          },
+          "gaps": {
+            "title": "Tiempo libre entre clases",
+            "intro": "Cada día de campus de la primera a la última clase: azul es clase, ámbar una pausa corta y verde una pausa de una hora o más donde cabe estudio real.",
+            "inClass": "en clase",
+            "short": "pausa < 1 h",
+            "study": "ventana de estudio ≥ 1 h",
+            "none": "sin pausas",
+            "longest": "Pausa más larga",
+            "studyWindows": "Ventanas de estudio (≥ 1 h)",
+            "total": "Pausas totales por semana"
+          },
+          "credits": {
+            "title": "Créditos frente a horas presenciales",
+            "intro": "Un crédito equivale aproximadamente a una hora de clase teórica por semana; los laboratorios y talleres duran más por el mismo crédito. Compara lo que aporta cada asignatura con el tiempo que exige.",
+            "credits": "créditos",
+            "contact": "horas presenciales/semana",
+            "overall": "Horario completo"
+          },
+          "window": {
+            "title": "Franja horaria diaria",
+            "intro": "De tu primera clase a la última de cada día. El verde marca el inicio más temprano de la semana y el rojo el final más tardío."
+          },
+          "campus": {
+            "title": "Días de campus y desplazamiento",
+            "intro": "Los días que tienes que ir al campus. Ajusta tu trayecto de ida y vuelta con − / + para ver el tiempo de viaje por semana y por periodo.",
+            "commute": "Ida y vuelta",
+            "campusDays": "Días en el campus",
+            "offDays": "Días sin clases",
+            "perWeek": "Trayecto por semana",
+            "trips": "Viajes de ida y vuelta en el periodo",
+            "tripsNote": "días de campus del periodo menos vacaciones",
+            "perTerm": "Trayecto por periodo"
+          },
+          "streak": {
+            "title": "Clases seguidas",
+            "intro": "La cadena más larga de clases casi sin descanso entre ellas. Elige qué pausa tan corta sigue contando como seguidas.",
+            "gapLabel": "Cuenta como seguidas si la pausa es",
+            "classesN": "{n, plural, one {# clase} other {# clases seguidas}}",
+            "longest": "Racha más larga de la semana"
+          },
+          "workload": {
+            "title": "Carga de trabajo semanal",
+            "intro": "Horas de clase más estudio autónomo (una regla habitual es unas 2 horas por crédito) más desplazamientos, frente a una semana laboral completa. Elige tus horas de estudio por crédito.",
+            "ratio": "Horas de estudio por crédito",
+            "contact": "Horas de clase",
+            "study": "Estudio autónomo",
+            "commute": "Desplazamiento",
+            "total": "Total semanal",
+            "perDay": "Media diaria (7 días)",
+            "vsWork": "{n}% de una semana laboral de 40 h",
+            "zone": {
+              "light": "Ligera",
+              "balanced": "Equilibrada",
+              "heavy": "Pesada",
+              "overload": "Sobrecarga"
+            }
+          }
+        }
       }
     },
     "citation-generator": {

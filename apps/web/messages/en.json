@@ -12869,6 +12869,171 @@
         "ariaLabel": "Line chart of the Ebbinghaus forgetting curve declining over 30 days, with spaced-repetition review points marked",
         "caption": "Based on Hermann Ebbinghaus's classic forgetting-curve research; individual retention varies by material and person.",
         "reviewLabel": "Review point"
+      },
+      "studio": {
+        "nav": {
+          "indicators": "Study indicators"
+        },
+        "units": {
+          "h": "h",
+          "min": "min"
+        },
+        "sample": {
+          "exams": [
+            "Biology",
+            "Organic Chemistry",
+            "Calculus II",
+            "World History"
+          ]
+        },
+        "input": {
+          "title": "Exam planner",
+          "start": "Start date (today)",
+          "weekly": "Focus hours per weekday",
+          "weeklyHint": "Real study time you can give each day; Pomodoro breaks are added on top.",
+          "exams": "Exams ({n})",
+          "name": "Subject",
+          "date": "Exam date",
+          "difficulty": "Difficulty (1 easy – 5 hard)",
+          "credits": "Credits / weight",
+          "topics": "Topics",
+          "hours": "Target study hours",
+          "add": "Add exam",
+          "remove": "Remove exam",
+          "newExam": "Exam {n}",
+          "pomodoro": "Pomodoro rhythm",
+          "work": "Focus (min)",
+          "short": "Short break (min)",
+          "long": "Long break (min)",
+          "every": "Long break every",
+          "reset": "Load the sample plan",
+          "savedNote": "Your plan is saved in this browser only."
+        },
+        "result": {
+          "title": "Your day-by-day study plan",
+          "ok": "On track: every exam gets its target hours, with {free} of buffer left.",
+          "short": "Overloaded: {short} will not fit before the exams. Add hours, lower targets or start earlier.",
+          "empty": "Add an exam with a future date to build the plan.",
+          "planned": "Planned",
+          "required": "Needed",
+          "buffer": "Buffer",
+          "shortfall": "Shortfall",
+          "pomodoros": "Pomodoros",
+          "colDay": "Day",
+          "colPlan": "Sessions",
+          "colHours": "Used / free",
+          "groupDays": "Day-by-day plan",
+          "groupExams": "Per exam: difficulty × credits × urgency",
+          "groupTotals": "Totals",
+          "review": "review",
+          "examDay": "exam: {names}",
+          "noStudy": "No study time",
+          "pomodoroCount": "Pomodoros: {n}",
+          "capacity": "Usable capacity",
+          "daysCount": "Days: {n}",
+          "studyDays": "Study days: {n}",
+          "load": "Load (needed ÷ capacity)",
+          "wall": "Desk time with breaks",
+          "caption": "Rows are exams, columns are days; darker means more time. ◆ review, ★ exam day; the top strip is each day's capacity and use."
+        },
+        "ind": {
+          "worked": "Worked example",
+          "pomodoro": {
+            "title": "Pomodoro cycle timeline",
+            "intro": "Your busiest day laid out as focus blocks and breaks. Move the sliders to change the rhythm for the whole plan.",
+            "work": "Focus",
+            "short": "Short break",
+            "long": "Long break",
+            "pomodoros": "Pomodoros",
+            "shortBreaks": "Short breaks",
+            "longBreaks": "Long breaks",
+            "focus": "Focus time",
+            "breaks": "Break time",
+            "wall": "Start to finish",
+            "ratio": "Focus share",
+            "last": "last one {n} min",
+            "hint": "Every slider updates the plan, the table and all indicators."
+          },
+          "reviews": {
+            "title": "Spaced-review schedule",
+            "intro": "Each exam gets short reviews 7, 3 and 1 day before it, when there is room after the first study days.",
+            "learn": "Learning day",
+            "review": "Review",
+            "exam": "Exam",
+            "none": "No room for reviews",
+            "total": "All reviews"
+          },
+          "curve": {
+            "title": "Forgetting curve before the exam",
+            "intro": "Estimated recall from the first study day to the exam: each review resets memory and slows the next decay. Pick an exam.",
+            "with": "With the booked reviews",
+            "without": "Without reviews",
+            "axis": "days from start",
+            "firstStudy": "First study day",
+            "reviews": "Reviews booked",
+            "stability": "Memory stability at the exam",
+            "days": "{n} days",
+            "recallWithout": "Recall at exam, no reviews",
+            "recallWith": "Recall at exam, with reviews",
+            "gain": "Gain from reviews",
+            "points": "percentage points"
+          },
+          "priority": {
+            "title": "Exam priority formula",
+            "intro": "Free time is shared by priority: difficulty × credits × urgency, where urgency = 1 + 7 ÷ days left.",
+            "difficulty": "Difficulty",
+            "credits": "Credits",
+            "urgency": "Urgency",
+            "priority": "Priority",
+            "daysLeft": "{n} days left",
+            "formula": "Sum of priorities"
+          },
+          "hours": {
+            "title": "Hours per exam",
+            "intro": "Planned learning and review time against each exam's target; the hatched part did not fit.",
+            "learn": "Learning",
+            "review": "Reviews",
+            "missing": "Shortfall",
+            "topics": "{n}/{total} topics",
+            "total": "All exams"
+          },
+          "load": {
+            "title": "Daily load vs capacity",
+            "intro": "Study time booked each day, stacked by exam, under the red line of that day's availability.",
+            "capacity": "Daily capacity",
+            "peak": "Busiest day",
+            "average": "Average per study day",
+            "full": "Days at full capacity",
+            "spare": "Days with spare time",
+            "utilization": "Capacity used"
+          },
+          "slack": {
+            "title": "Buffer and shortfall balance",
+            "intro": "Hours needed against hours available before the exams. Try the slider to see what an extra (or lost) hour a day changes.",
+            "extra": "Extra hours per day (what if)",
+            "needed": "Needed",
+            "capacity": "Available",
+            "capacityNow": "Capacity now",
+            "capacityWhatIf": "Capacity in this scenario",
+            "buffer": "Buffer left",
+            "shortfall": "Shortfall",
+            "load": "Load",
+            "heavy": "Over capacity",
+            "light": "Spare capacity",
+            "balanced": "Tight but fits"
+          },
+          "ratio": {
+            "title": "Focus-to-break ratio",
+            "intro": "All desk time in the plan split into focus, short breaks and long breaks with your Pomodoro rhythm.",
+            "focus": "Focus",
+            "short": "Short breaks",
+            "long": "Long breaks",
+            "wall": "Total desk time",
+            "perHour": "Focus minutes per desk hour",
+            "ratio": "Focus share",
+            "pomodoros": "Pomodoros: {n}"
+          }
+        }
       }
     },
     "vector-calculator": {
@@ -14812,6 +14977,235 @@
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input",
         "resultSectionTitle": "Result"
+      },
+      "studio": {
+        "nav": {
+          "indicators": "Schedule indicators"
+        },
+        "units": {
+          "hours": "{n} h",
+          "minutes": "{n} min",
+          "perCredit": "{n} h/credit"
+        },
+        "days": {
+          "mon": "Mon",
+          "tue": "Tue",
+          "wed": "Wed",
+          "thu": "Thu",
+          "fri": "Fri",
+          "sat": "Sat",
+          "sun": "Sun"
+        },
+        "daysLong": {
+          "mon": "Monday",
+          "tue": "Tuesday",
+          "wed": "Wednesday",
+          "thu": "Thursday",
+          "fri": "Friday",
+          "sat": "Saturday",
+          "sun": "Sunday"
+        },
+        "kinds": {
+          "lecture": "Lecture",
+          "lab": "Lab",
+          "seminar": "Seminar",
+          "tutorial": "Tutorial"
+        },
+        "ics": {
+          "calendarName": "Class schedule"
+        },
+        "sample": {
+          "classes": [
+            {
+              "name": "Data Structures",
+              "room": "Engineering Hall 120"
+            },
+            {
+              "name": "Data Structures Lab",
+              "room": "Engineering Hall 310"
+            },
+            {
+              "name": "Linear Algebra",
+              "room": "Science Center 204"
+            },
+            {
+              "name": "Physics I: Mechanics",
+              "room": "Physics Building 101"
+            },
+            {
+              "name": "Intro to Statistics",
+              "room": "Hamilton Hall 2B"
+            },
+            {
+              "name": "Physics I Lab",
+              "room": "Physics Lab B"
+            },
+            {
+              "name": "Technical Writing",
+              "room": "Library Seminar Room 3"
+            },
+            {
+              "name": "Intro to Film (elective)",
+              "room": "Arts Center Cinema"
+            }
+          ]
+        },
+        "input": {
+          "title": "Your week",
+          "classes": "{n, plural, one {# class} other {# classes}}",
+          "add": "Add class",
+          "untitled": "Untitled",
+          "editing": "Selected class",
+          "code": "Course code",
+          "name": "Course name",
+          "kind": "Class type",
+          "days": "Meeting days",
+          "start": "Starts",
+          "end": "Ends",
+          "errorTime": "The end time must be after the start time.",
+          "errorDays": "Pick at least one meeting day.",
+          "room": "Room",
+          "instructor": "Instructor",
+          "credits": "Credits",
+          "less": "Decrease",
+          "more": "Increase",
+          "color": "Color",
+          "duplicate": "Duplicate",
+          "delete": "Delete",
+          "term": "Term and calendar export",
+          "termStart": "First day of term",
+          "termEnd": "Last day of term",
+          "breakStart": "Break starts",
+          "breakEnd": "Break ends",
+          "errorTerm": "The term must end after it starts.",
+          "useTz": "Pin times to my time zone",
+          "tzNote": "Events keep their local time even if you travel (DTSTART with TZID).",
+          "floatingNote": "Floating times: each calendar shows them at the same clock time in any zone.",
+          "reset": "Load the sample week",
+          "savedNote": "Your schedule is saved in this browser only; nothing is sent to a server."
+        },
+        "result": {
+          "title": "Weekly schedule",
+          "statusClear": "No time conflicts",
+          "statusOverlap": "{n, plural, one {# overlap: two classes meet at the same time} other {# overlaps: classes meet at the same time}}",
+          "statusTight": "{n, plural, one {# gap shorter than {buffer} min} other {# gaps shorter than {buffer} min}}",
+          "alsoTight": "{n, plural, one {Plus # tight change-over.} other {Plus # tight change-overs.}}",
+          "contact": "Class hours/week",
+          "credits": "Credits",
+          "campusDays": "Campus days",
+          "downloadIcs": "Download .ics calendar",
+          "icsNote": "Weekly repeating events for Google Calendar, Apple Calendar and Outlook.",
+          "colItem": "Item",
+          "colHow": "How",
+          "colValue": "Value",
+          "groupWeek": "This week",
+          "classes": "Classes",
+          "meetingsFormula": "{n} meetings/week",
+          "busy": "Time in class (no double count)",
+          "busyFormula": "union of class times",
+          "earliest": "Earliest start",
+          "latest": "Latest end",
+          "avgDay": "Average campus day",
+          "avgDayFormula": "first start → last end",
+          "groupConflicts": "Conflicts (buffer {buffer} min)",
+          "overlapBy": "{n} min overlap",
+          "gapOnly": "gap {n} < {buffer} min",
+          "noConflicts": "No conflicts",
+          "pairsChecked": "{n} pairs checked",
+          "groupDays": "Day by day",
+          "dayOff": "No classes",
+          "groupClasses": "Classes",
+          "groupTerm": "Term (.ics export)",
+          "term": "Term",
+          "weeks": "{n} weeks",
+          "breakDays": "Break days",
+          "sessions": "Sessions in term",
+          "termHours": "Class hours in term",
+          "icsMode": "Calendar times",
+          "floating": "floating local time",
+          "gridAria": "Weekly timetable grid",
+          "gridCaption": "Click a block to edit that class.",
+          "legendOverlap": "overlap",
+          "legendTight": "gap under buffer"
+        },
+        "ind": {
+          "worked": "Worked example",
+          "conflict": {
+            "title": "Conflict and buffer map",
+            "intro": "Every class on a time line per day. Red hatching is a true overlap; an amber bar is a change-over shorter than your buffer. Drag the slider to set how many minutes you need to walk between rooms.",
+            "buffer": "Buffer between classes",
+            "overlaps": "True overlaps",
+            "tight": "Gaps under {buffer} min",
+            "rule": "flagged when gap < buffer (touching = 0 min)",
+            "atBuffer": "Tight gaps at {n} min",
+            "tightest": "Tightest change-over"
+          },
+          "load": {
+            "title": "Daily class load",
+            "intro": "Hours in class on each day, with the average over the days you are on campus. Very uneven days are harder to keep up with.",
+            "avgShort": "avg",
+            "classesN": "{n, plural, one {# class} other {# classes}}",
+            "avg": "Average per campus day",
+            "busiest": "Busiest day"
+          },
+          "gaps": {
+            "title": "Free time between classes",
+            "intro": "Each campus day from first class to last: blue is class time, amber a short gap, green a gap of an hour or more that can hold real study.",
+            "inClass": "in class",
+            "short": "gap under 1 h",
+            "study": "study window ≥ 1 h",
+            "none": "no gaps",
+            "longest": "Longest gap",
+            "studyWindows": "Study windows (≥ 1 h)",
+            "total": "Total gaps per week"
+          },
+          "credits": {
+            "title": "Credits vs contact hours",
+            "intro": "A credit is roughly one lecture hour a week; labs and studios meet longer for the same credit. Compare what each class earns with the time it takes.",
+            "credits": "credits",
+            "contact": "contact hours/week",
+            "overall": "Whole schedule"
+          },
+          "window": {
+            "title": "Daily time window",
+            "intro": "From your first class to your last on each day. Green marks the earliest start of the week, red the latest finish."
+          },
+          "campus": {
+            "title": "Campus days and commute",
+            "intro": "Which days you have to be on campus. Set your round-trip commute with − / + to see the travel time per week and per term.",
+            "commute": "Round trip",
+            "campusDays": "Campus days",
+            "offDays": "Days without classes",
+            "perWeek": "Commute per week",
+            "trips": "Round trips in term",
+            "tripsNote": "campus days in term minus break",
+            "perTerm": "Commute per term"
+          },
+          "streak": {
+            "title": "Back-to-back streaks",
+            "intro": "The longest chain of classes with almost no break in between. Choose how short a gap still counts as back to back.",
+            "gapLabel": "Gap counts as back to back if",
+            "classesN": "{n, plural, one {# class} other {# classes in a row}}",
+            "longest": "Longest streak of the week"
+          },
+          "workload": {
+            "title": "Weekly workload",
+            "intro": "Class hours plus self-study (a common rule is about 2 hours per credit) plus commuting, compared with a full working week. Pick your study hours per credit.",
+            "ratio": "Study h per credit",
+            "contact": "Class hours",
+            "study": "Self-study",
+            "commute": "Commute",
+            "total": "Total per week",
+            "perDay": "Average per day (7 days)",
+            "vsWork": "{n}% of a 40-hour work week",
+            "zone": {
+              "light": "Light",
+              "balanced": "Balanced",
+              "heavy": "Heavy",
+              "overload": "Overload"
+            }
+          }
+        }
       }
     },
     "citation-generator": {

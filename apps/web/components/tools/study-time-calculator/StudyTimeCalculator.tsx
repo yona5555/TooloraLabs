@@ -1,72 +1,33 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { StudyTimeCalculator as StudyTimeCalculatorTool } from "@tooloralabs/tools";
 
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import StudyTimeInputPanel from "./StudyTimeInputPanel";
-import StudyTimeResult from "./StudyTimeResult";
-import StudyTimeQuickReference from "./StudyTimeQuickReference";
-import type { StudySessionScenario } from "./types";
-
-const tool = new StudyTimeCalculatorTool();
-
-const DEFAULTS = { totalMinutes: "120", workMinutes: "25", shortBreakMinutes: "5", longBreakMinutes: "15", pomodorosBeforeLongBreak: "4" };
+import AdSpace from "@/components/tool-ui/AdSpace";
+import StudyStudioInput from "./StudyStudioInput";
+import StudyStudioResult from "./StudyStudioResult";
+import { ForgettingCurveCard, PomodoroCycleCard, PriorityFormulaCard, ReviewScheduleCard } from "./StudyIndicatorsA";
+import { DailyLoadCard, FocusRatioCard, HoursPerExamCard, SlackBalanceCard } from "./StudyIndicatorsB";
+import { sampleState, useDerived, useStudioState } from "./studio";
 
 export default function StudyTimeCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.study-time-calculator.nav");
+  const t = useTranslations("tools.study-time-calculator.studio");
+  const sampleNames = () => {
+    const raw: unknown = t.raw("sample.exams");
+    return Array.isArray(raw) ? (raw as string[]) : [];
+  };
 
-  const [totalMinutes, setTotalMinutes] = useState(DEFAULTS.totalMinutes);
-  const [workMinutes, setWorkMinutes] = useState(DEFAULTS.workMinutes);
-  const [shortBreakMinutes, setShortBreakMinutes] = useState(DEFAULTS.shortBreakMinutes);
-  const [longBreakMinutes, setLongBreakMinutes] = useState(DEFAULTS.longBreakMinutes);
-  const [pomodorosBeforeLongBreak, setPomodorosBeforeLongBreak] = useState(DEFAULTS.pomodorosBeforeLongBreak);
-
-  function handleScenarioPreset(scenario: StudySessionScenario) {
-    setTotalMinutes(scenario.totalMinutes);
-    setWorkMinutes(scenario.workMinutes);
-    setShortBreakMinutes(scenario.shortBreakMinutes);
-    setLongBreakMinutes(scenario.longBreakMinutes);
-    setPomodorosBeforeLongBreak(scenario.pomodorosBeforeLongBreak);
-  }
-
-  function handleClear() {
-    setTotalMinutes(DEFAULTS.totalMinutes);
-    setWorkMinutes(DEFAULTS.workMinutes);
-    setShortBreakMinutes(DEFAULTS.shortBreakMinutes);
-    setLongBreakMinutes(DEFAULTS.longBreakMinutes);
-    setPomodorosBeforeLongBreak(DEFAULTS.pomodorosBeforeLongBreak);
-  }
-
-  const digitStyle: DigitStyle = resolveDigitStyle(
-    totalMinutes,
-    workMinutes,
-    shortBreakMinutes,
-    longBreakMinutes,
-    pomodorosBeforeLongBreak
-  );
-
-  const result = useMemo(() => {
-    const output = tool.execute(
-      {
-        totalMinutes: parseLocalizedNumber(totalMinutes) || 0,
-        workMinutes: parseLocalizedNumber(workMinutes) || 0,
-        shortBreakMinutes: parseLocalizedNumber(shortBreakMinutes) || 0,
-        longBreakMinutes: parseLocalizedNumber(longBreakMinutes) || 0,
-        pomodorosBeforeLongBreak: parseLocalizedNumber(pomodorosBeforeLongBreak) || 0,
-      },
-      { locale: "en-US" }
-    );
-    return output.data;
-  }, [totalMinutes, workMinutes, shortBreakMinutes, longBreakMinutes, pomodorosBeforeLongBreak]);
+  const [state, setState] = useStudioState(() => sampleState(sampleNames()));
+  const d = useDerived(state);
+  const props = { state, setState, d };
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
+    { id: "study-indicators", label: t("nav.indicators") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
@@ -75,26 +36,11 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={
-            <StudyTimeInputPanel
-              totalMinutes={totalMinutes}
-              onTotalMinutesChange={setTotalMinutes}
-              workMinutes={workMinutes}
-              onWorkMinutesChange={setWorkMinutes}
-              shortBreakMinutes={shortBreakMinutes}
-              onShortBreakMinutesChange={setShortBreakMinutes}
-              longBreakMinutes={longBreakMinutes}
-              onLongBreakMinutesChange={setLongBreakMinutes}
-              pomodorosBeforeLongBreak={pomodorosBeforeLongBreak}
-              onPomodorosBeforeLongBreakChange={setPomodorosBeforeLongBreak}
-              onScenarioPreset={handleScenarioPreset}
-              onClear={handleClear}
-            />
-          }
+          stretchResult
+          input={<StudyStudioInput state={state} onChange={setState} onReset={() => setState(sampleState(sampleNames()))} />}
           result={
-            <div className="flex flex-col gap-4">
-              <StudyTimeResult result={result} digitStyle={digitStyle} />
-              <StudyTimeQuickReference />
+            <div className="flex flex-col gap-3 lg:flex-1">
+              <StudyStudioResult state={state} d={d} />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="study-time-calculator" category="student-productivity" />}
@@ -106,6 +52,18 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
           }
         />
       </div>
+
+      <section id="study-indicators" className="mt-8 grid scroll-mt-32 grid-cols-1 items-start gap-6">
+        <PomodoroCycleCard {...props} />
+        <ReviewScheduleCard {...props} />
+        <ForgettingCurveCard {...props} />
+        <PriorityFormulaCard {...props} />
+        <AdSpace variant="leaderboard" />
+        <HoursPerExamCard {...props} />
+        <DailyLoadCard {...props} />
+        <SlackBalanceCard {...props} />
+        <FocusRatioCard {...props} />
+      </section>
 
       {education}
     </>
