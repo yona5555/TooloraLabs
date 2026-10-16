@@ -8364,6 +8364,186 @@
       "courseContribution": {
         "courseLabel": "Curso {number}",
         "caption": "La participación de cada curso en tus puntos de calidad totales"
+      },
+      "planner": {
+        "scales": {
+          "sa5": "Escala 5.00 · Arabia Saudí (KSU)",
+          "sa4": "Escala 4.00 · Arabia Saudí (KSU / KFUPM)",
+          "us4": "Escala 4.00 · EE. UU. (College Board)"
+        },
+        "semesterN": "Semestre {n}",
+        "nav": {
+          "indicators": "Indicadores en vivo"
+        },
+        "sample": {
+          "courses": [
+            "Cálculo I",
+            "Física general I",
+            "Introducción a la programación",
+            "Redacción árabe",
+            "Inglés académico",
+            "Cálculo II",
+            "Química general",
+            "Estructuras de datos",
+            "Estadística",
+            "Cultura islámica"
+          ]
+        },
+        "input": {
+          "title": "Tu expediente",
+          "scale": "Escala de calificación",
+          "entry": "Introducir notas como",
+          "entryMode": {
+            "letter": "Letra",
+            "percent": "Porcentaje"
+          },
+          "priorGpa": "GPA acumulado anterior (de {max})",
+          "priorCredits": "Créditos completados",
+          "current": "actual",
+          "removeSemester": "Eliminar semestre",
+          "course": "Asignatura",
+          "credits": "Cr.",
+          "percent": "%",
+          "grade": "Nota",
+          "courseN": "Asignatura {n}",
+          "removeCourse": "Eliminar asignatura",
+          "addCourse": "Añadir asignatura",
+          "addSemester": "Añadir semestre",
+          "target": "GPA acumulado objetivo",
+          "plannedCredits": "Créditos del próximo semestre",
+          "print": "Imprimir expediente",
+          "reset": "Ejemplo",
+          "savedNote": "Tus semestres se guardan solo en este navegador."
+        },
+        "verdict": {
+          "never": "Inalcanzable: el objetivo iguala o supera el máximo de la escala.",
+          "impossible": "Imposible este semestre; necesita {n, plural, one {# semestre} other {# semestres}} con la nota máxima.",
+          "guaranteed": "Asegurado: incluso las notas más bajas te mantienen en el objetivo.",
+          "achievable": "Alcanzable con un GPA semestral de {gpa}."
+        },
+        "result": {
+          "title": "Tu GPA",
+          "colItem": "Concepto",
+          "colCalc": "Cálculo",
+          "colValue": "Valor",
+          "groupSemester": "Semestre {n} (actual)",
+          "semesterGpa": "GPA semestral",
+          "groupCumulative": "Acumulado",
+          "priorPoints": "Puntos de calidad previos",
+          "totalCredits": "Créditos totales",
+          "newCumulative": "Nuevo GPA acumulado",
+          "semCumFormula": "sem. {sem} → acum. {cum}",
+          "groupTarget": "Planificador de objetivo",
+          "target": "Objetivo",
+          "creditsUnit": "créditos",
+          "required": "GPA semestral necesario",
+          "verdict": "Veredicto",
+          "bestThisSemester": "máximo este semestre {gpa}",
+          "groupHonors": "Situación de honores",
+          "met": "Alcanzado",
+          "gap": "faltan {gap}",
+          "gaugeSemester": "Semestre {gpa}",
+          "gaugeTarget": "Objetivo {gpa}",
+          "gaugeCaption": "Aguja = GPA acumulado en la {scale}. Situación: {standing}."
+        },
+        "honors": {
+          "first": "Primeros honores",
+          "second": "Segundos honores",
+          "summa": "Summa cum laude",
+          "magna": "Magna cum laude",
+          "cum": "Cum laude",
+          "none": "Sin honores aún"
+        },
+        "print": {
+          "title": "Resumen del expediente académico",
+          "date": "Impreso el {date}",
+          "prior": "Expediente previo: GPA acumulado {gpa} en {credits} créditos",
+          "points": "Puntos de calidad",
+          "semLine": "GPA semestral {sem} ({credits} créditos) · GPA acumulado {cum} ({total} créditos)",
+          "final": "GPA acumulado {cum} de {max} · {total} créditos",
+          "disclaimer": "Resumen no oficial calculado por TooloraLabs. La referencia oficial es el registro de tu universidad."
+        },
+        "ind": {
+          "worked": "Ejemplo resuelto",
+          "trend": {
+            "title": "Tendencia del GPA por semestre",
+            "intro": "Cada barra es el GPA de un semestre; la línea es tu GPA acumulado tras ese semestre, frente a los umbrales de honores de tu escala.",
+            "prior": "Expediente previo",
+            "legend": "Lectura",
+            "legendValue": "barra = semestre, línea = acumulado"
+          },
+          "contribution": {
+            "title": "Impacto de cada asignatura en el GPA semestral",
+            "intro": "Cuánto sube o baja cada asignatura el GPA semestral, ponderado por sus créditos. La suma siempre es cero.",
+            "semGpa": "GPA semestral",
+            "share": "Peso en créditos",
+            "sum": "Suma de impactos"
+          },
+          "distribution": {
+            "title": "Distribución de notas por créditos",
+            "intro": "Créditos obtenidos con cada nota en todos los semestres introducidos.",
+            "courses": "{n, plural, one {# asignatura} other {# asignaturas}}",
+            "mode": "Más créditos en"
+          },
+          "target": {
+            "title": "Planificador de objetivo",
+            "intro": "Arrastra el objetivo y la carga del próximo semestre: la curva muestra el GPA semestral necesario para cada carga de 3 a 24 créditos. Por encima de la línea roja es imposible en un semestre.",
+            "impossibleZone": "imposible",
+            "current": "Acumulado actual",
+            "best": "Máximo posible este semestre",
+            "bestNote": "todas las notas en {max}"
+          },
+          "retake": {
+            "title": "Simulador de repetición de asignatura",
+            "intro": "Elige una asignatura y la nota que esperas al repetirla para ver el efecto en tu GPA acumulado según la política de tu universidad.",
+            "course": "Asignatura a repetir",
+            "newGrade": "Nueva nota",
+            "policy": {
+              "average": "Contar ambos intentos",
+              "replace": "Sustituir la nota anterior"
+            },
+            "policyNote": {
+              "average": "Cuentan ambos intentos (KSU, artículo 34): los créditos se suman de nuevo con la nueva nota.",
+              "replace": "La nueva nota sustituye a la anterior y los créditos no cambian. Consulta la norma de tu universidad."
+            },
+            "cumulative": "GPA acumulado",
+            "old": "Nota actual",
+            "before": "Antes",
+            "after": "Después",
+            "change": "Cambio"
+          },
+          "honors": {
+            "title": "Franja de zonas de honores",
+            "intro": "Dónde está tu GPA acumulado frente a los umbrales oficiales de honores de la escala elegida, y la distancia al siguiente.",
+            "current": "Tu GPA acumulado",
+            "needNext": "requiere {gpa} en {credits} créditos el próximo semestre",
+            "conditions": "Condiciones",
+            "conditionsValue": {
+              "sa5": "Sin suspensos, graduación en plazo, 60 % en la KSU (art. 47)",
+              "sa4": "Sin suspensos (normas de KFUPM / KSU)",
+              "us4": "Latin honors de UIC, solo GPA de UIC"
+            }
+          },
+          "converter": {
+            "title": "Conversor de escalas",
+            "intro": "Rangos porcentuales oficiales en las tres escalas. Las filas resaltadas indican cuántas de tus asignaturas caen en cada rango.",
+            "example": "Ejemplo",
+            "rule": "Regla saudí 5 → 4",
+            "ruleNote": "cada nota es exactamente un punto menor (tabla KSU)",
+            "yourGpa": "Tu GPA acumulado",
+            "noOfficial": "No hay fórmula oficial EE. UU. ↔ Arabia Saudí"
+          },
+          "whatIf": {
+            "title": "Deslizadores «¿y si?»",
+            "intro": "Mueve cualquier asignatura del semestre actual a otra nota y observa cómo responden el GPA semestral y el acumulado.",
+            "semester": "GPA semestral",
+            "cumulative": "GPA acumulado",
+            "reset": "Volver a las notas reales",
+            "changes": "Asignaturas cambiadas",
+            "none": "ninguna aún",
+            "delta": "Cambio acumulado"
+          }
+        }
       }
     },
     "density-calculator": {

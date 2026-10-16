@@ -8364,6 +8364,186 @@
       "courseContribution": {
         "courseLabel": "Kurs {number}",
         "caption": "Anteil jedes Kurses an Ihren gesamten Qualitätspunkten"
+      },
+      "planner": {
+        "scales": {
+          "sa5": "5.00-Skala · Saudi-Arabien (KSU)",
+          "sa4": "4.00-Skala · Saudi-Arabien (KSU / KFUPM)",
+          "us4": "4.00-Skala · USA (College Board)"
+        },
+        "semesterN": "Semester {n}",
+        "nav": {
+          "indicators": "Live-Indikatoren"
+        },
+        "sample": {
+          "courses": [
+            "Analysis I",
+            "Allgemeine Physik I",
+            "Einführung in die Programmierung",
+            "Arabisches Schreiben",
+            "Akademisches Englisch",
+            "Analysis II",
+            "Allgemeine Chemie",
+            "Datenstrukturen",
+            "Statistik",
+            "Islamische Kultur"
+          ]
+        },
+        "input": {
+          "title": "Deine Leistungen",
+          "scale": "Notenskala",
+          "entry": "Noten eingeben als",
+          "entryMode": {
+            "letter": "Buchstabe",
+            "percent": "Prozent"
+          },
+          "priorGpa": "Bisheriger kumulierter GPA (von {max})",
+          "priorCredits": "Abgeschlossene Credits",
+          "current": "aktuell",
+          "removeSemester": "Semester entfernen",
+          "course": "Kurs",
+          "credits": "Cr.",
+          "percent": "%",
+          "grade": "Note",
+          "courseN": "Kurs {n}",
+          "removeCourse": "Kurs entfernen",
+          "addCourse": "Kurs hinzufügen",
+          "addSemester": "Semester hinzufügen",
+          "target": "Ziel-GPA (kumuliert)",
+          "plannedCredits": "Credits im nächsten Semester",
+          "print": "Notenübersicht drucken",
+          "reset": "Beispiel",
+          "savedNote": "Deine Semester werden nur in diesem Browser gespeichert."
+        },
+        "verdict": {
+          "never": "Nicht erreichbar: Das Ziel erreicht oder übersteigt das Skalenmaximum.",
+          "impossible": "In diesem Semester unmöglich; nötig {n, plural, one {ist # Semester} other {sind # Semester}} mit Bestnote.",
+          "guaranteed": "Bereits gesichert: Selbst die schlechtesten Noten halten dich am Ziel.",
+          "achievable": "Erreichbar mit einem Semester-GPA von {gpa}."
+        },
+        "result": {
+          "title": "Dein GPA",
+          "colItem": "Posten",
+          "colCalc": "Rechnung",
+          "colValue": "Wert",
+          "groupSemester": "Semester {n} (aktuell)",
+          "semesterGpa": "Semester-GPA",
+          "groupCumulative": "Kumuliert",
+          "priorPoints": "Bisherige Qualitätspunkte",
+          "totalCredits": "Credits gesamt",
+          "newCumulative": "Neuer kumulierter GPA",
+          "semCumFormula": "Sem. {sem} → kum. {cum}",
+          "groupTarget": "Zielplaner",
+          "target": "Ziel",
+          "creditsUnit": "Credits",
+          "required": "Nötiger Semester-GPA",
+          "verdict": "Urteil",
+          "bestThisSemester": "bestenfalls {gpa} in diesem Semester",
+          "groupHonors": "Stand bei Auszeichnungen",
+          "met": "Erreicht",
+          "gap": "noch {gap}",
+          "gaugeSemester": "Semester {gpa}",
+          "gaugeTarget": "Ziel {gpa}",
+          "gaugeCaption": "Zeiger = kumulierter GPA auf der {scale}. Stand: {standing}."
+        },
+        "honors": {
+          "first": "Auszeichnung 1. Grades",
+          "second": "Auszeichnung 2. Grades",
+          "summa": "Summa cum laude",
+          "magna": "Magna cum laude",
+          "cum": "Cum laude",
+          "none": "Noch keine Auszeichnung"
+        },
+        "print": {
+          "title": "Übersicht der Studienleistungen",
+          "date": "Gedruckt am {date}",
+          "prior": "Bisherige Leistungen: kumulierter GPA {gpa} über {credits} Credits",
+          "points": "Qualitätspunkte",
+          "semLine": "Semester-GPA {sem} ({credits} Credits) · Kumulierter GPA {cum} ({total} Credits)",
+          "final": "Kumulierter GPA {cum} von {max} · {total} Credits",
+          "disclaimer": "Inoffizielle Übersicht, berechnet von TooloraLabs. Maßgeblich ist der Nachweis des Prüfungsamts deiner Hochschule."
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "trend": {
+            "title": "GPA-Verlauf nach Semester",
+            "intro": "Jeder Balken ist der GPA eines Semesters; die Linie ist dein kumulierter GPA nach diesem Semester, verglichen mit den Auszeichnungsgrenzen deiner Skala.",
+            "prior": "Bisherige Leistungen",
+            "legend": "Lesart",
+            "legendValue": "Balken = Semester, Linie = kumuliert"
+          },
+          "contribution": {
+            "title": "Einfluss jedes Kurses auf den Semester-GPA",
+            "intro": "Wie stark jeder Kurs den Semester-GPA hebt oder senkt, gewichtet nach Credits. Die Summe ist immer null.",
+            "semGpa": "Semester-GPA",
+            "share": "Credit-Anteil",
+            "sum": "Summe der Einflüsse"
+          },
+          "distribution": {
+            "title": "Notenverteilung nach Credits",
+            "intro": "Erworbene Credits je Note über alle eingegebenen Semester.",
+            "courses": "{n, plural, one {# Kurs} other {# Kurse}}",
+            "mode": "Meiste Credits bei"
+          },
+          "target": {
+            "title": "Zielplaner",
+            "intro": "Ziehe Ziel und nächste Semesterlast: Die Kurve zeigt den nötigen Semester-GPA für jede Last von 3 bis 24 Credits. Oberhalb der roten Linie ist es in einem Semester unmöglich.",
+            "impossibleZone": "unmöglich",
+            "current": "Aktuell kumuliert",
+            "best": "Bestmöglich in diesem Semester",
+            "bestNote": "alle Noten {max}"
+          },
+          "retake": {
+            "title": "Simulator für Kurswiederholung",
+            "intro": "Wähle einen Kurs und die erwartete Note bei Wiederholung, um die Wirkung auf deinen kumulierten GPA nach der Regel deiner Hochschule zu sehen.",
+            "course": "Zu wiederholender Kurs",
+            "newGrade": "Neue Note",
+            "policy": {
+              "average": "Beide Versuche zählen",
+              "replace": "Alte Note ersetzen"
+            },
+            "policyNote": {
+              "average": "Beide Versuche zählen (KSU, Artikel 34): Die Credits des Kurses kommen mit der neuen Note erneut hinzu.",
+              "replace": "Die neue Note ersetzt die alte, die Credits bleiben gleich. Prüfe die Regel deiner Hochschule."
+            },
+            "cumulative": "Kumulierter GPA",
+            "old": "Aktuelle Note",
+            "before": "Vorher",
+            "after": "Nachher",
+            "change": "Änderung"
+          },
+          "honors": {
+            "title": "Zonenleiste der Auszeichnungen",
+            "intro": "Wo dein kumulierter GPA im Vergleich zu den offiziellen Auszeichnungsgrenzen der gewählten Skala liegt und wie weit es bis zur nächsten ist.",
+            "current": "Dein kumulierter GPA",
+            "needNext": "braucht {gpa} über {credits} Credits im nächsten Semester",
+            "conditions": "Bedingungen",
+            "conditionsValue": {
+              "sa5": "Kein nicht bestandener Kurs, Abschluss in der Regelzeit, 60 % an der KSU (Art. 47)",
+              "sa4": "Kein nicht bestandener Kurs (Regeln von KFUPM / KSU)",
+              "us4": "Latin honors der UIC, nur UIC-GPA"
+            }
+          },
+          "converter": {
+            "title": "Umrechner der Notenskalen",
+            "intro": "Offizielle Prozentbereiche auf allen drei Skalen. Markierte Zeilen zeigen, wie viele deiner Kurse in jeden Bereich fallen.",
+            "example": "Beispiel",
+            "rule": "Saudische Regel 5 → 4",
+            "ruleNote": "jede Note liegt genau einen Punkt tiefer (KSU-Tabelle)",
+            "yourGpa": "Dein kumulierter GPA",
+            "noOfficial": "Keine offizielle Formel USA ↔ Saudi-Arabien"
+          },
+          "whatIf": {
+            "title": "Was-wäre-wenn-Regler",
+            "intro": "Verschiebe einen Kurs des aktuellen Semesters auf eine andere Note und sieh, wie Semester- und kumulierter GPA reagieren.",
+            "semester": "Semester-GPA",
+            "cumulative": "Kumulierter GPA",
+            "reset": "Auf echte Noten zurücksetzen",
+            "changes": "Geänderte Kurse",
+            "none": "noch keine",
+            "delta": "Änderung kumuliert"
+          }
+        }
       }
     },
     "density-calculator": {

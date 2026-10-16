@@ -8364,6 +8364,186 @@
       "courseContribution": {
         "courseLabel": "Course {number}",
         "caption": "Each course's share of your total quality points"
+      },
+      "planner": {
+        "scales": {
+          "sa5": "5.00 scale · Saudi (KSU)",
+          "sa4": "4.00 scale · Saudi (KSU / KFUPM)",
+          "us4": "4.00 scale · US (College Board)"
+        },
+        "semesterN": "Semester {n}",
+        "nav": {
+          "indicators": "Live indicators"
+        },
+        "sample": {
+          "courses": [
+            "Calculus I",
+            "General Physics I",
+            "Intro to Programming",
+            "Arabic Writing",
+            "Academic English",
+            "Calculus II",
+            "General Chemistry",
+            "Data Structures",
+            "Statistics",
+            "Islamic Culture"
+          ]
+        },
+        "input": {
+          "title": "Your Record",
+          "scale": "Grading scale",
+          "entry": "Enter grades as",
+          "entryMode": {
+            "letter": "Letter grade",
+            "percent": "Percentage"
+          },
+          "priorGpa": "Previous cumulative GPA (of {max})",
+          "priorCredits": "Completed credit hours",
+          "current": "current",
+          "removeSemester": "Remove semester",
+          "course": "Course",
+          "credits": "Hrs",
+          "percent": "%",
+          "grade": "Grade",
+          "courseN": "Course {n}",
+          "removeCourse": "Remove course",
+          "addCourse": "Add course",
+          "addSemester": "Add semester",
+          "target": "Target cumulative GPA",
+          "plannedCredits": "Credits next semester",
+          "print": "Print transcript",
+          "reset": "Sample",
+          "savedNote": "Your semesters are saved in this browser only."
+        },
+        "verdict": {
+          "never": "Not reachable: the target equals or exceeds the scale maximum.",
+          "impossible": "Impossible this semester; needs {n, plural, one {# semester} other {# semesters}} at the maximum grade.",
+          "guaranteed": "Already secured: even the lowest grades keep you at the target.",
+          "achievable": "Achievable with a semester GPA of {gpa}."
+        },
+        "result": {
+          "title": "Your GPA",
+          "colItem": "Item",
+          "colCalc": "Calculation",
+          "colValue": "Value",
+          "groupSemester": "Semester {n} (current)",
+          "semesterGpa": "Semester GPA",
+          "groupCumulative": "Cumulative",
+          "priorPoints": "Previous quality points",
+          "totalCredits": "Total credits",
+          "newCumulative": "New cumulative GPA",
+          "semCumFormula": "term {sem} → cum. {cum}",
+          "groupTarget": "Target planner",
+          "target": "Target",
+          "creditsUnit": "credits",
+          "required": "Semester GPA needed",
+          "verdict": "Verdict",
+          "bestThisSemester": "best this term {gpa}",
+          "groupHonors": "Honors standing",
+          "met": "Reached",
+          "gap": "{gap} to go",
+          "gaugeSemester": "Semester {gpa}",
+          "gaugeTarget": "Target {gpa}",
+          "gaugeCaption": "Needle = cumulative GPA on the {scale}. Standing: {standing}."
+        },
+        "honors": {
+          "first": "First honors",
+          "second": "Second honors",
+          "summa": "Summa cum laude",
+          "magna": "Magna cum laude",
+          "cum": "Cum laude",
+          "none": "No honors yet"
+        },
+        "print": {
+          "title": "Academic Record Summary",
+          "date": "Printed {date}",
+          "prior": "Previous record: cumulative GPA {gpa} over {credits} credit hours",
+          "points": "Quality points",
+          "semLine": "Semester GPA {sem} ({credits} credits) · Cumulative GPA {cum} ({total} credits)",
+          "final": "Cumulative GPA {cum} of {max} · {total} credit hours",
+          "disclaimer": "Unofficial summary calculated by TooloraLabs. Your university registrar's record is the official reference."
+        },
+        "ind": {
+          "worked": "Worked example",
+          "trend": {
+            "title": "GPA Trend by Semester",
+            "intro": "Each bar is one semester's GPA; the line is your cumulative GPA after that semester, against the honors thresholds of your scale.",
+            "prior": "Previous record",
+            "legend": "Reading",
+            "legendValue": "bar = term, line = cumulative"
+          },
+          "contribution": {
+            "title": "Course Impact on the Semester GPA",
+            "intro": "How much each course pulls the semester GPA up or down, weighted by its credit hours. The pulls always sum to zero.",
+            "semGpa": "Semester GPA",
+            "share": "Credit share",
+            "sum": "Sum of pulls"
+          },
+          "distribution": {
+            "title": "Grade Distribution by Credits",
+            "intro": "Credit hours earned at each grade across all entered semesters.",
+            "courses": "{n, plural, one {# course} other {# courses}}",
+            "mode": "Most credits at"
+          },
+          "target": {
+            "title": "Target Planner",
+            "intro": "Drag the target and next semester's load: the curve shows the semester GPA needed for every load from 3 to 24 credits. Above the red line is impossible in one semester.",
+            "impossibleZone": "impossible",
+            "current": "Current cumulative",
+            "best": "Best possible this term",
+            "bestNote": "all grades at {max}"
+          },
+          "retake": {
+            "title": "Course Retake Simulator",
+            "intro": "Pick a course and the grade you expect on retake to see the effect on your cumulative GPA under your university's policy.",
+            "course": "Course to retake",
+            "newGrade": "New grade",
+            "policy": {
+              "average": "Count both attempts",
+              "replace": "Replace old grade"
+            },
+            "policyNote": {
+              "average": "Both attempts count (KSU Article 34): the course credits are added again with the new grade.",
+              "replace": "The new grade replaces the old one and credits stay the same. Check your university's rule."
+            },
+            "cumulative": "Cumulative GPA",
+            "old": "Current grade",
+            "before": "Before",
+            "after": "After",
+            "change": "Change"
+          },
+          "honors": {
+            "title": "Honors Zone Strip",
+            "intro": "Where your cumulative GPA sits against the official honors thresholds of the selected scale, and the gap to the next one.",
+            "current": "Your cumulative GPA",
+            "needNext": "needs {gpa} over {credits} credits next term",
+            "conditions": "Conditions",
+            "conditionsValue": {
+              "sa5": "No failed course, on-time graduation, 60% at KSU (Art. 47)",
+              "sa4": "No failed course (KFUPM / KSU rules)",
+              "us4": "UIC Latin honors, UIC GPA only"
+            }
+          },
+          "converter": {
+            "title": "Grading Scale Converter",
+            "intro": "Official percentage bands on all three scales. Highlighted rows show how many of your courses fall in each band.",
+            "example": "Example",
+            "rule": "Saudi 5 → 4 rule",
+            "ruleNote": "every grade is exactly one point lower (KSU table)",
+            "yourGpa": "Your cumulative GPA",
+            "noOfficial": "No official US ↔ Saudi GPA formula"
+          },
+          "whatIf": {
+            "title": "What-If Grade Sliders",
+            "intro": "Slide any current-semester course to another grade and watch the semester and cumulative GPA respond.",
+            "semester": "Semester GPA",
+            "cumulative": "Cumulative GPA",
+            "reset": "Reset to actual grades",
+            "changes": "Changed courses",
+            "none": "none yet",
+            "delta": "Cumulative change"
+          }
+        }
       }
     },
     "density-calculator": {

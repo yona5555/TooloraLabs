@@ -31,6 +31,7 @@ export * from "./ScientificNotationConverter";
 export * from "./SignificantFiguresCalculator";
 export * from "./SignificantFiguresDigits";
 export * from "./GpaCalculator";
+export * from "./GpaPlanner";
 export * from "./DensityCalculator";
 export * from "./densityAnalysis";
 export * from "./OhmsLawCalculator";

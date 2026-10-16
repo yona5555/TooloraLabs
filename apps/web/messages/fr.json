@@ -8364,6 +8364,186 @@
       "courseContribution": {
         "courseLabel": "Cours {number}",
         "caption": "La part de chaque cours dans le total de vos points de qualité"
+      },
+      "planner": {
+        "scales": {
+          "sa5": "Échelle 5.00 · Arabie saoudite (KSU)",
+          "sa4": "Échelle 4.00 · Arabie saoudite (KSU / KFUPM)",
+          "us4": "Échelle 4.00 · États-Unis (College Board)"
+        },
+        "semesterN": "Semestre {n}",
+        "nav": {
+          "indicators": "Indicateurs en direct"
+        },
+        "sample": {
+          "courses": [
+            "Analyse I",
+            "Physique générale I",
+            "Introduction à la programmation",
+            "Rédaction arabe",
+            "Anglais académique",
+            "Analyse II",
+            "Chimie générale",
+            "Structures de données",
+            "Statistiques",
+            "Culture islamique"
+          ]
+        },
+        "input": {
+          "title": "Votre dossier",
+          "scale": "Échelle de notation",
+          "entry": "Saisir les notes en",
+          "entryMode": {
+            "letter": "Lettre",
+            "percent": "Pourcentage"
+          },
+          "priorGpa": "GPA cumulé précédent (sur {max})",
+          "priorCredits": "Crédits validés",
+          "current": "en cours",
+          "removeSemester": "Supprimer le semestre",
+          "course": "Cours",
+          "credits": "Cr.",
+          "percent": "%",
+          "grade": "Note",
+          "courseN": "Cours {n}",
+          "removeCourse": "Supprimer le cours",
+          "addCourse": "Ajouter un cours",
+          "addSemester": "Ajouter un semestre",
+          "target": "GPA cumulé visé",
+          "plannedCredits": "Crédits du prochain semestre",
+          "print": "Imprimer le relevé",
+          "reset": "Exemple",
+          "savedNote": "Vos semestres sont enregistrés dans ce navigateur uniquement."
+        },
+        "verdict": {
+          "never": "Inaccessible : l'objectif égale ou dépasse le maximum de l'échelle.",
+          "impossible": "Impossible ce semestre ; il faut {n, plural, one {# semestre} other {# semestres}} à la note maximale.",
+          "guaranteed": "Acquis : même les notes les plus basses vous maintiennent à l'objectif.",
+          "achievable": "Atteignable avec un GPA semestriel de {gpa}."
+        },
+        "result": {
+          "title": "Votre GPA",
+          "colItem": "Élément",
+          "colCalc": "Calcul",
+          "colValue": "Valeur",
+          "groupSemester": "Semestre {n} (en cours)",
+          "semesterGpa": "GPA semestriel",
+          "groupCumulative": "Cumulé",
+          "priorPoints": "Points de qualité antérieurs",
+          "totalCredits": "Total des crédits",
+          "newCumulative": "Nouveau GPA cumulé",
+          "semCumFormula": "sem. {sem} → cumul {cum}",
+          "groupTarget": "Planificateur d'objectif",
+          "target": "Objectif",
+          "creditsUnit": "crédits",
+          "required": "GPA semestriel requis",
+          "verdict": "Verdict",
+          "bestThisSemester": "maximum ce semestre {gpa}",
+          "groupHonors": "Position face aux mentions",
+          "met": "Atteinte",
+          "gap": "reste {gap}",
+          "gaugeSemester": "Semestre {gpa}",
+          "gaugeTarget": "Objectif {gpa}",
+          "gaugeCaption": "Aiguille = GPA cumulé sur l'{scale}. Position : {standing}."
+        },
+        "honors": {
+          "first": "Mention d'honneur de 1er rang",
+          "second": "Mention d'honneur de 2e rang",
+          "summa": "Summa cum laude",
+          "magna": "Magna cum laude",
+          "cum": "Cum laude",
+          "none": "Aucune mention pour l'instant"
+        },
+        "print": {
+          "title": "Résumé du dossier académique",
+          "date": "Imprimé le {date}",
+          "prior": "Dossier antérieur : GPA cumulé {gpa} sur {credits} crédits",
+          "points": "Points de qualité",
+          "semLine": "GPA semestriel {sem} ({credits} crédits) · GPA cumulé {cum} ({total} crédits)",
+          "final": "GPA cumulé {cum} sur {max} · {total} crédits",
+          "disclaimer": "Résumé non officiel calculé par TooloraLabs. Le dossier du service de scolarité de votre université fait foi."
+        },
+        "ind": {
+          "worked": "Exemple résolu",
+          "trend": {
+            "title": "Évolution du GPA par semestre",
+            "intro": "Chaque barre est le GPA d'un semestre ; la ligne est votre GPA cumulé après ce semestre, face aux seuils de mention de votre échelle.",
+            "prior": "Dossier antérieur",
+            "legend": "Lecture",
+            "legendValue": "barre = semestre, ligne = cumulé"
+          },
+          "contribution": {
+            "title": "Impact de chaque cours sur le GPA semestriel",
+            "intro": "De combien chaque cours tire le GPA semestriel vers le haut ou le bas, pondéré par ses crédits. La somme vaut toujours zéro.",
+            "semGpa": "GPA semestriel",
+            "share": "Part des crédits",
+            "sum": "Somme des impacts"
+          },
+          "distribution": {
+            "title": "Répartition des notes par crédits",
+            "intro": "Crédits obtenus à chaque note sur tous les semestres saisis.",
+            "courses": "{n, plural, one {# cours} other {# cours}}",
+            "mode": "Le plus de crédits en"
+          },
+          "target": {
+            "title": "Planificateur d'objectif",
+            "intro": "Faites glisser l'objectif et la charge du prochain semestre : la courbe montre le GPA semestriel requis pour chaque charge de 3 à 24 crédits. Au-dessus de la ligne rouge, c'est impossible en un semestre.",
+            "impossibleZone": "impossible",
+            "current": "Cumulé actuel",
+            "best": "Meilleur possible ce semestre",
+            "bestNote": "toutes les notes à {max}"
+          },
+          "retake": {
+            "title": "Simulateur de reprise de cours",
+            "intro": "Choisissez un cours et la note attendue à la reprise pour voir l'effet sur votre GPA cumulé selon la règle de votre université.",
+            "course": "Cours repris",
+            "newGrade": "Nouvelle note",
+            "policy": {
+              "average": "Compter les deux tentatives",
+              "replace": "Remplacer l'ancienne note"
+            },
+            "policyNote": {
+              "average": "Les deux tentatives comptent (KSU, article 34) : les crédits du cours sont ajoutés à nouveau avec la nouvelle note.",
+              "replace": "La nouvelle note remplace l'ancienne et les crédits restent identiques. Vérifiez la règle de votre université."
+            },
+            "cumulative": "GPA cumulé",
+            "old": "Note actuelle",
+            "before": "Avant",
+            "after": "Après",
+            "change": "Variation"
+          },
+          "honors": {
+            "title": "Bande des zones de mention",
+            "intro": "Où se situe votre GPA cumulé face aux seuils officiels de mention de l'échelle choisie, et l'écart jusqu'au suivant.",
+            "current": "Votre GPA cumulé",
+            "needNext": "exige {gpa} sur {credits} crédits au prochain semestre",
+            "conditions": "Conditions",
+            "conditionsValue": {
+              "sa5": "Aucun échec, diplôme dans les délais, 60 % à la KSU (art. 47)",
+              "sa4": "Aucun échec (règles KFUPM / KSU)",
+              "us4": "Latin honors de l'UIC, GPA de l'UIC uniquement"
+            }
+          },
+          "converter": {
+            "title": "Convertisseur d'échelles",
+            "intro": "Tranches de pourcentage officielles sur les trois échelles. Les lignes surlignées indiquent combien de vos cours tombent dans chaque tranche.",
+            "example": "Exemple",
+            "rule": "Règle saoudienne 5 → 4",
+            "ruleNote": "chaque note est exactement un point plus bas (table KSU)",
+            "yourGpa": "Votre GPA cumulé",
+            "noOfficial": "Aucune formule officielle États-Unis ↔ Arabie saoudite"
+          },
+          "whatIf": {
+            "title": "Curseurs « et si ? »",
+            "intro": "Déplacez n'importe quel cours du semestre en cours vers une autre note et observez la réaction des GPA semestriel et cumulé.",
+            "semester": "GPA semestriel",
+            "cumulative": "GPA cumulé",
+            "reset": "Revenir aux notes réelles",
+            "changes": "Cours modifiés",
+            "none": "aucun pour l'instant",
+            "delta": "Variation du cumulé"
+          }
+        }
       }
     },
     "density-calculator": {
