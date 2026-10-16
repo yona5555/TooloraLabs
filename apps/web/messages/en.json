@@ -19981,27 +19981,15 @@
       },
       "aboveFold": {
         "resultTitle": "Live Stats",
-        "placeholder": "Start typing or paste text to see word, character, and keyword stats here.",
-        "keywordsTitle": "Top Keywords by Frequency",
-        "platformLimits": {
-          "title": "Platform Character Limits",
-          "intro": "See how your current character count compares to common platform limits.",
-          "items": {
-            "smsMessage": "SMS Message",
-            "metaDescription": "Meta Description",
-            "xPost": "X (Twitter) Post",
-            "googleTitleTag": "Google Title Tag",
-            "youtubeTitle": "YouTube Title",
-            "instagramCaption": "Instagram Caption"
-          }
-        }
+        "placeholder": "Start typing or paste text to see word, character, and keyword stats here."
       },
       "form": {
         "inputTitle": "Your Text",
         "inputLabel": "Your Text",
         "inputPlaceholder": "Start typing or paste your text here...",
         "loadSampleText": "Load Sample Text",
-        "clear": "Clear"
+        "clear": "Clear",
+        "sampleText": "Clear writing starts with knowing your limits. A post on X allows 280 characters, a text message fits 160, and a search result shows roughly 60 characters of a page title before it is cut off.\n\nWord counts matter beyond social media. Students meet essay limits of 1,500 words, journalists write to an exact column length, and speakers plan a 5-minute talk at about 130 words per minute. Short sentences keep readers moving! Longer ones, when they are carefully built, can carry a more complex idea from its first clause all the way to a final and satisfying conclusion.\n\nTry it yourself: edit this paragraph, paste your own draft, or click a keyword below to see where it appears in the text. Every number and chart on this page updates as you type."
       },
       "stats": {
         "words": "Words",
@@ -20018,13 +20006,7 @@
         "intro": {
           "title": "How Word Counting Actually Works",
           "paragraph1": "Behind a single 'word count' number are several separate, deliberate decisions about what counts as a word, a sentence, and a paragraph. A word counter first tokenizes raw text — splitting it into individual units on whitespace and punctuation boundaries — then classifies those tokens: runs of characters ending in '.', '!', or '?' close out a sentence; blank lines mark paragraph breaks; and every token is measured for length and compared against every other token to find unique words and the longest one. None of this is guesswork once the rules are fixed, but the rules themselves are a choice, which is exactly why two different tools can report two different counts for the same text.",
-          "paragraph2": "Reading-time estimates add one more layer: a words-per-minute (WPM) constant, multiplied against the word count. This tool uses 200 WPM, a commonly cited middle-of-the-road figure for adult silent reading of English prose; a large 2019 meta-analysis of reading-speed research (see the reference below) puts the actual average closer to 238 WPM for non-fiction, with wide variation by reader, language, and text difficulty — which is why any reading-time estimate should be read as a reasonable approximation, not a precise measurement. Keyword density, this tool's third layer, works by counting how often each word recurs after filtering out short, high-frequency function words ('the', 'and', 'of') so that what's left reflects the text's actual subject matter rather than its grammar.",
-          "diagram": {
-            "rawTextLabel": "Raw Text",
-            "tokenizeLabel": "Tokenize\n(words, sentences,\nparagraphs)",
-            "countsLabel": "Counts +\nreading time +\nkeywords",
-            "caption": "The word-counting pipeline: raw text is split into tokens, those tokens are classified into words, sentences, and paragraphs, and the resulting counts feed reading-time and keyword-density calculations."
-          }
+          "paragraph2": "Reading-time estimates add one more layer: a words-per-minute (WPM) constant, multiplied against the word count. This tool uses 200 WPM, a commonly cited middle-of-the-road figure for adult silent reading of English prose; a large 2019 meta-analysis of reading-speed research (see the reference below) puts the actual average closer to 238 WPM for non-fiction, with wide variation by reader, language, and text difficulty — which is why any reading-time estimate should be read as a reasonable approximation, not a precise measurement. Keyword density, this tool's third layer, works by counting how often each word recurs after filtering out short, high-frequency function words ('the', 'and', 'of') so that what's left reflects the text's actual subject matter rather than its grammar."
         },
         "examples": {
           "title": "Worked Examples",
@@ -20151,10 +20133,154 @@
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated"
       },
-      "vocabularyDiversity": {
-        "title": "Vocabulary Diversity",
-        "uniqueLabel": "{count} unique",
-        "repeatedLabel": "{count} repeated"
+      "live": {
+        "highlighting": "Highlighting: {word}",
+        "inputFooter": "{words} words · {characters} characters — updates as you type",
+        "worked": "Worked Example",
+        "empty": "Type or paste some text above to see this indicator.",
+        "table": {
+          "wordsNote": "{unique} unique",
+          "charactersNote": "incl. {spaces} spaces",
+          "sentencesNote": "longest: {longest} words",
+          "paragraphsNote": "{avg} words each",
+          "uniqueNote": "{repeated} repeats",
+          "lettersUnit": "letters per word",
+          "wordsUnit": "words per sentence",
+          "averageSentenceLength": "Avg. Sentence Length",
+          "readingTime": "Reading Time",
+          "readingNote": "silent, {wpm} wpm",
+          "speakingTime": "Speaking Time",
+          "speakingNote": "aloud, {wpm} wpm",
+          "lettersCount": "{n} letters"
+        },
+        "ring": {
+          "aria": "Text composition ring: letters, digits, spaces, punctuation and other symbols, with unique versus repeated words inside",
+          "center": "characters",
+          "letters": "Letters",
+          "digits": "Digits",
+          "spaces": "Spaces",
+          "punctuation": "Punctuation",
+          "other": "Symbols",
+          "unique": "Unique words"
+        },
+        "keywords": {
+          "title": "Keyword Density",
+          "intro": "The topic words you repeat most, after filtering out common function words. Click a word to highlight every occurrence in your text.",
+          "none": "No keywords yet.",
+          "hint": "Click a word to highlight it in the text; click again to clear.",
+          "word": "Keyword",
+          "occurrences": "Occurrences",
+          "tokens": "Word tokens",
+          "tokensNote": "letters and digits only",
+          "density": "Density"
+        },
+        "rhythm": {
+          "title": "Sentence Length Rhythm",
+          "intro": "Each bar is one sentence in reading order. Varied lengths read naturally; long runs of tall bars tire the reader.",
+          "aria": "Bar chart of words per sentence",
+          "longLine": "long",
+          "barTitle": "Sentence {n}: {words} words",
+          "avgLine": "avg",
+          "first": "sentence",
+          "hint": "Click a bar to jump to that sentence in the text.",
+          "capped": "first {n} of {total} shown",
+          "count": "Sentences",
+          "average": "Average length",
+          "avgNote": "words per sentence",
+          "longest": "Longest",
+          "shortest": "Shortest",
+          "which": "sentence {n}",
+          "overLong": "Over {n} words",
+          "selected": "Selected sentence {n}",
+          "variation": "Length range",
+          "variationNote": "longest − shortest"
+        },
+        "platforms": {
+          "title": "Platform Limits",
+          "intro": "Your character count against four limits writers hit every day. Green fits, amber is close or short, red is cut off.",
+          "smsStatus": "{segments} SMS",
+          "left": "{n} left",
+          "over": "{n} over",
+          "characters": "Characters",
+          "x": {
+            "name": "X post",
+            "rule": "280 characters per post"
+          },
+          "sms": {
+            "name": "SMS",
+            "gsm": "GSM-7: 160 single, 153 per part",
+            "unicode": "Unicode: 70 single, 67 per part"
+          },
+          "meta": {
+            "name": "Meta description",
+            "rule": "about 120–160 shown in search"
+          },
+          "titleTag": {
+            "name": "Title tag",
+            "rule": "about 50–60 before truncation"
+          }
+        },
+        "readSpeak": {
+          "title": "Reading vs Speaking Time",
+          "intro": "The same words take longer to say than to read. Drag the sliders to match your own pace.",
+          "reading": "Silent reading",
+          "speaking": "Speaking aloud",
+          "pace": "{wpm} wpm",
+          "ratio": "Speaking takes {x}× as long as reading.",
+          "words": "Words",
+          "difference": "Difference"
+        },
+        "paragraphs": {
+          "title": "Paragraph Structure",
+          "intro": "How your words are shared between paragraphs, in order. One huge block usually means a paragraph needs splitting.",
+          "segment": "Paragraph {n}: {words} words",
+          "label": "Paragraph {n}",
+          "detail": "{words} w · {sentences} s",
+          "others": "{n} more paragraphs",
+          "count": "Paragraphs",
+          "average": "Average words",
+          "largest": "Largest paragraph",
+          "share": "Largest share"
+        },
+        "letters": {
+          "title": "Letter Frequency",
+          "intro": "The twelve letters you use most, case-insensitive. Every language has its own fingerprint.",
+          "aria": "Bar chart of the most frequent letters",
+          "total": "Letter characters",
+          "totalNote": "incl. attached marks",
+          "rank": "#{n} letter “{letter}”",
+          "top3": "Top 3 share"
+        },
+        "readability": {
+          "title": "Readability (LIX)",
+          "intro": "LIX adds average sentence length to the percentage of words longer than six letters. It works across languages: lower is easier.",
+          "aria": "Readability gauge from very easy to very hard",
+          "bands": {
+            "veryEasy": "Very easy",
+            "easy": "Easy",
+            "medium": "Medium",
+            "hard": "Hard",
+            "veryHard": "Very hard"
+          },
+          "wps": "Words per sentence",
+          "longWords": "Long words",
+          "longNote": "more than 6 letters",
+          "longShare": "Long-word share",
+          "lix": "LIX score"
+        },
+        "wordLengths": {
+          "title": "Word Length Distribution",
+          "intro": "How many words have 1, 2, 3… letters. The pin marks your average word length.",
+          "aria": "Histogram of word lengths with the average marked",
+          "axis": "letters per word",
+          "tokens": "Word tokens",
+          "mode": "Most common length",
+          "modeNote": "{n} words",
+          "long": "Long words",
+          "longNote": "more than 6 letters",
+          "average": "Average length",
+          "averageNote": "total letters ÷ word tokens"
+        }
       }
     },
     "base64-tool": {

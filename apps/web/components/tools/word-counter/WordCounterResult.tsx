@@ -1,49 +1,41 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { TextCounterOutput } from "@tooloralabs/tools";
+import { READING_WPM, SPEAKING_WPM, wordLength } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
-import TopKeywordsChart from "./TopKeywordsChart";
-import VocabularyDiversityChart from "./VocabularyDiversityChart";
 import WordCounterShareExportModal from "./WordCounterShareExportModal";
+import CompositionRing from "./CompositionRing";
+import { useWcLive } from "./WcLiveContext";
 
-type WordCounterResultProps = {
-  stats: TextCounterOutput;
-  hasText: boolean;
-  digitStyle: DigitStyle;
-};
+type Row = { key: string; label: string; value: string; note?: string; strong?: boolean };
 
-function Stat({ title, value, className }: { title: string; value: string; className?: string }) {
-  return (
-    <div className={`rounded-xl bg-zinc-50 px-3 py-2.5 text-center dark:bg-zinc-800/60 ${className ?? ""}`}>
-      <dt className="text-xs text-zinc-500 dark:text-zinc-400">{title}</dt>
-      <dd dir="ltr" className="mt-0.5 font-mono text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        {value}
-      </dd>
-    </div>
-  );
-}
-
-export default function WordCounterResult({ stats, hasText, digitStyle }: WordCounterResultProps) {
+export default function WordCounterResult() {
   const t = useTranslations("tools.word-counter");
+  const tl = useTranslations("tools.word-counter.live.table");
+  const { stats, profile, f, pct, clock } = useWcLive();
+  const hasText = stats.words > 0;
 
-  const summaryText = [
-    "words",
-    "characters",
-    "charactersNoSpaces",
-    "sentences",
-    "paragraphs",
-    "readingTimeMinutes",
-    "uniqueWords",
-    "averageWordLength",
-  ]
-    .map((key) => `${t(`stats.${key}`)}: ${formatLocalizedNumber(stats[key as keyof TextCounterOutput] as number, digitStyle)}`)
-    .join("\n");
+  const rows: Row[] = [
+    { key: "words", label: t("stats.words"), value: f(stats.words), strong: true, note: tl("wordsNote", { unique: pct(stats.words ? stats.uniqueWords / stats.words : 0) }) },
+    { key: "characters", label: t("stats.characters"), value: f(stats.characters), note: tl("charactersNote", { spaces: f(profile.composition.spaces) }) },
+    { key: "charactersNoSpaces", label: t("stats.charactersNoSpaces"), value: f(stats.charactersNoSpaces), note: pct(stats.characters ? stats.charactersNoSpaces / stats.characters : 0) },
+    { key: "sentences", label: t("stats.sentences"), value: f(stats.sentences), note: tl("sentencesNote", { longest: f(Math.max(0, ...profile.sentences.map((s) => s.words))) }) },
+    { key: "paragraphs", label: t("stats.paragraphs"), value: f(stats.paragraphs), note: tl("paragraphsNote", { avg: f(stats.paragraphs ? stats.words / stats.paragraphs : 0) }) },
+    { key: "uniqueWords", label: t("stats.uniqueWords"), value: f(stats.uniqueWords), note: tl("uniqueNote", { repeated: f(Math.max(0, profile.wordLengths.reduce((a, b) => a + b, 0) - stats.uniqueWords)) }) },
+    { key: "averageWordLength", label: t("stats.averageWordLength"), value: f(stats.averageWordLength), note: tl("lettersUnit") },
+    { key: "averageSentenceLength", label: tl("averageSentenceLength"), value: f(profile.averageSentenceLength), note: tl("wordsUnit") },
+    { key: "reading", label: tl("readingTime"), value: clock(profile.readingSeconds), note: tl("readingNote", { wpm: f(READING_WPM) }) },
+    { key: "speaking", label: tl("speakingTime"), value: clock(profile.speakingSeconds), note: tl("speakingNote", { wpm: f(SPEAKING_WPM) }) },
+    { key: "longestWord", label: t("stats.longestWord"), value: stats.longestWord || "—", note: tl("lettersCount", { n: f(wordLength(stats.longestWord)) }) },
+  ];
+
+  const summaryText = rows.map((r) => `${r.label}: ${r.value}`).join("\n");
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
+      className="lg:flex lg:h-full lg:flex-col"
+      bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"
       action={
         hasText ? (
           <div className="flex items-center gap-2">
@@ -51,18 +43,9 @@ export default function WordCounterResult({ stats, hasText, digitStyle }: WordCo
             <WordCounterShareExportModal
               operationLabel=""
               inputRows={[]}
-              resultRows={[
-                { label: t("stats.words"), value: formatLocalizedNumber(stats.words, digitStyle) },
-                { label: t("stats.characters"), value: formatLocalizedNumber(stats.characters, digitStyle) },
-                { label: t("stats.charactersNoSpaces"), value: formatLocalizedNumber(stats.charactersNoSpaces, digitStyle) },
-                { label: t("stats.sentences"), value: formatLocalizedNumber(stats.sentences, digitStyle) },
-                { label: t("stats.paragraphs"), value: formatLocalizedNumber(stats.paragraphs, digitStyle) },
-                { label: t("stats.readingTimeMinutes"), value: formatLocalizedNumber(stats.readingTimeMinutes, digitStyle) },
-                { label: t("stats.uniqueWords"), value: formatLocalizedNumber(stats.uniqueWords, digitStyle) },
-                { label: t("stats.averageWordLength"), value: formatLocalizedNumber(stats.averageWordLength, digitStyle) },
-              ]}
+              resultRows={rows.map((r) => ({ label: r.label, value: r.value }))}
               heroLabel={t("stats.words")}
-              heroValue={formatLocalizedNumber(stats.words, digitStyle)}
+              heroValue={f(stats.words)}
               sentence={summaryText}
             />
           </div>
@@ -70,32 +53,27 @@ export default function WordCounterResult({ stats, hasText, digitStyle }: WordCo
       }
     >
       {hasText ? (
-        <>
-          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("stats.words")}</p>
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {formatLocalizedNumber(stats.words, digitStyle)}
-          </p>
-
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-            <Stat title={t("stats.characters")} value={formatLocalizedNumber(stats.characters, digitStyle)} />
-            <Stat title={t("stats.charactersNoSpaces")} value={formatLocalizedNumber(stats.charactersNoSpaces, digitStyle)} />
-            <Stat title={t("stats.sentences")} value={formatLocalizedNumber(stats.sentences, digitStyle)} />
-            <Stat title={t("stats.paragraphs")} value={formatLocalizedNumber(stats.paragraphs, digitStyle)} />
-            <Stat title={t("stats.readingTimeMinutes")} value={formatLocalizedNumber(stats.readingTimeMinutes, digitStyle)} />
-            <Stat title={t("stats.uniqueWords")} value={formatLocalizedNumber(stats.uniqueWords, digitStyle)} />
-            <Stat title={t("stats.averageWordLength")} value={formatLocalizedNumber(stats.averageWordLength, digitStyle)} />
-            <Stat title={t("stats.longestWord")} value={stats.longestWord || "—"} className="sm:col-span-2" />
-          </div>
-
-          {stats.topKeywords.length > 0 && (
-            <div className="mt-4">
-              <p className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("aboveFold.keywordsTitle")}</p>
-              <TopKeywordsChart keywords={stats.topKeywords} chartLabel={t("aboveFold.keywordsTitle")} />
-            </div>
-          )}
-
-          <VocabularyDiversityChart words={stats.words} uniqueWords={stats.uniqueWords} digitStyle={digitStyle} />
-        </>
+        <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-stretch lg:flex-1">
+          <table className="min-w-0 flex-1 border-collapse text-sm">
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.key} className="border-b border-zinc-200 last:border-0 dark:border-zinc-700/70">
+                  <th scope="row" className="py-1.5 pe-2 text-start align-top font-medium text-zinc-600 dark:text-zinc-300">
+                    {r.label}
+                    {r.note && <span className="block text-[11px] font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
+                  </th>
+                  <td
+                    dir={r.key === "longestWord" ? "auto" : "ltr"}
+                    className={`py-1.5 text-end align-top font-semibold tabular-nums ${r.strong ? "text-xl text-blue-700 dark:text-blue-400" : "text-zinc-900 dark:text-zinc-100"} ${r.key === "longestWord" ? "max-w-[9rem] break-all" : "font-mono"}`}
+                  >
+                    {r.value}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <CompositionRing />
+        </div>
       ) : (
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
           {t("aboveFold.placeholder")}

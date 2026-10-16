@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { countWords } from "../analyzers/textSegmentation";
 
 export type SpeechPacePreset = "formal" | "normal" | "fast" | "custom";
 
@@ -52,7 +53,7 @@ export class SpeechWordCountCalculator extends BaseCalculator<SpeechWordCountInp
       return this.error("invalid-rate");
     }
 
-    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    const wordCount = countWords(text);
     const totalMinutesRaw = wordCount / input.wordsPerMinute;
     const totalSeconds = Math.round(totalMinutesRaw * 60);
     const minutes = Math.floor(totalSeconds / 60);

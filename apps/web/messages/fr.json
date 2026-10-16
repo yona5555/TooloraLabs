@@ -19981,27 +19981,15 @@
       },
       "aboveFold": {
         "resultTitle": "Statistiques en direct",
-        "placeholder": "Commencez à taper ou collez du texte pour voir ici les statistiques de mots, de caractères et de mots-clés.",
-        "keywordsTitle": "Mots-clés les plus fréquents",
-        "platformLimits": {
-          "title": "Limites de caractères par plateforme",
-          "intro": "Comparez votre nombre de caractères actuel aux limites courantes des plateformes.",
-          "items": {
-            "smsMessage": "SMS",
-            "metaDescription": "Meta description",
-            "xPost": "Publication X (Twitter)",
-            "googleTitleTag": "Balise de titre Google",
-            "youtubeTitle": "Titre YouTube",
-            "instagramCaption": "Légende Instagram"
-          }
-        }
+        "placeholder": "Commencez à taper ou collez du texte pour voir ici les statistiques de mots, de caractères et de mots-clés."
       },
       "form": {
         "inputTitle": "Votre texte",
         "inputLabel": "Votre texte",
         "inputPlaceholder": "Commencez à taper ou collez votre texte ici…",
         "loadSampleText": "Charger un texte d'exemple",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "sampleText": "Bien écrire commence par connaître ses limites. Une publication sur X accepte 280 caractères, un SMS tient en 160 et un résultat de recherche affiche environ 60 caractères du titre d’une page avant de le couper.\n\nLe nombre de mots compte bien au-delà des réseaux sociaux. Les étudiants respectent des limites de 1 500 mots, les journalistes écrivent pour un espace précis et les orateurs préparent une intervention de 5 minutes à environ 130 mots par minute. Les phrases courtes font avancer le lecteur ! Les plus longues, quand elles sont bien construites, peuvent porter une idée complexe de sa première proposition jusqu’à une conclusion finale et convaincante.\n\nEssayez vous-même : modifiez ce paragraphe, collez votre propre brouillon ou cliquez sur un mot-clé pour voir où il apparaît dans le texte. Chaque nombre et chaque graphique de cette page se met à jour pendant la frappe."
       },
       "stats": {
         "words": "Mots",
@@ -20018,13 +20006,7 @@
         "intro": {
           "title": "Comment fonctionne réellement le comptage de mots",
           "paragraph1": "Derrière un simple nombre de mots se cachent plusieurs décisions distinctes et délibérées sur ce qui compte comme un mot, une phrase ou un paragraphe. Un compteur de mots commence par découper le texte brut en unités (tokenisation) — en le divisant selon les espaces et la ponctuation —, puis classe ces unités : une suite de caractères se terminant par «.», «!» ou «?» clôt une phrase ; une ligne vide marque un changement de paragraphe ; et chaque unité est mesurée en longueur, puis comparée à toutes les autres pour repérer les mots uniques et le plus long d'entre eux. Rien de tout cela ne relève de l'approximation une fois les règles fixées — mais ces règles elles-mêmes résultent d'un choix, ce qui explique pourquoi deux outils différents peuvent afficher deux résultats différents pour un même texte.",
-          "paragraph2": "L'estimation du temps de lecture ajoute une couche supplémentaire : une constante de mots par minute (MPM), multipliée par le nombre de mots. Cet outil utilise 200 MPM, une valeur médiane couramment citée pour la lecture silencieuse d'un texte anglais par un adulte ; une vaste méta-analyse de 2019 sur la vitesse de lecture (voir la référence ci-dessous) situe la moyenne réelle plus près de 238 MPM pour les textes non fictionnels, avec de fortes variations selon le lecteur, la langue et la difficulté du texte — c'est pourquoi toute estimation de temps de lecture doit être lue comme une approximation raisonnable, et non comme une mesure précise. La densité de mots-clés, troisième couche de cet outil, fonctionne en comptant la fréquence de chaque mot après avoir filtré les mots grammaticaux courts et très fréquents («le», «et», «de»), de sorte que ce qui reste reflète le véritable sujet du texte plutôt que sa grammaire.",
-          "diagram": {
-            "rawTextLabel": "Texte brut",
-            "tokenizeLabel": "Tokenisation\n(mots, phrases,\nparagraphes)",
-            "countsLabel": "Comptages +\ntemps de lecture +\nmots-clés",
-            "caption": "Le pipeline de comptage de mots : le texte brut est découpé en unités, ces unités sont classées en mots, phrases et paragraphes, et les comptages obtenus alimentent les calculs de temps de lecture et de densité de mots-clés."
-          }
+          "paragraph2": "L'estimation du temps de lecture ajoute une couche supplémentaire : une constante de mots par minute (MPM), multipliée par le nombre de mots. Cet outil utilise 200 MPM, une valeur médiane couramment citée pour la lecture silencieuse d'un texte anglais par un adulte ; une vaste méta-analyse de 2019 sur la vitesse de lecture (voir la référence ci-dessous) situe la moyenne réelle plus près de 238 MPM pour les textes non fictionnels, avec de fortes variations selon le lecteur, la langue et la difficulté du texte — c'est pourquoi toute estimation de temps de lecture doit être lue comme une approximation raisonnable, et non comme une mesure précise. La densité de mots-clés, troisième couche de cet outil, fonctionne en comptant la fréquence de chaque mot après avoir filtré les mots grammaticaux courts et très fréquents («le», «et», «de»), de sorte que ce qui reste reflète le véritable sujet du texte plutôt que sa grammaire."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -20151,10 +20133,154 @@
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé"
       },
-      "vocabularyDiversity": {
-        "title": "Diversité du Vocabulaire",
-        "uniqueLabel": "{count} uniques",
-        "repeatedLabel": "{count} répétés"
+      "live": {
+        "highlighting": "Surlignage : {word}",
+        "inputFooter": "{words} mots · {characters} caractères — mis à jour pendant la frappe",
+        "worked": "Exemple résolu",
+        "empty": "Saisissez ou collez un texte ci-dessus pour voir cet indicateur.",
+        "table": {
+          "wordsNote": "{unique} uniques",
+          "charactersNote": "dont {spaces} espaces",
+          "sentencesNote": "la plus longue : {longest} mots",
+          "paragraphsNote": "{avg} mots chacun",
+          "uniqueNote": "{repeated} répétitions",
+          "lettersUnit": "lettres par mot",
+          "wordsUnit": "mots par phrase",
+          "averageSentenceLength": "Longueur moy. des phrases",
+          "readingTime": "Temps de lecture",
+          "readingNote": "silencieuse, {wpm} mots/min",
+          "speakingTime": "Temps de parole",
+          "speakingNote": "à voix haute, {wpm} mots/min",
+          "lettersCount": "{n} lettres"
+        },
+        "ring": {
+          "aria": "Anneau de composition du texte : lettres, chiffres, espaces, ponctuation et symboles, avec les mots uniques et répétés au centre",
+          "center": "caractères",
+          "letters": "Lettres",
+          "digits": "Chiffres",
+          "spaces": "Espaces",
+          "punctuation": "Ponctuation",
+          "other": "Symboles",
+          "unique": "Mots uniques"
+        },
+        "keywords": {
+          "title": "Densité des mots-clés",
+          "intro": "Les mots de sujet que vous répétez le plus, après filtrage des mots grammaticaux courants. Cliquez sur un mot pour surligner chacune de ses occurrences.",
+          "none": "Pas encore de mots-clés.",
+          "hint": "Cliquez sur un mot pour le surligner dans le texte ; cliquez à nouveau pour annuler.",
+          "word": "Mot-clé",
+          "occurrences": "Occurrences",
+          "tokens": "Jetons de mots",
+          "tokensNote": "lettres et chiffres uniquement",
+          "density": "Densité"
+        },
+        "rhythm": {
+          "title": "Rythme des longueurs de phrases",
+          "intro": "Chaque barre est une phrase dans l’ordre de lecture. Des longueurs variées se lisent naturellement ; une suite de barres hautes fatigue le lecteur.",
+          "aria": "Diagramme en barres des mots par phrase",
+          "longLine": "longue",
+          "barTitle": "Phrase {n} : {words} mots",
+          "avgLine": "moy.",
+          "first": "phrase",
+          "hint": "Cliquez sur une barre pour aller à cette phrase dans le texte.",
+          "capped": "{n} premières sur {total} affichées",
+          "count": "Phrases",
+          "average": "Longueur moyenne",
+          "avgNote": "mots par phrase",
+          "longest": "La plus longue",
+          "shortest": "La plus courte",
+          "which": "phrase {n}",
+          "overLong": "Plus de {n} mots",
+          "selected": "Phrase sélectionnée {n}",
+          "variation": "Écart de longueur",
+          "variationNote": "plus longue − plus courte"
+        },
+        "platforms": {
+          "title": "Limites des plateformes",
+          "intro": "Votre nombre de caractères face à quatre limites courantes. Vert : ça passe ; ambre : proche ou trop court ; rouge : coupé.",
+          "smsStatus": "{segments} SMS",
+          "left": "reste {n}",
+          "over": "{n} de trop",
+          "characters": "Caractères",
+          "x": {
+            "name": "Publication X",
+            "rule": "280 caractères par publication"
+          },
+          "sms": {
+            "name": "SMS",
+            "gsm": "GSM-7 : 160 seul, 153 par partie",
+            "unicode": "Unicode : 70 seul, 67 par partie"
+          },
+          "meta": {
+            "name": "Méta-description",
+            "rule": "environ 120–160 visibles dans la recherche"
+          },
+          "titleTag": {
+            "name": "Balise title",
+            "rule": "environ 50–60 avant troncature"
+          }
+        },
+        "readSpeak": {
+          "title": "Temps de lecture vs parole",
+          "intro": "Les mêmes mots prennent plus de temps à dire qu’à lire. Faites glisser les curseurs selon votre rythme.",
+          "reading": "Lecture silencieuse",
+          "speaking": "À voix haute",
+          "pace": "{wpm} mots/min",
+          "ratio": "Parler prend {x} fois le temps de lecture.",
+          "words": "Mots",
+          "difference": "Différence"
+        },
+        "paragraphs": {
+          "title": "Structure des paragraphes",
+          "intro": "La répartition de vos mots entre paragraphes, dans l’ordre. Un seul énorme bloc signale souvent un paragraphe à découper.",
+          "segment": "Paragraphe {n} : {words} mots",
+          "label": "Paragraphe {n}",
+          "detail": "{words} m · {sentences} ph",
+          "others": "{n} autres paragraphes",
+          "count": "Paragraphes",
+          "average": "Mots en moyenne",
+          "largest": "Plus long paragraphe",
+          "share": "Plus grande part"
+        },
+        "letters": {
+          "title": "Fréquence des lettres",
+          "intro": "Les douze lettres que vous utilisez le plus, sans tenir compte de la casse. Chaque langue a son empreinte.",
+          "aria": "Diagramme en barres des lettres les plus fréquentes",
+          "total": "Caractères de lettres",
+          "totalNote": "signes diacritiques combinés inclus",
+          "rank": "Lettre n° {n} « {letter} »",
+          "top3": "Part du top 3"
+        },
+        "readability": {
+          "title": "Lisibilité (LIX)",
+          "intro": "LIX additionne la longueur moyenne des phrases et le pourcentage de mots de plus de six lettres. Valable pour plusieurs langues : plus bas, plus facile.",
+          "aria": "Jauge de lisibilité de très facile à très difficile",
+          "bands": {
+            "veryEasy": "Très facile",
+            "easy": "Facile",
+            "medium": "Moyen",
+            "hard": "Difficile",
+            "veryHard": "Très difficile"
+          },
+          "wps": "Mots par phrase",
+          "longWords": "Mots longs",
+          "longNote": "plus de 6 lettres",
+          "longShare": "Part de mots longs",
+          "lix": "Score LIX"
+        },
+        "wordLengths": {
+          "title": "Répartition des longueurs de mots",
+          "intro": "Combien de mots ont 1, 2, 3… lettres. Le repère indique votre longueur moyenne de mot.",
+          "aria": "Histogramme des longueurs de mots avec la moyenne indiquée",
+          "axis": "lettres par mot",
+          "tokens": "Jetons de mots",
+          "mode": "Longueur la plus fréquente",
+          "modeNote": "{n} mots",
+          "long": "Mots longs",
+          "longNote": "plus de 6 lettres",
+          "average": "Longueur moyenne",
+          "averageNote": "total des lettres ÷ jetons"
+        }
       }
     },
     "base64-tool": {

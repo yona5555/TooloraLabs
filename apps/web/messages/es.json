@@ -19981,27 +19981,15 @@
       },
       "aboveFold": {
         "resultTitle": "Estadísticas en vivo",
-        "placeholder": "Empieza a escribir o pega un texto para ver aquí las estadísticas de palabras, caracteres y palabras clave.",
-        "keywordsTitle": "Palabras clave más frecuentes",
-        "platformLimits": {
-          "title": "Límites de caracteres por plataforma",
-          "intro": "Compara tu recuento actual de caracteres con los límites habituales de cada plataforma.",
-          "items": {
-            "smsMessage": "Mensaje SMS",
-            "metaDescription": "Meta description",
-            "xPost": "Publicación en X (Twitter)",
-            "googleTitleTag": "Etiqueta de título en Google",
-            "youtubeTitle": "Título de YouTube",
-            "instagramCaption": "Descripción de Instagram"
-          }
-        }
+        "placeholder": "Empieza a escribir o pega un texto para ver aquí las estadísticas de palabras, caracteres y palabras clave."
       },
       "form": {
         "inputTitle": "Tu texto",
         "inputLabel": "Tu texto",
         "inputPlaceholder": "Empieza a escribir o pega aquí tu texto...",
         "loadSampleText": "Cargar texto de ejemplo",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "sampleText": "Escribir con claridad empieza por conocer los límites. Una publicación en X admite 280 caracteres, un SMS cabe en 160 y un resultado de búsqueda muestra unos 60 caracteres del título de una página antes de cortarlo.\n\nEl recuento de palabras importa más allá de las redes sociales. Los estudiantes cumplen límites de ensayo de 1.500 palabras, los periodistas escriben para un espacio exacto y los oradores preparan una charla de 5 minutos a unas 130 palabras por minuto. ¡Las frases cortas mantienen al lector en marcha! Las largas, cuando están bien construidas, pueden llevar una idea compleja desde su primera cláusula hasta una conclusión final y satisfactoria.\n\nPruébalo tú mismo: edita este párrafo, pega tu propio borrador o haz clic en una palabra clave para ver dónde aparece en el texto. Cada número y gráfico de esta página se actualiza mientras escribes."
       },
       "stats": {
         "words": "Palabras",
@@ -20018,13 +20006,7 @@
         "intro": {
           "title": "Cómo funciona realmente el conteo de palabras",
           "paragraph1": "Detrás de un simple «número de palabras» hay varias decisiones deliberadas sobre qué cuenta como palabra, como frase y como párrafo. Un contador de palabras primero tokeniza el texto —lo divide en unidades individuales según los espacios en blanco y los signos de puntuación— y después clasifica esos tokens: las secuencias de caracteres que terminan en «.», «!» o «?» cierran una frase; las líneas en blanco marcan un cambio de párrafo; y cada token se mide en longitud y se compara con el resto para encontrar las palabras únicas y la más larga. Nada de esto es adivinación una vez fijadas las reglas, pero esas reglas son, en sí mismas, una elección — precisamente por eso dos herramientas distintas pueden dar dos recuentos distintos para el mismo texto.",
-          "paragraph2": "La estimación del tiempo de lectura añade una capa más: una constante de palabras por minuto (PPM), multiplicada por el número de palabras. Esta herramienta usa 200 PPM, una cifra intermedia habitualmente citada para la lectura silenciosa de prosa en inglés por parte de un adulto; un amplio metaanálisis de 2019 sobre velocidad de lectura (ver la referencia más abajo) sitúa la media real más cerca de 238 PPM para textos no narrativos, con una variación amplia según el lector, el idioma y la dificultad del texto — por lo que cualquier estimación de tiempo de lectura debe leerse como una aproximación razonable, no como una medición precisa. La densidad de palabras clave, la tercera capa de esta herramienta, funciona contando cuántas veces se repite cada palabra tras filtrar las palabras funcionales cortas y muy frecuentes («el», «y», «de»), de modo que lo que queda refleje el tema real del texto y no su gramática.",
-          "diagram": {
-            "rawTextLabel": "Texto sin procesar",
-            "tokenizeLabel": "Tokenizar\n(palabras, frases,\npárrafos)",
-            "countsLabel": "Recuentos +\ntiempo de lectura +\npalabras clave",
-            "caption": "El proceso de conteo de palabras: el texto sin procesar se divide en tokens, esos tokens se clasifican en palabras, frases y párrafos, y los recuentos resultantes alimentan los cálculos de tiempo de lectura y densidad de palabras clave."
-          }
+          "paragraph2": "La estimación del tiempo de lectura añade una capa más: una constante de palabras por minuto (PPM), multiplicada por el número de palabras. Esta herramienta usa 200 PPM, una cifra intermedia habitualmente citada para la lectura silenciosa de prosa en inglés por parte de un adulto; un amplio metaanálisis de 2019 sobre velocidad de lectura (ver la referencia más abajo) sitúa la media real más cerca de 238 PPM para textos no narrativos, con una variación amplia según el lector, el idioma y la dificultad del texto — por lo que cualquier estimación de tiempo de lectura debe leerse como una aproximación razonable, no como una medición precisa. La densidad de palabras clave, la tercera capa de esta herramienta, funciona contando cuántas veces se repite cada palabra tras filtrar las palabras funcionales cortas y muy frecuentes («el», «y», «de»), de modo que lo que queda refleje el tema real del texto y no su gramática."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -20151,10 +20133,154 @@
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto"
       },
-      "vocabularyDiversity": {
-        "title": "Diversidad de Vocabulario",
-        "uniqueLabel": "{count} únicas",
-        "repeatedLabel": "{count} repetidas"
+      "live": {
+        "highlighting": "Resaltando: {word}",
+        "inputFooter": "{words} palabras · {characters} caracteres — se actualiza al escribir",
+        "worked": "Ejemplo resuelto",
+        "empty": "Escribe o pega un texto arriba para ver este indicador.",
+        "table": {
+          "wordsNote": "{unique} únicas",
+          "charactersNote": "incl. {spaces} espacios",
+          "sentencesNote": "la más larga: {longest} palabras",
+          "paragraphsNote": "{avg} palabras cada uno",
+          "uniqueNote": "{repeated} repeticiones",
+          "lettersUnit": "letras por palabra",
+          "wordsUnit": "palabras por frase",
+          "averageSentenceLength": "Longitud media de frase",
+          "readingTime": "Tiempo de lectura",
+          "readingNote": "en silencio, {wpm} ppm",
+          "speakingTime": "Tiempo de habla",
+          "speakingNote": "en voz alta, {wpm} ppm",
+          "lettersCount": "{n} letras"
+        },
+        "ring": {
+          "aria": "Anillo de composición del texto: letras, dígitos, espacios, puntuación y símbolos, con palabras únicas frente a repetidas en el interior",
+          "center": "caracteres",
+          "letters": "Letras",
+          "digits": "Dígitos",
+          "spaces": "Espacios",
+          "punctuation": "Puntuación",
+          "other": "Símbolos",
+          "unique": "Palabras únicas"
+        },
+        "keywords": {
+          "title": "Densidad de palabras clave",
+          "intro": "Las palabras temáticas que más repites, tras filtrar las palabras funcionales comunes. Haz clic en una para resaltar cada aparición en tu texto.",
+          "none": "Aún no hay palabras clave.",
+          "hint": "Haz clic en una palabra para resaltarla en el texto; otra vez para quitarlo.",
+          "word": "Palabra clave",
+          "occurrences": "Apariciones",
+          "tokens": "Tokens de palabra",
+          "tokensNote": "solo letras y dígitos",
+          "density": "Densidad"
+        },
+        "rhythm": {
+          "title": "Ritmo de longitud de frases",
+          "intro": "Cada barra es una frase en orden de lectura. Las longitudes variadas se leen con naturalidad; muchas barras altas seguidas cansan al lector.",
+          "aria": "Gráfico de barras de palabras por frase",
+          "longLine": "larga",
+          "barTitle": "Frase {n}: {words} palabras",
+          "avgLine": "media",
+          "first": "frase",
+          "hint": "Haz clic en una barra para saltar a esa frase en el texto.",
+          "capped": "se muestran las primeras {n} de {total}",
+          "count": "Frases",
+          "average": "Longitud media",
+          "avgNote": "palabras por frase",
+          "longest": "La más larga",
+          "shortest": "La más corta",
+          "which": "frase {n}",
+          "overLong": "Más de {n} palabras",
+          "selected": "Frase seleccionada {n}",
+          "variation": "Rango de longitudes",
+          "variationNote": "más larga − más corta"
+        },
+        "platforms": {
+          "title": "Límites de plataformas",
+          "intro": "Tu recuento de caracteres frente a cuatro límites habituales. Verde cabe, ámbar está cerca o se queda corto, rojo se corta.",
+          "smsStatus": "{segments} SMS",
+          "left": "quedan {n}",
+          "over": "sobran {n}",
+          "characters": "Caracteres",
+          "x": {
+            "name": "Publicación en X",
+            "rule": "280 caracteres por publicación"
+          },
+          "sms": {
+            "name": "SMS",
+            "gsm": "GSM-7: 160 simple, 153 por parte",
+            "unicode": "Unicode: 70 simple, 67 por parte"
+          },
+          "meta": {
+            "name": "Meta descripción",
+            "rule": "unos 120–160 visibles en la búsqueda"
+          },
+          "titleTag": {
+            "name": "Etiqueta title",
+            "rule": "unos 50–60 antes del corte"
+          }
+        },
+        "readSpeak": {
+          "title": "Tiempo de lectura vs. habla",
+          "intro": "Las mismas palabras tardan más en decirse que en leerse. Mueve los controles para ajustar tu ritmo.",
+          "reading": "Lectura en silencio",
+          "speaking": "En voz alta",
+          "pace": "{wpm} ppm",
+          "ratio": "Hablar lleva {x} veces el tiempo de lectura.",
+          "words": "Palabras",
+          "difference": "Diferencia"
+        },
+        "paragraphs": {
+          "title": "Estructura de párrafos",
+          "intro": "Cómo se reparten tus palabras entre párrafos, en orden. Un único bloque enorme suele indicar que conviene dividirlo.",
+          "segment": "Párrafo {n}: {words} palabras",
+          "label": "Párrafo {n}",
+          "detail": "{words} p · {sentences} f",
+          "others": "{n} párrafos más",
+          "count": "Párrafos",
+          "average": "Palabras de media",
+          "largest": "Párrafo más largo",
+          "share": "Mayor proporción"
+        },
+        "letters": {
+          "title": "Frecuencia de letras",
+          "intro": "Las doce letras que más usas, sin distinguir mayúsculas. Cada idioma tiene su propia huella.",
+          "aria": "Gráfico de barras de las letras más frecuentes",
+          "total": "Caracteres de letra",
+          "totalNote": "incl. diacríticos combinados",
+          "rank": "Letra n.º {n} «{letter}»",
+          "top3": "Proporción del top 3"
+        },
+        "readability": {
+          "title": "Legibilidad (LIX)",
+          "intro": "LIX suma la longitud media de frase y el porcentaje de palabras de más de seis letras. Funciona en varios idiomas: más bajo es más fácil.",
+          "aria": "Indicador de legibilidad de muy fácil a muy difícil",
+          "bands": {
+            "veryEasy": "Muy fácil",
+            "easy": "Fácil",
+            "medium": "Media",
+            "hard": "Difícil",
+            "veryHard": "Muy difícil"
+          },
+          "wps": "Palabras por frase",
+          "longWords": "Palabras largas",
+          "longNote": "más de 6 letras",
+          "longShare": "Proporción de largas",
+          "lix": "Puntuación LIX"
+        },
+        "wordLengths": {
+          "title": "Distribución de longitud de palabras",
+          "intro": "Cuántas palabras tienen 1, 2, 3… letras. El marcador señala tu longitud media de palabra.",
+          "aria": "Histograma de longitudes de palabra con la media marcada",
+          "axis": "letras por palabra",
+          "tokens": "Tokens de palabra",
+          "mode": "Longitud más común",
+          "modeNote": "{n} palabras",
+          "long": "Palabras largas",
+          "longNote": "más de 6 letras",
+          "average": "Longitud media",
+          "averageNote": "letras totales ÷ tokens"
+        }
       }
     },
     "base64-tool": {

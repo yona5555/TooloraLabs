@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { countWords } from "../analyzers/textSegmentation";
 
 export type LoremUnit = "paragraphs" | "sentences" | "words";
 export type LoremStyle = "classic" | "modern";
@@ -116,7 +117,7 @@ export class LoremIpsumCalculator extends BaseCalculator<LoremIpsumInput, LoremI
       text = paragraphs.join("\n\n");
     }
 
-    const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+    const wordCount = countWords(text);
 
     return {
       success: true,

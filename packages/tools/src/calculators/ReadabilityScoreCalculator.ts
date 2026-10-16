@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { splitSentences as splitSentenceSpans, tokenizeWords as tokenizeWordSpans } from "../analyzers/textSegmentation";
 
 export type ReadabilityScoreCalculatorInput = {
   text: string;
@@ -32,28 +33,21 @@ function clean(value: number): number {
   return Number(value.toPrecision(10));
 }
 
-/**
- * Splits raw text into word tokens on whitespace, discarding tokens with no
- * letters or digits (stray punctuation, bullets, dashes on their own, etc.).
- */
+/** Word tokens (script-aware: diacritics and matras stay inside their word). */
 function tokenizeWords(text: string): string[] {
-  return text
-    .split(/\s+/)
-    .map((token) => token.trim())
-    .filter((token) => /[A-Za-z0-9]/.test(token));
+  return tokenizeWordSpans(text).map((t) => t.word);
 }
 
+const TERMINATED = /[.!?\u061F\u061B\u06D4\u0964\u0965\u2026\u203C\u2047-\u2049\u3002\uFF01\uFF0E\uFF1F]["'\u201D\u2019\u00BB)\]}\u300D\u300F]*$/u;
+
 /**
- * Splits raw text into sentence-like chunks by grouping runs of characters
- * that end in one or more sentence-terminating marks (. ! ?), optionally
- * followed by a closing quote or bracket. This is a heuristic — it does not
- * understand abbreviations (e.g. "Dr.") or decimal numbers — appropriate for
- * an estimate of readability rather than exact linguistic sentence parsing.
+ * Sentence chunks, ending on . ! ? ؟ ؛ । and the other terminators the shared segmenter knows.
+ * Only terminated chunks count, so a text without any end mark reports no sentences.
  */
 function splitSentences(text: string): string[] {
-  const matches = text.match(/[^.!?]+[.!?]+(?:['")\]]*)/g);
-  if (!matches) return [];
-  return matches.map((s) => s.trim()).filter((s) => s.length > 0 && /[A-Za-z0-9]/.test(s));
+  return splitSentenceSpans(text)
+    .map((s) => text.slice(s.start, s.end))
+    .filter((s) => TERMINATED.test(s));
 }
 
 /**

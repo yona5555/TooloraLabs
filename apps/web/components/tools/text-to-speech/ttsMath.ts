@@ -1,4 +1,4 @@
-import { TextToSpeechCalculator } from "@tooloralabs/tools";
+import { countWords, splitSentences, TextToSpeechCalculator } from "@tooloralabs/tools";
 
 /**
  * Pure helpers for the text-to-speech visuals. Every chunk shown comes from the tool's own
@@ -17,7 +17,7 @@ export const SPEC_RATE_MIN = 0.1;
 export const SPEC_RATE_MAX = 10;
 export const CHUNK_LIMIT = 200;
 
-export const wordCount = (s: string) => (s.trim() ? s.trim().split(/\s+/).length : 0);
+export const wordCount = (s: string) => countWords(s);
 export const seconds = (words: number, rate: number) => (words * 60) / (WPM * rate);
 
 /** The tool's own chunking (rate and pitch do not change chunks). */
@@ -26,7 +26,7 @@ export function chunksOf(text: string, max = CHUNK_LIMIT): string[] {
 }
 
 /** The same sentence split the tool uses before packing chunks. */
-export const sentencesOf = (text: string) => (text.match(/[^.!?]+[.!?]*/g) ?? [text]).map((s) => s.trim()).filter(Boolean);
+export const sentencesOf = (text: string) => splitSentences(text).map((s) => text.slice(s.start, s.end));
 
 /** Stored example paragraph (eight sentences) for the indicator cards. */
 export const STORY =

@@ -19981,27 +19981,15 @@
       },
       "aboveFold": {
         "resultTitle": "Live-Statistik",
-        "placeholder": "Beginnen Sie zu tippen oder fügen Sie Text ein, um hier Wort-, Zeichen- und Schlüsselwortstatistiken zu sehen.",
-        "keywordsTitle": "Top-Schlüsselwörter nach Häufigkeit",
-        "platformLimits": {
-          "title": "Plattform-Zeichenlimits",
-          "intro": "Sehen Sie, wie Ihre aktuelle Zeichenanzahl im Vergleich zu gängigen Plattformgrenzen abschneidet.",
-          "items": {
-            "smsMessage": "SMS-Nachricht",
-            "metaDescription": "Meta-Beschreibung",
-            "xPost": "X-Beitrag (Twitter)",
-            "googleTitleTag": "Google-Titel-Tag",
-            "youtubeTitle": "YouTube-Titel",
-            "instagramCaption": "Instagram-Bildunterschrift"
-          }
-        }
+        "placeholder": "Beginnen Sie zu tippen oder fügen Sie Text ein, um hier Wort-, Zeichen- und Schlüsselwortstatistiken zu sehen."
       },
       "form": {
         "inputTitle": "Ihr Text",
         "inputLabel": "Ihr Text",
         "inputPlaceholder": "Beginnen Sie zu tippen oder fügen Sie hier Ihren Text ein …",
         "loadSampleText": "Beispieltext laden",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "sampleText": "Klares Schreiben beginnt damit, die eigenen Grenzen zu kennen. Ein Beitrag auf X erlaubt 280 Zeichen, eine SMS fasst 160, und ein Suchergebnis zeigt etwa 60 Zeichen eines Seitentitels, bevor es ihn abschneidet.\n\nWortzahlen zählen auch jenseits sozialer Medien. Studierende halten Grenzen von 1.500 Wörtern ein, Journalisten schreiben für einen exakt bemessenen Platz, und Redner planen einen 5-minütigen Vortrag mit etwa 130 Wörtern pro Minute. Kurze Sätze halten den Leser in Bewegung! Längere Sätze können, wenn sie sorgfältig gebaut sind, eine komplexe Idee vom ersten Satzteil bis zu einem überzeugenden Schluss tragen.\n\nProbieren Sie es aus: Bearbeiten Sie diesen Absatz, fügen Sie Ihren eigenen Entwurf ein oder klicken Sie auf ein Schlüsselwort, um zu sehen, wo es im Text steht. Jede Zahl und jedes Diagramm auf dieser Seite aktualisiert sich beim Tippen."
       },
       "stats": {
         "words": "Wörter",
@@ -20018,13 +20006,7 @@
         "intro": {
           "title": "Wie Wortzählung tatsächlich funktioniert",
           "paragraph1": "Hinter einer einzigen Zahl für die „Wortanzahl“ stehen mehrere separate, bewusste Entscheidungen darüber, was als Wort, Satz und Absatz zählt. Ein Wortzähler tokenisiert zunächst den Rohtext — teilt ihn an Leerzeichen- und Satzzeichengrenzen in einzelne Einheiten auf — und klassifiziert diese Token dann: Zeichenfolgen, die mit „.“, „!“ oder „?“ enden, schließen einen Satz ab; Leerzeilen markieren Absatzumbrüche; und jedes Token wird auf seine Länge gemessen und mit jedem anderen verglichen, um eindeutige Wörter und das längste zu finden. Nichts davon ist Raterei, sobald die Regeln feststehen, aber die Regeln selbst sind eine Entscheidung — genau deshalb können zwei verschiedene Werkzeuge für denselben Text zwei unterschiedliche Zahlen ausgeben.",
-          "paragraph2": "Lesezeit-Schätzungen fügen eine weitere Ebene hinzu: eine Konstante in Wörtern pro Minute (WPM), multipliziert mit der Wortanzahl. Dieses Werkzeug verwendet 200 WPM, einen häufig zitierten Mittelwert für das stille Lesen englischer Prosa durch Erwachsene; eine große Metaanalyse von 2019 zur Leseforschung (siehe Quellenangabe unten) setzt den tatsächlichen Durchschnitt eher bei 238 WPM für Sachtexte an, mit großer Schwankung je nach Leser, Sprache und Textschwierigkeit — weshalb jede Lesezeit-Schätzung als vernünftige Annäherung zu verstehen ist, nicht als präzise Messung. Die Schlüsselwortdichte, die dritte Ebene dieses Werkzeugs, funktioniert, indem gezählt wird, wie oft jedes Wort wiederkehrt, nachdem kurze, häufige Funktionswörter („der“, „und“, „von“) herausgefiltert wurden, sodass das Übrige das tatsächliche Thema des Textes widerspiegelt statt seiner Grammatik.",
-          "diagram": {
-            "rawTextLabel": "Rohtext",
-            "tokenizeLabel": "Tokenisieren\n(Wörter, Sätze,\nAbsätze)",
-            "countsLabel": "Zählungen +\nLesezeit +\nSchlüsselwörter",
-            "caption": "Die Wortzählungs-Pipeline: Rohtext wird in Token zerlegt, diese Token werden in Wörter, Sätze und Absätze eingeteilt, und die daraus resultierenden Zählungen fließen in die Berechnung von Lesezeit und Schlüsselwortdichte ein."
-          }
+          "paragraph2": "Lesezeit-Schätzungen fügen eine weitere Ebene hinzu: eine Konstante in Wörtern pro Minute (WPM), multipliziert mit der Wortanzahl. Dieses Werkzeug verwendet 200 WPM, einen häufig zitierten Mittelwert für das stille Lesen englischer Prosa durch Erwachsene; eine große Metaanalyse von 2019 zur Leseforschung (siehe Quellenangabe unten) setzt den tatsächlichen Durchschnitt eher bei 238 WPM für Sachtexte an, mit großer Schwankung je nach Leser, Sprache und Textschwierigkeit — weshalb jede Lesezeit-Schätzung als vernünftige Annäherung zu verstehen ist, nicht als präzise Messung. Die Schlüsselwortdichte, die dritte Ebene dieses Werkzeugs, funktioniert, indem gezählt wird, wie oft jedes Wort wiederkehrt, nachdem kurze, häufige Funktionswörter („der“, „und“, „von“) herausgefiltert wurden, sodass das Übrige das tatsächliche Thema des Textes widerspiegelt statt seiner Grammatik."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -20151,10 +20133,154 @@
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet"
       },
-      "vocabularyDiversity": {
-        "title": "Wortschatzvielfalt",
-        "uniqueLabel": "{count} einzigartig",
-        "repeatedLabel": "{count} wiederholt"
+      "live": {
+        "highlighting": "Markiert: {word}",
+        "inputFooter": "{words} Wörter · {characters} Zeichen — aktualisiert beim Tippen",
+        "worked": "Rechenbeispiel",
+        "empty": "Geben Sie oben Text ein oder fügen Sie ihn ein, um diesen Indikator zu sehen.",
+        "table": {
+          "wordsNote": "{unique} eindeutig",
+          "charactersNote": "inkl. {spaces} Leerzeichen",
+          "sentencesNote": "längster: {longest} Wörter",
+          "paragraphsNote": "je {avg} Wörter",
+          "uniqueNote": "{repeated} Wiederholungen",
+          "lettersUnit": "Buchstaben pro Wort",
+          "wordsUnit": "Wörter pro Satz",
+          "averageSentenceLength": "Ø Satzlänge",
+          "readingTime": "Lesezeit",
+          "readingNote": "still, {wpm} WpM",
+          "speakingTime": "Sprechzeit",
+          "speakingNote": "laut, {wpm} WpM",
+          "lettersCount": "{n} Buchstaben"
+        },
+        "ring": {
+          "aria": "Ring der Textzusammensetzung: Buchstaben, Ziffern, Leerzeichen, Satzzeichen und Symbole, innen eindeutige gegenüber wiederholten Wörtern",
+          "center": "Zeichen",
+          "letters": "Buchstaben",
+          "digits": "Ziffern",
+          "spaces": "Leerzeichen",
+          "punctuation": "Satzzeichen",
+          "other": "Symbole",
+          "unique": "Eindeutige Wörter"
+        },
+        "keywords": {
+          "title": "Keyword-Dichte",
+          "intro": "Die Themenwörter, die Sie am häufigsten wiederholen, ohne gängige Funktionswörter. Klicken Sie auf ein Wort, um jedes Vorkommen im Text zu markieren.",
+          "none": "Noch keine Schlüsselwörter.",
+          "hint": "Klicken Sie auf ein Wort, um es im Text zu markieren; erneut klicken hebt es auf.",
+          "word": "Schlüsselwort",
+          "occurrences": "Vorkommen",
+          "tokens": "Wort-Tokens",
+          "tokensNote": "nur Buchstaben und Ziffern",
+          "density": "Dichte"
+        },
+        "rhythm": {
+          "title": "Satzlängen-Rhythmus",
+          "intro": "Jeder Balken ist ein Satz in Lesereihenfolge. Abwechslungsreiche Längen lesen sich natürlich; viele hohe Balken hintereinander ermüden.",
+          "aria": "Balkendiagramm der Wörter pro Satz",
+          "longLine": "lang",
+          "barTitle": "Satz {n}: {words} Wörter",
+          "avgLine": "Ø",
+          "first": "Satz",
+          "hint": "Klicken Sie auf einen Balken, um zu diesem Satz im Text zu springen.",
+          "capped": "erste {n} von {total} angezeigt",
+          "count": "Sätze",
+          "average": "Ø Länge",
+          "avgNote": "Wörter pro Satz",
+          "longest": "Längster",
+          "shortest": "Kürzester",
+          "which": "Satz {n}",
+          "overLong": "Über {n} Wörter",
+          "selected": "Gewählter Satz {n}",
+          "variation": "Längenspanne",
+          "variationNote": "längster − kürzester"
+        },
+        "platforms": {
+          "title": "Plattform-Limits",
+          "intro": "Ihre Zeichenzahl im Vergleich zu vier alltäglichen Grenzen. Grün passt, Bernstein ist knapp oder zu kurz, Rot wird abgeschnitten.",
+          "smsStatus": "{segments} SMS",
+          "left": "{n} übrig",
+          "over": "{n} zu viel",
+          "characters": "Zeichen",
+          "x": {
+            "name": "X-Beitrag",
+            "rule": "280 Zeichen pro Beitrag"
+          },
+          "sms": {
+            "name": "SMS",
+            "gsm": "GSM-7: 160 einzeln, 153 pro Teil",
+            "unicode": "Unicode: 70 einzeln, 67 pro Teil"
+          },
+          "meta": {
+            "name": "Meta-Beschreibung",
+            "rule": "etwa 120–160 in der Suche sichtbar"
+          },
+          "titleTag": {
+            "name": "Title-Tag",
+            "rule": "etwa 50–60 vor dem Abschneiden"
+          }
+        },
+        "readSpeak": {
+          "title": "Lesezeit vs. Sprechzeit",
+          "intro": "Dieselben Wörter dauern gesprochen länger als gelesen. Ziehen Sie die Regler auf Ihr eigenes Tempo.",
+          "reading": "Stilles Lesen",
+          "speaking": "Lautes Sprechen",
+          "pace": "{wpm} WpM",
+          "ratio": "Sprechen dauert {x}-mal so lange wie Lesen.",
+          "words": "Wörter",
+          "difference": "Unterschied"
+        },
+        "paragraphs": {
+          "title": "Absatzstruktur",
+          "intro": "Wie sich Ihre Wörter der Reihe nach auf die Absätze verteilen. Ein einziger riesiger Block deutet meist auf einen zu teilenden Absatz hin.",
+          "segment": "Absatz {n}: {words} Wörter",
+          "label": "Absatz {n}",
+          "detail": "{words} W · {sentences} S",
+          "others": "{n} weitere Absätze",
+          "count": "Absätze",
+          "average": "Ø Wörter",
+          "largest": "Größter Absatz",
+          "share": "Größter Anteil"
+        },
+        "letters": {
+          "title": "Buchstabenhäufigkeit",
+          "intro": "Die zwölf Buchstaben, die Sie am häufigsten verwenden, ohne Groß-/Kleinschreibung. Jede Sprache hat ihren eigenen Fingerabdruck.",
+          "aria": "Balkendiagramm der häufigsten Buchstaben",
+          "total": "Buchstabenzeichen",
+          "totalNote": "inkl. kombinierender Zeichen",
+          "rank": "Buchstabe Nr. {n} „{letter}“",
+          "top3": "Anteil Top 3"
+        },
+        "readability": {
+          "title": "Lesbarkeit (LIX)",
+          "intro": "LIX addiert die durchschnittliche Satzlänge und den Prozentsatz der Wörter mit mehr als sechs Buchstaben. Sprachübergreifend nutzbar: niedriger ist leichter.",
+          "aria": "Lesbarkeitsanzeige von sehr leicht bis sehr schwer",
+          "bands": {
+            "veryEasy": "Sehr leicht",
+            "easy": "Leicht",
+            "medium": "Mittel",
+            "hard": "Schwer",
+            "veryHard": "Sehr schwer"
+          },
+          "wps": "Wörter pro Satz",
+          "longWords": "Lange Wörter",
+          "longNote": "mehr als 6 Buchstaben",
+          "longShare": "Anteil langer Wörter",
+          "lix": "LIX-Wert"
+        },
+        "wordLengths": {
+          "title": "Verteilung der Wortlängen",
+          "intro": "Wie viele Wörter 1, 2, 3 … Buchstaben haben. Die Markierung zeigt Ihre durchschnittliche Wortlänge.",
+          "aria": "Histogramm der Wortlängen mit markiertem Durchschnitt",
+          "axis": "Buchstaben pro Wort",
+          "tokens": "Wort-Tokens",
+          "mode": "Häufigste Länge",
+          "modeNote": "{n} Wörter",
+          "long": "Lange Wörter",
+          "longNote": "mehr als 6 Buchstaben",
+          "average": "Ø Länge",
+          "averageNote": "Buchstaben gesamt ÷ Tokens"
+        }
       }
     },
     "base64-tool": {

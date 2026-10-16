@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { countWords } from "../analyzers/textSegmentation";
 
 export type SpeechToTextInput = {
   /** Finalized transcript segments, in the order they were recognized. */
@@ -41,7 +42,7 @@ export class SpeechToTextCalculator extends BaseCalculator<SpeechToTextInput, Sp
 
     const joined = cleanedSegments.join(" ");
     const transcript = capitalizeSentences(joined);
-    const wordCount = transcript ? transcript.split(/\s+/).length : 0;
+    const wordCount = countWords(transcript);
 
     return {
       success: true,
