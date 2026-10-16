@@ -12327,9 +12327,6 @@
         }
       },
       "gauge": {
-        "title": "Try It: Score Different Writing Styles",
-        "intro": "Pick a passage to see its real Flesch Reading Ease score, computed live by this same tool.",
-        "verdict": "The {example} passage scores as \"{band}\".",
         "examples": {
           "childrensBook": "Children's Book",
           "everydayEmail": "Everyday Email",
@@ -12368,6 +12365,113 @@
           "highSchool": "High School (9-12)",
           "college": "College (13-16)",
           "graduate": "Graduate (17+)"
+        }
+      },
+      "live": {
+        "worked": "Worked Example",
+        "empty": "Type or paste at least one complete English sentence above to see this indicator.",
+        "loadSample": "Load Sample Text",
+        "markHard": "Mark hard words",
+        "highlightingWord": "Highlighting: {word}",
+        "highlightingAtLeast": "Highlighting: {n}+ syllables",
+        "highlightingExactly": "Highlighting: {n} syllables",
+        "inputFooter": "{words} words · {sentences} sentences · {syllables} syllables — updates as you type",
+        "dial": {
+          "aria": "Reading Ease dial with the seven score bands, and the share of words by syllable count inside",
+          "bucket": "{n} syllables"
+        },
+        "table": {
+          "easeNote": "{band} · {points} points to {next}",
+          "hardNote": "{n} hard words (3+ syllables) · {share}",
+          "fragmentsNote": "{n} unfinished sentence(s) not counted",
+          "longestNote": "longest: {n} words",
+          "perSentence": "{n} per sentence",
+          "hardest": "Hardest Sentence",
+          "easiest": "Easiest Sentence",
+          "sentenceRef": "sentence #{n} · {words} words"
+        },
+        "scale": {
+          "aria": "Reading Ease scale with your score and four reference passages",
+          "you": "Your text"
+        },
+        "grade": {
+          "aria": "Grade level steps from elementary school to graduate level with your text's position",
+          "gradeLabel": "grade",
+          "constant": "Constant",
+          "belowK": "below kindergarten level"
+        },
+        "formula": {
+          "aria": "Waterfall: the constant 206.835 minus the sentence-length and word-length penalties gives the Reading Ease score",
+          "constant": "constant",
+          "cols": {
+            "base": "Start",
+            "sentencePenalty": "Sentences",
+            "wordPenalty": "Syllables",
+            "score": "Score"
+          }
+        },
+        "sentences": {
+          "title": "Sentence-by-Sentence Difficulty",
+          "intro": "Each bar is one sentence in reading order: its height is the word count and its colour is that sentence's own Reading Ease band. Click a bar to select the sentence in your text.",
+          "aria": "Bar chart of every sentence, coloured by its own Reading Ease score",
+          "barTitle": "Sentence {n}: {words} words",
+          "axis": "sentences in reading order",
+          "hint": "Click a bar to select that sentence in the text; hatched bars have no end mark and are not counted.",
+          "capped": "first {n} of {total} shown",
+          "selected": "Sentence #{n}",
+          "hardestTag": "hardest",
+          "counted": "counted",
+          "notCounted": "not counted",
+          "notCountedNote": "no period, question mark or exclamation point"
+        },
+        "plane": {
+          "title": "Readability Map",
+          "intro": "The two inputs of both formulas as a map: sentence length across, word length up. Coloured stripes are the Reading Ease bands; each dot is one sentence and the ring is your whole text.",
+          "aria": "Scatter plot of sentences by words per sentence and syllables per word over the Reading Ease bands",
+          "xAxis": "words per sentence",
+          "yAxis": "syllables per word",
+          "dotTitle": "Sentence {n}: Reading Ease {ease}",
+          "hint": "Click a dot to select that sentence in the text.",
+          "xNote": "across",
+          "yNote": "up",
+          "easyDots": "Easy sentences (70+)",
+          "hardDots": "Very hard sentences (under 30)",
+          "ofDots": "of {n} sentences",
+          "selected": "Sentence #{n} (words · syllables/word)"
+        },
+        "syllables": {
+          "title": "Syllables per Word",
+          "intro": "How many words have one, two, three or more syllables. Every word of three or more syllables raises the syllables-per-word average that both formulas penalise.",
+          "aria": "Bar chart of word counts by number of syllables",
+          "hardZone": "hard words",
+          "axis": "syllables per word",
+          "hint": "Click a bar to highlight those words in the text; click again to clear.",
+          "numbersNote": "{n} numbers count as 0 syllables",
+          "highlighted": "Highlighted: {n} syllables",
+          "hardShare": "Hard words (3+ syllables)"
+        },
+        "hardWords": {
+          "title": "Hard Words",
+          "intro": "The longest words in your text by syllable count, with how often each appears. Click a word to highlight every occurrence.",
+          "none": "No words of three or more syllables.",
+          "barValue": "{syllables} syl. ×{count}",
+          "hint": "Click a word to highlight it in the text; click again to clear.",
+          "unique": "Different hard words",
+          "occurrences": "Hard-word occurrences",
+          "extraSyllables": "Syllables above two",
+          "extraNote": "summed over every hard word",
+          "simpler": "Score if each had 2 syllables",
+          "gain": "{n} points"
+        },
+        "whatIf": {
+          "title": "What-If Sliders",
+          "intro": "Move the sliders to try shorter sentences or shorter words and watch the score change. The dashed needle stays on your text as written.",
+          "aria": "Reading Ease gauge for the slider values, with a dashed needle for your text",
+          "hint": "Drag the sliders; the dashed needle is your text.",
+          "reset": "Reset",
+          "yourText": "Your text",
+          "whatIfScore": "What-if score",
+          "delta": "{n} vs. your text"
         }
       }
     },
@@ -32029,7 +32133,8 @@
         },
         "customWpmLabel": "Words per Minute",
         "loadSampleText": "Load Sample Text",
-        "clear": "Clear"
+        "clear": "Clear",
+        "sampleText": "Most adults read silent prose at somewhere between 200 and 300 words per minute. That pace is not fixed: it rises with familiar topics and falls when a text is dense, technical or written in a second language.\n\nPublishers use this number every day. A news site labels a story as a \"4 min read\", a teacher budgets class time for a chapter, and a speaker checks whether a handout can be read before the next slide. Short labels like these help people decide whether to start reading now or save the piece for later.\n\nReading time also shapes how people write. Editors split long paragraphs, trim sentences that run past twenty-five words, and move the key point to the top, because readers who can see the end of a page are more likely to reach it.\n\nTry it yourself: paste your own article, pick a reading speed, and press play on the reading timeline below to watch a simulated reader move through your text word by word. Every number and chart on this page updates as you type."
       },
       "result": {
         "heading": "Estimated Reading Time",
@@ -32167,6 +32272,150 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated"
+      },
+      "live": {
+        "worked": "Worked Example",
+        "empty": "Enter some text and a valid reading speed above to see this indicator.",
+        "following": "Reader at {time}",
+        "inputFooter": "{words} words at {wpm} wpm — updates as you type",
+        "dial": {
+          "aria": "Reading-time dial: the estimated time as an arc split by paragraph, on a clock face that rescales to the text",
+          "scale": "dial = {n} min",
+          "paragraph": "Paragraph {n}",
+          "more": "+{n} more paragraphs"
+        },
+        "table": {
+          "clockNote": "{clock} on a clock",
+          "wordsNote": "letters and digits, any script",
+          "wpmValue": "{wpm} wpm",
+          "totalSeconds": "Total Seconds",
+          "totalSecondsNote": "rounded to whole seconds",
+          "decimalMinutes": "Minutes (decimal)",
+          "wordsPerSecond": "Words per Second",
+          "sentences": "Sentences",
+          "perSentence": "≈ {s} s each",
+          "paragraphs": "Paragraphs",
+          "perParagraph": "≈ {clock} each",
+          "longestParagraph": "Longest Paragraph",
+          "paragraphN": "¶{n} · {words} words",
+          "presetRange": "Fast to Slow",
+          "presetRangeNote": "{fast} → {slow} wpm presets"
+        },
+        "playback": {
+          "title": "Reading Playback",
+          "intro": "A simulated reader moves through your text at a steady pace. Press play, drag the timeline or click a paragraph to see exactly which word a reader would reach at any moment; the word lights up in your text.",
+          "aria": "Reading timeline: paragraphs and sentence starts along a time axis in minutes, with a playhead for the simulated reader",
+          "paragraphsRow": "Paragraphs",
+          "sentencesRow": "Sentence starts",
+          "paragraphTitle": "Paragraph {n} starts at {time}",
+          "play": "Play",
+          "pause": "Pause",
+          "restart": "Reset the reader",
+          "scrub": "Reader position",
+          "pace": "Pace: {wpm} wpm",
+          "paceLabel": "Playback reading pace",
+          "hint": "Playback runs about {x}× faster than real time. Drag the pace slider to stretch or shrink the timeline.",
+          "position": "Elapsed",
+          "positionNote": "at {wpm} wpm",
+          "word": "Word reached",
+          "paragraph": "Paragraph",
+          "sentence": "Sentence",
+          "remaining": "Remaining",
+          "progress": "Progress"
+        },
+        "curve": {
+          "title": "Speed vs. Time",
+          "intro": "Reading time falls along a curve as speed rises: doubling the pace halves the time. Drag the amber point to try another speed against yours.",
+          "aria": "Curve of reading time against reading speed from 100 to 600 words per minute, with presets, your speed and a trial speed marked",
+          "axis": "words per minute",
+          "yours": "You",
+          "try": "Try: {wpm} wpm",
+          "tryLabel": "Trial reading speed",
+          "yourSpeed": "Your speed ({wpm} wpm)",
+          "trySpeed": "Trial speed ({wpm} wpm)",
+          "ratio": "Time ratio",
+          "saves": "Time saved",
+          "adds": "Time added"
+        },
+        "presets": {
+          "title": "Speed Presets Side by Side",
+          "intro": "The same text timed at every preset speed. Click a row to switch the calculator to that speed.",
+          "wpm": "{wpm} wpm",
+          "hint": "Click a speed to use it for every result on this page.",
+          "spread": "Slow minus fast",
+          "spreadNote": "how much the speed choice matters for this text"
+        },
+        "formula": {
+          "words": "Words",
+          "wpm": "Words per minute",
+          "minutes": "Minutes",
+          "rawSeconds": "Seconds (exact)",
+          "rounded": "Seconds (rounded)",
+          "roundNote": "rounded to the nearest second",
+          "split": "Minutes and seconds",
+          "result": "Reading time"
+        },
+        "paragraphs": {
+          "title": "Time per Paragraph",
+          "intro": "How long each paragraph takes and when a reader reaches it. Click a paragraph to select it in your text.",
+          "startsAt": "from {time}",
+          "hint": "Click a paragraph to select it in the text.",
+          "capped": "first {n} of {total} shown",
+          "selected": "Paragraph {n} (selected)",
+          "longest": "Paragraph {n} (longest)",
+          "words": "{n} words",
+          "time": "Time to read",
+          "starts": "Reader arrives at",
+          "startsNote": "after {n} words",
+          "count": "Paragraphs",
+          "share": "Share of total time"
+        },
+        "sentences": {
+          "title": "Seconds per Sentence",
+          "intro": "Each bar is one sentence, in reading order, timed at your speed. Long bars are where a reader slows down; click one to select that sentence.",
+          "aria": "Bar chart of reading seconds for each sentence in order, with the average and an 8-second line",
+          "slowLine": "{s} s",
+          "barTitle": "Sentence {n}: {s} s",
+          "avgLine": "avg {s} s",
+          "axis": "sentence",
+          "hint": "Click a bar to select that sentence in the text.",
+          "capped": "first {n} of {total} shown",
+          "count": "Sentences",
+          "average": "Average",
+          "seconds": "{s} s",
+          "overSlow": "Over {s} s",
+          "selected": "Sentence {n} (selected)",
+          "longest": "Sentence {n} (longest)",
+          "words": "{n} words",
+          "time": "Time to read"
+        },
+        "zones": {
+          "title": "Read-Length Band",
+          "intro": "Where this text lands among common read-length bands used by publishers. The light box shows the range from the fast to the slow preset.",
+          "spanTitle": "Fast to slow preset range",
+          "quick": "Quick",
+          "short": "Short",
+          "medium": "Medium",
+          "long": "Long-form",
+          "deep": "Deep read",
+          "legend": "Band edges in minutes. The marker moves as you type or change speed.",
+          "time": "Reading time",
+          "band": "Band",
+          "bandRange": "{from}–{to} min",
+          "presetSpan": "Fast to slow",
+          "toNext": "Words to reach {band}",
+          "words": "{n} words"
+        },
+        "aloud": {
+          "title": "Silent vs. Aloud",
+          "intro": "Reading aloud is paced by breath and pronunciation, so it is slower than silent reading. Compare the two for your text and drag the speaking pace.",
+          "silent": "Silent reading",
+          "aloud": "Reading aloud",
+          "pace": "{wpm} wpm",
+          "speakPace": "Speaking pace",
+          "ratio": "Aloud ÷ silent",
+          "difference": "Difference"
+        }
       }
     },
     "lorem-ipsum-generator": {

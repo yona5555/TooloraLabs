@@ -4,9 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import ReadabilityGauge from "./ReadabilityGauge";
-import ReadabilityScaleDiagram from "./ReadabilityScaleDiagram";
-import ReadabilityGradeLevelDiagram from "./ReadabilityGradeLevelDiagram";
+import RsSentenceMap from "./RsSentenceMap";
+import RsEaseScale from "./RsEaseScale";
+import RsFormulaWaterfall from "./RsFormulaWaterfall";
+import RsGradeLadder from "./RsGradeLadder";
+import RsWhatIf from "./RsWhatIf";
+import RsReadabilityPlane from "./RsReadabilityPlane";
+import RsSyllableBars from "./RsSyllableBars";
+import RsHardWords from "./RsHardWords";
 
 type ExampleRow = { calculation: string; result: string };
 
@@ -19,14 +24,19 @@ export default async function ReadabilityEducation() {
 
   return (
     <EncyclopediaPaper>
-      <ReadabilityGauge />
-
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <div className="space-y-6">
+          <RsSentenceMap />
+          <RsEaseScale />
+          <RsFormulaWaterfall />
+        </div>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <RsGradeLadder />
+          <RsWhatIf />
+        </div>
         <p>{t("intro.paragraph3")}</p>
-        <ReadabilityScaleDiagram />
-        <ReadabilityGradeLevelDiagram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -48,6 +58,11 @@ export default async function ReadabilityEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="space-y-6">
+          <RsReadabilityPlane />
+          <RsSyllableBars />
+          <RsHardWords />
         </div>
       </InfoSection>
 

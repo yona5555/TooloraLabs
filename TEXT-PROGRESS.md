@@ -18,9 +18,11 @@
 - Round 1: script-aware counting fix (`packages/tools/src/analyzers/textSegmentation.ts`, used by TextCounter,
   textProfile, ReadingTime, SpeechWordCount, LoremIpsum, Readability, TextToSpeech, SpeechToText, SpellingGrammar,
   web `ttsMath`, word-counter highlight) + tests (Arabic with/without diacritics, Hindi, English). word-counter.
+- Round 2: readability-score-calculator (Rs* indicators, ScoreDial, package helpers `readabilityBreakdown`,
+  `fleschReadingEaseOf`, `fleschKincaidGradeOf`, `readabilityBandFor` + tests), reading-time-calculator
+  (Rt* indicators, ReadingDial, reader-playback wow piece).
 
 ## Remaining (text-tools category)
-- Round 2: readability-score-calculator, reading-time-calculator
 - Round 3: speech-word-count-calculator, lorem-ipsum-generator
 - Round 4: text-logo-generator
 - Final round: lint, tsc, tests, build; delete this file; pull --rebase; push; CI; URL list.
@@ -28,3 +30,5 @@
 ## Problems / notes
 - Readability keeps its contract: only terminated sentences count (text without end marks → `no-sentences`).
 - `sgMath.sentencesOf` (spelling-grammar, English-only fixed samples) intentionally left as is.
+- Readability sample text is English in all locales on purpose (formulas are English-only); it is `SAMPLE_TEXT`
+  in `passageExamples.ts`. Its Clear button now empties the textarea; a "Load Sample Text" button restores it.

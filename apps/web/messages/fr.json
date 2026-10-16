@@ -12327,9 +12327,6 @@
         }
       },
       "gauge": {
-        "title": "Essayez : Notez Différents Styles d'Écriture",
-        "intro": "Choisissez un passage pour voir son véritable score Flesch Reading Ease, calculé en direct par cet même outil.",
-        "verdict": "Le passage « {example} » est classé « {band} ».",
         "examples": {
           "childrensBook": "Livre pour Enfants",
           "everydayEmail": "E-mail Quotidien",
@@ -12368,6 +12365,113 @@
           "highSchool": "Lycée (9-12)",
           "college": "Université (13-16)",
           "graduate": "Études supérieures (17+)"
+        }
+      },
+      "live": {
+        "worked": "Exemple résolu",
+        "empty": "Saisissez ou collez ci-dessus au moins une phrase anglaise complète pour afficher cet indicateur.",
+        "loadSample": "Charger un texte d'exemple",
+        "markHard": "Marquer les mots difficiles",
+        "highlightingWord": "Surlignage : {word}",
+        "highlightingAtLeast": "Surlignage : {n}+ syllabes",
+        "highlightingExactly": "Surlignage : {n} syllabes",
+        "inputFooter": "{words} mots · {sentences} phrases · {syllables} syllabes — mis à jour pendant la saisie",
+        "dial": {
+          "aria": "Cadran de facilité de lecture avec les sept tranches de score et, à l'intérieur, la part des mots selon leur nombre de syllabes",
+          "bucket": "{n} syllabes"
+        },
+        "table": {
+          "easeNote": "{band} · {points} points pour atteindre {next}",
+          "hardNote": "{n} mots difficiles (3+ syllabes) · {share}",
+          "fragmentsNote": "{n} phrase(s) inachevée(s) non comptée(s)",
+          "longestNote": "la plus longue : {n} mots",
+          "perSentence": "{n} par phrase",
+          "hardest": "Phrase la plus difficile",
+          "easiest": "Phrase la plus facile",
+          "sentenceRef": "phrase n° {n} · {words} mots"
+        },
+        "scale": {
+          "aria": "Échelle de facilité de lecture avec votre score et quatre passages de référence",
+          "you": "Votre texte"
+        },
+        "grade": {
+          "aria": "Marches du niveau scolaire, du primaire aux études supérieures, avec la position de votre texte",
+          "gradeLabel": "niveau",
+          "constant": "Constante",
+          "belowK": "en dessous du niveau maternelle"
+        },
+        "formula": {
+          "aria": "Cascade : la constante 206.835 moins les pénalités de longueur de phrase et de longueur de mot donne la facilité de lecture",
+          "constant": "constante",
+          "cols": {
+            "base": "Départ",
+            "sentencePenalty": "Phrases",
+            "wordPenalty": "Syllabes",
+            "score": "Score"
+          }
+        },
+        "sentences": {
+          "title": "Difficulté phrase par phrase",
+          "intro": "Chaque barre est une phrase dans l'ordre de lecture : sa hauteur est le nombre de mots et sa couleur la tranche de facilité de lecture de cette phrase. Cliquez sur une barre pour sélectionner la phrase dans votre texte.",
+          "aria": "Diagramme en barres de chaque phrase, coloré selon sa propre facilité de lecture",
+          "barTitle": "Phrase {n} : {words} mots",
+          "axis": "phrases dans l'ordre de lecture",
+          "hint": "Cliquez sur une barre pour sélectionner cette phrase dans le texte ; les barres hachurées n'ont pas de ponctuation finale et ne sont pas comptées.",
+          "capped": "{n} premières sur {total} affichées",
+          "selected": "Phrase n° {n}",
+          "hardestTag": "la plus difficile",
+          "counted": "comptée",
+          "notCounted": "non comptée",
+          "notCountedNote": "sans point, point d'interrogation ni point d'exclamation"
+        },
+        "plane": {
+          "title": "Carte de lisibilité",
+          "intro": "Les deux entrées des deux formules sous forme de carte : longueur des phrases à l'horizontale, longueur des mots à la verticale. Les bandes colorées sont les tranches de facilité de lecture ; chaque point est une phrase et l'anneau votre texte entier.",
+          "aria": "Nuage de points des phrases selon les mots par phrase et les syllabes par mot, sur les tranches de facilité de lecture",
+          "xAxis": "mots par phrase",
+          "yAxis": "syllabes par mot",
+          "dotTitle": "Phrase {n} : facilité de lecture {ease}",
+          "hint": "Cliquez sur un point pour sélectionner cette phrase dans le texte.",
+          "xNote": "horizontal",
+          "yNote": "vertical",
+          "easyDots": "Phrases faciles (70+)",
+          "hardDots": "Phrases très difficiles (moins de 30)",
+          "ofDots": "sur {n} phrases",
+          "selected": "Phrase n° {n} (mots · syllabes/mot)"
+        },
+        "syllables": {
+          "title": "Syllabes par mot",
+          "intro": "Combien de mots ont une, deux, trois syllabes ou plus. Chaque mot de trois syllabes ou plus augmente la moyenne de syllabes par mot que les deux formules pénalisent.",
+          "aria": "Diagramme en barres du nombre de mots selon leur nombre de syllabes",
+          "hardZone": "mots difficiles",
+          "axis": "syllabes par mot",
+          "hint": "Cliquez sur une barre pour surligner ces mots dans le texte ; cliquez à nouveau pour effacer.",
+          "numbersNote": "{n} nombres comptent pour 0 syllabe",
+          "highlighted": "Surlignés : {n} syllabes",
+          "hardShare": "Mots difficiles (3+ syllabes)"
+        },
+        "hardWords": {
+          "title": "Mots difficiles",
+          "intro": "Les mots les plus longs de votre texte en nombre de syllabes, avec leur nombre d'occurrences. Cliquez sur un mot pour surligner toutes ses occurrences.",
+          "none": "Aucun mot de trois syllabes ou plus.",
+          "barValue": "{syllables} syl. ×{count}",
+          "hint": "Cliquez sur un mot pour le surligner dans le texte ; cliquez à nouveau pour effacer.",
+          "unique": "Mots difficiles différents",
+          "occurrences": "Occurrences de mots difficiles",
+          "extraSyllables": "Syllabes au-delà de deux",
+          "extraNote": "additionnées sur tous les mots difficiles",
+          "simpler": "Score si chacun avait 2 syllabes",
+          "gain": "{n} points"
+        },
+        "whatIf": {
+          "title": "Curseurs « Et si… »",
+          "intro": "Déplacez les curseurs pour essayer des phrases ou des mots plus courts et voyez le score évoluer. L'aiguille en pointillés reste sur votre texte tel quel.",
+          "aria": "Jauge de facilité de lecture pour les valeurs des curseurs, avec une aiguille en pointillés pour votre texte",
+          "hint": "Faites glisser les curseurs ; l'aiguille en pointillés est votre texte.",
+          "reset": "Réinitialiser",
+          "yourText": "Votre texte",
+          "whatIfScore": "Score simulé",
+          "delta": "{n} par rapport à votre texte"
         }
       }
     },
@@ -32029,7 +32133,8 @@
         },
         "customWpmLabel": "Mots par Minute",
         "loadSampleText": "Charger un texte d'exemple",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "sampleText": "La plupart des adultes lisent en silence à un rythme compris entre 200 et 300 mots par minute. Ce rythme n'est pas fixe : il augmente avec les sujets familiers et diminue lorsqu'un texte est dense, technique ou écrit dans une seconde langue.\n\nLes éditeurs utilisent ce chiffre tous les jours. Un site d'actualité indique « lecture de 4 min » sur un article, un enseignant prévoit le temps de cours nécessaire pour un chapitre, et un orateur vérifie que le public pourra lire un document avant la diapositive suivante. Ces courtes indications aident chacun à décider s'il commence à lire maintenant ou s'il garde le texte pour plus tard.\n\nLe temps de lecture influence aussi la façon d'écrire. Les rédacteurs découpent les longs paragraphes, raccourcissent les phrases qui dépassent vingt-cinq mots et placent l'idée principale en tête, car un lecteur qui voit la fin d'une page a plus de chances de l'atteindre.\n\nEssayez vous-même : collez votre propre article, choisissez une vitesse de lecture, puis lancez la lecture sur la frise ci-dessous pour voir un lecteur simulé parcourir votre texte mot après mot. Chaque chiffre et chaque graphique de cette page se met à jour pendant la saisie."
       },
       "result": {
         "heading": "Temps de Lecture Estimé",
@@ -32167,6 +32272,150 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé"
+      },
+      "live": {
+        "worked": "Exemple détaillé",
+        "empty": "Saisissez un texte et une vitesse de lecture valide ci-dessus pour afficher cet indicateur.",
+        "following": "Lecteur à {time}",
+        "inputFooter": "{words} mots à {wpm} mots/min — mis à jour pendant la saisie",
+        "dial": {
+          "aria": "Cadran du temps de lecture : le temps estimé sous forme d'arc découpé par paragraphe, sur un cadran qui s'adapte au texte",
+          "scale": "cadran = {n} min",
+          "paragraph": "Paragraphe {n}",
+          "more": "+{n} autres paragraphes"
+        },
+        "table": {
+          "clockNote": "{clock} au format horloge",
+          "wordsNote": "lettres et chiffres, toute écriture",
+          "wpmValue": "{wpm} mots/min",
+          "totalSeconds": "Secondes au total",
+          "totalSecondsNote": "arrondi à la seconde entière",
+          "decimalMinutes": "Minutes (décimal)",
+          "wordsPerSecond": "Mots par seconde",
+          "sentences": "Phrases",
+          "perSentence": "≈ {s} s chacune",
+          "paragraphs": "Paragraphes",
+          "perParagraph": "≈ {clock} chacun",
+          "longestParagraph": "Paragraphe le plus long",
+          "paragraphN": "¶{n} · {words} mots",
+          "presetRange": "De rapide à lent",
+          "presetRangeNote": "préréglages {fast} → {slow} mots/min"
+        },
+        "playback": {
+          "title": "Lecture animée",
+          "intro": "Un lecteur simulé parcourt votre texte à un rythme régulier. Lancez la lecture, faites glisser la frise ou cliquez sur un paragraphe pour voir précisément quel mot un lecteur atteindrait à chaque instant ; le mot s'allume dans votre texte.",
+          "aria": "Frise de lecture : paragraphes et débuts de phrase sur un axe du temps en minutes, avec une tête de lecture pour le lecteur simulé",
+          "paragraphsRow": "Paragraphes",
+          "sentencesRow": "Débuts de phrase",
+          "paragraphTitle": "Le paragraphe {n} commence à {time}",
+          "play": "Lire",
+          "pause": "Pause",
+          "restart": "Réinitialiser le lecteur",
+          "scrub": "Position du lecteur",
+          "pace": "Rythme : {wpm} mots/min",
+          "paceLabel": "Rythme de lecture de l'animation",
+          "hint": "L'animation va environ {x} fois plus vite que le temps réel. Faites glisser le curseur de rythme pour allonger ou raccourcir la frise.",
+          "position": "Temps écoulé",
+          "positionNote": "à {wpm} mots/min",
+          "word": "Mot atteint",
+          "paragraph": "Paragraphe",
+          "sentence": "Phrase",
+          "remaining": "Temps restant",
+          "progress": "Progression"
+        },
+        "curve": {
+          "title": "Vitesse et temps",
+          "intro": "Le temps de lecture diminue le long d'une courbe quand la vitesse augmente : doubler le rythme divise le temps par deux. Faites glisser le point ambre pour comparer une autre vitesse à la vôtre.",
+          "aria": "Courbe du temps de lecture en fonction de la vitesse de lecture, de 100 à 600 mots par minute, avec les préréglages, votre vitesse et une vitesse d'essai",
+          "axis": "mots par minute",
+          "yours": "Vous",
+          "try": "Essai : {wpm} mots/min",
+          "tryLabel": "Vitesse de lecture d'essai",
+          "yourSpeed": "Votre vitesse ({wpm} mots/min)",
+          "trySpeed": "Vitesse d'essai ({wpm} mots/min)",
+          "ratio": "Rapport des temps",
+          "saves": "Temps gagné",
+          "adds": "Temps ajouté"
+        },
+        "presets": {
+          "title": "Préréglages de vitesse côte à côte",
+          "intro": "Le même texte chronométré à chaque vitesse prédéfinie. Cliquez sur une ligne pour que le calculateur utilise cette vitesse.",
+          "wpm": "{wpm} mots/min",
+          "hint": "Cliquez sur une vitesse pour l'appliquer à tous les résultats de la page.",
+          "spread": "Lent moins rapide",
+          "spreadNote": "l'effet du choix de vitesse sur ce texte"
+        },
+        "formula": {
+          "words": "Mots",
+          "wpm": "Mots par minute",
+          "minutes": "Minutes",
+          "rawSeconds": "Secondes (exactes)",
+          "rounded": "Secondes (arrondies)",
+          "roundNote": "arrondi à la seconde la plus proche",
+          "split": "Minutes et secondes",
+          "result": "Temps de lecture"
+        },
+        "paragraphs": {
+          "title": "Temps par paragraphe",
+          "intro": "La durée de chaque paragraphe et le moment où le lecteur l'atteint. Cliquez sur un paragraphe pour le sélectionner dans votre texte.",
+          "startsAt": "dès {time}",
+          "hint": "Cliquez sur un paragraphe pour le sélectionner dans le texte.",
+          "capped": "{n} premiers sur {total} affichés",
+          "selected": "Paragraphe {n} (sélectionné)",
+          "longest": "Paragraphe {n} (le plus long)",
+          "words": "{n} mots",
+          "time": "Temps de lecture",
+          "starts": "Le lecteur arrive à",
+          "startsNote": "après {n} mots",
+          "count": "Paragraphes",
+          "share": "Part du temps total"
+        },
+        "sentences": {
+          "title": "Secondes par phrase",
+          "intro": "Chaque barre est une phrase, dans l'ordre de lecture, chronométrée à votre vitesse. Les longues barres montrent où le lecteur ralentit ; cliquez sur l'une d'elles pour sélectionner la phrase.",
+          "aria": "Diagramme en barres des secondes de lecture de chaque phrase dans l'ordre, avec la moyenne et une ligne à 8 secondes",
+          "slowLine": "{s} s",
+          "barTitle": "Phrase {n} : {s} s",
+          "avgLine": "moy. {s} s",
+          "axis": "phrase",
+          "hint": "Cliquez sur une barre pour sélectionner la phrase dans le texte.",
+          "capped": "{n} premières sur {total} affichées",
+          "count": "Phrases",
+          "average": "Moyenne",
+          "seconds": "{s} s",
+          "overSlow": "Plus de {s} s",
+          "selected": "Phrase {n} (sélectionnée)",
+          "longest": "Phrase {n} (la plus longue)",
+          "words": "{n} mots",
+          "time": "Temps de lecture"
+        },
+        "zones": {
+          "title": "Catégorie de durée de lecture",
+          "intro": "La place de ce texte parmi les catégories de durée de lecture courantes chez les éditeurs. L'encadré clair montre l'écart entre le préréglage rapide et le lent.",
+          "spanTitle": "Écart entre le préréglage rapide et le lent",
+          "quick": "Express",
+          "short": "Courte",
+          "medium": "Moyenne",
+          "long": "Format long",
+          "deep": "Approfondie",
+          "legend": "Limites des catégories en minutes. Le repère bouge pendant la saisie ou quand la vitesse change.",
+          "time": "Temps de lecture",
+          "band": "Catégorie",
+          "bandRange": "{from}–{to} min",
+          "presetSpan": "De rapide à lent",
+          "toNext": "Mots jusqu'à « {band} »",
+          "words": "{n} mots"
+        },
+        "aloud": {
+          "title": "En silence ou à voix haute",
+          "intro": "La lecture à voix haute suit le rythme de la respiration et de la prononciation ; elle est donc plus lente que la lecture silencieuse. Comparez les deux pour votre texte et faites glisser le débit oral.",
+          "silent": "Lecture silencieuse",
+          "aloud": "Lecture à voix haute",
+          "pace": "{wpm} mots/min",
+          "speakPace": "Débit oral",
+          "ratio": "Voix haute ÷ silence",
+          "difference": "Écart"
+        }
       }
     },
     "lorem-ipsum-generator": {

@@ -12327,9 +12327,6 @@
         }
       },
       "gauge": {
-        "title": "Ausprobieren: Verschiedene Schreibstile bewerten",
-        "intro": "Wählen Sie einen Textabschnitt, um seinen echten Flesch-Reading-Ease-Wert zu sehen, live von diesem selben Werkzeug berechnet.",
-        "verdict": "Der Abschnitt „{example}“ wird als „{band}“ eingestuft.",
         "examples": {
           "childrensBook": "Kinderbuch",
           "everydayEmail": "Alltägliche E-Mail",
@@ -12368,6 +12365,113 @@
           "highSchool": "Oberstufe (Klasse 9-12)",
           "college": "College (13-16)",
           "graduate": "Hochschulabschluss (17+)"
+        }
+      },
+      "live": {
+        "worked": "Rechenbeispiel",
+        "empty": "Geben Sie oben mindestens einen vollständigen englischen Satz ein oder fügen Sie ihn ein, um diesen Indikator zu sehen.",
+        "loadSample": "Beispieltext laden",
+        "markHard": "Schwere Wörter markieren",
+        "highlightingWord": "Hervorgehoben: {word}",
+        "highlightingAtLeast": "Hervorgehoben: {n}+ Silben",
+        "highlightingExactly": "Hervorgehoben: {n} Silben",
+        "inputFooter": "{words} Wörter · {sentences} Sätze · {syllables} Silben — aktualisiert sich beim Tippen",
+        "dial": {
+          "aria": "Lesbarkeitsskala mit den sieben Wertebereichen und innen dem Anteil der Wörter nach Silbenzahl",
+          "bucket": "{n} Silben"
+        },
+        "table": {
+          "easeNote": "{band} · {points} Punkte bis {next}",
+          "hardNote": "{n} schwere Wörter (3+ Silben) · {share}",
+          "fragmentsNote": "{n} unvollständige(r) Satz/Sätze nicht gezählt",
+          "longestNote": "längster: {n} Wörter",
+          "perSentence": "{n} pro Satz",
+          "hardest": "Schwerster Satz",
+          "easiest": "Leichtester Satz",
+          "sentenceRef": "Satz Nr. {n} · {words} Wörter"
+        },
+        "scale": {
+          "aria": "Lesbarkeitsskala mit Ihrem Wert und vier Referenztexten",
+          "you": "Ihr Text"
+        },
+        "grade": {
+          "aria": "Stufen der Schulklasse von der Grundschule bis zum Masterniveau mit der Position Ihres Textes",
+          "gradeLabel": "Klasse",
+          "constant": "Konstante",
+          "belowK": "unter Vorschulniveau"
+        },
+        "formula": {
+          "aria": "Wasserfall: die Konstante 206.835 minus die Abzüge für Satzlänge und Wortlänge ergibt den Lesbarkeitswert",
+          "constant": "Konstante",
+          "cols": {
+            "base": "Start",
+            "sentencePenalty": "Sätze",
+            "wordPenalty": "Silben",
+            "score": "Wert"
+          }
+        },
+        "sentences": {
+          "title": "Schwierigkeit Satz für Satz",
+          "intro": "Jeder Balken ist ein Satz in Lesereihenfolge: Die Höhe ist die Wortzahl, die Farbe der eigene Lesbarkeitsbereich des Satzes. Klicken Sie auf einen Balken, um den Satz in Ihrem Text auszuwählen.",
+          "aria": "Balkendiagramm aller Sätze, gefärbt nach ihrem eigenen Lesbarkeitswert",
+          "barTitle": "Satz {n}: {words} Wörter",
+          "axis": "Sätze in Lesereihenfolge",
+          "hint": "Klicken Sie auf einen Balken, um diesen Satz im Text auszuwählen; schraffierte Balken haben kein Satzzeichen am Ende und werden nicht gezählt.",
+          "capped": "die ersten {n} von {total} angezeigt",
+          "selected": "Satz Nr. {n}",
+          "hardestTag": "schwerster",
+          "counted": "gezählt",
+          "notCounted": "nicht gezählt",
+          "notCountedNote": "ohne Punkt, Fragezeichen oder Ausrufezeichen"
+        },
+        "plane": {
+          "title": "Lesbarkeitskarte",
+          "intro": "Die beiden Eingaben beider Formeln als Karte: Satzlänge waagerecht, Wortlänge senkrecht. Die farbigen Streifen sind die Lesbarkeitsbereiche; jeder Punkt ist ein Satz, der Ring Ihr gesamter Text.",
+          "aria": "Streudiagramm der Sätze nach Wörtern pro Satz und Silben pro Wort über den Lesbarkeitsbereichen",
+          "xAxis": "Wörter pro Satz",
+          "yAxis": "Silben pro Wort",
+          "dotTitle": "Satz {n}: Lesbarkeit {ease}",
+          "hint": "Klicken Sie auf einen Punkt, um diesen Satz im Text auszuwählen.",
+          "xNote": "waagerecht",
+          "yNote": "senkrecht",
+          "easyDots": "Leichte Sätze (70+)",
+          "hardDots": "Sehr schwere Sätze (unter 30)",
+          "ofDots": "von {n} Sätzen",
+          "selected": "Satz Nr. {n} (Wörter · Silben/Wort)"
+        },
+        "syllables": {
+          "title": "Silben pro Wort",
+          "intro": "Wie viele Wörter eine, zwei, drei oder mehr Silben haben. Jedes Wort mit drei oder mehr Silben erhöht den Silbendurchschnitt pro Wort, den beide Formeln bestrafen.",
+          "aria": "Balkendiagramm der Wortzahl nach Silbenzahl",
+          "hardZone": "schwere Wörter",
+          "axis": "Silben pro Wort",
+          "hint": "Klicken Sie auf einen Balken, um diese Wörter im Text hervorzuheben; erneut klicken zum Aufheben.",
+          "numbersNote": "{n} Zahlen zählen als 0 Silben",
+          "highlighted": "Hervorgehoben: {n} Silben",
+          "hardShare": "Schwere Wörter (3+ Silben)"
+        },
+        "hardWords": {
+          "title": "Schwere Wörter",
+          "intro": "Die längsten Wörter Ihres Textes nach Silbenzahl, mit ihrer Häufigkeit. Klicken Sie auf ein Wort, um jedes Vorkommen hervorzuheben.",
+          "none": "Keine Wörter mit drei oder mehr Silben.",
+          "barValue": "{syllables} Silb. ×{count}",
+          "hint": "Klicken Sie auf ein Wort, um es im Text hervorzuheben; erneut klicken zum Aufheben.",
+          "unique": "Verschiedene schwere Wörter",
+          "occurrences": "Vorkommen schwerer Wörter",
+          "extraSyllables": "Silben über zwei",
+          "extraNote": "summiert über alle schweren Wörter",
+          "simpler": "Wert, wenn jedes 2 Silben hätte",
+          "gain": "{n} Punkte"
+        },
+        "whatIf": {
+          "title": "Was-wäre-wenn-Regler",
+          "intro": "Bewegen Sie die Regler, um kürzere Sätze oder kürzere Wörter auszuprobieren, und sehen Sie, wie sich der Wert ändert. Die gestrichelte Nadel bleibt auf Ihrem Text, wie er geschrieben ist.",
+          "aria": "Lesbarkeitsanzeige für die Reglerwerte, mit einer gestrichelten Nadel für Ihren Text",
+          "hint": "Ziehen Sie die Regler; die gestrichelte Nadel ist Ihr Text.",
+          "reset": "Zurücksetzen",
+          "yourText": "Ihr Text",
+          "whatIfScore": "Simulierter Wert",
+          "delta": "{n} gegenüber Ihrem Text"
         }
       }
     },
@@ -32029,7 +32133,8 @@
         },
         "customWpmLabel": "Wörter pro Minute",
         "loadSampleText": "Beispieltext laden",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "sampleText": "Die meisten Erwachsenen lesen still mit einem Tempo von 200 bis 300 Wörtern pro Minute. Dieses Tempo ist nicht festgelegt: Es steigt bei vertrauten Themen und sinkt, wenn ein Text dicht, technisch oder in einer Zweitsprache geschrieben ist.\n\nVerlage nutzen diese Zahl jeden Tag. Eine Nachrichtenseite kennzeichnet einen Artikel als „4 Min. Lesezeit“, eine Lehrerin plant die Unterrichtszeit für ein Kapitel, und ein Redner prüft, ob das Publikum ein Handout vor der nächsten Folie lesen kann. Solche kurzen Angaben helfen bei der Entscheidung, ob man jetzt zu lesen beginnt oder den Text für später aufhebt.\n\nDie Lesezeit prägt auch, wie geschrieben wird. Redakteure teilen lange Absätze, kürzen Sätze mit mehr als fünfundzwanzig Wörtern und stellen den Kernpunkt an den Anfang, denn wer das Ende einer Seite sieht, erreicht es eher.\n\nProbieren Sie es selbst: Fügen Sie Ihren eigenen Artikel ein, wählen Sie ein Lesetempo und starten Sie die Wiedergabe auf der Lese-Zeitleiste unten, um zu sehen, wie ein simulierter Leser Ihren Text Wort für Wort durchgeht. Jede Zahl und jedes Diagramm auf dieser Seite aktualisiert sich beim Tippen."
       },
       "result": {
         "heading": "Geschätzte Lesezeit",
@@ -32167,6 +32272,150 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet"
+      },
+      "live": {
+        "worked": "Rechenbeispiel",
+        "empty": "Geben Sie oben einen Text und ein gültiges Lesetempo ein, um diesen Indikator zu sehen.",
+        "following": "Leser bei {time}",
+        "inputFooter": "{words} Wörter bei {wpm} WpM — aktualisiert beim Tippen",
+        "dial": {
+          "aria": "Lesezeit-Zifferblatt: die geschätzte Zeit als Bogen, nach Absätzen unterteilt, auf einem Zifferblatt, das sich dem Text anpasst",
+          "scale": "Zifferblatt = {n} Min.",
+          "paragraph": "Absatz {n}",
+          "more": "+{n} weitere Absätze"
+        },
+        "table": {
+          "clockNote": "{clock} im Uhrformat",
+          "wordsNote": "Buchstaben und Ziffern, jede Schrift",
+          "wpmValue": "{wpm} WpM",
+          "totalSeconds": "Sekunden gesamt",
+          "totalSecondsNote": "auf ganze Sekunden gerundet",
+          "decimalMinutes": "Minuten (dezimal)",
+          "wordsPerSecond": "Wörter pro Sekunde",
+          "sentences": "Sätze",
+          "perSentence": "≈ {s} s je Satz",
+          "paragraphs": "Absätze",
+          "perParagraph": "≈ {clock} je Absatz",
+          "longestParagraph": "Längster Absatz",
+          "paragraphN": "¶{n} · {words} Wörter",
+          "presetRange": "Schnell bis langsam",
+          "presetRangeNote": "Voreinstellungen {fast} → {slow} WpM"
+        },
+        "playback": {
+          "title": "Lese-Wiedergabe",
+          "intro": "Ein simulierter Leser bewegt sich in gleichmäßigem Tempo durch Ihren Text. Starten Sie die Wiedergabe, ziehen Sie die Zeitleiste oder klicken Sie auf einen Absatz, um genau zu sehen, welches Wort ein Leser zu jedem Zeitpunkt erreicht; das Wort leuchtet in Ihrem Text auf.",
+          "aria": "Lese-Zeitleiste: Absätze und Satzanfänge auf einer Zeitachse in Minuten, mit einem Abspielkopf für den simulierten Leser",
+          "paragraphsRow": "Absätze",
+          "sentencesRow": "Satzanfänge",
+          "paragraphTitle": "Absatz {n} beginnt bei {time}",
+          "play": "Abspielen",
+          "pause": "Pause",
+          "restart": "Leser zurücksetzen",
+          "scrub": "Position des Lesers",
+          "pace": "Tempo: {wpm} WpM",
+          "paceLabel": "Lesetempo der Wiedergabe",
+          "hint": "Die Wiedergabe läuft etwa {x}-mal schneller als in Echtzeit. Ziehen Sie den Tempo-Regler, um die Zeitleiste zu dehnen oder zu stauchen.",
+          "position": "Verstrichen",
+          "positionNote": "bei {wpm} WpM",
+          "word": "Erreichtes Wort",
+          "paragraph": "Absatz",
+          "sentence": "Satz",
+          "remaining": "Verbleibend",
+          "progress": "Fortschritt"
+        },
+        "curve": {
+          "title": "Tempo und Zeit",
+          "intro": "Die Lesezeit sinkt entlang einer Kurve, wenn das Tempo steigt: Doppeltes Tempo halbiert die Zeit. Ziehen Sie den bernsteinfarbenen Punkt, um ein anderes Tempo mit Ihrem zu vergleichen.",
+          "aria": "Kurve der Lesezeit über dem Lesetempo von 100 bis 600 Wörtern pro Minute, mit Voreinstellungen, Ihrem Tempo und einem Testtempo",
+          "axis": "Wörter pro Minute",
+          "yours": "Sie",
+          "try": "Test: {wpm} WpM",
+          "tryLabel": "Test-Lesetempo",
+          "yourSpeed": "Ihr Tempo ({wpm} WpM)",
+          "trySpeed": "Testtempo ({wpm} WpM)",
+          "ratio": "Zeitverhältnis",
+          "saves": "Gesparte Zeit",
+          "adds": "Zusätzliche Zeit"
+        },
+        "presets": {
+          "title": "Tempo-Voreinstellungen im Vergleich",
+          "intro": "Derselbe Text, mit jeder voreingestellten Geschwindigkeit gemessen. Klicken Sie auf eine Zeile, um den Rechner auf dieses Tempo umzustellen.",
+          "wpm": "{wpm} WpM",
+          "hint": "Klicken Sie auf ein Tempo, um es für alle Ergebnisse auf dieser Seite zu verwenden.",
+          "spread": "Langsam minus schnell",
+          "spreadNote": "wie stark die Tempowahl bei diesem Text ins Gewicht fällt"
+        },
+        "formula": {
+          "words": "Wörter",
+          "wpm": "Wörter pro Minute",
+          "minutes": "Minuten",
+          "rawSeconds": "Sekunden (exakt)",
+          "rounded": "Sekunden (gerundet)",
+          "roundNote": "auf die nächste Sekunde gerundet",
+          "split": "Minuten und Sekunden",
+          "result": "Lesezeit"
+        },
+        "paragraphs": {
+          "title": "Zeit pro Absatz",
+          "intro": "Wie lange jeder Absatz dauert und wann ein Leser ihn erreicht. Klicken Sie auf einen Absatz, um ihn in Ihrem Text auszuwählen.",
+          "startsAt": "ab {time}",
+          "hint": "Klicken Sie auf einen Absatz, um ihn im Text auszuwählen.",
+          "capped": "die ersten {n} von {total} angezeigt",
+          "selected": "Absatz {n} (ausgewählt)",
+          "longest": "Absatz {n} (längster)",
+          "words": "{n} Wörter",
+          "time": "Lesedauer",
+          "starts": "Leser kommt an bei",
+          "startsNote": "nach {n} Wörtern",
+          "count": "Absätze",
+          "share": "Anteil an der Gesamtzeit"
+        },
+        "sentences": {
+          "title": "Sekunden pro Satz",
+          "intro": "Jeder Balken ist ein Satz in Lesereihenfolge, gemessen mit Ihrem Tempo. Lange Balken zeigen, wo ein Leser langsamer wird; klicken Sie darauf, um den Satz auszuwählen.",
+          "aria": "Balkendiagramm der Lesesekunden jedes Satzes in Reihenfolge, mit Durchschnitt und einer 8-Sekunden-Linie",
+          "slowLine": "{s} s",
+          "barTitle": "Satz {n}: {s} s",
+          "avgLine": "Ø {s} s",
+          "axis": "Satz",
+          "hint": "Klicken Sie auf einen Balken, um den Satz im Text auszuwählen.",
+          "capped": "die ersten {n} von {total} angezeigt",
+          "count": "Sätze",
+          "average": "Durchschnitt",
+          "seconds": "{s} s",
+          "overSlow": "Über {s} s",
+          "selected": "Satz {n} (ausgewählt)",
+          "longest": "Satz {n} (längster)",
+          "words": "{n} Wörter",
+          "time": "Lesedauer"
+        },
+        "zones": {
+          "title": "Lesedauer-Kategorie",
+          "intro": "Wo dieser Text unter den bei Verlagen üblichen Lesedauer-Kategorien liegt. Der helle Kasten zeigt die Spanne zwischen schneller und langsamer Voreinstellung.",
+          "spanTitle": "Spanne zwischen schneller und langsamer Voreinstellung",
+          "quick": "Kurz & knapp",
+          "short": "Kurz",
+          "medium": "Mittel",
+          "long": "Langform",
+          "deep": "Ausführlich",
+          "legend": "Kategoriegrenzen in Minuten. Die Markierung wandert beim Tippen oder wenn sich das Tempo ändert.",
+          "time": "Lesezeit",
+          "band": "Kategorie",
+          "bandRange": "{from}–{to} Min.",
+          "presetSpan": "Schnell bis langsam",
+          "toNext": "Wörter bis „{band}“",
+          "words": "{n} Wörter"
+        },
+        "aloud": {
+          "title": "Still oder laut gelesen",
+          "intro": "Lautes Lesen richtet sich nach Atmung und Aussprache und ist daher langsamer als stilles Lesen. Vergleichen Sie beides für Ihren Text und ziehen Sie das Sprechtempo.",
+          "silent": "Stilles Lesen",
+          "aloud": "Lautes Lesen",
+          "pace": "{wpm} WpM",
+          "speakPace": "Sprechtempo",
+          "ratio": "Laut ÷ still",
+          "difference": "Unterschied"
+        }
       }
     },
     "lorem-ipsum-generator": {

@@ -1,8 +1,16 @@
 /**
- * Four real (not decorative) English passages spanning the readability
- * scale, shared between the above-the-fold InputPanel's scenario chips and
- * the encyclopedia section's live "try it" gauge — both fill/score with the
- * exact same text so the two widgets stay consistent with each other.
+ * Real English passages for the readability tool. The formulas are calibrated for English only (the
+ * tool's own copy says so), so the instant-result sample stays English on every locale's page.
+ */
+export const SAMPLE_TEXT = `Good writing is easy to read. Short sentences help readers keep their place, and familiar words let them move quickly from one idea to the next.
+
+Researchers have measured readability for decades. In 1948, Rudolf Flesch proposed a formula that combines average sentence length with the average number of syllables per word. Insurance regulators, government agencies and newspapers still check their documents against minimum scores. Unnecessarily complicated terminology, however, can dramatically reduce comprehension for everyday audiences!
+
+Try it yourself. Paste your own draft, click a sentence in the chart below, or mark the hard words to see exactly what pulls your score down.`;
+
+/**
+ * Four passages spanning the readability scale, shared by the input panel's scenario chips and the
+ * Reading Ease scale indicator (reference markers), so both always show the same scores.
  */
 export type PassageExampleKey = "childrensBook" | "everydayEmail" | "legalContract" | "academicPaper";
 

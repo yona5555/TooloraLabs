@@ -12327,9 +12327,6 @@
         }
       },
       "gauge": {
-        "title": "Pruébalo: Puntúa Diferentes Estilos de Escritura",
-        "intro": "Elige un pasaje para ver su puntuación real de Flesch Reading Ease, calculada en vivo por esta misma herramienta.",
-        "verdict": "El pasaje \"{example}\" se clasifica como \"{band}\".",
         "examples": {
           "childrensBook": "Libro Infantil",
           "everydayEmail": "Correo Cotidiano",
@@ -12368,6 +12365,113 @@
           "highSchool": "Secundaria (9-12)",
           "college": "Universidad (13-16)",
           "graduate": "Posgrado (17+)"
+        }
+      },
+      "live": {
+        "worked": "Ejemplo resuelto",
+        "empty": "Escribe o pega arriba al menos una oración completa en inglés para ver este indicador.",
+        "loadSample": "Cargar texto de ejemplo",
+        "markHard": "Marcar palabras difíciles",
+        "highlightingWord": "Resaltando: {word}",
+        "highlightingAtLeast": "Resaltando: {n}+ sílabas",
+        "highlightingExactly": "Resaltando: {n} sílabas",
+        "inputFooter": "{words} palabras · {sentences} oraciones · {syllables} sílabas — se actualiza al escribir",
+        "dial": {
+          "aria": "Dial de facilidad de lectura con las siete bandas de puntuación y, dentro, la proporción de palabras por número de sílabas",
+          "bucket": "{n} sílabas"
+        },
+        "table": {
+          "easeNote": "{band} · {points} puntos para {next}",
+          "hardNote": "{n} palabras difíciles (3+ sílabas) · {share}",
+          "fragmentsNote": "{n} oración(es) sin terminar no contadas",
+          "longestNote": "la más larga: {n} palabras",
+          "perSentence": "{n} por oración",
+          "hardest": "Oración más difícil",
+          "easiest": "Oración más fácil",
+          "sentenceRef": "oración n.º {n} · {words} palabras"
+        },
+        "scale": {
+          "aria": "Escala de facilidad de lectura con tu puntuación y cuatro pasajes de referencia",
+          "you": "Tu texto"
+        },
+        "grade": {
+          "aria": "Escalones de nivel escolar desde primaria hasta posgrado con la posición de tu texto",
+          "gradeLabel": "grado",
+          "constant": "Constante",
+          "belowK": "por debajo del nivel de preescolar"
+        },
+        "formula": {
+          "aria": "Cascada: la constante 206.835 menos las penalizaciones por longitud de oración y de palabra da la facilidad de lectura",
+          "constant": "constante",
+          "cols": {
+            "base": "Inicio",
+            "sentencePenalty": "Oraciones",
+            "wordPenalty": "Sílabas",
+            "score": "Puntuación"
+          }
+        },
+        "sentences": {
+          "title": "Dificultad oración por oración",
+          "intro": "Cada barra es una oración en orden de lectura: su altura es el número de palabras y su color, la banda de facilidad de lectura de esa oración. Haz clic en una barra para seleccionar la oración en tu texto.",
+          "aria": "Gráfico de barras de cada oración, coloreado según su propia facilidad de lectura",
+          "barTitle": "Oración {n}: {words} palabras",
+          "axis": "oraciones en orden de lectura",
+          "hint": "Haz clic en una barra para seleccionar esa oración en el texto; las barras rayadas no tienen signo final y no se cuentan.",
+          "capped": "se muestran las primeras {n} de {total}",
+          "selected": "Oración n.º {n}",
+          "hardestTag": "la más difícil",
+          "counted": "contada",
+          "notCounted": "no contada",
+          "notCountedNote": "sin punto, signo de interrogación ni de exclamación"
+        },
+        "plane": {
+          "title": "Mapa de legibilidad",
+          "intro": "Las dos entradas de ambas fórmulas como un mapa: longitud de oración en horizontal y longitud de palabra en vertical. Las franjas de color son las bandas de facilidad de lectura; cada punto es una oración y el anillo, tu texto completo.",
+          "aria": "Diagrama de dispersión de oraciones por palabras por oración y sílabas por palabra sobre las bandas de facilidad de lectura",
+          "xAxis": "palabras por oración",
+          "yAxis": "sílabas por palabra",
+          "dotTitle": "Oración {n}: facilidad de lectura {ease}",
+          "hint": "Haz clic en un punto para seleccionar esa oración en el texto.",
+          "xNote": "horizontal",
+          "yNote": "vertical",
+          "easyDots": "Oraciones fáciles (70+)",
+          "hardDots": "Oraciones muy difíciles (menos de 30)",
+          "ofDots": "de {n} oraciones",
+          "selected": "Oración n.º {n} (palabras · sílabas/palabra)"
+        },
+        "syllables": {
+          "title": "Sílabas por palabra",
+          "intro": "Cuántas palabras tienen una, dos, tres o más sílabas. Cada palabra de tres o más sílabas eleva el promedio de sílabas por palabra que ambas fórmulas penalizan.",
+          "aria": "Gráfico de barras del número de palabras según su cantidad de sílabas",
+          "hardZone": "palabras difíciles",
+          "axis": "sílabas por palabra",
+          "hint": "Haz clic en una barra para resaltar esas palabras en el texto; vuelve a hacer clic para quitarlo.",
+          "numbersNote": "{n} números cuentan como 0 sílabas",
+          "highlighted": "Resaltadas: {n} sílabas",
+          "hardShare": "Palabras difíciles (3+ sílabas)"
+        },
+        "hardWords": {
+          "title": "Palabras difíciles",
+          "intro": "Las palabras más largas de tu texto por número de sílabas, con cuántas veces aparece cada una. Haz clic en una palabra para resaltar todas sus apariciones.",
+          "none": "No hay palabras de tres o más sílabas.",
+          "barValue": "{syllables} síl. ×{count}",
+          "hint": "Haz clic en una palabra para resaltarla en el texto; vuelve a hacer clic para quitarlo.",
+          "unique": "Palabras difíciles distintas",
+          "occurrences": "Apariciones de palabras difíciles",
+          "extraSyllables": "Sílabas por encima de dos",
+          "extraNote": "sumadas en todas las palabras difíciles",
+          "simpler": "Puntuación si cada una tuviera 2 sílabas",
+          "gain": "{n} puntos"
+        },
+        "whatIf": {
+          "title": "Controles «¿y si…?»",
+          "intro": "Mueve los controles para probar oraciones o palabras más cortas y observa cómo cambia la puntuación. La aguja discontinua se queda en tu texto tal como está.",
+          "aria": "Indicador de facilidad de lectura para los valores de los controles, con una aguja discontinua para tu texto",
+          "hint": "Arrastra los controles; la aguja discontinua es tu texto.",
+          "reset": "Restablecer",
+          "yourText": "Tu texto",
+          "whatIfScore": "Puntuación hipotética",
+          "delta": "{n} frente a tu texto"
         }
       }
     },
@@ -32029,7 +32133,8 @@
         },
         "customWpmLabel": "Palabras por Minuto",
         "loadSampleText": "Cargar texto de ejemplo",
-        "clear": "Borrar"
+        "clear": "Borrar",
+        "sampleText": "La mayoría de los adultos lee en silencio a un ritmo de entre 200 y 300 palabras por minuto. Ese ritmo no es fijo: sube con los temas conocidos y baja cuando un texto es denso, técnico o está escrito en una segunda lengua.\n\nLas editoriales usan esta cifra a diario. Un sitio de noticias etiqueta un artículo como «lectura de 4 min», un profesor calcula el tiempo de clase para un capítulo y un ponente comprueba si el público podrá leer un folleto antes de la siguiente diapositiva. Etiquetas breves como estas ayudan a decidir si empezar a leer ahora o guardar el texto para más tarde.\n\nEl tiempo de lectura también influye en cómo se escribe. Los editores dividen los párrafos largos, recortan las frases que pasan de veinticinco palabras y llevan la idea principal al comienzo, porque quien ve el final de una página tiene más probabilidades de llegar a él.\n\nPruébalo tú mismo: pega tu propio artículo, elige una velocidad de lectura y pulsa reproducir en la línea de tiempo de lectura de abajo para ver cómo un lector simulado recorre tu texto palabra por palabra. Cada número y gráfico de esta página se actualiza mientras escribes."
       },
       "result": {
         "heading": "Tiempo de Lectura Estimado",
@@ -32167,6 +32272,150 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto"
+      },
+      "live": {
+        "worked": "Ejemplo resuelto",
+        "empty": "Introduce un texto y una velocidad de lectura válida arriba para ver este indicador.",
+        "following": "Lector en {time}",
+        "inputFooter": "{words} palabras a {wpm} ppm — se actualiza al escribir",
+        "dial": {
+          "aria": "Esfera del tiempo de lectura: el tiempo estimado como un arco dividido por párrafos, sobre una esfera de reloj que se ajusta al texto",
+          "scale": "esfera = {n} min",
+          "paragraph": "Párrafo {n}",
+          "more": "+{n} párrafos más"
+        },
+        "table": {
+          "clockNote": "{clock} en formato reloj",
+          "wordsNote": "letras y dígitos, cualquier escritura",
+          "wpmValue": "{wpm} ppm",
+          "totalSeconds": "Segundos totales",
+          "totalSecondsNote": "redondeado a segundos enteros",
+          "decimalMinutes": "Minutos (decimal)",
+          "wordsPerSecond": "Palabras por segundo",
+          "sentences": "Oraciones",
+          "perSentence": "≈ {s} s cada una",
+          "paragraphs": "Párrafos",
+          "perParagraph": "≈ {clock} cada uno",
+          "longestParagraph": "Párrafo más largo",
+          "paragraphN": "¶{n} · {words} palabras",
+          "presetRange": "De rápido a lento",
+          "presetRangeNote": "ajustes de {fast} → {slow} ppm"
+        },
+        "playback": {
+          "title": "Reproducción de la lectura",
+          "intro": "Un lector simulado recorre tu texto a ritmo constante. Pulsa reproducir, arrastra la línea de tiempo o haz clic en un párrafo para ver exactamente qué palabra alcanzaría un lector en cada momento; la palabra se ilumina en tu texto.",
+          "aria": "Línea de tiempo de lectura: párrafos e inicios de oración sobre un eje de tiempo en minutos, con un cabezal para el lector simulado",
+          "paragraphsRow": "Párrafos",
+          "sentencesRow": "Inicios de oración",
+          "paragraphTitle": "El párrafo {n} empieza en {time}",
+          "play": "Reproducir",
+          "pause": "Pausa",
+          "restart": "Reiniciar el lector",
+          "scrub": "Posición del lector",
+          "pace": "Ritmo: {wpm} ppm",
+          "paceLabel": "Ritmo de lectura de la reproducción",
+          "hint": "La reproducción va unas {x} veces más rápido que el tiempo real. Arrastra el control de ritmo para alargar o acortar la línea de tiempo.",
+          "position": "Transcurrido",
+          "positionNote": "a {wpm} ppm",
+          "word": "Palabra alcanzada",
+          "paragraph": "Párrafo",
+          "sentence": "Oración",
+          "remaining": "Restante",
+          "progress": "Progreso"
+        },
+        "curve": {
+          "title": "Velocidad frente a tiempo",
+          "intro": "El tiempo de lectura baja siguiendo una curva a medida que sube la velocidad: duplicar el ritmo reduce el tiempo a la mitad. Arrastra el punto ámbar para probar otra velocidad frente a la tuya.",
+          "aria": "Curva del tiempo de lectura frente a la velocidad de lectura de 100 a 600 palabras por minuto, con los ajustes, tu velocidad y una velocidad de prueba marcados",
+          "axis": "palabras por minuto",
+          "yours": "Tú",
+          "try": "Prueba: {wpm} ppm",
+          "tryLabel": "Velocidad de lectura de prueba",
+          "yourSpeed": "Tu velocidad ({wpm} ppm)",
+          "trySpeed": "Velocidad de prueba ({wpm} ppm)",
+          "ratio": "Proporción de tiempo",
+          "saves": "Tiempo ahorrado",
+          "adds": "Tiempo añadido"
+        },
+        "presets": {
+          "title": "Velocidades predefinidas lado a lado",
+          "intro": "El mismo texto cronometrado con cada velocidad predefinida. Haz clic en una fila para que la calculadora use esa velocidad.",
+          "wpm": "{wpm} ppm",
+          "hint": "Haz clic en una velocidad para usarla en todos los resultados de esta página.",
+          "spread": "Lento menos rápido",
+          "spreadNote": "cuánto importa la velocidad elegida en este texto"
+        },
+        "formula": {
+          "words": "Palabras",
+          "wpm": "Palabras por minuto",
+          "minutes": "Minutos",
+          "rawSeconds": "Segundos (exactos)",
+          "rounded": "Segundos (redondeados)",
+          "roundNote": "redondeado al segundo más cercano",
+          "split": "Minutos y segundos",
+          "result": "Tiempo de lectura"
+        },
+        "paragraphs": {
+          "title": "Tiempo por párrafo",
+          "intro": "Cuánto tarda cada párrafo y cuándo llega a él el lector. Haz clic en un párrafo para seleccionarlo en tu texto.",
+          "startsAt": "desde {time}",
+          "hint": "Haz clic en un párrafo para seleccionarlo en el texto.",
+          "capped": "se muestran los primeros {n} de {total}",
+          "selected": "Párrafo {n} (seleccionado)",
+          "longest": "Párrafo {n} (el más largo)",
+          "words": "{n} palabras",
+          "time": "Tiempo de lectura",
+          "starts": "El lector llega en",
+          "startsNote": "tras {n} palabras",
+          "count": "Párrafos",
+          "share": "Parte del tiempo total"
+        },
+        "sentences": {
+          "title": "Segundos por oración",
+          "intro": "Cada barra es una oración, en orden de lectura, cronometrada a tu velocidad. Las barras largas marcan dónde el lector va más despacio; haz clic en una para seleccionar esa oración.",
+          "aria": "Gráfico de barras con los segundos de lectura de cada oración en orden, con la media y una línea de 8 segundos",
+          "slowLine": "{s} s",
+          "barTitle": "Oración {n}: {s} s",
+          "avgLine": "media {s} s",
+          "axis": "oración",
+          "hint": "Haz clic en una barra para seleccionar esa oración en el texto.",
+          "capped": "se muestran las primeras {n} de {total}",
+          "count": "Oraciones",
+          "average": "Media",
+          "seconds": "{s} s",
+          "overSlow": "Más de {s} s",
+          "selected": "Oración {n} (seleccionada)",
+          "longest": "Oración {n} (la más larga)",
+          "words": "{n} palabras",
+          "time": "Tiempo de lectura"
+        },
+        "zones": {
+          "title": "Franja de duración de lectura",
+          "intro": "Dónde se sitúa este texto entre las franjas de duración de lectura habituales en las editoriales. El recuadro claro muestra el rango entre el ajuste rápido y el lento.",
+          "spanTitle": "Rango entre el ajuste rápido y el lento",
+          "quick": "Rápida",
+          "short": "Corta",
+          "medium": "Media",
+          "long": "Extensa",
+          "deep": "A fondo",
+          "legend": "Límites de las franjas en minutos. El marcador se mueve al escribir o al cambiar la velocidad.",
+          "time": "Tiempo de lectura",
+          "band": "Franja",
+          "bandRange": "{from}–{to} min",
+          "presetSpan": "De rápido a lento",
+          "toNext": "Palabras hasta «{band}»",
+          "words": "{n} palabras"
+        },
+        "aloud": {
+          "title": "En silencio frente a en voz alta",
+          "intro": "Leer en voz alta depende de la respiración y la pronunciación, así que es más lento que leer en silencio. Compara ambos para tu texto y arrastra el ritmo de habla.",
+          "silent": "Lectura en silencio",
+          "aloud": "Lectura en voz alta",
+          "pace": "{wpm} ppm",
+          "speakPace": "Ritmo de habla",
+          "ratio": "Voz alta ÷ silencio",
+          "difference": "Diferencia"
+        }
       }
     },
     "lorem-ipsum-generator": {

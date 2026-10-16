@@ -4,6 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import RtReaderPlayback from "./RtReaderPlayback";
+import RtFormula from "./RtFormula";
+import RtPresetCompare from "./RtPresetCompare";
+import RtSpeedCurve from "./RtSpeedCurve";
+import RtParagraphTimes from "./RtParagraphTimes";
+import RtSentenceTimes from "./RtSentenceTimes";
+import RtLengthZones from "./RtLengthZones";
+import RtReadVsAloud from "./RtReadVsAloud";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -18,7 +26,17 @@ export default async function RTEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <div className="space-y-6">
+          <RtReaderPlayback />
+          <RtFormula />
+          <RtPresetCompare />
+          <RtSpeedCurve />
+        </div>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <RtParagraphTimes />
+          <RtSentenceTimes />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
@@ -30,6 +48,10 @@ export default async function RTEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <RtLengthZones />
+          <RtReadVsAloud />
         </div>
       </InfoSection>
 
