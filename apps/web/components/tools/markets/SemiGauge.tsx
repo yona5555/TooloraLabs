@@ -30,7 +30,7 @@ export default function SemiGauge({ value, min = 0, max, zones, ticks, ariaLabel
   };
   const [nx, ny] = polar(value, R - 18);
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={ariaLabel} data-testid={testId}>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} overflow="visible" role="img" aria-label={ariaLabel} data-testid={testId}>
       {zones.map((z, i) => (
         <path key={z.to} d={arc(i === 0 ? min : zones[i - 1].to, z.to)} fill="none" strokeWidth={18} className={z.className} />
       ))}

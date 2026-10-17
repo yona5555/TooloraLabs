@@ -12,6 +12,12 @@ Auto-loaded from .claude/rules/:
 On demand: docs/claude/full-project-handbook.md — architecture, roles, general rules index, pending tasks
 Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
 
+## قواعد لا تُخالَف
+- Never report a result you did not verify with a test or measurement.
+- Never regenerate or overwrite approved work in bulk; change only what is broken, one item at a time. (Tool-card previews: approved images are locked in `apps/web/public/tool-previews/approved.json`; `npm run previews -- <slug>` skips them, `--force <slug>` redoes one; `npm run test:cards` checks the served cards.)
+- Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
+- Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
+
 ## Hard rules
 - Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.

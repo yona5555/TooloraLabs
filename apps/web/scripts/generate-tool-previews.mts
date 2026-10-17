@@ -13,9 +13,18 @@
 // Quality gates (fail + retry with a longer wait): nearly blank, content touching an edge (clipped),
 // 3D content cut by its canvas edge, skeleton placeholders.
 //
-// Usage (prod or dev server running on 3001): npm run previews [-- slug ...]
+// Approved images are LOCKED in public/tool-previews/approved.json (slug → "locale/theme" → {sha256, bg}):
+// they are never regenerated or overwritten. Unapproved variants of the named tools are generated, and
+// every image that passes all gates is added to approved.json. One tool at a time; never all tools.
+//
+// Usage (prod server running on 3001):
+//   npm run previews -- <slug>            generate the unapproved variants of one tool
+//   npm run previews -- --force <slug>    regenerate an approved tool (drops its approval first)
+//   npm run previews -- --audit [slug..]  check the EXISTING images (DOM gates on the live page + pixel
+//                                         gates on the file) and approve the ones that pass; writes no image
 // Env: BASE (default http://localhost:3001), RETRIES (default 3), CONCURRENCY (default 4), VARIANT, VERBOSE.
-import { mkdirSync, readFileSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, renameSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium, type ElementHandle, type Page } from "playwright";
@@ -25,11 +34,31 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const outRoot = path.join(here, "../public/tool-previews");
 const base = process.env.BASE ?? "http://localhost:3001";
 const retries = Number(process.env.RETRIES ?? 3);
-const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
+const args = process.argv.slice(2);
+const audit = args.includes("--audit");
+const forced = new Set(args.flatMap((a, i) => (args[i - 1] === "--force" ? [a] : [])));
+const only = args.filter((a) => !a.startsWith("-"));
 const allSlugs = [...new Set([...readFileSync(path.join(here, "../data/tools.ts"), "utf8").matchAll(/^\s{4}slug: "([^"]+)"/gm)].map((m) => m[1]))];
+for (const s of only) if (!allSlugs.includes(s)) throw new Error(`unknown tool slug: ${s}`);
+// Never all tools in one generating run: an explicit tool list is required (an audit may cover all).
+if (!audit && !only.length) {
+  console.error("Name the tool(s) to generate: npm run previews -- <slug> (approved images are skipped; --force <slug> to redo one).");
+  process.exit(2);
+}
 const slugs = only.length ? only : allSlugs;
-/** Tools whose page has no visual at all (file tools before a file is added): no image, reported. */
-const NO_VISUAL = new Set(["pdf-merge-split", "zip-compressor"]);
+const approvedFile = path.join(outRoot, "approved.json");
+type Approval = { sha256: string; bg: string };
+const approved: Record<string, Record<string, Approval>> = existsSync(approvedFile) ? JSON.parse(readFileSync(approvedFile, "utf8")) : {};
+const sha256 = (f: string) => createHash("sha256").update(readFileSync(f)).digest("hex");
+const saveApproved = () => {
+  const sorted = Object.fromEntries(Object.keys(approved).sort().map((k) => [k, Object.fromEntries(Object.keys(approved[k]).sort().map((v) => [v, approved[k][v]]))]));
+  writeFileSync(approvedFile, JSON.stringify(sorted, null, 2) + "\n");
+};
+const hex = (c: Rgb) => "#" + c.map((n) => n.toString(16).padStart(2, "0")).join("");
+for (const s of forced) delete approved[s];
+/** Tools with no drawing-only element: file tools (nothing before a file is added) and the colour
+ * palette (its swatches are copy buttons). No image (neutral placeholder), reported. */
+const NO_VISUAL = new Set(["pdf-merge-split", "zip-compressor", "color-palette-generator"]);
 const variants = [
   { locale: "ar", theme: "light" },
   { locale: "ar", theme: "dark" },
@@ -40,11 +69,114 @@ const WIDTH = 640;
 const HEIGHT = 480;
 const PAD = 16;
 const DPR = 2;
+/** Final-image gate: no content within this many px of any edge of the 640×480 image. */
+const EDGE = 8;
+/** Never inside a preview: the capture is the drawing, not the tool's controls or tables. */
+const FORBIDDEN = "input, select, textarea, button, label, table, form";
 
 type Rgb = [number, number, number];
 const dist = (a: ArrayLike<number>, i: number, c: Rgb) => Math.abs(a[i] - c[0]) + Math.abs(a[i + 1] - c[1]) + Math.abs(a[i + 2] - c[2]);
 
-async function capture(page: Page, slug: string, locale: string, theme: string, attempt: number): Promise<{ file: string; auto: boolean }> {
+/** Pixel gates on a finished 640×480 card image: size, not blank, nothing within EDGE px of an edge, and
+ * (when known) its background equals the live card background (a stale image fails). */
+async function imageGates(file: string, liveBg?: Rgb): Promise<Rgb> {
+  const { data, info } = await sharp(file).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  if (info.width !== WIDTH || info.height !== HEIGHT) throw new Error(`image is ${info.width}×${info.height}, not ${WIDTH}×${HEIGHT}`);
+  // Background = per-channel median of the 4 corners (lossy WebP can shift one corner pixel slightly).
+  const corners = [0, (WIDTH - 1) * 3, (HEIGHT - 1) * WIDTH * 3, ((HEIGHT - 1) * WIDTH + WIDTH - 1) * 3];
+  const med = (k: number) => corners.map((i) => data[i + k]).sort((x, y) => x - y).slice(1, 3).reduce((x, y) => x + y) / 2;
+  const bg: Rgb = [med(0), med(1), med(2)].map(Math.round) as Rgb;
+  if (corners.some((i) => dist(data, i, bg) > 12)) throw new Error("image corners differ (not letterboxed on one background)");
+  if (liveBg && dist(bg, 0, liveBg) > 6) throw new Error(`image background ${hex(bg)} ≠ live card background ${hex(liveBg)} (stale image)`);
+  let content = 0;
+  let edge = 0;
+  for (let y = 0; y < HEIGHT; y++)
+    for (let x = 0; x < WIDTH; x++) {
+      if (dist(data, (y * WIDTH + x) * 3, bg) <= 30) continue;
+      content++;
+      if (x < EDGE || y < EDGE || x >= WIDTH - EDGE || y >= HEIGHT - EDGE) edge++;
+    }
+  if (edge) throw new Error(`content within ${EDGE}px of the image edge (${edge} px, clipped)`);
+  if (content / (WIDTH * HEIGHT) < 0.02) throw new Error(`nearly blank (${((100 * content) / (WIDTH * HEIGHT)).toFixed(1)}% content)`);
+  return bg;
+}
+
+/** DOM gates on the live visual: no controls/tables inside, every label fully visible. Returns the
+ * card background (rgb) behind the visual. */
+async function domGates(el: ElementHandle<Element>, forbidden: string): Promise<Rgb> {
+  const r = await el.evaluate((e, sel) => {
+    const shown = (x: Element) => {
+      const b = x.getBoundingClientRect();
+      const st = getComputedStyle(x);
+      return b.width > 1 && b.height > 1 && st.visibility !== "hidden" && st.display !== "none" && st.clip === "auto" && st.clipPath === "none";
+    };
+    // lightweight-charts lays its canvases out in a text-free <table>: that table IS the chart.
+    const chartLayout = (x: Element) => x.matches(".tv-lightweight-charts > table") && !(x as HTMLElement).innerText.trim();
+    const bad = [...e.querySelectorAll(sel)].filter((x) => shown(x) && !chartLayout(x)).map((x) => x.tagName.toLowerCase());
+    if (e.matches(sel)) bad.push(e.tagName.toLowerCase());
+    const clipped: string[] = [];
+    const mc = document.createElement("canvas").getContext("2d")!;
+    // Cut = partly visible: a label wholly outside its clip box is simply not drawn (e.g. axis ticks
+    // beyond a graph's viewport); a label straddling the edge shows half a number.
+    const cut = (b: DOMRect, o: DOMRect) => {
+      const inside = b.left >= o.left - 1 && b.right <= o.right + 1 && b.top >= o.top - 1 && b.bottom <= o.bottom + 1;
+      const outside = b.right <= o.left + 1 || b.left >= o.right - 1 || b.bottom <= o.top + 1 || b.top >= o.bottom - 1;
+      return !inside && !outside;
+    };
+    for (const d of [e, ...e.querySelectorAll("*")]) {
+      const own = [...d.childNodes].some((n) => n.nodeType === 3 && n.textContent!.trim());
+      if (!own || !shown(d)) continue;
+      const b = d.getBoundingClientRect();
+      const label = (d.textContent ?? "").trim().slice(0, 30);
+      if (d instanceof SVGElement) {
+        const svg = (d as SVGGraphicsElement).ownerSVGElement;
+        if (svg && getComputedStyle(svg).overflow !== "visible") {
+          // SVG text boxes are font boxes (ascent + descent); judge the glyph ink instead, so the empty
+          // descent band under digits is not counted as a cut label.
+          const st = getComputedStyle(d);
+          mc.font = `${st.fontStyle} ${st.fontWeight} ${st.fontSize} ${st.fontFamily}`;
+          const m = mc.measureText(d.textContent ?? "");
+          const k = b.height / (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent || 1);
+          const top = b.top + Math.max(0, m.fontBoundingBoxAscent - m.actualBoundingBoxAscent) * k;
+          const bottom = b.bottom - Math.max(0, m.fontBoundingBoxDescent - m.actualBoundingBoxDescent) * k;
+          const ink = new DOMRect(b.left, top, b.width, Math.max(1, bottom - top));
+          if (cut(ink, svg.getBoundingClientRect())) clipped.push(label);
+        }
+        continue;
+      }
+      const st = getComputedStyle(d);
+      if (st.overflow !== "visible" && (d.scrollWidth > d.clientWidth + 1 || d.scrollHeight > d.clientHeight + 1)) {
+        clipped.push(label);
+        continue;
+      }
+      for (let p = d.parentElement; p && p !== e.parentElement; p = p.parentElement) {
+        const o = getComputedStyle(p);
+        if (o.overflowX === "visible" && o.overflowY === "visible") continue;
+        const pr = p.getBoundingClientRect();
+        if (cut(b, pr)) clipped.push(label);
+        break;
+      }
+    }
+    const cx = document.createElement("canvas").getContext("2d")!;
+    let bg = "";
+    for (let p: Element | null = e; p; p = p.parentElement) {
+      const c = getComputedStyle(p).backgroundColor;
+      if (c && !/rgba?\(0, 0, 0, 0\)|transparent/.test(c)) {
+        bg = c;
+        break;
+      }
+    }
+    cx.fillStyle = bg || (document.documentElement.classList.contains("dark") ? "#18181b" : "#ffffff");
+    cx.fillRect(0, 0, 1, 1);
+    const px = cx.getImageData(0, 0, 1, 1).data;
+    return { bad: [...new Set(bad)], clipped, bg: [px[0], px[1], px[2]] as Rgb };
+  }, forbidden);
+  if (r.bad.length) throw new Error(`controls/tables inside the visual: ${r.bad.join(", ")}`);
+  if (r.clipped.length) throw new Error(`label(s) clipped: ${r.clipped.slice(0, 4).map((t) => JSON.stringify(t)).join(", ")}`);
+  return r.bg;
+}
+
+async function capture(page: Page, slug: string, locale: string, theme: string, attempt: number): Promise<{ file: string; auto: boolean; bg: Rgb }> {
   const url = `${base}/${locale}/tools/${slug}`;
   await page.goto(url, { waitUntil: "networkidle", timeout: 90_000 });
   const isDark = await page.evaluate(() => document.documentElement.classList.contains("dark"));
@@ -65,7 +197,9 @@ async function capture(page: Page, slug: string, locale: string, theme: string, 
     };
     const res = document.querySelector("[data-preview='result']");
     const marked = [...document.querySelectorAll("[data-preview='visual']")].filter(big);
-    const hero = marked.find((e) => e.hasAttribute("data-preview-hero")) ?? marked.find((e) => res?.contains(e)) ?? marked[0];
+    let hero = marked.find((e) => e.hasAttribute("data-preview-hero")) ?? marked.find((e) => res?.contains(e)) ?? marked[0];
+    // A wrapper holding exactly one marked drawing (e.g. a scene plus its Replay button): the drawing.
+    for (let inner = hero && [...hero.querySelectorAll("[data-preview='visual']")].filter(big); inner?.length === 1; inner = [...hero.querySelectorAll("[data-preview='visual']")].filter(big)) hero = inner[0];
     if (hero) return { el: hero, auto: false };
     // Unmarked tool: largest SVG/canvas of the result column (reported as "auto" so it gets marked).
     const cands = res ? [...res.querySelectorAll("svg, canvas")].filter((e) => big(e) && e.getBoundingClientRect().width >= 140) : [];
@@ -101,6 +235,8 @@ async function capture(page: Page, slug: string, locale: string, theme: string, 
         const gl = [...e.querySelectorAll("canvas[data-engine]")];
         if (gl.some((c) => (c as HTMLElement).dataset.previewReady !== "true")) return false;
         if (e.querySelector("[data-ph-mode]") && e.querySelector("[data-ph-mode='2d']")) return false;
+        // Charts: every finite CSS/Web animation inside the visual has finished.
+        if (e.getAnimations({ subtree: true }).some((a) => a.playState === "running" && Number.isFinite(Number(a.effect?.getComputedTiming().endTime)))) return false;
         const r = e.getBoundingClientRect();
         const k = `${Math.round(r.width)}x${Math.round(r.height)}@${Math.round(r.top)}`;
         if (!w.__pv || w.__pv.k !== k) w.__pv = { k, n: 0 };
@@ -113,6 +249,24 @@ async function capture(page: Page, slug: string, locale: string, theme: string, 
       throw new Error("visual never finished rendering (placeholder, 3D frames or layout still changing)");
     });
   await page.waitForTimeout(300 * attempt);
+  // Settled: two renders of the visual 400 ms apart are pixel-identical (3D intro animations and JS
+  // chart tweens run outside CSS animations, past the 30-frame flag).
+  for (let prev = "", n = 0; ; n++) {
+    const cur = createHash("sha256").update(await el.screenshot({ animations: "disabled" })).digest("hex");
+    if (cur === prev) break;
+    if (n >= 25) throw new Error("visual never settled (still animating after 10 s)");
+    prev = cur;
+    await page.waitForTimeout(400);
+  }
+  const liveBg = await domGates(el, FORBIDDEN);
+  const dir = path.join(outRoot, locale, theme);
+  const file = path.join(dir, `${slug}.webp`);
+  if (audit) {
+    if (!existsSync(file)) throw new Error("no image file");
+    if (info.auto) throw new Error('visual not marked with data-preview="visual"');
+    await imageGates(file, liveBg);
+    return { file, auto: info.auto, bg: liveBg };
+  }
 
   // Isolate the visual: hide everything else, transparent page; clip = the visual and anything it
   // draws outside its own box (labels), plus padding.
@@ -221,21 +375,43 @@ async function capture(page: Page, slug: string, locale: string, theme: string, 
   const bgObj = { r: geo.bg[0], g: geo.bg[1], b: geo.bg[2], alpha: 1 };
   const flatPng = await sharp(png).flatten({ background: bgObj }).png().toBuffer();
   const trimmed = await sharp(flatPng).trim({ background: bgObj, threshold: 14 }).png().toBuffer().catch(() => flatPng);
-  const padded = await sharp(trimmed).extend({ top: PAD * DPR, bottom: PAD * DPR, left: PAD * DPR, right: PAD * DPR, background: bgObj }).png().toBuffer();
-  const dir = path.join(outRoot, locale, theme);
+  // Letterbox: the whole drawing scaled into 640×480 minus PAD on every side (never cropped).
+  const inner = await sharp(trimmed).resize({ width: WIDTH - 2 * PAD, height: HEIGHT - 2 * PAD, fit: "contain", background: bgObj }).png().toBuffer();
+  const out = await sharp(inner).extend({ top: PAD, bottom: PAD, left: PAD, right: PAD, background: bgObj }).webp({ quality: 82, effort: 5 }).toBuffer();
   mkdirSync(dir, { recursive: true });
-  const file = path.join(dir, `${slug}.webp`);
-  await sharp(padded).resize({ width: WIDTH, height: HEIGHT, fit: "contain", background: bgObj, withoutEnlargement: false }).webp({ quality: 82, effort: 5 }).toFile(file);
-  return { file, auto: info.auto };
+  // Gate the encoded image before it replaces anything on disk.
+  const tmp = `${file}.tmp.webp`;
+  writeFileSync(tmp, out);
+  try {
+    await imageGates(tmp, geo.bg);
+  } catch (err) {
+    unlinkSync(tmp);
+    throw err;
+  }
+  renameSync(tmp, file);
+  return { file, auto: info.auto, bg: geo.bg };
 }
 
 const browser = await chromium.launch();
 // VARIANT=en/light limits a run to one variant (quick checks).
 const pickVariants = variants.filter((v) => !process.env.VARIANT || process.env.VARIANT === `${v.locale}/${v.theme}`);
-let jobs = slugs.filter((s) => !NO_VISUAL.has(s)).flatMap((slug) => pickVariants.map((v) => ({ slug, ...v })));
-const done: string[] = [];
-const autoPicked = new Set<string>();
+const key = (v: { locale: string; theme: string }) => `${v.locale}/${v.theme}`;
+const fileOf = (slug: string, v: { locale: string; theme: string }) => path.join(outRoot, v.locale, v.theme, `${slug}.webp`);
+const locked: string[] = [];
 let failures: { slug: string; locale: string; theme: string; reason: string }[] = [];
+let jobs = slugs
+  .filter((s) => !NO_VISUAL.has(s))
+  .flatMap((slug) => pickVariants.map((v) => ({ slug, ...v })))
+  .filter((j) => {
+    const a = approved[j.slug]?.[key(j)];
+    if (!a) return true;
+    // Approved = locked. A locked file that no longer matches its hash is reported, never rewritten.
+    if (!existsSync(fileOf(j.slug, j)) || sha256(fileOf(j.slug, j)) !== a.sha256) failures.push({ ...j, reason: "approved image missing or modified (restore it from git; never overwritten)" });
+    else locked.push(`${j.slug} ${key(j)}`);
+    return false;
+  });
+const lockedFailures = [...failures];
+const done: string[] = [];
 for (let attempt = 1; attempt <= retries && jobs.length; attempt++) {
   failures = [];
   // A small worker pool (CONCURRENCY, default 4): each job still gets its own fresh context.
@@ -246,8 +422,10 @@ for (let attempt = 1; attempt <= retries && jobs.length; attempt++) {
       const page = await context.newPage();
       try {
         const r = await capture(page, job.slug, job.locale, job.theme, attempt);
+        if (r.auto) throw new Error('visual not marked with data-preview="visual"');
         done.push(r.file);
-        if (r.auto) autoPicked.add(job.slug);
+        (approved[job.slug] ??= {})[key(job)] = { sha256: sha256(r.file), bg: hex(r.bg) };
+        saveApproved();
       } catch (e) {
         failures.push({ ...job, reason: String(e).split("\n")[0].replace(/^Error: /, "").slice(0, 160) });
       }
@@ -255,14 +433,15 @@ for (let attempt = 1; attempt <= retries && jobs.length; attempt++) {
     }
   };
   await Promise.all(Array.from({ length: Number(process.env.CONCURRENCY ?? 4) }, worker));
+  // An audit judges the existing file: retrying cannot change it, except for slow renders.
   if (failures.length && attempt < retries) console.log(`attempt ${attempt}: ${failures.length} failed, retrying with a longer wait`);
   jobs = failures.map(({ slug, locale, theme }) => ({ slug, locale, theme }) as (typeof jobs)[number]);
 }
 await browser.close();
+failures = [...lockedFailures, ...failures];
 const bytes = done.reduce((a, f) => a + statSync(f).size, 0);
 const noVisual = slugs.filter((s) => NO_VISUAL.has(s));
-console.log(`previews: ${done.length} images for ${slugs.length - noVisual.length} tools, ${(bytes / 1024 / 1024).toFixed(2)} MB, ${failures.length} failures`);
-if (noVisual.length) console.log(`no visual (skipped): ${noVisual.join(", ")}`);
-if (autoPicked.size) console.log(`UNMARKED (auto-picked, add data-preview="visual"): ${[...autoPicked].join(", ")}`);
-for (const f of failures) console.log(`FAILED ${f.locale}/${f.theme}/${f.slug}: ${f.reason}`);
+console.log(`${audit ? "audit: approved" : "previews: generated"} ${done.length} images (${(bytes / 1024 / 1024).toFixed(2)} MB); ${locked.length} already approved (locked, skipped); ${failures.length} failures`);
+if (noVisual.length) console.log(`no visual (text/file-only, no image): ${noVisual.join(", ")}`);
+for (const f of failures.sort((a, b) => a.slug.localeCompare(b.slug))) console.log(`FAILED ${f.locale}/${f.theme}/${f.slug}: ${f.reason}`);
 process.exit(failures.length ? 1 : 0);

@@ -26,8 +26,8 @@ export default function PaceRings() {
   const ticks = span === 1 ? 12 : span <= 3 ? span * 4 : span <= 15 ? span : 12;
 
   return (
-    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-3 sm:w-[192px]">
-      <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
+    <div className="flex shrink-0 flex-col items-center gap-3 sm:w-[192px]">
+      <svg data-preview="visual" direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
         <circle cx={C} cy={C} r={RINGS[0] + 12} className="fill-zinc-50 stroke-zinc-200 dark:fill-zinc-800/60 dark:stroke-zinc-700" />
         {Array.from({ length: ticks }, (_, i) => {
           const a = (i / ticks) * 2 * Math.PI - Math.PI / 2;

@@ -32,7 +32,7 @@ function Dial({ s, d, f }: Props) {
   const r = (i: number) => outer - i * gap;
 
   return (
-    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
+    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
       <circle cx={c} cy={c} r={outer + 18} className="fill-zinc-50 dark:fill-zinc-800/60" />
       <path d={arc(22 * 60, 7 * 60, inner - 10, outer + 8)} fill={STATUS_COLORS.night} fillOpacity={0.18} />
       <path d={arc(s.ws, s.we % 1440 === s.ws ? s.ws + 1439 : s.we, inner - 10, outer + 8)} fill={STATUS_COLORS.work} fillOpacity={0.2} />

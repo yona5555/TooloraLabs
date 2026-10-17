@@ -162,7 +162,7 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
       <text x={W / 2} y={H - 9} textAnchor="middle" fontSize={10} fill="#e2e8f0">
         ☁ {f.num(cur.cloud)}% · ➶ {f.wind(cur.windKmh)}
       </text>
-      <text x={W - 8} y={18} textAnchor="end" fontSize={22} fontWeight={800} fill="#fff" style={{ paintOrder: "stroke" }} stroke="#0f172a" strokeOpacity={0.35} strokeWidth={3}>
+      <text x={W - 8} y={24} textAnchor="end" fontSize={22} fontWeight={800} fill="#fff" style={{ paintOrder: "stroke" }} stroke="#0f172a" strokeOpacity={0.35} strokeWidth={3}>
         {f.deg(cur.tempC)}
       </text>
     </svg>

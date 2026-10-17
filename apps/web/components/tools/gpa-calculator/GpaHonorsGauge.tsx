@@ -50,7 +50,7 @@ export default function GpaHonorsGauge({ scale, cumulative, semester, target, va
   };
 
   return (
-    <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={valueLabel} style={{ direction: "ltr" }} className="mx-auto block max-h-[300px]">
+    <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={valueLabel} style={{ direction: "ltr" }} overflow="visible" className="mx-auto block max-h-[300px]">
       {zones.map((z, i) => (
         <path key={i} d={arc(z.from, z.to)} stroke={z.honor ? z.color : "currentColor"} strokeOpacity={z.honor ? 0.9 : 0.15} strokeWidth={STROKE} fill="none" />
       ))}
