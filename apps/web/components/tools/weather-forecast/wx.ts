@@ -1,6 +1,6 @@
 "use client";
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   buildDailyForecast,
   currentStep,
@@ -26,6 +26,11 @@ import {
 
 /** The place being shown: a curated city, or the visitor's own position ("geo"). */
 export type WxPlace = { id: string; name: string; lat: number; lon: number; zone: string };
+
+/** Arabic is the site's only right-to-left locale; charts with a time axis mirror for it. */
+export function useIsRtl() {
+  return useLocale() === "ar";
+}
 
 export function useWxT() {
   return useTranslations("tools.weather-forecast.wx");

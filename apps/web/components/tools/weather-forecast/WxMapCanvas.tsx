@@ -14,6 +14,9 @@ type Props = {
   selectedId: string | null;
   onSelect: (id: string) => void;
   ariaLabel: string;
+  fullscreen: boolean;
+  onToggleFullscreen: () => void;
+  fullscreenLabels: { enter: string; exit: string };
 };
 
 /** OpenFreeMap vector styles (commercial use allowed, attribution added by MapLibre). Never the OSM tile servers. */
@@ -36,13 +39,14 @@ function hazardData(hazards: Hazard[], kind: Hazard["kind"]) {
 const HAZARD_KINDS = ["earthquake", "wildfire", "storm", "volcano"] as const;
 
 /** MapLibre canvas: temperature layer for the curated cities plus USGS / EONET hazard layers. */
-export default function WxMapCanvas({ cities, hazards, layers, center, dark, selectedId, onSelect, ariaLabel }: Props) {
+export default function WxMapCanvas({ cities, hazards, layers, center, dark, selectedId, onSelect, ariaLabel, fullscreen, onToggleFullscreen, fullscreenLabels }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<MlMap | null>(null);
   const ready = useRef(false);
-  const latest = useRef({ cities, hazards, layers, selectedId, onSelect });
+  const fsButton = useRef<HTMLButtonElement | null>(null);
+  const latest = useRef({ cities, hazards, layers, selectedId, onSelect, onToggleFullscreen });
   useEffect(() => {
-    latest.current = { cities, hazards, layers, selectedId, onSelect };
+    latest.current = { cities, hazards, layers, selectedId, onSelect, onToggleFullscreen };
   });
 
   useEffect(() => {
@@ -64,6 +68,31 @@ export default function WxMapCanvas({ cities, hazards, layers, center, dark, sel
       });
       map.current = m;
       m.addControl(new ml.NavigationControl({ showCompass: false }), "top-right");
+      // Expand / restore button in its own group right under + / −, using MapLibre's own icons.
+      m.addControl(
+        {
+          onAdd: () => {
+            const box = document.createElement("div");
+            box.className = "maplibregl-ctrl maplibregl-ctrl-group";
+            const btn = document.createElement("button");
+            btn.type = "button";
+            const icon = document.createElement("span");
+            icon.className = "maplibregl-ctrl-icon";
+            icon.setAttribute("aria-hidden", "true");
+            btn.appendChild(icon);
+            btn.addEventListener("click", () => latest.current.onToggleFullscreen());
+            box.appendChild(btn);
+            fsButton.current = btn;
+            syncFsButton();
+            return box;
+          },
+          onRemove: () => {
+            fsButton.current?.parentElement?.remove();
+            fsButton.current = null;
+          },
+        },
+        "top-right",
+      );
       m.on("load", () => {
         const { cities: cs, hazards: hz } = latest.current;
         const tempColor: unknown[] = ["interpolate", ["linear"], ["get", "t"], ...TEMP_STOPS.flat()];
@@ -139,6 +168,22 @@ export default function WxMapCanvas({ cities, hazards, layers, center, dark, sel
   }
 
   useEffect(sync, [cities, hazards, layers, selectedId]);
+
+  function syncFsButton() {
+    const btn = fsButton.current;
+    if (!btn) return;
+    const label = fullscreen ? fullscreenLabels.exit : fullscreenLabels.enter;
+    btn.className = fullscreen ? "maplibregl-ctrl-shrink" : "maplibregl-ctrl-fullscreen";
+    btn.setAttribute("aria-label", label);
+    btn.title = label;
+    btn.setAttribute("aria-pressed", String(fullscreen));
+  }
+  useEffect(() => {
+    syncFsButton();
+    // The container just changed size; let MapLibre re-measure on the next frame (zoom and centre stay).
+    const id = requestAnimationFrame(() => map.current?.resize());
+    return () => cancelAnimationFrame(id);
+  }, [fullscreen, fullscreenLabels.enter, fullscreenLabels.exit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     map.current?.easeTo({ center: [center.lon, center.lat], duration: 900 });

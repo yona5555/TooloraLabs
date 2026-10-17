@@ -2,6 +2,8 @@
 import { useState, type PointerEvent as RPointerEvent } from "react";
 import {
   beaufort,
+  celsiusToFahrenheit,
+  dewPointC,
   compass16,
   DEW_COMFORT_BANDS,
   dewComfort,
@@ -17,10 +19,10 @@ import {
   weatherWind,
 } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import WxSplit, { type WxRow } from "./WxSplit";
 import WeatherIcon from "./WeatherIcon";
 import { moonPath } from "./WxSkyScene";
-import { dateKeyMs, tempColor, useWxT, type WxCardProps } from "./wx";
+import { dateKeyMs, tempColor, useIsRtl, useWxT, type WxCardProps } from "./wx";
 
 const axis = "fill-zinc-500 dark:fill-zinc-400";
 const strong = "fill-zinc-800 dark:fill-zinc-100";
@@ -30,16 +32,17 @@ function Intro({ text }: { text: string }) {
   return <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{text}</p>;
 }
 
-/* 1 · Hourly 48 h: temperature + feels-like lines, precipitation bars, draggable hour cursor */
+/* 1 · Hourly 48 h: temperature + feels-like lines, precipitation bars, hover/drag hour cursor (mirrored in RTL) */
 export function WxHourlyCard({ d, f }: WxCardProps) {
   const t = useWxT();
+  const rtl = useIsRtl();
   const hours = d.hours48;
   const [sel, setSel] = useState(0);
   if (hours.length === 0) return null;
   const W = 640;
   const H = 240;
-  const L = 34;
-  const R = 34;
+  const PL = 34;
+  const PR = 34;
   const T = 16;
   const B = 34;
   const n = hours.length;
@@ -49,26 +52,63 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
   const lo = Math.floor(Math.min(...temps, ...fl) - 1);
   const hi = Math.ceil(Math.max(...temps, ...fl) + 1);
   const pMax = Math.max(1, ...hours.map((h) => h.precipMm));
-  const X = (i: number) => L + (i / Math.max(1, n - 1)) * (W - L - R);
+  const span = W - PL - PR;
+  const X = (i: number) => {
+    const frac = i / Math.max(1, n - 1);
+    return rtl ? W - PR - frac * span : PL + frac * span;
+  };
   const Y = (v: number) => T + ((hi - v) / (hi - lo)) * (H - T - B);
   const P = (mm: number) => (mm / pMax) * 60;
+  // Temperature axis at the start side, precipitation axis at the end side.
+  const tempAxisX = rtl ? W - PR + 4 : PL - 4;
+  const tempAnchor = rtl ? "start" : "end";
+  const precipAxisX = rtl ? PL - 4 : W - PR + 4;
+  const precipAnchor = rtl ? "end" : "start";
   const line = (vals: number[]) => vals.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("");
   const i = Math.min(sel, n - 1);
   const h = hours[i];
-  if (!h) return null;
   const fx = feelsLike(h.tempC, h.rh, h.windKmh);
+  const dew = h.dewC ?? dewPointC(h.tempC, h.rh);
   const pick = (e: RPointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - r.left) / r.width) * W;
-    setSel(Math.max(0, Math.min(n - 1, Math.round(((x - L) / (W - L - R)) * (n - 1)))));
+    let frac = (x - PL) / span;
+    if (rtl) frac = 1 - frac;
+    setSel(Math.max(0, Math.min(n - 1, Math.round(frac * (n - 1)))));
   };
+  const n1 = (v: number) => f.num(v, 1);
+  const tf = celsiusToFahrenheit(h.tempC);
+  const worked =
+    fx.method === "windChill"
+      ? `13.12 + 0.6215×${n1(h.tempC)} − 11.37×${n1(h.windKmh)}^0.16 + 0.3965×${n1(h.tempC)}×${n1(h.windKmh)}^0.16 = ${n1(fx.valueC)} °C`
+      : fx.method === "heatIndex"
+        ? `HI(T = ${n1(tf)} °F, RH = ${f.num(h.rh)}%) = ${n1(celsiusToFahrenheit(fx.valueC))} °F = ${n1(fx.valueC)} °C`
+        : `T = ${n1(h.tempC)} °C, V = ${n1(h.windKmh)} km/h → (T > 10 °C or V ≤ 4.8) & T < 26.7 °C → ${n1(h.tempC)} °C`;
+  const half = span / (2 * Math.max(1, n - 1));
   const ticks = 5;
+  const rows: WxRow[] = [
+    { label: t("ind.hourly.time"), value: `${f.weekday(h.t, d.place.zone)} ${f.time(h.t, d.place.zone)}` },
+    { label: t("result.condition"), value: t(`category.${metSymbolCategory(h.symbol)}`) },
+    { label: t("result.temp"), value: f.temp(h.tempC, 1) },
+    { label: t("result.feels"), value: f.temp(fx.valueC, 1), emphasize: true },
+    { label: t("result.dew"), value: f.temp(dew, 1) },
+    { label: t("result.humidity"), value: `${f.num(h.rh)}%` },
+    { label: t("result.wind"), value: `${f.wind(h.windKmh)} · ${t(`compass.${compass16(h.windDir)}`)}` },
+    ...(h.gustKmh !== null ? [{ label: t("result.gust"), value: f.wind(h.gustKmh) }] : []),
+    { label: t("result.pressure"), value: f.pressure(h.pressureHpa) },
+    { label: t("result.cloud"), value: `${f.num(h.cloud)}%` },
+    { label: t("ind.hourly.precipRow"), value: f.precip(h.precipMm) },
+    ...(h.uv !== null ? [{ label: t("result.uv"), value: `${f.num(h.uv, 1)} · ${t(`uv.${uvLevel(h.uv)}`)}` }] : []),
+    { label: t("ind.hourly.method"), value: t(`ind.method.${fx.method}`) },
+    { label: t("ind.hourly.formula"), value: worked, wide: true },
+  ];
   return (
     <SectionCard id="wx-hourly" title={t("ind.hourly.title")}>
       <Intro text={t("ind.hourly.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        rows={rows}
+        chart={
           <div className="w-full max-w-[640px]">
             <svg
               viewBox={`0 0 ${W} ${H}`}
@@ -80,21 +120,21 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
                 e.currentTarget.setPointerCapture(e.pointerId);
                 pick(e);
               }}
-              onPointerMove={(e) => e.buttons && pick(e)}
+              onPointerMove={pick}
               role="img"
               aria-label={t("ind.hourly.title")}
             >
               {hours.map((x, k) =>
-                isNightSymbol(x.symbol) ? <rect key={k} x={X(k) - (W - L - R) / (2 * (n - 1))} y={T} width={(W - L - R) / (n - 1)} height={H - T - B} className="fill-indigo-900/10 dark:fill-indigo-300/10" /> : null,
+                isNightSymbol(x.symbol) ? <rect key={k} x={X(k) - half} y={T} width={half * 2} height={H - T - B} className="fill-indigo-900/10 dark:fill-indigo-300/10" /> : null,
               )}
               {Array.from({ length: ticks + 1 }, (_, k) => lo + ((hi - lo) * k) / ticks).map((v) => (
                 <g key={v}>
-                  <line x1={L} x2={W - R} y1={Y(v)} y2={Y(v)} className={grid} />
-                  <text x={L - 4} y={Y(v) + 3} textAnchor="end" fontSize={9} className={axis}>{f.num(v)}°</text>
+                  <line x1={PL} x2={W - PR} y1={Y(v)} y2={Y(v)} className={grid} />
+                  <text x={tempAxisX} y={Y(v) + 3} textAnchor={tempAnchor} fontSize={9} className={axis}>{f.num(v)}°</text>
                 </g>
               ))}
               {[0, 0.5, 1].map((k) => (
-                <text key={k} x={W - R + 4} y={H - B - P(pMax * k) + 3} fontSize={9} className="fill-sky-600 dark:fill-sky-400">{f.num(weatherPrecip(pMax * k, f.units), 1)}</text>
+                <text key={k} x={precipAxisX} y={H - B - P(pMax * k) + 3} textAnchor={precipAnchor} fontSize={9} className="fill-sky-600 dark:fill-sky-400">{f.num(weatherPrecip(pMax * k, f.units), 1)}</text>
               ))}
               {hours.map((x, k) => (
                 <rect key={k} x={X(k) - 4} y={H - B - P(x.precipMm)} width={8} height={P(x.precipMm)} className="fill-sky-500/60" />
@@ -110,15 +150,15 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
                 k > 0 && f.hour(x.t, d.place.zone) === "00" ? (
                   <g key={`d${k}`}>
                     <line x1={X(k)} x2={X(k)} y1={T} y2={H - B} stroke="currentColor" strokeOpacity={0.3} strokeDasharray="2 3" />
-                    <text x={X(k) + 3} y={H - 4} fontSize={9} fontWeight={700} className={strong}>{f.weekday(x.t, d.place.zone)}</text>
+                    <text x={X(k) + (rtl ? -3 : 3)} y={H - 4} textAnchor={rtl ? "end" : "start"} fontSize={9} fontWeight={700} className={strong}>{f.weekday(x.t, d.place.zone)}</text>
                   </g>
                 ) : null,
               )}
               <line x1={X(i)} x2={X(i)} y1={T} y2={H - B} stroke="#2563eb" strokeWidth={1.5} />
               <circle cx={X(i)} cy={Y(temps[i])} r={5} fill="#2563eb" stroke="#fff" strokeWidth={1.5} />
               <circle cx={X(i)} cy={Y(fl[i])} r={3.5} fill="#a855f7" />
-              <rect x={Math.min(W - R - 92, Math.max(L, X(i) - 46))} y={T} width={92} height={18} rx={4} fill="#1d4ed8" />
-              <text x={Math.min(W - R - 46, Math.max(L + 46, X(i)))} y={T + 13} textAnchor="middle" fontSize={10} fontWeight={700} fill="#fff">
+              <rect x={Math.min(W - PR - 92, Math.max(PL, X(i) - 46))} y={T} width={92} height={18} rx={4} fill="#1d4ed8" />
+              <text x={Math.min(W - PR - 46, Math.max(PL + 46, X(i)))} y={T + 13} textAnchor="middle" fontSize={10} fontWeight={700} fill="#fff">
                 {f.hour(h.t, d.place.zone)}:00 · {f.deg(h.tempC)}
               </text>
             </svg>
@@ -131,15 +171,6 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
             </div>
           </div>
         }
-        rows={[
-          { label: t("ind.hourly.time"), value: `${f.weekday(h.t, d.place.zone)} ${f.time(h.t, d.place.zone)}` },
-          { label: t("result.temp"), value: f.temp(h.tempC, 1) },
-          { label: t("ind.hourly.inputs"), value: `${f.num(h.rh)}% · ${f.wind(h.windKmh)}` },
-          { label: t("ind.hourly.method"), value: t(`ind.method.${fx.method}`) },
-          { label: t("result.feels"), value: f.temp(fx.valueC, 1), emphasize: true },
-          { label: t("ind.hourly.precipRow"), value: f.precip(h.precipMm) },
-          { label: t("result.condition"), value: t(`category.${metSymbolCategory(h.symbol)}`) },
-        ]}
       />
     </SectionCard>
   );
@@ -159,9 +190,9 @@ export function WxDailyCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-daily" title={t("ind.daily.title", { n: days.length })}>
       <Intro text={t("ind.daily.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <ul className="w-full max-w-[640px] space-y-1" style={{ minWidth: "min(100%, 520px)" }}>
             {days.map((x, k) => {
               const ms = dateKeyMs(x.date);
@@ -225,9 +256,9 @@ export function WxWindCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-wind" title={t("ind.wind.title")}>
       <Intro text={t("ind.wind.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <div className="flex flex-col items-center gap-2">
             <svg viewBox={`0 0 ${S} ${S}`} width={S} height={S} style={{ direction: "ltr" }} role="img" aria-label={t("ind.wind.title")}>
               <circle cx={c} cy={c} r={r + 16} className="fill-sky-50 dark:fill-sky-500/10" />
@@ -284,6 +315,7 @@ export function WxWindCard({ d, f }: WxCardProps) {
 /* 4 · Pressure trend over 48 h with the ±1 hPa / 3 h steady band */
 export function WxPressureCard({ d, f }: WxCardProps) {
   const t = useWxT();
+  const rtl = useIsRtl();
   const hours = d.hours48;
   const cur = d.cur!;
   const W = 560;
@@ -296,7 +328,10 @@ export function WxPressureCard({ d, f }: WxCardProps) {
   const lo = Math.floor(Math.min(...vals) - 1);
   const hi = Math.ceil(Math.max(...vals) + 1);
   const n = hours.length;
-  const X = (i: number) => L + (i / Math.max(1, n - 1)) * (W - L - R);
+  const X = (i: number) => {
+    const frac = i / Math.max(1, n - 1);
+    return rtl ? W - L - frac * (W - L - R) : L + frac * (W - L - R);
+  };
   const Y = (v: number) => T + ((hi - v) / (hi - lo)) * (H - T - B);
   const p0 = hours[0]?.pressureHpa ?? cur.pressureHpa;
   const p3 = hours[3]?.pressureHpa ?? p0;
@@ -306,27 +341,27 @@ export function WxPressureCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-pressure" title={t("ind.pressure.title")}>
       <Intro text={t("ind.pressure.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-[560px]" role="img" aria-label={t("ind.pressure.title")}>
             {[0, 0.25, 0.5, 0.75, 1].map((k) => {
               const v = lo + (hi - lo) * k;
               return (
                 <g key={k}>
-                  <line x1={L} x2={W - R} y1={Y(v)} y2={Y(v)} className={grid} />
-                  <text x={L - 4} y={Y(v) + 3} textAnchor="end" fontSize={9} className={axis}>{f.num(weatherPressure(v, f.units), f.units === "us" ? 2 : 0)}</text>
+                  <line x1={rtl ? R : L} x2={rtl ? W - L : W - R} y1={Y(v)} y2={Y(v)} className={grid} />
+                  <text x={rtl ? W - L + 4 : L - 4} y={Y(v) + 3} textAnchor={rtl ? "start" : "end"} fontSize={9} className={axis}>{f.num(weatherPressure(v, f.units), f.units === "us" ? 2 : 0)}</text>
                 </g>
               );
             })}
-            <rect x={X(0)} y={Y(p0 + 1)} width={X(3) - X(0)} height={Y(p0 - 1) - Y(p0 + 1)} fill={color} fillOpacity={0.15} />
+            <rect x={Math.min(X(0), X(3))} y={Y(p0 + 1)} width={Math.abs(X(3) - X(0))} height={Y(p0 - 1) - Y(p0 + 1)} fill={color} fillOpacity={0.15} />
             <path d={vals.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("")} fill="none" stroke={color} strokeWidth={2.4} />
             <circle cx={X(0)} cy={Y(p0)} r={5} fill={color} />
             <circle cx={X(3)} cy={Y(p3)} r={4} fill="#fff" stroke={color} strokeWidth={2} />
             <text x={X(minI)} y={Y(vals[minI]) + 14} textAnchor="middle" fontSize={9} fontWeight={700} className={strong}>{f.num(weatherPressure(vals[minI], f.units), f.units === "us" ? 2 : 0)}</text>
             <text x={X(maxI)} y={Y(vals[maxI]) - 6} textAnchor="middle" fontSize={9} fontWeight={700} className={strong}>{f.num(weatherPressure(vals[maxI], f.units), f.units === "us" ? 2 : 0)}</text>
             {hours.map((x, k) => (k % 12 === 0 ? <text key={k} x={X(k)} y={H - 8} textAnchor="middle" fontSize={9} className={axis}>{f.weekday(x.t, d.place.zone)} {f.hour(x.t, d.place.zone)}</text> : null))}
-            <text x={W - R} y={T + 2} textAnchor="end" fontSize={10} className={axis}>{f.pressureUnit}</text>
+            <text x={rtl ? R : W - R} y={T + 2} textAnchor={rtl ? "start" : "end"} fontSize={10} className={axis}>{f.pressureUnit}</text>
           </svg>
         }
         rows={[
@@ -358,9 +393,9 @@ export function WxHumidityCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-humidity" title={t("ind.humidity.title")}>
       <Intro text={t("ind.humidity.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <div className="w-full max-w-[520px]" style={{ minWidth: "min(100%, 420px)" }}>
             <div className="mb-6 flex items-end justify-between">
               <div>
@@ -436,9 +471,9 @@ export function WxUvCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-uv" title={t("ind.uv.title")}>
       <Intro text={t("ind.uv.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <div className="flex flex-col items-center">
             <svg viewBox={`0 0 ${S} 180`} width={S} height={180} style={{ direction: "ltr" }} role="img" aria-label={t("ind.uv.title")}>
               {UV_BANDS.map((b, k) => {
@@ -475,10 +510,16 @@ export function WxUvCard({ d, f }: WxCardProps) {
 /* 7 · Daylight timeline with stations (dawn, sunrise, noon, sunset, dusk, now) */
 export function WxSunCard({ d, f }: WxCardProps) {
   const t = useWxT();
+  const rtl = useIsRtl();
   const s = d.sun;
   const W = 600;
   const H = 150;
-  const X = (m: number) => 20 + (Math.min(1440, Math.max(0, m)) / 1440) * (W - 40);
+  const X = (m: number) => {
+    const frac = Math.min(1440, Math.max(0, m)) / 1440;
+    return rtl ? W - 20 - frac * (W - 40) : 20 + frac * (W - 40);
+  };
+  /** Bar between two times as {x, width}, whichever way the axis runs. */
+  const bar = (a: number, b: number) => ({ x: Math.min(X(a), X(b)), width: Math.abs(X(b) - X(a)) });
   const stations: { key: string; m: number | null; color: string }[] = [
     { key: "dawn", m: s.civilDawn, color: "#6366f1" },
     { key: "sunrise", m: s.sunrise, color: "#f59e0b" },
@@ -490,13 +531,13 @@ export function WxSunCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-sun" title={t("ind.sun.title")}>
       <Intro text={t("ind.sun.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-[600px]" role="img" aria-label={t("ind.sun.title")}>
             <rect x={20} y={60} width={W - 40} height={22} rx={11} fill="#1e293b" />
-            {s.civilDawn !== null && s.civilDusk !== null && <rect x={X(s.civilDawn)} y={60} width={X(s.civilDusk) - X(s.civilDawn)} height={22} fill="#818cf8" />}
-            {ok && <rect x={X(s.sunrise!)} y={60} width={X(s.sunset!) - X(s.sunrise!)} height={22} fill="#fcd34d" />}
+            {s.civilDawn !== null && s.civilDusk !== null && <rect {...bar(s.civilDawn, s.civilDusk)} y={60} height={22} fill="#818cf8" />}
+            {ok && <rect {...bar(s.sunrise!, s.sunset!)} y={60} height={22} fill="#fcd34d" />}
             {s.polar === "day" && <rect x={20} y={60} width={W - 40} height={22} rx={11} fill="#fcd34d" />}
             {[0, 360, 720, 1080, 1440].map((m) => (
               <text key={m} x={X(m)} y={100} textAnchor="middle" fontSize={9} className={axis}>{m === 1440 ? "24:00" : f.hhmm(m)}</text>
@@ -543,9 +584,9 @@ export function WxMoonCard({ d, f }: WxCardProps) {
   return (
     <SectionCard id="wx-moon" title={t("ind.moon.title")}>
       <Intro text={t("ind.moon.intro")} />
-      <IndicatorWithTable
-        workedExampleTitle={t("ind.worked")}
-        indicator={
+      <WxSplit
+        title={t("ind.worked")}
+        chart={
           <div className="w-full max-w-[560px]" style={{ minWidth: "min(100%, 440px)" }}>
             <div className="flex items-center justify-center gap-6">
               <svg viewBox="0 0 120 120" width={120} height={120} role="img" aria-label={t(`moon.${m.phase}`)}>
@@ -560,7 +601,7 @@ export function WxMoonCard({ d, f }: WxCardProps) {
                 <p dir="ltr" className="text-3xl font-bold text-blue-700 dark:text-blue-300">{f.num(m.illumination * 100)}%</p>
               </div>
             </div>
-            <div dir="ltr" className="mt-4 grid grid-cols-8 gap-1">
+            <div className="mt-4 grid grid-cols-8 gap-1">
               {MOON_PHASES.map((p, k) => {
                 const ill = (1 - Math.cos((2 * Math.PI * k) / 8)) / 2;
                 const on = p === m.phase;

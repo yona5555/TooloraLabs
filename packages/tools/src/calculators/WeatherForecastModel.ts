@@ -27,6 +27,8 @@ export type WxStep = {
   dewC: number | null;
   windKmh: number;
   windDir: number;
+  /** Wind gust in km/h, when MET provides it for the location. */
+  gustKmh: number | null;
   pressureHpa: number;
   cloud: number;
   fog: number | null;
@@ -64,6 +66,7 @@ export function parseMetForecast(json: MetLocationforecast): WxForecast {
       dewC: opt(d.dew_point_temperature),
       windKmh: msToKmh(num(d.wind_speed)),
       windDir: num(d.wind_from_direction),
+      gustKmh: typeof d.wind_speed_of_gust === "number" ? msToKmh(d.wind_speed_of_gust) : null,
       pressureHpa: num(d.air_pressure_at_sea_level),
       cloud: num(d.cloud_area_fraction),
       fog: opt(d.fog_area_fraction),

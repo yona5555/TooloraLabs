@@ -78,7 +78,7 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
           <stop offset="0" stopColor={top} />
           <stop offset="1" stopColor={bottom} />
         </linearGradient>
-        <radialGradient id="wx-sun">
+        <radialGradient id="wx-sky-sun">
           <stop offset="0" stopColor="#fff7c2" />
           <stop offset="0.45" stopColor="#fde047" />
           <stop offset="1" stopColor="#fde047" stopOpacity="0" />
@@ -91,7 +91,7 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
 
       {!night && dayFrac >= 0 && (
         <g>
-          <circle cx={sx} cy={sy} r={30} fill="url(#wx-sun)">
+          <circle cx={sx} cy={sy} r={30} fill="url(#wx-sky-sun)">
             {!reduced && <animate attributeName="r" values="26;32;26" dur="4s" repeatCount="indefinite" />}
           </circle>
           <circle cx={sx} cy={sy} r={11} fill="#facc15" stroke="#f59e0b" strokeWidth={1.5} />

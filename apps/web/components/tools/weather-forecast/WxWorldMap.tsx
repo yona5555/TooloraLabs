@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useLocale } from "next-intl";
 import { ExternalLink, MapIcon } from "lucide-react";
@@ -32,6 +32,37 @@ export default function WxWorldMap({ d, f }: { d: WxDerived; f: WxFmt }) {
   const [failed, setFailed] = useState(false);
   const [layers, setLayers] = useState<MapLayers>({ temperature: true, earthquake: true, wildfire: true, storm: true, volcano: true });
   const [selected, setSelected] = useState<string | null>(null);
+  const fsBox = useRef<HTMLDivElement>(null);
+  const [full, setFull] = useState(false);
+
+  // Fullscreen: the browser Fullscreen API on the map + table block, or a fixed overlay where it is
+  // unavailable (iOS Safari). Esc or the button restores the card; selection and zoom are kept
+  // because the map instance is never remounted.
+  const toggleFull = useCallback(() => {
+    const el = fsBox.current;
+    if (!el) return;
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+      return;
+    }
+    if (full) {
+      setFull(false);
+      return;
+    }
+    if (document.fullscreenEnabled && el.requestFullscreen) el.requestFullscreen().catch(() => setFull(true));
+    else setFull(true);
+  }, [full]);
+  useEffect(() => {
+    const onChange = () => setFull(document.fullscreenElement === fsBox.current && fsBox.current !== null);
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+  useEffect(() => {
+    if (!full || document.fullscreenElement) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setFull(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [full]);
 
   useEffect(() => {
     const el = box.current;
@@ -86,89 +117,100 @@ export default function WxWorldMap({ d, f }: { d: WxDerived; f: WxFmt }) {
   return (
     <SectionCard id="wx-map" title={t("map.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("map.intro")}</p>
-      <div className="mb-3 flex flex-wrap gap-2">
-        {(["temperature", ...KINDS] as const).map((k) => (
-          <label key={k} className="flex cursor-pointer items-center gap-1.5 rounded-full border border-zinc-300 px-3 py-1 text-xs font-semibold dark:border-zinc-700">
-            <input type="checkbox" checked={layers[k]} onChange={(e) => setLayers((l) => ({ ...l, [k]: e.target.checked }))} className="accent-blue-600" />
-            <span className="h-2.5 w-2.5 rounded-full" style={{ background: k === "temperature" ? "linear-gradient(90deg,#2563eb,#eab308,#dc2626)" : EVENT_COLORS[k] }} />
-            {t(`map.layer.${k}`)}
-            {k !== "temperature" && snap && <span className="text-zinc-500">({f.num(counts[k])})</span>}
-          </label>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
-        <div ref={box} className="relative h-[460px] overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800">
-          {visible ? (
-            <WxMapCanvas
-              key={dark ? "dark" : "light"}
-              cities={cities}
-              hazards={hazards}
-              layers={layers}
-              center={{ lat: d.place.lat, lon: d.place.lon }}
-              dark={dark}
-              selectedId={selected}
-              onSelect={setSelected}
-              ariaLabel={t("map.title")}
-            />
-          ) : (
-            <button type="button" onClick={() => setVisible(true)} className="flex h-full w-full flex-col items-center justify-center gap-2 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
-              <MapIcon size={28} className="text-blue-600" />
-              {t("map.load")}
-            </button>
-          )}
-          {visible && (!points || !snap) && !failed && (
-            <p className="pointer-events-none absolute start-2 top-2 rounded bg-white/90 px-2 py-1 text-xs text-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-200">{t("map.loading")}</p>
-          )}
-          {failed && <p className="absolute start-2 top-2 rounded bg-red-50 px-2 py-1 text-xs text-red-700 dark:bg-red-500/10 dark:text-red-300">{t("map.error")}</p>}
+      <div
+        ref={fsBox}
+        className={`flex flex-col gap-3 ${full ? "fixed inset-0 z-[100] overflow-hidden bg-white p-3 dark:bg-zinc-950" : ""}`}
+        role={full ? "dialog" : undefined}
+        aria-modal={full ? true : undefined}
+        aria-label={full ? t("map.title") : undefined}
+      >
+        <div className="flex flex-wrap gap-2">
+          {(["temperature", ...KINDS] as const).map((k) => (
+            <label key={k} className="flex cursor-pointer items-center gap-1.5 rounded-full border border-zinc-300 px-3 py-1 text-xs font-semibold dark:border-zinc-700">
+              <input type="checkbox" checked={layers[k]} onChange={(e) => setLayers((l) => ({ ...l, [k]: e.target.checked }))} className="accent-blue-600" />
+              <span className="h-2.5 w-2.5 rounded-full" style={{ background: k === "temperature" ? "linear-gradient(90deg,#2563eb,#eab308,#dc2626)" : EVENT_COLORS[k] }} />
+              {t(`map.layer.${k}`)}
+              {k !== "temperature" && snap && <span className="text-zinc-500">({f.num(counts[k])})</span>}
+            </label>
+          ))}
         </div>
 
-        <div className="flex min-w-0 flex-col gap-3">
-          <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/40" data-bp-inner>
-            <p className="text-xs font-semibold tracking-wide text-zinc-400 uppercase dark:text-zinc-500">{t("ind.worked")}</p>
-            {sel ? (
-              <dl className="mt-2 space-y-1.5 text-sm">
-                <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.type")}</dt><dd className="font-semibold" style={{ color: EVENT_COLORS[sel.kind] }}>{t(`map.kind.${sel.kind}`)}</dd></div>
-                <div><dt className="text-zinc-500">{t("map.d.place")}</dt><dd dir="auto" className="font-semibold text-zinc-800 dark:text-zinc-100">{sel.title}</dd></div>
-                <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.size")}</dt><dd dir="ltr" className="font-semibold">{describe(sel)}</dd></div>
-                {sel.depthKm !== null && <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.depth")}</dt><dd dir="ltr">{km(sel.depthKm)}</dd></div>}
-                <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.time")}</dt><dd dir="ltr">{f.dateTime(sel.timeMs, "UTC")} UTC</dd></div>
-                <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.distance", { city: d.place.name })}</dt><dd dir="ltr" className="font-bold text-blue-700 dark:text-blue-300">{km(sel.distanceKm)}</dd></div>
-                {sel.tsunami && <p className="rounded bg-amber-50 px-2 py-1 text-xs text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">{t("map.d.tsunami")}</p>}
-                <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.source")}</dt><dd>{sel.source}</dd></div>
-                {sel.url && (
-                  <a href={sel.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline dark:text-blue-300">
-                    {t("map.d.open")} <ExternalLink size={13} />
-                  </a>
-                )}
-              </dl>
-            ) : (
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{t("map.pick")}</p>
+        <div className={`grid grid-cols-1 gap-4 min-[769px]:grid-cols-[320px_minmax(0,1fr)] ${full ? "min-h-0 flex-1 min-[769px]:grid-rows-[minmax(0,1fr)]" : ""}`}>
+          <div className={`order-2 flex min-w-0 flex-col gap-3 min-[769px]:order-1 ${full ? "min-h-0 overflow-y-auto" : ""}`}>
+            <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/40" data-bp-inner>
+              <p className="text-xs font-semibold tracking-wide text-zinc-400 uppercase dark:text-zinc-500">{t("ind.worked")}</p>
+              {sel ? (
+                <dl className="mt-2 space-y-1.5 text-sm">
+                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.type")}</dt><dd className="font-semibold" style={{ color: EVENT_COLORS[sel.kind] }}>{t(`map.kind.${sel.kind}`)}</dd></div>
+                  <div><dt className="text-zinc-500">{t("map.d.place")}</dt><dd dir="auto" className="font-semibold text-zinc-800 dark:text-zinc-100">{sel.title}</dd></div>
+                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.size")}</dt><dd dir="ltr" className="font-semibold">{describe(sel)}</dd></div>
+                  {sel.depthKm !== null && <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.depth")}</dt><dd dir="ltr">{km(sel.depthKm)}</dd></div>}
+                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.time")}</dt><dd dir="ltr">{f.dateTime(sel.timeMs, "UTC")} UTC</dd></div>
+                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.distance", { city: d.place.name })}</dt><dd dir="ltr" className="font-bold text-blue-700 dark:text-blue-300">{km(sel.distanceKm)}</dd></div>
+                  {sel.tsunami && <p className="rounded bg-amber-50 px-2 py-1 text-xs text-amber-800 dark:bg-amber-500/10 dark:text-amber-200">{t("map.d.tsunami")}</p>}
+                  <div className="flex justify-between gap-2"><dt className="text-zinc-500">{t("map.d.source")}</dt><dd>{sel.source}</dd></div>
+                  {sel.url && (
+                    <a href={sel.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 underline dark:text-blue-300">
+                      {t("map.d.open")} <ExternalLink size={13} />
+                    </a>
+                  )}
+                </dl>
+              ) : (
+                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{t("map.pick")}</p>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700">
+              <p className="border-b border-zinc-200 px-3 py-2 text-xs font-semibold text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">{t("map.nearest", { city: d.place.name })}</p>
+              <ul className={`${full ? "" : "max-h-[220px]"} overflow-y-auto text-sm`}>
+                {near.slice(0, 8).map((h) => (
+                  <li key={h.id}>
+                    <button type="button" onClick={() => setSelected(h.id)} className={`flex w-full items-center gap-2 px-3 py-1.5 text-start ${selected === h.id ? "bg-blue-50 dark:bg-blue-500/10" : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50"}`}>
+                      <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: EVENT_COLORS[h.kind] }} />
+                      <span dir="auto" className="min-w-0 flex-1 truncate">{h.title}</span>
+                      <span dir="ltr" className="shrink-0 text-xs text-zinc-500">{km(h.distanceKm)}</span>
+                    </button>
+                  </li>
+                ))}
+                {snap && near.length === 0 && <li className="px-3 py-2 text-zinc-500">{t("map.none")}</li>}
+              </ul>
+            </div>
+
+            {hottest && coldest && (
+              <div className="grid grid-cols-2 gap-2 text-center text-xs">
+                <div className="rounded-lg bg-red-50 p-2 dark:bg-red-500/10"><p className="text-zinc-500">{t("map.hottest")}</p><p className="font-bold">{hottest.name} {hottest.label}</p></div>
+                <div className="rounded-lg bg-blue-50 p-2 dark:bg-blue-500/10"><p className="text-zinc-500">{t("map.coldest")}</p><p className="font-bold">{coldest.name} {coldest.label}</p></div>
+              </div>
             )}
           </div>
 
-          <div className="rounded-xl border border-zinc-200 dark:border-zinc-700">
-            <p className="border-b border-zinc-200 px-3 py-2 text-xs font-semibold text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">{t("map.nearest", { city: d.place.name })}</p>
-            <ul className="max-h-[220px] overflow-y-auto text-sm">
-              {near.slice(0, 8).map((h) => (
-                <li key={h.id}>
-                  <button type="button" onClick={() => setSelected(h.id)} className={`flex w-full items-center gap-2 px-3 py-1.5 text-start ${selected === h.id ? "bg-blue-50 dark:bg-blue-500/10" : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50"}`}>
-                    <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: EVENT_COLORS[h.kind] }} />
-                    <span dir="auto" className="min-w-0 flex-1 truncate">{h.title}</span>
-                    <span dir="ltr" className="shrink-0 text-xs text-zinc-500">{km(h.distanceKm)}</span>
-                  </button>
-                </li>
-              ))}
-              {snap && near.length === 0 && <li className="px-3 py-2 text-zinc-500">{t("map.none")}</li>}
-            </ul>
+          <div ref={box} className={`relative order-1 overflow-hidden min-[769px]:order-2 ${full ? "h-[60vh] min-[769px]:h-full" : "h-[460px]"} rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800`}>
+            {visible ? (
+              <WxMapCanvas
+                key={dark ? "dark" : "light"}
+                cities={cities}
+                hazards={hazards}
+                layers={layers}
+                center={{ lat: d.place.lat, lon: d.place.lon }}
+                dark={dark}
+                selectedId={selected}
+                onSelect={setSelected}
+                ariaLabel={t("map.title")}
+                fullscreen={full}
+                onToggleFullscreen={toggleFull}
+                fullscreenLabels={{ enter: t("map.fullscreen"), exit: t("map.exitFullscreen") }}
+              />
+            ) : (
+              <button type="button" onClick={() => setVisible(true)} className="flex h-full w-full flex-col items-center justify-center gap-2 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+                <MapIcon size={28} className="text-blue-600" />
+                {t("map.load")}
+              </button>
+            )}
+            {visible && (!points || !snap) && !failed && (
+              <p className="pointer-events-none absolute start-2 top-2 rounded bg-white/90 px-2 py-1 text-xs text-zinc-700 dark:bg-zinc-900/90 dark:text-zinc-200">{t("map.loading")}</p>
+            )}
+            {failed && <p className="absolute start-2 top-2 rounded bg-red-50 px-2 py-1 text-xs text-red-700 dark:bg-red-500/10 dark:text-red-300">{t("map.error")}</p>}
           </div>
-
-          {hottest && coldest && (
-            <div className="grid grid-cols-2 gap-2 text-center text-xs">
-              <div className="rounded-lg bg-red-50 p-2 dark:bg-red-500/10"><p className="text-zinc-500">{t("map.hottest")}</p><p className="font-bold">{hottest.name} {hottest.label}</p></div>
-              <div className="rounded-lg bg-blue-50 p-2 dark:bg-blue-500/10"><p className="text-zinc-500">{t("map.coldest")}</p><p className="font-bold">{coldest.name} {coldest.label}</p></div>
-            </div>
-          )}
         </div>
       </div>
 

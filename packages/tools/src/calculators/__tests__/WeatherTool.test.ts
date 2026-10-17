@@ -139,6 +139,7 @@ describe("MET Norway forecast model", () => {
     expect(fc.updatedAt).toBe(Date.parse("2026-10-17T06:00:00Z"));
     expect(fc.steps[0].stepHours).toBe(1);
     expect(fc.steps[0].windKmh).toBeCloseTo(18, 6);
+    expect(fc.steps[0].gustKmh).toBeNull();
     expect(fc.steps[24].stepHours).toBe(6);
     expect(fc.steps[24].precipMm).toBe(3);
     expect(fc.steps[23].stepHours).toBe(1);
