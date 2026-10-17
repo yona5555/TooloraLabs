@@ -6849,43 +6849,7 @@
         "behindTheTool": "Hinter dem Tool"
       },
       "aboveFold": {
-        "converterTitle": "Uhrzeit zwischen Städten umrechnen",
-        "fromLabel": "Von",
-        "toLabel": "In",
-        "swapLabel": "Städte tauschen",
-        "pickerPlaceholder": "Stadt auswählen",
-        "pickerSearchPlaceholder": "Beliebige Stadt suchen …",
-        "pickerNoResults": "Keine Städte gefunden.",
-        "customTimeLabel": "Bestimmtes Datum und Uhrzeit statt jetzt verwenden",
-        "customTimeHint": "Geben Sie Datum und Uhrzeit so ein, wie sie auf einer Uhr in der „Von\"-Stadt angezeigt würden.",
-        "resultTitle": "Umgerechnete Uhrzeit",
-        "differenceLabel": "Zeitunterschied",
-        "differenceHoursOnly": "{hours} Std.",
-        "differenceHoursMinutes": "{hours} Std. {minutes} Min.",
-        "sameTime": "Gleiche Uhrzeit",
-        "dayNoteLabel": "Kalendertag",
-        "sameDay": "Gleicher Tag",
-        "nextDay": "Nächster Tag",
-        "previousDay": "Vorheriger Tag",
-        "utcOffsetLabel": "UTC-Versatz {city}",
-        "utcPrefix": "UTC",
-        "dayLabel": "Tag",
-        "nightLabel": "Nacht",
-        "disclaimer": "Zeitzonenregeln und Sommerzeit-Termine werden von den jeweiligen Regierungen festgelegt und können sich kurzfristig ändern. Dieses Tool nutzt die Zeitzonendaten Ihres Browsers (die IANA-Datenbank), die regelmäßig aktualisiert wird – bei zeitkritischen Terminen prüfen Sie zur Sicherheit eine offizielle Quelle.",
-        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
-        "clearLabel": "Zurücksetzen"
-      },
-      "worldClock": {
-        "title": "Weltuhr",
-        "intro": "Die aktuelle Uhrzeit in wichtigen Städten aller Zeitzonen, automatisch aktualisiert.",
-        "utcPrefix": "UTC"
-      },
-      "meetingPlanner": {
-        "title": "Beste Besprechungszeit",
-        "intro": "Die Stunden, in {from}-Zeit, die in {from} und {to} beide innerhalb der üblichen Geschäftszeiten (9–17 Uhr) liegen.",
-        "overlapFoundLabel": "Überschneidende Geschäftszeiten:",
-        "overlapNote": "Uhrzeiten in {from}-Ortszeit angegeben, basierend auf einem Geschäftstag von {start}–{end} Uhr in beiden Städten.",
-        "noOverlap": "Es gibt keine Stunde, in der sich die üblichen Geschäftszeiten ({start}:00–{end}:00) dieser beiden Städte überschneiden – der Arbeitstag der einen Stadt endet, bevor der der anderen beginnt."
+        "disclaimer": "Zeitzonenregeln und Sommerzeit-Termine werden von den jeweiligen Regierungen festgelegt und können sich kurzfristig ändern. Dieses Tool nutzt die Zeitzonendaten Ihres Browsers (die IANA-Datenbank), die regelmäßig aktualisiert wird – bei zeitkritischen Terminen prüfen Sie zur Sicherheit eine offizielle Quelle."
       },
       "education": {
         "intro": {
@@ -7046,33 +7010,202 @@
           "readOriginal": "Offizielle Datenbank besuchen"
         }
       },
-      "scenarios": {
-        "nyToTokyo": "New York → Tokio",
-        "londonToSydney": "London → Sydney",
-        "laToDubai": "Los Angeles → Dubai"
-      },
-      "shareExport": {
-        "triggerLabel": "Teilen / Exportieren",
-        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
-        "contactSectionTitle": "Erstellt für (optional)",
-        "contactName": "Name",
-        "contactNamePlaceholder": "z.B. Jordan Lee",
-        "contactEmail": "E-Mail",
-        "contactEmailPlaceholder": "z.B. jordan@example.com",
-        "contactPhone": "Telefon",
-        "contactPhonePlaceholder": "z.B. +49 151 12345678",
-        "contactOrganization": "Organisation",
-        "contactOrganizationPlaceholder": "z.B. Lee Labs",
-        "contactAddress": "Adresse",
-        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
-        "shareToSocial": "In sozialen Medien teilen",
-        "generatedOn": "Erstellt am",
-        "preparedForTitle": "Erstellt für"
-      },
-      "overlapTimeline": {
-        "caption": "24-Stunden-UTC-Zeitleiste — die jeweiligen lokalen Geschäftszeiten (9-17 Uhr) jeder Stadt, mit den tatsächlich überschneidenden Stunden umrandet.",
-        "businessHoursLabel": "Geschäftszeiten (lokal)",
-        "overlapLabel": "Überschneidende Stunden"
+      "wt": {
+        "nav": {
+          "map": "Tag-/Nachtkarte"
+        },
+        "copyHeader": "Weltzeit-Umrechnung",
+        "history": {
+          "title": "Letzte Umrechnungen",
+          "total": "{n, plural, one {# Stadt umgerechnet} other {# Städte umgerechnet}}",
+          "empty": "Ihre Umrechnungen erscheinen hier, sobald Sie eine Zeit festlegen, ein Ergebnis kopieren oder einen Link teilen."
+        },
+        "units": {
+          "h": "{n} Std.",
+          "hm": "{h} Std. {m} Min."
+        },
+        "picker": {
+          "placeholder": "Stadt wählen",
+          "search": "Stadt, Land oder Zone suchen…",
+          "none": "Keine Städte gefunden."
+        },
+        "presets": {
+          "usGlobal": "Team New York",
+          "gulfEurope": "Riad ↔ Europa",
+          "asiaPacific": "Asien-Pazifik"
+        },
+        "input": {
+          "title": "Uhrzeit umrechnen",
+          "presets": "Schnellauswahl",
+          "from": "Heimatstadt (Zeit wird hier eingegeben)",
+          "modeNow": "Jetzt (live)",
+          "modeCustom": "Bestimmtes Datum & Uhrzeit",
+          "calGreg": "Gregorianisch",
+          "calHijri": "Hidschri (Umm al-Qura)",
+          "date": "Datum",
+          "time": "Uhrzeit",
+          "hijriBelow": "Hidschri-Datum unten eingeben",
+          "customHint": "Geben Sie die Uhrzeit so ein, wie eine Uhr in {city} sie zeigen würde.",
+          "gap": "{input} gibt es in {city} nicht: Die Uhren springen für die Sommerzeit {min} Minuten vor, daher wird {used} verwendet.",
+          "overlap": "{time} kommt in {city} beim Zurückstellen der Uhren zweimal vor. Angezeigt wird das erste Mal ({first}); das zweite ist um {second} UTC.",
+          "cities": "Städte ({n}/{max})",
+          "makeHome": "Zur Heimatstadt machen",
+          "remove": "{city} entfernen",
+          "add": "Stadt hinzufügen",
+          "workStart": "Arbeitsbeginn",
+          "workEnd": "Arbeitsende",
+          "copy": "Ergebnis kopieren",
+          "copied": "Kopiert!",
+          "share": "Link teilen",
+          "linkCopied": "Link kopiert!",
+          "reset": "Auf Beispiel zurücksetzen",
+          "savedNote": "Ihre Städte und Arbeitszeiten werden in diesem Browser gespeichert. Der geteilte Link enthält Städte, Uhrzeit und Arbeitszeiten.",
+          "hijriDay": "Hidschri-Tag",
+          "hijriMonth": "Hidschri-Monat",
+          "hijriYear": "Hidschri-Jahr",
+          "hijriInvalid": "Dieser Hidschri-Monat hat nur 29 Tage.",
+          "hijriEquals": "= {date} (gregorianisch)"
+        },
+        "result": {
+          "title": "Umgerechnete Zeit",
+          "localTime": "Ortszeit",
+          "date": "Datum",
+          "sameDay": "gleicher Tag",
+          "nextDay": "+{n} Tag",
+          "prevDay": "−{n} Tag",
+          "offset": "UTC-Versatz",
+          "offsetDst": "Normalzeit {std} + Sommerzeit {dst}",
+          "offsetStd": "Normalzeit {std}",
+          "hijri": "Hidschri-Datum",
+          "ummAlQura": "Umm al-Qura",
+          "nextChange": "Nächste Zeitumstellung",
+          "noDstFormula": "keine Sommerzeit",
+          "noDst": "Keine",
+          "utc": "UTC",
+          "spread": "Versatzspanne",
+          "liveNote": "Live: gerade jetzt, {date} in der Heimatstadt. Aktualisiert sich jede Minute.",
+          "customNote": "{date} wie für {city} eingegeben.",
+          "colItem": "Stadt",
+          "colCalc": "Rechnung",
+          "colValue": "Ergebnis",
+          "dialCaption": "24-Stunden-Zifferblatt: ein Ring pro Stadt, der Punkt steht auf ihrer Ortszeit (gold = Sonne oben, marine = Nacht). Grüner Sektor = Arbeitszeit {start}–{end}; grau = 22:00–07:00."
+        },
+        "clock": {
+          "title": "Live-Weltuhr",
+          "intro": "Ihre Städte sekundengenau, mit der Sonnenhöhe über dem Horizont. Städte hinzufügen, entfernen oder zur Heimatstadt machen; die Liste wird in diesem Browser gespeichert.",
+          "dst": "Sommerzeit",
+          "sun": "Sonne {el}°",
+          "remove": "{city} entfernen",
+          "makeHome": "{city} zur Heimatstadt machen",
+          "add": "Stadt hinzufügen"
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "map": {
+            "title": "Live-Karte von Tag und Nacht",
+            "intro": "Der echte Terminator für die aktuelle UTC-Zeit: Der Subsolarpunkt ergibt sich aus der Sonnendeklination und der Zeitgleichung, und die Schattierung vertieft sich über bürgerliche, nautische und astronomische Dämmerung. Starten Sie die Wiedergabe für einen ganzen Tag oder ziehen Sie den Regler.",
+            "pause": "Pause",
+            "play": "Einen Tag abspielen",
+            "scrub": "Zeit verschieben",
+            "live": "Live",
+            "converted": "Umgerechnete Zeit",
+            "pinnedNote": "Die Sonne wird zur umgerechneten Zeit gezeigt.",
+            "liveNote": "Live: Der Terminator wandert jede Minute 0,25° Länge.",
+            "shiftNote": "Jetzt {shift}",
+            "rowUtc": "Angezeigte Zeit",
+            "rowDecl": "Sonnendeklination δ",
+            "rowEot": "Zeitgleichung",
+            "rowSub": "Subsolarpunkt",
+            "rowSubNote": "Länge = −15 × (UTC − 12 + {eot}/60)",
+            "rowElev": "Sonnenhöhe in {city}",
+            "rowSunTimes": "Auf- – Untergang in {city}",
+            "polarDay": "Mitternachtssonne",
+            "polarNight": "Polarnacht",
+            "rowLit": "Städte im Tageslicht"
+          },
+          "meet": {
+            "title": "Meeting-Planer",
+            "intro": "Jede halbe Stunde des Tages in {city}, eingefärbt nach dem Ortsstatus jeder Stadt. Wochenenden folgen dem jeweiligen Land (Freitag–Samstag in Saudi-Arabien und den meisten Golfstaaten, sonst Samstag–Sonntag). Ziehen Sie über das Raster, um einen Termin zu testen.",
+            "prevDay": "Vorheriger Tag",
+            "nextDay": "Nächster Tag",
+            "available": "Bei der Arbeit",
+            "best": "Bestes Fenster",
+            "dragHint": "Ziehen zum Auswählen",
+            "status": {
+              "work": "Arbeitszeit",
+              "shoulder": "Früh/spät (07–22)",
+              "night": "Nacht",
+              "weekend": "Wochenende"
+            },
+            "rowSlot": "Termin in {city}",
+            "rowAvail": "Städte bei der Arbeit",
+            "rowBest": "Bestes Fenster",
+            "none": "Keines",
+            "rowBestNote": "{n} von {total} Städten bei der Arbeit für {dur}"
+          },
+          "overlap": {
+            "title": "Gemeinsame Arbeitszeit mit der Heimatstadt",
+            "intro": "Wie lange sich der Arbeitstag jeder Stadt am {date} mit dem in {city} überschneidet, längste zuerst.",
+            "allCities": "Alle Städte",
+            "rowWork": "Arbeitszeit in {city}"
+          },
+          "offsets": {
+            "title": "UTC-Versatz jetzt",
+            "intro": "Der Versatz jeder Stadt zu UTC, aufgeteilt in Normalzeit (blau) und die Sommerzeitstunde darüber (bernstein), von West nach Ost.",
+            "std": "Normalzeit",
+            "dst": "Sommerzeit",
+            "rowEarliest": "Am weitesten zurück",
+            "rowLatest": "Am weitesten voraus",
+            "rowSpan": "Spanne",
+            "rowHome": "{city}",
+            "rowDstCount": "Städte in Sommerzeit"
+          },
+          "dst": {
+            "title": "Kommende Zeitumstellungen",
+            "intro": "Alle Sommerzeit-Umstellungen der nächsten 12 Monate für Ihre Städte, aus den IANA-Zeitzonendaten des Browsers.",
+            "today": "Heute",
+            "none": "Keine Zeitumstellung",
+            "rowNoDst": "Städte ohne Sommerzeit"
+          },
+          "hijri": {
+            "title": "Hidschri-Datum in jeder Stadt",
+            "intro": "Das Umm-al-Qura-Hidschri-Datum des lokalen Datums jeder Stadt. Städte auf verschiedenen Seiten von Mitternacht können im selben Moment an verschiedenen Hidschri-Tagen sein.",
+            "strip": "Hidschri-Monatsleiste",
+            "stripNote": "Dieser Monat hat {n} Tage; grüne Felder sind die heutigen Hidschri-Daten Ihrer Städte.",
+            "rowGreg": "Gregorianisch in {city}",
+            "rowHijri": "Hidschri (Umm al-Qura)",
+            "rowNumeric": "Tag/Monat/Jahr",
+            "rowLen": "Tage dieses Hidschri-Monats",
+            "days": "{n, plural, one {# Tag} other {# Tage}}",
+            "rowNext": "Bis zum nächsten Monat",
+            "rowDates": "Verschiedene Ortsdaten",
+            "rowDatesNote": "unter den gewählten Städten",
+            "limit": "Umm al-Qura ist der im Voraus berechnete offizielle Kalender Saudi-Arabiens; religiöse Termine nach Mondsichtung können um einen Tag abweichen."
+          },
+          "daylight": {
+            "title": "Tageslicht in jeder Stadt heute",
+            "intro": "Nacht (dunkel), bürgerliche Dämmerung (violett) und Tag (gold) auf dem lokalen 24-Stunden-Tag jeder Stadt, mit grün umrandeter Arbeitszeit und einem roten Punkt bei der aktuellen Uhrzeit.",
+            "rowSun": "Auf- – Untergang in {city}",
+            "rowNoon": "Sonnenmittag",
+            "rowNoonNote": "12:00 − 4 Min. × Länge − ZG + Versatz",
+            "rowLength": "Tageslänge",
+            "rowTwilight": "Bürgerliche Dämmerung",
+            "rowLongest": "Längster Tag",
+            "rowShortest": "Kürzester Tag"
+          },
+          "week": {
+            "title": "Arbeitswochen im Vergleich",
+            "intro": "Welche Wochentage in jeder Stadt Arbeitstage sind und welche alle teilen. Der blaue Ring markiert den aktuellen lokalen Wochentag jeder Stadt.",
+            "shared": "Gemeinsam",
+            "legend": "Aktentasche = Arbeitstag, Tasse = Wochenende.",
+            "rowShared": "Gemeinsame Arbeitstage",
+            "rowSharedNote": "{n, plural, one {# Tag pro Woche} other {# Tage pro Woche}}",
+            "friSat": "Wochenende Fr–Sa",
+            "satSun": "Wochenende Sa–So",
+            "thuFri": "Wochenende Do–Fr",
+            "rowWeekly": "Überschneidung aller diese Woche"
+          }
+        }
       }
     },
     "fraction-calculator": {

@@ -6849,43 +6849,7 @@
         "behindTheTool": "Dans les coulisses de l'outil"
       },
       "aboveFold": {
-        "converterTitle": "Convertir l'heure entre deux villes",
-        "fromLabel": "De",
-        "toLabel": "Vers",
-        "swapLabel": "Inverser les villes",
-        "pickerPlaceholder": "Sélectionnez une ville",
-        "pickerSearchPlaceholder": "Rechercher une ville…",
-        "pickerNoResults": "Aucune ville trouvée.",
-        "customTimeLabel": "Utiliser une date et une heure précises au lieu de maintenant",
-        "customTimeHint": "Saisissez la date et l'heure telles qu'elles apparaîtraient sur une horloge dans la ville « De ».",
-        "resultTitle": "Heure convertie",
-        "differenceLabel": "Décalage horaire",
-        "differenceHoursOnly": "{hours} h",
-        "differenceHoursMinutes": "{hours} h {minutes} min",
-        "sameTime": "Même heure",
-        "dayNoteLabel": "Jour du calendrier",
-        "sameDay": "Même jour",
-        "nextDay": "Jour suivant",
-        "previousDay": "Jour précédent",
-        "utcOffsetLabel": "Décalage UTC de {city}",
-        "utcPrefix": "UTC",
-        "dayLabel": "Jour",
-        "nightLabel": "Nuit",
-        "disclaimer": "Les règles de fuseau horaire et les dates de passage à l'heure d'été sont fixées par chaque gouvernement et peuvent changer sans grand préavis. Cet outil s'appuie sur les propres données de fuseau horaire de votre navigateur (la base de données IANA), mises à jour périodiquement — pour un rendez-vous où l'heure est critique, vérifiez toujours auprès d'une source officielle.",
-        "scenarioLabel": "Remplir rapidement un exemple résolu",
-        "clearLabel": "Effacer"
-      },
-      "worldClock": {
-        "title": "Horloge mondiale",
-        "intro": "L'heure actuelle, en ce moment, dans les grandes villes de chaque fuseau horaire, mise à jour automatiquement.",
-        "utcPrefix": "UTC"
-      },
-      "meetingPlanner": {
-        "title": "Meilleur créneau pour se réunir",
-        "intro": "Les heures, exprimées dans le fuseau de {from}, qui se situent dans les horaires de bureau standard (9 h–17 h) à la fois à {from} et à {to}.",
-        "overlapFoundLabel": "Créneaux de bureau communs :",
-        "overlapNote": "Heures affichées dans le fuseau local de {from}, sur la base d'une journée de bureau de {start} h à {end} h dans les deux villes.",
-        "noOverlap": "Il n'existe aucune heure où les horaires de bureau standard ({start} h–{end} h) se chevauchent entre ces deux villes — la journée de travail de l'une se termine avant que celle de l'autre ne commence."
+        "disclaimer": "Les règles de fuseau horaire et les dates de passage à l'heure d'été sont fixées par chaque gouvernement et peuvent changer sans grand préavis. Cet outil s'appuie sur les propres données de fuseau horaire de votre navigateur (la base de données IANA), mises à jour périodiquement — pour un rendez-vous où l'heure est critique, vérifiez toujours auprès d'une source officielle."
       },
       "education": {
         "intro": {
@@ -7046,33 +7010,202 @@
           "readOriginal": "Consulter la base de données officielle"
         }
       },
-      "scenarios": {
-        "nyToTokyo": "New York → Tokyo",
-        "londonToSydney": "Londres → Sydney",
-        "laToDubai": "Los Angeles → Dubaï"
-      },
-      "shareExport": {
-        "triggerLabel": "Partager / Exporter",
-        "modalTitle": "Partager ou Exporter Ce Résultat",
-        "contactSectionTitle": "Préparé Pour (facultatif)",
-        "contactName": "Nom",
-        "contactNamePlaceholder": "ex. Jordan Lee",
-        "contactEmail": "E-mail",
-        "contactEmailPlaceholder": "ex. jordan@example.com",
-        "contactPhone": "Téléphone",
-        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
-        "contactOrganization": "Organisation",
-        "contactOrganizationPlaceholder": "ex. Lee Labs",
-        "contactAddress": "Adresse",
-        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
-        "shareToSocial": "Partager sur les réseaux sociaux",
-        "generatedOn": "Généré le",
-        "preparedForTitle": "Préparé Pour"
-      },
-      "overlapTimeline": {
-        "caption": "Chronologie UTC de 24 heures — les heures de bureau locales (9h-17h) de chaque ville, avec les heures réellement communes entourées.",
-        "businessHoursLabel": "Heures de bureau (local)",
-        "overlapLabel": "Heures communes"
+      "wt": {
+        "nav": {
+          "map": "Carte jour/nuit"
+        },
+        "copyHeader": "Conversion d'heure mondiale",
+        "history": {
+          "title": "Conversions récentes",
+          "total": "{n, plural, one {# ville convertie} other {# villes converties}}",
+          "empty": "Vos conversions s'affichent ici dès que vous fixez une heure, copiez un résultat ou partagez un lien."
+        },
+        "units": {
+          "h": "{n} h",
+          "hm": "{h} h {m} min"
+        },
+        "picker": {
+          "placeholder": "Choisir une ville",
+          "search": "Rechercher une ville, un pays ou un fuseau…",
+          "none": "Aucune ville trouvée."
+        },
+        "presets": {
+          "usGlobal": "Équipe de New York",
+          "gulfEurope": "Riyad ↔ Europe",
+          "asiaPacific": "Asie-Pacifique"
+        },
+        "input": {
+          "title": "Convertir une heure",
+          "presets": "Configurations rapides",
+          "from": "Ville de référence (heure saisie ici)",
+          "modeNow": "Maintenant (en direct)",
+          "modeCustom": "Date et heure précises",
+          "calGreg": "Grégorien",
+          "calHijri": "Hégirien (Umm al-Qura)",
+          "date": "Date",
+          "time": "Heure",
+          "hijriBelow": "Saisissez la date hégirienne ci-dessous",
+          "customHint": "Saisissez l'heure telle qu'une horloge de {city} l'afficherait.",
+          "gap": "{input} n'existe pas à {city} : les horloges avancent de {min} minutes pour l'heure d'été, {used} est donc utilisé.",
+          "overlap": "{time} survient deux fois à {city} lors du retour à l'heure d'hiver. La première occurrence ({first}) est affichée ; la seconde est à {second} UTC.",
+          "cities": "Villes ({n}/{max})",
+          "makeHome": "En faire la ville de référence",
+          "remove": "Retirer {city}",
+          "add": "Ajouter une ville",
+          "workStart": "Début de journée",
+          "workEnd": "Fin de journée",
+          "copy": "Copier le résultat",
+          "copied": "Copié !",
+          "share": "Lien de partage",
+          "linkCopied": "Lien copié !",
+          "reset": "Revenir à l'exemple",
+          "savedNote": "Vos villes et horaires de travail sont enregistrés dans ce navigateur. Le lien de partage contient les villes, l'heure et les horaires.",
+          "hijriDay": "Jour hégirien",
+          "hijriMonth": "Mois hégirien",
+          "hijriYear": "Année hégirienne",
+          "hijriInvalid": "Ce mois hégirien ne compte que 29 jours.",
+          "hijriEquals": "= {date} (grégorien)"
+        },
+        "result": {
+          "title": "Heure convertie",
+          "localTime": "Heure locale",
+          "date": "Date",
+          "sameDay": "même jour",
+          "nextDay": "+{n} jour",
+          "prevDay": "−{n} jour",
+          "offset": "Décalage UTC",
+          "offsetDst": "standard {std} + été {dst}",
+          "offsetStd": "heure standard {std}",
+          "hijri": "Date hégirienne",
+          "ummAlQura": "Umm al-Qura",
+          "nextChange": "Prochain changement d'heure",
+          "noDstFormula": "pas d'heure d'été",
+          "noDst": "Aucun",
+          "utc": "UTC",
+          "spread": "Écart des décalages",
+          "liveNote": "En direct : maintenant, {date} dans la ville de référence. Mise à jour chaque minute.",
+          "customNote": "{date} tel que saisi pour {city}.",
+          "colItem": "Ville",
+          "colCalc": "Calcul",
+          "colValue": "Résultat",
+          "dialCaption": "Cadran de 24 heures : un anneau par ville, le point à son heure locale (or = soleil levé, marine = nuit). Secteur vert = horaires {start}–{end} ; gris = 22:00–07:00."
+        },
+        "clock": {
+          "title": "Horloge mondiale en direct",
+          "intro": "Vos villes à la seconde près, avec la hauteur du soleil au-dessus de l'horizon. Ajoutez, retirez ou choisissez une ville de référence ; la liste est enregistrée dans ce navigateur.",
+          "dst": "Été",
+          "sun": "Soleil {el}°",
+          "remove": "Retirer {city}",
+          "makeHome": "Faire de {city} la ville de référence",
+          "add": "Ajouter une ville"
+        },
+        "ind": {
+          "worked": "Exemple résolu",
+          "map": {
+            "title": "Carte jour et nuit en direct",
+            "intro": "Le vrai terminateur solaire pour l'heure UTC actuelle : le point subsolaire découle de la déclinaison solaire et de l'équation du temps, et l'ombre s'assombrit à travers les crépuscules civil, nautique et astronomique. Lancez la lecture pour parcourir une journée ou faites glisser le curseur.",
+            "pause": "Pause",
+            "play": "Lire une journée",
+            "scrub": "Décaler l'heure",
+            "live": "Direct",
+            "converted": "Heure convertie",
+            "pinnedNote": "Le soleil est affiché à l'heure convertie.",
+            "liveNote": "En direct : le terminateur avance de 0,25° de longitude par minute.",
+            "shiftNote": "Maintenant {shift}",
+            "rowUtc": "Heure affichée",
+            "rowDecl": "Déclinaison solaire δ",
+            "rowEot": "Équation du temps",
+            "rowSub": "Point subsolaire",
+            "rowSubNote": "lon = −15 × (UTC − 12 + {eot}/60)",
+            "rowElev": "Hauteur du soleil à {city}",
+            "rowSunTimes": "Lever – coucher à {city}",
+            "polarDay": "Soleil de minuit",
+            "polarNight": "Nuit polaire",
+            "rowLit": "Villes en plein jour"
+          },
+          "meet": {
+            "title": "Planificateur de réunions",
+            "intro": "Chaque demi-heure de la journée à {city}, colorée selon le statut local de chaque ville. Les week-ends suivent chaque pays (vendredi–samedi en Arabie saoudite et dans la plupart des pays du Golfe, samedi–dimanche ailleurs). Faites glisser sur la grille pour tester un créneau.",
+            "prevDay": "Jour précédent",
+            "nextDay": "Jour suivant",
+            "available": "Au travail",
+            "best": "Meilleur créneau",
+            "dragHint": "Glisser pour choisir",
+            "status": {
+              "work": "Heures de travail",
+              "shoulder": "Tôt/tard (07–22)",
+              "night": "Nuit",
+              "weekend": "Week-end"
+            },
+            "rowSlot": "Créneau à {city}",
+            "rowAvail": "Villes au travail",
+            "rowBest": "Meilleur créneau",
+            "none": "Aucun",
+            "rowBestNote": "{n} villes sur {total} au travail pendant {dur}"
+          },
+          "overlap": {
+            "title": "Heures de travail communes avec la ville de référence",
+            "intro": "Durée du chevauchement de la journée de travail de chaque ville avec celle de {city} le {date}, du plus long au plus court.",
+            "allCities": "Toutes les villes",
+            "rowWork": "Horaires à {city}"
+          },
+          "offsets": {
+            "title": "Décalages UTC en ce moment",
+            "intro": "Le décalage de chaque ville par rapport à UTC, réparti entre l'heure standard (bleu) et l'heure d'été au-dessus (ambre), d'ouest en est.",
+            "std": "Standard",
+            "dst": "Été",
+            "rowEarliest": "La plus en retard",
+            "rowLatest": "La plus en avance",
+            "rowSpan": "Écart",
+            "rowHome": "{city}",
+            "rowDstCount": "Villes à l'heure d'été"
+          },
+          "dst": {
+            "title": "Prochains changements d'heure",
+            "intro": "Tous les changements d'heure d'été des 12 prochains mois pour vos villes, lus dans les données de fuseaux IANA du navigateur.",
+            "today": "Aujourd'hui",
+            "none": "Aucun changement d'heure",
+            "rowNoDst": "Villes sans heure d'été"
+          },
+          "hijri": {
+            "title": "Date hégirienne dans chaque ville",
+            "intro": "La date hégirienne Umm al-Qura de la date locale de chaque ville. Des villes de part et d'autre de minuit peuvent être à des jours hégiriens différents au même instant.",
+            "strip": "Bande du mois hégirien",
+            "stripNote": "Ce mois compte {n} jours ; les cases vertes sont les dates hégiriennes actuelles de vos villes.",
+            "rowGreg": "Grégorien à {city}",
+            "rowHijri": "Hégirien (Umm al-Qura)",
+            "rowNumeric": "Jour/mois/année",
+            "rowLen": "Jours de ce mois hégirien",
+            "days": "{n, plural, one {# jour} other {# jours}}",
+            "rowNext": "Jusqu'au mois suivant",
+            "rowDates": "Dates locales distinctes",
+            "rowDatesNote": "parmi les villes choisies",
+            "limit": "Umm al-Qura est le calendrier officiel de l'Arabie saoudite calculé à l'avance ; les dates religieuses fixées par l'observation du croissant peuvent différer d'un jour."
+          },
+          "daylight": {
+            "title": "Lumière du jour dans chaque ville aujourd'hui",
+            "intro": "Nuit (sombre), crépuscule civil (violet) et jour (or) sur la journée locale de 24 heures de chaque ville, avec les horaires de travail en vert et un point rouge à l'heure actuelle.",
+            "rowSun": "Lever – coucher à {city}",
+            "rowNoon": "Midi solaire",
+            "rowNoonNote": "12:00 − 4 min × longitude − EdT + décalage",
+            "rowLength": "Durée du jour",
+            "rowTwilight": "Crépuscule civil",
+            "rowLongest": "Jour le plus long",
+            "rowShortest": "Jour le plus court"
+          },
+          "week": {
+            "title": "Comparaison de la semaine de travail",
+            "intro": "Les jours travaillés dans chaque ville et ceux que toutes partagent. L'anneau bleu indique le jour local actuel de chaque ville.",
+            "shared": "Commun",
+            "legend": "Mallette = jour travaillé, tasse = week-end.",
+            "rowShared": "Jours travaillés communs",
+            "rowSharedNote": "{n, plural, one {# jour par semaine} other {# jours par semaine}}",
+            "friSat": "Week-end ven–sam",
+            "satSun": "Week-end sam–dim",
+            "thuFri": "Week-end jeu–ven",
+            "rowWeekly": "Chevauchement de toutes cette semaine"
+          }
+        }
       }
     },
     "fraction-calculator": {

@@ -6849,43 +6849,7 @@
         "behindTheTool": "Behind the Tool"
       },
       "aboveFold": {
-        "converterTitle": "Convert Time Between Cities",
-        "fromLabel": "From",
-        "toLabel": "To",
-        "swapLabel": "Swap cities",
-        "pickerPlaceholder": "Select a city",
-        "pickerSearchPlaceholder": "Search any city…",
-        "pickerNoResults": "No cities found.",
-        "customTimeLabel": "Use a specific date and time instead of now",
-        "customTimeHint": "Enter the date and time as it would read on a clock in the \"From\" city.",
-        "resultTitle": "Converted Time",
-        "differenceLabel": "Time Difference",
-        "differenceHoursOnly": "{hours}h",
-        "differenceHoursMinutes": "{hours}h {minutes}m",
-        "sameTime": "Same time",
-        "dayNoteLabel": "Calendar Day",
-        "sameDay": "Same day",
-        "nextDay": "Next day",
-        "previousDay": "Previous day",
-        "utcOffsetLabel": "{city} UTC Offset",
-        "utcPrefix": "UTC",
-        "dayLabel": "Day",
-        "nightLabel": "Night",
-        "disclaimer": "Time zone rules and daylight saving dates are set by individual governments and can change with little notice. This tool relies on your browser's own time zone data (the IANA database), which is updated periodically — for time-critical appointments, double-check against an official source.",
-        "scenarioLabel": "Quick-fill a worked example",
-        "clearLabel": "Clear"
-      },
-      "worldClock": {
-        "title": "World Clock",
-        "intro": "The current time right now in major cities across every time zone, updating automatically.",
-        "utcPrefix": "UTC"
-      },
-      "meetingPlanner": {
-        "title": "Best Time to Meet",
-        "intro": "The hours, in {from} time, that fall within standard business hours (9 AM–5 PM) in both {from} and {to}.",
-        "overlapFoundLabel": "Overlapping business hours:",
-        "overlapNote": "Times shown in {from} local time, based on a {start} AM–{end}:00 business day in both cities.",
-        "noOverlap": "There's no hour where standard business hours ({start}:00–{end}:00) overlap between these two cities — one city's working day ends before the other's begins."
+        "disclaimer": "Time zone rules and daylight saving dates are set by individual governments and can change with little notice. This tool relies on your browser's own time zone data (the IANA database), which is updated periodically — for time-critical appointments, double-check against an official source."
       },
       "education": {
         "intro": {
@@ -7046,33 +7010,202 @@
           "readOriginal": "Visit the Official Database"
         }
       },
-      "scenarios": {
-        "nyToTokyo": "New York → Tokyo",
-        "londonToSydney": "London → Sydney",
-        "laToDubai": "Los Angeles → Dubai"
-      },
-      "shareExport": {
-        "triggerLabel": "Share / Export",
-        "modalTitle": "Share or Export This Result",
-        "contactSectionTitle": "Prepared For (optional)",
-        "contactName": "Name",
-        "contactNamePlaceholder": "e.g. Jordan Lee",
-        "contactEmail": "Email",
-        "contactEmailPlaceholder": "e.g. jordan@example.com",
-        "contactPhone": "Phone",
-        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
-        "contactOrganization": "Organization",
-        "contactOrganizationPlaceholder": "e.g. Lee Labs",
-        "contactAddress": "Address",
-        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
-        "shareToSocial": "Share to social media",
-        "generatedOn": "Generated on",
-        "preparedForTitle": "Prepared For"
-      },
-      "overlapTimeline": {
-        "caption": "24-hour UTC timeline — each city's own 9am-5pm local business hours, with the genuinely overlapping hours ringed.",
-        "businessHoursLabel": "Business hours (local)",
-        "overlapLabel": "Overlapping hours"
+      "wt": {
+        "nav": {
+          "map": "Day/Night Map"
+        },
+        "copyHeader": "World time conversion",
+        "history": {
+          "title": "Recent conversions",
+          "total": "{n, plural, one {# city converted} other {# cities converted}}",
+          "empty": "Your conversions appear here once you set a time, copy a result or share a link."
+        },
+        "units": {
+          "h": "{n} h",
+          "hm": "{h} h {m} m"
+        },
+        "picker": {
+          "placeholder": "Select a city",
+          "search": "Search a city, country or zone…",
+          "none": "No cities found."
+        },
+        "presets": {
+          "usGlobal": "New York team",
+          "gulfEurope": "Riyadh ↔ Europe",
+          "asiaPacific": "Asia-Pacific"
+        },
+        "input": {
+          "title": "Convert a time",
+          "presets": "Quick setups",
+          "from": "Home city (time entered here)",
+          "modeNow": "Now (live)",
+          "modeCustom": "Specific date & time",
+          "calGreg": "Gregorian",
+          "calHijri": "Hijri (Umm al-Qura)",
+          "date": "Date",
+          "time": "Time",
+          "hijriBelow": "Enter the Hijri date below",
+          "customHint": "Type the time as a clock in {city} would show it.",
+          "gap": "{input} does not exist in {city}: clocks jump forward {min} minutes for daylight saving, so {used} is used instead.",
+          "overlap": "{time} happens twice in {city} as clocks fall back. The first occurrence ({first}) is shown; the second one is {second} UTC.",
+          "cities": "Cities ({n}/{max})",
+          "makeHome": "Make this the home city",
+          "remove": "Remove {city}",
+          "add": "Add a city",
+          "workStart": "Work starts",
+          "workEnd": "Work ends",
+          "copy": "Copy result",
+          "copied": "Copied!",
+          "share": "Share link",
+          "linkCopied": "Link copied!",
+          "reset": "Reset to the sample",
+          "savedNote": "Your cities and work hours are saved in this browser. The share link carries the cities, the time and the work hours.",
+          "hijriDay": "Hijri day",
+          "hijriMonth": "Hijri month",
+          "hijriYear": "Hijri year",
+          "hijriInvalid": "This Hijri month has only 29 days.",
+          "hijriEquals": "= {date} (Gregorian)"
+        },
+        "result": {
+          "title": "Converted time",
+          "localTime": "Local time",
+          "date": "Date",
+          "sameDay": "same day",
+          "nextDay": "+{n} day",
+          "prevDay": "−{n} day",
+          "offset": "UTC offset",
+          "offsetDst": "standard {std} + DST {dst}",
+          "offsetStd": "standard time {std}",
+          "hijri": "Hijri date",
+          "ummAlQura": "Umm al-Qura",
+          "nextChange": "Next clock change",
+          "noDstFormula": "no daylight saving",
+          "noDst": "None",
+          "utc": "UTC",
+          "spread": "Offset spread",
+          "liveNote": "Live: right now, {date} in the home city. Updates every minute.",
+          "customNote": "{date} as entered in {city}.",
+          "colItem": "City",
+          "colCalc": "Calculation",
+          "colValue": "Result",
+          "dialCaption": "24-hour dial: one ring per city, the dot sits at its local time (gold = sun up, navy = night). Green sector = work hours {start}–{end}; grey = 22:00–07:00."
+        },
+        "clock": {
+          "title": "Live world clock",
+          "intro": "Your cities ticking every second, with the sun's height above the horizon. Add, remove or make a city home; the list is saved in this browser.",
+          "dst": "DST",
+          "sun": "Sun {el}°",
+          "remove": "Remove {city}",
+          "makeHome": "Make {city} the home city",
+          "add": "Add a city"
+        },
+        "ind": {
+          "worked": "Worked example",
+          "map": {
+            "title": "Live day and night map",
+            "intro": "The real solar terminator for the current UTC time: the subsolar point comes from the sun's declination and the equation of time, and the shading deepens through civil, nautical and astronomical twilight. Press play to run a day, or drag the slider.",
+            "pause": "Pause",
+            "play": "Play a day",
+            "scrub": "Shift the time",
+            "live": "Live",
+            "converted": "Converted time",
+            "pinnedNote": "Showing the sun at the converted time.",
+            "liveNote": "Live: the terminator moves 0.25° of longitude every minute.",
+            "shiftNote": "Now {shift}",
+            "rowUtc": "Time shown",
+            "rowDecl": "Solar declination δ",
+            "rowEot": "Equation of time",
+            "rowSub": "Subsolar point",
+            "rowSubNote": "lon = −15 × (UTC − 12 + {eot}/60)",
+            "rowElev": "Sun height in {city}",
+            "rowSunTimes": "Sunrise – sunset in {city}",
+            "polarDay": "Midnight sun",
+            "polarNight": "Polar night",
+            "rowLit": "Cities in daylight"
+          },
+          "meet": {
+            "title": "Meeting planner",
+            "intro": "Every half hour of the day in {city}, coloured by each city's local status. Weekends follow each country (Fri–Sat in Saudi Arabia and most Gulf states, Sat–Sun elsewhere). Drag across the grid to test a slot.",
+            "prevDay": "Previous day",
+            "nextDay": "Next day",
+            "available": "At work",
+            "best": "Best window",
+            "dragHint": "Drag to pick a slot",
+            "status": {
+              "work": "Work hours",
+              "shoulder": "Early/late (07–22)",
+              "night": "Night",
+              "weekend": "Weekend"
+            },
+            "rowSlot": "Slot in {city}",
+            "rowAvail": "Cities at work",
+            "rowBest": "Best window",
+            "none": "None",
+            "rowBestNote": "{n} of {total} cities at work for {dur}"
+          },
+          "overlap": {
+            "title": "Shared working hours with the home city",
+            "intro": "How long each city's working day overlaps with {city}'s on {date}, longest first.",
+            "allCities": "All cities",
+            "rowWork": "Work hours in {city}"
+          },
+          "offsets": {
+            "title": "UTC offsets right now",
+            "intro": "Each city's offset from UTC, split into standard time (blue) and the daylight-saving hour on top (amber), west to east.",
+            "std": "Standard",
+            "dst": "DST",
+            "rowEarliest": "Furthest behind",
+            "rowLatest": "Furthest ahead",
+            "rowSpan": "Span",
+            "rowHome": "{city}",
+            "rowDstCount": "Cities on DST now"
+          },
+          "dst": {
+            "title": "Upcoming clock changes",
+            "intro": "Every daylight-saving change in the next 12 months for your cities, read from the browser's IANA time zone data.",
+            "today": "Today",
+            "none": "No clock changes",
+            "rowNoDst": "Cities without DST"
+          },
+          "hijri": {
+            "title": "Hijri date in each city",
+            "intro": "The Umm al-Qura Hijri date of each city's local date. Cities on different sides of midnight can be on different Hijri days at the same moment.",
+            "strip": "Hijri month strip",
+            "stripNote": "This month has {n} days; green cells are today's Hijri dates across your cities.",
+            "rowGreg": "Gregorian in {city}",
+            "rowHijri": "Hijri (Umm al-Qura)",
+            "rowNumeric": "Day/month/year",
+            "rowLen": "Days in this Hijri month",
+            "days": "{n, plural, one {# day} other {# days}}",
+            "rowNext": "Until the next month",
+            "rowDates": "Distinct local dates",
+            "rowDatesNote": "across the chosen cities",
+            "limit": "Umm al-Qura is Saudi Arabia's official calendar computed in advance; religious dates set by moon sighting can differ by a day."
+          },
+          "daylight": {
+            "title": "Daylight in each city today",
+            "intro": "Night (dark), civil twilight (violet) and daylight (gold) on each city's local 24-hour day, with work hours outlined in green and a red dot at the current time.",
+            "rowSun": "Sunrise – sunset in {city}",
+            "rowNoon": "Solar noon",
+            "rowNoonNote": "12:00 − 4 min × longitude − EoT + offset",
+            "rowLength": "Day length",
+            "rowTwilight": "Civil twilight",
+            "rowLongest": "Longest day",
+            "rowShortest": "Shortest day"
+          },
+          "week": {
+            "title": "Workweek comparison",
+            "intro": "Which weekdays are workdays in each city and which days every city shares. The blue ring marks each city's current local weekday.",
+            "shared": "Shared",
+            "legend": "Briefcase = workday, cup = weekend.",
+            "rowShared": "Shared workdays",
+            "rowSharedNote": "{n, plural, one {# day a week} other {# days a week}}",
+            "friSat": "Fri–Sat weekend",
+            "satSun": "Sat–Sun weekend",
+            "thuFri": "Thu–Fri weekend",
+            "rowWeekly": "All-city overlap this week"
+          }
+        }
       }
     },
     "fraction-calculator": {
