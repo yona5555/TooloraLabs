@@ -24,7 +24,8 @@ paths:
 - **Drawing + table (every tool, updated 2026-10-10):** drawing cards are two parts: deep live table on the LEFT, live drawing on the RIGHT, same height, no gaps; mobile stacks the drawing on top and the table under it; RTL mirrors naturally. Use `tool-ui/three/LiveTable3DLayout` + `tool-ui/three/Scene3D` (lazy @react-three/fiber + drei, ssr:false, theme colors from `usePalette3D`). This replaces the older "drawing left, table right" direction.
 - **Indicator set (every tool):** about 12 indicators chosen from the §31 library, all computed from the tool's real calculations and following its inputs live, with at least one interactive "wow" piece (drag, sliders or animation).
 - **History panels (every tool that has one):** × delete per entry, live grand total of all results, entry count, Clear all, click an entry to reuse its result, persisted per visitor. Use `tool-ui/HistoryTape` + `lib/use-persisted-list`.
-- **Tool cards (listings):** one unified card, half image and half text; the preview shows the full result panel uncropped; separate light and dark previews, each shown with its matching theme.
+- **Tool cards (listings):** one unified card, half image and half text; the image is the tool's real top interface (input + result columns) from `npm run previews` (`apps/web/scripts/generate-tool-previews.mts` → `public/tool-previews/{ar|en}/{light|dark}/{slug}.webp`): ar pages use ar images, all other locales en; light/dark follow the site theme; a missing image shows a neutral placeholder.
+- **Previews rule:** After any change to a tool's top interface, run npm run previews for that tool (or all tools) and commit the new images in the same commit.
 - **Market charts:** real OHLC candles only (no synthetic or line stand-ins) in a trading-terminal layout: instrument list next to the chart. Width, fullscreen and the WORKED EXAMPLE exception: see §5 below.
 
 ## 2. فهرس القواعد البصرية
