@@ -1,20 +1,11 @@
 # Known Accepted Risks
 
-## Open-Meteo free-tier "non-commercial use" terms (weather-forecast tool)
-- Open-Meteo's free API tier (10,000 requests/day, no key) is documented as
-  "for non-commercial use," but Open-Meteo does not publicly define what
-  counts as commercial — specifically, it's unclear whether an ad-supported
-  site (AdSense) using the data on a free-to-visitors page qualifies.
-- Risk assessment: small and acceptable for now — the site has not launched
-  yet and has no meaningful real visitor traffic, so actual exposure is
-  minimal.
-- Action required before/at launch: re-evaluate this once the site has real
-  traffic — either contact Open-Meteo directly to clarify whether AdSense
-  monetization qualifies as commercial use, or upgrade to a paid plan with
-  unambiguous terms if it does.
-- Tracked in TooloraLabs-Claude-Instructions.md alongside the tool's other
-  documented constraints; see `weather-forecast` tool code for the actual
-  integration (`apps/web/lib/weather/open-meteo.ts`).
+## Weather tool data sources (resolved 2026-10-17)
+- Open-Meteo's free API was removed: its terms list ad-supported websites as
+  commercial use. The weather tool now uses only MET Norway (CC BY 4.0),
+  USGS (public domain), NASA EONET (CC0) and OpenFreeMap tiles.
+- Terms, verdicts and requirements for every source live in
+  `docs/legal/data-sources.md`; no data source may be added without a section there.
 
 ## npm audit: 4 vulnerabilities (1 moderate, 3 high) — postcss, sharp
 - Root cause: unchanged from initial finding — Next.js bundles an internal,

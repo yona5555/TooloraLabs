@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
-import { getWeatherCategory } from "@tooloralabs/tools";
+import { currentStep, metSymbolCategory, wxCityName, wxFindCity, type WxForecast } from "@tooloralabs/tools";
 import { resolveDigitStyle } from "@/lib/digit-style";
-import { TEMP_GAUGE_CITIES } from "@/lib/weather/open-meteo";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import EncyclopediaLiveWidget from "@/components/tool-ui/EncyclopediaLiveWidget";
 import WeatherIcon from "./WeatherIcon";
@@ -28,15 +27,18 @@ function classify(temperatureC: number): ZoneKey {
   return zone ? zone.key : temperatureC < MIN_C ? "freezing" : "hot";
 }
 
+/** Very different climates, so clicking through them moves the needle across the whole range. */
+const TEMP_GAUGE_CITIES = ["riyadh", "london", "tokyo", "moscow", "cairo", "sao-paulo"].map((id) => wxFindCity(id)!);
+
 type FetchState = "loading" | "idle" | "error";
 
 export default function WeatherLiveTempGauge() {
   const t = useTranslations("tools.weather-forecast.education.intro.tempGauge");
-  const tCities = useTranslations("tools.weather-forecast.aboveFold.priorityCity");
-  const tCategory = useTranslations("tools.weather-forecast.category");
+  const tCategory = useTranslations("tools.weather-forecast.wx.category");
+  const locale = useLocale();
   const [selectedId, setSelectedId] = useState(TEMP_GAUGE_CITIES[0].id);
   const [status, setStatus] = useState<FetchState>("loading");
-  const [data, setData] = useState<{ temperatureC: number; weatherCode: number } | null>(null);
+  const [data, setData] = useState<{ temperatureC: number; symbol: string | null } | null>(null);
 
   const selected = TEMP_GAUGE_CITIES.find((c) => c.id === selectedId) ?? TEMP_GAUGE_CITIES[0];
 
@@ -45,11 +47,13 @@ export default function WeatherLiveTempGauge() {
     async function load() {
       setStatus("loading");
       try {
-        const res = await fetch(`/api/weather/forecast?lat=${selected.latitude}&lon=${selected.longitude}`);
+        const res = await fetch(`/api/weather/forecast?lat=${selected.lat}&lon=${selected.lon}`);
         if (!res.ok) throw new Error("fetch_failed");
-        const json = (await res.json()) as { current: { temperatureC: number; weatherCode: number } };
+        const json = (await res.json()) as WxForecast;
+        const step = currentStep(json.steps, Date.now());
+        if (!step) throw new Error("empty");
         if (!cancelled) {
-          setData({ temperatureC: json.current.temperatureC, weatherCode: json.current.weatherCode });
+          setData({ temperatureC: step.tempC, symbol: step.symbol });
           setStatus("idle");
         }
       } catch {
@@ -60,7 +64,7 @@ export default function WeatherLiveTempGauge() {
     return () => {
       cancelled = true;
     };
-  }, [selected.latitude, selected.longitude]);
+  }, [selected.lat, selected.lon]);
 
   const digitStyle = resolveDigitStyle();
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
@@ -68,7 +72,7 @@ export default function WeatherLiveTempGauge() {
   const zoneKey = data ? classify(data.temperatureC) : "mild";
   const zone = ZONES.find((z) => z.key === zoneKey) ?? ZONES[2];
   const classification = t(`zones.${zoneKey}`);
-  const cityLabel = tCities(selected.nameKey);
+  const cityLabel = wxCityName(selected, locale);
 
   return (
     <EncyclopediaLiveWidget title={t("title")}>
@@ -104,15 +108,15 @@ export default function WeatherLiveTempGauge() {
                 : "border-current/20 bg-transparent text-current/70 hover:border-blue-300 hover:text-current"
             }`}
           >
-            {tCities(city.nameKey)}
+            {wxCityName(city, locale)}
           </button>
         ))}
       </div>
 
       {status === "idle" && data && (
         <p className="mt-4 flex items-center justify-center gap-2 text-center text-sm leading-6">
-          <WeatherIcon category={getWeatherCategory(data.weatherCode)} size={18} className={zone.fillClass} />
-          {t("verdict", { city: cityLabel, temperature: `${fmt(data.temperatureC)}°C`, condition: tCategory(getWeatherCategory(data.weatherCode)) })}
+          <WeatherIcon category={metSymbolCategory(data.symbol)} size={18} className={zone.fillClass} />
+          {t("verdict", { city: cityLabel, temperature: `${fmt(data.temperatureC)}°C`, condition: tCategory(metSymbolCategory(data.symbol)) })}
         </p>
       )}
     </EncyclopediaLiveWidget>

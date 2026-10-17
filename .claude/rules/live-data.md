@@ -9,3 +9,4 @@ paths:
 - **State the limit on the page:** any data limit (delay, update frequency, history depth, coverage) is written on the page next to the data.
 - **Display currency:** a selector listing every supported fiat currency, remembered per visitor (localStorage in try/catch).
 - Secrets: see the hard rule in `CLAUDE.md` (names only, values masked).
+- **Legal proof first:** no data source may be added to TooloraLabs without a section in `docs/legal/data-sources.md` (terms URL, verdict, requirements, check date).

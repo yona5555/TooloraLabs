@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getWeatherSnapshot } from "@/lib/weather/open-meteo";
+import { getForecast } from "@/lib/weather/met-norway";
+import { cacheHeaders } from "@/lib/weather/upstream";
 
 export async function GET(request: NextRequest) {
   const latitude = Number(request.nextUrl.searchParams.get("lat"));
@@ -10,8 +11,8 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const snapshot = await getWeatherSnapshot(latitude, longitude);
-    return NextResponse.json(snapshot);
+    const { forecast, expires } = await getForecast(latitude, longitude);
+    return NextResponse.json(forecast, { headers: cacheHeaders(expires) });
   } catch {
     return NextResponse.json({ error: "fetch_failed" }, { status: 502 });
   }

@@ -1,5 +1,7 @@
 export type TemperatureUnit = "celsius" | "fahrenheit";
 export type WindSpeedUnit = "kmh" | "mph";
+/** Display unit system for the weather tool: metric (°C, km/h, hPa, mm) or US (°F, mph, inHg, in). */
+export type WeatherUnitSystem = "metric" | "us";
 
 export function celsiusToFahrenheit(celsius: number): number {
   if (!Number.isFinite(celsius)) return 0;
@@ -33,61 +35,107 @@ export function convertWindSpeed(value: number, from: WindSpeedUnit, to: WindSpe
   return from === "kmh" ? kmhToMph(value) : mphToKmh(value);
 }
 
+/** MET Norway reports wind in m/s; 1 m/s = 3.6 km/h exactly. */
+export function msToKmh(ms: number): number {
+  if (!Number.isFinite(ms)) return 0;
+  return ms * 3.6;
+}
+
+/** 1 inHg = 33.8638866667 hPa (conventional value at 0 °C). */
+export function hpaToInHg(hpa: number): number {
+  if (!Number.isFinite(hpa)) return 0;
+  return hpa / 33.8638866667;
+}
+
+export function mmToInches(mm: number): number {
+  if (!Number.isFinite(mm)) return 0;
+  return mm / 25.4;
+}
+
+/** One display value in the chosen unit system. */
+export function weatherTemp(celsius: number, units: WeatherUnitSystem): number {
+  return units === "us" ? celsiusToFahrenheit(celsius) : celsius;
+}
+export function weatherWind(kmh: number, units: WeatherUnitSystem): number {
+  return units === "us" ? kmhToMph(kmh) : kmh;
+}
+export function weatherPressure(hpa: number, units: WeatherUnitSystem): number {
+  return units === "us" ? hpaToInHg(hpa) : hpa;
+}
+export function weatherPrecip(mm: number, units: WeatherUnitSystem): number {
+  return units === "us" ? mmToInches(mm) : mm;
+}
+
 /**
- * The WMO weather interpretation codes (table 4677) that Open-Meteo's API
- * returns as `weather_code` — grouped into the categories this tool actually
- * distinguishes in its UI and translations, so the data layer only ever
- * hands the UI a known key instead of a bare numeric code to interpret twice.
+ * Conditions this tool distinguishes, derived from MET Norway's `symbol_code`
+ * (e.g. "partlycloudy_day", "heavyrainshowersandthunder_night"). The day/night
+ * suffix is handled separately by `isNightSymbol`.
  */
 export type WeatherCategory =
   | "clearSky"
-  | "mainlyClear"
+  | "fair"
   | "partlyCloudy"
-  | "overcast"
+  | "cloudy"
   | "fog"
-  | "drizzle"
-  | "freezingDrizzle"
+  | "lightRain"
   | "rain"
-  | "freezingRain"
-  | "snow"
-  | "snowGrains"
+  | "heavyRain"
   | "rainShowers"
+  | "sleet"
+  | "snow"
   | "snowShowers"
   | "thunderstorm"
-  | "thunderstormHail"
   | "unknown";
 
-const WMO_CODE_CATEGORIES: Record<number, WeatherCategory> = {
-  0: "clearSky",
-  1: "mainlyClear",
-  2: "partlyCloudy",
-  3: "overcast",
-  45: "fog",
-  48: "fog",
-  51: "drizzle",
-  53: "drizzle",
-  55: "drizzle",
-  56: "freezingDrizzle",
-  57: "freezingDrizzle",
-  61: "rain",
-  63: "rain",
-  65: "rain",
-  66: "freezingRain",
-  67: "freezingRain",
-  71: "snow",
-  73: "snow",
-  75: "snow",
-  77: "snowGrains",
-  80: "rainShowers",
-  81: "rainShowers",
-  82: "rainShowers",
-  85: "snowShowers",
-  86: "snowShowers",
-  95: "thunderstorm",
-  96: "thunderstormHail",
-  99: "thunderstormHail",
-};
+export const WEATHER_CATEGORIES: readonly WeatherCategory[] = [
+  "clearSky",
+  "fair",
+  "partlyCloudy",
+  "cloudy",
+  "fog",
+  "lightRain",
+  "rain",
+  "heavyRain",
+  "rainShowers",
+  "sleet",
+  "snow",
+  "snowShowers",
+  "thunderstorm",
+  "unknown",
+];
 
-export function getWeatherCategory(wmoCode: number): WeatherCategory {
-  return WMO_CODE_CATEGORIES[wmoCode] ?? "unknown";
+function symbolBase(symbol: string): string {
+  return symbol.toLowerCase().replace(/_(day|night|polartwilight)$/, "");
+}
+
+export function metSymbolCategory(symbol: string | null | undefined): WeatherCategory {
+  if (!symbol) return "unknown";
+  const s = symbolBase(symbol);
+  if (s === "clearsky") return "clearSky";
+  if (s === "fair") return "fair";
+  if (s === "partlycloudy") return "partlyCloudy";
+  if (s === "cloudy") return "cloudy";
+  if (s === "fog") return "fog";
+  if (s.includes("thunder")) return "thunderstorm";
+  if (s.includes("sleet")) return "sleet";
+  if (s.includes("snow")) return s.includes("showers") ? "snowShowers" : "snow";
+  if (s.includes("rain")) {
+    if (s.includes("showers")) return "rainShowers";
+    if (s.startsWith("light")) return "lightRain";
+    if (s.startsWith("heavy")) return "heavyRain";
+    return "rain";
+  }
+  return "unknown";
+}
+
+export function isNightSymbol(symbol: string | null | undefined): boolean {
+  return Boolean(symbol && /_night$/.test(symbol));
+}
+
+/** True for categories that bring falling precipitation (used by the sky scene's particles). */
+export function precipitationKind(category: WeatherCategory): "rain" | "snow" | "sleet" | null {
+  if (category === "snow" || category === "snowShowers") return "snow";
+  if (category === "sleet") return "sleet";
+  if (["lightRain", "rain", "heavyRain", "rainShowers", "thunderstorm"].includes(category)) return "rain";
+  return null;
 }

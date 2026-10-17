@@ -138,13 +138,15 @@ export const tools: Tool[] = [
     title: "Weather Forecast",
     category: "weather",
     description:
-      "Current conditions and a 7-day forecast for major world cities or any city you search, with temperature, humidity, wind, and precipitation chance.",
+      "Live weather for major world and Arab cities: current conditions, a 48-hour hourly chart and up to a 10-day forecast from MET Norway, plus a world map of recent earthquakes and natural events.",
     featured: true,
     keywords: [
       "weather",
       "forecast",
       "temperature",
-      "7-day forecast",
+      "10-day forecast",
+      "hourly forecast",
+      "earthquake map",
       "humidity",
       "wind speed",
       "weather forecast",

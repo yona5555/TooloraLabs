@@ -17,7 +17,6 @@ import CommodityConverter from "@/components/tools/commodities-tracker/Commodity
 import CommodityEducation from "@/components/tools/commodities-tracker/CommodityEducation";
 import WeatherTracker from "@/components/tools/weather-forecast/WeatherTracker";
 import WeatherEducation from "@/components/tools/weather-forecast/WeatherEducation";
-import WeatherWorldMapSection from "@/components/tools/weather-forecast/WeatherWorldMapSection";
 import TDEECalculator from "@/components/tools/tdee-calculator/TDEECalculator";
 import TDEEEducation from "@/components/tools/tdee-calculator/TDEEEducation";
 import CompoundInterestCalculator from "@/components/tools/compound-interest-calculator/CompoundInterestCalculator";
@@ -209,7 +208,8 @@ import { getTopCoins, getGlobalStats, getFiatRates, getFetchTimestamp } from "@/
 import { getForexSnapshot } from "@/lib/forex/exchangerate";
 import { getMetalSnapshot } from "@/lib/commodities/metalprice";
 import { getOilSnapshot } from "@/lib/commodities/oilprice";
-import { getWeatherSnapshot, PRIORITY_CITIES } from "@/lib/weather/open-meteo";
+import { getForecast } from "@/lib/weather/met-norway";
+import { wxDefaultCity } from "@tooloralabs/tools";
 
 type ToolPageProps = {
   params: Promise<{
@@ -222,7 +222,7 @@ type ToolPageProps = {
  * Excludes crypto-converter, forex-converter, commodities-tracker, and
  * weather-forecast: all four fetch live external data at render time
  * (CoinGecko; ExchangeRate-API + Frankfurter; MetalpriceAPI + OilPriceAPI;
- * Open-Meteo), so including them here would make `next build` itself
+ * MET Norway), so including them here would make `next build` itself
  * perform those fetches to prerender the page — burning limited free-tier
  * API quota on every build regardless of what changed, and failing the
  * whole build on a rate limit (429), as happened with CoinGecko on
@@ -382,18 +382,13 @@ export default async function ToolPage({
       break;
     }
     case "weather-forecast": {
-      const defaultCity = PRIORITY_CITIES[0];
-      const tWeather = await getTranslations({ locale, namespace: "tools.weather-forecast.aboveFold" });
-      const snapshot = await getWeatherSnapshot(defaultCity.latitude, defaultCity.longitude);
+      const defaultCity = wxDefaultCity(locale);
+      const initial = await getForecast(defaultCity.lat, defaultCity.lon).catch(() => null);
       component = (
         <WeatherTracker
-          initialCity={{
-            label: tWeather(`priorityCity.${defaultCity.nameKey}`),
-            latitude: defaultCity.latitude,
-            longitude: defaultCity.longitude,
-          }}
-          initialSnapshot={snapshot}
-          worldMap={<WeatherWorldMapSection />}
+          initialCityId={defaultCity.id}
+          initialForecast={initial?.forecast ?? null}
+          renderedAt={initial?.servedAt ?? 0}
           education={<WeatherEducation />}
         />
       );

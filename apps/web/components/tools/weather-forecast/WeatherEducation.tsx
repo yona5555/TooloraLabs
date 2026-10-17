@@ -10,8 +10,7 @@ import WeatherDisasters, { type DisasterItem } from "./WeatherDisasters";
 
 export default async function WeatherEducation() {
   const t = await getTranslations("tools.weather-forecast.education");
-  const tAboveFold = await getTranslations("tools.weather-forecast.aboveFold");
-  const tForecast = await getTranslations("tools.weather-forecast.forecast");
+  const tNotice = await getTranslations("tools.weather-forecast.wx.notices");
 
   const faqItems = t.raw("faq.items") as FAQItem[];
   const equipmentItems = t.raw("behindTheTool.equipment.items") as EquipmentItem[];
@@ -81,8 +80,12 @@ export default async function WeatherEducation() {
 
       <InfoSection id="notices" title={t("notices.title")}>
         <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
-          <li>{tAboveFold("disclaimer")}</li>
-          <li>{tForecast("accuracyNote")}</li>
+          <li>{tNotice("disclaimer")}</li>
+          <li>{tNotice("accuracy")}</li>
+          <li>{tNotice("hazards")}</li>
+          <li>{tNotice("endorsement")}</li>
+          <li>{tNotice("location")}</li>
+          <li>{tNotice("limits")}</li>
           <li>{t("intro.disclaimer")}</li>
           <li>{t("disasters.disclaimer")}</li>
         </ul>

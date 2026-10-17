@@ -1,42 +1,37 @@
-import {
-  Sun,
-  CloudSun,
-  Cloud,
-  CloudFog,
-  CloudDrizzle,
-  CloudRain,
-  CloudSnow,
-  CloudLightning,
-  type LucideIcon,
-} from "lucide-react";
+import { Cloud, CloudDrizzle, CloudFog, CloudHail, CloudLightning, CloudMoon, CloudRain, CloudRainWind, CloudSnow, CloudSun, HelpCircle, Moon, Snowflake, Sun } from "lucide-react";
 import type { WeatherCategory } from "@tooloralabs/tools";
 
-const CATEGORY_ICONS: Record<WeatherCategory, LucideIcon> = {
-  clearSky: Sun,
-  mainlyClear: Sun,
-  partlyCloudy: CloudSun,
-  overcast: Cloud,
-  fog: CloudFog,
-  drizzle: CloudDrizzle,
-  freezingDrizzle: CloudDrizzle,
-  rain: CloudRain,
-  freezingRain: CloudRain,
-  snow: CloudSnow,
-  snowGrains: CloudSnow,
-  rainShowers: CloudRain,
-  snowShowers: CloudSnow,
-  thunderstorm: CloudLightning,
-  thunderstormHail: CloudLightning,
-  unknown: Cloud,
-};
+type Props = { category: WeatherCategory; night?: boolean; size?: number; className?: string };
 
-type WeatherIconProps = {
-  category: WeatherCategory;
-  size?: number;
-  className?: string;
-};
-
-export default function WeatherIcon({ category, size = 32, className = "" }: WeatherIconProps) {
-  const Icon = CATEGORY_ICONS[category];
-  return <Icon size={size} className={className} aria-hidden="true" />;
+/** Icon for a MET Norway–derived weather category (day/night variants for the clear and fair skies). */
+export default function WeatherIcon({ category, night = false, size = 20, className = "" }: Props) {
+  const props = { size, className, "aria-hidden": true } as const;
+  switch (category) {
+    case "clearSky":
+      return night ? <Moon {...props} /> : <Sun {...props} />;
+    case "fair":
+    case "partlyCloudy":
+      return night ? <CloudMoon {...props} /> : <CloudSun {...props} />;
+    case "cloudy":
+      return <Cloud {...props} />;
+    case "fog":
+      return <CloudFog {...props} />;
+    case "lightRain":
+      return <CloudDrizzle {...props} />;
+    case "rain":
+      return <CloudRain {...props} />;
+    case "heavyRain":
+    case "rainShowers":
+      return <CloudRainWind {...props} />;
+    case "sleet":
+      return <CloudHail {...props} />;
+    case "snow":
+      return <CloudSnow {...props} />;
+    case "snowShowers":
+      return <Snowflake {...props} />;
+    case "thunderstorm":
+      return <CloudLightning {...props} />;
+    default:
+      return <HelpCircle {...props} />;
+  }
 }

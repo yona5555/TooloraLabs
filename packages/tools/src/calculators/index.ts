@@ -127,3 +127,7 @@ export * from "./WorldTimeCities";
 export * from "./WorldTimePlanner";
 export * from "./WorldTimeSolar";
 export * from "./WorldTimeCityNames";
+export * from "./WeatherScience";
+export * from "./WeatherForecastModel";
+export * from "./WeatherHazards";
+export * from "./WeatherCities";

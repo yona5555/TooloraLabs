@@ -4376,79 +4376,7 @@
     },
     "weather-forecast": {
       "title": "Prévisions météo",
-      "description": "Conditions actuelles et prévisions sur 7 jours pour les grandes villes du monde ou toute ville de votre choix, avec température, humidité, vent et probabilité de précipitations.",
-      "aboveFold": {
-        "cityPanelTitle": "Choisissez une ville",
-        "searchLabel": "Ville",
-        "searchPlaceholder": "Rechercher une ville dans le monde",
-        "searching": "Recherche…",
-        "noResults": "Aucune ville correspondante trouvée",
-        "priorityCitiesLabel": "Accès rapide",
-        "priorityCity": {
-          "newYork": "New York",
-          "london": "Londres",
-          "tokyo": "Tokyo",
-          "sydney": "Sydney",
-          "toronto": "Toronto",
-          "riyadh": "Riyad",
-          "moscow": "Moscou",
-          "cairo": "Le Caire",
-          "rioDeJaneiro": "Rio de Janeiro"
-        },
-        "loading": "Chargement de la météo…",
-        "error": "Impossible de charger les données météo. Veuillez réessayer.",
-        "lastUpdated": "Mis à jour à {time}",
-        "feelsLikeLabel": "Ressenti",
-        "humidityLabel": "Humidité",
-        "windLabel": "Vent",
-        "precipChanceLabel": "Probabilité de pluie",
-        "kmh": "km/h",
-        "mph": "mph",
-        "disclaimer": "Il s'agit d'estimations météorologiques générales basées sur des modèles de prévision, qui peuvent différer des conditions réelles. Pour toute décision importante, fiez-vous aux sources locales officielles.",
-        "temperatureLabel": "Température",
-        "viewMapLink": "Voir la Carte du Monde",
-        "miles": "mi",
-        "km": "km",
-        "visibilityLabel": "Visibilité",
-        "pressureLabel": "Pression",
-        "hpa": "hPa",
-        "uvIndexLabel": "Indice UV",
-        "sunriseSunsetLabel": "Lever / Coucher du Soleil"
-      },
-      "nav": {
-        "tool": "Prévisions",
-        "forecast": "Aperçu sur 7 jours",
-        "faq": "FAQ",
-        "behindTheTool": "Derrière l'outil",
-        "worldMap": "Carte du Monde",
-        "disasters": "Catastrophes Naturelles",
-        "notices": "Avis"
-      },
-      "dataSource": {
-        "label": "Données météo fournies par"
-      },
-      "category": {
-        "clearSky": "Ciel dégagé",
-        "mainlyClear": "Généralement dégagé",
-        "partlyCloudy": "Partiellement nuageux",
-        "overcast": "Couvert",
-        "fog": "Brouillard",
-        "drizzle": "Bruine",
-        "freezingDrizzle": "Bruine verglaçante",
-        "rain": "Pluie",
-        "freezingRain": "Pluie verglaçante",
-        "snow": "Neige",
-        "snowGrains": "Grains de neige",
-        "rainShowers": "Averses de pluie",
-        "snowShowers": "Averses de neige",
-        "thunderstorm": "Orage",
-        "thunderstormHail": "Orage avec grêle",
-        "unknown": "Inconnu"
-      },
-      "forecast": {
-        "title": "Aperçu sur 7 jours",
-        "accuracyNote": "Les prévisions plus lointaines dans la semaine sont naturellement moins précises que celles d'aujourd'hui — considérez les jours 5 à 7 comme une tendance générale plutôt qu'une prévision exacte."
-      },
+      "description": "Météo en direct des grandes villes du monde et du monde arabe : conditions actuelles, graphique horaire sur 48 heures et prévisions jusqu'à 10 jours de MET Norway, plus une carte mondiale des séismes et événements naturels récents.",
       "education": {
         "intro": {
           "title": "Comment fonctionnent les prévisions météo",
@@ -4478,7 +4406,7 @@
         },
         "models": {
           "title": "Modèles météorologiques et sources de données",
-          "paragraph1": "Les prévisions de cet outil proviennent d'Open-Meteo, qui combine les résultats de plusieurs modèles numériques nationaux — dont le GFS du National Weather Service américain, l'ICON du service météorologique allemand, et l'IFS du Centre européen pour les prévisions météorologiques à moyen terme — en sélectionnant le meilleur modèle disponible pour chaque lieu et en actualisant les données à chaque nouvelle exécution de modèle.",
+          "paragraph1": "Les prévisions de cet outil proviennent du service Locationforecast de l'Institut météorologique norvégien (MET Norway), qui utilise le modèle IFS du Centre européen pour les prévisions météorologiques à moyen terme pour la couverture mondiale et les modèles haute résolution de MET Norway sur la région nordique, et se met à jour à chaque nouvelle exécution du modèle.",
           "paragraph2": "Chaque modèle découpe l'atmosphère en une grille tridimensionnelle et calcule l'évolution de la température, de la pression, de l'humidité et du vent en chaque point de cette grille au fil du temps ; la résolution d'un modèle (la distance entre les points de la grille) détermine directement le niveau de détail local — comme une vallée montagneuse isolée ou un tronçon de côte — qu'il peut représenter.",
           "paragraph3": "Comme ces modèles dépendent de données d'observation en temps réel, la qualité des prévisions est généralement meilleure dans les régions bien couvertes par les stations météo et les satellites, et peut être un peu moins précise dans les zones isolées où les observations sont plus rares."
         },
@@ -4491,7 +4419,7 @@
             },
             {
               "question": "À quelle fréquence les données sont-elles mises à jour ?",
-              "answer": "Les modèles météorologiques sur lesquels s'appuie cet outil sont actualisés toutes les heures à toutes les quelques heures selon le modèle, et cette page rafraîchit ses propres données mises en cache environ une fois par heure."
+              "answer": "MET Norway actualise ses prévisions plusieurs fois par jour à mesure que de nouvelles exécutions de modèles s'achèvent. Cette page conserve chaque prévision seulement jusqu'à l'heure d'expiration fixée par MET Norway (environ une demi-heure en général), puis récupère la mise à jour."
             },
             {
               "question": "Pourquoi la prévision pour ma ville change-t-elle parfois d'une visite à l'autre ?",
@@ -4503,7 +4431,7 @@
             },
             {
               "question": "Cet outil fournit-il des alertes météo sévères ?",
-              "answer": "Non. Cet outil n'inclut volontairement aucune alerte météo sévère ni avertissement de catastrophe en temps réel (ouragans, feux de forêt, etc.). Pour les alertes officielles, consultez toujours votre service météorologique national ou les services d'urgence locaux."
+              "answer": "Non. La carte mondiale affiche les séismes signalés récemment (USGS) et des événements naturels comme les feux de forêt, tempêtes et volcans (NASA EONET) à titre d'information uniquement ; ce n'est pas un service d'alerte. Pour les avertissements officiels, suivez toujours votre service météorologique national et les secours locaux."
             }
           ]
         },
@@ -4635,115 +4563,338 @@
           "title": "Avis"
         }
       },
-      "weekChart": {
-        "title": "Tendance des Températures sur 7 Jours",
-        "highLabel": "Maximale",
-        "lowLabel": "Minimale"
-      },
-      "humidityGauge": {
-        "title": "Niveau d'Humidité",
-        "zones": {
+      "wx": {
+        "nav": {
+          "tool": "Météo",
+          "hourly": "48 prochaines heures",
+          "daily": "Prévisions quotidiennes",
+          "map": "Carte mondiale",
+          "faq": "FAQ",
+          "behind": "Derrière l'outil",
+          "notices": "Avis"
+        },
+        "input": {
+          "title": "Choisir une ville",
+          "units": "Unités",
+          "metric": "Métrique (°C, km/h)",
+          "us": "US (°F, mph)",
+          "myLocation": "Ma position",
+          "favourite": "Ajouter aux favoris",
+          "unfavourite": "Retirer des favoris",
+          "locating": "Localisation…",
+          "useLocation": "Utiliser ma position",
+          "geo": {
+            "denied": "L'autorisation de localisation n'a pas été accordée. Choisissez une ville dans la liste.",
+            "unsupported": "Ce navigateur ne peut pas partager sa position."
+          },
+          "geoNote": "Votre position sert uniquement à demander sa prévision (arrondie à ~1 km) et n'est jamais enregistrée.",
+          "favourites": "Favoris",
+          "search": "Rechercher des villes",
+          "searchPlaceholder": "Rechercher dans la liste des villes",
+          "count": "{n} villes",
+          "noResults": "Aucune ville de la liste ne correspond."
+        },
+        "result": {
+          "title": "Météo actuelle",
+          "temp": "Température",
+          "feels": "Ressenti",
+          "condition": "Conditions",
+          "humidity": "Humidité",
+          "dew": "Point de rosée",
+          "cloud": "Couverture nuageuse",
+          "wind": "Vent",
+          "beaufort": "Force Beaufort",
+          "pressure": "Pression (niveau de la mer)",
+          "precipHour": "Précipitations, heure suivante",
+          "highLow": "Max / Min",
+          "precipDay": "Précipitations, aujourd'hui",
+          "uv": "Indice UV (ciel clair)",
+          "notProvided": "Non fourni par la source",
+          "sunrise": "Lever du soleil",
+          "sunset": "Coucher du soleil",
+          "dayLength": "Durée du jour",
+          "sunElevation": "Hauteur du soleil",
+          "moon": "Phase de la Lune",
+          "nextFull": "Prochaine pleine lune",
+          "localTime": "Heure locale {time}",
+          "updated": "Run de prévision {time}",
+          "error": "Impossible de charger la prévision de ce lieu. Veuillez réessayer.",
+          "loading": "Chargement des prévisions…",
+          "colItem": "Élément",
+          "colCalc": "Comment il est obtenu",
+          "colValue": "Valeur",
+          "skyCaption": "Ciel de cette heure : {condition}, nébulosité {cloud} %, hauteur du soleil {elev}°. Les nuages dérivent selon la direction réelle du vent.",
+          "g": {
+            "now": "Maintenant",
+            "windPressure": "Vent et pression",
+            "today": "Aujourd'hui",
+            "sunMoon": "Soleil et Lune"
+          },
+          "f": {
+            "heatIndex": "Indice de chaleur (NWS) à partir de T {t} et HR {rh} %",
+            "windChill": "Refroidissement éolien à partir de T {t} et vent {v}",
+            "air": "Égal à la température de l'air (ni refroidissement éolien ni indice de chaleur)",
+            "met": "Valeur de prévision MET Norway",
+            "magnus": "Formule de Magnus à partir de T {t} et HR {rh} %",
+            "wind": "{ms} m/s × 3,6",
+            "beaufort": "Échelle de Beaufort (OMM) depuis m/s",
+            "trend": "Variation sur les 3 prochaines h : {delta}",
+            "daily": "Min/max des pas de prévision du jour",
+            "sum": "Somme des pas du jour",
+            "uv": "UV maximal du jour par ciel clair (sans effet des nuages)",
+            "noaa": "Calculé localement (équations solaires NOAA)",
+            "solar": "Calculé localement à partir de la position du Soleil",
+            "moon": "Âge de la Lune {age} jours (mois synodique moyen)",
+            "synodic": "Mois synodique moyen de 29,53 jours"
+          }
+        },
+        "category": {
+          "clearSky": "Ciel dégagé",
+          "fair": "Beau temps",
+          "partlyCloudy": "Partiellement nuageux",
+          "cloudy": "Nuageux",
+          "fog": "Brouillard",
+          "lightRain": "Pluie faible",
+          "rain": "Pluie",
+          "heavyRain": "Forte pluie",
+          "rainShowers": "Averses",
+          "sleet": "Neige fondue",
+          "snow": "Neige",
+          "snowShowers": "Averses de neige",
+          "thunderstorm": "Orage",
+          "unknown": "Inconnu"
+        },
+        "dewComfort": {
           "dry": "Sec",
           "comfortable": "Confortable",
-          "humid": "Humide"
+          "sticky": "Moite",
+          "oppressive": "Étouffant",
+          "severe": "Très étouffant"
         },
-        "advice": {
-          "dry": "Une faible humidité peut assécher la peau, les yeux et les voies respiratoires — bien s'hydrater aide.",
-          "comfortable": "Ce niveau d'humidité est généralement agréable pour la plupart des gens.",
-          "humid": "Une humidité élevée donne l'impression que l'air est plus chaud que ce qu'indique le thermomètre et peut accentuer l'inconfort."
-        }
-      },
-      "windCompass": {
-        "title": "Vent",
-        "mph": "mph",
-        "kmh": "km/h",
-        "directions": {
+        "compass": {
           "n": "N",
+          "nne": "NNE",
           "ne": "NE",
+          "ene": "ENE",
           "e": "E",
+          "ese": "ESE",
           "se": "SE",
+          "sse": "SSE",
           "s": "S",
+          "ssw": "SSO",
           "sw": "SO",
+          "wsw": "OSO",
           "w": "O",
-          "nw": "NO"
+          "wnw": "ONO",
+          "nw": "NO",
+          "nnw": "NNO"
         },
-        "fromDirection": "venant du {direction}",
-        "ariaLabel": "Vent venant du {direction} à {speed}",
-        "levelAdvice": {
-          "calm": "Air calme — la fumée monte tout droit et les drapeaux restent immobiles.",
-          "light": "Brise légère — les feuilles bruissent et les girouettes commencent à bouger.",
-          "moderate": "Brise modérée — les petites branches s'agitent et la poussière légère ou le papier se soulèvent.",
-          "strong": "Vent fort — les grosses branches bougent et les parapluies deviennent difficiles à utiliser."
-        }
-      },
-      "uvGauge": {
-        "title": "Indice UV",
-        "zones": {
+        "beaufort": {
+          "0": "Calme",
+          "1": "Très légère brise",
+          "2": "Légère brise",
+          "3": "Petite brise",
+          "4": "Jolie brise",
+          "5": "Bonne brise",
+          "6": "Vent frais",
+          "7": "Grand frais",
+          "8": "Coup de vent",
+          "9": "Fort coup de vent",
+          "10": "Tempête",
+          "11": "Violente tempête",
+          "12": "Ouragan"
+        },
+        "trend": {
+          "rising": "en hausse",
+          "falling": "en baisse",
+          "steady": "stable"
+        },
+        "uv": {
           "low": "Faible",
           "moderate": "Modéré",
           "high": "Élevé",
-          "veryHigh": "Très Élevé",
+          "veryHigh": "Très élevé",
           "extreme": "Extrême"
         },
-        "advice": {
-          "low": "Risque minimal. Aucune protection nécessaire pour la plupart des gens.",
-          "moderate": "Portez des lunettes de soleil et utilisez de la crème solaire en cas d'exposition prolongée en extérieur.",
-          "high": "Réduisez l'exposition au soleil de midi. Portez un chapeau, des lunettes de soleil et une crème solaire SPF 30+.",
-          "veryHigh": "Prenez des précautions supplémentaires : cherchez l'ombre en milieu de journée et réappliquez la crème solaire souvent.",
-          "extreme": "Évitez l'exposition au soleil en milieu de journée. Une peau non protégée peut brûler en quelques minutes."
-        }
-      },
-      "worldMap": {
-        "title": "Carte Météo Mondiale Interactive",
-        "intro": "Cliquez sur un repère pour voir la température actuelle en direct et les conditions météo de cette ville, issues des mêmes modèles de prévision Open-Meteo utilisés dans tout cet outil.",
-        "showMapButton": "Afficher la Carte",
-        "attribution": {
-          "openMeteo": "Données météo par Open-Meteo.com"
+        "uvAdvice": {
+          "low": "Risque minimal pour la plupart des gens. Lunettes de soleil par temps lumineux.",
+          "moderate": "Cherchez l'ombre vers midi ; chapeau, lunettes de soleil et crème solaire.",
+          "high": "Limitez l'exposition de la fin de matinée au milieu d'après-midi ; FPS 30+, chapeau et lunettes.",
+          "veryHigh": "Protection renforcée : évitez le soleil de midi, couvrez-vous et réappliquez souvent la crème.",
+          "extreme": "Évitez le soleil vers midi ; une peau non protégée peut brûler en quelques minutes."
         },
-        "cities": {
-          "riyadh": "Riyad",
-          "cairo": "Le Caire",
-          "london": "Londres",
-          "paris": "Paris",
-          "berlin": "Berlin",
-          "madrid": "Madrid",
-          "rome": "Rome",
-          "moscow": "Moscou",
-          "istanbul": "Istanbul",
-          "dubai": "Dubaï",
-          "newDelhi": "New Delhi",
-          "beijing": "Pékin",
-          "tokyo": "Tokyo",
-          "seoul": "Séoul",
-          "bangkok": "Bangkok",
-          "jakarta": "Jakarta",
-          "sydney": "Sydney",
-          "nairobi": "Nairobi",
-          "lagos": "Lagos",
-          "capeTown": "Le Cap",
-          "newYork": "New York",
-          "mexicoCity": "Mexico",
-          "rioDeJaneiro": "Rio de Janeiro",
-          "buenosAires": "Buenos Aires"
+        "polar": {
+          "day": "Soleil toute la journée",
+          "night": "Pas de soleil de la journée"
+        },
+        "moon": {
+          "newMoon": "Nouvelle lune",
+          "waxingCrescent": "Premier croissant",
+          "firstQuarter": "Premier quartier",
+          "waxingGibbous": "Gibbeuse croissante",
+          "fullMoon": "Pleine lune",
+          "waningGibbous": "Gibbeuse décroissante",
+          "lastQuarter": "Dernier quartier",
+          "waningCrescent": "Dernier croissant"
+        },
+        "units": {
+          "hm": "{h} h {m} min",
+          "h": "{n} h",
+          "m": "{n} min",
+          "d": "{n} jours",
+          "km": "{n} km"
+        },
+        "ind": {
+          "worked": "Exemple résolu",
+          "method": {
+            "heatIndex": "Indice de chaleur",
+            "windChill": "Refroidissement éolien",
+            "air": "Température de l'air"
+          },
+          "hourly": {
+            "title": "48 prochaines heures",
+            "intro": "Température heure par heure avec la courbe de ressenti calculée ici et les barres de précipitations. Faites glisser sur le graphique pour lire n'importe quelle heure.",
+            "temp": "Température",
+            "feels": "Ressenti",
+            "precip": "Précipitations ({unit})",
+            "night": "Nuit",
+            "drag": "Faites glisser pour déplacer le curseur",
+            "time": "Heure",
+            "inputs": "Humidité · vent",
+            "method": "Formule utilisée",
+            "precipRow": "Précipitations sur cette heure"
+          },
+          "daily": {
+            "title": "Prévisions sur {n} jours",
+            "intro": "L'écart min–max de chaque jour sur une échelle commune, avec le cumul de précipitations. Touchez un jour pour ses détails.",
+            "today": "Aujourd'hui",
+            "legend": "Barres : écart de température sur une échelle commune · bleu : précipitations ({unit})",
+            "day": "Jour",
+            "high": "Max",
+            "low": "Min",
+            "range": "Amplitude du jour",
+            "precip": "Précipitations",
+            "windMax": "Vent le plus fort",
+            "coverage": "Heures couvertes"
+          },
+          "wind": {
+            "title": "Vent",
+            "intro": "La flèche montre où va l'air ; les traînées accélèrent quand le vent forcit. La bande inférieure indique la force Beaufort.",
+            "raw": "Valeur MET Norway",
+            "convert": "En km/h",
+            "from": "Souffle du",
+            "sector": "Secteur sur 16",
+            "max24": "Le plus fort sur 24 h"
+          },
+          "pressure": {
+            "title": "Tendance de la pression",
+            "intro": "Pression au niveau de la mer pour les 48 prochaines heures. Le cadre ombré est la bande de ±1 hPa sur 3 heures : en sortir signifie une vraie hausse ou baisse.",
+            "now": "Maintenant",
+            "plus3": "Dans 3 heures",
+            "delta": "Variation",
+            "rule": "Règle",
+            "ruleValue": "|Δ| ≤ 1 hPa en 3 h = stable",
+            "trend": "Tendance",
+            "range": "Plage sur 48 h"
+          },
+          "humidity": {
+            "title": "Humidité et point de rosée",
+            "intro": "Le point de rosée, calculé ici à partir de la température et de l'humidité, traduit mieux la moiteur de l'air que l'humidité relative seule.",
+            "metDew": "Point de rosée MET Norway",
+            "comfort": "Confort",
+            "spread": "Température − point de rosée"
+          },
+          "uv": {
+            "title": "Indice UV",
+            "intro": "L'indice UV maximal du jour par ciel clair de MET Norway sur l'échelle de l'OMS, avec le conseil de protection correspondant.",
+            "missing": "La source ne fournit pas d'indice UV pour ce lieu actuellement.",
+            "now": "UV cette heure",
+            "peak": "Pic sur 24 h",
+            "band": "Catégorie OMS",
+            "kind": "Type de valeur",
+            "kindValue": "Ciel clair (les nuages peuvent le réduire)",
+            "cloud": "Nébulosité actuelle"
+          },
+          "sun": {
+            "title": "Frise de la lumière du jour",
+            "intro": "Aube civile, lever, midi solaire, coucher et crépuscule civil d'aujourd'hui, calculés ici pour ce lieu ; le repère rouge est l'heure actuelle.",
+            "dawn": "Aube civile",
+            "sunrise": "Lever",
+            "noon": "Midi solaire",
+            "sunset": "Coucher",
+            "dusk": "Crépuscule civil",
+            "twilight": "Crépuscule civil (les deux)"
+          },
+          "moon": {
+            "title": "Phase de la Lune",
+            "intro": "La Lune de ce soir dans sa phase réelle parmi les huit phases, calculée ici à partir du cycle lunaire moyen.",
+            "age": "Âge de la Lune",
+            "direction": "Sens",
+            "waxing": "Croissante",
+            "waning": "Décroissante",
+            "nextFull": "Prochaine pleine lune",
+            "nextNew": "Prochaine nouvelle lune",
+            "view": "Dessinée vue depuis",
+            "north": "l'hémisphère Nord",
+            "south": "l'hémisphère Sud"
+          }
+        },
+        "map": {
+          "title": "Carte mondiale de la météo et des risques",
+          "intro": "Température actuelle des grandes villes, séismes de magnitude 4,5 ou plus de la dernière semaine et événements actifs de feux, tempêtes et volcans. Sélectionnez un repère pour ses détails et un lien vers la source d'origine.",
+          "load": "Charger la carte",
+          "loading": "Chargement des couches en direct…",
+          "error": "Certaines couches en direct n'ont pas pu être chargées.",
+          "layer": {
+            "temperature": "Température",
+            "earthquake": "Séismes",
+            "wildfire": "Feux de forêt",
+            "storm": "Tempêtes",
+            "volcano": "Volcans"
+          },
+          "kind": {
+            "earthquake": "Séisme",
+            "wildfire": "Feu de forêt",
+            "storm": "Tempête violente",
+            "volcano": "Volcan"
+          },
+          "d": {
+            "type": "Type",
+            "place": "Lieu",
+            "size": "Magnitude / intensité",
+            "depth": "Profondeur",
+            "time": "Signalé",
+            "distance": "Distance depuis {city}",
+            "tsunami": "L'USGS a signalé cet événement pour une éventuelle évaluation de tsunami. Suivez les centres officiels d'alerte aux tsunamis.",
+            "source": "Source",
+            "open": "Ouvrir la source d'origine"
+          },
+          "pick": "Sélectionnez un événement sur la carte ou dans la liste pour afficher ses détails ici.",
+          "nearest": "Événements les plus proches de {city}",
+          "none": "Aucun événement dans les données actuelles.",
+          "hottest": "La plus chaude",
+          "coldest": "La plus froide",
+          "quakeScale": "Le cercle grandit avec la magnitude",
+          "safety": "À titre d'information uniquement : pas un service d'alerte. Les positions peuvent être approximatives. En cas d'urgence, suivez les autorités locales et les services d'alerte officiels.",
+          "limits": "Séismes : magnitude 4,5+ sur les 7 derniers jours, actualisés toutes les 5 minutes. Événements : feux, tempêtes et volcans actifs de NASA EONET, actualisés toutes les 15 minutes ; EONET n'est pas une source officielle de données précises.",
+          "fetched": "Dernière récupération {time}."
+        },
+        "credits": {
+          "met": "Données météo :",
+          "changes": "converties dans vos unités et résumées en valeurs horaires et quotidiennes par TooloraLabs.",
+          "usgs": "Séismes :",
+          "eonet": "Événements :",
+          "eonetNote": "les sources liées conservent leurs propres conditions ; aucune approbation de la NASA n'est sous-entendue.",
+          "map": "Carte : tuiles OpenFreeMap via MapLibre (attribution affichée sur la carte)."
+        },
+        "notices": {
+          "disclaimer": "Ce sont des estimations générales issues de modèles de prévision, qui peuvent différer des conditions réelles. Pour les décisions importantes, fiez-vous aux sources officielles locales.",
+          "accuracy": "Plus l'échéance est lointaine, moins la prévision est précise : considérez les derniers jours comme une tendance générale.",
+          "hazards": "La carte des risques est purement informative et n'est pas un système d'alerte. Suivez toujours votre service météorologique national et les secours locaux.",
+          "endorsement": "Weather data: MET Norway (CC BY 4.0). Earthquakes: courtesy of the U.S. Geological Survey. Events: NASA EONET. Aucune de ces organisations n'approuve ce site.",
+          "location": "« Utiliser ma position » demande l'autorisation de votre navigateur ; la position sert uniquement à demander la prévision et n'est pas enregistrée. Les favoris et le choix des unités sont enregistrés dans ce navigateur seulement.",
+          "limits": "Limites des prévisions : pas horaires pendant environ 2,5 jours, puis pas de 6 heures jusqu'à environ 10 jours. Chaque prévision est mise en cache jusqu'à l'expiration fixée par MET Norway. L'indice UV est une valeur par ciel clair."
         }
-      },
-      "shareExport": {
-        "triggerLabel": "Partager / Exporter",
-        "modalTitle": "Partager ou Exporter Ce Résultat",
-        "contactSectionTitle": "Préparé Pour (facultatif)",
-        "contactName": "Nom",
-        "contactNamePlaceholder": "ex. Jordan Lee",
-        "contactEmail": "E-mail",
-        "contactEmailPlaceholder": "ex. jordan@example.com",
-        "contactPhone": "Téléphone",
-        "contactPhonePlaceholder": "ex. +33 6 12 34 56 78",
-        "contactOrganization": "Organisation",
-        "contactOrganizationPlaceholder": "ex. Lee Labs",
-        "contactAddress": "Adresse",
-        "contactAddressPlaceholder": "ex. 123 Rue Principale, Paris",
-        "shareToSocial": "Partager sur les réseaux sociaux",
-        "generatedOn": "Généré le",
-        "preparedForTitle": "Préparé Pour"
       }
     },
     "tdee-calculator": {
@@ -45656,7 +45807,7 @@
       },
       "weather-forecast": {
         "version": "v1",
-        "description": "Référence technique de l'outil Prévisions Météo : comment les coordonnées d'une ville recherchée ou prédéfinie servent à récupérer les conditions actuelles et des prévisions sur 7 jours, comment les codes météo et unités bruts sont traduits pour l'affichage, les variables impliquées et les cas limites gérés.",
+        "description": "Référence technique de l'outil de prévisions météo : comment une ville de la liste intégrée (ou la position du visiteur) devient une prévision MET Norway, comment le ressenti, le point de rosée, le soleil et la Lune sont calculés localement, les variables et les cas limites traités.",
         "sectionFormula": "Formule principale",
         "sectionFlowchart": "Comment c'est calculé",
         "sectionAnatomy": "Anatomie d'une prévision journalière",
@@ -45673,25 +45824,25 @@
           "readTimeValue": "3 min"
         },
         "formula": {
-          "expression": "°F = °C × 9⁄5 + 32  |  °C = (°F − 32) × 5⁄9  |  mph = km/h ÷ 1,609344",
-          "note": "Ce sont les seules véritables formules arithmétiques de l'outil — tout le reste (choisir une ville, récupérer une prévision, catégoriser une condition) est une recherche de données ou une requête réseau, pas un calcul."
+          "expression": "Wind chill = 13.12 + 0.6215T − 11.37V^0.16 + 0.3965TV^0.16  |  Dew point Td = bγ ⁄ (a − γ), γ = ln(RH/100) + aT ⁄ (b + T)",
+          "note": "Le ressenti utilise le refroidissement éolien pour T ≤ 10 °C avec un vent supérieur à 4,8 km/h, l'indice de chaleur NWS pour T ≥ 26,7 °C et la température de l'air sinon. Lever, coucher du soleil et phase de la Lune sont aussi calculés localement, pas téléchargés."
         },
         "flowchart": {
-          "intro": "Seule la toute dernière étape implique de l'arithmétique — tout ce qui précède consiste à résoudre un emplacement et à récupérer des données.",
+          "intro": "La prévision est téléchargée une fois par lieu et mise en cache ; chaque valeur dérivée est ensuite calculée dans la page.",
           "steps": [
-            "Rechercher une ville par nom, ou choisir l'une des villes prioritaires intégrées",
-            "Résoudre la ville choisie en une paire latitude/longitude (les résultats de recherche incluent déjà les coordonnées ; les villes prioritaires les ont intégrées)",
-            "Récupérer les conditions actuelles et une prévision sur 7 jours pour ces coordonnées depuis l'API Open-Meteo",
-            "Associer le code météo numérique OMM renvoyé par l'API à l'une des catégories météo connues de l'outil (ciel dégagé, pluie, neige, orage, etc.), avec un repli vers 'inconnu' pour tout code absent de la table",
-            "Convertir les valeurs de température et de vitesse du vent dans le système d'unités choisi par le visiteur (métrique ou américain) avant d'afficher la carte des conditions actuelles et le panneau des 7 jours"
+            "Choisir une ville de la liste intégrée (ou autoriser la position du navigateur) pour obtenir latitude, longitude et fuseau horaire",
+            "Demander le Locationforecast de MET Norway pour ces coordonnées avec un User-Agent identifiant, en cache jusqu'à l'heure Expires de la réponse",
+            "Découper la prévision en pas horaires (environ 2,5 jours) et de 6 heures (jusqu'à environ 10 jours), puis les regrouper en jours locaux",
+            "Calculer localement le ressenti, le point de rosée, la tendance de pression, la force Beaufort, lever/coucher du soleil et la phase de la Lune",
+            "Convertir chaque valeur dans le système d'unités choisi (métrique ou US) avant de dessiner le tableau, le ciel et les graphiques"
           ],
-          "caption": "Seule la dernière étape implique de l'arithmétique — tout ce qui précède consiste à résoudre un emplacement et à récupérer des données, pas à calculer une valeur."
+          "caption": "Seule la deuxième étape utilise le réseau ; tout le reste est un calcul local sur la prévision en cache."
         },
         "anatomy": {
           "intro": "Une entrée de prévision pour un seul jour est une petite structure, pas un nombre unique — ceci compare deux de ses champs côte à côte pour un jour illustratif.",
           "labelHigh": "Maximale (°C)",
           "labelLow": "Minimale (°C)",
-          "caption": "Chaque jour de la prévision sur 7 jours possède sa propre température maximale et minimale, ainsi qu'une catégorie météo et une probabilité de précipitations — ceci montre uniquement l'écart de température pour un jour représentatif."
+          "caption": "Chaque jour de la prévision a son max et son min, son cumul de précipitations, son vent le plus fort et son pic d'UV par ciel clair ; ceci ne montre que l'amplitude thermique d'un jour représentatif."
         },
         "variablesColumns": {
           "symbol": "Symbole",
@@ -45700,59 +45851,59 @@
         },
         "variables": [
           {
-            "symbol": "latitude, longitude",
-            "meaning": "Les coordonnées de la ville sélectionnée, utilisées pour interroger l'API de prévision.",
-            "unit": "degrés décimaux"
+            "symbol": "lat, lon, zone",
+            "meaning": "Coordonnées du lieu (arrondies à 0,01°) et fuseau IANA utilisé pour les jours et heures locaux.",
+            "unit": "degrés"
           },
           {
-            "symbol": "weather_code",
-            "meaning": "Un code OMM numérique renvoyé par l'API pour les conditions actuelles ou prévues.",
+            "symbol": "symbol_code",
+            "meaning": "Code de conditions MET Norway (p. ex. partlycloudy_day), associé à une catégorie de l'outil.",
             "unit": "—"
           },
           {
             "symbol": "unitSystem",
-            "meaning": "Si la température et la vitesse du vent sont affichées en unités métriques (°C, km/h) ou américaines (°F, mph).",
+            "meaning": "Affichage en unités métriques (°C, km/h, hPa, mm) ou US (°F, mph, inHg, in).",
             "unit": "—"
           }
         ],
         "edgeCases": [
           {
-            "title": "Un code météo non reconnu se replie sur 'inconnu' plutôt que de planter",
-            "description": "La fonction de catégorie météo recherche le code numérique dans une table fixe couvrant les codes OMM réellement renvoyés par Open-Meteo ; tout code en dehors de cette table (changement d'API, valeur non documentée) se résout en catégorie 'inconnu' plutôt que de lever une erreur ou d'afficher une icône vide."
+            "title": "Un code inconnu devient « inconnu »",
+            "description": "metSymbolCategory retire le suffixe _day/_night et reconnaît les familles (pluie, neige, neige fondue, orage…) ; tout autre code devient « inconnu » au lieu de planter ou d'afficher une icône vide."
           },
           {
-            "title": "Sélectionner la ville initiale déjà chargée ne relance pas la récupération de la prévision",
-            "description": "Le suivi compare les coordonnées de la ville nouvellement sélectionnée à la ville initiale de la page et saute entièrement la requête en cas de correspondance — la prévision rendue côté serveur pour la ville de départ est réutilisée plutôt que redemandée une seconde fois."
+            "title": "Les requêtes répétées d'un même lieu réutilisent le cache",
+            "description": "Le serveur garde chaque réponse MET Norway jusqu'à son heure Expires, la revalide avec If-Modified-Since et limite les appels à 10 par seconde, la moitié de la limite de 20 par seconde de MET Norway."
           },
           {
-            "title": "Un échec de récupération de la prévision définit un état d'erreur visible, pas un affichage périmé silencieux",
-            "description": "Si la requête de prévision ne se résout pas avec succès, le suivi passe son statut à 'erreur' plutôt que de laisser la prévision de la ville précédente affichée sans explication — l'interface peut alors indiquer que les données de la nouvelle ville n'ont pas pu être chargées."
+            "title": "Un échec de mise à jour ne vide jamais la page",
+            "description": "Si MET Norway est injoignable, la dernière prévision en cache est servie ; à défaut, la carte de résultat affiche une erreur claire plutôt que d'anciens chiffres d'une autre ville."
           },
           {
-            "title": "La recherche de ville n'interroge l'API qu'à partir de deux caractères saisis",
-            "description": "L'effet de recherche s'arrête immédiatement pour une requête normalisée de moins de 2 caractères, évitant une requête réseau (et un ensemble de résultats vide ou bruyant) pour une seule frappe."
+            "title": "Jour et nuit polaires sans lever ni coucher",
+            "description": "Quand le Soleil ne franchit pas l'horizon, les lignes lever/coucher l'indiquent au lieu d'inventer une heure, et la frise de lumière est entièrement claire ou sombre."
           },
           {
-            "title": "Une valeur de température ou de vitesse du vent non finie est convertie en zéro plutôt qu'en NaN",
-            "description": "Toutes les fonctions de conversion de température et de vitesse du vent se protègent en vérifiant que la valeur est finie avant de convertir, si bien qu'une lecture erronée ou manquante de l'API s'affiche comme 0 plutôt que de propager 'NaN°' sur la page."
+            "title": "Un UV manquant est signalé, pas deviné",
+            "description": "Si la prévision n'a pas d'indice UV pour un lieu, la carte UV indique que la source ne le fournit pas au lieu d'afficher zéro."
           }
         ],
         "faq": [
           {
-            "question": "Pourquoi l'outil ne prend-il en charge que les systèmes d'unités métrique et américain, pas d'autres ?",
-            "answer": "La température (°C/°F) et la vitesse du vent (km/h/mph) sont les deux paires d'unités qui diffèrent réellement d'une région à l'autre dans les bulletins météo quotidiens ; toute autre valeur renvoyée par l'API, comme la probabilité de précipitations et l'humidité, est déjà un pourcentage et ne nécessite aucune conversion d'unité."
+            "question": "Pourquoi une liste de villes intégrée plutôt qu'une recherche de n'importe quelle ville ?",
+            "answer": "Une liste sélectionnée aux coordonnées fixes n'a pas besoin de service de géocodage externe : chaque recherche est instantanée et n'utilise que des sources aux conditions vérifiées. Vous pouvez aussi utiliser votre position avec le bouton de localisation."
           },
           {
             "question": "D'où viennent les icônes et catégories météo ?",
-            "answer": "Open-Meteo renvoie un code météo OMM (Organisation Météorologique Mondiale) numérique à la fois pour les conditions actuelles et pour chaque jour de prévision. L'outil associe ce code à l'une de ses propres catégories connues — ciel dégagé, pluie, neige, orage, etc. — plutôt que d'afficher le code numérique brut aux visiteurs."
+            "answer": "MET Norway renvoie un code comme « lightrainshowers_day » pour chaque période. L'outil l'associe à l'une de ses catégories — ciel dégagé, pluie, neige, orage, etc. — et dessine sa propre icône."
           },
           {
-            "question": "Pourquoi n'y a-t-il pas de section actualités ou alertes, contrairement aux outils Devises ou Crypto ?",
-            "answer": "Cet outil est délibérément limité aux conditions actuelles et à une prévision sur 7 jours provenant d'une source de données gratuite et sans clé unique (Open-Meteo). Les alertes météo sévères nécessiteraient un second fournisseur de données spécifique à la région, et ont été omises pour garder la source de données de l'outil simple et cohérente dans le monde entier."
+            "question": "D'où viennent les repères de séismes et de feux ?",
+            "answer": "Les séismes proviennent du flux public de l'Institut d'études géologiques des États-Unis (magnitude 4,5+, 7 derniers jours) ; feux, tempêtes et volcans, du service EONET de la NASA. Chaque repère renvoie à sa source d'origine et sert uniquement d'information."
           },
           {
-            "question": "Sélectionner une nouvelle ville déclenche-t-il toujours une nouvelle requête réseau ?",
-            "answer": "Seulement lorsque les coordonnées de la nouvelle ville diffèrent de la ville dont la prévision est déjà chargée — resélectionner la même ville de départ avec laquelle la page a été chargée réutilise la prévision déjà récupérée côté serveur, au lieu de la redemander."
+            "question": "Choisir une autre ville déclenche-t-il toujours une nouvelle requête réseau ?",
+            "answer": "La page interroge son propre serveur, qui répond depuis son cache tant que l'expiration fixée par MET Norway n'est pas atteinte. Resélectionner la ville affichée ne demande rien."
           }
         ]
       },

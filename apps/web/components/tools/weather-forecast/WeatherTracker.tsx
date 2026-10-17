@@ -1,117 +1,152 @@
 "use client";
-import { useEffect, useState, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
-import type { DigitStyle } from "@tooloralabs/core";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useLocale } from "next-intl";
+import { wxFindCity, type WeatherUnitSystem, type WxForecast } from "@tooloralabs/tools";
 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import CityPanel from "./CityPanel";
-import CurrentWeatherResult from "./CurrentWeatherResult";
-import SevenDayForecastPanel from "./SevenDayForecastPanel";
-import WeatherWeekChart from "./WeatherWeekChart";
-import WeatherHumidityGauge from "./WeatherHumidityGauge";
-import WeatherWindCompass from "./WeatherWindCompass";
-import WeatherUVIndexGauge from "./WeatherUVIndexGauge";
-import type { SelectedCity, WeatherSnapshot } from "./types";
+import AdSpace from "@/components/tool-ui/AdSpace";
+import { usePersistedList } from "@/lib/use-persisted-list";
+import WxInput, { cityPlace } from "./WxInput";
+import WxResult from "./WxResult";
+import WxWorldMap from "./WxWorldMap";
+import WxCredits from "./WxCredits";
+import { WxDailyCard, WxHourlyCard, WxHumidityCard, WxMoonCard, WxPressureCard, WxSunCard, WxUvCard, WxWindCard } from "./WxIndicators";
+import { makeWxFmt, useWeatherDerived, useWxT, type WxPlace } from "./wx";
 
-type WeatherTrackerProps = {
-  initialCity: SelectedCity;
-  initialSnapshot: WeatherSnapshot;
-  worldMap: ReactNode;
+type Props = {
+  initialCityId: string;
+  initialForecast: WxForecast | null;
+  /** Server render time, so the first client render matches the server HTML. */
+  renderedAt: number;
   education: ReactNode;
 };
 
-export default function WeatherTracker({ initialCity, initialSnapshot, worldMap, education }: WeatherTrackerProps) {
-  const tNav = useTranslations("tools.weather-forecast.nav");
-  const [selectedCity, setSelectedCity] = useState<SelectedCity>(initialCity);
-  const [snapshot, setSnapshot] = useState<WeatherSnapshot | null>(initialSnapshot);
-  const [status, setStatus] = useState<"loading" | "idle" | "error">("idle");
-  const [unitSystem, setUnitSystem] = useState<"metric" | "us">("metric");
-
-  const digitStyle: DigitStyle = "western";
-
+/** Ticks once a minute so "now" (current hour, sun position, moon) stays live. */
+function useMinuteClock(start: number) {
+  const [now, setNow] = useState(start);
   useEffect(() => {
-    if (selectedCity.latitude === initialCity.latitude && selectedCity.longitude === initialCity.longitude) {
-      return;
-    }
+    const tick = () => setNow(Date.now());
+    const first = setTimeout(tick, 0);
+    const id = setInterval(tick, 60_000);
+    return () => {
+      clearTimeout(first);
+      clearInterval(id);
+    };
+  }, []);
+  return now;
+}
 
+export default function WeatherTracker({ initialCityId, initialForecast, renderedAt, education }: Props) {
+  const t = useWxT();
+  const locale = useLocale();
+  const initialPlace = useMemo(() => cityPlace(wxFindCity(initialCityId)!, locale), [initialCityId, locale]);
+  const [place, setPlace] = useState<WxPlace>(initialPlace);
+  const [forecast, setForecast] = useState<WxForecast | null>(initialForecast);
+  const [status, setStatus] = useState<"idle" | "loading" | "error">(initialForecast ? "idle" : "loading");
+  const favourites = usePersistedList<{ id: string }>("tooloralabs:weather:favourites:v1", 20);
+  const unitPref = usePersistedList<{ id: string }>("tooloralabs:weather:units:v1", 1);
+  const units: WeatherUnitSystem = unitPref.items[0]?.id === "us" ? "us" : "metric";
+  const now = useMinuteClock(renderedAt);
+  const f = useMemo(() => makeWxFmt(locale, units), [locale, units]);
+  const d = useWeatherDerived(place, forecast, now);
+
+  const loaded = useRef<string | null>(initialForecast ? `${initialPlace.lat},${initialPlace.lon}` : null);
+  useEffect(() => {
+    const key = `${place.lat},${place.lon}`;
+    if (loaded.current === key) return;
     let cancelled = false;
-    async function load() {
-      setStatus("loading");
-      try {
-        const res = await fetch(`/api/weather/forecast?lat=${selectedCity.latitude}&lon=${selectedCity.longitude}`);
-        if (!res.ok) throw new Error("fetch_failed");
-        const json = (await res.json()) as WeatherSnapshot;
-        if (!cancelled) {
-          setSnapshot(json);
-          setStatus("idle");
-        }
-      } catch {
-        if (!cancelled) setStatus("error");
-      }
-    }
-
-    load();
+    const ctrl = new AbortController();
+    fetch(`/api/weather/forecast?lat=${place.lat}&lon=${place.lon}`, { signal: ctrl.signal })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("forecast"))))
+      .then((j: WxForecast) => {
+        if (cancelled) return;
+        loaded.current = key;
+        setForecast(j);
+        setStatus("idle");
+      })
+      .catch(() => !cancelled && setStatus("error"));
     return () => {
       cancelled = true;
+      ctrl.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCity.latitude, selectedCity.longitude]);
+  }, [place.lat, place.lon]);
+
+  const choose = useCallback((p: WxPlace) => {
+    if (loaded.current !== `${p.lat},${p.lon}`) setStatus("loading");
+    setPlace(p);
+  }, []);
+  const toggleFavourite = useCallback(
+    (id: string) => (favourites.items.some((x) => x.id === id) ? favourites.remove(id) : favourites.add({ id })),
+    [favourites],
+  );
+  const setUnits = useCallback((u: WeatherUnitSystem) => (u === "us" ? unitPref.add({ id: "us" }) : unitPref.clear()), [unitPref]);
 
   const navItems = [
-    { id: "tool", label: tNav("tool") },
-    { id: "forecast", label: tNav("forecast") },
-    { id: "world-map", label: tNav("worldMap") },
-    { id: "disasters", label: tNav("disasters") },
-    { id: "faq", label: tNav("faq") },
-    { id: "behind-the-tool", label: tNav("behindTheTool") },
-    { id: "notices", label: tNav("notices") },
+    { id: "tool", label: t("nav.tool") },
+    { id: "wx-hourly", label: t("nav.hourly") },
+    { id: "wx-daily", label: t("nav.daily") },
+    { id: "wx-map", label: t("nav.map") },
+    { id: "faq", label: t("nav.faq") },
+    { id: "behind-the-tool", label: t("nav.behind") },
+    { id: "notices", label: t("nav.notices") },
   ];
+
+  const props = d ? { d, f } : null;
 
   return (
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<CityPanel selectedCity={selectedCity} onSelectCity={setSelectedCity} />}
-          result={
-            <CurrentWeatherResult
-              cityLabel={selectedCity.label}
-              snapshot={snapshot}
-              status={status}
-              unitSystem={unitSystem}
-              onUnitSystemChange={setUnitSystem}
-              digitStyle={digitStyle}
+          stretchInput
+          input={
+            <WxInput
+              place={place}
+              onPlace={choose}
+              units={units}
+              onUnits={setUnits}
+              favourites={favourites.items.map((x) => x.id)}
+              onToggleFavourite={toggleFavourite}
             />
+          }
+          result={
+            <div className="flex flex-col gap-3 lg:flex-1">
+              {props ? (
+                <WxResult {...props} status={status} />
+              ) : (
+                <p role="status" className="rounded-xl border border-zinc-200 p-6 text-center text-sm dark:border-zinc-700">
+                  {status === "error" ? t("result.error") : t("result.loading")}
+                </p>
+              )}
+              <WxCredits />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="weather-forecast" category="weather" />}
           secondary={
             <div className="flex flex-col gap-6">
-              <SectionNav items={navItems} />
               <ViewDocsLink slug="weather-forecast" />
-              {snapshot && (
-                <>
-                  <SevenDayForecastPanel daily={snapshot.daily} unitSystem={unitSystem} digitStyle={digitStyle} />
-                  <WeatherWeekChart daily={snapshot.daily} unitSystem={unitSystem} digitStyle={digitStyle} />
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <WeatherHumidityGauge relativeHumidity={snapshot.current.relativeHumidity} digitStyle={digitStyle} />
-                    <WeatherWindCompass
-                      windSpeedKmh={snapshot.current.windSpeedKmh}
-                      windDirectionDeg={snapshot.current.windDirectionDeg}
-                      unitSystem={unitSystem}
-                      digitStyle={digitStyle}
-                    />
-                  </div>
-                  <WeatherUVIndexGauge uvIndexMax={snapshot.daily[0]?.uvIndexMax ?? 0} digitStyle={digitStyle} />
-                </>
-              )}
+              <SectionNav items={navItems} />
+              {props && <WxHourlyCard {...props} />}
             </div>
           }
         />
       </div>
 
-      {worldMap}
+      {props && (
+        <section className="mt-8 grid grid-cols-1 items-start gap-6">
+          <WxDailyCard {...props} />
+          <WxWorldMap {...props} />
+          <WxWindCard {...props} />
+          <WxPressureCard {...props} />
+          <AdSpace variant="leaderboard" />
+          <WxHumidityCard {...props} />
+          <WxUvCard {...props} />
+          <WxSunCard {...props} />
+          <WxMoonCard {...props} />
+        </section>
+      )}
 
       {education}
     </>
