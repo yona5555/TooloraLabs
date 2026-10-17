@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import {
   civilToUtcMs,
+  wtLocalizedCityName,
   formatOffset,
   parseCivilDate,
   utcMsToCivil,
@@ -270,7 +271,7 @@ export function makeFmt(locale: string) {
     hhmm: (m: number) => toHHMM(((Math.round(m) % 1440) + 1440) % 1440),
     num: (n: number) => num.format(n),
     signed: (n: number) => `${n > 0 ? "+" : n < 0 ? "−" : "±"}${num.format(Math.abs(n))}`,
-    city: (c: WtCity) => (locale === "ar" ? c.name.ar : c.name.en),
+    city: (c: WtCity) => wtLocalizedCityName(c.name.en, c.name.ar, locale),
     country: (c: WtCity) => region?.of(c.country) ?? c.country,
   };
 }

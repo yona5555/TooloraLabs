@@ -125,3 +125,4 @@ export * from "./DateTimeCore";
 export * from "./WorldTimeCities";
 export * from "./WorldTimePlanner";
 export * from "./WorldTimeSolar";
+export * from "./WorldTimeCityNames";
