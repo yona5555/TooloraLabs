@@ -43,7 +43,9 @@ export default function SectionCard({
         </div>
       )}
 
-      <div className={bodyClassName}>{children}</div>
+      <div data-card-body className={bodyClassName}>
+        {children}
+      </div>
     </div>
   );
 }

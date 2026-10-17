@@ -227,6 +227,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
       <div
         ref={resultRef}
         data-tool-result
+        data-preview="result"
         className={`min-w-0 lg:col-start-2 lg:row-start-1 ${rowMinClass} ${stretchResult ? "lg:self-stretch" : ""}`}
         style={rowMinStyle}
       >

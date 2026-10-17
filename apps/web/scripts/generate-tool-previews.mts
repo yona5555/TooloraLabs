@@ -1,5 +1,9 @@
-// Tool-card preview images: the REAL top interface (input column + result column) of every tool,
-// in ar/en × light/dark, saved as ~640px WebP to public/tool-previews/{ar|en}/{light|dark}/{slug}.webp.
+// Tool-card preview images: the visual part of every tool's RESULT card (its drawing / chart / output,
+// without the card's header bar and without the inputs), cropped to 4:3 so it reads at card size,
+// in ar/en × light/dark, saved as 640×480 WebP to public/tool-previews/{ar|en}/{light|dark}/{slug}.webp.
+// The capture area is the shared result column marked data-preview="result" (ToolAboveFold); inside it
+// the visual is [data-preview-visual] if a tool marks one, else the drawing part, else the largest
+// canvas/SVG, else the card body.
 // These are generated site assets, not screenshots for review.
 // Usage (prod or dev server running on 3001): npm run previews [-- slug ...]
 // Env: BASE (default http://localhost:3001), RETRIES (default 3).
@@ -23,6 +27,7 @@ const variants = [
   { locale: "en", theme: "dark" },
 ] as const;
 const WIDTH = 640;
+const HEIGHT = 480;
 
 async function capture(page: Page, slug: string, locale: string, theme: string): Promise<string> {
   const url = `${base}/${locale}/tools/${slug}`;
@@ -51,28 +56,69 @@ async function capture(page: Page, slug: string, locale: string, theme: string):
     for (const sel of ["header", "footer", "[data-ad-space]", "[class*='AdSpace']", "[aria-label*='cookie' i]", "[id*='cookie' i]"]) {
       document.querySelectorAll<HTMLElement>(sel).forEach((el) => (el.style.visibility = "hidden"));
     }
-    const resultBox = document.querySelector<HTMLElement>("[data-tool-result]")!;
-    const grid = resultBox.parentElement!;
-    // Related-tools sidebar + ads: the grid's out-of-flow third column.
-    [...grid.children].forEach((c) => {
-      const el = c as HTMLElement;
-      if (el !== resultBox && el.className.includes("lg:absolute")) el.style.visibility = "hidden";
-    });
     document.querySelectorAll<HTMLElement>("ins, iframe, [data-ad]").forEach((el) => (el.style.visibility = "hidden"));
-    const input = resultBox.previousElementSibling as HTMLElement | null;
-    const boxes = [resultBox, input].filter(Boolean).map((e) => e!.getBoundingClientRect());
-    const left = Math.min(...boxes.map((b) => b.left));
-    const right = Math.max(...boxes.map((b) => b.right));
-    const top = Math.min(...boxes.map((b) => b.top)) + window.scrollY;
-    const bottom = Math.max(...boxes.map((b) => b.bottom)) + window.scrollY;
-    return { x: Math.max(0, left - 8), y: Math.max(0, top - 8), width: right - left + 16, height: Math.min(bottom - top + 16, 1400) };
+    const root = document.querySelector<HTMLElement>("[data-preview='result']") ?? document.querySelector<HTMLElement>("[data-tool-result]")!;
+    const big = (el: Element) => {
+      const r = el.getBoundingClientRect();
+      return r.width >= 160 && r.height >= 110 && getComputedStyle(el).visibility !== "hidden" ? r.width * r.height : 0;
+    };
+    const pick = (sel: string) =>
+      [...root.querySelectorAll(sel)].map((el) => ({ el, a: big(el) })).filter((c) => c.a > 0).sort((a, b) => b.a - a.a)[0]?.el;
+    const body = root.querySelector("[data-card-body]") ?? root;
+    const visual = pick("[data-preview-visual]") ?? pick("[data-part='drawing']") ?? pick("canvas, svg") ?? body;
+    // The drawing part also holds its caption/hint lines: crop to the drawing itself when it has one.
+    const inner = visual.matches("[data-part='drawing']") ? (visual.firstElementChild ?? visual) : visual;
+    const v = inner.getBoundingClientRect();
+    const b = body.getBoundingClientRect();
+    const r = root.getBoundingClientRect();
+    // Bounds: the result card below its header bar.
+    const bound = { left: r.left, right: r.right, top: Math.max(r.top, b.top), bottom: r.bottom };
+    const pad = 8;
+    let x0 = v.left - pad, x1 = v.right + pad, y0 = v.top - pad, y1 = v.bottom + pad;
+    const ratio = 4 / 3;
+    let pad43: string | null = null;
+    const grow = (a0: number, a1: number, len: number, lo: number, hi: number): [number, number] => {
+      const c = (a0 + a1) / 2;
+      let s0 = c - len / 2, s1 = c + len / 2;
+      if (s0 < lo) [s0, s1] = [lo, lo + len];
+      if (s1 > hi) [s0, s1] = [hi - len, hi];
+      return [Math.max(lo, s0), Math.min(hi, s1)];
+    };
+    // A small visual (e.g. a drop-zone graphic) takes in more of its card so the crop stays readable.
+    const minW = Math.min(360, bound.right - bound.left);
+    if (x1 - x0 < minW) [x0, x1] = grow(x0, x1, minW, bound.left, bound.right);
+    const w = x1 - x0, h = y1 - y0;
+    if (w / h > ratio) {
+      // Too wide: take more height from the card, else trim the sides.
+      if (w / ratio <= bound.bottom - bound.top) [y0, y1] = grow(y0, y1, w / ratio, bound.top, bound.bottom);
+      else if (h * ratio >= minW) [x0, x1] = grow(x0, x1, h * ratio, x0, x1);
+      else {
+        // A short card (e.g. a file tool before any file): keep the whole body, padded to 4:3 later.
+        [x0, x1, y0, y1] = [bound.left, bound.right, bound.top, bound.bottom];
+        // Resolve any CSS colour (lab(), oklch()…) to rgb through a 1px canvas, for sharp.
+        const cx = document.createElement("canvas").getContext("2d")!;
+        cx.fillStyle = getComputedStyle(root.querySelector("[data-bp-panel]") ?? document.body).backgroundColor;
+        cx.fillRect(0, 0, 1, 1);
+        const [r8, g8, b8] = cx.getImageData(0, 0, 1, 1).data;
+        pad43 = `rgb(${r8}, ${g8}, ${b8})`;
+      }
+    } else {
+      // Too tall: take more width from the card, else trim to the top of the visual.
+      if (h * ratio <= bound.right - bound.left) [x0, x1] = grow(x0, x1, h * ratio, bound.left, bound.right);
+      else {
+        [x0, x1] = [bound.left, bound.right];
+        y1 = y0 + (x1 - x0) / ratio;
+      }
+    }
+    return { x: Math.max(0, x0), y: Math.max(0, y0 + window.scrollY), width: x1 - x0, height: y1 - y0, pad43 };
   });
-  if (clip.width < 300 || clip.height < 150) throw new Error(`top section too small (${Math.round(clip.width)}×${Math.round(clip.height)})`);
-  const png = await page.screenshot({ clip, fullPage: true, animations: "disabled" });
+  if (clip.width < 240 || clip.height < (clip.pad43 ? 100 : 160)) throw new Error(`result visual too small (${Math.round(clip.width)}×${Math.round(clip.height)})`);
+  const { pad43, ...rect } = clip;
+  const png = await page.screenshot({ clip: rect, fullPage: true, animations: "disabled" });
   const dir = path.join(outRoot, locale, theme);
   mkdirSync(dir, { recursive: true });
   const file = path.join(dir, `${slug}.webp`);
-  await sharp(png).resize({ width: WIDTH }).webp({ quality: 78, effort: 5 }).toFile(file);
+  await sharp(png).resize({ width: WIDTH, height: HEIGHT, fit: pad43 ? "contain" : "cover", background: pad43 ?? undefined }).webp({ quality: 78, effort: 5 }).toFile(file);
   return file;
 }
 

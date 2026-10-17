@@ -1,18 +1,15 @@
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
-import Scene3D from "@/components/tool-ui/three/Scene3D";
+import HeartViewer from "./heart/HeartViewer";
 import TargetHeartRateShareExportModal from "./TargetHeartRateShareExportModal";
 import type { HRSnapshot } from "./HRLiveContext";
 import { BELOW_COLOR, ZONES, tanaka, targetAt, zoneColor, zoneIndex } from "./hr";
 import type { TargetHeartRateError } from "./types";
 import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
 
-// three/drei live only in this dynamically imported chunk, never in the page chunk.
-const HeartScene3D = dynamic(() => import("./HeartScene3D"), { ssr: false });
 
 type Props = {
   snap: HRSnapshot;
@@ -107,13 +104,11 @@ export default function TargetHeartRateResult({ snap, error, intensity, digitSty
       hint={tv("hint")}
       caption={tv("caption", { bpm: fmt(target), pct: fmt(intensity), zone: zoneName })}
       drawing={
-        <Scene3D className="min-h-0!" camera={[0.9, 0.5, 4.2]}>
-          <HeartScene3D
-            bpm={target}
-            color={zi < 0 ? BELOW_COLOR : color}
-            labels={{ bpm: `${fmt(target)} ${bpm}`, pct: `${fmt(intensity)}% · ${fmt(pctMax)}% HRmax`, max: `HRmax ${fmt(max)}` }}
-          />
-        </Scene3D>
+        <HeartViewer
+          bpm={target}
+          color={zi < 0 ? BELOW_COLOR : color}
+          labels={{ bpm: `${fmt(target)} ${bpm}`, pct: `${fmt(intensity)}% · ${fmt(pctMax)}% HRmax`, max: `HRmax ${fmt(max)}` }}
+        />
       }
     />
   );
