@@ -235,7 +235,7 @@ export default function MarketChart({
         </div>
       </div>
 
-      <div className={`relative mt-4 min-w-0 ${isFullscreen ? "flex-1" : ""}`} dir="ltr" style={isFullscreen ? undefined : { height: CHART_HEIGHT }}>
+      <div className={`relative mt-4 min-w-0 ${isFullscreen ? "flex-1" : ""}`} dir="ltr" data-preview="visual" data-preview-hero data-preview-ready={state.status === "ready" ? "true" : "false"} style={isFullscreen ? undefined : { height: CHART_HEIGHT }}>
         {state.status === "ready" && <div ref={containerRef} data-testid="candle-chart" data-mode={mode} className="absolute inset-0" />}
         {state.status === "ready" && shown && (
           <div

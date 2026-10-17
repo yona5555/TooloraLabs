@@ -38,7 +38,7 @@ type Props = {
 export default function IndicatorWithTable({ indicator, workedExampleTitle, rows, className = "" }: Props) {
   return (
     <div className={`flex flex-col gap-6 lg:flex-row lg:items-center ${className}`}>
-      <div className="min-w-0 shrink-0">{indicator}</div>
+      <div data-preview="visual" className="min-w-0 shrink-0">{indicator}</div>
       <div className="min-w-[200px] flex-1 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
         <p className="text-xs font-semibold tracking-wide text-zinc-400 uppercase dark:text-zinc-500">{workedExampleTitle}</p>
         <dl className="mt-3 space-y-2 text-sm">

@@ -58,7 +58,7 @@ export default function CompositionRing() {
   const repeated = Math.max(0, tokens - stats.uniqueWords);
 
   return (
-    <div className="flex shrink-0 flex-col items-center gap-3 sm:w-[184px]">
+    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-3 sm:w-[184px]">
       <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
         <Ring r={OUTER_R} width={18} segs={COMPOSITION.map((c) => ({ value: comp[c.key], stroke: c.stroke }))} />
         <Ring

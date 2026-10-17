@@ -23,7 +23,7 @@ export default function UnitDivergenceDiagram({ chartLabel, caption }: UnitDiver
   const height = PAD * 2 + ROWS.length * (BAR_HEIGHT + GAP) - GAP;
 
   return (
-    <figure className="my-2">
+    <figure data-preview="visual" data-preview-hero className="my-2">
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={chartLabel} className="h-auto w-full text-current" style={{ minWidth: 340 }}>
           {ROWS.map((row, i) => {

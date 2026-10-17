@@ -85,7 +85,7 @@ export function ViewportScene({ render3d, fallback, className = "", testId }: { 
   const on3d = show3d && ready;
   if (!show3d && ready) setReady(false);
   return (
-    <div ref={ref} data-ph-scene={testId} data-ph-mode={on3d ? "3d" : "2d"} className={`relative flex w-full flex-col ${className}`}>
+    <div ref={ref} data-ph-scene={testId} data-ph-mode={on3d ? "3d" : "2d"} data-preview="visual" data-preview-ready={on3d || !gl ? "true" : "false"} className={`relative flex w-full flex-col ${className}`}>
       <div className="flex w-full flex-1 flex-col" hidden={on3d}>
         {fallback}
       </div>

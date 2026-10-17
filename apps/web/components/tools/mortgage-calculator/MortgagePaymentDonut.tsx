@@ -34,7 +34,7 @@ export default function MortgagePaymentDonut({ segments, centerValue, centerLabe
     );
 
   return (
-    <div dir="ltr" className="flex flex-col items-center">
+    <div dir="ltr" data-preview="visual" className="flex flex-col items-center">
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44">
         <circle
           cx={center}

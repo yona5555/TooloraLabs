@@ -124,7 +124,7 @@ export default function ScientificUnitCircleCard({
       </div>
 
       {/* Desktop: the svg is taken out of flow (absolute) so it never grows the row; it scales to the freed height. */}
-      <div className="relative mt-2 w-full lg:min-h-[300px] lg:flex-1">
+      <div data-preview="visual" data-preview-hero className="relative mt-2 w-full lg:min-h-[300px] lg:flex-1">
         <svg
           viewBox={`0 0 ${VB_W} ${VB_H}`}
           role="img"

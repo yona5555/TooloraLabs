@@ -55,7 +55,7 @@ export default function QRResult({ svg, payload, error, logoDataUrl, logoMode }:
     >
       <div className="flex flex-col items-center gap-4">
         <div className="flex items-center justify-center gap-4">
-          <div className="flex h-56 w-56 items-center justify-center rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-700 [&_svg]:h-full [&_svg]:w-full">
+          <div data-preview="visual" className="flex h-56 w-56 items-center justify-center rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-700 [&_svg]:h-full [&_svg]:w-full">
             {renderedSvg ? (
               <div className="h-full w-full" dangerouslySetInnerHTML={{ __html: renderedSvg }} />
             ) : (

@@ -69,7 +69,7 @@ export function Drawing({
   children: ReactNode;
 }) {
   return (
-    <div ref={boxRef} className="relative w-full flex-1" style={{ minHeight: hMin }}>
+    <div ref={boxRef} data-preview="visual" className="relative w-full flex-1" style={{ minHeight: hMin }}>
       <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
         {children}
       </svg>

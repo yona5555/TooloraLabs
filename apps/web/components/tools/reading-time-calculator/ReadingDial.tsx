@@ -25,7 +25,7 @@ export default function ReadingDial() {
   const longest = paragraphs.reduce((b, p) => (p.words > (b?.words ?? -1) ? p : b), paragraphs[0]);
 
   return (
-    <div className="flex shrink-0 flex-col items-center gap-3 sm:w-[192px]">
+    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-3 sm:w-[192px]">
       <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
         <circle cx={C} cy={C} r={R + 14} className="fill-zinc-50 stroke-zinc-200 dark:fill-zinc-800/60 dark:stroke-zinc-700" />
         {Array.from({ length: ticks }, (_, i) => {

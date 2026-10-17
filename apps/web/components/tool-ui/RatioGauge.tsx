@@ -80,7 +80,7 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
   };
 
   return (
-    <div dir="ltr" className="flex flex-col items-center">
+    <div dir="ltr" data-preview="visual" className="flex flex-col items-center">
       <svg viewBox={`0 0 ${SIZE_W} ${SIZE_H}`} role="img" aria-label={`${valueLabel}${caption ? ` (${caption})` : ""}`} className="w-56">
         <circle cx={CX} cy={CY} r={R} fill="none" strokeWidth={STROKE} strokeDasharray={`${HALF_CIRCUMFERENCE} ${FULL_CIRCUMFERENCE}`} transform={`rotate(180 ${CX} ${CY})`} className="stroke-zinc-100 dark:stroke-zinc-800" />
         {arcs.map((arc) => (

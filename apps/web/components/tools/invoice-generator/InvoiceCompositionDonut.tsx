@@ -35,7 +35,7 @@ export default function InvoiceCompositionDonut({ segments, centerValue, centerL
     );
 
   return (
-    <div dir="ltr" className="flex flex-col items-center">
+    <div dir="ltr" data-preview="visual" className="flex flex-col items-center">
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44">
         <circle cx={center} cy={center} r={RADIUS} fill="none" strokeWidth={STROKE} className="stroke-zinc-100 dark:stroke-zinc-800" />
         {arcs.map((arc) => (

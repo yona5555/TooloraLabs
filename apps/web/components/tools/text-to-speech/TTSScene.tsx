@@ -77,7 +77,7 @@ export default function TTSScene({ chunks, rate, onRate }: { chunks: string[]; r
   return (
     <div data-ph-scene-block className="flex flex-1 flex-col gap-3">
       {/* Grows with the card's spare height (rows get taller), so the column ends flush (§41). */}
-      <div ref={box} dir="ltr" className="relative min-h-[300px] w-full flex-1" data-testid="tts-hero-drawing">
+      <div ref={box} dir="ltr" data-preview="visual" className="relative min-h-[300px] w-full flex-1" data-testid="tts-hero-drawing">
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
           <text x={X0} y={16} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
             {t("queue", { n: chunks.length })}

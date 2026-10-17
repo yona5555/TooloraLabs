@@ -47,7 +47,7 @@ export default function SGScene({ issues, checkedLen, sourceLen, words, totalWor
 
   return (
     <div data-ph-scene-block className="flex flex-1 flex-col gap-3">
-      <div ref={box} dir="ltr" className="relative min-h-[260px] w-full flex-1" data-testid="sg-hero-drawing">
+      <div ref={box} dir="ltr" data-preview="visual" className="relative min-h-[260px] w-full flex-1" data-testid="sg-hero-drawing">
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
           <text x={12} y={16} fontSize={11} fontWeight={700} style={{ fill: "var(--ph-ink-muted)" }}>
             {t("axis", { c: checkedLen, t: sourceLen })}

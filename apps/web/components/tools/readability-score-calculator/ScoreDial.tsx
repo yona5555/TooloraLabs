@@ -61,7 +61,7 @@ export default function ScoreDial() {
   const counted = counts.reduce((a, b) => a + b, 0);
 
   return (
-    <div className="flex shrink-0 flex-col items-center gap-3 sm:w-[184px]">
+    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-3 sm:w-[184px]">
       <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
         {EASE_BANDS.map((b) => (
           <path key={b.key} d={arc(b.from, b.to, OUTER_R)} fill="none" stroke={b.color} strokeWidth={12} opacity={b === band ? 1 : 0.35} style={{ transition: "opacity 300ms" }} />

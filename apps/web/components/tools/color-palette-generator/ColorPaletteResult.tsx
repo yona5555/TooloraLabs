@@ -53,7 +53,7 @@ export default function ColorPaletteResult({ palette }: ColorPaletteResultProps)
       }
     >
       {palette.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div data-preview="visual" className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {palette.map((color) => (
             <Swatch key={color.hex + color.hsl} color={color} />
           ))}

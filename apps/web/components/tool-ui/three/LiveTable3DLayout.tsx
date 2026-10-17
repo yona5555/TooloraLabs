@@ -131,7 +131,7 @@ export default function LiveTable3DLayout({
         </div>
         </div>
         <div className="order-first flex h-[320px] flex-col @3xl:order-none @3xl:h-auto @3xl:min-h-[320px]">
-          <div className="min-h-0 flex-1">{drawing}</div>
+          <div data-preview="visual" className="min-h-0 flex-1">{drawing}</div>
           {caption ? (
             <p className="mt-1.5 text-center text-xs leading-5 text-zinc-600 dark:text-zinc-300">{caption}</p>
           ) : null}

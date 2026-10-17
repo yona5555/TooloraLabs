@@ -41,7 +41,7 @@ export default function BarcodeResult({ segments, displayText, quietZoneModules,
         </div>
       ) : segments ? (
         <div className="flex flex-col items-center gap-4">
-          <div ref={containerRef} dir="ltr" className="w-full rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700">
+          <div ref={containerRef} dir="ltr" data-preview="visual" className="w-full rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700">
             <BarcodeSVG segments={segments} displayText={displayText} quietZoneModules={quietZoneModules} logoDataUrl={logoDataUrl} logoPlacement={logoPlacement} />
           </div>
           <div className="flex w-full items-center gap-2">

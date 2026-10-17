@@ -32,7 +32,7 @@ const JSON_X = 260;
 
 export default function CsvStructureDiagram({ caption }: CsvStructureDiagramProps) {
   return (
-    <figure className="my-2">
+    <figure data-preview="visual" data-preview-hero className="my-2">
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 420 }}>
           {/* CSV grid */}

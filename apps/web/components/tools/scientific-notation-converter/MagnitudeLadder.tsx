@@ -38,7 +38,7 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
   const ratioText = ratio >= 0.01 && ratio < 1000 ? coef(ratio, 3) : `${coef(ratio / 10 ** Math.floor(Math.log10(ratio)), 3)}×10${sup(Math.floor(Math.log10(ratio)))}`;
 
   return (
-    <div data-testid="ladder">
+    <div data-preview="visual" data-testid="ladder">
       <svg
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}

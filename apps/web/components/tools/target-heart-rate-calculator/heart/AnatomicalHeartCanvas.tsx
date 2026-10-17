@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, OrbitControls } from "@react-three/drei";
+import PreviewReady from "@/components/tool-ui/three/PreviewReady";
 import { beat, createHeartObject } from "./heartModel";
 
 /**
@@ -60,6 +61,7 @@ export default function AnatomicalHeartCanvas({ bpm, running, reduced, dark }: A
         <Lightformer form="rect" intensity={0.6} position={[0, -4, 0]} rotation-x={-Math.PI / 2} scale={[6, 6, 1]} />
       </Environment>
       <Heart bpm={bpm} running={running} reduced={reduced} />
+      <PreviewReady />
       <OrbitControls makeDefault enablePan={false} enableZoom zoomSpeed={0.6} minDistance={3.2} maxDistance={9} rotateSpeed={0.8} />
     </Canvas>
   );

@@ -16,7 +16,7 @@ export default function JSONGrammarDiagram({ valueLabel, caption }: JSONGrammarD
   const gap = (WIDTH - TYPES.length * BOX_W) / (TYPES.length + 1);
 
   return (
-    <figure className="my-2">
+    <figure data-preview="visual" data-preview-hero className="my-2">
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 380 }}>
           <rect x={WIDTH / 2 - 50} y={TOP_Y} width={100} height={BOX_H} rx={6} fill="none" stroke="currentColor" strokeWidth={1.5} />

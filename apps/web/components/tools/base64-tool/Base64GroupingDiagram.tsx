@@ -24,7 +24,7 @@ export default function Base64GroupingDiagram({ byteLabel, sextetLabel, caption 
   const sextetXs = [0, 1, 2, 3].map((i) => sextetsStartX + i * (SEXTET_W + sextetGap));
 
   return (
-    <figure className="my-2">
+    <figure data-preview="visual" data-preview-hero className="my-2">
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 420 }}>
           {byteXs.map((x, i) => (

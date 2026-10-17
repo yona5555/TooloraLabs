@@ -137,7 +137,7 @@ export function CompositionDonut({ overview, f }: IndicatorProps) {
           : null
       }
     >
-      <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center" data-testid="ind-donut">
+      <div data-preview="visual" data-preview-hero className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center" data-testid="ind-donut">
         <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("donut.title")} className="shrink-0">
           {ring(per.map((r) => r.total), 82, 22, INVOICE_COLORS)}
           {ring([overview.net, overview.tax], 56, 18, [NET, TAX])}

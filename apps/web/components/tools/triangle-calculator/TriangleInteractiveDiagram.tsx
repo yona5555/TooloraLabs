@@ -278,6 +278,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
       <div
         dir="ltr"
         aria-label={t("ariaLabel")}
+        data-preview="visual"
         className="triangle-mafs w-full overflow-hidden rounded-xl"
         onPointerDown={handleDragStart}
         onPointerUp={handleDragEnd}

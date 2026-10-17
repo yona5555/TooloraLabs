@@ -21,7 +21,7 @@ export default function DedupeDiagram({ inputLabel, hashSetLabel, outputLabel, c
   const kept: { line: string; row: number }[] = [];
 
   return (
-    <figure className="my-2">
+    <figure data-preview="visual" data-preview-hero className="my-2">
       <div dir="ltr" className="overflow-x-auto">
         <svg viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 420 }}>
           <text x={COL1_X} y={14} fontSize={10} fontWeight={700} fill="currentColor" opacity={0.7}>
