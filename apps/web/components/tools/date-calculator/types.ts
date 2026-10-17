@@ -1,22 +1,11 @@
-export type {
-  DateCalculatorMode,
-  DateUnit,
-  DateOperation,
-  DateCalculatorError,
-  DateDifferenceResult,
-  DateCalculatorOutput as DateResult,
-} from "@tooloralabs/tools";
-
-export const DATE_MODES = ["difference", "addSubtract"] as const;
-export const DATE_UNITS = ["days", "weeks", "months", "years"] as const;
-
+/** Worked add/subtract examples used by the education widget (DateAddSubtractTimelineDiagram). */
 export type DateScenario = {
   key: string;
-  mode: (typeof DATE_MODES)[number];
+  mode: "difference" | "addSubtract";
   startDaysAgo: number;
   endDaysAgo: number;
   amount: string;
-  unit: (typeof DATE_UNITS)[number];
+  unit: "days" | "weeks" | "months" | "years";
   operation: "add" | "subtract";
 };
 

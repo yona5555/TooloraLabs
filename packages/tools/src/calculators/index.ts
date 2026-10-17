@@ -101,6 +101,7 @@ export * from "./PregnancyCalculator";
 export * from "./MacroCalculator";
 export * from "./BMRCalculator";
 export * from "./DateCalculator";
+export * from "./DateCalculatorEngine";
 export * from "./TimeCalculator";
 export * from "./FuelCostCalculator";
 export * from "./BatchInvoiceCalculator";
