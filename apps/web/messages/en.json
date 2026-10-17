@@ -35333,31 +35333,6 @@
         "faq": "FAQ",
         "behindTheTool": "Behind the Tool"
       },
-      "form": {
-        "inputTitle": "Your Event",
-        "eventNameLabel": "Event Name (Optional)",
-        "eventNamePlaceholder": "e.g. New Year's Eve",
-        "dateLabel": "Date",
-        "timeLabel": "Time",
-        "scenarioLabel": "Quick-fill a worked example",
-        "clear": "Clear"
-      },
-      "result": {
-        "heading": "Countdown",
-        "noTarget": "Choose a date to start the countdown.",
-        "invalidDate": "Enter a valid date and time.",
-        "countingDownTo": "Counting down to your event",
-        "elapsedSince": "Time elapsed since your event",
-        "days": "Days",
-        "hours": "Hours",
-        "minutes": "Minutes",
-        "seconds": "Seconds",
-        "sentence": "{event} is {days} days, {hours} hours, and {minutes} minutes away."
-      },
-      "quickReference": {
-        "title": "Good to Know",
-        "intro": "The countdown updates automatically every second, right in your browser — no need to refresh the page."
-      },
       "education": {
         "intro": {
           "title": "Understanding This Countdown",
@@ -35407,11 +35382,11 @@
             },
             {
               "question": "What time zone does this use?",
-              "answer": "The countdown uses your device's local time zone for both the target date/time you enter and the current time it compares against, so the countdown is always accurate to wherever you personally are, not a fixed reference time zone."
+              "answer": "Each countdown has its own time zone. The date and time you enter are read as wall-clock time in that zone (with daylight saving time handled from the time-zone database), and the result also shows the same moment in your own time zone and in UTC."
             },
             {
-              "question": "Why does the countdown briefly show 0 when the page first loads?",
-              "answer": "The very first render happens before your browser's clock has been read, to avoid a mismatch between how the page is initially generated and what your browser actually displays. This resolves itself within a second as the live clock takes over, which is a standard technique for anything showing the current time on the web."
+              "question": "Can I count down to Ramadan or Eid?",
+              "answer": "Yes. The Islamic presets compute the next start of Ramadan, Eid al-Fitr, the Day of Arafah, Eid al-Adha and the Islamic New Year from the Umm al-Qura calendar. Official dates depend on moon sighting and can differ by a day."
             }
           ]
         },
@@ -35481,24 +35456,6 @@
         "productLaunch": "Product Launch",
         "weddingDay": "Wedding Day"
       },
-      "shareExport": {
-        "triggerLabel": "Share / Export",
-        "modalTitle": "Share or Export This Result",
-        "contactSectionTitle": "Prepared For (optional)",
-        "contactName": "Name",
-        "contactNamePlaceholder": "e.g. Jordan Lee",
-        "contactEmail": "Email",
-        "contactEmailPlaceholder": "e.g. jordan@example.com",
-        "contactPhone": "Phone",
-        "contactPhonePlaceholder": "e.g. +1 555 123 4567",
-        "contactOrganization": "Organization",
-        "contactOrganizationPlaceholder": "e.g. Lee Labs",
-        "contactAddress": "Address",
-        "contactAddressPlaceholder": "e.g. 123 Main St, Springfield",
-        "shareToSocial": "Share to social media",
-        "generatedOn": "Generated on",
-        "preparedForTitle": "Prepared For"
-      },
       "unitsDiagram": {
         "title": "One Day, Broken Down",
         "intro": "Whatever unit your countdown is measured in, it all breaks down from the same starting point: one day.",
@@ -35521,22 +35478,215 @@
           "m90": "Almost there"
         }
       },
-      "weekdayDiagram": {
-        "caption": "Day of the week your target date falls on",
-        "days": {
-          "0": "Sun",
-          "1": "Mon",
-          "2": "Tue",
-          "3": "Wed",
-          "4": "Thu",
-          "5": "Fri",
-          "6": "Sat"
+      "pro": {
+        "nav": {
+          "indicators": "Live indicators"
+        },
+        "input": {
+          "title": "Your Event",
+          "presetsHijri": "Islamic occasions (Umm al-Qura)",
+          "presetsGregorian": "Gregorian dates",
+          "name": "Event name",
+          "namePlaceholder": "e.g. Product launch",
+          "calendar": "Enter the date in",
+          "cal": {
+            "gregorian": "Gregorian",
+            "hijri": "Hijri"
+          },
+          "date": "Date",
+          "hijriDay": "Day",
+          "hijriMonth": "Hijri month",
+          "hijriYear": "Year",
+          "time": "Time",
+          "invalid": "This date does not exist. Check the day, month and year.",
+          "zone": "Event time zone",
+          "yourZone": "your zone",
+          "yearly": "Repeats every year",
+          "leap": "Feb 29 in common years",
+          "leapRule": {
+            "feb28": "Feb 28",
+            "mar1": "Mar 1"
+          },
+          "start": "Progress start",
+          "weekend": "Weekend (business days)",
+          "moonNote": "Islamic dates follow the Umm al-Qura calendar. Official dates depend on moon sighting and may shift by a day.",
+          "save": "Save countdown",
+          "saved": "Saved",
+          "ics": "Calendar .ics",
+          "copy": "Copy result",
+          "copied": "Copied",
+          "share": "Copy share link",
+          "linkCopied": "Link copied",
+          "reset": "Reset to sample"
+        },
+        "weekend": {
+          "fri-sat": "Fri–Sat",
+          "sat-sun": "Sat–Sun"
+        },
+        "presets": {
+          "ramadan": "Start of Ramadan",
+          "eidFitr": "Eid al-Fitr",
+          "arafah": "Day of Arafah",
+          "eidAdha": "Eid al-Adha",
+          "hijriNewYear": "Islamic New Year",
+          "newYear": "New Year's Day",
+          "endOfMonth": "End of this month",
+          "saudiNationalDay": "Saudi National Day"
+        },
+        "saved": {
+          "title": "Saved Countdowns",
+          "untitled": "My event",
+          "empty": "Save a countdown to keep it here. It stays in this browser only.",
+          "daysTotal": "{n} days",
+          "ago": "ago"
+        },
+        "milestones": {
+          "d100Short": "−100d",
+          "d30Short": "−30d",
+          "d7Short": "−7d",
+          "d1Short": "−1d",
+          "h1Short": "−1h"
+        },
+        "result": {
+          "title": "Live Countdown",
+          "countingDown": "Counting down to",
+          "countingUp": "Time since",
+          "days": "Days",
+          "hours": "Hours",
+          "minutes": "Minutes",
+          "seconds": "Seconds",
+          "colItem": "Item",
+          "colCalc": "Calculation",
+          "colValue": "Value",
+          "groupTarget": "Event instant",
+          "groupRemaining": "Time remaining",
+          "groupElapsed": "Time elapsed",
+          "groupDays": "Calendar and business days",
+          "groupProgress": "Progress",
+          "eventLocal": "Event time ({zone})",
+          "offset": "Zone offset at the event",
+          "dst": "Daylight saving time",
+          "dstOn": "DST in effect",
+          "dstOff": "Standard time",
+          "status": "Wall-time check",
+          "statusOk": "Exists once",
+          "statusGap": "Skipped by DST, moved to {time}",
+          "statusOverlap": "Occurs twice, earlier one used",
+          "utc": "UTC instant",
+          "yourLocal": "Your local time ({zone})",
+          "weekday": "Weekday",
+          "hijri": "Hijri date (Umm al-Qura)",
+          "rolled": "Next yearly occurrence",
+          "rolledNote": "The entered date has passed",
+          "adjusted": "Moved to the last day of a shorter month",
+          "breakdown": "Days · h:m:s",
+          "weeks": "Weeks + days",
+          "totalHours": "Total hours",
+          "totalMinutes": "Total minutes",
+          "totalSeconds": "Total seconds",
+          "calendarDays": "Calendar days left",
+          "fromToday": "From {date} (today) to the event day",
+          "businessDays": "Business days left ({weekend} weekend)",
+          "weekendDays": "Weekend days left",
+          "altBusiness": "With a {weekend} weekend",
+          "start": "Progress start",
+          "elapsed": "Share of the wait elapsed",
+          "dstChange": "Clock change before the event",
+          "dstChangeNone": "None",
+          "dialCaption": "Outer arc: share of the wait elapsed since {start}, with the 100, 30, 7 and 1-day milestones. Inner ring: seconds.",
+          "gapNotice": "This wall time does not exist in the chosen zone: clocks skip it when daylight saving time starts. The countdown uses the first valid moment after it.",
+          "overlapNotice": "This wall time happens twice in the chosen zone because clocks go back. The countdown uses the earlier one.",
+          "sentenceFuture": "{event}: {days} days and {hms} left ({business} business days). {date}, {zone}.",
+          "sentencePast": "{event}: {days} days and {hms} have passed since {date}, {zone}."
+        },
+        "ind": {
+          "worked": "Worked example",
+          "rings": {
+            "title": "Ticking Rings",
+            "intro": "Four rings tick live: seconds, minutes and hours of the remainder, and the share of the wait already behind you.",
+            "seconds": "Seconds",
+            "minutes": "Minutes",
+            "hours": "Hours",
+            "wait": "Wait elapsed",
+            "days": "Whole days"
+          },
+          "timeline": {
+            "title": "Countdown Timeline",
+            "intro": "The road from your progress start to the event, with fixed milestones. Drag the slider to preview any moment on the way.",
+            "slider": "Preview a moment",
+            "now": "Now",
+            "previewDate": "Preview moment",
+            "remaining": "Left at that moment",
+            "event": "Event",
+            "business": "Business days left then",
+            "passedStations": "Milestones passed",
+            "elapsed": "Share elapsed",
+            "start": "Start"
+          },
+          "split": {
+            "title": "Business Days vs Weekend",
+            "intro": "The days left split into workdays and weekend days. Compare both weekend conventions and tap a bar to use it.",
+            "selected": "selected",
+            "compare": "compare",
+            "business": "Business days",
+            "weekend": "Weekend days",
+            "calendar": "Calendar days left",
+            "calendarNote": "Today counted, event day not",
+            "share": "Workday share",
+            "difference": "Difference between weekends"
+          },
+          "weekdays": {
+            "title": "Weekdays Left",
+            "intro": "How many Sundays, Mondays and so on remain before the event day. Weekend days are shown in amber.",
+            "weekend": "Weekend",
+            "eventDay": "Event weekday",
+            "eventDot": "Green dot",
+            "total": "Total days"
+          },
+          "log": {
+            "title": "The Wait on a Log Scale",
+            "intro": "The same remaining time in seven units, on a logarithmic axis where each step is ten times larger.",
+            "orders": "Orders of magnitude (seconds)",
+            "u": {
+              "seconds": "Seconds",
+              "minutes": "Minutes",
+              "hours": "Hours",
+              "days": "Days",
+              "weeks": "Weeks",
+              "months": "Months",
+              "years": "Years"
+            }
+          },
+          "zones": {
+            "title": "One Instant, Three Clocks",
+            "intro": "The event moment on the event's clock, on your clock and in UTC. Offsets come from the time-zone database for that exact date.",
+            "gap": "Skipped by DST"
+          },
+          "hijri": {
+            "title": "The Event in the Hijri Year",
+            "intro": "The Umm al-Qura year of the event, month by month (29 or 30 days each), with the event and today marked.",
+            "event": "Event (Hijri)",
+            "month": "Month · days",
+            "monthNote": "Umm al-Qura month length",
+            "dayOfYear": "Day of the Hijri year",
+            "today": "Today (Hijri)",
+            "yearStart": "1 Muharram (Gregorian)",
+            "yearLength": "Days in this Hijri year",
+            "yearNote": "354 or 355 days",
+            "todayMark": "Today"
+          },
+          "ranked": {
+            "title": "Upcoming Events Ranked",
+            "intro": "Your event next to the upcoming calendar occasions and your saved countdowns, nearest first. Tap one to open it.",
+            "rank": "Your event's rank",
+            "nearest": "Nearest",
+            "farthest": "Farthest shown",
+            "days": "days",
+            "saved": "Saved countdowns",
+            "legend": "Colors",
+            "legendValue": "Blue: this event · Amber: calendar · Green: saved"
+          }
         }
-      },
-      "weeksAheadDiagram": {
-        "weeksLabel": "weeks",
-        "extraDaysLabel": "days",
-        "caption": "Time remaining, in weeks"
       }
     }
   },

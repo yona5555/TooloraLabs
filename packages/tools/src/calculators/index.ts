@@ -118,6 +118,7 @@ export * from "./MultiplicationTableCalculator";
 export * from "./MultiplicationTableMath";
 export * from "./SpeechWordCountCalculator";
 export * from "./CountdownCalculator";
+export * from "./CountdownEvent";
 export * from "./SolidGeometry";
 export * from "./PlaneShapeGeometry";
 export * from "./CitationFormats";

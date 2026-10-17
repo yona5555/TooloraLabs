@@ -35333,31 +35333,6 @@
         "faq": "FAQ",
         "behindTheTool": "Hintergrund"
       },
-      "form": {
-        "inputTitle": "Dein Ereignis",
-        "eventNameLabel": "Ereignisname (Optional)",
-        "eventNamePlaceholder": "z.B. Silvester",
-        "dateLabel": "Datum",
-        "timeLabel": "Uhrzeit",
-        "scenarioLabel": "Musterbeispiel schnell ausfüllen",
-        "clear": "Zurücksetzen"
-      },
-      "result": {
-        "heading": "Countdown",
-        "noTarget": "Wähle ein Datum, um den Countdown zu starten.",
-        "invalidDate": "Gib ein gültiges Datum und eine gültige Uhrzeit ein.",
-        "countingDownTo": "Countdown zu deinem Ereignis",
-        "elapsedSince": "Verstrichene Zeit seit deinem Ereignis",
-        "days": "Tage",
-        "hours": "Stunden",
-        "minutes": "Minuten",
-        "seconds": "Sekunden",
-        "sentence": "{event} ist noch {days} Tage, {hours} Stunden und {minutes} Minuten entfernt."
-      },
-      "quickReference": {
-        "title": "Gut zu wissen",
-        "intro": "Der Countdown aktualisiert sich automatisch jede Sekunde, direkt in deinem Browser — kein Neuladen der Seite nötig."
-      },
       "education": {
         "intro": {
           "title": "Diesen Countdown verstehen",
@@ -35407,11 +35382,11 @@
             },
             {
               "question": "Welche Zeitzone verwendet dieses Tool?",
-              "answer": "Der Countdown verwendet die lokale Zeitzone deines Geräts sowohl für das von dir eingegebene Zieldatum/die Zieluhrzeit als auch für die aktuelle Zeit, mit der er verglichen wird, sodass der Countdown immer genau ist, egal wo du dich persönlich befindest, und nicht auf eine feste Referenzzeitzone bezogen ist."
+              "answer": "Jeder Countdown hat seine eigene Zeitzone. Datum und Uhrzeit werden als Ortszeit in dieser Zone gelesen (die Sommerzeit stammt aus der Zeitzonendatenbank), und das Ergebnis zeigt denselben Zeitpunkt auch in Ihrer Zeitzone und in UTC."
             },
             {
-              "question": "Warum zeigt der Countdown beim ersten Laden der Seite kurz null an?",
-              "answer": "Die allererste Darstellung erfolgt, bevor die Uhr deines Browsers gelesen wurde, um eine Diskrepanz zwischen der ersten Erzeugung der Seite und dem, was dein Browser tatsächlich anzeigt, zu vermeiden. Dies löst sich innerhalb einer Sekunde auf, sobald die Live-Uhr übernimmt, was eine Standardtechnik für alles ist, was die aktuelle Zeit im Web anzeigt."
+              "question": "Kann ich bis Ramadan oder Eid herunterzählen?",
+              "answer": "Ja. Die islamischen Vorlagen berechnen den nächsten Beginn des Ramadan, Eid al-Fitr, den Tag von Arafat, Eid al-Adha und das islamische Neujahr nach dem Umm-al-Qura-Kalender. Offizielle Termine hängen von der Mondsichtung ab und können um einen Tag abweichen."
             }
           ]
         },
@@ -35481,24 +35456,6 @@
         "productLaunch": "Produkteinführung",
         "weddingDay": "Hochzeitstag"
       },
-      "shareExport": {
-        "triggerLabel": "Teilen / Exportieren",
-        "modalTitle": "Dieses Ergebnis teilen oder exportieren",
-        "contactSectionTitle": "Erstellt für (optional)",
-        "contactName": "Name",
-        "contactNamePlaceholder": "z.B. Jordan Lee",
-        "contactEmail": "E-Mail",
-        "contactEmailPlaceholder": "z.B. jordan@example.com",
-        "contactPhone": "Telefon",
-        "contactPhonePlaceholder": "z.B. +49 151 12345678",
-        "contactOrganization": "Organisation",
-        "contactOrganizationPlaceholder": "z.B. Lee Labs",
-        "contactAddress": "Adresse",
-        "contactAddressPlaceholder": "z.B. Hauptstraße 123, Berlin",
-        "shareToSocial": "In sozialen Medien teilen",
-        "generatedOn": "Erstellt am",
-        "preparedForTitle": "Erstellt für"
-      },
       "unitsDiagram": {
         "title": "Ein Tag, Aufgeschlüsselt",
         "intro": "Unabhängig davon, in welcher Einheit Ihr Countdown gemessen wird, geht alles vom selben Ausgangspunkt aus: einem Tag.",
@@ -35521,22 +35478,215 @@
           "m90": "Fast geschafft"
         }
       },
-      "weekdayDiagram": {
-        "caption": "Wochentag, auf den Ihr Zieldatum fällt",
-        "days": {
-          "0": "So",
-          "1": "Mo",
-          "2": "Di",
-          "3": "Mi",
-          "4": "Do",
-          "5": "Fr",
-          "6": "Sa"
+      "pro": {
+        "nav": {
+          "indicators": "Live-Indikatoren"
+        },
+        "input": {
+          "title": "Ihr Ereignis",
+          "presetsHijri": "Islamische Anlässe (Umm al-Qura)",
+          "presetsGregorian": "Gregorianische Daten",
+          "name": "Name des Ereignisses",
+          "namePlaceholder": "z. B. Produktstart",
+          "calendar": "Datum eingeben im",
+          "cal": {
+            "gregorian": "Gregorianisch",
+            "hijri": "Hidschri"
+          },
+          "date": "Datum",
+          "hijriDay": "Tag",
+          "hijriMonth": "Hidschri-Monat",
+          "hijriYear": "Jahr",
+          "time": "Uhrzeit",
+          "invalid": "Dieses Datum gibt es nicht. Prüfen Sie Tag, Monat und Jahr.",
+          "zone": "Zeitzone des Ereignisses",
+          "yourZone": "Ihre Zone",
+          "yearly": "Wiederholt sich jährlich",
+          "leap": "29. Februar in Gemeinjahren",
+          "leapRule": {
+            "feb28": "28. Feb.",
+            "mar1": "1. März"
+          },
+          "start": "Fortschrittsbeginn",
+          "weekend": "Wochenende (Arbeitstage)",
+          "moonNote": "Islamische Daten folgen dem Umm-al-Qura-Kalender. Offizielle Termine hängen von der Mondsichtung ab und können sich um einen Tag verschieben.",
+          "save": "Countdown speichern",
+          "saved": "Gespeichert",
+          "ics": "Kalender .ics",
+          "copy": "Ergebnis kopieren",
+          "copied": "Kopiert",
+          "share": "Link kopieren",
+          "linkCopied": "Link kopiert",
+          "reset": "Zurück zum Beispiel"
+        },
+        "weekend": {
+          "fri-sat": "Fr–Sa",
+          "sat-sun": "Sa–So"
+        },
+        "presets": {
+          "ramadan": "Beginn des Ramadan",
+          "eidFitr": "Eid al-Fitr",
+          "arafah": "Tag von Arafat",
+          "eidAdha": "Eid al-Adha",
+          "hijriNewYear": "Islamisches Neujahr",
+          "newYear": "Neujahr",
+          "endOfMonth": "Ende dieses Monats",
+          "saudiNationalDay": "Saudischer Nationalfeiertag"
+        },
+        "saved": {
+          "title": "Gespeicherte Countdowns",
+          "untitled": "Mein Ereignis",
+          "empty": "Speichern Sie einen Countdown, um ihn hier zu behalten. Er bleibt nur in diesem Browser.",
+          "daysTotal": "{n} Tage",
+          "ago": "her"
+        },
+        "milestones": {
+          "d100Short": "−100T",
+          "d30Short": "−30T",
+          "d7Short": "−7T",
+          "d1Short": "−1T",
+          "h1Short": "−1Std"
+        },
+        "result": {
+          "title": "Live-Countdown",
+          "countingDown": "Countdown bis",
+          "countingUp": "Zeit seit",
+          "days": "Tage",
+          "hours": "Stunden",
+          "minutes": "Minuten",
+          "seconds": "Sekunden",
+          "colItem": "Größe",
+          "colCalc": "Rechnung",
+          "colValue": "Wert",
+          "groupTarget": "Zeitpunkt des Ereignisses",
+          "groupRemaining": "Verbleibende Zeit",
+          "groupElapsed": "Vergangene Zeit",
+          "groupDays": "Kalender- und Arbeitstage",
+          "groupProgress": "Fortschritt",
+          "eventLocal": "Ereigniszeit ({zone})",
+          "offset": "Zeitverschiebung beim Ereignis",
+          "dst": "Sommerzeit",
+          "dstOn": "Sommerzeit",
+          "dstOff": "Normalzeit",
+          "status": "Prüfung der Ortszeit",
+          "statusOk": "Gibt es einmal",
+          "statusGap": "Durch Zeitumstellung übersprungen, verschoben auf {time}",
+          "statusOverlap": "Kommt zweimal vor, die frühere gilt",
+          "utc": "UTC-Zeitpunkt",
+          "yourLocal": "Ihre Ortszeit ({zone})",
+          "weekday": "Wochentag",
+          "hijri": "Hidschri-Datum (Umm al-Qura)",
+          "rolled": "Nächster jährlicher Termin",
+          "rolledNote": "Das eingegebene Datum ist vorbei",
+          "adjusted": "Auf den letzten Tag eines kürzeren Monats verschoben",
+          "breakdown": "Tage · h:m:s",
+          "weeks": "Wochen + Tage",
+          "totalHours": "Stunden gesamt",
+          "totalMinutes": "Minuten gesamt",
+          "totalSeconds": "Sekunden gesamt",
+          "calendarDays": "Verbleibende Kalendertage",
+          "fromToday": "Vom {date} (heute) bis zum Ereignistag",
+          "businessDays": "Verbleibende Arbeitstage (Wochenende {weekend})",
+          "weekendDays": "Verbleibende Wochenendtage",
+          "altBusiness": "Mit Wochenende {weekend}",
+          "start": "Fortschrittsbeginn",
+          "elapsed": "Vergangener Anteil der Wartezeit",
+          "dstChange": "Zeitumstellung vor dem Ereignis",
+          "dstChangeNone": "Keine",
+          "dialCaption": "Äußerer Bogen: vergangener Anteil der Wartezeit seit {start}, mit den Meilensteinen 100, 30, 7 und 1 Tag. Innerer Ring: Sekunden.",
+          "gapNotice": "Diese Ortszeit gibt es in der gewählten Zone nicht: Die Uhren überspringen sie beim Beginn der Sommerzeit. Der Countdown nutzt den ersten gültigen Zeitpunkt danach.",
+          "overlapNotice": "Diese Ortszeit kommt in der gewählten Zone zweimal vor, weil die Uhren zurückgestellt werden. Der Countdown nutzt die frühere.",
+          "sentenceFuture": "{event}: noch {days} Tage und {hms} ({business} Arbeitstage). {date}, {zone}.",
+          "sentencePast": "{event}: {days} Tage und {hms} sind seit {date}, {zone} vergangen."
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "rings": {
+            "title": "Tickende Ringe",
+            "intro": "Vier Ringe laufen live: Sekunden, Minuten und Stunden der Restzeit sowie der bereits vergangene Anteil der Wartezeit.",
+            "seconds": "Sekunden",
+            "minutes": "Minuten",
+            "hours": "Stunden",
+            "wait": "Wartezeit vergangen",
+            "days": "Ganze Tage"
+          },
+          "timeline": {
+            "title": "Countdown-Zeitleiste",
+            "intro": "Der Weg vom Fortschrittsbeginn bis zum Ereignis mit festen Meilensteinen. Ziehen Sie den Regler, um jeden Zeitpunkt dazwischen anzusehen.",
+            "slider": "Zeitpunkt ansehen",
+            "now": "Jetzt",
+            "previewDate": "Vorschau-Zeitpunkt",
+            "remaining": "Rest zu diesem Zeitpunkt",
+            "event": "Ereignis",
+            "business": "Dann verbleibende Arbeitstage",
+            "passedStations": "Erreichte Meilensteine",
+            "elapsed": "Vergangener Anteil",
+            "start": "Beginn"
+          },
+          "split": {
+            "title": "Arbeitstage und Wochenende",
+            "intro": "Die verbleibenden Tage aufgeteilt in Arbeits- und Wochenendtage. Vergleichen Sie beide Wochenendregeln und tippen Sie auf einen Balken, um ihn zu übernehmen.",
+            "selected": "gewählt",
+            "compare": "Vergleich",
+            "business": "Arbeitstage",
+            "weekend": "Wochenendtage",
+            "calendar": "Verbleibende Kalendertage",
+            "calendarNote": "Heute zählt, der Ereignistag nicht",
+            "share": "Anteil Arbeitstage",
+            "difference": "Unterschied der Wochenenden"
+          },
+          "weekdays": {
+            "title": "Verbleibende Wochentage",
+            "intro": "Wie viele Sonntage, Montage usw. vor dem Ereignistag noch bleiben. Wochenendtage sind bernsteinfarben.",
+            "weekend": "Wochenende",
+            "eventDay": "Wochentag des Ereignisses",
+            "eventDot": "Grüner Punkt",
+            "total": "Tage gesamt"
+          },
+          "log": {
+            "title": "Die Wartezeit auf logarithmischer Skala",
+            "intro": "Dieselbe Restzeit in sieben Einheiten auf einer logarithmischen Achse, bei der jeder Schritt zehnmal größer ist.",
+            "orders": "Größenordnungen (Sekunden)",
+            "u": {
+              "seconds": "Sekunden",
+              "minutes": "Minuten",
+              "hours": "Stunden",
+              "days": "Tage",
+              "weeks": "Wochen",
+              "months": "Monate",
+              "years": "Jahre"
+            }
+          },
+          "zones": {
+            "title": "Ein Zeitpunkt, drei Uhren",
+            "intro": "Der Ereigniszeitpunkt auf der Uhr des Ereignisses, auf Ihrer Uhr und in UTC. Die Verschiebungen stammen aus der Zeitzonendatenbank für genau dieses Datum.",
+            "gap": "Durch Zeitumstellung übersprungen"
+          },
+          "hijri": {
+            "title": "Das Ereignis im Hidschri-Jahr",
+            "intro": "Das Umm-al-Qura-Jahr des Ereignisses Monat für Monat (je 29 oder 30 Tage), mit Ereignis und heutigem Tag markiert.",
+            "event": "Ereignis (Hidschri)",
+            "month": "Monat · Tage",
+            "monthNote": "Monatslänge nach Umm al-Qura",
+            "dayOfYear": "Tag des Hidschri-Jahres",
+            "today": "Heute (Hidschri)",
+            "yearStart": "1. Muharram (gregorianisch)",
+            "yearLength": "Tage in diesem Hidschri-Jahr",
+            "yearNote": "354 oder 355 Tage",
+            "todayMark": "Heute"
+          },
+          "ranked": {
+            "title": "Kommende Ereignisse nach Rang",
+            "intro": "Ihr Ereignis neben den kommenden Kalenderanlässen und Ihren gespeicherten Countdowns, das nächste zuerst. Tippen Sie auf einen Eintrag, um ihn zu öffnen.",
+            "rank": "Rang Ihres Ereignisses",
+            "nearest": "Nächstes",
+            "farthest": "Fernstes angezeigt",
+            "days": "Tage",
+            "saved": "Gespeicherte Countdowns",
+            "legend": "Farben",
+            "legendValue": "Blau: dieses Ereignis · Bernstein: Kalender · Grün: gespeichert"
+          }
         }
-      },
-      "weeksAheadDiagram": {
-        "weeksLabel": "Wochen",
-        "extraDaysLabel": "Tage",
-        "caption": "Verbleibende Zeit, in Wochen"
       }
     }
   },

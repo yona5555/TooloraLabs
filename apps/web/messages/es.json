@@ -35333,31 +35333,6 @@
         "faq": "Preguntas frecuentes",
         "behindTheTool": "Detrás de la herramienta"
       },
-      "form": {
-        "inputTitle": "Tu Evento",
-        "eventNameLabel": "Nombre del Evento (Opcional)",
-        "eventNamePlaceholder": "p. ej. Nochevieja",
-        "dateLabel": "Fecha",
-        "timeLabel": "Hora",
-        "scenarioLabel": "Rellenar rápido un ejemplo resuelto",
-        "clear": "Borrar"
-      },
-      "result": {
-        "heading": "Cuenta Regresiva",
-        "noTarget": "Elige una fecha para comenzar la cuenta regresiva.",
-        "invalidDate": "Introduce una fecha y hora válidas.",
-        "countingDownTo": "Cuenta regresiva para tu evento",
-        "elapsedSince": "Tiempo transcurrido desde tu evento",
-        "days": "Días",
-        "hours": "Horas",
-        "minutes": "Minutos",
-        "seconds": "Segundos",
-        "sentence": "Faltan {days} días, {hours} horas y {minutes} minutos para {event}."
-      },
-      "quickReference": {
-        "title": "Bueno Saber",
-        "intro": "La cuenta regresiva se actualiza automáticamente cada segundo, directamente en tu navegador —sin necesidad de actualizar la página."
-      },
       "education": {
         "intro": {
           "title": "Entender Esta Cuenta Regresiva",
@@ -35407,11 +35382,11 @@
             },
             {
               "question": "¿Qué zona horaria usa esto?",
-              "answer": "La cuenta regresiva usa la zona horaria local de tu dispositivo tanto para la fecha/hora objetivo que introduces como para la hora actual con la que se compara, por lo que la cuenta regresiva siempre es precisa para donde tú personalmente estés, no una zona horaria de referencia fija."
+              "answer": "Cada cuenta atrás tiene su propia zona horaria. La fecha y la hora que introduces se leen como hora local de esa zona (con el horario de verano tomado de la base de datos de zonas horarias), y el resultado muestra también el mismo instante en tu zona y en UTC."
             },
             {
-              "question": "¿Por qué la cuenta regresiva muestra brevemente 0 cuando la página se carga por primera vez?",
-              "answer": "La primerísima renderización ocurre antes de que se haya leído el reloj de tu navegador, para evitar una discrepancia entre cómo se genera inicialmente la página y lo que tu navegador realmente muestra. Esto se resuelve en un segundo cuando el reloj en vivo toma el control, lo cual es una técnica estándar para cualquier cosa que muestre la hora actual en la web."
+              "question": "¿Puedo hacer una cuenta atrás para el Ramadán o el Eid?",
+              "answer": "Sí. Los atajos islámicos calculan el próximo inicio del Ramadán, Eid al-Fitr, el Día de Arafat, Eid al-Adha y el Año Nuevo islámico con el calendario Umm al-Qura. Las fechas oficiales dependen del avistamiento de la luna y pueden variar un día."
             }
           ]
         },
@@ -35481,24 +35456,6 @@
         "productLaunch": "Lanzamiento de producto",
         "weddingDay": "Día de la boda"
       },
-      "shareExport": {
-        "triggerLabel": "Compartir / Exportar",
-        "modalTitle": "Compartir o Exportar Este Resultado",
-        "contactSectionTitle": "Preparado Para (opcional)",
-        "contactName": "Nombre",
-        "contactNamePlaceholder": "p. ej. Jordan Lee",
-        "contactEmail": "Correo electrónico",
-        "contactEmailPlaceholder": "p. ej. jordan@example.com",
-        "contactPhone": "Teléfono",
-        "contactPhonePlaceholder": "p. ej. +34 600 123 456",
-        "contactOrganization": "Organización",
-        "contactOrganizationPlaceholder": "p. ej. Lee Labs",
-        "contactAddress": "Dirección",
-        "contactAddressPlaceholder": "p. ej. Calle Mayor 123, Madrid",
-        "shareToSocial": "Compartir en redes sociales",
-        "generatedOn": "Generado el",
-        "preparedForTitle": "Preparado Para"
-      },
       "unitsDiagram": {
         "title": "Un Día, Desglosado",
         "intro": "Sea cual sea la unidad en que se mide tu cuenta regresiva, todo parte del mismo punto de partida: un día.",
@@ -35521,22 +35478,215 @@
           "m90": "Casi llegando"
         }
       },
-      "weekdayDiagram": {
-        "caption": "Día de la semana en que cae tu fecha objetivo",
-        "days": {
-          "0": "Dom",
-          "1": "Lun",
-          "2": "Mar",
-          "3": "Mié",
-          "4": "Jue",
-          "5": "Vie",
-          "6": "Sáb"
+      "pro": {
+        "nav": {
+          "indicators": "Indicadores en vivo"
+        },
+        "input": {
+          "title": "Tu evento",
+          "presetsHijri": "Fechas islámicas (Umm al-Qura)",
+          "presetsGregorian": "Fechas gregorianas",
+          "name": "Nombre del evento",
+          "namePlaceholder": "p. ej. Lanzamiento del producto",
+          "calendar": "Introducir la fecha en",
+          "cal": {
+            "gregorian": "Gregoriano",
+            "hijri": "Hégira"
+          },
+          "date": "Fecha",
+          "hijriDay": "Día",
+          "hijriMonth": "Mes hégira",
+          "hijriYear": "Año",
+          "time": "Hora",
+          "invalid": "Esta fecha no existe. Revisa el día, el mes y el año.",
+          "zone": "Zona horaria del evento",
+          "yourZone": "tu zona",
+          "yearly": "Se repite cada año",
+          "leap": "29 de febrero en años comunes",
+          "leapRule": {
+            "feb28": "28 feb",
+            "mar1": "1 mar"
+          },
+          "start": "Inicio del progreso",
+          "weekend": "Fin de semana (días hábiles)",
+          "moonNote": "Las fechas islámicas siguen el calendario Umm al-Qura. Las fechas oficiales dependen del avistamiento de la luna y pueden variar un día.",
+          "save": "Guardar cuenta atrás",
+          "saved": "Guardado",
+          "ics": "Calendario .ics",
+          "copy": "Copiar resultado",
+          "copied": "Copiado",
+          "share": "Copiar enlace",
+          "linkCopied": "Enlace copiado",
+          "reset": "Volver al ejemplo"
+        },
+        "weekend": {
+          "fri-sat": "Vie–Sáb",
+          "sat-sun": "Sáb–Dom"
+        },
+        "presets": {
+          "ramadan": "Inicio del Ramadán",
+          "eidFitr": "Eid al-Fitr",
+          "arafah": "Día de Arafat",
+          "eidAdha": "Eid al-Adha",
+          "hijriNewYear": "Año Nuevo islámico",
+          "newYear": "Año Nuevo",
+          "endOfMonth": "Fin de este mes",
+          "saudiNationalDay": "Día Nacional saudí"
+        },
+        "saved": {
+          "title": "Cuentas atrás guardadas",
+          "untitled": "Mi evento",
+          "empty": "Guarda una cuenta atrás para tenerla aquí. Solo se guarda en este navegador.",
+          "daysTotal": "{n} días",
+          "ago": "atrás"
+        },
+        "milestones": {
+          "d100Short": "−100d",
+          "d30Short": "−30d",
+          "d7Short": "−7d",
+          "d1Short": "−1d",
+          "h1Short": "−1h"
+        },
+        "result": {
+          "title": "Cuenta atrás en vivo",
+          "countingDown": "Cuenta atrás para",
+          "countingUp": "Tiempo desde",
+          "days": "Días",
+          "hours": "Horas",
+          "minutes": "Minutos",
+          "seconds": "Segundos",
+          "colItem": "Concepto",
+          "colCalc": "Cálculo",
+          "colValue": "Valor",
+          "groupTarget": "Instante del evento",
+          "groupRemaining": "Tiempo restante",
+          "groupElapsed": "Tiempo transcurrido",
+          "groupDays": "Días naturales y hábiles",
+          "groupProgress": "Progreso",
+          "eventLocal": "Hora del evento ({zone})",
+          "offset": "Desfase horario en el evento",
+          "dst": "Horario de verano",
+          "dstOn": "Horario de verano",
+          "dstOff": "Horario estándar",
+          "status": "Comprobación de la hora local",
+          "statusOk": "Existe una vez",
+          "statusGap": "Saltada por el cambio de hora, movida a {time}",
+          "statusOverlap": "Ocurre dos veces, se usa la primera",
+          "utc": "Instante UTC",
+          "yourLocal": "Tu hora local ({zone})",
+          "weekday": "Día de la semana",
+          "hijri": "Fecha hégira (Umm al-Qura)",
+          "rolled": "Próxima repetición anual",
+          "rolledNote": "La fecha introducida ya pasó",
+          "adjusted": "Movida al último día de un mes más corto",
+          "breakdown": "Días · h:m:s",
+          "weeks": "Semanas + días",
+          "totalHours": "Horas totales",
+          "totalMinutes": "Minutos totales",
+          "totalSeconds": "Segundos totales",
+          "calendarDays": "Días naturales restantes",
+          "fromToday": "Desde {date} (hoy) hasta el día del evento",
+          "businessDays": "Días hábiles restantes (fin de semana {weekend})",
+          "weekendDays": "Días de fin de semana restantes",
+          "altBusiness": "Con fin de semana {weekend}",
+          "start": "Inicio del progreso",
+          "elapsed": "Parte de la espera transcurrida",
+          "dstChange": "Cambio de hora antes del evento",
+          "dstChangeNone": "Ninguno",
+          "dialCaption": "Arco exterior: parte de la espera transcurrida desde {start}, con los hitos de 100, 30, 7 y 1 día. Anillo interior: segundos.",
+          "gapNotice": "Esta hora local no existe en la zona elegida: los relojes la saltan al empezar el horario de verano. La cuenta atrás usa el primer momento válido después.",
+          "overlapNotice": "Esta hora local ocurre dos veces en la zona elegida porque los relojes se atrasan. La cuenta atrás usa la primera.",
+          "sentenceFuture": "{event}: faltan {days} días y {hms} ({business} días hábiles). {date}, {zone}.",
+          "sentencePast": "{event}: han pasado {days} días y {hms} desde {date}, {zone}."
+        },
+        "ind": {
+          "worked": "Ejemplo resuelto",
+          "rings": {
+            "title": "Anillos en marcha",
+            "intro": "Cuatro anillos avanzan en vivo: segundos, minutos y horas del tiempo restante, y la parte de la espera ya recorrida.",
+            "seconds": "Segundos",
+            "minutes": "Minutos",
+            "hours": "Horas",
+            "wait": "Espera transcurrida",
+            "days": "Días completos"
+          },
+          "timeline": {
+            "title": "Línea de tiempo",
+            "intro": "El camino desde el inicio del progreso hasta el evento, con hitos fijos. Arrastra el control para ver cualquier momento intermedio.",
+            "slider": "Previsualizar un momento",
+            "now": "Ahora",
+            "previewDate": "Momento previsto",
+            "remaining": "Restante en ese momento",
+            "event": "Evento",
+            "business": "Días hábiles restantes entonces",
+            "passedStations": "Hitos superados",
+            "elapsed": "Parte transcurrida",
+            "start": "Inicio"
+          },
+          "split": {
+            "title": "Días hábiles frente a fin de semana",
+            "intro": "Los días restantes divididos en laborables y de fin de semana. Compara ambas convenciones y toca una barra para usarla.",
+            "selected": "elegido",
+            "compare": "comparar",
+            "business": "Días hábiles",
+            "weekend": "Días de fin de semana",
+            "calendar": "Días naturales restantes",
+            "calendarNote": "Cuenta hoy, no el día del evento",
+            "share": "Proporción laborable",
+            "difference": "Diferencia entre fines de semana"
+          },
+          "weekdays": {
+            "title": "Días de la semana restantes",
+            "intro": "Cuántos domingos, lunes, etc. quedan antes del día del evento. Los días de fin de semana se muestran en ámbar.",
+            "weekend": "Fin de semana",
+            "eventDay": "Día del evento",
+            "eventDot": "Punto verde",
+            "total": "Total de días"
+          },
+          "log": {
+            "title": "La espera en escala logarítmica",
+            "intro": "El mismo tiempo restante en siete unidades, sobre un eje logarítmico donde cada paso es diez veces mayor.",
+            "orders": "Órdenes de magnitud (segundos)",
+            "u": {
+              "seconds": "Segundos",
+              "minutes": "Minutos",
+              "hours": "Horas",
+              "days": "Días",
+              "weeks": "Semanas",
+              "months": "Meses",
+              "years": "Años"
+            }
+          },
+          "zones": {
+            "title": "Un instante, tres relojes",
+            "intro": "El momento del evento en el reloj del evento, en el tuyo y en UTC. Los desfases vienen de la base de datos de zonas horarias para esa fecha exacta.",
+            "gap": "Saltada por el cambio de hora"
+          },
+          "hijri": {
+            "title": "El evento en el año hégira",
+            "intro": "El año Umm al-Qura del evento, mes a mes (29 o 30 días cada uno), con el evento y el día de hoy marcados.",
+            "event": "Evento (hégira)",
+            "month": "Mes · días",
+            "monthNote": "Duración del mes en Umm al-Qura",
+            "dayOfYear": "Día del año hégira",
+            "today": "Hoy (hégira)",
+            "yearStart": "1 de Muharram (gregoriano)",
+            "yearLength": "Días de este año hégira",
+            "yearNote": "354 o 355 días",
+            "todayMark": "Hoy"
+          },
+          "ranked": {
+            "title": "Próximos eventos ordenados",
+            "intro": "Tu evento junto a las próximas fechas del calendario y tus cuentas guardadas, de la más cercana a la más lejana. Toca una para abrirla.",
+            "rank": "Posición de tu evento",
+            "nearest": "Más cercano",
+            "farthest": "Más lejano mostrado",
+            "days": "días",
+            "saved": "Cuentas guardadas",
+            "legend": "Colores",
+            "legendValue": "Azul: este evento · Ámbar: calendario · Verde: guardadas"
+          }
         }
-      },
-      "weeksAheadDiagram": {
-        "weeksLabel": "semanas",
-        "extraDaysLabel": "días",
-        "caption": "Tiempo restante, en semanas"
       }
     }
   },
