@@ -103,6 +103,7 @@ export * from "./BMRCalculator";
 export * from "./DateCalculator";
 export * from "./DateCalculatorEngine";
 export * from "./TimeCalculator";
+export * from "./TimeCalculatorEngine";
 export * from "./FuelCostCalculator";
 export * from "./BatchInvoiceCalculator";
 export * from "./BatchInvoiceMath";

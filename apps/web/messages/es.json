@@ -31359,7 +31359,7 @@
             },
             {
               "question": "¿Es esto lo mismo que sumar dos horas de reloj, como 3:00 PM más 2:15?",
-              "answer": "No exactamente —esta herramienta suma y resta duraciones transcurridas (como \"1 hora 30 minutos de trabajo\"), no puntos en un reloj de 24 horas. Sumar una duración a una hora de reloj específica para encontrar una nueva hora de reloj es un cálculo relacionado pero distinto, ya que implica dar la vuelta a la medianoche y saber AM/PM, lo cual esta herramienta no maneja."
+              "answer": "Aquí se pueden hacer ambos, como cálculos distintos. El modo Hoja de horas suma y resta duraciones transcurridas (como «1 hora 30 minutos de trabajo»), mientras que el modo Hora ± tiempo suma una duración a una hora concreta —por ejemplo 3:00 p. m. + 2:15 = 5:15 p. m.— y pasa la medianoche indicando el desfase de días, como «+1 día». Con una zona horaria elegida, también tiene en cuenta un cambio de horario dentro del intervalo."
             },
             {
               "question": "¿Cuál es el número máximo de horas que puedo introducir?",
@@ -31458,6 +31458,251 @@
       "addSubtractDiagram": {
         "caption": "Los tiempos exactos introducidos arriba, dibujados a escala y combinados en el resultado.",
         "time1Label": "Tiempo 1"
+      },
+      "tc": {
+        "copyHeader": "Cálculo de tiempo",
+        "nav": {
+          "history": "Cálculos recientes",
+          "indicators": "Indicadores en vivo"
+        },
+        "sample": {
+          "rows": [
+            "Turno 1",
+            "Turno 2",
+            "Turno 3",
+            "Pausa no pagada",
+            "Horas extra"
+          ]
+        },
+        "modes": {
+          "sum": "Hoja de horas",
+          "span": "Tiempo entre horas",
+          "add": "Hora ± tiempo",
+          "week": "Semana laboral",
+          "dec": "Horas decimales"
+        },
+        "modeHint": {
+          "sum": "Suma o resta varias duraciones h:m:s; cada fila tiene su propio signo + / −.",
+          "span": "Horas entre dos horas de reloj. Los turnos nocturnos pasan al día siguiente; elige una zona horaria para contar los cambios de horario.",
+          "add": "La hora de inicio más o menos una duración da la hora final y el desfase de días, con el horario de verano incluido.",
+          "week": "Inicio, fin y pausa de cada día dan el total semanal, las horas ordinarias y las horas extra.",
+          "dec": "Conversión de nómina entre horas decimales y h:m:s, con redondeo estándar."
+        },
+        "input": {
+          "title": "Tus horas",
+          "mode": "Cálculo",
+          "display": "Formato de hora",
+          "h24": "24 horas",
+          "h12": "12 horas (a. m./p. m.)",
+          "zone": "Zona horaria",
+          "floating": "Sin zona horaria (solo hora de reloj)",
+          "entry": "Entrada",
+          "entryN": "Entrada {n}",
+          "h": "h",
+          "m": "min",
+          "s": "s",
+          "add": "Sumar",
+          "subtract": "Restar",
+          "toggleSign": "Cambiar entre sumar y restar",
+          "removeRow": "Eliminar entrada",
+          "addRow": "Añadir entrada",
+          "startDate": "Fecha de inicio",
+          "start": "Inicio",
+          "end": "Fin",
+          "setEndDate": "Indicar fecha de fin (varios días)",
+          "endDate": "Fecha de fin",
+          "autoEnd": "Termina el {date} (al día siguiente si el fin no es posterior al inicio).",
+          "breakMin": "Pausa (min)",
+          "breakShort": "Pausa",
+          "weekend": "Fin de semana",
+          "weekendFriSat": "Viernes – sábado",
+          "weekendSatSun": "Sábado – domingo",
+          "day": "Día",
+          "basis": "Horas extra por",
+          "basisWeekly": "Semana",
+          "basisDaily": "Día",
+          "weeklyH": "Límite semanal (h)",
+          "dailyH": "Límite diario (h)",
+          "mult": "Tarifa extra ×",
+          "toHms": "Decimal → h:m:s",
+          "toDec": "h:m:s → decimal",
+          "decimal": "Horas decimales",
+          "increment": "Incremento de redondeo",
+          "minutesN": "{n} min",
+          "roundMode": "Redondeo",
+          "copy": "Copiar resultado",
+          "copied": "Copiado",
+          "share": "Enlace para compartir",
+          "linkCopied": "Enlace copiado",
+          "reset": "Volver al ejemplo",
+          "savedNote": "Tus datos se quedan solo en este navegador. El enlace compartido incluye los datos actuales."
+        },
+        "presets": {
+          "night": "Noche 22:00–06:00",
+          "day": "Día 09:00–17:30",
+          "long": "12 h 07:00–19:00",
+          "p8": "+8 h",
+          "p12": "+12 h",
+          "p36": "+36 h",
+          "m90": "−1 h 30"
+        },
+        "round": {
+          "nearest": "Al más cercano",
+          "down": "Hacia abajo",
+          "up": "Hacia arriba"
+        },
+        "status": {
+          "ok": "Hora válida",
+          "gap": "Omitida por el cambio de hora (el reloj se adelantó)",
+          "overlap": "Repetida por el cambio de hora (se usa la primera)"
+        },
+        "day": {
+          "same": "mismo día",
+          "after": "+{n, plural, one {# día} other {# días}}",
+          "before": "−{n, plural, one {# día} other {# días}}"
+        },
+        "dst": {
+          "longer": "Horario de verano: {d} más",
+          "shorter": "Horario de verano: {d} menos",
+          "none": "sin cambio de hora"
+        },
+        "result": {
+          "title": {
+            "sum": "Total de la hoja de horas",
+            "span": "Tiempo entre horas",
+            "add": "Hora resultante",
+            "week": "Semana laboral",
+            "dec": "Horas decimales"
+          },
+          "colItem": "Concepto",
+          "colCalc": "Cálculo",
+          "colValue": "Valor",
+          "total": "Total",
+          "decimal": "Horas decimales",
+          "entries": "Entradas",
+          "groupEntries": "Entradas (total acumulado)",
+          "groupTotals": "Totales",
+          "added": "Sumado",
+          "subtracted": "Restado",
+          "minutes": "Minutos totales",
+          "seconds": "Segundos totales",
+          "daysHours": "Días + horas",
+          "daysHoursValue": "{d} d {hm}",
+          "waterfallAria": "Total acumulado de las entradas de la hoja de horas",
+          "captionSum": "{n} entradas combinadas en {total}.",
+          "net": "Tiempo pagado",
+          "elapsed": "Transcurrido",
+          "groupClock": "Horas de reloj",
+          "dayOffset": "Desfase de días",
+          "explicitEnd": "fecha de fin indicada",
+          "autoEnd": "automático",
+          "groupDuration": "Duración",
+          "wall": "Diferencia de reloj",
+          "dstChange": "Ajuste de horario de verano",
+          "break": "Pausa",
+          "minutesN": "{n} min",
+          "groupZone": "Zona horaria",
+          "intl": "Datos de zonas horarias de Intl",
+          "floatingNote": "sin horario de verano",
+          "startStatus": "Hora de inicio",
+          "endStatus": "Hora de fin",
+          "transition": "Cambio de hora",
+          "dialAria": "Esfera de 24 horas con el intervalo del inicio al fin",
+          "captionSpan": "{start} → {end}, {day}; {dst}.",
+          "dragHint": "Arrastra los controles ▶ y ■ para mover el inicio y el fin.",
+          "resultTime": "Resultado",
+          "duration": "Duración",
+          "groupInput": "Datos",
+          "groupResult": "Resultado",
+          "naive": "Aritmética simple de reloj",
+          "inHours": "En horas",
+          "captionAdd": "{start} → {result}, {day}; {dst}.",
+          "dstBannerSpan": "Este intervalo cruza un cambio de hora en {zone}: {d}.",
+          "dstBannerAdd": "La hora cambia en {zone} durante este intervalo: el reloj marca {real}, no {naive}.",
+          "weekTotal": "Total semanal",
+          "overtime": "Horas extra",
+          "paidEq": "Se paga como (h)",
+          "groupDays": "Días",
+          "off": "Libre",
+          "groupWeek": "Semana",
+          "daysN": "{n, plural, one {# día laborable} other {# días laborables}}",
+          "threshold": "Límite de horas extra",
+          "dayUnit": "día",
+          "regular": "Ordinarias",
+          "average": "Promedio por día",
+          "weekAria": "Horas trabajadas por día, ordinarias y extra",
+          "captionWeek": "{total} trabajadas esta semana, de las cuales {ot} son extra.",
+          "hms": "h:m:s",
+          "rounded": "Redondeado (h)",
+          "groupConvert": "Conversión",
+          "wholeHours": "Horas completas",
+          "minutesPart": "Minutos",
+          "secondsPart": "Segundos",
+          "groupRounding": "Redondeo de nómina a {n} min",
+          "groupCommon": "Minutos habituales en decimal",
+          "pieAria": "Fracción de hora como sector circular con marcas de minutos",
+          "captionDec": "{dec} h equivalen a {hms}."
+        },
+        "history": {
+          "title": "Cálculos recientes",
+          "empty": "Tus cálculos aparecerán aquí."
+        },
+        "ind": {
+          "worked": "Ejemplo resuelto",
+          "dial": {
+            "title": "Esfera del turno",
+            "intro": "Arrastra el inicio y el fin del turno por el anillo de 24 horas. Un turno que termina antes de su hora de inicio pasa la medianoche; el arco violeta marca una hora ganada o perdida por un cambio de hora."
+          },
+          "stack": {
+            "title": "Composición de la hoja de horas",
+            "intro": "Cada entrada sumada como parte del tiempo bruto, las entradas restadas descontadas y el total neto que queda.",
+            "negCount": "{n, plural, one {# entrada} other {# entradas}}"
+          },
+          "flow": {
+            "title": "Inicio → Duración → Fin",
+            "intro": "La hora de inicio, la duración que sumas o restas y la hora resultante, con los días de calendario que abarca."
+          },
+          "dstline": {
+            "title": "Cambios de hora este año",
+            "intro": "El desfase UTC de la zona elegida a lo largo del año del turno. Cada estación es un cambio de hora: esa noche dura 23 o 25 horas.",
+            "noDst": "{zone} mantiene un único desfase todo el año",
+            "floating": "Sin zona horaria: solo hora de reloj, sin horario de verano",
+            "back": "Se atrasa la hora",
+            "forward": "Se adelanta la hora",
+            "thisSpan": "Efecto en este turno"
+          },
+          "week": {
+            "title": "Horas por día",
+            "intro": "Horas trabajadas cada día de la semana, con las horas extra apiladas encima. Haz clic en un día para activarlo o desactivarlo.",
+            "hint": "Haz clic en una barra para cambiar el día",
+            "longest": "Día más largo"
+          },
+          "gauge": {
+            "title": "Horas semanales frente a límites",
+            "intro": "El total semanal frente a tu límite de horas extra y el tope medio de 48 horas semanales de la Directiva europea de tiempo de trabajo. Desliza para probar otro límite.",
+            "regular": "Dentro de la jornada ordinaria",
+            "overtime": "Horas extra",
+            "excess": "Más de 48 h",
+            "limit": "Tope UE 48 h",
+            "dailyNote": "cálculo diario activo"
+          },
+          "decimal": {
+            "title": "Minutos ⇄ horas decimales",
+            "intro": "Minutos y centésimas de hora en dos reglas alineadas: 15 minutos son 0,25 y 45 minutos son 0,75. Desliza los minutos para leer el decimal.",
+            "minutesRuler": "Minutos",
+            "decimalRuler": "Horas decimales",
+            "slider": "Minutos después de la hora",
+            "misread": "Leer {v} como h:mm",
+            "misreadNote": "error {d}",
+            "quarter": "Comprobación rápida"
+          },
+          "trio": {
+            "title": "Redondeo de nómina: abajo · cercano · arriba",
+            "intro": "El total semanal redondeado al incremento elegido de tres maneras. Al más cercano con 15 minutos es la regla de los 7 minutos; las barras muestran lo que añade o quita cada regla.",
+            "perYear": "{d} al año (× 52)",
+            "chosen": "Regla elegida"
+          }
+        }
       }
     },
     "fuel-cost-calculator": {

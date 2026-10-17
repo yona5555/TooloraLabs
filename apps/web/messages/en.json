@@ -31359,7 +31359,7 @@
             },
             {
               "question": "Is this the same as adding two clock times, like 3:00 PM plus 2:15?",
-              "answer": "Not quite — this tool adds and subtracts elapsed durations (like \"1 hour 30 minutes of work\"), not points on a 24-hour clock. Adding a duration to a specific clock time to find a new clock time is a related but distinct calculation, since it involves wrapping around midnight and knowing AM/PM, which this tool doesn't handle."
+              "answer": "Both work here, as separate calculations. The Timesheet mode adds and subtracts elapsed durations (like \"1 hour 30 minutes of work\"), while the Clock ± time mode adds a duration to a specific clock time — for example 3:00 PM + 2:15 = 5:15 PM — and wraps around midnight, reporting a day offset such as \"+1 day\". With a time zone selected, it also accounts for a daylight-saving change inside the interval."
             },
             {
               "question": "What's the maximum number of hours I can enter?",
@@ -31458,6 +31458,251 @@
       "addSubtractDiagram": {
         "caption": "The exact times entered above, drawn to scale and combined into the result.",
         "time1Label": "Time 1"
+      },
+      "tc": {
+        "copyHeader": "Time calculation",
+        "nav": {
+          "history": "Recent calculations",
+          "indicators": "Live indicators"
+        },
+        "sample": {
+          "rows": [
+            "Shift 1",
+            "Shift 2",
+            "Shift 3",
+            "Unpaid break",
+            "Overtime"
+          ]
+        },
+        "modes": {
+          "sum": "Timesheet",
+          "span": "Time between",
+          "add": "Clock ± time",
+          "week": "Work week",
+          "dec": "Decimal hours"
+        },
+        "modeHint": {
+          "sum": "Add or subtract several h:m:s durations — each row has its own + / − sign.",
+          "span": "Hours between two clock times. Overnight shifts roll into the next day; pick a time zone to count DST changes.",
+          "add": "Start time plus or minus a duration gives the end time and its day offset, DST included.",
+          "week": "Daily start, end and break give the weekly total, regular hours and overtime.",
+          "dec": "Payroll conversion between decimal hours and h:m:s, with standard rounding."
+        },
+        "input": {
+          "title": "Your Times",
+          "mode": "Calculation",
+          "display": "Clock display",
+          "h24": "24-hour",
+          "h12": "12-hour (AM/PM)",
+          "zone": "Time zone",
+          "floating": "No time zone (clock time only)",
+          "entry": "Entry",
+          "entryN": "Entry {n}",
+          "h": "h",
+          "m": "min",
+          "s": "sec",
+          "add": "Add",
+          "subtract": "Subtract",
+          "toggleSign": "Switch between add and subtract",
+          "removeRow": "Remove entry",
+          "addRow": "Add entry",
+          "startDate": "Start date",
+          "start": "Start",
+          "end": "End",
+          "setEndDate": "Set an end date (multi-day span)",
+          "endDate": "End date",
+          "autoEnd": "Ends on {date} (next day when the end is not after the start).",
+          "breakMin": "Break (min)",
+          "breakShort": "Break",
+          "weekend": "Weekend",
+          "weekendFriSat": "Friday – Saturday",
+          "weekendSatSun": "Saturday – Sunday",
+          "day": "Day",
+          "basis": "Overtime counted",
+          "basisWeekly": "Per week",
+          "basisDaily": "Per day",
+          "weeklyH": "Weekly limit (h)",
+          "dailyH": "Daily limit (h)",
+          "mult": "OT rate ×",
+          "toHms": "Decimal → h:m:s",
+          "toDec": "h:m:s → decimal",
+          "decimal": "Decimal hours",
+          "increment": "Rounding increment",
+          "minutesN": "{n} min",
+          "roundMode": "Rounding",
+          "copy": "Copy result",
+          "copied": "Copied",
+          "share": "Share link",
+          "linkCopied": "Link copied",
+          "reset": "Reset to the example",
+          "savedNote": "Your inputs stay in this browser only. The share link carries the current inputs."
+        },
+        "presets": {
+          "night": "Night 22:00–06:00",
+          "day": "Day 09:00–17:30",
+          "long": "12 h 07:00–19:00",
+          "p8": "+8 h",
+          "p12": "+12 h",
+          "p36": "+36 h",
+          "m90": "−1 h 30"
+        },
+        "round": {
+          "nearest": "Nearest",
+          "down": "Round down",
+          "up": "Round up"
+        },
+        "status": {
+          "ok": "Valid time",
+          "gap": "Skipped by DST (clocks jumped forward)",
+          "overlap": "Repeated by DST (first occurrence used)"
+        },
+        "day": {
+          "same": "same day",
+          "after": "+{n, plural, one {# day} other {# days}}",
+          "before": "−{n, plural, one {# day} other {# days}}"
+        },
+        "dst": {
+          "longer": "DST: {d} longer",
+          "shorter": "DST: {d} shorter",
+          "none": "no DST change"
+        },
+        "result": {
+          "title": {
+            "sum": "Timesheet Total",
+            "span": "Time Between",
+            "add": "Resulting Time",
+            "week": "Work Week",
+            "dec": "Decimal Hours"
+          },
+          "colItem": "Item",
+          "colCalc": "Calculation",
+          "colValue": "Value",
+          "total": "Total",
+          "decimal": "Decimal hours",
+          "entries": "Entries",
+          "groupEntries": "Entries (running total)",
+          "groupTotals": "Totals",
+          "added": "Added",
+          "subtracted": "Subtracted",
+          "minutes": "Total minutes",
+          "seconds": "Total seconds",
+          "daysHours": "Days + hours",
+          "daysHoursValue": "{d} d {hm}",
+          "waterfallAria": "Running total of the timesheet entries",
+          "captionSum": "{n} entries combined into {total}.",
+          "net": "Paid time",
+          "elapsed": "Elapsed",
+          "groupClock": "Clock times",
+          "dayOffset": "Day offset",
+          "explicitEnd": "end date set",
+          "autoEnd": "automatic",
+          "groupDuration": "Duration",
+          "wall": "Wall-clock difference",
+          "dstChange": "DST adjustment",
+          "break": "Break",
+          "minutesN": "{n} min",
+          "groupZone": "Time zone",
+          "intl": "Intl time-zone data",
+          "floatingNote": "no DST applied",
+          "startStatus": "Start time",
+          "endStatus": "End time",
+          "transition": "Clock change",
+          "dialAria": "24-hour dial showing the span from start to end",
+          "captionSpan": "{start} → {end}, {day}; {dst}.",
+          "dragHint": "Drag the ▶ and ■ handles to move the start and end.",
+          "resultTime": "Result",
+          "duration": "Duration",
+          "groupInput": "Input",
+          "groupResult": "Result",
+          "naive": "Plain clock arithmetic",
+          "inHours": "In hours",
+          "captionAdd": "{start} → {result}, {day}; {dst}.",
+          "dstBannerSpan": "This span crosses a clock change in {zone}: {d}.",
+          "dstBannerAdd": "Clocks change in {zone} during this interval: the wall clock reads {real}, not {naive}.",
+          "weekTotal": "Week total",
+          "overtime": "Overtime",
+          "paidEq": "Paid as (h)",
+          "groupDays": "Days",
+          "off": "Off",
+          "groupWeek": "Week",
+          "daysN": "{n, plural, one {# work day} other {# work days}}",
+          "threshold": "Overtime limit",
+          "dayUnit": "day",
+          "regular": "Regular",
+          "average": "Average per day",
+          "weekAria": "Worked hours per day, regular and overtime",
+          "captionWeek": "{total} worked this week, of which {ot} is overtime.",
+          "hms": "h:m:s",
+          "rounded": "Rounded (h)",
+          "groupConvert": "Conversion",
+          "wholeHours": "Whole hours",
+          "minutesPart": "Minutes",
+          "secondsPart": "Seconds",
+          "groupRounding": "Payroll rounding to {n} min",
+          "groupCommon": "Common minutes in decimal",
+          "pieAria": "Fraction of an hour as a pie with minute ticks",
+          "captionDec": "{dec} h equals {hms}."
+        },
+        "history": {
+          "title": "Recent Calculations",
+          "empty": "Your calculations will appear here."
+        },
+        "ind": {
+          "worked": "Worked Example",
+          "dial": {
+            "title": "Shift Dial",
+            "intro": "Drag the start and end of the shift around the 24-hour ring. A shift whose end is before its start runs past midnight; the violet arc marks an hour gained or lost to a clock change."
+          },
+          "stack": {
+            "title": "Timesheet Composition",
+            "intro": "Every added entry as a share of the gross time, the subtracted entries taken back off, and the net total that remains.",
+            "negCount": "{n, plural, one {# entry} other {# entries}}"
+          },
+          "flow": {
+            "title": "Start → Duration → End",
+            "intro": "The start time, the duration you add or subtract and the resulting clock time, with the calendar days it runs across."
+          },
+          "dstline": {
+            "title": "Clock Changes This Year",
+            "intro": "The UTC offset of the chosen zone through the year of the shift. Each station is a clock change: the night it happens is 23 or 25 hours long.",
+            "noDst": "{zone} keeps one offset all year",
+            "floating": "No time zone chosen: clock time only, no DST",
+            "back": "Clocks go back",
+            "forward": "Clocks go forward",
+            "thisSpan": "Effect on this shift"
+          },
+          "week": {
+            "title": "Hours per Day",
+            "intro": "Worked hours for each day of the week, with overtime stacked on top. Click a day to switch it on or off.",
+            "hint": "Click a bar to toggle the day",
+            "longest": "Longest day"
+          },
+          "gauge": {
+            "title": "Weekly Hours vs Limits",
+            "intro": "The week total against your overtime limit and the 48-hour weekly average cap of the EU Working Time Directive. Slide to try another limit.",
+            "regular": "Within regular hours",
+            "overtime": "Overtime",
+            "excess": "Above 48 h",
+            "limit": "EU 48 h cap",
+            "dailyNote": "daily basis active"
+          },
+          "decimal": {
+            "title": "Minutes ⇄ Decimal Hours",
+            "intro": "Minutes and hundredths of an hour on two aligned rulers: 15 minutes is 0.25, 45 minutes is 0.75. Slide the minutes to read the decimal.",
+            "minutesRuler": "Minutes",
+            "decimalRuler": "Decimal hours",
+            "slider": "Minutes past the hour",
+            "misread": "Misreading {v} as h:mm",
+            "misreadNote": "error {d}",
+            "quarter": "Quick check"
+          },
+          "trio": {
+            "title": "Payroll Rounding: Down · Nearest · Up",
+            "intro": "The week total rounded to the chosen increment three ways. Nearest with 15 minutes is the 7-minute rule; the bars show what each rule adds or removes.",
+            "perYear": "{d} per year (× 52)",
+            "chosen": "Chosen rule"
+          }
+        }
       }
     },
     "fuel-cost-calculator": {

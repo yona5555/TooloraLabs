@@ -31359,7 +31359,7 @@
             },
             {
               "question": "Ist das dasselbe wie das Addieren zweier Uhrzeiten, wie 15:00 Uhr plus 2:15?",
-              "answer": "Nicht ganz — dieses Tool addiert und subtrahiert verstrichene Dauern (wie \"1 Stunde 30 Minuten Arbeit\"), keine Punkte auf einer 24-Stunden-Uhr. Das Hinzufügen einer Dauer zu einer bestimmten Uhrzeit, um eine neue Uhrzeit zu finden, ist eine verwandte, aber andere Berechnung, da sie das Umwickeln um Mitternacht und das Wissen um AM/PM beinhaltet, was dieses Tool nicht behandelt."
+              "answer": "Beides geht hier, als getrennte Berechnungen. Der Modus Stundenzettel addiert und subtrahiert verstrichene Dauern (etwa „1 Stunde 30 Minuten Arbeit“), der Modus Uhrzeit ± Dauer addiert eine Dauer zu einer bestimmten Uhrzeit – zum Beispiel 15:00 + 2:15 = 17:15 – und läuft über Mitternacht mit Angabe des Tagesversatzes wie „+1 Tag“. Mit gewählter Zeitzone berücksichtigt er auch eine Zeitumstellung im Zeitraum."
             },
             {
               "question": "Wie viele Stunden kann ich maximal eingeben?",
@@ -31458,6 +31458,251 @@
       "addSubtractDiagram": {
         "caption": "Die oben eingegebenen Zeiten, maßstabsgetreu dargestellt und zum Ergebnis kombiniert.",
         "time1Label": "Zeit 1"
+      },
+      "tc": {
+        "copyHeader": "Zeitberechnung",
+        "nav": {
+          "history": "Letzte Berechnungen",
+          "indicators": "Live-Indikatoren"
+        },
+        "sample": {
+          "rows": [
+            "Schicht 1",
+            "Schicht 2",
+            "Schicht 3",
+            "Unbezahlte Pause",
+            "Überstunden"
+          ]
+        },
+        "modes": {
+          "sum": "Stundenzettel",
+          "span": "Zeit zwischen",
+          "add": "Uhrzeit ± Dauer",
+          "week": "Arbeitswoche",
+          "dec": "Dezimalstunden"
+        },
+        "modeHint": {
+          "sum": "Mehrere Dauern h:m:s addieren oder subtrahieren – jede Zeile hat ihr eigenes Vorzeichen + / −.",
+          "span": "Stunden zwischen zwei Uhrzeiten. Nachtschichten laufen in den nächsten Tag; wählen Sie eine Zeitzone, um Zeitumstellungen mitzuzählen.",
+          "add": "Startzeit plus oder minus eine Dauer ergibt die Endzeit und den Tagesversatz, Sommerzeit inklusive.",
+          "week": "Beginn, Ende und Pause je Tag ergeben Wochensumme, reguläre Stunden und Überstunden.",
+          "dec": "Lohnabrechnung: Umrechnung zwischen Dezimalstunden und h:m:s mit üblicher Rundung."
+        },
+        "input": {
+          "title": "Ihre Zeiten",
+          "mode": "Berechnung",
+          "display": "Uhrzeitformat",
+          "h24": "24 Stunden",
+          "h12": "12 Stunden (AM/PM)",
+          "zone": "Zeitzone",
+          "floating": "Keine Zeitzone (nur Uhrzeit)",
+          "entry": "Eintrag",
+          "entryN": "Eintrag {n}",
+          "h": "Std",
+          "m": "Min",
+          "s": "Sek",
+          "add": "Addieren",
+          "subtract": "Subtrahieren",
+          "toggleSign": "Zwischen Addieren und Subtrahieren wechseln",
+          "removeRow": "Eintrag entfernen",
+          "addRow": "Eintrag hinzufügen",
+          "startDate": "Startdatum",
+          "start": "Beginn",
+          "end": "Ende",
+          "setEndDate": "Enddatum festlegen (mehrere Tage)",
+          "endDate": "Enddatum",
+          "autoEnd": "Endet am {date} (am Folgetag, wenn das Ende nicht nach dem Beginn liegt).",
+          "breakMin": "Pause (Min)",
+          "breakShort": "Pause",
+          "weekend": "Wochenende",
+          "weekendFriSat": "Freitag – Samstag",
+          "weekendSatSun": "Samstag – Sonntag",
+          "day": "Tag",
+          "basis": "Überstunden je",
+          "basisWeekly": "Woche",
+          "basisDaily": "Tag",
+          "weeklyH": "Wochengrenze (Std)",
+          "dailyH": "Tagesgrenze (Std)",
+          "mult": "Zuschlag ×",
+          "toHms": "Dezimal → h:m:s",
+          "toDec": "h:m:s → dezimal",
+          "decimal": "Dezimalstunden",
+          "increment": "Rundungsschritt",
+          "minutesN": "{n} Min",
+          "roundMode": "Rundung",
+          "copy": "Ergebnis kopieren",
+          "copied": "Kopiert",
+          "share": "Link teilen",
+          "linkCopied": "Link kopiert",
+          "reset": "Zurück zum Beispiel",
+          "savedNote": "Ihre Eingaben bleiben nur in diesem Browser. Der Teilen-Link enthält die aktuellen Eingaben."
+        },
+        "presets": {
+          "night": "Nacht 22:00–06:00",
+          "day": "Tag 09:00–17:30",
+          "long": "12 Std 07:00–19:00",
+          "p8": "+8 Std",
+          "p12": "+12 Std",
+          "p36": "+36 Std",
+          "m90": "−1 Std 30"
+        },
+        "round": {
+          "nearest": "Kaufmännisch",
+          "down": "Abrunden",
+          "up": "Aufrunden"
+        },
+        "status": {
+          "ok": "Gültige Uhrzeit",
+          "gap": "Durch Zeitumstellung übersprungen (Uhr vorgestellt)",
+          "overlap": "Durch Zeitumstellung doppelt (erstes Vorkommen verwendet)"
+        },
+        "day": {
+          "same": "gleicher Tag",
+          "after": "+{n, plural, one {# Tag} other {# Tage}}",
+          "before": "−{n, plural, one {# Tag} other {# Tage}}"
+        },
+        "dst": {
+          "longer": "Sommerzeit: {d} länger",
+          "shorter": "Sommerzeit: {d} kürzer",
+          "none": "keine Zeitumstellung"
+        },
+        "result": {
+          "title": {
+            "sum": "Summe des Stundenzettels",
+            "span": "Zeit zwischen",
+            "add": "Ergebnis-Uhrzeit",
+            "week": "Arbeitswoche",
+            "dec": "Dezimalstunden"
+          },
+          "colItem": "Position",
+          "colCalc": "Rechnung",
+          "colValue": "Wert",
+          "total": "Summe",
+          "decimal": "Dezimalstunden",
+          "entries": "Einträge",
+          "groupEntries": "Einträge (laufende Summe)",
+          "groupTotals": "Summen",
+          "added": "Addiert",
+          "subtracted": "Abgezogen",
+          "minutes": "Minuten gesamt",
+          "seconds": "Sekunden gesamt",
+          "daysHours": "Tage + Stunden",
+          "daysHoursValue": "{d} T {hm}",
+          "waterfallAria": "Laufende Summe der Einträge im Stundenzettel",
+          "captionSum": "{n} Einträge ergeben zusammen {total}.",
+          "net": "Bezahlte Zeit",
+          "elapsed": "Verstrichen",
+          "groupClock": "Uhrzeiten",
+          "dayOffset": "Tagesversatz",
+          "explicitEnd": "Enddatum gesetzt",
+          "autoEnd": "automatisch",
+          "groupDuration": "Dauer",
+          "wall": "Differenz der Uhrzeiten",
+          "dstChange": "Sommerzeit-Korrektur",
+          "break": "Pause",
+          "minutesN": "{n} Min",
+          "groupZone": "Zeitzone",
+          "intl": "Zeitzonendaten aus Intl",
+          "floatingNote": "ohne Sommerzeit",
+          "startStatus": "Beginnzeit",
+          "endStatus": "Endzeit",
+          "transition": "Zeitumstellung",
+          "dialAria": "24-Stunden-Zifferblatt mit der Spanne von Beginn bis Ende",
+          "captionSpan": "{start} → {end}, {day}; {dst}.",
+          "dragHint": "Ziehen Sie die Griffe ▶ und ■, um Beginn und Ende zu verschieben.",
+          "resultTime": "Ergebnis",
+          "duration": "Dauer",
+          "groupInput": "Eingabe",
+          "groupResult": "Ergebnis",
+          "naive": "Einfache Uhrzeitrechnung",
+          "inHours": "In Stunden",
+          "captionAdd": "{start} → {result}, {day}; {dst}.",
+          "dstBannerSpan": "Diese Spanne überquert eine Zeitumstellung in {zone}: {d}.",
+          "dstBannerAdd": "In {zone} wird in diesem Zeitraum die Uhr umgestellt: Sie zeigt {real}, nicht {naive}.",
+          "weekTotal": "Wochensumme",
+          "overtime": "Überstunden",
+          "paidEq": "Bezahlt als (Std)",
+          "groupDays": "Tage",
+          "off": "Frei",
+          "groupWeek": "Woche",
+          "daysN": "{n, plural, one {# Arbeitstag} other {# Arbeitstage}}",
+          "threshold": "Überstundengrenze",
+          "dayUnit": "Tag",
+          "regular": "Regulär",
+          "average": "Schnitt pro Tag",
+          "weekAria": "Gearbeitete Stunden pro Tag, regulär und Überstunden",
+          "captionWeek": "{total} diese Woche gearbeitet, davon {ot} Überstunden.",
+          "hms": "h:m:s",
+          "rounded": "Gerundet (Std)",
+          "groupConvert": "Umrechnung",
+          "wholeHours": "Volle Stunden",
+          "minutesPart": "Minuten",
+          "secondsPart": "Sekunden",
+          "groupRounding": "Lohnrundung auf {n} Min",
+          "groupCommon": "Übliche Minuten als Dezimalwert",
+          "pieAria": "Stundenbruchteil als Kreissektor mit Minutenstrichen",
+          "captionDec": "{dec} Std entsprechen {hms}."
+        },
+        "history": {
+          "title": "Letzte Berechnungen",
+          "empty": "Ihre Berechnungen erscheinen hier."
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "dial": {
+            "title": "Schicht-Zifferblatt",
+            "intro": "Ziehen Sie Beginn und Ende der Schicht um den 24-Stunden-Ring. Eine Schicht, die vor ihrer Beginnzeit endet, läuft über Mitternacht; der violette Bogen markiert eine durch Zeitumstellung gewonnene oder verlorene Stunde."
+          },
+          "stack": {
+            "title": "Zusammensetzung des Stundenzettels",
+            "intro": "Jeder addierte Eintrag als Anteil der Bruttozeit, die abgezogenen Einträge wieder heraus, und die verbleibende Nettosumme.",
+            "negCount": "{n, plural, one {# Eintrag} other {# Einträge}}"
+          },
+          "flow": {
+            "title": "Beginn → Dauer → Ende",
+            "intro": "Die Startzeit, die addierte oder abgezogene Dauer und die resultierende Uhrzeit, mit den Kalendertagen, über die sie reicht."
+          },
+          "dstline": {
+            "title": "Zeitumstellungen in diesem Jahr",
+            "intro": "Der UTC-Versatz der gewählten Zone über das Jahr der Schicht. Jede Station ist eine Zeitumstellung: Diese Nacht dauert 23 oder 25 Stunden.",
+            "noDst": "{zone} behält das ganze Jahr einen Versatz",
+            "floating": "Keine Zeitzone gewählt: nur Uhrzeit, keine Sommerzeit",
+            "back": "Uhr wird zurückgestellt",
+            "forward": "Uhr wird vorgestellt",
+            "thisSpan": "Wirkung auf diese Schicht"
+          },
+          "week": {
+            "title": "Stunden pro Tag",
+            "intro": "Gearbeitete Stunden für jeden Wochentag, Überstunden obenauf gestapelt. Klicken Sie einen Tag an, um ihn ein- oder auszuschalten.",
+            "hint": "Balken anklicken, um den Tag umzuschalten",
+            "longest": "Längster Tag"
+          },
+          "gauge": {
+            "title": "Wochenstunden im Vergleich zu Grenzen",
+            "intro": "Die Wochensumme im Vergleich zu Ihrer Überstundengrenze und der 48-Stunden-Durchschnittsgrenze der EU-Arbeitszeitrichtlinie. Schieben Sie, um eine andere Grenze zu testen.",
+            "regular": "Innerhalb der regulären Zeit",
+            "overtime": "Überstunden",
+            "excess": "Über 48 Std",
+            "limit": "EU-Grenze 48 Std",
+            "dailyNote": "tägliche Berechnung aktiv"
+          },
+          "decimal": {
+            "title": "Minuten ⇄ Dezimalstunden",
+            "intro": "Minuten und Hundertstelstunden auf zwei ausgerichteten Linealen: 15 Minuten sind 0,25, 45 Minuten sind 0,75. Schieben Sie die Minuten, um den Dezimalwert abzulesen.",
+            "minutesRuler": "Minuten",
+            "decimalRuler": "Dezimalstunden",
+            "slider": "Minuten nach der vollen Stunde",
+            "misread": "{v} als h:mm gelesen",
+            "misreadNote": "Fehler {d}",
+            "quarter": "Schnellprüfung"
+          },
+          "trio": {
+            "title": "Lohnrundung: ab · kaufmännisch · auf",
+            "intro": "Die Wochensumme auf den gewählten Schritt auf drei Arten gerundet. Kaufmännisch mit 15 Minuten ist die 7-Minuten-Regel; die Balken zeigen, was jede Regel hinzufügt oder wegnimmt.",
+            "perYear": "{d} pro Jahr (× 52)",
+            "chosen": "Gewählte Regel"
+          }
+        }
       }
     },
     "fuel-cost-calculator": {
