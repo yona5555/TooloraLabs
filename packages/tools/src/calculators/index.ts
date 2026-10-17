@@ -1,5 +1,6 @@
 export * from "./BaseCalculator";
 export * from "./AgeCalculator";
+export * from "./AgeDualCalendar";
 export * from "./BMICalculator";
 export * from "./MortgageCalculator";
 export * from "./PercentageCalculator";

@@ -863,7 +863,7 @@
         "birthDateLabel": "Geburtsdatum",
         "hijriDayPlaceholder": "Tag",
         "hijriYearPlaceholder": "Jahr (H.)",
-        "hijriNote": "Der Hidschri-Kalender basiert hier auf dem festen tabellarischen (zivilen) Berechnungsschema, nicht auf tatsächlichen Mondsichtungen – er kann daher ein bis zwei Tage vom Beobachtungskalender abweichen.",
+        "hijriNote": "Hidschri-Daten folgen dem Umm-al-Qura-Kalender (offiziell in Saudi-Arabien); lokale Mondsichtungskalender können um ein bis zwei Tage abweichen.",
         "hijriMonths": [
           "Muharram",
           "Safar",
@@ -933,7 +933,7 @@
         "decimalAgeNote": "Das Alter als einzelne Dezimalzahl in Jahren ausgedrückt – die in der pädiatrischen Wachstumskurvenforschung übliche Konvention.",
         "hijriAgeLabel": "Hidschri-(islamisches) Alter",
         "hijriAgeValue": "{years}J {months}M {days}T",
-        "hijriAgeNote": "Basierend auf dem tabellarischen Hidschri-Kalender – Hidschri-Jahre sind etwa 3 % kürzer als gregorianische Jahre, weshalb dieser Wert naturgemäß etwas höher ausfällt.",
+        "hijriAgeNote": "Hidschri-Daten folgen dem Umm-al-Qura-Kalender (offiziell in Saudi-Arabien); lokale Mondsichtungskalender können um ein bis zwei Tage abweichen.",
         "zodiacLabel": "Westliches Sternzeichen",
         "zodiacNames": {
           "aries": "Widder",
@@ -1063,7 +1063,7 @@
           "intro": "Die oben verwendete Methode „Jahre seit der Geburt, die sich am Geburtstag erhöhen“ – manchmal auch internationales Alter genannt – ist heute der globale Standard, war aber selbst in Ländern, die ihn heute ausschließlich verwenden, lange Zeit kein einheitlicher Maßstab.",
           "hijri": {
             "title": "Der Hidschri-(islamische) Kalender",
-            "paragraph": "Der Hidschri-Kalender ist rein lunar und besteht aus 12 Monaten von 29 oder 30 Tagen, insgesamt also etwa 354–355 Tage pro Jahr – rund 11 Tage kürzer als das gregorianische Sonnenjahr. Wegen dieser Differenz liegt das Alter in Hidschri-Jahren konstant um einige Prozent höher als das Alter in gregorianischen Jahren, und Hidschri-Daten wandern im Laufe eines Lebens durch die gregorianischen Jahreszeiten. Das in diesem Rechner verwendete Hidschri-Alter basiert auf dem tabellarischen (zivilen) islamischen Kalender, einer festen mathematischen Näherung, die von den meisten Software-Kalendern genutzt wird – er kann um ein bis zwei Tage vom tatsächlichen, auf Mondsichtungen basierenden Kalender abweichen, der für religiöse Anlässe verwendet wird."
+            "paragraph": "Der Hidschri-Kalender ist rein lunar und besteht aus 12 Monaten von 29 oder 30 Tagen, insgesamt also etwa 354–355 Tage pro Jahr – rund 11 Tage kürzer als das gregorianische Sonnenjahr. Wegen dieser Differenz liegt das Alter in Hidschri-Jahren konstant um einige Prozent höher als das Alter in gregorianischen Jahren, und Hidschri-Daten wandern im Laufe eines Lebens durch die gregorianischen Jahreszeiten. Das in diesem Rechner verwendete Hidschri-Alter basiert auf dem Umm-al-Qura-Kalender (dem offiziellen Kalender Saudi-Arabiens, in moderne Browser eingebaut) – er kann dennoch um ein bis zwei Tage von Mondsichtungs-Bekanntgaben abweichen, die in anderen Ländern für religiöse Anlässe gelten."
           },
           "korea": {
             "title": "Südkoreas jüngste Umstellung auf das internationale Alter",
@@ -1131,7 +1131,7 @@
             },
             {
               "question": "Entspricht das hier angezeigte Hidschri-Datum genau dem, was meine örtliche Moschee oder mein Land verwendet?",
-              "answer": "Nicht unbedingt. Dieses Tool nutzt den tabellarischen (zivilen) islamischen Kalender – ein festes mathematisches Schema –, während viele Länder und religiöse Autoritäten den Beginn jedes Hidschri-Monats anhand einer tatsächlichen Mondsichtung oder der Bekanntgabe einer bestimmten örtlichen Autorität festlegen (etwa dem Umm-al-Qura-Kalender in Saudi-Arabien). Diese können vom tabellarischen Kalender um ein bis zwei Tage abweichen."
+              "answer": "Nicht unbedingt. Dieses Tool nutzt den Umm-al-Qura-Kalender – den offiziellen, astronomisch berechneten Kalender Saudi-Arabiens –, während viele Länder und religiöse Autoritäten den Beginn jedes Hidschri-Monats anhand einer tatsächlichen Mondsichtung oder der Bekanntgabe einer örtlichen Autorität festlegen. Diese können um ein bis zwei Tage von Umm al-Qura abweichen."
             },
             {
               "question": "Wie wird mein Sternzeichen bestimmt?",
@@ -1246,6 +1246,203 @@
         "shareToSocial": "In sozialen Medien teilen",
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für"
+      },
+      "dual": {
+        "cal": {
+          "gregorian": "Gregorianisch",
+          "hijri": "Hidschri",
+          "gShort": "G",
+          "hShort": "H"
+        },
+        "ymd": "{y} Jahre, {m} Monate, {d} Tage",
+        "ymdShort": "{y}J {m}M {d}T",
+        "nav": {
+          "tool": "Rechner",
+          "indicators": "Altersindikatoren",
+          "faq": "FAQ",
+          "behind": "Hinter dem Tool"
+        },
+        "scenarios": {
+          "millennial": "Geboren 1994",
+          "leapling": "Geburtstag am 29. Feb.",
+          "ramadan": "1. Ramadan 1445",
+          "boomer": "Geboren 1958"
+        },
+        "input": {
+          "title": "Geburtsdaten",
+          "examples": "Ein Rechenbeispiel ausprobieren",
+          "enterIn": "Geburtsdatum eingeben im Kalender",
+          "birth": "Geburtsdatum",
+          "birthHijri": "Geburtsdatum (Hidschri, Umm al-Qura)",
+          "day": "Tag",
+          "month": "Monat",
+          "year": "Jahr (AH)",
+          "equalsHijri": "= {date} (Umm al-Qura)",
+          "equalsGregorian": "= {date} (gregorianisch)",
+          "ageOn": "Alter berechnen am",
+          "today": "Heute",
+          "specificDate": "Bestimmtes Datum",
+          "leapRule": "Geburtstag am 29. Feb. in Gemeinjahren",
+          "leapFeb28": "Feiern am 28. Feb.",
+          "leapMar1": "Feiern am 1. März",
+          "leapNote": "Gilt immer, wenn der Geburtstag in einem Monat fehlt (29. Feb., der 31. oder Tag 30 eines 29-tägigen Hidschri-Monats). Die Rechtslage ist je nach Land verschieden.",
+          "sex": "Geschlecht (nur Lebenserwartung)",
+          "male": "Männlich",
+          "female": "Weiblich",
+          "copyResult": "Ergebnis kopieren",
+          "copyLink": "Link kopieren",
+          "copied": "Kopiert",
+          "reset": "Zurück zum Beispiel",
+          "linkNote": "Die Seitenadresse enthält immer Ihre Eingaben, daher öffnet der kopierte Link genau dieses Ergebnis."
+        },
+        "errors": {
+          "birthInvalid": "Geben Sie ein gültiges Geburtsdatum ein. Bis dahin wird das Beispiel gezeigt.",
+          "hijriInvalid": "Dieses Hidschri-Datum gibt es im Umm-al-Qura-Kalender nicht (Tag prüfen und ein Jahr zwischen 1300 und 1600 AH wählen).",
+          "refInvalid": "Geben Sie ein gültiges Stichtagsdatum ein.",
+          "referenceBeforeBirth": "Der Stichtag liegt vor dem Geburtsdatum.",
+          "outOfRange": "Daten müssen zwischen 1900 und 2150 liegen (Bereich der Umm-al-Qura-Tabelle)."
+        },
+        "result": {
+          "title": "Ihr Alter in beiden Kalendern",
+          "colItem": "Größe",
+          "colCalc": "Rechnung",
+          "colValue": "Wert",
+          "groupGregorian": "Gregorianisches Alter",
+          "groupHijri": "Hidschri-Alter (Umm al-Qura)",
+          "groupNext": "Nächste Geburtstage",
+          "groupLived": "Gelebte Zeit",
+          "groupBirth": "Zum Geburtsdatum",
+          "birth": "Geburt",
+          "reference": "Alter am",
+          "lastBirthday": "Letzter Geburtstag",
+          "turned": "wurde {n}",
+          "age": "Alter",
+          "monthsSince": "{n} volle Monate",
+          "decimal": "Dezimalalter",
+          "hijriAhead": "Vorsprung in Hidschri-Jahren",
+          "nextGregorian": "Gregorianischer Geburtstag ({n})",
+          "nextHijri": "Hidschri-Geburtstag ({n})",
+          "countdown": "Countdown",
+          "today": "Heute!",
+          "inDays": "in {n} Tagen",
+          "daysShort": "{n} Tage",
+          "nextBirthday": "Nächster Geburtstag",
+          "leapRule": "29.-Feb.-Regel",
+          "leapDaysLived": "{n} echte Geburtstage am 29. Feb.",
+          "days": "Gelebte Tage",
+          "weeks": "Gelebte Wochen",
+          "weeksDays": "{w} Wochen + {d} Tage",
+          "hours": "Gelebte Stunden",
+          "minutes": "Gelebte Minuten",
+          "leapDays": "Gelebte Schalttage",
+          "feb29s": "29. Februare seit der Geburt",
+          "bornOn": "Geboren an einem",
+          "dialCenter": "Jahre · Hidschri {h}",
+          "dialCaption": "Äußerer Ring: {g} des laufenden gregorianischen Lebensjahres. Innerer Ring: {h} des laufenden Hidschri-Lebensjahres. Die Lücke ist der Countdown bis zum nächsten Geburtstag."
+        },
+        "copy": {
+          "age": "Alter am {date}: {age}",
+          "hijri": "Hidschri-Alter (Umm al-Qura): {age}",
+          "birth": "Geboren am {g} ({h}), an einem {weekday}",
+          "next": "Nächster Geburtstag: {date}, in {n} Tagen",
+          "days": "Gelebte Tage: {n}"
+        },
+        "history": {
+          "title": "Letzte Berechnungen",
+          "empty": "Ihre Berechnungen werden hier auf diesem Gerät gespeichert, sobald Sie die Daten ändern.",
+          "totalDays": "{n} Tage",
+          "upcoming": "Ihre nächsten 10 Geburtstage",
+          "age": "Alter",
+          "date": "Datum"
+        },
+        "stages": {
+          "childhood": "Kindheit",
+          "adolescence": "Jugend",
+          "youth": "Junges Erwachsenenalter",
+          "middleAge": "Mittleres Alter",
+          "oldAge": "Höheres Alter"
+        },
+        "ind": {
+          "worked": "Rechenbeispiel",
+          "travel": {
+            "title": "Alters-Zeitmaschine",
+            "intro": "Ziehen Sie über Ihre ersten 100 Jahre, um Ihr genaues Alter in beiden Kalendern an jedem Datum zu sehen: Vergangenheit, heute oder Zukunft.",
+            "slider": "Datum zwischen Geburt und 100. Lebensjahr wählen",
+            "useDate": "Dieses Datum als Stichtag nutzen",
+            "reset": "Zurück zum Stichtag",
+            "date": "Gewähltes Datum",
+            "fromRef": "Abstand zum Stichtag",
+            "daysSigned": "{n} Tage"
+          },
+          "equiv": {
+            "title": "Gleiche Tage, zwei Kalender",
+            "intro": "Dieselbe Zahl gelebter Tage, aufgeteilt in gregorianische Jahre und in kürzere Hidschri-Mondjahre. Deshalb ist das Hidschri-Alter höher.",
+            "blocks": "{n} volle Jahre zu {len} Tagen",
+            "sameDays": "Beide Balken = {n} gelebte Tage",
+            "ratio": "Verhältnis der Jahreslängen"
+          },
+          "countdown": {
+            "title": "Countdown zu Ihren nächsten Meilensteinen",
+            "intro": "Jedes kommende Ereignis aus Ihrem Geburtsdatum berechnet, das nächste zuerst (Wurzelskala, damit kurze und lange Wartezeiten sichtbar bleiben).",
+            "gregorianBirthday": "Gregorianischer Geburtstag ({n})",
+            "hijriBirthday": "Hidschri-Geburtstag ({n})",
+            "thousandDays": "{n} Tage alt",
+            "thousandWeeks": "{n} Wochen alt",
+            "milestone": "Meilenstein-Alter {n}",
+            "leapBirthday": "Echter Geburtstag am 29. Feb. (Jahr {n})",
+            "days": "{n} T",
+            "now": "heute"
+          },
+          "weekday": {
+            "title": "Geburtstage nach Wochentag",
+            "intro": "Auf welchen Wochentag jeder Ihrer bisherigen gregorianischen Geburtstage fiel, Ihr Geburtswochentag hervorgehoben.",
+            "born": "Geburt",
+            "next": "nächster",
+            "total": "Gezählte Geburtstage",
+            "totalNote": "Alter 1 bis {n}",
+            "most": "Am häufigsten",
+            "nextOn": "Nächster Geburtstag fällt auf"
+          },
+          "stages": {
+            "title": "Gelebte Tage je Lebensphase",
+            "intro": "Ihre gelebten Tage verteilt auf die Lebensphasen nach WHO und Erikson, auf einer Skala bis zur durchschnittlichen Lebenserwartung.",
+            "horizon": "Lebenserwartung {y} J",
+            "ongoing": "laufend",
+            "current": "Aktuelle Phase"
+          },
+          "life": {
+            "title": "Anteil an der durchschnittlichen Lebenserwartung",
+            "intro": "Ihr Dezimalalter im Vergleich zur weltweiten Lebenserwartung bei Geburt. Geschlecht wechseln zum Vergleich. Ein statistischer Durchschnitt, keine persönliche Prognose.",
+            "of": "von {y} Jahren",
+            "expectancy": "Lebenserwartung (Jahre)",
+            "source": "Weltbank, Weltdurchschnitt, 2023 (jährlich aktualisiert)",
+            "elapsed": "Vergangen",
+            "remaining": "Verbleibende Jahre (Durchschnitt)",
+            "remainingDays": "≈ {n} Tage"
+          },
+          "units": {
+            "title": "Ihr Alter in jeder Einheit",
+            "intro": "Dasselbe Alter in Jahren, Monaten, Wochen, Tagen, Stunden, Minuten und Sekunden auf einer logarithmischen Skala: jede Linie ist das Zehnfache der vorigen.",
+            "years": "Jahre",
+            "months": "Monate",
+            "weeks": "Wochen",
+            "days": "Tage",
+            "hours": "Stunden",
+            "minutes": "Minuten",
+            "seconds": "Sekunden"
+          },
+          "formula": {
+            "title": "So wird das Alter berechnet",
+            "intro": "Volle Jahre bis zum letzten Geburtstag, dann volle Monate am selben Monatstag, dann die restlichen Tage. Das Hidschri-Alter wiederholt das in Mondmonaten.",
+            "anchor": "+ Monate",
+            "legend": "Monate zählen ab dem Geburtstag; ein fehlender Tag folgt der 29.-Feb.-Regel.",
+            "hijriLegend": "Dieselben Schritte in Umm-al-Qura-Monaten zu 29 oder 30 Tagen.",
+            "wholeYears": "Volle Jahre",
+            "wholeMonths": "Volle Monate",
+            "remainingDays": "Resttage",
+            "ruleNote": "gilt, wenn der Geburtstag fehlt"
+          }
+        }
       }
     },
     "bmi-calculator": {

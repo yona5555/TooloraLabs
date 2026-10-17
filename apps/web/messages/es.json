@@ -863,7 +863,7 @@
         "birthDateLabel": "Fecha de nacimiento",
         "hijriDayPlaceholder": "Día",
         "hijriYearPlaceholder": "Año (H)",
-        "hijriNote": "El calendario hijri usado aquí sigue el esquema tabular (civil) fijo, no la observación real de la luna — puede diferir del calendario observacional en uno o dos días.",
+        "hijriNote": "Las fechas hijri siguen el calendario Umm al-Qura (oficial de Arabia Saudita); los calendarios locales basados en la observación de la luna pueden diferir en uno o dos días.",
         "hijriMonths": [
           "Muharram",
           "Safar",
@@ -933,7 +933,7 @@
         "decimalAgeNote": "Edad expresada como un único número decimal de años — la convención usada en las tablas de crecimiento pediátrico.",
         "hijriAgeLabel": "Edad hijri (islámica)",
         "hijriAgeValue": "{years}a {months}m {days}d",
-        "hijriAgeNote": "Calculada con el calendario hijri tabular — los años hijri son aproximadamente un 3 % más cortos que los años gregorianos, por lo que esta cifra es naturalmente algo más alta.",
+        "hijriAgeNote": "Las fechas hijri siguen el calendario Umm al-Qura (oficial de Arabia Saudita); los calendarios locales basados en la observación de la luna pueden diferir en uno o dos días.",
         "zodiacLabel": "Signo del zodiaco occidental",
         "zodiacNames": {
           "aries": "Aries",
@@ -1063,7 +1063,7 @@
           "intro": "El método de «años desde el nacimiento, que aumentan en cada cumpleaños» descrito arriba —a veces llamado edad internacional— es hoy el estándar mundial por defecto, pero es una convención relativamente reciente incluso en los lugares que ahora la usan de forma exclusiva.",
           "hijri": {
             "title": "El calendario hijri (islámico)",
-            "paragraph": "El calendario hijri es puramente lunar, con 12 meses de 29 o 30 días que suman entre 354 y 355 días al año — unos 11 días menos que el año solar gregoriano. Debido a esa diferencia, la edad de una persona en años hijri es constantemente unos puntos porcentuales más alta que su edad en años gregorianos, y las fechas hijri se van adelantando progresivamente respecto a las estaciones gregorianas a lo largo de la vida de una persona. La edad hijri de esta calculadora usa el calendario islámico tabular (civil), una aproximación matemática fija que emplean la mayoría de los calendarios informáticos — puede diferir en uno o dos días del calendario real, basado en la observación de la luna, que se usa para las prácticas religiosas."
+            "paragraph": "El calendario hijri es puramente lunar, con 12 meses de 29 o 30 días que suman entre 354 y 355 días al año — unos 11 días menos que el año solar gregoriano. Debido a esa diferencia, la edad de una persona en años hijri es constantemente unos puntos porcentuales más alta que su edad en años gregorianos, y las fechas hijri se van adelantando progresivamente respecto a las estaciones gregorianas a lo largo de la vida de una persona. La edad hijri de esta calculadora usa el calendario Umm al-Qura (el calendario oficial de Arabia Saudita, integrado en los navegadores modernos); aun así, puede diferir en uno o dos días de los anuncios basados en la observación de la luna que otros países usan para las prácticas religiosas."
           },
           "korea": {
             "title": "El reciente cambio de Corea del Sur a la edad internacional",
@@ -1131,7 +1131,7 @@
             },
             {
               "question": "¿La fecha hijri que muestra esta herramienta coincide exactamente con la que usa mi mezquita o mi país?",
-              "answer": "No necesariamente. Esta herramienta usa el calendario islámico tabular (civil) —un esquema matemático fijo—, mientras que muchos países y autoridades religiosas fijan el inicio de cada mes hijri mediante la observación real de la luna o el anuncio de una autoridad local concreta (como el calendario Umm al-Qura en Arabia Saudita). Estos pueden diferir del calendario tabular en uno o dos días."
+              "answer": "No necesariamente. Esta herramienta usa el calendario Umm al-Qura —el calendario oficial de Arabia Saudita, calculado astronómicamente—, mientras que muchos países y autoridades religiosas fijan el inicio de cada mes hijri mediante la observación real de la luna o el anuncio de una autoridad local. Estos pueden diferir de Umm al-Qura en uno o dos días."
             },
             {
               "question": "¿Cómo se determina mi signo zodiacal?",
@@ -1246,6 +1246,203 @@
         "shareToSocial": "Compartir en redes sociales",
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para"
+      },
+      "dual": {
+        "cal": {
+          "gregorian": "Gregoriano",
+          "hijri": "Hégira",
+          "gShort": "G",
+          "hShort": "H"
+        },
+        "ymd": "{y} años, {m} meses, {d} días",
+        "ymdShort": "{y}a {m}m {d}d",
+        "nav": {
+          "tool": "Calculadora",
+          "indicators": "Indicadores de edad",
+          "faq": "Preguntas frecuentes",
+          "behind": "Detrás de la herramienta"
+        },
+        "scenarios": {
+          "millennial": "Nacido en 1994",
+          "leapling": "Cumpleaños el 29 feb",
+          "ramadan": "1 Ramadán 1445",
+          "boomer": "Nacido en 1958"
+        },
+        "input": {
+          "title": "Datos de nacimiento",
+          "examples": "Prueba un ejemplo resuelto",
+          "enterIn": "Introduce la fecha de nacimiento en",
+          "birth": "Fecha de nacimiento",
+          "birthHijri": "Fecha de nacimiento (Hégira, Umm al-Qura)",
+          "day": "Día",
+          "month": "Mes",
+          "year": "Año (H)",
+          "equalsHijri": "= {date} (Umm al-Qura)",
+          "equalsGregorian": "= {date} (gregoriano)",
+          "ageOn": "Calcular la edad el",
+          "today": "Hoy",
+          "specificDate": "Una fecha concreta",
+          "leapRule": "Cumpleaños del 29 feb en años comunes",
+          "leapFeb28": "Celebrar el 28 feb",
+          "leapMar1": "Celebrar el 1 mar",
+          "leapNote": "Se aplica siempre que el día de nacimiento no existe en un mes (29 feb, el día 31 o el día 30 de un mes hégira de 29 días). Las normas legales varían según el país.",
+          "sex": "Sexo (solo esperanza de vida)",
+          "male": "Hombre",
+          "female": "Mujer",
+          "copyResult": "Copiar resultado",
+          "copyLink": "Copiar enlace",
+          "copied": "Copiado",
+          "reset": "Volver al ejemplo",
+          "linkNote": "La dirección de la página siempre lleva tus datos, así que el enlace copiado abre este mismo resultado."
+        },
+        "errors": {
+          "birthInvalid": "Introduce una fecha de nacimiento válida. Mientras tanto se muestra el ejemplo.",
+          "hijriInvalid": "Esta fecha hégira no existe en el calendario Umm al-Qura (revisa el día y que el año esté entre 1300 y 1600 H).",
+          "refInvalid": "Introduce una fecha de referencia válida.",
+          "referenceBeforeBirth": "La fecha de referencia es anterior a la de nacimiento.",
+          "outOfRange": "Las fechas deben estar entre 1900 y 2150 (el rango de la tabla Umm al-Qura)."
+        },
+        "result": {
+          "title": "Tu edad en ambos calendarios",
+          "colItem": "Concepto",
+          "colCalc": "Cálculo",
+          "colValue": "Valor",
+          "groupGregorian": "Edad gregoriana",
+          "groupHijri": "Edad hégira (Umm al-Qura)",
+          "groupNext": "Próximos cumpleaños",
+          "groupLived": "Tiempo vivido",
+          "groupBirth": "Sobre la fecha de nacimiento",
+          "birth": "Nacimiento",
+          "reference": "Edad el",
+          "lastBirthday": "Último cumpleaños",
+          "turned": "cumplió {n}",
+          "age": "Edad",
+          "monthsSince": "{n} meses completos",
+          "decimal": "Edad decimal",
+          "hijriAhead": "Años hégira de ventaja",
+          "nextGregorian": "Cumpleaños gregoriano ({n})",
+          "nextHijri": "Cumpleaños hégira ({n})",
+          "countdown": "Cuenta atrás",
+          "today": "¡Hoy!",
+          "inDays": "en {n} días",
+          "daysShort": "{n} días",
+          "nextBirthday": "Próximo cumpleaños",
+          "leapRule": "Regla del 29 feb",
+          "leapDaysLived": "{n} cumpleaños reales el 29 feb",
+          "days": "Días vividos",
+          "weeks": "Semanas vividas",
+          "weeksDays": "{w} semanas + {d} días",
+          "hours": "Horas vividas",
+          "minutes": "Minutos vividos",
+          "leapDays": "Días bisiestos vividos",
+          "feb29s": "29 de febrero desde el nacimiento",
+          "bornOn": "Nació un",
+          "dialCenter": "años · hégira {h}",
+          "dialCaption": "Anillo exterior: {g} del año de vida gregoriano actual. Anillo interior: {h} del año de vida hégira actual. El hueco es la cuenta atrás hasta el próximo cumpleaños."
+        },
+        "copy": {
+          "age": "Edad el {date}: {age}",
+          "hijri": "Edad hégira (Umm al-Qura): {age}",
+          "birth": "Nacimiento {g} ({h}), un {weekday}",
+          "next": "Próximo cumpleaños: {date}, en {n} días",
+          "days": "Días vividos: {n}"
+        },
+        "history": {
+          "title": "Cálculos recientes",
+          "empty": "Tus cálculos se guardan aquí, en este dispositivo, al cambiar las fechas.",
+          "totalDays": "{n} días",
+          "upcoming": "Tus próximos 10 cumpleaños",
+          "age": "Edad",
+          "date": "Fecha"
+        },
+        "stages": {
+          "childhood": "Infancia",
+          "adolescence": "Adolescencia",
+          "youth": "Adulto joven",
+          "middleAge": "Mediana edad",
+          "oldAge": "Vejez"
+        },
+        "ind": {
+          "worked": "Ejemplo resuelto",
+          "travel": {
+            "title": "Máquina del tiempo de la edad",
+            "intro": "Arrastra a lo largo de tus primeros 100 años para ver tu edad exacta, en ambos calendarios, en cualquier fecha: pasada, hoy o futura.",
+            "slider": "Elige una fecha entre el nacimiento y los 100 años",
+            "useDate": "Usar esta fecha como referencia",
+            "reset": "Volver a la fecha de referencia",
+            "date": "Fecha elegida",
+            "fromRef": "Desde la fecha de referencia",
+            "daysSigned": "{n} días"
+          },
+          "equiv": {
+            "title": "Mismos días, dos calendarios",
+            "intro": "Los mismos días vividos, divididos en años gregorianos y en años lunares hégira más cortos. Por eso la edad hégira es mayor.",
+            "blocks": "{n} años completos de {len} días",
+            "sameDays": "Ambas barras = {n} días vividos",
+            "ratio": "Relación de duración del año"
+          },
+          "countdown": {
+            "title": "Cuenta atrás para tus próximos hitos",
+            "intro": "Cada evento próximo calculado a partir de tu fecha de nacimiento, el más cercano primero (escala de raíz cuadrada, para ver esperas cortas y largas).",
+            "gregorianBirthday": "Cumpleaños gregoriano ({n})",
+            "hijriBirthday": "Cumpleaños hégira ({n})",
+            "thousandDays": "{n} días de vida",
+            "thousandWeeks": "{n} semanas de vida",
+            "milestone": "Edad hito {n}",
+            "leapBirthday": "Cumpleaños real el 29 feb (año {n})",
+            "days": "{n} d",
+            "now": "hoy"
+          },
+          "weekday": {
+            "title": "Cumpleaños por día de la semana",
+            "intro": "En qué día de la semana cayó cada uno de tus cumpleaños gregorianos hasta ahora, con el día en que naciste resaltado.",
+            "born": "nacido",
+            "next": "próximo",
+            "total": "Cumpleaños contados",
+            "totalNote": "de 1 a {n} años",
+            "most": "Más frecuente",
+            "nextOn": "El próximo cumpleaños cae en"
+          },
+          "stages": {
+            "title": "Días vividos en cada etapa de la vida",
+            "intro": "Tus días vividos repartidos entre las etapas de la vida de la OMS y Erikson, en una escala que llega a la esperanza de vida media.",
+            "horizon": "esperanza de vida {y} a",
+            "ongoing": "en curso",
+            "current": "Etapa actual"
+          },
+          "life": {
+            "title": "Parte de la esperanza de vida media",
+            "intro": "Tu edad decimal frente a la esperanza de vida mundial al nacer. Cambia el sexo para comparar. Es un promedio estadístico, no una predicción personal.",
+            "of": "de {y} años",
+            "expectancy": "Esperanza de vida (años)",
+            "source": "Banco Mundial, media mundial, 2023 (actualización anual)",
+            "elapsed": "Transcurrido",
+            "remaining": "Años restantes (media)",
+            "remainingDays": "≈ {n} días"
+          },
+          "units": {
+            "title": "Tu edad en todas las unidades",
+            "intro": "La misma edad en años, meses, semanas, días, horas, minutos y segundos en una sola escala logarítmica: cada línea es diez veces la anterior.",
+            "years": "Años",
+            "months": "Meses",
+            "weeks": "Semanas",
+            "days": "Días",
+            "hours": "Horas",
+            "minutes": "Minutos",
+            "seconds": "Segundos"
+          },
+          "formula": {
+            "title": "Cómo se calcula la edad",
+            "intro": "Años completos hasta el último cumpleaños, luego meses completos en el mismo día del mes y después los días restantes. La edad hégira repite esto en meses lunares.",
+            "anchor": "+ meses",
+            "legend": "Los meses se cuentan en el día de nacimiento; un día inexistente sigue la regla del 29 feb.",
+            "hijriLegend": "Los mismos pasos en meses Umm al-Qura de 29 o 30 días.",
+            "wholeYears": "Años completos",
+            "wholeMonths": "Meses completos",
+            "remainingDays": "Días restantes",
+            "ruleNote": "se usa cuando falta el día de nacimiento"
+          }
+        }
       }
     },
     "bmi-calculator": {

@@ -881,7 +881,7 @@
         "birthDateLabel": "Date of birth",
         "hijriDayPlaceholder": "Day",
         "hijriYearPlaceholder": "Year (AH)",
-        "hijriNote": "The Hijri calendar here uses the fixed tabular (civil) scheme, not real moon sightings — it can differ from the observational calendar by a day or two.",
+        "hijriNote": "Hijri dates follow the Umm al-Qura calendar (Saudi Arabia's official calendar); local moon-sighting calendars can differ by a day or two.",
         "hijriMonths": [
           "Muharram",
           "Safar",
@@ -951,7 +951,7 @@
         "decimalAgeNote": "Age expressed as a single decimal number of years — the convention used in pediatric growth-chart research.",
         "hijriAgeLabel": "Hijri (Islamic) age",
         "hijriAgeValue": "{years}y {months}m {days}d",
-        "hijriAgeNote": "Based on the tabular Hijri calendar — Hijri years are about 3% shorter than Gregorian years, so this number is naturally a little higher.",
+        "hijriAgeNote": "Hijri dates follow the Umm al-Qura calendar (Saudi Arabia's official calendar); local moon-sighting calendars can differ by a day or two.",
         "zodiacLabel": "Western zodiac sign",
         "zodiacNames": {
           "aries": "Aries",
@@ -1081,7 +1081,7 @@
           "intro": "The \"years since birth, incrementing on your birthday\" method used above — sometimes called international age — is the global default today, but it is a relatively recent standard even in places that now use it exclusively.",
           "hijri": {
             "title": "The Hijri (Islamic) Calendar",
-            "paragraph": "The Hijri calendar is purely lunar, with 12 months of 29 or 30 days totaling about 354–355 days a year — roughly 11 days shorter than the Gregorian solar year. Because of that gap, a person's age in Hijri years is consistently a few percent higher than their age in Gregorian years, and Hijri dates drift earlier through the Gregorian seasons over a person's lifetime. This calculator's Hijri age uses the tabular (civil) Islamic calendar, a fixed mathematical approximation used by most software calendars — it can differ by a day or two from the real, moon-sighting-based calendar used for religious observances."
+            "paragraph": "The Hijri calendar is purely lunar, with 12 months of 29 or 30 days totaling about 354–355 days a year — roughly 11 days shorter than the Gregorian solar year. Because of that gap, a person's age in Hijri years is consistently a few percent higher than their age in Gregorian years, and Hijri dates drift earlier through the Gregorian seasons over a person's lifetime. This calculator's Hijri age uses the Umm al-Qura calendar (Saudi Arabia's official calendar, built into modern browsers) — it can still differ by a day or two from moon-sighting announcements used for religious observances in other countries."
           },
           "korea": {
             "title": "South Korea's Recent Switch to International Age",
@@ -1149,7 +1149,7 @@
             },
             {
               "question": "Is the Hijri date this tool shows exactly what my local mosque or country uses?",
-              "answer": "Not necessarily. This tool uses the tabular (civil) Islamic calendar — a fixed mathematical scheme — while many countries and religious authorities set the start of each Hijri month by an actual moon sighting or a specific local authority's announcement (such as the Umm al-Qura calendar in Saudi Arabia). These can differ from the tabular calcular by a day or two."
+              "answer": "Not necessarily. This tool uses the Umm al-Qura calendar — Saudi Arabia's official, astronomically calculated calendar — while many countries and religious authorities set the start of each Hijri month by an actual moon sighting or a local authority's announcement. These can differ from Umm al-Qura by a day or two."
             },
             {
               "question": "How is my zodiac sign determined?",
@@ -1246,6 +1246,203 @@
         "millennialExample": "Millennial Example",
         "genXExample": "Gen X Example",
         "boomerExample": "Baby Boomer Example"
+      },
+      "dual": {
+        "cal": {
+          "gregorian": "Gregorian",
+          "hijri": "Hijri",
+          "gShort": "G",
+          "hShort": "H"
+        },
+        "ymd": "{y} years, {m} months, {d} days",
+        "ymdShort": "{y}y {m}m {d}d",
+        "nav": {
+          "tool": "Calculator",
+          "indicators": "Age indicators",
+          "faq": "FAQ",
+          "behind": "Behind the Tool"
+        },
+        "scenarios": {
+          "millennial": "Born 1994",
+          "leapling": "Feb 29 birthday",
+          "ramadan": "1 Ramadan 1445",
+          "boomer": "Born 1958"
+        },
+        "input": {
+          "title": "Birth Details",
+          "examples": "Try a worked example",
+          "enterIn": "Enter the birth date in",
+          "birth": "Date of birth",
+          "birthHijri": "Date of birth (Hijri, Umm al-Qura)",
+          "day": "Day",
+          "month": "Month",
+          "year": "Year (AH)",
+          "equalsHijri": "= {date} (Umm al-Qura)",
+          "equalsGregorian": "= {date} (Gregorian)",
+          "ageOn": "Calculate the age on",
+          "today": "Today",
+          "specificDate": "A specific date",
+          "leapRule": "Feb 29 birthday in common years",
+          "leapFeb28": "Celebrate on Feb 28",
+          "leapMar1": "Celebrate on Mar 1",
+          "leapNote": "Applies whenever the birth day is missing from a month (Feb 29, the 31st, or day 30 of a 29-day Hijri month). Legal rules differ by country.",
+          "sex": "Sex (life expectancy only)",
+          "male": "Male",
+          "female": "Female",
+          "copyResult": "Copy result",
+          "copyLink": "Copy link",
+          "copied": "Copied",
+          "reset": "Reset to the example",
+          "linkNote": "The page address always carries your inputs, so the copied link reopens this exact result."
+        },
+        "errors": {
+          "birthInvalid": "Enter a valid date of birth. The sample result is shown meanwhile.",
+          "hijriInvalid": "This Hijri date does not exist in the Umm al-Qura calendar (check the day and a year between 1300 and 1600 AH).",
+          "refInvalid": "Enter a valid reference date.",
+          "referenceBeforeBirth": "The reference date is before the date of birth.",
+          "outOfRange": "Dates must fall between 1900 and 2150 (the range of the Umm al-Qura table)."
+        },
+        "result": {
+          "title": "Your Age in Both Calendars",
+          "colItem": "Item",
+          "colCalc": "Calculation",
+          "colValue": "Value",
+          "groupGregorian": "Gregorian age",
+          "groupHijri": "Hijri age (Umm al-Qura)",
+          "groupNext": "Next birthdays",
+          "groupLived": "Time lived",
+          "groupBirth": "About the birth date",
+          "birth": "Birth",
+          "reference": "Age on",
+          "lastBirthday": "Last birthday",
+          "turned": "turned {n}",
+          "age": "Age",
+          "monthsSince": "{n} whole months",
+          "decimal": "Decimal age",
+          "hijriAhead": "Hijri years ahead",
+          "nextGregorian": "Gregorian birthday ({n})",
+          "nextHijri": "Hijri birthday ({n})",
+          "countdown": "Countdown",
+          "today": "Today!",
+          "inDays": "in {n} days",
+          "daysShort": "{n} days",
+          "nextBirthday": "Next birthday",
+          "leapRule": "Feb 29 rule",
+          "leapDaysLived": "{n} real Feb 29 birthdays",
+          "days": "Days lived",
+          "weeks": "Weeks lived",
+          "weeksDays": "{w} weeks + {d} days",
+          "hours": "Hours lived",
+          "minutes": "Minutes lived",
+          "leapDays": "Leap days lived",
+          "feb29s": "Feb 29 dates since birth",
+          "bornOn": "Born on a",
+          "dialCenter": "years · Hijri {h}",
+          "dialCaption": "Outer ring: {g} of the current Gregorian year of life. Inner ring: {h} of the current Hijri year of life. The gap is the countdown to the next birthday."
+        },
+        "copy": {
+          "age": "Age on {date}: {age}",
+          "hijri": "Hijri (Umm al-Qura) age: {age}",
+          "birth": "Born {g} ({h}), a {weekday}",
+          "next": "Next birthday: {date}, in {n} days",
+          "days": "Days lived: {n}"
+        },
+        "history": {
+          "title": "Recent Calculations",
+          "empty": "Your calculations are saved here on this device as you change the dates.",
+          "totalDays": "{n} days",
+          "upcoming": "Your next 10 birthdays",
+          "age": "Age",
+          "date": "Date"
+        },
+        "stages": {
+          "childhood": "Childhood",
+          "adolescence": "Adolescence",
+          "youth": "Young adult",
+          "middleAge": "Middle age",
+          "oldAge": "Older age"
+        },
+        "ind": {
+          "worked": "Worked example",
+          "travel": {
+            "title": "Age Time Machine",
+            "intro": "Drag along your first 100 years to see your exact age, in both calendars, on any date: past, today or future.",
+            "slider": "Pick a date between birth and age 100",
+            "useDate": "Use this date as the reference",
+            "reset": "Back to the reference date",
+            "date": "Selected date",
+            "fromRef": "From the reference date",
+            "daysSigned": "{n} days"
+          },
+          "equiv": {
+            "title": "Same Days, Two Calendars",
+            "intro": "The same number of days lived, cut into Gregorian years and into shorter Hijri lunar years. That is why the Hijri age is higher.",
+            "blocks": "{n} full years of {len} days",
+            "sameDays": "Both bars = {n} days lived",
+            "ratio": "Year-length ratio"
+          },
+          "countdown": {
+            "title": "Countdown to Your Next Milestones",
+            "intro": "Every upcoming event worked out from your birth date, soonest first (square-root scale, so short and long waits are both visible).",
+            "gregorianBirthday": "Gregorian birthday ({n})",
+            "hijriBirthday": "Hijri birthday ({n})",
+            "thousandDays": "{n} days old",
+            "thousandWeeks": "{n} weeks old",
+            "milestone": "Milestone age {n}",
+            "leapBirthday": "Real Feb 29 birthday (year {n})",
+            "days": "{n} d",
+            "now": "today"
+          },
+          "weekday": {
+            "title": "Birthdays by Day of the Week",
+            "intro": "Which weekday each of your Gregorian birthdays fell on so far, with the weekday you were born on highlighted.",
+            "born": "born",
+            "next": "next",
+            "total": "Birthdays counted",
+            "totalNote": "ages 1 to {n}",
+            "most": "Most frequent",
+            "nextOn": "Next birthday falls on"
+          },
+          "stages": {
+            "title": "Days Lived in Each Life Stage",
+            "intro": "Your days lived split across the WHO and Erikson life stages, on a scale that runs to the average life expectancy.",
+            "horizon": "life expectancy {y} y",
+            "ongoing": "ongoing",
+            "current": "Current stage"
+          },
+          "life": {
+            "title": "Share of Average Life Expectancy",
+            "intro": "Your decimal age against the world average life expectancy at birth. Switch the sex to compare. A statistical average, not a personal prediction.",
+            "of": "of {y} years",
+            "expectancy": "Life expectancy (years)",
+            "source": "World Bank, world average, 2023 (updated yearly)",
+            "elapsed": "Elapsed",
+            "remaining": "Years remaining (average)",
+            "remainingDays": "≈ {n} days"
+          },
+          "units": {
+            "title": "Your Age in Every Unit",
+            "intro": "The same age in years, months, weeks, days, hours, minutes and seconds on one logarithmic scale: each grid line is ten times the last.",
+            "years": "Years",
+            "months": "Months",
+            "weeks": "Weeks",
+            "days": "Days",
+            "hours": "Hours",
+            "minutes": "Minutes",
+            "seconds": "Seconds"
+          },
+          "formula": {
+            "title": "How the Age Is Worked Out",
+            "intro": "Whole years up to the last birthday, then whole months on the same day of the month, then the remaining days. The Hijri age repeats this in lunar months.",
+            "anchor": "+ months",
+            "legend": "Months are counted on the birth day; a missing day follows the Feb 29 rule.",
+            "hijriLegend": "Same steps in Umm al-Qura months of 29 or 30 days.",
+            "wholeYears": "Whole years",
+            "wholeMonths": "Whole months",
+            "remainingDays": "Remaining days",
+            "ruleNote": "used when the birth day is missing"
+          }
+        }
       }
     },
     "bmi-calculator": {

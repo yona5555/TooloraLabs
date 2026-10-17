@@ -863,7 +863,7 @@
         "birthDateLabel": "Date de naissance",
         "hijriDayPlaceholder": "Jour",
         "hijriYearPlaceholder": "Année (AH)",
-        "hijriNote": "Le calendrier hégirien utilisé ici applique le schéma tabulaire (civil) fixe, et non l'observation réelle de la lune — il peut donc différer d'un jour ou deux du calendrier observationnel.",
+        "hijriNote": "Les dates hégiriennes suivent le calendrier Umm al-Qura (officiel en Arabie saoudite) ; les calendriers locaux fondés sur l'observation de la lune peuvent différer d'un jour ou deux.",
         "hijriMonths": [
           "Muharram",
           "Safar",
@@ -933,7 +933,7 @@
         "decimalAgeNote": "Âge exprimé sous la forme d'un seul nombre décimal d'années — la convention utilisée dans la recherche sur les courbes de croissance pédiatrique.",
         "hijriAgeLabel": "Âge hégirien (islamique)",
         "hijriAgeValue": "{years} a {months} m {days} j",
-        "hijriAgeNote": "Basé sur le calendrier hégirien tabulaire — les années hégiriennes sont environ 3 % plus courtes que les années grégoriennes, ce qui explique que ce nombre soit naturellement un peu plus élevé.",
+        "hijriAgeNote": "Les dates hégiriennes suivent le calendrier Umm al-Qura (officiel en Arabie saoudite) ; les calendriers locaux fondés sur l'observation de la lune peuvent différer d'un jour ou deux.",
         "zodiacLabel": "Signe du zodiaque occidental",
         "zodiacNames": {
           "aries": "Bélier",
@@ -1063,7 +1063,7 @@
           "intro": "La méthode « nombre d'années depuis la naissance, incrémenté à chaque anniversaire » utilisée ci-dessus — parfois appelée âge international — est aujourd'hui la norme mondiale par défaut, mais il s'agit d'une convention relativement récente, y compris dans les pays qui l'utilisent désormais exclusivement.",
           "hijri": {
             "title": "Le calendrier hégirien (islamique)",
-            "paragraph": "Le calendrier hégirien est purement lunaire, avec 12 mois de 29 ou 30 jours totalisant environ 354 à 355 jours par an — soit environ 11 jours de moins que l'année solaire grégorienne. En raison de cet écart, l'âge d'une personne en années hégiriennes est systématiquement supérieur de quelques pourcents à son âge en années grégoriennes, et les dates hégiriennes reculent progressivement à travers les saisons grégoriennes au fil d'une vie. L'âge hégirien de ce calculateur utilise le calendrier islamique tabulaire (civil), une approximation mathématique fixe employée par la plupart des logiciels de calendrier — il peut différer d'un jour ou deux du calendrier réel, fondé sur l'observation de la lune, utilisé pour les pratiques religieuses."
+            "paragraph": "Le calendrier hégirien est purement lunaire, avec 12 mois de 29 ou 30 jours totalisant environ 354 à 355 jours par an — soit environ 11 jours de moins que l'année solaire grégorienne. En raison de cet écart, l'âge d'une personne en années hégiriennes est systématiquement supérieur de quelques pourcents à son âge en années grégoriennes, et les dates hégiriennes reculent progressivement à travers les saisons grégoriennes au fil d'une vie. L'âge hégirien de ce calculateur utilise le calendrier Umm al-Qura (le calendrier officiel de l'Arabie saoudite, intégré aux navigateurs modernes) — il peut toutefois différer d'un jour ou deux des annonces fondées sur l'observation de la lune utilisées pour les pratiques religieuses dans d'autres pays."
           },
           "korea": {
             "title": "Le récent passage de la Corée du Sud à l'âge international",
@@ -1131,7 +1131,7 @@
             },
             {
               "question": "La date hégirienne indiquée par cet outil correspond-elle exactement à celle utilisée par ma mosquée locale ou mon pays ?",
-              "answer": "Pas nécessairement. Cet outil utilise le calendrier islamique tabulaire (civil) — un schéma mathématique fixe —, tandis que de nombreux pays et autorités religieuses fixent le début de chaque mois hégirien par une observation réelle de la lune ou l'annonce d'une autorité locale spécifique (comme le calendrier Umm al-Qura en Arabie saoudite). Ces dates peuvent différer du calendrier tabulaire d'un jour ou deux."
+              "answer": "Pas nécessairement. Cet outil utilise le calendrier Umm al-Qura — le calendrier officiel de l'Arabie saoudite, calculé astronomiquement —, tandis que de nombreux pays et autorités religieuses fixent le début de chaque mois hégirien par une observation réelle de la lune ou l'annonce d'une autorité locale. Ces dates peuvent différer d'Umm al-Qura d'un jour ou deux."
             },
             {
               "question": "Comment mon signe astrologique est-il déterminé ?",
@@ -1246,6 +1246,203 @@
         "shareToSocial": "Partager sur les réseaux sociaux",
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour"
+      },
+      "dual": {
+        "cal": {
+          "gregorian": "Grégorien",
+          "hijri": "Hégirien",
+          "gShort": "G",
+          "hShort": "H"
+        },
+        "ymd": "{y} ans, {m} mois, {d} jours",
+        "ymdShort": "{y}a {m}m {d}j",
+        "nav": {
+          "tool": "Calculateur",
+          "indicators": "Indicateurs d'âge",
+          "faq": "FAQ",
+          "behind": "Coulisses de l'outil"
+        },
+        "scenarios": {
+          "millennial": "Né en 1994",
+          "leapling": "Né un 29 février",
+          "ramadan": "1er Ramadan 1445",
+          "boomer": "Né en 1958"
+        },
+        "input": {
+          "title": "Données de naissance",
+          "examples": "Essayez un exemple résolu",
+          "enterIn": "Saisir la date de naissance en",
+          "birth": "Date de naissance",
+          "birthHijri": "Date de naissance (hégirienne, Umm al-Qura)",
+          "day": "Jour",
+          "month": "Mois",
+          "year": "Année (H)",
+          "equalsHijri": "= {date} (Umm al-Qura)",
+          "equalsGregorian": "= {date} (grégorien)",
+          "ageOn": "Calculer l'âge au",
+          "today": "Aujourd'hui",
+          "specificDate": "Une date précise",
+          "leapRule": "Anniversaire du 29 février les années communes",
+          "leapFeb28": "Fêter le 28 février",
+          "leapMar1": "Fêter le 1er mars",
+          "leapNote": "S'applique chaque fois que le jour de naissance manque dans un mois (29 février, le 31, ou le 30 d'un mois hégirien de 29 jours). Les règles légales varient selon les pays.",
+          "sex": "Sexe (espérance de vie uniquement)",
+          "male": "Homme",
+          "female": "Femme",
+          "copyResult": "Copier le résultat",
+          "copyLink": "Copier le lien",
+          "copied": "Copié",
+          "reset": "Revenir à l'exemple",
+          "linkNote": "L'adresse de la page contient toujours vos saisies : le lien copié rouvre exactement ce résultat."
+        },
+        "errors": {
+          "birthInvalid": "Saisissez une date de naissance valide. L'exemple est affiché en attendant.",
+          "hijriInvalid": "Cette date hégirienne n'existe pas dans le calendrier Umm al-Qura (vérifiez le jour et une année entre 1300 et 1600 H).",
+          "refInvalid": "Saisissez une date de référence valide.",
+          "referenceBeforeBirth": "La date de référence précède la date de naissance.",
+          "outOfRange": "Les dates doivent être comprises entre 1900 et 2150 (la plage de la table Umm al-Qura)."
+        },
+        "result": {
+          "title": "Votre âge dans les deux calendriers",
+          "colItem": "Élément",
+          "colCalc": "Calcul",
+          "colValue": "Valeur",
+          "groupGregorian": "Âge grégorien",
+          "groupHijri": "Âge hégirien (Umm al-Qura)",
+          "groupNext": "Prochains anniversaires",
+          "groupLived": "Temps vécu",
+          "groupBirth": "À propos de la date de naissance",
+          "birth": "Naissance",
+          "reference": "Âge au",
+          "lastBirthday": "Dernier anniversaire",
+          "turned": "a eu {n} ans",
+          "age": "Âge",
+          "monthsSince": "{n} mois entiers",
+          "decimal": "Âge décimal",
+          "hijriAhead": "Avance en années hégiriennes",
+          "nextGregorian": "Anniversaire grégorien ({n})",
+          "nextHijri": "Anniversaire hégirien ({n})",
+          "countdown": "Compte à rebours",
+          "today": "Aujourd'hui !",
+          "inDays": "dans {n} jours",
+          "daysShort": "{n} jours",
+          "nextBirthday": "Prochain anniversaire",
+          "leapRule": "Règle du 29 février",
+          "leapDaysLived": "{n} vrais anniversaires le 29 février",
+          "days": "Jours vécus",
+          "weeks": "Semaines vécues",
+          "weeksDays": "{w} semaines + {d} jours",
+          "hours": "Heures vécues",
+          "minutes": "Minutes vécues",
+          "leapDays": "Jours bissextiles vécus",
+          "feb29s": "29 février depuis la naissance",
+          "bornOn": "Né un",
+          "dialCenter": "ans · hégirien {h}",
+          "dialCaption": "Anneau extérieur : {g} de l'année de vie grégorienne en cours. Anneau intérieur : {h} de l'année de vie hégirienne en cours. L'écart est le compte à rebours jusqu'au prochain anniversaire."
+        },
+        "copy": {
+          "age": "Âge au {date} : {age}",
+          "hijri": "Âge hégirien (Umm al-Qura) : {age}",
+          "birth": "Né le {g} ({h}), un {weekday}",
+          "next": "Prochain anniversaire : {date}, dans {n} jours",
+          "days": "Jours vécus : {n}"
+        },
+        "history": {
+          "title": "Calculs récents",
+          "empty": "Vos calculs sont enregistrés ici, sur cet appareil, à mesure que vous changez les dates.",
+          "totalDays": "{n} jours",
+          "upcoming": "Vos 10 prochains anniversaires",
+          "age": "Âge",
+          "date": "Date"
+        },
+        "stages": {
+          "childhood": "Enfance",
+          "adolescence": "Adolescence",
+          "youth": "Jeune adulte",
+          "middleAge": "Âge mûr",
+          "oldAge": "Grand âge"
+        },
+        "ind": {
+          "worked": "Exemple résolu",
+          "travel": {
+            "title": "Machine à remonter l'âge",
+            "intro": "Faites glisser le long de vos 100 premières années pour voir votre âge exact, dans les deux calendriers, à n'importe quelle date : passée, aujourd'hui ou future.",
+            "slider": "Choisir une date entre la naissance et 100 ans",
+            "useDate": "Utiliser cette date comme référence",
+            "reset": "Revenir à la date de référence",
+            "date": "Date choisie",
+            "fromRef": "Écart avec la date de référence",
+            "daysSigned": "{n} jours"
+          },
+          "equiv": {
+            "title": "Mêmes jours, deux calendriers",
+            "intro": "Le même nombre de jours vécus, découpé en années grégoriennes et en années lunaires hégiriennes plus courtes. D'où un âge hégirien plus élevé.",
+            "blocks": "{n} années complètes de {len} jours",
+            "sameDays": "Les deux barres = {n} jours vécus",
+            "ratio": "Rapport des durées d'année"
+          },
+          "countdown": {
+            "title": "Compte à rebours de vos prochaines étapes",
+            "intro": "Chaque événement à venir calculé à partir de votre date de naissance, le plus proche d'abord (échelle en racine carrée pour voir attentes courtes et longues).",
+            "gregorianBirthday": "Anniversaire grégorien ({n})",
+            "hijriBirthday": "Anniversaire hégirien ({n})",
+            "thousandDays": "{n} jours de vie",
+            "thousandWeeks": "{n} semaines de vie",
+            "milestone": "Âge charnière {n}",
+            "leapBirthday": "Vrai anniversaire le 29 février (année {n})",
+            "days": "{n} j",
+            "now": "aujourd'hui"
+          },
+          "weekday": {
+            "title": "Anniversaires par jour de la semaine",
+            "intro": "Le jour de la semaine de chacun de vos anniversaires grégoriens jusqu'ici, avec votre jour de naissance mis en évidence.",
+            "born": "naissance",
+            "next": "prochain",
+            "total": "Anniversaires comptés",
+            "totalNote": "de 1 à {n} ans",
+            "most": "Le plus fréquent",
+            "nextOn": "Le prochain anniversaire tombe un"
+          },
+          "stages": {
+            "title": "Jours vécus dans chaque étape de la vie",
+            "intro": "Vos jours vécus répartis entre les étapes de la vie selon l'OMS et Erikson, sur une échelle allant jusqu'à l'espérance de vie moyenne.",
+            "horizon": "espérance de vie {y} a",
+            "ongoing": "en cours",
+            "current": "Étape actuelle"
+          },
+          "life": {
+            "title": "Part de l'espérance de vie moyenne",
+            "intro": "Votre âge décimal face à l'espérance de vie mondiale à la naissance. Changez le sexe pour comparer. Une moyenne statistique, pas une prédiction personnelle.",
+            "of": "sur {y} ans",
+            "expectancy": "Espérance de vie (ans)",
+            "source": "Banque mondiale, moyenne mondiale, 2023 (mise à jour annuelle)",
+            "elapsed": "Écoulé",
+            "remaining": "Années restantes (moyenne)",
+            "remainingDays": "≈ {n} jours"
+          },
+          "units": {
+            "title": "Votre âge dans toutes les unités",
+            "intro": "Le même âge en années, mois, semaines, jours, heures, minutes et secondes sur une seule échelle logarithmique : chaque ligne vaut dix fois la précédente.",
+            "years": "Années",
+            "months": "Mois",
+            "weeks": "Semaines",
+            "days": "Jours",
+            "hours": "Heures",
+            "minutes": "Minutes",
+            "seconds": "Secondes"
+          },
+          "formula": {
+            "title": "Comment l'âge est calculé",
+            "intro": "Les années entières jusqu'au dernier anniversaire, puis les mois entiers au même jour du mois, puis les jours restants. L'âge hégirien refait ces étapes en mois lunaires.",
+            "anchor": "+ mois",
+            "legend": "Les mois se comptent au jour de naissance ; un jour manquant suit la règle du 29 février.",
+            "hijriLegend": "Mêmes étapes en mois Umm al-Qura de 29 ou 30 jours.",
+            "wholeYears": "Années entières",
+            "wholeMonths": "Mois entiers",
+            "remainingDays": "Jours restants",
+            "ruleNote": "appliquée quand le jour de naissance manque"
+          }
+        }
       }
     },
     "bmi-calculator": {
