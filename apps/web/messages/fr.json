@@ -24038,14 +24038,7 @@
         "intro": {
           "title": "Pourquoi les noms de fichiers doivent-ils être nettoyés ?",
           "paragraph1": "Un nom de fichier n'est pas qu'une simple étiquette : sur la plupart des systèmes d'exploitation, c'est aussi une donnée que l'interpréteur de commandes du système de fichiers peut lui-même analyser — c'est exactement pour cette raison que certains caractères sont interdits. Une barre oblique ou une barre oblique inversée désigne un séparateur de chemin, les deux-points peuvent désigner une lettre de lecteur ou un flux de données alternatif, et un point d'interrogation ou un astérisque désignent un motif générique (wildcard) — un fichier littéralement nommé « facture?.pdf » serait donc ambigu, voire carrément rejeté par les systèmes mêmes censés le stocker. Nettoyer un nom de fichier consiste à retirer ou remplacer précisément ces caractères porteurs de sens structurel, tout en laissant intact le reste du nom.",
-          "paragraph2": "Au-delà des caractères pris individuellement, des noms de fichiers entiers peuvent être totalement réservés : Windows bloque CON, PRN, AUX, NUL, ainsi que les ports COM et LPT numérotés, quelle que soit la casse et avec ou sans extension, car ces chaînes de caractères sont historiquement liées à des périphériques physiques au niveau du système d'exploitation, et non du système de fichiers. Un nom de fichier se terminant par un point ou une espace est discrètement tronqué par les API mêmes de Windows, ce qui peut créer des décalages déroutants entre ce que l'utilisateur saisit et ce qui est réellement enregistré. Le rapport « ce qui a changé » de cet outil existe précisément pour rendre visibles ces corrections qui, autrement, resteraient invisibles.",
-          "diagram": {
-            "rawLabel": "Nom brut",
-            "normalizeLabel": "Retrait des caractères\nillégaux + espaces",
-            "checkLabel": "Vérification des noms\nréservés + longueur",
-            "safeLabel": "Nom sécurisé",
-            "caption": "Le pipeline de nettoyage : un nom de fichier brut est d'abord normalisé (caractères illégaux et espaces traités), puis vérifié par rapport aux noms réservés et aux limites de longueur, avant d'être considéré comme sûr à utiliser partout."
-          }
+          "paragraph2": "Au-delà des caractères pris individuellement, des noms de fichiers entiers peuvent être totalement réservés : Windows bloque CON, PRN, AUX, NUL, ainsi que les ports COM et LPT numérotés, quelle que soit la casse et avec ou sans extension, car ces chaînes de caractères sont historiquement liées à des périphériques physiques au niveau du système d'exploitation, et non du système de fichiers. Un nom de fichier se terminant par un point ou une espace est discrètement tronqué par les API mêmes de Windows, ce qui peut créer des décalages déroutants entre ce que l'utilisateur saisit et ce qui est réellement enregistré. Le rapport « ce qui a changé » de cet outil existe précisément pour rendre visibles ces corrections qui, autrement, resteraient invisibles."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -24155,6 +24148,149 @@
           "note": "La référence officielle de Microsoft définissant les caractères illégaux et les noms de périphériques réservés (CON, PRN, AUX, NUL, COM1–9, LPT1–9) que cet outil vérifie — la plus stricte, et donc la plus largement compatible, des règles de nommage des principales plateformes.",
           "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
           "readOriginal": "Lire la documentation officielle"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez un nom de fichier ci-dessus pour voir cet indicateur.",
+          "classes": {
+            "ascii": "Lettre latine",
+            "digit": "Chiffre",
+            "accented": "Lettre accentuée",
+            "nonLatin": "Autre écriture",
+            "space": "Espace",
+            "illegal": "Interdit",
+            "dot": "Point",
+            "punct": "Ponctuation"
+          },
+          "platforms": {
+            "windows": "Windows",
+            "macos": "macOS",
+            "linux": "Linux",
+            "url": "Chemin d’URL"
+          },
+          "reasons": {
+            "chars": "< > : \" / \\ | ? *",
+            "control": "caractère de contrôle",
+            "trailing": "finit par un point ou une espace",
+            "reserved": "nom de périphérique réservé",
+            "length": "plus de 255",
+            "colon": "deux-points",
+            "slash": "barre oblique",
+            "encoding": "encodage % requis"
+          },
+          "explorer": {
+            "title": "Examiner un caractère",
+            "intro": "Chaque caractère du nom d’origine, coloré selon son type. Cliquez dessus pour voir son point de code, ses octets UTF-8 et ce que le nettoyeur en fait.",
+            "hint": "Cliquez sur un caractère",
+            "position": "Position",
+            "char": "Caractère",
+            "code": "Point de code",
+            "utf8": "Octets UTF-8",
+            "kind": "Type",
+            "fate": "Ce qu’il devient",
+            "fateRemoved": "supprimé (interdit)",
+            "fateSeparator": "devient « {s} »",
+            "fateStripped": "devient « {s} »",
+            "fateLower": "devient « {s} »",
+            "fateKept": "conservé"
+          },
+          "pipeline": {
+            "title": "Le nom après chaque étape",
+            "intro": "Votre nom au fil du traitement : rogné, désaccentué, débarrassé des caractères interdits, espaces remplacées, puis nettoyage final des séparateurs, de la casse, des points finaux et des noms réservés.",
+            "aria": "Barres en escalier par étape",
+            "input": "Rogné",
+            "transliterate": "Accents",
+            "illegal": "Interdits",
+            "whitespace": "Espaces",
+            "result": "Final",
+            "removed": "Caractères supprimés",
+            "replaced": "Espaces remplacées",
+            "shrink": "Variation de longueur"
+          },
+          "platformRows": {
+            "title": "L’original marcherait-il tel quel ?",
+            "intro": "Si Windows, macOS, Linux et un chemin d’URL acceptent votre nom d’origine, avec la règle exacte enfreinte, à côté du verdict pour le nom sûr.",
+            "aria": "Verdicts avant et après",
+            "fine": "accepté",
+            "originalFails": "Original refusé sur",
+            "resultFails": "Nom sûr refusé sur",
+            "strictest": "Système le plus strict",
+            "urlNote": "Dans une URL",
+            "urlSafe": "aucun encodage",
+            "urlEncode": "encore un encodage %",
+            "verdict": "Verdict",
+            "portable": "portable sur les trois systèmes",
+            "notPortable": "pas encore portable"
+          },
+          "length": {
+            "title": "Longueur face à la limite de 255",
+            "intro": "La taille du nom sûr en octets UTF-8 face à la limite de 255 octets d’ext4 et d’APFS (NTFS compte 255 unités UTF-16). Les lettres non latines prennent 2–3 octets.",
+            "aria": "Jauge de longueur",
+            "chars": "Caractères",
+            "utf8": "Octets UTF-8",
+            "utf16": "Unités UTF-16",
+            "bytesPerChar": "Octets par caractère",
+            "room": "Marge restante"
+          },
+          "donut": {
+            "title": "De quoi est fait l’original",
+            "intro": "Les caractères du nom d’origine par type.",
+            "aria": "Anneau des types de caractères",
+            "safe": "Sûrs partout",
+            "illegal": "Interdits",
+            "spaces": "Espaces",
+            "nonAscii": "Lettres non ASCII",
+            "total": "Caractères"
+          },
+          "changes": {
+            "title": "Ce que chaque correction a touché",
+            "intro": "Combien de caractères chaque correction a changés : accents retirés, caractères interdits supprimés, espaces devenues séparateurs, lettres en minuscules, et combien ont survécu.",
+            "aria": "Barres des caractères par correction",
+            "accents": "Accents",
+            "illegal": "Interdits",
+            "spaces": "Espaces",
+            "lowered": "Minuscules",
+            "kept": "Conservés",
+            "off": "désactivé",
+            "touched": "Caractères touchés"
+          },
+          "compare": {
+            "title": "Quatre façons de mesurer un nom",
+            "intro": "L’original et le nom sûr en caractères, octets UTF-8 (limite Linux et macOS), unités UTF-16 (limite Windows) et longueur encodée en URL.",
+            "aria": "Barres appariées des longueurs",
+            "original": "Original",
+            "sanitized": "Sûr",
+            "chars": "Caractères",
+            "utf8": "Octets UTF-8",
+            "utf16": "Unités UTF-16",
+            "url": "Longueur en URL",
+            "urlSaving": "Plus court en URL de"
+          },
+          "variants": {
+            "title": "Quatre styles du même nom",
+            "intro": "Votre nom nettoyé avec chaque combinaison de séparateur et de minuscules, toutes produites par l’outil. Cliquez sur une carte pour adopter ce style.",
+            "lower": "minuscules",
+            "keepCase": "garder la casse",
+            "distinct": "Résultats différents",
+            "dash": "Tiret",
+            "dashUse": "courant dans les URL",
+            "underscore": "Tiret bas",
+            "underscoreUse": "courant dans le code",
+            "case": "Minuscules",
+            "caseUse": "évite les conflits de casse",
+            "current": "Style actuel"
+          },
+          "url": {
+            "title": "Son coût dans une URL",
+            "intro": "Les caractères du nom d’origine qui grossissent le plus dans une URL : chaque octet hors A–Z a–z 0–9 - . _ ~ devient un échappement %XX de trois caractères.",
+            "aria": "Barres classées du coût",
+            "none": "Tous les caractères sont sûrs en URL.",
+            "costly": "Caractères à échapper",
+            "top": "Le plus coûteux",
+            "originalUrl": "Original en URL",
+            "resultUrl": "Nom sûr en URL",
+            "extra": "Caractères en plus"
+          }
         }
       },
       "shareExport": {
@@ -24175,6 +24311,19 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "resume": "Nom de document désordonné",
+        "reserved": "Nom réservé de Windows",
+        "photo": "Photo avec barres et chevrons",
+        "arabic": "Nom de fichier en arabe",
+        "underscore": "Barres verticales et étoiles, style tiret bas"
+      },
+      "result": {
+        "original": "Nom d’origine, caractère par caractère",
+        "before": "Original",
+        "after": "Nom sûr"
       }
     },
     "duplicate-line-remover": {

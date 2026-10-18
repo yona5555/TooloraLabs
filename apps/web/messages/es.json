@@ -24038,14 +24038,7 @@
         "intro": {
           "title": "Por qué hay que sanitizar los nombres de archivo",
           "paragraph1": "Un nombre de archivo no es solo una etiqueta: en la mayoría de sistemas operativos, también es un dato que el propio intérprete de comandos del sistema de archivos puede analizar, y por eso ciertos caracteres están prohibidos. Una barra diagonal o invertida significa un separador de ruta, los dos puntos pueden indicar una letra de unidad o un flujo de datos alternativo, y un signo de interrogación o un asterisco funcionan como comodín — así que un archivo llamado literalmente «factura?.pdf» resultaría ambiguo o directamente rechazado por los mismos sistemas destinados a guardarlo. Sanitizar un nombre de archivo consiste en eliminar o sustituir precisamente esos caracteres con significado estructural, dejando intacto todo lo demás del nombre.",
-          "paragraph2": "Más allá de caracteres sueltos, nombres de archivo completos pueden estar reservados: Windows bloquea CON, PRN, AUX, NUL, y los puertos COM y LPT numerados como nombres de archivo, en cualquier combinación de mayúsculas y con o sin extensión, porque estas cadenas están ligadas históricamente a dispositivos físicos a nivel del sistema operativo, no del sistema de archivos. Un nombre de archivo que termina en punto o espacio es eliminado silenciosamente por las propias API de Windows, lo que puede crear discrepancias confusas entre lo que el usuario escribe y lo que realmente se guarda. El informe «qué se cambió» de esta herramienta existe precisamente para hacer visible cada una de estas correcciones que, de otro modo, pasarían inadvertidas.",
-          "diagram": {
-            "rawLabel": "Nombre original",
-            "normalizeLabel": "Eliminar caracteres\nilegales y espacios",
-            "checkLabel": "Comprobar nombres\nreservados y longitud",
-            "safeLabel": "Nombre seguro",
-            "caption": "El proceso de sanitización: un nombre de archivo original se normaliza (se gestionan los caracteres ilegales y los espacios), se comprueba frente a nombres reservados y límites de longitud, y solo entonces se considera seguro para usarlo en cualquier sitio."
-          }
+          "paragraph2": "Más allá de caracteres sueltos, nombres de archivo completos pueden estar reservados: Windows bloquea CON, PRN, AUX, NUL, y los puertos COM y LPT numerados como nombres de archivo, en cualquier combinación de mayúsculas y con o sin extensión, porque estas cadenas están ligadas históricamente a dispositivos físicos a nivel del sistema operativo, no del sistema de archivos. Un nombre de archivo que termina en punto o espacio es eliminado silenciosamente por las propias API de Windows, lo que puede crear discrepancias confusas entre lo que el usuario escribe y lo que realmente se guarda. El informe «qué se cambió» de esta herramienta existe precisamente para hacer visible cada una de estas correcciones que, de otro modo, pasarían inadvertidas."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -24155,6 +24148,149 @@
           "note": "La referencia oficial de Microsoft que define los caracteres ilegales y los nombres de dispositivo reservados (CON, PRN, AUX, NUL, COM1–9, LPT1–9) frente a los que comprueba esta herramienta — el más estricto, y por tanto el más ampliamente compatible, de los conjuntos de reglas de nomenclatura de las principales plataformas.",
           "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
           "readOriginal": "Leer la documentación oficial"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce un nombre de archivo arriba para ver este indicador.",
+          "classes": {
+            "ascii": "Letra latina",
+            "digit": "Dígito",
+            "accented": "Letra acentuada",
+            "nonLatin": "Otra escritura",
+            "space": "Espacio",
+            "illegal": "Prohibido",
+            "dot": "Punto",
+            "punct": "Puntuación"
+          },
+          "platforms": {
+            "windows": "Windows",
+            "macos": "macOS",
+            "linux": "Linux",
+            "url": "Ruta URL"
+          },
+          "reasons": {
+            "chars": "< > : \" / \\ | ? *",
+            "control": "carácter de control",
+            "trailing": "termina en punto o espacio",
+            "reserved": "nombre de dispositivo reservado",
+            "length": "más de 255",
+            "colon": "dos puntos",
+            "slash": "barra",
+            "encoding": "requiere codificación %"
+          },
+          "explorer": {
+            "title": "Examina cualquier carácter",
+            "intro": "Cada carácter del nombre original, coloreado según su tipo. Haz clic en uno para ver su punto de código, sus bytes UTF-8 y qué hace el limpiador con él.",
+            "hint": "Haz clic en un carácter",
+            "position": "Posición",
+            "char": "Carácter",
+            "code": "Punto de código",
+            "utf8": "Bytes UTF-8",
+            "kind": "Tipo",
+            "fate": "Qué le pasa",
+            "fateRemoved": "se elimina (prohibido)",
+            "fateSeparator": "pasa a \"{s}\"",
+            "fateStripped": "pasa a \"{s}\"",
+            "fateLower": "pasa a \"{s}\"",
+            "fateKept": "se conserva"
+          },
+          "pipeline": {
+            "title": "El nombre tras cada etapa",
+            "intro": "Tu nombre a lo largo del proceso: recortado, sin acentos, sin caracteres prohibidos, espacios sustituidos y la limpieza final de separadores, mayúsculas, puntos finales y nombres reservados.",
+            "aria": "Barras escalonadas por etapa",
+            "input": "Recortado",
+            "transliterate": "Acentos",
+            "illegal": "Prohibidos",
+            "whitespace": "Espacios",
+            "result": "Final",
+            "removed": "Caracteres eliminados",
+            "replaced": "Espacios sustituidos",
+            "shrink": "Cambio de longitud"
+          },
+          "platformRows": {
+            "title": "¿Funcionaría el original tal cual?",
+            "intro": "Si Windows, macOS, Linux y una ruta URL aceptan tu nombre original, con la regla exacta que incumple, junto al veredicto del nombre seguro.",
+            "aria": "Veredictos antes y después",
+            "fine": "aceptado",
+            "originalFails": "Original rechazado en",
+            "resultFails": "Seguro rechazado en",
+            "strictest": "Sistema más estricto",
+            "urlNote": "En una URL",
+            "urlSafe": "sin codificar",
+            "urlEncode": "aún requiere %",
+            "verdict": "Veredicto",
+            "portable": "portable en los tres sistemas",
+            "notPortable": "aún no portable"
+          },
+          "length": {
+            "title": "Longitud frente al límite de 255",
+            "intro": "El tamaño del nombre seguro en bytes UTF-8 frente al límite de 255 bytes de ext4 y APFS (NTFS cuenta 255 unidades UTF-16). Las letras no latinas ocupan 2–3 bytes.",
+            "aria": "Indicador de longitud",
+            "chars": "Caracteres",
+            "utf8": "Bytes UTF-8",
+            "utf16": "Unidades UTF-16",
+            "bytesPerChar": "Bytes por carácter",
+            "room": "Margen restante"
+          },
+          "donut": {
+            "title": "De qué está hecho el original",
+            "intro": "Los caracteres del nombre original por tipo.",
+            "aria": "Anillo de tipos de carácter",
+            "safe": "Seguros en todas partes",
+            "illegal": "Prohibidos",
+            "spaces": "Espacios",
+            "nonAscii": "Letras no ASCII",
+            "total": "Caracteres"
+          },
+          "changes": {
+            "title": "Qué tocó cada corrección",
+            "intro": "Cuántos caracteres cambió cada corrección: acentos quitados, prohibidos eliminados, espacios convertidos en separadores, letras en minúscula y cuántos sobrevivieron.",
+            "aria": "Barras de caracteres por corrección",
+            "accents": "Acentos",
+            "illegal": "Prohibidos",
+            "spaces": "Espacios",
+            "lowered": "Minúsculas",
+            "kept": "Conservados",
+            "off": "desactivado",
+            "touched": "Caracteres tocados"
+          },
+          "compare": {
+            "title": "Cuatro formas de medir un nombre",
+            "intro": "El original y el seguro en caracteres, bytes UTF-8 (límite de Linux y macOS), unidades UTF-16 (límite de Windows) y longitud codificada en URL.",
+            "aria": "Barras emparejadas de longitudes",
+            "original": "Original",
+            "sanitized": "Seguro",
+            "chars": "Caracteres",
+            "utf8": "Bytes UTF-8",
+            "utf16": "Unidades UTF-16",
+            "url": "Longitud en URL",
+            "urlSaving": "Más corto en URL en"
+          },
+          "variants": {
+            "title": "Cuatro estilos del mismo nombre",
+            "intro": "Tu nombre limpiado con cada combinación de separador y minúsculas, todas producidas por la herramienta. Haz clic en una para usar ese estilo.",
+            "lower": "minúsculas",
+            "keepCase": "mantener mayúsculas",
+            "distinct": "Resultados distintos",
+            "dash": "Guion",
+            "dashUse": "habitual en URL",
+            "underscore": "Guion bajo",
+            "underscoreUse": "habitual en código",
+            "case": "Minúsculas",
+            "caseUse": "evita choques de mayúsculas",
+            "current": "Estilo actual"
+          },
+          "url": {
+            "title": "Lo que cuesta en una URL",
+            "intro": "Los caracteres del nombre original que más crecen en una URL: cada byte fuera de A–Z a–z 0–9 - . _ ~ se convierte en un escape %XX de tres caracteres.",
+            "aria": "Barras ordenadas del coste",
+            "none": "Todos los caracteres son seguros en URL.",
+            "costly": "Caracteres a escapar",
+            "top": "El más costoso",
+            "originalUrl": "Original en URL",
+            "resultUrl": "Seguro en URL",
+            "extra": "Caracteres extra"
+          }
         }
       },
       "shareExport": {
@@ -24175,6 +24311,19 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "resume": "Nombre de documento desordenado",
+        "reserved": "Nombre reservado de Windows",
+        "photo": "Foto con barras y corchetes",
+        "arabic": "Nombre de archivo en árabe",
+        "underscore": "Barras verticales y asteriscos, guion bajo"
+      },
+      "result": {
+        "original": "Nombre original, carácter a carácter",
+        "before": "Original",
+        "after": "Nombre seguro"
       }
     },
     "duplicate-line-remover": {

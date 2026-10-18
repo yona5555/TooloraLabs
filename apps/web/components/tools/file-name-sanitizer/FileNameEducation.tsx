@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import SanitizePipelineDiagram from "./SanitizePipelineDiagram";
+import FnCharExplorer from "./FnCharExplorer";
+import FnPipelineSteps from "./FnPipelineSteps";
+import FnPlatformRows from "./FnPlatformRows";
+import FnLengthGauge from "./FnLengthGauge";
+import FnClassDonut from "./FnClassDonut";
+import FnChangeBars from "./FnChangeBars";
+import FnLengthCompare from "./FnLengthCompare";
+import FnVariants from "./FnVariants";
+import FnUrlCost from "./FnUrlCost";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,14 +27,14 @@ export default async function FileNameEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <FnCharExplorer />
+        <FnPipelineSteps />
         <p>{t("intro.paragraph2")}</p>
-        <SanitizePipelineDiagram
-          rawLabel={t("intro.diagram.rawLabel")}
-          normalizeLabel={t("intro.diagram.normalizeLabel")}
-          checkLabel={t("intro.diagram.checkLabel")}
-          safeLabel={t("intro.diagram.safeLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <div className="space-y-6">
+          <FnPlatformRows />
+          <FnClassDonut />
+        </div>
+        <FnChangeBars />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -55,6 +63,7 @@ export default async function FileNameEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <FnVariants />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -66,11 +75,12 @@ export default async function FileNameEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <FnLengthGauge />
+          <FnLengthCompare />
+          <FnUrlCost />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

@@ -24038,14 +24038,7 @@
         "intro": {
           "title": "Why File Names Need Sanitizing at All",
           "paragraph1": "A file name isn't just a label — on most operating systems, it's also data the file system's own command interpreter can parse, which is exactly why certain characters are forbidden. A forward slash or backslash means a path separator, a colon can mean a drive letter or an alternate data stream, and a question mark or asterisk means a wildcard pattern — so a file literally named \"invoice?.pdf\" would be ambiguous or outright rejected by the very systems meant to store it. Sanitizing a file name means stripping or replacing exactly these structurally meaningful characters, while leaving everything else about the name intact.",
-          "paragraph2": "Beyond individual characters, whole file names can be reserved outright: Windows blocks CON, PRN, AUX, NUL, and the numbered COM and LPT ports as file names, in any case and with or without an extension, because these strings are historically bound to physical devices at the operating-system level, not to the file system. A file name ending in a dot or space is silently stripped by Windows' own APIs, which can create confusing mismatches between what a user types and what actually gets saved. This tool's \"what changed\" report exists specifically to make each of these otherwise invisible corrections visible.",
-          "diagram": {
-            "rawLabel": "Raw Name",
-            "normalizeLabel": "Strip Illegal\nChars + Spaces",
-            "checkLabel": "Check Reserved\nNames + Length",
-            "safeLabel": "Safe Name",
-            "caption": "The sanitization pipeline: a raw file name is normalized (illegal characters and whitespace handled), checked against reserved names and length limits, and only then considered safe to use everywhere."
-          }
+          "paragraph2": "Beyond individual characters, whole file names can be reserved outright: Windows blocks CON, PRN, AUX, NUL, and the numbered COM and LPT ports as file names, in any case and with or without an extension, because these strings are historically bound to physical devices at the operating-system level, not to the file system. A file name ending in a dot or space is silently stripped by Windows' own APIs, which can create confusing mismatches between what a user types and what actually gets saved. This tool's \"what changed\" report exists specifically to make each of these otherwise invisible corrections visible."
         },
         "examples": {
           "title": "Worked Examples",
@@ -24155,6 +24148,149 @@
           "note": "The official Microsoft reference defining the illegal characters and reserved device names (CON, PRN, AUX, NUL, COM1–9, LPT1–9) this tool checks against — the strictest, and therefore most broadly compatible, of the major platforms' naming rules.",
           "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
           "readOriginal": "Read the Official Documentation"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter a file name above to see this indicator.",
+          "classes": {
+            "ascii": "Latin letter",
+            "digit": "Digit",
+            "accented": "Accented letter",
+            "nonLatin": "Other script",
+            "space": "Space",
+            "illegal": "Illegal",
+            "dot": "Dot",
+            "punct": "Punctuation"
+          },
+          "platforms": {
+            "windows": "Windows",
+            "macos": "macOS",
+            "linux": "Linux",
+            "url": "URL path"
+          },
+          "reasons": {
+            "chars": "< > : \" / \\ | ? *",
+            "control": "control character",
+            "trailing": "ends with dot or space",
+            "reserved": "reserved device name",
+            "length": "over 255",
+            "colon": "colon",
+            "slash": "slash",
+            "encoding": "needs %-encoding"
+          },
+          "explorer": {
+            "title": "Inspect Any Character",
+            "intro": "Every character of your original name, coloured by its kind. Click one to see its code point, its UTF-8 bytes and what the sanitizer does with it.",
+            "hint": "Click a character",
+            "position": "Position",
+            "char": "Character",
+            "code": "Code point",
+            "utf8": "UTF-8 bytes",
+            "kind": "Kind",
+            "fate": "What happens",
+            "fateRemoved": "removed (illegal)",
+            "fateSeparator": "becomes \"{s}\"",
+            "fateStripped": "becomes \"{s}\"",
+            "fateLower": "becomes \"{s}\"",
+            "fateKept": "kept as is"
+          },
+          "pipeline": {
+            "title": "The Name After Each Stage",
+            "intro": "Your name as it passes through the pipeline: trimmed, transliterated, stripped of illegal characters, whitespace replaced, then the final clean-up of separators, case, trailing dots and reserved names.",
+            "aria": "Stepped bars of the name at each stage",
+            "input": "Trimmed",
+            "transliterate": "Accents",
+            "illegal": "Illegal chars",
+            "whitespace": "Whitespace",
+            "result": "Final",
+            "removed": "Characters removed",
+            "replaced": "Spaces replaced",
+            "shrink": "Change in length"
+          },
+          "platformRows": {
+            "title": "Would the Original Work as Is?",
+            "intro": "Whether your original name is accepted on Windows, macOS, Linux and in a URL path, with the exact rule it breaks, next to the verdict for the safe name.",
+            "aria": "Platform verdicts before and after",
+            "fine": "accepted",
+            "originalFails": "Original rejected on",
+            "resultFails": "Safe name rejected on",
+            "strictest": "Strictest system",
+            "urlNote": "In a URL",
+            "urlSafe": "no encoding needed",
+            "urlEncode": "still needs %-encoding",
+            "verdict": "Verdict",
+            "portable": "portable on all three systems",
+            "notPortable": "not yet portable"
+          },
+          "length": {
+            "title": "Length Against the 255 Limit",
+            "intro": "The safe name's size in UTF-8 bytes against the 255-byte limit of ext4 and APFS (NTFS counts 255 UTF-16 units). Letters outside Latin take 2–3 bytes each.",
+            "aria": "Gauge of name length",
+            "chars": "Characters",
+            "utf8": "UTF-8 bytes",
+            "utf16": "UTF-16 units",
+            "bytesPerChar": "Bytes per character",
+            "room": "Room left"
+          },
+          "donut": {
+            "title": "What the Original Is Made Of",
+            "intro": "The characters of your original name by kind.",
+            "aria": "Donut of character kinds",
+            "safe": "Safe everywhere",
+            "illegal": "Illegal",
+            "spaces": "Spaces",
+            "nonAscii": "Non-ASCII letters",
+            "total": "Characters"
+          },
+          "changes": {
+            "title": "What Each Fix Touched",
+            "intro": "How many characters each kind of fix changed: accents stripped, illegal characters dropped, spaces turned into separators, letters lower-cased, and how many survived.",
+            "aria": "Bars of characters touched per fix",
+            "accents": "Accents",
+            "illegal": "Illegal",
+            "spaces": "Spaces",
+            "lowered": "Lower-cased",
+            "kept": "Kept",
+            "off": "off",
+            "touched": "Characters touched"
+          },
+          "compare": {
+            "title": "Four Ways to Measure a Name",
+            "intro": "The original and the safe name in characters, UTF-8 bytes (Linux and macOS limits), UTF-16 units (Windows limit) and URL-encoded length.",
+            "aria": "Paired bars of name lengths",
+            "original": "Original",
+            "sanitized": "Safe",
+            "chars": "Characters",
+            "utf8": "UTF-8 bytes",
+            "utf16": "UTF-16 units",
+            "url": "URL length",
+            "urlSaving": "Shorter in a URL by"
+          },
+          "variants": {
+            "title": "Four Styles of the Same Name",
+            "intro": "Your name sanitized with each combination of separator and lower-casing, every one produced by the tool. Click a card to use that style.",
+            "lower": "lower-case",
+            "keepCase": "keep case",
+            "distinct": "Different results",
+            "dash": "Hyphen",
+            "dashUse": "common in web URLs",
+            "underscore": "Underscore",
+            "underscoreUse": "common in code files",
+            "case": "Lower-case",
+            "caseUse": "avoids case clashes",
+            "current": "Current style"
+          },
+          "url": {
+            "title": "What It Costs in a URL",
+            "intro": "The characters of your original name that grow the most in a URL: every byte outside A–Z a–z 0–9 - . _ ~ becomes a three-character %XX escape.",
+            "aria": "Ranked bars of URL encoding cost",
+            "none": "Every character is URL-safe.",
+            "costly": "Characters that need escaping",
+            "top": "Costliest",
+            "originalUrl": "Original in a URL",
+            "resultUrl": "Safe name in a URL",
+            "extra": "Extra characters"
+          }
         }
       },
       "shareExport": {
@@ -24175,6 +24311,19 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "resume": "Messy document name",
+        "reserved": "Windows reserved name",
+        "photo": "Photo name with slashes and brackets",
+        "arabic": "Arabic file name",
+        "underscore": "Pipes and stars, underscore style"
+      },
+      "result": {
+        "original": "Original name, character by character",
+        "before": "Original",
+        "after": "Safe name"
       }
     },
     "duplicate-line-remover": {

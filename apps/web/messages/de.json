@@ -24038,14 +24038,7 @@
         "intro": {
           "title": "Warum Dateinamen überhaupt bereinigt werden müssen",
           "paragraph1": "Ein Dateiname ist nicht nur eine Beschriftung — auf den meisten Betriebssystemen sind es auch Daten, die der eigene Kommandozeileninterpreter des Dateisystems auswerten kann, genau deshalb sind bestimmte Zeichen verboten. Ein Schrägstrich oder Backslash bedeutet ein Pfadtrennzeichen, ein Doppelpunkt kann einen Laufwerksbuchstaben oder einen alternativen Datenstrom bedeuten, und ein Fragezeichen oder Sternchen bedeutet ein Platzhaltermuster — eine Datei, die wörtlich „rechnung?.pdf“ heißt, wäre für genau die Systeme, die sie speichern sollen, mehrdeutig oder würde schlicht abgelehnt. Einen Dateinamen zu bereinigen bedeutet, genau diese strukturell bedeutsamen Zeichen zu entfernen oder zu ersetzen, während der Rest des Namens unverändert bleibt.",
-          "paragraph2": "Über einzelne Zeichen hinaus können ganze Dateinamen komplett reserviert sein: Windows blockiert CON, PRN, AUX, NUL sowie die durchnummerierten COM- und LPT-Anschlüsse als Dateinamen, unabhängig von Groß-/Kleinschreibung und mit oder ohne Erweiterung, weil diese Zeichenketten historisch auf Betriebssystemebene an physische Geräte gebunden sind, nicht an das Dateisystem. Ein Dateiname, der mit einem Punkt oder Leerzeichen endet, wird von den eigenen APIs von Windows stillschweigend gekürzt, was zu verwirrenden Diskrepanzen zwischen dem, was ein Nutzer eintippt, und dem, was tatsächlich gespeichert wird, führen kann. Der „Was geändert wurde“-Bericht dieses Werkzeugs existiert speziell, um jede dieser sonst unsichtbaren Korrekturen sichtbar zu machen.",
-          "diagram": {
-            "rawLabel": "Roher Name",
-            "normalizeLabel": "Unerlaubte Zeichen\n+ Leerzeichen entfernen",
-            "checkLabel": "Reservierte Namen\n+ Länge prüfen",
-            "safeLabel": "Sicherer Name",
-            "caption": "Die Bereinigungs-Pipeline: Ein roher Dateiname wird normalisiert (unerlaubte Zeichen und Leerraum behandelt), gegen reservierte Namen und Längenlimits geprüft, und erst dann als überall sicher nutzbar eingestuft."
-          }
+          "paragraph2": "Über einzelne Zeichen hinaus können ganze Dateinamen komplett reserviert sein: Windows blockiert CON, PRN, AUX, NUL sowie die durchnummerierten COM- und LPT-Anschlüsse als Dateinamen, unabhängig von Groß-/Kleinschreibung und mit oder ohne Erweiterung, weil diese Zeichenketten historisch auf Betriebssystemebene an physische Geräte gebunden sind, nicht an das Dateisystem. Ein Dateiname, der mit einem Punkt oder Leerzeichen endet, wird von den eigenen APIs von Windows stillschweigend gekürzt, was zu verwirrenden Diskrepanzen zwischen dem, was ein Nutzer eintippt, und dem, was tatsächlich gespeichert wird, führen kann. Der „Was geändert wurde“-Bericht dieses Werkzeugs existiert speziell, um jede dieser sonst unsichtbaren Korrekturen sichtbar zu machen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -24155,6 +24148,149 @@
           "note": "Die offizielle Microsoft-Referenz, die die unerlaubten Zeichen und reservierten Gerätenamen (CON, PRN, AUX, NUL, COM1–9, LPT1–9) definiert, gegen die dieses Werkzeug prüft — die strengsten und damit am breitesten kompatiblen Benennungsregeln der großen Plattformen.",
           "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file",
           "readOriginal": "Offizielle Dokumentation lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben einen Dateinamen ein, um diesen Indikator zu sehen.",
+          "classes": {
+            "ascii": "Lateinischer Buchstabe",
+            "digit": "Ziffer",
+            "accented": "Buchstabe mit Akzent",
+            "nonLatin": "Andere Schrift",
+            "space": "Leerzeichen",
+            "illegal": "Verboten",
+            "dot": "Punkt",
+            "punct": "Satzzeichen"
+          },
+          "platforms": {
+            "windows": "Windows",
+            "macos": "macOS",
+            "linux": "Linux",
+            "url": "URL-Pfad"
+          },
+          "reasons": {
+            "chars": "< > : \" / \\ | ? *",
+            "control": "Steuerzeichen",
+            "trailing": "endet mit Punkt oder Leerzeichen",
+            "reserved": "reservierter Gerätename",
+            "length": "über 255",
+            "colon": "Doppelpunkt",
+            "slash": "Schrägstrich",
+            "encoding": "braucht %-Kodierung"
+          },
+          "explorer": {
+            "title": "Ein Zeichen untersuchen",
+            "intro": "Jedes Zeichen des Originalnamens, nach Art gefärbt. Klick eines an, um Codepunkt, UTF-8-Bytes und die Behandlung durch den Bereiniger zu sehen.",
+            "hint": "Zeichen anklicken",
+            "position": "Position",
+            "char": "Zeichen",
+            "code": "Codepunkt",
+            "utf8": "UTF-8-Bytes",
+            "kind": "Art",
+            "fate": "Was passiert",
+            "fateRemoved": "entfernt (verboten)",
+            "fateSeparator": "wird zu „{s}“",
+            "fateStripped": "wird zu „{s}“",
+            "fateLower": "wird zu „{s}“",
+            "fateKept": "bleibt"
+          },
+          "pipeline": {
+            "title": "Der Name nach jeder Stufe",
+            "intro": "Dein Name auf dem Weg durch die Verarbeitung: gekürzt, ohne Akzente, ohne verbotene Zeichen, Leerraum ersetzt, dann die Endbereinigung von Trennern, Schreibweise, Endpunkten und reservierten Namen.",
+            "aria": "Stufenbalken je Schritt",
+            "input": "Gekürzt",
+            "transliterate": "Akzente",
+            "illegal": "Verbotene",
+            "whitespace": "Leerraum",
+            "result": "Ergebnis",
+            "removed": "Entfernte Zeichen",
+            "replaced": "Ersetzte Leerzeichen",
+            "shrink": "Längenänderung"
+          },
+          "platformRows": {
+            "title": "Ginge das Original unverändert?",
+            "intro": "Ob Windows, macOS, Linux und ein URL-Pfad deinen Originalnamen akzeptieren, mit der genau verletzten Regel, neben dem Urteil für den sicheren Namen.",
+            "aria": "Urteile vorher und nachher",
+            "fine": "akzeptiert",
+            "originalFails": "Original abgelehnt auf",
+            "resultFails": "Sicherer Name abgelehnt auf",
+            "strictest": "Strengstes System",
+            "urlNote": "In einer URL",
+            "urlSafe": "keine Kodierung nötig",
+            "urlEncode": "braucht noch %-Kodierung",
+            "verdict": "Urteil",
+            "portable": "auf allen drei Systemen nutzbar",
+            "notPortable": "noch nicht portabel"
+          },
+          "length": {
+            "title": "Länge gegen das 255-Limit",
+            "intro": "Die Größe des sicheren Namens in UTF-8-Bytes gegen das 255-Byte-Limit von ext4 und APFS (NTFS zählt 255 UTF-16-Einheiten). Nicht-lateinische Buchstaben brauchen 2–3 Bytes.",
+            "aria": "Anzeige der Namenslänge",
+            "chars": "Zeichen",
+            "utf8": "UTF-8-Bytes",
+            "utf16": "UTF-16-Einheiten",
+            "bytesPerChar": "Bytes pro Zeichen",
+            "room": "Restplatz"
+          },
+          "donut": {
+            "title": "Woraus das Original besteht",
+            "intro": "Die Zeichen deines Originalnamens nach Art.",
+            "aria": "Ring der Zeichenarten",
+            "safe": "Überall sicher",
+            "illegal": "Verboten",
+            "spaces": "Leerzeichen",
+            "nonAscii": "Nicht-ASCII-Buchstaben",
+            "total": "Zeichen"
+          },
+          "changes": {
+            "title": "Was jede Korrektur berührt hat",
+            "intro": "Wie viele Zeichen jede Korrektur geändert hat: Akzente entfernt, verbotene Zeichen gelöscht, Leerzeichen zu Trennern, Buchstaben kleingeschrieben, und wie viele blieben.",
+            "aria": "Balken der Zeichen je Korrektur",
+            "accents": "Akzente",
+            "illegal": "Verbotene",
+            "spaces": "Leerzeichen",
+            "lowered": "Kleingeschrieben",
+            "kept": "Behalten",
+            "off": "aus",
+            "touched": "Berührte Zeichen"
+          },
+          "compare": {
+            "title": "Vier Arten, einen Namen zu messen",
+            "intro": "Original und sicherer Name in Zeichen, UTF-8-Bytes (Limit von Linux und macOS), UTF-16-Einheiten (Windows-Limit) und URL-kodierter Länge.",
+            "aria": "Balkenpaare der Längen",
+            "original": "Original",
+            "sanitized": "Sicher",
+            "chars": "Zeichen",
+            "utf8": "UTF-8-Bytes",
+            "utf16": "UTF-16-Einheiten",
+            "url": "Länge in URL",
+            "urlSaving": "In der URL kürzer um"
+          },
+          "variants": {
+            "title": "Vier Stile desselben Namens",
+            "intro": "Dein Name mit jeder Kombination aus Trenner und Kleinschreibung bereinigt, jeweils vom Tool erzeugt. Klick eine Karte, um den Stil zu übernehmen.",
+            "lower": "kleingeschrieben",
+            "keepCase": "Schreibweise behalten",
+            "distinct": "Verschiedene Ergebnisse",
+            "dash": "Bindestrich",
+            "dashUse": "üblich in Web-URLs",
+            "underscore": "Unterstrich",
+            "underscoreUse": "üblich in Code-Dateien",
+            "case": "Kleinschreibung",
+            "caseUse": "vermeidet Groß-/Klein-Konflikte",
+            "current": "Aktueller Stil"
+          },
+          "url": {
+            "title": "Was er in einer URL kostet",
+            "intro": "Die Zeichen des Originalnamens, die in einer URL am stärksten wachsen: Jedes Byte außerhalb A–Z a–z 0–9 - . _ ~ wird zu einem dreistelligen %XX-Escape.",
+            "aria": "Rangbalken der Kodierungskosten",
+            "none": "Alle Zeichen sind URL-sicher.",
+            "costly": "Zu maskierende Zeichen",
+            "top": "Teuerstes",
+            "originalUrl": "Original in URL",
+            "resultUrl": "Sicherer Name in URL",
+            "extra": "Zusätzliche Zeichen"
+          }
         }
       },
       "shareExport": {
@@ -24175,6 +24311,19 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "resume": "Unordentlicher Dokumentname",
+        "reserved": "Reservierter Windows-Name",
+        "photo": "Fotoname mit Schrägstrichen und Klammern",
+        "arabic": "Arabischer Dateiname",
+        "underscore": "Pipes und Sterne, Unterstrich-Stil"
+      },
+      "result": {
+        "original": "Originalname, Zeichen für Zeichen",
+        "before": "Original",
+        "after": "Sicherer Name"
       }
     },
     "duplicate-line-remover": {
