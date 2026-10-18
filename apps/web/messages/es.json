@@ -20352,10 +20352,7 @@
         "intro": {
           "title": "Cómo funciona realmente la fortaleza de una contraseña",
           "paragraph1": "La fortaleza real de una contraseña es su entropía: cuántas contraseñas posibles tendría que probar un atacante antes de dar con la tuya, expresada en bits (cada bit adicional duplica el espacio de búsqueda). Es el resultado de multiplicar dos factores: cuán grande es el conjunto de caracteres o palabras posibles, y cuántos de ellos usas. Una contraseña de 12 caracteres que solo usa minúsculas tiene menos entropía que una de 8 caracteres que combina mayúsculas, minúsculas, números y símbolos — la longitud importa, pero también de dónde tomas los caracteres.",
-          "paragraph2": "Por eso esta herramienta ofrece un modo de frase de contraseña junto a las contraseñas basadas en caracteres: cuatro palabras aleatorias de una lista de unas 1650 dan aproximadamente 43 bits de entropía —más que una contraseña mixta típica de 8 caracteres—, y siguen siendo mucho más fáciles de escribir y recordar. La entropía en bruto de una contraseña indica cuánto tarda en promedio una búsqueda por fuerza bruta, y aquí nada de eso es teórico: esta herramienta calcula el número real de bits de exactamente lo que acaba de generar, junto con estimaciones de tiempo de descifrado para algunos escenarios de ataque realistas más abajo.",
-          "diagram": {
-            "caption": "Tiempo estimado de descifrado según la composición, a una velocidad fija de ataque sin conexión de 100 000 millones de intentos por segundo — la longitud y la impredecibilidad importan, pero no por igual."
-          }
+          "paragraph2": "Por eso esta herramienta ofrece un modo de frase de contraseña junto a las contraseñas basadas en caracteres: cuatro palabras aleatorias de una lista de unas 1650 dan aproximadamente 43 bits de entropía —más que una contraseña mixta típica de 8 caracteres—, y siguen siendo mucho más fáciles de escribir y recordar. La entropía en bruto de una contraseña indica cuánto tarda en promedio una búsqueda por fuerza bruta, y aquí nada de eso es teórico: esta herramienta calcula el número real de bits de exactamente lo que acaba de generar, junto con estimaciones de tiempo de descifrado para algunos escenarios de ataque realistas más abajo."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -20383,14 +20380,7 @@
               "scenario": "12 caracteres, mayúsculas + minúsculas + dígitos + símbolos (94 opciones cada uno)",
               "result": "~79 bits → ~100 000 años"
             }
-          ],
-          "diagramLabels": {
-            "sevenLower": "7 letras minúsculas",
-            "fourWords": "Frase de 4 palabras",
-            "eightMixed": "8 caracteres mixtos + dígitos",
-            "sixWords": "Frase de 6 palabras",
-            "twelveMixed": "12 caracteres, todos los conjuntos + símbolos"
-          }
+          ]
         },
         "faq": {
           "title": "Preguntas frecuentes",
@@ -20480,6 +20470,132 @@
           "note": "La guía oficial vigente del gobierno de Estados Unidos sobre política de contraseñas, que sustituye a las reglas de complejidad y rotación de la era 2003 por recomendaciones centradas en la longitud, la verificación contra contraseñas ya filtradas y la eliminación de los cambios periódicos forzados.",
           "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
           "readOriginal": "Leer las directrices oficiales"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Elige al menos un tipo de carácter arriba para ver este indicador.",
+          "curve": {
+            "title": "Arrastra por la curva de entropía",
+            "introChars": "La entropía crece lo mismo con cada carácter extra de tu conjunto. Arrastra el punto para cambiar la longitud; la contraseña y todas las tarjetas lo siguen.",
+            "introWords": "La entropía crece lo mismo con cada palabra extra de la lista. Arrastra el punto para cambiar el número de palabras; la frase y todas las tarjetas lo siguen.",
+            "aria": "Entropía según longitud, arrastrable",
+            "axisChars": "Caracteres",
+            "axisWords": "Palabras",
+            "bits": "bits",
+            "words": "Palabras",
+            "length": "Longitud",
+            "perSymbol": "Bits por símbolo",
+            "plusOne": "Un símbolo más añade",
+            "toStrong": "Símbolos para 100 bits",
+            "entropy": "Entropía"
+          },
+          "pool": {
+            "title": "El conjunto del que sale cada carácter",
+            "intro": "Cada posición se elige uniformemente de este conjunto, dividido por tipo tras el filtro de caracteres parecidos, de los 88 de la herramienta.",
+            "introWords": "En modo frase cada palabra se elige uniformemente de la lista de la herramienta en lugar de un conjunto de caracteres.",
+            "aria": "Barra apilada del conjunto",
+            "axis": "Conjunto: {n} de {full} caracteres",
+            "axisWords": "Lista: {n} palabras",
+            "off": "no",
+            "size": "Tamaño del conjunto",
+            "classes": "Tipos activos",
+            "removed": "Parecidos excluidos",
+            "perSymbol": "Bits por elección",
+            "bits": "bits",
+            "coverage": "Parte de los 88"
+          },
+          "gauge": {
+            "title": "Entropía en la escala de fuerza",
+            "intro": "Entropía en bits en las cinco bandas: menos de 28 muy débil, 28–36 débil, 36–60 aceptable, 60–100 fuerte, 100+ muy fuerte.",
+            "aria": "Indicador de bits de entropía",
+            "band": "Banda",
+            "next": "Hasta la siguiente banda",
+            "keyspace": "Espacio de claves",
+            "of128": "De 128 bits",
+            "bits": "Entropía (bits)"
+          },
+          "ladder": {
+            "title": "Tiempo de descifrado en escala log",
+            "intro": "Tiempo esperado para hallar esta contraseña (la mitad del espacio) a tres velocidades, en un eje de 10 ms a 10³⁰ s, frente a duraciones conocidas.",
+            "aria": "Barras logarítmicas de tiempo",
+            "second": "1 s",
+            "day": "1 día",
+            "year": "1 año",
+            "century": "100 años",
+            "universe": "edad del universo",
+            "keyspace": "Espacio de claves",
+            "half": "Intentos medios",
+            "fastYears": "Años a 100 mil millones/s",
+            "underYear": "menos de un año",
+            "vsUniverse": "Frente a la edad del universo",
+            "formula": "Segundos a 100 mil millones/s"
+          },
+          "mix": {
+            "title": "De qué está hecha esta contraseña",
+            "intro": "Anillo exterior: los tipos en la contraseña mostrada. Interior: la parte media que recibe cada tipo del conjunto. Regenera para ver moverse el exterior.",
+            "introWords": "Los tipos de carácter de la frase mostrada: letras, dígitos y separadores.",
+            "aria": "Anillo de tipos de carácter",
+            "length": "Caracteres",
+            "most": "Tipo más común",
+            "expected": "Esperado por tipo",
+            "separators": "Separadores y dígitos",
+            "guarantee": "Cada tipo elegido presente",
+            "guaranteeYes": "garantizado",
+            "classesUsed": "Tipos usados"
+          },
+          "policy": {
+            "title": "Tus ajustes entre recetas comunes",
+            "intro": "Recetas conocidas puntuadas con los conjuntos de la herramienta (26, 52, 62 y 88 caracteres) y su lista de palabras, ordenadas por entropía.",
+            "aria": "Barras ordenadas de entropía",
+            "pin4": "PIN de 4 dígitos",
+            "lower8": "8 minúsculas",
+            "mixed8": "8 letras + dígitos",
+            "mixed12": "12 letras + dígitos",
+            "full16": "16 de todos los tipos",
+            "words4": "Frase de 4 palabras",
+            "words6": "Frase de 6 palabras",
+            "yours": "Tus ajustes",
+            "rank": "Tu puesto",
+            "vsLower8": "Frente a 8 minúsculas",
+            "vsWords6": "Frente a 6 palabras",
+            "wordList": "Lista de palabras",
+            "bits": "bits"
+          },
+          "formula": {
+            "title": "La fórmula de la entropía, con valores",
+            "intro": "H = n × log₂ N: n símbolos, cada uno de N opciones equiprobables; un número de dos dígitos añade log₂ 100.",
+            "aria": "Fórmula de entropía con valores",
+            "nWords": "palabras",
+            "nChars": "caracteres",
+            "NWords": "palabras en la lista",
+            "NChars": "tamaño del conjunto",
+            "digits": "2 dígitos",
+            "keyspace": "Espacio ≈ {k}",
+            "keyspaceLabel": "Espacio de claves",
+            "bits": "bits"
+          },
+          "collision": {
+            "title": "¿Podrían coincidir dos contraseñas?",
+            "intro": "La probabilidad de que dos contraseñas con estos ajustes salgan iguales si se generan mil, un millón o mil millones (cota del cumpleaños).",
+            "aria": "Probabilidad de colisión",
+            "thousand": "mil",
+            "million": "1 millón",
+            "billion": "mil millones",
+            "axis": "Altura en escala log, de 10⁻³⁰ a 1",
+            "formula": "Cota del cumpleaños",
+            "onePercent": "Cantidad para un 1 %"
+          },
+          "equivalent": {
+            "title": "La misma fuerza, de cuatro formas",
+            "intro": "Tu espacio de claves expresado en lanzamientos de moneda, tiradas de dado, PIN de 4 dígitos seguidos y palabras de la lista Diceware de 7.776.",
+            "aria": "Espacios de claves equivalentes",
+            "coins": "Monedas",
+            "dice": "Dados",
+            "pins": "PIN de 4 dígitos",
+            "diceware": "Palabras Diceware",
+            "note": "Puntos",
+            "dots": "hasta {n} por fila"
+          }
         }
       },
       "shareExport": {
@@ -20504,6 +20620,26 @@
         "generatedPasswordLabel": "Contraseña Generada",
         "summarySentence": "Fortaleza de la contraseña: {tier} ({bits} bits de entropía).",
         "resultSectionTitle": "Resultado"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "short": "Corta: 8 letras + dígitos",
+        "standard": "Estándar: 16 letras + dígitos",
+        "long": "Larga: 32, todos los tipos",
+        "words4": "Frase: 4 palabras",
+        "words6": "Frase: 6 palabras + número",
+        "detail": "{bits} bits de entropía"
+      },
+      "result": {
+        "class": {
+          "uppercase": "Mayús.",
+          "lowercase": "Minús.",
+          "numbers": "Dígitos",
+          "symbols": "Símbolos",
+          "other": "Otros"
+        },
+        "alternatives": "Más opciones con los mismos ajustes",
+        "use": "Usar esta contraseña"
       }
     },
     "color-palette-generator": {

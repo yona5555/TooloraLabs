@@ -20352,10 +20352,7 @@
         "intro": {
           "title": "Wie Passwortstärke tatsächlich funktioniert",
           "paragraph1": "Die tatsächliche Stärke eines Passworts ist seine Entropie — wie viele mögliche Passwörter ein Angreifer durchsuchen müsste, bevor er Ihres findet, ausgedrückt in Bit (jedes zusätzliche Bit verdoppelt den Suchraum). Sie ergibt sich aus der Multiplikation zweier Faktoren: wie groß der Pool möglicher Zeichen (oder Wörter) ist und wie viele davon Sie verwenden. Ein 12-stelliges Passwort nur mit Kleinbuchstaben hat weniger Entropie als ein 8-stelliges mit Groß-, Kleinbuchstaben, Zahlen und Symbolen — Länge zählt, aber auch, woraus geschöpft wird.",
-          "paragraph2": "Genau deshalb gibt es neben zeichenbasierten Passwörtern den Passphrasen-Modus dieses Werkzeugs: Vier zufällige Wörter aus einem Pool von etwa 1.650 ergeben rund 43 Bit Entropie — mehr als ein typisches 8-stelliges gemischtes Passwort —, bleiben dabei aber deutlich einfacher zu tippen und zu merken. Die rohe Entropie eines Passworts sagt Ihnen, wie lange eine Brute-Force-Suche im Schnitt dauert, aber an der Entropie hier ist nichts theoretisch: Dieses Werkzeug berechnet die tatsächliche Bitzahl für genau das, was es gerade erzeugt hat, zusammen mit Knackzeit-Schätzungen für ein paar realistische Angriffsszenarien unten angezeigt.",
-          "diagram": {
-            "caption": "Geschätzte Knackzeit nach Zusammensetzung, bei einer festen Offline-Angriffsrate von 100 Milliarden Versuchen pro Sekunde — Länge und Unvorhersehbarkeit zählen beide, aber nicht gleich stark."
-          }
+          "paragraph2": "Genau deshalb gibt es neben zeichenbasierten Passwörtern den Passphrasen-Modus dieses Werkzeugs: Vier zufällige Wörter aus einem Pool von etwa 1.650 ergeben rund 43 Bit Entropie — mehr als ein typisches 8-stelliges gemischtes Passwort —, bleiben dabei aber deutlich einfacher zu tippen und zu merken. Die rohe Entropie eines Passworts sagt Ihnen, wie lange eine Brute-Force-Suche im Schnitt dauert, aber an der Entropie hier ist nichts theoretisch: Dieses Werkzeug berechnet die tatsächliche Bitzahl für genau das, was es gerade erzeugt hat, zusammen mit Knackzeit-Schätzungen für ein paar realistische Angriffsszenarien unten angezeigt."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -20383,14 +20380,7 @@
               "scenario": "12 Zeichen, Groß+Klein+Ziffern+Symbole (je 94 Möglichkeiten)",
               "result": "~79 Bit → ~100.000 Jahre"
             }
-          ],
-          "diagramLabels": {
-            "sevenLower": "7 Kleinbuchstaben",
-            "fourWords": "4-Wort-Passphrase",
-            "eightMixed": "8 gemischt + Ziffern",
-            "sixWords": "6-Wort-Passphrase",
-            "twelveMixed": "12 Zeichen, alle Sätze + Symbole"
-          }
+          ]
         },
         "faq": {
           "title": "Häufig gestellte Fragen",
@@ -20480,6 +20470,132 @@
           "note": "Die aktuelle offizielle Richtlinie der US-Regierung zur Passwortpolitik, die die Komplexitäts- und Wechselregeln aus der Ära 2003 durch Empfehlungen ersetzt, die Länge priorisieren, gegen bekannt kompromittierte Passwörter abgleichen und erzwungene regelmäßige Wechsel fallenlassen.",
           "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
           "readOriginal": "Offizielle Richtlinien lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Wähle oben mindestens einen Zeichentyp, um diesen Indikator zu sehen.",
+          "curve": {
+            "title": "Entlang der Entropiekurve ziehen",
+            "introChars": "Die Entropie wächst mit jedem weiteren Zeichen aus deinem Vorrat um denselben Betrag. Zieh den Punkt, um die Länge zu ändern; Passwort und alle Karten folgen.",
+            "introWords": "Die Entropie wächst mit jedem weiteren Wort aus der Liste um denselben Betrag. Zieh den Punkt, um die Wortzahl zu ändern; Passphrase und alle Karten folgen.",
+            "aria": "Entropie gegen Länge, ziehbar",
+            "axisChars": "Zeichen",
+            "axisWords": "Wörter",
+            "bits": "Bit",
+            "words": "Wörter",
+            "length": "Länge",
+            "perSymbol": "Bit pro Symbol",
+            "plusOne": "Ein Symbol mehr bringt",
+            "toStrong": "Symbole für 100 Bit",
+            "entropy": "Entropie"
+          },
+          "pool": {
+            "title": "Der Vorrat, aus dem jedes Zeichen stammt",
+            "intro": "Jede Position wird gleichverteilt aus diesem Vorrat gezogen, nach Typ aufgeteilt nach dem Filter für verwechselbare Zeichen, von 88 Zeichen insgesamt.",
+            "introWords": "Im Passphrase-Modus wird jedes Wort gleichverteilt aus der Wortliste gezogen statt aus einem Zeichenvorrat.",
+            "aria": "Gestapelter Balken des Zeichenvorrats",
+            "axis": "Vorrat: {n} von {full} Zeichen",
+            "axisWords": "Wortliste: {n} Wörter",
+            "off": "aus",
+            "size": "Vorratsgröße",
+            "classes": "Aktive Zeichentypen",
+            "removed": "Entfernte Verwechsler",
+            "perSymbol": "Bit pro Ziehung",
+            "bits": "Bit",
+            "coverage": "Anteil an 88"
+          },
+          "gauge": {
+            "title": "Entropie auf der Stärkeskala",
+            "intro": "Entropie in Bit auf den fünf Stufen: unter 28 sehr schwach, 28–36 schwach, 36–60 ausreichend, 60–100 stark, ab 100 sehr stark.",
+            "aria": "Anzeige der Entropie in Bit",
+            "band": "Stufe",
+            "next": "Bis zur nächsten Stufe",
+            "keyspace": "Schlüsselraum",
+            "of128": "Von 128 Bit",
+            "bits": "Entropie (Bit)"
+          },
+          "ladder": {
+            "title": "Knackzeit auf logarithmischer Skala",
+            "intro": "Erwartete Zeit bis zum Finden (halber Schlüsselraum) bei drei Rateraten, auf einer Achse von 10 ms bis 10³⁰ s, verglichen mit bekannten Zeitspannen.",
+            "aria": "Logarithmische Balken der Knackzeit",
+            "second": "1 s",
+            "day": "1 Tag",
+            "year": "1 Jahr",
+            "century": "100 Jahre",
+            "universe": "Alter des Universums",
+            "keyspace": "Schlüsselraum",
+            "half": "Mittlere Rateversuche",
+            "fastYears": "Jahre bei 100 Mrd./s",
+            "underYear": "unter einem Jahr",
+            "vsUniverse": "Gegen das Weltalter",
+            "formula": "Sekunden bei 100 Mrd./s"
+          },
+          "mix": {
+            "title": "Woraus dieses Passwort besteht",
+            "intro": "Außenring: die Zeichentypen im angezeigten Passwort. Innenring: der mittlere Anteil jedes Typs am Vorrat. Neu erzeugen, um den Außenring wandern zu sehen.",
+            "introWords": "Die Zeichentypen der angezeigten Passphrase: Buchstaben, Ziffern und Trenner.",
+            "aria": "Ring der Zeichentypen",
+            "length": "Zeichen",
+            "most": "Häufigster Typ",
+            "expected": "Erwartet pro Typ",
+            "separators": "Trenner und Ziffern",
+            "guarantee": "Jeder gewählte Typ vorhanden",
+            "guaranteeYes": "garantiert",
+            "classesUsed": "Genutzte Typen"
+          },
+          "policy": {
+            "title": "Deine Einstellungen im Vergleich",
+            "intro": "Bekannte Passwortrezepte, bewertet mit den Vorräten dieses Tools (26, 52, 62 und 88 Zeichen) und seiner Wortliste, nach Entropie sortiert.",
+            "aria": "Rangbalken der Entropie",
+            "pin4": "4-stellige PIN",
+            "lower8": "8 Kleinbuchstaben",
+            "mixed8": "8 Buchstaben + Ziffern",
+            "mixed12": "12 Buchstaben + Ziffern",
+            "full16": "16 alle Typen",
+            "words4": "Passphrase 4 Wörter",
+            "words6": "Passphrase 6 Wörter",
+            "yours": "Deine Einstellungen",
+            "rank": "Dein Rang",
+            "vsLower8": "Gegen 8 Kleinbuchstaben",
+            "vsWords6": "Gegen 6 Wörter",
+            "wordList": "Wortliste",
+            "bits": "Bit"
+          },
+          "formula": {
+            "title": "Die Entropieformel mit Werten",
+            "intro": "H = n × log₂ N: n Symbole, jedes aus N gleich wahrscheinlichen Möglichkeiten; eine angehängte zweistellige Zahl bringt log₂ 100.",
+            "aria": "Entropieformel mit Werten",
+            "nWords": "Wörter",
+            "nChars": "Zeichen",
+            "NWords": "Wörter in der Liste",
+            "NChars": "Vorratsgröße",
+            "digits": "2 Ziffern",
+            "keyspace": "Schlüsselraum ≈ {k}",
+            "keyspaceLabel": "Schlüsselraum",
+            "bits": "Bit"
+          },
+          "collision": {
+            "title": "Können zwei Passwörter gleich sein?",
+            "intro": "Die Wahrscheinlichkeit, dass zwei mit diesen Einstellungen erzeugte Passwörter identisch sind, wenn tausend, eine Million oder eine Milliarde erzeugt werden (Geburtstagsschranke).",
+            "aria": "Kollisionswahrscheinlichkeit",
+            "thousand": "Tausend",
+            "million": "1 Million",
+            "billion": "1 Milliarde",
+            "axis": "Balkenhöhe logarithmisch, 10⁻³⁰ bis 1",
+            "formula": "Geburtstagsschranke",
+            "onePercent": "Anzahl für 1 %"
+          },
+          "equivalent": {
+            "title": "Dieselbe Stärke, viermal ausgedrückt",
+            "intro": "Dein Schlüsselraum als Münzwürfe, Würfelwürfe, 4-stellige PINs hintereinander und Wörter der Diceware-Liste mit 7.776 Wörtern.",
+            "aria": "Gleichwertige Schlüsselräume",
+            "coins": "Münzwürfe",
+            "dice": "Würfelwürfe",
+            "pins": "4-stellige PINs",
+            "diceware": "Diceware-Wörter",
+            "note": "Punkte",
+            "dots": "bis zu {n} pro Zeile"
+          }
         }
       },
       "shareExport": {
@@ -20504,6 +20620,26 @@
         "generatedPasswordLabel": "Generiertes Passwort",
         "summarySentence": "Passwortstärke: {tier} ({bits} Bit Entropie).",
         "resultSectionTitle": "Ergebnis"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "short": "Kurz: 8 Buchstaben + Ziffern",
+        "standard": "Standard: 16 Buchstaben + Ziffern",
+        "long": "Lang: 32, alle Zeichentypen",
+        "words4": "Passphrase: 4 Wörter",
+        "words6": "Passphrase: 6 Wörter + Zahl",
+        "detail": "{bits} Bit Entropie"
+      },
+      "result": {
+        "class": {
+          "uppercase": "Groß",
+          "lowercase": "Klein",
+          "numbers": "Ziffern",
+          "symbols": "Symbole",
+          "other": "Andere"
+        },
+        "alternatives": "Weitere Vorschläge mit denselben Einstellungen",
+        "use": "Dieses Passwort verwenden"
       }
     },
     "color-palette-generator": {

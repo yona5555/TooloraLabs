@@ -20352,10 +20352,7 @@
         "intro": {
           "title": "Comment fonctionne réellement la robustesse d'un mot de passe",
           "paragraph1": "La véritable robustesse d'un mot de passe, c'est son entropie — le nombre de mots de passe possibles qu'un attaquant devrait tester avant de trouver le vôtre, exprimé en bits (chaque bit ajouté double l'espace de recherche). Elle résulte de deux facteurs multipliés entre eux : la taille du jeu de caractères (ou de mots) possibles, et le nombre d'éléments que vous utilisez. Un mot de passe de 12 caractères composé uniquement de minuscules a moins d'entropie qu'un mot de passe de 8 caractères mélangeant majuscules, minuscules, chiffres et symboles — la longueur compte, mais la nature des caractères utilisés aussi.",
-          "paragraph2": "C'est exactement pour cela que le mode phrase de passe de cet outil existe en complément des mots de passe à base de caractères : quatre mots aléatoires tirés d'une liste d'environ 1 650 mots donnent environ 43 bits d'entropie — davantage qu'un mot de passe mixte classique de 8 caractères — tout en restant nettement plus facile à saisir et à mémoriser. L'entropie brute d'un mot de passe indique la durée moyenne d'une recherche par force brute, mais rien ici n'est théorique : cet outil calcule le nombre de bits réel du mot de passe qu'il vient de générer, affiché avec des estimations de temps de piratage pour quelques scénarios d'attaque réalistes ci-dessous.",
-          "diagram": {
-            "caption": "Temps de piratage estimé selon la composition, pour un taux d'attaque hors ligne fixe de 100 milliards d'essais par seconde — la longueur et l'imprévisibilité comptent toutes deux, mais pas à parts égales."
-          }
+          "paragraph2": "C'est exactement pour cela que le mode phrase de passe de cet outil existe en complément des mots de passe à base de caractères : quatre mots aléatoires tirés d'une liste d'environ 1 650 mots donnent environ 43 bits d'entropie — davantage qu'un mot de passe mixte classique de 8 caractères — tout en restant nettement plus facile à saisir et à mémoriser. L'entropie brute d'un mot de passe indique la durée moyenne d'une recherche par force brute, mais rien ici n'est théorique : cet outil calcule le nombre de bits réel du mot de passe qu'il vient de générer, affiché avec des estimations de temps de piratage pour quelques scénarios d'attaque réalistes ci-dessous."
         },
         "examples": {
           "title": "Exemples détaillés",
@@ -20383,14 +20380,7 @@
               "scenario": "12 caractères, majuscules+minuscules+chiffres+symboles (94 choix chacun)",
               "result": "~79 bits → ~100 000 ans"
             }
-          ],
-          "diagramLabels": {
-            "sevenLower": "7 lettres minuscules",
-            "fourWords": "Phrase de passe de 4 mots",
-            "eightMixed": "8 majuscules/minuscules + chiffres",
-            "sixWords": "Phrase de passe de 6 mots",
-            "twelveMixed": "12 caractères, tous les jeux + symboles"
-          }
+          ]
         },
         "faq": {
           "title": "Questions fréquentes",
@@ -20480,6 +20470,132 @@
           "note": "Les directives officielles actuelles du gouvernement américain en matière de politique de mots de passe, qui remplacent les règles de complexité et de renouvellement de l'ère 2003 par des recommandations privilégiant la longueur, la vérification par rapport aux mots de passe déjà compromis, et l'abandon du renouvellement périodique forcé.",
           "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
           "readOriginal": "Lire les directives officielles"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Choisissez au moins un type de caractère ci-dessus pour voir cet indicateur.",
+          "curve": {
+            "title": "Glissez le long de la courbe d’entropie",
+            "introChars": "L’entropie augmente d’autant à chaque caractère ajouté. Faites glisser le point pour changer la longueur ; le mot de passe et toutes les cartes suivent.",
+            "introWords": "L’entropie augmente d’autant à chaque mot ajouté. Faites glisser le point pour changer le nombre de mots ; la phrase et toutes les cartes suivent.",
+            "aria": "Entropie selon la longueur, déplaçable",
+            "axisChars": "Caractères",
+            "axisWords": "Mots",
+            "bits": "bits",
+            "words": "Mots",
+            "length": "Longueur",
+            "perSymbol": "Bits par symbole",
+            "plusOne": "Un symbole de plus ajoute",
+            "toStrong": "Symboles pour 100 bits",
+            "entropy": "Entropie"
+          },
+          "pool": {
+            "title": "Le jeu d’où vient chaque caractère",
+            "intro": "Chaque position est tirée uniformément de ce jeu, réparti par type après le filtre des caractères ambigus, sur les 88 de l’outil.",
+            "introWords": "En mode phrase, chaque mot est tiré uniformément de la liste de l’outil au lieu d’un jeu de caractères.",
+            "aria": "Barre empilée du jeu de caractères",
+            "axis": "Jeu : {n} sur {full} caractères",
+            "axisWords": "Liste : {n} mots",
+            "off": "non",
+            "size": "Taille du jeu",
+            "classes": "Types actifs",
+            "removed": "Ambigus retirés",
+            "perSymbol": "Bits par tirage",
+            "bits": "bits",
+            "coverage": "Part des 88"
+          },
+          "gauge": {
+            "title": "L’entropie sur l’échelle de robustesse",
+            "intro": "Entropie en bits sur les cinq bandes : sous 28 très faible, 28–36 faible, 36–60 correcte, 60–100 forte, 100+ très forte.",
+            "aria": "Jauge des bits d’entropie",
+            "band": "Bande",
+            "next": "Jusqu’à la bande suivante",
+            "keyspace": "Espace des clés",
+            "of128": "Sur 128 bits",
+            "bits": "Entropie (bits)"
+          },
+          "ladder": {
+            "title": "Temps de cassage en échelle log",
+            "intro": "Temps attendu pour trouver ce mot de passe (la moitié de l’espace) à trois vitesses, sur un axe de 10 ms à 10³⁰ s, face à des durées familières.",
+            "aria": "Barres logarithmiques du temps",
+            "second": "1 s",
+            "day": "1 jour",
+            "year": "1 an",
+            "century": "100 ans",
+            "universe": "âge de l’univers",
+            "keyspace": "Espace des clés",
+            "half": "Essais moyens",
+            "fastYears": "Années à 100 milliards/s",
+            "underYear": "moins d’un an",
+            "vsUniverse": "Face à l’âge de l’univers",
+            "formula": "Secondes à 100 milliards/s"
+          },
+          "mix": {
+            "title": "De quoi est fait ce mot de passe",
+            "intro": "Anneau extérieur : les types présents dans le mot de passe affiché. Intérieur : la part moyenne de chaque type. Régénérez pour voir bouger l’extérieur.",
+            "introWords": "Les types de caractères de la phrase affichée : lettres, chiffres et séparateurs.",
+            "aria": "Anneau des types de caractères",
+            "length": "Caractères",
+            "most": "Type le plus fréquent",
+            "expected": "Attendu par type",
+            "separators": "Séparateurs et chiffres",
+            "guarantee": "Chaque type choisi présent",
+            "guaranteeYes": "garanti",
+            "classesUsed": "Types utilisés"
+          },
+          "policy": {
+            "title": "Vos réglages parmi les recettes courantes",
+            "intro": "Des recettes connues évaluées avec les jeux de l’outil (26, 52, 62 et 88 caractères) et sa liste de mots, classées par entropie.",
+            "aria": "Barres classées d’entropie",
+            "pin4": "Code PIN à 4 chiffres",
+            "lower8": "8 minuscules",
+            "mixed8": "8 lettres + chiffres",
+            "mixed12": "12 lettres + chiffres",
+            "full16": "16 tous types",
+            "words4": "Phrase de 4 mots",
+            "words6": "Phrase de 6 mots",
+            "yours": "Vos réglages",
+            "rank": "Votre rang",
+            "vsLower8": "Face à 8 minuscules",
+            "vsWords6": "Face à 6 mots",
+            "wordList": "Liste de mots",
+            "bits": "bits"
+          },
+          "formula": {
+            "title": "La formule de l’entropie, remplie",
+            "intro": "H = n × log₂ N : n symboles, chacun parmi N choix équiprobables ; un nombre à deux chiffres ajoute log₂ 100.",
+            "aria": "Formule de l’entropie avec valeurs",
+            "nWords": "mots",
+            "nChars": "caractères",
+            "NWords": "mots de la liste",
+            "NChars": "taille du jeu",
+            "digits": "2 chiffres",
+            "keyspace": "Espace ≈ {k}",
+            "keyspaceLabel": "Espace des clés",
+            "bits": "bits"
+          },
+          "collision": {
+            "title": "Deux mots de passe peuvent-ils coïncider ?",
+            "intro": "La probabilité que deux mots de passe faits avec ces réglages soient identiques si l’on en génère mille, un million ou un milliard (borne des anniversaires).",
+            "aria": "Probabilité de collision",
+            "thousand": "mille",
+            "million": "1 million",
+            "billion": "1 milliard",
+            "axis": "Hauteur en échelle log, de 10⁻³⁰ à 1",
+            "formula": "Borne des anniversaires",
+            "onePercent": "Nombre pour 1 %"
+          },
+          "equivalent": {
+            "title": "La même robustesse, de quatre façons",
+            "intro": "Votre espace de clés exprimé en lancers de pièce, lancers de dé, codes PIN à 4 chiffres à la suite et mots de la liste Diceware de 7 776 mots.",
+            "aria": "Espaces de clés équivalents",
+            "coins": "Pile ou face",
+            "dice": "Lancers de dé",
+            "pins": "Codes PIN à 4 chiffres",
+            "diceware": "Mots Diceware",
+            "note": "Points",
+            "dots": "jusqu’à {n} par rangée"
+          }
         }
       },
       "shareExport": {
@@ -20504,6 +20620,26 @@
         "generatedPasswordLabel": "Mot de Passe Généré",
         "summarySentence": "Force du mot de passe : {tier} ({bits} bits d'entropie).",
         "resultSectionTitle": "Résultat"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "short": "Courte : 8 lettres + chiffres",
+        "standard": "Standard : 16 lettres + chiffres",
+        "long": "Longue : 32, tous types",
+        "words4": "Phrase : 4 mots",
+        "words6": "Phrase : 6 mots + nombre",
+        "detail": "{bits} bits d’entropie"
+      },
+      "result": {
+        "class": {
+          "uppercase": "Maj.",
+          "lowercase": "Min.",
+          "numbers": "Chiffres",
+          "symbols": "Symboles",
+          "other": "Autres"
+        },
+        "alternatives": "Autres choix avec les mêmes réglages",
+        "use": "Utiliser ce mot de passe"
       }
     },
     "color-palette-generator": {

@@ -25,7 +25,7 @@ export type PasswordGeneratorOutput = {
   poolSize: number;
 };
 
-const CHARSETS: Record<"uppercase" | "lowercase" | "numbers" | "symbols", string> = {
+export const CHARSETS: Record<"uppercase" | "lowercase" | "numbers" | "symbols", string> = {
   uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   lowercase: "abcdefghijklmnopqrstuvwxyz",
   numbers: "0123456789",
@@ -33,11 +33,11 @@ const CHARSETS: Record<"uppercase" | "lowercase" | "numbers" | "symbols", string
 };
 
 /** Characters that are easy to misread in some fonts: 0/O, 1/l/I, etc. */
-const AMBIGUOUS = new Set(["0", "O", "1", "l", "I", "|"]);
+export const AMBIGUOUS_CHARS = new Set(["0", "O", "1", "l", "I", "|"]);
 
 function removeAmbiguous(pool: string): string {
   return Array.from(pool)
-    .filter((ch) => !AMBIGUOUS.has(ch))
+    .filter((ch) => !AMBIGUOUS_CHARS.has(ch))
     .join("");
 }
 

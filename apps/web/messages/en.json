@@ -20352,10 +20352,7 @@
         "intro": {
           "title": "How Password Strength Actually Works",
           "paragraph1": "A password's real strength is its entropy — how many possible passwords an attacker would have to search through before finding yours, expressed in bits (each added bit doubles the search space). It's a function of two things multiplied together: how large the pool of possible characters (or words) is, and how many of them you use. A 12-character password using only lowercase letters has less entropy than an 8-character one mixing upper, lower, numbers, and symbols — length matters, but so does what you draw from.",
-          "paragraph2": "That's exactly why this tool's passphrase mode exists alongside character-based passwords: four random words from a pool of about 1,650 gives roughly 43 bits of entropy — more than a typical 8-character mixed password — while staying genuinely easier to type and remember. A password's raw entropy tells you how long a brute-force search takes on average, but nothing about entropy is theoretical here: this tool computes the real bit count for exactly what it just generated, shown alongside crack-time estimates for a few realistic attack scenarios below.",
-          "diagram": {
-            "caption": "Estimated crack time by composition, at a fixed 100-billion-guesses/second offline attack rate — length and unpredictability both matter, but not equally."
-          }
+          "paragraph2": "That's exactly why this tool's passphrase mode exists alongside character-based passwords: four random words from a pool of about 1,650 gives roughly 43 bits of entropy — more than a typical 8-character mixed password — while staying genuinely easier to type and remember. A password's raw entropy tells you how long a brute-force search takes on average, but nothing about entropy is theoretical here: this tool computes the real bit count for exactly what it just generated, shown alongside crack-time estimates for a few realistic attack scenarios below."
         },
         "examples": {
           "title": "Worked Examples",
@@ -20383,14 +20380,7 @@
               "scenario": "12 chars, upper+lower+digits+symbols (94 choices each)",
               "result": "~79 bits → ~100,000 years"
             }
-          ],
-          "diagramLabels": {
-            "sevenLower": "7 lowercase letters",
-            "fourWords": "4-word passphrase",
-            "eightMixed": "8 mixed-case + digits",
-            "sixWords": "6-word passphrase",
-            "twelveMixed": "12 chars, all sets + symbols"
-          }
+          ]
         },
         "faq": {
           "title": "Frequently Asked Questions",
@@ -20480,6 +20470,132 @@
           "note": "The current official US government guidance on password policy, replacing the 2003-era complexity-and-rotation rules with recommendations prioritizing length, screening against known-breached passwords, and dropping forced periodic changes.",
           "url": "https://pages.nist.gov/800-63-3/sp800-63b.html",
           "readOriginal": "Read the Official Guidelines"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Select at least one character type above to see this indicator.",
+          "curve": {
+            "title": "Drag Along the Entropy Curve",
+            "introChars": "Entropy grows by the same amount with every extra character from your pool. Drag the point to change the length; the password and every card follow.",
+            "introWords": "Entropy grows by the same amount with every extra word from the list. Drag the point to change the word count; the passphrase and every card follow.",
+            "aria": "Entropy against length, draggable",
+            "axisChars": "Characters",
+            "axisWords": "Words",
+            "bits": "bits",
+            "words": "Words",
+            "length": "Length",
+            "perSymbol": "Bits per symbol",
+            "plusOne": "One more symbol adds",
+            "toStrong": "Symbols for 100 bits",
+            "entropy": "Entropy"
+          },
+          "pool": {
+            "title": "The Pool Each Character Is Drawn From",
+            "intro": "Every position is picked uniformly from this pool, split by character type after the look-alike filter, out of the tool's full 88 characters.",
+            "introWords": "In passphrase mode each word is picked uniformly from the tool's word list instead of a character pool.",
+            "aria": "Stacked bar of the character pool",
+            "axis": "Pool: {n} of {full} characters",
+            "axisWords": "Word list: {n} words",
+            "off": "off",
+            "size": "Pool size",
+            "classes": "Character types on",
+            "removed": "Look-alikes removed",
+            "perSymbol": "Bits per pick",
+            "bits": "bits",
+            "coverage": "Share of all 88"
+          },
+          "gauge": {
+            "title": "Entropy on the Strength Scale",
+            "intro": "Entropy in bits on the tool's five bands: under 28 very weak, 28–36 weak, 36–60 reasonable, 60–100 strong, 100+ very strong.",
+            "aria": "Gauge of entropy bits",
+            "band": "Band",
+            "next": "To the next band",
+            "keyspace": "Keyspace",
+            "of128": "Of 128 bits",
+            "bits": "Entropy (bits)"
+          },
+          "ladder": {
+            "title": "Time to Crack on a Log Scale",
+            "intro": "Expected time to find this password (half the keyspace) at three guess rates, on one axis from 10 ms to 10³⁰ s, against familiar durations.",
+            "aria": "Logarithmic bars of crack time",
+            "second": "1 s",
+            "day": "1 day",
+            "year": "1 yr",
+            "century": "100 yr",
+            "universe": "age of universe",
+            "keyspace": "Keyspace",
+            "half": "Average guesses needed",
+            "fastYears": "Years at 100 billion/s",
+            "underYear": "under a year",
+            "vsUniverse": "Versus universe age",
+            "formula": "Seconds at 100 billion/s"
+          },
+          "mix": {
+            "title": "What This Password Is Made Of",
+            "intro": "Outer ring: the character types in the password on screen. Inner ring: the share each type gets on average from the pool. Regenerate to see the outer ring move.",
+            "introWords": "The character types in the passphrase on screen: letters of the words, digits and separators.",
+            "aria": "Donut of character types",
+            "length": "Characters",
+            "most": "Most common type",
+            "expected": "Expected per type",
+            "separators": "Separators and digits",
+            "guarantee": "Every chosen type present",
+            "guaranteeYes": "guaranteed",
+            "classesUsed": "Types used"
+          },
+          "policy": {
+            "title": "Your Settings Among Common Recipes",
+            "intro": "Familiar password recipes scored with this tool's own pools (26, 52, 62 and 88 characters) and word list, ranked by entropy.",
+            "aria": "Ranked bars of recipe entropy",
+            "pin4": "4-digit PIN",
+            "lower8": "8 lowercase",
+            "mixed8": "8 letters + digits",
+            "mixed12": "12 letters + digits",
+            "full16": "16 all types",
+            "words4": "4-word passphrase",
+            "words6": "6-word passphrase",
+            "yours": "Your settings",
+            "rank": "Your rank",
+            "vsLower8": "Versus 8 lowercase",
+            "vsWords6": "Versus 6 words",
+            "wordList": "Word list",
+            "bits": "bits"
+          },
+          "formula": {
+            "title": "The Entropy Formula, Filled In",
+            "intro": "H = n × log₂ N: n symbols, each picked from N equally likely choices; an appended two-digit number adds log₂ 100.",
+            "aria": "Entropy formula with values",
+            "nWords": "words",
+            "nChars": "characters",
+            "NWords": "words in list",
+            "NChars": "pool size",
+            "digits": "2 digits",
+            "keyspace": "Keyspace ≈ {k}",
+            "keyspaceLabel": "Keyspace",
+            "bits": "bits"
+          },
+          "collision": {
+            "title": "Could Two Passwords Ever Match?",
+            "intro": "The chance that two passwords made with these settings come out identical if a thousand, a million or a billion are generated (birthday bound).",
+            "aria": "Collision probability for three batch sizes",
+            "thousand": "1 thousand",
+            "million": "1 million",
+            "billion": "1 billion",
+            "axis": "Bar height on a log scale, 10⁻³⁰ to 1",
+            "formula": "Birthday bound",
+            "onePercent": "Passwords for a 1 % chance"
+          },
+          "equivalent": {
+            "title": "The Same Strength, Four Ways",
+            "intro": "Your keyspace expressed as coin flips, six-sided dice rolls, 4-digit PINs in a row and words from the 7,776-word Diceware list.",
+            "aria": "Equivalent keyspaces",
+            "coins": "Coin flips",
+            "dice": "Dice rolls",
+            "pins": "4-digit PINs",
+            "diceware": "Diceware words",
+            "note": "Dots",
+            "dots": "up to {n} per row"
+          }
         }
       },
       "shareExport": {
@@ -20504,6 +20620,26 @@
         "generatedPasswordLabel": "Generated Password",
         "summarySentence": "Password strength: {tier} ({bits} bits of entropy).",
         "resultSectionTitle": "Result"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "short": "Short: 8 letters + digits",
+        "standard": "Standard: 16 letters + digits",
+        "long": "Long: 32, all character types",
+        "words4": "Passphrase: 4 words",
+        "words6": "Passphrase: 6 words + number",
+        "detail": "{bits} bits of entropy"
+      },
+      "result": {
+        "class": {
+          "uppercase": "Upper",
+          "lowercase": "Lower",
+          "numbers": "Digits",
+          "symbols": "Symbols",
+          "other": "Other"
+        },
+        "alternatives": "More options with the same settings",
+        "use": "Use this password"
       }
     },
     "color-palette-generator": {
