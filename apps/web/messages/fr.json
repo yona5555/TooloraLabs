@@ -20653,6 +20653,115 @@
           "note": "Une étude examinant comment les personnes perçoivent et préfèrent réellement différentes combinaisons de couleurs, constatant que l'harmonie perçue et la simple préférence sont des jugements liés mais distincts — un contexte utile pour comprendre pourquoi les règles classiques de la roue chromatique appliquées par cet outil sont un point de départ bien établi, et non une garantie que chaque personne trouvera une combinaison donnée également plaisante.",
           "url": "https://doi.org/10.3758/s13414-010-0027-0",
           "readOriginal": "Lire l'article original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez ci-dessus une couleur hex valide à 6 chiffres pour voir cet indicateur.",
+          "wheel": {
+            "title": "Faites tourner l’harmonie sur la roue",
+            "intro": "L’anneau des teintes à la saturation et à la luminosité de votre couleur de base. Faites glisser la grande poignée : toute l’harmonie tourne et chaque carte suit.",
+            "aria": "Roue chromatique avec couleur de base déplaçable",
+            "drag": "faites glisser l’anneau",
+            "baseHue": "Teinte de base",
+            "saturation": "Saturation",
+            "lightness": "Luminosité",
+            "offsets": "Décalages de teinte",
+            "hexes": "Palette"
+          },
+          "matrix": {
+            "title": "Contraste entre chaque paire",
+            "intro": "Le rapport de contraste WCAG 2.x de chaque couleur avec les autres, le blanc et le noir, avec le niveau atteint pour du texte.",
+            "large": "grand",
+            "pairs": "Paires de couleurs",
+            "passing": "Paires à 4,5:1 ou plus",
+            "best": "Paire la plus contrastée",
+            "formula": "Formule du contraste",
+            "bestText": "Meilleure couleur de texte",
+            "white": "blanc",
+            "black": "noir"
+          },
+          "balance": {
+            "title": "Texte blanc ou texte noir ?",
+            "intro": "Le contraste avec un texte blanc s’étend à gauche, avec un texte noir à droite (échelle log) ; les tirets marquent 4,5:1, le niveau AA du texte courant.",
+            "aria": "Barres divergentes du contraste blanc et noir",
+            "white": "texte blanc",
+            "black": "texte noir",
+            "whiteOk": "AA en texte blanc",
+            "blackOk": "AA en texte noir",
+            "flip": "Le noir l’emporte dès",
+            "product": "Blanc × noir (base)",
+            "baseBest": "Meilleur pour la base"
+          },
+          "luminance": {
+            "title": "Luminance relative, du plus sombre au plus clair",
+            "intro": "La luminance relative fonde tout rapport de contraste : 0 pour le noir, 1 pour le blanc. La palette est réordonnée en escalier.",
+            "aria": "Barres en escalier de la luminance",
+            "color": "#{n}",
+            "darkest": "Le plus sombre",
+            "lightest": "Le plus clair",
+            "spread": "Écart de luminance",
+            "formula": "Luminance (RVB linéaire)",
+            "maxContrast": "Meilleur contraste dans la palette"
+          },
+          "cvd": {
+            "title": "Vue avec un daltonisme",
+            "intro": "La palette en vision typique et avec protanopie, deutéranopie et tritanopie simulées. Le nombre est la plus petite distance de couleur (ΔE) entre deux couleurs.",
+            "aria": "Rangées de la palette avec daltonisme",
+            "normal": "Typique",
+            "protanopia": "Protanopie",
+            "deuteranopia": "Deutéranopie",
+            "tritanopia": "Tritanopie",
+            "normalMin": "Vision typique",
+            "worst": "Cas le plus difficile",
+            "distinct": "restent distinctes",
+            "confusable": "peuvent se confondre"
+          },
+          "labPlane": {
+            "title": "Vos couleurs dans le plan CIELAB",
+            "intro": "Chaque couleur sur les axes a* (vert–rouge) et b* (bleu–jaune) ; la distance au centre est la chroma. Le gros point est votre couleur de base.",
+            "aria": "Nuage de couleurs dans le plan CIELAB a*–b*",
+            "base": "Couleur de base",
+            "chroma": "Chroma",
+            "hue": "Angle de teinte CIELAB",
+            "vivid": "La plus vive",
+            "meanChroma": "Chroma moyenne"
+          },
+          "ramp": {
+            "title": "Teintes et nuances de la teinte de base",
+            "intro": "La teinte de base de 5 % à 95 % de luminosité. Les nombres sont la luminosité, écrite dans la couleur de texte la plus lisible ; la marque indique le dernier pas où le texte blanc atteint AA.",
+            "aria": "Bande de la teinte de base selon la luminosité",
+            "base": "base L {l}%",
+            "whiteEnds": "blanc AA jusqu’à {l}%",
+            "baseL": "Luminosité de base",
+            "whiteRange": "Le texte blanc atteint AA",
+            "blackRange": "Le texte noir atteint AA",
+            "steps": "Pas",
+            "both": "Les deux conviennent",
+            "none": "aucun"
+          },
+          "rgb": {
+            "title": "Canaux rouge, vert et bleu",
+            "intro": "Comment chaque couleur est mélangée à l’écran : ses canaux rouge, vert et bleu de 0 à 255.",
+            "aria": "Barres groupées des canaux RVB",
+            "base": "RVB de base",
+            "hex": "Paires hex",
+            "dominant": "Canal dominant (base)",
+            "r": "rouge",
+            "g": "vert",
+            "b": "bleu",
+            "sum": "Somme moyenne des canaux",
+            "range": "Étendue des canaux de base"
+          },
+          "distance": {
+            "title": "Quelles couleurs sont trop proches ?",
+            "intro": "Chaque paire classée par distance perceptuelle (CIE76 ΔE*ab), la plus proche d’abord. Sous ΔE 10 environ, deux couleurs se confondent facilement.",
+            "aria": "Barres classées des distances",
+            "closest": "Paire la plus proche",
+            "farthest": "Paire la plus éloignée",
+            "formula": "ΔE de la paire la plus proche",
+            "confusable": "Paires sous ΔE 10",
+            "mean": "Distance moyenne"
+          }
         }
       },
       "shareExport": {
@@ -20679,6 +20788,19 @@
       "quickReference": {
         "title": "Angles d'harmonie chromatique",
         "intro": "Décalages de teinte réels sur la roue chromatique utilisés pour générer chaque type d'harmonie."
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "tailwind": "Tailwind blue-500",
+        "classicBlue": "Pantone Classic Blue (2020)",
+        "vivaMagenta": "Pantone Viva Magenta (2023)",
+        "peachFuzz": "Pantone Peach Fuzz (2024)",
+        "mochaMousse": "Pantone Mocha Mousse (2025)"
+      },
+      "result": {
+        "aaLarge": "AA grand",
+        "fail": "sous AA",
+        "legend": "Le texte d’exemple utilise le blanc ou le noir, le plus lisible ; le rapport est le contraste WCAG 2.x."
       }
     },
     "unit-converter": {

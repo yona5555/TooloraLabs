@@ -20653,6 +20653,115 @@
           "note": "Eine Studie, die untersucht, wie Menschen unterschiedliche Farbkombinationen tatsächlich wahrnehmen und bevorzugen, und feststellt, dass wahrgenommene Harmonie und bloße Vorliebe zwar verwandte, aber unterschiedliche Urteile sind — ein hilfreicher Kontext dafür, warum die von diesem Tool angewendeten klassischen Farbkreisregeln ein gut etablierter Ausgangspunkt sind, keine Garantie dafür, dass jeder Betrachter eine gegebene Kombination gleichermaßen ansprechend findet.",
           "url": "https://doi.org/10.3758/s13414-010-0027-0",
           "readOriginal": "Originalartikel lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben eine gültige 6-stellige Hex-Farbe ein, um diesen Indikator zu sehen.",
+          "wheel": {
+            "title": "Die Harmonie am Farbkreis drehen",
+            "intro": "Der Farbtonring mit Sättigung und Helligkeit deiner Grundfarbe. Zieh den großen Griff, die ganze Harmonie dreht sich mit, und alle Karten folgen.",
+            "aria": "Farbtonkreis mit ziehbarer Grundfarbe",
+            "drag": "Ring ziehen",
+            "baseHue": "Grundfarbton",
+            "saturation": "Sättigung",
+            "lightness": "Helligkeit",
+            "offsets": "Farbton-Versätze",
+            "hexes": "Palette"
+          },
+          "matrix": {
+            "title": "Kontrast zwischen allen Paaren",
+            "intro": "Das WCAG-2.x-Kontrastverhältnis jeder Farbe zu jeder anderen, zu Weiß und zu Schwarz, mit der für Text erreichten Stufe.",
+            "large": "groß",
+            "pairs": "Farbpaare",
+            "passing": "Paare ab 4,5:1",
+            "best": "Kontraststärkstes Paar",
+            "formula": "Kontrastformel",
+            "bestText": "Beste Textfarbe",
+            "white": "weiß",
+            "black": "schwarz"
+          },
+          "balance": {
+            "title": "Weiße oder schwarze Schrift?",
+            "intro": "Kontrast mit weißer Schrift wächst nach links, mit schwarzer nach rechts (log-Skala); die Linien markieren 4,5:1, WCAG AA für Fließtext.",
+            "aria": "Gegenläufige Balken für weiße und schwarze Schrift",
+            "white": "weiße Schrift",
+            "black": "schwarze Schrift",
+            "whiteOk": "AA mit weißer Schrift",
+            "blackOk": "AA mit schwarzer Schrift",
+            "flip": "Schwarz gewinnt ab",
+            "product": "Weiß × Schwarz (Grundfarbe)",
+            "baseBest": "Bestwert der Grundfarbe"
+          },
+          "luminance": {
+            "title": "Relative Leuchtdichte, dunkel bis hell",
+            "intro": "Die relative Leuchtdichte ist die Basis jedes Kontrastverhältnisses: 0 ist Schwarz, 1 ist Weiß. Die Palette wird als Treppe sortiert.",
+            "aria": "Stufenbalken der relativen Leuchtdichte",
+            "color": "#{n}",
+            "darkest": "Dunkelste",
+            "lightest": "Hellste",
+            "spread": "Leuchtdichte-Spanne",
+            "formula": "Leuchtdichte (lineares RGB)",
+            "maxContrast": "Bester Kontrast in der Palette"
+          },
+          "cvd": {
+            "title": "Mit Farbsehschwäche gesehen",
+            "intro": "Die Palette bei normalem Sehen und mit simulierter vollständiger Protanopie, Deuteranopie und Tritanopie. Die Zahl ist der kleinste verbleibende Farbabstand (ΔE).",
+            "aria": "Reihen der Palette bei Farbsehschwäche",
+            "normal": "Normal",
+            "protanopia": "Protanopie",
+            "deuteranopia": "Deuteranopie",
+            "tritanopia": "Tritanopie",
+            "normalMin": "Normales Sehen",
+            "worst": "Schwierigster Fall",
+            "distinct": "bleiben unterscheidbar",
+            "confusable": "Farben können verschmelzen"
+          },
+          "labPlane": {
+            "title": "Deine Farben in der CIELAB-Ebene",
+            "intro": "Jede Farbe auf den Achsen a* (Grün–Rot) und b* (Blau–Gelb); der Abstand zur Mitte ist die Buntheit. Der große Punkt ist deine Grundfarbe.",
+            "aria": "Streuung der Farben in der CIELAB-a*-b*-Ebene",
+            "base": "Grundfarbe",
+            "chroma": "Buntheit (Chroma)",
+            "hue": "CIELAB-Farbtonwinkel",
+            "vivid": "Am buntesten",
+            "meanChroma": "Mittlere Buntheit"
+          },
+          "ramp": {
+            "title": "Aufhellungen und Abdunklungen des Grundtons",
+            "intro": "Der Grundton von 5 % bis 95 % Helligkeit. Die Zahlen sind die Helligkeit in der besser lesbaren Schriftfarbe; die Marke zeigt die letzte Stufe, auf der weiße Schrift AA erreicht.",
+            "aria": "Streifen des Grundtons über die Helligkeit",
+            "base": "Basis L {l}%",
+            "whiteEnds": "weiß AA bis {l}%",
+            "baseL": "Helligkeit der Grundfarbe",
+            "whiteRange": "Weiße Schrift erreicht AA",
+            "blackRange": "Schwarze Schrift erreicht AA",
+            "steps": "Stufen",
+            "both": "Beides geht",
+            "none": "keine"
+          },
+          "rgb": {
+            "title": "Rot-, Grün- und Blaukanal",
+            "intro": "Wie jede Farbe am Bildschirm gemischt wird: ihr Rot-, Grün- und Blaukanal von 0 bis 255.",
+            "aria": "Gruppierte Balken der RGB-Kanäle",
+            "base": "RGB der Grundfarbe",
+            "hex": "Hex-Paare",
+            "dominant": "Dominanter Kanal (Grundfarbe)",
+            "r": "Rot",
+            "g": "Grün",
+            "b": "Blau",
+            "sum": "Mittlere Kanalsumme",
+            "range": "Kanalspanne der Grundfarbe"
+          },
+          "distance": {
+            "title": "Welche Farben liegen zu nah beieinander?",
+            "intro": "Alle Paare nach wahrgenommenem Abstand (CIE76 ΔE*ab) sortiert, das nächste zuerst. Unter etwa ΔE 10 sind zwei Farben leicht zu verwechseln.",
+            "aria": "Rangbalken der Farbabstände",
+            "closest": "Nächstes Paar",
+            "farthest": "Entferntestes Paar",
+            "formula": "ΔE des nächsten Paars",
+            "confusable": "Paare unter ΔE 10",
+            "mean": "Mittlerer Abstand"
+          }
         }
       },
       "shareExport": {
@@ -20679,6 +20788,19 @@
       "quickReference": {
         "title": "Farbharmonie-Winkel",
         "intro": "Reale Farbtonverschiebungen auf dem Farbkreis, die zur Erzeugung jedes Harmonietyps verwendet werden."
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "tailwind": "Tailwind blue-500",
+        "classicBlue": "Pantone Classic Blue (2020)",
+        "vivaMagenta": "Pantone Viva Magenta (2023)",
+        "peachFuzz": "Pantone Peach Fuzz (2024)",
+        "mochaMousse": "Pantone Mocha Mousse (2025)"
+      },
+      "result": {
+        "aaLarge": "AA groß",
+        "fail": "unter AA",
+        "legend": "Der Mustertext nutzt Weiß oder Schwarz, je nachdem, was besser lesbar ist; der Wert ist der WCAG-2.x-Kontrast."
       }
     },
     "unit-converter": {

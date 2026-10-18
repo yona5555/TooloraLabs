@@ -46,12 +46,12 @@ export default function BarcodeInkGauge() {
         const p = (v - lo) / (hi - lo);
         const ang = Math.PI * (1 - p);
         return (
-          <text key={v} x={CX + (R + 22) * Math.cos(ang)} y={CY - (R + 22) * Math.sin(ang) + 4} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
+          <text key={v} x={(CX + (R + 22) * Math.cos(ang)).toFixed(2)} y={(CY - (R + 22) * Math.sin(ang) + 4).toFixed(2)} textAnchor="middle" fontSize={12} className="fill-zinc-500 dark:fill-zinc-400">
             {Math.round(v * 100)}%
           </text>
         );
       })}
-      <line x1={CX} y1={CY} x2={CX + (R - 18) * Math.cos(needle)} y2={CY - (R - 18) * Math.sin(needle)} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
+      <line x1={CX} y1={CY} x2={(CX + (R - 18) * Math.cos(needle)).toFixed(2)} y2={(CY - (R - 18) * Math.sin(needle)).toFixed(2)} strokeWidth={4} strokeLinecap="round" className="stroke-zinc-800 dark:stroke-zinc-100" />
       <circle cx={CX} cy={CY} r={7} className="fill-zinc-800 dark:fill-zinc-100" />
       <text x={CX} y={CY - 34} textAnchor="middle" fontSize={22} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">
         {pct(a.darkModules, a.modules)}

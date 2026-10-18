@@ -20653,6 +20653,115 @@
           "note": "A study examining how people actually perceive and prefer different color combinations, finding that perceived harmony and simple preference are related but distinct judgments — useful context for why the classic color-wheel rules this tool applies are a well-established starting point, not a guarantee that every viewer will find a given combination equally pleasing.",
           "url": "https://doi.org/10.3758/s13414-010-0027-0",
           "readOriginal": "Read the Original Article"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter a valid 6-digit hex colour above to see this indicator.",
+          "wheel": {
+            "title": "Drag the Harmony Round the Wheel",
+            "intro": "The hue ring at your base colour's saturation and lightness. Drag the large handle and the whole harmony rotates; every card follows.",
+            "aria": "Hue wheel with draggable base colour",
+            "drag": "drag the ring",
+            "baseHue": "Base hue",
+            "saturation": "Saturation",
+            "lightness": "Lightness",
+            "offsets": "Hue offsets",
+            "hexes": "Palette"
+          },
+          "matrix": {
+            "title": "Contrast Between Every Pair",
+            "intro": "The WCAG 2.x contrast ratio of each colour against every other colour, white and black, tagged with the level it reaches for text.",
+            "large": "large",
+            "pairs": "Colour pairs",
+            "passing": "Pairs at 4.5:1 or more",
+            "best": "Highest-contrast pair",
+            "formula": "Contrast formula",
+            "bestText": "Best text colour",
+            "white": "white",
+            "black": "black"
+          },
+          "balance": {
+            "title": "White Text or Black Text?",
+            "intro": "Contrast with white text grows to the left, with black text to the right (log scale); the dashed lines mark 4.5:1, WCAG AA for body text.",
+            "aria": "Diverging bars of contrast with white and black text",
+            "white": "white text",
+            "black": "black text",
+            "whiteOk": "AA with white text",
+            "blackOk": "AA with black text",
+            "flip": "Black wins from",
+            "product": "White × black (base)",
+            "baseBest": "Base colour best"
+          },
+          "luminance": {
+            "title": "Relative Luminance, Darkest to Lightest",
+            "intro": "Relative luminance is what every contrast ratio is built from: 0 is black, 1 is white. The palette is re-ordered as a staircase.",
+            "aria": "Stepped bars of relative luminance",
+            "color": "#{n}",
+            "darkest": "Darkest",
+            "lightest": "Lightest",
+            "spread": "Luminance spread",
+            "formula": "Luminance (linear RGB)",
+            "maxContrast": "Best contrast inside the palette"
+          },
+          "cvd": {
+            "title": "Seen With Colour-Vision Deficiency",
+            "intro": "The palette with typical vision and simulated full protanopia, deuteranopia and tritanopia. The number is the smallest colour distance (ΔE) left between any two colours.",
+            "aria": "Rows of the palette under colour-vision deficiency",
+            "normal": "Typical",
+            "protanopia": "Protanopia",
+            "deuteranopia": "Deuteranopia",
+            "tritanopia": "Tritanopia",
+            "normalMin": "Typical vision",
+            "worst": "Hardest case",
+            "distinct": "still distinct",
+            "confusable": "colours may merge"
+          },
+          "labPlane": {
+            "title": "Your Colours on the CIELAB Plane",
+            "intro": "Each colour on the a* (green–red) and b* (blue–yellow) axes; distance from the centre is chroma. The large point is your base colour.",
+            "aria": "Scatter of colours on the CIELAB a*–b* plane",
+            "base": "Base colour",
+            "chroma": "Chroma",
+            "hue": "CIELAB hue angle",
+            "vivid": "Most vivid",
+            "meanChroma": "Average chroma"
+          },
+          "ramp": {
+            "title": "Tints and Shades of the Base Hue",
+            "intro": "The base hue from 5 % to 95 % lightness. Numbers are lightness, written in the text colour that reads best; the mark shows the last step where white text still meets AA.",
+            "aria": "Strip of the base hue across lightness",
+            "base": "base L {l}%",
+            "whiteEnds": "white AA to {l}%",
+            "baseL": "Base lightness",
+            "whiteRange": "White text meets AA",
+            "blackRange": "Black text meets AA",
+            "steps": "Steps",
+            "both": "Both work",
+            "none": "none"
+          },
+          "rgb": {
+            "title": "Red, Green and Blue Channels",
+            "intro": "How each colour is mixed on screen: its red, green and blue channel from 0 to 255.",
+            "aria": "Grouped bars of RGB channels",
+            "base": "Base RGB",
+            "hex": "Hex pairs",
+            "dominant": "Dominant channel (base)",
+            "r": "red",
+            "g": "green",
+            "b": "blue",
+            "sum": "Average channel total",
+            "range": "Base channel range"
+          },
+          "distance": {
+            "title": "Which Colours Are Too Close?",
+            "intro": "Every pair ranked by perceptual distance (CIE76 ΔE*ab), closest first. Under about ΔE 10, two colours are easy to confuse at a glance.",
+            "aria": "Ranked bars of colour distances",
+            "closest": "Closest pair",
+            "farthest": "Farthest pair",
+            "formula": "ΔE of the closest pair",
+            "confusable": "Pairs under ΔE 10",
+            "mean": "Average distance"
+          }
         }
       },
       "shareExport": {
@@ -20679,6 +20788,19 @@
       "quickReference": {
         "title": "Color Harmony Angles",
         "intro": "Real hue offsets on the color wheel used to generate each harmony type."
+      },
+      "examples": {
+        "title": "Quick examples",
+        "tailwind": "Tailwind blue-500",
+        "classicBlue": "Pantone Classic Blue (2020)",
+        "vivaMagenta": "Pantone Viva Magenta (2023)",
+        "peachFuzz": "Pantone Peach Fuzz (2024)",
+        "mochaMousse": "Pantone Mocha Mousse (2025)"
+      },
+      "result": {
+        "aaLarge": "AA large",
+        "fail": "below AA",
+        "legend": "Sample text uses whichever of white or black reads better; the ratio is WCAG 2.x contrast."
       }
     },
     "unit-converter": {

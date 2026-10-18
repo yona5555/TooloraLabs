@@ -4,6 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import PaletteHueWheel from "./PaletteHueWheel";
+import PaletteContrastMatrix from "./PaletteContrastMatrix";
+import PaletteTextBalance from "./PaletteTextBalance";
+import PaletteLuminanceSteps from "./PaletteLuminanceSteps";
+import PaletteColorBlind from "./PaletteColorBlind";
+import PaletteLabPlane from "./PaletteLabPlane";
+import PaletteTintRamp from "./PaletteTintRamp";
+import PaletteRgbChannels from "./PaletteRgbChannels";
+import PaletteDistances from "./PaletteDistances";
 
 type ExampleRow = { harmony: string; description: string; example: string };
 
@@ -18,7 +27,14 @@ export default async function ColorPaletteEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <PaletteHueWheel />
+        <PaletteContrastMatrix />
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <PaletteTextBalance />
+          <PaletteLuminanceSteps />
+        </div>
+        <PaletteColorBlind />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -49,6 +65,7 @@ export default async function ColorPaletteEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <PaletteDistances />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -60,11 +77,12 @@ export default async function ColorPaletteEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <PaletteLabPlane />
+          <PaletteTintRamp />
+          <PaletteRgbChannels />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

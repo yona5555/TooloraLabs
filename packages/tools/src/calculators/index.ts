@@ -131,3 +131,4 @@ export * from "./WeatherScience";
 export * from "./WeatherForecastModel";
 export * from "./WeatherHazards";
 export * from "./WeatherCities";
+export * from "./colorPaletteAnalysis";
