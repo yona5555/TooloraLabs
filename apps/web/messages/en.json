@@ -22396,12 +22396,7 @@
         "intro": {
           "title": "How Base64 Encoding Actually Works",
           "paragraph1": "Base64 solves one narrow problem: representing arbitrary binary data — the raw bytes of an image, a file, or any content that isn't plain text — using only characters that are guaranteed to survive being passed through text-only channels like email bodies, URLs, or JSON strings. It does this by regrouping data. Binary data is naturally organized into 8-bit bytes, but Base64 reads it in chunks of three bytes (24 bits) at a time and regroups those same 24 bits into four 6-bit groups instead. Since 6 bits can represent exactly 64 distinct values (2⁶ = 64), each 6-bit group maps directly onto one of 64 printable characters — hence the name.",
-          "paragraph2": "This regrouping is also exactly why Base64 output is always about a third larger than the original input: three input bytes (24 bits) become four output characters, and since each output character is stored as one full byte of text even though it only carries 6 bits of actual information, the encoded result inflates by a factor of 4/3, or roughly 33%. When the input length isn't a clean multiple of three bytes, standard Base64 pads the output with one or two '=' characters so the decoder can tell exactly how many of the final group's bits are real data versus filler — the URL-safe variant this tool also supports typically omits that padding entirely, since it's most often used in contexts (like URLs) where a trailing '=' would need its own escaping anyway.",
-          "diagram": {
-            "byteLabel": "Byte",
-            "sextetLabel": "Group",
-            "caption": "Base64's core regrouping: three 8-bit bytes (24 bits total) are read as one continuous bit stream and split into four 6-bit groups instead, each of which maps to one printable Base64 character."
-          }
+          "paragraph2": "This regrouping is also exactly why Base64 output is always about a third larger than the original input: three input bytes (24 bits) become four output characters, and since each output character is stored as one full byte of text even though it only carries 6 bits of actual information, the encoded result inflates by a factor of 4/3, or roughly 33%. When the input length isn't a clean multiple of three bytes, standard Base64 pads the output with one or two '=' characters so the decoder can tell exactly how many of the final group's bits are real data versus filler — the URL-safe variant this tool also supports typically omits that padding entirely, since it's most often used in contexts (like URLs) where a trailing '=' would need its own escaping anyway."
         },
         "examples": {
           "title": "Worked Examples",
@@ -22507,6 +22502,139 @@
           "note": "The official specification this tool implements exactly, including the standard alphabet, the padding rules, and the URL-safe and filename-safe alphabet this tool's variant toggle produces.",
           "url": "https://www.rfc-editor.org/rfc/rfc4648",
           "readOriginal": "Read the Original RFC"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter text above (or valid Base64 in decode mode) to see this indicator.",
+          "bits": {
+            "title": "Three Bytes Become Four Characters",
+            "intro": "Drag the slider to any group of your data: its 24 bits are split into four 6-bit values, and each value picks one of 64 characters.",
+            "aria": "Bits of one group regrouped into sextets",
+            "missing": "(none)",
+            "group": "Group {n} of {total}",
+            "slider": "Group",
+            "bytesRow": "Bytes (hex)",
+            "sextetsRow": "6-bit values",
+            "charsRow": "Characters",
+            "bitsUsed": "Real bits",
+            "offset": "Byte positions"
+          },
+          "size": {
+            "title": "Raw Bytes Against Base64",
+            "intro": "The bytes, the Base64 text made from them with its one-third growth and \"=\" padding, and the e-mail (MIME) form with a line break every 76 characters.",
+            "aria": "Stacked bars of raw, Base64 and MIME sizes",
+            "raw": "Raw bytes",
+            "base64": "Base64",
+            "mime": "MIME (76-char lines)",
+            "kRaw": "Same count as the bytes",
+            "kGrowth": "Growth (4 per 3)",
+            "kPad": "Padding \"=\"",
+            "kBreaks": "Line breaks (CRLF)",
+            "formula": "Length",
+            "padding": "Padding",
+            "lines": "MIME lines",
+            "remainder": "Leftover bytes",
+            "growth": "Growth"
+          },
+          "encodings": {
+            "title": "The Same Bytes, Other Encodings",
+            "intro": "Your bytes written as text five ways, ranked by length: Ascii85, Base64, Base32, hexadecimal and URL percent-encoding.",
+            "aria": "Ranked bars of encoded sizes",
+            "raw": "Raw bytes",
+            "ascii85": "Ascii85",
+            "base64": "Base64",
+            "base32": "Base32",
+            "hex": "Hex",
+            "percent": "Percent-encoded",
+            "vsHex": "Base64 versus hex"
+          },
+          "growth": {
+            "title": "Length Grows in Steps of Four",
+            "intro": "Base64 length against input bytes: four more characters every three bytes, above the straight 4/3 line. The gap between them is padding.",
+            "aria": "Step line of Base64 length",
+            "axis": "Input bytes",
+            "you": "You: {c}",
+            "youOff": "You: {n} B → {c}",
+            "bytes": "Input bytes",
+            "exact": "Exact 4/3",
+            "actual": "Actual characters",
+            "free": "Free room",
+            "freeValue": "{k} more bytes fit",
+            "ratio": "Characters per byte"
+          },
+          "alphabet": {
+            "title": "How the 64 Characters Are Used",
+            "intro": "Your Base64 text spread over its alphabet, against the share random data would give each part (dashed lines).",
+            "aria": "Bars of alphabet usage",
+            "upper": "Capitals",
+            "lower": "Small",
+            "digits": "Digits",
+            "symbols": "Symbols",
+            "padding": "Padding",
+            "chars": "Characters",
+            "distinct": "Distinct symbols",
+            "entropy": "Entropy",
+            "bitsPerChar": "bits/char",
+            "letters": "Letters",
+            "efficiency": "Of the 6-bit maximum"
+          },
+          "bytes": {
+            "title": "What the Raw Bytes Are",
+            "intro": "Your raw bytes by type: printable ASCII, UTF-8 lead bytes that start a multi-byte character, continuation bytes, control codes, and bytes that never appear in UTF-8.",
+            "aria": "Donut of byte types",
+            "bytes": "bytes",
+            "ascii": "Printable ASCII",
+            "lead": "UTF-8 lead",
+            "continuation": "UTF-8 continuation",
+            "control": "Control codes",
+            "invalid": "Not UTF-8",
+            "multibyteChars": "Multi-byte characters",
+            "avgBytes": "Bytes per character",
+            "asciiShare": "ASCII share",
+            "kind": "Looks like",
+            "text": "text",
+            "binary": "binary data",
+            "why": "Why encode it",
+            "whyText": "to pass through ASCII-only channels",
+            "whyBinary": "to embed it in text formats"
+          },
+          "overhead": {
+            "title": "Size Overhead",
+            "intro": "How much bigger the Base64 text is than the raw bytes. Long inputs approach 33.3 %; very short ones pay more for the padded last group.",
+            "aria": "Gauge of size overhead",
+            "extra": "Extra",
+            "chars": "characters",
+            "theory": "Long-input limit",
+            "padCost": "Cost of padding",
+            "mime": "With MIME line breaks",
+            "overhead": "Overhead"
+          },
+          "strip": {
+            "title": "The Four-Character Rhythm",
+            "intro": "The first characters of your Base64 text, sixteen to a row, coloured by the 3-byte group each comes from; padding is red.",
+            "aria": "Strip of Base64 characters by group",
+            "shown": "{n} of {total} characters",
+            "groups": "Groups",
+            "lastGroup": "Last group",
+            "padChars": "Padding characters",
+            "multipleOf4": "Length is a multiple of 4",
+            "yes": "yes",
+            "no": "no",
+            "perRow": "Each row",
+            "perRowValue": "{c} chars = {b} bytes"
+          },
+          "variants": {
+            "title": "Standard Versus URL-Safe",
+            "intro": "The same bytes in standard Base64 (RFC 4648 §4) and URL-safe Base64 (§5). Only \"+\" and \"/\" change, to \"-\" and \"_\", and URL-safe drops the padding.",
+            "standard": "Standard",
+            "urlSafe": "URL-safe",
+            "legend": "Highlighted characters differ between the two forms.",
+            "stdLength": "Standard length",
+            "urlLength": "URL-safe length",
+            "plus": "\"+\" characters",
+            "slash": "\"/\" characters",
+            "differ": "Characters that differ"
+          }
         }
       },
       "shareExport": {
@@ -22527,6 +22655,19 @@
         "generatedOn": "Generated on",
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "mixed": "Latin + Arabic text",
+        "rfc": "RFC 4648 test vector",
+        "json": "JWT payload (URL-safe)",
+        "basicAuth": "HTTP Basic credentials (RFC 7617)",
+        "decode": "Decode a Base64 sentence"
+      },
+      "result": {
+        "groups": "{n} groups: 3 bytes → 4 characters",
+        "bytes": "Raw bytes",
+        "chars": "Base64 characters"
       }
     },
     "csv-json-converter": {

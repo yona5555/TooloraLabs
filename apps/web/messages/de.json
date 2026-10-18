@@ -22396,12 +22396,7 @@
         "intro": {
           "title": "Wie Base64-Codierung tatsächlich funktioniert",
           "paragraph1": "Base64 löst ein eng umrissenes Problem: beliebige Binärdaten — die rohen Bytes eines Bildes, einer Datei oder jeden Inhalts, der kein reiner Text ist — nur mit Zeichen darzustellen, die garantiert unbeschadet durch reine Textkanäle wie E-Mail-Texte, URLs oder JSON-Strings gelangen. Dazu gruppiert es die Daten um. Binärdaten sind naturgemäß in 8-Bit-Bytes organisiert, aber Base64 liest sie in Blöcken von jeweils drei Bytes (24 Bit) und gruppiert dieselben 24 Bit stattdessen in vier 6-Bit-Gruppen um. Da 6 Bit genau 64 unterschiedliche Werte darstellen können (2⁶ = 64), wird jede 6-Bit-Gruppe direkt auf eines von 64 druckbaren Zeichen abgebildet — daher der Name.",
-          "paragraph2": "Diese Umgruppierung ist auch genau der Grund, warum die Base64-Ausgabe stets etwa ein Drittel größer ist als die ursprüngliche Eingabe: Drei Eingabebytes (24 Bit) werden zu vier Ausgabezeichen, und da jedes Ausgabezeichen als ein volles Textbyte gespeichert wird, obwohl es nur 6 Bit echte Information trägt, wächst das codierte Ergebnis um den Faktor 4/3, also etwa 33 %. Wenn die Eingabelänge kein sauberes Vielfaches von drei Bytes ist, füllt Standard-Base64 die Ausgabe mit einem oder zwei „=“-Zeichen auf, damit der Decoder genau erkennen kann, wie viele Bits der letzten Gruppe echte Daten sind und wie viele Füllzeichen — die von diesem Werkzeug ebenfalls unterstützte URL-sichere Variante lässt diese Auffüllung meist ganz weg, da sie am häufigsten in Kontexten (wie URLs) verwendet wird, in denen ein abschließendes „=“ ohnehin maskiert werden müsste.",
-          "diagram": {
-            "byteLabel": "Byte",
-            "sextetLabel": "Gruppe",
-            "caption": "Die Kernumgruppierung von Base64: Drei 8-Bit-Bytes (insgesamt 24 Bit) werden als ein durchgehender Bitstrom gelesen und stattdessen in vier 6-Bit-Gruppen aufgeteilt, von denen jede auf ein druckbares Base64-Zeichen abgebildet wird."
-          }
+          "paragraph2": "Diese Umgruppierung ist auch genau der Grund, warum die Base64-Ausgabe stets etwa ein Drittel größer ist als die ursprüngliche Eingabe: Drei Eingabebytes (24 Bit) werden zu vier Ausgabezeichen, und da jedes Ausgabezeichen als ein volles Textbyte gespeichert wird, obwohl es nur 6 Bit echte Information trägt, wächst das codierte Ergebnis um den Faktor 4/3, also etwa 33 %. Wenn die Eingabelänge kein sauberes Vielfaches von drei Bytes ist, füllt Standard-Base64 die Ausgabe mit einem oder zwei „=“-Zeichen auf, damit der Decoder genau erkennen kann, wie viele Bits der letzten Gruppe echte Daten sind und wie viele Füllzeichen — die von diesem Werkzeug ebenfalls unterstützte URL-sichere Variante lässt diese Auffüllung meist ganz weg, da sie am häufigsten in Kontexten (wie URLs) verwendet wird, in denen ein abschließendes „=“ ohnehin maskiert werden müsste."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -22507,6 +22502,139 @@
           "note": "Die offizielle Spezifikation, die dieses Werkzeug exakt umsetzt, einschließlich des Standardalphabets, der Padding-Regeln und des URL- und dateinamensicheren Alphabets, das der Varianten-Umschalter dieses Werkzeugs erzeugt.",
           "url": "https://www.rfc-editor.org/rfc/rfc4648",
           "readOriginal": "Original-RFC lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben Text ein (oder gültiges Base64 im Dekodiermodus), um diesen Indikator zu sehen.",
+          "bits": {
+            "title": "Drei Bytes werden vier Zeichen",
+            "intro": "Zieh den Regler zu einer Gruppe: Ihre 24 Bit werden in vier 6-Bit-Werte geteilt, und jeder wählt eines von 64 Zeichen.",
+            "aria": "Bits einer Gruppe in Sextette",
+            "missing": "(keins)",
+            "group": "Gruppe {n} von {total}",
+            "slider": "Gruppe",
+            "bytesRow": "Bytes (hex)",
+            "sextetsRow": "6-Bit-Werte",
+            "charsRow": "Zeichen",
+            "bitsUsed": "Echte Bits",
+            "offset": "Byte-Positionen"
+          },
+          "size": {
+            "title": "Rohbytes gegen Base64",
+            "intro": "Die Bytes, der Base64-Text mit seinem Drittel Zuwachs und \"=\"-Auffüllung, und die E-Mail-Form (MIME) mit Zeilenumbruch alle 76 Zeichen.",
+            "aria": "Gestapelte Balken der Größen",
+            "raw": "Rohbytes",
+            "base64": "Base64",
+            "mime": "MIME (76er-Zeilen)",
+            "kRaw": "So viele wie die Bytes",
+            "kGrowth": "Zuwachs (4 je 3)",
+            "kPad": "Auffüllung \"=\"",
+            "kBreaks": "Zeilenumbrüche (CRLF)",
+            "formula": "Länge",
+            "padding": "Auffüllung",
+            "lines": "MIME-Zeilen",
+            "remainder": "Restbytes",
+            "growth": "Zuwachs"
+          },
+          "encodings": {
+            "title": "Dieselben Bytes, andere Kodierungen",
+            "intro": "Deine Bytes als Text auf fünf Arten, nach Länge sortiert: Ascii85, Base64, Base32, Hexadezimal und URL-Prozentkodierung.",
+            "aria": "Rangbalken der Größen",
+            "raw": "Rohbytes",
+            "ascii85": "Ascii85",
+            "base64": "Base64",
+            "base32": "Base32",
+            "hex": "Hex",
+            "percent": "Prozentkodiert",
+            "vsHex": "Base64 gegen Hex"
+          },
+          "growth": {
+            "title": "Die Länge wächst in Viererstufen",
+            "intro": "Base64-Länge gegen Eingabebytes: alle drei Bytes vier Zeichen mehr, über der Geraden 4/3. Der Abstand ist die Auffüllung.",
+            "aria": "Treppe der Base64-Länge",
+            "axis": "Eingabebytes",
+            "you": "Du: {c}",
+            "youOff": "Du: {n} B → {c}",
+            "bytes": "Eingabebytes",
+            "exact": "Genau 4/3",
+            "actual": "Tatsächliche Zeichen",
+            "free": "Freier Platz",
+            "freeValue": "{k} Bytes passen noch",
+            "ratio": "Zeichen pro Byte"
+          },
+          "alphabet": {
+            "title": "Wie die 64 Zeichen genutzt werden",
+            "intro": "Dein Base64-Text verteilt auf sein Alphabet, gegen den Anteil, den Zufallsdaten jedem Teil geben würden (gestrichelt).",
+            "aria": "Balken der Alphabetnutzung",
+            "upper": "Groß",
+            "lower": "Klein",
+            "digits": "Ziffern",
+            "symbols": "Symbole",
+            "padding": "Auffüllung",
+            "chars": "Zeichen",
+            "distinct": "Verschiedene Symbole",
+            "entropy": "Entropie",
+            "bitsPerChar": "Bit/Zeichen",
+            "letters": "Buchstaben",
+            "efficiency": "Vom 6-Bit-Maximum"
+          },
+          "bytes": {
+            "title": "Woraus die Rohbytes bestehen",
+            "intro": "Deine Rohbytes nach Typ: druckbares ASCII, UTF-8-Startbytes eines Mehrbytezeichens, Folgebytes, Steuerzeichen und Bytes, die in UTF-8 nie vorkommen.",
+            "aria": "Ring der Byte-Typen",
+            "bytes": "Bytes",
+            "ascii": "Druckbares ASCII",
+            "lead": "UTF-8-Startbyte",
+            "continuation": "UTF-8-Folgebyte",
+            "control": "Steuerzeichen",
+            "invalid": "Kein UTF-8",
+            "multibyteChars": "Mehrbytezeichen",
+            "avgBytes": "Bytes pro Zeichen",
+            "asciiShare": "ASCII-Anteil",
+            "kind": "Wirkt wie",
+            "text": "Text",
+            "binary": "Binärdaten",
+            "why": "Warum kodieren",
+            "whyText": "für reine ASCII-Kanäle",
+            "whyBinary": "zum Einbetten in Textformate"
+          },
+          "overhead": {
+            "title": "Größenaufschlag",
+            "intro": "Wie viel größer der Base64-Text als die Rohbytes ist. Lange Eingaben nähern sich 33,3 %; sehr kurze zahlen mehr für die aufgefüllte letzte Gruppe.",
+            "aria": "Anzeige des Aufschlags",
+            "extra": "Zusätzlich",
+            "chars": "Zeichen",
+            "theory": "Grenze für lange Eingaben",
+            "padCost": "Kosten der Auffüllung",
+            "mime": "Mit MIME-Umbrüchen",
+            "overhead": "Aufschlag"
+          },
+          "strip": {
+            "title": "Der Vier-Zeichen-Rhythmus",
+            "intro": "Die ersten Zeichen deines Base64-Texts, sechzehn pro Zeile, nach ihrer 3-Byte-Gruppe gefärbt; Auffüllung rot.",
+            "aria": "Streifen der Zeichen nach Gruppe",
+            "shown": "{n} von {total} Zeichen",
+            "groups": "Gruppen",
+            "lastGroup": "Letzte Gruppe",
+            "padChars": "Füllzeichen",
+            "multipleOf4": "Länge Vielfaches von 4",
+            "yes": "ja",
+            "no": "nein",
+            "perRow": "Jede Zeile",
+            "perRowValue": "{c} Zeichen = {b} Bytes"
+          },
+          "variants": {
+            "title": "Standard gegen URL-sicher",
+            "intro": "Dieselben Bytes in Standard-Base64 (RFC 4648 §4) und URL-sicherem Base64 (§5). Nur \"+\" und \"/\" werden zu \"-\" und \"_\", und URL-sicher lässt die Auffüllung weg.",
+            "standard": "Standard",
+            "urlSafe": "URL-sicher",
+            "legend": "Hervorgehobene Zeichen unterscheiden sich.",
+            "stdLength": "Standardlänge",
+            "urlLength": "URL-sichere Länge",
+            "plus": "\"+\"-Zeichen",
+            "slash": "\"/\"-Zeichen",
+            "differ": "Abweichende Zeichen"
+          }
         }
       },
       "shareExport": {
@@ -22527,6 +22655,19 @@
         "generatedOn": "Erstellt am",
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "mixed": "Lateinischer + arabischer Text",
+        "rfc": "RFC-4648-Testvektor",
+        "json": "JWT-Nutzlast (URL-sicher)",
+        "basicAuth": "HTTP-Basic-Zugangsdaten (RFC 7617)",
+        "decode": "Base64-Satz dekodieren"
+      },
+      "result": {
+        "groups": "{n} Gruppen: 3 Bytes → 4 Zeichen",
+        "bytes": "Rohbytes",
+        "chars": "Base64-Zeichen"
       }
     },
     "csv-json-converter": {

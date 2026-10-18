@@ -22396,12 +22396,7 @@
         "intro": {
           "title": "Cómo funciona realmente la codificación Base64",
           "paragraph1": "Base64 resuelve un problema muy concreto: representar datos binarios arbitrarios —los bytes en bruto de una imagen, un archivo o cualquier contenido que no sea texto plano— usando solo caracteres que tienen garantizado sobrevivir al pasar por canales pensados únicamente para texto, como el cuerpo de un correo electrónico, una URL o una cadena JSON. Lo consigue reagrupando los datos. Los datos binarios se organizan de forma natural en bytes de 8 bits, pero Base64 los lee en bloques de tres bytes (24 bits) y reagrupa esos mismos 24 bits en cuatro grupos de 6 bits. Como 6 bits pueden representar exactamente 64 valores distintos (2⁶ = 64), cada grupo de 6 bits se traduce directamente en uno de 64 caracteres imprimibles — de ahí el nombre.",
-          "paragraph2": "Este reagrupamiento es también la razón exacta por la que la salida de Base64 es siempre alrededor de un tercio más grande que la entrada original: tres bytes de entrada (24 bits) se convierten en cuatro caracteres de salida, y como cada carácter de salida se almacena como un byte completo de texto aunque solo transporte 6 bits de información real, el resultado codificado se infla por un factor de 4/3, es decir, aproximadamente un 33 %. Cuando la longitud de la entrada no es un múltiplo exacto de tres bytes, el Base64 estándar rellena la salida con uno o dos caracteres «=» para que el decodificador sepa exactamente cuántos bits del último grupo son datos reales y cuántos son relleno — la variante compatible con URL que esta herramienta también admite normalmente omite ese relleno por completo, ya que suele usarse en contextos (como las URL) donde un «=» final necesitaría su propio escapado de todos modos.",
-          "diagram": {
-            "byteLabel": "Byte",
-            "sextetLabel": "Grupo",
-            "caption": "El reagrupamiento central de Base64: tres bytes de 8 bits (24 bits en total) se leen como un único flujo continuo de bits y se dividen en cuatro grupos de 6 bits, cada uno de los cuales se traduce en un carácter Base64 imprimible."
-          }
+          "paragraph2": "Este reagrupamiento es también la razón exacta por la que la salida de Base64 es siempre alrededor de un tercio más grande que la entrada original: tres bytes de entrada (24 bits) se convierten en cuatro caracteres de salida, y como cada carácter de salida se almacena como un byte completo de texto aunque solo transporte 6 bits de información real, el resultado codificado se infla por un factor de 4/3, es decir, aproximadamente un 33 %. Cuando la longitud de la entrada no es un múltiplo exacto de tres bytes, el Base64 estándar rellena la salida con uno o dos caracteres «=» para que el decodificador sepa exactamente cuántos bits del último grupo son datos reales y cuántos son relleno — la variante compatible con URL que esta herramienta también admite normalmente omite ese relleno por completo, ya que suele usarse en contextos (como las URL) donde un «=» final necesitaría su propio escapado de todos modos."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -22507,6 +22502,139 @@
           "note": "La especificación oficial que esta herramienta implementa con exactitud, incluidos el alfabeto estándar, las reglas de relleno y el alfabeto compatible con URL y con nombres de archivo que produce el selector de variante de esta herramienta.",
           "url": "https://www.rfc-editor.org/rfc/rfc4648",
           "readOriginal": "Leer el RFC original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce texto arriba (o Base64 válido en modo decodificar) para ver este indicador.",
+          "bits": {
+            "title": "Tres bytes se vuelven cuatro caracteres",
+            "intro": "Arrastra el control a cualquier grupo: sus 24 bits se dividen en cuatro valores de 6 bits y cada uno elige uno de 64 caracteres.",
+            "aria": "Bits de un grupo en sextetos",
+            "missing": "(ninguno)",
+            "group": "Grupo {n} de {total}",
+            "slider": "Grupo",
+            "bytesRow": "Bytes (hex)",
+            "sextetsRow": "Valores de 6 bits",
+            "charsRow": "Caracteres",
+            "bitsUsed": "Bits reales",
+            "offset": "Posiciones de bytes"
+          },
+          "size": {
+            "title": "Bytes en bruto frente a Base64",
+            "intro": "Los bytes, el texto Base64 con su crecimiento de un tercio y el relleno \"=\", y la forma de correo (MIME) con un salto cada 76 caracteres.",
+            "aria": "Barras apiladas de tamaños",
+            "raw": "Bytes en bruto",
+            "base64": "Base64",
+            "mime": "MIME (líneas de 76)",
+            "kRaw": "Igual que los bytes",
+            "kGrowth": "Crecimiento (4 por 3)",
+            "kPad": "Relleno \"=\"",
+            "kBreaks": "Saltos de línea (CRLF)",
+            "formula": "Longitud",
+            "padding": "Relleno",
+            "lines": "Líneas MIME",
+            "remainder": "Bytes sobrantes",
+            "growth": "Crecimiento"
+          },
+          "encodings": {
+            "title": "Los mismos bytes, otras codificaciones",
+            "intro": "Tus bytes escritos como texto de cinco formas, ordenadas por longitud: Ascii85, Base64, Base32, hexadecimal y codificación porcentual de URL.",
+            "aria": "Barras ordenadas de tamaños",
+            "raw": "Bytes en bruto",
+            "ascii85": "Ascii85",
+            "base64": "Base64",
+            "base32": "Base32",
+            "hex": "Hex",
+            "percent": "Codificación %",
+            "vsHex": "Base64 frente a hex"
+          },
+          "growth": {
+            "title": "La longitud crece de cuatro en cuatro",
+            "intro": "Longitud Base64 según los bytes: cuatro caracteres más cada tres bytes, por encima de la recta 4/3. La diferencia es el relleno.",
+            "aria": "Escalera de longitud Base64",
+            "axis": "Bytes de entrada",
+            "you": "Tú: {c}",
+            "youOff": "Tú: {n} B → {c}",
+            "bytes": "Bytes de entrada",
+            "exact": "4/3 exacto",
+            "actual": "Caracteres reales",
+            "free": "Espacio libre",
+            "freeValue": "caben {k} bytes más",
+            "ratio": "Caracteres por byte"
+          },
+          "alphabet": {
+            "title": "Cómo se usan los 64 caracteres",
+            "intro": "Tu texto Base64 repartido en su alfabeto, frente a la parte que daría a cada grupo un dato aleatorio (líneas discontinuas).",
+            "aria": "Barras de uso del alfabeto",
+            "upper": "Mayúsculas",
+            "lower": "Minúsculas",
+            "digits": "Dígitos",
+            "symbols": "Símbolos",
+            "padding": "Relleno",
+            "chars": "Caracteres",
+            "distinct": "Símbolos distintos",
+            "entropy": "Entropía",
+            "bitsPerChar": "bits/carác.",
+            "letters": "Letras",
+            "efficiency": "Del máximo de 6 bits"
+          },
+          "bytes": {
+            "title": "Qué son los bytes en bruto",
+            "intro": "Tus bytes por tipo: ASCII imprimible, bytes iniciales UTF-8 que abren un carácter multibyte, bytes de continuación, códigos de control y bytes que nunca aparecen en UTF-8.",
+            "aria": "Anillo de tipos de byte",
+            "bytes": "bytes",
+            "ascii": "ASCII imprimible",
+            "lead": "Inicial UTF-8",
+            "continuation": "Continuación UTF-8",
+            "control": "Control",
+            "invalid": "No UTF-8",
+            "multibyteChars": "Caracteres multibyte",
+            "avgBytes": "Bytes por carácter",
+            "asciiShare": "Parte ASCII",
+            "kind": "Parece",
+            "text": "texto",
+            "binary": "datos binarios",
+            "why": "Por qué codificarlo",
+            "whyText": "para pasar por canales solo ASCII",
+            "whyBinary": "para incrustarlo en formatos de texto"
+          },
+          "overhead": {
+            "title": "Sobrecarga de tamaño",
+            "intro": "Cuánto mayor es el texto Base64 que los bytes. Las entradas largas se acercan al 33,3 %; las muy cortas pagan más por el último grupo relleno.",
+            "aria": "Indicador de sobrecarga",
+            "extra": "Extra",
+            "chars": "caracteres",
+            "theory": "Límite para entradas largas",
+            "padCost": "Coste del relleno",
+            "mime": "Con saltos MIME",
+            "overhead": "Sobrecarga"
+          },
+          "strip": {
+            "title": "El ritmo de cuatro caracteres",
+            "intro": "Los primeros caracteres de tu texto Base64, dieciséis por fila, coloreados según el grupo de 3 bytes del que vienen; el relleno en rojo.",
+            "aria": "Franja de caracteres por grupo",
+            "shown": "{n} de {total} caracteres",
+            "groups": "Grupos",
+            "lastGroup": "Último grupo",
+            "padChars": "Caracteres de relleno",
+            "multipleOf4": "Longitud múltiplo de 4",
+            "yes": "sí",
+            "no": "no",
+            "perRow": "Cada fila",
+            "perRowValue": "{c} caract. = {b} bytes"
+          },
+          "variants": {
+            "title": "Estándar frente a segura para URL",
+            "intro": "Los mismos bytes en Base64 estándar (RFC 4648 §4) y segura para URL (§5). Solo cambian \"+\" y \"/\" por \"-\" y \"_\", y la segura para URL quita el relleno.",
+            "standard": "Estándar",
+            "urlSafe": "Segura para URL",
+            "legend": "Los caracteres resaltados difieren entre ambas.",
+            "stdLength": "Longitud estándar",
+            "urlLength": "Longitud segura URL",
+            "plus": "Caracteres \"+\"",
+            "slash": "Caracteres \"/\"",
+            "differ": "Caracteres distintos"
+          }
         }
       },
       "shareExport": {
@@ -22527,6 +22655,19 @@
         "generatedOn": "Generado el",
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "mixed": "Texto latino + árabe",
+        "rfc": "Vector de prueba RFC 4648",
+        "json": "Carga JWT (segura para URL)",
+        "basicAuth": "Credenciales HTTP Basic (RFC 7617)",
+        "decode": "Decodificar una frase Base64"
+      },
+      "result": {
+        "groups": "{n} grupos: 3 bytes → 4 caracteres",
+        "bytes": "Bytes en bruto",
+        "chars": "Caracteres Base64"
       }
     },
     "csv-json-converter": {

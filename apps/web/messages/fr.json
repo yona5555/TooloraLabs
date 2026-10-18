@@ -22396,12 +22396,7 @@
         "intro": {
           "title": "Comment fonctionne réellement l'encodage Base64",
           "paragraph1": "Le Base64 résout un problème précis : représenter des données binaires arbitraires — les octets bruts d'une image, d'un fichier ou de tout contenu qui n'est pas du texte brut — en n'utilisant que des caractères garantis de survivre au passage par des canaux réservés au texte, comme le corps d'un e-mail, une URL ou une chaîne JSON. Pour cela, il regroupe les données autrement. Les données binaires sont naturellement organisées en octets de 8 bits, mais le Base64 les lit par blocs de trois octets (24 bits) à la fois et redistribue ces mêmes 24 bits en quatre groupes de 6 bits. Puisque 6 bits peuvent représenter exactement 64 valeurs distinctes (2⁶ = 64), chaque groupe de 6 bits correspond directement à l'un des 64 caractères imprimables — d'où le nom.",
-          "paragraph2": "Ce réarrangement explique aussi précisément pourquoi la sortie Base64 est toujours environ un tiers plus volumineuse que l'entrée d'origine : trois octets en entrée (24 bits) deviennent quatre caractères en sortie, et comme chaque caractère de sortie est stocké sur un octet de texte complet alors qu'il ne porte que 6 bits d'information réelle, le résultat encodé gonfle d'un facteur 4/3, soit environ 33 %. Lorsque la longueur de l'entrée n'est pas un multiple exact de trois octets, le Base64 standard complète la sortie avec un ou deux caractères « = » afin que le décodeur sache exactement combien de bits du dernier groupe correspondent à de vraies données plutôt qu'à du remplissage — la variante compatible URL, également prise en charge par cet outil, omet généralement ce remplissage, car elle est le plus souvent utilisée dans des contextes (comme les URL) où un « = » final devrait de toute façon être échappé séparément.",
-          "diagram": {
-            "byteLabel": "Octet",
-            "sextetLabel": "Groupe",
-            "caption": "Le réarrangement au cœur du Base64 : trois octets de 8 bits (24 bits au total) sont lus comme un flux de bits continu, puis répartis en quatre groupes de 6 bits, chacun correspondant à un caractère Base64 imprimable."
-          }
+          "paragraph2": "Ce réarrangement explique aussi précisément pourquoi la sortie Base64 est toujours environ un tiers plus volumineuse que l'entrée d'origine : trois octets en entrée (24 bits) deviennent quatre caractères en sortie, et comme chaque caractère de sortie est stocké sur un octet de texte complet alors qu'il ne porte que 6 bits d'information réelle, le résultat encodé gonfle d'un facteur 4/3, soit environ 33 %. Lorsque la longueur de l'entrée n'est pas un multiple exact de trois octets, le Base64 standard complète la sortie avec un ou deux caractères « = » afin que le décodeur sache exactement combien de bits du dernier groupe correspondent à de vraies données plutôt qu'à du remplissage — la variante compatible URL, également prise en charge par cet outil, omet généralement ce remplissage, car elle est le plus souvent utilisée dans des contextes (comme les URL) où un « = » final devrait de toute façon être échappé séparément."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -22507,6 +22502,139 @@
           "note": "La spécification officielle que cet outil met en œuvre à l'identique, y compris l'alphabet standard, les règles de remplissage, et l'alphabet compatible URL et compatible nom de fichier que produit le sélecteur de variante de cet outil.",
           "url": "https://www.rfc-editor.org/rfc/rfc4648",
           "readOriginal": "Lire la RFC originale"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez un texte ci-dessus (ou du Base64 valide en mode décodage) pour voir cet indicateur.",
+          "bits": {
+            "title": "Trois octets deviennent quatre caractères",
+            "intro": "Faites glisser le curseur sur un groupe : ses 24 bits sont découpés en quatre valeurs de 6 bits, chacune choisissant un des 64 caractères.",
+            "aria": "Bits d’un groupe en sextets",
+            "missing": "(aucun)",
+            "group": "Groupe {n} sur {total}",
+            "slider": "Groupe",
+            "bytesRow": "Octets (hex)",
+            "sextetsRow": "Valeurs 6 bits",
+            "charsRow": "Caractères",
+            "bitsUsed": "Bits réels",
+            "offset": "Positions des octets"
+          },
+          "size": {
+            "title": "Octets bruts contre Base64",
+            "intro": "Les octets, le texte Base64 avec sa croissance d’un tiers et son remplissage \"=\", puis la forme e-mail (MIME) avec un saut tous les 76 caractères.",
+            "aria": "Barres empilées des tailles",
+            "raw": "Octets bruts",
+            "base64": "Base64",
+            "mime": "MIME (lignes de 76)",
+            "kRaw": "Autant que les octets",
+            "kGrowth": "Croissance (4 pour 3)",
+            "kPad": "Remplissage \"=\"",
+            "kBreaks": "Sauts de ligne (CRLF)",
+            "formula": "Longueur",
+            "padding": "Remplissage",
+            "lines": "Lignes MIME",
+            "remainder": "Octets restants",
+            "growth": "Croissance"
+          },
+          "encodings": {
+            "title": "Les mêmes octets, autres encodages",
+            "intro": "Vos octets écrits en texte de cinq façons, classés par longueur : Ascii85, Base64, Base32, hexadécimal et encodage pourcent des URL.",
+            "aria": "Barres classées des tailles",
+            "raw": "Octets bruts",
+            "ascii85": "Ascii85",
+            "base64": "Base64",
+            "base32": "Base32",
+            "hex": "Hex",
+            "percent": "Encodage %",
+            "vsHex": "Base64 face à l’hex"
+          },
+          "growth": {
+            "title": "La longueur croît par paliers de quatre",
+            "intro": "Longueur Base64 selon les octets : quatre caractères de plus tous les trois octets, au-dessus de la droite 4/3. L’écart est le remplissage.",
+            "aria": "Escalier de longueur Base64",
+            "axis": "Octets d’entrée",
+            "you": "Vous : {c}",
+            "youOff": "Vous : {n} o → {c}",
+            "bytes": "Octets d’entrée",
+            "exact": "4/3 exact",
+            "actual": "Caractères réels",
+            "free": "Place libre",
+            "freeValue": "{k} octets de plus tiennent",
+            "ratio": "Caractères par octet"
+          },
+          "alphabet": {
+            "title": "L’usage des 64 caractères",
+            "intro": "Votre texte Base64 réparti sur son alphabet, face à la part qu’auraient des données aléatoires (tirets).",
+            "aria": "Barres d’usage de l’alphabet",
+            "upper": "Majuscules",
+            "lower": "Minuscules",
+            "digits": "Chiffres",
+            "symbols": "Symboles",
+            "padding": "Remplissage",
+            "chars": "Caractères",
+            "distinct": "Symboles distincts",
+            "entropy": "Entropie",
+            "bitsPerChar": "bits/car.",
+            "letters": "Lettres",
+            "efficiency": "Du maximum de 6 bits"
+          },
+          "bytes": {
+            "title": "Ce que sont les octets bruts",
+            "intro": "Vos octets par type : ASCII imprimable, octets de tête UTF-8 qui ouvrent un caractère multioctet, octets de continuation, codes de contrôle et octets impossibles en UTF-8.",
+            "aria": "Anneau des types d’octets",
+            "bytes": "octets",
+            "ascii": "ASCII imprimable",
+            "lead": "Tête UTF-8",
+            "continuation": "Suite UTF-8",
+            "control": "Contrôle",
+            "invalid": "Hors UTF-8",
+            "multibyteChars": "Caractères multioctets",
+            "avgBytes": "Octets par caractère",
+            "asciiShare": "Part ASCII",
+            "kind": "Ressemble à",
+            "text": "du texte",
+            "binary": "des données binaires",
+            "why": "Pourquoi l’encoder",
+            "whyText": "pour passer par des canaux ASCII",
+            "whyBinary": "pour l’intégrer dans du texte"
+          },
+          "overhead": {
+            "title": "Surcoût de taille",
+            "intro": "De combien le texte Base64 dépasse les octets bruts. Les longues entrées approchent 33,3 % ; les très courtes paient davantage le dernier groupe rempli.",
+            "aria": "Jauge du surcoût",
+            "extra": "En plus",
+            "chars": "caractères",
+            "theory": "Limite des longues entrées",
+            "padCost": "Coût du remplissage",
+            "mime": "Avec sauts MIME",
+            "overhead": "Surcoût"
+          },
+          "strip": {
+            "title": "Le rythme de quatre caractères",
+            "intro": "Les premiers caractères de votre texte Base64, seize par rangée, colorés selon leur groupe de 3 octets ; le remplissage en rouge.",
+            "aria": "Bande des caractères par groupe",
+            "shown": "{n} sur {total} caractères",
+            "groups": "Groupes",
+            "lastGroup": "Dernier groupe",
+            "padChars": "Caractères de remplissage",
+            "multipleOf4": "Longueur multiple de 4",
+            "yes": "oui",
+            "no": "non",
+            "perRow": "Chaque rangée",
+            "perRowValue": "{c} car. = {b} octets"
+          },
+          "variants": {
+            "title": "Standard contre sûr pour URL",
+            "intro": "Les mêmes octets en Base64 standard (RFC 4648 §4) et sûr pour URL (§5). Seuls \"+\" et \"/\" deviennent \"-\" et \"_\", et la forme URL supprime le remplissage.",
+            "standard": "Standard",
+            "urlSafe": "Sûr pour URL",
+            "legend": "Les caractères surlignés diffèrent entre les deux formes.",
+            "stdLength": "Longueur standard",
+            "urlLength": "Longueur URL",
+            "plus": "Caractères \"+\"",
+            "slash": "Caractères \"/\"",
+            "differ": "Caractères différents"
+          }
         }
       },
       "shareExport": {
@@ -22527,6 +22655,19 @@
         "generatedOn": "Généré le",
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "mixed": "Texte latin + arabe",
+        "rfc": "Vecteur de test RFC 4648",
+        "json": "Charge JWT (sûr pour URL)",
+        "basicAuth": "Identifiants HTTP Basic (RFC 7617)",
+        "decode": "Décoder une phrase Base64"
+      },
+      "result": {
+        "groups": "{n} groupes : 3 octets → 4 caractères",
+        "bytes": "Octets bruts",
+        "chars": "Caractères Base64"
       }
     },
     "csv-json-converter": {
