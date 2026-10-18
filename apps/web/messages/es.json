@@ -23712,11 +23712,7 @@
         "intro": {
           "title": "Por qué convertir tamaños de archivo no es tan simple como parece",
           "paragraph1": "En el uso cotidiano existen, de hecho, dos definiciones distintas —e igualmente legítimas— de «kilobyte», y difieren entre sí en más de un 2 %. La definición decimal (SI) trata «kilo» igual que en cualquier otro ámbito de la ciencia: exactamente 1000, así que 1 KB = 1000 bytes, 1 MB = 1 000 000 bytes, y así sucesivamente. La definición binaria, en cambio, usa potencias de 2, porque la memoria de un ordenador se direcciona en binario: 1 KB = 2¹⁰ = 1024 bytes, 1 MB = 2²⁰ = 1 048 576 bytes. Ambas son reales, ambas siguen usándose activamente hoy en día, y ninguna es simplemente «incorrecta»: responden a preguntas distintas sobre cómo funciona el hardware subyacente.",
-          "paragraph2": "El problema práctico es que la diferencia entre ambos estándares se acumula en cada escalón hacia arriba. Empieza siendo pequeña —1024 es solo un 2,4 % mayor que 1000—, pero esa diferencia se multiplica en cada unidad superior: al llegar al terabyte ya ronda el 10 %, que es justo la razón por la que un disco anunciado y vendido como «1 TB» (la definición decimal, coincidente con su capacidad real de fabricación) aparece en un sistema operativo que mide en unidades binarias como apenas unos 931 GB. No ha desaparecido ningún espacio: el sistema operativo está midiendo con un «gigabyte» de tamaño distinto al impreso en la caja.",
-          "diagram": {
-            "chartLabel": "Diferencia porcentual entre unidades binarias y decimales según la escala",
-            "caption": "La diferencia entre unidades binarias (base 1024) y decimales (base 1000) en cada orden de magnitud: empieza en un 2,4 % en kilo y se acumula hasta casi un 12,6 % en peta."
-          }
+          "paragraph2": "El problema práctico es que la diferencia entre ambos estándares se acumula en cada escalón hacia arriba. Empieza siendo pequeña —1024 es solo un 2,4 % mayor que 1000—, pero esa diferencia se multiplica en cada unidad superior: al llegar al terabyte ya ronda el 10 %, que es justo la razón por la que un disco anunciado y vendido como «1 TB» (la definición decimal, coincidente con su capacidad real de fabricación) aparece en un sistema operativo que mide en unidades binarias como apenas unos 931 GB. No ha desaparecido ningún espacio: el sistema operativo está midiendo con un «gigabyte» de tamaño distinto al impreso en la caja."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -23822,6 +23818,119 @@
           "note": "El estándar oficial que define los prefijos binarios (kibi, mebi, gibi, tebi, pebi) que sigue la columna de estándar binario de esta herramienta, resolviendo formalmente la ambigüedad decimal/binaria del kilobyte.",
           "url": "https://webstore.iec.ch/en/publication/7479",
           "readOriginal": "Ver el estándar oficial"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce un tamaño arriba para ver este indicador.",
+          "media": {
+            "floppy": "Disquete",
+            "cd": "CD",
+            "dvd": "DVD",
+            "bluray": "Blu-ray"
+          },
+          "magnitude": {
+            "title": "Arrastra por la escala de bytes",
+            "intro": "Un eje logarítmico de 1 byte a 1 petabyte, con un disquete, un CD, un DVD y un Blu-ray marcados. Arrastra para fijar el tamaño; todas las tarjetas lo siguen.",
+            "aria": "Escala logarítmica arrastrable",
+            "you": "tu tamaño",
+            "log": "Orden de magnitud",
+            "digits": "Cifras del número de bytes",
+            "nearest": "Soporte más cercano",
+            "vsNearest": "Frente a ese soporte",
+            "bytes": "Bytes"
+          },
+          "gapBars": {
+            "title": "Decimal y binario, lado a lado",
+            "intro": "El mismo número de bytes leído en unidades decimales y binarias en su nivel natural y los cercanos; el número binario siempre es menor.",
+            "aria": "Barras emparejadas decimal y binario",
+            "axis": "Escala logarítmica",
+            "formula": "Valor binario",
+            "difference": "Diferencia",
+            "shrink": "Se muestra menor en"
+          },
+          "gapTrend": {
+            "title": "La diferencia crece con cada prefijo",
+            "intro": "Cuánto mayor es una unidad binaria que su homónima decimal: 2,4 % en kilo y hasta 12,6 % en peta. El punto grande es el nivel de tu tamaño.",
+            "aria": "Diferencia por prefijo",
+            "level": "Tu prefijo",
+            "formula": "Fórmula",
+            "kilo": "En kilo",
+            "peta": "En peta",
+            "yours": "En tu nivel"
+          },
+          "ladder": {
+            "title": "El mismo tamaño en cada unidad",
+            "intro": "Tu tamaño en cada unidad decimal de bytes a petabytes; cada paso divide entre 1000. El paso entre 1 y 1000 es la unidad natural.",
+            "aria": "Escalera de valores por unidad",
+            "band": "1 – 1000",
+            "bytes": "Bytes",
+            "rule": "Cada paso",
+            "ruleValue": "÷ 1000",
+            "best": "Unidad natural",
+            "next": "Unidad siguiente",
+            "steps": "Pasos desde bytes"
+          },
+          "mediaRank": {
+            "title": "Cuántos discos llena",
+            "intro": "Soportes estándar que necesitaría este tamaño: disquete de 3,5\" (1.474.560 bytes), CD-ROM (700 MiB), DVD-5 (4,7 GB) y Blu-ray de una capa (25 GB).",
+            "aria": "Barras ordenadas de soportes",
+            "fill": "{p}% lleno",
+            "smallestFit": "Menor soporte único",
+            "none": "ninguno, hacen falta varios"
+          },
+          "transfer": {
+            "title": "Tiempo de transferencia",
+            "intro": "Cuánto tarda este tamaño en cuatro conexiones. Las velocidades van en megabits, así que los bytes se multiplican por 8; la escala es logarítmica.",
+            "aria": "Barras de tiempo por conexión",
+            "bits": "Bits",
+            "formula": "Tiempo",
+            "formulaValue": "bits ÷ (Mb/s × 1.000.000)",
+            "fiber": "Fibra gigabit",
+            "ratio": "Módem frente a fibra",
+            "wifi": "Wi-Fi doméstico"
+          },
+          "cluster": {
+            "title": "Espacio real ocupado en disco",
+            "intro": "Los sistemas de archivos guardan datos en clústeres de 4 KiB (por defecto en NTFS, ext4 y APFS); un archivo ocupa clústeres enteros, así que los muy pequeños desperdician casi uno.",
+            "aria": "Indicador de eficiencia en disco",
+            "clusters": "Clústeres",
+            "onDisk": "Tamaño en disco",
+            "slack": "Desperdicio",
+            "lastCluster": "Uso del último clúster",
+            "efficiency": "Eficiencia"
+          },
+          "formula": {
+            "title": "Del valor a los bits",
+            "intro": "La cadena de cada conversión: valor × base^nivel = bytes, × 8 = bits, con tus números.",
+            "aria": "Fórmula de conversión",
+            "value": "valor",
+            "binary": "base binaria",
+            "decimal": "base decimal",
+            "bitsPerByte": "bits por byte",
+            "trap": "Internet de 100 Mb/s mueve solo 12,5 MB por segundo",
+            "bytes": "Bytes",
+            "bits": "Bits",
+            "megabits": "Megabits",
+            "megabytes": "Megabytes",
+            "speed": "Velocidades",
+            "speedValue": "Mb/s ÷ 8 = MB/s"
+          },
+          "os": {
+            "title": "Cómo lo etiqueta el software",
+            "intro": "El mismo número de bytes según el Explorador de Windows (×1024 con etiquetas KB/MB/GB), el Finder de macOS desde 10.6 (×1000), ls -lh de GNU (×1024 con K/M/G) y el envase del disco (×1000).",
+            "aria": "Filas del tamaño según cada sistema",
+            "windows": "Explorador de Windows",
+            "windowsShort": "W",
+            "mac": "Finder de macOS",
+            "macShort": "M",
+            "ls": "ls -lh (GNU)",
+            "lsShort": "$",
+            "box": "Envase del disco",
+            "boxShort": "□",
+            "why": "Por qué difieren",
+            "whyValue": "mismos bytes, otra base",
+            "gap": "Windows muestra menos en"
+          }
         }
       },
       "scenarios": {
@@ -23849,6 +23958,17 @@
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto",
         "inputSectionTitle": "Entrada"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "usb": "Memoria USB de 64 GB",
+        "floppy": "Disquete 3,5\" (1.440 KiB)",
+        "cd": "CD-ROM (700 MiB)",
+        "dvd": "DVD-5 (4,7 GB)",
+        "hdd": "Disco duro de 1 TB"
+      },
+      "result": {
+        "gap": "+{p}% de diferencia"
       }
     },
     "file-name-sanitizer": {

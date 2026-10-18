@@ -23712,11 +23712,7 @@
         "intro": {
           "title": "Warum die Umrechnung von Dateigrößen nicht so einfach ist, wie sie aussieht",
           "paragraph1": "Es gibt tatsächlich zwei unterschiedliche, gleichermaßen legitime Definitionen von „Kilobyte“ im alltäglichen Gebrauch, und sie weichen um mehr als 2 % voneinander ab. Die dezimale (SI-)Definition behandelt „Kilo“ genauso wie überall sonst in der Wissenschaft — exakt 1.000 —, sodass 1 KB = 1.000 Bytes, 1 MB = 1.000.000 Bytes und so weiter sind. Die binäre Definition verwendet stattdessen Zweierpotenzen, da Computerspeicher binär adressiert wird: 1 KB = 2¹⁰ = 1.024 Bytes, 1 MB = 2²⁰ = 1.048.576 Bytes. Beide sind real, beide werden bis heute aktiv verwendet, und keine ist einfach „falsch“ — sie beantworten unterschiedliche Fragen darüber, wie die zugrunde liegende Hardware funktioniert.",
-          "paragraph2": "Das praktische Problem ist, dass sich die Lücke zwischen diesen beiden Standards bei jedem Schritt auf der Skala verstärkt. Sie beginnt klein — 1.024 ist nur 2,4 % größer als 1.000 —, aber dieser Unterschied vervielfacht sich bei jeder höheren Einheit: Auf Terabyte-Ebene ist sie auf etwa 10 % angewachsen, weshalb ein als „1 TB“ beworbenes und verkauftes Laufwerk (die dezimale Definition, die der tatsächlich hergestellten Kapazität entspricht) in einem Betriebssystem, das freien Speicherplatz in binären Einheiten angibt, nur etwa 931 GB anzeigt — es ist kein Speicherplatz verschwunden; das Betriebssystem misst nur in einem anders großen „Gigabyte“ als dem auf der Verpackung aufgedruckten.",
-          "diagram": {
-            "chartLabel": "Prozentuale Lücke zwischen binären und dezimalen Einheiten nach Größenordnung",
-            "caption": "Die Lücke zwischen binären (auf 1024 basierenden) und dezimalen (auf 1000 basierenden) Einheiten bei jeder Größenordnung — beginnend bei 2,4 % für Kilo und wachsend auf fast 12,6 % bei Peta."
-          }
+          "paragraph2": "Das praktische Problem ist, dass sich die Lücke zwischen diesen beiden Standards bei jedem Schritt auf der Skala verstärkt. Sie beginnt klein — 1.024 ist nur 2,4 % größer als 1.000 —, aber dieser Unterschied vervielfacht sich bei jeder höheren Einheit: Auf Terabyte-Ebene ist sie auf etwa 10 % angewachsen, weshalb ein als „1 TB“ beworbenes und verkauftes Laufwerk (die dezimale Definition, die der tatsächlich hergestellten Kapazität entspricht) in einem Betriebssystem, das freien Speicherplatz in binären Einheiten angibt, nur etwa 931 GB anzeigt — es ist kein Speicherplatz verschwunden; das Betriebssystem misst nur in einem anders großen „Gigabyte“ als dem auf der Verpackung aufgedruckten."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -23822,6 +23818,119 @@
           "note": "Der offizielle Standard, der die binären Präfixe (kibi, mebi, gibi, tebi, pebi) definiert, denen die Binär-Standard-Spalte dieses Werkzeugs folgt und der die Dezimal-/Binär-Kilobyte-Mehrdeutigkeit formal auflöst.",
           "url": "https://webstore.iec.ch/en/publication/7479",
           "readOriginal": "Offiziellen Standard ansehen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben eine Größe ein, um diesen Indikator zu sehen.",
+          "media": {
+            "floppy": "Diskette",
+            "cd": "CD",
+            "dvd": "DVD",
+            "bluray": "Blu-ray"
+          },
+          "magnitude": {
+            "title": "Entlang der Byte-Skala ziehen",
+            "intro": "Eine logarithmische Achse von 1 Byte bis 1 Petabyte mit Diskette, CD, DVD und Blu-ray. Zieh entlang, um die Größe zu setzen; alle Karten folgen.",
+            "aria": "Logarithmische Byte-Skala, ziehbar",
+            "you": "deine Größe",
+            "log": "Größenordnung",
+            "digits": "Stellen der Bytezahl",
+            "nearest": "Nächstes Medium",
+            "vsNearest": "Gegen dieses Medium",
+            "bytes": "Bytes"
+          },
+          "gapBars": {
+            "title": "Dezimal und binär nebeneinander",
+            "intro": "Dieselbe Bytezahl in dezimalen und binären Einheiten auf ihrer natürlichen Stufe und den benachbarten; die binäre Zahl ist immer kleiner.",
+            "aria": "Balkenpaare dezimal und binär",
+            "axis": "Log-Skala",
+            "formula": "Binärer Wert",
+            "difference": "Differenz",
+            "shrink": "Kleiner angezeigt um"
+          },
+          "gapTrend": {
+            "title": "Der Abstand wächst mit jedem Präfix",
+            "intro": "Wie viel größer eine binäre Einheit als ihr dezimales Gegenstück ist: 2,4 % bei Kilo, bis 12,6 % bei Peta. Der große Punkt ist die Stufe deiner Größe.",
+            "aria": "Abstand je Präfix",
+            "level": "Dein Präfix",
+            "formula": "Formel",
+            "kilo": "Bei Kilo",
+            "peta": "Bei Peta",
+            "yours": "Auf deiner Stufe"
+          },
+          "ladder": {
+            "title": "Dieselbe Größe in jeder Einheit",
+            "intro": "Deine Größe in jeder dezimalen Einheit von Byte bis Petabyte; jede Stufe teilt durch 1000. Die Stufe zwischen 1 und 1000 ist die natürliche Einheit.",
+            "aria": "Treppe der Werte je Einheit",
+            "band": "1 – 1000",
+            "bytes": "Bytes",
+            "rule": "Jede Stufe",
+            "ruleValue": "÷ 1000",
+            "best": "Natürliche Einheit",
+            "next": "Nächste Einheit",
+            "steps": "Stufen ab Byte"
+          },
+          "mediaRank": {
+            "title": "Wie viele Datenträger es füllt",
+            "intro": "Standardmedien, die diese Größe bräuchte: 3,5\"-Diskette (1.474.560 Bytes), CD-ROM (700 MiB), DVD-5 (4,7 GB) und einschichtige Blu-ray (25 GB).",
+            "aria": "Rangbalken der Medien",
+            "fill": "{p} % voll",
+            "smallestFit": "Kleinstes einzelnes Medium",
+            "none": "keins, es braucht mehrere"
+          },
+          "transfer": {
+            "title": "Übertragungszeit",
+            "intro": "Wie lange diese Größe über vier Verbindungen braucht. Geschwindigkeiten sind in Megabit, also werden Bytes mit 8 multipliziert; die Skala ist logarithmisch.",
+            "aria": "Balken der Übertragungszeit",
+            "bits": "Bits",
+            "formula": "Zeit",
+            "formulaValue": "Bits ÷ (Mb/s × 1.000.000)",
+            "fiber": "Gigabit-Glasfaser",
+            "ratio": "Modem gegen Glasfaser",
+            "wifi": "WLAN zu Hause"
+          },
+          "cluster": {
+            "title": "Tatsächlich belegter Platz",
+            "intro": "Dateisysteme speichern in 4-KiB-Clustern (Standard bei NTFS, ext4 und APFS); eine Datei belegt immer ganze Cluster, winzige Dateien verschwenden fast einen ganzen.",
+            "aria": "Anzeige der Platzausnutzung",
+            "clusters": "Cluster",
+            "onDisk": "Größe auf Datenträger",
+            "slack": "Verschwendet",
+            "lastCluster": "Letzter Cluster genutzt",
+            "efficiency": "Ausnutzung"
+          },
+          "formula": {
+            "title": "Vom Wert zu den Bits",
+            "intro": "Die Kette hinter jeder Umrechnung: Wert × Basis^Stufe = Bytes, × 8 = Bits, mit deinen Zahlen.",
+            "aria": "Umrechnungsformel",
+            "value": "Wert",
+            "binary": "binäre Basis",
+            "decimal": "dezimale Basis",
+            "bitsPerByte": "Bit pro Byte",
+            "trap": "100-Mb/s-Internet überträgt nur 12,5 MB pro Sekunde",
+            "bytes": "Bytes",
+            "bits": "Bits",
+            "megabits": "Megabit",
+            "megabytes": "Megabyte",
+            "speed": "Geschwindigkeiten",
+            "speedValue": "Mb/s ÷ 8 = MB/s"
+          },
+          "os": {
+            "title": "Wie Software es beschriftet",
+            "intro": "Dieselbe Bytezahl im Windows-Explorer (×1024 mit KB/MB/GB-Beschriftung), im macOS-Finder seit 10.6 (×1000), bei GNU ls -lh (×1024 mit K/M/G) und auf der Verpackung (×1000).",
+            "aria": "Zeilen der Größe je System",
+            "windows": "Windows-Explorer",
+            "windowsShort": "W",
+            "mac": "macOS-Finder",
+            "macShort": "M",
+            "ls": "ls -lh (GNU)",
+            "lsShort": "$",
+            "box": "Verpackung",
+            "boxShort": "□",
+            "why": "Warum sie abweichen",
+            "whyValue": "gleiche Bytes, andere Basis",
+            "gap": "Windows zeigt weniger um"
+          }
         }
       },
       "scenarios": {
@@ -23849,6 +23958,17 @@
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet",
         "inputSectionTitle": "Eingabe"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "usb": "64-GB-USB-Stick",
+        "floppy": "3,5\"-Diskette (1.440 KiB)",
+        "cd": "CD-ROM (700 MiB)",
+        "dvd": "DVD-5 (4,7 GB)",
+        "hdd": "1-TB-Festplatte"
+      },
+      "result": {
+        "gap": "+{p} % Abstand"
       }
     },
     "file-name-sanitizer": {

@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import UnitDivergenceDiagram from "./UnitDivergenceDiagram";
+import FsMagnitudeSlider from "./FsMagnitudeSlider";
+import FsGapBars from "./FsGapBars";
+import FsGapTrend from "./FsGapTrend";
+import FsUnitLadder from "./FsUnitLadder";
+import FsMediaRanking from "./FsMediaRanking";
+import FsTransferBars from "./FsTransferBars";
+import FsClusterGauge from "./FsClusterGauge";
+import FsBitsFormula from "./FsBitsFormula";
+import FsOsLabels from "./FsOsLabels";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,8 +27,14 @@ export default async function FileSizeEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <FsMagnitudeSlider />
+        <FsGapBars />
         <p>{t("intro.paragraph2")}</p>
-        <UnitDivergenceDiagram chartLabel={t("intro.diagram.chartLabel")} caption={t("intro.diagram.caption")} />
+        <div className="space-y-6">
+          <FsOsLabels />
+          <FsGapTrend />
+        </div>
+        <FsUnitLadder />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -49,6 +63,7 @@ export default async function FileSizeEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <FsTransferBars />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -60,11 +75,12 @@ export default async function FileSizeEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <FsMediaRanking />
+          <FsClusterGauge />
+          <FsBitsFormula />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

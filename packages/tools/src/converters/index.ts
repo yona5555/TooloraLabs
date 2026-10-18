@@ -11,3 +11,4 @@ export * from "./CryptoNetworkMath";
 export * from "./ForexMarketMath";
 export * from "./CommodityMarketMath";
 export * from "./csvAnalysis";
+export * from "./fileSizeAnalysis";

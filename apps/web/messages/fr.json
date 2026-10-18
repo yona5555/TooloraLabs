@@ -23712,11 +23712,7 @@
         "intro": {
           "title": "Pourquoi la conversion de taille de fichier n'est pas aussi simple qu'il y paraît",
           "paragraph1": "Il existe en réalité deux définitions différentes, et toutes deux légitimes, du « kilooctet » dans l'usage courant, et elles divergent de plus de 2 %. La définition décimale (SI) traite « kilo » exactement comme partout ailleurs en science — précisément 1 000 — donc 1 Ko = 1 000 octets, 1 Mo = 1 000 000 octets, et ainsi de suite. La définition binaire utilise au contraire des puissances de 2, puisque la mémoire des ordinateurs est adressée en binaire : 1 Ko = 2¹⁰ = 1 024 octets, 1 Mo = 2²⁰ = 1 048 576 octets. Les deux sont réelles, toutes deux restent activement utilisées aujourd'hui, et aucune n'est simplement « fausse » — elles répondent à des questions différentes sur le fonctionnement du matériel sous-jacent.",
-          "paragraph2": "Le problème pratique est que l'écart entre ces deux normes s'amplifie à chaque échelon. Il commence petit — 1 024 n'est que 2,4 % plus grand que 1 000 — mais cette différence se multiplie à chaque unité supérieure : au niveau du téraoctet, elle atteint environ 10 %, ce qui explique précisément pourquoi un disque annoncé et vendu comme faisant « 1 To » (la définition décimale, correspondant à sa capacité réellement fabriquée) apparaît, dans un système d'exploitation qui mesure l'espace libre en unités binaires, comme n'ayant qu'environ 931 Go — aucun espace n'a disparu ; le système mesure simplement dans un « gigaoctet » de taille différente de celui imprimé sur la boîte.",
-          "diagram": {
-            "chartLabel": "Écart en pourcentage entre unités binaires et décimales selon l'échelle",
-            "caption": "L'écart entre les unités binaires (base 1024) et décimales (base 1000) à chaque ordre de grandeur — partant de 2,4 % pour kilo et s'amplifiant jusqu'à près de 12,6 % pour péta."
-          }
+          "paragraph2": "Le problème pratique est que l'écart entre ces deux normes s'amplifie à chaque échelon. Il commence petit — 1 024 n'est que 2,4 % plus grand que 1 000 — mais cette différence se multiplie à chaque unité supérieure : au niveau du téraoctet, elle atteint environ 10 %, ce qui explique précisément pourquoi un disque annoncé et vendu comme faisant « 1 To » (la définition décimale, correspondant à sa capacité réellement fabriquée) apparaît, dans un système d'exploitation qui mesure l'espace libre en unités binaires, comme n'ayant qu'environ 931 Go — aucun espace n'a disparu ; le système mesure simplement dans un « gigaoctet » de taille différente de celui imprimé sur la boîte."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -23822,6 +23818,119 @@
           "note": "La norme officielle définissant les préfixes binaires (kibi, mébi, gibi, tébi, pébi) que suit la colonne binaire de cet outil, résolvant formellement l'ambiguïté du kilooctet décimal/binaire.",
           "url": "https://webstore.iec.ch/en/publication/7479",
           "readOriginal": "Consulter la norme officielle"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez une taille ci-dessus pour voir cet indicateur.",
+          "media": {
+            "floppy": "Disquette",
+            "cd": "CD",
+            "dvd": "DVD",
+            "bluray": "Blu-ray"
+          },
+          "magnitude": {
+            "title": "Glissez le long de l’échelle des octets",
+            "intro": "Un axe logarithmique de 1 octet à 1 péta-octet, avec une disquette, un CD, un DVD et un Blu-ray marqués. Faites glisser pour fixer la taille ; toutes les cartes suivent.",
+            "aria": "Échelle logarithmique déplaçable",
+            "you": "votre taille",
+            "log": "Ordre de grandeur",
+            "digits": "Chiffres du nombre d’octets",
+            "nearest": "Support le plus proche",
+            "vsNearest": "Face à ce support",
+            "bytes": "Octets"
+          },
+          "gapBars": {
+            "title": "Décimal et binaire côte à côte",
+            "intro": "Le même nombre d’octets lu en unités décimales et binaires à son niveau naturel et aux niveaux voisins ; le nombre binaire est toujours plus petit.",
+            "aria": "Barres appariées décimal et binaire",
+            "axis": "Échelle log",
+            "formula": "Valeur binaire",
+            "difference": "Différence",
+            "shrink": "Affiché plus petit de"
+          },
+          "gapTrend": {
+            "title": "L’écart grandit à chaque préfixe",
+            "intro": "De combien une unité binaire dépasse son homonyme décimale : 2,4 % en kilo, jusqu’à 12,6 % en péta. Le gros point est le niveau de votre taille.",
+            "aria": "Écart par préfixe",
+            "level": "Votre préfixe",
+            "formula": "Formule de l’écart",
+            "kilo": "En kilo",
+            "peta": "En péta",
+            "yours": "À votre niveau"
+          },
+          "ladder": {
+            "title": "La même taille dans chaque unité",
+            "intro": "Votre taille dans chaque unité décimale de l’octet au péta-octet ; chaque marche divise par 1000. La marche entre 1 et 1000 est l’unité naturelle.",
+            "aria": "Escalier des valeurs par unité",
+            "band": "1 – 1000",
+            "bytes": "Octets",
+            "rule": "Chaque marche",
+            "ruleValue": "÷ 1000",
+            "best": "Unité naturelle",
+            "next": "Unité suivante",
+            "steps": "Marches depuis l’octet"
+          },
+          "mediaRank": {
+            "title": "Combien de disques il remplit",
+            "intro": "Les supports standard nécessaires : disquette 3,5\" (1 474 560 octets), CD-ROM (700 Mio), DVD-5 (4,7 Go) et Blu-ray simple couche (25 Go).",
+            "aria": "Barres classées des supports",
+            "fill": "{p} % plein",
+            "smallestFit": "Plus petit support unique",
+            "none": "aucun, il en faut plusieurs"
+          },
+          "transfer": {
+            "title": "Temps de transfert",
+            "intro": "Le temps pour transférer cette taille sur quatre connexions. Les débits sont en mégabits, donc les octets sont multipliés par 8 ; l’échelle est logarithmique.",
+            "aria": "Barres du temps par connexion",
+            "bits": "Bits",
+            "formula": "Temps",
+            "formulaValue": "bits ÷ (Mb/s × 1 000 000)",
+            "fiber": "Fibre gigabit",
+            "ratio": "Modem face à la fibre",
+            "wifi": "Wi-Fi domestique"
+          },
+          "cluster": {
+            "title": "Espace réellement occupé",
+            "intro": "Les systèmes de fichiers stockent en clusters de 4 Kio (par défaut sur NTFS, ext4 et APFS) ; un fichier prend des clusters entiers, donc les tout petits en gaspillent presque un.",
+            "aria": "Jauge d’efficacité disque",
+            "clusters": "Clusters",
+            "onDisk": "Taille sur disque",
+            "slack": "Perdu",
+            "lastCluster": "Dernier cluster utilisé",
+            "efficiency": "Efficacité"
+          },
+          "formula": {
+            "title": "De la valeur aux bits",
+            "intro": "La chaîne de chaque conversion : valeur × base^niveau = octets, × 8 = bits, avec vos nombres.",
+            "aria": "Formule de conversion",
+            "value": "valeur",
+            "binary": "base binaire",
+            "decimal": "base décimale",
+            "bitsPerByte": "bits par octet",
+            "trap": "Une connexion à 100 Mb/s ne transfère que 12,5 Mo par seconde",
+            "bytes": "Octets",
+            "bits": "Bits",
+            "megabits": "Mégabits",
+            "megabytes": "Méga-octets",
+            "speed": "Débits",
+            "speedValue": "Mb/s ÷ 8 = Mo/s"
+          },
+          "os": {
+            "title": "Comment les logiciels l’affichent",
+            "intro": "Le même nombre d’octets selon l’Explorateur Windows (×1024 avec les libellés Ko/Mo/Go), le Finder de macOS depuis 10.6 (×1000), ls -lh de GNU (×1024 avec K/M/G) et l’emballage du disque (×1000).",
+            "aria": "Lignes de la taille selon chaque système",
+            "windows": "Explorateur Windows",
+            "windowsShort": "W",
+            "mac": "Finder macOS",
+            "macShort": "M",
+            "ls": "ls -lh (GNU)",
+            "lsShort": "$",
+            "box": "Emballage du disque",
+            "boxShort": "□",
+            "why": "Pourquoi ils diffèrent",
+            "whyValue": "mêmes octets, autre base",
+            "gap": "Windows affiche moins de"
+          }
         }
       },
       "scenarios": {
@@ -23849,6 +23958,17 @@
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé",
         "inputSectionTitle": "Entrée"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "usb": "Clé USB de 64 Go",
+        "floppy": "Disquette 3,5\" (1 440 Kio)",
+        "cd": "CD-ROM (700 Mio)",
+        "dvd": "DVD-5 (4,7 Go)",
+        "hdd": "Disque dur de 1 To"
+      },
+      "result": {
+        "gap": "écart +{p} %"
       }
     },
     "file-name-sanitizer": {

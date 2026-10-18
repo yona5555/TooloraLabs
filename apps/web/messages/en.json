@@ -23712,11 +23712,7 @@
         "intro": {
           "title": "Why File Size Conversion Isn't as Simple as It Looks",
           "paragraph1": "There are actually two different, equally legitimate definitions of \"kilobyte\" in everyday use, and they disagree by more than 2%. The decimal (SI) definition treats \"kilo\" the same way it's used everywhere else in science — exactly 1,000 — so 1 KB = 1,000 bytes, 1 MB = 1,000,000 bytes, and so on. The binary definition instead uses powers of 2, since computer memory is addressed in binary: 1 KB = 2¹⁰ = 1,024 bytes, 1 MB = 2²⁰ = 1,048,576 bytes. Both are real, both are still in active use today, and neither is simply 'wrong' — they're answering different questions about how the underlying hardware works.",
-          "paragraph2": "The practical problem is that the gap between these two standards compounds at every step up the scale. It starts small — 1,024 is only 2.4% larger than 1,000 — but that difference multiplies at each higher unit: by the terabyte level it has grown to roughly 10%, which is exactly why a drive advertised and sold as \"1 TB\" (the decimal definition, matching its true manufactured capacity) shows up in an operating system reporting free space in binary units as only about 931 GB — no storage has vanished; the OS is measuring in a different-sized \"gigabyte\" than the one printed on the box.",
-          "diagram": {
-            "chartLabel": "Percentage gap between binary and decimal units by scale",
-            "caption": "The gap between binary (1024-based) and decimal (1000-based) units at each order of magnitude — starting at 2.4% for kilo and compounding to nearly 12.6% by peta."
-          }
+          "paragraph2": "The practical problem is that the gap between these two standards compounds at every step up the scale. It starts small — 1,024 is only 2.4% larger than 1,000 — but that difference multiplies at each higher unit: by the terabyte level it has grown to roughly 10%, which is exactly why a drive advertised and sold as \"1 TB\" (the decimal definition, matching its true manufactured capacity) shows up in an operating system reporting free space in binary units as only about 931 GB — no storage has vanished; the OS is measuring in a different-sized \"gigabyte\" than the one printed on the box."
         },
         "examples": {
           "title": "Worked Examples",
@@ -23822,6 +23818,119 @@
           "note": "The official standard defining the binary prefixes (kibi, mebi, gibi, tebi, pebi) this tool's binary-standard column follows, formally resolving the decimal/binary kilobyte ambiguity.",
           "url": "https://webstore.iec.ch/en/publication/7479",
           "readOriginal": "View the Official Standard"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter a size above to see this indicator.",
+          "media": {
+            "floppy": "Floppy",
+            "cd": "CD",
+            "dvd": "DVD",
+            "bluray": "Blu-ray"
+          },
+          "magnitude": {
+            "title": "Drag Along the Byte Scale",
+            "intro": "One logarithmic axis from 1 byte to 1 petabyte, with a floppy, a CD, a DVD and a Blu-ray marked. Drag along it to set the size; every card follows.",
+            "aria": "Logarithmic byte scale, draggable",
+            "you": "your size",
+            "log": "Order of magnitude",
+            "digits": "Digits in the byte count",
+            "nearest": "Nearest medium",
+            "vsNearest": "Versus that medium",
+            "bytes": "Bytes"
+          },
+          "gapBars": {
+            "title": "Decimal and Binary, Side by Side",
+            "intro": "The same byte count read in decimal units and in binary units at its natural level and the levels around it; the binary number is always smaller.",
+            "aria": "Paired bars of decimal and binary values",
+            "axis": "Log scale",
+            "formula": "Binary value",
+            "difference": "Difference",
+            "shrink": "Shown smaller by"
+          },
+          "gapTrend": {
+            "title": "The Gap Grows With Every Prefix",
+            "intro": "How much bigger a binary unit is than its decimal namesake: 2.4 % at kilo, rising to 12.6 % at peta. The large point is your size's level.",
+            "aria": "Gap between binary and decimal per prefix",
+            "level": "Your prefix",
+            "formula": "Gap formula",
+            "kilo": "At kilo",
+            "peta": "At peta",
+            "yours": "At your level"
+          },
+          "ladder": {
+            "title": "The Same Size in Every Unit",
+            "intro": "Your size in each decimal unit from bytes to petabytes; each step divides by 1000. The step that lands between 1 and 1000 is the natural unit to show.",
+            "aria": "Staircase of values per unit",
+            "band": "1 – 1000",
+            "bytes": "Bytes",
+            "rule": "Each step",
+            "ruleValue": "÷ 1000",
+            "best": "Natural unit",
+            "next": "Next unit up",
+            "steps": "Steps from bytes"
+          },
+          "mediaRank": {
+            "title": "How Many Discs It Fills",
+            "intro": "Standard media this size would need: 3.5\" floppy (1,474,560 bytes), CD-ROM (700 MiB), DVD-5 (4.7 GB) and single-layer Blu-ray (25 GB).",
+            "aria": "Ranked bars of media needed",
+            "fill": "{p}% full",
+            "smallestFit": "Smallest single medium",
+            "none": "none, needs several"
+          },
+          "transfer": {
+            "title": "Time to Transfer",
+            "intro": "How long this size takes over four connections. Speeds are in megabits, so bytes are multiplied by 8; the scale is logarithmic.",
+            "aria": "Bars of transfer time per connection",
+            "bits": "Bits",
+            "formula": "Time",
+            "formulaValue": "bits ÷ (Mb/s × 1,000,000)",
+            "fiber": "Gigabit fibre",
+            "ratio": "Dial-up vs fibre",
+            "wifi": "Home Wi-Fi"
+          },
+          "cluster": {
+            "title": "Space Actually Used on Disk",
+            "intro": "File systems store data in 4 KiB clusters (the default on NTFS, ext4 and APFS); a file always takes whole clusters, so tiny files waste most of one.",
+            "aria": "Gauge of disk space efficiency",
+            "clusters": "Clusters",
+            "onDisk": "Size on disk",
+            "slack": "Wasted (slack)",
+            "lastCluster": "Last cluster used",
+            "efficiency": "Space efficiency"
+          },
+          "formula": {
+            "title": "From Value to Bits",
+            "intro": "The chain behind every conversion: value × base^level = bytes, × 8 = bits, filled with your numbers.",
+            "aria": "Conversion formula",
+            "value": "value",
+            "binary": "binary base",
+            "decimal": "decimal base",
+            "bitsPerByte": "bits per byte",
+            "trap": "100 Mb/s internet moves only 12.5 MB per second",
+            "bytes": "Bytes",
+            "bits": "Bits",
+            "megabits": "Megabits",
+            "megabytes": "Megabytes",
+            "speed": "Speeds",
+            "speedValue": "Mb/s ÷ 8 = MB/s"
+          },
+          "os": {
+            "title": "How Software Labels It",
+            "intro": "The same byte count as Windows File Explorer (×1024 with KB/MB/GB labels), macOS Finder since 10.6 (×1000), GNU ls -lh (×1024 with K/M/G) and drive packaging (×1000) show it.",
+            "aria": "Rows of the size as each system labels it",
+            "windows": "Windows Explorer",
+            "windowsShort": "W",
+            "mac": "macOS Finder",
+            "macShort": "M",
+            "ls": "ls -lh (GNU)",
+            "lsShort": "$",
+            "box": "Drive packaging",
+            "boxShort": "□",
+            "why": "Why they differ",
+            "whyValue": "same bytes, different base",
+            "gap": "Windows shows less by"
+          }
         }
       },
       "scenarios": {
@@ -23849,6 +23958,17 @@
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "usb": "64 GB USB drive",
+        "floppy": "3.5\" floppy (1,440 KiB)",
+        "cd": "CD-ROM (700 MiB)",
+        "dvd": "DVD-5 (4.7 GB)",
+        "hdd": "1 TB hard drive"
+      },
+      "result": {
+        "gap": "+{p}% gap"
       }
     },
     "file-name-sanitizer": {
