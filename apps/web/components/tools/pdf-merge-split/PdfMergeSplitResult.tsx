@@ -1,64 +1,99 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Download, FileText, Loader2 } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import type { PdfMode } from "./PdfMergeSplitInputPanel";
 import PdfMergeSplitShareExportModal from "./PdfMergeSplitShareExportModal";
+import { formatBytes, SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
 
-type PdfMergeSplitResultProps = {
-  mode: PdfMode;
-  isProcessing: boolean;
-  resultReady: boolean;
-  resultCount: number;
-  inputFileCount: number;
-  onDownload: () => void;
-};
+const THUMB_H = 54;
 
-export default function PdfMergeSplitResult({ mode, isProcessing, resultReady, resultCount, inputFileCount, onDownload }: PdfMergeSplitResultProps) {
+/**
+ * Result card: every page of the output drawn at its real aspect ratio and coloured by the input
+ * file (merge) or the part (split) it ends up in, the files produced with their sizes, and the download.
+ */
+export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownload }: { isProcessing: boolean; resultCount: number; onDownload: () => void }) {
   const t = useTranslations("tools.pdf-merge-split");
-  const tRoot = t;
-
-  const heroValue =
-    mode === "merge" ? t("aboveFold.mergeReady") : t("aboveFold.splitReady", { count: resultCount });
+  const tr = useTranslations("tools.pdf-merge-split.result");
+  const { draft, ready, pages, sources, inputBytes, outputBytes, f } = usePdfModel();
+  const mode = draft.mode;
+  const inputFileCount = mode === "merge" ? draft.mergeDocs.length : draft.splitDoc ? 1 : 0;
+  const heroValue = mode === "merge" ? t("aboveFold.mergeReady") : t("aboveFold.splitReady", { count: resultCount });
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
+      className="lg:flex lg:h-full lg:flex-col"
+      bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"
       action={
-        resultReady ? (
+        ready ? (
           <PdfMergeSplitShareExportModal
-            inputRows={[{ label: tRoot("shareExport.inputFileCountLabel"), value: String(inputFileCount) }]}
+            inputRows={[{ label: t("shareExport.inputFileCountLabel"), value: String(inputFileCount) }]}
             heroLabel={t("aboveFold.resultTitle")}
             heroValue={heroValue}
-            sentence={tRoot("shareExport.sentence", { mode, count: resultCount, inputCount: inputFileCount })}
+            sentence={t("shareExport.sentence", { mode, count: resultCount, inputCount: inputFileCount })}
           />
         ) : undefined
       }
     >
-      {isProcessing ? (
-        <div className="flex flex-col items-center gap-3 px-4 py-10 text-center text-sm text-zinc-400 dark:text-zinc-500">
-          <Loader2 size={24} className="animate-spin" />
-          {t("aboveFold.processing")}
+      {!ready ? (
+        <div className="flex flex-col items-center gap-3 px-4 py-10 text-center text-sm text-zinc-500 dark:text-zinc-400">
+          {isProcessing || inputFileCount > 0 ? <Loader2 size={24} className="animate-spin" /> : null}
+          {isProcessing || inputFileCount > 0 ? t("aboveFold.processing") : mode === "merge" ? t("aboveFold.placeholderMerge") : t("aboveFold.placeholderSplit")}
         </div>
-      ) : resultReady ? (
-        <div className="flex flex-col items-center gap-4 px-4 py-8 text-center">
-          <FileText size={40} className="text-blue-600 dark:text-blue-400" />
-          <p className="text-sm text-zinc-600 dark:text-zinc-300">
-            {mode === "merge" ? t("aboveFold.mergeReady") : t("aboveFold.splitReady", { count: resultCount })}
+      ) : (
+        <>
+          <p className="text-center text-sm font-semibold text-zinc-700 dark:text-zinc-200">{heroValue}</p>
+          <p dir="ltr" className="mt-1 text-center font-mono text-2xl font-bold text-blue-700 dark:text-blue-400">
+            {f(pages.length)} {tr("pagesUnit")} · {formatBytes(outputBytes)}
           </p>
+
+          <div dir="ltr" data-preview="visual" className="mt-4 flex flex-wrap content-start justify-center gap-1.5 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/50">
+            {pages.map((p, i) => {
+              const w = Math.max(24, Math.round((p.width / p.height) * THUMB_H));
+              return (
+                <svg key={i} width={w} height={THUMB_H} viewBox={`0 0 ${w} ${THUMB_H}`} role="img" aria-label={`${sources[p.source]} p.${p.page}`}>
+                  <path d={`M 1 1 H ${w - 9} L ${w - 1} 9 V ${THUMB_H - 1} H 1 Z`} className={`${SOURCE_FILL[p.source % SOURCE_FILL.length]} opacity-90`} />
+                  <path d={`M ${w - 9} 1 V 9 H ${w - 1}`} className="fill-white/40" />
+                  <text x={w / 2} y={THUMB_H / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-white">
+                    {p.page}
+                  </text>
+                </svg>
+              );
+            })}
+          </div>
+
+          <ul className="mt-4 flex flex-col gap-1.5 text-sm lg:flex-1 lg:justify-center">
+            {(mode === "merge"
+              ? draft.mergeDocs.map((d, i) => ({ label: d.name, pages: d.pageCount, bytes: d.bytes, i }))
+              : sources.map((s, i) => ({ label: s, pages: pages.filter((p) => p.source === i).length, bytes: draft.outputSizes[i] ?? 0, i }))
+            ).map((row) => (
+              <li key={row.i} className="flex items-center gap-2 rounded-lg bg-zinc-50 px-3 py-2 dark:bg-zinc-800/50">
+                <svg width={10} height={10} aria-hidden="true">
+                  <circle cx={5} cy={5} r={5} className={SOURCE_FILL[row.i % SOURCE_FILL.length]} />
+                </svg>
+                <span dir="ltr" className="min-w-0 flex-1 truncate font-mono text-zinc-700 dark:text-zinc-200">
+                  {row.label}
+                </span>
+                <span className="shrink-0 text-xs text-zinc-500 dark:text-zinc-400">{tr("pages", { n: row.pages })}</span>
+                <span dir="ltr" className="w-20 shrink-0 text-end font-mono text-xs text-zinc-600 dark:text-zinc-300">
+                  {formatBytes(row.bytes)}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p dir="ltr" className="mt-3 text-center text-xs text-zinc-500 dark:text-zinc-400">
+            {formatBytes(inputBytes)} → {formatBytes(outputBytes)}
+          </p>
+
           <button
             type="button"
             onClick={onDownload}
-            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+            className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             <Download size={16} />
-            {mode === "merge" ? t("aboveFold.downloadMerged") : t("aboveFold.downloadZip")}
+            {mode === "merge" ? t("aboveFold.downloadMerged") : resultCount > 1 ? t("aboveFold.downloadZip") : tr("downloadPdf")}
           </button>
-        </div>
-      ) : (
-        <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
-          {mode === "merge" ? t("aboveFold.placeholderMerge") : t("aboveFold.placeholderSplit")}
-        </p>
+        </>
       )}
     </SectionCard>
   );

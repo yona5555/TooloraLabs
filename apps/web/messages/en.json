@@ -23030,6 +23030,131 @@
           "note": "An overview published as PDF was becoming a widely adopted publication standard, examining why a format-independent, universally readable document standard mattered for reliably distributing and archiving documents — the same underlying document structure this tool reads and rewrites when merging or splitting a PDF.",
           "url": "https://doi.org/10.14429/dbit.23.1.3587",
           "readOriginal": "Read the Original Article"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Add PDF files above (or pick a quick example) to see this indicator.",
+          "paper": {
+            "other": "Custom size",
+            "landscape": "landscape"
+          },
+          "map": {
+            "title": "Every Page of the Output",
+            "introMerge": "Each output page at its real proportions, coloured by the file it came from. Drag the slider to trace any page back to its source.",
+            "introSplit": "Each output page at its real proportions, coloured by the part it goes into. Drag the slider to trace any page back to the original.",
+            "aria": "Output pages coloured by source",
+            "slider": "Output page",
+            "outputPage": "Output page",
+            "fromFile": "From file",
+            "inPart": "In part",
+            "originalPage": "Original page number",
+            "paper": "Paper",
+            "size": "Page size"
+          },
+          "share": {
+            "title": "Pages per Source",
+            "introMerge": "How the merged document's pages divide between your input files.",
+            "introSplit": "How the selected pages divide between the files the split produces.",
+            "aria": "Donut of pages per source",
+            "pages": "pages",
+            "files": "Input files",
+            "parts": "Output files",
+            "largest": "Largest",
+            "largestShare": "Largest share",
+            "average": "Pages per file",
+            "total": "Total pages"
+          },
+          "sizes": {
+            "title": "File Sizes, Measured",
+            "introMerge": "The real size of each input file and of the merged result.",
+            "introSplit": "The real size of the original and of each file the split produces.",
+            "aria": "Bars of file sizes",
+            "merged": "Merged",
+            "original": "Original",
+            "inputs": "Input total",
+            "outputs": "Output total",
+            "difference": "Difference",
+            "why": "Why it changes",
+            "whyMerge": "shared fonts and structure are stored once",
+            "whySplit": "each part carries its own fonts and structure",
+            "change": "Change"
+          },
+          "paperRank": {
+            "title": "Paper Sizes in the Output",
+            "intro": "Each page's real dimensions matched to ISO 216 (A3, A4, A5) or US sizes (Letter, Legal, Tabloid) within 3 points.",
+            "aria": "Ranked bars of paper sizes",
+            "kinds": "Different sizes",
+            "most": "Most common",
+            "mixed": "Mixed sizes",
+            "yes": "yes",
+            "no": "no"
+          },
+          "coverage": {
+            "title": "Which Pages Go Where",
+            "introSplit": "One cell per page of the original, coloured by the part that takes it; grey pages are left out and amber pages appear in more than one part.",
+            "introMerge": "One cell per page of the merged file, coloured by the input it came from, numbered with its original page.",
+            "aria": "Strip of page coverage",
+            "axisSplit": "Pages of the original: {n}",
+            "axisMerge": "Pages of the output: {n}",
+            "legendSplit": "Colour = part · grey = not included · amber = repeated",
+            "legendMerge": "Colour = source file · number = original page",
+            "pages": "Pages",
+            "parts": "Parts",
+            "unused": "Pages left out",
+            "repeated": "Pages repeated",
+            "covered": "Pages included",
+            "files": "Files",
+            "boundaries": "Each file starts at page"
+          },
+          "flow": {
+            "title": "From Instructions to Files",
+            "introSplit": "Each comma-separated token of your page ranges, the range it parses to, and whether it becomes a part. The buttons rewrite the ranges into equal chunks.",
+            "introMerge": "Each input file in order, its page count and the page span it occupies in the merged document.",
+            "aria": "Flow from ranges or files to output",
+            "empty": "(empty: one file per page)",
+            "chunk": "{n} per file",
+            "input": "Ranges typed",
+            "tokens": "Tokens",
+            "skipped": "Tokens skipped",
+            "dropped": "Ranges past the end",
+            "parts": "Files produced",
+            "files": "Files",
+            "order": "Order",
+            "first": "First",
+            "last": "Last",
+            "totalPages": "Total pages"
+          },
+          "gauge": {
+            "title": "Output Size Against Input",
+            "intro": "Total output size compared with the input, from −50 % to +150 %. Merging can share fonts and shrink; splitting copies shared resources into every part.",
+            "aria": "Gauge of size change",
+            "input": "Input",
+            "output": "Output",
+            "files": "Output files",
+            "perFile": "Average per file",
+            "change": "Change"
+          },
+          "trend": {
+            "title": "Bytes Along the Document",
+            "intro": "Cumulative size page by page, using each source's measured bytes per page; the steepest stretch is the heaviest source (amber points).",
+            "aria": "Cumulative bytes by page",
+            "axis": "Output pages",
+            "pages": "Pages",
+            "heaviest": "Heaviest per page",
+            "lightest": "Lightest per page",
+            "average": "Average per page",
+            "total": "Total"
+          },
+          "compare": {
+            "title": "Page Sizes to Scale",
+            "intro": "Every distinct page size in the output drawn to the same scale and stacked at one corner, so the differences show at a glance.",
+            "aria": "Page outlines to scale",
+            "sizes": "Distinct sizes",
+            "first": "First size in points",
+            "inches": "In inches",
+            "diff": "Second minus first",
+            "area": "Area of second vs first"
+          }
         }
       },
       "shareExport": {
@@ -23061,6 +23186,20 @@
         "maxSizeLabel": "Max total size",
         "rangeSyntaxLabel": "Page range syntax",
         "rangeSyntaxNote": "Use commas to separate pages or ranges, and hyphens for consecutive ranges."
+      },
+      "examples": {
+        "title": "Quick examples (sample PDFs made in your browser)",
+        "mergeThree": "Merge report + invoice + appendix",
+        "mergeTwo": "Merge invoice before report",
+        "splitChapters": "Split into chapters",
+        "splitEvery": "Split every page",
+        "splitPairs": "Split into pairs",
+        "everyPage": "every page"
+      },
+      "result": {
+        "pagesUnit": "pages",
+        "pages": "{n} pages",
+        "downloadPdf": "Download PDF"
       }
     },
     "zip-compressor": {
