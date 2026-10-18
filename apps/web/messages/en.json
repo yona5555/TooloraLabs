@@ -21353,14 +21353,7 @@
         "intro": {
           "title": "How QR Codes Actually Work",
           "paragraph1": "A QR code encodes data as a grid of black and white squares called modules, but what makes it scannable from any angle — sideways, upside down, at a distance — is three identical bullseye squares in three of its four corners. A scanner locates those three finder patterns first, which is enough to work out the code's rotation and perspective before it even starts reading the data in between.",
-          "paragraph2": "The data itself is protected by Reed-Solomon error correction, the same family of algorithm used to protect CDs, DVDs, and deep-space transmissions from NASA probes. The encoder stores extra, redundant codewords alongside the real data, spread across the grid — which is exactly what lets a QR code stay scannable even with a logo covering its center or a corner torn off. This tool's four error-correction levels (L through H) trade code density for exactly how much damage the result can survive.",
-          "diagram": {
-            "finderLabel": "Finder pattern (3 corners) — establishes orientation",
-            "timingLabel": "Timing pattern — establishes module spacing",
-            "quietZoneLabel": "Quiet zone (blank margin, required for scanners to lock on)",
-            "dataLabel": "Data + error correction (Reed-Solomon)",
-            "caption": "A simplified Version-1 QR code (21×21 modules) — real codes scale up to 177×177 modules to hold more data."
-          }
+          "paragraph2": "The data itself is protected by Reed-Solomon error correction, the same family of algorithm used to protect CDs, DVDs, and deep-space transmissions from NASA probes. The encoder stores extra, redundant codewords alongside the real data, spread across the grid — which is exactly what lets a QR code stay scannable even with a logo covering its center or a corner torn off. This tool's four error-correction levels (L through H) trade code density for exactly how much damage the result can survive."
         },
         "examples": {
           "title": "Worked Examples",
@@ -21474,6 +21467,140 @@
           "note": "The official international standard defining the QR code symbology this tool generates — the exact structure of finder patterns, timing patterns, data encoding modes, and the four Reed-Solomon error-correction levels (L, M, Q, H).",
           "url": "https://www.iso.org/standard/83389.html",
           "readOriginal": "View the Official Standard"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter content above to see this indicator.",
+          "regions": {
+            "finder": "Finder",
+            "timing": "Timing",
+            "alignment": "Alignment",
+            "format": "Format info",
+            "version": "Version info",
+            "data": "Data"
+          },
+          "map": {
+            "title": "Every Module of Your Code",
+            "intro": "The real symbol on the page. Pick a part to light up only its modules: the three finder squares, the timing lines, alignment patterns, the format and version information, or your data.",
+            "aria": "QR symbol with highlighted regions",
+            "all": "All",
+            "grid": "Grid",
+            "fixed": "Fixed patterns",
+            "mask": "Mask pattern",
+            "version": "Version",
+            "modules": "Modules",
+            "share": "Share of grid",
+            "darkModules": "Dark modules",
+            "darkShare": "Dark share",
+            "role": "Job",
+            "roles": {
+              "finder": "lets a scanner find and orient the code",
+              "timing": "sets the module grid spacing",
+              "alignment": "corrects distortion in larger codes",
+              "format": "stores the level and mask",
+              "version": "stores the version (7 and up)",
+              "data": "carries content and error correction"
+            }
+          },
+          "codewords": {
+            "title": "Codeword Budget",
+            "intro": "The symbol's codewords (bytes): those carrying your content with its headers, the padding that fills the data area, and the Reed–Solomon error-correction codewords.",
+            "aria": "Stacked bar of codewords",
+            "axis": "{n} codewords in version {v}",
+            "content": "Your content",
+            "padding": "Padding",
+            "ec": "Error correction",
+            "bits": "Data bits used",
+            "blocks": "Error-correction blocks",
+            "ecPerBlock": "EC codewords per block",
+            "repairable": "Can repair",
+            "repairableValue": "up to {n} codewords",
+            "fill": "Data area filled"
+          },
+          "levels": {
+            "title": "Capacity at Each Error-Correction Level",
+            "intro": "How many bytes this version holds at L, M, Q and H, with your payload as the red line. Click a bar to switch the level for the whole page.",
+            "aria": "Bars of capacity per level, clickable",
+            "payload": "payload {n} B",
+            "version": "Version",
+            "current": "Current level",
+            "recovery": "Damage it survives",
+            "lToH": "L to H",
+            "used": "Capacity used"
+          },
+          "versions": {
+            "title": "Capacity Across All 40 Versions",
+            "intro": "Byte capacity of every QR version at the current level; your payload is the red line and the point is the version the encoder picked.",
+            "aria": "Capacity against version",
+            "axis": "Version (level {level})",
+            "point": "v{v}: {c} B",
+            "payload": "Your payload",
+            "thisVersion": "This version",
+            "previous": "One smaller",
+            "headroom": "Room left",
+            "max": "Largest possible"
+          },
+          "dark": {
+            "title": "Dark and Light Balance",
+            "intro": "Share of dark modules in the whole symbol. The encoder tries all eight masks and keeps the one with the lowest penalty, and an even balance is one of the penalty rules, so codes sit near 50 %.",
+            "aria": "Gauge of dark module share",
+            "dark": "Dark modules",
+            "dataDark": "Dark share in data area",
+            "mask": "Chosen mask",
+            "n4": "Balance penalty (rule N4)",
+            "balance": "Distance from 50 %"
+          },
+          "flow": {
+            "title": "From Text to Modules",
+            "intro": "How your content becomes the grid: characters, UTF-8 bytes, bits with mode and length headers, data codewords, plus error correction, then modules.",
+            "aria": "Flow from characters to modules",
+            "chars": "Characters",
+            "bytes": "UTF-8 bytes",
+            "bits": "Bits with headers",
+            "data": "Data codewords",
+            "total": "Codewords + EC",
+            "modules": "Module grid",
+            "mode": "Encoding mode",
+            "header": "Header bits",
+            "payloadBits": "Content bits",
+            "bitsPerByte": "Bits per byte",
+            "modulesPerByte": "Modules per byte",
+            "bitsUnit": "bits"
+          },
+          "steps": {
+            "title": "Smallest Version per Level",
+            "intro": "The smallest version (and grid) your content needs at each level — the staircase you climb when you ask for more damage tolerance.",
+            "aria": "Steps of minimum version per level",
+            "tooLong": "too long",
+            "cost": "Extra modules from L to H",
+            "modules": "modules"
+          },
+          "print": {
+            "title": "Printed Size to Scale",
+            "intro": "Your symbol drawn to scale at three module sizes, each with the four-module quiet zone the standard requires around it.",
+            "aria": "Three QR codes at scale",
+            "module": "{m} mm module",
+            "span": "Modules across",
+            "perCm": "Module for a 1 cm code",
+            "perCmValue": "{n} mm"
+          },
+          "bytes": {
+            "title": "What the Encoded Bytes Are",
+            "intro": "Every byte of the exact text encoded, including format syntax such as \"WIFI:\" or \"BEGIN:VCARD\". Non-ASCII characters take 2–4 bytes each.",
+            "aria": "Donut of payload byte kinds",
+            "bytes": "bytes",
+            "letters": "Letters",
+            "digits": "Digits",
+            "punctuation": "Punctuation",
+            "spaces": "Spaces / breaks",
+            "multibyte": "Non-ASCII bytes",
+            "chars": "Characters",
+            "utf8": "UTF-8 size",
+            "syntax": "Format prefix",
+            "none": "none",
+            "extra": "Extra bytes from non-ASCII",
+            "ascii": "ASCII share"
+          }
         }
       },
       "shareExport": {
@@ -21497,6 +21624,24 @@
         "inputSectionTitle": "Input",
         "summarySentence": "QR code encoding: {payload}",
         "resultSectionTitle": "Result"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "url": "Website link",
+        "wifi": "Wi-Fi network (WPA)",
+        "contact": "Contact card (vCard)",
+        "email": "Email with subject",
+        "long": "Long text paragraph",
+        "detail": "v{v} · {size}×{size} · {bytes} B"
+      },
+      "result": {
+        "capacity": "Space used at this version",
+        "version": "Version",
+        "grid": "Grid",
+        "level": "Error correction",
+        "mask": "Mask",
+        "codewords": "Data + EC codewords",
+        "dark": "Dark modules"
       }
     },
     "barcode-generator": {

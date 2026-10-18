@@ -21353,14 +21353,7 @@
         "intro": {
           "title": "Cómo funcionan realmente los códigos QR",
           "paragraph1": "Un código QR codifica datos como una cuadrícula de cuadros blancos y negros llamados módulos, pero lo que lo hace legible desde cualquier ángulo —de lado, boca abajo, a distancia— son tres cuadros idénticos en forma de diana situados en tres de sus cuatro esquinas. Un escáner localiza primero esos tres «patrones de búsqueda», lo cual basta para calcular la rotación y la perspectiva del código antes incluso de empezar a leer los datos que hay entre medias.",
-          "paragraph2": "Los propios datos están protegidos mediante la corrección de errores Reed-Solomon, la misma familia de algoritmos que protege los CD, los DVD y las transmisiones de las sondas espaciales de la NASA. El codificador almacena palabras clave redundantes junto a los datos reales, repartidas por toda la cuadrícula — justamente lo que permite que un código QR siga siendo legible aunque un logotipo cubra su centro o le falte una esquina. Los cuatro niveles de corrección de errores de esta herramienta (de L a H) equilibran la densidad del código con la cantidad de daño que puede soportar.",
-          "diagram": {
-            "finderLabel": "Patrón de búsqueda (3 esquinas) — establece la orientación",
-            "timingLabel": "Patrón de sincronización — establece el espaciado de los módulos",
-            "quietZoneLabel": "Zona silenciosa (margen en blanco, necesario para que los escáneres se enfoquen)",
-            "dataLabel": "Datos + corrección de errores (Reed-Solomon)",
-            "caption": "Un código QR de la versión 1 simplificado (21×21 módulos) — los códigos reales llegan hasta 177×177 módulos para almacenar más datos."
-          }
+          "paragraph2": "Los propios datos están protegidos mediante la corrección de errores Reed-Solomon, la misma familia de algoritmos que protege los CD, los DVD y las transmisiones de las sondas espaciales de la NASA. El codificador almacena palabras clave redundantes junto a los datos reales, repartidas por toda la cuadrícula — justamente lo que permite que un código QR siga siendo legible aunque un logotipo cubra su centro o le falte una esquina. Los cuatro niveles de corrección de errores de esta herramienta (de L a H) equilibran la densidad del código con la cantidad de daño que puede soportar."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -21474,6 +21467,140 @@
           "note": "El estándar internacional oficial que define la simbología de código QR que genera esta herramienta — la estructura exacta de los patrones de búsqueda, los patrones de sincronización, los modos de codificación de datos y los cuatro niveles de corrección de errores Reed-Solomon (L, M, Q, H).",
           "url": "https://www.iso.org/standard/83389.html",
           "readOriginal": "Ver el estándar oficial"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce contenido arriba para ver este indicador.",
+          "regions": {
+            "finder": "Localizador",
+            "timing": "Temporización",
+            "alignment": "Alineación",
+            "format": "Info de formato",
+            "version": "Info de versión",
+            "data": "Datos"
+          },
+          "map": {
+            "title": "Cada módulo de tu código",
+            "intro": "El símbolo real de la página. Elige una parte para iluminar solo sus módulos: los tres cuadrados localizadores, las líneas de temporización, la alineación, la información de formato y versión, o tus datos.",
+            "aria": "Símbolo QR con regiones resaltadas",
+            "all": "Todo",
+            "grid": "Cuadrícula",
+            "fixed": "Patrones fijos",
+            "mask": "Patrón de máscara",
+            "version": "Versión",
+            "modules": "Módulos",
+            "share": "Parte de la cuadrícula",
+            "darkModules": "Módulos oscuros",
+            "darkShare": "Parte oscura",
+            "role": "Función",
+            "roles": {
+              "finder": "permite al lector hallar y orientar el código",
+              "timing": "fija el espaciado de la cuadrícula",
+              "alignment": "corrige la distorsión en códigos grandes",
+              "format": "guarda el nivel y la máscara",
+              "version": "guarda la versión (7 o más)",
+              "data": "lleva el contenido y la corrección"
+            }
+          },
+          "codewords": {
+            "title": "Presupuesto de palabras",
+            "intro": "Las palabras (bytes) del símbolo: las que llevan tu contenido con sus cabeceras, el relleno del área de datos y las palabras de corrección Reed–Solomon.",
+            "aria": "Barra apilada de palabras",
+            "axis": "{n} palabras en la versión {v}",
+            "content": "Tu contenido",
+            "padding": "Relleno",
+            "ec": "Corrección de errores",
+            "bits": "Bits de datos usados",
+            "blocks": "Bloques de corrección",
+            "ecPerBlock": "Palabras CE por bloque",
+            "repairable": "Puede reparar",
+            "repairableValue": "hasta {n} palabras",
+            "fill": "Área de datos llena"
+          },
+          "levels": {
+            "title": "Capacidad en cada nivel de corrección",
+            "intro": "Cuántos bytes caben en esta versión con L, M, Q y H; tu contenido es la línea roja. Haz clic en una barra para cambiar el nivel en toda la página.",
+            "aria": "Barras de capacidad por nivel, clicables",
+            "payload": "contenido {n} B",
+            "version": "Versión",
+            "current": "Nivel actual",
+            "recovery": "Daño que resiste",
+            "lToH": "De L a H",
+            "used": "Capacidad usada"
+          },
+          "versions": {
+            "title": "Capacidad en las 40 versiones",
+            "intro": "La capacidad en bytes de cada versión QR al nivel actual; tu contenido es la línea roja y el punto la versión elegida.",
+            "aria": "Capacidad según versión",
+            "axis": "Versión (nivel {level})",
+            "point": "v{v}: {c} B",
+            "payload": "Tu contenido",
+            "thisVersion": "Esta versión",
+            "previous": "Una menor",
+            "headroom": "Espacio libre",
+            "max": "La mayor posible"
+          },
+          "dark": {
+            "title": "Equilibrio entre oscuro y claro",
+            "intro": "La parte de módulos oscuros en todo el símbolo. El codificador prueba las ocho máscaras y se queda con la de menor penalización, y el equilibrio es una de las reglas, así que los códigos rondan el 50 %.",
+            "aria": "Indicador de módulos oscuros",
+            "dark": "Módulos oscuros",
+            "dataDark": "Parte oscura en datos",
+            "mask": "Máscara elegida",
+            "n4": "Penalización de equilibrio (N4)",
+            "balance": "Distancia al 50 %"
+          },
+          "flow": {
+            "title": "Del texto a los módulos",
+            "intro": "Cómo tu contenido se convierte en cuadrícula: caracteres, bytes UTF-8, bits con cabeceras de modo y longitud, palabras de datos, más corrección, y módulos.",
+            "aria": "Flujo de caracteres a módulos",
+            "chars": "Caracteres",
+            "bytes": "Bytes UTF-8",
+            "bits": "Bits con cabeceras",
+            "data": "Palabras de datos",
+            "total": "Palabras + CE",
+            "modules": "Cuadrícula",
+            "mode": "Modo de codificación",
+            "header": "Bits de cabecera",
+            "payloadBits": "Bits de contenido",
+            "bitsPerByte": "Bits por byte",
+            "modulesPerByte": "Módulos por byte",
+            "bitsUnit": "bits"
+          },
+          "steps": {
+            "title": "Versión mínima por nivel",
+            "intro": "La menor versión (y cuadrícula) que necesita tu contenido en cada nivel: la escalera que subes al pedir más tolerancia al daño.",
+            "aria": "Escalones de versión mínima",
+            "tooLong": "demasiado largo",
+            "cost": "Módulos extra de L a H",
+            "modules": "módulos"
+          },
+          "print": {
+            "title": "Tamaño impreso a escala",
+            "intro": "Tu símbolo a escala con tres tamaños de módulo, cada uno con la zona de silencio de cuatro módulos que exige la norma.",
+            "aria": "Tres códigos QR a escala",
+            "module": "módulo de {m} mm",
+            "span": "Módulos de ancho",
+            "perCm": "Módulo para un código de 1 cm",
+            "perCmValue": "{n} mm"
+          },
+          "bytes": {
+            "title": "Qué son los bytes codificados",
+            "intro": "Cada byte del texto exacto codificado, incluida la sintaxis como \"WIFI:\" o \"BEGIN:VCARD\". Los caracteres no ASCII ocupan de 2 a 4 bytes.",
+            "aria": "Anillo de tipos de bytes",
+            "bytes": "bytes",
+            "letters": "Letras",
+            "digits": "Dígitos",
+            "punctuation": "Puntuación",
+            "spaces": "Espacios / saltos",
+            "multibyte": "Bytes no ASCII",
+            "chars": "Caracteres",
+            "utf8": "Tamaño UTF-8",
+            "syntax": "Prefijo de formato",
+            "none": "ninguno",
+            "extra": "Bytes extra por no ASCII",
+            "ascii": "Parte ASCII"
+          }
         }
       },
       "shareExport": {
@@ -21497,6 +21624,24 @@
         "inputSectionTitle": "Entrada",
         "summarySentence": "El código QR codifica: {payload}",
         "resultSectionTitle": "Resultado"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "url": "Enlace web",
+        "wifi": "Red Wi-Fi (WPA)",
+        "contact": "Tarjeta de contacto (vCard)",
+        "email": "Correo con asunto",
+        "long": "Párrafo de texto largo",
+        "detail": "v{v} · {size}×{size} · {bytes} B"
+      },
+      "result": {
+        "capacity": "Espacio usado en esta versión",
+        "version": "Versión",
+        "grid": "Cuadrícula",
+        "level": "Corrección de errores",
+        "mask": "Máscara",
+        "codewords": "Palabras de datos + CE",
+        "dark": "Módulos oscuros"
       }
     },
     "barcode-generator": {

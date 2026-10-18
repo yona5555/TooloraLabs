@@ -21353,14 +21353,7 @@
         "intro": {
           "title": "Wie QR-Codes tatsächlich funktionieren",
           "paragraph1": "Ein QR-Code codiert Daten als Raster schwarzer und weißer Quadrate, sogenannter Module, aber was ihn aus jedem Winkel scanbar macht — seitlich, kopfüber, aus der Distanz — sind drei identische Zielscheiben-Quadrate in drei seiner vier Ecken. Ein Scanner findet zuerst diese drei Suchmuster, was ausreicht, um Drehung und Perspektive des Codes zu bestimmen, bevor er überhaupt beginnt, die Daten dazwischen zu lesen.",
-          "paragraph2": "Die Daten selbst werden durch Reed-Solomon-Fehlerkorrektur geschützt, dieselbe Algorithmenfamilie, die CDs, DVDs und Tiefraum-Übertragungen von NASA-Sonden schützt. Der Encoder speichert zusätzliche, redundante Codewörter über das Raster verteilt neben den eigentlichen Daten — genau das lässt einen QR-Code auch mit einem Logo über der Mitte oder einer abgerissenen Ecke scanbar bleiben. Die vier Fehlerkorrekturstufen dieses Werkzeugs (L bis H) tauschen Codedichte gegen genau die Menge an Schaden, die das Ergebnis überstehen kann.",
-          "diagram": {
-            "finderLabel": "Suchmuster (3 Ecken) — legt die Ausrichtung fest",
-            "timingLabel": "Taktmuster — legt den Modulabstand fest",
-            "quietZoneLabel": "Ruhezone (leerer Rand, für Scanner zum Erfassen erforderlich)",
-            "dataLabel": "Daten + Fehlerkorrektur (Reed-Solomon)",
-            "caption": "Ein vereinfachter QR-Code der Version 1 (21×21 Module) — echte Codes skalieren bis zu 177×177 Module, um mehr Daten zu fassen."
-          }
+          "paragraph2": "Die Daten selbst werden durch Reed-Solomon-Fehlerkorrektur geschützt, dieselbe Algorithmenfamilie, die CDs, DVDs und Tiefraum-Übertragungen von NASA-Sonden schützt. Der Encoder speichert zusätzliche, redundante Codewörter über das Raster verteilt neben den eigentlichen Daten — genau das lässt einen QR-Code auch mit einem Logo über der Mitte oder einer abgerissenen Ecke scanbar bleiben. Die vier Fehlerkorrekturstufen dieses Werkzeugs (L bis H) tauschen Codedichte gegen genau die Menge an Schaden, die das Ergebnis überstehen kann."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -21474,6 +21467,140 @@
           "note": "Der offizielle internationale Standard, der die QR-Code-Symbologie definiert, die dieses Werkzeug erzeugt — die genaue Struktur von Suchmustern, Taktmustern, Datencodierungsmodi und den vier Reed-Solomon-Fehlerkorrekturstufen (L, M, Q, H).",
           "url": "https://www.iso.org/standard/83389.html",
           "readOriginal": "Offiziellen Standard ansehen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben Inhalt ein, um diesen Indikator zu sehen.",
+          "regions": {
+            "finder": "Positionsmarken",
+            "timing": "Taktlinien",
+            "alignment": "Ausrichtung",
+            "format": "Formatinfo",
+            "version": "Versionsinfo",
+            "data": "Daten"
+          },
+          "map": {
+            "title": "Jedes Modul deines Codes",
+            "intro": "Das echte Symbol der Seite. Wähle einen Teil, und nur seine Module leuchten auf: die drei Positionsmarken, die Taktlinien, die Ausrichtungsmuster, Format- und Versionsinfo oder deine Daten.",
+            "aria": "QR-Symbol mit hervorgehobenen Bereichen",
+            "all": "Alle",
+            "grid": "Raster",
+            "fixed": "Feste Muster",
+            "mask": "Maskenmuster",
+            "version": "Version",
+            "modules": "Module",
+            "share": "Anteil am Raster",
+            "darkModules": "Dunkle Module",
+            "darkShare": "Dunkelanteil",
+            "role": "Aufgabe",
+            "roles": {
+              "finder": "lässt den Scanner den Code finden und ausrichten",
+              "timing": "legt den Modulabstand fest",
+              "alignment": "gleicht Verzerrung bei großen Codes aus",
+              "format": "speichert Stufe und Maske",
+              "version": "speichert die Version (ab 7)",
+              "data": "trägt Inhalt und Fehlerkorrektur"
+            }
+          },
+          "codewords": {
+            "title": "Codewort-Budget",
+            "intro": "Die Codewörter (Bytes) des Symbols: die mit deinem Inhalt samt Kopfdaten, das Auffüllen des Datenbereichs und die Reed-Solomon-Fehlerkorrektur.",
+            "aria": "Gestapelter Balken der Codewörter",
+            "axis": "{n} Codewörter in Version {v}",
+            "content": "Dein Inhalt",
+            "padding": "Auffüllung",
+            "ec": "Fehlerkorrektur",
+            "bits": "Genutzte Datenbits",
+            "blocks": "Korrekturblöcke",
+            "ecPerBlock": "EC-Codewörter pro Block",
+            "repairable": "Reparierbar",
+            "repairableValue": "bis zu {n} Codewörter",
+            "fill": "Datenbereich gefüllt"
+          },
+          "levels": {
+            "title": "Kapazität je Fehlerkorrekturstufe",
+            "intro": "Wie viele Bytes diese Version bei L, M, Q und H fasst; dein Inhalt ist die rote Linie. Klick einen Balken, um die Stufe für die ganze Seite zu wechseln.",
+            "aria": "Kapazitätsbalken je Stufe, anklickbar",
+            "payload": "Inhalt {n} B",
+            "version": "Version",
+            "current": "Aktuelle Stufe",
+            "recovery": "Verkraftete Beschädigung",
+            "lToH": "L bis H",
+            "used": "Genutzte Kapazität"
+          },
+          "versions": {
+            "title": "Kapazität aller 40 Versionen",
+            "intro": "Byte-Kapazität jeder QR-Version auf der aktuellen Stufe; dein Inhalt ist die rote Linie, der Punkt die gewählte Version.",
+            "aria": "Kapazität gegen Version",
+            "axis": "Version (Stufe {level})",
+            "point": "v{v}: {c} B",
+            "payload": "Dein Inhalt",
+            "thisVersion": "Diese Version",
+            "previous": "Eine kleiner",
+            "headroom": "Restplatz",
+            "max": "Größtmöglich"
+          },
+          "dark": {
+            "title": "Balance aus Dunkel und Hell",
+            "intro": "Anteil dunkler Module im ganzen Symbol. Der Encoder probiert alle acht Masken und behält die mit der geringsten Strafpunktzahl; ausgewogene Helligkeit ist eine der Regeln, daher liegen Codes nahe 50 %.",
+            "aria": "Anzeige des Dunkelanteils",
+            "dark": "Dunkle Module",
+            "dataDark": "Dunkelanteil im Datenbereich",
+            "mask": "Gewählte Maske",
+            "n4": "Balance-Strafe (Regel N4)",
+            "balance": "Abstand zu 50 %"
+          },
+          "flow": {
+            "title": "Vom Text zu den Modulen",
+            "intro": "Wie dein Inhalt zum Raster wird: Zeichen, UTF-8-Bytes, Bits mit Modus- und Längenkopf, Datencodewörter, plus Fehlerkorrektur, dann Module.",
+            "aria": "Fluss von Zeichen zu Modulen",
+            "chars": "Zeichen",
+            "bytes": "UTF-8-Bytes",
+            "bits": "Bits mit Kopf",
+            "data": "Datencodewörter",
+            "total": "Codewörter + EC",
+            "modules": "Modulraster",
+            "mode": "Kodierungsmodus",
+            "header": "Kopfbits",
+            "payloadBits": "Inhaltsbits",
+            "bitsPerByte": "Bits pro Byte",
+            "modulesPerByte": "Module pro Byte",
+            "bitsUnit": "Bit"
+          },
+          "steps": {
+            "title": "Kleinste Version je Stufe",
+            "intro": "Die kleinste Version (und das Raster), die dein Inhalt je Stufe braucht: die Treppe, die du für mehr Schadenstoleranz hinaufsteigst.",
+            "aria": "Stufen der Mindestversion",
+            "tooLong": "zu lang",
+            "cost": "Mehr Module von L zu H",
+            "modules": "Module"
+          },
+          "print": {
+            "title": "Druckgröße maßstabsgetreu",
+            "intro": "Dein Symbol maßstabsgetreu mit drei Modulgrößen, jeweils mit der vorgeschriebenen Ruhezone von vier Modulen.",
+            "aria": "Drei QR-Codes maßstabsgetreu",
+            "module": "{m}-mm-Modul",
+            "span": "Module in der Breite",
+            "perCm": "Modul für einen 1-cm-Code",
+            "perCmValue": "{n} mm"
+          },
+          "bytes": {
+            "title": "Woraus die kodierten Bytes bestehen",
+            "intro": "Jedes Byte des exakt kodierten Texts, einschließlich Formatsyntax wie \"WIFI:\" oder \"BEGIN:VCARD\". Nicht-ASCII-Zeichen brauchen 2–4 Bytes.",
+            "aria": "Ring der Byte-Arten",
+            "bytes": "Bytes",
+            "letters": "Buchstaben",
+            "digits": "Ziffern",
+            "punctuation": "Satzzeichen",
+            "spaces": "Leerzeichen / Umbrüche",
+            "multibyte": "Nicht-ASCII-Bytes",
+            "chars": "Zeichen",
+            "utf8": "UTF-8-Größe",
+            "syntax": "Formatpräfix",
+            "none": "keins",
+            "extra": "Zusatzbytes durch Nicht-ASCII",
+            "ascii": "ASCII-Anteil"
+          }
         }
       },
       "shareExport": {
@@ -21497,6 +21624,24 @@
         "inputSectionTitle": "Eingabe",
         "summarySentence": "QR-Code kodiert: {payload}",
         "resultSectionTitle": "Ergebnis"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "url": "Website-Link",
+        "wifi": "WLAN (WPA)",
+        "contact": "Kontaktkarte (vCard)",
+        "email": "E-Mail mit Betreff",
+        "long": "Langer Textabsatz",
+        "detail": "v{v} · {size}×{size} · {bytes} B"
+      },
+      "result": {
+        "capacity": "Belegter Platz in dieser Version",
+        "version": "Version",
+        "grid": "Raster",
+        "level": "Fehlerkorrektur",
+        "mask": "Maske",
+        "codewords": "Daten- + EC-Codewörter",
+        "dark": "Dunkle Module"
       }
     },
     "barcode-generator": {

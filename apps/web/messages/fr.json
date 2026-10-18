@@ -21353,14 +21353,7 @@
         "intro": {
           "title": "Comment fonctionnent réellement les QR codes",
           "paragraph1": "Un QR code encode des données sous la forme d'une grille de carrés noirs et blancs appelés modules, mais ce qui le rend lisible sous n'importe quel angle — de travers, à l'envers, à distance — ce sont trois carrés en forme de cible identiques, placés dans trois de ses quatre coins. Un scanner repère d'abord ces trois motifs de repérage, ce qui suffit à déterminer la rotation et la perspective du code avant même de commencer à lire les données situées entre eux.",
-          "paragraph2": "Les données elles-mêmes sont protégées par la correction d'erreur de Reed-Solomon, la même famille d'algorithmes qui protège les CD, les DVD et les transmissions des sondes spatiales de la NASA. L'encodeur stocke des symboles redondants supplémentaires aux côtés des données réelles, répartis sur toute la grille — c'est exactement ce qui permet à un QR code de rester lisible même avec un logo recouvrant son centre ou un coin déchiré. Les quatre niveaux de correction d'erreur de cet outil (de L à H) font un compromis entre densité du code et quantité de dégâts que le résultat peut supporter.",
-          "diagram": {
-            "finderLabel": "Motif de repérage (3 coins) — établit l'orientation",
-            "timingLabel": "Motif de synchronisation — établit l'espacement des modules",
-            "quietZoneLabel": "Zone de silence (marge vide, nécessaire pour que les scanners puissent se caler)",
-            "dataLabel": "Données + correction d'erreur (Reed-Solomon)",
-            "caption": "Un QR code simplifié de version 1 (21 × 21 modules) — les codes réels vont jusqu'à 177 × 177 modules pour contenir davantage de données."
-          }
+          "paragraph2": "Les données elles-mêmes sont protégées par la correction d'erreur de Reed-Solomon, la même famille d'algorithmes qui protège les CD, les DVD et les transmissions des sondes spatiales de la NASA. L'encodeur stocke des symboles redondants supplémentaires aux côtés des données réelles, répartis sur toute la grille — c'est exactement ce qui permet à un QR code de rester lisible même avec un logo recouvrant son centre ou un coin déchiré. Les quatre niveaux de correction d'erreur de cet outil (de L à H) font un compromis entre densité du code et quantité de dégâts que le résultat peut supporter."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -21474,6 +21467,140 @@
           "note": "La norme internationale officielle qui définit la symbologie du QR code généré par cet outil — la structure exacte des motifs de repérage, des motifs de synchronisation, des modes d'encodage des données et des quatre niveaux de correction d'erreur Reed-Solomon (L, M, Q, H).",
           "url": "https://www.iso.org/standard/83389.html",
           "readOriginal": "Consulter la norme officielle"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez un contenu ci-dessus pour voir cet indicateur.",
+          "regions": {
+            "finder": "Repères",
+            "timing": "Synchronisation",
+            "alignment": "Alignement",
+            "format": "Info de format",
+            "version": "Info de version",
+            "data": "Données"
+          },
+          "map": {
+            "title": "Chaque module de votre code",
+            "intro": "Le vrai symbole de la page. Choisissez une partie pour n’éclairer que ses modules : les trois carrés repères, les lignes de synchronisation, l’alignement, les informations de format et de version, ou vos données.",
+            "aria": "Symbole QR avec zones surlignées",
+            "all": "Tout",
+            "grid": "Grille",
+            "fixed": "Motifs fixes",
+            "mask": "Motif de masque",
+            "version": "Version",
+            "modules": "Modules",
+            "share": "Part de la grille",
+            "darkModules": "Modules foncés",
+            "darkShare": "Part foncée",
+            "role": "Rôle",
+            "roles": {
+              "finder": "permet au lecteur de trouver et orienter le code",
+              "timing": "fixe l’espacement de la grille",
+              "alignment": "corrige la déformation des grands codes",
+              "format": "stocke le niveau et le masque",
+              "version": "stocke la version (7 et plus)",
+              "data": "porte le contenu et la correction"
+            }
+          },
+          "codewords": {
+            "title": "Budget de mots de code",
+            "intro": "Les mots de code (octets) du symbole : ceux qui portent votre contenu avec ses en-têtes, le remplissage de la zone de données et les mots de correction Reed–Solomon.",
+            "aria": "Barre empilée des mots de code",
+            "axis": "{n} mots de code en version {v}",
+            "content": "Votre contenu",
+            "padding": "Remplissage",
+            "ec": "Correction d’erreurs",
+            "bits": "Bits de données utilisés",
+            "blocks": "Blocs de correction",
+            "ecPerBlock": "Mots CE par bloc",
+            "repairable": "Peut réparer",
+            "repairableValue": "jusqu’à {n} mots",
+            "fill": "Zone de données remplie"
+          },
+          "levels": {
+            "title": "Capacité à chaque niveau de correction",
+            "intro": "Combien d’octets tient cette version en L, M, Q et H ; votre contenu est la ligne rouge. Cliquez sur une barre pour changer le niveau sur toute la page.",
+            "aria": "Barres de capacité par niveau, cliquables",
+            "payload": "contenu {n} o",
+            "version": "Version",
+            "current": "Niveau actuel",
+            "recovery": "Dégâts tolérés",
+            "lToH": "De L à H",
+            "used": "Capacité utilisée"
+          },
+          "versions": {
+            "title": "Capacité sur les 40 versions",
+            "intro": "La capacité en octets de chaque version QR au niveau actuel ; votre contenu est la ligne rouge et le point la version choisie.",
+            "aria": "Capacité selon la version",
+            "axis": "Version (niveau {level})",
+            "point": "v{v} : {c} o",
+            "payload": "Votre contenu",
+            "thisVersion": "Cette version",
+            "previous": "Une plus petite",
+            "headroom": "Marge restante",
+            "max": "La plus grande"
+          },
+          "dark": {
+            "title": "Équilibre foncé et clair",
+            "intro": "La part de modules foncés dans tout le symbole. L’encodeur essaie les huit masques et garde le moins pénalisé ; l’équilibre est l’une des règles, d’où des codes proches de 50 %.",
+            "aria": "Jauge des modules foncés",
+            "dark": "Modules foncés",
+            "dataDark": "Part foncée des données",
+            "mask": "Masque choisi",
+            "n4": "Pénalité d’équilibre (N4)",
+            "balance": "Écart à 50 %"
+          },
+          "flow": {
+            "title": "Du texte aux modules",
+            "intro": "Comment votre contenu devient une grille : caractères, octets UTF-8, bits avec en-têtes de mode et de longueur, mots de données, plus la correction, puis modules.",
+            "aria": "Flux des caractères aux modules",
+            "chars": "Caractères",
+            "bytes": "Octets UTF-8",
+            "bits": "Bits avec en-têtes",
+            "data": "Mots de données",
+            "total": "Mots + CE",
+            "modules": "Grille de modules",
+            "mode": "Mode d’encodage",
+            "header": "Bits d’en-tête",
+            "payloadBits": "Bits de contenu",
+            "bitsPerByte": "Bits par octet",
+            "modulesPerByte": "Modules par octet",
+            "bitsUnit": "bits"
+          },
+          "steps": {
+            "title": "Plus petite version par niveau",
+            "intro": "La plus petite version (et grille) dont votre contenu a besoin à chaque niveau : l’escalier qu’on monte en demandant plus de tolérance.",
+            "aria": "Marches de version minimale",
+            "tooLong": "trop long",
+            "cost": "Modules en plus de L à H",
+            "modules": "modules"
+          },
+          "print": {
+            "title": "Taille imprimée à l’échelle",
+            "intro": "Votre symbole à l’échelle avec trois tailles de module, chacun entouré de la zone de silence de quatre modules exigée par la norme.",
+            "aria": "Trois codes QR à l’échelle",
+            "module": "module de {m} mm",
+            "span": "Modules de large",
+            "perCm": "Module pour un code de 1 cm",
+            "perCmValue": "{n} mm"
+          },
+          "bytes": {
+            "title": "Ce que sont les octets encodés",
+            "intro": "Chaque octet du texte exact encodé, y compris la syntaxe comme \"WIFI:\" ou \"BEGIN:VCARD\". Les caractères non ASCII prennent 2 à 4 octets.",
+            "aria": "Anneau des types d’octets",
+            "bytes": "octets",
+            "letters": "Lettres",
+            "digits": "Chiffres",
+            "punctuation": "Ponctuation",
+            "spaces": "Espaces / retours",
+            "multibyte": "Octets non ASCII",
+            "chars": "Caractères",
+            "utf8": "Taille UTF-8",
+            "syntax": "Préfixe de format",
+            "none": "aucun",
+            "extra": "Octets en plus (non ASCII)",
+            "ascii": "Part ASCII"
+          }
         }
       },
       "shareExport": {
@@ -21497,6 +21624,24 @@
         "inputSectionTitle": "Entrée",
         "summarySentence": "Le code QR encode : {payload}",
         "resultSectionTitle": "Résultat"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "url": "Lien de site",
+        "wifi": "Réseau Wi-Fi (WPA)",
+        "contact": "Carte de visite (vCard)",
+        "email": "E-mail avec objet",
+        "long": "Long paragraphe",
+        "detail": "v{v} · {size}×{size} · {bytes} o"
+      },
+      "result": {
+        "capacity": "Espace utilisé à cette version",
+        "version": "Version",
+        "grid": "Grille",
+        "level": "Correction d’erreurs",
+        "mask": "Masque",
+        "codewords": "Mots données + CE",
+        "dark": "Modules foncés"
       }
     },
     "barcode-generator": {
