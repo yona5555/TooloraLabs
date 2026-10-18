@@ -23345,6 +23345,114 @@
           "note": "Der grundlegende Aufsatz, der die LZ77-Komprimierungstechnik beschreibt, deren Nachfolger — verfeinert und mit der Huffman-Kodierung im DEFLATE-Algorithmus kombiniert — fast fünf Jahrzehnte später noch immer die in das ZIP-Format eingebaute Komprimierungsmethode sind, die dieses Tool heute liest und schreibt.",
           "url": "https://doi.org/10.1109/tit.1977.1055714",
           "readOriginal": "Originalartikel lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Füge oben Dateien hinzu (oder wähle ein Beispiel), um diesen Indikator zu sehen.",
+          "explorer": {
+            "title": "Original gegen komprimiert, Datei für Datei",
+            "intro": "Grau ist die Originalgröße, farbig die komprimierte Größe. Klick ein Paar oder zieh den Regler, um den Eintrag dieser Datei im Archiv zu lesen.",
+            "aria": "Balkenpaare je Datei, auswählbar",
+            "slider": "Datei",
+            "file": "Datei",
+            "method": "Methode",
+            "stored": "gespeichert",
+            "sizes": "Original → komprimiert",
+            "saved": "Ersparnis"
+          },
+          "layout": {
+            "title": "In den Bytes des Archivs",
+            "intro": "Jedes Byte des ZIP: komprimierte Daten, der lokale Kopf vor jeder Datei, das zentrale Verzeichnis am Ende und der Endeintrag.",
+            "aria": "Gestapelter Balken der Archivbytes",
+            "axis": "Archiv: {n} Bytes",
+            "data": "Komprimierte Daten",
+            "local": "Lokale Köpfe",
+            "central": "Zentralverzeichnis",
+            "end": "Endeintrag",
+            "entries": "Einträge",
+            "perFile": "Kopfbytes pro Datei",
+            "name": "Name",
+            "headers": "Alle Kopfbytes",
+            "sum": "Summe der Teile",
+            "overhead": "Kopf-Overhead"
+          },
+          "entropy": {
+            "title": "Entropie sagt die Kompression voraus",
+            "intro": "Jede Datei nach ihrer Byte-Entropie (0–8 Bit pro Byte) und dem Anteil, der nach der Kompression bleibt. Die gestrichelte Linie ist Entropie ÷ 8, die Grenze für einen Coder ohne Gedächtnis für Wiederholungen.",
+            "aria": "Dateien nach Entropie und Restanteil",
+            "axis": "Entropie, Bit pro Byte",
+            "bits": "Bit/B",
+            "limit": "Grenze der besten Datei",
+            "best": "Am besten komprimiert"
+          },
+          "savings": {
+            "title": "Gesparter Platz",
+            "intro": "Wie viel kleiner das ganze Archiv als die Dateien ist, Köpfe eingeschlossen. Mit bereits komprimierten Dateien kann es etwas größer werden.",
+            "aria": "Anzeige des gesparten Platzes",
+            "original": "Dateien",
+            "archive": "Archiv",
+            "savedBytes": "Gesparte Bytes",
+            "ratio": "Kompressionsverhältnis",
+            "saved": "Ersparnis"
+          },
+          "kinds": {
+            "title": "Welche Dateiarten schrumpfen",
+            "intro": "Außenring: Originalbytes nach Dateiart. Innenring: dieselben nach der Kompression. Text und Daten schrumpfen; bereits komprimierte Medien kaum.",
+            "aria": "Ring der Bytes nach Dateiart",
+            "text": "Text",
+            "data": "Datentabellen",
+            "image": "Bilder / binär",
+            "archive": "Archive / Medien",
+            "other": "Andere",
+            "largest": "Größte Art",
+            "kindsUsed": "Vorhandene Arten"
+          },
+          "ranking": {
+            "title": "Woher die Ersparnis kommt",
+            "intro": "Dateien nach den Bytes sortiert, die die Kompression jeweils entfernt hat.",
+            "aria": "Rangbalken der gesparten Bytes",
+            "top": "Größte Ersparnis",
+            "topShare": "Anteil an der Gesamtersparnis",
+            "filesSaved": "In Dateien gespart",
+            "headers": "Für Köpfe verbraucht",
+            "net": "Nettoersparnis"
+          },
+          "flow": {
+            "title": "Wie die Einträge angeordnet sind",
+            "intro": "Die Reihenfolge der Einträge in diesem Archiv laut ZIP-Spezifikation: lokaler Kopf und Daten jeder Datei, dann ein Zentralverzeichnis-Eintrag pro Datei, dann der Endeintrag, der auf das Verzeichnis zeigt.",
+            "aria": "Fluss der ZIP-Einträge",
+            "local": "Lokaler Kopf: {name}",
+            "data": "Ihre komprimierten Daten",
+            "others": "{n} weitere Dateien",
+            "central": "Zentralverzeichnis ({n})",
+            "end": "Endeintrag",
+            "localFormula": "Lokaler Kopf",
+            "centralFormula": "Zentraleintrag",
+            "endSize": "Endeintrag",
+            "signature": "Signaturen",
+            "total": "Archivgröße"
+          },
+          "heat": {
+            "title": "Wie sich die Bytes verteilen",
+            "intro": "Für jede Datei ihre Bytes über die 256 möglichen Werte in 16 Bändern (dunkler = mehr Bytes). Text drängt sich in druckbares ASCII; zufällige Daten sind flach.",
+            "aria": "Wärmestreifen der Bytewerte",
+            "ascii": "{p} % in ASCII 32–127",
+            "bands": "Bänder",
+            "bandsValue": "16 × 16 Bytewerte",
+            "busiest": "Vollstes Band"
+          },
+          "limit": {
+            "title": "Gespeichert, komprimiert und Entropiegrenze",
+            "intro": "Deine Daten unverändert, wie DEFLATE sie schrieb, und an der Entropiegrenze 0. Ordnung (Größe × Entropie ÷ 8). DEFLATE kann sie bei Text unterbieten, weil es auch Wiederholungen ersetzt.",
+            "aria": "Drei Balken: gespeichert, DEFLATE, Grenze",
+            "stored": "Gespeichert",
+            "deflate": "DEFLATE",
+            "entropy": "Entropiegrenze",
+            "vsLimit": "DEFLATE gegen Grenze",
+            "below": "unter der Grenze (Wiederholungen genutzt)",
+            "above": "{p} darüber",
+            "gap": "Abstand"
+          }
         }
       },
       "shareExport": {
@@ -23379,6 +23487,20 @@
         "codeLabel": "Quellcode",
         "compressedLabel": "Bereits komprimiert (JPG, MP4, ZIP)",
         "note": "Bereits komprimierte Formate profitieren kaum oder gar nicht vom erneuten Zippen — die Daten enthalten keine sich wiederholenden Muster mehr, die entfernt werden könnten."
+      },
+      "examples": {
+        "title": "Schnellbeispiele (Beispieldateien aus deinem Browser)",
+        "mixed": "Text + Tabelle + fotoähnliche Bytes",
+        "text": "Nur Fließtext",
+        "table": "Nur CSV-Tabelle",
+        "random": "Bereits komprimierte Bytes",
+        "extract": "Beispiel-ZIP öffnen"
+      },
+      "result": {
+        "summary": "{files} Dateien · {saved} gespart",
+        "stored": "gespeichert",
+        "entropy": "Entropie {e} Bit/Byte",
+        "heat": "Bytewerte 0–255 in 16 Bändern; dunkler = mehr Bytes"
       }
     },
     "file-size-converter": {

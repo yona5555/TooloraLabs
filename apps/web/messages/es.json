@@ -23345,6 +23345,114 @@
           "note": "El artículo fundacional que describe la técnica de compresión LZ77, cuyos descendientes —refinados y combinados con la codificación de Huffman en el algoritmo DEFLATE— siguen siendo, casi cinco décadas después, el método de compresión integrado en el formato ZIP que esta herramienta lee y escribe hoy.",
           "url": "https://doi.org/10.1109/tit.1977.1055714",
           "readOriginal": "Leer el artículo original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Añade archivos arriba (o elige un ejemplo) para ver este indicador.",
+          "explorer": {
+            "title": "Original frente a comprimido, archivo a archivo",
+            "intro": "Gris es el tamaño original y color el comprimido. Haz clic en un par o arrastra el control para leer el registro de ese archivo.",
+            "aria": "Barras emparejadas por archivo",
+            "slider": "Archivo",
+            "file": "Archivo",
+            "method": "Método",
+            "stored": "almacenado",
+            "sizes": "Original → comprimido",
+            "saved": "Ahorro"
+          },
+          "layout": {
+            "title": "Dentro de los bytes del archivo ZIP",
+            "intro": "Cada byte del ZIP: datos comprimidos, la cabecera local antes de cada archivo, el directorio central al final y el registro de fin de directorio.",
+            "aria": "Barra apilada de bytes",
+            "axis": "Archivo ZIP: {n} bytes",
+            "data": "Datos comprimidos",
+            "local": "Cabeceras locales",
+            "central": "Directorio central",
+            "end": "Registro final",
+            "entries": "Entradas",
+            "perFile": "Bytes de cabecera por archivo",
+            "name": "nombre",
+            "headers": "Bytes de cabeceras",
+            "sum": "Suma de partes",
+            "overhead": "Sobrecarga de cabeceras"
+          },
+          "entropy": {
+            "title": "La entropía predice la compresión",
+            "intro": "Cada archivo según su entropía (0–8 bits por byte) y la parte de su tamaño que queda tras comprimir. La línea discontinua es entropía ÷ 8, el límite para un codificador sin memoria de repeticiones.",
+            "aria": "Archivos por entropía y parte restante",
+            "axis": "Entropía, bits por byte",
+            "bits": "bits/B",
+            "limit": "Límite del mejor archivo",
+            "best": "Mejor comprimido"
+          },
+          "savings": {
+            "title": "Espacio ahorrado",
+            "intro": "Cuánto más pequeño es el archivo ZIP que los archivos, con cabeceras incluidas. Con archivos ya comprimidos puede salir algo mayor.",
+            "aria": "Indicador de espacio ahorrado",
+            "original": "Archivos",
+            "archive": "ZIP",
+            "savedBytes": "Bytes ahorrados",
+            "ratio": "Relación de compresión",
+            "saved": "Ahorro"
+          },
+          "kinds": {
+            "title": "Qué tipos de archivo se reducen",
+            "intro": "Anillo exterior: bytes originales por tipo. Interior: los mismos tras comprimir. Texto y datos se reducen; los medios ya comprimidos casi no cambian.",
+            "aria": "Anillo de bytes por tipo",
+            "text": "Texto",
+            "data": "Tablas de datos",
+            "image": "Imágenes / binario",
+            "archive": "Archivos / medios",
+            "other": "Otros",
+            "largest": "Tipo mayor",
+            "kindsUsed": "Tipos presentes"
+          },
+          "ranking": {
+            "title": "De dónde sale el ahorro",
+            "intro": "Archivos ordenados por los bytes que la compresión les quitó.",
+            "aria": "Barras ordenadas de bytes ahorrados",
+            "top": "Mayor ahorro",
+            "topShare": "Parte del ahorro total",
+            "filesSaved": "Ahorrado en archivos",
+            "headers": "Gastado en cabeceras",
+            "net": "Ahorro neto"
+          },
+          "flow": {
+            "title": "Cómo se ordenan los registros",
+            "intro": "El orden de registros en este ZIP según la especificación: cabecera local y datos de cada archivo, luego un registro de directorio central por archivo y el registro final que apunta al directorio.",
+            "aria": "Flujo de registros ZIP",
+            "local": "Cabecera local: {name}",
+            "data": "Sus datos comprimidos",
+            "others": "{n} archivos más",
+            "central": "Directorio central ({n})",
+            "end": "Registro final",
+            "localFormula": "Cabecera local",
+            "centralFormula": "Registro central",
+            "endSize": "Registro final",
+            "signature": "Firmas",
+            "total": "Tamaño del ZIP"
+          },
+          "heat": {
+            "title": "Cómo se reparten los bytes",
+            "intro": "Para cada archivo, sus bytes en los 256 valores posibles en 16 bandas (más oscuro = más bytes). El texto se concentra en las bandas ASCII imprimibles; los datos aleatorios quedan planos.",
+            "aria": "Franja térmica de valores de byte",
+            "ascii": "{p}% en ASCII 32–127",
+            "bands": "Bandas",
+            "bandsValue": "16 × 16 valores",
+            "busiest": "Banda más llena"
+          },
+          "limit": {
+            "title": "Almacenado, comprimido y límite de entropía",
+            "intro": "Tus datos tal cual, como los escribió DEFLATE y en el límite de entropía de orden 0 (tamaño × entropía ÷ 8). DEFLATE puede superarlo en texto porque también sustituye cadenas repetidas.",
+            "aria": "Tres barras: almacenado, DEFLATE, límite",
+            "stored": "Almacenado",
+            "deflate": "DEFLATE",
+            "entropy": "Límite de entropía",
+            "vsLimit": "DEFLATE frente al límite",
+            "below": "por debajo (aprovecha repeticiones)",
+            "above": "{p} por encima",
+            "gap": "Diferencia"
+          }
         }
       },
       "shareExport": {
@@ -23379,6 +23487,20 @@
         "codeLabel": "Código fuente",
         "compressedLabel": "Ya comprimido (JPG, MP4, ZIP)",
         "note": "Los formatos ya comprimidos ganan poco o nada al volver a comprimirlos: los datos ya no tienen patrones repetidos que eliminar."
+      },
+      "examples": {
+        "title": "Ejemplos rápidos (archivos de muestra creados en tu navegador)",
+        "mixed": "Texto + tabla + bytes tipo foto",
+        "text": "Solo prosa",
+        "table": "Solo tabla CSV",
+        "random": "Bytes ya comprimidos",
+        "extract": "Abrir un ZIP de muestra"
+      },
+      "result": {
+        "summary": "{files} archivos · {saved} ahorrado",
+        "stored": "almacenado",
+        "entropy": "Entropía {e} bits/byte",
+        "heat": "Valores 0–255 en 16 bandas; más oscuro = más bytes"
       }
     },
     "file-size-converter": {

@@ -23345,6 +23345,114 @@
           "note": "L'article fondateur décrivant la technique de compression LZ77, dont les descendants — raffinés et combinés au codage de Huffman dans l'algorithme DEFLATE — restent aujourd'hui, près de cinq décennies plus tard, la méthode de compression intégrée au format ZIP que cet outil lit et écrit.",
           "url": "https://doi.org/10.1109/tit.1977.1055714",
           "readOriginal": "Lire l'article original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Ajoutez des fichiers ci-dessus (ou choisissez un exemple) pour voir cet indicateur.",
+          "explorer": {
+            "title": "Original contre compressé, fichier par fichier",
+            "intro": "En gris la taille d’origine, en couleur la taille compressée. Cliquez sur une paire ou faites glisser le curseur pour lire l’enregistrement de ce fichier.",
+            "aria": "Barres appariées par fichier",
+            "slider": "Fichier",
+            "file": "Fichier",
+            "method": "Méthode",
+            "stored": "stocké",
+            "sizes": "Original → compressé",
+            "saved": "Gain"
+          },
+          "layout": {
+            "title": "Dans les octets de l’archive",
+            "intro": "Chaque octet du ZIP : données compressées, l’en-tête local avant chaque fichier, le répertoire central à la fin et l’enregistrement de fin.",
+            "aria": "Barre empilée des octets",
+            "axis": "Archive : {n} octets",
+            "data": "Données compressées",
+            "local": "En-têtes locaux",
+            "central": "Répertoire central",
+            "end": "Enregistrement de fin",
+            "entries": "Entrées",
+            "perFile": "Octets d’en-tête par fichier",
+            "name": "nom",
+            "headers": "Octets d’en-têtes",
+            "sum": "Somme des parties",
+            "overhead": "Surcoût des en-têtes"
+          },
+          "entropy": {
+            "title": "L’entropie prédit la compression",
+            "intro": "Chaque fichier selon son entropie (0–8 bits par octet) et la part de taille restante après compression. La ligne pointillée est entropie ÷ 8, la limite d’un codeur sans mémoire des répétitions.",
+            "aria": "Fichiers selon entropie et part restante",
+            "axis": "Entropie, bits par octet",
+            "bits": "bits/o",
+            "limit": "Limite du meilleur fichier",
+            "best": "Mieux compressé"
+          },
+          "savings": {
+            "title": "Espace gagné",
+            "intro": "De combien l’archive entière est plus petite que les fichiers, en-têtes compris. Des fichiers déjà compressés peuvent donner une archive un peu plus grande.",
+            "aria": "Jauge d’espace gagné",
+            "original": "Fichiers",
+            "archive": "Archive",
+            "savedBytes": "Octets gagnés",
+            "ratio": "Taux de compression",
+            "saved": "Gain"
+          },
+          "kinds": {
+            "title": "Quels types de fichiers rétrécissent",
+            "intro": "Anneau extérieur : octets d’origine par type. Intérieur : les mêmes après compression. Texte et données rétrécissent ; les médias déjà compressés bougent à peine.",
+            "aria": "Anneau des octets par type",
+            "text": "Texte",
+            "data": "Tableaux de données",
+            "image": "Images / binaire",
+            "archive": "Archives / médias",
+            "other": "Autres",
+            "largest": "Type le plus gros",
+            "kindsUsed": "Types présents"
+          },
+          "ranking": {
+            "title": "D’où vient le gain",
+            "intro": "Les fichiers classés selon les octets que la compression leur a retirés.",
+            "aria": "Barres classées des octets gagnés",
+            "top": "Plus gros gain",
+            "topShare": "Part du gain total",
+            "filesSaved": "Gagné dans les fichiers",
+            "headers": "Dépensé en en-têtes",
+            "net": "Gain net"
+          },
+          "flow": {
+            "title": "L’ordre des enregistrements",
+            "intro": "L’ordre des enregistrements de cette archive selon la spécification ZIP : en-tête local et données de chaque fichier, puis un enregistrement de répertoire central par fichier, puis l’enregistrement de fin qui pointe vers le répertoire.",
+            "aria": "Flux des enregistrements ZIP",
+            "local": "En-tête local : {name}",
+            "data": "Ses données compressées",
+            "others": "{n} autres fichiers",
+            "central": "Répertoire central ({n})",
+            "end": "Enregistrement de fin",
+            "localFormula": "En-tête local",
+            "centralFormula": "Enregistrement central",
+            "endSize": "Enregistrement de fin",
+            "signature": "Signatures",
+            "total": "Taille de l’archive"
+          },
+          "heat": {
+            "title": "La répartition des octets",
+            "intro": "Pour chaque fichier, ses octets sur les 256 valeurs possibles en 16 bandes (plus foncé = plus d’octets). Le texte se concentre dans l’ASCII imprimable ; les données aléatoires sont plates.",
+            "aria": "Bande thermique des valeurs d’octets",
+            "ascii": "{p} % en ASCII 32–127",
+            "bands": "Bandes",
+            "bandsValue": "16 × 16 valeurs",
+            "busiest": "Bande la plus remplie"
+          },
+          "limit": {
+            "title": "Stocké, compressé et limite d’entropie",
+            "intro": "Vos données telles quelles, telles que DEFLATE les a écrites, et à la limite d’entropie d’ordre 0 (taille × entropie ÷ 8). DEFLATE peut la battre sur du texte car il remplace aussi les chaînes répétées.",
+            "aria": "Trois barres : stocké, DEFLATE, limite",
+            "stored": "Stocké",
+            "deflate": "DEFLATE",
+            "entropy": "Limite d’entropie",
+            "vsLimit": "DEFLATE face à la limite",
+            "below": "sous la limite (répétitions exploitées)",
+            "above": "{p} au-dessus",
+            "gap": "Écart"
+          }
         }
       },
       "shareExport": {
@@ -23379,6 +23487,20 @@
         "codeLabel": "Code source",
         "compressedLabel": "Déjà compressé (JPG, MP4, ZIP)",
         "note": "Les formats déjà compressés ne gagnent que peu ou rien à être re-zippés — les données n'ont plus de motifs répétitifs à supprimer."
+      },
+      "examples": {
+        "title": "Exemples rapides (fichiers d’exemple créés dans votre navigateur)",
+        "mixed": "Texte + tableau + octets type photo",
+        "text": "Prose seule",
+        "table": "Tableau CSV seul",
+        "random": "Octets déjà compressés",
+        "extract": "Ouvrir un ZIP d’exemple"
+      },
+      "result": {
+        "summary": "{files} fichiers · {saved} gagnés",
+        "stored": "stocké",
+        "entropy": "Entropie {e} bits/octet",
+        "heat": "Valeurs 0–255 en 16 bandes ; plus foncé = plus d’octets"
       }
     },
     "file-size-converter": {

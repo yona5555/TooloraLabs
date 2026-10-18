@@ -23345,6 +23345,114 @@
           "note": "The foundational paper describing the LZ77 compression technique, whose descendants — refined and combined with Huffman coding into the DEFLATE algorithm — remain the compression method built into the ZIP format this tool reads and writes today, nearly five decades later.",
           "url": "https://doi.org/10.1109/tit.1977.1055714",
           "readOriginal": "Read the Original Article"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Add files above (or pick a quick example) to see this indicator.",
+          "explorer": {
+            "title": "Original Against Compressed, File by File",
+            "intro": "Grey is each file's original size, colour its compressed size. Click a pair or drag the slider to read that entry's record from the archive.",
+            "aria": "Paired bars per file, selectable",
+            "slider": "File",
+            "file": "File",
+            "method": "Method",
+            "stored": "stored",
+            "sizes": "Original → compressed",
+            "saved": "Saved"
+          },
+          "layout": {
+            "title": "Inside the Archive's Bytes",
+            "intro": "Every byte of the ZIP: compressed file data, the local header written before each file, the central directory at the end, and the end-of-directory record.",
+            "aria": "Stacked bar of archive bytes",
+            "axis": "Archive: {n} bytes",
+            "data": "Compressed data",
+            "local": "Local headers",
+            "central": "Central directory",
+            "end": "End record",
+            "entries": "Entries",
+            "perFile": "Header bytes per file",
+            "name": "name",
+            "headers": "All header bytes",
+            "sum": "Sum of parts",
+            "overhead": "Header overhead"
+          },
+          "entropy": {
+            "title": "Entropy Predicts Compression",
+            "intro": "Each file placed by its byte entropy (0–8 bits per byte) and the share of its size left after compression. The dashed line is entropy ÷ 8, the limit for a coder with no memory of repeats.",
+            "aria": "Files by entropy and compressed share",
+            "axis": "Entropy, bits per byte",
+            "bits": "bits/B",
+            "limit": "Limit for the best file",
+            "best": "Best compressed"
+          },
+          "savings": {
+            "title": "Space Saved",
+            "intro": "How much smaller the whole archive is than the files, headers included. Archives of already-compressed files can come out slightly larger.",
+            "aria": "Gauge of space saved",
+            "original": "Files",
+            "archive": "Archive",
+            "savedBytes": "Bytes saved",
+            "ratio": "Compression ratio",
+            "saved": "Saved"
+          },
+          "kinds": {
+            "title": "Which Kinds of Files Shrink",
+            "intro": "Outer ring: original bytes by kind of file. Inner ring: the same after compression. Text and data shrink; already-compressed media barely moves.",
+            "aria": "Donut of bytes by file kind",
+            "text": "Text",
+            "data": "Data tables",
+            "image": "Images / binary",
+            "archive": "Archives / media",
+            "other": "Other",
+            "largest": "Largest kind",
+            "kindsUsed": "Kinds present"
+          },
+          "ranking": {
+            "title": "Where the Saving Comes From",
+            "intro": "Files ranked by the bytes compression removed from each.",
+            "aria": "Ranked bars of bytes saved",
+            "top": "Biggest saving",
+            "topShare": "Share of all savings",
+            "filesSaved": "Saved inside files",
+            "headers": "Spent on headers",
+            "net": "Net saving"
+          },
+          "flow": {
+            "title": "How the Records Are Laid Out",
+            "intro": "The order of records in this archive as the ZIP specification defines it: each file's local header and data, then one central-directory record per file, then the end record pointing back to the directory.",
+            "aria": "Flow of ZIP records",
+            "local": "Local header: {name}",
+            "data": "Its compressed data",
+            "others": "{n} more files",
+            "central": "Central directory ({n})",
+            "end": "End record",
+            "localFormula": "Local header",
+            "centralFormula": "Central record",
+            "endSize": "End record",
+            "signature": "Signatures",
+            "total": "Archive size"
+          },
+          "heat": {
+            "title": "How Each File's Bytes Spread",
+            "intro": "For each file, its bytes across the 256 possible values in 16 bands (darker = more bytes). Text crowds into the printable ASCII bands; random-looking data is flat.",
+            "aria": "Heat strip of byte values per file",
+            "ascii": "{p}% in ASCII 32–127",
+            "bands": "Bands",
+            "bandsValue": "16 × 16 byte values",
+            "busiest": "Busiest band"
+          },
+          "limit": {
+            "title": "Stored, Compressed and the Entropy Limit",
+            "intro": "Your file data stored as is, as DEFLATE wrote it, and at the order-0 entropy limit (size × entropy ÷ 8). DEFLATE can beat that limit on text because it also replaces repeated strings.",
+            "aria": "Three bars: stored, DEFLATE, entropy limit",
+            "stored": "Stored",
+            "deflate": "DEFLATE",
+            "entropy": "Entropy limit",
+            "vsLimit": "DEFLATE vs limit",
+            "below": "below the limit (repeats exploited)",
+            "above": "{p} above",
+            "gap": "Gap"
+          }
         }
       },
       "shareExport": {
@@ -23379,6 +23487,20 @@
         "codeLabel": "Source code",
         "compressedLabel": "Already-compressed (JPG, MP4, ZIP)",
         "note": "Already-compressed formats gain little to nothing from re-zipping — the data has no more repeating patterns left to remove."
+      },
+      "examples": {
+        "title": "Quick examples (sample files made in your browser)",
+        "mixed": "Text + table + photo-like bytes",
+        "text": "Prose only",
+        "table": "CSV table only",
+        "random": "Already-compressed bytes",
+        "extract": "Open a sample ZIP"
+      },
+      "result": {
+        "summary": "{files} files · {saved} saved",
+        "stored": "stored",
+        "entropy": "Entropy {e} bits/byte",
+        "heat": "Byte values 0–255 in 16 bands; darker = more bytes"
       }
     },
     "file-size-converter": {

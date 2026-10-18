@@ -4,6 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import ZipRatioExplorer from "./ZipRatioExplorer";
+import ZipArchiveLayout from "./ZipArchiveLayout";
+import ZipEntropyScatter from "./ZipEntropyScatter";
+import ZipSavingsGauge from "./ZipSavingsGauge";
+import ZipKindDonut from "./ZipKindDonut";
+import ZipSavedRanking from "./ZipSavedRanking";
+import ZipRecordFlow from "./ZipRecordFlow";
+import ZipByteHeat from "./ZipByteHeat";
+import ZipLimitTrio from "./ZipLimitTrio";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -18,7 +27,14 @@ export default async function ZipCompressorEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <ZipRatioExplorer />
+        <ZipEntropyScatter />
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <ZipArchiveLayout />
+          <ZipRecordFlow />
+        </div>
+        <ZipByteHeat />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -47,6 +63,7 @@ export default async function ZipCompressorEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <ZipSavingsGauge />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -58,11 +75,12 @@ export default async function ZipCompressorEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <ZipKindDonut />
+          <ZipSavedRanking />
+          <ZipLimitTrio />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
