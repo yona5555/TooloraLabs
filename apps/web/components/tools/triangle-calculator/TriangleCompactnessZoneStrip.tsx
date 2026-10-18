@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { EXAMPLE, compactnessIndex, compactnessMin, compactnessMax, round } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type ZoneKey = "compact" | "balanced" | "elongated";
 const ZONES: { key: ZoneKey; from: number; to: number; colorClass: string }[] = [
@@ -44,7 +45,7 @@ export default function TriangleCompactnessZoneStrip() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0">
           <svg viewBox={`-10 0 ${W + 20} ${H}`} role="img" aria-label={`${t("title")}: ${round(compactnessIndex)} — ${tZones(zone)}`} className="mx-auto block w-full max-w-[280px]">
             {ZONES.map((z) => {
@@ -75,7 +76,7 @@ export default function TriangleCompactnessZoneStrip() {
             { label: tw("index"), value: round(compactnessIndex).toString(), emphasize: true, note: tw("indexNote") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

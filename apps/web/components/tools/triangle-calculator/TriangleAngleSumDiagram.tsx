@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /**
  * The classic "tear off the three corners and line them up" proof sketch
@@ -16,7 +17,7 @@ export default function TriangleAngleSumDiagram() {
   return (
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg viewBox="0 0 260 190" role="img" aria-label={d("ariaLabel")} className="mx-auto block w-full max-w-sm text-current">
             <polygon points="30,150 230,150 90,30" fill="none" stroke="currentColor" strokeOpacity={0.5} strokeWidth={1.5} />
@@ -43,7 +44,7 @@ export default function TriangleAngleSumDiagram() {
             { label: d("worked.sum"), value: "180°", emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
       <p className="mt-3 text-center text-sm opacity-80">{d("caption")}</p>
     </SectionCard>
   );

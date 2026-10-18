@@ -15,6 +15,8 @@ type RatioGaugeProps = {
   captionColorClass?: string;
   ticks: number[];
   tickFormatter?: (tick: number) => string;
+  /** Fill a narrow card's width (up to 300px) instead of the fixed 224px, for a gauge stacked alone in a card. */
+  wide?: boolean;
 };
 
 const SIZE_W = 240;
@@ -46,7 +48,7 @@ const HALF_CIRCUMFERENCE = Math.PI * R;
 // fixed precision collapses both sides to the same string.
 const round = (n: number) => Math.round(n * 10000) / 10000;
 
-export default function RatioGauge({ value, domainMin, domainMax, zones, valueLabel, caption, captionColorClass, ticks, tickFormatter }: RatioGaugeProps) {
+export default function RatioGauge({ value, domainMin, domainMax, zones, valueLabel, caption, captionColorClass, ticks, tickFormatter, wide }: RatioGaugeProps) {
   const span = domainMax - domainMin;
   const clampedValue = Math.min(Math.max(value, domainMin), domainMax);
 
@@ -80,8 +82,8 @@ export default function RatioGauge({ value, domainMin, domainMax, zones, valueLa
   };
 
   return (
-    <div dir="ltr" data-preview="visual" className="flex flex-col items-center">
-      <svg viewBox={`0 0 ${SIZE_W} ${SIZE_H}`} role="img" aria-label={`${valueLabel}${caption ? ` (${caption})` : ""}`} className="w-56">
+    <div dir="ltr" data-preview="visual" className={`flex flex-col items-center ${wide ? "w-full" : ""}`}>
+      <svg viewBox={`0 0 ${SIZE_W} ${SIZE_H}`} role="img" aria-label={`${valueLabel}${caption ? ` (${caption})` : ""}`} className={wide ? "w-full max-w-[300px]" : "w-56"}>
         <circle cx={CX} cy={CY} r={R} fill="none" strokeWidth={STROKE} strokeDasharray={`${HALF_CIRCUMFERENCE} ${FULL_CIRCUMFERENCE}`} transform={`rotate(180 ${CX} ${CY})`} className="stroke-zinc-100 dark:stroke-zinc-800" />
         {arcs.map((arc) => (
           <circle

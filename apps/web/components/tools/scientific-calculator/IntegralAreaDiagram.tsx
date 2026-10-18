@@ -7,6 +7,7 @@ import { useIsDarkMode } from "@/lib/use-dark-mode";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useScientificAngle } from "./ScientificAngleContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type Vector2 = [number, number];
 const LIGHT = { rose: "#e11d48" };
@@ -37,7 +38,7 @@ export default function IntegralAreaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
           <Mafs viewBox={{ x: [0, 360], y: [-0.2, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
             <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
@@ -53,7 +54,7 @@ export default function IntegralAreaDiagram() {
             { label: t("worked.area"), value: `${area}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

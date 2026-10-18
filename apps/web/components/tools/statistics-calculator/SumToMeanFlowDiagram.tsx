@@ -6,6 +6,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -26,7 +27,7 @@ export default function SumToMeanFlowDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-2 text-center">
           <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800/40">
             <p className="font-mono text-lg font-bold text-zinc-800 dark:text-zinc-100">{round2(sum)}</p>
@@ -44,7 +45,7 @@ export default function SumToMeanFlowDiagram() {
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.formula"), value: `${round2(sum)} ÷ ${count} = ${round2(mean)}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -6,6 +6,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, computeSurfaceAreaFor, round } from "./surfaceAreaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const COVERAGE = [8, 10, 12] as const;
 
@@ -21,7 +22,7 @@ export default function PaintCoverageFlowDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-col items-center gap-3">
           <div className="flex flex-wrap items-center justify-center gap-1.5">
             {COVERAGE.map((c) => (
@@ -53,7 +54,7 @@ export default function PaintCoverageFlowDiagram() {
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.formula"), value: `${round(area)} ÷ ${coverage} = ${cans}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

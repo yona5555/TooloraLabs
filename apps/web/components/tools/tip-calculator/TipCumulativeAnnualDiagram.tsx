@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduLineChart from "./EduLineChart";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Real weekly-dining projection: the tool's own per-visit tip amount, multiplied across a year — a running total over time, best read as a trend line. */
 const WEEKLY_TIP = 15.3;
@@ -20,12 +21,12 @@ export default async function TipCumulativeAnnualDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { weeklyTip: WEEKLY_TIP.toFixed(2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1">
           <EduLineChart points={points} ariaLabel={t("title")} lineColorClass="stroke-violet-500 dark:stroke-violet-400" dotColorClass="fill-violet-500 dark:fill-violet-400" />
         </div>
         <TipWorkedExampleNote title={tRoot("workedExampleTitle")} rows={points.map((p) => ({ label: p.label, value: p.formatted }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

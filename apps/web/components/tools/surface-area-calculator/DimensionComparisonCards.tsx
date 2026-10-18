@@ -5,6 +5,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, round, type SurfaceNumericDims } from "./surfaceAreaEducationMath";
 import type { Solid3DShape } from "@tooloralabs/tools";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type Dim = { labelKey: string; value: number } | null;
 
@@ -43,7 +44,7 @@ export default function DimensionComparisonCards() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="grid shrink-0 grid-cols-2 gap-2.5">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
             <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{a ? t(`labels.${a.labelKey}`) : t("labels.none")}</p>
@@ -62,7 +63,7 @@ export default function DimensionComparisonCards() {
               : { label: t("worked.note"), value: t("worked.onlyOneDimension"), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

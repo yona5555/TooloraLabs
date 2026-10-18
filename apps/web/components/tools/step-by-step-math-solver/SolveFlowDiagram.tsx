@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Decision-flow diagram: the real 4-station pipeline the hero and every other indicator share —
  * clicking a station is the ONE control that drives dims.selectedStep, so this is the indicator
@@ -40,7 +41,7 @@ export default function SolveFlowDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full overflow-x-auto lg:flex-1">
           <ol className="flex min-w-[460px] items-start justify-between gap-2">
             {stations.map((s, i) => {
@@ -70,7 +71,7 @@ export default function SolveFlowDiagram() {
           </ol>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t(`stations.${stations[step].key}`), value: stations[step].value, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

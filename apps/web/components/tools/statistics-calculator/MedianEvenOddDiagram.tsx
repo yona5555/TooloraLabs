@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 const MAX_SHOWN = 10;
@@ -29,7 +30,7 @@ export default function MedianEvenOddDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { count })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-1.5 font-mono text-sm">
           {sorted.map((v, i) => {
             const isMiddle = isOdd ? i === midIndex : i === midIndex || i === midIndex + 1;
@@ -47,7 +48,7 @@ export default function MedianEvenOddDiagram() {
             { label: t("worked.median"), value: `${round2(median)}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

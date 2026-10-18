@@ -5,6 +5,7 @@ import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, characteristicLength, areaAtLength, ALL_SHAPES, round } from "./areaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Type #1 (Labeled Bar Chart): every shape's area at the SAME live characteristic length, ranked visually — how much more area a circle or ellipse packs in than a triangle at an identical "size". */
 export default function ShapeAreaComparisonBarChart() {
@@ -28,7 +29,7 @@ export default function ShapeAreaComparisonBarChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
@@ -39,7 +40,7 @@ export default function ShapeAreaComparisonBarChart() {
             { label: t("worked.vsSquare"), value: `${round(topArea / squareArea)}×`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

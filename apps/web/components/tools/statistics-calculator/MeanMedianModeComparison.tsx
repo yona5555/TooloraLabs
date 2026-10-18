@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -25,7 +26,7 @@ export default function MeanMedianModeComparison() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="grid shrink-0 grid-cols-3 gap-2.5">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
             <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{t("meanLabel")}</p>
@@ -41,7 +42,7 @@ export default function MeanMedianModeComparison() {
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.allAgree"), value: mean === median && mode.length === 1 && mode[0] === mean ? t("worked.yes") : t("worked.no"), emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

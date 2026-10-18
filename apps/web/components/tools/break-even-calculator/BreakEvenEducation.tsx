@@ -15,6 +15,7 @@ import BreakEvenRevenueDonut from "./BreakEvenRevenueDonut";
 import BreakEvenPriceChangeImpactBar from "./BreakEvenPriceChangeImpactBar";
 import BreakEvenMonthlyPaceLineChart from "./BreakEvenMonthlyPaceLineChart";
 import BreakEvenFixedCostAdditionDiagram from "./BreakEvenFixedCostAdditionDiagram";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type ExampleRow = { scenario: string; result: string };
 type VariableItem = { name: string; description: string };
@@ -84,7 +85,7 @@ export default async function BreakEvenEducation() {
             "indicator + WORKED EXAMPLE table" pair is never left floating with no container or
             heading of its own, per §32. */}
         <SectionCard title={t("intro.marginBar.cardTitle")}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+          <GapFreeRow>
             <div className="shrink-0">
               <BreakEvenRevenueDonut
                 ariaLabel={t("intro.marginBar.title")}
@@ -102,7 +103,7 @@ export default async function BreakEvenEducation() {
                 { label: t("intro.marginBar.marginLabel"), value: "$30", emphasize: true, note: t("intro.marginBar.marginPercentNote", { percent: "60%" }) },
               ]}
             />
-          </div>
+          </GapFreeRow>
           <p className="mt-3 text-xs opacity-60">{t("intro.marginBar.caption")}</p>
         </SectionCard>
       </InfoSection>
@@ -125,7 +126,7 @@ export default async function BreakEvenEducation() {
             example from a different angle: that section shows the split as a proportion, this
             one shows where 60% sits on the thin/healthy/rich spectrum. */}
         <SectionCard title={t("variables.marginGauge.cardTitle")}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+          <GapFreeRow>
             <div className="shrink-0">
               <BreakEvenMarginRatioGauge
                 valueLabel="60%"
@@ -141,7 +142,7 @@ export default async function BreakEvenEducation() {
                 { label: t("intro.marginBar.marginLabel"), value: "$30", emphasize: true, note: t("intro.marginBar.marginPercentNote", { percent: "60%" }) },
               ]}
             />
-          </div>
+          </GapFreeRow>
         </SectionCard>
         <SectionCard title={t("variables.accumulationDiagram.cardTitle")}>
           <BreakEvenFixedCostAccumulationDiagram
@@ -181,7 +182,7 @@ export default async function BreakEvenEducation() {
               </tbody>
             </table>
           </div>
-          <div className="mt-4 flex flex-col items-center gap-6 lg:flex-row lg:justify-center">
+          <GapFreeRow className="mt-4 items-center lg:justify-center">
             <div className="w-full max-w-xs shrink-0">
               <BreakEvenTwoScenarioCompareBar
                 title={t("examples.scenarioCompareBar.title")}
@@ -205,12 +206,12 @@ export default async function BreakEvenEducation() {
                 },
               ]}
             />
-          </div>
+          </GapFreeRow>
         </SectionCard>
 
         <SectionCard title={t("examples.revenueDonut.title")}>
           <p className="text-sm opacity-80">{t("examples.revenueDonut.intro")}</p>
-          <div className="mt-4 flex flex-col items-center gap-6 lg:flex-row lg:justify-center">
+          <GapFreeRow className="mt-4 items-center lg:justify-center">
             <div className="shrink-0">
               <BreakEvenRevenueDonut
                 ariaLabel={t("examples.revenueDonut.centerLabel")}
@@ -231,7 +232,7 @@ export default async function BreakEvenEducation() {
                 { label: t("examples.revenueDonut.totalLabel"), value: "$25,000", emphasize: true },
               ]}
             />
-          </div>
+          </GapFreeRow>
         </SectionCard>
       </InfoSection>
 
@@ -250,7 +251,7 @@ export default async function BreakEvenEducation() {
             previously alone at full card width, scaling its bars and numbers up well past every
             other indicator's size on this page) with a real worked-example note beside it. */}
         <SectionCard title={t("applications.priceImpactBar.cardTitle")}>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+          <GapFreeRow>
             <div className="w-full max-w-xs shrink-0">
               <BreakEvenPriceChangeImpactBar
                 title={t("applications.priceImpactBar.title")}
@@ -272,7 +273,7 @@ export default async function BreakEvenEducation() {
                 },
               ]}
             />
-          </div>
+          </GapFreeRow>
           <p className="mt-3 text-xs opacity-60">{t("applications.priceImpactBar.caption")}</p>
         </SectionCard>
         <SectionCard title={t("applications.monthlyPaceChart.cardTitle")}>

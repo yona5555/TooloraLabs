@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, evalPoly, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const R = 26;
 const CIRC = 2 * Math.PI * R;
@@ -56,7 +57,7 @@ export default function RadialProgressGauges() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-col items-center gap-3">
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Gauge pct={(step + 1) / 4} label={t("progressLabel")} value={`${step + 1}/4`} color="#2563eb" />
@@ -76,7 +77,7 @@ export default function RadialProgressGauges() {
             { label: t("worked.remainder"), value: fmt(remainder), emphasize: true, note: remainder < 0.05 ? t("worked.nearRoot") : undefined },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

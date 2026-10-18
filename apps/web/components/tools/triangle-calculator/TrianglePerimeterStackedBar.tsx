@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { EXAMPLE, round } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const W = 300;
 const H = 48;
@@ -27,7 +28,7 @@ export default function TrianglePerimeterStackedBar() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0">
           <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto block w-full max-w-[300px]">
             {segments.map((s) => (
@@ -50,7 +51,7 @@ export default function TrianglePerimeterStackedBar() {
             { label: tw("total"), value: `${EXAMPLE.perimeter}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -17,7 +17,7 @@ export default function FractionSensitivityCard() {
   const maxV = Math.max(...points.map((p) => p.value));
   const minV = Math.min(...points.map((p) => p.value));
   const w = 320;
-  const h = 150;
+  const h = 180;
   const toX = (k: number) => 10 + ((k - 1) / 9) * (w - 20);
   const toY = (v: number) => h - 10 - ((v - minV) / (maxV - minV || 1)) * (h - 20);
   const path = points.map((p, i) => `${i === 0 ? "M" : "L"} ${toX(p.n)} ${toY(p.value)}`).join(" ");

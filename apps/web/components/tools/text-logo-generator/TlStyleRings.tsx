@@ -22,8 +22,8 @@ export default function TlStyleRings() {
   const { styles, activeStyle, setActiveStyle, active, pct, styleName } = useTlLive();
 
   return (
-    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-2 sm:w-[184px]">
-      <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="block max-w-full">
+    <div data-preview="visual" className="flex w-full flex-col items-center gap-2">
+      <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="block h-auto w-full max-w-[300px]">
         {styles.map((s, i) => {
           const r = C - STROKE / 2 - 2 - i * (STROKE + GAP);
           const len = 2 * Math.PI * r;

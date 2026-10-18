@@ -70,7 +70,7 @@ export default function RTResult() {
         </div>
       }
     >
-      <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-stretch lg:flex-1">
+      <div className="flex flex-col-reverse gap-4 lg:flex-1">
         <table className="min-w-0 flex-1 border-collapse text-sm">
           <tbody>
             {rows.map((r) => (

@@ -7,6 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, solveQuadraticRoots, fmt, snapDragValue } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const GRID = 14;
 const RANGE = 10;
@@ -53,7 +54,7 @@ export default function SensitivityHeatmap() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           {isQuadratic ? (
             <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[340px] overflow-hidden rounded-xl" onMouseUp={handleRelease} onTouchEnd={handleRelease}>
@@ -90,7 +91,7 @@ export default function SensitivityHeatmap() {
             { label: t("worked.zone"), value: isQuadratic ? t(`zones.${currentKind}`) : "—", emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

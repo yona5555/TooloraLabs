@@ -5,6 +5,7 @@ import { ScientificCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new ScientificCalculator();
 
@@ -36,12 +37,12 @@ export default function LogComparisonBarList() {
         <input type="range" min={1} max={200} step={1} value={x} onChange={(e) => setX(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
         <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`x = ${x}`}</p>
       </div>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={rows.map((r) => ({ label: r.label, value: `${r.value}` }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

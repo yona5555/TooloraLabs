@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Fixed 25% off, four real original prices — the tool's own price*discount% formula, directly, shown as vertical columns so the four price points read as a lineup. */
 const DISCOUNT_PERCENT = 25;
@@ -25,7 +26,7 @@ export default async function DiscountOriginalPriceScalingChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { percent: DISCOUNT_PERCENT })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={16} y1={HEIGHT - PAD_BOTTOM} x2={WIDTH - 16} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
@@ -49,7 +50,7 @@ export default async function DiscountOriginalPriceScalingChart() {
           </svg>
         </div>
         <DiscountWorkedExampleNote title={tRoot("workedExampleTitle")} rows={PRICES.map((price, i) => ({ label: `$${price}`, value: `$${savings[i].toFixed(2)}` }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -58,8 +58,8 @@ export default function CompositionRing() {
   const repeated = Math.max(0, tokens - stats.uniqueWords);
 
   return (
-    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-3 sm:w-[184px]">
-      <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
+    <div data-preview="visual" className="flex w-full items-center gap-5">
+      <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="shrink-0">
         <Ring r={OUTER_R} width={18} segs={COMPOSITION.map((c) => ({ value: comp[c.key], stroke: c.stroke }))} />
         <Ring
           r={INNER_R}
@@ -76,7 +76,7 @@ export default function CompositionRing() {
           {t("center")}
         </text>
       </svg>
-      <ul className="grid w-full grid-cols-2 gap-x-3 gap-y-1 text-[11px] sm:grid-cols-1">
+      <ul className="flex min-w-0 flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs">
         {COMPOSITION.map((c) => (
           <li key={c.key} className="flex items-center justify-between gap-2">
             <span className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300">

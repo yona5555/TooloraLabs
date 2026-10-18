@@ -7,6 +7,7 @@ import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Same annual distance & price, five real-world efficiency levels — the tool's own inverse relationship (cost = distance / efficiency * price). */
 const ANNUAL_DISTANCE = 12000;
@@ -58,7 +59,7 @@ export default function FuelEfficiencyComparisonChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { distance: ANNUAL_DISTANCE.toLocaleString("en-US"), price: money(PRICE, 2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={10} y1={HEIGHT - PAD_BOTTOM} x2={WIDTH - 10} y2={HEIGHT - PAD_BOTTOM} className="stroke-current opacity-20" strokeWidth={1} />
@@ -105,7 +106,7 @@ export default function FuelEfficiencyComparisonChart() {
             { label: t("bestCaseLabel", { mpg: best.x }), value: best.formatted },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

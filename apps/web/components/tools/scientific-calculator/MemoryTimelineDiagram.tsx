@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type Step = { op: "M+" | "M−" | "MC"; amount: number; result: number };
 const MAX_STEPS = 5;
@@ -23,7 +24,7 @@ export default function MemoryTimelineDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <div dir="ltr" className="mx-auto max-w-sm">
             <input type="range" min={1} max={20} step={1} value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("amountSliderLabel")} />
@@ -57,7 +58,7 @@ export default function MemoryTimelineDiagram() {
         </div>
 
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.currentMemory"), value: `${memory}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

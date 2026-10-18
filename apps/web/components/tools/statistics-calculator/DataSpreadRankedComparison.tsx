@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 const MAX_ROWS = 6;
@@ -32,7 +33,7 @@ export default function DataSpreadRankedComparison() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full space-y-2 lg:flex-1">
           {ranked.map((r, i) => (
             <div key={i} className="flex items-center gap-3">
@@ -46,7 +47,7 @@ export default function DataSpreadRankedComparison() {
           ))}
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.furthest"), value: `${round2(ranked[0].value)}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

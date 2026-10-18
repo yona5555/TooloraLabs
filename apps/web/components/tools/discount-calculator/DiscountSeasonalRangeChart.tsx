@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduDonutChart from "./EduDonutChart";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Typical documented retail seasonal discount ranges, applied to the same $120 item via the tool's own formula — shown as a donut of final prices rather than a bar list. */
 const PRICE = 120;
@@ -25,12 +26,12 @@ export default async function DiscountSeasonalRangeChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { price: PRICE.toFixed(2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduDonutChart segments={segments} ariaLabel={t("title")} />
         </div>
         <DiscountWorkedExampleNote title={tRoot("workedExampleTitle")} rows={segments.map((s) => ({ label: s.label, value: s.formatted }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

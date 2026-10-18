@@ -98,6 +98,7 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
         <RatioGauge
+          wide
           value={healthyPercent}
           domainMin={0}
           domainMax={100}

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Receipt } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import NeumorphicIconBadge from "@/components/tool-ui/NeumorphicIconBadge";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Real rounding example: unrounded tax computation vs the cent-rounded figure actually billed. */
 const SUBTOTAL = 1093.5;
@@ -17,7 +18,7 @@ export default async function InvoiceRoundingImpactDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { subtotal: SUBTOTAL.toFixed(2), percent: TAX_PERCENT })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="flex shrink-0 items-center gap-3">
           <NeumorphicIconBadge icon={Receipt} />
           <p className="max-w-[14rem] text-sm text-zinc-600 dark:text-zinc-300">{t("note")}</p>
@@ -39,7 +40,7 @@ export default async function InvoiceRoundingImpactDiagram() {
             </div>
           </dl>
         </div>
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

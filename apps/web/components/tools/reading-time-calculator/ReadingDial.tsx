@@ -25,8 +25,8 @@ export default function ReadingDial() {
   const longest = paragraphs.reduce((b, p) => (p.words > (b?.words ?? -1) ? p : b), paragraphs[0]);
 
   return (
-    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-3 sm:w-[192px]">
-      <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")}>
+    <div data-preview="visual" className="flex w-full items-center gap-5">
+      <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="shrink-0">
         <circle cx={C} cy={C} r={R + 14} className="fill-zinc-50 stroke-zinc-200 dark:fill-zinc-800/60 dark:stroke-zinc-700" />
         {Array.from({ length: ticks }, (_, i) => {
           const a = (i / ticks) * 2 * Math.PI - Math.PI / 2;
@@ -76,7 +76,7 @@ export default function ReadingDial() {
           {t("scale", { n: f(span) })}
         </text>
       </svg>
-      <ul className="w-full space-y-1 text-[11px]">
+      <ul className="flex min-w-0 flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs">
         {paragraphs.slice(0, LEGEND_ROWS).map((p, i) => (
           <li key={p.index} className="flex items-center justify-between gap-2">
             <span className={`flex items-center gap-1.5 ${p === longest ? "font-semibold text-zinc-800 dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-300"}`}>

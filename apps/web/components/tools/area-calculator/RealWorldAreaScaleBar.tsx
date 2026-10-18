@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, computeAreaFor, round } from "./areaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const SCALE: { key: string; areaM2: number }[] = [
   { key: "stamp", areaM2: 0.0006 },
@@ -36,7 +37,7 @@ export default function RealWorldAreaScaleBar() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
             {marks.map((m) => (
@@ -59,7 +60,7 @@ export default function RealWorldAreaScaleBar() {
             { label: t("worked.closest"), value: t(`items.${closest.key}`), note: `${closest.areaM2.toLocaleString("en-US")} m²` },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

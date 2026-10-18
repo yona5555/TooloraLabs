@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const MAX_ROWS = 10;
 
@@ -22,7 +23,7 @@ export default function ModeFrequencyTable() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <table className="w-full min-w-[240px] border-collapse text-sm">
             <thead>
@@ -42,7 +43,7 @@ export default function ModeFrequencyTable() {
           </table>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.highestFrequency"), value: `${maxFreq}`, emphasize: true, note: maxFreq <= 1 ? t("worked.noMode") : undefined }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

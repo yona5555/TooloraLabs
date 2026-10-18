@@ -8,6 +8,7 @@ import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Same trip's cost-per-distance figure (the tool's own output field), expressed per mile vs per km via the real 1 mi = 1.60934 km conversion — a direct side-by-side comparison, not a multi-row bar list, since there are only two real values. */
 const DISTANCE = 300;
@@ -32,7 +33,7 @@ export default function FuelCostPerMileVsKmChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { cost: money(TOTAL_COST), distance: DISTANCE })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         {/* §31 Type #11 (Side-by-Side Equivalence), upgraded execution:
             gradient cards + icon, not plain bordered boxes with a bare "="
             line-icon between them. Still stacks vertically below `sm:`
@@ -74,7 +75,7 @@ export default function FuelCostPerMileVsKmChart() {
             { label: t("per100kmLabel"), value: money(COST_PER_KM * 100) },
           ]}
         />
-      </div>
+      </GapFreeRow>
       <p className="mt-3 text-center text-xs opacity-60">1 mi = 1.60934 km</p>
     </SectionCard>
   );

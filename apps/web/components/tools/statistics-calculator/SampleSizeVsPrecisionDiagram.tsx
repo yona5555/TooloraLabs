@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -27,7 +28,7 @@ export default function SampleSizeVsPrecisionDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { n: count })}</p>
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
             <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
@@ -45,7 +46,7 @@ export default function SampleSizeVsPrecisionDiagram() {
             { label: t("worked.inflation"), value: `+${inflationPct}%`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -177,6 +177,7 @@ export default function DebtToIncomeResult({
           return (
             <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
               <RatioGauge
+                wide
                 value={gaugeValue}
                 domainMin={0}
                 domainMax={domainMax}

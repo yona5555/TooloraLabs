@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   buildDailyForecast,
@@ -26,6 +26,23 @@ import {
 
 /** The place being shown: a curated city, or the visitor's own position ("geo"). */
 export type WxPlace = { id: string; name: string; lat: number; lon: number; zone: string };
+
+/**
+ * Chart width in real pixels (the container's width), so SVG text sizes are true pixel sizes and
+ * axis labels stay ≥ 12px at any screen width instead of shrinking with a scaled viewBox.
+ */
+export function useChartWidth(initial: number, min = 300) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(initial);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setWidth(Math.max(min, Math.round(e.contentRect.width))));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [min]);
+  return [ref, width] as const;
+}
 
 /** Arabic is the site's only right-to-left locale; charts with a time axis mirror for it. */
 export function useIsRtl() {

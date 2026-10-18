@@ -29,8 +29,8 @@ export default function LiPageMockup() {
   const fits = visible === total;
 
   return (
-    <div data-preview="visual" className="flex shrink-0 flex-col items-center gap-2 sm:w-[184px]">
-      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
+    <div data-preview="visual" className="flex w-full flex-col items-center gap-2">
+      <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block h-auto w-full max-w-[300px]">
         <rect x={0.5} y={0.5} width={W - 1} height={H - 1} rx={10} className="fill-white stroke-zinc-200 dark:fill-zinc-800/60 dark:stroke-zinc-700" />
         <rect x={PAD} y={PAD} width={W * 0.48} height={7} rx={3.5} className="fill-zinc-800 dark:fill-zinc-200" />
         <rect x={PAD + W * 0.5} y={PAD + 1.5} width={W * 0.16} height={4} rx={2} className="fill-zinc-300 dark:fill-zinc-600" />

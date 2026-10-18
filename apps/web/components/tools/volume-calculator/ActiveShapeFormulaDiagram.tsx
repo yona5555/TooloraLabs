@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useVolumeLive } from "./VolumeLiveContext";
 import { parseVolumeDims, computeVolumeFor, round } from "./volumeEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type Chip = { label: string; value: string };
 
@@ -36,7 +37,7 @@ export default function ActiveShapeFormulaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { shape: tShape(`shape.${dims.shape}`) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-2 text-center">
           {spec.prefix && <span className="font-mono text-sm text-zinc-500 dark:text-zinc-400">{spec.prefix}</span>}
           {spec.chips.map((c, i) => (
@@ -61,7 +62,7 @@ export default function ActiveShapeFormulaDiagram() {
             { label: t("worked.volume"), value: `${round(volume)}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

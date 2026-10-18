@@ -7,6 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import EduDonutChart from "./EduDonutChart";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /**
  * Same 300-mile trip, run through the tool's own cost = distance / rate * price formula
@@ -43,7 +44,7 @@ export default function FuelTypeCostComparisonChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { distance: DISTANCE })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduDonutChart segments={segments} ariaLabel={t("title")} />
         </div>
@@ -65,7 +66,7 @@ export default function FuelTypeCostComparisonChart() {
             })),
           ]}
         />
-      </div>
+      </GapFreeRow>
       <p className="mt-3 text-xs opacity-60">{t("note")}</p>
     </SectionCard>
   );

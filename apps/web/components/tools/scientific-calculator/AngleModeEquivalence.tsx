@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useScientificAngle } from "./ScientificAngleContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 function round3(n: number): number {
   return Math.round(n * 1000) / 1000;
@@ -19,7 +20,7 @@ export default function AngleModeEquivalence() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="grid shrink-0 grid-cols-3 gap-3">
           <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
             <p className="text-xs font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-400">{t("degreesLabel")}</p>
@@ -41,7 +42,7 @@ export default function AngleModeEquivalence() {
             { label: t("worked.degToGrad"), value: "grad = deg × 10 / 9", emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Coins } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import NeumorphicIconBadge from "@/components/tool-ui/NeumorphicIconBadge";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Real exact-tip vs round-up-to-nearest-$5 comparison, a common real practice for cash tipping. */
 const BILL = 42;
@@ -17,7 +18,7 @@ export default async function TipRoundUpDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { bill: BILL.toFixed(2), percent: TIP_PERCENT })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="flex shrink-0 items-center gap-3">
           <NeumorphicIconBadge icon={Coins} />
         </div>
@@ -38,7 +39,7 @@ export default async function TipRoundUpDiagram() {
             </div>
           </dl>
         </div>
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

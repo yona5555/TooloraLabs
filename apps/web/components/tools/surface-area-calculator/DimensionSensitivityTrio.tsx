@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, computeSurfaceAreaFor, withScale, round } from "./surfaceAreaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Type #12 (Sensitivity Trio): the live solid's real surface area if every one of its own dimensions were measured 20% smaller or 20% larger — directly tied to the current live values, not a generic example. */
 export default function DimensionSensitivityTrio() {
@@ -30,7 +31,7 @@ export default function DimensionSensitivityTrio() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-end justify-center gap-3">
           {bars.map((b) => (
             <div key={b.key} className={`flex w-24 flex-col items-center justify-end rounded-xl border p-3 text-center ${toneClasses[b.tone]}`} style={{ height: `${60 + (b.value / maxVal) * 80}px` }}>
@@ -40,7 +41,7 @@ export default function DimensionSensitivityTrio() {
           ))}
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.swing"), value: `±${round(((larger - smaller) / current) * 50, 1)}%`, emphasize: true, note: t("worked.note") }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

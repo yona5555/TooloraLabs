@@ -6,6 +6,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useVolumeLive } from "./VolumeLiveContext";
 import { parseVolumeDims, computeVolumeFor, round } from "./volumeEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const COUNTS = [2, 3, 4, 6] as const;
 
@@ -22,7 +23,7 @@ export default function CompositeVolumeFlowDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { shape: tShape(`shape.${dims.shape}`) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-col items-center gap-3">
           <div className="flex flex-wrap items-center justify-center gap-1.5">
             {COUNTS.map((c) => (
@@ -54,7 +55,7 @@ export default function CompositeVolumeFlowDiagram() {
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.formula"), value: `${round(volume)} × ${count} = ${round(total)}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -7,6 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { EXAMPLE, angleSensitivity } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const round = (n: number) => Math.round(n * 100) / 100;
 const toRad = (deg: number) => (deg * Math.PI) / 180;
@@ -51,7 +52,7 @@ export default function TriangleAngleDragSensitivity() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[320px]"
@@ -83,7 +84,7 @@ export default function TriangleAngleDragSensitivity() {
             { label: tw("measuredC"), value: round(measuredC).toString(), emphasize: true, note: tw("formulaNote", { formula: round(formulaC) }) },
           ]}
         />
-      </div>
+      </GapFreeRow>
       <TriangleSinCosLiveCurve angles={[{ label: "C", deg: currentAngle }]} />
       <p className="mt-3 text-xs opacity-60">{t("hint")}</p>
     </SectionCard>

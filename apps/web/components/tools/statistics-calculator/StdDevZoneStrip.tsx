@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -27,7 +28,7 @@ export default function StdDevZoneStrip() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-3 w-full overflow-hidden rounded-full">
             <div className="absolute inset-y-0 left-0 w-[16%] bg-amber-300/70 dark:bg-amber-500/50" />
@@ -47,7 +48,7 @@ export default function StdDevZoneStrip() {
             { label: t("worked.normalPrediction"), value: "68%", note: t("worked.note") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

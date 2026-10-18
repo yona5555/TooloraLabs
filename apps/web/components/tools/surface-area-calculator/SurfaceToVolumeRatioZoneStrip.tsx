@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, computeSurfaceAreaFor, computeVolumeFor, round } from "./surfaceAreaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 function log10(n: number): number {
   return Math.log(n) / Math.LN10;
@@ -25,7 +26,7 @@ export default function SurfaceToVolumeRatioZoneStrip() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-3 w-full overflow-hidden rounded-full bg-gradient-to-r from-blue-400 to-amber-400 dark:from-blue-500 dark:to-amber-500">
             <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-zinc-900 transition-all duration-300 dark:border-zinc-900 dark:bg-white" style={{ left: `${pct}%` }} />
@@ -43,7 +44,7 @@ export default function SurfaceToVolumeRatioZoneStrip() {
             { label: t("worked.ratio"), value: `${round(ratio, 3)} : 1`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

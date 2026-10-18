@@ -8,6 +8,7 @@ import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { round } from "./triangleEducationMath";
 import { TRIANGLE_SCENARIOS } from "./types";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type ShapeKey = "acute" | "right" | "obtuse";
 
@@ -56,7 +57,7 @@ export default function TriangleAngleGauge() {
     <SectionCard title={t("title")}>
       <p className="mb-4 text-sm leading-6 text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow>
         <div className="shrink-0">
           <div dir="ltr">
             <RatioGauge
@@ -102,7 +103,7 @@ export default function TriangleAngleGauge() {
             ]}
           />
         )}
-      </div>
+      </GapFreeRow>
 
       {selected && selected.valid && (
         <TriangleSinCosLiveCurve angles={[{ label: "A", deg: selected.angleA }, { label: "B", deg: selected.angleB }, { label: "C", deg: selected.angleC }]} />

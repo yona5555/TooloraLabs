@@ -5,6 +5,7 @@ import { ScientificCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new ScientificCalculator();
 
@@ -37,12 +38,12 @@ export default function PowerRootBarChart() {
         <input type="range" min={0} max={10} step={0.5} value={x} onChange={(e) => setX(Number(e.target.value))} className="w-full accent-blue-600 dark:accent-blue-400" aria-label={t("sliderLabel")} />
         <p className="mt-1 text-center text-xs font-semibold text-blue-700 dark:text-blue-300">{`x = ${x}`}</p>
       </div>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={bars.map((b) => ({ label: b.label, value: b.formatted }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

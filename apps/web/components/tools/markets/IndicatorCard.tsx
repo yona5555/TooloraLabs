@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
@@ -19,7 +20,7 @@ type IndicatorCardProps = {
 
 /**
  * §32 layout for one market indicator: its own blue-header SectionCard, an h3 + intro, and the
- * WORKED EXAMPLE table beside the indicator (stacked under it only on narrow screens).
+ * WORKED EXAMPLE table beside the indicator, or under it when side by side leaves a gap (GapFreeRow).
  */
 export default function IndicatorCard({ id, title, heading, intro, controls, children, fallback, worked }: IndicatorCardProps) {
   return (
@@ -30,14 +31,16 @@ export default function IndicatorCard({ id, title, heading, intro, controls, chi
       {fallback ?? (
         // Container query, not viewport: the same card sits in the narrow result column and full width.
         <div className="@container mt-4">
-          <div className="flex flex-col gap-6 @3xl:flex-row @3xl:items-center">
-            <div className="min-w-0 flex-1">{children}</div>
-            {worked && (
+          {worked ? (
+            <GapFreeRow container>
+              <div className="min-w-0 flex-1">{children}</div>
               <div className="@3xl:w-80 @3xl:shrink-0">
                 <WorkedExampleNote title={worked.title} rows={worked.rows} />
               </div>
-            )}
-          </div>
+            </GapFreeRow>
+          ) : (
+            <div className="min-w-0">{children}</div>
+          )}
         </div>
       )}
     </SectionCard>

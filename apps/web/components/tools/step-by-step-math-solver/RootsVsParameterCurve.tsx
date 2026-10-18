@@ -9,6 +9,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, fmt, snapDragValue } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { curve: "#2563eb", point: "#dc2626" };
 const DARK = { curve: "#60a5fa", point: "#f87171" };
@@ -91,7 +92,7 @@ export default function RootsVsParameterCurve() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { param: paramLabel })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div
             aria-label={t("ariaLabel")}
@@ -114,7 +115,7 @@ export default function RootsVsParameterCurve() {
             { label: t("worked.result"), value: fmt(rootFn(currentParam)), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

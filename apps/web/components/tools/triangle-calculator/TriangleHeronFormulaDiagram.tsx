@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { heron, round } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const BOX_W = 56;
 const BOX_H = 40;
@@ -25,7 +26,7 @@ export default function TriangleHeronFormulaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg viewBox={`0 0 ${totalW} ${H}`} role="img" aria-label={t("title")} className="mx-auto block w-full max-w-[440px]">
             {boxes.map((b, i) => {
@@ -69,7 +70,7 @@ export default function TriangleHeronFormulaDiagram() {
             { label: tw("area"), value: `${round(Math.sqrt(heron.product))}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

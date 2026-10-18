@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Same $85 unit price, four real quantities — the tool's own quantity * price line-total formula, shown as a scale rather than a bar list. */
 const UNIT_PRICE = 85;
@@ -25,7 +26,7 @@ export default async function InvoiceQuantityScalingChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { price: UNIT_PRICE.toFixed(2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[300px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />
@@ -59,7 +60,7 @@ export default async function InvoiceQuantityScalingChart() {
             ))}
           </dl>
         </div>
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 // Illustrative, not data-driven: 100 -> 70 (30% off) -> 63 (further 10% off).
 const WIDTH = 320;
@@ -22,7 +23,7 @@ export default async function DiscountStackDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
           <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="h-auto w-full text-current" style={{ minWidth: 280 }}>
             {ROWS.map((row, i) => {
@@ -47,7 +48,7 @@ export default async function DiscountStackDiagram() {
             { label: t("step3"), value: labels[2], emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

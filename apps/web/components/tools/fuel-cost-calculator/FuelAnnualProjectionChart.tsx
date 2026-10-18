@@ -7,6 +7,7 @@ import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Cumulative cost at 3/6/9/12 months for a fixed monthly distance — same cost formula, projected over time as a running total. */
 const MONTHLY_DISTANCE = 1000;
@@ -57,7 +58,7 @@ export default function FuelAnnualProjectionChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
         {t("caption", { distance: MONTHLY_DISTANCE.toLocaleString("en-US"), efficiency: EFFICIENCY, price: money(PRICE, 2) })}
       </p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={10} y1={BASELINE_Y} x2={WIDTH - 10} y2={BASELINE_Y} className="stroke-current opacity-20" strokeWidth={1} />
@@ -100,7 +101,7 @@ export default function FuelAnnualProjectionChart() {
             },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

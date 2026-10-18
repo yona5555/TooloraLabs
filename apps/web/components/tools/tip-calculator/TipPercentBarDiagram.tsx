@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "./EduBarChart";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Same $60 bill at four common tip percentages — small differences in the rate compound quickly as the bill grows. */
 const BILL = 60;
@@ -19,7 +20,7 @@ export default async function TipPercentBarDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1">
           <EduBarChart bars={bars} ariaLabel={t("title")} barColorClass="fill-blue-500/80 dark:fill-blue-400/80" />
         </div>
@@ -27,7 +28,7 @@ export default async function TipPercentBarDiagram() {
           title={tRoot("workedExampleTitle")}
           rows={bars.map((b) => ({ label: b.label, value: b.formatted }))}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

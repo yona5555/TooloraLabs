@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useVolumeLive } from "./VolumeLiveContext";
 import { parseVolumeDims, computeVolumeFor, round } from "./volumeEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const M3_TO_LITERS = 1000;
 const M3_TO_GALLONS = 264.172;
@@ -20,7 +21,7 @@ export default function UnitConversionEquivalence() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-3">
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-center dark:border-blue-500/30 dark:bg-blue-500/10">
             <p className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{`${round(m3)} m³`}</p>
@@ -41,7 +42,7 @@ export default function UnitConversionEquivalence() {
             { label: t("worked.result"), value: `${round(liters)} L`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

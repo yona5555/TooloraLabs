@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { root: "#16a34a", explorer: "#9333ea" };
 const DARK = { root: "#4ade80", explorer: "#c084fc" };
@@ -46,7 +47,7 @@ export default function NumberLineSolutionSet() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: domain, y: [-2, 2] }} height={140} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -73,7 +74,7 @@ export default function NumberLineSolutionSet() {
             { label: t("worked.distance"), value: distance !== null ? fmt(distance) : "—", emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Real Net 30 timeline: issue date to due date, tied to the invoice's own "date" field. */
 const NET_DAYS = 30;
@@ -16,7 +17,7 @@ export default async function InvoicePaymentTermsDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { days: NET_DAYS })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
           <svg width={WIDTH} height={70} viewBox={`0 0 ${WIDTH} 70`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <line x1={20} y1={35} x2={WIDTH - 20} y2={35} stroke="currentColor" strokeWidth={2} opacity={0.25} />
@@ -50,7 +51,7 @@ export default async function InvoicePaymentTermsDiagram() {
             </div>
           </dl>
         </div>
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { root: "#dc2626", circle: "#9333ea" };
 const DARK = { root: "#f87171", circle: "#c084fc" };
@@ -67,7 +68,7 @@ export default function ComplexPlaneDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[360px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-xMax, xMax], y: [-yMax, yMax] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -91,7 +92,7 @@ export default function ComplexPlaneDiagram() {
             { label: t("worked.exploredAngle"), value: `${fmt(angleDeg)}°`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

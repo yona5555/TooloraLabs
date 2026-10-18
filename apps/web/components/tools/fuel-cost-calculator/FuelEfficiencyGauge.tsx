@@ -5,6 +5,7 @@ import RatioGauge from "@/components/tool-ui/RatioGauge";
 import EncyclopediaLiveWidget from "@/components/tool-ui/EncyclopediaLiveWidget";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type ZoneKey = "efficient" | "average" | "thirsty";
 
@@ -68,7 +69,7 @@ export default function FuelEfficiencyGauge() {
     <EncyclopediaLiveWidget title={t("title")}>
       <p className="mb-4 text-sm leading-6 opacity-80">{t("intro")}</p>
 
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow>
         <div className="shrink-0">
           <div dir="ltr">
             <RatioGauge
@@ -115,7 +116,7 @@ export default function FuelEfficiencyGauge() {
             { label: t("classificationLabel"), value: classification, note: vsLeastEfficient },
           ]}
         />
-      </div>
+      </GapFreeRow>
 
       <p className="mt-4 text-center text-sm leading-6">{t("verdict", { example: tExamples(selectedKey), classification })}</p>
       <p className="mt-1 text-center text-sm leading-6 opacity-80">{t("fact", { rate: `${selected.litersPer100km} L/100km` })}</p>

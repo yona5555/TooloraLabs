@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, evalPoly, deriveHeroEquation, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { beam: "#44403c", left: "#2563eb", right: "#dc2626" };
 const DARK = { beam: "#d6d3d1", left: "#60a5fa", right: "#f87171" };
@@ -74,7 +75,7 @@ export default function EquationBalanceDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { mode: tMode(`mode.${dims.mode}`) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[380px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-5, 5], y: [-6, 4] }} height={220} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -106,7 +107,7 @@ export default function EquationBalanceDiagram() {
             { label: t("worked.difference"), value: fmt(Math.abs(diff)), emphasize: true, note: Math.abs(diff) < 0.01 ? t("worked.balanced") : undefined },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }
