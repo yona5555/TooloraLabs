@@ -22737,10 +22737,7 @@
         "intro": {
           "title": "Cómo se relacionan realmente CSV y JSON",
           "paragraph1": "CSV y JSON resuelven el mismo problema básico —representar una lista de registros— partiendo de supuestos estructurales opuestos. CSV asume que todos los registros comparten exactamente el mismo conjunto plano de campos, así que solo necesita escribir los nombres de los campos una vez, en una fila de encabezado, y después únicamente los valores. JSON no parte de ese supuesto: cada objeto lleva sus propias claves, lo que le permite representar registros con formas distintas, o campos que a su vez son objetos y listas anidados, a costa de repetir esos nombres de clave en cada registro.",
-          "paragraph2": "Esa diferencia estructural explica por qué convertir de CSV a JSON es un proceso mecánico (cada fila se convierte en un objeto, cada encabezado en una clave), mientras que convertir de JSON a CSV exige decisiones reales que esta herramienta toma de forma automática: los objetos anidados se aplanan en columnas con notación de punto (address.city, address.zip), y las listas se serializan como una única celda de texto JSON, ya que CSV no tiene una forma nativa de representar «una lista dentro de otra lista».",
-          "diagram": {
-            "caption": "Una fila de encabezado CSV se convierte en las claves de un objeto JSON; cada fila CSV siguiente se convierte en un objeto JSON dentro de un array."
-          }
+          "paragraph2": "Esa diferencia estructural explica por qué convertir de CSV a JSON es un proceso mecánico (cada fila se convierte en un objeto, cada encabezado en una clave), mientras que convertir de JSON a CSV exige decisiones reales que esta herramienta toma de forma automática: los objetos anidados se aplanan en columnas con notación de punto (address.city, address.zip), y las listas se serializan como una única celda de texto JSON, ya que CSV no tiene una forma nativa de representar «una lista dentro de otra lista»."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -22854,6 +22851,143 @@
           "note": "Lo más parecido a una especificación oficial que tiene el CSV: una RFC informativa que codificó las convenciones de entrecomillado, escape y filas de encabezado unas tres décadas después de que los archivos CSV ya estuvieran muy extendidos, razón por la que el analizador de esta herramienta maneja archivos reales que no la siguen estrictamente.",
           "url": "https://www.rfc-editor.org/rfc/rfc4180",
           "readOriginal": "Leer la RFC original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce CSV o un array JSON arriba para ver este indicador.",
+          "types": {
+            "integer": "entero",
+            "decimal": "decimal",
+            "boolean": "booleano",
+            "date": "fecha",
+            "text": "texto",
+            "empty": "vacío"
+          },
+          "explorer": {
+            "title": "Analiza cualquier columna",
+            "intro": "Elige una columna. Las numéricas muestran el valor de cada fila con la media; las demás, sus valores más frecuentes.",
+            "aria": "Perfil de la columna elegida",
+            "mean": "media {v}",
+            "rowsAxis": "primeras {n} filas",
+            "type": "Tipo inferido",
+            "filled": "Celdas llenas",
+            "distinct": "Valores distintos",
+            "range": "Rango",
+            "longest": "Valor más largo",
+            "chars": "{n} caract.",
+            "column": "Columna"
+          },
+          "typeShare": {
+            "title": "Qué contiene cada columna",
+            "intro": "El tipo en que coinciden los valores de cada columna. CSV guarda todo como texto; esto es lo que leería un programa con tipos.",
+            "aria": "Anillo de tipos de columna",
+            "columns": "columnas",
+            "numeric": "Columnas numéricas",
+            "text": "Columnas de texto",
+            "typed": "Columnas con tipo",
+            "note": "En la salida JSON",
+            "noteValue": "los valores siguen siendo texto",
+            "total": "Columnas"
+          },
+          "sizes": {
+            "title": "La misma tabla, tres tamaños",
+            "intro": "Tu tabla como CSV, JSON minificado y JSON con sangría, en bytes UTF-8. JSON repite cada nombre de columna en cada fila.",
+            "aria": "Barras de los tres tamaños",
+            "csv": "CSV",
+            "jsonMin": "JSON (minificado)",
+            "jsonPretty": "JSON (con sangría)",
+            "perRow": "Bytes por fila CSV / JSON",
+            "ratio": "JSON frente a CSV"
+          },
+          "jsonBytes": {
+            "title": "A dónde van los bytes extra de JSON",
+            "intro": "Los bytes del JSON minificado divididos en valores, nombres de clave repetidos en cada objeto y puntuación.",
+            "aria": "Barra apilada de bytes JSON",
+            "axis": "JSON minificado: {n} bytes",
+            "values": "Valores",
+            "keys": "Claves repetidas",
+            "punctuation": "Puntuación",
+            "keysPerRow": "Bytes de claves",
+            "keysOnce": "Claves una vez (cabecera CSV)",
+            "repeatCost": "Coste de repetir claves",
+            "sum": "Suma de partes",
+            "keysShare": "Parte en claves"
+          },
+          "delimiter": {
+            "title": "Qué separador usa el texto",
+            "intro": "Cuántas veces aparece cada candidato por línea, de media en las primeras líneas, con su dispersión en rojo. El separador real es frecuente e igual en cada línea.",
+            "aria": "Barras de separadores por línea",
+            "steady": "estable",
+            "varies": "varía",
+            "absent": "ausente",
+            "mode": "Detección automática",
+            "modeValue": "el más frecuente en la línea 1",
+            "lines": "Líneas revisadas",
+            "perLine": "Veces por línea",
+            "fields": "Campos por línea",
+            "used": "Separador usado"
+          },
+          "fill": {
+            "title": "Celdas llenas y vacías",
+            "intro": "La tabla como cuadrícula: una celda por valor, coloreada por el tipo de su columna, ámbar si está vacía.",
+            "aria": "Cuadrícula de celdas",
+            "cells": "Celdas",
+            "empty": "Celdas vacías",
+            "sparse": "Columna más vacía",
+            "complete": "Filas completas",
+            "filledShare": "Llenas"
+          },
+          "rows": {
+            "title": "Campos por fila",
+            "intro": "Cuántos campos tiene cada fila frente al ancho de la cabecera (discontinua). Las filas cortas se rellenan con celdas vacías; las largas pierden los campos sobrantes.",
+            "aria": "Línea de campos por fila",
+            "header": "cabecera: {n}",
+            "axis": "Filas de datos",
+            "rows": "Filas de datos",
+            "width": "Ancho de cabecera",
+            "short": "Filas cortas",
+            "long": "Filas largas",
+            "clean": "Todas coinciden",
+            "yes": "sí",
+            "no": "no"
+          },
+          "ranges": {
+            "title": "Rangos de las columnas numéricas",
+            "intro": "Cada columna numérica como su rango de mínimo a máximo, con la media marcada.",
+            "aria": "Barras de rango con medias",
+            "none": "Esta tabla no tiene columnas numéricas.",
+            "numeric": "Columnas numéricas",
+            "widest": "Rango más amplio",
+            "meanOf": "Media de {c}"
+          },
+          "flow": {
+            "title": "Qué hizo el conversor",
+            "introCsv": "De tu texto CSV: líneas, cabecera, filas de datos, campos separados (los entrecomillados se mantienen enteros) y los objetos JSON producidos.",
+            "introJson": "De tu array JSON: registros, claves aplanadas (los objetos anidados pasan a rutas con punto), celdas, campos entrecomillados y las líneas CSV producidas.",
+            "aria": "Flujo de la conversión",
+            "lines": "Líneas",
+            "header": "Campos de cabecera",
+            "generated": "Nombres generados",
+            "dataRows": "Filas de datos",
+            "fields": "Campos separados por \"{d}\"",
+            "objects": "Objetos JSON",
+            "records": "Registros",
+            "flatKeys": "Claves aplanadas",
+            "cells": "Celdas",
+            "quoted": "Campos entrecomillados",
+            "csvLines": "Líneas CSV",
+            "delimiter": "Separador",
+            "auto": "auto",
+            "quotedLabel": "Campos entrecomillados",
+            "headerRow": "Fila de cabecera",
+            "yes": "sí",
+            "no": "no",
+            "built": "creada a partir de claves",
+            "formula": "Celdas",
+            "output": "Salida",
+            "outputJson": "{n} objetos JSON",
+            "outputCsv": "{n} filas + cabecera"
+          }
         }
       },
       "shareExport": {
@@ -22877,6 +23011,19 @@
         "lineCount": "Número de Líneas",
         "charCount": "Número de Caracteres",
         "inputSectionTitle": "Entrada"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "inventory": "Inventario con comillas y huecos",
+        "semicolon": "Separado por punto y coma (auto)",
+        "noHeader": "Sin fila de cabecera",
+        "nested": "JSON anidado a CSV",
+        "ragged": "Filas de distinta longitud",
+        "detail": "{rows} filas · {cols} columnas · \"{delim}\""
+      },
+      "result": {
+        "summary": "{rows} filas × {cols} columnas · separador \"{delim}\"",
+        "table": "Tabla leída"
       }
     },
     "pdf-merge-split": {

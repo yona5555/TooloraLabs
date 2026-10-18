@@ -22737,10 +22737,7 @@
         "intro": {
           "title": "Comment le CSV et le JSON se rejoignent vraiment",
           "paragraph1": "Le CSV et le JSON résolvent le même problème de base — représenter une liste d'enregistrements — avec des hypothèses structurelles opposées. Le CSV suppose que chaque enregistrement possède exactement le même ensemble plat de champs : il lui suffit donc d'écrire les noms de champs une seule fois, dans une ligne d'en-tête, puis uniquement les valeurs ensuite. Le JSON ne fait aucune hypothèse de ce type : chaque objet porte ses propres clés, ce qui lui permet de représenter des enregistrements de formes différentes, ou des champs qui sont eux-mêmes des objets et des tableaux imbriqués, au prix de répéter ces noms de clés dans chaque enregistrement.",
-          "paragraph2": "Cet écart structurel explique exactement pourquoi la conversion CSV → JSON est mécanique (chaque ligne devient un objet, chaque en-tête devient une clé), tandis que la conversion JSON → CSV exige de vraies décisions que cet outil prend automatiquement : les objets imbriqués sont aplatis en colonnes à notation pointée (address.city, address.zip), et les tableaux sont sérialisés dans une seule cellule de texte JSON, car le CSV n'a aucun moyen natif de représenter une liste à l'intérieur d'une liste.",
-          "diagram": {
-            "caption": "Une ligne d'en-tête CSV devient les clés d'un objet JSON ; chaque ligne CSV suivante devient un objet JSON dans un tableau."
-          }
+          "paragraph2": "Cet écart structurel explique exactement pourquoi la conversion CSV → JSON est mécanique (chaque ligne devient un objet, chaque en-tête devient une clé), tandis que la conversion JSON → CSV exige de vraies décisions que cet outil prend automatiquement : les objets imbriqués sont aplatis en colonnes à notation pointée (address.city, address.zip), et les tableaux sont sérialisés dans une seule cellule de texte JSON, car le CSV n'a aucun moyen natif de représenter une liste à l'intérieur d'une liste."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -22854,6 +22851,143 @@
           "note": "Ce qui se rapproche le plus d'une spécification officielle pour le CSV — une RFC « Informational » qui a codifié les conventions de mise entre guillemets, d'échappement et de ligne d'en-tête environ trois décennies après que les fichiers CSV soient déjà largement répandus, ce qui explique pourquoi l'analyseur de cet outil gère des fichiers réels qui ne la respectent pas strictement.",
           "url": "https://www.rfc-editor.org/rfc/rfc4180",
           "readOriginal": "Lire la RFC originale"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez du CSV ou un tableau JSON ci-dessus pour voir cet indicateur.",
+          "types": {
+            "integer": "entier",
+            "decimal": "décimal",
+            "boolean": "booléen",
+            "date": "date",
+            "text": "texte",
+            "empty": "vide"
+          },
+          "explorer": {
+            "title": "Analyser une colonne",
+            "intro": "Choisissez une colonne. Les numériques montrent la valeur de chaque ligne avec la moyenne ; les autres leurs valeurs les plus fréquentes.",
+            "aria": "Profil de la colonne choisie",
+            "mean": "moyenne {v}",
+            "rowsAxis": "{n} premières lignes",
+            "type": "Type déduit",
+            "filled": "Cellules remplies",
+            "distinct": "Valeurs distinctes",
+            "range": "Étendue",
+            "longest": "Valeur la plus longue",
+            "chars": "{n} car.",
+            "column": "Colonne"
+          },
+          "typeShare": {
+            "title": "Ce que contient chaque colonne",
+            "intro": "Le type sur lequel s’accordent les valeurs de chaque colonne. Le CSV stocke tout en texte ; voici ce qu’un lecteur typé obtiendrait.",
+            "aria": "Anneau des types de colonnes",
+            "columns": "colonnes",
+            "numeric": "Colonnes numériques",
+            "text": "Colonnes texte",
+            "typed": "Colonnes typées",
+            "note": "Dans la sortie JSON",
+            "noteValue": "les valeurs restent du texte",
+            "total": "Colonnes"
+          },
+          "sizes": {
+            "title": "Le même tableau, trois tailles",
+            "intro": "Votre tableau en CSV, en JSON minifié et en JSON indenté, en octets UTF-8. Le JSON répète chaque nom de colonne à chaque ligne.",
+            "aria": "Barres des trois tailles",
+            "csv": "CSV",
+            "jsonMin": "JSON (minifié)",
+            "jsonPretty": "JSON (indenté)",
+            "perRow": "Octets par ligne CSV / JSON",
+            "ratio": "JSON face au CSV"
+          },
+          "jsonBytes": {
+            "title": "Où vont les octets en plus du JSON",
+            "intro": "Les octets du JSON minifié répartis entre valeurs, noms de clés répétés dans chaque objet et ponctuation.",
+            "aria": "Barre empilée des octets JSON",
+            "axis": "JSON minifié : {n} octets",
+            "values": "Valeurs",
+            "keys": "Clés répétées",
+            "punctuation": "Ponctuation",
+            "keysPerRow": "Octets de clés",
+            "keysOnce": "Clés une seule fois (en-tête CSV)",
+            "repeatCost": "Coût de la répétition",
+            "sum": "Somme des parties",
+            "keysShare": "Part des clés"
+          },
+          "delimiter": {
+            "title": "Quel séparateur utilise le texte",
+            "intro": "Combien de fois chaque candidat apparaît par ligne, en moyenne sur les premières lignes, avec sa dispersion en rouge. Le vrai séparateur est fréquent et identique sur chaque ligne.",
+            "aria": "Barres des séparateurs par ligne",
+            "steady": "stable",
+            "varies": "varie",
+            "absent": "absent",
+            "mode": "Détection automatique",
+            "modeValue": "le plus fréquent en ligne 1",
+            "lines": "Lignes examinées",
+            "perLine": "Nombre par ligne",
+            "fields": "Champs par ligne",
+            "used": "Séparateur utilisé"
+          },
+          "fill": {
+            "title": "Cellules remplies et vides",
+            "intro": "Le tableau en grille : une case par valeur, colorée selon le type de sa colonne, ambre si elle est vide.",
+            "aria": "Grille des cellules",
+            "cells": "Cellules",
+            "empty": "Cellules vides",
+            "sparse": "Colonne la plus vide",
+            "complete": "Lignes complètes",
+            "filledShare": "Remplies"
+          },
+          "rows": {
+            "title": "Champs par ligne",
+            "intro": "Combien de champs a chaque ligne face à la largeur de l’en-tête (tirets). Les lignes courtes sont complétées par des vides ; les longues perdent leurs champs en trop.",
+            "aria": "Courbe des champs par ligne",
+            "header": "en-tête : {n}",
+            "axis": "Lignes de données",
+            "rows": "Lignes de données",
+            "width": "Largeur de l’en-tête",
+            "short": "Lignes courtes",
+            "long": "Lignes longues",
+            "clean": "Toutes conformes",
+            "yes": "oui",
+            "no": "non"
+          },
+          "ranges": {
+            "title": "Étendue des colonnes numériques",
+            "intro": "Chaque colonne numérique sur sa propre étendue du minimum au maximum, avec la moyenne marquée.",
+            "aria": "Barres d’étendue avec moyennes",
+            "none": "Ce tableau n’a pas de colonne numérique.",
+            "numeric": "Colonnes numériques",
+            "widest": "Plus grande étendue",
+            "meanOf": "Moyenne de {c}"
+          },
+          "flow": {
+            "title": "Ce qu’a fait le convertisseur",
+            "introCsv": "Depuis votre texte CSV : lignes, en-tête, lignes de données, champs séparés (les champs entre guillemets restent entiers) et les objets JSON produits.",
+            "introJson": "Depuis votre tableau JSON : enregistrements, clés aplaties (les objets imbriqués deviennent des chemins à points), cellules, champs entre guillemets et les lignes CSV produites.",
+            "aria": "Flux de la conversion",
+            "lines": "Lignes",
+            "header": "Champs d’en-tête",
+            "generated": "Noms générés",
+            "dataRows": "Lignes de données",
+            "fields": "Champs séparés par \"{d}\"",
+            "objects": "Objets JSON",
+            "records": "Enregistrements",
+            "flatKeys": "Clés aplaties",
+            "cells": "Cellules",
+            "quoted": "Champs entre guillemets",
+            "csvLines": "Lignes CSV",
+            "delimiter": "Séparateur",
+            "auto": "auto",
+            "quotedLabel": "Champs entre guillemets",
+            "headerRow": "Ligne d’en-tête",
+            "yes": "oui",
+            "no": "non",
+            "built": "construite depuis les clés",
+            "formula": "Cellules",
+            "output": "Sortie",
+            "outputJson": "{n} objets JSON",
+            "outputCsv": "{n} lignes + en-tête"
+          }
         }
       },
       "shareExport": {
@@ -22877,6 +23011,19 @@
         "lineCount": "Nombre de Lignes",
         "charCount": "Nombre de Caractères",
         "inputSectionTitle": "Entrée"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "inventory": "Inventaire avec guillemets et trous",
+        "semicolon": "Séparé par points-virgules (auto)",
+        "noHeader": "Sans ligne d’en-tête",
+        "nested": "JSON imbriqué vers CSV",
+        "ragged": "Lignes de longueurs inégales",
+        "detail": "{rows} lignes · {cols} colonnes · \"{delim}\""
+      },
+      "result": {
+        "summary": "{rows} lignes × {cols} colonnes · séparateur \"{delim}\"",
+        "table": "Tableau lu"
       }
     },
     "pdf-merge-split": {

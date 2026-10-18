@@ -22737,10 +22737,7 @@
         "intro": {
           "title": "Wie CSV und JSON tatsächlich zusammenhängen",
           "paragraph1": "CSV und JSON lösen dasselbe grundlegende Problem – die Darstellung einer Liste von Datensätzen – mit entgegengesetzten strukturellen Annahmen. CSV geht davon aus, dass jeder Datensatz genau dieselbe flache Menge an Feldern hat, muss die Feldnamen also nur einmal in einer Kopfzeile schreiben, danach nur noch die Werte. JSON trifft keine solche Annahme: Jedes Objekt trägt seine eigenen Schlüssel, was es erlaubt, Datensätze mit unterschiedlichen Formen darzustellen, oder Felder, die selbst verschachtelte Objekte und Arrays sind – auf Kosten der Wiederholung dieser Schlüsselnamen in jedem einzelnen Datensatz.",
-          "paragraph2": "Diese strukturelle Kluft ist genau der Grund, warum CSV → JSON mechanisch ist (jede Zeile wird zu einem Objekt, jede Kopfspalte zu einem Schlüssel), während JSON → CSV echte Entscheidungen erfordert, die dieses Tool automatisch trifft: Verschachtelte Objekte werden zu Spalten in Punktnotation abgeflacht (address.city, address.zip), und Arrays werden als einzelne JSON-Text-Zelle serialisiert, da CSV keine native Möglichkeit hat, eine Liste innerhalb einer Liste darzustellen.",
-          "diagram": {
-            "caption": "Eine CSV-Kopfzeile wird zu JSON-Objektschlüsseln; jede folgende CSV-Zeile wird zu einem JSON-Objekt in einem Array."
-          }
+          "paragraph2": "Diese strukturelle Kluft ist genau der Grund, warum CSV → JSON mechanisch ist (jede Zeile wird zu einem Objekt, jede Kopfspalte zu einem Schlüssel), während JSON → CSV echte Entscheidungen erfordert, die dieses Tool automatisch trifft: Verschachtelte Objekte werden zu Spalten in Punktnotation abgeflacht (address.city, address.zip), und Arrays werden als einzelne JSON-Text-Zelle serialisiert, da CSV keine native Möglichkeit hat, eine Liste innerhalb einer Liste darzustellen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -22854,6 +22851,143 @@
           "note": "Das Nächste, was CSV an einer offiziellen Spezifikation hat – ein Informational-RFC, das Quotierungs-, Escaping- und Kopfzeilenkonventionen etwa drei Jahrzehnte, nachdem CSV-Dateien bereits verbreitet waren, kodifizierte – weshalb der Parser dieses Tools reale Dateien handhaben muss, die ihm nicht strikt folgen.",
           "url": "https://www.rfc-editor.org/rfc/rfc4180",
           "readOriginal": "Original-RFC lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben CSV oder ein JSON-Array ein, um diesen Indikator zu sehen.",
+          "types": {
+            "integer": "Ganzzahl",
+            "decimal": "Dezimal",
+            "boolean": "Boolean",
+            "date": "Datum",
+            "text": "Text",
+            "empty": "leer"
+          },
+          "explorer": {
+            "title": "Eine Spalte untersuchen",
+            "intro": "Wähle eine Spalte. Zahlen zeigen den Wert jeder Zeile mit Mittelwertlinie; andere Spalten ihre häufigsten Werte.",
+            "aria": "Profil der gewählten Spalte",
+            "mean": "Mittel {v}",
+            "rowsAxis": "erste {n} Zeilen",
+            "type": "Erkannter Typ",
+            "filled": "Gefüllte Zellen",
+            "distinct": "Verschiedene Werte",
+            "range": "Spanne",
+            "longest": "Längster Wert",
+            "chars": "{n} Zeichen",
+            "column": "Spalte"
+          },
+          "typeShare": {
+            "title": "Was jede Spalte enthält",
+            "intro": "Der Typ, auf den sich die Werte jeder Spalte einigen. CSV speichert alles als Text; so würde ein typisierter Leser es zurückbekommen.",
+            "aria": "Ring der Spaltentypen",
+            "columns": "Spalten",
+            "numeric": "Numerische Spalten",
+            "text": "Textspalten",
+            "typed": "Typisierte Spalten",
+            "note": "In der JSON-Ausgabe",
+            "noteValue": "Werte bleiben Text",
+            "total": "Spalten"
+          },
+          "sizes": {
+            "title": "Dieselbe Tabelle, drei Größen",
+            "intro": "Deine Tabelle als CSV, minifiziertes JSON und eingerücktes JSON, in UTF-8-Bytes. JSON wiederholt jeden Spaltennamen in jeder Zeile.",
+            "aria": "Balken der drei Größen",
+            "csv": "CSV",
+            "jsonMin": "JSON (minifiziert)",
+            "jsonPretty": "JSON (eingerückt)",
+            "perRow": "Bytes pro Zeile CSV / JSON",
+            "ratio": "JSON gegen CSV"
+          },
+          "jsonBytes": {
+            "title": "Wohin JSONs Zusatzbytes gehen",
+            "intro": "Die Bytes des minifizierten JSON aufgeteilt in Werte, in jedem Objekt wiederholte Schlüssel und Satzzeichen.",
+            "aria": "Gestapelter Balken der JSON-Bytes",
+            "axis": "Minifiziertes JSON: {n} Bytes",
+            "values": "Werte",
+            "keys": "Wiederholte Schlüssel",
+            "punctuation": "Satzzeichen",
+            "keysPerRow": "Schlüsselbytes",
+            "keysOnce": "Schlüssel einmal (CSV-Kopf)",
+            "repeatCost": "Kosten der Wiederholung",
+            "sum": "Summe der Teile",
+            "keysShare": "Anteil der Schlüssel"
+          },
+          "delimiter": {
+            "title": "Welches Trennzeichen der Text nutzt",
+            "intro": "Wie oft jeder Kandidat pro Zeile vorkommt, gemittelt über die ersten Zeilen, mit seiner Streuung in Rot. Das echte Trennzeichen ist häufig und in jeder Zeile gleich.",
+            "aria": "Balken der Trennzeichen pro Zeile",
+            "steady": "gleichmäßig",
+            "varies": "schwankt",
+            "absent": "fehlt",
+            "mode": "Automatische Erkennung",
+            "modeValue": "häufigstes in Zeile 1",
+            "lines": "Geprüfte Zeilen",
+            "perLine": "Anzahl pro Zeile",
+            "fields": "Felder pro Zeile",
+            "used": "Verwendetes Trennzeichen"
+          },
+          "fill": {
+            "title": "Gefüllte und leere Zellen",
+            "intro": "Die Tabelle als Raster: ein Feld pro Wert, nach Spaltentyp gefärbt, bernsteinfarben wenn leer.",
+            "aria": "Raster gefüllter und leerer Zellen",
+            "cells": "Zellen",
+            "empty": "Leere Zellen",
+            "sparse": "Lückenhafteste Spalte",
+            "complete": "Vollständige Zeilen",
+            "filledShare": "Gefüllt"
+          },
+          "rows": {
+            "title": "Felder pro Zeile",
+            "intro": "Wie viele Felder jede Datenzeile hat, verglichen mit der Kopfbreite (gestrichelt). Kurze Zeilen werden mit leeren Zellen aufgefüllt; lange verlieren ihre zusätzlichen Felder.",
+            "aria": "Linie der Felder pro Zeile",
+            "header": "Kopf: {n}",
+            "axis": "Datenzeilen",
+            "rows": "Datenzeilen",
+            "width": "Kopfbreite",
+            "short": "Kurze Zeilen",
+            "long": "Lange Zeilen",
+            "clean": "Alle Zeilen passen",
+            "yes": "ja",
+            "no": "nein"
+          },
+          "ranges": {
+            "title": "Spannen der numerischen Spalten",
+            "intro": "Jede numerische Spalte als eigene Spanne von Minimum bis Maximum, mit markiertem Mittelwert.",
+            "aria": "Spannenbalken mit Mittelwerten",
+            "none": "Diese Tabelle hat keine numerischen Spalten.",
+            "numeric": "Numerische Spalten",
+            "widest": "Größte Spanne",
+            "meanOf": "Mittel von {c}"
+          },
+          "flow": {
+            "title": "Was der Konverter getan hat",
+            "introCsv": "Aus deinem CSV-Text: Zeilen, Kopf, Datenzeilen, am Trennzeichen geteilte Felder (Felder in Anführungszeichen bleiben ganz) und die erzeugten JSON-Objekte.",
+            "introJson": "Aus deinem JSON-Array: Datensätze, abgeflachte Schlüssel (verschachtelte Objekte werden Punktpfade), Zellen, Felder in Anführungszeichen und die erzeugten CSV-Zeilen.",
+            "aria": "Fluss der Umwandlung",
+            "lines": "Zeilen",
+            "header": "Kopffelder",
+            "generated": "Erzeugte Namen",
+            "dataRows": "Datenzeilen",
+            "fields": "Felder geteilt an \"{d}\"",
+            "objects": "JSON-Objekte",
+            "records": "Datensätze",
+            "flatKeys": "Abgeflachte Schlüssel",
+            "cells": "Zellen",
+            "quoted": "Felder in Anführungszeichen",
+            "csvLines": "CSV-Zeilen",
+            "delimiter": "Trennzeichen",
+            "auto": "automatisch",
+            "quotedLabel": "Felder in Anführungszeichen",
+            "headerRow": "Kopfzeile",
+            "yes": "ja",
+            "no": "nein",
+            "built": "aus Schlüsseln gebaut",
+            "formula": "Zellen",
+            "output": "Ausgabe",
+            "outputJson": "{n} JSON-Objekte",
+            "outputCsv": "{n} Zeilen + Kopf"
+          }
         }
       },
       "shareExport": {
@@ -22877,6 +23011,19 @@
         "lineCount": "Zeilenanzahl",
         "charCount": "Zeichenanzahl",
         "inputSectionTitle": "Eingabe"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "inventory": "Bestand mit Anführungszeichen und Lücken",
+        "semicolon": "Semikolon-getrennt (automatisch)",
+        "noHeader": "Ohne Kopfzeile",
+        "nested": "Verschachteltes JSON zu CSV",
+        "ragged": "Ungleich lange Zeilen",
+        "detail": "{rows} Zeilen · {cols} Spalten · \"{delim}\""
+      },
+      "result": {
+        "summary": "{rows} Zeilen × {cols} Spalten · Trennzeichen \"{delim}\"",
+        "table": "Gelesene Tabelle"
       }
     },
     "pdf-merge-split": {

@@ -21,7 +21,7 @@ export type CsvJsonConverterOutput = {
 const CANDIDATE_DELIMITERS = [",", ";", "\t", "|"] as const;
 
 /** Picks whichever candidate delimiter appears most often in the first line. */
-function detectDelimiter(text: string): string {
+export function detectDelimiter(text: string): string {
   const firstLine = text.split(/\r?\n/, 1)[0] ?? "";
   let best: string = ",";
   let bestCount = -1;
@@ -35,7 +35,7 @@ function detectDelimiter(text: string): string {
   return best;
 }
 
-function parseCsv(text: string, delimiter: string): string[][] {
+export function parseCsv(text: string, delimiter: string): string[][] {
   const rows: string[][] = [];
   let row: string[] = [];
   let field = "";
@@ -123,7 +123,7 @@ function escapeCsvField(value: string, delimiter: string): string {
 /** Flattens nested plain objects into dot-notation keys; arrays and other
  * non-plain values are left as-is for the caller to stringify into a cell,
  * since CSV has no native way to represent nested structure. */
-function flattenObject(obj: Record<string, unknown>, prefix = ""): Record<string, unknown> {
+export function flattenObject(obj: Record<string, unknown>, prefix = ""): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(obj)) {
     const path = prefix ? `${prefix}.${key}` : key;
@@ -136,7 +136,7 @@ function flattenObject(obj: Record<string, unknown>, prefix = ""): Record<string
   return out;
 }
 
-function cellValue(value: unknown): string {
+export function cellValue(value: unknown): string {
   if (value === null || value === undefined) return "";
   if (typeof value === "object") return JSON.stringify(value);
   return String(value);

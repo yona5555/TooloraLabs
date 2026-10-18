@@ -22737,10 +22737,7 @@
         "intro": {
           "title": "How CSV and JSON Actually Relate",
           "paragraph1": "CSV and JSON solve the same basic problem — representing a list of records — with opposite structural assumptions. CSV assumes every record has exactly the same flat set of fields, so it only needs to write the field names once, in a header row, then just the values afterward. JSON makes no such assumption: every object carries its own keys, which is what lets it represent records with different shapes, or fields that are themselves nested objects and arrays, at the cost of repeating those key names in every single record.",
-          "paragraph2": "That structural gap is exactly why CSV → JSON is mechanical (each row becomes an object, each header becomes a key) while JSON → CSV requires real decisions this tool makes automatically: nested objects get flattened into dot-notation columns (address.city, address.zip), and arrays get serialized as a single JSON-text cell, since CSV has no native way to represent a list inside a list.",
-          "diagram": {
-            "caption": "A CSV header row becomes JSON object keys; each subsequent CSV row becomes one JSON object in an array."
-          }
+          "paragraph2": "That structural gap is exactly why CSV → JSON is mechanical (each row becomes an object, each header becomes a key) while JSON → CSV requires real decisions this tool makes automatically: nested objects get flattened into dot-notation columns (address.city, address.zip), and arrays get serialized as a single JSON-text cell, since CSV has no native way to represent a list inside a list."
         },
         "examples": {
           "title": "Worked Examples",
@@ -22854,6 +22851,143 @@
           "note": "The closest thing CSV has to an official specification — an Informational RFC that codified quoting, escaping, and header-row conventions roughly three decades after CSV files were already widespread, which is why this tool's parser handles real-world files that don't strictly follow it.",
           "url": "https://www.rfc-editor.org/rfc/rfc4180",
           "readOriginal": "Read the Original RFC"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Enter CSV or a JSON array above to see this indicator.",
+          "types": {
+            "integer": "integer",
+            "decimal": "decimal",
+            "boolean": "boolean",
+            "date": "date",
+            "text": "text",
+            "empty": "empty"
+          },
+          "explorer": {
+            "title": "Profile Any Column",
+            "intro": "Pick a column. Numbers show every row's value with the mean line; other columns show their most frequent values.",
+            "aria": "Profile chart of the selected column",
+            "mean": "mean {v}",
+            "rowsAxis": "first {n} rows",
+            "type": "Inferred type",
+            "filled": "Filled cells",
+            "distinct": "Distinct values",
+            "range": "Range",
+            "longest": "Longest value",
+            "chars": "{n} chars",
+            "column": "Column"
+          },
+          "typeShare": {
+            "title": "What Each Column Holds",
+            "intro": "The type every column's values agree on. CSV stores everything as text; this is what a typed reader would get back.",
+            "aria": "Donut of column types",
+            "columns": "columns",
+            "numeric": "Numeric columns",
+            "text": "Text columns",
+            "typed": "Typed columns",
+            "note": "In the JSON output",
+            "noteValue": "values stay strings",
+            "total": "Columns"
+          },
+          "sizes": {
+            "title": "The Same Table, Three Sizes",
+            "intro": "Your table as CSV, as minified JSON and as indented JSON, in UTF-8 bytes. JSON repeats every column name on every row.",
+            "aria": "Bars of the three sizes",
+            "csv": "CSV",
+            "jsonMin": "JSON (minified)",
+            "jsonPretty": "JSON (indented)",
+            "perRow": "Bytes per row CSV / JSON",
+            "ratio": "JSON vs CSV"
+          },
+          "jsonBytes": {
+            "title": "Where JSON's Extra Bytes Go",
+            "intro": "The minified JSON's bytes split into cell values, the key names repeated on every object, and punctuation.",
+            "aria": "Stacked bar of JSON bytes",
+            "axis": "Minified JSON: {n} bytes",
+            "values": "Values",
+            "keys": "Repeated keys",
+            "punctuation": "Punctuation",
+            "keysPerRow": "Key bytes",
+            "keysOnce": "Keys written once (CSV header)",
+            "repeatCost": "Cost of repeating keys",
+            "sum": "Sum of parts",
+            "keysShare": "Share spent on keys"
+          },
+          "delimiter": {
+            "title": "Which Delimiter the Text Uses",
+            "intro": "How often each candidate appears per line, averaged over the first lines, with its spread in red. The real delimiter is frequent and the same on every line.",
+            "aria": "Bars of delimiter counts per line",
+            "steady": "steady",
+            "varies": "varies",
+            "absent": "absent",
+            "mode": "Auto-detection",
+            "modeValue": "most frequent on line 1",
+            "lines": "Lines checked",
+            "perLine": "Count per line",
+            "fields": "Fields per line",
+            "used": "Delimiter used"
+          },
+          "fill": {
+            "title": "Filled and Empty Cells",
+            "intro": "The table as a grid: one cell per value, coloured by its column type, amber where the cell is empty.",
+            "aria": "Grid of filled and empty cells",
+            "cells": "Cells",
+            "empty": "Empty cells",
+            "sparse": "Sparsest column",
+            "complete": "Complete rows",
+            "filledShare": "Filled"
+          },
+          "rows": {
+            "title": "Fields per Row",
+            "intro": "How many fields each data row has against the header width (dashed). Short rows are padded with empty cells; long rows lose their extra fields.",
+            "aria": "Fields per row line",
+            "header": "header: {n}",
+            "axis": "Data rows",
+            "rows": "Data rows",
+            "width": "Header width",
+            "short": "Short rows",
+            "long": "Long rows",
+            "clean": "All rows match",
+            "yes": "yes",
+            "no": "no"
+          },
+          "ranges": {
+            "title": "Ranges of the Numeric Columns",
+            "intro": "Every numeric column as its own range from minimum to maximum, with the mean pinned on it.",
+            "aria": "Range bars with means",
+            "none": "This table has no numeric columns.",
+            "numeric": "Numeric columns",
+            "widest": "Widest range",
+            "meanOf": "Mean of {c}"
+          },
+          "flow": {
+            "title": "What the Converter Did",
+            "introCsv": "From your CSV text: lines, the header, data rows, fields split on the delimiter (quoted fields kept whole) and the JSON objects produced.",
+            "introJson": "From your JSON array: records, flattened keys (nested objects become dot paths), cells, quoted fields and the CSV lines produced.",
+            "aria": "Flow of the conversion",
+            "lines": "Lines",
+            "header": "Header fields",
+            "generated": "Generated names",
+            "dataRows": "Data rows",
+            "fields": "Fields split on \"{d}\"",
+            "objects": "JSON objects",
+            "records": "Records",
+            "flatKeys": "Flattened keys",
+            "cells": "Cells",
+            "quoted": "Quoted fields",
+            "csvLines": "CSV lines",
+            "delimiter": "Delimiter",
+            "auto": "auto",
+            "quotedLabel": "Quoted fields",
+            "headerRow": "Header row",
+            "yes": "yes",
+            "no": "no",
+            "built": "built from keys",
+            "formula": "Cells",
+            "output": "Output",
+            "outputJson": "{n} JSON objects",
+            "outputCsv": "{n} rows + header"
+          }
         }
       },
       "shareExport": {
@@ -22877,6 +23011,19 @@
         "lineCount": "Line Count",
         "charCount": "Character Count",
         "inputSectionTitle": "Input"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "inventory": "Inventory with quotes and gaps",
+        "semicolon": "Semicolon-separated (auto-detected)",
+        "noHeader": "No header row",
+        "nested": "Nested JSON to CSV",
+        "ragged": "Rows of uneven length",
+        "detail": "{rows} rows · {cols} columns · \"{delim}\""
+      },
+      "result": {
+        "summary": "{rows} rows × {cols} columns · delimiter \"{delim}\"",
+        "table": "Parsed table"
       }
     },
     "pdf-merge-split": {
