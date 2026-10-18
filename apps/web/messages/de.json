@@ -19949,6 +19949,20 @@
               "fix": "JSON hat überhaupt keine Kommentarsyntax – weder // noch /* */."
             }
           ]
+        },
+        "valid": "Gültiges JSON",
+        "summary": "Zeilen {lines} · Schlüssel {keys} · Tiefe {depth} · Werte {nodes}",
+        "railLegend": "Eine farbige Linie pro Verschachtelungsebene",
+        "caret": "hier",
+        "examplesTitle": "Schnellbeispiele",
+        "exampleDepth": "Tiefe {depth}",
+        "exampleError": "Fehler in Zeile {line}, Spalte {column}",
+        "examples": {
+          "library": "Bibliothekskatalog (Standard)",
+          "api": "GitHub-API-Benutzer (octocat)",
+          "config": "package.json-Konfiguration",
+          "geojson": "GeoJSON-Feature (RFC 7946)",
+          "broken": "Fehlerhaft: Komma am Ende"
         }
       },
       "form": {
@@ -19976,11 +19990,7 @@
         "intro": {
           "title": "Wie JSON tatsächlich funktioniert",
           "paragraph1": "JSON kennt nur zwei strukturelle Typen – Objekte (Schlüssel-Wert-Paare in „{ }\") und Arrays (geordnete Listen in [ ]) – sowie vier primitive Typen darin: Zeichenketten, Zahlen, Wahrheitswerte und null. Das ist die gesamte Grammatik. Es gibt keinen Datumstyp, keine Kommentare, keine nachgestellten Kommas und keine unquotierten Schlüssel, und jedes dieser „fehlenden\" Merkmale ist eine bewusste Entscheidung für Einfachheit, kein Versehen – genau das macht JSON so einfach, in jeder Sprache korrekt zu parsen, anders als Formate mit flexibleren, mehrdeutigen Grammatiken.",
-          "paragraph2": "Dieselbe strikte Grammatik ist auch der Grund, warum ein einziges fehlendes Komma oder Anführungszeichen ein ganzes JSON-Dokument beim Parsen scheitern lässt, ohne teilweise Wiederherstellung – genau das Problem, das die Fehlermeldung dieses Tools löst. Statt die kryptische Meldung anzuzeigen, die die JavaScript-Engine Ihres Browsers zufällig produziert (diese variieren je nach Engine und sind nicht immer zuverlässig), führt dieses Tool eine eigene, dedizierte JSON-Grammatikprüfung durch, um genau auf Zeile und Spalte der ersten Syntaxabweichung zu zeigen.",
-          "diagram": {
-            "valueLabel": "Wert",
-            "caption": "Jeder JSON-Wert ist genau einer von sechs Typen – zwei strukturelle (Objekt, Array) und vier primitive (Zeichenkette, Zahl, Wahrheitswert, null). Mehr gibt es in der Grammatik nicht."
-          }
+          "paragraph2": "Dieselbe strikte Grammatik ist auch der Grund, warum ein einziges fehlendes Komma oder Anführungszeichen ein ganzes JSON-Dokument beim Parsen scheitern lässt, ohne teilweise Wiederherstellung – genau das Problem, das die Fehlermeldung dieses Tools löst. Statt die kryptische Meldung anzuzeigen, die die JavaScript-Engine Ihres Browsers zufällig produziert (diese variieren je nach Engine und sind nicht immer zuverlässig), führt dieses Tool eine eigene, dedizierte JSON-Grammatikprüfung durch, um genau auf Zeile und Spalte der ersten Syntaxabweichung zu zeigen."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -20094,6 +20104,130 @@
           "note": "Die aktuelle offizielle Spezifikation von JSON, basierend auf Douglas Crockfords ursprünglicher Arbeit, ersetzt RFC 7159. Der eigene Grammatikprüfer dieses Tools folgt genau dieser Spezifikation beim Lokalisieren von Syntaxfehlern.",
           "url": "https://www.rfc-editor.org/rfc/rfc8259",
           "readOriginal": "Original-RFC lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Gib oben gültiges JSON ein, um diesen Indikator zu sehen.",
+          "kindNames": {
+            "object": "Objekt",
+            "array": "Array",
+            "string": "String",
+            "number": "Zahl",
+            "boolean": "Boolean",
+            "null": "Null"
+          },
+          "fold": {
+            "title": "Dokument nach Tiefe falten",
+            "intro": "Zieh den Regler: Jedes Objekt oder Array unterhalb der gewählten Ebene wird zu einer Zeile gefaltet, die zeigt, wie viele Elemente es verbirgt.",
+            "slider": "Ebenen anzeigen",
+            "level": "Angezeigte Ebenen",
+            "lines": "Sichtbare Zeilen",
+            "folded": "Gefaltete Container",
+            "nodes": "Sichtbare Werte",
+            "bytes": "Größe des gefalteten Texts",
+            "saved": "Ausgeblendete Zeilen"
+          },
+          "kinds": {
+            "title": "Werttypen in deinem JSON",
+            "intro": "Der innere Ring trennt Container von einfachen Werten, der äußere zählt jeden der sechs JSON-Werttypen.",
+            "aria": "Ringdiagramm der JSON-Werttypen",
+            "values": "Werte",
+            "containers": "Container (Objekt + Array)",
+            "scalars": "Einfache Werte",
+            "perContainer": "Kinder pro Container",
+            "most": "Häufigster Typ",
+            "total": "Werte gesamt"
+          },
+          "bytes": {
+            "title": "Wohin die Bytes gehen",
+            "intro": "Jedes Byte des minifizierten Dokuments, aufgeteilt in Satzzeichen, Schlüsselnamen, Strings, Zahlen und Literale.",
+            "aria": "Gestapelter Balken der Byte-Zusammensetzung",
+            "axis": "Minifizierte Größe: {total}",
+            "structure": "Satzzeichen und Klammern",
+            "keys": "Schlüsselnamen",
+            "strings": "Strings",
+            "numbers": "Zahlen",
+            "literals": "true / false / null",
+            "payload": "Daten (Werte)",
+            "overhead": "Struktur (Schlüssel + Satzzeichen)",
+            "perKey": "Mittlere Schlüsselgröße",
+            "sum": "Summe der Teile",
+            "total": "Minifiziert gesamt"
+          },
+          "depth": {
+            "title": "Werte auf jeder Verschachtelungsebene",
+            "intro": "Wie viele Werte auf jeder Ebene liegen, von der Wurzel auf Ebene 1 bis zu den tiefsten Blättern.",
+            "aria": "Balkendiagramm der Werte pro Ebene",
+            "axis": "Werte pro Ebene",
+            "levels": "Ebenen",
+            "widest": "Breiteste Ebene",
+            "level": "Ebene {n}",
+            "share": "Anteil an allen Werten",
+            "deepest": "Werte auf der tiefsten Ebene",
+            "fanout": "Verzweigung der Wurzel",
+            "total": "Werte gesamt"
+          },
+          "indent": {
+            "title": "Gleiche Daten, fünf Größen",
+            "intro": "Deine Eingabe und die vier Ausgabestile nebeneinander: Blau ist die gemeinsame Nutzlast, Bernstein der Leerraum, den jeder Stil hinzufügt.",
+            "aria": "Balken, die die Größe jedes Stils vergleichen",
+            "payloadKey": "Nutzlast",
+            "whitespaceKey": "Leerraum",
+            "input": "Deine Eingabe",
+            "minified": "Minifiziert",
+            "two": "2 Leerzeichen",
+            "four": "4 Leerzeichen",
+            "tab": "Tabs",
+            "saving": "Ersparnis durch Minifizieren"
+          },
+          "keys": {
+            "title": "Am häufigsten wiederholte Schlüssel",
+            "intro": "Häufig wiederkehrende Schlüssel zeigen eine Liste von Datensätzen mit einem gemeinsamen Schema, den Teil, den ein Schema oder ein Spaltenformat am besten komprimiert.",
+            "aria": "Rangbalken der Schlüsselhäufigkeit",
+            "none": "Dieses Dokument hat keine Objektschlüssel.",
+            "unique": "Verschiedene Schlüssel",
+            "occurrences": "Schlüsselvorkommen",
+            "repeated": "Mehrfach genutzte Schlüssel",
+            "top": "Am häufigsten",
+            "reuse": "Wiederholte Vorkommen"
+          },
+          "path": {
+            "title": "Der tiefste Pfad",
+            "intro": "Die Treppe von der Wurzel bis zum tiefsten Wert, eine Stufe pro Ebene, gefärbt nach dem Werttyp.",
+            "aria": "Stufendiagramm des tiefsten Pfads",
+            "skipped": "… {n} weitere Ebenen",
+            "path": "JSONPath",
+            "steps": "Stufen",
+            "leafKind": "Typ des tiefsten Werts",
+            "containersOnPath": "Container auf dem Pfad",
+            "depth": "Maximale Tiefe"
+          },
+          "share": {
+            "title": "Gewicht jedes Elements der obersten Ebene",
+            "intro": "Der Anteil jedes Wurzelschlüssels (oder Array-Elements) an der minifizierten Größe, gefärbt nach seinem Typ.",
+            "aria": "Ringdiagramm der Größen der obersten Ebene",
+            "scalarRoot": "Die Wurzel ist ein einzelner Wert ohne Elemente.",
+            "others": "andere",
+            "center": "{n} Elemente",
+            "members": "Elemente der obersten Ebene",
+            "largest": "Größtes",
+            "smallest": "Kleinstes",
+            "ratio": "Größtes ÷ kleinstes",
+            "largestShare": "Anteil des größten"
+          },
+          "strings": {
+            "title": "Verteilung der String-Längen",
+            "intro": "Wie lang deine Strings sind, in sechs Bereichen, mit der mittleren Länge auf der Achse.",
+            "aria": "Histogramm der String-Längen mit Mittelwert",
+            "none": "Dieses Dokument hat keine Strings.",
+            "mean": "Mittel {n}",
+            "count": "Strings",
+            "shortest": "Kürzester",
+            "longest": "Längster",
+            "longestText": "Längster String",
+            "meanLabel": "Mittlere Länge",
+            "chars": "{n} Zeichen"
+          }
         }
       },
       "shareExport": {

@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import JSONGrammarDiagram from "./JSONGrammarDiagram";
+import JSONFoldExplorer from "./JSONFoldExplorer";
+import JSONKindDonut from "./JSONKindDonut";
+import JSONByteComposition from "./JSONByteComposition";
+import JSONIndentSizes from "./JSONIndentSizes";
+import JSONDepthBars from "./JSONDepthBars";
+import JSONKeyFrequency from "./JSONKeyFrequency";
+import JSONDeepestPath from "./JSONDeepestPath";
+import JSONTopLevelShare from "./JSONTopLevelShare";
+import JSONStringLengths from "./JSONStringLengths";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,8 +27,14 @@ export default async function JSONEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <JSONFoldExplorer />
+        <JSONKindDonut />
         <p>{t("intro.paragraph2")}</p>
-        <JSONGrammarDiagram valueLabel={t("intro.diagram.valueLabel")} caption={t("intro.diagram.caption")} />
+        <div className="space-y-6">
+          <JSONByteComposition />
+          <JSONIndentSizes />
+        </div>
+        <JSONDepthBars />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -49,6 +63,7 @@ export default async function JSONEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <JSONKeyFrequency />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -59,6 +74,11 @@ export default async function JSONEducation() {
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
+        </div>
+        <div className="space-y-6">
+          <JSONDeepestPath />
+          <JSONTopLevelShare />
+          <JSONStringLengths />
         </div>
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}

@@ -19949,6 +19949,20 @@
               "fix": "JSON n'a aucune syntaxe de commentaire — ni // ni /* */."
             }
           ]
+        },
+        "valid": "JSON valide",
+        "summary": "Lignes {lines} · Clés {keys} · Profondeur {depth} · Valeurs {nodes}",
+        "railLegend": "Un repère coloré par niveau d’imbrication",
+        "caret": "ici",
+        "examplesTitle": "Exemples rapides",
+        "exampleDepth": "profondeur {depth}",
+        "exampleError": "erreur ligne {line}, colonne {column}",
+        "examples": {
+          "library": "Catalogue de bibliothèque (par défaut)",
+          "api": "Utilisateur de l’API GitHub (octocat)",
+          "config": "Configuration package.json",
+          "geojson": "Feature GeoJSON (RFC 7946)",
+          "broken": "Cassé : virgule finale"
         }
       },
       "form": {
@@ -19976,11 +19990,7 @@
         "intro": {
           "title": "Comment fonctionne réellement JSON",
           "paragraph1": "JSON ne comporte que deux types structurels — les objets (des paires clé/valeur entre { }) et les tableaux (des listes ordonnées entre [ ]) — et quatre types primitifs qu'ils peuvent contenir : chaînes de caractères, nombres, booléens et null. C'est toute la grammaire. Il n'existe ni type date, ni commentaires, ni virgule finale, ni clé sans guillemets, et chacune de ces fonctionnalités « manquantes » relève d'un choix délibéré de simplicité, pas d'un oubli : c'est précisément ce qui rend JSON aussi simple à analyser correctement dans n'importe quel langage, contrairement à des formats à la grammaire plus souple et plus ambiguë.",
-          "paragraph2": "Cette même grammaire stricte explique aussi pourquoi une simple virgule ou un simple guillemet manquant suffit à faire échouer l'analyse de tout un document JSON, sans récupération partielle possible — c'est exactement le problème que résout le rapport d'erreurs de cet outil. Plutôt que d'afficher le message parfois cryptique que produit le moteur JavaScript de votre navigateur (ces messages varient selon le moteur et ne sont pas toujours fiables), cet outil exécute son propre contrôle de grammaire JSON dédié pour indiquer la ligne et la colonne exactes de la première déviation de syntaxe.",
-          "diagram": {
-            "valueLabel": "valeur",
-            "caption": "Chaque valeur JSON appartient exactement à l'un de ces six types — deux structurels (objet, tableau) et quatre primitifs (chaîne, nombre, booléen, null). La grammaire ne contient rien d'autre."
-          }
+          "paragraph2": "Cette même grammaire stricte explique aussi pourquoi une simple virgule ou un simple guillemet manquant suffit à faire échouer l'analyse de tout un document JSON, sans récupération partielle possible — c'est exactement le problème que résout le rapport d'erreurs de cet outil. Plutôt que d'afficher le message parfois cryptique que produit le moteur JavaScript de votre navigateur (ces messages varient selon le moteur et ne sont pas toujours fiables), cet outil exécute son propre contrôle de grammaire JSON dédié pour indiquer la ligne et la colonne exactes de la première déviation de syntaxe."
         },
         "examples": {
           "title": "Exemples commentés",
@@ -20094,6 +20104,130 @@
           "note": "La spécification officielle actuelle de JSON, fondée sur les travaux originaux de Douglas Crockford, remplaçant la RFC 7159. Le vérificateur de grammaire de cet outil suit exactement cette spécification pour localiser les erreurs de syntaxe.",
           "url": "https://www.rfc-editor.org/rfc/rfc8259",
           "readOriginal": "Lire la RFC originale"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Saisissez un JSON valide ci-dessus pour voir cet indicateur.",
+          "kindNames": {
+            "object": "Objet",
+            "array": "Tableau",
+            "string": "Chaîne",
+            "number": "Nombre",
+            "boolean": "Booléen",
+            "null": "Null"
+          },
+          "fold": {
+            "title": "Replier le document par profondeur",
+            "intro": "Faites glisser le curseur : chaque objet ou tableau plus profond que le niveau choisi se replie en une ligne indiquant combien de membres il masque.",
+            "slider": "Niveaux affichés",
+            "level": "Niveaux affichés",
+            "lines": "Lignes visibles",
+            "folded": "Conteneurs repliés",
+            "nodes": "Valeurs visibles",
+            "bytes": "Taille du texte replié",
+            "saved": "Lignes masquées"
+          },
+          "kinds": {
+            "title": "Types de valeurs dans votre JSON",
+            "intro": "L’anneau intérieur sépare conteneurs et valeurs simples ; l’anneau extérieur compte chacun des six types de valeur JSON.",
+            "aria": "Graphique en anneaux des types de valeur JSON",
+            "values": "valeurs",
+            "containers": "Conteneurs (objet + tableau)",
+            "scalars": "Valeurs simples",
+            "perContainer": "Enfants par conteneur",
+            "most": "Type le plus fréquent",
+            "total": "Total des valeurs"
+          },
+          "bytes": {
+            "title": "Où vont les octets",
+            "intro": "Chaque octet du document minifié, réparti entre ponctuation, noms de clés, chaînes, nombres et littéraux.",
+            "aria": "Barre empilée de la composition en octets",
+            "axis": "Taille minifiée : {total}",
+            "structure": "Ponctuation et accolades",
+            "keys": "Noms de clés",
+            "strings": "Chaînes",
+            "numbers": "Nombres",
+            "literals": "true / false / null",
+            "payload": "Données (valeurs)",
+            "overhead": "Structure (clés + ponctuation)",
+            "perKey": "Taille moyenne d’une clé",
+            "sum": "Somme des parties",
+            "total": "Total minifié"
+          },
+          "depth": {
+            "title": "Valeurs à chaque niveau d’imbrication",
+            "intro": "Le nombre de valeurs à chaque niveau, de la racine au niveau 1 jusqu’aux feuilles les plus profondes.",
+            "aria": "Diagramme en barres des valeurs par niveau",
+            "axis": "Valeurs par niveau",
+            "levels": "Niveaux",
+            "widest": "Niveau le plus large",
+            "level": "Niveau {n}",
+            "share": "Part de toutes les valeurs",
+            "deepest": "Valeurs au niveau le plus profond",
+            "fanout": "Ramification de la racine",
+            "total": "Total des valeurs"
+          },
+          "indent": {
+            "title": "Mêmes données, cinq tailles",
+            "intro": "Votre saisie et les quatre styles de sortie côte à côte : la partie bleue est la charge commune, la partie ambre l’espacement ajouté par chaque style.",
+            "aria": "Barres comparant la taille de chaque style",
+            "payloadKey": "Charge",
+            "whitespaceKey": "Espacement",
+            "input": "Votre saisie",
+            "minified": "Minifié",
+            "two": "2 espaces",
+            "four": "4 espaces",
+            "tab": "Tabulations",
+            "saving": "Gain par minification"
+          },
+          "keys": {
+            "title": "Clés les plus répétées",
+            "intro": "Les clés très répétées révèlent une liste d’enregistrements partageant un même schéma, la partie qu’un schéma ou un format en colonnes compresse le mieux.",
+            "aria": "Barres classées par fréquence de clé",
+            "none": "Ce document n’a aucune clé d’objet.",
+            "unique": "Clés distinctes",
+            "occurrences": "Occurrences de clés",
+            "repeated": "Clés utilisées plusieurs fois",
+            "top": "La plus répétée",
+            "reuse": "Occurrences répétées"
+          },
+          "path": {
+            "title": "Le chemin le plus profond",
+            "intro": "L’escalier de la racine à la valeur la plus profonde, une marche par niveau, colorée selon le type de valeur.",
+            "aria": "Diagramme en escalier du chemin le plus profond",
+            "skipped": "… {n} niveaux de plus",
+            "path": "JSONPath",
+            "steps": "Marches",
+            "leafKind": "Type de la valeur la plus profonde",
+            "containersOnPath": "Conteneurs sur le chemin",
+            "depth": "Profondeur maximale"
+          },
+          "share": {
+            "title": "Poids de chaque membre de premier niveau",
+            "intro": "La part de la taille minifiée de chaque clé racine (ou élément du tableau), colorée selon son type.",
+            "aria": "Anneau des tailles des membres de premier niveau",
+            "scalarRoot": "La racine est une valeur unique, sans membres.",
+            "others": "autres",
+            "center": "{n} membres",
+            "members": "Membres de premier niveau",
+            "largest": "Le plus grand",
+            "smallest": "Le plus petit",
+            "ratio": "Plus grand ÷ plus petit",
+            "largestShare": "Part du plus grand"
+          },
+          "strings": {
+            "title": "Distribution des longueurs de chaîne",
+            "intro": "La longueur de vos chaînes en six tranches, avec la longueur moyenne marquée sur l’axe.",
+            "aria": "Histogramme des longueurs avec la moyenne",
+            "none": "Ce document n’a aucune chaîne.",
+            "mean": "moyenne {n}",
+            "count": "Chaînes",
+            "shortest": "La plus courte",
+            "longest": "La plus longue",
+            "longestText": "Chaîne la plus longue",
+            "meanLabel": "Longueur moyenne",
+            "chars": "{n} caract."
+          }
         }
       },
       "shareExport": {

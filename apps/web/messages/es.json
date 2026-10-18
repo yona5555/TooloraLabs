@@ -19949,6 +19949,20 @@
               "fix": "JSON no tiene ninguna sintaxis de comentarios — ni // ni /* */."
             }
           ]
+        },
+        "valid": "JSON válido",
+        "summary": "Líneas {lines} · Claves {keys} · Profundidad {depth} · Valores {nodes}",
+        "railLegend": "Una guía de color por nivel de anidación",
+        "caret": "aquí",
+        "examplesTitle": "Ejemplos rápidos",
+        "exampleDepth": "profundidad {depth}",
+        "exampleError": "error en línea {line}, columna {column}",
+        "examples": {
+          "library": "Catálogo de biblioteca (predeterminado)",
+          "api": "Usuario de la API de GitHub (octocat)",
+          "config": "Configuración package.json",
+          "geojson": "Feature GeoJSON (RFC 7946)",
+          "broken": "Roto: coma final"
         }
       },
       "form": {
@@ -19976,11 +19990,7 @@
         "intro": {
           "title": "Cómo funciona realmente JSON",
           "paragraph1": "JSON solo tiene dos tipos estructurales — objetos (pares clave-valor entre '{ }') y arreglos (listas ordenadas entre [ ]) — y cuatro tipos primitivos dentro de ellos: cadenas, números, booleanos y null. Esa es toda la gramática. No existe un tipo de fecha, ni comentarios, ni comas finales, ni claves sin comillas, y cada una de esas características «ausentes» es una decisión deliberada de simplicidad, no un descuido: es precisamente lo que hace que JSON sea trivial de analizar correctamente en cualquier lenguaje, a diferencia de formatos con gramáticas más flexibles y ambiguas.",
-          "paragraph2": "Esa misma gramática estricta también explica por qué falta una sola coma o comilla hace que todo un documento JSON deje de analizarse, sin ninguna recuperación parcial — que es exactamente el problema que resuelve el sistema de errores de esta herramienta. En lugar de mostrar el mensaje críptico que le toque generar al motor de JavaScript de tu navegador (que varía según el motor y no siempre es fiable), esta herramienta ejecuta su propia verificación de la gramática JSON para señalar la línea y columna exactas de la primera desviación de sintaxis.",
-          "diagram": {
-            "valueLabel": "valor",
-            "caption": "Todo valor JSON es exactamente uno de seis tipos — dos estructurales (objeto, arreglo) y cuatro primitivos (cadena, número, booleano, null). No hay nada más en la gramática."
-          }
+          "paragraph2": "Esa misma gramática estricta también explica por qué falta una sola coma o comilla hace que todo un documento JSON deje de analizarse, sin ninguna recuperación parcial — que es exactamente el problema que resuelve el sistema de errores de esta herramienta. En lugar de mostrar el mensaje críptico que le toque generar al motor de JavaScript de tu navegador (que varía según el motor y no siempre es fiable), esta herramienta ejecuta su propia verificación de la gramática JSON para señalar la línea y columna exactas de la primera desviación de sintaxis."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -20094,6 +20104,130 @@
           "note": "La especificación oficial vigente de JSON, basada en el trabajo original de Douglas Crockford, que deja obsoleta la RFC 7159. El verificador de gramática propio de esta herramienta sigue exactamente esta especificación al localizar errores de sintaxis.",
           "url": "https://www.rfc-editor.org/rfc/rfc8259",
           "readOriginal": "Leer la RFC original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Introduce un JSON válido arriba para ver este indicador.",
+          "kindNames": {
+            "object": "Objeto",
+            "array": "Array",
+            "string": "Cadena",
+            "number": "Número",
+            "boolean": "Booleano",
+            "null": "Null"
+          },
+          "fold": {
+            "title": "Plegar el documento por profundidad",
+            "intro": "Arrastra el control: cada objeto o array más profundo que el nivel elegido se pliega en una línea que indica cuántos miembros oculta.",
+            "slider": "Niveles visibles",
+            "level": "Niveles mostrados",
+            "lines": "Líneas visibles",
+            "folded": "Contenedores plegados",
+            "nodes": "Valores visibles",
+            "bytes": "Tamaño del texto plegado",
+            "saved": "Líneas ocultas"
+          },
+          "kinds": {
+            "title": "Tipos de valor en tu JSON",
+            "intro": "El anillo interior separa contenedores de valores simples; el exterior cuenta cada uno de los seis tipos de valor JSON.",
+            "aria": "Gráfico de anillos de tipos de valor JSON",
+            "values": "valores",
+            "containers": "Contenedores (objeto + array)",
+            "scalars": "Valores simples",
+            "perContainer": "Hijos por contenedor",
+            "most": "Tipo más común",
+            "total": "Valores totales"
+          },
+          "bytes": {
+            "title": "A dónde van los bytes",
+            "intro": "Cada byte del documento minificado, dividido en puntuación, nombres de clave, cadenas, números y literales.",
+            "aria": "Barra apilada de la composición en bytes",
+            "axis": "Tamaño minificado: {total}",
+            "structure": "Puntuación y llaves",
+            "keys": "Nombres de clave",
+            "strings": "Cadenas",
+            "numbers": "Números",
+            "literals": "true / false / null",
+            "payload": "Datos (valores)",
+            "overhead": "Estructura (claves + puntuación)",
+            "perKey": "Tamaño medio de clave",
+            "sum": "Suma de partes",
+            "total": "Total minificado"
+          },
+          "depth": {
+            "title": "Valores en cada nivel de anidación",
+            "intro": "Cuántos valores hay en cada nivel, desde la raíz en el nivel 1 hasta las hojas más profundas.",
+            "aria": "Gráfico de barras de valores por nivel",
+            "axis": "Valores por nivel",
+            "levels": "Niveles",
+            "widest": "Nivel más ancho",
+            "level": "Nivel {n}",
+            "share": "Parte de todos los valores",
+            "deepest": "Valores en el nivel más profundo",
+            "fanout": "Ramificación de la raíz",
+            "total": "Valores totales"
+          },
+          "indent": {
+            "title": "Los mismos datos, cinco tamaños",
+            "intro": "Tu entrada y los cuatro estilos de salida: la parte azul es la carga común y la ámbar el espacio en blanco que añade cada estilo.",
+            "aria": "Barras que comparan el tamaño de cada estilo",
+            "payloadKey": "Carga",
+            "whitespaceKey": "Espacios",
+            "input": "Tu entrada",
+            "minified": "Minificado",
+            "two": "2 espacios",
+            "four": "4 espacios",
+            "tab": "Tabulaciones",
+            "saving": "Ahorro al minificar"
+          },
+          "keys": {
+            "title": "Claves más repetidas",
+            "intro": "Las claves que aparecen muchas veces revelan una lista de registros con un mismo esquema, la parte que mejor comprime un esquema o un formato columnar.",
+            "aria": "Barras ordenadas por frecuencia de clave",
+            "none": "Este documento no tiene claves de objeto.",
+            "unique": "Claves distintas",
+            "occurrences": "Apariciones de claves",
+            "repeated": "Claves usadas más de una vez",
+            "top": "Más repetida",
+            "reuse": "Apariciones repetidas"
+          },
+          "path": {
+            "title": "La ruta más profunda",
+            "intro": "La escalera desde la raíz hasta el valor más profundo, un peldaño por nivel, coloreado según el tipo de valor.",
+            "aria": "Diagrama escalonado de la ruta más profunda",
+            "skipped": "… {n} niveles más",
+            "path": "JSONPath",
+            "steps": "Peldaños",
+            "leafKind": "Tipo del valor más profundo",
+            "containersOnPath": "Contenedores en la ruta",
+            "depth": "Profundidad máxima"
+          },
+          "share": {
+            "title": "Peso de cada miembro de primer nivel",
+            "intro": "La parte del tamaño minificado de cada clave raíz (o elemento del array), coloreada por su tipo.",
+            "aria": "Gráfico de anillo de tamaños de primer nivel",
+            "scalarRoot": "La raíz es un valor único, sin miembros.",
+            "others": "otros",
+            "center": "{n} miembros",
+            "members": "Miembros de primer nivel",
+            "largest": "Mayor",
+            "smallest": "Menor",
+            "ratio": "Mayor ÷ menor",
+            "largestShare": "Parte del mayor"
+          },
+          "strings": {
+            "title": "Distribución de longitudes de cadena",
+            "intro": "La longitud de tus cadenas en seis franjas, con la longitud media marcada en el eje.",
+            "aria": "Histograma de longitudes con la media",
+            "none": "Este documento no tiene cadenas.",
+            "mean": "media {n}",
+            "count": "Cadenas",
+            "shortest": "Más corta",
+            "longest": "Más larga",
+            "longestText": "Cadena más larga",
+            "meanLabel": "Longitud media",
+            "chars": "{n} caract."
+          }
         }
       },
       "shareExport": {
