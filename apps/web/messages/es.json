@@ -24387,13 +24387,7 @@
         "intro": {
           "title": "Cómo funciona realmente la deduplicación",
           "paragraph1": "El método ingenuo para encontrar duplicados —comparar cada línea con todas las demás— requiere un tiempo que crece de forma cuadrática con el tamaño de la lista: duplicar la longitud de una lista multiplica aproximadamente por cuatro el trabajo de comparación, lo que se vuelve poco práctico a partir de unos pocos miles de líneas. Un enfoque basado en tablas hash evita esto por completo manteniendo un conjunto de todas las líneas ya vistas: para cada línea nueva, comprobar si ya está en ese conjunto lleva un tiempo prácticamente constante, sin importar cuánto haya crecido el conjunto, porque una función hash convierte el contenido de la línea directamente en una posición de búsqueda en lugar de requerir un recorrido completo. Por eso las herramientas de deduplicación, incluida esta, pueden procesar listas de decenas de miles de líneas de forma instantánea en vez de quedarse bloqueadas.",
-          "paragraph2": "Esto también explica por qué los ajustes de esta herramienta importan más de lo que parece a primera vista. «Distinguir mayúsculas» y «Recortar espacios» controlan, en realidad, qué es lo que entra en la función hash: desactivar la distinción de mayúsculas hace que «Apple» y «apple» caigan en el mismo grupo y se fusionen en una sola línea; recortar los espacios hace lo mismo con « apple» y «apple». «Conservar primera» frente a «Conservar última» no cambia en absoluto qué líneas se consideran duplicadas, solo determina qué copia concreta de cada grupo de duplicados sobrevive en el resultado, y en qué posición queda.",
-          "diagram": {
-            "inputLabel": "Líneas de entrada",
-            "hashSetLabel": "Conjunto visto",
-            "outputLabel": "Resultado",
-            "caption": "Cómo funciona la deduplicación basada en hash: cada línea de entrada se comprueba contra un conjunto de líneas ya vistas. Una línea nueva se añade tanto al conjunto como al resultado; una repetida (tachada) se omite por completo."
-          }
+          "paragraph2": "Esto también explica por qué los ajustes de esta herramienta importan más de lo que parece a primera vista. «Distinguir mayúsculas» y «Recortar espacios» controlan, en realidad, qué es lo que entra en la función hash: desactivar la distinción de mayúsculas hace que «Apple» y «apple» caigan en el mismo grupo y se fusionen en una sola línea; recortar los espacios hace lo mismo con « apple» y «apple». «Conservar primera» frente a «Conservar última» no cambia en absoluto qué líneas se consideran duplicadas, solo determina qué copia concreta de cada grupo de duplicados sobrevive en el resultado, y en qué posición queda."
         },
         "examples": {
           "title": "Ejemplos resueltos",
@@ -24499,6 +24493,124 @@
           "note": "El primer artículo publicado que describe el hashing —calcular una dirección de búsqueda directamente a partir del contenido de un dato—, la técnica exacta en la que se apoya la detección casi instantánea de duplicados de esta herramienta.",
           "url": "https://doi.org/10.1147/rd.12.0130",
           "readOriginal": "Leer el artículo original"
+        },
+        "lab": {
+          "worked": "Ejemplo resuelto",
+          "unavailable": "Pega una lista arriba para ver este indicador.",
+          "map": {
+            "title": "Cada línea, conservada o eliminada",
+            "intro": "Una celda por línea en orden: verde conservada, roja eliminada, con un arco hasta la línea que repite cada duplicado. Haz clic para leer la línea.",
+            "aria": "Mapa de líneas",
+            "line": "Línea",
+            "text": "Texto",
+            "occurrences": "Apariciones",
+            "first": "Vista primero en la línea",
+            "fate": "Resultado",
+            "kept": "conservada",
+            "removed": "eliminada (repite la línea {n})"
+          },
+          "histogram": {
+            "title": "Cuántas veces aparece cada línea",
+            "intro": "Cuántas líneas distintas aparecen una, dos, tres o más veces.",
+            "aria": "Barras por número de apariciones",
+            "once": "Aparecen una vez",
+            "repeated": "Aparecen más de una vez",
+            "repeatedShare": "Parte repetida",
+            "top": "Más copias",
+            "distinct": "Líneas distintas"
+          },
+          "top": {
+            "title": "Líneas más repetidas",
+            "intro": "Las líneas con más copias: verde la copia conservada, rojo las eliminadas.",
+            "aria": "Barras ordenadas de líneas repetidas",
+            "none": "Ninguna línea se repite.",
+            "groups": "Líneas repetidas",
+            "topLine": "La más repetida",
+            "topRemoved": "Copias eliminadas",
+            "topShare": "Parte de lo eliminado",
+            "removed": "Líneas eliminadas"
+          },
+          "curve": {
+            "title": "Líneas distintas al leer",
+            "intro": "Líneas distintas vistas frente a líneas leídas. Sin repeticiones la curva seguiría la diagonal; cada tramo plano es un duplicado.",
+            "aria": "Líneas distintas acumuladas",
+            "axis": "Líneas leídas",
+            "lines": "Líneas leídas",
+            "distinct": "Distintas",
+            "firstRepeat": "Primera repetición",
+            "lineN": "línea {n}",
+            "flat": "Tramos planos",
+            "ratio": "Parte distinta"
+          },
+          "gauge": {
+            "title": "Parte eliminada",
+            "intro": "La parte de líneas no vacías que eran duplicados y se eliminaron.",
+            "aria": "Indicador de parte eliminada",
+            "total": "Líneas no vacías",
+            "unique": "Conservadas",
+            "removed": "Eliminadas",
+            "formula": "Eliminadas ÷ total",
+            "share": "Parte eliminada"
+          },
+          "bytes": {
+            "title": "Bytes conservados y eliminados",
+            "intro": "Los bytes UTF-8 de la entrada divididos entre lo que queda en la lista limpia y lo que se fue (duplicados, líneas vacías y espacios sobrantes).",
+            "aria": "Barra apilada de bytes",
+            "axis": "Entrada: {n} bytes",
+            "kept": "Conservado",
+            "removed": "Eliminado",
+            "input": "Entrada",
+            "output": "Salida",
+            "blank": "Líneas vacías",
+            "perLine": "Bytes por línea conservada",
+            "saved": "Más pequeño en"
+          },
+          "modes": {
+            "title": "Líneas únicas con cada regla",
+            "intro": "Líneas únicas al comparar exactamente, sin distinguir mayúsculas y sin mayúsculas ni espacios, contadas por la herramienta. Haz clic en una barra para usar esa regla.",
+            "aria": "Únicas por regla",
+            "strict": "Exacta",
+            "ignoreCase": "Sin mayúsculas",
+            "ignoreCaseAndSpace": "Sin mayúsculas ni espacios",
+            "hidden": "Casi duplicados ocultos",
+            "current": "Tu ajuste actual"
+          },
+          "variants": {
+            "title": "Casi duplicados",
+            "intro": "Líneas escritas distinto que coinciden al ignorar mayúsculas y espacios; los espacios se muestran como puntos.",
+            "aria": "Grupos de casi duplicados",
+            "none": "No hay casi duplicados.",
+            "groups": "Grupos",
+            "spellings": "Escrituras distintas",
+            "case": "Diferencias de mayúsculas",
+            "space": "Diferencias de espacios",
+            "kept": "separadas",
+            "merged": "fusionadas",
+            "tip": "Consejo",
+            "tipOn": "desactiva mayúsculas y deja el recorte activado para fusionarlas",
+            "tipDone": "ya fusionadas"
+          },
+          "flow": {
+            "title": "De líneas en bruto a lista limpia",
+            "intro": "Lo que hizo la herramienta: descartó líneas vacías, comparó, eliminó duplicados y conservó el orden u ordenó.",
+            "aria": "Flujo de la limpieza",
+            "raw": "Líneas en bruto",
+            "nonBlank": "No vacías",
+            "compareExact": "Comparación exacta",
+            "compareCaseless": "Sin mayúsculas",
+            "removed": "Duplicados eliminados",
+            "sorted": "Ordenadas A–Z",
+            "ordered": "En su orden",
+            "blank": "Líneas vacías",
+            "keep": "Copia conservada",
+            "keepFirst": "primera",
+            "keepLast": "última",
+            "trim": "Recortar espacios",
+            "on": "sí",
+            "off": "no",
+            "formula": "Recuento",
+            "output": "Líneas de salida"
+          }
         }
       },
       "shareExport": {
@@ -24520,6 +24632,18 @@
         "preparedForTitle": "Preparado Para",
         "howCalculatedTitle": "Cómo Se Calculó Esto",
         "inputSectionTitle": "Entrada"
+      },
+      "examples": {
+        "title": "Ejemplos rápidos",
+        "emails": "Lista de correo combinada",
+        "caseless": "Misma lista sin distinguir mayúsculas",
+        "sorted": "Sin mayúsculas, ordenada A–Z",
+        "tags": "Etiquetas repetidas",
+        "keepLast": "Conservar la última copia"
+      },
+      "result": {
+        "summary": "{removed} duplicados eliminados ({share}) · {blank} líneas vacías descartadas",
+        "repeats": "repite la línea {n}"
       }
     },
     "invoice-generator": {

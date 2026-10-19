@@ -5,3 +5,4 @@ export * from "./DuplicateLineRemover";
 export * from "./jsonAnalysis";
 export * from "./base64Analysis";
 export * from "./fileNameAnalysis";
+export * from "./dedupeAnalysis";

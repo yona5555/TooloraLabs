@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import DedupeDiagram from "./DedupeDiagram";
+import DlLineMap from "./DlLineMap";
+import DlRepeatHistogram from "./DlRepeatHistogram";
+import DlTopRepeats from "./DlTopRepeats";
+import DlUniqueCurve from "./DlUniqueCurve";
+import DlSavingsGauge from "./DlSavingsGauge";
+import DlBytesBar from "./DlBytesBar";
+import DlModeTrio from "./DlModeTrio";
+import DlVariants from "./DlVariants";
+import DlFlow from "./DlFlow";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,13 +27,14 @@ export default async function DuplicateLineEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <DlLineMap />
+        <DlFlow />
         <p>{t("intro.paragraph2")}</p>
-        <DedupeDiagram
-          inputLabel={t("intro.diagram.inputLabel")}
-          hashSetLabel={t("intro.diagram.hashSetLabel")}
-          outputLabel={t("intro.diagram.outputLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <div className="space-y-6">
+          <DlModeTrio />
+          <DlVariants />
+        </div>
+        <DlRepeatHistogram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -54,6 +63,7 @@ export default async function DuplicateLineEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <DlTopRepeats />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -65,11 +75,12 @@ export default async function DuplicateLineEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <DlUniqueCurve />
+          <DlSavingsGauge />
+          <DlBytesBar />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

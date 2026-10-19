@@ -24387,13 +24387,7 @@
         "intro": {
           "title": "How Deduplication Actually Works",
           "paragraph1": "The naive way to find duplicates — compare every line against every other line — takes time that grows quadratically with the list's size: doubling a list's length roughly quadruples the comparison work, which becomes impractical past a few thousand lines. A hash-based approach sidesteps this entirely by keeping a running set of every line already seen: for each new line, checking whether it's already in that set takes roughly constant time regardless of how large the set has grown, since a hash function converts the line's content directly into a lookup position rather than requiring a scan. This is exactly why deduplication tools, including this one, can process lists with tens of thousands of lines instantly rather than freezing.",
-          "paragraph2": "This also explains why the settings on this tool matter more than they might first appear. \"Case-sensitive\" and \"trim whitespace\" both control what actually goes into the hash function — turning case-sensitivity off means \"Apple\" and \"apple\" hash to the same bucket and collapse into one; trimming whitespace means \" apple\" and \"apple\" do the same. \"Keep first\" versus \"keep last\" doesn't change which lines are considered duplicates at all — only which single copy of each duplicate group is the one that survives into the output, and where it ends up positioned.",
-          "diagram": {
-            "inputLabel": "Input Lines",
-            "hashSetLabel": "Seen Set",
-            "outputLabel": "Output",
-            "caption": "How hash-based deduplication works: each input line is checked against a running set of lines already seen. A new line is added to both the set and the output; a repeat (struck through) is skipped entirely."
-          }
+          "paragraph2": "This also explains why the settings on this tool matter more than they might first appear. \"Case-sensitive\" and \"trim whitespace\" both control what actually goes into the hash function — turning case-sensitivity off means \"Apple\" and \"apple\" hash to the same bucket and collapse into one; trimming whitespace means \" apple\" and \"apple\" do the same. \"Keep first\" versus \"keep last\" doesn't change which lines are considered duplicates at all — only which single copy of each duplicate group is the one that survives into the output, and where it ends up positioned."
         },
         "examples": {
           "title": "Worked Examples",
@@ -24499,6 +24493,124 @@
           "note": "The first published paper describing hashing — computing a lookup address directly from data content — the exact technique this tool's near-instant duplicate detection relies on.",
           "url": "https://doi.org/10.1147/rd.12.0130",
           "readOriginal": "Read the Original Paper"
+        },
+        "lab": {
+          "worked": "Worked example",
+          "unavailable": "Paste a list above to see this indicator.",
+          "map": {
+            "title": "Every Line, Kept or Removed",
+            "intro": "One cell per line in order: green kept, red removed, with an arc back to the line each duplicate repeats. Click a cell to read that line.",
+            "aria": "Map of kept and removed lines",
+            "line": "Line",
+            "text": "Text",
+            "occurrences": "Occurrences",
+            "first": "First seen at line",
+            "fate": "Result",
+            "kept": "kept",
+            "removed": "removed (repeats line {n})"
+          },
+          "histogram": {
+            "title": "How Often Each Line Occurs",
+            "intro": "How many distinct lines appear once, twice, three times and more.",
+            "aria": "Bars of lines per occurrence count",
+            "once": "Appear once",
+            "repeated": "Appear more than once",
+            "repeatedShare": "Share repeated",
+            "top": "Most copies",
+            "distinct": "Distinct lines"
+          },
+          "top": {
+            "title": "Most Repeated Lines",
+            "intro": "The lines with the most copies: green is the copy kept, red the copies removed.",
+            "aria": "Ranked bars of repeated lines",
+            "none": "No line repeats.",
+            "groups": "Repeated lines",
+            "topLine": "Most repeated",
+            "topRemoved": "Its copies removed",
+            "topShare": "Share of all removals",
+            "removed": "Lines removed"
+          },
+          "curve": {
+            "title": "Distinct Lines as You Read",
+            "intro": "Distinct lines seen so far against lines read. Without repeats the curve would follow the dashed diagonal; every flat step is a duplicate.",
+            "aria": "Cumulative distinct lines",
+            "axis": "Lines read",
+            "lines": "Lines read",
+            "distinct": "Distinct",
+            "firstRepeat": "First repeat",
+            "lineN": "line {n}",
+            "flat": "Flat steps",
+            "ratio": "Distinct share"
+          },
+          "gauge": {
+            "title": "Share Removed",
+            "intro": "The share of non-blank lines that were duplicates and got removed.",
+            "aria": "Gauge of the removed share",
+            "total": "Non-blank lines",
+            "unique": "Kept",
+            "removed": "Removed",
+            "formula": "Removed ÷ total",
+            "share": "Removed share"
+          },
+          "bytes": {
+            "title": "Bytes Kept and Removed",
+            "intro": "The input's UTF-8 bytes split into what stays in the cleaned list and what went (duplicates, blank lines and stray spaces).",
+            "aria": "Stacked bar of bytes",
+            "axis": "Input: {n} bytes",
+            "kept": "Kept",
+            "removed": "Removed",
+            "input": "Input",
+            "output": "Output",
+            "blank": "Blank lines",
+            "perLine": "Bytes per kept line",
+            "saved": "Smaller by"
+          },
+          "modes": {
+            "title": "Unique Lines Under Each Rule",
+            "intro": "Unique lines when comparing exactly, ignoring case, and ignoring case and surrounding spaces, each counted by the tool. Click a bar to switch to that rule.",
+            "aria": "Unique counts per comparison rule",
+            "strict": "Exact",
+            "ignoreCase": "Ignore case",
+            "ignoreCaseAndSpace": "Ignore case + spaces",
+            "hidden": "Near-duplicates hidden by exact",
+            "current": "Your current setting"
+          },
+          "variants": {
+            "title": "Near-Duplicates",
+            "intro": "Lines written differently that become the same once case and surrounding spaces are ignored; spaces are shown as dots.",
+            "aria": "Groups of near-duplicate lines",
+            "none": "No near-duplicates found.",
+            "groups": "Groups",
+            "spellings": "Different spellings",
+            "case": "Case differences",
+            "space": "Space differences",
+            "kept": "kept apart",
+            "merged": "merged",
+            "tip": "Tip",
+            "tipOn": "turn off case-sensitive and keep trim on to merge them",
+            "tipDone": "already merged"
+          },
+          "flow": {
+            "title": "From Raw Lines to the Clean List",
+            "intro": "What the tool did: blank lines dropped, lines compared, duplicates removed, then kept in order or sorted.",
+            "aria": "Flow of the deduplication",
+            "raw": "Raw lines",
+            "nonBlank": "Non-blank",
+            "compareExact": "Compared exactly",
+            "compareCaseless": "Compared ignoring case",
+            "removed": "Duplicates removed",
+            "sorted": "Sorted A–Z",
+            "ordered": "Kept in order",
+            "blank": "Blank lines",
+            "keep": "Copy kept",
+            "keepFirst": "first",
+            "keepLast": "last",
+            "trim": "Trim spaces",
+            "on": "on",
+            "off": "off",
+            "formula": "Count",
+            "output": "Lines out"
+          }
         }
       },
       "shareExport": {
@@ -24520,6 +24632,18 @@
         "preparedForTitle": "Prepared For",
         "howCalculatedTitle": "How This Was Calculated",
         "inputSectionTitle": "Input"
+      },
+      "examples": {
+        "title": "Quick examples",
+        "emails": "Merged mailing list",
+        "caseless": "Same list, ignoring case",
+        "sorted": "Ignoring case, sorted A–Z",
+        "tags": "Repeated tags",
+        "keepLast": "Keep the last copy"
+      },
+      "result": {
+        "summary": "{removed} duplicates removed ({share}) · {blank} blank lines dropped",
+        "repeats": "repeats line {n}"
       }
     },
     "invoice-generator": {

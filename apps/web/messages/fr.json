@@ -24387,13 +24387,7 @@
         "intro": {
           "title": "Comment fonctionne réellement la déduplication",
           "paragraph1": "La méthode naïve pour repérer les doublons — comparer chaque ligne à toutes les autres — demande un temps qui croît de façon quadratique avec la taille de la liste : doubler la longueur d'une liste quadruple à peu près le travail de comparaison, ce qui devient vite impraticable au-delà de quelques milliers de lignes. Une approche fondée sur le hachage contourne entièrement ce problème en maintenant un ensemble de toutes les lignes déjà rencontrées : pour chaque nouvelle ligne, vérifier si elle figure déjà dans cet ensemble prend un temps à peu près constant, quelle que soit la taille de l'ensemble, car une fonction de hachage convertit directement le contenu de la ligne en une position de recherche plutôt que d'exiger un parcours complet. C'est exactement pour cette raison que les outils de déduplication, y compris celui-ci, peuvent traiter des listes de dizaines de milliers de lignes instantanément, sans jamais se figer.",
-          "paragraph2": "Cela explique aussi pourquoi les réglages de cet outil comptent plus qu'il n'y paraît au premier abord. « Sensible à la casse » et « Supprimer les espaces » déterminent tous deux ce qui entre réellement dans la fonction de hachage : désactiver la sensibilité à la casse fait que « Pomme » et « pomme » tombent dans le même compartiment et fusionnent en une seule entrée ; supprimer les espaces produit le même effet pour « pomme » et « pomme » (avec un espace superflu). « Conserver la première » et « Conserver la dernière » ne changent en rien les lignes considérées comme des doublons — seule change la copie unique de chaque groupe de doublons qui survit dans le résultat, et la position qu'elle y occupe.",
-          "diagram": {
-            "inputLabel": "Lignes en entrée",
-            "hashSetLabel": "Ensemble déjà vu",
-            "outputLabel": "Sortie",
-            "caption": "Fonctionnement de la déduplication par hachage : chaque ligne en entrée est comparée à un ensemble des lignes déjà rencontrées. Une nouvelle ligne est ajoutée à la fois à l'ensemble et à la sortie ; une répétition (barrée) est simplement ignorée."
-          }
+          "paragraph2": "Cela explique aussi pourquoi les réglages de cet outil comptent plus qu'il n'y paraît au premier abord. « Sensible à la casse » et « Supprimer les espaces » déterminent tous deux ce qui entre réellement dans la fonction de hachage : désactiver la sensibilité à la casse fait que « Pomme » et « pomme » tombent dans le même compartiment et fusionnent en une seule entrée ; supprimer les espaces produit le même effet pour « pomme » et « pomme » (avec un espace superflu). « Conserver la première » et « Conserver la dernière » ne changent en rien les lignes considérées comme des doublons — seule change la copie unique de chaque groupe de doublons qui survit dans le résultat, et la position qu'elle y occupe."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -24499,6 +24493,124 @@
           "note": "Le premier article publié décrivant le hachage — calculer une adresse de recherche directement à partir du contenu d'une donnée —, exactement la technique sur laquelle repose la détection quasi instantanée des doublons de cet outil.",
           "url": "https://doi.org/10.1147/rd.12.0130",
           "readOriginal": "Lire l'article original"
+        },
+        "lab": {
+          "worked": "Exemple résolu",
+          "unavailable": "Collez une liste ci-dessus pour voir cet indicateur.",
+          "map": {
+            "title": "Chaque ligne, gardée ou supprimée",
+            "intro": "Une case par ligne dans l’ordre : vert gardée, rouge supprimée, avec un arc vers la ligne que répète chaque doublon. Cliquez pour lire la ligne.",
+            "aria": "Carte des lignes",
+            "line": "Ligne",
+            "text": "Texte",
+            "occurrences": "Occurrences",
+            "first": "Vue d’abord à la ligne",
+            "fate": "Résultat",
+            "kept": "gardée",
+            "removed": "supprimée (répète la ligne {n})"
+          },
+          "histogram": {
+            "title": "Combien de fois chaque ligne apparaît",
+            "intro": "Combien de lignes distinctes apparaissent une, deux, trois fois ou plus.",
+            "aria": "Barres par nombre d’occurrences",
+            "once": "Une seule fois",
+            "repeated": "Plus d’une fois",
+            "repeatedShare": "Part répétée",
+            "top": "Le plus de copies",
+            "distinct": "Lignes distinctes"
+          },
+          "top": {
+            "title": "Lignes les plus répétées",
+            "intro": "Les lignes aux copies les plus nombreuses : vert la copie gardée, rouge les copies supprimées.",
+            "aria": "Barres classées des répétitions",
+            "none": "Aucune ligne ne se répète.",
+            "groups": "Lignes répétées",
+            "topLine": "La plus répétée",
+            "topRemoved": "Ses copies supprimées",
+            "topShare": "Part des suppressions",
+            "removed": "Lignes supprimées"
+          },
+          "curve": {
+            "title": "Lignes distinctes au fil de la lecture",
+            "intro": "Lignes distinctes vues face aux lignes lues. Sans répétition la courbe suivrait la diagonale ; chaque palier plat est un doublon.",
+            "aria": "Lignes distinctes cumulées",
+            "axis": "Lignes lues",
+            "lines": "Lignes lues",
+            "distinct": "Distinctes",
+            "firstRepeat": "Première répétition",
+            "lineN": "ligne {n}",
+            "flat": "Paliers plats",
+            "ratio": "Part distincte"
+          },
+          "gauge": {
+            "title": "Part supprimée",
+            "intro": "La part des lignes non vides qui étaient des doublons et ont été supprimées.",
+            "aria": "Jauge de la part supprimée",
+            "total": "Lignes non vides",
+            "unique": "Gardées",
+            "removed": "Supprimées",
+            "formula": "Supprimées ÷ total",
+            "share": "Part supprimée"
+          },
+          "bytes": {
+            "title": "Octets gardés et supprimés",
+            "intro": "Les octets UTF-8 de l’entrée répartis entre ce qui reste dans la liste propre et ce qui est parti (doublons, lignes vides, espaces superflues).",
+            "aria": "Barre empilée des octets",
+            "axis": "Entrée : {n} octets",
+            "kept": "Gardé",
+            "removed": "Supprimé",
+            "input": "Entrée",
+            "output": "Sortie",
+            "blank": "Lignes vides",
+            "perLine": "Octets par ligne gardée",
+            "saved": "Plus petit de"
+          },
+          "modes": {
+            "title": "Lignes uniques selon la règle",
+            "intro": "Lignes uniques en comparaison exacte, sans la casse, et sans la casse ni les espaces, comptées par l’outil. Cliquez sur une barre pour passer à cette règle.",
+            "aria": "Uniques par règle",
+            "strict": "Exacte",
+            "ignoreCase": "Sans la casse",
+            "ignoreCaseAndSpace": "Sans casse ni espaces",
+            "hidden": "Quasi-doublons cachés",
+            "current": "Votre réglage"
+          },
+          "variants": {
+            "title": "Quasi-doublons",
+            "intro": "Des lignes écrites différemment qui se confondent sans la casse ni les espaces ; les espaces sont montrées par des points.",
+            "aria": "Groupes de quasi-doublons",
+            "none": "Aucun quasi-doublon.",
+            "groups": "Groupes",
+            "spellings": "Graphies différentes",
+            "case": "Écarts de casse",
+            "space": "Écarts d’espaces",
+            "kept": "séparées",
+            "merged": "fusionnées",
+            "tip": "Astuce",
+            "tipOn": "désactivez la casse et gardez le rognage pour les fusionner",
+            "tipDone": "déjà fusionnées"
+          },
+          "flow": {
+            "title": "Des lignes brutes à la liste propre",
+            "intro": "Ce qu’a fait l’outil : lignes vides retirées, comparaison, doublons supprimés, puis ordre conservé ou tri.",
+            "aria": "Flux du dédoublonnage",
+            "raw": "Lignes brutes",
+            "nonBlank": "Non vides",
+            "compareExact": "Comparaison exacte",
+            "compareCaseless": "Sans la casse",
+            "removed": "Doublons supprimés",
+            "sorted": "Triées A–Z",
+            "ordered": "Dans l’ordre",
+            "blank": "Lignes vides",
+            "keep": "Copie gardée",
+            "keepFirst": "première",
+            "keepLast": "dernière",
+            "trim": "Rogner les espaces",
+            "on": "oui",
+            "off": "non",
+            "formula": "Décompte",
+            "output": "Lignes en sortie"
+          }
         }
       },
       "shareExport": {
@@ -24520,6 +24632,18 @@
         "preparedForTitle": "Préparé Pour",
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé",
         "inputSectionTitle": "Entrée"
+      },
+      "examples": {
+        "title": "Exemples rapides",
+        "emails": "Liste de diffusion fusionnée",
+        "caseless": "Même liste sans la casse",
+        "sorted": "Sans la casse, triée A–Z",
+        "tags": "Étiquettes répétées",
+        "keepLast": "Garder la dernière copie"
+      },
+      "result": {
+        "summary": "{removed} doublons supprimés ({share}) · {blank} lignes vides retirées",
+        "repeats": "répète la ligne {n}"
       }
     },
     "invoice-generator": {

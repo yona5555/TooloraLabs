@@ -24387,13 +24387,7 @@
         "intro": {
           "title": "Wie Deduplizierung tatsächlich funktioniert",
           "paragraph1": "Der naive Weg, Duplikate zu finden — jede Zeile mit jeder anderen zu vergleichen — benötigt eine Zeit, die quadratisch mit der Listengröße wächst: Eine Verdopplung der Listenlänge vervierfacht ungefähr den Vergleichsaufwand, was jenseits weniger tausend Zeilen unpraktikabel wird. Ein hashbasierter Ansatz umgeht das vollständig, indem eine laufende Menge aller bereits gesehenen Zeilen geführt wird: Für jede neue Zeile dauert die Prüfung, ob sie bereits in dieser Menge ist, ungefähr konstante Zeit, unabhängig davon, wie groß die Menge bereits gewachsen ist, da eine Hash-Funktion den Inhalt der Zeile direkt in eine Nachschlageposition umwandelt, statt einen Scan zu erfordern. Genau deshalb können Deduplizierungswerkzeuge, auch dieses, Listen mit Zehntausenden Zeilen sofort verarbeiten, statt einzufrieren.",
-          "paragraph2": "Das erklärt auch, warum die Einstellungen dieses Werkzeugs wichtiger sind, als es zunächst scheinen mag. „Groß-/Kleinschreibung beachten“ und „Leerraum trimmen“ steuern beide, was tatsächlich in die Hash-Funktion einfließt — die Groß-/Kleinschreibung zu deaktivieren bedeutet, dass „Apple“ und „apple“ auf denselben Bucket hashen und zu einem verschmelzen; das Trimmen von Leerraum bedeutet dasselbe für „ apple“ und „apple“. „Erstes behalten“ gegenüber „letztes behalten“ ändert überhaupt nicht, welche Zeilen als Duplikate gelten — nur, welche einzelne Kopie jeder Duplikatgruppe es in die Ausgabe schafft und an welcher Position sie landet.",
-          "diagram": {
-            "inputLabel": "Eingabezeilen",
-            "hashSetLabel": "Gesehen-Menge",
-            "outputLabel": "Ausgabe",
-            "caption": "Wie hashbasierte Deduplizierung funktioniert: Jede Eingabezeile wird gegen eine laufende Menge bereits gesehener Zeilen geprüft. Eine neue Zeile wird sowohl der Menge als auch der Ausgabe hinzugefügt; eine Wiederholung (durchgestrichen) wird vollständig übersprungen."
-          }
+          "paragraph2": "Das erklärt auch, warum die Einstellungen dieses Werkzeugs wichtiger sind, als es zunächst scheinen mag. „Groß-/Kleinschreibung beachten“ und „Leerraum trimmen“ steuern beide, was tatsächlich in die Hash-Funktion einfließt — die Groß-/Kleinschreibung zu deaktivieren bedeutet, dass „Apple“ und „apple“ auf denselben Bucket hashen und zu einem verschmelzen; das Trimmen von Leerraum bedeutet dasselbe für „ apple“ und „apple“. „Erstes behalten“ gegenüber „letztes behalten“ ändert überhaupt nicht, welche Zeilen als Duplikate gelten — nur, welche einzelne Kopie jeder Duplikatgruppe es in die Ausgabe schafft und an welcher Position sie landet."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -24499,6 +24493,124 @@
           "note": "Die erste veröffentlichte Arbeit, die Hashing beschreibt — das direkte Berechnen einer Nachschlageadresse aus dem Dateninhalt —, genau die Technik, auf der die nahezu sofortige Duplikaterkennung dieses Werkzeugs beruht.",
           "url": "https://doi.org/10.1147/rd.12.0130",
           "readOriginal": "Originalarbeit lesen"
+        },
+        "lab": {
+          "worked": "Rechenbeispiel",
+          "unavailable": "Füge oben eine Liste ein, um diesen Indikator zu sehen.",
+          "map": {
+            "title": "Jede Zeile, behalten oder entfernt",
+            "intro": "Ein Feld pro Zeile in Reihenfolge: grün behalten, rot entfernt, mit Bogen zur Zeile, die jedes Duplikat wiederholt. Klick ein Feld, um die Zeile zu lesen.",
+            "aria": "Karte der Zeilen",
+            "line": "Zeile",
+            "text": "Text",
+            "occurrences": "Vorkommen",
+            "first": "Zuerst in Zeile",
+            "fate": "Ergebnis",
+            "kept": "behalten",
+            "removed": "entfernt (wiederholt Zeile {n})"
+          },
+          "histogram": {
+            "title": "Wie oft jede Zeile vorkommt",
+            "intro": "Wie viele verschiedene Zeilen einmal, zweimal, dreimal und öfter vorkommen.",
+            "aria": "Balken nach Vorkommen",
+            "once": "Einmal",
+            "repeated": "Mehrfach",
+            "repeatedShare": "Anteil mehrfach",
+            "top": "Meiste Kopien",
+            "distinct": "Verschiedene Zeilen"
+          },
+          "top": {
+            "title": "Am häufigsten wiederholte Zeilen",
+            "intro": "Die Zeilen mit den meisten Kopien: grün die behaltene, rot die entfernten.",
+            "aria": "Rangbalken der Wiederholungen",
+            "none": "Keine Zeile wiederholt sich.",
+            "groups": "Wiederholte Zeilen",
+            "topLine": "Am häufigsten",
+            "topRemoved": "Entfernte Kopien",
+            "topShare": "Anteil an Entfernungen",
+            "removed": "Entfernte Zeilen"
+          },
+          "curve": {
+            "title": "Verschiedene Zeilen beim Lesen",
+            "intro": "Bisher gesehene verschiedene Zeilen gegen gelesene Zeilen. Ohne Wiederholungen folgte die Kurve der Diagonale; jede flache Stufe ist ein Duplikat.",
+            "aria": "Kumulierte verschiedene Zeilen",
+            "axis": "Gelesene Zeilen",
+            "lines": "Gelesene Zeilen",
+            "distinct": "Verschiedene",
+            "firstRepeat": "Erste Wiederholung",
+            "lineN": "Zeile {n}",
+            "flat": "Flache Stufen",
+            "ratio": "Anteil verschieden"
+          },
+          "gauge": {
+            "title": "Entfernter Anteil",
+            "intro": "Der Anteil nicht leerer Zeilen, die Duplikate waren und entfernt wurden.",
+            "aria": "Anzeige des entfernten Anteils",
+            "total": "Nicht leere Zeilen",
+            "unique": "Behalten",
+            "removed": "Entfernt",
+            "formula": "Entfernt ÷ gesamt",
+            "share": "Entfernter Anteil"
+          },
+          "bytes": {
+            "title": "Behaltene und entfernte Bytes",
+            "intro": "Die UTF-8-Bytes der Eingabe aufgeteilt in das, was in der bereinigten Liste bleibt, und das Entfernte (Duplikate, Leerzeilen, überflüssige Leerzeichen).",
+            "aria": "Gestapelter Balken der Bytes",
+            "axis": "Eingabe: {n} Bytes",
+            "kept": "Behalten",
+            "removed": "Entfernt",
+            "input": "Eingabe",
+            "output": "Ausgabe",
+            "blank": "Leerzeilen",
+            "perLine": "Bytes pro behaltener Zeile",
+            "saved": "Kleiner um"
+          },
+          "modes": {
+            "title": "Eindeutige Zeilen je Regel",
+            "intro": "Eindeutige Zeilen bei exaktem Vergleich, ohne Groß-/Kleinschreibung und ohne Schreibweise und Leerzeichen, vom Tool gezählt. Klick einen Balken, um zur Regel zu wechseln.",
+            "aria": "Eindeutige je Regel",
+            "strict": "Exakt",
+            "ignoreCase": "Ohne Schreibweise",
+            "ignoreCaseAndSpace": "Ohne Schreibweise + Leerzeichen",
+            "hidden": "Verdeckte Fast-Duplikate",
+            "current": "Deine Einstellung"
+          },
+          "variants": {
+            "title": "Fast-Duplikate",
+            "intro": "Unterschiedlich geschriebene Zeilen, die ohne Schreibweise und Leerzeichen gleich werden; Leerzeichen als Punkte.",
+            "aria": "Gruppen von Fast-Duplikaten",
+            "none": "Keine Fast-Duplikate gefunden.",
+            "groups": "Gruppen",
+            "spellings": "Schreibweisen",
+            "case": "Schreibweise",
+            "space": "Leerzeichen",
+            "kept": "getrennt",
+            "merged": "zusammengeführt",
+            "tip": "Tipp",
+            "tipOn": "Groß-/Kleinschreibung aus, Kürzen an, um sie zusammenzuführen",
+            "tipDone": "bereits zusammengeführt"
+          },
+          "flow": {
+            "title": "Von Rohzeilen zur bereinigten Liste",
+            "intro": "Was das Tool getan hat: Leerzeilen verworfen, verglichen, Duplikate entfernt, dann Reihenfolge behalten oder sortiert.",
+            "aria": "Fluss der Bereinigung",
+            "raw": "Rohzeilen",
+            "nonBlank": "Nicht leer",
+            "compareExact": "Exakt verglichen",
+            "compareCaseless": "Ohne Schreibweise",
+            "removed": "Duplikate entfernt",
+            "sorted": "A–Z sortiert",
+            "ordered": "In Reihenfolge",
+            "blank": "Leerzeilen",
+            "keep": "Behaltene Kopie",
+            "keepFirst": "erste",
+            "keepLast": "letzte",
+            "trim": "Leerzeichen kürzen",
+            "on": "an",
+            "off": "aus",
+            "formula": "Zählung",
+            "output": "Ausgabezeilen"
+          }
         }
       },
       "shareExport": {
@@ -24520,6 +24632,18 @@
         "preparedForTitle": "Erstellt für",
         "howCalculatedTitle": "So Wurde Dies Berechnet",
         "inputSectionTitle": "Eingabe"
+      },
+      "examples": {
+        "title": "Schnellbeispiele",
+        "emails": "Zusammengeführte Mailingliste",
+        "caseless": "Dieselbe Liste ohne Groß-/Kleinschreibung",
+        "sorted": "Ohne Schreibweise, A–Z sortiert",
+        "tags": "Doppelte Tags",
+        "keepLast": "Letzte Kopie behalten"
+      },
+      "result": {
+        "summary": "{removed} Duplikate entfernt ({share}) · {blank} Leerzeilen verworfen",
+        "repeats": "wiederholt Zeile {n}"
       }
     },
     "invoice-generator": {
