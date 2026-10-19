@@ -6,6 +6,29 @@ import PdfMergeSplitShareExportModal from "./PdfMergeSplitShareExportModal";
 import { formatBytes, SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
 
 const THUMB_H = 64;
+/** Largest drawn page: the grid grows to the card width but a page never exceeds this. */
+const THUMB_MAX_H = 136;
+const THUMB_MAX_W = 104;
+/** The 640×480 card frame the tool preview is letterboxed into. */
+const TARGET_RATIO = 4 / 3;
+
+/**
+ * Columns for the page grid so the whole drawing comes out close to 4:3 (the card frame) instead of
+ * one wide, low strip: for each column count, the grid's width ÷ height from the pages' mean aspect,
+ * plus a penalty for empty cells left in the last row.
+ */
+function gridFor(pages: { width: number; height: number }[]) {
+  const n = Math.max(1, pages.length);
+  const aspect = pages.length ? pages.reduce((s, p) => s + p.width / p.height, 0) / pages.length : 1 / Math.SQRT2;
+  let best = { cols: 1, score: Infinity };
+  for (let cols = 1; cols <= n; cols++) {
+    const rows = Math.ceil(n / cols);
+    // Empty cells at the end of the last row count against a layout (no gaps in a grid).
+    const score = Math.abs(Math.log((cols * aspect) / rows / TARGET_RATIO)) + (cols * rows - n) / n;
+    if (score < best.score) best = { cols, score };
+  }
+  return { cols: best.cols };
+}
 
 /**
  * Result card: every page of the output drawn at its real aspect ratio and coloured by the input
@@ -17,6 +40,7 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
   const { draft, ready, pages, sources, inputBytes, outputBytes, f } = usePdfModel();
   const mode = draft.mode;
   const inputFileCount = mode === "merge" ? draft.mergeDocs.length : draft.splitDoc ? 1 : 0;
+  const grid = gridFor(pages);
   const heroValue = mode === "merge" ? t("aboveFold.mergeReady") : t("aboveFold.splitReady", { count: resultCount });
 
   return (
@@ -47,11 +71,17 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
             {f(pages.length)} {tr("pagesUnit")} · {formatBytes(outputBytes)}
           </p>
 
-          <div dir="ltr" data-preview="visual" data-preview-hero className="mt-4 flex flex-wrap content-start justify-center gap-1.5 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/50">
+          <div
+            dir="ltr"
+            data-preview="visual"
+            data-preview-hero
+            className="mx-auto mt-4 grid w-full items-end justify-items-center gap-1.5 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/50"
+            style={{ gridTemplateColumns: `repeat(${grid.cols}, minmax(0, 1fr))`, maxWidth: grid.cols * THUMB_MAX_W + 24 }}
+          >
             {pages.map((p, i) => {
               const w = Math.max(24, Math.round((p.width / p.height) * THUMB_H));
               return (
-                <svg key={i} width={w} height={THUMB_H} viewBox={`0 0 ${w} ${THUMB_H}`} role="img" aria-label={`${sources[p.source]} p.${p.page}`}>
+                <svg key={i} viewBox={`0 0 ${w} ${THUMB_H}`} className="h-auto w-full" style={{ maxWidth: (w / THUMB_H) * THUMB_MAX_H }} role="img" aria-label={`${sources[p.source]} p.${p.page}`}>
                   <path d={`M 1 1 H ${w - 9} L ${w - 1} 9 V ${THUMB_H - 1} H 1 Z`} className={`${SOURCE_FILL[p.source % SOURCE_FILL.length]} opacity-90`} />
                   <path d={`M ${w - 9} 1 V 9 H ${w - 1}`} className="fill-white/40" />
                   <text x={w / 2} y={THUMB_H / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} className="fill-white">
