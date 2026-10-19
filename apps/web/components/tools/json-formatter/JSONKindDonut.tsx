@@ -27,7 +27,7 @@ export default function JSONKindDonut() {
   const inner = turns([containers, scalars]);
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <svg data-preview="visual" data-preview-hero direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       {JSON_VALUE_KINDS.map((k, i) =>
         counts[i] > 0 ? <path key={k} d={ringPath(CX, CY, 62, 88, outer[i][0], outer[i][1])} className={`${KIND_FILL[k]} stroke-white dark:stroke-zinc-900`} strokeWidth={1.5} /> : null,
       )}
