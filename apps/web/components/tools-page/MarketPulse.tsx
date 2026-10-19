@@ -77,7 +77,7 @@ function Chip({ id, href, label, note, children, trailing }: { id: string; href:
   );
 }
 
-function Sparkline({ points, up }: { points: number[]; up: boolean }) {
+export function Sparkline({ points, up }: { points: number[]; up: boolean }) {
   const w = 44;
   const h = 18;
   const min = Math.min(...points);
