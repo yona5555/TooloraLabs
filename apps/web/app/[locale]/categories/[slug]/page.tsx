@@ -11,6 +11,7 @@ import MarketsPulse from "@/components/category-page/MarketsPulse";
 import PhysicsPulse from "@/components/category-page/PhysicsPulse";
 import ChemistryPulse from "@/components/category-page/ChemistryPulse";
 import HealthPulse from "@/components/category-page/HealthPulse";
+import FinancePulse from "@/components/category-page/FinancePulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
 
 /** One indicator file per section; a section without one keeps the older header. */
@@ -26,6 +27,8 @@ function sectionPulse(slug: string, locale: string): ReactNode {
       return <ChemistryPulse locale={locale} />;
     case "health-fitness":
       return <HealthPulse locale={locale} />;
+    case "financial-calculators":
+      return <FinancePulse locale={locale} />;
     default:
       return null;
   }
