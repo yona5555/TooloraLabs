@@ -3,6 +3,7 @@ import { routing } from "@/i18n/routing";
 import { tools } from "@/data/tools";
 import { categories } from "@/data/categories";
 import { SITE_URL } from "@/lib/site";
+import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 
 function urlFor(path: string, locale: string) {
   return `${SITE_URL}/${locale}${path}`;
@@ -13,18 +14,32 @@ function alternatesFor(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "/about", "/contact", "/privacy", "/terms", "/affiliate-disclosure"];
+  const staticPaths = [
+    "",
+    "/tools",
+    "/docs",
+    "/categories",
+    "/compare/financial-calculators",
+    "/embed-tools",
+    "/coming-soon",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/affiliate-disclosure",
+  ];
   const categoryPaths = categories.map((category) => `/categories/${category.slug}`);
   const toolPaths = tools.map((tool) => `/tools/${tool.slug}`);
+  const docsPaths = DOCUMENTED_TOOL_SLUGS.map((slug) => `/docs/${slug}`);
 
-  const paths = [...staticPaths, ...categoryPaths, ...toolPaths];
+  const paths = [...staticPaths, ...categoryPaths, ...toolPaths, ...docsPaths];
 
   return paths.flatMap((path) =>
     routing.locales.map((locale) => ({
       url: urlFor(path, locale),
       alternates: { languages: alternatesFor(path) },
       changeFrequency: path === "" ? ("daily" as const) : ("weekly" as const),
-      priority: path === "" ? 1 : path.startsWith("/tools/") ? 0.8 : 0.6,
+      priority: path === "" ? 1 : path.startsWith("/tools/") ? 0.8 : path.startsWith("/docs/") ? 0.7 : 0.6,
     })),
   );
 }
