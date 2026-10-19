@@ -4,6 +4,8 @@ import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
+import ToolsPageNav from "@/components/tools-page/ToolsPageNav";
+import { toolsSectionId } from "@/components/tools-page/section-id";
 
 type ToolsPageProps = {
   params: Promise<{ locale: string }>;
@@ -43,33 +45,41 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
         </p>
       </div>
 
-      <div className="mt-16 flex flex-col gap-16">
-        {categories.map((category) => {
-          const categoryTools = tools.filter(
-            (tool) => tool.category === category.slug
-          );
-          if (categoryTools.length === 0) return null;
+      <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)]">
+        <aside className="hidden lg:block">
+          <div className="sticky top-24">
+            <ToolsPageNav />
+          </div>
+        </aside>
 
-          return (
-            <section key={category.slug}>
-              <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-                {tc(`${category.slug}.title`)}
-              </h2>
+        <div className="flex min-w-0 flex-col gap-16">
+          {categories.map((category) => {
+            const categoryTools = tools.filter(
+              (tool) => tool.category === category.slug
+            );
+            if (categoryTools.length === 0) return null;
 
-              <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {categoryTools.map((tool) => (
-                  <ToolCard
-                    key={tool.slug}
-                    tool={tool}
-                    titleText={tTools(`${tool.slug}.title`)}
-                    descriptionText={tTools(`${tool.slug}.description`)}
-                    featuredLabel={t("featuredBadge")}
-                  />
-                ))}
-              </div>
-            </section>
-          );
-        })}
+            return (
+              <section key={category.slug} id={toolsSectionId(category.slug)} className="scroll-mt-24">
+                <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+                  {tc(`${category.slug}.title`)}
+                </h2>
+
+                <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {categoryTools.map((tool) => (
+                    <ToolCard
+                      key={tool.slug}
+                      tool={tool}
+                      titleText={tTools(`${tool.slug}.title`)}
+                      descriptionText={tTools(`${tool.slug}.description`)}
+                      featuredLabel={t("featuredBadge")}
+                    />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
       </div>
     </main>
   );
