@@ -6,6 +6,8 @@ import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
 import CategorySidebar from "@/components/home/CategorySidebar";
 import HelpfulFeedback from "@/components/docs/HelpfulFeedback";
+import MarketPulse from "@/components/tools-page/MarketPulse";
+import { Suspense } from "react";
 
 type ToolsPageProps = {
   params: Promise<{ locale: string }>;
@@ -16,9 +18,10 @@ export async function generateMetadata({
 }: ToolsPageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "toolsPage" });
+  const tCategoriesSection = await getTranslations({ locale, namespace: "categoriesSection" });
   return {
     title: `${t("heading")} | TooloraLabs`,
-    description: t("subtitle"),
+    description: tCategoriesSection("subtitle"),
   };
 }
 
@@ -33,19 +36,19 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
 
   return (
     <main data-tools-page className="flex w-full flex-col lg:flex-row">
-      <CategorySidebar footer={<HelpfulFeedback />} />
+      <CategorySidebar footer={<HelpfulFeedback />} categoryLinksJumpToSections />
       <div className="min-w-0 flex-1 px-4 py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="flex items-center justify-center gap-3">
-            <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
-            <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-              {t("heading")}
-            </h1>
-          </div>
-          <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-300">
-            {t("subtitle")}
-          </p>
+        <div className="flex items-center justify-start gap-4 text-start">
+          <BackButton href="/" label={tCommon("backToHome")} variant="labeled" text={tCommon("back")} size={18} />
+          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+            {t("heading")}
+          </h1>
         </div>
+
+        {/* Live indicators on their own line under the title, spread evenly across the full width. */}
+        <Suspense fallback={null}>
+          <MarketPulse locale={locale} />
+        </Suspense>
 
         <div className="mt-16 flex flex-col gap-16">
           {categories.map((category) => {
@@ -55,12 +58,12 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
             if (categoryTools.length === 0) return null;
 
             return (
-              <section key={category.slug}>
+              <section key={category.slug} id={`category-${category.slug}`} className="scroll-mt-24">
                 <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
                   {tc(`${category.slug}.title`)}
                 </h2>
 
-                <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                   {categoryTools.map((tool) => (
                     <ToolCard
                       key={tool.slug}
