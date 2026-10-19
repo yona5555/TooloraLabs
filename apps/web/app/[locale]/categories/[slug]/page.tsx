@@ -14,6 +14,7 @@ import HealthPulse from "@/components/category-page/HealthPulse";
 import FinancePulse from "@/components/category-page/FinancePulse";
 import BusinessPulse from "@/components/category-page/BusinessPulse";
 import StudentPulse from "@/components/category-page/StudentPulse";
+import TextPulse from "@/components/category-page/TextPulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
 
 /** One indicator file per section; a section without one keeps the older header. */
@@ -35,6 +36,8 @@ function sectionPulse(slug: string, locale: string): ReactNode {
       return <BusinessPulse locale={locale} />;
     case "student-productivity":
       return <StudentPulse locale={locale} />;
+    case "text-tools":
+      return <TextPulse locale={locale} />;
     default:
       return null;
   }
