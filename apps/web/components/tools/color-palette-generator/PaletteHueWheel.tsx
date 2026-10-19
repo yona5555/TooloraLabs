@@ -43,6 +43,8 @@ export default function PaletteHueWheel() {
   const svg = (
     <svg
       ref={svgRef}
+      data-preview="visual"
+      data-preview-hero
       direction="ltr"
       width={SIZE}
       height={SIZE}
