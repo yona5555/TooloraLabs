@@ -10,6 +10,7 @@ import MathPulse from "@/components/category-page/MathPulse";
 import MarketsPulse from "@/components/category-page/MarketsPulse";
 import PhysicsPulse from "@/components/category-page/PhysicsPulse";
 import ChemistryPulse from "@/components/category-page/ChemistryPulse";
+import HealthPulse from "@/components/category-page/HealthPulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
 
 /** One indicator file per section; a section without one keeps the older header. */
@@ -23,6 +24,8 @@ function sectionPulse(slug: string, locale: string): ReactNode {
       return <PhysicsPulse locale={locale} />;
     case "chemistry":
       return <ChemistryPulse locale={locale} />;
+    case "health-fitness":
+      return <HealthPulse locale={locale} />;
     default:
       return null;
   }
