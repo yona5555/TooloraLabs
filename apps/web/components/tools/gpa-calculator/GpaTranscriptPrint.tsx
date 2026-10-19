@@ -10,7 +10,7 @@ export default function GpaTranscriptPrint({ state, d, f }: { state: PlannerStat
 
   return (
     <div data-print-area className="hidden bg-white text-black">
-      <h1 className="text-xl font-bold">{t("print.title")}</h1>
+      <div className="text-xl font-bold">{t("print.title")}</div>
       <p className="text-sm" suppressHydrationWarning>
         {t(`scales.${state.scale}`)} · {t("print.date", { date: new Date().toLocaleDateString() })}
       </p>

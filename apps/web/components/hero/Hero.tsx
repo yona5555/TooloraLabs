@@ -1,9 +1,12 @@
+import { useTranslations } from "next-intl";
 import HeroBackground from "./HeroBackground";
 import CategorySidebar from "@/components/home/CategorySidebar";
 import HomeCalculator from "@/components/home/calculator/HomeCalculator";
 import HomeCalculatorDocs from "@/components/home/HomeCalculatorDocs";
 
 export default function Hero() {
+  const t = useTranslations("hero");
+
   return (
     // No overflow-hidden here: it would silently disable position:sticky for
     // every descendant (the category sidebar and the docs section's "On
@@ -12,6 +15,9 @@ export default function Hero() {
     // own decorative blobs via its own wrapper, so the section itself never
     // needed this in the first place.
     <section className="relative">
+      {/* The page's single h1: the home design has no visible title, so it is visually hidden
+          but still names the page for search engines and screen readers. */}
+      <h1 className="sr-only">{t("heading")}</h1>
       <HeroBackground />
       {/* Unlike the rest of the site's sections, this content area is intentionally full-bleed (no
           mx-auto max-w-* / px-* wrapper) — the category sidebar and calculator column together fill

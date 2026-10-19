@@ -239,7 +239,7 @@ export default function GraphShareExportModal({ expression, xMin, xMax, yMin, yM
           </p>
         </div>
 
-        <h1 className="mb-4 text-xl font-bold text-zinc-900">{t("title")}</h1>
+        <div className="mb-4 text-xl font-bold text-zinc-900">{t("title")}</div>
 
         <h2 className="mb-2 mt-6 text-sm font-bold text-blue-600">{tForm("inputTitle")}</h2>
         <table className="w-full border-collapse text-sm">
