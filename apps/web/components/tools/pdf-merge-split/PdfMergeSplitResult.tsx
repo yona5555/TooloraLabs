@@ -5,7 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import PdfMergeSplitShareExportModal from "./PdfMergeSplitShareExportModal";
 import { formatBytes, SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
 
-const THUMB_H = 54;
+const THUMB_H = 64;
 
 /**
  * Result card: every page of the output drawn at its real aspect ratio and coloured by the input
@@ -47,7 +47,7 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
             {f(pages.length)} {tr("pagesUnit")} · {formatBytes(outputBytes)}
           </p>
 
-          <div dir="ltr" data-preview="visual" className="mt-4 flex flex-wrap content-start justify-center gap-1.5 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/50">
+          <div dir="ltr" data-preview="visual" data-preview-hero className="mt-4 flex flex-wrap content-start justify-center gap-1.5 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/50">
             {pages.map((p, i) => {
               const w = Math.max(24, Math.round((p.width / p.height) * THUMB_H));
               return (

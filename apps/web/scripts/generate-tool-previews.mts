@@ -58,7 +58,7 @@ const hex = (c: Rgb) => "#" + c.map((n) => n.toString(16).padStart(2, "0")).join
 for (const s of forced) delete approved[s];
 /** Tools with no drawing-only element: file tools (nothing before a file is added) and the colour
  * palette (its swatches are copy buttons). No image (neutral placeholder), reported. */
-const NO_VISUAL = new Set(["pdf-merge-split", "zip-compressor", "color-palette-generator"]);
+const NO_VISUAL = new Set(["zip-compressor", "color-palette-generator"]);
 const variants = [
   { locale: "ar", theme: "light" },
   { locale: "ar", theme: "dark" },
