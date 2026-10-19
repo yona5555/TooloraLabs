@@ -5,8 +5,9 @@ import { Link } from "@/i18n/navigation";
  * The generic indicator row that sits beside a category page's title. It knows nothing about any
  * one category: each section passes its own items (label, value, optional drawing and note), so a
  * new section only writes an items builder and reuses this layout. Same chip as the /tools strip:
- * 40px tall (the labeled back button's height), logical properties only. On wide screens the items
- * share the full row equally whatever their count; narrow screens stack them, never scrolling sideways.
+ * 40px tall (the labeled back button's height), logical properties only. Items share the row equally
+ * and wrap once a chip would drop under 10.5rem (so no value is cut), the last row stretching to fill
+ * it; a phone stacks them, never scrolling sideways.
  */
 export type IndicatorItem = {
   id: string;
@@ -22,11 +23,11 @@ const CHIP =
 
 export default function IndicatorStrip({ label, items }: { label: string; items: IndicatorItem[] }) {
   return (
-    <ul aria-label={label} className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:auto-cols-fr lg:grid-flow-col">
+    <ul aria-label={label} className="flex flex-wrap gap-2">
       {items.map((item) => {
         const noteId = `indicator-note-${item.id}`;
         return (
-          <li key={item.id} className="group relative min-w-0">
+          <li key={item.id} className="group relative min-w-0 flex-[1_1_10.5rem]">
             <Link href={item.href} aria-describedby={item.note ? noteId : undefined} className={CHIP}>
               <span className="flex min-w-0 flex-col leading-4">
                 <span className="truncate text-[11px] font-medium text-zinc-500 dark:text-zinc-400">{item.label}</span>

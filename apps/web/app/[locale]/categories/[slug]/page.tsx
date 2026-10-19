@@ -8,6 +8,7 @@ import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
 import MathPulse from "@/components/category-page/MathPulse";
 import MarketsPulse from "@/components/category-page/MarketsPulse";
+import PhysicsPulse from "@/components/category-page/PhysicsPulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
 
 /** One indicator file per section; a section without one keeps the older header. */
@@ -17,6 +18,8 @@ function sectionPulse(slug: string, locale: string): ReactNode {
       return <MathPulse />;
     case "financial-markets":
       return <MarketsPulse locale={locale} />;
+    case "physics":
+      return <PhysicsPulse locale={locale} />;
     default:
       return null;
   }
