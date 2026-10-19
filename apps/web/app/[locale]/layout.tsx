@@ -7,6 +7,7 @@ import { getLocaleFontClassName } from "@/lib/locale-fonts";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HtmlDocument from "@/components/layout/HtmlDocument";
+import { jsonLdHtml, organizationJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -28,6 +29,7 @@ export default async function LocaleLayout({
   return (
     <HtmlDocument lang={locale} dir={getLocaleDir(locale)}>
       <NextIntlClientProvider locale={locale}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(organizationJsonLd)} />
         <div className={getLocaleFontClassName(locale)}>
           <Navbar />
           {children}

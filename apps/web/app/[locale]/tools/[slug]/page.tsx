@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { localeAlternates } from "@/lib/seo";
+import { breadcrumbJsonLd, jsonLdHtml, localeAlternates } from "@/lib/seo";
 import { getOgLocale } from "@/lib/locale-meta";
 import AgeCalculator from "@/components/tools/age-calculator/AgeCalculator";
 import AgeEducation from "@/components/tools/age-calculator/AgeEducation";
@@ -305,6 +305,7 @@ export default async function ToolPage({
   const t = await getTranslations({ locale, namespace: "tools" });
   const tp = await getTranslations({ locale, namespace: "toolPage" });
   const tc = await getTranslations({ locale, namespace: "categories" });
+  const tn = await getTranslations({ locale, namespace: "navbar" });
 
   const title = t(`${slug}.title`);
   const description = t(`${slug}.description`);
@@ -796,7 +797,17 @@ export default async function ToolPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={jsonLdHtml(jsonLd)}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLdHtml(
+          breadcrumbJsonLd([
+            { name: tn("home"), path: `/${locale}` },
+            { name: tc(`${tool.category}.title`), path: `/${locale}/categories/${tool.category}` },
+            { name: title, path: `/${locale}/tools/${slug}` },
+          ])
+        )}
       />
       <ToolPageLayout
         category={tc(`${tool.category}.title`)}

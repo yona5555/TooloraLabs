@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { localeAlternates } from "@/lib/seo";
+import { breadcrumbJsonLd, jsonLdHtml, localeAlternates } from "@/lib/seo";
 import { getOgLocale } from "@/lib/locale-meta";
 import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
@@ -143,7 +143,7 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
 }
 
 export default async function DocsToolPage({ params }: DocsPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   if (!DOCUMENTED_TOOL_SLUGS.includes(slug)) {
     notFound();
   }
@@ -546,5 +546,18 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
       break;
   }
 
-  return <DocsLayout toc={<TableOfContents items={tocItems} />}>{content}</DocsLayout>;
+  const t = await getTranslations({ locale, namespace: "tools" });
+  const tn = await getTranslations({ locale, namespace: "navbar" });
+  const breadcrumb = breadcrumbJsonLd([
+    { name: tn("home"), path: `/${locale}` },
+    { name: tn("docs"), path: `/${locale}/docs` },
+    { name: t(`${slug}.title`), path: `/${locale}/docs/${slug}` },
+  ]);
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(breadcrumb)} />
+      <DocsLayout toc={<TableOfContents items={tocItems} />}>{content}</DocsLayout>
+    </>
+  );
 }

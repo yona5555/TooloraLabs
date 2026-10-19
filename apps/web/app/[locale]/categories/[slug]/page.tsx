@@ -22,7 +22,7 @@ import DevPulse from "@/components/category-page/DevPulse";
 import FilePulse from "@/components/category-page/FilePulse";
 import ConvertersPulse from "@/components/category-page/ConvertersPulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
-import { localeAlternates } from "@/lib/seo";
+import { breadcrumbJsonLd, jsonLdHtml, localeAlternates } from "@/lib/seo";
 
 /** One indicator file per section; a section without one keeps the older header. */
 function sectionPulse(slug: string, locale: string): ReactNode {
@@ -168,12 +168,23 @@ export default async function CategoryPage({
     </div>
   );
 
-  return pulse ? (
-    <main data-categories-page className="flex w-full flex-col lg:flex-row">
-      <CategoryToolsSidebar categorySlug={slug} />
-      {content}
-    </main>
-  ) : (
-    <main data-categories-page>{content}</main>
+  const tn = await getTranslations({ locale, namespace: "navbar" });
+  const breadcrumb = breadcrumbJsonLd([
+    { name: tn("home"), path: `/${locale}` },
+    { name: tc(`${slug}.title`), path: `/${locale}/categories/${slug}` },
+  ]);
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(breadcrumb)} />
+      {pulse ? (
+        <main data-categories-page className="flex w-full flex-col lg:flex-row">
+          <CategoryToolsSidebar categorySlug={slug} />
+          {content}
+        </main>
+      ) : (
+        <main data-categories-page>{content}</main>
+      )}
+    </>
   );
 }
