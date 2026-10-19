@@ -20,6 +20,7 @@ import WeatherPulse from "@/components/category-page/WeatherPulse";
 import AiPulse from "@/components/category-page/AiPulse";
 import DevPulse from "@/components/category-page/DevPulse";
 import FilePulse from "@/components/category-page/FilePulse";
+import ConvertersPulse from "@/components/category-page/ConvertersPulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
 
 /** One indicator file per section; a section without one keeps the older header. */
@@ -53,6 +54,8 @@ function sectionPulse(slug: string, locale: string): ReactNode {
       return <DevPulse locale={locale} />;
     case "file-tools":
       return <FilePulse locale={locale} />;
+    case "converters":
+      return <ConvertersPulse locale={locale} />;
     default:
       return null;
   }
