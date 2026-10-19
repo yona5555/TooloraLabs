@@ -9,6 +9,7 @@ Auto-loaded from .claude/rules/:
 - packages.md — packages/**: pure-logic constraint, tsc/test commands
 - testing.md — test/check scripts: efficient testing, fixed technical errors
 - live-data.md — apps/web/components/tools/**, apps/web/lib/**: real free keyless data, data limits, display currency
+- category-order.md — the one site-wide section order (single source: CATEGORY_ORDER in data/categories.ts)
 On demand: docs/claude/full-project-handbook.md — architecture, roles, general rules index, pending tasks
 Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
 
