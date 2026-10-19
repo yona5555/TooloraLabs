@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { categories } from "@/data/categories";
@@ -6,6 +7,17 @@ import { tools } from "@/data/tools";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
 import MathPulse from "@/components/category-page/MathPulse";
+import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
+
+/** One indicator file per section; a section without one keeps the older header. */
+function sectionPulse(slug: string, locale: string): ReactNode {
+  switch (slug) {
+    case "math":
+      return <MathPulse />;
+    default:
+      return null;
+  }
+}
 
 type CategoryPageProps = {
   params: Promise<{
@@ -56,16 +68,13 @@ export default async function CategoryPage({
 
   const categoryTools = tools.filter((tool) => tool.category === slug);
 
-  return (
-    <main data-categories-page className="mx-auto max-w-7xl px-6 py-24">
-      {slug !== "math" && (
-        <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
-          {t("badge")}
-        </span>
-      )}
+  // Sections with their own indicator file get the new header: no badge, description or count line,
+  // a labeled back button beside the title, the indicator strip under it and the tools side nav.
+  const pulse = sectionPulse(slug, locale);
 
-      {/* Trial on math only: no badge, labeled back button + title, then a full-width row of computed indicators; no description or count line. */}
-      {slug === "math" ? (
+  const content = (
+    <div className={pulse ? "mx-auto min-w-0 max-w-7xl flex-1 px-6 py-24" : "mx-auto max-w-7xl px-6 py-24"}>
+      {pulse ? (
         <>
           <div className="flex items-center justify-start gap-4 text-start">
             <BackButton href="/" label={tCommon("backToHome")} variant="labeled" text={tCommon("back")} size={18} />
@@ -73,12 +82,13 @@ export default async function CategoryPage({
               {tc(`${slug}.title`)}
             </h1>
           </div>
-          <div className="mt-6">
-            <MathPulse />
-          </div>
+          <div className="mt-6">{pulse}</div>
         </>
       ) : (
         <>
+          <span className="rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
+            {t("badge")}
+          </span>
           <div className="mt-6 flex items-center gap-3">
             <BackButton href="/" label={tCommon("backToHome")} size={22} className="h-12 w-12" />
             <h1 className="text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
@@ -111,6 +121,15 @@ export default async function CategoryPage({
       ) : (
         <p className="mt-10 text-zinc-500 dark:text-zinc-400">{t("empty")}</p>
       )}
+    </div>
+  );
+
+  return pulse ? (
+    <main data-categories-page className="flex w-full flex-col lg:flex-row">
+      <CategoryToolsSidebar categorySlug={slug} />
+      {content}
     </main>
+  ) : (
+    <main data-categories-page>{content}</main>
   );
 }
