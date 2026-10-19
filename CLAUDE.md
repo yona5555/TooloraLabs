@@ -10,8 +10,11 @@ Auto-loaded from .claude/rules/:
 - testing.md — test/check scripts: efficient testing, fixed technical errors
 - live-data.md — apps/web/components/tools/**, apps/web/lib/**: real free keyless data, data limits, display currency
 - category-order.md — the one site-wide section order (single source: CATEGORY_ORDER in data/categories.ts)
+- core-principles.md — always: §0 absolute completeness, §2 step by step, §3 root cause not patches
+- financial-neutrality.md — always: §11 neutrality in every financial tool
+- print-export.md — lib/pdf/**, globals.css, *ShareExportModal.tsx: §21 PDF/print depth
 On demand: docs/claude/full-project-handbook.md — architecture, roles, general rules index, pending tasks
-Never read TooloraLabs-Claude-Instructions.md (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
+TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules are this file and .claude/rules/. Never read it (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
 
 ## قواعد لا تُخالَف
 - Never report a result you did not verify with a test or measurement.
