@@ -37726,6 +37726,20 @@
       "qr": "Max QR capacity",
       "qrValue": "{bytes} bytes",
       "qrNote": "Version 40 at error-correction level L in byte mode, per ISO/IEC 18004. Higher correction levels hold less."
+    },
+    "file": {
+      "label": "File facts",
+      "gib": "GiB vs GB",
+      "gibNote": "1 GiB = 2³⁰ = {bytes} bytes against 1 GB = 10⁹ bytes, computed here. Why a \"1 TB\" drive shows about 931 GiB.",
+      "a4": "A4 page in PDF",
+      "a4Note": "210 × 297 mm ÷ 25.4 × 72: PDF measures pages in points of 1/72 inch. Computed here.",
+      "zip": "Classic ZIP limit",
+      "zipValue": "{bytes} bytes",
+      "zipNote": "2³² − 1: the largest size the original ZIP format's 32-bit fields can record, computed here. Bigger archives need ZIP64.",
+      "names": "Not allowed in Windows names",
+      "namesNote": "The nine characters Windows reserves in file names; the sanitizer removes them, along with control characters.",
+      "csv": "CSV standard",
+      "csvNote": "RFC 4180 (2005): fields separated by commas, quoted with double quotes, lines ending in CRLF."
     }
   },
   "embedTools": {
