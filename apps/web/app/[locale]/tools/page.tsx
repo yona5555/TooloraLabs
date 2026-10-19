@@ -8,6 +8,7 @@ import CategorySidebar from "@/components/home/CategorySidebar";
 import HelpfulFeedback from "@/components/docs/HelpfulFeedback";
 import MarketPulse from "@/components/tools-page/MarketPulse";
 import { Suspense } from "react";
+import { localeAlternates } from "@/lib/seo";
 
 type ToolsPageProps = {
   params: Promise<{ locale: string }>;
@@ -22,6 +23,7 @@ export async function generateMetadata({
   return {
     title: `${t("heading")} | TooloraLabs`,
     description: tCategoriesSection("subtitle"),
+    alternates: localeAlternates(locale, "/tools"),
   };
 }
 

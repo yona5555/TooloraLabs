@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { localeAlternates } from "@/lib/seo";
 import { getOgLocale } from "@/lib/locale-meta";
 import AgeCalculator from "@/components/tools/age-calculator/AgeCalculator";
 import AgeEducation from "@/components/tools/age-calculator/AgeEducation";
@@ -259,12 +260,7 @@ export async function generateMetadata({
   return {
     title: pageTitle,
     description,
-    alternates: {
-      canonical: `/${locale}${path}`,
-      languages: Object.fromEntries(
-        routing.locales.map((loc) => [loc, `/${loc}${path}`])
-      ),
-    },
+    alternates: localeAlternates(locale, path),
     openGraph: {
       title: pageTitle,
       description,

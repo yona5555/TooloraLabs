@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { localeAlternates } from "@/lib/seo";
 import { getOgLocale } from "@/lib/locale-meta";
 import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
@@ -128,10 +129,7 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
   return {
     title: pageTitle,
     description,
-    alternates: {
-      canonical: `/${locale}${path}`,
-      languages: Object.fromEntries(routing.locales.map((loc) => [loc, `/${loc}${path}`])),
-    },
+    alternates: localeAlternates(locale, path),
     openGraph: {
       title: pageTitle,
       description,

@@ -9,11 +9,15 @@ import { getToolIcon } from "@/lib/tool-icons";
 import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
 import BackButton from "@/components/tool-ui/BackButton";
+import { localeAlternates } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "docsNav" });
-  return { title: `${t("overview")} | Docs | TooloraLabs` };
+  return {
+    title: `${t("overview")} | Docs | TooloraLabs`,
+    alternates: localeAlternates(locale, "/docs"),
+  };
 }
 
 export default async function DocsIndexPage() {

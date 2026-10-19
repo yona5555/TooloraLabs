@@ -10,7 +10,10 @@ function urlFor(path: string, locale: string) {
 }
 
 function alternatesFor(path: string) {
-  return Object.fromEntries(routing.locales.map((locale) => [locale, urlFor(path, locale)]));
+  return {
+    ...Object.fromEntries(routing.locales.map((locale) => [locale, urlFor(path, locale)])),
+    "x-default": urlFor(path, routing.defaultLocale),
+  };
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {

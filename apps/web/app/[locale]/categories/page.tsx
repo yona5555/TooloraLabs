@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import HeroCategories from "@/components/hero/HeroCategories";
 import BackButton from "@/components/tool-ui/BackButton";
+import { localeAlternates } from "@/lib/seo";
 
 type CategoriesPageProps = {
   params: Promise<{ locale: string }>;
@@ -15,6 +16,7 @@ export async function generateMetadata({
   return {
     title: `${t("heading")} | TooloraLabs`,
     description: t("subtitle"),
+    alternates: localeAlternates(locale, "/categories"),
   };
 }
 

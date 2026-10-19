@@ -22,6 +22,7 @@ import DevPulse from "@/components/category-page/DevPulse";
 import FilePulse from "@/components/category-page/FilePulse";
 import ConvertersPulse from "@/components/category-page/ConvertersPulse";
 import CategoryToolsSidebar from "@/components/category-page/CategoryToolsSidebar";
+import { localeAlternates } from "@/lib/seo";
 
 /** One indicator file per section; a section without one keeps the older header. */
 function sectionPulse(slug: string, locale: string): ReactNode {
@@ -89,6 +90,7 @@ export async function generateMetadata({
   return {
     title: `${tc(`${slug}.title`)} | TooloraLabs`,
     description: tc(`${slug}.description`),
+    alternates: localeAlternates(locale, `/categories/${slug}`),
   };
 }
 

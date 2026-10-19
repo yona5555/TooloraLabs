@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mail } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import LegalPageLayout from "@/components/legal/LegalPageLayout";
+import { localeAlternates } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -12,7 +13,10 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "legal.contact" });
-  return { title: `${t("title")} | TooloraLabs` };
+  return {
+    title: `${t("title")} | TooloraLabs`,
+    alternates: localeAlternates(locale, "/contact"),
+  };
 }
 
 export default async function ContactPage({ params }: PageProps) {
