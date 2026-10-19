@@ -37712,6 +37712,20 @@
       "checker": "Correcteur sur un exemple",
       "checkerValue": "{count, plural, one {# erreur} other {# erreurs}}",
       "checkerNote": "Le décompte du correcteur d'orthographe et de grammaire lui-même sur « {sample} », exécuté dans votre navigateur."
+    },
+    "dev": {
+      "label": "Repères pour développeurs",
+      "entropy": "Entropie sur 16 caractères",
+      "entropyNote": "16 × log₂({chars}) : un mot de passe aléatoire parmi les {chars} caractères ASCII imprimables, calculé ici. 80 bits et plus résistent aux attaques hors ligne.",
+      "base64": "Taille Base64",
+      "base64Note": "Chaque groupe de 3 octets devient 4 caractères : les données encodées grossissent d'un tiers (avant remplissage). Calculé ici.",
+      "ean": "Clé de contrôle EAN-13",
+      "eanNote": "Chiffres pondérés 1, 3, 1, 3… puis additionnés ; la clé {digit} amène le total à un multiple de 10. Calculé ici sur le numéro d'exemple de GS1.",
+      "hex": "Couleurs en #RRGGBB",
+      "hexNote": "256³ : trois canaux de 8 bits, calculé ici. L'outil de palettes travaille dans cet espace.",
+      "qr": "Capacité max. d'un QR",
+      "qrValue": "{bytes} octets",
+      "qrNote": "Version 40, correction d'erreurs L en mode octet, selon ISO/IEC 18004. Les niveaux plus élevés contiennent moins."
     }
   },
   "embedTools": {
