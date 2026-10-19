@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { ChevronRight, Search, BookOpen, LayoutList, ArrowRight } from "lucide-react";
@@ -62,8 +62,11 @@ function ToolQuickPreview({ slug }: { slug: string }) {
  * LTR, with no manual left-0/right-0 positioning needed. The nested tool
  * list's indent and connector line use logical properties (ps-*, border-s)
  * so they flip sides with it automatically too.
+ *
+ * Shared by the home page (Hero.tsx) and /tools; `footer` renders below the
+ * category list (the /tools page passes the "Was this helpful?" card).
  */
-export default function CategorySidebar() {
+export default function CategorySidebar({ footer }: { footer?: ReactNode } = {}) {
   const t = useTranslations("categories");
   const tTools = useTranslations("tools");
   const tHome = useTranslations("homeCalculator");
@@ -245,6 +248,7 @@ export default function CategorySidebar() {
           })}
         </ul>
       )}
+      {footer && <div className="px-3 pb-3">{footer}</div>}
     </nav>
   );
 }

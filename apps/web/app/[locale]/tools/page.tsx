@@ -4,8 +4,8 @@ import { categories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import ToolCard from "@/components/tool-ui/ToolCard";
 import BackButton from "@/components/tool-ui/BackButton";
-import ToolsPageNav from "@/components/tools-page/ToolsPageNav";
-import { toolsSectionId } from "@/components/tools-page/section-id";
+import CategorySidebar from "@/components/home/CategorySidebar";
+import HelpfulFeedback from "@/components/docs/HelpfulFeedback";
 
 type ToolsPageProps = {
   params: Promise<{ locale: string }>;
@@ -32,27 +32,22 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
   const tCommon = await getTranslations({ locale, namespace: "common" });
 
   return (
-    <main data-tools-page className="mx-auto max-w-7xl px-6 py-24">
-      <div className="mx-auto max-w-3xl text-center">
-        <div className="flex items-center justify-center gap-3">
-          <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
-          <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-            {t("heading")}
-          </h1>
-        </div>
-        <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-300">
-          {t("subtitle")}
-        </p>
-      </div>
-
-      <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[240px_minmax(0,1fr)]">
-        <aside className="hidden lg:block">
-          <div className="sticky top-24">
-            <ToolsPageNav />
+    <main data-tools-page className="flex w-full flex-col lg:flex-row">
+      <CategorySidebar footer={<HelpfulFeedback />} />
+      <div className="min-w-0 flex-1 px-4 py-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="flex items-center justify-center gap-3">
+            <BackButton href="/" label={tCommon("backToHome")} size={20} className="h-10 w-10" />
+            <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+              {t("heading")}
+            </h1>
           </div>
-        </aside>
+          <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-300">
+            {t("subtitle")}
+          </p>
+        </div>
 
-        <div className="flex min-w-0 flex-col gap-16">
+        <div className="mt-16 flex flex-col gap-16">
           {categories.map((category) => {
             const categoryTools = tools.filter(
               (tool) => tool.category === category.slug
@@ -60,7 +55,7 @@ export default async function ToolsPage({ params }: ToolsPageProps) {
             if (categoryTools.length === 0) return null;
 
             return (
-              <section key={category.slug} id={toolsSectionId(category.slug)} className="scroll-mt-24">
+              <section key={category.slug}>
                 <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
                   {tc(`${category.slug}.title`)}
                 </h2>
