@@ -55,7 +55,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
       </p>
       <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{tr("summary", { files: rows.length, saved: pct(original - compressed, original) })}</p>
 
-      <ul data-preview="visual" className="mt-4 grid auto-rows-fr gap-2 overflow-auto lg:min-h-0 lg:flex-1 lg:basis-0">
+      <ul data-preview="visual" data-preview-hero className="mt-4 grid auto-rows-fr gap-2 overflow-auto lg:min-h-0 lg:flex-1 lg:basis-0">
         {rows.map((r, i) => {
           const entry = extractedEntries.find((e) => e.name === r.name);
           return (
