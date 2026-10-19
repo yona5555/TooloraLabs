@@ -13,6 +13,7 @@ Auto-loaded from .claude/rules/:
 - core-principles.md — always: §0 absolute completeness, §2 step by step, §3 root cause not patches
 - financial-neutrality.md — always: §11 neutrality in every financial tool
 - print-export.md — lib/pdf/**, globals.css, *ShareExportModal.tsx: §21 PDF/print depth
+On demand: docs/ARCHITECTURE.md — Mermaid architecture diagram + pending architecture notes
 On demand: docs/claude/full-project-handbook.md — architecture, roles, general rules index, pending tasks
 TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules are this file and .claude/rules/. Never read it (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
 
