@@ -1,4 +1,3 @@
-import JSZip from "jszip";
 import { batchOverview, lineTotal, toCsv, type BatchInvoice } from "@tooloralabs/tools";
 
 export type ExportLabels = {
@@ -82,6 +81,8 @@ function sheetXml(rows: Cell[][]): string {
 export async function downloadXlsx(invoices: BatchInvoice[], currency: string, l: ExportLabels) {
   const { items, summary } = exportTables(invoices, currency, l);
   const sheetName = (s: string) => xml(s.replace(/[\\/?*[\]:]/g, " ").slice(0, 31));
+  // JSZip is only needed for this download, so it loads on the click, not with the page.
+  const { default: JSZip } = await import("jszip");
   const zip = new JSZip();
   zip.file(
     "[Content_Types].xml",

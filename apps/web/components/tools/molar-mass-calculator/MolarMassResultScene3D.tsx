@@ -5,27 +5,15 @@ import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components
 import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { EL_TOKENS, elToken } from "../chemical-equation-balancer/chemMath";
 import { Molecules } from "../chemical-equation-balancer/Molecules3D";
-import type { Part } from "./mmMath";
+import { spreadLabels, type MmSceneProps } from "./mmSceneLayout";
 
-export type MmSceneProps = { formula: string; parts: Part[]; totalText: string; formulaLabel: string; atomsText: string; drawMolecule: boolean };
+export type { MmSceneProps } from "./mmSceneLayout";
 
 const TOKENS = [...EL_TOKENS, "--ph-ink", "--ph-ink-muted", "--ph-line", "--ph-surface", "--ph-glass"];
 const TAN = 2 * Math.tan((19 * Math.PI) / 180);
 const FIT_W = 9.4;
 /** Camera distance: fov fixed at 38°, the camera backs off until the full width fits (no fish-eye). */
 export const fitDistance = (aspect: number) => Math.max(9, FIT_W / (TAN * aspect));
-
-/**
- * Element label heights along the mass column: each at its segment's centre, pushed apart so two
- * labels are never closer than `gap` (small shares like H in glucose never overlap their neighbours).
- */
-export function spreadLabels(centres: number[], gap: number, lo: number, hi: number): number[] {
-  const out = centres.map((c) => Math.max(lo, Math.min(hi, c)));
-  for (let i = 1; i < out.length; i++) out[i] = Math.max(out[i], out[i - 1] + gap);
-  const over = out.length ? out[out.length - 1] - hi : 0;
-  if (over > 0) for (let i = out.length - 1; i >= 0; i--) out[i] = i === out.length - 1 ? hi : Math.min(out[i], out[i + 1] - gap);
-  return out;
-}
 
 function Scene({ p, c }: { p: MmSceneProps; c: TokenColors }) {
   const size = useThree((s) => s.size);

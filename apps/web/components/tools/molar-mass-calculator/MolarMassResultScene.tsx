@@ -7,7 +7,7 @@ import { ViewportScene } from "@/components/tool-ui/three/ViewportScene";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { clampIndex, RAIL, RAIL_SEED, railPos } from "./mmMath";
-import { spreadLabels, type MmSceneProps } from "./MolarMassResultScene3D";
+import { spreadLabels, type MmSceneProps } from "./mmSceneLayout";
 
 const Scene3D = dynamic(() => import("./MolarMassResultScene3D"), { ssr: false, loading: () => null });
 

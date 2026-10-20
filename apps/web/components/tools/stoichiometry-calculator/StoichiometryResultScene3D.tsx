@@ -6,32 +6,12 @@ import DemandCanvas3D, { SiteLabel3D as Label3D, Invalidate } from "@/components
 import { useTokenColors, type TokenColors } from "@/components/tool-ui/indicator-kit/tokenColors";
 import { EL_TOKENS, labelFormula } from "../chemical-equation-balancer/chemMath";
 import { Molecules } from "../chemical-equation-balancer/Molecules3D";
+import { gridDims, INSET, MAX_SHOWN, shownCount, type StoSceneProps } from "./stoichiometryLayout";
 
-export type StoItem = {
-  formula: string;
-  coefficient: number;
-  side: "reactant" | "product";
-  role: "known" | "co" | "target" | "side";
-  /** Mass (g) and amount (mol) from the calculator's moles and the coefficient ratio. */
-  mass: number;
-  moles: number;
-};
-export type StoSceneProps = { items: StoItem[]; ratio: string };
+export type { StoItem, StoSceneProps } from "./stoichiometryLayout";
 
-export const ROLE_TOKEN: Record<StoItem["role"], string> = { known: "--chem-reactant", co: "--chem-solute", target: "--chem-product", side: "--chem-cold" };
 const TOKENS = [...EL_TOKENS, "--ph-ink", "--ph-ink-muted", "--ph-surface", "--ph-line"];
 
-/** Molecules drawn per substance: the balanced coefficient, at most 6 (a "×n" label beyond that). */
-export const MAX_SHOWN = 6;
-export const shownCount = (coefficient: number) => Math.max(1, Math.min(MAX_SHOWN, Math.round(coefficient)));
-/** Molecules of one substance as a tidy cluster: one column of up to 3, two columns beyond (≤ 3 rows). */
-export const gridDims = (count: number) => {
-  const cols = count <= 3 ? 1 : 2;
-  return { cols, rows: Math.ceil(count / cols) };
-};
-
-/** Slots across the width (reactants, the arrow, products); the HTML value row uses the same inset. */
-export const INSET = 0.02;
 const TAN = 2 * Math.tan((19 * Math.PI) / 180);
 const D0 = 10;
 
