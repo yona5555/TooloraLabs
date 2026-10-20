@@ -23399,13 +23399,13 @@
       },
       "education": {
         "intro": {
-          "title": "How This Tool Works",
+          "title": "How to Compress and Extract ZIP Archives in Your Browser",
           "paragraph1": "This tool compresses and extracts ZIP archives entirely inside your browser using the DEFLATE algorithm, the same lossless compression method built into the ZIP format since its creation. Compressing packs each file's bytes, shrunk using DEFLATE, into a single archive alongside a directory listing every file's name and location; extracting reads that directory and reverses the compression to recover each file's original bytes exactly. No file you add here is ever sent to a server — everything happens locally on your device.",
           "paragraph2": "Because all of this runs in your browser's memory, very large files or a very large number of files can slow down or strain the page. This tool caps the total size processed in a single operation at 50 MB, a limit chosen to keep compression and extraction fast and reliable across a wide range of devices rather than an arbitrary restriction."
         },
         "examples": {
-          "title": "Worked Examples",
-          "intro": "A few scenarios show how compressing and extracting behave in practice.",
+          "title": "Examples of Compressing and Extracting ZIP Files",
+          "intro": "A few examples show how compressing and extracting ZIP files behave in practice.",
           "columnScenario": "Scenario",
           "columnResult": "Result",
           "rows": [
@@ -23451,11 +23451,11 @@
         "behindTheTool": {
           "title": "Behind This Tool",
           "history": {
-            "title": "From an Information Theory Paper to a File Format",
+            "title": "How LZ77 and DEFLATE Became the ZIP Format",
             "paragraph": "The compression technique underlying ZIP traces back to a 1977 paper by Abraham Lempel and Jacob Ziv describing a general-purpose method for compressing sequential data by replacing repeated patterns with shorter references to where they appeared before — an approach now called LZ77. Roughly a decade later, developer Phil Katz combined a refinement of this idea with Huffman coding, another compression technique, into the DEFLATE algorithm and released it as the core of the ZIP file format in 1989, specifically designing it to be implementable without infringing on then-existing patents covering a competing compression method."
           },
           "modernDevelopments": {
-            "title": "From a DOS Utility to a Universal Standard",
+            "title": "How ZIP Went From a DOS Utility to Your Browser",
             "paragraph": "ZIP began as PKZIP, a DOS command-line utility, but its specification was published openly rather than kept proprietary, which let it become the de facto standard archive format across essentially every operating system and platform. Modern web browsers now include JavaScript engines fast enough to implement DEFLATE compression and decompression directly, which is what libraries like the one behind this tool rely on, making an operation that once required installed software into something that runs in an ordinary browser tab, with no upload and no installation."
           },
           "academicPath": {
