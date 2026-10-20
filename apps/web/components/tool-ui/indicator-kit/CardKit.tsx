@@ -192,7 +192,7 @@ export function KitControls({ s, valueText, testId }: { s: Stepper; valueText: s
       <output
         dir="ltr"
         data-testid={`${testId}-value`}
-        className="min-w-[6.5rem] rounded-full px-3 py-1.5 text-center text-sm font-bold tabular-nums"
+        className="min-w-0 shrink basis-[6.5rem] rounded-full px-3 py-1.5 text-center text-sm font-bold tabular-nums"
         style={{ background: "var(--ph-surface)", color: "var(--ph-ink)" }}
       >
         <Chem text={valueText} />

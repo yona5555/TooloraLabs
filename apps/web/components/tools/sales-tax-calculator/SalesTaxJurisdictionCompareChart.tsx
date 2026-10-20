@@ -11,11 +11,11 @@ export default function SalesTaxJurisdictionCompareChart({ items }: SalesTaxJuri
   const range = Math.max(max - min, 1);
 
   return (
-    <div dir="ltr" className="flex items-end justify-center gap-4" style={{ height: 160 }}>
+    <div dir="ltr" className="flex items-end justify-center gap-2 sm:gap-4" style={{ height: 160 }}>
       {items.map((item) => {
         const heightPct = 20 + ((item.totalCost - min) / range) * 80;
         return (
-          <div key={item.key} className="flex flex-1 flex-col items-center gap-1" style={{ maxWidth: 72 }}>
+          <div key={item.key} className="flex min-w-0 flex-1 flex-col items-center gap-1" style={{ maxWidth: 72 }}>
             <span className="font-mono text-xs font-bold text-amber-700 dark:text-amber-300">${item.totalCost.toFixed(2)}</span>
             <div className="flex w-full flex-1 items-end">
               <div className="w-full rounded-t-md bg-amber-500 dark:bg-amber-400" style={{ height: `${heightPct}%` }} />

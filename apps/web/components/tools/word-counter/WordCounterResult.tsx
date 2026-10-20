@@ -53,7 +53,7 @@ export default function WordCounterResult() {
       }
     >
       {hasText ? (
-        <div className="flex flex-col-reverse gap-4 lg:flex-1">
+        <div className="flex flex-col gap-4 lg:flex-1 lg:flex-col-reverse">
           <table className="min-w-0 flex-1 border-collapse text-sm">
             <tbody>
               {rows.map((r) => (

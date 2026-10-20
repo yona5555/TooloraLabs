@@ -51,8 +51,9 @@ type Props = {
 /**
  * Site rule (visuals.md): drawing cards are two parts — deep live table on
  * the left, live 3D drawing on the right, same height, no gaps. Narrow
- * containers (mobile, the above-the-fold Result column) stack the drawing
- * on top via a container query. No forced dir, so RTL mirrors naturally.
+ * containers stack via a container query: the drawing on top in the desktop
+ * Result column, under the table on phones (the values come first there).
+ * No forced dir, so RTL mirrors naturally.
  */
 export default function LiveTable3DLayout({
   groups,
@@ -116,7 +117,10 @@ export default function LiveTable3DLayout({
                       dir={isWords(r.value) ? "auto" : "ltr"}
                       className={`px-3 py-1.5 text-end ${isWords(r.value) ? "" : "font-mono"} font-semibold [overflow-wrap:break-word] ${r.emphasize ? "text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
                     >
-                      <Subs text={r.value} />
+                      {/* its own box: the value stays whole, the unit may go to the next line */}
+                      <span>
+                        <Subs text={r.value} />
+                      </span>
                       {r.unit ? (
                         <span className="ms-1 text-xs font-normal whitespace-nowrap text-zinc-500 dark:text-zinc-400">
                           {r.unit}
@@ -130,7 +134,7 @@ export default function LiveTable3DLayout({
           </table>
         </div>
         </div>
-        <div data-part="drawing" className="order-first flex h-[320px] flex-col @3xl:order-none @3xl:h-auto @3xl:min-h-[320px]">
+        <div data-part="drawing" className="flex h-[320px] flex-col lg:max-@3xl:order-first @3xl:h-auto @3xl:min-h-[320px]">
           <div data-preview="visual" className="min-h-0 flex-1">{drawing}</div>
           {caption ? (
             <p className="mt-1.5 text-center text-xs leading-5 text-zinc-600 dark:text-zinc-300">{caption}</p>

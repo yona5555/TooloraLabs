@@ -31,10 +31,10 @@ export default function EnergyPowerRanking() {
           const mine = r.key === "yours";
           return (
             <li key={r.key} className="grid grid-cols-[96px_1fr] items-center gap-2 text-xs">
-              <span className={`truncate ${mine ? "font-bold text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-300"}`}>{name(r.key)}</span>
+              <span className={`min-w-0 ${mine ? "font-bold text-amber-600 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-300"}`}>{name(r.key)}</span>
               <div className="flex min-w-0 items-center gap-2">
                 <div
-                  className={`h-3.5 shrink-0 rounded-sm ${mine ? "bg-amber-500 dark:bg-amber-400" : "bg-zinc-400 dark:bg-zinc-500"}`}
+                  className={`h-3.5 min-w-0.5 shrink rounded-sm ${mine ? "bg-amber-500 dark:bg-amber-400" : "bg-zinc-400 dark:bg-zinc-500"}`}
                   style={{ width: `${Math.max(2, ((Math.log10(r.power) - lo) / (hi - lo)) * 64)}%` }}
                 />
                 <span dir="ltr" className="font-mono whitespace-nowrap text-zinc-700 dark:text-zinc-200">{`${f(r.power, 2)} W`}</span>

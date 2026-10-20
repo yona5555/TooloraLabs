@@ -47,7 +47,8 @@ export default function RealWorldVolumeScaleBar() {
           </div>
           <div className="relative mt-2 h-14 w-full text-[11px]">
             {marks.map((m, i) => (
-              <div key={m.key} className="absolute -translate-x-1/2 text-center" style={{ left: `${m.pct}%`, top: `${(i % 2) * 26}px` }}>
+              // labels near either end hang inward so they stay inside the card on a phone
+              <div key={m.key} className={`absolute ${m.pct < 15 ? "text-start" : m.pct > 85 ? "-translate-x-full text-end" : "-translate-x-1/2 text-center"}`} style={{ left: `${m.pct}%`, top: `${(i % 2) * 26}px` }}>
                 <div className="font-semibold text-zinc-700 dark:text-zinc-200">{t(`items.${m.key}`)}</div>
               </div>
             ))}

@@ -8,7 +8,7 @@ type SalesTaxNoTaxStatesDiagramProps = {
 export default function SalesTaxNoTaxStatesDiagram({ states, noTaxLabel, typicalLabel }: SalesTaxNoTaxStatesDiagramProps) {
   return (
     <div>
-      <p className="text-center text-xs font-bold text-cyan-600 dark:text-cyan-400">{noTaxLabel} — 0%</p>
+      <p className="text-center text-xs font-bold text-cyan-600 dark:text-cyan-400">{noTaxLabel} <span>— 0%</span></p>
       <div className="mt-2 flex flex-wrap justify-center gap-2">
         {states.map((state) => (
           <span key={state} className="rounded-full border-2 border-cyan-500 bg-cyan-50 px-3 py-1 text-sm font-bold text-cyan-700 dark:border-cyan-400 dark:bg-cyan-500/10 dark:text-cyan-300">

@@ -21,8 +21,8 @@ export default function AreaToBoundingBoxRatioZone() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div className="relative h-3 w-full overflow-hidden rounded-full bg-gradient-to-r from-zinc-200 to-blue-400 dark:from-zinc-700 dark:to-blue-500">
-            <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${markerPct}%` }} />
+          <div className="relative h-3 w-full rounded-full bg-gradient-to-r from-zinc-200 to-blue-400 dark:from-zinc-700 dark:to-blue-500">
+            <div className="absolute top-1/2 h-5 w-5 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `clamp(10px, ${markerPct}%, calc(100% - 10px))` }} />
           </div>
           <div className="mt-1 flex justify-between text-[10px] font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
             <span>{t("zones.sparse")}</span>

@@ -61,7 +61,7 @@ export default function ScoreDial() {
   const counted = counts.reduce((a, b) => a + b, 0);
 
   return (
-    <div data-preview="visual" className="flex w-full items-center gap-5">
+    <div data-preview="visual" className="flex w-full flex-wrap items-center justify-center gap-5 lg:flex-nowrap lg:justify-start">
       <svg direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="shrink-0">
         {EASE_BANDS.map((b) => (
           <path key={b.key} d={arc(b.from, b.to, OUTER_R)} fill="none" stroke={b.color} strokeWidth={12} opacity={b === band ? 1 : 0.35} style={{ transition: "opacity 300ms" }} />
@@ -80,7 +80,7 @@ export default function ScoreDial() {
           {`${f(EASE_MIN)} … ${f(EASE_MAX)}`}
         </text>
       </svg>
-      <ul className="flex min-w-0 flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs">
+      <ul className="flex min-w-[10rem] flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs lg:min-w-0">
         {SYLLABLE_BUCKETS.map((b, i) => (
           <li key={b.label} className="flex items-center justify-between gap-2">
             <span className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300">

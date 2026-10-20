@@ -54,7 +54,7 @@ export default function WorldClockGrid({ s, set, d, f }: CardProps) {
                 <p dir="ltr" className="text-start font-mono text-lg leading-6 font-bold text-zinc-800 tabular-nums dark:text-zinc-100" suppressHydrationWarning>
                   {f.timeSec(now, c.zone)}
                 </p>
-                <p className="truncate text-[11px] text-zinc-500 dark:text-zinc-400">
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
                   {f.date(now, c.zone)} · <bdi dir="ltr">{f.offset(off)}</bdi>
                   {isDstActive(now, c.zone) ? ` · ${t("dst")}` : ""}
                 </p>

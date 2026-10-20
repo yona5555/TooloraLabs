@@ -205,7 +205,7 @@ export function WxDailyCard({ d, f }: WxCardProps) {
                     type="button"
                     onClick={() => setSel(k)}
                     aria-pressed={sel === k}
-                    className={`grid w-full grid-cols-[64px_26px_44px_1fr_44px_70px] items-center gap-2 rounded-lg px-2 py-1.5 text-sm ${sel === k ? "bg-blue-50 ring-1 ring-blue-400 dark:bg-blue-500/10" : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50"}`}
+                    className={`grid w-full grid-cols-[52px_22px_40px_minmax(0,1fr)_40px_58px] items-center gap-1.5 rounded-lg sm:grid-cols-[64px_26px_44px_1fr_44px_70px] sm:gap-2 px-2 py-1.5 text-sm ${sel === k ? "bg-blue-50 ring-1 ring-blue-400 dark:bg-blue-500/10" : "hover:bg-zinc-50 dark:hover:bg-zinc-800/50"}`}
                   >
                     <span className="text-start font-semibold text-zinc-800 dark:text-zinc-100">{k === 0 ? t("ind.daily.today") : f.weekday(ms, "UTC")}</span>
                     <WeatherIcon category={x.category} size={20} className="text-amber-500" />

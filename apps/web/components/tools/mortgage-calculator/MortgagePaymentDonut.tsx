@@ -34,7 +34,7 @@ export default function MortgagePaymentDonut({ segments, centerValue, centerLabe
     );
 
   return (
-    <div data-preview="visual" className="flex w-full items-center gap-5">
+    <div data-preview="visual" className="flex w-full flex-wrap-reverse items-center justify-center gap-5 lg:flex-nowrap lg:justify-start">
       <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44 shrink-0">
         <circle
           cx={center}
@@ -66,7 +66,7 @@ export default function MortgagePaymentDonut({ segments, centerValue, centerLabe
         </text>
       </svg>
 
-      <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 self-stretch py-4 text-sm">
+      <div className="flex min-w-[10rem] flex-1 flex-col justify-between gap-2 self-stretch py-4 text-sm lg:min-w-0">
         {segments
           .filter((s) => s.value > 0)
           .map((segment) => (

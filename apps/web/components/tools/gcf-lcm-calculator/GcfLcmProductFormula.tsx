@@ -16,7 +16,7 @@ export default function GcfLcmProductFormula() {
   const table = primeExponentTable([a, b]);
 
   const box = (label: string, value: string, tone: string) => (
-    <div className={`flex min-w-[3.25rem] flex-col items-center rounded-xl px-2 py-2 ${tone}`}>
+    <div className={`flex min-w-0 flex-col items-center rounded-xl px-2 py-2 sm:min-w-[3.25rem] ${tone}`}>
       <span className="text-[10px] font-semibold tracking-wide uppercase opacity-80">{label}</span>
       <span className="font-mono text-lg font-bold">{value}</span>
     </div>

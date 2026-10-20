@@ -19,7 +19,7 @@ export default function VectorScaleSensitivityTrio() {
       title={t("title")}
       intro={t("intro")}
       indicator={
-        <div className="grid w-[300px] grid-cols-3 gap-2 sm:w-[420px]">
+        <div className="grid w-full max-w-[300px] grid-cols-3 gap-2 sm:w-[420px] sm:max-w-none">
           {rows.map((row, i) => {
             const mid = i === 1;
             return (

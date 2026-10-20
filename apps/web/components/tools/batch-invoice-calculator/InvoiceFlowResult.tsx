@@ -66,7 +66,7 @@ export default function InvoiceFlowResult({ invoice, overview, f, onPrint, onCsv
           <ul className="mt-3 space-y-1.5 rounded-xl border border-zinc-200 p-2.5 dark:border-zinc-700" data-testid="flow-items">
             {invoice.items.map((item, i) => (
               <li key={i} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2">
-                <span className="truncate text-xs text-zinc-700 dark:text-zinc-300">
+                <span className="min-w-0 text-xs text-zinc-700 dark:text-zinc-300">
                   {item.name || "—"} <span dir="ltr" className="font-mono text-[10px] text-zinc-400">{f.num(item.quantity)} × {f.money(item.unitPrice)}</span>
                 </span>
                 <span dir="ltr" className="font-mono text-xs font-semibold text-zinc-900 dark:text-zinc-100">

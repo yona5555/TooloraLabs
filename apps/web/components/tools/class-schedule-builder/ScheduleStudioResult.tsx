@@ -127,7 +127,7 @@ export default function ScheduleStudioResult({ state, onChange, d, timeZone }: P
                 : t("result.statusClear")}
           </p>
           {d.overlaps[0] && (
-            <p className="truncate text-xs">
+            <p className="text-xs">
               <bdi>{d.byId.get(d.overlaps[0].aId)?.code || d.overlaps[0].aName}</bdi> × <bdi>{d.byId.get(d.overlaps[0].bId)?.code || d.overlaps[0].bName}</bdi> ·{" "}
               {t(`daysLong.${d.overlaps[0].day}`)} <span dir="ltr">{`${hm(d.overlaps[0].startMinutes)}–${hm(d.overlaps[0].endMinutes)}`}</span>
             </p>

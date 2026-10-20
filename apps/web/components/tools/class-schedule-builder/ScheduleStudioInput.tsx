@@ -140,7 +140,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
           </label>
         </div>
 
-        <div className="flex items-end justify-between gap-3">
+        <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <span className={label}>{t("input.credits")}</span>
             <div className="flex items-center gap-1.5">
@@ -157,7 +157,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
           </div>
           <div>
             <span className={label}>{t("input.color")}</span>
-            <div className="flex gap-1">
+            <div className="flex flex-wrap gap-1">
               {CLASS_COLORS.map((c, i) => (
                 <button
                   key={c}

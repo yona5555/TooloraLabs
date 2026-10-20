@@ -22,7 +22,7 @@ export default function VectorDotFormulaDiagram() {
       title={t("title")}
       intro={t("intro")}
       indicator={
-        <div dir="ltr" className="flex w-[300px] flex-wrap items-center justify-center gap-2 sm:w-[420px]">
+        <div dir="ltr" className="flex w-full max-w-[300px] flex-wrap items-center justify-center gap-2 sm:w-[420px] sm:max-w-none">
           {axes.map((ax, i) => (
             <Fragment key={ax}>
               <div className={`min-w-[78px] rounded-xl border px-2 py-2 text-center ${TERM_STYLES[i]}`}>

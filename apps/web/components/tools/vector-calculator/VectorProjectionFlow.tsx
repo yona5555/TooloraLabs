@@ -28,7 +28,7 @@ export default function VectorProjectionFlow() {
       title={t("title")}
       intro={t("intro")}
       indicator={
-        <div className="flex w-[280px] flex-col items-center sm:w-[340px]">
+        <div className="flex w-full max-w-[280px] flex-col items-center sm:w-[340px] sm:max-w-none">
           {node(tr("dot"), f(r.dot), "border-blue-300 bg-blue-50 text-blue-800 dark:border-blue-500/40 dark:bg-blue-500/10 dark:text-blue-200")}
           {arrow(`${t("divide")} = ÷ ${n(r.magB)}`)}
           {node(tr("compAonB"), opt(r.compAonB, 4), "border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200")}

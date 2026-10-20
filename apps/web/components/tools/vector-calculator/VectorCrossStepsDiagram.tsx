@@ -22,7 +22,7 @@ export default function VectorCrossStepsDiagram() {
       title={t("title")}
       intro={t("intro")}
       indicator={
-        <ol className="w-[300px] space-y-2 sm:w-[400px]">
+        <ol className="w-full max-w-[300px] space-y-2 sm:w-[400px] sm:max-w-none">
           {steps.map((s, i) => (
             <li key={i} style={{ marginInlineStart: `${i * 22}px` }} className={`flex items-center gap-3 rounded-xl border px-3 py-2 ${i === 3 ? "border-rose-300 bg-rose-50 dark:border-rose-500/40 dark:bg-rose-500/10" : "border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800/50"}`}>
               <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${i === 3 ? "bg-rose-600" : "bg-blue-600"}`}>{i + 1}</span>

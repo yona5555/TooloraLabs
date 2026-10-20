@@ -26,8 +26,8 @@ export default function EnergyEquivalents() {
   ];
 
   const indicator = (
-    <div className="flex w-full max-w-[380px] items-stretch gap-3 sm:w-[380px]">
-      <div className="flex w-[118px] shrink-0 flex-col items-center justify-center rounded-xl border-2 border-blue-500 bg-blue-50 px-2 py-4 text-center dark:border-blue-400 dark:bg-blue-500/10">
+    <div className="flex w-full max-w-[380px] flex-col items-stretch gap-3 sm:w-[380px] sm:flex-row">
+      <div className="flex w-full shrink-0 flex-col items-center sm:w-[118px] justify-center rounded-xl border-2 border-blue-500 bg-blue-50 px-2 py-4 text-center dark:border-blue-400 dark:bg-blue-500/10">
         <span className="text-[11px] font-semibold text-blue-700 dark:text-blue-300">{tForm(`mode.${draft.mode}`)}</span>
         <span dir="ltr" className="mt-1 font-mono text-lg font-bold text-blue-700 dark:text-blue-300">
           {f(E)}
@@ -39,7 +39,7 @@ export default function EnergyEquivalents() {
           <li key={r.key} className="flex items-center gap-2 rounded-lg border border-zinc-200 px-2 py-1.5 text-xs dark:border-zinc-700">
             <span aria-hidden className="text-sm font-bold text-zinc-400">=</span>
             <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${r.cls}`} />
-            <span className="min-w-0 flex-1 truncate text-zinc-600 dark:text-zinc-300">{t(r.key)}</span>
+            <span className="min-w-0 flex-1 text-zinc-600 dark:text-zinc-300">{t(r.key)}</span>
             <span dir="ltr" className="font-mono font-semibold whitespace-nowrap text-zinc-800 dark:text-zinc-100">{`${r.value} ${r.unit}`}</span>
           </li>
         ))}

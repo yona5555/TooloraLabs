@@ -26,7 +26,7 @@ export default function PaceRings() {
   const ticks = span === 1 ? 12 : span <= 3 ? span * 4 : span <= 15 ? span : 12;
 
   return (
-    <div className="flex w-full items-center gap-5">
+    <div className="flex w-full flex-wrap items-center justify-center gap-5 lg:flex-nowrap lg:justify-start">
       <svg data-preview="visual" direction="ltr" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("aria")} className="shrink-0">
         <circle cx={C} cy={C} r={RINGS[0] + 12} className="fill-zinc-50 stroke-zinc-200 dark:fill-zinc-800/60 dark:stroke-zinc-700" />
         {Array.from({ length: ticks }, (_, i) => {
@@ -84,7 +84,7 @@ export default function PaceRings() {
           {t("scale", { n: f(span) })}
         </text>
       </svg>
-      <ul className="flex min-w-0 flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs">
+      <ul className="flex min-w-[10rem] flex-1 flex-col justify-between gap-1 self-stretch py-2 text-xs lg:min-w-0">
         {[...rings, ...(custom ? [{ key: "custom" as const, rate: wpm, r: 0 }] : [])].map((ring) => (
           <li key={ring.key}>
             <button

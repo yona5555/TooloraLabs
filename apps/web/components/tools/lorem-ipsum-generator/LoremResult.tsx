@@ -82,7 +82,7 @@ export default function LoremResult() {
       </div>
       <p className="mt-1.5 text-[11px] text-zinc-400 dark:text-zinc-500">{tl("selectHint")}</p>
 
-      <div className="mt-3 flex flex-col-reverse gap-4 lg:flex-1">
+      <div className="mt-3 flex flex-col gap-4 lg:flex-1 lg:flex-col-reverse">
         <table className="min-w-0 flex-1 border-collapse text-sm">
           <tbody>
             {rows.map((r) => (

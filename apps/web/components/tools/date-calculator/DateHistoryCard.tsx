@@ -51,11 +51,11 @@ export default function DateHistoryCard({ d, f, entries, onSelect, onDelete, onC
                   <tr key={n} className="border-t border-zinc-100 dark:border-zinc-700/60">
                     <td className="px-2 py-1 font-bold text-blue-700 dark:text-blue-300">+{f.int(n)}</td>
                     <td className="px-2 py-1 text-zinc-700 dark:text-zinc-200">
-                      {f.greg(cal)}
+                      <span className="block">{f.greg(cal)}</span>
                       <span className="block text-[10px] text-emerald-700 dark:text-emerald-300">{f.hijri(cal)}</span>
                     </td>
                     <td className="px-2 py-1 text-end text-zinc-700 dark:text-zinc-200">
-                      {f.greg(biz)}
+                      <span className="block">{f.greg(biz)}</span>
                       <span className="block text-[10px] text-emerald-700 dark:text-emerald-300">{f.hijri(biz)}</span>
                     </td>
                   </tr>

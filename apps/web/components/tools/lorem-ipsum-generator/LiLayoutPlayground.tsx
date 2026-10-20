@@ -3,13 +3,13 @@ import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { LOREM_COUNT_RANGE } from "@tooloralabs/tools";
 import { RefreshCw } from "lucide-react";
+import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 import LiIndicatorCard from "./LiIndicatorCard";
 import { charsPerLine, estimatedLines, GLYPH_EM, MEASURE } from "./liMath";
 import { useLiLive } from "./LiLiveContext";
 
 const FRAME = 340;
 const MAX_WIDTH = 720;
-const SCALE = FRAME / MAX_WIDTH;
 const FRAME_H = 230;
 const PARA_GAP = 0.75;
 
@@ -23,6 +23,9 @@ export default function LiLayoutPlayground() {
   const [fontSize, setFontSize] = useState(16);
   const [lineHeight, setLineHeight] = useState(1.6);
   const [width, setWidth] = useState(560);
+  // the mock page is MAX_WIDTH wide, scaled to the frame's real width (340px, narrower on a phone)
+  const [frameRef, frameWidth] = useMeasuredWidth(FRAME, 1);
+  const scale = frameWidth / MAX_WIDTH;
 
   const cpl = charsPerLine(width, fontSize);
   const lines = estimatedLines(a, cpl);
@@ -47,10 +50,10 @@ export default function LiLayoutPlayground() {
 
   const indicator = (
     <div className="w-full sm:w-[340px]">
-      <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-800/60" style={{ height: FRAME_H }}>
+      <div ref={frameRef} className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-800/60" style={{ height: FRAME_H }}>
         <div
           className="origin-top-left p-3 text-zinc-800 rtl:origin-top-right dark:text-zinc-100"
-          style={{ width: FRAME / SCALE, transform: `scale(${SCALE})` }}
+          style={{ width: MAX_WIDTH, transform: `scale(${scale})` }}
         >
           <div className="mb-4 h-5 w-2/5 rounded bg-zinc-800 dark:bg-zinc-200" />
           <div

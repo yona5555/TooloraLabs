@@ -155,7 +155,7 @@ export default function CitationStudioResult({ state, onChange, source, index }:
           { k: t("result.narrative"), v: narrative },
         ].map((r) => (
           <div key={r.k} className="contents">
-            <p className="min-w-0 truncate">
+            <p className="min-w-0">
               <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{r.k}: </span>
               <bdi className="font-semibold text-blue-700 dark:text-blue-300">{r.v}</bdi>
             </p>

@@ -1,5 +1,6 @@
 import ThemeInitScript from "@/components/layout/ThemeInitScript";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import FitNumbers from "@/components/layout/FitNumbers";
 
 /**
  * The <html>/<body> shell. Rendered by each root-level segment ([locale] layout, embed page,
@@ -20,6 +21,7 @@ export default function HtmlDocument({
       <body className="text-zinc-900 antialiased dark:text-zinc-100">
         <ThemeInitScript />
         <GoogleAnalytics />
+        <FitNumbers />
         {children}
       </body>
     </html>

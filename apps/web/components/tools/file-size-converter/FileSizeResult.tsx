@@ -61,7 +61,7 @@ export default function FileSizeResult() {
           const gap = prefixGap(k);
           return (
             <li key={d.unit} className="flex flex-col justify-center rounded-lg bg-zinc-50 px-3 py-2 dark:bg-zinc-800/50">
-              <div className="grid grid-cols-[2.5rem_1fr_1fr] items-baseline gap-x-3 text-sm">
+              <div className="grid grid-cols-[2.5rem_minmax(0,1fr)_minmax(0,1fr)] items-baseline gap-x-3 text-sm">
                 <span className="text-xs font-bold text-zinc-400">{k === 0 ? "×1" : `×10^${k * 3}`}</span>
                 <span dir="ltr" className={`font-mono ${k === a.decimalLevel ? "font-bold text-blue-700 dark:text-blue-300" : "text-zinc-700 dark:text-zinc-200"}`}>
                   {fmt(d.value)} <span className="text-xs text-zinc-400">{d.unit}</span>

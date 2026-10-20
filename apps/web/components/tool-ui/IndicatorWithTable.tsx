@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { hasWords, MixedText, Subs } from "./MixedText";
 import { useGapFreeSplit, type GapLayout } from "./useGapFreeSplit";
 
@@ -21,19 +21,36 @@ type Props = {
   layout?: GapLayout;
 };
 
+/**
+ * A long worked formula ("v = 0 + 2 × 2.5 = 5 m/s") as whole pieces split before each " = ", so a
+ * narrow card wraps it between the steps and never inside a value or term.
+ */
+function FormulaPieces({ text }: { text: string }) {
+  if (text.length <= 24 || hasWords(text) || !text.includes(" = ")) return <MixedText text={text} />;
+  return text.split(/ (?== )/).map((piece, i) => (
+    <Fragment key={i}>
+      {i > 0 && " "}
+      <span>
+        <MixedText text={piece} />
+      </span>
+    </Fragment>
+  ));
+}
+
 function RowView({ row }: { row: Row }) {
   return (
     <div>
-      <div className="flex items-baseline justify-between gap-3">
+      {/* a value too long to sit beside its label drops under it (label above value) */}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 lg:flex-nowrap lg:gap-3">
         <dt className="text-zinc-500 dark:text-zinc-400">
           <Subs text={row.label} />
         </dt>
         {/* Words (e.g. Arabic "not reached") keep the sans font: monospace breaks Arabic letter joining. */}
         <dd
           dir={hasWords(row.value) ? "auto" : "ltr"}
-          className={`text-end font-semibold ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
+          className={`ms-auto max-w-full text-end font-semibold lg:ms-0 ${row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"}`}
         >
-          <MixedText text={row.value} />
+          <FormulaPieces text={row.value} />
         </dd>
       </div>
       {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500"><Subs text={row.note} /></p>}

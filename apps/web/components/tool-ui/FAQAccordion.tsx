@@ -44,7 +44,7 @@ export default function FAQAccordion({ items }: { items: FAQItem[] }) {
                 />
               </button>
               {isOpen && (
-                <div className="px-5 pb-4 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+                <div className="px-5 pb-4 text-sm leading-normal text-zinc-600 sm:leading-7 dark:text-zinc-300">
                   {item.answer}
                 </div>
               )}
