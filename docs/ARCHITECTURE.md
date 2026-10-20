@@ -30,7 +30,7 @@ flowchart TD
 
     subgraph PAGES["app/[locale]/"]
       HOME["page.tsx (home + calculator)"]
-      TOOLPAGE["tools/[slug]/page.tsx<br/>tool page"]
+      TOOLPAGE["tools/&lt;slug&gt;/page.tsx (one route per tool)<br/>tools/[slug]: the 4 live-data tools"]
       TOOLSIDX["tools/page.tsx"]
       CATS["categories/[slug]"]
       DOCSPAGE["docs/[slug]/page.tsx<br/>per-tool docs page"]
@@ -85,7 +85,7 @@ flowchart TD
 ## Layers in one line each
 - **packages/** — framework-free logic shared with the future mobile app: `core` (engine, registry, pipeline), `sdk` (tool authoring contracts), `tools` (the tool implementations).
 - **i18n** — six locales via next-intl; `proxy.ts` adds the locale prefix; every UI string lives in `messages/*.json` with identical keys.
-- **Pages** — `/{locale}/tools/{slug}` renders the tool; `/{locale}/docs/{slug}` renders its long-form docs (only slugs in `DOCUMENTED_TOOL_SLUGS`).
+- **Pages** — `/{locale}/tools/{slug}` renders the tool: each tool has its own route folder `app/[locale]/tools/<slug>/page.tsx` that passes its server entry `components/tools/entries/<slug>.tsx` to `lib/tool-page.tsx` (Next.js splits client JS per route, so a tool page loads only its own tool's code); `tools/[slug]` serves the four live-data tools on first request. A new tool needs both files. Client messages: `lib/client-messages.tsx` ships only the namespaces a page needs (`data/client-message-deps.json`, generated pre-build); `/{locale}/docs/{slug}` renders its long-form docs (only slugs in `DOCUMENTED_TOOL_SLUGS`).
 - **Live data** — `lib/{crypto,forex,commodities,weather}` call the app's own `app/api/*` routes, which proxy free keyless sources.
 - **SEO** — `sitemap.ts`, `robots.ts`, `generateMetadata` (canonical + hreflang) and JSON-LD on tool pages.
 

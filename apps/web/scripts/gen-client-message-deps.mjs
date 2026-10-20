@@ -1,7 +1,8 @@
 // Client message split: every page ships only the `tools.<slug>` namespaces its
 // client components read (lib/i18n/client-messages.ts). This script finds, for
 // each tool slug, every `tools.<other>` namespace referenced by the files reachable
-// through imports from components/tools/<slug>/ and components/docs/<slug>/, and
+// through imports from its route entry, components/tools/<slug>/ and
+// components/docs/<slug>/, and
 // writes the closure to data/client-message-deps.json; "*" lists the namespaces
 // reachable from the other pages and layouts. Runs before dev and build.
 // Usage: node scripts/gen-client-message-deps.mjs [--check]
@@ -61,13 +62,16 @@ const reachableNamespaces = (roots) => {
 
 // Pages without a tool slug share the layout's messages, so the namespaces they
 // reach (e.g. the home calculator) ship on every page under "*".
-const SLUG_PAGES = ["app/[locale]/tools/[slug]/page.tsx", "app/[locale]/docs/[slug]/page.tsx", "app/embed/[slug]/page.tsx"];
+// Tool routes (app/[locale]/tools/<slug>/ and [slug]) and the docs/embed slug
+// pages provide their tool's namespaces themselves.
+const TOOL_PAGES = [/\/app\/\[locale\]\/tools\/[^/]+\/page\.tsx$/, /\/docs\/\[slug\]\/page\.tsx$/, /\/embed\/\[slug\]\/page\.tsx$/];
 const pageRoots = listFiles(join(web, "app")).filter(
-  (f) => /\/(page|layout)\.tsx$/.test(f) && !SLUG_PAGES.some((p) => f.endsWith(p)),
+  (f) => /\/(page|layout)\.tsx$/.test(f) && !TOOL_PAGES.some((re) => re.test(f)),
 );
 const deps = { "*": [...reachableNamespaces(pageRoots)].sort() };
 for (const slug of slugs) {
   const namespaces = reachableNamespaces([
+    join(web, "components/tools/entries", `${slug}.tsx`),
     ...listFiles(join(web, "components/tools", slug)),
     ...listFiles(join(web, "components/docs", slug)),
   ]);
