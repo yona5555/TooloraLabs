@@ -203,6 +203,7 @@ import BreakEvenCalculatorTool from "@/components/tools/break-even-calculator/Br
 import BreakEvenEducation from "@/components/tools/break-even-calculator/BreakEvenEducation";
 import ToolPageLayout from "@/components/tools/layout/ToolPageLayout";
 import RelatedTools from "@/components/tools/RelatedTools";
+import { ToolMessagesProvider } from "@/lib/client-messages";
 import { tools } from "@/data/tools";
 import { SITE_URL } from "@/lib/site";
 import { getTopCoins, getGlobalStats, getFiatRates, getFetchTimestamp } from "@/lib/crypto/coingecko";
@@ -794,7 +795,7 @@ export default async function ToolPage({
   };
 
   return (
-    <>
+    <ToolMessagesProvider locale={locale} toolSlugs={[slug]}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLdHtml(jsonLd)}
@@ -823,6 +824,6 @@ export default async function ToolPage({
       {!isAboveFoldLayout && (
         <RelatedTools locale={locale} category={tool.category} currentSlug={slug} />
       )}
-    </>
+    </ToolMessagesProvider>
   );
 }

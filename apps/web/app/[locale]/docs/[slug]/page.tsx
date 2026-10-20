@@ -105,6 +105,7 @@ import RomanNumeralConverterDocsPage, { getRomanNumeralConverterTocItems } from 
 import TextToSpeechDocsPage, { getTextToSpeechTocItems } from "@/components/docs/text-to-speech/TextToSpeechDocsPage";
 import SpeechToTextDocsPage, { getSpeechToTextTocItems } from "@/components/docs/speech-to-text/SpeechToTextDocsPage";
 import SpellingGrammarCheckerDocsPage, { getSpellingGrammarCheckerTocItems } from "@/components/docs/spelling-grammar-checker/SpellingGrammarCheckerDocsPage";
+import { ToolMessagesProvider } from "@/lib/client-messages";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -555,9 +556,9 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
   ]);
 
   return (
-    <>
+    <ToolMessagesProvider locale={locale} toolSlugs={[slug]}>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(breadcrumb)} />
       <DocsLayout toc={<TableOfContents items={tocItems} />}>{content}</DocsLayout>
-    </>
+    </ToolMessagesProvider>
   );
 }
