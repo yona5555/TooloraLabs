@@ -34,12 +34,17 @@ export default function RealWorldScaleBar() {
             <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
           </div>
           <div className="relative mt-2 h-14 w-full text-[10px]">
-            {REFERENCE.map((r, i) => (
-              <div key={r.key} className="absolute -translate-x-1/2 text-center" style={{ left: `${((r.exponent - -10) / 26) * 100}%`, top: `${(i % 2) * 24}px` }}>
-                <div className="font-semibold text-zinc-600 dark:text-zinc-300">{t(`items.${r.key}`)}</div>
-                <div className="text-zinc-400 dark:text-zinc-500">{`10^${r.exponent}`}</div>
-              </div>
-            ))}
+            {REFERENCE.map((r, i) => {
+              const left = ((r.exponent - -10) / 26) * 100;
+              // the end labels hang inward so they stay inside the card on a phone
+              const align = left === 0 ? "text-start" : left === 100 ? "-translate-x-full text-end" : "-translate-x-1/2 text-center";
+              return (
+                <div key={r.key} className={`absolute ${align}`} style={{ left: `${left}%`, top: `${(i % 2) * 24}px` }}>
+                  <div className="font-semibold text-zinc-600 dark:text-zinc-300">{t(`items.${r.key}`)}</div>
+                  <div className="text-zinc-400 dark:text-zinc-500">{`10^${r.exponent}`}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.currentExponent"), value: `10^${Math.round(rawExponentA)}`, emphasize: true }]} />

@@ -349,3 +349,31 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
 @media (prefers-reduced-motion: reduce) {
   .animate-block-in, .animate-flash-up, .animate-flash-down, .animate-flow-dash { animation: none; }
 }
+
+/*
+ * iOS Safari zooms the whole page in when a form field under 16px gets focus,
+ * and keeps it zoomed after blur — every text then looks oversized and spills
+ * out of its card. Phones and tablets only (below `lg`); desktop sizes are untouched.
+ * Unlayered so it outranks the `text-xs` / `text-sm` / `text-[11px]` utilities.
+ */
+@media (max-width: 1023.98px) {
+  /*
+   * A long word (German compounds, unit names) in a narrow box wraps inside it
+   * instead of spilling past its border or widening the page. `anywhere` also
+   * lets flex and grid items shrink below the word; tables keep their own
+   * width and scroll in their overflow wrappers instead of breaking letters.
+   */
+  body {
+    overflow-wrap: anywhere;
+  }
+  table {
+    overflow-wrap: normal;
+  }
+  /* a range slider in a flex row with a label must not hold the row wider than the card */
+  input[type="range"] {
+    min-width: 0;
+  }
+  :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="hidden"], [type="button"], [type="submit"], [type="reset"]), select, textarea):not([class*="text-base"], [class*="text-lg"], [class*="text-xl"], [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"]) {
+    font-size: 16px;
+  }
+}

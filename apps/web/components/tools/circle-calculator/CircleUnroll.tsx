@@ -86,7 +86,7 @@ export default function CircleUnroll() {
                 setPlaying(false);
                 setP(Number(e.target.value) / 1000);
               }}
-              className="flex-1 accent-blue-600"
+              className="min-w-0 flex-1 accent-blue-600"
             />
             <span dir="ltr" className="w-12 text-end font-mono">{f(p * 100, 0)}%</span>
           </label>
