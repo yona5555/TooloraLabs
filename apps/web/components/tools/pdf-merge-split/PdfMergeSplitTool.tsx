@@ -29,6 +29,8 @@ const SAMPLES = {
   handbook: { title: "Handbook", pages: 6, paper: "A4" as const },
 };
 type SampleKey = keyof typeof SAMPLES;
+/** The merge set the page opens on (the first example). */
+const SEED_MERGE: SampleKey[] = ["report", "invoice", "appendix"];
 
 const EXAMPLES: { id: string; mode: PdfMode; files: SampleKey[]; ranges?: string }[] = [
   { id: "mergeThree", mode: "merge", files: ["report", "invoice", "appendix"] },
@@ -108,13 +110,15 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
 
   // Open on real results: build the sample merge set and the sample split document after mount.
   const seeded = useRef(false);
+  const [seedPending, setSeedPending] = useState(true);
   useEffect(() => {
     // Effects run twice in development (Strict Mode); seed the samples only once.
     if (seeded.current) return;
     seeded.current = true;
     void (async () => {
-      const [report, invoice, appendix, handbook] = await Promise.all((["report", "invoice", "appendix", "handbook"] as SampleKey[]).map(sampleFile));
+      const [report, invoice, appendix, handbook] = await Promise.all(([...SEED_MERGE, "handbook"] as SampleKey[]).map(sampleFile));
       await addMergeFiles([report, invoice, appendix]);
+      setSeedPending(false);
       setSplitFile(handbook);
       setSplitInfo(await infoOf(handbook));
     })();
@@ -303,6 +307,7 @@ export default function PdfMergeSplitTool({ education }: { education: ReactNode 
                 mode={mode}
                 onModeChange={handleModeChange}
                 mergeFiles={mergeFiles}
+                pendingMergeNames={seedPending ? SEED_MERGE.map((key) => `${key}.pdf`) : undefined}
                 onMergeFilesAdd={handleMergeFilesAdd}
                 onMergeFileRemove={handleMergeFileRemove}
                 onMergeFileMove={handleMergeFileMove}
