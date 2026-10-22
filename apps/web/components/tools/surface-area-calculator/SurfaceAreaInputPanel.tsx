@@ -9,6 +9,14 @@ import { SHAPE_DEFAULTS } from "./types";
 
 const SHAPES: Solid3DShape[] = ["cube", "rectangular-prism", "sphere", "cylinder", "cone", "square-pyramid"];
 
+type FieldDef = { key: keyof Solid3DDraft; label: string; hint?: string };
+
+function chunkPairs<T>(items: T[]): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < items.length; i += 2) out.push(items.slice(i, i + 2));
+  return out;
+}
+
 type Props = {
   draft: Solid3DDraft;
   onChange: (draft: Solid3DDraft) => void;
@@ -29,7 +37,7 @@ export default function SurfaceAreaInputPanel({ draft, onChange, onCalculate, on
   // (dropped visually at this row height, not from the HTML — see `hint` below) since there's no
   // room for a third line at 47px.
   const field = (key: keyof Solid3DDraft, label: string, hint?: string) => (
-    <div className="max-md:grid max-md:h-[47px] max-md:grid-cols-[96px_1fr] max-md:items-center max-md:gap-3 max-md:border-b max-md:border-zinc-100 max-md:last:border-b-0 dark:max-md:border-zinc-800">
+    <div key={key} className="max-md:grid max-md:h-[47px] max-md:grid-cols-[96px_1fr] max-md:items-center max-md:gap-3 max-md:border-b max-md:border-zinc-100 max-md:last:border-b-0 dark:max-md:border-zinc-800">
       <span className="max-md:text-end max-md:text-[13px] max-md:font-semibold max-md:text-zinc-600 max-md:dark:text-zinc-300 md:hidden" aria-hidden="true">
         {label}
       </span>
@@ -45,6 +53,69 @@ export default function SurfaceAreaInputPanel({ draft, onChange, onCalculate, on
         hintClassName="max-md:hidden"
         wrapperClassName="max-md:space-y-0"
       />
+    </div>
+  );
+
+  // Phone standard (<768px, owner-approved 2026-10-23, this tool only): a shape with 2+ fields
+  // fits two per 44px row (label stacked above a compact input) instead of one 47px row per
+  // field; `md:contents` on the row wrapper removes it from the layout at `md` and up, so each
+  // field becomes a direct child of the `space-y-5` column there — identical to `field()`'s own
+  // markup, restoring today's one-full-row-per-field desktop layout untouched. A shape with an odd
+  // field count keeps its last field in the full-width `field()` row (unchanged) instead of a
+  // half-empty pair.
+  const fieldHalf = (key: keyof Solid3DDraft, label: string, hint?: string) => (
+    <div key={key} className="max-md:flex max-md:h-[44px] max-md:flex-col max-md:justify-center max-md:gap-0.5">
+      <span className="max-md:text-[10px] max-md:font-semibold max-md:text-zinc-500 md:hidden dark:max-md:text-zinc-400" aria-hidden="true">
+        {label}
+      </span>
+      <ToolInput
+        label={label}
+        hint={hint}
+        type="text"
+        inputMode="decimal"
+        value={draft[key]}
+        onChange={(e) => patch({ [key]: e.target.value } as Partial<Solid3DDraft>)}
+        className="max-md:h-[22px] max-md:py-0 max-md:text-sm"
+        labelClassName="max-md:hidden"
+        hintClassName="max-md:hidden"
+        wrapperClassName="max-md:space-y-0"
+      />
+    </div>
+  );
+
+  const fieldDefs: FieldDef[] =
+    draft.shape === "cube"
+      ? [{ key: "side", label: t("sideLabel"), hint: t("hint.cubeSide") }]
+      : draft.shape === "rectangular-prism"
+        ? [
+            { key: "length", label: t("lengthLabel"), hint: t("hint.prismLength") },
+            { key: "width", label: t("widthLabel"), hint: t("hint.prismWidth") },
+            { key: "height", label: t("heightLabel"), hint: t("hint.prismHeight") },
+          ]
+        : draft.shape === "sphere"
+          ? [{ key: "radius", label: t("radiusLabel"), hint: t("hint.sphereRadius") }]
+          : draft.shape === "cylinder"
+            ? [
+                { key: "radius", label: t("radiusLabel"), hint: t("hint.cylinderRadius") },
+                { key: "height", label: t("heightLabel"), hint: t("hint.cylinderHeight") },
+              ]
+            : draft.shape === "cone"
+              ? [
+                  { key: "radius", label: t("radiusLabel"), hint: t("hint.cylinderRadius") },
+                  { key: "height", label: t("heightLabel"), hint: t("hint.coneHeight") },
+                ]
+              : [
+                  { key: "baseSide", label: t("baseSideLabel"), hint: t("hint.pyramidBaseSide") },
+                  { key: "height", label: t("heightLabel"), hint: t("hint.pyramidHeight") },
+                ];
+
+  const pairRow = (a: FieldDef, b: FieldDef) => (
+    <div
+      key={`${a.key}_${b.key}`}
+      className="max-md:grid max-md:h-[44px] max-md:grid-cols-2 max-md:items-center max-md:gap-3 max-md:border-b max-md:border-zinc-100 max-md:last:border-b-0 md:contents dark:max-md:border-zinc-800"
+    >
+      {fieldHalf(a.key, a.label, a.hint)}
+      {fieldHalf(b.key, b.label, b.hint)}
     </div>
   );
 
@@ -73,38 +144,7 @@ export default function SurfaceAreaInputPanel({ draft, onChange, onCalculate, on
         </div>
 
         <div className="mt-5 space-y-5 max-md:mt-0 max-md:space-y-0">
-          {draft.shape === "cube" && field("side", t("sideLabel"), t("hint.cubeSide"))}
-
-          {draft.shape === "rectangular-prism" && (
-            <>
-              {field("length", t("lengthLabel"), t("hint.prismLength"))}
-              {field("width", t("widthLabel"), t("hint.prismWidth"))}
-              {field("height", t("heightLabel"), t("hint.prismHeight"))}
-            </>
-          )}
-
-          {draft.shape === "sphere" && field("radius", t("radiusLabel"), t("hint.sphereRadius"))}
-
-          {draft.shape === "cylinder" && (
-            <>
-              {field("radius", t("radiusLabel"), t("hint.cylinderRadius"))}
-              {field("height", t("heightLabel"), t("hint.cylinderHeight"))}
-            </>
-          )}
-
-          {draft.shape === "cone" && (
-            <>
-              {field("radius", t("radiusLabel"), t("hint.cylinderRadius"))}
-              {field("height", t("heightLabel"), t("hint.coneHeight"))}
-            </>
-          )}
-
-          {draft.shape === "square-pyramid" && (
-            <>
-              {field("baseSide", t("baseSideLabel"), t("hint.pyramidBaseSide"))}
-              {field("height", t("heightLabel"), t("hint.pyramidHeight"))}
-            </>
-          )}
+          {chunkPairs(fieldDefs).map((chunk) => (chunk.length === 2 ? pairRow(chunk[0], chunk[1]) : field(chunk[0].key, chunk[0].label, chunk[0].hint)))}
         </div>
 
         <div className="mt-6 flex flex-wrap gap-4 max-md:mt-3 max-md:grid max-md:grid-cols-2 max-md:gap-3">

@@ -135,10 +135,10 @@ export default function SurfaceAreaShareExportModal({ result, digitStyle, draft 
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 rounded-lg border border-white/40 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/10 dark:text-zinc-100"
+        className="flex items-center gap-1.5 rounded-lg border border-white/40 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-white/10 max-md:h-3.5 max-md:w-3.5 max-md:gap-0 max-md:border-0 max-md:p-0 max-md:text-zinc-500 max-md:hover:bg-transparent dark:text-zinc-100 max-md:dark:text-zinc-400"
       >
-        <Share2 size={14} />
-        {t("shareExport.triggerLabel")}
+        <Share2 size={14} className="max-md:h-3.5 max-md:w-3.5" />
+        <span className="max-md:hidden">{t("shareExport.triggerLabel")}</span>
       </button>
 
       {open && (

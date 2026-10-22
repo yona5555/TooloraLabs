@@ -2,6 +2,9 @@ import { ReactNode } from "react";
 import { ArrowLeft } from "lucide-react";
 import BackButton from "@/components/tool-ui/BackButton";
 import { Link } from "@/i18n/navigation";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import ShareButton from "@/components/layout/ShareButton";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 type ToolPageLayoutProps = {
   category: string;
@@ -22,6 +25,15 @@ type ToolPageLayoutProps = {
    * of wrapping. md and up render exactly as the existing `compact` header.
    */
   mobileCompact?: boolean;
+  /**
+   * Opt-in (owner-approved 2026-10-23, surface-area-calculator pilot only — every other `compact`
+   * tool is unaffected since this defaults to false): below 768px, the global sticky Navbar (logo
+   * + language/share/theme controls, normally its own ~73px bar above this header) is hidden via
+   * `globals.css` (`[data-merge-mobile-header]`) and replaced by one 48px bar here that carries the
+   * back arrow, the tool title, and those same three controls. md and up render the Navbar and this
+   * header exactly as before — nothing here touches that breakpoint.
+   */
+  mergeMobileHeader?: boolean;
 };
 
 export default function ToolPageLayout({
@@ -34,13 +46,38 @@ export default function ToolPageLayout({
   contentWidth = "default",
   compact = false,
   mobileCompact = false,
+  mergeMobileHeader = false,
 }: ToolPageLayoutProps) {
   const maxWidthClass = contentWidth === "wide" ? "max-w-6xl" : "max-w-5xl";
 
   if (compact) {
     return (
-      <main className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
-        <div className="flex items-center gap-3">
+      <main
+        data-merge-mobile-header={mergeMobileHeader ? "" : undefined}
+        className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}
+      >
+        {mergeMobileHeader && (
+          <div className="-mx-4 -mt-6 flex h-12 items-center gap-2 border-b border-blue-200/70 bg-blue-100/80 px-3 md:hidden dark:border-blue-500/30 dark:bg-blue-950/60">
+            <Link
+              href={`/categories/${categorySlug}`}
+              aria-label={backLabel}
+              title={backLabel}
+              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-zinc-500 transition hover:bg-white/60 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-blue-400"
+            >
+              <ArrowLeft size={18} className="rtl:rotate-180" />
+            </Link>
+            <h1 data-fit className="min-w-0 flex-1 truncate text-base font-bold text-zinc-900 dark:text-zinc-50">
+              {title}
+            </h1>
+            <div className="flex shrink-0 items-center gap-1">
+              <LanguageSwitcher />
+              <ShareButton />
+              <ThemeToggle />
+            </div>
+          </div>
+        )}
+
+        <div className={`flex items-center gap-3 ${mergeMobileHeader ? "max-md:hidden" : ""}`}>
           {mobileCompact ? (
             <Link
               href={`/categories/${categorySlug}`}
@@ -62,7 +99,7 @@ export default function ToolPageLayout({
           </h1>
         </div>
 
-        <div className="mt-4">{children}</div>
+        <div className={mergeMobileHeader ? "mt-4 max-md:mt-3" : "mt-4"}>{children}</div>
       </main>
     );
   }

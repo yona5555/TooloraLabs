@@ -73,12 +73,15 @@ export async function ToolPageView({
   slug,
   Entry,
   mobileCompact = false,
+  mergeMobileHeader = false,
 }: {
   locale: string;
   slug: string;
   Entry?: ComponentType<ToolEntryProps>;
   /** Opt-in per tool (2026-10-22, surface-area-calculator pilot only); see ToolPageLayout's own doc comment. */
   mobileCompact?: boolean;
+  /** Opt-in per tool (2026-10-23, surface-area-calculator pilot only); see ToolPageLayout's own doc comment. */
+  mergeMobileHeader?: boolean;
 }) {
   const tool = tools.find((item) => item.slug === slug);
   if (!tool) {
@@ -245,6 +248,7 @@ export async function ToolPageView({
         contentWidth={isAboveFoldLayout ? "wide" : "default"}
         compact={isAboveFoldLayout}
         mobileCompact={mobileCompact}
+        mergeMobileHeader={mergeMobileHeader}
       >
         {component}
       </ToolPageLayout>

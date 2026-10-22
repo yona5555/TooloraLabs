@@ -22,7 +22,7 @@ type SectionCardProps = {
 const headerClassName =
   "flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
 const headerClassNameMobilePlain =
-  "flex w-full items-center justify-between gap-3 border-b border-zinc-200 px-[11px] py-2 text-start max-md:rounded-none max-md:border-b max-md:bg-transparent md:rounded-t-2xl md:border-b-0 md:bg-blue-600 md:px-4 md:py-2.5 lg:px-6 lg:py-3 dark:border-zinc-800";
+  "flex w-full items-center justify-between gap-2 border-b border-zinc-200 px-[11px] py-2 text-start max-md:gap-1.5 max-md:rounded-none max-md:border-b max-md:bg-transparent max-md:px-[11px] max-md:py-[3px] md:rounded-t-2xl md:border-b-0 md:bg-blue-600 md:px-4 md:py-2.5 lg:px-6 lg:py-3 dark:border-zinc-800";
 
 export default function SectionCard({
   title,
@@ -35,7 +35,7 @@ export default function SectionCard({
   mobilePlain = false,
 }: SectionCardProps) {
   const heading = mobilePlain ? (
-    <h2 className="max-md:text-[12px] max-md:font-semibold max-md:tracking-wider max-md:text-zinc-500 max-md:uppercase md:font-bold md:text-white dark:max-md:text-zinc-400">
+    <h2 className="max-md:text-[10px] max-md:leading-[14px] max-md:font-semibold max-md:tracking-wider max-md:text-zinc-500 max-md:uppercase md:font-bold md:text-white dark:max-md:text-zinc-400">
       {title}
     </h2>
   ) : (

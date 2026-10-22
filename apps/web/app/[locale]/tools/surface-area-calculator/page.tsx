@@ -7,5 +7,5 @@ export async function generateMetadata({ params }: ToolRouteProps): Promise<Meta
 }
 
 export default async function Page({ params }: ToolRouteProps) {
-  return <ToolPageView locale={(await params).locale} slug="surface-area-calculator" Entry={ToolEntry} mobileCompact />;
+  return <ToolPageView locale={(await params).locale} slug="surface-area-calculator" Entry={ToolEntry} mobileCompact mergeMobileHeader />;
 }

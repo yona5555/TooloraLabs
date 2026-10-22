@@ -52,6 +52,12 @@ type ToolAboveFoldProps = {
    * for all three — a real 3→2→1 collapse driven by width tiers instead of one hard breakpoint.
    */
   fluidColumns?: boolean;
+  /**
+   * Opt-in (2026-10-23, surface-area-calculator pilot only — every other caller is unaffected
+   * since this defaults to false): below 768px only, the grid's row/column gap drops from 24px
+   * (or 16px under `tight`) to 12px. md and up are completely unaffected by this prop.
+   */
+  tightMobileGaps?: boolean;
 };
 
 /**
@@ -115,7 +121,7 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false, tight = false, fluidColumns = false }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false, tight = false, fluidColumns = false, tightMobileGaps = false }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -258,7 +264,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
     <div
       ref={gridRef}
       data-afold={sidebarMatchRow ? layoutId : undefined}
-      className={`relative grid grid-cols-1 content-start items-start ${gridColsClass} ${tight ? "gap-4" : "gap-6"}`}
+      className={`relative grid grid-cols-1 content-start items-start ${gridColsClass} ${tight ? "gap-4" : "gap-6"} ${tightMobileGaps ? "max-md:gap-3" : ""}`}
       style={{ minHeight: sidebarHeight || undefined }}
     >
       {/*

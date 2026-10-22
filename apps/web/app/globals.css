@@ -491,3 +491,16 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     }
   }
 }
+
+/*
+ * Merged mobile tool header (owner-approved 2026-10-23, surface-area-calculator pilot only):
+ * ToolPageLayout's `mergeMobileHeader` marks its <main> with [data-merge-mobile-header] and
+ * renders its own 48px back+title+controls bar below 768px; this hides the global sticky Navbar
+ * underneath it on that page only, at that width only. Every other page, and this same page at
+ * 768px and up, is untouched — #site-navbar keeps rendering normally there.
+ */
+@media (max-width: 767.98px) {
+  body:has([data-merge-mobile-header]) #site-navbar {
+    display: none;
+  }
+}
