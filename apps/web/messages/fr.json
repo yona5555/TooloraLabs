@@ -18940,7 +18940,61 @@
       "description": "Générez des harmonies de couleurs complémentaires, analogues, triadiques et autres à partir d'une couleur de base, avec des codes HEX, RVB et HSL prêts à copier.",
       "aboveFold": {
         "resultTitle": "Palette générée",
-        "placeholder": "Choisissez une couleur de base et un type d'harmonie pour générer une palette."
+        "sampleBadge": "Exemple",
+        "statAngles": "Pas de teinte",
+        "statCount": "Couleurs",
+        "statBaseHsl": "TSL de base",
+        "statContrast": "Base sur blanc",
+        "wheel": {
+          "aria": "Roue chromatique avec la palette marquée ; teinte de base {hue}°",
+          "handle": "Faites tourner le repère de base autour de la roue",
+          "chipLabel": "Copier la couleur {n}",
+          "readout": "Teinte de base {hue} · {name}",
+          "emptyAria": "Roue chromatique sans couleur : la couleur de base n'est pas valide",
+          "emptyTitle": "Pas encore de couleur à placer"
+        },
+        "errorPanel": {
+          "inputLabel": "Ce que vous avez saisi",
+          "emptyValue": "(vide)",
+          "meter": "{n} chiffres hex sur 6",
+          "suggestionLabel": "Correction suggérée",
+          "autoFixUnavailable": "Aucune correction automatique disponible — appliquez manuellement la correction suggérée ci-dessus.",
+          "fix": {
+            "expandShorthand": "Développer la forme courte à 3 chiffres",
+            "dropAlpha": "Retirer les chiffres alpha",
+            "removeSpaces": "Retirer les espaces",
+            "replace0x": "Remplacer 0x par #",
+            "loadSample": "Charger l'exemple"
+          },
+          "kind": {
+            "empty": {
+              "explanation": "Le champ couleur est vide : il n'y a aucune teinte à faire tourner sur la roue.",
+              "suggestion": "Saisissez une couleur hex à 6 chiffres comme #3B82F6, ou choisissez-en une avec le sélecteur."
+            },
+            "badChar": {
+              "explanation": "Une couleur hex n'utilise que les chiffres 0–9 et les lettres A–F. Le caractère signalé n'en fait pas partie.",
+              "suggestion": "Remplacez le caractère signalé par un chiffre hex (0–9, A–F)."
+            },
+            "badLength": {
+              "explanation": "Une couleur hex exige exactement 6 chiffres hex : deux pour le rouge, le vert et le bleu.",
+              "suggestion": "Utilisez 6 chiffres. La forme courte #38F vaut #3388FF ; une valeur à 8 chiffres ajoute l'alpha, inutile pour une palette."
+            }
+          },
+          "emptyExample": "par exemple {hex}"
+        },
+        "compareTitle": "Une couleur valide pour comparer — l'exemple",
+        "compareText": "L'exemple {sample} compte 6 chiffres hex ; avec l'harmonie complémentaire il donne ces deux couleurs.",
+        "preview": {
+          "title": "Votre palette sur une page",
+          "brand": "Studio",
+          "nav": "Travaux · À propos · Contact",
+          "heading": "Un titre dans votre couleur de base",
+          "body": "Le texte courant reste neutre pour garder son contraste ;",
+          "link": "les liens prennent votre dernière couleur.",
+          "button": "Bouton principal",
+          "secondary": "Secondaire"
+        },
+        "customBadge": "Votre couleur"
       },
       "nav": {
         "tool": "Générateur",
@@ -18961,7 +19015,25 @@
           "tetradic": "Tétradique",
           "monochromatic": "Monochromatique"
         },
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "extras": {
+          "quickSamplesTitle": "Couleurs d'exemple réelles",
+          "hslTitle": "Votre couleur de base en TSL",
+          "hue": "Teinte",
+          "saturation": "Saturation",
+          "lightness": "Luminosité",
+          "hslInvalid": "Pas encore une couleur valide.",
+          "huesTitle": "Teinte de chaque couleur de la palette",
+          "huesInvalid": "Pour comparer, l'exemple {hex} donne :",
+          "formatsTitle": "Votre couleur de base dans tous les formats",
+          "copy": "Copier",
+          "slotsTitle": "Où tombent vos chiffres",
+          "slotR": "rouge",
+          "slotG": "vert",
+          "slotB": "bleu",
+          "slotsNote": "Deux chiffres hex (0–9, A–F) par canal.",
+          "slotsExtra": "{n} chiffre(s) en trop au-delà des six d'une couleur."
+        }
       },
       "education": {
         "intro": {
@@ -19108,6 +19180,102 @@
       "quickReference": {
         "title": "Angles d'harmonie chromatique",
         "intro": "Décalages de teinte réels sur la roue chromatique utilisés pour générer chaque type d'harmonie."
+      },
+      "hueNames": {
+        "red": "Rouge",
+        "orange": "Orange",
+        "yellow": "Jaune",
+        "chartreuse": "Chartreuse",
+        "green": "Vert",
+        "spring": "Vert printemps",
+        "cyan": "Cyan",
+        "azure": "Azur",
+        "blue": "Bleu",
+        "violet": "Violet",
+        "magenta": "Magenta",
+        "rose": "Rose"
+      },
+      "visuals": {
+        "rgb": {
+          "title": "Canaux rouge, vert et bleu",
+          "subtitle": "L'exemple #3B82F6, ce sont trois nombres de 0 à 255. Modifiez son canal bleu : la couleur, le code hex et la teinte suivent.",
+          "caption": "Avec bleu = {b}, la couleur devient {hex}.",
+          "handle": "Canal bleu",
+          "rowR": "Rouge",
+          "rowG": "Vert",
+          "rowB": "Bleu",
+          "rowHex": "Code hex",
+          "rowHue": "Teinte"
+        },
+        "hex": {
+          "title": "Des paires hex aux nombres",
+          "subtitle": "Chaque paire de chiffres hex est un canal : premier chiffre × 16 + second chiffre. Modifiez le premier chiffre de la paire bleue.",
+          "caption": "Paire bleue {pair} = {b}, donc la couleur est {hex}.",
+          "handle": "Premier chiffre de la paire bleue",
+          "rowHex": "Code hex"
+        },
+        "hslFormula": {
+          "title": "De RVB à TSL, pas à pas",
+          "subtitle": "La conversion exacte que fait l'outil avant de faire tourner les teintes — sur l'exemple, avec son canal vert à votre main.",
+          "caption": "Avec vert = {g}, la couleur est TSL {hsl}.",
+          "handle": "Canal vert",
+          "rowNorm": "R, V, B ÷ 255",
+          "rowMaxMin": "max / min",
+          "rowH": "Teinte (d'après le canal maximal)",
+          "hSub": "d'après le canal max"
+        },
+        "rings": {
+          "title": "Toutes les harmonies d'une seule teinte",
+          "subtitle": "Un anneau par harmonie, chaque point à son vrai décalage par rapport à la teinte de base. Tournez la base : toutes les harmonies tournent avec elle.",
+          "caption": "Base {h} ; sa complémentaire est à {c}.",
+          "handle": "Teinte de base"
+        },
+        "ladder": {
+          "title": "L'échelle monochrome",
+          "subtitle": "Les cinq paliers de luminosité de l'outil (20, 35, 50, 65, 80 %) à la teinte de l'exemple. Changez la saturation : chaque palier se remélange.",
+          "caption": "À {s} de saturation, le palier central est {mid}.",
+          "handle": "Saturation"
+        },
+        "contrast": {
+          "title": "Contraste sur blanc et sur noir",
+          "subtitle": "Contraste WCAG 2.x de la teinte de l'exemple à la luminosité choisie — 4,5:1 est le minimum pour un texte normal.",
+          "caption": "À la luminosité {l} : {w}:1 sur blanc, {b}:1 sur noir.",
+          "handle": "Luminosité",
+          "rowLum": "Luminance relative",
+          "rowWhite": "Contraste sur blanc",
+          "rowBlack": "Contraste sur noir",
+          "rowAA": "AA texte normal (blanc · noir)",
+          "rowAAA": "AAA texte normal (blanc · noir)",
+          "pass": "réussi",
+          "fail": "échec",
+          "onWhite": "sur blanc"
+        },
+        "luminance": {
+          "title": "Même luminosité, éclat différent",
+          "subtitle": "Les 12 teintes nommées à la même luminosité TSL, classées par vraie luminance WCAG — la luminosité TSL n'est pas l'éclat perçu.",
+          "caption": "À {l} de luminosité, {top} est la plus claire et {bottom} la plus sombre.",
+          "handle": "Luminosité",
+          "rowRatio": "Plus claire ÷ plus sombre"
+        },
+        "hueZone": {
+          "title": "Où se situe une teinte sur la roue",
+          "subtitle": "Les 12 teintes nommées de la roue RVB, espacées de 30°. Déplacez la teinte pour trouver le nom le plus proche et sa complémentaire.",
+          "caption": "{h} est le plus proche de {name} ; sa complémentaire est {comp}.",
+          "handle": "Teinte",
+          "rowHue": "Teinte (S 100 %, L 50 %)",
+          "rowName": "Teinte nommée la plus proche",
+          "rowDist": "Écart avec elle",
+          "rowComp": "Complémentaire",
+          "rowCompHex": "Couleur complémentaire"
+        }
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Contraste de votre palette",
+          "contrastTitle": "Chaque couleur sur blanc ◻ et sur noir ◼",
+          "contrastNone": "S'affiche dès que la couleur est valide.",
+          "note": "WCAG 2.x : AA exige 4,5:1 pour un texte normal (3:1 en grand), AAA exige 7:1."
+        }
       }
     },
     "unit-converter": {
@@ -19680,7 +19848,6 @@
       },
       "aboveFold": {
         "resultTitle": "Votre code-barres",
-        "placeholder": "Saisissez une valeur à gauche pour générer un code-barres.",
         "disclaimer": "Ce code-barres est généré à des fins éducatives et de conception générale uniquement — il ne s'agit pas d'un enregistrement commercial officiel. Pour vendre un produit dans de vrais points de vente, vous devez enregistrer votre numéro auprès de l'organisme compétent (comme GS1) afin de garantir qu'il vous appartient de manière unique dans le monde entier.",
         "typesGuide": {
           "title": "UPC-A, EAN-13 et Code 128 : quelles différences ?",
@@ -19699,7 +19866,79 @@
               "usedFor": "Lettres, chiffres et symboles, sur n'importe quelle longueur. Utilisé pour les étiquettes d'expédition, le suivi des stocks et les identifiants internes — pas pour les points de vente au détail."
             }
           ]
-        }
+        },
+        "sampleBadge": "Exemple",
+        "statModules": "Modules",
+        "statBars": "Barres",
+        "statCheckDigit": "Chiffre de contrôle",
+        "statChecksum": "Somme de contrôle",
+        "statWidth": "Largeur à 100 %",
+        "scene": {
+          "aria": "Un scanner de caisse qui lit votre code-barres",
+          "handle": "Faites glisser le point de lecture du laser sur les barres",
+          "beep": "BIP",
+          "noRead": "ÉCHEC DE LECTURE",
+          "noReadHint": "Cette valeur ne peut pas encore être encodée",
+          "readDigit": "Lecture du chiffre {pos} = {digit} — son motif de 7 modules est {pattern}",
+          "readZone": "Lecture de {zone}",
+          "zone": {
+            "guard": "barres de garde",
+            "center": "la garde centrale",
+            "left": "la moitié gauche",
+            "right": "la moitié droite",
+            "data": "un symbole de données"
+          }
+        },
+        "errorPanel": {
+          "inputLabel": "Ce que vous avez saisi",
+          "emptyValue": "(vide)",
+          "lengthMeterDigits": "{have} chiffres sur {limit}",
+          "lengthMeterChars": "{have} caractères sur {limit} au maximum",
+          "suggestionLabel": "Correction suggérée",
+          "autoFixUnavailable": "Aucune correction automatique disponible — appliquez manuellement la correction suggérée ci-dessus.",
+          "fix": {
+            "loadSample": "Charger l'exemple",
+            "stripNonDigits": "Retirer les non-chiffres",
+            "dropCheckDigit": "Retirer le chiffre de contrôle",
+            "removeUnsupported": "Retirer les caractères non pris en charge",
+            "truncate": "Couper à 48 caractères"
+          },
+          "kind": {
+            "required": {
+              "explanation": "Le champ est vide : il n'y a rien à transformer en barres. UPC-A prend 11 chiffres, EAN-13 en prend 12, et Code 128 jusqu'à 48 caractères imprimables.",
+              "suggestion": "Saisissez une valeur ou chargez l'exemple de cette symbologie."
+            },
+            "invalidLengthUpc": {
+              "explanation": "UPC-A encode toujours exactement 12 chiffres : les 11 que vous saisissez plus 1 chiffre de contrôle calculé par l'outil.",
+              "suggestion": "Saisissez exactement 11 chiffres. Si vous avez collé un UPC complet de 12 chiffres, retirez le dernier."
+            },
+            "invalidLengthEan": {
+              "explanation": "EAN-13 encode toujours exactement 13 chiffres : les 12 que vous saisissez plus 1 chiffre de contrôle calculé par l'outil.",
+              "suggestion": "Saisissez exactement 12 chiffres. Si vous avez collé un EAN complet de 13 chiffres, retirez le dernier."
+            },
+            "nonDigit": {
+              "explanation": "UPC-A et EAN-13 n'ont de motifs de barres que pour les chiffres 0 à 9 : lettres, espaces et tirets n'ont aucun motif.",
+              "suggestion": "Retirez tout ce qui n'est pas un chiffre, ou passez à Code 128 pour du texte."
+            },
+            "unsupportedCharacter": {
+              "explanation": "Code 128 (sous-ensemble B) n'a un motif que pour chaque caractère ASCII imprimable ; lettres accentuées, emoji et écritures non latines n'en ont pas.",
+              "suggestion": "Retirez ou remplacez le caractère signalé."
+            },
+            "tooLong": {
+              "explanation": "Cet outil limite Code 128 à 48 caractères ; chaque caractère de plus ajouterait 11 modules de largeur.",
+              "suggestion": "Raccourcissez la valeur à 48 caractères ou moins."
+            }
+          }
+        },
+        "workingCheckDigit": "Comment votre chiffre de contrôle a été calculé",
+        "workingChecksum": "Comment votre somme de contrôle a été calculée",
+        "workingUpcNote": "Chiffres de rang impair × 3, plus chiffres de rang pair, puis ce qu'il manque pour atteindre le multiple de 10 suivant.",
+        "workingEanNote": "Chiffres de rang impair × 1, plus chiffres de rang pair × 3, puis ce qu'il manque pour atteindre le multiple de 10 suivant.",
+        "workingChecksumNote": "La valeur de chaque caractère (son code ASCII − 32) multipliée par sa position, ajoutée à la valeur de départ, puis le reste de la division par 103.",
+        "compareTitle": "Un {symbology} valide pour comparer — l'exemple, décodé",
+        "compareDigits": "Votre valeur compte {have} des {need} chiffres. L'exemple {sample} les a tous, et l'outil ajoute son chiffre de contrôle {check}.",
+        "compareChars": "Votre valeur compte {have} caractères ; Code 128 accepte de 1 à 48 caractères ASCII imprimables. L'exemple {sample} en a {n}, et sa somme de contrôle vaut {check}.",
+        "customBadge": "Votre valeur"
       },
       "form": {
         "inputTitle": "Valeur",
@@ -19726,7 +19965,25 @@
         "logoRemove": "Supprimer",
         "logoShowBeside": "Afficher le logo à côté du code-barres",
         "download": "Télécharger le SVG",
-        "clear": "Effacer"
+        "clear": "Effacer",
+        "extras": {
+          "quickSamplesTitle": "Valeurs d'exemple réelles",
+          "structureTitle": "Comment votre valeur se découpe",
+          "structureNote": "{total} positions en tout ; la largeur de chaque partie suit sa part.",
+          "partSystem": "Système numérique",
+          "partLeft": "Groupe gauche",
+          "partRight": "Groupe droit",
+          "partCheck": "Chiffre de contrôle",
+          "partFirst": "Premier chiffre",
+          "partStart": "Début B",
+          "partData": "Votre texte",
+          "partChecksum": "Somme de contrôle",
+          "partStop": "Fin",
+          "statusValid": "Encodable",
+          "statusInvalid": "Pas encore encodable",
+          "statusDigits": "{n} / {limit} chiffres",
+          "statusChars": "{n} / {limit} caractères"
+        }
       },
       "errors": {
         "required": "Saisissez une valeur pour générer un code-barres.",
@@ -19740,13 +19997,7 @@
         "intro": {
           "title": "Comment fonctionnent vraiment les codes-barres",
           "paragraph1": "Un code-barres 1D encode des données uniquement par la largeur de barres et d'espaces qui alternent — il n'y a ni couleur, ni points, rien de bidimensionnel. Le laser ou le capteur d'un scanner balaie le code et mesure la durée pendant laquelle la lumière reste claire ou sombre à chaque point ; une barre étroite peut avoir la largeur d'un seul « module », une barre large celle de trois ou quatre modules, et c'est la séquence exacte de ces largeurs qui encode chaque chiffre ou caractère. C'est aussi précisément pourquoi les codes-barres 1D ne comportent aucune correction d'erreur, contrairement à un QR code : aucune donnée redondante n'y est intégrée pour reconstituer une section endommagée, ce qui explique pourquoi cet outil propose de placer un logo optionnel à côté du code-barres plutôt que par-dessus.",
-          "paragraph2": "L'UPC-A et l'EAN-13 ajoutent une protection supplémentaire : un chiffre de contrôle, dérivé mathématiquement de tous les autres chiffres du code, que le scanner recalcule après lecture et compare — si une tache ou un défaut d'impression a corrompu ne serait-ce qu'un seul chiffre, le chiffre de contrôle ne correspondra presque certainement pas, et le scanner rejette la lecture plutôt que d'accepter des données corrompues. Le Code 128 va plus loin avec un symbole de somme de contrôle calculé à partir de la valeur de chaque caractère. Cet outil calcule automatiquement pour vous chaque chiffre de contrôle et chaque somme de contrôle, à partir de la valeur que vous saisissez.",
-          "diagram": {
-            "quietZoneLabel": "Zone de silence — une marge vierge obligatoire dont un scanner a besoin pour se caler avant la lecture",
-            "guardLabel": "Motif de garde — un repère fixe qui indique au scanner où le code commence, se centre ou se termine",
-            "dataLabel": "Barres de données — les chiffres ou caractères réellement encodés",
-            "caption": "Structure schématique d'un code-barres (largeurs illustratives, non décodées à partir de données réelles) — zone de silence, motifs de garde et barres de données sont présents sous une forme ou une autre dans toutes les symbologies 1D."
-          }
+          "paragraph2": "L'UPC-A et l'EAN-13 ajoutent une protection supplémentaire : un chiffre de contrôle, dérivé mathématiquement de tous les autres chiffres du code, que le scanner recalcule après lecture et compare — si une tache ou un défaut d'impression a corrompu ne serait-ce qu'un seul chiffre, le chiffre de contrôle ne correspondra presque certainement pas, et le scanner rejette la lecture plutôt que d'accepter des données corrompues. Le Code 128 va plus loin avec un symbole de somme de contrôle calculé à partir de la valeur de chaque caractère. Cet outil calcule automatiquement pour vous chaque chiffre de contrôle et chaque somme de contrôle, à partir de la valeur que vous saisissez."
         },
         "examples": {
           "title": "Exemples résolus",
@@ -19878,6 +20129,150 @@
         "howCalculatedTitle": "Comment Ce Résultat a Été Calculé",
         "quietZone": "Zone Silencieuse (modules)",
         "inputSectionTitle": "Entrée"
+      },
+      "visuals": {
+        "checkDigit": {
+          "title": "Formule du chiffre de contrôle",
+          "subtitle": "L'exemple UPC-A 03600029145, pondéré 3-1-3-1… — modifiez son 11e chiffre et regardez le chiffre de contrôle suivre.",
+          "caption": "Avec le chiffre 11 = {digit}, le chiffre de contrôle devient {check}.",
+          "handle": "Valeur du chiffre 11",
+          "labelBody": "Corps UPC-A (11 chiffres)",
+          "rowOdd": "Positions impaires (×3)",
+          "rowEven": "Positions paires (×1)",
+          "rowSum": "Somme pondérée",
+          "rowMod": "Dernier chiffre de la somme",
+          "rowCheck": "Chiffre de contrôle",
+          "rowCode": "Code complet à 12 chiffres"
+        },
+        "widths": {
+          "title": "Largeurs de barres dans de vrais codes",
+          "subtitle": "Chaque barre mesure de 1 à 4 modules. Combien de barres de chaque largeur les trois codes d'exemple utilisent réellement.",
+          "caption": "Barres de {w} modules : la plupart dans {sym} ({n}).",
+          "handle": "Largeur de barre",
+          "sym": {
+            "upc-a": "UPC-A",
+            "ean-13": "EAN-13",
+            "code128": "Code 128"
+          }
+        },
+        "size": {
+          "title": "Taille imprimée selon le grossissement",
+          "subtitle": "GS1 fixe un module (la dimension X) à 0,33 mm à 100 % ; un UPC-A peut être imprimé de 80 % à 200 %.",
+          "caption": "À {pct}, l'exemple UPC-A, zones de silence comprises, mesure {mm} mm.",
+          "handle": "Grossissement",
+          "rowX": "Un module (X)",
+          "rowData": "Barres et espaces ({n} modules)",
+          "rowQuiet": "Zones de silence",
+          "rowTotal": "Largeur totale",
+          "labelQuiet": "Silence",
+          "labelLeft": "Moitié gauche",
+          "labelRight": "Moitié droite"
+        },
+        "growth": {
+          "title": "Largeur de Code 128 selon la longueur du texte",
+          "subtitle": "EAN/UPC font toujours 95 modules ; Code 128 ajoute 11 modules par caractère, mesuré avec le vrai encodeur sur le texte d'exemple.",
+          "caption": "{n} caractères s'encodent en {m} modules (11 × (n + 2) + 13 = {formula}).",
+          "handle": "Nombre de caractères",
+          "rowText": "Texte encodé",
+          "rowC128": "Modules Code 128",
+          "rowUpc": "Modules EAN/UPC",
+          "rowDiff": "Différence",
+          "rowCross": "Plus large qu'EAN/UPC dès (caractères)",
+          "crossLabel": "plus large dès {n} caractères",
+          "axisChars": "caractères"
+        },
+        "patterns": {
+          "title": "Un chiffre, trois motifs de barres",
+          "subtitle": "Chaque chiffre a un motif L, un G et un R, de 7 modules, tirés des tables ISO/IEC 15420 de l'encodeur.",
+          "caption": "Chiffre {d} : L = {l}, et R = {r} en est l'inverse exact.",
+          "handle": "Chiffre",
+          "rowL": "Motif L (gauche, parité impaire)",
+          "rowG": "Motif G (gauche, parité paire)",
+          "rowR": "Motif R (droite)",
+          "rowRule": "Règle",
+          "ruleValue": "R = inverse de L ; G = R inversé",
+          "drawNote": "module sombre = 1"
+        },
+        "parity": {
+          "title": "Le premier chiffre invisible de l'EAN-13",
+          "subtitle": "Le premier chiffre d'un EAN-13 n'a pas de barres : il décide quels chiffres de la moitié gauche utilisent G au lieu de L.",
+          "caption": "Premier chiffre {d} → motif {p} : {g} des 6 chiffres de gauche utilisent G.",
+          "handle": "Premier chiffre",
+          "rowFirst": "Premier chiffre",
+          "rowPattern": "Motif de la moitié gauche",
+          "rowG": "Chiffres en G",
+          "rowLeft": "Six chiffres de gauche (exemple)",
+          "rowUpc": "Mêmes barres qu'un UPC-A",
+          "yes": "Oui",
+          "no": "Non",
+          "labelLeft": "Six chiffres de gauche de l'exemple",
+          "labelBars": "motif utilisé pour chaque chiffre",
+          "summary": "{g} chiffres sur 6 passent en G"
+        },
+        "checksum": {
+          "title": "Somme de contrôle Code 128, pas à pas",
+          "subtitle": "Valeur de départ 104, plus la valeur de chaque caractère × sa position, le tout modulo 103, sur l'exemple TOOLORA-2026.",
+          "caption": "Après le caractère {k} ({ch}), la somme cumulée vaut {sum} ; modulo 103, {mod}.",
+          "handle": "Caractères traités",
+          "rowStart": "Valeur de départ B",
+          "rowChar": "Caractère {k}",
+          "rowRunning": "Somme cumulée",
+          "rowMod": "Somme mod 103",
+          "rowFinal": "Somme de contrôle finale"
+        },
+        "transposition": {
+          "title": "Chiffres inversés que le contrôle détecte",
+          "subtitle": "Inversez deux chiffres voisins de l'exemple UPC-A : le chiffre de contrôle détecte toutes les inversions sauf entre chiffres qui diffèrent de 5.",
+          "caption": "Paire {p} ; sur toutes les inversions voisines de chiffres différents, {pct} % sont détectées.",
+          "handle": "Paire de chiffres",
+          "rowPair": "Paire en position {p}",
+          "rowSwapped": "Corps inversé",
+          "rowChecks": "Chiffre de contrôle avant → après",
+          "rowVerdict": "Verdict",
+          "rowRate": "Inversions voisines détectées",
+          "same": "chiffres identiques, pas d'erreur",
+          "caught": "détectée",
+          "missed": "non détectée",
+          "gaugeLabel": "des inversions détectées"
+        }
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Aide-mémoire code-barres",
+          "note": "D'après les spécifications générales GS1 et les normes ISO/IEC 15420 / 15417.",
+          "rows": [
+            {
+              "id": "width",
+              "label": "Symbole UPC-A / EAN-13",
+              "value": "95 modules"
+            },
+            {
+              "id": "x",
+              "label": "Un module (X) à 100 %",
+              "value": "0.33 mm"
+            },
+            {
+              "id": "mag",
+              "label": "Grossissement autorisé",
+              "value": "80 – 200 %"
+            },
+            {
+              "id": "quietUpc",
+              "label": "Zones de silence, UPC-A",
+              "value": "9 X | 9 X"
+            },
+            {
+              "id": "quietEan",
+              "label": "Zones de silence, EAN-13",
+              "value": "11 X | 7 X"
+            },
+            {
+              "id": "c128check",
+              "label": "Somme de contrôle Code 128",
+              "value": "mod 103"
+            }
+          ]
+        }
       }
     },
     "word-counter": {

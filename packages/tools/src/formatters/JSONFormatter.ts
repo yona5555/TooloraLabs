@@ -3,7 +3,8 @@ import { BaseTool } from "@tooloralabs/sdk";
 import { findJSONSyntaxError } from "./jsonValidate";
 
 export type JSONFormatterMode = "format" | "minify";
-export type JSONIndent = 2 | 4 | "tab";
+/** Any whole number of spaces (0-8 in the UI's own controls) or a literal tab. */
+export type JSONIndent = number | "tab";
 
 export type JSONFormatterInput = {
   json: string;

@@ -18940,7 +18940,61 @@
       "description": "Erstellen Sie komplementäre, analoge, triadische und andere Farbharmonien aus einer Grundfarbe, mit kopierbereiten HEX-, RGB- und HSL-Codes.",
       "aboveFold": {
         "resultTitle": "Erstellte Palette",
-        "placeholder": "Wählen Sie eine Grundfarbe und einen Harmonietyp, um eine Palette zu erstellen."
+        "sampleBadge": "Beispiel",
+        "statAngles": "Farbtonschritt",
+        "statCount": "Farben",
+        "statBaseHsl": "Basis-HSL",
+        "statContrast": "Basis auf Weiß",
+        "wheel": {
+          "aria": "Farbrad mit markierter Palette; Basisfarbton {hue}°",
+          "handle": "Ziehen Sie die Basismarke um das Rad",
+          "chipLabel": "Farbe {n} kopieren",
+          "readout": "Basisfarbton {hue} · {name}",
+          "emptyAria": "Farbrad ohne Farbe: Die Basisfarbe ist ungültig",
+          "emptyTitle": "Noch keine Farbe zum Platzieren"
+        },
+        "errorPanel": {
+          "inputLabel": "Ihre Eingabe",
+          "emptyValue": "(leer)",
+          "meter": "{n} von 6 Hex-Ziffern",
+          "suggestionLabel": "Vorgeschlagene Korrektur",
+          "autoFixUnavailable": "Für diesen Fehler gibt es keine automatische Korrektur — wenden Sie den obigen Vorschlag manuell an.",
+          "fix": {
+            "expandShorthand": "3-stellige Kurzform ausschreiben",
+            "dropAlpha": "Alpha-Ziffern entfernen",
+            "removeSpaces": "Leerzeichen entfernen",
+            "replace0x": "0x durch # ersetzen",
+            "loadSample": "Beispiel laden"
+          },
+          "kind": {
+            "empty": {
+              "explanation": "Das Farbfeld ist leer, es gibt also keinen Farbton, der sich um das Rad drehen ließe.",
+              "suggestion": "Geben Sie eine 6-stellige Hex-Farbe wie #3B82F6 ein oder wählen Sie eine mit dem Farbwähler."
+            },
+            "badChar": {
+              "explanation": "Eine Hex-Farbe verwendet nur die Ziffern 0–9 und die Buchstaben A–F. Das markierte Zeichen gehört nicht dazu.",
+              "suggestion": "Ersetzen Sie das markierte Zeichen durch eine Hex-Ziffer (0–9, A–F)."
+            },
+            "badLength": {
+              "explanation": "Eine Hex-Farbe braucht genau 6 Hex-Ziffern — je zwei für Rot, Grün und Blau.",
+              "suggestion": "Verwenden Sie 6 Ziffern. Die Kurzform #38F bedeutet #3388FF; ein 8-stelliger Wert fügt Alpha hinzu, das eine Palette nicht nutzt."
+            }
+          },
+          "emptyExample": "zum Beispiel {hex}"
+        },
+        "compareTitle": "Eine gültige Farbe zum Vergleich — das Beispiel",
+        "compareText": "Das Beispiel {sample} hat 6 Hex-Ziffern; mit der Komplementärharmonie ergibt es diese zwei Farben.",
+        "preview": {
+          "title": "Ihre Palette auf einer Seite",
+          "brand": "Studio",
+          "nav": "Arbeiten · Über uns · Kontakt",
+          "heading": "Eine Überschrift in Ihrer Basisfarbe",
+          "body": "Fließtext bleibt neutral, damit sein Kontrast erhalten bleibt;",
+          "link": "Links nehmen Ihre letzte Farbe.",
+          "button": "Primärer Button",
+          "secondary": "Sekundär"
+        },
+        "customBadge": "Ihre Farbe"
       },
       "nav": {
         "tool": "Generator",
@@ -18961,7 +19015,25 @@
           "tetradic": "Tetradisch",
           "monochromatic": "Monochromatisch"
         },
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "extras": {
+          "quickSamplesTitle": "Echte Beispielfarben",
+          "hslTitle": "Ihre Basisfarbe in HSL",
+          "hue": "Farbton",
+          "saturation": "Sättigung",
+          "lightness": "Helligkeit",
+          "hslInvalid": "Noch keine gültige Farbe.",
+          "huesTitle": "Farbton jeder Palettenfarbe",
+          "huesInvalid": "Zum Vergleich ergibt das Beispiel {hex}:",
+          "formatsTitle": "Ihre Basisfarbe in jedem Format",
+          "copy": "Kopieren",
+          "slotsTitle": "Wo Ihre Ziffern landen",
+          "slotR": "Rot",
+          "slotG": "Grün",
+          "slotB": "Blau",
+          "slotsNote": "Zwei Hex-Ziffern (0–9, A–F) pro Kanal.",
+          "slotsExtra": "{n} Ziffer(n) zu viel über die sechs einer Farbe hinaus."
+        }
       },
       "education": {
         "intro": {
@@ -19108,6 +19180,102 @@
       "quickReference": {
         "title": "Farbharmonie-Winkel",
         "intro": "Reale Farbtonverschiebungen auf dem Farbkreis, die zur Erzeugung jedes Harmonietyps verwendet werden."
+      },
+      "hueNames": {
+        "red": "Rot",
+        "orange": "Orange",
+        "yellow": "Gelb",
+        "chartreuse": "Chartreuse",
+        "green": "Grün",
+        "spring": "Frühlingsgrün",
+        "cyan": "Cyan",
+        "azure": "Azur",
+        "blue": "Blau",
+        "violet": "Violett",
+        "magenta": "Magenta",
+        "rose": "Rosé"
+      },
+      "visuals": {
+        "rgb": {
+          "title": "Rot-, Grün- und Blaukanal",
+          "subtitle": "Das Beispiel #3B82F6 besteht aus drei Zahlen von 0 bis 255. Ändern Sie den Blaukanal — Farbe, Hex-Code und Farbton folgen.",
+          "caption": "Mit Blau = {b} wird die Farbe zu {hex}.",
+          "handle": "Blaukanal",
+          "rowR": "Rot",
+          "rowG": "Grün",
+          "rowB": "Blau",
+          "rowHex": "Hex-Code",
+          "rowHue": "Farbton"
+        },
+        "hex": {
+          "title": "Von Hex-Paaren zu Zahlen",
+          "subtitle": "Jedes Paar Hex-Ziffern ist ein Kanal: erste Ziffer × 16 + zweite Ziffer. Ändern Sie die erste Ziffer des Blau-Paares.",
+          "caption": "Blau-Paar {pair} = {b}, also ist die Farbe {hex}.",
+          "handle": "Erste Ziffer des Blau-Paares",
+          "rowHex": "Hex-Code"
+        },
+        "hslFormula": {
+          "title": "Von RGB zu HSL, Schritt für Schritt",
+          "subtitle": "Genau die Umrechnung, die das Tool vor dem Drehen der Farbtöne ausführt — am Beispiel, mit Ihrem Grünkanal.",
+          "caption": "Mit Grün = {g} ist die Farbe HSL {hsl}.",
+          "handle": "Grünkanal",
+          "rowNorm": "R, G, B ÷ 255",
+          "rowMaxMin": "Max / Min",
+          "rowH": "Farbton (aus dem größten Kanal)",
+          "hSub": "aus dem Max-Kanal"
+        },
+        "rings": {
+          "title": "Jede Harmonie aus einem Farbton",
+          "subtitle": "Ein Ring pro Harmonie, jeder Punkt an seinem echten Versatz zum Basisfarbton. Drehen Sie die Basis — alle Harmonien drehen mit.",
+          "caption": "Basis {h}; ihre Komplementärfarbe liegt bei {c}.",
+          "handle": "Basisfarbton"
+        },
+        "ladder": {
+          "title": "Die monochrome Leiter",
+          "subtitle": "Die fünf Helligkeitsstufen des Tools (20, 35, 50, 65, 80 %) im Farbton des Beispiels. Ändern Sie die Sättigung — jede Stufe mischt sich neu.",
+          "caption": "Bei {s} Sättigung ist die mittlere Stufe {mid}.",
+          "handle": "Sättigung"
+        },
+        "contrast": {
+          "title": "Kontrast auf Weiß und Schwarz",
+          "subtitle": "WCAG-2.x-Kontrast des Beispielfarbtons bei einer Helligkeit Ihrer Wahl — 4,5:1 ist das Minimum für normalen Text.",
+          "caption": "Bei Helligkeit {l}: {w}:1 auf Weiß, {b}:1 auf Schwarz.",
+          "handle": "Helligkeit",
+          "rowLum": "Relative Leuchtdichte",
+          "rowWhite": "Kontrast auf Weiß",
+          "rowBlack": "Kontrast auf Schwarz",
+          "rowAA": "AA normaler Text (Weiß · Schwarz)",
+          "rowAAA": "AAA normaler Text (Weiß · Schwarz)",
+          "pass": "bestanden",
+          "fail": "nicht bestanden",
+          "onWhite": "auf Weiß"
+        },
+        "luminance": {
+          "title": "Gleiche Helligkeit, andere Leuchtkraft",
+          "subtitle": "Die 12 benannten Farbtöne bei gleicher HSL-Helligkeit, sortiert nach echter WCAG-Leuchtdichte — HSL-Helligkeit ist nicht die wahrgenommene Helligkeit.",
+          "caption": "Bei {l} Helligkeit ist {top} am hellsten und {bottom} am dunkelsten.",
+          "handle": "Helligkeit",
+          "rowRatio": "Hellster ÷ dunkelster"
+        },
+        "hueZone": {
+          "title": "Wo ein Farbton auf dem Rad liegt",
+          "subtitle": "Die 12 benannten Farbtöne des RGB-Farbrads im Abstand von 30°. Verschieben Sie den Farbton, um den nächsten Namen und die Komplementärfarbe zu finden.",
+          "caption": "{h} liegt am nächsten an {name}; die Komplementärfarbe ist {comp}.",
+          "handle": "Farbton",
+          "rowHue": "Farbton (S 100 %, L 50 %)",
+          "rowName": "Nächster benannter Farbton",
+          "rowDist": "Abstand dazu",
+          "rowComp": "Komplementärfarbe",
+          "rowCompHex": "Komplementärfarbe (Hex)"
+        }
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Kontrast Ihrer Palette",
+          "contrastTitle": "Jede Farbe gegen Weiß ◻ und Schwarz ◼",
+          "contrastNone": "Erscheint, sobald die Farbe gültig ist.",
+          "note": "WCAG 2.x: AA verlangt 4,5:1 für normalen Text (3:1 für großen), AAA 7:1."
+        }
       }
     },
     "unit-converter": {
@@ -19680,7 +19848,6 @@
       },
       "aboveFold": {
         "resultTitle": "Ihr Barcode",
-        "placeholder": "Geben Sie links einen Wert ein, um einen Barcode zu erstellen.",
         "disclaimer": "Dieser Barcode wird nur für Bildungs- und allgemeine Designzwecke erstellt — er ist keine offizielle kommerzielle Registrierung. Um ein Produkt in echten Einzelhandelsgeschäften zu verkaufen, müssen Sie Ihre Nummer bei der zuständigen Stelle (etwa GS1) registrieren, um sicherzustellen, dass sie weltweit eindeutig Ihnen gehört.",
         "typesGuide": {
           "title": "UPC-A vs. EAN-13 vs. Code 128",
@@ -19699,7 +19866,79 @@
               "usedFor": "Buchstaben, Ziffern und Symbole beliebiger Länge. Verwendet für Versandetiketten, Lagerverfolgung und interne Kennungen — nicht für den Einzelhandelskassenbereich."
             }
           ]
-        }
+        },
+        "sampleBadge": "Beispiel",
+        "statModules": "Module",
+        "statBars": "Striche",
+        "statCheckDigit": "Prüfziffer",
+        "statChecksum": "Prüfsumme",
+        "statWidth": "Breite bei 100 %",
+        "scene": {
+          "aria": "Ein Kassenscanner, der Ihren Barcode liest",
+          "handle": "Ziehen Sie den Lesepunkt des Lasers über die Striche",
+          "beep": "PIEP",
+          "noRead": "NICHT LESBAR",
+          "noReadHint": "Dieser Wert lässt sich noch nicht codieren",
+          "readDigit": "Liest Ziffer {pos} = {digit} — ihr 7-Modul-Muster ist {pattern}",
+          "readZone": "Liest {zone}",
+          "zone": {
+            "guard": "die Randzeichen",
+            "center": "das Mittelzeichen",
+            "left": "die linke Hälfte",
+            "right": "die rechte Hälfte",
+            "data": "ein Datenzeichen"
+          }
+        },
+        "errorPanel": {
+          "inputLabel": "Ihre Eingabe",
+          "emptyValue": "(leer)",
+          "lengthMeterDigits": "{have} von {limit} Ziffern",
+          "lengthMeterChars": "{have} von höchstens {limit} Zeichen",
+          "suggestionLabel": "Vorgeschlagene Korrektur",
+          "autoFixUnavailable": "Für diesen Fehler gibt es keine automatische Korrektur — wenden Sie den obigen Vorschlag manuell an.",
+          "fix": {
+            "loadSample": "Beispiel laden",
+            "stripNonDigits": "Nicht-Ziffern entfernen",
+            "dropCheckDigit": "Prüfziffer entfernen",
+            "removeUnsupported": "Nicht unterstützte Zeichen entfernen",
+            "truncate": "Auf 48 Zeichen kürzen"
+          },
+          "kind": {
+            "required": {
+              "explanation": "Das Feld ist leer, es gibt also nichts, was zu Strichen werden könnte. UPC-A nimmt 11 Ziffern, EAN-13 nimmt 12, Code 128 bis zu 48 druckbare Zeichen.",
+              "suggestion": "Geben Sie einen Wert ein oder laden Sie das Beispiel dieser Symbologie."
+            },
+            "invalidLengthUpc": {
+              "explanation": "UPC-A codiert immer genau 12 Ziffern: die 11, die Sie eingeben, plus 1 Prüfziffer, die das Tool berechnet.",
+              "suggestion": "Geben Sie genau 11 Ziffern ein. Haben Sie einen vollständigen 12-stelligen UPC eingefügt, entfernen Sie die letzte Ziffer."
+            },
+            "invalidLengthEan": {
+              "explanation": "EAN-13 codiert immer genau 13 Ziffern: die 12, die Sie eingeben, plus 1 Prüfziffer, die das Tool berechnet.",
+              "suggestion": "Geben Sie genau 12 Ziffern ein. Haben Sie einen vollständigen 13-stelligen EAN eingefügt, entfernen Sie die letzte Ziffer."
+            },
+            "nonDigit": {
+              "explanation": "UPC-A und EAN-13 haben nur für die Ziffern 0–9 Strichmuster; Buchstaben, Leerzeichen oder Bindestriche haben keines.",
+              "suggestion": "Entfernen Sie alles, was keine Ziffer ist, oder wechseln Sie für Text zu Code 128."
+            },
+            "unsupportedCharacter": {
+              "explanation": "Code 128 (Zeichensatz B) hat nur für jedes druckbare ASCII-Zeichen ein Muster; Umlaute, Emojis und nicht-lateinische Schriften haben keines.",
+              "suggestion": "Entfernen oder ersetzen Sie das markierte Zeichen."
+            },
+            "tooLong": {
+              "explanation": "Dieses Tool begrenzt Code 128 auf 48 Zeichen; jedes weitere Zeichen würde 11 Module Breite hinzufügen.",
+              "suggestion": "Kürzen Sie den Wert auf höchstens 48 Zeichen."
+            }
+          }
+        },
+        "workingCheckDigit": "So wurde Ihre Prüfziffer berechnet",
+        "workingChecksum": "So wurde Ihre Prüfsumme berechnet",
+        "workingUpcNote": "Ziffern an ungeraden Positionen × 3, plus Ziffern an geraden Positionen, dann der Rest bis zum nächsten Vielfachen von 10.",
+        "workingEanNote": "Ziffern an ungeraden Positionen × 1, plus Ziffern an geraden Positionen × 3, dann der Rest bis zum nächsten Vielfachen von 10.",
+        "workingChecksumNote": "Der Wert jedes Zeichens (ASCII-Code − 32) mal seine Position, zum Startwert addiert, dann der Rest der Division durch 103.",
+        "compareTitle": "Ein gültiger {symbology} zum Vergleich — das Beispiel, decodiert",
+        "compareDigits": "Ihr Wert hat {have} von {need} Ziffern. Das Beispiel {sample} hat alle {need}, und das Tool ergänzt seine Prüfziffer {check}.",
+        "compareChars": "Ihr Wert hat {have} Zeichen; Code 128 nimmt 1 bis 48 druckbare ASCII-Zeichen. Das Beispiel {sample} hat {n}, seine Prüfsumme ist {check}.",
+        "customBadge": "Ihr Wert"
       },
       "form": {
         "inputTitle": "Wert",
@@ -19726,7 +19965,25 @@
         "logoRemove": "Entfernen",
         "logoShowBeside": "Logo neben dem Barcode anzeigen",
         "download": "SVG herunterladen",
-        "clear": "Zurücksetzen"
+        "clear": "Zurücksetzen",
+        "extras": {
+          "quickSamplesTitle": "Echte Beispielwerte",
+          "structureTitle": "So teilt sich Ihr Wert auf",
+          "structureNote": "{total} Positionen insgesamt; die Breite jedes Teils entspricht seinem Anteil.",
+          "partSystem": "Nummernsystem",
+          "partLeft": "Linke Gruppe",
+          "partRight": "Rechte Gruppe",
+          "partCheck": "Prüfziffer",
+          "partFirst": "Erste Ziffer",
+          "partStart": "Start B",
+          "partData": "Ihr Text",
+          "partChecksum": "Prüfsumme",
+          "partStop": "Stopp",
+          "statusValid": "Codierbar",
+          "statusInvalid": "Noch nicht codierbar",
+          "statusDigits": "{n} / {limit} Ziffern",
+          "statusChars": "{n} / {limit} Zeichen"
+        }
       },
       "errors": {
         "required": "Geben Sie einen Wert ein, um einen Barcode zu erstellen.",
@@ -19740,13 +19997,7 @@
         "intro": {
           "title": "Wie Barcodes tatsächlich funktionieren",
           "paragraph1": "Ein 1D-Barcode codiert Daten rein über die Breiten abwechselnder Balken und Lücken — keine Farbe, keine Punkte, nichts Zweidimensionales daran. Ein Laser- oder Kamerasensor eines Scanners fährt über den Code und misst, wie lange das Licht an jeder Stelle hell oder dunkel bleibt; ein schmaler Balken könnte ein „Modul“ breit sein, ein breiter drei oder vier Module, und genau die Abfolge dieser Breiten codiert jede Ziffer oder jedes Zeichen. Genau deshalb tragen 1D-Barcodes auch keine Fehlerkorrektur wie ein QR-Code: Es gibt keine eingewobenen redundanten Reservedaten, um einen beschädigten Abschnitt zu rekonstruieren, weshalb dieses Werkzeug ein optionales Logo neben dem Barcode platziert, statt darüber.",
-          "paragraph2": "UPC-A und EAN-13 fügen eine weitere Absicherung hinzu: eine Prüfziffer, mathematisch aus jeder anderen Ziffer im Code abgeleitet, die ein Scanner nach dem Lesen neu berechnet und vergleicht — wenn ein Fleck oder Druckfehler auch nur eine Ziffer verfälscht hat, stimmt die Prüfziffer mit an Sicherheit grenzender Wahrscheinlichkeit nicht überein, und der Scanner lehnt das Ergebnis ab, statt verfälschte Daten zu übernehmen. Code 128 geht mit einem vollständigen, aus dem Wert jedes Zeichens berechneten Prüfsymbol noch weiter. Dieses Werkzeug berechnet jede Prüfziffer und jede Prüfsumme automatisch für Sie aus dem eingegebenen Wert.",
-          "diagram": {
-            "quietZoneLabel": "Ruhezone — ein verpflichtender leerer Rand, den ein Scanner vor dem Lesen zum Erfassen benötigt",
-            "guardLabel": "Wächtermuster — eine feste Markierung, die dem Scanner mitteilt, wo der Code beginnt, sich zentriert oder endet",
-            "dataLabel": "Datenbalken — die tatsächlich codierten Ziffern oder Zeichen",
-            "caption": "Eine schematische Barcode-Struktur (veranschaulichende Breiten, nicht aus echten Daten decodiert) — Ruhezone, Wächtermuster und Datenbalken kommen in irgendeiner Form in jeder 1D-Symbologie vor."
-          }
+          "paragraph2": "UPC-A und EAN-13 fügen eine weitere Absicherung hinzu: eine Prüfziffer, mathematisch aus jeder anderen Ziffer im Code abgeleitet, die ein Scanner nach dem Lesen neu berechnet und vergleicht — wenn ein Fleck oder Druckfehler auch nur eine Ziffer verfälscht hat, stimmt die Prüfziffer mit an Sicherheit grenzender Wahrscheinlichkeit nicht überein, und der Scanner lehnt das Ergebnis ab, statt verfälschte Daten zu übernehmen. Code 128 geht mit einem vollständigen, aus dem Wert jedes Zeichens berechneten Prüfsymbol noch weiter. Dieses Werkzeug berechnet jede Prüfziffer und jede Prüfsumme automatisch für Sie aus dem eingegebenen Wert."
         },
         "examples": {
           "title": "Beispielrechnungen",
@@ -19878,6 +20129,150 @@
         "howCalculatedTitle": "So Wurde Dies Berechnet",
         "quietZone": "Ruhezone (Module)",
         "inputSectionTitle": "Eingabe"
+      },
+      "visuals": {
+        "checkDigit": {
+          "title": "Prüfziffer-Formel",
+          "subtitle": "Das UPC-A-Beispiel 03600029145, gewichtet 3-1-3-1… — ändern Sie die 11. Ziffer und sehen Sie, wie die Prüfziffer folgt.",
+          "caption": "Mit Ziffer 11 = {digit} wird die Prüfziffer {check}.",
+          "handle": "Wert der Ziffer 11",
+          "labelBody": "UPC-A-Rumpf (11 Ziffern)",
+          "rowOdd": "Ungerade Positionen (×3)",
+          "rowEven": "Gerade Positionen (×1)",
+          "rowSum": "Gewichtete Summe",
+          "rowMod": "Letzte Ziffer der Summe",
+          "rowCheck": "Prüfziffer",
+          "rowCode": "Vollständiger 12-stelliger Code"
+        },
+        "widths": {
+          "title": "Strichbreiten in echten Codes",
+          "subtitle": "Jeder Strich ist 1 bis 4 Module breit. Wie viele Striche jeder Breite die drei Beispielcodes tatsächlich verwenden.",
+          "caption": "{w}-Modul-Striche: die meisten in {sym} ({n}).",
+          "handle": "Strichbreite",
+          "sym": {
+            "upc-a": "UPC-A",
+            "ean-13": "EAN-13",
+            "code128": "Code 128"
+          }
+        },
+        "size": {
+          "title": "Druckgröße bei einer Vergrößerung",
+          "subtitle": "GS1 legt ein Modul (die X-Dimension) bei 100 % Vergrößerung auf 0,33 mm fest; UPC-A darf zwischen 80 % und 200 % gedruckt werden.",
+          "caption": "Bei {pct} ist das UPC-A-Beispiel inklusive Ruhezonen {mm} mm breit.",
+          "handle": "Vergrößerung",
+          "rowX": "Ein Modul (X)",
+          "rowData": "Striche und Lücken ({n} Module)",
+          "rowQuiet": "Ruhezonen",
+          "rowTotal": "Gesamtbreite",
+          "labelQuiet": "Ruhe",
+          "labelLeft": "Linke Hälfte",
+          "labelRight": "Rechte Hälfte"
+        },
+        "growth": {
+          "title": "Code-128-Breite vs. Textlänge",
+          "subtitle": "EAN/UPC sind immer 95 Module breit; Code 128 wächst um 11 Module pro Zeichen — gemessen mit dem echten Encoder am Beispieltext.",
+          "caption": "{n} Zeichen ergeben {m} Module (11 × (n + 2) + 13 = {formula}).",
+          "handle": "Anzahl der Zeichen",
+          "rowText": "Codierter Text",
+          "rowC128": "Code-128-Module",
+          "rowUpc": "EAN/UPC-Module",
+          "rowDiff": "Differenz",
+          "rowCross": "Breiter als EAN/UPC ab (Zeichen)",
+          "crossLabel": "breiter ab {n} Zeichen",
+          "axisChars": "Zeichen"
+        },
+        "patterns": {
+          "title": "Eine Ziffer, drei Strichmuster",
+          "subtitle": "Jede Ziffer hat ein L-, ein G- und ein R-Muster, 7 Module breit, aus den ISO/IEC-15420-Tabellen des Encoders.",
+          "caption": "Ziffer {d}: L = {l}, und R = {r} ist genau das Inverse.",
+          "handle": "Ziffer",
+          "rowL": "L-Muster (links, ungerade Parität)",
+          "rowG": "G-Muster (links, gerade Parität)",
+          "rowR": "R-Muster (rechts)",
+          "rowRule": "Regel",
+          "ruleValue": "R = Inverses von L; G = R gespiegelt",
+          "drawNote": "dunkles Modul = 1"
+        },
+        "parity": {
+          "title": "Die unsichtbare erste Ziffer der EAN-13",
+          "subtitle": "Die erste Ziffer einer EAN-13 hat keine eigenen Striche: Sie bestimmt, welche Ziffern der linken Hälfte G- statt L-Muster nutzen.",
+          "caption": "Erste Ziffer {d} → Muster {p}: {g} der 6 linken Ziffern nutzen G.",
+          "handle": "Erste Ziffer",
+          "rowFirst": "Erste Ziffer",
+          "rowPattern": "Muster der linken Hälfte",
+          "rowG": "Ziffern mit G",
+          "rowLeft": "Linke sechs Ziffern (Beispiel)",
+          "rowUpc": "Gleiche Striche wie ein UPC-A",
+          "yes": "Ja",
+          "no": "Nein",
+          "labelLeft": "Linke sechs Ziffern des Beispiels",
+          "labelBars": "Muster für jede Ziffer",
+          "summary": "{g} von 6 Ziffern wechseln zu G"
+        },
+        "checksum": {
+          "title": "Code-128-Prüfsumme Schritt für Schritt",
+          "subtitle": "Startwert 104 plus Wert jedes Zeichens × seine Position, alles modulo 103 — am Beispiel TOOLORA-2026.",
+          "caption": "Nach Zeichen {k} ({ch}) beträgt die laufende Summe {sum}; modulo 103 ergibt das {mod}.",
+          "handle": "Verarbeitete Zeichen",
+          "rowStart": "Startwert B",
+          "rowChar": "Zeichen {k}",
+          "rowRunning": "Laufende Summe",
+          "rowMod": "Summe mod 103",
+          "rowFinal": "Endgültige Prüfsumme"
+        },
+        "transposition": {
+          "title": "Vertauschte Ziffern, die die Prüfziffer erkennt",
+          "subtitle": "Vertauschen Sie zwei benachbarte Ziffern des UPC-A-Beispiels: Die Prüfziffer erkennt jede Vertauschung außer zwischen Ziffern, die sich um 5 unterscheiden.",
+          "caption": "Paar {p}; von allen benachbarten Vertauschungen verschiedener Ziffern werden {pct} % erkannt.",
+          "handle": "Ziffernpaar",
+          "rowPair": "Paar an Position {p}",
+          "rowSwapped": "Vertauschter Rumpf",
+          "rowChecks": "Prüfziffer vorher → nachher",
+          "rowVerdict": "Ergebnis",
+          "rowRate": "Erkannte Nachbar-Vertauschungen",
+          "same": "gleiche Ziffern, kein Fehler",
+          "caught": "erkannt",
+          "missed": "übersehen",
+          "gaugeLabel": "der Vertauschungen erkannt"
+        }
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Barcode-Spickzettel",
+          "note": "Nach den GS1 General Specifications und ISO/IEC 15420 / 15417.",
+          "rows": [
+            {
+              "id": "width",
+              "label": "UPC-A-/EAN-13-Symbol",
+              "value": "95 Module"
+            },
+            {
+              "id": "x",
+              "label": "Ein Modul (X) bei 100 %",
+              "value": "0.33 mm"
+            },
+            {
+              "id": "mag",
+              "label": "Zulässige Vergrößerung",
+              "value": "80 – 200 %"
+            },
+            {
+              "id": "quietUpc",
+              "label": "Ruhezonen, UPC-A",
+              "value": "9 X | 9 X"
+            },
+            {
+              "id": "quietEan",
+              "label": "Ruhezonen, EAN-13",
+              "value": "11 X | 7 X"
+            },
+            {
+              "id": "c128check",
+              "label": "Code-128-Prüfsumme",
+              "value": "mod 103"
+            }
+          ]
+        }
       }
     },
     "word-counter": {

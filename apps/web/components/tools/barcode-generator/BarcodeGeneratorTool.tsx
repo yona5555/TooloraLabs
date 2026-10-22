@@ -1,25 +1,23 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { BarcodeGenerator, type BarcodeSymbology } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import { GlassPage } from "@/components/tool-ui/glass/GlassPrimitives";
+import { useNavBarVisible } from "@/components/tool-ui/useNavBarVisible";
 import BarcodeInputPanel from "./BarcodeInputPanel";
 import BarcodeResult from "./BarcodeResult";
-import BarcodeTypesReference from "./BarcodeTypesReference";
+import BarcodeCheatSheet from "./BarcodeCheatSheet";
 import BarcodeDisclaimer from "./BarcodeDisclaimer";
+import type { BarcodeErrorKey } from "./BarcodeErrorPanel";
+import { SAMPLE_VALUES } from "./barcodeMath";
 
 const tool = new BarcodeGenerator();
 
-const DEFAULT_VALUES: Record<BarcodeSymbology, string> = {
-  "upc-a": "03600029145",
-  "ean-13": "590123412345",
-  code128: "TOOLORA-2026",
-};
-
-const ERROR_KEYS: Record<string, string> = {
+const ERROR_KEYS: Record<string, BarcodeErrorKey> = {
   EMPTY_INPUT: "required",
   INVALID_LENGTH_UPC: "invalidLengthUpc",
   INVALID_LENGTH_EAN: "invalidLengthEan",
@@ -34,14 +32,19 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
   const tForm = useTranslations("tools.barcode-generator.form");
 
   const [symbology, setSymbology] = useState<BarcodeSymbology>("upc-a");
-  const [value, setValue] = useState(DEFAULT_VALUES["upc-a"]);
+  const [value, setValue] = useState(SAMPLE_VALUES["upc-a"]);
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
   const [logoPlacement, setLogoPlacement] = useState<"beside" | "none">("none");
 
   function handleSymbologyChange(next: BarcodeSymbology) {
     if (next === symbology) return;
     setSymbology(next);
-    setValue(DEFAULT_VALUES[next]);
+    setValue(SAMPLE_VALUES[next]);
+  }
+
+  function handlePick(next: BarcodeSymbology, v: string) {
+    setSymbology(next);
+    setValue(v);
   }
 
   function handleLogoSelect(file: File) {
@@ -60,14 +63,15 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
 
   function handleClear() {
     setSymbology("upc-a");
-    setValue(DEFAULT_VALUES["upc-a"]);
+    setValue(SAMPLE_VALUES["upc-a"]);
     handleLogoClear();
   }
 
   const output = useMemo(() => tool.execute({ symbology, value }, { locale: "en-US" }), [symbology, value]);
+  const errorKey = output.success ? null : (ERROR_KEYS[String(output.metadata.error)] ?? "required");
+  const errorMessage = errorKey ? t(errorKey) : "";
 
-  const errorMessage = output.success ? "" : t(ERROR_KEYS[String(output.metadata.error)] ?? "required");
-
+  const [navSentinelRef, navBarVisible] = useNavBarVisible();
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
@@ -75,49 +79,56 @@ export default function BarcodeGeneratorTool({ education }: { education: ReactNo
   ];
 
   return (
-    <>
-      <div id="tool" className="scroll-mt-32">
-        <ToolAboveFold
-          input={
-            <BarcodeInputPanel
-              symbology={symbology}
-              onSymbologyChange={handleSymbologyChange}
-              value={value}
-              onValueChange={setValue}
-              logoDataUrl={logoDataUrl}
-              onLogoSelect={handleLogoSelect}
-              onLogoClear={handleLogoClear}
-              logoPlacement={logoPlacement}
-              onLogoPlacementChange={setLogoPlacement}
-              onClear={handleClear}
-            />
-          }
-          result={
-            <div className="flex flex-col gap-4">
+    <GlassPage>
+      <div data-kit-page style={{ fontFamily: "var(--glass-font)", ["--glass-handle-border" as string]: "var(--ph-line)" } as CSSProperties}>
+        <div ref={navSentinelRef} aria-hidden="true" />
+        <div id="tool" className="scroll-mt-32">
+          <ToolAboveFold
+            tight
+            sidebarMatchRow
+            input={
+              <BarcodeInputPanel
+                symbology={symbology}
+                onSymbologyChange={handleSymbologyChange}
+                value={value}
+                onValueChange={setValue}
+                logoDataUrl={logoDataUrl}
+                onLogoSelect={handleLogoSelect}
+                onLogoClear={handleLogoClear}
+                logoPlacement={logoPlacement}
+                onLogoPlacementChange={setLogoPlacement}
+                onClear={handleClear}
+                valid={output.success}
+                onPick={handlePick}
+              />
+            }
+            result={
               <BarcodeResult
-                segments={output.success ? output.data.segments : null}
-                displayText={output.success ? output.data.displayText : ""}
-                quietZoneModules={output.success ? output.data.quietZoneModules : 0}
+                symbology={symbology}
+                value={value}
+                output={output.success ? output.data : null}
+                errorKey={errorKey}
                 errorMessage={errorMessage}
                 logoDataUrl={logoDataUrl}
                 logoPlacement={logoPlacement}
                 symbologyLabel={tForm(`symbology.${symbology}`)}
+                isSample={value === SAMPLE_VALUES[symbology]}
+                onApplyFix={setValue}
               />
-              <BarcodeTypesReference />
-            </div>
-          }
-          sidebar={<RelatedToolsSidebar currentSlug="barcode-generator" category="developer-tools" />}
-          secondary={
-            <div className="flex flex-col gap-6">
-              <ViewDocsLink slug="barcode-generator" />
-              <SectionNav items={navItems} />
-              <BarcodeDisclaimer />
-            </div>
-          }
-        />
-      </div>
+            }
+            sidebar={<RelatedToolsSidebar fill fillContent={<BarcodeCheatSheet />} currentSlug="barcode-generator" category="developer-tools" />}
+            secondary={
+              <div className="flex flex-col gap-4">
+                <ViewDocsLink slug="barcode-generator" />
+                <SectionNav items={navItems} visible={navBarVisible} />
+                <BarcodeDisclaimer />
+              </div>
+            }
+          />
+        </div>
 
-      {education}
-    </>
+        {education}
+      </div>
+    </GlassPage>
   );
 }

@@ -5,6 +5,7 @@ import { Upload, X, RotateCcw } from "lucide-react";
 import type { BarcodeSymbology } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ToolInput from "@/components/tool-ui/ToolInput";
+import BarcodeInputExtras from "./BarcodeInputExtras";
 
 const SYMBOLOGIES: BarcodeSymbology[] = ["upc-a", "ean-13", "code128"];
 
@@ -19,6 +20,8 @@ type BarcodeInputPanelProps = {
   logoPlacement: "beside" | "none";
   onLogoPlacementChange: (placement: "beside" | "none") => void;
   onClear: () => void;
+  valid: boolean;
+  onPick: (symbology: BarcodeSymbology, value: string) => void;
 };
 
 export default function BarcodeInputPanel({
@@ -32,6 +35,8 @@ export default function BarcodeInputPanel({
   logoPlacement,
   onLogoPlacementChange,
   onClear,
+  valid,
+  onPick,
 }: BarcodeInputPanelProps) {
   const t = useTranslations("tools.barcode-generator.form");
   const logoInputRef = useRef<HTMLInputElement>(null);
@@ -129,6 +134,8 @@ export default function BarcodeInputPanel({
         <RotateCcw size={16} />
         {t("clear")}
       </button>
+
+      <BarcodeInputExtras symbology={symbology} value={value} valid={valid} onPick={onPick} />
     </SectionCard>
   );
 }

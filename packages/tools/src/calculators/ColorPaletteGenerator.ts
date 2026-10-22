@@ -110,7 +110,7 @@ function toColor(hsl: HSL): PaletteColor {
   };
 }
 
-const HARMONY_OFFSETS: Record<Exclude<HarmonyType, "monochromatic">, number[]> = {
+export const HARMONY_OFFSETS: Record<Exclude<HarmonyType, "monochromatic">, number[]> = {
   complementary: [0, 180],
   analogous: [-30, 0, 30],
   triadic: [0, 120, 240],
@@ -118,7 +118,7 @@ const HARMONY_OFFSETS: Record<Exclude<HarmonyType, "monochromatic">, number[]> =
   tetradic: [0, 90, 180, 270],
 };
 
-const MONOCHROMATIC_LIGHTNESS = [20, 35, 50, 65, 80];
+export const MONOCHROMATIC_LIGHTNESS = [20, 35, 50, 65, 80];
 
 /**
  * Generates a color palette from a base hex color using classic color-wheel

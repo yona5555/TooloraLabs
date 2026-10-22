@@ -429,3 +429,43 @@
 .json-bulb-swing {
   animation: json-bulb-swing-kf 650ms ease-out;
 }
+
+/*
+ * Barcode Generator Result card: the checkout scene (wall, counter, scanner window, laser) and the
+ * label the barcode is printed on. The label and bars stay light/dark in both themes on purpose --
+ * a 1D barcode only scans as dark bars on a light ground, so its paper never inverts.
+ */
+:root {
+  --bc-wall: color-mix(in oklab, var(--color-sky-100) 75%, var(--color-white) 25%);
+  --bc-wall-2: color-mix(in oklab, var(--color-sky-200) 70%, var(--color-white) 30%);
+  --bc-counter: color-mix(in oklab, var(--color-amber-800) 75%, var(--color-zinc-800) 25%);
+  --bc-counter-top: color-mix(in oklab, var(--color-amber-600) 80%, var(--color-white) 20%);
+  --bc-paper: var(--color-white);
+  --bc-paper-edge: var(--color-zinc-300);
+  --bc-ink: var(--color-zinc-950);
+  --bc-laser: var(--color-red-500);
+  --bc-laser-glow: color-mix(in oklab, var(--color-red-500) 30%, transparent);
+  --bc-group: color-mix(in oklab, var(--color-sky-400) 28%, transparent);
+  --bc-ok: var(--color-emerald-500);
+  --bc-bad: var(--color-red-500);
+  --bc-led-bg: var(--color-zinc-900);
+  --bc-led-ink: var(--color-emerald-300);
+  --bc-window: color-mix(in oklab, var(--color-zinc-900) 85%, var(--color-sky-900) 15%);
+  --bc-zone-guard: var(--color-zinc-500);
+  --bc-zone-system: var(--color-violet-500);
+  --bc-zone-maker: var(--color-sky-500);
+  --bc-zone-product: var(--color-amber-500);
+  --bc-zone-check: var(--color-emerald-500);
+}
+:root.dark {
+  --bc-wall: color-mix(in oklab, var(--color-sky-950) 70%, var(--color-zinc-900) 30%);
+  --bc-wall-2: color-mix(in oklab, var(--color-sky-900) 60%, var(--color-zinc-900) 40%);
+  --bc-counter: color-mix(in oklab, var(--color-amber-900) 70%, var(--color-zinc-950) 30%);
+  --bc-counter-top: color-mix(in oklab, var(--color-amber-700) 75%, var(--color-zinc-900) 25%);
+  --bc-paper-edge: var(--color-zinc-600);
+  --bc-group: color-mix(in oklab, var(--color-sky-400) 32%, transparent);
+  --bc-zone-system: var(--color-violet-400);
+  --bc-zone-maker: var(--color-sky-400);
+  --bc-zone-product: var(--color-amber-400);
+  --bc-zone-check: var(--color-emerald-400);
+}

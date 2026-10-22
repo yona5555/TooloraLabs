@@ -2,7 +2,8 @@
 import { useTranslations } from "next-intl";
 import { RotateCcw, Shuffle } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import type { HarmonyType } from "@tooloralabs/tools";
+import type { HarmonyType, PaletteColor } from "@tooloralabs/tools";
+import PaletteInputExtras from "./PaletteInputExtras";
 
 type ColorPaletteInputPanelProps = {
   baseHex: string;
@@ -12,6 +13,8 @@ type ColorPaletteInputPanelProps = {
   onHarmonyChange: (value: HarmonyType) => void;
   error: string;
   onClear: () => void;
+  palette: PaletteColor[];
+  onPick: (hex: string) => void;
 };
 
 const HARMONIES: HarmonyType[] = [
@@ -31,6 +34,8 @@ export default function ColorPaletteInputPanel({
   onHarmonyChange,
   error,
   onClear,
+  palette,
+  onPick,
 }: ColorPaletteInputPanelProps) {
   const t = useTranslations("tools.color-palette-generator");
   const isValidForSwatch = /^#[0-9a-fA-F]{6}$/.test(baseHex);
@@ -107,6 +112,8 @@ export default function ColorPaletteInputPanel({
           {t("form.clear")}
         </button>
       </div>
+
+      <PaletteInputExtras baseHex={baseHex} harmony={harmony} palette={palette} onPick={onPick} />
     </SectionCard>
   );
 }

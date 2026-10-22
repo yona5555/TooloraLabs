@@ -18940,7 +18940,61 @@
       "description": "Generate complementary, analogous, triadic, and other color harmonies from a base color, with HEX, RGB, and HSL codes ready to copy.",
       "aboveFold": {
         "resultTitle": "Generated Palette",
-        "placeholder": "Choose a base color and a harmony type to generate a palette."
+        "sampleBadge": "Sample",
+        "statAngles": "Hue step",
+        "statCount": "Colours",
+        "statBaseHsl": "Base HSL",
+        "statContrast": "Base on white",
+        "wheel": {
+          "aria": "Colour wheel with the palette marked; base hue {hue}°",
+          "handle": "Drag the base marker around the wheel",
+          "chipLabel": "Copy colour {n}",
+          "readout": "Base hue {hue} · {name}",
+          "emptyAria": "Colour wheel with no colour placed: the base colour isn't valid",
+          "emptyTitle": "No colour to place yet"
+        },
+        "errorPanel": {
+          "inputLabel": "What you typed",
+          "emptyValue": "(empty)",
+          "meter": "{n} of 6 hex digits",
+          "suggestionLabel": "Suggested fix",
+          "autoFixUnavailable": "No automatic fix for this one — apply the suggested fix above by hand.",
+          "fix": {
+            "expandShorthand": "Expand the 3-digit shorthand",
+            "dropAlpha": "Drop the alpha digits",
+            "removeSpaces": "Remove the spaces",
+            "replace0x": "Replace 0x with #",
+            "loadSample": "Load the sample"
+          },
+          "kind": {
+            "empty": {
+              "explanation": "The colour box is empty, so there is no hue to rotate around the wheel.",
+              "suggestion": "Type a 6-digit hex colour such as #3B82F6, or pick one with the colour picker."
+            },
+            "badChar": {
+              "explanation": "A hex colour only uses the digits 0–9 and the letters A–F. The marked character isn't one of them.",
+              "suggestion": "Replace the marked character with a hex digit (0–9, A–F)."
+            },
+            "badLength": {
+              "explanation": "A hex colour needs exactly 6 hex digits — two each for red, green and blue.",
+              "suggestion": "Use 6 digits. A 3-digit shorthand like #38F means #3388FF; an 8-digit value adds alpha, which a palette doesn't use."
+            }
+          },
+          "emptyExample": "for example {hex}"
+        },
+        "compareTitle": "A valid colour for comparison — the sample",
+        "compareText": "The sample {sample} is 6 hex digits; with the complementary harmony it gives these two colours.",
+        "preview": {
+          "title": "Your palette on a page",
+          "brand": "Studio",
+          "nav": "Work · About · Contact",
+          "heading": "A headline in your base colour",
+          "body": "Body text stays neutral so it keeps its contrast;",
+          "link": "links take your last colour.",
+          "button": "Primary button",
+          "secondary": "Secondary"
+        },
+        "customBadge": "Your colour"
       },
       "nav": {
         "tool": "Generator",
@@ -18961,7 +19015,25 @@
           "tetradic": "Tetradic",
           "monochromatic": "Monochromatic"
         },
-        "clear": "Clear"
+        "clear": "Clear",
+        "extras": {
+          "quickSamplesTitle": "Real sample colours",
+          "hslTitle": "Your base colour in HSL",
+          "hue": "Hue",
+          "saturation": "Saturation",
+          "lightness": "Lightness",
+          "hslInvalid": "Not a valid colour yet.",
+          "huesTitle": "Hue of each palette colour",
+          "huesInvalid": "For comparison, the sample {hex} gives:",
+          "formatsTitle": "Your base colour in every format",
+          "copy": "Copy",
+          "slotsTitle": "Where your digits land",
+          "slotR": "red",
+          "slotG": "green",
+          "slotB": "blue",
+          "slotsNote": "Two hex digits (0–9, A–F) per channel.",
+          "slotsExtra": "{n} extra digit(s) beyond the six a colour uses."
+        }
       },
       "education": {
         "intro": {
@@ -19108,6 +19180,102 @@
       "quickReference": {
         "title": "Color Harmony Angles",
         "intro": "Real hue offsets on the color wheel used to generate each harmony type."
+      },
+      "hueNames": {
+        "red": "Red",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "chartreuse": "Chartreuse",
+        "green": "Green",
+        "spring": "Spring green",
+        "cyan": "Cyan",
+        "azure": "Azure",
+        "blue": "Blue",
+        "violet": "Violet",
+        "magenta": "Magenta",
+        "rose": "Rose"
+      },
+      "visuals": {
+        "rgb": {
+          "title": "Red, Green and Blue Channels",
+          "subtitle": "The sample #3B82F6 is three numbers from 0 to 255. Change its blue channel and the colour, hex code and hue follow.",
+          "caption": "With blue = {b}, the colour becomes {hex}.",
+          "handle": "Blue channel",
+          "rowR": "Red",
+          "rowG": "Green",
+          "rowB": "Blue",
+          "rowHex": "Hex code",
+          "rowHue": "Hue"
+        },
+        "hex": {
+          "title": "From Hex Pairs to Numbers",
+          "subtitle": "Each pair of hex digits is one channel: first digit × 16 + second digit. Change the first digit of the blue pair.",
+          "caption": "Blue pair {pair} = {b}, so the colour is {hex}.",
+          "handle": "First digit of the blue pair",
+          "rowHex": "Hex code"
+        },
+        "hslFormula": {
+          "title": "RGB to HSL, Step by Step",
+          "subtitle": "The exact conversion the tool runs before rotating hues — on the sample, with its green channel yours to change.",
+          "caption": "With green = {g}, the colour is HSL {hsl}.",
+          "handle": "Green channel",
+          "rowNorm": "R, G, B ÷ 255",
+          "rowMaxMin": "max / min",
+          "rowH": "Hue (from the largest channel)",
+          "hSub": "from the max channel"
+        },
+        "rings": {
+          "title": "Every Harmony From One Hue",
+          "subtitle": "One ring per harmony, each dot at its real offset from the base hue. Turn the base hue and every harmony turns with it.",
+          "caption": "Base {h}; its complement is at {c}.",
+          "handle": "Base hue"
+        },
+        "ladder": {
+          "title": "The Monochromatic Ladder",
+          "subtitle": "The tool's five lightness steps (20, 35, 50, 65, 80%) at the sample's hue. Change the saturation and every step re-mixes.",
+          "caption": "At {s} saturation the middle step is {mid}.",
+          "handle": "Saturation"
+        },
+        "contrast": {
+          "title": "Contrast on White and Black",
+          "subtitle": "WCAG 2.x contrast of the sample's hue at a lightness you choose — 4.5:1 is the minimum for normal text.",
+          "caption": "At lightness {l}: {w}:1 on white, {b}:1 on black.",
+          "handle": "Lightness",
+          "rowLum": "Relative luminance",
+          "rowWhite": "Contrast on white",
+          "rowBlack": "Contrast on black",
+          "rowAA": "AA normal text (white · black)",
+          "rowAAA": "AAA normal text (white · black)",
+          "pass": "pass",
+          "fail": "fail",
+          "onWhite": "on white"
+        },
+        "luminance": {
+          "title": "Same Lightness, Different Brightness",
+          "subtitle": "The 12 named hues at the same HSL lightness, ranked by real WCAG luminance — HSL lightness is not perceived brightness.",
+          "caption": "At {l} lightness, {top} is the brightest and {bottom} the darkest.",
+          "handle": "Lightness",
+          "rowRatio": "Brightest ÷ darkest"
+        },
+        "hueZone": {
+          "title": "Where a Hue Sits on the Wheel",
+          "subtitle": "The 12 named hues of the RGB colour wheel, 30° apart. Move the hue to find its nearest name and its complement.",
+          "caption": "{h} is nearest to {name}; its complement is {comp}.",
+          "handle": "Hue",
+          "rowHue": "Hue (S 100%, L 50%)",
+          "rowName": "Nearest named hue",
+          "rowDist": "Distance from it",
+          "rowComp": "Complement",
+          "rowCompHex": "Complement colour"
+        }
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Contrast of your palette",
+          "contrastTitle": "Each colour against white ◻ and black ◼",
+          "contrastNone": "Appears once the colour is valid.",
+          "note": "WCAG 2.x: AA needs 4.5:1 for normal text (3:1 for large), AAA needs 7:1."
+        }
       }
     },
     "unit-converter": {
@@ -19680,7 +19848,6 @@
       },
       "aboveFold": {
         "resultTitle": "Your Barcode",
-        "placeholder": "Enter a value on the left to generate a barcode.",
         "disclaimer": "This barcode is generated for educational and general design purposes only — it is not an official commercial registration. To sell a product in real retail stores, you must register your number with the appropriate authority (such as GS1) to guarantee it's uniquely yours worldwide.",
         "typesGuide": {
           "title": "UPC-A vs. EAN-13 vs. Code 128",
@@ -19699,7 +19866,79 @@
               "usedFor": "Letters, digits, and symbols of any length. Used for shipping labels, inventory tracking, and internal IDs — not retail point-of-sale."
             }
           ]
-        }
+        },
+        "sampleBadge": "Sample",
+        "statModules": "Modules",
+        "statBars": "Bars",
+        "statCheckDigit": "Check digit",
+        "statChecksum": "Checksum",
+        "statWidth": "Width at 100%",
+        "scene": {
+          "aria": "A checkout scanner reading your barcode",
+          "handle": "Drag the laser's read-spot across the bars",
+          "beep": "BEEP",
+          "noRead": "NO READ",
+          "noReadHint": "This value can't be encoded yet",
+          "readDigit": "Reading digit {pos} = {digit} — its 7-module pattern is {pattern}",
+          "readZone": "Reading the {zone}",
+          "zone": {
+            "guard": "guard bars",
+            "center": "centre guard",
+            "left": "left half",
+            "right": "right half",
+            "data": "data symbol"
+          }
+        },
+        "errorPanel": {
+          "inputLabel": "What you typed",
+          "emptyValue": "(empty)",
+          "lengthMeterDigits": "{have} of {limit} digits",
+          "lengthMeterChars": "{have} of at most {limit} characters",
+          "suggestionLabel": "Suggested fix",
+          "autoFixUnavailable": "No automatic fix for this one — apply the suggested fix above by hand.",
+          "fix": {
+            "loadSample": "Load the sample",
+            "stripNonDigits": "Remove the non-digits",
+            "dropCheckDigit": "Drop the check digit",
+            "removeUnsupported": "Remove unsupported characters",
+            "truncate": "Trim to 48 characters"
+          },
+          "kind": {
+            "required": {
+              "explanation": "The value box is empty, so there is nothing to turn into bars. UPC-A takes 11 digits, EAN-13 takes 12, and Code 128 up to 48 printable characters.",
+              "suggestion": "Type a value, or load the sample for this symbology."
+            },
+            "invalidLengthUpc": {
+              "explanation": "UPC-A always encodes exactly 12 digits: the 11 you type plus 1 check digit the tool calculates.",
+              "suggestion": "Type exactly 11 digits. If you pasted a full 12-digit UPC, drop its last digit."
+            },
+            "invalidLengthEan": {
+              "explanation": "EAN-13 always encodes exactly 13 digits: the 12 you type plus 1 check digit the tool calculates.",
+              "suggestion": "Type exactly 12 digits. If you pasted a full 13-digit EAN, drop its last digit."
+            },
+            "nonDigit": {
+              "explanation": "UPC-A and EAN-13 only have bar patterns for the digits 0–9 — letters, spaces or dashes have no pattern to draw.",
+              "suggestion": "Remove everything that isn't a digit, or switch to Code 128 for text."
+            },
+            "unsupportedCharacter": {
+              "explanation": "Code 128 (subset B) has a bar pattern for each printable ASCII character only — accented letters, emoji and non-Latin scripts have none.",
+              "suggestion": "Remove or replace the marked character."
+            },
+            "tooLong": {
+              "explanation": "This tool caps Code 128 at 48 characters; every extra character would add another 11 modules of width.",
+              "suggestion": "Shorten the value to 48 characters or fewer."
+            }
+          }
+        },
+        "workingCheckDigit": "How your check digit was calculated",
+        "workingChecksum": "How your checksum was calculated",
+        "workingUpcNote": "Digits in odd positions × 3, plus digits in even positions, then the amount needed to reach the next multiple of 10.",
+        "workingEanNote": "Digits in odd positions × 1, plus digits in even positions × 3, then the amount needed to reach the next multiple of 10.",
+        "workingChecksumNote": "Each character's value (its ASCII code − 32) times its position, added to the start value, then the remainder after dividing by 103.",
+        "compareTitle": "A valid {symbology} for comparison — the sample, decoded",
+        "compareDigits": "Your value has {have} of the {need} digits. The sample {sample} has all {need}, and the tool adds its check digit {check}.",
+        "compareChars": "Your value has {have} characters; Code 128 takes 1 to 48 printable ASCII ones. The sample {sample} has {n}, and its checksum is {check}.",
+        "customBadge": "Your value"
       },
       "form": {
         "inputTitle": "Value",
@@ -19726,7 +19965,25 @@
         "logoRemove": "Remove",
         "logoShowBeside": "Show logo beside the barcode",
         "download": "Download SVG",
-        "clear": "Clear"
+        "clear": "Clear",
+        "extras": {
+          "quickSamplesTitle": "Real sample values",
+          "structureTitle": "How your value is split",
+          "structureNote": "{total} positions in all; each part's width matches its share.",
+          "partSystem": "Number system",
+          "partLeft": "Left group",
+          "partRight": "Right group",
+          "partCheck": "Check digit",
+          "partFirst": "First digit",
+          "partStart": "Start B",
+          "partData": "Your text",
+          "partChecksum": "Checksum",
+          "partStop": "Stop",
+          "statusValid": "Encodes",
+          "statusInvalid": "Can't encode yet",
+          "statusDigits": "{n} / {limit} digits",
+          "statusChars": "{n} / {limit} characters"
+        }
       },
       "errors": {
         "required": "Enter a value to generate a barcode.",
@@ -19740,13 +19997,7 @@
         "intro": {
           "title": "How Barcodes Actually Work",
           "paragraph1": "A 1D barcode encodes data purely as the widths of alternating bars and spaces — there's no color, no dots, nothing two-dimensional about it. A scanner's laser or camera sensor sweeps across the code and measures how long the light stays bright or dark at each point; a narrow bar might be one \"module\" wide, a wide one three or four modules wide, and the exact sequence of those widths is what encodes each digit or character. This is also exactly why 1D barcodes carry no error correction the way a QR code does: there's no spare redundant data woven in to reconstruct a damaged section, which is why this tool places an optional logo beside the barcode rather than on top of it.",
-          "paragraph2": "UPC-A and EAN-13 add one more safeguard: a check digit, mathematically derived from every other digit in the code, that a scanner recalculates after reading and compares against — if a smudge or printing defect corrupted even one digit, the check digit almost certainly won't match, and the scanner rejects the read instead of accepting corrupted data. Code 128 goes further with a full checksum symbol computed from every character's value. This tool calculates every check digit and checksum for you automatically from whatever value you enter.",
-          "diagram": {
-            "quietZoneLabel": "Quiet zone — a mandatory blank margin a scanner needs to lock on before reading",
-            "guardLabel": "Guard pattern — a fixed marker that tells the scanner where the code starts, centers, or ends",
-            "dataLabel": "Data bars — the actual encoded digits or characters",
-            "caption": "A schematic barcode structure (illustrative widths, not decoded from real data) — quiet zone, guard patterns, and data bars are present in some form across every 1D symbology."
-          }
+          "paragraph2": "UPC-A and EAN-13 add one more safeguard: a check digit, mathematically derived from every other digit in the code, that a scanner recalculates after reading and compares against — if a smudge or printing defect corrupted even one digit, the check digit almost certainly won't match, and the scanner rejects the read instead of accepting corrupted data. Code 128 goes further with a full checksum symbol computed from every character's value. This tool calculates every check digit and checksum for you automatically from whatever value you enter."
         },
         "examples": {
           "title": "Worked Examples",
@@ -19878,6 +20129,150 @@
         "howCalculatedTitle": "How This Was Calculated",
         "quietZone": "Quiet Zone (modules)",
         "inputSectionTitle": "Input"
+      },
+      "visuals": {
+        "checkDigit": {
+          "title": "Check-Digit Formula",
+          "subtitle": "The UPC-A sample 03600029145, weighted 3-1-3-1… — change its 11th digit and watch the check digit follow.",
+          "caption": "With digit 11 = {digit}, the check digit becomes {check}.",
+          "handle": "Value of digit 11",
+          "labelBody": "UPC-A body (11 digits)",
+          "rowOdd": "Odd positions (×3)",
+          "rowEven": "Even positions (×1)",
+          "rowSum": "Weighted sum",
+          "rowMod": "Last digit of the sum",
+          "rowCheck": "Check digit",
+          "rowCode": "Full 12-digit code"
+        },
+        "widths": {
+          "title": "Bar Widths in Real Codes",
+          "subtitle": "Every bar is 1 to 4 modules wide. How many bars of each width the three sample codes really use.",
+          "caption": "{w}-module bars: the most are in {sym} ({n}).",
+          "handle": "Bar width",
+          "sym": {
+            "upc-a": "UPC-A",
+            "ean-13": "EAN-13",
+            "code128": "Code 128"
+          }
+        },
+        "size": {
+          "title": "Printed Size at a Magnification",
+          "subtitle": "GS1 sets one module (the X-dimension) at 0.33 mm at 100% magnification; a UPC-A may be printed from 80% to 200%.",
+          "caption": "At {pct} the UPC-A sample, quiet zones included, is {mm} mm wide.",
+          "handle": "Magnification",
+          "rowX": "One module (X)",
+          "rowData": "Bars and spaces ({n} modules)",
+          "rowQuiet": "Quiet zones",
+          "rowTotal": "Total width",
+          "labelQuiet": "Quiet",
+          "labelLeft": "Left half",
+          "labelRight": "Right half"
+        },
+        "growth": {
+          "title": "Code 128 Width vs. Text Length",
+          "subtitle": "EAN/UPC are always 95 modules; Code 128 adds 11 modules per character — measured with the real encoder on the sample text.",
+          "caption": "{n} characters encode to {m} modules (11 × (n + 2) + 13 = {formula}).",
+          "handle": "Number of characters",
+          "rowText": "Encoded text",
+          "rowC128": "Code 128 modules",
+          "rowUpc": "EAN/UPC modules",
+          "rowDiff": "Difference",
+          "rowCross": "Wider than EAN/UPC from (characters)",
+          "crossLabel": "wider from {n} characters",
+          "axisChars": "characters"
+        },
+        "patterns": {
+          "title": "One Digit, Three Bar Patterns",
+          "subtitle": "Each digit has an L, a G and an R pattern, 7 modules wide, from the ISO/IEC 15420 tables the encoder uses.",
+          "caption": "Digit {d}: L = {l}, and R = {r} is its exact inverse.",
+          "handle": "Digit",
+          "rowL": "L pattern (left, odd parity)",
+          "rowG": "G pattern (left, even parity)",
+          "rowR": "R pattern (right)",
+          "rowRule": "Rule",
+          "ruleValue": "R = inverse of L; G = R reversed",
+          "drawNote": "dark module = 1"
+        },
+        "parity": {
+          "title": "EAN-13's Invisible First Digit",
+          "subtitle": "The first digit of an EAN-13 has no bars of its own: it decides which left-half digits use G patterns instead of L.",
+          "caption": "First digit {d} → pattern {p}: {g} of the 6 left digits use G.",
+          "handle": "First digit",
+          "rowFirst": "First digit",
+          "rowPattern": "Left-half pattern",
+          "rowG": "Digits using G",
+          "rowLeft": "Left six digits (sample)",
+          "rowUpc": "Same bars as a UPC-A",
+          "yes": "Yes",
+          "no": "No",
+          "labelLeft": "Left six digits of the sample",
+          "labelBars": "pattern used for each digit",
+          "summary": "{g} of 6 digits switch to G"
+        },
+        "checksum": {
+          "title": "Code 128 Checksum, Step by Step",
+          "subtitle": "Start value 104, plus each character's value × its position, all mod 103 — on the sample TOOLORA-2026.",
+          "caption": "After character {k} ({ch}) the running sum is {sum}; mod 103 that is {mod}.",
+          "handle": "Characters processed",
+          "rowStart": "Start B value",
+          "rowChar": "Character {k}",
+          "rowRunning": "Running sum",
+          "rowMod": "Sum mod 103",
+          "rowFinal": "Final checksum"
+        },
+        "transposition": {
+          "title": "Swapped Digits the Check Digit Catches",
+          "subtitle": "Swap two neighbouring digits of the UPC-A sample: the check digit catches every swap except digits that differ by 5.",
+          "caption": "Pair {p}; over every neighbouring swap of two different digits, {pct}% are caught.",
+          "handle": "Digit pair",
+          "rowPair": "Pair at position {p}",
+          "rowSwapped": "Swapped body",
+          "rowChecks": "Check digit before → after",
+          "rowVerdict": "Verdict",
+          "rowRate": "All neighbouring swaps caught",
+          "same": "same digits, no error",
+          "caught": "caught",
+          "missed": "missed",
+          "gaugeLabel": "of swaps caught"
+        }
+      },
+      "sidebar": {
+        "cheatSheet": {
+          "title": "Barcode cheat sheet",
+          "note": "From the GS1 General Specifications and ISO/IEC 15420 / 15417.",
+          "rows": [
+            {
+              "id": "width",
+              "label": "UPC-A / EAN-13 symbol",
+              "value": "95 modules"
+            },
+            {
+              "id": "x",
+              "label": "One module (X) at 100%",
+              "value": "0.33 mm"
+            },
+            {
+              "id": "mag",
+              "label": "Allowed magnification",
+              "value": "80 – 200 %"
+            },
+            {
+              "id": "quietUpc",
+              "label": "Quiet zones, UPC-A",
+              "value": "9 X | 9 X"
+            },
+            {
+              "id": "quietEan",
+              "label": "Quiet zones, EAN-13",
+              "value": "11 X | 7 X"
+            },
+            {
+              "id": "c128check",
+              "label": "Code 128 checksum",
+              "value": "mod 103"
+            }
+          ]
+        }
       }
     },
     "word-counter": {

@@ -4,6 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import {
+  PaletteContrastCard,
+  PaletteHexCard,
+  PaletteHslFormulaCard,
+  PaletteHueZoneCard,
+  PaletteLadderCard,
+  PaletteLuminanceCard,
+  PaletteRgbCard,
+  PaletteRingsCard,
+} from "./PaletteCards";
 
 type ExampleRow = { harmony: string; description: string; example: string };
 
@@ -16,9 +26,13 @@ export default async function ColorPaletteEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* Inter throughout; every indicator sits right after the paragraph it illustrates, sides zigzag. */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <PaletteHslFormulaCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
+        <PaletteRingsCard side="table-left" />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -43,6 +57,8 @@ export default async function ColorPaletteEducation() {
             </tbody>
           </table>
         </div>
+        <PaletteLadderCard side="visual-left" />
+        <PaletteRgbCard side="table-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -51,15 +67,19 @@ export default async function ColorPaletteEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <PaletteContrastCard side="visual-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <PaletteHueZoneCard side="table-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        <PaletteHexCard side="visual-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -68,6 +88,8 @@ export default async function ColorPaletteEducation() {
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
+
+      <PaletteLuminanceCard side="table-left" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>
@@ -81,6 +103,7 @@ export default async function ColorPaletteEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

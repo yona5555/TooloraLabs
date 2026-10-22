@@ -17,3 +17,21 @@
 - Source (Openclipart): https://openclipart.org/detail/300395/living-room-scene
 - Licence: CC0 1.0 Universal (Public Domain Dedication) — Openclipart requires all uploads be public domain, https://creativecommons.org/publicdomain/zero/1.0/
 - Changes: `viewBox`/`width`/`height` adjusted to crop the original wide multi-room scene down to a single 4:3 vignette (650 × 487.5 of the original 2135.4536 × 905.5632 canvas, offset 350, 278); artwork itself unmodified. File size 231 KB.
+
+## barcode-shop-front.svg (barcode-generator Result-card checkout scene)
+
+- Subject: shop front with a striped awning, door and window
+- Title: "A shop"
+- Author: shokunin (Openclipart)
+- Source (Wikimedia Commons mirror of the Openclipart original): https://commons.wikimedia.org/wiki/File:Shop.svg
+- Licence: CC0 1.0 Universal (Public Domain Dedication), https://creativecommons.org/publicdomain/zero/1.0/
+- Changes: added a `viewBox` (0 0 588.31885 650.32196) to the root so it scales inside an `<img>`; artwork unmodified. File size 29 KB.
+
+## barcode-shopping-basket.svg (barcode-generator Result-card checkout scene)
+
+- Subject: green shopping basket
+- Title: "A shopping basket."
+- Author: gnokii (Openclipart)
+- Source (Wikimedia Commons mirror of the Openclipart original): https://commons.wikimedia.org/wiki/File:Shopping-basket.svg
+- Licence: CC0 1.0 Universal (Public Domain Dedication), https://creativecommons.org/publicdomain/zero/1.0/
+- Changes: none. File size 48 KB.
