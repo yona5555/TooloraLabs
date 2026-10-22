@@ -1,8 +1,3 @@
-export type {
-  StudyTimeCalculatorError as StudyTimeError,
-  StudyTimeCalculatorOutput as StudyTimeResult,
-} from "@tooloralabs/tools";
-
 export type StudySessionScenario = {
   key: string;
   totalMinutes: string;

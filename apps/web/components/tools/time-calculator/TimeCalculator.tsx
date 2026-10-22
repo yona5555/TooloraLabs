@@ -1,63 +1,139 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
-import { TimeCalculator as TimeTool } from "@tooloralabs/tools";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { tcFormatHms } from "@tooloralabs/tools";
 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
+import SectionCard from "@/components/tool-ui/SectionCard";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import TimeInputPanel from "./TimeInputPanel";
-import TimeResult from "./TimeResult";
-import TimeQuickReference from "./TimeQuickReference";
-import type { TimeOperation, TimeScenario } from "./types";
+import AdSpace from "@/components/tool-ui/AdSpace";
+import HistoryTape, { type TapeEntry } from "@/components/tool-ui/HistoryTape";
+import { newEntryId, usePersistedList } from "@/lib/use-persisted-list";
+import TcInput from "./TcInput";
+import TcResult, { useTcPhrases } from "./TcResult";
+import { TcDstTimelineCard, TcFlowCard, TcShiftDialCard, TcTimesheetStackCard } from "./TcIndicatorsA";
+import { TcDecimalCard, TcOvertimeGaugeCard, TcRoundingTrioCard, TcWeekBarsCard } from "./TcIndicatorsB";
+import { buildShareUrl, makeFmt, sampleState, sanitize, useDerived, useTcState, type TcState } from "./state";
 
-const tool = new TimeTool();
-
-function toInt(s: string): number {
-  if (!s.trim()) return 0;
-  const n = parseInt(s, 10);
-  return Number.isFinite(n) ? n : -1;
-}
-
-const DEFAULTS = { h1: "1", m1: "30", s1: "0", h2: "0", m2: "45", s2: "0", operation: "add" as TimeOperation };
+type HistoryEntry = TapeEntry & { state: TcState };
 
 export default function TimeCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.time-calculator.nav");
-  const [h1, setH1] = useState(DEFAULTS.h1);
-  const [m1, setM1] = useState(DEFAULTS.m1);
-  const [s1, setS1] = useState(DEFAULTS.s1);
-  const [h2, setH2] = useState(DEFAULTS.h2);
-  const [m2, setM2] = useState(DEFAULTS.m2);
-  const [s2, setS2] = useState(DEFAULTS.s2);
-  const [operation, setOperation] = useState<TimeOperation>(DEFAULTS.operation);
+  const { t, dayTag, dst, zoneName } = useTcPhrases();
+  const locale = useLocale();
+  const sample = useCallback(() => sampleState(locale, t.raw("sample.rows") as string[]), [locale, t]);
+  const [s, setState] = useTcState(sample);
+  const set = useCallback((patch: Partial<TcState>) => setState((prev) => ({ ...prev, ...patch })), [setState]);
+  const d = useDerived(s);
+  const f = useMemo(() => makeFmt(locale, s.h12), [locale, s.h12]);
+  const [copied, setCopied] = useState<"result" | "link" | null>(null);
+  const history = usePersistedList<HistoryEntry>("tooloralabs:time-calculator:history:v1", 30);
 
-  function handleScenarioPreset(scenario: TimeScenario) {
-    setH1(scenario.h1); setM1(scenario.m1); setS1(scenario.s1);
-    setH2(scenario.h2); setM2(scenario.m2); setS2(scenario.s2);
-    setOperation(scenario.operation);
-  }
+  /** One-line summary of the active mode (history label + copied text). */
+  const summary = useCallback((): { label: string; value: string; lines: string[] } => {
+    const mode = t(`modes.${s.mode}`);
+    if (s.mode === "sum") {
+      const lines = s.rows.map((r, i) => `${r.sign === 1 ? "+" : "−"}${f.dur(d.rowSeconds[i])}  ${r.label || t("input.entryN", { n: i + 1 })}`);
+      return { label: `${mode} · ${s.rows.length}×`, value: `${f.dur(d.sheet.totalSeconds)} (${f.hours(d.sheet.totalSeconds)} h)`, lines };
+    }
+    if (s.mode === "span") {
+      const sp = d.span;
+      return {
+        label: `${mode} · ${f.shortDate(d.spanStartDate)} ${f.clock(d.spanStart)} → ${f.clock(d.spanEnd)} ${dayTag(sp.dayOffset)}`,
+        value: `${f.dur(sp.netSeconds)} (${f.hours(sp.netSeconds)} h)`,
+        lines: [
+          `${t("result.elapsed")}: ${f.dur(sp.elapsedSeconds)} — ${dst(sp.dstDeltaSeconds, f)}`,
+          `${t("result.break")}: ${f.dur(sp.breakSeconds)}`,
+          `${t("input.zone")}: ${zoneName(d.zone)}`,
+        ],
+      };
+    }
+    if (s.mode === "add") {
+      const a = d.add;
+      return {
+        label: `${mode} · ${f.clock(d.addClock)} ${s.add.op === 1 ? "+" : "−"} ${f.dur(d.addDuration)}`,
+        value: `${f.clock(a.resultClock)} ${dayTag(a.dayOffset)}`,
+        lines: [`${f.date(a.resultDate)}`, `${t("result.dstChange")}: ${f.signedDur(a.dstDeltaSeconds)}`, `${t("input.zone")}: ${zoneName(d.zone)}`],
+      };
+    }
+    if (s.mode === "week") {
+      const w = d.week;
+      return {
+        label: `${mode} · ${t("result.daysN", { n: w.workDays })}`,
+        value: `${f.durHm(w.totalSeconds)} (+${f.durHm(w.overtimeSeconds)} OT)`,
+        lines: [
+          ...w.days.filter((x) => x.on).map((x) => `${f.weekday(x.weekday)}: ${f.durHm(x.workedSeconds)}`),
+          `${t("result.regular")}: ${f.dur(w.regularSeconds)}`,
+          `${t("result.overtime")}: ${f.dur(w.overtimeSeconds)}`,
+          `${t("result.paidEq")}: ${f.hours(w.paidEquivalentSeconds)} h`,
+        ],
+      };
+    }
+    return {
+      label: `${mode} · ${s.dec.dir === "toHms" ? `${s.dec.decimal} h` : f.dur(d.dec.seconds)}`,
+      value: `${f.dur(d.dec.seconds)} = ${f.num(d.dec.decimal2)} h`,
+      lines: [`${t(`round.${s.dec.round}`)} (${t("input.minutesN", { n: s.dec.inc })}): ${f.num(d.dec.rounded[s.dec.round] / 3600)} h`],
+    };
+  }, [d, dayTag, dst, f, s, t, zoneName]);
 
-  function handleClear() {
-    setH1(DEFAULTS.h1); setM1(DEFAULTS.m1); setS1(DEFAULTS.s1);
-    setH2(DEFAULTS.h2); setM2(DEFAULTS.m2); setS2(DEFAULTS.s2);
-    setOperation(DEFAULTS.operation);
-  }
+  const snapshot = useCallback((): HistoryEntry => {
+    const sm = summary();
+    // Tape value = the duration in hours, so the tape's grand total is a running sum of time.
+    return { id: newEntryId(), label: sm.label, valueText: sm.value, value: d.primarySeconds / 3600, state: s };
+  }, [d, s, summary]);
 
-  const result = useMemo(() => {
-    const output = tool.execute(
-      {
-        time1: { hours: toInt(h1), minutes: toInt(m1), seconds: toInt(s1) },
-        time2: { hours: toInt(h2), minutes: toInt(m2), seconds: toInt(s2) },
-        operation,
-      },
-      { locale: "en-US" },
-    );
-    return output.data;
-  }, [h1, m1, s1, h2, m2, s2, operation]);
+  const remember = useCallback(() => {
+    const e = snapshot();
+    if (history.items[0]?.label === e.label && history.items[0]?.valueText === e.valueText) return;
+    history.add(e);
+  }, [history, snapshot]);
 
+  // Calculations are recorded automatically once the inputs settle.
+  const rememberRef = useRef(remember);
+  useEffect(() => {
+    rememberRef.current = remember;
+  });
+  const loadedOnce = useRef(false);
+  useEffect(() => {
+    if (!loadedOnce.current) {
+      loadedOnce.current = true;
+      return;
+    }
+    const id = setTimeout(() => rememberRef.current(), 2000);
+    return () => clearTimeout(id);
+  }, [s]);
+
+  const flash = (k: "result" | "link") => {
+    setCopied(k);
+    setTimeout(() => setCopied(null), 1800);
+  };
+  const copyResult = async () => {
+    const sm = summary();
+    try {
+      await navigator.clipboard.writeText([`${t("copyHeader")} — ${sm.label}`, `= ${sm.value}`, ...sm.lines].join("\n"));
+      flash("result");
+      remember();
+    } catch {
+      /* clipboard unavailable */
+    }
+  };
+  const share = async () => {
+    try {
+      await navigator.clipboard.writeText(buildShareUrl(s, window.location.href));
+      flash("link");
+      remember();
+    } catch {
+      /* clipboard unavailable */
+    }
+  };
+
+  const props = { s, set, d, f };
   const navItems = [
     { id: "tool", label: tNav("tool") },
+    { id: "tc-history", label: t("nav.history") },
+    { id: "tc-indicators", label: t("nav.indicators") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
@@ -66,32 +142,44 @@ export default function TimeCalculator({ education }: { education: ReactNode }) 
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={
-            <TimeInputPanel
-              h1={h1} m1={m1} s1={s1} onH1Change={setH1} onM1Change={setM1} onS1Change={setS1}
-              h2={h2} m2={m2} s2={s2} onH2Change={setH2} onM2Change={setM2} onS2Change={setS2}
-              operation={operation} onOperationChange={setOperation}
-              onScenarioPreset={handleScenarioPreset} onClear={handleClear}
-            />
-          }
+          stretchResult
+          input={<TcInput s={s} set={set} d={d} f={f} onCopy={copyResult} onShare={share} onReset={() => setState(sample())} copied={copied} />}
           result={
-            <TimeResult
-              result={result}
-              h1={toInt(h1)} m1={toInt(m1)} s1={toInt(s1)}
-              h2={toInt(h2)} m2={toInt(m2)} s2={toInt(s2)}
-              operation={operation}
-            />
+            <div className="flex flex-col gap-3 lg:flex-1">
+              <TcResult s={s} set={set} d={d} f={f} />
+            </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="time-calculator" category="date-time" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="time-calculator" />
               <SectionNav items={navItems} />
-              <TimeQuickReference />
+              <SectionCard id="tc-history" title={t("history.title")} bodyClassName="p-4">
+                <HistoryTape
+                  entries={history.items}
+                  onSelect={(e) => setState(sanitize((e as HistoryEntry).state, sample()))}
+                  onDelete={history.remove}
+                  onClear={history.clear}
+                  formatTotal={(n) => `${tcFormatHms(Math.round(n * 3600))} · ${f.num(n)} h`}
+                  emptyText={t("history.empty")}
+                />
+              </SectionCard>
             </div>
           }
         />
       </div>
+
+      <section id="tc-indicators" className="mt-8 grid scroll-mt-32 grid-cols-1 items-start gap-6">
+        <TcShiftDialCard {...props} />
+        <TcTimesheetStackCard {...props} />
+        <TcFlowCard {...props} />
+        <TcDstTimelineCard {...props} />
+        <AdSpace variant="leaderboard" />
+        <TcWeekBarsCard {...props} />
+        <TcOvertimeGaugeCard {...props} />
+        <TcDecimalCard {...props} />
+        <TcRoundingTrioCard {...props} />
+      </section>
 
       {education}
     </>

@@ -99,6 +99,7 @@ export default function TipResult({ result, hasCalculated, errorMessage, digitSt
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
         <RatioGauge
+          wide
           value={result.tipPercent}
           domainMin={0}
           domainMax={GAUGE_DOMAIN_MAX}

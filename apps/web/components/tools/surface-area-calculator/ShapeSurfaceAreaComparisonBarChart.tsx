@@ -5,6 +5,7 @@ import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, characteristicLength, surfaceAreaAtLength, ALL_SHAPES, round } from "./surfaceAreaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Type #1 (Labeled Bar Chart): every solid's surface area at the SAME live characteristic length, ranked visually — a sphere always packs the least surface area for a given size, a cube or prism far more. */
 export default function ShapeSurfaceAreaComparisonBarChart() {
@@ -28,7 +29,7 @@ export default function ShapeSurfaceAreaComparisonBarChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
@@ -39,7 +40,7 @@ export default function ShapeSurfaceAreaComparisonBarChart() {
             { label: t("worked.vsSphere"), value: `${round(topArea / sphereArea)}×`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

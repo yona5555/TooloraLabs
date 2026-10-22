@@ -4,8 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import EnergyBalanceDiagram from "./EnergyBalanceDiagram";
-import TDEEComponentBreakdownDiagram from "./TDEEComponentBreakdownDiagram";
+import {
+  TDEEActivityStepsCard,
+  TDEEAdjustmentGaugeCard,
+  TDEEAgeSensitivityCard,
+  TDEEBalanceCard,
+  TDEEComponentsStackCard,
+  TDEEFormulaBarsCard,
+  TDEEFormulaDiagramCard,
+  TDEEProjectionCard,
+} from "./TDEECards";
 
 type ExampleRow = { profile: string; bmr: string; tdee: string };
 
@@ -19,16 +27,23 @@ export default async function TDEEEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <TDEEActivityStepsCard side="visual-left" />
+        <TDEEProjectionCard side="table-left" />
+      </div>
+
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <EnergyBalanceDiagram
-          caloriesInLabel={t("intro.diagram.caloriesIn")}
-          caloriesOutLabel={t("intro.diagram.caloriesOut")}
-          fulcrumLabel={t("intro.diagram.fulcrum")}
-          caption={t("intro.diagram.caption")}
-        />
-        <TDEEComponentBreakdownDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <TDEEBalanceCard side="visual-left" />
+          <TDEEComponentsStackCard side="table-left" />
+          <TDEEAdjustmentGaugeCard side="visual-left" />
+          <TDEEFormulaDiagramCard side="table-left" />
+          <TDEEFormulaBarsCard side="visual-left" />
+          <TDEEAgeSensitivityCard side="table-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>

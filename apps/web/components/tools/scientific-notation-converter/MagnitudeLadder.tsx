@@ -41,6 +41,7 @@ export default function MagnitudeLadder({ sci, onSetExponent }: { sci: Normalize
     <div data-testid="ladder">
       <svg
         ref={svgRef}
+        data-preview="visual"
         viewBox={`0 0 ${W} ${H}`}
         width="100%"
         className="block touch-none select-none"

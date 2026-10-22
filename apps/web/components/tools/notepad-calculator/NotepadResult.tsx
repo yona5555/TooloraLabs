@@ -47,8 +47,9 @@ export default function NotepadResult({ result, a, onPickLine }: Props) {
                 <span className="font-bold text-emerald-700 dark:text-emerald-300">{` = ${num(final.value as number)}`}</span>
               </p>
             )}
-            <div className="flex flex-col items-center">
+            <div data-preview="visual" className="flex w-full flex-col items-center">
               <SemiGauge
+                wide
                 value={a.coverage}
                 max={100}
                 zones={[

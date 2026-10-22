@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { circle: "#2563eb", sin: "#16a34a", cos: "#dc2626", ref: "#9333ea" };
 const DARK = { circle: "#60a5fa", sin: "#4ade80", cos: "#f87171", ref: "#c084fc" };
@@ -40,7 +41,7 @@ export default function UnitCircleWave() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { coeff: fmt(leadCoeff) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex w-full flex-col gap-3 sm:flex-row lg:flex-1">
           <div aria-label={t("circleAriaLabel")} className="mafs-canvas mx-auto w-full max-w-[180px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [-1.4, 1.4], y: [-1.4, 1.4] }} height={170} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -68,7 +69,7 @@ export default function UnitCircleWave() {
             { label: t("worked.cos"), value: fmt(Math.cos(rad)), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -6,6 +6,7 @@ import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
 import { ltrIsolate } from "@/lib/bidi";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /**
  * Same efficiency & price, four real trip distances spanning three orders of magnitude
@@ -58,7 +59,7 @@ export default function FuelDistanceScaleChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { efficiency: EFFICIENCY, price: money(PRICE) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[320px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />
@@ -103,7 +104,7 @@ export default function FuelDistanceScaleChart() {
             { label: tc("perMile"), value: perMile },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

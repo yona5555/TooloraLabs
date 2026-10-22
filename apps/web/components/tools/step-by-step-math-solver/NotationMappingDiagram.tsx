@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, evalPoly, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Notation-mapping diagram: the SAME solution set written four different real ways (set-builder,
  * decimal list, simplified fraction, and a membership check) — a draggable candidate-value slider
@@ -36,7 +37,7 @@ export default function NotationMappingDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1 space-y-2">
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-2 dark:border-zinc-700 dark:bg-zinc-800/40">
@@ -64,7 +65,7 @@ export default function NotationMappingDiagram() {
             { label: t("worked.membership"), value: isMember ? t("worked.yes") : t("worked.no"), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

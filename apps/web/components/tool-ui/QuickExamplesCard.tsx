@@ -1,4 +1,5 @@
 "use client";
+import { Fragment } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
 export type QuickExample = { id: string; label: string; detail: string };
@@ -10,6 +11,24 @@ type Props = {
   onPick: (id: string) => void;
   className?: string;
 };
+
+/**
+ * An example's inputs as whole pieces, so a narrow card wraps the line between pieces and never
+ * inside a value: groups split at " · ", and a long group (a data list) after each comma.
+ */
+function DetailPieces({ text }: { text: string }) {
+  return text.split(" · ").map((group, i) => (
+    <Fragment key={i}>
+      {i > 0 && " · "}
+      {(group.length > 24 ? group.split(/(?<=,) /) : [group]).map((piece, j) => (
+        <Fragment key={j}>
+          {j > 0 && " "}
+          <span>{piece}</span>
+        </Fragment>
+      ))}
+    </Fragment>
+  ));
+}
 
 /**
  * Fills the space under a short input card with real content (visuals.md column fill): preset
@@ -35,7 +54,9 @@ export default function QuickExamplesCard({ title, examples, activeId, onPick, c
               }`}
             >
               <span className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">{ex.label}</span>
-              <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{ex.detail}</span>
+              <span dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
+                <DetailPieces text={ex.detail} />
+              </span>
             </button>
           );
         })}

@@ -179,7 +179,7 @@ export default function FractionResultGauge({ numerator, denominator, caption }:
 
   return (
     <figure className="my-2 flex flex-col items-center gap-1">
-      <div dir="ltr" className="relative w-full max-w-[320px]">
+      <div dir="ltr" data-preview="visual" className="relative w-full max-w-[320px]">
         <svg
           viewBox={`0 0 ${VB_W} ${VB_H}`}
           width={VB_W}

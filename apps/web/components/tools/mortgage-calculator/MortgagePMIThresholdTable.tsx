@@ -14,9 +14,9 @@ export default function MortgagePMIThresholdTable({ rows }: { rows: ThresholdRow
             index !== 0 ? "border-t border-zinc-200 dark:border-zinc-800" : ""
           }`}
         >
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 lg:flex-nowrap">
             <span className="font-medium text-zinc-900 dark:text-zinc-100">{row.label}</span>
-            <span dir="ltr" className="shrink-0 font-mono text-sm text-zinc-500 dark:text-zinc-400">
+            <span dir="ltr" className="min-w-0 font-mono text-sm text-zinc-500 lg:shrink-0 dark:text-zinc-400">
               {row.threshold}
             </span>
           </div>

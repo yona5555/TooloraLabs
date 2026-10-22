@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { ReadabilityScoreCalculator, countSyllablesInWord } from "../ReadabilityScoreCalculator";
+import {
+  ReadabilityScoreCalculator,
+  countSyllablesInWord,
+  readabilityBreakdown,
+  fleschReadingEaseOf,
+  fleschKincaidGradeOf,
+} from "../ReadabilityScoreCalculator";
 
 const context = { locale: "en-US" };
 const calc = new ReadabilityScoreCalculator();
@@ -113,5 +119,25 @@ describe("ReadabilityScoreCalculator", () => {
     const r = calc.execute({ text: "Are you happy? Yes! I am." }, context);
     expect(r.data.error).toBeNull();
     expect(r.data.sentenceCount).toBe(3);
+  });
+});
+
+describe("readabilityBreakdown", () => {
+  it("matches execute() totals and marks unterminated fragments", () => {
+    const text = "  Short one. A rather complicated second sentence follows! Trailing fragment";
+    const { sentences, words } = readabilityBreakdown(text);
+    const r = calc.execute({ text }, context).data;
+    expect(sentences.map((s) => s.terminated)).toEqual([true, true, false]);
+    expect(sentences.filter((s) => s.terminated).length).toBe(r.sentenceCount);
+    expect(words.length).toBe(r.wordCount);
+    expect(words.reduce((a, w) => a + w.syllables, 0)).toBe(r.syllableCount);
+    expect(text.slice(sentences[0].start, sentences[0].end)).toBe("Short one.");
+    expect(words.filter((w) => w.sentence === 2).map((w) => w.word)).toEqual(["Trailing", "fragment"]);
+  });
+
+  it("formula helpers reproduce execute()", () => {
+    const r = calc.execute({ text: "The cat sat on the mat. The dog ran fast." }, context).data;
+    expect(fleschReadingEaseOf(r.averageWordsPerSentence, r.averageSyllablesPerWord)).toBeCloseTo(r.fleschReadingEase, 8);
+    expect(fleschKincaidGradeOf(r.averageWordsPerSentence, r.averageSyllablesPerWord)).toBeCloseTo(r.fleschKincaidGrade, 8);
   });
 });

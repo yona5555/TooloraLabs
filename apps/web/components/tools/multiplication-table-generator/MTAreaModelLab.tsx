@@ -81,7 +81,7 @@ export default function MTAreaModelLab({ view, onPick }: { view: MtView; onPick:
         ],
       }}
     >
-      <div dir="ltr" className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700" data-testid="mt-area" data-rows={rows} data-cols={cols}>
+      <div dir="ltr" data-preview="visual" data-preview-hero className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700" data-testid="mt-area" data-rows={rows} data-cols={cols}>
         <Mafs height={300} viewBox={{ x: [-0.6, board + 0.6], y: [-0.6, board + 0.6] }} preserveAspectRatio={false} pan={false} zoom={false}>
           <Coordinates.Cartesian xAxis={{ lines: 1, labels: (n) => (n % 2 === 0 && n > 0 ? String(n) : "") }} yAxis={{ lines: 1, labels: (n) => (n % 2 === 0 && n > 0 ? String(n) : "") }} />
           <Polygon points={[[0, 0], [cols, 0], [cols, r1], [0, r1]]} color={c.low} fillOpacity={0.35} weight={2} />

@@ -201,7 +201,7 @@ export function CommoditySpreadBalance({ spot, amount, oilUnit, commodity, digit
         </p>
         <p className="text-xs text-zinc-500 dark:text-zinc-400">{t("perBarrel")}</p>
         {/* The heavier (pricier) side sits lower: Brent on the left, WTI on the right. */}
-        <div className="relative mt-4 h-40 w-80">
+        <div className="relative mt-4 h-40 w-full max-w-80">
           <div className="absolute inset-x-0 top-6 flex justify-between transition-transform duration-700" style={{ transform: `rotate(${-tilt}deg)` }}>
             <div className="absolute inset-x-4 top-0 h-1.5 rounded bg-zinc-700 dark:bg-zinc-300" />
             <div className="mt-2">{pan("Brent", spot.brent!, s.spread >= 0)}</div>

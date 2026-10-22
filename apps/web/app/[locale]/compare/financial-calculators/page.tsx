@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import BackButton from "@/components/tool-ui/BackButton";
+import { localeAlternates } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${t("title")} | TooloraLabs`,
     description: t("description"),
+    alternates: localeAlternates(locale, "/compare/financial-calculators"),
   };
 }
 

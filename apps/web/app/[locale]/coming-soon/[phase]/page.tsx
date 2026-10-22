@@ -5,6 +5,7 @@ import { Clock } from "lucide-react";
 import { comingSoonPhaseIds, comingSoonPhases, type ComingSoonPhaseId } from "@/data/comingSoon";
 import { getComingSoonIcon } from "@/lib/coming-soon-icons";
 import BackButton from "@/components/tool-ui/BackButton";
+import { localeAlternates } from "@/lib/seo";
 
 type ComingSoonPhasePageProps = {
   params: Promise<{
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: ComingSoonPhasePageProps): Pr
   return {
     title: `${t(`phase.${phase}.title`)} | TooloraLabs`,
     description: t(`phase.${phase}.description`),
+    alternates: localeAlternates(locale, `/coming-soon/${phase}`),
   };
 }
 

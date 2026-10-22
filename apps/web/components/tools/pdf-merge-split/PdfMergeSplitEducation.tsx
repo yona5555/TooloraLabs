@@ -4,6 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import PdfPageMap from "./PdfPageMap";
+import PdfSourceDonut from "./PdfSourceDonut";
+import PdfSizeBars from "./PdfSizeBars";
+import PdfPaperRanking from "./PdfPaperRanking";
+import PdfCoverageStrip from "./PdfCoverageStrip";
+import PdfPlanFlow from "./PdfPlanFlow";
+import PdfSizeGauge from "./PdfSizeGauge";
+import PdfBytesTrend from "./PdfBytesTrend";
+import PdfPaperCompare from "./PdfPaperCompare";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -18,7 +27,14 @@ export default async function PdfMergeSplitEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <PdfPageMap />
+        <PdfPlanFlow />
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <PdfCoverageStrip />
+          <PdfSourceDonut />
+        </div>
+        <PdfSizeBars />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -47,6 +63,7 @@ export default async function PdfMergeSplitEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <PdfSizeGauge />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -58,11 +75,12 @@ export default async function PdfMergeSplitEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <PdfPaperRanking />
+          <PdfPaperCompare />
+          <PdfBytesTrend />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

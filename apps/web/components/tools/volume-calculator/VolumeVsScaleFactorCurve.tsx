@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useVolumeLive } from "./VolumeLiveContext";
 import { parseVolumeDims, computeVolumeFor, round } from "./volumeEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { curve: "#2563eb", point: "#dc2626" };
 const DARK = { curve: "#60a5fa", point: "#f87171" };
@@ -24,7 +25,7 @@ export default function VolumeVsScaleFactorCurve() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseVolume * 9.2] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -45,7 +46,7 @@ export default function VolumeVsScaleFactorCurve() {
             { label: t("worked.double"), value: `${round(baseVolume * 8)}`, emphasize: true, note: t("worked.note") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

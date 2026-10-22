@@ -34,8 +34,8 @@ export default function LoanBreakdownDonut({ segments, centerValue, centerLabel 
     );
 
   return (
-    <div dir="ltr" className="flex flex-col items-center">
-      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44">
+    <div data-preview="visual" className="flex w-full items-center gap-5">
+      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={`${centerLabel}: ${centerValue}`} className="w-44 shrink-0">
         <circle
           cx={center}
           cy={center}
@@ -66,7 +66,7 @@ export default function LoanBreakdownDonut({ segments, centerValue, centerLabel 
         </text>
       </svg>
 
-      <div className="mt-3 grid w-full grid-cols-1 gap-1.5 text-xs">
+      <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 self-stretch py-4 text-sm">
         {segments
           .filter((s) => s.value > 0)
           .map((segment) => (

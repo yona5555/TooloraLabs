@@ -1,72 +1,133 @@
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { TargetHeartRateResult as Result } from "./types";
-import HeartRateZoneChart from "./HeartRateZoneChart";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import HeartViewer from "./heart/HeartViewer";
 import TargetHeartRateShareExportModal from "./TargetHeartRateShareExportModal";
+import type { HRSnapshot } from "./HRLiveContext";
+import { BELOW_COLOR, ZONES, tanaka, targetAt, zoneColor, zoneIndex } from "./hr";
+import type { TargetHeartRateError } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
+
 
 type Props = {
-  result: Result;
+  snap: HRSnapshot;
+  /** The current input's error, if any: the table keeps the last good result under it. */
+  error: TargetHeartRateError | null;
+  intensity: number;
   digitStyle: DigitStyle;
   age: string;
   useRestingHeartRate: boolean;
   restingHeartRate: string;
+  /** Page mode: the table fills the stretched Result column (§27). */
+  fill?: boolean;
 };
 
-export default function TargetHeartRateResult({ result, digitStyle, age, useRestingHeartRate, restingHeartRate }: Props) {
+export default function TargetHeartRateResult({ snap, error, intensity, digitStyle, age, useRestingHeartRate, restingHeartRate, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.target-heart-rate-calculator.result");
   const tForm = useTranslations("tools.target-heart-rate-calculator.form");
   const tZones = useTranslations("tools.target-heart-rate-calculator.zones");
+  const tv = useTranslations("tools.target-heart-rate-calculator.visuals.result");
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
+  const fmt1 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 });
 
-  if (result.error) {
-    return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(`errors.${result.error}`)}</p>
-        </div>
-      </div>
-    );
-  }
+  const { data, rest } = snap;
+  const ageNum = snap.age;
+  const max = data.maxHeartRate;
+  const karvonen = rest !== null;
+  const r = rest ?? 0;
+  const bpm = t("bpm");
+  const target = targetAt(intensity, max, rest);
+  const zi = zoneIndex(intensity);
+  const zoneName = zi < 0 ? tv("belowZones") : tZones(ZONES[zi].key);
+  const color = zoneColor(intensity);
+  const pctMax = (target / max) * 100;
+  const p = fmt1(intensity / 100);
 
   const inputRows = [
     { label: tForm("age"), value: age },
     ...(useRestingHeartRate ? [{ label: tForm("restingHeartRate"), value: restingHeartRate }] : []),
   ];
-  const resultRows = result.zones.map((z) => ({ label: `${tZones(z.key)} (${fmt(z.lowPercent)}-${fmt(z.highPercent)}%)`, value: `${fmt(z.lowBpm)}-${fmt(z.highBpm)} ${t("bpm")}` }));
-  const sentence = t("sentence", { maxHr: fmt(result.maxHeartRate) });
+  const resultRows = data.zones.map((z) => ({ label: `${tZones(z.key)} (${fmt(z.lowPercent)}-${fmt(z.highPercent)}%)`, value: `${fmt(z.lowBpm)}-${fmt(z.highBpm)} ${bpm}` }));
+  const sentence = t("sentence", { maxHr: fmt(max) });
+
+  const zoneFormula = (lo: number, hi: number) =>
+    karvonen ? `(${fmt(max)} − ${fmt(r)}) × ${fmt(lo)}–${fmt(hi)}% + ${fmt(r)}` : `${fmt(max)} × ${fmt(lo)}–${fmt(hi)}%`;
+
+  const groups: LiveTableGroup[] = [
+    {
+      title: tv("groupInputs"),
+      rows: [
+        { label: tForm("age"), formula: tv("given"), value: fmt(ageNum) },
+        { label: tv("method"), formula: tv("given"), value: karvonen ? tv("methodKarvonen") : tv("methodSimple") },
+        ...(karvonen ? [{ label: tv("resting"), formula: tv("given"), value: fmt(r), unit: bpm }] : []),
+        { label: tv("intensity"), formula: tv("intensityFormula"), value: `${fmt(intensity)}%` },
+      ],
+    },
+    {
+      title: tv("groupResult"),
+      rows: [
+        { label: t("maxHeartRate"), formula: `220 − ${fmt(ageNum)}`, value: fmt(max), unit: bpm, emphasize: true },
+        { label: tv("maxTanaka"), formula: `208 − 0.7 × ${fmt(ageNum)}`, value: fmt(tanaka(ageNum)), unit: bpm },
+        ...(karvonen ? [{ label: tv("reserve"), formula: `${fmt(max)} − ${fmt(r)}`, value: fmt(data.heartRateReserve ?? max - r), unit: bpm }] : []),
+        {
+          label: tv("target"),
+          formula: karvonen ? `(${fmt(max)} − ${fmt(r)}) × ${p} + ${fmt(r)}` : `${fmt(max)} × ${p}`,
+          value: fmt(target),
+          unit: bpm,
+          emphasize: true,
+        },
+        { label: tv("zone"), formula: zi < 0 ? "< 50%" : `${fmt(ZONES[zi].lo)}–${fmt(ZONES[zi].hi)}%`, value: zoneName, emphasize: true },
+        { label: tv("pctMax"), formula: `${fmt(target)} ÷ ${fmt(max)}`, value: `${fmt(pctMax)}%` },
+        { label: tv("beat"), formula: `60 ÷ ${fmt(target)}`, value: fmt1(60 / target), unit: "s" },
+      ],
+    },
+    {
+      title: tv("groupZones"),
+      rows: data.zones.map((z) => ({
+        label: `${tZones(z.key)} · ${fmt(z.lowPercent)}–${fmt(z.highPercent)}%`,
+        formula: zoneFormula(z.lowPercent, z.highPercent),
+        value: `${fmt(z.lowBpm)}–${fmt(z.highBpm)}`,
+        unit: bpm,
+        emphasize: z.key === ZONES[zi]?.key,
+      })),
+    },
+  ];
+
+  const layout = (
+    <LiveTable3DLayout
+      headings={[tv("colQuantity"), tv("colFormula"), tv("colValue")]}
+      groups={groups}
+      hint={tv("hint")}
+      caption={tv("caption", { bpm: fmt(target), pct: fmt(intensity), zone: zoneName })}
+      drawing={
+        <HeartViewer
+          bpm={target}
+          color={zi < 0 ? BELOW_COLOR : color}
+          labels={{ bpm: `${fmt(target)} ${bpm}`, pct: `${fmt(intensity)}% · ${fmt(pctMax)}% HRmax`, max: `HRmax ${fmt(max)}` }}
+        />
+      }
+    />
+  );
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{t("heading")}</h2>
-        <TargetHeartRateShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("maxHeartRate")} heroValue={`${fmt(result.maxHeartRate)} ${t("bpm")}`} sentence={sentence} />
+    <SectionCard
+      title={t("heading")}
+      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
+      bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}
+      action={<TargetHeartRateShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("maxHeartRate")} heroValue={`${fmt(max)} ${bpm}`} sentence={sentence} />}
+    >
+      {error && (
+        <p role="status" className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
+          {t(`errors.${error}`)} {tv("keptLast")}
+        </p>
+      )}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
       </div>
-      <div className="p-4 lg:p-6">
-        <div className="text-center">
-          <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{fmt(result.maxHeartRate)}</p>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("maxHeartRate")}</p>
-        </div>
-
-        <div className="mt-5">
-          <HeartRateZoneChart zones={result.zones} maxHeartRate={result.maxHeartRate} digitStyle={digitStyle} />
-        </div>
-
-        <ul className="mt-5 space-y-1.5 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800">
-          {result.zones.map((zone) => (
-            <li key={zone.key} className="flex items-center justify-between gap-3">
-              <span className="text-zinc-500 dark:text-zinc-400">
-                {tZones(zone.key)} ({fmt(zone.lowPercent)}-{fmt(zone.highPercent)}%)
-              </span>
-              <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">
-                {fmt(zone.lowBpm)}-{fmt(zone.highBpm)} {t("bpm")}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </SectionCard>
   );
 }

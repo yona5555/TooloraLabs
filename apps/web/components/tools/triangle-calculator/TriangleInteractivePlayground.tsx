@@ -7,6 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { EXAMPLE, classifyByAngle, classifyBySides } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const dist = (p: [number, number], q: [number, number]) => Math.hypot(p[0] - q[0], p[1] - q[1]);
 const round = (n: number) => Math.round(n * 100) / 100;
@@ -63,7 +64,7 @@ export default function TriangleInteractivePlayground() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[320px]"
@@ -94,7 +95,7 @@ export default function TriangleInteractivePlayground() {
                 ]
           }
         />
-      </div>
+      </GapFreeRow>
       {!degenerate && (
         <TriangleSinCosLiveCurve angles={[{ label: "A", deg: angleA }, { label: "B", deg: angleB }, { label: "C", deg: angleC }]} />
       )}

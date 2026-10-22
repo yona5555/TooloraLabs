@@ -77,6 +77,20 @@ function computeViewBox(vertices: [TrianglePoint, TrianglePoint, TrianglePoint])
   };
 }
 
+/** Mafs' default tick label, left blank near the graph's edge, where the edge would cut the number in half. */
+function edgeSafeLabels([min, max]: [number, number]) {
+  const margin = (max - min) * 0.06;
+  return function EdgeSafeLabel(n: number) {
+    if (n < min + margin || n > max - margin) return "";
+    return (
+      <>
+        {n}
+        {n < 0 && <tspan visibility="hidden">-</tspan>}
+      </>
+    );
+  };
+}
+
 /** The outward perpendicular offset from a segment's midpoint, flipped away from the given centroid so labels never sit over the triangle's interior. */
 function outwardOffsetFromSegment(p1: TrianglePoint, p2: TrianglePoint, centroid: TrianglePoint, distancePx: number): TrianglePoint {
   const mid = { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
@@ -278,6 +292,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
       <div
         dir="ltr"
         aria-label={t("ariaLabel")}
+        data-preview="visual"
         className="triangle-mafs w-full overflow-hidden rounded-xl"
         onPointerDown={handleDragStart}
         onPointerUp={handleDragEnd}
@@ -285,7 +300,7 @@ export default function TriangleInteractiveDiagram({ vertices: initialVertices, 
         onTouchEnd={handleDragEnd}
       >
         <Mafs viewBox={viewBox} height={300} pan={false} zoom={false}>
-          <Coordinates.Cartesian xAxis={{ axis: false, lines: false }} yAxis={{ axis: false, lines: false }} />
+          <Coordinates.Cartesian xAxis={{ axis: false, lines: false, labels: edgeSafeLabels(viewBox.x) }} yAxis={{ axis: false, lines: false, labels: edgeSafeLabels(viewBox.y) }} />
 
           <Polygon points={[A.point, B.point, C.point]} color={colors.blueA} fillOpacity={0.1} strokeOpacity={0} />
 

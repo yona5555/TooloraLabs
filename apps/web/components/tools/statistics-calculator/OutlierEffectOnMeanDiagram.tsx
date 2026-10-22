@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -31,7 +32,7 @@ export default function OutlierEffectOnMeanDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { value: round2(outlierValue) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-3">
           <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-5 py-3 text-center dark:border-zinc-700 dark:bg-zinc-800/40">
             <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{t("withLabel")}</p>
@@ -43,7 +44,7 @@ export default function OutlierEffectOnMeanDiagram() {
           </div>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.shift"), value: `${round2(Math.abs(mean - withoutOutlier.data.mean))}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

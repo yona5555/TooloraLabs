@@ -1,9 +1,10 @@
-import { addDays, addMonths, addYears, differenceInCalendarDays, intervalToDuration } from "date-fns";
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { formatIsoDate, parseCivilDate, type WeekendPreset } from "./DateTimeCore";
+import { addDateSpan, computeDateSpan, type DateSpanUnit } from "./DateCalculatorEngine";
 
 export type DateCalculatorMode = "difference" | "addSubtract";
-export type DateUnit = "days" | "weeks" | "months" | "years";
+export type DateUnit = DateSpanUnit;
 export type DateOperation = "add" | "subtract";
 
 export type DateCalculatorInput = {
@@ -16,6 +17,12 @@ export type DateCalculatorInput = {
   amount?: number;
   unit?: DateUnit;
   operation?: DateOperation;
+  /** Count the end date itself in "difference" mode (default false). */
+  includeEnd?: boolean;
+  /** Weekend used for business days (default "sat-sun"). */
+  weekend?: WeekendPreset;
+  /** ISO dates skipped as holidays when counting/adding business days. */
+  holidays?: string[];
 };
 
 export type DateCalculatorError = "invalid-date" | "invalid-amount";
@@ -27,6 +34,7 @@ export type DateDifferenceResult = {
   months: number;
   days: number;
   isEndBeforeStart: boolean;
+  businessDays: number;
 };
 
 export type DateCalculatorOutput = {
@@ -35,64 +43,38 @@ export type DateCalculatorOutput = {
   resultDateISO: string | null;
 };
 
-function parseISODateLocal(value: string): Date {
-  const [year, month, day] = value.split("-").map(Number);
-  if (!year || !month || !day) return new Date(NaN);
-  return new Date(year, month - 1, day);
-}
-
-function toISODate(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
-function addByUnit(date: Date, amount: number, unit: DateUnit): Date {
-  if (unit === "days") return addDays(date, amount);
-  if (unit === "weeks") return addDays(date, amount * 7);
-  if (unit === "months") return addMonths(date, amount);
-  return addYears(date, amount);
-}
-
 export class DateCalculator extends BaseCalculator<DateCalculatorInput, DateCalculatorOutput> {
   metadata = {
     id: "date-calculator",
     slug: "date-calculator",
     name: "Date Calculator",
     category: "date-time",
-    description: "Find the difference between two dates in days, weeks, months, and years, or add/subtract a duration from a date.",
-    version: "1.0.0",
+    description: "Find the difference between two dates in years/months/days, total days, weeks and business days, or add/subtract calendar units or business days.",
+    version: "2.0.0",
   };
 
   execute(input: DateCalculatorInput, _context: ToolContext): ToolResult<DateCalculatorOutput> {
-    const startDate = parseISODateLocal(input.startDate);
-    if (Number.isNaN(startDate.getTime())) {
-      return this.error("invalid-date");
-    }
+    const startDate = parseCivilDate(input.startDate ?? "");
+    if (!startDate) return this.error("invalid-date");
+    const weekend = input.weekend ?? "sat-sun";
+    const holidays = input.holidays ?? [];
 
     if (input.mode === "difference") {
-      const endDate = input.endDate ? parseISODateLocal(input.endDate) : new Date(NaN);
-      if (Number.isNaN(endDate.getTime())) {
-        return this.error("invalid-date");
-      }
-
-      const isEndBeforeStart = endDate < startDate;
-      const [earlier, later] = isEndBeforeStart ? [endDate, startDate] : [startDate, endDate];
-      const totalDays = differenceInCalendarDays(later, earlier);
-      const duration = intervalToDuration({ start: earlier, end: later });
-
+      const endDate = parseCivilDate(input.endDate ?? "");
+      if (!endDate) return this.error("invalid-date");
+      const r = computeDateSpan({ start: startDate, end: endDate, includeEnd: input.includeEnd ?? false, weekend, holidays });
       return {
         success: true,
         data: {
           error: null,
           difference: {
-            totalDays,
-            totalWeeks: Math.floor(totalDays / 7),
-            years: duration.years ?? 0,
-            months: duration.months ?? 0,
-            days: duration.days ?? 0,
-            isEndBeforeStart,
+            totalDays: r.totalDays,
+            totalWeeks: r.weeks,
+            years: r.ymd.years,
+            months: r.ymd.months,
+            days: r.ymd.days,
+            isEndBeforeStart: r.isEndBeforeStart,
+            businessDays: r.business.businessDays,
           },
           resultDateISO: null,
         },
@@ -100,23 +82,17 @@ export class DateCalculator extends BaseCalculator<DateCalculatorInput, DateCalc
       };
     }
 
-    // addSubtract mode
     const amount = input.amount ?? NaN;
-    const unit = input.unit ?? "days";
-    const operation = input.operation ?? "add";
-
-    if (!Number.isFinite(amount) || amount < 0) {
-      return this.error("invalid-amount");
-    }
-
-    const signedAmount = operation === "subtract" ? -amount : amount;
-    const resultDate = addByUnit(startDate, signedAmount, unit);
-
-    return {
-      success: true,
-      data: { error: null, difference: null, resultDateISO: toISODate(resultDate) },
-      metadata: {},
-    };
+    if (!Number.isFinite(amount) || amount < 0) return this.error("invalid-amount");
+    const r = addDateSpan({
+      start: startDate,
+      amount,
+      unit: input.unit ?? "days",
+      operation: input.operation ?? "add",
+      weekend,
+      holidays,
+    });
+    return { success: true, data: { error: null, difference: null, resultDateISO: formatIsoDate(r.result) }, metadata: {} };
   }
 
   private error(error: DateCalculatorError): ToolResult<DateCalculatorOutput> {

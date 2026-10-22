@@ -40,6 +40,18 @@ describe("DueDateCalculator", () => {
     expect(r.data.trimester).toBe(1);
   });
 
+  // ACOG: 1st 0w0d–13w6d, 2nd 14w0d–27w6d, 3rd 28w0d onwards (LMP 2026-01-01).
+  it.each([
+    ["2026-04-08", 13, 1], // 13w6d
+    ["2026-04-09", 14, 2], // 14w0d
+    ["2026-07-15", 27, 2], // 27w6d
+    ["2026-07-16", 28, 3], // 28w0d
+  ])("on %s (week %i) reports trimester %i", (referenceDate, weeks, trimester) => {
+    const r = calc.execute({ method: "lmp", date: "2026-01-01", referenceDate }, context);
+    expect(r.data.gestationalAgeWeeks).toBe(weeks);
+    expect(r.data.trimester).toBe(trimester);
+  });
+
   it("rejects a date in the future relative to the reference date", () => {
     const r = calc.execute({ method: "lmp", date: "2026-06-01", referenceDate: "2026-01-01" }, context);
     expect(r.data.error).toBe("date-in-future");

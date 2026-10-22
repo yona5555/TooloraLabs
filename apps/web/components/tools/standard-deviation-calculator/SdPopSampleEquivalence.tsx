@@ -16,7 +16,7 @@ export default function SdPopSampleEquivalence() {
   const n = a.n;
 
   const column = (title: string, divisor: string, variance: number, sd: number, sym: string, tone: string) => (
-    <div className={`flex w-[132px] flex-col items-center gap-1.5 rounded-xl border-2 p-3 ${tone}`}>
+    <div className={`flex w-[132px] min-w-0 shrink flex-col items-center gap-1.5 rounded-xl border-2 p-3 ${tone}`}>
       <p className="text-center text-xs font-semibold text-zinc-600 dark:text-zinc-300">{title}</p>
       <p dir="ltr" className="font-mono text-xs text-zinc-500 dark:text-zinc-400">{`${f(a.sumSquares)} ÷ ${divisor}`}</p>
       <p dir="ltr" className="font-mono text-sm font-bold text-zinc-800 dark:text-zinc-100">{`${sym}² = ${f(variance)}`}</p>

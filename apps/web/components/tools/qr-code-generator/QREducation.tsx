@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import QRAnatomyDiagram from "./QRAnatomyDiagram";
+import QRModuleMap from "./QRModuleMap";
+import QRCodewordBar from "./QRCodewordBar";
+import QRLevelBars from "./QRLevelBars";
+import QRVersionCurve from "./QRVersionCurve";
+import QRDarkGauge from "./QRDarkGauge";
+import QREncodingFlow from "./QREncodingFlow";
+import QRMinVersionSteps from "./QRMinVersionSteps";
+import QRPrintTrio from "./QRPrintTrio";
+import QRPayloadDonut from "./QRPayloadDonut";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,14 +27,14 @@ export default async function QREducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <QRModuleMap />
+        <QREncodingFlow />
         <p>{t("intro.paragraph2")}</p>
-        <QRAnatomyDiagram
-          finderLabel={t("intro.diagram.finderLabel")}
-          timingLabel={t("intro.diagram.timingLabel")}
-          quietZoneLabel={t("intro.diagram.quietZoneLabel")}
-          dataLabel={t("intro.diagram.dataLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <div className="space-y-6">
+          <QRCodewordBar />
+          <QRLevelBars />
+        </div>
+        <QRVersionCurve />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -55,6 +63,7 @@ export default async function QREducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <QRMinVersionSteps />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -66,11 +75,12 @@ export default async function QREducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <QRDarkGauge />
+          <QRPrintTrio />
+          <QRPayloadDonut />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

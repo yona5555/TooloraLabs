@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, computeAreaFor, round } from "./areaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { curve: "#2563eb", point: "#dc2626" };
 const DARK = { curve: "#60a5fa", point: "#f87171" };
@@ -24,7 +25,7 @@ export default function AreaVsScaleFactorCurve() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseArea * 4.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -45,7 +46,7 @@ export default function AreaVsScaleFactorCurve() {
             { label: t("worked.double"), value: `${round(baseArea * 4)}`, emphasize: true, note: t("worked.note") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

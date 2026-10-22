@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { splitSentences as splitSentenceSpans, tokenizeWords as tokenizeWordSpans } from "../analyzers/textSegmentation";
 
 export type ReadabilityScoreCalculatorInput = {
   text: string;
@@ -32,28 +33,21 @@ function clean(value: number): number {
   return Number(value.toPrecision(10));
 }
 
-/**
- * Splits raw text into word tokens on whitespace, discarding tokens with no
- * letters or digits (stray punctuation, bullets, dashes on their own, etc.).
- */
+/** Word tokens (script-aware: diacritics and matras stay inside their word). */
 function tokenizeWords(text: string): string[] {
-  return text
-    .split(/\s+/)
-    .map((token) => token.trim())
-    .filter((token) => /[A-Za-z0-9]/.test(token));
+  return tokenizeWordSpans(text).map((t) => t.word);
 }
 
+const TERMINATED = /[.!?\u061F\u061B\u06D4\u0964\u0965\u2026\u203C\u2047-\u2049\u3002\uFF01\uFF0E\uFF1F]["'\u201D\u2019\u00BB)\]}\u300D\u300F]*$/u;
+
 /**
- * Splits raw text into sentence-like chunks by grouping runs of characters
- * that end in one or more sentence-terminating marks (. ! ?), optionally
- * followed by a closing quote or bracket. This is a heuristic — it does not
- * understand abbreviations (e.g. "Dr.") or decimal numbers — appropriate for
- * an estimate of readability rather than exact linguistic sentence parsing.
+ * Sentence chunks, ending on . ! ? ؟ ؛ । and the other terminators the shared segmenter knows.
+ * Only terminated chunks count, so a text without any end mark reports no sentences.
  */
 function splitSentences(text: string): string[] {
-  const matches = text.match(/[^.!?]+[.!?]+(?:['")\]]*)/g);
-  if (!matches) return [];
-  return matches.map((s) => s.trim()).filter((s) => s.length > 0 && /[A-Za-z0-9]/.test(s));
+  return splitSentenceSpans(text)
+    .map((s) => text.slice(s.start, s.end))
+    .filter((s) => TERMINATED.test(s));
 }
 
 /**
@@ -83,7 +77,67 @@ export function countSyllablesInWord(rawWord: string): number {
   return count === 0 ? 1 : count;
 }
 
-function bandFor(fleschReadingEase: number): ReadabilityBand {
+/** Flesch Reading Ease from average words per sentence and syllables per word (Flesch, 1948). */
+export function fleschReadingEaseOf(averageWordsPerSentence: number, averageSyllablesPerWord: number): number {
+  return 206.835 - 1.015 * averageWordsPerSentence - 84.6 * averageSyllablesPerWord;
+}
+
+/** Flesch-Kincaid Grade Level from the same two averages (Kincaid et al., 1975). */
+export function fleschKincaidGradeOf(averageWordsPerSentence: number, averageSyllablesPerWord: number): number {
+  return 0.39 * averageWordsPerSentence + 11.8 * averageSyllablesPerWord - 15.59;
+}
+
+export type ReadabilitySentence = {
+  index: number;
+  /** UTF-16 offsets into the analyzed text. */
+  start: number;
+  end: number;
+  /** Only terminated sentences count toward the score. */
+  terminated: boolean;
+  words: number;
+  syllables: number;
+};
+
+export type ReadabilityWord = {
+  word: string;
+  key: string;
+  start: number;
+  end: number;
+  syllables: number;
+  /** Index into `sentences` of the sentence span that holds this word. */
+  sentence: number;
+};
+
+/**
+ * Per-sentence and per-word breakdown behind the score, with offsets into `text` (not trimmed), for
+ * highlighting. Uses the same segmentation, terminator rule and syllable counter as `execute`.
+ */
+export function readabilityBreakdown(text: string): { sentences: ReadabilitySentence[]; words: ReadabilityWord[] } {
+  const spans = splitSentenceSpans(text);
+  const sentences: ReadabilitySentence[] = spans.map((s, index) => ({
+    index,
+    start: s.start,
+    end: s.end,
+    terminated: TERMINATED.test(text.slice(s.start, s.end)),
+    words: 0,
+    syllables: 0,
+  }));
+  const words: ReadabilityWord[] = [];
+  let si = 0;
+  for (const tok of tokenizeWordSpans(text)) {
+    while (si < spans.length - 1 && tok.start >= spans[si].end) si++;
+    const syllables = countSyllablesInWord(tok.word);
+    const sentence = sentences[si];
+    if (sentence) {
+      sentence.words++;
+      sentence.syllables += syllables;
+    }
+    words.push({ ...tok, syllables, sentence: si });
+  }
+  return { sentences, words };
+}
+
+export function readabilityBandFor(fleschReadingEase: number): ReadabilityBand {
   if (fleschReadingEase >= 90) return "very-easy";
   if (fleschReadingEase >= 80) return "easy";
   if (fleschReadingEase >= 70) return "fairly-easy";
@@ -133,10 +187,8 @@ export class ReadabilityScoreCalculator extends BaseCalculator<
     const averageWordsPerSentence = wordCount / sentenceCount;
     const averageSyllablesPerWord = syllableCount / wordCount;
 
-    const fleschReadingEase =
-      206.835 - 1.015 * averageWordsPerSentence - 84.6 * averageSyllablesPerWord;
-    const fleschKincaidGrade =
-      0.39 * averageWordsPerSentence + 11.8 * averageSyllablesPerWord - 15.59;
+    const fleschReadingEase = fleschReadingEaseOf(averageWordsPerSentence, averageSyllablesPerWord);
+    const fleschKincaidGrade = fleschKincaidGradeOf(averageWordsPerSentence, averageSyllablesPerWord);
 
     return this.ok({
       wordCount,
@@ -146,7 +198,7 @@ export class ReadabilityScoreCalculator extends BaseCalculator<
       averageSyllablesPerWord,
       fleschReadingEase,
       fleschKincaidGrade,
-      readingEaseLabel: bandFor(fleschReadingEase),
+      readingEaseLabel: readabilityBandFor(fleschReadingEase),
     });
   }
 

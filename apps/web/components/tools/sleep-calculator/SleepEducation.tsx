@@ -4,14 +4,23 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import SleepDurationGauge from "./SleepDurationGauge";
-import SleepByAgeDiagram from "./SleepByAgeDiagram";
+import {
+  SleepAgeCard,
+  SleepCycleTrioCard,
+  SleepDialCard,
+  SleepEfficiencyCard,
+  SleepFormulaCard,
+  SleepHypnogramCard,
+  SleepStagesCard,
+  SleepWindDownCard,
+} from "./SleepCards";
 
 type ExampleRow = { calculation: string; result: string };
 type StageItem = { title: string; description: string };
 
 export default async function SleepEducation() {
   const t = await getTranslations("tools.sleep-calculator.education");
+  const tv = await getTranslations("tools.sleep-calculator.visuals.notices");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const stageItems = t.raw("stages.items") as StageItem[];
@@ -20,12 +29,20 @@ export default async function SleepEducation() {
 
   return (
     <EncyclopediaPaper>
-      <SleepDurationGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <SleepHypnogramCard side="visual-left" />
+        <SleepDialCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <SleepByAgeDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <SleepAgeCard side="visual-left" />
+          <SleepEfficiencyCard side="table-left" />
+          <SleepWindDownCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("stages.title")}>
@@ -37,6 +54,11 @@ export default async function SleepEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <SleepStagesCard side="table-left" />
+          <SleepCycleTrioCard side="visual-left" />
+          <SleepFormulaCard side="table-left" />
         </div>
       </InfoSection>
 
@@ -97,6 +119,13 @@ export default async function SleepEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={tv("title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tv("heuristic")}</li>
+          <li>{tv("assumptions")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

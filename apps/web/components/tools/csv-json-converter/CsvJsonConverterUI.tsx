@@ -1,7 +1,7 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { CsvJsonConverter, type CsvJsonMode, type CsvDelimiter } from "@tooloralabs/tools";
+import type { CsvJsonMode } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
@@ -9,56 +9,27 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import CsvJsonInputPanel from "./CsvJsonInputPanel";
 import CsvJsonResult from "./CsvJsonResult";
 import CsvVsJsonReference from "./CsvVsJsonReference";
-
-const tool = new CsvJsonConverter();
-
-const SAMPLE_CSV = `name,age,city
-Alice,30,Cairo
-Bob,25,Giza`;
-
-const SAMPLE_JSON = JSON.stringify(
-  [
-    { name: "Alice", age: 30, city: "Cairo" },
-    { name: "Bob", age: 25, city: "Giza" },
-  ],
-  null,
-  2
-);
-
-const ERROR_MESSAGE_KEYS: Record<string, string> = {
-  INVALID_JSON: "invalidJson",
-  EXPECTED_ARRAY: "expectedArray",
-  EMPTY_INPUT: "required",
-};
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
+import { useNavBarVisible } from "@/components/tool-ui/useNavBarVisible";
+import { buildCsvModel, CSV_EXAMPLES, CsvLiveProvider, delimiterName, SAMPLE_CSV, SAMPLE_JSON, type CsvDraft } from "./CsvLiveContext";
 
 export default function CsvJsonConverterUI({ education }: { education: ReactNode }) {
-  const t = useTranslations("tools.csv-json-converter.errors");
   const tNav = useTranslations("tools.csv-json-converter.nav");
-  const tForm = useTranslations("tools.csv-json-converter.form");
+  const tEx = useTranslations("tools.csv-json-converter.examples");
+  const [draft, setDraft] = useState<CsvDraft>(CSV_EXAMPLES[0].draft);
+  const [activeExample, setActiveExample] = useState<string | null>("inventory");
+  const [sentinelRef, navBarVisible] = useNavBarVisible();
 
-  const [input, setInput] = useState(SAMPLE_CSV);
-  const [mode, setMode] = useState<CsvJsonMode>("csvToJson");
-  const [delimiter, setDelimiter] = useState<CsvDelimiter>(",");
-  const [hasHeader, setHasHeader] = useState(true);
+  function setDim<K extends keyof CsvDraft>(key: K, value: CsvDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    setActiveExample(null);
+  }
 
   function handleModeChange(next: CsvJsonMode) {
-    if (next === mode) return;
-    setMode(next);
-    setInput(next === "csvToJson" ? SAMPLE_CSV : SAMPLE_JSON);
+    if (next === draft.mode) return;
+    setDraft((d) => ({ ...d, mode: next, input: next === "csvToJson" ? SAMPLE_CSV : SAMPLE_JSON }));
+    setActiveExample(next === "csvToJson" ? "inventory" : "nested");
   }
-
-  function handleClear() {
-    setInput(mode === "csvToJson" ? SAMPLE_CSV : SAMPLE_JSON);
-    setDelimiter(",");
-    setHasHeader(true);
-  }
-
-  const output = useMemo(() => {
-    if (!input.trim()) return null;
-    return tool.execute({ text: input, mode, delimiter, hasHeader }, { locale: "en-US" });
-  }, [input, mode, delimiter, hasHeader]);
-
-  const errorMessage = output?.success === false ? t(ERROR_MESSAGE_KEYS[String(output.metadata.error)] ?? "required") : "";
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -67,46 +38,59 @@ export default function CsvJsonConverterUI({ education }: { education: ReactNode
   ];
 
   return (
-    <>
+    <CsvLiveProvider value={{ dims: draft, setDim }}>
+      <div ref={sentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
-            <CsvJsonInputPanel
-              input={input}
-              onInputChange={setInput}
-              mode={mode}
-              onModeChange={handleModeChange}
-              delimiter={delimiter}
-              onDelimiterChange={setDelimiter}
-              hasHeader={hasHeader}
-              onHasHeaderChange={setHasHeader}
-              onClear={handleClear}
-            />
-          }
-          result={
-            <div className="flex flex-col gap-4">
-              <CsvJsonResult
-                isEmpty={!output}
-                result={output?.data.result ?? ""}
-                errorMessage={errorMessage}
-                filename={mode === "csvToJson" ? "converted.json" : "converted.csv"}
-                mimeType={mode === "csvToJson" ? "application/json;charset=utf-8" : "text/csv;charset=utf-8"}
-                modeLabel={mode === "csvToJson" ? tForm("csvToJson") : tForm("jsonToCsv")}
+            <div className="flex flex-col gap-6 lg:h-full">
+              <CsvJsonInputPanel
+                input={draft.input}
+                onInputChange={(v) => setDim("input", v)}
+                mode={draft.mode}
+                onModeChange={handleModeChange}
+                delimiter={draft.delimiter}
+                onDelimiterChange={(v) => setDim("delimiter", v)}
+                hasHeader={draft.hasHeader}
+                onHasHeaderChange={(v) => setDim("hasHeader", v)}
+                onClear={() => {
+                  setDraft(CSV_EXAMPLES[0].draft);
+                  setActiveExample("inventory");
+                }}
               />
-              <CsvVsJsonReference />
+              <QuickExamplesCard
+                title={tEx("title")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={(id) => {
+                  const ex = CSV_EXAMPLES.find((e) => e.id === id);
+                  if (!ex) return;
+                  setDraft(ex.draft);
+                  setActiveExample(id);
+                }}
+                examples={CSV_EXAMPLES.map((ex) => {
+                  const m = buildCsvModel(ex.draft);
+                  return { id: ex.id, label: tEx(ex.id), detail: m.a ? tEx("detail", { rows: m.a.rows.length, cols: m.a.headers.length, delim: delimiterName(m.delimiter) }) : "" };
+                })}
+              />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="csv-json-converter" category="file-tools" />}
+          result={<CsvJsonResult />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="csv-json-converter" category="file-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="csv-json-converter" />
-              <SectionNav items={navItems} />
+              <SectionNav items={navItems} visible={navBarVisible} />
+              <CsvVsJsonReference />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </CsvLiveProvider>
   );
 }

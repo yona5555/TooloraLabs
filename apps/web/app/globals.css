@@ -349,3 +349,145 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
 @media (prefers-reduced-motion: reduce) {
   .animate-block-in, .animate-flash-up, .animate-flash-down, .animate-flow-dash { animation: none; }
 }
+
+/* ===== Phone layout (below `lg`): wrapping, numbers, cards, type scale, anchors =====
+ * Unlayered, so these outrank the Tailwind utilities (layered) without !important.
+ * Desktop (lg+) is untouched. */
+@media (max-width: 1023.98px) {
+  /*
+   * Only prose wraps inside a word: a long word (German compounds, unit names) in a narrow box
+   * breaks instead of widening the page, and `anywhere` lets a flex or grid item shrink below it.
+   * Values and formulas are not prose: components/layout/FitNumbers.tsx marks every element whose
+   * text is a number or formula with [data-num]; those and [data-fit] (the page title) stay on one
+   * line, and FitNumbers shrinks their type when the box is narrower (§29).
+   */
+  main {
+    overflow-wrap: anywhere;
+  }
+  main :is([data-num], [data-fit]) {
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+  main [data-fit-wrap] {
+    white-space: normal;
+  }
+  /* a table still wider than its card after that scrolls inside itself, never the page */
+  main table[data-scroll-x] {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  /* a fieldset is min-content wide by default (UA style), so it would hold its card wider */
+  main fieldset {
+    min-inline-size: 0;
+  }
+  /* a range slider in a flex row with a label must not hold the row wider than the card */
+  input[type="range"] {
+    min-width: 0;
+  }
+  /*
+   * iOS Safari zooms the whole page in when a form field under 16px gets focus and keeps it
+   * zoomed after blur, so every field stays at 16px or more on phones and tablets.
+   */
+  :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="hidden"], [type="button"], [type="submit"], [type="reset"]), select, textarea):not([class*="text-lg"], [class*="text-xl"], [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"]) {
+    font-size: 16px;
+  }
+
+  /*
+   * Card content scales with the card, not the screen: every card is an inline-size container,
+   * and its padding, header title and large values follow the card's own width (cqi).
+   */
+  :is([data-bp-panel], [data-hero-card], [data-indicator-card]) {
+    container-type: inline-size;
+  }
+  [data-bp-panel] > [data-card-body] {
+    padding: clamp(0.625rem, 4cqi, 1rem);
+  }
+  [data-bp-panel] > :first-child > h2 {
+    font-size: clamp(0.875rem, 0.7rem + 1.5cqi, 1.05rem);
+  }
+  :is([data-bp-panel], [data-hero-card], [data-indicator-card]) .text-xl {
+    font-size: clamp(1rem, 6cqi, var(--text-xl));
+  }
+  :is([data-bp-panel], [data-hero-card], [data-indicator-card]) .text-2xl {
+    font-size: clamp(1.0625rem, 7cqi, var(--text-2xl));
+  }
+  :is([data-bp-panel], [data-hero-card], [data-indicator-card]) .text-3xl {
+    font-size: clamp(1.125rem, 8.5cqi, var(--text-3xl));
+  }
+  :is([data-bp-panel], [data-hero-card], [data-indicator-card]) :is(.text-4xl, .text-5xl, .text-6xl) {
+    font-size: clamp(1.25rem, 10cqi, var(--text-4xl));
+  }
+}
+
+/*
+ * Phone order inside the indicator-kit Result card: the values first, then the live scene (desktop
+ * keeps the scene on top). Same nodes, reordered visually only; the divider moves with the values.
+ */
+@media (max-width: 1023.98px) {
+  [data-ph-result] [data-card-body]:has(> [data-ph-result-values]) {
+    display: flex;
+    flex-direction: column;
+  }
+  [data-ph-result] [data-card-body] > [data-ph-result-values] {
+    order: -2;
+  }
+  [data-ph-result] [data-card-body] > hr:has(+ [data-ph-result-values]) {
+    order: -1;
+  }
+}
+
+/* Phone type scale (below `sm`): one scale, smaller than the desktop one. Form fields keep 16px (above). */
+@media (max-width: 639.98px) {
+  main {
+    font-size: 14px;
+  }
+  main :is(.text-base, .text-lg):not(input, select, textarea) {
+    font-size: 14px;
+  }
+  main :is(p, li, dd, blockquote) {
+    line-height: 1.5;
+  }
+  main h1 {
+    font-size: clamp(1.125rem, 0.75rem + 2.5vw, 1.5rem);
+    line-height: 1.25;
+  }
+  main h2 {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+  main h3 {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+  main :is(label, th, dt, legend) {
+    font-size: 12.5px;
+  }
+}
+
+/*
+ * In-page anchors land below the sticky site header and the stuck section bar, whatever their
+ * real heights: SectionNav publishes the sum as --anchor-offset (falls back to the header alone).
+ */
+[id] {
+  scroll-margin-top: calc(var(--anchor-offset, 73px) + 12px);
+}
+
+/*
+ * indicator-kit drawings render their SVG in true pixels of the measured box (viewBox = box). Before
+ * the first measurement (server HTML) the SVG carries the fallback size, so it fills the box here
+ * instead of overflowing it.
+ */
+[data-ph-drawing] > svg.absolute {
+  width: 100%;
+  height: 100%;
+}
+
+/* Below `lg`, a drawing with a fixed pixel width never runs past its box; it scales down inside it. */
+@layer base {
+  @media (max-width: 1023.98px) {
+    svg {
+      max-width: 100%;
+    }
+  }
+}

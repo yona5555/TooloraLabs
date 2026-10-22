@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduDonutChart from "./EduDonutChart";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Documented service-type tipping conventions (distinct from country-based norms): delivery vs dine-in, same $30 order — shown as a donut split rather than a bar list. */
 const ORDER = 30;
@@ -23,12 +24,12 @@ export default async function TipDeliveryVsDineInChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { order: ORDER.toFixed(2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduDonutChart segments={segments} ariaLabel={t("title")} />
         </div>
         <TipWorkedExampleNote title={tRoot("workedExampleTitle")} rows={segments.map((s) => ({ label: s.label, value: s.formatted }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

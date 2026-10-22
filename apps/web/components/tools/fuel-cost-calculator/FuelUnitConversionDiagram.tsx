@@ -4,6 +4,7 @@ import { Gauge, Droplets, Equal } from "lucide-react";
 import AutoFitText from "@/components/tool-ui/AutoFitText";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Real MPG <-> L/100km conversion factor (235.215 / mpg = L/100km), worked with a real example. */
 const MPG = 30;
@@ -25,7 +26,7 @@ export default function FuelUnitConversionDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 items-center justify-center gap-3">
           <div className="flex w-32 flex-col items-center gap-1.5 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 px-4 py-5 text-center shadow-sm dark:from-blue-600 dark:to-blue-900">
             <Gauge size={20} className="text-blue-100" aria-hidden="true" />
@@ -50,7 +51,7 @@ export default function FuelUnitConversionDiagram() {
             { label: t("at20Label"), value: `${L_PER_100KM_AT_20.toFixed(2)} L/100km` },
           ]}
         />
-      </div>
+      </GapFreeRow>
       <p className="mt-3 text-center text-xs opacity-60">{t("formula")}</p>
     </SectionCard>
   );

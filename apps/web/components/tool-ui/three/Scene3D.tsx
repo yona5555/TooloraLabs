@@ -40,6 +40,7 @@ export default function Scene3D({
   return (
     <div
       ref={ref}
+      data-preview="visual"
       dir="ltr"
       className={`relative h-full min-h-[280px] w-full cursor-grab touch-none overflow-hidden rounded-xl active:cursor-grabbing ${className}`}
     >

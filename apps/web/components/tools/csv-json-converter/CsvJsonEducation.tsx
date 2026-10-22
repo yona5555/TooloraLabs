@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CsvStructureDiagram from "./CsvStructureDiagram";
+import CsvColumnExplorer from "./CsvColumnExplorer";
+import CsvTypeDonut from "./CsvTypeDonut";
+import CsvSizeBars from "./CsvSizeBars";
+import CsvJsonBytes from "./CsvJsonBytes";
+import CsvDelimiterBars from "./CsvDelimiterBars";
+import CsvFillGrid from "./CsvFillGrid";
+import CsvRowLengths from "./CsvRowLengths";
+import CsvNumericRanges from "./CsvNumericRanges";
+import CsvParseFlow from "./CsvParseFlow";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,8 +27,14 @@ export default async function CsvJsonEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <CsvColumnExplorer />
+        <CsvParseFlow />
         <p>{t("intro.paragraph2")}</p>
-        <CsvStructureDiagram caption={t("intro.diagram.caption")} />
+        <div className="space-y-6">
+          <CsvTypeDonut />
+          <CsvFillGrid />
+        </div>
+        <CsvSizeBars />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -49,6 +63,7 @@ export default async function CsvJsonEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <CsvDelimiterBars />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -60,11 +75,12 @@ export default async function CsvJsonEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <CsvJsonBytes />
+          <CsvRowLengths />
+          <CsvNumericRanges />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

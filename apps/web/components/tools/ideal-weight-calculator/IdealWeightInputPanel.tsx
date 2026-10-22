@@ -11,6 +11,8 @@ type IdealWeightInputPanelProps = {
   onGenderChange: (value: Gender) => void;
   heightCm: string;
   onHeightCmChange: (value: string) => void;
+  currentKg: string;
+  onCurrentKgChange: (value: string) => void;
   onScenarioPreset: (scenario: IdealWeightScenario) => void;
   onClear: () => void;
 };
@@ -20,11 +22,14 @@ export default function IdealWeightInputPanel({
   onGenderChange,
   heightCm,
   onHeightCmChange,
+  currentKg,
+  onCurrentKgChange,
   onScenarioPreset,
   onClear,
 }: IdealWeightInputPanelProps) {
   const t = useTranslations("tools.ideal-weight-calculator");
   const tScenarios = useTranslations("tools.ideal-weight-calculator.scenarios");
+  const tv = useTranslations("tools.ideal-weight-calculator.visuals.input");
 
   return (
     <SectionCard title={t("aboveFold.inputTitle")}>
@@ -70,6 +75,15 @@ export default function IdealWeightInputPanel({
           placeholder={t("form.heightPlaceholder")}
           value={heightCm}
           onChange={(e) => onHeightCmChange(e.target.value)}
+        />
+
+        <ToolInput
+          label={tv("currentWeight")}
+          type="text"
+          inputMode="decimal"
+          placeholder={tv("currentWeightPlaceholder")}
+          value={currentKg}
+          onChange={(e) => onCurrentKgChange(e.target.value)}
         />
       </div>
 

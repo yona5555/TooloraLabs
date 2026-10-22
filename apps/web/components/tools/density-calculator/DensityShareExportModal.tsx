@@ -222,9 +222,9 @@ export default function DensityShareExportModal({ operationLabel, inputRows, res
           </p>
         </div>
 
-        <h1 className="mb-4 text-2xl font-bold text-zinc-900">
+        <div className="mb-4 text-2xl font-bold text-zinc-900">
           {t("title")} — {operationLabel}
-        </h1>
+        </div>
 
         <h2 className="mb-2 mt-6 text-base font-bold text-blue-600">{t("form.inputTitle")}</h2>
         <table className="w-full border-collapse text-base">

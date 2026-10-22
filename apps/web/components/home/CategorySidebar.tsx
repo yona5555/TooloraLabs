@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type MouseEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { ChevronRight, Search, BookOpen, LayoutList, ArrowRight } from "lucide-react";
@@ -62,8 +62,17 @@ function ToolQuickPreview({ slug }: { slug: string }) {
  * LTR, with no manual left-0/right-0 positioning needed. The nested tool
  * list's indent and connector line use logical properties (ps-*, border-s)
  * so they flip sides with it automatically too.
+ *
+ * Shared by the home page (Hero.tsx) and /tools; `footer` renders below the
+ * category list (the /tools page passes the "Was this helpful?" card).
+ * `categoryLinksJumpToSections` (the /tools page only) splits each category
+ * row in two: the name smooth-scrolls to that category's section on the same
+ * page (`#category-<slug>`), and only the chevron expands/collapses its tools.
  */
-export default function CategorySidebar() {
+export default function CategorySidebar({
+  footer,
+  categoryLinksJumpToSections = false,
+}: { footer?: ReactNode; categoryLinksJumpToSections?: boolean } = {}) {
   const t = useTranslations("categories");
   const tTools = useTranslations("tools");
   const tHome = useTranslations("homeCalculator");
@@ -92,6 +101,15 @@ export default function CategorySidebar() {
       else next.add(slug);
       return next;
     });
+  }
+
+  function jumpToSection(event: MouseEvent<HTMLAnchorElement>, slug: string) {
+    const target = document.getElementById(`category-${slug}`);
+    if (!target) return;
+    event.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    history.replaceState(null, "", `#category-${slug}`);
   }
 
   const normalizedQuery = query.trim().toLowerCase();
@@ -193,8 +211,46 @@ export default function CategorySidebar() {
               );
             }
 
+            const rowClasses = `flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition ${
+              isActiveCategory
+                ? "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"
+                : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            }`;
+            const categoryLabel = (
+              <>
+                <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
+                  <Icon size={15} strokeWidth={2} />
+                </span>
+                <span className="flex-1 truncate text-start">{t(`${category.slug}.title`)}</span>
+                <span className="shrink-0 rounded-full bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                  {tCategoriesSection("toolCount", { count: categoryTools.length })}
+                </span>
+              </>
+            );
+            const chevron = <ChevronRight size={14} className={`shrink-0 text-zinc-400 transition-transform ${isOpen ? "rotate-90" : ""}`} />;
+
             return (
               <li key={category.slug}>
+                {categoryLinksJumpToSections ? (
+                  <div data-bp-inner className={`${rowClasses} gap-1 p-0`}>
+                    <a
+                      href={`#category-${category.slug}`}
+                      onClick={(event) => jumpToSection(event, category.slug)}
+                      className="flex min-w-0 flex-1 items-center gap-2.5 rounded-lg py-2 ps-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                    >
+                      {categoryLabel}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => toggle(category.slug)}
+                      aria-expanded={isOpen}
+                      aria-label={t(`${category.slug}.title`)}
+                      className="flex h-9 w-8 shrink-0 items-center justify-center rounded-lg pe-1 hover:bg-zinc-200/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:hover:bg-zinc-700/70"
+                    >
+                      {chevron}
+                    </button>
+                  </div>
+                ) : (
                 <button
                   type="button"
                   onClick={() => toggle(category.slug)}
@@ -215,6 +271,7 @@ export default function CategorySidebar() {
                   </span>
                   <ChevronRight size={14} className={`shrink-0 text-zinc-400 transition-transform ${isOpen ? "rotate-90" : ""}`} />
                 </button>
+                )}
 
                 {isOpen && categoryTools.length > 0 && (
                   <ul className="ms-[1.15rem] mt-0.5 flex flex-col gap-0.5 border-s border-zinc-200 ps-3 dark:border-zinc-700">
@@ -245,6 +302,7 @@ export default function CategorySidebar() {
           })}
         </ul>
       )}
+      {footer && <div className="px-3 pb-3">{footer}</div>}
     </nav>
   );
 }

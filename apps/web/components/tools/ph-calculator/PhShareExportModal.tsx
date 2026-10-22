@@ -221,9 +221,9 @@ export default function PhShareExportModal({ operationLabel, inputRows, resultRo
           </p>
         </div>
 
-        <h1 className="mb-4 text-xl font-bold text-zinc-900">
+        <div className="mb-4 text-xl font-bold text-zinc-900">
           {t("title")} — {operationLabel}
-        </h1>
+        </div>
 
         <h2 className="mb-2 mt-6 text-sm font-bold text-blue-600">{t("form.inputTitle")}</h2>
         <table className="w-full border-collapse text-sm">

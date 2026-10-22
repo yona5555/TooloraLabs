@@ -4,6 +4,7 @@ import { ScientificCalculator } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useScientificAngle } from "./ScientificAngleContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new ScientificCalculator();
 const ZONES = [
@@ -34,7 +35,7 @@ export default function InverseTrigRangeZone() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-3 w-full overflow-hidden rounded-full">
             {ZONES.map((z) => (
@@ -59,7 +60,7 @@ export default function InverseTrigRangeZone() {
             { label: t("worked.match"), value: isPrincipal ? t("worked.matchYes") : t("worked.matchNo"), note: isPrincipal ? undefined : t("worked.matchNote") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

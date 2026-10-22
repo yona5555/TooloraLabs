@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { splitSentences } from "../analyzers/textSegmentation";
 
 export type TextToSpeechInput = {
   text: string;
@@ -32,7 +33,8 @@ const DEFAULT_MAX_CHUNK_LENGTH = 200;
  * lets the queue advance chunk-by-chunk.
  */
 function splitIntoChunks(text: string, maxLength: number): string[] {
-  const sentences = text.match(/[^.!?]+[.!?]*/g) ?? [text];
+  const spans = splitSentences(text);
+  const sentences = spans.length ? spans.map((s) => text.slice(s.start, s.end)) : [text];
   const chunks: string[] = [];
   let current = "";
 

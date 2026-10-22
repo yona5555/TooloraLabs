@@ -21,6 +21,7 @@ import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import TDEEInputPanel from "./TDEEInputPanel";
 import TDEEResult from "./TDEEResult";
 import TDEEActivityMultiplierReference from "./TDEEActivityMultiplierReference";
+import { TDEELiveContext, type TDEELive, type TDEESnapshot } from "./TDEELiveContext";
 import type { ActivityLevel, Gender, GoalDirection, TDEEScenario, UnitSystem } from "./types";
 
 const DEFAULTS = {
@@ -90,7 +91,7 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
 
   const digitStyle: DigitStyle = resolveDigitStyle(heightCm, weightKg, age, weeklyRateKg);
 
-  const { bmr, tdee, goal } = useMemo(() => {
+  const { bmr, tdee, goal, body } = useMemo(() => {
     const heightCmValue = unitSystem === "metric" ? parseLocalizedNumber(heightCm) : feetInchesToCm({ feet: parseLocalizedNumber(heightFt) || 0, inches: parseLocalizedNumber(heightIn) || 0 });
     const weightKgValue = unitSystem === "metric" ? parseLocalizedNumber(weightKg) : lbToKg(parseLocalizedNumber(weightLb) || 0);
     const ageValue = parseLocalizedNumber(age);
@@ -106,8 +107,27 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
     const signedRate = goalDirection === "lose" ? -Math.abs(rateValue) : goalDirection === "gain" ? Math.abs(rateValue) : 0;
     const computedGoal = calculateWeightGoal(computedTdee, signedRate);
 
-    return { bmr: computedBmr, tdee: computedTdee, goal: computedGoal };
+    const usedBodyFat = useBodyFat && !Number.isNaN(bodyFatValue) && bodyFatValue > 0 ? bodyFatValue : null;
+    return {
+      bmr: computedBmr,
+      tdee: computedTdee,
+      goal: computedGoal,
+      body: { weightKg: weightKgValue, heightCm: heightCmValue, age: ageValue, bodyFat: usedBodyFat, weeklyKg: signedRate },
+    };
   }, [unitSystem, heightCm, weightKg, heightFt, heightIn, weightLb, age, gender, activityLevel, useBodyFat, bodyFatPercent, goalDirection, weeklyRateKg]);
+
+  // Live: every valid edit updates the result at once; an invalid or half-typed field keeps the
+  // last good result on screen (with a short note in the Result card).
+  const valid =
+    bmr > 0 && tdee > 0 && Number.isFinite(goal.dailyCalorieTarget) && [body.weightKg, body.heightCm, body.age].every((v) => Number.isFinite(v) && v > 0);
+  const liveSnap = useMemo<TDEESnapshot>(
+    () => ({ bmr, tdee, ...body, gender, activityLevel, goalDirection, dailyTarget: goal.dailyCalorieTarget }),
+    [bmr, tdee, body, gender, activityLevel, goalDirection, goal],
+  );
+  const [good, setGood] = useState(() => ({ snap: liveSnap, goal }));
+  if (valid && good.snap !== liveSnap) setGood({ snap: liveSnap, goal });
+  const shown = valid ? { snap: liveSnap, goal } : good;
+  const liveCtx = useMemo<TDEELive>(() => ({ snap: shown.snap, setActivityLevel }), [shown.snap]);
 
   useEffect(() => {
     if (!Number.isFinite(goal.dailyCalorieTarget) || goal.dailyCalorieTarget <= 0) return;
@@ -130,53 +150,57 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
   ];
 
   return (
-    <>
+    <TDEELiveContext.Provider value={liveCtx}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchResult
           input={
-            <TDEEInputPanel
-              unitSystem={unitSystem}
-              onUnitSystemChange={setUnitSystem}
-              heightCm={heightCm}
-              onHeightCmChange={setHeightCm}
-              weightKg={weightKg}
-              onWeightKgChange={setWeightKg}
-              heightFt={heightFt}
-              onHeightFtChange={setHeightFt}
-              heightIn={heightIn}
-              onHeightInChange={setHeightIn}
-              weightLb={weightLb}
-              onWeightLbChange={setWeightLb}
-              age={age}
-              onAgeChange={setAge}
-              gender={gender}
-              onGenderChange={setGender}
-              activityLevel={activityLevel}
-              onActivityLevelChange={setActivityLevel}
-              useBodyFat={useBodyFat}
-              onUseBodyFatChange={setUseBodyFat}
-              bodyFatPercent={bodyFatPercent}
-              onBodyFatPercentChange={setBodyFatPercent}
-              onScenarioPreset={handleScenarioPreset}
-              onClear={handleClear}
-            />
+            <div className="flex flex-col gap-4">
+              <TDEEInputPanel
+                unitSystem={unitSystem}
+                onUnitSystemChange={setUnitSystem}
+                heightCm={heightCm}
+                onHeightCmChange={setHeightCm}
+                weightKg={weightKg}
+                onWeightKgChange={setWeightKg}
+                heightFt={heightFt}
+                onHeightFtChange={setHeightFt}
+                heightIn={heightIn}
+                onHeightInChange={setHeightIn}
+                weightLb={weightLb}
+                onWeightLbChange={setWeightLb}
+                age={age}
+                onAgeChange={setAge}
+                gender={gender}
+                onGenderChange={setGender}
+                activityLevel={activityLevel}
+                onActivityLevelChange={setActivityLevel}
+                useBodyFat={useBodyFat}
+                onUseBodyFatChange={setUseBodyFat}
+                bodyFatPercent={bodyFatPercent}
+                onBodyFatPercentChange={setBodyFatPercent}
+                onScenarioPreset={handleScenarioPreset}
+                onClear={handleClear}
+              />
+              <TDEEActivityMultiplierReference />
+            </div>
           }
           result={
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4 lg:h-full">
               <TDEEResult
-                bmr={bmr}
-                tdee={tdee}
+                fill
+                snap={shown.snap}
+                invalid={!valid}
                 goalDirection={goalDirection}
                 onGoalDirectionChange={setGoalDirection}
                 weeklyRateKg={weeklyRateKg}
                 onWeeklyRateKgChange={setWeeklyRateKg}
-                dailyCalorieTarget={goal.dailyCalorieTarget}
-                adjustmentPercentOfTDEE={goal.adjustmentPercentOfTDEE}
-                dailyAdjustment={goal.dailyAdjustment}
-                isAggressive={goal.isAggressive}
+                dailyCalorieTarget={shown.goal.dailyCalorieTarget}
+                adjustmentPercentOfTDEE={shown.goal.adjustmentPercentOfTDEE}
+                dailyAdjustment={shown.goal.dailyAdjustment}
+                isAggressive={shown.goal.isAggressive}
                 digitStyle={digitStyle}
               />
-              <TDEEActivityMultiplierReference />
             </div>
           }
           sidebar={<RelatedToolsSidebar currentSlug="tdee-calculator" category="health-fitness" />}
@@ -190,6 +214,6 @@ export default function TDEECalculator({ education }: { education: ReactNode }) 
       </div>
 
       {education}
-    </>
+    </TDEELiveContext.Provider>
   );
 }

@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import BarcodeAnatomyDiagram from "./BarcodeAnatomyDiagram";
+import BarcodeSymbolExplorer from "./BarcodeSymbolExplorer";
+import BarcodeCheckDigitFlow from "./BarcodeCheckDigitFlow";
+import BarcodeModuleBudget from "./BarcodeModuleBudget";
+import BarcodeParityStrip from "./BarcodeParityStrip";
+import BarcodeWidthHistogram from "./BarcodeWidthHistogram";
+import BarcodeInkGauge from "./BarcodeInkGauge";
+import BarcodeErrorDetection from "./BarcodeErrorDetection";
+import BarcodePrintSizes from "./BarcodePrintSizes";
+import BarcodeLengthTrend from "./BarcodeLengthTrend";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,13 +27,14 @@ export default async function BarcodeEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <BarcodeSymbolExplorer />
+        <BarcodeCheckDigitFlow />
         <p>{t("intro.paragraph2")}</p>
-        <BarcodeAnatomyDiagram
-          quietZoneLabel={t("intro.diagram.quietZoneLabel")}
-          guardLabel={t("intro.diagram.guardLabel")}
-          dataLabel={t("intro.diagram.dataLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <div className="space-y-6">
+          <BarcodeModuleBudget />
+          <BarcodeParityStrip />
+        </div>
+        <BarcodeWidthHistogram />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -54,6 +63,7 @@ export default async function BarcodeEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <BarcodeErrorDetection />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -65,11 +75,12 @@ export default async function BarcodeEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <BarcodeInkGauge />
+          <BarcodePrintSizes />
+          <BarcodeLengthTrend />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

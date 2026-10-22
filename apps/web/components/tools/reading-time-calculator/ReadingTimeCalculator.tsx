@@ -1,42 +1,18 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { ReadingTimeCalculator as RTTool } from "@tooloralabs/tools";
-
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import RTInputPanel from "./RTInputPanel";
 import RTResult from "./RTResult";
-import RTQuickReference from "./RTQuickReference";
-import { READING_SPEED_PRESETS } from "./types";
-import type { ReadingSpeedPreset } from "./types";
-
-const tool = new RTTool();
+import { RtLiveProvider } from "./RtLiveContext";
 
 export default function ReadingTimeCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.reading-time-calculator.nav");
-  const [text, setText] = useState("");
-  const [preset, setPreset] = useState<ReadingSpeedPreset>("average");
-  const [customWpm, setCustomWpm] = useState("230");
-
-  function handleClear() {
-    setText("");
-    setPreset("average");
-    setCustomWpm("230");
-  }
-
-  const digitStyle: DigitStyle = resolveDigitStyle(customWpm);
-
-  const wordsPerMinute = preset === "custom" ? parseLocalizedNumber(customWpm) || 0 : READING_SPEED_PRESETS[preset];
-
-  const result = useMemo(() => {
-    const output = tool.execute({ text, wordsPerMinute }, { locale: "en-US" });
-    return output.data;
-  }, [text, wordsPerMinute]);
+  const tForm = useTranslations("tools.reading-time-calculator.form");
+  const sampleText = tForm("sampleText");
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -45,27 +21,15 @@ export default function ReadingTimeCalculator({ education }: { education: ReactN
   ];
 
   return (
-    <>
+    <RtLiveProvider initialText={sampleText}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={
-            <RTInputPanel
-              text={text}
-              onTextChange={setText}
-              preset={preset}
-              onPresetChange={setPreset}
-              customWpm={customWpm}
-              onCustomWpmChange={setCustomWpm}
-              onClear={handleClear}
-            />
-          }
-          result={
-            <div className="flex flex-col gap-4">
-              <RTResult result={result} digitStyle={digitStyle} />
-              <RTQuickReference />
-            </div>
-          }
-          sidebar={<RelatedToolsSidebar currentSlug="reading-time-calculator" category="text-tools" />}
+          stretchInput
+          stretchResult
+          sidebarMatchRow
+          input={<RTInputPanel sampleText={sampleText} />}
+          result={<RTResult />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="reading-time-calculator" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="reading-time-calculator" />
@@ -76,6 +40,6 @@ export default function ReadingTimeCalculator({ education }: { education: ReactN
       </div>
 
       {education}
-    </>
+    </RtLiveProvider>
   );
 }

@@ -4,6 +4,8 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import { TTSCharMixCard, TTSPackingCard, TTSPlayheadCard, TTSRateCheckCard, TTSRateCurveCard, TTSWordSplitCard, TTSWpmGaugeCard } from "./TTSCards";
+import { TTSChunkStackCard } from "./TTSCard3D";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -16,13 +18,22 @@ export default async function TTSEducation() {
 
   return (
     <EncyclopediaPaper>
+      {/* The paper sets a serif face; this page is Inter throughout (same spacing as the paper's own stack). */}
+      <div className="space-y-12" style={{ fontFamily: "var(--glass-font)" }}>
+      {/* Every indicator sits right after the paragraph it illustrates; sides zigzag down the page. */}
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <TTSCharMixCard side="visual-left" />
         <p>{t("intro.paragraph2")}</p>
+        <TTSChunkStackCard side="table-left" />
+        <TTSPackingCard side="visual-left" />
       </InfoSection>
+
+      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
+        <TTSRateCurveCard side="table-left" />
         <div className="space-y-4">
           {useCaseItems.map((item) => (
             <div key={item.title}>
@@ -31,6 +42,7 @@ export default async function TTSEducation() {
             </div>
           ))}
         </div>
+        <TTSWpmGaugeCard side="visual-left" />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />
@@ -39,15 +51,19 @@ export default async function TTSEducation() {
         <FAQAccordion items={faqItems} />
       </InfoSection>
 
+      <TTSWordSplitCard side="table-left" />
+
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
         <div>
           <h3 className="font-semibold">{t("behindTheTool.history.title")}</h3>
           <p className="mt-2">{t("behindTheTool.history.paragraph")}</p>
         </div>
+        <TTSPlayheadCard side="visual-left" />
         <div>
           <h3 className="font-semibold">{t("behindTheTool.browserSupport.title")}</h3>
           <p className="mt-2">{t("behindTheTool.browserSupport.paragraph")}</p>
         </div>
+        <TTSRateCheckCard side="table-left" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}
@@ -69,6 +85,7 @@ export default async function TTSEducation() {
           {t("references.readOriginal")}
         </a>
       </InfoSection>
+      </div>
     </EncyclopediaPaper>
   );
 }

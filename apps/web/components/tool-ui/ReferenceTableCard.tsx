@@ -48,8 +48,9 @@ export default function ReferenceTableCard({ title, caption, columnLabel, column
               <tr key={row.key} className="border-b border-zinc-100 dark:border-zinc-800/60">
                 <td className="px-2 py-1.5 font-medium text-zinc-800 dark:text-zinc-100">{row.label}</td>
                 <td dir="ltr" className="px-2 py-1.5 text-start font-mono text-zinc-700 dark:text-zinc-300">
-                  {row.value}
-                  {row.tag && <span className={`ms-2 rounded-full px-2 py-0.5 text-xs font-medium ${row.tag.colorClass}`}>{row.tag.text}</span>}
+                  {/* its own box, so the value stays whole while the tag may move to the next line */}
+                  <span>{row.value}</span>
+                  {row.tag && <span className={`ms-2 inline-block rounded-full px-2 py-0.5 text-xs font-medium ${row.tag.colorClass}`}>{row.tag.text}</span>}
                 </td>
               </tr>
             ))}

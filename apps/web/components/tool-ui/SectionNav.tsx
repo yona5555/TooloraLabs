@@ -184,6 +184,26 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
     return () => observer.disconnect();
   }, []);
 
+  // Anchors ([id], globals.css) land below the sticky site header plus this bar once it is stuck:
+  // publish their real combined height (both change with wrapping and breakpoints).
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    const header = document.querySelector("header");
+    if (!nav) return;
+    const root = document.documentElement;
+    const update = () => {
+      const h = (header?.getBoundingClientRect().height ?? STUCK_TOP_OFFSET) + nav.getBoundingClientRect().height;
+      root.style.setProperty("--anchor-offset", `${Math.ceil(h)}px`);
+    };
+    const observer = new ResizeObserver(update);
+    observer.observe(nav);
+    if (header) observer.observe(header);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--anchor-offset");
+    };
+  }, []);
+
   function scrollToSection(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }

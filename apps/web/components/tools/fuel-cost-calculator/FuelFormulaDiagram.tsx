@@ -6,6 +6,7 @@ import AutoFitText from "@/components/tool-ui/AutoFitText";
 import { useFuelLiveInputs } from "./FuelLiveInputsContext";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FuelWorkedExampleNote from "./FuelWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Worked example of the tool's own formula: cost = (distance / efficiency) * price. Reference numbers, not fabricated placeholders. */
 const DISTANCE = 300;
@@ -65,7 +66,7 @@ export default function FuelFormulaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { price: money(PRICE) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[340px] text-current">
             <defs>
@@ -112,7 +113,7 @@ export default function FuelFormulaDiagram() {
             { label: t("ifPriceDoubledLabel", { price: money(PRICE * 2) }), value: money(doublePriceCost) },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

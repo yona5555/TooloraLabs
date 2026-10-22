@@ -1,26 +1,19 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { TextCounter } from "@tooloralabs/tools";
-import { resolveDigitStyle } from "@/lib/digit-style";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import WordCounterInputPanel from "./WordCounterInputPanel";
 import WordCounterResult from "./WordCounterResult";
-import PlatformLimitsReference from "./PlatformLimitsReference";
-
-const tool = new TextCounter();
+import { WcLiveProvider } from "./WcLiveContext";
 
 export default function WordCounterTool({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.word-counter.nav");
-
-  const [text, setText] = useState("");
-
-  const stats = useMemo(() => tool.execute({ text }, { locale: "en-US" }).data, [text]);
-  const digitStyle = resolveDigitStyle(text);
+  const tForm = useTranslations("tools.word-counter.form");
+  const sampleText = tForm("sampleText");
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -29,17 +22,15 @@ export default function WordCounterTool({ education }: { education: ReactNode })
   ];
 
   return (
-    <>
+    <WcLiveProvider initialText={sampleText}>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<WordCounterInputPanel text={text} onTextChange={setText} />}
-          result={
-            <div className="flex flex-col gap-4">
-              <WordCounterResult stats={stats} hasText={text.trim().length > 0} digitStyle={digitStyle} />
-              <PlatformLimitsReference characters={stats.characters} />
-            </div>
-          }
-          sidebar={<RelatedToolsSidebar currentSlug="word-counter" category="text-tools" />}
+          stretchInput
+          stretchResult
+          sidebarMatchRow
+          input={<WordCounterInputPanel sampleText={sampleText} />}
+          result={<WordCounterResult />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="word-counter" category="text-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="word-counter" />
@@ -50,6 +41,6 @@ export default function WordCounterTool({ education }: { education: ReactNode })
       </div>
 
       {education}
-    </>
+    </WcLiveProvider>
   );
 }

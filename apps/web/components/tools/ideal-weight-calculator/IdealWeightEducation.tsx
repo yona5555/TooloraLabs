@@ -4,9 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import IdealWeightRangeGauge from "./IdealWeightRangeGauge";
-import IdealWeightFormulaDiagram from "./IdealWeightFormulaDiagram";
-import IdealWeightHeightCurveDiagram from "./IdealWeightHeightCurveDiagram";
+import {
+  IdealWeightFormulaCard,
+  IdealWeightGaugeCard,
+  IdealWeightHeightSweepCard,
+  IdealWeightRankCard,
+  IdealWeightSensitivityCard,
+  IdealWeightTargetBmiCard,
+  IdealWeightTimelineCard,
+  IdealWeightZoneCard,
+} from "./IdealWeightCards";
 
 type ExampleRow = { scenario: string; average: string; range: string };
 
@@ -19,15 +26,27 @@ export default async function IdealWeightEducation() {
 
   return (
     <EncyclopediaPaper>
-      <IdealWeightRangeGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <IdealWeightHeightSweepCard side="visual-left" />
+        <IdealWeightZoneCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <IdealWeightFormulaDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <IdealWeightRankCard side="visual-left" />
+          <IdealWeightFormulaCard side="table-left" />
+          <IdealWeightTargetBmiCard side="visual-left" />
+        </div>
       </InfoSection>
 
-      <IdealWeightHeightCurveDiagram />
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <IdealWeightGaugeCard side="table-left" />
+        <IdealWeightTimelineCard side="visual-left" />
+        <IdealWeightSensitivityCard side="table-left" />
+      </div>
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>

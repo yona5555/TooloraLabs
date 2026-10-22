@@ -1,5 +1,5 @@
 // History tape check: 3 calculations, delete one, grand total updates, persists on reload,
-// click reuses; same for dice-roller. Screenshots of the scientific panel in en light/dark + ar light.
+// click reuses. Screenshots of the scientific panel in en light/dark + ar light.
 // Usage: node apps/web/scripts/history-tape-check.mjs outDir
 import { chromium } from "playwright";
 const S = process.argv[2];
@@ -30,14 +30,4 @@ await shot("tape-en-light");
 await p.evaluate(() => localStorage.setItem("theme", "dark")); await p.reload({ waitUntil: "load" }); await p.waitForTimeout(2000); await shot("tape-en-dark");
 await p.evaluate(() => localStorage.setItem("theme", "light"));
 await p.goto(`${BASE}/ar/tools/scientific-calculator`, { waitUntil: "load" }); await p.waitForTimeout(2500); await shot("tape-ar-light");
-// dice
-await p.goto(`${BASE}/en/tools/dice-roller`, { waitUntil: "load" });
-await p.evaluate(() => localStorage.removeItem("tooloralabs:dice-roller-history")); await p.reload({ waitUntil: "load" }); await p.waitForTimeout(2000);
-const roll = p.getByRole("button", { name: /^roll/i }).first();
-for (let i = 0; i < 3; i++) { await roll.click(); await p.waitForTimeout(1200); }
-console.log("DICE 3:", JSON.stringify(await tape()));
-await p.locator('[data-testid="tape-delete"]').first().click(); await p.waitForTimeout(300);
-console.log("DICE DELETE:", JSON.stringify(await tape()));
-await p.locator('[data-testid="tape-clear"]').click(); await p.waitForTimeout(300);
-console.log("DICE CLEAR:", JSON.stringify(await tape()), errs);
 await b.close();

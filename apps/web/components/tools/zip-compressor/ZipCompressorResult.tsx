@@ -1,139 +1,117 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Download, FileArchive, FileIcon, Loader2 } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import { formatBytes } from "../image-converter/formatBytes";
-import type { ZipMode } from "./ZipCompressorInputPanel";
 import ZipCompressorShareExportModal from "./ZipCompressorShareExportModal";
+import { FILE_FILL, formatBytes, useZipModel } from "./ZipLiveContext";
 
 export type ExtractedEntry = { name: string; url: string; size: number };
 
-type ZipCompressorResultProps = {
-  mode: ZipMode;
-  isProcessing: boolean;
-  compressedReady: boolean;
-  compressedSize: number;
-  originalSize: number;
-  onDownloadZip: () => void;
-  extractedEntries: ExtractedEntry[];
-};
-
-export default function ZipCompressorResult({
-  mode,
-  isProcessing,
-  compressedReady,
-  compressedSize,
-  originalSize,
-  onDownloadZip,
-  extractedEntries,
-}: ZipCompressorResultProps) {
+/**
+ * Result card: the archive as a whole (original → archive size and saving), then every entry read
+ * from the archive's central directory — original and compressed bars side by side, method and ratio —
+ * with download buttons for extracted files.
+ */
+export default function ZipCompressorResult({ isProcessing, onDownloadZip, extractedEntries }: { isProcessing: boolean; onDownloadZip: () => void; extractedEntries: ExtractedEntry[] }) {
   const t = useTranslations("tools.zip-compressor");
-  const tRoot = t;
+  const tr = useTranslations("tools.zip-compressor.result");
+  const { draft, ready, rows, original, compressed, f, pct } = useZipModel();
+  const mode = draft.mode;
+  const savedPercent = original ? Math.round(((original - compressed) / original) * 100) : 0;
 
-  if (isProcessing) {
+  if (!ready) {
     return (
       <SectionCard title={t("aboveFold.resultTitle")}>
-        <div className="flex flex-col items-center gap-3 px-4 py-10 text-center text-sm text-zinc-400 dark:text-zinc-500">
-          <Loader2 size={24} className="animate-spin" />
-          {t("aboveFold.processing")}
+        <div className="flex flex-col items-center gap-3 px-4 py-10 text-center text-sm text-zinc-500 dark:text-zinc-400">
+          {isProcessing ? <Loader2 size={24} className="animate-spin" /> : null}
+          {isProcessing ? t("aboveFold.processing") : mode === "compress" ? t("aboveFold.placeholderCompress") : t("aboveFold.placeholderExtract")}
         </div>
       </SectionCard>
     );
   }
 
-  if (mode === "compress") {
-    const savedPercent = originalSize > 0 ? Math.max(0, Math.round((1 - compressedSize / originalSize) * 100)) : 0;
-
-    return (
-      <SectionCard
-        title={t("aboveFold.resultTitle")}
-        action={
-          compressedReady ? (
-            <ZipCompressorShareExportModal
-              inputRows={[{ label: tRoot("shareExport.originalSizeLabel"), value: formatBytes(originalSize) }]}
-              resultRows={[
-                { label: tRoot("shareExport.compressedSizeLabel"), value: formatBytes(compressedSize) },
-                { label: tRoot("shareExport.savedPercentLabel"), value: `${savedPercent}%` },
-              ]}
-              heroLabel={tRoot("shareExport.savedPercentLabel")}
-              heroValue={`${savedPercent}%`}
-              sentence={tRoot("shareExport.sentence", {
-                original: formatBytes(originalSize),
-                compressed: formatBytes(compressedSize),
-                percent: savedPercent,
-              })}
-            />
-          ) : undefined
-        }
-      >
-        {compressedReady ? (
-          <div className="flex flex-col items-center gap-4 px-4 py-8 text-center">
-            <FileArchive size={40} className="text-blue-600 dark:text-blue-400" />
-            <p className="text-sm text-zinc-600 dark:text-zinc-300">
-              {t("aboveFold.compressReady", { size: formatBytes(compressedSize) })}
-            </p>
-            {originalSize > 0 && (
-              <div dir="ltr" className="w-full max-w-xs">
-                <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
-                  <span>{formatBytes(originalSize)}</span>
-                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">-{savedPercent}%</span>
-                  <span>{formatBytes(compressedSize)}</span>
-                </div>
-                <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-                  <div
-                    className="h-full rounded-full bg-blue-600 dark:bg-blue-400"
-                    style={{ width: `${Math.max(4, 100 - savedPercent)}%` }}
-                  />
-                </div>
-              </div>
-            )}
-            <button
-              type="button"
-              onClick={onDownloadZip}
-              className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-            >
-              <Download size={16} />
-              {t("aboveFold.downloadZip")}
-            </button>
-          </div>
-        ) : (
-          <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
-            {t("aboveFold.placeholderCompress")}
-          </p>
-        )}
-      </SectionCard>
-    );
-  }
+  const peak = Math.max(...rows.map((r) => r.size), 1);
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")}>
-      {extractedEntries.length > 0 ? (
-        <ul className="space-y-2">
-          {extractedEntries.map((entry) => (
-            <li
-              key={entry.name}
-              className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800/60"
-            >
-              <FileIcon size={16} className="shrink-0 text-zinc-400" />
-              <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-300">{entry.name}</span>
-              <span dir="ltr" className="shrink-0 text-xs text-zinc-400 dark:text-zinc-500">
-                {formatBytes(entry.size)}
-              </span>
-              <a
-                href={entry.url}
-                download={entry.name}
-                className="shrink-0 rounded-lg p-1.5 text-blue-600 transition hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-500/10"
-                aria-label={t("aboveFold.downloadFile")}
-              >
-                <Download size={14} />
-              </a>
+    <SectionCard
+      title={t("aboveFold.resultTitle")}
+      className="lg:flex lg:h-full lg:flex-col"
+      bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"
+      action={
+        <ZipCompressorShareExportModal
+          inputRows={[{ label: t("shareExport.originalSizeLabel"), value: formatBytes(original) }]}
+          resultRows={[
+            { label: t("shareExport.compressedSizeLabel"), value: formatBytes(compressed) },
+            { label: t("shareExport.savedPercentLabel"), value: `${savedPercent}%` },
+          ]}
+          heroLabel={t("shareExport.savedPercentLabel")}
+          heroValue={`${savedPercent}%`}
+          sentence={t("shareExport.sentence", { original: formatBytes(original), compressed: formatBytes(compressed), percent: savedPercent })}
+        />
+      }
+    >
+      <p dir="ltr" className="text-center font-mono text-2xl font-bold text-blue-700 dark:text-blue-400">
+        {formatBytes(original)} → {formatBytes(compressed)}
+      </p>
+      <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{tr("summary", { files: rows.length, saved: pct(original - compressed, original) })}</p>
+
+      <ul data-preview="visual" data-preview-hero className="mt-4 grid auto-rows-fr gap-2 overflow-auto lg:min-h-0 lg:flex-1 lg:basis-0">
+        {rows.map((r, i) => {
+          const entry = extractedEntries.find((e) => e.name === r.name);
+          return (
+            <li key={r.name} className="flex min-h-36 flex-col rounded-xl bg-zinc-50 px-3 py-2.5 dark:bg-zinc-800/50">
+              <div className="flex items-center gap-2 text-sm">
+                <svg width={10} height={10} aria-hidden="true">
+                  <circle cx={5} cy={5} r={5} className={FILE_FILL[i % FILE_FILL.length]} />
+                </svg>
+                <span dir="ltr" className="min-w-0 flex-1 truncate font-mono font-semibold text-zinc-800 dark:text-zinc-100">
+                  {r.name}
+                </span>
+                <span className="shrink-0 text-xs text-zinc-500 dark:text-zinc-400">{r.method === 8 ? "DEFLATE" : r.method === 0 ? tr("stored") : `#${r.method}`}</span>
+                {entry && (
+                  <a
+                    href={entry.url}
+                    download={entry.name}
+                    aria-label={t("aboveFold.downloadFile")}
+                    className="shrink-0 rounded-md p-1 text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-500/10"
+                  >
+                    <Download size={14} />
+                  </a>
+                )}
+              </div>
+              <svg direction="ltr" viewBox="0 0 300 22" className="mt-1.5 block h-auto w-full" role="img" aria-label={`${formatBytes(r.size)} → ${formatBytes(r.compressed)}`}>
+                <rect x={0} y={1} width={Math.max(2, (r.size / peak) * 300)} height={8} rx={3} className="fill-zinc-300 dark:fill-zinc-600" />
+                <rect x={0} y={12} width={Math.max(2, (r.compressed / peak) * 300)} height={8} rx={3} className={FILE_FILL[i % FILE_FILL.length]} />
+              </svg>
+              <div dir="ltr" className="mt-1 flex justify-between font-mono text-xs text-zinc-500 dark:text-zinc-400">
+                <span>
+                  {formatBytes(r.size)} → {formatBytes(r.compressed)}
+                </span>
+                <span className="font-semibold text-zinc-700 dark:text-zinc-200">{r.size ? `−${f((1 - r.ratio) * 100, 1)}%` : "0%"}</span>
+              </div>
+              <div className="mt-2 flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                <span>{tr("entropy", { e: f(r.entropy, 2) })}</span>
+                <span dir="ltr" className="font-mono">CRC {r.crc32.toString(16).padStart(8, "0").toUpperCase()}</span>
+              </div>
+              <div dir="ltr" className="mt-1 flex min-h-6 flex-1 gap-0.5" title={tr("heat")}>
+                {r.histogram.map((c, k) => (
+                  <div key={k} className="flex-1 rounded-sm bg-blue-600 dark:bg-blue-400" style={{ opacity: c ? 0.12 + 0.88 * (c / Math.max(...r.histogram, 1)) : 0.05 }} />
+                ))}
+              </div>
             </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
-          {t("aboveFold.placeholderExtract")}
-        </p>
+          );
+        })}
+      </ul>
+
+      {mode === "compress" && (
+        <button
+          type="button"
+          onClick={onDownloadZip}
+          className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+        >
+          <Download size={16} />
+          {t("aboveFold.downloadZip")}
+        </button>
       )}
     </SectionCard>
   );

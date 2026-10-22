@@ -6,6 +6,7 @@ import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -31,7 +32,7 @@ export default function RangeVsStdDevComparison() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
@@ -42,7 +43,7 @@ export default function RangeVsStdDevComparison() {
             { label: t("worked.stdDev"), value: `${round2(populationStdDev)}`, note: t("worked.stdDevNote") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -13,6 +13,8 @@ type PdfMergeSplitInputPanelProps = {
   mode: PdfMode;
   onModeChange: (mode: PdfMode) => void;
   mergeFiles: FileEntry[];
+  /** Rows shown before the sample merge set exists (server render, first paint), so the list does not push the page down when it arrives. */
+  pendingMergeNames?: string[];
   onMergeFilesAdd: (files: FileList) => void;
   onMergeFileRemove: (id: string) => void;
   onMergeFileMove: (id: string, direction: "up" | "down") => void;
@@ -29,6 +31,7 @@ export default function PdfMergeSplitInputPanel({
   mode,
   onModeChange,
   mergeFiles,
+  pendingMergeNames,
   onMergeFilesAdd,
   onMergeFileRemove,
   onMergeFileMove,
@@ -101,20 +104,23 @@ export default function PdfMergeSplitInputPanel({
             <span className="text-sm font-medium text-zinc-600 dark:text-zinc-300">{t("form.chooseFiles")}</span>
           </button>
 
-          {mergeFiles.length > 0 && (
+          {(mergeFiles.length > 0 || Boolean(pendingMergeNames?.length)) && (
             <ul className="mt-4 space-y-2">
-              {mergeFiles.map((entry, index) => (
+              {(mergeFiles.length
+                ? mergeFiles.map((entry) => ({ id: entry.id, name: entry.file.name, pending: false }))
+                : (pendingMergeNames ?? []).map((name) => ({ id: name, name, pending: true }))
+              ).map((entry, index, rows) => (
                 <li
                   key={entry.id}
                   className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-800/60"
                 >
                   <GripVertical size={14} className="shrink-0 text-zinc-400" />
                   <span className="min-w-0 flex-1 truncate text-zinc-700 dark:text-zinc-300">
-                    {index + 1}. {entry.file.name}
+                    {index + 1}. {entry.name}
                   </span>
                   <button
                     type="button"
-                    onClick={() => onMergeFileMove(entry.id, "up")}
+                    onClick={entry.pending ? undefined : () => onMergeFileMove(entry.id, "up")}
                     disabled={index === 0}
                     className="rounded px-1 text-zinc-400 hover:text-zinc-700 disabled:opacity-30 dark:hover:text-zinc-200"
                     aria-label={t("form.moveUp")}
@@ -123,8 +129,8 @@ export default function PdfMergeSplitInputPanel({
                   </button>
                   <button
                     type="button"
-                    onClick={() => onMergeFileMove(entry.id, "down")}
-                    disabled={index === mergeFiles.length - 1}
+                    onClick={entry.pending ? undefined : () => onMergeFileMove(entry.id, "down")}
+                    disabled={index === rows.length - 1}
                     className="rounded px-1 text-zinc-400 hover:text-zinc-700 disabled:opacity-30 dark:hover:text-zinc-200"
                     aria-label={t("form.moveDown")}
                   >
@@ -132,7 +138,7 @@ export default function PdfMergeSplitInputPanel({
                   </button>
                   <button
                     type="button"
-                    onClick={() => onMergeFileRemove(entry.id)}
+                    onClick={entry.pending ? undefined : () => onMergeFileRemove(entry.id)}
                     className="rounded px-1 text-red-500 hover:text-red-700"
                     aria-label={t("form.remove")}
                   >

@@ -9,6 +9,8 @@ type SemiGaugeProps = {
   ticks: { value: number; label: string }[];
   ariaLabel: string;
   testId?: string;
+  /** Fill a narrow card's width (up to 300px) instead of the fixed 240px, for a gauge alone in a card. */
+  wide?: boolean;
 };
 
 const W = 240;
@@ -18,7 +20,7 @@ const CX = W / 2;
 const CY = 120;
 
 /** A half-circle gauge (§31 type 8) with coloured zones and a needle; numbers are always LTR. */
-export default function SemiGauge({ value, min = 0, max, zones, ticks, ariaLabel, testId }: SemiGaugeProps) {
+export default function SemiGauge({ value, min = 0, max, zones, ticks, ariaLabel, testId, wide }: SemiGaugeProps) {
   const polar = (v: number, r = R) => {
     const a = Math.PI * (1 - Math.min(1, Math.max(0, (v - min) / (max - min))));
     return [CX + r * Math.cos(a), CY - r * Math.sin(a)];
@@ -30,7 +32,7 @@ export default function SemiGauge({ value, min = 0, max, zones, ticks, ariaLabel
   };
   const [nx, ny] = polar(value, R - 18);
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={ariaLabel} data-testid={testId}>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} overflow="visible" role="img" aria-label={ariaLabel} data-testid={testId} className={wide ? "h-auto w-full max-w-[300px]" : undefined}>
       {zones.map((z, i) => (
         <path key={z.to} d={arc(i === 0 ? min : zones[i - 1].to, z.to)} fill="none" strokeWidth={18} className={z.className} />
       ))}
@@ -39,7 +41,7 @@ export default function SemiGauge({ value, min = 0, max, zones, ticks, ariaLabel
       {ticks.map((tk) => {
         const [x, y] = polar(tk.value, R + 14);
         return (
-          <text key={tk.value} x={x} y={y} textAnchor="middle" className="fill-zinc-400 font-mono text-[9px]">
+          <text key={tk.value} x={x} y={y} textAnchor="middle" className={`fill-zinc-400 font-mono ${wide ? "text-[10px]" : "text-[9px]"}`}>
             {tk.label}
           </text>
         );

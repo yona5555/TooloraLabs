@@ -43,7 +43,8 @@ function escapeQrField(value: string): string {
   return value.replace(/([\\;,:])/g, "\\$1");
 }
 
-function buildPayload(input: QRCodeGeneratorInput): string {
+/** The exact string encoded into the symbol for each content type (Wi-Fi, vCard, mailto, SMSTO, raw text). */
+export function buildQRPayload(input: QRCodeGeneratorInput): string {
   switch (input.contentType) {
     case "url":
     case "text":
@@ -92,7 +93,7 @@ export class QRCodeGenerator extends BaseTool<QRCodeGeneratorInput, QRCodeGenera
   };
 
   async execute(input: QRCodeGeneratorInput, _context: ToolContext): Promise<ToolResult<QRCodeGeneratorOutput>> {
-    const payload = buildPayload(input);
+    const payload = buildQRPayload(input);
 
     if (!payload || !payload.trim()) {
       return {

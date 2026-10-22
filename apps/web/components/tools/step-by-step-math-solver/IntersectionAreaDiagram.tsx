@@ -8,6 +8,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, evalPoly, fmt } from "./mathSolverEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const LIGHT = { lhs: "#2563eb", rhs: "#dc2626", fill: "#9333ea" };
 const DARK = { lhs: "#60a5fa", rhs: "#f87171", fill: "#c084fc" };
@@ -56,7 +57,7 @@ export default function IntersectionAreaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: domain, y: [-14, 14] }} height={230} pan={false} zoom={false} preserveAspectRatio={false}>
@@ -76,7 +77,7 @@ export default function IntersectionAreaDiagram() {
             { label: t("worked.gap"), value: fmt(Math.abs(lhsFn(ex) - rhsFn(ex))), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

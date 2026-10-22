@@ -138,13 +138,15 @@ export const tools: Tool[] = [
     title: "Weather Forecast",
     category: "weather",
     description:
-      "Current conditions and a 7-day forecast for major world cities or any city you search, with temperature, humidity, wind, and precipitation chance.",
+      "Live weather for major world and Arab cities: current conditions, a 48-hour hourly chart and up to a 10-day forecast from MET Norway, plus a world map of recent earthquakes and natural events.",
     featured: true,
     keywords: [
       "weather",
       "forecast",
       "temperature",
-      "7-day forecast",
+      "10-day forecast",
+      "hourly forecast",
+      "earthquake map",
       "humidity",
       "wind speed",
       "weather forecast",
@@ -906,36 +908,6 @@ export const tools: Tool[] = [
     ],
   },
   {
-    slug: "dice-roller",
-    title: "Dice Roller",
-    category: "fun-entertainment",
-    description:
-      "Roll customizable virtual dice (d4, d6, d8, d10, d12, d20) with a roll history log.",
-    featured: false,
-    keywords: [
-      "dice roller",
-      "roll a dice",
-      "virtual dice",
-      "d20 roller",
-      "online dice simulator",
-    ],
-  },
-  {
-    slug: "love-calculator",
-    title: "Love Calculator",
-    category: "fun-entertainment",
-    description:
-      "A fun, name-based compatibility percentage calculator. For entertainment purposes only.",
-    featured: false,
-    keywords: [
-      "love calculator",
-      "love percentage calculator",
-      "name compatibility test",
-      "relationship compatibility calculator",
-      "fun love test",
-    ],
-  },
-  {
     slug: "fuel-cost-calculator",
     title: "Fuel Cost Calculator",
     category: "business-finance",
@@ -1362,21 +1334,6 @@ export const tools: Tool[] = [
       "font generator",
       "stylish text generator",
       "unicode text generator",
-    ],
-  },
-  {
-    slug: "random-quote-generator",
-    title: "Random Quote Generator",
-    category: "fun-entertainment",
-    description:
-      "Displays a random quote from a curated, documented-source collection spanning motivational, literary, and philosophical categories.",
-    featured: false,
-    keywords: [
-      "random quote generator",
-      "quote of the day",
-      "inspirational quotes",
-      "famous quotes generator",
-      "motivational quote generator",
     ],
   },
   {

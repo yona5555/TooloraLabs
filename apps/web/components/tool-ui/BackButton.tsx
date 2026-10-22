@@ -3,15 +3,21 @@ import { Link } from "@/i18n/navigation";
 
 /**
  * The one shared back-navigation control for every page on the site — see
- * TooloraLabs-Claude-Instructions.md §35. Icon only, no visible text label
- * (the destination label is exposed to assistive tech only, via
- * `aria-label`/`title`). Always sits immediately beside the page's own
- * title via a `flex items-center gap-*` row — flexbox already reorders
- * correctly under `dir="rtl"` with no manual left/right positioning, so
- * the same markup mirrors correctly for Arabic and any future RTL locale
- * without special-casing. The arrow glyph itself also flips
- * (`rtl:rotate-180`) so it still visually points toward "back" (the
+ * TooloraLabs-Claude-Instructions.md §35. Always sits immediately beside the
+ * page's own title via a `flex items-center gap-*` row — flexbox already
+ * reorders correctly under `dir="rtl"` with no manual left/right
+ * positioning, so the same markup mirrors correctly for Arabic and any
+ * future RTL locale without special-casing. The arrow glyph itself also
+ * flips (`rtl:rotate-180`) so it still visually points toward "back" (the
  * reading-direction-start edge) in RTL, not literally left.
+ *
+ * Two variants:
+ * - "icon" (default): icon only, no visible text label (the destination
+ *   label is exposed to assistive tech only, via `aria-label`/`title`).
+ * - "labeled": a prominent pill — border, background, arrow and a visible
+ *   `text` (e.g. "Back"), with hover and visible keyboard-focus states.
+ *   `label` (the destination) stays available as the hover tooltip.
+ *   Switching a page over is one prop: `variant="labeled" text={...}`.
  *
  * This is deliberate in-site navigation to a specific parent page (tool →
  * its category, category → home, doc → docs index, etc.) — never the
@@ -23,9 +29,24 @@ type BackButtonProps = {
   label: string;
   className?: string;
   size?: number;
+  variant?: "icon" | "labeled";
+  /** Visible text for the "labeled" variant; falls back to `label`. */
+  text?: string;
 };
 
-export default function BackButton({ href, label, className = "", size = 20 }: BackButtonProps) {
+export default function BackButton({ href, label, className = "", size = 20, variant = "icon", text }: BackButtonProps) {
+  if (variant === "labeled") {
+    return (
+      <Link
+        href={href}
+        title={label}
+        className={`inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-zinc-300 bg-white px-4 text-sm font-semibold text-zinc-700 shadow-sm transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-blue-500 dark:hover:bg-blue-500/10 dark:hover:text-blue-300 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-zinc-950 ${className}`}
+      >
+        <ArrowLeft size={size} className="shrink-0 rtl:rotate-180" />
+        <span>{text ?? label}</span>
+      </Link>
+    );
+  }
   return (
     <Link
       href={href}

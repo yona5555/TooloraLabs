@@ -1,62 +1,98 @@
+"use client";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { SpeechWordCountOutput } from "./types";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import CopyButton from "@/components/tool-ui/CopyButton";
 import SpeechWordCountShareExportModal from "./SpeechWordCountShareExportModal";
+import PaceRings from "./PaceRings";
+import { SPEECH_PACE_PRESETS } from "./types";
+import { useSwLive } from "./SwLiveContext";
 
-type Props = {
-  result: SpeechWordCountOutput;
-  digitStyle: DigitStyle;
-  wordsPerMinute: number;
-};
+type Row = { key: string; label: string; value: string; note?: string; strong?: boolean };
 
-export default function SWResult({ result, digitStyle, wordsPerMinute }: Props) {
-  const t = useTranslations("tools.speech-word-count-calculator.result");
-  const tRoot = useTranslations("tools.speech-word-count-calculator");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle);
+export default function SWResult() {
+  const t = useTranslations("tools.speech-word-count-calculator");
+  const tl = useTranslations("tools.speech-word-count-calculator.live.table");
+  const { result, ok, wpm, preset, sentences, paragraphs, secondsFor, f, clock, timeLabel } = useSwLive();
 
-  if (result.error) {
-    const messageKey = result.error === "empty-text" ? "emptyText" : "invalidRate";
+  if (!ok) {
     return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(messageKey)}</p>
-        </div>
-      </div>
+      <SectionCard title={t("result.heading")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col lg:justify-center">
+        <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm leading-6 text-zinc-600 dark:border-zinc-700 dark:text-zinc-300">
+          {t(result.error === "empty-text" ? "result.emptyText" : "result.invalidRate")}
+        </p>
+      </SectionCard>
     );
   }
 
-  const timeLabel =
-    result.minutes > 0
-      ? t("timeMinutesSeconds", { minutes: fmt(result.minutes), seconds: fmt(result.seconds) })
-      : t("timeSecondsOnly", { seconds: fmt(result.seconds) });
+  const label = timeLabel(result.totalSeconds);
+  const words = result.wordCount;
+  const longest = sentences.reduce((b, s) => (s.words > (b?.words ?? -1) ? s : b), sentences[0]);
+  const rows: Row[] = [
+    { key: "time", label: t("result.heading"), value: label, strong: true, note: tl("clockNote", { clock: clock(result.totalSeconds) }) },
+    { key: "words", label: t("result.wordCountLabel"), value: f(words), note: tl("wordsNote") },
+    { key: "wpm", label: t("form.paceLabel"), value: tl("wpmValue", { wpm: f(wpm) }), note: t(`form.presets.${preset}`) },
+    { key: "seconds", label: tl("totalSeconds"), value: f(result.totalSeconds), note: tl("totalSecondsNote") },
+    { key: "minutes", label: tl("decimalMinutes"), value: f(words / wpm, 2), note: `${f(words)} ÷ ${f(wpm)}` },
+    { key: "wps", label: tl("wordsPerSecond"), value: f(wpm / 60, 2), note: `${f(wpm)} ÷ ${f(60)}` },
+    { key: "sentences", label: tl("sentences"), value: f(sentences.length), note: tl("perSentence", { s: f(sentences.length ? secondsFor(words) / sentences.length : 0) }) },
+    { key: "paragraphs", label: tl("paragraphs"), value: f(paragraphs.length), note: tl("perParagraph", { clock: clock(paragraphs.length ? secondsFor(words) / paragraphs.length : 0) }) },
+    {
+      key: "longest",
+      label: tl("longestSentence"),
+      value: tl("secondsValue", { s: f(longest ? secondsFor(longest.words) : 0) }),
+      note: longest ? tl("sentenceN", { n: f(longest.index + 1), words: f(longest.words) }) : undefined,
+    },
+    {
+      key: "range",
+      label: tl("presetRange"),
+      value: `${clock(secondsFor(words, SPEECH_PACE_PRESETS.fast))} – ${clock(secondsFor(words, SPEECH_PACE_PRESETS.formal))}`,
+      note: tl("presetRangeNote", { fast: f(SPEECH_PACE_PRESETS.fast), formal: f(SPEECH_PACE_PRESETS.formal) }),
+    },
+  ];
+  const summaryText = rows.map((r) => `${r.label}: ${r.value}`).join("\n");
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{t("heading")}</h2>
-        <SpeechWordCountShareExportModal
-          inputRows={[
-            { label: tRoot("shareExport.wordCountLabel"), value: String(fmt(result.wordCount)) },
-            { label: tRoot("shareExport.paceLabel"), value: `${wordsPerMinute} WPM` },
-          ]}
-          resultRows={[{ label: t("heading"), value: timeLabel }]}
-          heroLabel={t("heading")}
-          heroValue={timeLabel}
-          sentence={tRoot("shareExport.sentence", { words: result.wordCount, wpm: wordsPerMinute, time: timeLabel })}
-        />
+    <SectionCard
+      title={t("result.heading")}
+      className="lg:flex lg:h-full lg:flex-col"
+      bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"
+      action={
+        <div className="flex items-center gap-2">
+          <CopyButton text={summaryText} />
+          <SpeechWordCountShareExportModal
+            inputRows={[
+              { label: t("shareExport.wordCountLabel"), value: f(words) },
+              { label: t("shareExport.paceLabel"), value: `${wpm} WPM` },
+            ]}
+            resultRows={rows.map((r) => ({ label: r.label, value: r.value }))}
+            heroLabel={t("result.heading")}
+            heroValue={label}
+            sentence={t("shareExport.sentence", { words, wpm, time: label })}
+          />
+        </div>
+      }
+    >
+      <div className="flex flex-col gap-4 lg:flex-1 lg:flex-col-reverse">
+        <table className="min-w-0 flex-1 border-collapse text-sm">
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.key} className="border-b border-zinc-200 last:border-0 dark:border-zinc-700/70">
+                <th scope="row" className="py-1.5 pe-2 text-start align-top font-medium text-zinc-600 dark:text-zinc-300">
+                  {r.label}
+                  {r.note && <span className="block text-[11px] font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
+                </th>
+                <td
+                  dir={r.strong || r.key === "wpm" || r.key === "longest" ? "auto" : "ltr"}
+                  className={`py-1.5 text-end align-top font-semibold tabular-nums ${r.strong ? "text-lg text-blue-700 dark:text-blue-400" : "font-mono text-zinc-900 dark:text-zinc-100"}`}
+                >
+                  {r.value}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <PaceRings />
       </div>
-      <div className="p-4 lg:p-6">
-        <p className="text-center font-mono text-3xl font-bold text-blue-700 dark:text-blue-300">{timeLabel}</p>
-        <ul className="mt-5 space-y-1.5 border-t border-zinc-100 pt-4 text-sm dark:border-zinc-800">
-          <li className="flex items-center justify-between gap-3">
-            <span className="text-zinc-500 dark:text-zinc-400">{t("wordCountLabel")}</span>
-            <span className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{fmt(result.wordCount)}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </SectionCard>
   );
 }

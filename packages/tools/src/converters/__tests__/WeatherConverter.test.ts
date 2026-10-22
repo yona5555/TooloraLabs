@@ -6,7 +6,13 @@ import {
   kmhToMph,
   mphToKmh,
   convertWindSpeed,
-  getWeatherCategory,
+  msToKmh,
+  hpaToInHg,
+  mmToInches,
+  weatherTemp,
+  metSymbolCategory,
+  isNightSymbol,
+  precipitationKind,
 } from "../WeatherConverter";
 
 describe("celsiusToFahrenheit / fahrenheitToCelsius", () => {
@@ -55,33 +61,49 @@ describe("convertWindSpeed", () => {
   });
 });
 
-describe("getWeatherCategory", () => {
-  it("maps clear-sky and cloud codes", () => {
-    expect(getWeatherCategory(0)).toBe("clearSky");
-    expect(getWeatherCategory(1)).toBe("mainlyClear");
-    expect(getWeatherCategory(2)).toBe("partlyCloudy");
-    expect(getWeatherCategory(3)).toBe("overcast");
+describe("MET Norway unit helpers", () => {
+  it("converts m/s, hPa and mm", () => {
+    expect(msToKmh(10)).toBeCloseTo(36, 6);
+    expect(hpaToInHg(1013.25)).toBeCloseTo(29.92, 2);
+    expect(mmToInches(25.4)).toBeCloseTo(1, 6);
+    expect(msToKmh(NaN)).toBe(0);
   });
 
-  it("maps fog codes", () => {
-    expect(getWeatherCategory(45)).toBe("fog");
-    expect(getWeatherCategory(48)).toBe("fog");
+  it("switches temperature by unit system", () => {
+    expect(weatherTemp(100, "us")).toBeCloseTo(212, 6);
+    expect(weatherTemp(21, "metric")).toBe(21);
+  });
+});
+
+describe("metSymbolCategory", () => {
+  it("maps cloud and clear symbols with day/night suffixes", () => {
+    expect(metSymbolCategory("clearsky_day")).toBe("clearSky");
+    expect(metSymbolCategory("fair_night")).toBe("fair");
+    expect(metSymbolCategory("partlycloudy_polartwilight")).toBe("partlyCloudy");
+    expect(metSymbolCategory("cloudy")).toBe("cloudy");
+    expect(metSymbolCategory("fog")).toBe("fog");
   });
 
-  it("maps precipitation codes", () => {
-    expect(getWeatherCategory(61)).toBe("rain");
-    expect(getWeatherCategory(71)).toBe("snow");
-    expect(getWeatherCategory(80)).toBe("rainShowers");
-    expect(getWeatherCategory(85)).toBe("snowShowers");
+  it("maps precipitation and thunder symbols", () => {
+    expect(metSymbolCategory("lightrain")).toBe("lightRain");
+    expect(metSymbolCategory("heavyrain")).toBe("heavyRain");
+    expect(metSymbolCategory("rainshowers_day")).toBe("rainShowers");
+    expect(metSymbolCategory("heavysleetshowers_night")).toBe("sleet");
+    expect(metSymbolCategory("lightsnow")).toBe("snow");
+    expect(metSymbolCategory("snowshowers_day")).toBe("snowShowers");
+    expect(metSymbolCategory("heavyrainshowersandthunder_day")).toBe("thunderstorm");
   });
 
-  it("maps thunderstorm codes", () => {
-    expect(getWeatherCategory(95)).toBe("thunderstorm");
-    expect(getWeatherCategory(96)).toBe("thunderstormHail");
-    expect(getWeatherCategory(99)).toBe("thunderstormHail");
+  it("returns unknown for missing or unrecognized symbols", () => {
+    expect(metSymbolCategory(undefined)).toBe("unknown");
+    expect(metSymbolCategory("volcanic_ash")).toBe("unknown");
   });
 
-  it("returns unknown for an unrecognized code", () => {
-    expect(getWeatherCategory(12345)).toBe("unknown");
+  it("detects night symbols and precipitation kinds", () => {
+    expect(isNightSymbol("clearsky_night")).toBe(true);
+    expect(isNightSymbol("clearsky_day")).toBe(false);
+    expect(precipitationKind("snowShowers")).toBe("snow");
+    expect(precipitationKind("thunderstorm")).toBe("rain");
+    expect(precipitationKind("fair")).toBeNull();
   });
 });

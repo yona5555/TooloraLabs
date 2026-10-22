@@ -19,16 +19,17 @@ describe("PregnancyCalculator", () => {
     expect(r.data.daysUntilDue).toBe(280);
   });
 
-  it("reports trimester 2 starting at week 13", () => {
-    const r = calc.execute({ lastPeriodDate: "2026-01-01", referenceDate: "2026-04-02" }, context); // 91 days = 13 weeks
-    expect(r.data.gestationalAgeWeeks).toBe(13);
-    expect(r.data.trimester).toBe(2);
-  });
-
-  it("reports trimester 3 starting at week 27", () => {
-    const r = calc.execute({ lastPeriodDate: "2026-01-01", referenceDate: "2026-07-09" }, context); // 189 days = 27 weeks
-    expect(r.data.gestationalAgeWeeks).toBe(27);
-    expect(r.data.trimester).toBe(3);
+  // ACOG: 1st 0w0d–13w6d, 2nd 14w0d–27w6d, 3rd 28w0d onwards (LMP 2026-01-01).
+  it.each([
+    ["2026-04-08", 13, 6, 1], // day 97
+    ["2026-04-09", 14, 0, 2], // day 98
+    ["2026-07-15", 27, 6, 2], // day 195
+    ["2026-07-16", 28, 0, 3], // day 196
+  ])("on %s (%iw%id) reports trimester %i", (referenceDate, weeks, days, trimester) => {
+    const r = calc.execute({ lastPeriodDate: "2026-01-01", referenceDate }, context);
+    expect(r.data.gestationalAgeWeeks).toBe(weeks);
+    expect(r.data.gestationalAgeDays).toBe(days);
+    expect(r.data.trimester).toBe(trimester);
   });
 
   it("returns a size-comparison milestone once past week 4", () => {

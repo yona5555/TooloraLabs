@@ -55,7 +55,7 @@ export function CircleSolveSteps() {
       <div className="flex items-end gap-2">
         {steps.map((s, i) => (
           <div key={s.field} className={`flex min-w-0 flex-1 flex-col justify-end rounded-xl border-2 p-2 ${colors[i]}`} style={{ height: 88 + i * 34 }}>
-            <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
+            <span className="text-[11px] font-semibold hyphens-auto text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
             <span dir="ltr" className="truncate font-mono text-[10px] text-zinc-500 dark:text-zinc-400">{s.formula}</span>
             <span dir="ltr" className="truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{f(s.value)}</span>
           </div>
@@ -227,7 +227,7 @@ export function CircleAreaBars() {
               <span className="mb-1 truncate text-center font-mono text-[11px] font-bold text-zinc-800 dark:text-zinc-100">{f(b.v, 2)}</span>
               <div className={`rounded-t-md bg-gradient-to-t ${b.cls} transition-all duration-500`} style={{ height: `${(b.v / q.circumscribedArea) * 100}%` }} />
             </div>
-            <span className="mt-1 text-center text-[10px] leading-tight text-zinc-500 dark:text-zinc-400">{b.key === "circle" ? tf("area") : t(`bars.${b.key}`)}</span>
+            <span className="mt-1 hyphens-auto text-center text-[10px] leading-tight text-zinc-500 dark:text-zinc-400">{b.key === "circle" ? tf("area") : t(`bars.${b.key}`)}</span>
           </div>
         ))}
       </div>

@@ -4,14 +4,23 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import MacroCarbGauge from "./MacroCarbGauge";
-import MacroGoalComparisonChart from "./MacroGoalComparisonChart";
+import {
+  MacroAmdrCard,
+  MacroCaloriesStackCard,
+  MacroFlowCard,
+  MacroFoodsCard,
+  MacroMealsCard,
+  MacroMixerCard,
+  MacroProteinGaugeCard,
+  MacroSensitivityCard,
+} from "./MacroCards";
 
 type ExampleRow = { calculation: string; result: string };
 type GoalItem = { title: string; description: string };
 
 export default async function MacroEducation() {
   const t = await getTranslations("tools.macro-calculator.education");
+  const tTool = await getTranslations("tools.macro-calculator");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const goalItems = t.raw("goals.items") as GoalItem[];
@@ -20,11 +29,20 @@ export default async function MacroEducation() {
 
   return (
     <EncyclopediaPaper>
-      <MacroCarbGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <MacroMixerCard side="visual-left" />
+        <MacroCaloriesStackCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <MacroAmdrCard side="visual-left" />
+          <MacroProteinGaugeCard side="table-left" />
+          <MacroMealsCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("goals.title")}>
@@ -37,7 +55,11 @@ export default async function MacroEducation() {
             </div>
           ))}
         </div>
-        <MacroGoalComparisonChart />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <MacroSensitivityCard side="table-left" />
+          <MacroFlowCard side="visual-left" />
+          <MacroFoodsCard side="table-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -97,6 +119,13 @@ export default async function MacroEducation() {
         >
           {t("references.readOriginal")}
         </a>
+      </InfoSection>
+
+      <InfoSection id="notices" title={tTool("visuals.notices.title")}>
+        <ul className="list-disc space-y-3 ps-5 text-sm leading-6 opacity-80">
+          <li>{tTool("disclaimer")}</li>
+          <li>{tTool("visuals.notices.assumptions")}</li>
+        </ul>
       </InfoSection>
     </EncyclopediaPaper>
   );

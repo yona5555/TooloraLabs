@@ -7,6 +7,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { REFERENCE_TRIANGLES, classifyByAngle } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const round = (n: number) => Math.round(n * 10) / 10;
 
@@ -34,7 +35,7 @@ export default function TriangleAngleReferenceDrag() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div
           dir="ltr"
           className="triangle-mafs w-full shrink-0 overflow-hidden rounded-xl lg:w-[340px]"
@@ -55,7 +56,7 @@ export default function TriangleAngleReferenceDrag() {
             { label: tw("nearest"), value: tRef(nearest.key), emphasize: true, note: tw("nearestNote", { angle: Math.round(nearest.largestAngle) }) },
           ]}
         />
-      </div>
+      </GapFreeRow>
       <TriangleSinCosLiveCurve angles={[{ label: "θ", deg: currentAngle }]} />
       <div className="mt-4 flex flex-wrap justify-center gap-2">
         {REFERENCE_TRIANGLES.map((ref) => (

@@ -5,14 +5,23 @@ Keep this file short to save credits.
 Read `docs/RULES-SUMMARY.md` (compact, always applies) for the project basics, visual rules §37–44,
 and standing lessons. Read a specific section of TooloraLabs-Claude-Instructions.md only when a task
 needs it; never load the whole file. Same for ROADMAP.md and docs/claude/full-project-handbook.md.
-Auto-loaded from .claude/rules/ on top of this: working-with-yousef.md (always), and visuals.md /
-i18n.md / packages.md / testing.md / live-data.md (path-triggered — see each file's own header).
+Auto-loaded from .claude/rules/ on top of this: working-with-yousef.md, core-principles.md and
+financial-neutrality.md (always), and visuals.md / i18n.md / packages.md / testing.md / live-data.md /
+category-order.md / print-export.md (path-triggered — see each file's own header).
+On demand: docs/ARCHITECTURE.md — Mermaid architecture diagram + pending architecture notes.
+TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules are this file and .claude/rules/. Never read it (~216 KB) or ROADMAP.md in full: grep -n '^## ' then read only the needed section.
+
+## قواعد لا تُخالَف
+- Never report a result you did not verify with a test or measurement.
+- Never regenerate or overwrite approved work in bulk; change only what is broken, one item at a time. (Tool-card previews: approved images are locked in `apps/web/public/tool-previews/approved.json`; `npm run previews -- <slug>` skips them, `--force <slug>` redoes one; `npm run test:cards` checks the served cards.)
+- Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
+- Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
 
 ## Hard rules
 - Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.
 - If a request is ambiguous, state your understanding in one line and wait. Never re-ask something already answered.
 - Explain every terminal command in one sentence; translate terminal options to Arabic and give the option number.
-- Never claim "done" for a visual change without real screenshots (light, dark, Arabic RTL). One final screenshot pass only.
+- Never take or review screenshots (no Playwright screenshots, no image review), to save quota. Yousef reviews pages himself in the browser. At the end of any visual task, give him the list of page URLs to review (e.g. http://localhost:3001/ar/tools/<slug>). Reading values from the DOM via Playwright is still allowed when needed.
 - If you cannot find what was asked for, say so plainly; never invent a fix. Apply a general rule to every element, no exceptions.
 - git pull before work; commit + push after each finished part; verify CI silently. No force push, no reset --hard.
 - Before each commit, once: lint, tsc, tests, build.

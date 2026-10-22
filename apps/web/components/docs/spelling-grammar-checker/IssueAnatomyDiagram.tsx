@@ -7,8 +7,7 @@ type Props = {
 
 /**
  * A detected issue is one small record with several fields (type, message,
- * position, original text, suggested fix) — this shows that shape directly,
- * the same layout used for the Random Quote Generator's quote anatomy.
+ * position, original text, suggested fix) — this shows that shape directly.
  */
 export default function IssueAnatomyDiagram({ fields, caption }: Props) {
   return (

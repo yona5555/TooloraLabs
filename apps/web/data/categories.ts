@@ -5,7 +5,7 @@ export type Category = {
   icon: string;
 };
 
-export const categories: Category[] = [
+const categoryList: Category[] = [
   {
     slug: "financial-calculators",
     title: "Finance",
@@ -91,12 +91,6 @@ export const categories: Category[] = [
     icon: "calendar-clock",
   },
   {
-    slug: "fun-entertainment",
-    title: "Fun & Entertainment",
-    description: "Dice, games, and playful calculators for entertainment purposes only.",
-    icon: "party-popper",
-  },
-  {
     slug: "weather",
     title: "Weather",
     description: "Current conditions and forecasts for cities around the world.",
@@ -133,3 +127,34 @@ export const categories: Category[] = [
     icon: "axis-3d",
   },
 ];
+
+/**
+ * The one site-wide order of the sections (see .claude/rules/category-order.md). Every page, menu and
+ * listing reads `categories` below, so changing the order means editing this list only.
+ * Sections not listed here (the planned, still-empty ones) follow in their original order.
+ */
+export const CATEGORY_ORDER = [
+  "math",
+  "financial-markets",
+  "physics",
+  "chemistry",
+  "health-fitness",
+  "financial-calculators",
+  "business-finance",
+  "student-productivity",
+  "text-tools",
+  "date-time",
+  "weather",
+  "ai-tools",
+  "developer-tools",
+  "file-tools",
+  "converters",
+] as const;
+
+const rank = (slug: string) => {
+  const i = (CATEGORY_ORDER as readonly string[]).indexOf(slug);
+  return i === -1 ? CATEGORY_ORDER.length + categoryList.findIndex((c) => c.slug === slug) : i;
+};
+
+export const categories: Category[] = [...categoryList].sort((a, b) => rank(a.slug) - rank(b.slug));
+

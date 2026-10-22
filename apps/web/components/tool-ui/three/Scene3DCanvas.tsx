@@ -4,6 +4,8 @@ import { useEffect, type ReactNode } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { usePalette3D } from "./theme3d";
+import PreviewReady from "./PreviewReady";
+import FitContent from "./FitContent";
 
 export type Scene3DCanvasProps = {
   children: ReactNode;
@@ -51,6 +53,8 @@ export default function Scene3DCanvas({
       <directionalLight position={[-6, 4, -4]} intensity={0.35} />
       {fitWidth ? <FitWidth /> : null}
       {children}
+      <FitContent />
+      <PreviewReady />
       <OrbitControls
         makeDefault
         enablePan={false}

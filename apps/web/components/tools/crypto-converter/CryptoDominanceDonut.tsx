@@ -44,8 +44,8 @@ export default function CryptoDominanceDonut({ stats, fromCoin, toCoin, digitSty
 
       <div className="@container mt-4">
        <div className="flex flex-col gap-4 @xl:flex-row @xl:items-center">
-        <div className="flex shrink-0 flex-col items-center gap-2">
-          <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("heading")} data-testid="dominance-donut">
+        <div className="flex shrink-0 items-center gap-5">
+          <svg className="shrink-0" width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={t("heading")} data-testid="dominance-donut">
             {rings.map((r, i) => {
               const radius = SIZE / 2 - STROKE / 2 - i * (STROKE + GAP);
               const circ = 2 * Math.PI * radius;
@@ -72,7 +72,7 @@ export default function CryptoDominanceDonut({ stats, fromCoin, toCoin, digitSty
               BTC
             </text>
           </svg>
-          <ul className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-[11px] text-zinc-600 dark:text-zinc-300">
+          <ul className="flex min-w-0 flex-1 flex-col justify-between gap-1 self-stretch py-3 text-xs text-zinc-600 dark:text-zinc-300">
             {rings.map((r) => (
               <li key={r.key} className="flex items-center gap-1">
                 <span className={`h-2 w-2 shrink-0 rounded-full ${r.dot}`} />

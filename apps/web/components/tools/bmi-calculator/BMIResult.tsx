@@ -1,12 +1,19 @@
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
 import { mapBMIToResultLevel } from "@/lib/calculators/mappers/bmi";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import BMIBodyFatGauge from "./BMIBodyFatGauge";
-import BMIScaleChart from "./BMIScaleChart";
+import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import Scene3D from "@/components/tool-ui/three/Scene3D";
 import BMIShareExportModal from "./BMIShareExportModal";
+import { BMI_MID, WHO_CUTS, weightAt, whoOf } from "./who";
 import type { BMIExtendedResult, UnitSystem } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
+
+// three/drei live only in this dynamically imported chunk, never in the page chunk.
+const BMIFigureScene3D = dynamic(() => import("./BMIFigureScene3D"), { ssr: false });
 
 interface BMIResultProps {
   result: BMIExtendedResult;
@@ -19,6 +26,8 @@ interface BMIResultProps {
   weightLb: string;
   age: string;
   gender: Gender;
+  /** Page mode: the table fills the stretched Result column (§27). Off in the embed. */
+  fill?: boolean;
 }
 
 const NUM = { minimumFractionDigits: 1, maximumFractionDigits: 1 };
@@ -41,24 +50,33 @@ export default function BMIResult({
   weightLb,
   age,
   gender,
+  fill = false,
 }: BMIResultProps) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.bmi-calculator");
+  const tv = useTranslations("tools.bmi-calculator.visuals");
 
   const level = mapBMIToResultLevel(result.category);
   const fmt = (n: number, opts = NUM) => formatLocalizedNumber(n, digitStyle, opts);
+  const f2 = (n: number) => fmt(n, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   const bmiText = fmt(result.bmi);
   const minWeightText = fmt(result.healthyMinWeight);
   const maxWeightText = fmt(result.healthyMaxWeight);
-  const bmiPrimeText = fmt(result.bmi / 25, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const bmiPrimeText = f2(result.bmi / 25);
   const ponderalText = fmt(result.ponderalIndex);
   const bodyFatText = fmt(result.bodyFatEstimate);
+  const who = whoOf(result.bmi);
+  const whoName = tv(`who.${who.key}`);
+  const hM = f2(result.heightCm / 100);
+  const kg = t("aboveFold.kgUnit");
 
-  let target: { labelKey: "toTargetLoseLabel" | "toTargetGainLabel"; amount: string } | null = null;
+  let target: { labelKey: "toTargetLoseLabel" | "toTargetGainLabel"; amount: number } | null = null;
   if (result.bmi < 18.5) {
-    target = { labelKey: "toTargetGainLabel", amount: fmt(result.healthyMinWeight - result.weightKg) };
+    target = { labelKey: "toTargetGainLabel", amount: result.healthyMinWeight - result.weightKg };
   } else if (result.bmi > 24.9) {
-    target = { labelKey: "toTargetLoseLabel", amount: fmt(result.weightKg - result.healthyMaxWeight) };
+    target = { labelKey: "toTargetLoseLabel", amount: result.weightKg - result.healthyMaxWeight };
   }
 
   const pdfInputs =
@@ -80,17 +98,86 @@ export default function BMIResult({
   const pdfResults = [
     { label: "BMI", value: bmiText },
     { label: t("aboveFold.categoryLabel"), value: t(`levels.${level}.title`) },
-    { label: t("aboveFold.healthyRangeLabel"), value: `${minWeightText}–${maxWeightText} ${t("aboveFold.kgUnit")}` },
+    { label: t("aboveFold.healthyRangeLabel"), value: `${minWeightText}–${maxWeightText} ${kg}` },
     { label: t("aboveFold.bmiPrimeLabel"), value: bmiPrimeText },
     { label: t("aboveFold.ponderalLabel"), value: ponderalText },
     { label: t("aboveFold.bodyFatLabel"), value: `${bodyFatText}%` },
   ];
 
   const sentence = t("aboveFold.sentence", { bmi: bmiText, category: t(`levels.${level}.title`) });
+  const ageNum = Number(age) || 0;
+  const sex = gender === "male" ? 1 : 0;
+
+  const groups: LiveTableGroup[] = [
+    {
+      title: tv("result.groupInputs"),
+      rows: [
+        { label: tv("result.height"), formula: "h", value: fmt(result.heightCm), unit: "cm" },
+        { label: tv("result.weight"), formula: "w", value: fmt(result.weightKg), unit: kg },
+        { label: t("form.agePlaceholder"), formula: tv("result.given"), value: String(ageNum) },
+        { label: t("form.genderLabel"), formula: tv("result.given"), value: gender === "male" ? t("form.genderMale") : t("form.genderFemale") },
+      ],
+    },
+    {
+      title: tv("result.groupResult"),
+      rows: [
+        { label: "BMI", formula: `${fmt(result.weightKg)} ÷ ${hM}²`, value: bmiText, unit: "kg/m²", emphasize: true },
+        { label: tv("result.whoClass"), formula: `${fmt(who.min)}–${Number.isFinite(who.max) ? fmt(who.max) : "∞"}`, value: whoName, emphasize: true },
+        { label: t("aboveFold.bmiPrimeLabel"), formula: `${bmiText} ÷ 25`, value: bmiPrimeText },
+        { label: t("aboveFold.ponderalLabel"), formula: `${fmt(result.weightKg)} ÷ ${hM}³`, value: ponderalText, unit: "kg/m³" },
+        { label: t("aboveFold.bodyFatLabel"), formula: ageNum <= 15 ? `1.51×${bmiText} − 0.7×${ageNum} − 3.6×${sex} + 1.4` : `1.2×${bmiText} + 0.23×${ageNum} − 10.8×${sex} − 5.4`, value: bodyFatText, unit: "%" },
+      ],
+    },
+    {
+      title: tv("result.groupRange"),
+      rows: [
+        { label: tv("result.minWeight"), formula: `18.5 × ${hM}²`, value: minWeightText, unit: kg },
+        { label: tv("result.maxWeight"), formula: `24.9 × ${hM}²`, value: maxWeightText, unit: kg },
+        {
+          label: target ? t(`aboveFold.${target.labelKey}`) : tv("result.toRange"),
+          formula: target ? (target.labelKey === "toTargetLoseLabel" ? `${fmt(result.weightKg)} − ${maxWeightText}` : `${minWeightText} − ${fmt(result.weightKg)}`) : "0",
+          value: target ? fmt(target.amount) : t("aboveFold.alreadyHealthy"),
+          unit: target ? kg : undefined,
+          emphasize: true,
+        },
+        { label: tv("result.midWeight"), formula: `${BMI_MID} × ${hM}²`, value: fmt(weightAt(BMI_MID, result.heightCm)), unit: kg },
+      ],
+    },
+    {
+      title: tv("result.groupCuts"),
+      rows: WHO_CUTS.map((c) => ({
+        label: `BMI ${fmt(c)} · ${tv(`who.${whoOf(c).key}`)}`,
+        formula: `${fmt(c)} × ${hM}²`,
+        value: fmt(weightAt(c, result.heightCm)),
+        unit: kg,
+      })),
+    },
+  ];
+
+  const layout = (
+    <LiveTable3DLayout
+      headings={[tv("result.colQuantity"), tv("result.colFormula"), tv("result.colValue")]}
+      groups={groups}
+      hint={tv("result.hint")}
+      caption={tv("result.caption", { category: whoName })}
+      drawing={
+        <Scene3D className="min-h-0!" camera={[1.6, 0.6, 3.8]}>
+          <BMIFigureScene3D
+            heightCm={result.heightCm}
+            bmi={result.bmi}
+            color={who.color}
+            labels={{ height: `${fmt(result.heightCm)} cm`, bmi: `BMI ${bmiText}`, weight: `${fmt(result.weightKg)} kg` }}
+          />
+        </Scene3D>
+      }
+    />
+  );
 
   return (
     <SectionCard
       title={t("aboveFold.resultTitle")}
+      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
+      bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}
       action={
         <BMIShareExportModal
           inputRows={pdfInputs}
@@ -102,77 +189,8 @@ export default function BMIResult({
         />
       }
     >
-      <p className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">{bmiText}</p>
-      <p className="mt-1 font-medium text-blue-600 dark:text-blue-400">
-        {t(`levels.${level}.title`)}
-      </p>
-
-      <div className="mt-5">
-        <BMIScaleChart
-          bmi={result.bmi}
-          labels={{
-            underweight: t("levels.warning.title"),
-            normal: t("levels.normal.title"),
-            overweight: t("levels.high.title"),
-            obese: t("levels.critical.title"),
-            yourBmi: t("aboveFold.resultTitle"),
-          }}
-        />
-      </div>
-
-      <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.healthyRangeLabel")}</dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {minWeightText}–{maxWeightText} {t("aboveFold.kgUnit")}
-          </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.bmiPrimeLabel")}</dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {bmiPrimeText}
-          </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("aboveFold.ponderalLabel")}</dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {ponderalText}
-          </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400" title={t("aboveFold.bodyFatNote")}>
-            {t("aboveFold.bodyFatLabel")}
-          </dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {bodyFatText}%
-          </dd>
-        </div>
-        <div className="col-span-2 rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">
-            {target ? t(`aboveFold.${target.labelKey}`) : t("aboveFold.alreadyHealthy")}
-          </dt>
-          {target && (
-            <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-              {target.amount} {t("aboveFold.kgUnit")}
-            </dd>
-          )}
-        </div>
-      </dl>
-
-      <div className="mt-5 border-t border-zinc-200 pt-4 dark:border-zinc-800">
-        <p className="mb-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">{t("aboveFold.bodyFatGaugeTitle")}</p>
-        <BMIBodyFatGauge
-          bodyFatPercent={result.bodyFatEstimate}
-          gender={gender}
-          labels={{
-            essential: t("aboveFold.bodyFatZones.essential"),
-            athletes: t("aboveFold.bodyFatZones.athletes"),
-            fitness: t("aboveFold.bodyFatZones.fitness"),
-            average: t("aboveFold.bodyFatZones.average"),
-            obese: t("aboveFold.bodyFatZones.obese"),
-            yourBodyFat: t("aboveFold.bodyFatLabel"),
-          }}
-        />
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
       </div>
     </SectionCard>
   );

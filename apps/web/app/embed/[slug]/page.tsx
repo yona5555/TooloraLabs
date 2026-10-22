@@ -7,6 +7,7 @@ import { SITE_URL } from "@/lib/site";
 import { getLocaleDir } from "@/lib/locale-meta";
 import { getLocaleFontClassName } from "@/lib/locale-fonts";
 import HtmlDocument from "@/components/layout/HtmlDocument";
+import { getClientMessages } from "@/lib/client-messages";
 import BMICalculatorEmbed from "@/components/tools/bmi-calculator/BMICalculatorEmbed";
 
 // Tools available for third-party embedding. Add a slug here + a case below
@@ -52,7 +53,6 @@ export default async function EmbedPage({ params, searchParams }: PageProps) {
     notFound();
   }
 
-  const messages = (await import(`@/messages/${locale}.json`)).default;
   const t = await getTranslations({ locale, namespace: "tools" });
   const tEmbed = await getTranslations({ locale, namespace: "embedTools" });
 
@@ -60,7 +60,7 @@ export default async function EmbedPage({ params, searchParams }: PageProps) {
 
   return (
     <HtmlDocument lang={locale} dir={getLocaleDir(locale)}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={await getClientMessages(locale, [slug])}>
         <div className={`bg-white p-3 dark:bg-zinc-950 ${getLocaleFontClassName(locale) ?? ""}`}>
           <p className="mb-3 text-center text-sm font-bold text-zinc-900 dark:text-zinc-50">
             {t(`${slug}.title`)}

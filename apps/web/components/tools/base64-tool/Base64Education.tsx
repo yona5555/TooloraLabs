@@ -4,7 +4,15 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import Base64GroupingDiagram from "./Base64GroupingDiagram";
+import B64BitExplorer from "./B64BitExplorer";
+import B64SizeBar from "./B64SizeBar";
+import B64EncodingRanking from "./B64EncodingRanking";
+import B64GrowthSteps from "./B64GrowthSteps";
+import B64AlphabetBars from "./B64AlphabetBars";
+import B64ByteDonut from "./B64ByteDonut";
+import B64OverheadGauge from "./B64OverheadGauge";
+import B64CharStrip from "./B64CharStrip";
+import B64VariantCompare from "./B64VariantCompare";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,12 +27,14 @@ export default async function Base64Education() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <B64BitExplorer />
+        <B64CharStrip />
         <p>{t("intro.paragraph2")}</p>
-        <Base64GroupingDiagram
-          byteLabel={t("intro.diagram.byteLabel")}
-          sextetLabel={t("intro.diagram.sextetLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <div className="space-y-6">
+          <B64SizeBar />
+          <B64GrowthSteps />
+        </div>
+        <B64EncodingRanking />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -53,6 +63,7 @@ export default async function Base64Education() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <B64VariantCompare />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -64,11 +75,12 @@ export default async function Base64Education() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <B64OverheadGauge />
+          <B64AlphabetBars />
+          <B64ByteDonut />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

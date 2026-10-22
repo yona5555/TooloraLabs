@@ -329,103 +329,22 @@
 }
 
 /*
- * JSON Formatter Result card: the light-bulb scene (data colours for the bulb/cord/glow, which
- * read against the card's own light/dark surface -- site-theme aware, like every cv- and ph-
- * token above) and the code panel's own two selectable syntax palettes ("light-set" /
- * "dark-set"), which are a per-visitor CHOICE independent of the site's own theme toggle (pulling
- * the cord switches between them), so unlike every block above these two palettes are each fixed
- * regardless of :root.dark.
+ * AI tools pages (§44). Data colours defined once (light + dark): --ai-a..--ai-e are the five
+ * series of the AI-tool visuals (chunks, words, issue types…), --ai-soft a translucent band.
  */
 :root {
-  --json-bulb-glass: color-mix(in oklab, var(--color-zinc-200) 55%, var(--color-white) 45%);
-  --json-bulb-highlight: color-mix(in oklab, var(--color-white) 75%, transparent);
-  --json-bulb-filament-off: var(--color-zinc-400);
-  --json-bulb-filament-on: var(--color-amber-500);
-  --json-bulb-glow: color-mix(in oklab, var(--color-amber-400) 55%, transparent);
-  --json-bulb-error: var(--color-red-500);
-  --json-cord: color-mix(in oklab, var(--color-zinc-900) 45%, transparent);
-  --json-cord-pull: var(--color-zinc-200);
-  --json-socket: var(--color-zinc-500);
-  --json-backdrop: color-mix(in oklab, var(--color-zinc-700) 85%, var(--color-zinc-900) 15%);
-  --json-backdrop-line: color-mix(in oklab, var(--color-zinc-300) 45%, transparent);
-
-  --json-code-light-bg: #ffffff;
-  --json-code-light-frame: #f1f3f5;
-  --json-code-light-border: #d8dce3;
-  --json-code-light-ink: #1f2430;
-  --json-code-light-muted: #8a909c;
-  --json-code-light-key: #0969da;
-  --json-code-light-string: #0a7d4c;
-  --json-code-light-number: #b35900;
-  --json-code-light-boolean: #8250df;
-  --json-code-light-null: #6e7781;
-  --json-code-light-punct: #57606a;
-
-  --json-code-dark-bg: #0d1117;
-  --json-code-dark-frame: #161b22;
-  --json-code-dark-border: #30363d;
-  --json-code-dark-ink: #e6edf3;
-  --json-code-dark-muted: #7d8590;
-  --json-code-dark-key: #79c0ff;
-  --json-code-dark-string: #7ee787;
-  --json-code-dark-number: #ffa657;
-  --json-code-dark-boolean: #d2a8ff;
-  --json-code-dark-null: #8b949e;
-  --json-code-dark-punct: #8b949e;
-
-  /* Traffic-light indicator card: fixed signal colours (not data derived from a palette elsewhere,
-     since red/yellow/green here are the literal real-world meaning of the demo JSON document). */
-  --json-signal-red-on: #ef4444;
-  --json-signal-red-off: color-mix(in oklab, #ef4444 22%, var(--color-zinc-400) 78%);
-  --json-signal-yellow-on: #f5b60a;
-  --json-signal-yellow-off: color-mix(in oklab, #f5b60a 22%, var(--color-zinc-400) 78%);
-  --json-signal-green-on: #22c55e;
-  --json-signal-green-off: color-mix(in oklab, #22c55e 22%, var(--color-zinc-400) 78%);
-  --json-signal-housing: var(--color-zinc-800);
+  --ai-a: var(--color-blue-600);
+  --ai-b: var(--color-amber-600);
+  --ai-c: var(--color-emerald-600);
+  --ai-d: var(--color-rose-600);
+  --ai-e: var(--color-violet-600);
+  --ai-soft: color-mix(in oklab, var(--color-blue-500) 16%, transparent);
 }
 :root.dark {
-  --json-bulb-glass: color-mix(in oklab, var(--color-amber-200) 35%, var(--color-zinc-800) 65%);
-  --json-cord: color-mix(in oklab, var(--color-white) 45%, transparent);
-  --json-cord-pull: var(--color-zinc-300);
-  --json-socket: var(--color-zinc-400);
-  --json-backdrop: var(--color-zinc-950);
-  --json-backdrop-line: color-mix(in oklab, var(--color-zinc-400) 35%, transparent);
-  --json-signal-housing: var(--color-zinc-950);
-}
-
-/* Thin, theme-matched scrollbars for the JSON Formatter's own textareas/code panels (Firefox +
-   Chromium); replaces the default bright-white scrollbar that showed in dark mode. */
-.json-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: var(--ph-line) transparent;
-}
-.json-scroll::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
-}
-.json-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-.json-scroll::-webkit-scrollbar-thumb {
-  background-color: var(--ph-line);
-  border-radius: 6px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-.json-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: var(--ph-ink-muted);
-}
-
-/* Light-bulb scene (Result card main visual): the cord's spring-back swing after a pull, toggling
-   the bulb on/off. Skipped under reduced motion by never adding the class (handled in
-   JSONBulbScene.tsx), same pattern as glass-handle-pulse. */
-@keyframes json-bulb-swing-kf {
-  0% { transform: rotate(0deg); }
-  20% { transform: rotate(10deg); }
-  45% { transform: rotate(-7deg); }
-  70% { transform: rotate(4deg); }
-  100% { transform: rotate(0deg); }
-}
-.json-bulb-swing {
-  animation: json-bulb-swing-kf 650ms ease-out;
+  --ai-a: var(--color-blue-400);
+  --ai-b: var(--color-amber-400);
+  --ai-c: var(--color-emerald-400);
+  --ai-d: var(--color-rose-400);
+  --ai-e: var(--color-violet-400);
+  --ai-soft: color-mix(in oklab, var(--color-blue-400) 20%, transparent);
 }

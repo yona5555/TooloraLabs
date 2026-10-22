@@ -4,8 +4,16 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import TargetHeartRateRestingGauge from "./TargetHeartRateRestingGauge";
-import MaxHeartRateByAgeDiagram from "./MaxHeartRateByAgeDiagram";
+import {
+  HRAcsmStepsCard,
+  HRAgeCurveCard,
+  HRFormulaBarsCard,
+  HRKarvonenFormulaCard,
+  HRMethodBalanceCard,
+  HRReadingGaugeCard,
+  HRRestSensitivityCard,
+  HRZoneStripCard,
+} from "./HRCards";
 
 type ExampleRow = { calculation: string; result: string };
 type ZoneItem = { title: string; description: string };
@@ -20,12 +28,20 @@ export default async function TargetHeartRateEducation() {
 
   return (
     <EncyclopediaPaper>
-      <TargetHeartRateRestingGauge />
+      {/* The eight live indicators sit where the old drawings were; sides zigzag down the page. */}
+      <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+        <HRZoneStripCard side="visual-left" />
+        <HRReadingGaugeCard side="table-left" />
+      </div>
 
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
         <p>{t("intro.paragraph2")}</p>
-        <MaxHeartRateByAgeDiagram />
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <HRAgeCurveCard side="visual-left" />
+          <HRFormulaBarsCard side="table-left" />
+          <HRAcsmStepsCard side="visual-left" />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("zones.title")}>
@@ -37,6 +53,11 @@ export default async function TargetHeartRateEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6" style={{ fontFamily: "var(--glass-font)" }}>
+          <HRKarvonenFormulaCard side="table-left" />
+          <HRMethodBalanceCard side="visual-left" />
+          <HRRestSensitivityCard side="table-left" />
         </div>
       </InfoSection>
 

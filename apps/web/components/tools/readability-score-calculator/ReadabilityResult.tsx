@@ -1,110 +1,133 @@
+"use client";
 import { useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import CopyButton from "@/components/tool-ui/CopyButton";
 import ReadabilityShareExportModal from "./ReadabilityShareExportModal";
-import type { ReadabilityResult as Result } from "./types";
+import ScoreDial from "./ScoreDial";
+import { EASE_BANDS, EASE_MAX, EASE_MIN, HARD_SYLLABLES, clampEase, gradeBand } from "./rsScales";
+import { useRsLive } from "./RsLiveContext";
 
-type Props = {
-  result: Result;
-  digitStyle: DigitStyle;
-};
+type Row = { key: string; label: string; value: string; note?: string; strong?: boolean };
 
-export default function ReadabilityResult({ result, digitStyle }: Props) {
+export default function ReadabilityResult() {
   const t = useTranslations("tools.readability-score-calculator.result");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
-  const fmtInt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
-
-  if (result.error === "empty-text") {
-    return <ErrorCard heading={t("heading")} message={t("emptyText")} />;
-  }
-  if (result.error === "no-sentences") {
-    return <ErrorCard heading={t("heading")} message={t("noSentences")} />;
-  }
+  const tl = useTranslations("tools.readability-score-calculator.live.table");
+  const tGrade = useTranslations("tools.readability-score-calculator.gradeLevelDiagram.bands");
+  const { result, ok, sentences, words, f, pct, activeSentence, selectSentence } = useRsLive();
 
   const bandLabel = result.readingEaseLabel ? t(`bands.${result.readingEaseLabel}`) : "";
-  const sentence = `${t("fleschReadingEase")}: ${fmt(result.fleschReadingEase)} (${bandLabel}), ${t("fleschKincaidGrade")}: ${fmt(result.fleschKincaidGrade)}`;
+  const scored = sentences.filter((s) => s.terminated && s.words > 0);
+  const hardest = scored.reduce<(typeof scored)[number] | undefined>((a, s) => (!a || s.ease < a.ease ? s : a), undefined);
+  const easiest = scored.reduce<(typeof scored)[number] | undefined>((a, s) => (!a || s.ease > a.ease ? s : a), undefined);
+  const hard = words.filter((w) => w.syllables >= HARD_SYLLABLES).length;
+  const fragments = sentences.filter((s) => !s.terminated).length;
+  const longest = Math.max(0, ...scored.map((s) => s.words));
+  // Points still needed to reach the next easier band (none once at the top band).
+  const next = EASE_BANDS.find((b) => b.from > clampEase(result.fleschReadingEase) && b.from > EASE_MIN && b.from < EASE_MAX);
 
-  const resultRows = [
-    { label: t("fleschKincaidGrade"), value: fmt(result.fleschKincaidGrade) },
-    { label: t("averageWordsPerSentence"), value: fmt(result.averageWordsPerSentence) },
-    { label: t("averageSyllablesPerWord"), value: fmt(result.averageSyllablesPerWord) },
-    { label: t("wordCount"), value: fmtInt(result.wordCount) },
-    { label: t("sentenceCount"), value: fmtInt(result.sentenceCount) },
-    { label: t("syllableCount"), value: fmtInt(result.syllableCount) },
+  const rows: Row[] = [
+    {
+      key: "fre",
+      label: t("fleschReadingEase"),
+      value: f(result.fleschReadingEase),
+      strong: true,
+      note: next ? tl("easeNote", { band: bandLabel, points: f(next.from - result.fleschReadingEase), next: t(`bands.${next.key}`) }) : bandLabel,
+    },
+    { key: "fk", label: t("fleschKincaidGrade"), value: f(result.fleschKincaidGrade), note: tGrade(gradeBand(result.fleschKincaidGrade).key) },
+    {
+      key: "asl",
+      label: t("averageWordsPerSentence"),
+      value: f(result.averageWordsPerSentence, 2),
+      note: `${f(result.wordCount)} ÷ ${f(result.sentenceCount)}`,
+    },
+    {
+      key: "asw",
+      label: t("averageSyllablesPerWord"),
+      value: f(result.averageSyllablesPerWord, 2),
+      note: `${f(result.syllableCount)} ÷ ${f(result.wordCount)}`,
+    },
+    { key: "words", label: t("wordCount"), value: f(result.wordCount), note: tl("hardNote", { n: f(hard), share: pct(result.wordCount ? hard / result.wordCount : 0) }) },
+    {
+      key: "sentences",
+      label: t("sentenceCount"),
+      value: f(result.sentenceCount),
+      note: fragments ? tl("fragmentsNote", { n: f(fragments) }) : tl("longestNote", { n: f(longest) }),
+    },
+    { key: "syllables", label: t("syllableCount"), value: f(result.syllableCount), note: tl("perSentence", { n: f(result.sentenceCount ? result.syllableCount / result.sentenceCount : 0) }) },
   ];
+  if (hardest) rows.push({ key: "hardest", label: tl("hardest"), value: f(hardest.ease), note: tl("sentenceRef", { n: f(hardest.index + 1), words: f(hardest.words) }) });
+  if (easiest) rows.push({ key: "easiest", label: tl("easiest"), value: f(easiest.ease), note: tl("sentenceRef", { n: f(easiest.index + 1), words: f(easiest.words) }) });
 
-  const clampedScore = Math.max(-30, Math.min(100, result.fleschReadingEase));
+  const sentence = `${t("fleschReadingEase")}: ${f(result.fleschReadingEase, 2)} (${bandLabel}), ${t("fleschKincaidGrade")}: ${f(result.fleschKincaidGrade, 2)}`;
+  const exportRows = rows.filter((r) => r.key !== "fre").map((r) => ({ label: r.label, value: r.value }));
+  const summaryText = [sentence, ...exportRows.map((r) => `${r.label}: ${r.value}`)].join("\n");
+
   const gauge = {
-    domainMin: -30,
-    domainMax: 100,
-    value: clampedScore,
-    zones: [
-      { from: -30, to: 30, color: "#dc2626" },
-      { from: 30, to: 50, color: "#f97316" },
-      { from: 50, to: 60, color: "#f59e0b" },
-      { from: 60, to: 70, color: "#facc15" },
-      { from: 70, to: 80, color: "#84cc16" },
-      { from: 80, to: 90, color: "#22c55e" },
-      { from: 90, to: 100, color: "#059669" },
-    ],
+    domainMin: EASE_MIN,
+    domainMax: EASE_MAX,
+    value: clampEase(result.fleschReadingEase),
+    zones: EASE_BANDS.map((b) => ({ from: b.from, to: b.to, color: b.color })),
     ticks: [-30, 0, 30, 60, 90, 100],
-    valueLabel: fmt(result.fleschReadingEase),
+    valueLabel: f(result.fleschReadingEase, 2),
     caption: bandLabel,
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-          <ReadabilityShareExportModal
-            inputRows={[]}
-            resultRows={resultRows}
-            heroLabel={t("fleschReadingEase")}
-            heroValue={fmt(result.fleschReadingEase)}
-            sentence={sentence}
-            gauge={gauge}
-          />
+    <SectionCard
+      title={t("heading")}
+      className="lg:flex lg:h-full lg:flex-col"
+      bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"
+      action={
+        ok ? (
+          <div className="flex items-center gap-2">
+            <CopyButton text={summaryText} />
+            <ReadabilityShareExportModal
+              inputRows={[]}
+              resultRows={exportRows}
+              heroLabel={t("fleschReadingEase")}
+              heroValue={f(result.fleschReadingEase, 2)}
+              sentence={sentence}
+              gauge={gauge}
+            />
+          </div>
+        ) : undefined
+      }
+    >
+      {ok ? (
+        <div className="flex flex-col gap-4 lg:flex-1 lg:flex-col-reverse">
+          <table className="min-w-0 flex-1 border-collapse text-sm">
+            <tbody>
+              {rows.map((r) => {
+                const target = r.key === "hardest" ? hardest : r.key === "easiest" ? easiest : undefined;
+                const active = target != null && target.index === activeSentence;
+                return (
+                  <tr
+                    key={r.key}
+                    onClick={target ? () => selectSentence(target.index) : undefined}
+                    className={`border-b border-zinc-200 last:border-0 dark:border-zinc-700/70 ${target ? "cursor-pointer hover:bg-amber-50 dark:hover:bg-amber-500/10" : ""} ${active ? "bg-amber-100/70 dark:bg-amber-500/15" : ""}`}
+                  >
+                    <th scope="row" className="py-1.5 pe-2 text-start align-top font-medium text-zinc-600 dark:text-zinc-300">
+                      {r.label}
+                      {r.note && <span className="block text-[11px] font-normal text-zinc-400 dark:text-zinc-500">{r.note}</span>}
+                    </th>
+                    <td
+                      dir="ltr"
+                      className={`py-1.5 text-end align-top font-mono font-semibold tabular-nums ${r.strong ? "text-xl text-blue-700 dark:text-blue-400" : "text-zinc-900 dark:text-zinc-100"}`}
+                    >
+                      {r.value}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <ScoreDial />
         </div>
-
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("fleschReadingEase")}</p>
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {fmt(result.fleschReadingEase)}
-          </p>
-          <p className="mt-1 text-center text-sm font-semibold text-zinc-700 dark:text-zinc-300">{bandLabel}</p>
-
-          <dl dir="ltr" className="mt-4 grid grid-cols-2 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">
-            <Stat label={t("fleschKincaidGrade")} value={fmt(result.fleschKincaidGrade)} />
-            <Stat label={t("averageWordsPerSentence")} value={fmt(result.averageWordsPerSentence)} />
-            <Stat label={t("averageSyllablesPerWord")} value={fmt(result.averageSyllablesPerWord)} />
-            <Stat label={t("wordCount")} value={fmtInt(result.wordCount)} />
-            <Stat label={t("sentenceCount")} value={fmtInt(result.sentenceCount)} />
-            <Stat label={t("syllableCount")} value={fmtInt(result.syllableCount)} />
-          </dl>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{label}</dt>
-      <dd className="font-mono font-semibold text-zinc-800 dark:text-zinc-100">{value}</dd>
-    </div>
-  );
-}
-
-function ErrorCard({ heading, message }: { heading: string; message: string }) {
-  return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{heading}</h2>
-      </div>
-      <div className="p-4 lg:p-6">
-        <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{message}</p>
-      </div>
-    </div>
+      ) : (
+        <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm leading-6 text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+          {result.error === "no-sentences" ? t("noSentences") : t("emptyText")}
+        </p>
+      )}
+    </SectionCard>
   );
 }

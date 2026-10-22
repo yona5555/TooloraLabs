@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { breadcrumbJsonLd, jsonLdHtml, localeAlternates } from "@/lib/seo";
 import { getOgLocale } from "@/lib/locale-meta";
 import { DOCUMENTED_TOOL_SLUGS } from "@/lib/docs-tools";
 import DocsLayout from "@/components/docs/DocsLayout";
@@ -98,15 +99,13 @@ import ForexConverterDocsPage, { getForexConverterTocItems } from "@/components/
 import CryptoConverterDocsPage, { getCryptoConverterTocItems } from "@/components/docs/crypto-converter/CryptoConverterDocsPage";
 import CommoditiesTrackerDocsPage, { getCommoditiesTrackerTocItems } from "@/components/docs/commodities-tracker/CommoditiesTrackerDocsPage";
 import WeatherForecastDocsPage, { getWeatherForecastTocItems } from "@/components/docs/weather-forecast/WeatherForecastDocsPage";
-import DiceRollerDocsPage, { getDiceRollerTocItems } from "@/components/docs/dice-roller/DiceRollerDocsPage";
-import LoveCalculatorDocsPage, { getLoveCalculatorTocItems } from "@/components/docs/love-calculator/LoveCalculatorDocsPage";
-import RandomQuoteGeneratorDocsPage, { getRandomQuoteGeneratorTocItems } from "@/components/docs/random-quote-generator/RandomQuoteGeneratorDocsPage";
 import ImageConverterDocsPage, { getImageConverterTocItems } from "@/components/docs/image-converter/ImageConverterDocsPage";
 import UnitConverterDocsPage, { getUnitConverterTocItems } from "@/components/docs/unit-converter/UnitConverterDocsPage";
 import RomanNumeralConverterDocsPage, { getRomanNumeralConverterTocItems } from "@/components/docs/roman-numeral-converter/RomanNumeralConverterDocsPage";
 import TextToSpeechDocsPage, { getTextToSpeechTocItems } from "@/components/docs/text-to-speech/TextToSpeechDocsPage";
 import SpeechToTextDocsPage, { getSpeechToTextTocItems } from "@/components/docs/speech-to-text/SpeechToTextDocsPage";
 import SpellingGrammarCheckerDocsPage, { getSpellingGrammarCheckerTocItems } from "@/components/docs/spelling-grammar-checker/SpellingGrammarCheckerDocsPage";
+import { ToolMessagesProvider } from "@/lib/client-messages";
 
 type DocsPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -131,10 +130,7 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
   return {
     title: pageTitle,
     description,
-    alternates: {
-      canonical: `/${locale}${path}`,
-      languages: Object.fromEntries(routing.locales.map((loc) => [loc, `/${loc}${path}`])),
-    },
+    alternates: localeAlternates(locale, path),
     openGraph: {
       title: pageTitle,
       description,
@@ -148,7 +144,7 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
 }
 
 export default async function DocsToolPage({ params }: DocsPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   if (!DOCUMENTED_TOOL_SLUGS.includes(slug)) {
     notFound();
   }
@@ -525,18 +521,6 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
       content = <WeatherForecastDocsPage />;
       tocItems = await getWeatherForecastTocItems();
       break;
-    case "dice-roller":
-      content = <DiceRollerDocsPage />;
-      tocItems = await getDiceRollerTocItems();
-      break;
-    case "love-calculator":
-      content = <LoveCalculatorDocsPage />;
-      tocItems = await getLoveCalculatorTocItems();
-      break;
-    case "random-quote-generator":
-      content = <RandomQuoteGeneratorDocsPage />;
-      tocItems = await getRandomQuoteGeneratorTocItems();
-      break;
     case "image-converter":
       content = <ImageConverterDocsPage />;
       tocItems = await getImageConverterTocItems();
@@ -563,5 +547,18 @@ export default async function DocsToolPage({ params }: DocsPageProps) {
       break;
   }
 
-  return <DocsLayout toc={<TableOfContents items={tocItems} />}>{content}</DocsLayout>;
+  const t = await getTranslations({ locale, namespace: "tools" });
+  const tn = await getTranslations({ locale, namespace: "navbar" });
+  const breadcrumb = breadcrumbJsonLd([
+    { name: tn("home"), path: `/${locale}` },
+    { name: tn("docs"), path: `/${locale}/docs` },
+    { name: t(`${slug}.title`), path: `/${locale}/docs/${slug}` },
+  ]);
+
+  return (
+    <ToolMessagesProvider locale={locale} toolSlugs={[slug]}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(breadcrumb)} />
+      <DocsLayout toc={<TableOfContents items={tocItems} />}>{content}</DocsLayout>
+    </ToolMessagesProvider>
+  );
 }

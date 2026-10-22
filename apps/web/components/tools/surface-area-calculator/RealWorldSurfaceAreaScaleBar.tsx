@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, computeSurfaceAreaFor, round } from "./surfaceAreaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const SCALE: { key: string; areaM2: number }[] = [
   { key: "marble", areaM2: 0.0012 },
@@ -36,7 +37,7 @@ export default function RealWorldSurfaceAreaScaleBar() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-6">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
             {marks.map((m) => (
@@ -46,7 +47,8 @@ export default function RealWorldSurfaceAreaScaleBar() {
           </div>
           <div className="relative mt-2 h-14 w-full text-[11px]">
             {marks.map((m, i) => (
-              <div key={m.key} className="absolute -translate-x-1/2 text-center" style={{ left: `${m.pct}%`, top: `${(i % 2) * 26}px` }}>
+              // labels near either end hang inward so they stay inside the card on a phone
+              <div key={m.key} className={`absolute ${m.pct < 15 ? "text-start" : m.pct > 85 ? "-translate-x-full text-end" : "-translate-x-1/2 text-center"}`} style={{ left: `${m.pct}%`, top: `${(i % 2) * 26}px` }}>
                 <div className="font-semibold text-zinc-700 dark:text-zinc-200">{t(`items.${m.key}`)}</div>
               </div>
             ))}
@@ -59,7 +61,7 @@ export default function RealWorldSurfaceAreaScaleBar() {
             { label: t("worked.closest"), value: t(`items.${closest.key}`), note: `${closest.areaM2.toLocaleString("en-US")} m²` },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

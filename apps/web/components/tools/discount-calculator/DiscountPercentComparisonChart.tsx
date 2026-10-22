@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Same $120 original price, four real discount percentages — the tool's own price - price*discount% formula, shown as a scale of final prices rather than a bar list. */
 const PRICE = 120;
@@ -26,7 +27,7 @@ export default async function DiscountPercentComparisonChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { price: PRICE.toFixed(2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="block min-w-[300px] text-current">
             <line x1={PAD_LEFT} y1={AXIS_Y} x2={WIDTH - PAD_RIGHT} y2={AXIS_Y} className="stroke-teal-400 dark:stroke-teal-500" strokeWidth={3} strokeLinecap="round" />
@@ -50,7 +51,7 @@ export default async function DiscountPercentComparisonChart() {
           </svg>
         </div>
         <DiscountWorkedExampleNote title={tRoot("workedExampleTitle")} rows={marks.map((m) => ({ label: m.label, value: m.formatted }))} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseCalculator } from "./BaseCalculator";
+import { countWords } from "../analyzers/textSegmentation";
 
 export type IssueType = "spelling" | "grammar" | "capitalization" | "punctuation";
 
@@ -279,7 +280,7 @@ export class SpellingGrammarCalculator extends BaseCalculator<SpellingGrammarInp
       ...findYourYoureConfusion(text),
     ].sort((a, b) => a.start - b.start);
 
-    const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+    const wordCount = countWords(text);
 
     return {
       success: true,

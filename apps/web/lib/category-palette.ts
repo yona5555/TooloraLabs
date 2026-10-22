@@ -64,7 +64,6 @@ export const categoryPalette: Record<string, CategoryColor> = {
   "student-productivity": { hex: "#E8D8A0", text: "dark" },
   "health-fitness": { hex: "#B98080", text: "white" },
   "date-time": { hex: "#D89B72", text: "white" },
-  "fun-entertainment": { hex: "#E0B4B4", text: "dark" },
   weather: { hex: "#92B6BF", text: "white" },
   "website-tools": { hex: "#E8E2D0", text: "dark" },
   "algebra-number-theory": { hex: "#9FCBC5", text: "dark" },

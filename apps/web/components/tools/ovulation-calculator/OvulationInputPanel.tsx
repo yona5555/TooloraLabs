@@ -30,6 +30,8 @@ export default function OvulationInputPanel({
   const t = useTranslations("tools.ovulation-calculator.form");
   const tScenarios = useTranslations("tools.ovulation-calculator.scenarios");
   const [showAdvanced, setShowAdvanced] = useState(false);
+  // A luteal length other than 14 (typed, picked from an example or dragged on a card) keeps the field open.
+  const advancedOpen = showAdvanced || lutealPhaseDays !== "14";
 
   return (
     <SectionCard title={t("inputTitle")}>
@@ -58,7 +60,7 @@ export default function OvulationInputPanel({
           onChange={(e) => onCycleLengthDaysChange(e.target.value)}
         />
 
-        {showAdvanced ? (
+        {advancedOpen ? (
           <ToolInput
             label={t("lutealPhaseDays")}
             type="text"

@@ -4,32 +4,37 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import CrackTimeComparisonDiagram from "./CrackTimeComparisonDiagram";
+import PasswordLengthCurve from "./PasswordLengthCurve";
+import PasswordPoolBar from "./PasswordPoolBar";
+import PasswordEntropyGauge from "./PasswordEntropyGauge";
+import PasswordCrackLadder from "./PasswordCrackLadder";
+import PasswordClassDonut from "./PasswordClassDonut";
+import PasswordPolicyRanking from "./PasswordPolicyRanking";
+import PasswordEntropyFormula from "./PasswordEntropyFormula";
+import PasswordCollisionTrio from "./PasswordCollisionTrio";
+import PasswordKeyspaceEquivalence from "./PasswordKeyspaceEquivalence";
 
 type ExampleRow = { scenario: string; result: string };
 
 export default async function PasswordEducation() {
   const t = await getTranslations("tools.password-generator.education");
-  const tExamples = await getTranslations("tools.password-generator.education.examples.diagramLabels");
 
   const exampleRows = t.raw("examples.rows") as ExampleRow[];
   const faqItems = t.raw("faq.items") as FAQItem[];
   const universities = t.raw("behindTheTool.academicPath.universities") as University[];
 
-  const diagramLabels = {
-    sevenLower: tExamples("sevenLower"),
-    fourWords: tExamples("fourWords"),
-    eightMixed: tExamples("eightMixed"),
-    sixWords: tExamples("sixWords"),
-    twelveMixed: tExamples("twelveMixed"),
-  };
-
   return (
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <PasswordLengthCurve />
+        <PasswordEntropyFormula />
         <p>{t("intro.paragraph2")}</p>
-        <CrackTimeComparisonDiagram labels={diagramLabels} caption={t("intro.diagram.caption")} />
+        <div className="space-y-6">
+          <PasswordPoolBar />
+          <PasswordEntropyGauge />
+        </div>
+        <PasswordCrackLadder />
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -58,6 +63,7 @@ export default async function PasswordEducation() {
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
+        <PasswordPolicyRanking />
       </InfoSection>
 
       <InfoSection id="behind-the-tool" title={t("behindTheTool.title")}>
@@ -69,11 +75,12 @@ export default async function PasswordEducation() {
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
-        <AcademicPathSection
-          title={t("behindTheTool.academicPath.title")}
-          intro={t("behindTheTool.academicPath.intro")}
-          universities={universities}
-        />
+        <div className="space-y-6">
+          <PasswordClassDonut />
+          <PasswordCollisionTrio />
+          <PasswordKeyspaceEquivalence />
+        </div>
+        <AcademicPathSection title={t("behindTheTool.academicPath.title")} intro={t("behindTheTool.academicPath.intro")} universities={universities} />
       </InfoSection>
 
       <AdSpace variant="leaderboard" />

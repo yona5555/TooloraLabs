@@ -217,7 +217,7 @@ export default function SpellingGrammarShareExportModal({ resultRows, heroLabel,
           </p>
         </div>
 
-        <h1 className="mb-4 text-2xl font-bold text-zinc-900">{t("title")}</h1>
+        <div className="mb-4 text-2xl font-bold text-zinc-900">{t("title")}</div>
 
         <h2 className="mb-2 mt-6 text-base font-bold text-blue-600">{t("shareExport.resultSectionTitle")}</h2>
         <table className="w-full border-collapse text-base">

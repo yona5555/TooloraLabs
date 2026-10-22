@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EmbedCodeGenerator from "@/components/embed/EmbedCodeGenerator";
 import BackButton from "@/components/tool-ui/BackButton";
+import { localeAlternates } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -14,6 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${t("title")} | TooloraLabs`,
     description: t("description"),
+    alternates: localeAlternates(locale, "/embed-tools"),
   };
 }
 

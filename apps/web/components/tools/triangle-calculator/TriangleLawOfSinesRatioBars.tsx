@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "./EduBarChart";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { EXAMPLE, lawOfSinesRatios, circumdiameter, round } from "./triangleEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Ranked Horizontal Bar List (#5), reused deliberately: all three bars land at (almost) the same length, which is itself the proof that a/sinA = b/sinB = c/sinC. */
 export default function TriangleLawOfSinesRatioBars() {
@@ -19,7 +20,7 @@ export default function TriangleLawOfSinesRatioBars() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
@@ -32,7 +33,7 @@ export default function TriangleLawOfSinesRatioBars() {
             { label: tw("circumdiameter"), value: `${round(circumdiameter)}`, emphasize: true, note: tw("circumdiameterNote") },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

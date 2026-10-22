@@ -1,75 +1,170 @@
+"use client";
+import { useRef } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import type { SleepResult as Result, SleepMode } from "./types";
-import SleepCycleDiagram from "./SleepCycleDiagram";
-import SleepClockDiagram from "./SleepClockDiagram";
+import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import { ltr } from "@/components/tool-ui/MixedText";
+import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import Scene3D from "@/components/tool-ui/three/Scene3D";
 import SleepShareExportModal from "./SleepShareExportModal";
+import { ADULT_INDEX, AGE_GROUPS, CYCLE_MIN, DAY, OPTION_COLORS, STAGES, WIND_DOWN, ageVerdict, clock, stageTotals, wrap, type SleepSnapshot } from "./sleep";
+import type { SleepCalculatorError } from "./types";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
+
+// three/drei live only in this dynamically imported chunk, never in the page chunk.
+const SleepNightScene3D = dynamic(() => import("./SleepNightScene3D"), { ssr: false });
 
 type Props = {
-  result: Result;
-  mode: SleepMode;
+  /** The last valid result. */
+  snap: SleepSnapshot;
+  /** The calculator's error for the current (invalid) input; the last good result stays on screen. */
+  error: SleepCalculatorError | null;
+  digitStyle: DigitStyle;
+  /** Page mode: the table fills the stretched Result column (§27). */
+  fill?: boolean;
 };
 
-function formatClock(minutes: number): string {
-  const h24 = Math.floor(minutes / 60) % 24;
-  const m = minutes % 60;
-  const period = h24 >= 12 ? "PM" : "AM";
-  const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
-  return `${h12}:${String(m).padStart(2, "0")} ${period}`;
-}
-
-export default function SleepResult({ result, mode }: Props) {
+export default function SleepResult({ snap, error, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.sleep-calculator.result");
+  const tForm = useTranslations("tools.sleep-calculator.form");
+  const tModes = useTranslations("tools.sleep-calculator.modes");
+  const tv = useTranslations("tools.sleep-calculator.visuals.result");
+  const tc = useTranslations("tools.sleep-calculator.visuals.common");
+  const n0 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
+  const n1 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 });
+  const n2 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
 
-  if (result.error) {
-    return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(`errors.${result.error}`)}</p>
-        </div>
-      </div>
-    );
-  }
+  const { mode, anchor, latency, nights } = snap;
+  const wakeUp = mode === "wakeUp";
+  const heading = wakeUp ? t("headingBedtimes") : t("headingWakeUpTimes");
+  const best = nights[0];
+  const adult = AGE_GROUPS[ADULT_INDEX];
+  const stages = stageTotals(best.cycles);
+  const inBed = best.sleepMinutes + latency;
 
-  const heading = mode === "wakeUp" ? t("headingBedtimes") : t("headingWakeUpTimes");
-
-  const resultRows = result.options.map((o) => ({
+  const inputRows = [
+    { label: tModes("groupLabel"), value: tModes(`labels.${mode}`) },
+    { label: wakeUp ? tForm("wakeUpTime") : tForm("bedtime"), value: clock(anchor) },
+    { label: tForm("fallAsleepMinutes"), value: `${latency} min` },
+  ];
+  const resultRows = nights.map((o) => ({
     label: t("cyclesCount", { count: o.cycles }),
-    value: `${formatClock(o.clockMinutes)} (${t("sleepDuration", { hours: (o.sleepMinutes / 60).toFixed(1) })})`,
+    value: `${clock(o.clockMinutes)} (${t("sleepDuration", { hours: (o.sleepMinutes / 60).toFixed(1) })})`,
   }));
-  const best = result.options[0];
-  const sentence = best ? t("sentence", { time: formatClock(best.clockMinutes), hours: (best.sleepMinutes / 60).toFixed(1) }) : "";
+  const sentence = t("sentence", { time: clock(best.clockMinutes), hours: (best.sleepMinutes / 60).toFixed(1) });
+
+  const groups: LiveTableGroup[] = [
+    {
+      title: tv("groupInputs"),
+      rows: [
+        { label: tModes("groupLabel"), formula: tv("given"), value: tModes(`labels.${mode}`) },
+        { label: wakeUp ? tForm("wakeUpTime") : tForm("bedtime"), formula: tv("given"), value: clock(anchor) },
+        { label: tForm("fallAsleepMinutes"), formula: tv("given"), value: n0(latency), unit: "min" },
+        { label: tv("cycleLength"), formula: tv("standard"), value: n0(CYCLE_MIN), unit: "min" },
+      ],
+    },
+    {
+      title: heading,
+      rows: nights.map((o) => ({
+        label: t("cyclesCount", { count: o.cycles }),
+        formula: wakeUp ? `${clock(anchor)} − ${latency} − ${o.cycles} × 90` : `${clock(anchor)} + ${latency} + ${o.cycles} × 90`,
+        value: clock(o.clockMinutes),
+        emphasize: o.cycles >= 5,
+      })),
+    },
+    {
+      title: tv("groupAsleep"),
+      rows: nights.map((o) => ({
+        label: t("cyclesCount", { count: o.cycles }),
+        formula: `${o.cycles} × 90 = ${o.sleepMinutes} min`,
+        value: n2(o.sleepMinutes / 60),
+        unit: "h",
+      })),
+    },
+    {
+      title: tv("groupNight", { count: best.cycles }),
+      rows: [
+        { label: tv("inBed"), formula: wakeUp ? `${clock(anchor)} − ${inBed} min` : tv("given"), value: clock(best.bed) },
+        { label: tv("asleepAt"), formula: `${clock(best.bed)} + ${latency} min`, value: clock(best.onset) },
+        { label: tv("wakeAt"), formula: `${clock(best.onset)} + ${best.sleepMinutes} min`, value: clock(best.wake), emphasize: true },
+        { label: tv("timeInBed"), formula: `${best.sleepMinutes} + ${latency}`, value: n2(inBed / 60), unit: "h" },
+        { label: tv("efficiency"), formula: `${best.sleepMinutes} ÷ ${inBed}`, value: n1((best.sleepMinutes / inBed) * 100), unit: "%" },
+        { label: tv("awakeWindow"), formula: `24 h − ${n2(inBed / 60)} h`, value: n2((DAY - inBed) / 60), unit: "h" },
+      ],
+    },
+    {
+      title: tv("groupStages"),
+      rows: STAGES.map((k) => ({
+        label: tc(`stageLong.${k}`),
+        formula: `${stages[k]} ÷ ${best.sleepMinutes}`,
+        value: `${n0(stages[k])} min · ${n0((stages[k] / best.sleepMinutes) * 100)}%`,
+        emphasize: k === "n3" || k === "rem",
+      })),
+    },
+    {
+      title: tv("groupAge"),
+      rows: nights.map((o) => {
+        const v = ageVerdict(adult, o.sleepMinutes / 60);
+        return {
+          label: t("cyclesCount", { count: o.cycles }),
+          formula: `${n2(o.sleepMinutes / 60)} h vs 7–9 h`,
+          value: `${tc(`verdict.${v}`)} ${v === "rec" ? "✓" : v === "may" ? "~" : "✗"}`,
+          emphasize: v === "rec",
+        };
+      }),
+    },
+    {
+      title: tv("groupWindDown"),
+      rows: WIND_DOWN.map((w) => ({
+        label: tc(`stations.${w.key}`),
+        formula: w.at === 0 ? tv("given") : `${clock(best.bed)} − ${-w.at / 60} h`,
+        value: clock(wrap(best.bed + w.at)),
+        emphasize: w.key === "bed",
+      })),
+    },
+  ];
+
+  const rings = nights.map((o) => ({
+    cycles: o.cycles,
+    color: OPTION_COLORS[o.cycles],
+    bed: o.bed,
+    onset: o.onset,
+    wake: o.wake,
+    label: `${o.cycles}× · ${clock(o.clockMinutes)}`,
+  }));
+
+  const layout = (
+    <LiveTable3DLayout
+      headings={[tv("colQuantity"), tv("colFormula"), tv("colValue")]}
+      groups={groups}
+      hint={tv("hint")}
+      caption={tv("caption", { time: ltr(clock(anchor)) })}
+      drawing={
+        <Scene3D className="min-h-0!" camera={[0, 3.4, 3.3]}>
+          <SleepNightScene3D rings={rings} anchor={anchor} anchorLabel={clock(anchor)} />
+        </Scene3D>
+      }
+    />
+  );
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{heading}</h2>
-        <SleepShareExportModal inputRows={[]} resultRows={resultRows} heroLabel={heading} heroValue={best ? formatClock(best.clockMinutes) : ""} sentence={sentence} />
+    <SectionCard
+      title={heading}
+      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
+      bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}
+      action={<SleepShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={heading} heroValue={clock(best.clockMinutes)} sentence={sentence} />}
+    >
+      {error && (
+        <p role="status" className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
+          {t(`errors.${error}`)}
+        </p>
+      )}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
       </div>
-      <div className="p-4 lg:p-6">
-        <SleepCycleDiagram options={result.options} />
-        <div className="mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800">
-          <SleepClockDiagram options={result.options} />
-        </div>
-
-        <ul className="mt-5 space-y-2">
-          {result.options.map((option, index) => (
-            <li
-              key={option.cycles}
-              className={`flex items-center justify-between gap-3 rounded-xl border p-3 ${
-                index < 2 ? "border-blue-400 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10" : "border-zinc-100 dark:border-zinc-800"
-              }`}
-            >
-              <span className="text-lg font-bold text-blue-600 dark:text-blue-400">{formatClock(option.clockMinutes)}</span>
-              <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                {t("sleepDuration", { hours: (option.sleepMinutes / 60).toFixed(1) })} · {t("cyclesCount", { count: option.cycles })}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    </SectionCard>
   );
 }

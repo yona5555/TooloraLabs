@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import DiscountWorkedExampleNote from "./DiscountWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Worked example of the tool's own formula: price * discount% = savings, then price - savings = final price. */
 const PRICE = 120;
@@ -40,7 +41,7 @@ export default async function DiscountFormulaDiagram() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[300px] text-current">
             <defs>
@@ -79,7 +80,7 @@ export default async function DiscountFormulaDiagram() {
             { label: t("finalLabel"), value: `$${FINAL.toFixed(2)}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

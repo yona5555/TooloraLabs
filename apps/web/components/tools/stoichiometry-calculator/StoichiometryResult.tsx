@@ -9,7 +9,7 @@ import { balancedText, molarMassOf, uniFormula } from "../chemical-equation-bala
 import StoichiometryShareExportModal from "./StoichiometryShareExportModal";
 import StoichiometryResultScene from "./StoichiometryResultScene";
 import { inferReaction } from "./stoichMath";
-import type { StoItem } from "./StoichiometryResultScene3D";
+import type { StoItem } from "./stoichiometryLayout";
 import type { StoichiometryResult as Result } from "./types";
 
 type Props = {

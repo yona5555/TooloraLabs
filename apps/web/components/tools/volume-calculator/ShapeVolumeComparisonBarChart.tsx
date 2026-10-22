@@ -5,6 +5,7 @@ import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useVolumeLive } from "./VolumeLiveContext";
 import { parseVolumeDims, characteristicLength, volumeAtLength, ALL_SHAPES, round } from "./volumeEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Type #1 (Labeled Bar Chart): every solid's volume at the SAME live characteristic length, ranked visually — a sphere encloses far more volume than a cone or pyramid at an identical "size". */
 export default function ShapeVolumeComparisonBarChart() {
@@ -28,7 +29,7 @@ export default function ShapeVolumeComparisonBarChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
           <EduBarChart bars={bars} ariaLabel={t("title")} />
         </div>
@@ -39,7 +40,7 @@ export default function ShapeVolumeComparisonBarChart() {
             { label: t("worked.vsCone"), value: `${round(topVolume / coneVolume)}×`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

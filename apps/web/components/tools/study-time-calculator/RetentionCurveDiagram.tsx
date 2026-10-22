@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
 /**
@@ -21,9 +22,10 @@ const REVIEW_DAYS = [1, 6, 14];
 export default function RetentionCurveDiagram() {
   const d = useTranslations("tools.study-time-calculator.retentionDiagram");
 
-  const width = 340;
-  const height = 130;
-  const padLeft = 32;
+  // Drawn at the card's real width so the curve fills it while the text keeps its true size.
+  const [wrap, width] = useMeasuredWidth(340);
+  const height = 170;
+  const padLeft = 42;
   const padBottom = 22;
   const plotW = width - padLeft - 10;
   const plotH = height - padBottom - 10;
@@ -36,14 +38,14 @@ export default function RetentionCurveDiagram() {
   return (
     <SectionCard title={d("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{d("intro")}</p>
-      <div dir="ltr" className="mt-4 overflow-x-auto">
-        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={d("ariaLabel")} className="mx-auto block w-full max-w-md text-current">
+      <div ref={wrap} dir="ltr" className="mt-4 overflow-x-auto">
+        <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height} role="img" aria-label={d("ariaLabel")} className="block h-auto w-full text-current">
           <line x1={padLeft} y1={10} x2={padLeft} y2={height - padBottom} stroke="currentColor" strokeOpacity={0.3} strokeWidth={1} />
           <line x1={padLeft} y1={height - padBottom} x2={width - 10} y2={height - padBottom} stroke="currentColor" strokeOpacity={0.3} strokeWidth={1} />
-          <text x={padLeft - 6} y={16} textAnchor="end" fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={padLeft - 6} y={16} textAnchor="end" fontSize={12} fill="currentColor" opacity={0.6}>
             100%
           </text>
-          <text x={padLeft - 6} y={height - padBottom} textAnchor="end" fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={padLeft - 6} y={height - padBottom} textAnchor="end" fontSize={12} fill="currentColor" opacity={0.6}>
             0%
           </text>
           <polyline points={points} fill="none" stroke="currentColor" className="stroke-blue-500 dark:stroke-blue-400" strokeWidth={2.5} />
@@ -64,7 +66,7 @@ export default function RetentionCurveDiagram() {
               strokeWidth={1.5}
             />
           ))}
-          <text x={width - 10} y={22} textAnchor="end" fontSize={10} fontWeight={700} className="fill-green-600 dark:fill-green-400">
+          <text x={width - 10} y={22} textAnchor="end" fontSize={12} fontWeight={700} className="fill-green-600 dark:fill-green-400">
             {d("reviewLabel")}
           </text>
         </svg>

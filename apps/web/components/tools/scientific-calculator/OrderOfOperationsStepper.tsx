@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const STEPS = [
   { key: "start", expression: "3 + 4 × (2³ − 1)", partial: null as number | null },
@@ -21,7 +22,7 @@ export default function OrderOfOperationsStepper() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="shrink-0">
           <div dir="ltr" className="text-center">
             <p className="font-mono text-2xl font-bold text-blue-700 dark:text-blue-300">{current.expression}</p>
@@ -64,7 +65,7 @@ export default function OrderOfOperationsStepper() {
             { label: t("worked.partialResult"), value: current.partial === null ? "—" : `${current.partial}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

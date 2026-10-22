@@ -1,3 +1,6 @@
+"use client";
+import { useMeasuredWidth } from "@/components/tool-ui/useMeasuredWidth";
+
 type Point = { price: number; saved: number };
 
 type DiscountSavingsScalingDiagramProps = {
@@ -7,13 +10,13 @@ type DiscountSavingsScalingDiagramProps = {
   xLabel: string;
 };
 
-const WIDTH = 320;
 const HEIGHT = 160;
 const MARGIN = { top: 14, right: 12, bottom: 26, left: 12 };
-const PLOT_WIDTH = WIDTH - MARGIN.left - MARGIN.right;
 const PLOT_HEIGHT = HEIGHT - MARGIN.top - MARGIN.bottom;
 
 export default function DiscountSavingsScalingDiagram({ points, currentPrice, caption, xLabel }: DiscountSavingsScalingDiagramProps) {
+  const [wrap, WIDTH] = useMeasuredWidth(320);
+  const PLOT_WIDTH = WIDTH - MARGIN.left - MARGIN.right;
   const minPrice = Math.min(...points.map((p) => p.price));
   const maxPrice = Math.max(...points.map((p) => p.price));
   const minSaved = Math.min(...points.map((p) => p.saved));
@@ -30,19 +33,19 @@ export default function DiscountSavingsScalingDiagram({ points, currentPrice, ca
 
   return (
     <figure className="my-2">
-      <div dir="ltr" className="flex justify-center overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-72 text-current" style={{ minWidth: 260 }}>
+      <div ref={wrap} dir="ltr" className="w-full overflow-x-auto">
+        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} width={WIDTH} height={HEIGHT} role="img" aria-label={caption} className="block h-auto w-full text-current" style={{ minWidth: 260 }}>
           <line x1={MARGIN.left} y1={MARGIN.top + PLOT_HEIGHT} x2={WIDTH - MARGIN.right} y2={MARGIN.top + PLOT_HEIGHT} stroke="currentColor" strokeWidth={1} opacity={0.3} />
           <path d={pathD} fill="none" strokeWidth={2.5} className="stroke-emerald-600 dark:stroke-emerald-400" />
           <line x1={currentX} y1={MARGIN.top} x2={currentX} y2={MARGIN.top + PLOT_HEIGHT} strokeWidth={1} strokeDasharray="3 3" stroke="currentColor" opacity={0.4} />
           <circle cx={currentX} cy={currentY} r={4} className="fill-emerald-600 dark:fill-emerald-400" />
-          <text x={MARGIN.left} y={HEIGHT - 6} fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={MARGIN.left} y={HEIGHT - 6} fontSize={12} fill="currentColor" opacity={0.6}>
             {Math.round(minPrice)}
           </text>
-          <text x={WIDTH - MARGIN.right} y={HEIGHT - 6} textAnchor="end" fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={WIDTH - MARGIN.right} y={HEIGHT - 6} textAnchor="end" fontSize={12} fill="currentColor" opacity={0.6}>
             {Math.round(maxPrice)}
           </text>
-          <text x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.6}>
+          <text x={WIDTH / 2} y={HEIGHT - 6} textAnchor="middle" fontSize={12} fill="currentColor" opacity={0.6}>
             {xLabel}
           </text>
         </svg>

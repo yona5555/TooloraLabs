@@ -1,58 +1,30 @@
 "use client";
-import { useMemo, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { CitationGenerator as CitationGeneratorTool } from "@tooloralabs/tools";
 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import CitationInputPanel from "./CitationInputPanel";
-import CitationResult from "./CitationResult";
-import CitationQuickReference from "./CitationQuickReference";
-import { CITATION_SCENARIOS, EMPTY_CITATION_DRAFT, type CitationDraft, type CitationScenario } from "./types";
-
-const tool = new CitationGeneratorTool();
-
-function defaultDraft(): CitationDraft {
-  return CITATION_SCENARIOS[0].draft;
-}
+import AdSpace from "@/components/tool-ui/AdSpace";
+import CitationStudioInput from "./CitationStudioInput";
+import CitationStudioResult from "./CitationStudioResult";
+import CitationBibliography from "./CitationBibliography";
+import { CitationAnatomyCard, CitationCompletenessCard, CitationMixCard, CitationRecencyCard } from "./CitationIndicatorsA";
+import { CitationAuthorsCard, CitationIdentifierCard, CitationLengthCard, CitationOrderCard } from "./CitationIndicatorsB";
+import { sampleState, useSelected, useStudioState } from "./studio";
 
 export default function CitationGenerator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.citation-generator.nav");
-  const [draft, setDraft] = useState<CitationDraft>(defaultDraft());
-
-  function handleScenarioPreset(scenario: CitationScenario) {
-    setDraft({ ...scenario.draft, authors: scenario.draft.authors.map((a) => ({ ...a })) });
-  }
-
-  function handleClear() {
-    setDraft({ ...EMPTY_CITATION_DRAFT, authors: EMPTY_CITATION_DRAFT.authors.map((a) => ({ ...a })) });
-  }
-
-  const result = useMemo(() => {
-    const output = tool.execute(
-      {
-        sourceType: draft.sourceType,
-        authors: draft.authors,
-        title: draft.title,
-        year: draft.year,
-        publisher: draft.publisher,
-        journalName: draft.journalName,
-        volume: draft.volume,
-        issue: draft.issue,
-        pages: draft.pages,
-        siteName: draft.siteName,
-        url: draft.url,
-        accessDate: draft.accessDate,
-      },
-      { locale: "en-US" }
-    );
-    return output.data;
-  }, [draft]);
+  const t = useTranslations("tools.citation-generator.studio");
+  const [state, setState] = useStudioState();
+  const { source, index } = useSelected(state);
+  const props = { state, onChange: setState, source, index };
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
+    { id: "bibliography", label: t("nav.bibliography") },
+    { id: "citation-indicators", label: t("nav.indicators") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
   ];
@@ -61,25 +33,38 @@ export default function CitationGenerator({ education }: { education: ReactNode 
     <>
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={
-            <CitationInputPanel
-              draft={draft}
-              onChange={setDraft}
-              onScenarioPreset={handleScenarioPreset}
-              onClear={handleClear}
-            />
+          stretchResult
+          input={<CitationStudioInput state={state} onChange={setState} onReset={() => setState(sampleState())} />}
+          result={
+            <div className="flex flex-col gap-3 lg:flex-1">
+              <CitationStudioResult {...props} />
+            </div>
           }
-          result={<CitationResult result={result} draft={draft} />}
           sidebar={<RelatedToolsSidebar currentSlug="citation-generator" category="student-productivity" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="citation-generator" />
               <SectionNav items={navItems} />
-              <CitationQuickReference />
             </div>
           }
         />
       </div>
+
+      <div className="mt-8">
+        <CitationBibliography state={state} onChange={setState} />
+      </div>
+
+      <section id="citation-indicators" className="mt-6 grid scroll-mt-32 grid-cols-1 items-start gap-6">
+        <CitationAnatomyCard {...props} />
+        <CitationAuthorsCard {...props} />
+        <CitationCompletenessCard {...props} />
+        <CitationLengthCard {...props} />
+        <AdSpace variant="leaderboard" />
+        <CitationOrderCard {...props} />
+        <CitationMixCard {...props} />
+        <CitationRecencyCard {...props} />
+        <CitationIdentifierCard {...props} />
+      </section>
 
       {education}
     </>

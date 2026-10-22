@@ -4,6 +4,8 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Label3D from "@/components/tool-ui/three/Label3D";
 import { SceneReadyContext } from "./ViewportScene";
+import PreviewReady from "./PreviewReady";
+import FitContent from "./FitContent";
 
 /** The page font (Inter via --glass-font) resolved to a real family list the canvas can draw with. */
 let pageFont: string | null = null;
@@ -94,6 +96,8 @@ export default function DemandCanvas3D({
       }}
     >
       <ContextReleaser />
+      <FitContent />
+      <PreviewReady />
       <FitAspect fitAspect={fitAspect} />
       <ambientLight intensity={0.75} />
       <directionalLight position={[5, 8, 6]} intensity={1.1} />

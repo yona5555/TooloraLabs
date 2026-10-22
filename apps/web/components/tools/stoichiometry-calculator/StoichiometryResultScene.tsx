@@ -8,7 +8,7 @@ import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { SvgMolecule } from "../chemical-equation-balancer/Molecules2D";
 import { g3 } from "../molarity-calculator/molMath";
 import { fromLog, LOG_MAX, LOG_MIN, LOG_STEP, TICKS, tickText, toLog } from "./stoichMath";
-import { gridDims, INSET, MAX_SHOWN, ROLE_TOKEN, shownCount, type StoSceneProps } from "./StoichiometryResultScene3D";
+import { gridDims, INSET, MAX_SHOWN, ROLE_TOKEN, shownCount, type StoSceneProps } from "./stoichiometryLayout";
 
 const Scene3D = dynamic(() => import("./StoichiometryResultScene3D"), { ssr: false, loading: () => null });
 

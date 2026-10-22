@@ -10,6 +10,7 @@ import {
   secondsFromParts,
   partsFromSeconds,
   convertDistanceValue,
+  convertPaceSeconds,
   RACE_PRESET_DISTANCE_KM,
   type DistanceUnit,
   type RacePreset,
@@ -23,14 +24,13 @@ import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import PaceModeTabs from "./PaceModeTabs";
 import PaceCalcInputPanel from "./PaceCalcInputPanel";
-import PaceCalcResult from "./PaceCalcResult";
-import PaceQuickReference from "./PaceQuickReference";
 import MultipointInputPanel from "./MultipointInputPanel";
-import MultipointResult from "./MultipointResult";
 import ConverterInputPanel from "./ConverterInputPanel";
-import ConverterResult from "./ConverterResult";
 import FinishTimeInputPanel from "./FinishTimeInputPanel";
-import FinishTimeResult from "./FinishTimeResult";
+import PaceResult from "./PaceResult";
+import PaceRaceLadder from "./PaceRaceLadder";
+import { PaceLiveContext, type PaceSnapshot } from "./PaceLiveContext";
+import { REF_KM } from "./pace";
 import type { MultipointRowDraft, PaceScenario, SolveField, TopMode } from "./types";
 
 function toNum(s: string): number {
@@ -44,6 +44,7 @@ function round4(value: number): string {
 
 export default function PaceCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.pace-calculator.nav");
+  const tv = useTranslations("tools.pace-calculator.visuals");
   const [topMode, setTopMode] = useState<TopMode>("calculator");
 
   // --- Pace Calculator mode (Pace / Time / Distance solve tabs) ---
@@ -165,14 +166,55 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
     ...multipointRows.flatMap((row) => [row.distance, row.hours, row.minutes, row.seconds])
   );
 
+  // Live: every valid edit updates the Result, the 3D track and the cards at once; an invalid or
+  // half-typed input keeps that mode's last good result on screen (with the calculator's note).
+  const liveSnap = useMemo<PaceSnapshot | null>(() => {
+    if (topMode === "calculator") {
+      if (!calcResult.valid) return null;
+      return { mode: topMode, unit: calcResult.distanceUnit, km: convertDistanceValue(calcResult.distance, calcResult.distanceUnit, "km"), sec: calcResult.timeSeconds, solveFor };
+    }
+    if (topMode === "finish-time") {
+      const knownDistance = toNum(finishKnownDistance);
+      const knownTimeSeconds = secondsFromParts(toNum(finishHours), toNum(finishMinutes), toNum(finishSeconds));
+      const { predictedSeconds, targetDistance } = finishComputation;
+      if (!(predictedSeconds > 0 && targetDistance > 0)) return null;
+      return {
+        mode: topMode,
+        unit: finishUnit,
+        km: convertDistanceValue(knownDistance, finishUnit, "km"),
+        sec: knownTimeSeconds,
+        targetKm: convertDistanceValue(targetDistance, finishUnit, "km"),
+        predictedSec: predictedSeconds,
+      };
+    }
+    if (topMode === "converter") {
+      if (!(Number.isFinite(converterPaceSeconds) && converterPaceSeconds > 0)) return null;
+      const perKm = convertPaceSeconds(converterPaceSeconds, converterUnit, "km");
+      return { mode: topMode, unit: converterUnit, km: REF_KM, sec: REF_KM * perKm, assumedDistance: true };
+    }
+    if (multipointSegments.length === 0) return null;
+    // The package returns segment distances in km (its pace is per km), whatever the unit chosen.
+    const segments = multipointSegments.map((seg) => ({ from: seg.fromIndex, to: seg.toIndex, km: seg.segmentDistance, sec: seg.segmentTimeSeconds }));
+    return {
+      mode: topMode,
+      unit: multipointUnit,
+      km: segments.reduce((sum, seg) => sum + seg.km, 0),
+      sec: segments.reduce((sum, seg) => sum + seg.sec, 0),
+      segments,
+    };
+  }, [topMode, calcResult, solveFor, finishKnownDistance, finishHours, finishMinutes, finishSeconds, finishComputation, finishUnit, converterPaceSeconds, converterUnit, multipointSegments, multipointUnit]);
+  const [good, setGood] = useState<Partial<Record<TopMode, PaceSnapshot>>>({});
+  if (liveSnap && good[topMode] !== liveSnap) setGood({ ...good, [topMode]: liveSnap });
+  const shown: PaceSnapshot = liveSnap ?? good[topMode] ?? { mode: topMode, unit: "km", km: 5, sec: 1500 };
+
   const navItems = [
     { id: "tool", label: tNav("tool") },
     { id: "faq", label: tNav("faq") },
     { id: "behind-the-tool", label: tNav("behindTheTool") },
+    { id: "notices", label: tv("notices.title") },
   ];
 
   let input: ReactNode;
-  let result: ReactNode;
 
   if (topMode === "calculator") {
     input = (
@@ -198,15 +240,8 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
         onScenarioPreset={handleScenarioPreset}
       />
     );
-    result = (
-      <div className="flex flex-col gap-4">
-        <PaceCalcResult result={calcResult} solveFor={solveFor} digitStyle={digitStyle} />
-        <PaceQuickReference />
-      </div>
-    );
   } else if (topMode === "multipoint") {
     input = <MultipointInputPanel unit={multipointUnit} onUnitChange={setMultipointUnit} rows={multipointRows} onChange={setMultipointRows} />;
-    result = <MultipointResult segments={multipointSegments} unit={multipointUnit} digitStyle={digitStyle} />;
   } else if (topMode === "converter") {
     input = (
       <ConverterInputPanel
@@ -218,7 +253,6 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
         onSecondsChange={setConverterSeconds}
       />
     );
-    result = <ConverterResult fromUnit={converterUnit} paceSecondsPerUnit={converterPaceSeconds} digitStyle={digitStyle} />;
   } else {
     input = (
       <FinishTimeInputPanel
@@ -238,20 +272,29 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
         onTargetDistanceChange={setFinishTargetDistance}
       />
     );
-    result = (
-      <FinishTimeResult predictedSeconds={finishComputation.predictedSeconds} targetDistance={finishComputation.targetDistance} distanceUnit={finishUnit} digitStyle={digitStyle} />
-    );
   }
 
   return (
-    <>
+    <PaceLiveContext.Provider value={shown}>
       <div id="tool" className="scroll-mt-32">
         <div className="mb-4">
           <PaceModeTabs mode={topMode} onModeChange={setTopMode} />
         </div>
         <ToolAboveFold
-          input={input}
-          result={result}
+          stretchInput
+          stretchResult
+          input={
+            <div className="flex flex-col gap-4 lg:h-full">
+              {input}
+              {/* Multipoint's checkpoint list is already taller than the Result: no filler there. */}
+              {topMode !== "multipoint" && <PaceRaceLadder />}
+            </div>
+          }
+          result={
+            <div className="flex flex-col gap-4 lg:h-full">
+              <PaceResult fill snap={shown} invalid={!liveSnap} digitStyle={digitStyle} />
+            </div>
+          }
           sidebar={<RelatedToolsSidebar currentSlug="pace-calculator" category="health-fitness" />}
           secondary={
             <div className="flex flex-col gap-6">
@@ -263,6 +306,6 @@ export default function PaceCalculator({ education }: { education: ReactNode }) 
       </div>
 
       {education}
-    </>
+    </PaceLiveContext.Provider>
   );
 }

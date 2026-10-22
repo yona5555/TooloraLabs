@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/gen-client-message-deps.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/gen-client-message-deps.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "test:indicators": "node scripts/fraction-calculator-final-test.mjs",
-    "test:sci-sidebar": "node scripts/scientific-calculator-sidebar-test.mjs"
+    "test:sci-sidebar": "node scripts/scientific-calculator-sidebar-test.mjs",
+    "previews": "node scripts/generate-tool-previews.mts",
+    "test:cards": "node scripts/tool-cards-served-test.mjs",
+    "test:keywords": "node scripts/check-section-keywords.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -18,10 +23,10 @@
     "html2canvas-pro": "^2.3.3",
     "jspdf": "^4.2.1",
     "jszip": "^3.10.1",
-    "leaflet": "^1.9.4",
     "lightweight-charts": "5.2.1",
     "lucide-react": "^1.27.0",
     "mafs": "^0.21.0",
+    "maplibre-gl": "^6.14.0",
     "next": "^16.3.8",
     "next-intl": "^4.13.4",
     "pdf-lib": "^1.17.1",
@@ -31,7 +36,6 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/leaflet": "^1.9.22",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -39,6 +43,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.11",
     "playwright": "^1.63.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

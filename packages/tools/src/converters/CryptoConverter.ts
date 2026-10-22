@@ -17,6 +17,8 @@ export type CryptoCoin = {
   athDate?: string | null;
   atl?: number | null;
   atlDate?: string | null;
+  /** ISO time CoinGecko last refreshed this coin's market data. */
+  lastUpdated?: string | null;
 };
 
 export type CryptoGlobalStats = {

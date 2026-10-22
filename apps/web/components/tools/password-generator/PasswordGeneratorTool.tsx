@@ -1,63 +1,55 @@
 "use client";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { PasswordGenerator, type PasswordGeneratorOutput } from "@tooloralabs/tools";
+import { analyzePasswordSettings, PasswordGenerator } from "@tooloralabs/tools";
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
+import { useNavBarVisible } from "@/components/tool-ui/useNavBarVisible";
 import PasswordInputPanel, { type PasswordFormState } from "./PasswordInputPanel";
 import PasswordResult from "./PasswordResult";
 import PasswordGuidanceReference from "./PasswordGuidanceReference";
+import { INITIAL_FORM, PASSWORD_EXAMPLES, PasswordLiveProvider, type PasswordDraft } from "./PasswordLiveContext";
 
 const tool = new PasswordGenerator();
-
-const INITIAL_FORM: PasswordFormState = {
-  mode: "characters",
-  length: 16,
-  includeUppercase: true,
-  includeLowercase: true,
-  includeNumbers: true,
-  includeSymbols: false,
-  excludeAmbiguous: false,
-  wordCount: 4,
-  separator: "-",
-  capitalizeWords: true,
-  appendNumber: false,
-};
-
-const EMPTY_RESULT: PasswordGeneratorOutput = { password: "", entropyBits: 0, poolSize: 0 };
+/** Extra passwords offered in the result card, drawn with the same settings. */
+const ALTERNATIVES = 8;
 
 export default function PasswordGeneratorTool({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.password-generator.nav");
-
-  const [form, setForm] = useState<PasswordFormState>(INITIAL_FORM);
+  const tEx = useTranslations("tools.password-generator.examples");
+  const [draft, setDraft] = useState<PasswordDraft>({ ...INITIAL_FORM, password: "", alternatives: [] });
   const [seed, setSeed] = useState(0);
-  // Generating with crypto.getRandomValues() must stay client-only: computing it
-  // during render (e.g. via useMemo) would run once on the server and again on
-  // the client during hydration, producing two different passwords and a
-  // hydration mismatch. Starting from an empty result and filling it in a
-  // post-mount effect keeps server and client markup identical at hydration time.
-  const [result, setResult] = useState<PasswordGeneratorOutput>(EMPTY_RESULT);
+  const [activeExample, setActiveExample] = useState<string | null>("standard");
+  const [sentinelRef, navBarVisible] = useNavBarVisible();
+  const form: PasswordFormState = Object.fromEntries(Object.entries(draft).filter(([k]) => k !== "password" && k !== "alternatives")) as PasswordFormState;
+  const formKey = JSON.stringify(form);
 
   function patchForm(patch: Partial<PasswordFormState>) {
-    setForm((prev) => ({ ...prev, ...patch }));
+    setDraft((d) => ({ ...d, ...patch }));
+    setActiveExample(null);
   }
 
-  const regenerate = useCallback(() => setSeed((s) => s + 1), []);
-
-  function handleClear() {
-    setForm(INITIAL_FORM);
+  function setDim<K extends keyof PasswordDraft>(key: K, value: PasswordDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    if (key !== "password" && key !== "alternatives") setActiveExample(null);
   }
 
+  // crypto.getRandomValues() must stay client-only: generating during render would run once on the
+  // server and again during hydration, giving two different passwords and a hydration mismatch.
+  // Every settings-based indicator renders on the server; only the password itself fills in here.
   useEffect(() => {
-    // Deferred to a microtask so this genuinely runs after the commit (not
-    // synchronously inside the effect body), avoiding a cascading render.
     queueMicrotask(() => {
-      const output = tool.execute(form, { locale: "en-US" });
-      setResult(output.success ? output.data : EMPTY_RESULT);
+      const settings = JSON.parse(formKey) as PasswordFormState;
+      const make = () => {
+        const output = tool.execute(settings, { locale: "en-US" });
+        return output.success ? output.data.password : "";
+      };
+      setDraft((d) => ({ ...d, password: make(), alternatives: Array.from({ length: ALTERNATIVES }, make).filter(Boolean) }));
     });
-  }, [form, seed]);
+  }, [formKey, seed]);
 
   const navItems = [
     { id: "tool", label: tNav("tool") },
@@ -66,16 +58,46 @@ export default function PasswordGeneratorTool({ education }: { education: ReactN
   ];
 
   return (
-    <>
+    <PasswordLiveProvider value={{ dims: draft, setDim }}>
+      <div ref={sentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
-          input={<PasswordInputPanel form={form} onChange={patchForm} onClear={handleClear} />}
-          result={<PasswordResult password={result.password} entropyBits={result.entropyBits} onRegenerate={regenerate} />}
-          sidebar={<RelatedToolsSidebar currentSlug="password-generator" category="developer-tools" />}
+          stretchInput
+          stretchResult
+          sidebarMatchRow
+          input={
+            <div className="flex flex-col gap-6 lg:h-full">
+              <PasswordInputPanel
+                form={form}
+                onChange={patchForm}
+                onClear={() => {
+                  setDraft((d) => ({ ...d, ...INITIAL_FORM }));
+                  setActiveExample("standard");
+                }}
+              />
+              <QuickExamplesCard
+                title={tEx("title")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={(id) => {
+                  const ex = PASSWORD_EXAMPLES.find((e) => e.id === id);
+                  if (!ex) return;
+                  setDraft((d) => ({ ...d, ...INITIAL_FORM, ...ex.patch }));
+                  setActiveExample(id);
+                }}
+                examples={PASSWORD_EXAMPLES.map((ex) => {
+                  const bits = analyzePasswordSettings({ ...INITIAL_FORM, ...ex.patch }).entropyBits;
+                  return { id: ex.id, label: tEx(ex.id), detail: tEx("detail", { bits: bits.toLocaleString("en-US", { maximumFractionDigits: 1 }) }) };
+                })}
+              />
+            </div>
+          }
+          result={<PasswordResult onRegenerate={() => setSeed((s) => s + 1)} />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="password-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="password-generator" />
-              <SectionNav items={navItems} />
+              <SectionNav items={navItems} visible={navBarVisible} />
               <PasswordGuidanceReference />
             </div>
           }
@@ -83,6 +105,6 @@ export default function PasswordGeneratorTool({ education }: { education: ReactN
       </div>
 
       {education}
-    </>
+    </PasswordLiveProvider>
   );
 }

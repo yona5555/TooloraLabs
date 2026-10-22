@@ -4,7 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
-import TextPipelineDiagram from "./TextPipelineDiagram";
+import WcKeywordDensity from "./WcKeywordDensity";
+import WcSentenceRhythm from "./WcSentenceRhythm";
+import WcPlatformZones from "./WcPlatformZones";
+import WcReadSpeak from "./WcReadSpeak";
+import WcParagraphStack from "./WcParagraphStack";
+import WcLetterFrequency from "./WcLetterFrequency";
+import WcReadabilityGauge from "./WcReadabilityGauge";
+import WcWordLengths from "./WcWordLengths";
 
 type ExampleRow = { scenario: string; result: string };
 
@@ -19,13 +26,16 @@ export default async function WordCounterEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <div className="space-y-6">
+          <WcKeywordDensity />
+          <WcSentenceRhythm />
+          <WcParagraphStack />
+        </div>
         <p>{t("intro.paragraph2")}</p>
-        <TextPipelineDiagram
-          rawTextLabel={t("intro.diagram.rawTextLabel")}
-          tokenizeLabel={t("intro.diagram.tokenizeLabel")}
-          countsLabel={t("intro.diagram.countsLabel")}
-          caption={t("intro.diagram.caption")}
-        />
+        <div className="space-y-6">
+          <WcReadSpeak />
+          <WcReadabilityGauge />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("examples.title")}>
@@ -47,6 +57,11 @@ export default async function WordCounterEducation() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="space-y-6">
+          <WcPlatformZones />
+          <WcLetterFrequency />
+          <WcWordLengths />
         </div>
       </InfoSection>
 

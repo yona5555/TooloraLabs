@@ -1,48 +1,48 @@
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { Gender } from "@tooloralabs/tools";
-import { bandForBmr, type BMRResult as Result } from "./types";
-import RatioGauge from "@/components/tool-ui/RatioGauge";
-import BMRComparisonChart from "./BMRComparisonChart";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import Scene3D from "@/components/tool-ui/three/Scene3D";
 import BMRShareExportModal from "./BMRShareExportModal";
+import { useBMRLive } from "./BMRLiveContext";
+import { BANDS, CUTS, DOMAIN, bandOf, bmiOf, coefOf, weightForBmr, type Coef } from "./bmr";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
+
+// three/drei live only in this dynamically imported chunk (the BMI figure, reused).
+const FigureScene3D = dynamic(() => import("../bmi-calculator/BMIFigureScene3D"), { ssr: false });
 
 type Props = {
-  result: Result;
+  /** The current fields are invalid: the last good result stays, with a short note. */
+  invalid: boolean;
   digitStyle: DigitStyle;
   gender: Gender;
   weightKg: string;
   heightCm: string;
   age: string;
+  /** Page mode: the table fills the stretched Result column (§27). */
+  fill?: boolean;
 };
 
-export default function BMRResult({ result, digitStyle, gender, weightKg, heightCm, age }: Props) {
+export default function BMRResult({ invalid, digitStyle, gender, weightKg, heightCm, age, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.bmr-calculator.result");
   const tForm = useTranslations("tools.bmr-calculator.form");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
+  const tLabels = useTranslations("tools.bmr-calculator.formulas.labels");
+  const tv = useTranslations("tools.bmr-calculator.visuals.result");
+  const { body: b, hb, msj, formula, which, bmr } = useBMRLive();
 
-  if (result.error) {
-    return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t("invalidMeasurements")}</p>
-        </div>
-      </div>
-    );
-  }
+  const fmt = (value: number, d = 0) => formatLocalizedNumber(value, digitStyle, { minimumFractionDigits: d, maximumFractionDigits: d });
+  const band = bandOf(bmr);
+  const bandName = t(`range.${band.key}`);
+  const male = b.gender === "male";
+  const isCompare = formula === "compare";
+  const bmi = bmiOf(b);
 
-  const single = result.harrisBenedict ?? result.mifflinStJeor;
-  const isCompare = result.harrisBenedict !== null && result.mifflinStJeor !== null;
-  const band = bandForBmr(single ?? 0);
-  const bandColor =
-    band === "higher"
-      ? "fill-indigo-600 dark:fill-indigo-400"
-      : band === "typical"
-        ? "fill-blue-600 dark:fill-blue-400"
-        : "fill-sky-600 dark:fill-sky-400";
-
+  // The share card keeps the tool's own headline: both values when comparing, else the chosen one.
   const inputRows = [
     { label: tForm("genderLabel"), value: gender === "male" ? tForm("genderMale") : tForm("genderFemale") },
     { label: tForm("weight"), value: `${weightKg} kg` },
@@ -51,83 +51,115 @@ export default function BMRResult({ result, digitStyle, gender, weightKg, height
   ];
   const resultRows = isCompare
     ? [
-        { label: t("harrisBenedict"), value: `${fmt(result.harrisBenedict!)} kcal` },
-        { label: t("mifflinStJeor"), value: `${fmt(result.mifflinStJeor!)} kcal` },
+        { label: t("harrisBenedict"), value: `${fmt(hb)} kcal` },
+        { label: t("mifflinStJeor"), value: `${fmt(msj)} kcal` },
       ]
-    : [{ label: t("bmrUnit"), value: `${fmt(single!)} kcal` }];
-  const heroValue = isCompare ? `${fmt(result.harrisBenedict!)} / ${fmt(result.mifflinStJeor!)} kcal` : `${fmt(single!)} kcal`;
-  const sentence = t("sentence", { value: fmt(single ?? 0), classification: t(`range.${band}`) });
+    : [{ label: t("bmrUnit"), value: `${fmt(bmr)} kcal` }];
+  const heroValue = isCompare ? `${fmt(hb)} / ${fmt(msj)} kcal` : `${fmt(bmr)} kcal`;
+
+  const terms = (k: Coef, key: string) => {
+    const tw = k.w * b.weightKg;
+    const th = k.h * b.heightCm;
+    const ta = k.a * b.age;
+    return [
+      { label: tv("termWeight"), formula: `${k.w} × ${fmt(b.weightKg, 1)}`, value: fmt(tw, 1), unit: "kcal" },
+      { label: tv("termHeight"), formula: `${k.h} × ${fmt(b.heightCm, 1)}`, value: fmt(th, 1), unit: "kcal" },
+      { label: tv("termAge"), formula: `− ${k.a} × ${fmt(b.age)}`, value: `−${fmt(ta, 1)}`, unit: "kcal" },
+      { label: tv("termConstant"), formula: key === "msj" ? (male ? tv("constMale") : tv("constFemale")) : tv("constHb"), value: k.c < 0 ? `−${fmt(-k.c, 1)}` : fmt(k.c, 1), unit: "kcal" },
+      { label: tv("termSum"), formula: `${fmt(tw, 0)} + ${fmt(th, 0)} − ${fmt(ta, 0)} ${k.c < 0 ? "−" : "+"} ${fmt(Math.abs(k.c), 0)}`, value: fmt(k.c + tw + th - ta), unit: "kcal", emphasize: true },
+    ];
+  };
+
+  const groups: LiveTableGroup[] = [
+    {
+      title: tv("groupInputs"),
+      rows: [
+        { label: tForm("genderLabel"), formula: tv("given"), value: male ? tForm("genderMale") : tForm("genderFemale") },
+        { label: tv("weight"), formula: `${fmt(b.weightKg * 2.20462, 1)} lb`, value: fmt(b.weightKg, 1), unit: "kg" },
+        { label: tv("height"), formula: `${fmt(b.heightCm / 2.54, 1)} in`, value: fmt(b.heightCm, 1), unit: "cm" },
+        { label: tv("age"), formula: tv("given"), value: fmt(b.age), unit: tv("years") },
+        { label: "BMI", formula: `${fmt(b.weightKg, 1)} ÷ ${fmt(b.heightCm / 100, 2)}²`, value: fmt(bmi, 1) },
+      ],
+    },
+    {
+      title: tv("groupResult"),
+      rows: [
+        { label: t("harrisBenedict"), formula: which === "hb" ? tv("headline") : tv("forComparison"), value: fmt(hb), unit: "kcal", emphasize: which === "hb" },
+        { label: t("mifflinStJeor"), formula: which === "msj" ? tv("headline") : tv("forComparison"), value: fmt(msj), unit: "kcal", emphasize: which === "msj" },
+        { label: tv("difference"), formula: `|${fmt(hb)} − ${fmt(msj)}|`, value: fmt(Math.abs(hb - msj)), unit: "kcal" },
+        { label: tv("range"), formula: `${fmt(band.min)}–${fmt(band.max)} kcal`, value: bandName, emphasize: true },
+        { label: tv("formula"), formula: tv("given"), value: tLabels(formula) },
+      ],
+    },
+    { title: tv("groupMsj"), rows: terms(coefOf("msj", b.gender), "msj") },
+    { title: tv("groupHb"), rows: terms(coefOf("hb", b.gender), "hb") },
+    {
+      title: tv("groupRate"),
+      rows: [
+        { label: tv("perHour"), formula: `${fmt(bmr)} ÷ 24`, value: fmt(bmr / 24, 1), unit: "kcal/h" },
+        { label: tv("power"), formula: `${fmt(bmr)} × 4184 ÷ 86400`, value: fmt((bmr * 4184) / 86400, 1), unit: "W" },
+        { label: tv("kilojoules"), formula: `${fmt(bmr)} × 4.184`, value: fmt(bmr * 4.184), unit: "kJ" },
+        { label: tv("perKg"), formula: `${fmt(bmr)} ÷ ${fmt(b.weightKg, 1)}`, value: fmt(bmr / b.weightKg, 1), unit: "kcal/kg" },
+      ],
+    },
+    {
+      title: tv("groupCuts"),
+      rows: CUTS.map((cut) => ({
+        label: tv("weightAt", { kcal: fmt(cut) }),
+        formula: tv("solveWeight", { formula: tLabels(which === "hb" ? "harrisBenedict" : "mifflinStJeor") }),
+        value: fmt(Math.max(0, weightForBmr(b, cut, which)), 1),
+        unit: "kg",
+      })),
+    },
+  ];
+
+  const layout = (
+    <LiveTable3DLayout
+      headings={[tv("colQuantity"), tv("colFormula"), tv("colValue")]}
+      groups={groups}
+      hint={tv("hint")}
+      caption={tv("caption", { bmi: fmt(bmi, 1), range: bandName, kcal: `${fmt(bmr)} kcal` })}
+      drawing={
+        <Scene3D className="min-h-0!" camera={[1.6, 0.6, 3.8]}>
+          <FigureScene3D
+            heightCm={b.heightCm}
+            bmi={Math.min(45, Math.max(13, bmi))}
+            color={band.color}
+            labels={{ height: `${fmt(b.heightCm)} cm`, bmi: `${fmt(bmr)} kcal`, weight: `${fmt(b.weightKg, 1)} kg` }}
+          />
+        </Scene3D>
+      }
+    />
+  );
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{t("heading")}</h2>
+    <SectionCard
+      title={t("heading")}
+      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
+      bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}
+      action={
         <BMRShareExportModal
           inputRows={inputRows}
           resultRows={resultRows}
           heroLabel={t("heading")}
           heroValue={heroValue}
-          sentence={sentence}
+          sentence={t("sentence", { value: fmt(bmr), classification: bandName })}
           gauge={{
-            zones: [
-              { from: 800, to: 1400, color: "#0ea5e9" },
-              { from: 1400, to: 2000, color: "#3b82f6" },
-              { from: 2000, to: 3000, color: "#6366f1" },
-            ],
-            domainMin: 800,
-            domainMax: 3000,
-            value: single ?? 0,
-            ticks: [800, 1400, 2000, 3000],
-            valueLabel: fmt(single ?? 0),
-            caption: t(`range.${band}`),
+            zones: BANDS.map((z) => ({ from: z.min, to: z.max, color: z.color })),
+            domainMin: DOMAIN[0],
+            domainMax: DOMAIN[1],
+            value: bmr,
+            ticks: [DOMAIN[0], ...CUTS, DOMAIN[1]],
+            valueLabel: fmt(bmr),
+            caption: bandName,
           }}
         />
+      }
+    >
+      {invalid && <p className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-5 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-300">{t("invalidMeasurements")}</p>}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
       </div>
-      <div className="p-4 lg:p-6">
-        <div className="mb-5 flex justify-center border-b border-zinc-100 pb-5 dark:border-zinc-800">
-          <RatioGauge
-            value={single ?? 0}
-            domainMin={800}
-            domainMax={3000}
-            zones={[
-              { key: "lower", from: 800, to: 1400, colorClass: "stroke-sky-500 dark:stroke-sky-400" },
-              { key: "typical", from: 1400, to: 2000, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
-              { key: "higher", from: 2000, to: 3000, colorClass: "stroke-indigo-500 dark:stroke-indigo-400" },
-            ]}
-            valueLabel={fmt(single ?? 0)}
-            caption={t(`range.${band}`)}
-            captionColorClass={bandColor}
-            ticks={[800, 1400, 2000, 3000]}
-          />
-        </div>
-        {isCompare ? (
-          <>
-            <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-xl border border-blue-400 bg-blue-50 p-3 dark:border-blue-500/40 dark:bg-blue-500/10">
-                <p className="text-lg font-bold text-blue-600 dark:text-blue-400">{fmt(result.harrisBenedict!)}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("harrisBenedict")}</p>
-              </div>
-              <div className="rounded-xl border border-emerald-400 bg-emerald-50 p-3 dark:border-emerald-500/40 dark:bg-emerald-500/10">
-                <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{fmt(result.mifflinStJeor!)}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("mifflinStJeor")}</p>
-              </div>
-            </div>
-
-            <div className="mt-5">
-              <BMRComparisonChart harrisBenedict={result.harrisBenedict!} mifflinStJeor={result.mifflinStJeor!} digitStyle={digitStyle} />
-            </div>
-
-            <p className="mt-5 border-t border-zinc-100 pt-4 text-center text-sm text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
-              {t("difference", { value: fmt(Math.abs(result.differenceKcal!)) })}
-            </p>
-          </>
-        ) : (
-          <div className="text-center">
-            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{fmt(single!)}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{t("bmrUnit")}</p>
-          </div>
-        )}
-      </div>
-    </div>
+    </SectionCard>
   );
 }

@@ -1,71 +1,157 @@
+"use client";
+import { useRef } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import type { MacroGoal, MacroResult as Result } from "./types";
-import MacroPieChart from "./MacroPieChart";
+import SectionCard from "@/components/tool-ui/SectionCard";
+import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import Scene3D from "@/components/tool-ui/three/Scene3D";
 import MacroShareExportModal from "./MacroShareExportModal";
+import type { MacroSnapshot } from "./MacroLiveContext";
+import { AMDR, COLORS, GOALS, KCAL_G, MACROS, REF_WEIGHT_KG, SYMBOL, inAmdr, splitFor } from "./macros";
+import { useSnapTableRows } from "../ideal-weight-calculator/useSnapTableRows";
+
+// three/drei live only in this dynamically imported chunk, never in the page chunk.
+const MacroPlateScene3D = dynamic(() => import("./MacroPlateScene3D"), { ssr: false });
+
+const MEALS = 3;
 
 type Props = {
-  result: Result;
+  /** The last valid result. */
+  snap: MacroSnapshot;
+  /** The current total is invalid: the last good result stays, with the calculator's note. */
+  invalid: boolean;
   digitStyle: DigitStyle;
-  totalCalories: string;
-  goal: MacroGoal;
+  /** Page mode: the table fills the stretched Result column (§27). */
+  fill?: boolean;
 };
 
-export default function MacroResult({ result, digitStyle, totalCalories, goal }: Props) {
+export default function MacroResult({ snap, invalid, digitStyle, fill = false }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  useSnapTableRows(wrapRef);
   const t = useTranslations("tools.macro-calculator.result");
   const tForm = useTranslations("tools.macro-calculator.form");
   const tGoals = useTranslations("tools.macro-calculator.goals.labels");
-  const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
+  const tv = useTranslations("tools.macro-calculator.visuals.result");
+  const n0 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 0 });
+  const n1 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 1 });
+  const n2 = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 2 });
 
-  if (result.error) {
-    return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-        <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-          <h2 className="font-bold text-white">{t("heading")}</h2>
-        </div>
-        <div className="p-4 lg:p-6">
-          <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t("invalidCalories")}</p>
-        </div>
-      </div>
-    );
-  }
-
-  const rows: { key: "protein" | "carbs" | "fat"; color: string }[] = [
-    { key: "protein", color: "border-blue-400 bg-blue-50 dark:border-blue-500/40 dark:bg-blue-500/10" },
-    { key: "carbs", color: "border-emerald-400 bg-emerald-50 dark:border-emerald-500/40 dark:bg-emerald-500/10" },
-    { key: "fat", color: "border-amber-400 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-500/10" },
-  ];
+  const { calories: kcal, goal } = snap;
+  const pctText = MACROS.map((m) => n0(snap[m].percent)).join(" / ");
+  const totalGrams = MACROS.reduce((s, m) => s + snap[m].grams, 0);
+  const amdrOk = MACROS.every((m) => inAmdr(m, snap[m].percent));
 
   const inputRows = [
-    { label: tForm("totalCalories"), value: `${totalCalories} kcal` },
+    { label: tForm("totalCalories"), value: `${n0(kcal)} kcal` },
     { label: tForm("goalLabel"), value: tGoals(goal) },
   ];
-  const resultRows = rows.map((r) => ({ label: t(r.key), value: `${fmt(result[r.key].grams)} g (${fmt(result[r.key].calories)} kcal)` }));
-  const sentence = t("sentence", { protein: `${fmt(result.protein.grams)} g`, carbs: `${fmt(result.carbs.grams)} g`, fat: `${fmt(result.fat.grams)} g` });
+  const resultRows = MACROS.map((m) => ({ label: t(m), value: `${n0(snap[m].grams)} g (${n0(snap[m].calories)} kcal)` }));
+  const sentence = t("sentence", { protein: `${n0(snap.protein.grams)} g`, carbs: `${n0(snap.carbs.grams)} g`, fat: `${n0(snap.fat.grams)} g` });
+
+  const groups: LiveTableGroup[] = [
+    {
+      title: tv("groupInputs"),
+      rows: [
+        { label: tForm("totalCalories"), formula: tv("given"), value: n0(kcal), unit: "kcal" },
+        { label: tForm("goalLabel"), formula: tv("given"), value: tGoals(goal) },
+        { label: tv("split"), formula: "P / C / F", value: pctText, unit: "%" },
+      ],
+    },
+    {
+      title: tv("groupGrams"),
+      rows: [
+        ...MACROS.map((m) => ({
+          label: t(m),
+          formula: `${n0(kcal)} × ${n0(snap[m].percent)}% ÷ ${KCAL_G[m]}`,
+          value: n0(snap[m].grams),
+          unit: "g",
+          emphasize: true,
+        })),
+        { label: tv("totalGrams"), formula: MACROS.map((m) => n0(snap[m].grams)).join(" + "), value: n0(totalGrams), unit: "g" },
+      ],
+    },
+    {
+      title: tv("groupCalories"),
+      rows: [
+        ...MACROS.map((m) => ({
+          label: t(m),
+          formula: `${n0(kcal)} × ${n0(snap[m].percent)}%`,
+          value: n0(snap[m].calories),
+          unit: "kcal",
+        })),
+        { label: tv("check"), formula: MACROS.map((m) => n0(snap[m].calories)).join(" + "), value: n0(kcal), unit: "kcal" },
+        { label: tv("density"), formula: `${n0(kcal)} ÷ ${n0(totalGrams)}`, value: n2(kcal / totalGrams), unit: "kcal/g" },
+      ],
+    },
+    {
+      title: tv("groupMeal", { n: MEALS }),
+      rows: MACROS.map((m) => ({ label: t(m), formula: `${n0(snap[m].grams)} ÷ ${MEALS}`, value: n0(snap[m].grams / MEALS), unit: "g" })),
+    },
+    {
+      title: tv("groupAmdr"),
+      rows: [
+        ...MACROS.map((m) => ({
+          label: t(m),
+          formula: `${AMDR[m][0]}–${AMDR[m][1]}%`,
+          value: `${n0(snap[m].percent)}% ${inAmdr(m, snap[m].percent) ? "✓" : "✗"}`,
+        })),
+        { label: tv("amdrAll"), formula: "IOM 2005", value: amdrOk ? tv("yes") : tv("no"), emphasize: true },
+        { label: tv("perKg"), formula: `${n0(snap.protein.grams)} ÷ ${REF_WEIGHT_KG}`, value: n2(snap.protein.grams / REF_WEIGHT_KG), unit: "g/kg" },
+      ],
+    },
+    {
+      title: tv("groupGoals"),
+      rows: GOALS.map((g) => {
+        const sp = splitFor(kcal, g)!;
+        return {
+          label: tGoals(g),
+          formula: MACROS.map((m) => n0(sp[m].percent)).join(" / ") + "%",
+          value: MACROS.map((m) => n0(sp[m].grams)).join(" / "),
+          unit: "g",
+          emphasize: g === goal,
+        };
+      }),
+    },
+  ];
+
+  const parts = MACROS.map((m) => ({
+    key: m,
+    color: COLORS[m],
+    percent: snap[m].percent,
+    grams: snap[m].grams,
+    label: `${SYMBOL[m]} ${n0(snap[m].grams)} g · ${n1(snap[m].percent)}%`,
+  }));
+
+  const layout = (
+    <LiveTable3DLayout
+      headings={[tv("colQuantity"), tv("colFormula"), tv("colValue")]}
+      groups={groups}
+      hint={tv("hint")}
+      caption={tv("caption", { kcal: `${n0(kcal)} kcal` })}
+      drawing={
+        <Scene3D className="min-h-0!" camera={[0, 2.6, 3.9]}>
+          <MacroPlateScene3D parts={parts} total={`${n0(kcal)} kcal`} />
+        </Scene3D>
+      }
+    />
+  );
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
-      <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
-        <h2 className="font-bold text-white">{t("heading")}</h2>
-        <MacroShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={`${totalCalories} kcal`} sentence={sentence} />
+    <SectionCard
+      title={t("heading")}
+      className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
+      bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}
+      action={<MacroShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={`${n0(kcal)} kcal`} sentence={sentence} />}
+    >
+      {invalid && (
+        <p role="status" className="mb-3 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200">
+          {t("invalidCalories")}
+        </p>
+      )}
+      <div ref={wrapRef} className={fill ? "lg:flex lg:flex-1 lg:flex-col" : undefined}>
+        {fill ? <LiveTableFill>{layout}</LiveTableFill> : layout}
       </div>
-      <div className="p-4 lg:p-6">
-        <MacroPieChart protein={result.protein} carbs={result.carbs} fat={result.fat} />
-
-        <div className="mt-5 space-y-2.5">
-          {rows.map((row) => (
-            <div key={row.key} className={`flex items-center justify-between rounded-xl border p-3 ${row.color}`}>
-              <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-200">
-                {t(row.key)} <span className="font-normal text-zinc-500 dark:text-zinc-400">({fmt(result[row.key].percent)}%)</span>
-              </span>
-              <span className="text-right">
-                <span className="block text-base font-bold text-zinc-800 dark:text-zinc-100">{fmt(result[row.key].grams)} g</span>
-                <span className="block text-xs text-zinc-500 dark:text-zinc-400">{fmt(result[row.key].calories)} kcal</span>
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    </SectionCard>
   );
 }

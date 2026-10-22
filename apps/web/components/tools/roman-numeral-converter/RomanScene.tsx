@@ -52,7 +52,7 @@ export default function RomanScene({ value, seed, onSet }: { value: number; seed
   return (
     <div data-ph-scene-block className="flex flex-1 flex-col gap-3">
       {/* Grows with the Result card's spare height (the rods lengthen), so the column ends flush (§41). */}
-      <div ref={box} dir="ltr" className="relative min-h-[320px] w-full flex-1" data-testid="roman-hero-drawing">
+      <div ref={box} dir="ltr" data-preview="visual" className="relative min-h-[320px] w-full flex-1" data-testid="roman-hero-drawing">
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
           <rect x={X0} y={top} width={X1 - X0} height={bottom - top + 14} rx={16} style={{ fill: "var(--glass-track)", stroke: "var(--ph-line)" }} strokeWidth={1.25} />
           <rect x={X0 + 6} y={bar - 3} width={X1 - X0 - 12} height={6} rx={3} style={{ fill: "var(--ph-ink-muted)" }} />

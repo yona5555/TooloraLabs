@@ -4,6 +4,14 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
 import AdSpace from "@/components/tool-ui/AdSpace";
+import TlGlyphInspector from "./TlGlyphInspector";
+import TlCoverage from "./TlCoverage";
+import TlExceptions from "./TlExceptions";
+import TlBlockMap from "./TlBlockMap";
+import TlUtf16Length from "./TlUtf16Length";
+import TlByteCost from "./TlByteCost";
+import TlBudget from "./TlBudget";
+import TlRecovery from "./TlRecovery";
 
 type UseCaseItem = { title: string; description: string };
 
@@ -18,7 +26,17 @@ export default async function LogoEducation() {
     <EncyclopediaPaper>
       <InfoSection title={t("intro.title")}>
         <p>{t("intro.paragraph1")}</p>
+        <div className="space-y-6">
+          <TlGlyphInspector />
+          <TlCoverage />
+          <TlExceptions />
+        </div>
         <p>{t("intro.paragraph2")}</p>
+        <div className="space-y-6">
+          <TlBlockMap />
+          <TlUtf16Length />
+          <TlByteCost />
+        </div>
       </InfoSection>
 
       <InfoSection title={t("useCases.title")}>
@@ -30,6 +48,10 @@ export default async function LogoEducation() {
               <p className="mt-1">{item.description}</p>
             </div>
           ))}
+        </div>
+        <div className="space-y-6">
+          <TlBudget />
+          <TlRecovery />
         </div>
       </InfoSection>
 

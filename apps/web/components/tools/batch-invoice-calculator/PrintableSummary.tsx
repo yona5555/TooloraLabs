@@ -12,7 +12,7 @@ export default function PrintableSummary({ invoices, overview, f }: Props) {
 
   return (
     <div data-print-area className="hidden bg-white p-8 text-black print:block">
-      <h1 className="mb-4 text-xl font-bold">{t("title")}</h1>
+      <div className="mb-4 text-xl font-bold">{t("title")}</div>
       {invoices.map((inv, i) => {
         const row = overview.perInvoice[i];
         return (

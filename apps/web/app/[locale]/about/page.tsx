@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import LegalPageLayout from "@/components/legal/LegalPageLayout";
+import { localeAlternates } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -11,7 +12,10 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "legal.about" });
-  return { title: `${t("title")} | TooloraLabs` };
+  return {
+    title: `${t("title")} | TooloraLabs`,
+    alternates: localeAlternates(locale, "/about"),
+  };
 }
 
 export default async function AboutPage({ params }: PageProps) {

@@ -218,7 +218,7 @@ export default function ZipCompressorShareExportModal({ inputRows, resultRows, h
           </p>
         </div>
 
-        <h1 className="mb-4 text-2xl font-bold text-zinc-900">{t("title")}</h1>
+        <div className="mb-4 text-2xl font-bold text-zinc-900">{t("title")}</div>
 
         {inputRows.length > 0 && (
           <>

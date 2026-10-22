@@ -1,132 +1,143 @@
 "use client";
-import { useLocale, useTranslations } from "next-intl";
-import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
-import { formatUtcOffsetLabel, type TimeConversionResult } from "@tooloralabs/tools";
+import { useTranslations } from "next-intl";
+import { wtSolarElevation, wtSolarPosition, type WtCity } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
-import WorldClockGauge from "./WorldClockGauge";
-import WorldTimeShareExportModal from "./WorldTimeShareExportModal";
-import type { WorldCity } from "@/lib/worldtime/cities";
+import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import { STATUS_COLORS, type Derived, type Fmt, type WtState } from "./state";
 
-type WorldTimeResultProps = {
-  fromCity: WorldCity;
-  toCity: WorldCity;
-  result: TimeConversionResult;
-  digitStyle: DigitStyle;
-};
+type Props = { s: WtState; d: Derived; f: Fmt };
 
-function hourOf(instantMs: number, zone: string): number {
-  const dtf = new Intl.DateTimeFormat("en-US", { timeZone: zone, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
-  const parts = dtf.formatToParts(new Date(instantMs));
-  const hour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
-  const minute = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
-  return hour + minute / 60;
-}
+const RING_COLORS = ["#2563eb", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4", "#ec4899", "#84cc16", "#f97316", "#14b8a6", "#6366f1"];
 
-export default function WorldTimeResult({ fromCity, toCity, result, digitStyle }: WorldTimeResultProps) {
-  const t = useTranslations("tools.world-time-converter.aboveFold");
-  const locale = useLocale();
-  const nameKey = locale === "ar" ? "ar" : "en";
-  const intlLocale = locale === "ar" ? "ar" : "en-US";
-  const numberingSystem = digitStyle === "eastern" ? "arab" : "latn";
-
-  const instant = new Date(result.utcInstant);
-
-  const formattedTime = new Intl.DateTimeFormat(intlLocale, {
-    timeZone: toCity.ianaZone,
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: locale !== "ar",
-    numberingSystem,
-  }).format(instant);
-
-  const formattedDate = new Intl.DateTimeFormat(intlLocale, {
-    timeZone: toCity.ianaZone,
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    numberingSystem,
-  }).format(instant);
-
-  const diff = Math.abs(result.differenceMinutes);
-  const diffHours = Math.floor(diff / 60);
-  const diffMinutes = diff % 60;
-  const diffLabel =
-    diffMinutes === 0
-      ? t("differenceHoursOnly", { hours: formatLocalizedNumber(diffHours, digitStyle, { maximumFractionDigits: 0 }) })
-      : t("differenceHoursMinutes", {
-          hours: formatLocalizedNumber(diffHours, digitStyle, { maximumFractionDigits: 0 }),
-          minutes: formatLocalizedNumber(diffMinutes, digitStyle, { maximumFractionDigits: 0 }),
-        });
-
-  const dayNote = result.dayDifference === 0 ? t("sameDay") : result.dayDifference > 0 ? t("nextDay") : t("previousDay");
-
-  const inputRows = [
-    { label: t("fromLabel"), value: fromCity.city[nameKey] },
-    { label: t("toLabel"), value: toCity.city[nameKey] },
-  ];
-  const resultRows = [
-    { label: t("differenceLabel"), value: result.differenceMinutes === 0 ? t("sameTime") : `${result.differenceMinutes > 0 ? "+" : "−"}${diffLabel}` },
-    { label: t("dayNoteLabel"), value: dayNote },
-  ];
-  const sentence = `${toCity.city[nameKey]}: ${formattedTime} — ${formattedDate}`;
+/** 24-hour dial: one ring per city, the dot at its local time; work hours and night shaded. */
+function Dial({ s, d, f }: Props) {
+  const S = 320;
+  const c = S / 2;
+  const n = d.all.length;
+  const outer = 132;
+  const inner = 46;
+  const gap = n > 1 ? (outer - inner) / (n - 1) : 0;
+  const sun = wtSolarPosition(d.conv.utcMs);
+  const sub = { lat: sun.subsolarLatDeg, lon: sun.subsolarLonDeg };
+  const ang = (min: number) => (min / 1440) * 2 * Math.PI - Math.PI / 2;
+  const pt = (min: number, r: number) => [c + r * Math.cos(ang(min)), c + r * Math.sin(ang(min))] as const;
+  const arc = (a: number, b: number, r0: number, r1: number) => {
+    const large = (b - a + 1440) % 1440 > 720 ? 1 : 0;
+    const [x0, y0] = pt(a, r1);
+    const [x1, y1] = pt(b, r1);
+    const [x2, y2] = pt(b, r0);
+    const [x3, y3] = pt(a, r0);
+    return `M${x0},${y0} A${r1},${r1} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${r0},${r0} 0 ${large} 0 ${x3},${y3} Z`;
+  };
+  const r = (i: number) => outer - i * gap;
 
   return (
-    <SectionCard
-      title={t("resultTitle")}
-      action={
-        <WorldTimeShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("resultTitle")} heroValue={formattedTime} sentence={sentence} />
-      }
-    >
-      <div className="text-center">
-        <p dir="ltr" suppressHydrationWarning className="font-mono text-4xl font-bold text-zinc-900 dark:text-zinc-50">
-          {formattedTime}
-        </p>
-        <p suppressHydrationWarning className="mt-1 text-sm font-medium text-zinc-600 dark:text-zinc-300">
-          {formattedDate}
-        </p>
-        <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{toCity.city[nameKey]}</p>
-      </div>
+    <svg viewBox={`0 0 ${S} ${S}`} width="100%" height="100%" overflow="visible" style={{ direction: "ltr" }} role="img" aria-label="24h dial">
+      <circle cx={c} cy={c} r={outer + 18} className="fill-zinc-50 dark:fill-zinc-800/60" />
+      <path d={arc(22 * 60, 7 * 60, inner - 10, outer + 8)} fill={STATUS_COLORS.night} fillOpacity={0.18} />
+      <path d={arc(s.ws, s.we % 1440 === s.ws ? s.ws + 1439 : s.we, inner - 10, outer + 8)} fill={STATUS_COLORS.work} fillOpacity={0.2} />
+      {Array.from({ length: 24 }, (_, h) => {
+        const [x0, y0] = pt(h * 60, outer + 10);
+        const [x1, y1] = pt(h * 60, outer + (h % 3 === 0 ? 16 : 13));
+        const [tx, ty] = pt(h * 60, outer + 24);
+        return (
+          <g key={h}>
+            <line x1={x0} y1={y0} x2={x1} y2={y1} stroke="currentColor" strokeOpacity={0.45} />
+            {h % 3 === 0 && (
+              <text x={tx} y={ty + 3} textAnchor="middle" fontSize={9} className="fill-zinc-500 dark:fill-zinc-400">
+                {String(h).padStart(2, "0")}
+              </text>
+            )}
+          </g>
+        );
+      })}
+      {d.all.map((city: WtCity, i) => {
+        const row = d.conv.rows[i];
+        const m = row.parts.hour * 60 + row.parts.minute;
+        const [x, y] = pt(m, r(i));
+        const el = wtSolarElevation({ lat: city.lat, lon: city.lon }, sub);
+        const col = RING_COLORS[i % RING_COLORS.length];
+        const lx = x + (Math.cos(ang(m)) >= 0 ? 7 : -7);
+        return (
+          <g key={city.id} style={{ transition: "all 400ms ease" }}>
+            <circle cx={c} cy={c} r={r(i)} fill="none" stroke={col} strokeOpacity={0.25} strokeWidth={1} />
+            <line x1={c} y1={c} x2={x} y2={y} stroke={col} strokeOpacity={i === 0 ? 0.9 : 0.35} strokeWidth={i === 0 ? 2.5 : 1} />
+            <circle cx={x} cy={y} r={i === 0 ? 6 : 4.5} fill={el > -0.833 ? "#fbbf24" : "#1e3a8a"} stroke={col} strokeWidth={2} />
+            <text x={lx} y={y + 3} textAnchor={Math.cos(ang(m)) >= 0 ? "start" : "end"} fontSize={9} fontWeight={i === 0 ? 800 : 600} fill={col}>
+              {f.city(city).split(" / ")[0].slice(0, 12)} {f.time(d.conv.utcMs, city.zone)}
+            </text>
+          </g>
+        );
+      })}
+      <circle cx={c} cy={c} r={inner - 14} className="fill-white dark:fill-zinc-900" stroke="currentColor" strokeOpacity={0.2} />
+      <text x={c} y={c - 2} textAnchor="middle" fontSize={13} fontWeight={800} className="fill-zinc-800 dark:fill-zinc-100">
+        {f.time(d.conv.utcMs, "UTC")}
+      </text>
+      <text x={c} y={c + 11} textAnchor="middle" fontSize={8} className="fill-zinc-500 dark:fill-zinc-400">UTC</text>
+    </svg>
+  );
+}
 
-      <div className="mt-4">
-        <WorldClockGauge
-          fromHour={hourOf(result.utcInstant, fromCity.ianaZone)}
-          toHour={hourOf(result.utcInstant, toCity.ianaZone)}
-          fromLabel={fromCity.city[nameKey]}
-          toLabel={toCity.city[nameKey]}
-          dayLabel={t("dayLabel")}
-          nightLabel={t("nightLabel")}
+export default function WorldTimeResult({ s, d, f }: Props) {
+  const t = useTranslations("tools.world-time-converter.wt.result");
+  const tu = useTranslations("tools.world-time-converter.wt.units");
+  const ms = d.conv.utcMs;
+  const utcH = f.time(ms, "UTC");
+
+  const groups: LiveTableGroup[] = d.all.map((c, i) => {
+    const row = d.conv.rows[i];
+    const x = d.extra[i];
+    const dst = row.offsetMinutes - x.std.standard;
+    const next = x.next;
+    return {
+      title: `${i === 0 ? "⌂ " : ""}${f.city(c)} — ${f.country(c)}`,
+      rows: [
+        { label: t("localTime"), formula: `UTC ${utcH} ${row.offsetMinutes < 0 ? "−" : "+"} ${f.hhmm(Math.abs(row.offsetMinutes))}`, value: f.time(ms, c.zone), emphasize: true },
+        {
+          label: t("date"),
+          formula: row.dayDelta === 0 ? t("sameDay") : row.dayDelta > 0 ? t("nextDay", { n: row.dayDelta }) : t("prevDay", { n: -row.dayDelta }),
+          value: f.date(ms, c.zone),
+        },
+        {
+          label: t("offset"),
+          formula: dst ? t("offsetDst", { std: f.offset(x.std.standard), dst: f.hhmm(dst) }) : t("offsetStd", { std: f.offset(x.std.standard) }),
+          value: f.offset(row.offsetMinutes),
+        },
+        { label: t("hijri"), formula: t("ummAlQura"), value: f.hijri(ms, c.zone) },
+        {
+          label: t("nextChange"),
+          formula: next ? `${f.offset(next.offsetBefore)} → ${f.offset(next.offsetAfter)}` : t("noDstFormula"),
+          value: next ? `${f.shortDate(next.utcMs, c.zone)} (${tu("h", { n: f.signed((next.offsetAfter - next.offsetBefore) / 60) })})` : t("noDst"),
+        },
+      ],
+    };
+  });
+
+  return (
+    <SectionCard title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+      <div className="mb-3 grid grid-cols-3 gap-2 text-center" data-bp-inner>
+        {[
+          { k: f.city(d.from), v: f.time(ms, d.from.zone) },
+          { k: t("utc"), v: utcH },
+          { k: t("spread"), v: tu("h", { n: f.num(d.spread / 60) }) },
+        ].map((x) => (
+          <div key={x.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10">
+            <p className="truncate text-[10px] leading-3 font-semibold text-zinc-500 dark:text-zinc-400">{x.k}</p>
+            <p dir="ltr" className="font-mono text-lg font-bold text-blue-700 dark:text-blue-300">{x.v}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mb-2 text-center text-xs text-zinc-600 dark:text-zinc-300">
+        {s.mode === "now" ? t("liveNote", { date: f.date(ms, d.from.zone) }) : t("customNote", { date: f.date(ms, d.from.zone), city: f.city(d.from) })}
+      </p>
+      <LiveTableFill>
+        <LiveTable3DLayout
+          headings={[t("colItem"), t("colCalc"), t("colValue")]}
+          groups={groups}
+          drawing={<Dial s={s} d={d} f={f} />}
+          caption={t("dialCaption", { start: f.hhmm(s.ws), end: s.we === 1440 ? "24:00" : f.hhmm(s.we) })}
         />
-      </div>
-
-      <dl className="mt-4 grid grid-cols-2 gap-3">
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("differenceLabel")}</dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {result.differenceMinutes === 0 ? t("sameTime") : `${result.differenceMinutes > 0 ? "+" : "−"}${diffLabel}`}
-          </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">{t("dayNoteLabel")}</dt>
-          <dd className="mt-1 font-semibold text-zinc-900 dark:text-zinc-100">{dayNote}</dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">
-            {t("utcOffsetLabel", { city: fromCity.city[nameKey] })}
-          </dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {t("utcPrefix")} {formatUtcOffsetLabel(result.fromOffsetMinutes)}
-          </dd>
-        </div>
-        <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-800/60">
-          <dt className="text-xs text-zinc-500 dark:text-zinc-400">
-            {t("utcOffsetLabel", { city: toCity.city[nameKey] })}
-          </dt>
-          <dd dir="ltr" className="mt-1 font-mono font-semibold text-zinc-900 dark:text-zinc-100">
-            {t("utcPrefix")} {formatUtcOffsetLabel(result.toOffsetMinutes)}
-          </dd>
-        </div>
-      </dl>
+      </LiveTableFill>
     </SectionCard>
   );
 }

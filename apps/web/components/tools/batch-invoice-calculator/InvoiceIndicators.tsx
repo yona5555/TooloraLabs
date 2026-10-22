@@ -137,7 +137,7 @@ export function CompositionDonut({ overview, f }: IndicatorProps) {
           : null
       }
     >
-      <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center" data-testid="ind-donut">
+      <div data-preview="visual" data-preview-hero className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center" data-testid="ind-donut">
         <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("donut.title")} className="shrink-0">
           {ring(per.map((r) => r.total), 82, 22, INVOICE_COLORS)}
           {ring([overview.net, overview.tax], 56, 18, [NET, TAX])}
@@ -206,7 +206,7 @@ export function NetTaxStacked({ overview, f }: IndicatorProps) {
         {per.map((r, i) => (
           <li key={r.id}>
             <div className="flex items-baseline justify-between gap-2 text-sm">
-              <span className="truncate font-medium text-zinc-800 dark:text-zinc-100">
+              <span className="min-w-0 font-medium text-zinc-800 dark:text-zinc-100">
                 {label(r, i)} <span className="text-xs font-normal text-zinc-400">{r.client}</span>
               </span>
               <span dir="ltr" className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
@@ -446,9 +446,9 @@ export function ClientConcentration({ invoices, overview, f }: IndicatorProps) {
         </p>
         <p className={`text-sm font-semibold ${zoneClass}`}>{t(`gauge.zone.${zone}`)}</p>
         <div className="mt-3 grid w-full max-w-md grid-cols-3 gap-2 text-center text-[11px]">
-          <span className="rounded-lg bg-emerald-50 px-2 py-1 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">{t("gauge.zone.low")} &lt; 25%</span>
+          <span className="rounded-lg bg-emerald-50 px-2 py-1 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">{t("gauge.zone.low")} <bdi dir="ltr">&lt; 25%</bdi></span>
           <span className="rounded-lg bg-amber-50 px-2 py-1 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">25–50%</span>
-          <span className="rounded-lg bg-red-50 px-2 py-1 text-red-700 dark:bg-red-500/10 dark:text-red-300">{t("gauge.zone.high")} &gt; 50%</span>
+          <span className="rounded-lg bg-red-50 px-2 py-1 text-red-700 dark:bg-red-500/10 dark:text-red-300">{t("gauge.zone.high")} <bdi dir="ltr">&gt; 50%</bdi></span>
         </div>
       </div>
     </IndicatorCard>

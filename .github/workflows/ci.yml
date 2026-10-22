@@ -43,3 +43,13 @@ jobs:
 
       - name: Build web app
         run: npm run build --workspace=apps/web
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Served tool-card previews (approved hash, contain, not cropped)
+        working-directory: apps/web
+        run: |
+          npx next start -p 3001 > /tmp/next.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en/tools && break; sleep 2; done
+          npm run test:cards

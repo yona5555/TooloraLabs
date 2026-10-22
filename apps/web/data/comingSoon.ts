@@ -11,7 +11,6 @@ export const comingSoonPhaseIds: ComingSoonPhaseId[] = ["phase-1", "phase-1b", "
 
 export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
   "phase-1": [
-    { id: "random-name-generator", icon: "Wand2", category: "fun-entertainment" },
     { id: "golden-ratio-calculator", icon: "Infinity", category: "math" },
     { id: "cagr-calculator", icon: "TrendingUp", category: "financial-calculators" },
     { id: "personal-budget-calculator", icon: "Wallet", category: "financial-calculators" },
@@ -30,8 +29,6 @@ export const comingSoonPhases: Record<ComingSoonPhaseId, ComingSoonTool[]> = {
     { id: "zakat-calculator", icon: "HandCoins", category: "financial-calculators" },
     { id: "advanced-temperature-converter", icon: "Thermometer", category: "converters" },
     { id: "stacked-discount-calculator", icon: "Layers", category: "financial-calculators" },
-    { id: "chinese-zodiac-age-calculator", icon: "CalendarDays", category: "fun-entertainment" },
-    { id: "zodiac-sign-calculator", icon: "Star", category: "fun-entertainment" },
     { id: "steps-to-calories-calculator", icon: "Footprints", category: "health-fitness" },
     { id: "heat-index-calculator", icon: "CloudRain", category: "weather" },
     { id: "tree-age-calculator", icon: "TreePine", category: "date-time" },

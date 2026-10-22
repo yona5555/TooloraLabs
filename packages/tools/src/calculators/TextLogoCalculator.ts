@@ -3,6 +3,9 @@ import { BaseCalculator } from "./BaseCalculator";
 
 export type TextLogoStyle = "bold" | "italic" | "boldItalic" | "doubleStruck" | "monospace" | "fullwidth" | "circled";
 
+/** Every style, in display order. */
+export const TEXT_LOGO_STYLES: readonly TextLogoStyle[] = ["bold", "italic", "boldItalic", "doubleStruck", "monospace", "fullwidth", "circled"];
+
 export type TextLogoInput = {
   text: string;
   style: TextLogoStyle;
@@ -40,23 +43,127 @@ function buildMap(upperBase: number, lowerBase: number, digitBase: number | null
   return map;
 }
 
-const STYLE_MAPS: Record<TextLogoStyle, CharMap> = {
-  bold: buildMap(0x1d400, 0x1d41a, 0x1d7ce),
-  italic: buildMap(0x1d434, 0x1d44e, null, { h: "ℎ" }),
-  boldItalic: buildMap(0x1d468, 0x1d482, null),
-  doubleStruck: buildMap(0x1d538, 0x1d552, 0x1d7d8, {
-    C: "ℂ",
-    H: "ℍ",
-    N: "ℕ",
-    P: "ℙ",
-    Q: "ℚ",
-    R: "ℝ",
-    Z: "ℤ",
-  }),
-  monospace: buildMap(0x1d670, 0x1d68a, 0x1d7f6),
-  fullwidth: buildMap(0xff21, 0xff41, 0xff10),
-  circled: buildMap(0x24b6, 0x24d0, 0x245f, { "0": "⓪" }),
+/** Block base code points per style: A, a and 0 (null when the style has no digits). */
+export type TextLogoBases = { upper: number; lower: number; digit: number | null };
+
+const STYLE_BASES: Record<TextLogoStyle, TextLogoBases> = {
+  bold: { upper: 0x1d400, lower: 0x1d41a, digit: 0x1d7ce },
+  italic: { upper: 0x1d434, lower: 0x1d44e, digit: null },
+  boldItalic: { upper: 0x1d468, lower: 0x1d482, digit: null },
+  doubleStruck: { upper: 0x1d538, lower: 0x1d552, digit: 0x1d7d8 },
+  monospace: { upper: 0x1d670, lower: 0x1d68a, digit: 0x1d7f6 },
+  fullwidth: { upper: 0xff21, lower: 0xff41, digit: 0xff10 },
+  circled: { upper: 0x24b6, lower: 0x24d0, digit: 0x245f },
 };
+
+/** Characters where Unicode reuses an older code point instead of the block offset. */
+const STYLE_EXCEPTIONS: Record<TextLogoStyle, CharMap> = {
+  bold: {},
+  italic: { h: "ℎ" },
+  boldItalic: {},
+  doubleStruck: { C: "ℂ", H: "ℍ", N: "ℕ", P: "ℙ", Q: "ℚ", R: "ℝ", Z: "ℤ" },
+  monospace: {},
+  fullwidth: {},
+  circled: { "0": "⓪" },
+};
+
+const STYLE_MAPS = Object.fromEntries(
+  TEXT_LOGO_STYLES.map((style) => {
+    const b = STYLE_BASES[style];
+    return [style, buildMap(b.upper, b.lower, b.digit, STYLE_EXCEPTIONS[style])];
+  }),
+) as Record<TextLogoStyle, CharMap>;
+
+export function textLogoBases(style: TextLogoStyle): TextLogoBases {
+  return STYLE_BASES[style];
+}
+
+/** The legacy-code-point exceptions of a style, as [source, styled] pairs. */
+export function textLogoExceptions(style: TextLogoStyle): [string, string][] {
+  return Object.entries(STYLE_EXCEPTIONS[style]);
+}
+
+export type TextLogoCharKind = "upper" | "lower" | "digit" | "other";
+
+export type TextLogoGlyph = {
+  source: string;
+  styled: string;
+  sourceCodePoint: number;
+  styledCodePoint: number;
+  kind: TextLogoCharKind;
+  /** True when the style replaced the character. */
+  mapped: boolean;
+  /** True when the replacement is a legacy exception rather than base + offset. */
+  exception: boolean;
+  /** Offset from the block base (A, a or 0), or null for "other" characters. */
+  offset: number | null;
+  utf16Units: number;
+  utf8Bytes: number;
+};
+
+/** UTF-8 byte length of a string (pure, no TextEncoder). */
+export function utf8ByteLength(text: string): number {
+  let bytes = 0;
+  for (const ch of text) {
+    const cp = ch.codePointAt(0) ?? 0;
+    bytes += cp < 0x80 ? 1 : cp < 0x800 ? 2 : cp < 0x10000 ? 3 : 4;
+  }
+  return bytes;
+}
+
+function kindOf(ch: string): TextLogoCharKind {
+  if (ch >= "A" && ch <= "Z") return "upper";
+  if (ch >= "a" && ch <= "z") return "lower";
+  if (ch >= "0" && ch <= "9") return "digit";
+  return "other";
+}
+
+/**
+ * Per-character breakdown of the styled output (same trimming and mapping as `execute`), so a UI
+ * can show code points, byte costs and which characters the style could not replace.
+ */
+export function textLogoGlyphs(text: string, style: TextLogoStyle): TextLogoGlyph[] {
+  const map = STYLE_MAPS[style] ?? STYLE_MAPS.bold;
+  const exceptions = STYLE_EXCEPTIONS[style] ?? {};
+  return Array.from((text ?? "").trim()).map((source) => {
+    const styled = map[source] ?? source;
+    const kind = kindOf(source);
+    const offset = kind === "upper" ? source.charCodeAt(0) - 65 : kind === "lower" ? source.charCodeAt(0) - 97 : kind === "digit" ? source.charCodeAt(0) - 48 : null;
+    return {
+      source,
+      styled,
+      sourceCodePoint: source.codePointAt(0) ?? 0,
+      styledCodePoint: styled.codePointAt(0) ?? 0,
+      kind,
+      mapped: styled !== source,
+      exception: source in exceptions,
+      offset,
+      utf16Units: styled.length,
+      utf8Bytes: utf8ByteLength(styled),
+    };
+  });
+}
+
+/**
+ * Compatibility (NFKC) normalization of styled text — the folding search indexes and many text
+ * pipelines apply. Every style this tool produces folds back to the plain letters and digits.
+ */
+export function textLogoRecover(styled: string): string {
+  return (styled ?? "").normalize("NFKC");
+}
+
+export type TextLogoBlock = "basicLatin" | "latinSupplement" | "letterlike" | "enclosed" | "fullwidth" | "mathAlphanumeric" | "other";
+
+/** The Unicode block a code point belongs to (only the blocks this tool produces or keeps). */
+export function textLogoBlockOf(codePoint: number): TextLogoBlock {
+  if (codePoint < 0x80) return "basicLatin";
+  if (codePoint < 0x250) return "latinSupplement";
+  if (codePoint >= 0x2100 && codePoint <= 0x214f) return "letterlike";
+  if (codePoint >= 0x2460 && codePoint <= 0x24ff) return "enclosed";
+  if (codePoint >= 0xff00 && codePoint <= 0xffef) return "fullwidth";
+  if (codePoint >= 0x1d400 && codePoint <= 0x1d7ff) return "mathAlphanumeric";
+  return "other";
+}
 
 function applyStyle(text: string, map: CharMap): string {
   return Array.from(text)

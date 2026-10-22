@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 const tool = new StatisticsCalculator();
 
@@ -26,7 +27,7 @@ export default function VarianceCalculationSteps() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="flex shrink-0 flex-wrap items-center justify-center gap-2 text-center font-mono text-sm">
           <span className="rounded-lg bg-zinc-100 px-2.5 py-1.5 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">{t("worked.step1Short", { mean: round3(mean) })}</span>
           <span className="text-zinc-300 dark:text-zinc-600">→</span>
@@ -42,7 +43,7 @@ export default function VarianceCalculationSteps() {
             { label: t("worked.variance"), value: `${round3(populationVariance)}`, emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

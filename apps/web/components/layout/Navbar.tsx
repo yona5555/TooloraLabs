@@ -36,6 +36,14 @@ export default function Navbar() {
             {t("home")}
           </Link>
           <Link
+            href="/categories"
+            data-bp-nav="teal"
+            data-bp-link="categories"
+            className="text-sm font-medium"
+          >
+            {t("categories")}
+          </Link>
+          <Link
             href="/tools"
             data-bp-nav="navy"
             data-bp-link="tools"
@@ -44,15 +52,6 @@ export default function Navbar() {
             {t("tools")}
           </Link>
           <Link
-            href="/categories"
-            data-bp-nav="teal"
-            data-bp-link="categories"
-            className="text-sm font-medium"
-          >
-            {t("categories")}
-          </Link>
-          <ToolsDropdown />
-          <Link
             href="/docs"
             data-bp-nav="black"
             data-bp-link="docs"
@@ -60,6 +59,7 @@ export default function Navbar() {
           >
             {t("docs")}
           </Link>
+          <ToolsDropdown />
           <Link
             href="/coming-soon"
             data-bp-nav="violet"

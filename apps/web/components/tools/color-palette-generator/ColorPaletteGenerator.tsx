@@ -1,37 +1,32 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { generateColorPalette, generateRandomHex, isValidHex, type HarmonyType } from "@tooloralabs/tools";
+import { generateRandomHex, isValidHex } from "@tooloralabs/tools";
 
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
+import QuickExamplesCard from "@/components/tool-ui/QuickExamplesCard";
+import { useNavBarVisible } from "@/components/tool-ui/useNavBarVisible";
 import ColorPaletteInputPanel from "./ColorPaletteInputPanel";
 import ColorPaletteResult from "./ColorPaletteResult";
 import ColorPaletteQuickReference from "./ColorPaletteQuickReference";
-
-const DEFAULTS = { baseHex: "#3B82F6", harmony: "complementary" as HarmonyType };
+import { PALETTE_DEFAULTS, PALETTE_EXAMPLES, PaletteLiveProvider, type PaletteDraft } from "./PaletteLiveContext";
 
 export default function ColorPaletteGeneratorTool({ education }: { education: ReactNode }) {
   const t = useTranslations("tools.color-palette-generator");
   const tNav = useTranslations("tools.color-palette-generator.nav");
+  const tEx = useTranslations("tools.color-palette-generator.examples");
+  const tHarmony = useTranslations("tools.color-palette-generator.form.harmony");
+  const [draft, setDraft] = useState<PaletteDraft>(PALETTE_DEFAULTS);
+  const [activeExample, setActiveExample] = useState<string | null>("tailwind");
+  const [sentinelRef, navBarVisible] = useNavBarVisible();
 
-  const [baseHex, setBaseHex] = useState(DEFAULTS.baseHex);
-  const [harmony, setHarmony] = useState<HarmonyType>(DEFAULTS.harmony);
-
-  const isValid = isValidHex(baseHex);
-
-  const palette = useMemo(() => (isValid ? generateColorPalette(baseHex, harmony) : []), [baseHex, harmony, isValid]);
-
-  function handleRandomize() {
-    setBaseHex(generateRandomHex());
-  }
-
-  function handleClear() {
-    setBaseHex(DEFAULTS.baseHex);
-    setHarmony(DEFAULTS.harmony);
+  function setDim<K extends keyof PaletteDraft>(key: K, value: PaletteDraft[K]) {
+    setDraft((d) => ({ ...d, [key]: value }));
+    setActiveExample(null);
   }
 
   const navItems = [
@@ -41,37 +36,54 @@ export default function ColorPaletteGeneratorTool({ education }: { education: Re
   ];
 
   return (
-    <>
+    <PaletteLiveProvider value={{ dims: draft, setDim }}>
+      <div ref={sentinelRef} aria-hidden="true" />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
+          stretchInput
+          stretchResult
+          sidebarMatchRow
           input={
-            <ColorPaletteInputPanel
-              baseHex={baseHex}
-              onBaseHexChange={setBaseHex}
-              onRandomize={handleRandomize}
-              harmony={harmony}
-              onHarmonyChange={setHarmony}
-              error={baseHex && !isValid ? t("form.invalidHex") : ""}
-              onClear={handleClear}
-            />
-          }
-          result={
-            <div className="flex flex-col gap-4">
-              <ColorPaletteResult palette={palette} />
-              <ColorPaletteQuickReference />
+            <div className="flex flex-col gap-6 lg:h-full">
+              <ColorPaletteInputPanel
+                baseHex={draft.baseHex}
+                onBaseHexChange={(v) => setDim("baseHex", v)}
+                onRandomize={() => setDim("baseHex", generateRandomHex().toUpperCase())}
+                harmony={draft.harmony}
+                onHarmonyChange={(v) => setDim("harmony", v)}
+                error={draft.baseHex && !isValidHex(draft.baseHex) ? t("form.invalidHex") : ""}
+                onClear={() => {
+                  setDraft(PALETTE_DEFAULTS);
+                  setActiveExample("tailwind");
+                }}
+              />
+              <QuickExamplesCard
+                title={tEx("title")}
+                className="lg:flex-1"
+                activeId={activeExample}
+                onPick={(id) => {
+                  const ex = PALETTE_EXAMPLES.find((e) => e.id === id);
+                  if (!ex) return;
+                  setDraft({ baseHex: ex.baseHex, harmony: ex.harmony });
+                  setActiveExample(id);
+                }}
+                examples={PALETTE_EXAMPLES.map((ex) => ({ id: ex.id, label: tEx(ex.id), detail: `${ex.baseHex} · ${tHarmony(ex.harmony)}` }))}
+              />
             </div>
           }
-          sidebar={<RelatedToolsSidebar currentSlug="color-palette-generator" category="developer-tools" />}
+          result={<ColorPaletteResult />}
+          sidebar={<RelatedToolsSidebar fill currentSlug="color-palette-generator" category="developer-tools" />}
           secondary={
             <div className="flex flex-col gap-6">
               <ViewDocsLink slug="color-palette-generator" />
-              <SectionNav items={navItems} />
+              <SectionNav items={navItems} visible={navBarVisible} />
+              <ColorPaletteQuickReference />
             </div>
           }
         />
       </div>
 
       {education}
-    </>
+    </PaletteLiveProvider>
   );
 }

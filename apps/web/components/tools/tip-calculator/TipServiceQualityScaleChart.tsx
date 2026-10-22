@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import TipWorkedExampleNote from "./TipWorkedExampleNote";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Documented full-service-dining tipping convention by service tier, applied to the same $85 bill — shown as a colored quality scale (poor→excellent) rather than a bar list, matching what this diagram is actually about. */
 const BILL = 85;
@@ -27,7 +28,7 @@ export default async function TipServiceQualityScaleChart() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("caption", { bill: BILL.toFixed(2) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div className="min-w-0 flex-1 overflow-x-auto" dir="ltr">
           <svg width={WIDTH} height={height} viewBox={`0 0 ${WIDTH} ${height}`} role="img" aria-label={t("title")} className="block min-w-[300px] text-current">
             {TIERS.map((tier, i) => {
@@ -49,7 +50,7 @@ export default async function TipServiceQualityScaleChart() {
           </svg>
         </div>
         <TipWorkedExampleNote title={tRoot("workedExampleTitle")} rows={rows} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

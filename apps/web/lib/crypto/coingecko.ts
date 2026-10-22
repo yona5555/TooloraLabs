@@ -27,6 +27,7 @@ type CoinGeckoMarketCoin = {
   ath_date?: string | null;
   atl?: number | null;
   atl_date?: string | null;
+  last_updated?: string | null;
 };
 
 function mapMarketCoin(raw: CoinGeckoMarketCoin): CryptoCoin {
@@ -48,6 +49,7 @@ function mapMarketCoin(raw: CoinGeckoMarketCoin): CryptoCoin {
     athDate: raw.ath_date ?? null,
     atl: raw.atl ?? null,
     atlDate: raw.atl_date ?? null,
+    lastUpdated: raw.last_updated ?? null,
   };
 }
 

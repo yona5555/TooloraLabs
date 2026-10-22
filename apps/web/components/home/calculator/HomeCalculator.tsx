@@ -26,7 +26,7 @@ const SAVE_CONFIRMATION_MS = 1800;
  * respectively) rather than a placeholder.
  */
 export default function HomeCalculator() {
-  const [mode, setMode] = useState<CalculatorMode>("scientific");
+  const [mode, setMode] = useState<CalculatorMode>("graph");
   const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
   const { archive, saveEntries } = useArchive();
   const [justSaved, setJustSaved] = useState(false);

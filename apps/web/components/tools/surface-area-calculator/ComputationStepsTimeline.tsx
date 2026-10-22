@@ -5,6 +5,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, computeSurfaceAreaFor, slantHeightOf, round, type SurfaceNumericDims } from "./surfaceAreaEducationMath";
 import type { Solid3DShape } from "@tooloralabs/tools";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 type Station = { key: string; value: string };
 
@@ -78,7 +79,7 @@ export default function ComputationStepsTimeline() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full overflow-x-auto lg:flex-1">
           <ol className="flex min-w-[420px] items-start justify-between gap-2">
             {stations.map((s, i) => (
@@ -95,7 +96,7 @@ export default function ComputationStepsTimeline() {
           </ol>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.total"), value: `${round(total)}`, emphasize: true }]} />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

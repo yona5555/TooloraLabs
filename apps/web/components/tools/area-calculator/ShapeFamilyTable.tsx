@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, characteristicLength, areaAtLength, computeAreaFor, ALL_SHAPES, round } from "./areaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Type #17 (Tagged Reference Table): every shape in the family, each evaluated at the SAME live characteristic length as the currently active shape — the active row is tagged, so the table re-sorts and re-tags itself with every drag or field edit. */
 export default function ShapeFamilyTable() {
@@ -22,7 +23,7 @@ export default function ShapeFamilyTable() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
-      <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
           <table className="w-full min-w-[260px] border-collapse text-sm">
             <thead>
@@ -54,7 +55,7 @@ export default function ShapeFamilyTable() {
             { label: t("worked.winner"), value: tShape(`shape.${rows[0].shape}`), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

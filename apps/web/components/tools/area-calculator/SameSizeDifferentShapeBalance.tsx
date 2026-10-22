@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, characteristicLength, computeAreaFor, round } from "./areaEducationMath";
+import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
 /** Type #14 (Balance Indicator): the live shape's own real area against a square built from its own characteristic length — a genuine head-to-head of "same size, different shape". */
 export default function SameSizeDifferentShapeBalance() {
@@ -20,7 +21,7 @@ export default function SameSizeDifferentShapeBalance() {
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length), shape: tShape(`shape.${dims.shape}`) })}</p>
-      <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-center">
+      <GapFreeRow className="mt-5">
         <div dir="ltr" className="w-full lg:flex-1">
           <div className="relative h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
             <div className="absolute inset-y-0 left-0 bg-blue-500 transition-all duration-300" style={{ width: `${livePct}%` }} />
@@ -37,7 +38,7 @@ export default function SameSizeDifferentShapeBalance() {
             { label: t("worked.winner"), value: liveArea >= squareArea ? tShape(`shape.${dims.shape}`) : tShape("shape.square"), emphasize: true },
           ]}
         />
-      </div>
+      </GapFreeRow>
     </SectionCard>
   );
 }

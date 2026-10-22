@@ -37,7 +37,7 @@ export default function VectorDragLab() {
       title={t("title")}
       intro={t("intro")}
       indicator={
-        <div className="w-[300px] sm:w-[380px]">
+        <div className="w-full max-w-[300px] sm:w-[380px] sm:max-w-none">
           <div dir="ltr" className="mafs-canvas overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
             <Mafs viewBox={{ x: [-L, L], y: [-L, L] }} preserveAspectRatio="contain" height={320} pan={false} zoom={false}>
               {/* No tick label on the frame edge (it would be clipped) or at the origin. */}

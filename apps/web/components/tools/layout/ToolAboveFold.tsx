@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { ReactNode, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 
 type ToolAboveFoldProps = {
   input: ReactNode;
@@ -116,6 +116,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
   const [contentHeight, setContentHeight] = useState(0);
   const [inputHeight, setInputHeight] = useState(0);
   const [resultHeight, setResultHeight] = useState(0);
+  const layoutId = useId();
 
   useLayoutEffect(() => {
     const el = sidebarRef.current;
@@ -192,6 +193,10 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
     if (grow) observer.observe(grow);
     return () => observer.disconnect();
   }, [sidebarMatchRow]);
+  // The pre-paint script below has done its job once these inline values exist.
+  useLayoutEffect(() => {
+    if (sidebarMatchRow && sidebarNatural && rowHeight) document.getElementById(`afold-${layoutId}`)?.remove();
+  }, [sidebarMatchRow, sidebarNatural, rowHeight, layoutId]);
   const rowMinStyle = sidebarMatchRow && sidebarNatural ? ({ "--side-nat": `${sidebarNatural}px` } as CSSProperties) : undefined;
   const rowMinClass = sidebarMatchRow ? "lg:[min-height:var(--side-nat)]" : "";
 
@@ -199,8 +204,10 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
   const inputBoxHeight = resultHeight > inputHeight ? resultHeight : undefined;
 
   return (
+    <>
     <div
       ref={gridRef}
+      data-afold={sidebarMatchRow ? layoutId : undefined}
       className={`relative grid grid-cols-1 content-start items-start lg:grid-cols-[320px_minmax(360px,1fr)_320px] ${tight ? "gap-4" : "gap-6"}`}
       style={{ minHeight: sidebarHeight || undefined }}
     >
@@ -217,6 +224,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
       {/* stretchInput lets the grid row itself size the input card (self-stretch), with no measuring. */}
       <div
         ref={inputBoxRef}
+        data-afold-cell=""
         className={`min-w-0 lg:col-start-1 lg:row-start-1 ${rowMinClass} ${stretchInput ? "lg:self-stretch" : "lg:[height:var(--input-stretch-h)]"}`}
         style={{ ...(inputBoxHeight && !stretchInput ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : {}), ...rowMinStyle }}
       >
@@ -226,7 +234,9 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
       </div>
       <div
         ref={resultRef}
+        data-afold-cell=""
         data-tool-result
+        data-preview="result"
         className={`min-w-0 lg:col-start-2 lg:row-start-1 ${rowMinClass} ${stretchResult ? "lg:self-stretch" : ""}`}
         style={rowMinStyle}
       >
@@ -241,6 +251,7 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
       >
         <div
           ref={sidebarRef}
+          data-afold-side=""
           className={`${sidebarBoxHeight && !sidebarFill ? "lg:sticky lg:top-20" : ""} ${sidebarMatchRow ? "lg:flex lg:flex-col lg:[min-height:var(--row-h)]" : ""}`}
           style={sidebarMatchRow && rowHeight ? ({ "--row-h": `${rowHeight}px` } as CSSProperties) : undefined}
         >
@@ -249,5 +260,20 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
         {sidebarFill && <div className={`${tight ? "mt-4" : "mt-6"} min-h-0 flex-1`}>{sidebarFill}</div>}
       </div>
     </div>
+    {sidebarMatchRow && <script dangerouslySetInnerHTML={{ __html: prePaintRowScript(layoutId) }} />}
+    </>
   );
+}
+
+/**
+ * sidebarMatchRow sizes row 1 from measurements that the effects above only take after
+ * hydration, so the page first painted at its natural height and then grew (CLS). This inline
+ * script runs while the HTML is parsed, after the stylesheet and before the first paint, takes the
+ * same two measurements and applies them through a temporary <style> (not the elements' style
+ * attributes, which React hydrates); the effect above removes it once the inline values exist.
+ * Below lg the sidebar is hidden, its height is 0 and nothing is applied.
+ */
+function prePaintRowScript(id: string) {
+  const key = JSON.stringify(id);
+  return `(function(){var g=document.querySelector('[data-afold='+JSON.stringify(${key})+']');if(!g)return;var s=g.querySelector("[data-afold-side]");if(!s)return;var w=s.querySelector("[data-sidebar-grow]");var n=s.getBoundingClientRect().height-(w?w.getBoundingClientRect().height:0);if(!n)return;var el=document.createElement("style");el.id="afold-"+${key};var sel='[data-afold='+JSON.stringify(${key})+']';el.textContent=sel+">[data-afold-cell]{--side-nat:"+n+"px}";document.head.appendChild(el);var r=0;g.querySelectorAll(":scope>[data-afold-cell]").forEach(function(c){r=Math.max(r,c.getBoundingClientRect().height)});el.textContent+=sel+" [data-afold-side]{--row-h:"+r+"px}"})()`;
 }

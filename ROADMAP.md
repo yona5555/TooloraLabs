@@ -18,7 +18,7 @@
 
 ### 3. توسيع الفئات من 6 إلى 12 فئة — ✅ تجاوَز الهدف الأصلي
 
-- **الوضع الحالي (محدَّث 2026-10-12):** **21 فئة** معرّفة في `apps/web/data/categories.ts` فعليًا، 16 منها فيها أدوات شغّالة: Health & Fitness (12)، Math (22)، Business (8)، Financial Calculators (7)، Chemistry (6)، Date & Time (5)، Dev Tools (6)، File Tools (6)، Physics (6)، Text Tools (6)، Markets (3)، Converters (3)، Fun & Entertainment (3)، AI Tools (3)، Student Tools (4)، Weather (1).
+- **الوضع الحالي (محدَّث 2026-10-12):** **20 فئة** معرّفة في `apps/web/data/categories.ts` فعليًا (حُذفت فئة Fun & Entertainment وأدواتها الثلاث في 2026-10-16)، 15 منها فيها أدوات شغّالة: Health & Fitness (12)، Math (22)، Business (8)، Financial Calculators (7)، Chemistry (6)، Date & Time (5)، Dev Tools (6)، File Tools (6)، Physics (6)، Text Tools (6)، Markets (3)، Converters (3)، AI Tools (3)، Student Tools (4)، Weather (1).
 - **5 فئات مُعرَّفة بلا أي أداة شغّالة بعد** (بذور لتوسّع رياضي/فيزيائي قادم، مرتبطة مباشرة بقائمة `comingSoon.ts` phase-1b): Algebra & Number Theory، Calculus & Analysis، Probability & Statistics، Geometry & Coordinate Math، Website Tools.
 - **ملاحظة تاريخية:** فئة "AI Tools" القديمة (مولّد رمز QR فقط) أُزيلت 2026-08-17 لعدم علاقتها الفعلية بالذكاء الاصطناعي، ثم **أُعيد إنشاء فئة AI Tools من جديد بمحتوى فعلي** (Text to Speech، Speech to Text، Spelling & Grammar Checker) — هذه مرة فئة حقيقية لا فئة فارغة.
 - **الدرس المستفاد (لا يزال سارياً):** لا تُضاف فئة جديدة فارغة بدون أدوات فعلية فيها إلا إذا كانت مربوطة بخطة توسّع موثّقة بـ`comingSoon.ts` كما هو حال الخمس الفئات أعلاه.

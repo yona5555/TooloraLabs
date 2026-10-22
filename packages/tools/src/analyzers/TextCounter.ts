@@ -1,5 +1,6 @@
 import type { ToolContext, ToolResult } from "@tooloralabs/core";
 import { BaseTool } from "@tooloralabs/sdk";
+import { countSentences, splitParagraphs, tokenizeWords, wordLength } from "./textSegmentation";
 
 export type TextCounterInput = {
   text: string;
@@ -27,7 +28,7 @@ const WORDS_PER_MINUTE = 200;
 
 // Short, high-frequency function words excluded from keyword-density ranking
 // so the top list surfaces topic words instead of grammatical glue.
-const STOPWORDS = new Set([
+export const STOPWORDS = new Set([
   "the", "a", "an", "and", "or", "but", "of", "to", "in", "on", "at", "for", "with",
   "is", "are", "was", "were", "be", "been", "being", "this", "that", "these", "those",
   "it", "its", "as", "by", "from", "into", "than", "then", "so", "if", "not", "no",
@@ -37,10 +38,6 @@ const STOPWORDS = new Set([
   "و", "أو", "لا", "ما", "لم", "لن", "كان", "كانت", "يكون", "هو", "هي", "هم", "أنا",
   "أنت", "نحن", "أن", "إن", "قد", "كل", "بعض", "ثم", "حتى", "إذا",
 ]);
-
-function extractWords(text: string): string[] {
-  return text.toLowerCase().match(/[\p{L}\p{N}'-]+/gu) ?? [];
-}
 
 function round(value: number): number {
   return Math.round(value * 10) / 10;
@@ -54,7 +51,7 @@ export class TextCounter extends BaseTool<TextCounterInput, TextCounterOutput> {
     category: "text-tools",
     description:
       "Count words, characters, and sentences; estimate reading time; and see your top keywords by frequency.",
-    version: "1.1.0",
+    version: "1.2.0",
   };
 
   execute(
@@ -62,34 +59,30 @@ export class TextCounter extends BaseTool<TextCounterInput, TextCounterOutput> {
     _context: ToolContext
   ): ToolResult<TextCounterOutput> {
     const text = input.text;
-    const trimmed = text.trim();
 
     const characters = text.length;
     const charactersNoSpaces = text.replace(/\s/g, "").length;
-    const words = trimmed === "" ? 0 : trimmed.split(/\s+/).length;
-    const sentences =
-      trimmed === "" ? 0 : (trimmed.match(/[^.!?]+[.!?]+|[^.!?]+$/g) ?? []).length;
-    const paragraphs =
-      trimmed === ""
-        ? 0
-        : trimmed.split(/\n+/).filter((p) => p.trim() !== "").length;
+    const tokens = tokenizeWords(text);
+    const wordTokens = tokens.map((t) => t.key);
+    const words = tokens.length;
+    const sentences = countSentences(text);
+    const paragraphs = splitParagraphs(text).length;
     const readingTimeMinutes =
       words === 0 ? 0 : Math.ceil(words / WORDS_PER_MINUTE);
 
-    const wordTokens = extractWords(trimmed);
     const uniqueWords = new Set(wordTokens).size;
     const averageWordLength =
-      wordTokens.length === 0
+      words === 0
         ? 0
-        : round(wordTokens.reduce((sum, w) => sum + w.length, 0) / wordTokens.length);
-    const longestWord = wordTokens.reduce(
-      (longest, w) => (w.length > longest.length ? w : longest),
+        : round(tokens.reduce((sum, t) => sum + wordLength(t.word), 0) / words);
+    const longestWord = tokens.reduce(
+      (longest, t) => (wordLength(t.word) > wordLength(longest) ? t.word : longest),
       ""
     );
 
     const frequency = new Map<string, number>();
     for (const w of wordTokens) {
-      if (w.length < 2 || STOPWORDS.has(w)) continue;
+      if (wordLength(w) < 2 || STOPWORDS.has(w)) continue;
       frequency.set(w, (frequency.get(w) ?? 0) + 1);
     }
     const topKeywords: KeywordCount[] = [...frequency.entries()]
