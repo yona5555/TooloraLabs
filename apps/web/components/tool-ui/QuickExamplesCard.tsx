@@ -10,6 +10,8 @@ type Props = {
   activeId?: string | null;
   onPick: (id: string) => void;
   className?: string;
+  /** Forwarded to the internal SectionCard — see its own doc comment. Opt-in, defaults false. */
+  mobilePlain?: boolean;
 };
 
 /**
@@ -35,9 +37,14 @@ function DetailPieces({ text }: { text: string }) {
  * buttons that load a worked example into the tool's inputs. The list grows (`flex-1`) with the
  * column height instead of leaving an empty band.
  */
-export default function QuickExamplesCard({ title, examples, activeId, onPick, className = "" }: Props) {
+export default function QuickExamplesCard({ title, examples, activeId, onPick, className = "", mobilePlain = false }: Props) {
   return (
-    <SectionCard title={title} className={`flex flex-col ${className}`} bodyClassName="flex flex-1 flex-col p-4 lg:p-5">
+    <SectionCard
+      title={title}
+      className={`flex flex-col ${className}`}
+      bodyClassName={mobilePlain ? "flex flex-1 flex-col max-md:p-[11px] md:p-4 lg:p-5" : "flex flex-1 flex-col p-4 lg:p-5"}
+      mobilePlain={mobilePlain}
+    >
       <div className="grid flex-1 auto-rows-fr grid-cols-1 gap-2">
         {examples.map((ex) => {
           const active = ex.id === activeId;

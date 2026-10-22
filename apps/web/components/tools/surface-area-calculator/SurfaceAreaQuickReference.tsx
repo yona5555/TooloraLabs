@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import SurfaceAreaMobileRow from "./SurfaceAreaMobileRow";
 
 export default function SurfaceAreaQuickReference() {
   const t = useTranslations("tools.surface-area-calculator.aboveFold.quickReference");
@@ -15,8 +16,8 @@ export default function SurfaceAreaQuickReference() {
     { shape: tForm("shape.square-pyramid"), formula: `${tForm("baseSideLabel")}² + 2 × ${tForm("baseSideLabel")} × ${t("slantHeight")}` },
   ];
 
-  return (
-    <SectionCard title={t("title")}>
+  const body = (
+    <>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div className="mt-4 space-y-1.5 text-xs text-zinc-500 dark:text-zinc-400">
         {rows.map((row) => (
@@ -25,6 +26,15 @@ export default function SurfaceAreaQuickReference() {
           </p>
         ))}
       </div>
-    </SectionCard>
+    </>
+  );
+
+  return (
+    <>
+      <div className="hidden md:block">
+        <SectionCard title={t("title")}>{body}</SectionCard>
+      </div>
+      <SurfaceAreaMobileRow title={t("title")}>{body}</SurfaceAreaMobileRow>
+    </>
   );
 }

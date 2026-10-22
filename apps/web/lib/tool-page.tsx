@@ -72,10 +72,13 @@ export async function ToolPageView({
   locale,
   slug,
   Entry,
+  mobileCompact = false,
 }: {
   locale: string;
   slug: string;
   Entry?: ComponentType<ToolEntryProps>;
+  /** Opt-in per tool (2026-10-22, surface-area-calculator pilot only); see ToolPageLayout's own doc comment. */
+  mobileCompact?: boolean;
 }) {
   const tool = tools.find((item) => item.slug === slug);
   if (!tool) {
@@ -241,6 +244,7 @@ export async function ToolPageView({
         description={description}
         contentWidth={isAboveFoldLayout ? "wide" : "default"}
         compact={isAboveFoldLayout}
+        mobileCompact={mobileCompact}
       >
         {component}
       </ToolPageLayout>

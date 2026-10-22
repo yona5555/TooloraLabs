@@ -3,6 +3,15 @@ import { ChangeEvent, InputHTMLAttributes } from "react";
 type ToolInputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   hint?: string;
+  /** Extra classes appended to the label text's own span (e.g. `max-md:hidden` to hide the
+   * stacked label when a caller renders its own label elsewhere at that breakpoint). Additive only
+   * — omitting it keeps every existing caller's label exactly as before. */
+  labelClassName?: string;
+  /** Same as `labelClassName`, for the hint text's span. */
+  hintClassName?: string;
+  /** Extra classes appended to the outer `<label>` wrapper (e.g. to drop its `space-y-2` gap when
+   * the label span is hidden at that breakpoint). Additive only, same as the two above. */
+  wrapperClassName?: string;
 };
 
 const DECIMAL_CHAR = /[0-9٠-٩۰-۹.٫-]/;
@@ -17,6 +26,9 @@ function sanitizeNumericValue(value: string, pattern: RegExp): string {
 export default function ToolInput({
   label,
   hint,
+  labelClassName = "",
+  hintClassName = "",
+  wrapperClassName = "",
   className = "",
   inputMode,
   onChange,
@@ -36,9 +48,9 @@ export default function ToolInput({
   }
 
   return (
-    <label className="block space-y-2">
+    <label className={`block space-y-2 ${wrapperClassName}`}>
       {label && (
-        <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+        <span className={`block text-sm font-semibold text-zinc-700 dark:text-zinc-300 ${labelClassName}`}>
           {label}
         </span>
       )}
@@ -51,7 +63,7 @@ export default function ToolInput({
       />
 
       {hint && (
-        <span className="block text-xs text-zinc-500 dark:text-zinc-400">
+        <span className={`block text-xs text-zinc-500 dark:text-zinc-400 ${hintClassName}`}>
           {hint}
         </span>
       )}

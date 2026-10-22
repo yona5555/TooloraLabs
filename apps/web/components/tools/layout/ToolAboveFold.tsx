@@ -41,6 +41,17 @@ type ToolAboveFoldProps = {
    * `sidebarMatchRow`), so every column ends at the same bottom edge.
    */
   tight?: boolean;
+  /**
+   * Opt-in per §8 (2026-10-22, surface-area-calculator pilot only — every other caller is
+   * unaffected since this defaults to false): the three columns stop being `320px` / `320px`
+   * fixed with a `minmax(360px,1fr)` middle track (whose 1000px+gaps floor can exceed the real
+   * available width around 1024px, pushing the result column's content to overflow into the
+   * absolutely-positioned sidebar's area — the exact "Related Tools covers Result" bug). Instead:
+   * one column below `md` (768px), input+result as two flexible `minmax()` tracks from `md`, and
+   * the sidebar's reserved third track only from `xl` (1280px) once there's reliably enough room
+   * for all three — a real 3→2→1 collapse driven by width tiers instead of one hard breakpoint.
+   */
+  fluidColumns?: boolean;
 };
 
 /**
@@ -104,7 +115,7 @@ type ToolAboveFoldProps = {
  * the sidebar's own offset, so both columns clear the site header by the
  * same margin and never fight each other for the same sticky band.
  */
-export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false, tight = false }: ToolAboveFoldProps) {
+export default function ToolAboveFold({ input, result, sidebar, secondary, sidebarFill, stretchInput = false, stretchResult = false, sidebarMatchRow = false, tight = false, fluidColumns = false }: ToolAboveFoldProps) {
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
@@ -203,32 +214,71 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
   const sidebarBoxHeight = !tight && contentHeight > sidebarHeight ? contentHeight : undefined;
   const inputBoxHeight = resultHeight > inputHeight ? resultHeight : undefined;
 
+  // fluidColumns (§8 pilot, surface-area-calculator only): input+result become two real grid
+  // columns from `md` using flexible minmax() shares instead of a flat 320px, and the sidebar's
+  // reserved third track only joins from `xl` — see the prop's own doc comment for the overlap bug
+  // this avoids. Every class below is written out in full for both branches (not built from a
+  // shared breakpoint variable) because Tailwind's build-time scanner matches literal class text.
+  const gridColsClass = fluidColumns
+    ? "md:grid-cols-[minmax(240px,1fr)_minmax(320px,1.4fr)] xl:grid-cols-[minmax(260px,1fr)_minmax(360px,1.4fr)_minmax(240px,300px)]"
+    : "lg:grid-cols-[320px_minmax(360px,1fr)_320px]";
+  const inputCellClass = fluidColumns ? "md:col-start-1 md:row-start-1" : "lg:col-start-1 lg:row-start-1";
+  const inputStretchClass = fluidColumns
+    ? stretchInput
+      ? "md:self-stretch"
+      : "md:[height:var(--input-stretch-h)]"
+    : stretchInput
+      ? "lg:self-stretch"
+      : "lg:[height:var(--input-stretch-h)]";
+  const inputInnerClass = stretchInput
+    ? fluidColumns
+      ? "md:h-full"
+      : "lg:h-full"
+    : inputBoxHeight
+      ? fluidColumns
+        ? "md:sticky md:top-20"
+        : "lg:sticky lg:top-20"
+      : undefined;
+  const resultCellClass = fluidColumns ? "md:col-start-2 md:row-start-1" : "lg:col-start-2 lg:row-start-1";
+  const resultStretchClass = stretchResult ? (fluidColumns ? "md:self-stretch" : "lg:self-stretch") : "";
+  const secondaryCellClass = fluidColumns
+    ? tight
+      ? "md:col-start-1 md:row-start-2 md:col-span-2"
+      : "md:col-start-1 md:row-start-2 md:col-span-2"
+    : tight
+      ? "lg:col-start-1 lg:row-start-2 lg:col-span-3"
+      : "lg:col-start-1 lg:row-start-2 lg:col-span-2";
+  const sidebarOuterClass = fluidColumns
+    ? `hidden xl:absolute xl:top-0 xl:end-0 xl:w-[min(300px,22vw)] ${sidebarFill ? "xl:flex xl:flex-col" : "xl:block"}`
+    : `hidden lg:absolute lg:top-0 lg:end-0 lg:w-[320px] ${sidebarFill ? "lg:flex lg:flex-col" : "lg:block"}`;
+  const sidebarStickyClass = sidebarBoxHeight && !sidebarFill ? (fluidColumns ? "xl:sticky xl:top-20" : "lg:sticky lg:top-20") : "";
+
   return (
     <>
     <div
       ref={gridRef}
       data-afold={sidebarMatchRow ? layoutId : undefined}
-      className={`relative grid grid-cols-1 content-start items-start lg:grid-cols-[320px_minmax(360px,1fr)_320px] ${tight ? "gap-4" : "gap-6"}`}
+      className={`relative grid grid-cols-1 content-start items-start ${gridColsClass} ${tight ? "gap-4" : "gap-6"}`}
       style={{ minHeight: sidebarHeight || undefined }}
     >
       {/*
         The stretch height is desktop-only (matches the sidebar's `sticky`
-        below, which is also `lg:`-gated) — below `lg` the layout is a
-        single stacked column, so forcing this wrapper to `result`'s height
-        would leave a large empty gap under a short input card before the
-        result starts. Setting it as a CSS custom property and reading it
-        only inside an `lg:` arbitrary-property class (rather than an
-        unconditional inline `style.height`) keeps the value inert below
-        `lg` without needing a matchMedia/JS breakpoint check.
+        below, which is also gated to the same breakpoint) — below it the
+        layout is a single stacked column, so forcing this wrapper to
+        `result`'s height would leave a large empty gap under a short input
+        card before the result starts. Setting it as a CSS custom property
+        and reading it only inside a breakpoint-gated arbitrary-property
+        class (rather than an unconditional inline `style.height`) keeps the
+        value inert below that breakpoint without a matchMedia/JS check.
       */}
       {/* stretchInput lets the grid row itself size the input card (self-stretch), with no measuring. */}
       <div
         ref={inputBoxRef}
         data-afold-cell=""
-        className={`min-w-0 lg:col-start-1 lg:row-start-1 ${rowMinClass} ${stretchInput ? "lg:self-stretch" : "lg:[height:var(--input-stretch-h)]"}`}
+        className={`min-w-0 ${inputCellClass} ${rowMinClass} ${inputStretchClass}`}
         style={{ ...(inputBoxHeight && !stretchInput ? ({ "--input-stretch-h": `${inputBoxHeight}px` } as CSSProperties) : {}), ...rowMinStyle }}
       >
-        <div ref={inputRef} className={stretchInput ? "lg:h-full" : inputBoxHeight ? "lg:sticky lg:top-20" : undefined}>
+        <div ref={inputRef} className={inputInnerClass}>
           {input}
         </div>
       </div>
@@ -237,22 +287,17 @@ export default function ToolAboveFold({ input, result, sidebar, secondary, sideb
         data-afold-cell=""
         data-tool-result
         data-preview="result"
-        className={`min-w-0 lg:col-start-2 lg:row-start-1 ${rowMinClass} ${stretchResult ? "lg:self-stretch" : ""}`}
+        className={`min-w-0 ${resultCellClass} ${rowMinClass} ${resultStretchClass}`}
         style={rowMinStyle}
       >
         {result}
       </div>
-      {secondary && (
-        <div className={`min-w-0 lg:col-start-1 lg:row-start-2 ${tight ? "lg:col-span-3" : "lg:col-span-2"}`}>{secondary}</div>
-      )}
-      <div
-        className={`hidden lg:absolute lg:top-0 lg:end-0 lg:w-[320px] ${sidebarFill ? "lg:flex lg:flex-col" : "lg:block"}`}
-        style={sidebarBoxHeight ? { height: sidebarBoxHeight } : undefined}
-      >
+      {secondary && <div className={`min-w-0 ${secondaryCellClass}`}>{secondary}</div>}
+      <div className={`${sidebarOuterClass} min-w-0`} style={sidebarBoxHeight ? { height: sidebarBoxHeight } : undefined}>
         <div
           ref={sidebarRef}
           data-afold-side=""
-          className={`${sidebarBoxHeight && !sidebarFill ? "lg:sticky lg:top-20" : ""} ${sidebarMatchRow ? "lg:flex lg:flex-col lg:[min-height:var(--row-h)]" : ""}`}
+          className={`min-w-0 ${sidebarStickyClass} ${sidebarMatchRow ? "lg:flex lg:flex-col lg:[min-height:var(--row-h)]" : ""}`}
           style={sidebarMatchRow && rowHeight ? ({ "--row-h": `${rowHeight}px` } as CSSProperties) : undefined}
         >
           {sidebar}

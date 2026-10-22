@@ -55,6 +55,7 @@ function computeSurfaceArea(draft: Solid3DDraft): SurfaceAreaCalculatorOutput {
 export default function SurfaceAreaCalculator({ education }: { education: ReactNode }) {
   const tNav = useTranslations("tools.surface-area-calculator.nav");
   const t = useTranslations("tools.surface-area-calculator");
+  const tp = useTranslations("toolPage");
   const [draft, setDraft] = useState<Solid3DDraft>(DEFAULT_DRAFT);
   const [result, setResult] = useState<SurfaceAreaCalculatorOutput>(() => computeSurfaceArea(DEFAULT_DRAFT));
   const [hasCalculated, setHasCalculated] = useState(true);
@@ -110,9 +111,27 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
 
   return (
     <SurfaceAreaLiveProvider value={{ dims: draft, setDim: (key, value) => setDraft((prev) => ({ ...prev, [key]: value })) }}>
+      {/*
+        Mobile phone standard (<768px, owner-approved §2 2026-10-22, this tool only): the long meta
+        description isn't shown at all in the compact desktop header (ToolPageLayout's `compact`
+        branch never renders it), so on mobile it moves into its own collapsed "About the tool"
+        row right under the header instead of disappearing — full text stays in the HTML either way
+        via this native <details>, open or closed.
+      */}
+      <details className="group mb-4 rounded-lg border border-zinc-200 md:hidden dark:border-zinc-800">
+        <summary className="flex h-11 cursor-pointer list-none items-center justify-between gap-2 px-3 text-[12px] font-semibold tracking-wider text-zinc-500 uppercase marker:content-none dark:text-zinc-400">
+          {tp("aboutTitle")}
+          <span aria-hidden="true" className="text-base leading-none text-zinc-400 group-open:hidden">
+            +
+          </span>
+        </summary>
+        <p className="border-t border-zinc-200 px-3 py-3 text-[13.5px] leading-6 text-zinc-600 dark:border-zinc-800 dark:text-zinc-300">{t("description")}</p>
+      </details>
+
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput
+          fluidColumns
           input={
             <div className="flex flex-col gap-6 lg:h-full">
               <SurfaceAreaInputPanel draft={draft} onChange={handleChange} onCalculate={handleCalculate} onClear={handleClear} />
@@ -122,6 +141,7 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
                 activeId={activeExample}
                 onPick={handlePick}
                 examples={QUICK_EXAMPLES.map((e) => ({ id: e.id, label: tLive(`examples.${e.id}`), detail: e.detail }))}
+                mobilePlain
               />
             </div>
           }
