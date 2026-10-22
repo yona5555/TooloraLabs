@@ -1,7 +1,7 @@
 # TooloraLabs
 
 A monorepo platform for free online calculators, converters, and generators —
-built for quality and long-term scale rather than raw quantity. 101 tools,
+built for quality and long-term scale rather than raw quantity. 98 tools,
 each with full encyclopedic-depth content, live in 6 languages.
 
 ## Structure
@@ -49,7 +49,7 @@ See [SECURITY-NOTES.md](./SECURITY-NOTES.md) for accepted npm audit risks
 
 ## Status
 
-- **101 tools** live, each connected to `packages/core`/`packages/sdk` where
+- **98 tools** live, each connected to `packages/core`/`packages/sdk` where
   applicable, with full encyclopedic-depth content (above-the-fold UI +
   education section, worked examples, FAQ, "behind the tool" history, and
   academic references).
@@ -65,8 +65,13 @@ See [SECURITY-NOTES.md](./SECURITY-NOTES.md) for accepted npm audit risks
   Theory, Calculus & Analysis, Probability & Statistics, and Geometry &
   Coordinate Math. The last 5 are seeded for an upcoming math/physics/
   chemistry expansion and have no shipped tools yet.
+- Each tool gets its own prerendered route folder (`app/[locale]/tools/<slug>/page.tsx`,
+  94 of the 98 tools) so a tool page loads only its own code; the remaining 4
+  live-data tools (`crypto-converter`, `forex-converter`, `commodities-tracker`,
+  `weather-forecast`) are served dynamically through the shared `tools/[slug]`
+  route since they need server-side live data on every request.
 - A separate "Coming Soon" roadmap (`apps/web/data/comingSoon.ts`, 4
-  phases) lists 152 planned-but-unbuilt tools shown on `/coming-soon`.
+  phases) lists 149 planned-but-unbuilt tools shown on `/coming-soon`.
 - Embeddable widget (`/embed/[slug]` + the embed-tools docs page) and the
   financial-calculators comparison page are both live.
 - CI (lint, typecheck, test, build) runs on every push to `main` and is
