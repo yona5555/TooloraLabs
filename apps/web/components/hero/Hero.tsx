@@ -28,15 +28,20 @@ export default function Hero() {
           and docs cards' own white/zinc-900) plus a small uniform gutter, so the calculator and docs
           sections read as independent elevated cards with real depth rather than flush, flat panels
           — while the gutter itself stays inside this full-bleed row, never opening a true empty
-          margin at the row's own left/right edges (the sidebar still touches those). */}
-      <div className="relative z-10 flex min-h-[640px] w-full flex-col border-y border-zinc-200 lg:flex-row dark:border-zinc-800">
+          margin at the row's own left/right edges (the sidebar still touches those).
+
+          Phones (< md) show the calculator first, then the categories, then the docs, with CSS only:
+          the center column becomes display:contents, so the calculator and docs card join this row as
+          its own flex items; the calculator moves first with order, and the row's padding/gap/fill
+          stand in for the column's. Markup order and every md+ layout are unchanged. */}
+      <div className="relative z-10 flex min-h-[640px] w-full flex-col border-y border-zinc-200 lg:flex-row dark:border-zinc-800 max-md:gap-3 max-md:py-3 max-md:dark:bg-zinc-950">
         <CategorySidebar />
-        <div className="flex min-w-0 flex-1 flex-col gap-4 bg-transparent p-3 dark:bg-zinc-950 sm:p-4">
-          <HomeCalculator />
+        <div className="flex min-w-0 flex-1 flex-col gap-4 bg-transparent p-3 dark:bg-zinc-950 sm:p-4 max-md:contents">
+          <HomeCalculator className="max-md:order-first max-md:mx-3" />
           {/* No overflow-hidden here either — this card holds the docs section's own sticky "On
               This Page" TOC, and everything inside is already padded well clear of the rounded
               corners (HomeCalculatorDocs starts at p-4+), so clipping was never load-bearing. */}
-          <div className="rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="rounded-2xl border border-zinc-200 bg-white shadow-lg dark:border-zinc-800 dark:bg-zinc-900 max-md:mx-3">
             <HomeCalculatorDocs />
           </div>
         </div>

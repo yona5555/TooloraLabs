@@ -38,7 +38,7 @@ function viewportDefaultMode(): CalculatorMode {
  * engine, real 32-bit bitwise arithmetic, and real unit-conversion factors
  * respectively) rather than a placeholder.
  */
-export default function HomeCalculator() {
+export default function HomeCalculator({ className = "" }: { className?: string } = {}) {
   // The tab the visitor picked wins; until then the default follows the viewport.
   // The server (and hydration) cannot know the viewport, so the default is null
   // there and the first paint shows Scientific on phones and Graph on wider
@@ -65,7 +65,7 @@ export default function HomeCalculator() {
   }
 
   return (
-    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 ${calcDark ? "calc-dark" : ""}`}>
+    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 ${calcDark ? "calc-dark" : ""} ${className}`}>
       <CalculatorTopBar mode={mode} setMode={setMode} calcDark={calcDark} onToggleCalcDark={() => setCalcDark((v) => !v)} />
 
       {(mode === null || mode === "scientific") && (
