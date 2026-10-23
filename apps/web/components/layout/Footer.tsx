@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import Wordmark from "./Wordmark";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -16,27 +17,31 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
-      <div className="mx-auto flex max-w-7xl flex-col items-stretch justify-between gap-6 px-6 py-10 md:flex-row md:items-center">
-        <div className="flex flex-col items-start gap-3">
+      <div className="mx-auto flex max-w-7xl flex-col items-stretch justify-between gap-6 px-6 py-10 max-md:gap-3 md:flex-row md:items-center">
+        {/* Phone: rows sit 24px apart text-to-text (gap-6 here; gap-3 + the 44px links' own 12px
+            padding below). The wordmark is English, so it stays at the left edge on every locale
+            (self-end is the left in RTL); the copyright and links follow the page direction. */}
+        <div className="flex flex-col items-start gap-3 max-md:gap-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="TooloraLabs" className="h-8 w-auto dark:hidden" />
+          <img src="/logo.svg" alt="TooloraLabs" className="h-8 w-auto dark:hidden max-md:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo-full-dark.svg"
             alt="TooloraLabs"
-            className="hidden h-8 w-auto dark:block"
+            className="hidden h-8 w-auto md:dark:block"
           />
+          <Wordmark className="text-[15px] leading-5 md:hidden rtl:self-end" />
           <p className="text-start text-sm text-zinc-500 dark:text-zinc-400">
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
 
-        <nav className="flex flex-wrap items-center justify-start gap-6 md:justify-center">
+        <nav className="flex flex-wrap items-center justify-start gap-6 max-md:gap-y-0 md:justify-center">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-zinc-600 transition hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
+              className="text-sm font-medium text-zinc-600 transition max-md:inline-flex max-md:min-h-11 max-md:items-center hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400"
             >
               {link.label}
             </Link>

@@ -8,9 +8,9 @@ export const HEADER_ICON_BUTTON_PHONE =
   "relative max-md:h-9 max-md:w-9 max-md:rounded-lg max-md:before:absolute max-md:before:-inset-[5px] max-md:before:content-['']";
 
 /**
- * Same for the language button: a fixed 48px width (fits "AR ⌄" in every
+ * Same for the language button: a fixed 44px width (fits "AR ⌄" in every
  * locale at text-xs), so its edges land on whole pixels like the icon buttons;
  * a text-sized fractional width made its neighbour's hit area snap 0.5px short.
  */
 export const HEADER_LANGUAGE_BUTTON_PHONE =
-  "relative max-md:h-9 max-md:w-12 max-md:justify-center max-md:gap-0.5 max-md:rounded-lg max-md:px-0 max-md:text-xs max-md:before:absolute max-md:before:-inset-[5px] max-md:before:content-['']";
+  "relative max-md:h-9 max-md:w-11 max-md:justify-center max-md:gap-0.5 max-md:rounded-lg max-md:px-0 max-md:text-xs max-md:before:absolute max-md:before:-inset-[5px] max-md:before:content-['']";
