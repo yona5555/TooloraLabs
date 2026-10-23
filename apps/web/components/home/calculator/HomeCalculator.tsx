@@ -1,5 +1,5 @@
 "use client";
-import { useReducer, useState } from "react";
+import { useReducer, useState, useSyncExternalStore } from "react";
 import { calculatorReducer, initialCalculatorState } from "./homeCalculatorReducer";
 import { useArchive } from "./useArchive";
 import CalculatorTopBar from "./CalculatorTopBar";
@@ -16,6 +16,19 @@ export type CalculatorMode = "standard" | "scientific" | "graph" | "programmer" 
 
 const SAVE_CONFIRMATION_MS = 1800;
 
+/** Below Tailwind's `md` breakpoint the calculator opens on Scientific; from `md` up, on Graph. */
+const PHONE_QUERY = "(max-width: 767.98px)";
+
+function subscribeToPhoneQuery(onChange: () => void) {
+  const query = window.matchMedia(PHONE_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function viewportDefaultMode(): CalculatorMode {
+  return window.matchMedia(PHONE_QUERY).matches ? "scientific" : "graph";
+}
+
 /**
  * Every mode is real and working — Standard and Scientific share the same
  * expression-engine state (only the keypad differs, so switching between
@@ -26,7 +39,15 @@ const SAVE_CONFIRMATION_MS = 1800;
  * respectively) rather than a placeholder.
  */
 export default function HomeCalculator() {
-  const [mode, setMode] = useState<CalculatorMode>("graph");
+  // The tab the visitor picked wins; until then the default follows the viewport.
+  // The server (and hydration) cannot know the viewport, so the default is null
+  // there and the first paint shows Scientific on phones and Graph on wider
+  // screens with CSS (md:hidden / max-md:hidden); right after hydration the
+  // media query resolves to the mode already on screen. The wrapper elements
+  // stay the same, so the visible mode never remounts.
+  const [chosenMode, setMode] = useState<CalculatorMode | null>(null);
+  const defaultMode = useSyncExternalStore(subscribeToPhoneQuery, viewportDefaultMode, () => null);
+  const mode = chosenMode ?? defaultMode;
   const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
   const { archive, saveEntries } = useArchive();
   const [justSaved, setJustSaved] = useState(false);
@@ -47,15 +68,15 @@ export default function HomeCalculator() {
     <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 ${calcDark ? "calc-dark" : ""}`}>
       <CalculatorTopBar mode={mode} setMode={setMode} calcDark={calcDark} onToggleCalcDark={() => setCalcDark((v) => !v)} />
 
-      {mode === "scientific" && (
-        <>
+      {(mode === null || mode === "scientific") && (
+        <div className={mode === null ? "contents md:hidden" : "contents"}>
           <div className="p-3 sm:p-4">
             <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} />
           </div>
           <FunctionCategoryRow dispatch={dispatch} />
           <CalculatorKeypad state={state} dispatch={dispatch} />
           <CalculatorBottomBar state={state} onSaveHistory={handleSaveHistory} justSaved={justSaved} />
-        </>
+        </div>
       )}
 
       {mode === "standard" && (
@@ -68,7 +89,11 @@ export default function HomeCalculator() {
         </>
       )}
 
-      {mode === "graph" && <GraphCalculator calcDark={calcDark} />}
+      {(mode === null || mode === "graph") && (
+        <div className={mode === null ? "contents max-md:hidden" : "contents"}>
+          <GraphCalculator calcDark={calcDark} />
+        </div>
+      )}
       {mode === "programmer" && <ProgrammerCalculator />}
       {mode === "converter" && <UnitConverter />}
     </div>

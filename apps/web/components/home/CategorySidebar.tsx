@@ -2,7 +2,7 @@
 import { useMemo, useState, type MouseEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { ChevronRight, Search, BookOpen, LayoutList, ArrowRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Search, BookOpen, LayoutList, ArrowRight } from "lucide-react";
 import { categories } from "@/data/categories";
 import { tools, type Tool } from "@/data/tools";
 import { getCategoryIcon } from "@/lib/category-icons";
@@ -13,6 +13,9 @@ const TOOLS_BY_CATEGORY = tools.reduce<Record<string, Tool[]>>((acc, tool) => {
   (acc[tool.category] ??= []).push(tool);
   return acc;
 }, {});
+
+/** Categories shown on phones (< md) before the "show more" row; the rest stay in the HTML, hidden with CSS. */
+const PHONE_VISIBLE_CATEGORIES = 4;
 
 /**
  * A quick-overview preview for one tool, shown on hover/focus of its link in
@@ -93,6 +96,8 @@ export default function CategorySidebar({
     return initial;
   });
   const [query, setQuery] = useState("");
+  const [showAllCategories, setShowAllCategories] = useState(false);
+  const hiddenCategoryCount = categories.length - PHONE_VISIBLE_CATEGORIES;
 
   function toggle(slug: string) {
     setExpanded((prev) => {
@@ -188,16 +193,17 @@ export default function CategorySidebar({
         </ul>
       ) : (
         <ul className="flex flex-col gap-0.5 px-3 pb-3">
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             const Icon = getCategoryIcon(category.icon);
             const iconColorClasses = getCategoryIconColor(category.slug);
             const isOpen = expanded.has(category.slug);
             const categoryTools = TOOLS_BY_CATEGORY[category.slug] ?? [];
             const isActiveCategory = activeCategorySlug === category.slug;
+            const phoneHiddenClass = !showAllCategories && index >= PHONE_VISIBLE_CATEGORIES ? "max-md:hidden" : undefined;
 
             if (categoryTools.length === 0) {
               return (
-                <li key={category.slug}>
+                <li key={category.slug} className={phoneHiddenClass}>
                   <div aria-disabled="true" data-bp-inner className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-zinc-400 opacity-60 dark:text-zinc-500">
                     <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconColorClasses}`}>
                       <Icon size={15} strokeWidth={2} />
@@ -230,7 +236,7 @@ export default function CategorySidebar({
             const chevron = <ChevronRight size={14} className={`shrink-0 text-zinc-400 transition-transform ${isOpen ? "rotate-90" : ""}`} />;
 
             return (
-              <li key={category.slug}>
+              <li key={category.slug} className={phoneHiddenClass}>
                 {categoryLinksJumpToSections ? (
                   <div data-bp-inner className={`${rowClasses} gap-1 p-0`}>
                     <a
@@ -300,6 +306,23 @@ export default function CategorySidebar({
               </li>
             );
           })}
+          {hiddenCategoryCount > 0 && (
+            <li className="md:hidden">
+              <button
+                type="button"
+                onClick={() => setShowAllCategories((v) => !v)}
+                aria-expanded={showAllCategories}
+                className="flex min-h-11 w-full items-center gap-2.5 rounded-lg px-2.5 text-sm font-medium text-blue-600 transition hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-400 dark:hover:bg-zinc-800"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-500/10">
+                  <ChevronDown size={15} strokeWidth={2} className={`transition-transform ${showAllCategories ? "rotate-180" : ""}`} />
+                </span>
+                <span className="flex-1 text-start">
+                  {showAllCategories ? tHome("sidebarShowLess") : tHome("sidebarShowMore", { count: hiddenCategoryCount })}
+                </span>
+              </button>
+            </li>
+          )}
         </ul>
       )}
       {footer && <div className="px-3 pb-3">{footer}</div>}

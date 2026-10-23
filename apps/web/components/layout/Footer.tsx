@@ -16,8 +16,8 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row">
-        <div className="flex flex-col items-center gap-3 sm:items-start">
+      <div className="mx-auto flex max-w-7xl flex-col items-stretch justify-between gap-6 px-6 py-10 md:flex-row md:items-center">
+        <div className="flex flex-col items-start gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="TooloraLabs" className="h-8 w-auto dark:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,12 +26,12 @@ export default function Footer() {
             alt="TooloraLabs"
             className="hidden h-8 w-auto dark:block"
           />
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-start text-sm text-zinc-500 dark:text-zinc-400">
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
 
-        <nav className="flex flex-wrap items-center justify-center gap-6">
+        <nav className="flex flex-wrap items-center justify-start gap-6 md:justify-center">
           {links.map((link) => (
             <Link
               key={link.href}
