@@ -65,6 +65,9 @@ export default async function CryptoEducation({ coins, fetchedAt, locale }: Cryp
         <p>{t("risks.paragraph3")}</p>
       </InfoSection>
 
+      {/* PHONE PILOT ad 3: ~1/3 of the article's phone height, on a section boundary (desktop: display:none). */}
+      <AdSpace variant="leaderboard" label="advertisement" className="md:hidden" />
+
       <CryptoWorkedConversions coins={coins} fetchedAt={fetchedAt} locale={locale} />
 
       <AdSpace variant="leaderboard" label="advertisement" className="max-md:hidden" />
@@ -86,6 +89,9 @@ export default async function CryptoEducation({ coins, fetchedAt, locale }: Cryp
           <h3 className="font-semibold">{t("behindTheTool.modernDevelopments.title")}</h3>
           <p className="mt-2">{t("behindTheTool.modernDevelopments.paragraph")}</p>
         </div>
+        {/* PHONE PILOT ad 4: ~2/3 of the article's phone height, between two subsections; my-6 keeps it
+            24px clear of the text (the section's own space-y-4 gives only 16px). Desktop: display:none. */}
+        <AdSpace variant="leaderboard" label="advertisement" className="my-6 md:hidden" />
         <AcademicPathSection
           title={t("behindTheTool.academicPath.title")}
           intro={t("behindTheTool.academicPath.intro")}

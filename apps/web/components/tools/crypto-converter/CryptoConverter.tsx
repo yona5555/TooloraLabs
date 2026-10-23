@@ -212,8 +212,8 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
         <SectionNav items={navItems} phoneGroups={phoneGroups} />
         <ViewDocsLink slug="crypto-converter" />
 
-        {/* PHONE PILOT: the page's one phone ad, after the docs row and before the collapsed cards;
-            every other in-content slot is display:none below 768px (no ad request), desktop unchanged. */}
+        {/* PHONE PILOT ad 1 of 4: after the docs row, before the collapsed cards; the desktop
+            in-content slots are display:none below 768px (no ad request), desktop unchanged. */}
         <AdSpace variant="leaderboard" label="advertisement" className="md:hidden" />
 
         <PhoneCollapsibleCards>
@@ -225,6 +225,9 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
           ))}
         </PhoneCollapsibleCards>
       </div>
+
+      {/* PHONE PILOT ad 2: between the last collapsed card and the article (desktop: display:none). */}
+      <AdSpace variant="leaderboard" label="advertisement" className="mt-6 md:hidden" />
 
       <PhoneCollapsibleCards>{education}</PhoneCollapsibleCards>
     </FiatContext.Provider>
