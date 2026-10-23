@@ -20,7 +20,8 @@ export function phoneLayout(anchor: Element | null): void {
   root.setAttribute("data-phone-layout", "");
   const topLevel = (el: Element) => !el.parentElement || !el.parentElement.closest("[data-card]");
 
-  const cards = Array.prototype.filter.call(root.querySelectorAll("[data-card]"), topLevel) as Element[];
+  // Only cards this screen renders count (e.g. the desktop-only sidebar's cards do not on phone).
+  const cards = Array.prototype.filter.call(root.querySelectorAll("[data-card]"), (c: Element) => topLevel(c) && c.getClientRects().length > 0) as Element[];
   cards.forEach((card, i) => {
     if (card.hasAttribute("data-card-init")) return;
     card.setAttribute("data-card-init", "");

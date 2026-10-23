@@ -25,7 +25,7 @@ export default function ViewDocsLink({ slug }: { slug: string }) {
         />
       </Link>
       {/* APPROVED PHONE STANDARD ad 1: after the docs row, above the collapsed cards (display:none from 768px up). */}
-      <AdSpace variant="leaderboard" phone />
+      <AdSpace variant="leaderboard" phone className="my-3" />
     </>
   );
 }

@@ -36,7 +36,7 @@ export default function ToolPageLayout({
         <div className="flex items-center gap-3">
           <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" phoneText={backText} />
 
-          <h1 data-fit className={`min-w-0 max-md:truncate text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
+          <h1 data-fit data-fit-oneline className={`min-w-0 max-md:truncate text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
             {title}
           </h1>
         </div>

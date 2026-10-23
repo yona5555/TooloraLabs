@@ -29,31 +29,45 @@ On phone (below 768px) `/{locale}/tools/crypto-converter` breaks the phone stand
 Done with CSS order only inside `max-md:` (`display: contents` on the result cell, `order: -1` on the flow card); the markup order and the desktop layout are untouched. This exception applies to this tool only.
 
 ## Ad slot sizes on phone (Yousef, 2026-10-23)
-Every in-content `AdSpace variant="leaderboard"` below 768px is a fixed, centered 300×250 (Medium Rectangle) with the "إعلان" label above it; from 768px up it stays 728×90. 320×100 is the only allowed alternative where 300×250 is too tall. No other phone sizes and no full-width stretched boxes. The 300×600 sidebar is desktop-only (hidden below lg).
+Every phone ad slot (`AdSpace variant="leaderboard" phone`, see APPROVED PHONE STANDARD below) is a fixed, centered 300×250 (Medium Rectangle) with the "إعلان" label above it; the desktop in-content leaderboards stay 728×90 from 768px up and are hidden below it. 320×100 is the only allowed alternative where 300×250 is too tall. No other phone sizes and no full-width stretched boxes. The 300×600 sidebar is desktop-only (hidden below lg).
 
 
-## PHONE PILOT — pending Yousef's approval (crypto-converter)
+## APPROVED PHONE STANDARD — every tool page below 768px (Yousef, 2026-10-24)
 
-When approved, apply to all tools as a general rule. Branch `wip/phone-pilot-crypto` (not on main).
-Gated by one flag, `phonePilot: true` in `apps/web/data/tools.ts` (crypto-converter only). Everything
-lives below 768px; desktop and every other tool render as on main.
+The crypto-converter phone pilot was approved and is now the default for all tools; there is no flag.
+Everything sits behind `max-width: 767px` (or `md:hidden`); desktop renders exactly as before. It lives
+in the shared components, so a new tool gets it by using them (SectionCard, SectionNav, ViewDocsLink,
+InfoSection, AdSpace, ToolPageLayout) — never wire it per tool.
 
-- **Back button:** `BackButton` `phoneText` — arrow + "رجوع"/"Back" (`common.back`, 6 locales), 36px
-  bordered pill inside a 44px-tall hit area; the arrow flips in RTL. The title stays beside it on one
-  line (`max-md:truncate`).
-- **Two live mini cards** under the title (`CryptoPhoneTicker`): Bitcoin and Ethereum, the ticker chip
-  style grown to 64px (name, price, 24h change green/red, the ticker's 30-day sparkline from the
-  converter chart's daily candles). Tapping one sets it as the "from" coin.
-- **Cards:** the 3 above-the-fold cards are always open with no toggle. Cards 4+ (below the fold and
-  the encyclopedia's live-blocks card) sit in `PhoneCollapsibleCards` and start collapsed: only the blue
-  header (border dropped, collapsed height = header height). Toggle = one pill with text + chevron:
-  "فتح"/"OPEN" chevron down, "إغلاق"/"CLOSE" chevron up (`common.cardOpen/cardClose`, 6 locales),
-  `aria-expanded` (server default false), 44×44 hit area. The body stays in the HTML (CSS-hidden); the
-  candlestick canvas (`MarketChart`, `useCardOpened`) builds on first open.
-- **Section nav:** `SectionNav` `phoneGroups` — 4 equal buttons, Tool / Data (chart, coin, market,
-  network) / Learn (news, education, notices) / FAQ (`tools.crypto-converter.navGroups`), 13px, 44px
-  tall, nowrap + keep-all, no scrolling; smooth-scroll and the active button follows the scroll.
-- **Ads:** Phone ads on the tool page: 1 above the collapsed cards, 1 between the last card and the article, 2 inside the article at about 1/3 and 2/3 on paragraph boundaries with about 600px of text between them; other slots hidden on phone; desktop unchanged. Slots: 300×250, centered, reserved height, label "إعلان"/"Advertisement" (`common.advertisementLabel`), 24px clear of buttons, links and cards, never inside a collapsible or hidden container; the three new phone slots are `md:hidden`. Article ad 3 sits after "Risks" (section boundary), ad 4 inside "Behind the Concept" after "Modern Developments" and before "Academic Path" (at 390px: ar 26%/64%, en 28%/64%; text around them ≥1756px).
-- **Not met:** at 390×844 the result (live flow amount, y≈431) is in the first screen but the amount
-  input is not (y≈1154): the approved phone order puts the 780px live-flow card first. Needs a decision
-  (e.g. a compact amount field in the flow card, or input first).
+- **Back button:** `ToolPageLayout` → `BackButton phoneText` — arrow + "رجوع"/"Back" (`common.back`),
+  36px bordered pill in a 44×44 hit area, arrow flips in RTL; the title stays beside it on one line
+  (`max-md:truncate`).
+- **Two top mini cards** (`PhoneMiniCards`, the ticker chip at 64px: label, value, change, sparkline),
+  one row under the title, only where the page already loads live data from a verified source; never
+  invented data, a missing value hides the card or only its change/line. crypto-converter: Bitcoin +
+  Ethereum (`CryptoPhoneTicker`, tappable). commodities-tracker: gold (MetalpriceAPI spot, PAXG daily
+  closes for change + line) + silver (spot only — no free daily history). forex-converter: EUR/USD + the
+  selected pair (ExchangeRate-API value, ECB/Frankfurter 10-day table for change + line). weather-forecast:
+  now (temperature + icon) + next 24 h (low/high + hourly line), from its MET Norway forecast. Every
+  other tool has none (the finance calculators load no live data) until Yousef decides.
+- **Cards:** on tool pages (`main[data-phone-cards]`) the first 3 top-level blue-header cards are always
+  open with no toggle (a page with ≤3 cards has no toggles); cards 4+ start collapsed to the blue header
+  only (frame dropped, height = header). Pill toggle "فتح"/"OPEN" + chevron down, "إغلاق"/"CLOSE" +
+  chevron up (`common.cardOpen/cardClose`), `aria-expanded` (server default false), 44×44 hit area.
+  `lib/phone/layout.ts` marks the always-open cards (`data-fixed`) inline before the first paint; the
+  collapse is CSS only (globals.css), so the body stays in the HTML; heavy parts use `useCardOpened`
+  (e.g. `MarketChart`) and build on first open. Hand-built blue-header result cards carry
+  `data-card data-fixed` so they count among the first 3. Cards inside a dialog never collapse.
+- **Section nav:** 3–4 equal buttons Tool / Data / Learn / FAQ (`common.navGroups`): `tool` → Tool,
+  `faq` → FAQ, `behind-the-tool`/`notices`/`news`/`learning-resources`/`worked-examples` and the article's
+  own sections → Learn, every other id → Data; an empty group has no button. One line, 44px tall, no
+  scrolling; smooth scroll; the active button follows the scroll.
+- **Ads (phone only, `AdSpace phone`):** 1) after the docs row (`ViewDocsLink`), above the collapsed
+  cards; 2) before the article's first section; 3–4) inside the article near 1/3 and 2/3 of its phone
+  height, on section boundaries only (`InfoSection` renders a hidden slot before every section and
+  `lib/phone/layout.ts` picks them), ≥600px of article between ads and ≥300px after the last; a short
+  article gets one slot near the middle. 300×250, reserved height, centered, label "إعلان"/"Advertisement"
+  (`common.advertisementLabel`), ≥24px from interactive elements, never inside a collapsible or hidden
+  container. Every other in-content leaderboard is `max-md:hidden`; the phone slots are `md:hidden`.
+- **Known:** crypto-converter keeps the approved live-flow-first order, so its amount input is below the
+  first screen at 390×844 (pending decision since the pilot).

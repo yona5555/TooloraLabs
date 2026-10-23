@@ -40,7 +40,7 @@ export const useCardOpened = () => useContext(CardOpenedContext);
 function isAlwaysOpen(el: HTMLElement): boolean {
   const scope = el.closest("[data-phone-cards]");
   if (!scope || el.closest('dialog,[role="dialog"]')) return true;
-  const cards = Array.from(scope.querySelectorAll<HTMLElement>("[data-card]")).filter((c) => !c.parentElement?.closest("[data-card]"));
+  const cards = Array.from(scope.querySelectorAll<HTMLElement>("[data-card]")).filter((c) => !c.parentElement?.closest("[data-card]") && (c === el || c.getClientRects().length > 0));
   const index = cards.indexOf(el);
   return cards.length <= 3 || index < 3;
 }

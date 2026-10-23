@@ -84,6 +84,9 @@ function fit(el: HTMLElement) {
   }
   // A title ([data-fit], words) too long for one line even at the floor wraps at its own size
   // instead: two readable lines beat one tiny one. Numbers never take this path.
+  // APPROVED PHONE STANDARD: a tool page title ([data-fit-oneline]) stays on one line on phone,
+  // at the floor size, ending in an ellipsis if it still does not fit.
+  if (el.hasAttribute("data-fit-oneline") && window.matchMedia("(max-width: 767px)").matches) return;
   if (spills(el) && !el.hasAttribute("data-num")) {
     el.style.removeProperty("font-size");
     el.setAttribute("data-fit-wrap", "");
