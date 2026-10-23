@@ -133,3 +133,6 @@ Single source of truth: the "Blueprint theme" block in `apps/web/app/globals.css
 - **Light mode surfaces (site-wide, automatic):** `bg-white` → panel #e7eefa; `bg-zinc/gray/slate-50|100` → inner #dde7f7; white buttons/inputs → key #f5f8fd (teal/violet pages use their own tints). Never pure white panels.
 - **Light mode borders:** neutral borders → dividers rgba(40,80,160,.22); rounded fully bordered panels/cards/tables/FAQ/inputs → 1.5px rgba(40,80,160,.35); large rounded white panels get `0 1px 3px rgba(20,40,90,.08)`; table column dividers 1px; colored buttons keep their fill with a darker same-hue edge.
 - Shared components opt in with `data-bp-panel` (SectionCard, TOC list, feedback box) and `data-bp-inner` (stat boxes, formula box, sidebar rows). Dark mode cards/panels are unchanged. The home calculator's own dark toggle (`.calc-dark`) and print areas are excluded.
+
+## 9. Clickable actions look like buttons (Yousef, 2026-10-23, every page)
+Any clickable action (tabs, save, clear, copy, export, toggles, show more) must be a visible button: background or border, padding, radius, clear active/hover/focus states, and a 44×44 touch area on phone. Plain text or underlined text for an action is rejected. Real navigation links inside paragraphs stay links.

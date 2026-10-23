@@ -7,3 +7,6 @@ This replaces any earlier "always stack" or "always side-by-side" wording.
 - Approved full card, do not touch: weather "10-day forecast".
 - Stacked reference: weather "Next 48 hours".
 - Side-by-side reference: text tool "Layout playground".
+
+## Clickable actions look like buttons (Yousef 2026-10-23)
+Any clickable action (tabs, save, clear, copy, export, toggles, show more) must be a visible button: background or border, padding, radius, clear active/hover/focus states, and a 44×44 touch area on phone. Plain text or underlined text for an action is rejected. Real navigation links inside paragraphs stay links.
