@@ -33,7 +33,7 @@ type BackButtonProps = {
   /** Visible text for the "labeled" variant; falls back to `label`. */
   text?: string;
   /**
-   * Phone pilot (Tool.phonePilot): below 768px the icon variant becomes a 36px labeled button
+   * APPROVED PHONE STANDARD (every tool page): below 768px the icon variant becomes a 36px labeled button
    * (arrow + this text) inside a 44px-tall hit area. From 768px up it renders exactly as the icon variant.
    */
   phoneText?: string;

@@ -17,25 +17,21 @@ const SIDEBAR_SIZE = { width: 300, height: 600 };
 type AdSpaceProps = {
   className?: string;
   variant?: "sidebar" | "leaderboard";
-  /** Phone pilot (crypto-converter): "Advertisement" instead of "Sponsored" below 768px only. */
-  label?: "sponsored" | "advertisement";
+  /**
+   * APPROVED PHONE STANDARD (visuals.md): a phone-only 300×250 slot labelled "Advertisement",
+   * display:none from 768px up. Every other leaderboard is an in-content desktop slot and is
+   * display:none below 768px, so a phone only ever shows the phone slots.
+   */
+  phone?: boolean;
 };
 
-export default function AdSpace({ className = "", variant = "sidebar", label = "sponsored" }: AdSpaceProps) {
+export default function AdSpace({ className = "", variant = "sidebar", phone = false }: AdSpaceProps) {
   const t = useTranslations("common");
-  const labelText =
-    label === "advertisement" ? (
-      <>
-        <span className="md:hidden">{t("advertisementLabel")}</span>
-        <span className="max-md:hidden">{t("sponsoredLabel")}</span>
-      </>
-    ) : (
-      t("sponsoredLabel")
-    );
+  const labelText = phone ? t("advertisementLabel") : t("sponsoredLabel");
 
   if (variant === "leaderboard") {
     return (
-      <div data-ad-slot="" className={`mx-auto flex w-[300px] max-w-[728px] flex-col gap-1.5 max-md:mx-[calc((100%-300px)/2)] md:w-full ${className}`}>
+      <div data-ad-slot="" className={`mx-auto flex w-[300px] max-w-[728px] flex-col gap-1.5 max-md:mx-[calc((100%-300px)/2)] md:w-full ${phone ? "md:hidden" : "max-md:hidden"} ${className}`}>
         <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600">{labelText}</p>
         <div data-ad-box="" className="flex h-[250px] w-[300px] shrink-0 items-center justify-center rounded-xl border border-dashed border-zinc-300 text-sm font-medium text-zinc-400 md:h-[90px] md:w-full md:max-w-[728px] dark:border-zinc-700 dark:text-zinc-600">
           {t("adSpace")}

@@ -37,7 +37,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
           ? "invalidRate"
           : "invalidPrice";
     return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+      <div data-card="" data-fixed="" className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
         </div>
@@ -59,7 +59,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
   const heroValue = money(result.totalCost);
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div data-card="" data-fixed="" className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
         <FuelShareExportModal

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import BackButton from "@/components/tool-ui/BackButton";
+import PhoneLayoutScript from "./PhoneLayoutScript";
 
 type ToolPageLayoutProps = {
   category: string;
@@ -12,9 +13,8 @@ type ToolPageLayoutProps = {
   contentWidth?: "default" | "wide";
   /** Tightens the header so a 3-column layout can clear the fold. Opt-in per tool. */
   compact?: boolean;
-  /** Phone pilot (Tool.phonePilot): labeled back button and one-line title below 768px. */
-  phonePilot?: boolean;
-  backText?: string;
+  /** APPROVED PHONE STANDARD: the labeled back button's text below 768px ("Back"). */
+  backText: string;
 };
 
 export default function ToolPageLayout({
@@ -26,36 +26,36 @@ export default function ToolPageLayout({
   children,
   contentWidth = "default",
   compact = false,
-  phonePilot = false,
   backText,
 }: ToolPageLayoutProps) {
   const maxWidthClass = contentWidth === "wide" ? "max-w-6xl" : "max-w-5xl";
 
   if (compact) {
     return (
-      <main className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
+      <main data-phone-cards="" suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
-          <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" phoneText={phonePilot ? backText : undefined} />
+          <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" phoneText={backText} />
 
-          <h1 data-fit className={`min-w-0${phonePilot ? " max-md:truncate" : ""} text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
+          <h1 data-fit className={`min-w-0 max-md:truncate text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
             {title}
           </h1>
         </div>
 
         <div className="mt-4">{children}</div>
+        <PhoneLayoutScript />
       </main>
     );
   }
 
   return (
-    <main className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
+    <main data-phone-cards="" suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
       <span className="block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {category}
       </span>
 
       <div className="mt-4 flex items-center gap-3 lg:mt-6">
-        <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={22} className="h-12 w-12" />
-        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-5xl dark:text-zinc-50">
+        <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={22} className="h-12 w-12" phoneText={backText} />
+        <h1 className="min-w-0 max-md:truncate text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-5xl dark:text-zinc-50">
           {title}
         </h1>
       </div>
@@ -67,6 +67,7 @@ export default function ToolPageLayout({
       <div className="mt-8 lg:mt-12">
         {children}
       </div>
+      <PhoneLayoutScript />
     </main>
   );
 }

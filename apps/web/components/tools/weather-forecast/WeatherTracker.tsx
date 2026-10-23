@@ -14,6 +14,7 @@ import WxResult from "./WxResult";
 import WxWorldMap from "./WxWorldMap";
 import WxCredits from "./WxCredits";
 import { WxDailyCard, WxHourlyCard, WxHumidityCard, WxMoonCard, WxPressureCard, WxSunCard, WxUvCard, WxWindCard } from "./WxIndicators";
+import WeatherPhoneCards from "./WeatherPhoneCards";
 import { makeWxFmt, useWeatherDerived, useWxT, type WxPlace } from "./wx";
 
 type Props = {
@@ -98,6 +99,7 @@ export default function WeatherTracker({ initialCityId, initialForecast, rendere
 
   return (
     <>
+      {props && <WeatherPhoneCards {...props} />}
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput

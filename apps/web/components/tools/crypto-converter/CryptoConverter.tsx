@@ -29,7 +29,6 @@ import CryptoTopMovers from "./CryptoTopMovers";
 import CryptoNews from "./CryptoNews";
 import CryptoLearningResources from "./CryptoLearningResources";
 import CryptoPhoneTicker, { type PhoneTrends } from "./CryptoPhoneTicker";
-import { PhoneCollapsibleCards } from "@/components/tool-ui/SectionCard";
 import { FiatContext, marketFormatters, useFiatPreference } from "@/components/tools/markets/fiat";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import { useLiveTicks } from "./useCryptoLive";
@@ -123,14 +122,6 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
     { id: "notices", label: tNav("notices") },
   ];
 
-  const tGroups = useTranslations("tools.crypto-converter.navGroups");
-  const phoneGroups = [
-    { id: "tool", label: tGroups("tool"), members: ["tool"] },
-    { id: "chart", label: tGroups("data"), members: ["chart", "compare", "movers", "fear-greed"] },
-    { id: "news", label: tGroups("learn"), members: ["news", "learning-resources", "notices"] },
-    { id: "faq", label: tGroups("faq"), members: ["faq"] },
-  ];
-
   // Below the fold, in page order; `adAfter` = the desktop leaderboard that follows it (unchanged).
   const belowCards: { key: string; node: ReactNode; adAfter?: boolean }[] = [
     { key: "chart", node: <CryptoHistoricalChart coin={chartCoin} coins={initialCoins} onSelectCoin={setChartCoinId} digitStyle={digitStyle} /> },
@@ -209,27 +200,18 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
 
       {/* Below the fold every card spans the full content width; leaderboards sit between groups only. */}
       <div className="mt-6 flex flex-col gap-6">
-        <SectionNav items={navItems} phoneGroups={phoneGroups} />
+        <SectionNav items={navItems} />
         <ViewDocsLink slug="crypto-converter" />
 
-        {/* PHONE PILOT ad 1 of 4: after the docs row, before the collapsed cards; the desktop
-            in-content slots are display:none below 768px (no ad request), desktop unchanged. */}
-        <AdSpace variant="leaderboard" label="advertisement" className="md:hidden" />
-
-        <PhoneCollapsibleCards>
-          {belowCards.map((card) => (
-            <Fragment key={card.key}>
-              {card.node}
-              {card.adAfter && <AdSpace variant="leaderboard" className="max-md:hidden" />}
-            </Fragment>
-          ))}
-        </PhoneCollapsibleCards>
+        {belowCards.map((card) => (
+          <Fragment key={card.key}>
+            {card.node}
+            {card.adAfter && <AdSpace variant="leaderboard" />}
+          </Fragment>
+        ))}
       </div>
 
-      {/* PHONE PILOT ad 2: between the last collapsed card and the article (desktop: display:none). */}
-      <AdSpace variant="leaderboard" label="advertisement" className="mt-6 md:hidden" />
-
-      <PhoneCollapsibleCards>{education}</PhoneCollapsibleCards>
+      {education}
     </FiatContext.Provider>
   );
 }

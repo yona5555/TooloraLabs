@@ -493,11 +493,31 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
 }
 
 /*
- * PHONE PILOT (crypto-converter, pending Yousef's approval; SectionCard.tsx CollapsibleSectionCard):
- * a collapsed card is only its blue header, so drop the light theme's 1.5px panel frame too.
+ * APPROVED PHONE STANDARD (visuals.md; SectionCard.tsx, PhoneLayoutScript.tsx, InfoSection.tsx).
+ * Tool pages only ([data-phone-cards] on <main>), below 768px:
+ * - a card that is not always-open ([data-fixed]) and is closed is only its blue header: body hidden,
+ *   the light theme's 1.5px panel frame dropped, the header's bottom corners rounded;
+ * - the OPEN/CLOSE pill shows on those cards only (display:none everywhere else, desktop included);
+ * - article ad slots stay display:none until PhoneLayoutScript picks them ([data-show]).
  */
+[data-article-ad] {
+  display: none;
+}
 @media (max-width: 767px) {
-  [data-bp-panel][data-card][data-state="closed"] {
+  [data-phone-cards] [data-card]:not([data-fixed]) > [data-card-header] > [data-card-toggle] {
+    display: flex;
+  }
+  [data-phone-cards] [data-card][data-state="closed"]:not([data-fixed]) {
     border-width: 0;
+  }
+  [data-phone-cards] [data-card][data-state="closed"]:not([data-fixed]) > [data-card-header] {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+  [data-phone-cards] [data-card][data-state="closed"]:not([data-fixed]) > [data-card-body] {
+    display: none;
+  }
+  [data-article-ad][data-show] {
+    display: block;
   }
 }

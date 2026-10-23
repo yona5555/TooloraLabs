@@ -242,8 +242,7 @@ export async function ToolPageView({
         description={description}
         contentWidth={isAboveFoldLayout ? "wide" : "default"}
         compact={isAboveFoldLayout}
-        phonePilot={tool.phonePilot}
-        backText={tool.phonePilot ? tcommon("back") : undefined}
+        backText={tcommon("back")}
       >
         {component}
       </ToolPageLayout>

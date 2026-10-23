@@ -4,7 +4,7 @@ import { findCoinById, type CryptoCoin } from "@tooloralabs/tools";
 import Sparkline from "@/components/tools-page/PulseSparkline";
 
 /**
- * PHONE PILOT (pending Yousef's approval): Bitcoin and Ethereum as two live mini cards under the title,
+ * APPROVED PHONE STANDARD top mini cards: Bitcoin and Ethereum as two live mini cards under the title,
  * phone only (< 768px). The /tools ticker chip (price, 24h change, sparkline), grown to 64px; tapping
  * one makes it the "from" coin. Prices and 24h change are the page's own CoinGecko list; each trend is
  * the coin's last 30 daily closes (the converter chart's Coinbase candles). No trend hides only the line.

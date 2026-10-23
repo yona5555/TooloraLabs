@@ -3,10 +3,21 @@ import CommodityEducation from "@/components/tools/commodities-tracker/Commodity
 import { getForexSnapshot } from "@/lib/forex/exchangerate";
 import { getMetalSnapshot } from "@/lib/commodities/metalprice";
 import { getOilSnapshot } from "@/lib/commodities/oilprice";
+import { getCandles } from "@/lib/crypto/candles";
+import { getFetchTimestamp } from "@/lib/crypto/coingecko";
 import type { ToolEntryProps } from "./types";
 
 export default async function ToolEntry({ locale }: ToolEntryProps) {
-  const [metals, oil, forex] = await Promise.all([getMetalSnapshot(), getOilSnapshot(), getForexSnapshot()]);
+  const now = Math.floor(getFetchTimestamp() / 1000);
+  // Phone top card trend: the PAXG/USD daily candles the tracker's gold chart and /tools already use
+  // (same arguments, same cache entry); a failed fetch only hides the line and change.
+  const [metals, oil, forex, paxg] = await Promise.all([
+    getMetalSnapshot(),
+    getOilSnapshot(),
+    getForexSnapshot(),
+    getCandles("paxg", "1D", now).catch(() => null),
+  ]);
+  const goldTrend = paxg?.candles.map((c) => c.close).slice(-30) ?? null;
   const lastUpdatedUnix =
     metals && oil ? Math.min(metals.timestamp, oil.timestamp) : (metals?.timestamp ?? oil?.timestamp ?? null);
   const spot = {
@@ -22,6 +33,7 @@ export default async function ToolEntry({ locale }: ToolEntryProps) {
       spot={spot}
       fiatRates={fiatRates}
       lastUpdatedUnix={lastUpdatedUnix}
+      goldTrend={goldTrend}
       education={<CommodityEducation examples={{ gold: spot.gold, silver: spot.silver, brent: spot.brent, lastUpdatedUnix, locale }} />}
     />
   );
