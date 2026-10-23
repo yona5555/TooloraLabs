@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { Scene3DCanvasProps } from "./Scene3DCanvas";
+import { useCardOpened } from "../SectionCard";
 
 function Fallback() {
   return (
@@ -27,6 +28,8 @@ export default function Scene3D({
 }: Scene3DCanvasProps & { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  // Inside a phone card that is still collapsed, wait for its first open.
+  const cardOpened = useCardOpened();
   useEffect(() => {
     const el = ref.current;
     if (!el || visible) return;
@@ -44,7 +47,7 @@ export default function Scene3D({
       dir="ltr"
       className={`relative h-full min-h-[280px] w-full cursor-grab touch-none overflow-hidden rounded-xl active:cursor-grabbing ${className}`}
     >
-      {visible ? <Scene3DCanvas {...props} /> : <Fallback />}
+      {visible && cardOpened ? <Scene3DCanvas {...props} /> : <Fallback />}
     </div>
   );
 }

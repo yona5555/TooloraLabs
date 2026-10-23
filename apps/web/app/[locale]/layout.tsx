@@ -6,6 +6,8 @@ import { getLocaleDir } from "@/lib/locale-meta";
 import { getLocaleFontClassName } from "@/lib/locale-fonts";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { CARD_PREPAINT_SCRIPT } from "@/components/tool-ui/cardPrepaint";
+import CardFirstOpener from "@/components/tool-ui/CardFirstOpener";
 import HtmlDocument from "@/components/layout/HtmlDocument";
 import { jsonLdHtml, organizationJsonLd } from "@/lib/seo";
 import { getClientMessages } from "@/lib/client-messages";
@@ -36,6 +38,8 @@ export default async function LocaleLayout({
           {children}
           <Footer />
         </div>
+        <CardFirstOpener />
+        <script dangerouslySetInnerHTML={{ __html: CARD_PREPAINT_SCRIPT }} />
       </NextIntlClientProvider>
     </HtmlDocument>
   );

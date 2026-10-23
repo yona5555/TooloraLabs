@@ -474,6 +474,44 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
 }
 
 /*
+ * Phone collapsible cards (SectionCard.tsx): below 768px a collapsed card is only its blue header.
+ * Collapsed is the default ("auto" = never toggled); CARD_PREPAINT_SCRIPT (cardPrepaint.ts) opens the
+ * first 3 cards for good. The body stays in the HTML; the 0fr/1fr grid row animates a visitor's toggle.
+ */
+@media (max-width: 767px) {
+  [data-card] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+  [data-card] > [data-card-body] {
+    min-height: 0;
+  }
+  [data-card]:is([data-state="auto"], [data-state="closed"]) {
+    grid-template-rows: auto 0fr;
+    overflow: hidden;
+    border-width: 0;
+  }
+  [data-card]:is([data-state="auto"], [data-state="closed"]) > [data-card-body] {
+    visibility: hidden;
+    padding: 0;
+  }
+  [data-card]:is([data-state="auto"], [data-state="closed"]) > [data-card-header] {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+  [data-card][data-animating] {
+    overflow: hidden;
+    transition: grid-template-rows 0.22s ease;
+  }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  [data-card][data-animating] {
+    transition: none;
+  }
+}
+
+/*
  * indicator-kit drawings render their SVG in true pixels of the measured box (viewBox = box). Before
  * the first measurement (server HTML) the SVG carries the fallback size, so it fills the box here
  * instead of overflowing it.
