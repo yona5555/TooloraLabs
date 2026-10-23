@@ -65,12 +65,15 @@ export default function HomeCalculator({ className = "" }: { className?: string 
   }
 
   return (
-    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 ${calcDark ? "calc-dark" : ""} ${className}`}>
+    // Phones (< md): one device frame — a tinted surface with 10px padding and 8px gaps, each
+    // section a lighter-bordered card inside it; the history card moves above the display
+    // (order in CalculatorDisplay). Every class below that changes this is max-md only.
+    <div className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-lg calcdark:border-zinc-800 calcdark:bg-zinc-900 max-md:gap-2 max-md:bg-zinc-50 max-md:p-2.5 max-md:shadow-md max-md:calcdark:bg-zinc-950 ${calcDark ? "calc-dark" : ""} ${className}`}>
       <CalculatorTopBar mode={mode} setMode={setMode} calcDark={calcDark} onToggleCalcDark={() => setCalcDark((v) => !v)} />
 
       {(mode === null || mode === "scientific") && (
         <div className={mode === null ? "contents md:hidden" : "contents"}>
-          <div className="p-3 sm:p-4">
+          <div className="p-3 max-md:p-0 sm:p-4">
             <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} onDeleteArchiveEntry={deleteEntry} onClearArchive={clearArchive} />
           </div>
           <FunctionCategoryRow dispatch={dispatch} />
@@ -81,7 +84,7 @@ export default function HomeCalculator({ className = "" }: { className?: string 
 
       {mode === "standard" && (
         <>
-          <div className="p-3 sm:p-4">
+          <div className="p-3 max-md:p-0 sm:p-4">
             <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} onDeleteArchiveEntry={deleteEntry} onClearArchive={clearArchive} />
           </div>
           <StandardKeypad dispatch={dispatch} />

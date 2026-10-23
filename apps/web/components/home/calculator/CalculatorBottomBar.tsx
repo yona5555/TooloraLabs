@@ -14,7 +14,7 @@ export default function CalculatorBottomBar({ state, onSaveHistory, justSaved }:
   const tHome = useTranslations("homeCalculator");
 
   return (
-    <div className="flex items-center justify-between gap-3 border-t border-zinc-200 px-3 py-2.5 calcdark:border-zinc-800">
+    <div className="flex items-center justify-between gap-3 border-t border-zinc-200 px-3 py-2.5 calcdark:border-zinc-800 max-md:rounded-xl max-md:border max-md:border-zinc-200/70 max-md:bg-white max-md:calcdark:border-zinc-800 max-md:calcdark:bg-zinc-900">
       <button
         type="button"
         onClick={onSaveHistory}

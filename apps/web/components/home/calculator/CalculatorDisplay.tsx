@@ -46,9 +46,9 @@ function useMainPaneText(state: CalculatorState, tHome: ReturnType<typeof useTra
 
 function EntryRow({ entry }: { entry: HistoryEntry }) {
   return (
-    <div className="border-b border-zinc-100 px-3 py-2.5 last:border-0 calcdark:border-zinc-800" dir="ltr">
+    <div className="border-b border-zinc-100 px-3 py-2.5 last:border-0 calcdark:border-zinc-800 max-md:py-1.5" dir="ltr">
       <div className="truncate text-xs text-zinc-400 calcdark:text-zinc-500">{entry.expression}</div>
-      <div className="truncate text-lg font-semibold text-zinc-900 calcdark:text-zinc-50">{formatCalculatorNumber(entry.result)}</div>
+      <div className="truncate text-lg font-semibold text-zinc-900 calcdark:text-zinc-50 max-md:text-base">{formatCalculatorNumber(entry.result)}</div>
     </div>
   );
 }
@@ -84,10 +84,12 @@ export default function CalculatorDisplay({ state, dispatch, archive, onDeleteAr
   // by the total row's 2rem whenever the row shows (from two entries, the old
   // list already filled its 8rem cap). With a single entry the total equals
   // that entry, so on desktop the row is left out instead of growing the panel.
-  const listHeight = entries.length === 0 ? "max-h-32" : entries.length === 1 ? "max-h-24 md:max-h-32" : "max-h-24";
+  // Phones keep the whole card compact (one 52px entry row visible, the rest scroll) so the
+  // display and keypad below it stay on screen.
+  const listHeight = entries.length === 0 ? "max-h-32" : entries.length === 1 ? "max-h-[52px] md:max-h-32" : "max-h-[52px] md:max-h-24";
 
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1.4fr_1fr]">
+    <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.4fr_1fr] md:gap-3">
       <div
         aria-label={tHome("display.mainLabel")}
         className="flex min-h-[6.5rem] flex-col justify-end rounded-xl border border-blue-100 bg-gradient-to-b from-zinc-50 to-blue-50/40 px-4 py-3 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] calcdark:border-blue-500/20 calcdark:from-zinc-800 calcdark:to-zinc-800/60 calcdark:shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]"
@@ -95,12 +97,12 @@ export default function CalculatorDisplay({ state, dispatch, archive, onDeleteAr
         <div className="truncate text-end text-sm text-zinc-500 calcdark:text-zinc-400" dir="ltr">
           {topText}
         </div>
-        <div className="mt-1 truncate text-end text-4xl font-extrabold text-zinc-900 calcdark:text-white" dir="ltr">
+        <div data-fit className="mt-1 truncate text-end text-4xl font-extrabold text-zinc-900 calcdark:text-white" dir="ltr">
           {bottomText}
         </div>
       </div>
 
-      <div data-history-panel className="flex min-h-[6.5rem] flex-col overflow-hidden rounded-xl border border-zinc-200 calcdark:border-zinc-700">
+      <div data-history-panel className="flex min-h-[6.5rem] flex-col overflow-hidden rounded-xl border border-zinc-200 calcdark:border-zinc-700 max-md:order-first">
         <div className="flex border-b border-zinc-200 calcdark:border-zinc-700">
           <div className="flex flex-1" role="tablist">
             {(["history", "archive"] as const).map((key) => (
@@ -124,7 +126,7 @@ export default function CalculatorDisplay({ state, dispatch, archive, onDeleteAr
             <button
               type="button"
               onClick={clearEntries}
-              className="flex shrink-0 items-center gap-1 border-s border-zinc-200 bg-zinc-50 px-2.5 text-xs font-semibold text-red-600 transition hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 max-md:min-h-11 calcdark:border-zinc-700 calcdark:bg-zinc-800/40 calcdark:text-red-400 calcdark:hover:bg-red-500/10"
+              className="flex shrink-0 items-center gap-1 border-s border-zinc-200 bg-zinc-50 px-2.5 text-xs font-semibold text-red-600 transition hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500 max-md:min-h-9 calcdark:border-zinc-700 calcdark:bg-zinc-800/40 calcdark:text-red-400 calcdark:hover:bg-red-500/10"
             >
               <Trash2 size={13} />
               {tHome("display.clearAll")}

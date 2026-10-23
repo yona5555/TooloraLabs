@@ -64,7 +64,9 @@ function spills(el: HTMLElement): boolean {
       const b = a.getBoundingClientRect();
       return chain.some((c) => outside(c.getBoundingClientRect(), b));
     }
-    chain.push(a);
+    // display:contents ancestors have no box (a 0×0 rect at the origin), so they would always
+    // read as "outside" the clipping ancestor and shrink text that fits.
+    if (getComputedStyle(a).display !== "contents") chain.push(a);
   }
   return chain.some((c) => outside(c.getBoundingClientRect(), new DOMRect(0, 0, document.documentElement.clientWidth, 0)));
 }

@@ -60,7 +60,7 @@ export default function CalculatorTopBar({ mode, setMode, calcDark, onToggleCalc
   }
 
   return (
-    <div className="flex items-center gap-2 border-b border-zinc-200 bg-white px-3 py-2.5 calcdark:border-zinc-800 calcdark:bg-zinc-900">
+    <div className="flex items-center gap-2 border-b border-zinc-200 bg-white px-3 py-2.5 calcdark:border-zinc-800 calcdark:bg-zinc-900 max-md:rounded-xl max-md:border max-md:border-zinc-200/70 max-md:px-2 max-md:py-1.5 max-md:calcdark:border-zinc-800">
       <div className="relative shrink-0" ref={menuRef}>
         <button
           type="button"

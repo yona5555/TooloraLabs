@@ -137,7 +137,7 @@ export default function CalculatorKeypad({ state, dispatch }: CalculatorKeypadPr
   ];
 
   return (
-    <div className="grid grid-cols-8 gap-1 p-2 sm:gap-1.5 sm:p-3" dir="ltr">
+    <div className="grid grid-cols-8 gap-1 sm:gap-1.5 md:p-3" dir="ltr">
       {rows.flat().map((button, index) =>
         button === null ? (
           <div key={index} aria-hidden="true" />

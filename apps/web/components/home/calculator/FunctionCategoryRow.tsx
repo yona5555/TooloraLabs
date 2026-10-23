@@ -64,7 +64,7 @@ export default function FunctionCategoryRow({ dispatch }: FunctionCategoryRowPro
   const categories: CategoryKey[] = ["trigonometry", "probability", "calculus"];
 
   return (
-    <div className="border-t border-zinc-200 calcdark:border-zinc-800">
+    <div className="border-t border-zinc-200 calcdark:border-zinc-800 max-md:overflow-hidden max-md:rounded-xl max-md:border max-md:border-zinc-200/70 max-md:bg-white max-md:calcdark:border-zinc-800 max-md:calcdark:bg-zinc-900">
       <div className="flex">
         {categories.map((key) => {
           const Icon = CATEGORY_ICONS[key];

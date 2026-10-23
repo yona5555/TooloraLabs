@@ -82,7 +82,7 @@ export default function StandardKeypad({ dispatch }: StandardKeypadProps) {
   ];
 
   return (
-    <div className="grid grid-cols-5 gap-1 p-2 sm:gap-1.5 sm:p-3" dir="ltr">
+    <div className="grid grid-cols-5 gap-1 sm:gap-1.5 md:p-3" dir="ltr">
       {rows.flat().map((button, index) => (
         <button
           key={index}
