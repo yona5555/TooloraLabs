@@ -1,8 +1,9 @@
 /**
  * APPROVED PHONE STANDARD (visuals.md) — the tool page's phone layout pass. Self-contained on purpose:
- * PhoneLayoutScript inlines it with `toString()` so it runs while the HTML is parsed (before the first
- * paint and before hydration); PhoneLayoutRunner calls it after a client-side navigation, where an
- * inline script never runs. It runs once per page (`data-phone-layout` on the scope).
+ * PHONE_LAYOUT_BOOT inlines it with `toString()` so it runs while the HTML is parsed (before the first
+ * paint and before hydration) as soon as the `[data-phone-end]` sentinel after the page's content is
+ * parsed; PhoneLayoutScript also calls it in a layout effect for a client-side navigation, where no
+ * server HTML is parsed. It runs once per page (`data-phone-layout` on the scope).
  *
  * 1. Cards: the first 3 top-level blue-header cards ([data-card], not inside another card) are marked
  *    always-open (`data-fixed`, no toggle); with 3 cards or fewer all are; cards in a dialog too.
@@ -56,3 +57,11 @@ export function phoneLayout(anchor: Element | null): void {
   picked.forEach((i) => slots[i].setAttribute("data-show", ""));
   root.setAttribute("data-article-ads", String(picked.length));
 }
+
+/**
+ * Injected into the server HTML stream (not a React-owned <script>, so React never recreates it on the
+ * client). It watches the parser until the sentinel PhoneLayoutScript renders after the tool page's
+ * content exists, then runs the pass once; MutationObserver callbacks run in the same task as the
+ * insertion, before the browser can paint it.
+ */
+export const PHONE_LAYOUT_BOOT = `(function(){var run=${phoneLayout.toString()};var end=function(){return document.querySelector("[data-phone-end]")};if(end()){run(end());return}var o=new MutationObserver(function(){var s=end();if(s){o.disconnect();run(s)}});o.observe(document.documentElement,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",function(){o.disconnect()})})();`;
