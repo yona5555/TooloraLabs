@@ -10,3 +10,14 @@ This replaces any earlier "always stack" or "always side-by-side" wording.
 
 ## Clickable actions look like buttons (Yousef 2026-10-23)
 Any clickable action (tabs, save, clear, copy, export, toggles, show more) must be a visible button: background or border, padding, radius, clear active/hover/focus states, and a 44×44 touch area on phone. Plain text or underlined text for an action is rejected. Real navigation links inside paragraphs stay links.
+
+## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
+Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:
+- One-row header: the uppercase `TOOLORALABS.COM` wordmark (shared `Wordmark`, Arial, 15px, always LTR) and the smaller Docs / theme / share / language buttons (36px visible, 44×44 hit area, 8px apart; order from the start side Docs, theme, share, language).
+- The calculator FIRST, in one device frame (tinted surface, 10px padding, 8px gaps, each section a lighter-bordered card). Rounded tabs with the active one filled light blue, then the history/archive card BEFORE the display, then the functions row, the keypad and the bottom row.
+- The categories below it: 4 visible plus "عرض المزيد من الأقسام (N)" (count computed), "عرض أقل" when open.
+- Footer: the wordmark always at the left edge on every locale; copyright and links aligned by the page language (right in Arabic, left in the other locales); 24px between rows, 44px link targets.
+
+**Do not change the approved phone home page unless Yousef explicitly asks for that exact change.**
+Locked by `npm run test:home-phone` (CI job `home-phone-lock`, macOS runner) against `tests/baselines/home-phone.json`: rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change.
+Pending (already requested 2026-10-23, needs his decisions first): the button-style tab conversion from §9 (inactive tabs still have no fill or border).

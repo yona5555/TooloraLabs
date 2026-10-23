@@ -9,7 +9,9 @@
     "phone": "node scripts/phone-preview.mjs",
     "phone:iphone": "node scripts/phone-preview.mjs --iphone",
     "postinstall": "patch-package",
-    "check:json": "node scripts/check-json.mjs"
+    "check:json": "node scripts/check-json.mjs",
+    "test:home-phone": "node tests/home-phone-regression.mjs",
+    "baseline:home-phone": "node tests/home-phone-regression.mjs --write"
   },
   "devDependencies": {
     "patch-package": "^8.0.1",

@@ -56,3 +56,31 @@ jobs:
           npx next start -p 3001 > /tmp/next.log 2>&1 &
           for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en/tools && break; sleep 2; done
           npm run test:cards
+
+  # The approved phone home page is locked (.claude/rules/visuals.md, "APPROVED — LOCKED").
+  # Its baseline is measured on macOS (Arial), so this job runs on a macOS runner for the same fonts.
+  home-phone-lock:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web app
+        run: npm run build --workspace=apps/web
+
+      - name: Install Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: Approved phone home page unchanged (rects, fonts, texts, order)
+        working-directory: apps/web
+        run: |
+          npx next start -p 3001 > /tmp/next.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en && break; sleep 2; done
+          cd ../.. && npm run test:home-phone
