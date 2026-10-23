@@ -4,26 +4,33 @@ import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ShareButton from "./ShareButton";
 import ToolsDropdown from "./ToolsDropdown";
+import DocsHeaderButton from "./DocsHeaderButton";
 
 export default function Navbar() {
   const t = useTranslations("navbar");
 
   return (
     <header className="sticky top-0 z-50 border-b border-blue-200/70 bg-blue-100/80 backdrop-blur-xl dark:border-blue-500/30 dark:bg-blue-950/60">
-      <div className="relative mx-auto flex h-18 max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center">
+      <div className="relative mx-auto flex h-18 max-w-7xl items-center justify-between gap-2 px-4 md:px-6">
+        <Link href="/" aria-label={t("logoLabel")} className="flex min-w-0 items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.svg"
             alt="TooloraLabs"
-            className="h-9 w-auto dark:hidden"
+            className="h-9 w-auto dark:hidden max-md:hidden"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/logo-full-dark.svg"
             alt="TooloraLabs"
-            className="hidden h-9 w-auto dark:block"
+            className="hidden h-9 w-auto md:dark:block"
           />
+          {/* Phone wordmark: the domain itself, never translated, always LTR. */}
+          <span dir="ltr" className="whitespace-nowrap text-[19px] leading-none tracking-tight md:hidden">
+            <span className="font-bold text-[#5170ff] dark:text-[#8ea0ff]">toolora</span>
+            <span className="font-normal text-zinc-900 dark:text-white">labs</span>
+            <span className="font-light text-zinc-500 dark:text-[#5ce1e6]/80">.com</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -70,10 +77,12 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* Phones read Docs, theme, share, language from the start side; DOM order is kept for desktop. */}
+        <div className="flex shrink-0 items-center gap-2 max-md:flex-row-reverse md:gap-3">
           <LanguageSwitcher />
           <ShareButton />
           <ThemeToggle />
+          <DocsHeaderButton />
         </div>
       </div>
     </header>

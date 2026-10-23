@@ -13,6 +13,7 @@ import {
   WhatsAppIcon,
   XIcon,
 } from "@/lib/share-icons";
+import { HEADER_ICON_BUTTON_PHONE } from "./headerButton";
 
 function subscribeNever() {
   return () => {};
@@ -108,7 +109,7 @@ export default function ShareButton() {
           aria-haspopup="menu"
           aria-expanded={open}
           aria-label={t("share")}
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+          className={`flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 ${HEADER_ICON_BUTTON_PHONE}`}
         >
           <Share2 size={18} />
         </button>

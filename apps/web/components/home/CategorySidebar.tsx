@@ -145,7 +145,7 @@ export default function CategorySidebar({
             className="min-w-0 flex-1 bg-transparent text-sm text-zinc-700 outline-none placeholder:text-zinc-400 dark:text-zinc-200"
           />
         </div>
-        <p className="px-1 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400">{tHome("sidebarTotalTools", { count: tools.length })}</p>
+        <p className="max-md:hidden px-1 text-center text-xs font-medium text-zinc-500 dark:text-zinc-400">{tHome("sidebarTotalTools", { count: tools.length })}</p>
         <div className="flex gap-1 border-b border-zinc-100 pb-2.5 dark:border-zinc-800">
           <Link
             href="/docs"

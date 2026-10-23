@@ -7,6 +7,7 @@ import { Check, ChevronDown } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import { localeMeta } from "@/lib/locale-meta";
 import Tooltip from "./Tooltip";
+import { HEADER_LANGUAGE_BUTTON_PHONE } from "./headerButton";
 
 export default function LanguageSwitcher() {
   const t = useTranslations("navbar");
@@ -42,10 +43,10 @@ export default function LanguageSwitcher() {
           aria-label={t("switchLanguage")}
           aria-haspopup="menu"
           aria-expanded={open}
-          className="flex h-11 items-center gap-1.5 rounded-xl border border-zinc-200 px-3 text-sm font-semibold text-zinc-600 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400"
+          className={`flex h-11 items-center gap-1.5 rounded-xl border border-zinc-200 px-3 text-sm font-semibold text-zinc-600 transition hover:border-blue-200 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 ${HEADER_LANGUAGE_BUTTON_PHONE}`}
         >
           {locale.toUpperCase()}
-          <ChevronDown size={14} className={open ? "rotate-180 transition" : "transition"} />
+          <ChevronDown size={14} className={`max-md:size-3 ${open ? "rotate-180 transition" : "transition"}`} />
         </button>
       </Tooltip>
 
