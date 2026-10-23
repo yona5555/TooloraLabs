@@ -41,6 +41,9 @@ jobs:
       - name: Test (tools)
         run: npm run test --workspace=packages/tools
 
+      - name: Validate JSON (locale messages, data, approved previews)
+        run: npm run check:json
+
       - name: Build web app
         run: npm run build --workspace=apps/web
 

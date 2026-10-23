@@ -1,0 +1,86 @@
+diff --git a/node_modules/next/dist/server/dev/next-dev-server.js b/node_modules/next/dist/server/dev/next-dev-server.js
+index 64966ab..ec1201b 100644
+--- a/node_modules/next/dist/server/dev/next-dev-server.js
++++ b/node_modules/next/dist/server/dev/next-dev-server.js
+@@ -657,38 +657,49 @@ class DevServer extends _nextserver.default {
+             (!isAppPath || prerenderedRoutes && prerenderedRoutes.length > 0)) {
+                 // we write the static paths to partial manifest for
+                 // fallback handling inside of entry handler's
+-                const rawExistingManifest = await _fs.default.promises.readFile((0, _path.join)(this.distDir, _constants1.PRERENDER_MANIFEST), 'utf8');
+-                const existingManifest = JSON.parse(rawExistingManifest);
+-                for (const staticPath of value.staticPaths || []){
+-                    existingManifest.routes[staticPath] = {};
+-                }
+-                // Find the fallback route from the prerendered routes. This is
+-                // the route whose pathname matches the page pattern (e.g.
+-                // /dynamic-params/[slug]) and has fallback route params describing
+-                // which params are unknown at build time.
+-                const fallbackPrerenderedRoute = prerenderedRoutes == null ? void 0 : prerenderedRoutes.find((route)=>route.pathname === pathname);
+-                existingManifest.dynamicRoutes[pathname] = {
+-                    dataRoute: null,
+-                    dataRouteRegex: null,
+-                    fallback: (0, _fallback.fallbackModeToFallbackField)(res.value.fallbackMode, page),
+-                    fallbackRevalidate: false,
+-                    fallbackExpire: undefined,
+-                    fallbackHeaders: undefined,
+-                    fallbackStatus: undefined,
+-                    fallbackRootParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRootParams,
+-                    fallbackRouteParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRouteParams,
+-                    fallbackSourceRoute: pathname,
+-                    prefetchDataRoute: undefined,
+-                    prefetchDataRouteRegex: undefined,
+-                    routeRegex: (0, _routeregex.getRouteRegex)(pathname).re.source,
+-                    experimentalPPR: undefined,
+-                    renderingMode: undefined,
+-                    allowHeader: []
+-                };
+-                const updatedManifest = JSON.stringify(existingManifest);
+-                if (updatedManifest !== rawExistingManifest) {
+-                    await _fs.default.promises.writeFile((0, _path.join)(this.distDir, _constants1.PRERENDER_MANIFEST), updatedManifest);
+-                }
++                // TooloraLabs patch: serialize this read-modify-write per process; concurrent
++                // compiles used to interleave two writeFile calls and leave a corrupted file.
++                const manifestUpdate = (globalThis.__tooloraPrerenderManifestQueue ?? Promise.resolve()).then(async ()=>{
++                    const rawExistingManifest = await _fs.default.promises.readFile((0, _path.join)(this.distDir, _constants1.PRERENDER_MANIFEST), 'utf8');
++                    const existingManifest = JSON.parse(rawExistingManifest);
++                    for (const staticPath of value.staticPaths || []){
++                        existingManifest.routes[staticPath] = {};
++                    }
++                    // Find the fallback route from the prerendered routes. This is
++                    // the route whose pathname matches the page pattern (e.g.
++                    // /dynamic-params/[slug]) and has fallback route params describing
++                    // which params are unknown at build time.
++                    const fallbackPrerenderedRoute = prerenderedRoutes == null ? void 0 : prerenderedRoutes.find((route)=>route.pathname === pathname);
++                    existingManifest.dynamicRoutes[pathname] = {
++                        dataRoute: null,
++                        dataRouteRegex: null,
++                        fallback: (0, _fallback.fallbackModeToFallbackField)(res.value.fallbackMode, page),
++                        fallbackRevalidate: false,
++                        fallbackExpire: undefined,
++                        fallbackHeaders: undefined,
++                        fallbackStatus: undefined,
++                        fallbackRootParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRootParams,
++                        fallbackRouteParams: fallbackPrerenderedRoute == null ? void 0 : fallbackPrerenderedRoute.fallbackRouteParams,
++                        fallbackSourceRoute: pathname,
++                        prefetchDataRoute: undefined,
++                        prefetchDataRouteRegex: undefined,
++                        routeRegex: (0, _routeregex.getRouteRegex)(pathname).re.source,
++                        experimentalPPR: undefined,
++                        renderingMode: undefined,
++                        allowHeader: []
++                    };
++                    const updatedManifest = JSON.stringify(existingManifest);
++                    if (updatedManifest !== rawExistingManifest) {
++                        // TooloraLabs patch: write atomically (temp file + rename) so a reader or a
++                        // concurrent writer never sees a half-written manifest.
++                        const manifestPath = (0, _path.join)(this.distDir, _constants1.PRERENDER_MANIFEST);
++                        const tmpPath = `${manifestPath}.${process.pid}.${Date.now()}.${Math.random().toString(36).slice(2)}.tmp`;
++                        await _fs.default.promises.writeFile(tmpPath, updatedManifest);
++                        await _fs.default.promises.rename(tmpPath, manifestPath);
++                    }
++                });
++                globalThis.__tooloraPrerenderManifestQueue = manifestUpdate.catch(()=>{});
++                await manifestUpdate;
+             }
+             this.staticPathsCache.set(pathname, value);
+             // Since generateStaticParams runs in the background, the fallbackParams

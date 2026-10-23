@@ -4,7 +4,7 @@
 // least 44×44 (its own box, or an absolutely positioned ::before around it).
 // Real navigation links are not actions and are not checked.
 // Usage: node apps/web/scripts/button-style-scan.mjs [--base http://localhost:3001] [--locales ar,en]
-//        [--widths 360,390] [--slugs a,b] [--paths "",/tools] [--jobs 6] [--out file] [--details]
+//        [--widths 360,390] [--slugs a,b] [--paths "",/tools] [--jobs 1] [--out file] [--details]
 // --paths checks extra non-tool pages (path after the locale; "" = home). The home page is always included.
 // Exit code 1 when any element fails.
 import { writeFileSync } from "node:fs";
@@ -17,7 +17,10 @@ const arg = (name, def) => {
 const BASE = arg("base", "http://localhost:3001");
 const LOCALES = arg("locales", "ar,en").split(",");
 const WIDTHS = arg("widths", "360,390").split(",").map(Number);
-const JOBS = Number(arg("jobs", "6"));
+// One page at a time by default: parallel loads against `next dev` compile routes concurrently,
+// which once corrupted .next/dev/prerender-manifest.json (see patches/next+16.3.8.patch).
+// Use --jobs N only against `next start`.
+const JOBS = Number(arg("jobs", "1"));
 const OUT = arg("out", "");
 const DETAILS = process.argv.includes("--details");
 
