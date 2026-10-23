@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
 export type SectionNavItem = { id: string; label: string };
+/** Phone pilot: one button per group of sections; `id` is the group's first anchor, `members` every section id in it. */
+export type SectionNavGroup = { id: string; label: string; members: string[] };
 
 type SectionNavProps = {
   items: SectionNavItem[];
@@ -16,13 +18,20 @@ type SectionNavProps = {
    * `true`, so callers that don't pass it render exactly as before.
    */
   visible?: boolean;
+  /**
+   * Phone pilot (Tool.phonePilot): below 768px these 3–4 equal-width group buttons replace the
+   * per-section buttons and the back-to-top button. From 768px up nothing changes.
+   */
+  phoneGroups?: SectionNavGroup[];
 };
 
 const STUCK_TOP_OFFSET = 72; // px — matches the site header's own `h-18`/`top-18`.
 
-export default function SectionNav({ items, showJumpToBottom = false, visible = true }: SectionNavProps) {
+export default function SectionNav({ items, showJumpToBottom = false, visible = true, phoneGroups }: SectionNavProps) {
   const t = useTranslations("common");
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
+  const [activeGroup, setActiveGroup] = useState<string>(phoneGroups?.[0]?.id ?? "");
+  const groupsRef = useRef(phoneGroups);
   const [isStuck, setIsStuck] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
   const itemsRef = useRef(items);
@@ -58,6 +67,42 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const groups = groupsRef.current;
+    if (!groups?.length) return;
+    let ticking = false;
+    function pick() {
+      ticking = false;
+      if (!groups) return;
+      // The line just under the site header plus this bar once stuck.
+      const line = STUCK_TOP_OFFSET + (navRef.current?.offsetHeight ?? 0) + 16;
+      let best = groups[0].id;
+      let bestTop = -Infinity;
+      for (const g of groups) {
+        for (const id of g.members) {
+          const top = document.getElementById(id)?.getBoundingClientRect().top;
+          if (top !== undefined && top <= line && top > bestTop) {
+            bestTop = top;
+            best = g.id;
+          }
+        }
+      }
+      setActiveGroup(best);
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(pick);
+    }
+    pick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   /**
@@ -230,7 +275,27 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
         } ${visible && (isStuck || !gated) ? "opacity-100" : "pointer-events-none opacity-0"}`}
         inert={gated && !(isStuck && visible) ? true : undefined}
       >
-        <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6">
+        {phoneGroups && (
+          <div className="mx-auto grid max-w-6xl gap-1.5 px-4 py-1.5 md:hidden" style={{ gridTemplateColumns: `repeat(${phoneGroups.length}, minmax(0, 1fr))` }}>
+            {phoneGroups.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => scrollToSection(g.id)}
+                aria-current={activeGroup === g.id ? "true" : undefined}
+                data-nav-group=""
+                className={`flex h-11 min-w-0 items-center justify-center rounded-lg border px-1 text-[13px] font-semibold whitespace-nowrap break-keep transition ${
+                  activeGroup === g.id
+                    ? "border-blue-400 bg-blue-600 text-white"
+                    : "border-zinc-300 bg-white text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
+                }`}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
+        )}
+        <div className={`mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6${phoneGroups ? " max-md:hidden" : ""}`}>
           {items.map((item) => (
             <button
               key={item.id}

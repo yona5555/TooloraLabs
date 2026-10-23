@@ -12,6 +12,9 @@ type ToolPageLayoutProps = {
   contentWidth?: "default" | "wide";
   /** Tightens the header so a 3-column layout can clear the fold. Opt-in per tool. */
   compact?: boolean;
+  /** Phone pilot (Tool.phonePilot): labeled back button and one-line title below 768px. */
+  phonePilot?: boolean;
+  backText?: string;
 };
 
 export default function ToolPageLayout({
@@ -23,6 +26,8 @@ export default function ToolPageLayout({
   children,
   contentWidth = "default",
   compact = false,
+  phonePilot = false,
+  backText,
 }: ToolPageLayoutProps) {
   const maxWidthClass = contentWidth === "wide" ? "max-w-6xl" : "max-w-5xl";
 
@@ -30,9 +35,9 @@ export default function ToolPageLayout({
     return (
       <main className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
-          <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" />
+          <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" phoneText={phonePilot ? backText : undefined} />
 
-          <h1 data-fit className="min-w-0 text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50">
+          <h1 data-fit className={`min-w-0${phonePilot ? " max-md:truncate" : ""} text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
             {title}
           </h1>
         </div>

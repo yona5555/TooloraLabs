@@ -21,6 +21,7 @@ import { candleChangePercent, movingAverage, periodExtremes, type Candle } from 
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import { useFullscreen } from "./useFullscreen";
 import { changeColor } from "./fiat";
+import { useCardOpened } from "@/components/tool-ui/SectionCard";
 
 export type ChartTimeframe = { id: string; label: string };
 
@@ -98,10 +99,13 @@ export default function MarketChart({
   const ma50 = useMemo(() => movingAverage(candles, 50), [candles]);
   const extremes = useMemo(() => periodExtremes(candles), [candles]);
 
+  // Inside a phone card that is still collapsed (phone pilot), the canvas chart waits for the card's first open.
+  const cardOpened = useCardOpened();
+
   // Build (or rebuild) the chart whenever data or theme changes; toggles only flip visibility below.
   useEffect(() => {
     const el = containerRef.current;
-    if (!el || candles.length === 0) return;
+    if (!el || candles.length === 0 || !cardOpened) return;
     const text = isDark ? "#a1a1aa" : "#52525b";
     const grid = isDark ? "#27272a" : "#f4f4f5";
     const chart = createChart(el, {
@@ -166,7 +170,7 @@ export default function MarketChart({
       ma20Ref.current = null;
       ma50Ref.current = null;
     };
-  }, [candles, mode, hasVolume, isDark, locale, extremes, ma20, ma50, logScale, intraday, formatPrice, labels.high, labels.low]);
+  }, [candles, mode, hasVolume, isDark, locale, extremes, ma20, ma50, logScale, intraday, formatPrice, labels.high, labels.low, cardOpened]);
 
   useEffect(() => {
     ma20Ref.current?.applyOptions({ visible: showMa20 });

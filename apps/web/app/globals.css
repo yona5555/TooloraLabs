@@ -491,3 +491,13 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     }
   }
 }
+
+/*
+ * PHONE PILOT (crypto-converter, pending Yousef's approval; SectionCard.tsx CollapsibleSectionCard):
+ * a collapsed card is only its blue header, so drop the light theme's 1.5px panel frame too.
+ */
+@media (max-width: 767px) {
+  [data-bp-panel][data-card][data-state="closed"] {
+    border-width: 0;
+  }
+}

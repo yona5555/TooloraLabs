@@ -67,7 +67,7 @@ export default async function CryptoEducation({ coins, fetchedAt, locale }: Cryp
 
       <CryptoWorkedConversions coins={coins} fetchedAt={fetchedAt} locale={locale} />
 
-      <AdSpace variant="leaderboard" />
+      <AdSpace variant="leaderboard" label="advertisement" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -93,7 +93,7 @@ export default async function CryptoEducation({ coins, fetchedAt, locale }: Cryp
         />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
+      <AdSpace variant="leaderboard" label="advertisement" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

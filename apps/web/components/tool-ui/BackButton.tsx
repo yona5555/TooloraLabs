@@ -32,9 +32,14 @@ type BackButtonProps = {
   variant?: "icon" | "labeled";
   /** Visible text for the "labeled" variant; falls back to `label`. */
   text?: string;
+  /**
+   * Phone pilot (Tool.phonePilot): below 768px the icon variant becomes a 36px labeled button
+   * (arrow + this text) inside a 44px-tall hit area. From 768px up it renders exactly as the icon variant.
+   */
+  phoneText?: string;
 };
 
-export default function BackButton({ href, label, className = "", size = 20, variant = "icon", text }: BackButtonProps) {
+export default function BackButton({ href, label, className = "", size = 20, variant = "icon", text, phoneText }: BackButtonProps) {
   if (variant === "labeled") {
     return (
       <Link
@@ -44,6 +49,21 @@ export default function BackButton({ href, label, className = "", size = 20, var
       >
         <ArrowLeft size={size} className="shrink-0 rtl:rotate-180" />
         <span>{text ?? label}</span>
+      </Link>
+    );
+  }
+  if (phoneText) {
+    return (
+      <Link
+        href={href}
+        aria-label={label}
+        title={label}
+        className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-zinc-500 transition hover:bg-zinc-100 hover:text-blue-600 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-blue-400 ${className} max-md:w-auto max-md:min-w-11 max-md:text-zinc-700 max-md:hover:bg-transparent dark:max-md:text-zinc-200`}
+      >
+        <span className="flex h-9 items-center gap-1.5 rounded-full border border-zinc-300 bg-white ps-2.5 pe-3 text-sm font-semibold shadow-sm md:contents dark:border-zinc-700 dark:bg-zinc-900">
+          <ArrowLeft size={size} className="shrink-0 rtl:rotate-180" />
+          <span className="md:hidden">{phoneText}</span>
+        </span>
       </Link>
     );
   }

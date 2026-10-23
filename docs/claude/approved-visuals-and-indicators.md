@@ -31,3 +31,34 @@ Done with CSS order only inside `max-md:` (`display: contents` on the result cel
 ## Ad slot sizes on phone (Yousef, 2026-10-23)
 Every in-content `AdSpace variant="leaderboard"` below 768px is a fixed, centered 300×250 (Medium Rectangle) with the "إعلان" label above it; from 768px up it stays 728×90. 320×100 is the only allowed alternative where 300×250 is too tall. No other phone sizes and no full-width stretched boxes. The 300×600 sidebar is desktop-only (hidden below lg).
 
+
+## PHONE PILOT — pending Yousef's approval (crypto-converter)
+
+When approved, apply to all tools as a general rule. Branch `wip/phone-pilot-crypto` (not on main).
+Gated by one flag, `phonePilot: true` in `apps/web/data/tools.ts` (crypto-converter only). Everything
+lives below 768px; desktop and every other tool render as on main.
+
+- **Back button:** `BackButton` `phoneText` — arrow + "رجوع"/"Back" (`common.back`, 6 locales), 36px
+  bordered pill inside a 44px-tall hit area; the arrow flips in RTL. The title stays beside it on one
+  line (`max-md:truncate`).
+- **Two live mini cards** under the title (`CryptoPhoneTicker`): Bitcoin and Ethereum, the ticker chip
+  style grown to 64px (name, price, 24h change green/red, the ticker's 30-day sparkline from the
+  converter chart's daily candles). Tapping one sets it as the "from" coin.
+- **Cards:** the 3 above-the-fold cards are always open with no toggle. Cards 4+ (below the fold and
+  the encyclopedia's live-blocks card) sit in `PhoneCollapsibleCards` and start collapsed: only the blue
+  header (border dropped, collapsed height = header height). Toggle = one pill with text + chevron:
+  "فتح"/"OPEN" chevron down, "إغلاق"/"CLOSE" chevron up (`common.cardOpen/cardClose`, 6 locales),
+  `aria-expanded` (server default false), 44×44 hit area. The body stays in the HTML (CSS-hidden); the
+  candlestick canvas (`MarketChart`, `useCardOpened`) builds on first open.
+- **Section nav:** `SectionNav` `phoneGroups` — 4 equal buttons, Tool / Data (chart, coin, market,
+  network) / Learn (news, education, notices) / FAQ (`tools.crypto-converter.navGroups`), 13px, 44px
+  tall, nowrap + keep-all, no scrolling; smooth-scroll and the active button follows the scroll.
+- **Ads:** 300×250 centered with reserved height, 24px clear of cards and buttons, never inside a card,
+  label "إعلان"/"Advertisement" on phone (`common.advertisementLabel`; desktop keeps "Sponsored").
+  Interval: every **4th** card counted from the first, never after the last card. The 3-card interval
+  failed the balance guard (3 collapsed headers + gaps = 180px vs the 274px ad slot); at 4 the content
+  between ads is 248px, still below 274px — 5 cards would be the first to pass (316px). Yousef decides.
+  The encyclopedia's own two in-text ads stay where they are (between long text sections).
+- **Not met:** at 390×844 the result (live flow amount, y≈431) is in the first screen but the amount
+  input is not (y≈1154): the approved phone order puts the 780px live-flow card first. Needs a decision
+  (e.g. a compact amount field in the flow card, or input first).

@@ -5,6 +5,11 @@ export type Tool = {
   description: string;
   featured: boolean;
   keywords: string[];
+  /**
+   * PHONE PILOT (pending Yousef's approval): below 768px the labeled back button, collapsible cards,
+   * grouped section nav and 3-card ad interval. Only crypto-converter has it; once approved it becomes the default.
+   */
+  phonePilot?: boolean;
 };
 
 export const tools: Tool[] = [
@@ -15,6 +20,7 @@ export const tools: Tool[] = [
     description:
       "Live prices for the top 100 cryptocurrencies, a converter between any two coins, historical charts, and an educational investment-growth calculator.",
     featured: true,
+    phonePilot: true,
     keywords: [
       "cryptocurrency",
       "crypto converter",
