@@ -9,6 +9,7 @@ export * from "./TipCalculator";
 export * from "./DiscountCalculator";
 export * from "./SalesTaxCalculator";
 export * from "./ScientificCalculator";
+export * from "./HistoryTotal";
 export * from "./InvoiceGenerator";
 export * from "./InventoryValuationCalculator";
 export * from "./BreakEvenCalculator";

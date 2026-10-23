@@ -86,5 +86,13 @@ export function useArchive() {
     writeArchive(next);
   }, []);
 
-  return { archive, saveEntries };
+  const deleteEntry = useCallback((id: number) => {
+    writeArchive(parseArchive(readRaw()).filter((entry) => entry.id !== id));
+  }, []);
+
+  const clearArchive = useCallback(() => {
+    writeArchive([]);
+  }, []);
+
+  return { archive, saveEntries, deleteEntry, clearArchive };
 }

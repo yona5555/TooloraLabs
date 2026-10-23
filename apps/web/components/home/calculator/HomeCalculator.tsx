@@ -49,7 +49,7 @@ export default function HomeCalculator() {
   const defaultMode = useSyncExternalStore(subscribeToPhoneQuery, viewportDefaultMode, () => null);
   const mode = chosenMode ?? defaultMode;
   const [state, dispatch] = useReducer(calculatorReducer, initialCalculatorState);
-  const { archive, saveEntries } = useArchive();
+  const { archive, saveEntries, deleteEntry, clearArchive } = useArchive();
   const [justSaved, setJustSaved] = useState(false);
   // Independent of the site-wide theme: applying "calc-dark" here only
   // activates `calcdark:` utilities within this subtree (see the calcdark
@@ -71,7 +71,7 @@ export default function HomeCalculator() {
       {(mode === null || mode === "scientific") && (
         <div className={mode === null ? "contents md:hidden" : "contents"}>
           <div className="p-3 sm:p-4">
-            <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} />
+            <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} onDeleteArchiveEntry={deleteEntry} onClearArchive={clearArchive} />
           </div>
           <FunctionCategoryRow dispatch={dispatch} />
           <CalculatorKeypad state={state} dispatch={dispatch} />
@@ -82,7 +82,7 @@ export default function HomeCalculator() {
       {mode === "standard" && (
         <>
           <div className="p-3 sm:p-4">
-            <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} />
+            <CalculatorDisplay state={state} dispatch={dispatch} archive={archive} onDeleteArchiveEntry={deleteEntry} onClearArchive={clearArchive} />
           </div>
           <StandardKeypad dispatch={dispatch} />
           <CalculatorBottomBar state={state} onSaveHistory={handleSaveHistory} justSaved={justSaved} />

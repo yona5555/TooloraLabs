@@ -62,7 +62,9 @@ export type CalculatorAction =
   | { type: "memorySubtract" }
   | { type: "memoryRecall" }
   | { type: "memoryClear" }
-  | { type: "loadHistory"; entry: HistoryEntry };
+  | { type: "loadHistory"; entry: HistoryEntry }
+  | { type: "deleteHistory"; id: number }
+  | { type: "clearHistory" };
 
 const OPEN_TOKENS = new Set(["(", "sin(", "cos(", "tan(", "cot(", "sec(", "csc(", "sin⁻¹(", "cos⁻¹(", "tan⁻¹(", "√(", "³√(", "ln(", "log(", "eˣ(", "10ˣ(", "2ˣ(", "abs("]);
 
@@ -246,6 +248,17 @@ export function calculatorReducer(state: CalculatorState, action: CalculatorActi
       const expr = base.expression === "0" ? "" : base.expression;
       return { ...base, expression: expr + String(action.entry.result), ans: action.entry.result, justEvaluated: false };
     }
+
+    // The top line shows history[0] right after "=", so removing that entry
+    // also ends the just-evaluated view instead of showing a different equation.
+    case "deleteHistory": {
+      const history = state.history.filter((entry) => entry.id !== action.id);
+      const removedLatest = state.history[0]?.id === action.id;
+      return { ...state, history, justEvaluated: removedLatest ? false : state.justEvaluated };
+    }
+
+    case "clearHistory":
+      return { ...state, history: [], justEvaluated: false };
 
     default:
       return state;
