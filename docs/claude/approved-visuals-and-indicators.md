@@ -21,3 +21,13 @@ Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414
 **Do not change the approved phone home page unless Yousef explicitly asks for that exact change.**
 Locked by `npm run test:home-phone` (CI job `home-phone-lock`, macOS runner) against `tests/baselines/home-phone.json`: rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change.
 Pending (already requested 2026-10-23, needs his decisions first): the button-style tab conversion from §9 (inactive tabs still have no fill or border).
+
+## APPROVED EXCEPTION — crypto-converter phone order (Yousef, 2026-10-23)
+On phone (below 768px) `/{locale}/tools/crypto-converter` breaks the phone standard's "input first" rule, by request:
+1st the live conversion flow card (converted amount, copy/share, the BTC → ETH flow with sparklines, worked example),
+2nd the input card (amount, from, swap, to, display currency, clear, quick conversions), 3rd the market dominance card, then the rest unchanged.
+Done with CSS order only inside `max-md:` (`display: contents` on the result cell, `order: -1` on the flow card); the markup order and the desktop layout are untouched. This exception applies to this tool only.
+
+## Ad slot sizes on phone (Yousef, 2026-10-23)
+Every in-content `AdSpace variant="leaderboard"` below 768px is a fixed, centered 300×250 (Medium Rectangle) with the "إعلان" label above it; from 768px up it stays 728×90. 320×100 is the only allowed alternative where 300×250 is too tall. No other phone sizes and no full-width stretched boxes. The 300×600 sidebar is desktop-only (hidden below lg).
+

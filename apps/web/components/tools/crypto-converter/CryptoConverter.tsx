@@ -118,7 +118,7 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
   return (
     <FiatContext.Provider value={fiat}>
       {/* Agreed top-of-page layout: input | result | related tools + 300×600 ad (hidden on mobile). */}
-      <div id="tool" className="scroll-mt-32">
+      <div id="tool" className="scroll-mt-32 max-md:[&_[data-tool-result]]:contents">
         <ToolAboveFold
           stretchInput
           input={
@@ -144,7 +144,9 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
             />
           }
           result={
-            <div className="flex flex-col gap-6">
+            // Phone only (approved exception to "input first", Yousef 2026-10-23): the live flow card
+            // moves above the input card, the dominance card stays below it. CSS order only; desktop untouched.
+            <div className="flex flex-col gap-6 max-md:contents max-md:[&>:first-child]:-order-1">
               <CryptoLiveFlow
                 fromCoin={fromCoin}
                 toCoin={toCoin}
