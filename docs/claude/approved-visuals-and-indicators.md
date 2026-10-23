@@ -53,12 +53,7 @@ lives below 768px; desktop and every other tool render as on main.
 - **Section nav:** `SectionNav` `phoneGroups` — 4 equal buttons, Tool / Data (chart, coin, market,
   network) / Learn (news, education, notices) / FAQ (`tools.crypto-converter.navGroups`), 13px, 44px
   tall, nowrap + keep-all, no scrolling; smooth-scroll and the active button follows the scroll.
-- **Ads:** 300×250 centered with reserved height, 24px clear of cards and buttons, never inside a card,
-  label "إعلان"/"Advertisement" on phone (`common.advertisementLabel`; desktop keeps "Sponsored").
-  Interval: every **4th** card counted from the first, never after the last card. The 3-card interval
-  failed the balance guard (3 collapsed headers + gaps = 180px vs the 274px ad slot); at 4 the content
-  between ads is 248px, still below 274px — 5 cards would be the first to pass (316px). Yousef decides.
-  The encyclopedia's own two in-text ads stay where they are (between long text sections).
+- **Ads:** Phone: one ad only, placed after the docs row and before the collapsed cards; other in-content slots hidden on phone via CSS; desktop ads unchanged. The one slot is 300×250, centered, reserved height, label "إعلان"/"Advertisement" (`common.advertisementLabel`), 24px from the docs row and the first card; it sits outside every collapsible or hidden container. The other slots (desktop leaderboards, the encyclopedia's two, the 300×600 sidebar) are `display: none` below 768px, which makes no ad request. (Replaces the earlier "ad after every 3rd/4th card" rule.)
 - **Not met:** at 390×844 the result (live flow amount, y≈431) is in the first screen but the amount
   input is not (y≈1154): the approved phone order puts the 780px live-flow card first. Needs a decision
   (e.g. a compact amount field in the flow card, or input first).

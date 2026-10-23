@@ -47,14 +47,6 @@ type CryptoConverterProps = {
 
 const FIAT_STORAGE_KEY = "crypto-converter:fiat";
 
-/**
- * PHONE PILOT (pending Yousef's approval): below 768px one 300×250 ad after every Nth blue card,
- * counted from the page's first card (the 3 above-the-fold cards), never after the last card.
- * 3 failed the balance guard (3 collapsed headers + gaps = 180px, shorter than the 274px ad slot),
- * so 4 as the task specifies — see docs/claude/approved-visuals-and-indicators.md.
- */
-const PHONE_AD_EVERY = 4;
-const ABOVE_FOLD_CARDS = 3;
 
 export default function CryptoConverter({ initialCoins, globalStats, fiatRates, fetchedAt, education, phoneTrends }: CryptoConverterProps) {
   const t = useTranslations("tools.crypto-converter");
@@ -157,9 +149,6 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
     { key: "news", node: <CryptoNews /> },
     { key: "learning", node: <CryptoLearningResources /> },
   ];
-  const lastCard = ABOVE_FOLD_CARDS + belowCards.length;
-  const phoneAdAfter = (n: number) => n % PHONE_AD_EVERY === 0 && n < lastCard;
-  const phoneAd = (key: string) => <AdSpace key={key} variant="leaderboard" label="advertisement" className="md:hidden" />;
 
   return (
     <FiatContext.Provider value={fiat}>
@@ -220,16 +209,18 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
 
       {/* Below the fold every card spans the full content width; leaderboards sit between groups only. */}
       <div className="mt-6 flex flex-col gap-6">
-        {phoneAdAfter(ABOVE_FOLD_CARDS) && phoneAd("phone-ad-0")}
         <SectionNav items={navItems} phoneGroups={phoneGroups} />
         <ViewDocsLink slug="crypto-converter" />
 
+        {/* PHONE PILOT: the page's one phone ad, after the docs row and before the collapsed cards;
+            every other in-content slot is display:none below 768px (no ad request), desktop unchanged. */}
+        <AdSpace variant="leaderboard" label="advertisement" className="md:hidden" />
+
         <PhoneCollapsibleCards>
-          {belowCards.map((card, i) => (
+          {belowCards.map((card) => (
             <Fragment key={card.key}>
               {card.node}
               {card.adAfter && <AdSpace variant="leaderboard" className="max-md:hidden" />}
-              {phoneAdAfter(ABOVE_FOLD_CARDS + i + 1) && phoneAd(`phone-ad-${card.key}`)}
             </Fragment>
           ))}
         </PhoneCollapsibleCards>
