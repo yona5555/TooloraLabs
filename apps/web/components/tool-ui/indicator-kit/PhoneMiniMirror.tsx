@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, type ReactNode, type RefObject } from "react";
+import { useState, type ReactNode, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { MiniContext } from "./miniContext";
 
@@ -10,16 +10,18 @@ import { MiniContext } from "./miniContext";
  * renders the card's own `visual` element, so it is live with the card's state; tapping it scrolls to
  * the card. Nothing is generated: same component, compact mode (MiniContext).
  */
+/** The slot this card fills (0 or 1), or null. Read once: the mirror mounts only on the client, lazily
+ *  after the page committed, so the source card and the slots are already in the DOM. */
+function findSlot(el: HTMLElement | null): HTMLElement | null {
+  const main = el?.closest("main[data-phone-cards]");
+  if (!el || !main || main.hasAttribute("data-phone-markets") || main.querySelector("[data-phone-ticker]")) return null;
+  const index = Array.from(main.querySelectorAll("[data-ph-mini-ok]")).indexOf(el);
+  if (index < 0 || index > 1) return null;
+  return main.querySelector<HTMLElement>(`[data-phone-mini-slot="${index}"]`);
+}
+
 export default function PhoneMiniMirror({ title, visual, source }: { title: ReactNode; visual: ReactNode; source: RefObject<HTMLDivElement | null> }) {
-  const [slot, setSlot] = useState<HTMLElement | null>(null);
-  useEffect(() => {
-    const el = source.current;
-    const main = el?.closest("main[data-phone-cards]");
-    if (!el || !main || main.hasAttribute("data-phone-markets") || main.querySelector("[data-phone-ticker]")) return;
-    const index = Array.from(main.querySelectorAll("[data-ph-mini-ok]")).indexOf(el);
-    if (index < 0 || index > 1) return;
-    setSlot(main.querySelector<HTMLElement>(`[data-phone-mini-slot="${index}"]`));
-  }, [source]);
+  const [slot] = useState(() => findSlot(source.current));
   if (!slot) return null;
   return createPortal(
     <button
