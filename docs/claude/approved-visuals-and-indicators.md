@@ -127,3 +127,31 @@ InfoSection, AdSpace, ToolPageLayout) — never wire it per tool.
      (`data-phone-markets`) keep their approved order.
 - **Known:** crypto-converter keeps the approved live-flow-first order, so its amount input is below the
   first screen at 390×844 (pending decision since the pilot).
+
+## APPROVED — LOCKED: phone card order (Yousef, 2026-10-24)
+
+Permanent rule for every tool below 768px (desktop unchanged). It replaces phone polish rule 7.
+
+- **Card 1 = INPUT:** where the visitor types numbers or chooses operations (inputs, selects, sliders, keypad).
+- **Card 2 = OUTPUT:** the result card holding any result action (Share / Export, Copy, Print, Download,
+  Save). Always second, always open.
+- **Card 3 = VISUAL:** the main drawing or chart.
+- Input and output in one card (e.g. age, date, time, world-time, countdown, GPA, scientific calculator):
+  it is card 1 (`phoneRole="output"`), the visual is card 2, the next most useful card is card 3.
+- Two output cards (citation, loan, mortgage, notepad): the one with Share / Export is card 2, the other
+  card 3; the visual moves to the first place of the collapsible group (`phoneRole="visual-collapsed"`,
+  CSS order right after ad 1). Every further result-action card also stays open (mortgage: 4 open cards).
+- A card with a result action can NEVER be collapsed or placed after ad 1.
+- Exception kept: crypto-converter, forex-converter and commodities-tracker (their approved live order).
+
+**How it is built.** Every result button renders through a shared component that carries
+`data-result-action="share|copy|print|download|export|save"`: `ShareExportButton` (the trigger of every
+`*ShareExportModal`), `ResultActionButton` (any other result button), CopyButton, CopyLinkButton,
+PrintButton, DownloadButton, PdfDownloadButton. Roles are known at server render: SectionCard
+`phoneRole` = "input" | "output" | "visual" (hand-built cards: `data-card data-phone-role`), set on each
+tool's cards. globals.css orders them: input, output, visual, docs row, ad 1, collapsible group;
+`lib/phone/layout.ts` only marks the role cards always-open (no measuring, no reordering, no layout
+shift); a page with fewer than 3 role cards fills up with its first other cards in DOM order.
+**Guard:** `tests/phone-card-order.mjs` (CI, 390px, every tool): every card with `[data-result-action]`
+has `phoneRole="output"`, is open and above ad 1; the main output card (Share / Export) is open card 2,
+or 1 when merged with the input. A new tool that breaks this fails CI.

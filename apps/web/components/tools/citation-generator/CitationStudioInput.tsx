@@ -80,7 +80,7 @@ export default function CitationStudioInput({ state, onChange, onReset }: Props)
   const containerLabel = source.type === "website" ? t("fields.site") : t("fields.container");
 
   return (
-    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="input" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div>
         <span className={label}>{t("input.lookup")}</span>
         <form

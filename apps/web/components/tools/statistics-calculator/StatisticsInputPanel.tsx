@@ -17,7 +17,7 @@ export default function StatisticsInputPanel({ rawData, onRawDataChange, onScena
   const tLive = useTranslations("tools.statistics-calculator.live3d");
 
   return (
-    <SectionCard title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">

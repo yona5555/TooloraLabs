@@ -32,7 +32,7 @@ export default function IdealWeightInputPanel({
   const tv = useTranslations("tools.ideal-weight-calculator.visuals.input");
 
   return (
-    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="input" title={t("aboveFold.inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">

@@ -40,7 +40,7 @@ export default function BMRInputPanel({
   const tScenarios = useTranslations("tools.bmr-calculator.scenarios");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">

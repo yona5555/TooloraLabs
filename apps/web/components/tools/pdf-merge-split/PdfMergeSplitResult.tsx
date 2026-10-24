@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Download, Loader2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import PdfMergeSplitShareExportModal from "./PdfMergeSplitShareExportModal";
@@ -115,14 +116,14 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
             {formatBytes(inputBytes)} → {formatBytes(outputBytes)}
           </p>
 
-          <button
+          <ResultActionButton action="download"
             type="button"
             onClick={onDownload}
             className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             <Download size={16} />
             {mode === "merge" ? t("aboveFold.downloadMerged") : resultCount > 1 ? t("aboveFold.downloadZip") : tr("downloadPdf")}
-          </button>
+          </ResultActionButton>
         </>
       )}
     </SectionCard>

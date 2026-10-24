@@ -598,8 +598,9 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     backdrop-filter: none;
   }
   /*
-   * Phone order (rules A and B): the 3 always-open cards first, in logical order (1 tool, 2 output,
-   * 3 main visual; crypto's `live-output` above its tool), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
+   * Phone order (LOCKED, visuals.md): the always-open cards first, in logical order (1 input, 2 output =
+   * the card with the result actions, 3 main visual; crypto's `live-output` above its input), set at
+   * server render by SectionCard `phoneRole` (no client reordering), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
    * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper
    * between it and an always-open card, a role card or the docs row stops boxing (display:
    * contents), so CSS order can place them. lib/phone/layout.ts numbers the 3 always-open cards
@@ -624,7 +625,7 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-phone-flow] [data-phone-role="live-output"] {
     order: -55;
   }
-  [data-phone-flow] [data-phone-role="tool"] {
+  [data-phone-flow] [data-phone-role="input"] {
     order: -50;
   }
   [data-phone-flow] [data-phone-role="output"] {
@@ -635,6 +636,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   }
   [data-phone-flow] :is([data-phone-docs], [data-phone-docs] + [data-ad-slot]) {
     order: -10;
+  }
+  /* A page with two output cards: its main visual leads the collapsed group, right after ad 1. */
+  [data-phone-flow] [data-phone-role="visual-collapsed"] {
+    order: -5;
   }
   /* Ad balance: lib/phone/layout.ts drops ad 1 when the collapsed cards between it and ad 2 are shorter than one ad. */
   [data-phone-flow] [data-ad-slot][data-phone-hide] {

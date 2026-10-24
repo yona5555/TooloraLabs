@@ -34,7 +34,7 @@ export default function MeanMedianModeRangeInputPanel({ draft, onChange }: Props
   }
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <p className="mb-3 text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
       <div className="space-y-3">
         {draft.values.map((value, index) => (

@@ -54,7 +54,7 @@ export default function BMIInputPanel({
   const tScenarios = useTranslations("tools.bmi-calculator.scenarios");
 
   return (
-    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="input" title={t("aboveFold.inputTitle")}>
       {onScenarioPreset && (
         <div className="mb-5">
           <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.scenarioLabel")}</span>

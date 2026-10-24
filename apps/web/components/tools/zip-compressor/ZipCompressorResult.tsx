@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Download, Loader2 } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ZipCompressorShareExportModal from "./ZipCompressorShareExportModal";
@@ -70,7 +71,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
                 </span>
                 <span className="shrink-0 text-xs text-zinc-500 dark:text-zinc-400">{r.method === 8 ? "DEFLATE" : r.method === 0 ? tr("stored") : `#${r.method}`}</span>
                 {entry && (
-                  <a
+                  <a data-result-action="download"
                     href={entry.url}
                     download={entry.name}
                     aria-label={t("aboveFold.downloadFile")}
@@ -105,14 +106,14 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
       </ul>
 
       {mode === "compress" && (
-        <button
+        <ResultActionButton action="download"
           type="button"
           onClick={onDownloadZip}
           className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           <Download size={16} />
           {t("aboveFold.downloadZip")}
-        </button>
+        </ResultActionButton>
       )}
     </SectionCard>
   );

@@ -164,8 +164,22 @@ Default for all tools, desktop unchanged; built into the shared components (neve
   5) a table too wide for its card at 360px reflows into stacked rows (CSS on the same `<table>`), no sideways
      scroll; short tokens nowrap, long text wraps between words only;
   6) calculator mode tab bar: one row, icon + short label (icons only if needed), 44px, active filled;
-  7) a card holding a Copy or Share/Export action is an output card, always one of the 3 open cards
-     (markets exception kept).
+  7) LOCKED card order (rule 7 replaced, Yousef 2026-10-24): see "APPROVED — LOCKED: phone card order" below.
+
+## APPROVED — LOCKED: phone card order, every tool below 768px (Yousef, 2026-10-24)
+Permanent; applies to every current and future tool. Full spec: `docs/claude/approved-visuals-and-indicators.md`.
+- Card 1 = INPUT (inputs, selects, sliders, keypad). Card 2 = OUTPUT: the result card holding any result
+  action (Share / Export, Copy, Print, Download, Save), always second, always open. Card 3 = the main VISUAL.
+- Input and output in one card: it is card 1, the visual card 2, the next most useful card 3.
+- Two output cards: the Share / Export one is card 2, the other card 3; the visual leads the collapsed
+  group (`phoneRole="visual-collapsed"`). More result-action cards all stay open.
+- A card with a result action is NEVER collapsed and NEVER after ad 1.
+- Roles are set at server render: SectionCard `phoneRole` = "input" | "output" | "visual" (raw cards:
+  `data-phone-role`); globals.css orders them (input, output, visual, docs row, ad 1, collapsed group). No
+  client reordering. Every result button renders through `ResultActionButton` / `ShareExportButton` /
+  CopyButton / PrintButton / DownloadButton / PdfDownloadButton / CopyLinkButton (`data-result-action`).
+- Guard in CI: `tests/phone-card-order.mjs` (390px, every tool). Exception kept: crypto-converter,
+  forex-converter, commodities-tracker.
 
 ## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
 Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:

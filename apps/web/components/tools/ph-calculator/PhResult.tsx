@@ -68,7 +68,7 @@ export default function PhResult({ hasCalculated, result, operation, digitStyle,
 
   return (
     <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal lg:flex-1" style={{ fontFamily: "var(--glass-font)" }}>
-      <SectionCard
+      <SectionCard phoneRole="output"
         id="ph-result"
         title={t("heading")}
         className="flex flex-col lg:flex-1"

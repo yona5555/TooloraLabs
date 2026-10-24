@@ -58,7 +58,7 @@ export default function Base64InputPanel({
   const t = useTranslations("tools.base64-tool.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="mb-4 flex flex-wrap gap-2">
         <button
           type="button"

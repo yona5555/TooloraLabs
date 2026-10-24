@@ -16,7 +16,7 @@ export default function SWResult() {
 
   if (!ok) {
     return (
-      <SectionCard title={t("result.heading")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col lg:justify-center">
+      <SectionCard phoneRole="output" title={t("result.heading")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col lg:justify-center">
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm leading-6 text-zinc-600 dark:border-zinc-700 dark:text-zinc-300">
           {t(result.error === "empty-text" ? "result.emptyText" : "result.invalidRate")}
         </p>
@@ -52,7 +52,7 @@ export default function SWResult() {
   const summaryText = rows.map((r) => `${r.label}: ${r.value}`).join("\n");
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("result.heading")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"

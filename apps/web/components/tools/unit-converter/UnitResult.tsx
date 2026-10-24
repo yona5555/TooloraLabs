@@ -46,7 +46,7 @@ export default function UnitResult({ category, from, fromValue, numericValue, on
 
   return (
     <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal lg:flex-1" style={{ fontFamily: "var(--glass-font)" }}>
-      <SectionCard
+      <SectionCard phoneRole="output"
         id="unit-result"
         title={t("aboveFold.resultTitle")}
         className="flex flex-col lg:flex-1"

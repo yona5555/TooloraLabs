@@ -13,7 +13,7 @@ export default function SGInputPanel({ text, onTextChange, onClear }: Props) {
   const t = useTranslations("tools.spelling-grammar-checker.form");
 
   return (
-    <SectionCard title={t("inputTitle")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       {/* The text area takes the column's spare height, so the input card ends flush with the Results card (§41). */}
       <label className="flex flex-1 flex-col">
         <span className="sr-only">{t("textLabel")}</span>

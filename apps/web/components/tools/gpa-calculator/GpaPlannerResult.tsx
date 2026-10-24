@@ -87,7 +87,7 @@ export default function GpaPlannerResult({ state, d, f }: Props) {
   const standing = d.honors.current ? t(`honors.${d.honors.current}`) : t("honors.none");
 
   return (
-    <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div className="mb-3 grid grid-cols-3 gap-2 text-center" data-bp-inner>
         {[
           { k: t("result.semesterGpa"), v: f.gpa(semGpa) },

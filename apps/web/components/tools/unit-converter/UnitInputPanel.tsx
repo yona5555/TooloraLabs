@@ -35,7 +35,7 @@ export default function UnitInputPanel({
   const t = useTranslations("tools.unit-converter");
 
   return (
-    <SectionCard title={t("form.inputTitle")}>
+    <SectionCard phoneRole="input" title={t("form.inputTitle")}>
       <div className="flex flex-wrap gap-2">
         {UNIT_CATEGORIES.map((item) => (
           <button

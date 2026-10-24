@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Check, Copy } from "lucide-react";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import type { CitePart, CiteSegment } from "@tooloralabs/tools";
@@ -30,7 +31,7 @@ export async function copyRich(text: string, html?: string): Promise<boolean> {
 export function CopyButton({ text, html, label, doneLabel, compact = false }: { text: string; html?: string; label: string; doneLabel: string; compact?: boolean }) {
   const [done, setDone] = useState(false);
   return (
-    <button
+    <ResultActionButton action="copy"
       type="button"
       onClick={async () => {
         if (await copyRich(text, html)) {
@@ -45,7 +46,7 @@ export function CopyButton({ text, html, label, doneLabel, compact = false }: { 
     >
       {done ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
       {!compact && (done ? doneLabel : label)}
-    </button>
+    </ResultActionButton>
   );
 }
 

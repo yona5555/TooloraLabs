@@ -23,7 +23,7 @@ export default function LogoInputPanel() {
   const samples = SAMPLES.includes(sample) ? SAMPLES : [sample, ...SAMPLES];
 
   return (
-    <SectionCard title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
       <ToolInput label={t("textLabel")} type="text" dir="auto" value={text} onChange={(e) => setText(e.target.value)} placeholder={t("textPlaceholder")} />
       <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
 

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useTranslations } from "next-intl";
 import { Check, Copy, Link2, RotateCcw } from "lucide-react";
 import type { LeapDayRule } from "@tooloralabs/tools";
@@ -73,7 +74,7 @@ export default function AgeInputCard({ state, onChange, onReset, d, f, copyText 
   const errorText = (e: AgeError) => (e ? t(`errors.${e}`) : "");
 
   return (
-    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="output" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div>
         <span className={label}>{t("input.examples")}</span>
         <div className="flex flex-wrap gap-1.5">
@@ -173,14 +174,14 @@ export default function AgeInputCard({ state, onChange, onReset, d, f, copyText 
       )}
 
       <div className="flex gap-2">
-        <button
+        <ResultActionButton action="copy"
           type="button"
           onClick={() => copy("result")}
           className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-2 py-2 text-xs font-semibold text-white transition hover:bg-blue-700"
         >
           {copied === "result" ? <Check size={14} /> : <Copy size={14} />}
           {copied === "result" ? t("input.copied") : t("input.copyResult")}
-        </button>
+        </ResultActionButton>
         <button
           type="button"
           onClick={() => copy("link")}

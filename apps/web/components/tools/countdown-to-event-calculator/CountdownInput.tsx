@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useLocale, useTranslations } from "next-intl";
 import { Bookmark, CalendarPlus, Check, Copy, Link2, Moon, RotateCcw } from "lucide-react";
 import { buildCountdownIcs, countdownIcsFileName, type CountdownPreset } from "@tooloralabs/tools";
@@ -93,7 +94,7 @@ export default function CountdownInput({ state, onChange, d, presets, onPreset, 
   };
 
   return (
-    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-3">
+    <SectionCard phoneRole="output" title={t("input.title")} bodyClassName="p-4 space-y-3">
       <div>
         <span className={label}>{t("input.presetsHijri")}</span>
         <div className="flex flex-wrap gap-1.5">
@@ -245,14 +246,14 @@ export default function CountdownInput({ state, onChange, d, presets, onPreset, 
           <CalendarPlus size={15} />
           {t("input.ics")}
         </button>
-        <button
+        <ResultActionButton action="copy"
           type="button"
           onClick={async () => (await copyText(resultText)) && pulse("copy")}
           className="flex items-center justify-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-2 text-xs font-semibold text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           {flash === "copy" ? <Check size={14} /> : <Copy size={14} />}
           {flash === "copy" ? t("input.copied") : t("input.copy")}
-        </button>
+        </ResultActionButton>
         <button
           type="button"
           onClick={async () => (await copyText(window.location.href)) && pulse("link")}

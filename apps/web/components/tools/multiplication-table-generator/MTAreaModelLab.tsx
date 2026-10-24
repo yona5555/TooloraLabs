@@ -61,7 +61,7 @@ export default function MTAreaModelLab({ view, onPick }: { view: MtView; onPick:
   const f = view.fmt;
 
   return (
-    <IndicatorCard
+    <IndicatorCard phoneRole="visual"
       id="area-model"
       title={t("area.title")}
       heading={t("area.heading", { a: f(rows), b: f(cols) })}

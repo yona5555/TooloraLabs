@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import {
   checkFields,
@@ -44,7 +44,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
   const active = focus && parts.includes(focus) ? focus : parts[0];
 
   return (
-    <SectionCard phoneRole="visual" title={t("ind.anatomy.title")}>
+    <SectionCard phoneRole="visual-collapsed" title={t("ind.anatomy.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("ind.anatomy.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
@@ -103,6 +103,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
 
 /* 2 · Completeness gauge for the selected source (gradient gauge) */
 export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
+  const svgId = useId();
   const t = useCiteT();
   const pct = completeness(source);
   const checks = checkFields(source);
@@ -127,15 +128,15 @@ export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
           <PhoneMini slot={0} title={t("ind.complete.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.complete.title")}>
             <defs>
-              <linearGradient id="cite-complete" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}cite-complete`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" stopColor="#ef4444" />
                 <stop offset="50%" stopColor="#f59e0b" />
                 <stop offset="75%" stopColor="#3b82f6" />
                 <stop offset="100%" stopColor="#10b981" />
               </linearGradient>
             </defs>
-            <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} stroke="url(#cite-complete)" strokeOpacity={0.25} strokeWidth={18} fill="none" />
-            {pct > 0 && <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${ex} ${ey}`} stroke="url(#cite-complete)" strokeWidth={18} fill="none" strokeLinecap="round" style={{ transition: "d 500ms ease" }} />}
+            <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} stroke={`url(#${svgId}cite-complete)`} strokeOpacity={0.25} strokeWidth={18} fill="none" />
+            {pct > 0 && <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${ex} ${ey}`} stroke={`url(#${svgId}cite-complete)`} strokeWidth={18} fill="none" strokeLinecap="round" style={{ transition: "d 500ms ease" }} />}
             {[0, 50, 70, 90, 100].map((v) => {
               const [tx, ty] = pt(v / 100, R + 18);
               return (

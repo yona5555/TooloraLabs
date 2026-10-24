@@ -63,7 +63,7 @@ export default function ReadabilityInputPanel({ sampleText }: { sampleText: stri
   const fragments = sentences.filter((s) => !s.terminated).length;
 
   return (
-    <SectionCard title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
       <span className="mb-2 block text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
       <div className="mb-3 flex flex-wrap gap-1.5">
         {PASSAGE_EXAMPLES.map((example) => (

@@ -18,7 +18,7 @@ export default function CircleInputPanel({ knownField, onKnownFieldChange, value
   const t = useTranslations("tools.circle-calculator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div>
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownFieldLabel")}</span>
         <div className="grid grid-cols-2 gap-1.5">

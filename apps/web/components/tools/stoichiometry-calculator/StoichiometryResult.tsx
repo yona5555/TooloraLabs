@@ -110,7 +110,7 @@ export default function StoichiometryResult({ hasCalculated, result, knownFormul
 
   return (
     <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal" style={{ fontFamily: "var(--glass-font)" }}>
-      <SectionCard
+      <SectionCard phoneRole="output"
         id="sto-result"
         title={t("heading")}
         className="flex flex-col"

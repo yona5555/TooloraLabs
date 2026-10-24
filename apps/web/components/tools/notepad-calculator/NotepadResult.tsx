@@ -25,7 +25,7 @@ export default function NotepadResult({ result, a, onPickLine }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <SectionCard phoneRole="output" title={t("bottomLine")}>
+      <SectionCard phoneRole="visual" title={t("bottomLine")}>
         {!hasAny ? (
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("noCalculations")}</p>
         ) : (
@@ -69,7 +69,7 @@ export default function NotepadResult({ result, a, onPickLine }: Props) {
         )}
       </SectionCard>
 
-      <SectionCard title={t("heading")} action={hasAny ? <NotepadShareExportModal result={result} /> : undefined}>
+      <SectionCard phoneRole="output" title={t("heading")} action={hasAny ? <NotepadShareExportModal result={result} /> : undefined}>
         <p className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("calculatedCount", { count: a.counts.calculated })}</p>
         <ol className="divide-y divide-zinc-100 font-mono text-sm dark:divide-zinc-800" data-testid="answer-column">
           {a.lines.map((l) => {

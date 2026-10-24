@@ -85,7 +85,7 @@ export default function MolarityInputPanel({
   );
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       {mode === "concentration" ? (
         <>
           {scenarioChips}

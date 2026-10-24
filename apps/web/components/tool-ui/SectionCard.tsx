@@ -13,15 +13,16 @@ type SectionCardProps = {
   /** Anchor id for in-page navigation (e.g. SectionNav) — adds scroll-margin so sticky headers don't cover the target. */
   id?: string;
   /**
-   * APPROVED PHONE STANDARD rule A: this card's place among the 3 always-open cards on phone
-   * (1 tool = inputs, 2 output, 3 main visual), applied by CSS order (globals.css). Set it only on a
-   * page whose DOM order differs from that; desktop ignores it. `live-output` = an output shown
+   * LOCKED phone card order (visuals.md): this card's place among the 3 always-open cards on phone
+   * (1 input, 2 output = the card with the result actions, 3 main visual), applied by CSS order
+   * (globals.css) at server render. Set on every tool's role cards (scripts/phone-roles.mjs); desktop ignores it. `live-output` = an output shown
    * above the tool (crypto-converter's approved exception: the live result first, the input second).
+   * `visual-collapsed` = the main visual of a page with two output cards: it leads the collapsed group.
    */
   phoneRole?: PhoneRole;
 };
 
-export type PhoneRole = "tool" | "output" | "visual" | "live-output";
+export type PhoneRole = "input" | "output" | "visual" | "live-output" | "visual-collapsed";
 
 const headerClassName =
   "flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
@@ -45,7 +46,7 @@ const NestedCardContext = createContext(false);
 const CardOpenedContext = createContext(true);
 export const useCardOpened = () => useContext(CardOpenedContext);
 
-/** Rule 7 (lib/phone/layout.ts): a card holding a Copy or Share/Export action is an output card. */
+/** Desktop and markets (lib/phone/layout.ts): a card holding a Copy or Share/Export action counts as an output card. */
 const OUTPUT_ACTION = "[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)";
 
 /** Same rule as PhoneLayoutScript, for a card mounted after the page loaded (e.g. a result card). */
@@ -53,9 +54,16 @@ function isAlwaysOpen(el: HTMLElement): boolean {
   const scope = el.closest("[data-phone-cards]");
   if (!scope || el.closest('dialog,[role="dialog"]')) return true;
   const cards = Array.from(scope.querySelectorAll<HTMLElement>("[data-card]")).filter((c) => !c.parentElement?.closest("[data-card]") && (c === el || c.getClientRects().length > 0));
+  if (cards.length <= 3) return true;
+  if (window.matchMedia(PHONE_QUERY).matches && !scope.hasAttribute("data-phone-markets")) {
+    // LOCKED phone card order: the server's role cards are open, then the first other cards fill up to 3.
+    const isRole = (c: HTMLElement) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || "");
+    if (isRole(el)) return true;
+    const roles = cards.filter(isRole).length;
+    return cards.filter((c) => !isRole(c)).indexOf(el) < 3 - roles;
+  }
   if (window.matchMedia(PHONE_QUERY).matches) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-  const index = cards.indexOf(el);
-  return cards.length <= 3 || index < 3 || el.hasAttribute("data-phone-output");
+  return cards.indexOf(el) < 3 || el.hasAttribute("data-phone-output");
 }
 
 export default function SectionCard({ title, action, onToggle, children, bodyClassName = "p-4 lg:p-6", className = "", id, phoneRole }: SectionCardProps) {
@@ -76,7 +84,7 @@ export default function SectionCard({ title, action, onToggle, children, bodyCla
     if (!fixed) {
       if (!el.hasAttribute("data-card-init")) {
         const scope = el.closest("[data-phone-cards]");
-        if (scope && !scope.hasAttribute("data-phone-markets") && el.querySelector(OUTPUT_ACTION)) el.setAttribute("data-phone-output", "");
+        if (scope && !scope.hasAttribute("data-phone-markets") && !window.matchMedia(PHONE_QUERY).matches && el.querySelector(OUTPUT_ACTION)) el.setAttribute("data-phone-output", "");
         el.setAttribute("data-card-init", "");
         if (isAlwaysOpen(el)) el.setAttribute("data-fixed", "");
       }

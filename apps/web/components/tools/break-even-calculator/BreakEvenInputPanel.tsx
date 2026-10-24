@@ -42,7 +42,7 @@ export default function BreakEvenInputPanel({
   const t = useTranslations("tools.break-even-calculator.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 

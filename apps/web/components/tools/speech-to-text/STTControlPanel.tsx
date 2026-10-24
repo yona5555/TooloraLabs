@@ -42,7 +42,7 @@ export default function STTControlPanel({
   const tv = useTranslations("tools.speech-to-text.visuals");
 
   return (
-    <SectionCard title={t("inputTitle")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       {!isSupported && (
         <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
           {t("unsupported")}

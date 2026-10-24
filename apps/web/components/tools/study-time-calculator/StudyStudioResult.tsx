@@ -145,7 +145,7 @@ export default function StudyStudioResult({ state, d }: Props) {
 
   const ok = tot.shortfallMinutes === 0;
   return (
-    <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div
         role="status"
         className={`rounded-lg p-2.5 text-sm font-semibold ${ok ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-300" : "bg-red-50 text-red-800 dark:bg-red-500/10 dark:text-red-300"}`}

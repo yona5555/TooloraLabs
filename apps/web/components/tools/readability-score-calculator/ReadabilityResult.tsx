@@ -73,7 +73,7 @@ export default function ReadabilityResult() {
   };
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"

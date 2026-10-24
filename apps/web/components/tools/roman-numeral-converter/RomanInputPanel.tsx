@@ -27,7 +27,7 @@ export default function RomanInputPanel({
   const t = useTranslations("tools.roman-numeral-converter.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="mb-4 flex gap-2">
         <button
           type="button"

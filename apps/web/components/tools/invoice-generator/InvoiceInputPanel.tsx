@@ -62,7 +62,7 @@ export default function InvoiceInputPanel({
   const t = useTranslations("tools.invoice-generator.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <form onSubmit={onCalculate}>
         <div className="grid gap-4 sm:grid-cols-2">
           <ToolInput label={t("fromLabel")} type="text" placeholder={t("fromPlaceholder")} value={fromName} onChange={(e) => onFromNameChange(e.target.value)} />

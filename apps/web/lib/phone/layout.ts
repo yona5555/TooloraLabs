@@ -26,32 +26,40 @@ export function phoneLayout(anchor: Element | null): void {
   root.setAttribute("data-phone-layout", "");
   const topLevel = (el: Element) => !el.parentElement || !el.parentElement.closest("[data-card]");
 
-  // Rule 7: a card holding a Copy or Share/Export action is an output card (one of the 3 open ones on
-  // phone), unless it already has a role; the markets tools keep their approved order (live data first).
-  // The same selector is OUTPUT_ACTION in SectionCard.tsx (cards mounted later).
-  if (!root.hasAttribute("data-phone-markets")) {
-    root.querySelectorAll("[data-card]").forEach((c) => {
-      if (topLevel(c) && c.querySelector('[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)')) c.setAttribute("data-phone-output", "");
-    });
-  }
-  const isOutput = (c: Element) => c.hasAttribute("data-phone-output") || /output/.test(c.getAttribute("data-phone-role") || "");
+  const markets = root.hasAttribute("data-phone-markets");
   // Only cards this screen renders count (e.g. the desktop-only sidebar's cards do not on phone).
   const cards = Array.prototype.filter.call(root.querySelectorAll("[data-card]"), (c: Element) => topLevel(c) && c.getClientRects().length > 0) as Element[];
-  // Rule A reorders cards on phone with CSS order, so "first" there means first on screen.
   const phone = window.matchMedia("(max-width: 767px)").matches;
-  if (phone) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-  // The 3 always-open cards: the output cards first (rule 7), then the first cards on screen; they keep
-  // their screen order among themselves.
   const flowCards = cards.filter((c) => !c.closest('dialog,[role="dialog"]'));
-  const open = flowCards.filter(isOutput).slice(0, 3);
-  for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0) open.push(c);
-  open.sort((a, b) => flowCards.indexOf(a) - flowCards.indexOf(b));
+  let open: Element[];
+  if (phone && !markets) {
+    // LOCKED phone card order (visuals.md): the server marks each tool's input, output and main visual
+    // cards (SectionCard `phoneRole`, set by scripts/phone-roles.mjs); those are the always-open cards
+    // and globals.css orders them 1 input, 2 output, 3 visual. A page with fewer than 3 role cards fills
+    // up with its first other cards in DOM order; a card with a result action is never collapsed (a page
+    // with more output cards keeps them all open). Nothing is measured or moved here.
+    open = flowCards.filter((c) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || ""));
+    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0) open.push(c);
+  } else {
+    // Desktop (where nothing collapses) and the markets tools (approved order, live data first): a card
+    // holding a Copy or Share/Export action counts first, then the first cards on screen.
+    if (!markets) {
+      cards.forEach((c) => {
+        if (c.querySelector('[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)')) c.setAttribute("data-phone-output", "");
+      });
+    }
+    const isOutput = (c: Element) => c.hasAttribute("data-phone-output") || /output/.test(c.getAttribute("data-phone-role") || "");
+    if (phone) flowCards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+    open = flowCards.filter(isOutput).slice(0, 3);
+    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0) open.push(c);
+    open.sort((a, b) => flowCards.indexOf(a) - flowCards.indexOf(b));
+  }
   cards.forEach((card) => {
     if (card.hasAttribute("data-card-init")) return;
     card.setAttribute("data-card-init", "");
     if (cards.length <= 3 || open.indexOf(card) >= 0 || card.closest('dialog,[role="dialog"]')) card.setAttribute("data-fixed", "");
   });
-  // Phone order (globals.css): the always-open cards, numbered in screen order, go first.
+  // Phone order (globals.css): the always-open cards go first.
   if (phone) open.forEach((card, i) => card.setAttribute("data-phone-open", String(i + 1)));
 
   if (!phone) return;

@@ -49,7 +49,7 @@ export default function MatrixInputPanel({
   const t = useTranslations("tools.matrix-calculator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <div>
           <p className="mb-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("matrixALabel")}</p>

@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo, useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import {
   dependencyTree,
@@ -68,7 +68,7 @@ export function LineValuesTrend({ a }: IndicatorProps) {
   const peak = pts.reduce((b, l) => ((l.value as number) > (b.value as number) ? l : b), pts[0]);
   const last = pts[pts.length - 1];
   return (
-    <IndicatorCard phoneRole="visual"
+    <IndicatorCard
       id="line-values"
       mini={0}
       title={t("trend.title")}
@@ -622,6 +622,7 @@ export function InputImpactBars({ a, text }: IndicatorProps) {
 
 /* 10 — §31 type 10: every result placed on a powers-of-ten scale. */
 export function MagnitudeScale({ a }: IndicatorProps) {
+  const svgId = useId();
   const t = useInd();
   const pts = calculated(a).filter((l) => l.value !== 0);
   const mags = pts.map((l) => Math.log10(Math.abs(l.value as number)));
@@ -658,12 +659,12 @@ export function MagnitudeScale({ a }: IndicatorProps) {
       <div className="overflow-x-auto" dir="ltr">
         <svg width={W} height={76 + 20 * Math.min(pts.length, 6)} viewBox={`0 0 ${W} ${76 + 20 * Math.min(pts.length, 6)}`} role="img" aria-label={t("mag.title")} className="mx-auto h-auto max-w-full" data-testid="ind-mag">
           <defs>
-            <linearGradient id="np-mag" x1="0" x2="1">
+            <linearGradient id={`${svgId}np-mag`} x1="0" x2="1">
               <stop offset="0" stopColor="#bfdbfe" />
               <stop offset="1" stopColor="#1d4ed8" />
             </linearGradient>
           </defs>
-          <rect x={P} y={20} width={W - 2 * P} height={14} rx={7} fill="url(#np-mag)" />
+          <rect x={P} y={20} width={W - 2 * P} height={14} rx={7} fill={`url(#${svgId}np-mag)`} />
           {Array.from({ length: hi - lo + 1 }, (_, i) => lo + i).map((m) => (
             <g key={m}>
               <line x1={x(m)} x2={x(m)} y1={16} y2={38} className="stroke-white dark:stroke-zinc-900" strokeWidth={1.5} />

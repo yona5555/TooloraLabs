@@ -29,7 +29,7 @@ export default function SWInputPanel({ sampleText }: { sampleText: string }) {
   useEffect(syncScroll, [tok, text, textareaRef]);
 
   return (
-    <SectionCard title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <button
           type="button"

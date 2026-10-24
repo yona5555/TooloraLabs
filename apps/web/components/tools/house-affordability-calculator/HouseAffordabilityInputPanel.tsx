@@ -119,7 +119,7 @@ export default function HouseAffordabilityInputPanel({
   const t = useTranslations("tools.house-affordability-calculator");
 
   return (
-    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="input" title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 

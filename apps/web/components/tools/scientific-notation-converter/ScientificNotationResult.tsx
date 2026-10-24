@@ -38,7 +38,7 @@ export default function ScientificNotationResult({ result, computed, sigSources,
 
   if (result.error === "divide-by-zero") {
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t("divideByZero")}</p>
       </SectionCard>
     );
@@ -77,7 +77,7 @@ export default function ScientificNotationResult({ result, computed, sigSources,
   ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       action={
         <div className="flex items-center gap-2">

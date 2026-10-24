@@ -14,7 +14,7 @@ export default function NotepadInputPanel({ text, onChange, onSnippet, onClear }
   const t = useTranslations("tools.notepad-calculator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")} className="flex flex-1 flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex flex-1 flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <p className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("samples")}</p>
       <div className="mb-3 grid grid-cols-2 gap-2">
         {SNIPPET_KEYS.map((key) => (

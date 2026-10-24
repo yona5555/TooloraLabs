@@ -62,7 +62,7 @@ export default function DebtToIncomeInputPanel({
   const t = useTranslations("tools.debt-to-income-calculator");
 
   return (
-    <SectionCard title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="input" title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 

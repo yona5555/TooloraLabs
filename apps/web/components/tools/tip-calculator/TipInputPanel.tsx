@@ -41,7 +41,7 @@ export default function TipInputPanel({
   const t = useTranslations("tools.tip-calculator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 
