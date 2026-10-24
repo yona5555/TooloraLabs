@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { categories } from "@/data/categories";
@@ -20,11 +20,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function DocsIndexPage() {
-  const t = await getTranslations("docsNav");
-  const tTools = await getTranslations("tools");
-  const tCategories = await getTranslations("categories");
-  const tCommon = await getTranslations("common");
+export default async function DocsIndexPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  // Static per locale (no request headers): the locale comes from the route, not the request.
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: "docsNav" });
+  const tTools = await getTranslations({ locale, namespace: "tools" });
+  const tCategories = await getTranslations({ locale, namespace: "categories" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   const documentedByCategory = categories
     .map((category) => ({
