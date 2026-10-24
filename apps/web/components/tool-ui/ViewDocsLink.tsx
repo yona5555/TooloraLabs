@@ -11,6 +11,7 @@ export default function ViewDocsLink({ slug }: { slug: string }) {
     <>
       <Link
         href={`/docs/${slug}`}
+        data-phone-docs=""
         className="flex items-center gap-3 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:border-blue-400 hover:bg-blue-50/50 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-blue-500 dark:hover:bg-blue-500/5"
       >
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">

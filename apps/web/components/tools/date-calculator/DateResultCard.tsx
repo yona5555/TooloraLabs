@@ -128,7 +128,7 @@ export default function DateResultCard({ d, f, amountText, summary }: Props) {
       ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("result.title")}
       action={<DateShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("result.title")} heroValue={tiles[0].v} sentence={summary} />}
       className="lg:flex lg:flex-1 lg:flex-col"

@@ -123,7 +123,7 @@ export default function CitationStudioResult({ state, onChange, source, index }:
   ];
 
   return (
-    <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div role="tablist" aria-label={t("result.style")} className="mb-2 grid grid-cols-5 gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800" data-bp-inner>
         {CITATION_STYLES.map((id) => (
           <button

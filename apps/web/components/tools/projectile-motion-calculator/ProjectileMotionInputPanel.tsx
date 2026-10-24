@@ -18,7 +18,7 @@ export default function ProjectileMotionInputPanel({ inputs, onFieldChange, grav
   const t = useTranslations("tools.projectile-motion-calculator.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="space-y-5">
         <ToolInput
           label={t("speedLabel")}

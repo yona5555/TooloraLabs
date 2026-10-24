@@ -520,4 +520,43 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-article-ad][data-show] {
     display: block;
   }
+  /*
+   * Phone order (rules A and B): the 3 always-open cards first, in logical order (1 tool, 2 output,
+   * 3 main visual; crypto's `live-output` above its tool), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
+   * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper
+   * between it and an always-open card, a role card or the docs row stops boxing (display:
+   * contents), so CSS order can place them. lib/phone/layout.ts numbers the 3 always-open cards
+   * ([data-phone-open] 1-3, screen order); a page whose DOM order differs from the logical one marks
+   * those cards ([data-phone-role], SectionCard `phoneRole`). What came before the first open card
+   * (cards excepted) stays first. Dialogs never flatten.
+   */
+  [data-phone-flow] {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-open], [data-phone-role], [data-phone-docs]) {
+    display: contents;
+  }
+  [data-phone-flow] :where(:has(~ [data-phone-open="1"], ~ * [data-phone-open="1"]), :has(~ [data-phone-open="1"], ~ * [data-phone-open="1"]) *):where(:not([data-card], :has([data-card]))) {
+    order: -60;
+  }
+  [data-phone-flow] [data-phone-open] {
+    order: -20;
+  }
+  [data-phone-flow] [data-phone-role="live-output"] {
+    order: -55;
+  }
+  [data-phone-flow] [data-phone-role="tool"] {
+    order: -50;
+  }
+  [data-phone-flow] [data-phone-role="output"] {
+    order: -40;
+  }
+  [data-phone-flow] [data-phone-role="visual"] {
+    order: -30;
+  }
+  [data-phone-flow] :is([data-phone-docs], [data-phone-docs] + [data-ad-slot]) {
+    order: -10;
+  }
 }

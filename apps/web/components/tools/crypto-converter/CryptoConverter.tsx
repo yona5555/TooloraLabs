@@ -172,8 +172,8 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
           }
           result={
             // Phone only (approved exception to "input first", Yousef 2026-10-23): the live flow card
-            // moves above the input card, the dominance card stays below it. CSS order only; desktop untouched.
-            <div className="flex flex-col gap-6 max-md:contents max-md:[&>:first-child]:-order-1">
+            // (`live-output`) comes above the input card, the dominance card below it (globals.css).
+            <div className="flex flex-col gap-6">
               <CryptoLiveFlow
                 fromCoin={fromCoin}
                 toCoin={toCoin}

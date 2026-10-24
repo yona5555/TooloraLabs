@@ -119,7 +119,7 @@ export function HRZoneStripCard({ side }: { side: Side }) {
     { key: "prev", label: t("rowPrev"), value: prev ? `−${n0(bpm - targetAt(prev.lo, max, rest))} bpm` : "—" },
   ];
   return (
-    <Card tool="target-heart-rate-calculator" idPrefix="thr"
+    <Card phoneRole="visual" tool="target-heart-rate-calculator" idPrefix="thr"
       n={1}
       side={side}
       k="strip"

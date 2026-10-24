@@ -17,7 +17,7 @@ export default function OhmsLawInputPanel({ draft, onChange, onClear }: OhmsLawI
   const fields = FIELDS_BY_PAIR[draft.pair];
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("knownPairLabel")}</span>
         <OhmsLawModeTabs knownPair={draft.pair} onKnownPairChange={(p) => onChange("pair", p)} />

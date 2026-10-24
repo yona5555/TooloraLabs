@@ -60,13 +60,13 @@ const LOG2_10 = Math.log2(10);
 /* 1 — §31 type 1: observed count per bin with the uniform expectation on every bar. */
 export function FrequencyHistogram({ d, f }: IndicatorProps) {
   const t = useInd();
-  if (!d) return <IndicatorCard id="histogram" title={t("hist.title")} heading={t("hist.title")} intro={t("hist.intro")} fallback={fallbackOf(d)} worked={null}>{null}</IndicatorCard>;
+  if (!d) return <IndicatorCard phoneRole="visual" id="histogram" title={t("hist.title")} heading={t("hist.title")} intro={t("hist.intro")} fallback={fallbackOf(d)} worked={null}>{null}</IndicatorCard>;
   const scale = Math.max(...d.bins.map((b) => Math.max(b.count, b.expected)), 1) * 1.12;
   const fullest = d.bins.reduce((a, b) => (b.count > a.count ? b : a));
   const emptiest = d.bins.reduce((a, b) => (b.count < a.count ? b : a));
   const span = (b: HistogramBin) => (b.from === b.to ? f.int(b.from) : `${f.int(b.from)}–${f.int(b.to)}`);
   return (
-    <IndicatorCard
+    <IndicatorCard phoneRole="visual"
       id="histogram"
       title={t("hist.title")}
       heading={t("hist.heading", { count: f.int(d.k), bins: f.int(d.bins.length) })}

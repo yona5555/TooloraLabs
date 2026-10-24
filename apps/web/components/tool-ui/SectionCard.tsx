@@ -12,7 +12,16 @@ type SectionCardProps = {
   className?: string;
   /** Anchor id for in-page navigation (e.g. SectionNav) — adds scroll-margin so sticky headers don't cover the target. */
   id?: string;
+  /**
+   * APPROVED PHONE STANDARD rule A: this card's place among the 3 always-open cards on phone
+   * (1 tool = inputs, 2 output, 3 main visual), applied by CSS order (globals.css). Set it only on a
+   * page whose DOM order differs from that; desktop ignores it. `live-output` = an output shown
+   * above the tool (crypto-converter's approved exception: the live result first, the input second).
+   */
+  phoneRole?: PhoneRole;
 };
+
+export type PhoneRole = "tool" | "output" | "visual" | "live-output";
 
 const headerClassName =
   "flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
@@ -41,11 +50,12 @@ function isAlwaysOpen(el: HTMLElement): boolean {
   const scope = el.closest("[data-phone-cards]");
   if (!scope || el.closest('dialog,[role="dialog"]')) return true;
   const cards = Array.from(scope.querySelectorAll<HTMLElement>("[data-card]")).filter((c) => !c.parentElement?.closest("[data-card]") && (c === el || c.getClientRects().length > 0));
+  if (window.matchMedia(PHONE_QUERY).matches) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
   const index = cards.indexOf(el);
   return cards.length <= 3 || index < 3;
 }
 
-export default function SectionCard({ title, action, onToggle, children, bodyClassName = "p-4 lg:p-6", className = "", id }: SectionCardProps) {
+export default function SectionCard({ title, action, onToggle, children, bodyClassName = "p-4 lg:p-6", className = "", id, phoneRole }: SectionCardProps) {
   const t = useTranslations("common");
   const nested = useContext(NestedCardContext);
   const parentOpened = useCardOpened();
@@ -91,6 +101,7 @@ export default function SectionCard({ title, action, onToggle, children, bodyCla
       id={id}
       data-bp-panel
       data-card=""
+      data-phone-role={phoneRole}
       data-state={fixed || expanded ? "open" : "closed"}
       data-fixed={fixed ? "" : undefined}
       suppressHydrationWarning

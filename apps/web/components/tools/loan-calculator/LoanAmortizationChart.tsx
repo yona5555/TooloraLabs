@@ -100,7 +100,7 @@ export default function LoanAmortizationChart({ schedule, loanAmount, totalInter
   const labelEvery = Math.max(1, Math.ceil(schedule.length / MAX_DENSE_LABELS));
 
   return (
-    <SectionCard title={t("payoffChart.title")}>
+    <SectionCard phoneRole="visual" title={t("payoffChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("payoffChart.intro")}</p>
 
       <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">

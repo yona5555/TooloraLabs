@@ -38,7 +38,7 @@ export default async function MathSolverEducation() {
 
   return (
     <EncyclopediaPaper>
-      <SectionCard title={t3("cardTitle")}>
+      <SectionCard phoneRole="visual" title={t3("cardTitle")}>
         <MathSolverLive3D camera={[1.4, 2.8, 8.6]} />
       </SectionCard>
 

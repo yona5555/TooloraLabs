@@ -21,7 +21,7 @@ export default function CircleResult({ invalid }: { invalid: boolean }) {
   const sentence = t("sentence", { field: t(`fields.${knownField}`), value: f(values[knownField]) });
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"

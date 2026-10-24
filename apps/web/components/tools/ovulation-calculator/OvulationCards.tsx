@@ -77,7 +77,7 @@ export function OvCycleDayCard({ side }: { side: Side }) {
   const sx = xs(idx + 0.5);
   const tagRight = sx < W * 0.6;
   return (
-    <Card
+    <Card phoneRole="visual"
       tool={TOOL}
       idPrefix={ID}
       n={1}

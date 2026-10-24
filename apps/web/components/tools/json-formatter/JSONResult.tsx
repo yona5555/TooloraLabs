@@ -22,7 +22,7 @@ export default function JSONResult() {
 
   if (!output) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.placeholder")}</p>
       </SectionCard>
     );
@@ -33,7 +33,7 @@ export default function JSONResult() {
     const from = Math.max(0, output.errorLine - 1 - ERROR_CONTEXT);
     const shown = lines.slice(from, output.errorLine + ERROR_CONTEXT);
     return (
-      <SectionCard title={t("aboveFold.resultTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6">
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6">
         <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
           <AlertTriangle size={18} className="mt-0.5 shrink-0" />
           <div>
@@ -83,6 +83,7 @@ export default function JSONResult() {
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

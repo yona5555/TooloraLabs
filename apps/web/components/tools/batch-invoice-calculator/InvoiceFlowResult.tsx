@@ -45,7 +45,7 @@ export default function InvoiceFlowResult({ invoice, overview, f, onPrint, onCsv
   const btn = "flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-zinc-300 bg-white px-2 py-2 text-xs font-semibold text-zinc-700 transition hover:border-blue-500 hover:text-blue-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:text-blue-400";
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       id="result"
       title={t("title")}
       action={

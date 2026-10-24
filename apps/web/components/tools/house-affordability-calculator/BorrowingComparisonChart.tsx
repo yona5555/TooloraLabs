@@ -88,7 +88,7 @@ export default function BorrowingComparisonChart({ rows, digitStyle, currency }:
   const tooltipY = MARGIN.top + 4;
 
   return (
-    <SectionCard id="borrowing-comparison" title={t("comparisonChart.title")}>
+    <SectionCard phoneRole="visual" id="borrowing-comparison" title={t("comparisonChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("comparisonChart.intro")}</p>
 
       <div ref={containerRef} dir="ltr" data-preview="visual" className="mt-4 overflow-x-auto">

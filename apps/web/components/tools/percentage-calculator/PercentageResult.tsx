@@ -40,7 +40,7 @@ export default function PercentageResult({ invalid }: { invalid: boolean }) {
   }[mode];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"

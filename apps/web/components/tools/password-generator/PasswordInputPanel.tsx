@@ -37,7 +37,7 @@ export default function PasswordInputPanel({ form, onChange, onClear }: Password
   ];
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         {(["characters", "passphrase"] as const).map((m) => (
           <button

@@ -23,7 +23,7 @@ export default function ProbabilityInputPanel({ mode, onModeChange, fields, onFi
   const tScenarios = useTranslations("tools.probability-calculator.scenarios");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="mb-4">
         <ProbabilityModeTabs mode={mode} onModeChange={onModeChange} />
       </div>

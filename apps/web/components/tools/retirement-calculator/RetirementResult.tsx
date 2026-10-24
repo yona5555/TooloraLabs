@@ -56,7 +56,7 @@ export default function RetirementResult({
 
   if (!hasCalculated) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.emptyStateMessage")}</p>
@@ -128,6 +128,7 @@ export default function RetirementResult({
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       action={
         <RetirementShareExportModal

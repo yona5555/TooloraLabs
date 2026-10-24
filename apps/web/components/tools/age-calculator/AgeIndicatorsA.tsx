@@ -58,7 +58,7 @@ export function AgeTimeTravelCard({ state, setState, d, f }: IndicatorProps) {
   }
 
   return (
-    <SectionCard title={t("travel.title")}>
+    <SectionCard phoneRole="visual" title={t("travel.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("travel.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("worked")}

@@ -49,7 +49,7 @@ export default function PdfMergeSplitInputPanel({
   const hasState = mode === "merge" ? mergeFiles.length > 0 : splitFile !== null;
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="tool"
       title={t("form.inputTitle")}
       action={
         hasState ? (

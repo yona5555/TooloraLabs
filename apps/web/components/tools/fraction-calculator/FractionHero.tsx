@@ -127,7 +127,7 @@ export default function FractionHero() {
   const labelStep = labelStepFor(dataMax - dataMin);
 
   return (
-    <GlassHeroCard n={1} title={t("title")} subtitle={t("subtitle")}>
+    <GlassHeroCard phoneRole="visual" n={1} title={t("title")} subtitle={t("subtitle")}>
       <div className="flex flex-col gap-5 lg:flex-row lg:items-stretch">
         {/* Pie / donut -- a full outer ring plus a partial inner ring once the result passes 1 */}
         <div dir="ltr" className="flex shrink-0 flex-col items-center justify-center">

@@ -116,7 +116,7 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
   ];
   const colW = (W - 2 * X0) / 3;
   return (
-    <Card tool="ideal-weight-calculator" idPrefix="iw"
+    <Card phoneRole="visual" tool="ideal-weight-calculator" idPrefix="iw"
       n={1}
       side={side}
       k="sweep"

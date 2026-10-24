@@ -119,7 +119,7 @@ export default function OvulationResult({ snap, error, fill = false }: Props) {
   );
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
       bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}

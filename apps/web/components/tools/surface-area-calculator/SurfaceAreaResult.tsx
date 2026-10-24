@@ -20,7 +20,7 @@ export default function SurfaceAreaResult({ result, digitStyle, draft, hasCalcul
 
   if (!hasCalculated) {
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("emptyStateMessage")}</p>
@@ -32,14 +32,14 @@ export default function SurfaceAreaResult({ result, digitStyle, draft, hasCalcul
   if (result.error) {
     const messageKey = result.error === "missing-dimension" ? "missingDimension" : "invalidDimension";
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(messageKey)}</p>
       </SectionCard>
     );
   }
 
   return (
-    <SectionCard title={t("heading")} action={<SurfaceAreaShareExportModal result={result} digitStyle={digitStyle} draft={draft} />}>
+    <SectionCard phoneRole="output" title={t("heading")} action={<SurfaceAreaShareExportModal result={result} digitStyle={digitStyle} draft={draft} />}>
       <div className="text-center">
         <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{fmt(result.surfaceArea)}</p>
         <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("squareUnits")}</p>

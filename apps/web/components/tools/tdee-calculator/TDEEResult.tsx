@@ -164,7 +164,7 @@ export default function TDEEResult({
   );
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
       bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}

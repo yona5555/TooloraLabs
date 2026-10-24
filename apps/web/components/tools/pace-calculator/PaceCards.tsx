@@ -102,7 +102,7 @@ function Riegel({ side }: { side: Side }) {
     { key: "cost", label: t("rowFatigue"), value: sClock(T2 - even) },
   ];
   return (
-    <Card tool="pace-calculator" idPrefix="pace"
+    <Card phoneRole="visual" tool="pace-calculator" idPrefix="pace"
       n={1}
       side={side}
       k="riegel"

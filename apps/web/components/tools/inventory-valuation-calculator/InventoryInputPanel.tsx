@@ -44,7 +44,7 @@ export default function InventoryInputPanel({ currency, onCurrencyChange, items,
   }
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-6">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 

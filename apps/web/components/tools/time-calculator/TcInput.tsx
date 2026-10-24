@@ -74,7 +74,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
   );
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div>
         <span className={label}>{t("input.mode")}</span>
         <Segmented<Mode> value={s.mode} onChange={(mode) => set({ mode })} options={MODES.map((m) => ({ v: m, label: t(`modes.${m}`) }))} />

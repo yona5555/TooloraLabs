@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { Hand, Minus, Plus, RotateCcw } from "lucide-react";
-import SectionCard from "@/components/tool-ui/SectionCard";
+import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import { GlassHandle, usePrefersReducedMotion, type HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives";
 import { hasWords, subParts } from "@/components/tool-ui/MixedText";
 import { snap } from "./format";
@@ -284,8 +284,10 @@ export function IndicatorCard({
   side,
   kind,
   idPrefix = "ph",
+  phoneRole,
 }: {
   idPrefix?: string;
+  phoneRole?: PhoneRole;
   n: number;
   title: string;
   subtitle: string;
@@ -300,6 +302,7 @@ export function IndicatorCard({
   return (
     <div data-ph-visual data-ph-card={n} data-ph-kind={kind} data-card-side={side} className="leading-normal" style={{ fontFamily: "var(--glass-font)" }}>
       <SectionCard
+        phoneRole={phoneRole}
         id={`${idPrefix}-card-${n}`}
         title={<RichText text={title} />}
         action={

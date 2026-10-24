@@ -113,7 +113,7 @@ export default function ScientificUnitCircleCard({
   const chip = "rounded-full px-2.5 py-1 text-xs font-bold";
 
   return (
-    <SectionCard title={t("title")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-3">
+    <SectionCard phoneRole="visual" title={t("title")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-3">
       <div dir="ltr" className="flex flex-wrap items-center justify-center gap-1.5" data-testid="uc-chips">
         <span className={chip} style={{ background: "var(--glass-table-header-bg)", color: "var(--glass-title)" }}>{`θ = ${round4(d)}°`}</span>
         <span className={chip} style={{ background: "var(--glass-table-header-bg)", color: "var(--glass-title)" }}>{f.radiansPi ? `${f.radiansPi} rad` : `${round4(f.radians)} rad`}</span>

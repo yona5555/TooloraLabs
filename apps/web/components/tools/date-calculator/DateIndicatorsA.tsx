@@ -102,7 +102,7 @@ export function DateTimelineDragCard({ state, setState, d, f }: IndicatorProps) 
   };
 
   return (
-    <SectionCard title={t("timeline.title")}>
+    <SectionCard phoneRole="visual" title={t("timeline.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("timeline.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("worked")}

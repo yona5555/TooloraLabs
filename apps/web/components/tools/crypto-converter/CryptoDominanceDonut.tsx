@@ -38,7 +38,7 @@ export default function CryptoDominanceDonut({ stats, fromCoin, toCoin, digitSty
   const change = stats.marketCapChangePercentage24h;
 
   return (
-    <SectionCard id="dominance" title={t("title")}>
+    <SectionCard phoneRole="visual" id="dominance" title={t("title")}>
       <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{t("heading")}</h3>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
 

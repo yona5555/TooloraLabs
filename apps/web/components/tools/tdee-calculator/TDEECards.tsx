@@ -126,7 +126,7 @@ export function TDEEActivityStepsCard({ side }: { side: Side }) {
     { key: "hour", label: `${k0(tdee)} ÷ 24`, value: `${k0(tdee / 24)} kcal/h` },
   ];
   return (
-    <Card tool="tdee-calculator" idPrefix="tdee"
+    <Card phoneRole="visual" tool="tdee-calculator" idPrefix="tdee"
       n={1}
       side={side}
       k="steps"

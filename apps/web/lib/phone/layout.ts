@@ -5,9 +5,11 @@
  * parsed; PhoneLayoutScript also calls it in a layout effect for a client-side navigation, where no
  * server HTML is parsed. It runs once per page (`data-phone-layout` on the scope).
  *
- * 1. Cards: the first 3 top-level blue-header cards ([data-card], not inside another card) are marked
+ * 1. Cards: the first 3 top-level blue-header cards ([data-card], not inside another card; on phone in
+ *    screen order, which rule A's CSS order can make differ from DOM order) are marked
  *    always-open (`data-fixed`, no toggle); with 3 cards or fewer all are; cards in a dialog too.
  *    SectionCard reads the mark on hydration; a card mounted later applies the same rule itself.
+ *    On phone they are also numbered (`data-phone-open` 1-3) for the phone order in globals.css.
  * 2. Article ads (phone only): InfoSection renders a display:none phone slot before every section.
  *    The slot before the article's first section always shows (the ad between the cards and the
  *    article). Inside the article, slots are picked near 1/3 and 2/3 of its phone height, on section
@@ -23,13 +25,18 @@ export function phoneLayout(anchor: Element | null): void {
 
   // Only cards this screen renders count (e.g. the desktop-only sidebar's cards do not on phone).
   const cards = Array.prototype.filter.call(root.querySelectorAll("[data-card]"), (c: Element) => topLevel(c) && c.getClientRects().length > 0) as Element[];
+  // Rule A reorders cards on phone with CSS order, so "first" there means first on screen.
+  const phone = window.matchMedia("(max-width: 767px)").matches;
+  if (phone) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
   cards.forEach((card, i) => {
     if (card.hasAttribute("data-card-init")) return;
     card.setAttribute("data-card-init", "");
     if (cards.length <= 3 || i < 3 || card.closest('dialog,[role="dialog"]')) card.setAttribute("data-fixed", "");
   });
+  // Phone order (globals.css): the always-open cards, numbered in screen order, go first.
+  if (phone) cards.filter((c) => !c.closest('dialog,[role="dialog"]')).slice(0, 3).forEach((card, i) => card.setAttribute("data-phone-open", String(i + 1)));
 
-  if (!window.matchMedia("(max-width: 767px)").matches) return;
+  if (!phone) return;
   const slots = Array.prototype.filter.call(root.querySelectorAll("[data-article-ad]"), topLevel) as Element[];
   const sections = slots.map((slot) => slot.nextElementSibling).filter(Boolean) as Element[];
   if (!slots.length || sections.length !== slots.length) return;

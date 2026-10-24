@@ -62,7 +62,7 @@ export default function TriangleInteractivePlayground() {
   const classification = `${capitalize(tSideClass(sideClass))} · ${tAngleClass(angleClass)}`;
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="visual" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div

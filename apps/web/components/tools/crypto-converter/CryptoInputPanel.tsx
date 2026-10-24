@@ -60,7 +60,7 @@ export default function CryptoInputPanel({
   const quick = fromCoin && toCoin && fromPrice && toPrice;
 
   return (
-    <SectionCard title={t("converterTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="tool" title={t("converterTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <div className="space-y-5">
         <ToolInput
           label={t("amountLabel")}

@@ -27,7 +27,7 @@ export default function RandomNumberResult({ result, seed, f }: Props) {
   if (result.error || !live) {
     const messageKey = result.error === "invalid-range" ? "invalidRange" : result.error === "invalid-count" ? "invalidCount" : "rangeTooSmall";
     return (
-      <div data-card="" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+      <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
         </div>
@@ -50,7 +50,7 @@ export default function RandomNumberResult({ result, seed, f }: Props) {
         : "bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-300";
 
   return (
-    <div data-card="" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <style>{"@keyframes rng-pop{0%{opacity:0;transform:translateY(8px) scale(.6)}70%{transform:translateY(-2px) scale(1.08)}100%{opacity:1;transform:none}}@media (prefers-reduced-motion:reduce){.rng-chip{animation:none!important}}"}</style>
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>

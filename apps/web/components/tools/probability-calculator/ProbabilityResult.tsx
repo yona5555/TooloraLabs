@@ -35,7 +35,7 @@ export default function ProbabilityResult({ className = "" }: { className?: stri
   ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className={`flex flex-col lg:h-full ${className}`}
       bodyClassName="flex flex-1 flex-col p-4 lg:p-6"

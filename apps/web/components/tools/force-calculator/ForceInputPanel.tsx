@@ -35,7 +35,7 @@ export default function ForceInputPanel({ draft, onChange, onClear }: ForceInput
         ].filter((x) => x.key !== gSolve);
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
         <ForceModeTabs mode={mode} onModeChange={(m) => onChange("mode", m)} />

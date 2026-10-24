@@ -36,7 +36,7 @@ export default function ColorPaletteInputPanel({
   const isValidForSwatch = /^#[0-9a-fA-F]{6}$/.test(baseHex);
 
   return (
-    <SectionCard title={t("form.inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("form.inputTitle")}>
       <div className="space-y-5">
         <div>
           <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">

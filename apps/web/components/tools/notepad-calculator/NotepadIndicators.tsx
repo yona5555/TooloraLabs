@@ -68,7 +68,7 @@ export function LineValuesTrend({ a }: IndicatorProps) {
   const peak = pts.reduce((b, l) => ((l.value as number) > (b.value as number) ? l : b), pts[0]);
   const last = pts[pts.length - 1];
   return (
-    <IndicatorCard
+    <IndicatorCard phoneRole="visual"
       id="line-values"
       title={t("trend.title")}
       heading={t("trend.heading", { count: pts.length })}

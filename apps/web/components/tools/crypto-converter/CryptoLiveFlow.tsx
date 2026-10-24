@@ -117,6 +117,7 @@ export default function CryptoLiveFlow({ fromCoin, toCoin, amountText, amount, t
 
   return (
     <SectionCard
+      phoneRole="live-output"
       id="indicators"
       title={t("title")}
       action={

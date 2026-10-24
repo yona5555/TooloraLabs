@@ -207,7 +207,7 @@ export default function TipCalculator({ education }: { education: ReactNode }) {
               )}
 
               {hasCalculated && result && sensitivityPoints && (
-                <SectionCard title={t("sensitivityDiagram.title")}>
+                <SectionCard phoneRole="visual" title={t("sensitivityDiagram.title")}>
                   <TipSensitivityLineDiagram
                     points={sensitivityPoints}
                     currentTipPercent={result.tipPercent}

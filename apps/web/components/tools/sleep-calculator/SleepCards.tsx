@@ -98,7 +98,7 @@ export function SleepHypnogramCard({ side }: { side: Side }) {
   const mx = xt(tm);
   const tagRight = mx < W * 0.6;
   return (
-    <Card tool="sleep-calculator" idPrefix="sleep"
+    <Card phoneRole="visual" tool="sleep-calculator" idPrefix="sleep"
       n={1}
       side={side}
       k="hypno"

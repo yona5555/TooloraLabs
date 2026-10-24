@@ -72,7 +72,7 @@ export default function MortgageInputPanel({
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   return (
-    <SectionCard title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
       <form onSubmit={onSubmit} className="space-y-5">
         <ToolInput
           label={t("form.homePrice")}

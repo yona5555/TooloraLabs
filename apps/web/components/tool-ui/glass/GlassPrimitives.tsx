@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
-import SectionCard from "@/components/tool-ui/SectionCard";
+import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import "./glass-tokens.css";
 import { glassInter } from "./glass-font";
 
@@ -163,6 +163,7 @@ export function GlassHeroCard({
   subtitle,
   children,
   compact = false,
+  phoneRole,
 }: {
   n?: number;
   accent?: AccentKey;
@@ -173,10 +174,12 @@ export function GlassHeroCard({
    * sidebar column capped by a sibling it can't resize, §41) -- defaults to false, so every
    * existing caller's padding is unchanged. */
   compact?: boolean;
+  /** Rule A (SectionCard `phoneRole`). */
+  phoneRole?: PhoneRole;
 }) {
   return (
     <Reveal data-testid={`reveal-${n}`}>
-      <SectionCard title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName={compact ? "p-3" : "p-4 lg:p-6"}>
+      <SectionCard phoneRole={phoneRole} title={<CardTitle n={n} title={title} />} id={`card-${n}`} bodyClassName={compact ? "p-3" : "p-4 lg:p-6"}>
         <div data-hero-card={n}>
           {subtitle && (
             <p className="text-xs sm:text-sm" style={{ color: "var(--glass-subtitle)" }}>

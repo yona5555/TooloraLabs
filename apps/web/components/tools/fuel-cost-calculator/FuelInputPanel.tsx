@@ -40,7 +40,7 @@ export default function FuelInputPanel({
   const tScenarios = useTranslations("tools.fuel-cost-calculator.scenarios");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="mb-4 flex flex-wrap gap-2">
         {FUEL_SCENARIOS.map((scenario) => (
           <button

@@ -21,7 +21,7 @@ export default function GraphResult() {
   });
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className="flex h-full flex-col"
       bodyClassName="flex flex-1 flex-col p-4 lg:p-6"
