@@ -136,7 +136,7 @@ export default function MTResult({ result, view, onPick, playing, onTogglePlay }
     const messageKey =
       result.error === "invalid-number" ? "invalidNumber" : result.error === "invalid-multiplier" ? "invalidMultiplier" : result.error === "range-too-large" ? "rangeTooLarge" : "invalidRange";
     return (
-      <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+      <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         {header}
         <div className="p-4 lg:p-6">
           <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300" data-testid="mt-error">
@@ -152,7 +152,7 @@ export default function MTResult({ result, view, onPick, playing, onTogglePlay }
   const step = (d: number) => onPick(view.a, Math.min(last, Math.max(first, view.b + d)));
 
   return (
-    <div className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       {header}
       <div className="p-4 lg:p-6">
         <div className="rounded-xl bg-gradient-to-br from-blue-50 to-emerald-50 p-4 text-center dark:from-blue-500/10 dark:to-emerald-500/10">

@@ -155,6 +155,35 @@ Default for all tools, desktop unchanged; built into the shared components (neve
   group in their order, one DOM copy (display:contents + CSS order), sans font; ONE continuous paper is
   redrawn around the article parts with uniform spacing. Desktop unchanged.
 - Phone order: 3 open cards, docs row, ad 1 (if balanced), all collapsed cards, ad 2, the article paper.
+- Phone polish rules 1–7 (Yousef, 2026-10-24; full spec in the doc above):
+  1) section nav pinned directly under the site header from page open (one fixed element, active follows scroll);
+  2) two top mini cards (88px) mirror the first two 2D kit indicators, same Drawing in compact mode, lazy, phone only;
+     markets/live-ticker tools keep their live cards;
+  3) one continuous column header→footer (dark / light key surface), 10px of blueprint grid on both sides;
+  4) every warning/disclaimer callout (`data-phone-disclaimer`, notices section) ends the article, inside the paper;
+  5) a table too wide for its card at 360px reflows into stacked rows (CSS on the same `<table>`), no sideways
+     scroll; short tokens nowrap, long text wraps between words only;
+  6) calculator mode tab bar: one row, icon + short label (icons only if needed), 44px, active filled;
+  7) LOCKED card order (rule 7 replaced, Yousef 2026-10-24): see "APPROVED — LOCKED: phone card order" below.
+
+## APPROVED — LOCKED: phone card order, every tool below 768px (Yousef, 2026-10-24)
+Permanent; applies to every current and future tool. Full spec: `docs/claude/approved-visuals-and-indicators.md`.
+- Card 1 = INPUT (inputs, selects, sliders, keypad). Card 2 = OUTPUT: the result card holding any result
+  action (Share / Export, Copy, Print, Download, Save), always second, always open. Card 3 = the main VISUAL.
+- Input and output in one card: it is card 1, the visual card 2, the next most useful card 3.
+- CHANGED 2026-10-24 (Yousef): only the PRIMARY output card (the one with Share / Export, or the main
+  result) is always open, in place 2 (`phoneRole="output"`). SECONDARY output cards (long tables or
+  schedules with a Download / Copy button, e.g. mortgage's two payment schedules) go to the collapsible
+  group like other cards, with their buttons inside them (`phoneRole="output-secondary"`).
+- At most 3 open cards on every tool. An input card with a copy button counts as the merged card 1.
+- The primary output card is NEVER collapsed and NEVER after ad 1.
+- Roles are set at server render: SectionCard `phoneRole` = "input" | "output" | "output-secondary" |
+  "visual" | "visual-collapsed" (raw cards:
+  `data-phone-role`); globals.css orders them (input, output, visual, docs row, ad 1, collapsed group). No
+  client reordering. Every result button renders through `ResultActionButton` / `ShareExportButton` /
+  CopyButton / PrintButton / DownloadButton / PdfDownloadButton / CopyLinkButton (`data-result-action`).
+- Guard in CI: `tests/phone-card-order.mjs` (390px, every tool). Exception kept: crypto-converter,
+  forex-converter, commodities-tracker.
 
 ## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
 Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:
@@ -165,4 +194,4 @@ Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414
 
 **Do not change the approved phone home page unless Yousef explicitly asks for that exact change.**
 Locked by `npm run test:home-phone` (CI job `home-phone-lock`, macOS runner) against `tests/baselines/home-phone.json`: rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change.
-Pending (already requested 2026-10-23, needs his decisions first): the button-style tab conversion from §9 (inactive tabs still have no fill or border).
+Approved change (Yousef, 2026-10-24): the calculator tab bar below 768px is ONE row of five button-style tabs (border + fill on every state, active light blue, 44px tall, equal widths, no scroll, no scrollbar), each an icon over a short label (`homeCalculator.modesShort`), icons only with aria-label and title in any locale whose short label does not fit; the mode menu button is desktop only. Baseline re-approved with `npm run baseline:home-phone -- --approve` after this change.

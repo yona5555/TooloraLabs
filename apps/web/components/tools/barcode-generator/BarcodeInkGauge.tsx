@@ -63,6 +63,7 @@ export default function BarcodeInkGauge() {
     <BarcodeIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={0}
       indicator={svg}
       rows={[
         { label: t("dark"), value: f(a.darkModules) },

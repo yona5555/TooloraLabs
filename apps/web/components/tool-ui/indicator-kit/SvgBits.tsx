@@ -1,8 +1,9 @@
 "use client";
-import { useRef, type ReactNode } from "react";
+import { useContext, useRef, type ReactNode } from "react";
 import type { HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives";
 import { SvgChem, SvgHandle, useMeasuredSize, useSvgDrag, type Stepper } from "./CardKit";
 import { niceCeil } from "./format";
+import { MiniContext } from "./miniContext";
 
 /**
  * Small SVG building blocks shared by the 2D indicator cards: a token-coloured label, collision-free
@@ -68,6 +69,14 @@ export function Drawing({
   testId: string;
   children: ReactNode;
 }) {
+  // Phone top mini card (rule 2): the same drawing, scaled into the chip, without handle or refs.
+  if (useContext(MiniContext)) {
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet" className="absolute inset-0 block" aria-hidden="true">
+        {children}
+      </svg>
+    );
+  }
   return (
     <div ref={boxRef} data-preview="visual" className="relative w-full flex-1" style={{ minHeight: hMin }}>
       <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>

@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
 import AutoFitText from "@/components/tool-ui/AutoFitText";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import FuelFlowDiagram from "./FuelFlowDiagram";
 import FuelPriceSensitivityDiagram from "./FuelPriceSensitivityDiagram";
 import FuelShareExportModal from "./FuelShareExportModal";
@@ -78,11 +79,9 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
             full-width flow boxes and the table would compete for the same ~450px and both
             get crushed (confirmed visually before this fix). Stacking keeps both legible. */}
         <div className="mt-5 flex flex-col gap-4">
-          <FuelFlowDiagram
-            distanceLabel={fmt(distance, 0)}
-            fuelLabel={fmt(result.fuelUsed)}
-            costLabel={heroValue}
-          />
+          <PhoneMini slot={1} title={t("heading")}>
+            <FuelFlowDiagram distanceLabel={fmt(distance, 0)} fuelLabel={fmt(result.fuelUsed)} costLabel={heroValue} />
+          </PhoneMini>
           <FuelWorkedExampleNote
             title={tw("title")}
             rows={[
@@ -96,6 +95,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
 
         {pricePerUnit > 0 && (
           <div className="mt-5 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+            <PhoneMini slot={0} title={ts("caption")}>
             <FuelPriceSensitivityDiagram
               lowPoint={sensitivityPoints[0]}
               currentPoint={sensitivityPoints[2]}
@@ -107,6 +107,7 @@ export default function FuelResult({ result, distance, pricePerUnit, digitStyle,
               currency={currency}
               digitStyle={digitStyle}
             />
+            </PhoneMini>
             <FuelWorkedExampleNote
               title={tw("title")}
               rows={[

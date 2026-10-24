@@ -60,7 +60,7 @@ export default function CompoundInterestInputPanel({
   const t = useTranslations("tools.compound-interest-calculator");
 
   return (
-    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="input" title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 

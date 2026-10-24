@@ -36,7 +36,6 @@ const SCENARIOS: Record<string, number> = {
   bleach: 12.6,
 };
 
-const EMPTY_RESULT: PhCalculatorOutput = { error: null, pH: 0, pOH: 0, hConcentration: 0, ohConcentration: 0, classification: "neutral" };
 
 function computeResult(operation: PhOperation, i: Inputs): PhCalculatorOutput {
   const output = tool.execute(
@@ -144,9 +143,11 @@ export default function PhCalculator({ education }: { education: ReactNode }) {
     setPH(DEFAULTS.pH);
     setOhConcentration(DEFAULTS.ohConcentration);
     setPOH(DEFAULTS.pOH);
+    setOperation("fromPH");
     setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    // Instant result: Clear restores every input and the mode to the defaults and shows their result at once.
+    setResult(computeResult("fromPH", DEFAULTS));
+    setHasCalculated(true);
   }
 
   const navItems = [

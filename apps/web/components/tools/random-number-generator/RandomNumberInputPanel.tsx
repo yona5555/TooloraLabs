@@ -33,7 +33,7 @@ export default function RandomNumberInputPanel(p: Props) {
   const t = useTranslations("tools.random-number-generator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-3">
           <ToolInput label={t("minLabel")} type="text" inputMode="decimal" value={p.min} onChange={(e) => p.onMinChange(e.target.value)} data-testid="rng-min" />

@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import DiscountPriceBar from "./DiscountPriceBar";
 import DiscountShareExportModal from "./DiscountShareExportModal";
@@ -26,7 +27,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
 
   if (!hasCalculated) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.emptyStateMessage")}</p>
@@ -37,7 +38,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
 
   if (errorMessage || !result) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </p>
@@ -74,7 +75,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
   ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       action={<DiscountShareExportModal modeLabel={modeLabel} inputRows={inputRows} resultRows={resultRows} heroLabel={result.mode === "apply" ? t("result.finalPrice") : t("result.originalPrice")} heroValue={result.mode === "apply" ? money(result.finalPrice) : money(result.originalPrice)} sentence={sentence} />}
     >
@@ -97,6 +98,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
       </div>
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
         <RatioGauge
           wide
           value={result.effectiveDiscountPercent}
@@ -113,6 +115,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
           ticks={[0, 10, 25, 50, GAUGE_DOMAIN_MAX]}
           tickFormatter={(tick) => `${tick}%`}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">

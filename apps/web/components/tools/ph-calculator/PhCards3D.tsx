@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useId } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
@@ -17,6 +17,7 @@ const DROPLET_TOTAL = 60;
 
 // ── 3. Everyday substances shelf ──────────────────────────────────────────────────────
 function Shelf2D({ index }: { index: number }) {
+  const svgId = useId();
   const [box, { w: W, h: H }] = useMeasuredSize<HTMLDivElement>({ w: 520, h: 220 });
   const X0 = 22;
   const X1 = W - 22;
@@ -26,13 +27,13 @@ function Shelf2D({ index }: { index: number }) {
     <div ref={box} className="relative w-full flex-1">
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`pH ${SHELF[index].pH}`}>
         <defs>
-          <linearGradient id="ph-shelf-bar" x1="0" x2="1" y1="0" y2="0">
+          <linearGradient id={`${svgId}ph-shelf-bar`} x1="0" x2="1" y1="0" y2="0">
             {Array.from({ length: 15 }, (_, i) => (
               <stop key={i} offset={`${(i / 14) * 100}%`} style={{ stopColor: `var(--ph-ui-${i})` }} />
             ))}
           </linearGradient>
         </defs>
-        <rect x={X0 - 8} y={barY} width={X1 - X0 + 16} height={14} rx={7} fill="url(#ph-shelf-bar)" style={{ stroke: "var(--ph-line)" }} />
+        <rect x={X0 - 8} y={barY} width={X1 - X0 + 16} height={14} rx={7} fill={`url(#${svgId}ph-shelf-bar)`} style={{ stroke: "var(--ph-line)" }} />
         {SHELF.map((s, i) => {
           const up = i % 2 === 0;
           const sel = i === index;

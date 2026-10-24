@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
 import { GRADE_BANDS, GRADE_MAX, gradeBand } from "./rsScales";
@@ -64,7 +65,7 @@ export default function RsGradeLadder() {
     <RsIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={indicator}
+      indicator={<PhoneMini slot={1} title={t("title")}>{indicator}</PhoneMini>}
       rows={[
         { label: `0.39 × ${tr("averageWordsPerSentence")}`, value: f(0.39 * asl, 2), note: `0.39 × ${f(asl, 2)}` },
         { label: `11.8 × ${tr("averageSyllablesPerWord")}`, value: f(11.8 * asw, 2), note: `11.8 × ${f(asw, 3)}` },

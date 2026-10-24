@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useTranslations } from "next-intl";
 import { Check, Copy, Home, Link2, Plus, RotateCcw, X } from "lucide-react";
 import { civilToUtcMs, formatIsoDate, gregorianToHijri, hijriToGregorian, parseCivilDate, zonedParts } from "@tooloralabs/tools";
@@ -110,7 +111,7 @@ export default function WorldTimeInput({ s, set, d, f, now, onCopy, onShare, onR
   const status = d.conv.status;
 
   return (
-    <SectionCard title={t("title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="output" title={t("title")} bodyClassName="p-4 space-y-4">
       <div>
         <span className={label}>{t("presets")}</span>
         <div className="flex flex-wrap gap-1.5">
@@ -249,10 +250,10 @@ export default function WorldTimeInput({ s, set, d, f, now, onCopy, onShare, onR
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <button type="button" onClick={onCopy} className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">
+        <ResultActionButton action="copy" type="button" onClick={onCopy} className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">
           {copied === "result" ? <Check size={15} /> : <Copy size={15} />}
           {copied === "result" ? t("copied") : t("copy")}
-        </button>
+        </ResultActionButton>
         <button type="button" onClick={onShare} className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-blue-600 px-3 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-50 dark:text-blue-300 dark:hover:bg-blue-500/10">
           {copied === "link" ? <Check size={15} /> : <Link2 size={15} />}
           {copied === "link" ? t("linkCopied") : t("share")}

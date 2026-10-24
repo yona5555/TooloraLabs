@@ -30,7 +30,7 @@ export default function GcfLcmInputPanel({ draft, onChange }: Props) {
   }
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <p className="mb-3 text-xs text-zinc-500 dark:text-zinc-400">{t("hint")}</p>
       <div className="space-y-3">
         {draft.numbers.map((value, index) => (

@@ -57,6 +57,7 @@ export default function KinAccelerationZones() {
 
   return (
     <KinIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

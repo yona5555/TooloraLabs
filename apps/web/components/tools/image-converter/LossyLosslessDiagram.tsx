@@ -1,3 +1,4 @@
+import { useId } from "react";
 type LossyLosslessDiagramProps = {
   losslessLabel: string;
   lossyLabel: string;
@@ -24,7 +25,9 @@ function Row({
   noteLabel,
   compressedOpacity,
   resultOpacity,
+  arrowId,
 }: {
+  arrowId: string;
   y: number;
   rowLabel: string;
   originalLabel: string;
@@ -54,7 +57,7 @@ function Row({
         stroke="currentColor"
         strokeWidth={1.5}
         opacity={0.5}
-        markerEnd="url(#arrow)"
+        markerEnd={`url(#${arrowId})`}
       />
 
       <rect x={xs[1]} y={boxY} width={BOX_W} height={BOX_H} rx={6} fill="currentColor" opacity={compressedOpacity} stroke="currentColor" strokeWidth={1} />
@@ -67,7 +70,7 @@ function Row({
         stroke="currentColor"
         strokeWidth={1.5}
         opacity={0.5}
-        markerEnd="url(#arrow)"
+        markerEnd={`url(#${arrowId})`}
       />
 
       <rect x={xs[2]} y={boxY} width={BOX_W} height={BOX_H} rx={6} fill="currentColor" opacity={resultOpacity} stroke="currentColor" strokeWidth={1} />
@@ -92,16 +95,17 @@ export default function LossyLosslessDiagram({
   approximateLabel,
   caption,
 }: LossyLosslessDiagramProps) {
+  const svgId = useId();
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 420 }}>
+        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[420px] text-current max-md:min-w-0">
           <defs>
-            <marker id="arrow" markerWidth={8} markerHeight={8} refX={6} refY={3} orient="auto">
+            <marker id={`${svgId}arrow`} markerWidth={8} markerHeight={8} refX={6} refY={3} orient="auto">
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" opacity={0.6} />
             </marker>
           </defs>
-          <Row
+          <Row arrowId={`${svgId}arrow`}
             y={14}
             rowLabel={losslessLabel}
             originalLabel={originalLabel}
@@ -111,7 +115,7 @@ export default function LossyLosslessDiagram({
             compressedOpacity={0.15}
             resultOpacity={0.15}
           />
-          <Row
+          <Row arrowId={`${svgId}arrow`}
             y={14 + ROW_H}
             rowLabel={lossyLabel}
             originalLabel={originalLabel}

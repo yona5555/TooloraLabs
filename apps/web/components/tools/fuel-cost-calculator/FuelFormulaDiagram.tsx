@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import { convertAmount } from "@/lib/currency";
@@ -43,6 +44,7 @@ const RESULT_STEPS = ["text-lg", "text-base", "text-sm"];
  * apart in its own dedicated zone.
  */
 export default function FuelFormulaDiagram() {
+  const svgId = useId();
   const t = useTranslations("tools.fuel-cost-calculator.formulaDiagram");
   const td = useTranslations("tools.fuel-cost-calculator.diagram");
   const tw = useTranslations("tools.fuel-cost-calculator.workedExample");
@@ -68,14 +70,14 @@ export default function FuelFormulaDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { price: money(PRICE) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0 overflow-x-auto">
-          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[340px] text-current">
+          <svg width={WIDTH} height={HEIGHT} viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={t("title")} className="mx-auto block min-w-[340px] text-current max-md:h-auto max-md:w-full max-md:min-w-0">
             <defs>
-              <linearGradient id="fuelFormulaRibbon" x1="0" y1="0" x2="1" y2="0">
+              <linearGradient id={`${svgId}fuelFormulaRibbon`} x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="currentColor" className="text-blue-400 dark:text-blue-500" stopOpacity={0.85} />
                 <stop offset="100%" stopColor="currentColor" className="text-emerald-500 dark:text-emerald-400" stopOpacity={0.95} />
               </linearGradient>
             </defs>
-            <path d={ribbonPath} fill="url(#fuelFormulaRibbon)" />
+            <path d={ribbonPath} fill={`url(#${svgId}fuelFormulaRibbon)`} />
 
             {stops.map((stop) => (
               <foreignObject key={stop.label} x={stop.zoneStart + 2} y={RIBBON_TOP - 2} width={STOP_ZONE_W - 4} height={RIBBON_BOTTOM - RIBBON_TOP + 4}>

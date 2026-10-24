@@ -5,6 +5,7 @@ import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
 import { useIsDarkMode } from "@/lib/use-dark-mode";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, computeAreaFor, round } from "./areaEducationMath";
@@ -27,6 +28,7 @@ export default function AreaVsScaleFactorCurve() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
+          <PhoneMini slot={1} title={t("title")}>
           <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
             <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseArea * 4.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
               <Coordinates.Cartesian xAxis={{ lines: 0.25, labels: (x) => `${x}×` }} yAxis={{ lines: Math.max(1, Math.round((baseArea * 4) / 5)) }} />
@@ -37,6 +39,7 @@ export default function AreaVsScaleFactorCurve() {
               </Text>
             </Mafs>
           </div>
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

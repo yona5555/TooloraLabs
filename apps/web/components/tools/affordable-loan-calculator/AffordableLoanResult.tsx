@@ -3,6 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import AffordableLoanBreakdownDonut from "./AffordableLoanBreakdownDonut";
 import AffordableLoanShareExportModal from "./AffordableLoanShareExportModal";
 import type { AffordableLoanResult as MaxLoanResult, LoanResult as RequiredPaymentResult } from "@tooloralabs/tools";
@@ -118,6 +119,7 @@ export default function AffordableLoanResult({
       </div>
 
       <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
         {mode === "maxLoan" ? (
           <AffordableLoanBreakdownDonut
             centerValue={money(maxLoanResult.totalPayment)}
@@ -137,6 +139,7 @@ export default function AffordableLoanResult({
             ]}
           />
         )}
+        </PhoneMini>
       </div>
     </SectionCard>
   );

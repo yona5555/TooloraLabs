@@ -50,12 +50,13 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Served tool-card previews (approved hash, contain, not cropped)
+      - name: Served tool-card previews + LOCKED phone card order and zero duplicate ids (every tool at 390px)
         working-directory: apps/web
         run: |
           npx next start -p 3001 > /tmp/next.log 2>&1 &
           for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3001/en/tools && break; sleep 2; done
           npm run test:cards
+          node ../../tests/phone-card-order.mjs --ids http://localhost:3001 en
 
   # The approved phone home page is locked (.claude/rules/visuals.md, "APPROVED — LOCKED").
   # Its baseline is measured on macOS (Arial), so this job runs on a macOS runner for the same fonts.

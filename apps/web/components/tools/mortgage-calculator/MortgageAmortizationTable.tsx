@@ -98,7 +98,7 @@ export default function MortgageAmortizationTable({ result, digitStyle }: Mortga
   const remainingYears = yearGroups.length - 1;
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output-secondary"
       id="amortization"
       title={t("amortizationTable.title")}
       action={

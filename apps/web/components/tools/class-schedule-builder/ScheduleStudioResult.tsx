@@ -6,6 +6,7 @@ import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/compone
 import { downloadTextFile } from "@/lib/export";
 import { classColor, fmt, hm, toMinutes, type Derived, type StudioState } from "./studio";
 import { useSchedT, useUnits, WeekGrid } from "./ScheduleShared";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 
 type Props = { state: StudioState; onChange: (next: StudioState) => void; d: Derived; timeZone: string | null };
 
@@ -105,7 +106,7 @@ export default function ScheduleStudioResult({ state, onChange, d, timeZone }: P
   ];
 
   return (
-    <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div
         role="status"
         className={`flex items-start gap-2 rounded-lg p-2.5 text-sm ${
@@ -151,7 +152,7 @@ export default function ScheduleStudioResult({ state, onChange, d, timeZone }: P
         ))}
       </div>
 
-      <button
+      <ResultActionButton action="download"
         type="button"
         onClick={ics.download}
         disabled={!d.classes.length || state.termEnd < state.termStart}
@@ -159,7 +160,7 @@ export default function ScheduleStudioResult({ state, onChange, d, timeZone }: P
       >
         <CalendarPlus size={16} />
         {t("result.downloadIcs")}
-      </button>
+      </ResultActionButton>
       <p className="mt-1 text-center text-[11px] text-zinc-500 dark:text-zinc-400">{t("result.icsNote")}</p>
 
       <div className="mt-3 lg:flex lg:flex-1 lg:flex-col">

@@ -25,7 +25,7 @@ export default async function SGEducation() {
         <p>{t("intro.paragraph1")}</p>
         <SGRulesCard side="visual-left" />
         <SGArticleCard side="table-left" />
-        <p className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
+        <p data-phone-disclaimer="" className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
           {t("intro.limitation")}
         </p>
         <SGDensityCard side="visual-left" />

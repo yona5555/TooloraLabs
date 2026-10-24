@@ -13,7 +13,7 @@ export default function StandardDeviationInputPanel({ rawData, onRawDataChange, 
   const t = useTranslations("tools.standard-deviation-calculator.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("inputLabel")}</span>
         <textarea

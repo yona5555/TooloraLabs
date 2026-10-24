@@ -20,7 +20,7 @@ Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414
 
 **Do not change the approved phone home page unless Yousef explicitly asks for that exact change.**
 Locked by `npm run test:home-phone` (CI job `home-phone-lock`, macOS runner) against `tests/baselines/home-phone.json`: rects (±1px), font sizes, texts and element order of the header, calculator frame, categories list and footer at 360/390px in ar/en. The baseline is rewritten only with `npm run baseline:home-phone -- --approve`, after Yousef approves the exact change.
-Pending (already requested 2026-10-23, needs his decisions first): the button-style tab conversion from §9 (inactive tabs still have no fill or border).
+Approved change (Yousef, 2026-10-24): the calculator tab bar below 768px is ONE row of five button-style tabs (border + fill on every state, active light blue, 44px tall, equal widths, no scroll, no scrollbar), each an icon over a short label (`homeCalculator.modesShort`), icons only with aria-label and title in any locale whose short label does not fit; the mode menu button is desktop only. Baseline re-approved with `npm run baseline:home-phone -- --approve` after this change.
 
 ## APPROVED EXCEPTION — crypto-converter phone order (Yousef, 2026-10-23)
 On phone (below 768px) `/{locale}/tools/crypto-converter` breaks the phone standard's "input first" rule, by request:
@@ -88,5 +88,77 @@ InfoSection, AdSpace, ToolPageLayout) — never wire it per tool.
 - **Phone order (every tool):** 1) the 3 always-open cards (rule A); 2) the docs row; 3) ad 1 (only if the
   balance rule allows); 4) all collapsed cards; 5) ad 2; 6) one continuous article paper with its 1/3 and
   2/3 ads.
+- **Phone polish (Yousef, 2026-10-24), rules 1–7:**
+  1. **Section nav at the top:** SectionNav (`[data-section-nav]`) is `position: fixed` directly under the
+     site header (73px) from page open, above the back button and title, on every tool; the page reserves
+     its 57px. One element, never inert on phone, the active group follows the scroll. No mid-page position.
+  2. **Two top mini cards:** ToolPageLayout renders two 88px slots under the title (`[data-phone-mini-slot]`).
+     The page's first two 2D kit indicators whose visual is the shared `Drawing` (`[data-ph-mini-ok]`) are
+     mirrored there by `PhoneMiniMirror` (React.lazy, mounted only when `(max-width: 767px)` matches): the
+     card's own visual element in compact mode (`MiniContext`: SVG only, no handle, no refs), so it is live
+     with the card's state; tap scrolls to the card. Never 3D, nothing generated. Hidden where no such
+     indicator exists, on the markets tools and where live ticker cards (`PhoneMiniCards`) already show.
+     Every other tool CHOOSES its two: `PhoneMini` (`indicator-kit/PhoneMini.tsx`; or the `mini={0|1}` prop on
+     the markets/kit `IndicatorCard` and the tools' own card shells) wraps one of the tool's own 2D indicators
+     (no 3D; formula card + main result value only when no 2D indicator fits). A hidden marker before the
+     visual (no wrapper box, desktop unchanged); on phone a lazy copy of the same element is scaled into the
+     slot, inert and aria-hidden, tap scrolls to the original. A chosen page skips the automatic mirror.
+     A visual that holds a parent-created ref (drag, hover, measure) is first extracted so each copy owns its
+     ref. Per-tool choices: `scripts/output/top-cards-map.txt` (all 98 tools).
+  3. **One continuous column:** tool page `<main>` is one surface from the header to the footer (dark:
+     zinc-950, light: `--bp-key`), 10px margins so the blueprint grid shows on both sides, 8px inner
+     padding; the pinned nav is aligned to it.
+  4. **Disclaimers last:** every warning/disclaimer callout (`data-phone-disclaimer`: the `notices`
+     InfoSection, the intro disclaimer boxes, the tools' own disclaimer callouts) moves by CSS order (15)
+     to the end of the article, inside the one paper (`lib/phone/layout.ts` counts it as a part); no ad
+     slot is picked before it. Callouts inside a card stay in the card.
+  5. **Tables:** FitNumbers marks a table whose min-content width does not fit its card at 360px
+     (`data-stack`): each row is a block titled by its first cell, other cells "header: value" lines
+     (`data-label`), start-aligned; header row kept for screen readers, ARIA roles set; no horizontal
+     scroll in the page or the table (the scroll + fade remain for tablets 768–1023px only). Simple
+     tables that fit stay tables. Short tokens nowrap, long text wraps between words only.
+  6. **Calculator tab bar** (Standard / Scientific / Graph / Programmer / Converter): one row, no scroll,
+     icon + short label (icons only with aria-label/title when a locale does not fit at 360px), 44px,
+     active filled. Pending: the bar exists only on the locked phone home page.
+  7. **Output cards always open:** a top-level card holding a Copy or Share/Export action
+     (`button` with the lucide copy / share-2 / file-down icon, or `[data-phone-output-action]`) is an
+     output card (`data-phone-output`, set in `lib/phone/layout.ts` and SectionCard) and always one of the
+     3 open cards (outputs first, then the first cards on screen, kept in screen order). The markets tools
+     (`data-phone-markets`) keep their approved order.
 - **Known:** crypto-converter keeps the approved live-flow-first order, so its amount input is below the
   first screen at 390×844 (pending decision since the pilot).
+
+## APPROVED — LOCKED: phone card order (Yousef, 2026-10-24)
+
+Permanent rule for every tool below 768px (desktop unchanged). It replaces phone polish rule 7.
+
+- **Card 1 = INPUT:** where the visitor types numbers or chooses operations (inputs, selects, sliders, keypad).
+- **Card 2 = OUTPUT:** the PRIMARY result card (the one with Share / Export, or the main result).
+  Always second, always open (`phoneRole="output"`).
+- **Card 3 = VISUAL:** the main drawing or chart.
+- Input and output in one card (e.g. age, date, time, world-time, countdown, GPA, scientific calculator):
+  it is card 1 (`phoneRole="output"`), the visual is card 2, the next most useful card is card 3. An input
+  card with a copy button counts as this merged card 1 (approved 2026-10-24).
+- **CHANGED 2026-10-24 (Yousef): secondary outputs collapse.** SECONDARY output cards (long tables or
+  schedules with a Download / Copy button: mortgage's monthly and bi-weekly schedules, loan's
+  amortization schedule, citation's bibliography) go to the collapsible group like other cards, with
+  their buttons inside them (`phoneRole="output-secondary"`, DOM order after ad 1). The page's visual
+  then takes card 3 (`phoneRole="visual"`); `visual-collapsed` stays available for a visual that must
+  lead the collapsible group.
+- **At most 3 open cards on every tool.**
+- The primary output card can NEVER be collapsed or placed after ad 1.
+- Exception kept: crypto-converter, forex-converter and commodities-tracker (their approved live order).
+
+**How it is built.** Every result button renders through a shared component that carries
+`data-result-action="share|copy|print|download|export|save"`: `ShareExportButton` (the trigger of every
+`*ShareExportModal`), `ResultActionButton` (any other result button), CopyButton, CopyLinkButton,
+PrintButton, DownloadButton, PdfDownloadButton. Roles are known at server render: SectionCard
+`phoneRole` = "input" | "output" | "output-secondary" | "visual" | "visual-collapsed" (hand-built cards:
+`data-card data-phone-role`), set on each
+tool's cards. globals.css orders them: input, output, visual, docs row, ad 1, collapsible group;
+`lib/phone/layout.ts` only marks the role cards always-open (no measuring, no reordering, no layout
+shift); a page with fewer than 3 role cards fills up with its first other cards in DOM order.
+**Guard:** `tests/phone-card-order.mjs` (CI, 390px, every tool): at most 3 open cards; every card with
+`[data-result-action]` has `phoneRole="output"` (open, above ad 1) or `"output-secondary"` (collapsible
+group); the primary output card (Share / Export) is open card 2, or 1 when merged with the input; with
+`--ids` zero duplicate ids. A new tool that breaks this fails CI.

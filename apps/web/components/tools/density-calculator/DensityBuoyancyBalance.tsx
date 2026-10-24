@@ -63,6 +63,7 @@ export default function DensityBuoyancyBalance() {
     <DensityIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={1}
       indicator={svg}
       rows={[
         { label: "W = m g₀", value: `${f(a.massKg)} × ${STANDARD_GRAVITY} = ${f(weight, 3)} N` },

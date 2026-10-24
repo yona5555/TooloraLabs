@@ -99,7 +99,8 @@ export default function VolumeCalculator({ education }: { education: ReactNode }
 
   function handleClear() {
     setDraft(DEFAULT_DRAFT);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setResult(computeVolume(DEFAULT_DRAFT));
   }
 
   const navItems = [

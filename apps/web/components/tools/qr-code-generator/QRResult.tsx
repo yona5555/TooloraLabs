@@ -1,5 +1,6 @@
 "use client";
 import { useMemo } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useTranslations } from "next-intl";
 import { Download } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -79,14 +80,14 @@ export default function QRResult({ svg, payload, error, logoDataUrl, logoMode }:
         </div>
 
         {renderedSvg && (
-          <button
+          <ResultActionButton action="download"
             type="button"
             onClick={() => download(renderedSvg)}
             className="flex items-center gap-2 rounded-lg border border-zinc-300 px-4 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
           >
             <Download size={16} />
             {t("form.download")}
-          </button>
+          </ResultActionButton>
         )}
       </div>
 

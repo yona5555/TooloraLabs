@@ -6,6 +6,7 @@ import type { BreakEvenOutput } from "@tooloralabs/tools";
 import type { CurrencyCode } from "@/lib/currency";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import BreakEvenChart from "./BreakEvenChart";
 import BreakEvenCostStructureBar from "./BreakEvenCostStructureBar";
 import BreakEvenShareExportModal from "./BreakEvenShareExportModal";
@@ -44,7 +45,7 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
 
   if (!hasCalculated) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.emptyStateMessage")}</p>
@@ -55,7 +56,7 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
 
   if (errorMessage || !result) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">{errorMessage}</p>
       </SectionCard>
     );
@@ -88,7 +89,7 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
         ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       action={<BreakEvenShareExportModal mode={mode} inputRows={inputRows} resultRows={resultRows} heroLabel={heroLabel} heroValue={heroValue} sentence={sentence} />}
     >
@@ -119,6 +120,7 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
       </div>
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <PhoneMini slot={0} title={t("result.contributionMarginRatio")}>
         <RatioGauge
           wide
           value={result.contributionMarginRatio}
@@ -135,10 +137,12 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
           ticks={[0, 20, 40, 60, GAUGE_DOMAIN_MAX]}
           tickFormatter={(tick) => `${tick}%`}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
         <p className="mb-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("costStructureDiagram.title")}</p>
+        <PhoneMini slot={1} title={t("costStructureDiagram.title")}>
         <BreakEvenCostStructureBar
           fixedCosts={fixedCosts}
           variableCosts={result.breakEvenUnits * variableCostPerUnit}
@@ -148,6 +152,7 @@ export default function BreakEvenResult({ mode, hasCalculated, result, errorMess
           variableFormatted={money(result.breakEvenUnits * variableCostPerUnit)}
           caption={t("costStructureDiagram.caption")}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-2">

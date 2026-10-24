@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
@@ -13,6 +14,7 @@ const MAX_BARS = 60;
 
 /** Labeled Bar Chart (§31 #1), interactive: one bar per sentence (height = words, colour = its own Reading Ease band); click to select it in the text. */
 export default function RsSentenceMap() {
+  const svgId = useId();
   const t = useTranslations("tools.readability-score-calculator.live.sentences");
   const tr = useTranslations("tools.readability-score-calculator.result");
   const { sentences, text, f, activeSentence, selectSentence } = useRsLive();
@@ -30,7 +32,7 @@ export default function RsSentenceMap() {
     <div className="w-full sm:w-[340px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <defs>
-          <pattern id="rs-fragment" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <pattern id={`${svgId}rs-fragment`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <rect width="5" height="5" className="fill-zinc-200 dark:fill-zinc-700" />
             <line x1="0" y1="0" x2="0" y2="5" strokeWidth="2" className="stroke-zinc-400 dark:stroke-zinc-500" />
           </pattern>
@@ -38,7 +40,7 @@ export default function RsSentenceMap() {
         {shown.map((s, i) => {
           const x = PAD_X + i * slot + (slot - barW) / 2;
           const isFocus = focus?.index === s.index;
-          const fill = s.terminated ? easeBand(s.ease).color : "url(#rs-fragment)";
+          const fill = s.terminated ? easeBand(s.ease).color : `url(#${svgId}rs-fragment)`;
           return (
             <g key={s.index} className="cursor-pointer" onClick={() => selectSentence(s.index)}>
               <rect x={PAD_X + i * slot} y={TOP} width={slot} height={BASE - TOP} fill="transparent" />

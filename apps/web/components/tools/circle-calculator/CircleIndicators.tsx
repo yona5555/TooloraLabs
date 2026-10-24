@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type CSSProperties, useId } from "react";
 import { useTranslations } from "next-intl";
 import {
   CIRCLE_EQUAL_C_A_RADIUS,
@@ -52,10 +52,16 @@ export function CircleSolveSteps() {
         rows: steps.map((s, i) => ({ label: `${i + 1}. ${tf(s.field)}`, value: i === 0 ? f(s.value) : `${s.formula} = ${f(s.value)}`, emphasize: i === steps.length - 1 })),
       }}
     >
-      <div className="flex items-end gap-2">
+      {/* A rising staircase of four columns; on phone the columns are too narrow for the longest field name
+          (fr "Circonférence"), so the staircase turns sideways: four rows of growing width. */}
+      <div className="flex items-end gap-2 max-md:flex-col max-md:items-start">
         {steps.map((s, i) => (
-          <div key={s.field} className={`flex min-w-0 flex-1 flex-col justify-end rounded-xl border-2 p-2 ${colors[i]}`} style={{ height: 88 + i * 34 }}>
-            <span className="text-[11px] font-semibold hyphens-auto text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
+          <div
+            key={s.field}
+            className={`flex h-(--step-h) min-w-0 flex-1 flex-col justify-end rounded-xl border-2 p-2 max-md:h-auto max-md:w-(--step-w) max-md:flex-none ${colors[i]}`}
+            style={{ "--step-h": `${88 + i * 34}px`, "--step-w": `${55 + i * 15}%` } as CSSProperties}
+          >
+            <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
             <span dir="ltr" className="truncate font-mono text-[10px] text-zinc-500 dark:text-zinc-400">{s.formula}</span>
             <span dir="ltr" className="truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{f(s.value)}</span>
           </div>
@@ -209,6 +215,7 @@ export function CircleAreaBars() {
   return (
     <IndicatorCard
       id="area-bars"
+      mini={0}
       title={t("bars.title")}
       heading={t("bars.heading")}
       intro={t("bars.intro")}
@@ -432,6 +439,7 @@ export function CircleIsoperimetric() {
 
 /* §31 type 8 — gradient gauge: how close Archimedes' inscribed n-gon gets to the true rim. */
 export function CirclePolygonGauge() {
+  const svgId = useId();
   const t = useInd();
   const tf = useFields();
   const { r, fmt } = useCircleRadius();
@@ -451,6 +459,7 @@ export function CirclePolygonGauge() {
   return (
     <IndicatorCard
       id="polygon-gauge"
+      mini={1}
       title={t("gauge.title")}
       heading={t("gauge.heading", { n: p.sides })}
       intro={t("gauge.intro")}
@@ -475,13 +484,13 @@ export function CirclePolygonGauge() {
       <div dir="ltr" className="flex justify-center">
         <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("gauge.heading", { n: p.sides })}>
           <defs>
-            <linearGradient id="circle-gauge-grad" x1="0" x2="1" y1="0" y2="0">
+            <linearGradient id={`${svgId}circle-gauge-grad`} x1="0" x2="1" y1="0" y2="0">
               <stop offset="0%" stopColor="#ef4444" />
               <stop offset="50%" stopColor="#f59e0b" />
               <stop offset="100%" stopColor="#10b981" />
             </linearGradient>
           </defs>
-          <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`} fill="none" stroke="url(#circle-gauge-grad)" strokeWidth={16} strokeLinecap="round" />
+          <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`} fill="none" stroke={`url(#${svgId}circle-gauge-grad)`} strokeWidth={16} strokeLinecap="round" />
           {[80, 85, 90, 95, 100].map((v) => {
             const a = Math.PI * (1 - (v - MIN) / (100 - MIN));
             return (

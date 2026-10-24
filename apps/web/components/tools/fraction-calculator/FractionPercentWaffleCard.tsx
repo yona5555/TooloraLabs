@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { GlassIndicatorCard, GlassHandle, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue, formatPercent } from "@tooloralabs/tools";
@@ -43,6 +44,7 @@ export default function FractionPercentWaffleCard() {
       title={t("title")}
       subtitle={t("subtitle", { pct: formatPercent(pct) })}
       visual={
+        <PhoneMini slot={1} title={t("title")}>
         <div className="relative flex w-full flex-col items-center gap-2">
           <div className="relative w-full max-w-[180px]">
             <svg
@@ -83,6 +85,7 @@ export default function FractionPercentWaffleCard() {
             />
           </div>
         </div>
+        </PhoneMini>
       }
       table={
         <GlassTable

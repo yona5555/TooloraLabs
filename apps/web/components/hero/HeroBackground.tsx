@@ -1,13 +1,15 @@
+import { useId } from "react";
 export default function HeroBackground() {
+  const svgId = useId();
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       <svg className="absolute inset-0 h-full w-full">
         <defs>
-          <pattern id="hero-dots" width="32" height="32" patternUnits="userSpaceOnUse">
+          <pattern id={`${svgId}hero-dots`} width="32" height="32" patternUnits="userSpaceOnUse">
             <circle cx="2" cy="2" r="1.5" className="fill-zinc-300/40 dark:fill-zinc-700/40" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#hero-dots)" />
+        <rect width="100%" height="100%" fill={`url(#${svgId}hero-dots)`} />
       </svg>
 
       <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl dark:bg-blue-500/10" />

@@ -62,6 +62,7 @@ export default function FsGapBars() {
   const k = a.decimalLevel || 1;
   return (
     <FsIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

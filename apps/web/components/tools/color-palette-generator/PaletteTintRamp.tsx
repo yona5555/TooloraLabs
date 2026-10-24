@@ -65,6 +65,7 @@ export default function PaletteTintRamp() {
     <PaletteIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={0}
       indicator={svg}
       rows={[
         { label: t("baseL"), value: `${f(baseL, 1)}%` },

@@ -73,7 +73,7 @@ export default function WxResult({ d, f, status }: Props) {
   ];
 
   return (
-    <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div className="mb-2 flex items-center justify-between gap-2">
         <div className="min-w-0">
           <p className="truncate text-lg font-bold text-zinc-900 dark:text-zinc-50">{d.place.name}</p>

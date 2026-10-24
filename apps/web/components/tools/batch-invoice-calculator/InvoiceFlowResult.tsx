@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { FileSpreadsheet, FileText, Printer } from "lucide-react";
 import { invoiceTotals, type BatchInvoice, type BatchOverview } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -118,10 +119,10 @@ export default function InvoiceFlowResult({ invoice, overview, f, onPrint, onCsv
       </div>
 
       <div className="mt-3 flex gap-2 print:hidden">
-        <button type="button" className={btn} onClick={onPrint} data-testid="export-print">
+        <ResultActionButton action="print" type="button" className={btn} onClick={onPrint} data-testid="export-print">
           <Printer size={14} />
           {t("print")}
-        </button>
+        </ResultActionButton>
         <button type="button" className={btn} onClick={onCsv} disabled={!overview.invoiceCount} data-testid="export-csv">
           <FileText size={14} />
           CSV

@@ -2,10 +2,11 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { g3, sciText } from "../molarity-calculator/molMath";
 import { uniFormula } from "../chemical-equation-balancer/chemMath";
 import { ACIDS, AVOGADRO, M, rd } from "./stoichMath";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 /**
  * The five 2D stoichiometry indicator cards. Each drawing is laid out in real pixels at the measured
@@ -254,16 +255,7 @@ export function StoNeutralCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(10, { min: 1, max: 20, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
-  const HMIN = 240;
-  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
-  const H = Math.max(HMIN, hBox);
   const n = s.value / M.NaOH;
-  const items = ACIDS.map((a) => ({ ...a, g: n * a.perBase * a.mm })).sort((p, q) => q.g - p.g);
-  const LX = 92;
-  const X1 = W - 70;
-  const gMax = (20 / M.NaOH) * Math.max(...ACIDS.map((a) => a.perBase * a.mm));
-  const xg = (g: number) => LX + (g / gMax) * (X1 - LX);
-  const rowY = (i: number) => 24 + i * ((H - 48) / (items.length - 1));
   const valueText = `${s.value} g NaOH`;
   const rows: KitRow[] = [
     { key: "naoh", label: t("rowNaOH"), value: `${g3(s.value)} g` },
@@ -287,29 +279,48 @@ export function StoNeutralCard({ side }: { side: Side }) {
       }
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
       visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            {items.map((it, i) => {
-              const y = rowY(i);
-              const on = hover === it.formula;
-              return (
-                <g key={it.formula} onPointerEnter={() => setHover(it.formula)} onPointerLeave={() => setHover(null)}>
-                  <text x={LX - 12} y={y + 4} fontSize={12} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
-                    <SvgChem text={uniFormula(it.formula)} />
-                  </text>
-                  <line x1={LX} y1={y} x2={X1} y2={y} style={{ stroke: "var(--ph-grid)" }} strokeWidth={2} strokeLinecap="round" />
-                  <line x1={LX} y1={y} x2={xg(it.g)} y2={y} style={{ stroke: "var(--chem-reactant)" }} strokeWidth={on ? 5 : 3.5} strokeLinecap="round" />
-                  <circle cx={xg(it.g)} cy={y} r={on ? 10 : 8} style={{ fill: "var(--chem-reactant)", ...lit(on) }} />
-                  <text x={xg(it.g) + 14} y={y + 4} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
-                    {`${g3(it.g)} g`}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-        </div>
+        <PhoneMini slot={1} title={t("title")}>
+          <StoNeutralVisual value={s.value} hover={hover} setHover={setHover} />
+        </PhoneMini>
       }
     />
+  );
+}
+/** Card 5's drawing, which measures its own box: the phone mini card copy then never takes over the original's box. */
+function StoNeutralVisual({ value, hover, setHover }: { value: number; hover: string | null; setHover: (k: string | null) => void }) {
+  const HMIN = 240;
+  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
+  const H = Math.max(HMIN, hBox);
+  const n = value / M.NaOH;
+  const items = ACIDS.map((a) => ({ ...a, g: n * a.perBase * a.mm })).sort((p, q) => q.g - p.g);
+  const LX = 92;
+  const X1 = W - 70;
+  const gMax = (20 / M.NaOH) * Math.max(...ACIDS.map((a) => a.perBase * a.mm));
+  const xg = (g: number) => LX + (g / gMax) * (X1 - LX);
+  const rowY = (i: number) => 24 + i * ((H - 48) / (items.length - 1));
+  const valueText = `${value} g NaOH`;
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+        {items.map((it, i) => {
+          const y = rowY(i);
+          const on = hover === it.formula;
+          return (
+            <g key={it.formula} onPointerEnter={() => setHover(it.formula)} onPointerLeave={() => setHover(null)}>
+              <text x={LX - 12} y={y + 4} fontSize={12} fontWeight={800} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+                <SvgChem text={uniFormula(it.formula)} />
+              </text>
+              <line x1={LX} y1={y} x2={X1} y2={y} style={{ stroke: "var(--ph-grid)" }} strokeWidth={2} strokeLinecap="round" />
+              <line x1={LX} y1={y} x2={xg(it.g)} y2={y} style={{ stroke: "var(--chem-reactant)" }} strokeWidth={on ? 5 : 3.5} strokeLinecap="round" />
+              <circle cx={xg(it.g)} cy={y} r={on ? 10 : 8} style={{ fill: "var(--chem-reactant)", ...lit(on) }} />
+              <text x={xg(it.g) + 14} y={y + 4} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+                {`${g3(it.g)} g`}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 }
 const M_HCL = () => ACIDS.find((a) => a.formula === "HCl")!.mm;
@@ -323,6 +334,38 @@ export function StoDialCard({ side }: { side: Side }) {
   const step = 0.1 * M.H2O;
   const s = useStepper(2 * M.H2O, { min: step, max: DIAL_MAX * M.H2O, step });
   const [hover, setHover] = useState<string | null>(null);
+  const n = s.value / M.H2O;
+  const valueText = `${g3(s.value)} g H₂O`;
+  const rows: KitRow[] = [
+    { key: "g", label: t("rowGrams"), value: `${g3(s.value)} g` },
+    { key: "mm", label: t("rowMolarMass"), value: `${g3(M.H2O)} g/mol` },
+    { key: "n", label: "n = m / M", value: `${g3(n)} mol`, isKey: true },
+    { key: "molecules", label: t("rowMolecules"), value: sciText(n * AVOGADRO) },
+    { key: "ml", label: t("rowMl"), value: `≈ ${g3(s.value)} mL` },
+  ];
+  return (
+    <IndicatorCard
+      idPrefix="sto"
+      n={7}
+      side={side}
+      kind="2d"
+      title={t("title")}
+      subtitle={t("subtitle")}
+      caption={t("caption", { g: ltr(g3(s.value)), n: ltr(g3(n)) })}
+      controls={<KitControls s={s} valueText={valueText} testId="sto-c7" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      visual={
+        <PhoneMini slot={0} title={t("title")}>
+          <StoDialVisual s={s} setHover={setHover} />
+        </PhoneMini>
+      }
+    />
+  );
+}
+
+/** Card 7's drawing, which owns its box and drag target: the phone mini card copy then never takes over the original's. */
+function StoDialVisual({ s, setHover }: { s: Stepper; setHover: (k: string | null) => void }) {
+  const t = useTranslations("tools.stoichiometry-calculator.visuals.dial");
   const HMIN = 250;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
   const H = Math.max(HMIN, hBox);
@@ -345,52 +388,32 @@ export function StoDialCard({ side }: { side: Side }) {
     return `M ${x0} ${y0} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
   };
   const valueText = `${g3(s.value)} g H₂O`;
-  const rows: KitRow[] = [
-    { key: "g", label: t("rowGrams"), value: `${g3(s.value)} g` },
-    { key: "mm", label: t("rowMolarMass"), value: `${g3(M.H2O)} g/mol` },
-    { key: "n", label: "n = m / M", value: `${g3(n)} mol`, isKey: true },
-    { key: "molecules", label: t("rowMolecules"), value: sciText(n * AVOGADRO) },
-    { key: "ml", label: t("rowMl"), value: `≈ ${g3(s.value)} mL` },
-  ];
   return (
-    <IndicatorCard
-      idPrefix="sto"
-      n={7}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={t("caption", { g: ltr(g3(s.value)), n: ltr(g3(n)) })}
-      controls={<KitControls s={s} valueText={valueText} testId="sto-c7" />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            <path d={arc(0, DIAL_MAX, R)} fill="none" style={{ stroke: "var(--glass-track)" }} strokeWidth={16} strokeLinecap="round" />
-            <path d={arc(0, Math.max(0.001, n), R)} fill="none" style={{ stroke: "var(--chem-product)" }} strokeWidth={16} strokeLinecap="round" />
-            {[0, 1, 2, 3, 4, 5].map((v) => {
-              const [tx, ty] = pt(v, R - 30);
-              const [gx, gy] = pt(v, R + 22);
-              return (
-                <g key={v}>
-                  <text x={tx} y={ty + 4} fontSize={11} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-                    {`${v}`}
-                  </text>
-                  <text x={gx} y={gy + 4} fontSize={10} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
-                    {`${Math.round(v * M.H2O)} g`}
-                  </text>
-                </g>
-              );
-            })}
-            <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" onPointerEnter={() => setHover("n")} onPointerLeave={() => setHover(null)} />
-            <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
-            <text x={cx} y={cy + 26} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-              {`${g3(n)} mol`}
-            </text>
-          </svg>
-          <SvgHandle x={hx} y={hy} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="sto-c7-handle" />
-        </div>
-      }
-    />
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+        <path d={arc(0, DIAL_MAX, R)} fill="none" style={{ stroke: "var(--glass-track)" }} strokeWidth={16} strokeLinecap="round" />
+        <path d={arc(0, Math.max(0.001, n), R)} fill="none" style={{ stroke: "var(--chem-product)" }} strokeWidth={16} strokeLinecap="round" />
+        {[0, 1, 2, 3, 4, 5].map((v) => {
+          const [tx, ty] = pt(v, R - 30);
+          const [gx, gy] = pt(v, R + 22);
+          return (
+            <g key={v}>
+              <text x={tx} y={ty + 4} fontSize={11} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                {`${v}`}
+              </text>
+              <text x={gx} y={gy + 4} fontSize={10} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                {`${Math.round(v * M.H2O)} g`}
+              </text>
+            </g>
+          );
+        })}
+        <line x1={cx} y1={cy} x2={nx} y2={ny} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" onPointerEnter={() => setHover("n")} onPointerLeave={() => setHover(null)} />
+        <circle cx={cx} cy={cy} r={7} style={{ fill: "var(--ph-ink)" }} />
+        <text x={cx} y={cy + 26} fontSize={15} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+          {`${g3(n)} mol`}
+        </text>
+      </svg>
+      <SvgHandle x={hx} y={hy} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="sto-c7-handle" />
+    </div>
   );
 }

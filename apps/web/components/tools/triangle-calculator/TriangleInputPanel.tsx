@@ -32,7 +32,7 @@ export default function TriangleInputPanel({ mode, onModeChange, field1, field2,
   const [label1, label2, label3] = FIELD_LABEL_KEYS[mode];
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="mb-4">
         <TriangleModeTabs mode={mode} onModeChange={onModeChange} />
       </div>

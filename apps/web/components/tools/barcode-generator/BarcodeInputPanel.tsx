@@ -37,7 +37,7 @@ export default function BarcodeInputPanel({
   const logoInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="flex flex-wrap gap-2">
         {SYMBOLOGIES.map((s) => (
           <button

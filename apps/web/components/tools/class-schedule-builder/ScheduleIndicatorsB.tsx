@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Minus, Plus } from "lucide-react";
 import { DAY_CODES, termOccurrences, weeklyScheduleStats } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { classColor, fmt, hm } from "./studio";
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
 import type { SchedIndicatorProps } from "./ScheduleIndicatorsA";
@@ -259,6 +260,7 @@ export function ScheduleStreakCard({ d }: SchedIndicatorProps) {
 
 /* 8 · Weekly workload gauge: contact hours + study time (h per credit) + commute (gradient gauge) */
 export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
+  const svgId = useId();
   const t = useSchedT();
   const u = useUnits();
   const [ratio, setRatio] = useState(2);
@@ -285,17 +287,18 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[260px]">
+            <PhoneMini slot={0} title={t("ind.workload.title")}>
             <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.workload.title")}>
               <defs>
-                <linearGradient id="csb-workload" x1="0" x2="1" y1="0" y2="0">
+                <linearGradient id={`${svgId}csb-workload`} x1="0" x2="1" y1="0" y2="0">
                   <stop offset="0%" stopColor="#0ea5e9" />
                   <stop offset="50%" stopColor="#10b981" />
                   <stop offset="75%" stopColor="#f59e0b" />
                   <stop offset="100%" stopColor="#ef4444" />
                 </linearGradient>
               </defs>
-              <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} stroke="url(#csb-workload)" strokeOpacity={0.25} strokeWidth={18} fill="none" />
-              {f > 0 && <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${ex} ${ey}`} stroke="url(#csb-workload)" strokeWidth={18} fill="none" strokeLinecap="round" />}
+              <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} stroke={`url(#${svgId}csb-workload)`} strokeOpacity={0.25} strokeWidth={18} fill="none" />
+              {f > 0 && <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${ex} ${ey}`} stroke={`url(#${svgId}csb-workload)`} strokeWidth={18} fill="none" strokeLinecap="round" />}
               {[0, 30, 45, 55, 70].map((v) => {
                 const [tx, ty] = pt(v / MAX, R + 18);
                 return (
@@ -315,6 +318,7 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
                 {t(`ind.workload.zone.${zone}`)}
               </text>
             </svg>
+            </PhoneMini>
             <div className="mt-1 flex items-center justify-center gap-1 text-xs">
               <span className="font-semibold text-zinc-600 dark:text-zinc-300">{t("ind.workload.ratio")}</span>
               {[1, 2, 3].map((r) => (

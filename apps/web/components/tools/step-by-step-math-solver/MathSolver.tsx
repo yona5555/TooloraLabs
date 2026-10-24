@@ -76,7 +76,8 @@ export default function MathSolver({ education }: { education: ReactNode }) {
 
   function handleClear() {
     setDraft(DEFAULT_DRAFT);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setResult(computeResult(DEFAULT_DRAFT));
   }
 
   const navItems = [

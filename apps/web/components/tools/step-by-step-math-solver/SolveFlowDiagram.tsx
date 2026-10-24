@@ -5,6 +5,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, fmt } from "./mathSolverEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import { STATION_LI, STATION_LINE_HIDE, STATION_MARK_ROW, STATION_NAME, STATION_OL, STATION_VALUE } from "@/components/tool-ui/StationTimeline";
 
 /** Decision-flow diagram: the real 4-station pipeline the hero and every other indicator share —
  * clicking a station is the ONE control that drives dims.selectedStep, so this is the indicator
@@ -43,13 +44,13 @@ export default function SolveFlowDiagram() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full overflow-x-auto lg:flex-1">
-          <ol className="flex min-w-[460px] items-start justify-between gap-2">
+          <ol className={`${STATION_OL} min-w-[460px]`}>
             {stations.map((s, i) => {
               const active = i === step;
               return (
-                <li key={s.key} className="flex flex-1 flex-col items-center text-center">
-                  <div className="flex w-full items-center">
-                    <div className={`h-px flex-1 ${i === 0 ? "opacity-0" : active || i <= step ? "bg-blue-400 dark:bg-blue-500/60" : "bg-zinc-200 dark:bg-zinc-700"}`} />
+                <li key={s.key} className={STATION_LI}>
+                  <div className={STATION_MARK_ROW}>
+                    <div className={`h-px flex-1 ${STATION_LINE_HIDE} ${i === 0 ? "opacity-0" : active || i <= step ? "bg-blue-400 dark:bg-blue-500/60" : "bg-zinc-200 dark:bg-zinc-700"}`} />
                     <button
                       type="button"
                       onClick={() => setDim("selectedStep", i)}
@@ -59,10 +60,10 @@ export default function SolveFlowDiagram() {
                     >
                       {i + 1}
                     </button>
-                    <div className={`h-px flex-1 ${i === stations.length - 1 ? "opacity-0" : i < step ? "bg-blue-400 dark:bg-blue-500/60" : "bg-zinc-200 dark:bg-zinc-700"}`} />
+                    <div className={`h-px flex-1 ${STATION_LINE_HIDE} ${i === stations.length - 1 ? "opacity-0" : i < step ? "bg-blue-400 dark:bg-blue-500/60" : "bg-zinc-200 dark:bg-zinc-700"}`} />
                   </div>
-                  <p className={`mt-2 text-xs font-semibold ${active ? "text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>{t(`stations.${s.key}`)}</p>
-                  <p dir="ltr" className="mt-1 max-w-[110px] truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400" title={s.value}>
+                  <p className={`${STATION_NAME} text-xs font-semibold ${active ? "text-blue-700 dark:text-blue-300" : "text-zinc-600 dark:text-zinc-300"}`}>{t(`stations.${s.key}`)}</p>
+                  <p dir="ltr" className={`${STATION_VALUE} max-w-[110px] truncate font-mono text-[11px] text-zinc-500 dark:text-zinc-400 max-md:max-w-full`} title={s.value}>
                     {s.value}
                   </p>
                 </li>

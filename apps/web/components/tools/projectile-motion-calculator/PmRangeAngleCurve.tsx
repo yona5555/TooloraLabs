@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { projectileRange, rangeAngleCurve } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { r2, usePmModel } from "./PmLiveContext";
@@ -68,7 +69,7 @@ export default function PmRangeAngleCurve() {
     <PmIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={0} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("current"), value: `R(${f(a.angle, 1)}°) = ${f(a.range)} m` },
         { label: t("optimal"), value: `θ* = ${f(a.optimalAngle, 2)}°` },

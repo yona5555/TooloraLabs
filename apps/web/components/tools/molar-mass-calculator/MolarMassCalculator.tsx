@@ -30,7 +30,6 @@ const SCENARIOS: Record<string, string> = {
   sulfuricAcid: "H2SO4",
 };
 
-const EMPTY_RESULT: MolarMassCalculatorOutput = { error: null, errorDetail: null, totalMass: 0, breakdown: [] };
 
 function computeResult(formula: string): MolarMassCalculatorOutput {
   return tool.execute({ formula }, { locale: "en-US" }).data;
@@ -108,8 +107,8 @@ export default function MolarMassCalculator({ education }: { education: ReactNod
   function handleClear() {
     setFormula(DEFAULT_FORMULA);
     setDigitStyle(resolveDigitStyle(DEFAULT_FORMULA));
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setResult(computeResult(DEFAULT_FORMULA));
   }
 
   const navItems = [

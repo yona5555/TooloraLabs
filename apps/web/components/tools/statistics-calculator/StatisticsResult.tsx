@@ -4,6 +4,7 @@ import CopyButton from "@/components/tool-ui/CopyButton";
 import StatisticsLive3D from "./StatisticsLive3D";
 import StatisticsShareExportModal from "./StatisticsShareExportModal";
 import type { StatisticsResult as Result } from "./types";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 type Props = {
   result: Result;
@@ -23,7 +24,7 @@ export default function StatisticsResult({ result, digitStyle }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div data-card="" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+      <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
         <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
           <h2 className="font-bold text-white">{t("heading")}</h2>
           <div className="flex items-center gap-2">
@@ -52,9 +53,11 @@ export default function StatisticsResult({ result, digitStyle }: Props) {
         </div>
 
         <div className="p-4 lg:p-6">
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {fmt(result.mean)}
-          </p>
+          <PhoneMini slot={1} title={t("mean")}>
+            <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
+              {fmt(result.mean)}
+            </p>
+          </PhoneMini>
           <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("meanCaption", { count: result.count })}</p>
 
           <div className="mt-4">
@@ -68,7 +71,7 @@ export default function StatisticsResult({ result, digitStyle }: Props) {
 
 function ErrorCard({ heading, message }: { heading: string; message: string }) {
   return (
-    <div data-card="" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{heading}</h2>
       </div>

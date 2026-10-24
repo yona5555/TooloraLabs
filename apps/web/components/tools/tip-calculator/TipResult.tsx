@@ -8,6 +8,7 @@ import RatioGauge from "@/components/tool-ui/RatioGauge";
 import TipBreakdownDonut from "./TipBreakdownDonut";
 import TipShareExportModal from "./TipShareExportModal";
 import type { TipResult as Result } from "./types";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 type Props = {
   result: Result | null;
@@ -88,14 +89,16 @@ export default function TipResult({ result, hasCalculated, errorMessage, digitSt
       )}
 
       <div className="mt-5">
-        <TipBreakdownDonut
-          centerValue={money(result.totalAmount)}
-          centerLabel={t("result.totalAmount")}
-          segments={[
-            { key: "bill", value: result.billAmount, label: t("result.billAmount"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
-            { key: "tip", value: result.tipAmount, label: t("result.tipAmount"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
-          ]}
-        />
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
+          <TipBreakdownDonut
+            centerValue={money(result.totalAmount)}
+            centerLabel={t("result.totalAmount")}
+            segments={[
+              { key: "bill", value: result.billAmount, label: t("result.billAmount"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+              { key: "tip", value: result.tipAmount, label: t("result.tipAmount"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
+            ]}
+          />
+        </PhoneMini>
       </div>
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">

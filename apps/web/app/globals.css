@@ -382,10 +382,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   }
   /*
    * Tables: columns size to their content (no fixed min-width: with words unbreakable the columns can
-   * no longer be squeezed letter by letter) and header cells never wrap. A table still wider than its
-   * box scrolls inside itself, never the page (lib/phone/layout.ts marks it [data-scroll-x] when it
-   * has no scrolling container of its own), with a fade at the inline end as the hint; the trailing
-   * padding lets the last column scroll clear of the fade.
+   * no longer be squeezed letter by letter) and header cells never wrap. On phone a table too wide for
+   * its card reflows into stacked rows (rule 5, below). Tablets (768–1023px): a table still wider than
+   * its box scrolls inside itself, never the page (FitNumbers marks it [data-scroll-x] when it has no
+   * scrolling container of its own), with a fade at the inline end as the hint.
    */
   main[data-phone-cards] table {
     table-layout: auto;
@@ -554,8 +554,53 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     display: block;
   }
   /*
-   * Phone order (rules A and B): the 3 always-open cards first, in logical order (1 tool, 2 output,
-   * 3 main visual; crypto's `live-output` above its tool), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
+   * Rule 1: the section nav (SectionNav, one element wherever the tool renders it) is pinned directly
+   * under the site header (h-18 + its 1px border) from page open, above the back button and title; the
+   * page's top padding reserves its height (py-1.5 + h-11 + 1px border = 57px). No mid-page position.
+   */
+  [data-phone-cards] [data-section-nav] {
+    position: fixed;
+    inset-inline: 0;
+    top: 73px;
+    margin: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  main[data-phone-cards]:has([data-section-nav]) {
+    padding-top: calc(57px + 1rem);
+  }
+  /* Rule 2: the top mini row shows only where a mirrorable 2D indicator (kit Drawing or a chosen
+     PhoneMini) exists; the markets tools and
+     the live-ticker tools keep their own live cards (PhoneMiniCards) instead. */
+  main[data-phone-cards]:is(:not(:has([data-ph-mini-ok], [data-ph-mini-src])), [data-phone-markets], :has([data-phone-ticker])) [data-phone-mini] {
+    display: none;
+  }
+  /*
+   * Rule 3: one continuous column from the header to the footer holds the whole tool page (the pinned
+   * nav included), with the blueprint grid showing 10px on both sides; dark surface in dark mode, the
+   * light key surface in light mode. No gaps between sections: the column is the page's only box.
+   */
+  main[data-phone-cards] {
+    --phone-column: var(--bp-key);
+    margin-inline: 10px;
+    padding-inline: 8px;
+    padding-bottom: 1.5rem;
+    background-color: var(--phone-column);
+    border-inline: 1px solid var(--bp-frame);
+  }
+  .dark main[data-phone-cards] {
+    --phone-column: var(--color-zinc-950);
+    border-color: rgb(59 130 246 / 0.3);
+  }
+  [data-phone-cards] [data-section-nav] {
+    inset-inline: 10px;
+    background-color: var(--phone-column);
+    backdrop-filter: none;
+  }
+  /*
+   * Phone order (LOCKED, visuals.md): the always-open cards first, in logical order (1 input, 2 output =
+   * the card with the result actions, 3 main visual; crypto's `live-output` above its input), set at
+   * server render by SectionCard `phoneRole` (no client reordering), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
    * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper
    * between it and an always-open card, a role card or the docs row stops boxing (display:
    * contents), so CSS order can place them. lib/phone/layout.ts numbers the 3 always-open cards
@@ -580,7 +625,7 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-phone-flow] [data-phone-role="live-output"] {
     order: -55;
   }
-  [data-phone-flow] [data-phone-role="tool"] {
+  [data-phone-flow] [data-phone-role="input"] {
     order: -50;
   }
   [data-phone-flow] [data-phone-role="output"] {
@@ -591,6 +636,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   }
   [data-phone-flow] :is([data-phone-docs], [data-phone-docs] + [data-ad-slot]) {
     order: -10;
+  }
+  /* A page with two output cards: its main visual leads the collapsed group, right after ad 1. */
+  [data-phone-flow] [data-phone-role="visual-collapsed"] {
+    order: -5;
   }
   /* Ad balance: lib/phone/layout.ts drops ad 1 when the collapsed cards between it and ad 2 are shorter than one ad. */
   [data-phone-flow] [data-ad-slot][data-phone-hide] {
@@ -637,6 +686,76 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-phone-flow] [data-phone-article] [data-card] {
     margin-block: 0;
     font-family: var(--font-sans);
+  }
+  /*
+   * Rule 4: every warning/disclaimer callout ([data-phone-disclaimer]: the "notices" InfoSection and the
+   * tools' own disclaimer boxes) ends the article, inside the paper (lib/phone/layout.ts counts it as a
+   * paper part), one DOM copy: its wrappers stop boxing and it takes order 15 (article parts 10, what
+   * follows the article 20). Callouts inside a card stay in their card.
+   */
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-disclaimer]):not([data-phone-disclaimer]) {
+    display: contents;
+  }
+  [data-phone-flow] :is([data-phone-disclaimer], [data-phone-disclaimer][data-info-section] *):not([data-card] *) {
+    order: 15;
+  }
+  [data-phone-flow] [data-phone-disclaimer]:not([data-info-section], [data-card] *) {
+    margin: 0 1rem;
+  }
+  /*
+   * Rule 5: a table too wide for its card at 360px (FitNumbers marks it [data-stack]) reflows into
+   * stacked rows, nothing scrolls sideways: each row is one block titled by its first cell, every other
+   * cell a "column header: value" line at the start side (label from [data-label]). The header row
+   * stays for screen readers only; the markup stays a <table> (roles set alongside).
+   */
+  main table[data-stack] {
+    position: relative;
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+  main table[data-stack] :is(thead, tbody, tfoot, caption) {
+    display: block;
+  }
+  main table[data-stack] :is(thead, tr[data-stack-head]) {
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  main table[data-stack] tr {
+    display: block;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--bp-divider, rgb(63 63 70 / 0.6));
+  }
+  main table[data-stack] tr:last-child {
+    border-bottom: 0;
+  }
+  main table[data-stack] tr > :is(td, th) {
+    display: block;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0.125rem 0.5rem !important;
+    border: 0 !important;
+    text-align: start !important;
+    white-space: normal;
+  }
+  main table[data-stack] tr > :first-child {
+    font-weight: 700;
+  }
+  main table[data-stack] tr > [data-label]::before {
+    /* inline-block: the value may start a new line after the label (a nowrap label + nowrap value
+       on one line could not break between them) */
+    content: attr(data-label) ":";
+    display: inline-block;
+    margin-inline-end: 0.35em;
+    font-weight: 600;
+    opacity: 0.75;
   }
   [data-phone-cards][data-phone-paper-height] [data-phone-flow] {
     position: relative;

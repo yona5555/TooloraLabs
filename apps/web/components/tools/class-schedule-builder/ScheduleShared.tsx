@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { DayCode } from "@tooloralabs/tools";
 import { classColor, fmt, hm, type Derived, type StudioState } from "./studio";
@@ -66,6 +67,7 @@ function lanes(meetings: { id: string; startMinutes: number; endMinutes: number 
 
 /** Live 2D weekly grid: every class block, overlaps hatched red, too-short gaps marked amber. Click a block to edit it. */
 export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioState; d: Derived; onPick?: (id: string) => void; compact?: boolean }) {
+  const svgId = useId();
   const t = useSchedT();
   const days = useDayOrder(d.shownDays);
   const [h0, h1] = hourWindow(d);
@@ -81,7 +83,7 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
   return (
     <svg width="100%" height="100%" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("result.gridAria")} style={{ direction: "ltr" }} className="mx-auto block max-h-[340px]">
       <defs>
-        <pattern id="csb-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <pattern id={`${svgId}csb-hatch`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <rect width="5" height="5" fill="#ef4444" fillOpacity="0.25" />
           <line x1="0" y1="0" x2="0" y2="5" stroke="#dc2626" strokeWidth="2.2" />
         </pattern>
@@ -147,7 +149,7 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
             {d.overlaps
               .filter((o) => o.day === day)
               .map((o, i) => (
-                <rect key={`o${i}`} x={x0 + 2} y={y(o.startMinutes)} width={cw - 4} height={Math.max(2, y(o.endMinutes) - y(o.startMinutes))} fill="url(#csb-hatch)" stroke="#dc2626" strokeWidth={1} rx={2} pointerEvents="none" />
+                <rect key={`o${i}`} x={x0 + 2} y={y(o.startMinutes)} width={cw - 4} height={Math.max(2, y(o.endMinutes) - y(o.startMinutes))} fill={`url(#${svgId}csb-hatch)`} stroke="#dc2626" strokeWidth={1} rx={2} pointerEvents="none" />
               ))}
             {d.tight
               .filter((o) => o.day === day)

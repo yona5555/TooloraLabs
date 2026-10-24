@@ -6,6 +6,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useVolumeLive } from "./VolumeLiveContext";
 import { parseVolumeDims, characteristicLength, volumeAtLength, ALL_SHAPES, round } from "./volumeEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 /** Type #1 (Labeled Bar Chart): every solid's volume at the SAME live characteristic length, ranked visually — a sphere encloses far more volume than a cone or pyramid at an identical "size". */
 export default function ShapeVolumeComparisonBarChart() {
@@ -31,7 +32,9 @@ export default function ShapeVolumeComparisonBarChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <EduBarChart bars={bars} ariaLabel={t("title")} />
+          <PhoneMini slot={0} title={t("title")}>
+            <EduBarChart bars={bars} ariaLabel={t("title")} />
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

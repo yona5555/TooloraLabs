@@ -1,22 +1,24 @@
 "use client";
+import { useId } from "react";
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { derivativeAt, differenceQuotient, tangentAt, type GraphKeyPointKind } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { useGraphLive } from "./GraphLiveContext";
 import { fmtNum } from "./types";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
 /** One indicator card (§32): blue header, intro line, the indicator with its WORKED EXAMPLE table beside it. */
-function IndicatorCard({ ns, indicator, rows }: { ns: string; indicator: ReactNode; rows: Row[] }) {
+function IndicatorCard({ ns, indicator, rows, mini }: { ns: string; indicator: ReactNode; rows: Row[]; mini?: 0 | 1 }) {
   const t = useTranslations(`tools.graphing-calculator.viz.${ns}`);
   const tv = useTranslations("tools.graphing-calculator.viz");
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <IndicatorWithTable className="mt-4" workedExampleTitle={tv("workedExample")} indicator={indicator} rows={rows} />
+      <IndicatorWithTable className="mt-4" workedExampleTitle={tv("workedExample")} indicator={mini === undefined ? indicator : <PhoneMini slot={mini} title={t("title")}>{indicator}</PhoneMini>} rows={rows} />
     </SectionCard>
   );
 }
@@ -99,6 +101,7 @@ export function GraphKeyPointsTimeline() {
   return (
     <IndicatorCard
       ns="timeline"
+      mini={0}
       indicator={
         <div dir="ltr">
           <svg width={W} height={170} viewBox={`0 0 ${W} 170`} style={svgStyle} role="img" aria-label={t("title")}>
@@ -291,6 +294,7 @@ export function GraphSensitivityTrio() {
 /* ------------------------------------------------------------------ */
 /** Type #8 (Gradient Gauge): the tangent's inclination at the traced point, from −90° (vertical drop) to +90° (vertical climb). */
 export function GraphSlopeGauge() {
+  const svgId = useId();
   const t = useTranslations("tools.graphing-calculator.viz.gauge");
   const { f, traceX } = useGraphLive();
   const tan = tangentAt(f, traceX);
@@ -310,13 +314,13 @@ export function GraphSlopeGauge() {
         <div dir="ltr">
           <svg width={280} height={180} viewBox="0 0 280 180" style={svgStyle} role="img" aria-label={t("title")}>
             <defs>
-              <linearGradient id="graph-slope-gauge" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}graph-slope-gauge`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" stopColor="#e11d48" />
                 <stop offset="50%" stopColor="#a1a1aa" />
                 <stop offset="100%" stopColor="#10b981" />
               </linearGradient>
             </defs>
-            <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke="url(#graph-slope-gauge)" strokeWidth={18} strokeLinecap="round" />
+            <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke={`url(#${svgId}graph-slope-gauge)`} strokeWidth={18} strokeLinecap="round" />
             {[-90, -45, 0, 45, 90].map((deg) => {
               const [tx, ty] = toXY(deg, r + 18);
               return (
@@ -356,6 +360,7 @@ export function GraphShapeDonut() {
   return (
     <IndicatorCard
       ns="donut"
+      mini={1}
       indicator={
         <div dir="ltr" className="flex items-center gap-4">
           <svg width={168} height={168} viewBox="0 0 168 168" role="img" aria-label={t("title")}>

@@ -114,7 +114,7 @@ export default function WorldTimeResult({ s, d, f }: Props) {
   });
 
   return (
-    <SectionCard title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div className="mb-3 grid grid-cols-3 gap-2 text-center" data-bp-inner>
         {[
           { k: f.city(d.from), v: f.time(ms, d.from.zone) },

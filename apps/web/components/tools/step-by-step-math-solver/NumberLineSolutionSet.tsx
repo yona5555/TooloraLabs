@@ -9,6 +9,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, fmt } from "./mathSolverEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const LIGHT = { root: "#16a34a", explorer: "#9333ea" };
 const DARK = { root: "#4ade80", explorer: "#c084fc" };
@@ -49,23 +50,25 @@ export default function NumberLineSolutionSet() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: domain, y: [-2, 2] }} height={140} pan={false} zoom={false} preserveAspectRatio={false}>
-              <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 100 }} />
-              {roots.map((r, i) => (
-                <Point key={i} x={r} y={0} color={colors.root} svgCircleProps={{ r: 6 }} />
-              ))}
-              {roots.map((r, i) => (
-                <Text key={`t${i}`} x={r} y={0.8} size={11} color={colors.root}>
-                  {fmt(r)}
+          <PhoneMini slot={1} title={t("title")}>
+            <div aria-label={t("ariaLabel")} className="mafs-canvas mx-auto w-full max-w-[420px] overflow-hidden rounded-xl">
+              <Mafs viewBox={{ x: domain, y: [-2, 2] }} height={140} pan={false} zoom={false} preserveAspectRatio={false}>
+                <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 100 }} />
+                {roots.map((r, i) => (
+                  <Point key={i} x={r} y={0} color={colors.root} svgCircleProps={{ r: 6 }} />
+                ))}
+                {roots.map((r, i) => (
+                  <Text key={`t${i}`} x={r} y={0.8} size={11} color={colors.root}>
+                    {fmt(r)}
+                  </Text>
+                ))}
+                {explorer.element}
+                <Text x={ex} y={-0.9} size={11} color={colors.explorer}>
+                  {fmt(ex)}
                 </Text>
-              ))}
-              {explorer.element}
-              <Text x={ex} y={-0.9} size={11} color={colors.explorer}>
-                {fmt(ex)}
-              </Text>
-            </Mafs>
-          </div>
+              </Mafs>
+            </div>
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

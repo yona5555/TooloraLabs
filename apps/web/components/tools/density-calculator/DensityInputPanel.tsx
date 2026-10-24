@@ -27,7 +27,7 @@ export default function DensityInputPanel({ draft, onChange, onClear }: DensityI
   const fields = all.filter((x) => x.solvedBy !== operation);
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("operationLabel")}</span>
         <DensityModeTabs operation={operation} onOperationChange={(o) => onChange("operation", o)} />

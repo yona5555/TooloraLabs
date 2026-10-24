@@ -60,6 +60,7 @@ export default function DensityMaterialRanking() {
     <DensityIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={0}
       indicator={svg}
       rows={[
         { label: t("rank"), value: `${idx + 1} / ${ranked.length}`, emphasize: true },

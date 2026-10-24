@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
 
@@ -68,7 +69,7 @@ export default function QRPayloadDonut() {
     <QRIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={1} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("chars"), value: f(a.payloadChars) },
         { label: t("utf8"), value: `${f(a.payloadBytes)} B` },

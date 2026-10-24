@@ -44,7 +44,7 @@ export default function DuplicateLineInputPanel({
   const t = useTranslations("tools.duplicate-line-remover.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="space-y-4">
         <label className="block space-y-2">
           <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">

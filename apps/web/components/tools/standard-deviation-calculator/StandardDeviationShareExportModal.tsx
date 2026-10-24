@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Share2, X, FileDown, Printer, Check, Copy } from "lucide-react";
+import { X, FileDown, Printer, Check, Copy } from "lucide-react";
+import ShareExportButton from "@/components/tool-ui/ShareExportButton";
 import { generateToolPdf } from "@/lib/pdf/generateToolPdf";
 import type { GaugeSpec } from "@/lib/pdf/gauge";
 import { WhatsAppIcon, XIcon, FacebookIcon, LinkedInIcon } from "@/lib/share-icons";
@@ -106,14 +107,7 @@ export default function StandardDeviationShareExportModal({ inputRows, resultRow
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-1.5 rounded-lg border border-current/20 px-3 py-1.5 text-xs font-medium text-current/80 transition hover:bg-current/5 dark:border-zinc-700"
-      >
-        <Share2 size={14} />
-        {t("shareExport.triggerLabel")}
-      </button>
+      <ShareExportButton onClick={() => setOpen(true)} className="flex items-center gap-1.5 rounded-lg border border-current/20 px-3 py-1.5 text-xs font-medium text-current/80 transition hover:bg-current/5 dark:border-zinc-700" label={t("shareExport.triggerLabel")} />
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setOpen(false)}>

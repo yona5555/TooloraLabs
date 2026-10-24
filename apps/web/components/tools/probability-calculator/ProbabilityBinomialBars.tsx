@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { atLeastOnce, binomialDistribution } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
@@ -54,7 +55,7 @@ export default function ProbabilityBinomialBars() {
     <ProbabilityIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={chart}
+      indicator={<PhoneMini slot={1} title={t("title")}>{chart}</PhoneMini>}
       rows={[
         { label: `n · ${symbol}`, value: `${f(N, 0)} · ${pct(r)}` },
         { label: t("mean"), value: `${f(N, 0)} × ${f(r, 4)} = ${f(mean, 3)}` },

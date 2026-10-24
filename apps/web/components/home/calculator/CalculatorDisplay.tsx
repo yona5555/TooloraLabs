@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useTranslations } from "next-intl";
 import { Check, Copy, Trash2 } from "lucide-react";
 import { sumHistoryResults } from "@tooloralabs/tools";
@@ -169,14 +170,14 @@ export default function CalculatorDisplay({ state, dispatch, archive, onDeleteAr
             <span dir="ltr" className="ms-auto min-w-0 truncate text-sm font-bold text-zinc-900 calcdark:text-zinc-50" data-grand-total>
               {totalText}
             </span>
-            <button
+            <ResultActionButton action="copy"
               type="button"
               onClick={copyTotal}
               aria-label={tHome(totalCopied ? "display.totalCopied" : "display.copyTotal")}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-zinc-400 transition hover:bg-zinc-200/70 hover:text-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:h-7 md:w-7 calcdark:text-zinc-500 calcdark:hover:bg-zinc-700/70 calcdark:hover:text-zinc-200"
             >
               {totalCopied ? <Check size={14} className="text-green-600 calcdark:text-green-400" /> : <Copy size={14} />}
-            </button>
+            </ResultActionButton>
           </div>
         )}
       </div>

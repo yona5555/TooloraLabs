@@ -1,5 +1,6 @@
 "use client";
 
+import ResultActionButton from "./ResultActionButton";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check, Copy } from "lucide-react";
@@ -23,13 +24,13 @@ export default function CopyLinkButton({ className = "" }: CopyLinkButtonProps) 
   }
 
   return (
-    <button
+    <ResultActionButton action="share"
       type="button"
       onClick={handleCopy}
       className={`flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-1.5 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700 ${className}`}
     >
       {copied ? <Check size={14} /> : <Copy size={14} />}
       {copied ? t("copied") : t("copyLink")}
-    </button>
+    </ResultActionButton>
   );
 }

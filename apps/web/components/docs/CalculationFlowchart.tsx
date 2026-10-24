@@ -1,3 +1,4 @@
+import { useId } from "react";
 type LoopBack = {
   /** Index of the step the loop returns to (the earlier step). */
   from: number;
@@ -59,6 +60,7 @@ function wrapText(text: string, maxCharsPerLine: number): string[] {
  * describe a plain sequence, not a repeating loop.
  */
 export default function CalculationFlowchart({ steps, caption, loop }: Props) {
+  const svgId = useId();
   const width = loop ? BASE_WIDTH + LOOP_MARGIN : BASE_WIDTH;
   const centerX = BASE_WIDTH / 2;
   const maxCharsPerLine = Math.max(10, Math.floor((BOX_WIDTH - PADDING_H * 2) / AVG_CHAR_WIDTH));
@@ -92,7 +94,7 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
                 y2={boxTop(i + 1)}
                 stroke="currentColor"
                 strokeWidth={2}
-                markerEnd="url(#flow-arrow)"
+                markerEnd={`url(#${svgId}flow-arrow)`}
                 className="text-zinc-300 dark:text-zinc-600"
               />
             ) : null
@@ -109,7 +111,7 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
                 stroke="currentColor"
                 strokeWidth={2}
                 strokeDasharray="4 4"
-                markerEnd="url(#flow-arrow-loop)"
+                markerEnd={`url(#${svgId}flow-arrow-loop)`}
                 className="text-blue-400 dark:text-blue-500"
               />
               <text
@@ -153,10 +155,10 @@ export default function CalculationFlowchart({ steps, caption, loop }: Props) {
           ))}
 
           <defs>
-            <marker id="flow-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
+            <marker id={`${svgId}flow-arrow`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-zinc-300 dark:fill-zinc-600" />
             </marker>
-            <marker id="flow-arrow-loop" viewBox="0 0 10 10" refX="10" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
+            <marker id={`${svgId}flow-arrow-loop`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-blue-400 dark:fill-blue-500" />
             </marker>
           </defs>

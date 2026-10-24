@@ -54,7 +54,7 @@ export function PercentageFormulaDiagram() {
       }}
     >
       <div dir="ltr" className="overflow-x-auto">
-        <div className="mx-auto flex w-max items-stretch gap-1.5 py-2">
+        <div className="mx-auto flex w-max items-stretch gap-1.5 py-2 max-md:w-full max-md:flex-wrap max-md:justify-center max-md:gap-y-2">
           {tokens[mode].map((tk, i) =>
             tk.op ? (
               <div key={i} className="flex w-5 items-center justify-center text-xl font-bold text-zinc-400">{tk.sym}</div>
@@ -198,6 +198,7 @@ export function PercentageRingDonut() {
   return (
     <IndicatorCard
       id="ring-donut"
+      mini={0}
       title={t("rings.title")}
       heading={t("rings.heading")}
       intro={t("rings.intro")}
@@ -429,6 +430,7 @@ export function PercentageRangeGauge() {
   return (
     <IndicatorCard
       id="range-gauge"
+      mini={1}
       title={t("gauge.title")}
       heading={t("gauge.heading", { zone: t(`gauge.zones.${zone.k}`) })}
       intro={t("gauge.intro")}

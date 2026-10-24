@@ -48,6 +48,7 @@ export default function TlByteCost() {
 
   return (
     <TlIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { YearlyGrowthPoint } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import CompoundInterestBreakdownDonut from "./CompoundInterestBreakdownDonut";
 import CompoundInterestShareExportModal from "./CompoundInterestShareExportModal";
 import type { CurrencyCode } from "@/lib/currency";
@@ -143,6 +144,7 @@ export default function CompoundInterestResult({
       )}
 
       <div className="mt-5">
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
         <CompoundInterestBreakdownDonut
           centerValue={money(futureValue)}
           centerLabel={t("aboveFold.futureValueLabel")}
@@ -152,6 +154,7 @@ export default function CompoundInterestResult({
             { key: "interest", value: totalInterest, label: t("aboveFold.interestLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
           ]}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-5 grid grid-cols-3 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">

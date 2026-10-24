@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import type { DebtToIncomeCategory } from "@tooloralabs/tools";
 
 type DtiCategoryReferenceCardProps = {
@@ -25,6 +26,7 @@ export default function DtiCategoryReferenceCard({ activeCategory }: DtiCategory
 
   return (
     <SectionCard title={t("categoryReferenceTitle")}>
+      <PhoneMini slot={1} title={t("categoryReferenceTitle")}>
       <ul className="flex flex-col gap-2">
         {ROWS.map((row) => {
           const active = row.key === activeCategory;
@@ -48,6 +50,7 @@ export default function DtiCategoryReferenceCard({ activeCategory }: DtiCategory
           );
         })}
       </ul>
+      </PhoneMini>
     </SectionCard>
   );
 }

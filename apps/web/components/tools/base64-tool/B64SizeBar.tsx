@@ -79,6 +79,7 @@ export default function B64SizeBar() {
     <B64IndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={1}
       indicator={svg}
       rows={[
         { label: t("formula"), value: `4 × ⌈${f(a.byteCount)} / 3⌉ = ${f(a.paddedLength)}` },

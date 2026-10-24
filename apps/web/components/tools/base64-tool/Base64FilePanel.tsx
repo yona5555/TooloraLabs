@@ -1,5 +1,6 @@
 "use client";
 import { useState, type ChangeEvent } from "react";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { useTranslations } from "next-intl";
 import { Upload, Download } from "lucide-react";
 import { bytesToBase64, base64ToBytes } from "@tooloralabs/tools";
@@ -78,14 +79,14 @@ export default function Base64FilePanel() {
           />
           <div className="flex flex-wrap gap-2">
             <CopyButton text={dataUri} />
-            <button
+            <ResultActionButton action="download"
               type="button"
               onClick={handleDownload}
               className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-3 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700"
             >
               <Download size={16} />
               {t("download")}
-            </button>
+            </ResultActionButton>
           </div>
         </div>
       )}

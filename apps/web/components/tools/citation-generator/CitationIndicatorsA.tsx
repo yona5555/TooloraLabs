@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import {
   checkFields,
@@ -13,6 +13,7 @@ import {
 } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { EntryText, fmt } from "./CitationShared";
 import { partOrder } from "./CitationStudioResult";
 import { PART_COLORS, type StudioState } from "./studio";
@@ -102,6 +103,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
 
 /* 2 · Completeness gauge for the selected source (gradient gauge) */
 export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
+  const svgId = useId();
   const t = useCiteT();
   const pct = completeness(source);
   const checks = checkFields(source);
@@ -123,17 +125,18 @@ export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
+          <PhoneMini slot={0} title={t("ind.complete.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.complete.title")}>
             <defs>
-              <linearGradient id="cite-complete" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}cite-complete`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" stopColor="#ef4444" />
                 <stop offset="50%" stopColor="#f59e0b" />
                 <stop offset="75%" stopColor="#3b82f6" />
                 <stop offset="100%" stopColor="#10b981" />
               </linearGradient>
             </defs>
-            <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} stroke="url(#cite-complete)" strokeOpacity={0.25} strokeWidth={18} fill="none" />
-            {pct > 0 && <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${ex} ${ey}`} stroke="url(#cite-complete)" strokeWidth={18} fill="none" strokeLinecap="round" style={{ transition: "d 500ms ease" }} />}
+            <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${CX + R} ${CY}`} stroke={`url(#${svgId}cite-complete)`} strokeOpacity={0.25} strokeWidth={18} fill="none" />
+            {pct > 0 && <path d={`M ${CX - R} ${CY} A ${R} ${R} 0 0 1 ${ex} ${ey}`} stroke={`url(#${svgId}cite-complete)`} strokeWidth={18} fill="none" strokeLinecap="round" style={{ transition: "d 500ms ease" }} />}
             {[0, 50, 70, 90, 100].map((v) => {
               const [tx, ty] = pt(v / 100, R + 18);
               return (
@@ -146,6 +149,7 @@ export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
               {`${fmt(req.filter((c) => c.filled).length)}/${fmt(req.length)} · ${fmt(rec.filter((c) => c.filled).length)}/${fmt(rec.length)}`}
             </text>
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...checks.map((c) => ({
@@ -200,6 +204,7 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
+          <PhoneMini slot={1} title={t("ind.mix.title")}>
           <div className="flex items-center gap-4">
             <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("ind.mix.title")}>
               {ring(types, 78, 22)}
@@ -217,6 +222,7 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
               ))}
             </ul>
           </div>
+          </PhoneMini>
         }
         rows={[
           ...types.map((it) => ({ label: it.label, value: fmt(it.v), note: `${fmt((it.v / n) * 100, 1)}%` })),

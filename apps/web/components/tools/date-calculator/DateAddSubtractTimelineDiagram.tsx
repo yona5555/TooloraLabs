@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useId } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { DateCalculator as DateTool } from "@tooloralabs/tools";
 import EncyclopediaLiveWidget from "@/components/tool-ui/EncyclopediaLiveWidget";
@@ -21,6 +21,7 @@ const MARGIN = 55;
 const ARROW_INSET = 15;
 
 export default function DateAddSubtractTimelineDiagram() {
+  const svgId = useId();
   const t = useTranslations("tools.date-calculator.addSubtractTimeline");
   const tScenarios = useTranslations("tools.date-calculator.scenarios");
   const tUnits = useTranslations("tools.date-calculator.form.units");
@@ -66,12 +67,12 @@ export default function DateAddSubtractTimelineDiagram() {
                 ? `M ${MARGIN + ARROW_INSET} ${HEIGHT / 2} L ${WIDTH - MARGIN - ARROW_INSET} ${HEIGHT / 2}`
                 : `M ${WIDTH - MARGIN - ARROW_INSET} ${HEIGHT / 2} L ${MARGIN + ARROW_INSET} ${HEIGHT / 2}`
             }
-            markerEnd="url(#arrowhead)"
+            markerEnd={`url(#${svgId}arrowhead)`}
             strokeWidth={2}
             className={isForward ? "stroke-blue-500 dark:stroke-blue-400" : "stroke-amber-500 dark:stroke-amber-400"}
           />
           <defs>
-            <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+            <marker id={`${svgId}arrowhead`} markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
               <path d="M0,0 L8,4 L0,8 Z" className={isForward ? "fill-blue-500 dark:fill-blue-400" : "fill-amber-500 dark:fill-amber-400"} />
             </marker>
           </defs>

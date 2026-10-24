@@ -19,7 +19,7 @@ export default function MolarMassInputPanel({ formula, onFormulaChange, scenario
   const tScenarios = useTranslations("tools.molar-mass-calculator.form.scenarios");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioPresetsLabel")}</span>
         <div className="flex flex-wrap gap-2">

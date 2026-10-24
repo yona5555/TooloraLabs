@@ -1,8 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { AVOGADRO, g3, liquidCss, REFERENCE, referenceSeedIndex, sciText, SEED, SERIAL_MAX } from "./molMath";
 
@@ -23,25 +23,8 @@ export function MolFlowCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(SEED.molarMassNaCl, { min: MASS_STEP, max: MASS_MAX, step: MASS_STEP });
   const [hover, setHover] = useState<string | null>(null);
-  const HMIN = 236;
-  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
-  const H = Math.max(HMIN, hBox);
   const n = s.value / SEED.molarMassNaCl;
   const m = n / SEED.volume;
-  const X0 = 26;
-  const X1 = W - 26;
-  const railY = H - 26;
-  const xm = (g: number) => X0 + ((g - MASS_STEP) / (MASS_MAX - MASS_STEP)) * (X1 - X0);
-  const ref = useRef<SVGSVGElement>(null);
-  const drag = useSvgDrag(ref, W, H, (px) => s.set(MASS_STEP + ((px - X0) / (X1 - X0)) * (MASS_MAX - MASS_STEP)));
-  const cy = 34 + (railY - 60) / 2;
-  const R = Math.min(W * 0.11, (railY - 80) / 2);
-  const nodes = [
-    { key: "mass", x: W * 0.17, frac: s.value / MASS_MAX, value: g3(s.value), unit: "g" },
-    { key: "n", x: W * 0.5, frac: n / 4, value: g3(n), unit: "mol" },
-    { key: "m", x: W * 0.83, frac: m / 2, value: g3(m), unit: "mol/L" },
-  ];
-  const ops = [`÷ ${SEED.molarMassNaCl} g/mol`, `÷ ${SEED.volume} L`];
   const valueText = `${g3(s.value)} g NaCl`;
   const rows: KitRow[] = [
     { key: "mass", label: t("rowMass"), value: `${g3(s.value)} g` },
@@ -62,41 +45,67 @@ export function MolFlowCard({ side }: { side: Side }) {
       caption={t("caption", { g: ltr(g3(s.value)), n: ltr(g3(n)), m: ltr(g3(m)) })}
       controls={<KitControls s={s} valueText={valueText} testId="mol-c1" />}
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            {ops.map((op, i) => {
-              const a = nodes[i].x;
-              const b = nodes[i + 1].x;
-              return (
-                <g key={op}>
-                  <line x1={a + R * 0.5} y1={cy} x2={b - R * 0.5} y2={cy} style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeDasharray="4 4" />
-                  <path d={`M ${b - R * 0.5 - 8} ${cy - 5} L ${b - R * 0.5} ${cy} L ${b - R * 0.5 - 8} ${cy + 5}`} fill="none" style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeLinecap="round" />
-                  <text x={(a + b) / 2} y={16} fontSize={11.5} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
-                    {op}
-                  </text>
-                </g>
-              );
-            })}
-            {nodes.map((nd) => {
-              const r = R * (0.45 + 0.55 * Math.sqrt(clamp(nd.frac, 0, 1)));
-              const on = hover === nd.key;
-              return (
-                <g key={nd.key} onPointerEnter={() => setHover(nd.key)} onPointerLeave={() => setHover(null)}>
-                  <circle cx={nd.x} cy={cy} r={r} style={{ fill: nd.key === "m" ? liquidCss(m) : nd.key === "n" ? "var(--chem-solute)" : "var(--chem-stock)", fillOpacity: 0.85, ...lit(on || nd.key === "m") }} />
-                  <text x={nd.x} y={cy + R + 22} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-                    {`${nd.value} ${nd.unit}`}
-                  </text>
-                </g>
-              );
-            })}
-            <line x1={X0} y1={railY} x2={X1} y2={railY} style={{ stroke: "var(--ph-line)" }} strokeWidth={3} strokeLinecap="round" />
-            <line x1={X0} y1={railY} x2={xm(s.value)} y2={railY} style={{ stroke: "var(--chem-stock)" }} strokeWidth={5} strokeLinecap="round" />
-          </svg>
-          <SvgHandle x={xm(s.value)} y={railY} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="mol-c1-handle" />
-        </div>
-      }
+      mini={1}
+      visual={<MolFlowDrawing s={s} valueText={valueText} hover={hover} setHover={setHover} />}
     />
+  );
+}
+
+/** Card 1's drawing; it owns its measured box, svg ref and drag so the phone mini copy (PhoneMini) gets its own. */
+function MolFlowDrawing({ s, valueText, hover, setHover }: { s: Stepper; valueText: string; hover: string | null; setHover: (k: string | null) => void }) {
+  const t = useTranslations("tools.molarity-calculator.visuals.flow");
+  const HMIN = 236;
+  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
+  const H = Math.max(HMIN, hBox);
+  const n = s.value / SEED.molarMassNaCl;
+  const m = n / SEED.volume;
+  const X0 = 26;
+  const X1 = W - 26;
+  const railY = H - 26;
+  const xm = (g: number) => X0 + ((g - MASS_STEP) / (MASS_MAX - MASS_STEP)) * (X1 - X0);
+  const ref = useRef<SVGSVGElement>(null);
+  const drag = useSvgDrag(ref, W, H, (px) => s.set(MASS_STEP + ((px - X0) / (X1 - X0)) * (MASS_MAX - MASS_STEP)));
+  const cy = 34 + (railY - 60) / 2;
+  const R = Math.min(W * 0.11, (railY - 80) / 2);
+  const nodes = [
+    { key: "mass", x: W * 0.17, frac: s.value / MASS_MAX, value: g3(s.value), unit: "g" },
+    { key: "n", x: W * 0.5, frac: n / 4, value: g3(n), unit: "mol" },
+    { key: "m", x: W * 0.83, frac: m / 2, value: g3(m), unit: "mol/L" },
+  ];
+  const ops = [`÷ ${SEED.molarMassNaCl} g/mol`, `÷ ${SEED.volume} L`];
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+        {ops.map((op, i) => {
+          const a = nodes[i].x;
+          const b = nodes[i + 1].x;
+          return (
+            <g key={op}>
+              <line x1={a + R * 0.5} y1={cy} x2={b - R * 0.5} y2={cy} style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeDasharray="4 4" />
+              <path d={`M ${b - R * 0.5 - 8} ${cy - 5} L ${b - R * 0.5} ${cy} L ${b - R * 0.5 - 8} ${cy + 5}`} fill="none" style={{ stroke: "var(--ph-line)" }} strokeWidth={2} strokeLinecap="round" />
+              <text x={(a + b) / 2} y={16} fontSize={11.5} fontWeight={700} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                {op}
+              </text>
+            </g>
+          );
+        })}
+        {nodes.map((nd) => {
+          const r = R * (0.45 + 0.55 * Math.sqrt(clamp(nd.frac, 0, 1)));
+          const on = hover === nd.key;
+          return (
+            <g key={nd.key} onPointerEnter={() => setHover(nd.key)} onPointerLeave={() => setHover(null)}>
+              <circle cx={nd.x} cy={cy} r={r} style={{ fill: nd.key === "m" ? liquidCss(m) : nd.key === "n" ? "var(--chem-solute)" : "var(--chem-stock)", fillOpacity: 0.85, ...lit(on || nd.key === "m") }} />
+              <text x={nd.x} y={cy + R + 22} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                {`${nd.value} ${nd.unit}`}
+              </text>
+            </g>
+          );
+        })}
+        <line x1={X0} y1={railY} x2={X1} y2={railY} style={{ stroke: "var(--ph-line)" }} strokeWidth={3} strokeLinecap="round" />
+        <line x1={X0} y1={railY} x2={xm(s.value)} y2={railY} style={{ stroke: "var(--chem-stock)" }} strokeWidth={5} strokeLinecap="round" />
+      </svg>
+      <SvgHandle x={xm(s.value)} y={railY} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="mol-c1-handle" />
+    </div>
   );
 }
 
@@ -106,6 +115,38 @@ export function MolCurveCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(SEED.volume, { min: 0.2, max: 5, step: 0.1 });
   const [hover, setHover] = useState<string | null>(null);
+  const n = SEED.moles;
+  const c = n / s.value;
+  const valueText = `V = ${g3(s.value)} L`;
+  const rows: KitRow[] = [
+    { key: "n", label: t("rowN"), value: `${g3(n)} mol` },
+    { key: "v", label: t("rowV"), value: `${g3(s.value)} L` },
+    { key: "c", label: "c = n / V", value: `${g3(c)} mol/L`, isKey: true },
+    { key: "mmol", label: t("rowMmol"), value: `${g3(c * 1000)} mmol/L` },
+    { key: "double", label: t("rowDouble"), value: `${g3(n / (2 * s.value))} mol/L` },
+    { key: "half", label: t("rowHalf"), value: `${g3(n / (s.value / 2))} mol/L` },
+    { key: "check", label: "c × V", value: `${g3(c * s.value)} mol` },
+  ];
+  return (
+    <IndicatorCard
+      idPrefix="mol"
+      n={3}
+      side={side}
+      kind="2d"
+      title={t("title")}
+      subtitle={t("subtitle")}
+      caption={t("caption", { v: ltr(g3(s.value)), c: ltr(g3(c)) })}
+      controls={<KitControls s={s} valueText={valueText} testId="mol-c3" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      mini={0}
+      visual={<MolCurveDrawing s={s} valueText={valueText} hover={hover} />}
+    />
+  );
+}
+
+/** Card 3's drawing; it owns its measured box, svg ref and drag so the phone mini copy (PhoneMini) gets its own. */
+function MolCurveDrawing({ s, valueText, hover }: { s: Stepper; valueText: string; hover: string | null }) {
+  const t = useTranslations("tools.molarity-calculator.visuals.curve");
   const HMIN = 272;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
   const H = Math.max(HMIN, hBox);
@@ -122,57 +163,34 @@ export function MolCurveCard({ side }: { side: Side }) {
   const pts: string[] = [];
   for (let v = n / YMAX; v <= 5.0001; v += 0.02) pts.push(`${xv(v).toFixed(1)},${yc(n / v).toFixed(1)}`);
   const c = n / s.value;
-  const valueText = `V = ${g3(s.value)} L`;
-  const rows: KitRow[] = [
-    { key: "n", label: t("rowN"), value: `${g3(n)} mol` },
-    { key: "v", label: t("rowV"), value: `${g3(s.value)} L` },
-    { key: "c", label: "c = n / V", value: `${g3(c)} mol/L`, isKey: true },
-    { key: "mmol", label: t("rowMmol"), value: `${g3(c * 1000)} mmol/L` },
-    { key: "double", label: t("rowDouble"), value: `${g3(n / (2 * s.value))} mol/L` },
-    { key: "half", label: t("rowHalf"), value: `${g3(n / (s.value / 2))} mol/L` },
-    { key: "check", label: "c × V", value: `${g3(c * s.value)} mol` },
-  ];
   const on = hover === "c" || hover === "v";
   return (
-    <IndicatorCard
-      idPrefix="mol"
-      n={3}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={t("caption", { v: ltr(g3(s.value)), c: ltr(g3(c)) })}
-      controls={<KitControls s={s} valueText={valueText} testId="mol-c3" />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g3(c)} mol/L`}>
-            {[0, 0.5, 1, 1.5, 2, 2.5].map((g, gi) => (
-              <g key={g}>
-                <line x1={X0} y1={yc(g)} x2={X1} y2={yc(g)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
-                <text x={X0 - 8} y={yc(g) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
-                  {g}
-                </text>
-                <text x={xv(gi)} y={Y0 + 18} fontSize={11} textAnchor={gi === 0 ? "start" : gi === 5 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
-                  {gi}
-                </text>
-              </g>
-            ))}
-            <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
-              {t("axisV")}
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g3(c)} mol/L`}>
+        {[0, 0.5, 1, 1.5, 2, 2.5].map((g, gi) => (
+          <g key={g}>
+            <line x1={X0} y1={yc(g)} x2={X1} y2={yc(g)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
+            <text x={X0 - 8} y={yc(g) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+              {g}
             </text>
-            <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
-            <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
-            <line x1={xv(s.value)} y1={yc(c)} x2={xv(s.value)} y2={Y0} style={{ stroke: "var(--ph-focus)", opacity: on ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
-            <line x1={X0} y1={yc(c)} x2={xv(s.value)} y2={yc(c)} style={{ stroke: "var(--ph-focus)", opacity: on ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
-            <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
-              {`${g3(s.value)} L → ${g3(c)} mol/L`}
+            <text x={xv(gi)} y={Y0 + 18} fontSize={11} textAnchor={gi === 0 ? "start" : gi === 5 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+              {gi}
             </text>
-          </svg>
-          <SvgHandle x={xv(s.value)} y={yc(c)} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="mol-c3-handle" />
-        </div>
-      }
-    />
+          </g>
+        ))}
+        <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+          {t("axisV")}
+        </text>
+        <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
+        <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
+        <line x1={xv(s.value)} y1={yc(c)} x2={xv(s.value)} y2={Y0} style={{ stroke: "var(--ph-focus)", opacity: on ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
+        <line x1={X0} y1={yc(c)} x2={xv(s.value)} y2={yc(c)} style={{ stroke: "var(--ph-focus)", opacity: on ? 0.9 : 0.45 }} strokeWidth={1.5} strokeDasharray="3 3" />
+        <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+          {`${g3(s.value)} L → ${g3(c)} mol/L`}
+        </text>
+      </svg>
+      <SvgHandle x={xv(s.value)} y={yc(c)} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="mol-c3-handle" />
+    </div>
   );
 }
 
@@ -249,6 +267,7 @@ export function MolSerialCard({ side }: { side: Side }) {
 const LOG_MIN = -3;
 const LOG_MAX = 1.5;
 export function MolRulerCard({ side }: { side: Side }) {
+  const svgId = useId();
   const t = useTranslations("tools.molarity-calculator.visuals.ruler");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(referenceSeedIndex(), { min: 0, max: REFERENCE.length - 1, step: 1 });
@@ -297,12 +316,12 @@ export function MolRulerCard({ side }: { side: Side }) {
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
             <defs>
-              <linearGradient id="mol-ruler" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}mol-ruler`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" style={{ stopColor: "var(--chem-solvent)" }} />
                 <stop offset="100%" style={{ stopColor: "var(--chem-tint)" }} />
               </linearGradient>
             </defs>
-            <rect x={X0 - 8} y={axisY - 7} width={X1 - X0 + 16} height={14} rx={7} fill="url(#mol-ruler)" style={{ stroke: "var(--ph-line)" }} />
+            <rect x={X0 - 8} y={axisY - 7} width={X1 - X0 + 16} height={14} rx={7} fill={`url(#${svgId}mol-ruler)`} style={{ stroke: "var(--ph-line)" }} />
             {decades.map((d) => (
               <g key={d}>
                 <line x1={xl(10 ** d)} y1={axisY + 9} x2={xl(10 ** d)} y2={axisY + 16} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />

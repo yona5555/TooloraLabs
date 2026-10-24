@@ -70,6 +70,7 @@ export default function GcfLcmPrimeDonut() {
 
   return (
     <GcfLcmIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={donut}

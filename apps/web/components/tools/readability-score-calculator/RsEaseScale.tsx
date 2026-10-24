@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { ReadabilityScoreCalculator } from "@tooloralabs/tools";
 import RsIndicatorCard from "./RsIndicatorCard";
 import { useRsLive } from "./RsLiveContext";
@@ -76,7 +77,7 @@ export default function RsEaseScale() {
     <RsIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={indicator}
+      indicator={<PhoneMini slot={0} title={t("title")}>{indicator}</PhoneMini>}
       rows={[
         ...REFERENCES.map((r, i) => ({ label: `${f(i + 1)} · ${tExamples(r.key)}`, value: f(r.score), note: tBands(easeBand(r.score).key) })),
         { label: tl("you"), value: f(score), emphasize: true, note: tBands(band.key) },

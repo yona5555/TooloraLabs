@@ -32,7 +32,7 @@ export default function JSONInputPanel({
   const t = useTranslations("tools.json-formatter.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
           {(["format", "minify"] as const).map((m) => (

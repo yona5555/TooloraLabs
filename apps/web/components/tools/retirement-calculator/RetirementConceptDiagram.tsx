@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
@@ -17,6 +18,7 @@ const CURVE = `C 320,225 560,150 ${END_X},60`;
  * as the balance itself grows.
  */
 export default function RetirementConceptDiagram() {
+  const svgId = useId();
   const d = useTranslations("tools.retirement-calculator.aboveFold.conceptDiagram");
 
   return (
@@ -25,13 +27,13 @@ export default function RetirementConceptDiagram() {
       <div dir="ltr" className="mt-4 overflow-x-auto">
         <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} className="mx-auto block w-full max-w-3xl text-current">
           <defs>
-            <marker id="ret-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <marker id={`${svgId}ret-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 Z" className="fill-zinc-400 dark:fill-zinc-500" />
             </marker>
           </defs>
 
           {/* age timeline */}
-          <line x1={START_X} y1={BASE_Y} x2={830} y2={BASE_Y} stroke="currentColor" strokeWidth={1.5} opacity={0.25} markerEnd="url(#ret-arrow)" />
+          <line x1={START_X} y1={BASE_Y} x2={830} y2={BASE_Y} stroke="currentColor" strokeWidth={1.5} opacity={0.25} markerEnd={`url(#${svgId}ret-arrow)`} />
           <text x={834} y={BASE_Y + 4} fontSize={12} fill="currentColor" opacity={0.55}>
             {d("ageAxisLabel")}
           </text>

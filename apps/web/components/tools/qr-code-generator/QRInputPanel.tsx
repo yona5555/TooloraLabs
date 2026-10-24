@@ -39,7 +39,7 @@ export default function QRInputPanel({ form, onChange, onClear }: QRInputPanelPr
   const t = useTranslations("tools.qr-code-generator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="flex flex-wrap gap-2">
         {CONTENT_TYPES.map((type) => (
           <button

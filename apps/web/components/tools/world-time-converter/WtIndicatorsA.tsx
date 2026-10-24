@@ -23,6 +23,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { LAND, WATER } from "./worldLand";
 import { STATUS_COLORS, useNow, type CardProps } from "./state";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 export function useIndT() {
   return useTranslations("tools.world-time-converter.wt.ind");
@@ -86,56 +87,58 @@ export function WtDayNightMapCard({ d, f }: CardProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <div className="w-full max-w-[720px]">
-            <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-full rounded-lg" role="img" aria-label={t("map.title")}>
-              <rect width={W} height={H} className="fill-sky-200 dark:fill-[#0b2447]" />
-              <path d={land} className="fill-emerald-100 stroke-emerald-700/40 dark:fill-emerald-900 dark:stroke-emerald-400/30" strokeWidth={0.6} />
-              <path d={water} className="fill-sky-200 dark:fill-[#0b2447]" />
-              {[-60, -30, 0, 30, 60].map((la) => (
-                <g key={la}>
-                  <line x1={0} x2={W} y1={Y(la)} y2={Y(la)} stroke="currentColor" strokeOpacity={la === 0 ? 0.35 : 0.12} />
-                  <text x={3} y={Y(la) - 2} fontSize={8} className={axisText}>{la === 0 ? "0°" : `${Math.abs(la)}°${la > 0 ? "N" : "S"}`}</text>
-                </g>
-              ))}
-              {[23.44, -23.44].map((la) => (
-                <line key={la} x1={0} x2={W} y1={Y(la)} y2={Y(la)} stroke="#f59e0b" strokeOpacity={0.45} strokeDasharray="4 4" />
-              ))}
-              {Array.from({ length: 11 }, (_, i) => -150 + i * 30).map((lo) => (
-                <line key={lo} y1={0} y2={H} x1={X(lo)} x2={X(lo)} stroke="currentColor" strokeOpacity={0.1} />
-              ))}
-              {bands.map((b) =>
-                b.polygons.map((poly, j) => <path key={`${b.elevationDeg}-${j}`} d={path(poly)} fill="#020617" fillOpacity={0.2} />),
-              )}
-              {term.map((l, i) => (
-                <path key={i} d={line(l)} fill="none" stroke="#fbbf24" strokeWidth={1.6} />
-              ))}
-              <line x1={X(sub.lon)} x2={X(sub.lon)} y1={0} y2={H} stroke="#fbbf24" strokeDasharray="2 4" strokeOpacity={0.8} />
-              <text x={X(sub.lon) + 4} y={10} fontSize={9} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">12:00 ☀</text>
-              <circle cx={X(sub.lon)} cy={Y(sub.lat)} r={16} fill="#fde047" fillOpacity={0.35}>
-                <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
-              </circle>
-              <circle cx={X(sub.lon)} cy={Y(sub.lat)} r={7} fill="#facc15" stroke="#b45309" strokeWidth={1.5} />
-              <text x={X(sub.lon)} y={Y(sub.lat) + 22} textAnchor="middle" fontSize={9} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">
-                {coord(sub.lat, "N", "S")} {coord(sub.lon, "E", "W")}
-              </text>
-              {cities.map(({ c, el }, i) => {
-                const x = X(c.lon);
-                const y = Y(c.lat);
-                const day = el > WT_SUNRISE_ELEVATION;
-                const right = x < W - 90;
-                return (
-                  <g key={c.id}>
-                    <circle cx={x} cy={y} r={i === 0 ? 5.5 : 4} fill={day ? "#fbbf24" : "#93c5fd"} stroke={i === 0 ? "#1d4ed8" : "#0f172a"} strokeWidth={i === 0 ? 2 : 1} />
-                    <text x={right ? x + 7 : x - 7} y={y + 3 + (i % 2 ? 9 : 0)} textAnchor={right ? "start" : "end"} fontSize={9} fontWeight={i === 0 ? 800 : 600} className={day ? "fill-zinc-900 dark:fill-zinc-100" : "fill-blue-900 dark:fill-sky-200"}>
-                      {shortName(f.city(c))} {f.time(at, c.zone)}
-                    </text>
+            <PhoneMini slot={0} title={t("map.title")}>
+              <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto w-full max-w-full rounded-lg" role="img" aria-label={t("map.title")}>
+                <rect width={W} height={H} className="fill-sky-200 dark:fill-[#0b2447]" />
+                <path d={land} className="fill-emerald-100 stroke-emerald-700/40 dark:fill-emerald-900 dark:stroke-emerald-400/30" strokeWidth={0.6} />
+                <path d={water} className="fill-sky-200 dark:fill-[#0b2447]" />
+                {[-60, -30, 0, 30, 60].map((la) => (
+                  <g key={la}>
+                    <line x1={0} x2={W} y1={Y(la)} y2={Y(la)} stroke="currentColor" strokeOpacity={la === 0 ? 0.35 : 0.12} />
+                    <text x={3} y={Y(la) - 2} fontSize={8} className={axisText}>{la === 0 ? "0°" : `${Math.abs(la)}°${la > 0 ? "N" : "S"}`}</text>
                   </g>
-                );
-              })}
-              <rect x={W - 118} y={H - 22} width={114} height={18} rx={4} fill="#020617" fillOpacity={0.55} />
-              <text x={W - 61} y={H - 9} textAnchor="middle" fontSize={10} fontWeight={700} fill="#f8fafc">
-                UTC {f.time(at, "UTC")} · {f.shortDate(at, "UTC")}
-              </text>
-            </svg>
+                ))}
+                {[23.44, -23.44].map((la) => (
+                  <line key={la} x1={0} x2={W} y1={Y(la)} y2={Y(la)} stroke="#f59e0b" strokeOpacity={0.45} strokeDasharray="4 4" />
+                ))}
+                {Array.from({ length: 11 }, (_, i) => -150 + i * 30).map((lo) => (
+                  <line key={lo} y1={0} y2={H} x1={X(lo)} x2={X(lo)} stroke="currentColor" strokeOpacity={0.1} />
+                ))}
+                {bands.map((b) =>
+                  b.polygons.map((poly, j) => <path key={`${b.elevationDeg}-${j}`} d={path(poly)} fill="#020617" fillOpacity={0.2} />),
+                )}
+                {term.map((l, i) => (
+                  <path key={i} d={line(l)} fill="none" stroke="#fbbf24" strokeWidth={1.6} />
+                ))}
+                <line x1={X(sub.lon)} x2={X(sub.lon)} y1={0} y2={H} stroke="#fbbf24" strokeDasharray="2 4" strokeOpacity={0.8} />
+                <text x={X(sub.lon) + 4} y={10} fontSize={9} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">12:00 ☀</text>
+                <circle cx={X(sub.lon)} cy={Y(sub.lat)} r={16} fill="#fde047" fillOpacity={0.35}>
+                  <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
+                </circle>
+                <circle cx={X(sub.lon)} cy={Y(sub.lat)} r={7} fill="#facc15" stroke="#b45309" strokeWidth={1.5} />
+                <text x={X(sub.lon)} y={Y(sub.lat) + 22} textAnchor="middle" fontSize={9} fontWeight={700} fill="#b45309" className="dark:fill-amber-300">
+                  {coord(sub.lat, "N", "S")} {coord(sub.lon, "E", "W")}
+                </text>
+                {cities.map(({ c, el }, i) => {
+                  const x = X(c.lon);
+                  const y = Y(c.lat);
+                  const day = el > WT_SUNRISE_ELEVATION;
+                  const right = x < W - 90;
+                  return (
+                    <g key={c.id}>
+                      <circle cx={x} cy={y} r={i === 0 ? 5.5 : 4} fill={day ? "#fbbf24" : "#93c5fd"} stroke={i === 0 ? "#1d4ed8" : "#0f172a"} strokeWidth={i === 0 ? 2 : 1} />
+                      <text x={right ? x + 7 : x - 7} y={y + 3 + (i % 2 ? 9 : 0)} textAnchor={right ? "start" : "end"} fontSize={9} fontWeight={i === 0 ? 800 : 600} className={day ? "fill-zinc-900 dark:fill-zinc-100" : "fill-blue-900 dark:fill-sky-200"}>
+                        {shortName(f.city(c))} {f.time(at, c.zone)}
+                      </text>
+                    </g>
+                  );
+                })}
+                <rect x={W - 118} y={H - 22} width={114} height={18} rx={4} fill="#020617" fillOpacity={0.55} />
+                <text x={W - 61} y={H - 9} textAnchor="middle" fontSize={10} fontWeight={700} fill="#f8fafc">
+                  UTC {f.time(at, "UTC")} · {f.shortDate(at, "UTC")}
+                </text>
+              </svg>
+            </PhoneMini>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <button type="button" onClick={() => { setPinned(false); setPlaying((p) => !p); }} aria-label={playing ? t("map.pause") : t("map.play")} className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700">
                 {playing ? <Pause size={14} /> : <Play size={14} />}
@@ -384,31 +387,33 @@ export function WtOffsetBarsCard({ d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("offsets.title")}>
-            {ticks.map((h) => (
-              <g key={h}>
-                <line x1={L} x2={W} y1={y(h)} y2={y(h)} stroke="currentColor" strokeOpacity={h === 0 ? 0.5 : 0.1} />
-                <text x={L - 4} y={y(h) + 3} textAnchor="end" fontSize={9} className={axisText}>{h > 0 ? `+${h}` : h}</text>
-              </g>
-            ))}
-            {items.map((it, i) => {
-              const stdH = it.std / 60;
-              const offH = it.off / 60;
-              const cx = x(i) + bw / 2;
-              return (
-                <g key={it.c.id} style={{ transition: "all 400ms ease" }}>
-                  <rect x={x(i)} y={Math.min(y(0), y(stdH))} width={bw} height={Math.abs(y(stdH) - y(0))} rx={2} fill="#3b82f6" />
-                  {it.off !== it.std && <rect x={x(i)} y={Math.min(y(stdH), y(offH))} width={bw} height={Math.abs(y(offH) - y(stdH))} rx={2} fill="#f59e0b" />}
-                  <text x={cx} y={offH >= 0 ? y(offH) - 4 : y(offH) + 11} textAnchor="middle" fontSize={9} fontWeight={700} className={valueText}>{f.offset(it.off).replace("UTC", "")}</text>
-                  <text x={cx} y={H - B + 12} textAnchor="end" fontSize={9} transform={`rotate(-40 ${cx} ${H - B + 12})`} className={valueText}>{shortName(f.city(it.c)).slice(0, 13)}</text>
+          <PhoneMini slot={1} title={t("offsets.title")}>
+            <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{ direction: "ltr" }} className="h-auto max-w-full" role="img" aria-label={t("offsets.title")}>
+              {ticks.map((h) => (
+                <g key={h}>
+                  <line x1={L} x2={W} y1={y(h)} y2={y(h)} stroke="currentColor" strokeOpacity={h === 0 ? 0.5 : 0.1} />
+                  <text x={L - 4} y={y(h) + 3} textAnchor="end" fontSize={9} className={axisText}>{h > 0 ? `+${h}` : h}</text>
                 </g>
-              );
-            })}
-            <rect x={W - 150} y={4} width={9} height={9} fill="#3b82f6" />
-            <text x={W - 138} y={12} fontSize={9} className={axisText}>{t("offsets.std")}</text>
-            <rect x={W - 80} y={4} width={9} height={9} fill="#f59e0b" />
-            <text x={W - 68} y={12} fontSize={9} className={axisText}>{t("offsets.dst")}</text>
-          </svg>
+              ))}
+              {items.map((it, i) => {
+                const stdH = it.std / 60;
+                const offH = it.off / 60;
+                const cx = x(i) + bw / 2;
+                return (
+                  <g key={it.c.id} style={{ transition: "all 400ms ease" }}>
+                    <rect x={x(i)} y={Math.min(y(0), y(stdH))} width={bw} height={Math.abs(y(stdH) - y(0))} rx={2} fill="#3b82f6" />
+                    {it.off !== it.std && <rect x={x(i)} y={Math.min(y(stdH), y(offH))} width={bw} height={Math.abs(y(offH) - y(stdH))} rx={2} fill="#f59e0b" />}
+                    <text x={cx} y={offH >= 0 ? y(offH) - 4 : y(offH) + 11} textAnchor="middle" fontSize={9} fontWeight={700} className={valueText}>{f.offset(it.off).replace("UTC", "")}</text>
+                    <text x={cx} y={H - B + 12} textAnchor="end" fontSize={9} transform={`rotate(-40 ${cx} ${H - B + 12})`} className={valueText}>{shortName(f.city(it.c)).slice(0, 13)}</text>
+                  </g>
+                );
+              })}
+              <rect x={W - 150} y={4} width={9} height={9} fill="#3b82f6" />
+              <text x={W - 138} y={12} fontSize={9} className={axisText}>{t("offsets.std")}</text>
+              <rect x={W - 80} y={4} width={9} height={9} fill="#f59e0b" />
+              <text x={W - 68} y={12} fontSize={9} className={axisText}>{t("offsets.dst")}</text>
+            </svg>
+          </PhoneMini>
         }
         rows={[
           { label: t("offsets.rowEarliest"), value: `${shortName(f.city(first.c))} ${f.offset(first.off)}` },

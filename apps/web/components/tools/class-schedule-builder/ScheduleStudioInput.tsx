@@ -27,7 +27,7 @@ export default function ScheduleStudioInput({ state, onChange, onReset, timeZone
   const timeError = toMinutes(sel.end) <= toMinutes(sel.start);
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="input" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div>
         <div className="mb-1.5 flex items-center justify-between gap-2">
           <span className={label}>{t("input.classes", { n: state.classes.length })}</span>

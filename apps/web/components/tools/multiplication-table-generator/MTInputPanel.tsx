@@ -69,7 +69,7 @@ export default function MTInputPanel(props: Props) {
   const squares = Array.from({ length: 13 }, (_, i) => centre - 6 + i).filter((n) => n >= 1);
 
   return (
-    <SectionCard title={t("inputTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col gap-4 p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col gap-4 p-4 lg:p-6">
       <div className="flex gap-2">
         {(["single", "range"] as const).map((m) => (
           <button

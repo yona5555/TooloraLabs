@@ -70,7 +70,7 @@ export default function MathSolverInputPanel({ draft, onChange, onCalculate, onC
   }
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex flex-col lg:h-full" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <form onSubmit={onCalculate}>
       <label className="block space-y-2">
         <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>

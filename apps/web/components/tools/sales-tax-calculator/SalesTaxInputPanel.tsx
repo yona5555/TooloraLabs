@@ -36,7 +36,7 @@ export default function SalesTaxInputPanel({
   const t = useTranslations("tools.sales-tax-calculator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         {(["add", "reverse"] as const).map((m) => (
           <button

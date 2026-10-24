@@ -10,6 +10,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useMathSolverLive } from "./MathSolverLiveContext";
 import { parseMathSolverDraft, deriveHeroEquation, solveQuadraticRoots, solveLinearRoot, fmt, snapDragValue } from "./mathSolverEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const LIGHT = { curve: "#2563eb", point: "#dc2626" };
 const DARK = { curve: "#60a5fa", point: "#f87171" };
@@ -94,19 +95,21 @@ export default function RootsVsParameterCurve() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { param: paramLabel })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div
-            aria-label={t("ariaLabel")}
-            className="mafs-canvas mx-auto w-full max-w-[400px] overflow-hidden rounded-xl"
-            onMouseUp={handleRelease}
-            onTouchEnd={handleRelease}
-          >
-            <Mafs viewBox={{ x: domain, y: [-yMax, yMax] }} height={210} pan={false} zoom={false} preserveAspectRatio={false}>
-              <Coordinates.Cartesian xAxis={{ lines: Math.max(1, Math.round((domain[1] - domain[0]) / 8)) }} yAxis={{ lines: Math.max(1, Math.round(yMax / 4)) }} />
-              <Plot.OfX y={rootFn} color={colors.curve} weight={2.5} />
-              <Point x={currentParam} y={rootFn(currentParam)} color="#111827" svgCircleProps={{ r: 4 }} />
-              {paramPoint.element}
-            </Mafs>
-          </div>
+          <PhoneMini slot={0} title={t("title")}>
+            <div
+              aria-label={t("ariaLabel")}
+              className="mafs-canvas mx-auto w-full max-w-[400px] overflow-hidden rounded-xl"
+              onMouseUp={handleRelease}
+              onTouchEnd={handleRelease}
+            >
+              <Mafs viewBox={{ x: domain, y: [-yMax, yMax] }} height={210} pan={false} zoom={false} preserveAspectRatio={false}>
+                <Coordinates.Cartesian xAxis={{ lines: Math.max(1, Math.round((domain[1] - domain[0]) / 8)) }} yAxis={{ lines: Math.max(1, Math.round(yMax / 4)) }} />
+                <Plot.OfX y={rootFn} color={colors.curve} weight={2.5} />
+                <Point x={currentParam} y={rootFn(currentParam)} color="#111827" svgCircleProps={{ r: 4 }} />
+                {paramPoint.element}
+              </Mafs>
+            </div>
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

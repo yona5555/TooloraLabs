@@ -1,5 +1,6 @@
 "use client";
 
+import ResultActionButton from "./ResultActionButton";
 import { useState } from "react";
 import { FileDown, Check } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -39,7 +40,7 @@ export default function PdfDownloadButton({
   }
 
   return (
-    <button
+    <ResultActionButton action="export"
       type="button"
       onClick={handleClick}
       disabled={state === "generating"}
@@ -47,6 +48,6 @@ export default function PdfDownloadButton({
     >
       {state === "done" ? <Check size={16} /> : <FileDown size={16} />}
       {state === "generating" ? t("generatingPdf") : state === "done" ? t("downloaded") : t("downloadPdf")}
-    </button>
+    </ResultActionButton>
   );
 }

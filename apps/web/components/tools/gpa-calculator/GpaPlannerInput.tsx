@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Plus, Printer, RotateCcw, Trash2, X } from "lucide-react";
 import { GPA_SCALES, type GpaScaleId } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -42,7 +43,7 @@ export default function GpaPlannerInput({ state, onChange, onReset, onPrint }: P
     state.semesters.length > 1 && set({ semesters: state.semesters.filter((_, i) => i !== si) });
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="output" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div className="grid grid-cols-2 gap-2">
         <label className="col-span-2 block">
           <span className={label}>{t("input.scale")}</span>
@@ -187,14 +188,14 @@ export default function GpaPlannerInput({ state, onChange, onReset, onPrint }: P
       </div>
 
       <div className="flex gap-2">
-        <button
+        <ResultActionButton action="print"
           type="button"
           onClick={onPrint}
           className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           <Printer size={15} />
           {t("input.print")}
-        </button>
+        </ResultActionButton>
         <button
           type="button"
           onClick={onReset}

@@ -29,6 +29,7 @@ export default function VectorAngleGauge() {
 
   return (
     <VectorIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={

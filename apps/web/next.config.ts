@@ -8,6 +8,8 @@ const LOCALE = ":locale(en|ar|es|hi|fr|de)";
 const REMOVED_TOOLS = "dice-roller|love-calculator|random-quote-generator";
 
 const nextConfig: NextConfig = {
+  // A second production build beside the dev server's (e.g. a branch-vs-main comparison) sets its own folder.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   async redirects() {
     return [
       { source: `/${LOCALE}/tools/:slug(${REMOVED_TOOLS})`, destination: "/:locale/tools", statusCode: 301 },

@@ -35,7 +35,7 @@ export default function TimeZoneConceptDiagram({ sameInstantLabel, caption }: Ti
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${width} 150`} role="img" aria-label={caption} className="h-auto w-full" style={{ minWidth: 480 }}>
+        <svg viewBox={`0 0 ${width} 150`} role="img" aria-label={caption} className="h-auto w-full min-w-[480px] max-md:min-w-0">
           <line x1={SPACING / 2} y1={18} x2={width - SPACING / 2} y2={18} stroke="currentColor" strokeWidth={1.5} />
           <text x={width / 2} y={12} textAnchor="middle" fontSize={12} fontWeight={700} fill="currentColor">
             {sameInstantLabel}

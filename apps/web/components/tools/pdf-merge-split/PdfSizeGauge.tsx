@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { formatBytes, usePdfModel } from "./PdfLiveContext";
 
@@ -65,7 +66,7 @@ export default function PdfSizeGauge() {
     <PdfIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={0} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("input"), value: formatBytes(inputBytes) },
         { label: t("output"), value: formatBytes(outputBytes) },

@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Download, Hand } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { KitControls } from "@/components/tool-ui/indicator-kit/CardKit";
@@ -66,7 +67,7 @@ export default function ImageResult({
 
   return (
     <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal lg:flex-1" style={{ fontFamily: "var(--glass-font)" }}>
-      <SectionCard
+      <SectionCard phoneRole="output"
         id="image-result"
         title={t("aboveFold.resultTitle")}
         className="flex flex-col lg:flex-1"
@@ -179,7 +180,7 @@ export default function ImageResult({
                 : t("aboveFold.sameSize")}
         </div>
 
-        <button
+        <ResultActionButton action="download"
           type="button"
           onClick={onDownload}
           disabled={!ready}
@@ -187,7 +188,7 @@ export default function ImageResult({
         >
           <Download size={16} />
           {t("form.download")}
-        </button>
+        </ResultActionButton>
         </div>
       </SectionCard>
     </div>

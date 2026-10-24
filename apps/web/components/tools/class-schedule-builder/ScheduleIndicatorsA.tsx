@@ -1,7 +1,9 @@
 "use client";
+import { useId } from "react";
 import { DAY_CODES, findClassConflicts } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { classColor, fmt, hm, toMinutes, type Derived, type StudioState } from "./studio";
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
 
@@ -11,6 +13,7 @@ const BUFFER_STEPS = [0, 5, 10, 15, 20, 30];
 
 /* 1 · Conflict & buffer map (interactive: drag the buffer slider, the flagged gaps update everywhere) */
 export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps) {
+  const svgId = useId();
   const t = useSchedT();
   const [h0, h1] = hourWindow(d);
   const days = d.shownDays;
@@ -35,7 +38,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
           <div className="w-[420px] max-w-full">
             <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.conflict.title")} className="max-w-full">
               <defs>
-                <pattern id="csb-hatch-a" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <pattern id={`${svgId}csb-hatch-a`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                   <rect width="5" height="5" fill="#ef4444" fillOpacity="0.25" />
                   <line x1="0" y1="0" x2="0" y2="5" stroke="#dc2626" strokeWidth="2.2" />
                 </pattern>
@@ -67,7 +70,7 @@ export function ScheduleConflictCard({ state, onChange, d }: SchedIndicatorProps
                     {d.overlaps
                       .filter((o) => o.day === day)
                       .map((o, i) => (
-                        <rect key={`o${i}`} x={x(o.startMinutes)} y={y0 + 2} width={Math.max(2, x(o.endMinutes) - x(o.startMinutes))} height={RH - 4} fill="url(#csb-hatch-a)" stroke="#dc2626" rx={2} />
+                        <rect key={`o${i}`} x={x(o.startMinutes)} y={y0 + 2} width={Math.max(2, x(o.endMinutes) - x(o.startMinutes))} height={RH - 4} fill={`url(#${svgId}csb-hatch-a)`} stroke="#dc2626" rx={2} />
                       ))}
                     {d.tight
                       .filter((o) => o.day === day)
@@ -122,6 +125,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
+          <PhoneMini slot={1} title={t("ind.load.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
             <line x1={10} x2={W - 10} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
             {days.map((day, i) => {
@@ -153,6 +157,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
               </g>
             )}
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...d.shownDays.map((day) => {

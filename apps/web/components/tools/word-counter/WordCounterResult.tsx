@@ -32,7 +32,7 @@ export default function WordCounterResult() {
   const summaryText = rows.map((r) => `${r.label}: ${r.value}`).join("\n");
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"

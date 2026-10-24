@@ -58,6 +58,7 @@ export default function SwPaceCompare() {
 
   return (
     <SwIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

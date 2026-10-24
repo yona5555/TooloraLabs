@@ -1,3 +1,4 @@
+import { useId } from "react";
 type VectorArrowDiagramProps = {
   ax: number;
   ay: number;
@@ -25,6 +26,7 @@ function Arrow({ x, y, colorClass, markerId }: { x: number; y: number; colorClas
 }
 
 export default function VectorArrowDiagram({ ax, ay, bx, by, labelA, labelB, labelSum, caption }: VectorArrowDiagramProps) {
+  const svgId = useId();
   const sumEnd = toSvg(ax + bx, ay + by);
   const aEnd = toSvg(ax, ay);
   const bEnd = toSvg(bx, by);
@@ -40,9 +42,9 @@ export default function VectorArrowDiagram({ ax, ay, bx, by, labelA, labelB, lab
           <line x1={aEnd.x} y1={aEnd.y} x2={sumEnd.x} y2={sumEnd.y} strokeWidth={1} strokeDasharray="3 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
           <line x1={bEnd.x} y1={bEnd.y} x2={sumEnd.x} y2={sumEnd.y} strokeWidth={1} strokeDasharray="3 3" className="stroke-zinc-300 dark:stroke-zinc-600" />
 
-          <Arrow x={ax} y={ay} colorClass="stroke-blue-600 dark:stroke-blue-400" markerId="vec-arrow-a" />
-          <Arrow x={bx} y={by} colorClass="stroke-emerald-500 dark:stroke-emerald-400" markerId="vec-arrow-b" />
-          <Arrow x={ax + bx} y={ay + by} colorClass="stroke-purple-500 dark:stroke-purple-400" markerId="vec-arrow-sum" />
+          <Arrow x={ax} y={ay} colorClass="stroke-blue-600 dark:stroke-blue-400" markerId={`${svgId}vec-arrow-a`} />
+          <Arrow x={bx} y={by} colorClass="stroke-emerald-500 dark:stroke-emerald-400" markerId={`${svgId}vec-arrow-b`} />
+          <Arrow x={ax + bx} y={ay + by} colorClass="stroke-purple-500 dark:stroke-purple-400" markerId={`${svgId}vec-arrow-sum`} />
 
           <text x={aEnd.x + 6} y={aEnd.y - 4} fontSize={11} fontWeight={700} className="fill-blue-600 dark:fill-blue-400">
             {labelA}
@@ -55,13 +57,13 @@ export default function VectorArrowDiagram({ ax, ay, bx, by, labelA, labelB, lab
           </text>
 
           <defs>
-            <marker id="vec-arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
+            <marker id={`${svgId}vec-arrow-a`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-blue-600 dark:fill-blue-400" />
             </marker>
-            <marker id="vec-arrow-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
+            <marker id={`${svgId}vec-arrow-b`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-emerald-500 dark:fill-emerald-400" />
             </marker>
-            <marker id="vec-arrow-sum" viewBox="0 0 10 10" refX="8" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
+            <marker id={`${svgId}vec-arrow-sum`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth={6} markerHeight={6} orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" className="fill-purple-500 dark:fill-purple-400" />
             </marker>
           </defs>

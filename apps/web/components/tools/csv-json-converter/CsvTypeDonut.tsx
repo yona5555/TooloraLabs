@@ -65,6 +65,7 @@ export default function CsvTypeDonut() {
     <CsvIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={0}
       indicator={svg}
       rows={[
         { label: t("numeric"), value: `${f(numeric)} (${pct(numeric, total)})` },

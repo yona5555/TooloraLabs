@@ -68,7 +68,7 @@ export default function MolarMassResult({ hasCalculated, result, formula, digitS
   const th3 = "px-2 py-2 text-start font-bold";
   return (
     <div data-ph-visual data-ph-hero data-ph-result className="flex flex-col leading-normal lg:flex-1" style={{ fontFamily: "var(--glass-font)" }}>
-      <SectionCard
+      <SectionCard phoneRole="output"
         id="mm-result"
         title={t("heading")}
         className="flex flex-col lg:flex-1"

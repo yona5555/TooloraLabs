@@ -53,7 +53,7 @@ export default function ImageInputPanel({
   }
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="input"
       title={t("form.inputTitle")}
       action={
         file && !isSample ? (

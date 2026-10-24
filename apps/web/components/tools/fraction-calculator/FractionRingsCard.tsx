@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { GlassIndicatorCard, GlassTable } from "@/components/tool-ui/glass/GlassPrimitives";
 import { useFractionCardState } from "./useFractionCardState";
 import { formatMathValue } from "@tooloralabs/tools";
@@ -59,10 +60,12 @@ export default function FractionRingsCard() {
       title={t("title")}
       subtitle={t("subtitle")}
       visual={
+        <PhoneMini slot={0} title={t("title")}>
         <div className="flex w-full flex-wrap items-center justify-around gap-4">
           <Ring num={dims.numeratorA} den={dims.denominatorA} color="var(--glass-accent-1-strong)" onDrag={(n) => setDim("numeratorA", n)} label={t("labelA", { den: formatMathValue(dims.denominatorA) })} />
           <Ring num={dims.numeratorB} den={dims.denominatorB} color="var(--glass-accent-2-strong)" onDrag={(n) => setDim("numeratorB", n)} label={t("labelB", { den: formatMathValue(dims.denominatorB) })} />
         </div>
+        </PhoneMini>
       }
       table={
         <GlassTable

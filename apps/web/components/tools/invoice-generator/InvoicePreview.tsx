@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { InvoiceGeneratorOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import InvoiceCompositionDonut from "./InvoiceCompositionDonut";
 import InvoiceShareExportModal from "./InvoiceShareExportModal";
 
@@ -62,7 +63,7 @@ export default function InvoicePreview({
   ) : undefined;
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")} action={shareModal}>
+    <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")} action={shareModal}>
       {errorMessage ? (
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
@@ -137,6 +138,7 @@ export default function InvoicePreview({
           </div>
 
           <div className="border-t border-zinc-200 pt-5 print:hidden dark:border-zinc-800">
+            <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
             <InvoiceCompositionDonut
               centerValue={money(result.total)}
               centerLabel={t("result.grandTotal")}
@@ -145,6 +147,7 @@ export default function InvoicePreview({
                 { key: "tax", value: result.taxAmount, label: t("result.tax"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
               ]}
             />
+            </PhoneMini>
           </div>
         </div>
       ) : (

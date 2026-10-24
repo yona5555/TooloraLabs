@@ -50,6 +50,7 @@ export default function CsvSizeBars() {
     <CsvIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={1}
       indicator={svg}
       rows={[
         { label: t("csv"), value: `${f(a.sizes.csv)} B` },

@@ -65,7 +65,7 @@ export default function InvoiceBatchEditor(p: Props) {
   const selectedNet = invoice ? invoiceTotals(toBatch([invoice])[0]).subtotal : 0;
 
   return (
-    <SectionCard phoneRole="tool" title={t("title")} className="flex h-full flex-col" bodyClassName="flex min-h-0 flex-1 flex-col p-4">
+    <SectionCard phoneRole="input" title={t("title")} className="flex h-full flex-col" bodyClassName="flex min-h-0 flex-1 flex-col p-4">
       <div className="flex flex-wrap gap-2">
         <button type="button" onClick={p.onLoadSample} data-testid="load-sample" className="flex items-center gap-1.5 rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:border-blue-500 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:text-blue-400">
           <Sparkles size={13} />

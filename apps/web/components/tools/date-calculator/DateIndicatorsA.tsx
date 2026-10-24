@@ -16,6 +16,7 @@ import {
 } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { useYmd } from "./DateResultCard";
 import { DATE_COLORS, isWeekendDay, withSpanEnd, type DateState, type Derived, type Formatters } from "./dateModel";
 
@@ -210,6 +211,7 @@ export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps)
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
+          <PhoneMini slot={0} title={t("split.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("split.title")} className="max-w-full">
             {rows.map((r, i) => {
               const y = 22 + i * 78;
@@ -245,6 +247,7 @@ export function DateBusinessSplitCard({ state, setState, d, f }: IndicatorProps)
               );
             })}
           </svg>
+          </PhoneMini>
         }
         rows={[
           { label: tp("result.businessDays"), value: `${f.int(cur.businessDays)} · ${f.pct(cur.businessDays / total)}` },
@@ -277,6 +280,7 @@ export function DateWeekdayBarsCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
+          <PhoneMini slot={1} title={t("weekday.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("weekday.title")} className="max-w-full">
             {counts.map((n, i) => {
               const col = rtl ? 6 - i : i;
@@ -294,6 +298,7 @@ export function DateWeekdayBarsCard({ d, f }: IndicatorProps) {
               );
             })}
           </svg>
+          </PhoneMini>
         }
         rows={[
           { label: t("weekday.fullWeeks"), value: f.int(d.span.weeks), note: `${f.int(d.span.totalDays)} ÷ 7` },

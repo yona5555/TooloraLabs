@@ -55,6 +55,7 @@ export default function FnClassDonut() {
   const safe = a.classCounts.ascii + a.classCounts.digit + a.classCounts.dot;
   return (
     <FnIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

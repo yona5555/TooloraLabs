@@ -5,6 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSignificantFiguresLive } from "./SignificantFiguresLiveContext";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 /** Type #1 (Labeled Bar Chart): the live A and B's own significant-figure counts, ranked side by side — whichever is less precise sets the real limit for any calculation combining them. */
 export default function SigFigCountComparisonBarChart() {
@@ -25,7 +26,9 @@ export default function SigFigCountComparisonBarChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div className="shrink-0">
-          <EduBarChart bars={bars} ariaLabel={t("title")} />
+          <PhoneMini slot={1} title={t("title")}>
+            <EduBarChart bars={bars} ariaLabel={t("title")} />
+          </PhoneMini>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.limitingFigure"), value: `${Math.min(sfA, sfB)}`, emphasize: true, note: t("worked.note") }]} />
       </div>

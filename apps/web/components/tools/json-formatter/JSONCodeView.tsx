@@ -61,8 +61,12 @@ function Line({ text }: { text: string }) {
  * Syntax-coloured JSON with line numbers and one coloured rail per nesting level, so the depth of
  * every line is visible at a glance. `unit` = the indent string the text was formatted with.
  */
+/** Phone: long lines wrap between tokens instead of scrolling sideways (desktop keeps one line each). */
+export const PHONE_WRAP = "max-md:min-w-0 max-md:whitespace-pre-wrap max-md:[word-break:normal] max-md:[overflow-wrap:anywhere]";
+
 export default function JSONCodeView({ text, unit, className = "" }: { text: string; unit: string; className?: string }) {
-  // Minified text is one long line: wrap it instead of scrolling sideways.
+  // Minified text is one long line: wrap it instead of scrolling sideways. Phone (below md) wraps every
+  // line between tokens; a token with no space in it breaks only when it alone is wider than the box.
   const wrap = !text.includes("\n");
   const lines = text.split("\n");
   const gutter = String(lines.length).length;
@@ -72,14 +76,14 @@ export default function JSONCodeView({ text, unit, className = "" }: { text: str
         const lead = line.match(/^[ \t]*/)?.[0] ?? "";
         const depth = unit ? Math.floor(lead.length / unit.length) : 0;
         return (
-          <div key={n} className={wrap ? "flex" : "flex min-w-max"}>
+          <div key={n} className={wrap ? "flex" : "flex min-w-max max-md:min-w-0"}>
             <span className="sticky left-0 shrink-0 bg-zinc-50 ps-2 pe-3 text-end text-zinc-400 select-none dark:bg-zinc-800 dark:text-zinc-500" style={{ width: `${gutter + 2}ch` }}>
               {n + 1}
             </span>
             {Array.from({ length: depth }, (_, d) => (
               <span key={d} className={`inline-block shrink-0 border-s-2 ${RAIL[d % RAIL.length]}`} style={{ width: "2ch" }} />
             ))}
-            <span className={`pe-3 text-zinc-800 dark:text-zinc-100 ${wrap ? "min-w-0 break-all whitespace-pre-wrap" : "whitespace-pre"}`}>
+            <span className={`pe-3 text-zinc-800 dark:text-zinc-100 ${wrap ? "min-w-0 break-all whitespace-pre-wrap" : "whitespace-pre"} ${PHONE_WRAP}`}>
               <Line text={line.slice(depth * unit.length)} />
             </span>
           </div>

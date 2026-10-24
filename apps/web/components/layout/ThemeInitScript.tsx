@@ -1,4 +1,5 @@
 "use client";
+import { useRef } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 
 const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem("theme");var d=s?s==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;if(d)document.documentElement.classList.add("dark");}catch(e){}})();`;
@@ -12,11 +13,16 @@ const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem("theme");v
  * triggers React 19's dev-only "Encountered a script tag while rendering
  * React component" warning for `<script>` elements that ARE part of the
  * reconciled tree. The script still runs before paint either way, so
- * dark-mode-without-flicker behavior is unaffected.
+ * dark-mode-without-flicker behavior is unaffected. The callback runs at every
+ * flush of the streamed HTML, so it inserts the script on the first flush only
+ * (one `id="theme-init"` per page, never a duplicate id).
  */
 export default function ThemeInitScript() {
-  useServerInsertedHTML(() => (
-    <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-  ));
+  const inserted = useRef(false);
+  useServerInsertedHTML(() => {
+    if (inserted.current) return null;
+    inserted.current = true;
+    return <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />;
+  });
   return null;
 }

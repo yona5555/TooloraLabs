@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Check, Copy } from "lucide-react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
@@ -9,7 +10,7 @@ import { usePaletteModel } from "./PaletteLiveContext";
 function CopyValue({ value }: { value: string }) {
   const { copied, copy } = useCopyToClipboard();
   return (
-    <button
+    <ResultActionButton action="copy"
       type="button"
       onClick={() => copy(value)}
       dir="ltr"
@@ -17,7 +18,7 @@ function CopyValue({ value }: { value: string }) {
     >
       <span className="truncate">{value}</span>
       {copied ? <Check size={12} className="shrink-0 text-green-600 dark:text-green-400" /> : <Copy size={12} className="shrink-0 opacity-50" />}
-    </button>
+    </ResultActionButton>
   );
 }
 

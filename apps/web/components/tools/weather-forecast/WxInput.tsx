@@ -93,7 +93,7 @@ export default function WxInput({ place, onPlace, units, onUnits, favourites, on
   };
 
   return (
-    <SectionCard title={t("input.title")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="flex flex-col gap-3 p-4 lg:flex-1">
+    <SectionCard phoneRole="input" title={t("input.title")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="flex flex-col gap-3 p-4 lg:flex-1">
       <div className="grid grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 text-sm dark:bg-zinc-800" role="radiogroup" aria-label={t("input.units")} data-bp-inner>
         {(["metric", "us"] as const).map((u) => (
           <button

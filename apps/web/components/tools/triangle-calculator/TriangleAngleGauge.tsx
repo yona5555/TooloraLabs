@@ -9,6 +9,7 @@ import TriangleSinCosLiveCurve from "./TriangleSinCosLiveCurve";
 import { round } from "./triangleEducationMath";
 import { TRIANGLE_SCENARIOS } from "./types";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 type ShapeKey = "acute" | "right" | "obtuse";
 
@@ -59,18 +60,20 @@ export default function TriangleAngleGauge() {
 
       <GapFreeRow>
         <div className="shrink-0">
-          <div dir="ltr">
-            <RatioGauge
-              value={selectedAngle}
-              domainMin={DOMAIN_MIN}
-              domainMax={DOMAIN_MAX}
-              zones={ZONES}
-              valueLabel={`${Math.round(selectedAngle)}°`}
-              caption={classification}
-              captionColorClass={CAPTION_COLOR[shape]}
-              ticks={TICKS}
-            />
-          </div>
+          <PhoneMini slot={0} title={t("title")}>
+            <div dir="ltr">
+              <RatioGauge
+                value={selectedAngle}
+                domainMin={DOMAIN_MIN}
+                domainMax={DOMAIN_MAX}
+                zones={ZONES}
+                valueLabel={`${Math.round(selectedAngle)}°`}
+                caption={classification}
+                captionColorClass={CAPTION_COLOR[shape]}
+                ticks={TICKS}
+              />
+            </div>
+          </PhoneMini>
 
           <div role="tablist" className="mt-2 flex flex-wrap justify-center gap-2">
             {TRIANGLE_SCENARIOS.map((s) => (

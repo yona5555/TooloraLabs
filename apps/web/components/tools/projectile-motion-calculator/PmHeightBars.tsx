@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { sampleTrajectory } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { r2, usePmModel } from "./PmLiveContext";
@@ -54,7 +55,7 @@ export default function PmHeightBars() {
     <PmIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={1} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("step"), value: `Δt = ${f(a.timeOfFlight)} / ${STEPS} = ${f(dt, 3)} s` },
         { label: t("dx"), value: `Δx = ${f(a.vx)} × ${f(dt, 3)} = ${f(a.vx * dt)} m` },

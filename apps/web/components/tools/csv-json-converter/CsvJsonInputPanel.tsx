@@ -40,7 +40,7 @@ export default function CsvJsonInputPanel({
   };
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <div className="inline-flex rounded-lg border border-zinc-200 p-1 dark:border-zinc-800">
         {(["csvToJson", "jsonToCsv"] as const).map((m) => (
           <button

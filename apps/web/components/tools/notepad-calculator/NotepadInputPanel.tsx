@@ -14,7 +14,7 @@ export default function NotepadInputPanel({ text, onChange, onSnippet, onClear }
   const t = useTranslations("tools.notepad-calculator.form");
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")} className="flex flex-1 flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="flex flex-1 flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <p className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">{t("samples")}</p>
       <div className="mb-3 grid grid-cols-2 gap-2">
         {SNIPPET_KEYS.map((key) => (
@@ -38,7 +38,7 @@ export default function NotepadInputPanel({ text, onChange, onSnippet, onClear }
           placeholder={t("inputPlaceholder")}
           spellCheck={false}
           wrap="off"
-          className="w-full flex-1 resize-none rounded-xl border border-zinc-300 bg-white px-4 py-3 font-mono text-sm leading-7 text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
+          className="w-full flex-1 resize-none rounded-xl border border-zinc-300 bg-white px-4 py-3 max-md:break-words max-md:whitespace-pre-wrap font-mono text-sm leading-7 text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-blue-500 dark:focus:ring-blue-500/20"
           data-testid="notepad-input"
         />
       </label>

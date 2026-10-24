@@ -21,7 +21,7 @@ export default function GraphInputPanel({ draft, error, onChange, onClear }: Pro
   }
 
   return (
-    <SectionCard phoneRole="tool" title={t("inputTitle")}>
+    <SectionCard phoneRole="input" title={t("inputTitle")}>
       <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
         <ToolInput
           label={t("expressionLabel")}

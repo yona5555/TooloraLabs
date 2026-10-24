@@ -26,18 +26,41 @@ export function phoneLayout(anchor: Element | null): void {
   root.setAttribute("data-phone-layout", "");
   const topLevel = (el: Element) => !el.parentElement || !el.parentElement.closest("[data-card]");
 
+  const markets = root.hasAttribute("data-phone-markets");
   // Only cards this screen renders count (e.g. the desktop-only sidebar's cards do not on phone).
   const cards = Array.prototype.filter.call(root.querySelectorAll("[data-card]"), (c: Element) => topLevel(c) && c.getClientRects().length > 0) as Element[];
-  // Rule A reorders cards on phone with CSS order, so "first" there means first on screen.
   const phone = window.matchMedia("(max-width: 767px)").matches;
-  if (phone) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-  cards.forEach((card, i) => {
+  const flowCards = cards.filter((c) => !c.closest('dialog,[role="dialog"]'));
+  let open: Element[];
+  if (phone && !markets) {
+    // LOCKED phone card order (visuals.md): the server marks each tool's input, output and main visual
+    // cards (SectionCard `phoneRole`, set by scripts/phone-roles.mjs); those are the always-open cards
+    // and globals.css orders them 1 input, 2 output, 3 visual. A page with fewer than 3 role cards fills
+    // up with its first other cards in DOM order; a secondary output (`output-secondary`) or a
+    // `visual-collapsed` card always stays in the collapsed group. Nothing is measured or moved here.
+    open = flowCards.filter((c) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || ""));
+    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0 && !/^(output-secondary|visual-collapsed)$/.test(c.getAttribute("data-phone-role") || "")) open.push(c);
+  } else {
+    // Desktop (where nothing collapses) and the markets tools (approved order, live data first): a card
+    // holding a Copy or Share/Export action counts first, then the first cards on screen.
+    if (!markets) {
+      cards.forEach((c) => {
+        if (c.querySelector('[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)')) c.setAttribute("data-phone-output", "");
+      });
+    }
+    const isOutput = (c: Element) => c.hasAttribute("data-phone-output") || /output/.test(c.getAttribute("data-phone-role") || "");
+    if (phone) flowCards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+    open = flowCards.filter(isOutput).slice(0, 3);
+    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0) open.push(c);
+    open.sort((a, b) => flowCards.indexOf(a) - flowCards.indexOf(b));
+  }
+  cards.forEach((card) => {
     if (card.hasAttribute("data-card-init")) return;
     card.setAttribute("data-card-init", "");
-    if (cards.length <= 3 || i < 3 || card.closest('dialog,[role="dialog"]')) card.setAttribute("data-fixed", "");
+    if (cards.length <= 3 || open.indexOf(card) >= 0 || card.closest('dialog,[role="dialog"]')) card.setAttribute("data-fixed", "");
   });
-  // Phone order (globals.css): the always-open cards, numbered in screen order, go first.
-  if (phone) cards.filter((c) => !c.closest('dialog,[role="dialog"]')).slice(0, 3).forEach((card, i) => card.setAttribute("data-phone-open", String(i + 1)));
+  // Phone order (globals.css): the always-open cards go first.
+  if (phone) open.forEach((card, i) => card.setAttribute("data-phone-open", String(i + 1)));
 
   if (!phone) return;
   // Rule B flattens the article (display:contents has no box): an element's box is then its parts' union.
@@ -57,14 +80,17 @@ export function phoneLayout(anchor: Element | null): void {
   slots[0].setAttribute("data-show", "");
   slots[0].setAttribute("data-phone-ad2", "");
 
-  const top = (el: Element) => (box(el) || { top: 0 }).top;
-  const start = top(sections[0]);
-  const height = (box(sections[sections.length - 1]) || { bottom: start }).bottom - start;
-  const offsets = sections.map((section) => top(section) - start);
+  // Rule 4 moves the disclaimer sections to the article's end, so the screen order of sections can differ
+  // from the DOM order: measure the article's extent over all of them, and never put an ad before one.
+  const boxes = sections.map((section) => box(section) || { top: 0, bottom: 0 });
+  const start = Math.min(...boxes.map((b) => b.top));
+  const height = Math.max(...boxes.map((b) => b.bottom)) - start;
+  const offsets = boxes.map((b) => b.top - start);
   const pick = (target: number, min: number) => {
     let best = -1;
     let bestDistance = Infinity;
     for (let i = 1; i < offsets.length; i++) {
+      if (sections[i].hasAttribute("data-phone-disclaimer")) continue;
       if (offsets[i] < min || height - offsets[i] < 300) continue;
       const distance = Math.abs(offsets[i] - target);
       if (distance < bestDistance) {
@@ -105,6 +131,10 @@ export function phoneLayout(anchor: Element | null): void {
     }
   };
   collect(article);
+  // Rule 4: disclaimer callouts from outside the article join its end, inside the paper.
+  root.querySelectorAll("[data-phone-disclaimer]").forEach((el) => {
+    if (!article.contains(el) && !el.closest("[data-card]")) parts.push(el);
+  });
   const paper = () => {
     if (!window.matchMedia("(max-width: 767px)").matches) return;
     let min = Infinity;

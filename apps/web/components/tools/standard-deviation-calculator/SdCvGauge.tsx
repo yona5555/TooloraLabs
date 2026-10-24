@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SdIndicatorCard from "./SdIndicatorCard";
 import { useSdModel } from "./SdLiveContext";
@@ -21,6 +22,7 @@ export function cvZone(cv: number): "low" | "moderate" | "high" {
 
 /** Type #8 (Gradient Gauge): coefficient of variation σ / |μ| × 100 on a 0–60 % dial — low (< 10 %), moderate (10–30 %), high (> 30 %). */
 export default function SdCvGauge() {
+  const svgId = useId();
   const t = useTranslations("tools.standard-deviation-calculator.education.lab.cv");
   const tl = useTranslations("tools.standard-deviation-calculator.live3d");
   const { a, f } = useSdModel();
@@ -37,7 +39,7 @@ export default function SdCvGauge() {
   const gauge = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
-        <linearGradient id="sd-cv-grad" x1="0" x2="1" y1="0" y2="0">
+        <linearGradient id={`${svgId}sd-cv-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#10b981" />
           <stop offset="16%" stopColor="#10b981" />
           <stop offset="34%" stopColor="#f59e0b" />
@@ -46,7 +48,7 @@ export default function SdCvGauge() {
           <stop offset="100%" stopColor="#b91c1c" />
         </linearGradient>
       </defs>
-      <path d={`M ${sx0} ${sy0} A ${R} ${R} 0 0 1 ${sx1} ${sy1}`} fill="none" stroke="url(#sd-cv-grad)" strokeWidth={16} strokeLinecap="round" />
+      <path d={`M ${sx0} ${sy0} A ${R} ${R} 0 0 1 ${sx1} ${sy1}`} fill="none" stroke={`url(#${svgId}sd-cv-grad)`} strokeWidth={16} strokeLinecap="round" />
       {ticks.map((v) => {
         const [tx, ty] = polar(Math.PI * (1 - v / LIMIT), R - 24);
         return (
@@ -67,6 +69,7 @@ export default function SdCvGauge() {
 
   return (
     <SdIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={gauge}

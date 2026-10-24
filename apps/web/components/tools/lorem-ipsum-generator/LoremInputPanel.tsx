@@ -14,7 +14,7 @@ export default function LoremInputPanel() {
   const sliderValue = Math.min(LOREM_COUNT_RANGE.max, Math.max(LOREM_COUNT_RANGE.min, Math.round(countValue) || LOREM_COUNT_RANGE.min));
 
   return (
-    <SectionCard title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="input" title={t("inputTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col">
       <div className="space-y-4">
         <div>
           <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("styleLabel")}</span>

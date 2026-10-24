@@ -58,6 +58,7 @@ export default function KinDisplacementSplit() {
   const share = Math.abs(a1) + Math.abs(a2) > 0 ? Math.abs(a2) / (Math.abs(a1) + Math.abs(a2)) : 0;
   return (
     <KinIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

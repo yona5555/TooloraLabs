@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 
@@ -25,6 +26,7 @@ const TOTAL_CURVE = `C 300,200 560,120 ${END_X},${TOTAL_END_Y}`;
  * further ahead of that the longer the money stays invested (the upper band, widening over time).
  */
 export default function CompoundInterestConceptDiagram() {
+  const svgId = useId();
   const t = useTranslations("tools.compound-interest-calculator.aboveFold");
   const d = useTranslations("tools.compound-interest-calculator.aboveFold.conceptDiagram");
 
@@ -34,13 +36,13 @@ export default function CompoundInterestConceptDiagram() {
       <div dir="ltr" className="mt-4 overflow-x-auto">
         <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={d("ariaLabel")} className="mx-auto block w-full max-w-3xl text-current">
           <defs>
-            <marker id="ci-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <marker id={`${svgId}ci-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 Z" className="fill-zinc-400 dark:fill-zinc-500" />
             </marker>
           </defs>
 
           {/* baseline / time axis */}
-          <line x1={START_X} y1={BASE_Y} x2={END_X + 30} y2={BASE_Y} stroke="currentColor" strokeWidth={1.5} opacity={0.25} markerEnd="url(#ci-arrow)" />
+          <line x1={START_X} y1={BASE_Y} x2={END_X + 30} y2={BASE_Y} stroke="currentColor" strokeWidth={1.5} opacity={0.25} markerEnd={`url(#${svgId}ci-arrow)`} />
           <text x={END_X + 34} y={BASE_Y + 4} fontSize={12} fill="currentColor" opacity={0.55}>
             {d("timeLabel")}
           </text>

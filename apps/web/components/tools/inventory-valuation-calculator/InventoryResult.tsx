@@ -6,6 +6,7 @@ import type { InventoryValuationOutput } from "@tooloralabs/tools";
 import type { CurrencyCode } from "@/lib/currency";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import InventoryMethodChart from "./InventoryMethodChart";
 import InventoryShareExportModal from "./InventoryShareExportModal";
 
@@ -85,7 +86,8 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
     >
       <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.chartTitle")}</p>
       <div className="mt-2">
-        <InventoryMethodChart
+        <PhoneMini slot={0} title={t("aboveFold.chartTitle")}>
+          <InventoryMethodChart
           fifo={result.totalValueFifo}
           lifo={result.totalValueLifo}
           weightedAverage={result.totalValueWeightedAverage}
@@ -95,9 +97,11 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
           chartLabel={t("aboveFold.chartTitle")}
           formatValue={money}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <PhoneMini slot={1} title={t("result.stockHealth.caption")}>
         <RatioGauge
           wide
           value={healthyPercent}
@@ -113,6 +117,7 @@ export default function InventoryResult({ result, hasCalculated, errorMessage, d
           ticks={[0, 60, 90, 100]}
           tickFormatter={(tick) => `${tick}%`}
         />
+        </PhoneMini>
       </div>
       <p className="mt-2 text-center text-xs text-zinc-500 dark:text-zinc-400">{t("result.stockHealth.caption")}</p>
 

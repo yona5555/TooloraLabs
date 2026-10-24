@@ -23,7 +23,7 @@ export default function StudyStudioInput({ state, onChange, onReset }: Props) {
   const lastDate = state.exams.reduce((a, e) => (e.date > a ? e.date : a), state.start);
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="input" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <label className="block">
         <span className={label}>{t("input.start")}</span>
         <input type="date" dir="ltr" value={state.start} onChange={(e) => e.target.value && set({ start: e.target.value })} className={field} />

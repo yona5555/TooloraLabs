@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { ArrowDownAZ, Download, Pencil, Trash2 } from "lucide-react";
 import { formatReference, segmentsToHtml, segmentsToText, sortBibliography, sourceLang, toBibtex, toRis } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -32,7 +33,7 @@ export default function CitationBibliography({ state, onChange }: Props) {
   };
 
   return (
-    <SectionCard id="bibliography" title={t("bib.title")}>
+    <SectionCard phoneRole="output-secondary" id="bibliography" title={t("bib.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("bib.intro")}</p>
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <span className="rounded-md bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300">
@@ -43,14 +44,14 @@ export default function CitationBibliography({ state, onChange }: Props) {
           {t("bib.sort")}
         </button>
         <CopyButton text={allText} html={allHtml} label={t("bib.copyAll")} doneLabel={t("result.copied")} />
-        <button type="button" className={btn} disabled={!usable.length} onClick={() => downloadTextFile("references.bib", toBibtex(usable), "application/x-bibtex;charset=utf-8")}>
+        <ResultActionButton action="download" type="button" className={btn} disabled={!usable.length} onClick={() => downloadTextFile("references.bib", toBibtex(usable), "application/x-bibtex;charset=utf-8")}>
           <Download size={14} />
           {t("bib.bibtex")}
-        </button>
-        <button type="button" className={btn} disabled={!usable.length} onClick={() => downloadTextFile("references.ris", toRis(usable), "application/x-research-info-systems;charset=utf-8")}>
+        </ResultActionButton>
+        <ResultActionButton action="download" type="button" className={btn} disabled={!usable.length} onClick={() => downloadTextFile("references.ris", toRis(usable), "application/x-research-info-systems;charset=utf-8")}>
           <Download size={14} />
           {t("bib.ris")}
-        </button>
+        </ResultActionButton>
       </div>
 
       <ol className="divide-y divide-zinc-200 rounded-xl border border-zinc-200 dark:divide-zinc-700 dark:border-zinc-700">

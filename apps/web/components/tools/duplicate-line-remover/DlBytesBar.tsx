@@ -59,6 +59,7 @@ export default function DlBytesBar() {
     <DlIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={1}
       indicator={svg}
       rows={[
         { label: t("input"), value: `${f(b.input)} B` },

@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import ResultActionButton from "@/components/tool-ui/ResultActionButton";
 import { Check, Copy, Link2, Minus, Plus, RotateCcw, Trash2 } from "lucide-react";
 import type { TcOvertimeBasis, TcRoundMode, WeekendPreset } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -74,7 +75,7 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
   );
 
   return (
-    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="output" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div>
         <span className={label}>{t("input.mode")}</span>
         <Segmented<Mode> value={s.mode} onChange={(mode) => set({ mode })} options={MODES.map((m) => ({ v: m, label: t(`modes.${m}`) }))} />
@@ -317,10 +318,10 @@ export default function TcInput({ s, set, d, f, onCopy, onShare, onReset, copied
       )}
 
       <div className="grid grid-cols-[1fr_1fr_auto] gap-2">
-        <button type="button" onClick={onCopy} className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-2 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
+        <ResultActionButton action="copy" type="button" onClick={onCopy} className="flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-2 py-2 text-xs font-semibold text-white transition hover:bg-blue-700">
           {copied === "result" ? <Check size={14} /> : <Copy size={14} />}
           {copied === "result" ? t("input.copied") : t("input.copy")}
-        </button>
+        </ResultActionButton>
         <button
           type="button"
           onClick={onShare}

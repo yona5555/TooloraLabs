@@ -15,7 +15,7 @@ export default function LogoResult() {
 
   if (!ok) {
     return (
-      <SectionCard title={t("heading")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col lg:justify-center">
+      <SectionCard phoneRole="output" title={t("heading")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col lg:justify-center">
         <p className="rounded-xl border border-dashed border-zinc-300 px-4 py-8 text-center text-sm leading-6 text-zinc-600 dark:border-zinc-700 dark:text-zinc-300">{t("emptyText")}</p>
       </SectionCard>
     );
@@ -33,7 +33,7 @@ export default function LogoResult() {
   ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:p-5 lg:flex lg:flex-1 lg:flex-col"
