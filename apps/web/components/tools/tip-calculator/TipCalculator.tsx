@@ -127,7 +127,8 @@ export default function TipCalculator({ education }: { education: ReactNode }) {
     setRoundUpPerPerson(false);
     setDigitStyle("western");
     setCurrency(DEFAULT_CURRENCY);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setOutcome(getDefaultResult());
     window.history.replaceState(null, "", window.location.pathname);
   }
 

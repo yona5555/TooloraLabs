@@ -99,7 +99,8 @@ export default function SurfaceAreaCalculator({ education }: { education: ReactN
 
   function handleClear() {
     setDraft(DEFAULT_DRAFT);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setResult(computeSurfaceArea(DEFAULT_DRAFT));
   }
 
   const navItems = [

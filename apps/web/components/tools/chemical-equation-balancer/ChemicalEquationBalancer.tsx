@@ -31,7 +31,6 @@ const SCENARIOS: Record<string, string> = {
   glucoseCombustion: "C6H12O6 + O2 -> CO2 + H2O",
 };
 
-const EMPTY_RESULT: ChemicalEquationBalancerOutput = { error: null, errorDetail: null, balancedEquation: "", terms: [] };
 
 function computeResult(equation: string): ChemicalEquationBalancerOutput {
   return tool.execute({ equation }, { locale: "en-US" }).data;
@@ -111,8 +110,8 @@ export default function ChemicalEquationBalancer({ education }: { education: Rea
   function handleClear() {
     setEquation(DEFAULT_EQUATION);
     setDigitStyle(resolveDigitStyle(DEFAULT_EQUATION));
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setResult(computeResult(DEFAULT_EQUATION));
   }
 
   const navItems = [

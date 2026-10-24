@@ -107,7 +107,8 @@ export default function AreaCalculator({ education }: { education: ReactNode }) 
 
   function handleClear() {
     setDraft(DEFAULT_DRAFT);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setResult(computeArea(DEFAULT_DRAFT));
   }
 
   const navItems = [

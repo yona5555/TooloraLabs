@@ -135,7 +135,8 @@ export default function SalesTaxCalculator({ education }: { education: ReactNode
     setTaxRate(defaults.taxRate);
     setDigitStyle("western");
     setCurrency(DEFAULT_CURRENCY);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setOutcome(getDefaultResult());
     window.history.replaceState(null, "", window.location.pathname);
   }
 

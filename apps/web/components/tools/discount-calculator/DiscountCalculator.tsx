@@ -134,7 +134,8 @@ export default function DiscountCalculator({ education }: { education: ReactNode
     setDiscounts(defaults.discounts);
     setDigitStyle("western");
     setCurrency(DEFAULT_CURRENCY);
-    setHasCalculated(false);
+    // Instant result: Clear restores the defaults and shows their result at once.
+    setOutcome(getDefaultResult());
     window.history.replaceState(null, "", window.location.pathname);
   }
 
