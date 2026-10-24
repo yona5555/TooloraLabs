@@ -98,8 +98,9 @@ export default function UnitConverterTool({ education }: { education: ReactNode 
               onSwap={swap}
               onClear={handleClear}
             />
-              {/* Desktop: under the input card (keeps the columns flush). Phone: after the Result card. */}
-              <div className="hidden flex-1 flex-col lg:flex">{sideCards}</div>
+              {/* Rendered once: under the input card on desktop (keeps the columns flush); on phone its
+                  phoneRole="visual" places it after the Result card (globals.css). */}
+              <div className="flex flex-1 flex-col">{sideCards}</div>
             </div>
           }
           result={
@@ -117,7 +118,6 @@ export default function UnitConverterTool({ education }: { education: ReactNode 
               allConversions={allConversions}
               digitStyle={digitStyle}
             />
-              <div className="flex flex-col lg:hidden">{sideCards}</div>
             </div>
           }
           sidebar={<RelatedToolsSidebar fill currentSlug="unit-converter" category="converters" />}

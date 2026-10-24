@@ -1,7 +1,8 @@
 "use client";
-import { useState, type ReactNode, type RefObject } from "react";
+import { useMemo, useState, type ReactNode, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { MiniContext } from "./miniContext";
+import { miniCopy } from "./miniCopy";
 
 /**
  * APPROVED PHONE STANDARD rule 2 (phone only, lazy-loaded by IndicatorCard when (max-width: 767px)
@@ -23,6 +24,8 @@ function findSlot(el: HTMLElement | null): HTMLElement | null {
 
 export default function PhoneMiniMirror({ title, visual, source }: { title: ReactNode; visual: ReactNode; source: RefObject<HTMLDivElement | null> }) {
   const [slot] = useState(() => findSlot(source.current));
+  // A new render of the card's visual, never its markup again: ids baked into it get a "-mini" suffix.
+  const copy = useMemo(() => miniCopy(visual), [visual]);
   if (!slot) return null;
   return createPortal(
     <button
@@ -32,7 +35,7 @@ export default function PhoneMiniMirror({ title, visual, source }: { title: Reac
     >
       <span className="w-full truncate text-[11px] leading-4 font-semibold text-zinc-600 dark:text-zinc-300">{title}</span>
       <span aria-hidden="true" dir="ltr" className="relative block min-h-0 w-full flex-1">
-        <MiniContext.Provider value>{visual}</MiniContext.Provider>
+        <MiniContext.Provider value>{copy}</MiniContext.Provider>
       </span>
     </button>,
     slot,

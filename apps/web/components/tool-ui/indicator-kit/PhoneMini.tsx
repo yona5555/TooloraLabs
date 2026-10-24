@@ -7,7 +7,7 @@ const PhoneMiniCopy = lazy(() => import("./PhoneMiniCopy"));
 /**
  * APPROVED PHONE STANDARD rule 2, chosen per tool: wraps one of the tool's own 2D indicators (or its
  * formula card / main result) and, below 768px only, mirrors it into top mini card `slot` (0 or 1),
- * scaled to fit the 88px chip. The copy renders the same `children` element, so it is live with the
+ * scaled to fit the 88px chip. The copy renders the same `children` as a new render (miniCopy: baked ids get "-mini"), so it is live with the
  * state that produced it; it is inert and aria-hidden, and tapping the chip scrolls to the original.
  * No wrapper box: a hidden marker before the indicator finds it (its next sibling), so parent layouts
  * (gaps, space-y, grids) and desktop are unchanged.

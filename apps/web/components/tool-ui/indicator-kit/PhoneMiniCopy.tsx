@@ -1,6 +1,7 @@
 "use client";
-import { useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { createPortal } from "react-dom";
+import { miniCopy } from "./miniCopy";
 
 /** The mini slot `slot` of this page, or null on pages that keep their own top cards. */
 function findSlot(el: HTMLElement | null, slot: 0 | 1): HTMLElement | null {
@@ -24,6 +25,8 @@ export default function PhoneMiniCopy({ slot, title, label, source, children }: 
   const boxRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const [fit, setFit] = useState<{ w: number; s: number; x: number; y: number } | null>(null);
+  // A new render of the indicator, never its markup again: ids baked into it get a "-mini" suffix.
+  const copy = useMemo(() => miniCopy(children), [children]);
 
   useLayoutEffect(() => {
     const box = boxRef.current;
@@ -57,7 +60,7 @@ export default function PhoneMiniCopy({ slot, title, label, source, children }: 
           className="absolute top-0 left-0 origin-top-left"
           style={fit ? { width: fit.w, transform: `translate(${fit.x}px, ${fit.y}px) scale(${fit.s})` } : { visibility: "hidden" }}
         >
-          {children}
+          {copy}
         </div>
       </div>
       <button

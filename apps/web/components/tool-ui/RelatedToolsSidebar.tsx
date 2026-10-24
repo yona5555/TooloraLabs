@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, ChevronDown, Search as SearchIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -74,7 +74,8 @@ export default function RelatedToolsSidebar({
   const allRelated = [...curated, ...moreInCategory];
   const VISIBLE_COUNT = 3;
   const hiddenCount = allRelated.length - VISIBLE_COUNT;
-  const listId = `related-tools-${currentSlug}`;
+  // Per instance: a tool can render the sidebar twice (e.g. compound interest's tablet-only copy).
+  const listId = `related-tools-${useId()}`;
 
   const toolLink = (slug: string) => {
     const Icon = getToolIcon(slug);
