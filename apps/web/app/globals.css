@@ -382,10 +382,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   }
   /*
    * Tables: columns size to their content (no fixed min-width: with words unbreakable the columns can
-   * no longer be squeezed letter by letter) and header cells never wrap. A table still wider than its
-   * box scrolls inside itself, never the page (lib/phone/layout.ts marks it [data-scroll-x] when it
-   * has no scrolling container of its own), with a fade at the inline end as the hint; the trailing
-   * padding lets the last column scroll clear of the fade.
+   * no longer be squeezed letter by letter) and header cells never wrap. On phone a table too wide for
+   * its card reflows into stacked rows (rule 5, below). Tablets (768–1023px): a table still wider than
+   * its box scrolls inside itself, never the page (FitNumbers marks it [data-scroll-x] when it has no
+   * scrolling container of its own), with a fade at the inline end as the hint.
    */
   main[data-phone-cards] table {
     table-layout: auto;
@@ -569,6 +569,11 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   main[data-phone-cards]:has([data-section-nav]) {
     padding-top: calc(57px + 1rem);
   }
+  /* Rule 2: the top mini row shows only where a mirrorable 2D indicator exists; the markets tools and
+     the live-ticker tools keep their own live cards (PhoneMiniCards) instead. */
+  main[data-phone-cards]:is(:not(:has([data-ph-mini-ok])), [data-phone-markets], :has([data-phone-ticker])) [data-phone-mini] {
+    display: none;
+  }
   /*
    * Rule 3: one continuous column from the header to the footer holds the whole tool page (the pinned
    * nav included), with the blueprint grid showing 10px on both sides; dark surface in dark mode, the
@@ -690,6 +695,61 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   }
   [data-phone-flow] [data-phone-disclaimer]:not([data-info-section], [data-card] *) {
     margin: 0 1rem;
+  }
+  /*
+   * Rule 5: a table too wide for its card at 360px (FitNumbers marks it [data-stack]) reflows into
+   * stacked rows, nothing scrolls sideways: each row is one block titled by its first cell, every other
+   * cell a "column header: value" line at the start side (label from [data-label]). The header row
+   * stays for screen readers only; the markup stays a <table> (roles set alongside).
+   */
+  main table[data-stack] {
+    position: relative;
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100%;
+  }
+  main table[data-stack] :is(thead, tbody, tfoot, caption) {
+    display: block;
+  }
+  main table[data-stack] :is(thead, tr[data-stack-head]) {
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  main table[data-stack] tr {
+    display: block;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--bp-divider, rgb(63 63 70 / 0.6));
+  }
+  main table[data-stack] tr:last-child {
+    border-bottom: 0;
+  }
+  main table[data-stack] tr > :is(td, th) {
+    display: block;
+    width: auto !important;
+    min-width: 0 !important;
+    padding: 0.125rem 0.5rem !important;
+    border: 0 !important;
+    text-align: start !important;
+    white-space: normal;
+  }
+  main table[data-stack] tr > :first-child {
+    font-weight: 700;
+  }
+  main table[data-stack] tr > [data-label]::before {
+    /* inline-block: the value may start a new line after the label (a nowrap label + nowrap value
+       on one line could not break between them) */
+    content: attr(data-label) ":";
+    display: inline-block;
+    margin-inline-end: 0.35em;
+    font-weight: 600;
+    opacity: 0.75;
   }
   [data-phone-cards][data-phone-paper-height] [data-phone-flow] {
     position: relative;

@@ -10,9 +10,13 @@ import { useEffect } from "react";
  *    globals.css keeps `[data-num]` (and `[data-fit]`, e.g. the page title) on one line.
  * 2. When such a one-line element is wider than the box it sits in, shrinks its font in 6% steps
  *    down to 60% of its own size (never under 10px) until it fits — measured, not guessed.
- * 3. A table still wider than its card after that scrolls sideways inside itself
- *    (`data-scroll-x`), so the page itself never scrolls sideways; a table already in its own
- *    scrolling box marks that box instead. Both get a fade at the inline end as the hint.
+ * 3. Phone (below 768px, APPROVED PHONE STANDARD rule 5): a table whose narrowest layout does not
+ *    fit its card at 360px reflows into stacked rows (`data-stack`): each row becomes a block titled
+ *    by its first cell, every other cell a "column header: value" line (`data-label`, from the header
+ *    row). The <table> markup stays; explicit ARIA roles keep its semantics once CSS drops the table
+ *    display. Nothing scrolls sideways. Tablets (768–1023px): a table still wider than its card after
+ *    that scrolls sideways inside itself (`data-scroll-x`), so the page itself never does; a table
+ *    already in its own scrolling box marks that box instead. Both get a fade at the inline end.
  * Desktop is untouched: every inline size and mark is cleared at `lg` and up.
  */
 const PHONE = "(max-width: 1023.98px)";
@@ -60,8 +64,10 @@ function spills(el: HTMLElement): boolean {
   const chain: Element[] = [el];
   for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
     const ox = getComputedStyle(a).overflowX;
-    if (ox === "auto" || ox === "scroll") return false;
-    if (ox !== "visible" || a.hasAttribute("data-bp-panel")) {
+    // a stacked table (rule 5) never scrolls sideways, so its scrolling wrapper is a box to fit in
+    const stacked = (ox === "auto" || ox === "scroll") && !!el.closest("table[data-stack]") && a.contains(el.closest("table[data-stack]"));
+    if ((ox === "auto" || ox === "scroll") && !stacked) return false;
+    if (ox !== "visible" || stacked || a.hasAttribute("data-bp-panel")) {
       const b = a.getBoundingClientRect();
       return chain.some((c) => outside(c.getBoundingClientRect(), b));
     }
@@ -94,6 +100,89 @@ function fit(el: HTMLElement) {
   }
 }
 
+const PHONE_ONLY = "(max-width: 767px)";
+/** Rule 5 decides as if the screen were 360px wide, whatever phone it runs on. */
+const NARROWEST = 360;
+const ROLES: [string, string][] = [
+  ["table", "table"],
+  ["thead, tbody, tfoot", "rowgroup"],
+  ["tr", "row"],
+  ["td", "cell"],
+];
+
+function unstack(table: HTMLElement) {
+  if (!table.hasAttribute("data-stack")) return;
+  table.removeAttribute("data-stack");
+  for (const el of [table, ...table.querySelectorAll<HTMLElement>("[data-stack-role]")]) {
+    el.removeAttribute("role");
+    el.removeAttribute("data-stack-role");
+  }
+  table.querySelectorAll("[data-label]").forEach((c) => c.removeAttribute("data-label"));
+  table.querySelectorAll("[data-stack-head]").forEach((r) => r.removeAttribute("data-stack-head"));
+}
+
+// The card box the table has to fit: the nearest ancestor that is neither a sideways scroller nor
+// boxless (display: contents), measured inside its padding.
+function room(table: HTMLElement): number {
+  for (let a = table.parentElement; a && a !== document.body; a = a.parentElement) {
+    const cs = getComputedStyle(a);
+    if (cs.display === "contents" || /auto|scroll/.test(cs.overflowX)) continue;
+    return a.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  }
+  return document.documentElement.clientWidth;
+}
+
+function stack(table: HTMLElement) {
+  const rows = Array.from(table.querySelectorAll<HTMLTableRowElement>("tr")).filter((r) => r.closest("table") === table);
+  const headRows = rows.filter((r) => r.parentElement?.tagName === "THEAD");
+  let head = headRows[headRows.length - 1];
+  if (!head && rows[0] && Array.from(rows[0].cells).every((c) => c.tagName === "TH")) {
+    head = rows[0];
+    head.setAttribute("data-stack-head", "");
+  }
+  const labels: string[] = [];
+  if (head) for (const c of Array.from(head.cells)) for (let i = 0; i < c.colSpan; i++) labels.push((c.textContent ?? "").trim());
+  for (const r of rows) {
+    if (r === head || r.parentElement?.tagName === "THEAD") continue;
+    let col = 0;
+    for (const c of Array.from(r.cells)) {
+      if (col > 0 && labels[col]) c.setAttribute("data-label", labels[col]);
+      if (c.tagName === "TH") {
+        c.setAttribute("role", col === 0 ? "rowheader" : "cell");
+        c.setAttribute("data-stack-role", "");
+      }
+      col += c.colSpan;
+    }
+  }
+  for (const [selector, role] of ROLES) {
+    for (const el of [table, ...table.querySelectorAll<HTMLElement>(selector)]) {
+      if (!el.matches(selector) || el.closest("table") !== table || el.hasAttribute("role")) continue;
+      el.setAttribute("role", role);
+      el.setAttribute("data-stack-role", "");
+    }
+  }
+  table.querySelectorAll<HTMLElement>("thead th").forEach((th) => {
+    if (th.closest("table") !== table || th.hasAttribute("role")) return;
+    th.setAttribute("role", "columnheader");
+    th.setAttribute("data-stack-role", "");
+  });
+  table.setAttribute("data-stack", "");
+}
+
+function stackWideTables(root: Element) {
+  const shrink = Math.max(0, window.innerWidth - NARROWEST);
+  // inner tables first: an outer table measures with its nested ones already stacked
+  for (const table of [...root.querySelectorAll<HTMLElement>("main table")].reverse()) {
+    unstack(table);
+    if (!table.getClientRects().length) continue;
+    const width = table.style.width;
+    table.style.width = "min-content";
+    const need = table.getBoundingClientRect().width;
+    table.style.width = width;
+    if (need > room(table) - shrink + 0.5) stack(table);
+  }
+}
+
 function scrollWideTables(root: Element) {
   for (const table of root.querySelectorAll<HTMLElement>("main table")) {
     table.removeAttribute("data-scroll-x");
@@ -107,6 +196,7 @@ function scrollWideTables(root: Element) {
 }
 
 function clear() {
+  document.querySelectorAll<HTMLElement>("table[data-stack]").forEach(unstack);
   for (const el of document.querySelectorAll<HTMLElement>(`${FIT}, [data-scroll-x]`)) {
     el.style.removeProperty("font-size");
     el.removeAttribute("data-num");
@@ -142,9 +232,19 @@ export default function FitNumbers() {
         const owner = root.closest<HTMLElement>(FIT);
         if (owner) els.add(owner);
       }
+      // tables first (rule 5): a value fits the stacked row it ends up in
+      if (roots.length && window.matchMedia(PHONE_ONLY).matches) {
+        main.querySelectorAll("[data-scroll-x]").forEach((el) => el.removeAttribute("data-scroll-x"));
+        stackWideTables(main);
+      }
       // innermost first, so an outer element measures its children at their final size
       [...els].reverse().forEach(fit);
-      if (roots.length) scrollWideTables(main);
+      if (roots.length) {
+        if (!window.matchMedia(PHONE_ONLY).matches) {
+          main.querySelectorAll<HTMLElement>("table[data-stack]").forEach(unstack);
+          scrollWideTables(main);
+        }
+      }
     };
     const schedule = (all: boolean) => {
       if (all) full = true;
@@ -173,7 +273,7 @@ export default function FitNumbers() {
       subtree: true,
       characterData: true,
       attributes: true,
-      attributeFilter: ["class", "hidden", "open", "data-revealed"],
+      attributeFilter: ["class", "hidden", "open", "data-revealed", "data-state"],
     });
     const onBreakpoint = () => schedule(true);
     mq.addEventListener("change", onBreakpoint);
