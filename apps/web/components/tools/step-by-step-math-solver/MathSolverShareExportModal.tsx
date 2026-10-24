@@ -266,8 +266,8 @@ export default function MathSolverShareExportModal({ result, draft }: Props) {
         <h2 className="mb-2 mt-6 text-sm font-bold text-blue-600">{t("result.heading")}</h2>
         <table className="w-full border-collapse text-sm">
           <tbody>
-            {resultRows.map((row) => (
-              <tr key={row.label}>
+            {resultRows.map((row, i) => (
+              <tr key={i}>
                 <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{row.label}</td>
                 <td className="border border-zinc-200 px-3 py-1.5 font-semibold">{row.value}</td>
               </tr>

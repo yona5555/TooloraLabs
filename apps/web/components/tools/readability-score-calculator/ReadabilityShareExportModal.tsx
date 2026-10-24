@@ -224,8 +224,8 @@ export default function ReadabilityShareExportModal({ inputRows, resultRows, her
               <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{heroLabel}</td>
               <td className="border border-zinc-200 px-3 py-1.5 font-semibold">{heroValue}</td>
             </tr>
-            {resultRows.map((row) => (
-              <tr key={row.label}>
+            {resultRows.map((row, i) => (
+              <tr key={i}>
                 <td className="border border-zinc-200 bg-blue-50 px-3 py-1.5 font-semibold text-blue-900">{row.label}</td>
                 <td className="border border-zinc-200 px-3 py-1.5">{row.value}</td>
               </tr>

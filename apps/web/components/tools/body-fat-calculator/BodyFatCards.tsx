@@ -109,7 +109,7 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
           {/* waist axis on top: the same strip read in this body's centimetres */}
           <line x1={X0} y1={sy - SH / 2 - 26} x2={W - X0} y2={sy - SH / 2 - 26} style={LINE} strokeWidth={1} opacity={0.5} />
           {cmTicks.map((cm) => {
-            const x = xb(bfAt(m, cm));
+            const x = px2(xb(bfAt(m, cm)));
             if (cm <= m.neckCm || x < X0 + 8 || x > W - X0 - 8) return null;
             return (
               <g key={cm}>

@@ -31,7 +31,9 @@ export default function AdSpace({ className = "", variant = "sidebar", phone = f
 
   if (variant === "leaderboard") {
     return (
-      <div data-ad-slot="" className={`mx-auto flex w-[300px] max-w-[728px] flex-col gap-1.5 max-md:mx-[calc((100%-300px)/2)] md:w-full ${phone ? "md:hidden" : "max-md:hidden"} ${className}`}>
+      // suppressHydrationWarning: the phone layout pass (lib/phone/layout.ts) may mark this slot
+      // `data-phone-hide` while the HTML is parsed, before hydration (same as InfoSection's slots).
+      <div data-ad-slot="" suppressHydrationWarning className={`mx-auto flex w-[300px] max-w-[728px] flex-col gap-1.5 max-md:mx-[calc((100%-300px)/2)] md:w-full ${phone ? "md:hidden" : "max-md:hidden"} ${className}`}>
         <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600">{labelText}</p>
         <div data-ad-box="" className="flex h-[250px] w-[300px] shrink-0 items-center justify-center rounded-xl border border-dashed border-zinc-300 text-sm font-medium text-zinc-400 md:h-[90px] md:w-full md:max-w-[728px] dark:border-zinc-700 dark:text-zinc-600">
           {t("adSpace")}

@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import { dialMinutes, SEGMENT_DOTS, SEGMENT_STROKES } from "./rtMath";
 import { useRtLive } from "./RtLiveContext";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 const SIZE = 184;
 const C = SIZE / 2;
@@ -34,10 +35,10 @@ export default function ReadingDial() {
           return (
             <line
               key={i}
-              x1={C + Math.cos(a) * (R + 8)}
-              y1={C + Math.sin(a) * (R + 8)}
-              x2={C + Math.cos(a) * (R + (major ? 13 : 11))}
-              y2={C + Math.sin(a) * (R + (major ? 13 : 11))}
+              x1={px2(C + Math.cos(a) * (R + 8))}
+              y1={px2(C + Math.sin(a) * (R + 8))}
+              x2={px2(C + Math.cos(a) * (R + (major ? 13 : 11)))}
+              y2={px2(C + Math.sin(a) * (R + (major ? 13 : 11)))}
               strokeWidth={major ? 2 : 1}
               className="stroke-zinc-400 dark:stroke-zinc-500"
             />

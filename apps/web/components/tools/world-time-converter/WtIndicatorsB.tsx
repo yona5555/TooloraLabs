@@ -14,6 +14,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { useDuration, useIndT, useUnitT } from "./WtIndicatorsA";
 import type { CardProps } from "./state";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -187,7 +188,8 @@ export function WtDaylightCard({ s, d, f, now }: CardProps) {
   const RH = 26;
   const T = 18;
   const H = T + rows.length * RH + 6;
-  const X = (m: number) => L + (Math.max(0, Math.min(1440, m)) / 1440) * (W - L - 8);
+  // Rounded: sun times come from trig whose last digits differ between server and browser (hydration).
+  const X = (m: number) => px2(L + (Math.max(0, Math.min(1440, m)) / 1440) * (W - L - 8));
   const seg = (a: number | null, b: number | null) => (a === null || b === null ? null : [a, b] as const);
   const sorted = [...rows].sort((a, b) => b.st.dayLengthMin - a.st.dayLengthMin);
   const home = rows[0];

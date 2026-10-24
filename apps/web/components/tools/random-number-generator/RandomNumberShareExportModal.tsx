@@ -220,8 +220,8 @@ export default function RandomNumberShareExportModal({ operationLabel, inputRows
             <h2 className="mb-2 mt-6 text-base font-bold text-blue-600">{t("shareExport.inputSectionTitle")}</h2>
             <table className="w-full border-collapse text-base">
               <tbody>
-                {inputRows.map((row) => (
-                  <tr key={row.label}>
+                {inputRows.map((row, i) => (
+                  <tr key={i}>
                     <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{row.label}</td>
                     <td className="border border-zinc-200 px-3 py-2">{row.value}</td>
                   </tr>
@@ -240,8 +240,8 @@ export default function RandomNumberShareExportModal({ operationLabel, inputRows
             </tr>
             {resultRows
               .filter((row) => !(row.label === heroLabel && row.value === heroValue))
-              .map((row) => (
-                <tr key={row.label}>
+              .map((row, i) => (
+                <tr key={i}>
                   <td className="border border-zinc-200 bg-blue-50 px-3 py-2 font-semibold text-blue-900">{row.label}</td>
                   <td className="border border-zinc-200 px-3 py-2">{row.value}</td>
                 </tr>

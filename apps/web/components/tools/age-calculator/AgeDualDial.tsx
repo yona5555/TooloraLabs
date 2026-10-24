@@ -1,5 +1,6 @@
 "use client";
 import type { CalendarAge } from "@tooloralabs/tools";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 type Ring = { age: CalendarAge; color: string; label: string; next: string };
 
@@ -42,15 +43,15 @@ export default function AgeDualDial({ outer, inner, centerTop, centerBottom }: {
             {ticks.map((a, i) => (
               <line
                 key={i}
-                x1={c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2)}
-                y1={c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2)}
-                x2={c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2 + 4)}
-                y2={c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2 + 4)}
+                x1={px2(c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2))}
+                y1={px2(c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2))}
+                x2={px2(c + Math.cos(a - Math.PI / 2) * (ring.r - sw / 2 + 4))}
+                y2={px2(c + Math.sin(a - Math.PI / 2) * (ring.r - sw / 2 + 4))}
                 stroke="currentColor"
                 strokeOpacity={0.35}
               />
             ))}
-            <circle cx={c + Math.cos(endA) * ring.r} cy={c + Math.sin(endA) * ring.r} r={7} fill="white" stroke={ring.color} strokeWidth={3} style={{ transition: "all 700ms ease" }} />
+            <circle cx={px2(c + Math.cos(endA) * ring.r)} cy={px2(c + Math.sin(endA) * ring.r)} r={7} fill="white" stroke={ring.color} strokeWidth={3} style={{ transition: "all 700ms ease" }} />
             <text x={c + 4} y={c - ring.r + 4} fontSize={10} fontWeight={800} fill="white">
               {ring.label}
             </text>

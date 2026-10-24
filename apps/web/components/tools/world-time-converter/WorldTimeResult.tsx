@@ -4,6 +4,7 @@ import { wtSolarElevation, wtSolarPosition, type WtCity } from "@tooloralabs/too
 import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
 import { STATUS_COLORS, type Derived, type Fmt, type WtState } from "./state";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 type Props = { s: WtState; d: Derived; f: Fmt };
 
@@ -20,7 +21,8 @@ function Dial({ s, d, f }: Props) {
   const sun = wtSolarPosition(d.conv.utcMs);
   const sub = { lat: sun.subsolarLatDeg, lon: sun.subsolarLonDeg };
   const ang = (min: number) => (min / 1440) * 2 * Math.PI - Math.PI / 2;
-  const pt = (min: number, r: number) => [c + r * Math.cos(ang(min)), c + r * Math.sin(ang(min))] as const;
+  // Rounded: server and browser trig differ in the last digits, which broke hydration.
+  const pt = (min: number, r: number) => [px2(c + r * Math.cos(ang(min))), px2(c + r * Math.sin(ang(min)))] as const;
   const arc = (a: number, b: number, r0: number, r1: number) => {
     const large = (b - a + 1440) % 1440 > 720 ? 1 : 0;
     const [x0, y0] = pt(a, r1);

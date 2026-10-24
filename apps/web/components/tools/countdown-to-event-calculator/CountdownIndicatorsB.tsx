@@ -6,6 +6,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { AMBER, axisText, BLUE, GREEN, useIndT, valueText, VIOLET, type IndicatorProps } from "./CountdownIndicatorsA";
 import { fmtHijri, fmtInZone, formatOffset, hijriMonthName, num, two, zoneName, type CdState } from "./model";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 const DAY_MS = 86_400_000;
 
@@ -74,10 +75,10 @@ function ClockFace({ cx, cy, h, m, color, dayShift }: { cx: number; cy: number; 
       <circle cx={cx} cy={cy} r={r} fill={night ? "#1e293b" : "#fefce8"} stroke={color} strokeWidth={3} />
       {Array.from({ length: 12 }, (_, i) => {
         const a = rad(i * 30 - 90);
-        return <line key={i} x1={cx + (r - 6) * Math.cos(a)} y1={cy + (r - 6) * Math.sin(a)} x2={cx + (r - 2) * Math.cos(a)} y2={cy + (r - 2) * Math.sin(a)} stroke={night ? "#cbd5e1" : "#475569"} strokeWidth={i % 3 === 0 ? 2 : 1} />;
+        return <line key={i} x1={px2(cx + (r - 6) * Math.cos(a))} y1={px2(cy + (r - 6) * Math.sin(a))} x2={px2(cx + (r - 2) * Math.cos(a))} y2={px2(cy + (r - 2) * Math.sin(a))} stroke={night ? "#cbd5e1" : "#475569"} strokeWidth={i % 3 === 0 ? 2 : 1} />;
       })}
-      <line x1={cx} y1={cy} x2={cx + 24 * Math.cos(rad(ha))} y2={cy + 24 * Math.sin(rad(ha))} stroke={night ? "#f8fafc" : "#0f172a"} strokeWidth={3.5} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
-      <line x1={cx} y1={cy} x2={cx + 36 * Math.cos(rad(ma))} y2={cy + 36 * Math.sin(rad(ma))} stroke={color} strokeWidth={2.2} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
+      <line x1={cx} y1={cy} x2={px2(cx + 24 * Math.cos(rad(ha)))} y2={px2(cy + 24 * Math.sin(rad(ha)))} stroke={night ? "#f8fafc" : "#0f172a"} strokeWidth={3.5} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
+      <line x1={cx} y1={cy} x2={px2(cx + 36 * Math.cos(rad(ma)))} y2={px2(cy + 36 * Math.sin(rad(ma)))} stroke={color} strokeWidth={2.2} strokeLinecap="round" style={{ transition: "all 600ms ease" }} />
       <circle cx={cx} cy={cy} r={3} fill={color} />
       <text x={cx} y={cy + r + 18} textAnchor="middle" fontSize={15} fontWeight={800} className={valueText} style={{ fontFamily: "ui-monospace, monospace" }}>
         {`${two(h)}:${two(m)}`}

@@ -1,6 +1,7 @@
 "use client";
 import type { Derived } from "./model";
 import { num, pct, two } from "./model";
+import { px2 } from "@/components/tool-ui/indicator-kit/SvgBits";
 
 const S = 260;
 const C = S / 2;
@@ -9,7 +10,8 @@ const R_SEC = 78;
 
 function polar(r: number, frac: number) {
   const a = -Math.PI / 2 + frac * 2 * Math.PI;
-  return [C + r * Math.cos(a), C + r * Math.sin(a)] as const;
+  // Rounded: server and browser trig differ in the last digits, which broke hydration.
+  return [px2(C + r * Math.cos(a)), px2(C + r * Math.sin(a))] as const;
 }
 
 function arcPath(r: number, frac: number) {

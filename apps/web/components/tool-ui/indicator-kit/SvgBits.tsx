@@ -19,7 +19,8 @@ export const px2 = (v: number) => Math.round(v * 100) / 100;
 
 export function SvgLabel({ x, y, text, anchor = "middle", size = 11.5, bold, style = MUTED }: { x: number; y: number; text: string; anchor?: "start" | "middle" | "end"; size?: number; bold?: boolean; style?: { fill: string } }) {
   return (
-    <text x={x} y={y} fontSize={size} fontWeight={bold ? 800 : 600} textAnchor={anchor} style={style} className="tabular-nums">
+    // px2: positions often come from log/trig math whose last digits differ between server and browser.
+    <text x={px2(x)} y={px2(y)} fontSize={size} fontWeight={bold ? 800 : 600} textAnchor={anchor} style={style} className="tabular-nums">
       <SvgChem text={text} />
     </text>
   );
