@@ -559,4 +559,71 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-phone-flow] :is([data-phone-docs], [data-phone-docs] + [data-ad-slot]) {
     order: -10;
   }
+  /* Ad balance: lib/phone/layout.ts drops ad 1 when the collapsed cards between it and ad 2 are shorter than one ad. */
+  [data-phone-flow] [data-ad-slot][data-phone-hide] {
+    display: none;
+  }
+  /*
+   * Rule B: no blue-header card inside the article. The article (EncyclopediaPaper, [data-phone-article]),
+   * every wrapper around it, and inside it the paper boxes, the sections, their bodies and anything holding
+   * a card or an ad slot stop boxing, so the article's parts are items of the phone flow: its cards keep
+   * order 0 and join the collapsed cards in DOM order, ad 2 (the article's first ad slot, [data-phone-ad2])
+   * sits after them outside the paper, the article's parts follow (10), then whatever came after it (20).
+   * lib/phone/layout.ts measures the parts and draws ONE continuous paper behind them (::before below);
+   * the parts get the paper's inner padding as side margins and one uniform spacing (the flow's gap).
+   */
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-article]),
+  [data-phone-flow] [data-phone-article],
+  [data-phone-flow] [data-phone-article] :is([data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :not([data-card], [data-card] *):has([data-card], [data-article-ad])) {
+    display: contents;
+  }
+  [data-phone-flow] [data-phone-article] :where(:not([data-card], [data-card] *, :has([data-card]))) {
+    order: 10;
+  }
+  [data-phone-flow] :is([data-phone-article], :has([data-phone-article])) ~ :where(:not([data-card], :has([data-card]))),
+  [data-phone-flow] :is([data-phone-article], :has([data-phone-article])) ~ * :where(:not([data-card], [data-card] *, :has([data-card]))) {
+    order: 20;
+  }
+  [data-phone-flow] [data-phone-article] [data-article-ad][data-phone-ad2] {
+    order: 5;
+    padding-block: 0;
+  }
+  [data-phone-flow] :where([data-phone-article] :is([data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :not([data-card], [data-card] *):has([data-card], [data-article-ad])) > :not([data-card], [data-phone-ad2], [data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :has([data-card], [data-article-ad]))) {
+    margin: 0 1rem;
+  }
+  [data-phone-flow] [data-phone-article] [data-info-section] > h2 {
+    margin-top: 1rem;
+  }
+  [data-phone-flow] [data-phone-article] [data-info-section]:first-of-type > h2 {
+    margin-top: 0;
+  }
+  [data-phone-flow] [data-phone-article] [data-article-ad][data-show]:not([data-phone-ad2]) {
+    padding-block: 0.5rem;
+  }
+  /* A card keeps its own (sans) font on phone, never the article's serif it sits in. */
+  [data-phone-flow] [data-phone-article] [data-card] {
+    margin-block: 0;
+    font-family: var(--font-sans);
+  }
+  [data-phone-cards][data-phone-paper-height] [data-phone-flow] {
+    position: relative;
+    isolation: isolate;
+  }
+  [data-phone-cards][data-phone-paper-height] [data-phone-flow]::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-inline: 0;
+    top: var(--phone-paper-top);
+    height: var(--phone-paper-height);
+    border: 1px solid #e2d9c2;
+    border-radius: 0.25rem;
+    background: #faf7ef;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  .dark [data-phone-cards][data-phone-paper-height] [data-phone-flow]::before {
+    border-color: #39352c;
+    background: #17160f;
+    box-shadow: none;
+  }
 }

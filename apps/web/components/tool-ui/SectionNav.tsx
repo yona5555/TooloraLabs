@@ -17,15 +17,25 @@ const LEARN_IDS = new Set(["behind-the-tool", "notices", "news", "learning-resou
 const groupOf = (id: string): PhoneGroup => (id === "tool" ? "tool" : id === "faq" ? "faq" : LEARN_IDS.has(id) ? "learn" : "data");
 
 /** Each group's sections in page order, read from the DOM (Learn adds the article's unnamed sections). */
+/** Rule B flattens the article's sections on phone (display:contents, no box): scroll to and measure their first part. */
+function boxed(el: HTMLElement): HTMLElement {
+  if (el.getClientRects().length) return el;
+  for (const child of Array.from(el.children)) {
+    const found = boxed(child as HTMLElement);
+    if (found.getClientRects().length) return found;
+  }
+  return el;
+}
+
 function groupElements(items: SectionNavItem[]): Record<PhoneGroup, HTMLElement[]> {
   const out: Record<PhoneGroup, HTMLElement[]> = { tool: [], data: [], learn: [], faq: [] };
   const ids = new Set(items.map((i) => i.id));
   for (const item of items) {
     const el = document.getElementById(item.id);
-    if (el) out[groupOf(item.id)].push(el);
+    if (el) out[groupOf(item.id)].push(boxed(el));
   }
   document.querySelectorAll<HTMLElement>("[data-phone-cards] [data-info-section]").forEach((el) => {
-    if (!el.id || !ids.has(el.id)) out.learn.push(el);
+    if (!el.id || !ids.has(el.id)) out.learn.push(boxed(el));
   });
   for (const g of PHONE_GROUPS) out[g].sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
   return out;
@@ -268,7 +278,8 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
   }, []);
 
   function scrollToSection(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(id);
+    if (el) boxed(el).scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function scrollToGroup(group: PhoneGroup) {
