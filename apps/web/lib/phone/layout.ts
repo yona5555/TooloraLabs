@@ -57,14 +57,17 @@ export function phoneLayout(anchor: Element | null): void {
   slots[0].setAttribute("data-show", "");
   slots[0].setAttribute("data-phone-ad2", "");
 
-  const top = (el: Element) => (box(el) || { top: 0 }).top;
-  const start = top(sections[0]);
-  const height = (box(sections[sections.length - 1]) || { bottom: start }).bottom - start;
-  const offsets = sections.map((section) => top(section) - start);
+  // Rule 4 moves the disclaimer sections to the article's end, so the screen order of sections can differ
+  // from the DOM order: measure the article's extent over all of them, and never put an ad before one.
+  const boxes = sections.map((section) => box(section) || { top: 0, bottom: 0 });
+  const start = Math.min(...boxes.map((b) => b.top));
+  const height = Math.max(...boxes.map((b) => b.bottom)) - start;
+  const offsets = boxes.map((b) => b.top - start);
   const pick = (target: number, min: number) => {
     let best = -1;
     let bestDistance = Infinity;
     for (let i = 1; i < offsets.length; i++) {
+      if (sections[i].hasAttribute("data-phone-disclaimer")) continue;
       if (offsets[i] < min || height - offsets[i] < 300) continue;
       const distance = Math.abs(offsets[i] - target);
       if (distance < bestDistance) {
@@ -105,6 +108,10 @@ export function phoneLayout(anchor: Element | null): void {
     }
   };
   collect(article);
+  // Rule 4: disclaimer callouts from outside the article join its end, inside the paper.
+  root.querySelectorAll("[data-phone-disclaimer]").forEach((el) => {
+    if (!article.contains(el) && !el.closest("[data-card]")) parts.push(el);
+  });
   const paper = () => {
     if (!window.matchMedia("(max-width: 767px)").matches) return;
     let min = Infinity;

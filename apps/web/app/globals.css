@@ -676,6 +676,21 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     margin-block: 0;
     font-family: var(--font-sans);
   }
+  /*
+   * Rule 4: every warning/disclaimer callout ([data-phone-disclaimer]: the "notices" InfoSection and the
+   * tools' own disclaimer boxes) ends the article, inside the paper (lib/phone/layout.ts counts it as a
+   * paper part), one DOM copy: its wrappers stop boxing and it takes order 15 (article parts 10, what
+   * follows the article 20). Callouts inside a card stay in their card.
+   */
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-disclaimer]):not([data-phone-disclaimer]) {
+    display: contents;
+  }
+  [data-phone-flow] :is([data-phone-disclaimer], [data-phone-disclaimer][data-info-section] *):not([data-card] *) {
+    order: 15;
+  }
+  [data-phone-flow] [data-phone-disclaimer]:not([data-info-section], [data-card] *) {
+    margin: 0 1rem;
+  }
   [data-phone-cards][data-phone-paper-height] [data-phone-flow] {
     position: relative;
     isolation: isolate;
