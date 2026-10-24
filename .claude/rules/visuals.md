@@ -155,6 +155,17 @@ Default for all tools, desktop unchanged; built into the shared components (neve
   group in their order, one DOM copy (display:contents + CSS order), sans font; ONE continuous paper is
   redrawn around the article parts with uniform spacing. Desktop unchanged.
 - Phone order: 3 open cards, docs row, ad 1 (if balanced), all collapsed cards, ad 2, the article paper.
+- Phone polish rules 1–7 (Yousef, 2026-10-24; full spec in the doc above):
+  1) section nav pinned directly under the site header from page open (one fixed element, active follows scroll);
+  2) two top mini cards (88px) mirror the first two 2D kit indicators, same Drawing in compact mode, lazy, phone only;
+     markets/live-ticker tools keep their live cards;
+  3) one continuous column header→footer (dark / light key surface), 10px of blueprint grid on both sides;
+  4) every warning/disclaimer callout (`data-phone-disclaimer`, notices section) ends the article, inside the paper;
+  5) a table too wide for its card at 360px reflows into stacked rows (CSS on the same `<table>`), no sideways
+     scroll; short tokens nowrap, long text wraps between words only;
+  6) calculator mode tab bar: one row, icon + short label (icons only if needed), 44px, active filled;
+  7) a card holding a Copy or Share/Export action is an output card, always one of the 3 open cards
+     (markets exception kept).
 
 ## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
 Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:

@@ -88,5 +88,35 @@ InfoSection, AdSpace, ToolPageLayout) — never wire it per tool.
 - **Phone order (every tool):** 1) the 3 always-open cards (rule A); 2) the docs row; 3) ad 1 (only if the
   balance rule allows); 4) all collapsed cards; 5) ad 2; 6) one continuous article paper with its 1/3 and
   2/3 ads.
+- **Phone polish (Yousef, 2026-10-24), rules 1–7:**
+  1. **Section nav at the top:** SectionNav (`[data-section-nav]`) is `position: fixed` directly under the
+     site header (73px) from page open, above the back button and title, on every tool; the page reserves
+     its 57px. One element, never inert on phone, the active group follows the scroll. No mid-page position.
+  2. **Two top mini cards:** ToolPageLayout renders two 88px slots under the title (`[data-phone-mini-slot]`).
+     The page's first two 2D kit indicators whose visual is the shared `Drawing` (`[data-ph-mini-ok]`) are
+     mirrored there by `PhoneMiniMirror` (React.lazy, mounted only when `(max-width: 767px)` matches): the
+     card's own visual element in compact mode (`MiniContext`: SVG only, no handle, no refs), so it is live
+     with the card's state; tap scrolls to the card. Never 3D, nothing generated. Hidden where no such
+     indicator exists, on the markets tools and where live ticker cards (`PhoneMiniCards`) already show.
+  3. **One continuous column:** tool page `<main>` is one surface from the header to the footer (dark:
+     zinc-950, light: `--bp-key`), 10px margins so the blueprint grid shows on both sides, 8px inner
+     padding; the pinned nav is aligned to it.
+  4. **Disclaimers last:** every warning/disclaimer callout (`data-phone-disclaimer`: the `notices`
+     InfoSection, the intro disclaimer boxes, the tools' own disclaimer callouts) moves by CSS order (15)
+     to the end of the article, inside the one paper (`lib/phone/layout.ts` counts it as a part); no ad
+     slot is picked before it. Callouts inside a card stay in the card.
+  5. **Tables:** FitNumbers marks a table whose min-content width does not fit its card at 360px
+     (`data-stack`): each row is a block titled by its first cell, other cells "header: value" lines
+     (`data-label`), start-aligned; header row kept for screen readers, ARIA roles set; no horizontal
+     scroll in the page or the table (the scroll + fade remain for tablets 768–1023px only). Simple
+     tables that fit stay tables. Short tokens nowrap, long text wraps between words only.
+  6. **Calculator tab bar** (Standard / Scientific / Graph / Programmer / Converter): one row, no scroll,
+     icon + short label (icons only with aria-label/title when a locale does not fit at 360px), 44px,
+     active filled. Pending: the bar exists only on the locked phone home page.
+  7. **Output cards always open:** a top-level card holding a Copy or Share/Export action
+     (`button` with the lucide copy / share-2 / file-down icon, or `[data-phone-output-action]`) is an
+     output card (`data-phone-output`, set in `lib/phone/layout.ts` and SectionCard) and always one of the
+     3 open cards (outputs first, then the first cards on screen, kept in screen order). The markets tools
+     (`data-phone-markets`) keep their approved order.
 - **Known:** crypto-converter keeps the approved live-flow-first order, so its amount input is below the
   first screen at 390×844 (pending decision since the pilot).
