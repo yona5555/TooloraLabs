@@ -570,6 +570,28 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     padding-top: calc(57px + 1rem);
   }
   /*
+   * Rule 3: one continuous column from the header to the footer holds the whole tool page (the pinned
+   * nav included), with the blueprint grid showing 10px on both sides; dark surface in dark mode, the
+   * light key surface in light mode. No gaps between sections: the column is the page's only box.
+   */
+  main[data-phone-cards] {
+    --phone-column: var(--bp-key);
+    margin-inline: 10px;
+    padding-inline: 8px;
+    padding-bottom: 1.5rem;
+    background-color: var(--phone-column);
+    border-inline: 1px solid var(--bp-frame);
+  }
+  .dark main[data-phone-cards] {
+    --phone-column: var(--color-zinc-950);
+    border-color: rgb(59 130 246 / 0.3);
+  }
+  [data-phone-cards] [data-section-nav] {
+    inset-inline: 10px;
+    background-color: var(--phone-column);
+    backdrop-filter: none;
+  }
+  /*
    * Phone order (rules A and B): the 3 always-open cards first, in logical order (1 tool, 2 output,
    * 3 main visual; crypto's `live-output` above its tool), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
    * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper
