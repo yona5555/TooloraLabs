@@ -26,23 +26,11 @@ DONE
   console errors; production build (copy) checked 7 tools en + 5 ar; desktop 1440 geometry identical to
   the base on 10 tools x en/ar. Root causes 8-12 in scripts/output/root-causes.txt (11, 12 pre-existing).
 
+- AD FIX + RULE B DONE (option 1): ad balance (ad 1 dropped when < one ad between it and ad 2; ad 2
+  always outside the paper), article cards join the collapsed group, one redrawn paper (root causes 13, 14).
+  Sweep 98 en at 390: structure 98/98 OK; sample 10 ar/en OK; desktop 1440 identical; prod copy checked.
+
 NEXT (in order)
-1. RULE B (needs Yousef's answer first, see below): no blue-header cards inside the article on phone; they
-   join the collapsible group under AD 1, same relative order, single DOM. Mechanism ready: the shared
-   phone flow above; article cards stay order 0 (they already follow the above-fold cards in DOM), so it
-   needs (a) [data-phone-article] on EncyclopediaPaper's outer div, (b) flatten the paper wrappers and every
-   article element that contains a card, (c) every non-card item from the article on (and after it) gets
-   order 10. OPEN QUESTION: flattening removes the paper box (bg, border, padding) on phone. Options:
-   (1) emulate one continuous paper on the article's pieces (paper bg + side borders on every article item,
-   margins -> padding, gap covered with margin-top -1rem; inner spacing becomes uniform), or
-   (2) per-section paper sheets with a gap between sections. Card font: SectionCard sets its own font
-   (font-sans) so it never inherits the article serif. Then re-check article ads (1/3, 2/3, >=600px).
-   Phone order: 3 open cards, docs row, AD 1, all collapsible cards, AD 2, article (AD 3, AD 4).
-2. Countdown #418 root cause (pending 6 in root-causes.txt); quick-table digits (7) needs Yousef.
-3. Verify scientific-calculator, crypto, surface-area, mortgage, bmi at 390 ar/en (mapping, zero cards in
-   article, order 1-6, each card once, card font, article ads, no overflow) and 1440 ar/en vs main.
-4. ONE final sweep, all tools, 390 en: overflow, broken words, toggles, ad order/placement, 44px targets,
-   card order matches mapping, no card inside the article. Then lint, tsc, build (separate distDir: build
-   in a copy, e.g. rsync apps/web to .phone-build/apps/web + symlink node_modules, packages, tsconfig*).
-5. Record RULE A/B in both docs; commit per root cause; push wip/phone-all (not main); delete this file in
-   the final commit; git clean, 0 unpushed; 3001 answers 200.
+1. Countdown #418 root cause (pending 6 in root-causes.txt); quick-table digits (7) needs Yousef.
+2. Pre-existing broken words (97/98 en): squeezed first columns in LiveTable tables, button labels,
+   break-all URLs — needs its own task.
