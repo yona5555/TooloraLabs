@@ -212,7 +212,7 @@ export default function SalesTaxCalculator({ education }: { education: ReactNode
               )}
 
               {hasCalculated && totalByRatePoints && (
-                <SectionCard title={t("totalByRateDiagram.title")}>
+                <SectionCard phoneRole="visual" title={t("totalByRateDiagram.title")}>
                   <SalesTaxTotalByRateDiagram points={totalByRatePoints} currentRate={result?.taxRate ?? 0} caption={t("totalByRateDiagram.caption")} xLabel={t("totalByRateDiagram.xLabel")} />
                 </SectionCard>
               )}

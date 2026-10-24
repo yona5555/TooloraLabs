@@ -108,7 +108,7 @@ export default function LiveTable3DLayout({
                     <td
                       // A word (e.g. Arabic "given") keeps the sans font; only formulas use mono.
                       dir={isWords(r.formula) ? "auto" : "ltr"}
-                      className={`px-3 py-1.5 text-start ${isWords(r.formula) ? "" : "font-mono"} text-xs text-zinc-500 [overflow-wrap:anywhere] dark:text-zinc-400`}
+                      className={`px-3 py-1.5 text-start ${isWords(r.formula) ? "" : "font-mono"} text-xs text-zinc-500 lg:[overflow-wrap:anywhere] dark:text-zinc-400`}
                     >
                       {isWords(r.formula) ? <MixedText text={r.formula ?? ""} /> : <Subs text={r.formula ?? ""} />}
                     </td>

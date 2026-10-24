@@ -21,7 +21,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
 
   if (!ready) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <div className="flex flex-col items-center gap-3 px-4 py-10 text-center text-sm text-zinc-500 dark:text-zinc-400">
           {isProcessing ? <Loader2 size={24} className="animate-spin" /> : null}
           {isProcessing ? t("aboveFold.processing") : mode === "compress" ? t("aboveFold.placeholderCompress") : t("aboveFold.placeholderExtract")}
@@ -34,6 +34,7 @@ export default function ZipCompressorResult({ isProcessing, onDownloadZip, extra
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

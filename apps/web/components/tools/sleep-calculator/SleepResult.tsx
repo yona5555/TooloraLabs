@@ -151,7 +151,7 @@ export default function SleepResult({ snap, error, digitStyle, fill = false }: P
   );
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={heading}
       className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
       bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}

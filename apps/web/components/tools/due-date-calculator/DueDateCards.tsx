@@ -85,7 +85,7 @@ export function DueTimelineCard({ side }: { side: Side }) {
   ];
   const tagRight = sx < W * 0.6;
   return (
-    <Card tool="due-date-calculator" idPrefix="due"
+    <Card phoneRole="visual" tool="due-date-calculator" idPrefix="due"
       n={1}
       side={side}
       k="timeline"

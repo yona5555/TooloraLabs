@@ -25,7 +25,7 @@ export default function NotepadResult({ result, a, onPickLine }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <SectionCard title={t("bottomLine")}>
+      <SectionCard phoneRole="output" title={t("bottomLine")}>
         {!hasAny ? (
           <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("noCalculations")}</p>
         ) : (

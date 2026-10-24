@@ -64,7 +64,7 @@ export default function TDEEInputPanel({
   const tScenarios = useTranslations("tools.tdee-calculator.scenarios");
 
   return (
-    <SectionCard title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("form.scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">

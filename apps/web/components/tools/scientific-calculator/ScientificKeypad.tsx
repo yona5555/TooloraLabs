@@ -127,7 +127,7 @@ export default function ScientificKeypad({ state, dispatch, compact = false }: S
   };
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="tool"
       title={t("aboveFold.calculatorTitle")}
       bodyClassName={compact ? "p-3" : "p-4 lg:p-5"}
       action={

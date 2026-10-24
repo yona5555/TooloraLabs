@@ -86,6 +86,7 @@ export async function ToolPageView({
   const tp = await getTranslations({ locale, namespace: "toolPage" });
   const tc = await getTranslations({ locale, namespace: "categories" });
   const tn = await getTranslations({ locale, namespace: "navbar" });
+  const tcommon = await getTranslations({ locale, namespace: "common" });
 
   const title = t(`${slug}.title`);
   const description = t(`${slug}.description`);
@@ -241,6 +242,7 @@ export async function ToolPageView({
         description={description}
         contentWidth={isAboveFoldLayout ? "wide" : "default"}
         compact={isAboveFoldLayout}
+        backText={tcommon("back")}
       >
         {component}
       </ToolPageLayout>

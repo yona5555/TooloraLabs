@@ -32,6 +32,7 @@ import CommodityLearningResources from "./CommodityLearningResources";
 import { CommodityContext } from "./commodityContext";
 import { useCommodityHistory } from "./useCommodityData";
 import { type CommodityId, type MetalUnit, type OilUnit, type Spot } from "./types";
+import CommodityPhoneCards from "./CommodityPhoneCards";
 import type { ReactNode } from "react";
 
 type CommodityConverterProps = {
@@ -40,12 +41,14 @@ type CommodityConverterProps = {
   /** Unix seconds — the older of the metals/oil provider timestamps, so "last updated" never overclaims freshness. */
   lastUpdatedUnix: number | null;
   education: ReactNode;
+  /** Last 30 PAXG/USD daily closes for the phone gold card; null hides its line and change. */
+  goldTrend: number[] | null;
 };
 
 const FIAT_STORAGE_KEY = "commodities-tracker:fiat";
 const SIDEBAR_UNITS: MetalUnit[] = ["gram", "troyOunce", "kilogram", "tola", "tael"];
 
-export default function CommodityConverter({ spot, fiatRates, lastUpdatedUnix, education }: CommodityConverterProps) {
+export default function CommodityConverter({ spot, fiatRates, lastUpdatedUnix, goldTrend, education }: CommodityConverterProps) {
   const t = useTranslations("tools.commodities-tracker");
   const tA = useTranslations("tools.commodities-tracker.aboveFold");
   const tNav = useTranslations("tools.commodities-tracker.nav");
@@ -109,6 +112,7 @@ export default function CommodityConverter({ spot, fiatRates, lastUpdatedUnix, e
 
   return (
     <FiatContext.Provider value={fiat}>
+      <CommodityPhoneCards spot={spot} goldTrend={goldTrend} />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput

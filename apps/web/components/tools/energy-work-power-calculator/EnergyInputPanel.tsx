@@ -39,7 +39,7 @@ export default function EnergyInputPanel({ draft, onChange, onClear }: EnergyInp
   const t = useTranslations("tools.energy-work-power-calculator.form");
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("modeLabel")}</span>
         <EnergyModeTabs mode={draft.mode} onModeChange={(m) => onChange("mode", m)} />

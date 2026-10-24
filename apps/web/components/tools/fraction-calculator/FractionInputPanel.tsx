@@ -41,7 +41,7 @@ export default function FractionInputPanel({
   const tScenarios = useTranslations("tools.fraction-calculator.scenarios");
 
   return (
-    <SectionCard title={t("inputTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="tool" title={t("inputTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">

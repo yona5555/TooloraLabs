@@ -28,11 +28,12 @@ import CryptoMarketCapLog from "./CryptoMarketCapLog";
 import CryptoTopMovers from "./CryptoTopMovers";
 import CryptoNews from "./CryptoNews";
 import CryptoLearningResources from "./CryptoLearningResources";
+import CryptoPhoneTicker, { type PhoneTrends } from "./CryptoPhoneTicker";
 import { FiatContext, marketFormatters, useFiatPreference } from "@/components/tools/markets/fiat";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import { useLiveTicks } from "./useCryptoLive";
 import type { FiatRate } from "./types";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 type CryptoConverterProps = {
   initialCoins: CryptoCoin[];
@@ -40,11 +41,13 @@ type CryptoConverterProps = {
   fiatRates: FiatRate[];
   fetchedAt: number;
   education: ReactNode;
+  phoneTrends: PhoneTrends;
 };
 
 const FIAT_STORAGE_KEY = "crypto-converter:fiat";
 
-export default function CryptoConverter({ initialCoins, globalStats, fiatRates, fetchedAt, education }: CryptoConverterProps) {
+
+export default function CryptoConverter({ initialCoins, globalStats, fiatRates, fetchedAt, education, phoneTrends }: CryptoConverterProps) {
   const t = useTranslations("tools.crypto-converter");
   const tNav = useTranslations("tools.crypto-converter.nav");
   const [coins, setCoins] = useState<CryptoCoin[]>(initialCoins);
@@ -71,9 +74,13 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
   }
 
   /** Picking a coin from a list makes it the source; if it was the target, the pair swaps. */
-  function handlePick(id: string) {
+  function pickFrom(id: string) {
     if (id === toCoinId) setToCoinId(fromCoinId);
     setFromCoinId(id);
+  }
+
+  function handlePick(id: string) {
+    pickFrom(id);
     document.getElementById("tool")?.scrollIntoView({ behavior: "smooth" });
   }
 
@@ -115,8 +122,28 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
     { id: "notices", label: tNav("notices") },
   ];
 
+  // Below the fold, in page order; `adAfter` = the desktop leaderboard that follows it (unchanged).
+  const belowCards: { key: string; node: ReactNode; adAfter?: boolean }[] = [
+    { key: "chart", node: <CryptoHistoricalChart coin={chartCoin} coins={initialCoins} onSelectCoin={setChartCoinId} digitStyle={digitStyle} /> },
+    { key: "volatility", node: <CryptoVolatilityGauge coin={fromCoin} digitStyle={digitStyle} /> },
+    { key: "sensitivity", node: <CryptoSensitivityTrio fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} />, adAfter: true },
+    { key: "compare", node: <CryptoComparisonCards fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} /> },
+    { key: "supply", node: <CryptoSupplyBar coin={fromCoin} digitStyle={digitStyle} /> },
+    { key: "timeline", node: <CryptoCoinTimeline coin={fromCoin} digitStyle={digitStyle} /> },
+    { key: "mcap", node: <CryptoMarketCapLog coins={initialCoins} coin={fromCoin} digitStyle={digitStyle} />, adAfter: true },
+    { key: "movers", node: <CryptoTopMovers coins={initialCoins} digitStyle={digitStyle} onPick={handlePick} /> },
+    { key: "toplist", node: <CryptoTopList coins={initialCoins} digitStyle={digitStyle} fromCoinId={fromCoinId} toCoinId={toCoinId} onPick={handlePick} />, adAfter: true },
+    { key: "fear-greed", node: <CryptoFearGreed /> },
+    { key: "fees", node: <CryptoNetworkFees btcPriceUsd={findCoinById(coins, "bitcoin")?.currentPrice ?? null} digitStyle={digitStyle} /> },
+    { key: "halving", node: <CryptoHalvingSteps />, adAfter: true },
+    { key: "what-if", node: <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} /> },
+    { key: "news", node: <CryptoNews /> },
+    { key: "learning", node: <CryptoLearningResources /> },
+  ];
+
   return (
     <FiatContext.Provider value={fiat}>
+      <CryptoPhoneTicker coins={initialCoins} trends={phoneTrends} fromCoinId={fromCoinId} onPick={pickFrom} />
       {/* Agreed top-of-page layout: input | result | related tools + 300×600 ad (hidden on mobile). */}
       <div id="tool" className="scroll-mt-32 max-md:[&_[data-tool-result]]:contents">
         <ToolAboveFold
@@ -145,8 +172,8 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
           }
           result={
             // Phone only (approved exception to "input first", Yousef 2026-10-23): the live flow card
-            // moves above the input card, the dominance card stays below it. CSS order only; desktop untouched.
-            <div className="flex flex-col gap-6 max-md:contents max-md:[&>:first-child]:-order-1">
+            // (`live-output`) comes above the input card, the dominance card below it (globals.css).
+            <div className="flex flex-col gap-6">
               <CryptoLiveFlow
                 fromCoin={fromCoin}
                 toCoin={toCoin}
@@ -176,33 +203,12 @@ export default function CryptoConverter({ initialCoins, globalStats, fiatRates, 
         <SectionNav items={navItems} />
         <ViewDocsLink slug="crypto-converter" />
 
-        {/* Group 1 — price action: full-width candles with the live coin list beneath */}
-        <CryptoHistoricalChart coin={chartCoin} coins={initialCoins} onSelectCoin={setChartCoinId} digitStyle={digitStyle} />
-        <CryptoVolatilityGauge coin={fromCoin} digitStyle={digitStyle} />
-        <CryptoSensitivityTrio fromCoin={fromCoin} toCoin={toCoin} amount={amountValue} digitStyle={digitStyle} />
-        <AdSpace variant="leaderboard" />
-
-        {/* Group 2 — the coin itself */}
-        <CryptoComparisonCards fromCoin={fromCoin} toCoin={toCoin} digitStyle={digitStyle} />
-        <CryptoSupplyBar coin={fromCoin} digitStyle={digitStyle} />
-        <CryptoCoinTimeline coin={fromCoin} digitStyle={digitStyle} />
-        <CryptoMarketCapLog coins={initialCoins} coin={fromCoin} digitStyle={digitStyle} />
-        <AdSpace variant="leaderboard" />
-
-        {/* Group 3 — the whole market */}
-        <CryptoTopMovers coins={initialCoins} digitStyle={digitStyle} onPick={handlePick} />
-        <CryptoTopList coins={initialCoins} digitStyle={digitStyle} fromCoinId={fromCoinId} toCoinId={toCoinId} onPick={handlePick} />
-        <AdSpace variant="leaderboard" />
-
-        {/* Group 4 — sentiment and the Bitcoin network */}
-        <CryptoFearGreed />
-        <CryptoNetworkFees btcPriceUsd={findCoinById(coins, "bitcoin")?.currentPrice ?? null} digitStyle={digitStyle} />
-        <CryptoHalvingSteps />
-        <AdSpace variant="leaderboard" />
-
-        <CryptoWhatIfCalculator coins={coins} onCoinDiscovered={handleCoinDiscovered} digitStyle={digitStyle} />
-        <CryptoNews />
-        <CryptoLearningResources />
+        {belowCards.map((card) => (
+          <Fragment key={card.key}>
+            {card.node}
+            {card.adAfter && <AdSpace variant="leaderboard" />}
+          </Fragment>
+        ))}
       </div>
 
       {education}

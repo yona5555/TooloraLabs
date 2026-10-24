@@ -276,7 +276,7 @@ export default function TcResult({ s, set, d, f }: Props) {
   }
 
   return (
-    <SectionCard title={t(`result.title.${s.mode}`)} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t(`result.title.${s.mode}`)} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <div className="mb-3 grid grid-cols-3 gap-2 text-center" data-bp-inner>
         {stats.map((st) => (
           <div key={st.k} className="rounded-lg bg-blue-50 px-1 py-1.5 dark:bg-blue-500/10">

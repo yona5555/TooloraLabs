@@ -36,7 +36,7 @@ export default function SurfaceAreaInputPanel({ draft, onChange, onCalculate, on
   );
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <form onSubmit={onCalculate}>
         <label className="block space-y-2">
           <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("shapeLabel")}</span>

@@ -93,7 +93,7 @@ export default function CountdownInput({ state, onChange, d, presets, onPreset, 
   };
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-3">
+    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-3">
       <div>
         <span className={label}>{t("input.presetsHijri")}</span>
         <div className="flex flex-wrap gap-1.5">

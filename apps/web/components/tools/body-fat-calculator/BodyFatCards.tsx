@@ -94,7 +94,7 @@ export function BodyFatZoneStripCard({ side }: { side: Side }) {
     { key: "acsm", label: t("rowAcsm", { lo: aLo, hi: aHi }), value: bf > aHi ? `−${f1(m.waistCm - waistFor(m, aHi))} cm` : bf < aLo ? `+${f1(waistFor(m, aLo) - m.waistCm)} cm` : t("inside") },
   ];
   return (
-    <Card tool="body-fat-calculator" idPrefix="bodyfat"
+    <Card phoneRole="visual" tool="body-fat-calculator" idPrefix="bodyfat"
       n={1}
       side={side}
       k="zone"

@@ -355,27 +355,59 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
  * Desktop (lg+) is untouched. */
 @media (max-width: 1023.98px) {
   /*
-   * Only prose wraps inside a word: a long word (German compounds, unit names) in a narrow box
-   * breaks instead of widening the page, and `anywhere` lets a flex or grid item shrink below it.
-   * Values and formulas are not prose: components/layout/FitNumbers.tsx marks every element whose
-   * text is a number or formula with [data-num]; those and [data-fit] (the page title) stay on one
-   * line, and FitNumbers shrinks their type when the box is narrower (§29).
+   * Text wraps only BETWEEN words, never inside one (Yousef 2026-10-24: `overflow-wrap: anywhere` here
+   * split "Quantity" or "City" letter by letter in narrow table columns and buttons). A box too narrow
+   * for a word is fixed where it is (tables size to their content and scroll inside themselves, below).
+   * Values and formulas: components/layout/FitNumbers.tsx marks every element whose text is a number
+   * or formula with [data-num]; those and [data-fit] (the page title) stay on one line, and FitNumbers
+   * shrinks their type when the box is narrower (§29).
    */
-  main {
+  main[data-phone-cards] {
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+  /* other pages keep the old wrapping until checked one by one (the phone home page is locked) */
+  main:not([data-phone-cards]) {
     overflow-wrap: anywhere;
   }
-  main :is([data-num], [data-fit]) {
+  main:not([data-phone-cards]) :is([data-num], [data-fit]) {
     overflow-wrap: normal;
+  }
+  main :is([data-num], [data-fit]) {
     white-space: nowrap;
   }
   main [data-fit-wrap] {
     white-space: normal;
   }
-  /* a table still wider than its card after that scrolls inside itself, never the page */
+  /*
+   * Tables: columns size to their content (no fixed min-width: with words unbreakable the columns can
+   * no longer be squeezed letter by letter) and header cells never wrap. A table still wider than its
+   * box scrolls inside itself, never the page (lib/phone/layout.ts marks it [data-scroll-x] when it
+   * has no scrolling container of its own), with a fade at the inline end as the hint; the trailing
+   * padding lets the last column scroll clear of the fade.
+   */
+  main[data-phone-cards] table {
+    table-layout: auto;
+    min-width: 0;
+  }
+  main[data-phone-cards] :is(th, td) {
+    font-size: max(12px, 1em);
+  }
+  main[data-phone-cards] th {
+    white-space: nowrap;
+  }
   main table[data-scroll-x] {
     display: block;
     max-width: 100%;
     overflow-x: auto;
+  }
+  main [data-scroll-x] {
+    padding-inline-end: 24px;
+    mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  }
+  main [dir="rtl"] [data-scroll-x], main[dir="rtl"] [data-scroll-x], [dir="rtl"] main [data-scroll-x] {
+    mask-image: linear-gradient(to left, #000 calc(100% - 24px), transparent);
   }
   /* a fieldset is min-content wide by default (UA style), so it would hold its card wider */
   main fieldset {
@@ -469,7 +501,8 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
  * In-page anchors land below the sticky site header and the stuck section bar, whatever their
  * real heights: SectionNav publishes the sum as --anchor-offset (falls back to the header alone).
  */
-[id] {
+[id],
+[data-info-section] > :first-child {
   scroll-margin-top: calc(var(--anchor-offset, 73px) + 12px);
 }
 
@@ -489,5 +522,141 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     svg {
       max-width: 100%;
     }
+  }
+}
+
+/*
+ * APPROVED PHONE STANDARD (visuals.md; SectionCard.tsx, PhoneLayoutScript.tsx, InfoSection.tsx).
+ * Tool pages only ([data-phone-cards] on <main>), below 768px:
+ * - a card that is not always-open ([data-fixed]) and is closed is only its blue header: body hidden,
+ *   the light theme's 1.5px panel frame dropped, the header's bottom corners rounded;
+ * - the OPEN/CLOSE pill shows on those cards only (display:none everywhere else, desktop included);
+ * - article ad slots stay display:none until PhoneLayoutScript picks them ([data-show]).
+ */
+[data-article-ad] {
+  display: none;
+}
+@media (max-width: 767px) {
+  [data-phone-cards] [data-card]:not([data-fixed]) > [data-card-header] > [data-card-toggle] {
+    display: flex;
+  }
+  [data-phone-cards] [data-card][data-state="closed"]:not([data-fixed]) {
+    border-width: 0;
+  }
+  [data-phone-cards] [data-card][data-state="closed"]:not([data-fixed]) > [data-card-header] {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+  [data-phone-cards] [data-card][data-state="closed"]:not([data-fixed]) > [data-card-body] {
+    display: none;
+  }
+  [data-article-ad][data-show] {
+    display: block;
+  }
+  /*
+   * Phone order (rules A and B): the 3 always-open cards first, in logical order (1 tool, 2 output,
+   * 3 main visual; crypto's `live-output` above its tool), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
+   * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper
+   * between it and an always-open card, a role card or the docs row stops boxing (display:
+   * contents), so CSS order can place them. lib/phone/layout.ts numbers the 3 always-open cards
+   * ([data-phone-open] 1-3, screen order); a page whose DOM order differs from the logical one marks
+   * those cards ([data-phone-role], SectionCard `phoneRole`). What came before the first open card
+   * (cards excepted) stays first. Dialogs never flatten.
+   */
+  [data-phone-flow] {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-open], [data-phone-role], [data-phone-docs]) {
+    display: contents;
+  }
+  [data-phone-flow] :where(:has(~ [data-phone-open="1"], ~ * [data-phone-open="1"]), :has(~ [data-phone-open="1"], ~ * [data-phone-open="1"]) *):where(:not([data-card], :has([data-card]))) {
+    order: -60;
+  }
+  [data-phone-flow] [data-phone-open] {
+    order: -20;
+  }
+  [data-phone-flow] [data-phone-role="live-output"] {
+    order: -55;
+  }
+  [data-phone-flow] [data-phone-role="tool"] {
+    order: -50;
+  }
+  [data-phone-flow] [data-phone-role="output"] {
+    order: -40;
+  }
+  [data-phone-flow] [data-phone-role="visual"] {
+    order: -30;
+  }
+  [data-phone-flow] :is([data-phone-docs], [data-phone-docs] + [data-ad-slot]) {
+    order: -10;
+  }
+  /* Ad balance: lib/phone/layout.ts drops ad 1 when the collapsed cards between it and ad 2 are shorter than one ad. */
+  [data-phone-flow] [data-ad-slot][data-phone-hide] {
+    display: none;
+  }
+  /*
+   * Rule B: no blue-header card inside the article. The article (EncyclopediaPaper, [data-phone-article]),
+   * every wrapper around it, and inside it the paper boxes, the sections, their bodies and anything holding
+   * a card or an ad slot stop boxing, so the article's parts are items of the phone flow: its cards keep
+   * order 0 and join the collapsed cards in DOM order, ad 2 (the article's first ad slot, [data-phone-ad2])
+   * sits after them outside the paper, the article's parts follow (10), then whatever came after it (20).
+   * lib/phone/layout.ts measures the parts and draws ONE continuous paper behind them (::before below);
+   * the parts get the paper's inner padding as side margins and one uniform spacing (the flow's gap).
+   */
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-article]),
+  [data-phone-flow] [data-phone-article],
+  [data-phone-flow] [data-phone-article] :is([data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :not([data-card], [data-card] *):has([data-card], [data-article-ad])) {
+    display: contents;
+  }
+  [data-phone-flow] [data-phone-article] :where(:not([data-card], [data-card] *, :has([data-card]))) {
+    order: 10;
+  }
+  [data-phone-flow] :is([data-phone-article], :has([data-phone-article])) ~ :where(:not([data-card], :has([data-card]))),
+  [data-phone-flow] :is([data-phone-article], :has([data-phone-article])) ~ * :where(:not([data-card], [data-card] *, :has([data-card]))) {
+    order: 20;
+  }
+  [data-phone-flow] [data-phone-article] [data-article-ad][data-phone-ad2] {
+    order: 5;
+    padding-block: 0;
+  }
+  [data-phone-flow] :where([data-phone-article] :is([data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :not([data-card], [data-card] *):has([data-card], [data-article-ad])) > :not([data-card], [data-phone-ad2], [data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :has([data-card], [data-article-ad]))) {
+    margin: 0 1rem;
+  }
+  [data-phone-flow] [data-phone-article] [data-info-section] > h2 {
+    margin-top: 1rem;
+  }
+  [data-phone-flow] [data-phone-article] [data-info-section]:first-of-type > h2 {
+    margin-top: 0;
+  }
+  [data-phone-flow] [data-phone-article] [data-article-ad][data-show]:not([data-phone-ad2]) {
+    padding-block: 0.5rem;
+  }
+  /* A card keeps its own (sans) font on phone, never the article's serif it sits in. */
+  [data-phone-flow] [data-phone-article] [data-card] {
+    margin-block: 0;
+    font-family: var(--font-sans);
+  }
+  [data-phone-cards][data-phone-paper-height] [data-phone-flow] {
+    position: relative;
+    isolation: isolate;
+  }
+  [data-phone-cards][data-phone-paper-height] [data-phone-flow]::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-inline: 0;
+    top: var(--phone-paper-top);
+    height: var(--phone-paper-height);
+    border: 1px solid #e2d9c2;
+    border-radius: 0.25rem;
+    background: #faf7ef;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+  .dark [data-phone-cards][data-phone-paper-height] [data-phone-flow]::before {
+    border-color: #39352c;
+    background: #17160f;
+    box-shadow: none;
   }
 }

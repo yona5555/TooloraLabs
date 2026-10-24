@@ -30,18 +30,21 @@ import ForexNews from "./ForexNews";
 import ForexLearningResources from "./ForexLearningResources";
 import { useCurrencyName, useForexRecent, usePairHistory } from "./useForexData";
 import { ForexPairContext } from "./forexPairContext";
+import ForexPhoneCards, { type UsdTable } from "./ForexPhoneCards";
 import type { ReactNode } from "react";
 
 type ForexConverterProps = {
   initialCurrencies: CurrencyRate[];
   lastUpdatedUnix: number | null;
   education: ReactNode;
+  /** ECB fixings for the phone top cards' change and line; null hides them. */
+  usdTable: UsdTable;
 };
 
 const FIAT_STORAGE_KEY = "forex-converter:fiat";
 const SIDEBAR_CODES = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "CNY", "INR", "SAR", "AED", "KWD", "QAR", "EGP", "MAD", "TRY", "MXN", "BRL", "ZAR", "SGD", "HKD", "KRW", "SEK", "NOK", "NZD"];
 
-export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, education }: ForexConverterProps) {
+export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, usdTable, education }: ForexConverterProps) {
   const t = useTranslations("tools.forex-converter");
   const tNav = useTranslations("tools.forex-converter.nav");
   const dataUnavailable = initialCurrencies.length === 0;
@@ -103,6 +106,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, edu
 
   return (
     <FiatContext.Provider value={fiat}>
+      <ForexPhoneCards currencies={initialCurrencies} table={usdTable} from={fromCode} to={toCode} />
       <div id="tool" className="scroll-mt-32">
         <ToolAboveFold
           stretchInput

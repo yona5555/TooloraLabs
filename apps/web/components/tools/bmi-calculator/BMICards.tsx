@@ -98,7 +98,7 @@ export function BMIZoneStripCard({ side }: { side: Side }) {
     { key: "normal", label: t("rowNormal"), value: toNormal === 0 ? t("inside") : `${f1(toNormal)} kg` },
   ];
   return (
-    <Card tool="bmi-calculator" idPrefix="bmi"
+    <Card phoneRole="visual" tool="bmi-calculator" idPrefix="bmi"
       n={1}
       side={side}
       k="zone"

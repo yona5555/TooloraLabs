@@ -137,6 +137,25 @@ Single source of truth: the "Blueprint theme" block in `apps/web/app/globals.css
 ## 9. Clickable actions look like buttons (Yousef, 2026-10-23, every page)
 Any clickable action (tabs, save, clear, copy, export, toggles, show more) must be a visible button: background or border, padding, radius, clear active/hover/focus states, and a 44×44 touch area on phone. Plain text or underlined text for an action is rejected. Real navigation links inside paragraphs stay links.
 
+## APPROVED PHONE STANDARD — every tool page below 768px (Yousef, 2026-10-24)
+Default for all tools, desktop unchanged; built into the shared components (never per tool). Full spec:
+`docs/claude/approved-visuals-and-indicators.md` § APPROVED PHONE STANDARD.
+- Back button arrow + "رجوع"/"Back" (44×44), title on one line beside it.
+- Two top mini cards (`PhoneMiniCards`) only where verified live data already loads (crypto, commodities,
+  forex, weather); otherwise nothing.
+- First 3 blue-header cards open without toggle; cards 4+ collapsed to the header with the
+  "فتح/OPEN"–"إغلاق/CLOSE" pill (`aria-expanded`, server false, body kept in the HTML).
+- Section nav: 3–4 equal buttons Tool / Data / Learn / FAQ, one line, 44px, active follows the scroll.
+- Phone ads 300×250 "إعلان": after the docs row, before the article, and at ~1/3 and ~2/3 of the article
+  on section boundaries (≥600px apart; one in the middle if short). Desktop slots hidden on phone,
+  phone slots hidden on desktop.
+- Ad balance: if the collapsed cards between ad 1 and ad 2 are shorter than one ad (250px + label), only
+  ad 2 shows. Ad 2 is always outside the article paper, right before it; only the 1/3 and 2/3 ads are inside.
+- Rule B (option 1): no blue-header card inside the article on phone; article cards join the collapsed
+  group in their order, one DOM copy (display:contents + CSS order), sans font; ONE continuous paper is
+  redrawn around the article parts with uniform spacing. Desktop unchanged.
+- Phone order: 3 open cards, docs row, ad 1 (if balanced), all collapsed cards, ad 2, the article paper.
+
 ## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)
 Approved phone home page (below 768px), as shipped in commits 9cf4fb6d, be5df414, cb9012b2 and fd3b15d3:
 - One-row header: the uppercase `TOOLORALABS.COM` wordmark (shared `Wordmark`, Arial, 15px, always LTR) and the smaller Docs / theme / share / language buttons (36px visible, 44×44 hit area, 8px apart; order from the start side Docs, theme, share, language).

@@ -47,7 +47,7 @@ export function LineItemsRanked({ invoices, overview, f }: IndicatorProps) {
   const max = top?.total || 1;
   const colorOf = (id: string) => INVOICE_COLORS[invoices.findIndex((i) => i.id === id) % INVOICE_COLORS.length];
   return (
-    <IndicatorCard
+    <IndicatorCard phoneRole="visual"
       id="line-items"
       title={t("items.title")}
       heading={t("items.heading", { count: rows.length })}

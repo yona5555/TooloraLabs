@@ -27,7 +27,7 @@ export function TcShiftDialCard({ s, set, d, f }: CardProps) {
   };
   const btn = "rounded-md border border-zinc-300 px-2 py-1 text-xs font-bold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-800";
   return (
-    <SectionCard title={t("dial.title")}>
+    <SectionCard phoneRole="visual" title={t("dial.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("dial.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("worked")}

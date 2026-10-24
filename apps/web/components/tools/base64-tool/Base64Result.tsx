@@ -18,7 +18,7 @@ export default function Base64Result() {
 
   if (error || !a) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p
           className={`rounded-xl px-4 py-3 text-sm font-medium ${error ? "border border-red-200 bg-red-50 text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400" : "text-center text-zinc-500 dark:text-zinc-400"}`}
         >
@@ -33,6 +33,7 @@ export default function Base64Result() {
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

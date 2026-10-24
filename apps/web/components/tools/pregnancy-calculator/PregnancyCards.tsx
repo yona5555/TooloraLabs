@@ -90,7 +90,7 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
       : { key: "next", label: t("rowNext"), value: t("allPassed") },
   ];
   return (
-    <Card tool="pregnancy-calculator" idPrefix="pregnancy"
+    <Card phoneRole="visual" tool="pregnancy-calculator" idPrefix="pregnancy"
       n={1}
       side={side}
       k="timeline"

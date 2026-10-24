@@ -40,7 +40,7 @@ export default function ZipCompressorInputPanel({
   const hasState = mode === "compress" ? compressFiles.length > 0 : extractFile !== null;
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="tool"
       title={t("form.inputTitle")}
       action={
         hasState ? (

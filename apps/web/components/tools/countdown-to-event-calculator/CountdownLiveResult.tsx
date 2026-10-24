@@ -14,7 +14,7 @@ export default function CountdownLiveResult({ state, d }: Props) {
 
   if (!d) {
     return (
-      <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-4">
+      <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-4">
         <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("input.invalid")}</p>
       </SectionCard>
     );
@@ -94,7 +94,7 @@ export default function CountdownLiveResult({ state, d }: Props) {
   ];
 
   return (
-    <SectionCard title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
+    <SectionCard phoneRole="output" title={t("result.title")} className="lg:flex lg:flex-1 lg:flex-col" bodyClassName="p-3 lg:flex lg:flex-1 lg:flex-col">
       <p className="mb-2 text-center text-sm font-semibold text-zinc-700 dark:text-zinc-200">
         {b.isPast ? t("result.countingUp") : t("result.countingDown")} <span className="text-blue-700 dark:text-blue-300">{title}</span>
       </p>

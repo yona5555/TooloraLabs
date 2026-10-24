@@ -5,6 +5,42 @@ import { ArrowUp, ArrowDown } from "lucide-react";
 
 export type SectionNavItem = { id: string; label: string };
 
+/**
+ * APPROVED PHONE STANDARD (visuals.md): below 768px the bar is 3–4 equal-width position buttons —
+ * Tool, Data, Learn, FAQ — instead of one button per section. Every section id maps to a group by
+ * this rule; the article's own sections ([data-info-section] without a mapped id) belong to Learn.
+ * An empty group gets no button.
+ */
+type PhoneGroup = "tool" | "data" | "learn" | "faq";
+const PHONE_GROUPS: PhoneGroup[] = ["tool", "data", "learn", "faq"];
+const LEARN_IDS = new Set(["behind-the-tool", "notices", "news", "learning-resources", "worked-examples"]);
+const groupOf = (id: string): PhoneGroup => (id === "tool" ? "tool" : id === "faq" ? "faq" : LEARN_IDS.has(id) ? "learn" : "data");
+
+/** Each group's sections in page order, read from the DOM (Learn adds the article's unnamed sections). */
+/** Rule B flattens the article's sections on phone (display:contents, no box): scroll to and measure their first part. */
+function boxed(el: HTMLElement): HTMLElement {
+  if (el.getClientRects().length) return el;
+  for (const child of Array.from(el.children)) {
+    const found = boxed(child as HTMLElement);
+    if (found.getClientRects().length) return found;
+  }
+  return el;
+}
+
+function groupElements(items: SectionNavItem[]): Record<PhoneGroup, HTMLElement[]> {
+  const out: Record<PhoneGroup, HTMLElement[]> = { tool: [], data: [], learn: [], faq: [] };
+  const ids = new Set(items.map((i) => i.id));
+  for (const item of items) {
+    const el = document.getElementById(item.id);
+    if (el) out[groupOf(item.id)].push(boxed(el));
+  }
+  document.querySelectorAll<HTMLElement>("[data-phone-cards] [data-info-section]").forEach((el) => {
+    if (!el.id || !ids.has(el.id)) out.learn.push(boxed(el));
+  });
+  for (const g of PHONE_GROUPS) out[g].sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+  return out;
+}
+
 type SectionNavProps = {
   items: SectionNavItem[];
   /** Opt-in: adds a "Jump to Bottom" action next to "Back to Top". Off by default so existing callers are unaffected. */
@@ -22,7 +58,10 @@ const STUCK_TOP_OFFSET = 72; // px — matches the site header's own `h-18`/`top
 
 export default function SectionNav({ items, showJumpToBottom = false, visible = true }: SectionNavProps) {
   const t = useTranslations("common");
+  const tGroups = useTranslations("common.navGroups");
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
+  const phoneGroups = PHONE_GROUPS.filter((g) => items.some((i) => groupOf(i.id) === g));
+  const [activeGroup, setActiveGroup] = useState<PhoneGroup>(phoneGroups[0] ?? "tool");
   const [isStuck, setIsStuck] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
   const itemsRef = useRef(items);
@@ -58,6 +97,40 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
+    function pick() {
+      ticking = false;
+      // The line just under the site header plus this bar once stuck.
+      const line = STUCK_TOP_OFFSET + (navRef.current?.offsetHeight ?? 0) + 16;
+      const groups = groupElements(itemsRef.current);
+      let best: PhoneGroup = "tool";
+      let bestTop = -Infinity;
+      for (const g of PHONE_GROUPS) {
+        for (const el of groups[g]) {
+          const top = el.getBoundingClientRect().top;
+          if (top <= line && top > bestTop) {
+            bestTop = top;
+            best = g;
+          }
+        }
+      }
+      setActiveGroup(best);
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(pick);
+    }
+    pick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   /**
@@ -205,7 +278,12 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
   }, []);
 
   function scrollToSection(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(id);
+    if (el) boxed(el).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function scrollToGroup(group: PhoneGroup) {
+    groupElements(items)[group][0]?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function scrollToTop() {
@@ -230,7 +308,27 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
         } ${visible && (isStuck || !gated) ? "opacity-100" : "pointer-events-none opacity-0"}`}
         inert={gated && !(isStuck && visible) ? true : undefined}
       >
-        <div className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6">
+        {phoneGroups.length > 0 && (
+          <div className="mx-auto grid max-w-6xl gap-1.5 px-4 py-1.5 md:hidden" style={{ gridTemplateColumns: `repeat(${phoneGroups.length}, minmax(0, 1fr))` }}>
+            {phoneGroups.map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => scrollToGroup(g)}
+                aria-current={activeGroup === g ? "true" : undefined}
+                data-nav-group=""
+                className={`flex h-11 min-w-0 items-center justify-center rounded-lg border px-1 text-[13px] font-semibold whitespace-nowrap break-keep transition ${
+                  activeGroup === g
+                    ? "border-blue-400 bg-blue-600 text-white"
+                    : "border-zinc-300 bg-white text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
+                }`}
+              >
+                {tGroups(g)}
+              </button>
+            ))}
+          </div>
+        )}
+        <div className={`mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6${phoneGroups.length > 0 ? " max-md:hidden" : ""}`}>
           {items.map((item) => (
             <button
               key={item.id}

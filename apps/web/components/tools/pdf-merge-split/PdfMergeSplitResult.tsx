@@ -44,7 +44,7 @@ export default function PdfMergeSplitResult({ isProcessing, resultCount, onDownl
   const heroValue = mode === "merge" ? t("aboveFold.mergeReady") : t("aboveFold.splitReady", { count: resultCount });
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

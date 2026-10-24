@@ -18,7 +18,7 @@ export default function GcfLcmResult({ error, className = "" }: { error: GcfLcmE
   const sentence = t("sentence", { numbers: list, gcf: f(result.gcf), lcm: f(result.lcm) });
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className={`lg:flex lg:h-full lg:flex-col ${className}`}
       bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"

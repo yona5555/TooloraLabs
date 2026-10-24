@@ -168,7 +168,7 @@ export default function InventoryValuationTool({ education }: { education: React
               <InventoryMethodReference />
 
               {hasCalculated && stockLevelItems && stockLevelItems.length > 0 && (
-                <SectionCard title={tDiagrams("stockLevelDiagram.title")}>
+                <SectionCard phoneRole="visual" title={tDiagrams("stockLevelDiagram.title")}>
                   <InventoryStockLevelBarDiagram items={stockLevelItems} caption={tDiagrams("stockLevelDiagram.caption")} />
                 </SectionCard>
               )}

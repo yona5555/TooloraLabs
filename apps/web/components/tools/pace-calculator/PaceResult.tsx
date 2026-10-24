@@ -202,7 +202,7 @@ export default function PaceResult({ snap, invalid, digitStyle, fill = false }: 
   );
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={title}
       className={fill ? "lg:flex lg:flex-1 lg:flex-col" : ""}
       bodyClassName={fill ? "p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6" : undefined}

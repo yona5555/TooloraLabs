@@ -96,7 +96,7 @@ export function BMRZoneStripCard({ side }: { side: Side }) {
     { key: "other", label: tl(nameKey(other(which))), value: `${k0(otherVal)} kcal` },
   ];
   return (
-    <Card tool="bmr-calculator" idPrefix="bmr"
+    <Card phoneRole="visual" tool="bmr-calculator" idPrefix="bmr"
       n={1}
       side={side}
       k="zone"

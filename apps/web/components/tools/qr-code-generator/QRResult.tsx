@@ -42,7 +42,7 @@ export default function QRResult({ svg, payload, error, logoDataUrl, logoMode }:
   const showBesideLogo = logoMode === "beside" && logoDataUrl && svg;
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

@@ -24,7 +24,7 @@ export default function MathSolverResult({ result, draft, hasCalculated }: Props
 
   if (!hasCalculated) {
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("emptyStateMessage")}</p>
@@ -47,7 +47,7 @@ export default function MathSolverResult({ result, draft, hasCalculated }: Props
                 ? "divisionByZero"
                 : "emptyPolynomial";
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <p className="text-center text-sm leading-6 text-zinc-600 dark:text-zinc-300">{t(key)}</p>
       </SectionCard>
     );
@@ -76,7 +76,7 @@ export default function MathSolverResult({ result, draft, hasCalculated }: Props
   };
 
   return (
-    <SectionCard title={t("heading")} action={<MathSolverShareExportModal result={result} draft={draft} />}>
+    <SectionCard phoneRole="output" title={t("heading")} action={<MathSolverShareExportModal result={result} draft={draft} />}>
       {natureBadge && (
         <div className={`mb-4 inline-flex rounded-full border px-3 py-1 text-xs font-semibold ${badgeClasses[natureBadge.tone]}`}>{natureBadge.label}</div>
       )}

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import SectionCard from "@/components/tool-ui/SectionCard";
+import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
 
@@ -16,15 +16,17 @@ type IndicatorCardProps = {
   children: ReactNode;
   fallback?: ReactNode;
   worked: { title: string; rows: Row[] } | null;
+  /** Rule A (SectionCard `phoneRole`): set only when this indicator is the page's main visual. */
+  phoneRole?: PhoneRole;
 };
 
 /**
  * §32 layout for one market indicator: its own blue-header SectionCard, an h3 + intro, and the
  * WORKED EXAMPLE table beside the indicator, or under it when side by side leaves a gap (GapFreeRow).
  */
-export default function IndicatorCard({ id, title, heading, intro, controls, children, fallback, worked }: IndicatorCardProps) {
+export default function IndicatorCard({ id, title, heading, intro, controls, children, fallback, worked, phoneRole }: IndicatorCardProps) {
   return (
-    <SectionCard id={id} title={title}>
+    <SectionCard id={id} title={title} phoneRole={phoneRole}>
       <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">{heading}</h3>
       <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{intro}</p>
       {controls && <div className="mt-3">{controls}</div>}

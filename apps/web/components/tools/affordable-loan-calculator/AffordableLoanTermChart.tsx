@@ -42,7 +42,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
 
   if (!hasCalculated || rows.length === 0) {
     return (
-      <SectionCard title={t("termChart.title")}>
+      <SectionCard phoneRole="visual" title={t("termChart.title")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("termChart.emptyStateMessage")}</p>
@@ -94,7 +94,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
   const tooltipY = MARGIN.top + 4;
 
   return (
-    <SectionCard title={t("termChart.title")}>
+    <SectionCard phoneRole="visual" title={t("termChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("termChart.intro")}</p>
 
       <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">

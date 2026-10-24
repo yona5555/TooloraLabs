@@ -33,7 +33,7 @@ export function CdRingsCard({ d }: IndicatorProps) {
     { key: "wait", r: 42, frac: d.progress, color: BLUE, value: pct(d.progress), note: `${num((d.nowMs - d.startMs) / DAY_MS, 1)} ÷ ${num((d.target.utcMs - d.startMs) / DAY_MS, 1)}` },
   ] as const;
   return (
-    <SectionCard title={t("rings.title")}>
+    <SectionCard phoneRole="visual" title={t("rings.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("rings.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("worked")}

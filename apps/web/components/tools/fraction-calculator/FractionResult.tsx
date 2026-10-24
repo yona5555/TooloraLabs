@@ -48,7 +48,7 @@ export default function FractionResult({ result, computed }: Props) {
 
   if (result.error === "zero-denominator") {
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <p className="text-center text-sm leading-6" style={{ color: "var(--glass-subtitle)" }}>
           {t("zeroDenominator")}
         </p>
@@ -58,7 +58,7 @@ export default function FractionResult({ result, computed }: Props) {
 
   if (result.error === "divide-by-zero") {
     return (
-      <SectionCard title={t("heading")}>
+      <SectionCard phoneRole="output" title={t("heading")}>
         <p className="text-center text-sm leading-6" style={{ color: "var(--glass-subtitle)" }}>
           {t("divideByZeroFraction")}
         </p>
@@ -99,7 +99,7 @@ export default function FractionResult({ result, computed }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <SectionCard title={t("heading")} action={<FractionShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={heroValue} sentence={stepSentence} />}>
+      <SectionCard phoneRole="output" title={t("heading")} action={<FractionShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("heading")} heroValue={heroValue} sentence={stepSentence} />}>
         <div dir="ltr" className="flex items-center justify-center gap-3 font-mono text-4xl font-bold" style={{ color: "var(--glass-accent-1-strong)" }}>
           <FractionGlyph numerator={numeratorA} denominator={denominatorA} />
           <span className="text-2xl opacity-70">{OPERATION_SYMBOL[operation]}</span>

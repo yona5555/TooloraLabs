@@ -101,7 +101,7 @@ export default function AgeResultCard({ d, f, ageText, hijriText }: Props) {
   ];
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("result.title")}
       action={<AgeShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("result.title")} heroValue={ageText} sentence={`${ageText} · ${hijriText}`} />}
       className="lg:flex lg:flex-1 lg:flex-col"

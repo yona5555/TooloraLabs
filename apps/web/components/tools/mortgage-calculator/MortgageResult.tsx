@@ -75,7 +75,7 @@ export default function MortgageResult({ result, digitStyle }: MortgageResultPro
   };
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       action={<MortgageShareExportModal mode="standard" inputRows={inputRows} resultRows={resultRows} heroLabel={heroLabel} heroValue={heroValue} sentence={sentence} table={scheduleTable} />}
     >

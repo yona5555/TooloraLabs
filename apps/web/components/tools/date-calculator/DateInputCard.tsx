@@ -119,7 +119,7 @@ export default function DateInputCard({ state, onChange, onReset, d, f, copyText
   }
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-3.5">
+    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-3.5">
       <div>
         <span className={label}>{t("input.examples")}</span>
         <div className="flex flex-wrap gap-1.5">

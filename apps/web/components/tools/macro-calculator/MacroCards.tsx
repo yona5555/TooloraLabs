@@ -1,6 +1,7 @@
 "use client";
 import { useId, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import type { PhoneRole } from "@/components/tool-ui/SectionCard";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
@@ -92,11 +93,12 @@ export function SvgTrack({ W, y, frac, lo, hi, stops, stopAnchor = "ends" }: { W
  * One 2D indicator card. Shared by the health tools: `tool` is the tool slug whose
  * `tools.<tool>.visuals.<k>` holds title/subtitle, `idPrefix` names its ids and test ids.
  */
-export function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual, tool = "macro-calculator", idPrefix = "macro" }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode; tool?: string; idPrefix?: string }) {
+export function Card({ n, side, k, caption, s, valueText, rows, hover, setHover, visual, tool = "macro-calculator", idPrefix = "macro", phoneRole }: { n: number; side: Side; k: string; caption: string; s: Stepper; valueText: string; rows: KitRow[]; hover: string | null; setHover: (v: string | null) => void; visual: ReactNode; tool?: string; idPrefix?: string; phoneRole?: PhoneRole }) {
   const t = useTranslations(`tools.${tool}.visuals.${k}`);
   const tc = useTranslations("toolPage.indicatorKit");
   return (
     <IndicatorCard
+      phoneRole={phoneRole}
       idPrefix={idPrefix}
       n={n}
       side={side}
@@ -216,7 +218,7 @@ function Mixer({ side }: { side: Side }) {
   const legend = [...GOALS.map((g) => ({ key: g, color: GOAL_COLORS[g], text: tGoal(g) })), { key: "amdr", color: "#22c55e", text: "AMDR (IOM)" }];
   const colW = (W - 2 * X0) / 2;
   return (
-    <Card
+    <Card phoneRole="visual"
       n={1}
       side={side}
       k="mixer"

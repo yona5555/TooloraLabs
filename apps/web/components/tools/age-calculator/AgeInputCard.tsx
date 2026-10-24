@@ -73,7 +73,7 @@ export default function AgeInputCard({ state, onChange, onReset, d, f, copyText 
   const errorText = (e: AgeError) => (e ? t(`errors.${e}`) : "");
 
   return (
-    <SectionCard title={t("input.title")} bodyClassName="p-4 space-y-4">
+    <SectionCard phoneRole="tool" title={t("input.title")} bodyClassName="p-4 space-y-4">
       <div>
         <span className={label}>{t("input.examples")}</span>
         <div className="flex flex-wrap gap-1.5">

@@ -42,7 +42,7 @@ export default function AffordableLoanInputPanel({
   const t = useTranslations("tools.affordable-loan-calculator");
 
   return (
-    <SectionCard title={t("aboveFold.inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("aboveFold.inputTitle")}>
       <form onSubmit={onCalculate} className="space-y-5">
         <CurrencySelector value={currency} onChange={onCurrencyChange} />
 

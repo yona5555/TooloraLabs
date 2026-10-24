@@ -19,7 +19,7 @@ export default function FileNameResult() {
 
   if (error || !a) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {t(`errors.${error || "required"}`)}
         </p>
@@ -29,6 +29,7 @@ export default function FileNameResult() {
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

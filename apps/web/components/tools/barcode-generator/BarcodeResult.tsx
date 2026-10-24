@@ -46,7 +46,7 @@ export default function BarcodeResult() {
 
   if (error || !a) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">
           <AlertTriangle size={18} className="mt-0.5 shrink-0" />
           <p>{t(`errors.${ERROR_KEYS[error] ?? "required"}`)}</p>
@@ -72,7 +72,7 @@ export default function BarcodeResult() {
   ];
 
   return (
-    <SectionCard title={t("aboveFold.resultTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6">
+    <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")} className="lg:flex lg:h-full lg:flex-col" bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6">
       <div ref={containerRef} dir="ltr" data-preview="visual" className="w-full rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-700">
         <BarcodeSVG segments={output.segments} displayText={output.displayText} quietZoneModules={q} logoDataUrl={draft.logoDataUrl} logoPlacement={draft.logoPlacement} />
       </div>

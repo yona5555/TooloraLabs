@@ -11,7 +11,8 @@ import { useEffect } from "react";
  * 2. When such a one-line element is wider than the box it sits in, shrinks its font in 6% steps
  *    down to 60% of its own size (never under 10px) until it fits — measured, not guessed.
  * 3. A table still wider than its card after that scrolls sideways inside itself
- *    (`data-scroll-x`), so the page itself never scrolls sideways.
+ *    (`data-scroll-x`), so the page itself never scrolls sideways; a table already in its own
+ *    scrolling box marks that box instead. Both get a fade at the inline end as the hint.
  * Desktop is untouched: every inline size and mark is cleared at `lg` and up.
  */
 const PHONE = "(max-width: 1023.98px)";
@@ -84,6 +85,9 @@ function fit(el: HTMLElement) {
   }
   // A title ([data-fit], words) too long for one line even at the floor wraps at its own size
   // instead: two readable lines beat one tiny one. Numbers never take this path.
+  // APPROVED PHONE STANDARD: a tool page title ([data-fit-oneline]) stays on one line on phone,
+  // at the floor size, ending in an ellipsis if it still does not fit.
+  if (el.hasAttribute("data-fit-oneline") && window.matchMedia("(max-width: 767px)").matches) return;
   if (spills(el) && !el.hasAttribute("data-num")) {
     el.style.removeProperty("font-size");
     el.setAttribute("data-fit-wrap", "");
@@ -93,9 +97,12 @@ function fit(el: HTMLElement) {
 function scrollWideTables(root: Element) {
   for (const table of root.querySelectorAll<HTMLElement>("main table")) {
     table.removeAttribute("data-scroll-x");
-    if (table.scrollWidth > (table.parentElement?.clientWidth ?? Infinity) + 0.5 && spills(table)) {
-      table.setAttribute("data-scroll-x", "");
-    }
+    const parent = table.parentElement;
+    parent?.removeAttribute("data-scroll-x");
+    if (!parent || table.scrollWidth <= parent.clientWidth + 0.5) continue;
+    if (spills(table)) table.setAttribute("data-scroll-x", "");
+    // already inside its own scrolling box: that box gets the fade hint (globals.css)
+    else if (/auto|scroll/.test(getComputedStyle(parent).overflowX)) parent.setAttribute("data-scroll-x", "");
   }
 }
 

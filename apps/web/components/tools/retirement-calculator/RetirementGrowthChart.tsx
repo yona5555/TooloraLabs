@@ -52,7 +52,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
 
   if (!hasCalculated || yearlySchedule.length === 0) {
     return (
-      <SectionCard title={t("growthChart.title")}>
+      <SectionCard phoneRole="visual" title={t("growthChart.title")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("growthChart.emptyStateMessage")}</p>
@@ -121,7 +121,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
   const labelEvery = Math.max(1, Math.ceil(yearlySchedule.length / MAX_DENSE_LABELS));
 
   return (
-    <SectionCard title={t("growthChart.title")}>
+    <SectionCard phoneRole="visual" title={t("growthChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("growthChart.intro")}</p>
 
       <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">

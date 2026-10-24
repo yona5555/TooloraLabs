@@ -26,7 +26,7 @@ export default function TipResult({ result, hasCalculated, errorMessage, digitSt
 
   if (!hasCalculated) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
           <Calculator size={32} className="text-zinc-300 dark:text-zinc-700" />
           <p className="max-w-xs text-sm text-zinc-500 dark:text-zinc-400">{t("aboveFold.emptyStateMessage")}</p>
@@ -37,7 +37,7 @@ export default function TipResult({ result, hasCalculated, errorMessage, digitSt
 
   if (errorMessage || !result) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400">
           {errorMessage}
         </p>
@@ -73,6 +73,7 @@ export default function TipResult({ result, hasCalculated, errorMessage, digitSt
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       action={
         <TipShareExportModal inputRows={inputRows} resultRows={resultRows} heroLabel={t("result.totalPerPerson")} heroValue={money(result.totalPerPerson)} sentence={sentence} />

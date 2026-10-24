@@ -21,7 +21,7 @@ export default function MatrixResult({ result, digitStyle, matrices, className =
   const fmt = (value: number) => formatLocalizedNumber(value, digitStyle, { maximumFractionDigits: 4 });
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("heading")}
       className={`lg:flex lg:h-full lg:flex-col ${className}`}
       bodyClassName="p-4 lg:p-6 lg:flex lg:flex-1 lg:flex-col"

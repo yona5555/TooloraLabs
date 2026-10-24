@@ -38,7 +38,7 @@ export default function PasswordResult({ onRegenerate }: { onRegenerate: () => v
   const tierIndex = STRENGTH_TIER_ORDER.indexOf(tier);
 
   return (
-    <SectionCard
+    <SectionCard phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

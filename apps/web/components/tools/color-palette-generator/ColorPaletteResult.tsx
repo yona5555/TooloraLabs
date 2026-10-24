@@ -32,7 +32,7 @@ export default function ColorPaletteResult() {
 
   if (!a) {
     return (
-      <SectionCard title={t("aboveFold.resultTitle")}>
+      <SectionCard phoneRole="output" title={t("aboveFold.resultTitle")}>
         <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">{t("form.invalidHex")}</p>
       </SectionCard>
     );
@@ -40,6 +40,7 @@ export default function ColorPaletteResult() {
 
   return (
     <SectionCard
+      phoneRole="output"
       title={t("aboveFold.resultTitle")}
       className="lg:flex lg:h-full lg:flex-col"
       bodyClassName="p-4 lg:flex lg:flex-1 lg:flex-col lg:p-6"

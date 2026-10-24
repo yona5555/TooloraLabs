@@ -33,7 +33,7 @@ export default function MacroInputPanel({ totalCalories, onTotalCaloriesChange, 
   const storedTdee = useSyncExternalStore(subscribeToStorage, readStoredTdeeResult, getServerSnapshot);
 
   return (
-    <SectionCard title={t("inputTitle")}>
+    <SectionCard phoneRole="tool" title={t("inputTitle")}>
       <div className="mb-5">
         <span className="mb-2 block text-sm font-semibold text-zinc-700 dark:text-zinc-300">{t("scenarioLabel")}</span>
         <div className="flex flex-wrap gap-2">
