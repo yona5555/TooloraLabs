@@ -133,3 +133,24 @@ export function phoneLayout(anchor: Element | null): void {
  * insertion, before the browser can paint it.
  */
 export const PHONE_LAYOUT_BOOT = `(function(){var run=${phoneLayout.toString()};var end=function(){return document.querySelector("[data-phone-end]")};if(end()){run(end());return}var o=new MutationObserver(function(){var s=end();if(s){o.disconnect();run(s)}});o.observe(document.documentElement,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",function(){o.disconnect()})})();`;
+
+/**
+ * Rule B flattens the article's sections on phone (display:contents has no box), so the browser cannot
+ * scroll to `#section` from a search result or a shared link: scroll to the section's first part instead
+ * (it carries the anchors' scroll-margin, globals.css). Runs on load and on every hashchange.
+ */
+export function scrollToHashTarget(): void {
+  const id = decodeURIComponent(location.hash.slice(1));
+  const target = id ? document.getElementById(id) : null;
+  if (!target || target.getClientRects().length) return;
+  const first = (el: Element): Element | null => {
+    for (let i = 0; i < el.children.length; i++) {
+      const child = el.children[i];
+      if (child.getClientRects().length) return child;
+      const found = first(child);
+      if (found) return found;
+    }
+    return null;
+  };
+  first(target)?.scrollIntoView({ block: "start" });
+}

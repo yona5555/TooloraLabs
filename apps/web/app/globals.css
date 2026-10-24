@@ -501,7 +501,8 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
  * In-page anchors land below the sticky site header and the stuck section bar, whatever their
  * real heights: SectionNav publishes the sum as --anchor-offset (falls back to the header alone).
  */
-[id] {
+[id],
+[data-info-section] > :first-child {
   scroll-margin-top: calc(var(--anchor-offset, 73px) + 12px);
 }
 
