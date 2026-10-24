@@ -89,7 +89,7 @@ export default function MortgageBiweeklyPayment({ result, digitStyle }: Mortgage
   ];
 
   return (
-    <SectionCard phoneRole="output"
+    <SectionCard phoneRole="output-secondary"
       title={t("title")}
       action={<DownloadButton content={csvContent} filename="mortgage-biweekly-schedule.csv" mimeType="text/csv;charset=utf-8" />}
     >

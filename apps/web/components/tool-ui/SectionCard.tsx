@@ -17,12 +17,15 @@ type SectionCardProps = {
    * (1 input, 2 output = the card with the result actions, 3 main visual), applied by CSS order
    * (globals.css) at server render. Set on every tool's role cards (scripts/phone-roles.mjs); desktop ignores it. `live-output` = an output shown
    * above the tool (crypto-converter's approved exception: the live result first, the input second).
-   * `visual-collapsed` = the main visual of a page with two output cards: it leads the collapsed group.
+   * `output-secondary` = a secondary output (a long table or schedule with its own Download / Copy
+   * button, e.g. mortgage's payment schedules): only the primary output is always open, so it sits in
+   * the collapsed group with its buttons inside it (at most 3 open cards on every tool).
+   * `visual-collapsed` = a main visual that leads the collapsed group.
    */
   phoneRole?: PhoneRole;
 };
 
-export type PhoneRole = "input" | "output" | "visual" | "live-output" | "visual-collapsed";
+export type PhoneRole = "input" | "output" | "output-secondary" | "visual" | "live-output" | "visual-collapsed";
 
 const headerClassName =
   "flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
@@ -60,7 +63,8 @@ function isAlwaysOpen(el: HTMLElement): boolean {
     const isRole = (c: HTMLElement) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || "");
     if (isRole(el)) return true;
     const roles = cards.filter(isRole).length;
-    return cards.filter((c) => !isRole(c)).indexOf(el) < 3 - roles;
+    const collapsedRole = (c: HTMLElement) => /^(output-secondary|visual-collapsed)$/.test(c.getAttribute("data-phone-role") || "");
+    return !collapsedRole(el) && cards.filter((c) => !isRole(c) && !collapsedRole(c)).indexOf(el) < 3 - roles;
   }
   if (window.matchMedia(PHONE_QUERY).matches) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
   return cards.indexOf(el) < 3 || el.hasAttribute("data-phone-output");

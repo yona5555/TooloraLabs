@@ -36,10 +36,10 @@ export function phoneLayout(anchor: Element | null): void {
     // LOCKED phone card order (visuals.md): the server marks each tool's input, output and main visual
     // cards (SectionCard `phoneRole`, set by scripts/phone-roles.mjs); those are the always-open cards
     // and globals.css orders them 1 input, 2 output, 3 visual. A page with fewer than 3 role cards fills
-    // up with its first other cards in DOM order; a card with a result action is never collapsed (a page
-    // with more output cards keeps them all open). Nothing is measured or moved here.
+    // up with its first other cards in DOM order; a secondary output (`output-secondary`) or a
+    // `visual-collapsed` card always stays in the collapsed group. Nothing is measured or moved here.
     open = flowCards.filter((c) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || ""));
-    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0) open.push(c);
+    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0 && !/^(output-secondary|visual-collapsed)$/.test(c.getAttribute("data-phone-role") || "")) open.push(c);
   } else {
     // Desktop (where nothing collapses) and the markets tools (approved order, live data first): a card
     // holding a Copy or Share/Export action counts first, then the first cards on screen.

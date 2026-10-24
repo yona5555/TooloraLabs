@@ -1,11 +1,12 @@
 /**
  * GUARD (LOCKED phone card order, .claude/rules/visuals.md): every tool page at 390px.
+ * - At most 3 open cards (always-open, above ad 1).
  * - Every card holding a result action ([data-result-action]: Share / Export, Copy, Print, Download,
- *   Export, Save) has phoneRole "output", is open and sits above ad 1 — never collapsed, never after it.
- * - The main output card (the one with Share / Export, else the first output card with an action) is
- *   place 2 among the open cards, or place 1 when it is merged with the input (no input card).
- * - With --ids: zero duplicate id attributes on the page (not in CI yet: the PhoneMini copies still
- *   repeat the React useId of their original on 11 tools; see the LOCKED rule's open item).
+ *   Export, Save) has phoneRole "output" (open, above ad 1) or "output-secondary" (a long table or
+ *   schedule: in the collapsible group with its buttons inside it, never open).
+ * - The primary output card (the "output" card with Share / Export, else the first "output" card with an
+ *   action) is place 2 among the open cards, or place 1 when it is merged with the input (no input card).
+ * - With --ids: zero duplicate id attributes on the page.
  * The markets tools keep their approved order (live data first) and are skipped for the order checks.
  * Usage: node tests/phone-card-order.mjs [--ids] [base=http://localhost:3001] [locale=en] [slug...]
  */
@@ -42,12 +43,18 @@ for (const slug of slugs) {
     const ad1 = root.querySelector("[data-phone-docs]");
     const adTop = ad1 ? ad1.getBoundingClientRect().top : Infinity;
     const open = cards.filter((c) => c.hasAttribute("data-fixed") && c.getBoundingClientRect().top < adTop);
+    if (open.length > 3) out.push(`${open.length} open cards (max 3): ${open.map(title).join(" / ")}`);
+    const role = (c) => c.getAttribute("data-phone-role") || "";
     const withAction = cards.filter((c) => c.querySelector("[data-result-action]"));
     for (const c of withAction) {
-      if (c.getAttribute("data-phone-role") !== "output") out.push(`"${title(c)}" has a result action but phoneRole="${c.getAttribute("data-phone-role") || ""}"`);
-      if (!open.includes(c)) out.push(`"${title(c)}" has a result action but is collapsed or after ad 1`);
+      if (!/^output(-secondary)?$/.test(role(c))) out.push(`"${title(c)}" has a result action but phoneRole="${role(c)}"`);
     }
-    const main = withAction.find((c) => c.querySelector('[data-result-action="share"]')) || withAction[0];
+    for (const c of cards) {
+      if (role(c) === "output" && !open.includes(c)) out.push(`output "${title(c)}" is collapsed or after ad 1`);
+      if (role(c) === "output-secondary" && open.includes(c)) out.push(`secondary output "${title(c)}" is open (it belongs to the collapsible group)`);
+    }
+    const primary = withAction.filter((c) => role(c) === "output");
+    const main = primary.find((c) => c.querySelector('[data-result-action="share"]')) || primary[0];
     if (main) {
       const place = open.indexOf(main) + 1;
       const merged = !cards.some((c) => c.getAttribute("data-phone-role") === "input");

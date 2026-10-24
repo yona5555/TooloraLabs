@@ -44,7 +44,7 @@ export function CitationAnatomyCard({ state, source, index }: CiteIndicatorProps
   const active = focus && parts.includes(focus) ? focus : parts[0];
 
   return (
-    <SectionCard phoneRole="visual-collapsed" title={t("ind.anatomy.title")}>
+    <SectionCard phoneRole="visual" title={t("ind.anatomy.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("ind.anatomy.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}

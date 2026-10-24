@@ -1,9 +1,10 @@
 /**
  * LOCKED phone card order (.claude/rules/visuals.md): scans every tool page at 390px and proposes each
- * card's SectionCard `phoneRole` — a card with a result action ([data-result-action]) → "output"; the
- * first other card with inputs (inputs, selects, sliders, keypad) → "input" (none when the input card
- * itself holds a result action: merged, it is card 1); otherwise the first chart/scene → "visual"
- * (with two output cards it leads the collapsed group: "visual-collapsed"). It prints every card whose
+ * card's SectionCard `phoneRole` — the primary result card (Share / Export, else the first card with a
+ * result action [data-result-action]) and an input card holding a result action (merged, card 1) →
+ * "output"; every other card with a result action → "output-secondary" (collapsible group); the first
+ * other card with inputs (inputs, selects, sliders, keypad) → "input"; the first chart/scene → "visual".
+ * At most 3 open cards (visuals.md, changed 2026-10-24). It prints every card whose
  * current role differs from the proposal (decide each ambiguous case by reading it, then set the role in
  * the source) and writes the phone card order map.
  * Usage: node scripts/phone-roles.mjs [base=http://localhost:3001] [locale=en] [--map scripts/output/card-order-map.txt]
@@ -22,7 +23,7 @@ const slugs = [...new Set([...index.matchAll(new RegExp(`href="/${loc}/tools/([a
 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
-const map = ["tool / card1 / card2 / card3 (phone 390px, screen order; [role]; * = holds a result action)"];
+const map = ["tool / open cards in phone screen order (390px, en) [role]; * = holds a result action — LOCKED order: 1 input, 2 primary output, 3 visual; max 3 open; secondary outputs collapsed"];
 const diffs = [];
 for (const slug of slugs) {
   const page = await ctx.newPage();
@@ -39,22 +40,24 @@ for (const slug of slugs) {
         role: c.getAttribute("data-phone-role") || "",
         open: c.hasAttribute("data-fixed"),
         action: !!c.querySelector("[data-result-action]"),
+        share: !!c.querySelector('[data-result-action="share"]'),
         input: !!c.querySelector('input:not([type=hidden]),textarea,select,[role=slider],[data-keypad]'),
         visual: [...c.querySelectorAll("svg,canvas")].some((v) => v.getBoundingClientRect().width > 150 && v.getBoundingClientRect().height > 80),
       }));
   });
   await page.close();
-  const screen = [...cards].sort((a, b) => a.y - b.y).filter((c) => c.open).slice(0, 3);
+  const screen = [...cards].sort((a, b) => a.y - b.y).filter((c) => c.open);
   map.push(`${slug} / ${screen.map((c) => `${c.action ? "*" : ""}${c.title} [${c.role || "-"}]`).join(" / ")}`);
   if (MARKETS.has(slug)) continue;
   const plan = new Map();
   const outs = cards.filter((c) => c.action);
   const firstInput = cards.find((c) => c.input);
   if (firstInput && !firstInput.action) plan.set(firstInput.dom, "input");
-  for (const o of outs) plan.set(o.dom, "output");
+  const results = outs.filter((o) => !o.input);
+  const primary = results.find((o) => o.share) || results[0];
+  for (const o of outs) plan.set(o.dom, o.input || o === primary ? "output" : "output-secondary");
   const vis = cards.find((c) => c.visual && !plan.has(c.dom));
-  const nonMergedOuts = outs.filter((o) => !o.input).length;
-  if (vis) plan.set(vis.dom, nonMergedOuts >= 2 && plan.size >= 3 ? "visual-collapsed" : "visual");
+  if (vis) plan.set(vis.dom, "visual");
   for (const c of cards) {
     const want = plan.get(c.dom);
     if (want && want !== c.role) diffs.push(`${slug}: "${c.title}" is [${c.role || "-"}], proposal [${want}]`);

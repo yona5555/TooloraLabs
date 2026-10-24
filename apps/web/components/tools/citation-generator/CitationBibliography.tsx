@@ -33,7 +33,7 @@ export default function CitationBibliography({ state, onChange }: Props) {
   };
 
   return (
-    <SectionCard phoneRole="output" id="bibliography" title={t("bib.title")}>
+    <SectionCard phoneRole="output-secondary" id="bibliography" title={t("bib.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("bib.intro")}</p>
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <span className="rounded-md bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300">

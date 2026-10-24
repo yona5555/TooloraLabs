@@ -171,10 +171,14 @@ Permanent; applies to every current and future tool. Full spec: `docs/claude/app
 - Card 1 = INPUT (inputs, selects, sliders, keypad). Card 2 = OUTPUT: the result card holding any result
   action (Share / Export, Copy, Print, Download, Save), always second, always open. Card 3 = the main VISUAL.
 - Input and output in one card: it is card 1, the visual card 2, the next most useful card 3.
-- Two output cards: the Share / Export one is card 2, the other card 3; the visual leads the collapsed
-  group (`phoneRole="visual-collapsed"`). More result-action cards all stay open.
-- A card with a result action is NEVER collapsed and NEVER after ad 1.
-- Roles are set at server render: SectionCard `phoneRole` = "input" | "output" | "visual" (raw cards:
+- CHANGED 2026-10-24 (Yousef): only the PRIMARY output card (the one with Share / Export, or the main
+  result) is always open, in place 2 (`phoneRole="output"`). SECONDARY output cards (long tables or
+  schedules with a Download / Copy button, e.g. mortgage's two payment schedules) go to the collapsible
+  group like other cards, with their buttons inside them (`phoneRole="output-secondary"`).
+- At most 3 open cards on every tool. An input card with a copy button counts as the merged card 1.
+- The primary output card is NEVER collapsed and NEVER after ad 1.
+- Roles are set at server render: SectionCard `phoneRole` = "input" | "output" | "output-secondary" |
+  "visual" | "visual-collapsed" (raw cards:
   `data-phone-role`); globals.css orders them (input, output, visual, docs row, ad 1, collapsed group). No
   client reordering. Every result button renders through `ResultActionButton` / `ShareExportButton` /
   CopyButton / PrintButton / DownloadButton / PdfDownloadButton / CopyLinkButton (`data-result-action`).
