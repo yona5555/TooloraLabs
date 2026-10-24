@@ -32,13 +32,19 @@ export default function ToolPageLayout({
 
   if (compact) {
     return (
-      <main data-phone-cards="" suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
+      <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
           <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" phoneText={backText} />
 
           <h1 data-fit data-fit-oneline className={`min-w-0 max-md:truncate text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
             {title}
           </h1>
+        </div>
+
+        {/* APPROVED PHONE STANDARD rule 2: the two top mini cards (filled by PhoneMiniMirror, phone only). */}
+        <div data-phone-mini="" className="mt-3 grid h-[88px] grid-cols-2 gap-2 md:hidden">
+          <div data-phone-mini-slot="0" className="min-w-0" />
+          <div data-phone-mini-slot="1" className="min-w-0" />
         </div>
 
         <div data-phone-flow="" className="mt-4">{children}</div>
@@ -48,7 +54,7 @@ export default function ToolPageLayout({
   }
 
   return (
-    <main data-phone-cards="" suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
+    <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-10 sm:px-6 lg:py-20`}>
       <span className="block w-fit rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
         {category}
       </span>
@@ -58,6 +64,12 @@ export default function ToolPageLayout({
         <h1 className="min-w-0 max-md:truncate text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-5xl dark:text-zinc-50">
           {title}
         </h1>
+      </div>
+
+      {/* APPROVED PHONE STANDARD rule 2: the two top mini cards (filled by PhoneMiniMirror, phone only). */}
+      <div data-phone-mini="" className="mt-3 grid h-[88px] grid-cols-2 gap-2 md:hidden">
+        <div data-phone-mini-slot="0" className="min-w-0" />
+        <div data-phone-mini-slot="1" className="min-w-0" />
       </div>
 
       <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600 lg:mt-6 lg:text-lg lg:leading-8 dark:text-zinc-300">

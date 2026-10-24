@@ -1,11 +1,15 @@
 "use client";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
+import { isValidElement, lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { Hand, Minus, Plus, RotateCcw } from "lucide-react";
 import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import { GlassHandle, usePrefersReducedMotion, type HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives";
 import { hasWords, subParts } from "@/components/tool-ui/MixedText";
 import { snap } from "./format";
+import { Drawing } from "./SvgBits";
+
+// Rule 2: the top mini card mirror, fetched only on phone.
+const PhoneMiniMirror = lazy(() => import("./PhoneMiniMirror"));
 
 /**
  * Shared kit for a tool's result visual + 8 indicator cards: one independent state hook per card, the
@@ -299,8 +303,25 @@ export function IndicatorCard({
   kind: "2d" | "3d";
 }) {
   const t = useTranslations("toolPage.indicatorKit");
+  const wrapRef = useRef<HTMLDivElement>(null);
+  // Rule 2: a 2D card drawn with the shared Drawing can be mirrored in a phone top mini card.
+  const miniOk = kind === "2d" && isValidElement(visual) && visual.type === Drawing;
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    if (!miniOk) return;
+    const mq = window.matchMedia("(max-width: 767px)");
+    const read = () => setPhone(mq.matches);
+    read();
+    mq.addEventListener("change", read);
+    return () => mq.removeEventListener("change", read);
+  }, [miniOk]);
   return (
-    <div data-ph-visual data-ph-card={n} data-ph-kind={kind} data-card-side={side} className="leading-normal" style={{ fontFamily: "var(--glass-font)" }}>
+    <div ref={wrapRef} data-ph-visual data-ph-card={n} data-ph-kind={kind} data-ph-mini-ok={miniOk ? "" : undefined} data-card-side={side} className="leading-normal" style={{ fontFamily: "var(--glass-font)" }}>
+      {phone && (
+        <Suspense fallback={null}>
+          <PhoneMiniMirror title={<RichText text={title} />} visual={visual} source={wrapRef} />
+        </Suspense>
+      )}
       <SectionCard
         phoneRole={phoneRole}
         id={`${idPrefix}-card-${n}`}
