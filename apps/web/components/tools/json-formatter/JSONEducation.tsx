@@ -51,7 +51,7 @@ export default async function JSONEducation() {
               {exampleRows.map((row) => (
                 <tr key={row.scenario} className="border-b border-current/10">
                   <td className="px-3 py-2.5">{row.scenario}</td>
-                  <td className="break-all px-3 py-2.5 font-mono text-xs font-semibold">{row.result}</td>
+                  <td className="px-3 py-2.5 font-mono lg:break-all text-xs font-semibold">{row.result}</td>
                 </tr>
               ))}
             </tbody>
