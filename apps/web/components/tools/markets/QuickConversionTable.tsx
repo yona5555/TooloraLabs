@@ -5,6 +5,12 @@ export function quickAmounts(minExp: number, maxExp: number): number[] {
   return out;
 }
 
+/**
+ * Decimals the amount column needs to print every amount of `quickAmounts(minExp, …)` exactly. Fewer
+ * printed 0.0001/0.0002 (crypto) and 0.01/0.02 (commodities) as "0": wrong values and duplicate rows.
+ */
+export const quickAmountDigits = (minExp: number) => Math.max(0, -minExp);
+
 type QuickConversionTableProps = {
   title: string;
   /** Three column headings (codes/symbols, shown LTR). */
