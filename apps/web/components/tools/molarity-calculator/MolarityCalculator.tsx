@@ -43,7 +43,6 @@ const SCENARIOS_BY_MODE: Record<MolarityMode, Record<string, Partial<Inputs>>> =
   dilution: DILUTION_SCENARIOS,
 };
 
-const EMPTY_RESULT: MolarityCalculatorOutput = { error: null, moles: 0, molarity: 0, c1: 0, v1: 0, c2: 0, v2: 0 };
 
 function computeResult(mode: MolarityMode, concentrationBasis: ConcentrationBasis, dilutionSolveFor: DilutionSolveFor, i: Inputs): MolarityCalculatorOutput {
   const output = tool.execute(
@@ -194,9 +193,13 @@ export default function MolarityCalculator({ education }: { education: ReactNode
     setV1(DEFAULTS.v1);
     setC2(DEFAULTS.c2);
     setV2(DEFAULTS.v2);
+    setMode("concentration");
+    setConcentrationBasis("moles");
+    setDilutionSolveFor("c2");
     setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    // Instant result: Clear restores every input and the mode to the defaults and shows their result at once.
+    setResult(computeResult("concentration", "moles", "c2", DEFAULTS));
+    setHasCalculated(true);
   }
 
   const navItems = [

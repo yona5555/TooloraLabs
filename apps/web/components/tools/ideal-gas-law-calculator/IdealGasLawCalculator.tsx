@@ -34,7 +34,6 @@ const SCENARIOS: Record<string, Inputs> = {
   weatherBalloonHighAltitude: { pressureAtm: "0.05", volumeLiters: "1000", moles: "2.8", temperatureKelvin: "220" },
 };
 
-const EMPTY_RESULT: IdealGasLawCalculatorOutput = { error: null, pressureAtm: 0, volumeLiters: 0, moles: 0, temperatureKelvin: 0 };
 
 function computeResult(solveFor: GasLawSolveFor, i: Inputs): IdealGasLawCalculatorOutput {
   const output = tool.execute(
@@ -145,9 +144,11 @@ export default function IdealGasLawCalculator({ education }: { education: ReactN
     setVolumeLiters(DEFAULTS.volumeLiters);
     setMoles(DEFAULTS.moles);
     setTemperatureKelvin(DEFAULTS.temperatureKelvin);
+    setSolveFor("volume");
     setDigitStyle("western");
-    setResult(EMPTY_RESULT);
-    setHasCalculated(false);
+    // Instant result: Clear restores every input and the mode to the defaults and shows their result at once.
+    setResult(computeResult("volume", DEFAULTS));
+    setHasCalculated(true);
   }
 
   const navItems = [
