@@ -45,6 +45,9 @@ const NestedCardContext = createContext(false);
 const CardOpenedContext = createContext(true);
 export const useCardOpened = () => useContext(CardOpenedContext);
 
+/** Rule 7 (lib/phone/layout.ts): a card holding a Copy or Share/Export action is an output card. */
+const OUTPUT_ACTION = "[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)";
+
 /** Same rule as PhoneLayoutScript, for a card mounted after the page loaded (e.g. a result card). */
 function isAlwaysOpen(el: HTMLElement): boolean {
   const scope = el.closest("[data-phone-cards]");
@@ -52,7 +55,7 @@ function isAlwaysOpen(el: HTMLElement): boolean {
   const cards = Array.from(scope.querySelectorAll<HTMLElement>("[data-card]")).filter((c) => !c.parentElement?.closest("[data-card]") && (c === el || c.getClientRects().length > 0));
   if (window.matchMedia(PHONE_QUERY).matches) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
   const index = cards.indexOf(el);
-  return cards.length <= 3 || index < 3;
+  return cards.length <= 3 || index < 3 || el.hasAttribute("data-phone-output");
 }
 
 export default function SectionCard({ title, action, onToggle, children, bodyClassName = "p-4 lg:p-6", className = "", id, phoneRole }: SectionCardProps) {
@@ -72,6 +75,8 @@ export default function SectionCard({ title, action, onToggle, children, bodyCla
     if (!el) return;
     if (!fixed) {
       if (!el.hasAttribute("data-card-init")) {
+        const scope = el.closest("[data-phone-cards]");
+        if (scope && !scope.hasAttribute("data-phone-markets") && el.querySelector(OUTPUT_ACTION)) el.setAttribute("data-phone-output", "");
         el.setAttribute("data-card-init", "");
         if (isAlwaysOpen(el)) el.setAttribute("data-fixed", "");
       }
