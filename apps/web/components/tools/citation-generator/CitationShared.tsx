@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { formatLocalizedNumber } from "@tooloralabs/core";
 import type { CitePart, CiteSegment } from "@tooloralabs/tools";
+import { textWithUrlBreaks } from "@/components/tool-ui/UrlBreaks";
 import { PART_COLORS } from "./studio";
 
 export const fmt = (v: number, digits = 0) => formatLocalizedNumber(v, "western", { maximumFractionDigits: digits });
@@ -78,7 +79,7 @@ export function EntryText({
         const Tag = s.italic ? "i" : "span";
         return (
           <Tag key={i} style={style} className="transition-colors">
-            {s.text}
+            {textWithUrlBreaks(s.text)}
           </Tag>
         );
       })}

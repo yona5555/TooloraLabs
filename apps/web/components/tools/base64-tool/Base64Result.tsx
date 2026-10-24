@@ -66,7 +66,7 @@ export default function Base64Result() {
       <div
         dir="ltr"
         data-preview="visual"
-        className="grid max-h-80 auto-rows-fr gap-1.5 overflow-auto rounded-xl bg-zinc-50 p-2 lg:max-h-none lg:min-h-[8rem] lg:flex-1 lg:basis-0 dark:bg-zinc-800/50"
+        className="grid max-h-80 auto-rows-fr gap-1.5 overflow-auto max-md:grid-cols-[minmax(0,1fr)] rounded-xl bg-zinc-50 p-2 lg:max-h-none lg:min-h-[8rem] lg:flex-1 lg:basis-0 dark:bg-zinc-800/50"
       >
         {shownGroups.map((g, i) => (
           <div key={i} className="flex min-h-9 items-center gap-3 rounded-md bg-white px-3 dark:bg-zinc-900">

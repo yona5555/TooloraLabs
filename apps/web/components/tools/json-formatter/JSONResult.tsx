@@ -5,7 +5,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import CopyButton from "@/components/tool-ui/CopyButton";
 import DownloadButton from "@/components/tool-ui/DownloadButton";
 import JSONShareExportModal from "./JSONShareExportModal";
-import JSONCodeView from "./JSONCodeView";
+import JSONCodeView, { PHONE_WRAP } from "./JSONCodeView";
 import { formatBytes, useJSONModel } from "./JSONLiveContext";
 
 /** Lines shown around a syntax error so the faulty line sits in its context. */
@@ -56,14 +56,14 @@ export default function JSONResult() {
             const bad = n === output.errorLine;
             return (
               <div key={n}>
-                <div className={`flex min-w-max ${bad ? "bg-red-100 dark:bg-red-500/15" : ""}`}>
+                <div className={`flex min-w-max max-md:min-w-0 ${bad ? "bg-red-100 dark:bg-red-500/15" : ""}`}>
                   <span className={`w-12 shrink-0 ps-2 pe-3 text-end select-none ${bad ? "font-bold text-red-600 dark:text-red-300" : "text-zinc-400 dark:text-zinc-500"}`}>{n}</span>
-                  <span className="whitespace-pre pe-3 text-zinc-800 dark:text-zinc-100">{line || " "}</span>
+                  <span className={`whitespace-pre pe-3 text-zinc-800 dark:text-zinc-100 ${PHONE_WRAP}`}>{line || " "}</span>
                 </div>
                 {bad && (
-                  <div className="flex min-w-max text-red-600 dark:text-red-300">
+                  <div className="flex min-w-max text-red-600 dark:text-red-300 max-md:min-w-0">
                     <span className="w-12 shrink-0" />
-                    <span className="whitespace-pre font-bold">
+                    <span className={`whitespace-pre font-bold ${PHONE_WRAP}`}>
                       {" ".repeat(Math.max(0, output.errorColumn - 1))}^ {t("aboveFold.caret")}
                     </span>
                   </div>

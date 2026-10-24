@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import {
   CIRCLE_EQUAL_C_A_RADIUS,
@@ -52,10 +52,16 @@ export function CircleSolveSteps() {
         rows: steps.map((s, i) => ({ label: `${i + 1}. ${tf(s.field)}`, value: i === 0 ? f(s.value) : `${s.formula} = ${f(s.value)}`, emphasize: i === steps.length - 1 })),
       }}
     >
-      <div className="flex items-end gap-2">
+      {/* A rising staircase of four columns; on phone the columns are too narrow for the longest field name
+          (fr "Circonférence"), so the staircase turns sideways: four rows of growing width. */}
+      <div className="flex items-end gap-2 max-md:flex-col max-md:items-start">
         {steps.map((s, i) => (
-          <div key={s.field} className={`flex min-w-0 flex-1 flex-col justify-end rounded-xl border-2 p-2 ${colors[i]}`} style={{ height: 88 + i * 34 }}>
-            <span className="text-[11px] font-semibold hyphens-auto text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
+          <div
+            key={s.field}
+            className={`flex h-(--step-h) min-w-0 flex-1 flex-col justify-end rounded-xl border-2 p-2 max-md:h-auto max-md:w-(--step-w) max-md:flex-none ${colors[i]}`}
+            style={{ "--step-h": `${88 + i * 34}px`, "--step-w": `${55 + i * 15}%` } as CSSProperties}
+          >
+            <span className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400">{`${i + 1}. ${tf(s.field)}`}</span>
             <span dir="ltr" className="truncate font-mono text-[10px] text-zinc-500 dark:text-zinc-400">{s.formula}</span>
             <span dir="ltr" className="truncate font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">{f(s.value)}</span>
           </div>

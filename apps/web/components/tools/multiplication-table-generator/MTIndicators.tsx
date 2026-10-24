@@ -679,7 +679,7 @@ export function DistinctTrend({ view }: P) {
       }}
     >
       <div dir="ltr" className="overflow-x-auto" data-testid="mt-trend" data-distinct={point.distinct}>
-        <svg width="100%" height={TH} viewBox={`0 0 ${TW} ${TH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t("trend.title")} className="min-w-[420px]">
+        <svg width="100%" height={TH} viewBox={`0 0 ${TW} ${TH}`} preserveAspectRatio="xMidYMid meet" role="img" aria-label={t("trend.title")} className="min-w-[420px] max-md:min-w-0">
           {[0, 0.25, 0.5, 0.75, 1].map((s) => (
             <g key={s}>
               <line x1={TP.l} x2={TW - TP.r} y1={y(s)} y2={y(s)} className="stroke-zinc-200 dark:stroke-zinc-700" />

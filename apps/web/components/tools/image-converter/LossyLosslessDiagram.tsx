@@ -95,7 +95,7 @@ export default function LossyLosslessDiagram({
   return (
     <figure className="my-2">
       <div dir="ltr" className="overflow-x-auto">
-        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full text-current" style={{ minWidth: 420 }}>
+        <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={caption} className="h-auto w-full min-w-[420px] text-current max-md:min-w-0">
           <defs>
             <marker id="arrow" markerWidth={8} markerHeight={8} refX={6} refY={3} orient="auto">
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" opacity={0.6} />

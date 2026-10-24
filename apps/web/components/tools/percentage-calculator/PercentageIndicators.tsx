@@ -54,7 +54,7 @@ export function PercentageFormulaDiagram() {
       }}
     >
       <div dir="ltr" className="overflow-x-auto">
-        <div className="mx-auto flex w-max items-stretch gap-1.5 py-2">
+        <div className="mx-auto flex w-max items-stretch gap-1.5 py-2 max-md:w-full max-md:flex-wrap max-md:justify-center max-md:gap-y-2">
           {tokens[mode].map((tk, i) =>
             tk.op ? (
               <div key={i} className="flex w-5 items-center justify-center text-xl font-bold text-zinc-400">{tk.sym}</div>

@@ -71,7 +71,8 @@ export function STTCleanupCard({ side }: { side: Side }) {
     { key: "words", label: t("rowWords"), value: String(out.wordCount) },
   ];
   // Spaces drawn as middle dots so the extra ones are visible; the cleaned line is the tool's transcript.
-  const show = (str: string) => str.replace(/ /g, "·");
+  // A zero-width space after each dot keeps the wrap point the real space gave, so words never split.
+  const show = (str: string) => str.replace(/ /g, "·\u200B");
   return (
     <IndicatorCard
       idPrefix="stt"
@@ -87,7 +88,7 @@ export function STTCleanupCard({ side }: { side: Side }) {
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xl(raw.length), y: dotY, dir: "horizontal" }} s={s} testId="stt-c1">
           <T x={X0} y={rawY - 18} text={t("rawLabel")} anchor="start" size={10.5} bold />
           <text x={X0} y={rawY} fontSize={12} fontWeight={600} style={{ fill: "var(--ai-d)" }} onPointerEnter={() => setHover("raw")} onPointerLeave={() => setHover(null)}>
-            {show(raw).length > per ? `${show(raw).slice(0, per - 1)}…` : show(raw)}
+            {raw.length > per ? `${show(raw.slice(0, per - 1))}…` : show(raw)}
           </text>
           <T x={X0} y={cleanY - 18} text={t("cleanLabel")} anchor="start" size={10.5} bold />
           <text x={X0} y={cleanY} fontSize={12} fontWeight={600} style={{ fill: "var(--ai-c)" }} onPointerEnter={() => setHover("clean")} onPointerLeave={() => setHover(null)}>

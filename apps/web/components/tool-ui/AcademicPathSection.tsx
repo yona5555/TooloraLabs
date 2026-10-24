@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { urlWithBreaks } from "@/components/tool-ui/UrlBreaks";
 
 export type University = { name: string; note: string; url: string; online: string };
 
@@ -26,16 +26,7 @@ export default function AcademicPathSection({ title, intro, universities }: Acad
               dir="ltr"
               className="mt-2 block max-w-full text-sm lg:break-all font-medium underline decoration-dotted underline-offset-4"
             >
-              {/* a URL is not a word: it may wrap only after its separators, never mid-word */}
-              {uni.url
-                .replace(/^https?:\/\//, "")
-                .split(/(?<=[/.?=&_-])/)
-                .map((part, i) => (
-                  <Fragment key={i}>
-                    {part}
-                    <wbr />
-                  </Fragment>
-                ))}
+              {urlWithBreaks(uni.url.replace(/^https?:\/\//, ""))}
             </a>
           </li>
         ))}

@@ -126,7 +126,8 @@ export default function STTControlPanel({
                 <span dir="ltr">{`${sg.length} → ${clean(sg).length}`}</span>
               </div>
               <p dir="auto" className="mt-0.5 break-words leading-5" style={{ color: "var(--ph-ink)" }}>
-                {sg.replace(/ /g, "·")}
+                {/* dots show the spaces; the zero-width space after each keeps its wrap point */}
+                {sg.replace(/ /g, "·\u200B")}
               </p>
             </li>
           ))}
