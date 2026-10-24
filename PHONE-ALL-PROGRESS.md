@@ -30,7 +30,18 @@ DONE
   always outside the paper), article cards join the collapsed group, one redrawn paper (root causes 13, 14).
   Sweep 98 en at 390: structure 98/98 OK; sample 10 ar/en OK; desktop 1440 identical; prod copy checked.
 
+- 2026-10-24 (later): ar sweep 98/98 structural OK; broken words fixed at the root on tool pages
+  (16e78f1f), #id links on flattened sections (33773357); sample 10 ar/en OK.
+
+BLOCKER FOR THE MERGE: desktop 1440 vs MAIN is NOT identical (vs the branch base it is). On bmi,
+mortgage, world-time (en) every article section sits ~96px higher on the branch than on main and the
+article is shorter; cause sits in the earlier branch commits (SectionCard rewrite / InfoSection slots),
+not yet found. Measuring main needs the dev server on main: swapping branches under it stalled it
+for minutes, so use a separate production build of `git archive main` on its own port next time.
+
 NEXT (in order)
+0. Find the desktop main-vs-branch difference above; then the final en broken-words pass (not run yet);
+   then the merge steps.
 1. Countdown #418 root cause (pending 6 in root-causes.txt); quick-table digits (7) needs Yousef.
 2. Pre-existing broken words (97/98 en): squeezed first columns in LiveTable tables, button labels,
    break-all URLs — needs its own task.
