@@ -10,6 +10,15 @@ const REMOVED_TOOLS = "dice-roller|love-calculator|random-quote-generator";
 const nextConfig: NextConfig = {
   // A second production build beside the dev server's (e.g. a branch-vs-main comparison) sets its own folder.
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  // Dev only: Next blocks the HMR socket and dev chunks for any host but localhost, so a phone on the
+  // LAN (http://<mac-ip>:3001) never hydrates and no button responds. Allow the private LAN ranges.
+  ...(process.env.NODE_ENV === "development" && {
+    allowedDevOrigins: [
+      "10.*.*.*",
+      "192.168.*.*",
+      ...Array.from({ length: 16 }, (_, i) => `172.${16 + i}.*.*`),
+    ],
+  }),
   async redirects() {
     return [
       { source: `/${LOCALE}/tools/:slug(${REMOVED_TOOLS})`, destination: "/:locale/tools", statusCode: 301 },
