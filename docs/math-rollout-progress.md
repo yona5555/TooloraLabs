@@ -29,9 +29,8 @@ without dynamism or depth).
    - **Gaps test**: measure the vertical gap between every consecutive visible sibling in the
      above-fold columns, the encyclopedic paper's main flow, and every indicator card's own
      internals; fail on any statistical outlier gap (>3× the page's own median gap).
-4. Screenshot set per tool now includes an explicit before/after-input-change pair (in addition
-   to the existing initial / post-drag / dark / RTL / mobile set), and one full-page shot used as
-   the gap-test's visual backup.
+4. (Screenshot sets removed 2026-10-24: no screenshots — verify by DOM measurement; Yousef
+   reviews the pages himself on a real device. Hard rule in `CLAUDE.md`.)
 5. Component count, distribution pattern (explanation+indicator → AdSpace → explanation+indicator
    → …), and depth bar still literally match Triangle Calculator's scale — only the reactivity
    architecture is new.
@@ -68,7 +67,7 @@ sequence comes up. Tools 8–21 start directly at v2 — they never had a v1 pas
 - `not started`
 - `in progress`
 - `done` — v2 standard: live-state wiring verified, dynamism test PASS, gaps test PASS,
-  lint/typecheck/test/build pass, screenshotted (incl. before/after-input pair), committed,
+  lint/typecheck/test/build pass, committed,
   pushed, CI checked
 
 ## Tools (21)
