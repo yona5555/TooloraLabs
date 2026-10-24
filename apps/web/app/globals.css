@@ -554,6 +554,22 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     display: block;
   }
   /*
+   * Rule 1: the section nav (SectionNav, one element wherever the tool renders it) is pinned directly
+   * under the site header (h-18 + its 1px border) from page open, above the back button and title; the
+   * page's top padding reserves its height (py-1.5 + h-11 + 1px border = 57px). No mid-page position.
+   */
+  [data-phone-cards] [data-section-nav] {
+    position: fixed;
+    inset-inline: 0;
+    top: 73px;
+    margin: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  main[data-phone-cards]:has([data-section-nav]) {
+    padding-top: calc(57px + 1rem);
+  }
+  /*
    * Phone order (rules A and B): the 3 always-open cards first, in logical order (1 tool, 2 output,
    * 3 main visual; crypto's `live-output` above its tool), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
    * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper

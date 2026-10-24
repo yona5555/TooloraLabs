@@ -73,6 +73,16 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
   // pulled up by the parent's own gap so it adds no gap either; it still marks the exact same stuck line.
   const [gated] = useState(!visible);
   const [parentGap, setParentGap] = useState(0);
+  // APPROVED PHONE STANDARD rule 1: below 768px the bar is always pinned under the site header from page
+  // open (globals.css, [data-section-nav]), so a gated bar is never inert there.
+  const [phone, setPhone] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const read = () => setPhone(mq.matches);
+    read();
+    mq.addEventListener("change", read);
+    return () => mq.removeEventListener("change", read);
+  }, []);
 
   useEffect(() => {
     itemsRef.current = items;
@@ -298,15 +308,16 @@ export default function SectionNav({ items, showJumpToBottom = false, visible = 
 
   return (
     <>
-      <div ref={sentinelRef} aria-hidden="true" style={gated && parentGap ? { marginBlockStart: -parentGap } : undefined} />
-      {isStuck && !gated && <div aria-hidden="true" className="mb-6" style={{ height: navHeight }} />}
+      <div ref={sentinelRef} aria-hidden="true" className="max-md:hidden" style={gated && parentGap ? { marginBlockStart: -parentGap } : undefined} />
+      {isStuck && !gated && <div aria-hidden="true" className="mb-6 max-md:hidden" style={{ height: navHeight }} />}
       <nav
         ref={navRef}
+        data-section-nav=""
         aria-label={t("sectionNavLabel")}
         className={`z-40 border-b border-zinc-200 bg-white/90 backdrop-blur-xl transition-opacity duration-300 dark:border-zinc-800 dark:bg-zinc-950/90 ${
           isStuck ? "fixed inset-x-0 top-18" : gated ? "absolute inset-x-0" : "relative mb-6"
         } ${visible && (isStuck || !gated) ? "opacity-100" : "pointer-events-none opacity-0"}`}
-        inert={gated && !(isStuck && visible) ? true : undefined}
+        inert={gated && !phone && !(isStuck && visible) ? true : undefined}
       >
         {phoneGroups.length > 0 && (
           <div className="mx-auto grid max-w-6xl gap-1.5 px-4 py-1.5 md:hidden" style={{ gridTemplateColumns: `repeat(${phoneGroups.length}, minmax(0, 1fr))` }}>
