@@ -60,6 +60,7 @@ export default function JSONKindDonut() {
 
   return (
     <JSONIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

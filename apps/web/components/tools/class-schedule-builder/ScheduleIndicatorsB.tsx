@@ -4,6 +4,7 @@ import { Minus, Plus } from "lucide-react";
 import { DAY_CODES, termOccurrences, weeklyScheduleStats } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { classColor, fmt, hm } from "./studio";
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
 import type { SchedIndicatorProps } from "./ScheduleIndicatorsA";
@@ -285,6 +286,7 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
         workedExampleTitle={t("ind.worked")}
         indicator={
           <div className="w-[260px]">
+            <PhoneMini slot={0} title={t("ind.workload.title")}>
             <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.workload.title")}>
               <defs>
                 <linearGradient id="csb-workload" x1="0" x2="1" y1="0" y2="0">
@@ -315,6 +317,7 @@ export function ScheduleWorkloadCard({ state, d }: SchedIndicatorProps) {
                 {t(`ind.workload.zone.${zone}`)}
               </text>
             </svg>
+            </PhoneMini>
             <div className="mt-1 flex items-center justify-center gap-1 text-xs">
               <span className="font-semibold text-zinc-600 dark:text-zinc-300">{t("ind.workload.ratio")}</span>
               {[1, 2, 3].map((r) => (

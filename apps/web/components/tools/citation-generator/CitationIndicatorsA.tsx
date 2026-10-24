@@ -13,6 +13,7 @@ import {
 } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { EntryText, fmt } from "./CitationShared";
 import { partOrder } from "./CitationStudioResult";
 import { PART_COLORS, type StudioState } from "./studio";
@@ -123,6 +124,7 @@ export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
+          <PhoneMini slot={0} title={t("ind.complete.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.complete.title")}>
             <defs>
               <linearGradient id="cite-complete" x1="0" x2="1" y1="0" y2="0">
@@ -146,6 +148,7 @@ export function CitationCompletenessCard({ source }: CiteIndicatorProps) {
               {`${fmt(req.filter((c) => c.filled).length)}/${fmt(req.length)} · ${fmt(rec.filter((c) => c.filled).length)}/${fmt(rec.length)}`}
             </text>
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...checks.map((c) => ({
@@ -200,6 +203,7 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
+          <PhoneMini slot={1} title={t("ind.mix.title")}>
           <div className="flex items-center gap-4">
             <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("ind.mix.title")}>
               {ring(types, 78, 22)}
@@ -217,6 +221,7 @@ export function CitationMixCard({ state }: CiteIndicatorProps) {
               ))}
             </ul>
           </div>
+          </PhoneMini>
         }
         rows={[
           ...types.map((it) => ({ label: it.label, value: fmt(it.v), note: `${fmt((it.v / n) * 100, 1)}%` })),

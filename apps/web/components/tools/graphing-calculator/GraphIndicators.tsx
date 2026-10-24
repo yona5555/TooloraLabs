@@ -4,19 +4,20 @@ import { useTranslations } from "next-intl";
 import { derivativeAt, differenceQuotient, tangentAt, type GraphKeyPointKind } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { useGraphLive } from "./GraphLiveContext";
 import { fmtNum } from "./types";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
 /** One indicator card (§32): blue header, intro line, the indicator with its WORKED EXAMPLE table beside it. */
-function IndicatorCard({ ns, indicator, rows }: { ns: string; indicator: ReactNode; rows: Row[] }) {
+function IndicatorCard({ ns, indicator, rows, mini }: { ns: string; indicator: ReactNode; rows: Row[]; mini?: 0 | 1 }) {
   const t = useTranslations(`tools.graphing-calculator.viz.${ns}`);
   const tv = useTranslations("tools.graphing-calculator.viz");
   return (
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
-      <IndicatorWithTable className="mt-4" workedExampleTitle={tv("workedExample")} indicator={indicator} rows={rows} />
+      <IndicatorWithTable className="mt-4" workedExampleTitle={tv("workedExample")} indicator={mini === undefined ? indicator : <PhoneMini slot={mini} title={t("title")}>{indicator}</PhoneMini>} rows={rows} />
     </SectionCard>
   );
 }
@@ -99,6 +100,7 @@ export function GraphKeyPointsTimeline() {
   return (
     <IndicatorCard
       ns="timeline"
+      mini={0}
       indicator={
         <div dir="ltr">
           <svg width={W} height={170} viewBox={`0 0 ${W} 170`} style={svgStyle} role="img" aria-label={t("title")}>
@@ -356,6 +358,7 @@ export function GraphShapeDonut() {
   return (
     <IndicatorCard
       ns="donut"
+      mini={1}
       indicator={
         <div dir="ltr" className="flex items-center gap-4">
           <svg width={168} height={168} viewBox="0 0 168 168" role="img" aria-label={t("title")}>

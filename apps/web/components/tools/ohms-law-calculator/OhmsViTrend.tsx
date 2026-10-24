@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { viLine } from "@tooloralabs/tools";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
 import { useOhmsModel } from "./OhmsLiveContext";
@@ -85,7 +86,7 @@ export default function OhmsViTrend() {
     <OhmsIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={0} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("slope"), value: `ΔV / ΔI = ${f(V)} / ${f(I)} = ${f(Rr)} Ω`, emphasize: true },
         { label: t("atDouble"), value: `${f(2 * I)} A × ${f(Rr)} Ω = ${f(2 * V)} V` },

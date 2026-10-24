@@ -57,6 +57,7 @@ export default function FnLengthGauge() {
 
   return (
     <FnIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

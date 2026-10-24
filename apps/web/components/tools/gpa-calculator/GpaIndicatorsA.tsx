@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { courseContributions, planTarget } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { courseLetter, HONOR_COLORS, type Derived, type Formatters, type PlannerState } from "./planner";
 
 export type IndicatorProps = { state: PlannerState; setState: (s: PlannerState) => void; d: Derived; f: Formatters };
@@ -42,6 +43,7 @@ export function GpaTrendCard({ d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
+          <PhoneMini slot={0} title={t("trend.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("trend.title")} className="max-w-full">
             {[lo, ...d.scale.honors.map((h) => h.min), hi].map((v) => (
               <g key={v}>
@@ -78,6 +80,7 @@ export function GpaTrendCard({ d, f }: IndicatorProps) {
               </g>
             ))}
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...(d.priorCredits > 0 ? [{ label: t("trend.prior"), value: f.gpa(d.priorGpa), note: `${f.num(d.priorCredits)} ${tp("result.creditsUnit")}` }] : []),
@@ -118,6 +121,7 @@ export function GpaContributionCard({ state, d, f }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
+          <PhoneMini slot={1} title={t("contribution.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("contribution.title")} className="max-w-full">
             <line x1={mid} x2={mid} y1={0} y2={H - 18} stroke="currentColor" strokeOpacity={0.35} />
             {rows.map((r, i) => {
@@ -138,6 +142,7 @@ export function GpaContributionCard({ state, d, f }: IndicatorProps) {
             })}
             <text x={mid} y={H - 4} textAnchor="middle" fontSize={9} className={axisText}>{`GPA ${f.gpa(semGpa)}`}</text>
           </svg>
+          </PhoneMini>
         }
         rows={[
           { label: t("contribution.semGpa"), value: f.gpa(semGpa) },

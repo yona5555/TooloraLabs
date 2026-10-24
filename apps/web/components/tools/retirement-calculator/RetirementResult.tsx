@@ -1,6 +1,7 @@
 "use client";
 import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import RetirementBreakdownDonut from "./RetirementBreakdownDonut";
@@ -213,15 +214,17 @@ export default function RetirementResult({
 
       {!outcome.unreachable && (
         <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
-          <RetirementBreakdownDonut
-            centerValue={money(outcome.projectedBalance)}
-            centerLabel={t("aboveFold.projectedBalanceLabel")}
-            segments={[
-              { key: "savings", value: currentSavings, label: t("form.currentSavingsLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
-              { key: "contributions", value: outcome.totalContributionsPure, label: t("aboveFold.totalContributedLabel"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
-              { key: "growth", value: outcome.totalGrowth, label: t("aboveFold.totalGrowthLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
-            ]}
-          />
+          <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
+            <RetirementBreakdownDonut
+              centerValue={money(outcome.projectedBalance)}
+              centerLabel={t("aboveFold.projectedBalanceLabel")}
+              segments={[
+                { key: "savings", value: currentSavings, label: t("form.currentSavingsLabel"), colorClass: "stroke-zinc-400 dark:stroke-zinc-600" },
+                { key: "contributions", value: outcome.totalContributionsPure, label: t("aboveFold.totalContributedLabel"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
+                { key: "growth", value: outcome.totalGrowth, label: t("aboveFold.totalGrowthLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
+              ]}
+            />
+          </PhoneMini>
         </div>
       )}
     </SectionCard>

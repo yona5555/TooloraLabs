@@ -62,6 +62,7 @@ export default function MatrixConditionGauge() {
 
   return (
     <MatrixIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={gauge}

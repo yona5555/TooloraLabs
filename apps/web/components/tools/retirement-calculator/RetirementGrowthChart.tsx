@@ -2,6 +2,7 @@
 import { useLayoutEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import type { YearlyGrowthPoint } from "@tooloralabs/tools";
@@ -37,7 +38,6 @@ const MAX_DENSE_LABELS = 40;
 
 export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, currentSavings, totalContributions, totalGrowth, digitStyle, currency, inflationRate }: RetirementGrowthChartProps) {
   const t = useTranslations("tools.retirement-calculator");
-  const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -100,9 +100,8 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
   const activeIndex = hoverIndex;
   const active = activeIndex !== null ? yearlySchedule[activeIndex] : null;
 
-  function updateHoverFromClientX(clientX: number) {
-    const svg = svgRef.current;
-    if (!svg) return;
+  // The svg comes from the event, not a ref: the phone mini card renders a second copy of it.
+  function updateHoverFromClientX(svg: SVGSVGElement, clientX: number) {
     const rect = svg.getBoundingClientRect();
     const localX = ((clientX - rect.left) / rect.width) * chartWidth;
     const index = Math.round((localX - MARGIN.left - barWidth / 2) / step);
@@ -110,7 +109,7 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
   }
 
   function handlePointerMove(e: ReactPointerEvent<SVGSVGElement>) {
-    updateHoverFromClientX(e.clientX);
+    updateHoverFromClientX(e.currentTarget, e.clientX);
   }
 
   const tooltipX = active
@@ -125,111 +124,112 @@ export default function RetirementGrowthChart({ hasCalculated, yearlySchedule, c
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("growthChart.intro")}</p>
 
       <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
-        <svg
-          ref={svgRef}
-          width={chartWidth}
-          height={CHART_HEIGHT}
-          viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
-          role="img"
-          aria-label={t("growthChart.title")}
-          className="block touch-none text-current select-none"
-          onPointerMove={handlePointerMove}
-          onPointerDown={handlePointerMove}
-          onPointerLeave={() => setHoverIndex(null)}
-        >
-          {valueTicks.map((tick) => (
-            <g key={tick}>
-              <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {money(tick)}
-              </text>
-            </g>
-          ))}
-          <line x1={MARGIN.left} y1={mainBottom} x2={chartWidth - MARGIN.right} y2={mainBottom} stroke="currentColor" strokeWidth={1} opacity={0.25} />
-
-          {yearlySchedule.map((row, i) => {
-            const contributed = currentSavings + row.contributions;
-            const isLast = i === yearlySchedule.length - 1;
-            return (
-              <g key={row.year} opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.4}>
-                <rect x={barX(i)} y={yForValue(contributed)} width={barWidth} height={Math.max(mainBottom - yForValue(contributed), 0)} className="fill-blue-600 dark:fill-blue-400" />
-                <rect x={barX(i)} y={yForValue(row.balance)} width={barWidth} height={Math.max(yForValue(contributed) - yForValue(row.balance), 0)} className="fill-amber-400 dark:fill-amber-500" />
-                {isLast && (
-                  <text x={barCenterX(i)} y={yForValue(row.balance) - 10} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
-                    {money(row.balance)}
-                  </text>
-                )}
+        <PhoneMini slot={1} title={t("growthChart.title")}>
+          <svg
+            width={chartWidth}
+            height={CHART_HEIGHT}
+            viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
+            role="img"
+            aria-label={t("growthChart.title")}
+            className="block touch-none text-current select-none"
+            onPointerMove={handlePointerMove}
+            onPointerDown={handlePointerMove}
+            onPointerLeave={() => setHoverIndex(null)}
+          >
+            {valueTicks.map((tick) => (
+              <g key={tick}>
+                <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
+                <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+                  {money(tick)}
+                </text>
               </g>
-            );
-          })}
+            ))}
+            <line x1={MARGIN.left} y1={mainBottom} x2={chartWidth - MARGIN.right} y2={mainBottom} stroke="currentColor" strokeWidth={1} opacity={0.25} />
 
-          {inflationAdjustedPoints.length > 0 && (
-            <polyline
-              points={inflationAdjustedPoints.map((p) => `${p.x},${p.y}`).join(" ")}
-              fill="none"
-              strokeWidth={2}
-              strokeDasharray="5 3"
-              className="stroke-emerald-600 dark:stroke-emerald-400"
-            />
-          )}
+            {yearlySchedule.map((row, i) => {
+              const contributed = currentSavings + row.contributions;
+              const isLast = i === yearlySchedule.length - 1;
+              return (
+                <g key={row.year} opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.4}>
+                  <rect x={barX(i)} y={yForValue(contributed)} width={barWidth} height={Math.max(mainBottom - yForValue(contributed), 0)} className="fill-blue-600 dark:fill-blue-400" />
+                  <rect x={barX(i)} y={yForValue(row.balance)} width={barWidth} height={Math.max(yForValue(contributed) - yForValue(row.balance), 0)} className="fill-amber-400 dark:fill-amber-500" />
+                  {isLast && (
+                    <text x={barCenterX(i)} y={yForValue(row.balance) - 10} textAnchor="middle" fontSize={12} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
+                      {money(row.balance)}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
 
-          <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
-            {t("growthChart.interestLabel")}
-          </text>
-          {yearlySchedule.map((row, i) => (
-            <rect
-              key={`vol-${row.year}`}
-              x={barX(i)}
-              y={yForVolume(row.yearlyInterest)}
-              width={barWidth}
-              height={Math.max(volumeBottom - yForVolume(row.yearlyInterest), 1)}
-              rx={1}
-              className="fill-amber-400/50 dark:fill-amber-500/50"
-              opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.4}
-            />
-          ))}
-          <line x1={MARGIN.left} y1={volumeBottom} x2={chartWidth - MARGIN.right} y2={volumeBottom} stroke="currentColor" strokeWidth={1} opacity={0.15} />
+            {inflationAdjustedPoints.length > 0 && (
+              <polyline
+                points={inflationAdjustedPoints.map((p) => `${p.x},${p.y}`).join(" ")}
+                fill="none"
+                strokeWidth={2}
+                strokeDasharray="5 3"
+                className="stroke-emerald-600 dark:stroke-emerald-400"
+              />
+            )}
 
-          {yearlySchedule.map((row, i) =>
-            i % labelEvery === 0 ? (
-              <text key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.6}>
-                {formatLocalizedNumber(row.year, digitStyle, { maximumFractionDigits: 0 })}
-              </text>
-            ) : null
-          )}
+            <text x={MARGIN.left - 8} y={volumeTop + 8} textAnchor="end" fontSize={8} fill="currentColor" opacity={0.5}>
+              {t("growthChart.interestLabel")}
+            </text>
+            {yearlySchedule.map((row, i) => (
+              <rect
+                key={`vol-${row.year}`}
+                x={barX(i)}
+                y={yForVolume(row.yearlyInterest)}
+                width={barWidth}
+                height={Math.max(volumeBottom - yForVolume(row.yearlyInterest), 1)}
+                rx={1}
+                className="fill-amber-400/50 dark:fill-amber-500/50"
+                opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.4}
+              />
+            ))}
+            <line x1={MARGIN.left} y1={volumeBottom} x2={chartWidth - MARGIN.right} y2={volumeBottom} stroke="currentColor" strokeWidth={1} opacity={0.15} />
 
-          {active && activeIndex !== null && (
-            <>
-              <line x1={barCenterX(activeIndex)} y1={MARGIN.top} x2={barCenterX(activeIndex)} y2={volumeBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
-              <g transform={`translate(${tooltipX}, ${tooltipY})`}>
-                <rect
-                  width={TOOLTIP_WIDTH}
-                  height={inflationRate > 0 ? TOOLTIP_HEIGHT_WITH_INFLATION : TOOLTIP_HEIGHT}
-                  rx={6}
-                  className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700"
-                  strokeWidth={1}
-                />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t("growthChart.tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 0 })}
+            {yearlySchedule.map((row, i) =>
+              i % labelEvery === 0 ? (
+                <text key={`year-${row.year}`} x={barCenterX(i)} y={volumeBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={9} fill="currentColor" opacity={0.6}>
+                  {formatLocalizedNumber(row.year, digitStyle, { maximumFractionDigits: 0 })}
                 </text>
-                <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
-                  {t("growthChart.contributedLabel")}: {money(currentSavings + active.contributions)}
-                </text>
-                <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
-                  {t("growthChart.interestLabel")}: {money(active.interest)}
-                </text>
-                <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t("growthChart.tooltipBalanceLabel")}: {money(active.balance)}
-                </text>
-                {inflationRate > 0 && (
-                  <text x={10} y={82} fontSize={9} className="fill-emerald-600 dark:fill-emerald-400">
-                    {t("growthChart.inflationAdjustedLabel")}: {money(active.balance / Math.pow(1 + inflationRate / 100, active.year))}
+              ) : null
+            )}
+
+            {active && activeIndex !== null && (
+              <>
+                <line x1={barCenterX(activeIndex)} y1={MARGIN.top} x2={barCenterX(activeIndex)} y2={volumeBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
+                <g transform={`translate(${tooltipX}, ${tooltipY})`}>
+                  <rect
+                    width={TOOLTIP_WIDTH}
+                    height={inflationRate > 0 ? TOOLTIP_HEIGHT_WITH_INFLATION : TOOLTIP_HEIGHT}
+                    rx={6}
+                    className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700"
+                    strokeWidth={1}
+                  />
+                  <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                    {t("growthChart.tooltipYearLabel")} {formatLocalizedNumber(active.year, digitStyle, { maximumFractionDigits: 0 })}
                   </text>
-                )}
-              </g>
-            </>
-          )}
-        </svg>
+                  <text x={10} y={35} fontSize={10} className="fill-blue-700 dark:fill-blue-400">
+                    {t("growthChart.contributedLabel")}: {money(currentSavings + active.contributions)}
+                  </text>
+                  <text x={10} y={50} fontSize={10} className="fill-amber-600 dark:fill-amber-500">
+                    {t("growthChart.interestLabel")}: {money(active.interest)}
+                  </text>
+                  <text x={10} y={67} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                    {t("growthChart.tooltipBalanceLabel")}: {money(active.balance)}
+                  </text>
+                  {inflationRate > 0 && (
+                    <text x={10} y={82} fontSize={9} className="fill-emerald-600 dark:fill-emerald-400">
+                      {t("growthChart.inflationAdjustedLabel")}: {money(active.balance / Math.pow(1 + inflationRate / 100, active.year))}
+                    </text>
+                  )}
+                </g>
+              </>
+            )}
+          </svg>
+        </PhoneMini>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-400">

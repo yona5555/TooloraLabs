@@ -73,6 +73,7 @@ export default function ForceInverseSquareTrend() {
 
   return (
     <ForceIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

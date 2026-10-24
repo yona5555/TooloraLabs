@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { LoanPaymentRow, LoanGrowthRow } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import LoanBreakdownDonut from "./LoanBreakdownDonut";
 import LoanShareExportModal from "./LoanShareExportModal";
 import type { CurrencyCode } from "@/lib/currency";
@@ -97,6 +98,7 @@ export default function LoanResult({
       </p>
 
       <div className="mt-5">
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
         <LoanBreakdownDonut
           centerValue={money(total)}
           centerLabel={t("aboveFold.totalLabel")}
@@ -105,6 +107,7 @@ export default function LoanResult({
             { key: "interest", value: totalInterest, label: t("aboveFold.totalInterestLabel"), colorClass: "stroke-amber-400 dark:stroke-amber-500" },
           ]}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">

@@ -3,6 +3,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import DebtToIncomeBreakdownDonut from "./DebtToIncomeBreakdownDonut";
 import DebtToIncomeShareExportModal from "./DebtToIncomeShareExportModal";
@@ -176,6 +177,7 @@ export default function DebtToIncomeResult({
           const domainMax = Math.max(70, Math.ceil((gaugeValue + 10) / 10) * 10);
           return (
             <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+              <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
               <RatioGauge
                 wide
                 value={gaugeValue}
@@ -188,12 +190,14 @@ export default function DebtToIncomeResult({
                 ticks={[0, 36, 43, 50]}
                 tickFormatter={(tick) => `${tick}%`}
               />
+              </PhoneMini>
             </div>
           );
         })()}
 
       {mode === "maxDebt" && (
         <div className="mt-5 border-t border-zinc-200 pt-5 dark:border-zinc-800">
+          <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
           <DebtToIncomeBreakdownDonut
             centerValue={money(maxDebtResult.maxTotalMonthlyDebt)}
             centerLabel={t("aboveFold.maxTotalMonthlyDebtLabel")}
@@ -202,6 +206,7 @@ export default function DebtToIncomeResult({
               { key: "additional", value: maxDebtResult.maxAdditionalMonthlyDebt, label: t("aboveFold.maxAdditionalMonthlyDebtLabel"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
             ]}
           />
+          </PhoneMini>
         </div>
       )}
     </SectionCard>

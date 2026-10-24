@@ -4,6 +4,7 @@ import CopyButton from "@/components/tool-ui/CopyButton";
 import StatisticsLive3D from "./StatisticsLive3D";
 import StatisticsShareExportModal from "./StatisticsShareExportModal";
 import type { StatisticsResult as Result } from "./types";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 type Props = {
   result: Result;
@@ -52,9 +53,11 @@ export default function StatisticsResult({ result, digitStyle }: Props) {
         </div>
 
         <div className="p-4 lg:p-6">
-          <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
-            {fmt(result.mean)}
-          </p>
+          <PhoneMini slot={1} title={t("mean")}>
+            <p dir="ltr" className="text-center font-mono text-4xl font-bold text-blue-700 dark:text-blue-400">
+              {fmt(result.mean)}
+            </p>
+          </PhoneMini>
           <p className="mt-1 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("meanCaption", { count: result.count })}</p>
 
           <div className="mt-4">

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { getChineseZodiac, getGeneration, getZodiacSign } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import LiveTable3DLayout, { LiveTableFill, type LiveTableGroup } from "@/components/tool-ui/three/LiveTable3DLayout";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import AgeDualDial from "./AgeDualDial";
 import AgeShareExportModal from "./AgeShareExportModal";
 import { AGE_COLORS, type Derived, type Formatters } from "./ageModel";
@@ -120,12 +121,14 @@ export default function AgeResultCard({ d, f, ageText, hijriText }: Props) {
           headings={[t("result.colItem"), t("result.colCalc"), t("result.colValue")]}
           groups={groups}
           drawing={
+            <PhoneMini slot={0} title={t("result.title")}>
             <AgeDualDial
               outer={{ age: g, color: AGE_COLORS.gregorian, label: t("cal.gShort"), next: `${t("cal.gregorian")} · ${countdown(g.daysUntilNext)}` }}
               inner={h ? { age: h, color: AGE_COLORS.hijri, label: t("cal.hShort"), next: `${t("cal.hijri")} · ${countdown(h.daysUntilNext)}` } : null}
               centerTop={f.int(g.years)}
               centerBottom={h ? t("result.dialCenter", { h: f.int(h.years) }) : ""}
             />
+            </PhoneMini>
           }
           caption={t("result.dialCaption", { g: f.pct(g.yearProgress), h: h ? f.pct(h.yearProgress) : "—" })}
         />

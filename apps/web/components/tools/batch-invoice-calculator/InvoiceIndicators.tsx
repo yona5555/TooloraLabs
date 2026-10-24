@@ -118,6 +118,7 @@ export function CompositionDonut({ overview, f }: IndicatorProps) {
   return (
     <IndicatorCard
       id="composition"
+      mini={0}
       title={t("donut.title")}
       heading={t("donut.heading", { count: overview.invoiceCount })}
       intro={t("donut.intro")}
@@ -410,6 +411,7 @@ export function ClientConcentration({ invoices, overview, f }: IndicatorProps) {
   return (
     <IndicatorCard
       id="concentration"
+      mini={1}
       title={t("gauge.title")}
       heading={t("gauge.heading")}
       intro={t("gauge.intro")}

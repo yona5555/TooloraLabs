@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { InvoiceGeneratorOutput } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import InvoiceCompositionDonut from "./InvoiceCompositionDonut";
 import InvoiceShareExportModal from "./InvoiceShareExportModal";
 
@@ -137,6 +138,7 @@ export default function InvoicePreview({
           </div>
 
           <div className="border-t border-zinc-200 pt-5 print:hidden dark:border-zinc-800">
+            <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
             <InvoiceCompositionDonut
               centerValue={money(result.total)}
               centerLabel={t("result.grandTotal")}
@@ -145,6 +147,7 @@ export default function InvoicePreview({
                 { key: "tax", value: result.taxAmount, label: t("result.tax"), colorClass: "stroke-blue-600 dark:stroke-blue-400" },
               ]}
             />
+            </PhoneMini>
           </div>
         </div>
       ) : (

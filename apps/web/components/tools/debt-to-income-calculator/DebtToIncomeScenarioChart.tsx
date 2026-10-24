@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { DebtToIncomeResult as RatioResult } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 
@@ -43,7 +44,6 @@ const THRESHOLDS = [36, 43, 50];
 
 export default function DebtToIncomeScenarioChart({ hasCalculated, before, after, digitStyle, currency }: DebtToIncomeScenarioChartProps) {
   const t = useTranslations("tools.debt-to-income-calculator");
-  const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -94,9 +94,8 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
   const activeIndex = hoverIndex;
   const active = activeIndex !== null ? points[activeIndex] : null;
 
-  function updateHoverFromClientX(clientX: number) {
-    const svg = svgRef.current;
-    if (!svg) return;
+  // The svg comes from the event, not a ref: the phone mini card renders a second, inert copy of it.
+  function updateHoverFromClientX(svg: SVGSVGElement, clientX: number) {
     const rect = svg.getBoundingClientRect();
     const localX = ((clientX - rect.left) / rect.width) * chartWidth;
     const index = Math.floor((localX - MARGIN.left) / step);
@@ -104,7 +103,7 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
   }
 
   function handlePointerMove(e: ReactPointerEvent<SVGSVGElement>) {
-    updateHoverFromClientX(e.clientX);
+    updateHoverFromClientX(e.currentTarget, e.clientX);
   }
 
   const tooltipX = active
@@ -116,9 +115,9 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
     <SectionCard title={t("scenarioChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("scenarioChart.intro")}</p>
 
+      <PhoneMini slot={1} title={t("scenarioChart.title")}>
       <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
         <svg
-          ref={svgRef}
           width={chartWidth}
           height={CHART_HEIGHT}
           viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
@@ -195,6 +194,7 @@ export default function DebtToIncomeScenarioChart({ hasCalculated, before, after
           )}
         </svg>
       </div>
+      </PhoneMini>
 
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-400">
         {THRESHOLDS.map((threshold) => (

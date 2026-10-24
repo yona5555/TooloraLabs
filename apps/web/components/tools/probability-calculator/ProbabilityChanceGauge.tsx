@@ -1,6 +1,7 @@
 "use client";
 import { useId } from "react";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { binaryEntropyBits, oddsFromProbability, surprisalBits } from "@tooloralabs/tools";
 import ProbabilityIndicatorCard from "./ProbabilityIndicatorCard";
 import { useProbabilityModel } from "./ProbabilityLiveContext";
@@ -64,7 +65,7 @@ export default function ProbabilityChanceGauge() {
     <ProbabilityIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={gauge}
+      indicator={<PhoneMini slot={0} title={t("title")}>{gauge}</PhoneMini>}
       rows={[
         { label: symbol, value: pct(r) },
         { label: t("zone"), value: t(`zones.${zone}`), emphasize: true },

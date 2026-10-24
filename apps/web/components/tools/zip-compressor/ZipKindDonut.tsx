@@ -66,6 +66,7 @@ export default function ZipKindDonut() {
   const top = orig.indexOf(Math.max(...orig));
   return (
     <ZipIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

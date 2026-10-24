@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useAreaLive } from "./AreaLiveContext";
 import { parseAreaDims, characteristicLength, areaAtLength, ALL_SHAPES, round } from "./areaEducationMath";
@@ -31,7 +32,9 @@ export default function ShapeAreaComparisonBarChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro", { length: round(length) })}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <EduBarChart bars={bars} ariaLabel={t("title")} />
+          <PhoneMini slot={0} title={t("title")}>
+            <EduBarChart bars={bars} ariaLabel={t("title")} />
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

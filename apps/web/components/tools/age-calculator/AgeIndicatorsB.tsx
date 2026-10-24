@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { computeLifeExpectancyProgress, lifeStageDays, type Gender, type LifeStageKey } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { AGE_COLORS } from "./ageModel";
 import { axisText, useDualT, useIndicatorT, valueText, type IndicatorProps } from "./AgeIndicatorsA";
 
@@ -106,6 +107,7 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
         workedExampleTitle={t("worked")}
         indicator={
           <div className="w-[320px] max-w-full">
+            <PhoneMini slot={1} title={t("life.title")}>
             <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("life.title")} className="max-w-full">
               {stops.map((c, i) => (
                 <path key={c} d={arc(Math.PI * (1 - i / 5), Math.PI * (1 - (i + 1) / 5))} stroke={c} strokeWidth={22} fill="none" />
@@ -127,6 +129,7 @@ export function AgeLifeGaugeCard({ state, setState, d, f }: IndicatorProps) {
                 {t("life.of", { y: f.num(life.lifeExpectancyYears, 1) })}
               </text>
             </svg>
+            </PhoneMini>
             <div role="radiogroup" className="mx-auto mt-1 grid w-48 grid-cols-2 gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800" data-bp-inner>
               {(["male", "female"] as Gender[]).map((g) => (
                 <button

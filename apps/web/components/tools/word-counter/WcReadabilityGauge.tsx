@@ -57,6 +57,7 @@ export default function WcReadabilityGauge() {
 
   return (
     <WcIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

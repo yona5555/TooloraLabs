@@ -123,18 +123,9 @@ export function MmCompositionCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(0, { min: 0, max: COMPOUNDS.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
-  const HMIN = 210;
-  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
-  const H = Math.max(HMIN, hBox);
   const cp = COMPOUNDS[s.value];
   const pr = partsOf(cp.formula);
   const parts = pr?.parts ?? [];
-  const X0 = 16;
-  const X1 = W - 16;
-  const barY = H * 0.42;
-  const barH = Math.min(64, H * 0.3);
-  const before = (i: number) => parts.slice(0, i).reduce((a, q) => a + q.pct, 0);
-  const segs = parts.map((pt, i) => ({ pt, x: X0 + ((X1 - X0) * before(i)) / 100, w: ((X1 - X0) * pt.pct) / 100 }));
   const valueText = `${tn(cp.key)} · ${uniFormula(cp.formula)}`;
   const rows: KitRow[] = [
     ...parts.map((pt) => ({ key: pt.symbol, label: `${pt.symbol} (${pt.pct.toFixed(1)} %): ${pt.count} × ${f3(pt.atomicMass)}`, value: f3(pt.subtotal) })),
@@ -156,33 +147,48 @@ export function MmCompositionCard({ side }: { side: Side }) {
         </>
       }
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            <text x={W / 2} y={28} fontSize={16} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-              <SvgChem text={`${uniFormula(cp.formula)} · ${f3(pr?.total ?? 0)} g/mol`} />
-            </text>
-            {segs.map(({ pt, x, w }, i) => {
-              const on = hover === pt.symbol;
-              const wide = w > 54;
-              return (
-                <g key={pt.symbol} onPointerEnter={() => setHover(pt.symbol)} onPointerLeave={() => setHover(null)}>
-                  <rect x={x} y={barY} width={Math.max(1, w - 1.5)} height={barH} rx={i === 0 || i === segs.length - 1 ? 8 : 0} style={{ fill: elFill(pt.symbol), stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={on ? 3 : 0} />
-                  {wide && (
-                    <text x={x + w / 2} y={barY + barH / 2 + 5} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-                      {pt.symbol}
-                    </text>
-                  )}
-                  <text x={x + w / 2} y={barY + barH + 22 + (wide ? 0 : (i % 2) * 16)} fontSize={12.5} fontWeight={700} textAnchor={x + w / 2 < 40 ? "start" : x + w / 2 > W - 40 ? "end" : "middle"} style={{ fill: "var(--ph-ink)" }}>
-                    {`${wide ? "" : `${pt.symbol} `}${pt.pct.toFixed(1)} %`}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-        </div>
-      }
+      mini={0}
+      visual={<MmCompositionDrawing parts={parts} heading={`${uniFormula(cp.formula)} · ${f3(pr?.total ?? 0)} g/mol`} valueText={valueText} hover={hover} setHover={setHover} />}
     />
+  );
+}
+
+/** Card 4's drawing; it owns its measured box so the phone mini copy (PhoneMini) measures its own. */
+function MmCompositionDrawing({ parts, heading, valueText, hover, setHover }: { parts: NonNullable<ReturnType<typeof partsOf>>["parts"]; heading: string; valueText: string; hover: string | null; setHover: (k: string | null) => void }) {
+  const HMIN = 210;
+  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
+  const H = Math.max(HMIN, hBox);
+  const X0 = 16;
+  const X1 = W - 16;
+  const barY = H * 0.42;
+  const barH = Math.min(64, H * 0.3);
+  const before = (i: number) => parts.slice(0, i).reduce((a, q) => a + q.pct, 0);
+  const segs = parts.map((pt, i) => ({ pt, x: X0 + ((X1 - X0) * before(i)) / 100, w: ((X1 - X0) * pt.pct) / 100 }));
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+        <text x={W / 2} y={28} fontSize={16} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+          <SvgChem text={heading} />
+        </text>
+        {segs.map(({ pt, x, w }, i) => {
+          const on = hover === pt.symbol;
+          const wide = w > 54;
+          return (
+            <g key={pt.symbol} onPointerEnter={() => setHover(pt.symbol)} onPointerLeave={() => setHover(null)}>
+              <rect x={x} y={barY} width={Math.max(1, w - 1.5)} height={barH} rx={i === 0 || i === segs.length - 1 ? 8 : 0} style={{ fill: elFill(pt.symbol), stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={on ? 3 : 0} />
+              {wide && (
+                <text x={x + w / 2} y={barY + barH / 2 + 5} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                  {pt.symbol}
+                </text>
+              )}
+              <text x={x + w / 2} y={barY + barH + 22 + (wide ? 0 : (i % 2) * 16)} fontSize={12.5} fontWeight={700} textAnchor={x + w / 2 < 40 ? "start" : x + w / 2 > W - 40 ? "end" : "middle"} style={{ fill: "var(--ph-ink)" }}>
+                {`${wide ? "" : `${pt.symbol} `}${pt.pct.toFixed(1)} %`}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 }
 
@@ -192,16 +198,7 @@ export function MmRankedCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(10, { min: 1, max: 100, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
-  const HMIN = 300;
-  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
-  const H = Math.max(HMIN, hBox);
   const list = COMPOUNDS.map((c) => ({ ...c, n: s.value / c.mm })).sort((a, b) => b.n - a.n);
-  // The top-ranked compound spans the full width; the others are drawn to the same scale.
-  const nMax = list[0].n;
-  const LBL = 96;
-  const X0 = 10 + LBL;
-  const X1 = W - 70;
-  const rowH = (H - 20) / list.length;
   const valueText = `${s.value} g`;
   const rows: KitRow[] = [
     { key: "m", label: t("rowMass"), value: `${s.value} g` },
@@ -223,29 +220,44 @@ export function MmRankedCard({ side }: { side: Side }) {
         </>
       }
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            {list.map((c, i) => {
-              const y = 10 + i * rowH;
-              const w = Math.max(2, ((X1 - X0) * c.n) / nMax);
-              const on = hover === c.formula || (hover === null && i === 0);
-              return (
-                <g key={c.formula} onPointerEnter={() => setHover(c.formula)} onPointerLeave={() => setHover(null)}>
-                  <text x={X0 - 8} y={y + rowH / 2 + 5} fontSize={13} fontWeight={700} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
-                    <SvgChem text={uniFormula(c.formula)} />
-                  </text>
-                  <rect x={X0} y={y + rowH * 0.2} width={w} height={rowH * 0.6} rx={rowH * 0.3} style={{ fill: i === 0 ? "var(--chem-product)" : "var(--chem-gas)", opacity: on ? 1 : 0.75, stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={2} />
-                  <text x={X0 + w + 8} y={y + rowH / 2 + 5} fontSize={12.5} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
-                    {`${g3(c.n)} mol`}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-        </div>
-      }
+      mini={1}
+      visual={<MmRankedDrawing list={list} valueText={valueText} hover={hover} setHover={setHover} />}
     />
+  );
+}
+
+/** Card 5's drawing; it owns its measured box so the phone mini copy (PhoneMini) measures its own. */
+function MmRankedDrawing({ list, valueText, hover, setHover }: { list: Array<(typeof COMPOUNDS)[number] & { n: number }>; valueText: string; hover: string | null; setHover: (k: string | null) => void }) {
+  const HMIN = 300;
+  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
+  const H = Math.max(HMIN, hBox);
+  // The top-ranked compound spans the full width; the others are drawn to the same scale.
+  const nMax = list[0].n;
+  const LBL = 96;
+  const X0 = 10 + LBL;
+  const X1 = W - 70;
+  const rowH = (H - 20) / list.length;
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+        {list.map((c, i) => {
+          const y = 10 + i * rowH;
+          const w = Math.max(2, ((X1 - X0) * c.n) / nMax);
+          const on = hover === c.formula || (hover === null && i === 0);
+          return (
+            <g key={c.formula} onPointerEnter={() => setHover(c.formula)} onPointerLeave={() => setHover(null)}>
+              <text x={X0 - 8} y={y + rowH / 2 + 5} fontSize={13} fontWeight={700} textAnchor="end" style={{ fill: "var(--ph-ink)" }}>
+                <SvgChem text={uniFormula(c.formula)} />
+              </text>
+              <rect x={X0} y={y + rowH * 0.2} width={w} height={rowH * 0.6} rx={rowH * 0.3} style={{ fill: i === 0 ? "var(--chem-product)" : "var(--chem-gas)", opacity: on ? 1 : 0.75, stroke: on ? "var(--ph-focus)" : "none" }} strokeWidth={2} />
+              <text x={X0 + w + 8} y={y + rowH / 2 + 5} fontSize={12.5} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+                {`${g3(c.n)} mol`}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 }
 

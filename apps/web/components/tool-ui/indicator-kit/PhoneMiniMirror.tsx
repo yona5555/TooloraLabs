@@ -14,7 +14,8 @@ import { MiniContext } from "./miniContext";
  *  after the page committed, so the source card and the slots are already in the DOM. */
 function findSlot(el: HTMLElement | null): HTMLElement | null {
   const main = el?.closest("main[data-phone-cards]");
-  if (!el || !main || main.hasAttribute("data-phone-markets") || main.querySelector("[data-phone-ticker]")) return null;
+  // A page that chose its own mini cards (PhoneMini) keeps them instead of the automatic mirror.
+  if (!el || !main || main.hasAttribute("data-phone-markets") || main.querySelector("[data-phone-ticker], [data-ph-mini-src]")) return null;
   const index = Array.from(main.querySelectorAll("[data-ph-mini-ok]")).indexOf(el);
   if (index < 0 || index > 1) return null;
   return main.querySelector<HTMLElement>(`[data-phone-mini-slot="${index}"]`);

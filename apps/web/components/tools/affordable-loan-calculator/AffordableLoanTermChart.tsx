@@ -4,6 +4,7 @@ import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import type { TermComparisonRow } from "./types";
@@ -27,7 +28,6 @@ const TOOLTIP_HEIGHT = 78;
 
 export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyle, currency }: AffordableLoanTermChartProps) {
   const t = useTranslations("tools.affordable-loan-calculator");
-  const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -75,9 +75,8 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
   const activeIndex = hoverIndex;
   const active = activeIndex !== null ? rows[activeIndex] : null;
 
-  function updateHoverFromClientX(clientX: number) {
-    const svg = svgRef.current;
-    if (!svg) return;
+  // The svg comes from the event, not a ref: the phone mini card renders a second, inert copy of it.
+  function updateHoverFromClientX(svg: SVGSVGElement, clientX: number) {
     const rect = svg.getBoundingClientRect();
     const localX = ((clientX - rect.left) / rect.width) * chartWidth;
     const index = Math.floor((localX - MARGIN.left) / step);
@@ -85,7 +84,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
   }
 
   function handlePointerMove(e: ReactPointerEvent<SVGSVGElement>) {
-    updateHoverFromClientX(e.clientX);
+    updateHoverFromClientX(e.currentTarget, e.clientX);
   }
 
   const tooltipX = active
@@ -97,9 +96,9 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
     <SectionCard phoneRole="visual" title={t("termChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("termChart.intro")}</p>
 
+      <PhoneMini slot={1} title={t("termChart.title")}>
       <div ref={containerRef} dir="ltr" className="mt-4 overflow-x-auto">
         <svg
-          ref={svgRef}
           width={chartWidth}
           height={CHART_HEIGHT}
           viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
@@ -151,6 +150,7 @@ export default function AffordableLoanTermChart({ hasCalculated, rows, digitStyl
           )}
         </svg>
       </div>
+      </PhoneMini>
     </SectionCard>
   );
 }

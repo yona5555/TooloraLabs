@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { BREAK_COLORS, runPlan, useFmt, useStudyT } from "./studio";
 import { axisText, upcomingExams, valueText, type StudyIndicatorProps } from "./StudyIndicatorsA";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 /* 5 · Hours per exam: learning + reviews against the target, shortfall in red (ranked bars) */
 export function HoursPerExamCard({ d }: StudyIndicatorProps) {
@@ -24,48 +25,50 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <div className="w-[400px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.hours.title")} className="max-w-full">
-              <defs>
-                <pattern id="study-hatch" width={6} height={6} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                  <rect width={6} height={6} fill="#ef4444" fillOpacity={0.15} />
-                  <line x1={0} y1={0} x2={0} y2={6} stroke="#ef4444" strokeWidth={2.5} />
-                </pattern>
-              </defs>
-              {exams.map((e, i) => {
-                const y = 4 + i * RH;
-                const c = d.colorOf(e.id);
-                const idx = upcomingExams(d).findIndex((x) => x.id === e.id);
-                return (
-                  <g key={e.id}>
-                    <circle cx={9} cy={y + 11} r={7} fill={c} />
-                    <text x={9} y={y + 14.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
-                      {idx + 1}
-                    </text>
-                    <rect x={L} y={y + 2} width={sx(e.targetMinutes)} height={18} rx={4} fill="none" stroke="currentColor" strokeOpacity={0.3} strokeDasharray="3 2" />
-                    <rect x={L} y={y + 2} width={sx(e.learnMinutes)} height={18} rx={4} fill={c} style={{ transition: "width 400ms ease" }} />
-                    <rect x={L + sx(e.learnMinutes)} y={y + 2} width={sx(e.reviewMinutes)} height={18} fill={c} fillOpacity={0.45} style={{ transition: "all 400ms ease" }} />
-                    {e.shortfallMinutes > 0 && <rect x={L + sx(e.plannedMinutes)} y={y + 2} width={sx(e.shortfallMinutes)} height={18} fill="url(#study-hatch)" />}
-                    <text x={L + sx(e.targetMinutes) + 5} y={y + 15} fontSize={10.5} fontWeight={700} className={valueText}>
-                      {`${f.n(e.plannedMinutes / 60, 1)}/${f.n(e.targetMinutes / 60, 1)}`}
+          <PhoneMini slot={0} title={t("ind.hours.title")}>
+            <div className="w-[400px] max-w-full">
+              <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.hours.title")} className="max-w-full">
+                <defs>
+                  <pattern id="study-hatch" width={6} height={6} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <rect width={6} height={6} fill="#ef4444" fillOpacity={0.15} />
+                    <line x1={0} y1={0} x2={0} y2={6} stroke="#ef4444" strokeWidth={2.5} />
+                  </pattern>
+                </defs>
+                {exams.map((e, i) => {
+                  const y = 4 + i * RH;
+                  const c = d.colorOf(e.id);
+                  const idx = upcomingExams(d).findIndex((x) => x.id === e.id);
+                  return (
+                    <g key={e.id}>
+                      <circle cx={9} cy={y + 11} r={7} fill={c} />
+                      <text x={9} y={y + 14.5} textAnchor="middle" fontSize={9} fontWeight={800} fill="white">
+                        {idx + 1}
+                      </text>
+                      <rect x={L} y={y + 2} width={sx(e.targetMinutes)} height={18} rx={4} fill="none" stroke="currentColor" strokeOpacity={0.3} strokeDasharray="3 2" />
+                      <rect x={L} y={y + 2} width={sx(e.learnMinutes)} height={18} rx={4} fill={c} style={{ transition: "width 400ms ease" }} />
+                      <rect x={L + sx(e.learnMinutes)} y={y + 2} width={sx(e.reviewMinutes)} height={18} fill={c} fillOpacity={0.45} style={{ transition: "all 400ms ease" }} />
+                      {e.shortfallMinutes > 0 && <rect x={L + sx(e.plannedMinutes)} y={y + 2} width={sx(e.shortfallMinutes)} height={18} fill="url(#study-hatch)" />}
+                      <text x={L + sx(e.targetMinutes) + 5} y={y + 15} fontSize={10.5} fontWeight={700} className={valueText}>
+                        {`${f.n(e.plannedMinutes / 60, 1)}/${f.n(e.targetMinutes / 60, 1)}`}
+                      </text>
+                    </g>
+                  );
+                })}
+                {[
+                  { k: "learn", fill: "#2563eb", o: 1 },
+                  { k: "review", fill: "#2563eb", o: 0.45 },
+                  { k: "missing", fill: "url(#study-hatch)", o: 1 },
+                ].map((lg, i) => (
+                  <g key={lg.k} transform={`translate(${L + i * 110}, ${H - 18})`}>
+                    <rect width={12} height={12} rx={2} fill={lg.fill} fillOpacity={lg.o} />
+                    <text x={16} y={10} fontSize={10} fontWeight={600} className={valueText}>
+                      {t(`ind.hours.${lg.k}`)}
                     </text>
                   </g>
-                );
-              })}
-              {[
-                { k: "learn", fill: "#2563eb", o: 1 },
-                { k: "review", fill: "#2563eb", o: 0.45 },
-                { k: "missing", fill: "url(#study-hatch)", o: 1 },
-              ].map((lg, i) => (
-                <g key={lg.k} transform={`translate(${L + i * 110}, ${H - 18})`}>
-                  <rect width={12} height={12} rx={2} fill={lg.fill} fillOpacity={lg.o} />
-                  <text x={16} y={10} fontSize={10} fontWeight={600} className={valueText}>
-                    {t(`ind.hours.${lg.k}`)}
-                  </text>
-                </g>
-              ))}
-            </svg>
-          </div>
+                ))}
+              </svg>
+            </div>
+          </PhoneMini>
         }
         rows={[
           ...exams.map((e) => ({
@@ -279,40 +282,42 @@ export function FocusRatioCard({ d }: StudyIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
-          <div className="flex items-center gap-4">
-            <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("ind.ratio.title")}>
-              <circle cx={C} cy={C} r={R} fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={26} />
-              {arcs.map((a) =>
-                a.v > 0 ? (
-                  <g key={a.k}>
-                    <path d={a.d} fill="none" stroke={a.c} strokeWidth={26} style={{ transition: "all 400ms ease" }} />
-                    {a.sweep > 0.35 && (
-                      <text x={C + R * Math.cos(a.mid)} y={C + R * Math.sin(a.mid) + 4} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
-                        {f.pct(a.v / wall)}
-                      </text>
-                    )}
-                  </g>
-                ) : null,
-              )}
-              <text x={C} y={C + 4} textAnchor="middle" fontSize={24} fontWeight={800} className={valueText}>
-                {f.pct(ratio)}
-              </text>
-              <text x={C} y={C + 20} textAnchor="middle" fontSize={9} className={axisText}>
-                {t("ind.ratio.focus")}
-              </text>
-            </svg>
-            <ul className="space-y-1 text-xs">
-              {parts.map((p) => (
-                <li key={p.k} className="flex items-center gap-1.5">
-                  <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: p.c }} />
-                  <span className="text-zinc-600 dark:text-zinc-300">{t(`ind.ratio.${p.k}`)}</span>
-                  <span dir="ltr" className="font-mono font-bold text-zinc-800 dark:text-zinc-100">
-                    {f.h(p.v, 1)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <PhoneMini slot={1} title={t("ind.ratio.title")}>
+            <div className="flex items-center gap-4">
+              <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("ind.ratio.title")}>
+                <circle cx={C} cy={C} r={R} fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={26} />
+                {arcs.map((a) =>
+                  a.v > 0 ? (
+                    <g key={a.k}>
+                      <path d={a.d} fill="none" stroke={a.c} strokeWidth={26} style={{ transition: "all 400ms ease" }} />
+                      {a.sweep > 0.35 && (
+                        <text x={C + R * Math.cos(a.mid)} y={C + R * Math.sin(a.mid) + 4} textAnchor="middle" fontSize={10} fontWeight={800} fill="white">
+                          {f.pct(a.v / wall)}
+                        </text>
+                      )}
+                    </g>
+                  ) : null,
+                )}
+                <text x={C} y={C + 4} textAnchor="middle" fontSize={24} fontWeight={800} className={valueText}>
+                  {f.pct(ratio)}
+                </text>
+                <text x={C} y={C + 20} textAnchor="middle" fontSize={9} className={axisText}>
+                  {t("ind.ratio.focus")}
+                </text>
+              </svg>
+              <ul className="space-y-1 text-xs">
+                {parts.map((p) => (
+                  <li key={p.k} className="flex items-center gap-1.5">
+                    <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: p.c }} />
+                    <span className="text-zinc-600 dark:text-zinc-300">{t(`ind.ratio.${p.k}`)}</span>
+                    <span dir="ltr" className="font-mono font-bold text-zinc-800 dark:text-zinc-100">
+                      {f.h(p.v, 1)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </PhoneMini>
         }
         rows={[
           { label: t("ind.ratio.focus"), value: f.h(pt.focus), note: t("ind.ratio.pomodoros", { n: pt.pomodoros }) },

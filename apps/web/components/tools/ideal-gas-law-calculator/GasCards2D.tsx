@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { clamp } from "@/components/tool-ui/indicator-kit/format";
 import { g4, GAS_SEED_INDEX, GASES, PRESSURE_SEED_INDEX, PRESSURES, R_LATM, SEED, tempCss, ZERO_C } from "./gasMath";
 
@@ -18,11 +18,9 @@ const lit = (on: boolean) => ({ stroke: on ? "var(--ph-focus)" : "var(--ph-line)
 
 // ── Boyle's law: P × V constant ───────────────────────────────────────────────────────
 const NRT = SEED.moles * R_LATM * SEED.temperature; // 22.414 L·atm
-export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
+/** The Boyle drawing (own measured box and drag), so the phone mini card can render a live copy of it. */
+function GasBoylePlot({ s, on }: { s: Stepper; on: boolean }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.boyle");
-  const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = useStepper(SEED.pressure, { min: 0.5, max: 4, step: 0.25 });
-  const [hover, setHover] = useState<string | null>(null);
   const HMIN = 270;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
   const H = Math.max(HMIN, hBox);
@@ -39,6 +37,44 @@ export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
   for (let v = NRT / 4; v <= VMAX; v += 0.25) pts.push(`${xv(v).toFixed(1)},${yp(NRT / v).toFixed(1)}`);
   const v = NRT / s.value;
   const valueText = `P = ${g4(s.value)} atm`;
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g4(v)} L`}>
+        {[0, 1, 2, 3, 4].map((p) => (
+          <g key={p}>
+            <line x1={X0} y1={yp(p)} x2={X1} y2={yp(p)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
+            <text x={X0 - 8} y={yp(p) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+              {p}
+            </text>
+          </g>
+        ))}
+        {[0, 10, 20, 30, 40, 50].map((x) => (
+          <text key={x} x={xv(x)} y={Y0 + 18} fontSize={11} textAnchor={x === 0 ? "start" : x === 50 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+            {x}
+          </text>
+        ))}
+        <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
+          {t("axisV")}
+        </text>
+        <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
+        <rect x={X0} y={yp(s.value)} width={rd(xv(v) - X0)} height={rd(Y0 - yp(s.value))} rx={4} style={{ fill: "var(--chem-gas)", fillOpacity: on ? 0.28 : 0.16 }} />
+        <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
+        <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
+          {`${g4(s.value)} atm × ${g4(v)} L = ${g4(NRT)} L·atm`}
+        </text>
+      </svg>
+      <SvgHandle x={rd(xv(v))} y={yp(s.value)} viewW={W} viewH={H} direction="vertical" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="gas-boyle-handle" />
+    </div>
+  );
+}
+
+export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
+  const t = useTranslations("tools.ideal-gas-law-calculator.visuals.boyle");
+  const tc = useTranslations("tools.ph-calculator.visuals.common");
+  const s = useStepper(SEED.pressure, { min: 0.5, max: 4, step: 0.25 });
+  const [hover, setHover] = useState<string | null>(null);
+  const v = NRT / s.value;
+  const valueText = `P = ${g4(s.value)} atm`;
   const rows: KitRow[] = [
     { key: "nrt", label: "nRT", value: `${g4(NRT)} L·atm` },
     { key: "p", label: t("rowP"), value: `${g4(s.value)} atm` },
@@ -47,7 +83,6 @@ export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
     { key: "kpa", label: t("rowKpa"), value: `${g4(s.value * 101.325)} kPa` },
     { key: "double", label: t("rowDouble"), value: `${g4(v / 2)} L` },
   ];
-  const on = hover === "v" || hover === "p";
   return (
     <IndicatorCard
       idPrefix="gas"
@@ -59,35 +94,8 @@ export function GasBoyleCard({ side, n: cardN }: { side: Side; n: number }) {
       caption={t("caption", { p: ltr(g4(s.value)), v: ltr(g4(v)) })}
       controls={<KitControls s={s} valueText={valueText} testId="gas-boyle" />}
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${valueText}, ${g4(v)} L`}>
-            {[0, 1, 2, 3, 4].map((p) => (
-              <g key={p}>
-                <line x1={X0} y1={yp(p)} x2={X1} y2={yp(p)} style={{ stroke: "var(--ph-grid)" }} strokeWidth={1} />
-                <text x={X0 - 8} y={yp(p) + 4} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
-                  {p}
-                </text>
-              </g>
-            ))}
-            {[0, 10, 20, 30, 40, 50].map((x) => (
-              <text key={x} x={xv(x)} y={Y0 + 18} fontSize={11} textAnchor={x === 0 ? "start" : x === 50 ? "end" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
-                {x}
-              </text>
-            ))}
-            <text x={X1} y={Y0 + 36} fontSize={11} textAnchor="end" style={{ fill: "var(--ph-ink-muted)" }}>
-              {t("axisV")}
-            </text>
-            <line x1={X0} y1={Y0} x2={X1} y2={Y0} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinecap="round" />
-            <rect x={X0} y={yp(s.value)} width={rd(xv(v) - X0)} height={rd(Y0 - yp(s.value))} rx={4} style={{ fill: "var(--chem-gas)", fillOpacity: on ? 0.28 : 0.16 }} />
-            <polyline points={pts.join(" ")} fill="none" style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
-            <text x={X0 + 6} y={14} fontSize={12} fontWeight={800} style={{ fill: "var(--ph-ink)" }}>
-              {`${g4(s.value)} atm × ${g4(v)} L = ${g4(NRT)} L·atm`}
-            </text>
-          </svg>
-          <SvgHandle x={rd(xv(v))} y={yp(s.value)} viewW={W} viewH={H} direction="vertical" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="gas-boyle-handle" />
-        </div>
-      }
+      mini={0}
+      visual={<GasBoylePlot s={s} on={hover === "v" || hover === "p"} />}
     />
   );
 }
@@ -235,11 +243,9 @@ export function GasDensityCard({ side, n: cardN }: { side: Side; n: number }) {
 // ── Pressure dial (log scale) ─────────────────────────────────────────────────────────
 const LOG_LO = -1;
 const LOG_HI = 3;
-export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
+/** The pressure dial drawing (own measured box and drag), so the phone mini card can render a live copy of it. */
+function GasDialPlot({ s }: { s: Stepper }) {
   const t = useTranslations("tools.ideal-gas-law-calculator.visuals.dial");
-  const tc = useTranslations("tools.ph-calculator.visuals.common");
-  const s = useStepper(PRESSURE_SEED_INDEX, { min: 0, max: PRESSURES.length - 1, step: 1 });
-  const [hover, setHover] = useState<string | null>(null);
   const HMIN = 240;
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
   const H = Math.max(HMIN, hBox);
@@ -262,6 +268,47 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
     });
     s.set(best);
   });
+  const arc = (from: number, to: number) => {
+    const a = at(from, R);
+    const b = at(to, R);
+    return `M ${a[0]} ${a[1]} A ${R} ${R} 0 0 1 ${b[0]} ${b[1]}`;
+  };
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${name} ${g4(src.p)} atm`}>
+        <path d={arc(0.1, 1)} fill="none" style={{ stroke: "var(--chem-cold)" }} strokeWidth={16} />
+        <path d={arc(1, 10)} fill="none" style={{ stroke: "var(--ph-neutral)" }} strokeWidth={16} />
+        <path d={arc(10, 1000)} fill="none" style={{ stroke: "var(--chem-hot)" }} strokeWidth={16} />
+        {[0.1, 1, 10, 100, 1000].map((p) => {
+          const [x, y] = at(p, R + 20);
+          return (
+            <text key={p} x={x} y={y + 4} fontSize={11} textAnchor={p === 0.1 ? "end" : p === 1000 ? "start" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
+              {String(p)}
+            </text>
+          );
+        })}
+        {PRESSURES.map((q, i) => {
+          const [x, y] = at(q.p, R);
+          return <circle key={q.key} cx={x} cy={y} r={i === s.value ? 6 : 3.5} style={{ fill: "var(--ph-knob)", ...lit(i === s.value) }} />;
+        })}
+        <line x1={cx} y1={cy} x2={tip[0]} y2={tip[1]} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
+        <circle cx={cx} cy={cy} r={8} style={{ fill: "var(--ph-ink)" }} />
+        <text x={cx} y={H - 8} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+          {`${g4(src.p)} atm`}
+        </text>
+      </svg>
+      <SvgHandle x={tip[0]} y={tip[1]} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={`${name} · ${g4(src.p)} atm`} s={s} drag={drag} testId="gas-dial-handle" />
+    </div>
+  );
+}
+
+export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
+  const t = useTranslations("tools.ideal-gas-law-calculator.visuals.dial");
+  const tc = useTranslations("tools.ph-calculator.visuals.common");
+  const s = useStepper(PRESSURE_SEED_INDEX, { min: 0, max: PRESSURES.length - 1, step: 1 });
+  const [hover, setHover] = useState<string | null>(null);
+  const src = PRESSURES[s.value];
+  const name = t(`items.${src.key}`);
   const vMol = (R_LATM * 293.15) / src.p;
   const rows: KitRow[] = [
     { key: "name", label: t("rowName"), value: name },
@@ -270,11 +317,6 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
     { key: "psi", label: t("rowPsi"), value: `${g4(src.p * 14.6959)} psi` },
     { key: "vmol", label: t("rowVmol"), value: `${g4(vMol)} L` },
   ];
-  const arc = (from: number, to: number) => {
-    const a = at(from, R);
-    const b = at(to, R);
-    return `M ${a[0]} ${a[1]} A ${R} ${R} 0 0 1 ${b[0]} ${b[1]}`;
-  };
   return (
     <IndicatorCard
       idPrefix="gas"
@@ -286,33 +328,8 @@ export function GasDialCard({ side, n: cardN }: { side: Side; n: number }) {
       caption={t("caption", { name, p: ltr(g4(src.p)) })}
       controls={<KitControls s={s} valueText={`${s.value + 1} / ${PRESSURES.length}`} testId="gas-dial" />}
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`${name} ${g4(src.p)} atm`}>
-            <path d={arc(0.1, 1)} fill="none" style={{ stroke: "var(--chem-cold)" }} strokeWidth={16} />
-            <path d={arc(1, 10)} fill="none" style={{ stroke: "var(--ph-neutral)" }} strokeWidth={16} />
-            <path d={arc(10, 1000)} fill="none" style={{ stroke: "var(--chem-hot)" }} strokeWidth={16} />
-            {[0.1, 1, 10, 100, 1000].map((p) => {
-              const [x, y] = at(p, R + 20);
-              return (
-                <text key={p} x={x} y={y + 4} fontSize={11} textAnchor={p === 0.1 ? "end" : p === 1000 ? "start" : "middle"} style={{ fill: "var(--ph-ink-muted)" }}>
-                  {String(p)}
-                </text>
-              );
-            })}
-            {PRESSURES.map((q, i) => {
-              const [x, y] = at(q.p, R);
-              return <circle key={q.key} cx={x} cy={y} r={i === s.value ? 6 : 3.5} style={{ fill: "var(--ph-knob)", ...lit(i === s.value) }} />;
-            })}
-            <line x1={cx} y1={cy} x2={tip[0]} y2={tip[1]} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
-            <circle cx={cx} cy={cy} r={8} style={{ fill: "var(--ph-ink)" }} />
-            <text x={cx} y={H - 8} fontSize={13} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-              {`${g4(src.p)} atm`}
-            </text>
-          </svg>
-          <SvgHandle x={tip[0]} y={tip[1]} viewW={W} viewH={H} direction="horizontal" label={t("handle")} valueText={`${name} · ${g4(src.p)} atm`} s={s} drag={drag} testId="gas-dial-handle" />
-        </div>
-      }
+      mini={1}
+      visual={<GasDialPlot s={s} />}
     />
   );
 }

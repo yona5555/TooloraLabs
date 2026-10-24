@@ -70,6 +70,7 @@ export function LineValuesTrend({ a }: IndicatorProps) {
   return (
     <IndicatorCard phoneRole="visual"
       id="line-values"
+      mini={0}
       title={t("trend.title")}
       heading={t("trend.heading", { count: pts.length })}
       intro={t("trend.intro")}
@@ -147,6 +148,7 @@ export function CompositionDonut({ a }: IndicatorProps) {
   return (
     <IndicatorCard
       id="composition"
+      mini={1}
       title={t("donut.title")}
       heading={t("donut.heading", { lines: a.lines.length, ops: totalOps })}
       intro={t("donut.intro")}

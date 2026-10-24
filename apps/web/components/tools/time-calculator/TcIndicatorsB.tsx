@@ -7,6 +7,7 @@ import { WeekBars } from "./TcDrawings";
 import { useIndT } from "./TcIndicatorsA";
 import { useTcPhrases } from "./TcResult";
 import { C, INCREMENTS, type CardProps } from "./state";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -92,35 +93,37 @@ export function TcOvertimeGaugeCard({ s, set, d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <div className="w-[320px] max-w-full">
-            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("gauge.title")} className="max-w-full">
-              {zones.map((z, i) => (
-                <path key={i} d={arc(z.from, z.to)} fill="none" stroke={z.color} strokeWidth={22} />
-              ))}
-              {[0, th, LIMIT, max].filter((v, i, a) => a.indexOf(v) === i && v <= max).map((v) => {
-                const p = pt(v, r + 18);
-                return (
-                  <text key={v} x={p.x} y={p.y + 3} textAnchor="middle" fontSize={9} fontWeight={v === th ? 800 : 500} className={axisText}>{`${f.num(v, 1)}h`}</text>
-                );
-              })}
-              <line x1={cx} y1={cy} x2={needle.x} y2={needle.y} stroke="currentColor" strokeWidth={3} strokeLinecap="round" style={{ transition: "all 400ms ease" }} />
-              <circle cx={cx} cy={cy} r={6} fill="currentColor" />
-              <text x={cx} y={cy - 40} textAnchor="middle" fontSize={20} fontWeight={800} className={valueText}>{f.durHm(w.totalSeconds)}</text>
-              <text x={cx} y={cy - 24} textAnchor="middle" fontSize={10} fontWeight={700} fill={total <= th ? C.add : total <= LIMIT ? C.ot : C.sub}>{status}</text>
-            </svg>
-            <label className="mt-1 block text-xs font-semibold text-zinc-600 dark:text-zinc-300">
-              {tc("input.weeklyH")}: <span dir="ltr" className="font-mono text-blue-700 dark:text-blue-300">{f.num(th, 1)} h</span>
-              <input
-                type="range"
-                min={30}
-                max={60}
-                step={0.5}
-                value={Math.min(60, Math.max(30, th))}
-                onChange={(e) => set({ week: { ...s.week, weeklyH: e.target.value, basis: "weekly" } })}
-                className="mt-1 w-full accent-blue-600"
-              />
-            </label>
-          </div>
+          <PhoneMini slot={1} title={t("gauge.title")}>
+            <div className="w-[320px] max-w-full">
+              <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("gauge.title")} className="max-w-full">
+                {zones.map((z, i) => (
+                  <path key={i} d={arc(z.from, z.to)} fill="none" stroke={z.color} strokeWidth={22} />
+                ))}
+                {[0, th, LIMIT, max].filter((v, i, a) => a.indexOf(v) === i && v <= max).map((v) => {
+                  const p = pt(v, r + 18);
+                  return (
+                    <text key={v} x={p.x} y={p.y + 3} textAnchor="middle" fontSize={9} fontWeight={v === th ? 800 : 500} className={axisText}>{`${f.num(v, 1)}h`}</text>
+                  );
+                })}
+                <line x1={cx} y1={cy} x2={needle.x} y2={needle.y} stroke="currentColor" strokeWidth={3} strokeLinecap="round" style={{ transition: "all 400ms ease" }} />
+                <circle cx={cx} cy={cy} r={6} fill="currentColor" />
+                <text x={cx} y={cy - 40} textAnchor="middle" fontSize={20} fontWeight={800} className={valueText}>{f.durHm(w.totalSeconds)}</text>
+                <text x={cx} y={cy - 24} textAnchor="middle" fontSize={10} fontWeight={700} fill={total <= th ? C.add : total <= LIMIT ? C.ot : C.sub}>{status}</text>
+              </svg>
+              <label className="mt-1 block text-xs font-semibold text-zinc-600 dark:text-zinc-300">
+                {tc("input.weeklyH")}: <span dir="ltr" className="font-mono text-blue-700 dark:text-blue-300">{f.num(th, 1)} h</span>
+                <input
+                  type="range"
+                  min={30}
+                  max={60}
+                  step={0.5}
+                  value={Math.min(60, Math.max(30, th))}
+                  onChange={(e) => set({ week: { ...s.week, weeklyH: e.target.value, basis: "weekly" } })}
+                  className="mt-1 w-full accent-blue-600"
+                />
+              </label>
+            </div>
+          </PhoneMini>
         }
         rows={[
           { label: tc("result.weekTotal"), value: f.dur(w.totalSeconds) },

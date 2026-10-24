@@ -215,6 +215,7 @@ export function CircleAreaBars() {
   return (
     <IndicatorCard
       id="area-bars"
+      mini={0}
       title={t("bars.title")}
       heading={t("bars.heading")}
       intro={t("bars.intro")}
@@ -457,6 +458,7 @@ export function CirclePolygonGauge() {
   return (
     <IndicatorCard
       id="polygon-gauge"
+      mini={1}
       title={t("gauge.title")}
       heading={t("gauge.heading", { n: p.sides })}
       intro={t("gauge.intro")}

@@ -80,6 +80,7 @@ export default function SwSentenceBreaths() {
 
   return (
     <SwIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

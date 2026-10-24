@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import RatioBar from "@/components/tool-ui/RatioBar";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import HouseAffordabilityShareExportModal from "./HouseAffordabilityShareExportModal";
 import type {
   HouseAffordabilityResult as HomePriceResult,
@@ -224,6 +225,7 @@ export default function HouseAffordabilityResult({
         {mode === "business" && <Stat title={t("aboveFold.monthlyPaymentLabel")} value={money(businessResult.monthlyPayment)} />}
       </div>
 
+      <PhoneMini slot={1} title={t("aboveFold.resultTitle")}>
       <div className="mt-5 flex flex-col gap-4 border-t border-zinc-200 pt-5 dark:border-zinc-800">
         {mode === "homePrice" && (
           <>
@@ -298,6 +300,7 @@ export default function HouseAffordabilityResult({
           />
         )}
       </div>
+      </PhoneMini>
     </SectionCard>
   );
 }

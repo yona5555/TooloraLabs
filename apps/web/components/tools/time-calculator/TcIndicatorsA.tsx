@@ -6,6 +6,7 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { ShiftDial } from "./TcDrawings";
 import { useTcPhrases } from "./TcResult";
 import { C, type CardProps } from "./state";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";
 const valueText = "fill-zinc-800 dark:fill-zinc-100";
@@ -93,40 +94,42 @@ export function TcTimesheetStackCard({ s, d, f }: CardProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
-          <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stack.title")} className="max-w-full">
-            <text x={L} y={18} fontSize={10} fontWeight={700} fill={C.add}>{`+ ${f.dur(sh.addedSeconds)}`}</text>
-            {pos.map((e, k) => {
-              const x0 = x(posStart[k]);
-              const w = Math.max(1, x(posStart[k] + e.v) - x0);
-              return (
-                <g key={e.r.id}>
-                  <rect x={x0} y={26} width={w} height={44} fill={greens[k % greens.length]} stroke="white" strokeWidth={1} style={{ transition: "all 350ms ease" }} />
-                  {w > 38 && (
-                    <>
-                      <text x={x0 + w / 2} y={44} textAnchor="middle" fontSize={9} fontWeight={700} fill="white">{(e.r.label || `#${e.i + 1}`).slice(0, 10)}</text>
-                      <text x={x0 + w / 2} y={60} textAnchor="middle" fontSize={9} fill="white">{f.durHm(e.v)}</text>
-                    </>
-                  )}
-                </g>
-              );
-            })}
-            {neg.map((e, k) => {
-              const x1 = x(negEnd[k]);
-              const x0 = x(Math.max(0, negEnd[k] - e.v));
-              return (
-                <g key={e.r.id}>
-                  <rect x={x0} y={80} width={Math.max(1, x1 - x0)} height={30} fill={C.sub} fillOpacity={0.85} style={{ transition: "all 350ms ease" }} />
-                  <text x={x0 - 4} y={99} textAnchor="end" fontSize={9} fontWeight={700} fill={C.sub}>{`−${f.durHm(e.v)}`}</text>
-                </g>
-              );
-            })}
-            <rect x={L} y={120} width={Math.max(1, x(net) - L)} height={30} rx={3} fill={C.main} style={{ transition: "all 350ms ease" }} />
-            <text x={Math.min(W - 60, x(net) + 6)} y={140} fontSize={11} fontWeight={800} fill={C.main}>{f.dur(sh.totalSeconds)}</text>
-            <line x1={x(net)} x2={x(net)} y1={22} y2={156} stroke={C.main} strokeDasharray="3 3" />
-            {[0, 0.25, 0.5, 0.75, 1].map((q) => (
-              <text key={q} x={x(span * q)} y={172} textAnchor="middle" fontSize={8.5} className={axisText}>{f.durHm(span * q)}</text>
-            ))}
-          </svg>
+          <PhoneMini slot={0} title={t("stack.title")}>
+            <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("stack.title")} className="max-w-full">
+              <text x={L} y={18} fontSize={10} fontWeight={700} fill={C.add}>{`+ ${f.dur(sh.addedSeconds)}`}</text>
+              {pos.map((e, k) => {
+                const x0 = x(posStart[k]);
+                const w = Math.max(1, x(posStart[k] + e.v) - x0);
+                return (
+                  <g key={e.r.id}>
+                    <rect x={x0} y={26} width={w} height={44} fill={greens[k % greens.length]} stroke="white" strokeWidth={1} style={{ transition: "all 350ms ease" }} />
+                    {w > 38 && (
+                      <>
+                        <text x={x0 + w / 2} y={44} textAnchor="middle" fontSize={9} fontWeight={700} fill="white">{(e.r.label || `#${e.i + 1}`).slice(0, 10)}</text>
+                        <text x={x0 + w / 2} y={60} textAnchor="middle" fontSize={9} fill="white">{f.durHm(e.v)}</text>
+                      </>
+                    )}
+                  </g>
+                );
+              })}
+              {neg.map((e, k) => {
+                const x1 = x(negEnd[k]);
+                const x0 = x(Math.max(0, negEnd[k] - e.v));
+                return (
+                  <g key={e.r.id}>
+                    <rect x={x0} y={80} width={Math.max(1, x1 - x0)} height={30} fill={C.sub} fillOpacity={0.85} style={{ transition: "all 350ms ease" }} />
+                    <text x={x0 - 4} y={99} textAnchor="end" fontSize={9} fontWeight={700} fill={C.sub}>{`−${f.durHm(e.v)}`}</text>
+                  </g>
+                );
+              })}
+              <rect x={L} y={120} width={Math.max(1, x(net) - L)} height={30} rx={3} fill={C.main} style={{ transition: "all 350ms ease" }} />
+              <text x={Math.min(W - 60, x(net) + 6)} y={140} fontSize={11} fontWeight={800} fill={C.main}>{f.dur(sh.totalSeconds)}</text>
+              <line x1={x(net)} x2={x(net)} y1={22} y2={156} stroke={C.main} strokeDasharray="3 3" />
+              {[0, 0.25, 0.5, 0.75, 1].map((q) => (
+                <text key={q} x={x(span * q)} y={172} textAnchor="middle" fontSize={8.5} className={axisText}>{f.durHm(span * q)}</text>
+              ))}
+            </svg>
+          </PhoneMini>
         }
         rows={[
           ...pos.slice(0, 5).map((e) => ({ label: e.r.label || tc("input.entryN", { n: e.i + 1 }), value: f.dur(e.v), note: `${f.num((e.v / span) * 100, 1)}%` })),

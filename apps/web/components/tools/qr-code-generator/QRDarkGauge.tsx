@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import QRIndicatorCard, { QRIndicatorUnavailable } from "./QRIndicatorCard";
 import { useQRModel } from "./QRLiveContext";
 
@@ -65,7 +66,7 @@ export default function QRDarkGauge() {
     <QRIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={0} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("dark"), value: `${f(a.darkModules)} / ${f(total)}` },
         { label: t("dataDark"), value: pct(a.regionDark.data, a.regionCounts.data) },

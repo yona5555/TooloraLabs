@@ -569,9 +569,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   main[data-phone-cards]:has([data-section-nav]) {
     padding-top: calc(57px + 1rem);
   }
-  /* Rule 2: the top mini row shows only where a mirrorable 2D indicator exists; the markets tools and
+  /* Rule 2: the top mini row shows only where a mirrorable 2D indicator (kit Drawing or a chosen
+     PhoneMini) exists; the markets tools and
      the live-ticker tools keep their own live cards (PhoneMiniCards) instead. */
-  main[data-phone-cards]:is(:not(:has([data-ph-mini-ok])), [data-phone-markets], :has([data-phone-ticker])) [data-phone-mini] {
+  main[data-phone-cards]:is(:not(:has([data-ph-mini-ok], [data-ph-mini-src])), [data-phone-markets], :has([data-phone-ticker])) [data-phone-mini] {
     display: none;
   }
   /*

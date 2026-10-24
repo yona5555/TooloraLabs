@@ -1,6 +1,7 @@
 "use client";
 import { Calculator } from "lucide-react";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
 import SectionCard from "@/components/tool-ui/SectionCard";
@@ -104,22 +105,24 @@ export default function SalesTaxResult({ result, hasCalculated, errorMessage, di
       </div>
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
-        <RatioGauge
-          wide
-          value={result.taxRate}
-          domainMin={0}
-          domainMax={GAUGE_DOMAIN_MAX}
-          zones={[
-            { key: "low", from: 0, to: 3, colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
-            { key: "moderate", from: 3, to: 6, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
-            { key: "high", from: 6, to: 10, colorClass: "stroke-amber-500 dark:stroke-amber-400" },
-            { key: "veryHigh", from: 10, to: GAUGE_DOMAIN_MAX, colorClass: "stroke-red-500 dark:stroke-red-400" },
-          ]}
-          valueLabel={`${formatLocalizedNumber(result.taxRate, digitStyle)}%`}
-          caption={gaugeZone}
-          ticks={[0, 3, 6, 10, GAUGE_DOMAIN_MAX]}
-          tickFormatter={(tick) => `${tick}%`}
-        />
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
+          <RatioGauge
+            wide
+            value={result.taxRate}
+            domainMin={0}
+            domainMax={GAUGE_DOMAIN_MAX}
+            zones={[
+              { key: "low", from: 0, to: 3, colorClass: "stroke-emerald-500 dark:stroke-emerald-400" },
+              { key: "moderate", from: 3, to: 6, colorClass: "stroke-blue-500 dark:stroke-blue-400" },
+              { key: "high", from: 6, to: 10, colorClass: "stroke-amber-500 dark:stroke-amber-400" },
+              { key: "veryHigh", from: 10, to: GAUGE_DOMAIN_MAX, colorClass: "stroke-red-500 dark:stroke-red-400" },
+            ]}
+            valueLabel={`${formatLocalizedNumber(result.taxRate, digitStyle)}%`}
+            caption={gaugeZone}
+            ticks={[0, 3, 6, 10, GAUGE_DOMAIN_MAX]}
+            tickFormatter={(tick) => `${tick}%`}
+          />
+        </PhoneMini>
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">

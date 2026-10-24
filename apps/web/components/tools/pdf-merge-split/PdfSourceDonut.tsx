@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PdfIndicatorCard, { PdfIndicatorUnavailable } from "./PdfIndicatorCard";
 import { SOURCE_FILL, usePdfModel } from "./PdfLiveContext";
 
@@ -61,7 +62,7 @@ export default function PdfSourceDonut() {
     <PdfIndicatorCard
       title={t("title")}
       intro={t(draft.mode === "merge" ? "introMerge" : "introSplit")}
-      indicator={svg}
+      indicator={<PhoneMini slot={1} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: draft.mode === "merge" ? t("files") : t("parts"), value: f(sources.length) },
         { label: t("largest"), value: `${sources[big]} · ${f(counts[big])}` },

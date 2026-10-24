@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import EduBarChart from "@/components/tool-ui/EduBarChart";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useScientificNotationLive, deriveEffectiveA } from "./ScientificNotationLiveContext";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 function digitsBeforeDecimal(exponent: number): number {
   return exponent >= 0 ? exponent + 1 : 1;
@@ -28,7 +29,9 @@ export default function DigitCountComparisonBarChart() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-center">
         <div className="shrink-0">
-          <EduBarChart bars={bars} ariaLabel={t("title")} />
+          <PhoneMini slot={1} title={t("title")}>
+            <EduBarChart bars={bars} ariaLabel={t("title")} />
+          </PhoneMini>
         </div>
         <WorkedExampleNote title={t("worked.title")} rows={rows.map((r) => ({ label: r.label, value: t("worked.digitsCount", { count: r.value }) }))} />
       </div>

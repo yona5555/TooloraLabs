@@ -4,6 +4,7 @@ import SectionCard from "@/components/tool-ui/SectionCard";
 import TriangleWorkedExampleNote from "./TriangleWorkedExampleNote";
 import { EXAMPLE, round } from "./triangleEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const W = 300;
 const H = 48;
@@ -30,19 +31,21 @@ export default function TrianglePerimeterStackedBar() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="shrink-0">
-          <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto block w-full max-w-[300px]">
-            {segments.map((s) => (
-              <g key={s.key}>
-                <rect x={s.x} y={8} width={Math.max(s.w, 1)} height={24} className={s.colorClass} />
-                <text x={s.x + s.w / 2} y={24} textAnchor="middle" fontSize={11} fontWeight={700} fill="white">
-                  {s.value}
-                </text>
-                <text x={s.x + s.w / 2} y={44} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
-                  {round(s.pct, 0)}%
-                </text>
-              </g>
-            ))}
-          </svg>
+          <PhoneMini slot={1} title={t("title")}>
+            <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("title")} className="mx-auto block w-full max-w-[300px]">
+              {segments.map((s) => (
+                <g key={s.key}>
+                  <rect x={s.x} y={8} width={Math.max(s.w, 1)} height={24} className={s.colorClass} />
+                  <text x={s.x + s.w / 2} y={24} textAnchor="middle" fontSize={11} fontWeight={700} fill="white">
+                    {s.value}
+                  </text>
+                  <text x={s.x + s.w / 2} y={44} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+                    {round(s.pct, 0)}%
+                  </text>
+                </g>
+              ))}
+            </svg>
+          </PhoneMini>
         </div>
         <TriangleWorkedExampleNote
           title={tw("title")}

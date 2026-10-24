@@ -17,6 +17,7 @@ import TipInternationalNorms from "./TipInternationalNorms";
 import TipPerPersonSplitDiagram from "./TipPerPersonSplitDiagram";
 import TipSensitivityLineDiagram from "./TipSensitivityLineDiagram";
 import type { TipResult as Result } from "./types";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const tool = new TipCalculatorTool();
 const RELATED_TOOLS = ["sales-tax-calculator", "discount-calculator", "fuel-cost-calculator"];
@@ -208,12 +209,14 @@ export default function TipCalculator({ education }: { education: ReactNode }) {
 
               {hasCalculated && result && sensitivityPoints && (
                 <SectionCard phoneRole="visual" title={t("sensitivityDiagram.title")}>
-                  <TipSensitivityLineDiagram
-                    points={sensitivityPoints}
-                    currentTipPercent={result.tipPercent}
-                    caption={t("sensitivityDiagram.caption")}
-                    xLabel={t("sensitivityDiagram.xLabel")}
-                  />
+                  <PhoneMini slot={1} title={t("sensitivityDiagram.title")}>
+                    <TipSensitivityLineDiagram
+                      points={sensitivityPoints}
+                      currentTipPercent={result.tipPercent}
+                      caption={t("sensitivityDiagram.caption")}
+                      xLabel={t("sensitivityDiagram.xLabel")}
+                    />
+                  </PhoneMini>
                 </SectionCard>
               )}
 

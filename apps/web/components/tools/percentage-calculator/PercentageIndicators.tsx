@@ -198,6 +198,7 @@ export function PercentageRingDonut() {
   return (
     <IndicatorCard
       id="ring-donut"
+      mini={0}
       title={t("rings.title")}
       heading={t("rings.heading")}
       intro={t("rings.intro")}
@@ -429,6 +430,7 @@ export function PercentageRangeGauge() {
   return (
     <IndicatorCard
       id="range-gauge"
+      mini={1}
       title={t("gauge.title")}
       heading={t("gauge.heading", { zone: t(`gauge.zones.${zone.k}`) })}
       intro={t("gauge.intro")}

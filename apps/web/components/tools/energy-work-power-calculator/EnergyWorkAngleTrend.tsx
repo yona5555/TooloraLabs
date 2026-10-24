@@ -72,6 +72,7 @@ export default function EnergyWorkAngleTrend() {
 
   return (
     <EnergyIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

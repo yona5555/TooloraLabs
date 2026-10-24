@@ -9,6 +9,7 @@ import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import { usePrintExport } from "@/hooks/usePrintExport";
@@ -266,7 +267,9 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
 
               {hasCalculated && waterfallStages && (
                 <SectionCard title={tDiagrams("waterfallDiagram.title")}>
-                  <InvoiceRunningTotalWaterfall stages={waterfallStages} formatValue={money} caption={tDiagrams("waterfallDiagram.caption")} />
+                  <PhoneMini slot={1} title={tDiagrams("waterfallDiagram.title")}>
+                    <InvoiceRunningTotalWaterfall stages={waterfallStages} formatValue={money} caption={tDiagrams("waterfallDiagram.caption")} />
+                  </PhoneMini>
                 </SectionCard>
               )}
 

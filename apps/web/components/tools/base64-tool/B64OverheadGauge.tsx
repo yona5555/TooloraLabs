@@ -64,6 +64,7 @@ export default function B64OverheadGauge() {
     <B64IndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={0}
       indicator={svg}
       rows={[
         { label: t("extra"), value: `${f(a.paddedLength - a.byteCount)} ${t("chars")}` },

@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RtIndicatorCard from "./RtIndicatorCard";
 import { useRtLive } from "./RtLiveContext";
 
@@ -82,7 +83,7 @@ export default function RtSentenceTimes() {
     <RtIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={indicator}
+      indicator={<PhoneMini slot={1} title={t("title")}>{indicator}</PhoneMini>}
       rows={[
         { label: t("count"), value: f(sentences.length) },
         { label: t("average"), value: t("seconds", { s: f(avg) }) },

@@ -53,6 +53,7 @@ export default function PaletteLuminanceSteps() {
     <PaletteIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={1}
       indicator={svg}
       rows={[
         { label: t("darkest"), value: `${dark.c.hex.toUpperCase()} · ${f(dark.c.luminance, 3)}` },

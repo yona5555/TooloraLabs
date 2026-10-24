@@ -9,6 +9,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useSurfaceAreaLive } from "./SurfaceAreaLiveContext";
 import { parseSurfaceDims, computeSurfaceAreaFor, round } from "./surfaceAreaEducationMath";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const LIGHT = { curve: "#2563eb", point: "#dc2626" };
 const DARK = { curve: "#60a5fa", point: "#f87171" };
@@ -27,16 +28,18 @@ export default function SurfaceAreaVsScaleFactorCurve() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="w-full lg:flex-1">
-          <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
-            <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseArea * 4.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
-              <Coordinates.Cartesian xAxis={{ lines: 0.25, labels: (x) => `${x}×` }} yAxis={{ lines: Math.max(1, Math.round((baseArea * 4) / 5)) }} />
-              <Plot.OfX y={(factor) => baseArea * factor * factor} domain={[0.5, 2]} color={colors.curve} weight={2.5} />
-              <Point x={1} y={baseArea} color={colors.point} svgCircleProps={{ r: 5 }} />
-              <Text x={1} y={baseArea} attach="n" attachDistance={12} color={colors.point} size={12}>
-                {`${round(baseArea)}`}
-              </Text>
-            </Mafs>
-          </div>
+          <PhoneMini slot={1} title={t("title")}>
+            <div aria-label={t("ariaLabel")} className="mafs-canvas w-full overflow-hidden rounded-xl">
+              <Mafs viewBox={{ x: [0.4, 2.1], y: [0, baseArea * 4.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+                <Coordinates.Cartesian xAxis={{ lines: 0.25, labels: (x) => `${x}×` }} yAxis={{ lines: Math.max(1, Math.round((baseArea * 4) / 5)) }} />
+                <Plot.OfX y={(factor) => baseArea * factor * factor} domain={[0.5, 2]} color={colors.curve} weight={2.5} />
+                <Point x={1} y={baseArea} color={colors.point} svgCircleProps={{ r: 5 }} />
+                <Text x={1} y={baseArea} attach="n" attachDistance={12} color={colors.point} size={12}>
+                  {`${round(baseArea)}`}
+                </Text>
+              </Mafs>
+            </div>
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

@@ -68,6 +68,7 @@ export function FrequencyHistogram({ d, f }: IndicatorProps) {
   return (
     <IndicatorCard phoneRole="visual"
       id="histogram"
+      mini={0}
       title={t("hist.title")}
       heading={t("hist.heading", { count: f.int(d.k), bins: f.int(d.bins.length) })}
       intro={t("hist.intro")}
@@ -133,6 +134,7 @@ export function RunningAverage({ d, f }: IndicatorProps) {
   return (
     <IndicatorCard
       id="running-average"
+      mini={1}
       title={t("mean.title")}
       heading={t("mean.heading", { mu: f.num(d.mu, 2) })}
       intro={t("mean.intro")}

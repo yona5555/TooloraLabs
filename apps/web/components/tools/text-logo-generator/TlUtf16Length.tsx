@@ -43,6 +43,7 @@ export default function TlUtf16Length() {
 
   return (
     <TlIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

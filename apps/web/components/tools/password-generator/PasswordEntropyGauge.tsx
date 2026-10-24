@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { usePasswordModel } from "./PasswordLiveContext";
 import { getStrengthTier, STRENGTH_TIER_ORDER } from "./crackTime";
@@ -61,7 +62,7 @@ export default function PasswordEntropyGauge() {
     <PasswordIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={0} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("band"), value: `${STRENGTH_TIER_ORDER.indexOf(tier) + 1} / 5 · ${tt(tier)}` },
         { label: t("next"), value: next ? `+${f(next - s.entropyBits, 1)} → ${next}` : "—" },

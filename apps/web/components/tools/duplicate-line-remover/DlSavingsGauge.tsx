@@ -55,6 +55,7 @@ export default function DlSavingsGauge() {
     <DlIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={0}
       indicator={svg}
       rows={[
         { label: t("total"), value: f(out.totalLines) },

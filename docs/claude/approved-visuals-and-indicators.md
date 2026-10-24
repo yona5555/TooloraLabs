@@ -98,6 +98,13 @@ InfoSection, AdSpace, ToolPageLayout) — never wire it per tool.
      card's own visual element in compact mode (`MiniContext`: SVG only, no handle, no refs), so it is live
      with the card's state; tap scrolls to the card. Never 3D, nothing generated. Hidden where no such
      indicator exists, on the markets tools and where live ticker cards (`PhoneMiniCards`) already show.
+     Every other tool CHOOSES its two: `PhoneMini` (`indicator-kit/PhoneMini.tsx`; or the `mini={0|1}` prop on
+     the markets/kit `IndicatorCard` and the tools' own card shells) wraps one of the tool's own 2D indicators
+     (no 3D; formula card + main result value only when no 2D indicator fits). A hidden marker before the
+     visual (no wrapper box, desktop unchanged); on phone a lazy copy of the same element is scaled into the
+     slot, inert and aria-hidden, tap scrolls to the original. A chosen page skips the automatic mirror.
+     A visual that holds a parent-created ref (drag, hover, measure) is first extracted so each copy owns its
+     ref. Per-tool choices: `scripts/output/top-cards-map.txt` (all 98 tools).
   3. **One continuous column:** tool page `<main>` is one surface from the header to the footer (dark:
      zinc-950, light: `--bp-key`), 10px margins so the blueprint grid shows on both sides, 8px inner
      padding; the pinned nav is aligned to it.

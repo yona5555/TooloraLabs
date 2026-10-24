@@ -2,6 +2,7 @@
 import { DAY_CODES, findClassConflicts } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { classColor, fmt, hm, toMinutes, type Derived, type StudioState } from "./studio";
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
 
@@ -122,6 +123,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}
         indicator={
+          <PhoneMini slot={1} title={t("ind.load.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.load.title")} className="max-w-full">
             <line x1={10} x2={W - 10} y1={B} y2={B} stroke="currentColor" strokeOpacity={0.35} />
             {days.map((day, i) => {
@@ -153,6 +155,7 @@ export function ScheduleDailyLoadCard({ d }: SchedIndicatorProps) {
               </g>
             )}
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...d.shownDays.map((day) => {

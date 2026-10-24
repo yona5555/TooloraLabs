@@ -3,11 +3,13 @@ import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
 /** §32 shell shared by this tool's indicators: blue-header card (title only), one intro line, the indicator with its WORKED EXAMPLE table beside it. */
-export default function SdIndicatorCard({ title, intro, indicator, rows }: { title: string; intro: string; indicator: ReactNode; rows: Row[] }) {
+export default function SdIndicatorCard({ title, intro, indicator: visual, rows, mini }: { title: string; intro: string; indicator: ReactNode; rows: Row[]; /** Rule 2: this card's visual is the page's top mini card 0 or 1 on phone. */ mini?: 0 | 1 }) {
+  const indicator = mini === undefined ? visual : <PhoneMini slot={mini} title={title}>{visual}</PhoneMini>;
   const t = useTranslations("tools.standard-deviation-calculator.education.lab");
   return (
     <SectionCard title={title}>

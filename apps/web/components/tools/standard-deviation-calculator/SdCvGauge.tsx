@@ -67,6 +67,7 @@ export default function SdCvGauge() {
 
   return (
     <SdIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={gauge}

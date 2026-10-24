@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import PasswordIndicatorCard, { PasswordIndicatorUnavailable } from "./PasswordIndicatorCard";
 import { CLASS_FILL, usePasswordModel } from "./PasswordLiveContext";
 
@@ -72,7 +73,7 @@ export default function PasswordClassDonut() {
     <PasswordIndicatorCard
       title={t("title")}
       intro={t(draft.mode === "passphrase" ? "introWords" : "intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={1} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         { label: t("length"), value: f(total) },
         { label: t("most"), value: `${tc(top)} · ${f((classes[top] / Math.max(1, total)) * 100, 1)}%` },

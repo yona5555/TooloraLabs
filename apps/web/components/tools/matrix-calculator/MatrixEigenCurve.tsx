@@ -63,6 +63,7 @@ export default function MatrixEigenCurve() {
 
   return (
     <MatrixIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={chart}

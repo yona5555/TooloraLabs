@@ -92,6 +92,7 @@ export default function SdBellReference() {
 
   return (
     <SdIndicatorCard
+      mini={0}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

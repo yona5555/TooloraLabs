@@ -67,6 +67,7 @@ export default function MmmRangeZoneStrip() {
 
   return (
     <MmmIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={strip}

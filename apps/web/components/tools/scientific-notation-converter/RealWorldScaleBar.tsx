@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { useScientificNotationLive, deriveEffectiveA } from "./ScientificNotationLiveContext";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const REFERENCE: { key: string; exponent: number }[] = [
   { key: "atom", exponent: -10 },
@@ -26,27 +27,29 @@ export default function RealWorldScaleBar() {
     <SectionCard title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center">
-        <div dir="ltr" className="w-full lg:flex-1">
-          <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
-            {REFERENCE.map((r) => (
-              <div key={r.key} className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-zinc-400 dark:bg-zinc-500" style={{ left: `${((r.exponent - -10) / 26) * 100}%` }} />
-            ))}
-            <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
+        <PhoneMini slot={0} title={t("title")}>
+          <div dir="ltr" className="w-full lg:flex-1">
+            <div className="relative h-2 w-full rounded-full bg-zinc-200 dark:bg-zinc-700">
+              {REFERENCE.map((r) => (
+                <div key={r.key} className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-zinc-400 dark:bg-zinc-500" style={{ left: `${((r.exponent - -10) / 26) * 100}%` }} />
+              ))}
+              <div className="absolute top-1/2 h-4 w-4 -translate-y-1/2 -translate-x-1/2 rounded-full border-2 border-white bg-blue-600 transition-all duration-300 dark:border-zinc-900" style={{ left: `${pct}%` }} />
+            </div>
+            <div className="relative mt-2 h-14 w-full text-[10px]">
+              {REFERENCE.map((r, i) => {
+                const left = ((r.exponent - -10) / 26) * 100;
+                // the end labels hang inward so they stay inside the card on a phone
+                const align = left === 0 ? "text-start" : left === 100 ? "-translate-x-full text-end" : "-translate-x-1/2 text-center";
+                return (
+                  <div key={r.key} className={`absolute ${align}`} style={{ left: `${left}%`, top: `${(i % 2) * 24}px` }}>
+                    <div className="font-semibold text-zinc-600 dark:text-zinc-300">{t(`items.${r.key}`)}</div>
+                    <div className="text-zinc-400 dark:text-zinc-500">{`10^${r.exponent}`}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div className="relative mt-2 h-14 w-full text-[10px]">
-            {REFERENCE.map((r, i) => {
-              const left = ((r.exponent - -10) / 26) * 100;
-              // the end labels hang inward so they stay inside the card on a phone
-              const align = left === 0 ? "text-start" : left === 100 ? "-translate-x-full text-end" : "-translate-x-1/2 text-center";
-              return (
-                <div key={r.key} className={`absolute ${align}`} style={{ left: `${left}%`, top: `${(i % 2) * 24}px` }}>
-                  <div className="font-semibold text-zinc-600 dark:text-zinc-300">{t(`items.${r.key}`)}</div>
-                  <div className="text-zinc-400 dark:text-zinc-500">{`10^${r.exponent}`}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        </PhoneMini>
         <WorkedExampleNote title={t("worked.title")} rows={[{ label: t("worked.currentExponent"), value: `10^${Math.round(rawExponentA)}`, emphasize: true }]} />
       </div>
     </SectionCard>

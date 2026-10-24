@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import type { CurrencyCode } from "@/lib/currency";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import RatioGauge from "@/components/tool-ui/RatioGauge";
 import DiscountPriceBar from "./DiscountPriceBar";
 import DiscountShareExportModal from "./DiscountShareExportModal";
@@ -97,6 +98,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
       </div>
 
       <div className="mt-5 flex justify-center border-t border-zinc-200 pt-5 dark:border-zinc-800">
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
         <RatioGauge
           wide
           value={result.effectiveDiscountPercent}
@@ -113,6 +115,7 @@ export default function DiscountResult({ result, hasCalculated, errorMessage, di
           ticks={[0, 10, 25, 50, GAUGE_DOMAIN_MAX]}
           tickFormatter={(tick) => `${tick}%`}
         />
+        </PhoneMini>
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-2 border-t border-zinc-200 pt-5 text-center dark:border-zinc-800">

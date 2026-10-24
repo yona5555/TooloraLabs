@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import MortgagePaymentDonut from "./MortgagePaymentDonut";
@@ -80,11 +81,13 @@ export default function MortgageResult({ result, digitStyle }: MortgageResultPro
       action={<MortgageShareExportModal mode="standard" inputRows={inputRows} resultRows={resultRows} heroLabel={heroLabel} heroValue={heroValue} sentence={sentence} table={scheduleTable} />}
     >
       <div className="flex flex-wrap items-center justify-center gap-6">
-        <MortgagePaymentDonut
-          segments={segments}
-          centerValue={currency(result.monthlyPayment)}
-          centerLabel={t("aboveFold.perMonth")}
-        />
+        <PhoneMini slot={0} title={t("aboveFold.resultTitle")}>
+          <MortgagePaymentDonut
+            segments={segments}
+            centerValue={currency(result.monthlyPayment)}
+            centerLabel={t("aboveFold.perMonth")}
+          />
+        </PhoneMini>
       </div>
 
       <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-zinc-200 pt-4 text-sm dark:border-zinc-800">

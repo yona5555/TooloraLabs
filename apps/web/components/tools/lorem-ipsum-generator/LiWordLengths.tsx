@@ -62,6 +62,7 @@ export default function LiWordLengths() {
 
   return (
     <LiIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

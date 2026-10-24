@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { Mafs, Coordinates, Plot, Point, Text } from "mafs";
 import "mafs/core.css";
 import "@/components/tool-ui/mafsTheme.css";
@@ -36,19 +37,21 @@ export default function TrigWaveCurve() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div dir="ltr" className="mafs-canvas w-full overflow-hidden rounded-xl lg:flex-1">
-          <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
-            <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
-            <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
-            <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.emerald} />
-            <Point x={dims.angleDeg} y={sin} color={colors.rose} />
-            <Point x={dims.angleDeg} y={cos} color={colors.emerald} />
-            <Text x={20} y={1.15} size={11} color={colors.rose}>
-              sin(x)
-            </Text>
-            <Text x={20} y={-1.15} size={11} color={colors.emerald}>
-              cos(x)
-            </Text>
-          </Mafs>
+          <PhoneMini slot={1} title={t("title")}>
+            <Mafs viewBox={{ x: [0, 360], y: [-1.3, 1.3] }} height={200} pan={false} zoom={false} preserveAspectRatio={false}>
+              <Coordinates.Cartesian xAxis={{ lines: 90 }} yAxis={{ lines: 0.5, labels: (v) => (Math.abs(v) <= 1 ? `${v}` : "") }} />
+              <Plot.OfX y={(x) => Math.sin((x * Math.PI) / 180)} color={colors.rose} />
+              <Plot.OfX y={(x) => Math.cos((x * Math.PI) / 180)} color={colors.emerald} />
+              <Point x={dims.angleDeg} y={sin} color={colors.rose} />
+              <Point x={dims.angleDeg} y={cos} color={colors.emerald} />
+              <Text x={20} y={1.15} size={11} color={colors.rose}>
+                sin(x)
+              </Text>
+              <Text x={20} y={-1.15} size={11} color={colors.emerald}>
+                cos(x)
+              </Text>
+            </Mafs>
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

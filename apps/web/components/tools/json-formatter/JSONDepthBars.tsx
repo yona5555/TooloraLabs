@@ -54,6 +54,7 @@ export default function JSONDepthBars() {
   const leaves = counts[counts.length - 1];
   return (
     <JSONIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

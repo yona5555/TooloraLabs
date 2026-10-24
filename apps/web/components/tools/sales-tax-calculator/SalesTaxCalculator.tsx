@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { formatLocalizedNumber, parseLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import { SalesTaxCalculator as SalesTaxCalculatorTool } from "@tooloralabs/tools";
 
@@ -213,7 +214,9 @@ export default function SalesTaxCalculator({ education }: { education: ReactNode
 
               {hasCalculated && totalByRatePoints && (
                 <SectionCard phoneRole="visual" title={t("totalByRateDiagram.title")}>
-                  <SalesTaxTotalByRateDiagram points={totalByRatePoints} currentRate={result?.taxRate ?? 0} caption={t("totalByRateDiagram.caption")} xLabel={t("totalByRateDiagram.xLabel")} />
+                  <PhoneMini slot={1} title={t("totalByRateDiagram.title")}>
+                    <SalesTaxTotalByRateDiagram points={totalByRatePoints} currentRate={result?.taxRate ?? 0} caption={t("totalByRateDiagram.caption")} xLabel={t("totalByRateDiagram.xLabel")} />
+                  </PhoneMini>
                 </SectionCard>
               )}
 

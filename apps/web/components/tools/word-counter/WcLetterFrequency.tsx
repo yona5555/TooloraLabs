@@ -40,6 +40,7 @@ export default function WcLetterFrequency() {
 
   return (
     <WcIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

@@ -146,6 +146,7 @@ export function BalChargeCard({ side }: { side: Side }) {
     <IndicatorCard
       idPrefix="bal"
       n={3}
+      mini={1}
       side={side}
       kind="2d"
       title={t("title")}
@@ -386,6 +387,7 @@ export function BalRingsCard({ side }: { side: Side }) {
     <IndicatorCard
       idPrefix="bal"
       n={7}
+      mini={0}
       side={side}
       kind="2d"
       title={t("title")}

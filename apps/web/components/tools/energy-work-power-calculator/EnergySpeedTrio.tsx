@@ -49,6 +49,7 @@ export default function EnergySpeedTrio() {
 
   return (
     <EnergyIndicatorCard
+      mini={1}
       title={t("title")}
       intro={t("intro")}
       indicator={svg}

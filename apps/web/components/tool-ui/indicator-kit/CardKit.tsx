@@ -6,6 +6,7 @@ import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import { GlassHandle, usePrefersReducedMotion, type HandleDirection } from "@/components/tool-ui/glass/GlassPrimitives";
 import { hasWords, subParts } from "@/components/tool-ui/MixedText";
 import { snap } from "./format";
+import PhoneMini from "./PhoneMini";
 import { Drawing } from "./SvgBits";
 
 // Rule 2: the top mini card mirror, fetched only on phone.
@@ -289,9 +290,13 @@ export function IndicatorCard({
   kind,
   idPrefix = "ph",
   phoneRole,
+  mini,
 }: {
   idPrefix?: string;
   phoneRole?: PhoneRole;
+  /** Rule 2: this card is the page's chosen top mini card 0 or 1 on phone (PhoneMini), for a 2D
+   *  visual that is not a kit Drawing (those are mirrored automatically). */
+  mini?: 0 | 1;
   n: number;
   title: string;
   subtitle: string;
@@ -338,7 +343,13 @@ export function IndicatorCard({
         <div className={`mt-4 flex flex-col gap-4 lg:items-stretch ${side === "visual-left" ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
           <figure className="m-0 flex min-w-0 flex-col gap-3 lg:basis-[57%]" data-ph-figure>
             <div data-ph-drawing dir="ltr" className="relative flex w-full flex-1 flex-col">
-              {visual}
+              {mini === undefined ? (
+                visual
+              ) : (
+                <PhoneMini slot={mini} title={<RichText text={title} />} label={title}>
+                  {visual}
+                </PhoneMini>
+              )}
             </div>
             {controls}
             <figcaption dir="auto" className="text-center text-xs leading-5" style={{ color: "var(--ph-ink-muted)" }}>

@@ -2,7 +2,7 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
-import { IndicatorCard, KitControls, SvgChem, KitTable, KitTrack, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
+import { IndicatorCard, KitControls, SvgChem, KitTable, KitTrack, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
 import { clamp, f1, f2, ratio, sci, sup } from "@/components/tool-ui/indicator-kit/format";
 import { classify, DYES, dyeCss, dyeForm, EQUIVALENCE_ML, ions, KW_SEED_INDEX, KW_TABLE, PH_SEED, TITRATION, titrationPh, titrationSeed } from "./phMath";
 
@@ -189,20 +189,10 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(KW_SEED_INDEX, { min: 0, max: KW_TABLE.length - 1, step: 1 });
   const [hover, setHover] = useState<string | null>(null);
-  const HMIN = 214;
-  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
   const row = KW_TABLE[s.value];
   const pH = PH_SEED;
   const pOH = row.pKw - pH;
   const neutral = row.pKw / 2;
-  const angle = clamp((pOH - pH) * 2.2, -16, 16);
-  const H = Math.max(HMIN, hBox);
-  const cx = W / 2;
-  const cy = 86 + (H - HMIN) / 3;
-  const arm = Math.min(W / 2 - 54, 220);
-  const rad = (angle * Math.PI) / 180;
-  const L = [cx - arm * Math.cos(rad), cy - arm * Math.sin(rad)];
-  const R = [cx + arm * Math.cos(rad), cy + arm * Math.sin(rad)];
   const valueText = `${row.t} °C`;
   const rows: KitRow[] = [
     { key: "t", label: t("rowT"), value: `${row.t} °C` },
@@ -213,16 +203,6 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
     { key: "neutral", label: t("rowNeutral"), value: f2(neutral) },
     { key: "class", label: t("rowClass"), value: tc(classify(pH, neutral)) },
   ];
-  const pan = (p: number[], text: string, key: string, tint: string) => (
-    <g onPointerEnter={() => setHover(key)} onPointerLeave={() => setHover(null)}>
-      <line x1={p[0]} y1={p[1]} x2={p[0]} y2={p[1] + 32} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />
-      <ellipse cx={p[0]} cy={p[1] + 58} rx={48} ry={26} style={{ fill: "var(--ph-surface)", ...lit(hover === key) }} />
-      <ellipse cx={p[0]} cy={p[1] + 58} rx={48} ry={26} style={{ fill: tint, opacity: 0.22 }} />
-      <text x={p[0]} y={p[1] + 62} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-        {text}
-      </text>
-    </g>
-  );
   return (
     <IndicatorCard
       n={4}
@@ -238,21 +218,47 @@ export function PhKwBalanceCard({ side }: { side: Side }) {
         </>
       }
       table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`pH ${f2(pH)} + pOH ${f2(pOH)} = pKw ${row.pKw.toFixed(3)}`}>
-            <path d={`M ${cx} ${cy} L ${cx - 34} ${H - 12} Q ${cx} ${H - 2} ${cx + 34} ${H - 12} Z`} style={{ fill: "var(--ph-accent-soft)", stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinejoin="round" />
-            <line x1={L[0]} y1={L[1]} x2={R[0]} y2={R[1]} strokeWidth={10} strokeLinecap="round" style={{ stroke: "var(--ph-accent-strong)" }} />
-            <circle cx={cx} cy={cy} r={9} style={{ fill: "var(--ph-knob)", stroke: "var(--ph-line)" }} strokeWidth={2} />
-            {pan(L, `pH ${f2(pH)}`, "ph", "var(--ph-ion-h)")}
-            {pan(R, `pOH ${f2(pOH)}`, "poh", "var(--ph-ion-oh)")}
-            <text x={cx} y={cy - 62} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-              {`pKw = ${row.pKw.toFixed(3)}`}
-            </text>
-          </svg>
-        </div>
-      }
+      mini={1}
+      visual={<PhKwDrawing pKw={row.pKw} pH={pH} pOH={pOH} hover={hover} setHover={setHover} />}
     />
+  );
+}
+
+/** Card 4's drawing; it owns its measured box so the phone mini copy (PhoneMini) measures its own. */
+function PhKwDrawing({ pKw, pH, pOH, hover, setHover }: { pKw: number; pH: number; pOH: number; hover: string | null; setHover: (k: string | null) => void }) {
+  const HMIN = 214;
+  const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: HMIN });
+  const angle = clamp((pOH - pH) * 2.2, -16, 16);
+  const H = Math.max(HMIN, hBox);
+  const cx = W / 2;
+  const cy = 86 + (H - HMIN) / 3;
+  const arm = Math.min(W / 2 - 54, 220);
+  const rad = (angle * Math.PI) / 180;
+  const L = [cx - arm * Math.cos(rad), cy - arm * Math.sin(rad)];
+  const R = [cx + arm * Math.cos(rad), cy + arm * Math.sin(rad)];
+  const pan = (p: number[], text: string, key: string, tint: string) => (
+    <g onPointerEnter={() => setHover(key)} onPointerLeave={() => setHover(null)}>
+      <line x1={p[0]} y1={p[1]} x2={p[0]} y2={p[1] + 32} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />
+      <ellipse cx={p[0]} cy={p[1] + 58} rx={48} ry={26} style={{ fill: "var(--ph-surface)", ...lit(hover === key) }} />
+      <ellipse cx={p[0]} cy={p[1] + 58} rx={48} ry={26} style={{ fill: tint, opacity: 0.22 }} />
+      <text x={p[0]} y={p[1] + 62} fontSize={12.5} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+        {text}
+      </text>
+    </g>
+  );
+  return (
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={`pH ${f2(pH)} + pOH ${f2(pOH)} = pKw ${pKw.toFixed(3)}`}>
+        <path d={`M ${cx} ${cy} L ${cx - 34} ${H - 12} Q ${cx} ${H - 2} ${cx + 34} ${H - 12} Z`} style={{ fill: "var(--ph-accent-soft)", stroke: "var(--ph-line)" }} strokeWidth={1.5} strokeLinejoin="round" />
+        <line x1={L[0]} y1={L[1]} x2={R[0]} y2={R[1]} strokeWidth={10} strokeLinecap="round" style={{ stroke: "var(--ph-accent-strong)" }} />
+        <circle cx={cx} cy={cy} r={9} style={{ fill: "var(--ph-knob)", stroke: "var(--ph-line)" }} strokeWidth={2} />
+        {pan(L, `pH ${f2(pH)}`, "ph", "var(--ph-ion-h)")}
+        {pan(R, `pOH ${f2(pOH)}`, "poh", "var(--ph-ion-oh)")}
+        <text x={cx} y={cy - 62} fontSize={14} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+          {`pKw = ${pKw.toFixed(3)}`}
+        </text>
+      </svg>
+    </div>
   );
 }
 
@@ -343,6 +349,36 @@ export function PhDialCard({ side }: { side: Side }) {
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(PH_SEED, { min: 0, max: 14, step: 0.5 });
   const [hover, setHover] = useState<string | null>(null);
+  const x = ions(s.value);
+  const valueText = `pH ${f2(s.value)}`;
+  const rows: KitRow[] = [
+    { key: "ph", label: "pH", value: f2(x.pH), isKey: true },
+    { key: "poh", label: t("rowPoh"), value: f2(x.pOH) },
+    { key: "h", label: t("rowH"), value: `${sci(x.h)} M` },
+    { key: "oh", label: t("rowOh"), value: `${sci(x.oh)} M` },
+    { key: "kw", label: t("rowKw"), value: sci(x.h * x.oh) },
+    { key: "ratio", label: t("rowRatio"), value: ratio(x.h / x.oh) },
+    { key: "class", label: t("rowClass"), value: tc(classify(s.value)) },
+  ];
+  return (
+    <IndicatorCard
+      n={7}
+      side={side}
+      kind="2d"
+      title={t("title")}
+      subtitle={t("subtitle")}
+      caption={t("caption", { pH: ltr(f2(x.pH)), pOH: ltr(f2(x.pOH)) })}
+      controls={<KitControls s={s} valueText={valueText} testId="ph-c7" />}
+      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
+      mini={0}
+      visual={<PhDialDrawing s={s} hover={hover} setHover={setHover} />}
+    />
+  );
+}
+
+/** Card 7's drawing; it owns its measured box, svg ref and drag so the phone mini copy (PhoneMini) gets its own. */
+function PhDialDrawing({ s, hover, setHover }: { s: Stepper; hover: string | null; setHover: (k: string | null) => void }) {
+  const t = useTranslations("tools.ph-calculator.visuals.dial");
   const [box, { w: W, h: hBox }] = useMeasuredSize<HTMLDivElement>({ w: W0, h: 270 });
   const wide = W >= 470;
   // Narrow: the readouts stack in the bottom gap under the dial, so the box is as tall as they need.
@@ -369,15 +405,6 @@ export function PhDialCard({ side }: { side: Side }) {
     const [x1, y1] = pt(b, r);
     return `M ${x0} ${y0} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
   };
-  const rows: KitRow[] = [
-    { key: "ph", label: "pH", value: f2(x.pH), isKey: true },
-    { key: "poh", label: t("rowPoh"), value: f2(x.pOH) },
-    { key: "h", label: t("rowH"), value: `${sci(x.h)} M` },
-    { key: "oh", label: t("rowOh"), value: `${sci(x.oh)} M` },
-    { key: "kw", label: t("rowKw"), value: sci(x.h * x.oh) },
-    { key: "ratio", label: t("rowRatio"), value: ratio(x.h / x.oh) },
-    { key: "class", label: t("rowClass"), value: tc(classify(s.value)) },
-  ];
   const on = (k: string) => hover === k;
   // Readouts: a column beside the dial when wide, else stacked in the needle-free bottom gap.
   const RX = wide ? C.x + RO + 36 : C.x;
@@ -387,63 +414,51 @@ export function PhDialCard({ side }: { side: Side }) {
   const anchor = wide ? "start" : "middle";
   const ry = twoCol ? [C.y - 40, C.y - 40, C.y + 16, C.y + 16, C.y + 66] : wide ? [C.y - 54, C.y - 22, C.y + 20, C.y + 46, C.y + 84] : [C.y + 40, C.y + 62, C.y + 94, C.y + 112, -1];
   return (
-    <IndicatorCard
-      n={7}
-      side={side}
-      kind="2d"
-      title={t("title")}
-      subtitle={t("subtitle")}
-      caption={t("caption", { pH: ltr(f2(x.pH)), pOH: ltr(f2(x.pOH)) })}
-      controls={<KitControls s={s} valueText={valueText} testId="ph-c7" />}
-      table={<KitTable rows={rows} flash={s.flash} activeKey={hover} onHover={setHover} caption={tc("worked")} />}
-      visual={
-        <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
-          <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
-            {Array.from({ length: 14 }, (_, i) => (
-              <path key={`o${i}`} d={arc(RO, i, i + 1)} fill="none" strokeWidth={on("ph") ? 18 : 15} strokeLinecap={i === 0 || i === 13 ? "round" : "butt"} style={{ stroke: `var(--ph-ui-${i})` }} onPointerEnter={() => setHover("ph")} onPointerLeave={() => setHover(null)} />
-            ))}
-            {Array.from({ length: 14 }, (_, i) => (
-              <path key={`i${i}`} d={arc(RI, i, i + 1)} fill="none" strokeWidth={on("poh") ? 12 : 9} strokeLinecap={i === 0 || i === 13 ? "round" : "butt"} style={{ stroke: `var(--ph-ui-${13 - i})`, opacity: 0.85 }} onPointerEnter={() => setHover("poh")} onPointerLeave={() => setHover(null)} />
-            ))}
-            {[0, 7, 14].map((p) => {
-              // Outer labels sit beyond the handle's puck; inner labels just inside the ring, a little in
-              // from each end so they never touch the round end caps.
-              const [ox, oy] = pt(p, RO + 30);
-              const [ix, iy] = pt(p === 0 ? 0.6 : p === 14 ? 13.4 : 7, RI - 19);
-              return (
-                <g key={p}>
-                  <text x={ox} y={oy + 4} fontSize={11} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
-                    {p}
-                  </text>
-                  <text x={ix} y={iy + 4} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
-                    {14 - p}
-                  </text>
-                </g>
-              );
-            })}
-            {/* Pointer between the two rings only, so it never crosses a ring label. */}
-            <line x1={pt(s.value, RI + 7)[0]} y1={pt(s.value, RI + 7)[1]} x2={pt(s.value, RO)[0]} y2={pt(s.value, RO)[1]} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
-            <text x={RX} y={ry[0]} fontSize={wide ? 26 : 17} fontWeight={800} textAnchor={anchor} style={{ fill: "var(--ph-ink)" }}>
-              {`pH ${f2(x.pH)}`}
-            </text>
-            <text x={RX2} y={ry[1]} fontSize={wide ? 17 : 13} fontWeight={700} textAnchor={anchor} style={{ fill: "var(--ph-ink-muted)" }}>
-              {`pOH ${f2(x.pOH)}`}
-            </text>
-            <text x={RX} y={ry[2]} fontSize={wide ? 14 : 12} fontWeight={on("h") ? 800 : 650} textAnchor={anchor} style={{ fill: "var(--ph-acid)" }}>
-              <SvgChem text={`[H⁺] ${sci(x.h)} M`} />
-            </text>
-            <text x={RX2} y={ry[3]} fontSize={wide ? 14 : 12} fontWeight={on("oh") ? 800 : 650} textAnchor={anchor} style={{ fill: "var(--ph-base)" }}>
-              <SvgChem text={`[OH⁻] ${sci(x.oh)} M`} />
-            </text>
-            {wide && (
-              <text x={RX} y={ry[4]} fontSize={14} fontWeight={600} textAnchor={anchor} style={{ fill: "var(--ph-ink-muted)" }}>
-                <SvgChem text={`[H⁺] × [OH⁻] = ${sci(x.h * x.oh)}`} />
+    <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
+      <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
+        {Array.from({ length: 14 }, (_, i) => (
+          <path key={`o${i}`} d={arc(RO, i, i + 1)} fill="none" strokeWidth={on("ph") ? 18 : 15} strokeLinecap={i === 0 || i === 13 ? "round" : "butt"} style={{ stroke: `var(--ph-ui-${i})` }} onPointerEnter={() => setHover("ph")} onPointerLeave={() => setHover(null)} />
+        ))}
+        {Array.from({ length: 14 }, (_, i) => (
+          <path key={`i${i}`} d={arc(RI, i, i + 1)} fill="none" strokeWidth={on("poh") ? 12 : 9} strokeLinecap={i === 0 || i === 13 ? "round" : "butt"} style={{ stroke: `var(--ph-ui-${13 - i})`, opacity: 0.85 }} onPointerEnter={() => setHover("poh")} onPointerLeave={() => setHover(null)} />
+        ))}
+        {[0, 7, 14].map((p) => {
+          // Outer labels sit beyond the handle's puck; inner labels just inside the ring, a little in
+          // from each end so they never touch the round end caps.
+          const [ox, oy] = pt(p, RO + 30);
+          const [ix, iy] = pt(p === 0 ? 0.6 : p === 14 ? 13.4 : 7, RI - 19);
+          return (
+            <g key={p}>
+              <text x={ox} y={oy + 4} fontSize={11} fontWeight={800} textAnchor="middle" style={{ fill: "var(--ph-ink)" }}>
+                {p}
               </text>
-            )}
-          </svg>
-          <SvgHandle x={pt(s.value, RO)[0]} y={pt(s.value, RO)[1]} viewW={W} viewH={H} direction="circular" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="ph-c7-handle" />
-        </div>
-      }
-    />
+              <text x={ix} y={iy + 4} fontSize={10.5} textAnchor="middle" style={{ fill: "var(--ph-ink-muted)" }}>
+                {14 - p}
+              </text>
+            </g>
+          );
+        })}
+        {/* Pointer between the two rings only, so it never crosses a ring label. */}
+        <line x1={pt(s.value, RI + 7)[0]} y1={pt(s.value, RI + 7)[1]} x2={pt(s.value, RO)[0]} y2={pt(s.value, RO)[1]} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} strokeLinecap="round" />
+        <text x={RX} y={ry[0]} fontSize={wide ? 26 : 17} fontWeight={800} textAnchor={anchor} style={{ fill: "var(--ph-ink)" }}>
+          {`pH ${f2(x.pH)}`}
+        </text>
+        <text x={RX2} y={ry[1]} fontSize={wide ? 17 : 13} fontWeight={700} textAnchor={anchor} style={{ fill: "var(--ph-ink-muted)" }}>
+          {`pOH ${f2(x.pOH)}`}
+        </text>
+        <text x={RX} y={ry[2]} fontSize={wide ? 14 : 12} fontWeight={on("h") ? 800 : 650} textAnchor={anchor} style={{ fill: "var(--ph-acid)" }}>
+          <SvgChem text={`[H⁺] ${sci(x.h)} M`} />
+        </text>
+        <text x={RX2} y={ry[3]} fontSize={wide ? 14 : 12} fontWeight={on("oh") ? 800 : 650} textAnchor={anchor} style={{ fill: "var(--ph-base)" }}>
+          <SvgChem text={`[OH⁻] ${sci(x.oh)} M`} />
+        </text>
+        {wide && (
+          <text x={RX} y={ry[4]} fontSize={14} fontWeight={600} textAnchor={anchor} style={{ fill: "var(--ph-ink-muted)" }}>
+            <SvgChem text={`[H⁺] × [OH⁻] = ${sci(x.h * x.oh)}`} />
+          </text>
+        )}
+      </svg>
+      <SvgHandle x={pt(s.value, RO)[0]} y={pt(s.value, RO)[1]} viewW={W} viewH={H} direction="circular" label={t("handle")} valueText={valueText} s={s} drag={drag} testId="ph-c7-handle" />
+    </div>
   );
 }

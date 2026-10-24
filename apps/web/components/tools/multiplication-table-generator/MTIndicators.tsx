@@ -63,6 +63,7 @@ export function ProductBars({ view, onPick }: P) {
   return (
     <IndicatorCard
       id="product-bars"
+      mini={0}
       title={t("bars.title")}
       heading={t("bars.heading", { a: f(view.a) })}
       intro={t("bars.intro")}
@@ -174,6 +175,7 @@ export function DistributiveBalance({ view }: P) {
   return (
     <IndicatorCard
       id="balance"
+      mini={1}
       title={t("balance.title")}
       heading={t("balance.heading", { a: f(view.a), b: f(view.b) })}
       intro={t("balance.intro")}

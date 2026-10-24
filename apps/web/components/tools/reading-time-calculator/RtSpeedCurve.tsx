@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { READING_SPEED_PRESETS } from "@tooloralabs/tools";
 import RtIndicatorCard from "./RtIndicatorCard";
 import { useRtLive } from "./RtLiveContext";
@@ -79,7 +80,7 @@ export default function RtSpeedCurve() {
     <RtIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={indicator}
+      indicator={<PhoneMini slot={0} title={t("title")}>{indicator}</PhoneMini>}
       rows={[
         { label: t("yourSpeed", { wpm: f(wpm) }), value: clock(yours), note: `${f(words)} ÷ ${f(wpm)} × ${f(60)}` },
         { label: t("trySpeed", { wpm: f(trial) }), value: clock(tried), note: `${f(words)} ÷ ${f(trial)} × ${f(60)}` },

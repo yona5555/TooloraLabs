@@ -1,5 +1,6 @@
 "use client";
 import { useLocale, useTranslations } from "next-intl";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { ltr } from "@/components/tool-ui/MixedText";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
 import { useOhmsModel } from "./OhmsLiveContext";
@@ -62,7 +63,7 @@ export default function OhmsResistanceTrio() {
     <OhmsIndicatorCard
       title={t("title")}
       intro={t("intro")}
-      indicator={svg}
+      indicator={<PhoneMini slot={1} title={t("title")}>{svg}</PhoneMini>}
       rows={[
         ...items.map((it, i) => ({
           label: names[i],

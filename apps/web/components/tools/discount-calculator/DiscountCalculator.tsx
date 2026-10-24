@@ -9,6 +9,7 @@ import { convertAmountString, DEFAULT_CURRENCY, type CurrencyCode } from "@/lib/
 import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
 import DiscountInputPanel from "./DiscountInputPanel";
@@ -215,7 +216,9 @@ export default function DiscountCalculator({ education }: { education: ReactNode
 
               {hasCalculated && waterfallStages && (
                 <SectionCard title={t("waterfallDiagram.title")}>
-                  <DiscountLiveWaterfallDiagram stages={waterfallStages} formatValue={money} caption={t("waterfallDiagram.caption")} />
+                  <PhoneMini slot={1} title={t("waterfallDiagram.title")}>
+                    <DiscountLiveWaterfallDiagram stages={waterfallStages} formatValue={money} caption={t("waterfallDiagram.caption")} />
+                  </PhoneMini>
                 </SectionCard>
               )}
 

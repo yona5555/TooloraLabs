@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { countdownDaysLeft, countdownBreakdown, weekendDays } from "@tooloralabs/tools";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { fmtInZone, fmtShortWeekday, hms, num, pct, type CdState, type Derived } from "./model";
 
 export type IndicatorProps = { state: CdState; setState: (s: CdState) => void; d: Derived };
@@ -38,6 +39,7 @@ export function CdRingsCard({ d }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
+          <PhoneMini slot={0} title={t("rings.title")}>
           <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} role="img" aria-label={t("rings.title")} style={{ direction: "ltr" }}>
             {rings.map((r) => {
               const circ = 2 * Math.PI * r.r;
@@ -64,6 +66,7 @@ export function CdRingsCard({ d }: IndicatorProps) {
               {hms(b.hours, b.minutes, b.seconds)}
             </text>
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...rings.map((r) => ({ label: `● ${t(`rings.${r.key}`)}`, value: r.value, note: r.note })),
@@ -241,6 +244,7 @@ export function CdWeekdayBarsCard({ state, d }: IndicatorProps) {
       <IndicatorWithTable
         workedExampleTitle={t("worked")}
         indicator={
+          <PhoneMini slot={1} title={t("weekdays.title")}>
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("weekdays.title")} className="max-w-full" style={{ direction: "ltr" }}>
             {order.map((dow, i) => {
               const v = d.weekdayCounts[dow];
@@ -256,6 +260,7 @@ export function CdWeekdayBarsCard({ state, d }: IndicatorProps) {
               );
             })}
           </svg>
+          </PhoneMini>
         }
         rows={[
           ...order.map((dow) => ({ label: fmtShortWeekday(locale, dow), value: num(d.weekdayCounts[dow]), note: off.has(dow) ? t("weekdays.weekend") : undefined })),

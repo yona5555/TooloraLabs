@@ -7,6 +7,7 @@ import WorkedExampleNote from "@/components/tool-ui/WorkedExampleNote";
 import { parseDataSet } from "./types";
 import { useStatisticsLive } from "./StatisticsLiveContext";
 import GapFreeRow from "@/components/tool-ui/GapFreeRow";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 const tool = new StatisticsCalculator();
 
@@ -34,7 +35,9 @@ export default function RangeVsStdDevComparison() {
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <GapFreeRow className="mt-4">
         <div className="shrink-0">
-          <EduBarChart bars={bars} ariaLabel={t("title")} />
+          <PhoneMini slot={0} title={t("title")}>
+            <EduBarChart bars={bars} ariaLabel={t("title")} />
+          </PhoneMini>
         </div>
         <WorkedExampleNote
           title={t("worked.title")}

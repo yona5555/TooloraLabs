@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState, type PointerEvent as ReactPointerEve
 import { useTranslations } from "next-intl";
 import { formatLocalizedNumber, type DigitStyle } from "@tooloralabs/core";
 import SectionCard from "@/components/tool-ui/SectionCard";
+import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import type { ComparisonRow } from "./types";
@@ -30,7 +31,8 @@ const BAR_WIDTH_RATIO = 0.5;
 const TOOLTIP_WIDTH = 170;
 const TOOLTIP_HEIGHT = 56;
 
-export default function BorrowingComparisonChart({ rows, digitStyle, currency }: BorrowingComparisonChartProps) {
+/** The chart drawing itself (own refs, hover and width), so the phone mini card can render a live copy of it. */
+function ComparisonPlot({ rows, digitStyle, currency }: BorrowingComparisonChartProps) {
   const t = useTranslations("tools.house-affordability-calculator");
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -88,60 +90,69 @@ export default function BorrowingComparisonChart({ rows, digitStyle, currency }:
   const tooltipY = MARGIN.top + 4;
 
   return (
+    <div ref={containerRef} dir="ltr" data-preview="visual" className="mt-4 overflow-x-auto">
+      <svg
+        ref={svgRef}
+        width={chartWidth}
+        height={CHART_HEIGHT}
+        viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
+        role="img"
+        aria-label={t("comparisonChart.title")}
+        className="block touch-none text-current select-none"
+        onPointerMove={handlePointerMove}
+        onPointerDown={handlePointerMove}
+        onPointerLeave={() => setHoverIndex(null)}
+      >
+        {valueTicks.map((tick) => (
+          <g key={tick}>
+            <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
+            <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
+              {money(tick)}
+            </text>
+          </g>
+        ))}
+        <line x1={MARGIN.left} y1={mainBottom} x2={chartWidth - MARGIN.right} y2={mainBottom} stroke="currentColor" strokeWidth={1} opacity={0.25} />
+
+        {rows.map((row, i) => (
+          <g key={row.purpose} opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.5}>
+            <rect x={barX(i)} y={yForValue(row.maxAmount)} width={barWidth} height={Math.max(mainBottom - yForValue(row.maxAmount), 0)} rx={3} className={PURPOSE_FILL[row.purpose]} />
+            <text x={groupCenterX(i)} y={yForValue(row.maxAmount) - 8} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
+              {money(row.maxAmount)}
+            </text>
+            <text x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
+              {t(`comparisonChart.purposeLabels.${row.purpose}`)}
+            </text>
+          </g>
+        ))}
+
+        {active && activeIndex !== null && (
+          <>
+            <line x1={groupCenterX(activeIndex)} y1={MARGIN.top} x2={groupCenterX(activeIndex)} y2={mainBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
+            <g transform={`translate(${tooltipX}, ${tooltipY})`}>
+              <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
+              <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
+                {t(`comparisonChart.purposeLabels.${active.purpose}`)}
+              </text>
+              <text x={10} y={35} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">
+                {t("comparisonChart.maxAmountLabel")}: {money(active.maxAmount)}
+              </text>
+            </g>
+          </>
+        )}
+      </svg>
+    </div>
+  );
+}
+
+export default function BorrowingComparisonChart({ rows, digitStyle, currency }: BorrowingComparisonChartProps) {
+  const t = useTranslations("tools.house-affordability-calculator");
+  return (
     <SectionCard phoneRole="visual" id="borrowing-comparison" title={t("comparisonChart.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("comparisonChart.intro")}</p>
 
-      <div ref={containerRef} dir="ltr" data-preview="visual" className="mt-4 overflow-x-auto">
-        <svg
-          ref={svgRef}
-          width={chartWidth}
-          height={CHART_HEIGHT}
-          viewBox={`0 0 ${chartWidth} ${CHART_HEIGHT}`}
-          role="img"
-          aria-label={t("comparisonChart.title")}
-          className="block touch-none text-current select-none"
-          onPointerMove={handlePointerMove}
-          onPointerDown={handlePointerMove}
-          onPointerLeave={() => setHoverIndex(null)}
-        >
-          {valueTicks.map((tick) => (
-            <g key={tick}>
-              <line x1={MARGIN.left} y1={yForValue(tick)} x2={chartWidth - MARGIN.right} y2={yForValue(tick)} stroke="currentColor" strokeWidth={1} opacity={0.08} />
-              <text x={MARGIN.left - 8} y={yForValue(tick) + 3} textAnchor="end" fontSize={9} fill="currentColor" opacity={0.6}>
-                {money(tick)}
-              </text>
-            </g>
-          ))}
-          <line x1={MARGIN.left} y1={mainBottom} x2={chartWidth - MARGIN.right} y2={mainBottom} stroke="currentColor" strokeWidth={1} opacity={0.25} />
-
-          {rows.map((row, i) => (
-            <g key={row.purpose} opacity={hoverIndex === null || i === hoverIndex ? 1 : 0.5}>
-              <rect x={barX(i)} y={yForValue(row.maxAmount)} width={barWidth} height={Math.max(mainBottom - yForValue(row.maxAmount), 0)} rx={3} className={PURPOSE_FILL[row.purpose]} />
-              <text x={groupCenterX(i)} y={yForValue(row.maxAmount) - 8} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-zinc-900 dark:fill-zinc-100">
-                {money(row.maxAmount)}
-              </text>
-              <text x={groupCenterX(i)} y={mainBottom + XAXIS_HEIGHT - 6} textAnchor="middle" fontSize={10} fill="currentColor" opacity={0.7}>
-                {t(`comparisonChart.purposeLabels.${row.purpose}`)}
-              </text>
-            </g>
-          ))}
-
-          {active && activeIndex !== null && (
-            <>
-              <line x1={groupCenterX(activeIndex)} y1={MARGIN.top} x2={groupCenterX(activeIndex)} y2={mainBottom} stroke="currentColor" strokeWidth={1} strokeDasharray="3 3" opacity={0.35} />
-              <g transform={`translate(${tooltipX}, ${tooltipY})`}>
-                <rect width={TOOLTIP_WIDTH} height={TOOLTIP_HEIGHT} rx={6} className="fill-white stroke-zinc-200 dark:fill-zinc-900 dark:stroke-zinc-700" strokeWidth={1} />
-                <text x={10} y={17} fontSize={10} fontWeight={700} className="fill-zinc-700 dark:fill-zinc-200">
-                  {t(`comparisonChart.purposeLabels.${active.purpose}`)}
-                </text>
-                <text x={10} y={35} fontSize={10} className="fill-zinc-600 dark:fill-zinc-300">
-                  {t("comparisonChart.maxAmountLabel")}: {money(active.maxAmount)}
-                </text>
-              </g>
-            </>
-          )}
-        </svg>
-      </div>
+      <PhoneMini slot={0} title={t("comparisonChart.title")}>
+        <ComparisonPlot rows={rows} digitStyle={digitStyle} currency={currency} />
+      </PhoneMini>
 
       <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-400">
         {rows.map((row) => (

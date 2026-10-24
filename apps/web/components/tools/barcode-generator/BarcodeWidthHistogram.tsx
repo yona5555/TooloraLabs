@@ -62,6 +62,7 @@ export default function BarcodeWidthHistogram() {
     <BarcodeIndicatorCard
       title={t("title")}
       intro={t("intro")}
+      mini={1}
       indicator={svg}
       rows={[
         { label: t("barCount"), value: f(a.bars) },
