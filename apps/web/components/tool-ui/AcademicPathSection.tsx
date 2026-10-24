@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 export type University = { name: string; note: string; url: string; online: string };
 
 type AcademicPathSectionProps = {
@@ -22,9 +24,18 @@ export default function AcademicPathSection({ title, intro, universities }: Acad
               target="_blank"
               rel="noopener noreferrer"
               dir="ltr"
-              className="mt-2 block max-w-full break-all text-sm font-medium underline decoration-dotted underline-offset-4"
+              className="mt-2 block max-w-full text-sm lg:break-all font-medium underline decoration-dotted underline-offset-4"
             >
-              {uni.url.replace(/^https?:\/\//, "")}
+              {/* a URL is not a word: it may wrap only after its separators, never mid-word */}
+              {uni.url
+                .replace(/^https?:\/\//, "")
+                .split(/(?<=[/.?=&_-])/)
+                .map((part, i) => (
+                  <Fragment key={i}>
+                    {part}
+                    <wbr />
+                  </Fragment>
+                ))}
             </a>
           </li>
         ))}

@@ -355,27 +355,59 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
  * Desktop (lg+) is untouched. */
 @media (max-width: 1023.98px) {
   /*
-   * Only prose wraps inside a word: a long word (German compounds, unit names) in a narrow box
-   * breaks instead of widening the page, and `anywhere` lets a flex or grid item shrink below it.
-   * Values and formulas are not prose: components/layout/FitNumbers.tsx marks every element whose
-   * text is a number or formula with [data-num]; those and [data-fit] (the page title) stay on one
-   * line, and FitNumbers shrinks their type when the box is narrower (§29).
+   * Text wraps only BETWEEN words, never inside one (Yousef 2026-10-24: `overflow-wrap: anywhere` here
+   * split "Quantity" or "City" letter by letter in narrow table columns and buttons). A box too narrow
+   * for a word is fixed where it is (tables size to their content and scroll inside themselves, below).
+   * Values and formulas: components/layout/FitNumbers.tsx marks every element whose text is a number
+   * or formula with [data-num]; those and [data-fit] (the page title) stay on one line, and FitNumbers
+   * shrinks their type when the box is narrower (§29).
    */
-  main {
+  main[data-phone-cards] {
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+  /* other pages keep the old wrapping until checked one by one (the phone home page is locked) */
+  main:not([data-phone-cards]) {
     overflow-wrap: anywhere;
   }
-  main :is([data-num], [data-fit]) {
+  main:not([data-phone-cards]) :is([data-num], [data-fit]) {
     overflow-wrap: normal;
+  }
+  main :is([data-num], [data-fit]) {
     white-space: nowrap;
   }
   main [data-fit-wrap] {
     white-space: normal;
   }
-  /* a table still wider than its card after that scrolls inside itself, never the page */
+  /*
+   * Tables: columns size to their content (no fixed min-width: with words unbreakable the columns can
+   * no longer be squeezed letter by letter) and header cells never wrap. A table still wider than its
+   * box scrolls inside itself, never the page (lib/phone/layout.ts marks it [data-scroll-x] when it
+   * has no scrolling container of its own), with a fade at the inline end as the hint; the trailing
+   * padding lets the last column scroll clear of the fade.
+   */
+  main[data-phone-cards] table {
+    table-layout: auto;
+    min-width: 0;
+  }
+  main[data-phone-cards] :is(th, td) {
+    font-size: max(12px, 1em);
+  }
+  main[data-phone-cards] th {
+    white-space: nowrap;
+  }
   main table[data-scroll-x] {
     display: block;
     max-width: 100%;
     overflow-x: auto;
+  }
+  main [data-scroll-x] {
+    padding-inline-end: 24px;
+    mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  }
+  main [dir="rtl"] [data-scroll-x], main[dir="rtl"] [data-scroll-x], [dir="rtl"] main [data-scroll-x] {
+    mask-image: linear-gradient(to left, #000 calc(100% - 24px), transparent);
   }
   /* a fieldset is min-content wide by default (UA style), so it would hold its card wider */
   main fieldset {
