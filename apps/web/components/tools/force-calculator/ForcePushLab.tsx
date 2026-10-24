@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { kinematicsAt } from "@tooloralabs/tools";
@@ -27,6 +27,7 @@ const SYMBOL: Record<Knob, string> = { force: "F", mass: "m", acceleration: "a" 
  * calculator, so the Result card, the 3D drawing and every indicator follow.
  */
 export default function ForcePushLab() {
+  const svgId = useId();
   const t = useTranslations("tools.force-calculator.education.lab.push");
   const { setDim } = useForceLive();
   const { draft, sl, f } = useForceModel();
@@ -99,12 +100,12 @@ export default function ForcePushLab() {
                 );
               })}
               <rect x={bx} y={y - BLOCK} width={BLOCK} height={BLOCK} rx={4} className={i === 0 ? "fill-blue-600 dark:fill-blue-400" : "fill-amber-500 dark:fill-amber-400"} />
-              <line x1={bx - 22} y1={y - BLOCK / 2} x2={bx - 4} y2={y - BLOCK / 2} strokeWidth={3} markerEnd="url(#force-push-head)" className="stroke-red-600 dark:stroke-red-400" />
+              <line x1={bx - 22} y1={y - BLOCK / 2} x2={bx - 4} y2={y - BLOCK / 2} strokeWidth={3} markerEnd={`url(#${svgId}force-push-head)`} className="stroke-red-600 dark:stroke-red-400" />
             </g>
           );
         })}
         <defs>
-          <marker id="force-push-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+          <marker id={`${svgId}force-push-head`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
             <path d="M0,0 L10,5 L0,10 z" className="fill-red-600 dark:fill-red-400" />
           </marker>
         </defs>

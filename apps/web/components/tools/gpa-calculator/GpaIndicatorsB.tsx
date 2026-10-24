@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { parseLocalizedNumber } from "@tooloralabs/core";
 import { buildTimeline, convertSaudiGpa, GPA_SCALES, gradeForPercent, retakeImpact, type GpaRetakePolicy } from "@tooloralabs/tools";
@@ -127,6 +127,7 @@ export function GpaRetakeCard({ state, setState, d, f }: IndicatorProps) {
 
 /* 6 · Honors zone strip */
 export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
+  const svgId = useId();
   const t = useIndicatorT();
   const tp = useTranslations("tools.gpa-calculator.planner");
   const W = 400;
@@ -164,9 +165,9 @@ export function GpaHonorsStripCard({ d, f }: IndicatorProps) {
             </g>
             {nextGap && (
               <g>
-                <line x1={x(d.cumulativeGpa)} x2={x(nextGap.min)} y1={98} y2={98} stroke="#f59e0b" strokeWidth={2} markerEnd="url(#gpa-gap-arrow)" />
+                <line x1={x(d.cumulativeGpa)} x2={x(nextGap.min)} y1={98} y2={98} stroke="#f59e0b" strokeWidth={2} markerEnd={`url(#${svgId}gpa-gap-arrow)`} />
                 <defs>
-                  <marker id="gpa-gap-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <marker id={`${svgId}gpa-gap-arrow`} markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
                     <path d="M0,0 L8,4 L0,8 Z" fill="#f59e0b" />
                   </marker>
                 </defs>

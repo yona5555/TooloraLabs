@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
@@ -267,6 +267,7 @@ export function MolSerialCard({ side }: { side: Side }) {
 const LOG_MIN = -3;
 const LOG_MAX = 1.5;
 export function MolRulerCard({ side }: { side: Side }) {
+  const svgId = useId();
   const t = useTranslations("tools.molarity-calculator.visuals.ruler");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(referenceSeedIndex(), { min: 0, max: REFERENCE.length - 1, step: 1 });
@@ -315,12 +316,12 @@ export function MolRulerCard({ side }: { side: Side }) {
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
             <defs>
-              <linearGradient id="mol-ruler" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}mol-ruler`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" style={{ stopColor: "var(--chem-solvent)" }} />
                 <stop offset="100%" style={{ stopColor: "var(--chem-tint)" }} />
               </linearGradient>
             </defs>
-            <rect x={X0 - 8} y={axisY - 7} width={X1 - X0 + 16} height={14} rx={7} fill="url(#mol-ruler)" style={{ stroke: "var(--ph-line)" }} />
+            <rect x={X0 - 8} y={axisY - 7} width={X1 - X0 + 16} height={14} rx={7} fill={`url(#${svgId}mol-ruler)`} style={{ stroke: "var(--ph-line)" }} />
             {decades.map((d) => (
               <g key={d}>
                 <line x1={xl(10 ** d)} y1={axisY + 9} x2={xl(10 ** d)} y2={axisY + 16} style={{ stroke: "var(--ph-line)" }} strokeWidth={1.5} />

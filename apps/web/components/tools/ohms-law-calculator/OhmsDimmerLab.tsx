@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { Pause, Play } from "lucide-react";
@@ -39,6 +39,7 @@ function along(s: number): [number, number] {
  * write back into the calculator, so the Result card, the 3D circuit and every indicator follow.
  */
 export default function OhmsDimmerLab() {
+  const svgId = useId();
   const t = useTranslations("tools.ohms-law-calculator.education.lab.dimmer");
   const rtl = useLocale() === "ar";
   const { setDim } = useOhmsLive();
@@ -83,7 +84,7 @@ export default function OhmsDimmerLab() {
     <div className="w-full max-w-[360px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <defs>
-          <radialGradient id="ohms-bulb-glow">
+          <radialGradient id={`${svgId}ohms-bulb-glow`}>
             <stop offset="0%" stopColor="#fde047" stopOpacity={0.95} />
             <stop offset="60%" stopColor="#facc15" stopOpacity={0.45} />
             <stop offset="100%" stopColor="#facc15" stopOpacity={0} />
@@ -106,7 +107,7 @@ export default function OhmsDimmerLab() {
           {`${f(a.voltage)} V`}
         </text>
         {/* bulb on the top side */}
-        <circle cx={W / 2} cy={T} r={34 + 18 * glow} fill="url(#ohms-bulb-glow)" opacity={glow} />
+        <circle cx={W / 2} cy={T} r={34 + 18 * glow} fill={`url(#${svgId}ohms-bulb-glow)`} opacity={glow} />
         <circle cx={W / 2} cy={T} r={16} strokeWidth={2} className="fill-white stroke-zinc-500 dark:fill-zinc-900 dark:stroke-zinc-300" style={{ fill: glow > 0.02 ? `rgba(250, 204, 21, ${0.15 + 0.85 * glow})` : undefined }} />
         <path d={`M ${W / 2 - 7} ${T + 5} q 3.5 -12 7 0 q 3.5 -12 7 0`} fill="none" strokeWidth={1.5} className="stroke-zinc-700 dark:stroke-zinc-200" />
         <text x={W / 2} y={T + 32} textAnchor="middle" fontSize={10.5} fontFamily="ui-monospace, monospace" className="fill-zinc-600 dark:fill-zinc-300">

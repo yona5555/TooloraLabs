@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, useId } from "react";
 import { useTranslations } from "next-intl";
 import { projectileStateAt, sampleTrajectory } from "@tooloralabs/tools";
 import PmIndicatorCard from "./PmIndicatorCard";
@@ -38,6 +38,7 @@ export function niceCeil(v: number): number {
  * and the worked-example table reads the ball's state at the current instant.
  */
 export default function PmLaunchLab() {
+  const svgId = useId();
   const t = useTranslations("tools.projectile-motion-calculator.education.lab.launch");
   const { setDim } = usePmLive();
   const { a, f } = usePmModel();
@@ -98,10 +99,10 @@ export default function PmLaunchLab() {
     <div className="w-full max-w-[400px]">
       <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="block max-w-full">
         <defs>
-          <marker id="pm-lab-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <marker id={`${svgId}pm-lab-head`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
             <path d="M0,0 L10,5 L0,10 z" className="fill-red-600 dark:fill-red-400" />
           </marker>
-          <clipPath id="pm-lab-clip">
+          <clipPath id={`${svgId}pm-lab-clip`}>
             <rect x={L} y={0} width={W - L} height={B} />
           </clipPath>
         </defs>
@@ -127,10 +128,10 @@ export default function PmLaunchLab() {
         <text x={px(a.apexX)} y={py(a.maxHeight) - 9} textAnchor="middle" fontSize={11} fontWeight={700} className="fill-amber-700 dark:fill-amber-300">
           {`h_max ${f(a.maxHeight)} m`}
         </text>
-        <g clipPath="url(#pm-lab-clip)">
+        <g clipPath={`url(#${svgId}pm-lab-clip)`}>
         <line x1={ball.x} y1={ball.y} x2={hx.x} y2={hx.y} strokeWidth={2} className="stroke-violet-600 dark:stroke-violet-400" />
         <line x1={ball.x} y1={ball.y} x2={vyTip.x} y2={vyTip.y} strokeWidth={2} className="stroke-emerald-600 dark:stroke-emerald-400" />
-        <line x1={ball.x} y1={ball.y} x2={tip.x} y2={tip.y} strokeWidth={2.5} markerEnd="url(#pm-lab-head)" className="stroke-red-600 dark:stroke-red-400" />
+        <line x1={ball.x} y1={ball.y} x2={tip.x} y2={tip.y} strokeWidth={2.5} markerEnd={`url(#${svgId}pm-lab-head)`} className="stroke-red-600 dark:stroke-red-400" />
         </g>
         <circle cx={ball.x} cy={ball.y} r={7} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
       </svg>

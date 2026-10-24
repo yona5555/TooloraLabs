@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useId } from "react";
 import { useTranslations } from "next-intl";
 import { STORAGE_MEDIA } from "@tooloralabs/tools";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
@@ -20,6 +20,7 @@ const UNITS = ["B", "KB", "MB", "GB", "TB", "PB"] as const;
  * every card follow.
  */
 export default function FsMagnitudeSlider() {
+  const svgId = useId();
   const t = useTranslations("tools.file-size-converter.education.lab.magnitude");
   const tm = useTranslations("tools.file-size-converter.education.lab.media");
   const { setDim } = useFsLive();
@@ -64,12 +65,12 @@ export default function FsMagnitudeSlider() {
       className="mx-auto block max-w-full cursor-ew-resize touch-none"
     >
       <defs>
-        <linearGradient id="fs-mag" x1="0" x2="1">
+        <linearGradient id={`${svgId}fs-mag`} x1="0" x2="1">
           <stop offset="0" stopColor="#93c5fd" />
           <stop offset="1" stopColor="#1d4ed8" />
         </linearGradient>
       </defs>
-      <rect x={L} y={AXIS_Y - 9} width={W - L - R} height={18} rx={9} fill="url(#fs-mag)" opacity={0.85} />
+      <rect x={L} y={AXIS_Y - 9} width={W - L - R} height={18} rx={9} fill={`url(#${svgId}fs-mag)`} opacity={0.85} />
       {UNITS.map((u, k) => (
         <g key={u}>
           <line x1={x(k * 3)} y1={AXIS_Y + 10} x2={x(k * 3)} y2={AXIS_Y + 16} className="stroke-zinc-400" />

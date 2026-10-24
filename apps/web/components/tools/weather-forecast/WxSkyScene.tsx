@@ -1,5 +1,5 @@
 "use client";
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore, useId } from "react";
 import { precipitationKind } from "@tooloralabs/tools";
 import type { WxDerived, WxFmt } from "./wx";
 
@@ -53,6 +53,7 @@ const STARS = Array.from({ length: 34 }, (_, i) => [(i * 97) % W, 8 + ((i * 53) 
  * direction and speed, and falling rain/snow from the forecast symbol.
  */
 export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
+  const svgId = useId();
   const reduced = useReducedMotion();
   const cur = d.cur!;
   const [top, bottom] = skyColors(d.sunElevation);
@@ -74,24 +75,24 @@ export default function WxSkyScene({ d, f }: { d: WxDerived; f: WxFmt }) {
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" style={{ direction: "ltr" }} className="block h-auto w-full rounded-lg" role="img" aria-label="sky">
       <defs>
-        <linearGradient id="wx-sky" x1="0" x2="0" y1="0" y2="1">
+        <linearGradient id={`${svgId}wx-sky`} x1="0" x2="0" y1="0" y2="1">
           <stop offset="0" stopColor={top} />
           <stop offset="1" stopColor={bottom} />
         </linearGradient>
-        <radialGradient id="wx-sky-sun">
+        <radialGradient id={`${svgId}wx-sky-sun`}>
           <stop offset="0" stopColor="#fff7c2" />
           <stop offset="0.45" stopColor="#fde047" />
           <stop offset="1" stopColor="#fde047" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <rect width={W} height={H} fill="url(#wx-sky)" />
+      <rect width={W} height={H} fill={`url(#${svgId}wx-sky)`} />
       {night && STARS.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#fff" fillOpacity={0.4 + (i % 3) * 0.2} />)}
 
       <path d={`M30,${HORIZON} Q${W / 2},${HORIZON - 256} ${W - 30},${HORIZON}`} fill="none" stroke="#fff" strokeOpacity={0.35} strokeDasharray="3 5" />
 
       {!night && dayFrac >= 0 && (
         <g>
-          <circle cx={sx} cy={sy} r={30} fill="url(#wx-sky-sun)">
+          <circle cx={sx} cy={sy} r={30} fill={`url(#${svgId}wx-sky-sun)`}>
             {!reduced && <animate attributeName="r" values="26;32;26" dur="4s" repeatCount="indefinite" />}
           </circle>
           <circle cx={sx} cy={sy} r={11} fill="#facc15" stroke="#f59e0b" strokeWidth={1.5} />

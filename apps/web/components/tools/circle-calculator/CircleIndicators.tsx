@@ -1,5 +1,5 @@
 "use client";
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, useId } from "react";
 import { useTranslations } from "next-intl";
 import {
   CIRCLE_EQUAL_C_A_RADIUS,
@@ -439,6 +439,7 @@ export function CircleIsoperimetric() {
 
 /* §31 type 8 — gradient gauge: how close Archimedes' inscribed n-gon gets to the true rim. */
 export function CirclePolygonGauge() {
+  const svgId = useId();
   const t = useInd();
   const tf = useFields();
   const { r, fmt } = useCircleRadius();
@@ -483,13 +484,13 @@ export function CirclePolygonGauge() {
       <div dir="ltr" className="flex justify-center">
         <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("gauge.heading", { n: p.sides })}>
           <defs>
-            <linearGradient id="circle-gauge-grad" x1="0" x2="1" y1="0" y2="0">
+            <linearGradient id={`${svgId}circle-gauge-grad`} x1="0" x2="1" y1="0" y2="0">
               <stop offset="0%" stopColor="#ef4444" />
               <stop offset="50%" stopColor="#f59e0b" />
               <stop offset="100%" stopColor="#10b981" />
             </linearGradient>
           </defs>
-          <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`} fill="none" stroke="url(#circle-gauge-grad)" strokeWidth={16} strokeLinecap="round" />
+          <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`} fill="none" stroke={`url(#${svgId}circle-gauge-grad)`} strokeWidth={16} strokeLinecap="round" />
           {[80, 85, 90, 95, 100].map((v) => {
             const a = Math.PI * (1 - (v - MIN) / (100 - MIN));
             return (

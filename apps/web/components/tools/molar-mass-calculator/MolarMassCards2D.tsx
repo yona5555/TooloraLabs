@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, KitTrack, SvgChem, SvgHandle, useMeasuredSize, useStepper, useSvgDrag, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
@@ -263,6 +263,7 @@ function MmRankedDrawing({ list, valueText, hover, setHover }: { list: Array<(ty
 
 // ── 6. Particles on a log scale: where one mole sits ──────────────────────────────────
 export function MmAvogadroCard({ side }: { side: Side }) {
+  const svgId = useId();
   const t = useTranslations("tools.molar-mass-calculator.visuals.avogadro");
   const tc = useTranslations("tools.ph-calculator.visuals.common");
   const s = useStepper(LOG_N_SEED, { min: LOG_N_MIN, max: LOG_N_MAX, step: 0.05 });
@@ -305,12 +306,12 @@ export function MmAvogadroCard({ side }: { side: Side }) {
         <div ref={box} className="relative w-full flex-1" style={{ minHeight: HMIN }}>
           <svg ref={ref} viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
             <defs>
-              <linearGradient id="mm-c6-bar" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}mm-c6-bar`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" style={{ stopColor: "var(--chem-solvent)" }} />
                 <stop offset="100%" style={{ stopColor: "var(--chem-solute)" }} />
               </linearGradient>
             </defs>
-            <rect x={X0} y={barY - 9} width={X1 - X0} height={18} rx={9} fill="url(#mm-c6-bar)" style={{ stroke: "var(--ph-line)" }} />
+            <rect x={X0} y={barY - 9} width={X1 - X0} height={18} rx={9} fill={`url(#${svgId}mm-c6-bar)`} style={{ stroke: "var(--ph-line)" }} />
             {Array.from({ length: LOG_N_MAX - LOG_N_MIN + 1 }, (_, i) => LOG_N_MIN + i).map((e) => (
               <g key={e}>
                 <line x1={xl(e)} y1={barY + 11} x2={xl(e)} y2={barY + 17} style={{ stroke: "var(--ph-line)" }} />

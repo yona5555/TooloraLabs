@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, KitTrack, useMeasuredSize, useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
@@ -441,6 +441,7 @@ export function SGRulesCard({ side }: { side: Side }) {
 // ── 8. Issues found as the checker scans left to right (cumulative step area) ───────
 const MESSY_ISSUES = check(MESSY).issues;
 export function SGScanCard({ side }: { side: Side }) {
+  const svgId = useId();
   const { t, tc } = useCardText("scan");
   const tl = useTranslations("tools.spelling-grammar-checker.quickReference.legend");
   const s = useStepper(90, { min: 0, max: MESSY.length, step: 5 });
@@ -485,7 +486,7 @@ export function SGScanCard({ side }: { side: Side }) {
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xc(p), y: H - 22, dir: "horizontal" }} s={s} testId="sg-c8">
           <defs>
-            <clipPath id="sg-c8-clip">
+            <clipPath id={`${svgId}sg-c8-clip`}>
               <rect x={X0} y={0} width={Math.max(0, xc(p) - X0)} height={H} />
             </clipPath>
           </defs>
@@ -496,8 +497,8 @@ export function SGScanCard({ side }: { side: Side }) {
             </g>
           ))}
           <path d={`${steps} L ${px2(xc(MESSY.length))} ${bot} Z`} style={{ fill: "var(--glass-track)" }} />
-          <path d={`${steps} L ${px2(xc(MESSY.length))} ${bot} Z`} clipPath="url(#sg-c8-clip)" style={{ fill: "var(--ai-soft)" }} />
-          <path d={steps} fill="none" clipPath="url(#sg-c8-clip)" style={{ stroke: "var(--ai-a)" }} strokeWidth={2.5} />
+          <path d={`${steps} L ${px2(xc(MESSY.length))} ${bot} Z`} clipPath={`url(#${svgId}sg-c8-clip)`} style={{ fill: "var(--ai-soft)" }} />
+          <path d={steps} fill="none" clipPath={`url(#${svgId}sg-c8-clip)`} style={{ stroke: "var(--ai-a)" }} strokeWidth={2.5} />
           {MESSY_ISSUES.map((i, k) => (
             <circle key={k} cx={xc(i.start)} cy={bot + 10} r={4} style={{ fill: TYPE_COLOR[i.type], opacity: i.start < p ? 1 : 0.35, ...lit(i.start < p && hover === "found") }} />
           ))}

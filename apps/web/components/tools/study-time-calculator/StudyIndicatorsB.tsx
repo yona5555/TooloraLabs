@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useId } from "react";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import { BREAK_COLORS, runPlan, useFmt, useStudyT } from "./studio";
@@ -8,6 +8,7 @@ import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 
 /* 5 · Hours per exam: learning + reviews against the target, shortfall in red (ranked bars) */
 export function HoursPerExamCard({ d }: StudyIndicatorProps) {
+  const svgId = useId();
   const t = useStudyT();
   const f = useFmt();
   const exams = [...upcomingExams(d)].sort((a, b) => b.targetMinutes - a.targetMinutes);
@@ -29,7 +30,7 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
             <div className="w-[400px] max-w-full">
               <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ direction: "ltr" }} role="img" aria-label={t("ind.hours.title")} className="max-w-full">
                 <defs>
-                  <pattern id="study-hatch" width={6} height={6} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <pattern id={`${svgId}study-hatch`} width={6} height={6} patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                     <rect width={6} height={6} fill="#ef4444" fillOpacity={0.15} />
                     <line x1={0} y1={0} x2={0} y2={6} stroke="#ef4444" strokeWidth={2.5} />
                   </pattern>
@@ -47,7 +48,7 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
                       <rect x={L} y={y + 2} width={sx(e.targetMinutes)} height={18} rx={4} fill="none" stroke="currentColor" strokeOpacity={0.3} strokeDasharray="3 2" />
                       <rect x={L} y={y + 2} width={sx(e.learnMinutes)} height={18} rx={4} fill={c} style={{ transition: "width 400ms ease" }} />
                       <rect x={L + sx(e.learnMinutes)} y={y + 2} width={sx(e.reviewMinutes)} height={18} fill={c} fillOpacity={0.45} style={{ transition: "all 400ms ease" }} />
-                      {e.shortfallMinutes > 0 && <rect x={L + sx(e.plannedMinutes)} y={y + 2} width={sx(e.shortfallMinutes)} height={18} fill="url(#study-hatch)" />}
+                      {e.shortfallMinutes > 0 && <rect x={L + sx(e.plannedMinutes)} y={y + 2} width={sx(e.shortfallMinutes)} height={18} fill={`url(#${svgId}study-hatch)`} />}
                       <text x={L + sx(e.targetMinutes) + 5} y={y + 15} fontSize={10.5} fontWeight={700} className={valueText}>
                         {`${f.n(e.plannedMinutes / 60, 1)}/${f.n(e.targetMinutes / 60, 1)}`}
                       </text>
@@ -57,7 +58,7 @@ export function HoursPerExamCard({ d }: StudyIndicatorProps) {
                 {[
                   { k: "learn", fill: "#2563eb", o: 1 },
                   { k: "review", fill: "#2563eb", o: 0.45 },
-                  { k: "missing", fill: "url(#study-hatch)", o: 1 },
+                  { k: "missing", fill: `url(#${svgId}study-hatch)`, o: 1 },
                 ].map((lg, i) => (
                   <g key={lg.k} transform={`translate(${L + i * 110}, ${H - 18})`}>
                     <rect width={12} height={12} rx={2} fill={lg.fill} fillOpacity={lg.o} />

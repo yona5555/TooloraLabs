@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { derivativeAt, differenceQuotient, tangentAt, type GraphKeyPointKind } from "@tooloralabs/tools";
@@ -293,6 +294,7 @@ export function GraphSensitivityTrio() {
 /* ------------------------------------------------------------------ */
 /** Type #8 (Gradient Gauge): the tangent's inclination at the traced point, from −90° (vertical drop) to +90° (vertical climb). */
 export function GraphSlopeGauge() {
+  const svgId = useId();
   const t = useTranslations("tools.graphing-calculator.viz.gauge");
   const { f, traceX } = useGraphLive();
   const tan = tangentAt(f, traceX);
@@ -312,13 +314,13 @@ export function GraphSlopeGauge() {
         <div dir="ltr">
           <svg width={280} height={180} viewBox="0 0 280 180" style={svgStyle} role="img" aria-label={t("title")}>
             <defs>
-              <linearGradient id="graph-slope-gauge" x1="0" x2="1" y1="0" y2="0">
+              <linearGradient id={`${svgId}graph-slope-gauge`} x1="0" x2="1" y1="0" y2="0">
                 <stop offset="0%" stopColor="#e11d48" />
                 <stop offset="50%" stopColor="#a1a1aa" />
                 <stop offset="100%" stopColor="#10b981" />
               </linearGradient>
             </defs>
-            <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke="url(#graph-slope-gauge)" strokeWidth={18} strokeLinecap="round" />
+            <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke={`url(#${svgId}graph-slope-gauge)`} strokeWidth={18} strokeLinecap="round" />
             {[-90, -45, 0, 45, 90].map((deg) => {
               const [tx, ty] = toXY(deg, r + 18);
               return (

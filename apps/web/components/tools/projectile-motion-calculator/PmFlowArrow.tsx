@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import PmIndicatorCard from "./PmIndicatorCard";
 import { usePmModel } from "./PmLiveContext";
@@ -10,6 +11,7 @@ const BOX_W = 176;
 
 /** Type #2 (Flow Arrow with Embedded Numbers): v₀ → vy → t↑ → t → R, each arrow labelled with the live operation applied. */
 export default function PmFlowArrow() {
+  const svgId = useId();
   const t = useTranslations("tools.projectile-motion-calculator.education.lab.flow");
   const { a, f } = usePmModel();
   if (!a) return null;
@@ -29,7 +31,7 @@ export default function PmFlowArrow() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
-        <marker id="pm-flow-head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <marker id={`${svgId}pm-flow-head`} viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
           <path d="M0,0 L10,5 L0,10 z" className="fill-zinc-500 dark:fill-zinc-400" />
         </marker>
       </defs>
@@ -43,7 +45,7 @@ export default function PmFlowArrow() {
             </text>
             {i < ops.length && (
               <>
-                <line x1={cx} y1={y + BOX_H + 2} x2={cx} y2={y + BOX_H + GAP - 4} strokeWidth={2} markerEnd="url(#pm-flow-head)" className="stroke-zinc-500 dark:stroke-zinc-400" />
+                <line x1={cx} y1={y + BOX_H + 2} x2={cx} y2={y + BOX_H + GAP - 4} strokeWidth={2} markerEnd={`url(#${svgId}pm-flow-head)`} className="stroke-zinc-500 dark:stroke-zinc-400" />
                 <text x={cx + 14} y={y + BOX_H + GAP / 2 + 4} fontSize={11} fontWeight={600} className="fill-blue-700 dark:fill-blue-300">
                   {ops[i]}
                 </text>

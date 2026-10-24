@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import { RESISTANCE_REFERENCES } from "@tooloralabs/tools";
 import OhmsIndicatorCard, { OhmsIndicatorUnavailable } from "./OhmsIndicatorCard";
@@ -18,6 +19,7 @@ const lg = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-300));
  * lines to their true position, so no two labels can overlap at any value.
  */
 export default function OhmsResistanceScale() {
+  const svgId = useId();
   const t = useTranslations("tools.ohms-law-calculator.education.lab.scale");
   const { a, f } = useOhmsModel();
   if (!a || a.resistance === 0) return <OhmsIndicatorUnavailable title={t("title")} />;
@@ -40,13 +42,13 @@ export default function OhmsResistanceScale() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
-        <linearGradient id="ohms-log-grad" x1="0" x2="1" y1="0" y2="0">
+        <linearGradient id={`${svgId}ohms-log-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#3b82f6" />
           <stop offset="45%" stopColor="#22c55e" />
           <stop offset="100%" stopColor="#f59e0b" />
         </linearGradient>
       </defs>
-      <rect x={X0} y={AXIS - 5} width={X1 - X0} height={10} rx={5} fill="url(#ohms-log-grad)" opacity={0.85} />
+      <rect x={X0} y={AXIS - 5} width={X1 - X0} height={10} rx={5} fill={`url(#${svgId}ohms-log-grad)`} opacity={0.85} />
       {ticks.map((e) => (
         <line key={e} x1={sx(e)} y1={AXIS + 5} x2={sx(e)} y2={AXIS + 9} className="stroke-zinc-400 dark:stroke-zinc-500" />
       ))}

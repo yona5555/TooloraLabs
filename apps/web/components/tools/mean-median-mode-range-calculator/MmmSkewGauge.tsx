@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import MmmIndicatorCard from "./MmmIndicatorCard";
 import { useMmmModel } from "./MmmLiveContext";
@@ -18,6 +19,7 @@ function polar(angle: number, r: number): [number, number] {
 
 /** Type #8 (Gradient Gauge): Pearson's second skewness 3(x̄ − median)/s on a −3…+3 dial — left-skewed, symmetric, right-skewed. */
 export default function MmmSkewGauge() {
+  const svgId = useId();
   const t = useTranslations("tools.mean-median-mode-range-calculator.education.lab.skew");
   const tr = useTranslations("tools.mean-median-mode-range-calculator.result");
   const tl = useTranslations("tools.mean-median-mode-range-calculator.live3d");
@@ -34,14 +36,14 @@ export default function MmmSkewGauge() {
   const gauge = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
-        <linearGradient id="mmm-skew-grad" x1="0" x2="1" y1="0" y2="0">
+        <linearGradient id={`${svgId}mmm-skew-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#e11d48" />
           <stop offset="40%" stopColor="#10b981" />
           <stop offset="60%" stopColor="#10b981" />
           <stop offset="100%" stopColor="#f59e0b" />
         </linearGradient>
       </defs>
-      <path d={`M ${sx0} ${sy0} A ${R} ${R} 0 0 1 ${sx1} ${sy1}`} fill="none" stroke="url(#mmm-skew-grad)" strokeWidth={16} strokeLinecap="round" />
+      <path d={`M ${sx0} ${sy0} A ${R} ${R} 0 0 1 ${sx1} ${sy1}`} fill="none" stroke={`url(#${svgId}mmm-skew-grad)`} strokeWidth={16} strokeLinecap="round" />
       {ticks.map((v) => {
         const ang = Math.PI * (1 - (v + LIMIT) / (2 * LIMIT));
         const [tx, ty] = polar(ang, R - 22);

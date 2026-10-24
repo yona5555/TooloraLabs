@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Pause, Play } from "lucide-react";
 import { niceCeil, STANDARD_GRAVITY } from "@tooloralabs/tools";
@@ -33,6 +33,7 @@ const SOLVED: Record<string, Knob> = { solveDensity: "density", solveMass: "mass
  * the 3D tank and every indicator follow.
  */
 export default function DensityFloatLab() {
+  const svgId = useId();
   const t = useTranslations("tools.density-calculator.education.lab.float");
   const rtl = useLocale() === "ar";
   const tFluids = useTranslations("tools.density-calculator.live3d.fluids");
@@ -140,9 +141,9 @@ export default function DensityFloatLab() {
         <rect x={cx - s / 2} y={y - s} width={s} height={s} rx={2} className="fill-amber-500 stroke-amber-700 dark:fill-amber-400 dark:stroke-amber-300" strokeWidth={1.5} />
         {under > 0 && <rect x={cx - s / 2} y={SURFACE} width={s} height={Math.min(s, y - SURFACE)} className="fill-sky-600/25" />}
         {/* forces */}
-        <line x1={cx + s / 2 + 12} y1={y - s / 2} x2={cx + s / 2 + 12} y2={y - s / 2 + arrow(a.weight)} strokeWidth={3} markerEnd="url(#density-lab-w)" className="stroke-red-600 dark:stroke-red-400" />
+        <line x1={cx + s / 2 + 12} y1={y - s / 2} x2={cx + s / 2 + 12} y2={y - s / 2 + arrow(a.weight)} strokeWidth={3} markerEnd={`url(#${svgId}density-lab-w)`} className="stroke-red-600 dark:stroke-red-400" />
         {buoyNow > 0 && (
-          <line x1={cx - s / 2 - 12} y1={y - s / 2} x2={cx - s / 2 - 12} y2={y - s / 2 - arrow(buoyNow)} strokeWidth={3} markerEnd="url(#density-lab-b)" className="stroke-emerald-600 dark:stroke-emerald-400" />
+          <line x1={cx - s / 2 - 12} y1={y - s / 2} x2={cx - s / 2 - 12} y2={y - s / 2 - arrow(buoyNow)} strokeWidth={3} markerEnd={`url(#${svgId}density-lab-b)`} className="stroke-emerald-600 dark:stroke-emerald-400" />
         )}
         {/* true-scale ruler */}
         <line x1={TX} y1={FLOOR + 8} x2={TX + TANK} y2={FLOOR + 8} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" />
@@ -157,10 +158,10 @@ export default function DensityFloatLab() {
           {`${f(tankCm)} cm · a = ${f(a.cubeEdge, 3)} cm`}
         </text>
         <defs>
-          <marker id="density-lab-w" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+          <marker id={`${svgId}density-lab-w`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
             <path d="M0,0 L10,5 L0,10 z" className="fill-red-600 dark:fill-red-400" />
           </marker>
-          <marker id="density-lab-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+          <marker id={`${svgId}density-lab-b`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto">
             <path d="M0,0 L10,5 L0,10 z" className="fill-emerald-600 dark:fill-emerald-400" />
           </marker>
         </defs>

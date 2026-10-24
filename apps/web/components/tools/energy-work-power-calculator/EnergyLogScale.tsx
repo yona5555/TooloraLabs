@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { useTranslations } from "next-intl";
 import { ENERGY_REFERENCES } from "@tooloralabs/tools";
 import EnergyIndicatorCard from "./EnergyIndicatorCard";
@@ -20,6 +21,7 @@ const lg = (v: number) => Math.log10(Math.max(Math.abs(v), 1e-300));
  * can overlap at any value.
  */
 export default function EnergyLogScale() {
+  const svgId = useId();
   const t = useTranslations("tools.energy-work-power-calculator.education.lab.scale");
   const { work, kinetic, potential, f } = useEnergyModel();
 
@@ -41,13 +43,13 @@ export default function EnergyLogScale() {
   const svg = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
-        <linearGradient id="energy-log-grad" x1="0" x2="1" y1="0" y2="0">
+        <linearGradient id={`${svgId}energy-log-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#38bdf8" />
           <stop offset="50%" stopColor="#22c55e" />
           <stop offset="100%" stopColor="#ef4444" />
         </linearGradient>
       </defs>
-      <rect x={X0} y={AXIS - 5} width={X1 - X0} height={10} rx={5} fill="url(#energy-log-grad)" opacity={0.85} />
+      <rect x={X0} y={AXIS - 5} width={X1 - X0} height={10} rx={5} fill={`url(#${svgId}energy-log-grad)`} opacity={0.85} />
       {ticks.map((e) => (
         <line key={e} x1={sx(e)} y1={AXIS + 5} x2={sx(e)} y2={AXIS + 9} className="stroke-zinc-400 dark:stroke-zinc-500" />
       ))}

@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useId } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { GlassHandle } from "@/components/tool-ui/glass/GlassPrimitives";
@@ -21,6 +21,7 @@ const PTS_OH = ballPoints(44, 29);
  * scale, laid out in real pixels so it fills the whole scene box at any width.
  */
 function Hero2D({ s, valueText, label }: { s: Stepper; valueText: string; label: string }) {
+  const svgId = useId();
   const [box, { w: W, h: H }] = useMeasuredSize<HTMLDivElement>({ w: 380, h: 320 });
   const BAR_X = W - 56;
   const BAR_TOP = 22;
@@ -40,7 +41,7 @@ function Hero2D({ s, valueText, label }: { s: Stepper; valueText: string; label:
     <div ref={box} dir="ltr" className="relative w-full flex-1" data-scale-vb={`${BAR_X},${BAR_BOTTOM},${BAR_X},${BAR_TOP},${W},${H}`}>
       <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} className="absolute inset-0 block" role="img" aria-label={valueText}>
         <defs>
-          <linearGradient id="ph-hero-bar" x1="0" y1="1" x2="0" y2="0">
+          <linearGradient id={`${svgId}ph-hero-bar`} x1="0" y1="1" x2="0" y2="0">
             {Array.from({ length: 15 }, (_, i) => (
               <stop key={i} offset={`${(i / 14) * 100}%`} style={{ stopColor: `var(--ph-ui-${i})` }} />
             ))}
@@ -54,7 +55,7 @@ function Hero2D({ s, valueText, label }: { s: Stepper; valueText: string; label:
         {PTS_OH.slice(0, counts.oh).map((p, i) => (
           <circle key={`o${i}`} cx={dot(p)[0]} cy={dot(p)[1]} r={4.5} style={{ fill: "var(--ph-ion-oh)", stroke: "var(--ph-knob)" }} strokeWidth={1} />
         ))}
-        <rect x={BAR_X - 7} y={BAR_TOP - 7} width={14} height={BAR_BOTTOM - BAR_TOP + 14} rx={7} fill="url(#ph-hero-bar)" style={{ stroke: "var(--ph-line)" }} strokeWidth={1} />
+        <rect x={BAR_X - 7} y={BAR_TOP - 7} width={14} height={BAR_BOTTOM - BAR_TOP + 14} rx={7} fill={`url(#${svgId}ph-hero-bar)`} style={{ stroke: "var(--ph-line)" }} strokeWidth={1} />
         {[0, 2, 4, 7, 10, 12, 14].map((tk) => (
           <text key={tk} x={BAR_X + 24} y={yFor(tk) + 4} fontSize={11} style={{ fill: "var(--ph-ink-muted)" }}>
             {tk}
