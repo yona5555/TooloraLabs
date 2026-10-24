@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { categories } from "@/data/categories";
+import { categoryPages as categories } from "@/data/categories";
 
 export default function Categories() {
   const t = useTranslations("categoriesSection");

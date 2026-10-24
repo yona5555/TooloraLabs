@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ArrowRight, ChevronDown, Search as SearchIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { tools } from "@/data/tools";
+import { categoryHref } from "@/data/categories";
 import { getToolIcon } from "@/lib/tool-icons";
 import AdSpace from "./AdSpace";
 import SectionCard from "./SectionCard";
@@ -172,7 +173,7 @@ export default function RelatedToolsSidebar({
         )}
 
         <Link
-          href={`/categories/${category}`}
+          href={categoryHref(category)}
           className="flex items-center justify-center gap-1.5 rounded-xl border border-zinc-200 py-2.5 text-sm font-medium text-blue-600 transition hover:bg-blue-50/50 dark:border-zinc-800 dark:text-blue-400 dark:hover:bg-blue-500/10"
         >
           {tCommon("viewAllCta", { category: tCategories(`${category}.title`) })}

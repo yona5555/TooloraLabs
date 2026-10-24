@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import BackButton from "@/components/tool-ui/BackButton";
+import { categoryHref } from "@/data/categories";
 import PhoneLayoutScript from "./PhoneLayoutScript";
 
 type ToolPageLayoutProps = {
@@ -34,7 +35,7 @@ export default function ToolPageLayout({
     return (
       <main data-phone-cards="" data-phone-markets={categorySlug === "financial-markets" ? "" : undefined} suppressHydrationWarning className={`mx-auto ${maxWidthClass} px-4 py-6 lg:px-6`}>
         <div className="flex items-center gap-3">
-          <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={20} className="h-11 w-11" phoneText={backText} />
+          <BackButton href={categoryHref(categorySlug)} label={backLabel} size={20} className="h-11 w-11" phoneText={backText} />
 
           <h1 data-fit data-fit-oneline className={`min-w-0 max-md:truncate text-2xl font-extrabold tracking-tight text-zinc-900 lg:text-3xl dark:text-zinc-50`}>
             {title}
@@ -60,7 +61,7 @@ export default function ToolPageLayout({
       </span>
 
       <div className="mt-4 flex items-center gap-3 lg:mt-6">
-        <BackButton href={`/categories/${categorySlug}`} label={backLabel} size={22} className="h-12 w-12" phoneText={backText} />
+        <BackButton href={categoryHref(categorySlug)} label={backLabel} size={22} className="h-12 w-12" phoneText={backText} />
         <h1 className="min-w-0 max-md:truncate text-3xl font-extrabold tracking-tight text-zinc-900 lg:text-5xl dark:text-zinc-50">
           {title}
         </h1>

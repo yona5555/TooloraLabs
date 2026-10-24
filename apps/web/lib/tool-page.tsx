@@ -10,6 +10,7 @@ import RelatedTools from "@/components/tools/RelatedTools";
 import { ToolMessagesProvider } from "@/lib/client-messages";
 import type { ToolEntryProps } from "@/components/tools/entries/types";
 import { tools } from "@/data/tools";
+import { hasCategoryPage } from "@/data/categories";
 import { SITE_URL } from "@/lib/site";
 
 export async function toolPageMetadata(locale: string, slug: string): Promise<Metadata> {
@@ -229,7 +230,7 @@ export async function ToolPageView({
         dangerouslySetInnerHTML={jsonLdHtml(
           breadcrumbJsonLd([
             { name: tn("home"), path: `/${locale}` },
-            { name: tc(`${tool.category}.title`), path: `/${locale}/categories/${tool.category}` },
+            ...(hasCategoryPage(tool.category) ? [{ name: tc(`${tool.category}.title`), path: `/${locale}/categories/${tool.category}` }] : []),
             { name: title, path: `/${locale}/tools/${slug}` },
           ])
         )}
