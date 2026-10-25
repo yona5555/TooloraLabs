@@ -71,9 +71,9 @@ InfoSection, AdSpace, ToolPageLayout) — never wire it per tool.
   container. Every other in-content leaderboard is `max-md:hidden`; the phone slots are `md:hidden`.
 - **Ad balance (Yousef, 2026-10-24):** when what sits between ad 1 and ad 2 (the collapsed cards, in their
   default closed state) is shorter than one ad (250px + label), only ad 2 shows; ad 1 gets
-  `data-phone-hide` (display:none) from `lib/phone/layout.ts` before the first paint. Ad 2 is always
-  OUTSIDE the article paper, between the last collapsed card and the article (`data-phone-ad2`, CSS order
-  5). Only the 1/3 and 2/3 ads sit inside the paper. Hidden slots are CSS display:none (allowed by AdSense).
+  `data-phone-hide` (display:none) from `lib/phone/layout.ts` (measured; it sits after the docs row, so
+  the open cards never move). Ad 2 is always OUTSIDE the article paper, between the last collapsed card
+  and the article (the article's first ad slot, picked and placed by globals.css alone, CSS order 5). Only the 1/3 and 2/3 ads sit inside the paper. Hidden slots are CSS display:none (allowed by AdSense).
 - **Rule B — no blue-header card inside the article (Yousef, 2026-10-24, option 1):** on phone every card
   that lives in the article (EncyclopediaPaper) joins the collapsed-cards group under ad 1, keeping its
   relative order, with ONE DOM copy: globals.css makes the article, its wrappers, the paper boxes, the
@@ -153,12 +153,15 @@ Permanent rule for every tool below 768px (desktop unchanged). It replaces phone
 `data-result-action="share|copy|print|download|export|save"`: `ShareExportButton` (the trigger of every
 `*ShareExportModal`), `ResultActionButton` (any other result button), CopyButton, CopyLinkButton,
 PrintButton, DownloadButton, PdfDownloadButton. Roles are known at server render: SectionCard
-`phoneRole` = "input" | "output" | "output-secondary" | "visual" | "visual-collapsed" (hand-built cards:
-`data-card data-phone-role`), set on each
-tool's cards. globals.css orders them: input, output, visual, docs row, ad 1, collapsible group;
-`lib/phone/layout.ts` only marks the role cards always-open (no measuring, no reordering, no layout
-shift); a page with fewer than 3 role cards fills up with its first other cards in DOM order.
+`phoneRole` = "input" | "output" | "output-secondary" | "visual" | "visual-collapsed" | "extra"
+(hand-built cards: `data-card data-phone-role`, plus `data-phone-open data-fixed` when open), set on each
+tool's cards. globals.css orders them: input, output, visual, extra, docs row, ad 1, collapsible group,
+ad 2, article. Pure CSS from the server HTML (2026-10-25): SectionCard renders the open-role cards
+(input, output, visual, live-output, extra) always-open (`data-fixed`, `data-phone-open`) and no script
+orders or opens a card, so there is no render-blocking tag. A page with fewer than 3 open roles marks its
+next open card `phoneRole="extra"` (QuickExamplesCard does by default).
 **Guard:** `tests/phone-card-order.mjs` (CI, 390px, every tool): at most 3 open cards; every card with
 `[data-result-action]` has `phoneRole="output"` (open, above ad 1) or `"output-secondary"` (collapsible
 group); the primary output card (Share / Export) is open card 2, or 1 when merged with the input; with
-`--ids` zero duplicate ids. A new tool that breaks this fails CI.
+`--ids` zero duplicate ids; the cards, docs row and ad 2 come in the same order with JavaScript disabled.
+A new tool that breaks this fails CI.

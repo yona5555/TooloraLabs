@@ -266,7 +266,7 @@ export default function BreakEvenCalculatorTool({ education }: { education: Reac
               <ViewDocsLink slug="break-even-calculator" />
 
               {hasCalculated[mode] && sensitivityPoints && (
-                <SectionCard title={t2("sensitivityDiagram.title")}>
+                <SectionCard title={t2("sensitivityDiagram.title")} phoneRole="extra">
                   <BreakEvenSensitivityDiagram
                     points={sensitivityPoints}
                     currentPrice={activePricePerUnit}

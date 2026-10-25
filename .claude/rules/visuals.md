@@ -179,11 +179,14 @@ Permanent; applies to every current and future tool. Full spec: `docs/claude/app
 - At most 3 open cards on every tool. An input card with a copy button counts as the merged card 1.
 - The primary output card is NEVER collapsed and NEVER after ad 1.
 - Roles are set at server render: SectionCard `phoneRole` = "input" | "output" | "output-secondary" |
-  "visual" | "visual-collapsed" (raw cards:
-  `data-phone-role`); globals.css orders them (input, output, visual, docs row, ad 1, collapsed group). No
-  client reordering. Every result button renders through `ResultActionButton` / `ShareExportButton` /
+  "visual" | "visual-collapsed" | "extra" (raw cards: `data-phone-role` + `data-phone-open data-fixed`
+  when open); globals.css orders them (input, output, visual, extra, docs row, ad 1, collapsed group,
+  ad 2). Pure CSS from the server HTML: the open cards are exactly the open-role cards (input, output,
+  visual, live-output, extra), no script orders or opens a card, no render-blocking tag. A page with
+  fewer than 3 open roles marks its next open card `phoneRole="extra"` (e.g. Quick examples, by default). Every result button renders through `ResultActionButton` / `ShareExportButton` /
   CopyButton / PrintButton / DownloadButton / PdfDownloadButton / CopyLinkButton (`data-result-action`).
-- Guard in CI: `tests/phone-card-order.mjs` (390px, every tool). Exception kept: crypto-converter,
+- Guard in CI: `tests/phone-card-order.mjs` (390px, every tool; also compares the order with JavaScript
+  disabled). Exception kept: crypto-converter,
   forex-converter, commodities-tracker.
 
 ## APPROVED — LOCKED: phone home page /ar and /en (Yousef, 2026-10-23)

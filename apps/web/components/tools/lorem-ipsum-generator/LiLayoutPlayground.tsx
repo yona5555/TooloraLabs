@@ -121,6 +121,7 @@ export default function LiLayoutPlayground() {
 
   return (
     <LiIndicatorCard
+      phoneRole="extra"
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

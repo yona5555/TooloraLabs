@@ -1,23 +1,20 @@
 /**
- * APPROVED PHONE STANDARD (visuals.md) — the tool page's phone layout pass. Self-contained on purpose:
- * PHONE_LAYOUT_BOOT inlines it with `toString()` so it runs while the HTML is parsed (before the first
- * paint and before hydration) as soon as the `[data-phone-end]` sentinel after the page's content is
- * parsed; PhoneLayoutScript also calls it in a layout effect for a client-side navigation, where no
- * server HTML is parsed. It runs once per page (`data-phone-layout` on the scope).
+ * APPROVED PHONE STANDARD (visuals.md) — the tool page's phone ad and paper pass. It never orders, opens
+ * or collapses a card: the card order and the always-open cards come from the server HTML alone
+ * (SectionCard `phoneRole` + globals.css). Self-contained on purpose: PHONE_LAYOUT_BOOT inlines it with
+ * `toString()` so it runs while the HTML is parsed as soon as the `[data-phone-end]` sentinel after the
+ * page's content is parsed; PhoneLayoutScript also calls it in a layout effect for a client-side
+ * navigation, where no server HTML is parsed. It runs once per page (`data-phone-layout` on the scope).
+ * Everything it changes sits after the docs row, so it never moves the open cards above it.
  *
- * 1. Cards: the first 3 top-level blue-header cards ([data-card], not inside another card; on phone in
- *    screen order, which rule A's CSS order can make differ from DOM order) are marked
- *    always-open (`data-fixed`, no toggle); with 3 cards or fewer all are; cards in a dialog too.
- *    SectionCard reads the mark on hydration; a card mounted later applies the same rule itself.
- *    On phone they are also numbered (`data-phone-open` 1-3) for the phone order in globals.css.
- * 2. Article ads (phone only): InfoSection renders a display:none phone slot before every section.
- *    The slot before the article's first section always shows as ad 2 (`data-phone-ad2`: moved out of
+ * 1. Article ads (phone only): InfoSection renders a display:none phone slot before every section.
+ *    The slot before the article's first section is ad 2, shown and placed by globals.css alone (out of
  *    the paper, after the collapsed cards). Inside the article, slots are picked near 1/3 and 2/3 of its
  *    phone height, on section boundaries only, with at least 600px of article between ads and 300px
  *    after the last one. When two do not fit, one near the middle (or none when no boundary leaves
  *    600px). Ad balance: ad 1 (after the docs row) is dropped when less than one ad's height sits between
  *    it and ad 2. Desktop never measures: from 768px up every phone slot is display:none anyway.
- * 3. Rule B paper (phone only): the article is flattened into the phone flow (globals.css), so one
+ * 2. Rule B paper (phone only): the article is flattened into the phone flow (globals.css), so one
  *    continuous paper is drawn behind its parts (the flow's ::before, sized by CSS variables on the scope).
  */
 export function phoneLayout(anchor: Element | null): void {
@@ -25,42 +22,7 @@ export function phoneLayout(anchor: Element | null): void {
   if (!root || root.hasAttribute("data-phone-layout")) return;
   root.setAttribute("data-phone-layout", "");
   const topLevel = (el: Element) => !el.parentElement || !el.parentElement.closest("[data-card]");
-
-  const markets = root.hasAttribute("data-phone-markets");
-  // Only cards this screen renders count (e.g. the desktop-only sidebar's cards do not on phone).
-  const cards = Array.prototype.filter.call(root.querySelectorAll("[data-card]"), (c: Element) => topLevel(c) && c.getClientRects().length > 0) as Element[];
   const phone = window.matchMedia("(max-width: 767px)").matches;
-  const flowCards = cards.filter((c) => !c.closest('dialog,[role="dialog"]'));
-  let open: Element[];
-  if (phone && !markets) {
-    // LOCKED phone card order (visuals.md): the server marks each tool's input, output and main visual
-    // cards (SectionCard `phoneRole`, set by scripts/phone-roles.mjs); those are the always-open cards
-    // and globals.css orders them 1 input, 2 output, 3 visual. A page with fewer than 3 role cards fills
-    // up with its first other cards in DOM order; a secondary output (`output-secondary`) or a
-    // `visual-collapsed` card always stays in the collapsed group. Nothing is measured or moved here.
-    open = flowCards.filter((c) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || ""));
-    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0 && !/^(output-secondary|visual-collapsed)$/.test(c.getAttribute("data-phone-role") || "")) open.push(c);
-  } else {
-    // Desktop (where nothing collapses) and the markets tools (approved order, live data first): a card
-    // holding a Copy or Share/Export action counts first, then the first cards on screen.
-    if (!markets) {
-      cards.forEach((c) => {
-        if (c.querySelector('[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)')) c.setAttribute("data-phone-output", "");
-      });
-    }
-    const isOutput = (c: Element) => c.hasAttribute("data-phone-output") || /output/.test(c.getAttribute("data-phone-role") || "");
-    if (phone) flowCards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-    open = flowCards.filter(isOutput).slice(0, 3);
-    for (const c of flowCards) if (open.length < 3 && open.indexOf(c) < 0) open.push(c);
-    open.sort((a, b) => flowCards.indexOf(a) - flowCards.indexOf(b));
-  }
-  cards.forEach((card) => {
-    if (card.hasAttribute("data-card-init")) return;
-    card.setAttribute("data-card-init", "");
-    if (cards.length <= 3 || open.indexOf(card) >= 0 || card.closest('dialog,[role="dialog"]')) card.setAttribute("data-fixed", "");
-  });
-  // Phone order (globals.css): the always-open cards go first.
-  if (phone) open.forEach((card, i) => card.setAttribute("data-phone-open", String(i + 1)));
 
   if (!phone) return;
   // Rule B flattens the article (display:contents has no box): an element's box is then its parts' union.
@@ -76,9 +38,7 @@ export function phoneLayout(anchor: Element | null): void {
   const slots = Array.prototype.filter.call(root.querySelectorAll("[data-article-ad]"), topLevel) as Element[];
   const sections = slots.map((slot) => slot.nextElementSibling).filter(Boolean) as Element[];
   if (!slots.length || sections.length !== slots.length) return;
-  // Ad 2: the article's first slot, moved out of the paper to after the collapsed cards (globals.css).
-  slots[0].setAttribute("data-show", "");
-  slots[0].setAttribute("data-phone-ad2", "");
+  // Ad 2 is the first slot (globals.css shows it after the collapsed cards, out of the paper).
 
   // Rule 4 moves the disclaimer sections to the article's end, so the screen order of sections can differ
   // from the DOM order: measure the article's extent over all of them, and never put an ad before one.
@@ -125,7 +85,7 @@ export function phoneLayout(anchor: Element | null): void {
   const collect = (el: Element) => {
     for (let i = 0; i < el.children.length; i++) {
       const child = el.children[i];
-      if (child.hasAttribute("data-card") || child.hasAttribute("data-phone-ad2")) continue;
+      if (child.hasAttribute("data-card") || child === slots[0]) continue;
       if (getComputedStyle(child).display === "contents") collect(child);
       else parts.push(child);
     }

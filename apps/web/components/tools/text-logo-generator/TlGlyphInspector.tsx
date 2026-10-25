@@ -66,6 +66,7 @@ export default function TlGlyphInspector() {
 
   return (
     <TlIndicatorCard
+      phoneRole="extra"
       title={t("title")}
       intro={t("intro", { style: styleName(active.style) })}
       indicator={indicator}

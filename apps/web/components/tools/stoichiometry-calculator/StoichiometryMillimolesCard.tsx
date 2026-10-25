@@ -13,7 +13,7 @@ export default function StoichiometryMillimolesCard({ targetMoles, digitStyle }:
   const millimoles = targetMoles * 1000;
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <p className="text-sm text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
       {targetMoles > 0 && (
         <p className="mt-3 rounded-lg border border-blue-300 bg-blue-50 px-3 py-2.5 text-sm text-blue-900 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-200">

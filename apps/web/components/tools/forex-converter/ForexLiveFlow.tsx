@@ -99,6 +99,7 @@ export default function ForexLiveFlow({ fromCurrency, toCurrency, amountText, am
 
   return (
     <SectionCard
+      phoneRole="extra"
       id="indicators"
       title={t("title")}
       action={

@@ -16,7 +16,7 @@ export default function RomanQuickReference() {
   const t = useTranslations("tools.roman-numeral-converter.quickReference");
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div dir="ltr" className="mt-4 flex flex-wrap justify-center gap-2 text-xs">
         {SYMBOLS.map(([symbol, value]) => (

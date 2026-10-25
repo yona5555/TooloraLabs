@@ -44,7 +44,7 @@ export default function KinematicsResult() {
   const gaugeValue = Math.min(Math.abs(result.a), GAUGE_DOMAIN_MAX);
 
   return (
-    <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm lg:flex lg:h-full lg:flex-col dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div data-card="" data-phone-role="output" data-phone-open="" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm lg:flex lg:h-full lg:flex-col dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{t("heading")}</h2>
         <KinematicsShareExportModal
@@ -86,7 +86,7 @@ export default function KinematicsResult() {
 
 function ErrorCard({ heading, message }: { heading: string; message: string }) {
   return (
-    <div data-card="" data-phone-role="output" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
+    <div data-card="" data-phone-role="output" data-phone-open="" data-fixed="" suppressHydrationWarning className="rounded-2xl border border-blue-200 bg-white shadow-sm dark:border-blue-500/30 dark:bg-zinc-900 dark:shadow-none">
       <div className="rounded-t-2xl bg-blue-600 px-4 py-2.5 lg:px-6 lg:py-3">
         <h2 className="font-bold text-white">{heading}</h2>
       </div>

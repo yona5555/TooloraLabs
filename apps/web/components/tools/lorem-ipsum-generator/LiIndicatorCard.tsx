@@ -1,7 +1,7 @@
 "use client";
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import SectionCard from "@/components/tool-ui/SectionCard";
+import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { useLiLive } from "./LiLiveContext";
@@ -9,11 +9,11 @@ import { useLiLive } from "./LiLiveContext";
 type Row = { label: string; value: string; emphasize?: boolean; note?: string };
 
 /** §32 shell for this tool's indicators: title-only blue header, one intro line, indicator + adjacent WORKED EXAMPLE. */
-export default function LiIndicatorCard({ title, intro, indicator, rows, mini }: { title: string; intro: string; indicator: ReactNode; rows: Row[]; mini?: 0 | 1 }) {
+export default function LiIndicatorCard({ title, intro, indicator, rows, mini, phoneRole }: { title: string; intro: string; indicator: ReactNode; rows: Row[]; mini?: 0 | 1; /** SectionCard `phoneRole`. */ phoneRole?: PhoneRole }) {
   const t = useTranslations("tools.lorem-ipsum-generator.live");
   const { ok } = useLiLive();
   return (
-    <SectionCard title={title}>
+    <SectionCard title={title} phoneRole={phoneRole}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{intro}</p>
       {ok ? (
         <IndicatorWithTable className="mt-4" indicator={mini === undefined ? indicator : <PhoneMini slot={mini} title={title}>{indicator}</PhoneMini>} workedExampleTitle={t("worked")} rows={rows} />

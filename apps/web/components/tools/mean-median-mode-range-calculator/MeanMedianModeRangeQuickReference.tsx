@@ -6,7 +6,7 @@ export default function MeanMedianModeRangeQuickReference() {
   const t = useTranslations("tools.mean-median-mode-range-calculator.quickReference");
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div dir="ltr" className="mt-4 space-y-1.5 text-xs text-zinc-500 dark:text-zinc-400">
         <p>Mean = Sum / Count</p>

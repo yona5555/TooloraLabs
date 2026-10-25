@@ -1,6 +1,6 @@
 "use client";
 import { Fragment } from "react";
-import SectionCard from "@/components/tool-ui/SectionCard";
+import SectionCard, { type PhoneRole } from "@/components/tool-ui/SectionCard";
 
 export type QuickExample = { id: string; label: string; detail: string };
 
@@ -10,6 +10,8 @@ type Props = {
   activeId?: string | null;
   onPick: (id: string) => void;
   className?: string;
+  /** SectionCard `phoneRole`: always open on phone by default (it fills the open places under the input card). */
+  phoneRole?: PhoneRole;
 };
 
 /**
@@ -35,9 +37,9 @@ function DetailPieces({ text }: { text: string }) {
  * buttons that load a worked example into the tool's inputs. The list grows (`flex-1`) with the
  * column height instead of leaving an empty band.
  */
-export default function QuickExamplesCard({ title, examples, activeId, onPick, className = "" }: Props) {
+export default function QuickExamplesCard({ title, examples, activeId, onPick, className = "", phoneRole = "extra" }: Props) {
   return (
-    <SectionCard title={title} className={`flex flex-col ${className}`} bodyClassName="flex flex-1 flex-col p-4 lg:p-5">
+    <SectionCard title={title} phoneRole={phoneRole} className={`flex flex-col ${className}`} bodyClassName="flex flex-1 flex-col p-4 lg:p-5">
       <div className="grid flex-1 auto-rows-fr grid-cols-1 gap-2">
         {examples.map((ex) => {
           const active = ex.id === activeId;

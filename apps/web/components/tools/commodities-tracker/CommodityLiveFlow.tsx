@@ -50,6 +50,7 @@ export default function CommodityLiveFlow({ commodity, amountText, amount, metal
 
   return (
     <SectionCard
+      phoneRole="extra"
       id="indicators"
       title={t("title")}
       action={

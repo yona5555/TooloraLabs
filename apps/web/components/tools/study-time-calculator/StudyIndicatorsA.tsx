@@ -66,7 +66,7 @@ export function PomodoroCycleCard({ state, setState, d }: StudyIndicatorProps) {
   const clock = (m: number) => `${Math.floor(m / 60)}:${String(Math.round(m % 60)).padStart(2, "0")}`;
 
   return (
-    <SectionCard title={t("ind.pomodoro.title")}>
+    <SectionCard title={t("ind.pomodoro.title")} phoneRole="extra">
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("ind.pomodoro.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("ind.worked")}

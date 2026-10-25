@@ -14,19 +14,22 @@ type SectionCardProps = {
   /** Anchor id for in-page navigation (e.g. SectionNav) — adds scroll-margin so sticky headers don't cover the target. */
   id?: string;
   /**
-   * LOCKED phone card order (visuals.md): this card's place among the 3 always-open cards on phone
-   * (1 input, 2 output = the card with the result actions, 3 main visual), applied by CSS order
-   * (globals.css) at server render. Set on every tool's role cards (scripts/phone-roles.mjs); desktop ignores it. `live-output` = an output shown
-   * above the tool (crypto-converter's approved exception: the live result first, the input second).
-   * `output-secondary` = a secondary output (a long table or schedule with its own Download / Copy
-   * button, e.g. mortgage's payment schedules): only the primary output is always open, so it sits in
-   * the collapsed group with its buttons inside it (at most 3 open cards on every tool).
-   * `visual-collapsed` = a main visual that leads the collapsed group.
+   * LOCKED phone card order (visuals.md): this card's place on phone, applied by CSS order (globals.css)
+   * from the server HTML; desktop ignores it. The always-open cards are exactly the cards with an open
+   * role: 1 `input`, 2 `output` (the card with the result actions), 3 `visual` (the main visual), and
+   * `extra` = an always-open card that fills a page's 3 open places after those (e.g. Quick examples).
+   * `live-output` = an output shown above the tool (the markets tools' approved exception: the live
+   * result first, the input second). `output-secondary` = a secondary output (a long table or schedule
+   * with its own Download / Copy button, e.g. mortgage's payment schedules) and `visual-collapsed` = a
+   * main visual that leads the collapsed group: both stay in the collapsed group (at most 3 open cards).
    */
   phoneRole?: PhoneRole;
 };
 
-export type PhoneRole = "input" | "output" | "output-secondary" | "visual" | "live-output" | "visual-collapsed";
+export type PhoneRole = "input" | "output" | "output-secondary" | "visual" | "live-output" | "visual-collapsed" | "extra";
+
+/** The roles of the always-open cards on phone (`data-fixed` + `data-phone-open`; globals.css never collapses them). */
+const OPEN_ROLES: ReadonlySet<PhoneRole> = new Set<PhoneRole>(["input", "output", "visual", "live-output", "extra"]);
 
 const headerClassName =
   "flex w-full items-center justify-between gap-3 rounded-t-2xl bg-blue-600 px-4 py-2.5 text-start lg:px-6 lg:py-3";
@@ -35,11 +38,11 @@ const PHONE_QUERY = "(max-width: 767px)";
 
 /**
  * APPROVED PHONE STANDARD (visuals.md, below 768px, tool pages only — `[data-phone-cards]` on the
- * tool page's <main>): the page's first 3 top-level blue-header cards stay open with no toggle; every
- * later card starts collapsed to its blue header and gets an OPEN/CLOSE pill. A page with 3 cards or
- * fewer has no toggles. `PhoneLayoutScript` marks the always-open cards (`data-fixed`) while the HTML
- * is parsed, before the first paint; the collapse itself is CSS only (globals.css), so the body always
- * stays in the HTML. From 768px up nothing here applies: the pill is display:none and every body shows.
+ * tool page's <main>): the cards with an open `phoneRole` stay open with no toggle (at most 3 per page);
+ * every other top-level card starts collapsed to its blue header and gets an OPEN/CLOSE pill. Both are
+ * decided at server render (`data-fixed`), and the collapse itself is CSS only (globals.css), so the body
+ * always stays in the HTML and nothing changes after the first paint. Cards in a dialog never collapse.
+ * From 768px up nothing here applies: the pill is display:none and every body shows.
  */
 const NestedCardContext = createContext(false);
 
@@ -50,55 +53,28 @@ const NestedCardContext = createContext(false);
 const CardOpenedContext = createContext(true);
 export const useCardOpened = () => useContext(CardOpenedContext);
 
-/** Desktop and markets (lib/phone/layout.ts): a card holding a Copy or Share/Export action counts as an output card. */
-const OUTPUT_ACTION = "[data-phone-output-action],button:has(svg.lucide-copy,svg.lucide-share-2,svg.lucide-file-down)";
-
-/** Same rule as PhoneLayoutScript, for a card mounted after the page loaded (e.g. a result card). */
-function isAlwaysOpen(el: HTMLElement): boolean {
-  const scope = el.closest("[data-phone-cards]");
-  if (!scope || el.closest('dialog,[role="dialog"]')) return true;
-  const cards = Array.from(scope.querySelectorAll<HTMLElement>("[data-card]")).filter((c) => !c.parentElement?.closest("[data-card]") && (c === el || c.getClientRects().length > 0));
-  if (cards.length <= 3) return true;
-  if (window.matchMedia(PHONE_QUERY).matches && !scope.hasAttribute("data-phone-markets")) {
-    // LOCKED phone card order: the server's role cards are open, then the first other cards fill up to 3.
-    const isRole = (c: HTMLElement) => /^(input|output|visual|live-output)$/.test(c.getAttribute("data-phone-role") || "");
-    if (isRole(el)) return true;
-    const roles = cards.filter(isRole).length;
-    const collapsedRole = (c: HTMLElement) => /^(output-secondary|visual-collapsed)$/.test(c.getAttribute("data-phone-role") || "");
-    return !collapsedRole(el) && cards.filter((c) => !isRole(c) && !collapsedRole(c)).indexOf(el) < 3 - roles;
-  }
-  if (window.matchMedia(PHONE_QUERY).matches) cards.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
-  return cards.indexOf(el) < 3 || el.hasAttribute("data-phone-output");
-}
-
 export default function SectionCard({ title, action, onToggle, children, bodyClassName = "p-4 lg:p-6", className = "", id, phoneRole }: SectionCardProps) {
   const t = useTranslations("common");
   const nested = useContext(NestedCardContext);
   const parentOpened = useCardOpened();
   const ref = useRef<HTMLDivElement>(null);
   const bodyId = `${useId()}-body`;
-  // Server default: collapsed (aria-expanded=false); `fixed` = an always-open card (no toggle).
-  // A card with its own header toggle (`onToggle`) or inside another card is never collapsed here.
-  const [fixed, setFixed] = useState(nested || !!onToggle);
+  // `fixed` = an always-open card (no toggle): an open phone role, a card with its own header toggle
+  // (`onToggle`) or a card inside another card. Every other card is collapsed on phone (aria-expanded=false).
+  const [fixed, setFixed] = useState(nested || !!onToggle || (!!phoneRole && OPEN_ROLES.has(phoneRole)));
   const [expanded, setExpanded] = useState(false);
   const [opened, setOpened] = useState(false);
 
   useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (!fixed) {
-      if (!el.hasAttribute("data-card-init")) {
-        const scope = el.closest("[data-phone-cards]");
-        if (scope && !scope.hasAttribute("data-phone-markets") && !window.matchMedia(PHONE_QUERY).matches && el.querySelector(OUTPUT_ACTION)) el.setAttribute("data-phone-output", "");
-        el.setAttribute("data-card-init", "");
-        if (isAlwaysOpen(el)) el.setAttribute("data-fixed", "");
-      }
-      if (el.hasAttribute("data-fixed")) setFixed(true);
-    }
+    // A dialog's cards are mounted on the client when it opens, so this runs before their first paint.
+    const inDialog = !fixed && !!el.closest('dialog,[role="dialog"]');
+    if (inDialog) setFixed(true);
     // Desktop shows every body, so whatever it holds mounts at once there.
     const mq = window.matchMedia(PHONE_QUERY);
     const read = () => {
-      if (!mq.matches || el.hasAttribute("data-fixed")) setOpened(true);
+      if (!mq.matches || fixed || inDialog) setOpened(true);
     };
     read();
     mq.addEventListener("change", read);
@@ -123,6 +99,7 @@ export default function SectionCard({ title, action, onToggle, children, bodyCla
       data-bp-panel
       data-card=""
       data-phone-role={phoneRole}
+      data-phone-open={phoneRole && OPEN_ROLES.has(phoneRole) ? "" : undefined}
       data-state={fixed || expanded ? "open" : "closed"}
       data-fixed={fixed ? "" : undefined}
       suppressHydrationWarning

@@ -65,6 +65,7 @@ export function CommodityUnitEquivalence({ commodity, amount, metalUnit, oilUnit
 
   return (
     <IndicatorCard
+      phoneRole="extra"
       id="equivalence"
       title={t("title")}
       heading={t("heading", { amount: f.num(amt, 4), unit: short(unit), name: tA(`commodity.${commodity}`) })}

@@ -7,7 +7,7 @@ export default function SGQuickReference() {
   const t = useTranslations("tools.spelling-grammar-checker.quickReference");
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       {/* Same colours as the Results card's lanes and highlights. */}
       <div className="mt-4 space-y-1.5 text-xs text-zinc-500 dark:text-zinc-400">

@@ -8,7 +8,7 @@ export default function StatisticsQuickReference() {
   const t = useTranslations("tools.statistics-calculator.aboveFold.quickReference");
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div dir="ltr" className="mt-4 space-y-3">
         {FORMULA_KEYS.map((key) => (

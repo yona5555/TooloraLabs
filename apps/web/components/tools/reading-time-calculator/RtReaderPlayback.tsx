@@ -184,6 +184,7 @@ export default function RtReaderPlayback() {
 
   return (
     <RtIndicatorCard
+      phoneRole="extra"
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

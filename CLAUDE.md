@@ -16,6 +16,8 @@ TooloraLabs-Claude-Instructions.md is a historical archive; the binding rules ar
 - Never regenerate or overwrite approved work in bulk; change only what is broken, one item at a time. (Tool-card previews: approved images are locked in `apps/web/public/tool-previews/approved.json`; `npm run previews -- <slug>` skips them, `--force <slug>` redoes one; `npm run test:cards` checks the served cards.)
 - Every final report MUST end with: 'Context: <percent>% — <advice>'. Above 50% the advice is 'run /clear now'.
 - Details matter: clipping, cropping, stale cache and wrong elements are bugs. Check them before saying done.
+- CI: check the run ONCE with gh run view (or gh run list --limit 1). If it is still running, give Yousef the run URL and stop. Never loop, poll or use gh run watch.
+- Performance numbers: the only official metric is Lighthouse mobile (CLI, default throttling), 3 runs per page, median, on a production build. Any other timing method may be used only to compare two builds and must be labelled as such in the report.
 
 ## Hard rules
 - Always reply to Yousef in Modern Standard Arabic, even when the command or task is written in English. Code, commands and identifiers stay in English.

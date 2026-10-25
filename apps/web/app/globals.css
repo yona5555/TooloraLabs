@@ -607,28 +607,29 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
     backdrop-filter: none;
   }
   /*
-   * Phone order (LOCKED, visuals.md): the always-open cards first, in logical order (1 input, 2 output =
-   * the card with the result actions, 3 main visual; crypto's `live-output` above its input), set at
-   * server render by SectionCard `phoneRole` (no client reordering), then the docs row + ad 1 (ViewDocsLink), then everything else in DOM order.
-   * The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and every wrapper
-   * between it and an always-open card, a role card or the docs row stops boxing (display:
-   * contents), so CSS order can place them. lib/phone/layout.ts numbers the 3 always-open cards
-   * ([data-phone-open] 1-3, screen order); a page whose DOM order differs from the logical one marks
-   * those cards ([data-phone-role], SectionCard `phoneRole`). What came before the first open card
-   * (cards excepted) stays first. Dialogs never flatten.
+   * Phone order (LOCKED, visuals.md), pure CSS from the server HTML (no script orders or opens a card):
+   * the always-open cards first, in logical order (SectionCard `phoneRole`: 1 input, 2 output = the
+   * card with the result actions, 3 main visual, then `extra` open cards in DOM order; the markets
+   * tools' `live-output` above their input), then the docs row + ad 1 (ViewDocsLink), then everything
+   * else in DOM order. The page's content wrapper ([data-phone-flow], ToolPageLayout) is one column and
+   * every wrapper between it and a role card or the docs row stops boxing (display: contents), so CSS
+   * order can place them; a wrapper hidden on phone (a card's desktop copy, `hidden lg:flex`) stays
+   * hidden. What came before the first always-open card in DOM order ([data-phone-open], server-rendered
+   * on every open-role card; cards excepted: the back button, the title, the mini cards) stays first;
+   * what sits between open cards (e.g. a result tab bar) does not. Dialogs never flatten.
    */
   [data-phone-flow] {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
-  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *):has([data-phone-open], [data-phone-role], [data-phone-docs]) {
+  [data-phone-flow] :not([data-card], [data-card] *, dialog, dialog *, [role="dialog"], [role="dialog"] *, .hidden, .max-md\:hidden, .max-lg\:hidden):has([data-phone-role], [data-phone-docs]) {
     display: contents;
   }
-  [data-phone-flow] :where(:has(~ [data-phone-open="1"], ~ * [data-phone-open="1"]), :has(~ [data-phone-open="1"], ~ * [data-phone-open="1"]) *):where(:not([data-card], :has([data-card]))) {
+  [data-phone-flow] :where(:has(~ [data-phone-open], ~ * [data-phone-open]), :has(~ [data-phone-open], ~ * [data-phone-open]) *):where(:not([data-card], :has([data-card]))):where(:not([data-phone-open] ~ *, [data-phone-open] ~ * *, :has([data-phone-open]) ~ *, :has([data-phone-open]) ~ * *)) {
     order: -60;
   }
-  [data-phone-flow] [data-phone-open] {
+  [data-phone-flow] [data-phone-role="extra"] {
     order: -20;
   }
   [data-phone-flow] [data-phone-role="live-output"] {
@@ -658,8 +659,10 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
    * Rule B: no blue-header card inside the article. The article (EncyclopediaPaper, [data-phone-article]),
    * every wrapper around it, and inside it the paper boxes, the sections, their bodies and anything holding
    * a card or an ad slot stop boxing, so the article's parts are items of the phone flow: its cards keep
-   * order 0 and join the collapsed cards in DOM order, ad 2 (the article's first ad slot, [data-phone-ad2])
-   * sits after them outside the paper, the article's parts follow (10), then whatever came after it (20).
+   * order 0 and join the collapsed cards in DOM order, ad 2 (the article's first ad slot: InfoSection
+   * renders every slot as a sibling in the article, so it is the slot with no slot before it; shown from
+   * the server HTML) sits after them outside the paper, the article's parts follow (10), then whatever
+   * came after it (20).
    * lib/phone/layout.ts measures the parts and draws ONE continuous paper behind them (::before below);
    * the parts get the paper's inner padding as side margins and one uniform spacing (the flow's gap).
    */
@@ -675,11 +678,12 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-phone-flow] :is([data-phone-article], :has([data-phone-article])) ~ * :where(:not([data-card], [data-card] *, :has([data-card]))) {
     order: 20;
   }
-  [data-phone-flow] [data-phone-article] [data-article-ad][data-phone-ad2] {
+  [data-phone-flow] [data-phone-article] [data-article-ad]:not([data-article-ad] ~ *) {
+    display: block;
     order: 5;
     padding-block: 0;
   }
-  [data-phone-flow] :where([data-phone-article] :is([data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :not([data-card], [data-card] *):has([data-card], [data-article-ad])) > :not([data-card], [data-phone-ad2], [data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :has([data-card], [data-article-ad]))) {
+  [data-phone-flow] :where([data-phone-article] :is([data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :not([data-card], [data-card] *):has([data-card], [data-article-ad])) > :not([data-card], [data-phone-article] [data-article-ad]:not([data-article-ad] ~ *), [data-phone-paper], [data-encyclopedia-paper], [data-info-section], [data-info-body], :has([data-card], [data-article-ad]))) {
     margin: 0 1rem;
   }
   [data-phone-flow] [data-phone-article] [data-info-section] > h2 {
@@ -688,7 +692,7 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
   [data-phone-flow] [data-phone-article] [data-info-section]:first-of-type > h2 {
     margin-top: 0;
   }
-  [data-phone-flow] [data-phone-article] [data-article-ad][data-show]:not([data-phone-ad2]) {
+  [data-phone-flow] [data-phone-article] [data-article-ad][data-show]:not([data-phone-article] [data-article-ad]:not([data-article-ad] ~ *)) {
     padding-block: 0.5rem;
   }
   /* A card keeps its own (sans) font on phone, never the article's serif it sits in. */

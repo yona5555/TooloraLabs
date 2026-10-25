@@ -248,7 +248,7 @@ export function GpaTargetSliderCard({ state, setState, d, f }: IndicatorProps) {
   const step = d.scale.max === 5 ? 0.05 : 0.01;
 
   return (
-    <SectionCard title={t("target.title")}>
+    <SectionCard phoneRole="extra" title={t("target.title")}>
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("target.intro")}</p>
       <IndicatorWithTable
         workedExampleTitle={t("worked")}

@@ -260,7 +260,7 @@ export default function InvoiceGeneratorTool({ education }: { education: ReactNo
               <ViewDocsLink slug="invoice-generator" />
 
               {hasCalculated && lineItemBars && lineItemBars.length > 1 && (
-                <SectionCard title={tDiagrams("lineItemsDiagram.title")}>
+                <SectionCard title={tDiagrams("lineItemsDiagram.title")} phoneRole="extra">
                   <InvoiceLineItemsBarDiagram items={lineItemBars} formatValue={money} caption={tDiagrams("lineItemsDiagram.caption")} />
                 </SectionCard>
               )}

@@ -8,7 +8,7 @@ export default function SignificantFiguresQuickReference() {
   const t = useTranslations("tools.significant-figures-calculator.aboveFold.quickReference");
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <ul className="mt-4 space-y-3">
         {RULE_KEYS.map((key) => (
