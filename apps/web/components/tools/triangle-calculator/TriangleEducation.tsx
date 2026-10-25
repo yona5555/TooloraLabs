@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import TriangleAngleGauge from "./TriangleAngleGauge";
 import TriangleAngleSumDiagram from "./TriangleAngleSumDiagram";
 import TriangleSolvingTimeline from "./TriangleSolvingTimeline";
@@ -100,12 +99,6 @@ export default async function TriangleEducation() {
         </div>
       </InfoSection>
 
-      {/* §8.7: leaderboard placement is a manual, per-tool editorial decision — two
-          well-spaced positions, matching the site's established precedent (e.g. BMI:
-          after the solved/worked content, and after Behind the Tool), not one ad per
-          redistributed indicator. */}
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
@@ -126,8 +119,6 @@ export default async function TriangleEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

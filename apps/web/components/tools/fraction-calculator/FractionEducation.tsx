@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { GlassPage, GlassIndicatorGrid } from "@/components/tool-ui/glass/GlassPrimitives";
 import FractionHero from "./FractionHero";
 import FractionRingsCard from "./FractionRingsCard";
@@ -66,14 +65,10 @@ export default async function FractionEducation() {
             <FractionCommonGridCard />
           </GlassIndicatorGrid>
 
-          <AdSpace variant="leaderboard" />
-
           <GlassIndicatorGrid>
             <FractionLcdLadderCard />
             <FractionAreaModelCard />
           </GlassIndicatorGrid>
-
-          <AdSpace variant="leaderboard" />
 
           <GlassIndicatorGrid>
             <FractionDivisionTapeCard />
@@ -112,8 +107,6 @@ export default async function FractionEducation() {
             <FractionBenchmarkGaugeCard />
           </GlassIndicatorGrid>
 
-          <AdSpace variant="leaderboard" />
-
           <GlassIndicatorGrid>
             <FractionContributionCard />
             <FractionCrossMultiplyCard />
@@ -139,8 +132,6 @@ export default async function FractionEducation() {
             universities={universities}
           />
         </InfoSection>
-
-        <AdSpace variant="leaderboard" />
 
         <GlassIndicatorGrid>
           <FractionSensitivityCard />

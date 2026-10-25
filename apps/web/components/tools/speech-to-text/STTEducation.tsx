@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { STTCapitalsCard, STTCleanupCard, STTGaugeCard, STTInterimCard, STTJoinCard, STTLanguagesCard, STTWordLengthsCard } from "./STTCards";
 import { STTHelixCard } from "./STTCard3D";
 
@@ -30,8 +29,6 @@ export default async function STTEducation() {
         <STTCapitalsCard side="table-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
         <STTWordLengthsCard side="visual-left" />
@@ -45,8 +42,6 @@ export default async function STTEducation() {
         </div>
         <STTHelixCard side="table-left" />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -70,8 +65,6 @@ export default async function STTEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

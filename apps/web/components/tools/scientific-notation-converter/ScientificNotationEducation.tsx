@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import ScientificNotationMagnitudeDrag from "./ScientificNotationMagnitudeDrag";
 import LargeNumberConversionSteps from "./LargeNumberConversionSteps";
 import SmallNumberConversionSteps from "./SmallNumberConversionSteps";
@@ -51,8 +50,6 @@ export default async function ScientificNotationEducation() {
           <ExponentArithmeticComparison />
         </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("precision.title")}>
         <p>{t("precision.intro")}</p>
@@ -119,8 +116,6 @@ export default async function ScientificNotationEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

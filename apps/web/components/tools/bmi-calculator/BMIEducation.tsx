@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import EquipmentSection, { type EquipmentItem } from "@/components/tool-ui/EquipmentSection";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
@@ -53,8 +52,6 @@ export default async function BMIEducation() {
         <p>{t("categoryTable.intro")}</p>
         <BMICategoryTable rows={categoryRows} />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("bodyLevels.title")}>
         <p>{t("bodyLevels.intro")}</p>
@@ -169,8 +166,6 @@ export default async function BMIEducation() {
         <p>{t("primeIndex.example.primeResult")}</p>
         <p>{t("primeIndex.example.ponderalResult")}</p>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("limitations.title")}>
         <p>{t("limitations.paragraph1")}</p>

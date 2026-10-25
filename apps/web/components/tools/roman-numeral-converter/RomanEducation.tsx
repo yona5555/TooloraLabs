@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { RomanAdditionCard, RomanClockCard, RomanLengthCard, RomanSubtractiveCard, RomanTallyCard, RomanVinculumCard, RomanWaterfallCard, RomanYearsCard } from "./RomanCards";
 
 type ExampleRow = { arabic: string; roman: string };
@@ -28,8 +27,6 @@ export default async function RomanEducation() {
         <p>{t("intro.paragraph2")}</p>
         <RomanSubtractiveCard side="table-left" />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("useCases.title")}>
         <p>{t("useCases.intro")}</p>
@@ -68,8 +65,6 @@ export default async function RomanEducation() {
         <RomanYearsCard side="visual-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
@@ -93,8 +88,6 @@ export default async function RomanEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

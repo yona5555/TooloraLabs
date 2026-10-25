@@ -2,6 +2,7 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 import { PHONE_LAYOUT_BOOT, phoneLayout, scrollToHashTarget } from "@/lib/phone/layout";
+import { ADS_ENABLED, DESKTOP_ADS_BOOT, desktopAdLayout } from "@/lib/ads";
 
 /**
  * The approved phone layout pass (lib/phone/layout.ts), placed after the tool page's content.
@@ -10,16 +11,25 @@ import { PHONE_LAYOUT_BOOT, phoneLayout, scrollToHashTarget } from "@/lib/phone/
  * the client. The sentinel <span> marks the end of the content for it; after a client-side navigation
  * (no server HTML) the layout effect runs the same pass before paint. It also lands `#section` links
  * on a section that rule B flattened (scrollToHashTarget), on load and on hashchange.
+ * With desktop ads on, the desktop ad pass (lib/ads.ts) rides the same sentinel and timing.
  */
 export default function PhoneLayoutScript() {
   const inserted = useRef(false);
   useServerInsertedHTML(() => {
     if (inserted.current) return null;
     inserted.current = true;
-    return <script id="phone-layout" dangerouslySetInnerHTML={{ __html: PHONE_LAYOUT_BOOT }} />;
+    return (
+      <>
+        <script id="phone-layout" dangerouslySetInnerHTML={{ __html: PHONE_LAYOUT_BOOT }} />
+        {ADS_ENABLED && <script id="desktop-ads" dangerouslySetInnerHTML={{ __html: DESKTOP_ADS_BOOT }} />}
+      </>
+    );
   });
   const ref = useRef<HTMLSpanElement>(null);
-  useLayoutEffect(() => phoneLayout(ref.current), []);
+  useLayoutEffect(() => {
+    phoneLayout(ref.current);
+    if (ADS_ENABLED) desktopAdLayout(ref.current);
+  }, []);
   useEffect(() => {
     scrollToHashTarget();
     // late fonts and images move the target: land again once the page has fully loaded

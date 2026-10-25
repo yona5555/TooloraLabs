@@ -7,7 +7,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import NotepadInputPanel from "./NotepadInputPanel";
 import NotepadResult, { NotepadNudge, NotepadSyntaxTable } from "./NotepadResult";
@@ -109,7 +108,7 @@ export default function NotepadCalculator({ education }: { education: ReactNode 
         />
       </div>
 
-      {/* Below the fold every card spans the full width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full width. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="notepad-calculator" />
@@ -118,25 +117,21 @@ export default function NotepadCalculator({ education }: { education: ReactNode 
         <LineValuesTrend {...ind} />
         <CompositionDonut {...ind} />
         <VariablesRanked {...ind} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 2 — how one line is evaluated */}
         <EvaluationStairs {...lineProps} />
         <LiveFormula {...lineProps} />
         <DependencyFlow {...ind} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 3 — what-if on the inputs */}
         <NotepadWhatIfLab {...varProps} onApply={applyValue} />
         <SensitivityTrio {...varProps} />
         <InputImpactBars {...ind} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 4 — scope and precision */}
         <ScopeTimeline {...ind} />
         <MagnitudeScale {...ind} />
         <RoundingEquivalence {...lineProps} />
-        <AdSpace variant="leaderboard" />
 
         <NotepadWorkedExamples />
       </div>

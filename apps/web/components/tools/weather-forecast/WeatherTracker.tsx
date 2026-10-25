@@ -7,7 +7,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { usePersistedList } from "@/lib/use-persisted-list";
 import WxInput, { cityPlace } from "./WxInput";
 import WxResult from "./WxResult";
@@ -142,7 +141,6 @@ export default function WeatherTracker({ initialCityId, initialForecast, rendere
           <WxWorldMap {...props} />
           <WxWindCard {...props} />
           <WxPressureCard {...props} />
-          <AdSpace variant="leaderboard" />
           <WxHumidityCard {...props} />
           <WxUvCard {...props} />
           <WxSunCard {...props} />

@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { tools } from "@/data/tools";
 import ToolCard from "@/components/tool-ui/ToolCard";
-import AdSpace from "@/components/tool-ui/AdSpace";
 
 type Props = {
   locale: string;
@@ -24,8 +23,6 @@ export default async function RelatedTools({
 
   return (
     <section className="mx-auto max-w-5xl px-6 pb-20">
-      <AdSpace variant="leaderboard" className={related.length > 0 ? "mb-10 lg:mb-12" : ""} />
-
       {related.length > 0 && (
         <>
           <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">

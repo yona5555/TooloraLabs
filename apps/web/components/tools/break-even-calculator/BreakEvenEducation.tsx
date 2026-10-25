@@ -4,7 +4,6 @@ import InfoSection from "@/components/tool-ui/InfoSection";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import BreakEvenWorkedExampleTable from "./BreakEvenWorkedExampleTable";
 import BreakEvenWorkedExampleNote from "./BreakEvenWorkedExampleNote";
 import BreakEvenBusinessTypeDiagram from "./BreakEvenBusinessTypeDiagram";
@@ -302,8 +301,6 @@ export default async function BreakEvenEducation() {
         </SectionCard>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
@@ -323,8 +320,6 @@ export default async function BreakEvenEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

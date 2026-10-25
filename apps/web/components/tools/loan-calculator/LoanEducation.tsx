@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import LoanAmortizationAreaChart from "./LoanAmortizationAreaChart";
 
 type ExampleRow = { scenario: string; monthlyPayment: string; totalInterest: string };
@@ -86,8 +85,6 @@ export default async function LoanEducation() {
         </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
@@ -107,8 +104,6 @@ export default async function LoanEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

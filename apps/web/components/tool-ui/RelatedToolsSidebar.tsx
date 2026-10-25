@@ -7,6 +7,7 @@ import { tools } from "@/data/tools";
 import { categoryHref } from "@/data/categories";
 import { getToolIcon } from "@/lib/tool-icons";
 import AdSpace from "./AdSpace";
+import { ADS_ENABLED } from "@/lib/ads";
 import SectionCard from "./SectionCard";
 
 type RelatedToolsSidebarProps = {
@@ -181,9 +182,11 @@ export default function RelatedToolsSidebar({
         </Link>
       </div>
 
-      <div className="-mx-4 border-t border-zinc-200 pt-6 dark:border-zinc-800 lg:-mx-6">
-        <AdSpace className="mx-auto" />
-      </div>
+      {ADS_ENABLED && (
+        <div className="-mx-4 border-t border-zinc-200 pt-6 dark:border-zinc-800 lg:-mx-6">
+          <AdSpace className="mx-auto" />
+        </div>
+      )}
     </SectionCard>
     {/* Unused sidebarMatchRow column height lands here, outside the card; ToolAboveFold subtracts it when
         measuring regardless of whether it's empty or filled with `fillContent`. */}

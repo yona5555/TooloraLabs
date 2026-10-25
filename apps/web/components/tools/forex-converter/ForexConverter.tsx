@@ -9,7 +9,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import { FiatContext, marketFormatters, useFiatPreference, type FiatRate } from "@/components/tools/markets/fiat";
 import ForexInputPanel from "./ForexInputPanel";
@@ -156,7 +155,7 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, usd
         />
       </div>
 
-      {/* Below the fold every card spans the full content width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full content width. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="forex-converter" />
@@ -166,21 +165,18 @@ export default function ForexConverter({ initialCurrencies, lastUpdatedUnix, usd
         <ForexRangeStrip {...pairProps} history={history} />
         <ForexVolatilityGauge {...pairProps} recent={recent} />
         <ForexSensitivityTrio {...pairProps} amount={amountValue} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 2 — the pair itself */}
         <ForexComparisonCards {...pairProps} recent={recent} history={history} />
         <ForexPairTimeline {...pairProps} history={history} />
         <ForexPeriodReturns {...pairProps} history={history} />
         <ForexYearlySteps {...pairProps} amount={amountValue} history={history} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 3 — the whole market */}
         <ForexStrengthMeter recent={recent} highlight={[fromCode, toCode]} digitStyle={digitStyle} />
         <ForexTopMovers recent={recent} onPick={handlePick} digitStyle={digitStyle} />
         <ForexCrossRates currencies={initialCurrencies} fromCode={fromCode} toCode={toCode} digitStyle={digitStyle} />
         <ForexTopList currencies={initialCurrencies} fromCurrency={fromCurrency} amount={amountValue} digitStyle={digitStyle} />
-        <AdSpace variant="leaderboard" />
 
         <ForexNews />
         <ForexLearningResources />

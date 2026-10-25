@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { UnitAreaCirclesCard, UnitGallonJugsCard, UnitImperialCard, UnitMeridianCard, UnitPrefixCard, UnitRoadCard, UnitScalesCard, UnitTempLineCard } from "./UnitCards";
 
 type ExampleRow = { scenario: string; result: string };
@@ -29,8 +28,6 @@ export default async function UnitEducation() {
         <UnitScalesCard side="table-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
         <UnitAreaCirclesCard side="visual-left" />
@@ -55,8 +52,6 @@ export default async function UnitEducation() {
         <UnitRoadCard side="table-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
       </InfoSection>
@@ -79,8 +74,6 @@ export default async function UnitEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>
