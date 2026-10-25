@@ -6,7 +6,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import CitationStudioInput from "./CitationStudioInput";
 import CitationStudioResult from "./CitationStudioResult";
 import CitationBibliography from "./CitationBibliography";
@@ -59,7 +58,6 @@ export default function CitationGenerator({ education }: { education: ReactNode 
         <CitationAuthorsCard {...props} />
         <CitationCompletenessCard {...props} />
         <CitationLengthCard {...props} />
-        <AdSpace variant="leaderboard" />
         <CitationOrderCard {...props} />
         <CitationMixCard {...props} />
         <CitationRecencyCard {...props} />

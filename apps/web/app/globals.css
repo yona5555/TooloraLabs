@@ -536,6 +536,15 @@ body:has([data-coming-soon-page]) [data-bp-link="coming-soon"] {
 [data-article-ad] {
   display: none;
 }
+/* Desktop in-content ad candidates (DesktopAdSlot): display:none until lib/ads.ts picks 3 before the first paint. */
+[data-desktop-ad] {
+  display: none;
+}
+@media (min-width: 768px) {
+  [data-desktop-ad][data-show] {
+    display: block;
+  }
+}
 @media (max-width: 767px) {
   [data-phone-cards] [data-card]:not([data-fixed]) > [data-card-header] > [data-card-toggle] {
     display: flex;

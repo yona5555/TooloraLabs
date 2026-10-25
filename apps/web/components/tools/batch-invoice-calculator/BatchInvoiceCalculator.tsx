@@ -9,7 +9,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SidebarFillList from "@/components/tools/markets/SidebarFillList";
 import InvoiceBatchEditor from "./InvoiceBatchEditor";
 import InvoiceFlowResult from "./InvoiceFlowResult";
@@ -227,7 +226,7 @@ export default function BatchInvoiceCalculator({ education, fx }: Props) {
         />
       </div>
 
-      {/* Below the fold every card spans the full width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full width. */}
       <div className="mt-6 flex flex-col gap-6 print:hidden">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="batch-invoice-calculator" />
@@ -237,20 +236,17 @@ export default function BatchInvoiceCalculator({ education, fx }: Props) {
         <CompositionDonut {...ind} />
         <NetTaxStacked {...ind} />
         <LiveFormula {...ind} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 2 — when and who */}
         <TotalsTrend {...ind} />
         <InvoiceTimeline {...ind} />
         <RevenueByClient {...ind} />
         <ClientConcentration {...ind} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 3 — the tax side */}
         <NetTaxBalance {...ind} />
         <TaxSensitivityTrio {...ind} />
         <VatReferenceTable {...ind} onUseRate={applyRate} />
-        <AdSpace variant="leaderboard" />
 
         <InvoiceWorkedExamples />
       </div>

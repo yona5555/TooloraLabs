@@ -6,7 +6,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import ScheduleStudioInput from "./ScheduleStudioInput";
 import ScheduleStudioResult from "./ScheduleStudioResult";
 import { ScheduleConflictCard, ScheduleCreditsCard, ScheduleDailyLoadCard, ScheduleGapsCard } from "./ScheduleIndicatorsA";
@@ -59,7 +58,6 @@ export default function ClassScheduleBuilder({ education }: { education: ReactNo
         <ScheduleDailyLoadCard {...props} />
         <ScheduleGapsCard {...props} />
         <ScheduleCreditsCard {...props} />
-        <AdSpace variant="leaderboard" />
         <ScheduleWindowCard {...props} />
         <ScheduleCampusCard {...props} />
         <ScheduleStreakCard {...props} />

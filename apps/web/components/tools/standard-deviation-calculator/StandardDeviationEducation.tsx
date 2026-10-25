@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import SdLive3D from "./SdLive3D";
 import SdDragLab from "./SdDragLab";
@@ -45,8 +44,6 @@ export default async function StandardDeviationEducation() {
         </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("formula.title")}>
         <p>{t("formula.paragraph1")}</p>
         <p dir="ltr" className="rounded-sm border border-current/20 p-4 text-center font-mono text-base">
@@ -62,8 +59,6 @@ export default async function StandardDeviationEducation() {
           <SdSquaresStacked />
         </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
@@ -92,8 +87,6 @@ export default async function StandardDeviationEducation() {
         </div>
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("applications.title")}>
         <p>{t("applications.intro")}</p>
         <div className="space-y-4">
@@ -110,8 +103,6 @@ export default async function StandardDeviationEducation() {
           <SdSensitivityTrio />
         </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -132,8 +123,6 @@ export default async function StandardDeviationEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

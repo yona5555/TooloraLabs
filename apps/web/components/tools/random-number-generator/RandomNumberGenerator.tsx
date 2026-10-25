@@ -9,7 +9,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import RandomNumberInputPanel from "./RandomNumberInputPanel";
 import RandomNumberResult from "./RandomNumberResult";
 import RandomNumberDrawOrder from "./RandomNumberDrawOrder";
@@ -178,7 +177,7 @@ export default function RandomNumberGenerator({ education }: { education: ReactN
         />
       </div>
 
-      {/* Below the fold every card spans the full width; leaderboards sit between groups only. */}
+      {/* Below the fold every card spans the full width. */}
       <div className="mt-6 flex flex-col gap-6">
         <SectionNav items={navItems} />
         <ViewDocsLink slug="random-number-generator" />
@@ -195,21 +194,18 @@ export default function RandomNumberGenerator({ education }: { education: ReactN
         />
         <RunningAverage d={d} f={f} />
         <UniformityGauge d={d} f={f} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 2 — what to expect */}
         <SpreadInRange d={d} f={f} />
         <SumFormula d={d} f={f} />
         <DistinctStacked d={d} f={f} />
         <AppearanceTrio d={d} f={f} />
-        <AdSpace variant="leaderboard" />
 
         {/* Group 3 — how big and how fair the space is */}
         <OutcomeSpaceLog d={d} f={f} />
         <ModuloBiasCards d={d} f={f} />
         <EntropyZoneStrip d={d} f={f} />
         <PresetOddsTable d={d} f={f} active={activePreset} onApply={applyPreset} />
-        <AdSpace variant="leaderboard" />
 
         <RandomNumberWorkedExamples />
       </div>

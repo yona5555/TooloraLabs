@@ -8,7 +8,6 @@ import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import HistoryTape, { type TapeEntry } from "@/components/tool-ui/HistoryTape";
 import { newEntryId, usePersistedList } from "@/lib/use-persisted-list";
 import WorldTimeInput from "./WorldTimeInput";
@@ -146,7 +145,6 @@ export default function WorldTimeCalculator({ education }: { education: ReactNod
         <WtMeetingCard {...props} />
         <WtOverlapBarsCard {...props} />
         <WtOffsetBarsCard {...props} />
-        <AdSpace variant="leaderboard" />
         <WtDstTimelineCard {...props} />
         <WtHijriCard {...props} />
         <WtDaylightCard {...props} />

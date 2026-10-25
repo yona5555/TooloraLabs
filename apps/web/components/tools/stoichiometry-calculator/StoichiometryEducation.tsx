@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { StoDialCard, StoLinesCard, StoNeutralCard, StoProgressCard, StoSlopesCard } from "./StoichiometryCards2D";
 import { StoMoleCard, StoRatioCard, StoTanksCard } from "./StoichiometryCards3D";
 
@@ -31,8 +30,6 @@ export default async function StoichiometryEducation() {
         <StoProgressCard side="visual-left" />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
         <StoSlopesCard side="table-left" />
@@ -55,8 +52,6 @@ export default async function StoichiometryEducation() {
           </table>
         </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -89,8 +84,6 @@ export default async function StoichiometryEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

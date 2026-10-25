@@ -8,7 +8,6 @@ import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import HistoryTape, { type TapeEntry } from "@/components/tool-ui/HistoryTape";
 import { newEntryId, usePersistedList } from "@/lib/use-persisted-list";
 import TcInput from "./TcInput";
@@ -174,7 +173,6 @@ export default function TimeCalculator({ education }: { education: ReactNode }) 
         <TcTimesheetStackCard {...props} />
         <TcFlowCard {...props} />
         <TcDstTimelineCard {...props} />
-        <AdSpace variant="leaderboard" />
         <TcWeekBarsCard {...props} />
         <TcOvertimeGaugeCard {...props} />
         <TcDecimalCard {...props} />

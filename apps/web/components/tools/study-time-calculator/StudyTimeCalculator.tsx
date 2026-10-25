@@ -6,7 +6,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import StudyStudioInput from "./StudyStudioInput";
 import StudyStudioResult from "./StudyStudioResult";
 import { ForgettingCurveCard, PomodoroCycleCard, PriorityFormulaCard, ReviewScheduleCard } from "./StudyIndicatorsA";
@@ -58,7 +57,6 @@ export default function StudyTimeCalculator({ education }: { education: ReactNod
         <ReviewScheduleCard {...props} />
         <ForgettingCurveCard {...props} />
         <PriorityFormulaCard {...props} />
-        <AdSpace variant="leaderboard" />
         <HoursPerExamCard {...props} />
         <DailyLoadCard {...props} />
         <SlackBalanceCard {...props} />

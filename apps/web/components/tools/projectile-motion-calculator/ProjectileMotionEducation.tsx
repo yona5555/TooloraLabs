@@ -3,7 +3,6 @@ import EncyclopediaPaper from "@/components/tool-ui/EncyclopediaPaper";
 import InfoSection from "@/components/tool-ui/InfoSection";
 import FAQAccordion, { type FAQItem } from "@/components/tool-ui/FAQAccordion";
 import AcademicPathSection, { type University } from "@/components/tool-ui/AcademicPathSection";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import SectionCard from "@/components/tool-ui/SectionCard";
 import PmLive3D from "./PmLive3D";
 import PmLaunchLab from "./PmLaunchLab";
@@ -41,8 +40,6 @@ export default async function ProjectileMotionEducation() {
         <PmFlightSplit />
       </InfoSection>
 
-      <AdSpace variant="leaderboard" />
-
       <InfoSection title={t("examples.title")}>
         <p>{t("examples.intro")}</p>
         <div dir="ltr" className="overflow-x-auto">
@@ -68,8 +65,6 @@ export default async function ProjectileMotionEducation() {
           <PmSpeedSensitivity />
         </div>
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection id="faq" title={t("faq.title")}>
         <FAQAccordion items={faqItems} />
@@ -111,8 +106,6 @@ export default async function ProjectileMotionEducation() {
           universities={universities}
         />
       </InfoSection>
-
-      <AdSpace variant="leaderboard" />
 
       <InfoSection title={t("references.title")}>
         <p>{t("references.citation")}</p>

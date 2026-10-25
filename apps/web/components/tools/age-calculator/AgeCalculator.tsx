@@ -6,7 +6,6 @@ import ToolAboveFold from "@/components/tools/layout/ToolAboveFold";
 import RelatedToolsSidebar from "@/components/tool-ui/RelatedToolsSidebar";
 import SectionNav from "@/components/tool-ui/SectionNav";
 import ViewDocsLink from "@/components/tool-ui/ViewDocsLink";
-import AdSpace from "@/components/tool-ui/AdSpace";
 import { newEntryId, usePersistedList } from "@/lib/use-persisted-list";
 import AgeInputCard from "./AgeInputCard";
 import AgeResultCard from "./AgeResultCard";
@@ -119,7 +118,6 @@ export default function AgeCalculator({ education }: { education: ReactNode }) {
         <AgeEquivalenceCard {...props} />
         <AgeCountdownCard {...props} />
         <AgeWeekdayCard {...props} />
-        <AdSpace variant="leaderboard" />
         <AgeLifeStagesCard {...props} />
         <AgeLifeGaugeCard {...props} />
         <AgeUnitsLadderCard {...props} />

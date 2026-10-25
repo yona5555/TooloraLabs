@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import AdSpace from "./AdSpace";
+import DesktopAdSlot from "./DesktopAdSlot";
 
 type InfoSectionProps = {
   title: string;
@@ -11,6 +12,9 @@ type InfoSectionProps = {
 export default function InfoSection({ title, children, id }: InfoSectionProps) {
   return (
     <>
+      {/* Desktop ad candidate on this section boundary (lib/ads.ts); kept before the phone slot, whose
+          next sibling must stay the section (lib/phone/layout.ts). */}
+      <DesktopAdSlot />
       {/* APPROVED PHONE STANDARD: a phone ad slot on every section boundary, display:none until
           lib/phone/layout.ts picks it (before the first paint); never shown from 768px up. */}
       <div data-article-ad="" suppressHydrationWarning className="py-6">
