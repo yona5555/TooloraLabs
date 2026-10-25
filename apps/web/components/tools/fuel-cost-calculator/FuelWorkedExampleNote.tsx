@@ -25,10 +25,10 @@ export default function FuelWorkedExampleNote({ title, rows }: Props) {
           hardcoded per-language branch. Only the value cell keeps its own
           `dir="ltr"`, matching the `Stat` cards in FuelResult.tsx, so its
           digits/currency code stay correctly ordered either way. */}
-      <dl className="mt-3 space-y-2 text-sm">
+      <div className="mt-3 space-y-2 text-sm">
         {rows.map((row, i) => (
           <div key={i}>
-            <div
+            <dl
               className={`flex items-baseline justify-between gap-3 ${
                 row.emphasize ? "border-t border-zinc-200 pt-2 dark:border-zinc-700" : ""
               }`}
@@ -42,11 +42,11 @@ export default function FuelWorkedExampleNote({ title, rows }: Props) {
               >
                 {row.value}
               </dd>
-            </div>
+            </dl>
             {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500">{row.note}</p>}
           </div>
         ))}
-      </dl>
+      </div>
     </div>
   );
 }

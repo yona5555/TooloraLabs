@@ -92,7 +92,7 @@ export default function CryptoCoinPicker({ label, coins, value, onChange, onCoin
         {selectedCoin ? (
           <span className="flex min-w-0 items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={selectedCoin.image} alt="" width={20} height={20} className="shrink-0 rounded-full" />
+            <img src={selectedCoin.image} alt="" width={20} height={20} className="shrink-0 rounded-full object-contain" />
             <span className="truncate font-medium text-zinc-900 dark:text-zinc-100">{selectedCoin.name}</span>
             <span dir="ltr" className="shrink-0 text-xs uppercase text-zinc-400">
               {selectedCoin.symbol}
@@ -131,7 +131,7 @@ export default function CryptoCoinPicker({ label, coins, value, onChange, onCoin
                   className="flex w-full items-center gap-3 px-4 py-2.5 text-start text-sm transition hover:bg-zinc-50 dark:hover:bg-zinc-800"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={coin.image} alt="" width={20} height={20} className="shrink-0 rounded-full" />
+                  <img src={coin.image} alt="" width={20} height={20} className="shrink-0 rounded-full object-contain" />
                   <span className="min-w-0 flex-1 truncate text-zinc-800 dark:text-zinc-200">{coin.name}</span>
                   <span dir="ltr" className="shrink-0 text-xs uppercase text-zinc-400">
                     {coin.symbol}
@@ -154,7 +154,7 @@ export default function CryptoCoinPicker({ label, coins, value, onChange, onCoin
                       className="flex w-full items-center gap-3 px-4 py-2.5 text-start text-sm transition hover:bg-zinc-50 disabled:opacity-50 dark:hover:bg-zinc-800"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={coin.thumb} alt="" width={20} height={20} className="shrink-0 rounded-full" />
+                      <img src={coin.thumb} alt="" width={20} height={20} className="shrink-0 rounded-full object-contain" />
                       <span className="min-w-0 flex-1 truncate text-zinc-800 dark:text-zinc-200">{coin.name}</span>
                       <span dir="ltr" className="shrink-0 text-xs uppercase text-zinc-400">
                         {coin.symbol}

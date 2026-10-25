@@ -15,10 +15,10 @@ export default function TriangleWorkedExampleNote({ title, rows }: Props) {
   return (
     <div className="min-w-[200px] flex-1 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-800/40">
       <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">{title}</p>
-      <dl className="mt-3 space-y-2 text-sm">
+      <div className="mt-3 space-y-2 text-sm">
         {rows.map((row, i) => (
           <div key={i}>
-            <div
+            <dl
               className={`flex items-baseline justify-between gap-3 ${
                 row.emphasize ? "border-t border-zinc-200 pt-2 dark:border-zinc-700" : ""
               }`}
@@ -32,11 +32,11 @@ export default function TriangleWorkedExampleNote({ title, rows }: Props) {
               >
                 {row.value}
               </dd>
-            </div>
+            </dl>
             {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500">{row.note}</p>}
           </div>
         ))}
-      </dl>
+      </div>
     </div>
   );
 }

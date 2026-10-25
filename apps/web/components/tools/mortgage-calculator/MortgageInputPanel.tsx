@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import ToolButton from "@/components/tool-ui/ToolButton";
@@ -69,6 +69,7 @@ export default function MortgageInputPanel({
   onReset,
 }: MortgageInputPanelProps) {
   const t = useTranslations("tools.mortgage-calculator");
+  const downPaymentLabelId = useId();
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   return (
@@ -84,7 +85,7 @@ export default function MortgageInputPanel({
 
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+            <span id={downPaymentLabelId} className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
               {t("form.downPayment")}
             </span>
             <div className="inline-flex rounded-lg border border-zinc-200 p-0.5 dark:border-zinc-800">
@@ -116,6 +117,7 @@ export default function MortgageInputPanel({
             <ToolInput
               type="text"
               inputMode="decimal"
+              aria-labelledby={downPaymentLabelId}
               value={downPaymentPercent}
               onChange={(e) => onDownPaymentPercentChange(e.target.value)}
             />
@@ -123,6 +125,7 @@ export default function MortgageInputPanel({
             <ToolInput
               type="text"
               inputMode="decimal"
+              aria-labelledby={downPaymentLabelId}
               value={downPaymentAmount}
               onChange={(e) => onDownPaymentAmountChange(e.target.value)}
             />

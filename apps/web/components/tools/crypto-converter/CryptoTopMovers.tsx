@@ -25,7 +25,7 @@ export default function CryptoTopMovers({ coins, digitStyle, onPick }: Props) {
             <button type="button" onClick={() => onPick(c.id)} title={t("pick")} className="grid w-full grid-cols-[4.5rem_minmax(0,1fr)_4rem] items-center gap-2 rounded-md px-1 py-0.5 text-xs hover:bg-zinc-50 dark:hover:bg-zinc-800/60">
               <span className="flex items-center gap-1.5 truncate">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={c.image} alt="" width={14} height={14} className="rounded-full" />
+                <img src={c.image} alt="" width={14} height={14} className="rounded-full object-contain" />
                 <span dir="ltr" className="font-mono uppercase text-zinc-700 dark:text-zinc-200">{c.symbol}</span>
               </span>
               <span className="h-3 rounded-sm bg-zinc-100 dark:bg-zinc-800">

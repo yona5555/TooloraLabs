@@ -80,7 +80,7 @@ export default function CryptoTopList({ coins, digitStyle, fromCoinId, toCoinId,
                     <td className="px-2 py-2">
                       <span className="flex items-center gap-2">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={coin.image} alt="" width={18} height={18} className="shrink-0 rounded-full" />
+                        <img src={coin.image} alt="" width={18} height={18} className="shrink-0 rounded-full object-contain" />
                         <span className="max-w-[6rem] truncate font-medium text-zinc-900 dark:text-zinc-100" title={coin.symbol.toUpperCase()}>{coin.name}</span>
                       </span>
                     </td>
