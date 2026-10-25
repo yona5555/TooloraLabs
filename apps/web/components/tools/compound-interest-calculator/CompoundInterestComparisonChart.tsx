@@ -7,7 +7,7 @@ import { calculateSimpleInterestSchedule } from "@tooloralabs/tools";
 import { useCompoundInterestLiveInputs } from "./CompoundInterestLiveInputsContext";
 import { computeNiceTicks } from "./niceTicks";
 import { svgPx } from "@/components/tool-ui/svgPx";
-import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { wrapLabel } from "@/components/tool-ui/labelLayout";
 import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 
 const MARGIN = { top: 16, left: 56, right: 16 };

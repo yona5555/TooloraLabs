@@ -8,7 +8,7 @@ import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import { computeNiceTicks } from "./niceTicks";
 import type { CurrencyCode } from "@/lib/currency";
 import { svgPx } from "@/components/tool-ui/svgPx";
-import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { wrapLabel } from "@/components/tool-ui/labelLayout";
 
 type LoanGrowthChartProps = {
   schedule: LoanGrowthRow[];

@@ -19,7 +19,8 @@ const ROW_GAP = 10;
 const VALUE_WIDTH = 78;
 const MARGIN = { top: 8, bottom: 8 };
 /** Rough monospace-ish average glyph width at fontSize 11, generous enough for this tool's longest real labels (e.g. "Annual driving (12,000 mi)"). */
-const CHAR_WIDTH = 6.3;
+// 12px labels (≈7.4px a glyph), with room for the up-to-1.1× label boost of a slightly narrowed chart
+const CHAR_WIDTH = 8.2;
 const MIN_LABEL_WIDTH = 90;
 const MIN_PLOT_WIDTH = 150;
 

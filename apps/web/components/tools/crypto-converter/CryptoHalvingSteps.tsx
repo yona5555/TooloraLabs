@@ -10,7 +10,7 @@ import { useNetworkData } from "./useCryptoLive";
 import LiveFallback from "@/components/tools/markets/LiveFallback";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
-import { labelW } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 /** Genesis plus the four halvings so far, with the UTC date each era's first block was mined. */
 const ERA_STARTS = [

@@ -19,7 +19,7 @@ import { partOrder } from "./CitationStudioResult";
 import { PART_COLORS, type StudioState } from "./studio";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
-import { labelW, thinLabels } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW, thinLabels } from "@/components/tool-ui/labelLayout";
 
 export type CiteIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; source: CiteSource; index: number };
 

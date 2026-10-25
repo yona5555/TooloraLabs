@@ -7,7 +7,7 @@ import IndicatorWithTable from "@/components/tool-ui/IndicatorWithTable";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { fmtInZone, fmtShortWeekday, hms, num, pct, type CdState, type Derived } from "./model";
 import { svgPx } from "@/components/tool-ui/svgPx";
-import { labelW, thinLabels } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW, thinLabels } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 export type IndicatorProps = { state: CdState; setState: (s: CdState) => void; d: Derived };

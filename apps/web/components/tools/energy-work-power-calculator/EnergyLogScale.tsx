@@ -5,11 +5,12 @@ import { ENERGY_REFERENCES } from "@tooloralabs/tools";
 import EnergyIndicatorCard from "./EnergyIndicatorCard";
 import { pow10, useEnergyModel } from "./EnergyLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { useFitWidth } from "@/components/tool-ui/useFitWidth";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
-const W = 400;
+const MAX_W = 400;
 const H = 230;
 const X0 = 46;
-const X1 = W - 46;
 const AXIS = 100;
 const ROWS = [72, 47, 22] as const;
 
@@ -25,6 +26,9 @@ export default function EnergyLogScale() {
   const svgId = useId();
   const t = useTranslations("tools.energy-work-power-calculator.education.lab.scale");
   const { work, kinetic, potential, f } = useEnergyModel();
+  // laid out at its on-screen width (true px) so the 12px labels keep their spacing on a phone
+  const [fitRef, W] = useFitWidth(MAX_W);
+  const X1 = W - 46;
 
   const live = [
     { key: "W", v: work.work, cls: "fill-red-600 dark:fill-red-400", stroke: "stroke-red-600 dark:stroke-red-400" },
@@ -40,9 +44,11 @@ export default function EnergyLogScale() {
   const ticks: number[] = [];
   for (let e = Math.ceil(lo / step) * step; e <= hi; e += step) ticks.push(e);
   const slotW = (X1 - X0) / ENERGY_REFERENCES.length;
+  // reference labels take two alternating rows, or three when two slots are narrower than the longest label (§39)
+  const rowsN = 2 * slotW >= Math.max(...ENERGY_REFERENCES.map((r) => labelW(t(`refs.${r.key}`)))) + 6 ? 2 : 3;
 
   const svg = (
-    <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
+    <svg ref={fitRef} direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <defs>
         <linearGradient id={`${svgId}energy-log-grad`} x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stopColor="#38bdf8" />
@@ -63,7 +69,7 @@ export default function EnergyLogScale() {
       {ENERGY_REFERENCES.map((r, i) => {
         const x = sx(lg(r.energy));
         const lx = X0 + slotW * (i + 0.5);
-        const ny = AXIS + (i % 2 === 0 ? 44 : 80);
+        const ny = AXIS + (rowsN === 2 ? (i % 2 === 0 ? 44 : 80) : [40, 72, 104][i % 3]);
         return (
           <g key={r.key}>
             <line x1={x} y1={AXIS + 5} x2={lx} y2={ny - 11} strokeWidth={1} className="stroke-zinc-400 dark:stroke-zinc-500" />

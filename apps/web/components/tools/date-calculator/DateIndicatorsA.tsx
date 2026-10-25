@@ -21,7 +21,7 @@ import { useYmd } from "./DateResultCard";
 import { DATE_COLORS, isWeekendDay, withSpanEnd, type DateState, type Derived, type Formatters } from "./dateModel";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
-import { labelW } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 export type IndicatorProps = { state: DateState; setState: (s: DateState) => void; d: Derived; f: Formatters };
 

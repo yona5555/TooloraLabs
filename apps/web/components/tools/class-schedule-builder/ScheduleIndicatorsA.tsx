@@ -8,7 +8,7 @@ import { classColor, fmt, hm, toMinutes, type Derived, type StudioState } from "
 import { axisText, gridLine, hourWindow, useDayOrder, useSchedT, useUnits, valueText } from "./ScheduleShared";
 import { svgPx } from "@/components/tool-ui/svgPx";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
-import { flowRows, labelW } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { flowRows, labelW } from "@/components/tool-ui/labelLayout";
 
 export type SchedIndicatorProps = { state: StudioState; onChange: (s: StudioState) => void; d: Derived };
 

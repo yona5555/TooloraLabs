@@ -10,7 +10,7 @@ import type { YearlyGrowthPoint } from "@tooloralabs/tools";
 import type { CurrencyCode } from "@/lib/currency";
 import { computeNiceTicks } from "./niceTicks";
 import { svgPx } from "@/components/tool-ui/svgPx";
-import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { wrapLabel } from "@/components/tool-ui/labelLayout";
 
 type CompoundInterestGrowthChartProps = {
   hasCalculated: boolean;

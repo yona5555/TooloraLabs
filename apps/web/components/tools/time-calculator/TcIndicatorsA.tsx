@@ -8,7 +8,7 @@ import { useTcPhrases } from "./TcResult";
 import { C, type CardProps } from "./state";
 import PhoneMini from "@/components/tool-ui/indicator-kit/PhoneMini";
 import { svgPx } from "@/components/tool-ui/svgPx";
-import { labelW } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW } from "@/components/tool-ui/labelLayout";
 import { useFitWidth } from "@/components/tool-ui/useFitWidth";
 
 const axisText = "fill-zinc-500 dark:fill-zinc-400";

@@ -19,7 +19,8 @@ const ROW_HEIGHT = 30;
 const ROW_GAP = 10;
 const VALUE_WIDTH = 78;
 const MARGIN = { top: 8, bottom: 8 };
-const CHAR_WIDTH = 6.3;
+// 12px labels (≈7.4px a glyph), with room for the up-to-1.1× label boost of a slightly narrowed chart
+const CHAR_WIDTH = 8.2;
 const MIN_LABEL_WIDTH = 90;
 const MIN_PLOT_WIDTH = 150;
 

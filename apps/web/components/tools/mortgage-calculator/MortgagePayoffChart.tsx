@@ -8,7 +8,7 @@ import { useBelowLg } from "@/components/tool-ui/useBelowLg";
 import { computeNiceTicks } from "./niceTicks";
 import type { MortgageExtendedResult } from "./types";
 import { svgPx } from "@/components/tool-ui/svgPx";
-import { wrapLabel } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { wrapLabel } from "@/components/tool-ui/labelLayout";
 
 type MortgagePayoffChartProps = {
   result: MortgageExtendedResult;
