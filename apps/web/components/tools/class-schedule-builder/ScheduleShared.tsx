@@ -76,7 +76,8 @@ export function WeekGrid({ state, d, onPick, compact = false }: { state: StudioS
   const AX = 30;
   const TOP = 18;
   const PH = compact ? 18 : 22;
-  const H = TOP + (h1 - h0) * PH + 4;
+  // room under the last hour line for its 12px label (it sits centred on the line)
+  const H = TOP + (h1 - h0) * PH + 9;
   const cw = (W - AX - 2) / days.length;
   const y = (min: number) => TOP + ((min - h0 * 60) / 60) * PH;
   const colX = (day: DayCode) => AX + days.indexOf(day) * cw;

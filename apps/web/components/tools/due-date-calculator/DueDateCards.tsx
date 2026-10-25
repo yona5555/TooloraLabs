@@ -5,6 +5,7 @@ import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp } from "@/components/tool-ui/indicator-kit/format";
+import { labelW, staggerRows } from "@/components/tool-ui/labelLayout";
 import { Card, SvgTrack, useSharedStepper } from "../macro-calculator/MacroCards";
 import { useDateFmt, useDueLive } from "./DueDateLiveContext";
 import {
@@ -46,7 +47,6 @@ function useCardText(key: string) {
 }
 
 /** Rough text width for placing SVG labels (no measuring pass needed). */
-const textW = (s: string, size: number) => s.length * size * 0.56;
 
 // ── 1. Timeline with stations: pick any week, see its dates and what happens then (wow) ───────
 export function DueTimelineCard({ side }: { side: Side }) {
@@ -113,7 +113,8 @@ export function DueTimelineCard({ side }: { side: Side }) {
             const name = tc(`milestones.${m.key}`);
             const a = xs(m.from);
             const b = xs(m.to);
-            const after = b + 6 + textW(name, 10) < W - 4;
+            // measured at the 12px it is drawn at (a 10px estimate let "GBS swab" run past the right edge)
+            const after = b + 6 + labelW(name) < W - 4;
             return (
               <g key={m.key}>
                 <line x1={X0} y1={y} x2={W - X0} y2={y} style={{ stroke: "var(--ph-grid)" }} />
@@ -171,7 +172,16 @@ export function DueTermWindowCard({ side }: { side: Side }) {
   ];
   const mx = xs(ga);
   const tagRight = mx < W * 0.55;
-  const legendY = stripY + 74;
+  // boundary weeks under the strip: one that would touch its neighbour drops a line, and the legend
+  // moves down with it (§39)
+  const weekMarks = [245, 259, 273, 287, 294, 301];
+  const weekRow = staggerRows(
+    weekMarks.map((g, i) => {
+      const w = labelW(wd(g));
+      return { x: i === 0 ? xs(g) + w / 2 : i === weekMarks.length - 1 ? xs(g) - w / 2 : xs(g), w };
+    }),
+  );
+  const legendY = stripY + 74 + (weekRow.some((r) => r) ? 14 : 0);
   const legendStep = Math.max(19, Math.min(26, (trackY - 30 - legendY) / 5));
   return (
     <Card tool="due-date-calculator" idPrefix="due"
@@ -196,8 +206,8 @@ export function DueTermWindowCard({ side }: { side: Side }) {
           {/* Due date line */}
           <line x1={xs(TERM_DAYS)} y1={stripY - 4} x2={xs(TERM_DAYS)} y2={stripY + 36} style={{ stroke: "#fff" }} strokeWidth={2} strokeDasharray="4 3" />
           {/* Boundary weeks under the strip */}
-          {[245, 259, 273, 287, 294, 301].map((g, i, all) => (
-            <T key={g} x={xs(g)} y={stripY + 50} text={wd(g)} anchor={i === 0 ? "start" : i === all.length - 1 ? "end" : "middle"} size={12} bold={g === 259 || g === 294} />
+          {weekMarks.map((g, i, all) => (
+            <T key={g} x={xs(g)} y={stripY + 50 + weekRow[i] * 14} text={wd(g)} anchor={i === 0 ? "start" : i === all.length - 1 ? "end" : "middle"} size={12} bold={g === 259 || g === 294} />
           ))}
           {/* Selected birth day */}
           <line x1={mx} y1={stripY - 10} x2={mx} y2={stripY + 38} style={{ stroke: "var(--ph-ink)" }} strokeWidth={3} />
@@ -331,6 +341,10 @@ export function DueCycleCard({ side }: { side: Side }) {
   const py = ys(c - 28);
   const tag = `${signed(c - 28)} ${dd} → ${f.short(adj)}`;
   const tagRight = px < W * 0.55;
+  // the "28 d = Naegele" note moves under its line when the live tag (on the same line near 28 d) would cover it
+  const classic = `28 ${dd} = ${t("classic")}`;
+  const tagA = tagRight ? px + 12 : px - 12 - labelW(tag);
+  const classicBelow = Math.abs(py - 10 - (ys(0) - 6)) < 16 && tagA < W - PR + 2 && tagA + labelW(tag) > W - PR - labelW(classic) - 2;
   return (
     <Card tool="due-date-calculator" idPrefix="due"
       n={4}
@@ -355,7 +369,7 @@ export function DueCycleCard({ side }: { side: Side }) {
               <T x={PL - 6} y={ys(v) + 4} text={signed(v)} anchor="end" size={12} />
             </g>
           ))}
-          <T x={W - PR} y={ys(0) - 6} text={`28 ${dd} = ${t("classic")}`} anchor="end" size={12} bold style={INK} />
+          <T x={W - PR} y={classicBelow ? ys(0) + 16 : ys(0) - 6} text={classic} anchor="end" size={12} bold style={INK} />
           {/* Shift line: one day later per day of cycle */}
           <line x1={xc(20)} y1={ys(-8)} x2={xc(45)} y2={ys(17)} style={{ stroke: "var(--ph-accent-strong)" }} strokeWidth={3} />
           {/* Reference point */}

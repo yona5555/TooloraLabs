@@ -4,6 +4,7 @@ import { det2, detZone, mul2 } from "@tooloralabs/tools";
 import MatrixIndicatorCard from "./MatrixIndicatorCard";
 import { useMatrixModel } from "./MatrixLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const X0 = 20;
@@ -26,6 +27,11 @@ export default function MatrixDeterminantZoneStrip() {
   const mid = x(0);
   const one = x(1);
 
+  // a marker label near either end stays whole inside the strip (widths allow for a phone's up-to-1.15×)
+  const inside = (cx: number, text: string) => {
+    const half = (labelW(text) / 2) * 1.15 + 2;
+    return Math.max(half, Math.min(W - half, cx));
+  };
   const markers = [
     { key: "A", v: dA, cls: "fill-blue-600 dark:fill-blue-400", y: 34 },
     { key: "B", v: dB, cls: "fill-orange-500 dark:fill-orange-400", y: 20 },
@@ -49,7 +55,7 @@ export default function MatrixDeterminantZoneStrip() {
         <g key={m.key} transform={`translate(${x(m.v)}, 0)`}>
           <line x1={0} y1={m.y + 10} x2={0} y2={70} strokeWidth={1.5} className="stroke-zinc-400 dark:stroke-zinc-500" />
           <circle cx={0} cy={70} r={4} className={m.cls} />
-          <text style={{ fontSize: svgPx(12) }} x={0} y={m.y + 6} textAnchor="middle" className={`${m.cls} font-mono font-bold`}>{`${m.key}: ${f(m.v)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={inside(x(m.v), `${m.key}: ${f(m.v)}`) - x(m.v)} y={m.y + 6} textAnchor="middle" className={`${m.cls} font-mono font-bold`}>{`${m.key}: ${f(m.v)}`}</text>
         </g>
       ))}
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={158} textAnchor="middle" className="fill-zinc-400 dark:fill-zinc-500">{t("axis")}</text>

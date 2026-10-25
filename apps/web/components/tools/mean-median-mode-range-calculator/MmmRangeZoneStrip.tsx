@@ -3,9 +3,9 @@ import { useTranslations } from "next-intl";
 import MmmIndicatorCard, { scaleX } from "./MmmIndicatorCard";
 import { useMmmModel } from "./MmmLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW, laneRows } from "@/components/tool-ui/labelLayout";
 
 const W = 360;
-const H = 150;
 const Y = 70;
 
 /**
@@ -31,6 +31,21 @@ export default function MmmRangeZoneStrip() {
   ];
   const share = a.range > 0 ? (a.iqr / a.range) * 100 : 100;
 
+  // min / Q1 / Q3 / max labels kept inside the strip, each on the first line where it clears the label
+  // before it (close quartiles stack instead of printing over each other) (§39); widths allow for the
+  // up-to-1.15× a phone draws them at
+  const marks = [
+    { v: a.min, l: tr("min") },
+    { v: a.q1, l: "Q1" },
+    { v: a.q3, l: "Q3" },
+    { v: a.max, l: tr("max") },
+  ].map((m) => {
+    const text = `${m.l} ${f(m.v)}`;
+    const w = labelW(text) * 1.15;
+    return { text, w, x: Math.max(w / 2 + 2, Math.min(W - w / 2 - 2, sx(m.v))) };
+  });
+  const lane = laneRows(marks, 6);
+  const H = Math.max(150, Y + 58 + Math.max(...lane) * 15 + 10);
   const strip = (
     <svg direction="ltr" width={W} height={H} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t("aria")} className="mx-auto block max-w-full">
       <rect x={16} y={Y} width={W - 32} height={16} rx={8} className="fill-zinc-100 dark:fill-zinc-800" />
@@ -50,14 +65,9 @@ export default function MmmRangeZoneStrip() {
         seen.set(v, k + 1);
         return <circle key={i} cx={sx(v)} cy={Y - 8 - k * 9} r={4} className={outSet.has(v) ? "fill-rose-600 dark:fill-rose-400" : "fill-blue-600 dark:fill-blue-400"} />;
       })}
-      {[
-        { v: a.min, l: tr("min") },
-        { v: a.q1, l: "Q1" },
-        { v: a.q3, l: "Q3" },
-        { v: a.max, l: tr("max") },
-      ].map((m, i) => (
-        <text style={{ fontSize: svgPx(12) }} key={i} x={sx(m.v)} y={Y + 58 + (i % 2) * 12} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
-          {`${m.l} ${f(m.v)}`}
+      {marks.map((m, i) => (
+        <text style={{ fontSize: svgPx(12) }} key={i} x={m.x} y={Y + 58 + lane[i] * 15} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
+          {m.text}
         </text>
       ))}
       <text style={{ fontSize: svgPx(12) }} x={W / 2} y={14} textAnchor="middle" fontWeight={700} className="fill-emerald-700 dark:fill-emerald-300">

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import type { PhoneRole } from "@/components/tool-ui/SectionCard";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, staggerRows, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2 } from "@/components/tool-ui/indicator-kit/format";
 import { useMacroLive } from "./MacroLiveContext";
 import {
@@ -64,6 +64,20 @@ function useBase() {
  */
 export function SvgTrack({ W, y, frac, lo, hi, stops, stopAnchor = "ends" }: { W: number; y: number; frac: number; lo?: string; hi?: string; stops?: { frac: number; text?: string; on?: boolean }[]; stopAnchor?: "ends" | "middle" | "frac" }) {
   const x = X0 + clamp(frac, 0, 1) * (W - 2 * X0);
+  const placed = stops?.map((st, i) => {
+    const sx = X0 + st.frac * (W - 2 * X0);
+    const anchor: "start" | "middle" | "end" =
+      stopAnchor === "middle"
+        ? "middle"
+        : stopAnchor === "frac"
+          ? st.frac <= 0 ? "start" : st.frac >= 1 ? "end" : "middle"
+          : i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle";
+    const w = st.text ? labelW(st.text) : 0;
+    return { sx, anchor, w, cx: anchor === "start" ? sx + w / 2 : anchor === "end" ? sx - w / 2 : sx };
+  });
+  // stop names that would touch their neighbour (long goal names on a phone) take turns on a second
+  // line, between the track and the first (the drawing ends under the first line) (§39)
+  const stopRow = placed ? staggerRows(placed.map((p) => ({ x: p.cx, w: p.w }))) : [];
   return (
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />
@@ -71,17 +85,11 @@ export function SvgTrack({ W, y, frac, lo, hi, stops, stopAnchor = "ends" }: { W
       {lo && <T x={X0} y={y + TRACK_LABEL_DY} text={lo} anchor="start" size={12} />}
       {hi && <T x={W - X0} y={y + TRACK_LABEL_DY} text={hi} anchor="end" size={12} />}
       {stops?.map((st, i) => {
-        const sx = X0 + st.frac * (W - 2 * X0);
-        const anchor =
-          stopAnchor === "middle"
-            ? "middle"
-            : stopAnchor === "frac"
-              ? st.frac <= 0 ? "start" : st.frac >= 1 ? "end" : "middle"
-              : i === 0 ? "start" : i === stops.length - 1 ? "end" : "middle";
+        const { sx, anchor } = placed![i];
         return (
           <g key={i}>
             <circle cx={sx} cy={y} r={3.5} style={{ fill: "var(--ph-ink-muted)" }} />
-            {st.text && <T x={sx} y={y + TRACK_LABEL_DY} text={st.text} anchor={anchor} size={12} bold={st.on} style={st.on ? INK : MUTED} />}
+            {st.text && <T x={sx} y={y + TRACK_LABEL_DY - stopRow[i] * 14} text={st.text} anchor={anchor} size={12} bold={st.on} style={st.on ? INK : MUTED} />}
           </g>
         );
       })}
@@ -303,6 +311,9 @@ export function MacroCaloriesStackCard({ side }: { side: Side }) {
   const xk = (v: number) => X0 + (v / KMAX) * (W - 2 * X0);
   const by = 58;
   const bh = 52;
+  // legend packed by the real 12px widths (three across where they fit), so "250 g · 1,000 kcal" never
+  // runs into the next one (§39)
+  const legend = flowRows(MACROS.map((m) => 14 + Math.max(labelW(tm(m)), labelW(`${gT(snap[m].grams)} · ${k0(snap[m].calories)} kcal`))), W - 2 * X0, 12);
   const segs = MACROS.map((m, i) => {
     const a = MACROS.slice(0, i).reduce((sum, q) => sum + snap[q].calories, 0);
     return { m, a, b: a + snap[m].calories };
@@ -346,12 +357,13 @@ export function MacroCaloriesStackCard({ side }: { side: Side }) {
           })}
           {/* Grams per macro under the bar */}
           {MACROS.map((m, i) => {
-            const lx = X0 + i * ((W - 2 * X0) / 3);
+            const lx = X0 + legend.at[i].x;
+            const ly = by + bh + 18 + legend.at[i].row * 36;
             return (
               <g key={`lg${m}`}>
-                <rect x={lx} y={by + bh + 18} width={10} height={10} rx={2} style={{ fill: COLORS[m] }} />
-                <T x={lx + 14} y={by + bh + 27} text={`${tm(m)}`} anchor="start" size={12} bold style={INK} />
-                <T x={lx + 14} y={by + bh + 42} text={`${gT(snap[m].grams)} · ${k0(snap[m].calories)} kcal`} anchor="start" size={12} />
+                <rect x={lx} y={ly} width={10} height={10} rx={2} style={{ fill: COLORS[m] }} />
+                <T x={lx + 14} y={ly + 9} text={`${tm(m)}`} anchor="start" size={12} bold style={INK} />
+                <T x={lx + 14} y={ly + 24} text={`${gT(snap[m].grams)} · ${k0(snap[m].calories)} kcal`} anchor="start" size={12} />
               </g>
             );
           })}

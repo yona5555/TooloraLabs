@@ -47,6 +47,21 @@ export default function EduLineChart({ points, ariaLabel, lineColorClass = "stro
   const xFor = xPos;
   const yFor = (v: number) => HEIGHT - PAD_B - ((v - minValue) / range) * (HEIGHT - PAD_TOP - PAD_B);
 
+  // value labels sit above their dot; one that would touch the previous value label (close points with
+  // close values) goes below its dot instead. Widths allow for the up-to-1.13× a phone draws them at.
+  const valueBelow: boolean[] = [];
+  let prev: { a: number; b: number; y: number } | null = null;
+  for (const [i, p] of points.entries()) {
+    const w = labelW(p.formatted) * 1.13;
+    const x = xFor(p.x);
+    const anchor = anchorOf(i);
+    const a = anchor === "start" ? x : anchor === "end" ? x - w : x - w / 2;
+    const box = { a, b: a + w, y: yFor(p.value) - 10 };
+    const hit = prev !== null && box.a < prev.b + 4 && Math.abs(box.y - prev.y) < 16;
+    valueBelow.push(hit);
+    if (!hit) prev = box;
+  }
+
   const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${xFor(p.x).toFixed(1)} ${yFor(p.value).toFixed(1)}`).join(" ");
   const areaD = `${pathD} L ${xFor(points[points.length - 1].x).toFixed(1)} ${HEIGHT - PAD_B} L ${xFor(points[0].x).toFixed(1)} ${HEIGHT - PAD_B} Z`;
 
@@ -65,7 +80,7 @@ export default function EduLineChart({ points, ariaLabel, lineColorClass = "stro
               <text style={{ fontSize: svgPx(12) }} x={xFor(p.x)} y={HEIGHT - PAD_B + 16 + xRow[i] * 14} textAnchor={anchor} fill="currentColor" opacity={0.7}>
                 {p.label}
               </text>
-              <text style={{ fontSize: svgPx(12) }} x={xFor(p.x)} y={yFor(p.value) - 10} textAnchor={anchor} fontWeight={700} fill="currentColor">
+              <text style={{ fontSize: svgPx(12) }} x={xFor(p.x)} y={valueBelow[i] ? yFor(p.value) + 20 : yFor(p.value) - 10} textAnchor={anchor} fontWeight={700} fill="currentColor">
                 {p.formatted}
               </text>
             </g>

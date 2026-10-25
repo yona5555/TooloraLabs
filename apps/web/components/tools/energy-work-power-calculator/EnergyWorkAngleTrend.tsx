@@ -47,7 +47,7 @@ export default function EnergyWorkAngleTrend() {
       <line x1={L} y1={MID} x2={R} y2={MID} className="stroke-zinc-300 dark:stroke-zinc-600" />
       <line x1={L} y1={T} x2={L} y2={B} className="stroke-zinc-300 dark:stroke-zinc-600" />
       {[0, 45, 90, 135, 180].map((d) => (
-        <text style={{ fontSize: svgPx(12) }} key={d} x={sx(d)} y={B + 14} textAnchor="middle" fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
+        <text style={{ fontSize: svgPx(12) }} key={d} x={sx(d)} y={B + 14} textAnchor={d === 180 ? "end" : "middle"} fontFamily="ui-monospace, monospace" className="fill-zinc-500 dark:fill-zinc-400">
           {`${d}°`}
         </text>
       ))}

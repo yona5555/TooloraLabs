@@ -3,11 +3,11 @@ import { useTranslations } from "next-intl";
 import FsIndicatorCard, { FsIndicatorUnavailable } from "./FsIndicatorCard";
 import { useFsModel } from "./FsLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const H = 210;
 const BASE = H - 36;
-const TOP = 22;
 
 /**
  * Type #11 (Side-by-Side Equivalence): the same byte count read in decimal and binary units at the
@@ -22,6 +22,12 @@ export default function FsGapBars() {
   const levels = [center - 1, center, center + 1].filter((k) => k >= 0 && k <= 5);
   const slot = W / levels.length;
   const peak = Math.max(...levels.map((k) => out.decimal[k].value));
+  const num = (v: number) => f(v, v < 10 ? 2 : 0);
+  // a pair of values too wide to sit side by side over their bars (38 apart; widths allow for the
+  // up-to-1.15× a phone draws them at): the binary one moves a line up, and the plot starts lower so
+  // that line clears the axis caption (§39)
+  const pairTouch = levels.some((k) => ((labelW(num(out.decimal[k].value)) + labelW(num(out.binary[k].value))) / 2) * 1.15 + 3 > 38);
+  const TOP = pairTouch ? 44 : 30;
   const y = (v: number) => Math.round((BASE - (Math.log10(1 + v) / Math.log10(1 + peak)) * (BASE - TOP)) * 100) / 100;
 
   const svg = (
@@ -43,10 +49,10 @@ export default function FsGapBars() {
               className="fill-emerald-600 dark:fill-emerald-400"
             />
             <text style={{ fontSize: svgPx(12) }} x={cx - 19} y={y(d.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-blue-700 dark:fill-blue-300">
-              {f(d.value, d.value < 10 ? 2 : 0)}
+              {num(d.value)}
             </text>
-            <text style={{ fontSize: svgPx(12) }} x={cx + 19} y={y(b.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-300">
-              {f(b.value, b.value < 10 ? 2 : 0)}
+            <text style={{ fontSize: svgPx(12) }} x={cx + 19} y={pairTouch ? Math.min(y(b.value), y(d.value) - 14) - 5 : y(b.value) - 5} textAnchor="middle" fontWeight={700} fontFamily="ui-monospace, monospace" className="fill-emerald-700 dark:fill-emerald-300">
+              {num(b.value)}
             </text>
             <text style={{ fontSize: svgPx(12) }} x={cx} y={BASE + 16} textAnchor="middle" fontWeight={600} className="fill-zinc-600 dark:fill-zinc-300">
               {d.unit} / {b.unit}

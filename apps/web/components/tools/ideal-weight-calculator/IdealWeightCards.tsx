@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { axisTicks, Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { axisTicks, Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2, snap } from "@/components/tool-ui/indicator-kit/format";
 import { Card } from "../macro-calculator/MacroCards";
 import { useIdealWeightLive } from "./IdealWeightLiveContext";
@@ -86,7 +86,15 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
   const A1 = HS1 + 5;
   const d = useDrawing(HMIN, s, (x, _y, W) => A0 + ((x - PL) / (W - PL - PR)) * (A1 - A0));
   const { W, H } = d;
-  const top = 56;
+  const legend: { key: string; label: string; color: string; dash?: string; band?: boolean }[] = [
+    ...FORMULAS.map((f) => ({ key: f.key, label: tf(f.label), color: f.color })),
+    { key: "avg", label: tf("averageLabel"), color: "var(--ph-ink)", dash: "7 4" },
+    { key: "who", label: tc("whoRange"), color: IDEAL_COLOR, band: true },
+  ];
+  // legend items packed by their real 12px widths (two rows of three on desktop, more rows on a
+  // phone), so long names never run into their neighbour or off the edge (§39)
+  const pack = flowRows(legend.map((l) => 24 + labelW(l.label)), W - 2 * X0, 14);
+  const top = 20 + pack.rows * 18;
   const base = H - 44;
   const yLo = Math.floor((Math.min(weightAt(WHO_LO, A0), ...FORMULAS.map((f) => ideal(g, A0)[f.key])) - 2) / 10) * 10;
   const yHi = Math.ceil((Math.max(weightAt(WHO_HI, A1), ...FORMULAS.map((f) => ideal(g, A1)[f.key])) + 2) / 10) * 10;
@@ -109,12 +117,6 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
     { key: "who", label: tc("whoRange"), value: `${f1(weightAt(WHO_LO, h))}–${kg1(weightAt(WHO_HI, h))}` },
     { key: "slope", label: t("rowSlope"), value: `+${f2(slope)} kg` },
   ];
-  const legend: { key: string; label: string; color: string; dash?: string; band?: boolean }[] = [
-    ...FORMULAS.map((f) => ({ key: f.key, label: tf(f.label), color: f.color })),
-    { key: "avg", label: tf("averageLabel"), color: "var(--ph-ink)", dash: "7 4" },
-    { key: "who", label: tc("whoRange"), color: IDEAL_COLOR, band: true },
-  ];
-  const colW = (W - 2 * X0) / 3;
   return (
     <Card phoneRole="visual" tool="ideal-weight-calculator" idPrefix="iw"
       n={1}
@@ -128,10 +130,9 @@ export function IdealWeightHeightSweepCard({ side }: { side: Side }) {
       caption={t("caption", { h: ltr(valueText), kg: ltr(kg1(r.average)), slope: ltr(`${f2(slope)} kg`) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={`${valueText} · ${kg1(r.average)}`} handle={{ x: xa(hc), y: yk(r.average), dir: "horizontal" }} s={s} testId="iw-c1">
-          {/* legend, two rows of three */}
           {legend.map((l, i) => {
-            const lx = X0 + (i % 3) * colW;
-            const ly = 12 + Math.floor(i / 3) * 18;
+            const lx = X0 + pack.at[i].x;
+            const ly = 12 + pack.at[i].row * 18;
             return (
               <g key={l.key}>
                 {l.band ? (
@@ -530,7 +531,8 @@ export function IdealWeightTimelineCard({ side }: { side: Side }) {
     { key: "last", label: t("rowLast"), value: `${f1(Math.max(...FORMULAS.map((f) => weeksOf(r[f.key]))))} ${tc("weeks")}` },
     { key: "months", label: t("rowMonths"), value: f1(avgWeeks / 4.345) },
   ];
-  const colW = (W - 2 * X0) / 2;
+  // legend packed by the real 12px widths (two per row where they fit), so long names never collide (§39)
+  const pack = flowRows(stations.map((x) => 22 + labelW(`${x.label} · ${f1(weeksOf(x.kg))}`)), W - 2 * X0, 14);
   return (
     <Card tool="ideal-weight-calculator" idPrefix="iw"
       n={6}
@@ -560,8 +562,8 @@ export function IdealWeightTimelineCard({ side }: { side: Side }) {
           ))}
           {/* legend instead of labels on the line, so close stations never collide */}
           {stations.map((x, i) => {
-            const lx = X0 + (i % 2) * colW;
-            const lyy = ly + 62 + Math.floor(i / 2) * 18;
+            const lx = X0 + pack.at[i].x;
+            const lyy = ly + 62 + pack.at[i].row * 18;
             return (
               <g key={`lg${x.key}`}>
                 <circle cx={lx + 6} cy={lyy - 4} r={5} style={{ fill: x.color }} />
