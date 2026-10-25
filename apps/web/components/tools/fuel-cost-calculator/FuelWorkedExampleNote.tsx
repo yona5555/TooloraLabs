@@ -25,28 +25,27 @@ export default function FuelWorkedExampleNote({ title, rows }: Props) {
           hardcoded per-language branch. Only the value cell keeps its own
           `dir="ltr"`, matching the `Stat` cards in FuelResult.tsx, so its
           digits/currency code stay correctly ordered either way. */}
-      <div className="mt-3 space-y-2 text-sm">
+      <dl className="mt-3 space-y-2 text-sm">
         {rows.map((row, i) => (
-          <div key={i}>
-            <dl
-              className={`flex items-baseline justify-between gap-3 ${
-                row.emphasize ? "border-t border-zinc-200 pt-2 dark:border-zinc-700" : ""
+          <div
+            key={i}
+            className={`flex items-baseline justify-between ${row.note ? "flex-wrap gap-x-3" : "gap-3"} ${
+              row.emphasize ? "border-t border-zinc-200 pt-2 dark:border-zinc-700" : ""
+            }`}
+          >
+            <dt className="text-zinc-500 dark:text-zinc-400">{row.label}</dt>
+            <dd
+              dir="ltr"
+              className={`font-mono font-semibold ${
+                row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"
               }`}
             >
-              <dt className="text-zinc-500 dark:text-zinc-400">{row.label}</dt>
-              <dd
-                dir="ltr"
-                className={`font-mono font-semibold ${
-                  row.emphasize ? "text-base text-blue-700 dark:text-blue-300" : "text-zinc-800 dark:text-zinc-100"
-                }`}
-              >
-                {row.value}
-              </dd>
-            </dl>
-            {row.note && <p className="text-end text-xs text-zinc-400 dark:text-zinc-500">{row.note}</p>}
+              {row.value}
+            </dd>
+            {row.note && <dd className="basis-full text-end text-xs text-zinc-400 dark:text-zinc-500">{row.note}</dd>}
           </div>
         ))}
-      </div>
+      </dl>
     </div>
   );
 }
