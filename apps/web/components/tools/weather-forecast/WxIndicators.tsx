@@ -104,7 +104,7 @@ export function WxHourlyCard({ d, f }: WxCardProps) {
     { label: t("ind.hourly.formula"), value: worked, wide: true },
   ];
   return (
-    <SectionCard id="wx-hourly" title={t("ind.hourly.title")}>
+    <SectionCard id="wx-hourly" title={t("ind.hourly.title")} phoneRole="extra">
       <Intro text={t("ind.hourly.intro")} />
       <WxSplit
         layout="stacked"

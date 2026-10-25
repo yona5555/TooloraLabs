@@ -24,6 +24,7 @@ export default function PhReferenceTable() {
 
   return (
     <ReferenceTableCard
+      phoneRole="extra"
       title={t("title")}
       caption={t("caption")}
       columnLabel={t("columnSubstance")}

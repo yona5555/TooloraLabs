@@ -1,4 +1,4 @@
-import SectionCard from "./SectionCard";
+import SectionCard, { type PhoneRole } from "./SectionCard";
 
 export type ReferenceTableRow = {
   key: string;
@@ -13,6 +13,8 @@ type ReferenceTableCardProps = {
   columnLabel: string;
   columnValue: string;
   rows: ReferenceTableRow[];
+  /** SectionCard `phoneRole`. */
+  phoneRole?: PhoneRole;
 };
 
 /**
@@ -21,9 +23,9 @@ type ReferenceTableCardProps = {
  * handling) with a real, documented reference table tied to the tool's own
  * subject matter — never left as blank stretched space.
  */
-export default function ReferenceTableCard({ title, caption, columnLabel, columnValue, rows }: ReferenceTableCardProps) {
+export default function ReferenceTableCard({ title, caption, columnLabel, columnValue, rows, phoneRole }: ReferenceTableCardProps) {
   return (
-    <SectionCard title={title}>
+    <SectionCard title={title} phoneRole={phoneRole}>
       {caption && <p className="text-sm text-zinc-600 dark:text-zinc-300">{caption}</p>}
       {/* No `dir="ltr"` on this wrapper: that used to force the table's
           column order to always read left-to-right, so on an RTL page the

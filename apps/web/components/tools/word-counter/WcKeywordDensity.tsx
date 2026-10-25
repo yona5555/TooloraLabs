@@ -51,6 +51,7 @@ export default function WcKeywordDensity() {
 
   return (
     <WcIndicatorCard
+      phoneRole="extra"
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

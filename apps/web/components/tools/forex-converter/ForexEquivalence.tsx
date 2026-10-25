@@ -29,6 +29,7 @@ export default function ForexEquivalence({ currencies, fromCurrency, amount, dig
 
   return (
     <IndicatorCard
+      phoneRole="extra"
       id="equivalence"
       title={t("title")}
       heading={t("heading", { amount: f.num(amt, 2), code: F })}

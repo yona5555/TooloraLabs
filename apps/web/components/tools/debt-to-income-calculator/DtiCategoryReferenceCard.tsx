@@ -25,7 +25,7 @@ export default function DtiCategoryReferenceCard({ activeCategory }: DtiCategory
   const t = useTranslations("tools.debt-to-income-calculator.aboveFold");
 
   return (
-    <SectionCard title={t("categoryReferenceTitle")}>
+    <SectionCard phoneRole="extra" title={t("categoryReferenceTitle")}>
       <PhoneMini slot={1} title={t("categoryReferenceTitle")}>
       <ul className="flex flex-col gap-2">
         {ROWS.map((row) => {

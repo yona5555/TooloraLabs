@@ -37,7 +37,7 @@ export default function ImageFormatReference({
   ];
 
   return (
-    <SectionCard title={t("title")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="extra" title={t("title")} className="flex flex-col lg:flex-1" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("intro")}</p>
       <div className="mt-4 flex flex-col gap-2.5">
         {rows.map((row) => {

@@ -17,6 +17,7 @@ export default function MolarityReferenceTable() {
 
   return (
     <ReferenceTableCard
+      phoneRole="extra"
       title={t("title")}
       caption={t("caption")}
       columnLabel={t("columnSolution")}

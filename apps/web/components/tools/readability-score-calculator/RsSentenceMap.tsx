@@ -99,5 +99,5 @@ export default function RsSentenceMap() {
       ]
     : [{ label: tr("sentenceCount"), value: f(counted.length) }];
 
-  return <RsIndicatorCard title={t("title")} intro={t("intro")} indicator={indicator} rows={rows} />;
+  return <RsIndicatorCard phoneRole="extra" title={t("title")} intro={t("intro")} indicator={indicator} rows={rows} />;
 }

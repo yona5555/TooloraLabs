@@ -16,7 +16,7 @@ export default function InfoSection({ title, children, id }: InfoSectionProps) {
           next sibling must stay the section (lib/phone/layout.ts). */}
       <DesktopAdSlot />
       {/* APPROVED PHONE STANDARD: a phone ad slot on every section boundary, display:none until
-          lib/phone/layout.ts picks it (before the first paint); never shown from 768px up. */}
+          lib/phone/layout.ts picks it; never shown from 768px up. */}
       <div data-article-ad="" suppressHydrationWarning className="py-6">
         <AdSpace variant="leaderboard" phone />
       </div>

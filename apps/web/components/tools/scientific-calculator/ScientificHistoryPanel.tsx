@@ -18,7 +18,7 @@ export default function ScientificHistoryPanel({ history, onSelect, onDelete, on
   const t = useTranslations("tools.scientific-calculator.history");
 
   return (
-    <SectionCard title={t("title")}>
+    <SectionCard phoneRole="extra" title={t("title")}>
       <HistoryTape
         entries={history.map((h) => ({ id: h.id, label: h.expression, value: h.result, valueText: formatResult(h.result) }))}
         onSelect={(e) => onSelect(e.value)}

@@ -193,6 +193,7 @@ export default function SwTeleprompter() {
 
   return (
     <SwIndicatorCard
+      phoneRole="extra"
       title={t("title")}
       intro={t("intro")}
       indicator={indicator}

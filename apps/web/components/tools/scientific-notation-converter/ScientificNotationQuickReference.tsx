@@ -20,7 +20,7 @@ export default function ScientificNotationQuickReference() {
   const tNames = useTranslations("tools.scientific-notation-converter.result.numberNames");
 
   return (
-    <SectionCard title={t("quickReference.title")}>
+    <SectionCard phoneRole="extra" title={t("quickReference.title")}>
       <p className="text-sm text-zinc-500 dark:text-zinc-400">{t("quickReference.intro")}</p>
       <div dir="ltr" className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[280px] border-collapse text-sm">

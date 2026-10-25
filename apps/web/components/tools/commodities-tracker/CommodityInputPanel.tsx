@@ -42,7 +42,7 @@ export default function CommodityInputPanel(p: Props) {
   const baseUnit = metal ? "oz t" : "bbl";
 
   return (
-    <SectionCard title={t("converterTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
+    <SectionCard phoneRole="extra" title={t("converterTitle")} className="flex h-full flex-col" bodyClassName="flex flex-1 flex-col p-4 lg:p-6">
       <div className="space-y-5">
         {p.dataUnavailable && (
           <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300">

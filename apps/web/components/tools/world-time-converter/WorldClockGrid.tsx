@@ -36,7 +36,7 @@ export default function WorldClockGrid({ s, set, d, f }: CardProps) {
   const setFrom = (id: string) => set({ from: id, cities: [...s.cities.filter((c) => c !== id), s.from] });
 
   return (
-    <SectionCard id="world-clock" title={t("title")} bodyClassName="p-4">
+    <SectionCard phoneRole="extra" id="world-clock" title={t("title")} bodyClassName="p-4">
       <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">{t("intro")}</p>
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3">
         {d.all.map((c: WtCity, i) => {
