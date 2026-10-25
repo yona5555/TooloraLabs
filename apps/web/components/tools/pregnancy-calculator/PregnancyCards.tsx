@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { useStepper, type KitRow } from "@/components/tool-ui/indicator-kit/CardKit";
 import { Drawing, INK, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { labelW, laneRows, thinLabels, wrapLabel } from "@/components/tool-ui/labelLayout";
 import { clamp, f1 } from "@/components/tool-ui/indicator-kit/format";
 import { Card, SvgTrack, useSharedStepper } from "../macro-calculator/MacroCards";
 import { usePregnancyLive } from "./PregnancyLiveContext";
@@ -72,7 +73,20 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
   const xd = (day: number) => X0 + (clamp(day, 0, MAX_DAY) / MAX_DAY) * (W - 2 * X0);
   const extra = Math.max(0, (H - HMIN) / 3);
   const LEVEL = 32;
-  const lineY = 34 + 4 * LEVEL + extra;
+  // station labels: each on the first row where it clears the label before it, by the real 12px widths
+  // (four rows on desktop as before; close stations on a phone no longer share a row) (§39)
+  const stationBox = STATIONS.map((st) => {
+    const x = xd(st.at);
+    const w = Math.max(labelW(tc(`stations.${st.key}`)), labelW(`${Math.floor(st.at / 7)}w${st.at % 7 ? ` ${st.at % 7}d` : ""}`));
+    const anchor: "start" | "middle" | "end" = x < X0 + 50 ? "start" : x > W - X0 - 50 ? "end" : "middle";
+    const tx = anchor === "start" ? x - 4 : anchor === "end" ? x + 4 : x;
+    return { anchor, tx, w, x: anchor === "start" ? tx + w / 2 : anchor === "end" ? tx - w / 2 : tx };
+  });
+  const lanes = STATIONS.map((_, i) => i % 4);
+  const fits = (rows: number[]) =>
+    rows.every((r, i) => rows.every((q, j) => j >= i || q !== r || Math.abs(stationBox[i].x - stationBox[j].x) >= (stationBox[i].w + stationBox[j].w) / 2 + 6));
+  const level = fits(lanes) ? lanes : laneRows(stationBox, 6);
+  const lineY = 34 + Math.max(4, ...level.map((l) => l + 1)) * LEVEL + extra;
   const bandY = lineY + 14;
   const trackY = H - 52;
   const passed = STATIONS.filter((st) => st.at <= ga);
@@ -102,15 +116,13 @@ export function PregnancyTimelineCard({ side }: { side: Side }) {
       caption={t("caption", { ga: ltr(wd(ga)), due: ltr(fmtDate(due, locale)) })}
       visual={
         <Drawing {...d} hMin={HMIN} label={t("handle")} valueText={valueText} handle={{ x: xd(ga), y: trackY, dir: "horizontal" }} s={s} testId="pregnancy-c1">
-          {/* Stations: four label rows above the line, neighbours on a row are four stations apart */}
+          {/* Stations: label rows above the line (see `level`) */}
           {STATIONS.map((st, i) => {
             const x = xd(st.at);
-            const level = i % 4;
-            const ly = 30 + level * LEVEL + extra * 0.5;
+            const ly = 30 + level[i] * LEVEL + extra * 0.5;
             const done = st.at <= ga;
             const on = hover === "next" && next?.key === st.key;
-            const anchor = x < X0 + 50 ? "start" : x > W - X0 - 50 ? "end" : "middle";
-            const tx = anchor === "start" ? x - 4 : anchor === "end" ? x + 4 : x;
+            const { anchor, tx } = stationBox[i];
             return (
               <g key={st.key}>
                 <line x1={x} y1={ly + 16} x2={x} y2={lineY} style={{ stroke: "var(--ph-line)" }} strokeDasharray="2 3" />
@@ -299,7 +311,10 @@ function Growth({ side }: { side: Side }) {
           {[4, 12, 20, 28, 36, 40].map((wk) => (
             <T key={wk} x={xw(wk)} y={base + 26} text={`${wk}w`} size={12} />
           ))}
-          <T x={xw(20)} y={base + 44} text={t("lengthNote")} size={12} />
+          {/* the note wraps across the drawing's width instead of running off both edges (§39) */}
+          {wrapLabel(t("lengthNote"), W - 2 * X0).map((line, i) => (
+            <T key={i} x={W / 2} y={base + 44 + i * 14} text={line} size={12} />
+          ))}
           <SvgTrack stopAnchor="middle" W={W} y={trackY} frac={(w - 4) / 36} lo="4w" hi="40w" />
         </Drawing>
       }
@@ -356,9 +371,12 @@ export function PregnancyTermCard({ side }: { side: Side }) {
             const on = z.key === zone.key;
             return <rect key={z.key} x={xz(a)} y={sy} width={Math.max(0, xz(e) - xz(a) - 1)} height={sh} fill={z.color} opacity={on ? 0.95 : 0.45} />;
           })}
-          {[259, 273, 287, 294].map((v) => (
-            <T key={v} x={xz(v)} y={sy + sh + 16} text={`${v / 7}`} size={12} bold style={INK} />
-          ))}
+          {/* zone boundary weeks; "41" gives way to "42" when a phone puts them closer than a label (§39) */}
+          {[259, 273, 287, 294].map((v, i, all) =>
+            thinLabels(all.map((u) => ({ x: xz(u), w: labelW(`${u / 7}`) })), 4, [0, 1, 3, 2])[i] ? (
+              <T key={v} x={xz(v)} y={sy + sh + 16} text={`${v / 7}`} size={12} bold style={INK} />
+            ) : null,
+          )}
           {/* Due date and today */}
           <line x1={xz(FULL_TERM)} y1={sy - 8} x2={xz(FULL_TERM)} y2={sy + sh + 4} style={{ stroke: "var(--ph-ink)" }} strokeWidth={hover === "due" ? 3 : 1.5} strokeDasharray="3 3" />
           <T x={xz(FULL_TERM)} y={sy - 12} text={`${tc("edd")} 40w`} size={12} bold />

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import type { PhoneRole } from "@/components/tool-ui/SectionCard";
 import { ltr } from "@/components/tool-ui/MixedText";
 import { IndicatorCard, KitControls, KitTable, useStepper, type KitRow, type Stepper } from "@/components/tool-ui/indicator-kit/CardKit";
-import { Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, staggerRows, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
+import { Drawing, flowRows, INK, labelW, LINE, lit, MUTED, px2, SvgLabel as T, useDrawing } from "@/components/tool-ui/indicator-kit/SvgBits";
 import { clamp, f1, f2 } from "@/components/tool-ui/indicator-kit/format";
 import { useMacroLive } from "./MacroLiveContext";
 import {
@@ -77,7 +77,17 @@ export function SvgTrack({ W, y, frac, lo, hi, stops, stopAnchor = "ends" }: { W
   });
   // stop names that would touch their neighbour (long goal names on a phone) take turns on a second
   // line, between the track and the first (the drawing ends under the first line) (§39)
-  const stopRow = placed ? staggerRows(placed.map((p) => ({ x: p.cx, w: p.w }))) : [];
+  // (the lo / hi end labels always keep the first line, so a stop touching them moves too)
+  const loEnd = lo ? X0 + labelW(lo) : -Infinity;
+  const hiStart = hi ? W - X0 - labelW(hi) : Infinity;
+  const rowEnd = [loEnd, -Infinity];
+  const stopRow = (placed ?? []).map((p) => {
+    const a = p.cx - p.w / 2;
+    const b = p.cx + p.w / 2;
+    const row = !p.w || (a >= rowEnd[0] + 6 && b <= hiStart - 6) ? 0 : 1;
+    if (p.w) rowEnd[row] = b;
+    return row;
+  });
   return (
     <g>
       <line x1={X0} y1={y} x2={W - X0} y2={y} style={LINE} strokeWidth={3} strokeLinecap="round" opacity={0.45} />

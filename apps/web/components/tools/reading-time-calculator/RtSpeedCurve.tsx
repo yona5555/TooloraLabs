@@ -6,6 +6,7 @@ import { READING_SPEED_PRESETS } from "@tooloralabs/tools";
 import RtIndicatorCard from "./RtIndicatorCard";
 import { useRtLive } from "./RtLiveContext";
 import { svgPx } from "@/components/tool-ui/svgPx";
+import { labelW } from "@/components/tool-ui/labelLayout";
 
 const W = 340;
 const H = 190;
@@ -34,6 +35,30 @@ export default function RtSpeedCurve() {
   const yours = secondsFor(words, wpm);
   const tried = secondsFor(words, trial);
   const delta = tried - yours;
+  // "You 0:47" takes the first spot beside its dot (below right, below left, above right, above left)
+  // clear of the preset names and inside the chart (§39); widths allow for a phone's up-to-1.15×
+  const presetBoxes = PRESET_KEYS.map((k) => {
+    const v = READING_SPEED_PRESETS[k];
+    const bx = x(v) + 5;
+    const by = y(secondsFor(words, v)) - 5;
+    return { a: bx, b: bx + labelW(tf(k)) * 1.15, t: by - 12, u: by + 3 };
+  });
+  const yoursText = `${t("yours")} ${clock(yours)}`;
+  const yw = labelW(yoursText) * 1.15;
+  const yx = x(wpm);
+  const yy = y(yours);
+  const spots = [
+    { dx: 8, dy: 14, anchor: "start" as const },
+    { dx: -8, dy: 14, anchor: "end" as const },
+    { dx: 8, dy: -10, anchor: "start" as const },
+    { dx: -8, dy: -10, anchor: "end" as const },
+  ];
+  const yoursSpot =
+    spots.find(({ dx, dy, anchor }) => {
+      const a = anchor === "start" ? yx + dx : yx + dx - yw;
+      const box = { a, b: a + yw, t: yy + dy - 12, u: yy + dy + 3 };
+      return box.a >= 0 && box.b <= W && box.t >= 0 && box.u <= H && presetBoxes.every((p) => box.a >= p.b || box.b <= p.a || box.t >= p.u || box.u <= p.t);
+    }) ?? spots[0];
 
   const indicator = (
     <div className="w-full sm:w-[340px]">
@@ -48,7 +73,7 @@ export default function RtSpeedCurve() {
         <path d={path} fill="none" strokeWidth={2.5} className="stroke-blue-600 dark:stroke-blue-400" />
         <line x1={L} y1={BASE} x2={W - R} y2={BASE} className="stroke-zinc-300 dark:stroke-zinc-600" />
         {[100, 200, 300, 400, 500, 600].map((v) => (
-          <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={BASE + 13} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
+          <text style={{ fontSize: svgPx(12) }} key={v} x={x(v)} y={BASE + 13} textAnchor={v === 100 ? "start" : "middle"} className="fill-zinc-500 dark:fill-zinc-400">{f(v)}</text>
         ))}
         <text style={{ fontSize: svgPx(12) }} x={W - R} y={BASE + 25} textAnchor="end" fontWeight={600} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
         {PRESET_KEYS.map((k) => {
@@ -67,7 +92,7 @@ export default function RtSpeedCurve() {
         </g>
         <g style={{ transform: `translate(${x(wpm)}px, ${y(yours)}px)`, transition: "transform 300ms ease" }}>
           <circle r={7} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={2} />
-          <text style={{ fontSize: svgPx(12) }} x={8} y={14} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{`${t("yours")} ${clock(yours)}`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={yoursSpot.dx} y={yoursSpot.dy} textAnchor={yoursSpot.anchor} fontWeight={700} className="fill-blue-700 dark:fill-blue-300">{yoursText}</text>
         </g>
       </svg>
       <label className="mt-1 flex items-center gap-2 text-[11px] text-zinc-500 dark:text-zinc-400">

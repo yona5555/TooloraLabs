@@ -44,6 +44,17 @@ export default function PasswordLengthCurve() {
     setDim(words ? "wordCount" : "length", clamped);
   }
 
+  // tier numbers on the y axis: a tier line closer than a label line to the one already labelled keeps
+  // its line but not its number (§39: fewer ticks, never smaller text)
+  const tierLabel = new Set<number>();
+  let lastY = -Infinity;
+  for (const b of TIERS.filter((v) => v < maxY).sort((p, q) => p - q)) {
+    if (Math.abs(lastY - y(b)) >= 15) {
+      tierLabel.add(b);
+      lastY = y(b);
+    }
+  }
+
   const svg = (
     <svg
       ref={svgRef}
@@ -71,9 +82,11 @@ export default function PasswordLengthCurve() {
       {TIERS.filter((b) => b < maxY).map((b) => (
         <g key={b}>
           <line x1={L} y1={y(b)} x2={W - R} y2={y(b)} strokeDasharray="3 4" className="stroke-zinc-300 dark:stroke-zinc-600" />
-          <text style={{ fontSize: svgPx(12) }} x={L - 5} y={y(b) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
-            {b}
-          </text>
+          {tierLabel.has(b) && (
+            <text style={{ fontSize: svgPx(12) }} x={L - 5} y={y(b) + 4} textAnchor="end" className="fill-zinc-500 dark:fill-zinc-400">
+              {b}
+            </text>
+          )}
         </g>
       ))}
       {[lo, Math.round((lo + hi) / 2), hi].map((k) => (

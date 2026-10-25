@@ -9,11 +9,11 @@ import { svgPx } from "@/components/tool-ui/svgPx";
 
 const TRIALS = 2000;
 const W = 320;
-const H = 210;
+const H = 216;
 const L = 38;
 const R = 10;
 const T = 12;
-const B = 28;
+const B = 32;
 const DURATION_MS = 4000;
 
 /**
@@ -95,13 +95,14 @@ export default function ProbabilityMonteCarlo() {
           </g>
         ))}
         {[0, 500, 1000, 1500, 2000].map((n) => (
-          <text style={{ fontSize: svgPx(12) }} key={n} x={x(Math.max(0, n - 1))} y={H - 12} textAnchor="middle" className="fill-zinc-500 font-mono dark:fill-zinc-400">{f(n, 0)}</text>
+          <text style={{ fontSize: svgPx(12) }} key={n} x={x(Math.max(0, n - 1))} y={H - B + 14} textAnchor={n === 2000 ? "end" : "middle"} className="fill-zinc-500 font-mono dark:fill-zinc-400">{f(n, 0)}</text>
         ))}
         <polygon points={[...funnelTop, ...funnelBot].join(" ")} className="fill-blue-500/15 dark:fill-blue-400/15" />
         <line x1={L} x2={W - R} y1={y(r)} y2={y(r)} strokeDasharray="5 4" strokeWidth={1.5} className="stroke-violet-600 dark:stroke-violet-400" />
         <path d={path} fill="none" strokeWidth={1.8} className="stroke-blue-600 dark:stroke-blue-400" />
         <circle cx={x(shown - 1)} cy={y(est)} r={4.5} className="fill-blue-600 stroke-white dark:fill-blue-400 dark:stroke-zinc-900" strokeWidth={1.5} />
         <text style={{ fontSize: svgPx(12) }} x={W - R - 2} y={Math.max(T + 10, y(r) - 6)} textAnchor="end" className="fill-violet-700 font-mono font-bold dark:fill-violet-300">{`${symbol} = ${pct(r)}`}</text>
+        {/* a full line under the tick numbers (§39) */}
         <text style={{ fontSize: svgPx(12) }} x={L + 4} y={H - 2} className="fill-zinc-500 dark:fill-zinc-400">{t("axis")}</text>
       </svg>
       <div className="mt-2 flex justify-center gap-2">

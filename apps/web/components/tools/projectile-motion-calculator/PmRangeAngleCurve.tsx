@@ -41,7 +41,7 @@ export default function PmRangeAngleCurve() {
       {[0, 15, 30, 45, 60, 75, 90].map((deg) => (
         <g key={deg}>
           <line x1={px(deg)} y1={T} x2={px(deg)} y2={B} className="stroke-zinc-200 dark:stroke-zinc-700" />
-          <text style={{ fontSize: svgPx(12) }} x={px(deg)} y={B + 14} textAnchor="middle" className="fill-zinc-500 dark:fill-zinc-400">{`${deg}°`}</text>
+          <text style={{ fontSize: svgPx(12) }} x={px(deg)} y={B + 14} textAnchor={deg === 0 ? "start" : "middle"} className="fill-zinc-500 dark:fill-zinc-400">{`${deg}°`}</text>
         </g>
       ))}
       {[0, 0.5, 1].map((s) => (
