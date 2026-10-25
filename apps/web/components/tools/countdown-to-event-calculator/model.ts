@@ -343,7 +343,9 @@ export function zoneOptions(locale: string, nowMs: number, extra: string[]): Zon
   }
   return rows
     .map((r) => ({ zone: r.zone, off: zoneOffsetMinutes(nowMs, r.zone), name: r.name }))
-    .sort((a, b) => a.off - b.off || a.name.localeCompare(b.name))
+    // Explicit locale: the runtime default differs between server and browser, which ordered Arabic and Latin
+    // names differently and broke hydration (React #418 on ar).
+    .sort((a, b) => a.off - b.off || a.name.localeCompare(b.name, locale))
     .map((r) => ({ zone: r.zone, label: `${r.name} (${formatOffset(r.off)})` }));
 }
 
